@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Data files
+*.vot 
+*.pkl
+
+# Plot outputs
+*.html
+*.png
