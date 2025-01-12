@@ -75,7 +75,7 @@ python palomas_orrery.py
 
 ## About
 
-Created by Tony Quintanilla with assistance from ChatGPT and Claude. Updated January 12, 2025.
+Created by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI assistants. Updated January 12, 2025.
 
 ## License
 
