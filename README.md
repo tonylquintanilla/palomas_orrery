@@ -24,6 +24,30 @@ An interactive solar system visualization tool with support for stellar neighbor
   - tkinter
   - kaleido (for saving static images)
 
+numpy>=1.24.0
+pandas>=2.0.0
+plotly>=5.18.0
+astropy>=5.3.4
+astroquery>=0.4.6
+kaleido>=0.2.1
+tk>=0.1.0
+python-dateutil>=2.8.2
+requests>=2.31.0
+webbrowser>=0.0.1
+matplotlib>=3.8.0
+scipy>=1.11.3
+
+requirements.txt includes all necessary packages for running Paloma's Orrery:
+
+Core numerical and data processing libraries
+Plotting and visualization tools
+Astronomical data access
+GUI components
+Supporting utilities
+
+Users can install these requirements using:
+pip install -r requirements.txt
+
 ## Installation
 
 1. Clone this repository:
