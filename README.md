@@ -115,6 +115,215 @@ These files store:
 
 The files are created when first running the program and reused in subsequent runs to avoid re-fetching data.
 
+# Data Flow for Solar Plots
+
+## 1. Data Acquisition Flow
+
+### Static Plot (plot_objects)
+```
+fetch_position() → plot_objects() → add_celestial_object() → Plotly Figure
+```
+
+1. **fetch_position** (data_acquisition.py):
+   - Queries JPL Horizons system for object coordinates
+   - Returns dictionary with:
+     - Position (x, y, z in AU)
+     - Range from center
+     - Velocity components
+     - Distance in light-minutes/hours
+     - Orbital period
+
+2. **plot_objects** (palomas_orrery.py):
+   - Collects positions for all selected objects
+   - Handles center object selection
+   - Manages scale calculations
+   - Creates base Plotly figure
+
+3. **add_celestial_object** (visualization_utils.py):
+   - Creates individual Plotly traces
+   - Adds hover text and formatting
+   - Handles marker properties
+
+### Animation Flow (animate_objects)
+```
+fetch_position() → animation_worker() → create frames → Plotly Animation
+```
+
+1. **animation_worker** (palomas_orrery.py):
+   - Generates date sequence
+   - Pre-calculates orbital periods
+   - Creates position cache
+
+2. **Frame Generation**:
+   - Creates series of frames from position data
+   - Each frame contains:
+     - Updated positions
+     - Hover text
+     - Marker properties
+
+## 2. Data Processing Chain
+
+### Position Data Processing
+```
+JPL Horizons → fetch_position() → calculate_distances() → calculate_cartesian_coordinates()
+```
+
+- **fetch_position**:
+  ```python
+  {
+      'x': float,  # AU
+      'y': float,  # AU
+      'z': float,  # AU
+      'range': float,  # Distance from center (AU)
+      'velocity': float,  # AU/day
+      'distance_lm': float,  # Light-minutes
+      'distance_lh': float,  # Light-hours
+      'orbital_period': float  # Earth years
+  }
+  ```
+
+### Scale Calculation Flow
+```
+get_positions() → calculate_axis_range() → update_layout()
+```
+
+- Determines plot boundaries based on:
+  - Object positions
+  - Manual/auto scaling settings
+  - Center object selection
+
+## 3. Visualization Pipeline
+
+### Base Plot Creation
+```
+create_figure() → add_sun_visualization() → add_celestial_objects() → add_hover_controls()
+```
+
+### Animation Frame Generation
+```
+create_frames() → update_positions() → update_traces() → create_animation()
+```
+
+## 4. Key Data Structures
+
+### Object Definition
+```python
+{
+    'name': str,
+    'id': str,
+    'var': tk.IntVar,
+    'color': str,
+    'symbol': str,
+    'is_mission': bool,
+    'id_type': str,
+    'start_date': datetime,  # For missions/comets
+    'end_date': datetime,    # For missions/comets
+    'mission_info': str      # Optional
+}
+```
+
+### Position Data
+```python
+{
+    'x': float,
+    'y': float,
+    'z': float,
+    'range': float,
+    'velocity': float,
+    'distance_lm': float,
+    'distance_lh': float,
+    'orbital_period': float
+}
+```
+
+## 5. Error Handling
+
+- Data fetch failures handled in fetch_position()
+- Position calculation errors managed in calculate_distances()
+- Animation frame generation errors caught in animation_worker()
+- Scale calculation fallbacks in calculate_axis_range()
+
+## 6. Performance Considerations
+
+- Position data cached during animations
+- Batch processing for multiple objects
+- Asynchronous data fetching for animations
+- Scale calculations optimized for large datasets
+
+This data flow documentation provides a comprehensive overview of how data moves through the system from initial acquisition to final visualization, helping developers understand the system architecture and data transformations at each step.
+
+## Data Flow for Stellar Plots
+
+The stellar data pipeline processes data through multiple modules to create visualizations:
+
+1. Initial Data Acquisition:
+   - Module: data_acquisition.py
+     * initialize_vizier(): Sets up connection to VizieR service
+     * load_or_fetch_hipparcos_data(): Fetches Hipparcos stars
+     * load_or_fetch_gaia_data(): Fetches Gaia stars
+     * calculate_parallax_limit(): Determines minimum parallax for distance filtering
+
+2. Data Processing Pipeline:
+
+   a) Distance-based plots (hr_diagram_distance.py, planetarium_distance.py):
+      - Data Processing (data_processing.py):
+        * calculate_distances(): Converts parallax to distances
+        * calculate_cartesian_coordinates(): Computes 3D positions
+        * select_stars_by_distance(): Filters stars within distance limit
+      - Star Properties (star_properties.py):
+        * load_existing_properties(): Checks cache for stellar data
+        * query_simbad_for_star_properties(): Fetches new properties
+        * assign_properties_to_data(): Adds properties to star data
+      - Stellar Parameters (stellar_parameters.py):
+        * calculate_stellar_parameters(): Computes temperatures and luminosities
+        * estimate_temperature_from_spectral_type(): Temperature from spectral class
+        * calculate_bv_temperature(): Temperature from B-V color
+      - Visualization:
+        * prepare_2d_data() or prepare_3d_data(): Formats data for plotting
+        * create_hr_diagram() or create_3d_visualization(): Generates final plot
+
+   b) Magnitude-based plots (hr_diagram_apparent_magnitude.py, planetarium_apparent_magnitude.py):
+      - Data Processing (data_processing.py):
+        * estimate_vmag_from_gaia(): Converts Gaia G magnitudes to V
+        * select_stars_by_magnitude(): Separates Hipparcos and Gaia data
+        * align_coordinate_systems(): Standardizes coordinates
+      - Messier Objects (messier_object_data_handler.py):
+        * get_visible_objects(): Fetches visible Messier objects
+        * create_dataframe(): Formats Messier data
+      - Visualization Core (visualization_core.py):
+        * analyze_magnitude_distribution(): Studies magnitude ranges
+        * create_hover_text(): Generates interactive labels
+        * generate_star_count_text(): Prepares statistics
+
+3. Data Storage and Caching:
+   - Handled by data_acquisition.py:
+     * validate_votable_file(): Checks data file integrity
+     * save_properties_to_file(): Caches stellar properties
+     * format_file_size(): Handles file size reporting
+   - Progress reporting via ProgressReporter class:
+     * start_operation(): Begins data operation
+     * file_operation(): Handles file operations
+     * catalog_stats(): Reports statistics
+
+4. Visualization Components:
+   - visualization_2d.py:
+     * create_hr_diagram(): Generates HR diagrams
+     * generate_footer_text(): Adds plot information
+   - visualization_3d.py:
+     * create_3d_visualization(): Creates 3D star plots
+     * parse_stellar_classes(): Processes spectral types
+     * create_notable_stars_list(): Handles star selection
+   - visualization_utils.py:
+     * add_hover_toggle_buttons(): Adds interactivity
+     * format_hover_text(): Creates tooltips
+     * update_figure_frames(): Handles animation frames
+
+5. Error Handling and Cleanup:
+   - shutdown_handler.py:
+     * PlotlyShutdownHandler: Manages graceful shutdowns
+     * create_monitored_thread(): Handles background tasks
+     * show_figure_safely(): Manages plot display and saving
+
 ## About
 
 Created by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI assistants. Updated January 12, 2025.

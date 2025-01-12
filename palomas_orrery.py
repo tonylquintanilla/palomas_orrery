@@ -603,7 +603,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # Define the text string once
         radiative_zone_info = (
             "Solar Radiative Zone (extends from about 0.2 to 0.7 solar radii, ~0.00325 AU)<br>"
-            "Temperature: ranges from about 2M K near the convective zone to 7M K near the core<br>"
+            "Temperature: ranges from about 7M K near the core to about 2M K near the convective zone<br>"
             "A region where energy moves from the core to the convective zone, taking 170,000 years<br>"
             "Energy is transported by radiative diffusion, through photon absorption and re-emission"
         )
