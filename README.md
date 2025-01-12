@@ -100,9 +100,9 @@ python palomas_orrery.py
 There are 4 data storage files created and used by the script. Some are very large, but they need to be created only once:
 
 *.vot files:
-1. hipparcos_data_magnitude.vot  (~ 193KB)
+1. hipparcos_data_magnitude.vot  (~ 193KB -- generated anew.)
 2. gaia_data_magnitude.vot  (~292MB -- this file is very large and will take a very long time to generate. Watch your terminal output for progress in batches. I recommend running it over night and disable sleep mode! The script is fetching data from Gaia DR3.)
-3. hipparcos_data_distance.vot  (~30KB)
+3. hipparcos_data_distance.vot  (~30KB -- generated anew.)
 4. gaia_data_distance.vot  (~9.4MB)
 
 *.pkl files:
