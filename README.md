@@ -97,6 +97,24 @@ python palomas_orrery.py
   - [Gaia DR3](https://www.cosmos.esa.int/web/gaia)
 - Object properties: [SIMBAD database](http://simbad.u-strasbg.fr/simbad/)
 
+There are 4 data storage files created and used by the script. Some are very large, but they need to be created only once:
+
+*.vot files:
+1. hipparcos_data_magnitude.vot  (~ 193KB)
+2. gaia_data_magnitude.vot  (~292MB -- this file is very large and will take a very long time to generate. Watch your terminal output for progress in batches. I recommend running it over night and disable sleep mode! The script is fetching data from Gaia DR3.)
+3. hipparcos_data_distance.vot  (~30KB)
+4. gaia_data_distance.vot  (~9.4MB)
+
+*.pkl files:
+1. star_properties_magnitude.pkl  (~12MB)
+2. star_properties_distance.pkl  (~1MB)
+
+These files store:
+- .vot: Star catalog data from Hipparcos and Gaia missions
+- .pkl: Cached star properties retrieved from SIMBAD database
+
+The files are created when first running the program and reused in subsequent runs to avoid re-fetching data.
+
 ## About
 
 Created by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI assistants. Updated January 12, 2025.
