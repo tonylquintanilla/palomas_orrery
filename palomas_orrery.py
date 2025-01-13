@@ -29,8 +29,6 @@ from constants import (
     hover_text_sun_and_corona,
 )
 
-from visualization_3d import create_3d_visualization
-
 from visualization_utils import format_hover_text, add_hover_toggle_buttons
 
 from save_utils import save_plot
@@ -844,77 +842,45 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
             print(f"No data returned for object {object_id} on {date_obj}")
             return None
 
-        # Extract desired fields with better error handling and formatting
+        # Extract desired fields with error handling
         x = float(vectors['x'][0]) if 'x' in vectors.colnames else None
         y = float(vectors['y'][0]) if 'y' in vectors.colnames else None
         z = float(vectors['z'][0]) if 'z' in vectors.colnames else None
-        range_ = float(vectors['range'][0]) if 'range' in vectors.colnames else None
-        
-        # Calculate velocity components
-        vx = float(vectors['vx'][0]) if 'vx' in vectors.colnames else None
+        range_ = float(vectors['range'][0]) if 'range' in vectors.colnames else None  # Distance in AU from the Sun
+        range_rate = float(vectors['range_rate'][0]) if 'range_rate' in vectors.colnames else None  # AU/day
+        vx = float(vectors['vx'][0]) if 'vx' in vectors.colnames else None  # AU/day
         vy = float(vectors['vy'][0]) if 'vy' in vectors.colnames else None
         vz = float(vectors['vz'][0]) if 'vz' in vectors.colnames else None
-        
-        # Calculate velocity magnitude only if all components are available
-        velocity = np.sqrt(vx**2 + vy**2 + vz**2) if all(v is not None for v in [vx, vy, vz]) else None
+        velocity = np.sqrt(vx**2 + vy**2 + vz**2) if vx is not None and vy is not None and vz is not None else 'N/A'
 
-        # Calculate distances
-        distance_lm = range_ * LIGHT_MINUTES_PER_AU if range_ is not None else None
-        distance_lh = distance_lm / 60 if distance_lm is not None else None
+        # Calculate distance in light-minutes and light-hours
+        distance_lm = range_ * LIGHT_MINUTES_PER_AU if range_ is not None else 'N/A'
+        distance_lh = (distance_lm / 60) if isinstance(distance_lm, float) else 'N/A'
 
-        # ------------------------------------------
-        #   Orbital period fix: robust ID matching
-        # ------------------------------------------
-        orbital_period = None
-        found_name = None
-
-        # 1) Try matching 'object_id' or its absolute value to an entry in objects
-        #    so that you handle e.g. '-31' vs '31'
-        for obj_item in objects:
-            if str(obj_item['id']) == str(object_id) \
-               or str(obj_item['id']) == str(abs(int(object_id))):
-                found_name = obj_item['name']
-                break
-
-        # 2) Fallback: try matching by name, if not found in the loop above
-        if not found_name:
-            maybe_obj = next((o for o in objects if o['id'] == object_id), None)
-            if maybe_obj:
-                found_name = maybe_obj['name']
-
-        # 3) If we found a matching name, see if that name is in planetary_params
-        if found_name and found_name in planetary_params:
-            a = planetary_params[found_name]['a']  # Semi-major axis in AU
-            orbital_period = np.sqrt(a ** 3)       # Period in Earth years
-
-        # Debug output using output_label
-        debug_msg = f"\nCalculating orbital period for object_id: {object_id}\n"
-        debug_msg += f"Found name: {found_name}\n"
-        if found_name:
-            debug_msg += f"Is {found_name} in planetary_params? {found_name in planetary_params}\n"
-            if found_name in planetary_params:
-                a = planetary_params[found_name]['a']
-                debug_msg += f"Semi-major axis: {a}\n"
-                orbital_period = np.sqrt(a ** 3)
-                debug_msg += f"Calculated orbital period: {orbital_period}\n"
-        
-        # Print to console and update GUI
-        print(debug_msg)  # This will show in the console/terminal
-        if 'output_label' in globals():
-            output_label.config(text=debug_msg)  # This will show in the GUI
+        # Retrieve orbital period from planetary_params if available
+        orbital_period = 'N/A'
+        if object_id in [obj['id'] for obj in objects]:
+            obj_name = next((obj['name'] for obj in objects if obj['id'] == object_id), None)
+            if obj_name and obj_name in planetary_params:
+                a = planetary_params[obj_name]['a']  # Semi-major axis in AU
+                orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
+                orbital_period = f"{orbital_period_years:.2f}"
 
         return {
             'x': x,
             'y': y,
             'z': z,
             'range': range_,
+            'range_rate': range_rate,
+            'vx': vx,
+            'vy': vy,
+            'vz': vz,
             'velocity': velocity,
             'distance_lm': distance_lm,
             'distance_lh': distance_lh,
-            'orbital_period': orbital_period,
-            'mission_info': mission_info
+            'mission_info': mission_info,  # Include mission info if available
+            'orbital_period': orbital_period  # Include orbital period
         }
-
     except Exception as e:
         print(f"Error fetching data for object {object_id} on {date_obj}: {e}")
         return None
@@ -931,57 +897,13 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
         # Fetch vectors for all dates in one call
         vectors = obj.vectors()
 
-        # Find matching object name for orbital period calculation
-        found_name = None
-        for obj_item in objects:
-            if str(obj_item['id']) == str(object_id) \
-               or str(obj_item['id']) == str(abs(int(object_id) if str(object_id).lstrip('-').isdigit() else 0)):
-                found_name = obj_item['name']
-                break
-
-        # Calculate orbital period if we have the object's parameters
-        orbital_period = None
-        if found_name and found_name in planetary_params:
-            a = planetary_params[found_name]['a']  # Semi-major axis in AU
-            orbital_period = np.sqrt(a ** 3)       # Period in Earth years
-
+        # Process vectors to extract positions
         positions = []
         for i in range(len(vectors)):
-            # Basic coordinates
             x = float(vectors['x'][i])
             y = float(vectors['y'][i])
             z = float(vectors['z'][i])
-
-            # Range from center
-            range_ = float(vectors['range'][i]) if 'range' in vectors.colnames else None
-
-            # Velocity components
-            vx = float(vectors['vx'][i]) if 'vx' in vectors.colnames else None
-            vy = float(vectors['vy'][i]) if 'vy' in vectors.colnames else None
-            vz = float(vectors['vz'][i]) if 'vz' in vectors.colnames else None
-
-            # Velocity magnitude
-            if vx is not None and vy is not None and vz is not None:
-                velocity = (vx**2 + vy**2 + vz**2) ** 0.5
-            else:
-                velocity = None
-
-            # Convert range to light-minutes, light-hours
-            distance_lm = range_ * LIGHT_MINUTES_PER_AU if range_ else None
-            distance_lh = distance_lm / 60 if distance_lm else None
-
-            positions.append({
-                'date': dates_list[i],
-                'x': x,
-                'y': y,
-                'z': z,
-                'range': range_,
-                'velocity': velocity,
-                'distance_lm': distance_lm,
-                'distance_lh': distance_lh,
-                'orbital_period': orbital_period  # Add orbital period to each position
-            })
-
+            positions.append({'x': x, 'y': y, 'z': z, 'date': dates_list[i]})
         return positions
 
     except Exception as e:
@@ -1099,16 +1021,6 @@ def plot_objects():
                 center_id = 'Sun'
                 center_id_type = None
 
-            # Get the interval divisor value, with error handling
-            try:
-                interval_divisor = float(interval_divisor_entry.get())
-                if interval_divisor <= 0:
-                    output_label.config(text="Interval divisor must be positive. Using default value of 50.")
-                    interval_divisor = 50
-            except ValueError:
-                output_label.config(text="Invalid interval divisor. Using default value of 50.")
-                interval_divisor = 50
-
             # Create date lists for each selected object
             dates_lists = {}
             for obj in objects:
@@ -1120,7 +1032,7 @@ def plot_objects():
                         if total_days <= 0:
                             dates_list = [start_date]
                         else:
-                            interval = total_days / interval_divisor
+                            interval = total_days / 100         # divide by 100 to have more resolution at perihelion
                             dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
                     elif obj.get('is_mission', False):
@@ -1130,7 +1042,7 @@ def plot_objects():
                         if total_days <= 0:
                             dates_list = [start_date]
                         else:
-                            interval = total_days / interval_divisor
+                            interval = total_days / 75      # divide by 75 to have more resolution at launch
                             dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
                     elif obj['name'] in planetary_params:
@@ -1143,7 +1055,7 @@ def plot_objects():
                         if capped_orbital_period_days <= 0:
                             dates_list = [date_obj]
                         else:
-                            interval = capped_orbital_period_days / interval_divisor
+                            interval = capped_orbital_period_days / 50      # divide by 50 because this is sufficient for orbit resolution
                             dates_list = [date_obj + timedelta(days=i) for i in np.arange(0, capped_orbital_period_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
                     else:
@@ -1156,42 +1068,6 @@ def plot_objects():
                 if obj['var'].get() == 1:
                     if obj['name'] == center_object_name:
                         obj_data = {'x': 0, 'y': 0, 'z': 0}
-
-                    # For fixed stars, compute x, y, z from RA/Dec/distance, no Horizons
-                    elif obj.get('is_fixed_star'):
-                        from astropy.coordinates import SkyCoord
-                        import astropy.units as u
-                        
-                        # Parse the star's RA, Dec, and distance (light-years)
-                        coords = SkyCoord(obj['coordinates']['ra'],
-                                        obj['coordinates']['dec'],
-                                        distance=obj['coordinates']['distance_ly'] * u.lyr,
-                                        frame='icrs')
-
-                        # Convert to cartesian coordinates (which will be in the same units as your distance)
-                        cartesian = coords.cartesian
-
-                        # The x, y, z from coords.cartesian are in light-years if you used distance in light-years
-                        # Convert them to AU
-                        x_au = cartesian.x.to(u.au).value
-                        y_au = cartesian.y.to(u.au).value
-                        z_au = cartesian.z.to(u.au).value
-
-                        # For consistency with the rest of your code, store them in a dictionary
-                        # You can also store a 'range' (distance from your chosen center) in AU
-                        distance_au = (cartesian.norm().to(u.au)).value
-                        
-                        obj_data = {
-                            'x': x_au,
-                            'y': y_au,
-                            'z': z_au,
-                            'range': distance_au,
-                            'velocity': 0,         # no relative motion for a "fixed" star in this simplified view
-                            'distance_lm': 'N/A',  # you can fill in if desired
-                            'distance_lh': 'N/A',
-                            'orbital_period': 'N/A'
-            }
-
                     else:
                         obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', 'majorbody'))
                     positions[obj['name']] = obj_data
@@ -1273,25 +1149,25 @@ def plot_objects():
                 )
 
             # Again, for clarity, place the center marker
-    #        center_marker_size = 10
-    #        fig.add_trace(
-    #            go.Scatter3d(
-    #                x=[0],
-    #                y=[0],
-    #                z=[0],
-    #                mode='markers+text',
-    #                marker=dict(
-    #                    color=center_object_info['color'],
+            center_marker_size = 10
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[0],
+                    y=[0],
+                    z=[0],
+                    mode='markers+text',
+                    marker=dict(
+                        color=center_object_info['color'],
             #            color='rgb(0, 255, 0)',        #green
-    #                    size=center_marker_size,
-    #                    symbol=center_object_info['symbol']
-    #                ),
-    #                name=center_object_name,
-    #                text=[center_object_name],
-    #                hoverinfo='skip',
-    #                showlegend=True
-    #            )
-    #        )
+                        size=center_marker_size,
+                        symbol=center_object_info['symbol']
+                    ),
+                    name=center_object_name,
+                    text=[center_object_name],
+                    hoverinfo='skip',
+                    showlegend=True
+                )
+            )
 
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
@@ -1465,7 +1341,7 @@ def plot_idealized_orbits(fig, planets_to_plot, center_id='Sun'):
                 showlegend=True
             )
         )
-    
+
 def show_animation_safely(fig, default_name):
     """Show and optionally save an animated Plotly figure with proper cleanup."""
     import tkinter as tk
@@ -1532,7 +1408,6 @@ def show_animation_safely(fig, default_name):
 def animate_objects(step, label):
     def animation_worker():
         try:
-
             # Original setup code remains unchanged
             center_object_name = center_object_var.get()
             center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
@@ -1558,8 +1433,8 @@ def animate_objects(step, label):
                 return
 
             # Generate dates list
-            current_date = datetime(int(entry_year.get()), int(entry_month.get()),
-                                    int(entry_day.get()), int(entry_hour.get()))
+            current_date = datetime(int(entry_year.get()), int(entry_month.get()), 
+                                int(entry_day.get()), int(entry_hour.get()))
             dates_list = []
 
             for i in range(N):
@@ -1581,169 +1456,189 @@ def animate_objects(step, label):
                     break
                 dates_list.append(date)
 
-            # Pre-calculate orbital periods for each object
-            orbital_periods = {}
-            for obj in objects:
-                if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    if obj['name'] in planetary_params:
-                        a = planetary_params[obj['name']]['a']  # Semi-major axis in AU
-                        orbital_periods[obj['name']] = np.sqrt(a ** 3)  # Period in Earth years
-
-
-            # In the animation_worker function:
-
-        # Initialize positions dictionary before creating frames
-            positions_over_time = {}
-
-            # Get selected objects and their positions for each date
-            for obj in objects:
-                if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    positions_over_time[obj['name']] = []
-                    for date in dates_list:
-                        try:
-                            obj_data = fetch_position(
-                                obj['id'], 
-                                date, 
-                                center_id=center_id, 
-                                id_type=obj.get('id_type', 'majorbody'),
-                                mission_info=obj.get('mission_info')
-                            )
-
-                            # Add pre-calculated orbital period
-                            if obj_data and obj['name'] in orbital_periods:
-                                obj_data['orbital_period'] = orbital_periods[obj['name']]
-
-                            positions_over_time[obj['name']].append(obj_data)
-                        except Exception as e:
-                            print(f"Error fetching position for {obj['name']} at {date}: {e}")
-                            positions_over_time[obj['name']].append(None)
-
-            # 1. Create base figure and solar visualization
+            # Initialize figure
             fig = go.Figure()
 
+            # Add Sun visualization if Sun is center
             if center_object_name == 'Sun':
                 fig = create_sun_visualization(fig)
-                # Add center marker
-                fig.add_trace(go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color=color_map('Sun'),
-                        size=12,
-                        symbol='circle'
-                    ),
-                    name='Sun (Center)',
-                    text=['Sun'],
-                    customdata=['<b>Sun</b>'],
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                ))
-            else:
-                # Fallback for other centers
-                if center_object_info:  # Check if center_object_info exists
-                    fig.add_trace(go.Scatter3d(
+        #    else:
+                fig.add_trace(
+                    go.Scatter3d(
                         x=[0], y=[0], z=[0],
-                        mode='markers',
+                        mode='markers+text',
                         marker=dict(
-                            color=center_object_info.get('color', 'white'),
+                            color=center_object_info['color'],
+            #                color=rgb(0, 255, 0),                            
+                            size=12,    
+                            symbol=center_object_info['symbol']
+                            ),
+                        name=f"{center_object_name} (Center)",
+                        text=[center_object_name],
+                        hoverinfo='skip',
+                        showlegend=True
+                    )
+                )
+
+                # Add a simple center marker in addition to the layered visualization
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=[0],
+                        y=[0],
+                        z=[0],
+                        mode='markers+text',
+                        marker=dict(
+                            color=color_map('Sun'),
                             size=12,
-                            symbol=center_object_info.get('symbol', 'circle')
+                            symbol='circle'
+                        ),
+                        name='Sun (Center)',
+                        text=['Sun'],
+                        hoverinfo='skip',
+                        showlegend=True
+                    )
+                )
+            else:
+                # Existing fallback for other centers
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=[0], y=[0], z=[0],
+                        mode='markers+text',
+                        marker=dict(
+                            color=center_object_info['color'],
+                            size=12,
+                            symbol=center_object_info['symbol']
                         ),
                         name=f"{center_object_name} (Center)",
                         text=[center_object_name],
-                        customdata=[f'<b>{center_object_name}</b>'],
-                        hovertemplate='%{text}<extra></extra>',
+                        hoverinfo='skip',
                         showlegend=True
-                    ))
+                    )
+                )
 
-            # 2. Initialize traces and track indices
-            obj_traces = {}
-            trace_indices = {}
-            current_index = len(fig.data)
-
-            # Add initial traces for each object
+            # Fetch positions for all objects
+            positions_over_time = {}
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    obj_positions = positions_over_time.get(obj['name'], [])
-                    if obj_positions and obj_positions[0] is not None:
+                    positions = fetch_trajectory(obj['id'], dates_list, center_id=center_id, 
+                                            id_type=obj.get('id_type'))
+                    positions_over_time[obj['name']] = positions
+
+            # Add idealized orbits for Sun-centered view
+            if center_id == 'Sun':
+                selected_planets = [obj['name'] for obj in objects 
+                                if obj['var'].get() == 1 and not obj.get('is_mission', False)]
+                plot_idealized_orbits(fig, selected_planets)
+
+            # Create initial traces and track indices
+            trace_indices = []
+            for obj in objects:
+                if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                    obj_positions = positions_over_time.get(obj['name'])
+                    if obj_positions and obj_positions[0]:
                         obj_data = obj_positions[0]
-                        
-                        # Create hover text
+                        distance_from_origin = np.sqrt(obj_data['x']**2 + 
+                                                    obj_data['y']**2 + 
+                                                    obj_data['z']**2)
+                        customdata = [distance_from_origin, obj.get('mission_info')]
+
+                        # Format hover text for this object
                         hover_texts = format_hover_text({
-                            'range': obj_data.get('range', 'N/A'),
+                            'range': distance_from_origin,
                             'velocity': obj_data.get('velocity', 'N/A'),
                             'distance_lm': obj_data.get('distance_lm', 'N/A'),
                             'distance_lh': obj_data.get('distance_lh', 'N/A'),
                             'orbital_period': obj_data.get('orbital_period', 'N/A'),
                             'mission_info': obj.get('mission_info', '')
                         }, obj['name'], True)
-
-                        trace = go.Scatter3d(
-                            x=[obj_data['x']],
-                            y=[obj_data['y']],
-                            z=[obj_data['z']],
-                            mode='markers',
-                            marker=dict(
-                                symbol=obj.get('symbol', 'circle'),
-                                color=obj.get('color', 'white'),
-                                size=6,
-                                opacity=0.7
-                            ),
-                            name=obj['name'],
-                            text=[hover_texts[0]],
-                            customdata=[hover_texts[1]],
-                            hovertemplate='%{text}<extra></extra>',
-                            showlegend=True
-                        )
-                        fig.add_trace(trace)
-                        obj_traces[obj['name']] = trace
-                        trace_indices[obj['name']] = current_index
-                        current_index += 1
-
-            # 3. Create frames
-            frames = []
-            for i, date in enumerate(dates_list):
-                frame_data = []
-                frame_traces = []
-                
-                for obj_name, index in trace_indices.items():
-                    obj_positions = positions_over_time.get(obj_name, [])
-                    if len(obj_positions) > i and obj_positions[i] is not None:
-                        obj_data = obj_positions[i]
-                        obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
                         
-                        if obj_info:  # Make sure we found the object info
-                            hover_texts = format_hover_text({
-                                'range': obj_data.get('range', 'N/A'),
-                                'velocity': obj_data.get('velocity', 'N/A'),
-                                'distance_lm': obj_data.get('distance_lm', 'N/A'),
-                                'distance_lh': obj_data.get('distance_lh', 'N/A'),
-                                'orbital_period': obj_data.get('orbital_period', 'N/A'),
-                                'mission_info': obj_info.get('mission_info', '')
-                            }, obj_name, True)
-                            
-                            frame_data.append(
-                                dict(
+                        full_hover_text = hover_texts[0]  # First element is full hover text
+                        minimal_hover_text = hover_texts[1]  # Second element is minimal hover text
+
+                        fig.add_trace(
+                            go.Scatter3d(
+                                x=[obj_data['x']],
+                                y=[obj_data['y']],
+                                z=[obj_data['z']],
+                                mode='markers',     # removed +text  to remove the hovertext from the marker
+                                marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
+                                name=obj['name'],
+                                text=[full_hover_text],             # Full hover info
+                                customdata=[minimal_hover_text],    # Minimal hover info
+                        #        text=[obj['name']],
+                                textposition='top center',
+                                textfont=dict(size=8, color='white'),
+                                hovertemplate='%{text}<extra></extra>',  # Let toggle buttons control template
+                        #        customdata=[customdata],
+                        #        hovertemplate=(
+                        #            f"<b>{obj['name']}</b><br>"
+                        #            "Distance from center: %{customdata[0]:.5f} AU<br>"
+                        #            "<extra></extra>"
+                        #        ),
+                                showlegend=True
+                            )
+                        )
+                    else:
+                        fig.add_trace(
+                            go.Scatter3d(
+                                x=[None], y=[None], z=[None],
+                                mode='markers+text',
+                                marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
+                                name=obj['name'],
+                                text=[obj['name']],
+                                textposition='top center',
+                                textfont=dict(size=8, color='white'),
+                                customdata=[['N/A', obj.get('mission_info')]],
+                                hovertemplate=(
+                                    f"{obj['name']}<br>"
+                                    "Distance from center: N/A<br>"
+                                    "<extra></extra>"
+                                ),
+                                showlegend=True
+                            )
+                        )
+                    trace_indices.append(len(fig.data) - 1)
+
+            # Create frames
+            frames = []
+            for i in range(N):
+                frame_data = []
+                current_date = dates_list[i]
+
+                for obj in objects:
+                    if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                        if 'start_date' in obj and current_date < obj['start_date']:
+                            frame_data.append(dict(visible=False))
+                        else:
+                            obj_positions = positions_over_time.get(obj['name'])
+                            if obj_positions and obj_positions[i]:
+                                obj_data = obj_positions[i]
+                                distance_from_origin = np.sqrt(obj_data['x']**2 + 
+                                                            obj_data['y']**2 + 
+                                                            obj_data['z']**2)
+                                customdata = [distance_from_origin, obj.get('mission_info')]
+
+                                frame_data.append(dict(
                                     type='scatter3d',
                                     x=[obj_data['x']],
                                     y=[obj_data['y']],
                                     z=[obj_data['z']],
-                                    text=[hover_texts[0]],
-                                    customdata=[hover_texts[1]],
-                                    hovertemplate='%{text}<extra></extra>'
-                                )
-                            )
-                            frame_traces.append(index)
-                
-                frames.append(
-                    go.Frame(
-                        data=frame_data,
-                        traces=frame_traces,
-                        name=str(date.strftime('%Y-%m-%d'))
-                    )
-                )
+                                    customdata=[customdata],
+                                    hovertemplate=(
+                                        f"<b>{obj['name']}</b><br>"
+                                        "Distance from center: %{customdata[0]:.5f} AU<br>"
+                                        "<extra></extra>"
+                                    ),
+                                    visible=True
+                                ))
+                            else:
+                                frame_data.append(dict(visible=False))
 
-            fig.frames = frames
+                frames.append(go.Frame(
+                    data=frame_data,
+                    traces=trace_indices,
+                    name=str(dates_list[i].strftime('%Y-%m-%d'))
+                ))
 
             # NEW CODE: Calculate axis ranges
             x_coords = []
@@ -1784,19 +1679,19 @@ def animate_objects(step, label):
             # Update layout with dynamic scaling
             fig.update_layout(
                 scene=dict(
-                    xaxis=dict(title='X (AU)', range=axis_range,
-                               backgroundcolor='black', gridcolor='gray',
-                               showbackground=True, showgrid=True),
-                    yaxis=dict(title='Y (AU)', range=axis_range,
-                               backgroundcolor='black', gridcolor='gray',
-                               showbackground=True, showgrid=True),
-                    zaxis=dict(title='Z (AU)', range=axis_range,
-                               backgroundcolor='black', gridcolor='gray',
-                               showbackground=True, showgrid=True),
+                    xaxis=dict(title='X (AU)', range=axis_range, 
+                            backgroundcolor='black', gridcolor='gray', 
+                            showbackground=True, showgrid=True),
+                    yaxis=dict(title='Y (AU)', range=axis_range, 
+                            backgroundcolor='black', gridcolor='gray', 
+                            showbackground=True, showgrid=True),
+                    zaxis=dict(title='Z (AU)', range=axis_range, 
+                            backgroundcolor='black', gridcolor='gray', 
+                            showbackground=True, showgrid=True),
                     aspectmode='cube',
                     camera=get_default_camera()
                 ),
-
+            
                 paper_bgcolor='black',
                 plot_bgcolor='black',
                 title_font_color='white',
@@ -1843,13 +1738,13 @@ def animate_objects(step, label):
                         showactive=False,
                         buttons=[
                             dict(label='Play',
-                                 method='animate',
-                                 args=[None, {'frame': {'duration': 500, 'redraw': True},
-                                               'fromcurrent': True,
-                                               'transition': {'duration': 0}}]),
+                                method='animate',
+                                args=[None, {'frame': {'duration': 500, 'redraw': True},
+                                        'fromcurrent': True,
+                                        'transition': {'duration': 0}}]),
                             dict(label='Pause',
-                                 method='animate',
-                                 args=[[None], {'frame': {'duration': 0},
+                                method='animate',
+                                args=[[None], {'frame': {'duration': 0},
                                                 'mode': 'immediate',
                                                 'transition': {'duration': 0}}])
                         ],
@@ -1864,8 +1759,8 @@ def animate_objects(step, label):
                 active=0,
                 steps=[dict(method='animate',
                             args=[[str(dates_list[k].strftime('%Y-%m-%d'))],
-                                  {'frame': {'duration': 500, 'redraw': True},
-                                   'mode': 'immediate'}],
+                                {'frame': {'duration': 500, 'redraw': True},
+                                'mode': 'immediate'}],
                             label=dates_list[k].strftime('%Y-%m-%d')) for k in range(N)],
                 transition=dict(duration=0),
                 x=0,
@@ -1882,19 +1777,27 @@ def animate_objects(step, label):
             fig = add_hover_toggle_buttons(fig)
 
             # Save and display the animation
-            html_str = fig.to_html(include_plotlyjs='cdn', auto_play=False)
-            temp_file = "palomas_orrery_animation.html"
+    #        html_str = fig.to_html(include_plotlyjs='cdn', auto_play=False)
+    #        temp_file = "palomas_orrery_animation.html"
 
             # Generate default name with timestamp
             current_date = datetime.now()
             default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
-            temp_file = f"{default_name}.html"
+    #        temp_file = f"{default_name}.html"
+
+            # Save the animation to an HTML file
+    #        fig.write_html(temp_file, include_plotlyjs='cdn', auto_play=False)
 
             # New code at the end of animation_worker:
             current_date = datetime.now()
             default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
             show_animation_safely(fig, default_name)
 
+            # Update output_label with instructions
+            output_label.config(
+                text="Animation opened in browser. "
+                    "Use your browser's File -> Save As to save the animation if desired."
+            )
             progress_bar.stop()
 
         except Exception as e:
@@ -1916,9 +1819,8 @@ def on_closing():
             try:
                 if os.path.exists(temp_file):
                     os.remove(temp_file)
-            except Exception as e:
-                print(f"Error removing temporary file {temp_file}: {e}")
-                pass  # Continue even if file removal fails
+            except:
+                pass
     finally:
         root.destroy()
 
@@ -2242,6 +2144,7 @@ comet_neowise_var = tk.IntVar(value=0)
 comet_tsuchinshan_atlas_var = tk.IntVar(value=0)
 comet_Churyumov_Gerasimenko_var = tk.IntVar(value=0)
 comet_borisov_var = tk.IntVar(value=0)
+comet_atlas_var = tk.IntVar(value=0)
 oumuamua_var = tk.IntVar(value=0)
 apophis_var = tk.IntVar(value=0)
 vesta_var = tk.IntVar(value=0)
@@ -2308,7 +2211,7 @@ triton_var = tk.IntVar(value=0)
 charon_var = tk.IntVar(value=0)
 
 # Proxima Centauri variable
-# proxima_var = tk.IntVar(value=0)  
+proxima_var = tk.IntVar(value=0)  
 
 # Scrollable frame for celestial objects and missions
 scrollable_frame = ScrollableFrame(input_frame)
@@ -2411,7 +2314,7 @@ create_celestial_checkbutton("GV9", gv9_var)
 create_celestial_checkbutton("MS4", ms4_var)
 create_celestial_checkbutton("OR10", or10_var)
 
-# create_celestial_checkbutton("View from Proxima Centauri", proxima_var)
+create_celestial_checkbutton("NAME Proxima Centauri", proxima_var)
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
@@ -2501,6 +2404,8 @@ create_comet_checkbutton("NEOWISE", comet_neowise_var, "(2020-03-27 to 2021-06-0
                          "July 3, 2020")
 create_comet_checkbutton("Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to present)", 
                          "April 28, 2024")
+create_comet_checkbutton("ATLAS", comet_atlas_var, "(2024-06-17 to present)", 
+                         "January 13, 2025")
 
 # Controls in controls_frame (Scale Options and beyond)
 
@@ -2514,8 +2419,7 @@ auto_scale_radio = tk.Radiobutton(scale_frame, text="Automatic Scaling of Your P
 auto_scale_radio.pack(anchor='w')
 CreateToolTip(auto_scale_radio, "Automatically adjust scale based on selected objects")
 
-manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU. Examples:\n" 
-"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Inner Oort Cloud: 20000; Outer Oort Cloud: 100000;\nProxima Centauri: 268585; Alpha Centauri: 276643", variable=scale_var, value='Manual')
+manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU (Outer Oort Cloud at 100,000 AU):", variable=scale_var, value='Manual')
 manual_scale_radio.pack(anchor='w')
 CreateToolTip(manual_scale_radio, "Set custom scale. Some key mean distances: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
 "* Mars: 1.52 AU\n* Asteroid Belt: between 2.2 and 3.2 AU\n* Jupiter: 5.2 AU\n* Saturn: 9.5 AU\n* Uranus: 19.2 AU\n* Neptune: 30.1 AU\n"
@@ -2586,33 +2490,12 @@ CreateToolTip(
 advance_buttons_frame = tk.Frame(controls_frame)
 advance_buttons_frame.pack(pady=(5, 0), fill='x')
 
-# Create a frame for the plot button and interval input
-plot_with_interval_frame = tk.Frame(advance_buttons_frame)
-plot_with_interval_frame.grid(row=0, column=0, columnspan=2, sticky='w', pady=(5, 0))
-
-# Add the plot button to the new frame
-plot_button = tk.Button(plot_with_interval_frame, text="Plot This Date", command=plot_objects, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
-plot_button.pack(side='left', padx=(0, 5))
-
-# Add "Interval =" label
-interval_label = tk.Label(plot_with_interval_frame, text="Interval = (days to plot) /")
-interval_label.pack(side='left', padx=(5, 5))
-
-# Add interval input field
-interval_divisor_entry = tk.Entry(plot_with_interval_frame, width=5)
-interval_divisor_entry.pack(side='left')
-interval_divisor_entry.insert(0, '50')  # Default value
-
-# Update the tooltip for the plot button
+# "Single Time Plot" Button 
+plot_button = tk.Button(advance_buttons_frame, text="Plot This Date", command=plot_objects, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+plot_button.grid(row=0, column=0, columnspan=2, sticky='w', pady=(5, 0))
 CreateToolTip(plot_button, "Plot the positions of selected objects on the selected date. Planets and asteroids show their orbits. " 
-              "Comets and Missions show their trajectory between the identified start and end dates. \n\n"
-              "The interval divisor determines how many points are plotted along each object's path. "
-              "For example, with a divisor of 50:\n"
-              "* Earth's orbit (365 days) would be plotted every 7.3 days (365/50)\n"
-              "* Mars's orbit (687 days) would be plotted every 13.7 days (687/50)\n"
-              "* Jupiter's orbit (4333 days) would be plotted every 86.7 days (4333/50)\n\n"
-              "A smaller divisor means fewer points and faster plotting but less smooth orbits. "
-              "A larger divisor means more points and smoother orbits but slower plotting.")
+              "Comets and Missions show their trajectory between the identified start and end dates. Plotting may take a while due " 
+              "to a large number of positions fetched from Horizons. The tooltip text has more position, velocity, and orbit information.")
 
 # First Row of Animate Buttons: "Animate Days" and "Animate Weeks"
 animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
@@ -3031,7 +2914,9 @@ objects = [
      'start_date': datetime(2019, 8, 30), 'end_date': datetime(2020, 10, 1), 'mission_info': 'The second interstellar object detected, after \'Oumuamua.'},
     {'name': 'Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('Oumuamua'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
      'start_date': datetime(2017, 10, 14), 'end_date': datetime(2018, 1, 1), 'mission_info': 'First known interstellar object detected passing through the Solar System.'},
-   
+    {'name': 'ATLAS', 'id': 'DES=C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
+     'start_date': datetime(2024, 6, 17), 'end_date': datetime(2026, 1, 1), 'mission_info': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!'},
+
     # Asteroids
     {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_comet': False, 'id_type': 'smallbody',
      'start_date': datetime(2004, 6, 19), 'end_date': datetime(2036, 1, 1), 'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
@@ -3074,30 +2959,30 @@ objects = [
     {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
 
     # Pluto's Moon
-#    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-#    {'name': 'Pluto\'s Moon Nix', 'id': 'Nix', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-#    'mission_info': 'One of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/nix/overview/'},
-#    {'name': 'Pluto\'s Moon Hydra', 'id': 'Hydra', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-#    'mission_info': 'Another of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/hydra/overview/'},
+    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+    {'name': 'Pluto\'s Moon Nix', 'id': 'Nix', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+    'mission_info': 'One of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/nix/overview/'},
+    {'name': 'Pluto\'s Moon Hydra', 'id': 'Hydra', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+    'mission_info': 'Another of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/hydra/overview/'},
 
     # Eris's Moon
-#    {'name': 'Eris\' Moon Dysnomia', 'id': 'Dysnomia', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-#     'mission_info': 'Companion to the dwarf planet Eris.', 'mission_url': 'https://www.nasa.gov/asteroids'},
+    {'name': 'Eris\' Moon Dysnomia', 'id': 'Dysnomia', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+     'mission_info': 'Companion to the dwarf planet Eris.', 'mission_url': 'https://www.nasa.gov/asteroids'},
 
     # Stars
     # Proxima Centauri - Our closest stellar neighbor
-#    {'name': 'Proxima Centauri', 
-#    'id': 'unused-proxima-id',  # or just 'Proxima',
-#    'is_fixed_star': True,
-#    'var': proxima_var, 
-#    'color': 'rgb(255, 50, 50)', 
-#    'symbol': 'circle', 
-#    'is_mission': False,
-#    'coordinates': {
-#        'ra': '14h 29m 42.95s',
-#        'dec': '-62° 40′ 46.14″',
-#        'distance_ly': 4.247  # 4.247 ly is 268584 AU
-#    }}
+    {'name': 'NAME Proxima Centauri', 
+    'id': 'HIP 70890',  # Hipparcos ID if we want to use that instead
+    'var': proxima_var, 
+    'color': 'rgb(255, 50, 50)', 
+    'symbol': 'circle', 
+    'is_mission': False,
+    'is_fixed_star': True,  # New flag to indicate static position
+    'coordinates': {
+        'ra': '14h 29m 42.95s',
+        'dec': '-62° 40′ 46.14″',
+        'distance_ly': 4.2465  # light-years
+    }}
 ]
 
 

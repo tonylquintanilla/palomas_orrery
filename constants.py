@@ -460,6 +460,7 @@ def color_map(planet):
         'McNaught': 'rgb(218, 165, 32)',
         'NEOWISE': 'rgb(218, 165, 32)',
         'Tsuchinshan-ATLAS': 'rgb(218, 165, 32)',
+        'ATLAS': 'rgb(218, 165, 32)',
         'Churyumov-Gerasimenko': 'rgb(32, 178, 170)',
         'Borisov': 'rgb(64, 224, 208)',
         'SOHO: Solar and Heliospheric Observatory': 'white',
