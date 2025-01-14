@@ -1394,9 +1394,6 @@ def plot_objects():
                 ]
             )
 
-            # After creating the figure (where fig.show() was previously called):
-        #    temp_file = "palomas_orrery.html"
-            # Save and display the plot
             # Generate default name with timestamp
             current_date = datetime.now()
             default_name = f"solar_system_{date_obj.strftime('%Y%m%d_%H%M')}"
@@ -1737,12 +1734,6 @@ def animate_objects(step, label):
                                 textposition='top center',
                                 textfont=dict(size=8, color='white'),
                                 hovertemplate='%{text}<extra></extra>',  # Let toggle buttons control template
-                        #        customdata=[customdata],
-                        #        hovertemplate=(
-                        #            f"<b>{obj['name']}</b><br>"
-                        #            "Distance from center: %{customdata[0]:.5f} AU<br>"
-                        #            "<extra></extra>"
-                        #        ),
                                 showlegend=True
                             )
                         )
@@ -1944,17 +1935,9 @@ def animate_objects(step, label):
             # Add hover toggle buttons
             fig = add_hover_toggle_buttons(fig)
 
-            # Save and display the animation
-    #        html_str = fig.to_html(include_plotlyjs='cdn', auto_play=False)
-    #        temp_file = "palomas_orrery_animation.html"
-
             # Generate default name with timestamp
             current_date = datetime.now()
             default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
-    #        temp_file = f"{default_name}.html"
-
-            # Save the animation to an HTML file
-    #        fig.write_html(temp_file, include_plotlyjs='cdn', auto_play=False)
 
             # New code at the end of animation_worker:
             current_date = datetime.now()
@@ -2588,8 +2571,8 @@ auto_scale_radio.pack(anchor='w')
 CreateToolTip(auto_scale_radio, "Automatically adjust scale based on selected objects")
 
 manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU. Examples:\n" 
-"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s orbit: 936; Inner Oort Cloud: 20000;\n" 
-"Outer Oort Cloud: 100000; Proxima Centauri: 268585;\n The Sun's gravitational influence: 126000; Alpha Centauri: 276643", 
+"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s furthest orbit (aphelion): 936; Inner Limit of Oort Cloud: 2000;\n" 
+"Outer Oort Cloud Limit: 100000; The Sun's gravitational influence: 126000;\n Proxima Centauri: 268585; Alpha Centauri: 276643", 
 variable=scale_var, value='Manual')
 manual_scale_radio.pack(anchor='w')
 
@@ -2735,7 +2718,7 @@ stellar_scale_frame.pack(pady=(5, 0), fill='x')
 stellar_scale_var = tk.StringVar(value='Auto')
 
 # Auto scale option
-stellar_auto_scale = tk.Radiobutton(stellar_scale_frame, text="Automatic Scaling of 3D Stellar Plots", 
+stellar_auto_scale = tk.Radiobutton(stellar_scale_frame, text="Automatic Scaling of Your 3D Stellar Plots", 
                                    variable=stellar_scale_var, value='Auto')
 stellar_auto_scale.pack(anchor='w')
 CreateToolTip(stellar_auto_scale, "Automatically adjust scale based on the data range")
@@ -2936,7 +2919,6 @@ CreateToolTip(
     "The planets are usually visible: Mercury is about magnitude -2.5, Venus about -4.5, Mars about -3, Jupiter about -3, and Saturn about -0.5." 
 )
 
-
 # Create a LabelFrame for Status Messages
 status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status for Solar Object Plotting", padx=10, pady=10, bg='SystemButtonFace', fg='black')
 status_frame.pack(pady=(5, 5), fill='x')
@@ -2988,7 +2970,6 @@ note_text_widget.insert(tk.END, note_text)
 
 # Make the ScrolledText widget read-only
 note_text_widget.config(state='disabled')
-
 
 # Define the list of objects
 objects = [

@@ -632,7 +632,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             ),
 
             dict(       # target marker 
-                x=0.5,
+                x=0.500,
                 y=0.505,
                 text='<span style="vertical-align:1em;">◇</span>',
                 showarrow=False,
