@@ -129,8 +129,10 @@ LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
 CORE_AU = 0.00093               # Core in AU, or approximately 0.2 Solar radii
 RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, or approximately 0.7 Solar radii
 SOLAR_RADIUS_AU = 0.00465047  # Sun's radius in AU
-INNER_OORT_CLOUD_AU = 20000   # Oort cloud inner boundary in AU.
-OUTER_OORT_CLOUD_AU = 100000   # Oort cloud inner boundary in AU.
+INNER_LIMIT_OORT_CLOUD_AU = 2000   # Inner Oort cloud inner boundary in AU.
+INNER_OORT_CLOUD_AU = 20000   # Inner Oort cloud outer boundary in AU.
+OUTER_OORT_CLOUD_AU = 100000   # Oort cloud outer boundary in AU.
+GRAVITATIONAL_INFLUENCE_AU = 126000   # Sun's gravitational influence in AU.
 CHROMOSPHERE_RADII = 1.5    # The Chromosphere extends from about 1 to 1.5 solar radii or about 0.00465 - 0.0070 AU
 INNER_CORONA_RADII = 3  # Inner corona extends to 2 to 3 solar radii or about 0.01 AU
 OUTER_CORONA_RADII = 50       # Outer corona extends up to 50 solar radii or about 0.2 AU, more typically 10 to 20 solar radii
@@ -159,6 +161,64 @@ def create_sun_visualization(fig, animate=False, frames=None):
     def create_layer_traces():
         traces = []
         
+        # 0.2. Sun's Gravitational Influence
+        x, y, z = create_corona_sphere(GRAVITATIONAL_INFLUENCE_AU)
+
+        # Define the text string once
+        gravitational_influence_info = (
+            "The Solar System\'s extent is actually defined in multiple ways. The Heliopause (120-123 AU):<br>" 
+            "Where the solar wind meets interstellar space. Gravitational influence: Extends much further, including,<br>" 
+            "Sedna\'s orbit (936 AU), The Hills Cloud/Inner Oort Cloud (2,000-20,000 AU), The Outer Oort Cloud (20,000-100,000 AU).<br>"
+            "The Sun's gravitational influence extends to about 2 light-years (~126,000 AU). While the Heliopause marks<br>" 
+            "where the Sun\'s particle influence ends, its gravitational influence extends much further. Sedna and other<br>" 
+            "distant objects remain gravitationally bound to the Sun despite being well beyond the Heliopause. This is<br>" 
+            "why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part of our Solar System,<br>" 
+            "even though we've never directly observed the Oort Cloud. The distinction comes down to different types of influence:<br>" 
+            "Particle/plasma influence (solar wind) → ends at Heliopause; gravitational influence → extends much further,<br>" 
+            "including Sedna and the theoretical Oort Cloud. So the Solar System is generally considered to extend at least<br>" 
+            "as far as these gravitationally bound objects, even beyond the Heliopause. Sedna is one of our first glimpses<br>" 
+            "into this very distant region that may connect to the Oort Cloud population."
+        )
+
+        # Create a text list matching the number of points
+        text_array_gravitational_influence = [gravitational_influence_info for _ in range(len(x))]
+        customdata_array_gravitational_influence = ["Sun's Gravitational Influence" for _ in range(len(x))]
+
+        traces.append(
+            go.Scatter3d(
+                x=x, y=y, z=z,
+                mode='markers',
+                marker=dict(
+                    size=1.0,
+                    color='green',  
+                    opacity=0.2
+                ),
+                name='Sun\'s Gravitational Influence',
+                text=text_array_gravitational_influence,             
+                customdata=customdata_array_gravitational_influence, # Replicated customdata
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+        
+        # Add shell
+        traces.append(
+            go.Scatter3d(
+                x=[0], y=[0], z=[0],
+                mode='markers',
+                marker=dict(
+                    color='green',
+                    size=0.5,
+                    symbol='square-open',
+                    opacity=0.2
+                ),
+                name='Sun\'s Gravitational Influence',
+                text=['The Sun\'s gravitational influence to ~126,000 AU or 2 ly.'],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            )
+        )
+
         # 0.3. Outer Oort Cloud
         x, y, z = create_corona_sphere(OUTER_OORT_CLOUD_AU)
 
@@ -214,7 +274,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
             )
         )
 
-        # 0.4. Inner Oort Cloud (Hill Cloud)
+        # 0.4. Inner Oort Cloud
         x, y, z = create_corona_sphere(INNER_OORT_CLOUD_AU)
 
         # Define the text string once
@@ -262,6 +322,60 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     opacity=0.3
                 ),
                 name='Inner Oort Cloud',
+                text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            )
+        )
+
+        # 0.45. Inner Limit of Inner Oort Cloud
+        x, y, z = create_corona_sphere(INNER_LIMIT_OORT_CLOUD_AU)
+
+        # Define the text string once
+        inner_limit_oort_info = (
+            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
+            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
+            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
+            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
+            "periods exceeding 200 years.<br><br>" 
+            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
+            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
+            "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
+        )
+
+        # Create a text list matching the number of points
+        text_array_inner_limit_oort = [inner_limit_oort_info for _ in range(len(x))]
+        customdata_array_inner_limit_oort = ["Inner Limit of Oort Cloud" for _ in range(len(x))]
+
+        traces.append(
+            go.Scatter3d(
+                x=x, y=y, z=z,
+                mode='markers',
+                marker=dict(
+                    size=1.0,
+                    color='white',  
+                    opacity=0.3
+                ),
+                name='Inner Limit of Oort Cloud',
+                text=text_array_inner_limit_oort,             
+                customdata=customdata_array_inner_limit_oort, # Replicated customdata
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+        
+        # Add shell
+        traces.append(
+            go.Scatter3d(
+                x=[0], y=[0], z=[0],
+                mode='markers',
+                marker=dict(
+                    color='white',
+                    size=1.0,
+                    symbol='circle-open',
+                    opacity=0.3
+                ),
+                name='Inner Limit of Oort Cloud',
                 text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
                 hovertemplate='%{text}<extra></extra>',
                 showlegend=False
@@ -1268,7 +1382,7 @@ def plot_objects():
                              "toggle them off and back on.",
                         xref='paper',
                         yref='paper',
-                        x=0.97,
+                        x=0.98,
                         y=1.08,
                         showarrow=False,
                         font=dict(size=12, color='white'),
@@ -1304,40 +1418,94 @@ def plot_objects():
     plot_thread.start()
 
 def plot_idealized_orbits(fig, planets_to_plot, center_id='Sun'):
+    """
+    Plot idealized orbits using complete orbital elements.
+    
+    Parameters:
+        fig: plotly figure object
+        planets_to_plot: list of planet names to plot
+        center_id: ID of central body (default='Sun')
+    """
     if center_id != 'Sun':
         return  # Skip plotting idealized orbits if the center is not the Sun
+
+    def rotate_points(x, y, z, angle, axis='z'):
+        """Rotate points around specified axis."""
+        if axis == 'z':
+            xr = x * np.cos(angle) - y * np.sin(angle)
+            yr = x * np.sin(angle) + y * np.cos(angle)
+            zr = z
+        elif axis == 'x':
+            yr = y * np.cos(angle) - z * np.sin(angle)
+            zr = y * np.sin(angle) + z * np.cos(angle)
+            xr = x
+        elif axis == 'y':
+            zr = z * np.cos(angle) - x * np.sin(angle)
+            xr = z * np.sin(angle) + x * np.cos(angle)
+            yr = y
+        return xr, yr, zr
 
     for planet in planets_to_plot:
         params = planetary_params.get(planet)
         if not params:
-            continue  # Skip if planet parameters not defined
-        a = params['a']
-        e = params['e']
-        i = params['i']
-        # For hyperbolic or parabolic orbits, adjust the true anomaly range
-        if e < 1:
+            continue
+
+        # Get all orbital elements
+        a = params.get('a', 0)  # semi-major axis (AU)
+        e = params.get('e', 0)  # eccentricity
+        i = params.get('i', 0)  # inclination (degrees)
+        omega = params.get('omega', 0)  # argument of periapsis (degrees)
+        Omega = params.get('Omega', 0)  # longitude of ascending node (degrees)
+        
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+
+        # Generate points for the orbit
+        if e < 1:  # Elliptical orbit
             theta = np.linspace(0, 2 * np.pi, 1000)
-        else:
+            r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        else:  # Hyperbolic orbit
             theta_limit = np.arccosh(1 / e)
             theta = np.linspace(-theta_limit, theta_limit, 1000)
-        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+            r = a * (e**2 - 1) / (1 + e * np.cos(theta))
+
+        # Initial orbital points in orbital plane
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-        # Rotate orbit by inclination angle
-        x_rot = x_orbit
-        y_rot = y_orbit * np.cos(i)
-        z_rot = y_orbit * np.sin(i)
-        # Remove invalid points (e.g., negative radii)
-        valid_indices = np.where(np.isfinite(x_rot) & np.isfinite(y_rot) & np.isfinite(z_rot) & (r > 0))
+
+        # Apply rotations in correct order:
+        # 1. Rotate by argument of periapsis (ω) around z-axis
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+        
+        # 2. Rotate by inclination (i) around x-axis
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        
+        # 3. Rotate by longitude of ascending node (Ω) around z-axis
+        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+
+        # Remove invalid points
+        valid_indices = np.where(np.isfinite(x_final) & 
+                               np.isfinite(y_final) & 
+                               np.isfinite(z_final) & 
+                               (r > 0))[0]
+
+        # Add the orbit trace
         fig.add_trace(
             go.Scatter3d(
-                x=x_rot[valid_indices], y=y_rot[valid_indices], z=z_rot[valid_indices],
+                x=x_final[valid_indices],
+                y=y_final[valid_indices],
+                z=z_final[valid_indices],
                 mode='lines',
-                line=dict(dash='dash', color=color_map(planet)),
-                name=f"{planet} Orbit",
-                hoverinfo='none',
-                hovertemplate=None,
+                line=dict(
+                    dash='dot',  # Changed to dotted line for distinction
+                    color=color_map(planet),
+                    width=1
+                ),
+                name=f"{planet} Ideal Orbit",
+                hoverinfo='name',
                 showlegend=True
             )
         )
@@ -1722,7 +1890,7 @@ def animate_objects(step, label):
                         text="Click on the legend items <br>to toggle them off or back on:",
                         xref='paper',
                         yref='paper',
-                        x=0.98,
+                        x=0.997,
                         y=1.07,
                         showarrow=False,
                         font=dict(size=12, color='white'),
@@ -2314,7 +2482,7 @@ create_celestial_checkbutton("GV9", gv9_var)
 create_celestial_checkbutton("MS4", ms4_var)
 create_celestial_checkbutton("OR10", or10_var)
 
-create_celestial_checkbutton("NAME Proxima Centauri", proxima_var)
+# create_celestial_checkbutton("NAME Proxima Centauri", proxima_var)
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
@@ -2419,8 +2587,12 @@ auto_scale_radio = tk.Radiobutton(scale_frame, text="Automatic Scaling of Your P
 auto_scale_radio.pack(anchor='w')
 CreateToolTip(auto_scale_radio, "Automatically adjust scale based on selected objects")
 
-manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU (Outer Oort Cloud at 100,000 AU):", variable=scale_var, value='Manual')
+manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU. Examples:\n" 
+"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s orbit: 936; Inner Oort Cloud: 20000;\n" 
+"Outer Oort Cloud: 100000; Proxima Centauri: 268585;\n The Sun's gravitational influence: 126000; Alpha Centauri: 276643", 
+variable=scale_var, value='Manual')
 manual_scale_radio.pack(anchor='w')
+
 CreateToolTip(manual_scale_radio, "Set custom scale. Some key mean distances: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
 "* Mars: 1.52 AU\n* Asteroid Belt: between 2.2 and 3.2 AU\n* Jupiter: 5.2 AU\n* Saturn: 9.5 AU\n* Uranus: 19.2 AU\n* Neptune: 30.1 AU\n"
 "* Dwarf Planet Pluto: between 30 and 49 AU.\n* Kuiper Belt: from roughly 30 to 50 AU\n* Dwarf Planet Sedna: currently at about 83.3 AU, ranging from 74 AU to 936 AU, " 
@@ -2926,7 +3098,13 @@ objects = [
      'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 'mission_url': 'https://www.nasa.gov/content/osiris-rex'},
     {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
      'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
-
+    {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
+    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 'mission_url': 'https://www.jhuapl.edu/near/'},
+    {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
+    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 'mission_url': 'https://www.hayabusa2.jaxa.jp/en/'},
+    {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
+    'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 'mission_url': 'https://www.isas.jaxa.jp/en/missions/spacecraft/past/hayabusa.html'},
+        
     # --- Adding New Moons ---
 
     # Mars' Moons

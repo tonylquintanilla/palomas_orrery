@@ -11,60 +11,371 @@ CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
 
 # Orbital parameters for planets and dwarf planets
+
 planetary_params = {
-    # Planets
-    'Mercury': {'a': 0.387, 'e': 0.2056, 'i': np.radians(7.005)},
-    'Venus': {'a': 0.723, 'e': 0.0068, 'i': np.radians(3.39471)},
-    'Earth': {'a': 1.000000, 'e': 0.016710, 'i': np.radians(0.00005)},
-    'Mars': {'a': 1.523679, 'e': 0.0934, 'i': np.radians(1.850)},
-    'Jupiter': {'a': 5.204, 'e': 0.0489, 'i': np.radians(1.303)},
-    'Saturn': {'a': 9.537, 'e': 0.0565, 'i': np.radians(2.485)},
-    'Uranus': {'a': 19.191, 'e': 0.0472, 'i': np.radians(0.773)},
-    'Neptune': {'a': 30.07, 'e': 0.0086, 'i': np.radians(1.770)},
-    'Pluto': {'a': 39.48, 'e': 0.2488, 'i': np.radians(17.16)},
+    'Mercury': {
+        'a': 0.387098,  # semi-major axis in AU
+        'e': 0.205630,  # eccentricity
+        'i': 7.005,     # inclination in degrees
+        'omega': 29.124, # argument of perihelion in degrees
+        'Omega': 48.331  # longitude of ascending node in degrees
+    },
+    'Venus': {
+        'a': 0.723332,
+        'e': 0.006772,
+        'i': 3.39471,
+        'omega': 54.884,
+        'Omega': 76.680
+    },
+    'Earth': {
+        'a': 1.000000,
+        'e': 0.016710,
+        'i': 0.00005,
+        'omega': 114.207,
+        'Omega': -11.26064
+    },
+    'Mars': {
+        'a': 1.523679,
+        'e': 0.093400,
+        'i': 1.850,
+        'omega': 286.502,
+        'Omega': 49.558
+    },
+    'Jupiter': {
+        'a': 5.204267,
+        'e': 0.048498,
+        'i': 1.303,
+        'omega': 273.867,
+        'Omega': 100.464
+    },
+    'Saturn': {
+        'a': 9.582486,
+        'e': 0.054150,
+        'i': 2.485,
+        'omega': 339.392,
+        'Omega': 113.665
+    },
+    'Uranus': {
+        'a': 19.191263,
+        'e': 0.047318,
+        'i': 0.773,
+        'omega': 96.998857,
+        'Omega': 74.006
+    },
+    'Neptune': {
+        'a': 30.068963,
+        'e': 0.008678,
+        'i': 1.770,
+        'omega': 276.336,
+        'Omega': 131.784
+    },
+    'Pluto': {
+        'a': 39.482117,
+        'e': 0.248808,
+        'i': 17.16,
+        'omega': 113.834,
+        'Omega': 110.299
+    },
     
     # Dwarf Planets
-    'Ceres': {'a': 2.7675, 'e': 0.076, 'i': np.radians(10.593)},
-    'Haumea': {'a': 43.13, 'e': 0.191, 'i': np.radians(28.20)},
-    'Makemake': {'a': 45.79, 'e': 0.159, 'i': np.radians(28.01)},
-    'Eris': {'a': 67.78, 'e': 0.441, 'i': np.radians(44.03)},
-    'Quaoar': {'a': 43.325, 'e': 0.0002, 'i': np.radians(8.34)},
-    'Sedna': {'a': 506, 'e': 0.854, 'i': np.radians(12.0)},
+    'Ceres': {
+        'a': 2.7675,
+        'e': 0.076,
+        'i': 10.593,
+        'omega': 73.597,
+        'Omega': 80.393
+    },
+    'Haumea': {
+        'a': 43.13,
+        'e': 0.191,
+        'i': 28.20,
+        'omega': 240.20,
+        'Omega': 122.10
+    },
+    'Makemake': {
+        'a': 45.79,
+        'e': 0.159,
+        'i': 28.01,
+        'omega': 294.834,
+        'Omega': 79.382
+    },
+    'Eris': {
+        'a': 67.78,
+        'e': 0.441,
+        'i': 44.03,
+        'omega': 150.977,
+        'Omega': 35.873
+    },
+    'Quaoar': {
+        'a': 43.325,
+        'e': 0.0392,
+        'i': 8.34,
+        'omega': 157.631,
+        'Omega': 188.809
+    },
+    'Sedna': {
+        'a': 506.0,
+        'e': 0.854,
+        'i': 12.0,
+        'omega': 311.286,
+        'Omega': 144.546
+    },
+'OR10': {  # 2007 OR10, now officially named Gonggong
+    'a': 67.485,     # semi-major axis in AU
+    'e': 0.503828,   # eccentricity
+    'i': 30.942,     # inclination in degrees
+    'omega': 207.669, # argument of perihelion in degrees
+    'Omega': 336.864  # longitude of ascending node in degrees
+},
 
-        # Asteroids
-    'Vesta': {'a': 2.3617, 'e': 0.089, 'i': np.radians(7.155)},
-    'Pallas': {'a': 2.7726, 'e': 0.231, 'i': np.radians(34.792)},
-    'Hygiea': {'a': 3.1386, 'e': 0.176, 'i': np.radians(3.100)},
-    'Eunomia': {'a': 2.665, 'e': 0.185, 'i': np.radians(11.834)},
+'Orcus': {
+    'a': 39.419,     # semi-major axis in AU
+    'e': 0.226701,   # eccentricity
+    'i': 20.573,     # inclination in degrees
+    'omega': 72.400,  # argument of perihelion in degrees
+    'Omega': 268.457  # longitude of ascending node in degrees
+},
 
-    # Moons
-    'Moon': {'a': 0.00257, 'e': 0.0549, 'i': np.radians(5.145)},  # Earth's Moon
-    'Phobos': {'a': 0.000062, 'e': 0.0151, 'i': np.radians(1.093)},  # Mars' Phobos
-    'Deimos': {'a': 0.000156, 'e': 0.0002, 'i': np.radians(0.93)},  # Mars' Deimos
-    'Io': {'a': 0.00282, 'e': 0.0041, 'i': np.radians(0.036)},  # Jupiter's Io
-    'Europa': {'a': 0.00449, 'e': 0.0094, 'i': np.radians(0.466)},  # Jupiter's Europa
-    'Ganymede': {'a': 0.00716, 'e': 0.0013, 'i': np.radians(0.177)},  # Jupiter's Ganymede
-    'Callisto': {'a': 0.01258, 'e': 0.0074, 'i': np.radians(0.192)},  # Jupiter's Callisto
-    'Titan': {'a': 0.00817, 'e': 0.0288, 'i': np.radians(0.348)},  # Saturn's Titan
-    'Enceladus': {'a': 0.00124, 'e': 0.0047, 'i': np.radians(0.0003)},  # Saturn's Enceladus
-    'Rhea': {'a': 0.00354, 'e': 0.0014, 'i': np.radians(0.001)},  # Saturn's Rhea
-    'Dione': {'a': 0.00219, 'e': 0.0013, 'i': np.radians(0.002)},  # Saturn's Dione
-    'Tethys': {'a': 0.00195, 'e': 0.0002, 'i': np.radians(0.002)},  # Saturn's Tethys
-    'Mimas': {'a': 0.00098, 'e': 0.0002, 'i': np.radians(0.007)},  # Saturn's Mimas
-    'Phoebe': {'a': 0.02602, 'e': 0.0964, 'i': np.radians(179.73)},  # Saturn's Phoebe (retrograde)
-    'Oberon': {'a': 0.00177, 'e': 0.0015, 'i': np.radians(0.157)},  # Uranus' Oberon
-    'Umbriel': {'a': 0.00128, 'e': 0.0012, 'i': np.radians(0.162)},  # Uranus' Umbriel
-    'Ariel': {'a': 0.00091, 'e': 0.0003, 'i': np.radians(0.037)},  # Uranus' Ariel
-    'Miranda': {'a': 0.00048, 'e': 0.0014, 'i': np.radians(0.009)},  # Uranus' Miranda
-    'Titania': {'a': 0.00275, 'e': 0.0016, 'i': np.radians(0.011)},  # Uranus' Titania
-    'Triton': {'a': 0.00361, 'e': 0.0001, 'i': np.radians(157.86)},  # Neptune's Triton (retrograde)
-    'Charon': {'a': 0.00121, 'e': 0.0003, 'i': np.radians(0.0)},  # Pluto's Charon    
+'Ixion': {
+    'a': 39.648,     # semi-major axis in AU
+    'e': 0.242419,   # eccentricity
+    'i': 19.636,     # inclination in degrees
+    'omega': 300.273, # argument of perihelion in degrees
+    'Omega': 71.031   # longitude of ascending node in degrees
+},
+
+'MS4': {  # 2002 MS4
+    'a': 41.987,     # semi-major axis in AU
+    'e': 0.145843,   # eccentricity
+    'i': 17.698,     # inclination in degrees
+    'omega': 158.428, # argument of perihelion in degrees
+    'Omega': 113.499  # longitude of ascending node in degrees
+},
+
+'Varuna': {
+    'a': 42.947,     # semi-major axis in AU
+    'e': 0.051739,   # eccentricity
+    'i': 17.200,     # inclination in degrees
+    'omega': 97.286,  # argument of perihelion in degrees
+    'Omega': 97.286   # longitude of ascending node in degrees
+},
+
+'GV9': {  # 2004 GV9
+    'a': 41.837,     # semi-major axis in AU
+    'e': 0.083043,   # eccentricity
+    'i': 21.963,     # inclination in degrees
+    'omega': 292.562, # argument of perihelion in degrees
+    'Omega': 173.559  # longitude of ascending node in degrees
+},
+
+    # Asteroids
+    'Vesta': {
+        'a': 2.3617,
+        'e': 0.089,
+        'i': 7.155,
+        'omega': 151.216,
+        'Omega': 103.851
+    },
+    'Bennu': {
+        'a': 1.126391,    # semi-major axis in AU
+        'e': 0.203745,    # eccentricity
+        'i': 6.035,       # inclination in degrees
+        'omega': 66.223,  # argument of perihelion in degrees
+        'Omega': 2.061    # longitude of ascending node in degrees
+    },
+    'Šteins': {
+        'a': 2.363,      # semi-major axis in AU
+        'e': 0.146,      # eccentricity
+        'i': 9.944,      # inclination in degrees
+        'omega': 250.97,  # argument of perihelion in degrees
+        'Omega': 55.39    # longitude of ascending node in degrees
+    },
+    'Apophis': {
+        'a': 0.922583,   # semi-major axis in AU
+        'e': 0.191481,   # eccentricity
+        'i': 3.331,      # inclination in degrees
+        'omega': 126.394, # argument of perihelion in degrees
+        'Omega': 204.061  # longitude of ascending node in degrees
+    },    
+    'Eros': {
+        'a': 1.458040,   # semi-major axis in AU
+        'e': 0.222868,   # eccentricity
+        'i': 10.829,     # inclination in degrees
+        'omega': 178.817, # argument of perihelion in degrees
+        'Omega': 304.435  # longitude of ascending node in degrees
+    },
+
+    'Ryugu': {
+        'a': 1.189562,   # semi-major axis in AU
+        'e': 0.190349,   # eccentricity
+        'i': 5.884,      # inclination in degrees
+        'omega': 211.421, # argument of perihelion in degrees
+        'Omega': 251.617  # longitude of ascending node in degrees
+    },
+
+    'Itokawa': {
+        'a': 1.324163,   # semi-major axis in AU
+        'e': 0.280164,   # eccentricity
+        'i': 1.622,      # inclination in degrees
+        'omega': 162.767, # argument of perihelion in degrees
+        'Omega': 69.095   # longitude of ascending node in degrees
+    },
+
+    # Moons (relative to their parent planets)
+    'Moon': {
+        'a': 0.00257,  # semi-major axis in AU
+        'e': 0.0549,
+        'i': 5.145,
+        'omega': 318.15,
+        'Omega': 125.08
+    },
+    'Phobos': {
+        'a': 0.000062,
+        'e': 0.0151,
+        'i': 1.093,
+        'omega': 150.057,
+        'Omega': 16.946
+    },
+    'Deimos': {
+        'a': 0.000156,
+        'e': 0.0002,
+        'i': 0.93,
+        'omega': 260.729,
+        'Omega': 47.651
+    },
+    'Io': {
+        'a': 0.00282,
+        'e': 0.0041,
+        'i': 0.036,
+        'omega': 84.129,
+        'Omega': 43.977
+    },
+    'Europa': {
+        'a': 0.00449,
+        'e': 0.0094,
+        'i': 0.466,
+        'omega': 88.970,
+        'Omega': 219.106
+    },
+    'Ganymede': {
+        'a': 0.00716,
+        'e': 0.0013,
+        'i': 0.177,
+        'omega': 192.417,
+        'Omega': 63.552
+    },
+    'Callisto': {
+        'a': 0.01258,
+        'e': 0.0074,
+        'i': 0.192,
+        'omega': 52.643,
+        'Omega': 298.848
+    },
+    'Titan': {
+        'a': 0.00817,
+        'e': 0.0288,
+        'i': 0.348,
+        'omega': 186.5985,
+        'Omega': 28.0601
+    },
+    'Enceladus': {
+        'a': 0.00124,
+        'e': 0.0047,
+        'i': 0.0003,
+        'omega': 115.321,
+        'Omega': 169.499
+    },
+    'Rhea': {
+        'a': 0.00354,
+        'e': 0.0014,
+        'i': 0.001,
+        'omega': 277.435,
+        'Omega': 130.422
+    },
+    'Dione': {
+        'a': 0.00219,
+        'e': 0.0013,
+        'i': 0.002,
+        'omega': 168.668,
+        'Omega': 128.557
+    },
+    'Tethys': {
+        'a': 0.00195,
+        'e': 0.0002,
+        'i': 0.002,
+        'omega': 215.571,
+        'Omega': 98.194
+    },
+    'Mimas': {
+        'a': 0.00098,
+        'e': 0.0002,
+        'i': 0.007,
+        'omega': 333.457,
+        'Omega': 139.762
+    },
+    'Phoebe': {
+        'a': 0.02602,
+        'e': 0.0964,
+        'i': 179.73,  # retrograde orbit
+        'omega': 247.950,
+        'Omega': 339.392
+    },
+    'Oberon': {
+        'a': 0.00177,
+        'e': 0.0015,
+        'i': 0.157,
+        'omega': 279.771,
+        'Omega': 169.356
+    },
+    'Umbriel': {
+        'a': 0.00128,
+        'e': 0.0012,
+        'i': 0.162,
+        'omega': 12.469,
+        'Omega': 165.817
+    },
+    'Ariel': {
+        'a': 0.00091,
+        'e': 0.0003,
+        'i': 0.037,
+        'omega': 22.394,
+        'Omega': 22.734
+    },
+    'Miranda': {
+        'a': 0.00048,
+        'e': 0.0014,
+        'i': 0.009,
+        'omega': 68.312,
+        'Omega': 326.438
+    },
+    'Titania': {
+        'a': 0.00275,
+        'e': 0.0016,
+        'i': 0.011,
+        'omega': 284.400,
+        'Omega': 99.771
+    },
+    'Triton': {
+        'a': 0.00361,
+        'e': 0.0001,
+        'i': 157.86,  # retrograde orbit
+        'omega': 344.046,
+        'Omega': 172.431
+    },
+    'Charon': {
+        'a': 0.00121,
+        'e': 0.0003,
+        'i': 0.0,
+        'omega': 157.633,
+        'Omega': 223.046
+    }
+}  
     
     # Comets
 #    'Halley': {'a': 17.834, 'e': 0.96714, 'i': np.radians(162.26)},
 #    'Oumuamua': {'a': -1.275, 'e': 1.2, 'i': np.radians(122.7)},  # Hyperbolic orbit
 #    'Churyumov-Gerasimenko': {'a': 3.463, 'e': 0.6405, 'i': np.radians(7.0405)},
-}
+
 
 parent_planets = {
     'Moon': 'Earth',
