@@ -19,6 +19,7 @@ import threading
 import time  # Used here for simulation purposes
 import subprocess
 import sys
+import math
 
 from constants import (
     planetary_params,
@@ -190,7 +191,8 @@ def create_sun_visualization(fig, animate=False, frames=None):
                 mode='markers',
                 marker=dict(
                     size=1.0,
-                    color='green',  
+        #            color='green',
+                    color= 'rgb(102, 187, 106)', 
                     opacity=0.2
                 ),
                 name='Sun\'s Gravitational Influence',
@@ -1053,20 +1055,40 @@ def print_planet_positions(positions):
         print(f"{name:15} Position: {pos_str:35} Distance from center: {dist_str}")
     print("=" * 50)
 
-def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info"):
-    if obj_data is None or obj_data['x'] is None:
-        return  # Skip plotting if data is not available
+def format_maybe_float(value):
+    """
+    If 'value' is a numeric type (int or float), return it formatted
+    with 5 decimal places. Otherwise, return 'N/A'.
+    """
+    if isinstance(value, (int, float)):
+        return f"{value:.5f}"
+    return "N/A"
 
-    # Print debug info about the trace construction
+
+def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info"):
+
+    # Skip if there's no data
+    if obj_data is None or obj_data['x'] is None:
+        return
+
     print(f"\nAdding trace for {name}:")
-    
-    # Create hover texts exactly like planets
-    full_hover_text = f"<b>{name}</b><br><br>" \
-                     f"Distance from Center: {obj_data.get('range', 'N/A'):.5f} AU<br>" \
-                     f"Distance: {obj_data.get('distance_lm', 'N/A'):.5f} light-minutes<br>" \
-                     f"Distance: {obj_data.get('distance_lh', 'N/A'):.5f} light-hours<br>" \
-                     f"Velocity: {obj_data.get('velocity', 'N/A'):.5f} AU/day<br>" \
-                     f"Orbital Period: {obj_data.get('orbital_period', 'N/A')} Earth years"
+
+    # Use format_maybe_float() for numeric fields
+    distance_au   = format_maybe_float(obj_data.get('range'))
+    distance_lm   = format_maybe_float(obj_data.get('distance_lm'))
+    distance_lh   = format_maybe_float(obj_data.get('distance_lh'))
+    velocity_au   = format_maybe_float(obj_data.get('velocity'))
+    orbit_period  = obj_data.get('orbital_period', 'N/A')  # This might be a string
+
+    # Now build your hover text strings
+    full_hover_text = (
+        f"<b>{name}</b><br><br>"
+        f"Distance from Center: {distance_au} AU<br>"
+        f"Distance: {distance_lm} light-minutes<br>"
+        f"Distance: {distance_lh} light-hours<br>"
+        f"Velocity: {velocity_au} AU/day<br>"
+        f"Orbital Period: {orbit_period} Earth years"
+    )
 
     if obj_data.get('mission_info'):
         full_hover_text += f"<br>{obj_data['mission_info']}"
@@ -1285,7 +1307,7 @@ def plot_objects():
 
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
-            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)
+            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #using ideal orbits only
 
             # Refetch positions (so we can add them as Scatter3d traces)
             positions = {}
@@ -1394,6 +1416,12 @@ def plot_objects():
                 ]
             )
 
+            # 5. Collect user-checked objects for orbits
+            selected_objects = [obj['name'] for obj in objects if obj['var'].get() == 1]
+
+            # 6. Plot idealized orbits using your new logic
+            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # using this logic for animate_objects only
+
             # Generate default name with timestamp
             current_date = datetime.now()
             default_name = f"solar_system_{date_obj.strftime('%Y%m%d_%H%M')}"
@@ -1414,98 +1442,128 @@ def plot_objects():
     plot_thread = create_monitored_thread(shutdown_handler, worker)
     plot_thread.start()
 
-def plot_idealized_orbits(fig, planets_to_plot, center_id='Sun'):
+def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
     """
-    Plot idealized orbits using complete orbital elements.
-    
-    Parameters:
-        fig: plotly figure object
-        planets_to_plot: list of planet names to plot
-        center_id: ID of central body (default='Sun')
+    Generalized orbit plotting:
+      - If center_id == 'Sun', plot orbits for the major planets (and possibly dwarf planets).
+      - Otherwise, plot orbits for any satellites whose parent_planets entry == center_id.
     """
-    if center_id != 'Sun':
-        return  # Skip plotting idealized orbits if the center is not the Sun
+    import numpy as np
+    import math
+    import plotly.graph_objs as go
 
     def rotate_points(x, y, z, angle, axis='z'):
-        """Rotate points around specified axis."""
+        """
+        Rotates points (x,y,z) about the given axis by 'angle' radians.
+        Returns (xr, yr, zr) as numpy arrays.
+        """
+        xr = np.array(x, copy=True)
+        yr = np.array(y, copy=True)
+        zr = np.array(z, copy=True)
+
         if axis == 'z':
-            xr = x * np.cos(angle) - y * np.sin(angle)
-            yr = x * np.sin(angle) + y * np.cos(angle)
-            zr = z
+            xr = x * math.cos(angle) - y * math.sin(angle)
+            yr = x * math.sin(angle) + y * math.cos(angle)
+            # zr stays the same
         elif axis == 'x':
-            yr = y * np.cos(angle) - z * np.sin(angle)
-            zr = y * np.sin(angle) + z * np.cos(angle)
-            xr = x
+            yr = y * math.cos(angle) - z * math.sin(angle)
+            zr = y * math.sin(angle) + z * math.cos(angle)
         elif axis == 'y':
-            zr = z * np.cos(angle) - x * np.sin(angle)
-            xr = z * np.sin(angle) + x * np.cos(angle)
-            yr = y
-        return xr, yr, zr
+            zr = z * math.cos(angle) - x * math.sin(angle)
+            xr = z * math.sin(angle) + x * math.cos(angle)
 
-    for planet in planets_to_plot:
-        params = planetary_params.get(planet)
-        if not params:
-            continue
+        return (xr, yr, zr)
 
-        # Get all orbital elements
-        a = params.get('a', 0)  # semi-major axis (AU)
-        e = params.get('e', 0)  # eccentricity
-        i = params.get('i', 0)  # inclination (degrees)
-        omega = params.get('omega', 0)  # argument of periapsis (degrees)
-        Omega = params.get('Omega', 0)  # longitude of ascending node (degrees)
-        
-        # Convert angles to radians
-        i_rad = np.radians(i)
-        omega_rad = np.radians(omega)
-        Omega_rad = np.radians(Omega)
-
-        # Generate points for the orbit
-        if e < 1:  # Elliptical orbit
-            theta = np.linspace(0, 2 * np.pi, 1000)
+    # 1) If center is the Sun, plot orbits for all requested objects that revolve around the Sun.
+    if center_id == 'Sun':
+        for obj_name in objects_to_plot:
+            # must be in planetary_params
+            if obj_name not in planetary_params:
+                continue
+            
+            params = planetary_params[obj_name]
+            # e.g. a = params['a'], e = params['e'], i = params['i'], etc.
+            a = params.get('a', 0)
+            e = params.get('e', 0)
+            i = params.get('i', 0)
+            omega = params.get('omega', 0)
+            Omega = params.get('Omega', 0)
+            
+            # Generate ellipse in orbital plane
+            theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
             r = a * (1 - e**2) / (1 + e * np.cos(theta))
-        else:  # Hyperbolic orbit
-            theta_limit = np.arccosh(1 / e)
-            theta = np.linspace(-theta_limit, theta_limit, 1000)
-            r = a * (e**2 - 1) / (1 + e * np.cos(theta))
+            
+            x_orbit = r * np.cos(theta)
+            y_orbit = r * np.sin(theta)
+            z_orbit = np.zeros_like(theta)
 
-        # Initial orbital points in orbital plane
-        x_orbit = r * np.cos(theta)
-        y_orbit = r * np.sin(theta)
-        z_orbit = np.zeros_like(theta)
+            # Convert angles to radians
+            i_rad = math.radians(i)
+            omega_rad = math.radians(omega)
+            Omega_rad = math.radians(Omega)
 
-        # Apply rotations in correct order:
-        # 1. Rotate by argument of periapsis (ω) around z-axis
-        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
-        
-        # 2. Rotate by inclination (i) around x-axis
-        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-        
-        # 3. Rotate by longitude of ascending node (Ω) around z-axis
-        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+            # Rotate ellipse by argument of periapsis (ω) around z-axis
+            x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+            # Then rotate by inclination (i) around x-axis
+            x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+            # Then rotate by longitude of ascending node (Ω) around z-axis
+            x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
 
-        # Remove invalid points
-        valid_indices = np.where(np.isfinite(x_final) & 
-                               np.isfinite(y_final) & 
-                               np.isfinite(z_final) & 
-                               (r > 0))[0]
-
-        # Add the orbit trace
-        fig.add_trace(
-            go.Scatter3d(
-                x=x_final[valid_indices],
-                y=y_final[valid_indices],
-                z=z_final[valid_indices],
-                mode='lines',
-                line=dict(
-                    dash='dot',  # Changed to dotted line for distinction
-                    color=color_map(planet),
-                    width=1
-                ),
-                name=f"{planet} Ideal Orbit",
-                hoverinfo='name',
-                showlegend=True
+            fig.add_trace(
+                go.Scatter3d(
+                    x=x_final,
+                    y=y_final,
+                    z=z_final,
+                    mode='lines',
+                    line=dict(dash='dot', width=1, color='white'),
+                    name=f"{obj_name} Ideal Orbit (Sun-centered)",
+                    hoverinfo='name'
+                )
             )
-        )
+
+    else:
+        # 2) If center is *not* the Sun, we plot orbits for satellites that revolve around that center.
+        for obj_name in objects_to_plot:
+            # For example, if center_id='Earth', we want to see if parent_planets[obj_name]=='Earth'
+            parent = parent_planets.get(obj_name)
+            if parent == center_id and obj_name in planetary_params:
+                params = planetary_params[obj_name]
+                a = params.get('a', 0)
+                e = params.get('e', 0)
+                i = params.get('i', 0)
+                omega = params.get('omega', 0)
+                Omega = params.get('Omega', 0)
+                
+                # Generate an elliptical orbit in the same manner
+                theta = np.linspace(0, 2*np.pi, 360)
+                r = a * (1 - e**2) / (1 + e * np.cos(theta))
+
+                x_orbit = r * np.cos(theta)
+                y_orbit = r * np.sin(theta)
+                z_orbit = np.zeros_like(theta)
+
+                # Convert angles to radians
+                i_rad = math.radians(i)
+                omega_rad = math.radians(omega)
+                Omega_rad = math.radians(Omega)
+
+                # Apply same rotation steps
+                x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+                x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+                x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=x_final,
+                        y=y_final,
+                        z=z_final,
+                        mode='lines',
+                        line=dict(dash='dot', width=1, color='white'),
+                        name=f"{obj_name} Ideal Orbit ({center_id}-centered)",
+                        hoverinfo='name',
+                        showlegend=True
+                    )
+                )
 
 def show_animation_safely(fig, default_name):
     """Show and optionally save an animated Plotly figure with proper cleanup."""
@@ -1633,8 +1691,8 @@ def animate_objects(step, label):
                         x=[0], y=[0], z=[0],
                         mode='markers+text',
                         marker=dict(
-                            color=center_object_info['color'],
-            #                color=rgb(0, 255, 0),                            
+            #                color=center_object_info['color'],
+                            color='rgb(102, 187, 106)',      # chlorophyll green                      
                             size=12,    
                             symbol=center_object_info['symbol']
                             ),
@@ -1644,25 +1702,7 @@ def animate_objects(step, label):
                         showlegend=True
                     )
                 )
-
-                # Add a simple center marker in addition to the layered visualization
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[0],
-                        y=[0],
-                        z=[0],
-                        mode='markers+text',
-                        marker=dict(
-                            color=color_map('Sun'),
-                            size=12,
-                            symbol='circle'
-                        ),
-                        name='Sun (Center)',
-                        text=['Sun'],
-                        hoverinfo='skip',
-                        showlegend=True
-                    )
-                )
+   
             else:
                 # Existing fallback for other centers
                 fig.add_trace(
@@ -1688,12 +1728,6 @@ def animate_objects(step, label):
                     positions = fetch_trajectory(obj['id'], dates_list, center_id=center_id, 
                                             id_type=obj.get('id_type'))
                     positions_over_time[obj['name']] = positions
-
-            # Add idealized orbits for Sun-centered view
-            if center_id == 'Sun':
-                selected_planets = [obj['name'] for obj in objects 
-                                if obj['var'].get() == 1 and not obj.get('is_mission', False)]
-                plot_idealized_orbits(fig, selected_planets)
 
             # Create initial traces and track indices
             trace_indices = []
@@ -1783,7 +1817,7 @@ def animate_objects(step, label):
                                     y=[obj_data['y']],
                                     z=[obj_data['z']],
                                     customdata=[customdata],
-                                    hovertemplate=(
+                                    hovertemplate=(            
                                         f"<b>{obj['name']}</b><br>"
                                         "Distance from center: %{customdata[0]:.5f} AU<br>"
                                         "<extra></extra>"
@@ -1834,6 +1868,14 @@ def animate_objects(step, label):
                         axis_range = [-custom_scale, custom_scale]
                 except ValueError:
                     pass  # Keep calculated range if custom scale is invalid
+
+            selected_objects = [
+                obj['name']
+                for obj in objects
+                if obj['var'].get() == 1 and not obj.get('is_mission', False)
+            ]
+
+            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # duplicate set of ideal orbit traces
 
             # Update layout with dynamic scaling
             fig.update_layout(
@@ -2593,16 +2635,17 @@ center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn
 center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
 center_menu.pack(anchor='w')
 
-CreateToolTip(center_menu, "Select the object to center the plot on.")
+CreateToolTip(center_menu, "Select the object to center the plot on. DO NOT select the same object from the Select Objects check list.")
 
 # Number of Frames
 num_frames_label = tk.Label(controls_frame, text="Enter Days, Weeks, Months or Years to Animate from Now:")
 num_frames_label.pack(anchor='w')
 num_frames_entry = tk.Entry(controls_frame, width=5)
 num_frames_entry.pack(anchor='w')
-num_frames_entry.insert(0, '20')  # Default number of frames
+num_frames_entry.insert(0, '28')  # Default number of frames
 CreateToolTip(num_frames_entry, "Enter the number of frames you wish to animate, where each frame represents a day, week, month, or year. " 
-              "Keep in mind that a higher number of frames may increase data fetching time or cause timeouts with the Horizons system.")
+              "Keep in mind that a higher number of frames may increase data fetching time or cause timeouts with the Horizons system. "
+              "The default value of 28 days is the length of the lunar month.")
 
 # Paloma's Birthday button and its animation
 paloma_buttons_frame = tk.Frame(controls_frame)

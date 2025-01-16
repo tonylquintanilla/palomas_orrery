@@ -120,53 +120,53 @@ planetary_params = {
         'omega': 311.286,
         'Omega': 144.546
     },
-'OR10': {  # 2007 OR10, now officially named Gonggong
-    'a': 67.485,     # semi-major axis in AU
-    'e': 0.503828,   # eccentricity
-    'i': 30.942,     # inclination in degrees
-    'omega': 207.669, # argument of perihelion in degrees
-    'Omega': 336.864  # longitude of ascending node in degrees
-},
+    'OR10': {  # 2007 OR10, now officially named Gonggong
+        'a': 67.485,     # semi-major axis in AU
+        'e': 0.503828,   # eccentricity
+        'i': 30.942,     # inclination in degrees
+        'omega': 207.669, # argument of perihelion in degrees
+        'Omega': 336.864  # longitude of ascending node in degrees
+    },
 
-'Orcus': {
-    'a': 39.419,     # semi-major axis in AU
-    'e': 0.226701,   # eccentricity
-    'i': 20.573,     # inclination in degrees
-    'omega': 72.400,  # argument of perihelion in degrees
-    'Omega': 268.457  # longitude of ascending node in degrees
-},
+    'Orcus': {
+        'a': 39.419,     # semi-major axis in AU
+        'e': 0.226701,   # eccentricity
+        'i': 20.573,     # inclination in degrees
+        'omega': 72.400,  # argument of perihelion in degrees
+        'Omega': 268.457  # longitude of ascending node in degrees
+    },
 
-'Ixion': {
-    'a': 39.648,     # semi-major axis in AU
-    'e': 0.242419,   # eccentricity
-    'i': 19.636,     # inclination in degrees
-    'omega': 300.273, # argument of perihelion in degrees
-    'Omega': 71.031   # longitude of ascending node in degrees
-},
+    'Ixion': {
+        'a': 39.648,     # semi-major axis in AU
+        'e': 0.242419,   # eccentricity
+        'i': 19.636,     # inclination in degrees
+        'omega': 300.273, # argument of perihelion in degrees
+        'Omega': 71.031   # longitude of ascending node in degrees
+    },
 
-'MS4': {  # 2002 MS4
-    'a': 41.987,     # semi-major axis in AU
-    'e': 0.145843,   # eccentricity
-    'i': 17.698,     # inclination in degrees
-    'omega': 158.428, # argument of perihelion in degrees
-    'Omega': 113.499  # longitude of ascending node in degrees
-},
+    'MS4': {  # 2002 MS4
+        'a': 41.987,     # semi-major axis in AU
+        'e': 0.145843,   # eccentricity
+        'i': 17.698,     # inclination in degrees
+        'omega': 158.428, # argument of perihelion in degrees
+        'Omega': 113.499  # longitude of ascending node in degrees
+    },
 
-'Varuna': {
-    'a': 42.947,     # semi-major axis in AU
-    'e': 0.051739,   # eccentricity
-    'i': 17.200,     # inclination in degrees
-    'omega': 97.286,  # argument of perihelion in degrees
-    'Omega': 97.286   # longitude of ascending node in degrees
-},
+    'Varuna': {
+        'a': 42.947,     # semi-major axis in AU
+        'e': 0.051739,   # eccentricity
+        'i': 17.200,     # inclination in degrees
+        'omega': 97.286,  # argument of perihelion in degrees
+        'Omega': 97.286   # longitude of ascending node in degrees
+    },
 
-'GV9': {  # 2004 GV9
-    'a': 41.837,     # semi-major axis in AU
-    'e': 0.083043,   # eccentricity
-    'i': 21.963,     # inclination in degrees
-    'omega': 292.562, # argument of perihelion in degrees
-    'Omega': 173.559  # longitude of ascending node in degrees
-},
+    'GV9': {  # 2004 GV9
+        'a': 41.837,     # semi-major axis in AU
+        'e': 0.083043,   # eccentricity
+        'i': 21.963,     # inclination in degrees
+        'omega': 292.562, # argument of perihelion in degrees
+        'Omega': 173.559  # longitude of ascending node in degrees
+    },
 
     # Asteroids
     'Vesta': {
@@ -370,12 +370,6 @@ planetary_params = {
         'Omega': 223.046
     }
 }  
-    
-    # Comets
-#    'Halley': {'a': 17.834, 'e': 0.96714, 'i': np.radians(162.26)},
-#    'Oumuamua': {'a': -1.275, 'e': 1.2, 'i': np.radians(122.7)},  # Hyperbolic orbit
-#    'Churyumov-Gerasimenko': {'a': 3.463, 'e': 0.6405, 'i': np.radians(7.0405)},
-
 
 parent_planets = {
     'Moon': 'Earth',
@@ -392,13 +386,15 @@ parent_planets = {
     'Tethys': 'Saturn',
     'Mimas': 'Saturn',
     'Phoebe': 'Saturn',
-    'Oberon': 'Uranus',
-    'Umbriel': 'Uranus',
-    'Ariel': 'Uranus',
     'Miranda': 'Uranus',
+    'Ariel': 'Uranus',
+    'Umbriel': 'Uranus',
     'Titania': 'Uranus',
+    'Oberon': 'Uranus',
     'Triton': 'Neptune',
-    'Charon': 'Pluto'
+    'Charon': 'Pluto',
+    'Nix': 'Pluto',
+    'Hydra': 'Pluto'
 }
 
 # Mapping of SIMBAD object types to full descriptions
