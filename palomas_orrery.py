@@ -1444,9 +1444,14 @@ def plot_objects():
 
 def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
     """
-    Generalized orbit plotting:
-      - If center_id == 'Sun', plot orbits for the major planets (and possibly dwarf planets).
-      - Otherwise, plot orbits for any satellites whose parent_planets entry == center_id.
+    Plot idealized orbits for planets, dwarf planets, asteroids, and KBOs only.
+    Skip satellites, comets, and missions as their trajectories are too complex 
+    or dynamic for simple Keplerian elements.
+    
+    Parameters:
+        fig (plotly.graph_objects.Figure): The figure to add orbits to
+        objects_to_plot (list): List of object names to potentially plot orbits for
+        center_id (str): The central body ('Sun' or a planet name)
     """
     import numpy as np
     import math
@@ -1474,21 +1479,53 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
 
         return (xr, yr, zr)
 
-    # 1) If center is the Sun, plot orbits for all requested objects that revolve around the Sun.
+    # If center is the Sun, plot orbits for selected heliocentric objects
     if center_id == 'Sun':
+
+        # Track skipped objects by category
+        skipped = {
+            'satellites': [],
+            'comets': [],
+            'missions': [],
+            'no_params': [],
+            'invalid_orbit': []
+        }
+
+        plotted = []
+
         for obj_name in objects_to_plot:
-            # must be in planetary_params
+            # Find the object in the objects list
+            obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
+            if obj_info is None:
+                continue
+                
+            # Check each skip condition and record the reason
             if obj_name not in planetary_params:
+                skipped['no_params'].append(obj_name)
+                continue
+            elif obj_name in parent_planets:
+                skipped['satellites'].append(obj_name)
+                continue
+            elif obj_info.get('is_comet', False):
+                skipped['comets'].append(obj_name)
+                continue
+            elif obj_info.get('is_mission', False):
+                skipped['missions'].append(obj_name)
                 continue
             
             params = planetary_params[obj_name]
             # e.g. a = params['a'], e = params['e'], i = params['i'], etc.
             a = params.get('a', 0)
+
+            # Skip if semi-major axis is zero or very small
+            if a < 0.0001:
+                continue
+
             e = params.get('e', 0)
             i = params.get('i', 0)
             omega = params.get('omega', 0)
             Omega = params.get('Omega', 0)
-            
+
             # Generate ellipse in orbital plane
             theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
             r = a * (1 - e**2) / (1 + e * np.cos(theta))
@@ -1521,49 +1558,44 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
                 )
             )
 
-    else:
-        # 2) If center is *not* the Sun, we plot orbits for satellites that revolve around that center.
-        for obj_name in objects_to_plot:
-            # For example, if center_id='Earth', we want to see if parent_planets[obj_name]=='Earth'
-            parent = parent_planets.get(obj_name)
-            if parent == center_id and obj_name in planetary_params:
-                params = planetary_params[obj_name]
-                a = params.get('a', 0)
-                e = params.get('e', 0)
-                i = params.get('i', 0)
-                omega = params.get('omega', 0)
-                Omega = params.get('Omega', 0)
+            plotted.append(obj_name)
+
+        # Print summary of plotted and skipped objects
+        print("\nIdeal Orbit Summary:")
+        print(f"Plotted ideal orbits for {len(plotted)} objects:")
+        for obj in plotted:
+            print(f"  - {obj}")
+
+        print("\nSkipped ideal orbits for:")
+        if skipped['satellites']:
+            print(f"\nPlanetary Satellites ({len(skipped['satellites'])}):")
+            for obj in skipped['satellites']:
+                print(f"  - {obj}")
+        
+        if skipped['comets']:
+            print(f"\nComets ({len(skipped['comets'])}):")
+            for obj in skipped['comets']:
+                print(f"  - {obj}")
                 
-                # Generate an elliptical orbit in the same manner
-                theta = np.linspace(0, 2*np.pi, 360)
-                r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        if skipped['missions']:
+            print(f"\nSpace Missions ({len(skipped['missions'])}):")
+            for obj in skipped['missions']:
+                print(f"  - {obj}")
+                
+        if skipped['no_params']:
+            print(f"\nNo Orbital Parameters ({len(skipped['no_params'])}):")
+            for obj in skipped['no_params']:
+                print(f"  - {obj}")
+                
+        if skipped['invalid_orbit']:
+            print(f"\nInvalid Orbital Parameters ({len(skipped['invalid_orbit'])}):")
+            for obj in skipped['invalid_orbit']:
+                print(f"  - {obj}")
+    else:
+        # No idealized orbits for planetary satellites
+        print(f"\nNo ideal orbits plotted - center is {center_id} (not Sun)")
 
-                x_orbit = r * np.cos(theta)
-                y_orbit = r * np.sin(theta)
-                z_orbit = np.zeros_like(theta)
-
-                # Convert angles to radians
-                i_rad = math.radians(i)
-                omega_rad = math.radians(omega)
-                Omega_rad = math.radians(Omega)
-
-                # Apply same rotation steps
-                x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
-                x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-                x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
-
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=x_final,
-                        y=y_final,
-                        z=z_final,
-                        mode='lines',
-                        line=dict(dash='dot', width=1, color='white'),
-                        name=f"{obj_name} Ideal Orbit ({center_id}-centered)",
-                        hoverinfo='name',
-                        showlegend=True
-                    )
-                )
+    return fig
 
 def show_animation_safely(fig, default_name):
     """Show and optionally save an animated Plotly figure with proper cleanup."""

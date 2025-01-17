@@ -223,11 +223,11 @@ planetary_params = {
 
     # Moons (relative to their parent planets)
     'Moon': {
-        'a': 0.00257,  # semi-major axis in AU
-        'e': 0.0549,
-        'i': 5.145,
-        'omega': 318.15,
-        'Omega': 125.08
+        'a': 0.00257,    # semi-major axis in AU (correct)
+        'e': 0.0549,     # eccentricity (correct)
+        'i': 28.545,     # inclination relative to Earth's equator in degrees
+        'omega': 318.15, # argument of perihelion (varies)
+        'Omega': 125.08  # longitude of ascending node (varies)
     },
     'Phobos': {
         'a': 0.000062,
@@ -802,7 +802,10 @@ INFO = {
         'Mercury': 'The smallest planet and closest to the Sun.',
         'Venus': 'Second planet from the Sun, known for its thick atmosphere.',
         'Earth': 'Our home planet, the third from the Sun.',
-        'Moon': 'Earth\'s only natural satellite.',
+        'Moon': 'Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145° to the ecliptic plane, ' 
+        'but approximately 28.545° to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4°). '
+        'The Moon\'s orbital parameters are not fixed but vary significantly over time due to precession of the nodes, ' 
+        'perturbations from the Sun\'s gravity, Earth\'s non-spherical shape, and other gravitational influences.',
         'Mars': 'Known as the Red Planet, fourth planet from the Sun.',
         'Phobos': 'The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
         'Deimos': 'The smaller and more distant moon of Mars, with a stable orbit.',
