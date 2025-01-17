@@ -1,12 +1,23 @@
+# Core data processing and numerical libraries
 numpy>=1.24.0
 pandas>=2.0.0
-plotly>=5.18.0
+
+# Astronomical data and calculations
 astropy>=5.3.4
 astroquery>=0.4.6
-kaleido>=0.2.1
+
+# Plotting and visualization
+plotly>=5.18.0
+kaleido>=0.2.1  # Required for saving static images
+
+# GUI components
 tk>=0.1.0
+
+# Date handling
 python-dateutil>=2.8.2
+
+# Network requests (used by astroquery but good to specify)
 requests>=2.31.0
-webbrowser>=0.0.1
-matplotlib>=3.8.0
-scipy>=1.11.3
+
+# Essential for running in Jupyter notebooks (if used)
+ipython>=8.12.0
