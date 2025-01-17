@@ -2317,15 +2317,15 @@ now_button.grid(row=0, column=8, padx=(2, 0), pady=2, sticky='w')
 CreateToolTip(now_button, "Fill the current date and time")
 
 # Scrollable frame for celestial objects and missions
-scrollable_frame = ScrollableFrame(input_frame, width=430, height=525)  # Adjust width and height as needed
+scrollable_frame = ScrollableFrame(input_frame, width=430, height=710)  # Adjust width and height as needed
 scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
 
 # Prevent the ScrollableFrame from resizing based on its content
-scrollable_frame.config(width=430, height=630)
+scrollable_frame.config(width=430, height=710)
 scrollable_frame.pack_propagate(False)  # Disable automatic resizing
 
 # Optionally, set the inner frame size slightly smaller
-scrollable_frame.scrollable_frame.config(width=410, height=650)
+scrollable_frame.scrollable_frame.config(width=410, height=690)
 scrollable_frame.scrollable_frame.pack_propagate(False)
 
 # Define selection variables for each object
@@ -2558,7 +2558,7 @@ create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-03 to 2003-01-
 create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-06 to 1995-09-30)")
 create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-20 to present)")
 create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-05 to present)")
-create_mission_checkbutton("Voyager 1 to heliopause", voyager1h_var, "(1977-09-05 to 2012-08-25)")
+# create_mission_checkbutton("Voyager 1 to heliopause", voyager1h_var, "(1977-09-05 to 2012-08-25)")
 create_mission_checkbutton("Galileo", galileo_var, "(1989-10-18 to 2003-09-21)")
 create_mission_checkbutton("Cassini-Huygens", cassini_var, "(1997-10-15 to 2017-09-15)")
 create_mission_checkbutton("SOHO: Solar and Heliospheric Observatory", soho_var, "(1995-12-2 to present)")
@@ -2609,6 +2609,8 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
 
 create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to 1966-01-01)", 
                          "October 21, 1965")
+#create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to present)", 
+#                         "October 21, 1965")
 create_comet_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
                          "February 25, 1976")
 create_comet_checkbutton("Halley", comet_halley_var, "(1982-11-26 to 1995-10-20)", 
@@ -3032,8 +3034,8 @@ note_label.pack(anchor='w', pady=(0, 5))  # Align to the left with padding below
 note_text_widget = scrolledtext.ScrolledText(
     note_frame,
     wrap='word',
-    width=40,
-    height=40,
+    width=44,
+    height=44.5,
     bg='SystemButtonFace',
     fg='black',
     insertbackground='white'
@@ -3122,6 +3124,10 @@ objects = [
     # Comets
     {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
      'start_date': datetime(1965, 9, 18), 'end_date': datetime(1966, 1, 1), 'mission_info': 'One of the brightest comets of the 20th century.'},
+#    {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
+#     'start_date': datetime(1965, 9, 18), 'end_date': datetime(2025, 1, 1), 'mission_info': 'One of the brightest comets of the 20th century.'},
+
+
     {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
      'start_date': datetime(1975, 11, 5), 'end_date': datetime(1976, 6, 1), 'mission_info': 'Notable for its bright and impressive tail.'},
     {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',   
@@ -3194,9 +3200,9 @@ objects = [
 
     # Pluto's Moon
     {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Pluto\'s Moon Nix', 'id': 'Nix', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
     'mission_info': 'One of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/nix/overview/'},
-    {'name': 'Pluto\'s Moon Hydra', 'id': 'Hydra', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
     'mission_info': 'Another of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/hydra/overview/'},
 
     # Eris's Moon

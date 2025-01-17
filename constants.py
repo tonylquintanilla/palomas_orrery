@@ -221,154 +221,6 @@ planetary_params = {
         'Omega': 69.095   # longitude of ascending node in degrees
     },
 
-    # Moons (relative to their parent planets)
-    'Moon': {
-        'a': 0.00257,    # semi-major axis in AU (correct)
-        'e': 0.0549,     # eccentricity (correct)
-        'i': 28.545,     # inclination relative to Earth's equator in degrees
-        'omega': 318.15, # argument of perihelion (varies)
-        'Omega': 125.08  # longitude of ascending node (varies)
-    },
-    'Phobos': {
-        'a': 0.000062,
-        'e': 0.0151,
-        'i': 1.093,
-        'omega': 150.057,
-        'Omega': 16.946
-    },
-    'Deimos': {
-        'a': 0.000156,
-        'e': 0.0002,
-        'i': 0.93,
-        'omega': 260.729,
-        'Omega': 47.651
-    },
-    'Io': {
-        'a': 0.00282,
-        'e': 0.0041,
-        'i': 0.036,
-        'omega': 84.129,
-        'Omega': 43.977
-    },
-    'Europa': {
-        'a': 0.00449,
-        'e': 0.0094,
-        'i': 0.466,
-        'omega': 88.970,
-        'Omega': 219.106
-    },
-    'Ganymede': {
-        'a': 0.00716,
-        'e': 0.0013,
-        'i': 0.177,
-        'omega': 192.417,
-        'Omega': 63.552
-    },
-    'Callisto': {
-        'a': 0.01258,
-        'e': 0.0074,
-        'i': 0.192,
-        'omega': 52.643,
-        'Omega': 298.848
-    },
-    'Titan': {
-        'a': 0.00817,
-        'e': 0.0288,
-        'i': 0.348,
-        'omega': 186.5985,
-        'Omega': 28.0601
-    },
-    'Enceladus': {
-        'a': 0.00124,
-        'e': 0.0047,
-        'i': 0.0003,
-        'omega': 115.321,
-        'Omega': 169.499
-    },
-    'Rhea': {
-        'a': 0.00354,
-        'e': 0.0014,
-        'i': 0.001,
-        'omega': 277.435,
-        'Omega': 130.422
-    },
-    'Dione': {
-        'a': 0.00219,
-        'e': 0.0013,
-        'i': 0.002,
-        'omega': 168.668,
-        'Omega': 128.557
-    },
-    'Tethys': {
-        'a': 0.00195,
-        'e': 0.0002,
-        'i': 0.002,
-        'omega': 215.571,
-        'Omega': 98.194
-    },
-    'Mimas': {
-        'a': 0.00098,
-        'e': 0.0002,
-        'i': 0.007,
-        'omega': 333.457,
-        'Omega': 139.762
-    },
-    'Phoebe': {
-        'a': 0.02602,
-        'e': 0.0964,
-        'i': 179.73,  # retrograde orbit
-        'omega': 247.950,
-        'Omega': 339.392
-    },
-    'Oberon': {
-        'a': 0.00177,
-        'e': 0.0015,
-        'i': 0.157,
-        'omega': 279.771,
-        'Omega': 169.356
-    },
-    'Umbriel': {
-        'a': 0.00128,
-        'e': 0.0012,
-        'i': 0.162,
-        'omega': 12.469,
-        'Omega': 165.817
-    },
-    'Ariel': {
-        'a': 0.00091,
-        'e': 0.0003,
-        'i': 0.037,
-        'omega': 22.394,
-        'Omega': 22.734
-    },
-    'Miranda': {
-        'a': 0.00048,
-        'e': 0.0014,
-        'i': 0.009,
-        'omega': 68.312,
-        'Omega': 326.438
-    },
-    'Titania': {
-        'a': 0.00275,
-        'e': 0.0016,
-        'i': 0.011,
-        'omega': 284.400,
-        'Omega': 99.771
-    },
-    'Triton': {
-        'a': 0.00361,
-        'e': 0.0001,
-        'i': 157.86,  # retrograde orbit
-        'omega': 344.046,
-        'Omega': 172.431
-    },
-    'Charon': {
-        'a': 0.00121,
-        'e': 0.0003,
-        'i': 0.0,
-        'omega': 157.633,
-        'Omega': 223.046
-    }
 }  
 
 parent_planets = {
@@ -604,30 +456,33 @@ note_text = (
 
     "An orrery is a model of the solar system! This model attempts to display celestial and human objects in both stationary " 
     "and animated 3D plots over different periods of time. It uses real-time data from NASA's Jet Propulsion Laboratory's Horizon System " 
-    "to plot actual positions of objects. Idealized orbits of the planets are calculated from orbital data from Horizons, " 
-    "but are only approximate. Explore! \n\n" 
+    "to plot actual positions of objects. In addition, complete idealized orbits of the planets, asteroids, dwarf planets, and Kuiper " 
+    "belt objects are calculated from their orbital parameters using Kepler's equations. Explore! \n\n" 
 
     "In addition to the solar system, you can also create 2D and 3D plots of our stellar neighborhood. There are four ways to do this: "
     "by distance in light-years or by brightness as apparent magnitude, and in both modes in a 2D or a 3D plot.\n\n"
 
     "You can plot our stellar neighborhood up to 100 light-years away in 2D and 3D, with a user defined entry in light-years.\n\n" 
 
-    "The other way of selecting stars is by apparent magnitude. This "
-    "method also plots 2D or 3D, but the star selection is quite different. Instead of seeing all stars within a certain distance from the Sun "
-    "you see all stars visible to the unaided eye up to a certain apparent, or visual magnitude, meaning how bright they appear, which " 
-    "is a function of how luminous they are and their distance from us.\n\n" 
+    "The other way of selecting stars is by apparent magnitude. This method also plots 2D or 3D, but the star selection is quite " 
+    "different. Instead of seeing all stars within a certain distance from the Sun, you see all stars visible to the unaided eye up " 
+    "to a certain apparent, or visual magnitude, meaning how bright they appear, which is a function of how luminous they are and " 
+    "their distance from us.\n\n" 
+    
+    "If you click the \"Move Camera to the Center\" button, the view will move to the position of the Sun.\n\n" 
 
     "The 3D plot is just that, you will "
     "see stars plotted relative to the Sun in their actual positions, up to the selected distance in light-years, or up to the selected "
     "apparent magnitude, regardless of the distance. In fact, you will begin to see the shape and tilt of the galaxy! You can also " 
     "use a drop down menu of bright stars and Messier Objects that are plotted, which will allow you to point to that object!\n\n"
     
-    "You can also see in all plots the hovertext with the stars' information, in some cases in detail as I add it.\n\n"  
+    "You can also see in all plots the hovertext with the stars' information, in some cases in detail as I add it. You can toggle " 
+    "between full hovertext information and just the star's name using the buttons, \"Full Star Info\" and \"Star Names Only\".\n\n"  
     
-    "The 2D plot is the classic Hertzprung-Russell diagram of stars plotted by "
+    "The 2D star plot is the classic Hertzprung-Russell diagram of stars plotted by "
     "luminosity, or absolute magnitude, meaning how intrinsically bright the star is, and temperature, which is related to the star's "
     "spectral class and color. This is a more scientific plot that reveals a lot about the "
-    "kind of stars they are, and their place in stellar evolution.\n\n" 
+    "kind of stars they are, and their place in stellar evolution. The 2D plots can be done both by distance and apparent magnitude.\n\n" 
 
     "More on the magnitude mode: You can select the magnitude "
     "you wish to plot up to apparent magnitude 9, extremely faint stars, which is what you might be able to see from space, down to -1.44, which is the "
@@ -643,7 +498,7 @@ note_text = (
     "A crucial difference between the magnitude plot and the distance plot is that some stars that are visible are extremely far away, " 
     "thousands of light-years, yet will still be "
     "visible because of how luminous they are, such as the Blue Supergiants! "
-    "While nearer, fainter stars, may not be plotted at all, for example White Dwarfs. In fact, the greater the apparent magnitude " 
+    "On the other hand, nearer, fainter stars, may not be plotted at all, for example White Dwarfs. In fact, the greater the apparent magnitude " 
     "that you select, you will fetch more faint stars, which are farther aways, and you will begin to see the shape and tilt of the " 
     "galaxy! Warning: the higher the apparent magnitude you select, the more stars you will fetch and the longer your plot will take " 
     "to create, up to a minute and a half at apparent magnitude 9, the limit of visibity in space, say from the Space Station.\n\n"
@@ -658,7 +513,8 @@ note_text = (
     
     "The color scales follow the color of the black body radiation associated with star temperature, in other words, the star\'s " 
     "actual color. The Sun is colored chlorophyll green, to set it apart in the plot and because it represents the Sun\'s life-giving light! " 
-    "Obviously it's not the Sun's actual color, which is in the yellow-orange range.\n\n"
+    "Plants have evolved to use the most abundant parts of the Sun's visible light spectrum for photosynthesis (red and blue) " 
+    "while reflecting the green light.\n\n"
 
     "Solar System Objects:\nThe Solar sytem object selection menu is scrollable. Select the objects to plot.\n\n"  
 
@@ -667,16 +523,12 @@ note_text = (
     "For space missions and comets, be careful to enter a start date and number of days, weeks, months or years to plot that are " 
     "within the timeframes of all the objects to plot to avoid plotting errors. "
     "For dates beyond 2199-12-29, the Horizons system does not provide data for most objects. " 
-    "Objects like Dwarf Planet Sedna have orbital periods that are thousands of years long so the orbit will only plot partially. " 
+    "Objects like Dwarf Planet Sedna have orbital periods that are thousands of years long so the orbit will only plot partially " 
+    "with actual positions. Full ideal orbits estimated from their orbital parameters using Kepler\'s equations are also plotted. " 
     "This is also the case for Dwarf Planet Pluto!\n\n"
 
-    "Idealized orbits are only displayed where representative of actual positions, that is, only for the planets. " 
-    "Smaller objects tend to have actual orbits that do not follow idealized orbits due to gravitational perturbations, " 
-    "so are not plotted.\n\n"
-
     "The Sun is visualized in detail with all its structural sections, core, radiative zone, convective zone and photosphere, "
-    "chromosphere, inner corona, outer corona, and solar wind and heliopause -- the edge of the solar atmosphere, manually " 
-    "select 123 AU to see this.\n\n" 
+    "chromosphere, inner corona, outer corona, and solar wind (inner limit, termination shock and heliopause). See the hovertext.\n\n" 
     
     "We also visualize the inner and outer Oort clouds, the inferred source of comets. Manually select the scale "
     "at 100000 AU to see this."
@@ -697,8 +549,8 @@ note_text = (
 
     "Explore and enjoy!\n\n"
 
-    "Python programming by Tony Quintanilla with assistance from Claude, ChatGPT and Gemini (my AI friends!), December 2024. "
-    "Contact info: \"tony quintanilla (one word) at gmail dot com\"."
+    "Python programming by Tony Quintanilla with assistance from Claude, ChatGPT and Gemini AI LLMs, January 2025. "
+    "Contact info: \"tonyquintanilla@gmail.com\"."
 )
 
 
