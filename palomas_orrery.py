@@ -522,7 +522,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                 marker=dict(
                     size=0.75,
                     color='rgb(25, 25, 112)',  # approximate visualization
-                    opacity=0.2
+                    opacity=0.3
                 ),
                 name='Outer Corona',
                 text=text_array_outer_corona,            # Replicated text
@@ -541,7 +541,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(25, 25, 112)',
                     size=0.75,
                     symbol='circle',
-                    opacity=0.2
+                    opacity=0.3
                 ),
                 name='Outer Corona',
                 text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
@@ -1061,7 +1061,7 @@ def format_maybe_float(value):
     with 5 decimal places. Otherwise, return 'N/A'.
     """
     if isinstance(value, (int, float)):
-        return f"{value:.5f}"
+        return f"{value:.8f}"
     return "N/A"
 
 
@@ -1393,6 +1393,18 @@ def plot_objects():
                         yref='paper',
                         x=0,
                         y=0,
+                        showarrow=False,
+                        font=dict(size=12, color='white'),
+                        align='left',
+                        xanchor='left',
+                        yanchor='top'
+                    ),
+                    dict(
+                        text="Search: <a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
+                        xref='paper',
+                        yref='paper',
+                        x=0,
+                        y=-0.05,
                         showarrow=False,
                         font=dict(size=12, color='white'),
                         align='left',
@@ -1776,10 +1788,10 @@ def animate_objects(step, label):
                         # Format hover text for this object
                         hover_texts = format_hover_text({
                             'range': distance_from_origin,
-                            'velocity': obj_data.get('velocity', 'N/A'),
-                            'distance_lm': obj_data.get('distance_lm', 'N/A'),
-                            'distance_lh': obj_data.get('distance_lh', 'N/A'),
-                            'orbital_period': obj_data.get('orbital_period', 'N/A'),
+                #            'velocity': obj_data.get('velocity', 'N/A'),       # removed these data from the hovertext
+                #            'distance_lm': obj_data.get('distance_lm', 'N/A'),
+                #            'distance_lh': obj_data.get('distance_lh', 'N/A'),
+                #            'orbital_period': obj_data.get('orbital_period', 'N/A'),
                             'mission_info': obj.get('mission_info', '')
                         }, obj['name'], True)
                         
@@ -1841,19 +1853,32 @@ def animate_objects(step, label):
                                 distance_from_origin = np.sqrt(obj_data['x']**2 + 
                                                             obj_data['y']**2 + 
                                                             obj_data['z']**2)
-                                customdata = [distance_from_origin, obj.get('mission_info')]
+                                
+                                # Calculate new values for each frame
+                                distance_lm = distance_from_origin * LIGHT_MINUTES_PER_AU
+                                distance_lh = distance_lm / 60
+
+                                customdata = [{
+                                    'distance': f"{distance_from_origin:.8f}",  # Convert to string with full precision
+                                    'mission_info': obj.get('mission_info')
+                                }]                
 
                                 frame_data.append(dict(
                                     type='scatter3d',
                                     x=[obj_data['x']],
                                     y=[obj_data['y']],
                                     z=[obj_data['z']],
-                                    customdata=[customdata],
-                                    hovertemplate=(            
-                                        f"<b>{obj['name']}</b><br>"
-                                        "Distance from center: %{customdata[0]:.5f} AU<br>"
-                                        "<extra></extra>"
-                                    ),
+
+                                    # Add full hover data calculation
+                                    text=[f"<b>{obj['name']}</b><br><br>"
+                                        f"Distance from Center: {distance_from_origin:.8f} AU<br>"
+                        #                f"Distance: {obj_data.get('distance_lm', 'N/A')} light-minutes<br>"        # removed from hovertext
+                        #                f"Distance: {obj_data.get('distance_lh', 'N/A')} light-hours<br>"
+                        #                f"Velocity: {obj_data.get('velocity', 'N/A')} AU/day<br>"
+                        #                f"Orbital Period: {obj_data.get('orbital_period', 'N/A')} Earth years"
+                                        + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")],
+                                    customdata=[f"<b>{obj['name']}</b>"],  # Fix for Object Names Only
+                                    hovertemplate='%{text}<extra></extra>',
                                     visible=True
                                 ))
                             else:
@@ -1862,7 +1887,7 @@ def animate_objects(step, label):
                 frames.append(go.Frame(
                     data=frame_data,
                     traces=trace_indices,
-                    name=str(dates_list[i].strftime('%Y-%m-%d'))
+                    name=str(dates_list[i].strftime('%Y-%m-%d %H:00'))
                 ))
 
             # NEW CODE: Calculate axis ranges
@@ -1952,6 +1977,18 @@ def animate_objects(step, label):
                         yanchor='top'
                     ),
                     dict(
+                        text="Search: <a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
+                        xref='paper',
+                        yref='paper',
+                        x=0.2,
+                        y=0,
+                        showarrow=False,
+                        font=dict(size=12, color='white'),
+                        align='left',
+                        xanchor='left',
+                        yanchor='top'
+                    ),
+                    dict(
                         text="Click on the legend items <br>to toggle them off or back on:",
                         xref='paper',
                         yref='paper',
@@ -1991,14 +2028,14 @@ def animate_objects(step, label):
             sliders = [dict(
                 active=0,
                 steps=[dict(method='animate',
-                            args=[[str(dates_list[k].strftime('%Y-%m-%d'))],
+                            args=[[str(dates_list[k].strftime('%Y-%m-%d %H:00'))],
                                 {'frame': {'duration': 500, 'redraw': True},
                                 'mode': 'immediate'}],
-                            label=dates_list[k].strftime('%Y-%m-%d')) for k in range(N)],
+                            label=dates_list[k].strftime('%Y-%m-%d %H:00')) for k in range(N)],
                 transition=dict(duration=0),
                 x=0,
                 y=0,
-                currentvalue=dict(font=dict(size=12), prefix='Date: ', visible=True, xanchor='center'),
+                currentvalue=dict(font=dict(size=14), prefix='Date: ', visible=True, xanchor='center'),
                 len=1.0
             )]
 
@@ -2123,37 +2160,10 @@ class CreateToolTip(object):
     """
     Create a tooltip for a given widget with intelligent positioning to prevent clipping.
     """
+
     def __init__(self, widget, text='widget info'):
         self.waittime = 500     # milliseconds
-        self.wraplength = 600   # Reduced wraplength
-        self.widget = widget
-        self.text = text
-        self.widget.bind("<Enter>", self.enter)
-        self.widget.bind("<Leave>", self.leave)
-        self.id = None
-        self.tw = None
-
-    def enter(self, event=None):
-        self.schedule()
-
-    def leave(self, event=None):
-        self.unschedule()
-        self.hidetip()
-
-    def schedule(self):
-        self.unschedule()
-        self.id = self.widget.after(self.waittime, self.showtip)
-
-    def unschedule(self):
-        id_ = self.id
-        self.id = None
-        if id_:
-            self.widget.after_cancel(id_)
-
-class CreateToolTip(object):
-    def __init__(self, widget, text='widget info'):
-        self.waittime = 500     # milliseconds
-        self.wraplength = 600   # Reduced wraplength
+        self.wraplength = 1000   # Reduced wraplength
         self.widget = widget
         self.text = text
         self.widget.bind("<Enter>", self.enter)
@@ -2283,7 +2293,7 @@ date_frame = tk.Frame(input_frame)
 date_frame.grid(row=0, column=0, columnspan=9, padx=(0, 0), pady=2, sticky='w')
 
 # Define date labels and entries with reduced padding
-label_year = tk.Label(date_frame, text="Year:")
+label_year = tk.Label(date_frame, text="Dates in UTC, Year:")
 label_year.grid(row=0, column=0, padx=(0, 5), pady=2, sticky='e')
 
 entry_year = tk.Entry(date_frame, width=5)
@@ -2359,6 +2369,7 @@ osiris_rex_var = tk.IntVar(value=0)
 parker_solar_probe_var = tk.IntVar(value=0)
 jwst_var = tk.IntVar(value=0)
 rosetta_var = tk.IntVar(value=0)
+bepicolombo_var = tk.IntVar(value=0)
 comet_ikeya_seki_var = tk.IntVar(value=0)
 comet_west_var = tk.IntVar(value=0)
 comet_halley_var = tk.IntVar(value=0)
@@ -2570,6 +2581,7 @@ create_mission_checkbutton("Gaia", gaia_var, "(2013-12-19 to 2025-12-31)")
 create_mission_checkbutton("Hayabusa2", hayabusa2_var, "(2014-12-03 to 2020-12-05)")
 create_mission_checkbutton("OSIRIS-REx", osiris_rex_var, "(2016-09-08 to 2023-09-24)")
 create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-12 to present)")
+create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-20 to 2025-12-31)")
 create_mission_checkbutton("Perseverance Rover", perse_var, "(2020-07-30 to present)")
 create_mission_checkbutton("Lucy Mission", lucy_var, "(2021-10-17 to 2033-05-01)")
 create_mission_checkbutton("DART Mission", dart_var, "(2021-11-25 to 2022-09-25)")
@@ -2677,9 +2689,9 @@ num_frames_label.pack(anchor='w')
 num_frames_entry = tk.Entry(controls_frame, width=5)
 num_frames_entry.pack(anchor='w')
 num_frames_entry.insert(0, '28')  # Default number of frames
-CreateToolTip(num_frames_entry, "Enter the number of frames you wish to animate, where each frame represents a day, week, month, or year. " 
+CreateToolTip(num_frames_entry, "Enter the number of frames you wish to animate, where each frame represents an hour, day, week, month, or year. " 
               "Keep in mind that a higher number of frames may increase data fetching time or cause timeouts with the Horizons system. "
-              "The default value of 28 days is the length of the lunar month.")
+              "The default value of 28, for days in the lunar month.")
 
 # Paloma's Birthday button and its animation
 paloma_buttons_frame = tk.Frame(controls_frame)
@@ -2714,8 +2726,7 @@ animate_paloma_button = tk.Button(
 animate_paloma_button.pack(side='left', padx=(0, 5), pady=(5, 0))
 CreateToolTip(
     animate_paloma_button, 
-    "Animate from Paloma's Birthday over years. If you want to see all your birthdays, " 
-    "enter in Number of Frames your age +1. Plotting may take a while due to the large number of positions fetched from Horizons."
+    "Animate from Paloma's Birthday over years."
 )
 
 # Advance Buttons
@@ -2724,10 +2735,22 @@ advance_buttons_frame.pack(pady=(5, 0), fill='x')
 
 # "Single Time Plot" Button 
 plot_button = tk.Button(advance_buttons_frame, text="Plot This Date", command=plot_objects, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
-plot_button.grid(row=0, column=0, columnspan=2, sticky='w', pady=(5, 0))
+# plot_button.grid(row=0, column=0, columnspan=2, sticky='w', pady=(5, 0))
+plot_button.grid(row=0, column=0, padx=(0, 5), pady=(5, 0))
 CreateToolTip(plot_button, "Plot the positions of selected objects on the selected date. Planets and asteroids show their orbits. " 
               "Comets and Missions show their trajectory between the identified start and end dates. Plotting may take a while due " 
               "to a large number of positions fetched from Horizons. The tooltip text has more position, velocity, and orbit information.")
+
+# In the advance_buttons_frame section:
+animate_hour_button = tk.Button(advance_buttons_frame, 
+    text="Animate Hours", 
+    command=lambda: animate_objects(timedelta(hours=1), "Hour"),
+    width=BUTTON_WIDTH, 
+    font=BUTTON_FONT, 
+    bg='SystemButtonFace', 
+    fg='blue')
+animate_hour_button.grid(row=0, column=1, padx=(0, 5), pady=(5, 0))
+CreateToolTip(animate_hour_button, "Animate the motion over hours. Shows position every hour.")
 
 # First Row of Animate Buttons: "Animate Days" and "Animate Weeks"
 animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
@@ -3120,7 +3143,9 @@ objects = [
      'start_date': datetime(2021, 12, 26), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://www.jwst.nasa.gov/', 'mission_info': 'NASA\'s flagship infrared space telescope.'},
     {'name': 'Europa Clipper', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Europa Clipper'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',        # id -159
      'start_date': datetime(2024, 10, 15), 'end_date': datetime(2030, 4, 1), 'mission_url': 'https://europa.nasa.gov/', 'mission_info': 'Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
- 
+    {'name': 'BepiColombo', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('BepiColombo'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
+    'start_date': datetime(2018, 10, 20), 'end_date': datetime(2030, 12, 31), 'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'Joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
+
     # Comets
     {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
      'start_date': datetime(1965, 9, 18), 'end_date': datetime(1966, 1, 1), 'mission_info': 'One of the brightest comets of the 20th century.'},

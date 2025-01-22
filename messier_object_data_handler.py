@@ -5,6 +5,7 @@ import astropy.units as u
 import pandas as pd
 import numpy as np
 from messier_catalog import messier_catalog, star_cluster_catalog, get_nebulae, get_star_clusters
+from star_notes import unique_notes
 
 class MessierObjectHandler:
     """Handles all Messier object related operations."""
@@ -150,7 +151,8 @@ class MessierObjectHandler:
                 f"Type: {row['type']}<br>"
                 f"Apparent Magnitude: {row['Apparent_Magnitude']:.1f}<br>"
                 f"Distance: {row['Distance_ly']:.1f} ly<br>"
-                f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly"
+                f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly<br>"
+                f"{unique_notes.get(row['messier_id'], 'None')}<br>"  # Use unique_notes with messier_id
             ),
             axis=1
         )
@@ -185,6 +187,7 @@ class MessierObjectHandler:
             f"Apparent Magnitude: {row['vmag']:.1f}",
             f"Distance: {row['distance_ly']:.1f} light-years",
             f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly"
+            f"{unique_notes.get(row['messier_id'], 'None')}<br>"  # Use unique_notes with messier_id
         ]
         
         if 'size' in row and pd.notna(row['size']):

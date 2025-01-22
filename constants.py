@@ -606,6 +606,7 @@ def color_map(planet):
         'Parker Solar Probe': 'white',
         'James Webb Space Telescope': 'white',
         'Rosetta': 'white',
+        'BepiColombo': 'white',
         'Oumuamua': 'rgb(218, 165, 32)',
         'Apophis': 'rgb(255, 140, 0)',
         'Vesta': 'rgb(240, 128, 128)',
@@ -799,9 +800,52 @@ INFO = {
         'Rosetta': 'European Space Agency, European Space Agency, mission that studied Comet ' 
         '67p/Churyumov-Gerasimenko. Flyby Asteroid Steins 2008-09-05. Arrives at 67p 2014-08-6. Deployed Philae lander 2014-11-12. ' 
         'Soft landing and termination 2016-09-30. https://rosetta.esa.int/', 
+
+        'BepiColombo': 'BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
+        'It\'s a joint endeavor by the European Space Agency (ESA) and the Japan Aerospace Exploration Agency (JAXA).\n ' 
+        '* The mission consists of two main spacecraft that journeyed to Mercury together: Mercury Planetary Orbiter (MPO) ' 
+        'built by ESA, it will study Mercury\'s surface and internal composition. And Mercury Magnetospheric Orbiter (Mio) ' 
+        'developed by JAXA, it will investigate Mercury\'s magnetic field and its interaction with the solar wind.\n ' 
+        '* BepiColombo was launched in October 2018 and is using a combination of gravity assists: flybys of Earth, Venus, ' 
+        'and Mercury itself to adjust its trajectory and slow down; solar electric propulsion: ion thrusters for fine-tuning ' 
+        'its path.\n '
+        '* Earth flyby: April 10, 2020\n* Venus flyby 1: October 15, 2020\n* Venus flyby 2: August 10, 2021\n' 
+        '* Mercury flyby 1: October 1, 2021\n* Mercury flyby 2: June 23, 2022\n* Mercury flyby 3: June 20, 2023\n' 
+        '* Mercury flyby 4: September 5, 2023\n* Mercury flyby 5: December 2, 2024\n* Mercury flyby 6: January 8, 2025\n' 
+        '* Mercury Orbit Insertion: December 5, 2025\n' 
+        'Each of these flybys has been essential in gradually slowing the spacecraft down enough to achieve Mercury orbit.\n ' 
+        'The January 8th flyby is the final gravitational assist before the spacecraft prepares for its historic orbit\n ' 
+        'insertion around Mercury later in 2025.'
+        '* BepiColombo is scheduled to arrive at Mercury in December 2025. Once there, the two orbiters will separate and ' 
+        'enter their respective orbits around Mercury.\n ' 
+        '* Challenges: Mercury experiences scorching temperatures of over 400°C (750°F). The spacecraft needs special ' 
+        'protection from the Sun\'s powerful radiation. Mercury\'s proximity to the Sun creates a strong gravitational pull.\n ' 
+        '* BepiColombo is the most comprehensive mission to Mercury to date, with two orbiters providing a detailed view of ' 
+        'the planet and its environment. It\'s a prime example of international cooperation in space exploration.\n ' 
+        '* Timeline:\n ' 
+        '  * According to this model, the closest flyby of Mercury by BepiColombo occurred on January 8th, 2025, 6 UTC. ' 
+        'During this flyby, the spacecraft came within approximately 0.00001829 AU from Mercury\'s surface: 0.00001829 AU = 2,736 km ' 
+        '(from Mercury\'s center), Mercury radius = 2,440 km, actual flyby altitude ≈ 296 km above Mercury\'s surface!\n ' 
+        '  * This is the statement from ESA, \"On 8 January 2025, the ESA/JAXA BepiColombo mission will fly just 295 km above ' 
+        'Mercury\'s surface, with a closest approach scheduled for 06:59 CET (05:59 UTC). It will use this opportunity to ' 
+        'photograph Mercury, make unique measurements of the planet\'s environment, and fine-tune science instrument operations ' 
+        'before the main mission begins. This sixth and final flyby will reduce the spacecraft\'s speed and change its direction, ' 
+        'readying it for entering orbit around the tiny planet in late 2026.\"\n ' 
+        '  * December 2025 - November 2026: After the flyby, BepiColombo will still be in a trajectory that takes it around ' 
+        'the Sun, but it will be heavily influenced by Mercury\'s gravity. It will essentially be "captured" by Mercury, ' 
+        'but not yet in a stable orbit.\n ' 
+        '  * November 2026: Finally, after a series of maneuvers, BepiColombo will achieve a stable orbit around Mercury. ' 
+        'The two orbiters (MPO and Mio) will then separate and begin their individual science missions.\n ' 
+        '  * The BepiColombo mission has a planned duration of one Earth year of scientific observations at Mercury. This ' 
+        'nominal mission is set to begin in April 2027, after the orbiters have settled into their final orbits and ' 
+        'completed their commissioning phase.\n ' 
+        '  * If the spacecraft remain in good health and there\'s continued scientific interest, the mission could be ' 
+        'prolonged for another one to two years. This would allow scientists to gather even more data and further deepen ' 
+        'our understanding of Mercury.\n '
+        'It\'s a complex dance with gravity, but this intricate approach is necessary to get BepiColombo into the right ' 
+        'position to study Mercury effectively!',
         
-        'SOHO: Solar and Heliospheric Observatory': 'Observes the Sun and heliosphere from the L1 Lagrange point. ' 
-        'https://sohowww.nascom.nasa.gov/',
+        'SOHO: Solar and Heliospheric Observatory': 'Located at the L1 Lagrange point. https://sohowww.nascom.nasa.gov/',
         
         'Gaia': 'European Space Agency mission at L2 mapping the Milky Way. https://www.cosmos.esa.int/web/gaia',
         
@@ -869,13 +913,22 @@ INFO = {
         
         'NEOWISE': 'Brightest comet visible from the Northern Hemisphere in decades.',
         
-        'Tsuchinshan-ATLAS': 'Comet expected to become bright in 2024.',
+        'Tsuchinshan-ATLAS': 'Discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
+        'and the Asteroid Terrestrial-impact Last Alert System (ATLAS) in South Africa in February 2023.\n * It originates from the ' 
+        'Oort cloud, meaning it takes tens of thousands of years to orbit the Sun.\n * It orbits the Sun in the opposite direction ' 
+        'to most planets.\n * It reached its closest point to the Sun (perihelion) on September 27, 2024, at a distance of 0.39 AU\n ' 
+        '* It still reached a peak magnitude of around -4.9 in early October 2024, making it the brightest comet in over 25 years!\n ' 
+        '* It was easily visible to the naked eye and presented a stunning sight with its long, wispy tail.\n * It made its closest ' 
+        'approach to Earth on October 12, 2024. At that time, it was about 0.47 AU from Earth.',
         
         'Churyumov-Gerasimenko': 'Comet visited by the Rosetta spacecraft.',
         
         'Borisov': 'Second interstellar object detected.',
         
         'Oumuamua': 'First known interstellar object detected passing through the Solar System.',
+
+        'ATLAS': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!',        
+
 }
 
     # Define positions for stellar class labels with different x positions and fonts

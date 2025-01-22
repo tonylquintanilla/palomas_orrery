@@ -1162,7 +1162,12 @@ unique_notes = {
 
         'M43': 'M43, De Mairan\'s Nebula',
 
-        'M44': 'M44, Beehive Cluster.',   
+        'M44': 'M44, Beehive Cluster. Wikipedia: \"Also known as Praesepe (Latin for \"crib\"), M44, NGC 2632, or Cr 189), is an open<br>' 
+        'cluster in the constellation Cancer. One of the nearest open clusters to Earth, it contains a larger population<br>' 
+        'of stars than other nearby bright open clusters holding around 1,000 stars. Under dark skies, the Beehive Cluster<br>' 
+        'looks like a small nebulous object to the naked eye, and has been known since ancient times. Classical astronomer<br>' 
+        'Ptolemy described it as a \"nebulous mass in the breast of Cancer\". It was among the first objects that Galileo<br>' 
+        'studied with his telescope.\" ',   
 
         'M45': 'M45, The Pleiades.',     
 
