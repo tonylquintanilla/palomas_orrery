@@ -6,6 +6,7 @@ warnings.simplefilter('ignore', UnitsWarning)
 
 import sys
 import time
+import pandas as pd  # Add at top of file with other imports
 
 # Import modules - same structure as hr_diagram_apparent_magnitude.py
 from data_acquisition import (
@@ -201,6 +202,19 @@ def main():
             print("No plottable stars found after data preparation.")
             return
 
+        # In main() before final_counts:
+        plottable_mask = (
+            (~combined_df['Temperature'].isna()) & 
+            (~combined_df['Luminosity'].isna()) &
+            (
+                ((combined_df['Source_Catalog'] == 'Hipparcos') & 
+                (combined_df['Apparent_Magnitude'] <= 4.0)) |
+                ((combined_df['Source_Catalog'] == 'Gaia') & 
+                (combined_df['Apparent_Magnitude'] > 4.0))
+            )
+        )
+        plottable_count = plottable_mask.sum()
+
         # Calculate final counts for visualization
         final_counts = {
             'hip_bright_count': len(combined_df[
@@ -212,20 +226,36 @@ def main():
                 (combined_df['Apparent_Magnitude'] > 1.73) & 
                 (combined_df['Apparent_Magnitude'] <= 4.0)
             ]),
-            'gaia_mid_count': len(combined_df[
-                (combined_df['Source_Catalog'] == 'Gaia') & 
-                (combined_df['Apparent_Magnitude'] > 1.73) & 
-                (combined_df['Apparent_Magnitude'] <= 4.0)
-            ]),
+            'gaia_mid_count': 0,  # We don't use Gaia stars in this range
+
             'gaia_faint_count': len(combined_df[
                 (combined_df['Source_Catalog'] == 'Gaia') & 
                 (combined_df['Apparent_Magnitude'] > 4.0)
             ]),
-            'source_counts': source_counts,
-            'total_stars': len(combined_df),
-            'plottable_count': len(combined_df),
-            'missing_temp_only': len(combined_df),
-            'missing_lum_only': len(combined_df)   
+
+            'total_stars': (
+                # Only count stars we actually plot
+                len(combined_df[
+                    ((combined_df['Source_Catalog'] == 'Hipparcos') & 
+                    (combined_df['Apparent_Magnitude'] <= 4.0)) |
+                    ((combined_df['Source_Catalog'] == 'Gaia') & 
+                    (combined_df['Apparent_Magnitude'] > 4.0))
+                ])
+            ),
+
+    #        'total_stars': len(combined_df),
+            'plottable_count': plottable_count,
+            'missing_temp_only': estimation_results['final_missing_temp'],
+            'missing_lum_only': estimation_results['final_missing_lum'],
+            'estimation_results': estimation_results,
+            'source_counts': source_counts
+
+    #        'source_counts': source_counts,
+    #        'total_stars': len(combined_df),
+    #        'plottable_count': len(combined_df),
+    #        'missing_temp_only': len(combined_df),
+    #        'missing_lum_only': len(combined_df)  
+
         }
 
         # Create visualization

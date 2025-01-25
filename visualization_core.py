@@ -160,9 +160,12 @@ def analyze_star_counts(combined_df):
         'plottable_stars': np.sum(plottable),
         'plottable_hip': plottable_hip,
         'plottable_gaia': plottable_gaia,
-        'missing_temp': len(combined_df) - np.sum(valid_temp),
-        'missing_lum': np.sum(~has_lum),
-        'temp_le_zero': np.sum(has_temp & ~valid_temp)
+#        'missing_temp': len(combined_df) - np.sum(valid_temp),     # incorrect
+#        'missing_lum': np.sum(~has_lum),                           # incorrect
+        'temp_le_zero': np.sum(has_temp & ~valid_temp),
+        'missing_temp_only': len(combined_df[combined_df['Temperature'].isna() & ~combined_df['Luminosity'].isna()]),
+        'missing_lum_only': len(combined_df[~combined_df['Temperature'].isna() & combined_df['Luminosity'].isna()]),
+        'missing_both': len(combined_df[combined_df['Temperature'].isna() & combined_df['Luminosity'].isna()])
     }
 
 def analyze_magnitude_distribution(data, mag_limit=None):
@@ -340,14 +343,10 @@ def generate_star_count_text(counts_dict, combined_df=None):
     bright_star_estimates = estimation_results.get('bright_star_estimates', 0)
     
     return (
-        f"<br>* Initial catalog data: <span style='background-color: red; color: red'>{total_stars:,d}</span> total stars. "
-        f"*** <a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Hipparcos</a> bright (Vmag ≤ 1.73): <span style='background-color: red; color: red'>{hip_bright}</span> stars. "
-        f"*** Hipparcos mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{hip_mid}</span> stars. "
-        f"*** <a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Gaia</a> mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{gaia_mid}</span> stars. "
-        f"*** Gaia faint (Vmag > 4.0): <span style='background-color: red; color: red'>{gaia_faint}</span> stars.<br>"
-        f"*** <span style='background-color: red; color: red'>{plottable_count:,d}</span> stars have complete data and are plotted. "
-        f"*** <span style='background-color: red; color: red'>{missing_temp}</span> stars lack temperature data. "
-        f"*** <span style='background-color: red; color: red'>{missing_lum}</span> stars lack luminosity data.<br>"
-        f"*** For <span style='background-color: red; color: red'>{bright_star_estimates}</span> mid-range Gaia stars (Vmag ≤ 2.608) with uncertain parallaxes, "
-        "luminosity was estimated using spectral type, spectral class, and luminosity class, if available. These estimates are indicated in the hover text."
+        f"<br>     Total stars plotted: <span style='background-color: red; color: red'>{total_stars:,d}</span>: "
+        f"<a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Hipparcos</a> bright (Vmag ≤ 1.73): <span style='background-color: red; color: red'>{hip_bright}</span> stars. "
+        f"Hipparcos mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{hip_mid}</span> stars. "
+    #    f"<a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Gaia</a> mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{gaia_mid}</span> stars. "
+        f"Gaia faint (Vmag > 4.0): <span style='background-color: red; color: red'>{gaia_faint}</span> stars.<br>"
+        "-- Python script by Tony Quintanilla, with assistance from ChatGPT, Claude and Gemini, January 2025."
     )

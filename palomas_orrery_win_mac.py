@@ -20,6 +20,7 @@ import time  # Used here for simulation purposes
 import subprocess
 import sys
 import math
+import tempfile
 
 from constants import (
     planetary_params,
@@ -1120,22 +1121,9 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
 def plot_objects():
     def worker():
         try:
-
-            # Create figure object at the start
-            fig = go.Figure()
-
-# Generate default name with timestamp
-            current_date = datetime.now()
-            default_name = f"solar_system_{current_date.strftime('%Y%m%d_%H%M')}"
-            
-            # Use show_figure_safely to handle both display and save options
-            show_figure_safely(fig, default_name)
-            
-        #    output_label.config(text="Plotting complete.")
-        #    progress_bar.stop()
             output_label.config(text="Fetching data, please wait...")
-            progress_bar.start(10)  # Start the progress bar with a slight delay
-            root.update_idletasks()  # Force GUI to update
+            progress_bar.start(10)  
+            root.update_idletasks()  
 
             # Get the date from the entry fields
             year = int(entry_year.get())
@@ -1145,7 +1133,7 @@ def plot_objects():
             date_obj = datetime(year, month, day, hour)
 
             # Define hover_data with a default value
-            hover_data = "Full Object Info"  # Or "Object Names Only"
+            hover_data = "Full Object Info"  
 
             # Determine center object
             center_object_name = center_object_var.get()
@@ -1168,7 +1156,7 @@ def plot_objects():
                         if total_days <= 0:
                             dates_list = [start_date]
                         else:
-                            interval = total_days / 100         # divide by 100 to have more resolution at perihelion
+                            interval = total_days / 100         
                             dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
                     elif obj.get('is_mission', False):
@@ -1178,12 +1166,12 @@ def plot_objects():
                         if total_days <= 0:
                             dates_list = [start_date]
                         else:
-                            interval = total_days / 75      # divide by 75 to have more resolution at launch
+                            interval = total_days / 75      
                             dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
                     elif obj['name'] in planetary_params:
-                        a = planetary_params[obj['name']]['a']  # Semi-major axis in AU
-                        orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
+                        a = planetary_params[obj['name']]['a']  
+                        orbital_period_years = np.sqrt(a ** 3)  
                         orbital_period_days = orbital_period_years * 365.25
                         days_until_horizons = (HORIZONS_MAX_DATE - date_obj).days
                         days_until_datetime_max = (datetime.max - date_obj).days
@@ -1191,7 +1179,7 @@ def plot_objects():
                         if capped_orbital_period_days <= 0:
                             dates_list = [date_obj]
                         else:
-                            interval = capped_orbital_period_days / 50      # divide by 50 because this is sufficient for orbit resolution
+                            interval = capped_orbital_period_days / 50      
                             dates_list = [date_obj + timedelta(days=i) for i in np.arange(0, capped_orbital_period_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
                     else:
@@ -1211,40 +1199,50 @@ def plot_objects():
             # Print planet positions in the console
             print_planet_positions(positions)
 
-            # Prepare coordinate lists for auto-scaling
+            # Collect coordinates from current positions and orbits 
             x_coords = []
             y_coords = []
             z_coords = []
+
+            # Get coordinates from current positions
             for obj_data in positions.values():
                 if obj_data and obj_data['x'] is not None:
                     x_coords.append(obj_data['x'])
                     y_coords.append(obj_data['y'])
                     z_coords.append(obj_data['z'])
 
+            # Add coordinates from orbits and trajectories
+            for obj in objects:
+                if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                    if obj['name'] in planetary_params:
+                        # Add orbit extents 
+                        a = planetary_params[obj['name']]['a']
+                        e = planetary_params[obj['name']].get('e', 0)
+                        # Account for elliptical orbits
+                        max_dist = a * (1 + e)
+                        x_coords.extend([-max_dist, max_dist])
+                        y_coords.extend([-max_dist, max_dist])
+                        z_coords.extend([-max_dist, max_dist])
+                    elif obj.get('is_mission', False) or obj.get('is_comet', False):
+                        # Add full trajectory for missions and comets
+                        dates_list = dates_lists.get(obj['name'], [])
+                        if dates_list:
+                            trajectory = fetch_trajectory(obj['id'], dates_list, center_id=center_id, id_type=obj.get('id_type'))
+                            if trajectory:
+                                x_coords.extend([pos['x'] for pos in trajectory if pos])
+                                y_coords.extend([pos['y'] for pos in trajectory if pos])
+                                z_coords.extend([pos['z'] for pos in trajectory if pos])
+
             # Decide on scale
             if scale_var.get() == 'Auto':
                 if x_coords and y_coords and z_coords:
-                    x_min, x_max = min(x_coords), max(x_coords)
-                    y_min, y_max = min(y_coords), max(y_coords)
-                    z_min, z_max = min(z_coords), max(z_coords)
-
-                    x_range = x_max - x_min
-                    y_range = y_max - y_min
-                    z_range = z_max - z_min
-                    max_range = max(x_range, y_range, z_range)
-                    padding = max_range * 0.5
-                    if max_range == 0:
-                        padding = 1e-3
-
-                    x_axis_range = [x_min - padding, x_max + padding]
-                    y_axis_range = [y_min - padding, y_max + padding]
-                    z_axis_range = [z_min - padding, z_max + padding]
-                    overall_max = max(
-                        abs(x_axis_range[0]), x_axis_range[1],
-                        abs(y_axis_range[0]), y_axis_range[1],
-                        abs(z_axis_range[0]), z_axis_range[1]
+                    max_coord = max(
+                        abs(max(x_coords)), abs(min(x_coords)),
+                        abs(max(y_coords)), abs(min(y_coords)),
+                        abs(max(z_coords)), abs(min(z_coords))
                     )
-                    axis_range = [-overall_max, overall_max]
+                    max_coord *= 1.2  # Add 20% padding
+                    axis_range = [-max_coord, max_coord]
                 else:
                     axis_range = [-1, 1]
             else:
@@ -1268,9 +1266,7 @@ def plot_objects():
             else:
                 fig.add_trace(
                     go.Scatter3d(
-                        x=[0],
-                        y=[0],
-                        z=[0],
+                        x=[0], y=[0], z=[0],
                         mode='markers',
                         marker=dict(
                             color=center_object_info['color'],
@@ -1284,7 +1280,7 @@ def plot_objects():
                     )
                 )
 
-            # Again, for clarity, place the center marker
+            # Place the center marker
             center_marker_size = 10
             fig.add_trace(
                 go.Scatter3d(
@@ -1294,7 +1290,6 @@ def plot_objects():
                     mode='markers+text',
                     marker=dict(
                         color=center_object_info['color'],
-            #            color='rgb(0, 255, 0)',        #green
                         size=center_marker_size,
                         symbol=center_object_info['symbol']
                     ),
@@ -1307,9 +1302,9 @@ def plot_objects():
 
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
-            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #using ideal orbits only
+            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)
 
-            # Refetch positions (so we can add them as Scatter3d traces)
+            # Refetch positions
             positions = {}
             for obj in objects:
                 if obj['var'].get() == 1:
@@ -1329,21 +1324,15 @@ def plot_objects():
                             marker_size = 10
                         elif obj['name'] == 'Moon' and center_object_name == 'Earth':
                             marker_size = 6
-                        add_celestial_object(fig, obj_data, obj['name'], obj['color'], obj['symbol'], marker_size=marker_size, hover_data=hover_data)  # Pass hover_data here
+                        add_celestial_object(fig, obj_data, obj['name'], obj['color'], obj['symbol'], marker_size=marker_size, hover_data=hover_data)
 
             # Rearrange traces to ensure the center marker is on top
-            center_trace_name = center_object_name  # This should match the 'name' parameter of your center marker trace
-
-            # Extract center traces
+            center_trace_name = center_object_name
             center_traces = [trace for trace in fig.data if trace.name == center_trace_name]
-
-            # Extract all other traces
             other_traces = [trace for trace in fig.data if trace.name != center_trace_name]
-
-            # Reassign fig.data with center traces at the end
             fig.data = tuple(other_traces + center_traces)
 
-            # Now that the figure is ready, update layout with axis_range
+            # Update layout with dynamic scaling
             fig.update_layout(
                 scene=dict(
                     xaxis=dict(
@@ -1424,21 +1413,16 @@ def plot_objects():
                         xanchor='left',
                         yanchor='top'
                     ),
-
                 ]
             )
 
-            # 5. Collect user-checked objects for orbits
+            # Collect user-checked objects for orbits
             selected_objects = [obj['name'] for obj in objects if obj['var'].get() == 1]
-
-            # 6. Plot idealized orbits using your new logic
-            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # using this logic for animate_objects only
+            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)
 
             # Generate default name with timestamp
             current_date = datetime.now()
             default_name = f"solar_system_{date_obj.strftime('%Y%m%d_%H%M')}"
-
-            # Use show_figure_safely to handle both display and save options
             show_figure_safely(fig, default_name)
 
             output_label.config(text="Plotting complete.")
@@ -1450,7 +1434,6 @@ def plot_objects():
             traceback.print_exc()
             progress_bar.stop()
 
-    # Instead of threading.Thread(...).start(), use create_monitored_thread
     plot_thread = create_monitored_thread(shutdown_handler, worker)
     plot_thread.start()
 
@@ -1673,359 +1656,269 @@ def show_animation_safely(fig, default_name):
         root.destroy()
 
 def animate_objects(step, label):
-    def animation_worker():
-        try:
-            # Original setup code remains unchanged
-            center_object_name = center_object_var.get()
-            center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
-            if center_object_info:
-                if center_object_name == 'Sun':
-                    center_id = 'Sun'
-                    center_id_type = None
-                else:
-                    center_id = center_object_info['id']
-                    center_id_type = center_object_info.get('id_type')
-            else:
+    """Create animation of solar system objects without threading."""
+    try:
+        # Setup
+        center_object_name = center_object_var.get()
+        center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
+        if center_object_info:
+            if center_object_name == 'Sun':
                 center_id = 'Sun'
                 center_id_type = None
-
-            # Get frames number and validate
-            N_str = num_frames_entry.get()
-            if not N_str.strip():
-                output_label.config(text="Please enter a valid number of frames.")
-                return
-            N = int(N_str)
-            if N <= 0:
-                output_label.config(text="Number of frames must be positive.")
-                return
-
-            # Generate dates list
-            current_date = datetime(int(entry_year.get()), int(entry_month.get()), 
-                                int(entry_day.get()), int(entry_hour.get()))
-            dates_list = []
-
-            for i in range(N):
-                if step == 'month':
-                    month_offset = current_date.month - 1 + i
-                    year = current_date.year + month_offset // 12
-                    month = month_offset % 12 + 1
-                    day = min(current_date.day, calendar.monthrange(year, month)[1])
-                    date = datetime(year, month, day, current_date.hour)
-                elif step == 'year':
-                    try:
-                        date = current_date.replace(year=current_date.year + i)
-                    except ValueError:
-                        date = current_date.replace(year=current_date.year + i, month=2, day=28)
-                else:
-                    date = current_date + step * i
-                if date > HORIZONS_MAX_DATE:
-                    print(f"Date {date} exceeds Horizons' data range. Skipping further dates.")
-                    break
-                dates_list.append(date)
-
-            # Initialize figure
-            fig = go.Figure()
-
-            # Add Sun visualization if Sun is center
-            if center_object_name == 'Sun':
-                fig = create_sun_visualization(fig)
-        #    else:
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[0], y=[0], z=[0],
-                        mode='markers+text',
-                        marker=dict(
-            #                color=center_object_info['color'],
-                            color='rgb(102, 187, 106)',      # chlorophyll green                      
-                            size=12,    
-                            symbol=center_object_info['symbol']
-                            ),
-                        name=f"{center_object_name} (Center)",
-                        text=[center_object_name],
-                        hoverinfo='skip',
-                        showlegend=True
-                    )
-                )
-   
             else:
-                # Existing fallback for other centers
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[0], y=[0], z=[0],
-                        mode='markers+text',
-                        marker=dict(
-                            color=center_object_info['color'],
-                            size=12,
-                            symbol=center_object_info['symbol']
-                        ),
-                        name=f"{center_object_name} (Center)",
-                        text=[center_object_name],
-                        hoverinfo='skip',
-                        showlegend=True
-                    )
+                center_id = center_object_info['id']
+                center_id_type = center_object_info.get('id_type')
+        else:
+            center_id = 'Sun'
+            center_id_type = None
+
+        # Get frames number and validate
+        N_str = num_frames_entry.get()
+        if not N_str.strip():
+            output_label.config(text="Please enter a valid number of frames.")
+            return
+        N = int(N_str)
+        if N <= 0:
+            output_label.config(text="Number of frames must be positive.")
+            return
+
+        # Generate dates list
+        current_date = datetime(int(entry_year.get()), int(entry_month.get()), 
+                            int(entry_day.get()), int(entry_hour.get()))
+        dates_list = []
+
+        for i in range(N):
+            if step == 'month':
+                month_offset = current_date.month - 1 + i
+                year = current_date.year + month_offset // 12
+                month = month_offset % 12 + 1
+                day = min(current_date.day, calendar.monthrange(year, month)[1])
+                date = datetime(year, month, day, current_date.hour)
+            elif step == 'year':
+                try:
+                    date = current_date.replace(year=current_date.year + i)
+                except ValueError:
+                    date = current_date.replace(year=current_date.year + i, month=2, day=28)
+            else:
+                date = current_date + step * i
+            if date > HORIZONS_MAX_DATE:
+                print(f"Date {date} exceeds Horizons' data range. Skipping further dates.")
+                break
+            dates_list.append(date)
+
+        # Initialize figure
+        fig = go.Figure()
+
+        # Add Sun visualization if Sun is center
+        if center_object_name == 'Sun':
+            fig = create_sun_visualization(fig)
+        else:
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers+text',
+                    marker=dict(
+                        color=center_object_info['color'],
+                        size=12,
+                        symbol=center_object_info['symbol']
+                    ),
+                    name=f"{center_object_name} (Center)",
+                    text=[center_object_name],
+                    hoverinfo='skip',
+                    showlegend=True
                 )
+            )
 
-            # Fetch positions for all objects
-            positions_over_time = {}
+        # Fetch positions for all objects
+        positions_over_time = {}
+        for obj in objects:
+            if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                positions = fetch_trajectory(obj['id'], dates_list, center_id=center_id, 
+                                        id_type=obj.get('id_type'))
+                positions_over_time[obj['name']] = positions
+
+        # Create initial traces and track indices
+        trace_indices = []
+        for obj in objects:
+            if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                obj_positions = positions_over_time.get(obj['name'])
+                if obj_positions and obj_positions[0]:
+                    obj_data = obj_positions[0]
+                    distance_from_origin = np.sqrt(obj_data['x']**2 + 
+                                                obj_data['y']**2 + 
+                                                obj_data['z']**2)
+                    hover_texts = format_hover_text({
+                        'range': distance_from_origin,
+                        'mission_info': obj.get('mission_info', '')
+                    }, obj['name'], True)
+                    
+                    full_hover_text = hover_texts[0]
+                    minimal_hover_text = hover_texts[1]
+
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[obj_data['x']],
+                            y=[obj_data['y']],
+                            z=[obj_data['z']],
+                            mode='markers',
+                            marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
+                            name=obj['name'],
+                            text=[full_hover_text],
+                            customdata=[minimal_hover_text],
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True
+                        )
+                    )
+                else:
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[None], y=[None], z=[None],
+                            mode='markers+text',
+                            marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
+                            name=obj['name'],
+                            text=[obj['name']],
+                            textposition='top center',
+                            textfont=dict(size=8, color='white'),
+                            customdata=[['N/A', obj.get('mission_info')]],
+                            hovertemplate=(
+                                f"{obj['name']}<br>"
+                                "Distance from center: N/A<br>"
+                                "<extra></extra>"
+                            ),
+                            showlegend=True
+                        )
+                    )
+                trace_indices.append(len(fig.data) - 1)
+
+        # Create frames
+        frames = []
+        for i in range(N):
+            frame_data = []
+            current_date = dates_list[i]
+
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    positions = fetch_trajectory(obj['id'], dates_list, center_id=center_id, 
-                                            id_type=obj.get('id_type'))
-                    positions_over_time[obj['name']] = positions
+                    if 'start_date' in obj and current_date < obj['start_date']:
+                        frame_data.append(dict(visible=False))
+                    else:
+                        obj_positions = positions_over_time.get(obj['name'])
+                        if obj_positions and obj_positions[i]:
+                            obj_data = obj_positions[i]
+                            distance_from_origin = np.sqrt(obj_data['x']**2 + 
+                                                        obj_data['y']**2 + 
+                                                        obj_data['z']**2)
+                            
+                            distance_lm = distance_from_origin * LIGHT_MINUTES_PER_AU
+                            distance_lh = distance_lm / 60
 
-            # Create initial traces and track indices
-            trace_indices = []
-            for obj in objects:
-                if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    obj_positions = positions_over_time.get(obj['name'])
-                    if obj_positions and obj_positions[0]:
-                        obj_data = obj_positions[0]
-                        distance_from_origin = np.sqrt(obj_data['x']**2 + 
-                                                    obj_data['y']**2 + 
-                                                    obj_data['z']**2)
-                        customdata = [distance_from_origin, obj.get('mission_info')]
-
-                        # Format hover text for this object
-                        hover_texts = format_hover_text({
-                            'range': distance_from_origin,
-                #            'velocity': obj_data.get('velocity', 'N/A'),       # removed these data from the hovertext
-                #            'distance_lm': obj_data.get('distance_lm', 'N/A'),
-                #            'distance_lh': obj_data.get('distance_lh', 'N/A'),
-                #            'orbital_period': obj_data.get('orbital_period', 'N/A'),
-                            'mission_info': obj.get('mission_info', '')
-                        }, obj['name'], True)
-                        
-                        full_hover_text = hover_texts[0]  # First element is full hover text
-                        minimal_hover_text = hover_texts[1]  # Second element is minimal hover text
-
-                        fig.add_trace(
-                            go.Scatter3d(
+                            frame_data.append(dict(
+                                type='scatter3d',
                                 x=[obj_data['x']],
                                 y=[obj_data['y']],
                                 z=[obj_data['z']],
-                                mode='markers',     # removed +text  to remove the hovertext from the marker
-                                marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
-                                name=obj['name'],
-                                text=[full_hover_text],             # Full hover info
-                                customdata=[minimal_hover_text],    # Minimal hover info
-                        #        text=[obj['name']],
-                                textposition='top center',
-                                textfont=dict(size=8, color='white'),
-                                hovertemplate='%{text}<extra></extra>',  # Let toggle buttons control template
-                                showlegend=True
-                            )
-                        )
-                    else:
-                        fig.add_trace(
-                            go.Scatter3d(
-                                x=[None], y=[None], z=[None],
-                                mode='markers+text',
-                                marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
-                                name=obj['name'],
-                                text=[obj['name']],
-                                textposition='top center',
-                                textfont=dict(size=8, color='white'),
-                                customdata=[['N/A', obj.get('mission_info')]],
-                                hovertemplate=(
-                                    f"{obj['name']}<br>"
-                                    "Distance from center: N/A<br>"
-                                    "<extra></extra>"
-                                ),
-                                showlegend=True
-                            )
-                        )
-                    trace_indices.append(len(fig.data) - 1)
-
-            # Create frames
-            frames = []
-            for i in range(N):
-                frame_data = []
-                current_date = dates_list[i]
-
-                for obj in objects:
-                    if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                        if 'start_date' in obj and current_date < obj['start_date']:
-                            frame_data.append(dict(visible=False))
+                                text=[f"<b>{obj['name']}</b><br><br>"
+                                    f"Distance from Center: {distance_from_origin:.8f} AU<br>"
+                                    + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")],
+                                customdata=[f"<b>{obj['name']}</b>"],
+                                hovertemplate='%{text}<extra></extra>',
+                                visible=True
+                            ))
                         else:
-                            obj_positions = positions_over_time.get(obj['name'])
-                            if obj_positions and obj_positions[i]:
-                                obj_data = obj_positions[i]
-                                distance_from_origin = np.sqrt(obj_data['x']**2 + 
-                                                            obj_data['y']**2 + 
-                                                            obj_data['z']**2)
-                                
-                                # Calculate new values for each frame
-                                distance_lm = distance_from_origin * LIGHT_MINUTES_PER_AU
-                                distance_lh = distance_lm / 60
+                            frame_data.append(dict(visible=False))
 
-                                customdata = [{
-                                    'distance': f"{distance_from_origin:.8f}",  # Convert to string with full precision
-                                    'mission_info': obj.get('mission_info')
-                                }]                
+            frames.append(go.Frame(
+                data=frame_data,
+                traces=trace_indices,
+                name=str(dates_list[i].strftime('%Y-%m-%d %H:00'))
+            ))
 
-                                frame_data.append(dict(
-                                    type='scatter3d',
-                                    x=[obj_data['x']],
-                                    y=[obj_data['y']],
-                                    z=[obj_data['z']],
+        # Calculate and set axis ranges
+        x_coords = []
+        y_coords = []
+        z_coords = []
+        for obj_name, positions in positions_over_time.items():
+            for pos in positions:
+                if pos:
+                    x_coords.append(pos['x'])
+                    y_coords.append(pos['y'])
+                    z_coords.append(pos['z'])
 
-                                    # Add full hover data calculation
-                                    text=[f"<b>{obj['name']}</b><br><br>"
-                                        f"Distance from Center: {distance_from_origin:.8f} AU<br>"
-                        #                f"Distance: {obj_data.get('distance_lm', 'N/A')} light-minutes<br>"        # removed from hovertext
-                        #                f"Distance: {obj_data.get('distance_lh', 'N/A')} light-hours<br>"
-                        #                f"Velocity: {obj_data.get('velocity', 'N/A')} AU/day<br>"
-                        #                f"Orbital Period: {obj_data.get('orbital_period', 'N/A')} Earth years"
-                                        + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")],
-                                    customdata=[f"<b>{obj['name']}</b>"],  # Fix for Object Names Only
-                                    hovertemplate='%{text}<extra></extra>',
-                                    visible=True
-                                ))
-                            else:
-                                frame_data.append(dict(visible=False))
-
-                frames.append(go.Frame(
-                    data=frame_data,
-                    traces=trace_indices,
-                    name=str(dates_list[i].strftime('%Y-%m-%d %H:00'))
-                ))
-
-            # NEW CODE: Calculate axis ranges
-            x_coords = []
-            y_coords = []
-            z_coords = []
-
-            # Collect coordinates from all positions for all objects
-            for obj_name, positions in positions_over_time.items():
-                for pos in positions:
-                    if pos:  # Check if position data exists
-                        x_coords.append(pos['x'])
-                        y_coords.append(pos['y'])
-                        z_coords.append(pos['z'])
-
-            # Calculate range with padding
-            if x_coords and y_coords and z_coords:
-                max_coord = max(
-                    abs(max(x_coords)), abs(min(x_coords)),
-                    abs(max(y_coords)), abs(min(y_coords)),
-                    abs(max(z_coords)), abs(min(z_coords))
-                )
-                # Add 20% padding
-                max_coord *= 1.2
-                axis_range = [-max_coord, max_coord]
-            else:
-                # Default range if no coordinates available
-                axis_range = [-1, 1]
-
-            # Check for manual scale override
-            if scale_var.get() == 'Manual':
-                try:
-                    custom_scale = float(custom_scale_entry.get())
-                    if custom_scale > 0:
-                        axis_range = [-custom_scale, custom_scale]
-                except ValueError:
-                    pass  # Keep calculated range if custom scale is invalid
-
-            selected_objects = [
-                obj['name']
-                for obj in objects
-                if obj['var'].get() == 1 and not obj.get('is_mission', False)
-            ]
-
-            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # duplicate set of ideal orbit traces
-
-            # Update layout with dynamic scaling
-            fig.update_layout(
-                scene=dict(
-                    xaxis=dict(title='X (AU)', range=axis_range, 
-                            backgroundcolor='black', gridcolor='gray', 
-                            showbackground=True, showgrid=True),
-                    yaxis=dict(title='Y (AU)', range=axis_range, 
-                            backgroundcolor='black', gridcolor='gray', 
-                            showbackground=True, showgrid=True),
-                    zaxis=dict(title='Z (AU)', range=axis_range, 
-                            backgroundcolor='black', gridcolor='gray', 
-                            showbackground=True, showgrid=True),
-                    aspectmode='cube',
-                    camera=get_default_camera()
-                ),
-            
-                paper_bgcolor='black',
-                plot_bgcolor='black',
-                title_font_color='white',
-                font_color='white',
-                title="Paloma's Orrery - Animation Over Below Dates",
-                showlegend=True,
-                legend=dict(
-                    font=dict(color='white'),
-                    x=1,
-                    y=1,
-                    xanchor='left',
-                    yanchor='top'
-                ),
-                annotations=[
-                    dict(
-                        text="Data source: <a href='https://ssd.jpl.nasa.gov/horizons/app.html#/' target='_blank'>JPL Horizons</a>",
-                        xref='paper',
-                        yref='paper',
-                        x=0,
-                        y=0,
-                        showarrow=False,
-                        font=dict(size=12, color='white'),
-                        align='left',
-                        xanchor='left',
-                        yanchor='top'
-                    ),
-                    dict(
-                        text="Search: <a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
-                        xref='paper',
-                        yref='paper',
-                        x=0.2,
-                        y=0,
-                        showarrow=False,
-                        font=dict(size=12, color='white'),
-                        align='left',
-                        xanchor='left',
-                        yanchor='top'
-                    ),
-                    dict(
-                        text="Click on the legend items <br>to toggle them off or back on:",
-                        xref='paper',
-                        yref='paper',
-                        x=0.95,
-                        y=1.07,
-                        showarrow=False,
-                        font=dict(size=12, color='white'),
-                        align='left',
-                        xanchor='left',
-                        yanchor='top'
-                    ),
-
-                ],
-                updatemenus=[
-                    dict(
-                        type='buttons',
-                        showactive=False,
-                        buttons=[
-                            dict(label='Play',
-                                method='animate',
-                                args=[None, {'frame': {'duration': 500, 'redraw': True},
-                                        'fromcurrent': True,
-                                        'transition': {'duration': 0}}]),
-                            dict(label='Pause',
-                                method='animate',
-                                args=[[None], {'frame': {'duration': 0},
-                                                'mode': 'immediate',
-                                                'transition': {'duration': 0}}])
-                        ],
-                        x=0.1,
-                        y=0.85
-                    )
-                ]
+        if x_coords and y_coords and z_coords:
+            max_coord = max(
+                abs(max(x_coords)), abs(min(x_coords)),
+                abs(max(y_coords)), abs(min(y_coords)),
+                abs(max(z_coords)), abs(min(z_coords))
             )
+            max_coord *= 1.2
+            axis_range = [-max_coord, max_coord]
+        else:
+            axis_range = [-1, 1]
 
-            # Add sliders for date navigation
-            sliders = [dict(
+        if scale_var.get() == 'Manual':
+            try:
+                custom_scale = float(custom_scale_entry.get())
+                if custom_scale > 0:
+                    axis_range = [-custom_scale, custom_scale]
+            except ValueError:
+                pass
+
+        selected_objects = [
+            obj['name']
+            for obj in objects
+            if obj['var'].get() == 1 and not obj.get('is_mission', False)
+        ]
+
+        plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)
+
+        # Update layout
+        fig.update_layout(
+            scene=dict(
+                xaxis=dict(title='X (AU)', range=axis_range, 
+                        backgroundcolor='black', gridcolor='gray', 
+                        showbackground=True, showgrid=True),
+                yaxis=dict(title='Y (AU)', range=axis_range, 
+                        backgroundcolor='black', gridcolor='gray', 
+                        showbackground=True, showgrid=True),
+                zaxis=dict(title='Z (AU)', range=axis_range, 
+                        backgroundcolor='black', gridcolor='gray', 
+                        showbackground=True, showgrid=True),
+                aspectmode='cube',
+                camera=get_default_camera()
+            ),
+            paper_bgcolor='black',
+            plot_bgcolor='black',
+            title_font_color='white',
+            font_color='white',
+            title="Paloma's Orrery - Animation Over Below Dates",
+            showlegend=True,
+            legend=dict(
+                font=dict(color='white'),
+                x=1,
+                y=1,
+                xanchor='left',
+                yanchor='top'
+            ),
+            updatemenus=[
+                dict(
+                    type='buttons',
+                    showactive=False,
+                    buttons=[
+                        dict(label='Play',
+                            method='animate',
+                            args=[None, {'frame': {'duration': 500, 'redraw': True},
+                                    'fromcurrent': True,
+                                    'transition': {'duration': 0}}]),
+                        dict(label='Pause',
+                            method='animate',
+                            args=[[None], {'frame': {'duration': 0},
+                                            'mode': 'immediate',
+                                            'transition': {'duration': 0}}])
+                    ],
+                    x=0.1,
+                    y=0.85
+                )
+            ],
+            sliders=[dict(
                 active=0,
                 steps=[dict(method='animate',
                             args=[[str(dates_list[k].strftime('%Y-%m-%d %H:00'))],
@@ -2038,39 +1931,30 @@ def animate_objects(step, label):
                 currentvalue=dict(font=dict(size=14), prefix='Date: ', visible=True, xanchor='center'),
                 len=1.0
             )]
+        )
 
-            fig.update_layout(sliders=sliders)
+        # Add frames to figure
+        fig.frames = frames
 
-            fig.frames = frames
+        # Add hover toggle buttons
+        fig = add_hover_toggle_buttons(fig)
 
-            # Add hover toggle buttons
-            fig = add_hover_toggle_buttons(fig)
+        # Generate default name with timestamp
+        current_date = datetime.now()
+        default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
+        show_animation_safely(fig, default_name)
 
-            # Generate default name with timestamp
-            current_date = datetime.now()
-            default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
+        output_label.config(
+            text="Animation opened in browser. "
+                "Use your browser's File -> Save As to save the animation if desired."
+        )
+        progress_bar.stop()
 
-            # New code at the end of animation_worker:
-            current_date = datetime.now()
-            default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
-            show_animation_safely(fig, default_name)
-
-            # Update output_label with instructions
-            output_label.config(
-                text="Animation opened in browser. "
-                    "Use your browser's File -> Save As to save the animation if desired."
-            )
-            progress_bar.stop()
-
-        except Exception as e:
-            output_label.config(text=f"Error during animation: {e}")
-            print(f"Error during animation: {e}")
-            traceback.print_exc()
-            progress_bar.stop()
-
-    # Create and start monitored thread
-    animation_thread = create_monitored_thread(shutdown_handler, animation_worker)
-    animation_thread.start()
+    except Exception as e:
+        output_label.config(text=f"Error during animation: {e}")
+        print(f"Error during animation: {e}")
+        traceback.print_exc()
+        progress_bar.stop()
 
 def on_closing():
     """Handle cleanup when the main window is closed."""
@@ -2783,22 +2667,24 @@ ly_entry = tk.Entry(plot_buttons_frame)
 ly_entry.grid(row=4, column=1, padx=(5, 0), pady=(5, 0), sticky='w')
 ly_entry.insert(0, '20')  # Default ly value
 
-# Function to call the planetarium_distance script with user input
 def call_planetarium_distance_script_with_input():
     try:
         ly_value = ly_entry.get()
-        ly_value = int(ly_value)
-        if ly_value <= 0:
-            output_label.config(text="Please enter a positive number of light-years.")
+        ly_value = float(ly_value)
+        
+        if ly_value <= 0 or ly_value > 100:
+            output_label.config(text="Please enter a number between 0 and 100 light-years.")
             return
+            
         script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
-        # Pass the light-years value as a command-line argument
         subprocess.run(['python', script_path, str(ly_value)])
+        
     except ValueError:
-        output_label.config(text="Please enter the number of light-years to plot, up to 100.")
+        output_label.config(text="Please enter a valid number between 0 and 100 light-years.")
     except Exception as e:
         output_label.config(text=f"Error running planetarium_distance.py: {e}")
         print(f"Error running planetarium_distance.py: {e}")
+        traceback.print_exc()
 
 # Create a single button to call the plot script
 plot_button = tk.Button(
@@ -2857,6 +2743,7 @@ on_stellar_scale_change()
 
 def call_planetarium_apparent_magnitude_script_with_input():
     try:
+        # Validate magnitude input
         mag_value = mag_entry.get()
         mag_value = float(mag_value)
         if mag_value < -1.44 or mag_value > 9:
@@ -2875,13 +2762,13 @@ def call_planetarium_apparent_magnitude_script_with_input():
                 output_label.config(text="Invalid scale value.")
                 return
                 
+        # Build command with arguments
         script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
-        # Pass magnitude value as command-line argument
         cmd = ['python', script_path, str(mag_value)]
         if user_scale is not None:
             cmd.append(str(user_scale))
             
-        print(f"Running command: {' '.join(cmd)}")  # Debug print
+        print(f"Running command: {' '.join(cmd)}")
         subprocess.run(cmd)
         
     except ValueError:
@@ -2889,7 +2776,7 @@ def call_planetarium_apparent_magnitude_script_with_input():
     except Exception as e:
         output_label.config(text=f"Error running planetarium_apparent_magnitude.py: {e}")
         print(f"Error running planetarium_apparent_magnitude.py: {e}")
-        traceback.print_exc()  # Add this for more detailed error info
+        traceback.print_exc()
 
 # Create a single button to call the plot script
 plot_button = tk.Button(
@@ -2928,19 +2815,17 @@ CreateToolTip(
     "The planets are usually visible: Mercury is about magnitude -2.5, Venus about -4.5, Mars about -3, Jupiter about -3, and Saturn about -0.5." 
 )
 
-# Function to call the hr_diagram script with user input
 def call_hr_diagram_distance_script_with_input():
     try:
-        mag_value = ly_entry.get()
-        mag_value = int(mag_value)
-        if mag_value <= 0:
+        ly_value = ly_entry.get()
+        ly_value = int(ly_value)
+        if ly_value <= 0:
             output_label.config(text="Please enter a positive number of light-years.")
             return
         script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
-        # Pass the light-years value as a command-line argument
-        subprocess.run(['python', script_path, str(mag_value)])
+        subprocess.run(['python', script_path, str(ly_value)])
     except ValueError:
-        output_label.config(text="Please enter the number of light-years to plot, up to 100.")
+        output_label.config(text="Please enter a valid number of light-years.")
     except Exception as e:
         output_label.config(text=f"Error running hr_diagram_distance.py: {e}")
         print(f"Error running hr_diagram_distance.py: {e}")
@@ -2972,18 +2857,19 @@ def call_hr_diagram_apparent_magnitude_script_with_input():
         mag_value = mag_entry.get()
         mag_value = float(mag_value)
         if mag_value < -1.44 or mag_value > 9:
-            output_label.config(text="Please enter a magnitude between -1.44 (brightest star Sirius) and 9. (ideal visibility and vision limit).")
+            output_label.config(text="Please enter a magnitude between -1.44 and 9.")
             return
         script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
-        # Pass the magnitude value as a command-line argument
+        # Pass magnitude value as command-line argument
         subprocess.run(['python', script_path, str(mag_value)])
     except ValueError:
-        output_label.config(text="Please enter a valid magnitude between -1.44 (brightest star Sirius) and 9 (ideal visibility and vision limit).")
+        output_label.config(text="Please enter a valid magnitude between -1.44 (brightest star Sirius) and 9.")
     except Exception as e:
         output_label.config(text=f"Error running hr_diagram_apparent_magnitude.py: {e}")
         print(f"Error running hr_diagram_apparent_magnitude.py: {e}")
+        traceback.print_exc()
 
-# Create a single button to call the plot script
+# Create a button to call the HR diagram script
 plot_button = tk.Button(
     plot_buttons_frame,
     text="2D Visualization of Stars Visible Unaided",
@@ -2995,29 +2881,19 @@ plot_button = tk.Button(
 )
 plot_button.grid(row=9, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
 CreateToolTip(
-    plot_button, 
+    plot_button,
     "*** THIS BUTTON WILL TAKE ABOUT HALF A MINUTE TO LOAD FOR MAGNITUDE 4 ***\n"
     "*** AND ABOUT A MINUTE AND A HALF TO LOAD FOR MAGNITUDE 9! ***\n"
-    "*** BECAUSE OF THE LARGE NUMBER OF STARS BEING FETCHED ***\n\n" 
-    "This button plots stars that are visible to the naked eye up to the maximum apparent magnitude (Vmag) of 9 under ideal conditions in space.\n\n" 
-    "The visibility of stars based on apparent magnitude is influenced by light pollution, atmospheric quality, and observer eyesight.\n" 
+    "*** BECAUSE OF THE LARGE NUMBER OF STARS BEING FETCHED ***\n\n"
+    "This button plots stars that are visible to the naked eye up to the maximum apparent magnitude (Vmag) of 9 under ideal conditions in space.\n\n"
+    "The visibility of stars based on apparent magnitude is influenced by light pollution, atmospheric quality, and observer eyesight.\n"
     "Here's a list of approximate visibility limits for typical conditions:\n"
     "* In space, like the International Space Station, without light or pollution and with perfect eye sight, it may be possible to see "
-    "to Vmag 8.5 or possibly even approach Vmag 9!" 
-    "* In those rare places with perfect visibility like the Namibian desert or the Atacama desert in Chile, with perfect vision " 
-    "vibility may reach Vmag 6.7 to 7.5, possibly even 8! (Bortle scale 1-2) " 
-    "Astronomer Brian Skiff is reportedly able to see to magnitude 8.5! However, there is no verified case of anyone seeing Neptune " 
-    "at magnitude 7.7, although theoretically possible if you can find it among miriad background stars!\n"
-    "* Under the best conditions with no light pollution, clear skies, and excellent atmospheric transparency, a person with 20/20 " 
-    "vision can see stars up to a Vmag of about 6.5 (Bortle scale 3-4).\n" 
-    "* In very dark locations, such as rural areas with minimal light pollution, stars up to magnitude 5 or 6 can be visible. (Bortle scale 5-6) " 
-    "The Milky Way and faint nebulae are prominent. If you know where to look, you might see Uranus at magnitude about 5.5!\n" 
-    "* In suburban areas, light pollution starts to become a major factor. Stars up to a magnitude of about 5 to 5.5 can be seen.\n" 
-    "* In most urban areas, light pollution severely limits visibility. Only stars up to magnitude 4 may are visible. (Bortle scale 7-8)\n" 
-    "* In very dense urban areas with light pollution, like Chicago, visibility is likely limited to magnitude 2 to 3 so on a clear night. (Bortle scale 9)\n"
-    "* In densely populated cities with intense light pollution or haze, visibility is limited to 2 or less. Only the brightest stars " 
-    "are visible. Sirius is the brightest star at -1.44 -- the lower limit for our plot!\n"
-    "The planets are usually visible: Mercury is about magnitude -2.5, Venus about -4.5, Mars about -3, Jupiter about -3, and Saturn about -0.5." 
+    "to Vmag 8.5 or possibly even approach Vmag 9!\n"
+    "* In dark rural skies, stars up to magnitude 6.5 might be visible.\n"
+    "* In suburban areas, typically only stars brighter than magnitude 4-5 are visible.\n"
+    "* In urban areas with light pollution, visibility may be limited to magnitude 2-3.\n"
+    "Note: Sirius, the brightest star, has magnitude -1.44"
 )
 
 # Create a LabelFrame for Status Messages

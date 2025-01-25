@@ -136,27 +136,11 @@ def generate_footer_text(counts_dict, estimation_results=None, mag_limit=None, m
 
     if mag_limit is not None:
         footer_text = (
-            "<br>The Hertzsprung-Russell (H-R) diagram is a fundamental tool in astrophysics that graphically represents the "
+            "     The Hertzsprung-Russell (H-R) diagram is a fundamental tool in astrophysics that graphically represents the "
             "relationship between a star's surface temperature and its luminosity (intrinsic brightness). The H-R diagram illustrates the life "
-            "cycles of stars. As stars age, they move to different<br>regions on the diagram, providing insights into their evolutionary stages. "
+            "cycles of stars. As stars age, they move to different<br>regions on the diagram, providing insights into their evolutionary stages.<br>"
 
-        #    f"<span style='color:red;'>{total_stars:,d}</span> 
-            f"We are plotting stars with apparent magnitude (Vmag) ≤ <span style='color:red;'>{mag_limit}</span>. " 
-        #    f"*** <span style='background-color: red; color: red'>{plottable_count:,d}</span> stars have complete data and are plotted. "
-        
-        #    f"* Initially missing values: <span style='color:red;'>{initial_missing_temp}</span> temperatures "
-        #    f"and <span style='color:red;'>{initial_missing_lum}</span> luminosities. "
-
-        #    f"* Recovered through estimation: <span style='color:red;'>{recovered_temp}</span> temperatures "
-        #    f"and <span style='color:red;'>{recovered_lum}</span> luminosities.<br>"
-
-        #    f"* Final missing values: <span style='color:red;'>{final_missing_temp}</span> temperatures "
-        #    f"and <span style='color:red;'>{final_missing_lum}</span> luminosities. "
-
-        #    f"* Data sources: Hipparcos catalog for bright stars (Vmag ≤ 1.73: <span style='color:red;'>{hip_bright_count}</span> stars), "
-        #    f"mixed Hipparcos (<span style='color:red;'>{hip_mid_count}</span> stars) and "
-        #    f"Gaia (<span style='color:red;'>{gaia_mid_count}</span> stars) for mid-range (1.73 < Vmag ≤ 4.0), "
-        #    f"and Gaia for faint stars (Vmag > 4.0: <span style='color:red;'>{gaia_faint_count}</span> stars).<br>"
+            f"     We are plotting stars with apparent magnitude (Vmag) ≤ <span style='color:red;'>{mag_limit}</span>. " 
    
             "* Star properties from <a href='https://simbad.u-strasbg.fr/simbad/'>Simbad</a>. "
             "Temperature was estimated using B-V color index, spectral type, or Gaia BP-RP color. "
@@ -167,27 +151,27 @@ def generate_footer_text(counts_dict, estimation_results=None, mag_limit=None, m
             "<a href='https://en.wikipedia.org/wiki/Stellar_classification'>Harvard classification</a> "
             "spectral types shown in colored bands. "
             
-            "<br>-- Python script by Tony Quintanilla, with assistance from ChatGPT and Claude, Updated November 2024."
+    #        "<br>-- Python script by Tony Quintanilla, with assistance from ChatGPT and Claude, Updated November 2024."
         )
 
     elif max_light_years is not None:
         footer_text = (
-            f"This H-R diagram shows {total_stars:,d} stars within {int(max_light_years)} light-years. "
-            f"Initially missing values: <span style='background-color: red; color: red'>{initial_missing_temp}</span> temperatures "
-            f"and <span style='background-color: red; color: red'>{initial_missing_lum}</span> luminosities. "
-            f"Recovered through estimation: <span style='background-color: red; color: red'>{recovered_temp}</span> temperatures "
-            f"and <span style='background-color: red; color: red'>{recovered_lum}</span> luminosities.<br>"
-            f"This H-R diagram shows up to {total_stars:,d} <a href='https://en.wikipedia.org/wiki/List_of_nearest_stars'>stars</a> within "
-            f"{int(max_light_years)} light-years of the Sun, although less may be selected. "
+
+            "     The Hertzsprung-Russell (H-R) diagram is a fundamental tool in astrophysics that graphically represents the "
+            "relationship between a star's surface temperature and its luminosity (intrinsic brightness). The H-R diagram illustrates the life "
+            "cycles of stars. As stars age, they move to different<br>regions on the diagram, providing insights into their evolutionary stages.<br>"
+
+            f"     This H-R diagram shows {total_stars:,d} <a href='https://en.wikipedia.org/wiki/List_of_nearest_stars'>stars</a> within "
+            f"<span style='background-color: red; color: red'>{int(max_light_years)}</span> light-years of the Sun. "
             "Temperature is plotted on the x-axis (decreasing to the right), "
             "and Luminosity in solar units on the y-axis. "
-            "Temperatures are calculated using B-V color indices<br>when available, "
-            "The B-V color index provides a quantitative measure of a star's color, which is directly related to its surface temperature. "
+            "Temperatures are calculated using B-V color indices when available. "
+            "The B-V color index provides<br>a quantitative measure of a star's color, which is directly related to its surface temperature. "
             "Otherwise temperature is estimated from spectral types. "
             "Star properties retrieved from the <a href='https://simbad.u-strasbg.fr/simbad/'>Simbad</a> database. "
-            "<a href='https://en.wikipedia.org/wiki/Stellar_classification'>Harvard Stellar<br>classification</a> by spectral "
-            "types L through B. Also provides information about stellar classes. "
-            "-- Python script by Tony Quintanilla, with assistance from ChatGPT and Claude, November 2024."
+            "<a href='https://en.wikipedia.org/wiki/Stellar_classification'>Harvard Stellar classification</a> by spectral "
+            "types L through B."
+    #        "-- Python script by Tony Quintanilla, with assistance from ChatGPT and Claude, November 2024."
         )
 
     else:

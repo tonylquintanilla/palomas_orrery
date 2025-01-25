@@ -557,7 +557,8 @@ note_text = (
 # Function to map celestial objects to colors
 def color_map(planet):
     colors = {
-        'Sun': 'rgb(255, 249, 240)',  # Slightly warm white to represent 6000K at the Sun's surface. The inner corona is 2M K.
+        'Sun': 'rgb(102, 187, 106)',      # chlorophyll green
+    #    'Sun': 'rgb(255, 249, 240)',  # Slightly warm white to represent 6000K at the Sun's surface. The inner corona is 2M K.
         'Mercury': 'rgb(128, 128, 128)',   # Description: Dark Gray reflecting Mercury's rocky and heavily cratered surface.
         'Venus': 'rgb(255, 255, 224)',
         'Earth': 'rgb(0, 102, 204)',
@@ -608,6 +609,7 @@ def color_map(planet):
         'Rosetta': 'white',
         'BepiColombo': 'white',
         'Oumuamua': 'rgb(218, 165, 32)',
+        '2024 PT5': 'rgb(255, 140, 0)',
         'Apophis': 'rgb(255, 140, 0)',
         'Vesta': 'rgb(240, 128, 128)',
         'Bennu': 'rgb(255, 255, 224)',
@@ -659,6 +661,15 @@ INFO = {
         'but approximately 28.545° to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4°). '
         'The Moon\'s orbital parameters are not fixed but vary significantly over time due to precession of the nodes, ' 
         'perturbations from the Sun\'s gravity, Earth\'s non-spherical shape, and other gravitational influences.',
+        '2024 PT5': 'In late September 2024, Earth temporarily captured a small asteroid into its orbit, leading to it being ' 
+        'dubbed Earth\'s "second moon". The object\'s official designation is 2024 PT5, but it was also referred to as a ' 
+        '"mini-moon" due to its small size. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
+        'small compared to our permanent Moon.\n* Origin: It belongs to the Arjuna asteroid belt, a group of asteroids that ' 
+        'share similar orbits with Earth.\n* Temporary Capture: 2024 PT5 was only temporarily captured by Earth\'s gravity. ' 
+        'It entered our orbit on September 29, 2024, and is expected to depart on November 25, 2024.\n* Visibility: Due to its ' 
+        'small size, it\'s not visible to the naked eye and requires powerful telescopes to be observed.\n* While 2024 PT5 is ' 
+        'not a permanent addition to our celestial neighborhood, its temporary presence provided scientists with a valuable ' 
+        'opportunity to study near-Earth objects and learn more about the dynamics of our solar system.',
         'Mars': 'Known as the Red Planet, fourth planet from the Sun.',
         'Phobos': 'The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
         'Deimos': 'The smaller and more distant moon of Mars, with a stable orbit.',
