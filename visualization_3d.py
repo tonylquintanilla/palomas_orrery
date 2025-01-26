@@ -580,7 +580,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                 f"<a href='http://www.messier.seds.org/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>SEDS Messier Catalog</a>.<br>"
             #    f"Data quality: <span style='color:red'>{analysis['missing_temp']:,d}</span> stars lack temperature data, "
             #    f"<span style='color:red'>{analysis['missing_lum']:,d}</span> lack luminosity data. "
-                f"Star and Messier object properties from <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> database. "
+                f"Star properties from <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> database. "
                 f"Star marker size is inversely proportional to apparent magnitude, where lower apparent magnitudes are brighter. "
                 f"Star color indicates temperature based on black-body radiation (scale: 1,300K to 50,000K).<br>"
                 f"The Sun is shown in chlorophyll green (source of life's energy!) at the origin of the plot (0, 0, 0). "
