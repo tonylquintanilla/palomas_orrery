@@ -28,6 +28,18 @@ from constants import (
     note_text,
     INFO,
     hover_text_sun_and_corona,
+    gravitational_influence_info,
+    outer_oort_info,
+    inner_oort_info,
+    inner_limit_oort_info,
+    solar_wind_info,
+    termination_shock_info,
+    outer_corona_info,
+    inner_corona_info,
+    chromosphere_info,
+    photosphere_info,
+    radiative_zone_info,
+    core_info,
 )
 
 from visualization_utils import format_hover_text, add_hover_toggle_buttons
@@ -141,6 +153,66 @@ TERMINATION_SHOCK_AU = 94       # Termination shock where the solar wind slows t
 HELIOPAUSE_RADII = 26449         # Outer boundary of the solar wind and solar system, about 123 AU. 
 PARKER_CLOSEST_RADII = 8.2    # Parker's closest approach was 3.8 million miles on 12-24-24 at 6:53 AM EST (0.41 AU, 8.2 solar radii)
     
+def add_url_buttons(fig, objects_to_plot, selected_objects):
+    """
+    Add URL buttons for missions and celestial objects in solar system visualizations.
+    
+    Parameters:
+        fig: plotly figure object
+        objects_to_plot: full list of available objects
+        selected_objects: list of currently selected object names
+        
+    Returns:
+        plotly.graph_objects.Figure: The modified figure with URL buttons added
+    """
+    # Collect objects with URLs that are currently selected
+    url_objects = []
+    for obj in objects_to_plot:
+        if obj['var'].get() == 1 and obj.get('mission_url'):  
+            url_objects.append({
+                'name': obj['name'],
+                'url': obj['mission_url']
+            })
+    
+    # Remove duplicates while preserving order
+    seen = set()
+    url_objects = [x for x in url_objects if x['name'] not in seen and not seen.add(x['name'])]
+    
+    if not url_objects:
+        return fig
+
+    # Get existing annotations and create new list
+    annotations = list(fig.layout.annotations) if fig.layout.annotations else []
+
+    # Position URL buttons after "Data source" and "Search" links
+    start_x = 0  # Starting position after existing links
+
+    # Add URL buttons while preserving existing annotations
+    for idx, obj in enumerate(url_objects):
+        button_x = start_x + (idx * 0.15)
+        
+        annotations.append(dict(
+            text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF;'>{obj['name']}</a>",
+            xref='paper',
+            yref='paper',
+            x=button_x,
+            y=0,  
+            showarrow=False,
+            font=dict(size=12, color='#1E90FF'),
+            align='left',
+            bgcolor='rgba(255, 255, 255, 0.1)',
+            bordercolor='#1E90FF',
+            borderwidth=1,
+            borderpad=4,
+            xanchor='left',
+            yanchor='middle'
+        ))
+
+    # Update layout with new annotations using update_layout
+    fig.update_layout(annotations=annotations)
+    
+    return fig
+
 def create_sun_visualization(fig, animate=False, frames=None):
     """
     Creates a visualization of the Sun's layers including photosphere, inner corona, and outer corona.
@@ -164,22 +236,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         
         # 0.2. Sun's Gravitational Influence
         x, y, z = create_corona_sphere(GRAVITATIONAL_INFLUENCE_AU)
-
-        # Define the text string once
-        gravitational_influence_info = (
-            "The Solar System\'s extent is actually defined in multiple ways. The Heliopause (120-123 AU):<br>" 
-            "Where the solar wind meets interstellar space. Gravitational influence: Extends much further, including,<br>" 
-            "Sedna\'s orbit (936 AU), The Hills Cloud/Inner Oort Cloud (2,000-20,000 AU), The Outer Oort Cloud (20,000-100,000 AU).<br>"
-            "The Sun's gravitational influence extends to about 2 light-years (~126,000 AU). While the Heliopause marks<br>" 
-            "where the Sun\'s particle influence ends, its gravitational influence extends much further. Sedna and other<br>" 
-            "distant objects remain gravitationally bound to the Sun despite being well beyond the Heliopause. This is<br>" 
-            "why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part of our Solar System,<br>" 
-            "even though we've never directly observed the Oort Cloud. The distinction comes down to different types of influence:<br>" 
-            "Particle/plasma influence (solar wind) → ends at Heliopause; gravitational influence → extends much further,<br>" 
-            "including Sedna and the theoretical Oort Cloud. So the Solar System is generally considered to extend at least<br>" 
-            "as far as these gravitationally bound objects, even beyond the Heliopause. Sedna is one of our first glimpses<br>" 
-            "into this very distant region that may connect to the Oort Cloud population."
-        )
 
         # Create a text list matching the number of points
         text_array_gravitational_influence = [gravitational_influence_info for _ in range(len(x))]
@@ -224,19 +280,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 0.3. Outer Oort Cloud
         x, y, z = create_corona_sphere(OUTER_OORT_CLOUD_AU)
 
-        # Define the text string once
-        outer_oort_info = (
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
-            "periods exceeding 200 years.<br><br>" 
-            "Oort Cloud's Outer Edge: At 100,000 AU, it's about 1.58 light-years from the Sun, placing it just<br>" 
-            "beyond the nearest star systems and marking the boundary between the Solar System and interstellar space.<br>" 
-            "The primary source of long-period comets. Objects here are more loosely bound and more susceptible to<br>" 
-            "external gravitational perturbations."
-        )
-
         # Create a text list matching the number of points
         text_array_outer_oort = [outer_oort_info for _ in range(len(x))]
         customdata_array_outer_oort = ["Outer Oort Cloud" for _ in range(len(x))]
@@ -278,18 +321,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # 0.4. Inner Oort Cloud
         x, y, z = create_corona_sphere(INNER_OORT_CLOUD_AU)
-
-        # Define the text string once
-        inner_oort_info = (
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
-            "periods exceeding 200 years.<br><br>" 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
-            "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
-        )
 
         # Create a text list matching the number of points
         text_array_inner_oort = [inner_oort_info for _ in range(len(x))]
@@ -333,18 +364,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 0.45. Inner Limit of Inner Oort Cloud
         x, y, z = create_corona_sphere(INNER_LIMIT_OORT_CLOUD_AU)
 
-        # Define the text string once
-        inner_limit_oort_info = (
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
-            "periods exceeding 200 years.<br><br>" 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
-            "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
-        )
-
         # Create a text list matching the number of points
         text_array_inner_limit_oort = [inner_limit_oort_info for _ in range(len(x))]
         customdata_array_inner_limit_oort = ["Inner Limit of Oort Cloud" for _ in range(len(x))]
@@ -386,19 +405,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # 0.5. Solar Wind and Heliopause Sphere
         x, y, z = create_corona_sphere(HELIOPAUSE_RADII * SOLAR_RADIUS_AU)
-
-        # Define the text string once
-        solar_wind_info = (
-            "Solar Wind (Heliosheath extends from ~120 to 150 AU at the Heliopause)<br>"
-            "Temperature: ~1,000,000K on average<br>"
-            "Black body radiation at 2.897 nm falls within the X-ray region of the<br>" 
-            "electromagnetic spectrum, which is invisible to the human eye.<br>"
-            "Stream of charged particles (plasma) ejected from the upper atmosphere of the Sun.<br>"
-            "At the Heliopause the speed of the solar wind stops due to interaction with the<br>"
-            "interstellar medium. Voyager 1 encountered the Heliopause at ~123 AU. This is<br>"
-            "considered the end of the Sun's influence and the start of interstellar space.<br>"
-            "This region is turbulent and variable, and speeds slow to ~100 km/s at the Heliopause."
-        )
 
         # Create a text list matching the number of points
         text_array_solar_wind = [solar_wind_info for _ in range(len(x))]
@@ -443,19 +449,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 0.7. Solar Wind and Termination Shock Sphere
         x, y, z = create_corona_sphere(TERMINATION_SHOCK_AU)
 
-        # Define the text string once
-        termination_shock_info = (
-            "Solar Wind Termination Shock (extends to from ~75 to 100 AU)<br>"
-            "Temperature: from ~100,000 to 400,000K before the shock to ~1M K after it.<br>"
-            "Black body radiation at 11.59 nm, extreme ultraviolet,<br>" 
-            "which is invisible or at the edge of visibility.<br>"
-            "The Termination Shock is the region where the solar wind slows down from<br>"
-            "supersonic to subsonic speeds due to interaction with the interstellar<br>"
-            "medium. The kinetic energy transfers into heat, increasing abruptly.<br>"
-            "Voyager 1 encountered the Termination Shock at 94 AU, while Voyager 2 at 84 AU.<br>"
-            "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
-        )
-
         # Create a text list matching the number of points
         text_array_termination_shock = [termination_shock_info for _ in range(len(x))]
         customdata_array_termination_shock = ["Solar Wind Termination Shock" for _ in range(len(x))]
@@ -499,21 +492,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 1. Outer Corona Sphere (most expansive, very diffuse)
         x, y, z = create_corona_sphere(OUTER_CORONA_RADII * SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        outer_corona_info = (
-            "Solar Outer Corona (extends to 50 solar radii or more, ~0.2 AU)<br>"
-            "It is the most tenuous and expansive layer of the solar atmosphere<br>"
-            "Temperature: ~2-3M K, or an average of 2.5M K<br>" 
-            "It radiates at an average wavelength of 1.159 nm, which falls within the<br>" 
-            "extreme ultraviolet to X-ray regions of the electromagnetic spectrum.<br>"
-            "The solar Corona generates the solar wind, a stream of electrons, protons, and Helium<br>"
-            "travelling at supersonic speeds between 300 and 800 km/s, and temperatures to 2M K."
-
-        )
-
         # Create a text list matching the number of points
         text_array_outer_corona = [outer_corona_info for _ in range(len(x))]
-        customdata_array_outer_corona = ["Outer Corona" for _ in range(len(x))]
+        customdata_array_outer_corona = ["Sun: Outer Corona" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -524,7 +505,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(25, 25, 112)',  # approximate visualization
                     opacity=0.3
                 ),
-                name='Outer Corona',
+                name='Sun: Outer Corona',
                 text=text_array_outer_corona,            # Replicated text
                 customdata=customdata_array_outer_corona, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -543,7 +524,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.3
                 ),
-                name='Outer Corona',
+                name='Sun: Outer Corona',
                 text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
         #        hoverinfo='text',
                 hovertemplate='%{text}<extra></extra>',
@@ -554,19 +535,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 2. Inner Corona Sphere
         x, y, z = create_corona_sphere(INNER_CORONA_RADII * SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        inner_corona_info = (
-            "Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)<br>"
-            "Region of intense heating and complex magnetic activity"
-            "Temperature: 1-2M K, or an average of about 1.5M K<br>"
-            "It radiates at an average wavelenght of 1.93 nm, which falls within<br>" 
-            "the extreme ultraviolet to soft X-ray regions of the electromagnetic spectrum."
-            
-        )
-
         # Create a text list matching the number of points
         text_array_inner_corona = [inner_corona_info for _ in range(len(x))]
-        customdata_array_inner_corona = ["Inner Corona" for _ in range(len(x))]
+        customdata_array_inner_corona = ["Sun: Inner Corona" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -577,7 +548,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(0, 0, 255)',  # Warmer tint
                     opacity=0.09
                 ),
-                name='Inner Corona',
+                name='Sun: Inner Corona',
                 text=text_array_inner_corona,            # Replicated text
                 customdata=customdata_array_inner_corona, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -596,7 +567,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.09
                 ),
-                name='Inner Corona Shell',
+                name='Sun: Inner Corona',
                 text=['Solar Inner Corona (extends to 2-3 solar radii)'],
                 hoverinfo='text',
                 showlegend=False
@@ -606,19 +577,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 2.5. Chromosphere
         x, y, z = create_corona_sphere(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        chromosphere_info = (
-            "Chromosphere<br>"
-            "Channels energy into the corona through a radiative process<br>"
-            "Site of Spicules, solar flares, and prominences"
-            "Radius: from Photosphere to 1.5 Solar radii or ~0.00465 - 0.0070 AU<br>"
-            "Temperature: ~6,000 to 20,000 K, for a average of 10,000 K<br>"
-            "Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible.<br>"
-        )
-
         # Create a text list matching the number of points
         text_array_chromosphere = [chromosphere_info for _ in range(len(x))]
-        customdata_array_chromosphere = ["Chromosphere" for _ in range(len(x))]
+        customdata_array_chromosphere = ["Sun: Chromosphere" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -629,7 +590,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(30, 144, 255)',  # approximate visible
                     opacity=0.10
                 ),
-                name='Chromosphere',
+                name='Sun: Chromosphere',
                 text=text_array_chromosphere,            # Replicated text
                 customdata=customdata_array_chromosphere, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -648,7 +609,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.10
                 ),
-                name='Chromosphere Shell',
+                name='Sun: Chromosphere',
                 text=['Solar Chromosphere (surface temperature ~6,000 to 20,000 K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -658,23 +619,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 3. Convective Zone and Photoshere Sphere
         x, y, z = create_corona_sphere(SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        photosphere_info = (
-            "Solar Convective Zone and Photosphere (visible surface)<br>"
-            "Radius: from 0.7 to 1 Solar radius, or ~0.00465 AU<br>"
-            "Temperature: from 2M K at the Radiative Zone to ~5,500K at the Photosphere<br>"
-            "Convection transports energy to the visible \"surface\" of the Sun.<br>"
-            "The convection process starts at the Radiative Zone<br>"
-            "It is noted by granulation patterns and magnetic field generation<br>"
-            "At the Photosphere, the energy is radiated as visible light<br>"
-            "Radiation emits at a peak wavelength at 527.32 nm, which is in the green spectrum.<br>" 
-            "The Sun's emitted light is a combination of all visible wavelengths, resulting in a<br>" 
-            "yellowish-white color. The Photosphere is noted by sunspots, faculae, and solar granules."
-        )
-
         # Create a text list matching the number of points
         text_array_photosphere = [photosphere_info for _ in range(len(x))]
-        customdata_array_photosphere = ["Photosphere" for _ in range(len(x))]
+        customdata_array_photosphere = ["Sun: Photosphere" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -685,7 +632,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(255, 244, 214)',  # Yellow approximates the visible color
                     opacity=1.0
                 ),
-                name='Convective Zone and Photosphere',
+                name='Sun: Photosphere',
                 text=text_array_photosphere,            # Replicated text
                 customdata=customdata_array_photosphere, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -704,7 +651,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Photosphere',
+                name='Sun: Photosphere',
                 text=['Solar Photosphere (surface temperature ~6,000K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -714,17 +661,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 4. Radiative Zone
         x, y, z = create_corona_sphere(RADIATIVE_ZONE_AU)
 
-        # Define the text string once
-        radiative_zone_info = (
-            "Solar Radiative Zone (extends from about 0.2 to 0.7 solar radii, ~0.00325 AU)<br>"
-            "Temperature: ranges from about 7M K near the core to about 2M K near the convective zone<br>"
-            "A region where energy moves from the core to the convective zone, taking 170,000 years<br>"
-            "Energy is transported by radiative diffusion, through photon absorption and re-emission"
-        )
-
         # Create a text list matching the number of points
         text_array_radiative_zone = [radiative_zone_info for _ in range(len(x))]
-        customdata_array_radiative_zone = ["Radiative Zone" for _ in range(len(x))]
+        customdata_array_radiative_zone = ["Sun: Radiative Zone" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -735,7 +674,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(30, 144, 255)',  # arbitrary color for contrast
                     opacity=1.0
                 ),
-                name='Radiative Zone',
+                name='Sun: Radiative Zone',
                 text=text_array_radiative_zone,            # Replicated text
                 customdata=customdata_array_radiative_zone, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -754,7 +693,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Radiative Zone Shell',
+                name='Sun: Radiative Zone',
                 text=['Solar Radiative Zone (extends to 0.2 to 0.7 solar radii)'],
                 hoverinfo='text',
                 showlegend=False
@@ -764,21 +703,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 5. Core
         x, y, z = create_corona_sphere(CORE_AU)
 
-        # Define the text string once
-        core_info = (
-            "Solar Core<br>"
-            "Radius: ~0.00093 AU or about 0.2 Solar radii<br>"
-            "Temperature: ~15M K<br>"
-            "Nuclear fusion and energy generation<br>"
-            "Energy is transported by radiative diffusion<br>"
-            "Site of proton-proton chain reactions<br>"
-            "The Sun is currently mostly (98 to 99 percent) fusing hydrogen into helium<br>"
-            "1 to 2 percent of the energy is produced by the Carbon-Nitrogen-Oxygen Cycle"
-        )
-
         # Create a text list matching the number of points
         text_array_core = [core_info for _ in range(len(x))]
-        customdata_array_core = ["Core" for _ in range(len(x))]
+        customdata_array_core = ["Sun: Core" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -789,7 +716,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(70, 130, 180)',  
                     opacity=1.0
                 ),
-                name='Core',
+                name='Sun: Core',
                 text=text_array_core,            # Replicated text
                 customdata=customdata_array_core, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -808,7 +735,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Core Shell',
+                name='Sun: Core',
                 text=['Solar Core (temperature ~15M K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -938,7 +865,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             )
 
 # Function to fetch the position of a celestial object for a specific date
-def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None):
+def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None):  
     try:
         # Convert date to Julian Date
         times = Time([date_obj])
@@ -1131,8 +1058,6 @@ def plot_objects():
             # Use show_figure_safely to handle both display and save options
             show_figure_safely(fig, default_name)
             
-        #    output_label.config(text="Plotting complete.")
-        #    progress_bar.stop()
             output_label.config(text="Fetching data, please wait...")
             progress_bar.start(10)  # Start the progress bar with a slight delay
             root.update_idletasks()  # Force GUI to update
@@ -1392,7 +1317,7 @@ def plot_objects():
                         xref='paper',
                         yref='paper',
                         x=0,
-                        y=0,
+                        y=0.35,
                         showarrow=False,
                         font=dict(size=12, color='white'),
                         align='left',
@@ -1404,7 +1329,7 @@ def plot_objects():
                         xref='paper',
                         yref='paper',
                         x=0,
-                        y=-0.05,
+                        y=0.3,
                         showarrow=False,
                         font=dict(size=12, color='white'),
                         align='left',
@@ -1433,6 +1358,9 @@ def plot_objects():
 
             # 6. Plot idealized orbits using your new logic
             plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # using this logic for animate_objects only
+
+            # Add URL buttons before showing/saving
+            fig = add_url_buttons(fig, objects, selected_objects)
 
             # Generate default name with timestamp
             current_date = datetime.now()
@@ -1934,6 +1862,9 @@ def animate_objects(step, label):
 
             plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # duplicate set of ideal orbit traces
 
+            # Add URL buttons before showing/saving
+        #    fig = add_url_buttons(fig, objects, selected_objects)
+
             # Update layout with dynamic scaling
             fig.update_layout(
                 scene=dict(
@@ -1964,12 +1895,13 @@ def animate_objects(step, label):
                     yanchor='top'
                 ),
                 annotations=[
+
                     dict(
-                        text="Data source: <a href='https://ssd.jpl.nasa.gov/horizons/app.html#/' target='_blank'>JPL Horizons</a>",
+                        text="Search: <a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
                         xref='paper',
                         yref='paper',
                         x=0,
-                        y=0,
+                        y=0.35,
                         showarrow=False,
                         font=dict(size=12, color='white'),
                         align='left',
@@ -1977,11 +1909,11 @@ def animate_objects(step, label):
                         yanchor='top'
                     ),
                     dict(
-                        text="Search: <a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
+                        text="Data source: <a href='https://ssd.jpl.nasa.gov/horizons/app.html#/' target='_blank'>JPL Horizons</a>",
                         xref='paper',
                         yref='paper',
-                        x=0.2,
-                        y=0,
+                        x=0,
+                        y=0.3,
                         showarrow=False,
                         font=dict(size=12, color='white'),
                         align='left',
@@ -2045,6 +1977,9 @@ def animate_objects(step, label):
 
             # Add hover toggle buttons
             fig = add_hover_toggle_buttons(fig)
+
+            # Add URL buttons before showing/saving
+            fig = add_url_buttons(fig, objects, selected_objects)            
 
             # Generate default name with timestamp
             current_date = datetime.now()
@@ -2371,6 +2306,7 @@ parker_solar_probe_var = tk.IntVar(value=0)
 jwst_var = tk.IntVar(value=0)
 rosetta_var = tk.IntVar(value=0)
 bepicolombo_var = tk.IntVar(value=0)
+akatsuki_var = tk.IntVar(value=0)
 comet_ikeya_seki_var = tk.IntVar(value=0)
 comet_west_var = tk.IntVar(value=0)
 comet_halley_var = tk.IntVar(value=0)
@@ -2396,7 +2332,6 @@ change_var = tk.IntVar(value=0)
 perse_var = tk.IntVar(value=0)
 dart_var = tk.IntVar(value=0)
 lucy_var = tk.IntVar(value=0)
-dysnomia_var = tk.IntVar(value=0)
 nix_var = tk.IntVar(value=0)
 kbo_var = tk.IntVar(value=0)
 gaia_var = tk.IntVar(value=0)
@@ -2446,6 +2381,9 @@ triton_var = tk.IntVar(value=0)
 
 # Pluto's Moon
 charon_var = tk.IntVar(value=0)
+
+# Eris's Moon
+dysnomia_var = tk.IntVar(value=0)
 
 # Proxima Centauri variable
 proxima_var = tk.IntVar(value=0)  
@@ -2536,6 +2474,7 @@ create_celestial_checkbutton("- Hydra", hydra_var)
 create_celestial_checkbutton("Haumea", haumea_var)
 create_celestial_checkbutton("Makemake", makemake_var)
 create_celestial_checkbutton("Eris", eris_var)
+create_celestial_checkbutton("- Dysnomia", dysnomia_var)
 
 # LabelFrame for Kuiper Belt Objects
 kbo_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Kuiper Belt Objects (KBOs)")
@@ -2552,8 +2491,6 @@ create_celestial_checkbutton("GV9", gv9_var)
 create_celestial_checkbutton("MS4", ms4_var)
 create_celestial_checkbutton("OR10", or10_var)
 
-# create_celestial_checkbutton("NAME Proxima Centauri", proxima_var)
-
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
 mission_frame.pack(pady=(10, 5), fill='x')
@@ -2566,29 +2503,30 @@ def create_mission_checkbutton(name, variable, dates):
     if 'mission_url' in INFO:
         tooltip_text += f"\nMore Info: {INFO['mission_url']}"
     CreateToolTip(checkbutton, tooltip_text)
-
-create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-03 to 2003-01-23)")
-create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-06 to 1995-09-30)")
-create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-20 to present)")
-create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-05 to present)")
+# Start dates are the day after launch to avoid missing Horizons data.
+create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2003-01-23)")
+create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
+create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-21 to present)")
+create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-06 to present)")
 # create_mission_checkbutton("Voyager 1 to heliopause", voyager1h_var, "(1977-09-05 to 2012-08-25)")
-create_mission_checkbutton("Galileo", galileo_var, "(1989-10-18 to 2003-09-21)")
-create_mission_checkbutton("Cassini-Huygens", cassini_var, "(1997-10-15 to 2017-09-15)")
-create_mission_checkbutton("SOHO: Solar and Heliospheric Observatory", soho_var, "(1995-12-2 to present)")
-create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-02 to 2016-09-30)")
-create_mission_checkbutton("New Horizons", new_horizons_var, "(2006-01-19 to present)")
-create_mission_checkbutton("Chang'e", change_var, "(2007-10-24 to present)")
-create_mission_checkbutton("Juno", juno_var, "(2011-08-05 to present)")
-create_mission_checkbutton("Gaia", gaia_var, "(2013-12-19 to 2025-12-31)")
-create_mission_checkbutton("Hayabusa2", hayabusa2_var, "(2014-12-03 to 2020-12-05)")
-create_mission_checkbutton("OSIRIS-REx", osiris_rex_var, "(2016-09-08 to 2023-09-24)")
-create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-12 to present)")
-create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-20 to 2025-12-31)")
-create_mission_checkbutton("Perseverance Rover", perse_var, "(2020-07-30 to present)")
-create_mission_checkbutton("Lucy Mission", lucy_var, "(2021-10-17 to 2033-05-01)")
-create_mission_checkbutton("DART Mission", dart_var, "(2021-11-25 to 2022-09-25)")
-create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-25 to present)")
-create_mission_checkbutton("Europa Clipper", europa_clipper_var, "(2024-10-14 to April 2030)")
+create_mission_checkbutton("Galileo", galileo_var, "(1989-10-19 to 2003-09-21)")
+create_mission_checkbutton("Cassini-Huygens", cassini_var, "(1997-10-16 to 2017-09-15)")
+create_mission_checkbutton("SOHO: Solar and Heliospheric Observatory", soho_var, "(1995-12-3 to present)")
+create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-03 to 2016-09-30)")
+create_mission_checkbutton("New Horizons", new_horizons_var, "(2006-01-20 to present)")
+create_mission_checkbutton("Chang'e", change_var, "(2007-10-25 to present)")
+create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to present)")
+create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to present)")
+create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-12-31)")
+create_mission_checkbutton("Hayabusa2", hayabusa2_var, "(2014-12-04 to 2020-12-05)")
+create_mission_checkbutton("OSIRIS-REx", osiris_rex_var, "(2016-09-09 to 2023-09-24)")
+create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to present)")
+create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2025-12-31)")
+create_mission_checkbutton("Perseverance Rover", perse_var, "(2020-07-31 to present)")
+create_mission_checkbutton("Lucy Mission", lucy_var, "(2021-10-18 to 2033-05-01)")
+create_mission_checkbutton("DART Mission", dart_var, "(2021-11-26 to 2022-09-25)")
+create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to present)")
+create_mission_checkbutton("Europa Clipper", europa_clipper_var, "(2024-10-15 to April 2030)")
 
 # Checkbuttons for comets
 comet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Comets and Interstellar Objects")
@@ -2679,7 +2617,7 @@ center_label = tk.Label(controls_frame, text="Select Center Object for Your Plot
 center_label.pack(anchor='w')
 
 center_object_var = tk.StringVar(value='Sun')
-center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto']
+center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris']
 center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
 center_menu.pack(anchor='w')
 
@@ -2811,6 +2749,7 @@ plot_button = tk.Button(
     font=BUTTON_FONT
 )
 plot_button.grid(row=5, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
+CreateToolTip(plot_button, "3D plot of stars within the selected distance from the Sun.")
 
 # Create a Frame for the stellar scale options
 stellar_scale_frame = tk.LabelFrame(controls_frame, text="Scale Options for Apparent Magnitude 3D Plots")
@@ -2828,13 +2767,7 @@ CreateToolTip(stellar_auto_scale, "Automatically adjust scale based on the data 
 stellar_manual_scale = tk.Radiobutton(stellar_scale_frame, text="Or Manually Enter Scale of Your Plot in Light-Years:", 
                                      variable=stellar_scale_var, value='Manual')
 stellar_manual_scale.pack(anchor='w')
-CreateToolTip(stellar_manual_scale, "Set a custom scale for your 3D plot. This will set the range from +/- in light-years on all axes. "
-              "Note that selecting the scale only changes the range of your plot, not the objects fetched, the object menu, or the "
-              "plotting statistics in the footer. The automatic scale will plot all objects to the selected apparent magnitude " 
-              "with a generous margin. Reducing the scale plotted allows you to visualize the plot with more resolution. " 
-              "The plot will always be centered regardless of scale, so the range of the axes gets reduced. "
-              "+/- 1400 light-years is set as the default manual scale to include all Messier objects at apparent magnitude of 4. " 
-              "The automatic scaling is +/- 30,382.4 light-years at apparent magnitude of 4.")
+CreateToolTip(stellar_manual_scale, "The range of the axes gets reduced to your input, so visible objects beyond that range will not display. ")
 
 # Frame for scale entry
 stellar_entry_frame = tk.Frame(stellar_scale_frame)
@@ -2902,31 +2835,7 @@ plot_button = tk.Button(
     font=BUTTON_FONT
 )
 plot_button.grid(row=8, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
-CreateToolTip(
-    plot_button,
-    "*** THIS BUTTON WILL TAKE ABOUT HALF A MINUTE TO LOAD FOR MAGNITUDE 4 ***\n"
-    "*** AND ABOUT A MINUTE AND A HALF TO LOAD FOR MAGNITUDE 9! ***\n"
-    "*** BECAUSE OF THE LARGE NUMBER OF STARS BEING FETCHED ***\n\n" 
-    "This button plots stars that are visible to the naked eye up to the maximum apparent magnitude (Vmag) of 9 under ideal conditions in space.\n\n" 
-    "The visibility of stars based on apparent magnitude is influenced by light pollution, atmospheric quality, and observer eyesight.\n" 
-    "Here's a list of approximate visibility limits for typical conditions:\n"
-    "* In space, like the International Space Station, without light or pollution and with perfect eye sight, it may be possible to see "
-    "to Vmag 8.5 or possibly even approach Vmag 9!" 
-    "* In those rare places with perfect visibility like the Namibian desert or the Atacama desert in Chile, with perfect vision " 
-    "vibility may reach Vmag 6.7 to 7.5, possibly even 8! (Bortle scale 1-2) " 
-    "Astronomer Brian Skiff is reportedly able to see to magnitude 8.5! However, there is no verified case of anyone seeing Neptune " 
-    "at magnitude 7.7, although theoretically possible if you can find it among miriad background stars!\n"
-    "* Under the best conditions with no light pollution, clear skies, and excellent atmospheric transparency, a person with 20/20 " 
-    "vision can see stars up to a Vmag of about 6.5 (Bortle scale 3-4).\n" 
-    "* In very dark locations, such as rural areas with minimal light pollution, stars up to magnitude 5 or 6 can be visible. (Bortle scale 5-6) " 
-    "The Milky Way and faint nebulae are prominent. If you know where to look, you might see Uranus at magnitude about 5.5!\n" 
-    "* In suburban areas, light pollution starts to become a major factor. Stars up to a magnitude of about 5 to 5.5 can be seen.\n" 
-    "* In most urban areas, light pollution severely limits visibility. Only stars up to magnitude 4 may are visible. (Bortle scale 7-8)\n" 
-    "* In very dense urban areas with light pollution, like Chicago, visibility is likely limited to magnitude 2 to 3 so on a clear night. (Bortle scale 9)\n"
-    "* In densely populated cities with intense light pollution or haze, visibility is limited to 2 or less. Only the brightest stars " 
-    "are visible. Sirius is the brightest star at -1.44 -- the lower limit for our plot!\n"
-    "The planets are usually visible: Mercury is about magnitude -2.5, Venus about -4.5, Mars about -3, Jupiter about -3, and Saturn about -0.5." 
-)
+CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
 
 # Function to call the hr_diagram script with user input
 def call_hr_diagram_distance_script_with_input():
@@ -2956,6 +2865,7 @@ plot_button = tk.Button(
     font=BUTTON_FONT
 )
 plot_button.grid(row=6, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
+CreateToolTip(plot_button, "2D Hertzprung-Russell plot of stars within the selected distance from the Sun.")
 
 # Create an Entry widget for the user to input the maximum apparent magnitude
 mag_entry_label = tk.Label(plot_buttons_frame, text="Enter maximum apparent magnitude (-1.44 to 9):")
@@ -2994,31 +2904,7 @@ plot_button = tk.Button(
     font=BUTTON_FONT
 )
 plot_button.grid(row=9, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
-CreateToolTip(
-    plot_button, 
-    "*** THIS BUTTON WILL TAKE ABOUT HALF A MINUTE TO LOAD FOR MAGNITUDE 4 ***\n"
-    "*** AND ABOUT A MINUTE AND A HALF TO LOAD FOR MAGNITUDE 9! ***\n"
-    "*** BECAUSE OF THE LARGE NUMBER OF STARS BEING FETCHED ***\n\n" 
-    "This button plots stars that are visible to the naked eye up to the maximum apparent magnitude (Vmag) of 9 under ideal conditions in space.\n\n" 
-    "The visibility of stars based on apparent magnitude is influenced by light pollution, atmospheric quality, and observer eyesight.\n" 
-    "Here's a list of approximate visibility limits for typical conditions:\n"
-    "* In space, like the International Space Station, without light or pollution and with perfect eye sight, it may be possible to see "
-    "to Vmag 8.5 or possibly even approach Vmag 9!" 
-    "* In those rare places with perfect visibility like the Namibian desert or the Atacama desert in Chile, with perfect vision " 
-    "vibility may reach Vmag 6.7 to 7.5, possibly even 8! (Bortle scale 1-2) " 
-    "Astronomer Brian Skiff is reportedly able to see to magnitude 8.5! However, there is no verified case of anyone seeing Neptune " 
-    "at magnitude 7.7, although theoretically possible if you can find it among miriad background stars!\n"
-    "* Under the best conditions with no light pollution, clear skies, and excellent atmospheric transparency, a person with 20/20 " 
-    "vision can see stars up to a Vmag of about 6.5 (Bortle scale 3-4).\n" 
-    "* In very dark locations, such as rural areas with minimal light pollution, stars up to magnitude 5 or 6 can be visible. (Bortle scale 5-6) " 
-    "The Milky Way and faint nebulae are prominent. If you know where to look, you might see Uranus at magnitude about 5.5!\n" 
-    "* In suburban areas, light pollution starts to become a major factor. Stars up to a magnitude of about 5 to 5.5 can be seen.\n" 
-    "* In most urban areas, light pollution severely limits visibility. Only stars up to magnitude 4 may are visible. (Bortle scale 7-8)\n" 
-    "* In very dense urban areas with light pollution, like Chicago, visibility is likely limited to magnitude 2 to 3 so on a clear night. (Bortle scale 9)\n"
-    "* In densely populated cities with intense light pollution or haze, visibility is limited to 2 or less. Only the brightest stars " 
-    "are visible. Sirius is the brightest star at -1.44 -- the lower limit for our plot!\n"
-    "The planets are usually visible: Mercury is about magnitude -2.5, Venus about -4.5, Mars about -3, Jupiter about -3, and Saturn about -0.5." 
-)
+CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
 
 # Create a LabelFrame for Status Messages
 status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status for Solar Object Plotting", padx=10, pady=10, bg='SystemButtonFace', fg='black')
@@ -3079,7 +2965,7 @@ objects = [
     {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody', 'mission_info': 'Earth orbital period: 27.32 days.'},
     {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Ceres', 'id': 'ceres', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
     {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
@@ -3089,7 +2975,7 @@ objects = [
     {'name': 'Pluto', 'id': '999', 'var': pluto_var, 'color': color_map('Pluto'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Haumea', 'id': '136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
     {'name': 'Makemake', 'id': '136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
-    {'name': 'Eris', 'id': '136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
+    {'name': 'Eris', 'id': '20136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
 
     # Kuiper Belt Objects
     {'name': 'Quaoar', 'id': '50000', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'A large Kuiper Belt object with a ring system.', 'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
@@ -3124,6 +3010,8 @@ objects = [
      'start_date': datetime(2006, 1, 20, 19, 0), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
     {'name': 'Chang\'e', 'id': 'Chang\'e', 'var': change_var, 'color': color_map('Chang\'e'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
      'start_date': datetime(2007, 10, 25), 'end_date': datetime(2025, 1, 1), 'mission_info': 'China\'s lunar exploration program.', 'mission_url': 'http://www.clep.org.cn/'},
+    {'name': 'Akatsuki', 'id': 'Akatsuki', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
+     'start_date': datetime(2010, 5, 21), 'end_date': datetime(2025, 1, 28), 'mission_info': 'JAXA mission to study the atmospheric circulation of Venus', 'mission_url': ''},
     {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
      'start_date': datetime(2011, 8, 6, 16, 25), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 'mission_info': 'Juno studies Jupiter\'s atmosphere and magnetosphere.'},
     {'name': 'Gaia', 'id': 'Gaia', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
@@ -3180,7 +3068,7 @@ objects = [
     # Asteroids
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'is_mission': False,
     'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 1), 'end_date': datetime(2025, 1, 1), 'mission_info': 'A newly discovered small body from 2024.',
-    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/des/2024%20PT5'},
+    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
     {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_comet': False, 'id_type': 'smallbody',
      'start_date': datetime(2004, 6, 19), 'end_date': datetime(2036, 1, 1), 'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
     {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'is_mission': False, 'id_type': 'smallbody',
@@ -3234,9 +3122,22 @@ objects = [
     {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
     'mission_info': 'Another of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/hydra/overview/'},
 
+    {
+    'name': 'Dysnomia', 
+    'id': '120136199', 
+    'var': dysnomia_var, 
+    'color': color_map('Dysnomia'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Dysnomia: January 1, 2025, to January 16, 2025 (15.79 days)
+    'end_date': datetime(2025, 1, 19),
+    'mission_info': 'Orbital period: 15.79 Earth days.'
+    },
+
     # Eris's Moon
-    {'name': 'Eris\' Moon Dysnomia', 'id': 'Dysnomia', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-     'mission_info': 'Companion to the dwarf planet Eris.', 'mission_url': 'https://www.nasa.gov/asteroids'},
+    #{'name': 'Eris\' Moon Dysnomia', 'id': 'Dysnomia', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+    # 'mission_info': 'Companion to the dwarf planet Eris.', 'mission_url': 'https://www.nasa.gov/asteroids'},
 
     # Stars
     # Proxima Centauri - Our closest stellar neighbor

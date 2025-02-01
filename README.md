@@ -2,6 +2,89 @@
 
 An interactive solar system visualization tool with support for stellar neighborhood mapping and Hertzsprung-Russell diagrams.
 
+## Summary
+
+The provided code is a complex Python application that visualizes the solar system using data from the JPL Horizons system. It allows users to select celestial objects (planets, dwarf planets, moons, asteroids, comets, and missions) and visualize their positions and orbits on a given date or over a period of time.
+
+Here's a breakdown of the code's functionality:
+
+1. Initialization and Imports:
+
+Imports necessary libraries like tkinter, astroquery, numpy, plotly, etc.
+Defines constants for colors, orbital parameters, physical properties of celestial objects, and hover text.
+Sets up a shutdown handler for graceful exit.
+Initializes the main tkinter window (root).
+Defines global variables like today.
+2. UI Elements:
+
+ScrollableFrame Class: Creates a custom scrollable frame to hold the numerous checkboxes.
+Input Frame:
+Date Selection: Entry widgets for year, month, day, and hour, along with a "Now" button to fill in the current date.
+Object Selection: Checkbuttons for each celestial object, grouped into categories (Planets, Dwarf Planets, Moons, Asteroids, KBOs, Missions, Comets).
+Center Object Selection: A dropdown menu to select the central body for the plot (Sun or a planet).
+Scale Options: Radio buttons for automatic or manual scaling, with an entry for custom scale values.
+Animation Controls: Entry for the number of frames and buttons to animate the motion over hours, days, weeks, months, or years.
+"Paloma's Birthday" Buttons: Set the date to Paloma's birthday or animate from that date over years.
+Stellar Visualization Buttons: Buttons to launch separate scripts (planetarium_distance.py, hr_diagram_distance.py, etc.) for visualizing stars and the Hertzsprung-Russell diagram.
+Status Label and Progress Bar: Displays messages and a progress bar during data fetching and plotting.
+Note Frame: A text area displaying additional information or instructions.
+3. Core Functions:
+
+create_sun_visualization(fig, animate=False, frames=None): Creates a 3D visualization of the Sun's layers (core, radiative zone, convective zone, photosphere, chromosphere, inner corona, outer corona, termination shock, heliopause, inner and outer Oort Cloud, and the Sun's gravitational influence) using sphere equations and adds them to a plotly figure.
+create_corona_sphere(radius, n_points=100): Generates points to represent a spherical surface for the Sun's layers.
+get_default_camera(): Returns default orthographic camera settings for a top-down view.
+calculate_axis_range(objects_to_plot): Calculates the appropriate axis range for the plot based on the selected objects.
+plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=False): Plots the actual orbital trajectories of selected objects fetched from the JPL Horizons system.
+fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None): Fetches the position of a celestial object for a specific date from the JPL Horizons system.
+fetch_trajectory_with_batching(obj_id, dates_list, center_id='Sun', id_type=None, batch_size=50): Fetches the trajectory of an object over a range of dates, batching the requests to avoid URL length limitations.
+fetch_trajectory(obj_id, dates_list, center_id='Sun', id_type=None): A wrapper for fetch_trajectory_with_batching.
+print_planet_positions(positions): Prints the fetched positions and distances of planets to the console.
+format_maybe_float(value): Formats a numeric value to 8 decimal places or returns "N/A" if the value is not numeric.
+add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info"): Adds a celestial object to the plotly figure with specified properties.
+debug_trajectory_data(objects, selected_objects, center_id='Sun'): A debug function to analyze and print trajectory data, especially for missions and comets.
+plot_objects(): The main function that orchestrates the plotting process:
+Gets the user-selected date and center object.
+Creates a plotly figure.
+Adds the Sun's visualization if the Sun is the center.
+Fetches positions and trajectories of selected objects.
+Adds objects to the plot using add_celestial_object.
+Plots idealized orbits if the center is the Sun using plot_idealized_orbits.
+Sets the axis ranges and updates the layout.
+Displays the plot using show_figure_safely.
+plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'): Plots idealized Keplerian orbits for planets and dwarf planets based on orbital parameters (semi-major axis, eccentricity, inclination, etc.). It handles rotations to account for the argument of periapsis and longitude of the ascending node. It skips satellites, comets, and missions.
+show_animation_safely(fig, default_name): Displays and optionally saves an animated plotly figure, handling temporary file cleanup.
+animate_objects(step, label): Creates the animation by generating a sequence of frames and updating the plot accordingly.
+on_closing(): Handles cleanup (removing temporary files) when the main window is closed.
+fill_now(): Fills the date entry fields with the current date and time.
+set_palomas_birthday(): Sets the date to Paloma's birthday.
+update_date_fields(new_date): Updates the date entry fields with a given date.
+handle_mission_selection(): Handles mission selection (currently does not adjust the date).
+animate_one_day(), animate_one_week(), animate_one_month(), animate_one_year(), animate_palomas_birthday(): Wrapper functions for animate_objects with specific time steps.
+CreateToolTip(object, text): Creates a custom tooltip for a given widget with intelligent positioning.
+report_callback_exception(self, exc_type, exc_value, exc_traceback): Handles exceptions in Tkinter callbacks.
+call_planetarium_distance_script_with_input(): Calls the planetarium_distance.py script with user input for the number of light-years.
+call_planetarium_apparent_magnitude_script_with_input(): Calls the planetarium_apparent_magnitude.py script with user input for the maximum apparent magnitude and optionally, the manual scale.
+call_hr_diagram_distance_script_with_input(): Calls the hr_diagram_distance.py script with user input for the number of light-years.
+call_hr_diagram_apparent_magnitude_script_with_input(): Calls the hr_diagram_apparent_magnitude.py script with user input for the maximum apparent magnitude.
+4. Object Data:
+
+The objects list defines the celestial objects that can be selected and visualized. Each object has properties like:
+name: The name of the object.
+id: The JPL Horizons ID.
+var: The tkinter variable linked to the object's checkbox.
+color: The color used for plotting.
+symbol: The marker symbol used for plotting.
+is_mission: Boolean indicating if it's a space mission.
+is_comet: Boolean indicating if it's a comet.
+id_type: The type of ID used in JPL Horizons (e.g., 'majorbody', 'smallbody', 'id').
+start_date, end_date: For missions and comets, the start and end dates of their activity.
+mission_url: A URL with more information about the mission.
+mission_info: A brief description of the mission or object.
+is_satellite: Boolean indicating if the object is a satellite.
+5. Main Loop:
+
+root.mainloop() starts the tkinter event loop, making the application interactive.
+
 ## Features
 
 - Real-time 3D visualization of celestial objects using NASA JPL Horizons data
@@ -29,7 +112,10 @@ astropy>=5.3.4
 astroquery>=0.4.6
 kaleido>=0.2.1  # Required for saving static images
 tk>=0.1.0
-```
+python-dateutil>=2.8.2
+requests>=2.31.0
+ipython>=8.12.0
+scipy>=1.11.0  # Add this line
 
 ### Installation
 

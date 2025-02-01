@@ -21,6 +21,7 @@ import subprocess
 import sys
 import math
 import tempfile
+from pathlib import Path
 
 from constants import (
     planetary_params,
@@ -29,6 +30,18 @@ from constants import (
     note_text,
     INFO,
     hover_text_sun_and_corona,
+    gravitational_influence_info,
+    outer_oort_info,
+    inner_oort_info,
+    inner_limit_oort_info,
+    solar_wind_info,
+    termination_shock_info,
+    outer_corona_info,
+    inner_corona_info,
+    chromosphere_info,
+    photosphere_info,
+    radiative_zone_info,
+    core_info,
 )
 
 from visualization_utils import format_hover_text, add_hover_toggle_buttons
@@ -142,6 +155,19 @@ TERMINATION_SHOCK_AU = 94       # Termination shock where the solar wind slows t
 HELIOPAUSE_RADII = 26449         # Outer boundary of the solar wind and solar system, about 123 AU. 
 PARKER_CLOSEST_RADII = 8.2    # Parker's closest approach was 3.8 million miles on 12-24-24 at 6:53 AM EST (0.41 AU, 8.2 solar radii)
     
+
+def get_script_path(script_name):
+    """
+    Get the absolute path to a script in the same directory.
+    
+    Parameters:
+        script_name (str): Name of the script file
+        
+    Returns:
+        Path: Resolved path to the script
+    """
+    return Path(__file__).parent / script_name
+
 def create_sun_visualization(fig, animate=False, frames=None):
     """
     Creates a visualization of the Sun's layers including photosphere, inner corona, and outer corona.
@@ -165,22 +191,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         
         # 0.2. Sun's Gravitational Influence
         x, y, z = create_corona_sphere(GRAVITATIONAL_INFLUENCE_AU)
-
-        # Define the text string once
-        gravitational_influence_info = (
-            "The Solar System\'s extent is actually defined in multiple ways. The Heliopause (120-123 AU):<br>" 
-            "Where the solar wind meets interstellar space. Gravitational influence: Extends much further, including,<br>" 
-            "Sedna\'s orbit (936 AU), The Hills Cloud/Inner Oort Cloud (2,000-20,000 AU), The Outer Oort Cloud (20,000-100,000 AU).<br>"
-            "The Sun's gravitational influence extends to about 2 light-years (~126,000 AU). While the Heliopause marks<br>" 
-            "where the Sun\'s particle influence ends, its gravitational influence extends much further. Sedna and other<br>" 
-            "distant objects remain gravitationally bound to the Sun despite being well beyond the Heliopause. This is<br>" 
-            "why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part of our Solar System,<br>" 
-            "even though we've never directly observed the Oort Cloud. The distinction comes down to different types of influence:<br>" 
-            "Particle/plasma influence (solar wind) → ends at Heliopause; gravitational influence → extends much further,<br>" 
-            "including Sedna and the theoretical Oort Cloud. So the Solar System is generally considered to extend at least<br>" 
-            "as far as these gravitationally bound objects, even beyond the Heliopause. Sedna is one of our first glimpses<br>" 
-            "into this very distant region that may connect to the Oort Cloud population."
-        )
 
         # Create a text list matching the number of points
         text_array_gravitational_influence = [gravitational_influence_info for _ in range(len(x))]
@@ -225,19 +235,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 0.3. Outer Oort Cloud
         x, y, z = create_corona_sphere(OUTER_OORT_CLOUD_AU)
 
-        # Define the text string once
-        outer_oort_info = (
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
-            "periods exceeding 200 years.<br><br>" 
-            "Oort Cloud's Outer Edge: At 100,000 AU, it's about 1.58 light-years from the Sun, placing it just<br>" 
-            "beyond the nearest star systems and marking the boundary between the Solar System and interstellar space.<br>" 
-            "The primary source of long-period comets. Objects here are more loosely bound and more susceptible to<br>" 
-            "external gravitational perturbations."
-        )
-
         # Create a text list matching the number of points
         text_array_outer_oort = [outer_oort_info for _ in range(len(x))]
         customdata_array_outer_oort = ["Outer Oort Cloud" for _ in range(len(x))]
@@ -279,18 +276,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # 0.4. Inner Oort Cloud
         x, y, z = create_corona_sphere(INNER_OORT_CLOUD_AU)
-
-        # Define the text string once
-        inner_oort_info = (
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
-            "periods exceeding 200 years.<br><br>" 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
-            "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
-        )
 
         # Create a text list matching the number of points
         text_array_inner_oort = [inner_oort_info for _ in range(len(x))]
@@ -334,18 +319,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 0.45. Inner Limit of Inner Oort Cloud
         x, y, z = create_corona_sphere(INNER_LIMIT_OORT_CLOUD_AU)
 
-        # Define the text string once
-        inner_limit_oort_info = (
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
-            "periods exceeding 200 years.<br><br>" 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
-            "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
-        )
-
         # Create a text list matching the number of points
         text_array_inner_limit_oort = [inner_limit_oort_info for _ in range(len(x))]
         customdata_array_inner_limit_oort = ["Inner Limit of Oort Cloud" for _ in range(len(x))]
@@ -387,19 +360,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # 0.5. Solar Wind and Heliopause Sphere
         x, y, z = create_corona_sphere(HELIOPAUSE_RADII * SOLAR_RADIUS_AU)
-
-        # Define the text string once
-        solar_wind_info = (
-            "Solar Wind (Heliosheath extends from ~120 to 150 AU at the Heliopause)<br>"
-            "Temperature: ~1,000,000K on average<br>"
-            "Black body radiation at 2.897 nm falls within the X-ray region of the<br>" 
-            "electromagnetic spectrum, which is invisible to the human eye.<br>"
-            "Stream of charged particles (plasma) ejected from the upper atmosphere of the Sun.<br>"
-            "At the Heliopause the speed of the solar wind stops due to interaction with the<br>"
-            "interstellar medium. Voyager 1 encountered the Heliopause at ~123 AU. This is<br>"
-            "considered the end of the Sun's influence and the start of interstellar space.<br>"
-            "This region is turbulent and variable, and speeds slow to ~100 km/s at the Heliopause."
-        )
 
         # Create a text list matching the number of points
         text_array_solar_wind = [solar_wind_info for _ in range(len(x))]
@@ -444,19 +404,6 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 0.7. Solar Wind and Termination Shock Sphere
         x, y, z = create_corona_sphere(TERMINATION_SHOCK_AU)
 
-        # Define the text string once
-        termination_shock_info = (
-            "Solar Wind Termination Shock (extends to from ~75 to 100 AU)<br>"
-            "Temperature: from ~100,000 to 400,000K before the shock to ~1M K after it.<br>"
-            "Black body radiation at 11.59 nm, extreme ultraviolet,<br>" 
-            "which is invisible or at the edge of visibility.<br>"
-            "The Termination Shock is the region where the solar wind slows down from<br>"
-            "supersonic to subsonic speeds due to interaction with the interstellar<br>"
-            "medium. The kinetic energy transfers into heat, increasing abruptly.<br>"
-            "Voyager 1 encountered the Termination Shock at 94 AU, while Voyager 2 at 84 AU.<br>"
-            "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
-        )
-
         # Create a text list matching the number of points
         text_array_termination_shock = [termination_shock_info for _ in range(len(x))]
         customdata_array_termination_shock = ["Solar Wind Termination Shock" for _ in range(len(x))]
@@ -500,21 +447,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 1. Outer Corona Sphere (most expansive, very diffuse)
         x, y, z = create_corona_sphere(OUTER_CORONA_RADII * SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        outer_corona_info = (
-            "Solar Outer Corona (extends to 50 solar radii or more, ~0.2 AU)<br>"
-            "It is the most tenuous and expansive layer of the solar atmosphere<br>"
-            "Temperature: ~2-3M K, or an average of 2.5M K<br>" 
-            "It radiates at an average wavelength of 1.159 nm, which falls within the<br>" 
-            "extreme ultraviolet to X-ray regions of the electromagnetic spectrum.<br>"
-            "The solar Corona generates the solar wind, a stream of electrons, protons, and Helium<br>"
-            "travelling at supersonic speeds between 300 and 800 km/s, and temperatures to 2M K."
-
-        )
-
         # Create a text list matching the number of points
         text_array_outer_corona = [outer_corona_info for _ in range(len(x))]
-        customdata_array_outer_corona = ["Outer Corona" for _ in range(len(x))]
+        customdata_array_outer_corona = ["Sun: Outer Corona" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -525,7 +460,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(25, 25, 112)',  # approximate visualization
                     opacity=0.3
                 ),
-                name='Outer Corona',
+                name='Sun: Outer Corona',
                 text=text_array_outer_corona,            # Replicated text
                 customdata=customdata_array_outer_corona, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -544,7 +479,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.3
                 ),
-                name='Outer Corona',
+                name='Sun: Outer Corona',
                 text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
         #        hoverinfo='text',
                 hovertemplate='%{text}<extra></extra>',
@@ -555,19 +490,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 2. Inner Corona Sphere
         x, y, z = create_corona_sphere(INNER_CORONA_RADII * SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        inner_corona_info = (
-            "Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)<br>"
-            "Region of intense heating and complex magnetic activity"
-            "Temperature: 1-2M K, or an average of about 1.5M K<br>"
-            "It radiates at an average wavelenght of 1.93 nm, which falls within<br>" 
-            "the extreme ultraviolet to soft X-ray regions of the electromagnetic spectrum."
-            
-        )
-
         # Create a text list matching the number of points
         text_array_inner_corona = [inner_corona_info for _ in range(len(x))]
-        customdata_array_inner_corona = ["Inner Corona" for _ in range(len(x))]
+        customdata_array_inner_corona = ["Sun: Inner Corona" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -578,7 +503,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(0, 0, 255)',  # Warmer tint
                     opacity=0.09
                 ),
-                name='Inner Corona',
+                name='Sun: Inner Corona',
                 text=text_array_inner_corona,            # Replicated text
                 customdata=customdata_array_inner_corona, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -597,7 +522,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.09
                 ),
-                name='Inner Corona Shell',
+                name='Sun: Inner Corona',
                 text=['Solar Inner Corona (extends to 2-3 solar radii)'],
                 hoverinfo='text',
                 showlegend=False
@@ -607,19 +532,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 2.5. Chromosphere
         x, y, z = create_corona_sphere(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        chromosphere_info = (
-            "Chromosphere<br>"
-            "Channels energy into the corona through a radiative process<br>"
-            "Site of Spicules, solar flares, and prominences"
-            "Radius: from Photosphere to 1.5 Solar radii or ~0.00465 - 0.0070 AU<br>"
-            "Temperature: ~6,000 to 20,000 K, for a average of 10,000 K<br>"
-            "Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible.<br>"
-        )
-
         # Create a text list matching the number of points
         text_array_chromosphere = [chromosphere_info for _ in range(len(x))]
-        customdata_array_chromosphere = ["Chromosphere" for _ in range(len(x))]
+        customdata_array_chromosphere = ["Sun: Chromosphere" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -630,7 +545,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(30, 144, 255)',  # approximate visible
                     opacity=0.10
                 ),
-                name='Chromosphere',
+                name='Sun: Chromosphere',
                 text=text_array_chromosphere,            # Replicated text
                 customdata=customdata_array_chromosphere, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -649,7 +564,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.10
                 ),
-                name='Chromosphere Shell',
+                name='Sun: Chromosphere',
                 text=['Solar Chromosphere (surface temperature ~6,000 to 20,000 K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -659,23 +574,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 3. Convective Zone and Photoshere Sphere
         x, y, z = create_corona_sphere(SOLAR_RADIUS_AU)
 
-        # Define the text string once
-        photosphere_info = (
-            "Solar Convective Zone and Photosphere (visible surface)<br>"
-            "Radius: from 0.7 to 1 Solar radius, or ~0.00465 AU<br>"
-            "Temperature: from 2M K at the Radiative Zone to ~5,500K at the Photosphere<br>"
-            "Convection transports energy to the visible \"surface\" of the Sun.<br>"
-            "The convection process starts at the Radiative Zone<br>"
-            "It is noted by granulation patterns and magnetic field generation<br>"
-            "At the Photosphere, the energy is radiated as visible light<br>"
-            "Radiation emits at a peak wavelength at 527.32 nm, which is in the green spectrum.<br>" 
-            "The Sun's emitted light is a combination of all visible wavelengths, resulting in a<br>" 
-            "yellowish-white color. The Photosphere is noted by sunspots, faculae, and solar granules."
-        )
-
         # Create a text list matching the number of points
         text_array_photosphere = [photosphere_info for _ in range(len(x))]
-        customdata_array_photosphere = ["Photosphere" for _ in range(len(x))]
+        customdata_array_photosphere = ["Sun: Photosphere" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -686,7 +587,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(255, 244, 214)',  # Yellow approximates the visible color
                     opacity=1.0
                 ),
-                name='Convective Zone and Photosphere',
+                name='Sun: Photosphere',
                 text=text_array_photosphere,            # Replicated text
                 customdata=customdata_array_photosphere, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -705,7 +606,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Photosphere',
+                name='Sun: Photosphere',
                 text=['Solar Photosphere (surface temperature ~6,000K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -715,17 +616,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 4. Radiative Zone
         x, y, z = create_corona_sphere(RADIATIVE_ZONE_AU)
 
-        # Define the text string once
-        radiative_zone_info = (
-            "Solar Radiative Zone (extends from about 0.2 to 0.7 solar radii, ~0.00325 AU)<br>"
-            "Temperature: ranges from about 7M K near the core to about 2M K near the convective zone<br>"
-            "A region where energy moves from the core to the convective zone, taking 170,000 years<br>"
-            "Energy is transported by radiative diffusion, through photon absorption and re-emission"
-        )
-
         # Create a text list matching the number of points
         text_array_radiative_zone = [radiative_zone_info for _ in range(len(x))]
-        customdata_array_radiative_zone = ["Radiative Zone" for _ in range(len(x))]
+        customdata_array_radiative_zone = ["Sun: Radiative Zone" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -736,7 +629,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(30, 144, 255)',  # arbitrary color for contrast
                     opacity=1.0
                 ),
-                name='Radiative Zone',
+                name='Sun: Radiative Zone',
                 text=text_array_radiative_zone,            # Replicated text
                 customdata=customdata_array_radiative_zone, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -755,7 +648,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Radiative Zone Shell',
+                name='Sun: Radiative Zone',
                 text=['Solar Radiative Zone (extends to 0.2 to 0.7 solar radii)'],
                 hoverinfo='text',
                 showlegend=False
@@ -765,21 +658,9 @@ def create_sun_visualization(fig, animate=False, frames=None):
         # 5. Core
         x, y, z = create_corona_sphere(CORE_AU)
 
-        # Define the text string once
-        core_info = (
-            "Solar Core<br>"
-            "Radius: ~0.00093 AU or about 0.2 Solar radii<br>"
-            "Temperature: ~15M K<br>"
-            "Nuclear fusion and energy generation<br>"
-            "Energy is transported by radiative diffusion<br>"
-            "Site of proton-proton chain reactions<br>"
-            "The Sun is currently mostly (98 to 99 percent) fusing hydrogen into helium<br>"
-            "1 to 2 percent of the energy is produced by the Carbon-Nitrogen-Oxygen Cycle"
-        )
-
         # Create a text list matching the number of points
         text_array_core = [core_info for _ in range(len(x))]
-        customdata_array_core = ["Core" for _ in range(len(x))]
+        customdata_array_core = ["Sun: Core" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -790,7 +671,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(70, 130, 180)',  
                     opacity=1.0
                 ),
-                name='Core',
+                name='Sun: Core',
                 text=text_array_core,            # Replicated text
                 customdata=customdata_array_core, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -809,7 +690,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Core Shell',
+                name='Sun: Core',
                 text=['Solar Core (temperature ~15M K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -842,17 +723,17 @@ def create_sun_hover_text():
     """
     return {
         'photosphere': (
-            'Solar Photosphere<br>'
+            'Sun: Photosphere<br>'
             'Temperature: ~6,000K<br>'
             'Radius: 0.00465 AU'
         ),
         'inner_corona': (
-            'Inner Corona<br>'
+            'Sun: Inner Corona<br>'
             'Temperature: >2,000,000K<br>'
             'Extends to: 2-3 solar radii (~0.014 AU)'
         ),
         'outer_corona': (
-            'Outer Corona<br>'
+            'Sun: Outer Corona<br>'
             'Temperature: ~1,000,000K<br>'
             'Extends to: ~50 solar radii (~0.2 AU)'
         )
@@ -1127,24 +1008,39 @@ def debug_trajectory_data(objects, selected_objects, center_id='Sun'):
     print("=" * 50)
     
     for obj in selected_objects:
-        if obj.get('is_mission', False) or obj.get('is_comet', False):
-            print(f"\nAnalyzing trajectory for: {obj['name']}")
+        if obj.get('is_satellite', False):
+            print(f"\nAnalyzing trajectory for satellite: {obj['name']}")
             print(f"Object ID: {obj['id']}")
             print(f"ID Type: {obj.get('id_type', 'Not specified')}")
+            print(f"Center ID: {center_id}")
             
             start_date = obj.get('start_date')
             end_date = obj.get('end_date')
             
             if start_date and end_date:
                 total_days = (end_date - start_date).days
-                interval = max(1, total_days // 100)
-                dates_list = [start_date + timedelta(days=i) for i in range(0, total_days + 1, interval)]
+                interval = 4  # 4-hour intervals
+                dates_list = [start_date + timedelta(hours=i) for i in range(0, total_days * 24 + 1, interval)]
                 
                 print(f"Date range: {start_date} to {end_date}")
                 print(f"Total days: {total_days}")
-                print(f"Sample interval: {interval} days")
+                print(f"Sample interval: {interval} hours")
                 print(f"Number of sample points: {len(dates_list)}")
                 
+                # Try to fetch first point
+                try:
+                    first_pos = fetch_position(obj['id'], dates_list[0], center_id=center_id, id_type=obj.get('id_type'))
+                    if first_pos:
+                        print("\nFirst position fetched successfully:")
+                        print(f"X: {first_pos.get('x')}")
+                        print(f"Y: {first_pos.get('y')}")
+                        print(f"Z: {first_pos.get('z')}")
+                    else:
+                        print("\nFailed to fetch first position")
+                except Exception as e:
+                    print(f"\nError fetching first position: {e}")
+                
+                # Fetch full trajectory
                 trajectory = fetch_trajectory(obj['id'], dates_list, center_id=center_id, id_type=obj.get('id_type'))
                 if trajectory:
                     print("\nTrajectory data retrieved:")
@@ -1161,9 +1057,11 @@ def debug_trajectory_data(objects, selected_objects, center_id='Sun'):
                     print("\nNo trajectory data returned")
             else:
                 print("Missing start_date or end_date")
-    
+
     print("\nDebug analysis complete")
     print("=" * 50)
+
+
 
 def plot_objects():
     """Plot selected objects with proper error handling."""
@@ -1200,6 +1098,35 @@ def plot_objects():
         # Add Sun visualization if Sun is center
         if center_object_name == 'Sun':
             fig = create_sun_visualization(fig)
+            # Add Sun marker at origin for legend and hover text
+            add_celestial_object(
+                fig,
+                {'x': 0, 'y': 0, 'z': 0,
+                 'range': 0,
+                 'distance_lm': 0,
+                 'distance_lh': 0,
+                 'velocity': 0,
+                 'orbital_period': 'N/A'
+                },
+                'Sun',
+                color_map('Sun'),
+                'circle',
+                marker_size=CENTER_MARKER_SIZE
+            )
+        else:
+            # Fetch position of center object if not the Sun
+            center_pos = fetch_position(center_object_info['id'], date_obj, 
+                                     center_id='399', # Use Earth as reference for non-Sun centers
+                                     id_type=center_object_info.get('id_type'))
+            if center_pos:
+                add_celestial_object(
+                    fig, 
+                    {'x': 0, 'y': 0, 'z': 0}, # Plot at origin since everything is relative
+                    center_object_name,
+                    center_object_info['color'],
+                    center_object_info['symbol'],
+                    marker_size=CENTER_MARKER_SIZE
+                )
 
         # Get selected objects
         selected_objects = [obj for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
@@ -1210,7 +1137,54 @@ def plot_objects():
         # Calculate trajectories for missions and comets
         trajectories = {}
         for obj in selected_objects:
+
+            if obj.get('is_satellite', False):
+                # Get the parent planet's ID (first digit + 99)
+                parent_planet_id = obj['id'][0] + '99'
+                parent_planet_name = {
+                    '399': 'Earth',
+                    '499': 'Mars',
+                    '599': 'Jupiter',       # 599 or 5
+                    '699': 'Saturn',
+                    '799': 'Uranus',
+                    '899': 'Neptune',
+                    '999': 'Pluto',
+                    '20136199': 'Eris'        
+                }.get(parent_planet_id)
+
+                # Only plot satellite trajectory if its parent is the center
+                if parent_planet_name == center_object_name:
+                    dates_list = []
+                    delta = timedelta(hours=4)  # 4-hour steps for smooth orbits
+                    current_date = obj['start_date']
+                    while current_date <= obj['end_date']:
+                        dates_list.append(current_date)
+                        current_date += delta
+
+                    trajectory = fetch_trajectory(
+                        obj['id'],
+                        dates_list,
+                        center_id=center_id,  # Use selected center
+                        id_type='majorbody'
+                    )
+
+                    if trajectory:
+                        x = [pos['x'] for pos in trajectory if pos is not None]
+                        y = [pos['y'] for pos in trajectory if pos is not None]
+                        z = [pos['z'] for pos in trajectory if pos is not None]
+
+                        fig.add_trace(go.Scatter3d(
+                            x=x, y=y, z=z,
+                            mode='lines',
+                            line=dict(color=obj['color'], width=1),
+                            name=f"{obj['name']} Orbit",
+                            hoverinfo='none',
+                            showlegend=True
+                        ))
+    #        else:
+
             if obj.get('is_mission', False) or obj.get('is_comet', False):
+#            if obj.get('is_mission', False) or obj.get('is_comet', False) or obj.get('is_satellite', False):  # adds satellite traces
                 # Get original start/end dates from object definition
                 start_date = obj.get('start_date')
                 end_date = obj.get('end_date')
@@ -1662,17 +1636,18 @@ def animate_objects(step, label):
         # Initialize figure
         fig = go.Figure()
 
-        # Add Sun visualization if Sun is center
+        # If center is the Sun, draw its layered visualization 
         if center_object_name == 'Sun':
             fig = create_sun_visualization(fig)
         else:
+            # Add center object marker
             fig.add_trace(
                 go.Scatter3d(
                     x=[0], y=[0], z=[0],
                     mode='markers+text',
                     marker=dict(
                         color=center_object_info['color'],
-                        size=12,
+                        size=CENTER_MARKER_SIZE,
                         symbol=center_object_info['symbol']
                     ),
                     name=f"{center_object_name} (Center)",
@@ -1681,6 +1656,26 @@ def animate_objects(step, label):
                     showlegend=True
                 )
             )
+
+        # Add center marker
+        center_marker_size = CENTER_MARKER_SIZE
+        fig.add_trace(
+            go.Scatter3d(
+                x=[0],
+                y=[0],
+                z=[0],
+                mode='markers+text',
+                marker=dict(
+                    color=center_object_info['color'],
+                    size=center_marker_size,
+                    symbol=center_object_info['symbol']
+                ),
+                name=center_object_name,
+                text=[center_object_name],
+                hoverinfo='skip',
+                showlegend=True
+            )
+        )
 
         # Fetch positions for all objects
         positions_over_time = {}
@@ -2233,7 +2228,6 @@ change_var = tk.IntVar(value=0)
 perse_var = tk.IntVar(value=0)
 dart_var = tk.IntVar(value=0)
 lucy_var = tk.IntVar(value=0)
-dysnomia_var = tk.IntVar(value=0)
 nix_var = tk.IntVar(value=0)
 kbo_var = tk.IntVar(value=0)
 gaia_var = tk.IntVar(value=0)
@@ -2283,6 +2277,9 @@ triton_var = tk.IntVar(value=0)
 
 # Pluto's Moon
 charon_var = tk.IntVar(value=0)
+
+# Eris's Moon
+dysnomia_var = tk.IntVar(value=0)
 
 # Proxima Centauri variable
 proxima_var = tk.IntVar(value=0)  
@@ -2373,6 +2370,7 @@ create_celestial_checkbutton("- Hydra", hydra_var)
 create_celestial_checkbutton("Haumea", haumea_var)
 create_celestial_checkbutton("Makemake", makemake_var)
 create_celestial_checkbutton("Eris", eris_var)
+create_celestial_checkbutton("- Dysnomia", dysnomia_var)
 
 # LabelFrame for Kuiper Belt Objects
 kbo_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Kuiper Belt Objects (KBOs)")
@@ -2460,7 +2458,7 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
 
 create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to 1966-01-01)", 
                          "October 21, 1965")
-#create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to present)", 
+#create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to 2025-01-01)",  # the trajectory does not extend beyond 1966-01-01
 #                         "October 21, 1965")
 create_comet_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
                          "February 25, 1976")
@@ -2498,7 +2496,7 @@ auto_scale_radio.pack(anchor='w')
 CreateToolTip(auto_scale_radio, "Automatically adjust scale based on selected objects")
 
 manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU. Examples:\n" 
-"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s furthest orbit (aphelion): 936; Inner Limit of Oort Cloud: 2000;\n" 
+"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s furthest orbit (aphelion): 936; Inner Oort Cloud: 2000 to 20000;\n" 
 "Outer Oort Cloud Limit: 100000; The Sun's gravitational influence: 126000;\n Proxima Centauri: 268585; Alpha Centauri: 276643", 
 variable=scale_var, value='Manual')
 manual_scale_radio.pack(anchor='w')
@@ -2516,7 +2514,7 @@ center_label = tk.Label(controls_frame, text="Select Center Object for Your Plot
 center_label.pack(anchor='w')
 
 center_object_var = tk.StringVar(value='Sun')
-center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto']
+center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris']
 center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
 center_menu.pack(anchor='w')
 
@@ -2632,8 +2630,11 @@ def call_planetarium_distance_script_with_input():
             output_label.config(text="Please enter a number between 0 and 100 light-years.")
             return
             
-        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
-        subprocess.run(['python', script_path, str(ly_value)])
+        script_path = get_script_path('planetarium_distance.py')        # dethreading
+        subprocess.run(['python', str(script_path), str(ly_value)])     # dethreading
+
+    #    script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
+    #    subprocess.run(['python', script_path, str(ly_value)])
         
     except ValueError:
         output_label.config(text="Please enter a valid number between 0 and 100 light-years.")
@@ -2714,8 +2715,12 @@ def call_planetarium_apparent_magnitude_script_with_input():
                 return
                 
         # Build command with arguments
-        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
-        cmd = ['python', script_path, str(mag_value)]
+        script_path = get_script_path('planetarium_apparent_magnitude.py')      # dethreading
+        cmd = ['python', str(script_path), str(mag_value)]                      # dethreading
+
+    #    script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
+    #    cmd = ['python', script_path, str(mag_value)]
+
         if user_scale is not None:
             cmd.append(str(user_scale))
             
@@ -2749,8 +2754,13 @@ def call_hr_diagram_distance_script_with_input():
         if ly_value <= 0:
             output_label.config(text="Please enter a positive number of light-years.")
             return
-        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
-        subprocess.run(['python', script_path, str(ly_value)])
+
+        script_path = get_script_path('hr_diagram_distance.py')         # dethreading
+        subprocess.run(['python', str(script_path), str(ly_value)])     # dethreading
+
+    #    script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
+    #    subprocess.run(['python', script_path, str(ly_value)])
+
     except ValueError:
         output_label.config(text="Please enter a valid number of light-years.")
     except Exception as e:
@@ -2787,9 +2797,14 @@ def call_hr_diagram_apparent_magnitude_script_with_input():
         if mag_value < -1.44 or mag_value > 9:
             output_label.config(text="Please enter a magnitude between -1.44 and 9.")
             return
-        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
+
+        script_path = get_script_path('hr_diagram_apparent_magnitude.py')       # dethreading
+        subprocess.run(['python', str(script_path), str(mag_value)])            # dethreading
+
+    #    script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
         # Pass magnitude value as command-line argument
-        subprocess.run(['python', script_path, str(mag_value)])
+    #    subprocess.run(['python', script_path, str(mag_value)])
+
     except ValueError:
         output_label.config(text="Please enter a valid magnitude between -1.44 (brightest star Sirius) and 9.")
     except Exception as e:
@@ -2869,7 +2884,7 @@ objects = [
     {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
     {'name': 'Ceres', 'id': 'ceres', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
     {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
@@ -2986,47 +3001,376 @@ objects = [
     {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
     'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 'mission_url': 'https://www.isas.jaxa.jp/en/missions/spacecraft/past/hayabusa.html'},
         
-    # --- Adding New Moons ---
+    # --- Adding multi-point trajectories for satellites, see: https://ssd.jpl.nasa.gov/sats/ephem/
+
+    {
+    'name': 'Moon',
+    'id': '301',
+    'var': moon_var,
+    'color': color_map('Moon'),
+    'symbol': 'circle',
+    'is_mission': False, 
+    'is_satellite': True,         # <--- Let the code know this object is treated like a multi-point trajectory
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Moon: January 1, 2025 to January 28, 2025 (27.32 days)
+    'end_date': datetime(2025, 1, 29),
+    'mission_info': 'Earth orbital period: 27.32 days.'
+    },
 
     # Mars' Moons
-    {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+
+    {
+    'name': 'Phobos', 
+    'id': '401', 
+    'var': phobos_var, 
+    'color': color_map('Phobos'), 
+    'symbol': 'circle', 
+    'is_mission': False,
+    'is_satellite': True,  
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Phobos: January 1, 2025 to January 1, 2025 (0.32 days)
+    'end_date': datetime(2025, 1, 15),
+    'mission_info': 'Mars orbital period: 0.32 Earth days.'
+    },
+
+    {
+    'name': 'Deimos', 
+    'id': '402', 
+    'var': deimos_var, 
+    'color': color_map('Deimos'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'is_satellite': True,  
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Deimos: January 1, 2025 to January 2, 2025 (1.26 days)
+    'end_date': datetime(2025, 1, 15),
+    'mission_info': 'Mars orbital period: 1.26 Earth days.'
+    },
+
+#    {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
 
     # Jupiter's Galilean Moons
-    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+
+    {
+    'name': 'Io', 
+    'id': '10260',        # 501
+    'var': io_var, 
+    'color': color_map('Io'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Io: January 1, 2024 to January 2, 2024 (1.77 days)
+    'end_date': datetime(2025, 1, 4),
+    'mission_info': 'Jupiter orbital period: 1.77 Earth days.'
+    },
+
+    {
+    'name': 
+    'Europa', 
+    'id': '502', 
+    'var': europa_var, 
+    'color': color_map('Europa'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Europa: January 1, 2025 to January 4, 2025 (3.55 days)
+    'end_date': datetime(2025, 1, 6),
+    'mission_info': 'Jupiter orbital period: 3.55 Earth days.'
+    },
+
+    {
+    'name': 'Ganymede', 
+    'id': '503', 
+    'var': ganymede_var, 
+    'color': color_map('Ganymede'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Ganymede: January 1, 2025 to January 8, 2025 (7.15 days)
+    'end_date': datetime(2025, 1, 10),
+    'mission_info': 'Jupiter orbital period: 7.15 Earth days.'
+    },
+
+    {
+    'name': 'Callisto', 
+    'id': '504', 
+    'var': callisto_var, 
+    'color': color_map('Callisto'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Callisto: January 1, 2025 to January 17, 2025 (16.69 days)
+    'end_date': datetime(2025, 1, 19),
+    'mission_info': 'Jupiter orbital period: 16.69 Earth days.'
+    },
+
+#    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
 
     # Saturn's Major Moons
-    {'name': 'Titan', 'id': '601', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Rhea', 'id': '603', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Tethys', 'id': '605', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Phoebe', 'id': '607', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+
+    # Iapetus: January 1, 2025, to March 21, 2025 (79.32 days)
+
+    {
+    'name': 'Titan', 
+    'id': '606', 
+    'var': titan_var, 
+    'color': color_map('Titan'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Titan: January 1, 2025 to January 16, 2025 (15.95 days)
+    'end_date': datetime(2025, 1, 19),
+    'mission_info': 'Saturn orbital period: 15.95 Earth days.'
+    },
+
+    {
+    'name': 'Enceladus', 
+    'id': '602', 
+    'var': enceladus_var, 
+    'color': color_map('Enceladus'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Enceladus: January 1, 2025 to January 2, 2025 (1.37 days)
+    'end_date': datetime(2025, 1, 5),
+    'mission_info': 'Saturn orbital period: 1.37 Earth days.'
+    },
+
+    {
+    'name': 'Rhea', 
+    'id': '605', 
+    'var': rhea_var, 
+    'color': color_map('Rhea'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Rhea: January 1, 2025 to January 5, 2025 (4.52 days)
+    'end_date': datetime(2025, 1, 8),
+    'mission_info': 'Saturn orbital period: 4.52 Earth days.'
+    },
+
+    {
+    'name': 'Dione', 
+    'id': '604', 
+    'var': dione_var, 
+    'color': color_map('Dione'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Dione: January 1, 2025 to January 3, 2025 (2.74 days)
+    'end_date': datetime(2025, 1, 6),
+    'mission_info': 'Saturn orbital period: 2.74 Earth days.'
+    },
+
+    {
+    'name': 'Tethys', 
+    'id': '603', 
+    'var': tethys_var, 
+    'color': color_map('Tethys'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Tethys: January 1, 2025 to January 2, 2025 (1.89 days)
+    'end_date': datetime(2026, 1, 5),
+    'mission_info': 'Saturn orbital period: 1.89 Earth days.'
+    },
+
+    {
+    'name': 'Mimas', 
+    'id': '601', 
+    'var': mimas_var, 
+    'color': color_map('Mimas'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Mimas: January 1, 2025 to January 1, 2025 (0.94 days)
+    'end_date': datetime(2025, 1, 4),
+    'mission_info': 'Saturn orbital period: 0.94 Earth days.'
+    },
+
+    {
+    'name': 'Phoebe', 
+    'id': '609', 
+    'var': phoebe_var, 
+    'color': color_map('Phoebe'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Phoebe: January 1, 2025, to July 5, 2026 (550.56 days)
+    'end_date': datetime(2026, 7, 8),
+    'mission_info': 'Saturn orbital period: 550.56 Earth days.'
+    },
+
+#    {'name': 'Titan', 'id': '601', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Rhea', 'id': '603', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Tethys', 'id': '605', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Phoebe', 'id': '607', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
 
     # Uranus's Major Moons
-    {'name': 'Oberon', 'id': '701', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Umbriel', 'id': '703', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Ariel', 'id': '704', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Titania', 'id': '706', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+
+    {
+    'name': 'Oberon', 
+    'id': '704', 
+    'var': oberon_var, 
+    'color': color_map('Oberon'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Oberon: January 1, 2025, to January 14, 2025 (13.46 days)
+    'end_date': datetime(2025, 1, 17),
+    'mission_info': 'Uranus orbital period: 13.46 Earth days.'
+    },
+
+    {
+    'name': 'Umbriel', 
+    'id': '702', 
+    'var': umbriel_var, 
+    'color': color_map('Umbriel'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Umbriel: January 1, 2025, to January 5, 2025 (4.14 days)
+    'end_date': datetime(2025, 1, 8),
+    'mission_info': 'Uranus orbital period: 4.14 Earth days.'
+    },
+
+    {
+    'name': 'Ariel', 
+    'id': '701', 
+    'var': ariel_var, 
+    'color': color_map('Ariel'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Ariel: January 1, 2025, to January 3, 2025 (2.52 days)
+    'end_date': datetime(2025, 1, 6),
+    'mission_info': 'Uranus orbital period: 2.52 Earth days.'
+    },
+
+    {
+    'name': 'Miranda', 
+    'id': '705', 
+    'var': miranda_var, 
+    'color': color_map('Miranda'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Miranda: January 1, 2025, to January 2, 2025 (1.41 days)
+    'end_date': datetime(2025, 1, 5),
+    'mission_info': 'Uranus orbital period: 1.41 Earth days.'
+    },
+
+    {
+    'name': 'Titania', 
+    'id': '703', 
+    'var': titania_var, 
+    'color': color_map('Titania'), 
+    'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Titania: January 1, 2025, to January 9, 2025 (8.71 days)
+    'end_date': datetime(2025, 1, 12),
+    'mission_info': 'Uranus orbital period: 8.71 Earth days.'
+    },
+
+#    {'name': 'Oberon', 'id': '701', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Umbriel', 'id': '703', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Ariel', 'id': '704', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Titania', 'id': '706', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
 
     # Neptune's Major Moon
-    {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+
+    # Nereid: January 1, 2025, to December 27, 2025 (360.13 days)
+
+    {
+    'name': 'Triton', 
+    'id': '801', 
+    'var': triton_var, 
+    'color': color_map('Triton'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Triton: January 1, 2025, to January 6, 2025 (5.88 days)
+    'end_date': datetime(2035, 1, 9),
+    'mission_info': 'Neptune orbital period: 5.88 Earth days.'
+    },
+
+#    {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
 
     # Pluto's Moon
-    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-    'mission_info': 'One of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/nix/overview/'},
-    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-    'mission_info': 'Another of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/hydra/overview/'},
+
+    # Styx: January 1, 2025, to January 21, 2025 (20.16 days)
+    # Kerberos: January 1, 2025, to February 2, 2025 (32.17 days)
+
+    {
+    'name': 'Charon', 
+    'id': '901', 
+    'var': charon_var, 
+    'color': color_map('Charon'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Charon: January 1, 2025, to January 7, 2025 (6.39 days)
+    'end_date': datetime(2025, 1, 10),
+    'mission_info': 'Pluto orbital period: 6.39 Earth days.'
+    },
+
+    {
+    'name': 'Nix', 
+    'id': '902', 
+    'var': nix_var, 
+    'color': color_map('Nix'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Nix: January 1, 2025, to January 25, 2025 (24.86 days)
+    'end_date': datetime(2025, 1, 28),
+    'mission_info': 'Pluto orbital period: 24.86 Earth days.'
+    },
+
+    {
+    'name': 'Hydra', 
+    'id': '903', 
+    'var': hydra_var, 
+    'color': color_map('Hydra'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Hydra: January 1, 2025, to February 8, 2025 (38.20 days)
+    'end_date': datetime(2025, 1, 11),
+    'mission_info': 'Pluto orbital period: 38.20 Earth days.'
+    },
+
+#    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+#    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+#    'mission_info': 'One of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/nix/overview/'},
+#    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+#    'mission_info': 'Another of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/hydra/overview/'},
 
     # Eris's Moon
-    {'name': 'Eris\' Moon Dysnomia', 'id': 'Dysnomia', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-     'mission_info': 'Companion to the dwarf planet Eris.', 'mission_url': 'https://www.nasa.gov/asteroids'},
+
+    {
+    'name': 'Dysnomia', 
+    'id': '120136199', 
+    'var': dysnomia_var, 
+    'color': color_map('Dysnomia'), 
+    'symbol': 'circle', 
+    'is_mission': False, 
+    'id_type': 'majorbody',
+    'start_date': datetime(2025, 1, 1),     # Dysnomia: January 1, 2025, to January 16, 2025 (15.79 days)
+    'end_date': datetime(2025, 1, 19),
+    'mission_info': 'Orbital period: 15.79 Earth days.'
+    },
+
+#    {'name': 'Eris\' Moon Dysnomia', 'id': 'Dysnomia', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
+#     'mission_info': 'Companion to the dwarf planet Eris.', 'mission_url': 'https://www.nasa.gov/asteroids'},
 
     # Stars
     # Proxima Centauri - Our closest stellar neighbor

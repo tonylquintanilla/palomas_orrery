@@ -21,3 +21,5 @@ requests>=2.31.0
 
 # Essential for running in Jupyter notebooks (if used)
 ipython>=8.12.0
+
+scipy>=1.11.0  # Add this line

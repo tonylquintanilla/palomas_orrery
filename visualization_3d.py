@@ -686,7 +686,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                     'y': y/distance,
                     'z': z/distance
                 }
-                notable_stars.append({
+                notable_stars.append({      # this moves the camera to point to the notable star
                     'label': star_name,
                     'method': 'relayout',
                     'args': [{
@@ -713,12 +713,12 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                 x=0.05,
                 y=1.15,
                 buttons=[dict(
-                    label="Move Camera to Center",
+                    label="Move Camera to the Sun (Center)",
                     method="relayout",
                     args=[{
                         "scene.camera": {
                             "center": {"x": 0, "y": 0, "z": 0},
-                            "eye": {"x": 0, "y": -0.005, "z": 0},
+                            "eye": {"x": 0, "y": 0.05, "z": 0},       # "y": -0.005 places the camera just in front of the Sun
                             "up": {"x": 0, "y": 0, "z": 1}
                         }
                     }]

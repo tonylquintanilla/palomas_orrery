@@ -24,7 +24,7 @@ def add_hover_toggle_buttons(fig):
         type="buttons",
         direction="right",
         x=0.2,
-        y=0.08,
+        y=0.2,
         buttons=[
             dict(
                 label="Full Object Info",
