@@ -190,6 +190,13 @@ planetary_params = {
         'omega': 250.97,  # argument of perihelion in degrees
         'Omega': 55.39    # longitude of ascending node in degrees
     },
+    'Lutetia': {                  # Epoch 2017-10-12, heliocentric
+        'a': 2.434591597038037,   # Horizons: A, semi-major axis in AU
+        'e': .1644174522633922,   # Horizons: EC, eccentricity
+        'i': 3.063715677953934,      # Horizons: IN, inclination in degrees
+        'omega': 249.980528664283, # Horizons: W, argument of perihelion in degrees
+        'Omega': 80.87713180326485   # Horizons: OM, longitude of ascending node in degrees
+    },
     'Apophis': {
         'a': 0.922583,   # semi-major axis in AU
         'e': 0.191481,   # eccentricity
@@ -221,6 +228,31 @@ planetary_params = {
         'Omega': 69.095   # longitude of ascending node in degrees
     },
 
+    # Comets
+    'Churyumov': {                  # Epoch 2015-10-10, heliocentric (500@10) and geocentric (500)
+        'a': 3.462249489765068,   # Horizons: A, semi-major axis in AU
+        'e': .6409081306555051,   # Horizons: EC, eccentricity
+        'i': 7.040294906760007,      # Horizons: IN, inclination in degrees
+        'omega': 12.79824973415729, # Horizons: W, argument of perihelion in degrees
+        'Omega': 50.13557380441372   # Horizons: OM, longitude of ascending node in degrees
+    },
+
+    'Halley_geocentric': {         # Epoch 2017-10-13, geocentric -- not accurate for our plot
+        'a': 3.170639037258039,   # Horizons: A, semi-major axis in AU
+        'e': .1433170784128717,   # Horizons: EC, eccentricity
+        'i': 3.449227641924809,      # Horizons: IN, inclination in degrees
+        'omega': 188.324777427583, # Horizons: W, argument of perihelion in degrees
+        'Omega': 95.24615579501011   # Horizons: OM, longitude of ascending node in degrees
+    },
+
+    'Halley': {                  # Epoch 2068-02-21, heliocentric
+        'a': 17.93003431157555,   # Horizons: A, semi-major axis in AU
+        'e': .9679221169240834,   # Horizons: EC, eccentricity
+        'i': 162.1951462980701,      # Horizons: IN, inclination in degrees
+        'omega': 112.2128395742619, # Horizons: W, argument of perihelion in degrees
+        'Omega': 59.07198712310091   # Horizons: OM, longitude of ascending node in degrees
+    },
+
 }  
 
 parent_planets = {
@@ -246,7 +278,8 @@ parent_planets = {
     'Triton': 'Neptune',
     'Charon': 'Pluto',
     'Nix': 'Pluto',
-    'Hydra': 'Pluto'
+    'Hydra': 'Pluto',
+    'Dysnomia': 'Eris'
 }
 
 # Mapping of SIMBAD object types to full descriptions
@@ -594,53 +627,53 @@ def color_map(planet):
         'Makemake': 'rgb(255, 192, 203)',
         'Eris': 'rgb(144, 238, 144)',
         'Voyager 1': 'white',
-        'Voyager 1 to heliopause': 'white',
-        'Voyager 2': 'white',
-        'Cassini-Huygens': 'white',
-        'New Horizons': 'white',
-        'Juno': 'white',
+        'Voyager 2': 'gold',
+        'Cassini': 'green',
+        'Horizons': 'red',
+        'Juno': 'cyan',
         'Galileo': 'white',
-        'Pioneer 10': 'white',
-        'Pioneer 11': 'white',
-        'Europa Clipper': 'white',
-        'OSIRIS-REx': 'white',
-        'Parker Solar Probe': 'white',
-        'James Webb Space Telescope': 'white',
+        'Pioneer10': 'red',
+        'Pioneer11': 'green',
+        'Europa': 'red',
+        'OSIRIS': 'cyan',
+        'Parker': 'white',
+        'JWST': 'gold',
         'Rosetta': 'white',
-        'BepiColombo': 'white',
-        'Akatsuki': 'white',
-        'Oumuamua': 'rgb(218, 165, 32)',
-        '2024 PT5': 'rgb(255, 140, 0)',
-        'Apophis': 'rgb(255, 140, 0)',
-        'Vesta': 'rgb(240, 128, 128)',
-        'Bennu': 'rgb(255, 255, 224)',
-        'Šteins': 'rgb(30, 144, 255)',  # Added Šteins' color
-        'Ikeya-Seki': 'rgb(218, 165, 32)',
-        'West': 'rgb(218, 165, 32)',
-        'Halley': 'rgb(218, 165, 32)',
-        'Hyakutake': 'rgb(218, 165, 32)',
-        'Hale-Bopp': 'rgb(218, 165, 32)',
-        'McNaught': 'rgb(218, 165, 32)',
-        'NEOWISE': 'rgb(218, 165, 32)',
-        'Tsuchinshan-ATLAS': 'rgb(218, 165, 32)',
-        'ATLAS': 'rgb(218, 165, 32)',
-        'Churyumov-Gerasimenko': 'rgb(32, 178, 170)',
-        'Borisov': 'rgb(64, 224, 208)',
-        'SOHO: Solar and Heliospheric Observatory': 'white',
-        'Ryugu': 'white',
-        'Eros': 'white',
-        'Itokawa': 'white',
-        'Chang\'e': 'white',
-        'Perseverance Rover': 'white',
-        'DART Mission': 'white',
-        'Lucy Mission': 'white',
-        'Eris\' Moon Dysnomia': 'white',
-        'Pluto\'s Moons Nix and Hydra': 'white',
-        'Gaia': 'white',
-        'Hayabusa2': 'white', 
+        'Bepi': 'red',
+        'Akatsuki': 'cyan',
+        'Oumuamua': 'gold',
+        '2024 PT5': 'green',
+        'Apophis': 'red',
+        'Vesta': 'cyan',
+        'Bennu': 'white',
+        'Lutetia': 'green',
+        'Šteins': 'red',  
+        'IkeyaSeki': 'green',
+        'West': 'red',
+        'Halley': 'cyan',
+        'Hyakutake': 'white',
+        'Hale-Bopp': 'gold',
+        'McNaught': 'green',
+        'NEOWISE': 'red',
+        'Tsuchinsh': 'cyan',
+        'ATLAS': 'white',
+        'Churyumov': 'gold',
+        'Borisov': 'red',
+        'SOHO': 'white',
+        'JamesWebb': 'gold',
+        'Ryugu': 'gold',
+        'Eros': 'green',
+        'Itokawa': 'red',
+        'Chang\'e': 'cyan',
+        'MarsRover': 'white',
+        'DART': 'gold',
+        'Lucy': 'green',
+        'Gaia': 'red',
+        'Hayabusa2': 'cyan', 
         'Nix': 'white',        
         'Hydra': 'rgb(218, 165, 32)',  
         'Quaoar': 'rgb(244, 164, 96)',
+        'Dysnomia': 'white',
         'Sedna': 'rgb(135, 206, 235)',
         'Orcus': 'rgb(0, 100, 0)',
         'Varuna': 'rgb(218, 165, 32)',
@@ -681,8 +714,33 @@ INFO = {
         'Ceres': 'The largest object in the asteroid belt, considered a dwarf planet.',
         'Apophis': 'Near-Earth asteroid with a close approach in 2029.',
         'Vesta': 'Asteroid visited by NASA\'s Dawn mission.',
-        'Bennu': 'A near-Earth asteroid studied by the OSIRIS-REx mission.',
+
+        'Bennu': 'A near-Earth asteroid studied by the OSIRIS-REx mission.\n' 
+        '* Type: Bennu is a near-Earth asteroid classified as a carbonaceous (C-type) asteroid. These types of asteroids are rich in ' 
+        'carbon and other organic molecules, as well as hydrated minerals. They are considered to be some of the most primitive ' 
+        'objects in the solar system, essentially time capsules from the early days of our planetary system\'s formation.\n' 
+        '* Size: Bennu is relatively small, with an equatorial diameter of about 510 meters. It\'s shaped somewhat like a spinning ' 
+        'top or a lumpy potato.\n' 
+        '* Rotation: Bennu rotates fairly quickly, completing a rotation every 4.3 hours.\n' 
+        '* Orbit: Bennu\'s orbit brings it relatively close to Earth, making it accessible for a spacecraft mission. However, its orbit also crosses Earth\'s.\n' 
+        '* Scientific Value: Carbonaceous asteroids like Bennu are believed to contain the building blocks of life - organic molecules, ' 
+        'amino acids, and potentially even more complex compounds. Studying these materials can give us insights into the early solar ' 
+        'system and the origins of life itself. Bennu is a pristine sample of this material.\n' 
+        '* Accessibility: Bennu\'s near-Earth orbit made it a logistically feasible target for the OSIRIS-REx mission. The round trip was ' 
+        'possible within a reasonable timeframe.\n' 
+        '* Sample Return: The primary goal of OSIRIS-REx was to collect a sample of material from Bennu and return it to Earth. Bennu\'s ' 
+        'size, composition, and relatively slow rotation made it a good candidate for a touch-and-go sample collection maneuver.\n' 
+        'Planetary Defense: Studying Bennu also provides valuable information for planetary defense. Because it\'s a near-Earth asteroid, ' 
+        'understanding its composition, structure, and orbit helps us better assess the potential threat of asteroid impacts and develop' 
+        'mitigation strategies if necessary.\n' 
+        '* Understanding Asteroids: Bennu is representative of a large population of C-type asteroids. Studying it in detail helps us ' 
+        'understand the properties of these types of asteroids in general, which is important for understanding the history of the solar ' 
+        'system.', 
+
         'Šteins': 'A main-belt asteroid visited by the Rosetta spacecraft.', 
+
+        'Lutetia': 'A main-belt asteroid visited by the Rosetta spacecraft.', 
+
         'Ryugu': 'Asteroid visited by the Japanese Hayabusa2 mission.',
         'Eros': 'Asteroid explored by NASA\'s NEAR Shoemaker spacecraft.',
         'Itokawa': 'Asteroid visited by the original Hayabusa mission.',
@@ -754,34 +812,128 @@ INFO = {
         'Earth. It is a testament to the ingenuity and perseverance of the scientists and engineers who designed, built, and operate ' 
         'it.',
 
-        'Voyager 2': 'The only spacecraft to visit all four gas giants: Jupiter, Saturn, Uranus, and Neptune. ' 
-        'https://voyager.jpl.nasa.gov/mission/',
+        'Voyager 2': 'The only spacecraft to visit all four gas giants: Jupiter, Saturn, Uranus, and Neptune.',
 
-        'Cassini-Huygens': 'Explored Saturn, its rings, and moons, and delivered the Huygens probe to Titan. ' 
-        'https://solarsystem.nasa.gov/missions/cassini/overview/',
+        'Cassini': 'NASA: "A joint endeavor of NASA, ESA, and the Italian space agency (ASI), Cassini was a sophisticated robotic ' 
+        'spacecraft sent to study Saturn and its complex system of rings and moons in unprecedented detail. Cassini carried a probe ' 
+        'called Huygens to the Saturn system. The probe, which was built by ESA, parachuted to the surface of Saturn’s largest moon, ' 
+        'Titan, in January 2005 — the most distant landing to date in our solar system. Huygens returned spectacular images and other ' 
+        'science results during a two-and-a-half-hour descent through Titan’s hazy atmosphere, before coming to rest amid rounded ' 
+        'cobbles of ice on a floodplain damp with liquid methane. Cassini completed its initial four-year mission in June 2008 and ' 
+        'earned two mission extensions. Key discoveries during its 13 years at Saturn included a global ocean with strong indications ' 
+        'of hydrothermal activity within Enceladus and liquid methane seas on Titan. The mission ended on Sept. 15, 2017."\n' 
+        '* Launch: October 15, 1997\n'
+        '* Venus flyby: April 26, 1998\n'
+        '* Earth flyby: August 17, 1999\n'
+        '* Jupiter flyby: December 26, 2000\n'
+        '* Saturn orbit insertion: June 30, 2004\n'
+        '* Final transmission: September 15, 2017',
 
-        'New Horizons': 'Flew past Pluto in 2015, now exploring the Kuiper Belt. ' 
-        'https://www.nasa.gov/mission_pages/newhorizons/main/index.html',
+        'Horizons': 'New Horizons flew past Pluto in 2015, now exploring the Kuiper Belt.',
 
-        'Juno': 'Currently orbiting Jupiter, studying its atmosphere and magnetic field. ' 
-        'https://www.nasa.gov/mission_pages/juno/main/index.html',
+        'Juno': 'NASA\'s Juno mission is a spacecraft orbiting Jupiter to study the planet\'s origins, structure, atmosphere, and ' 
+        'magnetosphere.\n'
+        '* Key dates:\n' 
+        '  * Juno launched on August 5, 2011.\n' 
+        '  * Earth Flyby (Gravity Assist) on October 9, 2013\n' 
+        '  * Jupiter Arrival and Orbit Insertion on July 4, 2016\n'
+        '  * Extended Mission Start on August 1, 2021\n' 
+        '  * First Ganymede Flyby on June 7, 2021\n'
+        '  * First Europa Flyby on September 29, 2022\n' 
+        '  * First Io Flyby on December 30, 2023\n'
+        '  * End of Mission on September 2025 or end of spacecraft life\n'
+        '* Juno is the first spacecraft to orbit Jupiter from pole to pole, giving it a unique perspective on the planet\'s polar regions.\n' 
+        '* Juno is also the first spacecraft to operate on solar power at such a great distance from the Sun.\n' 
+        '* Juno has made several significant discoveries, including:\n' 
+        '  * Jupiter has a complex and dynamic atmosphere, with powerful storms and cyclones that can last for centuries.\n' 
+        '  * Jupiter\'s magnetic field is the strongest in the solar system, and it is generated by a layer of metallic hydrogen deep within the planet.\n' 
+        '  * Jupiter has a core that is larger and more diffuse than previously thought.\n' 
+        '  * Jupiter\'s moons are diverse and fascinating worlds in their own right, with potential for harboring life.\n' 
+        '  * Juno is currently in an extended mission, which will last until 2025. During this time, it will continue to study Jupiter\n' 
+        '    and its moons, providing valuable insights into the formation and evolution of our solar system.',
 
-        'Galileo': 'Studied Jupiter and its major moons, including Europa and Ganymede. https://solarsystem.nasa.gov/missions/galileo/overview/',
+        'Galileo': 'Studied Jupiter and its major moons, including Europa and Ganymede.',
         
-        'Pioneer 10': 'The first spacecraft to travel through the asteroid belt and make direct observations ' 
-        'of Jupiter. https://www.nasa.gov/centers/ames/missions/archive/pioneer.html',
+        'Pioneer10': 'The first spacecraft to travel through the asteroid belt and make direct observations',
         
-        'Pioneer 11': 'The first spacecraft to encounter Saturn and study its rings. ' 
-        'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html',
+        'Pioneer11': 'The first spacecraft to encounter Saturn and study its rings.',
         
-        'Europa Clipper': 'NASA\'s mission to explore Jupiter\'s moon Europa, launched October 14, 2024. No ephemeris available. ' 
-        'https://europa.nasa.gov/',
+        'Europa': 'Europa-Clipper is NASA\'s mission to explore Jupiter\'s moon Europa, launched October 14, 2024. No ephemeris available.',
         
-        'OSIRIS-REx': 'NASA mission collected samples from asteroid Bennu and returned to Earth. ' 
-        'Arrived 2018-12-03. Left 2021-05-10. Sample recovered 2023-09-24. Mission ongoing. https://www.asteroidmission.org/',
+        'OSIRISREx': 'OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
+        '* NASA information: "OSIRIS-REx ("Origins, Spectral Interpretation, Resource Identification, and Security-Regolith Explorer") explored 101955 ' 
+        'Bennu (1999 RQ36), a carbonaceous B-type asteroid whose regolith may provide insights on the early history of the solar ' 
+        'system. After the sample was returned to Earth, in 2023, the mission was retargeted to encounter asteroid Apophis in 2029 ' 
+        'and renamed OSIRIS-APEX ("APophis EXplorer").\n' 
+        '* MISSION EVENT SUMMARY (UTC):\n' 
+        '  * 2016  Sep 08 23:05 Launch from Cape Canaveral\n' 
+        '  * 2017  Sep 22 16:52 Earth flyby and gravity assist 23,592 km from geocenter\n' 
+        '  * 2018  August, Bennu approach phase\n' 
+        '  *       October, Rendevous with asteroid\n' 
+        '  *       November, Estimate mass, shape, and spin state models\n' 
+        '  *       December 3, Proximity operations began. Closest approach from December 4, 13:00 to 21:00. This marked the start ' 
+        'of its detailed study of the asteroid.\n' 
+        '  * 2019  January, Begin detailed mapping; identify candidate sample sites\n' 
+        '  *       May, Sorties to examine 4 candidate sample sites\n' 
+        '  *       October, Fly over candidate sample sites\n' 
+        '  * 2020  April, First sample-collection rehearsal\n' 
+        '  *       August, Second sample-collection rehearsal\n' 
+        '  *       October 20, Collect sample > 60 grams. Touchdown from 21:00 to 22:13: OSIRIS-REx successfully collected a sample from Bennu\'s ' 
+        'surface on October 20, 2020, at 22:13 UTC. This involved a brief "touch-and-go" maneuver where the spacecraft\'s sampling ' 
+        'arm made contact with the asteroid\'s surface to collect dust and rocks. The plot will show the closest approach at about ' 
+        '0.0000000024 to 0.0000000026 AU, third of a meter from the surface -- the length of the sampling arm.\n' 
+        '  * 2021  May 10, Start return cruise and transport sample back to Earth\n' 
+        '  * 2023  September 24, Sample Return Capsule (SRC) recovery on Earth\n' 
+        '  * 2023  October 24, Retargeting maneuver for Apophis (OSIRIS-APEX)\n' 
+        '* MISSION OBJECTIVES:\n'  
+        '  * Map the asteroid\n' 
+        '  * Return and analyze a sample of Bennu\'s surface\n' 
+        '  * Document the sample site\n' 
+        '  * Measure the orbit deviation caused by small non-gravitational forces\n' 
+        '  * Compare observations made at the asteroid to ground-based observations\n' 
+        'NOTE: To generate ephemerides OF destination asteroid Bennu as a target look-up "2101955". To use asteroid Bennu as an ' 
+        'observing point, set the coordinate center to "@ 2101955". The Sample Return Capsule can be accessed as object \'-64090\' ' 
+        'Apophis mission trajectory as object \'2099942\'',
+
+        'OSIRISAPE': 'OSIRIS-APEX is a NASA mission that will study the asteroid Apophis.\n' 
+        '* OSIRIS-REx\'s Legacy: OSIRIS-REx was a NASA mission that successfully traveled to the asteroid Bennu, collected a sample ' 
+        'of its surface material, and returned it to Earth in September 2023. This was a landmark achievement in asteroid exploration.\n' 
+        '* Spacecraft in Good Condition: After completing its primary mission, the OSIRIS-REx spacecraft was still in good working ' 
+        'order and had plenty of fuel left.\n' 
+        '* Extended Mission: Instead of retiring the spacecraft, NASA decided to extend the mission and send it to another asteroid, ' 
+        'Apophis. This new mission was named OSIRIS-APEX (Origins, Spectral Interpretation, Resource Identification, and Security - ' 
+        'Apophis Explorer).\n' 
+        '* Repurposed Spacecraft: OSIRIS-APEX is essentially the same OSIRIS-REx spacecraft, but with a new target and new objectives.\n' 
+        '* Connection to OSIRIS-REx: The most direct connection is that OSIRIS-APEX uses the exact same spacecraft that successfully ' 
+        'explored Bennu. This means it inherits all the capabilities and instruments that were used on the OSIRIS-REx mission.\n' 
+        '* Building on Knowledge: The knowledge and experience gained from the OSIRIS-REx mission are invaluable for OSIRIS-APEX. ' 
+        'Scientists and engineers can apply what they learned about asteroid navigation, sample collection, and data analysis to the ' 
+        'new mission.\n' 
+        '* Study Apophis: OSIRIS-APEX will study the asteroid Apophis, which is a near-Earth asteroid that will make a very close ' 
+        'approach to Earth in 2029. This close approach will allow scientists to observe how Earth\'s gravity affects the asteroid.\n' 
+        '* Different Asteroid Type: Apophis is a different type of asteroid than Bennu. It\'s a "stony" asteroid rather than a ' 
+        'carbonaceous one. This gives scientists an opportunity to compare and contrast different types of asteroids.\n' 
+        '* Surface Changes: OSIRIS-APEX will observe Apophis before and after its close encounter with Earth to see how the encounter ' 
+        'changes the asteroid\'s surface.\n'
+        '* Not just a one-time flyby: While OSIRIS-APEX will indeed fly by Apophis, it\'s not just a quick pass-by like some ' 
+        'traditional flyby missions. The spacecraft will actually enter a close orbit around Apophis and study it for an extended ' 
+        'period.\n' 
+        '  * Close Approach: Before entering orbit, OSIRIS-APEX will perform a close flyby of Apophis. This will allow the spacecraft ' 
+        'to gather crucial data about the asteroid\'s shape, size, mass, and surface features. This information will help scientists ' 
+        'plan the subsequent orbital phase of the mission. The close flyby is expected to happen shortly after Apophis makes its close ' 
+        'approach to Earth in April 2029.\n' 
+        '  * Purpose of the Flyby: The primary purpose of the flyby is to gather preliminary data about Apophis. This will help ' 
+        'scientists select the best location for the spacecraft to enter orbit and conduct more detailed studies. By observing Apophis ' 
+        'before and after its close approach to Earth, OSIRIS-APEX can study how the asteroid\'s surface and rotation are affected by ' 
+        'Earth\'s gravity. This is a rare opportunity to observe such a phenomenon up close.\n' 
+        '  * Orbital Phase: After the initial flyby, OSIRIS-APEX will enter orbit around Apophis. This will allow for long-term study ' 
+        'of the asteroid, including mapping its surface, analyzing its composition, and observing any changes caused by the Earth flyby.\n' 
+        '  * "Touch-and-Go" Maneuver: OSIRIS-APEX is also planned to perform a maneuver similar to the touch-and-go sample collection ' 
+        'on Bennu. However, this time it won\'t be collecting a sample. Instead, it will use its thrusters to disturb Apophis\'s surface, ' 
+        'allowing scientists to study the material beneath.',
         
-        'Parker Solar Probe':
-        'Studying the Sun\'s outer corona by flying closer to the Sun than any previous spacecraft.\n\n'
+        'Parker':
+        'The Parker Solar Probe is studying the Sun\'s outer corona by flying closer to the Sun than any previous spacecraft.\n\n'
         'Operating Region:\n'
         '* Sun\'s surface (photosphere): ~0.00465 AU\n'
         '* Inner corona: extends to ~2 to 3 solar radii or 0.01 AU\n'
@@ -795,16 +947,40 @@ INFO = {
         '* Launch: August 12, 2018\n'
         '* First perihelion: November 5, 2018\n'
         '* Final closest approach: 8.8 solar radii at 7AM EST on December 24, 2024\n\n'
-        '* NOTE: To visualize the closest approach plot Paker on December 24, 2024, at 12 hours.'
-        'Website: https://www.nasa.gov/content/goddard/parker-solar-probe',       
+        '* NOTE: To visualize the closest approach plot Paker on December 24, 2024, at 12 hours.',       
         
-        'James Webb Space Telescope': 'NASA\'s flagship infrared space telescope. https://www.jwst.nasa.gov/',
+        'JamesWebb': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope, orbiting Lagrange point 2.',
         
-        'Rosetta': 'European Space Agency mission that studied Comet ' 
-        '67p/Churyumov-Gerasimenko. Flyby Asteroid Steins 2008-09-05. Arrives at 67p 2014-08-6. Deployed Philae lander 2014-11-12. ' 
-        'Soft landing and termination 2016-09-30. https://rosetta.esa.int/', 
+        'Rosetta': 'European Space Agency mission that studied Comet 67p/Churyumov-Gerasimenko. The Rosetta mission significantly ' 
+        'advanced our understanding of comets and their role in the early solar system. Its data continues to be analyzed, providing ' 
+        'valuable information for planetary science.\n' 
+        '* Key Dates:\n' 
+        '  * Launch: March 2, 2004 - Rosetta launched from Kourou, French Guiana.\n' 
+        '  * Flybys: Rosetta performed flybys to gain gravitational assists and adjust its trajectory.\n'
+        '    * Earth Flyby 1: March 4, 2005\n' 
+        '    * Mars Flyby: February 25, 2007\n' 
+        '    * Earth Flyby 2: November 13, 2007\n' 
+        '    * Steins, on September 5, 2008\n' 
+        '    * Earth Flyby 3: November 12, 2009\n' 
+        '    * Lutetia, on July 10, 2010\n' 
+        '  * Deep Space Hibernation: From June 2011 to January 2014, Rosetta entered hibernation mode to conserve energy.\n' 
+        '  * Comet Arrival: August 6, 2014 - Rosetta arrived at Comet 67P/Churyumov-Gerasimenko and began orbiting it.\n' 
+        '  * Philae Lander Deployment: November 12, 2014 - The Philae lander was deployed and successfully landed on the comet\'s surface.\n' 
+        '  * Perihelion Passage: August 13, 2015 - Comet 67P reached perihelion, and Rosetta observed its most active period.\n' 
+        '  * Mission End: September 30, 2016 - The Rosetta mission concluded with a controlled impact onto the comet\'s surface.\n'
+        '  * JPL Horizons data ends 2016-10-05.\n' 
+        '* The Rosetta mission was a groundbreaking space exploration endeavor by the European Space Agency (ESA) to study Comet ' 
+        '67P/Churyumov-Gerasimenko. Launched in 2004, the Rosetta spacecraft traveled for ten years to reach the comet.\n' 
+        '* Firsts: Rosetta was the first mission to orbit a comet nucleus and deploy a lander, Philae, onto its surface.\n' 
+        '* Long-term Observation: The mission provided unprecedented insights into cometary activity by accompanying 67P as it traveled ' 
+        'closer to the Sun.\n' 
+        '* Scientific Discoveries: Rosetta\'s data revealed the comet\'s composition, including organic molecules, and challenged existing ' 
+        'theories about the origin of Earth\'s water.\n' 
+        '* Mission Duration: Rosetta orbited Comet 67P from August 2014 to September 2016, witnessing the comet\'s most active period.\n' 
+        '* Legacy: The Rosetta mission significantly advanced our understanding of comets and their role in the early solar system. ' 
+        'Its data continues to be analyzed, providing valuable information for planetary science.', 
 
-        'BepiColombo': 'BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
+        'Bepi': 'BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
         'It\'s a joint endeavor by the European Space Agency (ESA) and the Japan Aerospace Exploration Agency (JAXA).\n ' 
         '* The mission consists of two main spacecraft that journeyed to Mercury together: Mercury Planetary Orbiter (MPO) ' 
         'built by ESA, it will study Mercury\'s surface and internal composition. And Mercury Magnetospheric Orbiter (Mio) ' 
@@ -848,17 +1024,48 @@ INFO = {
         'It\'s a complex dance with gravity, but this intricate approach is necessary to get BepiColombo into the right ' 
         'position to study Mercury effectively!',
         
-        'SOHO: Solar and Heliospheric Observatory': 'Located at the L1 Lagrange point. https://sohowww.nascom.nasa.gov/',
+        'SOHO': 'The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
         
-        'Gaia': 'European Space Agency mission at L2 mapping the Milky Way. https://www.cosmos.esa.int/web/gaia',
+        'Gaia': 'European Space Agency mission at L2 mapping the Milky Way.',
         
-        'Hayabusa2': 'Japan JAXA mission that returned samples from Ryugu. https://hayabusa2.jaxa.jp/en/', 
+        'Hayabusa2': 'Japan JAXA mission that returned samples from Ryugu.', 
         
-        'Chang\'e': 'China\'s lunar exploration program. http://www.clep.org.cn/',
+        'Chang\'e': 'China\'s lunar exploration program.',
         
-        'Perseverance Rover': 'NASA Mars rover and Ingenuity helicopter. https://mars.nasa.gov/mars2020/',
+        'MarsRover': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. The NASA Mars Perseverance mission ' 
+        'is a robotic space mission currently underway, aimed at exploring the planet Mars and searching for signs of ancient ' 
+        'microbial life.\n'
+        '* Objective: To investigate the habitability of Mars in the ancient past, search for evidence of past microbial life, collect ' 
+        'and store Martian rock and soil samples for future return to Earth, and test technologies for future human exploration of Mars.\n' 
+        '* Launch Date: July 30, 2020\n'
+        '* Landing Date: February 18, 2021, at 20:55 UTC.\n'
+        '* Perseverance\'s Journey: Perseverance, along with Ingenuity, was housed within a protective aeroshell during its journey ' 
+        'to Mars. This aeroshell helped protect the rover and helicopter during the high-speed entry into Mars\' atmosphere.\n' 
+        '* Landing on Mars: During the landing process, the aeroshell separated, and Perseverance used a parachute and a "sky crane" ' 
+        'system to gently lower itself onto the Martian surface. The sky crane then detached and flew away to a safe distance before crashing.\n'
+        '* Landing Site: Jezero Crater, a former lake basin believed to be a promising location for finding evidence of past life.\n'
+        '* Landing elevation: Jezero Crater is located in a depression on Mars.\n' 
+        '  * Its floor lies about 2,600 meters below the "Mars Areoid," which is a reference level similar to sea level on Earth.\n' 
+        '  * Subtract Jezero\'s elevation from Mars\' average radius: 3,389,500 meters - 2,600 meters = 3,386,900 meters.\n' 
+        '  * Convert to AU: Divide the distance to Jezero\'s center by the number of meters in 1 AU: 3,386,900 meters / 149,597,870,700 '
+        'meters/AU ≈ 0.00002264 AU. This is very close to the "Distance from center" value reported by Horizons in the plot ' 
+        '(0.00002267 AU) starting February 18, 21:00, which corresponds to the landing time of 20:55 UTC.\n'
+        '* "Orbit": The apparent "orbit" around Mars in the plot is just the Perseverance lander rotating with Mars on the surface.\n' 
+        '* Rover: Perseverance, a six-wheeled, car-sized rover equipped with advanced scientific instruments.\n' 
+        '* Helicopter: Ingenuity, a small, experimental helicopter that demonstrated the first powered flight on another planet. ' 
+        'Ingenuity\'s mission has recently ended due to damage sustained during a landing.\n' 
+        '* Search for past life: Perseverance is equipped with instruments designed to detect chemical and mineral biosignatures, ' 
+        'as well as examine the geological context of potential past life.\n' 
+        '* Sample collection: The rover has a drill and sample caching system to collect and store samples of Martian rock and soil ' 
+        'for future return to Earth. These samples could provide invaluable insights into the history of Mars and the potential for ' 
+        'life beyond Earth.\n' 
+        '* Technology demonstration: Perseverance is testing technologies that could be used for future human exploration of Mars, ' 
+        'such as a system for producing oxygen from the Martian atmosphere.\n' 
+        '* Status: As of February 2025, Perseverance is still active on Mars, continuing its exploration of Jezero Crater and ' 
+        'collecting samples. The mission is expected to continue for several more years, and the collected samples are planned to ' 
+        'be returned to Earth in the 2030s through a joint mission with the European Space Agency.',
         
-        'DART Mission': 'NASA DART mission to test asteroid deflection. https://www.nasa.gov/dart \n* The DART mission ' 
+        'DART': 'The NASA DART mission to test asteroid deflection.\n* The DART mission ' 
         '(Double Asteroid Redirection Test) was a groundbreaking NASA project that made history in planetary defense! It was the ' 
         'first-ever mission to test a method of deflecting an asteroid by intentionally crashing a spacecraft into it.\n' 
         '* Planetary Defense: The primary goal was to demonstrate the kinetic impactor technique as a viable method for deflecting ' 
@@ -882,7 +1089,7 @@ INFO = {
         'celestial bodies.\n' 
         '* Scientific Research: The impact provided valuable data on the composition and structure of asteroids.',
         
-        'Lucy Mission': 'NASA mission exploring Trojan asteroids around Jupiter. https://www.nasa.gov/lucy \n* The Lucy mission ' 
+        'Lucy': 'The NASA Lucy mission exploring Trojan asteroids around Jupiter.\n* The Lucy mission ' 
         'is a groundbreaking NASA space probe that\'s on an ambitious journey to explore the Trojan asteroids, a unique population ' 
         'of asteroids that share Jupiter\'s orbit around the Sun. These "Trojan swarms" are like fossils of our early solar system, ' 
         'holding clues to the formation of the planets and the conditions that existed billions of years ago. \n* Lucy will visit a ' 
@@ -892,7 +1099,7 @@ INFO = {
         'Akatsuki': 'The Venus Climate Orbiter mission (PLANET-C), will study the atmospheric circulation of Venus over a nominal mission of 4.5 years.',
 
 # Comets        
-        'Ikeya-Seki': 'Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
+        'IkeyaSeki': 'Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
         'in 1965! It was one of the brightest comets of the 20th century and is a member of the Kreutz sungrazers, a family of ' 
         'comets believed to have originated from a larger comet that broke apart long ago. As a Kreutz sungrazer, it provided valuable ' 
         'information about these comets and their origins.\n  Key dates and information:\n ' 
@@ -908,7 +1115,49 @@ INFO = {
         
         'West': 'Notable comet for its bright and impressive tail.',
         
-        'Halley': 'Most famous comet, returns every 76 years.',
+        'Halley': 'Most famous comet, returns every 76 years. ' 
+        '* Orbital Period and Characteristics: Halley\'s Comet has an average orbital period of 76 Earth years. However, this period ' 
+        'can vary due to the gravitational influence of planets, particularly Jupiter and Saturn.  In fact, the gravitational pull ' 
+        'of the major planets alters the orbital period from revolution to revolution. Measured from one perihelion passage to the ' 
+        'next, Halley\'s period has been as short as 74.42 years (1835-1910) and as long as 79.25 years (451-530).\n' 
+        '* Orbit Path: The comet\'s orbit is highly elliptical, with an eccentricity of ' 
+        '0.967. This means its path around the Sun takes it from a point relatively close to the Sun (perihelion) to a point far ' 
+        'beyond Neptune\'s orbit (aphelion).\n' 
+        '* Orbit is Retrograde: Halley\'s Comet orbits the Sun in a retrograde direction, opposite to the direction of most planets. ' 
+        'Its orbit is also inclined by 18 degrees to the ecliptic, the plane of Earth\'s orbit.\n' 
+        '* History of Observations: Halley\'s Comet has been observed and recorded by astronomers for millennia. Before Halley\'s ' 
+        'prediction of its return in 1705, these appearances were not recognized as being the same object. Ancient civilizations, ' 
+        'particularly the Chinese, meticulously documented cometary appearances, providing valuable historical records.  It is a ' 
+        'remarkable fact that observations made with the naked eye 2,000 years ago are still of value today. In the centuries ' 
+        'leading up to Halley\'s prediction, observations from China, Babylon, and Europe helped to track the comet\'s appearances. ' 
+        'These observations, even those made with the naked eye, have proven valuable for modern astronomers studying the comet\'s ' 
+        'long-term behavior.\n' 
+        '  * The comet\'s appearance in 1066, shortly before the Norman Conquest of England, is perhaps its most famous historical ' 
+        'sighting. It was depicted in the Bayeux Tapestry, a significant historical artifact. It is said that William the Conqueror ' 
+        'believed the comet heralded his success.\n' 
+        '  * The 1910 apparition of Halley\'s Comet was also notable, as it was the first time the comet was captured on camera.\n' 
+        '  * The 1986 apparition marked a turning point in our understanding of comets. For the first time, spacecraft were sent ' 
+        'to encounter a comet, providing close-up images and data about its nucleus and composition. Halley\'s Comet reached perihelion on February 9th, 1986.\n'  
+        '  * Halley\'s Comet reached aphelion most recently on December 9th, 2023.\n' 
+        '  * It will reach perihelion next on July 28th, 2061 and then aphelion again on November 21st, 2097.\n'
+        '* Halley\'s Meteor Showers: Each time Halley returns to the inner solar system, its nucleus sprays ice and rock into space. ' 
+        'This debris stream results in two weak meteor showers each year: the Eta Aquarids in May and the Orionids in October.\n' 
+        '* Physical Characteristics:\n' 
+        '  * Halley\'s Comet is a relatively small object, with a nucleus measuring approximately 15 kilometers long, 8 kilometers ' 
+        'wide, and 8 kilometers thick. Its shape has been likened to a peanut or a potato.\n' 
+        '  * Its low density indicates that it is made of a large number of small pieces, held together very loosely, forming a ' 
+        'structure known as a rubble pile.\n' 
+        '  * The comet\'s nucleus is a dark, dusty conglomerate of ice and rock, often described as a "dirty snowball."\n' 
+        '  * It reflects only 4% of the light that falls on it. This makes it one of the darkest objects in the solar system. This ' 
+        'dark coloration is likely due to a layer of dust and complex organic molecules covering much of its surface.\n' 
+        '* Tail or Coma: As Halley approaches the Sun, its volatile compounds, such as water, carbon monoxide, and carbon dioxide, begin to ' 
+        'sublimate, forming a coma, or atmosphere, around the nucleus. This coma can extend up to 100,000 kilometers across. The ' 
+        'sublimation process also releases dust particles, which contribute to the comet\'s tail.\n' 
+        '* Next Predicted Perihelion Passage: Halley\'s Comet is expected to reach its next perihelion, or closest approach to the ' 
+        'Sun, on July 28, 2061. During this apparition, Earth will be in a more favorable position for viewing the comet compared to ' 
+        'its 1986 appearance. It is predicted to be as bright as some of the brightest stars in the sky (apparent magnitude -0.3). ' 
+        'Even more exciting, in 2134, Halley\'s Comet will pass very close to the earth (0.09 AU, or about 13 million km) and should ' 
+        'be much brighter than in 2061 (apparent magnitude -2).',
         
         'Hyakutake': 'Comet passed very close to Earth in 1996.',
         
@@ -918,7 +1167,7 @@ INFO = {
         
         'NEOWISE': 'Brightest comet visible from the Northern Hemisphere in decades.',
         
-        'Tsuchinshan-ATLAS': 'Discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
+        'Tsuchinsh': 'Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
         'and the Asteroid Terrestrial-impact Last Alert System (ATLAS) in South Africa in February 2023.\n * It originates from the ' 
         'Oort cloud, meaning it takes tens of thousands of years to orbit the Sun.\n * It orbits the Sun in the opposite direction ' 
         'to most planets.\n * It reached its closest point to the Sun (perihelion) on September 27, 2024, at a distance of 0.39 AU\n ' 
@@ -926,7 +1175,40 @@ INFO = {
         '* It was easily visible to the naked eye and presented a stunning sight with its long, wispy tail.\n * It made its closest ' 
         'approach to Earth on October 12, 2024. At that time, it was about 0.47 AU from Earth.',
         
-        'Churyumov-Gerasimenko': 'Comet visited by the Rosetta spacecraft.',
+        'Churyumov': 'Comet 67P/Churyumov-Gerasimenko visited by the Rosetta spacecraft.\n' 
+        '* Discovered: In 1969 by Soviet astronomers Klim Churyumov and Svetlana Gerasimenko.\n' 
+        '* Type: A Jupiter-family comet, meaning its orbit is influenced by Jupiter\'s gravity.\n' 
+        '* Origin: Likely from the Kuiper Belt, a region beyond Neptune populated by icy bodies.\n' 
+        '* Shape: A distinctive "rubber duck" shape, consisting of two lobes connected by a narrower neck. This shape is thought to be ' 
+        'the result of a collision between two smaller objects.\n' 
+        '* Size: Approximately 4.3 by 4.1 km at its longest and widest dimensions.\n' 
+        '* Composition: A mixture of ice, dust, and organic materials.\n' 
+        '* Key dates:\n' 
+        '  * Perihelion Date: August 13, 2015 (TP from current Horizons ephemeris, epoch 2015-10-10)\n' 
+        '  * Orbital Period (P): 6.44 years (approximately)\n' 
+        '  * Calculate the Next Perihelion Date: August 13, 2015 + 6.44 years =  Approximately February 2022.\n' 
+        '  * Calculate the Next Aphelion Date: This is half the orbital period. August 13, 2015 + 3.22 years = Approximately November 2018.\n' 
+        '* The Rosetta Mission: A Historic Encounter\n' 
+        '  * First mission to orbit a comet nucleus.\n' 
+        '  * First mission to deploy a lander (Philae) onto a comet\'s surface.\n' 
+        '  * Long-term Observation: Rosetta escorted 67P for over two years, from August 2014 to September 2016, witnessing the comet\'s ' 
+        'activity as it approached the Sun. This provided invaluable data on how comets evolve.\n' 
+        '* Scientific Discoveries:\n' 
+        '  * Water: Rosetta found that the water vapor from 67P has a different isotopic composition than Earth\'s water, suggesting ' 
+        'that comets like 67P may not be the primary source of Earth\'s water.\n' 
+        '  * Organics: Rosetta detected a variety of organic molecules in the comet\'s coma, including some that are considered building ' 
+        'blocks of life.\n' 
+        '  * Surface Features: Rosetta\'s images revealed a diverse landscape on 67P, with cliffs, craters, and even dunes.\n' 
+        '  * Cometary Activity: Rosetta observed how 67P\'s activity increased as it approached the Sun, with jets of gas and dust ' 
+        'erupting from its nucleus.\n' 
+        '* Key Events of the Rosetta Mission\n' 
+        '  * Launch: March 2, 2004\n' 
+        '  * Arrival at 67P: August 6, 2014\n' 
+        '  * Philae Lander Deployment: November 12, 2014. Philae\'s landing was challenging, but it did manage to send back valuable data.\n' 
+        '  * Mission End: September 30, 2016. Rosetta was deliberately crashed onto the comet\'s surface. Horizons data ends 2016-10-5.\n' 
+        '* Legacy: The Rosetta mission provided a wealth of data that continues to be analyzed by scientists. It has significantly advanced ' 
+        'our understanding of comets, their composition, and their role in the early solar system. The mission also demonstrated the ' 
+        'feasibility of complex space maneuvers and the challenges of landing on a comet.',
         
         'Borisov': 'Second interstellar object detected.',
         

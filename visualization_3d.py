@@ -560,8 +560,10 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             f"Marker size indicates luminosity (1e-6 to 1e3 Lsun), "
             f"color indicates temperature based on black-body radiation (1,300K to 50,000K).<br>"
             f"The Sun is shown in chlorophyll green at the origin (0, 0, 0). "
-            f"Python script by Tony Quintanilla with assistance from ChatGPT and Claude, January 2025. "
-            f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>."
+            f"Python script by Tony Quintanilla with assistance from ChatGPT and Claude, February 2025. "
+            f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
+            f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
+            f"with the star name, for example: \"* alf Aql\", for star data."
         )
 
     else:  # magnitude mode
@@ -585,10 +587,12 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                 f"Star color indicates temperature based on black-body radiation (scale: 1,300K to 50,000K).<br>"
                 f"The Sun is shown in chlorophyll green (source of life's energy!) at the origin of the plot (0, 0, 0). "
                 f"The plot coordinates are standardized to the International Celestial Reference System, "
-                f"so the Milky Way is tilted approximately 63° with respect to the celestial equator.<br>"
+                f"so the Milky Way is tilted approximately 63° with respect to the<br>celestial equator. "
                 f"Messier object markers do not reflect object type, apparent magnitude or temperature, but are fixed. " 
-                f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI, January 2025. "
-                f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>."               
+                f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI, February 2025.<br>"
+                f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
+                f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
+                f"with the star name, for example: \"* alf Aql\", for star data."              
             )
 
     # Update layout with centered axes

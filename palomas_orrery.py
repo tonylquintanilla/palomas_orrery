@@ -55,7 +55,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery - Updated January 25, 2025")
+root.title("Paloma's Orrery -- Updated: February 9, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # root.configure(bg="lightblue")  # Set the background color of the root window
@@ -155,7 +155,7 @@ PARKER_CLOSEST_RADII = 8.2    # Parker's closest approach was 3.8 million miles 
     
 def add_url_buttons(fig, objects_to_plot, selected_objects):
     """
-    Add URL buttons for missions and celestial objects in solar system visualizations.
+    Add URL buttons for missions and objects in solar system visualizations.
     
     Parameters:
         fig: plotly figure object
@@ -168,10 +168,12 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
     # Collect objects with URLs that are currently selected
     url_objects = []
     for obj in objects_to_plot:
-        if obj['var'].get() == 1 and obj.get('mission_url'):  
+#        if obj['var'].get() == 1 and obj.get('mission_url'): 
+        if obj['var'].get() == 1 and ('mission_url' in obj or 'url' in obj):          # adds urls for any object   
             url_objects.append({
                 'name': obj['name'],
-                'url': obj['mission_url']
+#                'url': obj['mission_url']
+                'url': obj.get('mission_url') or obj.get('url')                        # Use either URL field
             })
     
     # Remove duplicates while preserving order
@@ -189,7 +191,7 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
 
     # Add URL buttons while preserving existing annotations
     for idx, obj in enumerate(url_objects):
-        button_x = start_x + (idx * 0.15)
+        button_x = start_x + (idx * 0.07)
         
         annotations.append(dict(
             text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF;'>{obj['name']}</a>",
@@ -827,6 +829,16 @@ def calculate_axis_range(objects_to_plot):
     return [-max_range, max_range]
 
 def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=False):
+    """
+    Plot actual orbit positions for selected objects.
+    
+    Parameters:
+        fig: plotly figure object
+        planets_to_plot: list of planet names to plot
+        dates_lists: dictionary mapping planet names to lists of dates
+        center_id: ID of central body (default: 'Sun')
+        show_lines: whether to show lines connecting points (default: False)
+    """
     for planet in planets_to_plot:
         dates_list = dates_lists.get(planet, [])
         if not dates_list:
@@ -841,7 +853,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             x = [pos['x'] for pos in trajectory if pos is not None]
             y = [pos['y'] for pos in trajectory if pos is not None]
             z = [pos['z'] for pos in trajectory if pos is not None]
-            if show_lines:
+            if show_lines:                                                 # this code adds lines betwen the markers
                 mode = 'lines'
                 line = dict(color=color_map(planet), width=1)
                 marker = None
@@ -849,6 +861,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 mode = 'markers'
                 line = None
                 marker = dict(color=color_map(planet), size=1)
+
             fig.add_trace(
                 go.Scatter3d(
                     x=x,
@@ -929,29 +942,34 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         return None
 
 def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
+    """Fetch trajectory data in batch for all dates, handling missing epochs."""
     try:
-        # Convert date list to Julian Dates
         times = Time(dates_list)
         epochs = times.jd.tolist()
-
-        # Create Horizons query
-        obj = Horizons(id=object_id, id_type=id_type, location='@' + str(center_id), epochs=epochs)
-
-        # Fetch vectors for all dates in one call
+        obj = Horizons(id=object_id, id_type=id_type, location='@' + center_id, epochs=epochs)
         vectors = obj.vectors()
-
-        # Process vectors to extract positions
-        positions = []
-        for i in range(len(vectors)):
-            x = float(vectors['x'][i])
-            y = float(vectors['y'][i])
-            z = float(vectors['z'][i])
-            positions.append({'x': x, 'y': y, 'z': z, 'date': dates_list[i]})
+        
+        # Map JD epochs to their indices in the original list
+        epoch_to_index = {epoch: idx for idx, epoch in enumerate(epochs)}
+        positions = [None] * len(epochs)  # Initialize with None
+        
+        # Fill valid positions based on returned data
+        for i, vec in enumerate(vectors):
+            jd = vec['datetime_jd']
+            if jd in epoch_to_index:
+                idx = epoch_to_index[jd]
+                positions[idx] = {
+                    'x': float(vec['x']),
+                    'y': float(vec['y']),
+                    'z': float(vec['z']),
+                    'date': dates_list[idx]
+                }
         return positions
-
     except Exception as e:
-        print(f"Error fetching trajectory for object {object_id}: {e}")
-        return []
+        if "No ephemeris for target" in str(e):
+            return [None] * len(dates_list)
+        print(f"Error fetching trajectory for {object_id}: {e}")
+        return [None] * len(dates_list)
 
 def print_planet_positions(positions):
     """Print positions and distances for planets."""
@@ -985,10 +1003,10 @@ def print_planet_positions(positions):
 def format_maybe_float(value):
     """
     If 'value' is a numeric type (int or float), return it formatted
-    with 5 decimal places. Otherwise, return 'N/A'.
+    with 8 decimal places. Otherwise, return 'N/A'.
     """
     if isinstance(value, (int, float)):
-        return f"{value:.8f}"
+        return f"{value:.10f}"
     return "N/A"
 
 
@@ -1007,6 +1025,10 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
     velocity_au   = format_maybe_float(obj_data.get('velocity'))
     orbit_period  = obj_data.get('orbital_period', 'N/A')  # This might be a string
 
+    # Find the object's info in the objects list
+    obj_info = next((obj for obj in objects if obj['name'] == name), None)
+    mission_info = obj_info.get('mission_info', '') if obj_info else ''
+
     # Now build your hover text strings
     full_hover_text = (
         f"<b>{name}</b><br><br>"
@@ -1017,8 +1039,11 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
         f"Orbital Period: {orbit_period} Earth years"
     )
 
-    if obj_data.get('mission_info'):
-        full_hover_text += f"<br>{obj_data['mission_info']}"
+    # Add mission_info if it exists, regardless of whether it's a mission
+    if mission_info:
+        full_hover_text += f"<br>{mission_info}"
+#    if obj_data.get('mission_info'):
+#        full_hover_text += f"<br>{obj_data['mission_info']}"    
 
     minimal_hover_text = f"<b>{name}</b>"
 
@@ -1093,7 +1118,7 @@ def plot_objects():
                         if total_days <= 0:
                             dates_list = [start_date]
                         else:
-                            interval = total_days / 100         # divide by 100 to have more resolution at perihelion
+                            interval = total_days / 100         # divide by 100 to have more resolution at perihelion, increase for more intervals
                             dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
                     elif obj.get('is_mission', False):
@@ -1116,11 +1141,11 @@ def plot_objects():
                         if capped_orbital_period_days <= 0:
                             dates_list = [date_obj]
                         else:
-                            interval = capped_orbital_period_days / 50      # divide by 50 because this is sufficient for orbit resolution
+                            interval = capped_orbital_period_days / 50      # was 50
                             dates_list = [date_obj + timedelta(days=i) for i in np.arange(0, capped_orbital_period_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
-                    else:
-                        dates_list = [date_obj + timedelta(days=i) for i in range(0, 730, 30)]
+                    else:                                                                       # planetary satellites
+                        dates_list = [date_obj + timedelta(days=i) for i in range(0, 2400, 20)] # starts at day 0, for 2000 days, with 20 day intervals
                         dates_lists[obj['name']] = dates_list
 
             # Fetch positions for selected objects on the chosen date
@@ -1232,7 +1257,7 @@ def plot_objects():
 
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
-            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #using ideal orbits only
+            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #show_lines=True
 
             # Refetch positions (so we can add them as Scatter3d traces)
             positions = {}
@@ -1446,9 +1471,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
             elif obj_name in parent_planets:
                 skipped['satellites'].append(obj_name)
                 continue
-            elif obj_info.get('is_comet', False):
-                skipped['comets'].append(obj_name)
-                continue
+    #        elif obj_info.get('is_comet', False):
+    #            skipped['comets'].append(obj_name)
+    #            continue
             elif obj_info.get('is_mission', False):
                 skipped['missions'].append(obj_name)
                 continue
@@ -1600,6 +1625,40 @@ def show_animation_safely(fig, default_name):
     finally:
         root.destroy()
 
+def pad_trajectory(global_dates, object_start_date, object_end_date, object_id, center_id, id_type):
+    """Fetch trajectory and pad with None before start_date and after end_date."""
+    # Filter dates within the object's active period
+    filtered_dates = [d for d in global_dates if object_start_date <= d <= object_end_date]
+    # Fetch trajectory for active dates
+    fetched_positions = fetch_trajectory(object_id, filtered_dates, center_id=center_id, id_type=id_type)
+    
+    # Calculate padding
+    start_pad_count = 0
+    end_pad_count = 0
+    
+    # Count dates before start_date
+    for d in global_dates:
+        if d < object_start_date:
+            start_pad_count += 1
+        else:
+            break
+    
+    # Count dates after end_date
+    for d in reversed(global_dates):
+        if d > object_end_date:
+            end_pad_count += 1
+        else:
+            break
+    
+    # Pad with None before and after
+    padded_positions = (
+        [None] * start_pad_count +
+        fetched_positions +
+        [None] * end_pad_count
+    )
+    
+    return padded_positions
+
 def animate_objects(step, label):
     def animation_worker():
         try:
@@ -1651,6 +1710,30 @@ def animate_objects(step, label):
                     break
                 dates_list.append(date)
 
+            # In the animate_objects function's animation_worker:
+            positions_over_time = {}
+            for obj in objects:
+                if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                    if 'start_date' in obj or 'end_date' in obj:
+                        # Get start/end dates with fallbacks
+                        start_date = obj.get('start_date', dates_list[0])
+                        end_date = obj.get('end_date', dates_list[-1])
+                        positions_over_time[obj['name']] = pad_trajectory(
+                            dates_list, 
+                            start_date,
+                            end_date,
+                            obj['id'], 
+                            center_id, 
+                            obj.get('id_type')
+                        )
+                    else:
+                        positions_over_time[obj['name']] = fetch_trajectory(
+                            obj['id'], 
+                            dates_list, 
+                            center_id=center_id, 
+                            id_type=obj.get('id_type')
+                        )
+                        
             # Initialize figure
             fig = go.Figure()
 
@@ -1693,13 +1776,13 @@ def animate_objects(step, label):
                     )
                 )
 
-            # Fetch positions for all objects
-            positions_over_time = {}
-            for obj in objects:
-                if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    positions = fetch_trajectory(obj['id'], dates_list, center_id=center_id, 
-                                            id_type=obj.get('id_type'))
-                    positions_over_time[obj['name']] = positions
+    #        positions_over_time = {}
+    #        for obj in objects:
+    #            if obj['var'].get() == 1 and obj['name'] != center_object_name:
+    #                if 'start_date' in obj and obj['start_date'] > dates_list[0]:
+    #                    positions_over_time[obj['name']] = pad_trajectory(dates_list, obj['start_date'], obj['id'], center_id, obj.get('id_type'))
+    #                else:
+    #                    positions_over_time[obj['name']] = fetch_trajectory(obj['id'], dates_list, center_id=center_id, id_type=obj.get('id_type'))
 
             # Create initial traces and track indices
             trace_indices = []
@@ -1747,7 +1830,7 @@ def animate_objects(step, label):
                         fig.add_trace(
                             go.Scatter3d(
                                 x=[None], y=[None], z=[None],
-                                mode='markers+text',
+                                mode='markers',        # removed +text
                                 marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
                                 name=obj['name'],
                                 text=[obj['name']],
@@ -1772,45 +1855,45 @@ def animate_objects(step, label):
 
                 for obj in objects:
                     if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                        if 'start_date' in obj and current_date < obj['start_date']:
-                            frame_data.append(dict(visible=False))
+                        obj_positions = positions_over_time.get(obj['name'])
+                        
+                        if obj_positions and obj_positions[i] is not None and obj_positions[i].get('x') is not None:
+                            obj_data = obj_positions[i]
+                            distance_from_origin = np.sqrt(obj_data['x']**2 + 
+                                                        obj_data['y']**2 + 
+                                                        obj_data['z']**2)
+                            
+                            # Calculate distance in light units
+                            distance_lm = distance_from_origin * LIGHT_MINUTES_PER_AU
+                            distance_lh = distance_lm / 60
+
+                            customdata = [{
+                                'distance': f"{distance_from_origin:.10f}",
+                                'mission_info': obj.get('mission_info')
+                            }]
+
+                            frame_data.append(dict(
+                                type='scatter3d',
+                                x=[obj_data['x']],
+                                y=[obj_data['y']],
+                                z=[obj_data['z']],
+                                text=[f"<b>{obj['name']}</b><br><br>"
+                                    f"Distance from Center: {distance_from_origin:.10f} AU<br>"
+                                    f"Distance: {distance_lm:.2f} light-minutes<br>"
+                                    f"Distance: {distance_lh:.2f} light-hours<br>"
+                                    + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")],
+                                customdata=[f"<b>{obj['name']}</b>"],
+                                hovertemplate='%{text}<extra></extra>',
+                                visible=True
+                            ))
                         else:
-                            obj_positions = positions_over_time.get(obj['name'])
-                            if obj_positions and obj_positions[i]:
-                                obj_data = obj_positions[i]
-                                distance_from_origin = np.sqrt(obj_data['x']**2 + 
-                                                            obj_data['y']**2 + 
-                                                            obj_data['z']**2)
-                                
-                                # Calculate new values for each frame
-                                distance_lm = distance_from_origin * LIGHT_MINUTES_PER_AU
-                                distance_lh = distance_lm / 60
-
-                                customdata = [{
-                                    'distance': f"{distance_from_origin:.8f}",  # Convert to string with full precision
-                                    'mission_info': obj.get('mission_info')
-                                }]                
-
-                                frame_data.append(dict(
-                                    type='scatter3d',
-                                    x=[obj_data['x']],
-                                    y=[obj_data['y']],
-                                    z=[obj_data['z']],
-
-                                    # Add full hover data calculation
-                                    text=[f"<b>{obj['name']}</b><br><br>"
-                                        f"Distance from Center: {distance_from_origin:.8f} AU<br>"
-                        #                f"Distance: {obj_data.get('distance_lm', 'N/A')} light-minutes<br>"        # removed from hovertext
-                        #                f"Distance: {obj_data.get('distance_lh', 'N/A')} light-hours<br>"
-                        #                f"Velocity: {obj_data.get('velocity', 'N/A')} AU/day<br>"
-                        #                f"Orbital Period: {obj_data.get('orbital_period', 'N/A')} Earth years"
-                                        + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")],
-                                    customdata=[f"<b>{obj['name']}</b>"],  # Fix for Object Names Only
-                                    hovertemplate='%{text}<extra></extra>',
-                                    visible=True
-                                ))
-                            else:
-                                frame_data.append(dict(visible=False))
+                            frame_data.append(dict(
+                                type='scatter3d',
+                                x=[None],
+                                y=[None],
+                                z=[None],
+                                visible=False
+                            ))
 
                 frames.append(go.Frame(
                     data=frame_data,
@@ -2275,7 +2358,7 @@ scrollable_frame.scrollable_frame.pack_propagate(False)
 
 # Define selection variables for each object
 # Set inner planets selected by default
-sun_var = tk.IntVar(value=0)  
+sun_var = tk.IntVar(value=1)  
 mercury_var = tk.IntVar(value=1) # default
 venus_var = tk.IntVar(value=1) # default
 earth_var = tk.IntVar(value=1)  # Set Earth to 1 to preselect it by default
@@ -2291,6 +2374,7 @@ pluto_var = tk.IntVar(value=0)
 haumea_var = tk.IntVar(value=0)
 makemake_var = tk.IntVar(value=0)
 eris_var = tk.IntVar(value=0)
+eris2_var = tk.IntVar(value=0)
 voyager1_var = tk.IntVar(value=0)
 voyager1h_var = tk.IntVar(value=0)
 voyager2_var = tk.IntVar(value=0)
@@ -2302,6 +2386,7 @@ pioneer10_var = tk.IntVar(value=0)
 pioneer11_var = tk.IntVar(value=0)
 europa_clipper_var = tk.IntVar(value=0)
 osiris_rex_var = tk.IntVar(value=0)
+osiris_apex_var = tk.IntVar(value=0)
 parker_solar_probe_var = tk.IntVar(value=0)
 jwst_var = tk.IntVar(value=0)
 rosetta_var = tk.IntVar(value=0)
@@ -2321,9 +2406,10 @@ comet_atlas_var = tk.IntVar(value=0)
 oumuamua_var = tk.IntVar(value=0)
 apophis_var = tk.IntVar(value=0)
 vesta_var = tk.IntVar(value=0)
-bennu_var = tk.IntVar(value=0)  # 0 means unselected by default
-steins_var = tk.IntVar(value=0)  # 0 means unselected by default
-# Define IntVar variables for new objects
+bennu_var = tk.IntVar(value=0)  
+bennu2_var = tk.IntVar(value=0)  # Bennu as a center body
+steins_var = tk.IntVar(value=0) 
+lutetia_var = tk.IntVar(value=0) 
 soho_var = tk.IntVar(value=0)
 ryugu_var = tk.IntVar(value=0)
 eros_var = tk.IntVar(value=0)
@@ -2396,7 +2482,7 @@ scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew'
 CreateToolTip(scrollable_frame.scrollable_frame, "Use the scrollbar to see all objects. Categories include:\n" 
               "- Planets and Dwarf Planets;\n- Moons, Asteroids, and Kuiper Belt Objects;\n- Space Missions;\n" 
               "- Comets and Interstellar Objects!\n"
-              "Select a start date for plotting within the range for all objects selected. The default start date is \'Now\'.")
+              "Select a start date for plotting. The default start date is \'Now\'.")
 
 # Checkbuttons for celestial objects
 celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Planets, Dwarf Planets, Moons, Asteroids, and Kuiper" 
@@ -2442,6 +2528,7 @@ create_celestial_checkbutton("Ceres", ceres_var)
 create_celestial_checkbutton("Apophis", apophis_var)
 create_celestial_checkbutton("Bennu", bennu_var)
 create_celestial_checkbutton("Šteins", steins_var)
+create_celestial_checkbutton("Lutetia", lutetia_var)
 create_celestial_checkbutton("Vesta", vesta_var)
 create_celestial_checkbutton("Ryugu", ryugu_var)
 create_celestial_checkbutton("Eros", eros_var)
@@ -2474,6 +2561,8 @@ create_celestial_checkbutton("- Hydra", hydra_var)
 create_celestial_checkbutton("Haumea", haumea_var)
 create_celestial_checkbutton("Makemake", makemake_var)
 create_celestial_checkbutton("Eris", eris_var)
+# create_celestial_checkbutton("Eris/Dysnomia", eris2_var) -- Eris/Dysnomia is only for Eris-centered plot, not needed for 
+# Sun centered plots
 create_celestial_checkbutton("- Dysnomia", dysnomia_var)
 
 # LabelFrame for Kuiper Belt Objects
@@ -2504,29 +2593,29 @@ def create_mission_checkbutton(name, variable, dates):
         tooltip_text += f"\nMore Info: {INFO['mission_url']}"
     CreateToolTip(checkbutton, tooltip_text)
 # Start dates are the day after launch to avoid missing Horizons data.
-create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2003-01-23)")
-create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
+create_mission_checkbutton("Pioneer10", pioneer10_var, "(1972-03-04 to 2003-01-23)")
+create_mission_checkbutton("Pioneer11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
 create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-21 to present)")
 create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-06 to present)")
-# create_mission_checkbutton("Voyager 1 to heliopause", voyager1h_var, "(1977-09-05 to 2012-08-25)")
 create_mission_checkbutton("Galileo", galileo_var, "(1989-10-19 to 2003-09-21)")
-create_mission_checkbutton("Cassini-Huygens", cassini_var, "(1997-10-16 to 2017-09-15)")
-create_mission_checkbutton("SOHO: Solar and Heliospheric Observatory", soho_var, "(1995-12-3 to present)")
-create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-03 to 2016-09-30)")
-create_mission_checkbutton("New Horizons", new_horizons_var, "(2006-01-20 to present)")
+create_mission_checkbutton("Cassini", cassini_var, "(1997-10-16 to 2017-09-15)")
+create_mission_checkbutton("Solar Observatory", soho_var, "(1995-12-3 to present)")
+create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-02 to 2016-10-05)")
+create_mission_checkbutton("Horizons", new_horizons_var, "(2006-01-20 to present)")
 create_mission_checkbutton("Chang'e", change_var, "(2007-10-25 to present)")
 create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to present)")
 create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to present)")
 create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-12-31)")
 create_mission_checkbutton("Hayabusa2", hayabusa2_var, "(2014-12-04 to 2020-12-05)")
-create_mission_checkbutton("OSIRIS-REx", osiris_rex_var, "(2016-09-09 to 2023-09-24)")
-create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to present)")
-create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2025-12-31)")
-create_mission_checkbutton("Perseverance Rover", perse_var, "(2020-07-31 to present)")
-create_mission_checkbutton("Lucy Mission", lucy_var, "(2021-10-18 to 2033-05-01)")
-create_mission_checkbutton("DART Mission", dart_var, "(2021-11-26 to 2022-09-25)")
-create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to present)")
-create_mission_checkbutton("Europa Clipper", europa_clipper_var, "(2024-10-15 to April 2030)")
+create_mission_checkbutton("OSIRISREx", osiris_rex_var, "(2016-09-10 to 2023-09-24)")
+create_mission_checkbutton("OSIRISAPE", osiris_apex_var, "(2023-09-24 to 2029-12-31)")
+create_mission_checkbutton("Parker", parker_solar_probe_var, "(2018-08-13 to present)")
+create_mission_checkbutton("Bepi", bepicolombo_var, "(2018-10-21 to 2030-12-31)")
+create_mission_checkbutton("MarsRover", perse_var, "(2020-07-31 to present)")
+create_mission_checkbutton("Lucy", lucy_var, "(2021-10-18 to 2033-05-01)")
+create_mission_checkbutton("DART", dart_var, "(2021-11-26 to 2022-09-25)")
+create_mission_checkbutton("JamesWebb", jwst_var, "(2021-12-26 to present)")
+create_mission_checkbutton("Europa", europa_clipper_var, "(2024-10-15 to April 2030)")
 
 # Checkbuttons for comets
 comet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Comets and Interstellar Objects")
@@ -2559,13 +2648,14 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
     CreateToolTip(checkbutton, tooltip_text)
 
 
-create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to 1966-01-01)", 
+create_comet_checkbutton("IkeyaSeki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
                          "October 21, 1965")
 #create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to present)", 
 #                         "October 21, 1965")
 create_comet_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
                          "February 25, 1976")
-create_comet_checkbutton("Halley", comet_halley_var, "(1982-11-26 to 1995-10-20)", 
+create_comet_checkbutton("Halley", comet_halley_var, "(1962-01-21 to 2061-7-28)",      
+                         # initial start date 1982-11-26 to 1995-10-20. Horizons has 1962-01-20 and ongoing.
                          "February 9, 1986")
 create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
                          "May 1, 1996")
@@ -2573,15 +2663,16 @@ create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1995-07-23 to 2001-
                          "April 1, 1997")
 create_comet_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
                          "January 12, 2007")
-create_comet_checkbutton("Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(2002-11-22 to 2021-05-01)", 
+create_comet_checkbutton("Churyumov", comet_Churyumov_Gerasimenko_var, "(1962-1-20 to present)", 
     "August 13, 2015")
+    # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
 create_comet_checkbutton("Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
                          "September 9, 2017")
 create_comet_checkbutton("Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-01)", 
     "December 8, 2019")
 create_comet_checkbutton("NEOWISE", comet_neowise_var, "(2020-03-27 to 2021-06-01)", 
                          "July 3, 2020")
-create_comet_checkbutton("Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to present)", 
+create_comet_checkbutton("Tsuchinsh", comet_tsuchinshan_atlas_var, "(2023-01-09 to present)", 
                          "April 28, 2024")
 create_comet_checkbutton("ATLAS", comet_atlas_var, "(2024-06-17 to present)", 
                          "January 13, 2025")
@@ -2617,7 +2708,8 @@ center_label = tk.Label(controls_frame, text="Select Center Object for Your Plot
 center_label.pack(anchor='w')
 
 center_object_var = tk.StringVar(value='Sun')
-center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris']
+center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris/Dysnomia' ] 
+# A unique center for Eris is required using the satellite solution not the sun centered object.
 center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
 center_menu.pack(anchor='w')
 
@@ -2961,198 +3053,497 @@ note_text_widget.config(state='disabled')
 # Define the list of objects
 objects = [
     # Existing Celestial Objects
-    {'name': 'Sun', 'id': '10', 'var': sun_var, 'color': color_map('Sun'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody', 'mission_info': 'Earth orbital period: 27.32 days.'},
-    {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Ceres', 'id': 'ceres', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
-    {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Saturn', 'id': '699', 'var': saturn_var, 'color': color_map('Saturn'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Uranus', 'id': '799', 'var': uranus_var, 'color': color_map('Uranus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Neptune', 'id': '899', 'var': neptune_var, 'color': color_map('Neptune'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Pluto', 'id': '999', 'var': pluto_var, 'color': color_map('Pluto'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Haumea', 'id': '136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
-    {'name': 'Makemake', 'id': '136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
-    {'name': 'Eris', 'id': '20136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody'},
+    {'name': 'Sun', 'id': '10', 'var': sun_var, 'color': color_map('Sun'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit. "', 
+    'mission_url': 'https://science.nasa.gov/sun/'},
+
+    {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
+    'mission_url': 'https://science.nasa.gov/mercury/'},
+
+    {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
+    'mission_url': 'https://science.nasa.gov/venus/'},
+
+    {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'Earth orbital period: 27.32 days.', 
+     'mission_url': 'https://science.nasa.gov/earth/', 'mission_info': 'Our home planet.'},
+
+    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Earth orbital period: 27.32 days.', 
+     'mission_url': 'https://science.nasa.gov/moon/', 'mission_info': 'NASA: "The Moon rotates exactly once each time it orbits our planet."'},
+
+    {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Mars is one of the easiest planets to spot in the night sky — it looks like a bright red point of light."', 
+    'mission_url': 'https://science.nasa.gov/?search=mars'},
+
+    {'name': 'Ceres', 'id': 'ceres', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture."', 
+    'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
+
+    {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Jupiter is the largest and oldest planet in our solar system."', 
+    'mission_url': 'https://science.nasa.gov/?search=Jupiter'},
+
+    {'name': 'Saturn', 'id': '699', 'var': saturn_var, 'color': color_map('Saturn'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
+    'mission_url': 'https://science.nasa.gov/saturn/'},
+
+    {'name': 'Uranus', 'id': '799', 'var': uranus_var, 'color': color_map('Uranus'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
+    'mission_url': 'https://science.nasa.gov/uranus/'},
+
+    {'name': 'Neptune', 'id': '899', 'var': neptune_var, 'color': color_map('Neptune'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
+    'mission_url': 'https://science.nasa.gov/neptune/'},
+
+    {'name': 'Pluto', 'id': '999', 'var': pluto_var, 'color': color_map('Pluto'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'majorbody', 
+    'mission_info': 'NASA: "Pluto is a dwarf planet located in a distant region of our solar system beyond Neptune known as the Kuiper Belt."', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
+
+    {'name': 'Haumea', 'id': '136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
+
+    {'name': 'Makemake', 'id': '136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Makemake is slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
+
+    {'name': 'Eris', 'id': '136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 
+    # 136199 primary (required for Sun centered plots)
+    'id_type': 'smallbody', 
+    'mission_info': 'Eris is about the same size as Pluto, but it\'s three times farther from the Sun.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
+
+    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var': eris2_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 
+    # 20136199 satellite solution (required for Eris centered plots) 
+    'id_type': 'smallbody', 
+    'mission_info': 'Eris is about the same size as Pluto, but it\'s three times farther from the Sun.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
 
     # Kuiper Belt Objects
-    {'name': 'Quaoar', 'id': '50000', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'A large Kuiper Belt object with a ring system.', 'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
-    {'name': 'Sedna', 'id': '90377', 'var': sedna_var, 'color': color_map('Sedna'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'A distant trans-Neptunian object with an extremely long orbit.', 'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
-    {'name': 'Orcus', 'id': '90482', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'A large Kuiper Belt object with a moon named Vanth.', 'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-    {'name': 'Varuna', 'id': '20000', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'A significant Kuiper Belt Object with a rapid rotation period.', 'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-    {'name': 'Ixion', 'id': '2001 KX76', 'var': ixion_var, 'color': color_map('Ixion'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'A large Kuiper Belt object without a known moon.', 'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-    {'name': 'GV9', 'id': '2004 GV9', 'var': gv9_var, 'color': color_map('GV9'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.', 'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-    {'name': 'MS4', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons.', 'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
-    {'name': 'OR10', 'id': '2007 OR10', 'var': or10_var, 'color': color_map('OR10'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'smallbody', 'mission_info': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.', 'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
+    {'name': 'Quaoar', 'id': '50000', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A large Kuiper Belt object with a ring system.', 
+    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
+
+    {'name': 'Sedna', 'id': '90377', 'var': sedna_var, 'color': color_map('Sedna'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A distant trans-Neptunian object with an extremely long orbit.', 
+    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
+
+    {'name': 'Orcus', 'id': '90482', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A large Kuiper Belt object with a moon named Vanth.', 
+    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
+
+    {'name': 'Varuna', 'id': '20000', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A significant Kuiper Belt Object with a rapid rotation period.', 
+    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
+
+    {'name': 'Ixion', 'id': '2001 KX76', 'var': ixion_var, 'color': color_map('Ixion'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A large Kuiper Belt object without a known moon.', 
+    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
+
+    {'name': 'GV9', 'id': '2004 GV9', 'var': gv9_var, 'color': color_map('GV9'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.', 
+    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
+
+    {'name': 'MS4', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
+    'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
+
+    {'name': 'OR10', 'id': '2007 OR10', 'var': or10_var, 'color': color_map('OR10'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.', 
+    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
 
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
-    {'name': 'Pioneer 10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer 10'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(1972, 3, 4, 1, 49, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 'mission_info': 'First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
-    {'name': 'Pioneer 11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer 11'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(1973, 4, 7, 2, 11, 0), 'end_date': datetime(1995, 9, 30, 11, 0), 'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 'mission_info': 'First spacecraft to encounter Saturn and study its rings.'},
-    {'name': 'Voyager 1', 'id': '-31', 'var': voyager1_var, 'color': color_map('Voyager 1'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-    'start_date': datetime(1977, 9, 6, 12, 56), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 'mission_info': 'Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
-    {'name': 'Voyager 1 to heliopause', 'id': '-31', 'var': voyager1h_var, 'color': color_map('Voyager 1 to heliopause'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-    'start_date': datetime(1977, 9, 6, 12, 56), 'end_date': datetime(2012, 8, 25), 'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 'mission_info': 'Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
-    {'name': 'Voyager 2', 'id': '-32', 'var': voyager2_var, 'color': color_map('Voyager 2'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(1977, 8, 21, 14, 29), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 'mission_info': 'Launched in 1977, Voyager 2 explored all four giant planets.'},
-    {'name': 'Galileo', 'id': '-77', 'var': galileo_var, 'color': color_map('Galileo'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(1989, 10, 19, 16, 53), 'end_date': datetime(2003, 9, 21, 19, 57), 'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 'mission_info': 'Galileo studied Jupiter and its moons from 1995 to 2003.'},
-    {'name': 'SOHO: Solar and Heliospheric Observatory', 'id': '488', 'var': soho_var, 'color': color_map('SOHO'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(1995, 12, 3), 'end_date': datetime(2025, 1, 1), 'mission_info': 'Observes the Sun and heliosphere from the L1 Lagrange point.', 'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
-    {'name': 'Cassini-Huygens', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini-Huygens'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(1997, 10, 16, 8, 43), 'end_date': datetime(2017, 9, 15, 10, 31), 'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 'mission_info': 'Cassini studied Saturn and its moons from 2004 to 2017.'},
-    {'name': 'Rosetta', 'id': '-226', 'var': rosetta_var, 'color': color_map('Rosetta'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 9, 30), 'mission_url': 'https://rosetta.esa.int/', 'mission_info': 'European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
-    {'name': 'New Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('New Horizons'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2006, 1, 20, 19, 0), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
-    {'name': 'Chang\'e', 'id': 'Chang\'e', 'var': change_var, 'color': color_map('Chang\'e'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2007, 10, 25), 'end_date': datetime(2025, 1, 1), 'mission_info': 'China\'s lunar exploration program.', 'mission_url': 'http://www.clep.org.cn/'},
-    {'name': 'Akatsuki', 'id': 'Akatsuki', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2010, 5, 21), 'end_date': datetime(2025, 1, 28), 'mission_info': 'JAXA mission to study the atmospheric circulation of Venus', 'mission_url': ''},
-    {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2011, 8, 6, 16, 25), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 'mission_info': 'Juno studies Jupiter\'s atmosphere and magnetosphere.'},
-    {'name': 'Gaia', 'id': 'Gaia', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2013, 12, 20), 'end_date': datetime(2025, 12, 31), 'mission_info': 'European Space Agency mission at L2 mapping the Milky Way.', 'mission_url': 'https://www.cosmos.esa.int/web/gaia'},
-    {'name': 'Hayabusa2', 'id': 'Hayabusa2', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2014, 12, 4), 'end_date': datetime(2020, 12, 5), 'mission_info': 'JAXA mission that returned samples from Ryugu.', 'mission_url': 'https://hayabusa2.jaxa.jp/en/'},
-    {'name': 'OSIRIS-REx', 'id': '-64', 'var': osiris_rex_var, 'color': color_map('OSIRIS-REx'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2016, 9, 9), 'end_date': datetime(2023, 9, 24), 'mission_url': 'https://www.asteroidmission.org/', 'mission_info': 'NASA mission to collect samples from asteroid Bennu.'},
-    {'name': 'Parker Solar Probe', 'id': '-96', 'var': parker_solar_probe_var, 'color': color_map('Parker Solar Probe'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2018, 8, 13), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 'mission_info': 'Mission to study the outer corona of the Sun.'},
-    {'name': 'Perseverance Rover', 'id': 'Perseverance', 'var': perse_var, 'color': color_map('Perseverance'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2020, 7, 31), 'end_date': datetime(2025, 1, 1), 'mission_info': 'NASA\'s Mars rover and Ingenuity helicopter.', 'mission_url': 'https://mars.nasa.gov/mars2020/'},
-    {'name': 'Lucy Mission', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',      # id Lucy
-     'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 1), 'mission_info': 'Exploring Trojan asteroids around Jupiter.', 'mission_url': 'https://www.nasa.gov/lucy'},
-    {'name': 'DART Mission', 'id': '-135', 'var': dart_var, 'color': color_map('DART'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 25), 'mission_info': 'NASA\'s mission to test asteroid deflection.', 'mission_url': 'https://www.nasa.gov/dart'},
-    {'name': 'James Webb Space Telescope', 'id': '-170', 'var': jwst_var, 'color': color_map('James Webb Space Telescope'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-     'start_date': datetime(2021, 12, 26), 'end_date': datetime(2025, 1, 1), 'mission_url': 'https://www.jwst.nasa.gov/', 'mission_info': 'NASA\'s flagship infrared space telescope.'},
-    {'name': 'Europa Clipper', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Europa Clipper'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',        # id -159
-     'start_date': datetime(2024, 10, 15), 'end_date': datetime(2030, 4, 1), 'mission_url': 'https://europa.nasa.gov/', 'mission_info': 'Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
-    {'name': 'BepiColombo', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('BepiColombo'), 'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id',
-    'start_date': datetime(2018, 10, 20), 'end_date': datetime(2030, 12, 31), 'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'Joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
+    {'name': 'Pioneer10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer10'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1972, 3, 3, 1, 49, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 
+    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
+    'mission_info': 'First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
+
+    {'name': 'Pioneer11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer11'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1973, 4, 6, 2, 11, 0), 'end_date': datetime(1995, 9, 30, 11, 0), 
+    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
+    'mission_info': 'First spacecraft to encounter Saturn and study its rings.'},
+
+    {'name': 'Voyager 1', 'id': '-31', 'var': voyager1_var, 'color': color_map('Voyager 1'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 9, 5, 12, 56), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
+    'mission_info': 'Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
+
+    {'name': 'Voyager 2', 'id': '-32', 'var': voyager2_var, 'color': color_map('Voyager 2'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 8, 20, 14, 29), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
+    'mission_info': 'Launched in 1977, Voyager 2 explored all four giant planets.'},
+
+    {'name': 'Galileo', 'id': '-77', 'var': galileo_var, 'color': color_map('Galileo'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(1989, 10, 18, 16, 53), 'end_date': datetime(2003, 9, 21, 19, 57), 
+    'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 
+    'mission_info': 'Galileo studied Jupiter and its moons from 1995 to 2003.'},
+
+    {'name': 'SOHO', 'id': '488', 'var': soho_var, 'color': color_map('SOHO'), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(1995, 12, 2), 'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
+    'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
+
+    {'name': 'Cassini', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini-Huygens'), 'symbol': 'diamond-open', 
+     'is_mission': True, 'id_type': 'id', 'start_date': datetime(1997, 10, 15, 8, 43), 'end_date': datetime(2017, 9, 15, 10, 31), 
+     'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 
+     'mission_info': 'Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
+
+    {'name': 'Rosetta', 'id': '-226', 'var': rosetta_var, 'color': color_map('Rosetta'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2004, 3, 2), 'end_date': datetime(2016, 10, 5), 
+    'mission_url': 'https://rosetta.esa.int/', 
+    'mission_info': 'European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
+
+    {'name': 'Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('New Horizons'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2006, 1, 19, 19, 0), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
+    'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
+
+    {'name': 'Chang\'e', 'id': 'Chang\'e', 'var': change_var, 'color': color_map('Chang\'e'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2007, 10, 24), 'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'China\'s lunar exploration program.', 
+    'mission_url': 'http://www.clep.org.cn/'},
+
+    {'name': 'Akatsuki', 'id': 'Akatsuki', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2010, 5, 20), 'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'JAXA mission to study the atmospheric circulation of Venus', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
+
+    {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2011, 8, 5, 16, 25), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 
+    'mission_info': 'Juno studies Jupiter\'s atmosphere and magnetosphere.'},
+
+    {'name': 'Gaia', 'id': 'Gaia', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2013, 12, 19), 'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'European Space Agency mission at L2 mapping the Milky Way.', 
+    'mission_url': 'https://www.cosmos.esa.int/web/gaia'},
+
+    {'name': 'Hayabusa2', 'id': 'Hayabusa2', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2014, 12, 3), 'end_date': datetime(2020, 12, 5), 
+    'mission_info': 'JAXA mission that returned samples from Ryugu.', 
+    'mission_url': 'https://hayabusa2.jaxa.jp/en/'},
+
+    {'name': 'OSIRISREx', 'id': '-64', 'var': osiris_rex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2016, 9, 9), 'end_date': datetime(2023, 9, 24), 
+    'mission_url': 'https://science.nasa.gov/mission/osiris-rex/', 
+    'mission_info': 'OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
+
+    {'name': 'OSIRISAPE', 'id': '-64', 'var': osiris_apex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2023, 9, 23), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://science.nasa.gov/category/missions/osiris-apex/', 
+    'mission_info': 'OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
+
+    {'name': 'Parker', 'id': '-96', 'var': parker_solar_probe_var, 'color': color_map('Parker Solar Probe'), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 8, 12), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
+    'mission_info': 'The Parker Solar Probe mission is to study the outer corona of the Sun.'},
+
+    {'name': 'MarsRover', 'id': 'Perseverance', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 7, 30), 'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter.', 
+    'mission_url': 'https://mars.nasa.gov/mars2020/'},
+
+    {'name': 'Lucy', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2021, 10, 16), 'end_date': datetime(2033, 4, 1), 
+    'mission_info': 'Exploring Trojan asteroids around Jupiter.', 
+    'mission_url': 'https://www.nasa.gov/lucy'},
+
+    {'name': 'DART', 'id': '-135', 'var': dart_var, 'color': color_map('DART'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2021, 11, 24), 'end_date': datetime(2022, 9, 25), 
+    'mission_info': 'NASA\'s mission to test asteroid deflection.', 
+    'mission_url': 'https://www.nasa.gov/dart'},
+
+    {'name': 'JamesWebb', 'id': '-170', 'var': jwst_var, 'color': color_map('JamesWebb'), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2021, 12, 25), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://science.nasa.gov/mission/webb/', 
+    'mission_info': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
+
+    {'name': 'Europa', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Europa Clipper'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2024, 10, 14), 'end_date': datetime(2030, 4, 1), 
+    'mission_url': 'https://europa.nasa.gov/', 
+    'mission_info': 'Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
+
+    {'name': 'Bepi', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('Bepi'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 10, 19), 'end_date': datetime(2030, 12, 31), 
+    'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
 
     # Comets
-    {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(1965, 9, 18), 'end_date': datetime(1966, 1, 1), 'mission_info': 'One of the brightest comets of the 20th century.'},
-#    {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-#     'start_date': datetime(1965, 9, 18), 'end_date': datetime(2025, 1, 1), 'mission_info': 'One of the brightest comets of the 20th century.'},
+    {'name': 'IkeyaSeki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('IkeyaSeki'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 21), 'end_date': datetime(1966, 1, 14), 
+    'mission_info': 'One of the brightest comets of the 20th century.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Comet_Ikeya-Seki'},
 
+    {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 5), 'end_date': datetime(1976, 6, 1), 
+    'mission_info': 'Notable for its bright and impressive tail.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
-    {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(1975, 11, 5), 'end_date': datetime(1976, 6, 1), 'mission_info': 'Notable for its bright and impressive tail.'},
-    {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',   
-     'start_date': datetime(1982, 11, 26), 'end_date': datetime(1995, 10, 20), 'mission_info': 'Most famous comet, returned in 1986.'},
-    {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(1995, 12, 1), 'end_date': datetime(1996, 6, 1), 'mission_info': 'Passed very close to Earth in 1996.'},
-    {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(1995, 7, 23), 'end_date': datetime(2001, 12, 31), 'mission_info': 'Visible to the naked eye for a record 18 months.'},
-    {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(2006, 8, 7), 'end_date': datetime(2008, 6, 1), 'mission_info': 'Known as the Great Comet of 2007.'},
-    {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(2020, 3, 27), 'end_date': datetime(2021, 6, 1), 'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades.'},
-    {'name': 'Tsuchinshan-ATLAS', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinshan-ATLAS'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(2023, 1, 9), 'end_date': datetime(2025, 1, 1), 'mission_info': 'A new comet discovered in 2023, expected to become bright in 2024.'},
-    {'name': 'Churyumov-Gerasimenko', 'id': '90000703', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov-Gerasimenko'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(2002, 11, 22), 'end_date': datetime(2021, 5, 1), 'mission_info': 'The comet visited by the Rosetta spacecraft.'},
-    {'name': 'Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('Borisov'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(2019, 8, 30), 'end_date': datetime(2020, 10, 1), 'mission_info': 'The second interstellar object detected, after \'Oumuamua.'},
-    {'name': 'Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('Oumuamua'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(2017, 10, 14), 'end_date': datetime(2018, 1, 1), 'mission_info': 'First known interstellar object detected passing through the Solar System.'},
-    {'name': 'ATLAS', 'id': 'DES=C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody',
-     'start_date': datetime(2024, 6, 17), 'end_date': datetime(2026, 1, 1), 'mission_info': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!'},
+    {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2061, 7, 28), 
+    # initial start date 1982-11-26. Horizons has 1962-01-20
+    'mission_info': 'Most famous comet, returned in 1986 and will return in 2061.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/1p-halley/'},
+
+    {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 12, 1), 'end_date': datetime(1996, 6, 1), 
+    'mission_info': 'Passed very close to Earth in 1996.', 
+    'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
+
+    {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 7, 23), 'end_date': datetime(2001, 12, 31), 
+    'mission_info': 'Visible to the naked eye for a record 18 months.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
+
+    {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 7), 'end_date': datetime(2008, 6, 1), 
+    'mission_info': 'Known as the Great Comet of 2007.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/'}, 
+
+    {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 27), 'end_date': datetime(2021, 6, 1), 
+    'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades.', 
+    'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
+
+    {'name': 'Tsuchinsh', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
+    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 9), 
+    'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
+
+    {'name': 'Churyumov', 'id': '90000702', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 90000703
+    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 20), 'end_date': datetime(2030, 12, 31), 
+    # datetime(1962, 1, 20), 'end_date': datetime(2030, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
+    'mission_info': '67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
+
+    {'name': 'Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('Borisov'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2019, 8, 30), 'end_date': datetime(2020, 10, 1), 
+    'mission_info': 'The second interstellar object detected, after \'Oumuamua.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
+
+    {'name': 'Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('Oumuamua'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 14), 'end_date': datetime(2018, 1, 1), 
+    'mission_info': 'First known interstellar object detected passing through the Solar System.', 
+    'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
+
+    {'name': 'ATLAS', 'id': 'DES=C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'circle-open', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2024, 6, 17), 'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
 
     # Asteroids
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'is_mission': False,
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 1), 'end_date': datetime(2025, 1, 1), 'mission_info': 'A newly discovered small body from 2024.',
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 1), 'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'A newly discovered small body from 2024.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
-    {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_comet': False, 'id_type': 'smallbody',
-     'start_date': datetime(2004, 6, 19), 'end_date': datetime(2036, 1, 1), 'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
-    {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'is_mission': False, 'id_type': 'smallbody',
-     'mission_info': 'One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 'mission_url': 'https://dawn.jpl.nasa.gov/'},
-    {'name': 'Bennu', 'id': '101955', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
-     'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 'mission_url': 'https://www.nasa.gov/content/osiris-rex'},
-    {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
-     'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
-    {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
-    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 'mission_url': 'https://www.jhuapl.edu/near/'},
-    {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
-    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 'mission_url': 'https://www.hayabusa2.jaxa.jp/en/'},
-    {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'is_mission': False, 'is_comet': False, 'id_type': 'smallbody',
-    'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 'mission_url': 'https://www.isas.jaxa.jp/en/missions/spacecraft/past/hayabusa.html'},
+
+    {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_mission': False,
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2004, 6, 19), 'end_date': datetime(2036, 1, 1), 
+    'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 
+    'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
+
+    {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
+    'mission_url': 'https://dawn.jpl.nasa.gov/'},
+
+    {'name': 'Bennu', 'id': '101955', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
+
+    {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', # Bennu as a center object
+    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
+
+    {'name': 'Lutetia', 'id': '21', 'var': lutetia_var, 'color': color_map('Lutetia'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Studied by European Space Agency\'s Rosetta mission.', 
+    'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
+
+    {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'is_mission': False, 
+     'is_comet': False, 'id_type': 'smallbody',
+     'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 
+     'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
+
+    {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
+    'mission_url': 'https://www.jhuapl.edu/near/'},
+
+    {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
+    'mission_url': 'https://www.hayabusa2.jaxa.jp/en/'},
+
+    {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
+    'mission_url': 'https://www.isas.jaxa.jp/en/missions/spacecraft/past/hayabusa.html'},
         
     # --- Adding New Moons ---
 
     # Mars' Moons
-    {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+    {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Mars orbital period: 0.32 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/resource/martian-moon-phobos/'},
+
+    {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Mars orbital period: 1.26 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
 
     # Jupiter's Galilean Moons
-    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Jupiter orbital period: 1.77 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/io/'},
+
+    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Jupiter orbital period: 3.55 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/europa/'},
+
+    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Jupiter orbital period: 7.15 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/ganymede/'},
+
+    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Jupiter orbital period: 16.69 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
 
     # Saturn's Major Moons
-    {'name': 'Titan', 'id': '601', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Rhea', 'id': '603', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Tethys', 'id': '605', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Phoebe', 'id': '607', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+    {'name': 'Titan', 'id': '601', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Saturn orbital period: 15.95 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/titan/'},
+
+    {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Saturn orbital period: 1.37 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/enceladus/'},
+
+    {'name': 'Rhea', 'id': '603', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Saturn orbital period: 4.52 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/rhea/'},
+
+    {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Saturn orbital period: 2.74 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/dione/'},
+
+    {'name': 'Tethys', 'id': '605', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Saturn orbital period: 1.89 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/tethys/'},
+
+    {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Saturn orbital period: 0.94 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/mimas/'},
+
+    {'name': 'Phoebe', 'id': '607', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Saturn orbital period: 550.56 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/phoebe/'},
 
     # Uranus's Major Moons
-    {'name': 'Oberon', 'id': '701', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Umbriel', 'id': '703', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Ariel', 'id': '704', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Titania', 'id': '706', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+    {'name': 'Oberon', 'id': '701', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Uranus orbital period: 13.46 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/oberon/'},
+
+    {'name': 'Umbriel', 'id': '703', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Uranus orbital period: 4.14 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/umbriel/'},
+
+    {'name': 'Ariel', 'id': '704', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Uranus orbital period: 2.52 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/ariel/'},
+
+    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Uranus orbital period: 1.41 Earth days.',
+     'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},
+
+    {'name': 'Titania', 'id': '706', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Uranus orbital period: 8.71 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/titania/'},
 
     # Neptune's Major Moon
-    {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
+    {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Neptune orbital period: 5.88 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/neptune/moons/triton/'},
 
     # Pluto's Moon
-    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody'},
-    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-    'mission_info': 'One of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/nix/overview/'},
-    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-    'mission_info': 'Another of Pluto\'s moons.', 'mission_url': 'https://solarsystem.nasa.gov/moons/pluto-moons/hydra/overview/'},
+    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Pluto orbital period: 6.39 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/charon/'},
 
-    {
-    'name': 'Dysnomia', 
-    'id': '120136199', 
-    'var': dysnomia_var, 
-    'color': color_map('Dysnomia'), 
-    'symbol': 'circle', 
-    'is_mission': False, 
-    'id_type': 'majorbody',
-    'start_date': datetime(2025, 1, 1),     # Dysnomia: January 1, 2025, to January 16, 2025 (15.79 days)
-    'end_date': datetime(2025, 1, 19),
-    'mission_info': 'Orbital period: 15.79 Earth days.'
-    },
+    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Pluto orbital period: 24.86 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/nix/'},
+
+    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Pluto orbital period: 38.20 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/'},
 
     # Eris's Moon
-    #{'name': 'Eris\' Moon Dysnomia', 'id': 'Dysnomia', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 'id_type': 'majorbody',
-    # 'mission_info': 'Companion to the dwarf planet Eris.', 'mission_url': 'https://www.nasa.gov/asteroids'},
+    {'name': 'Dysnomia', 'id': '120136199', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': 'majorbody', 
+     'mission_info': 'Eris orbital period: 15.79 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
 
     # Stars
     # Proxima Centauri - Our closest stellar neighbor
-    {'name': 'NAME Proxima Centauri', 
-    'id': 'HIP 70890',  # Hipparcos ID if we want to use that instead
-    'var': proxima_var, 
-    'color': 'rgb(255, 50, 50)', 
-    'symbol': 'circle', 
-    'is_mission': False,
-    'is_fixed_star': True,  # New flag to indicate static position
-    'coordinates': {
-        'ra': '14h 29m 42.95s',
-        'dec': '-62° 40′ 46.14″',
-        'distance_ly': 4.2465  # light-years
-    }}
+#    {'name': 'NAME Proxima Centauri', 
+#    'id': 'HIP 70890',  # Hipparcos ID if we want to use that instead
+#    'var': proxima_var, 
+#    'color': 'rgb(255, 50, 50)', 
+#    'symbol': 'circle', 
+#    'is_mission': False,
+#    'is_fixed_star': True,  # New flag to indicate static position
+#    'coordinates': {
+#        'ra': '14h 29m 42.95s',
+#        'dec': '-62° 40′ 46.14″',
+#        'distance_ly': 4.2465  # light-years
+#    }}
 ]
 
 
