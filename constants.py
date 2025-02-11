@@ -11,6 +11,7 @@ CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
 
 # Orbital parameters for planets and dwarf planets
+# https://ssd.jpl.nasa.gov/sats/elem/
 
 planetary_params = {
     'Mercury': {
@@ -252,6 +253,14 @@ planetary_params = {
         'omega': 112.2128395742619, # Horizons: W, argument of perihelion in degrees
         'Omega': 59.07198712310091   # Horizons: OM, longitude of ascending node in degrees
     },
+
+#    'Moon': {                  # Epoch 2000-1-1, geocentric
+#        'a': 0.002569,   # Horizons: A, semi-major axis in AU
+#        'e': 0.05490,   # Horizons: EC, eccentricity
+#        'i': 5.145,      # Horizons: IN, inclination in degrees
+#        'omega': 318.15, # Horizons: W, argument of perihelion in degrees
+#        'Omega': 125.08   # Horizons: OM, longitude of ascending node in degrees
+#    },
 
 }  
 
@@ -858,7 +867,7 @@ INFO = {
         
         'Pioneer11': 'The first spacecraft to encounter Saturn and study its rings.',
         
-        'Europa': 'Europa-Clipper is NASA\'s mission to explore Jupiter\'s moon Europa, launched October 14, 2024. No ephemeris available.',
+        'Clipper': 'Europa-Clipper is NASA\'s mission to explore Jupiter\'s moon Europa, launched October 14, 2024. No ephemeris available.',
         
         'OSIRISREx': 'OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
         '* NASA information: "OSIRIS-REx ("Origins, Spectral Interpretation, Resource Identification, and Security-Regolith Explorer") explored 101955 ' 
