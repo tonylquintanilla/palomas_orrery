@@ -838,7 +838,22 @@ INFO = {
         '* Saturn orbit insertion: June 30, 2004\n'
         '* Final transmission: September 15, 2017',
 
-        'Horizons': 'New Horizons flew past Pluto in 2015, now exploring the Kuiper Belt.',
+        'New Horizons': 'New Horizons flew past Pluto in 2015, now exploring the Kuiper Belt.\n' 
+        '* The New Horizons space probe is an interplanetary space probe built by the Applied Physics Laboratory of Johns Hopkins\n' 
+        'University for NASA.\n' 
+        '* It was launched on January 19, 2006 with the primary mission to conduct a flyby study of Pluto and its moons in the Kuiper Belt. ' 
+        'It is the first spacecraft to explore Pluto and the Kuiper Belt up close.\n' 
+        '* Approaches 2002 JF56 on June 13, 2006 to within 102,000 km at 10:06 UTC\n' 
+        '* Jupiter gravity assist on February 28, 2007, 05:43 UTC, 2.3045(10)^6 km\n'
+        '* Pluto Flyby: On July 14, 2015, Pluto-Charon encounter at 11:49:57 UTC. New Horizons made its historic closest approach to ' 
+        'Pluto, capturing stunning images and valuable scientific data about the dwarf planet and its moons.\n' 
+        '* Kuiper Belt Exploration: After its Pluto encounter, New Horizons continued its journey into the Kuiper Belt.\n' 
+        '* Arrokoth (2014 MU69) flyby on January 1, 2019, at 05:33 UTC, 3500 km from center. Arrokoth is the most distant object ever ' 
+        'visited by a spacecraft.\n' 
+        '* Scientific Instruments: New Horizons carries a suite of scientific instruments, including cameras, spectrometers, and ' 
+        'plasma analyzers, to study the composition, atmosphere, and environment of Pluto and other Kuiper Belt objects.\n' 
+        '* Continuing Mission: New Horizons is still traveling through the Kuiper Belt, and NASA may extend its mission to explore ' 
+        'other distant objects in the future.',
 
         'Juno': 'NASA\'s Juno mission is a spacecraft orbiting Jupiter to study the planet\'s origins, structure, atmosphere, and ' 
         'magnetosphere.\n'
@@ -863,13 +878,13 @@ INFO = {
 
         'Galileo': 'Studied Jupiter and its major moons, including Europa and Ganymede.',
         
-        'Pioneer10': 'The first spacecraft to travel through the asteroid belt and make direct observations',
+        'Pioneer 10': 'The first spacecraft to travel through the asteroid belt and make direct observations',
         
-        'Pioneer11': 'The first spacecraft to encounter Saturn and study its rings.',
+        'Pioneer 11': 'The first spacecraft to encounter Saturn and study its rings.',
         
-        'Clipper': 'Europa-Clipper is NASA\'s mission to explore Jupiter\'s moon Europa, launched October 14, 2024. No ephemeris available.',
+        'Europa-Clipper': 'Europa-Clipper is NASA\'s mission to explore Jupiter\'s moon Europa, launched October 14, 2024. No ephemeris available.',
         
-        'OSIRISREx': 'OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
+        'OSIRIS REx': 'OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
         '* NASA information: "OSIRIS-REx ("Origins, Spectral Interpretation, Resource Identification, and Security-Regolith Explorer") explored 101955 ' 
         'Bennu (1999 RQ36), a carbonaceous B-type asteroid whose regolith may provide insights on the early history of the solar ' 
         'system. After the sample was returned to Earth, in 2023, the mission was retargeted to encounter asteroid Apophis in 2029 ' 
@@ -904,7 +919,7 @@ INFO = {
         'observing point, set the coordinate center to "@ 2101955". The Sample Return Capsule can be accessed as object \'-64090\' ' 
         'Apophis mission trajectory as object \'2099942\'',
 
-        'OSIRISAPE': 'OSIRIS-APEX is a NASA mission that will study the asteroid Apophis.\n' 
+        'OSIRIS APEX': 'OSIRIS-APEX is a NASA mission that will study the asteroid Apophis.\n' 
         '* OSIRIS-REx\'s Legacy: OSIRIS-REx was a NASA mission that successfully traveled to the asteroid Bennu, collected a sample ' 
         'of its surface material, and returned it to Earth in September 2023. This was a landmark achievement in asteroid exploration.\n' 
         '* Spacecraft in Good Condition: After completing its primary mission, the OSIRIS-REx spacecraft was still in good working ' 
@@ -941,7 +956,7 @@ INFO = {
         'on Bennu. However, this time it won\'t be collecting a sample. Instead, it will use its thrusters to disturb Apophis\'s surface, ' 
         'allowing scientists to study the material beneath.',
         
-        'Parker':
+        'Parker Solar Probe':
         'The Parker Solar Probe is studying the Sun\'s outer corona by flying closer to the Sun than any previous spacecraft.\n\n'
         'Operating Region:\n'
         '* Sun\'s surface (photosphere): ~0.00465 AU\n'
@@ -958,7 +973,7 @@ INFO = {
         '* Final closest approach: 8.8 solar radii at 7AM EST on December 24, 2024\n\n'
         '* NOTE: To visualize the closest approach plot Paker on December 24, 2024, at 12 hours.',       
         
-        'JamesWebb': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope, orbiting Lagrange point 2.',
+        'James Webb Space Telescope': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope, orbiting Lagrange point 2.',
         
         'Rosetta': 'European Space Agency mission that studied Comet 67p/Churyumov-Gerasimenko. The Rosetta mission significantly ' 
         'advanced our understanding of comets and their role in the early solar system. Its data continues to be analyzed, providing ' 
@@ -989,7 +1004,7 @@ INFO = {
         '* Legacy: The Rosetta mission significantly advanced our understanding of comets and their role in the early solar system. ' 
         'Its data continues to be analyzed, providing valuable information for planetary science.', 
 
-        'Bepi': 'BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
+        'BepiColombo': 'BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
         'It\'s a joint endeavor by the European Space Agency (ESA) and the Japan Aerospace Exploration Agency (JAXA).\n ' 
         '* The mission consists of two main spacecraft that journeyed to Mercury together: Mercury Planetary Orbiter (MPO) ' 
         'built by ESA, it will study Mercury\'s surface and internal composition. And Mercury Magnetospheric Orbiter (Mio) ' 
@@ -1033,15 +1048,15 @@ INFO = {
         'It\'s a complex dance with gravity, but this intricate approach is necessary to get BepiColombo into the right ' 
         'position to study Mercury effectively!',
         
-        'SOHO': 'The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
+        'SOHO Solar Observatory': 'The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
         
         'Gaia': 'European Space Agency mission at L2 mapping the Milky Way.',
         
-        'Hayabusa2': 'Japan JAXA mission that returned samples from Ryugu.', 
+        'Hayabusa 2': 'Japan JAXA mission that returned samples from Ryugu.', 
         
         'Chang\'e': 'China\'s lunar exploration program.',
         
-        'MarsRover': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. The NASA Mars Perseverance mission ' 
+        'Perseverance Mars Rover': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. The NASA Mars Perseverance mission ' 
         'is a robotic space mission currently underway, aimed at exploring the planet Mars and searching for signs of ancient ' 
         'microbial life.\n'
         '* Objective: To investigate the habitability of Mars in the ancient past, search for evidence of past microbial life, collect ' 
@@ -1108,7 +1123,7 @@ INFO = {
         'Akatsuki': 'The Venus Climate Orbiter mission (PLANET-C), will study the atmospheric circulation of Venus over a nominal mission of 4.5 years.',
 
 # Comets        
-        'IkeyaSeki': 'Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
+        'Ikeya-Seki': 'Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
         'in 1965! It was one of the brightest comets of the 20th century and is a member of the Kreutz sungrazers, a family of ' 
         'comets believed to have originated from a larger comet that broke apart long ago. As a Kreutz sungrazer, it provided valuable ' 
         'information about these comets and their origins.\n  Key dates and information:\n ' 
@@ -1176,7 +1191,7 @@ INFO = {
         
         'NEOWISE': 'Brightest comet visible from the Northern Hemisphere in decades.',
         
-        'Tsuchinsh': 'Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
+        'Tsuchinshan-ATLAS': 'Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
         'and the Asteroid Terrestrial-impact Last Alert System (ATLAS) in South Africa in February 2023.\n * It originates from the ' 
         'Oort cloud, meaning it takes tens of thousands of years to orbit the Sun.\n * It orbits the Sun in the opposite direction ' 
         'to most planets.\n * It reached its closest point to the Sun (perihelion) on September 27, 2024, at a distance of 0.39 AU\n ' 
@@ -1184,7 +1199,7 @@ INFO = {
         '* It was easily visible to the naked eye and presented a stunning sight with its long, wispy tail.\n * It made its closest ' 
         'approach to Earth on October 12, 2024. At that time, it was about 0.47 AU from Earth.',
         
-        'Churyumov': 'Comet 67P/Churyumov-Gerasimenko visited by the Rosetta spacecraft.\n' 
+        '67P/Churyumov-Gerasimenko': 'Comet 67P/Churyumov-Gerasimenko visited by the Rosetta spacecraft.\n' 
         '* Discovered: In 1969 by Soviet astronomers Klim Churyumov and Svetlana Gerasimenko.\n' 
         '* Type: A Jupiter-family comet, meaning its orbit is influenced by Jupiter\'s gravity.\n' 
         '* Origin: Likely from the Kuiper Belt, a region beyond Neptune populated by icy bodies.\n' 

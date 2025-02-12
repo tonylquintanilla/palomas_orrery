@@ -2513,6 +2513,7 @@ gv9_var = tk.IntVar(value=0)
 ms4_var = tk.IntVar(value=0)
 dw_var = tk.IntVar(value=0)
 or10_var = tk.IntVar(value=0)
+arrokoth_var = tk.IntVar(value=0)
 ixion_var = tk.IntVar(value=0)
 
 # New Selection Variables for Major Moons
@@ -2660,6 +2661,7 @@ create_celestial_checkbutton("Ixion", ixion_var)
 create_celestial_checkbutton("GV9", gv9_var)
 create_celestial_checkbutton("MS4", ms4_var)
 create_celestial_checkbutton("OR10", or10_var)
+create_celestial_checkbutton("Arrokoth", arrokoth_var)
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
@@ -2674,29 +2676,29 @@ def create_mission_checkbutton(name, variable, dates):
         tooltip_text += f"\nMore Info: {INFO['mission_url']}"
     CreateToolTip(checkbutton, tooltip_text)
 # Start dates are the day after launch to avoid missing Horizons data.
-create_mission_checkbutton("Pioneer10", pioneer10_var, "(1972-03-04 to 2003-01-23)")
-create_mission_checkbutton("Pioneer11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
+create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2003-01-23)")
+create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
 create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-21 to 2029-12-31)")
 create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-06 to 2029-12-31)")
 create_mission_checkbutton("Galileo", galileo_var, "(1989-10-19 to 2003-09-21)")
 create_mission_checkbutton("Cassini", cassini_var, "(1997-10-16 to 2017-09-15)")
-create_mission_checkbutton("Solar Observatory", soho_var, "(1995-12-3 to 2029-12-31)")
+create_mission_checkbutton("SOHO Solar Observatory", soho_var, "(1995-12-3 to 2029-12-31)")
 create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-02 to 2016-10-05)")
-create_mission_checkbutton("Horizons", new_horizons_var, "(2006-01-19 to 2029-12-31)")
+create_mission_checkbutton("New Horizons", new_horizons_var, "(2006-01-19 to 2029-12-31)")
 create_mission_checkbutton("Chang'e", change_var, "(2007-10-25 to 2029-12-31)")
 create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to 2029-12-31)")
 create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to 2029-12-31)")
 create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-12-31)")
-create_mission_checkbutton("Hayabusa2", hayabusa2_var, "(2014-12-04 to 2020-12-05)")
-create_mission_checkbutton("OSIRISREx", osiris_rex_var, "(2016-09-10 to 2023-09-24)")
-create_mission_checkbutton("OSIRISAPE", osiris_apex_var, "(2023-09-24 to 2029-12-31)")
-create_mission_checkbutton("Parker", parker_solar_probe_var, "(2018-08-13 to 2029-12-31)")
-create_mission_checkbutton("Bepi", bepicolombo_var, "(2018-10-21 to 2030-12-31)")
-create_mission_checkbutton("MarsRover", perse_var, "(2020-07-31 to 2029-12-31)")
+create_mission_checkbutton("Hayabusa 2", hayabusa2_var, "(2014-12-04 to 2020-12-05)")
+create_mission_checkbutton("OSIRIS REx", osiris_rex_var, "(2016-09-10 to 2023-09-24)")
+create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2029-12-31)")
+create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to 2029-12-31)")
+create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2030-12-31)")
+create_mission_checkbutton("Perseverance Mars Rover", perse_var, "(2020-07-31 to 2029-12-31)")
 create_mission_checkbutton("Lucy", lucy_var, "(2021-10-18 to 2033-05-01)")
 create_mission_checkbutton("DART", dart_var, "(2021-11-26 to 2022-09-25)")
-create_mission_checkbutton("JamesWebb", jwst_var, "(2021-12-26 to 2029-12-31)")
-create_mission_checkbutton("Clipper", europa_clipper_var, "(2024-10-15 to April 2030)")
+create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to 2029-12-31)")
+create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to April 2030)")
 
 # Checkbuttons for comets
 comet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Comets and Interstellar Objects")
@@ -2729,7 +2731,7 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
     CreateToolTip(checkbutton, tooltip_text)
 
 
-create_comet_checkbutton("IkeyaSeki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
+create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
                          "October 21, 1965")
 #create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to 2029-12-31)", 
 #                         "October 21, 1965")
@@ -2744,7 +2746,7 @@ create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1995-07-23 to 2001-
                          "April 1, 1997")
 create_comet_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
                          "January 12, 2007")
-create_comet_checkbutton("Churyumov", comet_Churyumov_Gerasimenko_var, "(1962-1-20 to 2029-12-31)", 
+create_comet_checkbutton("67P/Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(1962-1-20 to 2029-12-31)", 
     "August 13, 2015")
     # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
 create_comet_checkbutton("Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
@@ -2753,7 +2755,7 @@ create_comet_checkbutton("Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-0
     "December 8, 2019")
 create_comet_checkbutton("NEOWISE", comet_neowise_var, "(2020-03-27 to 2021-06-01)", 
                          "July 3, 2020")
-create_comet_checkbutton("Tsuchinsh", comet_tsuchinshan_atlas_var, "(2023-01-09 to 2029-12-31)", 
+create_comet_checkbutton("Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to 2029-12-31)", 
                          "April 28, 2024")
 create_comet_checkbutton("ATLAS", comet_atlas_var, "(2024-06-17 to 2029-12-31)", 
                          "January 13, 2025")
@@ -3257,193 +3259,198 @@ objects = [
     'mission_info': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.', 
     'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
 
+    {'name': 'Arrokoth', 'id': '2486958', 'var': arrokoth_var, 'color': color_map('Arrokoth'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Arrokoth (2014 MU69) flyby from New Horizons on January 1, 2019.', 
+    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
+
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
     {'name': 'Pioneer10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer10'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1972, 3, 3, 1, 49, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 
     'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
     'mission_info': 'First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
 
     {'name': 'Pioneer11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer11'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1973, 4, 6, 2, 11, 0), 'end_date': datetime(1995, 9, 30, 11, 0), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1973, 4, 7), 'end_date': datetime(1995, 9, 30, 11, 0), 
     'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
     'mission_info': 'First spacecraft to encounter Saturn and study its rings.'},
 
     {'name': 'Voyager 1', 'id': '-31', 'var': voyager1_var, 'color': color_map('Voyager 1'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 9, 5), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 9, 6), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
     'mission_info': 'Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
 
     {'name': 'Voyager 2', 'id': '-32', 'var': voyager2_var, 'color': color_map('Voyager 2'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 8, 20), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 8, 21), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
     'mission_info': 'Launched in 1977, Voyager 2 explored all four giant planets.'},
 
     {'name': 'Galileo', 'id': '-77', 'var': galileo_var, 'color': color_map('Galileo'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(1989, 10, 18), 'end_date': datetime(2003, 9, 21), 
+    'id_type': 'id', 'start_date': datetime(1989, 10, 19), 'end_date': datetime(2003, 9, 21), 
     'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 
     'mission_info': 'Galileo studied Jupiter and its moons from 1995 to 2003.'},
 
     {'name': 'SOHO', 'id': '488', 'var': soho_var, 'color': color_map('SOHO'), 
-    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(1995, 12, 2), 'end_date': datetime(2029, 12, 31), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(1995, 12, 3), 'end_date': datetime(2029, 12, 31), 
     'mission_info': 'The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
     'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
 
     {'name': 'Cassini', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini-Huygens'), 'symbol': 'diamond-open', 
-     'is_mission': True, 'id_type': 'id', 'start_date': datetime(1997, 10, 15, 8, 43), 'end_date': datetime(2017, 9, 15, 10, 31), 
+     'is_mission': True, 'id_type': 'id', 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 15, 10, 31), 
      'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 
      'mission_info': 'Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
 
     {'name': 'Rosetta', 'id': '-226', 'var': rosetta_var, 'color': color_map('Rosetta'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2004, 3, 2), 'end_date': datetime(2016, 10, 5), 
+    'id_type': 'id', 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 5), 
     'mission_url': 'https://rosetta.esa.int/', 
     'mission_info': 'European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
 
     {'name': 'Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('New Horizons'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2006, 1, 19), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
     'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
 
     {'name': 'Chang\'e', 'id': 'Chang\'e', 'var': change_var, 'color': color_map('Chang\'e'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2007, 10, 24), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2007, 10, 25), 'end_date': datetime(2029, 12, 31), 
     'mission_info': 'China\'s lunar exploration program.', 
     'mission_url': 'http://www.clep.org.cn/'},
 
     {'name': 'Akatsuki', 'id': 'Akatsuki', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2010, 5, 20), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2010, 5, 21), 'end_date': datetime(2029, 12, 31), 
     'mission_info': 'JAXA mission to study the atmospheric circulation of Venus', 
     'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
 
     {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2011, 8, 5, 16, 25), 'end_date': datetime(2029, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 
     'mission_info': 'Juno studies Jupiter\'s atmosphere and magnetosphere.'},
 
     {'name': 'Gaia', 'id': 'Gaia', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2013, 12, 19), 'end_date': datetime(2029, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(2013, 12, 20), 'end_date': datetime(2029, 12, 31), 
     'mission_info': 'European Space Agency mission at L2 mapping the Milky Way.', 
     'mission_url': 'https://www.cosmos.esa.int/web/gaia'},
 
     {'name': 'Hayabusa2', 'id': 'Hayabusa2', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2014, 12, 3), 'end_date': datetime(2020, 12, 5), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2014, 12, 4), 'end_date': datetime(2020, 12, 5), 
     'mission_info': 'JAXA mission that returned samples from Ryugu.', 
     'mission_url': 'https://hayabusa2.jaxa.jp/en/'},
 
     {'name': 'OSIRISREx', 'id': '-64', 'var': osiris_rex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2016, 9, 9), 'end_date': datetime(2023, 9, 24), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2016, 9, 10), 'end_date': datetime(2023, 9, 24), 
     'mission_url': 'https://science.nasa.gov/mission/osiris-rex/', 
     'mission_info': 'OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
 
     {'name': 'OSIRISAPE', 'id': '-64', 'var': osiris_apex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2023, 9, 23), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://science.nasa.gov/category/missions/osiris-apex/', 
     'mission_info': 'OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
 
     {'name': 'Parker', 'id': '-96', 'var': parker_solar_probe_var, 'color': color_map('Parker Solar Probe'), 
-    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 8, 12), 'end_date': datetime(2029, 12, 31), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
     'mission_info': 'The Parker Solar Probe mission is to study the outer corona of the Sun.'},
 
     {'name': 'MarsRover', 'id': 'Perseverance', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 7, 30), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2029, 12, 31), 
     'mission_info': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter.', 
     'mission_url': 'https://mars.nasa.gov/mars2020/'},
 
     {'name': 'Lucy', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2021, 10, 16), 'end_date': datetime(2033, 4, 1), 
+    'id_type': 'id', 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 1), 
     'mission_info': 'Exploring Trojan asteroids around Jupiter.', 
     'mission_url': 'https://www.nasa.gov/lucy'},
 
     {'name': 'DART', 'id': '-135', 'var': dart_var, 'color': color_map('DART'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2021, 11, 24), 'end_date': datetime(2022, 9, 25), 
+    'id_type': 'id', 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 25), 
     'mission_info': 'NASA\'s mission to test asteroid deflection.', 
     'mission_url': 'https://www.nasa.gov/dart'},
 
     {'name': 'JamesWebb', 'id': '-170', 'var': jwst_var, 'color': color_map('JamesWebb'), 
-    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2021, 12, 25), 'end_date': datetime(2029, 12, 31), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2021, 12, 26), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://science.nasa.gov/mission/webb/', 
     'mission_info': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
 
     {'name': 'Clipper', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Clipper'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2024, 10, 14), 'end_date': datetime(2030, 4, 1), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2030, 4, 1), 
     'mission_url': 'https://europa.nasa.gov/', 
     'mission_info': 'Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
 
     {'name': 'Bepi', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('Bepi'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 10, 19), 'end_date': datetime(2029, 12, 31), 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 10, 20), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
 
     # Comets
     {'name': 'IkeyaSeki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('IkeyaSeki'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 21), 'end_date': datetime(1966, 1, 14), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
     'mission_info': 'One of the brightest comets of the 20th century.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_Ikeya-Seki'},
 
     {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 5), 'end_date': datetime(1976, 6, 1), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
     'mission_info': 'Notable for its bright and impressive tail.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
     {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2061, 7, 28), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 22), 'end_date': datetime(2061, 7, 28), 
     # initial start date 1982-11-26. Horizons has 1962-01-20
     'mission_info': 'Most famous comet, returned in 1986 and will return in 2061.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/1p-halley/'},
 
     {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 12, 1), 'end_date': datetime(1996, 6, 1), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 12, 2), 'end_date': datetime(1996, 6, 1), 
     'mission_info': 'Passed very close to Earth in 1996.', 
     'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
 
     {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 7, 23), 'end_date': datetime(2001, 12, 31), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 7, 24), 'end_date': datetime(2001, 12, 31), 
     'mission_info': 'Visible to the naked eye for a record 18 months.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
 
     {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 7), 'end_date': datetime(2008, 6, 1), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2008, 6, 1), 
     'mission_info': 'Known as the Great Comet of 2007.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/'}, 
 
     {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 27), 'end_date': datetime(2021, 6, 1), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
     'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades.', 
     'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
 
     {'name': 'Tsuchinsh', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
-    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 9), 
+    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 10), 
     'end_date': datetime(2030, 12, 31), 
     'mission_info': 'Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
 
     {'name': 'Churyumov', 'id': '90000702', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 90000703
-    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 20), 'end_date': datetime(2029, 12, 31), 
+    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2029, 12, 31), 
     # datetime(1962, 1, 20), 'end_date': datetime(2030, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
     'mission_info': '67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
 
     {'name': 'Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('Borisov'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2019, 8, 30), 'end_date': datetime(2020, 10, 1), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2019, 8, 31), 'end_date': datetime(2020, 10, 1), 
     'mission_info': 'The second interstellar object detected, after \'Oumuamua.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
 
     {'name': 'Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('Oumuamua'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 14), 'end_date': datetime(2018, 1, 1), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1), 
     'mission_info': 'First known interstellar object detected passing through the Solar System.', 
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
 
     {'name': 'ATLAS', 'id': 'DES=C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2024, 6, 17), 'end_date': datetime(2029, 12, 31), 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2024, 6, 18), 'end_date': datetime(2029, 12, 31), 
     'mission_info': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
 
     # Asteroids
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'is_mission': False,
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 1), 'end_date': datetime(2029, 12, 31), 
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2029, 12, 31), 
     'mission_info': 'A newly discovered small body from 2024.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
 
     {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_mission': False,
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2004, 6, 19), 'end_date': datetime(2036, 1, 1), 
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
     'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 
     'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
 
