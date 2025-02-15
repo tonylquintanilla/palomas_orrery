@@ -638,7 +638,8 @@ def color_map(planet):
         'Voyager 1': 'white',
         'Voyager 2': 'gold',
         'Cassini': 'green',
-        'Horizons': 'red',
+        'Horizons': 'cyan',
+        'Arrokoth': 'red',
         'Juno': 'cyan',
         'Galileo': 'white',
         'Pioneer10': 'red',
@@ -848,12 +849,40 @@ INFO = {
         '* Pluto Flyby: On July 14, 2015, Pluto-Charon encounter at 11:49:57 UTC. New Horizons made its historic closest approach to ' 
         'Pluto, capturing stunning images and valuable scientific data about the dwarf planet and its moons.\n' 
         '* Kuiper Belt Exploration: After its Pluto encounter, New Horizons continued its journey into the Kuiper Belt.\n' 
-        '* Arrokoth (2014 MU69) flyby on January 1, 2019, at 05:33 UTC, 3500 km from center. Arrokoth is the most distant object ever ' 
-        'visited by a spacecraft.\n' 
+        '* Arrokoth (2014 MU69) flyby on January 1, 2019, at 05:35 UTC, as close as 3561 km, or 0.0000238015 AU if you plot it.\n' 
         '* Scientific Instruments: New Horizons carries a suite of scientific instruments, including cameras, spectrometers, and ' 
         'plasma analyzers, to study the composition, atmosphere, and environment of Pluto and other Kuiper Belt objects.\n' 
         '* Continuing Mission: New Horizons is still traveling through the Kuiper Belt, and NASA may extend its mission to explore ' 
         'other distant objects in the future.',
+
+        'Arrokoth': 'Arrokoth is the most distant object ever visited by a spacecraft, New Horizons, on January 1, 2019.\n' 
+        '***NOTE: ARROKOTH DOES NOT PLOT WITH THE SUN AS THE CENTER BODY. TO VISUALIZE IT, SELECT ARROKOTH AS THE CENTER BODY AND PLOT ' 
+        'ARROKOTH AND THE "NEW HORIZONS" CRAFT ON DATE 2019-1-1 5:35 UTC, THE TIME OF CLOSEST APPROACH. SEE JPL HORIZONS FOR AN ' 
+        'EXPLANATION. TO VISUALIZE ITS LOCATION IN THE SOLAR SYSTEM, PLOT THE ABOVE WITH THE SUN AS THE CENTER BODY, YOU WILL SEE THE NEW ' 
+        'HORIZONS CRAFT, BUT NOT ARROKOTH, HOWEVER, ON 2019-1-1, THIS IS THE LOCATION OF ARROKOTH.***\n'
+        '  * Official Name: Arrokoth (formerly known as Ultima Thule)\n' 
+        '  * JPL Horizons Designation: (486958) 2014 MU69\n' 
+        '  * Location: Kuiper Belt, a region beyond Neptune populated by icy bodies\n' 
+        '  * Discovered: 2014 by the New Horizons team using the Hubble Space Telescope\n' 
+        '  * Shape: A contact binary, meaning it\'s made of two lobes joined together. It resembles a flattened snowman.\n' 
+        '  * Size: About 36 km (22 miles) long at its longest axis.\n' 
+        '  * Color: Very red, even redder than Pluto. This is due to the presence of complex organic molecules called tholins, formed ' 
+        'by radiation interacting with ices.\n' 
+        '  * Surface: Smooth with few craters, suggesting it\'s ancient and hasn\'t experienced many impacts.\n' 
+        '  * Composition: Likely a mix of ices (water, methane, etc.) and organic materials.\n' 
+        '  * Significance:\n' 
+        '    * Most Distant Object Explored: Arrokoth is the most distant and most primitive object ever visited by a spacecraft.\n' 
+        '    * Clues to Solar System Formation: Because it\'s so far from the Sun, Arrokoth has likely remained relatively unchanged ' 
+        'since the early days of the solar system. Studying it helps us understand the conditions and processes that led to the ' 
+        'formation of planets and other celestial bodies.\n' 
+        '    * Building Blocks of Life: Recent research suggests that Arrokoth may contain sugars like ribose and glucose, which are ' 
+        'essential for life as we know it. This raises exciting questions about the potential for life to exist elsewhere in the universe.\n' 
+        '    * New Horizons Flyby on January 1, 2019 (See "New Horizons" for more information):\n' 
+        '      * Detailed Images: Stunning images revealed Arrokoth\'s unique shape and surface features.\n' 
+        '      * Compositional Data: Instruments on New Horizons analyzed the light reflected from Arrokoth, giving us information ' 
+        'about its composition.\n' 
+        '      * Insights into Formation: Scientists are using the data to create models of how Arrokoth formed, which has implications ' 
+        'for our understanding of planet formation in general.', 
 
         'Juno': 'NASA\'s Juno mission is a spacecraft orbiting Jupiter to study the planet\'s origins, structure, atmosphere, and ' 
         'magnetosphere.\n'

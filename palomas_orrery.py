@@ -1173,7 +1173,8 @@ def plot_objects():
             month = int(entry_month.get())
             day = int(entry_day.get())
             hour = int(entry_hour.get())
-            date_obj = datetime(year, month, day, hour)
+            minute = int(entry_minute.get())  # Get minute value
+            date_obj = datetime(year, month, day, hour, minute)
 
             # Define hover_data with a default value
             hover_data = "Full Object Info"  # Or "Object Names Only"
@@ -1408,7 +1409,7 @@ def plot_objects():
                 plot_bgcolor='black',
                 title_font_color='white',
                 font_color='white',
-                title=f"Paloma's Orrery for {date_obj.strftime('%B %d, %Y')}",
+                title=f"Paloma's Orrery for {date_obj.strftime('%B %d, %Y %H:%M')} UTC",
                 showlegend=True,
                 legend=dict(
                     font=dict(color='white'),
@@ -1768,8 +1769,13 @@ def animate_objects(step, label):
                 return
 
             # Generate dates list
-            current_date = datetime(int(entry_year.get()), int(entry_month.get()), 
-                                int(entry_day.get()), int(entry_hour.get()))
+            current_date = datetime(
+                int(entry_year.get()), 
+                int(entry_month.get()), 
+                int(entry_day.get()), 
+                int(entry_hour.get()),
+                int(entry_minute.get())
+                )
             dates_list = []
 
             for i in range(N):
@@ -1979,7 +1985,8 @@ def animate_objects(step, label):
                 frames.append(go.Frame(
                     data=frame_data,
                     traces=trace_indices,
-                    name=str(dates_list[i].strftime('%Y-%m-%d %H:00'))
+        #            name=str(dates_list[i].strftime('%Y-%m-%d %H:00'))
+                    name=str(dates_list[i].strftime('%Y-%m-%d %H:%M'))  # Include minutes
                 ))
 
             # NEW CODE: Calculate axis ranges
@@ -2124,10 +2131,10 @@ def animate_objects(step, label):
             sliders = [dict(
                 active=0,
                 steps=[dict(method='animate',
-                            args=[[str(dates_list[k].strftime('%Y-%m-%d %H:00'))],
+                            args=[[str(dates_list[k].strftime('%Y-%m-%d %H:%M'))],
                                 {'frame': {'duration': 500, 'redraw': True},
                                 'mode': 'immediate'}],
-                            label=dates_list[k].strftime('%Y-%m-%d %H:00')) for k in range(N)],
+                            label=dates_list[k].strftime('%Y-%m-%d %H:%M')) for k in range(N)],
                 transition=dict(duration=0),
                 x=0,
                 y=0,
@@ -2207,6 +2214,8 @@ def update_date_fields(new_date):
     entry_day.insert(0, new_date.day)
     entry_hour.delete(0, tk.END)
     entry_hour.insert(0, new_date.hour)
+    entry_minute.delete(0, tk.END)
+    entry_minute.insert(0, new_date.minute)
 
 # Function to handle mission selection (no longer adjusts date)
 def handle_mission_selection():
@@ -2392,7 +2401,7 @@ date_frame = tk.Frame(input_frame)
 date_frame.grid(row=0, column=0, columnspan=9, padx=(0, 0), pady=2, sticky='w')
 
 # Define date labels and entries with reduced padding
-label_year = tk.Label(date_frame, text="Dates in UTC, Year:")
+label_year = tk.Label(date_frame, text="Date(UTC) Year:")
 label_year.grid(row=0, column=0, padx=(0, 5), pady=2, sticky='e')
 
 entry_year = tk.Entry(date_frame, width=5)
@@ -2420,9 +2429,16 @@ entry_hour = tk.Entry(date_frame, width=5)
 entry_hour.grid(row=0, column=7, padx=(0, 5), pady=2, sticky='w')
 entry_hour.insert(0, '0')
 
+label_minute = tk.Label(date_frame, text="Minute:")
+label_minute.grid(row=0, column=8, padx=(0, 5), pady=2, sticky='e')
+
+entry_minute = tk.Entry(date_frame, width=5)
+entry_minute.grid(row=0, column=9, padx=(0, 5), pady=2, sticky='w')
+entry_minute.insert(0, '0')  # Default to 0 minutes
+
 # "Now" button with minimal padding
 now_button = tk.Button(date_frame, text="Now", command=fill_now)
-now_button.grid(row=0, column=8, padx=(2, 0), pady=2, sticky='w')
+now_button.grid(row=0, column=10, padx=(2, 0), pady=2, sticky='w')
 CreateToolTip(now_button, "Fill the current date and time")
 
 # Scrollable frame for celestial objects and missions
@@ -2640,28 +2656,21 @@ create_celestial_checkbutton("Pluto", pluto_var)
 create_celestial_checkbutton("- Charon", charon_var)
 create_celestial_checkbutton("- Nix", nix_var)
 create_celestial_checkbutton("- Hydra", hydra_var)
-create_celestial_checkbutton("Haumea", haumea_var)
-create_celestial_checkbutton("Makemake", makemake_var)
-create_celestial_checkbutton("Eris", eris_var)
-# create_celestial_checkbutton("Eris/Dysnomia", eris2_var) -- Eris/Dysnomia is only for Eris-centered plot, not needed for 
-# Sun centered plots
-create_celestial_checkbutton("- Dysnomia", dysnomia_var)
-
-# LabelFrame for Kuiper Belt Objects
-kbo_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Kuiper Belt Objects (KBOs)")
-kbo_frame.pack(pady=(10, 5), fill='x')
-
-# Create checkbuttons for each Kuiper Belt Object within the kbo_frame
-
-create_celestial_checkbutton("Quaoar", quaoar_var)
-create_celestial_checkbutton("Sedna", sedna_var)
-create_celestial_checkbutton("Orcus", orcus_var)
-create_celestial_checkbutton("Varuna", varuna_var)
 create_celestial_checkbutton("Ixion", ixion_var)
 create_celestial_checkbutton("GV9", gv9_var)
-create_celestial_checkbutton("MS4", ms4_var)
-create_celestial_checkbutton("OR10", or10_var)
+create_celestial_checkbutton("Quaoar", quaoar_var)
 create_celestial_checkbutton("Arrokoth", arrokoth_var)
+create_celestial_checkbutton("Varuna", varuna_var)
+create_celestial_checkbutton("MS4", ms4_var)
+create_celestial_checkbutton("Orcus", orcus_var)
+create_celestial_checkbutton("Haumea", haumea_var)
+create_celestial_checkbutton("Makemake", makemake_var)
+create_celestial_checkbutton("Sedna", sedna_var)
+create_celestial_checkbutton("OR10", or10_var)
+create_celestial_checkbutton("Eris", eris_var)
+create_celestial_checkbutton("- Dysnomia", dysnomia_var)
+# create_celestial_checkbutton("Eris/Dysnomia", eris2_var) -- Eris/Dysnomia is only for Eris-centered plot, not needed for 
+# Sun centered plots
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
@@ -2791,7 +2800,7 @@ center_label = tk.Label(controls_frame, text="Select Center Object for Your Plot
 center_label.pack(anchor='w')
 
 center_object_var = tk.StringVar(value='Sun')
-center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris/Dysnomia' ] 
+center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth', 'Eris/Dysnomia'] 
 # A unique center for Eris is required using the satellite solution not the sun centered object.
 center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
 center_menu.pack(anchor='w')
@@ -2811,9 +2820,25 @@ CreateToolTip(num_frames_entry, "Enter the number of frames you wish to animate,
 paloma_buttons_frame = tk.Frame(controls_frame)
 paloma_buttons_frame.pack(pady=(5, 0), fill='x')
 
+# "Single Time Plot" Button 
+plot_button = tk.Button(
+    paloma_buttons_frame, 
+    text="Plot Entered Date", 
+    command=plot_objects, 
+    width=BUTTON_WIDTH, 
+    font=BUTTON_FONT, 
+    bg='SystemButtonFace', 
+    fg='blue'
+)
+plot_button.pack(side='left', padx=(0, 5), pady=(5, 0))
+CreateToolTip(plot_button, "Plot the positions of selected objects on the selected date. Planets and asteroids show their orbits. " 
+              "Comets and Missions show their trajectory between the identified start and end dates. Plotting may take a while due " 
+              "to a large number of positions fetched from Horizons. The tooltip text has more position, velocity, and orbit information.")
+
+
 paloma_birthday_button = tk.Button(
     paloma_buttons_frame, 
-    text="Paloma's Birthday", 
+    text="Enter Paloma's Birthday", 
     command=set_palomas_birthday, 
     bg='pink', 
     fg='blue',
@@ -2847,22 +2872,29 @@ CreateToolTip(
 advance_buttons_frame = tk.Frame(controls_frame)
 advance_buttons_frame.pack(pady=(5, 0), fill='x')
 
-# "Single Time Plot" Button 
-plot_button = tk.Button(advance_buttons_frame, text="Plot This Date", command=plot_objects, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
-# plot_button.grid(row=0, column=0, columnspan=2, sticky='w', pady=(5, 0))
-plot_button.grid(row=0, column=0, padx=(0, 5), pady=(5, 0))
-CreateToolTip(plot_button, "Plot the positions of selected objects on the selected date. Planets and asteroids show their orbits. " 
-              "Comets and Missions show their trajectory between the identified start and end dates. Plotting may take a while due " 
-              "to a large number of positions fetched from Horizons. The tooltip text has more position, velocity, and orbit information.")
+# "Animate Minutes" button
+animate_minute_button = tk.Button(
+    advance_buttons_frame, 
+    text="Animate Minutes", 
+    command=lambda: animate_objects(timedelta(minutes=1), "Minute"),
+    width=BUTTON_WIDTH, 
+    font=BUTTON_FONT, 
+    bg='SystemButtonFace', 
+    fg='blue'
+)
+animate_minute_button.grid(row=0, column=0, padx=(0, 5), pady=(5, 0))
+CreateToolTip(animate_minute_button, "Animate the motion over minutes. Shows position every minute using the minutes entry field.")
 
-# In the advance_buttons_frame section:
-animate_hour_button = tk.Button(advance_buttons_frame, 
+# "Animate Hours" button
+animate_hour_button = tk.Button(
+    advance_buttons_frame, 
     text="Animate Hours", 
     command=lambda: animate_objects(timedelta(hours=1), "Hour"),
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
     bg='SystemButtonFace', 
-    fg='blue')
+    fg='blue'
+)
 animate_hour_button.grid(row=0, column=1, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_hour_button, "Animate the motion over hours. Shows position every hour.")
 
@@ -3305,7 +3337,7 @@ objects = [
     'mission_url': 'https://rosetta.esa.int/', 
     'mission_info': 'European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
 
-    {'name': 'Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('New Horizons'), 'symbol': 'diamond-open', 
+    {'name': 'Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('Horizons'), 'symbol': 'diamond-open', 
     'is_mission': True, 'id_type': 'id', 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
     'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
