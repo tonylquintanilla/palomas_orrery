@@ -213,14 +213,27 @@ def create_notable_stars_list(combined_df, unique_notes, user_max_coord=None):
         print(f"Display boundaries: ±{user_max_coord} light-years")
 
     for star_name in sorted(unique_notes.keys()):
-        # Check if it's a Messier object
-        is_messier = star_name.startswith('M ') or star_name.startswith('M')
+        # Check if it's a non-stellar object (Messier, NGC, or IC or special objects labeled X)
+    #    is_messier = star_name.startswith('M') or star_name.startswith('N') or star_name.startswith('I')
+        is_non_stellar = (
+            star_name.startswith('M') or 
+            star_name.startswith('NGC') or 
+            star_name.startswith('IC') or
+            star_name.startswith('X')
+        )
 
-        # Find the star in the combined_df
-        if is_messier:
-            messier_num = star_name.split()[1] if ' ' in star_name else star_name[1:]
+        # Find the object in the combined_df
+        if is_non_stellar:
+            # Extract object number
+            if star_name.startswith('M'):
+                catalog_prefix = 'M'
+                obj_num = star_name.split()[1] if ' ' in star_name else star_name[1:]
+                search_pattern = f"{catalog_prefix}{obj_num}"
+            else:  # NGC or IC
+                search_pattern = star_name  # Use full name for NGC/IC objects
+            
             star_data = combined_df[
-                combined_df['Star_Name'].str.contains(f"M{messier_num}", na=False)
+                combined_df['Star_Name'].str.contains(search_pattern, na=False)
             ]
         else:
             star_data = combined_df[combined_df['Star_Name'] == star_name]
@@ -243,7 +256,8 @@ def create_notable_stars_list(combined_df, unique_notes, user_max_coord=None):
                     print(f"Skipping {star_name} - beyond distance limit ({distance:.1f} > {max_value} ly)")
                     should_include = False
             elif mode == 'magnitude':
-                if star_row['Apparent_Magnitude'] > max_value and not is_messier:
+    #            if star_row['Apparent_Magnitude'] > max_value and not is_messier:
+                if not is_non_stellar and star_row['Apparent_Magnitude'] > max_value:
                     print(f"Skipping {star_name} - too faint (mag {star_row['Apparent_Magnitude']:.1f} > {max_value})")
                     should_include = False
 
@@ -449,20 +463,31 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
      # Create figure
     fig = go.Figure()
     
-    # Add star trace with fixed hover text handling
+# In visualization_3d.py and planetarium_apparent_magnitude.py
+# Modify the trace creation section to handle special objects first:
+
+    # Create masks for different object types
+#    messier_mask = combined_df['Source_Catalog'] == 'Messier'
+    special_mask = combined_df['Star_Name'].str.startswith('X ', na=False)
+    messier_mask = (combined_df['Source_Catalog'] == 'Messier') & ~special_mask
+    
+    # Create mask for regular stars (not Messier and not special)
+    regular_stars_mask = ~(messier_mask | special_mask)
+
+    # First add regular stars trace
     fig.add_trace(go.Scatter3d(
-        x=combined_df['x'],
-        y=combined_df['y'],
-        z=combined_df['z'],
+        x=combined_df[regular_stars_mask]['x'],
+        y=combined_df[regular_stars_mask]['y'],
+        z=combined_df[regular_stars_mask]['z'],
         mode='markers',
         marker=dict(
-            size=combined_df['Marker_Size'],
-            color=combined_df['Temperature_Normalized'],
+            size=combined_df[regular_stars_mask]['Marker_Size'],
+            color=combined_df[regular_stars_mask]['Temperature_Normalized'],
             colorscale=colorscale,
             cmin=0,
             cmax=1,
             colorbar=dict(
-                title='Temperature (K)',
+                title='K',
                 tickmode='array',
                 tickvals=[
                     (temp - temp_min) / (temp_max - temp_min)
@@ -474,72 +499,114 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             ),
             showscale=True,
         ),
-        text=combined_df['Hover_Text'].values,  # Use .values to avoid indexing issues
-        customdata=combined_df['Min_Hover_Text'].values,
+        text=combined_df[regular_stars_mask]['Hover_Text'].values,
+        customdata=combined_df[regular_stars_mask]['Min_Hover_Text'].values,
         hovertemplate='%{text}<extra></extra>',
         name='Stars',
         showlegend=True
-    ))   
-    
-    # Add Sun with both hover text versions
+    ))
+
+    # Add Sun trace
     fig.add_trace(go.Scatter3d(
         x=[0], y=[0], z=[0],
         mode='markers',
         marker=dict(
             size=14,
             symbol='circle',
-            color='rgb(102, 187, 106)',  # Chlorophyll green
+            color='rgb(102, 187, 106)',
             line=dict(color='yellow', width=2),
         ),
-        text=[hover_text_sun],  # Full hover text
-        customdata=['<b>Sun</b>'],  # Minimal hover text
+        text=[hover_text_sun],
+        customdata=['<b>Sun</b>'],
         hovertemplate='%{text}<extra></extra>',
         name='Sun',
         showlegend=True
     ))
 
-    # Add Messier objects with distinct symbols if present
-    messier_mask = combined_df['Source_Catalog'] == 'Messier'  # Changed from Is_Messier
-    print("\nChecking for Messier objects...")
-    if messier_mask.any():
-        messier_df = combined_df[messier_mask]
-        print(f"Found {len(messier_df)} Messier objects to plot:")
-        for _, obj in messier_df.iterrows():
+    # Add special X objects before Messier objects
+    if special_mask.any():
+        special_df = combined_df[special_mask]
+        print(f"\nFound {len(special_df)} special X objects:")
+        for _, obj in special_df.iterrows():
             print(f"  {obj['Star_Name']}: ({obj['x']:.1f}, {obj['y']:.1f}, {obj['z']:.1f}) ly")
 
-    # Add invisible trace just for legend
+        # Add legend entry
         fig.add_trace(go.Scatter3d(
-            x=[None], y=[None], z=[None],  # No actual points
+            x=[None], y=[None], z=[None],
             mode='markers',
             marker=dict(
-                size=30,  # Fixed size for legend
-                symbol='circle',
-                color='goldenrod',
-                opacity=1,               
-                line=dict(color='yellow', width=2),
+                size=15,
+                symbol='circle-open',
+                color='blue',
+                opacity=1,
+                line=dict(color='white', width=2),
             ),
-            name='Messier Objects',
+            name='Special Objects',
             showlegend=True
         ))
 
-        # Add actual Messier objects trace without legend
+        # Add actual special X objects
+        fig.add_trace(go.Scatter3d(
+            x=special_df['x'],
+            y=special_df['y'],
+            z=special_df['z'],
+            mode='markers',
+            marker=dict(
+    #            size=special_df['Marker_Size'],
+                size=15,  # Fixed size of 20 for special objects
+                symbol='circle-open',
+                color='blue',
+                line=dict(color='white', width=5),
+                opacity=1
+            ),
+            text=special_df['Hover_Text'],
+            customdata=special_df['Min_Hover_Text'],
+            hovertemplate='%{text}<extra></extra>',
+            name='Special Objects',
+            showlegend=False
+        ))
+
+    # Add Messier objects last
+    if messier_mask.any():
+        messier_df = combined_df[messier_mask]
+        print(f"\nFound {len(messier_df)} Messier objects:")
+        for _, obj in messier_df.iterrows():
+            print(f"  {obj['Star_Name']}: ({obj['x']:.1f}, {obj['y']:.1f}, {obj['z']:.1f}) ly")
+
+        # Add legend entry for Messier objects
+        fig.add_trace(go.Scatter3d(
+            x=[None], y=[None], z=[None],
+            mode='markers',
+            marker=dict(
+                size=20,
+                symbol='circle-open',
+                color='red',
+                opacity=1,
+                line=dict(color='white', width=2),
+            ),
+            name='Non-stellar Objects',
+            showlegend=True
+        ))
+
+        # Add actual non-stellar objects
         fig.add_trace(go.Scatter3d(
             x=messier_df['x'],
             y=messier_df['y'],
             z=messier_df['z'],
             mode='markers',
             marker=dict(
-                size=messier_df['Marker_Size'],
+    #            size=messier_df['Marker_Size'],
+                size=20,  # Fixed size of 20 for non-stellar objects
                 symbol='circle-open',
-                color='white',
+                color='red',
                 line=dict(color='white', width=5),
                 opacity=0.5
             ),
             text=messier_df['Hover_Text'],
             customdata=messier_df['Min_Hover_Text'],
             hovertemplate='%{text}<extra></extra>',
-            name='Messier Objects',
-            showlegend=False  # Hide from legend since we have the other trace
+            name='Non-stellar Objects',
+            showlegend=False
         ))
     
     # Set title and footer text based on mode
@@ -560,7 +627,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             f"Marker size indicates luminosity (1e-6 to 1e3 Lsun), "
             f"color indicates temperature based on black-body radiation (1,300K to 50,000K).<br>"
             f"The Sun is shown in chlorophyll green at the origin (0, 0, 0). "
-            f"Python script by Tony Quintanilla with assistance from ChatGPT and Claude, February 2025. "
+            f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude, Gemini, and DeepSeek, February 2025.<br>"
             f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
             f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
             f"with the star name, for example: \"* alf Aql\", for star data."
@@ -578,7 +645,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                 f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a> and "
                 f"<span style='color:red'>{analysis['plottable_gaia']:,d}</span> from "
                 f"<a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a>. "
-                f"<span style='color:red'>{messier_count}</span> Messier objects are also displayed from the "
+                f"<span style='color:red'>{messier_count}</span> Messier and other non-stellar objects are also displayed. "
                 f"<a href='http://www.messier.seds.org/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>SEDS Messier Catalog</a>.<br>"
             #    f"Data quality: <span style='color:red'>{analysis['missing_temp']:,d}</span> stars lack temperature data, "
             #    f"<span style='color:red'>{analysis['missing_lum']:,d}</span> lack luminosity data. "
@@ -588,11 +655,11 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                 f"The Sun is shown in chlorophyll green (source of life's energy!) at the origin of the plot (0, 0, 0). "
                 f"The plot coordinates are standardized to the International Celestial Reference System, "
                 f"so the Milky Way is tilted approximately 63° with respect to the<br>celestial equator. "
-                f"Messier object markers do not reflect object type, apparent magnitude or temperature, but are fixed. " 
-                f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI, February 2025.<br>"
+                f"Non-stellar object markers do not reflect object type, apparent magnitude or temperature, but are fixed. " 
+                f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude, Gemini AI, and DeepSeek February 2025.<br>"
                 f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
                 f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
-                f"with the star name, for example: \"* alf Aql\", for star data."              
+                f"with the star name, for example: \"* alf Aql\", for star data (right-click will keep the hovertext box open to read the name)."              
             )
 
     # Update layout with centered axes

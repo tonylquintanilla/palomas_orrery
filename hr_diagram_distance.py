@@ -176,16 +176,6 @@ def main():
             print("No stars available for visualization after processing.")
             return
         
-    #    combined_data, _ = select_stars_by_distance(hip_data, gaia_data, max_light_years)
-    #    if combined_data is None:
-    #        print("No valid stars found to process. Exiting.")
-    #        return
-
-    #    combined_df = combined_data.to_pandas()  # Now this should work without issues
-    #    if len(combined_df) == 0:
-    #        print("No stars available for visualization after processing.")
-    #        return
-
         # Analyze magnitude distribution
         analyze_magnitude_distribution(combined_df, mag_limit=None)
         
@@ -249,12 +239,6 @@ def main():
             'missing_lum_only': estimation_results['final_missing_lum'],
             'estimation_results': estimation_results,
             'source_counts': source_counts
-
-    #        'source_counts': source_counts,
-    #        'total_stars': len(combined_df),
-    #        'plottable_count': len(combined_df),
-    #        'missing_temp_only': len(combined_df),
-    #        'missing_lum_only': len(combined_df)  
 
         }
 

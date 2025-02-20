@@ -1,7 +1,7 @@
     # Define unique_notes dictionary
 unique_notes = {
 
-        '* alf And': 'α Andromeda or Alpha Andromeda, better known as Alpheratz or Sirrah. It\'s the brightest star in <br>' 
+        '* alf And': '<br><br>α Andromeda or Alpha Andromeda, better known as Alpheratz or Sirrah. It\'s the brightest star in <br>' 
         'the constellation Andromeda, but it\'s also considered part of the constellation Pegasus. In <br>' 
         'fact, it forms the top left corner of the Great Square of Pegasus asterism. Alpheratz is a <br>' 
         'blue-white subgiant star, meaning it\'s hotter and more massive than our Sun, and it\'s <br>' 
@@ -16,37 +16,37 @@ unique_notes = {
         'chemical composition of stars. To find Alpheratz, look for the Great Square of Pegasus. <br>' 
         'It\'s the star that marks the top left corner of the square.',
 
-        '* bet And': 'Mirach',
-        '* gam And': 'Almach or Alamak',
-        '* del And': 'Delta Andromedae', 
-        '* eps And': 'Epsilon Andromedae',
-        '* zet And': 'Zeta Andromedae',
-        '* eta And': 'Eta Andromedae',
-        '* pi And': 'Pi Andromedae',
-        '* 51 And': 'Nembus', 
-        '* ups And': 'Upsilon Andromedae',
-        '* phi And': 'Phi Andromedae', 
-        '* chi And': 'Chi Andromedae',
-        '* psi And': 'Psi Andromedae',
-        '* ome And': 'Omega Andromedae', 
-        '* alf Ant': 'Alpha Antliae',
-        '* eps Ant': 'Epsilon Antliae',
-        '* eta Ant': 'Eta Antliae', 
-        '* the Ant': 'Theta Antliae', 
-        '* iota Ant': 'Iota Antliae',
-        '* alf Aps': 'Alpha Apodis',
-        '* bet Aps': 'Beta Apodis',
-        '* gam Aps': 'Gamma Apodis',
-        '* del Aps': 'Delta Apodis', 
-        '* the Aps': 'Theta Apodis',
-        '* kap Aps': 'Kappa Apodis', 
-        '* bet Aqr': 'Sadalsuud',
-        '* eps Aqr': 'Albali', 
-        '* zet Aqr': 'Sadaltager', 
-        '* the Aqr': 'Ancha',
-        '* lam Aqr': 'Hydor or Lambda Aquarii',
+        '* bet And': '<br><br>Mirach',
+        '* gam And': '<br><br>Almach or Alamak',
+        '* del And': '<br><br>Delta Andromedae', 
+        '* eps And': '<br><br>Epsilon Andromedae',
+        '* zet And': '<br>Zeta Andromedae',
+        '* eta And': '<br>Eta Andromedae',
+        '* pi And': '<br>Pi Andromedae',
+        '* 51 And': '<br>Nembus', 
+        '* ups And': '<br>Upsilon Andromedae',
+        '* phi And': '<br>Phi Andromedae', 
+        '* chi And': '<br>Chi Andromedae',
+        '* psi And': '<br>Psi Andromedae',
+        '* ome And': '<br>Omega Andromedae', 
+        '* alf Ant': '<br>Alpha Antliae',
+        '* eps Ant': '<br>Epsilon Antliae',
+        '* eta Ant': '<br>Eta Antliae', 
+        '* the Ant': '<br>Theta Antliae', 
+        '* iota Ant': '<br>Iota Antliae',
+        '* alf Aps': '<br>Alpha Apodis',
+        '* bet Aps': '<br>Beta Apodis',
+        '* gam Aps': '<br>Gamma Apodis',
+        '* del Aps': '<br>Delta Apodis', 
+        '* the Aps': '<br>Theta Apodis',
+        '* kap Aps': '<br>Kappa Apodis', 
+        '* bet Aqr': '<br>Sadalsuud',
+        '* eps Aqr': '<br>Albali', 
+        '* zet Aqr': '<br>Sadaltager', 
+        '* the Aqr': '<br>Ancha',
+        '* lam Aqr': '<br>Hydor or Lambda Aquarii',
 
-        '* alf Aql': 'α Aquilae or Alpha Aquilae, also known as Altair.<br> ' 
+        '* alf Aql': '<br>α Aquilae or Alpha Aquilae, also known as Altair.<br> ' 
         '* Fast spinner: Altair is completes a rotation in just 8.9 hours! This rapid spin causes it to have a flattened shape<br> ' 
         '  with its equatorial diameter being significantly larger than its polar diameter.<br> ' 
         '* Hot and bright: Altair is a white main-sequence star of spectral type A7V. It\'s about 1.8 times more massive than<br> ' 
@@ -56,27 +56,27 @@ unique_notes = {
         '* Gravity darkening: Due to its rapid rotation and flattened shape, Altair exhibits a phenomenon called gravity darkening.<br> ' 
         '  Its poles are hotter and brighter than its equator.', 
 
-        '* gam Aql': 'Tarazed',
-        '* zet Aql': 'Okab',
-        '* eta Aql': 'Eta Aquilae', 
-        '* the Aql': 'Theta Aquilae',
-        '* 12 Aql': 'Gienah or 12 Aquilae', 
-        '* lam Aql': 'Lambda Aquilae',
-        '* 15 Aql': '15 Aquilae',
-        '* alf Ara': 'Alpha Arae', 
-        '* bet Ara': 'Beta Arae',
-        '* gam Ara': 'Gamma Arae', 
-        '* zet Ara': 'Zeta Arae',
-        '* eta Ara': 'Eta Arae',
-        '* alf Ari': 'Hamal',
-        '* bet Ari': 'Sheratan',
-        '* gam Ari': 'Mesarthim', 
-        '* del Ari': 'Botein',
-        '* 41 Ari': 'Bharani', 
-        '* eps Ari': 'Epsilon Arietis',
-        '* lam Ari': 'Lambda Arietis',
+        '* gam Aql': '<br>Tarazed',
+        '* zet Aql': '<br>Okab',
+        '* eta Aql': '<br>Eta Aquilae', 
+        '* the Aql': '<br>Theta Aquilae',
+        '* 12 Aql': '<br>Gienah or 12 Aquilae', 
+        '* lam Aql': '<br>Lambda Aquilae',
+        '* 15 Aql': '<br>15 Aquilae',
+        '* alf Ara': '<br>Alpha Arae', 
+        '* bet Ara': '<br>Beta Arae',
+        '* gam Ara': '<br>Gamma Arae', 
+        '* zet Ara': '<br>Zeta Arae',
+        '* eta Ara': '<br>Eta Arae',
+        '* alf Ari': '<br>Hamal',
+        '* bet Ari': '<br>Sheratan',
+        '* gam Ari': '<br>Mesarthim', 
+        '* del Ari': '<br>Botein',
+        '* 41 Ari': '<br>Bharani', 
+        '* eps Ari': '<br>Epsilon Arietis',
+        '* lam Ari': '<br>Lambda Arietis',
 
-        '* alf Aur': 'α Auriga or Alpha Auriga, better known as Capella.<br> ' 
+        '* alf Aur': '<br>α Auriga or Alpha Auriga, better known as Capella.<br> ' 
         '* Spectroscopic binary: Capella consists of two pairs of binary stars.<br> ' 
         '* Capella Aa and Ab: The main pair are two yellow giant stars orbiting each other closely. They are both about 2.5 times<br> ' 
         '  more massive than our Sun and have evolved off the main sequence.<br> ' 
@@ -88,15 +88,15 @@ unique_notes = {
         '* X-ray source: The two main stars in Capella are known to emit X-rays, likely due to their active outer atmospheres.<br> ' 
         '* Future evolution: The two giant stars in Capella will eventually exhaust their nuclear fuel and evolve into white dwarfs.<br> ',
 
-        '* bet Aur': 'Menkalinan',
-        '* the Aur': 'Mahasim', 
-        '* iota Aur': 'Kabdhilinan',
-        '* eps Aur': 'Almaaz or Epsilon Aurigae', 
-        '* eta Aur': 'Haedus',
-        '* zet Aur': 'Zeta Aurigae', 
-        '* 14 Aur': '14 Aurigae',
+        '* bet Aur': '<br>Menkalinan',
+        '* the Aur': '<br>Mahasim', 
+        '* iota Aur': '<br>Kabdhilinan',
+        '* eps Aur': '<br>Almaaz or Epsilon Aurigae', 
+        '* eta Aur': '<br>Haedus',
+        '* zet Aur': '<br>Zeta Aurigae', 
+        '* 14 Aur': '<br>14 Aurigae',
 
-        '* alf Boo': 'α Bootes or Alpha Bootes is also known as Arcturus. It is the fourth brightest star in the entire<br> ' 
+        '* alf Boo': '<br>α Bootes or Alpha Bootes is also known as Arcturus. It is the fourth brightest star in the entire<br> ' 
         'Arcturus is an orange giant star, in a later stage of its life compared to our Sun.<br> ' 
         '* Distance: About 37 light-years away from Earth.<br> ' 
         '* Mass: Around 1.1 solar masses.<br> ' 
@@ -109,35 +109,35 @@ unique_notes = {
         '  Locate the Big Dipper asterism in Ursa Major. Follow the curve of its handle downwards, and the first<br> ' 
         '  bright star you encounter is Arcturus.',
 
-        '* eps Boo': 'Izar or Pulcherrima', 
-        '* eta Boo': 'Muphrid',
-        '* mu Boo': 'Alkalurops', 
-        '* nu Boo': 'Nu Bootis',
-        '* xi Boo': 'Xi Bootis',
-        '* 38 Boo': 'Merga', 
-        '* alf Cae': 'Alpha Caeli',
-        '* gam Cae': 'Gamma Caeli', 
-        '* bet Cam': 'Beta Camelopardalis',
-        '* alf Cnc': 'Acubens',
-        '* bet Cnc': 'Altarf',
-        '* del Cnc': 'Asellus Australis', 
-        '* gam Cnc': 'Asellus Borealis',
-        '* iota Cnc': 'Iota Cancri',
-        '* alf CVn': 'Cor Caroli', 
-        '* alf CMa': 'Sirius',
-        '* eps CMa': 'Adhara', 
-        '* del CMa': 'Wezen',
-        '* eta CMa': 'Aludra',
-        '* ome CMa': 'Omicron2 Canis Majoris', 
-        '* zet CMa': 'Furud',
-        '* bet CMi': 'Gomeisa',
-        '* alf Cap': 'Algedi',
-        '* bet Cap': 'Dabih',
-        '* gam Cap': 'Nashira', 
-        '* del Cap': 'Deneb Algedi',
-        '* zet Cap': 'Marakk', 
+        '* eps Boo': '<br>Izar or Pulcherrima', 
+        '* eta Boo': '<br>Muphrid',
+        '* mu Boo': '<br>Alkalurops', 
+        '* nu Boo': '<br>Nu Bootis',
+        '* xi Boo': '<br>Xi Bootis',
+        '* 38 Boo': '<br>Merga', 
+        '* alf Cae': '<br>Alpha Caeli',
+        '* gam Cae': '<br>Gamma Caeli', 
+        '* bet Cam': '<br>Beta Camelopardalis',
+        '* alf Cnc': '<br>Acubens',
+        '* bet Cnc': '<br>Altarf',
+        '* del Cnc': '<br>Asellus Australis', 
+        '* gam Cnc': '<br>Asellus Borealis',
+        '* iota Cnc': '<br>Iota Cancri',
+        '* alf CVn': '<br>Cor Caroli', 
+        '* alf CMa': '<br>Sirius',
+        '* eps CMa': '<br>Adhara', 
+        '* del CMa': '<br>Wezen',
+        '* eta CMa': '<br>Aludra',
+        '* ome CMa': '<br>Omicron2 Canis Majoris', 
+        '* zet CMa': '<br>Furud',
+        '* bet CMi': '<br>Gomeisa',
+        '* alf Cap': '<br>Algedi',
+        '* bet Cap': '<br>Dabih',
+        '* gam Cap': '<br>Nashira', 
+        '* del Cap': '<br>Deneb Algedi',
+        '* zet Cap': '<br>Marakk', 
 
-        '* alf Car': 'α Carina or Alpha Carina, better known as Canopus, is the second brightest star in the entire<br> ' 
+        '* alf Car': '<br>α Carina or Alpha Carina, better known as Canopus, is the second brightest star in the entire<br> ' 
         'night sky, after Sirius. Canopus is a yellow-white supergiant star, much larger and more luminous<br> ' 
         'than our Sun, and in a later stage of its stellar evolution.<br> ' 
         '* Distance: About 310 light-years away from Earth.<br> ' 
@@ -146,7 +146,7 @@ unique_notes = {
         '* Luminosity: A whopping 10,700 times more luminous than the Sun!<br> ' 
         '* Temperature: Around 7,350 Kelvin, giving it its yellow-white hue.',
 
-        '* bet Car': 'β Carinae or Beta Carinae, better known as Miaplacidus.<br>' 
+        '* bet Car': '<br>β Carinae or Beta Carinae, better known as Miaplacidus.<br>' 
         '* One of the brightest stars: Miaplacidus shines brightly in the night sky, ranking as the 28th brightest star overall.<br>' 
         '* Blue-white giant: It\'s a blue-white giant star of spectral type A2 III, meaning it\'s hotter, larger, and more<br>' 
         '  massive than our Sun.<br>' 
@@ -156,29 +156,29 @@ unique_notes = {
         '* Name\'s origin: The name Miaplacidus is a combination of Arabic and Latin words, roughly translating to "waters of<br>' 
         '  placidity.',
 
-        '* eps Car': 'Avior',
-        '* eta Car': 'Eta Carinae',
-        '* iota Car': 'Aspidiske or Turais', 
-        '* the Car': 'Vathorz Posterior',
-        '* ups Car': 'Upsilon Carinae', 
-        '* ome Car': 'Omega Carinae', 
-        '* chi Car': 'Chi Carinae', 
-        '* alf Cas': 'Schedar',
-        '* bet Cas': 'Caph',
-        '* gam Cas': 'Cih or Navi', 
-        '* del Cas': 'Ruchbah or Rucba', 
-        '* eps Cas': 'Segin',
+        '* eps Car': '<br>Avior',
+        '* eta Car': '<br>Eta Carinae',
+        '* iota Car': '<br>Aspidiske or Turais', 
+        '* the Car': '<br>Vathorz Posterior',
+        '* ups Car': '<br>Upsilon Carinae', 
+        '* ome Car': '<br>Omega Carinae', 
+        '* chi Car': '<br>Chi Carinae', 
+        '* alf Cas': '<br>Schedar',
+        '* bet Cas': '<br>Caph',
+        '* gam Cas': '<br>Cih or Navi', 
+        '* del Cas': '<br>Ruchbah or Rucba', 
+        '* eps Cas': '<br>Segin',
 
-        '* eta Cas': 'Eta Cassiopeiae A or Achird. It is part of a binary system. Eta Cas A is similar to the Sun.',
+        '* eta Cas': '<br>Eta Cassiopeiae A or Achird. It is part of a binary system. Eta Cas A is similar to the Sun.',
 
-        '* eta Cas B': 'Eta Cassiopeiae B. It orbits Eta Cas A.',
+        '* eta Cas B': '<br>Eta Cassiopeiae B. It orbits Eta Cas A.',
 
-        '* kap Cas': 'Kappa Cassiopeiae', 
-        '* rho Cas': 'Rho Cassiopeiae',
+        '* kap Cas': '<br>Kappa Cassiopeiae', 
+        '* rho Cas': '<br>Rho Cassiopeiae',
 
-        '* alf Cen': 'Rigil Kentaurus or Toliman',
+        '* alf Cen': '<br>Rigil Kentaurus or Toliman',
 
-        '* alf Cen A': 'α Centauri or Alpha Centauri A, is part of the Alpha Centauri system, the<br> ' 
+        '* alf Cen A': '<br>α Centauri or Alpha Centauri A, is part of the Alpha Centauri system, the<br> ' 
         '  closest star system to the Sun. It consists of Alpha Centauri A and B, and<br> ' 
         '  Proxima Centauri. A and B orbit each other, while Proxima orbits the A-B pair.<br>' 
         '  Alpha Centauri is the closest star system to our own, located just about 4.37<br> ' 
@@ -194,7 +194,7 @@ unique_notes = {
         '  at a much greater distance. Proxima is closest individual star to our Sun.<br> ' 
         '  Proxima Centauri is known to host at least two exoplanets.',
 
-        '* alf Cen B': 'α Centauri B or Alpha Centauri B.<br>' 
+        '* alf Cen B': '<br>α Centauri B or Alpha Centauri B.<br>' 
         '* Red dwarf companion to Alpha Centauri A. Alpha Centauri B is a fascinating star and a crucial component of the Alpha<br>' 
         '  Centauri system, the closest star system to our own!<br>' 
         '* Closest stellar neighbor: Alpha Centauri is a triple star system located just 4.37 light-years away from Earth. It<br>' 
@@ -206,7 +206,7 @@ unique_notes = {
         '  * Alpha Centauri Bc: In 2021 Bc, was detected orbiting α Centauri B. This candidate is estimated to be about six times<br>' 
         '    the mass of Earth.',
 
-        '* bet Cen': 'Beta Centauri, or β Cen. Beta Centauri is also known by the proper name Hadar or Agena, derived from<br> ' 
+        '* bet Cen': '<br>Beta Centauri, or β Cen. Beta Centauri is also known by the proper name Hadar or Agena, derived from<br> ' 
         'an Arabic word meaning "ground." It\'s actually a triple star system! The two main stars (β Cen A and β Cen B)<br> ' 
         'orbit each other closely, and a much fainter third star (β Cen C) orbits the pair at a greater distance.<br> ' 
         'Found in the constellation Centaurus, it\'s easily visible to the naked eye in the Southern Hemisphere.<br> ' 
@@ -217,31 +217,31 @@ unique_notes = {
         '* Young stars: Estimated to be only 10 to 20 million years old, compared to our 4.6 billion-year-old Sun.<br> ' 
         '* Circumstellar disks: Both β Cen A and B might have disks of dust and gas orbiting them.',
 
-        '* alf Cep': 'Alderamin',
-        '* bet Cep': 'Alfirk',
-        '* gam Cep': 'Errai', 
-        '* zet Cep': 'Zeta Cephei',
-        '* eta Cep': 'Eta Cephei',
-        '* iota Cep': 'Iota Cephei',
-        '* alf Cet': 'Menkar',
-        '* bet Cet': 'Deneb Kaitos or Diphda', 
-        '* eta Cet': 'Deneb Algenubi',
+        '* alf Cep': '<br>Alderamin',
+        '* bet Cep': '<br>Alfirk',
+        '* gam Cep': '<br>Errai', 
+        '* zet Cep': '<br>Zeta Cephei',
+        '* eta Cep': '<br>Eta Cephei',
+        '* iota Cep': '<br>Iota Cephei',
+        '* alf Cet': '<br>Menkar',
+        '* bet Cet': '<br>Deneb Kaitos or Diphda', 
+        '* eta Cet': '<br>Deneb Algenubi',
 
-        '* tau Cet': 'Tau Ceti. It is similar to the Sun, and very stable. It has a low <br>' 
+        '* tau Cet': '<br>Tau Ceti. It is similar to the Sun, and very stable. It has a low <br>' 
         'abundance of heavier elements. Tau Ceti has a system of at least four confirmed <br>' 
         'planets, all so-called Super Earths. Two of these planets, Tau Ceti e and f, <br>' 
         'orbit within the habitable zone, where liquid water is possible.',
 
-        '* iota Cet': 'Iota Ceti',
-        '* ome Cet': 'Mira',
-        '* alf Cha': 'Alpha Chamaeleontis',
-        '* gam Cha': 'Gamma Chamaeleontis', 
-        '* del Cha': 'Delta Chamaeleontis', 
-        '* alf Cir': 'Alpha Circini',
-        '* bet Cir': 'Beta Circini', 
-        '* gam Cir': 'Gamma Circini', 
+        '* iota Cet': '<br>Iota Ceti',
+        '* ome Cet': '<br>Mira',
+        '* alf Cha': '<br>Alpha Chamaeleontis',
+        '* gam Cha': '<br>Gamma Chamaeleontis', 
+        '* del Cha': '<br>Delta Chamaeleontis', 
+        '* alf Cir': '<br>Alpha Circini',
+        '* bet Cir': '<br>Beta Circini', 
+        '* gam Cir': '<br>Gamma Circini', 
 
-        '* alf CMa': 'α Canis Majoris or Alpha Canis Majoris, also known as Sirius, is the brightest star as<br> ' 
+        '* alf CMa': '<br>α Canis Majoris or Alpha Canis Majoris, also known as Sirius, is the brightest star as<br> ' 
         'seen from Earth. It is a binary star system, with a White Dwarf companion.<br> ' 
         'Sirius shines with a brilliant white light that\'s easily visible even from<br> ' 
         'light-polluted areas. It\'s a main-sequence star, meaning it\'s fusing hydrogen.<br> ' 
@@ -255,9 +255,9 @@ unique_notes = {
         '* Temperature: Around 9,940 Kelvin, giving it its white color.<br> ' 
         '  The three stars of Orion\'s belt point downwards towards Sirius.',
 
-        '* alf CMa B': 'Alpha Canis Majoris B. It is White Dward companion to Sirius.',
+        '* alf CMa B': '<br>Alpha Canis Majoris B. It is White Dward companion to Sirius.',
 
-        '* eps CMa': 'ε Canis Majoris or Epsilon Canis Majoris, better known as Adhara.<br>' 
+        '* eps CMa': '<br>ε Canis Majoris or Epsilon Canis Majoris, better known as Adhara.<br>' 
         '* Adhara is the second-brightest star in the constellation Canis Major, the Great Dog, after Sirius.<br>' 
         '* One of the most luminous stars: It\'s also one of the most intrinsically luminous stars visible to the naked eye. It<br>' 
         '  shines with a luminosity roughly 25,000 times that of our Sun!<br>' 
@@ -268,7 +268,7 @@ unique_notes = {
         '* Evolution: Adhara is an evolved star that has exhausted the hydrogen fuel in its core. It\'s expected to eventually end<br>' 
         '  its life as a white dwarf.',
 
-        '* del CMa': 'δ Canis Majoris or Delta Canis Majori, also known as Wezen.<br>' 
+        '* del CMa': '<br>δ Canis Majoris or Delta Canis Majori, also known as Wezen.<br>' 
         '* One of the brightest stars: It\'s one of the brightest stars in Canis Major and is the 35th brightest star in the<br>' 
         '  entire night sky.<br>' 
         '* Yellow-white supergiant: Wezen is a yellow-white supergiant of spectral type F8 Ia. This means it\'s much hotter,<br>' 
@@ -283,12 +283,12 @@ unique_notes = {
         '  eventually end its life in a spectacular supernova explosion.<br>' 
         '* Distance: Wezen is located about 1,800 light-years away from Earth.',
 
-        '* eta CMa': 'Aludra',
-        '* sig CMa': 'Mirzam', 
-        '* zet CMa': 'Furud',
-        '* ome CMa': 'Omicron2 Canis Majoris', 
+        '* eta CMa': '<br>Aludra',
+        '* sig CMa': '<br>Mirzam', 
+        '* zet CMa': '<br>Furud',
+        '* ome CMa': '<br>Omicron2 Canis Majoris', 
 
-        '* alf CMi': 'α Canis Minoris or Alpha Canis Minoris, also known as Procyon. <br> ' 
+        '* alf CMi': '<br>α Canis Minoris or Alpha Canis Minoris, also known as Procyon. <br> ' 
         '* Eighth brightest star: Procyon shines brightly in our night sky, ranking as the eighth-brightest star overall.<br> ' 
         '* Nearby neighbor: Located just 11.46 light-years away, Procyon is one of the closest stars to our solar system.<br> ' 
         '* Binary system: Procyon is a binary star system, consisting of two stars:<br> ' 
@@ -298,13 +298,13 @@ unique_notes = {
         '* Evolution: Procyon A is expected to eventually evolve into a red giant and then a white dwarf, similar to its companion<br> ' 
         '  Procyon B.', 
 
-        '* bet CMi': 'Gomeisa',
-        '* gam CMi': 'Gamma Canis Minoris', 
-        '* alf Cap': 'Algedi',
-        '* bet Cap': 'Dabih', 
-        '* gam Cap': 'Nashira',
+        '* bet CMi': '<br>Gomeisa',
+        '* gam CMi': '<br>Gamma Canis Minoris', 
+        '* alf Cap': '<br>Algedi',
+        '* bet Cap': '<br>Dabih', 
+        '* gam Cap': '<br>Nashira',
 
-        '* del Cap': 'Delta Capricorni (δ Cap) also known as Deneb Algedi, a star in the constellation Capricornus.<br>'
+        '* del Cap': '<br>Delta Capricorni (δ Cap) also known as Deneb Algedi, a star in the constellation Capricornus.<br>'
         '* Multiple Star System: Delta Capricorni is actually a complex multiple star system. It consists of:<br> ' 
         '  * δ Cap A: A yellow-white giant star.<br> ' 
         '  * δ Cap B: A fainter companion that orbits δ Cap A. This companion is itself a binary star (two stars orbiting each other).<br> ' 
@@ -314,33 +314,33 @@ unique_notes = {
         '* Visibility: Delta Capricorni is visible to the naked eye, but it\'s not particularly bright. It has an apparent magnitude<br> ' 
         '  of around +2.85. It\'s best seen from the Southern Hemisphere during the summer months.',
 
-        '* zet Cap': 'Marakk',
-        '* alf Car': 'Canopus',
-        '* bet Car': 'Miaplacidus',
-        '* eps Car': 'Avior',
-        '* eta Car': 'Eta Carinae', 
-        '* iota Car': 'Aspidiske or Turais', 
-        '* the Car': 'Vathorz Posterior',
-        '* ups Car': 'Upsilon Carinae', 
-        '* ome Car': 'Omega Carinae', 
-        '* chi Car': 'Chi Carinae', 
-        '* alf CrA': 'Alpha Coronae Australis',
-        '* bet CrA': 'Beta Coronae Australis',
+        '* zet Cap': '<br>Marakk',
+        '* alf Car': '<br>Canopus',
+        '* bet Car': '<br>Miaplacidus',
+        '* eps Car': '<br>Avior',
+        '* eta Car': '<br>Eta Carinae', 
+        '* iota Car': '<br>Aspidiske or Turais', 
+        '* the Car': '<br>Vathorz Posterior',
+        '* ups Car': '<br>Upsilon Carinae', 
+        '* ome Car': '<br>Omega Carinae', 
+        '* chi Car': '<br>Chi Carinae', 
+        '* alf CrA': '<br>Alpha Coronae Australis',
+        '* bet CrA': '<br>Beta Coronae Australis',
 
-        '* alf CrB': 'Alphecca or Gemma.',
+        '* alf CrB': '<br>Alphecca or Gemma.',
 
-        '* bet CrB': 'Beta Coronae Borealis', 
-        '* gam CrB': 'Gamma Coronae Borealis',
-        '* alf Crv': 'Alchiba or Al Chiba', 
-        '* bet Crv': 'Beta Corvi', 
-        '* gam Crv': 'Gienah Gurab or Gamma Corvi', 
-        '* del Crv': 'Algorab or Delta Corvi', 
-        '* eps Crv': 'Epsilon Corvi', 
-        '* alf Crt': 'Alpha Crateris',
-        '* bet Crt': 'Beta Crateris or Alkes', 
-        '* alf Cru': 'Acrux',
+        '* bet CrB': '<br>Beta Coronae Borealis', 
+        '* gam CrB': '<br>Gamma Coronae Borealis',
+        '* alf Crv': '<br>Alchiba or Al Chiba', 
+        '* bet Crv': '<br>Beta Corvi', 
+        '* gam Crv': '<br>Gienah Gurab or Gamma Corvi', 
+        '* del Crv': '<br>Algorab or Delta Corvi', 
+        '* eps Crv': '<br>Epsilon Corvi', 
+        '* alf Crt': '<br>Alpha Crateris',
+        '* bet Crt': '<br>Beta Crateris or Alkes', 
+        '* alf Cru': '<br>Acrux',
 
-        '* bet Cru': 'β Crucis or Beta Crucis, more commonly known as Mimosa or Becrux.<br>' 
+        '* bet Cru': '<br>β Crucis or Beta Crucis, more commonly known as Mimosa or Becrux.<br>' 
         '* 20th brightest star: Mimosa shines brilliantly, ranking as the 20th brightest star in the entire night sky.<br> ' 
         '* Blue giant: It\'s a blue giant star of spectral type B0.5 III, meaning it\'s much hotter, larger, and more massive than our Sun.<br>' 
         '* Part of a system: Mimosa is actually a binary star system, or possibly even a triple system. The main star, Mimosa A, has a<br>' 
@@ -353,7 +353,7 @@ unique_notes = {
         '* Navigation: In the past, Mimosa and the other stars of the Southern Cross were important for navigation in the Southern<br>' 
         '  Hemisphere.',
 
-        '* gam Cru': 'Gam Cru, or Gamma Crux, is more commonly known as Gacrux, holds a special place <br>' 
+        '* gam Cru': '<br>Gam Cru, or Gamma Crux, is more commonly known as Gacrux, holds a special place <br>' 
         'in the Southern Hemisphere sky! It\'s the third-brightest star in the constellation Crux, which <br>' 
         'is better known as the Southern Cross. Gacrux is a red giant star, meaning it\'s in a later <br>' 
         'stage of its stellar evolution, similar to Aldebaran. Distance: Approximately 88 light-years <br>' 
@@ -367,16 +367,16 @@ unique_notes = {
         'Gacrux might have a faint companion star, though this is still uncertain. It\'s classified as a <br>' 
         'semi-regular variable star, meaning its brightness changes slightly over time.',
 
-        '* del Cru': 'Delta Crucis', 
-        '* eps Cru': 'Epsilon Crucis', 
-        '* zet Cru': 'Zeta Crucis', 
-        '* eta Cru': 'Eta Crucis', 
-        '* the1 Cru': 'Theta1 Crucis', 
-        '* lam Cru': 'Lambda Crucis', 
-        '* mu1 Cru': 'Mu1 Crucis', 
-        '* mu2 Cru': 'Mu2 Crucis',
+        '* del Cru': '<br>Delta Crucis', 
+        '* eps Cru': '<br>Epsilon Crucis', 
+        '* zet Cru': '<br>Zeta Crucis', 
+        '* eta Cru': '<br>Eta Crucis', 
+        '* the1 Cru': '<br>Theta1 Crucis', 
+        '* lam Cru': '<br>Lambda Crucis', 
+        '* mu1 Cru': '<br>Mu1 Crucis', 
+        '* mu2 Cru': '<br>Mu2 Crucis',
 
-        '* alf Cyg': 'α Cygnus or Alpha Cygnus, also known as Deneb or Arided.<br> '
+        '* alf Cyg': '<br>α Cygnus or Alpha Cygnus, also known as Deneb or Arided.<br> '
         '* One of the most luminous stars: Deneb is a blue-white supergiant, one of the most luminous stars known in the Milky Way<br> ' 
         '  galaxy. It\'s estimated to be at least 50,000 times more luminous than our Sun.<br> ' 
         '* Immense size: Though its exact size is also subject to some uncertainty due to its distance, Deneb is thought to have a<br> ' 
@@ -391,40 +391,40 @@ unique_notes = {
         '  behind a neutron star or a black hole.<br> ' 
         '* Cygnus the Swan: Deneb is the brightest star in the constellation Cygnus.',
 
-        '* gam Cyg': 'Sadr', 
-        '* eps Cyg': 'Gienah', 
-        '* del Cyg': 'Fawaris or Delta Cygni', 
-        '* zet Cyg': 'Zeta Cygni', 
-        '* eta Cyg': 'Aladfar', 
-        '* the Cyg': 'Theta Cygni', 
-        '* iota Cyg': 'Iota Cygni', 
-        '* kap Cyg': 'Kappa Cygni', 
-        '* lam Cyg': 'Lambda Cygni', 
-        '* 61 Cyg': '61 Cygni', 
-        '* pi1 Cyg': 'Azelfafage', 
-        '* alf Del': 'Sualocin or Alpha Delphini',
-        '* bet Del': 'Rotanev or Beta Delphini', 
-        '* gam Del': 'Gamma Delphini', 
-        '* del Del': 'Delta Delphini', 
-        '* eps Del': 'Epsilon Delphini or Aldulfin', 
-        '* alf Dor': 'Alpha Doradus',
-        '* bet Dor': 'Beta Doradus', 
-        '* gam Dor': 'Gamma Doradus', 
-        '* alf Dra': 'Thuban', 
-        '* gam Dra': 'Eltanin or Etamin', 
-        '* eta Dra': 'Athebyne or Aldhibain', 
-        '* nu Dra': 'Kuma', 
-        '* xi Dra': 'Grumium', 
+        '* gam Cyg': '<br>Sadr', 
+        '* eps Cyg': '<br>Gienah', 
+        '* del Cyg': '<br>Fawaris or Delta Cygni', 
+        '* zet Cyg': '<br>Zeta Cygni', 
+        '* eta Cyg': '<br>Aladfar', 
+        '* the Cyg': '<br>Theta Cygni', 
+        '* iota Cyg': '<br>Iota Cygni', 
+        '* kap Cyg': '<br>Kappa Cygni', 
+        '* lam Cyg': '<br>Lambda Cygni', 
+        '* 61 Cyg': '<br>61 Cygni', 
+        '* pi1 Cyg': '<br>Azelfafage', 
+        '* alf Del': '<br>Sualocin or Alpha Delphini',
+        '* bet Del': '<br>Rotanev or Beta Delphini', 
+        '* gam Del': '<br>Gamma Delphini', 
+        '* del Del': '<br>Delta Delphini', 
+        '* eps Del': '<br>Epsilon Delphini or Aldulfin', 
+        '* alf Dor': '<br>Alpha Doradus',
+        '* bet Dor': '<br>Beta Doradus', 
+        '* gam Dor': '<br>Gamma Doradus', 
+        '* alf Dra': '<br>Thuban', 
+        '* gam Dra': '<br>Eltanin or Etamin', 
+        '* eta Dra': '<br>Athebyne or Aldhibain', 
+        '* nu Dra': '<br>Kuma', 
+        '* xi Dra': '<br>Grumium', 
 
-        '* sig Dra': 'Sigma Draconis, also known as Alsafi. Sigma Draconis hosts at least <br>' 
+        '* sig Dra': '<br>Sigma Draconis, also known as Alsafi. Sigma Draconis hosts at least <br>' 
         'one known exoplanet, a gas giant with a mass about 11 times that of Jupiter. <br>' 
         'This planet orbits the star at a distance greater than the orbit of Mars.',
 
-        '* alf Equ': 'Kitalpha or Alpha Equulei',         
-        '* del Equ': 'Delta Equulei', 
-        '* gam Equ': 'Gamma Equulei', 
+        '* alf Equ': '<br>Kitalpha or Alpha Equulei',         
+        '* del Equ': '<br>Delta Equulei', 
+        '* gam Equ': '<br>Gamma Equulei', 
 
-        '* alf Eri': 'α Eridani, or Alpha Eridani, often shortened to α Eri, and more famously known as Achernar! Its name comes from<br> ' 
+        '* alf Eri': '<br>α Eridani, or Alpha Eridani, often shortened to α Eri, and more famously known as Achernar! Its name comes from<br> ' 
         '  an Arabic phrase meaning "the end of the river," <br> ' 
         '* A Rapidly Rotating Giant: Achernar is notable for its extremely rapid rotation. It spins so fast that it\'s<br> ' 
         '  significantly flattened at its poles and bulges at the equator, more like a lentil than a sphere.<br> ' 
@@ -438,25 +438,25 @@ unique_notes = {
         '* Evolution: Achernar is still on the main sequence, fusing hydrogen in its core. However, due to its high mass,<br> ' 
         '  it will have a shorter lifespan than our Sun and eventually evolve into a giant star.',
 
-        '* bet Eri': 'Cursa', 
-        '* gam Eri': 'Zaurak', 
-        '* del Eri': 'Rana', 
+        '* bet Eri': '<br>Cursa', 
+        '* gam Eri': '<br>Zaurak', 
+        '* del Eri': '<br>Rana', 
 
-        '* eps Eri': 'Epsilon Eridani also known as 18 Eridani. It is a young star less <br>' 
+        '* eps Eri': '<br>Epsilon Eridani also known as 18 Eridani. It is a young star less <br>' 
         'than one billion years old, compared to our 4.6 billion year-old Sun! It has <br>' 
         'frequent flares. Epsilon is <br>' 
         'surrounded by a dusty debris disk, which could contain comets, asteroid and planets. <br>' 
         'Epsilon has one confirmed planet Epsilon Eridani b, a gas giant, slightly larger <br>' 
         'than Jupiter, and there is evidence of a second planet.',
 
-        '* zet Eri': 'Zibal', 
-        '* eta Eri': 'Azha', 
-        '* the Eri': 'Acamar', 
-        '* 40 Eri': '40 Eridani', 
+        '* zet Eri': '<br>Zibal', 
+        '* eta Eri': '<br>Azha', 
+        '* the Eri': '<br>Acamar', 
+        '* 40 Eri': '<br>40 Eridani', 
 
-        '* e Eri': 'Also known as 82 Eridani.',
+        '* e Eri': '<br>Also known as 82 Eridani.',
 
-        '* omi02 Eri': 'ο² Eridani A, also known as Keid. It is a K1V-type main-<br>' 
+        '* omi02 Eri': '<br>ο² Eridani A, also known as Keid. It is a K1V-type main-<br>' 
         'sequence star (specifically K1V). it has a radius about 85 percent of the <br>' 
         'Sun and a mass around 82 percent of the Sun. ο² Eri A is in the triple star <br>'
         'ο² Eridani. It is estimated to be around 5.7 billion years old. Unlike its <br>' 
@@ -466,7 +466,7 @@ unique_notes = {
         'in its core for many billions of years. ο² Eri A was featured as the location <br>' 
         'of the fictional planet Vulcan in the Star Trek universe.',
 
-        '* omi02 Eri B': 'Omicron2 Eridani B, is a fascinating component of a <br>' 
+        '* omi02 Eri B': '<br>Omicron2 Eridani B, is a fascinating component of a <br>' 
         'triple star system. It is a white dwarf, the remnant core of a star that <br>' 
         'has exhausted its nuclear fuel. It is a White Dwarf (specifically, a DA <br>' 
         'type, indicating a hydrogen-rich atmosphere. Even though a white dwarf <br>' 
@@ -482,12 +482,12 @@ unique_notes = {
         'A and B. ο² Eri B and C form a close binary pair that orbits around the <br>' 
         'primary star A at a considerable distance.',
 
-        '* lam Eri': 'Lambda Eridani', 
-        '* alf For': 'Alpha Fornacis',
-        '* bet For': 'Beta Fornacis', 
-        '* nu For': 'Nu Fornacis', 
+        '* lam Eri': '<br>Lambda Eridani', 
+        '* alf For': '<br>Alpha Fornacis',
+        '* bet For': '<br>Beta Fornacis', 
+        '* nu For': '<br>Nu Fornacis', 
 
-        '* alf Gem': 'α Gem or alpha Gemini, better known as Castor.<br>' 
+        '* alf Gem': '<br>α Gem or alpha Gemini, better known as Castor.<br>' 
         '* Gemini\'s Head: Castor marks the head of one of the twins in the constellation Gemini.<br>' 
         '* Sextuple star system: While it appears as a single star to the naked eye, Castor is actually a system of six stars!<br>' 
         '  It consists of three binary pairs that orbit each other.<br>' 
@@ -503,7 +503,7 @@ unique_notes = {
         '* Distance: Castor is located about 51 light-years away from Earth.<br>' 
         '* Near Pollux: It\'s located near its "twin" star, Pollux, which is slightly brighter and has a more orange hue.',
  
-        '* bet Gem': 'β Geminorum or Beta Geminorum, better known as Pollux. <br> ' 
+        '* bet Gem': '<br>β Geminorum or Beta Geminorum, better known as Pollux. <br> ' 
         '* Orange giant: Pollux is an evolved star that has moved off the main sequence and expanded into an orange giant. It\'s<br> ' 
         '  about twice as massive as our Sun and has a diameter roughly nine times larger.<br> ' 
         '* Cooler than the Sun: Pollux is cooler than our Sun, with a surface temperature of about 4,865 Kelvin. This gives it a<br> ' 
@@ -514,36 +514,36 @@ unique_notes = {
         '  astronomical units (AU), taking approximately 590 days to complete one orbit.<br> ' 
         '* Future evolution: Pollux will eventually exhaust its nuclear fuel and shed its outer layers, leaving behind a white dwarf', 
 
-        '* gam Gem': 'Alhena', 
-        '* del Gem': 'Wasat', 
-        '* eps Gem': 'Mebsuta', 
-        '* zet Gem': 'Mekbuda', 
-        '* eta Gem': 'Propus', 
-        '* mu Gem': 'Tejat Posterior', 
-        '* nu Gem': 'Nu Geminorum', 
-        '* xi Gem': 'Alzirr', 
-        '* alf Gru': 'Alnair or Alpha Gruis', 
-        '* bet Gru': 'Beta Gruis', 
-        '* gam Gru': 'Al Dhanab', 
-        '* alf Her': 'Rasalgethi or Ras Algethi', 
-        '* bet Her': 'Kornephoros', 
-        '* zet Her': 'Zeta Herculis', 
-        '* lam Her': 'Maasym', 
-        '* mu Her': 'Mu Herculis', 
-        '* pi Her': 'Pi Herculis', 
-        '* 109 Her': '109 Herculis', 
-        '* alf Hor': 'Alpha Horologii', 
-        '* alf Hya': 'Alphard or Alpha Hydrae', 
-        '* gam Hya': 'Gamma Hydrae', 
-        '* zet Hya': 'Zeta Hydrae', 
-        '* nu Hya': 'Nu Hydrae', 
-        '* alf Hyi': 'Alpha Hydri', 
-        '* bet Hyi': 'Beta Hydri', 
-        '* gam Hyi': 'Gamma Hydri', 
-        '* alf Ind': 'Alpha Indi or The Persian', 
-        '* bet Ind': 'Beta Indi', 
+        '* gam Gem': '<br>Alhena', 
+        '* del Gem': '<br>Wasat', 
+        '* eps Gem': '<br>Mebsuta', 
+        '* zet Gem': '<br>Mekbuda', 
+        '* eta Gem': '<br>Propus', 
+        '* mu Gem': '<br>Tejat Posterior', 
+        '* nu Gem': '<br>Nu Geminorum', 
+        '* xi Gem': '<br>Alzirr', 
+        '* alf Gru': '<br>Alnair or Alpha Gruis', 
+        '* bet Gru': '<br>Beta Gruis', 
+        '* gam Gru': '<br>Al Dhanab', 
+        '* alf Her': '<br>Rasalgethi or Ras Algethi', 
+        '* bet Her': '<br>Kornephoros', 
+        '* zet Her': '<br>Zeta Herculis', 
+        '* lam Her': '<br>Maasym', 
+        '* mu Her': '<br>Mu Herculis', 
+        '* pi Her': '<br>Pi Herculis', 
+        '* 109 Her': '<br>109 Herculis', 
+        '* alf Hor': '<br>Alpha Horologii', 
+        '* alf Hya': '<br>Alphard or Alpha Hydrae', 
+        '* gam Hya': '<br>Gamma Hydrae', 
+        '* zet Hya': '<br>Zeta Hydrae', 
+        '* nu Hya': '<br>Nu Hydrae', 
+        '* alf Hyi': '<br>Alpha Hydri', 
+        '* bet Hyi': '<br>Beta Hydri', 
+        '* gam Hyi': '<br>Gamma Hydri', 
+        '* alf Ind': '<br>Alpha Indi or The Persian', 
+        '* bet Ind': '<br>Beta Indi', 
 
-        '* eps Ind': 'Also known as Epsilon Indi. Epsilon Indi is actually a triple <br>' 
+        '* eps Ind': '<br>Also known as Epsilon Indi. Epsilon Indi is actually a triple <br>' 
         'star system, consisting of: ε Indi A, the main, K-type main-sequence star. <br>' 
         'ε Indi Ba and Bb are a binary pair of brown dwarfs orbiting ε Indi A at a <br>' 
         'considerable distance. Brown dwarfs are "failed stars" that are not massive <br>' 
@@ -551,10 +551,10 @@ unique_notes = {
         'approximately 69 and 49 times the mass of Jupiter, respectively with an <br>' 
         'orbital period around ε Indi A estimated to be tens of thousands of years.',
 
-        '* alf Lac': 'Alpha Lacertae', 
-        '* bet Lac': 'Beta Lacertae', 
+        '* alf Lac': '<br>Alpha Lacertae', 
+        '* bet Lac': '<br>Beta Lacertae', 
  
-        '* alf Leo': 'α Leo or Alpha Leo, is more formally known as Regulus or Cor Leonis, and it\'s the brightest star in the constellation <br>' 
+        '* alf Leo': '<br>α Leo or Alpha Leo, is more formally known as Regulus or Cor Leonis, and it\'s the brightest star in the constellation <br>' 
         'Leo the Lion. Regulus is a quadruple star system, with four stars orbiting each other: Regulus A: The main component <br>' 
         'and the one we see as the bright "star." It\'s a blue-white main-sequence star, much hotter and larger than our Sun. <br>' 
         'Regulus B: A faint white dwarf companion to Regulus A. They orbit each other very closely. Regulus C and D: A pair of <br>' 
@@ -564,20 +564,20 @@ unique_notes = {
         'Rotation: Regulus A spins incredibly fast, completing a rotation in just 15.9 hours! This rapid rotation causes it to <br>' 
         'have an oblate shape (flattened at the poles and bulging at the equator).',
 
-        '* gam Leo': 'Algieba', 
-        '* del Leo': 'Zosma', 
-        '* eps Leo': 'Algenubi or Ras Elased Australis', 
-        '* zet Leo': 'Adhafera', 
-        '* eta Leo': 'Al Jabbah', 
-        '* the Leo': 'Chertan or Coxa', 
-        '* iota Leo': 'Iota Leonis', 
-        '* kap Leo': 'Al Minliar al Asad', 
-        '* lam Leo': 'Alterf', 
-        '* mu Leo': 'Rasalas', 
-        '* ome Leo': 'Subra', 
-        '* 83 Leo': '83 Leonis', 
+        '* gam Leo': '<br>Algieba', 
+        '* del Leo': '<br>Zosma', 
+        '* eps Leo': '<br>Algenubi or Ras Elased Australis', 
+        '* zet Leo': '<br>Adhafera', 
+        '* eta Leo': '<br>Al Jabbah', 
+        '* the Leo': '<br>Chertan or Coxa', 
+        '* iota Leo': '<br>Iota Leonis', 
+        '* kap Leo': '<br>Al Minliar al Asad', 
+        '* lam Leo': '<br>Alterf', 
+        '* mu Leo': '<br>Rasalas', 
+        '* ome Leo': '<br>Subra', 
+        '* 83 Leo': '<br>83 Leonis', 
 
-        '* AD Leo': 'AD Leonis also known as Gliese 388. It is a Red dwarf star. <br>' 
+        '* AD Leo': '<br>AD Leonis also known as Gliese 388. It is a Red dwarf star. <br>' 
         'AD Leonis is known for its dramatic and unpredictable flares, where it <br>' 
         'suddenly releases enormous amounts of energy, causing a temporary increase <br>' 
         'in brightness. These flares are thought to be driven by magnetic activity <br>' 
@@ -586,37 +586,37 @@ unique_notes = {
         'magnetic fields and frequent flaring activity. AD Leonis is relatively young, <br>' 
         'estimated to be a few hundred million years old.',
 
-        '* alf Lep': 'Arneb', 
-        '* bet Lep': 'Nihal', 
-        '* eps Lep': 'Epsilon Leporis', 
-        '* mu Lep': 'Mu Leporis', 
-        '* alf Lib': 'Zubenelgenubi', 
-        '* bet Lib': 'Zubeneschamali', 
-        '* gam Lib': 'Zubenelakrab', 
-        '* sig Lib': 'Brachium', 
-        '* ups Lib': 'Upsilon Librae', 
-        '* alf Lup': 'Alpha Lupi', 
-        '* bet Lup': 'Beta Lupi', 
-        '* gam Lup': 'Gamma Lupi', 
-        '* del Lup': 'Delta Lupi', 
-        '* eps Lup': 'Epsilon Lupi', 
-        '* zet Lup': 'Zeta Lupi', 
-        '* eta Lup': 'Eta Lupi', 
-        '* the Lup': 'Theta Lupi', 
-        '* iota Lup': 'Iota Lupi', 
-        '* kap Lup': 'Kappa Lupi', 
-        '* lam Lup': 'Lambda Lupi', 
-        '* mu Lup': 'Mu Lupi', 
-        '* nu Lup': 'Nu Lupi', 
-        '* xi Lup': 'Xi Lupi', 
-        '* ome Lup': 'Omega Lupi', 
-        '* pi Lup': 'Pi Lupi', 
-        '* sig Lup': 'Sigma Lupi', 
-        '* tau Lup': 'Tau Lupi', 
-        '* alf Lyn': 'Alpha Lyncis', 
-        '* 31 Lyn': '31 Lyncis', 
+        '* alf Lep': '<br>Arneb', 
+        '* bet Lep': '<br>Nihal', 
+        '* eps Lep': '<br>Epsilon Leporis', 
+        '* mu Lep': '<br>Mu Leporis', 
+        '* alf Lib': '<br>Zubenelgenubi', 
+        '* bet Lib': '<br>Zubeneschamali', 
+        '* gam Lib': '<br>Zubenelakrab', 
+        '* sig Lib': '<br>Brachium', 
+        '* ups Lib': '<br>Upsilon Librae', 
+        '* alf Lup': '<br>Alpha Lupi', 
+        '* bet Lup': '<br>Beta Lupi', 
+        '* gam Lup': '<br>Gamma Lupi', 
+        '* del Lup': '<br>Delta Lupi', 
+        '* eps Lup': '<br>Epsilon Lupi', 
+        '* zet Lup': '<br>Zeta Lupi', 
+        '* eta Lup': '<br>Eta Lupi', 
+        '* the Lup': '<br>Theta Lupi', 
+        '* iota Lup': '<br>Iota Lupi', 
+        '* kap Lup': '<br>Kappa Lupi', 
+        '* lam Lup': '<br>Lambda Lupi', 
+        '* mu Lup': '<br>Mu Lupi', 
+        '* nu Lup': '<br>Nu Lupi', 
+        '* xi Lup': '<br>Xi Lupi', 
+        '* ome Lup': '<br>Omega Lupi', 
+        '* pi Lup': '<br>Pi Lupi', 
+        '* sig Lup': '<br>Sigma Lupi', 
+        '* tau Lup': '<br>Tau Lupi', 
+        '* alf Lyn': '<br>Alpha Lyncis', 
+        '* 31 Lyn': '<br>31 Lyncis', 
 
-        '* alf Lyr': 'α Lyr, Alpha Lyrae, more commonly known as Vega.<br> ' 
+        '* alf Lyr': '<br>α Lyr, Alpha Lyrae, more commonly known as Vega.<br> ' 
         '* Fifth brightest star: Vega shines brilliantly in our night sky, ranking as the fifth-brightest star overall and the<br> ' 
         '  second-brightest in the northern celestial hemisphere.<br> ' 
         '* Close proximity: Located a mere 25 light-years away, Vega is considered one of our closest stellar neighbors.<br> ' 
@@ -628,47 +628,47 @@ unique_notes = {
         '* Possible variability: There\'s some evidence that Vega might be a slightly variable star, with subtle changes in<br> ' 
         '  brightness over time.',
 
-        '* bet Lyr': 'Sheliak', 
-        '* gam Lyr': 'Sulafat', 
-        '* del1 Lyr': 'Delta1 Lyrae', 
-        '* del2 Lyr': 'Delta2 Lyrae', 
-        '* zet1 Lyr': 'Zeta1 Lyrae', 
-        '* zet2 Lyr': 'Zeta2 Lyrae', 
-        '* eps1 Lyr': 'Epsilon1 Lyrae', 
-        '* eps2 Lyr': 'Epsilon2 Lyrae', 
-        '* eta Lyr': 'Eta Lyrae', 
-        '* the Lyr': 'Theta Lyrae', 
-        '* 12 Lyr': '12 Lyrae', 
-        '* RR Lyr': 'RR Lyrae', 
-        '* alf Mic': 'Alpha Microscopii',
-        '* gam Mic': 'Gamma Microscopii',
-        '* eps Mic': 'Epsilon Microscopii',
-        '* alf Mon': 'Alpha Monocerotis',
-        '* gam Mon': 'Gamma Monocerotis',
-        '* del Mon': 'Delta Monocerotis',
-        '* zet Mon': 'Zeta Monocerotis',
-        '* 13 Mon': '13 Monocerotis',
-        '* 18 Mon': '18 Monocerotis',
-        '* 28 Mon': '28 Monocerotis',
-        '* alf Mus': 'Alpha Muscae',
-        '* bet Mus': 'Beta Muscae',
-        '* del Mus': 'Delta Muscae',
-        '* lam Mus': 'Lambda Muscae',
-        '* alf Nor': 'Alpha Normae',
-        '* gam Nor': 'Gamma Normae',
-        '* eps Nor': 'Epsilon Normae',
-        '* iota1 Nor': 'Iota1 Normae',
-        '* alf Oct': 'Alpha Octantis',
-        '* nu Oct': 'Nu Octantis',
-        '* alf Oph': 'Rasalhague or Alpha Ophiuchi',
-        '* bet Oph': 'Cebalrai or Beta Ophiuchi',
-        '* del Oph': 'Yed Prior or Delta Ophiuchi',
-        '* eps Oph': 'Yed Posterior or Epsilon Ophiuchi',
-        '* eta Oph': 'Sabik',
-        '* zet Oph': 'Zeta Ophiuchi',
-        '* lam Oph': 'Marfik',
+        '* bet Lyr': '<br>Sheliak', 
+        '* gam Lyr': '<br>Sulafat', 
+        '* del1 Lyr': '<br>Delta1 Lyrae', 
+        '* del2 Lyr': '<br>Delta2 Lyrae', 
+        '* zet1 Lyr': '<br>Zeta1 Lyrae', 
+        '* zet2 Lyr': '<br>Zeta2 Lyrae', 
+        '* eps1 Lyr': '<br>Epsilon1 Lyrae', 
+        '* eps2 Lyr': '<br>Epsilon2 Lyrae', 
+        '* eta Lyr': '<br>Eta Lyrae', 
+        '* the Lyr': '<br>Theta Lyrae', 
+        '* 12 Lyr': '<br>12 Lyrae', 
+        '* RR Lyr': '<br>RR Lyrae', 
+        '* alf Mic': '<br>Alpha Microscopii',
+        '* gam Mic': '<br>Gamma Microscopii',
+        '* eps Mic': '<br>Epsilon Microscopii',
+        '* alf Mon': '<br>Alpha Monocerotis',
+        '* gam Mon': '<br>Gamma Monocerotis',
+        '* del Mon': '<br>Delta Monocerotis',
+        '* zet Mon': '<br>Zeta Monocerotis',
+        '* 13 Mon': '<br>13 Monocerotis',
+        '* 18 Mon': '<br>18 Monocerotis',
+        '* 28 Mon': '<br>28 Monocerotis',
+        '* alf Mus': '<br>Alpha Muscae',
+        '* bet Mus': '<br>Beta Muscae',
+        '* del Mus': '<br>Delta Muscae',
+        '* lam Mus': '<br>Lambda Muscae',
+        '* alf Nor': '<br>Alpha Normae',
+        '* gam Nor': '<br>Gamma Normae',
+        '* eps Nor': '<br>Epsilon Normae',
+        '* iota1 Nor': '<br>Iota1 Normae',
+        '* alf Oct': '<br>Alpha Octantis',
+        '* nu Oct': '<br>Nu Octantis',
+        '* alf Oph': '<br>Rasalhague or Alpha Ophiuchi',
+        '* bet Oph': '<br>Cebalrai or Beta Ophiuchi',
+        '* del Oph': '<br>Yed Prior or Delta Ophiuchi',
+        '* eps Oph': '<br>Yed Posterior or Epsilon Ophiuchi',
+        '* eta Oph': '<br>Sabik',
+        '* zet Oph': '<br>Zeta Ophiuchi',
+        '* lam Oph': '<br>Marfik',
 
-        '* alf Ori': 'α Ori, Alpha Orionis, better known by its captivating name Betelgeuse.<br> ' 
+        '* alf Ori': '<br>α Ori, Alpha Orionis, better known by its captivating name Betelgeuse.<br> ' 
         '* Immense size: Betelgeuse is classified as a red supergiant, one of the largest and most luminous stars known. If it<br> ' 
         '  were placed at the center of our solar system, its surface would extend beyond the orbit of Jupiter!<br> ' 
         '* Cool but bright: Despite its cool surface temperature of about 3,500 Kelvin, Betelgeuse is incredibly luminous,<br> ' 
@@ -683,7 +683,7 @@ unique_notes = {
         '  years. This event will be a spectacular sight, visible even during the day. After the supernova, Betelgeuse will likely<br> ' 
         '  leave behind a neutron star or a black hole.',
 
-        '* bet Ori': 'β Ori, Beta Orionis, better known as Rigel.<br> ' 
+        '* bet Ori': '<br>β Ori, Beta Orionis, better known as Rigel.<br> ' 
         '* Massive and luminous: Rigel is a blue supergiant, a star that has evolved off the main sequence and expanded<br> ' 
         '  significantly. It\'s estimated to be around 17 times more massive than our Sun and a staggering 66,000 times more luminous!<br> ' 
         '* Intense heat: With a surface temperature of about 11,000 Kelvin, it shines with a brilliant blue-white light.<br> ' 
@@ -696,7 +696,7 @@ unique_notes = {
         '* Short lifespan: Rigel is destined to have a relatively short lifespan compared to our Sun. It will likely end its life<br> ' 
         '  in a supernova explosion, possibly leaving behind a neutron star or black hole.',
 
-        '* gam Ori': 'γ Orionis or Gamma Orionis, better known as Bellatrix.<br>' 
+        '* gam Ori': '<br>γ Orionis or Gamma Orionis, better known as Bellatrix.<br>' 
         '* Orion\'s Shoulder: Bellatrix is located in the constellation Orion, marking the hunter\'s left shoulder.<br>' 
         '* Third brightest in Orion: It\'s the third-brightest star in Orion, after Rigel and Betelgeuse, and the 27th brightest<br>' 
         '  star in the entire night sky.<br>' 
@@ -709,7 +709,7 @@ unique_notes = {
         '  stage of its stellar life cycle.<br>' 
         '* Future evolution: Bellatrix is expected to eventually end its life as a massive white dwarf.',
 
-        '* del Ori': 'δ Ori or delta Orionis, better known as Mintaka.<br>' 
+        '* del Ori': '<br>δ Ori or delta Orionis, better known as Mintaka.<br>' 
         '* Mintaka is a star system that marks the westernmost point of Orion\'s Belt<br>' 
         '* While it appears as a single star to the naked eye, Mintaka is actually a multiple star system of six or more stars!<br>' 
         '* Mintaka Aa1, Aa2, and Ab: The main component is itself a triple star system. Aa1 and Aa2 are two close binary stars<br>' 
@@ -722,7 +722,7 @@ unique_notes = {
         '* Powerful stellar winds: Like other massive stars, these stars have powerful stellar winds that expel material into space.<br>' 
         '* Distance: Mintaka is located about 900 light-years away from Earth.',
 
-        '* eps Ori': 'ε Orionis or Epsilon Orionis, more commonly known as Alnilam.<br>' 
+        '* eps Ori': '<br>ε Orionis or Epsilon Orionis, more commonly known as Alnilam.<br>' 
         '* Fourth brightest in Orion: It\'s the fourth-brightest star in the constellation Orion and the 29th brightest star in the<br>' 
         '  entire night sky.<br>' 
         '* Blue supergiant: Alnilam is a blue supergiant of spectral type B0 Ia. This means it\'s incredibly hot, massive, and luminous.<br>' 
@@ -735,7 +735,7 @@ unique_notes = {
         '  life in a spectacular supernova explosion.<br>' 
         '* Surrounded by nebulosity: Alnilam is surrounded by a faint reflection nebula, NGC 1990, which is illuminated by the star\'s light.',
       
-        '* zet Ori': 'ζ Orionis or Zeta Orionis, more commonly known as Alnitak.<br>' 
+        '* zet Ori': '<br>ζ Orionis or Zeta Orionis, more commonly known as Alnitak.<br>' 
         '* Orion\'s Belt: Alnitak is one of the three stars that form Orion\'s Belt, the prominent line of stars across the<br>' 
         '  Hunter\'s waist.' 
         '* Triple star system: While it appears as a single star to the naked eye, Alnitak is actually a triple star system.<br>' 
@@ -753,16 +753,16 @@ unique_notes = {
         '* Easternmost in Orion\'s Belt: Alnitak is the easternmost star in Orion\'s Belt.<br>' 
         '* Distance: Alnitak is located about 817 light-years away from Earth.',
 
-        '* eta Ori': 'Saiph',
-        '* kap Ori': 'Saiph',
-        '* lam Ori': 'Meissa',
-        '* mu Ori': 'Mu Orionis',
-        '* xi Ori': 'Xi Orionis',
-        '* pi3 Ori': 'Tabit',
-        '* sig Ori': 'Sigma Orionis',
-        '* tau Ori': 'Tau Orionis',
+        '* eta Ori': '<br>Saiph',
+        '* kap Ori': '<br>Saiph',
+        '* lam Ori': '<br>Meissa',
+        '* mu Ori': '<br>Mu Orionis',
+        '* xi Ori': '<br>Xi Orionis',
+        '* pi3 Ori': '<br>Tabit',
+        '* sig Ori': '<br>Sigma Orionis',
+        '* tau Ori': '<br>Tau Orionis',
 
-        '* iot Ori': 'ι Ori or iota Orionis, which goes by the name Hatysa.<br>' 
+        '* iot Ori': '<br>ι Ori or iota Orionis, which goes by the name Hatysa.<br>' 
         '* Hatysa is situated within Orion\'s Sword, a prominent asterism hanging from Orion\'s Belt.<br>' 
         '* Multiple star system: It\'s not just one star, but a complex system containing at least four stars!<br>' 
         '* Hatysa A: This is the main component, and it\'s itself a triple star system!<br>' 
@@ -781,50 +781,50 @@ unique_notes = {
         '  from the same molecular cloud.<br>' 
         '* Location: It\'s near the Trapezium Cluster, a small group of bright stars at the heart of the Orion Nebula.',
 
-        '* 48 Ori': '48 Orionis',
-        '* alf Pav': 'Alpha Pavonis or Peacock',
-        '* bet Pav': 'Beta Pavonis',
+        '* 48 Ori': '<br>48 Orionis',
+        '* alf Pav': '<br>Alpha Pavonis or Peacock',
+        '* bet Pav': '<br>Beta Pavonis',
 
-        '* del Pav': 'Delta Pavonis, a subgiant about 6.6-6.9 billion years old. <br>' 
+        '* del Pav': '<br>Delta Pavonis, a subgiant about 6.6-6.9 billion years old. <br>' 
         'It may have a Jupiter-size gas giant planet.',
 
-        '* eps Pav': 'Epsilon Pavonis',
-        '* gam Pav': 'Gamma Pavonis',
-        '* eta Pav': 'Eta Pavonis',
-        '* alf Peg': 'Markab or Alpha Pegasi',
-        '* bet Peg': 'Scheat',
-        '* gam Peg': 'Algenib',
-        '* eps Peg': 'Enif',
-        '* zet Peg': 'Homam',
-        '* eta Peg': 'Matar',
-        '* the Peg': 'Biham',
-        '* mu Peg': 'Sadalbari',
-        '* alf Per': 'Mirfak or Algenib',
-        '* bet Per': 'Algol',
-        '* gam Per': 'Algol',
-        '* del Per': 'Delta Persei',
-        '* eps Per': 'Epsilon Persei',
-        '* zet Per': 'Zeta Persei',
-        '* eta Per': 'Miram',
-        '* the Per': 'Theta Persei',
-        '* iota Per': 'Iota Persei',
-        '* kap Per': 'Kappa Persei',
-        '* lam Per': 'Lambda Persei',
-        '* 58 Per': '58 Persei',
-        '* psi Per': 'Psi Persei',
-        '* ome Per': 'Omega Persei',
-        '* alf Phe': 'Alpha Phoenicis or Ankaa',
-        '* bet Phe': 'Beta Phoenicis',
-        '* gam Phe': 'Gamma Phoenicis',
-        '* zet Phe': 'Zeta Phoenicis',
-        '* eta Phe': 'Eta Phoenicis',
-        '* kap Phe': 'Kappa Phoenicis',
-        '* alf Pic': 'Alpha Pictoris',
-        '* bet Pic': 'Beta Pictoris',
-        '* gam Pic': 'Gamma Pictoris',
-        '* del Pic': 'Delta Pictoris',
+        '* eps Pav': '<br>Epsilon Pavonis',
+        '* gam Pav': '<br>Gamma Pavonis',
+        '* eta Pav': '<br>Eta Pavonis',
+        '* alf Peg': '<br>Markab or Alpha Pegasi',
+        '* bet Peg': '<br>Scheat',
+        '* gam Peg': '<br>Algenib',
+        '* eps Peg': '<br>Enif',
+        '* zet Peg': '<br>Homam',
+        '* eta Peg': '<br>Matar',
+        '* the Peg': '<br>Biham',
+        '* mu Peg': '<br>Sadalbari',
+        '* alf Per': '<br>Mirfak or Algenib',
+        '* bet Per': '<br>Algol',
+        '* gam Per': '<br>Algol',
+        '* del Per': '<br>Delta Persei',
+        '* eps Per': '<br>Epsilon Persei',
+        '* zet Per': '<br>Zeta Persei',
+        '* eta Per': '<br>Miram',
+        '* the Per': '<br>Theta Persei',
+        '* iota Per': '<br>Iota Persei',
+        '* kap Per': '<br>Kappa Persei',
+        '* lam Per': '<br>Lambda Persei',
+        '* 58 Per': '<br>58 Persei',
+        '* psi Per': '<br>Psi Persei',
+        '* ome Per': '<br>Omega Persei',
+        '* alf Phe': '<br>Alpha Phoenicis or Ankaa',
+        '* bet Phe': '<br>Beta Phoenicis',
+        '* gam Phe': '<br>Gamma Phoenicis',
+        '* zet Phe': '<br>Zeta Phoenicis',
+        '* eta Phe': '<br>Eta Phoenicis',
+        '* kap Phe': '<br>Kappa Phoenicis',
+        '* alf Pic': '<br>Alpha Pictoris',
+        '* bet Pic': '<br>Beta Pictoris',
+        '* gam Pic': '<br>Gamma Pictoris',
+        '* del Pic': '<br>Delta Pictoris',
 
-        '* alf PsA': 'α Piscis Austrinus or Alpha Piscis Austrinus, also known as Fomalhaut.<br> ' 
+        '* alf PsA': '<br>α Piscis Austrinus or Alpha Piscis Austrinus, also known as Fomalhaut.<br> ' 
         '* Relatively young: Fomalhaut is a young star, estimated to be around 440 million years old. This is quite young compared<br> ' 
         '  to our Sun\'s 4.6 billion years.<br> ' 
         '* Nearby and bright: Located about 25 light-years away, Fomalhaut is relatively close to our solar system and shines brightly<br> ' 
@@ -842,18 +842,18 @@ unique_notes = {
         '* The Southern Fish: Fomalhaut is the brightest star in the constellation Piscis Austrinus, the Southern Fish.<br> ' 
         '* Future evolution: Fomalhaut is expected to eventually evolve into a red giant and then a white dwarf.', 
 
-        '* bet PsA': 'Beta Piscis Austrini',
-        '* gam PsA': 'Gamma Piscis Austrini',
-        '* del PsA': 'Delta Piscis Austrini',
-        '* eps PsA': 'Epsilon Piscis Austrini',
-        '* alf Psc': 'Alrischa or Alpha Piscium',
-        '* bet Psc': 'Beta Piscium',
-        '* gam Psc': 'Gamma Piscium',
-        '* eta Psc': 'Eta Piscium',
-        '* ome Psc': 'Omega Piscium',
-        '* alf Pup': 'Alpha Puppis',
+        '* bet PsA': '<br>Beta Piscis Austrini',
+        '* gam PsA': '<br>Gamma Piscis Austrini',
+        '* del PsA': '<br>Delta Piscis Austrini',
+        '* eps PsA': '<br>Epsilon Piscis Austrini',
+        '* alf Psc': '<br>Alrischa or Alpha Piscium',
+        '* bet Psc': '<br>Beta Piscium',
+        '* gam Psc': '<br>Gamma Piscium',
+        '* eta Psc': '<br>Eta Piscium',
+        '* ome Psc': '<br>Omega Piscium',
+        '* alf Pup': '<br>Alpha Puppis',
 
-        '* zet Pup': 'Zeta Puppis (ζ Pup), also known by its beautiful traditional name Naos. Shining with an apparent<br> ' 
+        '* zet Pup': '<br>Zeta Puppis (ζ Pup), also known by its beautiful traditional name Naos. Shining with an apparent<br> ' 
         'magnitude of 2.25. It\'s the brightest star in the constellation Puppis (the Stern) and one of the most luminous stars<br> ' 
         'visible to the naked eye.<br> '
         '* Massive and hot: Naos is an O-type star, meaning it\'s incredibly hot and massive.<br> ' 
@@ -872,35 +872,35 @@ unique_notes = {
         '* Uncertain future: Its ultimate fate is uncertain, but it\'s likely to end its life in a spectacular supernova<br> ' 
         '  explosion, possibly leaving behind a neutron star or black hole.',
 
-        '* pi Pup': 'Pi Puppis',
-        '* rho Pup': 'Rho Puppis',
-        '* tau Pup': 'Tau Puppis',
-        '* xi Pup': 'Xi Puppis',
-        '* alf Pyx': 'Alpha Pyxidis',
-        '* bet Pyx': 'Beta Pyxidis',
-        '* alf Ret': 'Alpha Reticuli',
-        '* bet Ret': 'Beta Reticuli',
-        '* alf Sge': 'Sham or Alpha Sagittae',
-        '* gam Sge': 'Gamma Sagittae',
-        '* del Sge': 'Delta Sagittae',
-        '* alf Sgr': 'Rukbat or Alpha Sagittarii',
-        '* eps Sgr': 'Kaus Australis',
-        '* zet Sgr': 'Ascella',
-        '* eta Sgr': 'Eta Sagittarii',
-        '* the Sgr': 'Theta Sagittarii',
-        '* iota Sgr': 'Iota Sagittarii',
-        '* lam Sgr': 'Kaus Borealis',
-        '* mu Sgr': 'Mu Sagittarii',
-        '* nu Sgr': 'Nu Sagittarii',
-        '* pi Sgr': 'Pi Sagittarii',
-        '* sig Sgr': 'Nunki',
-        '* tau Sgr': 'Tau Sagittarii',
-        '* phi Sgr': 'Phi Sagittarii',
-        '* chi Sgr': 'Chi Sagittarii',
-        '* psi Sgr': 'Psi Sagittarii',
-        '* ome Sgr': 'Omega Sagittarii',
+        '* pi Pup': '<br>Pi Puppis',
+        '* rho Pup': '<br>Rho Puppis',
+        '* tau Pup': '<br>Tau Puppis',
+        '* xi Pup': '<br>Xi Puppis',
+        '* alf Pyx': '<br>Alpha Pyxidis',
+        '* bet Pyx': '<br>Beta Pyxidis',
+        '* alf Ret': '<br>Alpha Reticuli',
+        '* bet Ret': '<br>Beta Reticuli',
+        '* alf Sge': '<br>Sham or Alpha Sagittae',
+        '* gam Sge': '<br>Gamma Sagittae',
+        '* del Sge': '<br>Delta Sagittae',
+        '* alf Sgr': '<br>Rukbat or Alpha Sagittarii',
+        '* eps Sgr': '<br>Kaus Australis',
+        '* zet Sgr': '<br>Ascella',
+        '* eta Sgr': '<br>Eta Sagittarii',
+        '* the Sgr': '<br>Theta Sagittarii',
+        '* iota Sgr': '<br>Iota Sagittarii',
+        '* lam Sgr': '<br>Kaus Borealis',
+        '* mu Sgr': '<br>Mu Sagittarii',
+        '* nu Sgr': '<br>Nu Sagittarii',
+        '* pi Sgr': '<br>Pi Sagittarii',
+        '* sig Sgr': '<br>Nunki',
+        '* tau Sgr': '<br>Tau Sagittarii',
+        '* phi Sgr': '<br>Phi Sagittarii',
+        '* chi Sgr': '<br>Chi Sagittarii',
+        '* psi Sgr': '<br>Psi Sagittarii',
+        '* ome Sgr': '<br>Omega Sagittarii',
 
-        '* alf Sco': 'α Scorpius or Alpha Scorpius, better known as Antares. It\'s a red supergiant.<br> ' 
+        '* alf Sco': '<br>α Scorpius or Alpha Scorpius, better known as Antares. It\'s a red supergiant.<br> ' 
         '* Immense size: Antares is one of the largest known stars in the Milky Way galaxy. If it were placed at the center of our<br>' 
         '  solar system, its surface would extend beyond the orbit of Mars!<br> ' 
         '* Red hue and luminosity: It\'s a red supergiant, meaning it\'s relatively cool compared to other stars (about 3,400 Kelvin),<br>' 
@@ -915,7 +915,7 @@ unique_notes = {
         '* Future supernova: Antares is expected to explode as a supernova sometime in the astronomically near future.<br>' 
         '* Stellar winds: Like other massive stars, Antares has powerful stellar winds that expel material into space.',
 
-        '* lam Sco': 'Lambda Scorpii (λ Scorpii), which also goes by the traditional name Shaula.<br>' 
+        '* lam Sco': '<br>Lambda Scorpii (λ Scorpii), which also goes by the traditional name Shaula.<br>' 
         '* Blue subgiant: Shaula is a blue subgiant star of spectral type B1.5 IV. This means it\'s much hotter and more massive than<br>' 
         '  our Sun, and it\'s in a stage of its life where it\'s starting to evolve off the main sequence.<br>' 
         '* Part of a system: It\'s actually a multiple star system, consisting of at least three stars. The main star, Shaula A, has<br>' 
@@ -928,34 +928,34 @@ unique_notes = {
         '  a few hours. This variation is caused by pulsations in the star\'s atmosphere.<br>' 
         '* Stellar winds: Like other massive stars, Shaula has powerful stellar winds that expel material into space.',
 
-        '* the Sco': 'Sargas',
-        '* kap Sco': 'Girtab',
-        '* mu1 Sco': 'Xamidimura or Mu1 Scorpii',
-        '* xi Sco': 'Xi Scorpii',
-        '* pi Sco': 'Pi Scorpii',
-        '* sig Sco': 'Alniyat',
-        '* tau Sco': 'Tau Scorpii',
-        '* ups Sco': 'Upsilon Scorpii',
-        '* alf Sct': 'Alpha Scuti',
-        '* bet Sct': 'Beta Scuti',
-        '* del Sct': 'Delta Scuti',
-        '* eps Sct': 'Epsilon Scuti',
-        '* zet Sct': 'Zeta Scuti',
-        '* eta Sct': 'Eta Scuti',
-        '* alf Ser': 'Unukalhai or Alpha Serpentis',
-        '* bet Ser': 'Beta Serpentis',
-        '* gam Ser': 'Gamma Serpentis',
-        '* del Ser': 'Delta Serpentis',
-        '* eps Ser': 'Epsilon Serpentis',
-        '* mu Ser': 'Mu Serpentis',
-        '* xi Ser': 'Xi Serpentis',
-        '* nu Oph': 'Sinistra or Nu Ophiuchi',
-        '* alf Sex': 'Alpha Sextantis',
-        '* gam Sex': 'Gamma Sextantis',
-        '* 18 Sex': '18 Sextantis',
-        '* 27 Sex': '27 Sextantis',
+        '* the Sco': '<br>Sargas',
+        '* kap Sco': '<br>Girtab',
+        '* mu1 Sco': '<br>Xamidimura or Mu1 Scorpii',
+        '* xi Sco': '<br>Xi Scorpii',
+        '* pi Sco': '<br>Pi Scorpii',
+        '* sig Sco': '<br>Alniyat',
+        '* tau Sco': '<br>Tau Scorpii',
+        '* ups Sco': '<br>Upsilon Scorpii',
+        '* alf Sct': '<br>Alpha Scuti',
+        '* bet Sct': '<br>Beta Scuti',
+        '* del Sct': '<br>Delta Scuti',
+        '* eps Sct': '<br>Epsilon Scuti',
+        '* zet Sct': '<br>Zeta Scuti',
+        '* eta Sct': '<br>Eta Scuti',
+        '* alf Ser': '<br>Unukalhai or Alpha Serpentis',
+        '* bet Ser': '<br>Beta Serpentis',
+        '* gam Ser': '<br>Gamma Serpentis',
+        '* del Ser': '<br>Delta Serpentis',
+        '* eps Ser': '<br>Epsilon Serpentis',
+        '* mu Ser': '<br>Mu Serpentis',
+        '* xi Ser': '<br>Xi Serpentis',
+        '* nu Oph': '<br>Sinistra or Nu Ophiuchi',
+        '* alf Sex': '<br>Alpha Sextantis',
+        '* gam Sex': '<br>Gamma Sextantis',
+        '* 18 Sex': '<br>18 Sextantis',
+        '* 27 Sex': '<br>27 Sextantis',
 
-        '* alf Tau': 'α Taurus or Alpha Taurus, is better known as Aldebaran. <br>' 
+        '* alf Tau': '<br>α Taurus or Alpha Taurus, is better known as Aldebaran. <br>' 
         'It\'s the brightest star in the constellation Taurus (the Bull) <br>' 
         'and one of the easiest stars to spot. Aldebaran is an orange giant star, <br>' 
         'meaning it\'s in a later stage of its life compared to our Sun. Distance: About 65 light-years <br>' 
@@ -972,7 +972,7 @@ unique_notes = {
         'and then follow the line of Orion\'s belt stars upward. The first bright, orange-ish star you <br>' 
         'encounter is Aldebaran. It marks the eye of the bull in the constellation Taurus.',
 
-        '* bet Tau': 'β Tauri or Beta Tauri, better known as Elnath.<br>' 
+        '* bet Tau': '<br>β Tauri or Beta Tauri, better known as Elnath.<br>' 
         '* Second brightest in Taurus: Elnath shines brightly, ranking as the second-brightest star in Taurus, after Aldebaran.<br>' 
         '* Giant star: It\'s a blue-white giant star of spectral type B7 III. This means it\'s much hotter, larger, and more<br>' 
         '  massive than our Sun.<br>' 
@@ -983,70 +983,70 @@ unique_notes = {
         '* Evolved star: It has exhausted the hydrogen fuel in its core and is now fusing helium, putting it in a more advanced<br>' 
         '  stage of its stellar life cycle.', 
 
-        '* gam Tau': 'Hyadum I or Prima Hyadum',
-        '* del1 Tau': 'Hyadum II or Secunda Hyadum',
-        '* eps Tau': 'Ain or Oculus Borealis',
-        '* zet Tau': 'Zeta Tauri',
-        '* eta Tau': 'Alcyone',
-        '* the1 Tau': 'Theta1 Tauri',
-        '* the2 Tau': 'Theta2 Tauri',
-        '* iota Tau': 'Iota Tauri',
-        '* kap1 Tau': 'Kappa1 Tauri',
-        '* lam Tau': 'Lambda Tauri',
-        '* nu Tau': 'Nu Tauri',
-        '* ome Tau': 'Omega Tauri',
-        '* 119 Tau': '119 Tauri or Ruby Star',
-        '* alf Tel': 'Alpha Telescopii',
-        '* zet Tel': 'Zeta Telescopii',
-        '* alf Tri': 'Alpha Trianguli or Mothallah',
-        '* bet Tri': 'Beta Trianguli',
-        '* gam Tri': 'Gamma Trianguli',
-        '* alf TrA': 'Alpha Trianguli Australis or Atria',
-        '* bet TrA': 'Beta Trianguli Australis',
-        '* gam TrA': 'Gamma Trianguli Australis',
-        '* del TrA': 'Delta Trianguli Australis',
-        '* eps TrA': 'Epsilon Trianguli Australis',
-        '* zet TrA': 'Zeta Trianguli Australis',
-        '* eta TrA': 'Eta Trianguli Australis',
-        '* the TrA': 'Theta Trianguli Australis',
-        '* iota TrA': 'Iota Trianguli Australis',
-        '* alf Tuc': 'Alpha Tucanae',
-        '* gam Tuc': 'Gamma Tucanae',
-        '* zet Tuc': 'Zeta Tucanae',
-        '* alf UMa': 'Dubhe',
-        '* bet UMa': 'Merak',
-        '* gam UMa': 'Phecda or Phad',
-        '* del UMa': 'Megrez',
-        '* eps UMa': 'Alioth',
-        '* zet UMa': 'Mizar',
-        '* eta UMa': 'Alkaid or Benetnash',
-        '* the UMa': 'Theta Ursae Majoris',
-        '* iota UMa': 'Talitha',
-        '* kap UMa': 'Kappa Ursae Majoris',
-        '* lam UMa': 'Lambda Ursae Majoris',
-        '* mu UMa': 'Tania Australis',
-        '* nu UMa': 'Alula Borealis',
-        '* xi UMa': 'Alula Australis',
-        '* ome UMa': 'Omega Ursae Majoris',
-        '* psi UMa': 'Psi Ursae Majoris',
-        '* 80 UMa': 'Alcor',
-        '* alf UMi': 'Polaris',
-        '* bet UMi': 'Kochab',
-        '* gam UMi': 'Pherkad',
-        '* del UMi': 'Yildun',
-        '* eps UMi': 'Epsilon Ursae Minoris',
-        '* zet UMi': 'Alifa al Farkadain',
-        '* eta UMi': 'Anwar al Farkadain',
-        '* alf Vel': 'Suhail or Al Suhail',
-        '* gam Vel': 'Gamma Velorum or Regor',
-        '* del Vel': 'Delta Velorum',
-        '* lam Vel': 'Lambda Velorum or Suhail',
-        '* mu Vel': 'Mu Velorum',
-        '* kap Vel': 'Kappa Velorum',
-        '* phi Vel': 'Phi Velorum',
-        '* ome Vel': 'Omega Velorum',
+        '* gam Tau': '<br>Hyadum I or Prima Hyadum',
+        '* del1 Tau': '<br>Hyadum II or Secunda Hyadum',
+        '* eps Tau': '<br>Ain or Oculus Borealis',
+        '* zet Tau': '<br>Zeta Tauri',
+        '* eta Tau': '<br>Alcyone',
+        '* the1 Tau': '<br>Theta1 Tauri',
+        '* the2 Tau': '<br>Theta2 Tauri',
+        '* iota Tau': '<br>Iota Tauri',
+        '* kap1 Tau': '<br>Kappa1 Tauri',
+        '* lam Tau': '<br>Lambda Tauri',
+        '* nu Tau': '<br>Nu Tauri',
+        '* ome Tau': '<br>Omega Tauri',
+        '* 119 Tau': '<br>119 Tauri or Ruby Star',
+        '* alf Tel': '<br>Alpha Telescopii',
+        '* zet Tel': '<br>Zeta Telescopii',
+        '* alf Tri': '<br>Alpha Trianguli or Mothallah',
+        '* bet Tri': '<br>Beta Trianguli',
+        '* gam Tri': '<br>Gamma Trianguli',
+        '* alf TrA': '<br>Alpha Trianguli Australis or Atria',
+        '* bet TrA': '<br>Beta Trianguli Australis',
+        '* gam TrA': '<br>Gamma Trianguli Australis',
+        '* del TrA': '<br>Delta Trianguli Australis',
+        '* eps TrA': '<br>Epsilon Trianguli Australis',
+        '* zet TrA': '<br>Zeta Trianguli Australis',
+        '* eta TrA': '<br>Eta Trianguli Australis',
+        '* the TrA': '<br>Theta Trianguli Australis',
+        '* iota TrA': '<br>Iota Trianguli Australis',
+        '* alf Tuc': '<br>Alpha Tucanae',
+        '* gam Tuc': '<br>Gamma Tucanae',
+        '* zet Tuc': '<br>Zeta Tucanae',
+        '* alf UMa': '<br>Dubhe',
+        '* bet UMa': '<br>Merak',
+        '* gam UMa': '<br>Phecda or Phad',
+        '* del UMa': '<br>Megrez',
+        '* eps UMa': '<br>Alioth',
+        '* zet UMa': '<br>Mizar',
+        '* eta UMa': '<br>Alkaid or Benetnash',
+        '* the UMa': '<br>Theta Ursae Majoris',
+        '* iota UMa': '<br>Talitha',
+        '* kap UMa': '<br>Kappa Ursae Majoris',
+        '* lam UMa': '<br>Lambda Ursae Majoris',
+        '* mu UMa': '<br>Tania Australis',
+        '* nu UMa': '<br>Alula Borealis',
+        '* xi UMa': '<br>Alula Australis',
+        '* ome UMa': '<br>Omega Ursae Majoris',
+        '* psi UMa': '<br>Psi Ursae Majoris',
+        '* 80 UMa': '<br>Alcor',
+        '* alf UMi': '<br>Polaris',
+        '* bet UMi': '<br>Kochab',
+        '* gam UMi': '<br>Pherkad',
+        '* del UMi': '<br>Yildun',
+        '* eps UMi': '<br>Epsilon Ursae Minoris',
+        '* zet UMi': '<br>Alifa al Farkadain',
+        '* eta UMi': '<br>Anwar al Farkadain',
+        '* alf Vel': '<br>Suhail or Al Suhail',
+        '* gam Vel': '<br>Gamma Velorum or Regor',
+        '* del Vel': '<br>Delta Velorum',
+        '* lam Vel': '<br>Lambda Velorum or Suhail',
+        '* mu Vel': '<br>Mu Velorum',
+        '* kap Vel': '<br>Kappa Velorum',
+        '* phi Vel': '<br>Phi Velorum',
+        '* ome Vel': '<br>Omega Velorum',
 
-        '* alf Vir': 'α Virginis or Alpha Virginis, which is better known by its beautiful name Spica or Azimech.<br> ' 
+        '* alf Vir': '<br>α Virginis or Alpha Virginis, which is better known by its beautiful name Spica or Azimech.<br> ' 
         '* Close-knit pair: Spica is a binary system composed of two stars orbiting incredibly close to each other.<br> ' 
         '  They\'re so close that they can\'t be resolved as separate stars even with powerful telescopes. We know they\'re<br> ' 
         '  a pair due to their combined spectrum and how their light varies.<br> ' 
@@ -1066,43 +1066,43 @@ unique_notes = {
         '  supernova explosion. However, this event is likely millions of years in the future.<br> ' 
         '  and impressive brightness make it a standout in the night sky.',
 
-        '* gam Vir': 'Porrima',
-        '* eps Vir': 'Vindemiatrix',
-        '* zet Vir': 'Heze',
-        '* eta Vir': 'Zaniah',
-        '* the Vir': 'Theta Virginis',
-        '* iota Vir': 'Syrma',
-        '* kap Vir': 'Kappa Virginis',
-        '* lam Vir': 'Lambda Virginis',
-        '* mu Vir': 'Rijl al Awwa',
-        '* 109 Vir': '109 Virginis',
-        '* alf Vol': 'Alpha Volantis',
-        '* bet Vol': 'Beta Volantis',
-        '* gam Vol': 'Gamma Volantis',
-        '* del Vol': 'Delta Volantis',
-        '* eps Vol': 'Epsilon Volantis',
-        '* zet Vol': 'Zeta Volantis',
-        '* eta Vol': 'Eta Volantis',
-        '* the Vol': 'Theta Volantis',
-        '* iota Vol': 'Iota Volantis',
-        '* kap1 Vol': 'Kappa1 Volantis',
-        '* alf Vul': 'Alpha Vulpeculae or Anser',
-        '* 13 Vul': '13 Vulpeculae',
+        '* gam Vir': '<br>Porrima',
+        '* eps Vir': '<br>Vindemiatrix',
+        '* zet Vir': '<br>Heze',
+        '* eta Vir': '<br>Zaniah',
+        '* the Vir': '<br>Theta Virginis',
+        '* iota Vir': '<br>Syrma',
+        '* kap Vir': '<br>Kappa Virginis',
+        '* lam Vir': '<br>Lambda Virginis',
+        '* mu Vir': '<br>Rijl al Awwa',
+        '* 109 Vir': '<br>109 Virginis',
+        '* alf Vol': '<br>Alpha Volantis',
+        '* bet Vol': '<br>Beta Volantis',
+        '* gam Vol': '<br>Gamma Volantis',
+        '* del Vol': '<br>Delta Volantis',
+        '* eps Vol': '<br>Epsilon Volantis',
+        '* zet Vol': '<br>Zeta Volantis',
+        '* eta Vol': '<br>Eta Volantis',
+        '* the Vol': '<br>Theta Volantis',
+        '* iota Vol': '<br>Iota Volantis',
+        '* kap1 Vol': '<br>Kappa1 Volantis',
+        '* alf Vul': '<br>Alpha Vulpeculae or Anser',
+        '* 13 Vul': '<br>13 Vulpeculae',
 
-        'HD 131977': 'HD 131977 is an evolved giant star (spectral type K2II-III) <br>'
+        'HD 131977': '<br>HD 131977 is an evolved giant star (spectral type K2II-III) <br>'
         'with a radius about 14 times that of the Sun. Its mass is estimated to be <br>' 
         'around 2.7 times the mass of the Sun. It is in the constellation Apus. It <br>' 
         'has a ring of dust and gas orbiting the star, possibly indicating planet <br>' 
         'formation. Unusual chemical abundances hint at possible past planet <br>' 
         'engulfment. It has exhausted its core hydrogen and is now fusing helium.',
 
-        'HD 191408': 'Also known as Gliese 783 A, is a binary star system in Sagittarius. <br>'
+        'HD 191408': '<br>Also known as Gliese 783 A, is a binary star system in Sagittarius. <br>'
         'Gliese 783 A is actually a subgiant. This means it has nearly exhausted its core <br>' 
         'hydrogen and is beginning to evolve off the main sequence. It is about 7.7 billion <br>'
         'years-old There is likely at least one planet orbiting Gliese 783 A, likely a gas <br>' 
         'giant. Gliese 783 B is a much smaller Red Dwarf.',
 
-        'LAWD 37': 'Also known as Gliese 440. About 56% the mass of our Sun, in an <br>' 
+        'LAWD 37': '<br>Also known as Gliese 440. About 56% the mass of our Sun, in an <br>' 
         'Earth-sized volume! This makes it incredibly dense. Estimated to be around <br>' 
         '1.15 billion years old. Astronomers recently used a technique called <br>' 
         'gravitational microlensing to precisely measure its mass. This involved <br>' 
@@ -1114,13 +1114,13 @@ unique_notes = {
         'with a higher mass, leading to faster fuel consumption and a more rapid <br>' 
         'progression through its stellar life cycle.',
 
-        'NAME Proxima Centauri': 'Closest known star to the Sun. Proxima is Red Dwarf, <br>' 
+        'NAME Proxima Centauri': '<br>Closest known star to the Sun. Proxima is Red Dwarf, <br>' 
         'and is known for its dramatic flares. In 2016 a planet was discovered orbiting <br>' 
         'Proxima, called Proxima Centauri b; it is about Earth-sized and within the <br>' 
         'habitable zone that could allow liquid water. It orbits the Alpha Centauri <br>' 
         'A-B pair at a far distance, taking 500,000 years to complete its orbit!',
 
-        'NAME Teegarden\'s Star': 'Teegarden\'s Star is a Red Dwarf star, M7V type, <br>' 
+        'NAME Teegarden\'s Star': '<br>Teegarden\'s Star is a Red Dwarf star, M7V type, <br>' 
         'It is very small, with a radius estimated to be about 11% of the Sun\'s. <br>' 
         'That\'s only slightly larger than Jupiter! It has a mass of roughly 9% of <br>' 
         'the Sun\'s. Teegarden\'s Star is located in the constellation Aries. <br>' 
@@ -1132,7 +1132,7 @@ unique_notes = {
         'are potentially within the star\'s habitable zone. As a Red Dwarf, it has an <br>' 
         'incredibly long lifespan, potentially trillions of years.', 
 
-        'Wolf   28': '(Note the three spaces between Wolf and 28 in the Star_Name) <br>'
+        'Wolf   28': '<br>(Note the three spaces between Wolf and 28 in the Star_Name) <br>'
         'Wolf 28, is a very cool and faint brown dwarf located in the constellation <br>' 
         'of Eridanus. It is a fascinating object that pushes the boundaries of what <br>' 
         'we consider a star. It is a Y-type brown dwarf (the coolest spectral class <br>' 
@@ -1142,37 +1142,65 @@ unique_notes = {
         'billion years old. Wolf 28 helps us understand the lower mass limit for <br>' 
         'star-like objects and the transition between brown dwarfs and giant planets.',
 
-        'M6': 'M6, Butterfly Cluster.',
+        'M6': '<br>M6, Butterfly Cluster.',
 
-        'M7': 'M7, Ptolemy Cluster.',
+        'M7': '<br>M7, Ptolemy Cluster.',
 
-        'M8': 'M8, Lagoon Nebula',
+        'M8': '<br>M8, Lagoon Nebula',
 
-        'M11': 'M11, Wild Duck Cluster',
+        'M11': '<br>M11, Wild Duck Cluster',
 
-        'M16': 'M16, Eagle Nebula',
+        'M16': '<br>M16, Eagle Nebula',
 
-        'M17': 'M17, Omega Nebula',
+        'M17': '<br>M17, Omega Nebula',
 
-        'M20': 'M20, Trifid Nebula',
+        'M20': '<br>M20, Trifid Nebula',
 
-        'M27': 'M27, Dumbbell Nebula',
+        'M27': '<br>M27, Dumbbell Nebula',
 
-        'M42': 'M42, Orion Nebula.',
+        'M42': '<br>M42, Orion Nebula.',
 
-        'M43': 'M43, De Mairan\'s Nebula',
+        'M43': '<br>M43, De Mairan\'s Nebula',
 
-        'M44': 'M44, Beehive Cluster. Wikipedia: \"Also known as Praesepe (Latin for \"crib\"), M44, NGC 2632, or Cr 189), is an open<br>' 
+        'M44': '<br>M44, Beehive Cluster. Wikipedia: \"Also known as Praesepe (Latin for \"crib\"), M44, NGC 2632, or Cr 189), is an open<br>' 
         'cluster in the constellation Cancer. One of the nearest open clusters to Earth, it contains a larger population<br>' 
         'of stars than other nearby bright open clusters holding around 1,000 stars. Under dark skies, the Beehive Cluster<br>' 
         'looks like a small nebulous object to the naked eye, and has been known since ancient times. Classical astronomer<br>' 
         'Ptolemy described it as a \"nebulous mass in the breast of Cancer\". It was among the first objects that Galileo<br>' 
         'studied with his telescope.\" ',   
 
-        'M45': 'M45, The Pleiades.',     
+        'M45': '<br>M45, The Pleiades.',     
 
-        'M57': 'M57, Ring Nebula',
+        'M57': '<br>M57, Ring Nebula',
 
-        'M78': 'M78, reflection nebula',
+        'M78': '<br>M78, reflection nebula',
+
+        'NGC 7293': '<br>NGC 7293, Helix Nebula, nearest bright planetary nebula to Earth. Appears as a large, ring-like structure.',
+
+        'NGC 3242': '<br>NGC 3242, Ghost of Jupiter, appears similar in size to Jupiter through a telescope. Shows a distinctive blue-green color.',
+
+        'NGC 2392': '<br>NGC 2392, Eskimo Nebula, distinctive appearance resembling a face surrounded by a fur parka hood.',
+
+        'NGC 752': '<br>NGC 752, Caldwell 28, one of the oldest known open clusters, estimated age of 1.6 billion years.',
+    
+        'NGC 2451': '<br>NGC 2451, Caldwell 71, One of the brightest open clusters in the sky, visible to naked eye.',
+    
+        'NGC 2477': '<br>NGC 2477, Open Cluster, rich open cluster containing thousands of stars, sometimes called the Southern Beehive.',
+
+        'NGC 2264': '<br>NGC 2264, Cone Nebula, part of the Christmas Tree Cluster, includes distinctive cone-shaped dark nebula.',
+    
+        'IC 2944': '<br>IC 2944, Lambda Centauri Nebula, contains distinctive dark globules known as Thackeray\'s Globules.',
+    
+        'IC 405': '<br>IC 405, Flaming Star Nebula, illuminated by the hot star AE Aurigae, appears reddish in photographs.',   
+
+        'X Sgr A*': '<br>Sagitarius A*, Supermassive black hole at the center of the Milky Way galaxy. Strong source of radio waves and other<br>' 
+        'emissions. Surrounded by a complex of gas and dust known as Sagittarius A West. Its immense gravity influences the orbits<br>' 
+        'of nearby stars.<br>' 
+        '<br>Note: Sagitarius A* is not visually detectable. The apparent magnitude of 0 is meant for plotting purposes as an interesting object.',
+
+        'X Stephenson 2-18': '<br>Stephenson 2-18, One of the largest known stars, a red supergiant in the constellation Scutum.  Its size is<br>' 
+        'uncertain but it is estimated to be significantly larger than the Sun. It resides within the star cluster Stephenson 2.<br>' 
+        '<br>Note: Apparent visual magnitude is difficult to determine precisely and varies, about Vmag=12. The apparent magnitude<br>' 
+        'of 0 is meant for plotting purposes as an interesting object.',
 
 }

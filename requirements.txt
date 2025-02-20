@@ -1,25 +1,53 @@
-# Core data processing and numerical libraries
-numpy>=1.24.0
-pandas>=2.0.0
+# Core data processing and scientific computing
+numpy>=1.24.0         # Array processing, required by multiple dependencies
+pandas>=2.0.0         # Data manipulation and analysis
+scipy>=1.11.0         # Scientific computing
 
-# Astronomical data and calculations
-astropy>=5.3.4
-astroquery>=0.4.6
+# Astronomical calculations and data access
+astropy>=5.3.4        # Core astronomy library
+astroquery>=0.4.6     # Access to astronomical databases
+JPL_Horizons>=2.1.0   # JPL Horizons system interface
 
 # Plotting and visualization
-plotly>=5.18.0
-kaleido>=0.2.1  # Required for saving static images
+plotly>=5.18.0        # Interactive plotting library
+kaleido>=0.2.1        # Required for saving static plotly images
+pillow>=10.0.0        # Image processing, required by kaleido
 
-# GUI components
-tk>=0.1.0
+# GUI and interface
+tk>=0.1.0             # Tkinter for GUI
+customtkinter>=5.2.0  # Modern themed widgets for tkinter
 
-# Date handling
-python-dateutil>=2.8.2
+# Date and time handling
+python-dateutil>=2.8.2  # Extended datetime functionality
+pytz>=2023.3          # Timezone support
 
-# Network requests (used by astroquery but good to specify)
-requests>=2.31.0
+# Network and web
+requests>=2.31.0      # HTTP library
+beautifulsoup4>=4.12.0  # HTML parsing for web scraping
+html5lib>=1.1         # HTML parsing backend
 
-# Essential for running in Jupyter notebooks (if used)
-ipython>=8.12.0
+# File formats and data handling
+h5py>=3.10.0          # HDF5 file format support
+astropy-healpix>=1.0.0  # HEALPix support for astronomy
+pyvo>=1.4             # Virtual Observatory access
 
-scipy>=1.11.0  # Add this line
+# Development and debugging
+ipython>=8.12.0       # Enhanced interactive Python shell
+jupyter>=1.0.0        # Notebook support (optional)
+
+# Testing and quality
+pytest>=7.4.0         # Testing framework (for development)
+flake8>=6.1.0         # Code linting (for development)
+
+# Optional but recommended
+astroplan>=0.9        # Observation planning
+regions>=0.7          # Astronomical region handling
+reproject>=0.13       # Astronomical image reprojection
+
+# Performance optimization
+numba>=0.57.0         # JIT compilation for faster computation
+dask>=2023.5.0        # Parallel computing (optional)
+
+# System and environment
+setuptools>=68.0.0    # Package installation tools
+wheel>=0.41.0         # Built-package format

@@ -1,19 +1,39 @@
-Copyright (c) 2025 Tony Quintanilla
+## License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, merge, and distribute the Software for non-commercial purposes only, subject to the following conditions:
+This project is licensed under the MIT License with Non-Commercial Use Restriction.
 
-1. The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+### Key Points:
+1. **Free for Non-Commercial Use**
+   - Academic research
+   - Personal projects
+   - Educational purposes
+   - Non-profit organizations
 
-2. Commercial use of the Software is expressly prohibited without prior written permission from the copyright holder. Commercial use includes but is not limited to:
-   - Using the Software in a commercial product
-   - Using the Software to provide commercial services
-   - Incorporating the Software into commercial applications
-   - Any use of the Software that is primarily intended for or directed toward commercial advantage or monetary compensation
+2. **Commercial Use Requires Permission**
+   - Contact author for commercial licensing
+   - Written permission required
+   - Separate terms may apply
 
-3. For purposes of this license, "non-commercial" means not primarily intended for or directed towards commercial advantage or monetary compensation.
+3. **Attribution Requirements**
+   - Must credit original author
+   - Must indicate modifications
+   - Must include license notice
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+4. **Data Source Attributions Required**
+   - NASA/JPL-Caltech for Horizons data
+   - ESA for Hipparcos data
+   - ESA/Gaia/DPAC for Gaia data
+   - CDS, Strasbourg, France for SIMBAD data
 
-For commercial use inquiries, please contact:
-Tony Quintanilla
-tonyquintanilla@gmail.com
+### Third-Party Components:
+This software incorporates several open-source libraries:
+- NumPy (BSD 3-Clause)
+- Pandas (BSD 3-Clause)
+- Plotly (MIT)
+- Astropy (BSD 3-Clause)
+- Astroquery (BSD 3-Clause)
+
+For commercial licensing inquiries, contact:
+Tony Quintanilla (tonyquintanilla@gmail.com)
+
+See LICENSE.txt for complete terms.

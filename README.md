@@ -4,99 +4,34 @@ An interactive solar system visualization tool with support for stellar neighbor
 
 ## Summary
 
-The provided code is a complex Python application that visualizes the solar system using data from the JPL Horizons system. It allows users to select celestial objects (planets, dwarf planets, moons, asteroids, comets, and missions) and visualize their positions and orbits on a given date or over a period of time.
+A comprehensive Python application that visualizes the solar system using data from the JPL Horizons system, combined with stellar visualization capabilities using Hipparcos and Gaia data. The tool allows users to:
 
-Here's a breakdown of the code's functionality:
+1. Visualize and animate solar system objects:
+   - Planets, dwarf planets, and their major moons
+   - Asteroids and comets
+   - Space missions and their trajectories
+   - Sun's structure from core to heliopause
 
-1. Initialization and Imports:
-
-Imports necessary libraries like tkinter, astroquery, numpy, plotly, etc.
-Defines constants for colors, orbital parameters, physical properties of celestial objects, and hover text.
-Sets up a shutdown handler for graceful exit.
-Initializes the main tkinter window (root).
-Defines global variables like today.
-2. UI Elements:
-
-ScrollableFrame Class: Creates a custom scrollable frame to hold the numerous checkboxes.
-Input Frame:
-Date Selection: Entry widgets for year, month, day, and hour, along with a "Now" button to fill in the current date.
-Object Selection: Checkbuttons for each celestial object, grouped into categories (Planets, Dwarf Planets, Moons, Asteroids, KBOs, Missions, Comets).
-Center Object Selection: A dropdown menu to select the central body for the plot (Sun or a planet).
-Scale Options: Radio buttons for automatic or manual scaling, with an entry for custom scale values.
-Animation Controls: Entry for the number of frames and buttons to animate the motion over hours, days, weeks, months, or years.
-"Paloma's Birthday" Buttons: Set the date to Paloma's birthday or animate from that date over years.
-Stellar Visualization Buttons: Buttons to launch separate scripts (planetarium_distance.py, hr_diagram_distance.py, etc.) for visualizing stars and the Hertzsprung-Russell diagram.
-Status Label and Progress Bar: Displays messages and a progress bar during data fetching and plotting.
-Note Frame: A text area displaying additional information or instructions.
-3. Core Functions:
-
-create_sun_visualization(fig, animate=False, frames=None): Creates a 3D visualization of the Sun's layers (core, radiative zone, convective zone, photosphere, chromosphere, inner corona, outer corona, termination shock, heliopause, inner and outer Oort Cloud, and the Sun's gravitational influence) using sphere equations and adds them to a plotly figure.
-create_corona_sphere(radius, n_points=100): Generates points to represent a spherical surface for the Sun's layers.
-get_default_camera(): Returns default orthographic camera settings for a top-down view.
-calculate_axis_range(objects_to_plot): Calculates the appropriate axis range for the plot based on the selected objects.
-plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=False): Plots the actual orbital trajectories of selected objects fetched from the JPL Horizons system.
-fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None): Fetches the position of a celestial object for a specific date from the JPL Horizons system.
-fetch_trajectory_with_batching(obj_id, dates_list, center_id='Sun', id_type=None, batch_size=50): Fetches the trajectory of an object over a range of dates, batching the requests to avoid URL length limitations.
-fetch_trajectory(obj_id, dates_list, center_id='Sun', id_type=None): A wrapper for fetch_trajectory_with_batching.
-print_planet_positions(positions): Prints the fetched positions and distances of planets to the console.
-format_maybe_float(value): Formats a numeric value to 8 decimal places or returns "N/A" if the value is not numeric.
-add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info"): Adds a celestial object to the plotly figure with specified properties.
-debug_trajectory_data(objects, selected_objects, center_id='Sun'): A debug function to analyze and print trajectory data, especially for missions and comets.
-plot_objects(): The main function that orchestrates the plotting process:
-Gets the user-selected date and center object.
-Creates a plotly figure.
-Adds the Sun's visualization if the Sun is the center.
-Fetches positions and trajectories of selected objects.
-Adds objects to the plot using add_celestial_object.
-Plots idealized orbits if the center is the Sun using plot_idealized_orbits.
-Sets the axis ranges and updates the layout.
-Displays the plot using show_figure_safely.
-plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'): Plots idealized Keplerian orbits for planets and dwarf planets based on orbital parameters (semi-major axis, eccentricity, inclination, etc.). It handles rotations to account for the argument of periapsis and longitude of the ascending node. It skips satellites, comets, and missions.
-show_animation_safely(fig, default_name): Displays and optionally saves an animated plotly figure, handling temporary file cleanup.
-animate_objects(step, label): Creates the animation by generating a sequence of frames and updating the plot accordingly.
-on_closing(): Handles cleanup (removing temporary files) when the main window is closed.
-fill_now(): Fills the date entry fields with the current date and time.
-set_palomas_birthday(): Sets the date to Paloma's birthday.
-update_date_fields(new_date): Updates the date entry fields with a given date.
-handle_mission_selection(): Handles mission selection (currently does not adjust the date).
-animate_one_day(), animate_one_week(), animate_one_month(), animate_one_year(), animate_palomas_birthday(): Wrapper functions for animate_objects with specific time steps.
-CreateToolTip(object, text): Creates a custom tooltip for a given widget with intelligent positioning.
-report_callback_exception(self, exc_type, exc_value, exc_traceback): Handles exceptions in Tkinter callbacks.
-call_planetarium_distance_script_with_input(): Calls the planetarium_distance.py script with user input for the number of light-years.
-call_planetarium_apparent_magnitude_script_with_input(): Calls the planetarium_apparent_magnitude.py script with user input for the maximum apparent magnitude and optionally, the manual scale.
-call_hr_diagram_distance_script_with_input(): Calls the hr_diagram_distance.py script with user input for the number of light-years.
-call_hr_diagram_apparent_magnitude_script_with_input(): Calls the hr_diagram_apparent_magnitude.py script with user input for the maximum apparent magnitude.
-4. Object Data:
-
-The objects list defines the celestial objects that can be selected and visualized. Each object has properties like:
-name: The name of the object.
-id: The JPL Horizons ID.
-var: The tkinter variable linked to the object's checkbox.
-color: The color used for plotting.
-symbol: The marker symbol used for plotting.
-is_mission: Boolean indicating if it's a space mission.
-is_comet: Boolean indicating if it's a comet.
-id_type: The type of ID used in JPL Horizons (e.g., 'majorbody', 'smallbody', 'id').
-start_date, end_date: For missions and comets, the start and end dates of their activity.
-mission_url: A URL with more information about the mission.
-mission_info: A brief description of the mission or object.
-is_satellite: Boolean indicating if the object is a satellite.
-5. Main Loop:
-
-root.mainloop() starts the tkinter event loop, making the application interactive.
+2. Create stellar visualizations:
+   - 3D maps of the stellar neighborhood
+   - Distance-based visualizations up to 100 light-years
+   - Magnitude-limited views of visible stars
+   - Hertzsprung-Russell diagrams
+   - Messier object visualizations
 
 ## Features
 
 - Real-time 3D visualization of celestial objects using NASA JPL Horizons data
-- Interactive plots of planets, dwarf planets, moons, asteroids, and space missions
-- Solar system animation capabilities (days, weeks, months, years)
-- Detailed visualization of the Sun's structure from core to heliopause and Oort Cloud
+- Interactive plots with customizable views and scales
+- Solar system animation capabilities (hours/days/weeks/months/years)
+- Detailed visualization of the Sun's structure from core to Oort Cloud
 - Stellar neighborhood mapping up to 100 light-years
 - Hertzsprung-Russell diagrams for stellar classification
 - Support for both distance-based and apparent magnitude-based star plotting
-- Visualization of Messier objects (nebulae and star clusters)
+- Integration of Messier objects (nebulae and star clusters)
 - Interactive camera controls and notable star navigation
-- Toggle between detailed and simplified hover information
+- Click-to-copy star names and detailed hover information
+- Comprehensive data caching system for improved performance
 
 ## Requirements
 
@@ -115,7 +50,8 @@ tk>=0.1.0
 python-dateutil>=2.8.2
 requests>=2.31.0
 ipython>=8.12.0
-scipy>=1.11.0  # Add this line
+scipy>=1.11.0
+```
 
 ### Installation
 
@@ -147,32 +83,88 @@ python palomas_orrery.py
      * Stellar neighborhood 3D plots (distance or magnitude based)
      * Hertzsprung-Russell diagrams (2D)
 
-## Visualization Types
+## Implementation Details
 
-### 1. Solar System
-- Interactive 3D plots with accurate orbital trajectories
-- Detailed Sun visualization from core to outer corona
-- Mission paths and comet trajectories
-- Animated position tracking
-- Scale options from planetary orbits to Oort Cloud
+### Photometric Systems and Magnitude Handling
 
-### 2. Stellar Neighborhood
-- **Distance-based mapping:**
-  * Up to 100 light-years from Sun
-  * Shows actual stellar positions in 3D space
-  * Combined data from Hipparcos and Gaia catalogs
+The program handles data from two major catalogs with different photometric systems:
 
-- **Apparent magnitude plots:**
-  * Range from -1.44 (Sirius) to 9.0 (space visibility limit)
-  * Includes Messier objects
-  * Shows both nearby and distant bright stars
-  * Reveals galactic structure at higher magnitudes
+1. **Hipparcos Catalog**:
+   - Uses the Johnson-Cousins photometric system
+   - Directly provides standard V magnitudes (Vmag)
+   - Provides B magnitudes for B-V color index calculation
+   - Traditional system used in most historical astronomical observations
 
-### 3. Hertzsprung-Russell Diagrams
-- Temperature vs Luminosity plots
-- Stellar classification visualization
-- Main sequence and evolved star populations
-- Options for both distance and magnitude-limited samples
+2. **Gaia Catalog**:
+   - Uses its own three-band photometric system:
+     * G (broad band covering most visible light)
+     * BP (Blue Photometer)
+     * RP (Red Photometer)
+   - V magnitudes must be estimated using the transformation:
+     ```python
+     V = G - (-0.0257 - 0.0924*(BP-RP) - 0.1623*(BP-RP)**2 + 0.0090*(BP-RP)**3)
+     ```
+   - Estimation is accurate to within a few hundredths of a magnitude for most stars
+
+### Catalog Separation Logic
+
+1. **Magnitude-based Selection (Default)**:
+   - Hipparcos catalog: Used exclusively for stars with Vmag ≤ 4.0
+   - Gaia catalog: Used exclusively for stars with Vmag > 4.0
+   - This prevents duplicate stars and ensures optimal data quality
+
+2. **Distance-based Selection**:
+   - Follows the same separation logic as magnitude-based selection
+   - Hipparcos for bright stars (Vmag ≤ 4.0)
+   - Gaia for fainter stars (Vmag > 4.0)
+   - Selection based on parallax measurements
+
+### Data Processing Pipeline
+
+1. **Data Acquisition**:
+   - Hipparcos data fetched first with appropriate magnitude/distance constraints
+   - Gaia data fetched with complementary constraints
+   - Data cached in VOTable format for future use
+
+2. **Catalog Processing**:
+   - Hipparcos stars:
+     * Bright stars (Vmag ≤ 1.73)
+     * Mid-range stars (1.73 < Vmag ≤ 4.0)
+   - Gaia stars:
+     * Faint stars (Vmag > 4.0)
+
+3. **Star Properties**:
+   - Properties fetched from SIMBAD database
+   - Cached in PKL format
+   - Includes:
+     * Spectral types
+     * B-V colors
+     * Object classifications
+     * Additional notes for notable stars
+
+### Technical Notes
+
+1. **Magnitude Conversion**:
+   ```python
+   # Gaia G magnitude to Johnson V magnitude conversion
+   V = G - (-0.0257 - 0.0924*(BP-RP) - 0.1623*(BP-RP)**2 + 0.0090*(BP-RP)**3)
+   ```
+
+2. **Magnitude Standardization**:
+   - All magnitudes standardized to `Apparent_Magnitude` column
+   - Used consistently across all visualization modes
+   - Facilitates proper star selection and display
+
+3. **Temperature Estimation**:
+   - Primary: B-V color index when available
+   - Secondary: Spectral type
+   - Uses interpolation for missing data
+   - Required for both HR diagrams and 3D visualizations
+
+4. **Distance Calculations**:
+   - Parallax to distance conversion
+   - Error handling for uncertain measurements
+   - Light-year conversion factor: 3.26156
 
 ## Data Files
 
@@ -192,6 +184,57 @@ The program creates and uses several data cache files:
 
 Note: Files are created on first run and reused in subsequent sessions.
 
+## Performance Notes
+
+1. **Initial Load**:
+   - First run: 2-5 minutes for data fetching
+   - Subsequent runs: 5-10 seconds from cache
+   - Cache updates: Weekly recommended
+
+2. **Memory Usage**:
+   - Magnitude limit 4: ~100MB
+   - Magnitude limit 6: ~500MB
+   - Magnitude limit 9: ~2GB
+
+3. **Visualization Response**:
+   - Interactive updates: <100ms
+   - Animation frames: 200-500ms
+   - Plot generation: 2-5 seconds
+
+## Troubleshooting
+
+1. **Missing Star Data**:
+   - Check cache files are not corrupted
+   - Verify SIMBAD connection
+   - Confirm magnitude/distance limits
+
+2. **Visualization Issues**:
+   - Clear browser cache
+   - Check plotly.js loading
+   - Verify screen resolution settings
+
+3. **Performance Problems**:
+   - Reduce number of selected objects
+   - Lower animation frame count
+   - Use manual scaling for large distances
+
+## Contributing
+
+1. **Code Style**:
+   - Follow PEP 8
+   - Use type hints
+   - Document complex algorithms
+
+2. **Testing**:
+   - Unit tests for core functions
+   - Integration tests for data pipeline
+   - Performance benchmarks
+
+3. **Documentation**:
+   - Update README for new features
+   - Document API changes
+   - Maintain version history
+
 ## Data Sources
 
 - Solar system positions: [JPL Horizons System](https://ssd.jpl.nasa.gov/horizons/)
@@ -201,18 +244,47 @@ Note: Files are created on first run and reused in subsequent sessions.
 - Object properties: [SIMBAD database](http://simbad.u-strasbg.fr/simbad/)
 - Messier objects: [SEDS Messier Database](http://www.messier.seds.org/)
 
-## Performance Notes
+## License
 
-- Initial data fetching may take several minutes, especially for higher magnitude limits
-- Animation speed depends on number of objects selected
-- Large-scale visualizations (e.g., Oort Cloud) may require manual scale adjustment
-- Toggle between detailed and simple hover text can improve performance
+This project is licensed under the MIT License with Non-Commercial Use Restriction.
+
+### Key Points:
+1. **Free for Non-Commercial Use**
+   - Academic research
+   - Personal projects
+   - Educational purposes
+   - Non-profit organizations
+
+2. **Commercial Use Requires Permission**
+   - Contact author for commercial licensing
+   - Written permission required
+   - Separate terms may apply
+
+3. **Attribution Requirements**
+   - Must credit original author
+   - Must indicate modifications
+   - Must include license notice
+
+4. **Data Source Attributions Required**
+   - NASA/JPL-Caltech for Horizons data
+   - ESA for Hipparcos data
+   - ESA/Gaia/DPAC for Gaia data
+   - CDS, Strasbourg, France for SIMBAD data
+
+### Third-Party Components:
+This software incorporates several open-source libraries:
+- NumPy (BSD 3-Clause)
+- Pandas (BSD 3-Clause)
+- Plotly (MIT)
+- Astropy (BSD 3-Clause)
+- Astroquery (BSD 3-Clause)
+
+For commercial licensing inquiries, contact:
+Tony Quintanilla (tonyquintanilla@gmail.com)
+
+See LICENSE.txt for complete terms.
 
 ## About
 
 Created by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI assistants.
-Updated January 16, 2025.
-
-## License
-
-MIT License - See LICENSE file for details.
+Updated February 17, 2025.

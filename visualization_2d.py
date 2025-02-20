@@ -143,7 +143,7 @@ def generate_footer_text(counts_dict, estimation_results=None, mag_limit=None, m
             f"     We are plotting stars with apparent magnitude (Vmag) ≤ <span style='color:red;'>{mag_limit}</span>. " 
    
             "* Star properties from <a href='https://simbad.u-strasbg.fr/simbad/'>Simbad</a>. "
-            "Temperature was estimated using B-V color index, spectral type, or Gaia BP-RP color. "
+            "Temperature was estimated using B-V color index, spectral type, or <a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a> BP-RP color. "
             "Luminosity was estimated using apparent<br>magnitude, distance, and extinction correction. "
             
             "Marker size indicates apparent magnitude (except Sun), temperature (Kelvin) decreases right on x-axis, "

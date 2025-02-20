@@ -4,7 +4,15 @@ from astropy.coordinates import SkyCoord
 import astropy.units as u
 import pandas as pd
 import numpy as np
-from messier_catalog import messier_catalog, star_cluster_catalog, get_nebulae, get_star_clusters
+from messier_catalog import (messier_catalog, 
+                            star_cluster_catalog, 
+                            get_nebulae, 
+                            get_star_clusters,
+                            bright_planetaries, 
+                            bright_nebulae, 
+                            bright_open_clusters,
+                            get_all_bright_objects
+                            )
 from star_notes import unique_notes
 
 class MessierObjectHandler:
@@ -91,6 +99,51 @@ class MessierObjectHandler:
         
         return objects
     
+    def get_visible_objects(self, mag_limit, object_type=None):
+        """
+        Get Messier objects visible up to specified magnitude limit.
+        
+        Parameters:
+            mag_limit (float): Maximum apparent magnitude to include
+            object_type (str, optional): Filter by object type 
+                ('Nebula', 'Cluster', 'Planetary', 'Emission', etc.)
+        
+        Returns:
+            list: List of visible objects matching criteria
+        """
+        visible_objects = []
+        
+        print(f"\nFiltering Messier objects to magnitude {mag_limit}")
+        
+        # Process both catalogs
+        for catalog in [self.nebulae, self.clusters]:
+            for messier_id, data in catalog.items():
+                if data['vmag'] <= mag_limit:
+                    if object_type is None or object_type.lower() in data['type'].lower():
+                        # Parse RA and Dec from string format to degrees
+                        coords = SkyCoord(data['ra'], data['dec'], frame='icrs')
+                        
+                        obj_data = {
+                            'messier_id': messier_id,
+                            'name': data['name'],
+                            'type': data['type'],
+                            'vmag': data['vmag'],
+                            'distance_ly': data['distance_ly'],
+                            'ra': coords.ra.deg,
+                            'dec': coords.dec.deg,
+                            'notes': data.get('notes', ''),
+                            'size': data.get('size', None),
+                            'age': data.get('age', None),
+                            'parent_constellation': data.get('constellation', None)
+                        }
+                        visible_objects.append(obj_data)
+        
+        print(f"Found {len(visible_objects)} visible Messier objects")
+        if object_type:
+            print(f"(Filtered to type: {object_type})")
+            
+        return visible_objects
+
     def create_dataframe(self, objects):
         """Convert Messier objects to DataFrame format compatible with stellar data."""
         if not objects:
@@ -101,20 +154,32 @@ class MessierObjectHandler:
         for obj in objects:
             try:
                 # Parse coordinates
-                coords = SkyCoord(obj['ra'], obj['dec'], unit=(u.hourangle, u.deg))
+        #        coords = SkyCoord(obj['ra'], obj['dec'], unit=(u.hourangle, u.deg))
+
+                coords = SkyCoord(
+                    ra=obj['ra'],
+                    dec=obj['dec'],
+                    unit=(u.deg, u.deg),
+                    frame='icrs'
+                )
+
                 distance_pc = obj['distance_ly'] / 3.26156
                 
                 # Create 3D coordinates
                 coord_with_dist = SkyCoord(
                     ra=coords.ra,
                     dec=coords.dec,
-                    distance=distance_pc * u.pc
+                    distance=distance_pc * u.pc,
+                    frame='icrs'
                 )
                 
-                # Convert to light-years
-                obj['x'] = coord_with_dist.cartesian.x.value * 3.26156
-                obj['y'] = coord_with_dist.cartesian.y.value * 3.26156
-                obj['z'] = coord_with_dist.cartesian.z.value * 3.26156
+                # Convert to cartesian coordinates
+                cart = coord_with_dist.cartesian
+
+                # Convert to light-years and store
+                obj['x'] = cart.x.value * 3.26156
+                obj['y'] = cart.y.value * 3.26156
+                obj['z'] = cart.z.value * 3.26156
                 
                 print(f"  {obj['messier_id']}: Calculated coordinates ({obj['x']:.1f}, {obj['y']:.1f}, {obj['z']:.1f}) ly")
                 
@@ -127,6 +192,7 @@ class MessierObjectHandler:
         
         # Add required columns to match stellar data format
         df['Star_Name'] = df.apply(lambda row: f"{row['messier_id']}: {row['name']}", axis=1)
+    #    df['Star_Name'] = df['name']
         df['Source_Catalog'] = 'Messier'
         df['Apparent_Magnitude'] = df['vmag']
         df['Distance_pc'] = df['distance_ly'] / 3.26156
@@ -136,34 +202,44 @@ class MessierObjectHandler:
         
         # Add null values for stellar-specific columns
         df['Temperature'] = np.nan
+        df['Temperature_Method'] = 'none'  # Added for compatibility
+        df['Temperature_Normalized'] = 0.5  # Middle value for color scale
         df['Luminosity'] = np.nan
+        df['Luminosity_Estimated'] = False  # Added for compatibility
         df['B_V'] = np.nan
         df['Spectral_Type'] = None
-        df['Temperature_Normalized'] = 0.5  # Middle value for color scale
+        df['Abs_Mag'] = np.nan  # Added for compatibility
         
         # Add visualization properties
-        df['Marker_Size'] = 20  # Fixed larger size for Messier objects
+        df['Marker_Size'] = 20  # Fixed larger size for non-stellar objects
         
         # Create hover texts
         df['Hover_Text'] = df.apply(
             lambda row: (
                 f"<b>{row['messier_id']}: {row['name']}</b><br>"
+        #        f"<b>{row['Star_Name']}</b><br>"
                 f"Type: {row['type']}<br>"
-                f"Apparent Magnitude: {row['Apparent_Magnitude']:.1f}<br>"
-                f"Distance: {row['Distance_ly']:.1f} ly<br>"
+        #        f"Apparent Magnitude: {row['Apparent_Magnitude']:.1f}<br>"
+                f"Apparent Magnitude: {row['vmag']:.1f}<br>"
+        #        f"Distance: {row['Distance_ly']:.1f} ly<br>"
+                f"Distance: {row['Distance_pc']:.2f} pc ({row['Distance_ly']:.2f} ly)<br>"
                 f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly<br>"
                 f"{unique_notes.get(row['messier_id'], 'None')}<br>"  # Use unique_notes with messier_id
+        #        f"Notes: {row['notes']}"
             ),
             axis=1
         )
-        df['Min_Hover_Text'] = df.apply(lambda row: f"<b>{row['messier_id']}</b>", axis=1)
+        df['Min_Hover_Text'] = df.apply(
+            lambda row: f"<b>{row['messier_id']}</b>", 
+    #        lambda row: f"<b>{row['Star_Name']}</b>", 
+            axis=1)
         
         print(f"\nProcessed {len(df)} Messier objects with columns:")
         print(df.columns.tolist())
         
         return df
 
-    def _calculate_marker_size(self, vmag):
+    def _calculate_marker_size(self, vmag):         # obsolete
         """Calculate marker sizes based on apparent magnitude."""
         def calc_size(mag):
             if pd.isna(mag):
@@ -179,7 +255,7 @@ class MessierObjectHandler:
         
         return vmag.apply(calc_size)
 
-    def _create_hover_text(self, row):
+    def _create_hover_text(self, row):      # used?
         """Create hover text for a Messier object."""
         text = [
             f"<b>{row['messier_id']}: {row['name']}</b>",
@@ -208,7 +284,7 @@ class MessierObjectHandler:
             desc += f", Size: {row['size']}"
         return desc
     
-    def _get_marker_symbol(self, obj_type):
+    def _get_marker_symbol(self, obj_type):     # I don't think we use this function. all objects look the same. 
             """
             Get appropriate marker symbol based on object type.
             Uses only symbols available in Plotly's Scatter3d:
@@ -232,7 +308,7 @@ class MessierObjectHandler:
                 return 'cross'  # Specific symbol for supernova remnants
             return 'diamond'  # Default symbol
     
-    def _get_marker_color(self, obj_type):
+    def _get_marker_color(self, obj_type):          # I don't think we use this function. all objects look the same. 
         """Get appropriate color based on object type."""
         if 'Emission' in obj_type or 'HII Region' in obj_type:
             return 'red'
@@ -283,7 +359,7 @@ class MessierObjectHandler:
             # Collect magnitudes
             mag_distribution.append(obj['vmag'])
         
-        print("\nMessier Catalog Analysis")
+        print("\nNon-stellar Object Catalog Analysis")
         print("=" * 50)
         print(f"Total Objects: {total_objects}")
         print("\nObject Types:")

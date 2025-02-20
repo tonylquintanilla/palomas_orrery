@@ -9,9 +9,30 @@ DEFAULT_MARKER_SIZE = 6
 HORIZONS_MAX_DATE = datetime(2199, 12, 29, 0, 0, 0)
 CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
+KM_PER_AU = 149597870.7   # Approximate kilometers per Astronomical Unit
 
 # Orbital parameters for planets and dwarf planets
 # https://ssd.jpl.nasa.gov/sats/elem/
+
+# Add to constants.py
+
+# Radii of celestial bodies in kilometers
+CENTER_BODY_RADII = {
+    'Sun': 696340,      # Solar radius
+    'Mercury': 2440,
+    'Venus': 6052,
+    'Earth': 6371,
+    'Moon': 1737,
+    'Mars': 3390,
+    'Jupiter': 69911,
+    'Saturn': 58232,
+    'Uranus': 25362,
+    'Neptune': 24622,
+    'Pluto': 1188,
+    'Bennu': 0.262,     # Bennu's mean radius
+    'Eris': 1163,
+    'Arrokoth': 0.0088  # Approximate mean radius
+}
 
 planetary_params = {
     'Mercury': {
@@ -177,6 +198,7 @@ planetary_params = {
         'omega': 151.216,
         'Omega': 103.851
     },
+
     'Bennu': {
         'a': 1.126391,    # semi-major axis in AU
         'e': 0.203745,    # eccentricity
@@ -184,6 +206,7 @@ planetary_params = {
         'omega': 66.223,  # argument of perihelion in degrees
         'Omega': 2.061    # longitude of ascending node in degrees
     },
+
     'Šteins': {
         'a': 2.363,      # semi-major axis in AU
         'e': 0.146,      # eccentricity
@@ -191,6 +214,7 @@ planetary_params = {
         'omega': 250.97,  # argument of perihelion in degrees
         'Omega': 55.39    # longitude of ascending node in degrees
     },
+
     'Lutetia': {                  # Epoch 2017-10-12, heliocentric
         'a': 2.434591597038037,   # Horizons: A, semi-major axis in AU
         'e': .1644174522633922,   # Horizons: EC, eccentricity
@@ -198,13 +222,15 @@ planetary_params = {
         'omega': 249.980528664283, # Horizons: W, argument of perihelion in degrees
         'Omega': 80.87713180326485   # Horizons: OM, longitude of ascending node in degrees
     },
+
     'Apophis': {
         'a': 0.922583,   # semi-major axis in AU
         'e': 0.191481,   # eccentricity
         'i': 3.331,      # inclination in degrees
         'omega': 126.394, # argument of perihelion in degrees
         'Omega': 204.061  # longitude of ascending node in degrees
-    },    
+    },  
+
     'Eros': {
         'a': 1.458040,   # semi-major axis in AU
         'e': 0.222868,   # eccentricity
@@ -227,6 +253,22 @@ planetary_params = {
         'i': 1.622,      # inclination in degrees
         'omega': 162.767, # argument of perihelion in degrees
         'Omega': 69.095   # longitude of ascending node in degrees
+    },
+
+    '2024 YR4': {                  # Epoch 2025-1-19, heliocentric, solution date 2025-2-18
+        'a': 2.516462729645334,   # Horizons: A, semi-major axis in AU
+        'e': .6616221997710975,   # Horizons: EC, eccentricity
+        'i': 3.408344156920807,      # Horizons: IN, inclination in degrees
+        'omega': 134.3641851542753, # Horizons: W, argument of perihelion in degrees
+        'Omega': 271.3680439745675   # Horizons: OM, longitude of ascending node in degrees
+    },
+
+    '2024 PT5': {                  # Epoch 2024-10-20, heliocentric
+        'a': 1.012228628670663,   # Horizons: A, semi-major axis in AU
+        'e': .02141074038624791,   # Horizons: EC, eccentricity
+        'i': 1.518377382131216,      # Horizons: IN, inclination in degrees
+        'omega': 116.8074860094156, # Horizons: W, argument of perihelion in degrees
+        'Omega': 305.1069316209851   # Horizons: OM, longitude of ascending node in degrees
     },
 
     # Comets
@@ -650,9 +692,11 @@ def color_map(planet):
         'JWST': 'gold',
         'Rosetta': 'white',
         'Bepi': 'red',
+        'SolO': 'red',
         'Akatsuki': 'cyan',
         'Oumuamua': 'gold',
         '2024 PT5': 'green',
+        '2024 YR4': 'green',
         'Apophis': 'red',
         'Vesta': 'cyan',
         'Bennu': 'white',
@@ -717,6 +761,15 @@ INFO = {
         'not a permanent addition to our celestial neighborhood, its temporary presence provided scientists with a valuable ' 
         'opportunity to study near-Earth objects and learn more about the dynamics of our solar system.\n* Plot 2024 PT5 with' 
         'Earth as the center to see its close approach and also with the Sun as the center to see its orbit near Earth\'s.',
+
+        '2024 YR4': '2024 YR4 is an asteroid that poses a potential risk to Earth, with a probability of around 2%.\n' 
+        '* It was discovered on December 27, 2024, with a close approach on December 25.\n' 
+        '* It is estimated to be between 40 and 100 meters wide.\n' 
+        '* It\'s next close approach is on December 17, 2028, 10:30 UTC, according to JPL Horizons.\n'
+        '* As of February 18, 2025, YR4 is predicted to make its closest approach to Earth on December 22, 2032, 11:37 UTC. ' 
+        'JPL Horizons currently estimates a closest approach of 0.0008191243 AU or about 122,540.25 km from Earth\'s center. ' 
+        'Earth\'s radius is about 6,371 kilometers. Subtract this to find the distance from Earth\'s surface, about 116,169.25 km.\n' 
+        '* While the chances of impact are low (3.1%), it is being closely monitored by astronomers.',
 
         'Mars': 'Known as the Red Planet, fourth planet from the Sun.',
         'Phobos': 'The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
@@ -1078,6 +1131,27 @@ INFO = {
         'position to study Mercury effectively!',
         
         'SOHO Solar Observatory': 'The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
+
+        'Solar Orbiter': 'From JPL Horizons: Solar Orbiter ("Solo"), an ESA/NASA mission, was launched 2020-Feb-10 at 4:03 UTC from ' 
+        'Cape Canaveral, Florida\n' 
+        '* The 7-year mission will provide close-up, high-latitude observations of the Sun from a highly elliptic orbit that ranges ' 
+        'between 0.28 au at perihelion (~60 solar radii, inside Mercury''s orbit) and 1.2 au at aphelion.\n' 
+        '* It will reach its operational orbit ~22 months after launch by using gravity assist maneuvers (GAMs) at Earth and Venus.\n' 
+        '* During closest approach (every ~5 months), Solar Orbiter will be positioned for several days over roughly the same region ' 
+        'of the solar atmosphere, as the Sun rotates on its axis beneath the spacecraft. The spacecraft will thus effectively "hover" ' 
+        'over the rotating surface, and therefore able to watch developing magnetic activity that can lead to flares and eruptions. ' 
+        'The view of the solar poles from higher latitudes will help understand how dynamo processes generate the Sun\'s magnetic ' 
+        'field. Observations will be coordinated as appropriate between Solar Orbiter and the Parker Solar Probe.\n' 
+        '* Flybys:\n' 
+        '  * 2020-Dec-26: Venus\n' 
+        '  * 2021-Aug-08: Venus\n' 
+        '  * 2021-Nov-27: Earth (end of cruise phase)\n' 
+        '  * 2022-Sep-04: Venus\n' 
+        '  * 2025-Feb-18: Venus\n' 
+        '  * 2026-Dec-24: Venus\n' 
+        '  * 2028-Mar-17: Venus\n' 
+        '  * 2029-Jun-10: Venus\n' 
+        '  * 2030-Sep-02: Venus',
         
         'Gaia': 'European Space Agency mission at L2 mapping the Milky Way.',
         

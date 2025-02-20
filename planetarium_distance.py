@@ -19,7 +19,8 @@ from data_acquisition import (
 )
 from data_processing import (
     estimate_vmag_from_gaia, calculate_distances, calculate_cartesian_coordinates,
-    align_coordinate_systems, select_stars_by_distance
+    align_coordinate_systems 
+    #select_stars_by_distance
 )
 from star_properties import (
     load_existing_properties, generate_unique_ids, query_simbad_for_star_properties,
@@ -33,71 +34,48 @@ from visualization_3d import prepare_3d_data, create_3d_visualization, parse_ste
 
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
-def select_stars_by_distance(hip_data, gaia_data, max_light_years):
-    """Select stars based on distance criteria with accurate counting."""
-    print("\nSelecting stars by distance...")
+from catalog_selection import select_stars
+
+def process_stars(hip_data, gaia_data, max_light_years):
+    """Process stars for distance-based 3D visualization with full count tracking."""
+    # Use the unified selection function
+    combined_data, counts = select_stars(
+        hip_data, 
+        gaia_data, 
+        mode='distance', 
+        limit_value=max_light_years
+    )
     
-    all_selected_stars = []
-    counts = {
-        'hip_bright_count': 0,
-        'hip_mid_count': 0,
-        'hip_faint_count': 0,
-        'gaia_mid_count': 0,
-        'gaia_faint_count': 0
-    }
+    if combined_data is None:
+        return None, {}
+
+    # Add 3D-specific processing
+    combined_data = calculate_cartesian_coordinates(combined_data)
     
-    # Process Hipparcos stars
-    if hip_data is not None:
-        distance_mask = hip_data['Distance_ly'] <= max_light_years
-        hip_stars = hip_data[distance_mask]
-        if len(hip_stars) > 0:
-            # Count all categories
-            bright_mask = hip_stars['Vmag'] <= 1.73
-            mid_mask = (hip_stars['Vmag'] > 1.73) & (hip_stars['Vmag'] <= 4.0)
-            faint_mask = hip_stars['Vmag'] > 4.0
-            
-            # Add Source_Catalog and Apparent_Magnitude
-            hip_stars['Source_Catalog'] = 'Hipparcos'
-            hip_stars['Apparent_Magnitude'] = hip_stars['Vmag']
-            
-            # Set Include_In_Plot flag - only bright and mid-range Hipparcos
-            hip_stars['Include_In_Plot'] = bright_mask | mid_mask
-            
-            counts['hip_bright_count'] = int(np.sum(bright_mask))
-            counts['hip_mid_count'] = int(np.sum(mid_mask))
-            counts['hip_faint_count'] = int(np.sum(faint_mask))
-            
-            all_selected_stars.append(hip_stars)
-    
-    # Process Gaia stars
-    if gaia_data is not None:
-        distance_mask = gaia_data['Distance_ly'] <= max_light_years
-        gaia_stars = gaia_data[distance_mask]
-        if len(gaia_stars) > 0:
-            # Add Source_Catalog and Apparent_Magnitude
-            gaia_stars['Source_Catalog'] = 'Gaia'
-            gaia_stars['Estimated_Vmag'] = estimate_vmag_from_gaia(gaia_stars)
-            gaia_stars['Apparent_Magnitude'] = gaia_stars['Estimated_Vmag']
-            
-            # Count categories
-            mid_mask = (gaia_stars['Apparent_Magnitude'] > 1.73) & (gaia_stars['Apparent_Magnitude'] <= 4.0)
-            faint_mask = gaia_stars['Apparent_Magnitude'] > 4.0
-            
-            # Set Include_In_Plot flag - include all Gaia stars
-            gaia_stars['Include_In_Plot'] = True
-            
-            counts['gaia_mid_count'] = int(np.sum(mid_mask))
-            counts['gaia_faint_count'] = int(np.sum(faint_mask))
-            
-            all_selected_stars.append(gaia_stars)
-    
-    # Combine all stars and update total
-    combined_data = vstack(all_selected_stars)
-    counts['total_stars'] = len(combined_data)
-    
-    print(f"\nTotal stars fetched: {counts['total_stars']}")
-    
+    # Calculate stellar parameters
+    combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
+
+    # Update counts with results from stellar parameter calculations
+    counts['source_counts'] = source_counts
+    counts['estimation_results'] = estimation_results
+
+    # Safely calculate plottable count only if columns exist
+    if 'Temperature' in combined_data.colnames and 'Luminosity' in combined_data.colnames:
+        plottable_mask = (
+            (~combined_data['Temperature'].isna()) &
+            (~combined_data['Luminosity'].isna())
+        )
+        counts['plottable_count'] = int(np.sum(plottable_mask))
+    else:
+        print("Warning: 'Temperature' or 'Luminosity' column not found in combined_data.")
+        counts['plottable_count'] = 0
+
+    # Update missing parameter counts
+    counts['missing_temp_only'] = estimation_results['final_missing_temp']
+    counts['missing_lum_only'] = estimation_results['final_missing_lum']
+
     return combined_data, counts
+
 
 def main():
     # Initialize shutdown handler
@@ -155,7 +133,7 @@ def main():
             gaia_data['Estimated_Vmag'] = estimate_vmag_from_gaia(gaia_data)
 
         # Select stars and combine data
-        combined_data, counts = select_stars_by_distance(hip_data, gaia_data, max_light_years)
+        combined_data, counts = select_stars(hip_data, gaia_data, mode='distance', limit_value=max_light_years)
         if combined_data is None:
             print("No valid stars found to process. Exiting.")
             return
@@ -213,19 +191,36 @@ def main():
         # Store the mode in the DataFrame attributes
         combined_df.attrs['mode'] = 'distance'
 
-        # Calculate final counts for visualization
         final_counts = {
             'hip_bright_count': counts['hip_bright_count'],
             'hip_mid_count': counts['hip_mid_count'],
             'gaia_mid_count': counts['gaia_mid_count'],
             'gaia_faint_count': counts['gaia_faint_count'],
-            'source_counts': source_counts,
-            'total_stars': len(combined_df),
-            'plottable_count': len(combined_df[~combined_df['Temperature'].isna() & ~combined_df['Luminosity'].isna()]),
-            'missing_temp_only': len(combined_df[combined_df['Temperature'].isna()]),
-            'missing_lum_only': len(combined_df[combined_df['Luminosity'].isna()]),
-            'estimation_results': estimation_results
+            'total_stars': counts['total_stars'],
+            'plottable_count': counts['plottable_count'],
+            'missing_temp_only': counts['missing_temp_only'],
+            'missing_lum_only': counts['missing_lum_only'],
+            'source_counts': counts['source_counts'],
+            'estimation_results': counts['estimation_results']
         }
+
+        # Prepare data for visualization
+        prepared_df = prepare_3d_data(
+            combined_df,  # your DataFrame from combined_data
+            max_value=max_light_years,
+            counts=final_counts,
+            mode='distance'  # Explicitly set mode to 'distance'
+        )
+
+        if prepared_df is None or len(prepared_df) == 0:
+            print("No plottable stars found after data preparation.")
+            return
+
+        create_3d_visualization(
+            combined_df=prepared_df,
+            max_value=max_light_years,
+            user_max_coord=None  # Optional: you can pass a custom scale value here
+        )
 
 # Define the visualize function here, just before the visualization code
         def visualize():

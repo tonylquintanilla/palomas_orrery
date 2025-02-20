@@ -40,6 +40,9 @@ from constants import (
     photosphere_info,
     radiative_zone_info,
     core_info,
+    CENTER_BODY_RADII,
+    KM_PER_AU, 
+    LIGHT_MINUTES_PER_AU
 )
 
 from visualization_utils import format_hover_text, add_hover_toggle_buttons
@@ -139,6 +142,7 @@ CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 
 # Constants
 LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
+KM_PER_AU = 149597870.7       # Kilometers per Astronomical Unit
 CORE_AU = 0.00093               # Core in AU, or approximately 0.2 Solar radii
 RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, or approximately 0.7 Solar radii
 SOLAR_RADIUS_AU = 0.00465047  # Sun's radius in AU
@@ -910,6 +914,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         velocity = np.sqrt(vx**2 + vy**2 + vz**2) if vx is not None and vy is not None and vz is not None else 'N/A'
 
         # Calculate distance in light-minutes and light-hours
+        distance_km = range_ * KM_PER_AU if range_ is not None else 'N/A'
         distance_lm = range_ * LIGHT_MINUTES_PER_AU if range_ is not None else 'N/A'
         distance_lh = (distance_lm / 60) if isinstance(distance_lm, float) else 'N/A'
 
@@ -931,7 +936,8 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
             'vx': vx,
             'vy': vy,
             'vz': vz,
-            'velocity': velocity,
+            'velocity': velocity,\
+            'distance_km': distance_km,
             'distance_lm': distance_lm,
             'distance_lh': distance_lh,
             'mission_info': mission_info,  # Include mission info if available
@@ -1084,14 +1090,22 @@ def print_planet_positions(positions):
 def format_maybe_float(value):
     """
     If 'value' is a numeric type (int or float), return it formatted
-    with 8 decimal places. Otherwise, return 'N/A'.
+    with 10 decimal places. Otherwise, return 'N/A'.
     """
     if isinstance(value, (int, float)):
         return f"{value:.10f}"
     return "N/A"
 
+def format_km_float(value):
+    """
+    Format kilometer values in scientific notation with 2 decimal places.
+    """
+    if isinstance(value, (int, float)):
+        return f"{value:.10e}"              # using .10e for scientific notation instead of .10f
+    return "N/A"
 
-def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info"):
+def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info", 
+                         center_object_name=None):
 
     # Skip if there's no data
     if obj_data is None or obj_data['x'] is None:
@@ -1101,10 +1115,21 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
 
     # Use format_maybe_float() for numeric fields
     distance_au   = format_maybe_float(obj_data.get('range'))
+    distance_km   = format_km_float(obj_data.get('distance_km'))   
     distance_lm   = format_maybe_float(obj_data.get('distance_lm'))
     distance_lh   = format_maybe_float(obj_data.get('distance_lh'))
     velocity_au   = format_maybe_float(obj_data.get('velocity'))
     orbit_period  = obj_data.get('orbital_period', 'N/A')  # This might be a string
+
+    # Get center body radius from constants
+    center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)  # Default to 0 if center body not found
+
+    # Calculate surface distance if we have valid distance data
+    if isinstance(obj_data.get('distance_km'), (int, float)) and obj_data.get('distance_km') > center_radius_km:
+        surface_distance_km = obj_data['distance_km'] - center_radius_km
+        surface_distance_str = format_km_float(surface_distance_km)
+    else:
+        surface_distance_str = "N/A"
 
     # Find the object's info in the objects list
     obj_info = next((obj for obj in objects if obj['name'] == name), None)
@@ -1114,8 +1139,10 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
     full_hover_text = (
         f"<b>{name}</b><br><br>"
         f"Distance from Center: {distance_au} AU<br>"
+        f"Distance: {distance_km} kilometers<br>"
         f"Distance: {distance_lm} light-minutes<br>"
         f"Distance: {distance_lh} light-hours<br>"
+        f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
         f"Velocity: {velocity_au} AU/day<br>"
         f"Orbital Period: {orbit_period} Earth years"
     )
@@ -1123,9 +1150,7 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
     # Add mission_info if it exists, regardless of whether it's a mission
     if mission_info:
         full_hover_text += f"<br>{mission_info}"
-#    if obj_data.get('mission_info'):
-#        full_hover_text += f"<br>{obj_data['mission_info']}"    
-
+    
     minimal_hover_text = f"<b>{name}</b>"
 
     print(f"Full hover text: {full_hover_text}")
@@ -1361,7 +1386,15 @@ def plot_objects():
                             marker_size = 10
                         elif obj['name'] == 'Moon' and center_object_name == 'Earth':
                             marker_size = 6
-                        add_celestial_object(fig, obj_data, obj['name'], obj['color'], obj['symbol'], marker_size=marker_size, hover_data=hover_data)  # Pass hover_data here
+                        add_celestial_object(fig, 
+                                             obj_data, 
+                                             obj['name'], 
+                                             obj['color'], 
+                                             obj['symbol'], 
+                                             marker_size=marker_size, 
+                                             hover_data=hover_data,
+                                             center_object_name=center_object_name
+                                             )  
 
             # Rearrange traces to ensure the center marker is on top
             center_trace_name = center_object_name  # This should match the 'name' parameter of your center marker trace
@@ -1863,14 +1896,6 @@ def animate_objects(step, label):
                     )
                 )
 
-    #        positions_over_time = {}
-    #        for obj in objects:
-    #            if obj['var'].get() == 1 and obj['name'] != center_object_name:
-    #                if 'start_date' in obj and obj['start_date'] > dates_list[0]:
-    #                    positions_over_time[obj['name']] = pad_trajectory(dates_list, obj['start_date'], obj['id'], center_id, obj.get('id_type'))
-    #                else:
-    #                    positions_over_time[obj['name']] = fetch_trajectory(obj['id'], dates_list, center_id=center_id, id_type=obj.get('id_type'))
-
             # Create initial traces and track indices
             trace_indices = []
             for obj in objects:
@@ -1951,8 +1976,19 @@ def animate_objects(step, label):
                                                         obj_data['z']**2)
                             
                             # Calculate distance in light units
+                            distance_km = distance_from_origin * KM_PER_AU
                             distance_lm = distance_from_origin * LIGHT_MINUTES_PER_AU
                             distance_lh = distance_lm / 60
+
+                            # Get center body radius from constants
+                            center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)
+
+                            # Calculate surface distance
+                            if distance_km > center_radius_km:
+                                surface_distance_km = distance_km - center_radius_km
+                                surface_distance_str = f"{surface_distance_km:.10e}"
+                            else:
+                                surface_distance_str = "N/A"
 
                             customdata = [{
                                 'distance': f"{distance_from_origin:.10f}",
@@ -1966,8 +2002,10 @@ def animate_objects(step, label):
                                 z=[obj_data['z']],
                                 text=[f"<b>{obj['name']}</b><br><br>"
                                     f"Distance from Center: {distance_from_origin:.10f} AU<br>"
-                                    f"Distance: {distance_lm:.2f} light-minutes<br>"
-                                    f"Distance: {distance_lh:.2f} light-hours<br>"
+                                    f"Distance: {distance_km:.10e} kilometers<br>"               # changed .2f to .10e for scientific notation
+                                    f"Distance: {distance_lm:.10f} light-minutes<br>"
+                                    f"Distance: {distance_lh:.10f} light-hours<br>"
+                                    f"Distance to Center Surface: {surface_distance_str} kilometers<br>"                                   
                                     + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")],
                                 customdata=[f"<b>{obj['name']}</b>"],
                                 hovertemplate='%{text}<extra></extra>',
@@ -2461,6 +2499,7 @@ venus_var = tk.IntVar(value=1) # default
 earth_var = tk.IntVar(value=1)  # Set Earth to 1 to preselect it by default
 moon_var = tk.IntVar(value=0)  
 pt5_var = tk.IntVar(value=0)
+yr4_var = tk.IntVar(value=0)
 mars_var = tk.IntVar(value=1) # default
 ceres_var = tk.IntVar(value=0)
 jupiter_var = tk.IntVar(value=0)
@@ -2488,6 +2527,7 @@ parker_solar_probe_var = tk.IntVar(value=0)
 jwst_var = tk.IntVar(value=0)
 rosetta_var = tk.IntVar(value=0)
 bepicolombo_var = tk.IntVar(value=0)
+solarorbiter_var = tk.IntVar(value=0)
 akatsuki_var = tk.IntVar(value=0)
 comet_ikeya_seki_var = tk.IntVar(value=0)
 comet_west_var = tk.IntVar(value=0)
@@ -2619,6 +2659,7 @@ create_celestial_checkbutton("Venus", venus_var)
 create_celestial_checkbutton("Earth", earth_var)
 create_celestial_checkbutton("- Moon", moon_var)
 create_celestial_checkbutton("- 2024 PT5", pt5_var)
+create_celestial_checkbutton("- 2024 YR4", yr4_var)
 create_celestial_checkbutton("Mars", mars_var)
 create_celestial_checkbutton("- Phobos", phobos_var)
 create_celestial_checkbutton("- Deimos", deimos_var)
@@ -2703,6 +2744,7 @@ create_mission_checkbutton("OSIRIS REx", osiris_rex_var, "(2016-09-10 to 2023-09
 create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2029-12-31)")
 create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to 2029-12-31)")
 create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2030-12-31)")
+create_mission_checkbutton("Solar Orbiter", solarorbiter_var, "(2020-02-10 to 2030-11-20)")
 create_mission_checkbutton("Perseverance Mars Rover", perse_var, "(2020-07-31 to 2029-12-31)")
 create_mission_checkbutton("Lucy", lucy_var, "(2021-10-18 to 2033-05-01)")
 create_mission_checkbutton("DART", dart_var, "(2021-11-26 to 2022-09-25)")
@@ -3042,7 +3084,8 @@ plot_button = tk.Button(
     font=BUTTON_FONT
 )
 plot_button.grid(row=8, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
-CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
+CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less; stars and non-stellar objects " 
+              "-- long load time.")
 
 # Function to call the hr_diagram script with user input
 def call_hr_diagram_distance_script_with_input():
@@ -3411,6 +3454,11 @@ objects = [
     'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 10, 20), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
 
+    {'name': 'SolO', 'id': '-144', 'var': solarorbiter_var, 'color': color_map('SolO'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20), 
+    'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 'mission_info': 'Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
+
+
     # Comets
     {'name': 'IkeyaSeki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('IkeyaSeki'), 'symbol': 'circle-open', 
     'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
@@ -3477,9 +3525,14 @@ objects = [
 
     # Asteroids
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'is_mission': False,
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'A newly discovered small body from 2024.',
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
+    'mission_info': 'A newly discovered near-Earth asteroid currently orbiting Earth.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
+
+    {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'is_mission': False,
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2025, 1, 18), 'end_date': datetime(2032, 12, 31), 
+    'mission_info': 'A newly discovered near-Earth asteroid from 2024.',
+    'mission_url': 'https://cneos.jpl.nasa.gov/news/news210.html'},
 
     {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_mission': False,
     'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 

@@ -344,13 +344,13 @@ def generate_star_count_text(counts_dict, combined_df=None):
     
     return (
         f"<br>     Total stars plotted: <span style='background-color: red; color: red'>{total_stars:,d}</span>: "
-        f"<a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Hipparcos</a> bright (Vmag ≤ 1.73): <span style='background-color: red; color: red'>{hip_bright}</span> stars. "
+        f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a> bright (Vmag ≤ 1.73): <span style='background-color: red; color: red'>{hip_bright}</span> stars. "
         f"Hipparcos mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{hip_mid}</span> stars. "
     #    f"<a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Gaia</a> mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{gaia_mid}</span> stars. "
-        f"Gaia faint (Vmag > 4.0): <span style='background-color: red; color: red'>{gaia_faint}</span> stars."
+        f"<a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a> faint (Vmag > 4.0): <span style='background-color: red; color: red'>{gaia_faint}</span> stars."
         f"<br>     Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
         f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
-        f"with the star name, for example: \"* alf Aql\", for star data. " 
-        f"-- Python script by Tony Quintanilla, with assistance from ChatGPT, Claude and Gemini, February 2025.<br>"
+        f"with the star name, for example: \"* alf Aql\", for star data (right-click will keep the hovertext box open to read the name). " 
+        f"<br>     -- Python script by Tony Quintanilla, with assistance from ChatGPT, Claude, Gemini, and DeepSeek, February 2025."
         
     )

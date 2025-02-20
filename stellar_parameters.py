@@ -249,7 +249,7 @@ def calculate_stellar_parameters(combined_data):
     }
 
     distance_pc = combined_data['Distance_pc']
-    V_mag = combined_data['V_mag']
+    V_mag = combined_data['Apparent_Magnitude']
     B_mag = combined_data['B_mag']
     spectral_types = combined_data['Spectral_Type']
 
