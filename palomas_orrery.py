@@ -52,6 +52,10 @@ from save_utils import save_plot
 # At the very top of the file, after imports:
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
+import sys, os          # troubleshooting VS
+print("Interpreter:", sys.executable)
+print("Working directory:", os.getcwd())
+
 # Create a global shutdown handler instance
 shutdown_handler = PlotlyShutdownHandler()
 

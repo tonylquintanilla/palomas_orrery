@@ -513,7 +513,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
         marker=dict(
             size=14,
             symbol='circle',
-            color='rgb(102, 187, 106)',
+            color='rgb(102, 187, 106)',     # chlorophyl green
             line=dict(color='yellow', width=2),
         ),
         text=[hover_text_sun],
@@ -630,7 +630,8 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude, Gemini, and DeepSeek, February 2025.<br>"
             f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
             f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
-            f"with the star name, for example: \"* alf Aql\", for star data."
+            f"with the star name, for example: \"* alf Aql\", for star data. " 
+            f"<span style='color:red'>Paloma's Orrery project website:</span> <a href='https://sites.google.com/view/tony-quintanilla' target='_blank' style='color:#1E90FF; text-decoration:underline;'>here</a>. "
         )
 
     else:  # magnitude mode

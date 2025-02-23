@@ -1,7 +1,8 @@
     # Define unique_notes dictionary
 unique_notes = {
 
-        '* alf And': '<br><br>α Andromeda or Alpha Andromeda, better known as Alpheratz or Sirrah. It\'s the brightest star in <br>' 
+        '* alf And': 
+        '<br><br>α Andromeda or Alpha Andromeda, better known as Alpheratz or Sirrah. It\'s the brightest star in <br>' 
         'the constellation Andromeda, but it\'s also considered part of the constellation Pegasus. In <br>' 
         'fact, it forms the top left corner of the Great Square of Pegasus asterism. Alpheratz is a <br>' 
         'blue-white subgiant star, meaning it\'s hotter and more massive than our Sun, and it\'s <br>' 
@@ -14,7 +15,8 @@ unique_notes = {
         'star, a type of chemically peculiar star with an overabundance of those elements in its <br>' 
         'atmosphere. This makes it interesting for astronomers studying stellar evolution and the <br>' 
         'chemical composition of stars. To find Alpheratz, look for the Great Square of Pegasus. <br>' 
-        'It\'s the star that marks the top left corner of the square.',
+        'It\'s the star that marks the top left corner of the square.'
+        '<a href="https://en.wikipedia.org/wiki/Alpheratz">',
 
         '* bet And': '<br><br>Mirach',
         '* gam And': '<br><br>Almach or Alamak',
@@ -46,7 +48,8 @@ unique_notes = {
         '* the Aqr': '<br>Ancha',
         '* lam Aqr': '<br>Hydor or Lambda Aquarii',
 
-        '* alf Aql': '<br>α Aquilae or Alpha Aquilae, also known as Altair.<br> ' 
+        '* alf Aql': 
+        '<br>α Aquilae or Alpha Aquilae, also known as Altair.<br> ' 
         '* Fast spinner: Altair is completes a rotation in just 8.9 hours! This rapid spin causes it to have a flattened shape<br> ' 
         '  with its equatorial diameter being significantly larger than its polar diameter.<br> ' 
         '* Hot and bright: Altair is a white main-sequence star of spectral type A7V. It\'s about 1.8 times more massive than<br> ' 
@@ -54,7 +57,8 @@ unique_notes = {
         '* The Eagle\'s Eye: Altair is the brightest star in the constellation Aquila, the Eagle.<br> ' 
         '* Relatively young: Altair is estimated to be about a billion years old, making it much younger than our Sun.<br> ' 
         '* Gravity darkening: Due to its rapid rotation and flattened shape, Altair exhibits a phenomenon called gravity darkening.<br> ' 
-        '  Its poles are hotter and brighter than its equator.', 
+        '  Its poles are hotter and brighter than its equator.'
+        '<a href="https://en.wikipedia.org/wiki/Altair">', 
 
         '* gam Aql': '<br>Tarazed',
         '* zet Aql': '<br>Okab',
@@ -76,7 +80,8 @@ unique_notes = {
         '* eps Ari': '<br>Epsilon Arietis',
         '* lam Ari': '<br>Lambda Arietis',
 
-        '* alf Aur': '<br>α Auriga or Alpha Auriga, better known as Capella.<br> ' 
+        '* alf Aur': 
+        '<br>α Auriga or Alpha Auriga, better known as Capella.<br> ' 
         '* Spectroscopic binary: Capella consists of two pairs of binary stars.<br> ' 
         '* Capella Aa and Ab: The main pair are two yellow giant stars orbiting each other closely. They are both about 2.5 times<br> ' 
         '  more massive than our Sun and have evolved off the main sequence.<br> ' 
@@ -86,7 +91,8 @@ unique_notes = {
         '* The Charioteer: Capella is the brightest star in the constellation Auriga, the Charioteer.<br> ' 
         '* Circumpolar: For observers at higher northern latitudes, Capella is circumpolar, it never sets below the horizon.<br> ' 
         '* X-ray source: The two main stars in Capella are known to emit X-rays, likely due to their active outer atmospheres.<br> ' 
-        '* Future evolution: The two giant stars in Capella will eventually exhaust their nuclear fuel and evolve into white dwarfs.<br> ',
+        '* Future evolution: The two giant stars in Capella will eventually exhaust their nuclear fuel and evolve into white dwarfs.<br> '
+        '<a href="https://en.wikipedia.org/wiki/Auriga">',
 
         '* bet Aur': '<br>Menkalinan',
         '* the Aur': '<br>Mahasim', 
@@ -96,7 +102,8 @@ unique_notes = {
         '* zet Aur': '<br>Zeta Aurigae', 
         '* 14 Aur': '<br>14 Aurigae',
 
-        '* alf Boo': '<br>α Bootes or Alpha Bootes is also known as Arcturus. It is the fourth brightest star in the entire<br> ' 
+        '* alf Boo': 
+        '<br>α Bootes or Alpha Bootes is also known as Arcturus. It is the fourth brightest star in the entire<br> ' 
         'Arcturus is an orange giant star, in a later stage of its life compared to our Sun.<br> ' 
         '* Distance: About 37 light-years away from Earth.<br> ' 
         '* Mass: Around 1.1 solar masses.<br> ' 
@@ -107,7 +114,8 @@ unique_notes = {
         '* High Proper Motion: Arcturus moves relatively quickly. This is because it\'s an older star that\'s<br> ' 
         '  part of the Milky Way\'s halo, rather than the disk.<br> ' 
         '  Locate the Big Dipper asterism in Ursa Major. Follow the curve of its handle downwards, and the first<br> ' 
-        '  bright star you encounter is Arcturus.',
+        '  bright star you encounter is Arcturus.'
+        '<a href="https://en.wikipedia.org/wiki/Arcturus">',
 
         '* eps Boo': '<br>Izar or Pulcherrima', 
         '* eta Boo': '<br>Muphrid',
@@ -115,38 +123,42 @@ unique_notes = {
         '* nu Boo': '<br>Nu Bootis',
         '* xi Boo': '<br>Xi Bootis',
         '* 38 Boo': '<br>Merga', 
+
         '* alf Cae': '<br>Alpha Caeli',
         '* gam Cae': '<br>Gamma Caeli', 
-        '* bet Cam': '<br>Beta Camelopardalis',
-        '* alf Cnc': '<br>Acubens',
-        '* bet Cnc': '<br>Altarf',
-        '* del Cnc': '<br>Asellus Australis', 
-        '* gam Cnc': '<br>Asellus Borealis',
-        '* iota Cnc': '<br>Iota Cancri',
-        '* alf CVn': '<br>Cor Caroli', 
-        '* alf CMa': '<br>Sirius',
-        '* eps CMa': '<br>Adhara', 
-        '* del CMa': '<br>Wezen',
-        '* eta CMa': '<br>Aludra',
-        '* ome CMa': '<br>Omicron2 Canis Majoris', 
-        '* zet CMa': '<br>Furud',
-        '* bet CMi': '<br>Gomeisa',
+        '* bet Cam': '<br>Beta Camelopardalis', 
+
         '* alf Cap': '<br>Algedi',
         '* bet Cap': '<br>Dabih',
-        '* gam Cap': '<br>Nashira', 
-        '* del Cap': '<br>Deneb Algedi',
-        '* zet Cap': '<br>Marakk', 
+        '* gam Cap': '<br>Nashira',  
 
-        '* alf Car': '<br>α Carina or Alpha Carina, better known as Canopus, is the second brightest star in the entire<br> ' 
+        '* del Cap': 
+        '<br>Delta Capricorni (δ Cap) also known as Deneb Algedi, a star in the constellation Capricornus.<br>'
+        '* Multiple Star System: Delta Capricorni is actually a complex multiple star system. It consists of:<br> ' 
+        '  * δ Cap A: A yellow-white giant star.<br> ' 
+        '  * δ Cap B: A fainter companion that orbits δ Cap A. This companion is itself a binary star (two stars orbiting each other).<br> ' 
+        '* Variable Star: The primary star, δ Cap A, is classified as an eclipsing binary. This means that the two stars in the δ Cap B<br> ' 
+        '  system periodically pass in front of each other from our perspective, causing slight dips in the overall brightness of the<br> ' 
+        '  system.<br> ' 
+        '* Visibility: Delta Capricorni is visible to the naked eye, but it\'s not particularly bright. It has an apparent magnitude<br> ' 
+        '  of around +2.85. It\'s best seen from the Southern Hemisphere during the summer months.'
+        '<a href="https://en.wikipedia.org/wiki/Delta_Capricorni">',
+
+        '* zet Cap': '<br>Marakk',
+ 
+        '* alf Car': 
+        '<br>α Carina or Alpha Carina, better known as Canopus, is the second brightest star in the entire<br> ' 
         'night sky, after Sirius. Canopus is a yellow-white supergiant star, much larger and more luminous<br> ' 
         'than our Sun, and in a later stage of its stellar evolution.<br> ' 
         '* Distance: About 310 light-years away from Earth.<br> ' 
         '* Mass: Estimated to be about 8.5 times the mass of the Sun.<br> ' 
         '* Radius: Around 71 times larger than the Sun!<br> ' 
         '* Luminosity: A whopping 10,700 times more luminous than the Sun!<br> ' 
-        '* Temperature: Around 7,350 Kelvin, giving it its yellow-white hue.',
+        '* Temperature: Around 7,350 Kelvin, giving it its yellow-white hue.'
+        '<a href="https://en.wikipedia.org/wiki/Canopus">',
 
-        '* bet Car': '<br>β Carinae or Beta Carinae, better known as Miaplacidus.<br>' 
+        '* bet Car': 
+        '<br>β Carinae or Beta Carinae, better known as Miaplacidus.<br>' 
         '* One of the brightest stars: Miaplacidus shines brightly in the night sky, ranking as the 28th brightest star overall.<br>' 
         '* Blue-white giant: It\'s a blue-white giant star of spectral type A2 III, meaning it\'s hotter, larger, and more<br>' 
         '  massive than our Sun.<br>' 
@@ -154,7 +166,8 @@ unique_notes = {
         '  advanced stage of its stellar life cycle.<br>' 
         '* Southern Hemisphere: Miaplacidus is located in the constellation Carina, the Keel.<br>' 
         '* Name\'s origin: The name Miaplacidus is a combination of Arabic and Latin words, roughly translating to "waters of<br>' 
-        '  placidity.',
+        '  placidity.'
+        '<a href="https://en.wikipedia.org/wiki/Beta_Carinae">',
 
         '* eps Car': '<br>Avior',
         '* eta Car': '<br>Eta Carinae',
@@ -169,16 +182,19 @@ unique_notes = {
         '* del Cas': '<br>Ruchbah or Rucba', 
         '* eps Cas': '<br>Segin',
 
-        '* eta Cas': '<br>Eta Cassiopeiae A or Achird. It is part of a binary system. Eta Cas A is similar to the Sun.',
+        '* eta Cas': 
+        '<br>Eta Cassiopeiae A or Achird. It is part of a binary system. Eta Cas A is similar to the Sun.'
+        '<a href="https://en.wikipedia.org/wiki/Eta_Cassiopeiae">',
 
-        '* eta Cas B': '<br>Eta Cassiopeiae B. It orbits Eta Cas A.',
+        '* eta Cas B': 
+        '<br>Eta Cassiopeiae B. It orbits Eta Cas A.'
+        '<a href="https://en.wikipedia.org/wiki/Eta_Cassiopeiae">',
 
         '* kap Cas': '<br>Kappa Cassiopeiae', 
         '* rho Cas': '<br>Rho Cassiopeiae',
 
-        '* alf Cen': '<br>Rigil Kentaurus or Toliman',
-
-        '* alf Cen A': '<br>α Centauri or Alpha Centauri A, is part of the Alpha Centauri system, the<br> ' 
+        '* alf Cen A': 
+        '<br>α Centauri or Alpha Centauri A, is part of the Alpha Centauri system, the<br> ' 
         '  closest star system to the Sun. It consists of Alpha Centauri A and B, and<br> ' 
         '  Proxima Centauri. A and B orbit each other, while Proxima orbits the A-B pair.<br>' 
         '  Alpha Centauri is the closest star system to our own, located just about 4.37<br> ' 
@@ -192,9 +208,11 @@ unique_notes = {
         '  B: A slightly smaller and cooler orange main-sequence star.<br> ' 
         '  Proxima: A small, faint red dwarf star that orbits the Alpha Centauri AB pair<br> ' 
         '  at a much greater distance. Proxima is closest individual star to our Sun.<br> ' 
-        '  Proxima Centauri is known to host at least two exoplanets.',
+        '  Proxima Centauri is known to host at least two exoplanets.'
+        '<a href="https://en.wikipedia.org/wiki/Alpha_Centauri">',
 
-        '* alf Cen B': '<br>α Centauri B or Alpha Centauri B.<br>' 
+        '* alf Cen B': 
+        '<br>α Centauri B or Alpha Centauri B.<br>' 
         '* Red dwarf companion to Alpha Centauri A. Alpha Centauri B is a fascinating star and a crucial component of the Alpha<br>' 
         '  Centauri system, the closest star system to our own!<br>' 
         '* Closest stellar neighbor: Alpha Centauri is a triple star system located just 4.37 light-years away from Earth. It<br>' 
@@ -204,9 +222,11 @@ unique_notes = {
         '  than our Sun. It has about 90% of the Sun\'s mass and about 50% of its luminosity.<br>' 
         '* Exoplanet Candidate:<br>' 
         '  * Alpha Centauri Bc: In 2021 Bc, was detected orbiting α Centauri B. This candidate is estimated to be about six times<br>' 
-        '    the mass of Earth.',
+        '    the mass of Earth.'
+        '<a href="https://en.wikipedia.org/wiki/Alpha_Centauri">',
 
-        '* bet Cen': '<br>Beta Centauri, or β Cen. Beta Centauri is also known by the proper name Hadar or Agena, derived from<br> ' 
+        '* bet Cen': 
+        '<br>Beta Centauri, or β Cen. Beta Centauri is also known by the proper name Hadar or Agena, derived from<br> ' 
         'an Arabic word meaning "ground." It\'s actually a triple star system! The two main stars (β Cen A and β Cen B)<br> ' 
         'orbit each other closely, and a much fainter third star (β Cen C) orbits the pair at a greater distance.<br> ' 
         'Found in the constellation Centaurus, it\'s easily visible to the naked eye in the Southern Hemisphere.<br> ' 
@@ -215,7 +235,8 @@ unique_notes = {
         '* Luminosity: They are incredibly luminous, thousands of times brighter than the Sun.<br> ' 
         '* Spectral type: Classified as B1 III, indicating they are giant stars that have evolved off the main sequence.<br> ' 
         '* Young stars: Estimated to be only 10 to 20 million years old, compared to our 4.6 billion-year-old Sun.<br> ' 
-        '* Circumstellar disks: Both β Cen A and B might have disks of dust and gas orbiting them.',
+        '* Circumstellar disks: Both β Cen A and B might have disks of dust and gas orbiting them.'
+        '<a href="https://en.wikipedia.org/wiki/Beta_Centauri">',
 
         '* alf Cep': '<br>Alderamin',
         '* bet Cep': '<br>Alfirk',
@@ -227,10 +248,12 @@ unique_notes = {
         '* bet Cet': '<br>Deneb Kaitos or Diphda', 
         '* eta Cet': '<br>Deneb Algenubi',
 
-        '* tau Cet': '<br>Tau Ceti. It is similar to the Sun, and very stable. It has a low <br>' 
+        '* tau Cet': 
+        '<br>Tau Ceti. It is similar to the Sun, and very stable. It has a low <br>' 
         'abundance of heavier elements. Tau Ceti has a system of at least four confirmed <br>' 
         'planets, all so-called Super Earths. Two of these planets, Tau Ceti e and f, <br>' 
-        'orbit within the habitable zone, where liquid water is possible.',
+        'orbit within the habitable zone, where liquid water is possible.'
+        '<a href="https://en.wikipedia.org/wiki/Tau_Ceti">',
 
         '* iota Cet': '<br>Iota Ceti',
         '* ome Cet': '<br>Mira',
@@ -241,7 +264,8 @@ unique_notes = {
         '* bet Cir': '<br>Beta Circini', 
         '* gam Cir': '<br>Gamma Circini', 
 
-        '* alf CMa': '<br>α Canis Majoris or Alpha Canis Majoris, also known as Sirius, is the brightest star as<br> ' 
+        '* alf CMa': 
+        '<br>α Canis Majoris or Alpha Canis Majoris, also known as Sirius, is the brightest star as<br> ' 
         'seen from Earth. It is a binary star system, with a White Dwarf companion.<br> ' 
         'Sirius shines with a brilliant white light that\'s easily visible even from<br> ' 
         'light-polluted areas. It\'s a main-sequence star, meaning it\'s fusing hydrogen.<br> ' 
@@ -253,11 +277,15 @@ unique_notes = {
         '* Radius: About 1.7 times the radius of the Sun.<br> ' 
         '* Luminosity: 25 times more luminous than the Sun!<br> ' 
         '* Temperature: Around 9,940 Kelvin, giving it its white color.<br> ' 
-        '  The three stars of Orion\'s belt point downwards towards Sirius.',
+        '  The three stars of Orion\'s belt point downwards towards Sirius.'
+        '<a href="https://en.wikipedia.org/wiki/Sirius">',
 
-        '* alf CMa B': '<br>Alpha Canis Majoris B. It is White Dward companion to Sirius.',
+        '* alf CMa B': 
+        '<br>Alpha Canis Majoris B. It is White Dward companion to Sirius.'
+        '<a href="https://en.wikipedia.org/wiki/Sirius">',
 
-        '* eps CMa': '<br>ε Canis Majoris or Epsilon Canis Majoris, better known as Adhara.<br>' 
+        '* eps CMa': 
+        '<br>ε Canis Majoris or Epsilon Canis Majoris, better known as Adhara.<br>' 
         '* Adhara is the second-brightest star in the constellation Canis Major, the Great Dog, after Sirius.<br>' 
         '* One of the most luminous stars: It\'s also one of the most intrinsically luminous stars visible to the naked eye. It<br>' 
         '  shines with a luminosity roughly 25,000 times that of our Sun!<br>' 
@@ -266,9 +294,11 @@ unique_notes = {
         '* Ultraviolet radiation: Adhara is a strong source of ultraviolet radiation. In fact, it\'s the strongest ultraviolet source<br>' 
         '  in the night sky that\'s visible to the naked eye.<br>' 
         '* Evolution: Adhara is an evolved star that has exhausted the hydrogen fuel in its core. It\'s expected to eventually end<br>' 
-        '  its life as a white dwarf.',
+        '  its life as a white dwarf.'
+        '<a href="https://en.wikipedia.org/wiki/Epsilon_Canis_Majoris">',
 
-        '* del CMa': '<br>δ Canis Majoris or Delta Canis Majori, also known as Wezen.<br>' 
+        '* del CMa': 
+        '<br>δ Canis Majoris or Delta Canis Majoris, also known as Wezen.<br>' 
         '* One of the brightest stars: It\'s one of the brightest stars in Canis Major and is the 35th brightest star in the<br>' 
         '  entire night sky.<br>' 
         '* Yellow-white supergiant: Wezen is a yellow-white supergiant of spectral type F8 Ia. This means it\'s much hotter,<br>' 
@@ -281,14 +311,21 @@ unique_notes = {
         '  advanced stage of its stellar life cycle.<br>' 
         '* Short lifespan: Due to its large mass, Wezen has a relatively short lifespan compared to our Sun. It\'s expected to<br>' 
         '  eventually end its life in a spectacular supernova explosion.<br>' 
-        '* Distance: Wezen is located about 1,800 light-years away from Earth.',
+        '* Distance: Wezen is located about 1,800 light-years away from Earth.'
+        '<a href="https://en.wikipedia.org/wiki/Delta_Canis_Majoris">',
 
         '* eta CMa': '<br>Aludra',
         '* sig CMa': '<br>Mirzam', 
         '* zet CMa': '<br>Furud',
         '* ome CMa': '<br>Omicron2 Canis Majoris', 
 
-        '* alf CMi': '<br>α Canis Minoris or Alpha Canis Minoris, also known as Procyon. <br> ' 
+        '* ksi02 CMa': 
+        '<br>Also Xi2 Canis Majoris. Xi2 Canis Majoris, which is Latinized from ξ2 Canis Majoris, is an astrometric binary star<br>'
+        'system in the southern constellation of Canis Major.<br>' 
+        '<a href="https://en.wikipedia.org/wiki/Xi2_Canis_Majoris">',
+
+        '* alf CMi': 
+        '<br>α Canis Minoris or Alpha Canis Minoris, also known as Procyon. <br> ' 
         '* Eighth brightest star: Procyon shines brightly in our night sky, ranking as the eighth-brightest star overall.<br> ' 
         '* Nearby neighbor: Located just 11.46 light-years away, Procyon is one of the closest stars to our solar system.<br> ' 
         '* Binary system: Procyon is a binary star system, consisting of two stars:<br> ' 
@@ -296,34 +333,19 @@ unique_notes = {
         '  * Procyon B: The companion star is a faint white dwarf, the core of a star that has reached the end of its life cycle.<br> ' 
         '* The Little Dog: Procyon is the brightest star in the constellation Canis Minor, the Little Dog.<br> ' 
         '* Evolution: Procyon A is expected to eventually evolve into a red giant and then a white dwarf, similar to its companion<br> ' 
-        '  Procyon B.', 
+        '  Procyon B.'
+        '<a href="https://en.wikipedia.org/wiki/Procyon">', 
 
         '* bet CMi': '<br>Gomeisa',
         '* gam CMi': '<br>Gamma Canis Minoris', 
-        '* alf Cap': '<br>Algedi',
-        '* bet Cap': '<br>Dabih', 
-        '* gam Cap': '<br>Nashira',
 
-        '* del Cap': '<br>Delta Capricorni (δ Cap) also known as Deneb Algedi, a star in the constellation Capricornus.<br>'
-        '* Multiple Star System: Delta Capricorni is actually a complex multiple star system. It consists of:<br> ' 
-        '  * δ Cap A: A yellow-white giant star.<br> ' 
-        '  * δ Cap B: A fainter companion that orbits δ Cap A. This companion is itself a binary star (two stars orbiting each other).<br> ' 
-        '* Variable Star: The primary star, δ Cap A, is classified as an eclipsing binary. This means that the two stars in the δ Cap B<br> ' 
-        '  system periodically pass in front of each other from our perspective, causing slight dips in the overall brightness of the<br> ' 
-        '  system.<br> ' 
-        '* Visibility: Delta Capricorni is visible to the naked eye, but it\'s not particularly bright. It has an apparent magnitude<br> ' 
-        '  of around +2.85. It\'s best seen from the Southern Hemisphere during the summer months.',
+        '* alf Cnc': '<br>Acubens',
+        '* bet Cnc': '<br>Altarf',
+        '* del Cnc': '<br>Asellus Australis', 
+        '* gam Cnc': '<br>Asellus Borealis',
+        '* iota Cnc': '<br>Iota Cancri',
 
-        '* zet Cap': '<br>Marakk',
-        '* alf Car': '<br>Canopus',
-        '* bet Car': '<br>Miaplacidus',
-        '* eps Car': '<br>Avior',
-        '* eta Car': '<br>Eta Carinae', 
-        '* iota Car': '<br>Aspidiske or Turais', 
-        '* the Car': '<br>Vathorz Posterior',
-        '* ups Car': '<br>Upsilon Carinae', 
-        '* ome Car': '<br>Omega Carinae', 
-        '* chi Car': '<br>Chi Carinae', 
+
         '* alf CrA': '<br>Alpha Coronae Australis',
         '* bet CrA': '<br>Beta Coronae Australis',
 
@@ -340,7 +362,8 @@ unique_notes = {
         '* bet Crt': '<br>Beta Crateris or Alkes', 
         '* alf Cru': '<br>Acrux',
 
-        '* bet Cru': '<br>β Crucis or Beta Crucis, more commonly known as Mimosa or Becrux.<br>' 
+        '* bet Cru': 
+        '<br>β Crucis or Beta Crucis, more commonly known as Mimosa or Becrux.<br>' 
         '* 20th brightest star: Mimosa shines brilliantly, ranking as the 20th brightest star in the entire night sky.<br> ' 
         '* Blue giant: It\'s a blue giant star of spectral type B0.5 III, meaning it\'s much hotter, larger, and more massive than our Sun.<br>' 
         '* Part of a system: Mimosa is actually a binary star system, or possibly even a triple system. The main star, Mimosa A, has a<br>' 
@@ -351,9 +374,11 @@ unique_notes = {
         '  This is due to pulsations in its atmosphere.<br>' 
         '* Stellar winds: Like other massive stars, Mimosa has powerful stellar winds that expel material into space.<br>' 
         '* Navigation: In the past, Mimosa and the other stars of the Southern Cross were important for navigation in the Southern<br>' 
-        '  Hemisphere.',
+        '  Hemisphere.'
+        '<a href="https://en.wikipedia.org/wiki/Mimosa_(star)">',
 
-        '* gam Cru': '<br>Gam Cru, or Gamma Crux, is more commonly known as Gacrux, holds a special place <br>' 
+        '* gam Cru': 
+        '<br>Gam Cru, or Gamma Crucis, is more commonly known as Gacrux, holds a special place <br>' 
         'in the Southern Hemisphere sky! It\'s the third-brightest star in the constellation Crux, which <br>' 
         'is better known as the Southern Cross. Gacrux is a red giant star, meaning it\'s in a later <br>' 
         'stage of its stellar evolution, similar to Aldebaran. Distance: Approximately 88 light-years <br>' 
@@ -365,7 +390,8 @@ unique_notes = {
         'navigation in the Southern Hemisphere, as it points towards the south celestial pole. Gacrux is <br>' 
         'the nearest red giant star to our Sun, making it an interesting object of study for astronomers. <br>' 
         'Gacrux might have a faint companion star, though this is still uncertain. It\'s classified as a <br>' 
-        'semi-regular variable star, meaning its brightness changes slightly over time.',
+        'semi-regular variable star, meaning its brightness changes slightly over time.'
+        '<a href="https://en.wikipedia.org/wiki/Gacrux">',
 
         '* del Cru': '<br>Delta Crucis', 
         '* eps Cru': '<br>Epsilon Crucis', 
@@ -376,7 +402,10 @@ unique_notes = {
         '* mu1 Cru': '<br>Mu1 Crucis', 
         '* mu2 Cru': '<br>Mu2 Crucis',
 
-        '* alf Cyg': '<br>α Cygnus or Alpha Cygnus, also known as Deneb or Arided.<br> '
+        '* alf CVn': '<br>Cor Caroli',         
+
+        '* alf Cyg': 
+        '<br>α Cygnus or Alpha Cygnus, also known as Deneb or Arided.<br> '
         '* One of the most luminous stars: Deneb is a blue-white supergiant, one of the most luminous stars known in the Milky Way<br> ' 
         '  galaxy. It\'s estimated to be at least 50,000 times more luminous than our Sun.<br> ' 
         '* Immense size: Though its exact size is also subject to some uncertainty due to its distance, Deneb is thought to have a<br> ' 
@@ -389,7 +418,8 @@ unique_notes = {
         '* Distance uncertainty: Deneb\'s exact distance is somewhat uncertain. Estimates range from about 1,400 to 3,200 light-years.<br> ' 
         '* Future evolution: Deneb is expected to eventually end its life in a spectacular supernova explosion, possibly leaving<br> ' 
         '  behind a neutron star or a black hole.<br> ' 
-        '* Cygnus the Swan: Deneb is the brightest star in the constellation Cygnus.',
+        '* Cygnus the Swan: Deneb is the brightest star in the constellation Cygnus.'
+        '<a href="https://en.wikipedia.org/wiki/Deneb">',
 
         '* gam Cyg': '<br>Sadr', 
         '* eps Cyg': '<br>Gienah', 
@@ -402,6 +432,7 @@ unique_notes = {
         '* lam Cyg': '<br>Lambda Cygni', 
         '* 61 Cyg': '<br>61 Cygni', 
         '* pi1 Cyg': '<br>Azelfafage', 
+
         '* alf Del': '<br>Sualocin or Alpha Delphini',
         '* bet Del': '<br>Rotanev or Beta Delphini', 
         '* gam Del': '<br>Gamma Delphini', 
@@ -416,15 +447,18 @@ unique_notes = {
         '* nu Dra': '<br>Kuma', 
         '* xi Dra': '<br>Grumium', 
 
-        '* sig Dra': '<br>Sigma Draconis, also known as Alsafi. Sigma Draconis hosts at least <br>' 
+        '* sig Dra': 
+        '<br>Sigma Draconis, also known as Alsafi. Sigma Draconis hosts at least <br>' 
         'one known exoplanet, a gas giant with a mass about 11 times that of Jupiter. <br>' 
-        'This planet orbits the star at a distance greater than the orbit of Mars.',
+        'This planet orbits the star at a distance greater than the orbit of Mars.'
+        '<a href="https://en.wikipedia.org/wiki/Sigma_Draconis">',
 
         '* alf Equ': '<br>Kitalpha or Alpha Equulei',         
         '* del Equ': '<br>Delta Equulei', 
         '* gam Equ': '<br>Gamma Equulei', 
 
-        '* alf Eri': '<br>α Eridani, or Alpha Eridani, often shortened to α Eri, and more famously known as Achernar! Its name comes from<br> ' 
+        '* alf Eri': 
+        '<br>α Eridani, or Alpha Eridani, often shortened to α Eri, and more famously known as Achernar! Its name comes from<br> ' 
         '  an Arabic phrase meaning "the end of the river," <br> ' 
         '* A Rapidly Rotating Giant: Achernar is notable for its extremely rapid rotation. It spins so fast that it\'s<br> ' 
         '  significantly flattened at its poles and bulges at the equator, more like a lentil than a sphere.<br> ' 
@@ -436,18 +470,21 @@ unique_notes = {
         '* Circumstellar disk: Observations suggest that Achernar might have a disk of gas and dust orbiting it, possibly<br> ' 
         '  a remnant of its formation or a sign of a potential planetary system.<br> ' 
         '* Evolution: Achernar is still on the main sequence, fusing hydrogen in its core. However, due to its high mass,<br> ' 
-        '  it will have a shorter lifespan than our Sun and eventually evolve into a giant star.',
+        '  it will have a shorter lifespan than our Sun and eventually evolve into a giant star.'
+        '<a href="https://en.wikipedia.org/wiki/Achernar">',
 
         '* bet Eri': '<br>Cursa', 
         '* gam Eri': '<br>Zaurak', 
         '* del Eri': '<br>Rana', 
 
-        '* eps Eri': '<br>Epsilon Eridani also known as 18 Eridani. It is a young star less <br>' 
+        '* eps Eri': 
+        '<br>Epsilon Eridani also known as 18 Eridani. It is a young star less <br>' 
         'than one billion years old, compared to our 4.6 billion year-old Sun! It has <br>' 
         'frequent flares. Epsilon is <br>' 
         'surrounded by a dusty debris disk, which could contain comets, asteroid and planets. <br>' 
         'Epsilon has one confirmed planet Epsilon Eridani b, a gas giant, slightly larger <br>' 
-        'than Jupiter, and there is evidence of a second planet.',
+        'than Jupiter, and there is evidence of a second planet.'
+        '<a href="https://en.wikipedia.org/wiki/Epsilon_Eridani">',
 
         '* zet Eri': '<br>Zibal', 
         '* eta Eri': '<br>Azha', 
@@ -456,7 +493,8 @@ unique_notes = {
 
         '* e Eri': '<br>Also known as 82 Eridani.',
 
-        '* omi02 Eri': '<br>ο² Eridani A, also known as Keid. It is a K1V-type main-<br>' 
+        '* omi02 Eri': 
+        '<br>ο² Eridani A, also known as Keid. It is a K1V-type main-<br>' 
         'sequence star (specifically K1V). it has a radius about 85 percent of the <br>' 
         'Sun and a mass around 82 percent of the Sun. ο² Eri A is in the triple star <br>'
         'ο² Eridani. It is estimated to be around 5.7 billion years old. Unlike its <br>' 
@@ -464,9 +502,11 @@ unique_notes = {
         'exhibit dramatic flares or significant variability. As a K-type main-sequence <br>' 
         'star, it has a longer lifespan than our Sun. It will continue fusing hydrogen <br>' 
         'in its core for many billions of years. ο² Eri A was featured as the location <br>' 
-        'of the fictional planet Vulcan in the Star Trek universe.',
+        'of the fictional planet Vulcan in the Star Trek universe.'
+        '<a href="https://en.wikipedia.org/wiki/40_Eridani">',
 
-        '* omi02 Eri B': '<br>Omicron2 Eridani B, is a fascinating component of a <br>' 
+        '* omi02 Eri B': 
+        '<br>Omicron2 Eridani B, is a fascinating component of a <br>' 
         'triple star system. It is a white dwarf, the remnant core of a star that <br>' 
         'has exhausted its nuclear fuel. It is a White Dwarf (specifically, a DA <br>' 
         'type, indicating a hydrogen-rich atmosphere. Even though a white dwarf <br>' 
@@ -480,14 +520,17 @@ unique_notes = {
         'system, a K-type main-sequence star, is slightly smaller and cooler than <br>' 
         'our Sun. ο² Eri C is a red dwarf star, much smaller and cooler than both <br>' 
         'A and B. ο² Eri B and C form a close binary pair that orbits around the <br>' 
-        'primary star A at a considerable distance.',
+        'primary star A at a considerable distance.'
+        '<a href="https://en.wikipedia.org/wiki/40_Eridani">',
 
         '* lam Eri': '<br>Lambda Eridani', 
+
         '* alf For': '<br>Alpha Fornacis',
         '* bet For': '<br>Beta Fornacis', 
         '* nu For': '<br>Nu Fornacis', 
 
-        '* alf Gem': '<br>α Gem or alpha Gemini, better known as Castor.<br>' 
+        '* alf Gem': 
+        '<br>α Gem or alpha Gemini, better known as Castor.<br>' 
         '* Gemini\'s Head: Castor marks the head of one of the twins in the constellation Gemini.<br>' 
         '* Sextuple star system: While it appears as a single star to the naked eye, Castor is actually a system of six stars!<br>' 
         '  It consists of three binary pairs that orbit each other.<br>' 
@@ -501,17 +544,18 @@ unique_notes = {
         '* Gravitational dance: The complex gravitational interactions between the six stars make Castor a dynamic system<br>' 
         '* Brightness: Castor is the second-brightest star in Gemini, after Pollux.<br>' 
         '* Distance: Castor is located about 51 light-years away from Earth.<br>' 
-        '* Near Pollux: It\'s located near its "twin" star, Pollux, which is slightly brighter and has a more orange hue.',
+        '* Near Pollux: It\'s located near its "twin" star, Pollux, which is slightly brighter and has a more orange hue.'
+        '<a href="https://en.wikipedia.org/wiki/Castor_(star)">',
  
-        '* bet Gem': '<br>β Geminorum or Beta Geminorum, better known as Pollux. <br> ' 
-        '* Orange giant: Pollux is an evolved star that has moved off the main sequence and expanded into an orange giant. It\'s<br> ' 
-        '  about twice as massive as our Sun and has a diameter roughly nine times larger.<br> ' 
-        '* Cooler than the Sun: Pollux is cooler than our Sun, with a surface temperature of about 4,865 Kelvin. This gives it a<br> ' 
+        '* bet Gem': '<br>β Geminorum or Beta Geminorum, better known as Pollux.<br>' 
+        '* Orange giant: Pollux is an evolved star that has moved off the main sequence and expanded into an orange giant. It\'s<br>' 
+        '  about twice as massive as our Sun and has a diameter roughly nine times larger.<br>' 
+        '* Cooler than the Sun: Pollux is cooler than our Sun, with a surface temperature of about 4,865 Kelvin. This gives it a<br>' 
         '  distinctive orange hue.<br> ' 
-        '* 17th brightest star: Pollux shines brightly, ranking as the 17th brightest star in the entire night sky.<br> ' 
-        '* Exoplanet Host: In 2006, astronomers discovered an exoplanet orbiting Pollux. This planet, designated Pollux b (or β<br> ' 
-        '  Geminorum b), is a gas giant with a mass at least 2.3 times that of Jupiter. It orbits Pollux at a distance of about 1.64<br> ' 
-        '  astronomical units (AU), taking approximately 590 days to complete one orbit.<br> ' 
+        '* 17th brightest star: Pollux shines brightly, ranking as the 17th brightest star in the entire night sky.<br>' 
+        '* Exoplanet Host: In 2006, astronomers discovered an exoplanet orbiting Pollux. This planet, designated Pollux b (or β<br>' 
+        '  Geminorum b), is a gas giant with a mass at least 2.3 times that of Jupiter. It orbits Pollux at a distance of about 1.64<br>' 
+        '  astronomical units (AU), taking approximately 590 days to complete one orbit.<br>' 
         '* Future evolution: Pollux will eventually exhaust its nuclear fuel and shed its outer layers, leaving behind a white dwarf', 
 
         '* gam Gem': '<br>Alhena', 
@@ -1167,7 +1211,7 @@ unique_notes = {
         'of stars than other nearby bright open clusters holding around 1,000 stars. Under dark skies, the Beehive Cluster<br>' 
         'looks like a small nebulous object to the naked eye, and has been known since ancient times. Classical astronomer<br>' 
         'Ptolemy described it as a \"nebulous mass in the breast of Cancer\". It was among the first objects that Galileo<br>' 
-        'studied with his telescope.\" ',   
+        'studied with his telescope.',   
 
         'M45': '<br>M45, The Pleiades.',     
 
