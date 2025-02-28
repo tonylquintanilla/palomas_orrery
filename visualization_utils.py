@@ -31,17 +31,21 @@ def add_hover_toggle_buttons(fig):
                 method="update",
         #        args=[{"hovertemplate": None}]
                 args=[{"hovertemplate": "%{text}<extra></extra>"}]
+                # Enhanced hover template with semi-transparent background
+        #        args=[{"hovertemplate": "<div style='background-color:rgba(0,0,0,0); color:white; padding:10px; border-radius:5px;'>%{text}</div><extra></extra>"}]
             ),
             dict(
                 label="Object Names Only",
                 method="update",
                 args=[{"hovertemplate": '%{customdata}<extra></extra>'}]
+                # Enhanced hover template with semi-transparent background
+        #        args=[{"hovertemplate": "<div style='background-color:rgba(0,0,0,0); color:white; padding:5px; border-radius:5px;'>%{text}</div><extra></extra>"}]
             ),
         ],
-        font=dict(color='blue'),
-        bgcolor='rgba(255,255,255,0.50)',
+        font=dict(color='blue'),        # button parameters
+        bgcolor='rgba(255,255,255,0.70)',
         bordercolor='white',
-        borderwidth=1
+        borderwidth=1,
     )
     
     # Add hover buttons to updatemenus

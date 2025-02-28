@@ -5,6 +5,21 @@ import re
 from astroquery.simbad import Simbad
 import numpy as np
 
+
+def parse_magnitude(value):
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    value_str = str(value)
+    # remove anything like “ [~]” or “[some text]”
+    cleaned = re.sub(r"\[.*?\]", "", value_str).strip()
+    try:
+        return float(cleaned)
+    except ValueError:
+        return None
+
+
 def load_existing_properties(properties_file):
     """Load existing star and Messier object properties from a file."""
     if os.path.exists(properties_file):
@@ -125,6 +140,17 @@ def save_properties_to_file(properties, properties_file):
     with open(properties_file, 'wb') as f:
         pickle.dump(property_lists, f)
 
+def create_custom_simbad():
+    custom_simbad = Simbad()
+    # Reset to the standard defaults, which typically include 'MAIN_ID'
+    custom_simbad.reset_votable_fields()
+    custom_simbad.ROW_LIMIT = 1
+    custom_simbad.TIMEOUT = 300
+    
+    # Add the extra fields you need for your script
+    custom_simbad.add_votable_fields('ids', 'sp', 'flux(V)', 'flux(B)', 'otype')
+    return custom_simbad
+
 def query_simbad_for_star_properties(missing_ids, existing_properties, properties_file):
     """Query Simbad for missing star properties."""
     print(f"\nQuerying Simbad for {len(missing_ids)} missing star properties...")
@@ -133,10 +159,14 @@ def query_simbad_for_star_properties(missing_ids, existing_properties, propertie
         from messier_catalog import messier_catalog, star_cluster_catalog
         supplemental_data = {**messier_catalog, **star_cluster_catalog}
 
-        custom_simbad = Simbad()
-        custom_simbad.ROW_LIMIT = 1
-        custom_simbad.TIMEOUT = 300
-        custom_simbad.add_votable_fields('ids', 'sp', 'flux(V)', 'flux(B)', 'otype', 'dim', 'dist')
+    #    custom_simbad = Simbad()
+        custom_simbad = create_custom_simbad()  # use the helper above
+
+    #    custom_simbad.ROW_LIMIT = 1
+    #    custom_simbad.TIMEOUT = 300
+    #    custom_simbad.add_votable_fields('ids', 'sp', 'flux(V)', 'flux(B)', 'otype')   
+        # removed 'dim' because it was causing the Simbad fetch to fail on MAIN_ID 
+        # removed deprecated dist, distance is generated from parallax
 
         # Process in smaller batches to avoid timeouts
         batch_size = 50

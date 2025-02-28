@@ -882,10 +882,10 @@ plot_button_2d_mag = tk.Button(
 )
 plot_button_2d_mag.pack(pady=(0, 20))
 
-CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
+CreateToolTip(plot_button_2d_mag, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
 
 # Status frame remains at bottom of middle column
-status_frame = tk.LabelFrame(plot_controls_frame, text="Data Fetching Status")
+status_frame = tk.LabelFrame(plot_controls_frame, text="Output Errors")
 status_frame.pack(pady=(0, 10), fill='x')
 
 output_label = tk.Label(status_frame, text="", fg='red', wraplength=400)

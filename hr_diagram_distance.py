@@ -8,10 +8,9 @@ import sys
 import time
 import pandas as pd  # Add at top of file with other imports
 
-# Import modules - same structure as hr_diagram_apparent_magnitude.py
-from data_acquisition import (
-    initialize_vizier, load_or_fetch_hipparcos_data, load_or_fetch_gaia_data,
-    calculate_parallax_limit
+from data_acquisition_distance import (
+    initialize_vizier, fetch_hipparcos_data, fetch_gaia_data,
+    calculate_parallax_limit, process_hipparcos_data, process_gaia_data
 )
 from data_processing import (
     estimate_vmag_from_gaia, calculate_distances, calculate_cartesian_coordinates,
@@ -27,58 +26,8 @@ from visualization_core import analyze_magnitude_distribution, analyze_and_repor
 
 from visualization_2d import prepare_2d_data, create_hr_diagram
 
-def select_stars_by_distance(hip_data, gaia_data, max_light_years):
-    """
-    Select stars based on distance criteria.
-    Similar to select_stars_by_magnitude but using distance as the filter.
-    """
-    print("\nSelecting stars by distance...")
-    
-    all_selected_stars = []
-    hip_count = 0
-    gaia_count = 0
-    
-    # Process Hipparcos stars
-    if hip_data is not None:
-        distance_mask = hip_data['Distance_ly'] <= max_light_years
-        hip_stars = hip_data[distance_mask]
-        if len(hip_stars) > 0:
-            hip_stars['Source_Catalog'] = 'Hipparcos'
-            hip_stars['Apparent_Magnitude'] = hip_stars['Vmag']
-            hip_count = len(hip_stars)
-            print(f"Selected {hip_count} stars from Hipparcos within {max_light_years} light-years")
-            all_selected_stars.append(hip_stars)
-    
-    # Process Gaia stars
-    if gaia_data is not None:
-        distance_mask = gaia_data['Distance_ly'] <= max_light_years
-        gaia_stars = gaia_data[distance_mask]
-        if len(gaia_stars) > 0:
-            gaia_stars['Source_Catalog'] = 'Gaia'
-            gaia_stars['Apparent_Magnitude'] = gaia_stars['Estimated_Vmag']
-            gaia_count = len(gaia_stars)
-            print(f"Selected {gaia_count} stars from Gaia within {max_light_years} light-years")
-            all_selected_stars.append(gaia_stars)
-    
-    if not all_selected_stars:
-        print(f"No stars found within {max_light_years} light-years")
-        return None, {}
-    
-    # Combine selected stars
-    from astropy.table import vstack
-    combined_data = vstack(all_selected_stars)
-    
-    print("\nSelection Summary:")
-    print(f"Hipparcos stars: {hip_count}")
-    print(f"Gaia stars: {gaia_count}")
-    print(f"Total stars: {len(combined_data)}")
-    
-    counts = {
-        'hip_count': hip_count,
-        'gaia_count': gaia_count,
-    }
-    
-    return combined_data, counts
+# Uses the select_stars function from the catalog_selection module
+from catalog_selection import select_stars
 
 def main():
     # Parse command-line arguments for max light-years
@@ -105,14 +54,14 @@ def main():
         min_parallax_mas = calculate_parallax_limit(max_light_years)
         
         # Define data files
-        hip_data_file = f'hipparcos_data_distance.vot'
-        gaia_data_file = f'gaia_data_distance.vot'
+        hip_data_file = 'hipparcos_data_distance.vot'
+        gaia_data_file = 'gaia_data_distance.vot'
         
         # Load or fetch data with parallax constraint
-        hip_data = load_or_fetch_hipparcos_data(v, hip_data_file, 
-                                               parallax_constraint=f">={min_parallax_mas}")
-        gaia_data = load_or_fetch_gaia_data(v, gaia_data_file, 
-                                           parallax_constraint=f">={min_parallax_mas}")
+        parallax_constraint = f">={min_parallax_mas}"
+
+        hip_data = fetch_hipparcos_data(v, hip_data_file, min_parallax_mas)
+        gaia_data = fetch_gaia_data(v, gaia_data_file, min_parallax_mas)
 
         if hip_data is None and gaia_data is None:
             print("Error: Could not load or fetch data from either catalog.")
@@ -121,6 +70,7 @@ def main():
         print(f"Data acquisition completed in {time.time() - start_time:.2f} seconds.")
         
         # Step 2: Data Processing
+        process_start = time.time()
         hip_data = calculate_distances(hip_data) if hip_data is not None else None
         gaia_data = calculate_distances(gaia_data) if gaia_data is not None else None
 
@@ -131,20 +81,19 @@ def main():
             gaia_data['Estimated_Vmag'] = estimate_vmag_from_gaia(gaia_data)
 
         # Select stars and combine data
-        combined_data, counts = select_stars_by_distance(hip_data, gaia_data, max_light_years)
+        combined_data, counts = select_stars(hip_data, gaia_data, mode='distance', limit_value=max_light_years)
         if combined_data is None:
             print("No valid stars found to process. Exiting.")
             return
             
         combined_data = calculate_cartesian_coordinates(combined_data)
-
-#        print(f"Data processing completed in {time.time() - process_start:.2f} seconds.")
+        print(f"Data processing completed in {time.time() - process_start:.2f} seconds.")
 
         # Step 3: Star Properties
         print("Retrieving star properties...")
         properties_start = time.time()
         
-        properties_file = f'star_properties_distance.pkl'
+        properties_file = 'star_properties_distance.pkl'
         existing_properties = load_existing_properties(properties_file)
         unique_ids = generate_unique_ids(combined_data)
         
@@ -161,9 +110,7 @@ def main():
         print("Calculating stellar parameters...")
         params_start = time.time()
         
-    #    combined_data, source_counts = calculate_stellar_parameters(combined_data)
         combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
-
         print(f"Parameter calculations completed in {time.time() - params_start:.2f} seconds.")
 
         # Step 5: Analysis and Visualization
@@ -207,6 +154,21 @@ def main():
 
         # Calculate final counts for visualization
         final_counts = {
+            'hip_bright_count': counts.get('hip_bright_count', 0),
+            'hip_mid_count': counts.get('hip_mid_count', 0),
+            'gaia_mid_count': counts.get('gaia_mid_count', 0),
+            'gaia_faint_count': counts.get('gaia_faint_count', 0),
+            'total_stars': counts.get('total_stars', len(combined_df)),
+            'plottable_count': plottable_count,
+            'missing_temp_only': estimation_results.get('final_missing_temp', 0),
+            'missing_lum_only': estimation_results.get('final_missing_lum', 0),
+            'estimation_results': estimation_results,
+            'source_counts': source_counts
+        }
+
+        '''
+        # Calculate final counts for visualization
+        final_counts = {
             'hip_bright_count': len(combined_df[
                 (combined_df['Source_Catalog'] == 'Hipparcos') & 
                 (combined_df['Apparent_Magnitude'] <= 1.73)
@@ -233,14 +195,14 @@ def main():
                 ])
             ),
 
-    #        'total_stars': len(combined_df),
+            'total_stars': len(combined_df),
             'plottable_count': plottable_count,
             'missing_temp_only': estimation_results['final_missing_temp'],
             'missing_lum_only': estimation_results['final_missing_lum'],
             'estimation_results': estimation_results,
             'source_counts': source_counts
-
         }
+        '''
 
         # Create visualization
         create_hr_diagram(
