@@ -366,7 +366,7 @@ planetary_params = {
     'Io': {
 #        'a': 421800,         # semi-major axis in km
         'a': 0.002819,         # semi-major axis in AU
-#        'a_parent': 5.90,      # semi-major axis in Jupiter radii
+    #    'a_parent': 5.90,      # semi-major axis in Jupiter radii
         'e': 0.0041,           # eccentricity
         'i': 0.05,             # inclination to Jupiter's equator in degrees
         'omega': 49.1,       # argument of perihelion in degrees
@@ -376,7 +376,7 @@ planetary_params = {
     'Europa': {
 #        'a': 671100,         # semi-major axis in km
         'a': 0.004486,         # semi-major axis in AU
-#        'a_parent': 9.40,      # semi-major axis in Jupiter radii
+    #    'a_parent': 9.40,      # semi-major axis in Jupiter radii
         'e': 0.0094,           # eccentricity
         'i': 0.471,            # inclination to Jupiter's equator in degrees
         'omega': 45.0,       # argument of perihelion in degrees
@@ -386,7 +386,7 @@ planetary_params = {
     'Ganymede': {
 #        'a': 1070400,         # semi-major axis in km
         'a': 0.007155,         # semi-major axis in AU
-#        'a_parent': 14.99,     # semi-major axis in Jupiter radii
+    #    'a_parent': 14.99,     # semi-major axis in Jupiter radii
         'e': 0.0013,           # eccentricity
         'i': 0.204,            # inclination to Jupiter's equator in degrees
         'omega': 198.3,      # argument of perihelion in degrees
@@ -396,7 +396,7 @@ planetary_params = {
     'Callisto': {
 #        'a': 1882700,         # semi-major axis in km
         'a': 0.012585,         # semi-major axis in AU
-#        'a_parent': 26.37,     # semi-major axis in Jupiter radii
+    #    'a_parent': 26.37,     # semi-major axis in Jupiter radii
         'e': 0.0074,           # eccentricity
         'i': 0.205,            # inclination to Jupiter's equator in degrees
         'omega': 43.8,       # argument of perihelion in degrees
@@ -580,7 +580,6 @@ planetary_params = {
 
 }  
 
-"""
 parent_planets = {
     'Earth': ['Moon'],
     'Mars': ['Phobos', 'Deimos'],
@@ -591,8 +590,8 @@ parent_planets = {
     'Pluto': ['Charon', 'Nix', 'Hydra'],
     'Eris': ['Dysnomia']
 }
-"""
 
+"""
 parent_planets = {
     'Moon': 'Earth',
     'Phobos': 'Mars',
@@ -619,7 +618,8 @@ parent_planets = {
     'Nix': 'Pluto',
     'Hydra': 'Pluto',
     'Dysnomia': 'Eris'
-}
+}"
+"""
 
 planet_tilts = {
     'Mars': 25.19,
@@ -1042,9 +1042,9 @@ def color_map(planet):
         'SolO': 'red',
         'Akatsuki': 'cyan',
         'Oumuamua': 'gold',
-        '2024 PT5': 'cyan',
-        '2024 YR4': 'green',
         '2024 DW': 'gold',
+        '2024 PT5': 'red',
+        '2024 YR4': 'green',
         'Apophis': 'red',
         'Vesta': 'cyan',
         'Bennu': 'white',
@@ -1104,7 +1104,8 @@ INFO = {
         'dubbed Earth\'s "second moon". The object\'s official designation is 2024 PT5, but it was also referred to as a ' 
         '"mini-moon" due to its small size. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
         'small compared to our permanent Moon.\n* Origin: It belongs to the Arjuna asteroid belt, a group of asteroids that ' 
-        'share similar orbits with Earth.\n* Temporary Capture: 2024 PT5 was only temporarily captured by Earth\'s gravity. ' 
+        'share similar orbits with Earth.\n* Closest approach August 9, 2024. \n* Temporary Capture: 2024 PT5 was only temporarily ' 
+        'captured by Earth\'s gravity. ' 
         'It entered our orbit on September 29, 2024, and is expected to depart on November 25, 2024.\n* Visibility: Due to its ' 
         'small size, it\'s not visible to the naked eye and requires powerful telescopes to be observed.\n* While 2024 PT5 is ' 
         'not a permanent addition to our celestial neighborhood, its temporary presence provided scientists with a valuable ' 
@@ -1314,12 +1315,14 @@ INFO = {
         '* Key dates:\n' 
         '  * Juno launched on August 5, 2011.\n' 
         '  * Earth Flyby (Gravity Assist) on October 9, 2013\n' 
-        '  * Jupiter Arrival and Orbit Insertion on July 4, 2016\n'
+        '  * Jupiter Arrival and Orbit Insertion on July 5, 2016\n'
         '  * Extended Mission Start on August 1, 2021\n' 
         '  * First Ganymede Flyby on June 7, 2021\n'
         '  * First Europa Flyby on September 29, 2022\n' 
         '  * First Io Flyby on December 30, 2023\n'
-        '  * End of Mission on September 2025 or end of spacecraft life\n'
+        '  * Second Io Flyby on February 3, 2024\n'
+        '  * End of recorded orbit on February 15, 2025\n'
+        '  * End of Mission on September 2025 by Jupiter impact\n'
         '* Juno is the first spacecraft to orbit Jupiter from pole to pole, giving it a unique perspective on the planet\'s polar regions.\n' 
         '* Juno is also the first spacecraft to operate on solar power at such a great distance from the Sun.\n' 
         '* Juno has made several significant discoveries, including:\n' 

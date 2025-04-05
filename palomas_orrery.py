@@ -3,6 +3,8 @@
 # Import necessary libraries
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
+from tkinter import scrolledtext
 from astroquery.jplhorizons import Horizons
 import numpy as np
 from datetime import datetime, timedelta
@@ -14,20 +16,20 @@ import warnings
 from astropy.utils.exceptions import ErfaWarning
 from astropy.time import Time
 import traceback
-from tkinter import scrolledtext
 import threading
 import time  # Used here for simulation purposes
 import subprocess
 import sys
 import math
+import json
 
-from constants import (
+from constants_new import (
     planetary_params,
     parent_planets,
     color_map,
     note_text,
     INFO,
-    hover_text_sun_and_corona,
+    hover_text_sun,
     gravitational_influence_info,
     outer_oort_info,
     inner_oort_info,
@@ -40,9 +42,22 @@ from constants import (
     photosphere_info,
     radiative_zone_info,
     core_info,
+    gravitational_influence_info_hover,
+    outer_oort_info_hover,
+    inner_oort_info_hover,
+    inner_limit_oort_info_hover,
+    solar_wind_info_hover,
+    termination_shock_info_hover,
+    outer_corona_info_hover,
+    inner_corona_info_hover,
+    chromosphere_info_hover,
+    photosphere_info_hover,
+    radiative_zone_info_hover,
+    core_info_hover,
     CENTER_BODY_RADII,
     KM_PER_AU, 
-    LIGHT_MINUTES_PER_AU
+    LIGHT_MINUTES_PER_AU,
+    KNOWN_ORBITAL_PERIODS
 )
 
 from visualization_utils import format_hover_text, add_hover_toggle_buttons
@@ -56,20 +71,1052 @@ import sys, os          # troubleshooting VS
 print("Interpreter:", sys.executable)
 print("Working directory:", os.getcwd())
 
+# File to persist orbit path data between sessions
+ORBIT_PATHS_FILE = "orbit_paths.json"
+
 # Create a global shutdown handler instance
 shutdown_handler = PlotlyShutdownHandler()
 
-
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: February 9, 2025")
+root.title("Paloma's Orrery -- Updated: March 22, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
-# root.configure(bg="lightblue")  # Set the background color of the root window
+# Add this line:
+STATIC_TODAY = today  # Static reference date for orbit calculations
 
-# Define a standard font and button width
+# Define controls_frame
+# controls_frame = tk.Frame(root)
+# controls_frame.grid(row=0, column=1, padx=(5, 10), pady=(10, 10), sticky='n')
+
+# Modify the controls_frame to be scrollable
+# Replace the existing controls_frame definition with this code
+
+# First, create a container frame for the controls column
+controls_container = tk.Frame(root)
+controls_container.grid(row=0, column=1, padx=(5, 10), pady=(10, 10), sticky='n')
+
+# Add these lines after creating controls_container
+controls_container.grid_propagate(False)
+
+# Remove this line:
+# controls_container.config(width=320, height=710)
+
+# And add this to make it expand properly:
+controls_container.pack_propagate(False)
+controls_container.grid_propagate(False)
+controls_container.config(width=450, height=750)  # Wider container
+
+# Create a canvas inside the container
+controls_canvas = tk.Canvas(controls_container, bg='SystemButtonFace')
+# controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview)
+# style = ttk.Style()
+# style.configure("Thick.TScrollbar", arrowsize=20)  # Increase arrow size
+# controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, style="Thick.TScrollbar")
+controls_scrollbar = tk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, width=16)
+
+# Configure the canvas
+controls_canvas.configure(yscrollcommand=controls_scrollbar.set)
+controls_canvas.pack(side="left", fill="both", expand=True)
+controls_scrollbar.pack(side="right", fill="y")
+
+# Create the frame that will contain all the controls
+controls_frame = tk.Frame(controls_canvas, bg='SystemButtonFace')
+
+# Add these lines after controls_frame is created
+# controls_container.configure(borderwidth=2, relief="solid")
+# controls_frame.configure(borderwidth=2, relief="solid")
+
+# Add these lines after controls_frame is created
+controls_container.configure(bg='SystemButtonFace')
+controls_canvas.configure(bg='SystemButtonFace')
+controls_frame.configure(bg='SystemButtonFace')
+
+# Create a window in the canvas that contains the controls_frame
+# controls_window = controls_canvas.create_window((0, 0), window=controls_frame, anchor="nw")
+
+# Update the canvas window creation with explicit width
+controls_window = controls_canvas.create_window(
+    (0, 0),  # Position at top-left corner
+    window=controls_frame,
+    anchor="nw",
+    width=controls_canvas.winfo_width(),  # Match canvas width
+    tags="controls"  # Add a tag for easier reference
+)
+
+# Configure the canvas to resize with the frame
+# def configure_controls_canvas(event):
+    # Update the scrollregion to encompass the inner frame
+#    controls_canvas.configure(scrollregion=controls_canvas.bbox("all"))
+    
+    # Set the canvas width to match the frame width
+#    canvas_width = event.width
+#    controls_canvas.itemconfig(controls_window, width=canvas_width)
+
+def configure_controls_canvas(event):
+    # Update the scrollregion to encompass the inner frame
+    controls_canvas.configure(scrollregion=controls_canvas.bbox("all"))
+    
+    # Set the canvas window width to match the canvas width
+    controls_canvas.itemconfig(controls_window, width=controls_canvas.winfo_width())
+    
+    # Force a redraw of the canvas
+    controls_canvas.update_idletasks()
+
+controls_frame.bind("<Configure>", configure_controls_canvas)
+
+# Bind mousewheel scrolling
+def _on_mousewheel(event):
+    controls_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+controls_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
+# Unbind the mousewheel when mouse leaves the canvas
+def _unbound_mousewheel(event):
+    controls_canvas.unbind_all("<MouseWheel>")
+
+def _bound_mousewheel(event):
+    controls_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
+controls_canvas.bind("<Enter>", _bound_mousewheel)
+controls_canvas.bind("<Leave>", _unbound_mousewheel)
+
+# Set the canvas size to match available space
+controls_canvas.config(width=580, height=710)  # Adjust these values as needed
+
+# Near the top of your code, after the root is initialized:
+status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg='SystemButtonFace', fg='black')
+# Don't pack it here
+
+# OR alternatively, update the original status_label's text and have the display just show it:
+def update_status(text):
+    status_display.config(text=text)
+    status_display.config(text=text)
+
+def load_orbit_paths():
+    """Load orbit paths from file with backwards compatibility."""
+    try:
+        with open(ORBIT_PATHS_FILE, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def save_orbit_paths(orbit_paths):
+    with open(ORBIT_PATHS_FILE, "w") as f:
+        json.dump(orbit_paths, f)
+
+# Load the stored orbit paths at startup
+orbit_paths_over_time = load_orbit_paths()
+
+# Define selection variables for each object
+# Set inner planets selected by default
+sun_var = tk.IntVar(value=0)  
+sun_shells_var = tk.IntVar(value=0)  
+sun_core_var = tk.IntVar(value=0)
+sun_radiative_var = tk.IntVar(value=0)
+sun_photosphere_var = tk.IntVar(value=0)
+sun_chromosphere_var = tk.IntVar(value=0)
+sun_inner_corona_var = tk.IntVar(value=0)
+sun_outer_corona_var = tk.IntVar(value=0)
+sun_termination_shock_var = tk.IntVar(value=0)
+sun_heliopause_var = tk.IntVar(value=0)
+sun_inner_oort_limit_var = tk.IntVar(value=0)
+sun_inner_oort_var = tk.IntVar(value=0)
+sun_outer_oort_var = tk.IntVar(value=0)
+sun_gravitational_var = tk.IntVar(value=0)
+mercury_var = tk.IntVar(value=1) # default
+venus_var = tk.IntVar(value=1) # default
+earth_var = tk.IntVar(value=1)  # Set Earth to 1 to preselect it by default
+moon_var = tk.IntVar(value=0)  
+pt5_var = tk.IntVar(value=0)
+yr4_var = tk.IntVar(value=0)
+asteroid_dw_var = tk.IntVar(value=0)
+mars_var = tk.IntVar(value=1) # default
+ceres_var = tk.IntVar(value=0)
+jupiter_var = tk.IntVar(value=0)
+saturn_var = tk.IntVar(value=0)
+uranus_var = tk.IntVar(value=0)
+neptune_var = tk.IntVar(value=0)
+pluto_var = tk.IntVar(value=0)
+planet9_var = tk.IntVar(value=0)  # hypothetical
+haumea_var = tk.IntVar(value=0)
+makemake_var = tk.IntVar(value=0)
+eris_var = tk.IntVar(value=0)
+eris2_var = tk.IntVar(value=0)
+voyager1_var = tk.IntVar(value=0)
+voyager1h_var = tk.IntVar(value=0)
+voyager2_var = tk.IntVar(value=0)
+cassini_var = tk.IntVar(value=0)
+new_horizons_var = tk.IntVar(value=0)
+juno_var = tk.IntVar(value=0)
+galileo_var = tk.IntVar(value=0)
+pioneer10_var = tk.IntVar(value=0)
+pioneer11_var = tk.IntVar(value=0)
+europa_clipper_var = tk.IntVar(value=0)
+osiris_rex_var = tk.IntVar(value=0)
+osiris_apex_var = tk.IntVar(value=0)
+parker_solar_probe_var = tk.IntVar(value=0)
+jwst_var = tk.IntVar(value=0)
+rosetta_var = tk.IntVar(value=0)
+bepicolombo_var = tk.IntVar(value=0)
+solarorbiter_var = tk.IntVar(value=0)
+akatsuki_var = tk.IntVar(value=0)
+comet_ikeya_seki_var = tk.IntVar(value=0)
+comet_west_var = tk.IntVar(value=0)
+comet_halley_var = tk.IntVar(value=0)
+comet_hyakutake_var = tk.IntVar(value=0)
+comet_hale_bopp_var = tk.IntVar(value=0)
+comet_mcnaught_var = tk.IntVar(value=0)
+comet_neowise_var = tk.IntVar(value=0)
+comet_tsuchinshan_atlas_var = tk.IntVar(value=0)
+comet_Churyumov_Gerasimenko_var = tk.IntVar(value=0)
+comet_borisov_var = tk.IntVar(value=0)
+comet_atlas_var = tk.IntVar(value=0)
+oumuamua_var = tk.IntVar(value=0)
+apophis_var = tk.IntVar(value=0)
+vesta_var = tk.IntVar(value=0)
+bennu_var = tk.IntVar(value=0)  
+bennu2_var = tk.IntVar(value=0)  # Bennu as a center body
+steins_var = tk.IntVar(value=0) 
+lutetia_var = tk.IntVar(value=0) 
+soho_var = tk.IntVar(value=0)
+ryugu_var = tk.IntVar(value=0)
+eros_var = tk.IntVar(value=0)
+itokawa_var = tk.IntVar(value=0)
+change_var = tk.IntVar(value=0)
+perse_var = tk.IntVar(value=0)
+dart_var = tk.IntVar(value=0)
+lucy_var = tk.IntVar(value=0)
+nix_var = tk.IntVar(value=0)
+kbo_var = tk.IntVar(value=0)
+gaia_var = tk.IntVar(value=0)
+hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
+hydra_var = tk.IntVar(value=0)  # 0 means unselected by default
+# Define IntVar variables for Kuiper Belt Objects
+quaoar_var = tk.IntVar(value=0)
+sedna_var = tk.IntVar(value=0)
+orcus_var = tk.IntVar(value=0)    # 0 means unselected by default
+varuna_var = tk.IntVar(value=0)
+gv9_var = tk.IntVar(value=0)
+ms4_var = tk.IntVar(value=0)
+dw_var = tk.IntVar(value=0)
+gonggong_var = tk.IntVar(value=0)
+arrokoth_var = tk.IntVar(value=0)
+arrokoth_new_horizons_var = tk.IntVar(value=0)
+ixion_var = tk.IntVar(value=0)
+
+# New Selection Variables for Major Moons
+
+# Mars' Moons
+phobos_var = tk.IntVar(value=0)
+deimos_var = tk.IntVar(value=0)
+
+# Jupiter's Galilean Moons
+io_var = tk.IntVar(value=0)
+europa_var = tk.IntVar(value=0)
+ganymede_var = tk.IntVar(value=0)
+callisto_var = tk.IntVar(value=0)
+
+# Saturn's Major Moons
+titan_var = tk.IntVar(value=0)
+enceladus_var = tk.IntVar(value=0)
+rhea_var = tk.IntVar(value=0)
+dione_var = tk.IntVar(value=0)
+tethys_var = tk.IntVar(value=0)
+mimas_var = tk.IntVar(value=0)
+phoebe_var = tk.IntVar(value=0)
+
+# Uranus's Major Moons
+oberon_var = tk.IntVar(value=0)
+umbriel_var = tk.IntVar(value=0)
+ariel_var = tk.IntVar(value=0)
+miranda_var = tk.IntVar(value=0)
+titania_var = tk.IntVar(value=0)
+
+# Neptune's Major Moon
+triton_var = tk.IntVar(value=0)
+
+# Pluto's Moon
+charon_var = tk.IntVar(value=0)
+
+# Eris's Moon
+dysnomia_var = tk.IntVar(value=0)
+
+# Define the list of objects
+objects = [
+    # Existing Celestial Objects
+    {'name': 'Sun', 'id': '10', 'var': sun_var, 'color': color_map('Sun'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit. "', 
+    'mission_url': 'https://science.nasa.gov/sun/'},
+
+    {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
+    'mission_url': 'https://science.nasa.gov/mercury/'},
+
+    {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
+    'mission_url': 'https://science.nasa.gov/venus/'},
+
+    {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'Earth orbital period: 27.32 days.', 
+     'mission_url': 'https://science.nasa.gov/earth/', 'mission_info': 'Our home planet.'},
+
+    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Earth orbital period: 27.32 days.', 
+     'mission_url': 'https://science.nasa.gov/moon/', 'mission_info': 'NASA: "The Moon rotates exactly once each time it orbits our planet."'},
+
+    {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Mars is one of the easiest planets to spot in the night sky — it looks like a bright red point of light."', 
+    'mission_url': 'https://science.nasa.gov/?search=mars'},
+
+    {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Jupiter is the largest and oldest planet in our solar system."', 
+    'mission_url': 'https://science.nasa.gov/?search=Jupiter'},
+
+    {'name': 'Saturn', 'id': '699', 'var': saturn_var, 'color': color_map('Saturn'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
+    'mission_url': 'https://science.nasa.gov/saturn/'},
+
+    {'name': 'Uranus', 'id': '799', 'var': uranus_var, 'color': color_map('Uranus'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
+    'mission_url': 'https://science.nasa.gov/uranus/'},
+
+    {'name': 'Neptune', 'id': '899', 'var': neptune_var, 'color': color_map('Neptune'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
+    'mission_url': 'https://science.nasa.gov/neptune/'},
+
+    {'name': 'Planet 9', 'id': 'planet9_placeholder', 'var': planet9_var, 'color': color_map('Planet 9'), 
+    'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'Hypothetical planet with estimated mass of 5-10 Earths at ~400-800 AU. Not yet directly observed.',
+    'mission_url': 'https://en.wikipedia.org/wiki/Planet_Nine'},
+
+# Dwarf planets
+
+    {'name': 'Pluto', 'id': '999', 'var': pluto_var, 'color': color_map('Pluto'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': None, 
+    'mission_info': 'NASA: "Pluto is a dwarf planet located in a distant region of our solar system beyond Neptune known as the Kuiper Belt."', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
+
+    {'name': 'Ceres', 'id': 'ceres', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture."', 
+    'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
+
+    {'name': 'Haumea', 'id': '136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
+
+    {'name': 'Eris', 'id': '136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 
+    # 136199 primary (required for Sun centered plots)
+    'id_type': 'smallbody', 
+    'mission_info': 'Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
+
+    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var': eris2_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 
+    # 20136199 satellite solution (required for Eris centered plots) 
+    'id_type': 'smallbody', 
+    'mission_info': 'Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
+
+    {'name': 'Gonggong', 'id': '2007 OR10', 'var': gonggong_var, 'color': color_map('Gonggong'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Dwarf planet in the Kuiper Belt with a highly inclined orbit.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)'},
+
+    {'name': 'Makemake', 'id': '136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
+
+    {'name': 'MS4', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
+    'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
+
+    {'name': 'Orcus', 'id': '90482', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A dwarf planet in the Kuiper Belt with a moon named Vanth.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
+
+    {'name': 'Quaoar', 'id': '50000', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A large Kuiper Belt object with a ring system.', 
+    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
+
+    {'name': 'Sedna', 'id': '90377', 'var': sedna_var, 'color': color_map('Sedna'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
+    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
+
+    # Asteroids
+    {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'is_mission': False,
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
+    'mission_info': 'Closest approach to Earth 8-9-2024.',
+    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
+
+    {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'is_mission': False,
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 12, 24), 'end_date': datetime(2032, 12, 31), 
+    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
+
+    {'name': '2024 DW', 'id': '2024 DW', 'var': asteroid_dw_var, 'color': color_map('2024 DW'), 'symbol': 'circle-open', 'is_mission': False,
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 2, 19), 'end_date': datetime(2032, 12, 31), 
+    'mission_info': 'Closest approach to Earth 2-22-2024 approximately 5 UTC.',
+    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20DW'},
+
+    {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_mission': False,
+    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
+    'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 
+    'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
+
+    {'name': 'Bennu', 'id': '101955', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
+
+    {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', # Bennu as a center object
+    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
+
+    {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
+
+    {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/25143_Itokawa'},
+
+    {'name': 'Lutetia', 'id': '21', 'var': lutetia_var, 'color': color_map('Lutetia'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Studied by European Space Agency\'s Rosetta mission.', 
+    'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
+
+    {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
+
+    {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'is_mission': False, 
+     'is_comet': False, 'id_type': 'smallbody',
+     'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 
+     'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
+
+    {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
+    'mission_url': 'https://dawn.jpl.nasa.gov/'},
+
+    # Kuiper Belt Objects
+
+    {'name': 'Arrokoth', 'id': '486958', 'var': arrokoth_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Arrokoth (2014 MU69) flyby from New Horizons on January 1, 2019.', 
+    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
+
+    {'name': 'Arrokoth/New_Horizons', 'id': '2486958', 'var': arrokoth_new_horizons_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'Arrokoth (2014 MU69) flyby from New Horizons on January 1, 2019.', 
+    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
+
+    {'name': 'Ixion', 'id': '2001 KX76', 'var': ixion_var, 'color': color_map('Ixion'), 'symbol': 'circle-open', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A large Kuiper Belt object without a known moon.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/28978_Ixion'},
+
+    {'name': 'GV9', 'id': '2004 GV9', 'var': gv9_var, 'color': color_map('GV9'), 'symbol': 'circle-open', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/(90568)_2004_GV9'},
+
+    {'name': 'Varuna', 'id': '20000', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle-open', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A significant Kuiper Belt Object with a rapid rotation period.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/20000_Varuna'},
+
+    # Comets
+
+    {'name': 'ATLAS', 'id': 'DES=C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2024, 6, 18), 'end_date': datetime(2029, 12, 31), 
+    'mission_info': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
+
+    {'name': 'Churyumov', 'id': '90000702', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 90000703
+    'symbol': 'diamond', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2029, 12, 31), 
+    # datetime(1962, 1, 20), 'end_date': datetime(2030, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
+    'mission_info': '67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
+
+    {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 7, 24), 'end_date': datetime(2001, 12, 31), 
+    'mission_info': 'Visible to the naked eye for a record 18 months.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
+
+    {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 22), 'end_date': datetime(2061, 7, 28), 
+    # initial start date 1982-11-26. Horizons has 1962-01-20
+    'mission_info': 'Most famous comet, returned in 1986 and will return in 2061.', 
+    'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/halley-1986'},
+
+    {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 12, 2), 'end_date': datetime(1996, 6, 1), 
+    'mission_info': 'Passed very close to Earth in 1996.', 
+    'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
+
+    {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
+    'mission_info': 'One of the brightest comets of the 20th century.', 
+    'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/ikeya-seki-1965'},
+
+    {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2008, 6, 1), 
+    'mission_info': 'Known as the Great Comet of 2007.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/'}, 
+
+    {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
+    'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades.', 
+    'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
+
+    {'name': 'Tsuchinshan', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
+    'symbol': 'diamond', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 10), 
+    'end_date': datetime(2030, 12, 31), 
+    'mission_info': 'Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/C/2023_A3_(Tsuchinshan-ATLAS)'},
+
+    {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
+    'mission_info': 'Notable for its bright and impressive tail.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
+
+    {'name': 'Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('Borisov'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2019, 8, 31), 'end_date': datetime(2020, 10, 1), 
+    'mission_info': 'The second interstellar object detected, after \'Oumuamua.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
+
+    {'name': 'Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('Oumuamua'), 'symbol': 'diamond', 
+    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1), 
+    'mission_info': 'First known interstellar object detected passing through the Solar System.', 
+    'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
+
+    # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
+
+    {'name': 'Pioneer10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer10'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 
+    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
+    'mission_info': 'First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
+
+    {'name': 'Pioneer11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer11'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1973, 4, 7), 'end_date': datetime(1995, 9, 30, 11, 0), 
+    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
+    'mission_info': 'First spacecraft to encounter Saturn and study its rings.'},
+
+    {'name': 'Voyager 1', 'id': '-31', 'var': voyager1_var, 'color': color_map('Voyager 1'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 9, 6), 'end_date': datetime(2029, 12, 31), 
+    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
+    'mission_info': 'Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
+
+    {'name': 'Voyager 2', 'id': '-32', 'var': voyager2_var, 'color': color_map('Voyager 2'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 8, 21), 'end_date': datetime(2029, 12, 31), 
+    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
+    'mission_info': 'Launched in 1977, Voyager 2 explored all four giant planets.'},
+
+    {'name': 'Galileo', 'id': '-77', 'var': galileo_var, 'color': color_map('Galileo'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(1989, 10, 19), 'end_date': datetime(2003, 9, 30), # no ephemeris after this date
+    'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 
+    'mission_info': 'Galileo studied Jupiter and its moons from 1995 to 2003.'},
+
+    {'name': 'SOHO', 'id': '488', 'var': soho_var, 'color': color_map('SOHO'), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(1995, 12, 3), 'end_date': datetime(2029, 12, 31), 
+    'mission_info': 'The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
+    'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
+
+    {'name': 'Cassini', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini-Huygens'), 'symbol': 'diamond-open', 
+     'is_mission': True, 'id_type': 'id', 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 15), 
+     'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 
+     'mission_info': 'Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
+
+    {'name': 'Rosetta', 'id': '-226', 'var': rosetta_var, 'color': color_map('Rosetta'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 5), 
+    'mission_url': 'https://rosetta.esa.int/', 
+    'mission_info': 'European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
+
+    {'name': 'New Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('Horizons'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
+    'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
+    'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
+
+    {'name': 'Chang\'e', 'id': 'Chang\'e', 'var': change_var, 'color': color_map('Chang\'e'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2007, 10, 25), 'end_date': datetime(2029, 12, 31), 
+    'mission_info': 'China\'s lunar exploration program.', 
+    'mission_url': 'http://www.clep.org.cn/'},
+
+    {'name': 'Akatsuki', 'id': 'Akatsuki', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2010, 5, 21), 'end_date': datetime(2025, 3, 2), # end ephemeris
+    'mission_info': 'JAXA mission to study the atmospheric circulation of Venus', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
+
+    {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2025, 5, 10), 
+    'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 
+    'mission_info': 'Juno studies Jupiter\'s atmosphere and magnetosphere.'},
+
+    {'name': 'Gaia', 'id': 'Gaia', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2013, 12, 20), 'end_date': datetime(2025, 7, 1),    # end ephemeris 
+    'mission_info': 'European Space Agency mission at L2 mapping the Milky Way.', 
+    'mission_url': 'https://www.cosmos.esa.int/web/gaia'},
+
+    {'name': 'Hayabusa2', 'id': 'Hayabusa2', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2014, 12, 4), 'end_date': datetime(2020, 12, 5), 
+    'mission_info': 'JAXA mission that returned samples from Ryugu.', 
+    'mission_url': 'https://hayabusa2.jaxa.jp/en/'},
+
+    {'name': 'OSIRISREx', 'id': '-64', 'var': osiris_rex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2016, 9, 10), 'end_date': datetime(2023, 9, 24), 
+    'mission_url': 'https://science.nasa.gov/mission/osiris-rex/', 
+    'mission_info': 'OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
+
+    {'name': 'OSIRISAPE', 'id': '-64', 'var': osiris_apex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2029, 12, 31), 
+    'mission_url': 'https://science.nasa.gov/category/missions/osiris-apex/', 
+    'mission_info': 'OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
+
+    {'name': 'Parker', 'id': '-96', 'var': parker_solar_probe_var, 'color': color_map('Parker Solar Probe'), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 12, 31), 
+    'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
+    'mission_info': 'The Parker Solar Probe mission is to study the outer corona of the Sun.'},
+
+    {'name': 'MarsRover', 'id': 'Perseverance', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2026, 2, 19),    # end ephemeris
+    'mission_info': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter.', 
+    'mission_url': 'https://mars.nasa.gov/mars2020/'},
+
+    {'name': 'Lucy', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 1), 
+    'mission_info': 'Exploring Trojan asteroids around Jupiter.', 
+    'mission_url': 'https://www.nasa.gov/lucy'},
+
+    {'name': 'DART', 'id': '-135', 'var': dart_var, 'color': color_map('DART'), 'symbol': 'diamond-open', 'is_mission': True, 
+    'id_type': 'id', 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 25), 
+    'mission_info': 'NASA\'s mission to test asteroid deflection.', 
+    'mission_url': 'https://www.nasa.gov/dart'},
+
+    {'name': 'JamesWebb', 'id': '-170', 'var': jwst_var, 'color': color_map('JamesWebb'), 
+    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2021, 12, 26), 'end_date': datetime(2029, 12, 31), 
+    'mission_url': 'https://science.nasa.gov/mission/webb/', 
+    'mission_info': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
+
+    {'name': 'Clipper', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Clipper'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2030, 4, 1), 
+    'mission_url': 'https://europa.nasa.gov/', 
+    'mission_info': 'Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
+
+    {'name': 'Bepi', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('Bepi'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 10, 20), 'end_date': datetime(2029, 12, 31), 
+    'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
+
+    {'name': 'SolO', 'id': '-144', 'var': solarorbiter_var, 'color': color_map('SolO'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20), 
+    'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 'mission_info': 'Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
+        
+    # --- Adding New Moons ---
+
+    # Mars' Moons
+    {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Mars orbital period: 0.32 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/resource/martian-moon-phobos/'},
+
+    {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Mars orbital period: 1.26 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
+
+    # Jupiter's Galilean Moons
+    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, # instead of 501 use 59901?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 1.77 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/io/'},
+
+    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False,  # instead of id 502 use 59902?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 3.55 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/europa/'},
+
+    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, # instead of 503 use 59903?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 7.15 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/ganymede/'},
+
+    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, # instead of 504 use 59904?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 16.69 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
+
+    # Saturn's Major Moons
+
+    {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 0.94 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/mimas/'},
+
+    {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 1.37 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/enceladus/'},
+
+    {'name': 'Tethys', 'id': '605', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 1.89 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/tethys/'},
+
+    {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 2.74 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/dione/'},
+
+    {'name': 'Rhea', 'id': '603', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 4.52 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/rhea/'},
+
+    {'name': 'Titan', 'id': '601', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 15.95 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/titan/'},
+
+    {'name': 'Phoebe', 'id': '607', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 550.56 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/phoebe/'},
+
+    # Uranus's Major Moons
+
+    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 1.41 Earth days.',
+     'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},
+
+    {'name': 'Ariel', 'id': '704', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 2.52 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/ariel/'},
+
+    {'name': 'Umbriel', 'id': '703', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 4.14 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/umbriel/'},
+
+    {'name': 'Titania', 'id': '706', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 8.71 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/titania/'},
+
+    {'name': 'Oberon', 'id': '701', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 13.46 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/uranus/moons/oberon/'},
+
+    # Neptune's Major Moon
+    {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Neptune orbital period: 5.88 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/neptune/moons/triton/'},
+
+    # Pluto's Moon
+    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Pluto orbital period: 6.39 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/charon/'},
+
+    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Pluto orbital period: 24.86 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/nix/'},
+
+    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Pluto orbital period: 38.20 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/'},
+
+    # Eris's Moon
+    {'name': 'Dysnomia', 'id': '120136199', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Eris orbital period: 15.79 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
+
+]
+
+# Ask the user whether to refresh all stored orbit paths (warn about delay)
+refresh_all = messagebox.askyesno(
+    "Refresh Orbit Data",
+    "Would you like to refresh all stored orbit paths from JPL Horizons?\n\n"
+    "This may take several minutes. Choose 'No' to only fetch missing data."
+)
+
+# CONSTANTS
 BUTTON_FONT = ("Arial", 10, "normal")  # You can adjust the font as needed
 BUTTON_WIDTH = 17  # Number of characters wide
+# COMET_INTERVAL_DIVISOR = 100
+# MISSION_INTERVAL_DIVISOR = 75
+# PLANET_INTERVAL_DIVISOR = 50
+# SAT_PLOT_ORBIT_DAYS = 56
+# SAT_PLOT_ORBIT_PERIOD = 1
+
+def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', id_type=None):
+    """
+    Fetch orbit path data from JPL Horizons for the given object between start_date and end_date,
+    using the specified time interval.
+    Returns a dictionary with keys 'x', 'y', and 'z' or None on failure.
+    
+    Parameters:
+        obj_info (dict): Object information dictionary
+        start_date (datetime): Start date for the orbit path
+        end_date (datetime): End date for the orbit path
+        interval (str): Time interval (e.g., "1d", "12h")
+        center_id (str): ID of the central body (default: '@0' for solar system barycenter)
+        id_type (str): Type of ID for the object (None, 'id', 'smallbody', etc.)
+    """
+# def fetch_orbit_path(obj_info, start_date, end_date, interval):
+
+    try:
+        from astroquery.jplhorizons import Horizons
+        # Use the object's id and id_type
+        object_id = obj_info['id']
+        id_type = obj_info.get('id_type', None)
+        
+        # Format the center_id appropriately
+        location = center_id
+        if not location.startswith('@'):
+            location = '@' + location
+
+#        location = "@0"  # This typically refers to the solar system barycenter
+        
+        # Format dates as required by Horizons
+        epochs = {
+            'start': start_date.strftime('%Y-%m-%d'),
+            'stop': end_date.strftime('%Y-%m-%d'),
+            'step': interval  # e.g. "1d" for one day, "12h" for 12 hours
+        }
+
+        # Create Horizons object and fetch vectors        
+        obj = Horizons(id=object_id, id_type=id_type, location=location, epochs=epochs)
+        eph = obj.vectors()
+        
+        # Process the ephemerides table to extract x, y, z coordinates
+        x_coords = list(eph['x'])
+        y_coords = list(eph['y'])
+        z_coords = list(eph['z'])
+        
+        return {'x': x_coords, 'y': y_coords, 'z': z_coords}
+    except Exception as e:
+        print(f"Error fetching orbit path for {obj_info['name']}: {e}")
+        return None
+    
+# Update orbit_paths to handle center objects
+def update_orbit_paths(center_object_name='Sun'):
+    """
+    For each object in the global 'objects' list that has an 'id', check if its orbit path is
+    stored in orbit_paths_over_time. If not (or if refresh_all is True), fetch its orbit path
+    from JPL Horizons and update the global dictionary.
+    
+    Parameters:
+        center_object_name (str): Name of the central body (default: 'Sun')
+    """
+# def update_orbit_paths():
+
+    import datetime
+    global orbit_paths_over_time
+    
+    # Get center object info
+    center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
+    if center_object_info:
+        center_id = center_object_info['id']
+        center_id_type = center_object_info.get('id_type')
+    else:
+        center_id = 'Sun'
+        center_id_type = None
+
+    updated_count = 0
+    total_objects = 0
+#    now = datetime.datetime.now()                       # default code 
+# Use a datetime object for a specific date, such as:
+#    now = datetime.datetime(1986, 4, 11)               # start date for comet Ikeya-Seki ephemeris
+    # For demonstration, set the orbit path time range to one year before and after the current date.
+#    start_date = now - datetime.timedelta(days=365)     # one year
+#    end_date = now + datetime.timedelta(days=365)       # one year
+    now = STATIC_TODAY
+    start_date = now - datetime.timedelta(days=0)    # default start at now
+    end_date = now + datetime.timedelta(days=730)      # default 2 years or 730 days
+    
+    # Iterate over all objects in the 'objects' list
+    for obj in objects:
+        if 'id' not in obj or obj['name'] == center_object_name:
+#        if 'id' not in obj:
+            continue
+        total_objects += 1
+
+        # Check if this is a satellite of the center object
+        is_satellite_of_center = False
+        if center_object_name in parent_planets and obj['name'] in parent_planets.get(center_object_name, []):
+            is_satellite_of_center = True
+            print(f"Identified {obj['name']} as a satellite of {center_object_name}")
+
+        # Generate a unique key for this object-center pair
+        orbit_key = f"{obj['name']}_{center_object_name}"
+
+        # If refresh_all is True or the object's orbit path is missing, fetch new data.
+        if refresh_all or (obj['name'] not in orbit_paths_over_time):
+            # Determine a suitable interval.
+            # Use adaptive step sizing if available – for example, for high eccentricity objects use "12h" instead of "1d".
+            interval = "1d"  # default interval
+
+            if obj['name'] in planetary_params:
+                e = planetary_params[obj['name']].get('e', 0)
+                if e > 0.5:  # example threshold for a highly elliptical orbit
+                    interval = "12h"
+            else:
+                # For spacecraft, comets, and moons, use a finer interval
+                # For comet Ikeya-Seki using 6h, then 2h for +/- 3 days, and 1h for +/- 1 day from perihelion 1965-10-21
+                interval = "6h"
+            
+            # For satellites of the center object, use a much finer resolution
+            if is_satellite_of_center:
+                interval = "1h"  # Higher resolution for moons orbiting the center
+
+            # Update the status in the GUI
+            status_display.config(text=f"Fetching orbit path for {obj['name']} relative to {center_object_name}...")
+    #        status_label.config(text=f"Fetching orbit path for {obj['name']}...")
+            root.update()  # Force GUI to refresh the status
+            
+            path_data = fetch_orbit_path(
+                obj, 
+                start_date, 
+                end_date, 
+                interval, 
+                center_id=center_id,
+                id_type=obj.get('id_type')
+            )           
+
+            if path_data is not None:
+                # Store with the unique key
+                orbit_paths_over_time[orbit_key] = path_data
+                updated_count += 1
+                print(f"Updated orbit path for {obj['name']} relative to {center_object_name}")
+    
+    status_display.config(text=f"Orbit paths updated for {updated_count}/{total_objects} objects relative to {center_object_name}.")
+    # Save the updated orbit paths to the JSON file
+    save_orbit_paths(orbit_paths_over_time)
+
+# Load the stored orbit paths at startup
+orbit_paths_over_time = load_orbit_paths()
+
+# Now that 'objects' is defined, update orbit paths with Sun as center (default)
+update_orbit_paths('Sun')
+# update_orbit_paths()
+
+def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
+    """
+    For each object in objects_to_plot, if orbit path data exists in orbit_paths_over_time,
+    add a Scatter3d trace (static background line) for its orbit.
+    
+    Parameters:
+        fig: plotly figure object
+        objects_to_plot: list of objects to plot orbits for
+        center_object_name: name of the central body (default: 'Sun')
+    """
+
+    # Extract just the names from the objects_to_plot list
+    selected_names = [obj['name'] for obj in objects_to_plot]
+    
+    # Debug output to verify we're getting the right list of selected objects
+    print("\nSelected objects for orbit paths:")
+    for name in selected_names:
+        print(f"  - {name}")
+
+    for name in selected_names:
+
+        # Skip objects that are the center
+        if name == center_object_name:
+            continue
+            
+        # Check if this is a satellite of the center object
+        is_satellite_of_center = center_object_name in parent_planets and name in parent_planets.get(center_object_name, [])
+        
+        # Generate a unique key for this object-center pair
+        orbit_key = f"{name}_{center_object_name}"
+        
+        # Check if we have the orbit path for this object-center combination
+        if orbit_key in orbit_paths_over_time:
+            path = orbit_paths_over_time[orbit_key]
+
+            # Create the hover text arrays - these need to match the number of points in the path
+            if is_satellite_of_center:
+                hover_text = [f"{name} Orbit around {center_object_name}"] * len(path['x'])
+                orbit_name = f"{name} Orbit around {center_object_name}"
+            else:
+                hover_text = [f"{name} Orbit"] * len(path['x'])
+                orbit_name = f"{name} Orbit"
+
+            print(f"Plotting orbit for {name} relative to {center_object_name} ({len(path['x'])} points)")
+      
+    #        # Create the hover text arrays - these need to match the number of points in the path
+    #        hover_text = [f"{name} Orbit"] * len(path['x'])
+
+            fig.add_trace(
+                go.Scatter3d(
+                    x=path['x'],
+                    y=path['y'],
+                    z=path['z'],
+                    mode='lines',
+                    line=dict(width=1, color=color_map(name)),  # uses the same color as defined in your code
+                    name=orbit_name,
+        #            name=f"{name} Orbit",
+                    text=hover_text,            # Add proper hover text array
+                    customdata=hover_text,      # Add same for customdata
+                    hovertemplate='%{text}<extra></extra>',
+        #            hovertemplate=f"{name} Orbit<extra></extra>",
+                    showlegend=True
+                )
+            )
+
+        # Fallback to old key format if the new format isn't found
+        elif name in orbit_paths_over_time:
+            path = orbit_paths_over_time[name]
+            
+            # Create the hover text arrays - these need to match the number of points in the path
+            hover_text = [f"{name} Orbit"] * len(path['x'])
+
+            fig.add_trace(
+                go.Scatter3d(
+                    x=path['x'],
+                    y=path['y'],
+                    z=path['z'],
+                    mode='lines',
+                    line=dict(width=1, color=color_map(name)),  # uses the same color as defined in your code
+                    name=f"{name} Orbit",
+                    text=hover_text,            # Add proper hover text array
+                    customdata=hover_text,      # Add same for customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
+            )
+        else:
+            print(f"No orbit path found for {name} relative to {center_object_name}")
 
 class ScrollableFrame(tk.Frame):
     """
@@ -133,10 +1180,6 @@ class ScrollableFrame(tk.Frame):
         event.widget.unbind_all("<Button-4>")
         event.widget.unbind_all("<Button-5>")
 
-# Define controls_frame
-controls_frame = tk.Frame(root)
-controls_frame.grid(row=0, column=1, padx=(5, 10), pady=(10, 10), sticky='n')
-
 # Suppress ErfaWarning messages
 warnings.simplefilter('ignore', ErfaWarning)
 
@@ -164,6 +1207,7 @@ PARKER_CLOSEST_RADII = 8.2    # Parker's closest approach was 3.8 million miles 
 def add_url_buttons(fig, objects_to_plot, selected_objects):
     """
     Add URL buttons for missions and objects in solar system visualizations.
+    Displays buttons in two rows if needed (max 14 per row).
     
     Parameters:
         fig: plotly figure object
@@ -176,11 +1220,9 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
     # Collect objects with URLs that are currently selected
     url_objects = []
     for obj in objects_to_plot:
-#        if obj['var'].get() == 1 and obj.get('mission_url'): 
         if obj['var'].get() == 1 and ('mission_url' in obj or 'url' in obj):          # adds urls for any object   
             url_objects.append({
                 'name': obj['name'],
-#                'url': obj['mission_url']
                 'url': obj.get('mission_url') or obj.get('url')                        # Use either URL field
             })
     
@@ -194,19 +1236,30 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
     # Get existing annotations and create new list
     annotations = list(fig.layout.annotations) if fig.layout.annotations else []
 
-    # Position URL buttons after "Data source" and "Search" links
-    start_x = 0  # Starting position after existing links
+    # Constants for button layout
+    max_per_row = 14
+    button_width = 0.075  # Slight reduction from 0.07 to fit more buttons
+    start_x = -0.05  # Starting position after existing links
 
     # Add URL buttons while preserving existing annotations
     for idx, obj in enumerate(url_objects):
-        button_x = start_x + (idx * 0.07)
+        padded_name = obj['name'].ljust(12)  # This adds spaces to make it exactly 12 chars
+        # Determine row and position within row
+        row = idx // max_per_row
+        position_in_row = idx % max_per_row
+        # Calculate x position - each row starts from the left
+        button_x = start_x + (position_in_row * button_width)
+        # Calculate y position based on row (row 0 is at y=0, row 1 is at y=-0.05)
+        button_y = 0.07 - (row * 0.06)
         
         annotations.append(dict(
-            text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF;'>{obj['name']}</a>",
+    #        text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF;'>{obj['name']}</a>",
+    #        text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF;'>{padded_name}</a>",
+            text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF; font-family:monospace;'>{padded_name}</a>",  # uniform
             xref='paper',
             yref='paper',
             x=button_x,
-            y=0,  
+            y=button_y,  
             showarrow=False,
             font=dict(size=12, color='#1E90FF'),
             align='left',
@@ -244,513 +1297,526 @@ def create_sun_visualization(fig, animate=False, frames=None):
     def create_layer_traces():
         traces = []
         
-        # 0.2. Sun's Gravitational Influence
-        x, y, z = create_corona_sphere(GRAVITATIONAL_INFLUENCE_AU)
+        # Only add layers that are selected
+        # 12. Sun's Gravitational Influence
+        if sun_gravitational_var.get() == 1:
+            x, y, z = create_corona_sphere(GRAVITATIONAL_INFLUENCE_AU)
 
-        # Create a text list matching the number of points
-        text_array_gravitational_influence = [gravitational_influence_info for _ in range(len(x))]
-        customdata_array_gravitational_influence = ["Sun's Gravitational Influence" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_gravitational_influence = [gravitational_influence_info_hover for _ in range(len(x))]
+            customdata_array_gravitational_influence = ["Sun's Gravitational Influence" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=1.0,
-        #            color='green',
-                    color= 'rgb(102, 187, 106)', 
-                    opacity=0.2
-                ),
-                name='Sun\'s Gravitational Influence',
-                text=text_array_gravitational_influence,             
-                customdata=customdata_array_gravitational_influence, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=1.0,
+            #            color='green',
+                        color= 'rgb(102, 187, 106)', 
+                        opacity=0.2
+                    ),
+                    name='Sun\'s Gravitational Influence',
+                    text=text_array_gravitational_influence,             
+                    customdata=customdata_array_gravitational_influence, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='green',
-                    size=0.5,
-                    symbol='square-open',
-                    opacity=0.2
-                ),
-                name='Sun\'s Gravitational Influence',
-                text=['The Sun\'s gravitational influence to ~126,000 AU or 2 ly.'],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            
+            # Add shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='green',
+                        size=0.5,
+                        symbol='square-open',
+                        opacity=0.2
+                    ),
+                    name='Sun\'s Gravitational Influence',
+                    text=['The Sun\'s gravitational influence to ~126,000 AU or 2 ly.'],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
+                )
             )
-        )
 
-        # 0.3. Outer Oort Cloud
-        x, y, z = create_corona_sphere(OUTER_OORT_CLOUD_AU)
+        # 11. Outer Oort Cloud
+        if sun_outer_oort_var.get() == 1:
+            x, y, z = create_corona_sphere(OUTER_OORT_CLOUD_AU)
 
-        # Create a text list matching the number of points
-        text_array_outer_oort = [outer_oort_info for _ in range(len(x))]
-        customdata_array_outer_oort = ["Outer Oort Cloud" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_outer_oort = [outer_oort_info_hover for _ in range(len(x))]
+            customdata_array_outer_oort = ["Outer Oort Cloud" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=1.0,
-                    color='white',  # Yellow approximates the visible color
-                    opacity=0.2
-                ),
-                name='Outer Oort Cloud',
-                text=text_array_outer_oort,             
-                customdata=customdata_array_outer_oort, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=1.0,
+                        color='white',  # Yellow approximates the visible color
+                        opacity=0.2
+                    ),
+                    name='Outer Oort Cloud',
+                    text=text_array_outer_oort,             
+                    customdata=customdata_array_outer_oort, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='white',
-                    size=1.0,
-                    symbol='circle-open',
-                    opacity=0.2
-                ),
-                name='Outer Oort Cloud',
-                text=['Outer Oort Cloud from estimated 20,000 to 100,000 AU.'],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            
+            # Add shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='white',
+                        size=1.0,
+                        symbol='circle-open',
+                        opacity=0.2
+                    ),
+                    name='Outer Oort Cloud',
+                    text=['Outer Oort Cloud from estimated 20,000 to 100,000 AU.'],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
+                )
             )
-        )
 
-        # 0.4. Inner Oort Cloud
-        x, y, z = create_corona_sphere(INNER_OORT_CLOUD_AU)
+        # 10. Inner Oort Cloud
+        if sun_inner_oort_var.get() == 1:
+            x, y, z = create_corona_sphere(INNER_OORT_CLOUD_AU)
 
-        # Create a text list matching the number of points
-        text_array_inner_oort = [inner_oort_info for _ in range(len(x))]
-        customdata_array_inner_oort = ["Inner Oort Cloud" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_inner_oort = [inner_oort_info_hover for _ in range(len(x))]
+            customdata_array_inner_oort = ["Inner Oort Cloud" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=1.0,
-                    color='white',  # Yellow approximates the visible color
-                    opacity=0.3
-                ),
-                name='Inner Oort Cloud',
-                text=text_array_inner_oort,             
-                customdata=customdata_array_inner_oort, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=1.0,
+                        color='white',  # Yellow approximates the visible color
+                        opacity=0.3
+                    ),
+                    name='Inner Oort Cloud',
+                    text=text_array_inner_oort,             
+                    customdata=customdata_array_inner_oort, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='white',
-                    size=1.0,
-                    symbol='circle-open',
-                    opacity=0.3
-                ),
-                name='Inner Oort Cloud',
-                text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            
+            # Add shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='white',
+                        size=1.0,
+                        symbol='circle-open',
+                        opacity=0.3
+                    ),
+                    name='Inner Oort Cloud',
+                    text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
+                )
             )
-        )
 
-        # 0.45. Inner Limit of Inner Oort Cloud
-        x, y, z = create_corona_sphere(INNER_LIMIT_OORT_CLOUD_AU)
+        # 9. Inner Limit of Inner Oort Cloud
+        if sun_inner_oort_limit_var.get() == 1:
+            x, y, z = create_corona_sphere(INNER_LIMIT_OORT_CLOUD_AU)
 
-        # Create a text list matching the number of points
-        text_array_inner_limit_oort = [inner_limit_oort_info for _ in range(len(x))]
-        customdata_array_inner_limit_oort = ["Inner Limit of Oort Cloud" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_inner_limit_oort = [inner_limit_oort_info_hover for _ in range(len(x))]
+            customdata_array_inner_limit_oort = ["Inner Limit of Oort Cloud" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=1.0,
-                    color='white',  
-                    opacity=0.3
-                ),
-                name='Inner Limit of Oort Cloud',
-                text=text_array_inner_limit_oort,             
-                customdata=customdata_array_inner_limit_oort, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=1.0,
+                        color='white',  
+                        opacity=0.3
+                    ),
+                    name='Inner Limit of Oort Cloud',
+                    text=text_array_inner_limit_oort,             
+                    customdata=customdata_array_inner_limit_oort, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='white',
-                    size=1.0,
-                    symbol='circle-open',
-                    opacity=0.3
-                ),
-                name='Inner Limit of Oort Cloud',
-                text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            
+            # Add shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='white',
+                        size=1.0,
+                        symbol='circle-open',
+                        opacity=0.3
+                    ),
+                    name='Inner Limit of Oort Cloud',
+                    text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
+                )
             )
-        )
 
-        # 0.5. Solar Wind and Heliopause Sphere
-        x, y, z = create_corona_sphere(HELIOPAUSE_RADII * SOLAR_RADIUS_AU)
+        # 8. Solar Wind and Heliopause Sphere
+        if sun_heliopause_var.get() == 1:
+            x, y, z = create_corona_sphere(HELIOPAUSE_RADII * SOLAR_RADIUS_AU)
 
-        # Create a text list matching the number of points
-        text_array_solar_wind = [solar_wind_info for _ in range(len(x))]
-        customdata_array_solar_wind = ["Solar Wind Heliopause" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_solar_wind = [solar_wind_info_hover for _ in range(len(x))]
+            customdata_array_solar_wind = ["Solar Wind Heliopause" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=0.5,
-                    color='rgb(135, 206, 250)',  # Nearest visible approximatation
-                    opacity=0.2
-                ),
-                name='Solar Wind Heliopause',
-                text=text_array_solar_wind,            # Replicated text
-                customdata=customdata_array_solar_wind, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=0.5,
+                        color='rgb(135, 206, 250)',  # Nearest visible approximatation
+                        opacity=0.2
+                    ),
+                    name='Solar Wind Heliopause',
+                    text=text_array_solar_wind,            # Replicated text
+                    customdata=customdata_array_solar_wind, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add Heliopause shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(135, 206, 250)',
-                    size=0.5,
-                    symbol='circle',
-                    opacity=0.2
-                ),
-                name='Solar Wind Heliopause',
-                text=['Solar Wind Heliopause (extends to 123 AU)'],
-        #        hoverinfo='text',
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            
+            # Add Heliopause shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(135, 206, 250)',
+                        size=0.5,
+                        symbol='circle',
+                        opacity=0.2
+                    ),
+                    name='Solar Wind Heliopause',
+                    text=['Solar Wind Heliopause (extends to 123 AU)'],
+            #        hoverinfo='text',
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
+                )
             )
-        )
 
-        # 0.7. Solar Wind and Termination Shock Sphere
-        x, y, z = create_corona_sphere(TERMINATION_SHOCK_AU)
+        # 7. Solar Wind and Termination Shock Sphere
+        if sun_termination_shock_var.get() == 1:
+            x, y, z = create_corona_sphere(TERMINATION_SHOCK_AU)
 
-        # Create a text list matching the number of points
-        text_array_termination_shock = [termination_shock_info for _ in range(len(x))]
-        customdata_array_termination_shock = ["Solar Wind Termination Shock" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_termination_shock = [termination_shock_info_hover for _ in range(len(x))]
+            customdata_array_termination_shock = ["Solar Wind Termination Shock" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=0.5,
-                    color='rgb(240, 244, 255)',  # Nearest visible approximatation
-                    opacity=0.2
-                ),
-                name='Solar Wind Termination Shock',
-                text=text_array_termination_shock,            # Replicated text
-                customdata=customdata_array_termination_shock, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=0.5,
+                        color='rgb(240, 244, 255)',  # Nearest visible approximatation
+                        opacity=0.2
+                    ),
+                    name='Solar Wind Termination Shock',
+                    text=text_array_termination_shock,            # Replicated text
+                    customdata=customdata_array_termination_shock, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add Termination Shock shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(240, 244, 255)',
-                    size=0.5,
-                    symbol='circle',
-                    opacity=0.2
-                ),
-                name='Solar Wind Termination Shock',
-                text=['Solar Wind Termination Shock (extends to 94 AU)'],
-        #        hoverinfo='text',
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            
+            # Add Termination Shock shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(240, 244, 255)',
+                        size=0.5,
+                        symbol='circle',
+                        opacity=0.2
+                    ),
+                    name='Solar Wind Termination Shock',
+                    text=['Solar Wind Termination Shock (extends to 94 AU)'],
+            #        hoverinfo='text',
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
+                )
             )
-        )
 
-        # 1. Outer Corona Sphere (most expansive, very diffuse)
-        x, y, z = create_corona_sphere(OUTER_CORONA_RADII * SOLAR_RADIUS_AU)
+        # 6. Outer Corona Sphere (most expansive, very diffuse)
+        if sun_outer_corona_var.get() == 1:
+            x, y, z = create_corona_sphere(OUTER_CORONA_RADII * SOLAR_RADIUS_AU)
 
-        # Create a text list matching the number of points
-        text_array_outer_corona = [outer_corona_info for _ in range(len(x))]
-        customdata_array_outer_corona = ["Sun: Outer Corona" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_outer_corona = [outer_corona_info_hover for _ in range(len(x))]
+            customdata_array_outer_corona = ["Sun: Outer Corona" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=0.75,
-                    color='rgb(25, 25, 112)',  # approximate visualization
-                    opacity=0.3
-                ),
-                name='Sun: Outer Corona',
-                text=text_array_outer_corona,            # Replicated text
-                customdata=customdata_array_outer_corona, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=0.75,
+                        color='rgb(25, 25, 112)',  # approximate visualization
+                        opacity=0.3
+                    ),
+                    name='Sun: Outer Corona',
+                    text=text_array_outer_corona,            # Replicated text
+                    customdata=customdata_array_outer_corona, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add outer corona shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(25, 25, 112)',
-                    size=0.75,
-                    symbol='circle',
-                    opacity=0.3
-                ),
-                name='Sun: Outer Corona',
-                text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
-        #        hoverinfo='text',
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            
+            # Add outer corona shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(25, 25, 112)',
+                        size=0.75,
+                        symbol='circle',
+                        opacity=0.3
+                    ),
+                    name='Sun: Outer Corona',
+                    text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
+            #        hoverinfo='text',
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
+                )
             )
-        )
 
-        # 2. Inner Corona Sphere
-        x, y, z = create_corona_sphere(INNER_CORONA_RADII * SOLAR_RADIUS_AU)
+        # 5. Inner Corona Sphere
+        if sun_inner_corona_var.get() == 1:
+            x, y, z = create_corona_sphere(INNER_CORONA_RADII * SOLAR_RADIUS_AU)
 
-        # Create a text list matching the number of points
-        text_array_inner_corona = [inner_corona_info for _ in range(len(x))]
-        customdata_array_inner_corona = ["Sun: Inner Corona" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_inner_corona = [inner_corona_info_hover for _ in range(len(x))]
+            customdata_array_inner_corona = ["Sun: Inner Corona" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=1,
-                    color='rgb(0, 0, 255)',  # Warmer tint
-                    opacity=0.09
-                ),
-                name='Sun: Inner Corona',
-                text=text_array_inner_corona,            # Replicated text
-                customdata=customdata_array_inner_corona, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=1,
+                        color='rgb(0, 0, 255)',  # Warmer tint
+                        opacity=0.09
+                    ),
+                    name='Sun: Inner Corona',
+                    text=text_array_inner_corona,            # Replicated text
+                    customdata=customdata_array_inner_corona, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add inner corona shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(0, 0, 255)',
-                    size=1,
-                    symbol='circle',
-                    opacity=0.09
-                ),
-                name='Sun: Inner Corona',
-                text=['Solar Inner Corona (extends to 2-3 solar radii)'],
-                hoverinfo='text',
-                showlegend=False
+            
+            # Add inner corona shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(0, 0, 255)',
+                        size=1,
+                        symbol='circle',
+                        opacity=0.09
+                    ),
+                    name='Sun: Inner Corona',
+                    text=['Solar Inner Corona (extends to 2-3 solar radii)'],
+                    hoverinfo='text',
+                    showlegend=False
+                )
             )
-        )
 
-        # 2.5. Chromosphere
-        x, y, z = create_corona_sphere(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU)
+        # 4. Chromosphere
+        if sun_chromosphere_var.get() == 1:
+            x, y, z = create_corona_sphere(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU)
 
-        # Create a text list matching the number of points
-        text_array_chromosphere = [chromosphere_info for _ in range(len(x))]
-        customdata_array_chromosphere = ["Sun: Chromosphere" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_chromosphere = [chromosphere_info_hover for _ in range(len(x))]
+            customdata_array_chromosphere = ["Sun: Chromosphere" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=1.25,
-                    color='rgb(30, 144, 255)',  # approximate visible
-                    opacity=0.10
-                ),
-                name='Sun: Chromosphere',
-                text=text_array_chromosphere,            # Replicated text
-                customdata=customdata_array_chromosphere, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=1.25,
+                        color='rgb(30, 144, 255)',  # approximate visible
+                        opacity=0.10
+                    ),
+                    name='Sun: Chromosphere',
+                    text=text_array_chromosphere,            # Replicated text
+                    customdata=customdata_array_chromosphere, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add chromosphere shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(30, 144, 255)',
-                    size=1.25,
-                    symbol='circle',
-                    opacity=0.10
-                ),
-                name='Sun: Chromosphere',
-                text=['Solar Chromosphere (surface temperature ~6,000 to 20,000 K)'],
-                hoverinfo='text',
-                showlegend=False
+            
+            # Add chromosphere shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(30, 144, 255)',
+                        size=1.25,
+                        symbol='circle',
+                        opacity=0.10
+                    ),
+                    name='Sun: Chromosphere',
+                    text=['Solar Chromosphere (surface temperature ~6,000 to 20,000 K)'],
+                    hoverinfo='text',
+                    showlegend=False
+                )
             )
-        )
 
         # 3. Convective Zone and Photoshere Sphere
-        x, y, z = create_corona_sphere(SOLAR_RADIUS_AU)
+        if sun_photosphere_var.get() == 1:
+            x, y, z = create_corona_sphere(SOLAR_RADIUS_AU)
 
-        # Create a text list matching the number of points
-        text_array_photosphere = [photosphere_info for _ in range(len(x))]
-        customdata_array_photosphere = ["Sun: Photosphere" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_photosphere = [photosphere_info_hover for _ in range(len(x))]
+            customdata_array_photosphere = ["Sun: Photosphere" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=7.0,
-                    color='rgb(255, 244, 214)',  # Yellow approximates the visible color
-                    opacity=1.0
-                ),
-                name='Sun: Photosphere',
-                text=text_array_photosphere,            # Replicated text
-                customdata=customdata_array_photosphere, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=7.0,
+                        color='rgb(255, 244, 214)',  # Yellow approximates the visible color
+                        opacity=1.0
+                    ),
+                    name='Sun: Photosphere',
+                    text=text_array_photosphere,            # Replicated text
+                    customdata=customdata_array_photosphere, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
+            
+            # Add photosphere shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(255, 244, 214)',
+                        size=7.0,
+                        symbol='circle',
+                        opacity=1.0
+                    ),
+                    name='Sun: Photosphere',
+                    text=['Solar Photosphere (surface temperature ~6,000K)'],
+                    hoverinfo='text',
+                    showlegend=False
+                )
+            )
         
-        # Add photosphere shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(255, 244, 214)',
-                    size=7.0,
-                    symbol='circle',
-                    opacity=1.0
-                ),
-                name='Sun: Photosphere',
-                text=['Solar Photosphere (surface temperature ~6,000K)'],
-                hoverinfo='text',
-                showlegend=False
-            )
-        )
-        
-        # 4. Radiative Zone
-        x, y, z = create_corona_sphere(RADIATIVE_ZONE_AU)
+        # 2. Radiative Zone
+        if sun_radiative_var.get() == 1:
+            x, y, z = create_corona_sphere(RADIATIVE_ZONE_AU)
 
-        # Create a text list matching the number of points
-        text_array_radiative_zone = [radiative_zone_info for _ in range(len(x))]
-        customdata_array_radiative_zone = ["Sun: Radiative Zone" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_radiative_zone = [radiative_zone_info_hover for _ in range(len(x))]
+            customdata_array_radiative_zone = ["Sun: Radiative Zone" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=7,
-                    color='rgb(30, 144, 255)',  # arbitrary color for contrast
-                    opacity=1.0
-                ),
-                name='Sun: Radiative Zone',
-                text=text_array_radiative_zone,            # Replicated text
-                customdata=customdata_array_radiative_zone, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=7,
+                        color='rgb(30, 144, 255)',  # arbitrary color for contrast
+                        opacity=1.0
+                    ),
+                    name='Sun: Radiative Zone',
+                    text=text_array_radiative_zone,            # Replicated text
+                    customdata=customdata_array_radiative_zone, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add radiative zone shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(30, 144, 255)',
-                    size=7,
-                    symbol='circle',
-                    opacity=1.0
-                ),
-                name='Sun: Radiative Zone',
-                text=['Solar Radiative Zone (extends to 0.2 to 0.7 solar radii)'],
-                hoverinfo='text',
-                showlegend=False
+            
+            # Add radiative zone shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(30, 144, 255)',
+                        size=7,
+                        symbol='circle',
+                        opacity=1.0
+                    ),
+                    name='Sun: Radiative Zone',
+                    text=['Solar Radiative Zone (extends to 0.2 to 0.7 solar radii)'],
+                    hoverinfo='text',
+                    showlegend=False
+                )
             )
-        )
 
-        # 5. Core
-        x, y, z = create_corona_sphere(CORE_AU)
+        # 1. Core
+        if sun_core_var.get() == 1:
+            x, y, z = create_corona_sphere(CORE_AU)
 
-        # Create a text list matching the number of points
-        text_array_core = [core_info for _ in range(len(x))]
-        customdata_array_core = ["Sun: Core" for _ in range(len(x))]
+            # Create a text list matching the number of points
+            text_array_core = [core_info_hover for _ in range(len(x))]
+            customdata_array_core = ["Sun: Core" for _ in range(len(x))]
 
-        traces.append(
-            go.Scatter3d(
-                x=x, y=y, z=z,
-                mode='markers',
-                marker=dict(
-                    size=10,
-                    color='rgb(70, 130, 180)',  
-                    opacity=1.0
-                ),
-                name='Sun: Core',
-                text=text_array_core,            # Replicated text
-                customdata=customdata_array_core, # Replicated customdata
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
+            traces.append(
+                go.Scatter3d(
+                    x=x, y=y, z=z,
+                    mode='markers',
+                    marker=dict(
+                        size=10,
+                        color='rgb(70, 130, 180)',  
+                        opacity=1.0
+                    ),
+                    name='Sun: Core',
+                    text=text_array_core,            # Replicated text
+                    customdata=customdata_array_core, # Replicated customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
             )
-        )
-        
-        # Add core shell
-        traces.append(
-            go.Scatter3d(
-                x=[0], y=[0], z=[0],
-                mode='markers',
-                marker=dict(
-                    color='rgb(70, 130, 180)',
-                    size=10,
-                    symbol='circle',
-                    opacity=1.0
-                ),
-                name='Sun: Core',
-                text=['Solar Core (temperature ~15M K)'],
-                hoverinfo='text',
-                showlegend=False
+            
+            # Add core shell
+            traces.append(
+                go.Scatter3d(
+                    x=[0], y=[0], z=[0],
+                    mode='markers',
+                    marker=dict(
+                        color='rgb(70, 130, 180)',
+                        size=10,
+                        symbol='circle',
+                        opacity=1.0
+                    ),
+                    name='Sun: Core',
+                    text=['Solar Core (temperature ~15M K)'],
+                    hoverinfo='text',
+                    showlegend=False
+                )
             )
-        )
 
         return traces
 
@@ -870,6 +1936,9 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 line = None
                 marker = dict(color=color_map(planet), size=1)
 
+            # Create the hover text for the actual orbit
+            hover_text = f"{planet} Orbit"
+
             fig.add_trace(
                 go.Scatter3d(
                     x=x,
@@ -879,8 +1948,11 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                     line=line,
                     marker=marker,
                     name=f"{planet} Orbit",
-                    hoverinfo='none',
-                    hovertemplate=None,
+                    text=[hover_text] * len(x),           # Add proper hover text
+                    customdata=[hover_text] * len(x),     # Same for customdata
+                    hovertemplate='%{text}<extra></extra>',
+        #            hoverinfo=None,
+        #            hovertemplate=None,
                     showlegend=True
                 )
             )
@@ -922,14 +1994,92 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         distance_lm = range_ * LIGHT_MINUTES_PER_AU if range_ is not None else 'N/A'
         distance_lh = (distance_lm / 60) if isinstance(distance_lm, float) else 'N/A'
 
+        # Find object name from id
+        obj_name = next((obj['name'] for obj in objects if obj['id'] == object_id), None)
+        
+        # Initialize orbital period values
+        calculated_orbital_period = 'N/A'
+        known_orbital_period = 'N/A'
+        orbital_period = 'N/A'  # Keep the original variable for backward compatibility
+        
+        # Find object name from id
+        obj_name = next((obj['name'] for obj in objects if obj['id'] == object_id), None)
+        
+        # Check if it's a planetary satellite
+        is_satellite = False
+        for planet, satellites in parent_planets.items():
+            if obj_name in satellites:
+                is_satellite = True
+                break
+
+        # Get the known orbital period if available
+        if obj_name in KNOWN_ORBITAL_PERIODS:
+            known_value = KNOWN_ORBITAL_PERIODS[obj_name]
+
+            if is_satellite:
+                # For satellites, the values are in days
+                known_orbital_period = {
+                    'days': known_value,
+                    'years': known_value / 365.25
+                }
+                # For satellites, use the known period as the main orbital_period
+                orbital_period = known_orbital_period['years']
+            else:
+                # For non-satellites, the values are in years
+                known_orbital_period = {
+                    'years': known_value,
+                    'days': known_value * 365.25
+                }
+                orbital_period = known_value  # Use the known value directly
+
+            # Check if the value is in years or days
+    #        if known_value < 100:  # Assume it's days if less than 100
+    #            known_orbital_period = {
+    #                'days': known_value,
+    #                'years': known_value / 365.25
+    #            }
+    #        else:  # It's in days
+    #            known_orbital_period = {
+    #                'days': known_value,
+    #                'years': known_value / 365.25
+    #            }
+        
+        # Check if it's a planetary satellite
+    #    is_satellite = False
+    #    for planet, satellites in parent_planets.items():
+    #        if obj_name in satellites:
+    #            is_satellite = True
+    #            break
+                
+        # Only calculate the orbital period for non-satellites
+        if not is_satellite and obj_name and obj_name in planetary_params:
+            a = planetary_params[obj_name]['a']  # Semi-major axis in AU
+            orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
+            calculated_orbital_period = {
+                'years': orbital_period_years,
+                'days': orbital_period_years * 365.25
+            }
+            # If no known period, use the calculated one
+            if orbital_period == 'N/A':
+                orbital_period = orbital_period_years
+
+
+    #        # Set the original orbital_period for backward compatibility
+    #        orbital_period = orbital_period_years
+    #    elif is_satellite and obj_name in KNOWN_ORBITAL_PERIODS:
+            # For satellites, use the known period as the main orbital_period
+    #        orbital_period = known_orbital_period['years']
+
         # Retrieve orbital period from planetary_params if available
-        orbital_period = 'N/A'
-        if object_id in [obj['id'] for obj in objects]:
-            obj_name = next((obj['name'] for obj in objects if obj['id'] == object_id), None)
-            if obj_name and obj_name in planetary_params:
-                a = planetary_params[obj_name]['a']  # Semi-major axis in AU
-                orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
-                orbital_period = f"{orbital_period_years:.2f}"
+    #    orbital_period = 'N/A'
+    #    if object_id in [obj['id'] for obj in objects]:
+    #        obj_name = next((obj['name'] for obj in objects if obj['id'] == object_id), None)
+    #        if obj_name and obj_name in planetary_params:
+    #            a = planetary_params[obj_name]['a']  # Semi-major axis in AU
+    #            orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
+        #            orbital_period = f"{orbital_period_years:.2f}"
+    #                # Return as numeric value, not string
+    #            orbital_period = orbital_period_years
 
         return {
             'x': x,
@@ -945,7 +2095,9 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
             'distance_lm': distance_lm,
             'distance_lh': distance_lh,
             'mission_info': mission_info,  # Include mission info if available
-            'orbital_period': orbital_period  # Include orbital period
+            'calculated_orbital_period': calculated_orbital_period,  # New: separated calculated period
+            'known_orbital_period': known_orbital_period,  # New: added known period from reference data
+            'orbital_period': orbital_period  # Original variable preserved for backward compatibility
         }
     except Exception as e:
         print(f"Error fetching data for object {object_id} on {date_obj}: {e}")
@@ -960,7 +2112,7 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
         object_id (str): ID of the object to fetch
         dates_list (list): List of datetime objects
         center_id (str): ID of central body (default: 'Sun')
-        id_type (str): Type of ID (e.g., 'majorbody', 'smallbody')
+        id_type (str): Type of ID (e.g., None, 'smallbody')
         
     Returns:
         list: List of position dictionaries or None values for each requested date
@@ -1123,7 +2275,48 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
     distance_lm   = format_maybe_float(obj_data.get('distance_lm'))
     distance_lh   = format_maybe_float(obj_data.get('distance_lh'))
     velocity_au   = format_maybe_float(obj_data.get('velocity'))
-    orbit_period  = obj_data.get('orbital_period', 'N/A')  # This might be a string
+
+    # Format orbital periods - both calculated and known
+    calculated_period = obj_data.get('calculated_orbital_period', 'N/A')
+    known_period = obj_data.get('known_orbital_period', 'N/A')
+
+    # Format calculated period
+    if isinstance(calculated_period, dict):
+        calc_years = calculated_period.get('years')
+        calc_days = calculated_period.get('days')
+        calculated_period_str = f"{calc_years:.4f} Earth years ({calc_days:.2f} days)"
+    else:
+        calculated_period_str = str(calculated_period)
+    
+    # Format known period
+    if isinstance(known_period, dict):
+        known_years = known_period.get('years')
+        known_days = known_period.get('days')
+        known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days)"
+    else:
+        known_period_str = str(known_period)
+
+    # Format the orbital period - handle both numeric and string inputs
+#    orbit_period = obj_data.get('orbital_period', 'N/A')
+
+# If it's already a string with a number, try to extract the number
+#    if isinstance(orbit_period, str) and orbit_period.replace('.', '', 1).isdigit():
+#        try:
+            # Convert from string to float
+#            orbit_period = float(orbit_period)
+#        except:
+            # Keep as is if conversion fails
+#            pass
+
+    # Format based on type
+#    if isinstance(orbit_period, (int, float)):
+        # It's a number, format it properly    
+#        orbit_period_years = f"{orbit_period:.4f} Earth years"
+#        orbit_period_days = f"{(orbit_period * 365.25):.2f} days"
+#        orbit_period_str = f"{orbit_period_years} ({orbit_period_days})"
+#    else:
+        # It's not a number, use as is
+#        orbit_period_str = orbit_period  
 
     # Get center body radius from constants
     center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)  # Default to 0 if center body not found
@@ -1139,6 +2332,31 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
     obj_info = next((obj for obj in objects if obj['name'] == name), None)
     mission_info = obj_info.get('mission_info', '') if obj_info else ''
 
+    # Check if this is a planetary satellite
+    is_satellite = False
+    for planet, satellites in parent_planets.items():
+        if name in satellites:
+            is_satellite = True
+            break
+
+    velocity_km_hr = "N/A"
+    if isinstance(obj_data.get('velocity'), (int, float)):
+        velocity_km_hr = f"{obj_data.get('velocity') * KM_PER_AU / 24:,.2f}"
+
+    # Calculate percent difference between calculated and known orbital periods
+    period_diff_percent = "N/A"
+    if (not is_satellite and 
+        isinstance(calculated_period, dict) and 
+        isinstance(known_period, dict) and
+        isinstance(calculated_period.get('years'), (int, float)) and 
+        isinstance(known_period.get('years'), (int, float)) and
+        known_period.get('years') != 0):
+        
+        calc_years = calculated_period.get('years')
+        known_years = known_period.get('years')
+        period_diff = abs(calc_years - known_years)
+        period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
+
     # Now build your hover text strings
     full_hover_text = (
         f"<b>{name}</b><br><br>"
@@ -1148,8 +2366,23 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
         f"Distance: {distance_lh} light-hours<br>"
         f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
         f"Velocity: {velocity_au} AU/day<br>"
-        f"Orbital Period: {orbit_period} Earth years"
+        f"Velocity: {velocity_km_hr} km/hr<br>"
+#        f"Orbital Period: {orbit_period} Earth years"
+#        f"Orbital Period: {orbit_period_str}"
     )
+
+    # Add orbital period information
+    if is_satellite:
+        full_hover_text += f"Calculated Orbital Period: N/A (satellite of {planet})<br>"
+    else:
+        full_hover_text += f"Calculated Orbital Period: {calculated_period_str}<br>"
+    
+    # Always add known period if available
+#    full_hover_text += f"Known Orbital Period: {known_period_str}"
+    if period_diff_percent != "N/A":
+        full_hover_text += f"Known Orbital Period: {known_period_str} (Percent difference: {period_diff_percent}%)"
+    else:
+        full_hover_text += f"Known Orbital Period: {known_period_str}"
 
     # Add mission_info if it exists, regardless of whether it's a mission
     if mission_info:
@@ -1183,19 +2416,47 @@ def plot_objects():
     def worker():
         try:
 
+            # Reset the global today or use a local today variable
+            today = datetime.today()
+
             # Create figure object at the start
             fig = go.Figure()
 
 # Generate default name with timestamp
-            current_date = datetime.now()
+#            current_date = datetime.now()
+            current_date = STATIC_TODAY
             default_name = f"solar_system_{current_date.strftime('%Y%m%d_%H%M')}"
             
             # Use show_figure_safely to handle both display and save options
-            show_figure_safely(fig, default_name)
+    #        show_figure_safely(fig, default_name)      # just one call at the end of the function
             
             output_label.config(text="Fetching data, please wait...")
             progress_bar.start(10)  # Start the progress bar with a slight delay
             root.update_idletasks()  # Force GUI to update
+
+            # Get user-defined interval values
+            try:
+                comet_interval_divisor = float(comet_interval_entry.get())
+                mission_interval_divisor = float(mission_interval_entry.get())
+                planet_interval_divisor = float(planet_interval_entry.get())
+                sat_plot_orbit_days = int(sat_days_entry.get())
+                sat_plot_orbit_period = int(sat_period_entry.get())
+                
+                # Ensure values are within reasonable ranges
+                if comet_interval_divisor <= 0: comet_interval_divisor = 100
+                if mission_interval_divisor <= 0: mission_interval_divisor = 75
+                if planet_interval_divisor <= 0: planet_interval_divisor = 50
+                if sat_plot_orbit_days <= 0: sat_plot_orbit_days = 56              
+                if sat_plot_orbit_period <= 0: sat_plot_orbit_period = 1
+                
+            except ValueError:
+                # Default values if parsing fails
+                comet_interval_divisor = 100
+                mission_interval_divisor = 75
+                planet_interval_divisor = 50
+                sat_plot_orbit_days = 56
+                sat_plot_orbit_period = 1
+                output_label.config(text="Invalid interval values, using defaults.")
 
             # Get the date from the entry fields
             year = int(entry_year.get())
@@ -1221,7 +2482,131 @@ def plot_objects():
             # Create date lists for each selected object
             dates_lists = {}
             for obj in objects:
+
+                # Planet 9 visualization
+                # This goes in the plot_objects function where objects are plotted
+                if obj['name'] == 'Planet 9' and obj['var'].get() == 1:
+                    # For Planet 9, use the orbital parameters to generate a position
+                    # based on the specified date
+                    params = planetary_params['Planet 9']
+                    a = params['a']  # Semi-major axis in AU
+                    e = params['e']  # Eccentricity
+                    
+                    # Use simplified orbital equations to estimate position
+                    # This is a very simplified model - in a real implementation,
+                    # you'd want to use proper orbital mechanics
+                    
+                    # Convert the date to an orbital angle (mean anomaly)
+                    # This is a placeholder - actual calculation would depend on
+                    # the epoch and period
+                    days_since_epoch = (date_obj - datetime(2000, 1, 1)).days
+                    period_days = a**1.5 * 365.25  # Kepler's Third Law, period in days
+                    mean_anomaly = (days_since_epoch % period_days) / period_days * 2 * math.pi
+                    
+                    # Convert mean anomaly to true anomaly using an approximation
+                    true_anomaly = mean_anomaly + 2 * e * math.sin(mean_anomaly)
+                    
+                    # Calculate distance from Sun
+                    r = a * (1 - e**2) / (1 + e * math.cos(true_anomaly))
+                    
+                    # Calculate position in orbital plane
+                    x_orbit = r * math.cos(true_anomaly)
+                    y_orbit = r * math.sin(true_anomaly)
+                    z_orbit = 0
+                    
+                    # Rotate for inclination and other orbital elements
+                    # Convert angles to radians
+                    i_rad = math.radians(params['i'])
+                    omega_rad = math.radians(params['omega'])
+                    Omega_rad = math.radians(params['Omega'])
+                    
+                    # Apply rotations (simplified)
+                    # First rotate by argument of periapsis
+                    x_temp = x_orbit * math.cos(omega_rad) - y_orbit * math.sin(omega_rad)
+                    y_temp = x_orbit * math.sin(omega_rad) + y_orbit * math.cos(omega_rad)
+                    z_temp = z_orbit
+                    
+                    # Then rotate by inclination
+                    x_temp2 = x_temp
+                    y_temp2 = y_temp * math.cos(i_rad) - z_temp * math.sin(i_rad)
+                    z_temp2 = y_temp * math.sin(i_rad) + z_temp * math.cos(i_rad)
+                    
+                    # Then rotate by longitude of ascending node
+                    x_final = x_temp2 * math.cos(Omega_rad) - y_temp2 * math.sin(Omega_rad)
+                    y_final = x_temp2 * math.sin(Omega_rad) + y_temp2 * math.cos(Omega_rad)
+                    z_final = z_temp2
+                    
+                    # Create simulated object data
+                    obj_data = {
+                        'x': x_final,
+                        'y': y_final,
+                        'z': z_final,
+                        'range': r,
+                        'distance_km': r * KM_PER_AU,
+                        'distance_lm': r * LIGHT_MINUTES_PER_AU,
+                        'distance_lh': r * LIGHT_MINUTES_PER_AU / 60,
+                        'orbital_period': (a**1.5)  # Period in Earth years
+                    }
+                    
+                    # Plot Planet 9 as a special case
+                    add_celestial_object(
+                        fig, obj_data, obj['name'], obj['color'], obj['symbol'], 
+                        marker_size=6, hover_data=hover_data, 
+                        center_object_name=center_object_name
+                    )
+                    
+                    # Draw the hypothetical orbit of Planet 9
+                    theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
+                    r_orbit = a * (1 - e**2) / (1 + e * np.cos(theta))
+                    x_orbit = r_orbit * np.cos(theta)
+                    y_orbit = r_orbit * np.sin(theta)
+                    z_orbit = np.zeros_like(theta)
+                    
+                    # Rotate orbit according to orbital elements
+                    # Rotate by argument of periapsis
+                    x_temp, y_temp, z_temp = rotate_points2(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+                    # Rotate by inclination
+                    x_temp, y_temp, z_temp = rotate_points2(x_temp, y_temp, z_temp, i_rad, 'x')
+                    # Rotate by longitude of ascending node
+                    x_final, y_final, z_final = rotate_points2(x_temp, y_temp, z_temp, Omega_rad, 'z')
+                    
+                    # Add the orbit to the plot
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=x_final,
+                            y=y_final,
+                            z=z_final,
+                            mode='lines',
+                            line=dict(dash='dot', width=1, color=obj['color']),     #   obj  ['rgb(50, 100, 200)']
+                            name=f"{obj['name']} Orbit",
+                            text=[f"{obj['name']} Hypothetical planet proposed to explain the orbital clustering of some distant "
+                                  "trans-Neptunian objects. Estimated to be 5-10 Earth masses and orbit 400-800 AU from the Sun, " 
+                                  "and possibly in the region of Taurus. As of 2025, it remains undetected."] * len(x_final),
+                            customdata=[f"{obj['name']} Hypothetical Orbit"] * len(x_final),
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True
+                        )
+                    )
+                    
+                    # Special Planet 9 handling code...
+                    continue  # Skip to next object after handling Planet 9                    
+        #    else:
+
+                # For satellites specifically, even if they have orbital parameters, 
+                # we should always fetch their actual position data
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
+
+                    # Check if this is a satellite of a planet
+                    is_satellite = False
+                    parent_planet = None
+                    for planet, moons in parent_planets.items():
+                        if obj['name'] in moons:
+                            is_satellite = True
+                            parent_planet = planet  # Use 'planet' to match the loop variable
+                            break
+
+                    is_parent = obj['name'] in parent_planets    
+                    
                     if obj.get('is_comet', False):
                         start_date = obj.get('start_date', date_obj)
                         end_date = obj.get('end_date', date_obj)
@@ -1229,9 +2614,13 @@ def plot_objects():
                         if total_days <= 0:
                             dates_list = [start_date]
                         else:
-                            interval = total_days / 100         # divide by 100 to have more resolution at perihelion, increase for more intervals
-                            dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
+                            # Replace np.arange with np.linspace for more precise spacing
+                            num_points = int(comet_interval_divisor) + 1
+                            dates_list = [start_date + timedelta(days=float(d)) for d in np.linspace(0, total_days, num=num_points)]                            
+                #            interval = total_days / comet_interval_divisor         # divide by 100 to have more resolution at perihelion, increase for more intervals
+                #            dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
+
                     elif obj.get('is_mission', False):
                         start_date = obj.get('start_date', date_obj)
                         end_date = obj.get('end_date', date_obj)
@@ -1239,24 +2628,114 @@ def plot_objects():
                         if total_days <= 0:
                             dates_list = [start_date]
                         else:
-                            interval = total_days / 75      # divide by 75 to have more resolution at launch
-                            dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
+                            # Replace np.arange with np.linspace for more precise spacing
+                            num_points = int(mission_interval_divisor) + 1
+                            dates_list = [start_date + timedelta(days=float(d)) for d in np.linspace(0, total_days, num=num_points)]                            
+                #            interval = total_days / mission_interval_divisor      # divide by 75 to have more resolution at launch
+                #            dates_list = [start_date + timedelta(days=i) for i in np.arange(0, total_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
+
+                    elif is_satellite or obj['name'] in ['Moon']:  # Explicitly check for known satellites
+                        # Always use actual trajectory for satellites, regardless of planetary_params
+                        # Replace range with np.linspace for more precise spacing
+                        num_points = int(sat_plot_orbit_days / sat_plot_orbit_period) + 1
+                        dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, sat_plot_orbit_days, num=num_points)]
+                        dates_lists[obj['name']] = dates_list
+
                     elif obj['name'] in planetary_params:
                         a = planetary_params[obj['name']]['a']  # Semi-major axis in AU
                         orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
-                        orbital_period_days = orbital_period_years * 365.25
+                        orbital_period_days = orbital_period_years * 365.25                
+
                         days_until_horizons = (HORIZONS_MAX_DATE - date_obj).days
                         days_until_datetime_max = (datetime.max - date_obj).days
-                        capped_orbital_period_days = min(orbital_period_days, days_until_horizons, days_until_datetime_max)
+
+                        # List of objects known to work with their full orbital periods
+                        non_problematic_objects = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+
+                        if obj['name'] in non_problematic_objects:
+                            # For well-established planets, use their full orbital period with system limits
+                            capped_orbital_period_days = min(orbital_period_days, days_until_horizons, days_until_datetime_max)
+                            print(f"Using full orbital period for {obj['name']}: {capped_orbital_period_days:.1f} days")
+                        else:
+                            # For all other objects (KBOs, dwarf planets, etc.), cap at a reasonable timeframe
+                            # For objects like Sedna with extremely long periods, this is essential
+            #                reasonable_period = min(10*365.25, orbital_period_days * 0.05)  # 10 years or 5% of orbit, whichever is smaller
+                            reasonable_period = 3650  # 10 years 
+                            capped_orbital_period_days = min(reasonable_period, days_until_horizons)
+                            print(f"Applied capping for {obj['name']}: Original {orbital_period_days:.1f} → Capped {capped_orbital_period_days:.1f} days")
+
+                        # For very long-period objects, cap at reasonable values
+            #            if orbital_period_days > 10000:  # Over ~27 years
+                            # Use at most 10% of the orbital period, or 10 years, whichever is greater
+            #                suggested_period = max(orbital_period_days * 0.1, 3650)
+            #            else:
+            #                suggested_period = orbital_period_days
+
+                        # Apply hard caps based on system limitations
+            #            capped_orbital_period_days = min(suggested_period, days_until_horizons, days_until_datetime_max)
+
+            #            print(f"{obj['name']}: Full period = {orbital_period_days:.1f} days, Capped = {capped_orbital_period_days:.1f} days")                            
+
+            #            capped_orbital_period_days = min(orbital_period_days, days_until_horizons, days_until_datetime_max)
+            #            capped_orbital_period_days = orbital_period_days
                         if capped_orbital_period_days <= 0:
                             dates_list = [date_obj]
                         else:
-                            interval = capped_orbital_period_days / 50      # was 50
-                            dates_list = [date_obj + timedelta(days=i) for i in np.arange(0, capped_orbital_period_days + 1, interval)]
+
+                #            print(f"DEBUG: Planet: ['name'], planet_interval_divisor: {planet_interval_divisor}, capped_orbital_period_days: {capped_orbital_period_days}")
+                #            num_points = int(planet_interval_divisor) + 1
+                #            print(f"DEBUG: Calculated num_points: {num_points} (should be planet_interval_divisor + 1)")
+                #            dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]
+
+                #            if obj['id'] in ['399', '499']:
+                #                print(f"DEBUG: Processing planet {obj['name']} (id {obj['id']})")
+                #                print(f"DEBUG: planet_interval_divisor = {planet_interval_divisor}, capped_orbital_period_days = {capped_orbital_period_days}")
+                #                step = capped_orbital_period_days / planet_interval_divisor
+                #                print(f"DEBUG: Computed step size = {step} days")
+                #            num_points = int(planet_interval_divisor) + 1
+                #            print(f"DEBUG: Calculated num_points = {num_points} (planet_interval_divisor + 1)")
+                #            dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]
+
+                #            print(f"DEBUG: Starting trajectory for {obj['name']} (id {obj['id']})") 
+                #            print(f"DEBUG: Raw planet_interval_divisor = {planet_interval_divisor}") 
+                #            print(f"DEBUG: planetary_params for {obj['name']}: {planetary_params.get(obj['name'], {})}") 
+                #            print(f"DEBUG: capped_orbital_period_days = {capped_orbital_period_days}")
+                #            num_points = int(planet_interval_divisor) + 1 
+                #            print(f"DEBUG: Calculated num_points = {num_points} (planet_interval_divisor + 1)")
+                #            dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]
+
+                            # Replace np.arange with np.linspace for more precise spacing
+                            num_points = int(planet_interval_divisor) + 1
+                            dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]                            
+                #            interval = capped_orbital_period_days / planet_interval_divisor      # divide by 50 is the default
+                #            dates_list = [date_obj + timedelta(days=i) for i in np.arange(0, capped_orbital_period_days + 1, interval)]
                         dates_lists[obj['name']] = dates_list
-                    else:                                                                       # planetary satellites
-                        dates_list = [date_obj + timedelta(days=i) for i in range(0, 2400, 20)] # starts at day 0, for 2000 days, with 20 day intervals
+                        # Use this instead:
+                #        if 'dates_list' in locals() and dates_list:
+                #            print(f"  Date list length: {len(dates_list)}")
+                #            print(f"  First date: {dates_list[0]}")
+                #            print(f"  Last date: {dates_list[-1]}")                      
+
+                        # Add in both functions where date lists are calculated
+                        has_satellites = obj['name'] in parent_planets
+                        print(f"\n{obj['name']} satellite status:")
+                        print(f"  Has satellites: {has_satellites}")
+                        if has_satellites:
+                            print(f"  Satellites: {parent_planets.get(obj['name'], [])}")
+                        print(f"  Date calculation method: {'satellite_parent' if has_satellites else 'no_satellites'}")
+
+                        # Then print the actual date range being used
+                        if 'dates_list' in locals() and dates_list:
+                            print(f"  Date range: {dates_list[0]} to {dates_list[-1]}")
+                            print(f"  Total days: {(dates_list[-1] - dates_list[0]).days}")
+                            print(f"  Points: {len(dates_list)}")
+
+                    else:   
+                        # Replace range with np.linspace for more precise spacing
+                        num_points = int(sat_plot_orbit_days / sat_plot_orbit_period) + 1
+                        dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, sat_plot_orbit_days, num=num_points)]                                                                                            # planetary satellites
+                #        dates_list = [date_obj + timedelta(days=i) for i in range(0, sat_plot_orbit_days, sat_plot_orbit_period)] # starts at day 0, for 420 days, with 7 day intervals
                         dates_lists[obj['name']] = dates_list
 
             # Fetch positions for selected objects on the chosen date
@@ -1266,7 +2745,7 @@ def plot_objects():
                     if obj['name'] == center_object_name:
                         obj_data = {'x': 0, 'y': 0, 'z': 0}
                     else:
-                        obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', 'majorbody'))
+                        obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
                     positions[obj['name']] = obj_data
 
             # Print planet positions in the console
@@ -1323,10 +2802,45 @@ def plot_objects():
             # Add hover toggle buttons
             fig = add_hover_toggle_buttons(fig)
 
-            # If center is the Sun, draw its layered visualization
-            if center_object_name == 'Sun':
+            
+        # If center is the Sun, draw its layered visualization if shells are selected
+        #    if center_object_name == 'Sun' and sun_shells_var.get() == 1:
+        #        fig = create_sun_visualization(fig)
+            if center_object_name == 'Sun' and (sun_shells_var.get() == 1 or any([          # add shells
+                sun_core_var.get(), sun_radiative_var.get(), sun_photosphere_var.get(),
+                sun_chromosphere_var.get(), sun_inner_corona_var.get(), sun_outer_corona_var.get(),
+                sun_termination_shock_var.get(), sun_heliopause_var.get(), sun_inner_oort_limit_var.get(),
+                sun_inner_oort_var.get(), sun_outer_oort_var.get(), sun_gravitational_var.get()
+            ])):
                 fig = create_sun_visualization(fig)
+        #    else:
+            elif center_object_name == 'Sun':
+            # Just add the central Sun marker if shells not selected
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=[0],
+                        y=[0],
+                        z=[0],
+                        mode='markers',
+                        marker=dict(
+        #                    color=center_object_info['color'],
+                            color='rgb(102, 187, 106)',      # chlorophyll green  
+                            size=12,                            # make the size 12 to match animate_objects
+                            symbol=center_object_info['symbol']
+                        ),
+        #                name=f"{center_object_name} (Center)",
+        #                text=[center_object_name],
+                        name="Sun",                 # Just "Sun" instead of "Sun (Center)"
+                        text=[hover_text_sun],      # add the hover text
+                        customdata=["Sun"],         # Use simple name for minimal hover
+                        hovertemplate='%{text}<extra></extra>',  # Use the detailed hover template
+        #                hoverinfo='skip',
+                        showlegend=True
+                    )
+                )
+
             else:
+                # For other central bodies, add the center marker trace
                 fig.add_trace(
                     go.Scatter3d(
                         x=[0],
@@ -1335,36 +2849,15 @@ def plot_objects():
                         mode='markers',
                         marker=dict(
                             color=center_object_info['color'],
-                            size=10,
+                            size=12,
                             symbol=center_object_info['symbol']
                         ),
-                        name=f"{center_object_name} (Center)",
+                        name=f"{center_object_name}",
                         text=[center_object_name],
                         hoverinfo='skip',
                         showlegend=True
                     )
                 )
-
-            # Again, for clarity, place the center marker
-            center_marker_size = 10
-            fig.add_trace(
-                go.Scatter3d(
-                    x=[0],
-                    y=[0],
-                    z=[0],
-                    mode='markers+text',
-                    marker=dict(
-                        color=center_object_info['color'],
-            #            color='rgb(0, 255, 0)',        #green
-                        size=center_marker_size,
-                        symbol=center_object_info['symbol']
-                    ),
-                    name=center_object_name,
-                    text=[center_object_name],
-                    hoverinfo='skip',
-                    showlegend=True
-                )
-            )
 
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
@@ -1377,7 +2870,7 @@ def plot_objects():
                     if obj['name'] == center_object_name:
                         obj_data = {'x': 0, 'y': 0, 'z': 0}
                     else:
-                        obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', 'majorbody'))
+                        obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
                     positions[obj['name']] = obj_data
 
             # Plot each celestial object
@@ -1501,13 +2994,14 @@ def plot_objects():
             selected_objects = [obj['name'] for obj in objects if obj['var'].get() == 1]
 
             # 6. Plot idealized orbits using your new logic
-            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # using this logic for animate_objects only
+            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)    
 
             # Add URL buttons before showing/saving
             fig = add_url_buttons(fig, objects, selected_objects)
 
             # Generate default name with timestamp
-            current_date = datetime.now()
+#            current_date = datetime.now()
+            current_date = STATIC_TODAY
             default_name = f"solar_system_{date_obj.strftime('%Y%m%d_%H%M')}"
 
             # Use show_figure_safely to handle both display and save options
@@ -1526,11 +3020,58 @@ def plot_objects():
     plot_thread = create_monitored_thread(shutdown_handler, worker)
     plot_thread.start()
 
+def rotate_points2(x, y, z, angle, axis='z'):
+    """
+    Rotates points (x,y,z) about the given axis by 'angle' radians.
+    Returns (xr, yr, zr) as numpy arrays.
+    
+    Parameters:
+        x (array-like): x coordinates
+        y (array-like): y coordinates
+        z (array-like): z coordinates
+        angle (float): rotation angle in radians
+        axis (str): axis of rotation ('x', 'y', or 'z')
+        
+    Returns:
+        tuple: (xr, yr, zr) rotated coordinates
+    """
+    import numpy as np
+    
+    # Convert inputs to numpy arrays if they aren't already
+    x = np.array(x, copy=True)
+    y = np.array(y, copy=True)
+    z = np.array(z, copy=True)
+
+    # Initialize rotated coordinates
+    xr = x.copy()
+    yr = y.copy()
+    zr = z.copy()
+
+    # Perform rotation based on specified axis
+    if axis == 'z':
+        # Rotate about z-axis
+        xr = x * np.cos(angle) - y * np.sin(angle)
+        yr = x * np.sin(angle) + y * np.cos(angle)
+        # zr remains the same
+    elif axis == 'x':
+        # Rotate about x-axis
+        yr = y * np.cos(angle) - z * np.sin(angle)
+        zr = y * np.sin(angle) + z * np.cos(angle)
+        # xr remains the same
+    elif axis == 'y':
+        # Rotate about y-axis
+        zr = z * np.cos(angle) - x * np.sin(angle)
+        xr = z * np.sin(angle) + x * np.cos(angle)
+        # yr remains the same
+    else:
+        raise ValueError(f"Unknown rotation axis: {axis}. Use 'x', 'y', or 'z'.")
+
+    return xr, yr, zr
+
 def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
     """
-    Plot idealized orbits for planets, dwarf planets, asteroids, and KBOs only.
-    Skip satellites, comets, and missions as their trajectories are too complex 
-    or dynamic for simple Keplerian elements.
+    Plot idealized orbits for planets, dwarf planets, asteroids, KBOs, and moons.
+    For non-Sun centers, only plots moons of that center body.
     
     Parameters:
         fig (plotly.graph_objects.Figure): The figure to add orbits to
@@ -1563,20 +3104,27 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
 
         return (xr, yr, zr)
 
+    # Track skipped objects by category
+    skipped = {
+        'satellites': [],
+        'comets': [],
+        'missions': [],
+        'no_params': [],
+        'invalid_orbit': []
+    }
+
+    plotted = []
+
+    # If center is not the Sun, we only want to plot moons of that center
+    if center_id != 'Sun':
+        # Get list of moons for this center
+        moons = parent_planets.get(center_id, [])
+        
+        # Filter objects_to_plot to only include moons of this center
+        objects_to_plot = [obj for obj in objects_to_plot if obj in moons]
+
     # If center is the Sun, plot orbits for selected heliocentric objects
     if center_id == 'Sun':
-
-        # Track skipped objects by category -- allow comets and planetary satellites
-        skipped = {
-            'satellites': [],
-            'comets': [],
-            'missions': [],
-            'no_params': [],
-            'invalid_orbit': []
-        }
-
-        plotted = []
-
         for obj_name in objects_to_plot:
             # Find the object in the objects list
             obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
@@ -1587,12 +3135,34 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
             if obj_name not in planetary_params:
                 skipped['no_params'].append(obj_name)
                 continue
-            elif obj_name in parent_planets:
+
+            # Only skip satellites if the center is the Sun and the satellite isn't of the center object
+            # This allows plotting satellite orbits when their parent is the center
+        #    if center_id == 'Sun' and obj_name in parent_planets:
+                # If we're centered on the Sun, skip planetary satellites
+        #        skipped['satellites'].append(obj_name)
+        #        continue
+
+            # Check if this is a satellite of another object (but not of the center)
+            is_satellite_of_another = False
+            for planet, moons in parent_planets.items():
+                if obj_name in moons and planet != center_id:
+                    is_satellite_of_another = True
+                    break
+
+            if center_id == 'Sun' and is_satellite_of_another:
+                # If we're centered on the Sun, skip satellites of other objects
                 skipped['satellites'].append(obj_name)
-                continue
-    #        elif obj_info.get('is_comet', False):
+                continue            
+
+    #        elif obj_name in parent_planets:
+    #            skipped['satellites'].append(obj_name)
+    #            continue
+
+    #        elif obj_info.get('is_comet', False):          # add comets to idealized orbits
     #            skipped['comets'].append(obj_name)
     #            continue
+
             elif obj_info.get('is_mission', False):
                 skipped['missions'].append(obj_name)
                 continue
@@ -1636,13 +3206,112 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
                     y=y_final,
                     z=z_final,
                     mode='lines',
-                    line=dict(dash='dot', width=1, color='white'),
-                    name=f"{obj_name} Ideal Orbit (Sun-centered)",
-                    hoverinfo='name'
+                    line=dict(dash='dot', width=1, color=obj_info['color']),
+                    name=f"{obj_name} Ideal Orbit",
+                    text=[f"{obj_name} Ideal Orbit"] * len(x_final),        # Add proper hover text
+                    customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),  # Add same for customdata
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True                    
+        #            hoverinfo='name'
                 )
             )
 
             plotted.append(obj_name)
+
+    else:
+        # For non-Sun centers, we'll plot idealized orbits for moons of that planet
+        center_object = center_id  # e.g., 'Earth'        
+        moons = parent_planets.get(center_id, [])
+
+        # Filter objects_to_plot to include only moons of this planet that are selected
+        moon_objects = [name for name in objects_to_plot if name in moons]
+        
+        # Find moons of this center object
+    #    moons = [moon for moon, parent in parent_planets.items() if parent == center_object]
+    #    moon_objects = [name for name in objects_to_plot if name in moons]
+        
+        for moon_name in moon_objects:
+            # Find the object in the objects list
+            moon_info = next((obj for obj in objects if obj['name'] == moon_name), None)
+            if moon_info is None:
+                continue
+                
+            # Check if we have orbital parameters
+            if moon_name not in planetary_params:
+                skipped['no_params'].append(moon_name)
+                continue
+                
+            params = planetary_params[moon_name]
+            # Proper parameter lookup for satellites
+    #        if is_satellite_of_center:
+    #            params = planetary_params.get(moon_name, {})
+            
+            # Get orbital parameters
+            a = params.get('a_parent', 0)  # Use a_parent if available (in planet radii)
+            if a == 0:
+                a = params.get('a', 0)  # Fallback to a (in AU)
+                
+            # Skip if semi-major axis is zero or very small
+            if a < 0.0001:
+                skipped['invalid_orbit'].append(moon_name)
+                continue
+
+            e = params.get('e', 0)
+            i = params.get('i', 0)
+            omega = params.get('omega', 0)
+            Omega = params.get('Omega', 0)
+
+            # Generate ellipse in orbital plane
+            theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
+            r = a * (1 - e**2) / (1 + e * np.cos(theta))
+            
+            x_orbit = r * np.cos(theta)
+            y_orbit = r * np.sin(theta)
+            z_orbit = np.zeros_like(theta)
+
+            # Convert angles to radians
+            i_rad = math.radians(i)
+            omega_rad = math.radians(omega)
+            Omega_rad = math.radians(Omega)
+
+            # Correct rotation sequence:
+            # 1. Longitude of ascending node (Ω) around z-axis
+            x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+            # 2. Inclination (i) around x-axis
+            x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+            # 3. Argument of periapsis (ω) around z-axis
+            x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+
+            # Rotate ellipse -- this may cause the wrong angle to be plotted
+    #        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+    #        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+    #        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+
+            orbit_name = f"{moon_name} Ideal Orbit around {center_object}"
+            hover_text = f"{moon_name} Ideal Orbit around {center_object}"
+
+            fig.add_trace(
+                go.Scatter3d(
+                    x=x_final,
+                    y=y_final,
+                    z=z_final,
+                    mode='lines',
+                    line=dict(dash='dot', width=1, color=moon_info['color']),
+
+                    name=orbit_name,
+                    text=[hover_text] * len(x_final),
+                    customdata=[hover_text] * len(x_final),
+
+        #            name=f"{moon_name} Ideal Orbit",
+        #            text=[f"{moon_name} Ideal Orbit around {center_id}"] * len(x_final),
+        #            customdata=[f"{moon_name} Ideal Orbit"] * len(x_final),
+        
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
+            )
+
+            plotted.append(moon_name)
 
         # Print summary of plotted and skipped objects
         print("\nIdeal Orbit Summary:")
@@ -1675,11 +3344,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
             print(f"\nInvalid Orbital Parameters ({len(skipped['invalid_orbit'])}):")
             for obj in skipped['invalid_orbit']:
                 print(f"  - {obj}")
-    else:
+#    else:
         # No idealized orbits for planetary satellites
-        print(f"\nNo ideal orbits plotted - center is {center_id} (not Sun)")
+#        print(f"\nNo ideal orbits plotted - center is {center_id} (not Sun)")
 
-    return fig
+        return fig
 
 def show_animation_safely(fig, default_name):
     """Show and optionally save an animated Plotly figure with proper cleanup."""
@@ -1805,6 +3474,35 @@ def animate_objects(step, label):
                 output_label.config(text="Number of frames must be positive.")
                 return
 
+            # Get all user-defined interval values
+            try:
+                # Read all user entries
+                comet_interval_divisor = float(comet_interval_entry.get())
+                mission_interval_divisor = float(mission_interval_entry.get())
+                planet_interval_divisor = float(planet_interval_entry.get())
+                sat_plot_orbit_days = int(sat_days_entry.get())
+                sat_plot_orbit_period = int(sat_period_entry.get())
+                end_date_offset = int(end_date_entry.get())
+                start_date_offset = int(start_date_entry.get())
+                
+                # Validate entries (ensure positive values)
+                if comet_interval_divisor <= 0: comet_interval_divisor = 100
+                if mission_interval_divisor <= 0: mission_interval_divisor = 75
+                if planet_interval_divisor <= 0: planet_interval_divisor = 50
+                if sat_plot_orbit_days <= 0: sat_plot_orbit_days = 56              
+                if sat_plot_orbit_period <= 0: sat_plot_orbit_period = 1
+                
+            except ValueError:
+                # Default values if parsing fails
+                comet_interval_divisor = 100
+                mission_interval_divisor = 75
+                planet_interval_divisor = 50
+                sat_plot_orbit_days = 56
+                sat_plot_orbit_period = 1
+                end_date_offset = 730  # Default 2 years
+                start_date_offset = 0   # Default 0 days (from now)
+                output_label.config(text="Some invalid interval values, using defaults.")
+
             # Generate dates list
             current_date = datetime(
                 int(entry_year.get()), 
@@ -1815,33 +3513,71 @@ def animate_objects(step, label):
                 )
             dates_list = []
 
-            for i in range(N):
-                if step == 'month':
+            if step == 'month':
+                # For months, properly handle month lengths
+                for i in range(N):
                     month_offset = current_date.month - 1 + i
                     year = current_date.year + month_offset // 12
                     month = month_offset % 12 + 1
+                    # Handle case where the day might not exist in the month
                     day = min(current_date.day, calendar.monthrange(year, month)[1])
-                    date = datetime(year, month, day, current_date.hour)
-                elif step == 'year':
+                    date = datetime(year, month, day, current_date.hour, current_date.minute)
+                    dates_list.append(date)
+            elif step == 'year':
+                # For years, handle leap year issues
+                for i in range(N):
                     try:
                         date = current_date.replace(year=current_date.year + i)
                     except ValueError:
+                        # Handle Feb 29 in non-leap years
                         date = current_date.replace(year=current_date.year + i, month=2, day=28)
-                else:
+                    dates_list.append(date)
+            else:
+                # For days, hours, minutes, etc.
+                for i in range(N):
                     date = current_date + step * i
-                if date > HORIZONS_MAX_DATE:
-                    print(f"Date {date} exceeds Horizons' data range. Skipping further dates.")
-                    break
-                dates_list.append(date)
+                    dates_list.append(date)
+            
+            # Check for dates exceeding Horizons' data range
+            valid_dates = []
+            for date in dates_list:
+                if date <= HORIZONS_MAX_DATE:
+                    valid_dates.append(date)
+                else:
+                    print(f"Date {date} exceeds Horizons' data range. Skipping.")
+            
+            # Update dates_list with only valid dates
+            dates_list = valid_dates
+            
+            # Make sure we have at least one valid date
+            if not dates_list:
+                output_label.config(text="No valid dates within Horizons data range.")
+                return
+                
+            # Update N if dates were filtered out
+            N = len(dates_list)
+            
+            # Initialize dates_lists dictionary
+            dates_lists = {}
 
-            # In the animate_objects function's animation_worker:
+            # Use the same dates_list for all objects
+            for obj in objects:
+                if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                    dates_lists[obj['name']] = dates_list
+
+            # Fetch trajectory data for all selected objects
             positions_over_time = {}
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
+
+                    # Check if this is a moon of the center object
+                    is_satellite = center_object_name in parent_planets and obj['name'] in parent_planets.get(center_object_name, [])
+
                     if 'start_date' in obj or 'end_date' in obj:
                         # Get start/end dates with fallbacks
                         start_date = obj.get('start_date', dates_list[0])
                         end_date = obj.get('end_date', dates_list[-1])
+
                         positions_over_time[obj['name']] = pad_trajectory(
                             dates_list, 
                             start_date,
@@ -1850,6 +3586,18 @@ def animate_objects(step, label):
                             center_id, 
                             obj.get('id_type')
                         )
+
+                    # For objects without specific date ranges, use our custom date lists
+                    elif obj['name'] in dates_lists:
+                        obj_dates = dates_lists[obj['name']]
+                        if obj_dates:  # Only fetch if we have dates
+                            positions_over_time[obj['name']] = fetch_trajectory(
+                                obj['id'], 
+                                obj_dates, 
+                                center_id=center_id, 
+                                id_type=obj.get('id_type')
+                            )
+
                     else:
                         positions_over_time[obj['name']] = fetch_trajectory(
                             obj['id'], 
@@ -1861,41 +3609,81 @@ def animate_objects(step, label):
             # Initialize figure
             fig = go.Figure()
 
-            # Add Sun visualization if Sun is center
-            if center_object_name == 'Sun':
+            # After you create your Plotly figure (fig = go.Figure()) and before plotting the moving objects:
+            selected_objects = [obj for obj in objects if obj['var'].get() == 1]
+
+            # Plot actual orbits using the dates_lists we just created
+            # This matches the behavior in plot_objects
+            selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
+            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)
+
+            if center_object_name == 'Sun' and (sun_shells_var.get() == 1 or any([
+                sun_core_var.get(), sun_radiative_var.get(), sun_photosphere_var.get(),
+                sun_chromosphere_var.get(), sun_inner_corona_var.get(), sun_outer_corona_var.get(),
+                sun_termination_shock_var.get(), sun_heliopause_var.get(), sun_inner_oort_limit_var.get(),
+                sun_inner_oort_var.get(), sun_outer_oort_var.get(), sun_gravitational_var.get()
+            ])):
                 fig = create_sun_visualization(fig)
-        #    else:
+
+                # Add the Sun marker only if Sun is also selected
+                if sun_var.get() == 1:
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[0], y=[0], z=[0],
+                            mode='markers',
+                            marker=dict(
+                                color='rgb(102, 187, 106)',      # chlorophyll green  
+                                size=12,
+                                symbol=center_object_info['symbol']
+                            ),
+                            name="Sun",
+                            text=[hover_text_sun],
+                            customdata=["Sun"],
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True
+                        )
+                    )
+
+            elif center_object_name == 'Sun':
                 fig.add_trace(
                     go.Scatter3d(
                         x=[0], y=[0], z=[0],
-                        mode='markers+text',
+                        mode='markers',                             # removed +text to omit the permanent "Sun" name above the marker
                         marker=dict(
             #                color=center_object_info['color'],
-                            color='rgb(102, 187, 106)',      # chlorophyll green                      
+                            color='rgb(102, 187, 106)',             # chlorophyll green                      
                             size=12,    
                             symbol=center_object_info['symbol']
                             ),
-                        name=f"{center_object_name} (Center)",
-                        text=[center_object_name],
-                        hoverinfo='skip',
+            #            name=f"{center_object_name} (Center)",
+            #            text=[center_object_name],
+                        name="Sun",                                 # Just "Sun" instead of "Sun (Center)"
+                        text=[hover_text_sun],
+                        customdata=["Sun"],                         # Use simple name for minimal hover
+                        hovertemplate='%{text}<extra></extra>',     # Use the detailed hover template
+            #            hoverinfo='skip',
                         showlegend=True
                     )
                 )
    
             else:
-                # Existing fallback for other centers
+                # For non-Sun centers (planets), add a marker at the center
                 fig.add_trace(
                     go.Scatter3d(
                         x=[0], y=[0], z=[0],
-                        mode='markers+text',
+            #            mode='markers+text',            
+                        mode='markers',            # omit +text
                         marker=dict(
                             color=center_object_info['color'],
                             size=12,
                             symbol=center_object_info['symbol']
                         ),
-                        name=f"{center_object_name} (Center)",
-                        text=[center_object_name],
-                        hoverinfo='skip',
+                        name=f"{center_object_name}",
+                        text=[f"<b>{center_object_name}</b><br>Center of the current view"],
+                        customdata=[f"<b>{center_object_name}</b>"],
+                        hovertemplate='%{text}<extra></extra>',
+            #            text=[center_object_name],
+            #            hoverinfo='skip',
                         showlegend=True
                     )
                 )
@@ -1912,6 +3700,10 @@ def animate_objects(step, label):
                                                     obj_data['z']**2)
                         customdata = [distance_from_origin, obj.get('mission_info')]
 
+                        # Identify if this is a satellite of the center object
+                        is_satellite = center_object_name in parent_planets and obj['name'] in parent_planets.get(center_object_name, [])
+                        satellite_note = f"<br>Moon of {center_object_name}" if is_satellite else ""
+                        
                         # Format hover text for this object
                         hover_texts = format_hover_text({
                             'range': distance_from_origin,
@@ -1919,10 +3711,13 @@ def animate_objects(step, label):
                 #            'distance_lm': obj_data.get('distance_lm', 'N/A'),
                 #            'distance_lh': obj_data.get('distance_lh', 'N/A'),
                 #            'orbital_period': obj_data.get('orbital_period', 'N/A'),
-                            'mission_info': obj.get('mission_info', '')
+                            'mission_info': obj.get('mission_info', ''),
+                            'is_satellite': is_satellite,
+                            'parent_body': center_object_name if is_satellite else None
                         }, obj['name'], True)
                         
-                        full_hover_text = hover_texts[0]  # First element is full hover text
+                        full_hover_text = hover_texts[0] + satellite_note  # Add satellite note to full hover text
+                #        full_hover_text = hover_texts[0]  # First element is full hover text
                         minimal_hover_text = hover_texts[1]  # Second element is minimal hover text
 
                         fig.add_trace(
@@ -1965,6 +3760,14 @@ def animate_objects(step, label):
 
             # Create frames
             frames = []
+
+            # This is a more comprehensive fix for the animate_objects function
+            # The issue is likely that the animation frames aren't correctly extracting
+            # or formatting the orbital period data from the trajectory data
+
+            # Inside animate_objects function, find the part where frames are created
+            # and replace/add this code for processing each object's data:
+
             for i in range(N):
                 frame_data = []
                 current_date = dates_list[i]
@@ -1975,6 +3778,33 @@ def animate_objects(step, label):
                         
                         if obj_positions and obj_positions[i] is not None and obj_positions[i].get('x') is not None:
                             obj_data = obj_positions[i]
+
+                            # CRITICAL FIX: Ensure velocity information is available for this specific date
+                            if 'velocity' not in obj_data or obj_data['velocity'] is None or obj_data['velocity'] == 'N/A':
+                                try:
+                                    # Directly fetch position/velocity data for this specific date
+                                    direct_pos = fetch_position(
+                                        obj['id'], 
+                                        current_date, 
+                                        center_id=center_id, 
+                                        id_type=obj.get('id_type', None)
+                                    )
+                                    
+                                    # If successful, use that velocity
+                                    if direct_pos and 'velocity' in direct_pos and direct_pos['velocity'] not in (None, 'N/A'):
+                                        obj_data['velocity'] = direct_pos['velocity']
+                                    # Or compute from velocity components if available
+                                    elif all(k in obj_data for k in ['vx', 'vy', 'vz']):
+                                        vx = obj_data.get('vx', 0)
+                                        vy = obj_data.get('vy', 0)
+                                        vz = obj_data.get('vz', 0)
+                                        # Only calculate if all values are not None
+                                        if all(v is not None for v in [vx, vy, vz]):
+                                            obj_data['velocity'] = np.sqrt(vx**2 + vy**2 + vz**2)
+                                except Exception as e:
+                                    print(f"Error fetching velocity data for {obj['name']}: {e}")
+
+                            # Calculate basic position and distance data
                             distance_from_origin = np.sqrt(obj_data['x']**2 + 
                                                         obj_data['y']**2 + 
                                                         obj_data['z']**2)
@@ -1993,11 +3823,97 @@ def animate_objects(step, label):
                                 surface_distance_str = f"{surface_distance_km:.10e}"
                             else:
                                 surface_distance_str = "N/A"
+                            
+                            # Format velocity
+                            velocity = obj_data.get('velocity', 'N/A')
+                            velocity_str = f"{velocity:.10f}" if isinstance(velocity, (int, float)) else "N/A"
+                            
+                            # Check if this is a satellite
+                            is_satellite = False
+                            satellite_parent = None
+                            for planet, satellites in parent_planets.items():
+                                if obj['name'] in satellites:
+                                    is_satellite = True
+                                    satellite_parent = planet
+                                    break
+                            
+                            satellite_note = f"<br>Moon of {center_object_name}" if (is_satellite and satellite_parent == center_object_name) else ""
+                            
+                            # For animation frames, we need to handle orbital period data directly
+                            obj_name = obj['name']
+                            
+                            # 1. Calculated orbital period
+                            calculated_period_str = "N/A"
+                            orbital_period_years = None  # Initialize this variable
 
-                            customdata = [{
-                                'distance': f"{distance_from_origin:.10f}",
-                                'mission_info': obj.get('mission_info')
-                            }]
+                            if not is_satellite and obj_name in planetary_params:
+                                a = planetary_params[obj_name]['a']  # Semi-major axis in AU
+                                orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
+                                orbital_period_days = orbital_period_years * 365.25
+                                calculated_period_str = f"{orbital_period_years:.4f} Earth years ({orbital_period_days:.2f} days)"
+                            
+                            # 2. Known orbital period
+                            known_period_str = "N/A"
+                            period_diff_percent = "N/A"  # Initialize this here before any use
+                            velocity_km_hr = "N/A"  # Initialize this here
+
+                            if obj_name in KNOWN_ORBITAL_PERIODS:
+                                known_value = KNOWN_ORBITAL_PERIODS[obj_name]
+                                
+                                if is_satellite:
+                                    # For satellites, values are in days
+                                    known_days = known_value
+                                    known_years = known_value / 365.25
+                                else:
+                                    # For non-satellites, values are in years
+                                    known_years = known_value
+                                    known_days = known_value * 365.25
+                                    
+                                known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days)"
+
+                                # Calculate velocity in km/hr
+                                if isinstance(velocity, (int, float)):
+                                    velocity_km_hr = f"{velocity * KM_PER_AU / 24:,.2f}"
+                                elif isinstance(velocity_str, str) and velocity_str != "N/A" and velocity_str.replace('.', '', 1).isdigit():
+                                    try:
+                                        velocity_float = float(velocity_str)
+                                        velocity_km_hr = f"{velocity_float * KM_PER_AU / 24:,.2f}"
+                                    except ValueError:
+                                        pass
+
+                                # Calculate percent difference between calculated and known orbital periods
+                                if (not is_satellite and 
+                                    orbital_period_years is not None and 
+                                    isinstance(orbital_period_years, (int, float)) and
+                                    isinstance(known_years, (int, float)) and 
+                                    known_years != 0):
+                                    
+                                    period_diff = abs(orbital_period_years - known_years)
+                                    period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
+                                    known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days) (Percent difference: {period_diff_percent}%)"
+
+                                """
+                                if period_diff_percent != "N/A":
+                                    known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days) (Percent difference: {period_diff_percent}%)"
+                
+                                # Calculate velocity in km/hr
+                                velocity_km_hr = "N/A"
+                                if isinstance(velocity, (int, float)):
+                                    velocity_km_hr = f"{velocity * KM_PER_AU / 24:,.2f}"
+                                elif isinstance(velocity_str, str) and velocity_str != "N/A" and velocity_str.replace('.', '', 1).isdigit():
+                                    try:
+                                        velocity_float = float(velocity_str)
+                                        velocity_km_hr = f"{velocity * KM_PER_AU / 24:,.2f}"
+                                    except ValueError:
+                                        pass
+                                        
+
+                                # Calculate percent difference between calculated and known orbital periods
+                                period_diff_percent = "N/A"
+                                if (not is_satellite and orbital_period_years and known_years and known_years != 0):
+                                    period_diff = abs(orbital_period_years - known_years)
+                                    period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
+                                    """
 
                             frame_data.append(dict(
                                 type='scatter3d',
@@ -2006,16 +3922,22 @@ def animate_objects(step, label):
                                 z=[obj_data['z']],
                                 text=[f"<b>{obj['name']}</b><br><br>"
                                     f"Distance from Center: {distance_from_origin:.10f} AU<br>"
-                                    f"Distance: {distance_km:.10e} kilometers<br>"               # changed .2f to .10e for scientific notation
+                                    f"Distance: {distance_km:.10e} kilometers<br>"
                                     f"Distance: {distance_lm:.10f} light-minutes<br>"
                                     f"Distance: {distance_lh:.10f} light-hours<br>"
-                                    f"Distance to Center Surface: {surface_distance_str} kilometers<br>"                                   
-                                    + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")],
+                                    f"Distance to Center Surface: {surface_distance_str} kilometers<br>" 
+                                    f"Velocity: {velocity_str} AU/day<br>"  
+                                    f"Velocity: {velocity_km_hr} km/hr<br>"    
+                                    + (f"Calculated Orbital Period: N/A (satellite of {satellite_parent})<br>" if is_satellite else f"Calculated Orbital Period: {calculated_period_str}<br>")
+                                    + f"Known Orbital Period: {known_period_str}"
+                                    + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")
+                                    + satellite_note],
                                 customdata=[f"<b>{obj['name']}</b>"],
                                 hovertemplate='%{text}<extra></extra>',
                                 visible=True
                             ))
                         else:
+                            # Handle null/missing data points
                             frame_data.append(dict(
                                 type='scatter3d',
                                 x=[None],
@@ -2039,7 +3961,8 @@ def animate_objects(step, label):
             # Collect coordinates from all positions for all objects
             for obj_name, positions in positions_over_time.items():
                 for pos in positions:
-                    if pos:  # Check if position data exists
+                    if pos and pos.get('x') is not None:  # Check if position data exists
+        #            if pos:  # Check if position data exists
                         x_coords.append(pos['x'])
                         y_coords.append(pos['y'])
                         z_coords.append(pos['z'])
@@ -2067,16 +3990,27 @@ def animate_objects(step, label):
                 except ValueError:
                     pass  # Keep calculated range if custom scale is invalid
 
-            selected_objects = [
-                obj['name']
-                for obj in objects
-                if obj['var'].get() == 1 and not obj.get('is_mission', False)
-            ]
+            # Get list of objects to plot idealized orbits for
+            # Don't include satellites if not centered on Sun
+            if center_object_name == 'Sun':
+                selected_objects = [
+                    obj['name']
+                    for obj in objects
+                    if obj['var'].get() == 1 and not obj.get('is_mission', False)
+                ]
+            else:
+                # For non-Sun centers, we only want to plot idealized orbits of moons
 
+                selected_objects = [
+                    obj['name']
+                    for obj in objects
+        #            if obj['var'].get() == 1 and parent_planets.get(obj['name']) == center_object_name      # identifies moons of a parent planet
+                    if obj['var'].get() == 1 and obj['name'] in parent_planets.get(center_object_name, [])
+        #            if obj['var'].get() == 1 and not obj.get('is_mission', False)
+                ]
+
+            # Add idealized orbits if appropriate
             plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # duplicate set of ideal orbit traces
-
-            # Add URL buttons before showing/saving
-        #    fig = add_url_buttons(fig, objects, selected_objects)
 
             # Update layout with dynamic scaling
             fig.update_layout(
@@ -2195,18 +4129,17 @@ def animate_objects(step, label):
             fig = add_url_buttons(fig, objects, selected_objects)            
 
             # Generate default name with timestamp
-            current_date = datetime.now()
-            default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
-
-            # New code at the end of animation_worker:
-            current_date = datetime.now()
-            default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
+#            current_date = datetime.now()
+            current_date = STATIC_TODAY
+            default_name = f"{center_object_name}_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
+    #        default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
             show_animation_safely(fig, default_name)
 
             # Update output_label with instructions
             output_label.config(
-                text="Animation opened in browser. "
-                    "Use your browser's File -> Save As to save the animation if desired."
+                text=f"Animation of objects around {center_object_name} opened in browser."
+    #            text="Animation opened in browser."
+    #                "Use your browser's File -> Save As to save the animation if desired."
             )
             progress_bar.stop()
 
@@ -2258,6 +4191,22 @@ def update_date_fields(new_date):
     entry_hour.insert(0, new_date.hour)
     entry_minute.delete(0, tk.END)
     entry_minute.insert(0, new_date.minute)
+
+def toggle_all_shells():
+    """Toggle all sun shell checkboxes based on the main shell checkbox."""
+    state = sun_shells_var.get()
+    sun_core_var.set(state)
+    sun_radiative_var.set(state)
+    sun_photosphere_var.set(state)
+    sun_chromosphere_var.set(state)
+    sun_inner_corona_var.set(state)
+    sun_outer_corona_var.set(state)
+    sun_termination_shock_var.set(state)
+    sun_heliopause_var.set(state)
+    sun_inner_oort_limit_var.set(state)
+    sun_inner_oort_var.set(state)
+    sun_outer_oort_var.set(state)
+    sun_gravitational_var.set(state)
 
 # Function to handle mission selection (no longer adjusts date)
 def handle_mission_selection():
@@ -2495,127 +4444,6 @@ scrollable_frame.pack_propagate(False)  # Disable automatic resizing
 scrollable_frame.scrollable_frame.config(width=410, height=690)
 scrollable_frame.scrollable_frame.pack_propagate(False)
 
-# Define selection variables for each object
-# Set inner planets selected by default
-sun_var = tk.IntVar(value=1)  
-mercury_var = tk.IntVar(value=1) # default
-venus_var = tk.IntVar(value=1) # default
-earth_var = tk.IntVar(value=1)  # Set Earth to 1 to preselect it by default
-moon_var = tk.IntVar(value=0)  
-pt5_var = tk.IntVar(value=0)
-yr4_var = tk.IntVar(value=0)
-mars_var = tk.IntVar(value=1) # default
-ceres_var = tk.IntVar(value=0)
-jupiter_var = tk.IntVar(value=0)
-saturn_var = tk.IntVar(value=0)
-uranus_var = tk.IntVar(value=0)
-neptune_var = tk.IntVar(value=0)
-pluto_var = tk.IntVar(value=0)
-haumea_var = tk.IntVar(value=0)
-makemake_var = tk.IntVar(value=0)
-eris_var = tk.IntVar(value=0)
-eris2_var = tk.IntVar(value=0)
-voyager1_var = tk.IntVar(value=0)
-voyager1h_var = tk.IntVar(value=0)
-voyager2_var = tk.IntVar(value=0)
-cassini_var = tk.IntVar(value=0)
-new_horizons_var = tk.IntVar(value=0)
-juno_var = tk.IntVar(value=0)
-galileo_var = tk.IntVar(value=0)
-pioneer10_var = tk.IntVar(value=0)
-pioneer11_var = tk.IntVar(value=0)
-europa_clipper_var = tk.IntVar(value=0)
-osiris_rex_var = tk.IntVar(value=0)
-osiris_apex_var = tk.IntVar(value=0)
-parker_solar_probe_var = tk.IntVar(value=0)
-jwst_var = tk.IntVar(value=0)
-rosetta_var = tk.IntVar(value=0)
-bepicolombo_var = tk.IntVar(value=0)
-solarorbiter_var = tk.IntVar(value=0)
-akatsuki_var = tk.IntVar(value=0)
-comet_ikeya_seki_var = tk.IntVar(value=0)
-comet_west_var = tk.IntVar(value=0)
-comet_halley_var = tk.IntVar(value=0)
-comet_hyakutake_var = tk.IntVar(value=0)
-comet_hale_bopp_var = tk.IntVar(value=0)
-comet_mcnaught_var = tk.IntVar(value=0)
-comet_neowise_var = tk.IntVar(value=0)
-comet_tsuchinshan_atlas_var = tk.IntVar(value=0)
-comet_Churyumov_Gerasimenko_var = tk.IntVar(value=0)
-comet_borisov_var = tk.IntVar(value=0)
-comet_atlas_var = tk.IntVar(value=0)
-oumuamua_var = tk.IntVar(value=0)
-apophis_var = tk.IntVar(value=0)
-vesta_var = tk.IntVar(value=0)
-bennu_var = tk.IntVar(value=0)  
-bennu2_var = tk.IntVar(value=0)  # Bennu as a center body
-steins_var = tk.IntVar(value=0) 
-lutetia_var = tk.IntVar(value=0) 
-soho_var = tk.IntVar(value=0)
-ryugu_var = tk.IntVar(value=0)
-eros_var = tk.IntVar(value=0)
-itokawa_var = tk.IntVar(value=0)
-change_var = tk.IntVar(value=0)
-perse_var = tk.IntVar(value=0)
-dart_var = tk.IntVar(value=0)
-lucy_var = tk.IntVar(value=0)
-nix_var = tk.IntVar(value=0)
-kbo_var = tk.IntVar(value=0)
-gaia_var = tk.IntVar(value=0)
-hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
-hydra_var = tk.IntVar(value=0)  # 0 means unselected by default
-# Define IntVar variables for Kuiper Belt Objects
-quaoar_var = tk.IntVar(value=0)
-sedna_var = tk.IntVar(value=0)
-orcus_var = tk.IntVar(value=0)    # 0 means unselected by default
-varuna_var = tk.IntVar(value=0)
-gv9_var = tk.IntVar(value=0)
-ms4_var = tk.IntVar(value=0)
-dw_var = tk.IntVar(value=0)
-or10_var = tk.IntVar(value=0)
-arrokoth_var = tk.IntVar(value=0)
-ixion_var = tk.IntVar(value=0)
-
-# New Selection Variables for Major Moons
-
-# Mars' Moons
-phobos_var = tk.IntVar(value=0)
-deimos_var = tk.IntVar(value=0)
-
-# Jupiter's Galilean Moons
-io_var = tk.IntVar(value=0)
-europa_var = tk.IntVar(value=0)
-ganymede_var = tk.IntVar(value=0)
-callisto_var = tk.IntVar(value=0)
-
-# Saturn's Major Moons
-titan_var = tk.IntVar(value=0)
-enceladus_var = tk.IntVar(value=0)
-rhea_var = tk.IntVar(value=0)
-dione_var = tk.IntVar(value=0)
-tethys_var = tk.IntVar(value=0)
-mimas_var = tk.IntVar(value=0)
-phoebe_var = tk.IntVar(value=0)
-
-# Uranus's Major Moons
-oberon_var = tk.IntVar(value=0)
-umbriel_var = tk.IntVar(value=0)
-ariel_var = tk.IntVar(value=0)
-miranda_var = tk.IntVar(value=0)
-titania_var = tk.IntVar(value=0)
-
-# Neptune's Major Moon
-triton_var = tk.IntVar(value=0)
-
-# Pluto's Moon
-charon_var = tk.IntVar(value=0)
-
-# Eris's Moon
-dysnomia_var = tk.IntVar(value=0)
-
-# Proxima Centauri variable
-proxima_var = tk.IntVar(value=0)  
-
 # Scrollable frame for celestial objects and missions
 scrollable_frame = ScrollableFrame(input_frame)
 scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
@@ -2627,13 +4455,16 @@ CreateToolTip(scrollable_frame.scrollable_frame, "Use the scrollbar to see all o
               "Select a start date for plotting. The default start date is \'Now\'.")
 
 # Checkbuttons for celestial objects
-celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Planets, Dwarf Planets, Moons, Asteroids, and Kuiper" 
-                                "Belt Objects")
+celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Solar Shells, Planets, Dwarf Planets, Moons, Asteroids, " 
+                                "Kuiper Belt Objects")
 celestial_frame.pack(pady=(10, 5), fill='x')
+CreateToolTip(celestial_frame, "Select celestial bodies for plotting. Selected objects will be plotted on the entered date, as well " 
+              "as actual and ideal orbits. Selected objects will be animated only over the fetched dates, and will plot both actual and " 
+              "ideal orbits.")
 
 def create_celestial_checkbutton(name, variable):
     # For main planets and Sun, make a bold label
-    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto']:
+    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Planet 9 (Hypothetical)']:
         # Create frame to hold checkbox and label
         frame = tk.Frame(celestial_frame)
         frame.pack(anchor='w')
@@ -2658,72 +4489,147 @@ def create_celestial_checkbutton(name, variable):
 
 # Existing celestial checkbuttons
 create_celestial_checkbutton("Sun", sun_var)
+# create_celestial_checkbutton("- Solar Shells", sun_shells_var)
+
+# After the "- Solar Shells" checkbutton
+# First, modify the existing Solar Shells checkbutton to call toggle_all_shells
+sun_shells_checkbutton = tk.Checkbutton(celestial_frame, text="- Solar Shells (All)", variable=sun_shells_var, command=toggle_all_shells)
+sun_shells_checkbutton.pack(anchor='w')
+CreateToolTip(sun_shells_checkbutton, "Toggle all Sun shells on/off")
+
+# Create a Frame specifically for the shell options (indented)
+shell_options_frame = tk.Frame(celestial_frame)
+shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
+# Add individual shell checkbuttons in the indented frame
+sun_core_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Core", variable=sun_core_var)
+sun_core_checkbutton.pack(anchor='w')
+CreateToolTip(sun_core_checkbutton, core_info)
+
+sun_radiative_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Radiative Zone", variable=sun_radiative_var)
+sun_radiative_checkbutton.pack(anchor='w')
+CreateToolTip(sun_radiative_checkbutton, radiative_zone_info)
+
+sun_photosphere_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Photosphere", variable=sun_photosphere_var)
+sun_photosphere_checkbutton.pack(anchor='w')
+CreateToolTip(sun_photosphere_checkbutton, photosphere_info)
+
+sun_chromosphere_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Chromosphere", variable=sun_chromosphere_var)
+sun_chromosphere_checkbutton.pack(anchor='w')
+CreateToolTip(sun_chromosphere_checkbutton, chromosphere_info)
+
+sun_inner_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inner Corona", variable=sun_inner_corona_var)
+sun_inner_corona_checkbutton.pack(anchor='w')
+CreateToolTip(sun_inner_corona_checkbutton, inner_corona_info)
+
+sun_outer_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Outer Corona", variable=sun_outer_corona_var)
+sun_outer_corona_checkbutton.pack(anchor='w')
+CreateToolTip(sun_outer_corona_checkbutton, outer_corona_info)
+
+sun_termination_shock_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Termination Shock", variable=sun_termination_shock_var)
+sun_termination_shock_checkbutton.pack(anchor='w')
+CreateToolTip(sun_termination_shock_checkbutton, termination_shock_info)
+
+sun_heliopause_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Heliopause", variable=sun_heliopause_var)
+sun_heliopause_checkbutton.pack(anchor='w')
+CreateToolTip(sun_heliopause_checkbutton, solar_wind_info)
+
+sun_inner_oort_limit_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inner Limit of Oort Cloud", variable=sun_inner_oort_limit_var)
+sun_inner_oort_limit_checkbutton.pack(anchor='w')
+CreateToolTip(sun_inner_oort_limit_checkbutton, inner_limit_oort_info)
+
+sun_inner_oort_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inner Oort Cloud", variable=sun_inner_oort_var)
+sun_inner_oort_checkbutton.pack(anchor='w')
+CreateToolTip(sun_inner_oort_checkbutton, inner_oort_info)
+
+sun_outer_oort_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Outer Oort Cloud", variable=sun_outer_oort_var)
+sun_outer_oort_checkbutton.pack(anchor='w')
+CreateToolTip(sun_outer_oort_checkbutton, outer_oort_info)
+
+sun_gravitational_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Gravitational Influence", variable=sun_gravitational_var)
+sun_gravitational_checkbutton.pack(anchor='w')
+CreateToolTip(sun_gravitational_checkbutton, gravitational_influence_info)
+
+# inner planets
 create_celestial_checkbutton("Mercury", mercury_var)
 create_celestial_checkbutton("Venus", venus_var)
 create_celestial_checkbutton("Earth", earth_var)
 create_celestial_checkbutton("- Moon", moon_var)
+create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)
 create_celestial_checkbutton("- 2024 PT5", pt5_var)
 create_celestial_checkbutton("- 2024 YR4", yr4_var)
 create_celestial_checkbutton("Mars", mars_var)
 create_celestial_checkbutton("- Phobos", phobos_var)
 create_celestial_checkbutton("- Deimos", deimos_var)
-create_celestial_checkbutton("Ceres", ceres_var)
+# asteroids
 create_celestial_checkbutton("Apophis", apophis_var)
 create_celestial_checkbutton("Bennu", bennu_var)
-create_celestial_checkbutton("Šteins", steins_var)
-create_celestial_checkbutton("Lutetia", lutetia_var)
-create_celestial_checkbutton("Vesta", vesta_var)
-create_celestial_checkbutton("Ryugu", ryugu_var)
+create_celestial_checkbutton("Ceres", ceres_var)
 create_celestial_checkbutton("Eros", eros_var)
 create_celestial_checkbutton("Itokawa", itokawa_var)
+create_celestial_checkbutton("Lutetia", lutetia_var)
+create_celestial_checkbutton("Ryugu", ryugu_var)
+create_celestial_checkbutton("Šteins", steins_var)
+create_celestial_checkbutton("Vesta", vesta_var)
+# outer planets
 create_celestial_checkbutton("Jupiter", jupiter_var)
 create_celestial_checkbutton("- Io", io_var)
 create_celestial_checkbutton("- Europa", europa_var)
 create_celestial_checkbutton("- Ganymede", ganymede_var)
 create_celestial_checkbutton("- Callisto", callisto_var)
+
 create_celestial_checkbutton("Saturn", saturn_var)
-create_celestial_checkbutton("- Titan", titan_var)
-create_celestial_checkbutton("- Enceladus", enceladus_var)
-create_celestial_checkbutton("- Rhea", rhea_var)
-create_celestial_checkbutton("- Dione", dione_var)
-create_celestial_checkbutton("- Tethys", tethys_var)
 create_celestial_checkbutton("- Mimas", mimas_var)
+create_celestial_checkbutton("- Enceladus", enceladus_var)
+create_celestial_checkbutton("- Tethys", tethys_var)
+create_celestial_checkbutton("- Dione", dione_var)
+create_celestial_checkbutton("- Rhea", rhea_var)
+create_celestial_checkbutton("- Titan", titan_var)
 create_celestial_checkbutton("- Phoebe", phoebe_var)
+
 create_celestial_checkbutton("Uranus", uranus_var)
-create_celestial_checkbutton("- Oberon", oberon_var)
-create_celestial_checkbutton("- Umbriel", umbriel_var)
-create_celestial_checkbutton("- Ariel", ariel_var)
 create_celestial_checkbutton("- Miranda", miranda_var)
+create_celestial_checkbutton("- Ariel", ariel_var)
+create_celestial_checkbutton("- Umbriel", umbriel_var)
 create_celestial_checkbutton("- Titania", titania_var)
+create_celestial_checkbutton("- Oberon", oberon_var)
+
 create_celestial_checkbutton("Neptune", neptune_var)
 create_celestial_checkbutton("- Triton", triton_var)
+
 create_celestial_checkbutton("Pluto", pluto_var)
 create_celestial_checkbutton("- Charon", charon_var)
 create_celestial_checkbutton("- Nix", nix_var)
 create_celestial_checkbutton("- Hydra", hydra_var)
-create_celestial_checkbutton("Ixion", ixion_var)
-create_celestial_checkbutton("GV9", gv9_var)
-create_celestial_checkbutton("Quaoar", quaoar_var)
+
+create_celestial_checkbutton("Planet 9 (Hypothetical)", planet9_var)
+
+# Kuiper Belt Objects
+create_celestial_checkbutton("2004 GV9", gv9_var)
+create_celestial_checkbutton("2002 MS4", ms4_var)
 create_celestial_checkbutton("Arrokoth", arrokoth_var)
-create_celestial_checkbutton("Varuna", varuna_var)
-create_celestial_checkbutton("MS4", ms4_var)
-create_celestial_checkbutton("Orcus", orcus_var)
-create_celestial_checkbutton("Haumea", haumea_var)
-create_celestial_checkbutton("Makemake", makemake_var)
-create_celestial_checkbutton("Sedna", sedna_var)
-create_celestial_checkbutton("OR10", or10_var)
+create_celestial_checkbutton("Gonggong", gonggong_var)
 create_celestial_checkbutton("Eris", eris_var)
 create_celestial_checkbutton("- Dysnomia", dysnomia_var)
-# create_celestial_checkbutton("Eris/Dysnomia", eris2_var) -- Eris/Dysnomia is only for Eris-centered plot, not needed for 
-# Sun centered plots
+create_celestial_checkbutton("Haumea", haumea_var)
+create_celestial_checkbutton("Ixion", ixion_var)
+create_celestial_checkbutton("Makemake", makemake_var)
+create_celestial_checkbutton("Orcus", orcus_var)
+create_celestial_checkbutton("Quaoar", quaoar_var)
+create_celestial_checkbutton("Sedna", sedna_var)
+create_celestial_checkbutton("Varuna", varuna_var)
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
 mission_frame.pack(pady=(10, 5), fill='x')
+CreateToolTip(mission_frame, "Select space missions for plotting. Selected objects will be plotted on the entered date, as well as ideal " 
+              "orbits. Selected objects will be animated only over the fetched dates and only if within their defined date ranges, and will " 
+              "plot both actual and ideal orbits.")
 
 def create_mission_checkbutton(name, variable, dates):
     checkbutton = tk.Checkbutton(mission_frame, text=f"{name} {dates}", variable=variable, command=handle_mission_selection)
     checkbutton.pack(anchor='w')
+
     info_text = INFO.get(name, "No information available")
     tooltip_text = f"{info_text}\nMission duration: {dates}"
     if 'mission_url' in INFO:
@@ -2734,30 +4640,33 @@ create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2003-01-
 create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
 create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-21 to 2029-12-31)")
 create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-06 to 2029-12-31)")
-create_mission_checkbutton("Galileo", galileo_var, "(1989-10-19 to 2003-09-21)")
-create_mission_checkbutton("Cassini", cassini_var, "(1997-10-16 to 2017-09-15)")
+create_mission_checkbutton("Galileo", galileo_var, "(1989-10-19 to 2003-09-30)")
 create_mission_checkbutton("SOHO Solar Observatory", soho_var, "(1995-12-3 to 2029-12-31)")
+create_mission_checkbutton("Cassini", cassini_var, "(1997-10-16 to 2017-09-15)")
 create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-02 to 2016-10-05)")
 create_mission_checkbutton("New Horizons", new_horizons_var, "(2006-01-19 to 2029-12-31)")
 create_mission_checkbutton("Chang'e", change_var, "(2007-10-25 to 2029-12-31)")
-create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to 2029-12-31)")
-create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to 2029-12-31)")
-create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-12-31)")
+create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to 2025-03-02)")
+create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to 2025-5-10)")
+create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-07-01)")
 create_mission_checkbutton("Hayabusa 2", hayabusa2_var, "(2014-12-04 to 2020-12-05)")
 create_mission_checkbutton("OSIRIS REx", osiris_rex_var, "(2016-09-10 to 2023-09-24)")
-create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2029-12-31)")
 create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to 2029-12-31)")
 create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2030-12-31)")
 create_mission_checkbutton("Solar Orbiter", solarorbiter_var, "(2020-02-10 to 2030-11-20)")
-create_mission_checkbutton("Perseverance Mars Rover", perse_var, "(2020-07-31 to 2029-12-31)")
+create_mission_checkbutton("Perseverance Mars Rover", perse_var, "(2020-07-31 to 2026-2-19)")
 create_mission_checkbutton("Lucy", lucy_var, "(2021-10-18 to 2033-05-01)")
 create_mission_checkbutton("DART", dart_var, "(2021-11-26 to 2022-09-25)")
 create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to 2029-12-31)")
+create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2029-12-31)")
 create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to April 2030)")
 
 # Checkbuttons for comets
 comet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Comets and Interstellar Objects")
 comet_frame.pack(pady=(10, 5), fill='x')
+CreateToolTip(comet_frame, "Select comets for plotting. Selected objects will be plotted on the entered date, as well as ideal " 
+              "orbits. Selected objects will be animated only over the fetched dates only if within their defined date ranges, and will " 
+              "plot both actual and ideal orbits.")
 
 # Updated create_comet_checkbutton function
 def create_comet_checkbutton(name, variable, dates, perihelion):
@@ -2785,25 +4694,22 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
     tooltip_text = f"{info_text}\nPerihelion: {perihelion}"
     CreateToolTip(checkbutton, tooltip_text)
 
-
-create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
-                         "October 21, 1965")
-#create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-18 to 2029-12-31)", 
-#                         "October 21, 1965")
-create_comet_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
-                         "February 25, 1976")
-create_comet_checkbutton("Halley", comet_halley_var, "(1962-01-21 to 2061-7-28)",      
-                         # initial start date 1982-11-26 to 1995-10-20. Horizons has 1962-01-20 and ongoing.
-                         "February 9, 1986")
-create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
-                         "May 1, 1996")
-create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1995-07-23 to 2001-12-31)", 
-                         "April 1, 1997")
-create_comet_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
-                         "January 12, 2007")
 create_comet_checkbutton("67P/Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(1962-1-20 to 2029-12-31)", 
     "August 13, 2015")
     # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
+create_comet_checkbutton("Halley", comet_halley_var, "(1962-01-21 to 2061-7-28)",      
+                         # initial start date 1982-11-26 to 1995-10-20. Horizons has 1962-01-20 and ongoing.
+                         "February 9, 1986")
+create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
+                         "October 21, 1965")
+create_comet_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
+                         "February 25, 1976")
+create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1995-07-23 to 2001-12-31)", 
+                         "April 1, 1997")
+create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
+                         "May 1, 1996")
+create_comet_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
+                         "January 12, 2007")
 create_comet_checkbutton("Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
                          "September 9, 2017")
 create_comet_checkbutton("Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-01)", 
@@ -2846,21 +4752,155 @@ center_label = tk.Label(controls_frame, text="Select Center Object for Your Plot
 center_label.pack(anchor='w')
 
 center_object_var = tk.StringVar(value='Sun')
-center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth', 'Eris/Dysnomia'] 
+center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth/New_Horizons', 'Eris/Dysnomia'] 
 # A unique center for Eris is required using the satellite solution not the sun centered object.
 center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
 center_menu.pack(anchor='w')
-
 CreateToolTip(center_menu, "Select the object to center the plot on. DO NOT select the same object from the Select Objects check list.")
 
+# Define function to update orbit paths when the center object changes
+def on_center_change(*args):
+    """Update orbit paths when the center object is changed."""
+    center_object = center_object_var.get()
+    if center_object != 'Sun':
+        # Only fetch non-Sun centered paths when needed to avoid excessive startup time
+        status_display.config(text=f"Updating orbit paths for center: {center_object}...")
+        root.update()  # Force GUI to refresh
+        update_orbit_paths(center_object)
+        status_display.config(text=f"Orbit paths updated for center: {center_object}")
+
+# Bind the center_object_var to the on_center_change function
+center_object_var.trace_add("write", on_center_change)
+
+# Create a frame for the interval settings
+interval_frame = tk.LabelFrame(controls_frame, text="Orbit & Trajectory Plotting Intervals for Non-Animated Plots")
+interval_frame.pack(pady=(5, 5), fill='x')
+
+# Add label and entry for comet path plotting interval
+comet_interval_label = tk.Label(interval_frame, text="Comet path plotting interval = end date - start date (in days) / :")
+comet_interval_label.grid(row=0, column=0, padx=(5, 5), pady=(5, 2), sticky='w')
+comet_interval_entry = tk.Entry(interval_frame, width=5)
+comet_interval_entry.grid(row=0, column=1, padx=(0, 5), pady=(5, 2), sticky='w')
+comet_interval_entry.insert(0, '100')  # Default value
+CreateToolTip(comet_interval_label, "Higher value = fewer points = faster loading. Lower value = more detailed trajectory.")
+
+# Add label and entry for mission path plotting interval
+mission_interval_label = tk.Label(interval_frame, text="Space mission path plotting interval = end date - start date (in days) / :")
+mission_interval_label.grid(row=1, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+mission_interval_entry = tk.Entry(interval_frame, width=5)
+mission_interval_entry.grid(row=1, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+mission_interval_entry.insert(0, '75')  # Default value
+CreateToolTip(mission_interval_label, "Higher value = fewer points = faster loading. Lower value = more detailed trajectory.")
+
+# Add label and entry for planet orbit plotting interval
+planet_interval_label = tk.Label(interval_frame, text="Planet orbit plotting interval = orbital period (in days) / :")
+planet_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+planet_interval_entry = tk.Entry(interval_frame, width=5)
+planet_interval_entry.grid(row=2, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+planet_interval_entry.insert(0, '50')  # Default value
+CreateToolTip(planet_interval_label, "Higher value = fewer points = faster loading. Lower value = smoother orbit.")
+
+# Add label and entry for satellite orbit days
+sat_days_label = tk.Label(interval_frame, text="Planetary satellite number of days of orbit to plot:")
+sat_days_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+sat_days_entry = tk.Entry(interval_frame, width=5)
+sat_days_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+sat_days_entry.insert(0, '56')  # Default value
+CreateToolTip(sat_days_label, "Total number of days to plot for planetary moons' orbits.")
+
+# Add label and entry for satellite orbit period
+sat_period_label = tk.Label(interval_frame, text="Planetary satellite orbit plotting interval (in days):")
+sat_period_label.grid(row=4, column=0, padx=(5, 5), pady=(2, 5), sticky='w')
+sat_period_entry = tk.Entry(interval_frame, width=5)
+sat_period_entry.grid(row=4, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
+sat_period_entry.insert(0, '1')  # Default value
+CreateToolTip(sat_period_label, "Higher value = fewer points = faster loading. Lower value = smoother orbit.")
+
 # Number of Frames
-num_frames_label = tk.Label(controls_frame, text="Enter Hours, Days, Weeks, Months or Years to Animate from \"Now\":")
+num_frames_label = tk.Label(controls_frame, text="Enter Hours, Days, Weeks, Months or Years to Animate starting with \"Now\":")
 num_frames_label.pack(anchor='w')
 num_frames_entry = tk.Entry(controls_frame, width=5)
 num_frames_entry.pack(anchor='w')
-num_frames_entry.insert(0, '28')  # Default number of frames
-CreateToolTip(num_frames_entry, "Enter the number of frames you wish to animate, where each frame represents an hour, day, week, month, or year. " 
-              "The default value of 28, for days in the lunar month.")
+num_frames_entry.insert(0, '29')  # Default number of frames
+CreateToolTip(num_frames_entry, "Do not exceed 130 to avoid timing out JPL Horizons' data fetch.")
+
+# Create a new frame for orbit path fetching controls
+orbit_path_frame = tk.LabelFrame(controls_frame, text="Orbit Path Fetching Controls")
+orbit_path_frame.pack(pady=(5, 5), fill='x')
+
+# After orbit_path_frame, where you want to position the status frame:
+status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg='SystemButtonFace', fg='black')
+status_frame.pack(pady=(5, 5), fill='x')
+
+status_display.destroy()  # Remove the old label
+
+# Create a NEW label in the status_frame instead of trying to re-parent
+status_display = tk.Label(
+    status_frame, 
+    text="Data Fetching Status", 
+    font=("Arial", 10), 
+    bg='SystemButtonFace', 
+    fg='black'
+)
+status_display.pack(anchor='w', padx=5, pady=5)
+
+# Add label and entry for start date timedelta
+start_date_label = tk.Label(orbit_path_frame, text="Start date offset from now (in days):")
+start_date_label.grid(row=0, column=0, padx=(5, 5), pady=(5, 2), sticky='w')
+start_date_entry = tk.Entry(orbit_path_frame, width=5)
+start_date_entry.grid(row=0, column=1, padx=(0, 5), pady=(5, 2), sticky='w')
+start_date_entry.insert(0, '0')  # Default value
+CreateToolTip(start_date_label, "Number of days to look back from current date (negative value means looking into the past)")
+
+# Add label and entry for end date timedelta
+end_date_label = tk.Label(orbit_path_frame, text="End date offset from now (in days):")
+end_date_label.grid(row=1, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+end_date_entry = tk.Entry(orbit_path_frame, width=5)
+end_date_entry.grid(row=1, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+end_date_entry.insert(0, '730')  # Default value (2 years)
+CreateToolTip(end_date_label, "Number of days to look ahead from current date")
+
+# Add label and entry for default interval
+default_interval_label = tk.Label(orbit_path_frame, text="Default interval for orbit paths:")
+default_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+default_interval_entry = tk.Entry(orbit_path_frame, width=5)
+default_interval_entry.grid(row=2, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+default_interval_entry.insert(0, '1d')  # Default value
+CreateToolTip(default_interval_label, "Default time interval for orbit paths. Examples: 1d, 12h, 6h, 1h")
+
+# Add label and entry for high eccentricity interval
+eccentric_interval_label = tk.Label(orbit_path_frame, text="High eccentricity object interval:")
+eccentric_interval_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+eccentric_interval_entry = tk.Entry(orbit_path_frame, width=5)
+eccentric_interval_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+eccentric_interval_entry.insert(0, '12h')  # Default value
+CreateToolTip(eccentric_interval_label, "Time interval for objects with high eccentricity (e > 0.5)")
+
+# Add label and entry for mission/comet interval
+mission_comet_interval_label = tk.Label(orbit_path_frame, text="Mission/comet interval:")
+mission_comet_interval_label.grid(row=4, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+mission_comet_interval_entry = tk.Entry(orbit_path_frame, width=5)
+mission_comet_interval_entry.grid(row=4, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+mission_comet_interval_entry.insert(0, '6h')  # Default value
+CreateToolTip(mission_comet_interval_label, "Time interval for spacecraft, comets, and non-satellite objects")
+
+# Add label and entry for satellite interval
+satellite_interval_label = tk.Label(orbit_path_frame, text="Satellite/moon interval:")
+satellite_interval_label.grid(row=5, column=0, padx=(5, 5), pady=(2, 5), sticky='w')
+satellite_interval_entry = tk.Entry(orbit_path_frame, width=5)
+satellite_interval_entry.grid(row=5, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
+satellite_interval_entry.insert(0, '1h')  # Default value
+CreateToolTip(satellite_interval_label, "Time interval for satellites (moons) of the center object")
+
+# Add a scroll down message right before the plotting buttons
+scroll_message = tk.Label(
+    controls_frame,
+    text="SCROLL DOWN TO SEE PLOTTING BUTTONS",
+    fg='red',
+    bg='SystemButtonFace',
+    font=("Arial", 10, "bold")
+)
+scroll_message.pack(pady=(10, 5))
 
 # Paloma's Birthday button and its animation
 paloma_buttons_frame = tk.Frame(controls_frame)
@@ -2877,10 +4917,7 @@ plot_button = tk.Button(
     fg='blue'
 )
 plot_button.pack(side='left', padx=(0, 5), pady=(5, 0))
-CreateToolTip(plot_button, "Plot the positions of selected objects on the selected date. Planets and asteroids show their orbits. " 
-              "Comets and Missions show their trajectory between the identified start and end dates. Plotting may take a while due " 
-              "to a large number of positions fetched from Horizons. The tooltip text has more position, velocity, and orbit information.")
-
+CreateToolTip(plot_button, "Plot the positions of selected objects on the selected date.")
 
 paloma_birthday_button = tk.Button(
     paloma_buttons_frame, 
@@ -2962,208 +4999,6 @@ animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", com
 animate_year_button.grid(row=2, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_year_button, "Animate the motion over years. This may take a while due to the large number of positions fetched.")
 
-# Create a subframe for plot button
-plot_buttons_frame = tk.Frame(controls_frame)
-plot_buttons_frame.pack(pady=(5, 0), fill='x')
-
-# Create an Entry widget for the user to input the number of light-years
-ly_entry_label = tk.Label(plot_buttons_frame, text="Enter number of light-years to plot up to 100:")
-ly_entry_label.grid(row=4, column=0, padx=(0, 5), pady=(5, 0), sticky='w')
-
-ly_entry = tk.Entry(plot_buttons_frame)
-ly_entry.grid(row=4, column=1, padx=(5, 0), pady=(5, 0), sticky='w')
-ly_entry.insert(0, '20')  # Default ly value
-
-# Function to call the planetarium_distance script with user input
-def call_planetarium_distance_script_with_input():
-    try:
-        ly_value = ly_entry.get()
-        ly_value = int(ly_value)
-        if ly_value <= 0:
-            output_label.config(text="Please enter a positive number of light-years.")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
-        # Pass the light-years value as a command-line argument
-        subprocess.run(['python', script_path, str(ly_value)])
-    except ValueError:
-        output_label.config(text="Please enter the number of light-years to plot, up to 100.")
-    except Exception as e:
-        output_label.config(text=f"Error running planetarium_distance.py: {e}")
-        print(f"Error running planetarium_distance.py: {e}")
-
-# Create a single button to call the plot script
-plot_button = tk.Button(
-    plot_buttons_frame,
-    text="3D Visualization of Stellar Neighborhood",
-    command=call_planetarium_distance_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-plot_button.grid(row=5, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
-CreateToolTip(plot_button, "3D plot of stars within the selected distance from the Sun.")
-
-# Create a Frame for the stellar scale options
-stellar_scale_frame = tk.LabelFrame(controls_frame, text="Scale Options for Apparent Magnitude 3D Plots")
-stellar_scale_frame.pack(pady=(5, 0), fill='x')
-
-stellar_scale_var = tk.StringVar(value='Auto')
-
-# Auto scale option
-stellar_auto_scale = tk.Radiobutton(stellar_scale_frame, text="Automatic Scaling of Your 3D Stellar Plots", 
-                                   variable=stellar_scale_var, value='Auto')
-stellar_auto_scale.pack(anchor='w')
-CreateToolTip(stellar_auto_scale, "Automatically adjust scale based on the data range")
-
-# Manual scale option
-stellar_manual_scale = tk.Radiobutton(stellar_scale_frame, text="Or Manually Enter Scale of Your Plot in Light-Years:", 
-                                     variable=stellar_scale_var, value='Manual')
-stellar_manual_scale.pack(anchor='w')
-CreateToolTip(stellar_manual_scale, "The range of the axes gets reduced to your input, so visible objects beyond that range will not display. ")
-
-# Frame for scale entry
-stellar_entry_frame = tk.Frame(stellar_scale_frame)
-stellar_entry_frame.pack(anchor='w', padx=20)
-
-# Entry for scale
-stellar_scale_entry = tk.Entry(stellar_entry_frame, width=10)
-stellar_scale_entry.pack(side='left')
-stellar_scale_entry.insert(0, '1400')  # Default scale value
-
-def on_stellar_scale_change(*args):
-    """Enable/disable scale entry based on selected mode"""
-    stellar_scale_entry.config(state='normal' if stellar_scale_var.get() == 'Manual' else 'disabled')
-
-# Bind the scale variable to the callback
-stellar_scale_var.trace('w', on_stellar_scale_change)
-
-# Initial state setup
-on_stellar_scale_change()
-
-def call_planetarium_apparent_magnitude_script_with_input():
-    try:
-        mag_value = mag_entry.get()
-        mag_value = float(mag_value)
-        if mag_value < -1.44 or mag_value > 9:
-            output_label.config(text="Please enter a magnitude between -1.44 and 9.")
-            return
-            
-        # Get scale value if manual mode is selected
-        user_scale = None
-        if stellar_scale_var.get() == 'Manual':
-            try:
-                user_scale = float(stellar_scale_entry.get())
-                if user_scale <= 0:
-                    output_label.config(text="Please enter a positive scale value.")
-                    return
-            except ValueError:
-                output_label.config(text="Invalid scale value.")
-                return
-                
-        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
-        # Pass magnitude value as command-line argument
-        cmd = ['python', script_path, str(mag_value)]
-        if user_scale is not None:
-            cmd.append(str(user_scale))
-            
-        print(f"Running command: {' '.join(cmd)}")  # Debug print
-        subprocess.run(cmd)
-        
-    except ValueError:
-        output_label.config(text="Please enter a valid magnitude between -1.44 (brightest star Sirius) and 9.")
-    except Exception as e:
-        output_label.config(text=f"Error running planetarium_apparent_magnitude.py: {e}")
-        print(f"Error running planetarium_apparent_magnitude.py: {e}")
-        traceback.print_exc()  # Add this for more detailed error info
-
-# Create a single button to call the plot script
-plot_button = tk.Button(
-    plot_buttons_frame,
-    text="3D Visualization of Stars Visible Unaided",
-    command=call_planetarium_apparent_magnitude_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-plot_button.grid(row=8, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
-CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less; stars and non-stellar objects " 
-              "-- long load time.")
-
-# Function to call the hr_diagram script with user input
-def call_hr_diagram_distance_script_with_input():
-    try:
-        mag_value = ly_entry.get()
-        mag_value = int(mag_value)
-        if mag_value <= 0:
-            output_label.config(text="Please enter a positive number of light-years.")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
-        # Pass the light-years value as a command-line argument
-        subprocess.run(['python', script_path, str(mag_value)])
-    except ValueError:
-        output_label.config(text="Please enter the number of light-years to plot, up to 100.")
-    except Exception as e:
-        output_label.config(text=f"Error running hr_diagram_distance.py: {e}")
-        print(f"Error running hr_diagram_distance.py: {e}")
-
-# Create a single button to call the plot script
-plot_button = tk.Button(
-    plot_buttons_frame,
-    text="2D Visualization of Stellar Neighborhood",
-    command=call_hr_diagram_distance_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-plot_button.grid(row=6, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
-CreateToolTip(plot_button, "2D Hertzprung-Russell plot of stars within the selected distance from the Sun.")
-
-# Create an Entry widget for the user to input the maximum apparent magnitude
-mag_entry_label = tk.Label(plot_buttons_frame, text="Enter maximum apparent magnitude (-1.44 to 9):")
-mag_entry_label.grid(row=7, column=0, padx=(0, 5), pady=(5, 0), sticky='w')
-
-mag_entry = tk.Entry(plot_buttons_frame)
-mag_entry.grid(row=7, column=1, padx=(5, 0), pady=(5, 0), sticky='w')
-mag_entry.insert(0, '4')  # Default magnitude value
-
-# Function to call the hr_diagram script with user input
-
-def call_hr_diagram_apparent_magnitude_script_with_input():
-    try:
-        mag_value = mag_entry.get()
-        mag_value = float(mag_value)
-        if mag_value < -1.44 or mag_value > 9:
-            output_label.config(text="Please enter a magnitude between -1.44 (brightest star Sirius) and 9. (ideal visibility and vision limit).")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
-        # Pass the magnitude value as a command-line argument
-        subprocess.run(['python', script_path, str(mag_value)])
-    except ValueError:
-        output_label.config(text="Please enter a valid magnitude between -1.44 (brightest star Sirius) and 9 (ideal visibility and vision limit).")
-    except Exception as e:
-        output_label.config(text=f"Error running hr_diagram_apparent_magnitude.py: {e}")
-        print(f"Error running hr_diagram_apparent_magnitude.py: {e}")
-
-# Create a single button to call the plot script
-plot_button = tk.Button(
-    plot_buttons_frame,
-    text="2D Visualization of Stars Visible Unaided",
-    command=call_hr_diagram_apparent_magnitude_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-plot_button.grid(row=9, column=0, columnspan=2, padx=(0, 5), pady=(5, 0), sticky='we')
-CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
-
-# Create a LabelFrame for Status Messages
-status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status for Solar Object Plotting", padx=10, pady=10, bg='SystemButtonFace', fg='black')
-status_frame.pack(pady=(5, 5), fill='x')
-
 # Create the output_label inside the status_frame
 output_label = tk.Label(
      status_frame,
@@ -3179,6 +5014,31 @@ output_label.pack()
 # Create a Progress Bar inside the status_frame
 progress_bar = ttk.Progressbar(status_frame, orient='horizontal', mode='indeterminate', length=300)
 progress_bar.pack(pady=(5, 0))
+
+# Add the function to call star_visualization_gui.py
+def open_star_visualization():
+    try:
+        script_path = os.path.join(os.path.dirname(__file__), 'star_visualization_gui.py')
+        subprocess.Popen(['python', script_path])
+    except Exception as e:
+        output_label.config(text=f"Error opening star visualization: {e}")
+        print(f"Error opening star visualization: {e}")
+
+# Add Star Visualization button
+star_viz_button = tk.Button(
+    advance_buttons_frame, 
+    text="2D and 3D Star Visualizations", 
+    command=open_star_visualization,
+    width=BUTTON_WIDTH*2 + 5,  # Make it span two columns
+    font=BUTTON_FONT, 
+#    bg='SystemButtonFace', 
+#    fg='blue'
+    bg='blue', 
+    fg='white'
+)
+star_viz_button.grid(row=3, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
+CreateToolTip(star_viz_button, "Open a specialized UI for 2D and 3D star visualizations, " 
+              "including HR diagrams and stellar neighborhoods.")
 
 # Create a Frame for the note (right column)
 note_frame = tk.Frame(root)
@@ -3211,518 +5071,6 @@ note_text_widget.insert(tk.END, note_text)
 
 # Make the ScrolledText widget read-only
 note_text_widget.config(state='disabled')
-
-# Define the list of objects
-objects = [
-    # Existing Celestial Objects
-    {'name': 'Sun', 'id': '10', 'var': sun_var, 'color': color_map('Sun'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit. "', 
-    'mission_url': 'https://science.nasa.gov/sun/'},
-
-    {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
-    'mission_url': 'https://science.nasa.gov/mercury/'},
-
-    {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
-    'mission_url': 'https://science.nasa.gov/venus/'},
-
-    {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'Earth orbital period: 27.32 days.', 
-     'mission_url': 'https://science.nasa.gov/earth/', 'mission_info': 'Our home planet.'},
-
-    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Earth orbital period: 27.32 days.', 
-     'mission_url': 'https://science.nasa.gov/moon/', 'mission_info': 'NASA: "The Moon rotates exactly once each time it orbits our planet."'},
-
-    {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Mars is one of the easiest planets to spot in the night sky — it looks like a bright red point of light."', 
-    'mission_url': 'https://science.nasa.gov/?search=mars'},
-
-    {'name': 'Ceres', 'id': 'ceres', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture."', 
-    'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
-
-    {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Jupiter is the largest and oldest planet in our solar system."', 
-    'mission_url': 'https://science.nasa.gov/?search=Jupiter'},
-
-    {'name': 'Saturn', 'id': '699', 'var': saturn_var, 'color': color_map('Saturn'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
-    'mission_url': 'https://science.nasa.gov/saturn/'},
-
-    {'name': 'Uranus', 'id': '799', 'var': uranus_var, 'color': color_map('Uranus'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
-    'mission_url': 'https://science.nasa.gov/uranus/'},
-
-    {'name': 'Neptune', 'id': '899', 'var': neptune_var, 'color': color_map('Neptune'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
-    'mission_url': 'https://science.nasa.gov/neptune/'},
-
-    {'name': 'Pluto', 'id': '999', 'var': pluto_var, 'color': color_map('Pluto'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'majorbody', 
-    'mission_info': 'NASA: "Pluto is a dwarf planet located in a distant region of our solar system beyond Neptune known as the Kuiper Belt."', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
-
-    {'name': 'Haumea', 'id': '136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
-
-    {'name': 'Makemake', 'id': '136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'Makemake is slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
-
-    {'name': 'Eris', 'id': '136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 
-    # 136199 primary (required for Sun centered plots)
-    'id_type': 'smallbody', 
-    'mission_info': 'Eris is about the same size as Pluto, but it\'s three times farther from the Sun.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
-
-    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var': eris2_var, 'color': color_map('Eris'), 'symbol': 'circle', 'is_mission': False, 
-    # 20136199 satellite solution (required for Eris centered plots) 
-    'id_type': 'smallbody', 
-    'mission_info': 'Eris is about the same size as Pluto, but it\'s three times farther from the Sun.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
-
-    # Kuiper Belt Objects
-    {'name': 'Quaoar', 'id': '50000', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'A large Kuiper Belt object with a ring system.', 
-    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
-
-    {'name': 'Sedna', 'id': '90377', 'var': sedna_var, 'color': color_map('Sedna'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'A distant trans-Neptunian object with an extremely long orbit.', 
-    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
-
-    {'name': 'Orcus', 'id': '90482', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'A large Kuiper Belt object with a moon named Vanth.', 
-    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-
-    {'name': 'Varuna', 'id': '20000', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'A significant Kuiper Belt Object with a rapid rotation period.', 
-    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-
-    {'name': 'Ixion', 'id': '2001 KX76', 'var': ixion_var, 'color': color_map('Ixion'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'A large Kuiper Belt object without a known moon.', 
-    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-
-    {'name': 'GV9', 'id': '2004 GV9', 'var': gv9_var, 'color': color_map('GV9'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.', 
-    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-
-    {'name': 'MS4', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
-    'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
-
-    {'name': 'OR10', 'id': '2007 OR10', 'var': or10_var, 'color': color_map('OR10'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.', 
-    'mission_url': 'https://www.celestrak.com/satcat/tables/minorplanet.txt'},
-
-    {'name': 'Arrokoth', 'id': '2486958', 'var': arrokoth_var, 'color': color_map('Arrokoth'), 'symbol': 'circle', 'is_mission': False, 
-    'id_type': 'smallbody', 
-    'mission_info': 'Arrokoth (2014 MU69) flyby from New Horizons on January 1, 2019.', 
-    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
-
-    # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
-    {'name': 'Pioneer10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer10'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 
-    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
-
-    {'name': 'Pioneer11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer11'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1973, 4, 7), 'end_date': datetime(1995, 9, 30, 11, 0), 
-    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'First spacecraft to encounter Saturn and study its rings.'},
-
-    {'name': 'Voyager 1', 'id': '-31', 'var': voyager1_var, 'color': color_map('Voyager 1'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 9, 6), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
-
-    {'name': 'Voyager 2', 'id': '-32', 'var': voyager2_var, 'color': color_map('Voyager 2'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1977, 8, 21), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Launched in 1977, Voyager 2 explored all four giant planets.'},
-
-    {'name': 'Galileo', 'id': '-77', 'var': galileo_var, 'color': color_map('Galileo'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(1989, 10, 19), 'end_date': datetime(2003, 9, 21), 
-    'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 
-    'mission_info': 'Galileo studied Jupiter and its moons from 1995 to 2003.'},
-
-    {'name': 'SOHO', 'id': '488', 'var': soho_var, 'color': color_map('SOHO'), 
-    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(1995, 12, 3), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
-    'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
-
-    {'name': 'Cassini', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini-Huygens'), 'symbol': 'diamond-open', 
-     'is_mission': True, 'id_type': 'id', 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 15, 10, 31), 
-     'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 
-     'mission_info': 'Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
-
-    {'name': 'Rosetta', 'id': '-226', 'var': rosetta_var, 'color': color_map('Rosetta'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 5), 
-    'mission_url': 'https://rosetta.esa.int/', 
-    'mission_info': 'European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
-
-    {'name': 'Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('Horizons'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
-    'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
-
-    {'name': 'Chang\'e', 'id': 'Chang\'e', 'var': change_var, 'color': color_map('Chang\'e'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2007, 10, 25), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'China\'s lunar exploration program.', 
-    'mission_url': 'http://www.clep.org.cn/'},
-
-    {'name': 'Akatsuki', 'id': 'Akatsuki', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2010, 5, 21), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'JAXA mission to study the atmospheric circulation of Venus', 
-    'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
-
-    {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 
-    'mission_info': 'Juno studies Jupiter\'s atmosphere and magnetosphere.'},
-
-    {'name': 'Gaia', 'id': 'Gaia', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2013, 12, 20), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'European Space Agency mission at L2 mapping the Milky Way.', 
-    'mission_url': 'https://www.cosmos.esa.int/web/gaia'},
-
-    {'name': 'Hayabusa2', 'id': 'Hayabusa2', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2014, 12, 4), 'end_date': datetime(2020, 12, 5), 
-    'mission_info': 'JAXA mission that returned samples from Ryugu.', 
-    'mission_url': 'https://hayabusa2.jaxa.jp/en/'},
-
-    {'name': 'OSIRISREx', 'id': '-64', 'var': osiris_rex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2016, 9, 10), 'end_date': datetime(2023, 9, 24), 
-    'mission_url': 'https://science.nasa.gov/mission/osiris-rex/', 
-    'mission_info': 'OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
-
-    {'name': 'OSIRISAPE', 'id': '-64', 'var': osiris_apex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://science.nasa.gov/category/missions/osiris-apex/', 
-    'mission_info': 'OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
-
-    {'name': 'Parker', 'id': '-96', 'var': parker_solar_probe_var, 'color': color_map('Parker Solar Probe'), 
-    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
-    'mission_info': 'The Parker Solar Probe mission is to study the outer corona of the Sun.'},
-
-    {'name': 'MarsRover', 'id': 'Perseverance', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter.', 
-    'mission_url': 'https://mars.nasa.gov/mars2020/'},
-
-    {'name': 'Lucy', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 1), 
-    'mission_info': 'Exploring Trojan asteroids around Jupiter.', 
-    'mission_url': 'https://www.nasa.gov/lucy'},
-
-    {'name': 'DART', 'id': '-135', 'var': dart_var, 'color': color_map('DART'), 'symbol': 'diamond-open', 'is_mission': True, 
-    'id_type': 'id', 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 25), 
-    'mission_info': 'NASA\'s mission to test asteroid deflection.', 
-    'mission_url': 'https://www.nasa.gov/dart'},
-
-    {'name': 'JamesWebb', 'id': '-170', 'var': jwst_var, 'color': color_map('JamesWebb'), 
-    'symbol': 'diamond-open', 'is_mission': True, 'id_type': 'id', 'start_date': datetime(2021, 12, 26), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://science.nasa.gov/mission/webb/', 
-    'mission_info': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
-
-    {'name': 'Clipper', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Clipper'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2030, 4, 1), 
-    'mission_url': 'https://europa.nasa.gov/', 
-    'mission_info': 'Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
-
-    {'name': 'Bepi', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('Bepi'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2018, 10, 20), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
-
-    {'name': 'SolO', 'id': '-144', 'var': solarorbiter_var, 'color': color_map('SolO'), 'symbol': 'diamond-open', 
-    'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20), 
-    'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 'mission_info': 'Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
-
-
-    # Comets
-    {'name': 'IkeyaSeki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('IkeyaSeki'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
-    'mission_info': 'One of the brightest comets of the 20th century.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/Comet_Ikeya-Seki'},
-
-    {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
-    'mission_info': 'Notable for its bright and impressive tail.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
-
-    {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 22), 'end_date': datetime(2061, 7, 28), 
-    # initial start date 1982-11-26. Horizons has 1962-01-20
-    'mission_info': 'Most famous comet, returned in 1986 and will return in 2061.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/1p-halley/'},
-
-    {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 12, 2), 'end_date': datetime(1996, 6, 1), 
-    'mission_info': 'Passed very close to Earth in 1996.', 
-    'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
-
-    {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1995, 7, 24), 'end_date': datetime(2001, 12, 31), 
-    'mission_info': 'Visible to the naked eye for a record 18 months.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
-
-    {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2008, 6, 1), 
-    'mission_info': 'Known as the Great Comet of 2007.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/'}, 
-
-    {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
-    'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades.', 
-    'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
-
-    {'name': 'Tsuchinsh', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
-    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 10), 
-    'end_date': datetime(2030, 12, 31), 
-    'mission_info': 'Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
-
-    {'name': 'Churyumov', 'id': '90000702', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 90000703
-    'symbol': 'circle-open', 'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2029, 12, 31), 
-    # datetime(1962, 1, 20), 'end_date': datetime(2030, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
-    'mission_info': '67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
-
-    {'name': 'Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('Borisov'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2019, 8, 31), 'end_date': datetime(2020, 10, 1), 
-    'mission_info': 'The second interstellar object detected, after \'Oumuamua.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
-
-    {'name': 'Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('Oumuamua'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1), 
-    'mission_info': 'First known interstellar object detected passing through the Solar System.', 
-    'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
-
-    {'name': 'ATLAS', 'id': 'DES=C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'circle-open', 
-    'is_comet': True, 'id_type': 'smallbody', 'start_date': datetime(2024, 6, 18), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
-
-    # Asteroids
-    {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'is_mission': False,
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'A newly discovered near-Earth asteroid currently orbiting Earth.',
-    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
-
-    {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'is_mission': False,
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2025, 1, 18), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'A newly discovered near-Earth asteroid from 2024.',
-    'mission_url': 'https://cneos.jpl.nasa.gov/news/news210.html'},
-
-    {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'is_mission': False,
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
-    'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 
-    'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
-
-    {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'is_mission': False, 
-    'is_comet': False, 'id_type': 'smallbody', 
-    'mission_info': 'One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
-    'mission_url': 'https://dawn.jpl.nasa.gov/'},
-
-    {'name': 'Bennu', 'id': '101955', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'is_mission': False, 
-    'is_comet': False, 'id_type': 'smallbody', 
-    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
-
-    {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'is_mission': False, 
-    'is_comet': False, 'id_type': 'smallbody', # Bennu as a center object
-    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
-
-    {'name': 'Lutetia', 'id': '21', 'var': lutetia_var, 'color': color_map('Lutetia'), 'symbol': 'circle-open', 'is_mission': False, 
-    'is_comet': False, 'id_type': 'smallbody', 
-    'mission_info': 'Studied by European Space Agency\'s Rosetta mission.', 
-    'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
-
-    {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'is_mission': False, 
-     'is_comet': False, 'id_type': 'smallbody',
-     'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 
-     'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
-
-    {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'is_mission': False, 
-    'is_comet': False, 'id_type': 'smallbody', 
-    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
-    'mission_url': 'https://www.jhuapl.edu/near/'},
-
-    {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'is_mission': False, 
-    'is_comet': False, 'id_type': 'smallbody', 
-    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
-    'mission_url': 'https://www.hayabusa2.jaxa.jp/en/'},
-
-    {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'is_mission': False, 
-    'is_comet': False, 'id_type': 'smallbody', 
-    'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
-    'mission_url': 'https://www.isas.jaxa.jp/en/missions/spacecraft/past/hayabusa.html'},
-        
-    # --- Adding New Moons ---
-
-    # Mars' Moons
-    {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Mars orbital period: 0.32 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/resource/martian-moon-phobos/'},
-
-    {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Mars orbital period: 1.26 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
-
-    # Jupiter's Galilean Moons
-    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, # instead of 501 use 59901?
-     'id_type': 'majorbody', 
-     'mission_info': 'Jupiter orbital period: 1.77 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/io/'},
-
-    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False,  # instead of id 502 use 59902?
-     'id_type': 'majorbody', 
-     'mission_info': 'Jupiter orbital period: 3.55 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/europa/'},
-
-    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, # instead of 503 use 59903?
-     'id_type': 'majorbody', 
-     'mission_info': 'Jupiter orbital period: 7.15 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/ganymede/'},
-
-    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, # instead of 504 use 59904?
-     'id_type': 'majorbody', 
-     'mission_info': 'Jupiter orbital period: 16.69 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
-
-    # Saturn's Major Moons
-    {'name': 'Titan', 'id': '601', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Saturn orbital period: 15.95 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/titan/'},
-
-    {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Saturn orbital period: 1.37 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/enceladus/'},
-
-    {'name': 'Rhea', 'id': '603', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Saturn orbital period: 4.52 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/rhea/'},
-
-    {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Saturn orbital period: 2.74 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/dione/'},
-
-    {'name': 'Tethys', 'id': '605', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Saturn orbital period: 1.89 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/tethys/'},
-
-    {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Saturn orbital period: 0.94 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/mimas/'},
-
-    {'name': 'Phoebe', 'id': '607', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Saturn orbital period: 550.56 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/phoebe/'},
-
-    # Uranus's Major Moons
-    {'name': 'Oberon', 'id': '701', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Uranus orbital period: 13.46 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/oberon/'},
-
-    {'name': 'Umbriel', 'id': '703', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Uranus orbital period: 4.14 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/umbriel/'},
-
-    {'name': 'Ariel', 'id': '704', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Uranus orbital period: 2.52 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/ariel/'},
-
-    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Uranus orbital period: 1.41 Earth days.',
-     'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},
-
-    {'name': 'Titania', 'id': '706', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Uranus orbital period: 8.71 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/titania/'},
-
-    # Neptune's Major Moon
-    {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Neptune orbital period: 5.88 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/neptune/moons/triton/'},
-
-    # Pluto's Moon
-    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Pluto orbital period: 6.39 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/charon/'},
-
-    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Pluto orbital period: 24.86 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/nix/'},
-
-    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Pluto orbital period: 38.20 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/'},
-
-    # Eris's Moon
-    {'name': 'Dysnomia', 'id': '120136199', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': 'majorbody', 
-     'mission_info': 'Eris orbital period: 15.79 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
-
-    # Stars
-    # Proxima Centauri - Our closest stellar neighbor
-#    {'name': 'NAME Proxima Centauri', 
-#    'id': 'HIP 70890',  # Hipparcos ID if we want to use that instead
-#    'var': proxima_var, 
-#    'color': 'rgb(255, 50, 50)', 
-#    'symbol': 'circle', 
-#    'is_mission': False,
-#    'is_fixed_star': True,  # New flag to indicate static position
-#    'coordinates': {
-#        'ra': '14h 29m 42.95s',
-#        'dec': '-62° 40′ 46.14″',
-#        'distance_ly': 4.2465  # light-years
-#    }}
-]
-
 
 # Run the Tkinter main loop
 root.mainloop()
