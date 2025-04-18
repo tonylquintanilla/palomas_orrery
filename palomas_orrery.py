@@ -22,6 +22,30 @@ import subprocess
 import sys
 import math
 import json
+from formatting_utils import format_maybe_float, format_km_float
+from planet_visualization import (
+    create_celestial_body_visualization,
+    create_planet_visualization,
+    create_planet_shell_traces,
+    create_sun_visualization,
+    earth_inner_core_info,
+    earth_outer_core_info,
+    earth_lower_mantle_info,
+    earth_upper_mantle_info,
+    earth_crust_info,
+    earth_atmosphere_info,
+    earth_upper_atmosphere_info,
+    earth_magnetosphere_info,
+    earth_hill_sphere_info,
+    jupiter_core_info,
+    jupiter_metallic_hydrogen_info,
+    jupiter_molecular_hydrogen_info,
+    jupiter_cloud_layer_info,
+    jupiter_upper_atmosphere_info,
+    jupiter_ring_system_info,
+    jupiter_magnetosphere_info,
+    jupiter_hill_sphere_info
+)
 
 from constants_new import (
     planetary_params,
@@ -60,14 +84,14 @@ from constants_new import (
     KNOWN_ORBITAL_PERIODS
 )
 
-from visualization_utils import format_hover_text, add_hover_toggle_buttons
+from visualization_utils import (format_hover_text, add_hover_toggle_buttons, format_detailed_hover_text)
 
 from save_utils import save_plot
 
-# At the very top of the file, after imports:
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
 import sys, os          # troubleshooting VS
+
 print("Interpreter:", sys.executable)
 print("Working directory:", os.getcwd())
 
@@ -79,18 +103,11 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: March 22, 2025")
+root.title("Paloma's Orrery -- Updated: April 14, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
 STATIC_TODAY = today  # Static reference date for orbit calculations
-
-# Define controls_frame
-# controls_frame = tk.Frame(root)
-# controls_frame.grid(row=0, column=1, padx=(5, 10), pady=(10, 10), sticky='n')
-
-# Modify the controls_frame to be scrollable
-# Replace the existing controls_frame definition with this code
 
 # First, create a container frame for the controls column
 controls_container = tk.Frame(root)
@@ -99,9 +116,6 @@ controls_container.grid(row=0, column=1, padx=(5, 10), pady=(10, 10), sticky='n'
 # Add these lines after creating controls_container
 controls_container.grid_propagate(False)
 
-# Remove this line:
-# controls_container.config(width=320, height=710)
-
 # And add this to make it expand properly:
 controls_container.pack_propagate(False)
 controls_container.grid_propagate(False)
@@ -109,10 +123,6 @@ controls_container.config(width=450, height=750)  # Wider container
 
 # Create a canvas inside the container
 controls_canvas = tk.Canvas(controls_container, bg='SystemButtonFace')
-# controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview)
-# style = ttk.Style()
-# style.configure("Thick.TScrollbar", arrowsize=20)  # Increase arrow size
-# controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, style="Thick.TScrollbar")
 controls_scrollbar = tk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, width=16)
 
 # Configure the canvas
@@ -124,16 +134,9 @@ controls_scrollbar.pack(side="right", fill="y")
 controls_frame = tk.Frame(controls_canvas, bg='SystemButtonFace')
 
 # Add these lines after controls_frame is created
-# controls_container.configure(borderwidth=2, relief="solid")
-# controls_frame.configure(borderwidth=2, relief="solid")
-
-# Add these lines after controls_frame is created
 controls_container.configure(bg='SystemButtonFace')
 controls_canvas.configure(bg='SystemButtonFace')
 controls_frame.configure(bg='SystemButtonFace')
-
-# Create a window in the canvas that contains the controls_frame
-# controls_window = controls_canvas.create_window((0, 0), window=controls_frame, anchor="nw")
 
 # Update the canvas window creation with explicit width
 controls_window = controls_canvas.create_window(
@@ -143,15 +146,6 @@ controls_window = controls_canvas.create_window(
     width=controls_canvas.winfo_width(),  # Match canvas width
     tags="controls"  # Add a tag for easier reference
 )
-
-# Configure the canvas to resize with the frame
-# def configure_controls_canvas(event):
-    # Update the scrollregion to encompass the inner frame
-#    controls_canvas.configure(scrollregion=controls_canvas.bbox("all"))
-    
-    # Set the canvas width to match the frame width
-#    canvas_width = event.width
-#    controls_canvas.itemconfig(controls_window, width=canvas_width)
 
 def configure_controls_canvas(event):
     # Update the scrollregion to encompass the inner frame
@@ -208,7 +202,201 @@ def save_orbit_paths(orbit_paths):
 # Load the stored orbit paths at startup
 orbit_paths_over_time = load_orbit_paths()
 
-# Define selection variables for each object
+class ScrollableFrame(tk.Frame):
+    """
+    A scrollable frame that can contain multiple widgets with a vertical scrollbar.
+    """
+    def __init__(self, container, *args, **kwargs):
+        super().__init__(container, *args, **kwargs)
+
+        # Canvas and Scrollbar
+        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
+        self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=self.scrollbar.set) 
+
+        # Layout
+        self.canvas.pack(side="left", fill="both", expand=True)
+        self.scrollbar.pack(side="right", fill="y")
+
+        # Scrollable Frame
+        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+
+        # Bind mousewheel to the canvas
+        self.canvas.bind("<Enter>", self._on_enter)
+        self.canvas.bind("<Leave>", self._on_leave)
+
+        # Update scroll region when the canvas size changes
+        self.canvas.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        )
+
+    def _on_mousewheel(self, event):
+        if event.delta:
+            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+        elif event.num == 4:
+            self.canvas.yview_scroll(-1, "units")
+        elif event.num == 5:
+            self.canvas.yview_scroll(1, "units")
+
+    def _on_enter(self, event):
+        # Bind the mousewheel events
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux
+        self.canvas.bind_all("<Button-5>", self._on_mousewheel)  # Linux
+
+    def _on_leave(self, event):
+        # Unbind mousewheel events
+        self.canvas.unbind_all("<MouseWheel>")
+        self.canvas.unbind_all("<Button-4>")
+        self.canvas.unbind_all("<Button-5>")   
+
+    def _on_enter(self, event):
+        # Bind the mouse wheel events when the cursor enters a widget
+        event.widget.bind_all("<MouseWheel>", self._on_mousewheel)
+        event.widget.bind_all("<Button-4>", self._on_mousewheel)
+        event.widget.bind_all("<Button-5>", self._on_mousewheel)
+
+    def _on_leave(self, event):
+        # Unbind the mouse wheel events when the cursor leaves a widget
+        event.widget.unbind_all("<MouseWheel>")
+        event.widget.unbind_all("<Button-4>")
+        event.widget.unbind_all("<Button-5>")
+
+input_frame = tk.Frame(root)
+input_frame.grid(row=0, column=0, padx=(10, 5), pady=(10, 10), sticky='n')
+
+# Configure grid weights within input_frame for proper spacing
+input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
+input_frame.grid_rowconfigure(1, weight=1)  # Row for __frame
+for col in range(0, 9):
+    input_frame.grid_columnconfigure(col, weight=1)  # Allow columns to expand if needed
+
+# Scrollable frame for celestial objects and missions
+scrollable_frame = ScrollableFrame(input_frame, width=430, height=710)  # Adjust width and height as needed
+scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
+
+# Prevent the ScrollableFrame from resizing based on its content
+scrollable_frame.config(width=430, height=710)
+scrollable_frame.pack_propagate(False)  # Disable automatic resizing
+
+# Optionally, set the inner frame size slightly smaller
+scrollable_frame.scrollable_frame.config(width=410, height=690)
+scrollable_frame.scrollable_frame.pack_propagate(False)
+
+# Scrollable frame for celestial objects and missions
+scrollable_frame = ScrollableFrame(input_frame)
+scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
+
+# Custom Tooltip Class
+
+class CreateToolTip(object):
+    """
+    Create a tooltip for a given widget with intelligent positioning to prevent clipping.
+    """
+
+    def __init__(self, widget, text='widget info'):
+        self.waittime = 500     # milliseconds
+        self.wraplength = 1000   # Reduced wraplength
+        self.widget = widget
+        self.text = text
+        self.widget.bind("<Enter>", self.enter)
+        self.widget.bind("<Leave>", self.leave)
+        self.id = None
+        self.tw = None
+
+    def enter(self, event=None):
+        self.schedule()
+
+    def leave(self, event=None):
+        self.unschedule()
+        self.hidetip()
+
+    def schedule(self):
+        self.unschedule()
+        self.id = self.widget.after(self.waittime, self.showtip)
+
+    def unschedule(self):
+        id_ = self.id
+        self.id = None
+        if id_:
+            self.widget.after_cancel(id_)
+
+    def showtip(self, event=None):
+        try:
+            # Get screen dimensions and taskbar height (estimated)
+            screen_width = self.widget.winfo_screenwidth()
+            screen_height = self.widget.winfo_screenheight()
+            taskbar_height = 40  # Estimated Windows taskbar height
+
+            # Create the tooltip window
+            self.tw = tk.Toplevel(self.widget)
+            self.tw.wm_overrideredirect(True)
+            
+            # Calculate usable screen height
+            usable_height = screen_height - taskbar_height
+
+            # Create the tooltip label
+            label = tk.Label(
+                self.tw,
+                text=self.text,
+                justify='left',
+                background='yellow',
+                relief='solid',
+                borderwidth=1,
+                wraplength=min(self.wraplength, screen_width - 100),
+                font=("Arial", 10, "normal")
+            )
+            label.pack(ipadx=1, ipady=1)
+
+            # Update the window to calculate its size
+            self.tw.update_idletasks()
+            tooltip_width = self.tw.winfo_width()
+            tooltip_height = self.tw.winfo_height()
+
+            # Initial x position - try positioning to the right of the widget first
+            x = self.widget.winfo_rootx() + self.widget.winfo_width() + 5
+
+            # If tooltip would extend beyond right edge, try positioning to the left of the widget
+            if x + tooltip_width > screen_width:
+                x = self.widget.winfo_rootx() - tooltip_width - 5
+
+            # If that would push it off the left edge, position at left screen edge with padding
+            if x < 0:
+                x = 5
+
+            # Calculate vertical position
+            y = self.widget.winfo_rooty()
+
+            # If tooltip is taller than available space, position at top of screen
+            if tooltip_height > usable_height:
+                y = 5  # Small padding from top
+            else:
+                # Center vertically relative to widget if space allows
+                widget_center = y + (self.widget.winfo_height() / 2)
+                y = widget_center - (tooltip_height / 2)
+                
+                # Ensure tooltip doesn't go below usable screen area
+                if y + tooltip_height > usable_height:
+                    y = usable_height - tooltip_height - 5
+
+                # Ensure tooltip doesn't go above top of screen
+                if y < 5:
+                    y = 5
+
+            # Position the tooltip
+            self.tw.wm_geometry(f"+{int(x)}+{int(y)}")
+
+        except Exception as e:
+            print(f"Error showing tooltip: {e}")
+            traceback.print_exc()
+
+    def hidetip(self):
+        if self.tw:
+            self.tw.destroy()
+        self.tw = None
+
 # Set inner planets selected by default
 sun_var = tk.IntVar(value=0)  
 sun_shells_var = tk.IntVar(value=0)  
@@ -224,85 +412,205 @@ sun_inner_oort_limit_var = tk.IntVar(value=0)
 sun_inner_oort_var = tk.IntVar(value=0)
 sun_outer_oort_var = tk.IntVar(value=0)
 sun_gravitational_var = tk.IntVar(value=0)
+
 mercury_var = tk.IntVar(value=1) # default
+
 venus_var = tk.IntVar(value=1) # default
+
 earth_var = tk.IntVar(value=1)  # Set Earth to 1 to preselect it by default
+# earth_shells_var = tk.IntVar(value=0)  # 0 means unselected by default
+# earth_internal_shells_var = tk.IntVar(value=0)
+# earth_external_shells_var = tk.IntVar(value=0)
 moon_var = tk.IntVar(value=0)  
+# near Earth asteroids
 pt5_var = tk.IntVar(value=0)
 yr4_var = tk.IntVar(value=0)
 asteroid_dw_var = tk.IntVar(value=0)
+# Earth shells
+# Earth inner core shell
+earth_inner_core_var = tk.IntVar(value=0)
+# Earth outer core shell
+earth_outer_core_var = tk.IntVar(value=0)
+# Earth lower mantle shell
+earth_lower_mantle_var = tk.IntVar(value=0)
+# Earth upper mantle shell
+earth_upper_mantle_var= tk.IntVar(value=0) 
+# Earth crust shell
+earth_crust_var = tk.IntVar(value=0)
+# Earth atmosphere shell
+earth_atmosphere_var = tk.IntVar(value=0)
+# Earth upper atmosphere shell
+earth_upper_atmosphere_var = tk.IntVar(value=0)
+# Earth magnetosphere shell
+earth_magnetosphere_var = tk.IntVar(value=0)
+# Earth hill sphere shell
+earth_hill_sphere_var = tk.IntVar(value=0)
+
 mars_var = tk.IntVar(value=1) # default
+
 ceres_var = tk.IntVar(value=0)
+
 jupiter_var = tk.IntVar(value=0)
+# Jupiter's Galilean Moons
+io_var = tk.IntVar(value=0)
+europa_var = tk.IntVar(value=0)
+ganymede_var = tk.IntVar(value=0)
+callisto_var = tk.IntVar(value=0)
+# Jupiter's ring Moons
+metis_var = tk.IntVar(value=0)
+adrastea_var = tk.IntVar(value=0)
+amalthea_var = tk.IntVar(value=0)
+thebe_var = tk.IntVar(value=0)
+# Jupiter shells
+# Jupiter core shell
+jupiter_core_var = tk.IntVar(value=0)
+# Jupiter metallic hydrogen shell
+jupiter_metallic_hydrogen_var = tk.IntVar(value=0)
+# Jupiter molecular hydrogen shell
+jupiter_molecular_hydrogen_var = tk.IntVar(value=0)
+# Jupiter cloud layer shell
+jupiter_cloud_layer_var = tk.IntVar(value=0)
+# Jupiter upper atmosphere shell
+jupiter_upper_atmosphere_var = tk.IntVar(value=0)
+# Jupiter ring system shell
+jupiter_ring_system_var = tk.IntVar(value=0)
+# Jupiter magnetosphere shell
+jupiter_magnetosphere_var = tk.IntVar(value=0)
+# Jupiter hill_sphere shell
+jupiter_hill_sphere_var = tk.IntVar(value=0)
+
 saturn_var = tk.IntVar(value=0)
+
 uranus_var = tk.IntVar(value=0)
+
 neptune_var = tk.IntVar(value=0)
+
 pluto_var = tk.IntVar(value=0)
+
 planet9_var = tk.IntVar(value=0)  # hypothetical
+
 haumea_var = tk.IntVar(value=0)
+
 makemake_var = tk.IntVar(value=0)
+
 eris_var = tk.IntVar(value=0)
 eris2_var = tk.IntVar(value=0)
+
 voyager1_var = tk.IntVar(value=0)
 voyager1h_var = tk.IntVar(value=0)
+
 voyager2_var = tk.IntVar(value=0)
+
 cassini_var = tk.IntVar(value=0)
+
 new_horizons_var = tk.IntVar(value=0)
+
 juno_var = tk.IntVar(value=0)
+
 galileo_var = tk.IntVar(value=0)
+
 pioneer10_var = tk.IntVar(value=0)
+
 pioneer11_var = tk.IntVar(value=0)
+
 europa_clipper_var = tk.IntVar(value=0)
+
 osiris_rex_var = tk.IntVar(value=0)
 osiris_apex_var = tk.IntVar(value=0)
+
 parker_solar_probe_var = tk.IntVar(value=0)
+
 jwst_var = tk.IntVar(value=0)
+
 rosetta_var = tk.IntVar(value=0)
+
 bepicolombo_var = tk.IntVar(value=0)
+
 solarorbiter_var = tk.IntVar(value=0)
+
 akatsuki_var = tk.IntVar(value=0)
+
 comet_ikeya_seki_var = tk.IntVar(value=0)
+
 comet_west_var = tk.IntVar(value=0)
+
 comet_halley_var = tk.IntVar(value=0)
+
 comet_hyakutake_var = tk.IntVar(value=0)
+
 comet_hale_bopp_var = tk.IntVar(value=0)
+
 comet_mcnaught_var = tk.IntVar(value=0)
+
 comet_neowise_var = tk.IntVar(value=0)
+
 comet_tsuchinshan_atlas_var = tk.IntVar(value=0)
+
 comet_Churyumov_Gerasimenko_var = tk.IntVar(value=0)
+
 comet_borisov_var = tk.IntVar(value=0)
+
 comet_atlas_var = tk.IntVar(value=0)
+
 oumuamua_var = tk.IntVar(value=0)
+
 apophis_var = tk.IntVar(value=0)
+
 vesta_var = tk.IntVar(value=0)
+
 bennu_var = tk.IntVar(value=0)  
 bennu2_var = tk.IntVar(value=0)  # Bennu as a center body
+
 steins_var = tk.IntVar(value=0) 
+
 lutetia_var = tk.IntVar(value=0) 
+
 soho_var = tk.IntVar(value=0)
+
 ryugu_var = tk.IntVar(value=0)
+
 eros_var = tk.IntVar(value=0)
+
 itokawa_var = tk.IntVar(value=0)
+
 change_var = tk.IntVar(value=0)
+
 perse_var = tk.IntVar(value=0)
+
 dart_var = tk.IntVar(value=0)
+
 lucy_var = tk.IntVar(value=0)
+
 nix_var = tk.IntVar(value=0)
+
 kbo_var = tk.IntVar(value=0)
+
 gaia_var = tk.IntVar(value=0)
+
 hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
+
 hydra_var = tk.IntVar(value=0)  # 0 means unselected by default
+
 # Define IntVar variables for Kuiper Belt Objects
 quaoar_var = tk.IntVar(value=0)
+
 sedna_var = tk.IntVar(value=0)
+
 orcus_var = tk.IntVar(value=0)    # 0 means unselected by default
+
 varuna_var = tk.IntVar(value=0)
+
 gv9_var = tk.IntVar(value=0)
+
 ms4_var = tk.IntVar(value=0)
+
 dw_var = tk.IntVar(value=0)
+
 gonggong_var = tk.IntVar(value=0)
+
 arrokoth_var = tk.IntVar(value=0)
 arrokoth_new_horizons_var = tk.IntVar(value=0)
+
 ixion_var = tk.IntVar(value=0)
 
 # New Selection Variables for Major Moons
@@ -310,12 +618,6 @@ ixion_var = tk.IntVar(value=0)
 # Mars' Moons
 phobos_var = tk.IntVar(value=0)
 deimos_var = tk.IntVar(value=0)
-
-# Jupiter's Galilean Moons
-io_var = tk.IntVar(value=0)
-europa_var = tk.IntVar(value=0)
-ganymede_var = tk.IntVar(value=0)
-callisto_var = tk.IntVar(value=0)
 
 # Saturn's Major Moons
 titan_var = tk.IntVar(value=0)
@@ -341,6 +643,48 @@ charon_var = tk.IntVar(value=0)
 
 # Eris's Moon
 dysnomia_var = tk.IntVar(value=0)
+
+# Create a mapping dictionary for Sun shell variables:
+
+sun_shell_vars = {
+    'gravitational': sun_gravitational_var,
+    'outer_oort': sun_outer_oort_var,
+    'inner_oort': sun_inner_oort_var,
+    'inner_oort_limit': sun_inner_oort_limit_var,
+    'heliopause': sun_heliopause_var,
+    'termination_shock': sun_termination_shock_var,
+    'outer_corona': sun_outer_corona_var,
+    'inner_corona': sun_inner_corona_var,
+    'chromosphere': sun_chromosphere_var,
+    'photosphere': sun_photosphere_var,
+    'radiative': sun_radiative_var,
+    'core': sun_core_var
+}
+
+# Create mapping dictionaries for planet shell variables:
+
+jupiter_shell_vars = {
+    'jupiter_core': jupiter_core_var,
+    'jupiter_metallic_hydrogen': jupiter_metallic_hydrogen_var,
+    'jupiter_molecular_hydrogen': jupiter_molecular_hydrogen_var,
+    'jupiter_cloud_layer': jupiter_cloud_layer_var,
+    'jupiter_upper_atmosphere': jupiter_upper_atmosphere_var,
+    'jupiter_ring_system': jupiter_ring_system_var,
+    'jupiter_magnetosphere': jupiter_magnetosphere_var,
+    'jupiter_hill_sphere': jupiter_hill_sphere_var
+}
+
+earth_shell_vars = {
+    'earth_inner_core': earth_inner_core_var,
+    'earth_outer_core': earth_outer_core_var,
+    'earth_lower_mantle': earth_lower_mantle_var,
+    'earth_upper_mantle': earth_upper_mantle_var,
+    'earth_crust': earth_crust_var,
+    'earth_atmosphere': earth_atmosphere_var,
+    'earth_upper_atmosphere': earth_upper_atmosphere_var,
+    'earth_magnetosphere': earth_magnetosphere_var,
+    'earth_hill_sphere': earth_hill_sphere_var
+}
 
 # Define the list of objects
 objects = [
@@ -767,6 +1111,27 @@ objects = [
      'mission_info': 'Jupiter orbital period: 16.69 Earth days.', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
 
+# Jupiter's Inner Ring Moons
+    {'name': 'Metis', 'id': '516', 'var': metis_var, 'color': color_map('Metis'), 'symbol': 'circle', 'is_mission': False,
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 0.295 Earth days (7.08 hours).', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
+
+    {'name': 'Adrastea', 'id': '515', 'var': adrastea_var, 'color': color_map('Adrastea'), 'symbol': 'circle', 'is_mission': False,
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 0.298 Earth days (7.15 hours).', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
+
+    {'name': 'Amalthea', 'id': '505', 'var': amalthea_var, 'color': color_map('Amalthea'), 'symbol': 'circle', 'is_mission': False,
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 0.498 Earth days (11.95 hours).', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
+
+    {'name': 'Thebe', 'id': '514', 'var': thebe_var, 'color': color_map('Thebe'), 'symbol': 'circle', 'is_mission': False,
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 0.675 Earth days (16.20 hours).', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
+
     # Saturn's Major Moons
 
     {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 
@@ -876,6 +1241,12 @@ BUTTON_WIDTH = 17  # Number of characters wide
 # PLANET_INTERVAL_DIVISOR = 50
 # SAT_PLOT_ORBIT_DAYS = 56
 # SAT_PLOT_ORBIT_PERIOD = 1
+
+# Add a pulsating effect to the progress bar during long operations
+def pulse_progress_bar():
+    """Create a pulsating effect for the progress bar"""
+    progress_bar.step(2)  # Increase by 2%
+    root.after(100, pulse_progress_bar)  # Call again after 100ms
 
 def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', id_type=None):
     """
@@ -1118,67 +1489,7 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
         else:
             print(f"No orbit path found for {name} relative to {center_object_name}")
 
-class ScrollableFrame(tk.Frame):
-    """
-    A scrollable frame that can contain multiple widgets with a vertical scrollbar.
-    """
-    def __init__(self, container, *args, **kwargs):
-        super().__init__(container, *args, **kwargs)
 
-        # Canvas and Scrollbar
-        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
-        self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
-        self.canvas.configure(yscrollcommand=self.scrollbar.set) 
-
-        # Layout
-        self.canvas.pack(side="left", fill="both", expand=True)
-        self.scrollbar.pack(side="right", fill="y")
-
-        # Scrollable Frame
-        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
-        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
-
-        # Bind mousewheel to the canvas
-        self.canvas.bind("<Enter>", self._on_enter)
-        self.canvas.bind("<Leave>", self._on_leave)
-
-        # Update scroll region when the canvas size changes
-        self.canvas.bind(
-            "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-        )
-
-    def _on_mousewheel(self, event):
-        if event.delta:
-            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        elif event.num == 4:
-            self.canvas.yview_scroll(-1, "units")
-        elif event.num == 5:
-            self.canvas.yview_scroll(1, "units")
-
-    def _on_enter(self, event):
-        # Bind the mousewheel events
-        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
-        self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux
-        self.canvas.bind_all("<Button-5>", self._on_mousewheel)  # Linux
-
-    def _on_leave(self, event):
-        # Unbind mousewheel events
-        self.canvas.unbind_all("<MouseWheel>")
-        self.canvas.unbind_all("<Button-4>")
-        self.canvas.unbind_all("<Button-5>")   
-
-    def _on_enter(self, event):
-        # Bind the mouse wheel events when the cursor enters a widget
-        event.widget.bind_all("<MouseWheel>", self._on_mousewheel)
-        event.widget.bind_all("<Button-4>", self._on_mousewheel)
-        event.widget.bind_all("<Button-5>", self._on_mousewheel)
-
-    def _on_leave(self, event):
-        # Unbind the mouse wheel events when the cursor leaves a widget
-        event.widget.unbind_all("<MouseWheel>")
-        event.widget.unbind_all("<Button-4>")
-        event.widget.unbind_all("<Button-5>")
 
 # Suppress ErfaWarning messages
 warnings.simplefilter('ignore', ErfaWarning)
@@ -1274,564 +1585,6 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
     # Update layout with new annotations using update_layout
     fig.update_layout(annotations=annotations)
     
-    return fig
-
-def create_sun_visualization(fig, animate=False, frames=None):
-    """
-    Creates a visualization of the Sun's layers including photosphere, inner corona, and outer corona.
-    
-    Parameters:
-        fig (plotly.graph_objects.Figure): The figure to add the Sun visualization to
-        animate (bool): Whether this is for an animated plot
-        frames (list, optional): List of frames for animation
-        
-    Returns:
-        plotly.graph_objects.Figure: The updated figure
-
-    Constants used:
-        SOLAR_RADIUS_AU: Sun's radius in AU (0.00465047)
-        INNER_CORONA_RADII: Inner corona extends to 2-3 solar radii (~0.014 AU)
-        OUTER_CORONA_RADII: Outer corona extends to ~50 solar radii (~0.2 AU)
-    """
-    # Create base traces for static visualization
-    def create_layer_traces():
-        traces = []
-        
-        # Only add layers that are selected
-        # 12. Sun's Gravitational Influence
-        if sun_gravitational_var.get() == 1:
-            x, y, z = create_corona_sphere(GRAVITATIONAL_INFLUENCE_AU)
-
-            # Create a text list matching the number of points
-            text_array_gravitational_influence = [gravitational_influence_info_hover for _ in range(len(x))]
-            customdata_array_gravitational_influence = ["Sun's Gravitational Influence" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=1.0,
-            #            color='green',
-                        color= 'rgb(102, 187, 106)', 
-                        opacity=0.2
-                    ),
-                    name='Sun\'s Gravitational Influence',
-                    text=text_array_gravitational_influence,             
-                    customdata=customdata_array_gravitational_influence, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='green',
-                        size=0.5,
-                        symbol='square-open',
-                        opacity=0.2
-                    ),
-                    name='Sun\'s Gravitational Influence',
-                    text=['The Sun\'s gravitational influence to ~126,000 AU or 2 ly.'],
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
-            )
-
-        # 11. Outer Oort Cloud
-        if sun_outer_oort_var.get() == 1:
-            x, y, z = create_corona_sphere(OUTER_OORT_CLOUD_AU)
-
-            # Create a text list matching the number of points
-            text_array_outer_oort = [outer_oort_info_hover for _ in range(len(x))]
-            customdata_array_outer_oort = ["Outer Oort Cloud" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=1.0,
-                        color='white',  # Yellow approximates the visible color
-                        opacity=0.2
-                    ),
-                    name='Outer Oort Cloud',
-                    text=text_array_outer_oort,             
-                    customdata=customdata_array_outer_oort, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='white',
-                        size=1.0,
-                        symbol='circle-open',
-                        opacity=0.2
-                    ),
-                    name='Outer Oort Cloud',
-                    text=['Outer Oort Cloud from estimated 20,000 to 100,000 AU.'],
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
-            )
-
-        # 10. Inner Oort Cloud
-        if sun_inner_oort_var.get() == 1:
-            x, y, z = create_corona_sphere(INNER_OORT_CLOUD_AU)
-
-            # Create a text list matching the number of points
-            text_array_inner_oort = [inner_oort_info_hover for _ in range(len(x))]
-            customdata_array_inner_oort = ["Inner Oort Cloud" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=1.0,
-                        color='white',  # Yellow approximates the visible color
-                        opacity=0.3
-                    ),
-                    name='Inner Oort Cloud',
-                    text=text_array_inner_oort,             
-                    customdata=customdata_array_inner_oort, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='white',
-                        size=1.0,
-                        symbol='circle-open',
-                        opacity=0.3
-                    ),
-                    name='Inner Oort Cloud',
-                    text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
-            )
-
-        # 9. Inner Limit of Inner Oort Cloud
-        if sun_inner_oort_limit_var.get() == 1:
-            x, y, z = create_corona_sphere(INNER_LIMIT_OORT_CLOUD_AU)
-
-            # Create a text list matching the number of points
-            text_array_inner_limit_oort = [inner_limit_oort_info_hover for _ in range(len(x))]
-            customdata_array_inner_limit_oort = ["Inner Limit of Oort Cloud" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=1.0,
-                        color='white',  
-                        opacity=0.3
-                    ),
-                    name='Inner Limit of Oort Cloud',
-                    text=text_array_inner_limit_oort,             
-                    customdata=customdata_array_inner_limit_oort, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='white',
-                        size=1.0,
-                        symbol='circle-open',
-                        opacity=0.3
-                    ),
-                    name='Inner Limit of Oort Cloud',
-                    text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
-            )
-
-        # 8. Solar Wind and Heliopause Sphere
-        if sun_heliopause_var.get() == 1:
-            x, y, z = create_corona_sphere(HELIOPAUSE_RADII * SOLAR_RADIUS_AU)
-
-            # Create a text list matching the number of points
-            text_array_solar_wind = [solar_wind_info_hover for _ in range(len(x))]
-            customdata_array_solar_wind = ["Solar Wind Heliopause" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=0.5,
-                        color='rgb(135, 206, 250)',  # Nearest visible approximatation
-                        opacity=0.2
-                    ),
-                    name='Solar Wind Heliopause',
-                    text=text_array_solar_wind,            # Replicated text
-                    customdata=customdata_array_solar_wind, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add Heliopause shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(135, 206, 250)',
-                        size=0.5,
-                        symbol='circle',
-                        opacity=0.2
-                    ),
-                    name='Solar Wind Heliopause',
-                    text=['Solar Wind Heliopause (extends to 123 AU)'],
-            #        hoverinfo='text',
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
-            )
-
-        # 7. Solar Wind and Termination Shock Sphere
-        if sun_termination_shock_var.get() == 1:
-            x, y, z = create_corona_sphere(TERMINATION_SHOCK_AU)
-
-            # Create a text list matching the number of points
-            text_array_termination_shock = [termination_shock_info_hover for _ in range(len(x))]
-            customdata_array_termination_shock = ["Solar Wind Termination Shock" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=0.5,
-                        color='rgb(240, 244, 255)',  # Nearest visible approximatation
-                        opacity=0.2
-                    ),
-                    name='Solar Wind Termination Shock',
-                    text=text_array_termination_shock,            # Replicated text
-                    customdata=customdata_array_termination_shock, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add Termination Shock shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(240, 244, 255)',
-                        size=0.5,
-                        symbol='circle',
-                        opacity=0.2
-                    ),
-                    name='Solar Wind Termination Shock',
-                    text=['Solar Wind Termination Shock (extends to 94 AU)'],
-            #        hoverinfo='text',
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
-            )
-
-        # 6. Outer Corona Sphere (most expansive, very diffuse)
-        if sun_outer_corona_var.get() == 1:
-            x, y, z = create_corona_sphere(OUTER_CORONA_RADII * SOLAR_RADIUS_AU)
-
-            # Create a text list matching the number of points
-            text_array_outer_corona = [outer_corona_info_hover for _ in range(len(x))]
-            customdata_array_outer_corona = ["Sun: Outer Corona" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=0.75,
-                        color='rgb(25, 25, 112)',  # approximate visualization
-                        opacity=0.3
-                    ),
-                    name='Sun: Outer Corona',
-                    text=text_array_outer_corona,            # Replicated text
-                    customdata=customdata_array_outer_corona, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add outer corona shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(25, 25, 112)',
-                        size=0.75,
-                        symbol='circle',
-                        opacity=0.3
-                    ),
-                    name='Sun: Outer Corona',
-                    text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
-            #        hoverinfo='text',
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
-            )
-
-        # 5. Inner Corona Sphere
-        if sun_inner_corona_var.get() == 1:
-            x, y, z = create_corona_sphere(INNER_CORONA_RADII * SOLAR_RADIUS_AU)
-
-            # Create a text list matching the number of points
-            text_array_inner_corona = [inner_corona_info_hover for _ in range(len(x))]
-            customdata_array_inner_corona = ["Sun: Inner Corona" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=1,
-                        color='rgb(0, 0, 255)',  # Warmer tint
-                        opacity=0.09
-                    ),
-                    name='Sun: Inner Corona',
-                    text=text_array_inner_corona,            # Replicated text
-                    customdata=customdata_array_inner_corona, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add inner corona shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(0, 0, 255)',
-                        size=1,
-                        symbol='circle',
-                        opacity=0.09
-                    ),
-                    name='Sun: Inner Corona',
-                    text=['Solar Inner Corona (extends to 2-3 solar radii)'],
-                    hoverinfo='text',
-                    showlegend=False
-                )
-            )
-
-        # 4. Chromosphere
-        if sun_chromosphere_var.get() == 1:
-            x, y, z = create_corona_sphere(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU)
-
-            # Create a text list matching the number of points
-            text_array_chromosphere = [chromosphere_info_hover for _ in range(len(x))]
-            customdata_array_chromosphere = ["Sun: Chromosphere" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=1.25,
-                        color='rgb(30, 144, 255)',  # approximate visible
-                        opacity=0.10
-                    ),
-                    name='Sun: Chromosphere',
-                    text=text_array_chromosphere,            # Replicated text
-                    customdata=customdata_array_chromosphere, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add chromosphere shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(30, 144, 255)',
-                        size=1.25,
-                        symbol='circle',
-                        opacity=0.10
-                    ),
-                    name='Sun: Chromosphere',
-                    text=['Solar Chromosphere (surface temperature ~6,000 to 20,000 K)'],
-                    hoverinfo='text',
-                    showlegend=False
-                )
-            )
-
-        # 3. Convective Zone and Photoshere Sphere
-        if sun_photosphere_var.get() == 1:
-            x, y, z = create_corona_sphere(SOLAR_RADIUS_AU)
-
-            # Create a text list matching the number of points
-            text_array_photosphere = [photosphere_info_hover for _ in range(len(x))]
-            customdata_array_photosphere = ["Sun: Photosphere" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=7.0,
-                        color='rgb(255, 244, 214)',  # Yellow approximates the visible color
-                        opacity=1.0
-                    ),
-                    name='Sun: Photosphere',
-                    text=text_array_photosphere,            # Replicated text
-                    customdata=customdata_array_photosphere, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add photosphere shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(255, 244, 214)',
-                        size=7.0,
-                        symbol='circle',
-                        opacity=1.0
-                    ),
-                    name='Sun: Photosphere',
-                    text=['Solar Photosphere (surface temperature ~6,000K)'],
-                    hoverinfo='text',
-                    showlegend=False
-                )
-            )
-        
-        # 2. Radiative Zone
-        if sun_radiative_var.get() == 1:
-            x, y, z = create_corona_sphere(RADIATIVE_ZONE_AU)
-
-            # Create a text list matching the number of points
-            text_array_radiative_zone = [radiative_zone_info_hover for _ in range(len(x))]
-            customdata_array_radiative_zone = ["Sun: Radiative Zone" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=7,
-                        color='rgb(30, 144, 255)',  # arbitrary color for contrast
-                        opacity=1.0
-                    ),
-                    name='Sun: Radiative Zone',
-                    text=text_array_radiative_zone,            # Replicated text
-                    customdata=customdata_array_radiative_zone, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add radiative zone shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(30, 144, 255)',
-                        size=7,
-                        symbol='circle',
-                        opacity=1.0
-                    ),
-                    name='Sun: Radiative Zone',
-                    text=['Solar Radiative Zone (extends to 0.2 to 0.7 solar radii)'],
-                    hoverinfo='text',
-                    showlegend=False
-                )
-            )
-
-        # 1. Core
-        if sun_core_var.get() == 1:
-            x, y, z = create_corona_sphere(CORE_AU)
-
-            # Create a text list matching the number of points
-            text_array_core = [core_info_hover for _ in range(len(x))]
-            customdata_array_core = ["Sun: Core" for _ in range(len(x))]
-
-            traces.append(
-                go.Scatter3d(
-                    x=x, y=y, z=z,
-                    mode='markers',
-                    marker=dict(
-                        size=10,
-                        color='rgb(70, 130, 180)',  
-                        opacity=1.0
-                    ),
-                    name='Sun: Core',
-                    text=text_array_core,            # Replicated text
-                    customdata=customdata_array_core, # Replicated customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-            
-            # Add core shell
-            traces.append(
-                go.Scatter3d(
-                    x=[0], y=[0], z=[0],
-                    mode='markers',
-                    marker=dict(
-                        color='rgb(70, 130, 180)',
-                        size=10,
-                        symbol='circle',
-                        opacity=1.0
-                    ),
-                    name='Sun: Core',
-                    text=['Solar Core (temperature ~15M K)'],
-                    hoverinfo='text',
-                    showlegend=False
-                )
-            )
-
-        return traces
-
-    # Add base traces to figure
-    traces = create_layer_traces()
-    for trace in traces:
-        fig.add_trace(trace)
-
-    # If this is for animation, add the traces to each frame
-    if animate and frames is not None:
-        for frame in frames:
-            frame_data = list(frame.data)  # Convert tuple to list if necessary
-            frame_data.extend(traces)
-            frame.data = frame_data
-
     return fig
 
 def create_sun_hover_text():
@@ -2106,7 +1859,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
 def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
     """
     Fetch trajectory data in batch for all dates, handling missing epochs through interpolation.
-    Particularly useful for objects with intermittent data like New Horizons.
+    Includes velocity calculations and additional orbital parameters for each point.
     
     Parameters:
         object_id (str): ID of the object to fetch
@@ -2115,7 +1868,7 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
         id_type (str): Type of ID (e.g., None, 'smallbody')
         
     Returns:
-        list: List of position dictionaries or None values for each requested date
+        list: List of position dictionaries with complete orbital data
     """
     try:
         # Convert dates to Julian Date
@@ -2141,10 +1894,44 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
             differences = [abs(jd_returned - epoch) for epoch in epochs]
             idx = differences.index(min(differences))
             if differences[idx] < tolerance:
+                # Extract position components
+                x = float(vec['x']) if 'x' in vec.colnames else None
+                y = float(vec['y']) if 'y' in vec.colnames else None
+                z = float(vec['z']) if 'z' in vec.colnames else None
+                
+                # Extract velocity components
+                vx = float(vec['vx']) if 'vx' in vec.colnames else None
+                vy = float(vec['vy']) if 'vy' in vec.colnames else None
+                vz = float(vec['vz']) if 'vz' in vec.colnames else None
+                
+                # Calculate velocity magnitude
+                velocity = np.sqrt(vx**2 + vy**2 + vz**2) if (vx is not None and 
+                                                             vy is not None and 
+                                                             vz is not None) else 'N/A'
+                
+                # Extract range and range_rate
+                range_ = float(vec['range']) if 'range' in vec.colnames else None
+                range_rate = float(vec['range_rate']) if 'range_rate' in vec.colnames else None
+                
+                # Calculate distance in light-minutes and light-hours
+                distance_km = range_ * KM_PER_AU if range_ is not None else 'N/A'
+                distance_lm = range_ * LIGHT_MINUTES_PER_AU if range_ is not None else 'N/A'
+                distance_lh = (distance_lm / 60) if isinstance(distance_lm, float) else 'N/A'
+                
+                # Store complete position data
                 positions[idx] = {
-                    'x': float(vec['x']),
-                    'y': float(vec['y']),
-                    'z': float(vec['z']),
+                    'x': x,
+                    'y': y,
+                    'z': z,
+                    'vx': vx,
+                    'vy': vy,
+                    'vz': vz,
+                    'velocity': velocity,
+                    'range': range_,
+                    'range_rate': range_rate,
+                    'distance_km': distance_km,
+                    'distance_lm': distance_lm,
+                    'distance_lh': distance_lh,
                     'date': dates_list[idx]
                 }
 
@@ -2174,15 +1961,56 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
                     t = dates_list[i].timestamp()
                     frac = (t - t0) / (t1 - t0)
                     
-                    # Linear interpolation for each coordinate
+                    # Linear interpolation for position
                     interp_x = (1 - frac) * positions[prev_idx]['x'] + frac * positions[next_idx]['x']
                     interp_y = (1 - frac) * positions[prev_idx]['y'] + frac * positions[next_idx]['y']
                     interp_z = (1 - frac) * positions[prev_idx]['z'] + frac * positions[next_idx]['z']
+                    
+                    # Initialize interpolated values
+                    interp_vx = None
+                    interp_vy = None
+                    interp_vz = None
+                    interp_velocity = 'N/A'
+                    interp_range = None
+                    interp_range_rate = None
+                    interp_distance_km = 'N/A'
+                    interp_distance_lm = 'N/A'
+                    interp_distance_lh = 'N/A'
+                    
+                    # Interpolate velocity components if available
+                    if (isinstance(positions[prev_idx]['vx'], (int, float)) and 
+                        isinstance(positions[next_idx]['vx'], (int, float))):
+                        interp_vx = (1 - frac) * positions[prev_idx]['vx'] + frac * positions[next_idx]['vx']
+                        interp_vy = (1 - frac) * positions[prev_idx]['vy'] + frac * positions[next_idx]['vy']
+                        interp_vz = (1 - frac) * positions[prev_idx]['vz'] + frac * positions[next_idx]['vz']
+                        interp_velocity = np.sqrt(interp_vx**2 + interp_vy**2 + interp_vz**2)
+                    
+                    # Interpolate range if available
+                    if (isinstance(positions[prev_idx]['range'], (int, float)) and 
+                        isinstance(positions[next_idx]['range'], (int, float))):
+                        interp_range = (1 - frac) * positions[prev_idx]['range'] + frac * positions[next_idx]['range']
+                        interp_distance_km = interp_range * KM_PER_AU
+                        interp_distance_lm = interp_range * LIGHT_MINUTES_PER_AU
+                        interp_distance_lh = interp_distance_lm / 60
+                    
+                    # Interpolate range_rate if available
+                    if (isinstance(positions[prev_idx]['range_rate'], (int, float)) and 
+                        isinstance(positions[next_idx]['range_rate'], (int, float))):
+                        interp_range_rate = (1 - frac) * positions[prev_idx]['range_rate'] + frac * positions[next_idx]['range_rate']
                     
                     positions[i] = {
                         'x': interp_x,
                         'y': interp_y,
                         'z': interp_z,
+                        'vx': interp_vx,
+                        'vy': interp_vy,
+                        'vz': interp_vz,
+                        'velocity': interp_velocity,
+                        'range': interp_range,
+                        'range_rate': interp_range_rate,
+                        'distance_km': interp_distance_km,
+                        'distance_lm': interp_distance_lm,
+                        'distance_lh': interp_distance_lh,
                         'date': dates_list[i]
                     }
                     interpolated_count += 1
@@ -2212,6 +2040,7 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
             print(f"No ephemeris available for {object_id}")
             return [None] * len(dates_list)
         print(f"Error fetching trajectory for {object_id}: {e}")
+        traceback.print_exc()  # Add traceback for better debugging
         return [None] * len(dates_list)
 
 def print_planet_positions(positions):
@@ -2243,153 +2072,50 @@ def print_planet_positions(positions):
         print(f"{name:15} Position: {pos_str:35} Distance from center: {dist_str}")
     print("=" * 50)
 
-def format_maybe_float(value):
-    """
-    If 'value' is a numeric type (int or float), return it formatted
-    with 10 decimal places. Otherwise, return 'N/A'.
-    """
-    if isinstance(value, (int, float)):
-        return f"{value:.10f}"
-    return "N/A"
+#def format_maybe_float(value):
+#    """
+#    If 'value' is a numeric type (int or float), return it formatted
+#    with 10 decimal places. Otherwise, return 'N/A'.
+#    """
+#    if isinstance(value, (int, float)):
+#        return f"{value:.10f}"
+#    return "N/A"
 
-def format_km_float(value):
-    """
-    Format kilometer values in scientific notation with 2 decimal places.
-    """
-    if isinstance(value, (int, float)):
-        return f"{value:.10e}"              # using .10e for scientific notation instead of .10f
-    return "N/A"
+#def format_km_float(value):
+#    """
+#    Format kilometer values in scientific notation with 2 decimal places.
+#    """
+#    if isinstance(value, (int, float)):
+#        return f"{value:.10e}"              # using .10e for scientific notation instead of .10f
+#    return "N/A"
 
 def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info", 
                          center_object_name=None):
-
+    
     # Skip if there's no data
     if obj_data is None or obj_data['x'] is None:
         return
 
     print(f"\nAdding trace for {name}:")
-
-    # Use format_maybe_float() for numeric fields
-    distance_au   = format_maybe_float(obj_data.get('range'))
-    distance_km   = format_km_float(obj_data.get('distance_km'))   
-    distance_lm   = format_maybe_float(obj_data.get('distance_lm'))
-    distance_lh   = format_maybe_float(obj_data.get('distance_lh'))
-    velocity_au   = format_maybe_float(obj_data.get('velocity'))
-
-    # Format orbital periods - both calculated and known
-    calculated_period = obj_data.get('calculated_orbital_period', 'N/A')
-    known_period = obj_data.get('known_orbital_period', 'N/A')
-
-    # Format calculated period
-    if isinstance(calculated_period, dict):
-        calc_years = calculated_period.get('years')
-        calc_days = calculated_period.get('days')
-        calculated_period_str = f"{calc_years:.4f} Earth years ({calc_days:.2f} days)"
-    else:
-        calculated_period_str = str(calculated_period)
     
-    # Format known period
-    if isinstance(known_period, dict):
-        known_years = known_period.get('years')
-        known_days = known_period.get('days')
-        known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days)"
-    else:
-        known_period_str = str(known_period)
-
-    # Format the orbital period - handle both numeric and string inputs
-#    orbit_period = obj_data.get('orbital_period', 'N/A')
-
-# If it's already a string with a number, try to extract the number
-#    if isinstance(orbit_period, str) and orbit_period.replace('.', '', 1).isdigit():
-#        try:
-            # Convert from string to float
-#            orbit_period = float(orbit_period)
-#        except:
-            # Keep as is if conversion fails
-#            pass
-
-    # Format based on type
-#    if isinstance(orbit_period, (int, float)):
-        # It's a number, format it properly    
-#        orbit_period_years = f"{orbit_period:.4f} Earth years"
-#        orbit_period_days = f"{(orbit_period * 365.25):.2f} days"
-#        orbit_period_str = f"{orbit_period_years} ({orbit_period_days})"
-#    else:
-        # It's not a number, use as is
-#        orbit_period_str = orbit_period  
-
-    # Get center body radius from constants
-    center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)  # Default to 0 if center body not found
-
-    # Calculate surface distance if we have valid distance data
-    if isinstance(obj_data.get('distance_km'), (int, float)) and obj_data.get('distance_km') > center_radius_km:
-        surface_distance_km = obj_data['distance_km'] - center_radius_km
-        surface_distance_str = format_km_float(surface_distance_km)
-    else:
-        surface_distance_str = "N/A"
-
-    # Find the object's info in the objects list
-    obj_info = next((obj for obj in objects if obj['name'] == name), None)
-    mission_info = obj_info.get('mission_info', '') if obj_info else ''
-
-    # Check if this is a planetary satellite
-    is_satellite = False
-    for planet, satellites in parent_planets.items():
-        if name in satellites:
-            is_satellite = True
-            break
-
-    velocity_km_hr = "N/A"
-    if isinstance(obj_data.get('velocity'), (int, float)):
-        velocity_km_hr = f"{obj_data.get('velocity') * KM_PER_AU / 24:,.2f}"
-
-    # Calculate percent difference between calculated and known orbital periods
-    period_diff_percent = "N/A"
-    if (not is_satellite and 
-        isinstance(calculated_period, dict) and 
-        isinstance(known_period, dict) and
-        isinstance(calculated_period.get('years'), (int, float)) and 
-        isinstance(known_period.get('years'), (int, float)) and
-        known_period.get('years') != 0):
-        
-        calc_years = calculated_period.get('years')
-        known_years = known_period.get('years')
-        period_diff = abs(calc_years - known_years)
-        period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
-
-    # Now build your hover text strings
-    full_hover_text = (
-        f"<b>{name}</b><br><br>"
-        f"Distance from Center: {distance_au} AU<br>"
-        f"Distance: {distance_km} kilometers<br>"
-        f"Distance: {distance_lm} light-minutes<br>"
-        f"Distance: {distance_lh} light-hours<br>"
-        f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
-        f"Velocity: {velocity_au} AU/day<br>"
-        f"Velocity: {velocity_km_hr} km/hr<br>"
-#        f"Orbital Period: {orbit_period} Earth years"
-#        f"Orbital Period: {orbit_period_str}"
+    # Use the consolidated function for hover text
+    full_hover_text, minimal_hover_text, satellite_note = format_detailed_hover_text(
+        obj_data, 
+        name, 
+        center_object_name,
+        objects,
+        planetary_params,
+        parent_planets,
+        CENTER_BODY_RADII,
+        KM_PER_AU,
+        LIGHT_MINUTES_PER_AU,
+        KNOWN_ORBITAL_PERIODS
     )
-
-    # Add orbital period information
-    if is_satellite:
-        full_hover_text += f"Calculated Orbital Period: N/A (satellite of {planet})<br>"
-    else:
-        full_hover_text += f"Calculated Orbital Period: {calculated_period_str}<br>"
     
-    # Always add known period if available
-#    full_hover_text += f"Known Orbital Period: {known_period_str}"
-    if period_diff_percent != "N/A":
-        full_hover_text += f"Known Orbital Period: {known_period_str} (Percent difference: {period_diff_percent}%)"
-    else:
-        full_hover_text += f"Known Orbital Period: {known_period_str}"
-
-    # Add mission_info if it exists, regardless of whether it's a mission
-    if mission_info:
-        full_hover_text += f"<br>{mission_info}"
+    # Add satellite note if present
+    if satellite_note:
+        full_hover_text += satellite_note
     
-    minimal_hover_text = f"<b>{name}</b>"
-
     print(f"Full hover text: {full_hover_text}")
     print(f"Minimal hover text: {minimal_hover_text}")
 
@@ -2412,6 +2138,14 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
         )
     )
 
+# Define dictionary mapping all celestial bodies to their shell variable dictionaries
+body_shells_config = {
+    'Sun': sun_shell_vars,
+    'Jupiter': jupiter_shell_vars,
+    'Earth': earth_shell_vars
+    # Add more celestial bodies here as shell systems are developed
+}
+
 def plot_objects():
     def worker():
         try:
@@ -2422,15 +2156,12 @@ def plot_objects():
             # Create figure object at the start
             fig = go.Figure()
 
-# Generate default name with timestamp
-#            current_date = datetime.now()
+            # Generate default name with timestamp
             current_date = STATIC_TODAY
             default_name = f"solar_system_{current_date.strftime('%Y%m%d_%H%M')}"
-            
-            # Use show_figure_safely to handle both display and save options
-    #        show_figure_safely(fig, default_name)      # just one call at the end of the function
-            
+                       
             output_label.config(text="Fetching data, please wait...")
+            progress_bar['mode'] = 'indeterminate'
             progress_bar.start(10)  # Start the progress bar with a slight delay
             root.update_idletasks()  # Force GUI to update
 
@@ -2473,11 +2204,29 @@ def plot_objects():
             center_object_name = center_object_var.get()
             center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
             if center_object_info:
-                center_id = 'Sun' if center_object_name == 'Sun' else center_object_info['id']
-                center_id_type = None if center_object_name == 'Sun' else center_object_info.get('id_type')
+                if center_object_name == 'Sun':
+                    center_id = 'Sun'
+                    center_id_type = None
+                else:
+                    center_id = center_object_info['id']
+                    center_id_type = center_object_info.get('id_type')
+    #            center_id = 'Sun' if center_object_name == 'Sun' else center_object_info['id']
+    #            center_id_type = None if center_object_name == 'Sun' else center_object_info.get('id_type')
             else:
                 center_id = 'Sun'
                 center_id_type = None
+
+            # Define planets with shell visualizations
+            planets_with_shells = {
+                'Jupiter': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': jupiter_shell_vars
+                },
+                'Earth': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': earth_shell_vars
+                }
+            }
 
             # Create date lists for each selected object
             dates_lists = {}
@@ -2748,6 +2497,10 @@ def plot_objects():
                         obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
                     positions[obj['name']] = obj_data
 
+                    # Store positions for planets with shells
+                    if obj['name'] in planets_with_shells and obj_data and 'x' in obj_data:
+                        planets_with_shells[obj['name']]['position'] = (obj_data['x'], obj_data['y'], obj_data['z'])
+
             # Print planet positions in the console
             print_planet_positions(positions)
 
@@ -2802,62 +2555,99 @@ def plot_objects():
             # Add hover toggle buttons
             fig = add_hover_toggle_buttons(fig)
 
-            
         # If center is the Sun, draw its layered visualization if shells are selected
-        #    if center_object_name == 'Sun' and sun_shells_var.get() == 1:
-        #        fig = create_sun_visualization(fig)
-            if center_object_name == 'Sun' and (sun_shells_var.get() == 1 or any([          # add shells
-                sun_core_var.get(), sun_radiative_var.get(), sun_photosphere_var.get(),
-                sun_chromosphere_var.get(), sun_inner_corona_var.get(), sun_outer_corona_var.get(),
-                sun_termination_shock_var.get(), sun_heliopause_var.get(), sun_inner_oort_limit_var.get(),
-                sun_inner_oort_var.get(), sun_outer_oort_var.get(), sun_gravitational_var.get()
-            ])):
-                fig = create_sun_visualization(fig)
-        #    else:
-            elif center_object_name == 'Sun':
-            # Just add the central Sun marker if shells not selected
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[0],
-                        y=[0],
-                        z=[0],
-                        mode='markers',
-                        marker=dict(
-        #                    color=center_object_info['color'],
-                            color='rgb(102, 187, 106)',      # chlorophyll green  
-                            size=12,                            # make the size 12 to match animate_objects
-                            symbol=center_object_info['symbol']
-                        ),
-        #                name=f"{center_object_name} (Center)",
-        #                text=[center_object_name],
-                        name="Sun",                 # Just "Sun" instead of "Sun (Center)"
-                        text=[hover_text_sun],      # add the hover text
-                        customdata=["Sun"],         # Use simple name for minimal hover
-                        hovertemplate='%{text}<extra></extra>',  # Use the detailed hover template
-        #                hoverinfo='skip',
-                        showlegend=True
-                    )
-                )
 
-            else:
-                # For other central bodies, add the center marker trace
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[0],
-                        y=[0],
-                        z=[0],
-                        mode='markers',
-                        marker=dict(
-                            color=center_object_info['color'],
-                            size=12,
-                            symbol=center_object_info['symbol']
-                        ),
-                        name=f"{center_object_name}",
-                        text=[center_object_name],
-                        hoverinfo='skip',
-                        showlegend=True
+        #    if center_object_name == 'Sun' and (sun_shells_var.get() == 1 or any([          # add shells
+        #        sun_core_var.get(), sun_radiative_var.get(), sun_photosphere_var.get(),
+        #        sun_chromosphere_var.get(), sun_inner_corona_var.get(), sun_outer_corona_var.get(),
+        #        sun_termination_shock_var.get(), sun_heliopause_var.get(), sun_inner_oort_limit_var.get(),
+        #        sun_inner_oort_var.get(), sun_outer_oort_var.get(), sun_gravitational_var.get()
+        #    ])):
+        #        fig = create_sun_visualization(fig)
+
+            # Define dictionary mapping planets to their shell variable dictionaries
+            planet_shells_config = {
+                'Jupiter': jupiter_shell_vars,
+                'Earth': earth_shell_vars
+                # Add more planets here as shell systems are developed
+            }
+
+            # Flag to track if shells have been added for center object
+            center_shells_added = False
+
+            # First add Sun visualization if needed
+            if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
+                fig = create_sun_visualization(fig, sun_shell_vars)
+                center_shells_added = True
+                
+            # Now add planet visualization if the center is a planet with shells
+            elif center_object_name in planet_shells_config:
+                shell_vars = planet_shells_config[center_object_name]
+                if any(var.get() == 1 for var in shell_vars.values()):
+                    fig = create_planet_visualization(fig, center_object_name, shell_vars)
+                    center_shells_added = True
+
+            # Add center marker only if shells haven't been added
+            if not center_shells_added:
+                if center_object_name == 'Sun':
+                    # Just add the central Sun marker if shells not selected
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[0],
+                            y=[0],
+                            z=[0],
+                            mode='markers',
+                            marker=dict(
+                                color='rgb(102, 187, 106)',
+                                size=12,
+                                symbol=center_object_info['symbol']
+                            ),
+                            name="Sun",
+                            text=[hover_text_sun],
+                            customdata=["Sun"],
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True
+                        )
                     )
-                )
+                else:
+                    # For other central bodies (planets), add the center marker trace
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[0],
+                            y=[0],
+                            z=[0],
+                            mode='markers',
+                            marker=dict(
+                                color=center_object_info['color'],
+                                size=12,
+                                symbol=center_object_info['symbol']
+                            ),
+                            name=f"{center_object_name}",
+                            text=[center_object_name],
+                            hoverinfo='skip',
+                            showlegend=True
+                        )
+                    )
+
+            # Create dictionary of shell variables for each planet
+            planet_shell_vars = {
+                'Jupiter': jupiter_shell_vars,
+                'Earth': earth_shell_vars
+            }
+
+            for planet_name, planet_data in planets_with_shells.items():
+                is_center = (center_object_name == planet_name)
+                
+                # Only add shells if the planet is the center
+        #        if is_center and planet_name in planet_shell_vars:
+                if is_center and planet_name in planet_shell_vars and not center_shells_added:
+                    print(f"\nAdding shells for center planet {planet_name}")
+                    fig = create_planet_visualization(
+                        fig,                            # First parameter should be fig
+                        planet_name,                    # Second parameter should be planet_name
+                        planet_shell_vars[planet_name], # Third parameter should be shell_vars
+                        center_position=(0, 0, 0)       # Named parameter can stay as is
+                    )
 
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
@@ -3450,6 +3240,15 @@ def pad_trajectory(global_dates, object_start_date, object_end_date, object_id, 
 def animate_objects(step, label):
     def animation_worker():
         try:
+            # Initialize frames list at the beginning
+            frames = []
+
+            # Display status message at the beginning of animation
+            output_label.config(text=f"Creating {label} animation. Please be patient as data is being fetched...")
+            progress_bar['mode'] = 'indeterminate'
+            progress_bar.start(10)  # Start the progress bar
+            root.update_idletasks()  # Force GUI to update
+
             # Original setup code remains unchanged
             center_object_name = center_object_var.get()
             center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
@@ -3474,9 +3273,8 @@ def animate_objects(step, label):
                 output_label.config(text="Number of frames must be positive.")
                 return
 
-            # Get all user-defined interval values
+            # Get all user-defined interval values (unchanged)
             try:
-                # Read all user entries
                 comet_interval_divisor = float(comet_interval_entry.get())
                 mission_interval_divisor = float(mission_interval_entry.get())
                 planet_interval_divisor = float(planet_interval_entry.get())
@@ -3485,7 +3283,6 @@ def animate_objects(step, label):
                 end_date_offset = int(end_date_entry.get())
                 start_date_offset = int(start_date_entry.get())
                 
-                # Validate entries (ensure positive values)
                 if comet_interval_divisor <= 0: comet_interval_divisor = 100
                 if mission_interval_divisor <= 0: mission_interval_divisor = 75
                 if planet_interval_divisor <= 0: planet_interval_divisor = 50
@@ -3493,7 +3290,6 @@ def animate_objects(step, label):
                 if sat_plot_orbit_period <= 0: sat_plot_orbit_period = 1
                 
             except ValueError:
-                # Default values if parsing fails
                 comet_interval_divisor = 100
                 mission_interval_divisor = 75
                 planet_interval_divisor = 50
@@ -3538,17 +3334,6 @@ def animate_objects(step, label):
                     date = current_date + step * i
                     dates_list.append(date)
             
-            # Check for dates exceeding Horizons' data range
-            valid_dates = []
-            for date in dates_list:
-                if date <= HORIZONS_MAX_DATE:
-                    valid_dates.append(date)
-                else:
-                    print(f"Date {date} exceeds Horizons' data range. Skipping.")
-            
-            # Update dates_list with only valid dates
-            dates_list = valid_dates
-            
             # Make sure we have at least one valid date
             if not dates_list:
                 output_label.config(text="No valid dates within Horizons data range.")
@@ -3556,6 +3341,18 @@ def animate_objects(step, label):
                 
             # Update N if dates were filtered out
             N = len(dates_list)
+            
+            # Define planets with shell visualizations
+            planets_with_shells = {
+                'Jupiter': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': jupiter_shell_vars
+                },
+                'Earth': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': earth_shell_vars
+                }
+            }
             
             # Initialize dates_lists dictionary
             dates_lists = {}
@@ -3565,11 +3362,10 @@ def animate_objects(step, label):
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
                     dates_lists[obj['name']] = dates_list
 
-            # Fetch trajectory data for all selected objects
+            # Fetch trajectory data for all selected objects including planets with shells
             positions_over_time = {}
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
-
                     # Check if this is a moon of the center object
                     is_satellite = center_object_name in parent_planets and obj['name'] in parent_planets.get(center_object_name, [])
 
@@ -3586,7 +3382,6 @@ def animate_objects(step, label):
                             center_id, 
                             obj.get('id_type')
                         )
-
                     # For objects without specific date ranges, use our custom date lists
                     elif obj['name'] in dates_lists:
                         obj_dates = dates_lists[obj['name']]
@@ -3597,7 +3392,6 @@ def animate_objects(step, label):
                                 center_id=center_id, 
                                 id_type=obj.get('id_type')
                             )
-
                     else:
                         positions_over_time[obj['name']] = fetch_trajectory(
                             obj['id'], 
@@ -3605,28 +3399,87 @@ def animate_objects(step, label):
                             center_id=center_id, 
                             id_type=obj.get('id_type')
                         )
-                        
+            
+            # Add position data for center planet if it has shells
+            if center_object_name in planets_with_shells:
+                # Create a list of positions at (0,0,0) for all frames
+                center_positions = []
+                for i in range(N):
+                    center_positions.append({
+                        'x': 0, 'y': 0, 'z': 0,
+                        'date': dates_list[i]
+                    })
+                positions_over_time[center_object_name] = center_positions
+
             # Initialize figure
             fig = go.Figure()
 
-            # After you create your Plotly figure (fig = go.Figure()) and before plotting the moving objects:
-            selected_objects = [obj for obj in objects if obj['var'].get() == 1]
-
             # Plot actual orbits using the dates_lists we just created
-            # This matches the behavior in plot_objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
             plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)
 
-            if center_object_name == 'Sun' and (sun_shells_var.get() == 1 or any([
-                sun_core_var.get(), sun_radiative_var.get(), sun_photosphere_var.get(),
-                sun_chromosphere_var.get(), sun_inner_corona_var.get(), sun_outer_corona_var.get(),
-                sun_termination_shock_var.get(), sun_heliopause_var.get(), sun_inner_oort_limit_var.get(),
-                sun_inner_oort_var.get(), sun_outer_oort_var.get(), sun_gravitational_var.get()
-            ])):
-                fig = create_sun_visualization(fig)
+            # Define dictionary mapping planets to their shell variable dictionaries
+            planet_shells_config = {
+                'Jupiter': jupiter_shell_vars,
+                'Earth': earth_shell_vars
+                # Add more planets here as shell systems are developed
+            }
 
-                # Add the Sun marker only if Sun is also selected
-                if sun_var.get() == 1:
+            # Get shell traces for center object (if applicable) but don't add them to the figure yet
+            shell_traces = []
+            center_has_shells = False
+
+            # Use the unified create_celestial_body_visualization function for animations
+            if center_object_name in body_shells_config:
+                shell_vars = body_shells_config[center_object_name]
+                if any(var.get() == 1 for var in shell_vars.values()):
+                    print(f"Using unified visualization function for {center_object_name} animation")
+                    fig = create_celestial_body_visualization(fig, center_object_name, shell_vars, animate=True, frames=frames)
+                    # We don't add a center marker because shells are displayed
+                else:
+                    # Add center marker since no shells are active
+                    if center_object_name == 'Sun':
+                        # Add the Sun marker
+                        fig.add_trace(
+                            go.Scatter3d(
+                                x=[0], y=[0], z=[0],
+                                mode='markers',
+                                marker=dict(
+                                    color='rgb(102, 187, 106)',      # chlorophyll green  
+                                    size=12,
+                                    symbol=center_object_info['symbol']
+                                ),
+                                name="Sun",
+                                text=[hover_text_sun],
+                                customdata=["Sun"],
+                                hovertemplate='%{text}<extra></extra>',
+                                showlegend=True
+                            )
+                        )
+                    else:
+                        # For non-Sun centers with no shells, add the center marker trace
+                        fig.add_trace(
+                            go.Scatter3d(
+                                x=[0], y=[0], z=[0],
+                                mode='markers',
+                                marker=dict(
+                                    color=center_object_info['color'],
+                                    size=12,
+                                    symbol=center_object_info['symbol']
+                                ),
+                                name=f"{center_object_name}",
+                                text=[f"<b>{center_object_name}</b><br>Center of the current view"],
+                                customdata=[f"<b>{center_object_name}</b>"],
+                                hovertemplate='%{text}<extra></extra>',
+                                showlegend=True
+                            )
+                        )
+            else:
+                # For center objects without shell configurations, always add the marker
+            
+                # Add the center object marker
+                if center_object_name == 'Sun':
+                    # Add the Sun marker
                     fig.add_trace(
                         go.Scatter3d(
                             x=[0], y=[0], z=[0],
@@ -3643,317 +3496,186 @@ def animate_objects(step, label):
                             showlegend=True
                         )
                     )
-
-            elif center_object_name == 'Sun':
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[0], y=[0], z=[0],
-                        mode='markers',                             # removed +text to omit the permanent "Sun" name above the marker
-                        marker=dict(
-            #                color=center_object_info['color'],
-                            color='rgb(102, 187, 106)',             # chlorophyll green                      
-                            size=12,    
-                            symbol=center_object_info['symbol']
+                else:
+                    # For non-Sun centers (planets), add a marker at the center
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[0], y=[0], z=[0],
+                            mode='markers',
+                            marker=dict(
+                                color=center_object_info['color'],
+                                size=12,
+                                symbol=center_object_info['symbol']
                             ),
-            #            name=f"{center_object_name} (Center)",
-            #            text=[center_object_name],
-                        name="Sun",                                 # Just "Sun" instead of "Sun (Center)"
-                        text=[hover_text_sun],
-                        customdata=["Sun"],                         # Use simple name for minimal hover
-                        hovertemplate='%{text}<extra></extra>',     # Use the detailed hover template
-            #            hoverinfo='skip',
-                        showlegend=True
+                            name=f"{center_object_name}",
+                            text=[f"<b>{center_object_name}</b><br>Center of the current view"],
+                            customdata=[f"<b>{center_object_name}</b>"],
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True
+                        )
                     )
-                )
-   
-            else:
-                # For non-Sun centers (planets), add a marker at the center
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[0], y=[0], z=[0],
-            #            mode='markers+text',            
-                        mode='markers',            # omit +text
-                        marker=dict(
-                            color=center_object_info['color'],
-                            size=12,
-                            symbol=center_object_info['symbol']
-                        ),
-                        name=f"{center_object_name}",
-                        text=[f"<b>{center_object_name}</b><br>Center of the current view"],
-                        customdata=[f"<b>{center_object_name}</b>"],
-                        hovertemplate='%{text}<extra></extra>',
-            #            text=[center_object_name],
-            #            hoverinfo='skip',
-                        showlegend=True
-                    )
-                )
 
-            # Create initial traces and track indices
-            trace_indices = []
+            # Add idealized orbits for selected objects
+            selected_objects = [
+                obj['name']
+                for obj in objects
+                if obj['var'].get() == 1
+            ]
+            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)
+
+            # Create initial traces for moving objects and store their indices
+            trace_indices = {}  # Define trace_indices dictionary
+            
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    obj_positions = positions_over_time.get(obj['name'])
-                    if obj_positions and obj_positions[0]:
+                    obj_name = obj['name']
+                    obj_positions = positions_over_time.get(obj_name)
+                    
+                    if obj_positions and len(obj_positions) > 0 and obj_positions[0] is not None and 'x' in obj_positions[0]:
                         obj_data = obj_positions[0]
-                        distance_from_origin = np.sqrt(obj_data['x']**2 + 
-                                                    obj_data['y']**2 + 
-                                                    obj_data['z']**2)
-                        customdata = [distance_from_origin, obj.get('mission_info')]
-
-                        # Identify if this is a satellite of the center object
-                        is_satellite = center_object_name in parent_planets and obj['name'] in parent_planets.get(center_object_name, [])
-                        satellite_note = f"<br>Moon of {center_object_name}" if is_satellite else ""
                         
-                        # Format hover text for this object
-                        hover_texts = format_hover_text({
-                            'range': distance_from_origin,
-                #            'velocity': obj_data.get('velocity', 'N/A'),       # removed these data from the hovertext
-                #            'distance_lm': obj_data.get('distance_lm', 'N/A'),
-                #            'distance_lh': obj_data.get('distance_lh', 'N/A'),
-                #            'orbital_period': obj_data.get('orbital_period', 'N/A'),
-                            'mission_info': obj.get('mission_info', ''),
-                            'is_satellite': is_satellite,
-                            'parent_body': center_object_name if is_satellite else None
-                        }, obj['name'], True)
-                        
-                        full_hover_text = hover_texts[0] + satellite_note  # Add satellite note to full hover text
-                #        full_hover_text = hover_texts[0]  # First element is full hover text
-                        minimal_hover_text = hover_texts[1]  # Second element is minimal hover text
-
-                        fig.add_trace(
-                            go.Scatter3d(
-                                x=[obj_data['x']],
-                                y=[obj_data['y']],
-                                z=[obj_data['z']],
-                                mode='markers',     # removed +text  to remove the hovertext from the marker
-                                marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
-                                name=obj['name'],
-                                text=[full_hover_text],             # Full hover info
-                                customdata=[minimal_hover_text],    # Minimal hover info
-                        #        text=[obj['name']],
-                                textposition='top center',
-                                textfont=dict(size=8, color='white'),
-                                hovertemplate='%{text}<extra></extra>',  # Let toggle buttons control template
-                                showlegend=True
-                            )
+                        # Use format_detailed_hover_text
+                        full_hover_text, minimal_hover_text, satellite_note = format_detailed_hover_text(
+                            obj_data, 
+                            obj_name, 
+                            center_object_name,
+                            objects,
+                            planetary_params,
+                            parent_planets,
+                            CENTER_BODY_RADII,
+                            KM_PER_AU,
+                            LIGHT_MINUTES_PER_AU,
+                            KNOWN_ORBITAL_PERIODS
                         )
+                        
+                        # Add satellite note if present
+                        if satellite_note:
+                            full_hover_text += satellite_note
+
+                        trace = go.Scatter3d(
+                            x=[obj_data['x']],
+                            y=[obj_data['y']],
+                            z=[obj_data['z']],
+                            mode='markers',
+                            marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
+                            name=obj_name,
+                            text=[full_hover_text],
+                            customdata=[minimal_hover_text],
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True
+                        )
+                        fig.add_trace(trace)
+                        trace_indices[obj_name] = len(fig.data) - 1
                     else:
-                        fig.add_trace(
-                            go.Scatter3d(
-                                x=[None], y=[None], z=[None],
-                                mode='markers',        # removed +text
-                                marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
-                                name=obj['name'],
-                                text=[obj['name']],
-                                textposition='top center',
-                                textfont=dict(size=8, color='white'),
-                                customdata=[['N/A', obj.get('mission_info')]],
-                                hovertemplate=(
-                                    f"{obj['name']}<br>"
-                                    "Distance from center: N/A<br>"
-                                    "<extra></extra>"
-                                ),
-                                showlegend=True
-                            )
+                        # If no initial position, still create a trace for the legend
+                        trace = go.Scatter3d(
+                            x=[None], y=[None], z=[None],
+                            mode='markers',
+                            marker=dict(symbol=obj['symbol'], color=obj['color'], size=6),
+                            name=obj_name,
+                            text=[obj_name],
+                            customdata=[obj_name],
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True
                         )
-                    trace_indices.append(len(fig.data) - 1)
+                        fig.add_trace(trace)
+                        trace_indices[obj_name] = len(fig.data) - 1
 
-            # Create frames
-            frames = []
+            # First, make sure initial base traces show the first valid position
+            for obj in objects:
+                if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                    obj_name = obj['name']
+                    
+                    if obj_name in positions_over_time and obj_name in trace_indices:
+                        trace_idx = trace_indices[obj_name]
+                        obj_positions = positions_over_time[obj_name]
+                        
+                        # Try to find the first valid position
+                        first_valid_pos = None
+                        for pos in obj_positions:
+                            if pos is not None and 'x' in pos:
+                                first_valid_pos = pos
+                                break
+                        
+                        if first_valid_pos:
+                            # Use format_detailed_hover_text for first valid position
+                            full_hover_text, minimal_hover_text, satellite_note = format_detailed_hover_text(
+                                first_valid_pos, 
+                                obj_name, 
+                                center_object_name,
+                                objects,
+                                planetary_params,
+                                parent_planets,
+                                CENTER_BODY_RADII,
+                                KM_PER_AU,
+                                LIGHT_MINUTES_PER_AU,
+                                KNOWN_ORBITAL_PERIODS
+                            )
+                            
+                            # Add satellite note if present
+                            if satellite_note:
+                                full_hover_text += satellite_note
+                            
+                            # Update the trace with first valid position data
+                            fig.data[trace_idx].x = [first_valid_pos['x']]
+                            fig.data[trace_idx].y = [first_valid_pos['y']]
+                            fig.data[trace_idx].z = [first_valid_pos['z']]
+                            fig.data[trace_idx].text = [full_hover_text]
+                            fig.data[trace_idx].customdata = [minimal_hover_text]
+                            fig.data[trace_idx].visible = True
 
-            # This is a more comprehensive fix for the animate_objects function
-            # The issue is likely that the animation frames aren't correctly extracting
-            # or formatting the orbital period data from the trajectory data
-
-            # Inside animate_objects function, find the part where frames are created
-            # and replace/add this code for processing each object's data:
-
+            # Create frames - using the base traces approach
             for i in range(N):
-                frame_data = []
+                frame_data = list(fig.data)  # Start with all base traces
                 current_date = dates_list[i]
-
+                
+                # Update position traces for selected objects
                 for obj in objects:
                     if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                        obj_positions = positions_over_time.get(obj['name'])
+                        obj_name = obj['name']
                         
-                        if obj_positions and obj_positions[i] is not None and obj_positions[i].get('x') is not None:
-                            obj_data = obj_positions[i]
+                        if obj_name in positions_over_time and obj_name in trace_indices:
+                            trace_idx = trace_indices[obj_name]
+                            obj_positions = positions_over_time[obj_name]
+                            
+                            if i < len(obj_positions) and obj_positions[i] is not None and 'x' in obj_positions[i]:
+                                obj_data = obj_positions[i]
 
-                            # CRITICAL FIX: Ensure velocity information is available for this specific date
-                            if 'velocity' not in obj_data or obj_data['velocity'] is None or obj_data['velocity'] == 'N/A':
-                                try:
-                                    # Directly fetch position/velocity data for this specific date
-                                    direct_pos = fetch_position(
-                                        obj['id'], 
-                                        current_date, 
-                                        center_id=center_id, 
-                                        id_type=obj.get('id_type', None)
-                                    )
-                                    
-                                    # If successful, use that velocity
-                                    if direct_pos and 'velocity' in direct_pos and direct_pos['velocity'] not in (None, 'N/A'):
-                                        obj_data['velocity'] = direct_pos['velocity']
-                                    # Or compute from velocity components if available
-                                    elif all(k in obj_data for k in ['vx', 'vy', 'vz']):
-                                        vx = obj_data.get('vx', 0)
-                                        vy = obj_data.get('vy', 0)
-                                        vz = obj_data.get('vz', 0)
-                                        # Only calculate if all values are not None
-                                        if all(v is not None for v in [vx, vy, vz]):
-                                            obj_data['velocity'] = np.sqrt(vx**2 + vy**2 + vz**2)
-                                except Exception as e:
-                                    print(f"Error fetching velocity data for {obj['name']}: {e}")
-
-                            # Calculate basic position and distance data
-                            distance_from_origin = np.sqrt(obj_data['x']**2 + 
-                                                        obj_data['y']**2 + 
-                                                        obj_data['z']**2)
-                            
-                            # Calculate distance in light units
-                            distance_km = distance_from_origin * KM_PER_AU
-                            distance_lm = distance_from_origin * LIGHT_MINUTES_PER_AU
-                            distance_lh = distance_lm / 60
-
-                            # Get center body radius from constants
-                            center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)
-
-                            # Calculate surface distance
-                            if distance_km > center_radius_km:
-                                surface_distance_km = distance_km - center_radius_km
-                                surface_distance_str = f"{surface_distance_km:.10e}"
-                            else:
-                                surface_distance_str = "N/A"
-                            
-                            # Format velocity
-                            velocity = obj_data.get('velocity', 'N/A')
-                            velocity_str = f"{velocity:.10f}" if isinstance(velocity, (int, float)) else "N/A"
-                            
-                            # Check if this is a satellite
-                            is_satellite = False
-                            satellite_parent = None
-                            for planet, satellites in parent_planets.items():
-                                if obj['name'] in satellites:
-                                    is_satellite = True
-                                    satellite_parent = planet
-                                    break
-                            
-                            satellite_note = f"<br>Moon of {center_object_name}" if (is_satellite and satellite_parent == center_object_name) else ""
-                            
-                            # For animation frames, we need to handle orbital period data directly
-                            obj_name = obj['name']
-                            
-                            # 1. Calculated orbital period
-                            calculated_period_str = "N/A"
-                            orbital_period_years = None  # Initialize this variable
-
-                            if not is_satellite and obj_name in planetary_params:
-                                a = planetary_params[obj_name]['a']  # Semi-major axis in AU
-                                orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
-                                orbital_period_days = orbital_period_years * 365.25
-                                calculated_period_str = f"{orbital_period_years:.4f} Earth years ({orbital_period_days:.2f} days)"
-                            
-                            # 2. Known orbital period
-                            known_period_str = "N/A"
-                            period_diff_percent = "N/A"  # Initialize this here before any use
-                            velocity_km_hr = "N/A"  # Initialize this here
-
-                            if obj_name in KNOWN_ORBITAL_PERIODS:
-                                known_value = KNOWN_ORBITAL_PERIODS[obj_name]
+                                # Use format_detailed_hover_text
+                                full_hover_text, minimal_hover_text, satellite_note = format_detailed_hover_text(
+                                    obj_data, 
+                                    obj_name, 
+                                    center_object_name,
+                                    objects,
+                                    planetary_params,
+                                    parent_planets,
+                                    CENTER_BODY_RADII,
+                                    KM_PER_AU,
+                                    LIGHT_MINUTES_PER_AU,
+                                    KNOWN_ORBITAL_PERIODS
+                                )
                                 
-                                if is_satellite:
-                                    # For satellites, values are in days
-                                    known_days = known_value
-                                    known_years = known_value / 365.25
-                                else:
-                                    # For non-satellites, values are in years
-                                    known_years = known_value
-                                    known_days = known_value * 365.25
-                                    
-                                known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days)"
+                                # Add satellite note if present
+                                if satellite_note:
+                                    full_hover_text += satellite_note
 
-                                # Calculate velocity in km/hr
-                                if isinstance(velocity, (int, float)):
-                                    velocity_km_hr = f"{velocity * KM_PER_AU / 24:,.2f}"
-                                elif isinstance(velocity_str, str) and velocity_str != "N/A" and velocity_str.replace('.', '', 1).isdigit():
-                                    try:
-                                        velocity_float = float(velocity_str)
-                                        velocity_km_hr = f"{velocity_float * KM_PER_AU / 24:,.2f}"
-                                    except ValueError:
-                                        pass
-
-                                # Calculate percent difference between calculated and known orbital periods
-                                if (not is_satellite and 
-                                    orbital_period_years is not None and 
-                                    isinstance(orbital_period_years, (int, float)) and
-                                    isinstance(known_years, (int, float)) and 
-                                    known_years != 0):
-                                    
-                                    period_diff = abs(orbital_period_years - known_years)
-                                    period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
-                                    known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days) (Percent difference: {period_diff_percent}%)"
-
-                                """
-                                if period_diff_percent != "N/A":
-                                    known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days) (Percent difference: {period_diff_percent}%)"
-                
-                                # Calculate velocity in km/hr
-                                velocity_km_hr = "N/A"
-                                if isinstance(velocity, (int, float)):
-                                    velocity_km_hr = f"{velocity * KM_PER_AU / 24:,.2f}"
-                                elif isinstance(velocity_str, str) and velocity_str != "N/A" and velocity_str.replace('.', '', 1).isdigit():
-                                    try:
-                                        velocity_float = float(velocity_str)
-                                        velocity_km_hr = f"{velocity * KM_PER_AU / 24:,.2f}"
-                                    except ValueError:
-                                        pass
-                                        
-
-                                # Calculate percent difference between calculated and known orbital periods
-                                period_diff_percent = "N/A"
-                                if (not is_satellite and orbital_period_years and known_years and known_years != 0):
-                                    period_diff = abs(orbital_period_years - known_years)
-                                    period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
-                                    """
-
-                            frame_data.append(dict(
-                                type='scatter3d',
-                                x=[obj_data['x']],
-                                y=[obj_data['y']],
-                                z=[obj_data['z']],
-                                text=[f"<b>{obj['name']}</b><br><br>"
-                                    f"Distance from Center: {distance_from_origin:.10f} AU<br>"
-                                    f"Distance: {distance_km:.10e} kilometers<br>"
-                                    f"Distance: {distance_lm:.10f} light-minutes<br>"
-                                    f"Distance: {distance_lh:.10f} light-hours<br>"
-                                    f"Distance to Center Surface: {surface_distance_str} kilometers<br>" 
-                                    f"Velocity: {velocity_str} AU/day<br>"  
-                                    f"Velocity: {velocity_km_hr} km/hr<br>"    
-                                    + (f"Calculated Orbital Period: N/A (satellite of {satellite_parent})<br>" if is_satellite else f"Calculated Orbital Period: {calculated_period_str}<br>")
-                                    + f"Known Orbital Period: {known_period_str}"
-                                    + (f"<br>{obj.get('mission_info', '')}" if obj.get('mission_info') else "")
-                                    + satellite_note],
-                                customdata=[f"<b>{obj['name']}</b>"],
-                                hovertemplate='%{text}<extra></extra>',
-                                visible=True
-                            ))
-                        else:
-                            # Handle null/missing data points
-                            frame_data.append(dict(
-                                type='scatter3d',
-                                x=[None],
-                                y=[None],
-                                z=[None],
-                                visible=False
-                            ))
+                                # Update the trace with new position data
+                                frame_data[trace_idx].x = [obj_data['x']]
+                                frame_data[trace_idx].y = [obj_data['y']]
+                                frame_data[trace_idx].z = [obj_data['z']]
+                                frame_data[trace_idx].text = [full_hover_text]
+                                frame_data[trace_idx].customdata = [minimal_hover_text]
+                                frame_data[trace_idx].visible = True
+                            else:
+                                # If position is missing for this frame, make the object invisible
+                                frame_data[trace_idx].visible = False
 
                 frames.append(go.Frame(
                     data=frame_data,
-                    traces=trace_indices,
-        #            name=str(dates_list[i].strftime('%Y-%m-%d %H:00'))
-                    name=str(dates_list[i].strftime('%Y-%m-%d %H:%M'))  # Include minutes
+                    name=str(dates_list[i].strftime('%Y-%m-%d %H:%M'))
                 ))
 
-            # NEW CODE: Calculate axis ranges
+            # Calculate axis ranges
             x_coords = []
             y_coords = []
             z_coords = []
@@ -3961,8 +3683,7 @@ def animate_objects(step, label):
             # Collect coordinates from all positions for all objects
             for obj_name, positions in positions_over_time.items():
                 for pos in positions:
-                    if pos and pos.get('x') is not None:  # Check if position data exists
-        #            if pos:  # Check if position data exists
+                    if pos and pos.get('x') is not None:
                         x_coords.append(pos['x'])
                         y_coords.append(pos['y'])
                         z_coords.append(pos['z'])
@@ -3989,28 +3710,13 @@ def animate_objects(step, label):
                         axis_range = [-custom_scale, custom_scale]
                 except ValueError:
                     pass  # Keep calculated range if custom scale is invalid
-
-            # Get list of objects to plot idealized orbits for
-            # Don't include satellites if not centered on Sun
-            if center_object_name == 'Sun':
-                selected_objects = [
-                    obj['name']
-                    for obj in objects
-                    if obj['var'].get() == 1 and not obj.get('is_mission', False)
-                ]
-            else:
-                # For non-Sun centers, we only want to plot idealized orbits of moons
-
-                selected_objects = [
-                    obj['name']
-                    for obj in objects
-        #            if obj['var'].get() == 1 and parent_planets.get(obj['name']) == center_object_name      # identifies moons of a parent planet
-                    if obj['var'].get() == 1 and obj['name'] in parent_planets.get(center_object_name, [])
-        #            if obj['var'].get() == 1 and not obj.get('is_mission', False)
-                ]
-
-            # Add idealized orbits if appropriate
-            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)     # duplicate set of ideal orbit traces
+                    
+            # For Jupiter-centered view, adjust scale if not manually set
+            if center_object_name == 'Jupiter' and scale_var.get() == 'Auto':
+                # Default to a scale that shows Galilean moons well
+                # Jupiter's most distant major moon (Callisto) orbits at ~0.0126 AU
+                # Add 50% padding for good visualization
+                axis_range = [-0.02, 0.02]
 
             # Update layout with dynamic scaling
             fig.update_layout(
@@ -4042,7 +3748,6 @@ def animate_objects(step, label):
                     yanchor='top'
                 ),
                 annotations=[
-
                     dict(
                         text="Search: <a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
                         xref='paper',
@@ -4079,14 +3784,13 @@ def animate_objects(step, label):
                         xanchor='left',
                         yanchor='top'
                     ),
-
                 ],
                 updatemenus=[
                     dict(
                         type='buttons',
                         showactive=False,
                         buttons=[
-                            dict(label='Play',
+                            dict(label='Play  ',
                                 method='animate',
                                 args=[None, {'frame': {'duration': 500, 'redraw': True},
                                         'fromcurrent': True,
@@ -4118,9 +3822,24 @@ def animate_objects(step, label):
                 len=1.0
             )]
 
+            # First, assign frames to the figure
+            fig.frames = frames
+
+            # Then update layout with sliders
             fig.update_layout(sliders=sliders)
 
-            fig.frames = frames
+            # Now set the initial slider position (outside try/except)
+            fig.layout.sliders[0].active = 0
+
+            # Explicitly sync the displayed data with the first frame's data
+            for obj_name, trace_idx in trace_indices.items():
+                if trace_idx < len(fig.data) and 0 < len(frames) and trace_idx < len(frames[0].data):
+                    fig.data[trace_idx].x = frames[0].data[trace_idx].x
+                    fig.data[trace_idx].y = frames[0].data[trace_idx].y
+                    fig.data[trace_idx].z = frames[0].data[trace_idx].z
+                    fig.data[trace_idx].text = frames[0].data[trace_idx].text
+                    fig.data[trace_idx].customdata = frames[0].data[trace_idx].customdata
+                    fig.data[trace_idx].visible = frames[0].data[trace_idx].visible
 
             # Add hover toggle buttons
             fig = add_hover_toggle_buttons(fig)
@@ -4129,17 +3848,13 @@ def animate_objects(step, label):
             fig = add_url_buttons(fig, objects, selected_objects)            
 
             # Generate default name with timestamp
-#            current_date = datetime.now()
             current_date = STATIC_TODAY
             default_name = f"{center_object_name}_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
-    #        default_name = f"solar_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
             show_animation_safely(fig, default_name)
 
             # Update output_label with instructions
             output_label.config(
                 text=f"Animation of objects around {center_object_name} opened in browser."
-    #            text="Animation opened in browser."
-    #                "Use your browser's File -> Save As to save the animation if desired."
             )
             progress_bar.stop()
 
@@ -4215,17 +3930,36 @@ def handle_mission_selection():
 
 # Animation Functions
 
+def animate_one_minute():
+    # Update status before calling animate_objects
+    output_label.config(text="Preparing minute-by-minute animation. Please wait...")
+    root.update_idletasks()  # Force GUI to update
+    animate_objects(timedelta(minutes=1), "Minute") 
+
+def animate_one_hour():
+    output_label.config(text="Preparing hour-by-hour animation. Please wait...")
+    root.update_idletasks()
+    animate_objects(timedelta(hours=1), "Hour") 
+
 def animate_one_day():
+    output_label.config(text="Preparing day-by-day animation. Please wait...")
+    root.update_idletasks()
     animate_objects(timedelta(days=1), "Day") 
 
  # Add the new animate_one_week function
 def animate_one_week():
+    output_label.config(text="Preparing week-by-week animation. Please wait...")
+    root.update_idletasks()
     animate_objects(timedelta(weeks=1), "Week")            
 
 def animate_one_month():
+    output_label.config(text="Preparing month-by-month animation. Please wait...")
+    root.update_idletasks()
     animate_objects('month', "Month")
 
 def animate_one_year():
+    output_label.config(text="Preparing year-by-year animation. Please wait...")
+    root.update_idletasks()
     animate_objects('year', "Year")
 
 def animate_palomas_birthday():
@@ -4253,114 +3987,6 @@ def animate_palomas_birthday():
     # Call the animate_objects function with 'year' step
     animate_objects('year', "Year")  
 
-# Custom Tooltip Class
-
-class CreateToolTip(object):
-    """
-    Create a tooltip for a given widget with intelligent positioning to prevent clipping.
-    """
-
-    def __init__(self, widget, text='widget info'):
-        self.waittime = 500     # milliseconds
-        self.wraplength = 1000   # Reduced wraplength
-        self.widget = widget
-        self.text = text
-        self.widget.bind("<Enter>", self.enter)
-        self.widget.bind("<Leave>", self.leave)
-        self.id = None
-        self.tw = None
-
-    def enter(self, event=None):
-        self.schedule()
-
-    def leave(self, event=None):
-        self.unschedule()
-        self.hidetip()
-
-    def schedule(self):
-        self.unschedule()
-        self.id = self.widget.after(self.waittime, self.showtip)
-
-    def unschedule(self):
-        id_ = self.id
-        self.id = None
-        if id_:
-            self.widget.after_cancel(id_)
-
-    def showtip(self, event=None):
-        try:
-            # Get screen dimensions and taskbar height (estimated)
-            screen_width = self.widget.winfo_screenwidth()
-            screen_height = self.widget.winfo_screenheight()
-            taskbar_height = 40  # Estimated Windows taskbar height
-
-            # Create the tooltip window
-            self.tw = tk.Toplevel(self.widget)
-            self.tw.wm_overrideredirect(True)
-            
-            # Calculate usable screen height
-            usable_height = screen_height - taskbar_height
-
-            # Create the tooltip label
-            label = tk.Label(
-                self.tw,
-                text=self.text,
-                justify='left',
-                background='yellow',
-                relief='solid',
-                borderwidth=1,
-                wraplength=min(self.wraplength, screen_width - 100),
-                font=("Arial", 10, "normal")
-            )
-            label.pack(ipadx=1, ipady=1)
-
-            # Update the window to calculate its size
-            self.tw.update_idletasks()
-            tooltip_width = self.tw.winfo_width()
-            tooltip_height = self.tw.winfo_height()
-
-            # Initial x position - try positioning to the right of the widget first
-            x = self.widget.winfo_rootx() + self.widget.winfo_width() + 5
-
-            # If tooltip would extend beyond right edge, try positioning to the left of the widget
-            if x + tooltip_width > screen_width:
-                x = self.widget.winfo_rootx() - tooltip_width - 5
-
-            # If that would push it off the left edge, position at left screen edge with padding
-            if x < 0:
-                x = 5
-
-            # Calculate vertical position
-            y = self.widget.winfo_rooty()
-
-            # If tooltip is taller than available space, position at top of screen
-            if tooltip_height > usable_height:
-                y = 5  # Small padding from top
-            else:
-                # Center vertically relative to widget if space allows
-                widget_center = y + (self.widget.winfo_height() / 2)
-                y = widget_center - (tooltip_height / 2)
-                
-                # Ensure tooltip doesn't go below usable screen area
-                if y + tooltip_height > usable_height:
-                    y = usable_height - tooltip_height - 5
-
-                # Ensure tooltip doesn't go above top of screen
-                if y < 5:
-                    y = 5
-
-            # Position the tooltip
-            self.tw.wm_geometry(f"+{int(x)}+{int(y)}")
-
-        except Exception as e:
-            print(f"Error showing tooltip: {e}")
-            traceback.print_exc()
-
-    def hidetip(self):
-        if self.tw:
-            self.tw.destroy()
-        self.tw = None
-
 # Get the script's saved date for version control
 script_saved_date = datetime.now().strftime("%Y-%m-%d")
 
@@ -4377,15 +4003,6 @@ root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 root.grid_columnconfigure(2, weight=1)
-
-input_frame = tk.Frame(root)
-input_frame.grid(row=0, column=0, padx=(10, 5), pady=(10, 10), sticky='n')
-
-# Configure grid weights within input_frame for proper spacing
-input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
-input_frame.grid_rowconfigure(1, weight=1)  # Row for __frame
-for col in range(0, 9):
-    input_frame.grid_columnconfigure(col, weight=1)  # Allow columns to expand if needed
 
 # Create a separate frame for date fields and the "Now" button
 date_frame = tk.Frame(input_frame)
@@ -4432,29 +4049,13 @@ now_button = tk.Button(date_frame, text="Now", command=fill_now)
 now_button.grid(row=0, column=10, padx=(2, 0), pady=2, sticky='w')
 CreateToolTip(now_button, "Fill the current date and time")
 
-# Scrollable frame for celestial objects and missions
-scrollable_frame = ScrollableFrame(input_frame, width=430, height=710)  # Adjust width and height as needed
-scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
-
-# Prevent the ScrollableFrame from resizing based on its content
-scrollable_frame.config(width=430, height=710)
-scrollable_frame.pack_propagate(False)  # Disable automatic resizing
-
-# Optionally, set the inner frame size slightly smaller
-scrollable_frame.scrollable_frame.config(width=410, height=690)
-scrollable_frame.scrollable_frame.pack_propagate(False)
-
-# Scrollable frame for celestial objects and missions
-scrollable_frame = ScrollableFrame(input_frame)
-scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
-
 # Tooltip for scrollable frame
 CreateToolTip(scrollable_frame.scrollable_frame, "Use the scrollbar to see all objects. Categories include:\n" 
               "- Planets and Dwarf Planets;\n- Moons, Asteroids, and Kuiper Belt Objects;\n- Space Missions;\n" 
               "- Comets and Interstellar Objects!\n"
               "Select a start date for plotting. The default start date is \'Now\'.")
 
-# Checkbuttons for celestial objects
+# Define selection variables for each object
 celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Solar Shells, Planets, Dwarf Planets, Moons, Asteroids, " 
                                 "Kuiper Belt Objects")
 celestial_frame.pack(pady=(10, 5), fill='x')
@@ -4553,11 +4154,52 @@ CreateToolTip(sun_gravitational_checkbutton, gravitational_influence_info)
 # inner planets
 create_celestial_checkbutton("Mercury", mercury_var)
 create_celestial_checkbutton("Venus", venus_var)
+
 create_celestial_checkbutton("Earth", earth_var)
+# Create a Frame specifically for the Earth shell options (indented)
+earth_shell_options_frame = tk.Frame(celestial_frame)
+earth_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+# Earth inner core shell
+earth_inner_core_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Inner Core", variable=earth_inner_core_var)
+earth_inner_core_checkbutton.pack(anchor='w')
+CreateToolTip(earth_inner_core_checkbutton, earth_inner_core_info)
+# Earth outer core shell
+earth_outer_core_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Outer Core", variable=earth_outer_core_var)
+earth_outer_core_checkbutton.pack(anchor='w')
+CreateToolTip(earth_outer_core_checkbutton, earth_outer_core_info)
+# Earth lower mantle shell
+earth_lower_mantle_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Lower Mantle", variable=earth_lower_mantle_var)
+earth_lower_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(earth_lower_mantle_checkbutton, earth_lower_mantle_info)
+# Earth upper mantle shell
+earth_upper_mantle_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Upper Mantle", variable=earth_upper_mantle_var)
+earth_upper_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(earth_upper_mantle_checkbutton, earth_upper_mantle_info)
+# Earth crust shell
+earth_crust_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Crust", variable=earth_crust_var)
+earth_crust_checkbutton.pack(anchor='w')
+CreateToolTip(earth_crust_checkbutton, earth_crust_info)
+# Earth atmosphere shell
+earth_atmosphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Atmosphere", variable=earth_atmosphere_var)
+earth_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(earth_atmosphere_checkbutton, earth_atmosphere_info)
+# Earth upper atmosphere shell
+earth_upper_atmosphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Upper Atmosphere", variable=earth_upper_atmosphere_var)
+earth_upper_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(earth_upper_atmosphere_checkbutton, earth_upper_atmosphere_info)
+# Earth magnetosphere shell
+earth_magnetosphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Magnetosphere", variable=earth_magnetosphere_var)
+earth_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(earth_magnetosphere_checkbutton, earth_magnetosphere_info)
+# Earth hill sphere shell
+earth_hill_sphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Hill Sphere", variable=earth_hill_sphere_var)
+earth_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(earth_hill_sphere_checkbutton, earth_hill_sphere_info)
 create_celestial_checkbutton("- Moon", moon_var)
 create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)
 create_celestial_checkbutton("- 2024 PT5", pt5_var)
 create_celestial_checkbutton("- 2024 YR4", yr4_var)
+
 create_celestial_checkbutton("Mars", mars_var)
 create_celestial_checkbutton("- Phobos", phobos_var)
 create_celestial_checkbutton("- Deimos", deimos_var)
@@ -4571,12 +4213,53 @@ create_celestial_checkbutton("Lutetia", lutetia_var)
 create_celestial_checkbutton("Ryugu", ryugu_var)
 create_celestial_checkbutton("Šteins", steins_var)
 create_celestial_checkbutton("Vesta", vesta_var)
+
 # outer planets
+
 create_celestial_checkbutton("Jupiter", jupiter_var)
-create_celestial_checkbutton("- Io", io_var)
-create_celestial_checkbutton("- Europa", europa_var)
-create_celestial_checkbutton("- Ganymede", ganymede_var)
-create_celestial_checkbutton("- Callisto", callisto_var)
+# Create a Frame specifically for the Jupiter shell options (indented)
+jupiter_shell_options_frame = tk.Frame(celestial_frame)
+jupiter_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+# Jupiter core shell
+jupiter_core_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Core", variable=jupiter_core_var)
+jupiter_core_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_core_checkbutton, jupiter_core_info)
+# Jupiter metallic hydrogen shell
+jupiter_metallic_hydrogen_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Metallic Hydrogen Layer", variable=jupiter_metallic_hydrogen_var)
+jupiter_metallic_hydrogen_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_metallic_hydrogen_checkbutton, jupiter_metallic_hydrogen_info)
+# Jupiter molecular hydrogen shell
+jupiter_molecular_hydrogen_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Molecular Hydrogen Layer", variable=jupiter_molecular_hydrogen_var)
+jupiter_molecular_hydrogen_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_molecular_hydrogen_checkbutton, jupiter_molecular_hydrogen_info)
+# Jupiter cloud layer shell
+jupiter_cloud_layer_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Cloud Layer", variable=jupiter_cloud_layer_var)
+jupiter_cloud_layer_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_cloud_layer_checkbutton, jupiter_cloud_layer_info)
+# Jupiter upper atmosphere shell
+jupiter_upper_atmosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Upper Atmosphere", variable=jupiter_upper_atmosphere_var)
+jupiter_upper_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_upper_atmosphere_checkbutton, jupiter_upper_atmosphere_info)
+# Jupiter ring system shell
+jupiter_ring_system_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Ring System", variable=jupiter_ring_system_var)
+jupiter_ring_system_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_ring_system_checkbutton, jupiter_ring_system_info)
+# Jupiter magnetosphere shell
+jupiter_magnetosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Magnetosphere", variable=jupiter_magnetosphere_var)
+jupiter_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_magnetosphere_checkbutton, jupiter_magnetosphere_info)
+# Jupiter hill_sphere shell
+jupiter_hill_sphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Hill Sphere", variable=jupiter_hill_sphere_var)
+jupiter_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_hill_sphere_checkbutton, jupiter_hill_sphere_info)
+create_celestial_checkbutton("- Metis", metis_var)      # 1.79 Jupiter radii, 128,000 km
+create_celestial_checkbutton("- Adrastea", adrastea_var)  # 1.81 Jupiter radii, 129,000 km
+create_celestial_checkbutton("- Amalthea", amalthea_var)  # 2.54 Jupiter radii, 182,000 km
+create_celestial_checkbutton("- Thebe", thebe_var)        # 3.11 Jupiter radii, 226,000 km
+create_celestial_checkbutton("- Io", io_var)              # 5.90 Jupiter radii, 422,000 km
+create_celestial_checkbutton("- Europa", europa_var)      # 9.40 Jupiter radii, 671,000 km
+create_celestial_checkbutton("- Ganymede", ganymede_var)  # 14.99 Jupiter radii, 1,070,000 km
+create_celestial_checkbutton("- Callisto", callisto_var)  # 26.37 Jupiter radii, 1,883,000 km
 
 create_celestial_checkbutton("Saturn", saturn_var)
 create_celestial_checkbutton("- Mimas", mimas_var)
@@ -4729,20 +4412,19 @@ scale_frame.pack(pady=(5, 5), fill='x')
 
 scale_var = tk.StringVar(value='Auto')
 
-auto_scale_radio = tk.Radiobutton(scale_frame, text="Automatic Scaling of Your Plot", variable=scale_var, value='Auto')
+auto_scale_radio = tk.Radiobutton(scale_frame, text="Automatic scaling of your plot", variable=scale_var, value='Auto')
 auto_scale_radio.pack(anchor='w')
 CreateToolTip(auto_scale_radio, "Automatically adjust scale based on selected objects")
 
-manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU. Examples:\n" 
-"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s furthest orbit (aphelion): 936; Inner Limit of Oort Cloud: 2000;\n" 
-"Outer Oort Cloud Limit: 100000; The Sun's gravitational influence: 126000;\n Proxima Centauri: 268585; Alpha Centauri: 276643", 
+manual_scale_radio = tk.Radiobutton(scale_frame, text="Or manually enter scale of your plot in AU. See hovertext for suggestions.", 
 variable=scale_var, value='Manual')
 manual_scale_radio.pack(anchor='w')
 
-CreateToolTip(manual_scale_radio, "Set custom scale. Some key mean distances: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
-"* Mars: 1.52 AU\n* Asteroid Belt: between 2.2 and 3.2 AU\n* Jupiter: 5.2 AU\n* Saturn: 9.5 AU\n* Uranus: 19.2 AU\n* Neptune: 30.1 AU\n"
+CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
+"* Mars: 1.52 AU\n* Asteroid Belt: between 2.2 and 3.2 AU\n* Jupiter: 5.2 AU\n* Jupiter System: 0.5 AU\n* Saturn: 9.5 AU\n* Uranus: 19.2 AU\n* Neptune: 30.1 AU\n"
 "* Dwarf Planet Pluto: between 30 and 49 AU.\n* Kuiper Belt: from roughly 30 to 50 AU\n* Dwarf Planet Sedna: currently at about 83.3 AU, ranging from 74 AU to 936 AU, " 
-"with a mean distance of 526 AU\n* Heliopause (edge of the Sun's influence): approximately 120 AU\n* Voyager 1: currently over 165 AU")
+"with a mean distance of 526 AU\n* Solar Wind Termination Shock: 94 AU\n* Heliopause (edge of the Sun's influence): 126 AU\n* Voyager 1: currently over 165 AU\n"
+"* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n* Extent of Solar Gravitational Influence (Hill Sphere): 126,000 AU\n* Proximate Centauri: 268,585 AU")
 
 custom_scale_entry = tk.Entry(scale_frame, width=10)
 custom_scale_entry.pack(anchor='w')
@@ -4895,7 +4577,7 @@ CreateToolTip(satellite_interval_label, "Time interval for satellites (moons) of
 # Add a scroll down message right before the plotting buttons
 scroll_message = tk.Label(
     controls_frame,
-    text="SCROLL DOWN TO SEE PLOTTING BUTTONS",
+    text="SCROLL DOWN TO SEE ALL PLOTTING BUTTONS",
     fg='red',
     bg='SystemButtonFace',
     font=("Arial", 10, "bold")
@@ -4959,7 +4641,8 @@ advance_buttons_frame.pack(pady=(5, 0), fill='x')
 animate_minute_button = tk.Button(
     advance_buttons_frame, 
     text="Animate Minutes", 
-    command=lambda: animate_objects(timedelta(minutes=1), "Minute"),
+#    command=lambda: animate_objects(timedelta(minutes=1), "Minute"),
+    command=animate_one_minute,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
     bg='SystemButtonFace', 
@@ -4972,7 +4655,8 @@ CreateToolTip(animate_minute_button, "Animate the motion over minutes. Shows pos
 animate_hour_button = tk.Button(
     advance_buttons_frame, 
     text="Animate Hours", 
-    command=lambda: animate_objects(timedelta(hours=1), "Hour"),
+#    command=lambda: animate_objects(timedelta(hours=1), "Hour"),
+    command=animate_one_hour,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
     bg='SystemButtonFace', 

@@ -16,7 +16,7 @@ KM_PER_AU = 149597870.7   # Approximate kilometers per Astronomical Unit
 
 # Add to constants.py
 
-# Radii of celestial bodies in kilometers
+# International Astronomical Union (IAU) has defined nominal values for planetary radii, 2015.
 CENTER_BODY_RADII = {
     'Sun': 696340,      # Solar radius
     'Mercury': 2440,
@@ -24,7 +24,7 @@ CENTER_BODY_RADII = {
     'Earth': 6371,
     'Moon': 1737,
     'Mars': 3390,
-    'Jupiter': 69911,
+    'Jupiter': 71492,   # was 69911
     'Saturn': 58232,
     'Uranus': 25362,
     'Neptune': 24622,
@@ -403,6 +403,43 @@ planetary_params = {
         'Omega': 309.1       # longitude of ascending node in degrees
     },
 
+# Jupiter's Inner Moons associated with ring system
+    'Metis': {
+        'a': 0.000856,         # semi-major axis in AU (128,000 km)
+    #    'a_parent': 1.79,      # semi-major axis in Jupiter radii
+        'e': 0.0002,           # eccentricity (nearly circular)
+        'i': 0.06,             # inclination to Jupiter's equator in degrees
+        'omega': 16.63,        # argument of perihelion in degrees
+        'Omega': 68.9          # longitude of ascending node in degrees
+    },
+
+    'Adrastea': {
+        'a': 0.000864,         # semi-major axis in AU (129,000 km)
+    #    'a_parent': 1.81,      # semi-major axis in Jupiter radii
+        'e': 0.0015,           # eccentricity
+        'i': 0.03,             # inclination to Jupiter's equator in degrees
+        'omega': 234.0,        # argument of perihelion in degrees
+        'Omega': 33.5          # longitude of ascending node in degrees
+    },
+
+    'Amalthea': {
+        'a': 0.001217,         # semi-major axis in AU (182,000 km)
+    #    'a_parent': 2.54,      # semi-major axis in Jupiter radii
+        'e': 0.0032,           # eccentricity
+        'i': 0.374,            # inclination to Jupiter's equator in degrees
+        'omega': 155.87,       # argument of perihelion in degrees
+        'Omega': 108.05        # longitude of ascending node in degrees
+    },
+
+    'Thebe': {
+        'a': 0.001514,         # semi-major axis in AU (226,000 km)
+    #    'a_parent': 3.11,      # semi-major axis in Jupiter radii
+        'e': 0.0175,           # eccentricity
+        'i': 1.076,            # inclination to Jupiter's equator in degrees
+        'omega': 234.57,       # argument of perihelion in degrees
+        'Omega': 237.33        # longitude of ascending node in degrees
+    },
+
     # Saturn's Major Moons
     'Mimas': {
 #        'a': 186000,         # semi-major axis in km
@@ -583,7 +620,7 @@ planetary_params = {
 parent_planets = {
     'Earth': ['Moon'],
     'Mars': ['Phobos', 'Deimos'],
-    'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto'],
+    'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
     'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe'],
     'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon'],
     'Neptune': ['Triton'],
@@ -600,6 +637,10 @@ parent_planets = {
     'Europa': 'Jupiter',
     'Ganymede': 'Jupiter',
     'Callisto': 'Jupiter',
+    'Metis': 'Jupiter',
+    'Adrastea': 'Jupiter',
+    'Amalthea': 'Jupiter',
+    'Thebe': 'Jupiter',
     'Titan': 'Saturn',
     'Enceladus': 'Saturn',
     'Rhea': 'Saturn',
@@ -651,6 +692,10 @@ KNOWN_ORBITAL_PERIODS = {
     'Europa': 3.55,     # 3.55 days (85.2 hours)
     'Ganymede': 7.15,   # 7.15 days
     'Callisto': 16.69,  # 16.69 days
+    'Metis': 0.295,     # 0.295 days (7.08 hours)
+    'Adrastea': 0.298,  # 0.298 days (7.15 hours)
+    'Amalthea': 0.498,  # 0.498 days (11.95 hours)
+    'Thebe': 0.675,      # 0.675 days (16.20 hours)
     'Titan': 15.95,     # 15.95 days
     'Enceladus': 1.37,  # 1.37 days (32.88 hours)
     'Rhea': 4.52,       # 4.52 days
@@ -676,7 +721,10 @@ KNOWN_ORBITAL_PERIODS = {
     'Makemake': 306.0,  # 111,766.50 days (306.0 years)
     'Quaoar': 288.0,    # 105,192.00 days (288.0 years)
     'Sedna': 11400.0,   # 4,163,850.00 days (11,400.0 years)
-    'Orcus': 247.0      # 90,216.75 days (247.0 years)
+    'Orcus': 247.0,      # 90,216.75 days (247.0 years)
+
+    # Comets
+    'Halley': 76        # Halley's orbital period varies. This is an average
 }
 
 # Mapping of SIMBAD object types to full descriptions
@@ -1002,6 +1050,10 @@ def color_map(planet):
         'Europa': 'rgb(173, 216, 230)',
         'Ganymede': 'rgb(150, 75, 0)',
         'Callisto': 'rgb(169, 169, 169)',
+        'Metis': 'rgb(180, 120, 100)',    # Reddish-brown
+        'Adrastea': 'rgb(190, 150, 130)',  # Light reddish-brown
+        'Amalthea': 'rgb(200, 60, 50)',    # Red
+        'Thebe': 'rgb(170, 110, 90)',       # Dark reddish-brown
         'Saturn': 'rgb(210, 180, 140)',
         'Titan': 'rgb(255, 215, 0)',
         'Enceladus': 'rgb(192, 192, 192)',
@@ -1181,6 +1233,10 @@ INFO = {
         'Europa': 'Jupiter moon. Covered with a smooth ice layer, potential subsurface ocean.',
         'Ganymede': 'Jupiter moon. The largest moon in the Solar System, bigger than Mercury.',
         'Callisto': 'Jupiter moon. Heavily cratered and geologically inactive.',
+        'Metis': 'Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
+        'Adrastea': 'Jupiter moon. Tiny moon orbiting near the outer edge of Jupiter\'s main ring, source of ring material.',
+        'Amalthea': 'Jupiter moon. Oddly shaped red moon associated with the Amalthea Gossamer Ring.',
+        'Thebe': 'Jupiter moon. Small irregular moon that supplies dust to the outermost Thebe Gossamer Ring.',
         'Saturn': 'Known for its beautiful ring system, the sixth planet from the Sun.',
         'Titan': 'Saturn moon. The second-largest moon in the Solar System, with a thick atmosphere.',
         'Enceladus': 'Saturn moon. Known for its geysers ejecting water ice and vapor.',
@@ -1316,8 +1372,8 @@ INFO = {
         '  * Juno launched on August 5, 2011.\n' 
         '  * Earth Flyby (Gravity Assist) on October 9, 2013\n' 
         '  * Jupiter Arrival and Orbit Insertion on July 5, 2016\n'
-        '  * Extended Mission Start on August 1, 2021\n' 
         '  * First Ganymede Flyby on June 7, 2021\n'
+        '  * Extended Mission Start on August 1, 2021\n' 
         '  * First Europa Flyby on September 29, 2022\n' 
         '  * First Io Flyby on December 30, 2023\n'
         '  * Second Io Flyby on February 3, 2024\n'
@@ -2398,3 +2454,4 @@ core_info_hover = (
             "* Neutrino observations: Neutrinos produced in the core can pass through the Sun almost unimpeded, providing direct<br>" 
             "  information about the nuclear reactions taking place there." 
             )
+

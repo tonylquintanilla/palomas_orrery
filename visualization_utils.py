@@ -1,6 +1,8 @@
 """visualization_utils.py - Shared utilities for visualization functions."""
 
 import plotly.graph_objects as go
+import numpy as np
+from formatting_utils import format_maybe_float, format_km_float
 
 def add_hover_toggle_buttons(fig):     
     """
@@ -119,6 +121,158 @@ def format_hover_text(obj_data, name, is_solar_system=False):
         )
     
     return full_hover_text, minimal_hover_text
+
+def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, planetary_params, parent_planets, CENTER_BODY_RADII, KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS):
+    """
+    Generate detailed hover text for celestial objects with comprehensive information.
+    
+    Parameters:
+        obj_data (dict): Object position data
+        obj_name (str): Name of the celestial object
+        center_object_name (str): Name of the center body
+        objects (list): List of all celestial objects
+        planetary_params (dict): Dictionary of planetary parameters
+        parent_planets (dict): Dictionary mapping planets to their satellites
+        CENTER_BODY_RADII (dict): Dictionary of body radii in km
+        KM_PER_AU (float): Conversion factor from AU to km
+        LIGHT_MINUTES_PER_AU (float): Conversion factor from AU to light-minutes
+        KNOWN_ORBITAL_PERIODS (dict): Dictionary of known orbital periods
+        
+    Returns:
+        tuple: (full_hover_text, minimal_hover_text, satellite_note)
+    """
+    # Calculate distance from center
+    distance_from_origin = np.sqrt(obj_data['x']**2 + obj_data['y']**2 + obj_data['z']**2)
+    
+    # Format values with proper formatting functions
+    distance_au = format_maybe_float(distance_from_origin)
+    distance_km = format_km_float(distance_from_origin * KM_PER_AU)
+    distance_lm = format_maybe_float(distance_from_origin * LIGHT_MINUTES_PER_AU)
+    distance_lh = format_maybe_float(distance_from_origin * LIGHT_MINUTES_PER_AU / 60)
+    velocity_au = format_maybe_float(obj_data.get('velocity', 'N/A'))
+    
+    # Calculate velocity in km/hr
+    velocity_km_hr = "N/A"
+    if isinstance(obj_data.get('velocity'), (int, float)):
+        velocity_km_hr = f"{obj_data.get('velocity') * KM_PER_AU / 24:,.2f}"
+    
+    # Calculate surface distance if we have valid distance data
+    center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)  # Default to 0 if center body not found
+    surface_distance_str = "N/A"
+    
+    if isinstance(distance_from_origin * KM_PER_AU, (int, float)) and (distance_from_origin * KM_PER_AU) > center_radius_km:
+        surface_distance_km = (distance_from_origin * KM_PER_AU) - center_radius_km
+        surface_distance_str = format_km_float(surface_distance_km)
+    
+    # Check if this is a planetary satellite
+    is_satellite = False
+    planet = None
+    for p, satellites in parent_planets.items():
+        if obj_name in satellites:
+            is_satellite = True
+            planet = p
+            break
+    
+    # Get orbital period information
+    calculated_period = "N/A"
+    known_period = "N/A"
+    
+    # Calculate orbital period for non-satellites
+    if not is_satellite and obj_name in planetary_params:
+        a = planetary_params[obj_name]['a']  # Semi-major axis in AU
+        orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
+        calculated_period = {
+            'years': orbital_period_years,
+            'days': orbital_period_years * 365.25
+        }
+    
+    # Format calculated period
+    if isinstance(calculated_period, dict):
+        calc_years = calculated_period.get('years')
+        calc_days = calculated_period.get('days')
+        calculated_period_str = f"{calc_years:.4f} Earth years ({calc_days:.2f} days)"
+    else:
+        calculated_period_str = str(calculated_period)
+    
+    # Get known orbital period if available
+    if obj_name in KNOWN_ORBITAL_PERIODS:
+        known_value = KNOWN_ORBITAL_PERIODS[obj_name]
+        
+        if is_satellite:
+            # For satellites, the values are in days
+            known_period = {
+                'days': known_value,
+                'years': known_value / 365.25
+            }
+        else:
+            # For non-satellites, the values are in years
+            known_period = {
+                'years': known_value,
+                'days': known_value * 365.25
+            }
+    
+    # Format known period
+    if isinstance(known_period, dict):
+        known_years = known_period.get('years')
+        known_days = known_period.get('days')
+        known_period_str = f"{known_years:.4f} Earth years ({known_days:.2f} days)"
+    else:
+        known_period_str = str(known_period)
+    
+    # Calculate percent difference between calculated and known orbital periods
+    period_diff_percent = "N/A"
+    if (not is_satellite and 
+        isinstance(calculated_period, dict) and 
+        isinstance(known_period, dict) and
+        isinstance(calculated_period.get('years'), (int, float)) and 
+        isinstance(known_period.get('years'), (int, float)) and
+        known_period.get('years') != 0):
+        
+        calc_years = calculated_period.get('years')
+        known_years = known_period.get('years')
+        period_diff = abs(calc_years - known_years)
+        period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
+    
+    # Find the object's info in the objects list
+    obj_info = next((o for o in objects if o['name'] == obj_name), None)
+    mission_info = obj_info.get('mission_info', '') if obj_info else ''
+    
+    # Now build the hover text
+    full_hover_text = (
+        f"<b>{obj_name}</b><br><br>"
+        f"Distance from Center: {distance_au} AU<br>"
+        f"Distance: {distance_km} kilometers<br>"
+        f"Distance: {distance_lm} light-minutes<br>"
+        f"Distance: {distance_lh} light-hours<br>"
+        f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
+        f"Velocity: {velocity_au} AU/day<br>"
+        f"Velocity: {velocity_km_hr} km/hr<br>"
+    )
+    
+    # Add orbital period information
+    if is_satellite:
+        full_hover_text += f"Calculated Orbital Period: N/A (satellite of {planet})<br>"
+    else:
+        full_hover_text += f"Calculated Orbital Period: {calculated_period_str}<br>"
+    
+    # Add known period if available
+    if period_diff_percent != "N/A":
+        full_hover_text += f"Known Orbital Period: {known_period_str} (Percent difference: {period_diff_percent}%)"
+    else:
+        full_hover_text += f"Known Orbital Period: {known_period_str}"
+    
+    # Add mission_info if it exists
+    if mission_info:
+        full_hover_text += f"<br>{mission_info}"
+    
+    # Determine if this is a satellite of the center object specifically
+    satellite_note = ""
+    if is_satellite and planet == center_object_name:
+        satellite_note = f"<br>Moon of {center_object_name}"
+    
+    minimal_hover_text = f"<b>{obj_name}</b>"
+    
+    return full_hover_text, minimal_hover_text, satellite_note
 
 def update_figure_frames(fig, include_hover_toggle=True):
     """
