@@ -1228,15 +1228,16 @@ INFO = {
         'Ryugu': 'Asteroid visited by the Japanese Hayabusa2 mission.',
         'Eros': 'Asteroid explored by NASA\'s NEAR Shoemaker spacecraft.',
         'Itokawa': 'Asteroid visited by the original Hayabusa mission.',
-        'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.',
+        'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.\n\n'
+        '36.7 MB PER FRAME FOR ALL SHELLS AND MOONS IN HTML.',
+        'Metis': 'Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
+        'Adrastea': 'Jupiter moon. Tiny moon orbiting near the outer edge of Jupiter\'s main ring, source of ring material.',
+        'Amalthea': 'Jupiter moon. Oddly shaped red moon associated with the Amalthea Gossamer Ring.',
+        'Thebe': 'Jupiter moon. Small irregular moon that supplies dust to the outermost Thebe Gossamer Ring.',        
         'Io': 'Jupiter moon. The most volcanically active body in the Solar System.',
         'Europa': 'Jupiter moon. Covered with a smooth ice layer, potential subsurface ocean.',
         'Ganymede': 'Jupiter moon. The largest moon in the Solar System, bigger than Mercury.',
         'Callisto': 'Jupiter moon. Heavily cratered and geologically inactive.',
-        'Metis': 'Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
-        'Adrastea': 'Jupiter moon. Tiny moon orbiting near the outer edge of Jupiter\'s main ring, source of ring material.',
-        'Amalthea': 'Jupiter moon. Oddly shaped red moon associated with the Amalthea Gossamer Ring.',
-        'Thebe': 'Jupiter moon. Small irregular moon that supplies dust to the outermost Thebe Gossamer Ring.',
         'Saturn': 'Known for its beautiful ring system, the sixth planet from the Sun.',
         'Titan': 'Saturn moon. The second-largest moon in the Solar System, with a thick atmosphere.',
         'Enceladus': 'Saturn moon. Known for its geysers ejecting water ice and vapor.',
@@ -1254,11 +1255,6 @@ INFO = {
         'Neptune': 'The eighth and farthest known planet in the solar system.',
         'Triton': 'Neptune\'s largest moon, has a retrograde orbit and geysers suggesting geological activity.',
         'Pluto': 'Once considered the ninth planet, now classified as a dwarf planet.',
-
-        'Planet 9 (Hypothetical)': 'Hypothetical planet proposed to explain the orbital clustering of some distant trans-Neptunian objects. ' 
-        'Estimated to be 5-10 Earth masses and orbit 400-800 AU from the Sun. As of 2025, it remains undetected.\n\n' 
-        'Select manual scaling of 800 AU to display the estimated orbit from Kuiper Belt disturbances.',
-
         'Charon': 'Pluto\'s largest moon, forming a binary system with Pluto.',
         'Nix': 'One of Pluto\'s moons.',
         'Hydra': 'Another of Pluto\'s moons',
@@ -1289,6 +1285,10 @@ INFO = {
         '2004 GV9': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.',
         '2002 MS4': 'A large unnumbered Kuiper Belt Object with no known moons.',  
         'Gonggong': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.',
+
+        'Planet 9 (Hypothetical)': 'Hypothetical planet proposed to explain the orbital clustering of some distant trans-Neptunian objects. ' 
+        'Estimated to be 5-10 Earth masses and orbit 400-800 AU from the Sun. As of 2025, it remains undetected.\n\n' 
+        'Select manual scaling of 800 AU to display the estimated orbit from Kuiper Belt disturbances.',        
 # Missions
         'Voyager 1': 'The farthest human-made object from Earth, exploring interstellar space. Voyager 1 is a ' 
         'space probe that was launched by NASA on September 5, 1977, to study the outer Solar System and interstellar space. It is the ' 

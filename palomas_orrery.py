@@ -103,7 +103,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: April 14, 2025")
+root.title("Paloma's Orrery -- Updated: April 18, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -476,6 +476,10 @@ jupiter_upper_atmosphere_var = tk.IntVar(value=0)
 jupiter_ring_system_var = tk.IntVar(value=0)
 # Jupiter magnetosphere shell
 jupiter_magnetosphere_var = tk.IntVar(value=0)
+# Jupiter Io torus shell
+jupiter_io_plasma_torus_var = tk.IntVar(value=0)
+# Jupiter Hill Sphere shell
+jupiter_radiation_belts_var = tk.IntVar(value=0)
 # Jupiter hill_sphere shell
 jupiter_hill_sphere_var = tk.IntVar(value=0)
 
@@ -670,6 +674,8 @@ jupiter_shell_vars = {
     'jupiter_cloud_layer': jupiter_cloud_layer_var,
     'jupiter_upper_atmosphere': jupiter_upper_atmosphere_var,
     'jupiter_ring_system': jupiter_ring_system_var,
+    'jupiter_radiation_belts': jupiter_radiation_belts_var,
+    'jupiter_io_plasma_torus': jupiter_io_plasma_torus_var,
     'jupiter_magnetosphere': jupiter_magnetosphere_var,
     'jupiter_hill_sphere': jupiter_hill_sphere_var
 }
@@ -1090,27 +1096,6 @@ objects = [
      'mission_info': 'Mars orbital period: 1.26 Earth days.', 
      'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
 
-    # Jupiter's Galilean Moons
-    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, # instead of 501 use 59901?
-     'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 1.77 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/io/'},
-
-    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False,  # instead of id 502 use 59902?
-     'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 3.55 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/europa/'},
-
-    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, # instead of 503 use 59903?
-     'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 7.15 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/ganymede/'},
-
-    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, # instead of 504 use 59904?
-     'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 16.69 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
-
 # Jupiter's Inner Ring Moons
     {'name': 'Metis', 'id': '516', 'var': metis_var, 'color': color_map('Metis'), 'symbol': 'circle', 'is_mission': False,
      'id_type': None, 
@@ -1131,6 +1116,27 @@ objects = [
      'id_type': None, 
      'mission_info': 'Jupiter orbital period: 0.675 Earth days (16.20 hours).', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
+
+    # Jupiter's Galilean Moons
+    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'is_mission': False, # instead of 501 use 59901?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 1.77 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/io/'},
+
+    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'is_mission': False,  # instead of id 502 use 59902?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 3.55 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/europa/'},
+
+    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'is_mission': False, # instead of 503 use 59903?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 7.15 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/ganymede/'},
+
+    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'is_mission': False, # instead of 504 use 59904?
+     'id_type': None, 
+     'mission_info': 'Jupiter orbital period: 16.69 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
 
     # Saturn's Major Moons
 
@@ -4220,38 +4226,59 @@ create_celestial_checkbutton("Jupiter", jupiter_var)
 # Create a Frame specifically for the Jupiter shell options (indented)
 jupiter_shell_options_frame = tk.Frame(celestial_frame)
 jupiter_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
 # Jupiter core shell
 jupiter_core_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Core", variable=jupiter_core_var)
 jupiter_core_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_core_checkbutton, jupiter_core_info)
+
 # Jupiter metallic hydrogen shell
 jupiter_metallic_hydrogen_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Metallic Hydrogen Layer", variable=jupiter_metallic_hydrogen_var)
 jupiter_metallic_hydrogen_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_metallic_hydrogen_checkbutton, jupiter_metallic_hydrogen_info)
+
 # Jupiter molecular hydrogen shell
 jupiter_molecular_hydrogen_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Molecular Hydrogen Layer", variable=jupiter_molecular_hydrogen_var)
 jupiter_molecular_hydrogen_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_molecular_hydrogen_checkbutton, jupiter_molecular_hydrogen_info)
+
 # Jupiter cloud layer shell
 jupiter_cloud_layer_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Cloud Layer", variable=jupiter_cloud_layer_var)
 jupiter_cloud_layer_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_cloud_layer_checkbutton, jupiter_cloud_layer_info)
+
 # Jupiter upper atmosphere shell
 jupiter_upper_atmosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Upper Atmosphere", variable=jupiter_upper_atmosphere_var)
 jupiter_upper_atmosphere_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_upper_atmosphere_checkbutton, jupiter_upper_atmosphere_info)
+
 # Jupiter ring system shell
 jupiter_ring_system_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Ring System", variable=jupiter_ring_system_var)
 jupiter_ring_system_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_ring_system_checkbutton, jupiter_ring_system_info)
-# Jupiter magnetosphere shell
+
+jupiter_radiation_belts_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Radiation Belts", variable=jupiter_radiation_belts_var)
+jupiter_radiation_belts_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_radiation_belts_checkbutton, "560 KB PER FRAME FOR HTML.\n\n"
+              "Zones of trapped high-energy particles in Jupiter's magnetosphere")
+
+jupiter_io_plasma_torus_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Io Plasma Torus", variable=jupiter_io_plasma_torus_var)
+jupiter_io_plasma_torus_checkbutton.pack(anchor='w')
+CreateToolTip(jupiter_io_plasma_torus_checkbutton, "634 KB PER FRAME FOR HTML.\n\n"
+              "Donut-shaped region of charged particles from Jupiter's moon Io")
+
+# Jupiter magnetosphere components
 jupiter_magnetosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Magnetosphere", variable=jupiter_magnetosphere_var)
 jupiter_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_magnetosphere_checkbutton, jupiter_magnetosphere_info)
+CreateToolTip(jupiter_magnetosphere_checkbutton, "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n"
+              "407 KB PER FRAME FOR HTML.\n\n"
+              "Jupiter's main magnetosphere structure that extends far into space.")
+
 # Jupiter hill_sphere shell
 jupiter_hill_sphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Hill Sphere", variable=jupiter_hill_sphere_var)
 jupiter_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_hill_sphere_checkbutton, jupiter_hill_sphere_info)
+
 create_celestial_checkbutton("- Metis", metis_var)      # 1.79 Jupiter radii, 128,000 km
 create_celestial_checkbutton("- Adrastea", adrastea_var)  # 1.81 Jupiter radii, 129,000 km
 create_celestial_checkbutton("- Amalthea", amalthea_var)  # 2.54 Jupiter radii, 182,000 km

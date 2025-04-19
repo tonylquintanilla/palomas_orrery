@@ -150,8 +150,12 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                     traces.extend(create_jupiter_upper_atmosphere_shell(center_position))
                 elif shell_type == 'ring_system' and var.get() == 1:
                     traces.extend(create_jupiter_ring_system(center_position))
+                elif shell_type == 'radiation_belts' and var.get() == 1:
+                    traces.extend(create_jupiter_radiation_belts(center_position))
+                elif shell_type == 'io_plasma_torus' and var.get() == 1:
+                    traces.extend(create_jupiter_io_plasma_torus(center_position))
                 elif shell_type == 'magnetosphere' and var.get() == 1:
-                    traces.extend(create_jupiter_magnetosphere_shell(center_position))
+                    traces.extend(create_jupiter_magnetosphere(center_position))
                 elif shell_type == 'hill_sphere' and var.get() == 1:
                     traces.extend(create_jupiter_hill_sphere_shell(center_position))
     
@@ -836,8 +840,12 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
             traces.extend(create_jupiter_upper_atmosphere_shell(center_position))
         if shell_vars['jupiter_ring_system'].get() == 1:
             traces.extend(create_jupiter_ring_system(center_position))
+        if shell_vars['jupiter_radiation_belts'].get() == 1:
+            traces.extend(create_jupiter_radiation_belts(center_position))
+        if shell_vars['jupiter_io_plasma_torus'].get() == 1:
+            traces.extend(create_jupiter_io_plasma_torus(center_position))
         if shell_vars['jupiter_magnetosphere'].get() == 1:
-            traces.extend(create_jupiter_magnetosphere_shell(center_position))
+            traces.extend(create_jupiter_magnetosphere(center_position))
         if shell_vars['jupiter_hill_sphere'].get() == 1:
             traces.extend(create_jupiter_hill_sphere_shell(center_position))
     
@@ -925,6 +933,7 @@ def create_planet_shell_traces(planet_name, shell_vars, center_position=(0, 0, 0
 # Jupiter Shell Creation Functions
 
 jupiter_core_info = (
+            "2.4 MB PER FRAME FOR HTML.\n\n"
             "Jupiter's core is believed to be a dense mixture of rock, metal, and hydrogen compounds.\n"
             "It may be up to 10 times the mass of Earth. Recent models suggest the core might be\n"
             "partially dissolved or 'fuzzy' rather than a distinct solid structure. Its temperature\n"
@@ -979,6 +988,7 @@ def create_jupiter_core_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_metallic_hydrogen_info = (
+            "2.1 MB PER FRAME FOR HTML.\n\n"
             "Under extreme pressure, hydrogen transitions to a metallic state in this layer.\n"
             "It behaves like an electrical conductor and is responsible for generating\n"
             "Jupiter's powerful magnetic field. Temperatures in this region may reach 10,000K."
@@ -1032,6 +1042,7 @@ def create_jupiter_metallic_hydrogen_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_molecular_hydrogen_info = (
+            "2.5 MB PER FRAME FOR HTML.\n\n"
             "This layer consists of hydrogen in its molecular form. The transition from metallic\n"
             "to molecular hydrogen is gradual. This layer makes up the bulk of Jupiter's mass\n"
             "and is marked by decreasing temperature and pressure as you move outward. The temperature\n"
@@ -1087,6 +1098,7 @@ def create_jupiter_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_cloud_layer_info = (
+            "2.9 MB PER FRAME FOR HTML.\n\n"
             "Jupiter's visible cloud layer consists of bands of different colors, caused by\n"
             "variations in chemical composition and atmospheric dynamics. The clouds are primarily\n"
             "composed of ammonia, ammonium hydrosulfide, and water. The famous Great Red Spot\n"
@@ -1143,6 +1155,7 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_upper_atmosphere_info = (
+            "2.7 MB PER FRAME FOR HTML.\n\n"
             "Jupiter's upper atmosphere includes the stratosphere and thermosphere.\n"
             "It's less dense than the cloud layer below and contains hydrocarbon haze\n"
             "produced by solar ultraviolet radiation. Aurora activity can be observed\n"
@@ -1199,10 +1212,209 @@ def create_jupiter_upper_atmosphere_shell(center_position=(0, 0, 0)):
     
     return traces
 
-def create_jupiter_magnetosphere_shell(center_position=(0, 0, 0)):
-    """Creates Jupiter's magnetosphere shell."""
-    # Call the existing create_jupiter_magnetosphere function
-    return create_jupiter_magnetosphere(center_position)
+def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
+    """Creates Jupiter's main magnetosphere structure."""
+    # Parameters for magnetosphere components (in Jupiter radii)
+    params = {
+        # Compressed sunward side
+        'sunward_distance': 50,  # Compressed toward the sun
+        
+        # Equatorial extension (wider than polar)
+        'equatorial_radius': 100,
+        'polar_radius': 80,
+        
+        # Magnetotail parameters
+        'tail_length': 500,  # Length of visible magnetotail
+        'tail_base_radius': 150,  # Radius at the base of the tail
+        'tail_end_radius': 200,  # Radius at the end of the tail
+    }
+    
+    # Scale everything by Jupiter's radius in AU
+    for key in params:
+        params[key] *= JUPITER_RADIUS_AU
+    
+    # Create magnetosphere main shape
+    x, y, z = create_magnetosphere_shape(params)
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Apply center position offset
+    x = np.array(x) + center_x
+    y = np.array(y) + center_y
+    z = np.array(z) + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color='rgb(200, 200, 255)', # Light blue for magnetic field
+                opacity=0.3
+            ),
+            name='Jupiter: Magnetosphere',
+            text=["Jupiter's magnetosphere extends up to 100 Jupiter radii on the sunward side<br>"
+                  "and forms a magnetotail stretching beyond Saturn's orbit in the opposite direction.<br>"
+                  "It traps charged particles, creating intense radiation belts that would be lethal to humans."] * len(x),
+            customdata=['Jupiter: Magnetosphere'] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
+    """Creates Jupiter's Io plasma torus."""
+    # Parameters
+    io_torus_distance = 5.9 * JUPITER_RADIUS_AU  # Io's orbit is at about 5.9 Jupiter radii
+    io_torus_thickness = 2 * JUPITER_RADIUS_AU
+    io_torus_width = 1 * JUPITER_RADIUS_AU
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create the Io plasma torus points
+    io_torus_x = []
+    io_torus_y = []
+    io_torus_z = []
+    
+    n_points = 100
+    n_rings = 8
+    
+    for i_ring in range(n_rings):
+        # Vary the radius slightly to create thickness
+        radius_offset = (i_ring / (n_rings-1) - 0.5) * io_torus_thickness
+        torus_radius = io_torus_distance + radius_offset
+        
+        for i in range(n_points):
+            angle = (i / n_points) * 2 * np.pi
+
+            # Position in x-y plane (equatorial)
+            x = torus_radius * np.cos(angle)
+            y = torus_radius * np.sin(angle)
+            z = 0  # In the equatorial plane    
+            
+            # Add some thickness variation
+            jitter = (np.random.random() - 0.5) * io_torus_width
+            
+            io_torus_x.append(x)
+            io_torus_y.append(y)
+            io_torus_z.append(z + jitter)     # Apply jitter to z axis
+    
+    # Apply center position offset
+    io_torus_x = np.array(io_torus_x) + center_x
+    io_torus_y = np.array(io_torus_y) + center_y
+    io_torus_z = np.array(io_torus_z) + center_z
+
+    # Create the Io plasma torus hover text and customdata arrays
+    io_text = ["Io plasma torus: A donut-shaped region of charged particles emanating from<br>"
+              "Jupiter's moon Io due to volcanic activity. These particles become trapped<br>"
+              "in Jupiter's magnetic field, forming this distinctive structure."] * len(io_torus_x)
+    io_customdata = ['Jupiter: Io Plasma Torus'] * len(io_torus_x)
+    
+    traces = [
+        go.Scatter3d(
+            x=io_torus_x,
+            y=io_torus_y,
+            z=io_torus_z,
+            mode='markers',
+            marker=dict(
+                size=1.5,
+                color='rgb(255, 100, 100)',  # Reddish color for plasma torus
+                opacity=0.3
+            ),
+            name='Jupiter: Io Plasma Torus',
+            text=io_text,
+            customdata=io_customdata,
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
+    """Creates Jupiter's radiation belts."""
+    belt_colors = ['rgb(255, 255, 100)', 'rgb(100, 255, 150)', 'rgb(100, 200, 255)']
+    belt_names = ['Jupiter: Inner Radiation Belt', 'Jupiter: Middle Radiation Belt', 'Jupiter: Outer Radiation Belt']
+    belt_texts = [
+        "Inner radiation belt: Intense region of trapped high-energy particles near Jupiter",
+        "Middle radiation belt: Region of trapped charged particles at intermediate distances from Jupiter",
+        "Outer radiation belt: Extended region of trapped particles in Jupiter's outer magnetosphere"
+    ]
+    
+    # Belt distances in Jupiter radii
+    belt_distances = [1.5, 3.0, 6.0]
+    belt_thickness = 0.5 * JUPITER_RADIUS_AU
+    
+    # Scale distances by Jupiter's radius in AU
+    belt_distances = [d * JUPITER_RADIUS_AU for d in belt_distances]
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    traces = []
+    
+    for i, belt_distance in enumerate(belt_distances):
+        belt_x = []
+        belt_y = []
+        belt_z = []
+        
+        n_points = 80
+        n_rings = 5
+        
+        for i_ring in range(n_rings):
+            # Vary the radius slightly to create thickness
+            radius_offset = (i_ring / (n_rings-1) - 0.5) * belt_thickness
+            belt_radius = belt_distance + radius_offset
+            
+            for j in range(n_points):
+                angle = (j / n_points) * 2 * np.pi
+                
+                # Create a belt around Jupiter's rotational axis
+                x = belt_radius * np.cos(angle)
+                y = belt_radius * np.sin(angle)
+                
+                # Add some z variation based on angle to create the shape of a belt
+                # rather than a perfect torus (thinner near poles)
+                z_scale = 0.2 * belt_radius  # Controls how flat the belts are
+                z = z_scale * np.sin(2 * angle)
+                
+                belt_x.append(x)
+                belt_y.append(y)
+                belt_z.append(z)
+        
+        # Apply center position offset
+        belt_x = np.array(belt_x) + center_x
+        belt_y = np.array(belt_y) + center_y
+        belt_z = np.array(belt_z) + center_z
+        
+        # Create the radiation belt hover text and customdata arrays
+        belt_text = [belt_texts[i]] * len(belt_x)
+        belt_customdata = [belt_names[i]] * len(belt_x)
+
+        traces.append(
+            go.Scatter3d(
+                x=belt_x,
+                y=belt_y,
+                z=belt_z,
+                mode='markers',
+                marker=dict(
+                    size=1.5,
+                    color=belt_colors[i],
+                    opacity=0.3
+                ),
+                name=belt_names[i],
+                text=belt_text,
+                customdata=belt_customdata,
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+    
+    return traces
     
 def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Jupiter's Hill sphere shell."""
@@ -1250,27 +1462,20 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_ring_system_info = (
-                "Jupiter's Main Ring is a relatively bright and very thin ring.\n"
-                "It extends from about 122,500 km to 129,000 km from Jupiter's center.\n"
-                "Its thickness is only about 30-300 km.\n"
+                "22.2 MB PER FRAME FOR HTML.\n\n"
+
                 "The main ring is reddish and composed of dust ejected from Jupiter's small inner moons,\n"
                 "Metis and Adrastea, due to high-speed impacts by micrometeoroids.\n\n"
 
                 "The Halo Ring is a faint, thick torus of material.\n"
-                "It extends inward from the main ring to about 100,000 km from Jupiter's center.\n"
-                "It is much thicker than the main ring, extending about 12,500 km vertically.\n"
                 "The ring likely consists of fine dust particles pushed out of the main ring\n"
                 "by electromagnetic forces from Jupiter's powerful magnetosphere.\n\n" 
 
                 "The Amalthea Gossamer Ring is an extremely faint and wide ring.\n"
-                "It extends outwards from the main ring (129,000 km) to Amalthea's orbit (182,000 km).\n"
-                "It is composed of dust particles ejected from Amalthea by micrometeoroid impacts.\n"
-                "It is much fainter and more diffuse than the main ring.\n\n"    
+                "It is composed of dust particles ejected from Amalthea by micrometeoroid impacts.\n\n"   
 
                 "The Thebe Gossamer Ring is another very faint and wide ring.\n"
-                "It extends outwards from the main ring (129,000 km) to beyond Thebe's orbit (226,000 km).\n"
-                "It is composed of dust particles ejected from Thebe by micrometeoroid impacts.\n"
-                "It is the faintest of Jupiter's rings, with a vertical extension of about 8,600 km."                                           
+                "It is composed of dust particles ejected from Thebe by micrometeoroid impacts."                                           
 )
 
 def create_jupiter_ring_system(center_position=(0, 0, 0)):
@@ -1395,7 +1600,8 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
     return traces
 
 jupiter_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
+            "1.4 MB PER FRAME FOR HTML.\n\n"
 
             "Jupiter's magnetosphere extends up to 100 Jupiter radii on the sunward side\n"
             "and forms a magnetotail stretching beyond Saturn's orbit in the opposite direction.\n"
@@ -1464,16 +1670,9 @@ def create_magnetosphere_shape(params):
     
     return x_coords, y_coords, z_coords
 
+    """
 def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
-    """
-    Creates a realistic visualization of Jupiter's magnetosphere.
-    
-    Parameters:
-        center_position (tuple): (x, y, z) position of Jupiter's center
-        
-    Returns:
-        list: A list of plotly traces representing the magnetosphere components
-    """
+
     traces = []
     
     # Parameters for magnetosphere components (in Jupiter radii)
@@ -1667,9 +1866,11 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
         )
     
     return traces
+    """
 
 jupiter_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.\n\n" 
+            "SELECT MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
             "Jupiter's Hill Sphere (extends to ~530 Jupiter radii or about 0.25 AU)"                      
 )
 
