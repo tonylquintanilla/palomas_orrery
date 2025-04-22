@@ -22,6 +22,7 @@ import subprocess
 import sys
 import math
 import json
+from idealized_orbits import plot_idealized_orbits, planetary_params
 from formatting_utils import format_maybe_float, format_km_float
 from planet_visualization import (
     create_celestial_body_visualization,
@@ -37,6 +38,13 @@ from planet_visualization import (
     earth_upper_atmosphere_info,
     earth_magnetosphere_info,
     earth_hill_sphere_info,
+    mars_inner_core_info,
+    mars_outer_core_info,
+    mars_mantle_info,
+    mars_crust_info,
+    mars_atmosphere_info,
+    mars_upper_atmosphere_info,
+    mars_hill_sphere_info,
     jupiter_core_info,
     jupiter_metallic_hydrogen_info,
     jupiter_molecular_hydrogen_info,
@@ -48,8 +56,8 @@ from planet_visualization import (
 )
 
 from constants_new import (
-    planetary_params,
     parent_planets,
+    planet_tilts,
     color_map,
     note_text,
     INFO,
@@ -418,9 +426,6 @@ mercury_var = tk.IntVar(value=1) # default
 venus_var = tk.IntVar(value=1) # default
 
 earth_var = tk.IntVar(value=1)  # Set Earth to 1 to preselect it by default
-# earth_shells_var = tk.IntVar(value=0)  # 0 means unselected by default
-# earth_internal_shells_var = tk.IntVar(value=0)
-# earth_external_shells_var = tk.IntVar(value=0)
 moon_var = tk.IntVar(value=0)  
 # near Earth asteroids
 pt5_var = tk.IntVar(value=0)
@@ -446,7 +451,25 @@ earth_magnetosphere_var = tk.IntVar(value=0)
 # Earth hill sphere shell
 earth_hill_sphere_var = tk.IntVar(value=0)
 
-mars_var = tk.IntVar(value=1) # default
+mars_var = tk.IntVar(value=1)  # Set Mars to 1 to preselect it by default
+# Mars' Moons
+phobos_var = tk.IntVar(value=0)
+deimos_var = tk.IntVar(value=0)
+# Mars shells
+# Mars inner core shell
+mars_inner_core_var = tk.IntVar(value=0)
+# Mars outer core shell
+mars_outer_core_var = tk.IntVar(value=0)
+# Mars mantle shell
+mars_mantle_var = tk.IntVar(value=0)
+# Mars crust shell
+mars_crust_var = tk.IntVar(value=0)
+# Mars atmosphere shell
+mars_atmosphere_var = tk.IntVar(value=0)
+# Mars upper atmosphere shell
+mars_upper_atmosphere_var = tk.IntVar(value=0)
+# Mars hill sphere shell
+mars_hill_sphere_var = tk.IntVar(value=0)
 
 ceres_var = tk.IntVar(value=0)
 
@@ -619,10 +642,6 @@ ixion_var = tk.IntVar(value=0)
 
 # New Selection Variables for Major Moons
 
-# Mars' Moons
-phobos_var = tk.IntVar(value=0)
-deimos_var = tk.IntVar(value=0)
-
 # Saturn's Major Moons
 titan_var = tk.IntVar(value=0)
 enceladus_var = tk.IntVar(value=0)
@@ -667,6 +686,28 @@ sun_shell_vars = {
 
 # Create mapping dictionaries for planet shell variables:
 
+earth_shell_vars = {
+    'earth_inner_core': earth_inner_core_var,
+    'earth_outer_core': earth_outer_core_var,
+    'earth_lower_mantle': earth_lower_mantle_var,
+    'earth_upper_mantle': earth_upper_mantle_var,
+    'earth_crust': earth_crust_var,
+    'earth_atmosphere': earth_atmosphere_var,
+    'earth_upper_atmosphere': earth_upper_atmosphere_var,
+    'earth_magnetosphere': earth_magnetosphere_var,
+    'earth_hill_sphere': earth_hill_sphere_var
+}
+
+mars_shell_vars = {
+    'mars_inner_core': mars_inner_core_var,
+    'mars_outer_core': mars_outer_core_var,
+    'mars_mantle': mars_mantle_var,
+    'mars_crust': mars_crust_var,
+    'mars_atmosphere': mars_atmosphere_var,
+    'mars_upper_atmosphere': mars_upper_atmosphere_var,
+    'mars_hill_sphere': mars_hill_sphere_var
+}
+
 jupiter_shell_vars = {
     'jupiter_core': jupiter_core_var,
     'jupiter_metallic_hydrogen': jupiter_metallic_hydrogen_var,
@@ -678,18 +719,6 @@ jupiter_shell_vars = {
     'jupiter_io_plasma_torus': jupiter_io_plasma_torus_var,
     'jupiter_magnetosphere': jupiter_magnetosphere_var,
     'jupiter_hill_sphere': jupiter_hill_sphere_var
-}
-
-earth_shell_vars = {
-    'earth_inner_core': earth_inner_core_var,
-    'earth_outer_core': earth_outer_core_var,
-    'earth_lower_mantle': earth_lower_mantle_var,
-    'earth_upper_mantle': earth_upper_mantle_var,
-    'earth_crust': earth_crust_var,
-    'earth_atmosphere': earth_atmosphere_var,
-    'earth_upper_atmosphere': earth_upper_atmosphere_var,
-    'earth_magnetosphere': earth_magnetosphere_var,
-    'earth_hill_sphere': earth_hill_sphere_var
 }
 
 # Define the list of objects
@@ -1093,10 +1122,10 @@ objects = [
 
     {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
-     'mission_info': 'Mars orbital period: 1.26 Earth days.', 
+     'mission_info': 'Mars orbital period: 1.26 Earth days. Retrogade.', 
      'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
 
-# Jupiter's Inner Ring Moons
+# Jupiter's Inner Ring Moons (Amalthea Group)
     {'name': 'Metis', 'id': '516', 'var': metis_var, 'color': color_map('Metis'), 'symbol': 'circle', 'is_mission': False,
      'id_type': None, 
      'mission_info': 'Jupiter orbital period: 0.295 Earth days (7.08 hours).', 
@@ -1140,7 +1169,7 @@ objects = [
 
     # Saturn's Major Moons
 
-    {'name': 'Mimas', 'id': '606', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Mimas', 'id': '601', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Saturn orbital period: 0.94 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/mimas/'},
@@ -1150,7 +1179,7 @@ objects = [
      'mission_info': 'Saturn orbital period: 1.37 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/enceladus/'},
 
-    {'name': 'Tethys', 'id': '605', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Tethys', 'id': '603', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Saturn orbital period: 1.89 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/tethys/'},
@@ -1160,17 +1189,20 @@ objects = [
      'mission_info': 'Saturn orbital period: 2.74 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/dione/'},
 
-    {'name': 'Rhea', 'id': '603', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Rhea', 'id': '605', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Saturn orbital period: 4.52 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/rhea/'},
 
-    {'name': 'Titan', 'id': '601', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Titan', 'id': '606', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Saturn orbital period: 15.95 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/titan/'},
 
-    {'name': 'Phoebe', 'id': '607', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 
+    # Hyperion 607
+    # Iapetus 608
+
+    {'name': 'Phoebe', 'id': '609', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Saturn orbital period: 550.56 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/phoebe/'},
@@ -1182,22 +1214,22 @@ objects = [
      'mission_info': 'Uranus orbital period: 1.41 Earth days.',
      'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},
 
-    {'name': 'Ariel', 'id': '704', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Ariel', 'id': '701', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Uranus orbital period: 2.52 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/ariel/'},
 
-    {'name': 'Umbriel', 'id': '703', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Umbriel', 'id': '702', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Uranus orbital period: 4.14 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/umbriel/'},
 
-    {'name': 'Titania', 'id': '706', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Titania', 'id': '703', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Uranus orbital period: 8.71 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/titania/'},
 
-    {'name': 'Oberon', 'id': '701', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 
+    {'name': 'Oberon', 'id': '704', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Uranus orbital period: 13.46 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/oberon/'},
@@ -1822,24 +1854,6 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
             if orbital_period == 'N/A':
                 orbital_period = orbital_period_years
 
-
-    #        # Set the original orbital_period for backward compatibility
-    #        orbital_period = orbital_period_years
-    #    elif is_satellite and obj_name in KNOWN_ORBITAL_PERIODS:
-            # For satellites, use the known period as the main orbital_period
-    #        orbital_period = known_orbital_period['years']
-
-        # Retrieve orbital period from planetary_params if available
-    #    orbital_period = 'N/A'
-    #    if object_id in [obj['id'] for obj in objects]:
-    #        obj_name = next((obj['name'] for obj in objects if obj['id'] == object_id), None)
-    #        if obj_name and obj_name in planetary_params:
-    #            a = planetary_params[obj_name]['a']  # Semi-major axis in AU
-    #            orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
-        #            orbital_period = f"{orbital_period_years:.2f}"
-    #                # Return as numeric value, not string
-    #            orbital_period = orbital_period_years
-
         return {
             'x': x,
             'y': y,
@@ -2147,8 +2161,9 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
 # Define dictionary mapping all celestial bodies to their shell variable dictionaries
 body_shells_config = {
     'Sun': sun_shell_vars,
-    'Jupiter': jupiter_shell_vars,
-    'Earth': earth_shell_vars
+    'Earth': earth_shell_vars,
+    'Mars': mars_shell_vars,
+    'Jupiter': jupiter_shell_vars
     # Add more celestial bodies here as shell systems are developed
 }
 
@@ -2224,14 +2239,19 @@ def plot_objects():
 
             # Define planets with shell visualizations
             planets_with_shells = {
-                'Jupiter': {
-                    'position': None,  # Will be populated during animation
-                    'shell_vars': jupiter_shell_vars
-                },
                 'Earth': {
                     'position': None,  # Will be populated during animation
                     'shell_vars': earth_shell_vars
+                },
+                'Mars': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': mars_shell_vars
+                },
+                'Jupiter': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': jupiter_shell_vars
                 }
+
             }
 
             # Create date lists for each selected object
@@ -2561,20 +2581,11 @@ def plot_objects():
             # Add hover toggle buttons
             fig = add_hover_toggle_buttons(fig)
 
-        # If center is the Sun, draw its layered visualization if shells are selected
-
-        #    if center_object_name == 'Sun' and (sun_shells_var.get() == 1 or any([          # add shells
-        #        sun_core_var.get(), sun_radiative_var.get(), sun_photosphere_var.get(),
-        #        sun_chromosphere_var.get(), sun_inner_corona_var.get(), sun_outer_corona_var.get(),
-        #        sun_termination_shock_var.get(), sun_heliopause_var.get(), sun_inner_oort_limit_var.get(),
-        #        sun_inner_oort_var.get(), sun_outer_oort_var.get(), sun_gravitational_var.get()
-        #    ])):
-        #        fig = create_sun_visualization(fig)
-
             # Define dictionary mapping planets to their shell variable dictionaries
             planet_shells_config = {
-                'Jupiter': jupiter_shell_vars,
-                'Earth': earth_shell_vars
+                'Earth': earth_shell_vars,
+                'Mars': mars_shell_vars,
+                'Jupiter': jupiter_shell_vars
                 # Add more planets here as shell systems are developed
             }
 
@@ -2637,8 +2648,9 @@ def plot_objects():
 
             # Create dictionary of shell variables for each planet
             planet_shell_vars = {
-                'Jupiter': jupiter_shell_vars,
-                'Earth': earth_shell_vars
+                'Earth': earth_shell_vars,
+                'Mars': mars_shell_vars,
+                'Jupiter': jupiter_shell_vars
             }
 
             for planet_name, planet_data in planets_with_shells.items():
@@ -2790,7 +2802,11 @@ def plot_objects():
             selected_objects = [obj['name'] for obj in objects if obj['var'].get() == 1]
 
             # 6. Plot idealized orbits using your new logic
-            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)    
+    #        plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)    
+
+            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name, 
+                                    objects=objects, planetary_params=planetary_params,
+                                    parent_planets=parent_planets, color_map=color_map)
 
             # Add URL buttons before showing/saving
             fig = add_url_buttons(fig, objects, selected_objects)
@@ -2863,288 +2879,6 @@ def rotate_points2(x, y, z, angle, axis='z'):
         raise ValueError(f"Unknown rotation axis: {axis}. Use 'x', 'y', or 'z'.")
 
     return xr, yr, zr
-
-def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun'):
-    """
-    Plot idealized orbits for planets, dwarf planets, asteroids, KBOs, and moons.
-    For non-Sun centers, only plots moons of that center body.
-    
-    Parameters:
-        fig (plotly.graph_objects.Figure): The figure to add orbits to
-        objects_to_plot (list): List of object names to potentially plot orbits for
-        center_id (str): The central body ('Sun' or a planet name)
-    """
-    import numpy as np
-    import math
-    import plotly.graph_objs as go
-
-    def rotate_points(x, y, z, angle, axis='z'):
-        """
-        Rotates points (x,y,z) about the given axis by 'angle' radians.
-        Returns (xr, yr, zr) as numpy arrays.
-        """
-        xr = np.array(x, copy=True)
-        yr = np.array(y, copy=True)
-        zr = np.array(z, copy=True)
-
-        if axis == 'z':
-            xr = x * math.cos(angle) - y * math.sin(angle)
-            yr = x * math.sin(angle) + y * math.cos(angle)
-            # zr stays the same
-        elif axis == 'x':
-            yr = y * math.cos(angle) - z * math.sin(angle)
-            zr = y * math.sin(angle) + z * math.cos(angle)
-        elif axis == 'y':
-            zr = z * math.cos(angle) - x * math.sin(angle)
-            xr = z * math.sin(angle) + x * math.cos(angle)
-
-        return (xr, yr, zr)
-
-    # Track skipped objects by category
-    skipped = {
-        'satellites': [],
-        'comets': [],
-        'missions': [],
-        'no_params': [],
-        'invalid_orbit': []
-    }
-
-    plotted = []
-
-    # If center is not the Sun, we only want to plot moons of that center
-    if center_id != 'Sun':
-        # Get list of moons for this center
-        moons = parent_planets.get(center_id, [])
-        
-        # Filter objects_to_plot to only include moons of this center
-        objects_to_plot = [obj for obj in objects_to_plot if obj in moons]
-
-    # If center is the Sun, plot orbits for selected heliocentric objects
-    if center_id == 'Sun':
-        for obj_name in objects_to_plot:
-            # Find the object in the objects list
-            obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
-            if obj_info is None:
-                continue
-                
-            # Check each skip condition and record the reason
-            if obj_name not in planetary_params:
-                skipped['no_params'].append(obj_name)
-                continue
-
-            # Only skip satellites if the center is the Sun and the satellite isn't of the center object
-            # This allows plotting satellite orbits when their parent is the center
-        #    if center_id == 'Sun' and obj_name in parent_planets:
-                # If we're centered on the Sun, skip planetary satellites
-        #        skipped['satellites'].append(obj_name)
-        #        continue
-
-            # Check if this is a satellite of another object (but not of the center)
-            is_satellite_of_another = False
-            for planet, moons in parent_planets.items():
-                if obj_name in moons and planet != center_id:
-                    is_satellite_of_another = True
-                    break
-
-            if center_id == 'Sun' and is_satellite_of_another:
-                # If we're centered on the Sun, skip satellites of other objects
-                skipped['satellites'].append(obj_name)
-                continue            
-
-    #        elif obj_name in parent_planets:
-    #            skipped['satellites'].append(obj_name)
-    #            continue
-
-    #        elif obj_info.get('is_comet', False):          # add comets to idealized orbits
-    #            skipped['comets'].append(obj_name)
-    #            continue
-
-            elif obj_info.get('is_mission', False):
-                skipped['missions'].append(obj_name)
-                continue
-            
-            params = planetary_params[obj_name]
-            # e.g. a = params['a'], e = params['e'], i = params['i'], etc.
-            a = params.get('a', 0)
-
-            # Skip if semi-major axis is zero or very small
-            if a < 0.0001:
-                continue
-
-            e = params.get('e', 0)
-            i = params.get('i', 0)
-            omega = params.get('omega', 0)
-            Omega = params.get('Omega', 0)
-
-            # Generate ellipse in orbital plane
-            theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
-            r = a * (1 - e**2) / (1 + e * np.cos(theta))
-            
-            x_orbit = r * np.cos(theta)
-            y_orbit = r * np.sin(theta)
-            z_orbit = np.zeros_like(theta)
-
-            # Convert angles to radians
-            i_rad = math.radians(i)
-            omega_rad = math.radians(omega)
-            Omega_rad = math.radians(Omega)
-
-            # Rotate ellipse by argument of periapsis (ω) around z-axis
-            x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
-            # Then rotate by inclination (i) around x-axis
-            x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-            # Then rotate by longitude of ascending node (Ω) around z-axis
-            x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
-
-            fig.add_trace(
-                go.Scatter3d(
-                    x=x_final,
-                    y=y_final,
-                    z=z_final,
-                    mode='lines',
-                    line=dict(dash='dot', width=1, color=obj_info['color']),
-                    name=f"{obj_name} Ideal Orbit",
-                    text=[f"{obj_name} Ideal Orbit"] * len(x_final),        # Add proper hover text
-                    customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),  # Add same for customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True                    
-        #            hoverinfo='name'
-                )
-            )
-
-            plotted.append(obj_name)
-
-    else:
-        # For non-Sun centers, we'll plot idealized orbits for moons of that planet
-        center_object = center_id  # e.g., 'Earth'        
-        moons = parent_planets.get(center_id, [])
-
-        # Filter objects_to_plot to include only moons of this planet that are selected
-        moon_objects = [name for name in objects_to_plot if name in moons]
-        
-        # Find moons of this center object
-    #    moons = [moon for moon, parent in parent_planets.items() if parent == center_object]
-    #    moon_objects = [name for name in objects_to_plot if name in moons]
-        
-        for moon_name in moon_objects:
-            # Find the object in the objects list
-            moon_info = next((obj for obj in objects if obj['name'] == moon_name), None)
-            if moon_info is None:
-                continue
-                
-            # Check if we have orbital parameters
-            if moon_name not in planetary_params:
-                skipped['no_params'].append(moon_name)
-                continue
-                
-            params = planetary_params[moon_name]
-            # Proper parameter lookup for satellites
-    #        if is_satellite_of_center:
-    #            params = planetary_params.get(moon_name, {})
-            
-            # Get orbital parameters
-            a = params.get('a_parent', 0)  # Use a_parent if available (in planet radii)
-            if a == 0:
-                a = params.get('a', 0)  # Fallback to a (in AU)
-                
-            # Skip if semi-major axis is zero or very small
-            if a < 0.0001:
-                skipped['invalid_orbit'].append(moon_name)
-                continue
-
-            e = params.get('e', 0)
-            i = params.get('i', 0)
-            omega = params.get('omega', 0)
-            Omega = params.get('Omega', 0)
-
-            # Generate ellipse in orbital plane
-            theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
-            r = a * (1 - e**2) / (1 + e * np.cos(theta))
-            
-            x_orbit = r * np.cos(theta)
-            y_orbit = r * np.sin(theta)
-            z_orbit = np.zeros_like(theta)
-
-            # Convert angles to radians
-            i_rad = math.radians(i)
-            omega_rad = math.radians(omega)
-            Omega_rad = math.radians(Omega)
-
-            # Correct rotation sequence:
-            # 1. Longitude of ascending node (Ω) around z-axis
-            x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
-            # 2. Inclination (i) around x-axis
-            x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-            # 3. Argument of periapsis (ω) around z-axis
-            x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
-
-            # Rotate ellipse -- this may cause the wrong angle to be plotted
-    #        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
-    #        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-    #        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
-
-            orbit_name = f"{moon_name} Ideal Orbit around {center_object}"
-            hover_text = f"{moon_name} Ideal Orbit around {center_object}"
-
-            fig.add_trace(
-                go.Scatter3d(
-                    x=x_final,
-                    y=y_final,
-                    z=z_final,
-                    mode='lines',
-                    line=dict(dash='dot', width=1, color=moon_info['color']),
-
-                    name=orbit_name,
-                    text=[hover_text] * len(x_final),
-                    customdata=[hover_text] * len(x_final),
-
-        #            name=f"{moon_name} Ideal Orbit",
-        #            text=[f"{moon_name} Ideal Orbit around {center_id}"] * len(x_final),
-        #            customdata=[f"{moon_name} Ideal Orbit"] * len(x_final),
-        
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
-
-            plotted.append(moon_name)
-
-        # Print summary of plotted and skipped objects
-        print("\nIdeal Orbit Summary:")
-        print(f"Plotted ideal orbits for {len(plotted)} objects:")
-        for obj in plotted:
-            print(f"  - {obj}")
-
-        print("\nSkipped ideal orbits for:")
-        if skipped['satellites']:
-            print(f"\nPlanetary Satellites ({len(skipped['satellites'])}):")
-            for obj in skipped['satellites']:
-                print(f"  - {obj}")
-        
-        if skipped['comets']:
-            print(f"\nComets ({len(skipped['comets'])}):")
-            for obj in skipped['comets']:
-                print(f"  - {obj}")
-                
-        if skipped['missions']:
-            print(f"\nSpace Missions ({len(skipped['missions'])}):")
-            for obj in skipped['missions']:
-                print(f"  - {obj}")
-                
-        if skipped['no_params']:
-            print(f"\nNo Orbital Parameters ({len(skipped['no_params'])}):")
-            for obj in skipped['no_params']:
-                print(f"  - {obj}")
-                
-        if skipped['invalid_orbit']:
-            print(f"\nInvalid Orbital Parameters ({len(skipped['invalid_orbit'])}):")
-            for obj in skipped['invalid_orbit']:
-                print(f"  - {obj}")
-#    else:
-        # No idealized orbits for planetary satellites
-#        print(f"\nNo ideal orbits plotted - center is {center_id} (not Sun)")
-
-        return fig
 
 def show_animation_safely(fig, default_name):
     """Show and optionally save an animated Plotly figure with proper cleanup."""
@@ -3350,14 +3084,19 @@ def animate_objects(step, label):
             
             # Define planets with shell visualizations
             planets_with_shells = {
-                'Jupiter': {
-                    'positions': [],  # Will be populated during animation
-                    'shell_vars': jupiter_shell_vars
-                },
                 'Earth': {
                     'positions': [],  # Will be populated during animation
                     'shell_vars': earth_shell_vars
+                },
+                'Mars': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': mars_shell_vars
+                },
+                'Jupiter': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': jupiter_shell_vars
                 }
+
             }
             
             # Initialize dates_lists dictionary
@@ -3426,8 +3165,9 @@ def animate_objects(step, label):
 
             # Define dictionary mapping planets to their shell variable dictionaries
             planet_shells_config = {
-                'Jupiter': jupiter_shell_vars,
-                'Earth': earth_shell_vars
+                'Earth': earth_shell_vars,
+                'Mars': mars_shell_vars,
+                'Jupiter': jupiter_shell_vars
                 # Add more planets here as shell systems are developed
             }
 
@@ -3527,7 +3267,11 @@ def animate_objects(step, label):
                 for obj in objects
                 if obj['var'].get() == 1
             ]
-            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)
+    ##        plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)
+            
+            plot_idealized_orbits(fig, selected_objects, center_id=center_object_name, 
+                          objects=objects, planetary_params=planetary_params,
+                          parent_planets=parent_planets, color_map=color_map)            
 
             # Create initial traces for moving objects and store their indices
             trace_indices = {}  # Define trace_indices dictionary
@@ -4207,8 +3951,40 @@ create_celestial_checkbutton("- 2024 PT5", pt5_var)
 create_celestial_checkbutton("- 2024 YR4", yr4_var)
 
 create_celestial_checkbutton("Mars", mars_var)
+# Create a Frame specifically for the Mars shell options (indented)
+mars_shell_options_frame = tk.Frame(celestial_frame)
+mars_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+# Mars inner core shell
+mars_inner_core_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Inner Core", variable=mars_inner_core_var)
+mars_inner_core_checkbutton.pack(anchor='w')
+CreateToolTip(mars_inner_core_checkbutton, mars_inner_core_info)
+# Mars outer core shell
+mars_outer_core_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Outer Core", variable=mars_outer_core_var)
+mars_outer_core_checkbutton.pack(anchor='w')
+CreateToolTip(mars_outer_core_checkbutton, mars_outer_core_info)
+# Mars mantle shell
+mars_mantle_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Mantle", variable=mars_mantle_var)
+mars_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(mars_mantle_checkbutton, mars_mantle_info)
+# mars crust shell
+mars_crust_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Crust", variable=mars_crust_var)
+mars_crust_checkbutton.pack(anchor='w')
+CreateToolTip(mars_crust_checkbutton, mars_crust_info)
+# mars atmosphere shell
+mars_atmosphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Atmosphere", variable=mars_atmosphere_var)
+mars_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(mars_atmosphere_checkbutton, mars_atmosphere_info)
+# mars upper atmosphere shell
+mars_upper_atmosphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Upper Atmosphere", variable=mars_upper_atmosphere_var)
+mars_upper_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(mars_upper_atmosphere_checkbutton, mars_upper_atmosphere_info)
+# mars hill sphere shell
+mars_hill_sphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Hill Sphere", variable=mars_hill_sphere_var)
+mars_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(mars_hill_sphere_checkbutton, mars_hill_sphere_info)
 create_celestial_checkbutton("- Phobos", phobos_var)
 create_celestial_checkbutton("- Deimos", deimos_var)
+
 # asteroids
 create_celestial_checkbutton("Apophis", apophis_var)
 create_celestial_checkbutton("Bennu", bennu_var)

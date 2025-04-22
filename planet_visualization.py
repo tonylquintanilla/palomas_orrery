@@ -51,6 +51,10 @@ JUPITER_RADIUS_AU = JUPITER_RADIUS_KM / 149597870.7  # Convert to AU
 EARTH_RADIUS_KM = 6371  # Mean radius in km
 EARTH_RADIUS_AU = EARTH_RADIUS_KM / 149597870.7  # Convert to AU
 
+# Mars Constants
+MARS_RADIUS_KM = 3390  # Mean radius in km
+MARS_RADIUS_AU = MARS_RADIUS_KM / 149597870.7  # Convert to AU
+
 #####################################
 # Shared Utility Functions
 #####################################
@@ -133,6 +137,26 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 elif shell_type == 'hill_sphere' and var.get() == 1:
                     traces.extend(create_earth_hill_sphere_shell(center_position))
     
+    elif body_name == 'Mars':
+        # Handle Mars visualization with its specific shells
+        for shell_name, var in shell_vars.items():
+            if var.get() == 1:
+                shell_type = shell_name.replace('mars_', '')
+                if shell_type == 'inner_core' and var.get() == 1:
+                    traces.extend(create_mars_inner_core_shell(center_position))
+                elif shell_type == 'outer_core' and var.get() == 1:
+                    traces.extend(create_mars_outer_core_shell(center_position))
+                elif shell_type == 'mantle' and var.get() == 1:
+                    traces.extend(create_mars_mantle_shell(center_position))
+                elif shell_type == 'crust' and var.get() == 1:
+                    traces.extend(create_mars_crust_shell(center_position))
+                elif shell_type == 'atmosphere' and var.get() == 1:
+                    traces.extend(create_mars_atmosphere_shell(center_position))
+                elif shell_type == 'upper_atmosphere' and var.get() == 1:
+                    traces.extend(create_mars_upper_atmosphere_shell(center_position))
+                elif shell_type == 'hill_sphere' and var.get() == 1:
+                    traces.extend(create_mars_hill_sphere_shell(center_position))
+
     elif body_name == 'Jupiter':
         # Handle Jupiter visualization with its specific shells
         for shell_name, var in shell_vars.items():
@@ -336,22 +360,6 @@ def create_sun_gravitational_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='green',
-    #            size=0.5,
-    #            symbol='square-open',
-    #            opacity=0.2
-    #        ),
-    #        name='Sun\'s Gravitational Influence',
-    #        text=['The Sun\'s gravitational influence to ~126,000 AU or 2 ly.'],
-    #        customdata=customdata_array,
-    #        hoverinfo='skip',
-    #        hovertemplate='%{text}<extra></extra>',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -378,21 +386,6 @@ def create_sun_outer_oort_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='white',
-    #            size=1.0,
-    #            symbol='circle-open',
-    #            opacity=0.2
-    #        ),
-    #        name='Outer Oort Cloud',
-    #        text=['Outer Oort Cloud from estimated 20,000 to 100,000 AU.'],
-    #        customdata=customdata_array,
-    #        hovertemplate='%{text}<extra></extra>',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -419,21 +412,6 @@ def create_sun_inner_oort_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='white',
-    #            size=1.0,
-    #            symbol='circle-open',
-    #            opacity=0.3
-    #        ),
-    #        name='Inner Oort Cloud',
-    #        text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
-    #        customdata=customdata_array,
-    #        hovertemplate='%{text}<extra></extra>',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -460,21 +438,6 @@ def create_sun_inner_oort_limit_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='white',
-    #            size=1.0,
-    #            symbol='circle-open',
-    #            opacity=0.3
-    #        ),
-    #        name='Inner Limit of Oort Cloud',
-    #        text=['Inner Oort Cloud from estimated 2,000 to 20,000 AU.'],
-    #        customdata=customdata_array,
-    #        hovertemplate='%{text}<extra></extra>',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -501,21 +464,6 @@ def create_sun_heliopause_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(135, 206, 250)',
-    #            size=0.5,
-    #            symbol='circle',
-    #            opacity=0.2
-    #        ),
-    #        name='Solar Wind Heliopause',
-    #        text=['Solar Wind Heliopause (extends to 123 AU)'],
-    #        customdata=customdata_array,
-    #        hovertemplate='%{text}<extra></extra>',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -542,21 +490,6 @@ def create_sun_termination_shock_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(240, 244, 255)',
-    #            size=0.5,
-    #            symbol='circle',
-    #            opacity=0.2
-    #        ),
-    #        name='Solar Wind Termination Shock',
-    #        text=['Solar Wind Termination Shock (extends to 94 AU)'],
-    #        customdata=customdata_array,
-    #        hovertemplate='%{text}<extra></extra>',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -583,21 +516,6 @@ def create_sun_outer_corona_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(25, 25, 112)',
-    #            size=0.75,
-    #            symbol='circle',
-    #            opacity=0.3
-    #        ),
-    #        name='Sun: Outer Corona',
-    #        text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
-    #        customdata=customdata_array,
-    #        hovertemplate='%{text}<extra></extra>',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -624,20 +542,6 @@ def create_sun_inner_corona_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(0, 0, 255)',
-    #            size=1,
-    #            symbol='circle',
-    #            opacity=0.09
-    #        ),
-    #        name='Sun: Inner Corona',
-    #        text=['Solar Inner Corona (extends to 2-3 solar radii)'],
-    #        hoverinfo='text',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -664,20 +568,6 @@ def create_sun_chromosphere_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(30, 144, 255)',
-    #            size=1.25,
-    #            symbol='circle',
-    #            opacity=0.10
-    #        ),
-    #        name='Sun: Chromosphere',
-    #        text=['Solar Chromosphere (surface temperature ~6,000 to 20,000 K)'],
-    #        hoverinfo='text',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -704,20 +594,6 @@ def create_sun_photosphere_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(255, 244, 214)',
-    #            size=7.0,
-    #            symbol='circle',
-    #            opacity=1.0
-    #        ),
-    #        name='Sun: Photosphere',
-    #        text=['Solar Photosphere (surface temperature ~6,000K)'],
-    #        hoverinfo='text',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -744,20 +620,6 @@ def create_sun_radiative_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(30, 144, 255)',
-    #            size=7,
-    #            symbol='circle',
-    #            opacity=1.0
-    #        ),
-    #        name='Sun: Radiative Zone',
-    #        text=['Solar Radiative Zone (extends to 0.2 to 0.7 solar radii)'],
-    #        hoverinfo='text',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -784,21 +646,6 @@ def create_sun_core_shell():
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ),
-    #    go.Scatter3d(
-    #        x=[0], y=[0], z=[0],
-    #        mode='markers',
-    #        marker=dict(
-    #            color='rgb(70, 130, 180)',
-    #            size=10,
-    #            symbol='circle',
-    #            opacity=1.0
-    #        ),
-    #        name='Sun: Core',
-    #        text=['Solar Core (temperature ~15M K)'],
-    #        hoverinfo='text',
-    #        hoverinfo='skip',
-    #        showlegend=False
-    #    )
     ]
     
     return traces
@@ -827,7 +674,44 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
     traces = []
     
     # Create shell traces based on selected variables
-    if planet_name == 'Jupiter':
+
+    if planet_name == 'Earth':
+        if shell_vars['earth_inner_core'].get() == 1:
+            traces.extend(create_earth_inner_core_shell(center_position))
+        if shell_vars['earth_outer_core'].get() == 1:
+            traces.extend(create_earth_outer_core_shell(center_position))
+        if shell_vars['earth_lower_mantle'].get() == 1:
+            traces.extend(create_earth_lower_mantle_shell(center_position))
+        if shell_vars['earth_upper_mantle'].get() == 1:
+            traces.extend(create_earth_upper_mantle_shell(center_position))
+        if shell_vars['earth_crust'].get() == 1:
+            traces.extend(create_earth_crust_shell(center_position))
+        if shell_vars['earth_atmosphere'].get() == 1:
+            traces.extend(create_earth_atmosphere_shell(center_position))
+        if shell_vars['earth_upper_atmosphere'].get() == 1:
+            traces.extend(create_earth_upper_atmosphere_shell(center_position))
+        if shell_vars['earth_magnetosphere'].get() == 1:
+            traces.extend(create_earth_magnetosphere_shell(center_position))
+        if shell_vars['earth_hill_sphere'].get() == 1:
+            traces.extend(create_earth_hill_sphere_shell(center_position))
+
+    if planet_name == 'Mars':
+        if shell_vars['mars_inner_core'].get() == 1:
+            traces.extend(create_mars_inner_core_shell(center_position))
+        if shell_vars['mars_outer_core'].get() == 1:
+            traces.extend(create_mars_outer_core_shell(center_position))
+        if shell_vars['mars_mantle'].get() == 1:
+            traces.extend(create_mars_mantle_shell(center_position))
+        if shell_vars['mars_crust'].get() == 1:
+            traces.extend(create_mars_crust_shell(center_position))
+        if shell_vars['mars_atmosphere'].get() == 1:
+            traces.extend(create_mars_atmosphere_shell(center_position))
+        if shell_vars['mars_upper_atmosphere'].get() == 1:
+            traces.extend(create_mars_upper_atmosphere_shell(center_position))
+        if shell_vars['mars_hill_sphere'].get() == 1:
+            traces.extend(create_mars_hill_sphere_shell(center_position))
+
+    elif planet_name == 'Jupiter':
         if shell_vars['jupiter_core'].get() == 1:
             traces.extend(create_jupiter_core_shell(center_position))
         if shell_vars['jupiter_metallic_hydrogen'].get() == 1:
@@ -848,26 +732,6 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
             traces.extend(create_jupiter_magnetosphere(center_position))
         if shell_vars['jupiter_hill_sphere'].get() == 1:
             traces.extend(create_jupiter_hill_sphere_shell(center_position))
-    
-    elif planet_name == 'Earth':
-        if shell_vars['earth_inner_core'].get() == 1:
-            traces.extend(create_earth_inner_core_shell(center_position))
-        if shell_vars['earth_outer_core'].get() == 1:
-            traces.extend(create_earth_outer_core_shell(center_position))
-        if shell_vars['earth_lower_mantle'].get() == 1:
-            traces.extend(create_earth_lower_mantle_shell(center_position))
-        if shell_vars['earth_upper_mantle'].get() == 1:
-            traces.extend(create_earth_upper_mantle_shell(center_position))
-        if shell_vars['earth_crust'].get() == 1:
-            traces.extend(create_earth_crust_shell(center_position))
-        if shell_vars['earth_atmosphere'].get() == 1:
-            traces.extend(create_earth_atmosphere_shell(center_position))
-        if shell_vars['earth_upper_atmosphere'].get() == 1:
-            traces.extend(create_earth_upper_atmosphere_shell(center_position))
-        if shell_vars['earth_magnetosphere'].get() == 1:
-            traces.extend(create_earth_magnetosphere_shell(center_position))
-        if shell_vars['earth_hill_sphere'].get() == 1:
-            traces.extend(create_earth_hill_sphere_shell(center_position))
     
     # Add base traces to figure for static visualization
     for trace in traces:
@@ -1670,204 +1534,6 @@ def create_magnetosphere_shape(params):
     
     return x_coords, y_coords, z_coords
 
-    """
-def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
-
-    traces = []
-    
-    # Parameters for magnetosphere components (in Jupiter radii)
-    params = {
-        # Compressed sunward side
-        'sunward_distance': 50,  # Compressed toward the sun
-        
-        # Equatorial extension (wider than polar)
-        'equatorial_radius': 100,
-        'polar_radius': 80,
-        
-        # Magnetotail parameters
-        'tail_length': 500,  # Length of visible magnetotail
-        'tail_base_radius': 150,  # Radius at the base of the tail
-        'tail_end_radius': 200,  # Radius at the end of the tail
-        
-        # Io plasma torus
-        'io_torus_distance': 5.9,  # Io's orbit is at about 5.9 Jupiter radii
-        'io_torus_thickness': 2,
-        'io_torus_width': 1,
-        
-        # Radiation belts
-        'inner_belt_distance': 1.5,
-        'middle_belt_distance': 3,
-        'outer_belt_distance': 6,
-        'belt_thickness': 0.5
-    }
-    
-    # Scale everything by Jupiter's radius in AU
-    for key in params:
-        params[key] *= JUPITER_RADIUS_AU
-    
-    # Create magnetosphere main shape
-    x, y, z = create_magnetosphere_shape(params)
-    
-# Unpack center position
-    center_x, center_y, center_z = center_position
-    
-    # 1. Add the main magnetosphere structure
-    x = np.array(x) + center_x
-    y = np.array(y) + center_y
-    z = np.array(z) + center_z
-    
-    traces.append(
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.0,
-                color='rgb(200, 200, 255)', # Light blue for magnetic field
-                opacity=0.3
-            ),
-            name='Jupiter: Magnetosphere',
-            text=["Jupiter's magnetosphere extends up to 100 Jupiter radii on the sunward side<br>"
-                  "and forms a magnetotail stretching beyond Saturn's orbit in the opposite direction.<br>"
-                  "It traps charged particles, creating intense radiation belts that would be lethal to humans."] * len(x),
-            customdata=['Jupiter: Magnetosphere'] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    )
-    
-    # 2. Create and add Io plasma torus with a different color
-    io_torus_x = []
-    io_torus_y = []
-    io_torus_z = []
-    
-    n_points = 100
-    n_rings = 8
-    
-    for i_ring in range(n_rings):
-        # Vary the radius slightly to create thickness
-        radius_offset = (i_ring / (n_rings-1) - 0.5) * params['io_torus_thickness']
-        torus_radius = params['io_torus_distance'] + radius_offset
-        
-        for i in range(n_points):
-            angle = (i / n_points) * 2 * np.pi
-
-            # Position in x-y plane (equatorial)
-            x = torus_radius * np.cos(angle)
-            y = torus_radius * np.sin(angle)
-            z = 0  # In the equatorial plane    
-            
-            # Add some thickness variation
-            jitter = (np.random.random() - 0.5) * params['io_torus_width']
-            
-            io_torus_x.append(x)
-            io_torus_y.append(y)
-            io_torus_z.append(z + jitter)     # Apply jitter to z axis
-    
-    # Apply center position offset
-    io_torus_x = np.array(io_torus_x) + center_x
-    io_torus_y = np.array(io_torus_y) + center_y
-    io_torus_z = np.array(io_torus_z) + center_z
-
-    # Create the Io plasma torus hover text and customdata arrays
-    io_text = ["Io plasma torus: A donut-shaped region of charged particles emanating from<br>"
-              "Jupiter's moon Io due to volcanic activity. These particles become trapped<br>"
-              "in Jupiter's magnetic field, forming this distinctive structure."] * len(io_torus_x)
-    io_customdata = ['Jupiter: Io Plasma Torus'] * len(io_torus_x)
-    
-    traces.append(
-        go.Scatter3d(
-            x=io_torus_x,
-            y=io_torus_y,
-            z=io_torus_z,
-            mode='markers',
-            marker=dict(
-                size=1.5,
-                color='rgb(255, 100, 100)',  # Reddish color for plasma torus
-                opacity=0.3
-            ),
-            name='Jupiter: Io Plasma Torus',
-            text=io_text,
-            customdata=io_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    )
-    
-    # 3. Create and add radiation belts with different colors
-    belt_colors = ['rgb(255, 255, 100)', 'rgb(100, 255, 150)', 'rgb(100, 200, 255)']
-    belt_names = ['Jupiter: Inner Radiation Belt', 'Jupiter: Middle Radiation Belt', 'Jupiter: Outer Radiation Belt']
-    belt_texts = [
-        "Inner radiation belt: Intense region of trapped high-energy particles near Jupiter",
-        "Middle radiation belt: Region of trapped charged particles at intermediate distances from Jupiter",
-        "Outer radiation belt: Extended region of trapped particles in Jupiter's outer magnetosphere"
-    ]
-    
-    belt_distances = [
-        params['inner_belt_distance'],
-        params['middle_belt_distance'],
-        params['outer_belt_distance']
-    ]
-    
-    for i, belt_distance in enumerate(belt_distances):
-        belt_x = []
-        belt_y = []
-        belt_z = []
-        
-        n_points = 80
-        n_rings = 5
-        
-        for i_ring in range(n_rings):
-            # Vary the radius slightly to create thickness
-            radius_offset = (i_ring / (n_rings-1) - 0.5) * params['belt_thickness']
-            belt_radius = belt_distance + radius_offset
-            
-            for j in range(n_points):
-                angle = (j / n_points) * 2 * np.pi
-                
-                # Create a belt around Jupiter's rotational axis
-                x = belt_radius * np.cos(angle)
-                y = belt_radius * np.sin(angle)
-                
-                # Add some z variation based on angle to create the shape of a belt
-                # rather than a perfect torus (thinner near poles)
-                z_scale = 0.2 * belt_radius  # Controls how flat the belts are
-                z = z_scale * np.sin(2 * angle)
-                
-                belt_x.append(x)
-                belt_y.append(y)
-                belt_z.append(z)
-        
-        # Apply center position offset
-        belt_x = np.array(belt_x) + center_x
-        belt_y = np.array(belt_y) + center_y
-        belt_z = np.array(belt_z) + center_z
-        
-        # Create the radiation belt hover text and customdata arrays
-        belt_text = [belt_texts[i]] * len(belt_x)
-        belt_customdata = [belt_names[i]] * len(belt_x)
-
-        traces.append(
-            go.Scatter3d(
-                x=belt_x,
-                y=belt_y,
-                z=belt_z,
-                mode='markers',
-                marker=dict(
-                    size=1.5,
-                    color=belt_colors[i],
-                    opacity=0.3
-                ),
-                name=belt_names[i],
-                text=belt_text,
-                customdata=belt_customdata,
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
-            )
-        )
-    
-    return traces
-    """
-
 jupiter_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
@@ -2553,6 +2219,461 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
             name='Earth: Hill Sphere',
             text=[hover_text] * len(x),
             customdata=['Earth: Hill Sphere'] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+# Mars Shell Creation Functions
+
+mars_inner_core_info = (
+            "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars \n" 
+            "possesses a solid inner core. This inner core is primarily composed of iron and nickel, similar to Earth's."
+)
+
+def create_mars_inner_core_shell(center_position=(0, 0, 0)):
+    """Creates Mars's inner core shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.5,  # Inner core: 0-50% of Mars's radius
+        'color': 'rgb(255, 180, 140)',  # Orange-red for hot iron core
+        'opacity': 1.0,
+        'name': 'Inner Core',
+        'description': (
+            "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars <br>" 
+            "possesses a solid inner core. This inner core is primarily composed of iron and nickel, similar to Earth's.<br><br>"
+            "The differentiation into a solid inner core and a liquid outer core is primarily driven by:<br>"
+            "* Temperature Gradient: The temperature increases significantly as you move towards the center of the planet. <br>" 
+            "  The very high pressure at the center raises the melting point of the metallic core material. The inner core <br>" 
+            "  is where the pressure exceeds the melting point at that temperature, forcing the metal into a solid state. <br>" 
+            "  The outer core is still hot enough to be liquid at the prevailing pressures.<br>"
+            "* Compositional Differences: The presence of lighter elements in the outer core also contributes to its lower <br>" 
+            "  melting point compared to the purer iron-nickel of the inner core.<br>"
+            "* Differences from Earth's Core:"
+            "  * Size: Mars' core is proportionally larger relative to the planet's overall size compared to Earth's core.<br>"
+            "  * Density: The lower overall density of Mars suggests that its core likely contains a higher percentage of <br>" 
+            "    lighter elements than Earth's core.<br>" 
+            "  * Lack of a Global Dynamo (Currently): Earth's liquid outer core is convecting, which, along with the planet's <br>" 
+            "    rotation, generates our global magnetic field (the geodynamo). The fact that Mars currently lacks a global <br>" 
+            "    magnetic field suggests that the convection in its liquid outer core is either absent, very weak, or organized <br>" 
+            "    differently. This could be due to its smaller size, different cooling history, or the higher abundance of <br>" 
+            "    lighter elements affecting its fluid dynamics.<br>" 
+            "The precise composition and dynamics of these layers are still subjects of ongoing research and analysis of data.<br><br>" 
+            "Past Magnetosphere: Scientists believe that early in its history, Mars did possess a global magnetic field, <br>" 
+            "much like Earth's. This would have created a significant magnetosphere, deflecting much of the solar wind and <br>" 
+            "cosmic radiation. However, unlike Earth, Mars lost its global magnetic field billions of years ago. The exact <br>" 
+            "reasons are still being investigated, but theories involve the cooling and solidification of its iron core, which <br>" 
+            "would have stopped the dynamo process that generates a global magnetic field. Today, Mars doesn't have a planet-wide <br>" 
+            "magnetosphere generated by a global magnetic field. However, the Mars Global Surveyor mission discovered strong, <br>" 
+            "localized magnetic fields embedded in certain regions of the Martian crust, particularly in the ancient southern <br>" 
+            "highlands. These are remnants of the early global field. These localized fields can create small, localized <br>" 
+            "magnetospheres, but they don't provide planet-wide protection like Earth's magnetosphere."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=4.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Mars: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Mars: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+mars_outer_core_info = (
+            "A Liquid Outer Core: Surrounding the solid inner core is believed to be a liquid outer core, also primarily \n" 
+            "made of iron and nickel, but likely containing a significant amount of lighter elements like sulfur, oxygen, \n" 
+            "or even hydrogen. The presence of these lighter elements would lower the melting point of the iron-nickel alloy, \n" 
+            "allowing it to remain liquid despite the pressure."
+)
+
+def create_mars_outer_core_shell(center_position=(0, 0, 0)):
+    """Creates Mars's outer core shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.8,  # Outer core: 50-80% of Mars's radius
+        'color': 'rgb(255, 140, 0)',  # Deeper orange for liquid metal
+        'opacity': 0.8,
+        'name': 'Outer Core',
+        'description': (
+            "A Liquid Outer Core: Surrounding the solid inner core is believed to be a liquid outer core, also primarily <br>" 
+            "made of iron and nickel, but likely containing a significant amount of lighter elements like sulfur, oxygen, <br>" 
+            "or even hydrogen. The presence of these lighter elements would lower the melting point of the iron-nickel alloy, <br>" 
+            "allowing it to remain liquid despite the pressure.<br><br>"
+            "The differentiation into a solid inner core and a liquid outer core is primarily driven by:<br>"
+            "* Temperature Gradient: The temperature increases significantly as you move towards the center of the planet. <br>" 
+            "  The very high pressure at the center raises the melting point of the metallic core material. The inner core <br>" 
+            "  is where the pressure exceeds the melting point at that temperature, forcing the metal into a solid state. <br>" 
+            "  The outer core is still hot enough to be liquid at the prevailing pressures.<br>"
+            "* Compositional Differences: The presence of lighter elements in the outer core also contributes to its lower <br>" 
+            "  melting point compared to the purer iron-nickel of the inner core.<br>"
+            "* Differences from Earth's Core:"
+            "  * Size: Mars' core is proportionally larger relative to the planet's overall size compared to Earth's core.<br>"
+            "  * Density: The lower overall density of Mars suggests that its core likely contains a higher percentage of <br>" 
+            "    lighter elements than Earth's core.<br>" 
+            "  * Lack of a Global Dynamo (Currently): Earth's liquid outer core is convecting, which, along with the planet's <br>" 
+            "    rotation, generates our global magnetic field (the geodynamo). The fact that Mars currently lacks a global <br>" 
+            "    magnetic field suggests that the convection in its liquid outer core is either absent, very weak, or organized <br>" 
+            "    differently. This could be due to its smaller size, different cooling history, or the higher abundance of <br>" 
+            "    lighter elements affecting its fluid dynamics.<br>" 
+            "The precise composition and dynamics of these layers are still subjects of ongoing research and analysis of data."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.7,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Mars: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Mars: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+mars_mantle_info = (
+            "Mantle: Surrounding the core is a silicate mantle, similar to Earth's. It's composed of dense rocks rich in \n" 
+            "elements like silicon, oxygen, iron, and magnesium."
+)
+
+def create_mars_mantle_shell(center_position=(0, 0, 0)):
+    """Creates Mars's mantle shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.98,  # Upper mantle: 80-98% of Mars's radius
+        'color': 'rgb(205, 85, 85)',  # Lighter reddish-brown
+        'opacity': 0.6,
+        'name': 'Mantle',
+        'description': (
+            "Mantle: Surrounding the core is a silicate mantle, similar to Earth's. It's composed of dense rocks rich in <br>" 
+            "elements like silicon, oxygen, iron, and magnesium. While \"upper mantle\" isn't a formal layer name in the <br>" 
+            "same way as Earth's, scientists do discuss different regions within the mantle based on mineral phase transitions <br>" 
+            "that occur at different depths and pressures. For example, there might be an upper and lower transition zone <br>" 
+            "within the mantle, similar in concept to Earth's, although the specific minerals and depths would differ due to <br>" 
+            "Mars' unique composition and internal pressures."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.1,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Mars: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Mars: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+mars_crust_info = (
+            "Mars's crust: Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes \n" 
+            "suggest that the Martian crust is significantly thicker than Earth's, perhaps averaging around 70 kilometers \n" 
+            "(43 miles) or even thicker in some areas."
+)
+
+def create_mars_crust_shell(center_position=(0, 0, 0)):
+    """Creates Mars's crust shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.0,  # Crust: 98-100% of Mars's radius
+        'color': 'rgb(188, 39, 50)',  # Mars red
+        'opacity': 1.0,
+        'name': 'Crust',
+        'description': (
+            "Mars's crust: Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes <br>" 
+            "suggest that the Martian crust is significantly thicker than Earth's, perhaps averaging around 70 kilometers <br>" 
+            "(43 miles) or even thicker in some areas.<br><br>" 
+            "Today, Mars doesn't have a planet-wide magnetosphere generated by a global magnetic field. However, the Mars Global <br>" 
+            "Surveyor mission discovered strong, localized magnetic fields embedded in certain regions of the Martian crust, <br>" 
+            "particularly in the ancient southern highlands. These are remnants of the early global field. These localized fields <br>" 
+            "can create small, localized magnetospheres, but they don't provide planet-wide protection like Earth's magnetosphere."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=7,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Mars: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Mars: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+mars_atmosphere_info = (
+            "Atmosphere: Mars has a thin atmosphere, much less dense than Earth's. It's primarily composed of carbon dioxide \n" 
+            "(about 95%), with small amounts of nitrogen, argon, and other gases."
+)
+
+def create_mars_atmosphere_shell(center_position=(0, 0, 0)):
+    """Creates Mars's lower atmosphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.02,  # Troposphere
+        'color': 'rgb(150, 200, 255)',  # Light blue for atmosphere
+        'opacity': 0.5,
+        'name': 'Lower Atmosphere',
+        'description': (
+            "Atmosphere: Mars has a thin atmosphere, much less dense than Earth's. It's primarily composed of carbon dioxide <br>" 
+            "(about 95%), with small amounts of nitrogen, argon, and other gases.<br><br>" 
+            "Scientists often divide the Martian atmosphere into layers based on temperature profiles, similar to Earth's <br>" 
+            "atmosphere, although some layers are absent or behave differently:<br>" 
+            "* Troposphere: This is the lowest layer, extending from the surface up to about 40-50 kilometers (25-31 miles). <br>" 
+            "  Most of Mars' weather, like dust storms and convection, occurs here. The temperature generally decreases with altitude.<br>" 
+            "* Mesosphere: Above the troposphere, extending from about 50 to 100 kilometers (31 to 62 miles). This layer has the <br>" 
+            "  lowest temperatures in the Martian atmosphere as carbon dioxide efficiently radiates heat into space. Carbon dioxide <br>" 
+            "  ice clouds have even been observed in the Martian mesosphere.<br>" 
+            "* Thermosphere: Above the mesosphere, starting around 100 kilometers (62 miles) and extending to about 200 kilometers <br>" 
+            "  (124 miles). This layer is heated by extreme ultraviolet radiation from the Sun, and temperatures increase with <br>" 
+            "  altitude. However, it's still much colder than Earth's thermosphere."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.5,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Mars: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Mars: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+mars_upper_atmosphere_info = (
+            "Upper Atmosphere: Like Earth, Mars has upper atmospheric layers, including an ionosphere and exosphere, where \n" 
+            "the atmosphere becomes very thin and interacts with solar radiation and the solar wind.\n\n" 
+            "Exosphere: This is the outermost layer, starting above the thermosphere (around 200 km/124 miles) and gradually \n" 
+            "thinning out into space. Atoms and molecules here are so far apart that they can escape the planet's gravity.\n\n" 
+            "Interaction with Solar Wind: Without a global magnetosphere, the Martian atmosphere is directly exposed to the \n" 
+            "solar wind, a stream of charged particles from the Sun. This interaction is believed to have played a significant \n" 
+            "role in stripping away much of Mars' early, potentially thicker atmosphere and contributing to the loss of liquid \n" 
+            "water on the surface. Unlike Earth, Mars lacks a stratosphere. On Earth, the stratosphere is characterized by a \n" 
+            "temperature inversion due to the absorption of ultraviolet radiation by the ozone layer. Mars has a very thin \n" 
+            "atmosphere and no significant ozone layer, so this distinct layer doesn't form."
+)
+
+def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
+    """Creates Mars's upper atmosphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.06,  # Mesosphere, thermosphere, and exosphere
+        'color': 'rgb(100, 150, 255)',  # Lighter blue
+        'opacity': 0.3,
+        'name': 'Upper Atmosphere',
+        'description': (
+            "Upper Atmosphere: Like Earth, Mars has upper atmospheric layers, including an ionosphere and exosphere, where <br>" 
+            "the atmosphere becomes very thin and interacts with solar radiation and the solar wind.<br><br>" 
+            "Exosphere: This is the outermost layer, starting above the thermosphere (around 200 km/124 miles) and gradually <br>" 
+            "thinning out into space. Atoms and molecules here are so far apart that they can escape the planet's gravity.<br><br>" 
+            "Interaction with Solar Wind: Without a global magnetosphere, the Martian atmosphere is directly exposed to the <br>" 
+            "solar wind, a stream of charged particles from the Sun. This interaction is believed to have played a significant <br>" 
+            "role in stripping away much of Mars' early, potentially thicker atmosphere and contributing to the loss of liquid <br>" 
+            "water on the surface. Unlike Earth, Mars lacks a stratosphere. On Earth, the stratosphere is characterized by a <br>" 
+            "temperature inversion due to the absorption of ultraviolet radiation by the ozone layer. Mars has a very thin <br>" 
+            "atmosphere and no significant ozone layer, so this distinct layer doesn't form."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Mars: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Mars: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+mars_hill_sphere_info = (
+            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
+            "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its \n" 
+            "gravitational influence and encompasses its two moons."
+)
+
+def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
+    """Creates Mars's Hill sphere."""
+
+    """Creates Mars's upper atmosphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 324.5,  
+        'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
+        'opacity': 0.15,
+        'name': 'Hill Sphere',
+        'description': (
+                "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its <br>" 
+                "gravitational influence and encompasses its two moons.<br><br>" 
+                "* Definition: The Hill sphere (sometimes called the Roche sphere or gravitational sphere of influence) of a <br>" 
+                "  celestial body is the region around it where its own gravity is the dominant force attracting satellites. <br>" 
+                "  Essentially, it's the space where a moon or spacecraft would primarily orbit that body rather than the larger <br>" 
+                "  body it orbits (in Mars' case, the Sun).<br>" 
+                "* Mars' Hill Sphere: The size of a planet's Hill sphere depends on its mass and its distance from the Sun. <br>" 
+                "  Mars, being less massive than Earth and farther from the Sun, has a Hill sphere with a radius of approximately <br>" 
+                "  1.1 million kilometers (about 0.073 astronomical units).<br>" 
+                "* Moons Within the Hill Sphere: Mars' two small moons, Phobos and Deimos, orbit well within Mars' Hill sphere, <br>" 
+                "  which is why they are gravitationally bound to the planet and not the Sun.<br>" 
+                "* Importance: The concept of the Hill sphere is crucial for understanding the stability of orbits around a planet. <br>" 
+                "  Any object orbiting Mars within its Hill sphere is more likely to remain a satellite of Mars. If an object's <br>" 
+                "  orbit extends beyond the Hill sphere, the Sun's gravity would become the dominant influence, potentially pulling <br>" 
+                "the object into a heliocentric orbit."
+        )
+    }
+
+    # Hill sphere radius in Mars radii
+    radius_fraction = 324.5  # Mars's Hill sphere is about 324.5 Mars radii
+    
+    # Calculate radius in AU
+    radius_au = radius_fraction * MARS_RADIUS_AU
+    
+    # Create sphere points with fewer points for memory efficiency
+    n_points = 30  # Reduced for large spheres
+    x, y, z = create_sphere_points(radius_au, n_points=n_points)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=1.0,
+                color='rgb(0, 255, 0)',  # Green for Hill sphere
+                opacity=0.15
+            ),
+            name=f"Mars: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Mars: {layer_info['name']}"] * len(x),
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )

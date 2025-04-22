@@ -35,6 +35,15 @@ CENTER_BODY_RADII = {
 }
 
 planetary_params = {
+    # Semi-major axis: This is one-half of the longest diameter of the elliptical orbit. It's essentially the average 
+    # of the periapsis (closest point to Saturn) and apoapsis (farthest point from Saturn) distances.
+    # IDs are NAIF IDs used by Horizons. The acronym NAIF stands for the Navigation and Ancillary Information Facility. 
+    # It is a group at NASA's Jet Propulsion Laboratory (JPL) that is responsible for developing and supporting the SPICE 
+    # (Spacecraft, Planet, Instrument, C-matrix, Events) information system. SPICE is used extensively by NASA and the 
+    # international space science community for mission planning and the analysis of scientific observations from space missions. 
+    # The NAIF IDs are numerical identifiers assigned to various celestial bodies, spacecraft, and instruments within the SPICE system. 
+    # These IDs provide a consistent and unambiguous way to refer to these objects in SPICE data files (kernels) and software.
+
     'Mercury': {
         'a': 0.387098,  # semi-major axis in AU
         'e': 0.205630,  # eccentricity
@@ -331,36 +340,36 @@ planetary_params = {
 
     # Satellites
 
-    'Moon': {                  # Epoch 2000-1-1, geocentric; source: https://ssd.jpl.nasa.gov/sats/elem/
+    'Moon': {            # 301; Revised 7-31-2013, geocentric; source: https://ssd.jpl.nasa.gov/horizons/app.html#/
 #        'a': 384400,   # Horizons: A, semi-major axis in AU
-        'a': 0.002570,   # Horizons: A, semi-major axis in AU
-        'e': 0.0554,   # Horizons: EC, eccentricity
-        'i': 5.16,      # Horizons: IN, inclination in degrees
+        'a': 0.002570,   # Horizons: A, semi-major axis in AU; 384400 km or 0.00257 au
+        'e': 0.0549,   # Horizons: EC, eccentricity; 0.05490 was 0.0554
+        'i': 5.145,      # Horizons: IN, inclination in degrees; 5.145 deg was 5.16
         'omega': 318.15, # Horizons: W, argument of perihelion in degrees
         'Omega': 125.08   # Horizons: OM, longitude of ascending node in degrees
     },
 
     # Mars' Moons
 
-    #'Phobos': {
+    'Phobos': {
 #        'a': 9400,       # semi-major axis in km
-    #    'a': 0.0000628,       # semi-major axis in AU
+        'a': 0.0000628,       # semi-major axis in AU
 #        'a_parent': 2.76,      # semi-major axis in Mars radii
-    #    'e': 0.0151,           # eccentricity
-    #    'i': 1.093,            # inclination to Mars' equator in degrees
-    #    'omega': 216.3,      # argument of perihelion in degrees
-    #    'Omega': 169.2        # longitude of ascending node in degrees
-    #},
+        'e': 0.0151,           # eccentricity
+        'i': 1.093,            # inclination to Mars' equator in degrees
+        'omega': 216.3,      # argument of perihelion in degrees
+        'Omega': 169.2        # longitude of ascending node in degrees
+    },
 
-    #'Deimos': {
+    'Deimos': {
 #        'a': 23500,       # semi-major axis in km
-    #    'a': 0.0001568,       # semi-major axis in AU
+        'a': 0.0001568,       # semi-major axis in AU
 #        'a_parent': 6.92,      # semi-major axis in Mars radii
-    #    'e': 0.00033,          # eccentricity
-    #    'i': 1.791,            # inclination to Mars' equator in degrees
-    #    'omega': 0,      # argument of perihelion in degrees
-    #    'Omega': 54.4       # longitude of ascending node in degrees
-    #},
+        'e': 0.00033,          # eccentricity
+        'i': 1.791,            # inclination to Mars' equator in degrees
+        'omega': 0,      # argument of perihelion in degrees
+        'Omega': 54.4       # longitude of ascending node in degrees
+    },
 
     # Jupiter's Galilean Moons
     'Io': {
@@ -441,17 +450,17 @@ planetary_params = {
     },
 
     # Saturn's Major Moons
-    'Mimas': {
-#        'a': 186000,         # semi-major axis in km
+    'Mimas': {              # revised 1-26-2022; 601
+#        'a': 185540,         # semi-major axis in km
         'a': 0.001242,         # semi-major axis in AU
 #        'a_parent': 3.08,      # semi-major axis in Saturn radii
         'e': 0.0196,           # eccentricity
-        'i': 1.574,            # inclination to Saturn's equator in degrees
-        'omega': 160.4,      # argument of perihelion in degrees
+        'i': 1.572,            # inclination to Saturn's equator in degrees
+        'omega': 160.4,      # argument of perihelion in degrees; laplace
         'Omega': 66.2       # longitude of ascending node in degrees
     },
 
-    'Enceladus': {
+    'Enceladus': {          # 602
 #        'a': 238400,         # semi-major axis in km
         'a': 0.001587,         # semi-major axis in AU
 #        'a_parent': 3.95,      # semi-major axis in Saturn radii
@@ -461,7 +470,7 @@ planetary_params = {
         'Omega': 0.0       # longitude of ascending node in degrees
     },
 
-    'Tethys': {
+    'Tethys': {             # 603
 #        'a': 295000,         # semi-major axis in km
         'a': 0.001970,         # semi-major axis in AU
 #        'a_parent': 4.89,      # semi-major axis in Saturn radii
@@ -471,7 +480,7 @@ planetary_params = {
         'Omega': 273.0       # longitude of ascending node in degrees
     },
 
-    'Dione': {
+    'Dione': {              # 604
 #        'a': 377700,         # semi-major axis in km
         'a': 0.002525,         # semi-major axis in AU
 #        'a_parent': 6.26,      # semi-major axis in Saturn radii
@@ -481,7 +490,7 @@ planetary_params = {
         'Omega': 0.0       # longitude of ascending node in degrees
     },
 
-    'Rhea': {
+    'Rhea': {               # 605
 #        'a': 527200,         # semi-major axis in km
         'a': 0.003524,         # semi-major axis in AU
 #        'a_parent': 8.74,      # semi-major axis in Saturn radii
@@ -491,7 +500,7 @@ planetary_params = {
         'Omega': 133.7       # longitude of ascending node in degrees
     },
 
-    'Titan': {
+    'Titan': {              # 606
 #        'a': 1221900,         # semi-major axis in km
         'a': 0.008168,         # semi-major axis in AU
 #        'a_parent': 20.27,     # semi-major axis in Saturn radii
@@ -501,7 +510,7 @@ planetary_params = {
         'Omega': 78.6        # longitude of ascending node in degrees
     },
 
-    'Phoebe': {
+    'Phoebe': {             # 609
 #        'a': 12929400,          # semi-major axis in km
         'a': 0.08650,          # semi-major axis in AU
 #        'a_parent': 214.7,     # semi-major axis in Saturn radii
@@ -512,97 +521,97 @@ planetary_params = {
     },
 
     # Uranus's Major Moons
-    #'Miranda': {
+    'Miranda': {            # 705
 #        'a': 129900,         # semi-major axis in km
-    #    'a': 0.000868,         # semi-major axis in AU
+        'a': 0.000868,         # semi-major axis in AU
 #        'a_parent': 5.0,       # semi-major axis in Uranus radii
-    #    'e': 0.0013,           # eccentricity
-    #    'i': 4.338,            # inclination to Uranus's equator in degrees
-    #    'omega': 155.6,       # argument of perihelion in degrees
-    #    'Omega': 100.6       # longitude of ascending node in degrees
-    #},
+        'e': 0.0013,           # eccentricity
+        'i': 4.338,            # inclination to Uranus's equator in degrees
+        'omega': 155.6,       # argument of perihelion in degrees
+        'Omega': 100.6       # longitude of ascending node in degrees
+    },
 
-    #'Ariel': {
+    'Ariel': {              # 701
 #        'a': 190900,         # semi-major axis in km
-    #    'a': 0.001276,         # semi-major axis in AU
+        'a': 0.001276,         # semi-major axis in AU
 #        'a_parent': 7.35,      # semi-major axis in Uranus radii
-    #    'e': 0.0012,           # eccentricity
-    #    'i': 0.0,            # inclination to Uranus's equator in degrees
-    #    'omega': 83.3,      # argument of perihelion in degrees
-    #    'Omega': 0.0        # longitude of ascending node in degrees
-    #},
+        'e': 0.0012,           # eccentricity
+        'i': 0.0,            # inclination to Uranus's equator in degrees
+        'omega': 83.3,      # argument of perihelion in degrees
+        'Omega': 0.0        # longitude of ascending node in degrees
+    },
 
-    #'Umbriel': {
+    'Umbriel': {            # 702
 #        'a': 266000,         # semi-major axis in km
-    #    'a': 0.001778,         # semi-major axis in AU
+        'a': 0.001778,         # semi-major axis in AU
 #        'a_parent': 10.23,     # semi-major axis in Uranus radii
-    #    'e': 0.0039,           # eccentricity
-    #    'i': 0.1,            # inclination to Uranus's equator in degrees
-    #    'omega': 157.5,       # argument of perihelion in degrees
-    #    'Omega': 195.5        # longitude of ascending node in degrees
-    #},
+        'e': 0.0039,           # eccentricity
+        'i': 0.1,            # inclination to Uranus's equator in degrees
+        'omega': 157.5,       # argument of perihelion in degrees
+        'Omega': 195.5        # longitude of ascending node in degrees
+    },
 
-    #'Titania': {
+    'Titania': {            # 703
 #        'a': 436300,         # semi-major axis in km
-    #    'a': 0.002914,         # semi-major axis in AU
+        'a': 0.002914,         # semi-major axis in AU
 #        'a_parent': 16.77,     # semi-major axis in Uranus radii
-    #    'e': 0.001,           # eccentricity
-    #    'i': 0.1,            # inclination to Uranus's equator in degrees
-    #    'omega': 202.0,      # argument of perihelion in degrees
-    #    'Omega': 26.4        # longitude of ascending node in degrees
-    #},
+        'e': 0.001,           # eccentricity
+        'i': 0.1,            # inclination to Uranus's equator in degrees
+        'omega': 202.0,      # argument of perihelion in degrees
+        'Omega': 26.4        # longitude of ascending node in degrees
+    },
 
-    #'Oberon': {
+    'Oberon': {             # 704
 #       'a': 583400,         # semi-major axis in km
-    #    'a': 0.003907,         # semi-major axis in AU
+        'a': 0.003907,         # semi-major axis in AU
 #        'a_parent': 22.47,     # semi-major axis in Uranus radii
-    #    'e': 0.0008,           # eccentricity
-    #    'i': 0.058,            # inclination to Uranus's equator in degrees
-    #    'omega': 182.4,      # argument of perihelion in degrees
-    #    'Omega': 30.5       # longitude of ascending node in degrees
-    #},
+        'e': 0.0008,           # eccentricity
+        'i': 0.058,            # inclination to Uranus's equator in degrees
+        'omega': 182.4,      # argument of perihelion in degrees
+        'Omega': 30.5       # longitude of ascending node in degrees
+    },
 
     # Neptune's Major Moon
-    #'Triton': {
+    'Triton': {             # 801
 #        'a': 354800,         # semi-major axis in km
-    #    'a': 0.002371,         # semi-major axis in AU
+        'a': 0.002371,         # semi-major axis in AU
 #        'a_parent': 14.33,     # semi-major axis in Neptune radii
-    #    'e': 0.000016,         # eccentricity (nearly circular)
-    #    'i': 157.3,          # inclination to Neptune's equator in degrees (retrograde)
-    #    'omega': 0.0,       # argument of perihelion in degrees
-    #    'Omega': 178.1       # longitude of ascending node in degrees
-    #},
+        'e': 0.000016,         # eccentricity (nearly circular)
+        'i': 157.3,          # inclination to Neptune's equator in degrees (retrograde)
+        'omega': 0.0,       # argument of perihelion in degrees
+        'Omega': 178.1       # longitude of ascending node in degrees
+    },
 
     # Pluto's Moons
-    #'Charon': {
+    'Charon': {             # 901
 #        'a': 19600,         # semi-major axis in km
-    #    'a': 0.000127,         # semi-major axis in AU
+        'a': 0.000127,         # semi-major axis in AU
 #        'a_parent': 16.4,      # semi-major axis in Pluto radii
-    #    'e': 0.0002,           # eccentricity (nearly circular)
-    #    'i': 0.001,            # inclination to Pluto's equator in degrees
-    #    'omega': 0.0,      # argument of perihelion in degrees
-    #    'Omega': 0.0       # longitude of ascending node in degrees
-    #},
+        'e': 0.0002,           # eccentricity (nearly circular)
+        'i': 0.001,            # inclination to Pluto's equator in degrees
+        'omega': 0.0,      # argument of perihelion in degrees
+        'Omega': 0.0       # longitude of ascending node in degrees
+    },
 
-    #'Nix': {
+    'Nix': {                # 902
 #        'a': 49300,         # semi-major axis in km
-    #    'a': 0.000242,         # semi-major axis in AU
+        'a': 0.000242,         # semi-major axis in AU
 #        'a_parent': 31.3,      # semi-major axis in Pluto radii
-    #    'e': 0.015,           # eccentricity
-    #    'i': 0.0,            # inclination to Pluto's equator in degrees
-    #    'omega': 31.4,      # argument of perihelion in degrees
-    #    'Omega': 0.0         # longitude of ascending node in degrees
-    #},
+        'e': 0.015,           # eccentricity
+        'i': 0.0,            # inclination to Pluto's equator in degrees
+        'omega': 31.4,      # argument of perihelion in degrees
+        'Omega': 0.0         # longitude of ascending node in degrees
+    },
 
-    #'Hydra': {
+    'Hydra': {              # 903; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
 #        'a': 65200,         # semi-major axis in km
-    #    'a': 0.000650,         # semi-major axis in AU
+        'a': 0.0004358,         # semi-major axis in AU; 0.00043583
 #        'a_parent': 83.9,     # semi-major axis in Pluto radii
-    #    'e': 0.009,           # eccentricity
-    #    'i': 0.3,            # inclination to Pluto's equator in degrees
-    #    'omega': 139.3,      # argument of perihelion in degrees
-    #    'Omega': 114.3       # longitude of ascending node in degrees
-    #},
+        'e': 0.009,           # eccentricity
+        'i': 0.3,            # inclination to Pluto's equator in degrees
+        'omega': 139.3,      # argument of perihelion in degrees
+        'Omega': 114.3       # longitude of ascending node in degrees
+    },
 
     # Eris's Moon
     #'Dysnomia': {
@@ -628,47 +637,14 @@ parent_planets = {
     'Eris': ['Dysnomia']
 }
 
-"""
-parent_planets = {
-    'Moon': 'Earth',
-    'Phobos': 'Mars',
-    'Deimos': 'Mars',
-    'Io': 'Jupiter',
-    'Europa': 'Jupiter',
-    'Ganymede': 'Jupiter',
-    'Callisto': 'Jupiter',
-    'Metis': 'Jupiter',
-    'Adrastea': 'Jupiter',
-    'Amalthea': 'Jupiter',
-    'Thebe': 'Jupiter',
-    'Titan': 'Saturn',
-    'Enceladus': 'Saturn',
-    'Rhea': 'Saturn',
-    'Dione': 'Saturn',
-    'Tethys': 'Saturn',
-    'Mimas': 'Saturn',
-    'Iapetus': 'Saturn',
-    'Phoebe': 'Saturn',
-    'Miranda': 'Uranus',
-    'Ariel': 'Uranus',
-    'Umbriel': 'Uranus',
-    'Titania': 'Uranus',
-    'Oberon': 'Uranus',
-    'Triton': 'Neptune',
-    'Charon': 'Pluto',
-    'Nix': 'Pluto',
-    'Hydra': 'Pluto',
-    'Dysnomia': 'Eris'
-}"
-"""
-
-planet_tilts = {
-    'Mars': 25.19,
-    'Jupiter': 3.13,
-    'Saturn': 26.73,
-    'Uranus': 97.77,
-    'Neptune': 28.32,
-    'Pluto': 122.53
+planet_tilts = {        # degrees
+    'Earth': 0,         # 23.44 tilt not needed,  the moon is already defined in the ecliptic frame; using tilt does not align
+    'Mars': 25.19,     # 25.19 tilt; neither the positive nor the negative tilt align
+    'Jupiter': 3.13,    # tilt aligns well
+    'Saturn': -26.73,   # 26.73 tilt; the positive tilt does not align; the negative is much better
+    'Uranus': 97.77,   # 97.77 tilt; does not align either positive or negative
+    'Neptune': 28.32,   # 28.32; does not align well, but the negative tilt is worse
+    'Pluto': -122.53    # 122.53; does not align well, the negative is better
 }
 
 # Dictionary of known orbital periods for validation
@@ -1061,7 +1037,7 @@ def color_map(planet):
         'Dione': 'rgb(255, 182, 193)',
         'Tethys': 'rgb(173, 216, 230)',
         'Mimas': 'rgb(105, 105, 105)',
-        'Phoebe': 'rgb(0, 0, 139)',
+        'Phoebe': 'cyan',
         'Uranus': 'rgb(173, 216, 230)',
         'Titania': 'rgb(221, 160, 221)',         
         'Oberon': 'rgb(128, 0, 128)',
@@ -1194,7 +1170,7 @@ INFO = {
 
         'Mars': 'Known as the Red Planet, fourth planet from the Sun.',
         'Phobos': 'The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
-        'Deimos': 'The smaller and more distant moon of Mars, with a stable orbit.',
+        'Deimos': 'The smaller and more distant moon of Mars, with a stable orbit. Retrogade orbit.',
         'Ceres': 'The largest object in the asteroid belt, considered a dwarf planet.',
         'Apophis': 'Near-Earth asteroid with a close approach in 2029.',
         'Vesta': 'Asteroid visited by NASA\'s Dawn mission.',
