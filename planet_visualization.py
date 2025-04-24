@@ -5,6 +5,7 @@ Functions for creating layered visualizations of solar system bodies (Sun, plane
 Each celestial body has individual shell components that can be toggled with selection variables.
 """
 
+import math
 import numpy as np
 import plotly.graph_objs as go
 from constants_new import (
@@ -52,12 +53,69 @@ EARTH_RADIUS_KM = 6371  # Mean radius in km
 EARTH_RADIUS_AU = EARTH_RADIUS_KM / 149597870.7  # Convert to AU
 
 # Mars Constants
-MARS_RADIUS_KM = 3390  # Mean radius in km
+MARS_RADIUS_KM = 3396.2  # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
 MARS_RADIUS_AU = MARS_RADIUS_KM / 149597870.7  # Convert to AU
 
 #####################################
 # Shared Utility Functions
 #####################################
+
+def create_hover_markers_for_planet(center_position, radius, color, name, description, num_points=40):
+    """
+    Creates clean hover markers for a planet with proper hover text formatting.
+    This is a helper function to ensure consistent hover behavior across static and animated views.
+    """
+    import math
+    import numpy as np
+    import plotly.graph_objects as go
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Fibonacci sphere algorithm for even distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=num_points)
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+    
+    # Create hover markers with clean hover text
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=3,
+            color=color,
+            opacity=0.5
+        ),
+        name=f"{name} (Info)",
+        text=[description] * len(x_hover),  # Array of identical description strings
+        hoverinfo='text',  # Use only the text for hover
+        showlegend=False
+    )
+    
+    return hover_trace
 
 # Revised create_celestial_body_visualization function for planet_visualization.py
 # This ensures consistent animation support for all celestial bodies
@@ -962,7 +1020,8 @@ def create_jupiter_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_cloud_layer_info = (
-            "2.9 MB PER FRAME FOR HTML.\n\n"
+            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
+            "4.6 MB PER FRAME FOR HTML.\n\n"
             "Jupiter's visible cloud layer consists of bands of different colors, caused by\n"
             "variations in chemical composition and atmospheric dynamics. The clouds are primarily\n"
             "composed of ammonia, ammonium hydrosulfide, and water. The famous Great Red Spot\n"
@@ -979,6 +1038,8 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
         'opacity': 1.0,
         'name': 'Cloud Layer',
         'description': (
+            "Jupiter Cloud Layer<br>" 
+            "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
             "Jupiter's visible cloud layer consists of bands of different colors, caused by<br>"
             "variations in chemical composition and atmospheric dynamics. The clouds are primarily<br>"
             "composed of ammonia, ammonium hydrosulfide, and water. The famous Great Red Spot<br>"
@@ -988,35 +1049,136 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
     }
     
     # Calculate radius in AU
-    layer_radius = layer_info['radius_fraction'] * JUPITER_RADIUS_AU
+    radius = layer_info['radius_fraction'] * JUPITER_RADIUS_AU
     
-    # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
     
     # Apply center position offset
-    center_x, center_y, center_z = center_position
     x = x + center_x
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=7,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Jupiter: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Jupiter: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
     
-    return traces
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Jupiter: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Jupiter: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(255, 255, 235)',  # Layer color, originally 'white'
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Jupiter: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
 
 jupiter_upper_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
@@ -1813,14 +1975,16 @@ earth_crust_info = (
 )
 
 def create_earth_crust_shell(center_position=(0, 0, 0)):
-    """Creates Earth's crust shell."""
+    """Creates Earth's crust shell using Mesh3d for better performance with improved hover."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 1.0,  # Crust: 98-100% of Earth's radius
+        'radius_fraction': 1.0,  # Crust: 100% of Mars's radius
         'color': 'rgb(70, 120, 160)',  # Bluish for oceans, brown for land
         'opacity': 1.0,
         'name': 'Crust',
         'description': (
+            "Earth Crust<br>" 
+            "(Note: toggle off the crust layer in the legend to better see the interior structure.)<br><br>"
             "Earth's crust is the thin, solid outer layer where humans live. It's divided into<br>"
             "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)<br>"
             "made primarily of granite. The crust contains all known life and the accessible portion<br>"
@@ -1829,35 +1993,136 @@ def create_earth_crust_shell(center_position=(0, 0, 0)):
     }
     
     # Calculate radius in AU
-    layer_radius = layer_info['radius_fraction'] * EARTH_RADIUS_AU
+    radius = layer_info['radius_fraction'] * EARTH_RADIUS_AU
     
-    # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
     
     # Apply center position offset
-    center_x, center_y, center_z = center_position
     x = x + center_x
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=7,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Earth: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Earth: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
     
-    return traces
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Earth: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Earth: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(70, 120, 160)',  # Layer color, originally 'white'
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Earth: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
 
 earth_atmosphere_info = (
             "The lower atmosphere includes the troposphere (0-12 km) where weather occurs, and\n"
@@ -2436,15 +2701,17 @@ mars_crust_info = (
 )
 
 def create_mars_crust_shell(center_position=(0, 0, 0)):
-    """Creates Mars's crust shell."""
+    """Creates Mars's crust shell using Mesh3d for better performance with improved hover."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 1.0,  # Crust: 98-100% of Mars's radius
+        'radius_fraction': 1.0,  # Crust: 100% of Mars's radius
         'color': 'rgb(188, 39, 50)',  # Mars red
         'opacity': 1.0,
         'name': 'Crust',
         'description': (
-            "Mars's crust: Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes <br>" 
+            "Mars Crust<br>" 
+            "(Note: toggle off the crust layer in the legend to better see the interior structure.)<br><br>" 
+            "Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes <br>" 
             "suggest that the Martian crust is significantly thicker than Earth's, perhaps averaging around 70 kilometers <br>" 
             "(43 miles) or even thicker in some areas.<br><br>" 
             "Today, Mars doesn't have a planet-wide magnetosphere generated by a global magnetic field. However, the Mars Global <br>" 
@@ -2455,35 +2722,136 @@ def create_mars_crust_shell(center_position=(0, 0, 0)):
     }
     
     # Calculate radius in AU
-    layer_radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
+    radius = layer_info['radius_fraction'] * MARS_RADIUS_AU
     
-    # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
     
     # Apply center position offset
-    center_x, center_y, center_z = center_position
     x = x + center_x
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=7,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Mars: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Mars: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
     
-    return traces
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Mars: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Mars: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(188, 39, 50)',  # Layer color, originally 'white'
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Mars: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
 
 mars_atmosphere_info = (
             "Atmosphere: Mars has a thin atmosphere, much less dense than Earth's. It's primarily composed of carbon dioxide \n" 

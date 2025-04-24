@@ -17,13 +17,13 @@ KM_PER_AU = 149597870.7   # Approximate kilometers per Astronomical Unit
 # Add to constants.py
 
 # International Astronomical Union (IAU) has defined nominal values for planetary radii, 2015.
-CENTER_BODY_RADII = {
+CENTER_BODY_RADII = {       # km
     'Sun': 696340,      # Solar radius
     'Mercury': 2440,
     'Venus': 6052,
     'Earth': 6371,
     'Moon': 1737,
-    'Mars': 3390,
+    'Mars': 3396.2,    # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
     'Jupiter': 71492,   # was 69911
     'Saturn': 58232,
     'Uranus': 25362,
@@ -1204,8 +1204,11 @@ INFO = {
         'Ryugu': 'Asteroid visited by the Japanese Hayabusa2 mission.',
         'Eros': 'Asteroid explored by NASA\'s NEAR Shoemaker spacecraft.',
         'Itokawa': 'Asteroid visited by the original Hayabusa mission.',
-        'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.\n\n'
-        '36.7 MB PER FRAME FOR ALL SHELLS AND MOONS IN HTML.',
+
+        'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.\n' 
+        'Jupiter was visited by the Juno spacecraft, entering orbit on July 5, 2016.\n\n'
+        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+
         'Metis': 'Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
         'Adrastea': 'Jupiter moon. Tiny moon orbiting near the outer edge of Jupiter\'s main ring, source of ring material.',
         'Amalthea': 'Jupiter moon. Oddly shaped red moon associated with the Amalthea Gossamer Ring.',
@@ -1570,34 +1573,41 @@ INFO = {
         'is a robotic space mission currently underway, aimed at exploring the planet Mars and searching for signs of ancient ' 
         'microbial life.\n'
         '* Objective: To investigate the habitability of Mars in the ancient past, search for evidence of past microbial life, collect ' 
-        'and store Martian rock and soil samples for future return to Earth, and test technologies for future human exploration of Mars.\n' 
+        '  and store Martian rock and soil samples for future return to Earth, and test technologies for future human exploration of Mars.\n' 
         '* Launch Date: July 30, 2020\n'
         '* Landing Date: February 18, 2021, at 20:55 UTC.\n'
         '* Perseverance\'s Journey: Perseverance, along with Ingenuity, was housed within a protective aeroshell during its journey ' 
-        'to Mars. This aeroshell helped protect the rover and helicopter during the high-speed entry into Mars\' atmosphere.\n' 
+        '  to Mars. This aeroshell helped protect the rover and helicopter during the high-speed entry into Mars\' atmosphere.\n' 
         '* Landing on Mars: During the landing process, the aeroshell separated, and Perseverance used a parachute and a "sky crane" ' 
-        'system to gently lower itself onto the Martian surface. The sky crane then detached and flew away to a safe distance before crashing.\n'
+        '  system to gently lower itself onto the Martian surface. The sky crane then detached and flew away to a safe distance before crashing.\n'
         '* Landing Site: Jezero Crater, a former lake basin believed to be a promising location for finding evidence of past life.\n'
         '* Landing elevation: Jezero Crater is located in a depression on Mars.\n' 
         '  * Its floor lies about 2,600 meters below the "Mars Areoid," which is a reference level similar to sea level on Earth.\n' 
-        '  * Subtract Jezero\'s elevation from Mars\' average radius: 3,389,500 meters - 2,600 meters = 3,386,900 meters.\n' 
-        '  * Convert to AU: Divide the distance to Jezero\'s center by the number of meters in 1 AU: 3,386,900 meters / 149,597,870,700 '
-        'meters/AU ≈ 0.00002264 AU. This is very close to the "Distance from center" value reported by Horizons in the plot ' 
-        '(0.00002267 AU) starting February 18, 21:00, which corresponds to the landing time of 20:55 UTC.\n'
+        '  * Note: The elevation values after landing shown (-4200m) differ from published scientific values for Jezero Crater (-2600m) due to \n' 
+        '    different Mars reference systems. JPL Horizons uses one elevation datum, while scientific publications often use the \n' 
+        '    Mars Orbiter Laser Altimeter (MOLA) reference areoid (3396.19 km). The rover is correctly positioned relative to Mars, but the \n' 
+        '    absolute elevation value has a systematic offset of approximately 1600m.\n' 
+        '  * Jezero Crater is a 45.0 km diameter crater located in the Syrtis Major quadrangle of Mars. It sits within the larger \n' 
+        '    Isidis Planitia region, where an ancient meteorite impact left behind a crater about 1,200 kilometers across. Nasa \n' 
+        '    Jezero Crater was once a lake several hundred feet deep. The landing site for Perseverance was carefully chosen after \n' 
+        '    examining more than 60 candidate locations, with Jezero being selected because of its ancient river delta which would \n' 
+        '    be a prime location to search for signs of past microbial life.\n' 
+        '  * According to the Mars geodetic parameters from MOLA (Mars Orbiter Laser Altimeter), the mean equatorial radius is \n' 
+        '    3,396,200 meters (with an uncertainty of 160 meters), while the mean radius (volumetric) is 3,389,508 meters.\n'
         '* "Orbit": The apparent "orbit" around Mars in the plot is just the Perseverance lander rotating with Mars on the surface.\n' 
         '* Rover: Perseverance, a six-wheeled, car-sized rover equipped with advanced scientific instruments.\n' 
         '* Helicopter: Ingenuity, a small, experimental helicopter that demonstrated the first powered flight on another planet. ' 
-        'Ingenuity\'s mission has recently ended due to damage sustained during a landing.\n' 
+        '  Ingenuity\'s mission has recently ended due to damage sustained during a landing.\n' 
         '* Search for past life: Perseverance is equipped with instruments designed to detect chemical and mineral biosignatures, ' 
-        'as well as examine the geological context of potential past life.\n' 
+        '  as well as examine the geological context of potential past life.\n' 
         '* Sample collection: The rover has a drill and sample caching system to collect and store samples of Martian rock and soil ' 
-        'for future return to Earth. These samples could provide invaluable insights into the history of Mars and the potential for ' 
-        'life beyond Earth.\n' 
+        '  for future return to Earth. These samples could provide invaluable insights into the history of Mars and the potential for ' 
+        '  life beyond Earth.\n' 
         '* Technology demonstration: Perseverance is testing technologies that could be used for future human exploration of Mars, ' 
-        'such as a system for producing oxygen from the Martian atmosphere.\n' 
+        '  such as a system for producing oxygen from the Martian atmosphere.\n' 
         '* Status: As of February 2025, Perseverance is still active on Mars, continuing its exploration of Jezero Crater and ' 
-        'collecting samples. The mission is expected to continue for several more years, and the collected samples are planned to ' 
-        'be returned to Earth in the 2030s through a joint mission with the European Space Agency.',
+        '  collecting samples. The mission is expected to continue for several more years, and the collected samples are planned to ' 
+        '  be returned to Earth in the 2030s through a joint mission with the European Space Agency.',
         
         'DART': 'The NASA DART mission to test asteroid deflection.\n* The DART mission ' 
         '(Double Asteroid Redirection Test) was a groundbreaking NASA project that made history in planetary defense! It was the ' 

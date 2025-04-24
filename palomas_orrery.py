@@ -111,7 +111,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: April 18, 2025")
+root.title("Paloma's Orrery -- Updated: April 23, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -1079,9 +1079,12 @@ objects = [
     'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
     'mission_info': 'The Parker Solar Probe mission is to study the outer corona of the Sun.'},
 
-    {'name': 'MarsRover', 'id': 'Perseverance', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', 
+    {'name': 'MarsRover', 'id': '-168', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', # Perseverance
     'is_mission': True, 'id_type': 'id', 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2026, 2, 19),    # end ephemeris
-    'mission_info': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter.', 
+    'mission_info': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. Note: The elevation values shown (-4200m) <br>' 
+    'differ from published scientific values for Jezero Crater (-2600m) due to different Mars reference systems. JPL <br>' 
+    'Horizons uses one elevation datum, while scientific publications often use the Mars Orbiter Laser Altimeter (MOLA) reference areoid. <br>' 
+    'The rover is correctly positioned relative to Mars, but the absolute elevation value has a systematic offset of approximately 1600m.', 
     'mission_url': 'https://mars.nasa.gov/mars2020/'},
 
     {'name': 'Lucy', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'is_mission': True, 
@@ -4046,14 +4049,15 @@ CreateToolTip(jupiter_io_plasma_torus_checkbutton, "634 KB PER FRAME FOR HTML.\n
 # Jupiter magnetosphere components
 jupiter_magnetosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Magnetosphere", variable=jupiter_magnetosphere_var)
 jupiter_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_magnetosphere_checkbutton, "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n"
+CreateToolTip(jupiter_magnetosphere_checkbutton, 
+              "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n"
               "407 KB PER FRAME FOR HTML.\n\n"
               "Jupiter's main magnetosphere structure that extends far into space.")
 
 # Jupiter hill_sphere shell
 jupiter_hill_sphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Hill Sphere", variable=jupiter_hill_sphere_var)
 jupiter_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_hill_sphere_checkbutton, jupiter_hill_sphere_info)
+CreateToolTip(jupiter_hill_sphere_checkbutton, jupiter_hill_sphere_info)              
 
 create_celestial_checkbutton("- Metis", metis_var)      # 1.79 Jupiter radii, 128,000 km
 create_celestial_checkbutton("- Adrastea", adrastea_var)  # 1.81 Jupiter radii, 129,000 km
