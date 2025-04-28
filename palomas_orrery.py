@@ -29,6 +29,23 @@ from planet_visualization import (
     create_planet_visualization,
     create_planet_shell_traces,
     create_sun_visualization,
+
+    mercury_inner_core_info,
+    mercury_outer_core_info,
+    mercury_mantle_info,
+    mercury_crust_info,
+    mercury_atmosphere_info,
+    mercury_magnetosphere_info,
+    mercury_hill_sphere_info,
+
+    venus_core_info,
+    venus_mantle_info,
+    venus_crust_info,
+    venus_atmosphere_info,
+    venus_upper_atmosphere_info,
+    venus_magnetosphere_info,
+    venus_hill_sphere_info,
+
     earth_inner_core_info,
     earth_outer_core_info,
     earth_lower_mantle_info,
@@ -38,6 +55,7 @@ from planet_visualization import (
     earth_upper_atmosphere_info,
     earth_magnetosphere_info,
     earth_hill_sphere_info,
+
     mars_inner_core_info,
     mars_outer_core_info,
     mars_mantle_info,
@@ -45,6 +63,7 @@ from planet_visualization import (
     mars_atmosphere_info,
     mars_upper_atmosphere_info,
     mars_hill_sphere_info,
+
     jupiter_core_info,
     jupiter_metallic_hydrogen_info,
     jupiter_molecular_hydrogen_info,
@@ -52,7 +71,16 @@ from planet_visualization import (
     jupiter_upper_atmosphere_info,
     jupiter_ring_system_info,
     jupiter_magnetosphere_info,
-    jupiter_hill_sphere_info
+    jupiter_hill_sphere_info,
+
+    saturn_core_info,
+    saturn_metallic_hydrogen_info,
+    saturn_molecular_hydrogen_info,
+    saturn_cloud_layer_info,
+    saturn_upper_atmosphere_info,
+    saturn_ring_system_info,
+    saturn_magnetosphere_info,
+    saturn_hill_sphere_info
 )
 
 from constants_new import (
@@ -421,11 +449,39 @@ sun_inner_oort_var = tk.IntVar(value=0)
 sun_outer_oort_var = tk.IntVar(value=0)
 sun_gravitational_var = tk.IntVar(value=0)
 
-mercury_var = tk.IntVar(value=1) # default
+mercury_var = tk.IntVar(value=0) # default
+# Mercury inner core shell
+mercury_inner_core_var = tk.IntVar(value=0)
+# mercury outer core shell
+mercury_outer_core_var = tk.IntVar(value=0)
+# mercury mantle shell
+mercury_mantle_var = tk.IntVar(value=0) 
+# mercury crust shell
+mercury_crust_var = tk.IntVar(value=0)
+# mercury atmosphere shell
+mercury_atmosphere_var = tk.IntVar(value=0)
+# mercury magnetosphere shell
+mercury_magnetosphere_var = tk.IntVar(value=0)
+# mercury hill sphere shell
+mercury_hill_sphere_var = tk.IntVar(value=0)
 
-venus_var = tk.IntVar(value=1) # default
+venus_var = tk.IntVar(value=0) # default
+# venus core shell
+venus_core_var = tk.IntVar(value=0)
+# venus mantle shell
+venus_mantle_var = tk.IntVar(value=0)
+# venus crust shell
+venus_crust_var = tk.IntVar(value=0)
+# venus atmosphere shell
+venus_atmosphere_var = tk.IntVar(value=0)
+# venus upper atmosphere shell
+venus_upper_atmosphere_var = tk.IntVar(value=0)
+# venus magnetosphere shell
+venus_magnetosphere_var = tk.IntVar(value=0)
+# venus hill sphere shell
+venus_hill_sphere_var = tk.IntVar(value=0)
 
-earth_var = tk.IntVar(value=1)  # Set Earth to 1 to preselect it by default
+earth_var = tk.IntVar(value=0)  # Set Earth to 1 to preselect it by default
 moon_var = tk.IntVar(value=0)  
 # near Earth asteroids
 pt5_var = tk.IntVar(value=0)
@@ -451,7 +507,7 @@ earth_magnetosphere_var = tk.IntVar(value=0)
 # Earth hill sphere shell
 earth_hill_sphere_var = tk.IntVar(value=0)
 
-mars_var = tk.IntVar(value=1)  # Set Mars to 1 to preselect it by default
+mars_var = tk.IntVar(value=0)  # Set Mars to 1 to preselect it by default
 # Mars' Moons
 phobos_var = tk.IntVar(value=0)
 deimos_var = tk.IntVar(value=0)
@@ -507,6 +563,40 @@ jupiter_radiation_belts_var = tk.IntVar(value=0)
 jupiter_hill_sphere_var = tk.IntVar(value=0)
 
 saturn_var = tk.IntVar(value=0)
+# Saturn's Major and Ring Moons
+pan_var = tk.IntVar(value=0)
+daphnis_var = tk.IntVar(value=0)
+prometheus_var = tk.IntVar(value=0)
+pandora_var = tk.IntVar(value=0)
+mimas_var = tk.IntVar(value=0)
+enceladus_var = tk.IntVar(value=0)
+tethys_var = tk.IntVar(value=0)
+dione_var = tk.IntVar(value=0)
+rhea_var = tk.IntVar(value=0)
+titan_var = tk.IntVar(value=0)
+hyperion_var = tk.IntVar(value=0)
+iapetus_var = tk.IntVar(value=0)
+phoebe_var = tk.IntVar(value=0)
+# saturn core shell
+saturn_core_var = tk.IntVar(value=0)
+# saturn metallic hydrogen shell
+saturn_metallic_hydrogen_var = tk.IntVar(value=0)
+# saturn molecular hydrogen shell
+saturn_molecular_hydrogen_var = tk.IntVar(value=0)
+# saturn cloud layer shell
+saturn_cloud_layer_var = tk.IntVar(value=0)
+# saturn upper atmosphere shell
+saturn_upper_atmosphere_var = tk.IntVar(value=0)
+# saturn ring system shell
+saturn_ring_system_var = tk.IntVar(value=0)
+# saturn magnetosphere shell
+saturn_magnetosphere_var = tk.IntVar(value=0)
+# saturn Enceladus torus shell
+saturn_enceladus_plasma_torus_var = tk.IntVar(value=0)
+# saturn Hill Sphere shell
+saturn_radiation_belts_var = tk.IntVar(value=0)
+# saturn hill_sphere shell
+saturn_hill_sphere_var = tk.IntVar(value=0)
 
 uranus_var = tk.IntVar(value=0)
 
@@ -642,15 +732,6 @@ ixion_var = tk.IntVar(value=0)
 
 # New Selection Variables for Major Moons
 
-# Saturn's Major Moons
-titan_var = tk.IntVar(value=0)
-enceladus_var = tk.IntVar(value=0)
-rhea_var = tk.IntVar(value=0)
-dione_var = tk.IntVar(value=0)
-tethys_var = tk.IntVar(value=0)
-mimas_var = tk.IntVar(value=0)
-phoebe_var = tk.IntVar(value=0)
-
 # Uranus's Major Moons
 oberon_var = tk.IntVar(value=0)
 umbriel_var = tk.IntVar(value=0)
@@ -686,6 +767,26 @@ sun_shell_vars = {
 
 # Create mapping dictionaries for planet shell variables:
 
+mercury_shell_vars = {
+    'mercury_inner_core': mercury_inner_core_var,
+    'mercury_outer_core': mercury_outer_core_var,
+    'mercury_mantle': mercury_mantle_var,
+    'mercury_crust': mercury_crust_var,
+    'mercury_atmosphere': mercury_atmosphere_var,
+    'mercury_magnetosphere': mercury_magnetosphere_var,
+    'mercury_hill_sphere': mercury_hill_sphere_var
+}
+
+venus_shell_vars = {
+    'venus_core': venus_core_var,
+    'venus_mantle': venus_mantle_var,
+    'venus_crust': venus_crust_var,
+    'venus_atmosphere': venus_atmosphere_var,
+    'venus_upper_atmosphere': venus_upper_atmosphere_var,
+    'venus_magnetosphere': venus_magnetosphere_var,
+    'venus_hill_sphere': venus_hill_sphere_var
+}
+
 earth_shell_vars = {
     'earth_inner_core': earth_inner_core_var,
     'earth_outer_core': earth_outer_core_var,
@@ -719,6 +820,19 @@ jupiter_shell_vars = {
     'jupiter_io_plasma_torus': jupiter_io_plasma_torus_var,
     'jupiter_magnetosphere': jupiter_magnetosphere_var,
     'jupiter_hill_sphere': jupiter_hill_sphere_var
+}
+
+saturn_shell_vars = {
+    'saturn_core': saturn_core_var,
+    'saturn_metallic_hydrogen': saturn_metallic_hydrogen_var,
+    'saturn_molecular_hydrogen': saturn_molecular_hydrogen_var,
+    'saturn_cloud_layer': saturn_cloud_layer_var,
+    'saturn_upper_atmosphere': saturn_upper_atmosphere_var,
+    'saturn_ring_system': saturn_ring_system_var,
+    'saturn_radiation_belts': saturn_radiation_belts_var,
+    'saturn_enceladus_plasma_torus': saturn_enceladus_plasma_torus_var,
+    'saturn_magnetosphere': saturn_magnetosphere_var,
+    'saturn_hill_sphere': saturn_hill_sphere_var
 }
 
 # Define the list of objects
@@ -1172,6 +1286,26 @@ objects = [
 
     # Saturn's Major Moons
 
+    {'name': 'Pan', 'id': '618', 'var': pan_var, 'color': color_map('Pan'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 0.58 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/pan/'},
+
+    {'name': 'Daphnis', 'id': '635', 'var': daphnis_var, 'color': color_map('Daphnis'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 0.58 Earth days. No Horizons ephemeris after 1-16-2018.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/daphnis/'},
+
+    {'name': 'Prometheus', 'id': '616', 'var': prometheus_var, 'color': color_map('Prometheus'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 0.61 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/prometheus/'},
+
+    {'name': 'Pandora', 'id': '617', 'var': pandora_var, 'color': color_map('Pandora'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 0.63 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/pandora/'},
+
     {'name': 'Mimas', 'id': '601', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Saturn orbital period: 0.94 Earth days.', 
@@ -1202,8 +1336,15 @@ objects = [
      'mission_info': 'Saturn orbital period: 15.95 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/titan/'},
 
-    # Hyperion 607
-    # Iapetus 608
+    {'name': 'Hyperion', 'id': '607', 'var': hyperion_var, 'color': color_map('Hyperion'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 21 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/hyperion/'},
+
+    {'name': 'Iapetus', 'id': '608', 'var': iapetus_var, 'color': color_map('Iapetus'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Saturn orbital period: 79.33 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/saturn/moons/iapetus/'},
 
     {'name': 'Phoebe', 'id': '609', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
@@ -2164,9 +2305,12 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
 # Define dictionary mapping all celestial bodies to their shell variable dictionaries
 body_shells_config = {
     'Sun': sun_shell_vars,
+    'Mercury': mercury_shell_vars,
+    'Venus': venus_shell_vars,
     'Earth': earth_shell_vars,
     'Mars': mars_shell_vars,
-    'Jupiter': jupiter_shell_vars
+    'Jupiter': jupiter_shell_vars,
+    'Saturn': saturn_shell_vars
     # Add more celestial bodies here as shell systems are developed
 }
 
@@ -2242,6 +2386,14 @@ def plot_objects():
 
             # Define planets with shell visualizations
             planets_with_shells = {
+                'Mercury': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': mercury_shell_vars
+                },
+                'Venus': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': venus_shell_vars
+                },
                 'Earth': {
                     'position': None,  # Will be populated during animation
                     'shell_vars': earth_shell_vars
@@ -2253,8 +2405,11 @@ def plot_objects():
                 'Jupiter': {
                     'position': None,  # Will be populated during animation
                     'shell_vars': jupiter_shell_vars
+                },
+                'Saturn': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': saturn_shell_vars
                 }
-
             }
 
             # Create date lists for each selected object
@@ -2586,9 +2741,12 @@ def plot_objects():
 
             # Define dictionary mapping planets to their shell variable dictionaries
             planet_shells_config = {
+                'Mercury': mercury_shell_vars,
+                'Venus': venus_shell_vars,
                 'Earth': earth_shell_vars,
                 'Mars': mars_shell_vars,
-                'Jupiter': jupiter_shell_vars
+                'Jupiter': jupiter_shell_vars,
+                'Saturn': saturn_shell_vars                
                 # Add more planets here as shell systems are developed
             }
 
@@ -2651,9 +2809,12 @@ def plot_objects():
 
             # Create dictionary of shell variables for each planet
             planet_shell_vars = {
+                'Mercury': mercury_shell_vars,
+                'Venus': venus_shell_vars,
                 'Earth': earth_shell_vars,
                 'Mars': mars_shell_vars,
-                'Jupiter': jupiter_shell_vars
+                'Jupiter': jupiter_shell_vars,
+                'Saturn': saturn_shell_vars                
             }
 
             for planet_name, planet_data in planets_with_shells.items():
@@ -3087,6 +3248,14 @@ def animate_objects(step, label):
             
             # Define planets with shell visualizations
             planets_with_shells = {
+                'Mercury': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': mercury_shell_vars
+                },
+                'Venus': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': venus_shell_vars
+                },
                 'Earth': {
                     'positions': [],  # Will be populated during animation
                     'shell_vars': earth_shell_vars
@@ -3098,8 +3267,11 @@ def animate_objects(step, label):
                 'Jupiter': {
                     'positions': [],  # Will be populated during animation
                     'shell_vars': jupiter_shell_vars
+                },
+                'Saturn': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': saturn_shell_vars
                 }
-
             }
             
             # Initialize dates_lists dictionary
@@ -3168,9 +3340,12 @@ def animate_objects(step, label):
 
             # Define dictionary mapping planets to their shell variable dictionaries
             planet_shells_config = {
+                'Mercury': mercury_shell_vars,
+                'Venus': venus_shell_vars,
                 'Earth': earth_shell_vars,
                 'Mars': mars_shell_vars,
-                'Jupiter': jupiter_shell_vars
+                'Jupiter': jupiter_shell_vars,
+                'Saturn': saturn_shell_vars,                
                 # Add more planets here as shell systems are developed
             }
 
@@ -3906,7 +4081,70 @@ CreateToolTip(sun_gravitational_checkbutton, gravitational_influence_info)
 
 # inner planets
 create_celestial_checkbutton("Mercury", mercury_var)
+# Create a Frame specifically for the mercury shell options (indented)
+mercury_shell_options_frame = tk.Frame(celestial_frame)
+mercury_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+# mercury inner core shell
+mercury_inner_core_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Inner Core", variable=mercury_inner_core_var)
+mercury_inner_core_checkbutton.pack(anchor='w')
+CreateToolTip(mercury_inner_core_checkbutton, mercury_inner_core_info)
+# mercury outer core shell
+mercury_outer_core_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Outer Core", variable=mercury_outer_core_var)
+mercury_outer_core_checkbutton.pack(anchor='w')
+CreateToolTip(mercury_outer_core_checkbutton, mercury_outer_core_info)
+# mercury lower mantle shell
+mercury_mantle_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Mantle", variable=mercury_mantle_var)
+mercury_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(mercury_mantle_checkbutton, mercury_mantle_info)
+# mercury crust shell
+mercury_crust_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Crust", variable=mercury_crust_var)
+mercury_crust_checkbutton.pack(anchor='w')
+CreateToolTip(mercury_crust_checkbutton, mercury_crust_info)
+# mercury atmosphere shell
+mercury_atmosphere_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Exosphere", variable=mercury_atmosphere_var)
+mercury_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(mercury_atmosphere_checkbutton, mercury_atmosphere_info)
+# mercury magnetosphere shell
+mercury_magnetosphere_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Magnetosphere", variable=mercury_magnetosphere_var)
+mercury_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(mercury_magnetosphere_checkbutton, mercury_magnetosphere_info)
+# mercury hill sphere shell
+mercury_hill_sphere_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Hill Sphere", variable=mercury_hill_sphere_var)
+mercury_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(mercury_hill_sphere_checkbutton, mercury_hill_sphere_info)
+
 create_celestial_checkbutton("Venus", venus_var)
+# Create a Frame specifically for the venus shell options (indented)
+venus_shell_options_frame = tk.Frame(celestial_frame)
+venus_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+# venus core shell
+venus_core_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Core", variable=venus_core_var)
+venus_core_checkbutton.pack(anchor='w')
+CreateToolTip(venus_core_checkbutton, venus_core_info)
+# venus mantle shell
+venus_mantle_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Mantle", variable=venus_mantle_var)
+venus_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(venus_mantle_checkbutton, venus_mantle_info)
+# venus crust shell
+venus_crust_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Crust", variable=venus_crust_var)
+venus_crust_checkbutton.pack(anchor='w')
+CreateToolTip(venus_crust_checkbutton, venus_crust_info)
+# venus atmosphere shell
+venus_atmosphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Atmosphere", variable=venus_atmosphere_var)
+venus_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(venus_atmosphere_checkbutton, venus_atmosphere_info)
+# venus upper atmosphere shell
+venus_upper_atmosphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Upper Atmosphere", variable=venus_upper_atmosphere_var)
+venus_upper_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(venus_upper_atmosphere_checkbutton, venus_upper_atmosphere_info)
+# venus magnetosphere shell
+venus_magnetosphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Magnetosphere", variable=venus_magnetosphere_var)
+venus_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(venus_magnetosphere_checkbutton, venus_magnetosphere_info)
+# venus hill sphere shell
+venus_hill_sphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Hill Sphere", variable=venus_hill_sphere_var)
+venus_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(venus_hill_sphere_checkbutton, venus_hill_sphere_info)
 
 create_celestial_checkbutton("Earth", earth_var)
 # Create a Frame specifically for the Earth shell options (indented)
@@ -4069,12 +4307,75 @@ create_celestial_checkbutton("- Ganymede", ganymede_var)  # 14.99 Jupiter radii,
 create_celestial_checkbutton("- Callisto", callisto_var)  # 26.37 Jupiter radii, 1,883,000 km
 
 create_celestial_checkbutton("Saturn", saturn_var)
+# Create a Frame specifically for the saturn shell options (indented)
+saturn_shell_options_frame = tk.Frame(celestial_frame)
+saturn_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
+# saturn core shell
+saturn_core_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Core", variable=saturn_core_var)
+saturn_core_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_core_checkbutton, saturn_core_info)
+
+# saturn metallic hydrogen shell
+saturn_metallic_hydrogen_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Metallic Hydrogen Layer", variable=saturn_metallic_hydrogen_var)
+saturn_metallic_hydrogen_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_metallic_hydrogen_checkbutton, saturn_metallic_hydrogen_info)
+
+# saturn molecular hydrogen shell
+saturn_molecular_hydrogen_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Molecular Hydrogen Layer", variable=saturn_molecular_hydrogen_var)
+saturn_molecular_hydrogen_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_molecular_hydrogen_checkbutton, saturn_molecular_hydrogen_info)
+
+# saturn cloud layer shell
+saturn_cloud_layer_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Cloud Layer", variable=saturn_cloud_layer_var)
+saturn_cloud_layer_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_cloud_layer_checkbutton, saturn_cloud_layer_info)
+
+# saturn upper atmosphere shell
+saturn_upper_atmosphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Upper Atmosphere", variable=saturn_upper_atmosphere_var)
+saturn_upper_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_upper_atmosphere_checkbutton, saturn_upper_atmosphere_info)
+
+# saturn ring system shell
+saturn_ring_system_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Ring System", variable=saturn_ring_system_var)
+saturn_ring_system_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_ring_system_checkbutton, saturn_ring_system_info)
+
+saturn_radiation_belts_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Radiation Belts", variable=saturn_radiation_belts_var)
+saturn_radiation_belts_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_radiation_belts_checkbutton, "560 KB PER FRAME FOR HTML.\n\n"
+              "Zones of trapped high-energy particles in saturn's magnetosphere")
+
+saturn_enceladus_plasma_torus_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Enceladus Plasma Torus", variable=saturn_enceladus_plasma_torus_var)
+saturn_enceladus_plasma_torus_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_enceladus_plasma_torus_checkbutton, "634 KB PER FRAME FOR HTML.\n\n"
+              "Donut-shaped region of charged particles from saturn's moon Io")
+
+# saturn magnetosphere components
+saturn_magnetosphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Magnetosphere", variable=saturn_magnetosphere_var)
+saturn_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_magnetosphere_checkbutton, 
+              "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n"
+              "407 KB PER FRAME FOR HTML.\n\n"
+              "saturn's main magnetosphere structure that extends far into space.")
+
+# saturn hill_sphere shell
+saturn_hill_sphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Hill Sphere", variable=saturn_hill_sphere_var)
+saturn_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(saturn_hill_sphere_checkbutton, saturn_hill_sphere_info) 
+
+create_celestial_checkbutton("- Pan", pan_var)
+create_celestial_checkbutton("- Daphnis", daphnis_var)
+create_celestial_checkbutton("- Prometheus", prometheus_var)
+create_celestial_checkbutton("- Pandora", pandora_var)
 create_celestial_checkbutton("- Mimas", mimas_var)
 create_celestial_checkbutton("- Enceladus", enceladus_var)
 create_celestial_checkbutton("- Tethys", tethys_var)
 create_celestial_checkbutton("- Dione", dione_var)
 create_celestial_checkbutton("- Rhea", rhea_var)
 create_celestial_checkbutton("- Titan", titan_var)
+create_celestial_checkbutton("- Hyperion", hyperion_var)
+create_celestial_checkbutton("- Iapetus", iapetus_var)
 create_celestial_checkbutton("- Phoebe", phoebe_var)
 
 create_celestial_checkbutton("Uranus", uranus_var)
@@ -4092,22 +4393,22 @@ create_celestial_checkbutton("- Charon", charon_var)
 create_celestial_checkbutton("- Nix", nix_var)
 create_celestial_checkbutton("- Hydra", hydra_var)
 
-create_celestial_checkbutton("Planet 9 (Hypothetical)", planet9_var)
-
 # Kuiper Belt Objects
 create_celestial_checkbutton("2004 GV9", gv9_var)
 create_celestial_checkbutton("2002 MS4", ms4_var)
 create_celestial_checkbutton("Arrokoth", arrokoth_var)
-create_celestial_checkbutton("Gonggong", gonggong_var)
-create_celestial_checkbutton("Eris", eris_var)
-create_celestial_checkbutton("- Dysnomia", dysnomia_var)
 create_celestial_checkbutton("Haumea", haumea_var)
 create_celestial_checkbutton("Ixion", ixion_var)
 create_celestial_checkbutton("Makemake", makemake_var)
 create_celestial_checkbutton("Orcus", orcus_var)
 create_celestial_checkbutton("Quaoar", quaoar_var)
-create_celestial_checkbutton("Sedna", sedna_var)
 create_celestial_checkbutton("Varuna", varuna_var)
+
+create_celestial_checkbutton("Gonggong", gonggong_var)
+create_celestial_checkbutton("Eris", eris_var)
+create_celestial_checkbutton("- Dysnomia", dysnomia_var)
+create_celestial_checkbutton("Planet 9 (Hypothetical)", planet9_var)
+create_celestial_checkbutton("Sedna", sedna_var)
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
@@ -4230,7 +4531,8 @@ manual_scale_radio.pack(anchor='w')
 CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
 "* Mars: 1.52 AU\n* Asteroid Belt: between 2.2 and 3.2 AU\n* Jupiter: 5.2 AU\n* Jupiter System: 0.5 AU\n* Saturn: 9.5 AU\n* Uranus: 19.2 AU\n* Neptune: 30.1 AU\n"
 "* Dwarf Planet Pluto: between 30 and 49 AU.\n* Kuiper Belt: from roughly 30 to 50 AU\n* Dwarf Planet Sedna: currently at about 83.3 AU, ranging from 74 AU to 936 AU, " 
-"with a mean distance of 526 AU\n* Solar Wind Termination Shock: 94 AU\n* Heliopause (edge of the Sun's influence): 126 AU\n* Voyager 1: currently over 165 AU\n"
+"with a mean distance of 526 AU\n* Solar Wind Termination Shock: 94 AU\n* Heliopause (edge of the Sun's influence): 126 AU\n* Voyager 1: currently over 165 AU\n" 
+"* Hypothetical \"Planet Nine\" orbit: 600 AU\n"
 "* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n* Extent of Solar Gravitational Influence (Hill Sphere): 126,000 AU\n* Proximate Centauri: 268,585 AU")
 
 custom_scale_entry = tk.Entry(scale_frame, width=10)

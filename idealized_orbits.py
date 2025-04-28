@@ -419,7 +419,48 @@ planetary_params = {
         'Omega': 237.33        # longitude of ascending node in degrees
     },
 
-    # Saturn's Major Moons
+    # Saturn's Major and Ring Moons
+
+    'Pan': {              # Revised: Oct 03, 2018; 618
+#        'a': 133584,         # semi-major axis in km 133.584(10^3)
+        'a': 0.0008930,         # semi-major axis in AU
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0,           # eccentricity not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Daphnis': {              # Revised: Aug 08, 2019; 635
+#        'a': 136500,         # semi-major axis in km 136500 in https://ssd.jpl.nasa.gov/sats/elem/
+        'a': 0.0009124,         # semi-major axis in AU
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0,           # eccentricity not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Prometheus': {              # Revised: Oct 03, 2018; 616
+#        'a': 139350,         # semi-major axis in km 139.35 (10^3) in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.0009315,         # semi-major axis in AU; Orbital period 0.612986 d
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0.0024,           # eccentricity in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 341.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Pandora': {              # Revised: Oct 03, 2018; 617
+#        'a': 141700,         # semi-major axis in km 141.70 (10^3) in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.0009472,         # semi-major axis in AU; Orbital period 0.628804 d
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0.0042,           # eccentricity in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 217.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
     'Mimas': {              # revised 1-26-2022; 601
 #        'a': 185540,         # semi-major axis in km
         'a': 0.001242,         # semi-major axis in AU
@@ -478,6 +519,26 @@ planetary_params = {
         'i': 0.306,            # inclination to Saturn's equator in degrees
         'omega': 78.3,      # argument of perihelion in degrees
         'Omega': 78.6        # longitude of ascending node in degrees
+    },
+
+    'Hyperion': {              # 607; Revised: Jan 26, 2022; Orbital period 21.28 d
+#        'a': 1500933,         # semi-major axis in km; 1500.933(10^3); https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.010033,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Saturn radii
+        'e': 0.0232,           # eccentricity; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 0.615,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 214.0,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 87.1        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Iapetus': {              # 608; Revised: Jan 26, 2022; Orbital period 79.33 d
+#        'a': 3560840,         # semi-major axis in km; 3560.84 (10^3); https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.02380,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Saturn radii
+        'e': 0.0283,           # eccentricity; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 7.489,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 254.5,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 86.5        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
     },
 
     'Phoebe': {             # 609
@@ -600,7 +661,8 @@ parent_planets = {
     'Earth': ['Moon'],
     'Mars': ['Phobos', 'Deimos'],
     'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
-    'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe'],
+    'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe', 'Pan', 'Daphnis', 'Prometheus',
+               'Pandora', 'Hyperion'],
     'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon'],
     'Neptune': ['Triton'],
     'Pluto': ['Charon', 'Nix', 'Hydra'],

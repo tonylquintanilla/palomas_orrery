@@ -449,7 +449,48 @@ planetary_params = {
         'Omega': 237.33        # longitude of ascending node in degrees
     },
 
-    # Saturn's Major Moons
+    # Saturn's Major and Ring Moons
+
+    'Pan': {              # Revised: Oct 03, 2018; 618
+#        'a': 133584,         # semi-major axis in km 133.584(10^3)
+        'a': 0.0008930,         # semi-major axis in AU
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0,           # eccentricity not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Daphnis': {              # Revised: Aug 08, 2019; 635
+#        'a': 136500,         # semi-major axis in km 136500 in https://ssd.jpl.nasa.gov/sats/elem/
+        'a': 0.0009124,         # semi-major axis in AU
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0,           # eccentricity not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Prometheus': {              # Revised: Oct 03, 2018; 616
+#        'a': 139350,         # semi-major axis in km 139.35 (10^3) in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.0009315,         # semi-major axis in AU; Orbital period 0.612986 d
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0.0024,           # eccentricity in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 341.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Pandora': {              # Revised: Oct 03, 2018; 617
+#        'a': 141700,         # semi-major axis in km 141.70 (10^3) in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.0009472,         # semi-major axis in AU; Orbital period 0.628804 d
+#        'a_parent': ,      # semi-major axis in Saturn radii
+        'e': 0.0042,           # eccentricity in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 217.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
     'Mimas': {              # revised 1-26-2022; 601
 #        'a': 185540,         # semi-major axis in km
         'a': 0.001242,         # semi-major axis in AU
@@ -508,6 +549,26 @@ planetary_params = {
         'i': 0.306,            # inclination to Saturn's equator in degrees
         'omega': 78.3,      # argument of perihelion in degrees
         'Omega': 78.6        # longitude of ascending node in degrees
+    },
+
+    'Hyperion': {              # 607; Revised: Jan 26, 2022; Orbital period 21.28 d
+#        'a': 1500933,         # semi-major axis in km; 1500.933(10^3); https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.010033,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Saturn radii
+        'e': 0.0232,           # eccentricity; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 0.615,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 214.0,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 87.1        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+    },
+
+    'Iapetus': {              # 608; Revised: Jan 26, 2022; Orbital period 79.33 d
+#        'a': 3560840,         # semi-major axis in km; 3560.84 (10^3); https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'a': 0.02380,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Saturn radii
+        'e': 0.0283,           # eccentricity; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'i': 7.489,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
+        'omega': 254.5,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+        'Omega': 86.5        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
     },
 
     'Phoebe': {             # 609
@@ -630,7 +691,8 @@ parent_planets = {
     'Earth': ['Moon'],
     'Mars': ['Phobos', 'Deimos'],
     'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
-    'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe'],
+    'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe', 'Pan', 'Daphnis', 'Prometheus',
+               'Pandora', 'Hyperion'],
     'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon'],
     'Neptune': ['Triton'],
     'Pluto': ['Charon', 'Nix', 'Hydra'],
@@ -677,6 +739,12 @@ KNOWN_ORBITAL_PERIODS = {
     'Rhea': 4.52,       # 4.52 days
     'Dione': 2.74,      # 2.74 days (65.76 hours)
     'Tethys': 1.89,     # 1.89 days (45.36 hours)
+    'Pan': 0.575051,        # https://ssd.jpl.nasa.gov/sats/elem/ and following
+    'Daphnis': 0.594080,
+    'Prometheus': 0.615878,
+    'Pandora': 0.631369,
+    'Hyperion': 21.276658,
+    'Iapetus': 79.331002,
     'Mimas': 0.94,      # 0.94 days (22.56 hours)
     'Phoebe': 550.56,   # 550.56 days (1.51 years)
     'Miranda': 1.41,    # 1.41 days (33.84 hours)
@@ -1037,6 +1105,13 @@ def color_map(planet):
         'Dione': 'rgb(255, 182, 193)',
         'Tethys': 'rgb(173, 216, 230)',
         'Mimas': 'rgb(105, 105, 105)',
+        'Pan': 'rgb(180, 180, 180)',            # (Light Gray)
+        'Daphnis': 'rgb(190, 190, 190)',        # (Slightly lighter gray)
+        'Prometheus': 'rgb(170, 170, 170)',     # (Medium Gray)
+        'Pandora': 'rgb(185, 185, 185)',        # (Light-Medium Gray)
+        'Hyperion': 'rgb(160, 100, 80)',        # (Dark reddish-brown)
+        'Iapetus': 'rgb(220, 220, 220)',        # Trailing Hemisphere: (220, 220, 220) (Light Gray/Whitish); 
+                                                # Leading Hemisphere (Cassini Regio): (50, 50, 50) (Very dark gray/almost black) 
         'Phoebe': 'cyan',
         'Uranus': 'rgb(173, 216, 230)',
         'Titania': 'rgb(221, 160, 221)',         
@@ -1119,8 +1194,9 @@ INFO = {
 # Celestial objects
         'Sun': 'The star at the center of our solar system. To display structure and atmosphere select "Solar Shells".',
         'Solar Shells': 'Solar structure and atmosphere, Oort cloud, and gravitational reach.',
-        'Mercury': 'The smallest planet and closest to the Sun.',
-        'Venus': 'Second planet from the Sun, known for its thick atmosphere.',
+        'Mercury': 'The smallest planet and closest to the Sun.\n* Visualize shells at 0.002 AU.\n* Missions: Mariner, Messenger, BepiColombo',
+        'Venus': 'Second planet from the Sun, known for its thick atmosphere.\n* Visualize shells at 0.01 AU.\n' 
+        '* Missions: Pioneer Venus Orbiter, VERITAS, EnVision, Solar Orbiter',
         'Earth': 'Our home planet, the third from the Sun.',
 
         'Moon': 'Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145° to the ecliptic plane, ' 
@@ -1224,6 +1300,26 @@ INFO = {
         'Dione': 'Saturn moon. Features wispy terrains and numerous craters.',
         'Tethys': 'Saturn moon. Notable for its large Ithaca Chasma canyon.',
         'Mimas': 'Saturn moon. Known for the large Herschel Crater, resembling the Death Star.',
+
+        'Pan': 'The innermost known moon of Saturn. It orbits within the Encke Gap of the A Ring and is responsible for keeping \n' 
+        'that gap relatively clear. It has a distinctive equatorial ridge, giving it a flattened, ravioli-like appearance.',
+
+        'Daphnis': 'A small moon that orbits within the Keeler Gap, a narrow gap in the outer part of Saturn\'s A Ring. Its \n' 
+        'gravitational influence creates waves in the edges of the gap.', 
+
+        'Prometheus': 'An irregularly shaped inner moon that acts as a shepherd moon for the inner edge of Saturn\'s F Ring. \n' 
+        'Its slightly eccentric orbit leads to complex interactions with the ring material, creating kinks and streamers.',
+
+        'Pandora': 'Another irregularly shaped inner moon and the outer shepherd moon of Saturn\'s F Ring. Along with Prometheus, \n' 
+        'it helps to confine the F Ring into a narrow band.',
+
+        'Hyperion': 'A mid-sized moon with a highly irregular shape and a chaotic rotation. Its surface is dark and reddish, \n' 
+        'possibly due to hydrocarbon deposits, and it has a very porous, sponge-like appearance with many deep craters.',
+
+        'Iapetus': 'A unique moon with a striking two-toned surface. Its leading hemisphere (Cassini Regio) is very dark, while \n' 
+        'its trailing hemisphere is bright white, likely due to the deposition of icy material. It also has a mysterious equatorial \n' 
+        'ridge that spans a significant portion of its circumference.',
+    
         'Phoebe': 'Saturn moon. An irregular moon with a retrograde orbit around Saturn.',
         'Uranus': 'The ice giant with a unique tilt, orbits the Sun on its side.',
         'Titania': 'Uranus moon. The largest moon of Uranus, with a mix of heavily cratered and relatively younger regions.',    
