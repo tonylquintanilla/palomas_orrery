@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import re
 import plotly.graph_objects as go
-from constants import (
+from constants_new import (
     object_type_mapping, class_mapping, hover_text_sun, stellar_class_labels
 )
 import plotly.graph_objects as go
@@ -384,7 +384,7 @@ def create_hr_diagram(combined_df, counts_dict, mag_limit=None, max_light_years=
         margin=dict(t=125, b=155),
     )
 
-    # Add the labels (if stellar_class_labels is defined in constants)
+    # Add the labels (if stellar_class_labels is defined in constants_new)
     for label in stellar_class_labels:
         fig.add_annotation(
             x=label['x'],

@@ -47,28 +47,48 @@ GRAVITATIONAL_INFLUENCE_AU = 126000  # Sun's gravitational influence in AU
 KM_PER_AU = 149597870.7  # Conversion factor from km to AU
 
 # Mercury Constants
-MERCURY_RADIUS_KM = 2440  # Mean radius in km
-MERCURY_RADIUS_AU = MERCURY_RADIUS_KM / 149597870.7  # Convert to AU
+MERCURY_RADIUS_KM = CENTER_BODY_RADII['Mercury']        
+MERCURY_RADIUS_AU = MERCURY_RADIUS_KM / KM_PER_AU
 
 # Venus Constants
-VENUS_RADIUS_KM = 6052  # Mean radius in km
-VENUS_RADIUS_AU = VENUS_RADIUS_KM / 149597870.7  # Convert to AU
+VENUS_RADIUS_KM = CENTER_BODY_RADII['Venus']
+VENUS_RADIUS_AU = VENUS_RADIUS_KM / KM_PER_AU
 
 # Earth Constants
-EARTH_RADIUS_KM = 6371  # Mean radius in km
-EARTH_RADIUS_AU = EARTH_RADIUS_KM / 149597870.7  # Convert to AU
+EARTH_RADIUS_KM = CENTER_BODY_RADII['Earth']
+EARTH_RADIUS_AU = EARTH_RADIUS_KM / KM_PER_AU
 
 # Mars Constants
-MARS_RADIUS_KM = 3396.2  # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
-MARS_RADIUS_AU = MARS_RADIUS_KM / 149597870.7  # Convert to AU
+MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']  # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
+MARS_RADIUS_AU = MARS_RADIUS_KM / KM_PER_AU  # Convert to AU
 
 # Jupiter Constants
-JUPITER_RADIUS_KM = 71492  # Equatorial radius in km
-JUPITER_RADIUS_AU = JUPITER_RADIUS_KM / 149597870.7  # Convert to AU
+JUPITER_RADIUS_KM = CENTER_BODY_RADII['Jupiter']  # Equatorial radius in km
+JUPITER_RADIUS_AU = JUPITER_RADIUS_KM / KM_PER_AU  # Convert to AU
 
 # Saturn Constants
-SATURN_RADIUS_KM = 58232  # Equatorial radius in km
-SATURN_RADIUS_AU = SATURN_RADIUS_KM / 149597870.7  # Convert to AU
+SATURN_RADIUS_KM = CENTER_BODY_RADII['Saturn']  # Equatorial radius in km
+SATURN_RADIUS_AU = SATURN_RADIUS_KM / KM_PER_AU  # Convert to AU
+
+# Uranus Constants
+URANUS_RADIUS_KM = CENTER_BODY_RADII['Uranus']  # Equatorial radius in km
+URANUS_RADIUS_AU = URANUS_RADIUS_KM / KM_PER_AU  # Convert to AU
+
+# Neptune Constants
+NEPTUNE_RADIUS_KM = CENTER_BODY_RADII['Neptune']  # Equatorial radius in km
+NEPTUNE_RADIUS_AU = NEPTUNE_RADIUS_KM / KM_PER_AU  # Convert to AU
+
+# Pluto Constants
+PLUTO_RADIUS_KM = CENTER_BODY_RADII['Pluto']  # Equatorial radius in km
+PLUTO_RADIUS_AU = PLUTO_RADIUS_KM / KM_PER_AU  # Convert to AU
+
+# Eris/Dysnomia Constants
+ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris/Dysnomia']  # Equatorial radius in km
+ERIS_RADIUS_AU = ERIS_RADIUS_KM / KM_PER_AU  # Convert to AU
+
+# Planet 9 Constants
+PLANET9_RADIUS_KM = CENTER_BODY_RADII['Planet 9']  # Equatorial radius in km
+PLANET9_RADIUS_AU = PLANET9_RADIUS_KM / KM_PER_AU  # Convert to AU
 
 #####################################
 # Shared Utility Functions
@@ -180,6 +200,60 @@ def create_hover_markers_for_planet(center_position, radius, color, name, descri
     
     return hover_trace
 
+def create_magnetosphere_shape(params):
+    """
+    Creates points for a magnetosphere with asymmetry, compressed on sunward side
+    and extended on the tail side.
+    
+    Parameters:
+        params (dict): Dictionary of shape parameters
+        
+    Returns:
+        tuple: (x, y, z) coordinates as lists
+    """
+    x_coords = []
+    y_coords = []
+    z_coords = []
+    
+    # Number of points to generate (reduced for memory efficiency)
+    n_phi = 20              # from 30 to 20
+    n_theta = 20            # from 30 to 20
+    n_tail_segments = 10    # from 20 to 10
+    
+    # 1. Generate sunward hemisphere (compressed, use an ellipsoid)
+    for i_phi in range(int(n_phi/2)):
+        phi = (i_phi / (n_phi-1)) * np.pi
+        
+        for i_theta in range(n_theta):
+            theta = (i_theta / (n_theta-1)) * 2 * np.pi
+            
+            # Use ellipsoidal shaping - compress in x direction (sunward)
+            x = -params['sunward_distance'] * np.cos(phi)  # Negative for sunward direction
+            rho = np.sin(phi)
+            y = params['equatorial_radius'] * rho * np.cos(theta)
+            z = params['polar_radius'] * rho * np.sin(theta)
+            
+            x_coords.append(x)
+            y_coords.append(y)
+            z_coords.append(z)
+    
+    # 2. Generate magnetotail (anti-sunward direction, expands outward)
+    for i in range(n_tail_segments + 1):
+        fraction = i / n_tail_segments
+        tail_x = fraction * params['tail_length']  # Positive for tail direction
+        tail_radius = params['tail_base_radius'] + (params['tail_end_radius'] - params['tail_base_radius']) * fraction
+        
+        for i_theta in range(n_theta):
+            theta = (i_theta / (n_theta-1)) * 2 * np.pi
+            y = tail_radius * np.cos(theta)
+            z = tail_radius * np.sin(theta)
+            
+            x_coords.append(tail_x)
+            y_coords.append(y)
+            z_coords.append(z)
+    
+    return x_coords, y_coords, z_coords
+
 # Revised create_celestial_body_visualization function for planet_visualization.py
 # This ensures consistent animation support for all celestial bodies
 
@@ -201,6 +275,9 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     """
     print(f"\nCreating visualization for {body_name} (animate={animate})")
     
+    # Initialize shell_type to avoid undefined variable errors
+#    shell_type = ""
+
     # Create shell traces based on selected variables
     traces = []
     
@@ -209,166 +286,254 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
                 # Call the appropriate shell creation function based on name
-                if shell_name == 'core' and var.get() == 1:
+                if shell_name == 'core':
                     traces.extend(create_sun_core_shell())
-                elif shell_name == 'radiative' and var.get() == 1:
+                elif shell_name == 'radiative':
                     traces.extend(create_sun_radiative_shell())
-                elif shell_name == 'photosphere' and var.get() == 1:
+                elif shell_name == 'photosphere':
                     traces.extend(create_sun_photosphere_shell())
-                elif shell_name == 'chromosphere' and var.get() == 1:
+                elif shell_name == 'chromosphere':
                     traces.extend(create_sun_chromosphere_shell())
-                elif shell_name == 'inner_corona' and var.get() == 1:
+                elif shell_name == 'inner_corona':
                     traces.extend(create_sun_inner_corona_shell())
-                elif shell_name == 'outer_corona' and var.get() == 1:
+                elif shell_name == 'outer_corona':
                     traces.extend(create_sun_outer_corona_shell())
-                elif shell_name == 'termination_shock' and var.get() == 1:
+                elif shell_name == 'termination_shock':
                     traces.extend(create_sun_termination_shock_shell())
-                elif shell_name == 'heliopause' and var.get() == 1:
+                elif shell_name == 'heliopause':
                     traces.extend(create_sun_heliopause_shell())
-                elif shell_name == 'inner_oort_limit' and var.get() == 1:
+                elif shell_name == 'inner_oort_limit':
                     traces.extend(create_sun_inner_oort_limit_shell())
-                elif shell_name == 'inner_oort' and var.get() == 1:
+                elif shell_name == 'inner_oort':
                     traces.extend(create_sun_inner_oort_shell())
-                elif shell_name == 'outer_oort' and var.get() == 1:
+                elif shell_name == 'outer_oort':
                     traces.extend(create_sun_outer_oort_shell())
-                elif shell_name == 'gravitational' and var.get() == 1:
+                elif shell_name == 'gravitational':
                     traces.extend(create_sun_gravitational_shell())
     
     elif body_name == 'Mercury':
         # Handle Mercury visualization with its specific shells
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
-                shell_type = shell_name.replace('mercury_', '')
-                if shell_type == 'inner_core' and var.get() == 1:
+    #            shell_type = shell_name.replace('mercury_', '')
+                if shell_name == 'inner_core':
                     traces.extend(create_mercury_inner_core_shell(center_position))
-                elif shell_type == 'outer_core' and var.get() == 1:
+                elif shell_name == 'outer_core':
                     traces.extend(create_mercury_outer_core_shell(center_position))
-                elif shell_type == 'mantle' and var.get() == 1:
+                elif shell_name == 'mantle':
                     traces.extend(create_mercury_mantle_shell(center_position))
-                elif shell_type == 'crust' and var.get() == 1:
+                elif shell_name == 'crust':
                     traces.extend(create_mercury_crust_shell(center_position))
-                elif shell_type == 'atmosphere' and var.get() == 1:
+                elif shell_name == 'atmosphere':
                     traces.extend(create_mercury_atmosphere_shell(center_position))
-                elif shell_type == 'magnetosphere' and var.get() == 1:
+                elif shell_name == 'magnetosphere':
                     traces.extend(create_mercury_magnetosphere_shell(center_position))
-                elif shell_type == 'hill_sphere' and var.get() == 1:
+                elif shell_name == 'hill_sphere':
                     traces.extend(create_mercury_hill_sphere_shell(center_position))
 
     elif body_name == 'Venus':
         # Handle Venus visualization with its specific shells
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
-                shell_type = shell_name.replace('venus_', '')
-                if shell_type == 'core' and var.get() == 1:
+    #            shell_name = shell_name.replace('venus_', '')
+                if shell_name == 'core':
                     traces.extend(create_venus_core_shell(center_position))
-                elif shell_type == 'mantle' and var.get() == 1:
+                elif shell_name == 'mantle':
                     traces.extend(create_venus_mantle_shell(center_position))
-                elif shell_type == 'crust' and var.get() == 1:
+                elif shell_name == 'crust':
                     traces.extend(create_venus_crust_shell(center_position))
-                elif shell_type == 'atmosphere' and var.get() == 1:
+                elif shell_name == 'atmosphere':
                     traces.extend(create_venus_atmosphere_shell(center_position))
-                elif shell_type == 'upper_atmosphere' and var.get() == 1:
+                elif shell_name == 'upper_atmosphere':
                     traces.extend(create_venus_upper_atmosphere_shell(center_position))
-                elif shell_type == 'magnetosphere' and var.get() == 1:
+                elif shell_name == 'magnetosphere':
                     traces.extend(create_venus_magnetosphere_shell(center_position))
-                elif shell_type == 'hill_sphere' and var.get() == 1:
+                elif shell_name == 'hill_sphere':
                     traces.extend(create_venus_hill_sphere_shell(center_position))
 
     elif body_name == 'Earth':
         # Handle Earth visualization with its specific shells
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
-                shell_type = shell_name.replace('earth_', '')
-                if shell_type == 'inner_core' and var.get() == 1:
+    #            shell_name = shell_name.replace('earth_', '')
+                if shell_name == 'inner_core':
                     traces.extend(create_earth_inner_core_shell(center_position))
-                elif shell_type == 'outer_core' and var.get() == 1:
+                elif shell_name == 'outer_core':
                     traces.extend(create_earth_outer_core_shell(center_position))
-                elif shell_type == 'lower_mantle' and var.get() == 1:
+                elif shell_name == 'lower_mantle':
                     traces.extend(create_earth_lower_mantle_shell(center_position))
-                elif shell_type == 'upper_mantle' and var.get() == 1:
+                elif shell_name == 'upper_mantle':
                     traces.extend(create_earth_upper_mantle_shell(center_position))
-                elif shell_type == 'crust' and var.get() == 1:
+                elif shell_name == 'crust':
                     traces.extend(create_earth_crust_shell(center_position))
-                elif shell_type == 'atmosphere' and var.get() == 1:
+                elif shell_name == 'atmosphere':
                     traces.extend(create_earth_atmosphere_shell(center_position))
-                elif shell_type == 'upper_atmosphere' and var.get() == 1:
+                elif shell_name == 'upper_atmosphere':
                     traces.extend(create_earth_upper_atmosphere_shell(center_position))
-                elif shell_type == 'magnetosphere' and var.get() == 1:
+                elif shell_name == 'magnetosphere':
                     traces.extend(create_earth_magnetosphere_shell(center_position))
-                elif shell_type == 'hill_sphere' and var.get() == 1:
+                elif shell_name == 'hill_sphere':
                     traces.extend(create_earth_hill_sphere_shell(center_position))
     
     elif body_name == 'Mars':
         # Handle Mars visualization with its specific shells
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
-                shell_type = shell_name.replace('mars_', '')
-                if shell_type == 'inner_core' and var.get() == 1:
+    #            shell_name = shell_name.replace('mars_', '')
+                if shell_name == 'inner_core':
                     traces.extend(create_mars_inner_core_shell(center_position))
-                elif shell_type == 'outer_core' and var.get() == 1:
+                elif shell_name == 'outer_core':
                     traces.extend(create_mars_outer_core_shell(center_position))
-                elif shell_type == 'mantle' and var.get() == 1:
+                elif shell_name == 'mantle':
                     traces.extend(create_mars_mantle_shell(center_position))
-                elif shell_type == 'crust' and var.get() == 1:
+                elif shell_name == 'crust':
                     traces.extend(create_mars_crust_shell(center_position))
-                elif shell_type == 'atmosphere' and var.get() == 1:
+                elif shell_name == 'atmosphere':
                     traces.extend(create_mars_atmosphere_shell(center_position))
-                elif shell_type == 'upper_atmosphere' and var.get() == 1:
+                elif shell_name == 'upper_atmosphere':
                     traces.extend(create_mars_upper_atmosphere_shell(center_position))
-                elif shell_type == 'hill_sphere' and var.get() == 1:
+                elif shell_name == 'hill_sphere':
                     traces.extend(create_mars_hill_sphere_shell(center_position))
 
     elif body_name == 'Jupiter':
         # Handle Jupiter visualization with its specific shells
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
-                shell_type = shell_name.replace('jupiter_', '')
-                if shell_type == 'core' and var.get() == 1:
+    #            shell_name = shell_name.replace('jupiter_', '')
+                if shell_name == 'core':
                     traces.extend(create_jupiter_core_shell(center_position))
-                elif shell_type == 'metallic_hydrogen' and var.get() == 1:
+                elif shell_name == 'metallic_hydrogen':
                     traces.extend(create_jupiter_metallic_hydrogen_shell(center_position))
-                elif shell_type == 'molecular_hydrogen' and var.get() == 1:
+                elif shell_name == 'molecular_hydrogen':
                     traces.extend(create_jupiter_molecular_hydrogen_shell(center_position))
-                elif shell_type == 'cloud_layer' and var.get() == 1:
+                elif shell_name == 'cloud_layer':
                     traces.extend(create_jupiter_cloud_layer_shell(center_position))
-                elif shell_type == 'upper_atmosphere' and var.get() == 1:
+                elif shell_name == 'upper_atmosphere':
                     traces.extend(create_jupiter_upper_atmosphere_shell(center_position))
-                elif shell_type == 'ring_system' and var.get() == 1:
+                elif shell_name == 'ring_system':
                     traces.extend(create_jupiter_ring_system(center_position))
-                elif shell_type == 'radiation_belts' and var.get() == 1:
+                elif shell_name == 'radiation_belts':
                     traces.extend(create_jupiter_radiation_belts(center_position))
-                elif shell_type == 'io_plasma_torus' and var.get() == 1:
+                elif shell_name == 'io_plasma_torus':
                     traces.extend(create_jupiter_io_plasma_torus(center_position))
-                elif shell_type == 'magnetosphere' and var.get() == 1:
+                elif shell_name == 'magnetosphere':
                     traces.extend(create_jupiter_magnetosphere(center_position))
-                elif shell_type == 'hill_sphere' and var.get() == 1:
+                elif shell_name == 'hill_sphere':
                     traces.extend(create_jupiter_hill_sphere_shell(center_position))
 
     elif body_name == 'Saturn':
         # Handle Saturn visualization with its specific shells
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
-                shell_type = shell_name.replace('saturn_', '')
-                if shell_type == 'core' and var.get() == 1:
+    #            shell_name = shell_name.replace('saturn_', '')
+                if shell_name == 'core':
                     traces.extend(create_saturn_core_shell(center_position))
-                elif shell_type == 'metallic_hydrogen' and var.get() == 1:
+                elif shell_name == 'metallic_hydrogen':
                     traces.extend(create_saturn_metallic_hydrogen_shell(center_position))
-                elif shell_type == 'molecular_hydrogen' and var.get() == 1:
+                elif shell_name == 'molecular_hydrogen':
                     traces.extend(create_saturn_molecular_hydrogen_shell(center_position))
-                elif shell_type == 'cloud_layer' and var.get() == 1:
+                elif shell_name == 'cloud_layer':
                     traces.extend(create_saturn_cloud_layer_shell(center_position))
-                elif shell_type == 'upper_atmosphere' and var.get() == 1:
+                elif shell_name == 'upper_atmosphere':
                     traces.extend(create_saturn_upper_atmosphere_shell(center_position))
-                elif shell_type == 'ring_system' and var.get() == 1:
+                elif shell_name == 'ring_system':
                     traces.extend(create_saturn_ring_system(center_position))
-                elif shell_type == 'radiation_belts' and var.get() == 1:
+                elif shell_name == 'radiation_belts':
                     traces.extend(create_saturn_radiation_belts(center_position))
-                elif shell_type == 'io_plasma_torus' and var.get() == 1:
+                elif shell_name == 'io_plasma_torus':
                     traces.extend(create_saturn_enceladus_plasma_torus(center_position))
-                elif shell_type == 'magnetosphere' and var.get() == 1:
+                elif shell_name == 'magnetosphere':
                     traces.extend(create_saturn_magnetosphere(center_position))
-                elif shell_type == 'hill_sphere' and var.get() == 1:
+                elif shell_name == 'hill_sphere':
                     traces.extend(create_saturn_hill_sphere_shell(center_position))
+
+    elif body_name == 'Uranus':
+        # Handle uranus visualization with its specific shells
+        for shell_name, var in shell_vars.items():
+            if var.get() == 1:
+    #            shell_name = shell_name.replace('uranus_', '')
+                if shell_name == 'core':
+                    traces.extend(create_uranus_core_shell(center_position))
+                elif shell_name == 'mantle':
+                    traces.extend(create_uranus_mantel_shell(center_position))
+                elif shell_name == 'cloud_layer':
+                    traces.extend(create_uranus_cloud_layer_shell(center_position))
+                elif shell_name == 'upper_atmosphere':
+                    traces.extend(create_uranus_upper_atmosphere_shell(center_position))
+                elif shell_name == 'ring_system':
+                    traces.extend(create_uranus_ring_system(center_position))
+                elif shell_name == 'radiation_belts':
+                    traces.extend(create_uranus_radiation_belts(center_position))
+                elif shell_name == 'magnetosphere':
+                    traces.extend(create_uranus_magnetosphere(center_position))
+                elif shell_name == 'hill_sphere':
+                    traces.extend(create_uranus_hill_sphere_shell(center_position))
+
+    elif body_name == 'Neptune':
+        # Handle Neptune visualization with its specific shells
+        for shell_name, var in shell_vars.items():
+            if var.get() == 1:
+    #            shell_name = shell_name.replace('neptune_', '')
+                if shell_name == 'core':
+                    traces.extend(create_neptune_core_shell(center_position))
+                elif shell_name == 'mantle':
+                    traces.extend(create_neptune_mantel_shell(center_position))
+                elif shell_name == 'cloud_layer':
+                    traces.extend(create_neptune_cloud_layer_shell(center_position))
+                elif shell_name == 'upper_atmosphere':
+                    traces.extend(create_neptune_upper_atmosphere_shell(center_position))
+                elif shell_name == 'ring_system':
+                    traces.extend(create_neptune_ring_system(center_position))
+                elif shell_name == 'radiation_belts':
+                    traces.extend(create_neptune_radiation_belts(center_position))
+                elif shell_name == 'magnetosphere':
+                    traces.extend(create_neptune_magnetosphere(center_position))
+                elif shell_name == 'hill_sphere':
+                    traces.extend(create_neptune_hill_sphere_shell(center_position))
+
+    elif body_name == 'Pluto':
+        # Handle Pluto visualization with its specific shells
+        for shell_name, var in shell_vars.items():
+            if var.get() == 1:
+    #            shell_name = shell_name.replace('pluto_', '')
+                if shell_name == 'core':
+                    traces.extend(create_pluto_core_shell(center_position))
+                elif shell_name == 'mantle':
+                    traces.extend(create_pluto_mantel_shell(center_position))
+                elif shell_name == 'crust':
+                    traces.extend(create_pluto_crust_shell(center_position))
+                elif shell_name == 'haze_layer':
+                    traces.extend(create_pluto_haze_layer_shell(center_position))
+                elif shell_name == 'atmosphere':
+                    traces.extend(create_pluto_atmosphere_shell(center_position))
+                elif shell_name == 'hill_sphere':
+                    traces.extend(create_pluto_hill_sphere_shell(center_position))
+
+    elif body_name == 'Eris/Dysnomia':
+        # Handle eris visualization with its specific shells
+        for shell_name, var in shell_vars.items():
+            if var.get() == 1:
+    #            shell_name = shell_name.replace('eris_', '')
+                if shell_name == 'core':
+                    traces.extend(create_eris_core_shell(center_position))
+                elif shell_name == 'mantle':
+                    traces.extend(create_eris_mantel_shell(center_position))
+                elif shell_name == 'crust':
+                    traces.extend(create_eris_crust_shell(center_position))
+                elif shell_name == 'atmosphere':
+                    traces.extend(create_eris_atmosphere_shell(center_position))
+                elif shell_name == 'hill_sphere':
+                    traces.extend(create_eris_hill_sphere_shell(center_position))
+
+    elif body_name == 'Planet 9':
+        # Handle Planet 9 visualization with its specific shells
+        for shell_name, var in shell_vars.items():
+            if var.get() == 1:
+    #            shell_name = shell_name.replace('planet9_', '')
+                if shell_name == 'surface':
+                    traces.extend(create_planet9_surface_shell(center_position))
+                elif shell_name == 'hill_sphere':
+                    traces.extend(create_planet9_hill_sphere_shell(center_position))
 
     else:
         print(f"Warning: No visualization available for {body_name}")
@@ -1008,6 +1173,74 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
             traces.extend(create_saturn_magnetosphere(center_position))
         if shell_vars['saturn_hill_sphere'].get() == 1:
             traces.extend(create_saturn_hill_sphere_shell(center_position))
+
+    if planet_name == 'Uranus':
+        if shell_vars['uranus_core'].get() == 1:
+            traces.extend(create_uranus_core_shell(center_position))
+        if shell_vars['uranus_mantel'].get() == 1:
+            traces.extend(create_uranus_mantel_shell(center_position))
+        if shell_vars['uranus_cloud_layer'].get() == 1:
+            traces.extend(create_uranus_cloud_layer_shell(center_position))
+        if shell_vars['uranus_upper_atmosphere'].get() == 1:
+            traces.extend(create_uranus_upper_atmosphere_shell(center_position))
+        if shell_vars['uranus_ring_system'].get() == 1:
+            traces.extend(create_uranus_ring_system(center_position))
+        if shell_vars['uranus_radiation_belts'].get() == 1:
+            traces.extend(create_uranus_radiation_belts(center_position))
+        if shell_vars['uranus_magnetosphere'].get() == 1:
+            traces.extend(create_uranus_magnetosphere(center_position))
+        if shell_vars['uranus_hill_sphere'].get() == 1:
+            traces.extend(create_uranus_hill_sphere_shell(center_position))
+
+    if planet_name == 'Neptune':
+        if shell_vars['neptune_core'].get() == 1:
+            traces.extend(create_neptune_core_shell(center_position))
+        if shell_vars['neptune_mantel'].get() == 1:
+            traces.extend(create_neptune_mantel_shell(center_position))
+        if shell_vars['neptune_cloud_layer'].get() == 1:
+            traces.extend(create_neptune_cloud_layer_shell(center_position))
+        if shell_vars['neptune_upper_atmosphere'].get() == 1:
+            traces.extend(create_neptune_upper_atmosphere_shell(center_position))
+        if shell_vars['neptune_ring_system'].get() == 1:
+            traces.extend(create_neptune_ring_system(center_position))
+        if shell_vars['neptune_radiation_belts'].get() == 1:
+            traces.extend(create_neptune_radiation_belts(center_position))
+        if shell_vars['neptune_magnetosphere'].get() == 1:
+            traces.extend(create_neptune_magnetosphere(center_position))
+        if shell_vars['neptune_hill_sphere'].get() == 1:
+            traces.extend(create_neptune_hill_sphere_shell(center_position))
+
+    if planet_name == 'Pluto':
+        if shell_vars['pluto_core'].get() == 1:
+            traces.extend(create_pluto_core_shell(center_position))
+        if shell_vars['pluto_mantel'].get() == 1:
+            traces.extend(create_pluto_mantel_shell(center_position))
+        if shell_vars['pluto_crust'].get() == 1:
+            traces.extend(create_pluto_crust_shell(center_position))
+        if shell_vars['pluto_haze_layer'].get() == 1:
+            traces.extend(create_pluto_haze_layer_shell(center_position))
+        if shell_vars['pluto_atmosphere'].get() == 1:
+            traces.extend(create_pluto_atmosphere_shell(center_position))
+        if shell_vars['pluto_hill_sphere'].get() == 1:
+            traces.extend(create_pluto_hill_sphere_shell(center_position))
+
+    if planet_name == 'Eris/Dysnomia':
+        if shell_vars['eris_core'].get() == 1:
+            traces.extend(create_eris_core_shell(center_position))
+        if shell_vars['eris_mantel'].get() == 1:
+            traces.extend(create_eris_mantel_shell(center_position))
+        if shell_vars['eris_crust'].get() == 1:
+            traces.extend(create_eris_crust_shell(center_position))
+        if shell_vars['eris_atmosphere'].get() == 1:
+            traces.extend(create_eris_atmosphere_shell(center_position))
+        if shell_vars['eris_hill_sphere'].get() == 1:
+            traces.extend(create_eris_hill_sphere_shell(center_position))
+
+    if planet_name == 'Planet 9':
+        if shell_vars['planet9_surface'].get() == 1:
+            traces.extend(create_planet9_surface_shell(center_position))
+        if shell_vars['planet9_hill_sphere'].get() == 1:
+            traces.extend(create_planet9_hill_sphere_shell(center_position))
     
     # Add base traces to figure for static visualization
     for trace in traces:
@@ -1062,10 +1295,13 @@ def create_planet_shell_traces(planet_name, shell_vars, center_position=(0, 0, 0
             if isinstance(trace.customdata, list):
                 # Make sure all customdata items reference the correct planet
                 trace.customdata = [str(item).replace("Mercury", planet_name).replace("Venus", planet_name).replace("Earth", planet_name)
-                                    .replace("Mars", planet_name).replace("Jupiter", planet_name).replace("Saturn", planet_name) 
-                              if "Mercury" in str(item) or "Venus" in str(item) or "Earth" in str(item)
-                                or "Mars" in str(item) or "Jupiter" in str(item) or "Saturn" in str(item) 
-                              else str(item) for item in trace.customdata]
+                                    .replace("Mars", planet_name).replace("Jupiter", planet_name).replace("Saturn", planet_name)
+                                    .replace("Uranus", planet_name).replace("Neptune", planet_name).replace("Pluto", planet_name)
+                                    .replace("Eris/Dysnomia", planet_name).replace("Planet 9", planet_name)
+                            if "Mercury" in str(item) or "Venus" in str(item) or "Earth" in str(item) or "Mars" in str(item)
+                                or "Jupiter" in str(item) or "Saturn" in str(item) or "Uranus" in str(item) or "Neptune" in str(item)
+                                or "Pluto" in str(item) or "Eris/Dysnomia" in str(item) or "Planet 9" in str(item)
+                            else str(item) for item in trace.customdata]
         
         # Set correct hovertemplate
         trace.hovertemplate = '%{text}<extra></extra>'
@@ -1621,7 +1857,7 @@ mercury_hill_sphere_info = (
 def create_mercury_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Mercury's Hill sphere."""
     # Hill sphere radius in Mercury radii
-    radius_fraction = 72  # Mercury's Hill sphere is about 235 Mercury radii
+    radius_fraction = 90  # Mercury's Hill sphere is about 235 Mercury radii
     
     # Calculate radius in AU
     radius_au = radius_fraction * MERCURY_RADIUS_AU
@@ -1637,12 +1873,16 @@ def create_mercury_hill_sphere_shell(center_position=(0, 0, 0)):
     z = z + center_z
     
     # Create hover text
-    hover_text = ["Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it <br>" 
+    hover_text = ("Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it <br>" 
                 "where its gravity is the dominant gravitational force. Mercury certainly has a Hill sphere, but its size depends on <br>" 
                 "its mass and its distance from the Sun. Being the closest planet to the Sun, the Sun's powerful gravity limits the <br>" 
                 "extent of Mercury's Hill sphere compared to planets farther out.<br><br>" 
                 "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
-                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces."]
+                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
+                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
+                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
+                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
+                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's.")
     
     hover_customdata = ["Hill Sphere"]
 
@@ -2306,7 +2546,14 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
     z = z + center_z
     
     # Create hover text
-    hover_text = "Venus's Hill Sphere (extends to ~166 Venus radii or about 1 million km)"
+    hover_text = ("Venus's Hill Sphere (extends to ~166 Venus radii or about 1 million km)<br><br>" 
+                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
+                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
+                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
+                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
+                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
+                )
     
     # Create the trace
     traces = [
@@ -3052,7 +3299,14 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
     z = z + center_z
     
     # Create hover text
-    hover_text = "Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)"
+    hover_text = ("Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)<br><br>"
+                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
+                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
+                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
+                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
+                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."                  
+                )
     
     # Create the trace
     traces = [
@@ -3595,7 +3849,13 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
                 "* Importance: The concept of the Hill sphere is crucial for understanding the stability of orbits around a planet. <br>" 
                 "  Any object orbiting Mars within its Hill sphere is more likely to remain a satellite of Mars. If an object's <br>" 
                 "  orbit extends beyond the Hill sphere, the Sun's gravity would become the dominant influence, potentially pulling <br>" 
-                "the object into a heliocentric orbit."
+                "the object into a heliocentric orbit.<br><br>"
+                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
+                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
+                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
+                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
+                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."               
         )
     }
 
@@ -4073,6 +4333,9 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
     
     return traces
 
+jupiter_io_plasma_torus_info = ("634 KB PER FRAME FOR HTML.\n\n"
+              "Donut-shaped region of charged particles from Jupiter's moon Io")
+
 def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
     """Creates Jupiter's Io plasma torus."""
     # Parameters
@@ -4142,6 +4405,11 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
     ]
     
     return traces
+
+jupiter_radiation_belts_info = (
+            "560 KB PER FRAME FOR HTML.\n\n"
+            "Zones of trapped high-energy particles in Jupiter's magnetosphere"                     
+)
 
 def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
     """Creates Jupiter's radiation belts."""
@@ -4224,17 +4492,29 @@ def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
     
     return traces
     
+jupiter_hill_sphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
+            "Jupiter's Hill Sphere (extends to ~530 Jupiter radii or about 0.25 AU)"                      
+)
+
 def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Jupiter's Hill sphere shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 530,  # Jupiter's Hill sphere is about 530 Jupiter radii
+        'radius_fraction': 750,  
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
         'opacity': 0.3,
         'name': 'Hill Sphere',
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
-            "Jupiter's Hill Sphere (extends to ~530 Jupiter radii or about 0.25 AU)"
+            "Jupiter's Hill Sphere (extends to ~750 Jupiter radii)<br><br>"
+                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
+                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
+                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
+                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
+                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."            
         )
     }
         
@@ -4423,109 +4703,6 @@ jupiter_magnetosphere_info = (
             "Middle radiation belt: Region of trapped charged particles at intermediate distances from Jupiter\n"
             "Outer radiation belt: Extended region of trapped particles in Jupiter's outer magnetosphere"                      
 )
-
-def create_magnetosphere_shape(params):
-    """
-    Creates points for a magnetosphere with asymmetry, compressed on sunward side
-    and extended on the tail side.
-    
-    Parameters:
-        params (dict): Dictionary of shape parameters
-        
-    Returns:
-        tuple: (x, y, z) coordinates as lists
-    """
-    x_coords = []
-    y_coords = []
-    z_coords = []
-    
-    # Number of points to generate (reduced for memory efficiency)
-    n_phi = 20              # from 30 to 20
-    n_theta = 20            # from 30 to 20
-    n_tail_segments = 10    # from 20 to 10
-    
-    # 1. Generate sunward hemisphere (compressed, use an ellipsoid)
-    for i_phi in range(int(n_phi/2)):
-        phi = (i_phi / (n_phi-1)) * np.pi
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            
-            # Use ellipsoidal shaping - compress in x direction (sunward)
-            x = -params['sunward_distance'] * np.cos(phi)  # Negative for sunward direction
-            rho = np.sin(phi)
-            y = params['equatorial_radius'] * rho * np.cos(theta)
-            z = params['polar_radius'] * rho * np.sin(theta)
-            
-            x_coords.append(x)
-            y_coords.append(y)
-            z_coords.append(z)
-    
-    # 2. Generate magnetotail (anti-sunward direction, expands outward)
-    for i in range(n_tail_segments + 1):
-        fraction = i / n_tail_segments
-        tail_x = fraction * params['tail_length']  # Positive for tail direction
-        tail_radius = params['tail_base_radius'] + (params['tail_end_radius'] - params['tail_base_radius']) * fraction
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            y = tail_radius * np.cos(theta)
-            z = tail_radius * np.sin(theta)
-            
-            x_coords.append(tail_x)
-            y_coords.append(y)
-            z_coords.append(z)
-    
-    return x_coords, y_coords, z_coords
-
-jupiter_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
-            "Jupiter's Hill Sphere (extends to ~530 Jupiter radii or about 0.25 AU)"                      
-)
-
-def create_jupiter_hill_sphere(center_position=(0, 0, 0)):
-    """Creates Jupiter's Hill sphere."""
-    # Hill sphere radius in Jupiter radii
-    radius_fraction = 530  # Jupiter's Hill sphere is about 530 Jupiter radii
-    
-    # Calculate radius in AU
-    radius_au = radius_fraction * JUPITER_RADIUS_AU
-    
-    # Create sphere points with fewer points for memory efficiency
-    n_points = 30  # Reduced for large spheres
-    x, y, z = create_sphere_points(radius_au, n_points=n_points)
-    
-    # Apply center position offset
-    center_x, center_y, center_z = center_position
-    x = x + center_x
-    y = y + center_y
-    z = z + center_z
-    
-    # Create hover text
-    hover_text = "Jupiter's Hill Sphere (extends to ~530 Jupiter radii or about 0.25 AU)"
-    
-    # Create the trace
-    traces = [
-        go.Scatter3d(
-            x=x,
-            y=y,
-            z=z,
-            mode='markers',
-            marker=dict(
-                size=1.0,
-                color='rgb(0, 255, 0)',  # Green for Hill sphere
-                opacity=0.3
-            ),
-            name='Jupiter: Hill Sphere',
-            text=[hover_text] * len(x),
-            customdata=['Jupiter: Hill Sphere'] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
-    
-    return traces
 
 # Saturn Shell Creation Functions
 
@@ -5088,6 +5265,9 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0)):
     
     return traces
 
+saturn_enceladus_plasma_torus_info = ("634 KB PER FRAME FOR HTML.\n\n"
+              "Donut-shaped region of charged particles from saturn's moon Io")
+
 def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
     """Creates Saturn's Enceladus plasma torus."""
     # Parameters
@@ -5181,6 +5361,11 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
     ]
     
     return traces
+
+saturn_radiation_belts_info = (
+            "560 KB PER FRAME FOR HTML.\n\n"
+            "Zones of trapped high-energy particles in Saturn's magnetosphere"                     
+)
 
 def create_saturn_radiation_belts(center_position=(0, 0, 0)):
     """Creates Saturn's radiation belts."""
@@ -5303,11 +5488,21 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
     
     return traces
     
+saturn_hill_sphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
+
+            "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of \n" 
+            "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to \n" 
+            "Saturn's lower mass. The Hill sphere is crucial for determining the maximum distance at which a moon can stably orbit \n" 
+            "Saturn."                     
+)
+
 def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Saturn's Hill sphere shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 91,  # Saturn's Hill sphere is about 91 Saturn radii
+        'radius_fraction': 1120,  
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
         'opacity': 0.3,
         'name': 'Hill Sphere',
@@ -5316,7 +5511,13 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
             "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of <br>" 
             "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to <br>" 
             "Saturn's lower mass. The Hill sphere is crucial for determining the maximum distance at which a moon can stably orbit <br>" 
-            "Saturn."
+            "Saturn.<br><br>"
+                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
+                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
+                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
+                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
+                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."        
         )
     }
         
@@ -5563,81 +5764,35 @@ saturn_magnetosphere_info = (
             "contributes plasma to Saturn's magnetosphere and its E ring."                      
 )
 
-def create_magnetosphere_shape(params):
-    """
-    Creates points for a magnetosphere with asymmetry, compressed on sunward side
-    and extended on the tail side.
-    
-    Parameters:
-        params (dict): Dictionary of shape parameters
-        
-    Returns:
-        tuple: (x, y, z) coordinates as lists
-    """
-    x_coords = []
-    y_coords = []
-    z_coords = []
-    
-    # Number of points to generate (reduced for memory efficiency)
-    n_phi = 20              # from 30 to 20
-    n_theta = 20            # from 30 to 20
-    n_tail_segments = 10    # from 20 to 10
-    
-    # 1. Generate sunward hemisphere (compressed, use an ellipsoid)
-    for i_phi in range(int(n_phi/2)):
-        phi = (i_phi / (n_phi-1)) * np.pi
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            
-            # Use ellipsoidal shaping - compress in x direction (sunward)
-            x = -params['sunward_distance'] * np.cos(phi)  # Negative for sunward direction
-            rho = np.sin(phi)
-            y = params['equatorial_radius'] * rho * np.cos(theta)
-            z = params['polar_radius'] * rho * np.sin(theta)
-            
-            x_coords.append(x)
-            y_coords.append(y)
-            z_coords.append(z)
-    
-    # 2. Generate magnetotail (anti-sunward direction, expands outward)
-    for i in range(n_tail_segments + 1):
-        fraction = i / n_tail_segments
-        tail_x = fraction * params['tail_length']  # Positive for tail direction
-        tail_radius = params['tail_base_radius'] + (params['tail_end_radius'] - params['tail_base_radius']) * fraction
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            y = tail_radius * np.cos(theta)
-            z = tail_radius * np.sin(theta)
-            
-            x_coords.append(tail_x)
-            y_coords.append(y)
-            z_coords.append(z)
-    
-    return x_coords, y_coords, z_coords
+# Uranus Shell Creation Functions
 
-saturn_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
-
-            "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of \n" 
-            "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to \n" 
-            "Saturn's lower mass. The Hill sphere is crucial for determining the maximum distance at which a moon can stably orbit \n" 
-            "Saturn."                     
+uranus_core_info = (
+            "2.4 MB PER FRAME FOR HTML.\n\n"
+            "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and \n" 
+            "metallic iron-nickel. It's estimated to have a mass roughly equivalent to that of Earth. Temperatures near the core can \n" 
+            "reach incredibly high values, around 4982°C (5255 K) degrees Celsius."
 )
 
-def create_saturn_hill_sphere(center_position=(0, 0, 0)):
-    """Creates Saturn's Hill sphere."""
-    # Hill sphere radius in Saturn radii
-    radius_fraction = 91  # Saturn's Hill sphere is about 91 Saturn radii
+def create_uranus_core_shell(center_position=(0, 0, 0)):
+    """Creates Uranus's core shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.2,  # Approximately 20% of Uranus's radius
+        'color': 'rgb(255, 215, 0)',  # estimated black body color at about 4982°C (5255 K)
+        'opacity': 1.0,
+        'name': 'Core',
+        'description': (
+            "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and <br>" 
+            "metallic iron-nickel. It's estimated to have a mass roughly equivalent to that of Earth. Temperatures near the core can <br>" 
+            "reach incredibly high values, around 4982°C (5255 K) degrees Celsius."
+        )
+    }
     
     # Calculate radius in AU
-    radius_au = radius_fraction * SATURN_RADIUS_AU
+    layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
     
-    # Create sphere points with fewer points for memory efficiency
-    n_points = 30  # Reduced for large spheres
-    x, y, z = create_sphere_points(radius_au, n_points=n_points)
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -5645,24 +5800,3741 @@ def create_saturn_hill_sphere(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    # Create hover text
-    hover_text = "Saturn's Hill Sphere extends to ~91 Saturn radii."
-    
-    # Create the trace
     traces = [
         go.Scatter3d(
-            x=x,
-            y=y,
-            z=z,
+            x=x, y=y, z=z,
             mode='markers',
             marker=dict(
-                size=1.0,
-                color='rgb(0, 255, 0)',  # Green for Hill sphere
+                size=4.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Uranus: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+uranus_mantel_info = (
+            "2.1 MB PER FRAME FOR HTML.\n\n"
+            "Mantel: Surrounding the rocky core is a dense fluid layer often referred to as an \"icy mantle.\" This layer makes up the \n" 
+            "majority (80% or more) of the planet's mass. It's not ice in the traditional sense but rather a hot, dense fluid \n" 
+            "containing water, ammonia, and methane under immense pressure. These are sometimes referred to as \"ices\" by planetary \n" 
+            "scientists. This mantle is electrically conductive and is thought to be the region where Uranus' unusual magnetic field \n" 
+            "is generated."
+)
+
+def create_uranus_mantel_shell(center_position=(0, 0, 0)):
+    """Creates Uranus's matel shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.7,  # Up to about 70% of Uranus's radius
+        'color': 'rgb(255, 138, 18)',  # estimated black body color at about 2,000 K
+        'opacity': 0.9,
+        'name': 'Mantel',
+        'description': (
+            "Mantel: Surrounding the rocky core is a dense fluid layer often referred to as an \"icy mantle.\" This layer makes up the <br>" 
+            "majority (80% or more) of the planet's mass. It's not ice in the traditional sense but rather a hot, dense fluid <br>" 
+            "containing water, ammonia, and methane under immense pressure. These are sometimes referred to as \"ices\" by planetary <br>" 
+            "scientists. This mantle is electrically conductive and is thought to be the region where Uranus' unusual magnetic field <br>" 
+            "is generated.<br>" 
+            "* It's estimated to extend out to roughly 60-70% of Uranus' total radius.<br>" 
+            "* The temperature of Uranus' mantle is thought to range from around 2,000 K at its outer edge to about 5,000 K near <br>" 
+            "the core.<br>" 
+            "* The theoretical black body color of Uranus' mantle would transition from a deep orange-red in the outer regions to <br>" 
+            "a pale yellow-white in the deeper regions near the core, if we could somehow observe its thermal radiation directly."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.5,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Uranus: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+uranus_cloud_layer_info = (
+            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
+            "4.6 MB PER FRAME FOR HTML.\n\n"
+            "Troposphere: This is the lowest and densest part of the atmosphere, extending from where the pressure is about 100 bar \n" 
+            "(deep inside) up to an altitude of roughly 50 kilometers, where the pressure is around 0.1 bar. In the troposphere, the \n" 
+            "temperature generally decreases with altitude, ranging from around 320 K at the base to a frigid 53 K at the top. This \n" 
+            "region is where most of Uranus' cloud activity occurs. There are several cloud layers within the troposphere, thought to \n" 
+            "be composed of water ice (deepest), ammonium hydrosulfide, ammonia and hydrogen sulfide, and finally methane ice at the \n" 
+            "highest levels."
+)
+
+def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
+    """Creates Uranus's cloud layer shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.0,  # the top of the troposphere is actually 1.002
+        'color': 'rgb(173, 216, 230)',  # optical
+        'opacity': 1.0,
+        'name': 'Cloud Layer',
+        'description': (
+            "Uranus Cloud Layer<br>" 
+            "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
+            "Troposphere: This is the lowest and densest part of the atmosphere, extending from where the pressure is about 100 bar <br>" 
+            "(deep inside) up to an altitude of roughly 50 kilometers, where the pressure is around 0.1 bar. In the troposphere, the <br>" 
+            "temperature generally decreases with altitude, ranging from around 320 K at the base to a frigid 53 K at the top. This <br>" 
+            "region is where most of Uranus' cloud activity occurs. There are several cloud layers within the troposphere, thought to <br>" 
+            "be composed of water ice (deepest), ammonium hydrosulfide, ammonia and hydrogen sulfide, and finally methane ice at the <br>" 
+            "highest levels.<br>" 
+            "* Radius Definition: The top of the troposphere, or the cloud layer, is not equivalent to the radius of Uranus. The radius of Uranus is <br>" 
+            "  defined at a specific pressure level in its atmosphere. The quoted radius of Uranus (around 25,559 km at the equator) <br>" 
+            "  is typically given at the 1 bar pressure level. This is an arbitrary but standard reference point in the atmosphere of <br>" 
+            "  gas giants, roughly equivalent to Earth's sea-level atmospheric pressure. Since Uranus doesn't have a solid surface, this <br>" 
+            "  pressure level serves as a convenient marker for the planet's \"size.\"<br>"
+            "* Troposphere and Cloud Layer Altitude: The troposphere of Uranus extends from deep within the atmosphere (pressures <br>" 
+            "  around 100 bar) up to an altitude of about 50 km above the 1 bar level, where the pressure is around 0.1 bar. The <br>" 
+            "  cloud layers exist within this troposphere. The uppermost cloud layer, composed of methane ice, is found at a pressure <br>" 
+            "  level of about 1.2 bar. The visible cloud layer and the top of the troposphere are located within Uranus' atmosphere, <br>" 
+            "  at altitudes significantly lower than the radius defined at the 1 bar pressure level. The radius encompasses all these <br>" 
+            "  atmospheric layers down to that defined pressure. The radius of Uranus is like saying the \"surface\" is at a certain <br>" 
+            "  depth in the atmosphere. The clouds are features that exist above that deeper level.<br>" 
+            "* The top of Uranus' troposphere is defined by the tropopause, which is the temperature minimum in the atmosphere, <br>" 
+            "  separating the troposphere from the stratosphere. This occurs at an altitude of approximately 50 kilometers above the <br>" 
+            "  1 bar pressure level. At this altitude, the pressure is around 0.1 bar. Since the radius of Uranus is conventionally <br>" 
+            "  defined at the 1 bar pressure level as approximately 25,559 kilometers, the equivalent radius at the top of the <br>" 
+            "  troposphere (or cloud layer, which is within the upper troposphere) would be approximately 25,559 km + 50 km = 25,609 <br>" 
+            "  kilometers. Therefore, the radius at the top of the troposphere is about 25,609 kilometers. To express this as a <br>" 
+            "  fraction of Uranus' radius at the 1 bar level: Fraction = 25,609 km / 25,559 km ≈ 1.002."
+            )
+    }
+    
+    # Calculate radius in AU
+    radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
+    
+    # Apply center position offset
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
+    
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Uranus: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Uranus: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(173, 216, 230)',  # Layer color, originally 'white'
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Uranus: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
+
+uranus_upper_atmosphere_info = (
+            "2.7 MB PER FRAME FOR HTML.\n\n"
+            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H₂): Making up about 83% of the atmosphere; \n" 
+            "Helium (He): Constituting around 15%; Methane (CH₄): Present in smaller amounts, around 2.3%. This methane absorbs red \n" 
+            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H₂O) and ammonia (NH₃) are also present \n" 
+            "in small quantities. Other hydrocarbons like ethane, acetylene, and methyl acetylene exist in trace amounts, formed by \n" 
+            "the breakdown of methane by sunlight. The atmosphere lacks the prominent banding seen on Jupiter and Saturn but does \n" 
+            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224 °C), making it the coldest planetary \n" 
+            "atmosphere in our solar system. The atmosphere is layered into a troposphere, stratosphere, and thermosphere."
+)
+
+def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
+    """Creates Uranus's upper atmosphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.16,  
+        'color': 'rgb(240, 245, 250)',  # optical pale blue
+        'opacity': 0.5,
+        'name': 'Upper Atmosphere',
+        'description': (
+            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H₂): Making up about 83% of the atmosphere; <br>" 
+            "Helium (He): Constituting around 15%; Methane (CH₄): Present in smaller amounts, around 2.3%. This methane absorbs red <br>" 
+            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H₂O) and ammonia (NH₃) are also present <br>" 
+            "in small quantities. Other hydrocarbons like ethane, acetylene, and methyl acetylene exist in trace amounts, formed by <br>" 
+            "the breakdown of methane by sunlight. The atmosphere lacks the prominent banding seen on Jupiter and Saturn but does <br>" 
+            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224 °C), making it the coldest planetary <br>" 
+            "atmosphere in our solar system. The atmosphere is layered into a troposphere, stratosphere, and thermosphere.<br>" 
+            "* The altitude of the top of Uranus' thermosphere is not as sharply defined as the tropopause. The thermosphere <br>" 
+            "  gradually transitions into the exosphere. The stratosphere extends up to about 4,000 kilometers above the 1 bar <br>" 
+            "  level. The thermosphere and exosphere then extend from this altitude outwards. Some sources suggest the thermosphere <br>" 
+            "  can reach as high as two Uranus radii from the planet's center.<br>" 
+            "* Top of Stratosphere (approximate lower bound of Thermosphere): Radius at 1 bar level: ≈ 25,559 km; Altitude of <br>" 
+            "  stratopause: ≈ 4,000 km; Equivalent radius: 25,559 km + 4,000 km = 29,559 kilometers; Fraction of Uranus' radius <br>" 
+            "  (at 1 bar): 29,559 km / 25,559 km ≈ 1.157.<br>" 
+            "* Outer Extent of Thermosphere/Exosphere (approximate upper bound): Radius at 1 bar level: ≈ 25,559 km; Two Uranus radii <br>" 
+            "  from the center: 2 * 25,559 km = 51,118 kilometers. Therefore, the equivalent radius at the top of the thermosphere <br>" 
+            "  (or more accurately, the extended thermosphere/exosphere region) is estimated to range from approximately 1.16 to 2.0 <br>" 
+            "  times the radius of Uranus as defined at the 1 bar pressure level. This indicates that the thermosphere of Uranus is a <br>" 
+            "  very extended and diffuse region of its upper atmosphere."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Uranus: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+uranus_magnetosphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 0.02 AU TO VISUALIZE.\n"
+            "1.4 MB PER FRAME FOR HTML.\n\n"
+
+            "Magnetic Field (Magnetosphere): Uranus possesses a unique and peculiar magnetic field. Unlike most planets, its \n" 
+            "magnetic axis is tilted at a dramatic angle of nearly 60 degrees relative to its rotational axis. Furthermore, the \n" 
+            "magnetic field is offset from the planet's center by about one-third of Uranus' radius. This unusual orientation \n" 
+            "leads to a magnetosphere that is highly distorted and asymmetric. The magnetic field is generated by the convective \n" 
+            "motions of electrically conductive materials (likely the icy mantle) within the planet. The strength of Uranus' \n" 
+            "dipole magnetic field is significant, about 50 times that of Earth's, although smaller than Jupiter's. The \n" 
+            "magnetosphere deflects the solar wind, creating a complex boundary called the magnetopause, which extends a \n" 
+            "considerable distance from the planet."                      
+)
+
+def create_uranus_magnetosphere(center_position=(0, 0, 0)):
+    """Creates Uranus's main magnetosphere structure."""
+    # Parameters for magnetosphere components (in Uranus radii)
+    params = {
+        # Compressed sunward side
+        'sunward_distance': 21,  # Compressed toward the sun, ranges from 18-24 Ru
+        
+        # Equatorial extension (wider than polar)
+        'equatorial_radius': 27.5,   # ranges from 25-30 Ru
+        'polar_radius': 17.5,         # ranges from 15-20 Rs
+        
+        # Magnetotail parameters
+        'tail_length': 300,  # Length of visible magnetotail, ranges from 200-500 Ru
+        'tail_base_radius': 15,  # Radius at the base of the tail, ranges from 10-20 Ru
+        'tail_end_radius': 75,  # Radius at the end of the tail, ranges from 50-100 Ru
+    }
+    
+    # Scale everything by Uranus's radius in AU
+    for key in params:
+        params[key] *= URANUS_RADIUS_AU
+    
+    # Create magnetosphere main shape
+    x, y, z = create_magnetosphere_shape(params)
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Apply center position offset
+    x = np.array(x) + center_x
+    y = np.array(y) + center_y
+    z = np.array(z) + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color='rgb(200, 200, 255)', # Light blue for magnetic field
                 opacity=0.3
             ),
-            name='Saturn: Hill Sphere',
-            text=[hover_text] * len(x),
-            customdata=['Saturn: Hill Sphere'] * len(x),
+            name='Uranus: Magnetosphere',
+            text=["Magnetic Field (Magnetosphere): Uranus possesses a unique and peculiar magnetic field. Unlike most planets, its <br>" 
+            "magnetic axis is tilted at a dramatic angle of nearly 60 degrees relative to its rotational axis. Furthermore, the <br>" 
+            "magnetic field is offset from the planet's center by about one-third of Uranus' radius. This unusual orientation <br>" 
+            "leads to a magnetosphere that is highly distorted and asymmetric. The magnetic field is generated by the convective <br>" 
+            "motions of electrically conductive materials (likely the icy mantle) within the planet. The strength of Uranus' <br>" 
+            "dipole magnetic field is significant, about 50 times that of Earth's, although smaller than Jupiter's. The <br>" 
+            "magnetosphere deflects the solar wind, creating a complex boundary called the magnetopause, which extends a <br>" 
+            "considerable distance from the planet.<BR>" 
+            "* The distance to Uranus' magnetopause (the boundary where the planet's magnetic field meets the solar wind) on the <BR>" 
+            "  sunward side is estimated to be around 18-24 Ru.<br>" 
+            "* The equatorial radius of Uranus' magnetosphere varies depending on solar wind conditions, but a typical estimate is <br>" 
+            "  around 25-30 Ru.<br>" 
+            "* The polar radius of Uranus' magnetosphere, measured from the center of the planet to the magnetopause along the <br>" 
+            "  magnetic poles, is typically smaller than the equatorial radius due to the interaction with the solar wind and the <br>" 
+            "  shape of the magnetic field. Estimates range, but it's likely in the order of 15-20 Ru.<br>" 
+            "* The magnetotail is the region of the magnetosphere that extends away from the Sun, stretched by the solar wind. The <br>" 
+            "  length of Uranus' magnetotail is highly variable and depends on the conditions of the solar wind. However, Voyager 2 <br>" 
+            "  observations provided some insights. Estimates for the length of Uranus' magnetotail range significantly, but it's <br>" 
+            "  often cited to extend hundreds of Uranus radii downwind. A reasonable estimate based on observations would be in the <br>" 
+            "  order of several hundred Ru, perhaps around 200-500 Ru or even more under certain solar wind conditions.<br>" 
+            "* The \"base\" of the magnetotail is the region connected to the planet's nightside magnetosphere. Its radius is <br>" 
+            "  related to the size of the obstacle the planet presents to the solar wind. A typical estimate for the radius of the <br>" 
+            "  magnetotail near the planet (the base) is on the order of the planet's radius. So, the tail base radius is estimated <br>" 
+            "  to be around 10-20 Ru.<br>" 
+            "* The magnetotail flares out as it extends away from the planet. The radius at the \"end\" (where it becomes less <br>" 
+            "  well-defined and merges with the interplanetary medium) would be larger than at the base. This is even more variable <br>" 
+            "  and less well-defined than the tail length. It could be several tens of Uranus radii. So, a rough estimate for the <br>" 
+            "  tail end radius is ~50-100 Ru."] * len(x),
+            customdata=['Magnetosphere'] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+uranus_radiation_belts_info = (
+            "560 KB PER FRAME FOR HTML.\n\n"
+            "Zones of trapped high-energy particles in uranus's magnetosphere"                     
+)
+
+def create_uranus_radiation_belts(center_position=(0, 0, 0)):
+    """Creates Uranus's radiation belts."""
+    belt_colors = ['rgb(255, 255, 100)', 'rgb(100, 255, 150)']
+    belt_names = ['Inner Radiation Belt', 'Outer Radiation Belt']
+    belt_texts = [
+        "Radiation Belts: Regions in its magnetosphere where charged particles (mainly electrons and protons) are trapped and <br>" 
+        "accelerated by the magnetic field. Voyager 2 data revealed that Uranus' electron radiation belts are surprisingly intense, <br>" 
+        "comparable to Earth's and much stronger than Saturn's. The source of these energetic particles is primarily the planet's <br>" 
+        "upper atmosphere.<br>" 
+        "* Voyager 2 was the first and so far only spacecraft to directly observe them during its flyby in 1986.<br>" 
+        "* Composition: The primary charged particles in Uranus' radiation belts are electrons and protons. There is also a minor <br>" 
+        "  component of molecular hydrogen ions.<br>" 
+        "* Intensity: The intensity of Uranus' electron radiation belts was surprisingly found to be similar to those of Earth and <br>" 
+        "  significantly more intense than those of Saturn. However, the proton radiation belts were observed to be much weaker than <br>" 
+        "  expected, about 100 times lower than predicted.<br>" 
+        "* Effects: The intense radiation in the electron belts can cause rapid darkening (within about 100,000 years) of any methane <br>" 
+        "  trapped in the icy surfaces of Uranus' inner moons and ring particles. This is a likely contributor to the uniformly dark <br>" 
+        "  and gray appearance of these objects. Uranus' moons can also create gaps in the radiation belts by sweeping up charged <br>" 
+        "  particles as they orbit the planet.<br>" 
+        "* Distances from Uranus' Center: The precise boundaries of Uranus' radiation belts are not as sharply defined as Earth's <br>" 
+        "  Van Allen belts, and their structure is influenced by Uranus' unusual, highly tilted, and offset magnetic field. However, <br>" 
+        "  based on Voyager 2 data and subsequent modeling, we can provide approximate ranges:<br>" 
+        "  * Inner Radiation Belt (primarily protons): This belt is thought to be relatively weak and located closer to the planet, <br>" 
+        "    likely within a few Uranus radii. Estimates suggest it may extend from around 1 to 3 R. However, its intensity is much <br>" 
+        "    lower than expected.<br>" 
+        "  * Outer Radiation Belt (primarily electrons): This belt is surprisingly intense, comparable to Earth's and much stronger <br>" 
+        "    than Saturn's. It is believed to extend further out, roughly from 3 to 10 R. Some models suggest it might even extend <br>" 
+        "    beyond this range, but the most intense regions are within 10 R.<br>" 
+        "  * Asymmetry: Due to the complex magnetic field, the radiation belts are likely asymmetric and their extent can vary with <br>" 
+        "    latitude and longitude.<br>" 
+        "  * Dynamic: The structure and intensity of the belts can be influenced by solar wind activity.<br>" 
+        "  * Data Limitations: Our understanding is primarily based on a single flyby from Voyager 2. Future missions are needed for <br>" 
+        "    a more comprehensive mapping of Uranus' radiation belts.<br>",
+
+        "Radiation Belts: Regions in its magnetosphere where charged particles (mainly electrons and protons) are trapped and <br>" 
+        "accelerated by the magnetic field. Voyager 2 data revealed that Uranus' electron radiation belts are surprisingly intense, <br>" 
+        "comparable to Earth's and much stronger than Saturn's. The source of these energetic particles is primarily the planet's <br>" 
+        "upper atmosphere.<br>" 
+        "* Voyager 2 was the first and so far only spacecraft to directly observe them during its flyby in 1986.<br>" 
+        "* Composition: The primary charged particles in Uranus' radiation belts are electrons and protons. There is also a minor <br>" 
+        "  component of molecular hydrogen ions.<br>" 
+        "* Intensity: The intensity of Uranus' electron radiation belts was surprisingly found to be similar to those of Earth and <br>" 
+        "  significantly more intense than those of Saturn. However, the proton radiation belts were observed to be much weaker than <br>" 
+        "  expected, about 100 times lower than predicted.<br>" 
+        "* Effects: The intense radiation in the electron belts can cause rapid darkening (within about 100,000 years) of any methane <br>" 
+        "  trapped in the icy surfaces of Uranus' inner moons and ring particles. This is a likely contributor to the uniformly dark <br>" 
+        "  and gray appearance of these objects. Uranus' moons can also create gaps in the radiation belts by sweeping up charged <br>" 
+        "  particles as they orbit the planet.<br>" 
+        "* Distances from Uranus' Center: The precise boundaries of Uranus' radiation belts are not as sharply defined as Earth's <br>" 
+        "  Van Allen belts, and their structure is influenced by Uranus' unusual, highly tilted, and offset magnetic field. However, <br>" 
+        "  based on Voyager 2 data and subsequent modeling, we can provide approximate ranges:<br>" 
+        "  * Inner Radiation Belt (primarily protons): This belt is thought to be relatively weak and located closer to the planet, <br>" 
+        "    likely within a few Uranus radii. Estimates suggest it may extend from around 1 to 3 R. However, its intensity is much <br>" 
+        "    lower than expected.<br>" 
+        "  * Outer Radiation Belt (primarily electrons): This belt is surprisingly intense, comparable to Earth's and much stronger <br>" 
+        "    than Saturn's. It is believed to extend further out, roughly from 3 to 10 R. Some models suggest it might even extend <br>" 
+        "    beyond this range, but the most intense regions are within 10 R.<br>" 
+        "  * Asymmetry: Due to the complex magnetic field, the radiation belts are likely asymmetric and their extent can vary with <br>" 
+        "    latitude and longitude.<br>" 
+        "  * Dynamic: The structure and intensity of the belts can be influenced by solar wind activity.<br>" 
+        "  * Data Limitations: Our understanding is primarily based on a single flyby from Voyager 2. Future missions are needed for <br>" 
+        "    a more comprehensive mapping of Uranus' radiation belts.<br>" 
+    ]
+    
+    # Belt distances in Uranus radii from the planet's center
+    belt_distances = [2, 6]
+    belt_thickness = 0.5 * URANUS_RADIUS_AU
+    
+    # Scale distances by Uranus's radius in AU
+    belt_distances = [d * URANUS_RADIUS_AU for d in belt_distances]
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+
+    # uranus tilt is 97.77 degrees, 105 was arrived at by trial and error
+    uranus_tilt = np.radians(105)
+    
+    traces = []
+    
+    for i, belt_distance in enumerate(belt_distances):
+        belt_x = []
+        belt_y = []
+        belt_z = []
+        
+        n_points = 80
+        n_rings = 5
+        
+        for i_ring in range(n_rings):
+            # Vary the radius slightly to create thickness
+            radius_offset = (i_ring / (n_rings-1) - 0.5) * belt_thickness
+            belt_radius = belt_distance + radius_offset
+            
+            for j in range(n_points):
+                angle = (j / n_points) * 2 * np.pi
+                
+                # Create a belt around Saturn's rotational axis
+                x = belt_radius * np.cos(angle)
+                y = belt_radius * np.sin(angle)
+                
+                # Add some z variation based on angle to create the shape of a belt
+                # rather than a perfect torus (thinner near poles)
+                z_scale = 0.2 * belt_radius  # Controls how flat the belts are
+                z = z_scale * np.sin(2 * angle)
+                
+                belt_x.append(x)
+                belt_y.append(y)
+                belt_z.append(z)
+        
+        # Apply center position offset
+        belt_x = np.array(belt_x) + center_x
+        belt_y = np.array(belt_y) + center_y
+        belt_z = np.array(belt_z) + center_z
+        
+        # Create the radiation belt hover text and customdata arrays
+        belt_text = [belt_texts[i]] * len(belt_x)
+        belt_customdata = [belt_names[i]] * len(belt_x)
+
+        # Apply center position offset
+        belt_x = np.array(belt_x)
+        belt_y = np.array(belt_y)
+        belt_z = np.array(belt_z)
+        
+        # Apply Saturn's axial tilt (rotate around x-axis)
+        belt_x_tilted, belt_y_tilted, belt_z_tilted = rotate_points(belt_x, belt_y, belt_z, uranus_tilt, 'x')
+            
+            
+            # First apply rotation around x-axis
+    #    x_tilted, y_tilted, z_tilted = rotate_points(x, y, z, np.radians(uranus_tilt), 'x')
+            
+            # Then apply rotation around y-axis with the same angle
+        belt_x_final, belt_y_final, belt_z_final = rotate_points(belt_x_tilted, belt_y_tilted, belt_z_tilted, uranus_tilt, 'y')        
+
+        # Apply center position offset
+    #    x = np.array(x) + center_x
+    #    y = np.array(y) + center_y
+    #    z = np.array(z) + center_z
+
+        # Apply center position offset
+    #    x_final = np.array(x_tilted) + center_x
+    #    y_final = np.array(y_tilted) + center_y
+    #    z_final = np.array(z_tilted) + center_z
+        
+        # Apply center position offset
+        belt_x_final = belt_x_tilted + center_x
+        belt_y_final = belt_y_tilted + center_y
+        belt_z_final = belt_z_tilted + center_z
+
+        traces.append(
+            go.Scatter3d(
+                x=belt_x_final,
+                y=belt_y_final,
+                z=belt_z_final,
+                mode='markers',
+                marker=dict(
+                    size=1.5,
+                    color=belt_colors[i],
+                    opacity=0.3
+                ),
+                name=belt_names[i],
+                text=belt_text,
+                customdata=belt_customdata,
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+    
+    return traces
+    
+uranus_ring_system_info = (
+                "22.2 MB PER FRAME FOR HTML.\n\n"
+
+                "Uranus has a system of 13 known rings. These rings are generally very narrow, dark (reflecting very little light, \n" 
+                "similar to charcoal), and composed of dust and larger particles that are icy and darkened by rock. The rings are \n" 
+                "grouped into two main systems:\n" 
+                "* Inner Rings: Nine narrow, dark rings.\n" 
+                "* Outer Rings: Two more distant rings, one of which is bluish and the other reddish.\n" 
+                "While the main rings of Uranus are narrow bands, there are also broader, more diffuse rings made of dust. These \n" 
+                "dusty rings could be considered to have a more toroidal (donut-like) distribution of material compared to the thin, \n" 
+                "distinct main rings. For example, the outermost rings (Nu and Mu) are quite broad and dusty.\n" 
+                "* There are nine main, narrow rings. These rings are relatively dense and have well-defined edges. They are composed \n" 
+                "  mostly of larger, darker particles, often described as being the color of charcoal. Examples of the main rings include \n" 
+                "  the Epsilon, Delta, Gamma, Eta, Beta, Alpha, and the numbered rings 4, 5, and 6. The Epsilon ring is the outermost and \n" 
+                "  widest of the main rings.\n" 
+                "* There are two outer rings: the Nu ring and the Mu ring. These rings are much fainter and more diffuse than the main \n" 
+                "  rings. They are composed of fine dust particles. The Mu ring is quite broad and has a more torus-like distribution of \n" 
+                "  material. It also has a distinct blue color, similar to Saturn's E ring. The Nu ring is reddish in color, similar to \n" 
+                "  dusty rings seen elsewhere in the solar system.\n" 
+                "* Composition: The main rings are primarily larger, dark particles, while the outer rings are predominantly fine dust.\n" 
+                "* Structure: The main rings are narrow and well-defined, whereas the outer rings are broad and diffuse, with the Mu \n" 
+                "  ring exhibiting a clear torus-like structure.\n" 
+                "* Origin and Evolution: The origins and the processes that shape these different sets of rings might vary. The dusty \n" 
+                "  outer rings are likely fed by dust kicked off Uranus' inner moons by micrometeoroid impacts.\n" 
+                "* Visual Characteristics: The main rings are dark and difficult to see, requiring specific observation techniques. The \n" 
+                "  outer rings are even fainter, with the Mu ring having a unique blue color.\n" 
+                "In summary, while all are part of Uranus' ring system, the significant differences in their composition, structure, and \n" 
+                "likely origin make it accurate and informative to distinguish between the narrow, dark main rings and the broad, dusty, \n" 
+                "and torus-like outer rings."                                           
+)
+
+def create_uranus_ring_system(center_position=(0, 0, 0)):
+    """
+    Creates a visualization of Saturn's ring system.
+    
+    Parameters:
+        center_position (tuple): (x, y, z) position of Saturn's center
+        
+    Returns:
+        list: A list of plotly traces representing the ring components
+
+    Uranus Ring System Transformation:
+
+    For proper alignment with satellite orbits, Uranus's ring system requires a specific 
+    compound rotation approach due to the planet's extreme axial tilt (97.77°).
+
+    The transformation uses these key elements:
+    1. A 105° rotation around the X-axis followed by a 105° rotation around the Y-axis
+    (empirically determined to match satellite orbit alignment)
+    2. Converting point coordinates to NumPy arrays before rotation
+    3. Applying center position offset to the final coordinates after both rotations
+
+    This approach ensures that all components of the Uranian system (rings, satellites, 
+    radiation belts) share the same reference frame, correctly representing the planet's
+    unique orientation in space.
+
+    NOTE: The 105° value, rather than the nominal 97.77° axial tilt, accounts for the 
+    specific reference frame conversion between Uranus's equatorial plane and the
+    ecliptic coordinate system used for visualization.
+    
+    """
+    traces = []
+    
+    # Define Saturn's ring parameters in kilometers from Saturn's center
+    # Then convert to Saturn radii, and finally to AU
+    ring_params = {
+
+        'ring_6': {
+            'inner_radius_km': 41800,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 41802,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 2,         # Approximate thickness
+            'color': 'rgb(60, 60, 60)',  
+            'opacity': 0.4,
+            'name': 'Ring 6',
+            'description': (
+                "Ring 6: Very narrow. Dark gray. 2 km thick. Very narrow, faint.<br>" 
+                "* Dark, likely icy particles darkened by radiation<br>" 
+                "* Relatively high density for its width.<br>" 
+                "* Possibly fragments from small, disrupted moons or impacts on existing moons.<br>" 
+                "* Narrow, relatively uniform width."
+            )
+        },
+
+        'ring_5': {
+            'inner_radius_km': 42200,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 42207,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 7,         # Approximate thickness, 2 to 7 km
+            'color': 'rgb(65, 65, 65)',  
+            'opacity': 0.4,
+            'name': 'Ring 5',
+            'description': (
+                "Ring 5: Narrow. Dark gray. 2 to 7 km thick.<br>" 
+                "* Narrow, slightly wider than Ring 6.<br>" 
+                "* Dark, likely icy particles darkened by radiation.<br>" 
+                "* Relatively high density for its width.<br>" 
+                "* Possibly fragments from small, disrupted moons or impacts on existing moons.<br>" 
+                "* Narrow, relatively uniform width."
+            )
+        },
+
+        'ring_4': {
+            'inner_radius_km': 42600,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 42603,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 3,         # Approximate thickness 
+            'color': 'rgb(60, 60, 60)',  
+            'opacity': 0.4,
+            'name': 'Ring 4',
+            'description': (
+                "Ring 4: Narrow. Dark gray. 3 km thick.<br>" 
+                "* Narrow, very faint.<br>" 
+                "* Dark, likely icy particles darkened by radiation.<br>" 
+                "* Relatively high density for its width.<br>" 
+                "* Possibly fragments from small, disrupted moons or impacts on existing moons.<br>" 
+                "* Narrow, relatively uniform width."
+            )
+        },
+
+        'alpha_ring': {
+            'inner_radius_km': 44700,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 44710,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 10,         # Approximate thickness, 4 to 10 km
+            'color': 'rgb(70, 70, 70)',  
+            'opacity': 0.3,
+            'name': 'Alpha Ring',
+            'description': (
+                "Alpha Ring: Relatively narrow. Dark gray. 4 to 10 km thick.<br>" 
+                "* Relatively narrow, but wider than 4, 5, 6.<br>" 
+                "* Shows some brightness variations.<br>" 
+                "* Dark, likely icy particles darkened by radiation.<br>" 
+                "* Moderate to high density for its width.<br>" 
+                "* Possibly fragments from small, disrupted moons or impacts on existing moons, perhaps confined by shepherd moons.<br>" 
+                "* Narrow, slight variations in width."
+            )
+        },
+
+        'beta_ring': {
+            'inner_radius_km': 45700,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 45711,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 11,         # Approximate thickness, 5 to 11 km
+            'color': 'rgb(75, 75, 75)',  
+            'opacity': 0.4,
+            'name': 'Beta Ring',
+            'description': (
+                "Beta Ring: Relatively narrow, but can be brighter than Alpha. Dark gray, sometimes appears slightly lighter. <br>" 
+                "5 to 11 km thick.<br>" 
+                "* Relatively narrow, can be brighter than Alpha.<br>" 
+                "* Shows some structure.<br>" 
+                "* Dark, likely icy particles darkened by radiation.<br>" 
+                "* Moderate to high density for its width.<br>" 
+                "* Possibly fragments from small, disrupted moons or impacts on existing moons, perhaps confined by shepherd moons.<br>" 
+                "* Narrow, slight variations in width."
+            )
+        },        
+
+        'eta_ring': {
+            'inner_radius_km': 47200,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 47202,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 2,         
+            'color': 'rgb(80, 70, 70)',  
+            'opacity': 0.2,
+            'name': 'Eta Ring',
+            'description': (
+                "Eta Ring: Narrow, has a dusty component. Dark gray with a possible faint reddish tint due to associated dust. 2 km thick.<br>" 
+                "* Narrow, has a faint, dusty component extending inwards and outwards.<br>" 
+                "* Associated with the moon Mab's orbit.<br>" 
+                "* Dark, likely icy particles mixed with fine dust.<br>" 
+                "* Low to moderate density.<br>" 
+                "* Likely generated by micrometeoroid impacts on small inner moons, with dustier regions.<br>" 
+                "* Narrow core with broader, diffuse edges."
+            )
+        }, 
+
+        'gamma_ring': {
+            'inner_radius_km': 47600,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 47604,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 4,         # 1 to 4 km
+            'color': 'rgb(70, 75, 70)',  
+            'opacity': 0.4,
+            'name': 'Gamma Ring',
+            'description': (
+                "Gamma Ring: Narrow, can appear brighter than Eta. Dark gray, sometimes appears slightly greenish in false-color <br>" 
+                "images used to study composition. 1 to 4 km thick.<br>" 
+                "* Narrow, can appear brighter than Eta.<br>" 
+                "* Shows some evidence of structure.<br>" 
+                "* Dark, likely icy particles darkened by radiation.<br>" 
+                "* Relatively high density for its width.<br>" 
+                "* Possibly fragments from small, disrupted moons or impacts on existing moons, perhaps confined by shepherd moons.<br>" 
+                "* Narrow, relatively uniform width."
+            )
+        },
+
+         'delta_ring': {
+            'inner_radius_km': 48300,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 48307,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 7,         # 3 to 7 km
+            'color': 'rgb(70, 70, 75)',  
+            'opacity': 0.3,
+            'name': 'Delta Ring',
+            'description': (
+                "Delta Ring: Narrow, shows some variations in width and brightness. Dark gray, may show a subtle bluish tint in some <br>" 
+                "enhanced images, but overall very dark. 3 to 7 km thick.<br>" 
+                "* Narrow, shows significant variations in width and brightness along its circumference.<br>" 
+                "* Has a faint, inner dusty component.<br>" 
+                "* Dark, likely icy particles darkened by radiation mixed with some dust.<br>" 
+                "* Moderate density.<br>" 
+                "* Possibly fragments from small, disrupted moons or impacts, with confinement and dust generation mechanisms.<br>" 
+                "* Narrow, with localized wider and fainter regions."
+            )
+        },    
+
+         'epsilon_ring': {
+            'inner_radius_km': 51100,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 51190,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 60,         # 20-100 km
+            'color': 'rgb(70, 70, 70)',  
+            'opacity': 0.3,
+            'name': 'Epsilon Ring',
+            'description': (
+                "Epsilon Ring: Widest and most substantial of the main rings, density variations along it. Neutral dark gray. While <br>" 
+                "the outer dusty Mu ring is bluish, the main Epsilon ring itself is generally considered neutral in color. 20-100 km thick.<br>" 
+                "* Widest and most substantial of the main rings.<br>" 
+                "* Shows significant density variations and kinks.<br>" 
+                "* Confined by shepherd moons Cordelia and Ophelia.<br>" 
+                "* Dark, likely icy particles darkened by radiation.<br>" 
+                "* Variable density, generally moderate.<br>" 
+                "* Likely fragments from a disrupted moon, with its sharp edges maintained by shepherd moons.<br>" 
+                "* Relatively wide, with varying width and density."
+            )
+        },           
+
+         'nu_gossamer_ring': {
+            'inner_radius_km': 62000,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 97700,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 9500,         # 7000 to 12000 km
+            'color': 'rgb(150, 100, 100)',  
+            'opacity': 0.1,
+            'name': 'Nu Gossamer Ring',
+            'description': (
+                "Nu Gossamer Ring: Broad, faint, and dusty outer ring. It's associated with the moon Portia. Faint reddish/dusty. <br>" 
+                "7,000 to 12,000 km thick. These rings are much fainter and more diffuse than the main rings, composed primarily of <br>" 
+                "fine dust particles. Their thicknesses are much greater than the main rings due to their diffuse nature. <br>" 
+                "* The Mu ring's inner boundary (~86,000 km) is well within the Nu ring's outer boundary (~97,700 km). There is a <br>" 
+                "  region between approximately 86,000 km and 97,700 km from Uranus' center where material from both rings can be <br>" 
+                "  found. However, it's important to remember that these are broad, dusty rings. The density of particles within <br>" 
+                "  them is likely quite low, and the overlap doesn't necessarily mean a dense collision zone like you might imagine <br>" 
+                "  with solid rings. Instead, it's a region where the diffuse dust distributions of both rings coexist.<br>" 
+                "* Faint and Diffuse: The Mu and Nu rings are indeed very faint and were discovered much later than the main rings, <br>" 
+                "  requiring sensitive instruments like the Hubble Space Telescope and Voyager 2. Their low brightness indicates a low <br>" 
+                "  density of particles.<br>" 
+                "* Dust-Dominated: Observations confirm that these outer rings are primarily composed of fine dust particles. This is <br>" 
+                "  evidenced by their colors (bluish for Mu, reddish for Nu), which are likely due to the way these small particles <br>" 
+                "  scatter sunlight.<br>" 
+                "* Source Moons: Both rings are strongly associated with small inner moons. Mu ring is linked to the moon Mab, which <br>" 
+                "  orbits within it and is believed to be the primary source of its dust through micrometeoroid impacts. Nu ring is <br>" 
+                "  associated with the moon Portia, although the exact mechanism of its dust generation is still being studied.<br>" 
+                "* Broad Radial Extent: As the radius information shows, both the Mu and Nu rings are significantly broader than the <br>" 
+                "  narrow main rings of Uranus.<br>"                
+                "* Broad, faint, and dusty outer ring extending significantly outwards.<br>" 
+                "* Fine dust.<br>" 
+                "* Very low density.<br>"  
+                "* Broad, diffuse, torus-like."
+            )
+        },
+
+         'Mu__goassamer_ring': {
+            'inner_radius_km': 86000,  # Inner edge (in km from Uranus's center)
+            'outer_radius_km': 102000,  # Outer edge (in km from Uranus's center)
+            'thickness_km': 16000,         # 15000 to 17000 km
+            'color': 'rgb(100, 150, 200)',  
+            'opacity': 0.1,
+            'name': 'Mu Gossamer Ring',
+            'description': (
+                "Mu Gossamer Ring: Very broad, faint, and dusty outermost ring. It has a distinct bluish color and is associated with <br>" 
+                "the moon Mab. Muted blue. 15,000 to 17,000 km thick. These rings are much fainter and more diffuse than the main <br>" 
+                "rings, composed primarily of fine dust particles.<br>"
+                "* The Mu ring's inner boundary (~86,000 km) is well within the Nu ring's outer boundary (~97,700 km). There is a <br>" 
+                "  region between approximately 86,000 km and 97,700 km from Uranus' center where material from both rings can be <br>" 
+                "  found. However, it's important to remember that these are broad, dusty rings. The density of particles within <br>" 
+                "  them is likely quite low, and the overlap doesn't necessarily mean a dense collision zone like you might imagine <br>" 
+                "  with solid rings. Instead, it's a region where the diffuse dust distributions of both rings coexist.<br>" 
+                "* Faint and Diffuse: The Mu and Nu rings are indeed very faint and were discovered much later than the main rings, <br>" 
+                "  requiring sensitive instruments like the Hubble Space Telescope and Voyager 2. Their low brightness indicates a low <br>" 
+                "  density of particles.<br>" 
+                "* Dust-Dominated: Observations confirm that these outer rings are primarily composed of fine dust particles. This is <br>" 
+                "  evidenced by their colors (bluish for Mu, reddish for Nu), which are likely due to the way these small particles <br>" 
+                "  scatter sunlight.<br>" 
+                "* Source Moons: Both rings are strongly associated with small inner moons. Mu ring is linked to the moon Mab, which <br>" 
+                "  orbits within it and is believed to be the primary source of its dust through micrometeoroid impacts. Nu ring is <br>" 
+                "  associated with the moon Portia, although the exact mechanism of its dust generation is still being studied.<br>" 
+                "* Broad Radial Extent: As the radius information shows, both the Mu and Nu rings are significantly broader than the <br>" 
+                "  narrow main rings of Uranus.<br>"                 
+                "* Very broad, faint, and dusty outermost ring with a distinct bluish color.<br>" 
+                "* Strongly associated with the moon Mab, which orbits within it.<br>" 
+                "* Fine dust (icy?)<br>" 
+                "* Very low density.<br>" 
+                "* Primarily generated by micrometeoroid impacts ejecting material from the surface of the small moon Mab.<br>" 
+                "* Very broad, diffuse, torus-like, somewhat clumpy."                
+            )
+        },
+
+    }
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    uranus_tilt = np.radians(105)  # Convert to radians here, once; actual tilt is 97.77 but using 105 that is best fit empirically
+
+    # Create traces for each ring
+    for ring_name, ring_info in ring_params.items():
+        # Convert km to AU
+        inner_radius_au = ring_info['inner_radius_km'] / KM_PER_AU
+        outer_radius_au = ring_info['outer_radius_km'] / KM_PER_AU
+        thickness_au = ring_info['thickness_km'] / KM_PER_AU
+        
+        # Reduce point count for very large rings to improve performance
+        n_points = 100
+        if 'gossamer' in ring_name:
+            n_points = 80  # Fewer points for larger gossamer rings
+        
+        # Create ring points
+        x, y, z = create_ring_points_saturn (inner_radius_au, outer_radius_au, n_points, thickness_au)
+        
+        # Convert to numpy arrays BEFORE applying rotations
+        x = np.array(x)
+        y = np.array(y)
+        z = np.array(z)           
+            
+            # Apply the SAME compound rotation as for satellites
+            # First apply rotation around x-axis
+        x_tilted, y_tilted, z_tilted = rotate_points(x, y, z, uranus_tilt, 'x')
+            
+            # Then apply rotation around y-axis with the same angle
+        x_final, y_final, z_final = rotate_points(x_tilted, y_tilted, z_tilted, uranus_tilt, 'y')        
+
+        # Apply center position offset to the FINAL coordinates
+        x_final = x_final + center_x  # Use x_final from Y rotation
+        y_final = y_final + center_y  # Use y_final from Y rotation
+        z_final = z_final + center_z  # Use z_final from Y rotation
+        
+        # Create a text list for hover information
+        text_array = [ring_info['description'] for _ in range(len(x))]
+        
+        # Add ring trace
+        traces.append(
+            go.Scatter3d(
+    #            x=x, y=y, z=z,
+                x=x_final,
+                y=y_final,
+                z=z_final,
+                mode='markers',
+                marker=dict(
+                    size=1.5,  # Small markers for rings
+                    color=ring_info['color'],
+                    opacity=ring_info['opacity']
+                ),
+                name=f"Uranus: {ring_info['name']}",
+                text=text_array,
+                customdata=[f"Uranus: {ring_info['name']}"] * len(x),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+    
+    return traces
+
+uranus_hill_sphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
+
+            "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity \n" 
+            "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02×10⁷ km, which corresponds to about \n" 
+            "2 770 Uranus radii (mean radius ≈25 360 km). This means that any moon or other object orbiting Uranus within this \n" 
+            "sphere is primarily gravitationally bound to the planet. The major moons and rings of Uranus lie well within its Hill \n" 
+            "sphere."                     
+)
+
+def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
+    """Creates Uranus's Hill sphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 2770, 
+        'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
+        'opacity': 0.3,
+        'name': 'Hill Sphere',
+        'description': (
+            "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
+    "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity <br>" 
+    "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10⁷ km, which corresponds to about <br>" 
+    "2 770 Uranus radii (mean radius ≈25 360 km). This means that any moon or other object orbiting Uranus within this <br>" 
+    "sphere is primarily gravitationally bound to the planet. The major moons and rings of Uranus lie well within its Hill Sphere<br><br>" 
+                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
+                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
+                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
+                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
+                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
+        )
+    }
+        
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Uranus: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+# Neptune Shell Creation Functions
+
+neptune_core_info = (
+            "2.4 MB PER FRAME FOR HTML.\n\n"
+            "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. \n" 
+            "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million \n" 
+            "bars (700 GPa), and the temperature could be as high as 5,100 °C."
+)
+
+def create_neptune_core_shell(center_position=(0, 0, 0)):
+    """Creates Neptune's core shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.25,  # Approximately 25% of Neptune's radius
+        'color': 'rgb(255, 215, 0)',  # estimated black body color at about 5100°C 
+        'opacity': 1.0,
+        'name': 'Core',
+        'description': (
+            "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. <br>" 
+            "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million <br>" 
+            "bars (700 GPa), and the temperature could be as high as 5,100 °C.<br>" 
+            "* While there isn't a single, precisely agreed-upon value for Neptune's core radius, estimates suggest that the rocky <br>" 
+            "  core makes up a relatively small fraction of the planet's total radius."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=4.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Neptune: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+neptune_mantel_info = (
+            "2.1 MB PER FRAME FOR HTML.\n\n"
+            "Mantel: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. \n " 
+            "This layer constitutes the majority of Neptune's mass, about 10 to 15 Earth masses. The high pressure and temperature create \n" 
+            "an environment where these \"icy\" materials exist in exotic phases, possibly including ionic water and superionic water. \n" 
+            "Some theories suggest that at great depths within the mantle, methane may decompose, forming diamond crystals that could \n" 
+            "\"rain\" downwards."
+)
+
+def create_neptune_mantel_shell(center_position=(0, 0, 0)):
+    """Creates Neptune's mantel shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.85,  # Up to about 85% of neptune's radius
+        'color': 'rgb(255, 138, 18)',  # estimated black body color at about 2,000 K
+        'opacity': 0.9,
+        'name': 'Mantel',
+        'description': (
+            "Mantel: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. <br> " 
+            "This layer constitutes the majority of Neptune's mass, about 10 to 15 Earth masses. The high pressure and temperature create <br>" 
+            "an environment where these \"icy\" materials exist in exotic phases, possibly including ionic water and superionic water. <br>" 
+            "Some theories suggest that at great depths within the mantle, methane may decompose, forming diamond crystals that could <br>" 
+            "\"rain\" downwards.<br>" 
+            "* The mantle makes up a significant portion of the remaining interior. Models suggest it could extend out to approximately <br>" 
+            "  80-85% of Neptune's total radius.<br>" 
+            "* It's important to remember that this is still an estimate based on our current understanding of Neptune's interior. <br>" 
+            "  The transition from the dense fluid mantle to the gaseous atmosphere is likely a gradual one.<br>" 
+            "* The temperature within Neptune's mantle is incredibly high, ranging from approximately 2,000 K (around 1,700 °C) to <br>" 
+            "  5,000 K (around 4,700 °C). It's important to understand that Neptune's mantle isn't a solid, icy layer like the name <br>" 
+            "  \"ice giant\" might suggest. Instead, it's a hot, dense fluid composed primarily of water, methane, and ammonia under <br>" 
+            "  immense pressure. This high pressure actually raises the freezing point of these substances significantly. So, even at <br>" 
+            "  these high temperatures, they can exist in a fluid or even superionic state."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.5,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Neptune: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+neptune_cloud_layer_info = (
+            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
+            "4.6 MB PER FRAME FOR HTML.\n\n"
+            "Atmosphere: Neptune's atmosphere is primarily composed of hydrogen (around 80%) and helium (around 19%), with a small \n" 
+            "amount of methane (about 1.5%). It's the methane that absorbs red light and reflects blue light, giving Neptune its \n" 
+            "characteristic vivid blue color. The atmosphere extends to great depths, gradually merging into the fluid mantle below.\n" 
+            "* Cloud Layer: Within the troposphere, the lowest layer of the atmosphere, various cloud layers exist at different \n" 
+            "  altitudes. The highest clouds are thought to be composed of methane ice. Below that, there may be clouds of ammonia \n" 
+            "  and hydrogen sulfide, followed by ammonium sulfide and water ice clouds at even deeper levels. These clouds are often \n" 
+            "  swept around the planet by incredibly strong winds, the fastest in the Solar System, reaching up to 2,100 kilometers \n" 
+            "  per hour. Recent observations have shown surprising changes in Neptune's cloud cover, with a significant decrease in \n" 
+            "  cloudiness possibly linked to the solar cycle."
+)
+
+def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
+    """Creates neptune's cloud layer shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.0,  # the top of the troposphere is actually 1.002
+        'color': 'rgb(0, 128, 255)',  # optical
+        'opacity': 1.0,
+        'name': 'Cloud Layer',
+        'description': (
+            "Neptune Cloud Layer<br>" 
+            "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
+            "Atmosphere: Neptune's atmosphere is primarily composed of hydrogen (around 80%) and helium (around 19%), with a small <br>" 
+            "amount of methane (about 1.5%). It's the methane that absorbs red light and reflects blue light, giving Neptune its <br>" 
+            "characteristic vivid blue color. The atmosphere extends to great depths, gradually merging into the fluid mantle below.<br>" 
+            "* Cloud Layer: Within the troposphere, the lowest layer of the atmosphere, various cloud layers exist at different <br>" 
+            "  altitudes. The highest clouds are thought to be composed of methane ice. Below that, there may be clouds of ammonia <br>" 
+            "  and hydrogen sulfide, followed by ammonium sulfide and water ice clouds at even deeper levels. These clouds are often <br>" 
+            "  swept around the planet by incredibly strong winds, the fastest in the Solar System, reaching up to 2,100 kilometers <br>" 
+            "  per hour. Recent observations have shown surprising changes in Neptune's cloud cover, with a significant decrease in <br>" 
+            "  cloudiness possibly linked to the solar cycle.<br>" 
+            "* Based on available information, the troposphere extends to a pressure level of about 0.1 bar (10 kPa). The altitude <br>" 
+            "  at which this pressure occurs is estimated to be around 50 to 80 kilometers above the 1-bar pressure level (which is <br>" 
+            "  often considered the \"surface\" of gas giants). Therefore, the radius fraction at the top of Neptune's troposphere <br>" 
+            "  is approximately 1.002 to 1.003 of Neptune's total radius (using the equatorial radius). In essence, when we talk <br>" 
+            "  about the planet's radius, it's a defined level within its atmosphere. The troposphere extends a bit further out.<br>" 
+            "* The predominant visual color of Neptune is a distinct blue. This is primarily due to the absorption of red and infrared <br>" 
+            "  light by methane in its atmosphere. While the exact shade can vary slightly depending on viewing conditions and image <br>" 
+            "  processing, a representative RGB value for Neptune's blue could be approximately: R: 0-63, G: 119-159, B: 135-253"
+            )
+    }
+    
+    # Calculate radius in AU
+    radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
+    
+    # Apply center position offset
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
+    
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Neptune: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Neptune: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(0, 128, 255)',  # Layer color, originally 'white'
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Neptune: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
+
+neptune_upper_atmosphere_info = (
+            "2.7 MB PER FRAME FOR HTML.\n\n"
+            "Upper Atmosphere: Above the troposphere lies the stratosphere, where temperature increases with altitude. Higher still \n" 
+            "is the thermosphere, characterized by lower pressures. The outermost layer is the exosphere, which gradually fades into space."
+)
+
+def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
+    """Creates Neptune's upper atmosphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.01,  # more like 1.008 and very approximate.
+        'color': 'rgb(240, 245, 250)',  # optical pale blue
+        'opacity': 0.5,
+        'name': 'Upper Atmosphere',
+        'description': (
+            "Upper Atmosphere: Above the troposphere lies the stratosphere, where temperature increases with altitude. Higher still <br>" 
+            "is the thermosphere, characterized by lower pressures. The outermost layer is the exosphere, which gradually fades into space.<br>" 
+            "* No Solid Surface: Neptune is a gas giant, so its \"radius\" is defined at a specific pressure level (usually the 1-bar <br>" 
+            "  level). The atmosphere extends far beyond this.<br>" 
+            "* Gradual Transition: The thermosphere doesn't have a sharp upper boundary; it gradually fades into the exosphere. The <br>" 
+            "  altitude where one ends and the other begins (the thermopause) varies.<br>" 
+            "* Dynamic Conditions: The thermosphere's extent is influenced by solar activity and Neptune's magnetic field, causing it to <br>" 
+            "  expand and contract.<br>" 
+            "* Temperature: The upper atmospheres of Uranus and Neptune are known to be inexplicably hot, suggesting significant <br>" 
+            "  energy input that could lead to a more extended thermosphere than expected based solely on solar heating.<br>" 
+            "* Estimated Height: The thermosphere on Neptune likely extends a significant distance above the 1-bar radius.<br>" 
+            "  * The thermosphere begins at pressures below 10⁻⁵ to 10⁻⁴ bars (1 to 10 Pa).<br>" 
+            "  * Barometric Formula: We'll use a simplified version of the barometric formula, which relates pressure and altitude in <br>" 
+            "    an atmosphere.<br>" 
+            "    * The pressure at a certain altitude in an atmosphere is equal to the pressure at a reference altitude multiplied <br>" 
+            "      by the natural exponential function raised to the power of the negative of the altitude difference divided by the <br>" 
+            "      atmospheric scale height.<br>" 
+            "    * This exponential relationship is fundamental to how pressure changes with altitude in an atmosphere.<br>" 
+            "    * The negative sign indicates that pressure generally decreases as altitude increases.<br>" 
+            "    * The atmospheric scale height is a characteristic distance for a particular atmosphere. It's the vertical distance <br>" 
+            "      over which the pressure decreases by a factor of 'e'. It depends on the gravity and temperature of the atmosphere.<br>" 
+            "  * The pressure level of 5 Pa is estimated to be at a radius fraction of approximately 1.008 of Neptune's radius (1-bar).<br>" 
+            "  * The pressure level of 1 Pa is estimated to be at a radius fraction of approximately 1.0091 of Neptune's radius. This <br>" 
+            "    is an estimate using a simplified model. At these very low pressures, the actual temperature profile and thus the scale <br>" 
+            "    height can deviate from the average value used, potentially affecting the accuracy of this calculation.<br>" 
+            "  * Isothermal Assumption: The simple barometric formula assumes a constant temperature with altitude, which is not entirely <br>" 
+            "    accurate for Neptune's atmosphere, especially across different layers. However, it provides a reasonable approximation.<br>" 
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Neptune: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+neptune_magnetosphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
+            "1.4 MB PER FRAME FOR HTML.\n\n"
+
+            "Magnetosphere: Neptune possesses a significant and unusual magnetosphere. Unlike Earth's magnetic field, which is \n" 
+            "roughly aligned with its rotational axis, Neptune's magnetic axis is tilted by about 47 degrees relative to its rotation \n" 
+            "axis and offset from the planet's center by a considerable fraction of its radius. This creates a complex and dynamic \n" 
+            "magnetic environment. The magnetosphere traps charged particles from the solar wind and accelerates them to high energies."                     
+)
+
+def create_neptune_magnetosphere(center_position=(0, 0, 0)):
+    """Creates Neptune's main magnetosphere structure with proper tilt and offset."""
+    # Parameters for magnetosphere components (in Neptune radii)
+    params = {
+        # Compressed sunward side - Neptune's bow shock standoff distance
+        'sunward_distance': 34,  # Based on Voyager 2 data, ~34 Neptune radii
+        
+        # Equatorial extension (wider than polar)
+        'equatorial_radius': 40,  # Typical equatorial extension
+        'polar_radius': 25,       # Polar extension is smaller
+        
+        # Magnetotail parameters
+        'tail_length': 600,       # Neptune's tail extends far downstream
+        'tail_base_radius': 60,   # Radius at the base of the tail, based on modeling
+        'tail_end_radius': 120,   # Radius at the end of the tail, based on modeling
+    }
+    
+    # Scale everything by Neptune's radius in AU
+    for key in params:
+        params[key] *= NEPTUNE_RADIUS_AU
+    
+    # Create magnetosphere main shape
+    x, y, z = create_magnetosphere_shape(params)
+    
+    # Convert to numpy arrays for efficient rotation
+    x = np.array(x)
+    y = np.array(y)
+    z = np.array(z)
+    
+    # Implement Neptune's magnetic field offset (0.55 Neptune radii, mostly northward)
+    # The offset is applied before rotation to properly represent the field
+    offset_distance = 0.55 * NEPTUNE_RADIUS_AU
+    
+    # Apply the offset primarily in the z-direction (northward)
+    # with small components in x and y to match observations
+    z = z + (0.5 * offset_distance)  # Major component of offset in z
+    x = x + (0.2 * offset_distance)  # Minor component in x
+    y = y + (0.1 * offset_distance)  # Minor component in y
+    
+    # Implement Neptune's magnetic axis tilt (47 degrees relative to rotation axis)
+    # First, tilt around the y-axis to implement the main magnetic axis tilt
+    magnetic_tilt = np.radians(47)
+    x_tilted1, y_tilted1, z_tilted1 = rotate_points(x, y, z, magnetic_tilt, 'y')
+    
+    # Second rotation to match the observed orientation (around z-axis)
+    azimuthal_angle = np.radians(60)  # Estimated angle based on Voyager data
+    x_tilted2, y_tilted2, z_tilted2 = rotate_points(x_tilted1, y_tilted1, z_tilted1, azimuthal_angle, 'z')
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Apply center position offset to final coordinates
+    x_final = x_tilted2 + center_x
+    y_final = y_tilted2 + center_y
+    z_final = z_tilted2 + center_z
+    
+    # Detailed description for hover information
+    magnetosphere_text = [
+        "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted (47° from its rotation axis) and "
+        "significantly offset from the planet's center by more than half a Neptune radius. This creates an extremely asymmetric magnetosphere "
+        "that varies greatly depending on Neptune's rotation. The magnetosphere extends about 34-40 Neptune radii sunward and stretches into "
+        "a long tail in the opposite direction. It deflects the solar wind and contains trapped charged particles that produce aurora near "
+        "Neptune's magnetic poles. This uniquely complex magnetic environment was studied by Voyager 2 during its 1989 flyby."
+    ] * len(x_final)
+    
+    magnetosphere_customdata = ['Neptune: Magnetosphere'] * len(x_final)
+    
+    traces = [
+        go.Scatter3d(
+            x=x_final, y=y_final, z=z_final,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color='rgb(30, 136, 229)',  # More appropriate blue for Neptune
+                opacity=0.3
+            ),
+            name='Neptune: Magnetosphere',
+            text=magnetosphere_text,
+            customdata=magnetosphere_customdata,
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    # Add a trace to visualize the magnetic axis and poles
+    # This helps users understand the tilt and offset
+#    magnetic_poles = create_neptune_magnetic_poles(center_position, offset_distance, magnetic_tilt, azimuthal_angle)
+#    traces.extend(magnetic_poles)
+    
+    return traces
+
+"""
+def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth):
+    
+#    Creates visualization elements for Neptune's magnetic poles and axis.
+    
+#    Parameters:
+#        center_position (tuple): Planet center coordinates
+#        offset_distance (float): Offset of magnetic field center in AU
+#        tilt (float): Main magnetic tilt angle in radians
+#        azimuth (float): Azimuthal orientation angle in radians
+        
+#    Returns:
+#        list: Plotly traces for magnetic poles and axis
+    
+    center_x, center_y, center_z = center_position
+    
+    # Start with offset magnetic center
+    mag_center_x = center_x + (0.2 * offset_distance)
+    mag_center_y = center_y + (0.1 * offset_distance)
+    mag_center_z = center_z + (0.5 * offset_distance)
+    
+    # Create axis points (north and south poles at 15 Neptune radii from magnetic center)
+    axis_length = 15 * NEPTUNE_RADIUS_AU
+    
+    # Initial axis points along z-axis
+    north_x, north_y, north_z = 0, 0, axis_length
+    south_x, south_y, south_z = 0, 0, -axis_length
+    
+    # Apply tilts to match Neptune's magnetic field orientation
+    # First y-axis tilt
+    north_x, north_y, north_z = rotate_points(north_x, north_y, north_z, tilt, 'y')
+    south_x, south_y, south_z = rotate_points(south_x, south_y, south_z, tilt, 'y')
+    
+    # Then z-axis rotation
+    north_x, north_y, north_z = rotate_points(north_x, north_y, north_z, azimuth, 'z')
+    south_x, south_y, south_z = rotate_points(south_x, south_y, south_z, azimuth, 'z')
+    
+    # Add to magnetic center offset
+    north_x += mag_center_x
+    north_y += mag_center_y 
+    north_z += mag_center_z
+    
+    south_x += mag_center_x
+    south_y += mag_center_y
+    south_z += mag_center_z
+    
+    # Create magnetic center marker
+    mag_center_trace = go.Scatter3d(
+        x=[mag_center_x],
+        y=[mag_center_y],
+        z=[mag_center_z],
+        mode='markers',
+        marker=dict(
+            size=5,
+            color='yellow',
+            symbol='diamond'
+        ),
+        name='Neptune: Magnetic Field Center',
+        text=["Neptune's magnetic field center is offset by ~0.55 Neptune radii from the planet's center"],
+        hoverinfo='text',
+        showlegend=True
+    )
+    
+    # Create magnetic axis line
+    axis_trace = go.Scatter3d(
+        x=[north_x, south_x],
+        y=[north_y, south_y],
+        z=[north_z, south_z],
+        mode='lines',
+        line=dict(
+            color='yellow',
+            width=4,
+            dash='dot'
+        ),
+        name='Neptune: Magnetic Axis',
+        text=["Neptune's magnetic axis is tilted 47° from its rotation axis"],
+        hoverinfo='text',
+        showlegend=True
+    )
+    
+    # Create north and south magnetic poles
+    north_pole_trace = go.Scatter3d(
+        x=[north_x],
+        y=[north_y],
+        z=[north_z],
+        mode='markers',
+        marker=dict(
+            size=4,
+            color='blue',
+            symbol='circle'
+        ),
+        name='Neptune: North Magnetic Pole',
+        text=["Neptune's north magnetic pole"],
+        hoverinfo='text',
+        showlegend=True
+    )
+    
+    south_pole_trace = go.Scatter3d(
+        x=[south_x],
+        y=[south_y],
+        z=[south_z],
+        mode='markers',
+        marker=dict(
+            size=4,
+            color='red',
+            symbol='circle'
+        ),
+        name='Neptune: South Magnetic Pole',
+        text=["Neptune's south magnetic pole"],
+        hoverinfo='text',
+        showlegend=True
+    )
+    
+    return [mag_center_trace, axis_trace, north_pole_trace, south_pole_trace]
+"""
+
+neptune_radiation_belts_info = (
+                "560 KB PER FRAME FOR HTML.\n\n"
+                "Zones of trapped high-energy particles in neptune's magnetosphere"                     
+)
+
+def create_neptune_radiation_belts(center_position=(0, 0, 0)):
+    """Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment."""
+    # Belt names and descriptions based on current understanding
+    belt_regions = [
+        {
+            'name': 'Proton-Rich Inner Belt',
+            'distance': 1.8,  # Neptune radii from magnetic center
+            'thickness': 0.5,  # Relative thickness
+            'color': 'rgb(80, 180, 255)',  
+            'opacity': 0.4,
+            'description': "Neptune's innermost radiation belt is dominated by protons. Located approximately 1.2-2.5 Neptune <br>"
+                          "radii from the center, it's influenced by Neptune's offset and tilted magnetic field. This region <br>"
+                          "shows significant day/night asymmetry as Neptune rotates.<br><br>" 
+                          "This implementation includes four distinct radiation regions: a proton-rich inner belt; a primary <br>" 
+                          "electron belt; an outer plasma sheet region; a cusp region where solar wind particles directly enter.<br>" 
+                          "* Adds field-aligned currents that represent important features in Neptune's magnetosphere, showing how <br>" 
+                          "  charged particles flow along magnetic field lines.<br>" 
+                          "* Creates more accurate geometric structures that reflect Neptune's complex magnetic environment: asymmetric <br>" 
+                          "  shapes that account for the unusual magnetic field.<br>" 
+                          "* Magnetotail stretching for the outer plasma sheet.<br>" 
+                          "* Funnel-shaped polar cusps.<br>" 
+                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "  from the planet's center.<br>" 
+                          "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
+                          "  data and subsequent scientific analysis."
+        },
+        {
+            'name': 'Primary Electron Belt',
+            'distance': 3.5,  # Neptune radii from magnetic center
+            'thickness': 0.6,  # Relative thickness
+            'color': 'rgb(120, 150, 230)',  
+            'opacity': 0.35,
+            'description': "Neptune's middle radiation region contains high-energy electrons. This belt shows notable <br>"
+                          "variations in intensity with longitude due to Neptune's unusual magnetic field geometry. <br>"
+                          "The trapped electron fluxes here are surprisingly intense, comparable to Earth's electron belts.<br><br>"
+                          "This implementation includes four distinct radiation regions: a proton-rich inner belt; a primary <br>" 
+                          "electron belt; an outer plasma sheet region; a cusp region where solar wind particles directly enter.<br>" 
+                          "* Adds field-aligned currents that represent important features in Neptune's magnetosphere, showing how <br>" 
+                          "  charged particles flow along magnetic field lines.<br>" 
+                          "* Creates more accurate geometric structures that reflect Neptune's complex magnetic environment: asymmetric <br>" 
+                          "  shapes that account for the unusual magnetic field.<br>" 
+                          "* Magnetotail stretching for the outer plasma sheet.<br>" 
+                          "* Funnel-shaped polar cusps.<br>" 
+                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "  from the planet's center.<br>" 
+                          "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
+                          "  data and subsequent scientific analysis."                          
+        },
+        {
+            'name': 'Outer Plasma Sheet',
+            'distance': 6.0,  # Neptune radii from magnetic center
+            'thickness': 0.8,  # Relative thickness
+            'color': 'rgb(150, 130, 210)',  
+            'opacity': 0.3,
+            'description': "This transition region between the trapped radiation and the magnetotail contains a mix of charged <br>"
+                          "particles. Its structure is highly dynamic and asymmetric, with its shape constantly changing as <br>"
+                          "Neptune rotates and the solar wind conditions vary.<br><br>"
+                          "This implementation includes four distinct radiation regions: a proton-rich inner belt; a primary <br>" 
+                          "electron belt; an outer plasma sheet region; a cusp region where solar wind particles directly enter.<br>" 
+                          "* Adds field-aligned currents that represent important features in Neptune's magnetosphere, showing how <br>" 
+                          "  charged particles flow along magnetic field lines.<br>" 
+                          "* Creates more accurate geometric structures that reflect Neptune's complex magnetic environment: asymmetric <br>" 
+                          "  shapes that account for the unusual magnetic field.<br>" 
+                          "* Magnetotail stretching for the outer plasma sheet.<br>" 
+                          "* Funnel-shaped polar cusps.<br>" 
+                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "  from the planet's center.<br>" 
+                          "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
+                          "  data and subsequent scientific analysis."
+        },
+        {
+            'name': 'Cusp Region',
+            'distance': 4.2,  # Neptune radii from magnetic center
+            'thickness': 0.4,  # Relative thickness
+            'color': 'rgb(200, 150, 180)',  
+            'opacity': 0.25,
+            'variable_offset': True,  # Special handling for cusp region
+            'description': "The polar cusps represent funnel-shaped openings where solar wind particles can directly access <br>"
+                          "Neptune's magnetosphere. Due to Neptune's tilted magnetic field, these regions demonstrate complex <br>"
+                          "behavior and vary dramatically with the planet's rotation.<br><br>"
+                          "This implementation includes four distinct radiation regions: a proton-rich inner belt; a primary <br>" 
+                          "electron belt; an outer plasma sheet region; a cusp region where solar wind particles directly enter.<br>" 
+                          "* Adds field-aligned currents that represent important features in Neptune's magnetosphere, showing how <br>" 
+                          "  charged particles flow along magnetic field lines.<br>" 
+                          "* Creates more accurate geometric structures that reflect Neptune's complex magnetic environment: asymmetric <br>" 
+                          "  shapes that account for the unusual magnetic field.<br>" 
+                          "* Magnetotail stretching for the outer plasma sheet.<br>" 
+                          "* Funnel-shaped polar cusps.<br>" 
+                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "  from the planet's center.<br>" 
+                          "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
+                          "  data and subsequent scientific analysis."
+        }
+    ]
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Apply magnetic field offset (about 0.55 Neptune radii, offset from center)
+    offset_distance = 0.55 * NEPTUNE_RADIUS_AU
+    magnetic_center_x = center_x + (0.2 * offset_distance)
+    magnetic_center_y = center_y + (0.1 * offset_distance)
+    magnetic_center_z = center_z + (0.5 * offset_distance)
+    
+    # Neptune's magnetic axis tilt in radians (47 degrees from rotation axis)
+    magnetic_tilt = np.radians(47)
+    
+    # Additional rotation to match the observed orientation
+    azimuthal_angle = np.radians(60)  # Based on Voyager data
+    
+    traces = []
+    
+    for belt in belt_regions:
+        belt_x = []
+        belt_y = []
+        belt_z = []
+        
+        n_points = 90  # More points for smoother appearance
+        n_rings = 6    # More rings for better volume representation
+        
+        # Scale distances by Neptune's radius in AU
+        belt_distance = belt['distance'] * NEPTUNE_RADIUS_AU
+        belt_thickness = belt['thickness'] * NEPTUNE_RADIUS_AU
+        
+        for i_ring in range(n_rings):
+            # Vary the radius slightly to create thickness
+            radius_offset = (i_ring / (n_rings-1) - 0.5) * belt_thickness
+            ring_radius = belt_distance + radius_offset
+            
+            for j in range(n_points):
+                angle = (j / n_points) * 2 * np.pi
+                
+                # Create a belt around magnetic field axis
+                x = ring_radius * np.cos(angle)
+                y = ring_radius * np.sin(angle)
+                
+                # For the cusp region, create a more funnel-like shape
+                if belt.get('variable_offset', False):
+                    # Create funnel-like shape pointing in the magnetic field direction
+                    z_scale = 0.4 * ring_radius * (1 + 0.5 * np.cos(angle))
+                    z = z_scale * np.sin(angle)
+                    
+                    # Add distortion to create cusp-like features
+                    if np.abs(np.sin(angle)) > 0.7:
+                        z = z * 1.5
+                else:
+                    # For regular belts, add variation to create a more realistic shape
+                    z_scale = 0.2 * ring_radius
+                    z = z_scale * np.sin(2 * angle)
+                    
+                    # Add some longitudinal variation to reflect Neptune's complex field
+                    variation = 0.15 * ring_radius * np.sin(3 * angle)
+                    x += variation * np.cos(angle + np.pi/4)
+                    y += variation * np.sin(angle + np.pi/4)
+                
+                belt_x.append(x)
+                belt_y.append(y)
+                belt_z.append(z)
+        
+        # Convert to numpy arrays for efficient rotation
+        belt_x = np.array(belt_x)
+        belt_y = np.array(belt_y)
+        belt_z = np.array(belt_z)
+        
+        # First apply rotation around y-axis for magnetic tilt
+        x_rotated1, y_rotated1, z_rotated1 = rotate_points(belt_x, belt_y, belt_z, magnetic_tilt, 'y')
+        
+        # Then apply rotation around z-axis for azimuthal orientation
+        x_rotated2, y_rotated2, z_rotated2 = rotate_points(x_rotated1, y_rotated1, z_rotated1, azimuthal_angle, 'z')
+        
+        # Apply additional distortions for more complex shapes
+        # For outer plasma sheet, create magnetotail-like extension
+        if belt['name'] == 'Outer Plasma Sheet':
+            # Apply a gradient to simulate magnetotail stretching
+            stretch_factor = 1.0 + 0.8 * np.clip(-x_rotated2/belt_distance, 0, 1.5)
+            x_rotated2 = x_rotated2 * stretch_factor
+            
+            # Add some flaring to the tail
+            tail_factor = np.clip(-x_rotated2/belt_distance, 0, 1)
+            y_rotated2 = y_rotated2 * (1 + 0.3 * tail_factor)
+            z_rotated2 = z_rotated2 * (1 + 0.3 * tail_factor)
+        
+        # Apply magnetic center offset
+        x_final = x_rotated2 + magnetic_center_x
+        y_final = y_rotated2 + magnetic_center_y
+        z_final = z_rotated2 + magnetic_center_z
+        
+        # Create hover information arrays
+        belt_text = [belt['description']] * len(belt_x)
+        belt_customdata = [f"Neptune: {belt['name']}"] * len(belt_x)
+        
+        # Create the trace
+        traces.append(
+            go.Scatter3d(
+                x=x_final,
+                y=y_final,
+                z=z_final,
+                mode='markers',
+                marker=dict(
+                    size=2.0,
+                    color=belt['color'],
+                    opacity=belt['opacity']
+                ),
+                name=f"Neptune: {belt['name']}",
+                text=belt_text,
+                customdata=belt_customdata,
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+    
+    # Add field-aligned current visualization connecting regions
+    # These are important features in Neptune's dynamic magnetosphere
+    current_traces = create_field_aligned_currents(magnetic_center_x, magnetic_center_y, magnetic_center_z, 
+                                                 magnetic_tilt, azimuthal_angle)
+    traces.extend(current_traces)
+    
+    return traces
+
+def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth):
+    """Creates visualization of field-aligned currents in Neptune's magnetosphere."""
+    # These are electric currents that flow along magnetic field lines
+    # and are important features of planetary magnetospheres
+    
+    traces = []
+    
+    # Define parameters for currents
+    current_params = [
+        {
+            'start_radius': 2.0 * NEPTUNE_RADIUS_AU,
+            'end_radius': 5.0 * NEPTUNE_RADIUS_AU,
+            'angle_range': (np.pi/4, 3*np.pi/4),  # Angular sector for current
+            'color': 'rgb(200, 200, 255)',
+            'name': 'Dusk Field-Aligned Current',
+            'description': ("Field-aligned currents are channels of charged particles flowing along magnetic field lines. <br>"
+                           "In Neptune's complex magnetic environment, these currents connect different regions of the magnetosphere <br>"
+                           "and play an important role in energy transfer. The dusk sector currents flow in the evening "
+                           "side of the planet's magnetosphere.")
+        },
+        {
+            'start_radius': 2.0 * NEPTUNE_RADIUS_AU,
+            'end_radius': 5.0 * NEPTUNE_RADIUS_AU,
+            'angle_range': (5*np.pi/4, 7*np.pi/4),  # Angular sector for current
+            'color': 'rgb(200, 200, 255)',
+            'name': 'Dawn Field-Aligned Current',
+            'description': ("Field-aligned currents are channels of charged particles flowing along magnetic field lines. <br>"
+                           "In Neptune's complex magnetic environment, these currents connect different regions of the magnetosphere <br>"
+                           "and play an important role in energy transfer. The dawn sector currents flow in the morning "
+                           "side of the planet's magnetosphere.")
+        }
+    ]
+    
+    for params in current_params:
+        current_x = []
+        current_y = []
+        current_z = []
+        
+        # Number of field lines and points per line
+        n_lines = 15
+        n_points = 20
+        
+        for i in range(n_lines):
+            # Vary the angle within the specified range
+            angle_range = params['angle_range']
+            angle = angle_range[0] + (angle_range[1] - angle_range[0]) * (i / (n_lines-1))
+            
+            # Create points along a curved field line
+            for j in range(n_points):
+                # Parametric position along the field line (0 to 1)
+                t = j / (n_points-1)
+                
+                # Calculate radius that follows magnetic field line shape
+                radius = params['start_radius'] + (params['end_radius'] - params['start_radius']) * t
+                
+                # Add curvature to field line
+                angle_offset = 0.4 * np.sin(np.pi * t)  # Max 0.4 radians (~23°) curvature
+                current_angle = angle + angle_offset
+                
+                # Calculate position
+                x = radius * np.cos(current_angle)
+                y = radius * np.sin(current_angle)
+                z = radius * 0.5 * np.sin(np.pi * t)  # Add some z-variation
+                
+                current_x.append(x)
+                current_y.append(y)
+                current_z.append(z)
+        
+        # Convert to numpy arrays for rotation
+        current_x = np.array(current_x)
+        current_y = np.array(current_y)
+        current_z = np.array(current_z)
+        
+        # Apply rotations to align with magnetic field
+        # First apply rotation around y-axis for magnetic tilt
+        x_rot1, y_rot1, z_rot1 = rotate_points(current_x, current_y, current_z, tilt, 'y')
+        
+        # Then apply rotation around z-axis for azimuthal orientation
+        x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, azimuth, 'z')
+        
+        # Apply magnetic center offset
+        x_final = x_rot2 + mag_center_x
+        y_final = y_rot2 + mag_center_y
+        z_final = z_rot2 + mag_center_z
+        
+        # Create hover text and customdata arrays for consistency with other traces
+        hover_text = [params['description']] * len(current_x)
+        custom_data = [f"Neptune: {params['name']}"] * len(current_x)
+        
+        # Create the trace with very small markers to create a line-like effect
+        traces.append(
+            go.Scatter3d(
+                x=x_final,
+                y=y_final,
+                z=z_final,
+                mode='markers',
+                marker=dict(
+                    size=1.0,
+                    color=params['color'],
+                    opacity=0.3
+                ),
+                name=f"Neptune: {params['name']}",
+                text=hover_text,
+                customdata=custom_data,
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+    
+    return traces
+    
+neptune_ring_system_info = (
+                "22.2 MB PER FRAME FOR HTML.\n\n"
+
+                "neptune has a system of 13 known rings. These rings are generally very narrow, dark (reflecting very little light, \n" 
+                "similar to charcoal), and composed of dust and larger particles that are icy and darkened by rock. The rings are \n" 
+                "grouped into two main systems:\n" 
+                "* Inner Rings: Nine narrow, dark rings.\n" 
+                "* Outer Rings: Two more distant rings, one of which is bluish and the other reddish.\n" 
+                "While the main rings of neptune are narrow bands, there are also broader, more diffuse rings made of dust. These \n" 
+                "dusty rings could be considered to have a more toroidal (donut-like) distribution of material compared to the thin, \n" 
+                "distinct main rings. For example, the outermost rings (Nu and Mu) are quite broad and dusty.\n" 
+                "* There are nine main, narrow rings. These rings are relatively dense and have well-defined edges. They are composed \n" 
+                "  mostly of larger, darker particles, often described as being the color of charcoal. Examples of the main rings include \n" 
+                "  the Epsilon, Delta, Gamma, Eta, Beta, Alpha, and the numbered rings 4, 5, and 6. The Epsilon ring is the outermost and \n" 
+                "  widest of the main rings.\n" 
+                "* There are two outer rings: the Nu ring and the Mu ring. These rings are much fainter and more diffuse than the main \n" 
+                "  rings. They are composed of fine dust particles. The Mu ring is quite broad and has a more torus-like distribution of \n" 
+                "  material. It also has a distinct blue color, similar to Saturn's E ring. The Nu ring is reddish in color, similar to \n" 
+                "  dusty rings seen elsewhere in the solar system.\n" 
+                "* Composition: The main rings are primarily larger, dark particles, while the outer rings are predominantly fine dust.\n" 
+                "* Structure: The main rings are narrow and well-defined, whereas the outer rings are broad and diffuse, with the Mu \n" 
+                "  ring exhibiting a clear torus-like structure.\n" 
+                "* Origin and Evolution: The origins and the processes that shape these different sets of rings might vary. The dusty \n" 
+                "  outer rings are likely fed by dust kicked off neptune' inner moons by micrometeoroid impacts.\n" 
+                "* Visual Characteristics: The main rings are dark and difficult to see, requiring specific observation techniques. The \n" 
+                "  outer rings are even fainter, with the Mu ring having a unique blue color.\n" 
+                "In summary, while all are part of neptune' ring system, the significant differences in their composition, structure, and \n" 
+                "likely origin make it accurate and informative to distinguish between the narrow, dark main rings and the broad, dusty, \n" 
+                "and torus-like outer rings."                                           
+)
+
+def create_neptune_ring_system(center_position=(0, 0, 0)):
+    """
+    Creates a visualization of Neptune's ring system with proper alignment.
+    
+    Parameters:
+        center_position (tuple): (x, y, z) position of Neptune's center
+        
+    Returns:
+        list: A list of plotly traces representing Neptune's ring components
+        
+    Notes:
+        Neptune's ring system requires specific transformations to correctly align
+        with its axial tilt (28.32°) and pole orientation. Unlike Uranus (which has
+        an extreme axial tilt of ~98°), Neptune's rings require a different approach.
+        
+        The transformation uses:
+        1. Standard orbital element rotations for each ring
+        2. Application of Neptune's pole direction (RA: 299.36°, Dec: 43.46°)
+        3. Proper offsetting relative to Neptune's center
+    """
+    traces = []
+    
+    # Define Neptune's ring parameters in kilometers from Neptune's center
+    # Then convert to Neptune radii, and finally to AU
+    ring_params = {
+        'galle_ring': {
+            'inner_radius_km': 41900,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 42900,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 15,         # Approximate thickness
+            'color': 'rgb(70, 70, 70)',  
+            'opacity': 0.4,
+            'name': 'Galle Ring (1989N3R)',
+            'description': (
+                "Galle Ring (1989N3R): Neptune's innermost ring, located about 41,900-42,900 km from Neptune's center.<br>" 
+                "* Named after Johann Gottfried Galle, who discovered Neptune in 1846.<br>" 
+                "* Faint, relatively broad ring approximately 2,000 km in width.<br>" 
+                "* Composed primarily of dust particles, giving it a diffuse appearance.<br>" 
+                "* Relatively uniform, lacking the clumpy structure seen in some of Neptune's other rings.<br>"
+                "* Discovery: First detected by Voyager 2 during its 1989 flyby mission.<br><br>" 
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'leverrier_ring': {
+            'inner_radius_km': 53200,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 53200,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 110,       # Approximate thickness
+            'color': 'rgb(75, 75, 75)',  
+            'opacity': 0.5,
+            'name': 'Leverrier Ring (1989N2R)',
+            'description': (
+                "Leverrier Ring (1989N2R): A narrow, well-defined ring located about 53,200 km from Neptune's center.<br>" 
+                "* Named after Urbain Le Verrier, who mathematically predicted Neptune's existence.<br>" 
+                "* Approximately 110 km in width, much narrower than the Galle ring.<br>" 
+                "* Higher density of material compared to the Galle ring, giving it a more defined appearance.<br>" 
+                "* May have small embedded moonlets that help maintain its structure.<br>"
+                "* Discovery: First detected by Voyager 2 during its 1989 flyby mission.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'lassell_ring': {
+            'inner_radius_km': 55400,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 57600,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 4000,      # Approximate thickness
+            'color': 'rgb(70, 70, 75)',  
+            'opacity': 0.3,
+            'name': 'Lassell Ring',
+            'description': (
+                "Lassell Ring: A broad, faint plateau-like ring region extending from about 55,400 to 57,600 km from Neptune's center.<br>" 
+                "* Named after William Lassell, who discovered Neptune's largest moon Triton.<br>" 
+                "* Sometimes described as a 'plateau' rather than a distinct ring.<br>" 
+                "* Very faint, with a width of approximately 4,000 km.<br>" 
+                "* Has a more diffuse, dusty composition.<br>"
+                "* Connects the Leverrier and Arago rings, forming part of a broader ring system structure.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'arago_ring': {
+            'inner_radius_km': 57600,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 57600,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 100,       # Approximate thickness
+            'color': 'rgb(80, 80, 85)',  
+            'opacity': 0.4,
+            'name': 'Arago Ring',
+            'description': (
+                "Arago Ring: A narrow ring located at the outer edge of the Lassell Ring, about 57,600 km from Neptune's center.<br>" 
+                "* Named after François Arago, a French mathematician, physicist, and astronomer.<br>" 
+                "* Approximately 100 km in width.<br>" 
+                "* Less prominent than the Leverrier and Adams rings.<br>" 
+                "* Discovery: First observed by Voyager 2 in 1989, though initially not designated as a separate ring.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'adams_ring': {
+            'inner_radius_km': 62932,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 62932,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 50,        # Approximate thickness, variable
+            'color': 'rgb(85, 85, 85)',  
+            'opacity': 0.6,
+            'name': 'Adams Ring (1989N1R)',
+            'description': (
+                "Adams Ring (1989N1R): Neptune's outermost and most prominent discrete ring, located about 62,930 km from Neptune's center.<br>" 
+                "* Named after John Couch Adams, who independently predicted Neptune's existence around the same time as Le Verrier.<br>" 
+                "* Has a variable width of approximately 35-50 km, but contains distinctive arc segments.<br>" 
+                "* Contains five prominent arc segments (Courage, Liberté, Egalité 1 & 2, and Fraternité) that are denser than the rest of the ring.<br>" 
+                "* These arcs are confined by gravitational resonances with the moon Galatea.<br>"
+                "* Most studied of Neptune's rings, with observations from both Voyager 2 and Earth-based telescopes.<br>"
+                "* Discovery: Its bright arcs were first detected from Earth in 1984, then confirmed by Voyager 2 in 1989.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'adams_courage_arc': {
+            'inner_radius_km': 62932,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 62932,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 50,        # Approximate thickness
+            'arc_length': 4.0,         # Arc length in degrees
+            'arc_center': 0,           # Center angle of the arc in degrees
+            'color': 'rgb(200, 200, 200)',  
+            'opacity': 0.7,
+            'name': 'Courage Arc',
+            'description': (
+                "Courage Arc: The smallest and faintest of the five arcs in Neptune's Adams Ring.<br>" 
+                "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
+                "* Spans approximately 1,000 km (4° of arc) along the ring.<br>" 
+                "* Named after one of the three civic virtues from the motto of the French Republic.<br>"
+                "* The least stable of the arcs, showing significant changes since its discovery.<br>"
+                "* Discovery: First imaged by Voyager 2 in 1989.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'adams_liberte_arc': {
+            'inner_radius_km': 62932,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 62932,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 50,        # Approximate thickness
+            'arc_length': 4.5,         # Arc length in degrees
+            'arc_center': 8.0,         # Center angle of the arc in degrees
+            'color': 'rgb(200, 200, 200)',  
+            'opacity': 0.7,
+            'name': 'Liberté Arc',
+            'description': (
+                "Liberté Arc: The second arc in Neptune's Adams Ring.<br>" 
+                "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
+                "* Spans approximately 1,100 km (4.5° of arc) along the ring.<br>" 
+                "* Named after 'Liberty' from the motto of the French Republic ('Liberty, Equality, Fraternity').<br>"
+                "* Shows brightness variations along its length.<br>"
+                "* Has shown evolutionary changes since its discovery, with variations in brightness and length.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'adams_egalite1_arc': {
+            'inner_radius_km': 62932,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 62932,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 50,        # Approximate thickness
+            'arc_length': 4.2,         # Arc length in degrees
+            'arc_center': 14.0,        # Center angle of the arc in degrees
+            'color': 'rgb(200, 200, 200)',  
+            'opacity': 0.7,
+            'name': 'Égalité 1 Arc',
+            'description': (
+                "Égalité 1 Arc: One of two 'Equality' arcs in Neptune's Adams Ring.<br>" 
+                "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
+                "* Spans approximately 1,000 km (4.2° of arc) along the ring.<br>" 
+                "* Named after 'Equality' from the motto of the French Republic.<br>"
+                "* Together with Égalité 2, forms a pair of similar arcs separated by a small gap.<br>"
+                "* Has shown some changes in structure since the Voyager 2 observations.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'adams_egalite2_arc': {
+            'inner_radius_km': 62932,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 62932,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 50,        # Approximate thickness
+            'arc_length': 4.0,         # Arc length in degrees
+            'arc_center': 22.0,        # Center angle of the arc in degrees
+            'color': 'rgb(200, 200, 200)',  
+            'opacity': 0.7,
+            'name': 'Égalité 2 Arc',
+            'description': (
+                "Égalité 2 Arc: The second 'Equality' arc in Neptune's Adams Ring.<br>" 
+                "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
+                "* Spans approximately 1,000 km (4° of arc) along the ring.<br>" 
+                "* Named after 'Equality' from the motto of the French Republic.<br>"
+                "* Follows closely after Égalité 1, separated by a small gap.<br>"
+                "* The pair of Égalité arcs may be maintained by resonances with nearby moons.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'adams_fraternite_arc': {
+            'inner_radius_km': 62932,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 62932,  # Outer edge (in km from Neptune's center)
+            'thickness_km': 50,        # Approximate thickness
+            'arc_length': 9.0,         # Arc length in degrees
+            'arc_center': 40.0,        # Center angle of the arc in degrees
+            'color': 'rgb(200, 200, 200)',  
+            'opacity': 0.7,
+            'name': 'Fraternité Arc',
+            'description': (
+                "Fraternité Arc: The longest and most prominent arc in Neptune's Adams Ring.<br>" 
+                "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
+                "* Spans approximately 2,200 km (9° of arc) along the ring, making it the longest arc.<br>" 
+                "* Named after 'Fraternity' from the motto of the French Republic.<br>"
+                "* The brightest and most stable of Neptune's ring arcs.<br>"
+                "* Discovery: It was the first arc detected from Earth-based observations in 1984.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        },
+        
+        'unnamed_dusty_ring': {
+            'inner_radius_km': 67500,  # Inner edge (in km from Neptune's center)
+            'outer_radius_km': 73000,  # Outer edge (in km from Neptune's center) 
+            'thickness_km': 2000,      # Approximate thickness
+            'color': 'rgb(100, 150, 200)',  # Bluish tint for dusty ring
+            'opacity': 0.1,
+            'name': 'Outer Dusty Ring',
+            'description': (
+                "Outer Dusty Ring: A faint, diffuse ring extending beyond the Adams Ring.<br>" 
+                "* Located approximately 67,500-73,000 km from Neptune's center.<br>" 
+                "* Very faint and difficult to observe, composed primarily of microscopic dust particles.<br>" 
+                "* May be fed by impacts on Neptune's small inner moons.<br>"
+                "* Discovery: First hinted at in Voyager 2 data, later confirmed by Earth-based observations.<br><br>"
+                "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
+                "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
+                "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
+                "in Neptune's equatorial plane, aligned with the rings. These inner moons play an important role in shepherding and <br>" 
+                "maintaining the ring structure, particularly:<br>" 
+                "* Galatea: This moon helps confine the Adams Ring and its distinctive arcs through orbital resonances.<br>" 
+                "* Despina: Located near the Le Verrier Ring, it may help maintain its structure.<br>" 
+                "* This misalignment between Triton and the rings/regular moons provides strong evidence for Triton's capture hypothesis <br>" 
+                "  - it was likely an independent Kuiper Belt Object (similar to Pluto) that was captured by Neptune's gravity rather than <br>" 
+                "  forming alongside Neptune like the other moons.<br>" 
+                "* The contrast between the orderly, equatorial system of rings and regular moons versus Triton's highly inclined <br>" 
+                "  orbit represents two different formation mechanisms in the same planetary system."
+            )
+        }
+    }
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Neptune's axial tilt in radians (28.32 degrees)
+    neptune_tilt = np.radians(28.32)
+    
+    # Neptune's pole direction (J2000)
+    pole_ra = np.radians(299.36)  # Right ascension in radians
+    pole_dec = np.radians(43.46)  # Declination in radians
+    
+    # Create traces for each ring
+    for ring_name, ring_info in ring_params.items():
+        # Convert km to AU
+        inner_radius_au = ring_info['inner_radius_km'] / KM_PER_AU
+        outer_radius_au = ring_info['outer_radius_km'] / KM_PER_AU
+        thickness_au = ring_info['thickness_km'] / KM_PER_AU
+        
+        # For arc segments, generate partial rings
+        if 'arc_length' in ring_info and 'arc_center' in ring_info:
+            # Create arc points
+            arc_length = ring_info['arc_length']  # Arc length in degrees
+            arc_center = ring_info['arc_center']  # Center angle of the arc in degrees
+            
+            # Calculate arc start and end angles
+            arc_start = np.radians(arc_center - arc_length/2)
+            arc_end = np.radians(arc_center + arc_length/2)
+            
+            # Generate points along the arc
+            n_points = int(arc_length * 10)  # 10 points per degree for smoothness
+            theta = np.linspace(arc_start, arc_end, n_points)
+            
+            # Generate radial points
+            n_radial = 5  # Number of radial points
+            
+            x = []
+            y = []
+            z = []
+            
+            for r in np.linspace(inner_radius_au, outer_radius_au, n_radial):
+                for t in theta:
+                    x.append(r * np.cos(t))
+                    y.append(r * np.sin(t))
+                    z.append(0)  # Start in xy-plane
+                    
+                    # Add thickness in z-direction
+                    for h in np.linspace(-thickness_au/2, thickness_au/2, 3):
+                        if h != 0:  # Skip duplicate points
+                            x.append(r * np.cos(t))
+                            y.append(r * np.sin(t))
+                            z.append(h)
+            
+        else:
+            # Create complete ring points
+            n_points = 100  # Fewer points for outer dusty rings to improve performance
+            if 'dusty' in ring_name:
+                n_points = 80
+                
+            # Create ring points
+            x, y, z = create_ring_points_saturn(
+                inner_radius_au, outer_radius_au, n_points, thickness_au
+            )
+        
+        # Convert to numpy arrays for rotation
+        x = np.array(x)
+        y = np.array(y)
+        z = np.array(z)
+        
+        # TRANSFORMATION APPROACH:
+        # Neptune's pole is oriented at RA=299.36°, DEC=43.46°
+        # We'll use a transformation sequence to correctly orient the rings
+        
+        # Step 1: Rotate around z-axis by the Right Ascension
+    #    x_rot1, y_rot1, z_rot1 = rotate_points(x, y, z, pole_ra, 'z')
+        
+        # Step 2: Rotate around x-axis by (90° - Declination)
+        # This aligns the z-axis with Neptune's pole
+    #    x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, np.radians(90) - pole_dec, 'x')
+        
+        # Step 3: Apply final adjustment based on Neptune's specific orientation
+        # This 25° rotation adjusts for the reference frame of Neptune's ring observations
+    #    x_final, y_final, z_final = rotate_points(x_rot2, y_rot2, z_rot2, np.radians(25), 'z')
+
+        # SIMPLIFIED TRANSFORMATION:
+        # Instead of using RA/Dec-based transformations, we'll use a direct alignment
+        # to match what we see in the image with Despina and Galatea's orbits
+        
+        # Transform ring coordinates to align with Neptune's equatorial plane
+        # These angles were empirically determined to match the orbital plane of Despina and Galatea
+        # First rotation: 32° around x-axis provides the primary tilt 
+        tilt_angle = np.radians(32)
+        x_rot1, y_rot1, z_rot1 = rotate_points(x, y, z, tilt_angle, 'x')
+
+        # Second rotation: 34° around z-axis aligns with the final orientation
+        final_orientation = np.radians(34)
+        x_final, y_final, z_final = rotate_points(x_rot1, y_rot1, z_rot1, final_orientation, 'z')
+        
+        # Apply center position offset
+        x_final = x_final + center_x
+        y_final = y_final + center_y
+        z_final = z_final + center_z
+        
+        # Create hover text
+        text_array = [ring_info['description']] * len(x)
+        
+        # Add ring trace
+        traces.append(
+            go.Scatter3d(
+                x=x_final,
+                y=y_final,
+                z=z_final,
+                mode='markers',
+                marker=dict(
+                    size=1.5,  # Small markers for rings
+                    color=ring_info['color'],
+                    opacity=ring_info['opacity']
+                ),
+                name=f"Neptune: {ring_info['name']}",
+                text=text_array,
+                customdata=[f"Neptune: {ring_info['name']}"] * len(x),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+    
+    return traces
+
+neptune_hill_sphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
+
+            "Neptune's Hill sphere is the region around the planet where its gravitational influence dominates over that of the Sun. \n" 
+            "Any moon or other object orbiting Neptune within this sphere is more likely to remain bound to it rather than being pulled \n" 
+            "away by the Sun's gravity. Neptune's Hill sphere extends to a staggering approximately 4685 times the radius of Neptune. \n" 
+            "This vast gravitational influence allows Neptune to retain its large system of moons, including the distant and unusual \n" 
+            "irregular satellites."                     
+)
+
+def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
+    """Creates neptune's Hill sphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 4685, 
+        'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
+        'opacity': 0.3,
+        'name': 'Hill Sphere',
+        'description': (
+            "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
+            "Neptune's Hill sphere is the region around the planet where its gravitational influence dominates over that of the Sun. <br>" 
+            "Any moon or other object orbiting Neptune within this sphere is more likely to remain bound to it rather than being pulled <br>" 
+            "away by the Sun's gravity. Neptune's Hill sphere extends to a staggering approximately 4685 times the radius of Neptune. <br>" 
+            "This vast gravitational influence allows Neptune to retain its large system of moons, including the distant and unusual <br>" 
+            "irregular satellites."          )
+    }
+        
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Neptune: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+# Pluto Shell Creation Functions
+
+pluto_core_info = (
+            "2.4 MB PER FRAME FOR HTML.\n\n"
+            "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter \n" 
+            "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay \n" 
+            "of radioactive elements within the core may still be present today."
+)
+
+def create_pluto_core_shell(center_position=(0, 0, 0)):
+    """Creates pluto's core shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.70,  
+        'color': 'rgb(255, 56, 0)',  # This represents a color that is strongly biased towards red with very little green and no blue.
+        'opacity': 1.0,
+        'name': 'Core',
+        'description': (
+            "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter <br>" 
+            "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay <br>" 
+            "of radioactive elements within the core may still be present today.<br>" 
+            "* Radioactive Isotopes: Based on theoretical models and our understanding of its composition and formation, scientists have made <br>" 
+            "  estimations. Pluto's density suggests it differentiated early in its history, forming a rocky core and an icy mantle. <br>" 
+            "  This differentiation process itself would have released heat. Like other rocky bodies in our solar system, Pluto's core <br>" 
+            "  likely contains radioactive isotopes such as Uranium-238, Uranium-235, Thorium-232, and Potassium-40. The decay of these <br>" 
+            "  elements over billions of years generates heat within the core. This is considered a primary source of its internal heat.<br>" 
+            "* Initial Accretional Heat: The heat generated from the collisions of smaller bodies that accreted to form Pluto would have <br>" 
+            "  also contributed to its initial core temperature. While much of this heat would have dissipated over time, some likely remains.<br>" 
+            "* Subsurface Ocean Evidence: The potential presence of a subsurface liquid water ocean beneath Pluto's icy mantle suggests that <br>" 
+            "  the core is warm enough to prevent this ocean from completely freezing. The heat flow from the core would be crucial for <br>" 
+            "  maintaining this liquid layer.<br>" 
+            "* Estimated Temperature: The estimated temperature of Pluto's core is around 1000 K. This estimate comes from models that <br>" 
+            "  consider the heat generated by radioactive decay within a rocky core. These models also need to account for the heat transfer <br>" 
+            "  through the icy mantle. Future research and more detailed data could refine this value. The exact temperature would depend on <br>" 
+            "  the precise composition of the core and the efficiency of heat transfer through the mantle. In comparison, the surface <br>" 
+            "  temperature of Pluto is extremely cold, around 40 K. The significant difference highlights the internal heating processes at <br>" 
+            "  work within the dwarf planet. "
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=4.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Pluto: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+pluto_mantel_info = (
+            "2.1 MB PER FRAME FOR HTML.\n\n"
+            "Mantel: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean \n" 
+            "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean \n" 
+            "could be 100 to 180 km thick. The presence of this ocean is supported by geological features observed on Pluto's surface."
+)
+
+def create_pluto_mantel_shell(center_position=(0, 0, 0)):
+    """Creates pluto's mantel shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.99,  
+        'color': 'rgb(150, 0, 0)',  # These still represent red but with a lower intensity,  
+        'opacity': 0.9,
+        'name': 'Mantel',
+        'description': (
+            "Mantel: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean <br>" 
+            "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean <br>" 
+            "could be 100 to 180 km thick. The presence of this ocean is supported by geological features observed on Pluto's surface.<br>" 
+            "* This layer is primarily water ice. Within this icy mantle, there is strong evidence for a subsurface ocean of liquid <br>" 
+            "  water, potentially mixed with ammonia, located above the rocky core.<br>" 
+            "* Inner Icy Layer (if ocean exists): A layer of solid water ice may exist directly above the rocky core, potentially <br>" 
+            "  forming the bottom of the ocean.<br>" 
+            "* Subsurface Ocean: A layer of liquid water (possibly with dissolved substances). The thickness of this ocean is estimated <br>" 
+            "  to be potentially 100 to 180 kilometers.<br>" 
+            "* Outer Icy Layer (Lithosphere): A rigid outer shell of water ice above the potential ocean (or the main icy mantle if no <br>" 
+            "  ocean is present). This layer is thought to be significant in thickness, potentially ranging from 45 to several hundred <br>" 
+            "  kilometers."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.5,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Pluto: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+pluto_crust_info = (
+            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
+            "4.6 MB PER FRAME FOR HTML.\n\n"
+            "Crust (Surface Layer): This is the outermost layer, composed of more volatile ices: primarily nitrogen ice, with smaller\n" 
+            "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively \n" 
+            "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen \n" 
+            "ice layer is estimated to be several kilometers thick and overlies the water-ice lithosphere."
+)
+
+def create_pluto_crust_shell(center_position=(0, 0, 0)):
+    """Creates pluto's cloud layer shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.0,  # the top of the troposphere is actually 1.002
+        'color': 'rgb(83, 68, 55)',  # optical brownish
+        'opacity': 1.0,
+        'name': 'Crust',
+        'description': (
+            "Pluto Crust<br>" 
+            "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
+            "Crust (Surface Layer): This is the outermost layer, composed of more volatile ices: primarily nitrogen ice, with smaller <br>" 
+            "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively <br>" 
+            "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen <br>" 
+            "ice layer is estimated to be several kilometers thick and overlies the water-ice lithosphere.<br>" 
+            "* Pluto's surface, or crust, is composed of various ices, primarily nitrogen ice (over 98%). It also contains smaller <br>" 
+            "  amounts of methane and carbon monoxide ices.<br>" 
+            "* Interestingly, mountains on Pluto can reach heights comparable to the Rocky Mountains on Earth and are believed to be <br>" 
+            "  made of water ice, which is strong enough to support such structures at Pluto's frigid temperatures. These water-ice <br>" 
+            "  mountains likely \"float\" in the denser nitrogen ice.<br>" 
+            "* The surface exhibits a wide range of colors and brightness, with features like the bright \"heart\" (Tombaugh Regio) and <br>" 
+            "  dark regions like Cthulhu Macula (\"the Whale\").<bR>" 
+            "* Sputnik Planitia, the western lobe of the \"heart,\" is a vast basin of nitrogen and carbon monoxide ices showing <br>" 
+            "  evidence of convection cells and glacial flow. The lack of impact craters in this region suggests it's geologically <br>" 
+            "  young (possibly less than 10 million years old)."
+            )
+    }
+    
+    # Calculate radius in AU
+    radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
+    
+    # Apply center position offset
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
+    
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Pluto: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Pluto: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(83, 68, 55)',  # brownish
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Pluto: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
+
+pluto_haze_layer_info = (
+            "2.7 MB PER FRAME FOR HTML.\n\n"
+            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
+            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature \n" 
+            "inversion, possibly caused by the presence of methane."
+)
+
+def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
+    """Creates pluto's haze layer shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.17,  
+        'color': 'rgb(135, 206, 235)',  # optical pale blue
+        'opacity': 0.5,
+        'name': 'Haze Layer',
+        'description': (
+            "Haze Layer: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
+            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature <br>" 
+            "inversion, possibly caused by the presence of methane.<br>" 
+            "* Composition and Formation: Pluto's atmosphere is primarily nitrogen (N₂) with smaller amounts of methane (CH₄) and <br>" 
+            "  carbon monoxide (CO). The haze is thought to form when ultraviolet sunlight and high-energy radiation (like cosmic <br>" 
+            "  rays) break apart methane molecules in the upper atmosphere. This breakdown leads to the formation of more complex <br>" 
+            "  hydrocarbon gases, such as acetylene (C₂H₂) and ethylene (C₂H₄), as well as heavier compounds called tholins. As these <br>" 
+            "  hydrocarbons drift to the lower, colder parts of the atmosphere, they condense into tiny ice particles, forming the haze. <br>" 
+            "  Continued exposure to ultraviolet sunlight then chemically converts these haze particles into the dark, reddish-brown tholins <br>" 
+            "  that contribute to the color of Pluto's surface.<br>" 
+            "* Structure and Extent: The New Horizons mission revealed a surprisingly complex, multi-layered haze extending up to 200 km or <br>" 
+            "  more above Pluto's surface. Scientists have observed as many as 20 distinct layers of haze. These layers can extend <br>" 
+            "  horizontally for hundreds of kilometers and are not always perfectly parallel to the surface. There can be variations in haze <br>" 
+            "  density and layer structure with altitude and even geographic location on Pluto.<br>" 
+            "* Color: The haze has a blue tint when viewed in backlit images (like those taken as New Horizons sped away). This blue color <br>" 
+            "  arises because the small haze particles efficiently scatter blue light from the sun.<br>" 
+            "* Particle Settling: The haze particles eventually settle out of the atmosphere and onto Pluto's surface, contributing to the <br>" 
+            "  surface composition and color over time.<br>" 
+            "* Condensation and Coagulation: As particles descend, they can grow through condensation of atmospheric gases onto them and by <br>" 
+            "  sticking together (coagulation).<br>" 
+            "* Temperature Regulation: By absorbing infrared light, the haze can influence the atmospheric temperature profile, potentially <br>" 
+            "  keeping the upper atmosphere cooler than it otherwise would be.<br>" 
+            "* Haze Layers: Within the lower atmosphere, haze layers extend up to about 200 km altitude. This is approximately: ≈0.17 So, <br>" 
+            "  the distinct haze layers reach about 0.17 Pluto radii above the surface." 
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Pluto: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+pluto_atmosphere_info = (
+            "2.7 MB PER FRAME FOR HTML.\n\n"
+            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
+            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature \n" 
+            "inversion, possibly caused by the presence of methane."
+)
+
+def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
+    """Creates pluto's atmosphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.43,  
+        'color': 'rgb(240, 245, 250)',  # optical pale blue
+        'opacity': 0.3,
+        'name': 'Atmosphere',
+        'description': (
+            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
+            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature <br>" 
+            "inversion, possibly caused by the presence of methane.<br>" 
+            "The extent of Pluto's atmosphere is surprisingly large relative to the dwarf planet itself. While it's very thin in terms <br>" 
+            "of density compared to Earth's, it stretches far out into space. Here's a breakdown in terms of Pluto's radius <br>" 
+            "(approximately 1188 km):<br>" 
+            "* Significant Atmosphere: The atmosphere, composed primarily of nitrogen with traces of methane and carbon monoxide, has <br>" 
+            "  been detected extending up to 1700 km above the surface (the exobase).<br>" 
+            "* In Pluto radii: To express this as a fraction of Pluto's radius: ≈1.43.<br>" 
+            "* Outer Limits: Some research suggests that the outer, most tenuous parts of Pluto's atmosphere might extend even further, <br>" 
+            "  perhaps to several times Pluto's radius, gradually merging with the vacuum of space. One New Horizons science brief even <br>" 
+            "  mentioned an outer limit potentially as far as seven times Pluto's radius, although this is very ill-defined.<br>" 
+            "* Haze Layers: Within the lower atmosphere, haze layers extend up to about 200 km altitude. This is approximately: ≈0.17 So, <br>" 
+            "  the distinct haze layers reach about 0.17 Pluto radii above the surface.<br>" 
+            "In summary, while the bulk of Pluto's atmosphere is very thin, its outer reaches are quite extended. For a general extent, <br>" 
+            "considering the exobase, the atmosphere reaches about 0.43 Pluto radii above the surface, or 1.43 Pluto radii from the center. <br>" 
+            "If you consider the more diffuse outer limits, it could be even larger."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Pluto: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+pluto_hill_sphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
+
+            "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n" 
+            "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is \n" 
+            "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is \n" 
+            "gravitationally bound to it. Pluto has five known moons: Charon, Styx, Nix, Kerberos, and Hydra, all of which reside within \n" 
+            "its Hill sphere."                     
+)
+
+def create_pluto_hill_sphere_shell(center_position=(0, 0, 0)):
+    """Creates pluto's Hill sphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 4685, 
+        'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
+        'opacity': 0.3,
+        'name': 'Hill Sphere',
+        'description': (
+            "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
+            "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br>" 
+            "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is <br>" 
+            "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is <br>" 
+            "gravitationally bound to it. Pluto has five known moons: Charon, Styx, Nix, Kerberos, and Hydra, all of which reside within <br>" 
+            "its Hill sphere."          
+            )
+    }
+        
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Pluto: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+# Eris Shell Creation Functions
+
+eris_core_info = (
+            "2.4 MB PER FRAME FOR HTML.\n\n"
+            "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations \n" 
+            "and theoretical modeling. Here's what we currently understand:\n" 
+            "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm³) suggests that it is composed \n" 
+            "primarily of rock, making up a significant portion of its mass (possibly over 85%). This core likely contains radioactive \n" 
+            "elements, which produce internal heat."
+)
+
+def create_eris_core_shell(center_position=(0, 0, 0)):
+    """Creates Eris's core shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.60,  # range is .5 to .65
+        'color': 'rgb(187, 63, 63)',  # dull red at 875 K
+        'opacity': 1.0,
+        'name': 'Core',
+        'description': (
+            "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations <br>" 
+            "and theoretical modeling. Here's what we currently understand:<br>" 
+            "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm³) suggests that it is composed <br>" 
+            "primarily of rock, making up a significant portion of its mass (possibly over 85%). This core likely contains radioactive <br>" 
+            "elements, which produce internal heat.<br>" 
+            "* Determining the precise radius fraction of Eris's core is challenging because we don't have direct observations of its <br>" 
+            "  internal structure. However, we can make estimations based on its known properties:<br>" 
+            "  * Total Radius: Eris has a radius of approximately 1163 ± 6 kilometers.<br>" 
+            "  * Density: Its density is estimated to be around 2.52 ± 0.07 g/cm³. This high density suggests a significant rocky component.<br>" 
+            "  * Compositional Models: Based on its density, scientists believe Eris is composed largely of rock (possibly over 85% of its <br>" 
+            "    mass) with the remainder being primarily water ice. The ice forms the mantle surrounding the rocky core.<br>" 
+            "* Considering these factors, and drawing comparisons to other icy bodies with rocky cores like Europa or Ganymede in the outer <br>" 
+            "  solar system, a reasonable estimate for the radius fraction of Eris's core would likely be around 50-65% of its total radius. <br>" 
+            "  To achieve Eris's high bulk density with a significant ice mantle, the denser rocky core must occupy a substantial portion of <br>" 
+            "  its volume. If the core were much smaller (a smaller radius fraction), the overall density would likely be lower, given the <br>" 
+            "  lower density of water ice. Conversely, if the core occupied a much larger fraction, there would be less room for the <br>" 
+            "  substantial ice mantle that is believed to exist. Therefore, while we don't have a definitive number, the rocky core of Eris <br>" 
+            "  likely makes up roughly half to two-thirds of its total radius.<br>" 
+            "* Temperature:<br>" 
+            "  * Radiogenic Heating: The rocky core of Eris likely contains radioactive isotopes (such as uranium, thorium, and <br>" 
+            "    potassium) that decay over time, releasing heat.<br>" 
+            "  * Recent research based on data from the James Webb Space Telescope provides indirect evidence for a warm, potentially <br>" 
+            "    even hot, rocky core in Eris. The detection of a moderate deuterium-to-hydrogen (D/H) ratio in methane ice on its surface <br>" 
+            "    suggests that the methane was likely produced through geochemical processes in the interior, requiring elevated <br>" 
+            "    temperatures (possibly above 150°C or 300°F) within the rocky core. Theoretical modeling of Eris's interior, considering <br>" 
+            "    radiogenic heating and thermal conductivity, suggests that the central temperature could have been as high as 875 K.<br>" 
+            "  * This warmth might even be sufficient to support a subsurface ocean at the core-mantle boundary."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * ERIS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=4.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Eris/Dysnomia: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+eris_mantel_info = (
+            "2.1 MB PER FRAME FOR HTML.\n\n"
+            "Mantle: Surrounding the rocky core is a substantial mantle made of water ice. Unlike Pluto's ice shell, Eris's ice \n" 
+            "mantle is thought to be convecting. This means that the warmer ice closer to the core rises, while the colder ice near \n" 
+            "the surface sinks, a process that helps dissipate the internal heat generated by the core. The thickness of this ice \n" 
+            "shell is estimated to be around 100 kilometers. There is currently no evidence to suggest the presence of a subsurface \n" 
+            "ocean within Eris."
+)
+
+def create_eris_mantel_shell(center_position=(0, 0, 0)):
+    """Creates Eris's mantle shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 0.66,  
+        'color': 'rgb(150, 0, 0)',  # These still represent red but with a lower intensity,  
+        'opacity': 0.9,
+        'name': 'Mantel',
+        'description': (
+            "Mantle: Surrounding the rocky core is a substantial mantle made of water ice. Unlike Pluto's ice shell, Eris's ice <br>" 
+            "mantle is thought to be convecting. This means that the warmer ice closer to the core rises, while the colder ice near <br>" 
+            "the surface sinks, a process that helps dissipate the internal heat generated by the core. The thickness of this ice <br>" 
+            "shell is estimated to be around 100 kilometers. There is currently no evidence to suggest the presence of a subsurface <br>" 
+            "ocean within Eris.<br>"
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * ERIS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.5,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Eris/Dysnomia: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+eris_crust_info = (
+            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
+            "4.6 MB PER FRAME FOR HTML.\n\n"
+            "Crust: The outermost layer is a crust of frozen gases, primarily nitrogen and methane ice. Eris has a very high albedo \n" 
+            "(reflectivity), reflecting about 96% of the sunlight that hits it. This bright surface is likely due to a frost layer \n" 
+            "formed from the condensation of its atmosphere when it is far from the Sun."
+)
+
+def create_eris_crust_shell(center_position=(0, 0, 0)):
+    """Creates eris's cloud layer shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.0,  # the top of the troposphere is actually 1.002
+        'color': 'rgb(240, 240, 240)',  # optical, a color that is very close to white but with a slight hint of gray
+        'opacity': 1.0,
+        'name': 'Crust',
+        'description': (
+            "Eris Crust<br>" 
+            "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
+            "Crust: The outermost layer is a crust of frozen gases, primarily nitrogen and methane ice. Eris has a very high albedo <br>" 
+            "(reflectivity), reflecting about 96% of the sunlight that hits it. This bright surface is likely due to a frost layer <br>" 
+            "formed from the condensation of its atmosphere when it is far from the Sun.<br>" 
+            "* The optical color of Eris is primarily characterized by its very high albedo, meaning it reflects a large percentage <br>" 
+            "  of the sunlight that hits it (around 96%). This high reflectivity is due to a relatively fresh layer of frozen nitrogen <br>" 
+            "  and methane on its surface. The color is largely that of the illuminating source (the Sun). <br>" 
+            "* Atmospheric effects (if any): Although its atmosphere is currently thought to be very thin or mostly frozen, any past or <br>" 
+            "  transient atmosphere could have slightly altered the light scattering and thus the observed color."
+            )
+    }
+    
+    # Calculate radius in AU
+    radius = layer_info['radius_fraction'] * ERIS_RADIUS_AU
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
+    
+    # Apply center position offset
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
+    
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Eris/Dysnomia: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Eris/Dysnomia: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(240, 240, 240)',  
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Eris/Dysnomia: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
+
+eris_atmosphere_info = (
+            "2.7 MB PER FRAME FOR HTML.\n\n"
+            "Atmosphere: Eris has a very tenuous atmosphere that is dynamic. When Eris is at its farthest point from the Sun \n" 
+            "(aphelion), the extremely cold temperatures cause its atmosphere, likely composed of nitrogen and methane, to freeze \n" 
+            "and fall as snow onto the surface. As Eris moves closer to the Sun in its highly elliptical orbit (perihelion), the \n" 
+            "surface warms up, and these ices sublimate, potentially creating a temporary atmosphere similar to Pluto's. However, \n" 
+            "observations have placed a very low upper limit on the current atmospheric pressure, suggesting it is currently very \n" 
+            "thin or mostly frozen."
+)
+
+def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
+    """Creates eris's atmosphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.005,  # almost none and intermittent
+        'color': 'rgb(240, 245, 250)',  # optical pale blue
+        'opacity': 0.1,
+        'name': 'Atmosphere',
+        'description': (
+            "Atmosphere: Eris has a very tenuous atmosphere that is dynamic. When Eris is at its farthest point from the Sun <br>" 
+            "(aphelion), the extremely cold temperatures cause its atmosphere, likely composed of nitrogen and methane, to freeze <br>" 
+            "and fall as snow onto the surface. As Eris moves closer to the Sun in its highly elliptical orbit (perihelion), the <br>" 
+            "surface warms up, and these ices sublimate, potentially creating a temporary atmosphere similar to Pluto's. However, <br>" 
+            "observations have placed a very low upper limit on the current atmospheric pressure, suggesting it is currently very <br>" 
+            "thin or mostly frozen.<br>" 
+            "* The current understanding of Eris's atmosphere is that it is extremely tenuous, with an upper limit on surface <br>" 
+            "  pressure of about 1 nanobar. This is about 10,000 times thinner than Pluto's current atmosphere. Given such a low <br>" 
+            "  pressure, the extent of the atmosphere in terms of Eris's radii would be very small and likely not easily definable <br>" 
+            "  in a significant way.<br>" 
+            "* Near-Surface Existence: At such low pressures, the \"atmosphere\" is likely confined to a very thin layer near the <br>" 
+            "  surface. The density of gas molecules would drop off extremely rapidly with altitude.<br>" 
+            "* Collapse at Aphelion: Eris is currently near its aphelion (farthest point from the Sun). At these extremely cold <br>" 
+            "  temperatures (around -240°C), the primary atmospheric constituents, nitrogen and methane, would freeze and deposit <br>" 
+            "  as frost on the surface. Any atmosphere present would be minimal.<br>" 
+            "* Potential Sublimation at Perihelion: As Eris gets closer to the Sun (perihelion), the surface temperature will increase <br>" 
+            "  slightly, potentially causing some of these ices to sublimate and form a transient, thin atmosphere. However, even in <br>" 
+            "  this case, the extent is not expected to be a significant fraction of Eris's radius. In practical terms, the extent of <br>" 
+            "  Eris's atmosphere in radii is considered negligible for most structural considerations. Scientists often discuss the <br>" 
+            "  surface composition and potential for a thin, dynamic atmosphere rather than a significant, extended gaseous envelope. <br>" 
+            "* To put it in perspective: if Eris had an atmosphere that extended even a few kilometers, that would be a tiny fraction <br>" 
+            "  (less than 0.01) of its total radius. The current observational limits suggest it's likely much less than that for a <br>" 
+            "  sustained atmosphere at its current distance from the Sun."
+        )
+    }
+    
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * ERIS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=3.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Eris/Dysnomia: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+eris_hill_sphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
+
+            "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant \n" 
+            "force attracting satellites. For Eris, the radius of its Hill sphere is estimated to be about 8.1 million kilometers \n" 
+            "(0.054 astronomical units). This is the region where its moon, Dysnomia, orbits. Any object within this sphere is more \n" 
+            "likely to be gravitationally bound to Eris."                      
+)
+
+def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
+    """Creates Eris's Hill sphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 6965, 
+        'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
+        'opacity': 0.3,
+        'name': 'Hill Sphere',
+        'description': (
+            "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
+            "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant <br>" 
+            "force attracting satellites. For Eris, the radius of its Hill sphere is estimated to be about 8.1 million kilometers <br>" 
+            "(0.054 astronomical units). This is the region where its moon, Dysnomia, orbits. Any object within this sphere is more <br>" 
+            "likely to be gravitationally bound to Eris.<br>" 
+            "* The region where Eris's gravity is the dominant force attracting satellites extends to a distance of roughly 6965 <br>" 
+            "  Eris radii from its center."          
+            )
+    }
+        
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * ERIS_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Eris/Dysnomia: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
+    return traces
+
+# Planet 9
+
+planet9_surface_info = (
+            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
+            "4.6 MB PER FRAME FOR HTML.\n\n"
+            "The estimation of Planet Nine's radius being between 3 and 4 Earth radii, with a specific estimate of around 3.7 Earth \n" 
+            "radii (or 23,500 - 24,000 km), appears in several scientific discussions. This size estimate is often linked to the \n" 
+            "assumption that Planet Nine is likely an ice giant, similar in composition to Uranus and Neptune, but potentially a \n" 
+            "smaller version."
+)
+
+def create_planet9_surface_shell(center_position=(0, 0, 0)):
+    """Creates eris's cloud layer shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 1.0,  # the top of the troposphere is actually 1.002
+        'color': 'rgb(83, 68, 55)',  # optical brownish
+        'opacity': 1.0,
+        'name': 'Crust',
+        'description': (
+            "Planet 9 Surface<br>" 
+            "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
+            "The estimation of Planet Nine's radius being between 3 and 4 Earth radii, with a specific estimate of around 3.7 Earth <br>" 
+            "radii (or 23,500 - 24,000 km), appears in several scientific discussions. This size estimate is often linked to the <br>" 
+            "assumption that Planet Nine is likely an ice giant, similar in composition to Uranus and Neptune, but potentially a <br>" 
+            "smaller version.<br>" 
+            "* Mass and Density Relationship: For a given mass, the radius of a planet is strongly influenced by its density.<br>" 
+            "* Terrestrial Planets: Terrestrial planets (like Earth, Mars, Venus, Mercury) are primarily composed of rock and metal, <br>" 
+            "  making them quite dense. If Planet Nine were a terrestrial planet with 5-10 times the mass of Earth, its radius would <br>" 
+            "  likely be significantly smaller than 3-4 Earth radii due to its high density.<br>" 
+            "* Gas Giants: Gas giants (like Jupiter and Saturn) are composed mostly of hydrogen and helium, making them very large and <br>" 
+            "  not very dense. A planet with several Earth masses composed primarily of these light gases would have a much larger radius <br>" 
+            "  than 3-4 Earth radii.<br>" 
+            "* Ice Giants: Ice giants (like Uranus and Neptune) have a composition that includes heavier elements like oxygen, carbon, <br>" 
+            "  nitrogen, and sulfur, often in the form of water, methane, and ammonia ices, along with a significant amount of hydrogen and <br>" 
+            "  helium. This composition results in densities higher than gas giants but lower than terrestrial planets.<br>" 
+            "The 3-4 Earth radii estimate, particularly the 3.7 Earth radii figure, comes from models that assume Planet Nine has a mass <br>" 
+            "around 5-10 Earth masses and an internal composition similar to Uranus and Neptune. These models predict that such a planet <br>" 
+            "would have a larger radius than Earth due to its significant mass, but not as large as a pure gas giant with the same mass due <br>" 
+            "to the presence of heavier \"ice\" materials. Therefore, the estimated radius of 3-4 Earth radii strongly suggests that Planet <br>" 
+            "Nine, if it exists, is likely an ice giant or a sub-Neptune type of planet, rather than a rocky terrestrial planet or a large <br>" 
+            "gas giant. This is also consistent with theories about how a planet could have formed or been captured in the distant outer <br>" 
+            "solar system."
+            )
+    }
+    
+    # Calculate radius in AU
+    radius = layer_info['radius_fraction'] * PLANET9_RADIUS_AU
+    
+    # Unpack center position
+    center_x, center_y, center_z = center_position
+    
+    # Create mesh with reasonable resolution for performance
+    resolution = 24  # Reduced from typical 50 for markers
+    
+    # Create a UV sphere
+    phi = np.linspace(0, 2*np.pi, resolution)
+    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
+    phi, theta = np.meshgrid(phi, theta)
+    
+    x = radius * np.cos(theta) * np.cos(phi)
+    y = radius * np.cos(theta) * np.sin(phi)
+    z = radius * np.sin(theta)
+    
+    # Apply center position offset
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    # Create triangulation
+    indices = []
+    for i in range(resolution-1):
+        for j in range(resolution-1):
+            p1 = i * resolution + j
+            p2 = i * resolution + (j + 1)
+            p3 = (i + 1) * resolution + j
+            p4 = (i + 1) * resolution + (j + 1)
+            
+            indices.append([p1, p2, p4])
+            indices.append([p1, p4, p3])
+    
+    # Create main surface
+    surface_trace = go.Mesh3d(
+        x=x.flatten(), 
+        y=y.flatten(), 
+        z=z.flatten(),
+        i=[idx[0] for idx in indices],
+        j=[idx[1] for idx in indices],
+        k=[idx[2] for idx in indices],
+        color=layer_info['color'],
+        opacity=layer_info['opacity'],
+        name=f"Planet 9: {layer_info['name']}",
+        showlegend=True,
+        hoverinfo='none',  # Disable hover on mesh surface
+        # Add these new parameters to make hover text invisible
+        hovertemplate=' ',  # Empty template instead of None
+        hoverlabel=dict(
+    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
+            font=dict(
+                color='rgba(0,0,0,0)',  # Transparent text
+    #            size=0                  # Zero font size
+            ),
+            bordercolor='rgba(0,0,0,0)'  # Transparent border
+        ), 
+        # Add these new parameters to eliminate shading
+        flatshading=True,  # Use flat shading instead of smooth
+        lighting=dict(
+            ambient=1.0,     # Set to maximum (1.0)
+            diffuse=0.0,     # Turn off diffuse lighting
+            specular=0.0,    # Turn off specular highlights
+            roughness=1.0,   # Maximum roughness
+            fresnel=0.0      # Turn off fresnel effect
+        ),
+        lightposition=dict(
+            x=0,  # Centered light
+            y=0,  # Centered light
+            z=10000  # Light from very far above to minimize shadows
+        )       
+    )
+        
+    # Use the Fibonacci sphere algorithm for more even point distribution
+    def fibonacci_sphere(samples=1000):
+        points = []
+        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
+        
+        for i in range(samples):
+            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
+            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
+            
+            theta = phi * i  # Golden angle increment
+            
+            x = math.cos(theta) * radius_at_y
+            z = math.sin(theta) * radius_at_y
+            
+            points.append((x, y, z))
+        
+        return points
+    
+    # Generate fibonacci sphere points
+    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
+    
+    # Scale and offset the points
+    x_hover = [p[0] * radius + center_x for p in fib_points]
+    y_hover = [p[1] * radius + center_y for p in fib_points]
+    z_hover = [p[2] * radius + center_z for p in fib_points]
+        
+    # Create a list of repeated descriptions for each point
+    # This is crucial - we need exactly one text entry per point
+    hover_texts = [layer_info['description']] * len(x_hover)
+
+    # Just the name for "Object Names Only" mode
+    layer_name = f"Planet 9: {layer_info['name']}"
+    minimal_hover_texts = [layer_name] * len(x_hover)
+
+    # Create hover trace with direct text assignment
+    hover_trace = go.Scatter3d(
+        x=x_hover, 
+        y=y_hover, 
+        z=z_hover,
+        mode='markers',
+        marker=dict(
+            size=2,  # originally 5
+            color='rgb(83, 68, 55)',  # brownish
+            opacity=1.0,  # originally 0.8
+            line=dict(  # Add a contrasting outline
+                width=1,
+                color='black'
+            )
+        ),
+        name=f"Planet 9: {layer_info['name']} (Info)",
+        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
+        customdata=minimal_hover_texts,  # For "Object Names Only" mode
+        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
+        showlegend=False  # Don't show in legend since it's just for hover
+    )
+
+    return [surface_trace, hover_trace]
+
+planet9_hill_sphere_info = (
+            "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.\n" 
+            "1.3 MB PER FRAME FOR HTML.\n\n"
+
+            "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n" 
+            "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU."                     
+)
+
+def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
+    """Creates Planet 9's Hill sphere shell."""
+    # Define layer properties
+    layer_info = {
+        'radius_fraction': 48000, # this is estimated based on the modeled data
+        'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
+        'opacity': 0.3,
+        'name': 'Hill Sphere',
+        'description': (
+            "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br><br>"
+            "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br><br>" 
+            "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU.<br>" 
+            "To arrive at the Hill sphere estimate of 7.6 AU, we made the following key assumptions about Planet Nine: <br>" 
+            "* Semi-major axis (a): We assumed a semi-major axis of 600 AU. This value is within the range of 500-700 AU suggested <br>" 
+            "  by some studies, including those considering the IRAS/AKARI observations. The semi-major axis is the average distance <br>" 
+            "  of the planet from the Sun and has a direct linear relationship with the Hill sphere radius. A larger semi-major axis <br>" 
+            "  leads to a larger Hill sphere.<br>" 
+            "* Eccentricity (e): We assumed an eccentricity of 0.30. This value aligns with estimates that suggest a highly elliptical <br>" 
+            "  orbit for Planet Nine, consistent with a perihelion around 280 AU and an aphelion around 1120 AU. The eccentricity <br>" 
+            "  affects the Hill sphere radius because the formula uses the distance to the Sun at the perihelion. A higher eccentricity <br>" 
+            "  would result in a smaller Hill sphere radius.<br>" 
+            "* Mass of Planet Nine (m): We assumed a mass of 6 times the mass of Earth. This is within the generally accepted range of <br>" 
+            "  a few to ten Earth masses, and close to some refined estimates. The mass of Planet Nine has a cubic root relationship <br>" 
+            "  with the Hill sphere radius, meaning a larger mass leads to a larger Hill sphere, but the effect is less pronounced than <br>" 
+            "  that of the semi-major axis.<br>" 
+            "* Mass of the Sun (M): We used the standard value for the mass of the Sun. This is a well-established constant.<br>" 
+            "* In summary: the region where Planet 9's gravity is strong enough to hold onto its own moons despite the Sun's pull is <br>" 
+            "  what the Hill sphere represents. To estimate the radius of this safe zone, we take Planet Nine's average distance from <br>" 
+            "  the Sun, which we're assuming to be 600 AU (that's 600 times the distance between the Earth and the Sun). Because <br>" 
+            "  Planet Nine's orbit isn't a perfect circle but more of an oval shape (we call this eccentricity, and we're assuming <br>" 
+            "  it's 0.30), the closest it gets to the Sun is a bit less than this average. To account for this, we consider the distance <br>" 
+            "  at its closest approach, which is roughly its average distance multiplied by (one minus the eccentricity), <br>" 
+            "  so 600AU×(1−0.30)=600AU×0.70=420AU. This closest distance is important because the Sun's gravity is strongest there, <br>" 
+            "  making it harder for Planet Nine to hold onto moons. Now, we also need to consider how strong Planet Nine's gravity is <br>" 
+            "  compared to the Sun's. We're assuming Planet Nine has a mass of 6 times the mass of the Earth. The Sun, of course, is <br>" 
+            "  vastly more massive.<br>" 
+            "* The full equation for calculating the Hill sphere radius is: r_Hill = a x (m/(3 x M))^(1/3). Where: a is the semi-major <br>" 
+            "  axis of Eris's orbit around the Sun; m is the mass of Eris; M is the mass of the Sun."        
+            )
+    }
+        
+    # Calculate radius in AU
+    layer_radius = layer_info['radius_fraction'] * PLANET9_RADIUS_AU
+    
+    # Create sphere points
+    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    
+    # Apply center position offset
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+    
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color=layer_info['color'],
+                opacity=layer_info['opacity']
+            ),
+            name=f"Planet 9: {layer_info['name']}",
+            text=[layer_info['description']] * len(x),
+            customdata=[f"Planet 9: {layer_info['name']}"] * len(x),
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )

@@ -2,7 +2,7 @@
 
 import numpy as np
 import re
-from constants import spectral_subclass_temps  # Import the spectral subclass temperatures
+from constants_new import spectral_subclass_temps  # Import the spectral subclass temperatures
 
 def estimate_temperature_from_spectral_type(sp_type):
     """

@@ -5,7 +5,7 @@ import pandas as pd
 import re
 import plotly.graph_objects as go
 
-from constants import (
+from constants_new import (
     object_type_mapping, class_mapping, hover_text_sun, stellar_class_labels
 )
 from save_utils import save_plot

@@ -23,10 +23,10 @@ import math
 import pickle
 import re
 from typing import Dict, List, Optional
-
-from constants import (
-    planetary_params,
-    parent_planets,
+from idealized_orbits import planetary_params, parent_planets
+from constants_new import (
+#    planetary_params,
+#    parent_planets,
     color_map,
     note_text,
     INFO,
@@ -82,7 +82,7 @@ DEFAULT_MARKER_SIZE = 6
 HORIZONS_MAX_DATE = datetime(2199, 12, 29, 0, 0, 0)
 CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 
-# Constants
+# constants_new
 LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
 KM_PER_AU = 149597870.7       # Kilometers per Astronomical Unit
 CORE_AU = 0.00093               # Core in AU, or approximately 0.2 Solar radii
@@ -885,7 +885,7 @@ plot_button_2d_mag.pack(pady=(0, 20))
 CreateToolTip(plot_button_2d_mag, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
 
 # Status frame remains at bottom of middle column
-status_frame = tk.LabelFrame(plot_controls_frame, text="Output Errors")
+status_frame = tk.LabelFrame(plot_controls_frame, text="Output Messages")
 status_frame.pack(pady=(0, 10), fill='x')
 
 output_label = tk.Label(status_frame, text="", fg='red', wraplength=400)

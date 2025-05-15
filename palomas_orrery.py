@@ -22,7 +22,7 @@ import subprocess
 import sys
 import math
 import json
-from idealized_orbits import plot_idealized_orbits, planetary_params
+from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points 
 from formatting_utils import format_maybe_float, format_km_float
 from planet_visualization import (
     create_celestial_body_visualization,
@@ -70,6 +70,8 @@ from planet_visualization import (
     jupiter_cloud_layer_info,
     jupiter_upper_atmosphere_info,
     jupiter_ring_system_info,
+    jupiter_radiation_belts_info,
+    jupiter_io_plasma_torus_info,
     jupiter_magnetosphere_info,
     jupiter_hill_sphere_info,
 
@@ -79,13 +81,47 @@ from planet_visualization import (
     saturn_cloud_layer_info,
     saturn_upper_atmosphere_info,
     saturn_ring_system_info,
+    saturn_radiation_belts_info,
+    saturn_enceladus_plasma_torus_info,
     saturn_magnetosphere_info,
-    saturn_hill_sphere_info
+    saturn_hill_sphere_info,
+
+    uranus_core_info,
+    uranus_mantel_info,
+    uranus_cloud_layer_info,
+    uranus_upper_atmosphere_info,
+    uranus_ring_system_info,
+    uranus_radiation_belts_info,
+    uranus_magnetosphere_info,
+    uranus_hill_sphere_info, 
+
+    neptune_core_info,
+    neptune_mantel_info,
+    neptune_cloud_layer_info,
+    neptune_upper_atmosphere_info,
+    neptune_ring_system_info,
+    neptune_radiation_belts_info,
+    neptune_magnetosphere_info,
+    neptune_hill_sphere_info,
+
+    pluto_core_info,
+    pluto_mantel_info,
+    pluto_crust_info,
+    pluto_haze_layer_info,
+    pluto_atmosphere_info,
+    pluto_hill_sphere_info,
+
+    eris_core_info,
+    eris_mantel_info,
+    eris_crust_info,
+    eris_atmosphere_info,
+    eris_hill_sphere_info, 
+
+    planet9_surface_info,
+    planet9_hill_sphere_info           
 )
 
 from constants_new import (
-    parent_planets,
-    planet_tilts,
     color_map,
     note_text,
     INFO,
@@ -139,7 +175,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: April 23, 2025")
+root.title("Paloma's Orrery -- Updated: May 12, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -599,19 +635,97 @@ saturn_radiation_belts_var = tk.IntVar(value=0)
 saturn_hill_sphere_var = tk.IntVar(value=0)
 
 uranus_var = tk.IntVar(value=0)
+# Uranus's Major Moons
+ariel_var = tk.IntVar(value=0)
+umbriel_var = tk.IntVar(value=0)
+titania_var = tk.IntVar(value=0)
+oberon_var = tk.IntVar(value=0)
+miranda_var = tk.IntVar(value=0)
+portia_var = tk.IntVar(value=0)
+mab_var = tk.IntVar(value=0)
+# uranus core shell
+uranus_core_var = tk.IntVar(value=0)
+# uranus mantel shell
+uranus_mantel_var = tk.IntVar(value=0)
+# uranus cloud layer shell
+uranus_cloud_layer_var = tk.IntVar(value=0)
+# uranus upper atmosphere shell
+uranus_upper_atmosphere_var = tk.IntVar(value=0)
+# uranus ring system shell
+uranus_ring_system_var = tk.IntVar(value=0)
+# uranus magnetosphere shell
+uranus_magnetosphere_var = tk.IntVar(value=0)
+# uranus radiation shell
+uranus_radiation_belts_var = tk.IntVar(value=0)
+# uranus hill_sphere shell
+uranus_hill_sphere_var = tk.IntVar(value=0)
 
 neptune_var = tk.IntVar(value=0)
+# neptune's Major Moons
+triton_var = tk.IntVar(value=0)
+despina_var = tk.IntVar(value=0)
+galatea_var = tk.IntVar(value=0)
+# neptune core shell
+neptune_core_var = tk.IntVar(value=0)
+# neptune mantel shell
+neptune_mantel_var = tk.IntVar(value=0)
+# neptune cloud layer shell
+neptune_cloud_layer_var = tk.IntVar(value=0)
+# neptune upper atmosphere shell
+neptune_upper_atmosphere_var = tk.IntVar(value=0)
+# neptune ring system shell
+neptune_ring_system_var = tk.IntVar(value=0)
+# neptune magnetosphere shell
+neptune_magnetosphere_var = tk.IntVar(value=0)
+# neptune radiation shell
+neptune_radiation_belts_var = tk.IntVar(value=0)
+# neptune hill_sphere shell
+neptune_hill_sphere_var = tk.IntVar(value=0)
 
 pluto_var = tk.IntVar(value=0)
+# pluto's Major Moons
+charon_var = tk.IntVar(value=0)
+styx_var = tk.IntVar(value=0)
+nix_var = tk.IntVar(value=0)
+kerberos_var = tk.IntVar(value=0)
+hydra_var = tk.IntVar(value=0)  
+# pluto core shell
+pluto_core_var = tk.IntVar(value=0)
+# pluto mantel shell
+pluto_mantel_var = tk.IntVar(value=0)
+# pluto cloud layer shell
+pluto_crust_var = tk.IntVar(value=0)
+# pluto haze layer shell
+pluto_haze_layer_var = tk.IntVar(value=0)
+# pluto upper atmosphere shell
+pluto_atmosphere_var = tk.IntVar(value=0)
+# pluto hill_sphere shell
+pluto_hill_sphere_var = tk.IntVar(value=0)
 
 planet9_var = tk.IntVar(value=0)  # hypothetical
+# planet9 surface shell
+planet9_surface_var = tk.IntVar(value=0)
+# planet9 hill_sphere shell
+planet9_hill_sphere_var = tk.IntVar(value=0)
 
 haumea_var = tk.IntVar(value=0)
 
 makemake_var = tk.IntVar(value=0)
 
-eris_var = tk.IntVar(value=0)
-eris2_var = tk.IntVar(value=0)
+eris_var = tk.IntVar(value=0)       # for heliocentric plots
+eris2_var = tk.IntVar(value=0)      # for Eris-centered plots
+# Eris's Moon
+dysnomia_var = tk.IntVar(value=0)
+# eris core shell
+eris_core_var = tk.IntVar(value=0)
+# eris mantel shell
+eris_mantel_var = tk.IntVar(value=0)
+# eris cloud layer shell
+eris_crust_var = tk.IntVar(value=0)
+# eris upper atmosphere shell
+eris_atmosphere_var = tk.IntVar(value=0)
+# eris hill_sphere shell
+eris_hill_sphere_var = tk.IntVar(value=0)
 
 voyager1_var = tk.IntVar(value=0)
 voyager1h_var = tk.IntVar(value=0)
@@ -698,15 +812,11 @@ dart_var = tk.IntVar(value=0)
 
 lucy_var = tk.IntVar(value=0)
 
-nix_var = tk.IntVar(value=0)
-
 kbo_var = tk.IntVar(value=0)
 
 gaia_var = tk.IntVar(value=0)
 
 hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
-
-hydra_var = tk.IntVar(value=0)  # 0 means unselected by default
 
 # Define IntVar variables for Kuiper Belt Objects
 quaoar_var = tk.IntVar(value=0)
@@ -729,24 +839,6 @@ arrokoth_var = tk.IntVar(value=0)
 arrokoth_new_horizons_var = tk.IntVar(value=0)
 
 ixion_var = tk.IntVar(value=0)
-
-# New Selection Variables for Major Moons
-
-# Uranus's Major Moons
-oberon_var = tk.IntVar(value=0)
-umbriel_var = tk.IntVar(value=0)
-ariel_var = tk.IntVar(value=0)
-miranda_var = tk.IntVar(value=0)
-titania_var = tk.IntVar(value=0)
-
-# Neptune's Major Moon
-triton_var = tk.IntVar(value=0)
-
-# Pluto's Moon
-charon_var = tk.IntVar(value=0)
-
-# Eris's Moon
-dysnomia_var = tk.IntVar(value=0)
 
 # Create a mapping dictionary for Sun shell variables:
 
@@ -835,6 +927,50 @@ saturn_shell_vars = {
     'saturn_hill_sphere': saturn_hill_sphere_var
 }
 
+uranus_shell_vars = {
+    'uranus_core': uranus_core_var,
+    'uranus_mantel': uranus_mantel_var,
+    'uranus_cloud_layer': uranus_cloud_layer_var,
+    'uranus_upper_atmosphere': uranus_upper_atmosphere_var,
+    'uranus_ring_system': uranus_ring_system_var,
+    'uranus_radiation_belts': uranus_radiation_belts_var,
+    'uranus_magnetosphere': uranus_magnetosphere_var,
+    'uranus_hill_sphere': uranus_hill_sphere_var
+}
+
+neptune_shell_vars = {
+    'neptune_core': neptune_core_var,
+    'neptune_mantel': neptune_mantel_var,
+    'neptune_cloud_layer': neptune_cloud_layer_var,
+    'neptune_upper_atmosphere': neptune_upper_atmosphere_var,
+    'neptune_ring_system': neptune_ring_system_var,
+    'neptune_radiation_belts': neptune_radiation_belts_var,
+    'neptune_magnetosphere': neptune_magnetosphere_var,
+    'neptune_hill_sphere': neptune_hill_sphere_var
+}
+
+pluto_shell_vars = {
+    'pluto_core': pluto_core_var,
+    'pluto_mantel': pluto_mantel_var,
+    'pluto_crust': pluto_crust_var,
+    'pluto_haze_layer': pluto_haze_layer_var,
+    'pluto_atmosphere': pluto_atmosphere_var,
+    'pluto_hill_sphere': pluto_hill_sphere_var
+}
+
+eris_shell_vars = {
+    'eris_core': eris_core_var,
+    'eris_mantel': eris_mantel_var,
+    'eris_crust': eris_crust_var,
+    'eris_atmosphere': eris_atmosphere_var,
+    'eris_hill_sphere': eris_hill_sphere_var
+}
+
+planet9_shell_vars = {
+    'planet9_surface': planet9_surface_var,    
+    'planet9_hill_sphere': planet9_hill_sphere_var
+}
+
 # Define the list of objects
 objects = [
     # Existing Celestial Objects
@@ -891,7 +1027,7 @@ objects = [
     {'name': 'Planet 9', 'id': 'planet9_placeholder', 'var': planet9_var, 'color': color_map('Planet 9'), 
     'symbol': 'circle', 'is_mission': False, 
     'id_type': None, 
-    'mission_info': 'Hypothetical planet with estimated mass of 5-10 Earths at ~400-800 AU. Not yet directly observed.',
+    'mission_info': 'Hypothetical planet with estimated mass of 5-10 Earths at ~400-800 AU. Not yet directly observed. Visualization is our estimate and not from JPL Horizons.',
     'mission_url': 'https://en.wikipedia.org/wiki/Planet_Nine'},
 
 # Dwarf planets
@@ -1353,11 +1489,6 @@ objects = [
 
     # Uranus's Major Moons
 
-    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 
-     'id_type': None, 
-     'mission_info': 'Uranus orbital period: 1.41 Earth days.',
-     'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},
-
     {'name': 'Ariel', 'id': '701', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Uranus orbital period: 2.52 Earth days.', 
@@ -1378,11 +1509,36 @@ objects = [
      'mission_info': 'Uranus orbital period: 13.46 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/oberon/'},
 
-    # Neptune's Major Moon
+    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 1.41 Earth days.',
+     'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},   
+
+    {'name': 'Portia', 'id': '712', 'var': portia_var, 'color': color_map('Portia'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 0.513196 Earth days or 12.317 hours.',
+     'mission_url': 'https://science.nasa.gov/uranus/moons/portia/'}, 
+
+    {'name': 'Mab', 'id': '726', 'var': mab_var, 'color': color_map('Mab'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Uranus orbital period: 0.923293 Earth days or 22.159 hours.',
+     'mission_url': 'https://science.nasa.gov/uranus/moons/mab/'},             
+
+    # Neptune's Major Moons
     {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Neptune orbital period: 5.88 Earth days.', 
      'mission_url': 'https://science.nasa.gov/neptune/moons/triton/'},
+
+    {'name': 'Despina', 'id': '805', 'var': despina_var, 'color': color_map('Despina'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Neptune orbital period: 0.334656 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/neptune/moons/despina/'},
+
+    {'name': 'Galatea', 'id': '806', 'var': galatea_var, 'color': color_map('Galatea'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Neptune orbital period: 0.428744 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/neptune/moons/galatea/'},
 
     # Pluto's Moon
     {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'is_mission': False, 
@@ -1390,10 +1546,20 @@ objects = [
      'mission_info': 'Pluto orbital period: 6.39 Earth days.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/charon/'},
 
+    {'name': 'Styx', 'id': '905', 'var': styx_var, 'color': color_map('Styx'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Pluto orbital period: 20.16 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/styx/'},     
+
     {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
      'mission_info': 'Pluto orbital period: 24.86 Earth days.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/nix/'},
+
+    {'name': 'Kerberos', 'id': '904', 'var': kerberos_var, 'color': color_map('Kerberos'), 'symbol': 'circle', 'is_mission': False, 
+     'id_type': None, 
+     'mission_info': 'Pluto orbital period: 32.17 Earth days.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/kerberos/'},
 
     {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'is_mission': False, 
      'id_type': None, 
@@ -1892,8 +2058,78 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 )
             )
 
+def calculate_planet9_position_on_orbit(a=600, e=0.30, i=6, omega=150, Omega=90, theta=75):
+    """
+    Calculate position that lies exactly on the orbit defined by the parameters
+    
+    Parameters:
+        a: Semi-major axis in AU
+        e: Eccentricity
+        i: Inclination in degrees
+        omega: Argument of perihelion in degrees
+        Omega: Longitude of ascending node in degrees
+        theta: True anomaly in degrees - adjusted to place object on orbit
+    
+    Returns:
+        (x, y, z) position in AU and range (distance from Sun)
+    """
+    # Convert angles to radians
+    i_rad = math.radians(i)
+    omega_rad = math.radians(omega)
+    Omega_rad = math.radians(Omega)
+    theta_rad = math.radians(theta)
+    
+    # Calculate distance from Sun at this point in the orbit
+    r = a * (1 - e**2) / (1 + e * math.cos(theta_rad))
+    
+    # Calculate position in orbital plane
+    x_orbit = r * math.cos(theta_rad)
+    y_orbit = r * math.sin(theta_rad)
+    
+    # Rotate to account for orientation of orbit in 3D space
+    # First, rotate by argument of perihelion
+    x_perihelion = x_orbit * math.cos(omega_rad) - y_orbit * math.sin(omega_rad)
+    y_perihelion = x_orbit * math.sin(omega_rad) + y_orbit * math.cos(omega_rad)
+    
+    # Then, rotate to account for inclination
+    x_inclined = x_perihelion
+    y_inclined = y_perihelion * math.cos(i_rad)
+    z_inclined = y_perihelion * math.sin(i_rad)
+    
+    # Finally, rotate by longitude of ascending node
+    x = x_inclined * math.cos(Omega_rad) - y_inclined * math.sin(Omega_rad)
+    y = x_inclined * math.sin(Omega_rad) + y_inclined * math.cos(Omega_rad)
+    z = z_inclined
+    
+    # Calculate range for consistency
+    range_val = math.sqrt(x**2 + y**2 + z**2)
+    
+    return x, y, z, range_val
+
 # Function to fetch the position of a celestial object for a specific date
 def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None):  
+ 
+    # Skip fetching for Planet 9 and use accurate position on orbit
+    if object_id == 'planet9_placeholder':
+        # Calculate position directly on the theoretical orbit
+        x, y, z, range_val = calculate_planet9_position_on_orbit()
+        
+        # Return a complete position object with all necessary fields
+        return {
+            'x': x,
+            'y': y,
+            'z': z,
+            'range': range_val,   # Distance based on IRAS/AKARI study estimate
+            'vx': 0,
+            'vy': 0,
+            'vz': 0,
+            'velocity': 0,
+            'distance_km': range_val * KM_PER_AU,
+            'distance_lm': range_val * LIGHT_MINUTES_PER_AU,
+            'distance_lh': (range_val * LIGHT_MINUTES_PER_AU) / 60,
+            'mission_info': "Planet 9 candidate identified in 2025 IRAS/AKARI infrared data analysis."
+        }
+        
     try:
         # Convert date to Julian Date
         times = Time([date_obj])
@@ -2034,6 +2270,11 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
     Returns:
         list: List of position dictionaries with complete orbital data
     """
+    # Skip trajectory fetching for Planet 9
+    if object_id == 'planet9_placeholder':
+        # Return a list of None values matching the length of dates_list
+        return [None] * len(dates_list)
+
     try:
         # Convert dates to Julian Date
         times = Time(dates_list)
@@ -2310,7 +2551,12 @@ body_shells_config = {
     'Earth': earth_shell_vars,
     'Mars': mars_shell_vars,
     'Jupiter': jupiter_shell_vars,
-    'Saturn': saturn_shell_vars
+    'Saturn': saturn_shell_vars,
+    'Uranus': uranus_shell_vars,
+    'Neptune': neptune_shell_vars,
+    'Pluto': pluto_shell_vars,
+    'Eris/Dysnomia': eris_shell_vars,
+    'Planet 9': planet9_shell_vars
     # Add more celestial bodies here as shell systems are developed
 }
 
@@ -2409,6 +2655,26 @@ def plot_objects():
                 'Saturn': {
                     'position': None,  # Will be populated during animation
                     'shell_vars': saturn_shell_vars
+                },
+                'Uranus': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': uranus_shell_vars
+                },
+                'Neptune': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': neptune_shell_vars
+                },
+                'Pluto': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': pluto_shell_vars
+                },
+                'Eris/Dysnomia': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': eris_shell_vars
+                },
+                'Planet 9': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': planet9_shell_vars
                 }
             }
 
@@ -2416,113 +2682,6 @@ def plot_objects():
             dates_lists = {}
             for obj in objects:
 
-                # Planet 9 visualization
-                # This goes in the plot_objects function where objects are plotted
-                if obj['name'] == 'Planet 9' and obj['var'].get() == 1:
-                    # For Planet 9, use the orbital parameters to generate a position
-                    # based on the specified date
-                    params = planetary_params['Planet 9']
-                    a = params['a']  # Semi-major axis in AU
-                    e = params['e']  # Eccentricity
-                    
-                    # Use simplified orbital equations to estimate position
-                    # This is a very simplified model - in a real implementation,
-                    # you'd want to use proper orbital mechanics
-                    
-                    # Convert the date to an orbital angle (mean anomaly)
-                    # This is a placeholder - actual calculation would depend on
-                    # the epoch and period
-                    days_since_epoch = (date_obj - datetime(2000, 1, 1)).days
-                    period_days = a**1.5 * 365.25  # Kepler's Third Law, period in days
-                    mean_anomaly = (days_since_epoch % period_days) / period_days * 2 * math.pi
-                    
-                    # Convert mean anomaly to true anomaly using an approximation
-                    true_anomaly = mean_anomaly + 2 * e * math.sin(mean_anomaly)
-                    
-                    # Calculate distance from Sun
-                    r = a * (1 - e**2) / (1 + e * math.cos(true_anomaly))
-                    
-                    # Calculate position in orbital plane
-                    x_orbit = r * math.cos(true_anomaly)
-                    y_orbit = r * math.sin(true_anomaly)
-                    z_orbit = 0
-                    
-                    # Rotate for inclination and other orbital elements
-                    # Convert angles to radians
-                    i_rad = math.radians(params['i'])
-                    omega_rad = math.radians(params['omega'])
-                    Omega_rad = math.radians(params['Omega'])
-                    
-                    # Apply rotations (simplified)
-                    # First rotate by argument of periapsis
-                    x_temp = x_orbit * math.cos(omega_rad) - y_orbit * math.sin(omega_rad)
-                    y_temp = x_orbit * math.sin(omega_rad) + y_orbit * math.cos(omega_rad)
-                    z_temp = z_orbit
-                    
-                    # Then rotate by inclination
-                    x_temp2 = x_temp
-                    y_temp2 = y_temp * math.cos(i_rad) - z_temp * math.sin(i_rad)
-                    z_temp2 = y_temp * math.sin(i_rad) + z_temp * math.cos(i_rad)
-                    
-                    # Then rotate by longitude of ascending node
-                    x_final = x_temp2 * math.cos(Omega_rad) - y_temp2 * math.sin(Omega_rad)
-                    y_final = x_temp2 * math.sin(Omega_rad) + y_temp2 * math.cos(Omega_rad)
-                    z_final = z_temp2
-                    
-                    # Create simulated object data
-                    obj_data = {
-                        'x': x_final,
-                        'y': y_final,
-                        'z': z_final,
-                        'range': r,
-                        'distance_km': r * KM_PER_AU,
-                        'distance_lm': r * LIGHT_MINUTES_PER_AU,
-                        'distance_lh': r * LIGHT_MINUTES_PER_AU / 60,
-                        'orbital_period': (a**1.5)  # Period in Earth years
-                    }
-                    
-                    # Plot Planet 9 as a special case
-                    add_celestial_object(
-                        fig, obj_data, obj['name'], obj['color'], obj['symbol'], 
-                        marker_size=6, hover_data=hover_data, 
-                        center_object_name=center_object_name
-                    )
-                    
-                    # Draw the hypothetical orbit of Planet 9
-                    theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
-                    r_orbit = a * (1 - e**2) / (1 + e * np.cos(theta))
-                    x_orbit = r_orbit * np.cos(theta)
-                    y_orbit = r_orbit * np.sin(theta)
-                    z_orbit = np.zeros_like(theta)
-                    
-                    # Rotate orbit according to orbital elements
-                    # Rotate by argument of periapsis
-                    x_temp, y_temp, z_temp = rotate_points2(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
-                    # Rotate by inclination
-                    x_temp, y_temp, z_temp = rotate_points2(x_temp, y_temp, z_temp, i_rad, 'x')
-                    # Rotate by longitude of ascending node
-                    x_final, y_final, z_final = rotate_points2(x_temp, y_temp, z_temp, Omega_rad, 'z')
-                    
-                    # Add the orbit to the plot
-                    fig.add_trace(
-                        go.Scatter3d(
-                            x=x_final,
-                            y=y_final,
-                            z=z_final,
-                            mode='lines',
-                            line=dict(dash='dot', width=1, color=obj['color']),     #   obj  ['rgb(50, 100, 200)']
-                            name=f"{obj['name']} Orbit",
-                            text=[f"{obj['name']} Hypothetical planet proposed to explain the orbital clustering of some distant "
-                                  "trans-Neptunian objects. Estimated to be 5-10 Earth masses and orbit 400-800 AU from the Sun, " 
-                                  "and possibly in the region of Taurus. As of 2025, it remains undetected."] * len(x_final),
-                            customdata=[f"{obj['name']} Hypothetical Orbit"] * len(x_final),
-                            hovertemplate='%{text}<extra></extra>',
-                            showlegend=True
-                        )
-                    )
-                    
-                    # Special Planet 9 handling code...
-                    continue  # Skip to next object after handling Planet 9                    
         #    else:
 
                 # For satellites specifically, even if they have orbital parameters, 
@@ -2598,58 +2757,15 @@ def plot_objects():
                             capped_orbital_period_days = min(reasonable_period, days_until_horizons)
                             print(f"Applied capping for {obj['name']}: Original {orbital_period_days:.1f} → Capped {capped_orbital_period_days:.1f} days")
 
-                        # For very long-period objects, cap at reasonable values
-            #            if orbital_period_days > 10000:  # Over ~27 years
-                            # Use at most 10% of the orbital period, or 10 years, whichever is greater
-            #                suggested_period = max(orbital_period_days * 0.1, 3650)
-            #            else:
-            #                suggested_period = orbital_period_days
-
-                        # Apply hard caps based on system limitations
-            #            capped_orbital_period_days = min(suggested_period, days_until_horizons, days_until_datetime_max)
-
-            #            print(f"{obj['name']}: Full period = {orbital_period_days:.1f} days, Capped = {capped_orbital_period_days:.1f} days")                            
-
-            #            capped_orbital_period_days = min(orbital_period_days, days_until_horizons, days_until_datetime_max)
-            #            capped_orbital_period_days = orbital_period_days
                         if capped_orbital_period_days <= 0:
                             dates_list = [date_obj]
                         else:
 
-                #            print(f"DEBUG: Planet: ['name'], planet_interval_divisor: {planet_interval_divisor}, capped_orbital_period_days: {capped_orbital_period_days}")
-                #            num_points = int(planet_interval_divisor) + 1
-                #            print(f"DEBUG: Calculated num_points: {num_points} (should be planet_interval_divisor + 1)")
-                #            dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]
-
-                #            if obj['id'] in ['399', '499']:
-                #                print(f"DEBUG: Processing planet {obj['name']} (id {obj['id']})")
-                #                print(f"DEBUG: planet_interval_divisor = {planet_interval_divisor}, capped_orbital_period_days = {capped_orbital_period_days}")
-                #                step = capped_orbital_period_days / planet_interval_divisor
-                #                print(f"DEBUG: Computed step size = {step} days")
-                #            num_points = int(planet_interval_divisor) + 1
-                #            print(f"DEBUG: Calculated num_points = {num_points} (planet_interval_divisor + 1)")
-                #            dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]
-
-                #            print(f"DEBUG: Starting trajectory for {obj['name']} (id {obj['id']})") 
-                #            print(f"DEBUG: Raw planet_interval_divisor = {planet_interval_divisor}") 
-                #            print(f"DEBUG: planetary_params for {obj['name']}: {planetary_params.get(obj['name'], {})}") 
-                #            print(f"DEBUG: capped_orbital_period_days = {capped_orbital_period_days}")
-                #            num_points = int(planet_interval_divisor) + 1 
-                #            print(f"DEBUG: Calculated num_points = {num_points} (planet_interval_divisor + 1)")
-                #            dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]
-
-                            # Replace np.arange with np.linspace for more precise spacing
                             num_points = int(planet_interval_divisor) + 1
                             dates_list = [date_obj + timedelta(days=float(d)) for d in np.linspace(0, capped_orbital_period_days, num=num_points)]                            
-                #            interval = capped_orbital_period_days / planet_interval_divisor      # divide by 50 is the default
-                #            dates_list = [date_obj + timedelta(days=i) for i in np.arange(0, capped_orbital_period_days + 1, interval)]
-                        dates_lists[obj['name']] = dates_list
-                        # Use this instead:
-                #        if 'dates_list' in locals() and dates_list:
-                #            print(f"  Date list length: {len(dates_list)}")
-                #            print(f"  First date: {dates_list[0]}")
-                #            print(f"  Last date: {dates_list[-1]}")                      
 
+                        dates_lists[obj['name']] = dates_list
+                    
                         # Add in both functions where date lists are calculated
                         has_satellites = obj['name'] in parent_planets
                         print(f"\n{obj['name']} satellite status:")
@@ -2675,7 +2791,36 @@ def plot_objects():
             positions = {}
             for obj in objects:
                 if obj['var'].get() == 1:
-                    if obj['name'] == center_object_name:
+
+                    if obj['name'] == 'Planet 9' or obj['id'] == 'planet9_placeholder':
+                        # Calculate Planet 9 position directly on its theoretical orbit
+                        x, y, z, range_val = calculate_planet9_position_on_orbit()
+                        # Create a complete position object
+                        obj_data = {
+                            'x': x,
+                            'y': y,
+                            'z': z,
+                            'range': range_val,
+                            'distance_km': range_val * KM_PER_AU,
+                            'distance_lm': range_val * LIGHT_MINUTES_PER_AU,
+                            'distance_lh': (range_val * LIGHT_MINUTES_PER_AU) / 60,
+                            'vx': 0,
+                            'vy': 0,
+                            'vz': 0,
+                            'velocity': 0,
+                            'calculated_orbital_period': {
+                                'years': np.sqrt(600**3),  # Semi-major axis^1.5
+                                'days': np.sqrt(600**3) * 365.25
+                            },
+                            'known_orbital_period': {
+                                'years': np.sqrt(600**3),
+                                'days': np.sqrt(600**3) * 365.25
+                            },
+                            'orbital_period': np.sqrt(600**3)  # Orbital period in years
+                        }
+                    elif obj['name'] == center_object_name:
+
+            #        if obj['name'] == center_object_name:
                         obj_data = {'x': 0, 'y': 0, 'z': 0}
                     else:
                         obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
@@ -2746,7 +2891,12 @@ def plot_objects():
                 'Earth': earth_shell_vars,
                 'Mars': mars_shell_vars,
                 'Jupiter': jupiter_shell_vars,
-                'Saturn': saturn_shell_vars                
+                'Saturn': saturn_shell_vars,
+                'Uranus': uranus_shell_vars,
+                'Neptune': neptune_shell_vars,
+                'Pluto': pluto_shell_vars,
+                'Eris/Dysnomia': eris_shell_vars,
+                'Planet 9': planet9_shell_vars               
                 # Add more planets here as shell systems are developed
             }
 
@@ -2814,22 +2964,49 @@ def plot_objects():
                 'Earth': earth_shell_vars,
                 'Mars': mars_shell_vars,
                 'Jupiter': jupiter_shell_vars,
-                'Saturn': saturn_shell_vars                
+                'Saturn': saturn_shell_vars,
+                'Uranus': uranus_shell_vars,
+                'Neptune': neptune_shell_vars,
+                'Pluto': pluto_shell_vars,
+                'Eris/Dysnomia': eris_shell_vars,
+                'Planet 9': planet9_shell_vars               
             }
 
             for planet_name, planet_data in planets_with_shells.items():
                 is_center = (center_object_name == planet_name)
                 
-                # Only add shells if the planet is the center
-        #        if is_center and planet_name in planet_shell_vars:
-                if is_center and planet_name in planet_shell_vars and not center_shells_added:
-                    print(f"\nAdding shells for center planet {planet_name}")
-                    fig = create_planet_visualization(
-                        fig,                            # First parameter should be fig
-                        planet_name,                    # Second parameter should be planet_name
-                        planet_shell_vars[planet_name], # Third parameter should be shell_vars
-                        center_position=(0, 0, 0)       # Named parameter can stay as is
-                    )
+                # Only add shells if the planet is the center -- removed
+        #        if is_center and planet_name in planet_shell_vars and not center_shells_added:
+        #            print(f"\nAdding shells for center planet {planet_name}")
+        #            fig = create_planet_visualization(
+        #                fig,                            # First parameter should be fig
+        #                planet_name,                    # Second parameter should be planet_name
+        #                planet_shell_vars[planet_name], # Third parameter should be shell_vars
+        #                center_position=(0, 0, 0)       # Named parameter can stay as is
+        #            )
+
+                # Modified condition: allow shells for any planet, not just the center
+                if planet_name in planet_shell_vars:
+                    # For center planet, position at (0,0,0)
+                    if is_center and not center_shells_added:
+                        print(f"\nAdding shells for center planet {planet_name}")
+                        fig = create_planet_visualization(
+                            fig,                            # First parameter should be fig
+                            planet_name,                    # Second parameter should be planet_name
+                            planet_shell_vars[planet_name], # Third parameter should be shell_vars
+                            center_position=(0, 0, 0)       # Named parameter can stay as is
+                        )
+                    # For non-center planets, use their actual positions
+                    elif not is_center and 'position' in planet_data and planet_data['position'] is not None:
+                        # Check if any shell for this planet is selected
+                        if any(var.get() == 1 for var in planet_shell_vars[planet_name].values()):
+                            print(f"\nAdding shells for non-center planet {planet_name}")
+                            fig = create_planet_visualization(
+                                fig,                            
+                                planet_name,                    
+                                planet_shell_vars[planet_name], 
+                                center_position=planet_data['position']  # Use planet's position
+                            )
 
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
@@ -3271,6 +3448,26 @@ def animate_objects(step, label):
                 'Saturn': {
                     'positions': [],  # Will be populated during animation
                     'shell_vars': saturn_shell_vars
+                },
+                'Uranus': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': uranus_shell_vars
+                },
+                'Neptune': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': neptune_shell_vars
+                },
+                'Pluto': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': pluto_shell_vars
+                },
+                'Eris/Dysnomia': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': eris_shell_vars
+                },
+                'Planet 9': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': planet9_shell_vars
                 }
             }
             
@@ -3345,7 +3542,12 @@ def animate_objects(step, label):
                 'Earth': earth_shell_vars,
                 'Mars': mars_shell_vars,
                 'Jupiter': jupiter_shell_vars,
-                'Saturn': saturn_shell_vars,                
+                'Saturn': saturn_shell_vars,
+                'Uranus': uranus_shell_vars,
+                'Neptune': neptune_shell_vars,
+                'Pluto': pluto_shell_vars,
+                'Eris/Dysnomia': eris_shell_vars,
+                'Planet 9': planet9_shell_vars,              
                 # Add more planets here as shell systems are developed
             }
 
@@ -3993,7 +4195,7 @@ CreateToolTip(celestial_frame, "Select celestial bodies for plotting. Selected o
 
 def create_celestial_checkbutton(name, variable):
     # For main planets and Sun, make a bold label
-    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Planet 9 (Hypothetical)']:
+    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris', 'Planet 9']:
         # Create frame to hold checkbox and label
         frame = tk.Frame(celestial_frame)
         frame.pack(anchor='w')
@@ -4276,21 +4478,16 @@ CreateToolTip(jupiter_ring_system_checkbutton, jupiter_ring_system_info)
 
 jupiter_radiation_belts_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Radiation Belts", variable=jupiter_radiation_belts_var)
 jupiter_radiation_belts_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_radiation_belts_checkbutton, "560 KB PER FRAME FOR HTML.\n\n"
-              "Zones of trapped high-energy particles in Jupiter's magnetosphere")
+CreateToolTip(jupiter_radiation_belts_checkbutton, jupiter_radiation_belts_info)
 
 jupiter_io_plasma_torus_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Io Plasma Torus", variable=jupiter_io_plasma_torus_var)
 jupiter_io_plasma_torus_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_io_plasma_torus_checkbutton, "634 KB PER FRAME FOR HTML.\n\n"
-              "Donut-shaped region of charged particles from Jupiter's moon Io")
+CreateToolTip(jupiter_io_plasma_torus_checkbutton, jupiter_io_plasma_torus_info)
 
 # Jupiter magnetosphere components
 jupiter_magnetosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Magnetosphere", variable=jupiter_magnetosphere_var)
 jupiter_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_magnetosphere_checkbutton, 
-              "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n"
-              "407 KB PER FRAME FOR HTML.\n\n"
-              "Jupiter's main magnetosphere structure that extends far into space.")
+CreateToolTip(jupiter_magnetosphere_checkbutton, jupiter_magnetosphere_info)
 
 # Jupiter hill_sphere shell
 jupiter_hill_sphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Hill Sphere", variable=jupiter_hill_sphere_var)
@@ -4343,21 +4540,16 @@ CreateToolTip(saturn_ring_system_checkbutton, saturn_ring_system_info)
 
 saturn_radiation_belts_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Radiation Belts", variable=saturn_radiation_belts_var)
 saturn_radiation_belts_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_radiation_belts_checkbutton, "560 KB PER FRAME FOR HTML.\n\n"
-              "Zones of trapped high-energy particles in saturn's magnetosphere")
+CreateToolTip(saturn_radiation_belts_checkbutton, saturn_radiation_belts_info)
 
 saturn_enceladus_plasma_torus_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Enceladus Plasma Torus", variable=saturn_enceladus_plasma_torus_var)
 saturn_enceladus_plasma_torus_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_enceladus_plasma_torus_checkbutton, "634 KB PER FRAME FOR HTML.\n\n"
-              "Donut-shaped region of charged particles from saturn's moon Io")
+CreateToolTip(saturn_enceladus_plasma_torus_checkbutton, saturn_enceladus_plasma_torus_info)
 
 # saturn magnetosphere components
 saturn_magnetosphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Magnetosphere", variable=saturn_magnetosphere_var)
 saturn_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_magnetosphere_checkbutton, 
-              "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n"
-              "407 KB PER FRAME FOR HTML.\n\n"
-              "saturn's main magnetosphere structure that extends far into space.")
+CreateToolTip(saturn_magnetosphere_checkbutton, saturn_magnetosphere_info)
 
 # saturn hill_sphere shell
 saturn_hill_sphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Hill Sphere", variable=saturn_hill_sphere_var)
@@ -4379,18 +4571,145 @@ create_celestial_checkbutton("- Iapetus", iapetus_var)
 create_celestial_checkbutton("- Phoebe", phoebe_var)
 
 create_celestial_checkbutton("Uranus", uranus_var)
-create_celestial_checkbutton("- Miranda", miranda_var)
+# Create a Frame specifically for the uranus shell options (indented)
+uranus_shell_options_frame = tk.Frame(celestial_frame)
+uranus_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
+# uranus core shell
+uranus_core_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Core", variable=uranus_core_var)
+uranus_core_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_core_checkbutton, uranus_core_info)
+
+# uranus metallic hydrogen shell
+uranus_mantel_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Mantel", variable=uranus_mantel_var)
+uranus_mantel_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_mantel_checkbutton, uranus_mantel_info)
+
+# uranus cloud layer shell
+uranus_cloud_layer_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Cloud Layer", variable=uranus_cloud_layer_var)
+uranus_cloud_layer_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_cloud_layer_checkbutton, uranus_cloud_layer_info)
+
+# uranus upper atmosphere shell
+uranus_upper_atmosphere_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Upper Atmosphere", variable=uranus_upper_atmosphere_var)
+uranus_upper_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_upper_atmosphere_checkbutton, uranus_upper_atmosphere_info)
+
+# uranus ring system shell
+uranus_ring_system_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Ring System", variable=uranus_ring_system_var)
+uranus_ring_system_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_ring_system_checkbutton, uranus_ring_system_info)
+
+uranus_radiation_belts_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Radiation Belts", variable=uranus_radiation_belts_var)
+uranus_radiation_belts_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_radiation_belts_checkbutton, uranus_radiation_belts_info)
+
+# uranus magnetosphere components
+uranus_magnetosphere_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Magnetosphere", variable=uranus_magnetosphere_var)
+uranus_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_magnetosphere_checkbutton, uranus_magnetosphere_info)
+
+# uranus hill_sphere shell
+uranus_hill_sphere_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Hill Sphere", variable=uranus_hill_sphere_var)
+uranus_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_hill_sphere_checkbutton, uranus_hill_sphere_info) 
+
+# Uranus moons
 create_celestial_checkbutton("- Ariel", ariel_var)
 create_celestial_checkbutton("- Umbriel", umbriel_var)
 create_celestial_checkbutton("- Titania", titania_var)
 create_celestial_checkbutton("- Oberon", oberon_var)
+create_celestial_checkbutton("- Miranda", miranda_var)
+create_celestial_checkbutton("- Portia", portia_var)
+create_celestial_checkbutton("- Mab", mab_var)
 
 create_celestial_checkbutton("Neptune", neptune_var)
+
+# Create a Frame specifically for the neptune shell options (indented)
+neptune_shell_options_frame = tk.Frame(celestial_frame)
+neptune_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
+# neptune core shell
+neptune_core_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Core", variable=neptune_core_var)
+neptune_core_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_core_checkbutton, neptune_core_info)
+
+# neptune metallic hydrogen shell
+neptune_mantel_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Mantel", variable=neptune_mantel_var)
+neptune_mantel_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_mantel_checkbutton, neptune_mantel_info)
+
+# neptune cloud layer shell
+neptune_cloud_layer_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Cloud Layer", variable=neptune_cloud_layer_var)
+neptune_cloud_layer_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_cloud_layer_checkbutton, neptune_cloud_layer_info)
+
+# neptune upper atmosphere shell
+neptune_upper_atmosphere_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Upper Atmosphere", variable=neptune_upper_atmosphere_var)
+neptune_upper_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_upper_atmosphere_checkbutton, neptune_upper_atmosphere_info)
+
+# neptune ring system shell
+neptune_ring_system_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Ring System", variable=neptune_ring_system_var)
+neptune_ring_system_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_ring_system_checkbutton, neptune_ring_system_info)
+
+neptune_radiation_belts_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Radiation Belts", variable=neptune_radiation_belts_var)
+neptune_radiation_belts_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_radiation_belts_checkbutton, neptune_radiation_belts_info)
+
+# neptune magnetosphere components
+neptune_magnetosphere_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Magnetosphere", variable=neptune_magnetosphere_var)
+neptune_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_magnetosphere_checkbutton, neptune_magnetosphere_info)
+
+# neptune hill_sphere shell
+neptune_hill_sphere_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Hill Sphere", variable=neptune_hill_sphere_var)
+neptune_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_hill_sphere_checkbutton, neptune_hill_sphere_info) 
 create_celestial_checkbutton("- Triton", triton_var)
+create_celestial_checkbutton("- Despina", despina_var)
+create_celestial_checkbutton("- Galatea", galatea_var)
 
 create_celestial_checkbutton("Pluto", pluto_var)
+
+# Create a Frame specifically for the pluto shell options (indented)
+pluto_shell_options_frame = tk.Frame(celestial_frame)
+pluto_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
+# pluto core shell
+pluto_core_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Core", variable=pluto_core_var)
+pluto_core_checkbutton.pack(anchor='w')
+CreateToolTip(pluto_core_checkbutton, pluto_core_info)
+
+# pluto mantle shell
+pluto_mantel_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Mantel", variable=pluto_mantel_var)
+pluto_mantel_checkbutton.pack(anchor='w')
+CreateToolTip(pluto_mantel_checkbutton, pluto_mantel_info)
+
+# pluto crust shell
+pluto_crust_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Crust", variable=pluto_crust_var)
+pluto_crust_checkbutton.pack(anchor='w')
+CreateToolTip(pluto_crust_checkbutton, pluto_crust_info)
+
+# pluto haze layer shell
+pluto_haze_layer_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Haze Layer", variable=pluto_haze_layer_var)
+pluto_haze_layer_checkbutton.pack(anchor='w')
+CreateToolTip(pluto_haze_layer_checkbutton, pluto_haze_layer_info)
+
+# pluto atmosphere shell
+pluto_atmosphere_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Atmosphere", variable=pluto_atmosphere_var)
+pluto_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(pluto_atmosphere_checkbutton, pluto_atmosphere_info)
+
+# pluto hill_sphere shell
+pluto_hill_sphere_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Hill Sphere", variable=pluto_hill_sphere_var)
+pluto_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(pluto_hill_sphere_checkbutton, pluto_hill_sphere_info) 
 create_celestial_checkbutton("- Charon", charon_var)
+create_celestial_checkbutton("- Styx", styx_var)
 create_celestial_checkbutton("- Nix", nix_var)
+create_celestial_checkbutton("- Kerberos", kerberos_var)
 create_celestial_checkbutton("- Hydra", hydra_var)
 
 # Kuiper Belt Objects
@@ -4403,11 +4722,54 @@ create_celestial_checkbutton("Makemake", makemake_var)
 create_celestial_checkbutton("Orcus", orcus_var)
 create_celestial_checkbutton("Quaoar", quaoar_var)
 create_celestial_checkbutton("Varuna", varuna_var)
-
 create_celestial_checkbutton("Gonggong", gonggong_var)
+
 create_celestial_checkbutton("Eris", eris_var)
+# Create a Frame specifically for the eris shell options (indented)
+eris_shell_options_frame = tk.Frame(celestial_frame)
+eris_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
+# eris core shell
+eris_core_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Core", variable=eris_core_var)
+eris_core_checkbutton.pack(anchor='w')
+CreateToolTip(eris_core_checkbutton, eris_core_info)
+
+# eris mantle shell
+eris_mantel_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Mantel", variable=eris_mantel_var)
+eris_mantel_checkbutton.pack(anchor='w')
+CreateToolTip(eris_mantel_checkbutton, eris_mantel_info)
+
+# eris crust shell
+eris_crust_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Crust", variable=eris_crust_var)
+eris_crust_checkbutton.pack(anchor='w')
+CreateToolTip(eris_crust_checkbutton, eris_crust_info)
+
+# eris atmosphere shell
+eris_atmosphere_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Atmosphere", variable=eris_atmosphere_var)
+eris_atmosphere_checkbutton.pack(anchor='w')
+CreateToolTip(eris_atmosphere_checkbutton, eris_atmosphere_info)
+
+# eris hill_sphere shell
+eris_hill_sphere_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Hill Sphere", variable=eris_hill_sphere_var)
+eris_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(eris_hill_sphere_checkbutton, eris_hill_sphere_info) 
 create_celestial_checkbutton("- Dysnomia", dysnomia_var)
-create_celestial_checkbutton("Planet 9 (Hypothetical)", planet9_var)
+
+create_celestial_checkbutton("Planet 9", planet9_var)
+# Create a Frame specifically for the planet9 shell options (indented)
+planet9_shell_options_frame = tk.Frame(celestial_frame)
+planet9_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+
+# planet9 surface shell
+planet9_surface_checkbutton = tk.Checkbutton(planet9_shell_options_frame, text="-- Surface", variable=planet9_surface_var)
+planet9_surface_checkbutton.pack(anchor='w')
+CreateToolTip(planet9_surface_checkbutton, planet9_surface_info)
+
+# planet9 hill_sphere shell
+planet9_hill_sphere_checkbutton = tk.Checkbutton(planet9_shell_options_frame, text="-- Hill Sphere", variable=planet9_hill_sphere_var)
+planet9_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(planet9_hill_sphere_checkbutton, planet9_hill_sphere_info) 
+
 create_celestial_checkbutton("Sedna", sedna_var)
 
 # Checkbuttons for missions
@@ -4531,9 +4893,9 @@ manual_scale_radio.pack(anchor='w')
 CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
 "* Mars: 1.52 AU\n* Asteroid Belt: between 2.2 and 3.2 AU\n* Jupiter: 5.2 AU\n* Jupiter System: 0.5 AU\n* Saturn: 9.5 AU\n* Uranus: 19.2 AU\n* Neptune: 30.1 AU\n"
 "* Dwarf Planet Pluto: between 30 and 49 AU.\n* Kuiper Belt: from roughly 30 to 50 AU\n* Dwarf Planet Sedna: currently at about 83.3 AU, ranging from 74 AU to 936 AU, " 
-"with a mean distance of 526 AU\n* Solar Wind Termination Shock: 94 AU\n* Heliopause (edge of the Sun's influence): 126 AU\n* Voyager 1: currently over 165 AU\n" 
+"with a mean distance of 526 AU\n* Planet 9, use 360 AU for full orbit\n* Solar Wind Termination Shock: 94 AU\n* Heliopause (edge of the Sun's influence): 126 AU\n* Voyager 1: currently over 165 AU\n" 
 "* Hypothetical \"Planet Nine\" orbit: 600 AU\n"
-"* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n* Extent of Solar Gravitational Influence (Hill Sphere): 126,000 AU\n* Proximate Centauri: 268,585 AU")
+"* Inner Limit of Oort Cloud: 2,000 AU\n* Outer Limit of Oort Cloud: 100,000 AU\n* Extent of Solar Gravitational Influence (Hill Sphere): 126,000 AU\n* Proxima Centauri: 268,585 AU")
 
 custom_scale_entry = tk.Entry(scale_frame, width=10)
 custom_scale_entry.pack(anchor='w')
@@ -4543,7 +4905,7 @@ center_label = tk.Label(controls_frame, text="Select Center Object for Your Plot
 center_label.pack(anchor='w')
 
 center_object_var = tk.StringVar(value='Sun')
-center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth/New_Horizons', 'Eris/Dysnomia'] 
+center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth/New_Horizons', 'Eris/Dysnomia', 'Planet 9'] 
 # A unique center for Eris is required using the satellite solution not the sun centered object.
 center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
 center_menu.pack(anchor='w')

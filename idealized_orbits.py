@@ -3,6 +3,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
+import traceback  # Add this import
+from constants_new import color_map
 
 planetary_params = {
     # Semi-major axis: This is one-half of the longest diameter of the elliptical orbit. It's essentially the average 
@@ -79,13 +81,13 @@ planetary_params = {
     },
 
     'Planet 9': {
-    'a': 400,          # Semi-major axis in AU (estimates range from 400-800 AU)
-    'e': 0.6,          # Eccentricity (estimates range from 0.2-0.7)
-    'i': 20,           # Inclination in degrees (estimates range from 15-25 degrees)
-    'L': 238,          # Mean longitude at epoch in degrees
-    'omega': 150,      # Argument of perihelion in degrees
-    'Omega': 90        # Longitude of ascending node in degrees
-},
+        'a': 600,          # Semi-major axis in AU (updated to match 500-700 AU range from IRAS/AKARI study)
+        'e': 0.30,         # Eccentricity (slightly adjusted to align with 280-1120 AU perihelion/aphelion range)
+        'i': 6,            # Inclination in degrees (2025 estimate: 6°)
+        'L': 238,          # Mean longitude at epoch in degrees (unchanged)
+        'omega': 150,      # Argument of perihelion in degrees (unchanged)
+        'Omega': 90        # Longitude of ascending node in degrees (unchanged)
+    },
     
     # Dwarf Planets
     'Ceres': {
@@ -602,6 +604,26 @@ planetary_params = {
         'Omega': 30.5       # longitude of ascending node in degrees
     },
 
+     'Portia': {             # 712
+#       'a': 66100,         # semi-major axis in km
+        'a': 0.0004419,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Uranus radii
+        'e': 0.000,           # eccentricity
+        'i': 0.0,            # inclination to Uranus's equator in degrees
+        'omega': 0,      # argument of perihelion in degrees
+        'Omega': 0       # longitude of ascending node in degrees
+    },   
+
+     'Mab': {             # 726
+#       'a': 97700,         # semi-major axis in km
+        'a': 0.0006531,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Uranus radii
+        'e': 0.003,           # eccentricity
+        'i': 0.1,            # inclination to Uranus's equator in degrees
+        'omega': 237.9,      # argument of perihelion in degrees
+        'Omega': 188.2       # longitude of ascending node in degrees
+    },    
+
     # Neptune's Major Moon
     'Triton': {             # 801
 #        'a': 354800,         # semi-major axis in km
@@ -613,30 +635,69 @@ planetary_params = {
         'Omega': 178.1       # longitude of ascending node in degrees
     },
 
+    'Despina': {             # 805
+#        'a': 52500,         # semi-major axis in km
+        'a': 0.0003509,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Neptune radii
+        'e': 0.000,         # eccentricity (nearly circular)
+        'i': 0.0,          # inclination to Neptune's equator in degrees (retrograde)
+        'omega': 0.0,       # argument of perihelion in degrees
+        'Omega': 0.0       # longitude of ascending node in degrees
+    },
+
+    'Galatea': {             # 806
+#        'a': 62000,         # semi-major axis in km
+        'a': 0.0004144,         # semi-major axis in AU
+#        'a_parent': ,     # semi-major axis in Neptune radii
+        'e': 0.000,         # eccentricity (nearly circular)
+        'i': 0.0,          # inclination to Neptune's equator in degrees (retrograde)
+        'omega': 0.0,       # argument of perihelion in degrees
+        'Omega': 0.0       # longitude of ascending node in degrees
+    },
+
     # Pluto's Moons
-    'Charon': {             # 901
+    'Charon': {             # 901; revised 4/3/2024 post-New Horizons
 #        'a': 19600,         # semi-major axis in km
-        'a': 0.000127,         # semi-major axis in AU
+        'a': 0.00013102,         # semi-major axis in AU
 #        'a_parent': 16.4,      # semi-major axis in Pluto radii
-        'e': 0.0002,           # eccentricity (nearly circular)
-        'i': 0.001,            # inclination to Pluto's equator in degrees
+        'e': 0.000,           # eccentricity (nearly circular)
+        'i': 0.0,            # inclination to Pluto's equator in degrees
         'omega': 0.0,      # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
     },
 
-    'Nix': {                # 902
+    'Styx': {              # 905; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
+#        'a': 43200,         # semi-major axis in km
+        'a': 0.00028877,         # semi-major axis in AU; 0.00043583
+#        'a_parent': ,     # semi-major axis in Pluto radii
+        'e': 0.025,           # eccentricity
+        'i': 0.0,            # inclination to Pluto's equator in degrees
+        'omega': 322.5,      # argument of perihelion in degrees
+        'Omega': 0.0       # longitude of ascending node in degrees
+    },    
+
+    'Nix': {                # 902; revised 4/3/2024 post-New Horizons
 #        'a': 49300,         # semi-major axis in km
-        'a': 0.000242,         # semi-major axis in AU
+        'a': 0.00032955,         # semi-major axis in AU
 #        'a_parent': 31.3,      # semi-major axis in Pluto radii
-        'e': 0.015,           # eccentricity
+        'e': 0.025,           # eccentricity
         'i': 0.0,            # inclination to Pluto's equator in degrees
         'omega': 31.4,      # argument of perihelion in degrees
         'Omega': 0.0         # longitude of ascending node in degrees
     },
+    'Kerberos': {              # 904; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
+#        'a': 58300,         # semi-major axis in km
+        'a': 0.00038971,         # semi-major axis in AU; 0.00043583
+#        'a_parent': ,     # semi-major axis in Pluto radii
+        'e': 0.010,           # eccentricity
+        'i': 0.4,            # inclination to Pluto's equator in degrees
+        'omega': 32.1,      # argument of perihelion in degrees
+        'Omega': 314.3       # longitude of ascending node in degrees
+    },   
 
     'Hydra': {              # 903; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
 #        'a': 65200,         # semi-major axis in km
-        'a': 0.0004358,         # semi-major axis in AU; 0.00043583
+        'a': 0.00043584,         # semi-major axis in AU; 0.00043583
 #        'a_parent': 83.9,     # semi-major axis in Pluto radii
         'e': 0.009,           # eccentricity
         'i': 0.3,            # inclination to Pluto's equator in degrees
@@ -645,15 +706,15 @@ planetary_params = {
     },
 
     # Eris's Moon
-    #'Dysnomia': {
-#        'a': 0.000364,         # semi-major axis in AU
-    #    'a': 0.000364,         # semi-major axis in AU
+    'Dysnomia': {
+#        'a': 0.000364,         # semi-major axis in km
+        'a': 0.000364,         # semi-major axis in AU
 #        'a_parent': 36.2,      # semi-major axis in Eris radii (estimate)
-    #    'e': 0.0062,           # eccentricity
-    #    'i': 78.29,            # inclination in degrees (to the ecliptic)
-    #    'omega': 139.65,       # argument of perihelion in degrees
-    #    'Omega': 29.43         # longitude of ascending node in degrees
-    #},
+        'e': 0.0062,           # eccentricity
+        'i': 78.29,            # inclination in degrees (to the ecliptic)
+        'omega': 139.65,       # argument of perihelion in degrees
+        'Omega': 29.43         # longitude of ascending node in degrees
+    },
 
 } 
 
@@ -663,9 +724,9 @@ parent_planets = {
     'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
     'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe', 'Pan', 'Daphnis', 'Prometheus',
                'Pandora', 'Hyperion'],
-    'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon'],
-    'Neptune': ['Triton'],
-    'Pluto': ['Charon', 'Nix', 'Hydra'],
+    'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon', 'Portia', 'Mab'],
+    'Neptune': ['Triton', 'Despina', 'Galatea'],
+    'Pluto': ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],
     'Eris': ['Dysnomia']
 }
 
@@ -676,7 +737,7 @@ planet_tilts = {
     'Jupiter': 3.13,    # Jupiter axial tilt
     'Saturn': -26.73,   # Saturn axial tilt (negative works better)
     'Uranus': 97.77,    # Uranus axial tilt
-    'Neptune': 28.32,   # Neptune axial tilt
+    'Neptune': 28.32,   # Neptune axial tilt (28.32) 
     'Pluto': -122.53    # Pluto axial tilt (negative works better)
 }
 
@@ -997,6 +1058,347 @@ def plot_mars_satellite_orbit(satellite_name, planetary_params, color, fig=None)
         print(f"Error plotting Mars satellite {satellite_name}: {e}")
         return fig
 
+def plot_uranus_satellite_orbit_refined(satellite_name, planetary_params, color, fig=None):
+    """Refined approach for Uranus satellites to account for its extreme axial tilt and Laplace plane reference"""
+    if fig is None:
+        fig = go.Figure()
+    
+    try:
+        # Get orbital parameters
+        if satellite_name not in planetary_params:
+            print(f"Error: No orbital parameters found for {satellite_name}")
+            return fig
+            
+        orbital_params = planetary_params[satellite_name]
+        
+        # Extract orbital elements
+        a = orbital_params.get('a', 0)
+        e = orbital_params.get('e', 0)
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        
+        print(f"\nPlotting Uranus satellite: {satellite_name}")
+        print(f"Orbital elements: a={a}, e={e}, i={i}°, ω={omega}°, Ω={Omega}°")
+        
+        # Generate ellipse in orbital plane
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+
+        # STEP 1: Standard orbital element rotation sequence - this gives us the orbit in the Laplace plane
+        x_laplace, y_laplace, z_laplace = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+        x_laplace, y_laplace, z_laplace = rotate_points(x_laplace, y_laplace, z_laplace, i_rad, 'x')
+        x_laplace, y_laplace, z_laplace = rotate_points(x_laplace, y_laplace, z_laplace, omega_rad, 'z')
+        
+        # STEP 2: Transform from Laplace plane to Uranus's equatorial plane
+        # For Uranus, the Laplace plane is approximately Uranus's equatorial plane for close satellites,
+        # so for the major moons we don't need a significant transformation here.
+        # However, we'll keep this step separate in case specific adjustments are needed for certain satellites.
+        x_equatorial, y_equatorial, z_equatorial = x_laplace, y_laplace, z_laplace
+        
+        # STEP 3: Transform from Uranus's equatorial plane to the ecliptic
+        # Get Uranus's pole orientation
+        uranus_pole = planet_poles['Uranus']
+        ra_pole = np.radians(uranus_pole['ra'])
+        dec_pole = np.radians(uranus_pole['dec'])
+        
+        # Calculate pole vector in cartesian coordinates
+        sin_dec = np.sin(dec_pole)
+        cos_dec = np.cos(dec_pole)
+        sin_ra = np.sin(ra_pole)
+        cos_ra = np.cos(ra_pole)
+        
+        # Uranus's north pole vector in ecliptic coordinates
+        x_pole = cos_dec * cos_ra
+        y_pole = cos_dec * sin_ra
+        z_pole = sin_dec
+        
+        print(f"Uranus pole vector: [{x_pole:.4f}, {y_pole:.4f}, {z_pole:.4f}]")
+        
+        # Normalize the pole vector
+        pole_norm = np.sqrt(x_pole**2 + y_pole**2 + z_pole**2)
+        x_pole /= pole_norm
+        y_pole /= pole_norm
+        z_pole /= pole_norm
+        
+        # Find the node vector (perpendicular to pole, in ecliptic plane)
+        # This corresponds to the intersection of Uranus's equator with the ecliptic
+        node_denom = np.sqrt(x_pole**2 + y_pole**2)
+        if node_denom > 0:
+            x_node = -y_pole / node_denom
+            y_node = x_pole / node_denom
+            z_node = 0
+            
+            # Calculate the equatorial plane's normal vector
+            # This is just the pole vector
+            equatorial_normal = np.array([x_pole, y_pole, z_pole])
+            
+            # The third vector of our basis (perpendicular to both node and pole)
+            third_vector = np.cross(equatorial_normal, np.array([x_node, y_node, z_node]))
+            
+            # Create a rotation matrix from equatorial to ecliptic
+            # Each row is one of our basis vectors
+            rotation_matrix = np.array([
+                [x_node, y_node, z_node],
+                [third_vector[0], third_vector[1], third_vector[2]],
+                [x_pole, y_pole, z_pole]
+            ])
+            
+            # Apply the rotation matrix
+            points = np.column_stack((x_equatorial, y_equatorial, z_equatorial))
+            transformed_points = np.dot(points, rotation_matrix)
+            
+            x_final = transformed_points[:, 0]
+            y_final = transformed_points[:, 1]
+            z_final = transformed_points[:, 2]
+            
+            print(f"Transformed using Uranus pole orientation")
+        else:
+            # Special case: pole is aligned with z-axis
+            x_final, y_final, z_final = x_equatorial, y_equatorial, z_equatorial
+            print(f"Special case: pole aligned with z-axis")
+            
+        # Add the refined orbit trace to the figure
+        fig.add_trace(
+            go.Scatter3d(
+                x=x_final,
+                y=y_final,
+                z=z_final,
+                mode='lines',
+                line=dict(dash='dashdot', width=2, color=color),
+                name=f"{satellite_name} Refined Orbit",
+                text=[f"{satellite_name} Refined Orbit"] * len(x_final),
+                customdata=[f"{satellite_name} Refined Orbit"] * len(x_final),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+        
+        print(f"Added refined orbit trace for {satellite_name}")
+        return fig
+    
+    except Exception as e:
+        print(f"Error plotting refined Uranus satellite {satellite_name}: {e}")
+        traceback.print_exc()  # This will print the full stack trace for better debugging
+        return fig
+
+def test_uranus_equatorial_transformations(satellite_name, planetary_params, color, fig=None):
+    """Test transformations assuming orbital elements are in Uranus's equatorial plane"""
+    if fig is None:
+        fig = go.Figure()
+    
+    try:
+        # Get orbital parameters
+        if satellite_name not in planetary_params:
+            print(f"Error: No orbital parameters found for {satellite_name}")
+            return fig
+            
+        orbital_params = planetary_params[satellite_name]
+        
+        # Extract orbital elements
+        a = orbital_params.get('a', 0)
+        e = orbital_params.get('e', 0)
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        
+        # Generate ellipse in orbital plane
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        # Standard orbital element rotation sequence - this gives us the orbit in Uranus's equatorial plane
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+        
+        # Now transform from Uranus's equatorial frame to ecliptic frame
+        # Get Uranus's pole orientation
+        uranus_pole = planet_poles['Uranus']
+        ra_pole = np.radians(uranus_pole['ra'])
+        dec_pole = np.radians(uranus_pole['dec'])
+        
+        # Calculate pole vector
+        sin_dec = np.sin(dec_pole)
+        cos_dec = np.cos(dec_pole)
+        sin_ra = np.sin(ra_pole)
+        cos_ra = np.cos(ra_pole)
+        
+        # Pole vector
+        x_pole = cos_dec * cos_ra
+        y_pole = cos_dec * sin_ra
+        z_pole = sin_dec
+        
+        # Normalize the pole vector
+        pole_norm = np.sqrt(x_pole**2 + y_pole**2 + z_pole**2)
+        x_pole /= pole_norm
+        y_pole /= pole_norm
+        z_pole /= pole_norm
+        
+        print(f"Uranus pole vector: [{x_pole:.4f}, {y_pole:.4f}, {z_pole:.4f}]")
+        
+        # Transform from equatorial to ecliptic
+        # Step 1: First rotation to get the pole's projection onto the XY plane aligned with the X-axis
+        phi = np.arctan2(y_pole, x_pole)
+        x_rot1, y_rot1, z_rot1 = rotate_points(x_temp, y_temp, z_temp, -phi, 'z')  # Note the negative sign
+        
+        # Step 2: Second rotation to align the pole with the Z-axis
+        theta = np.arccos(z_pole)
+        x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, -theta, 'y')  # Note the negative sign
+        
+        # Step 3: Third rotation to fix the orientation
+        x_final, y_final, z_final = rotate_points(x_rot2, y_rot2, z_rot2, phi, 'z')
+        
+        # Add trace to figure
+        fig.add_trace(
+            go.Scatter3d(
+                x=x_final,
+                y=y_final,
+                z=z_final,
+                mode='lines',
+                line=dict(dash='solid', width=2, color=color),
+                name=f"{satellite_name} Equatorial Transform",
+                text=[f"{satellite_name} Equatorial Transform"] * len(x_final),
+                customdata=[f"{satellite_name} Equatorial Transform"] * len(x_final),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+        
+        return fig
+        
+    except Exception as e:
+        print(f"Error in test_uranus_equatorial_transformations: {e}")
+        traceback.print_exc()
+        return fig
+
+def test_uranus_rotation_combinations(satellite_name, planetary_params, color, fig=None):
+    """Test multiple rotation combinations for Uranus satellites systematically"""
+    if fig is None:
+        fig = go.Figure()
+    
+    try:
+        # Get orbital parameters
+        if satellite_name not in planetary_params:
+            print(f"Error: No orbital parameters found for {satellite_name}")
+            return fig
+            
+        orbital_params = planetary_params[satellite_name]
+        
+        # Extract orbital elements
+        a = orbital_params.get('a', 0)
+        e = orbital_params.get('e', 0)
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        
+        # Generate ellipse in orbital plane
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        # Standard orbital element rotation sequence
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+        
+        # Styles for different combinations
+        styles = ["solid", "dash", "dot", "dashdot", "longdash", "longdashdot"]
+        
+        # Uranus's axial tilt value
+        tilt = planet_tilts['Uranus']  # 97.77 degrees
+        tilt_rad = np.radians(tilt)
+        neg_tilt_rad = np.radians(-tilt)
+        
+        # Test combinations
+        combinations = [
+            {"name": "X+", "axis": 'x', "angle": tilt_rad},
+            {"name": "X-", "axis": 'x', "angle": neg_tilt_rad},
+            {"name": "Y+", "axis": 'y', "angle": tilt_rad},
+            {"name": "Y-", "axis": 'y', "angle": neg_tilt_rad},
+            {"name": "Z+", "axis": 'z', "angle": tilt_rad},
+            {"name": "Z-", "axis": 'z', "angle": neg_tilt_rad},
+            # Try some composite rotations
+            {"name": "X+Y+", "rotations": [
+                {"axis": 'x', "angle": tilt_rad},
+                {"axis": 'y', "angle": tilt_rad}
+            ]},
+            {"name": "X+Z+", "rotations": [
+                {"axis": 'x', "angle": tilt_rad},
+                {"axis": 'z', "angle": tilt_rad}
+            ]},
+            {"name": "90X", "axis": 'x', "angle": np.radians(90)},
+            {"name": "90Y", "axis": 'y', "angle": np.radians(90)}
+        ]
+        
+        # Plot each combination
+        for idx, combo in enumerate(combinations):
+            x_rotated, y_rotated, z_rotated = x_temp.copy(), y_temp.copy(), z_temp.copy()
+            
+            if "rotations" in combo:
+                # Apply multiple rotations in sequence
+                for rot in combo["rotations"]:
+                    x_rotated, y_rotated, z_rotated = rotate_points(
+                        x_rotated, y_rotated, z_rotated, 
+                        rot["angle"], rot["axis"]
+                    )
+            else:
+                # Apply single rotation
+                x_rotated, y_rotated, z_rotated = rotate_points(
+                    x_rotated, y_rotated, z_rotated, 
+                    combo["angle"], combo["axis"]
+                )
+            
+            # Add trace to figure
+            style = styles[idx % len(styles)]
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=x_rotated,
+                    y=y_rotated,
+                    z=z_rotated,
+                    mode='lines',
+                    line=dict(dash=style, width=1, color=color),
+                    name=f"{satellite_name} {combo['name']}",
+                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
+            )
+        
+        return fig
+        
+    except Exception as e:
+        print(f"Error in test_uranus_rotation_combinations: {e}")
+        traceback.print_exc()
+        return fig
+
 def debug_planet_transformation(planet_name):
     """Print detailed information about the transformation for a specific planet"""
     print(f"\n==== DEBUG: {planet_name} Transformation ====")
@@ -1119,11 +1521,6 @@ def debug_mars_moons(satellites_data, parent_planets):
 
 def compare_transformation_methods(fig, satellites_data, parent_planets):
     """Plot orbits with different transformation methods for comparison"""
-    # Colors for different systems
-    colors = {
-        'Mars': 'red',
-        'Jupiter': 'orange'
-    }
     
     # Plot Mars moons with all transformation methods
     for moon in parent_planets.get('Mars', []):
@@ -1133,7 +1530,7 @@ def compare_transformation_methods(fig, satellites_data, parent_planets):
                     moon, 
                     satellites_data[moon],
                     'Mars',
-                    colors['Mars'],
+                    color_map('Mars'),  # Call the function with planet name
                     fig,
                     debug=True,
                     transform_method=method
@@ -1147,7 +1544,7 @@ def compare_transformation_methods(fig, satellites_data, parent_planets):
                     moon, 
                     satellites_data[moon],
                     'Jupiter',
-                    colors['Jupiter'],
+                    color_map('Jupiter'),  # Changed brackets [] to parentheses ()
                     fig,
                     debug=True,
                     transform_method=method
@@ -1390,6 +1787,22 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         # 3. Argument of periapsis (ω) around z-axis
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
         
+        # Transformation from a planet's equatorial frame to ecliptic frame:
+        # 
+        # This solution follows an important pattern we discovered across multiple planetary systems:
+        # - For Mars satellites: Y-axis rotation of 25.19° (Mars's axial tilt) aligns orbits properly
+        # - For Uranus satellites: Matching X and Y rotations of 97.77° (Uranus's axial tilt) creates proper alignment
+        #
+        # General principle: When satellite orbital elements are defined in a planet's equatorial reference frame
+        # (as documented by JPL), the transformation to the ecliptic frame must incorporate the planet's axial tilt
+        # in a manner that reflects the planet's specific orientation in space.
+        #
+        # For planets with moderate axial tilts (Mars), a single rotation may suffice.
+        # For planets with extreme axial tilts (Uranus), compound rotations around multiple axes are required.
+        #
+        # This transformation correctly maps from the satellite's native reference frame (the planet's equator)
+        # to the ecliptic reference frame used in our visualization.
+
         # Apply transformation based on the planet
         if parent_planet == 'Mars':
             # This 25° value is particularly interesting because it's very close to Mars' axial tilt of 25.19°. 
@@ -1428,7 +1841,91 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             else:
                 x_final, y_final, z_final = x_temp, y_temp, z_temp
                 print("No transformation applied for Jupiter (missing tilt data)")
+
+        elif parent_planet == 'Uranus':
+            # Transformation from Uranus's equatorial frame to ecliptic frame:
+            # 
+            # The orbital elements in JPL Horizons are defined relative to Uranus's
+            # equatorial plane (per JPL documentation), requiring a transformation
+            # to the ecliptic reference frame used in our visualization.
+            #
+            # Our optimal transformation uses two sequential rotations:
+            # 1. First rotation (X+): 105° rotation around the X-axis
+            # 2. Second rotation (Y+): 105° rotation around the Y-axis
+            #
+            # This compound rotation of 105° (rather than Uranus's nominal axial tilt of 97.77°)
+            # was determined through empirical testing to provide the best alignment between
+            # idealized and actual satellite orbits. The 7° difference may account for:
+            #   - Reference frame subtleties not captured in simple transformations
+            #   - Uranus's magnetic field orientation (which is offset from its rotation axis)
+            #   - The combined effect of Uranus's obliquity and orbital inclination
+            #   - Possible reference epoch differences
+            #
+            # This solution follows a pattern we discovered across planetary systems:
+            # - For Mars: Y-axis rotation of ~25° (Mars's axial tilt) aligns satellite orbits
+            # - For Uranus: Matching X and Y rotations of 105° creates optimal alignment
+            #
+            # The need for dual-axis rotation reflects Uranus's unique 3D orientation
+            # in space, where its equatorial plane is nearly perpendicular to its orbital plane.
+
+            uranus_tilt = 105  # uranus tilt is 97.77 degrees            
             
+            # First apply rotation around x-axis
+            x_rot1, y_rot1, z_rot1 = rotate_points(x_temp, y_temp, z_temp, np.radians(uranus_tilt), 'x')
+            
+            # Then apply rotation around y-axis with the same angle
+            x_final, y_final, z_final = rotate_points(x_rot1, y_rot1, z_rot1, np.radians(uranus_tilt), 'y')
+            
+            print(f"Transformation applied: Uranus with X and Y rotations of {uranus_tilt}°")
+            
+            # This transformation was determined by testing and provides the best visual alignment
+            # between the ideal orbits and the actual orbits of Uranian satellites
+
+        elif parent_planet == 'Neptune':
+            if satellite_name == 'Triton':
+                # Special transformation for Triton, Neptune's largest moon
+                # Triton's orbital elements are defined relative to Neptune's equatorial plane
+                # To transform to ecliptic coordinates, we use Neptune's pole orientation
+                
+                # Step 1: Rotate around z-axis by Neptune's pole Right Ascension
+                # This aligns the x-axis with the line of nodes (intersection of Neptune's equator and the ecliptic)
+                ra_pole = np.radians(planet_poles['Neptune']['ra'])
+                x_rot1, y_rot1, z_rot1 = rotate_points(x_temp, y_temp, z_temp, ra_pole, 'z')
+                
+                # Step 2: Rotate around x-axis by (90° - Neptune's pole Declination)
+                # This tilts the orbital plane to match Neptune's equatorial tilt relative to the ecliptic
+                dec_pole = np.radians(90 - planet_poles['Neptune']['dec'])
+                x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, dec_pole, 'x')
+                
+                # Step 3: Fine-tuning with a 3° z-axis rotation
+                # This small adjustment compensates for reference frame differences between
+                # Neptune's pole coordinates and Triton's orbital elements
+                x_final, y_final, z_final = rotate_points(x_rot2, y_rot2, z_rot2, np.radians(3), 'z')
+                
+                print(f"Transformation applied: Triton with Neptune pole orientation + 3° z-axis adjustment")
+            else:
+                # Standard transformation for other Neptune satellites
+                tilt_rad = np.radians(planet_tilts['Neptune'])
+                x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, tilt_rad, 'x')
+
+        elif parent_planet == 'Pluto':
+            # Special case for Pluto's satellites
+            # Apply the optimized transformation: X-Tilt->Y-Tilt->Z-105
+            
+            # Get Pluto's axial tilt
+            pluto_tilt = planet_tilts.get('Pluto', -122.53)
+            pluto_tilt_rad = np.radians(pluto_tilt)
+            
+            # 1. X-axis rotation by Pluto's tilt
+            x_rotated, y_rotated, z_rotated = rotate_points(x_temp, y_temp, z_temp, pluto_tilt_rad, 'x')
+            # 2. Y-axis rotation by Pluto's tilt
+            x_rotated, y_rotated, z_rotated = rotate_points(x_rotated, y_rotated, z_rotated, pluto_tilt_rad, 'y')
+            # 3. Z-axis rotation by -105 degrees
+            z_angle = np.radians(-105)
+            x_final, y_final, z_final = rotate_points(x_rotated, y_rotated, z_rotated, z_angle, 'z')
+            
+            print(f"Transformation applied: Pluto X-Tilt->Y-Tilt->Z-105")
+
         elif parent_planet in planet_tilts:
             # Use recorded tilt for other planets
             tilt_rad = np.radians(planet_tilts[parent_planet])
@@ -1510,21 +2007,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
         
     # If color_map is None, use a default function
     if color_map is None:
-        def default_color_map(name):
-            # Default colors for common objects
-            colors = {
-                'Mercury': 'gray',
-                'Venus': 'orange',
-                'Earth': 'blue',
-                'Mars': 'red',
-                'Jupiter': 'brown',
-                'Saturn': 'gold',
-                'Uranus': 'lightblue',
-                'Neptune': 'darkblue',
-                'Pluto': 'purple'
-            }
-            return colors.get(name, 'white')
-        color_map = default_color_map
+        from constants_new import color_map       
 
     # If center is not the Sun, we only want to plot moons of that center
     if center_id != 'Sun':
@@ -1534,7 +2017,13 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
         # Filter objects_to_plot to only include moons of this center
         objects_to_plot = [obj for obj in objects_to_plot if obj in moons]
 
-        # For each satellite of the center object, use the standard function
+    # Special case for Pluto to test rotation combinations
+#    if center_id == 'Pluto':
+#        for moon_name in objects_to_plot:
+#            fig = test_pluto_moon_rotations(moon_name, planetary_params, color_map(moon_name), fig)
+#        else:
+
+            # For each satellite of the center object, use the standard function
         for moon_name in objects_to_plot:
             # Find the object in the objects list
             moon_info = next((obj for obj in objects if obj['name'] == moon_name), None)
@@ -1585,8 +2074,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
             a = params.get('a', 0)
 
             # Skip if semi-major axis is zero or very small
-            if a < 0.0001:
-                continue
+    #        if a < 0.0001:
+    #           continue
 
             e = params.get('e', 0)
             i = params.get('i', 0)
@@ -1645,3 +2134,631 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
 
     return fig
 
+def test_triton_rotations(satellite_name, planetary_params, color, fig=None):
+    """Test multiple rotation combinations for Triton's orbit"""
+    if fig is None:
+        fig = go.Figure()
+    
+    try:
+        # Get orbital parameters
+        if satellite_name not in planetary_params:
+            print(f"Error: No orbital parameters found for {satellite_name}")
+            return fig
+            
+        orbital_params = planetary_params[satellite_name]
+        
+        # Extract orbital elements
+        a = orbital_params.get('a', 0)
+        e = orbital_params.get('e', 0)
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        
+        # Generate ellipse in orbital plane
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+
+        # Standard orbital element rotation sequence
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+        
+        # Neptune's axial tilt is 28.32 degrees
+        neptune_tilt = 28.32
+        
+        # Test combinations
+        combinations = [
+            {"name": "Standard", "rotations": []},
+            {"name": "X+", "rotations": [{"axis": 'x', "angle": np.radians(neptune_tilt)}]},
+            {"name": "X-", "rotations": [{"axis": 'x', "angle": np.radians(-neptune_tilt)}]},
+            {"name": "Y+", "rotations": [{"axis": 'y', "angle": np.radians(neptune_tilt)}]},
+            {"name": "Y-", "rotations": [{"axis": 'y', "angle": np.radians(-neptune_tilt)}]},
+            {"name": "Z+", "rotations": [{"axis": 'z', "angle": np.radians(neptune_tilt)}]},
+            {"name": "Z-", "rotations": [{"axis": 'z', "angle": np.radians(-neptune_tilt)}]},
+            
+            # Compound rotations like what worked for Uranus
+            {"name": "X+Y+", "rotations": [
+                {"axis": 'x', "angle": np.radians(neptune_tilt)}, 
+                {"axis": 'y', "angle": np.radians(neptune_tilt)}
+            ]},
+            {"name": "X+Y-", "rotations": [
+                {"axis": 'x', "angle": np.radians(neptune_tilt)}, 
+                {"axis": 'y', "angle": np.radians(-neptune_tilt)}
+            ]},
+            {"name": "X-Y+", "rotations": [
+                {"axis": 'x', "angle": np.radians(-neptune_tilt)}, 
+                {"axis": 'y', "angle": np.radians(neptune_tilt)}
+            ]},
+            {"name": "X-Y-", "rotations": [
+                {"axis": 'x', "angle": np.radians(-neptune_tilt)}, 
+                {"axis": 'y', "angle": np.radians(-neptune_tilt)}
+            ]},
+            
+            # Try 90-degree rotations
+            {"name": "X+90", "rotations": [{"axis": 'x', "angle": np.radians(90)}]},
+            {"name": "Y+90", "rotations": [{"axis": 'y', "angle": np.radians(90)}]},
+            {"name": "Z+90", "rotations": [{"axis": 'z', "angle": np.radians(90)}]},
+            
+            # Compound rotations with 90 degrees
+            {"name": "X+90_Y+", "rotations": [
+                {"axis": 'x', "angle": np.radians(90)}, 
+                {"axis": 'y', "angle": np.radians(neptune_tilt)}
+            ]},
+            {"name": "X+_Y+90", "rotations": [
+                {"axis": 'x', "angle": np.radians(neptune_tilt)}, 
+                {"axis": 'y', "angle": np.radians(90)}
+            ]},
+            
+            # Try a different approach with pole-based transformation using Neptune's pole
+            {"name": "Neptune Pole", "rotations": [
+                {"axis": 'z', "angle": np.radians(planet_poles['Neptune']['ra'])},
+                {"axis": 'x', "angle": np.radians(90 - planet_poles['Neptune']['dec'])}
+            ]},
+
+            # Add these to your combinations list
+            {"name": "Retrograde", "rotations": [
+                {"axis": 'z', "angle": np.radians(planet_poles['Neptune']['ra'])},
+                {"axis": 'x', "angle": np.radians(90 - planet_poles['Neptune']['dec'])},
+                {"axis": 'z', "angle": np.radians(180)}
+            ]},
+            {"name": "Complex", "rotations": [
+                {"axis": 'z', "angle": np.radians(planet_poles['Neptune']['ra'])},
+                {"axis": 'y', "angle": np.radians(90 - planet_poles['Neptune']['dec'])},
+                {"axis": 'x', "angle": np.radians(30)}
+            ]}
+
+        ]
+        
+        # Define line styles and colors for each rotation
+        styles = ["solid", "dash", "dot", "dashdot", "longdash", "longdashdot"]
+        
+        # Apply each rotation combination
+        for idx, combo in enumerate(combinations):
+            x_rotated, y_rotated, z_rotated = x_temp.copy(), y_temp.copy(), z_temp.copy()
+            
+            for rot in combo["rotations"]:
+                x_rotated, y_rotated, z_rotated = rotate_points(
+                    x_rotated, y_rotated, z_rotated, 
+                    rot["angle"], rot["axis"]
+                )
+            
+            # Add trace with unique style
+            style = styles[idx % len(styles)]
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=x_rotated,
+                    y=y_rotated,
+                    z=z_rotated,
+                    mode='lines',
+                    line=dict(dash=style, width=1, color=color),
+                    name=f"{satellite_name} {combo['name']}",
+                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
+            )
+        
+        return fig
+        
+    except Exception as e:
+        print(f"Error in test_triton_rotations: {e}")
+        traceback.print_exc()  # This will print the full stack trace for better debugging
+        return fig
+    
+def test_pluto_moon_rotations(satellite_name, planetary_params, color, fig=None):
+#def test_pluto_moon_xyz_rotations(satellite_name, planetary_params, color, fig=None):
+    """
+    Fine-tuned testing of XYZ rotation combinations for Pluto's moons.
+    This function focuses on variations of X, Y, and Z rotations with different angles.
+    
+    Parameters:
+        satellite_name (str): Name of the satellite (Charon, Styx, Nix, Kerberos or Hydra)
+        planetary_params (dict): Dictionary containing orbital parameters
+        color (str): Color to use for the orbit lines
+        fig (plotly.graph_objects.Figure): Existing figure to add the orbit to
+        
+    Returns:
+        plotly.graph_objects.Figure: Figure with various test orbits added
+    """
+    if fig is None:
+        fig = go.Figure()
+    
+    try:
+        # Get orbital parameters
+        if satellite_name not in planetary_params:
+            print(f"Error: No orbital parameters found for {satellite_name}")
+            return fig
+            
+        orbital_params = planetary_params[satellite_name]
+        
+        # Extract orbital elements
+        a = orbital_params.get('a', 0)
+        e = orbital_params.get('e', 0)
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        
+        print(f"Testing fine-tuned XYZ rotations for {satellite_name} orbit around Pluto")
+        print(f"Orbital elements: a={a}, e={e}, i={i}°, ω={omega}°, Ω={Omega}°")
+        
+        # Generate ellipse in orbital plane
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+
+        # Standard orbital element rotation sequence
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+        
+        # Pluto's axial tilt value
+        pluto_tilt = planet_tilts.get('Pluto', -122.53)
+        pluto_tilt_rad = np.radians(pluto_tilt)
+        
+        # Create a list of angles to test
+        # We'll focus on different angles around Pluto's tilt and other relevant values
+        # Using a mix of fixed angles and variations of Pluto's tilt
+        x_angles = [-180, -150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150, 180]
+        y_angles = [-180, -150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150, 180]
+        z_angles = [-180, -150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150, 180]
+        
+        # Define specific combinations to test
+        combinations = []
+        
+        # Base combination that was close
+        combinations.append({
+            "name": "XYZ-Tilt-Base",
+            "rotations": [
+                {"axis": 'x', "angle": pluto_tilt_rad},
+                {"axis": 'y', "angle": pluto_tilt_rad},
+                {"axis": 'z', "angle": pluto_tilt_rad}
+            ]
+        })
+        
+        # Variations around the base XYZ-Tilt rotation
+        # Adjust X rotation
+        for angle in [-135, -125, -115, -110, -105, -100, -95, -90]:
+            combinations.append({
+                "name": f"X{angle}->Y-Tilt->Z-Tilt",
+                "rotations": [
+                    {"axis": 'x', "angle": np.radians(angle)},
+                    {"axis": 'y', "angle": pluto_tilt_rad},
+                    {"axis": 'z', "angle": pluto_tilt_rad}
+                ]
+            })
+        
+        # Adjust Y rotation
+        for angle in [-135, -125, -115, -110, -105, -100, -95, -90]:
+            combinations.append({
+                "name": f"X-Tilt->Y{angle}->Z-Tilt",
+                "rotations": [
+                    {"axis": 'x', "angle": pluto_tilt_rad},
+                    {"axis": 'y', "angle": np.radians(angle)},
+                    {"axis": 'z', "angle": pluto_tilt_rad}
+                ]
+            })
+        
+        # Adjust Z rotation
+        for angle in [-135, -125, -115, -110, -105, -100, -95, -90]:
+            combinations.append({
+                "name": f"X-Tilt->Y-Tilt->Z{angle}",
+                "rotations": [
+                    {"axis": 'x', "angle": pluto_tilt_rad},
+                    {"axis": 'y', "angle": pluto_tilt_rad},
+                    {"axis": 'z', "angle": np.radians(angle)}
+                ]
+            })
+        
+        # Try different rotation orders
+        combinations.append({
+            "name": "YXZ-Tilt",
+            "rotations": [
+                {"axis": 'y', "angle": pluto_tilt_rad},
+                {"axis": 'x', "angle": pluto_tilt_rad},
+                {"axis": 'z', "angle": pluto_tilt_rad}
+            ]
+        })
+        
+        combinations.append({
+            "name": "ZXY-Tilt",
+            "rotations": [
+                {"axis": 'z', "angle": pluto_tilt_rad},
+                {"axis": 'x', "angle": pluto_tilt_rad},
+                {"axis": 'y', "angle": pluto_tilt_rad}
+            ]
+        })
+        
+        # Try modified combinations with 90-degree rotations and Pluto's tilt
+        combinations.append({
+            "name": "X-90->Y-Tilt->Z-Tilt",
+            "rotations": [
+                {"axis": 'x', "angle": np.radians(-90)},
+                {"axis": 'y', "angle": pluto_tilt_rad},
+                {"axis": 'z', "angle": pluto_tilt_rad}
+            ]
+        })
+        
+        combinations.append({
+            "name": "X-Tilt->Y-90->Z-Tilt",
+            "rotations": [
+                {"axis": 'x', "angle": pluto_tilt_rad},
+                {"axis": 'y', "angle": np.radians(-90)},
+                {"axis": 'z', "angle": pluto_tilt_rad}
+            ]
+        })
+        
+        combinations.append({
+            "name": "X-Tilt->Y-Tilt->Z-90",
+            "rotations": [
+                {"axis": 'x', "angle": pluto_tilt_rad},
+                {"axis": 'y', "angle": pluto_tilt_rad},
+                {"axis": 'z', "angle": np.radians(-90)}
+            ]
+        })
+        
+        # Adding some specific combinations that might work well
+        combinations.append({
+            "name": "X-110->Y-115->Z-105",
+            "rotations": [
+                {"axis": 'x', "angle": np.radians(-110)},
+                {"axis": 'y', "angle": np.radians(-115)},
+                {"axis": 'z', "angle": np.radians(-105)}
+            ]
+        })
+        
+        combinations.append({
+            "name": "X-115->Y-115->Z-115",
+            "rotations": [
+                {"axis": 'x', "angle": np.radians(-115)},
+                {"axis": 'y', "angle": np.radians(-115)},
+                {"axis": 'z', "angle": np.radians(-115)}
+            ]
+        })
+        
+        combinations.append({
+            "name": "X-120->Y-120->Z-120",
+            "rotations": [
+                {"axis": 'x', "angle": np.radians(-120)},
+                {"axis": 'y', "angle": np.radians(-120)},
+                {"axis": 'z', "angle": np.radians(-120)}
+            ]
+        })
+        
+        # Fine-tuning around a specific zone
+        for x_angle in [-122, -123]:
+            for y_angle in [-122, -123]:
+                for z_angle in [-122, -123]:
+                    combinations.append({
+                        "name": f"X{x_angle}->Y{y_angle}->Z{z_angle}",
+                        "rotations": [
+                            {"axis": 'x', "angle": np.radians(x_angle)},
+                            {"axis": 'y', "angle": np.radians(y_angle)},
+                            {"axis": 'z', "angle": np.radians(z_angle)}
+                        ]
+                    })
+        
+        # Define line styles for different combinations
+        styles = ["solid", "dash", "dot", "dashdot", "longdash", "longdashdot", "solid", "dash", "dot"]
+        
+        # Apply each rotation combination
+        for idx, combo in enumerate(combinations):
+            x_rotated, y_rotated, z_rotated = x_temp.copy(), y_temp.copy(), z_temp.copy()
+            
+            for rot in combo["rotations"]:
+                x_rotated, y_rotated, z_rotated = rotate_points(
+                    x_rotated, y_rotated, z_rotated, 
+                    rot["angle"], rot["axis"]
+                )
+            
+            # Add trace with unique style
+            style = styles[idx % len(styles)]
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=x_rotated,
+                    y=y_rotated,
+                    z=z_rotated,
+                    mode='lines',
+                    line=dict(dash=style, width=1, color=color),
+                    name=f"{satellite_name} {combo['name']}",
+                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
+            )
+        
+        return fig
+        
+    except Exception as e:
+        print(f"Error in test_pluto_moon_xyz_rotations: {e}")
+        traceback.print_exc()
+        return fig
+
+def very_fine_pluto_rotations(satellite_name, planetary_params, color, fig=None, 
+                             x_range=(-125, -115), 
+                             y_range=(-125, -115), 
+                             z_range=(-125, -115),
+                             step=1):
+    """
+    Extremely fine-grained testing of XYZ rotation combinations for Pluto's moons.
+    Tests all combinations within specified ranges with the given step size.
+    
+    Parameters:
+        satellite_name (str): Name of the satellite (Charon, Styx, Nix, Kerberos or Hydra)
+        planetary_params (dict): Dictionary containing orbital parameters
+        color (str): Color to use for the orbit lines
+        fig (plotly.graph_objects.Figure): Existing figure to add the orbit to
+        x_range (tuple): Range of X rotation angles to test in degrees (min, max)
+        y_range (tuple): Range of Y rotation angles to test in degrees (min, max)
+        z_range (tuple): Range of Z rotation angles to test in degrees (min, max)
+        step (int): Step size between angles in degrees
+        
+    Returns:
+        plotly.graph_objects.Figure: Figure with various test orbits added
+    """
+    if fig is None:
+        fig = go.Figure()
+    
+    try:
+        # Get orbital parameters
+        if satellite_name not in planetary_params:
+            print(f"Error: No orbital parameters found for {satellite_name}")
+            return fig
+            
+        orbital_params = planetary_params[satellite_name]
+        
+        # Extract orbital elements
+        a = orbital_params.get('a', 0)
+        e = orbital_params.get('e', 0)
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        
+        print(f"Testing very fine XYZ rotations for {satellite_name} orbit around Pluto")
+        print(f"X range: {x_range}, Y range: {y_range}, Z range: {z_range}, Step: {step}")
+        
+        # Generate ellipse in orbital plane
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+
+        # Standard orbital element rotation sequence
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+        
+        # Create angle ranges
+        x_angles = range(x_range[0], x_range[1] + 1, step)
+        y_angles = range(y_range[0], y_range[1] + 1, step)
+        z_angles = range(z_range[0], z_range[1] + 1, step)
+        
+        # To limit the number of combinations, we'll only test a few combinations
+        # where all three angles are the same or very similar
+        combinations = []
+        
+        # Same angle for all three rotations
+        for angle in range(max(x_range[0], y_range[0], z_range[0]), 
+                           min(x_range[1], y_range[1], z_range[1]) + 1, 
+                           step):
+            combinations.append({
+                "name": f"X{angle}->Y{angle}->Z{angle}",
+                "rotations": [
+                    {"axis": 'x', "angle": np.radians(angle)},
+                    {"axis": 'y', "angle": np.radians(angle)},
+                    {"axis": 'z', "angle": np.radians(angle)}
+                ]
+            })
+        
+        # Fixed X, varying Y and Z
+        for x_angle in [x_range[0], (x_range[0] + x_range[1]) // 2, x_range[1]]:
+            for y_angle in y_angles:
+                for z_angle in z_angles:
+                    if abs(y_angle - z_angle) <= step:  # Only when Y and Z are similar
+                        combinations.append({
+                            "name": f"X{x_angle}->Y{y_angle}->Z{z_angle}",
+                            "rotations": [
+                                {"axis": 'x', "angle": np.radians(x_angle)},
+                                {"axis": 'y', "angle": np.radians(y_angle)},
+                                {"axis": 'z', "angle": np.radians(z_angle)}
+                            ]
+                        })
+        
+        # Define line styles for different combinations
+        styles = ["solid", "dash", "dot", "dashdot", "longdash", "longdashdot", "solid", "dash", "dot"]
+        
+        # Apply each rotation combination
+        for idx, combo in enumerate(combinations):
+            x_rotated, y_rotated, z_rotated = x_temp.copy(), y_temp.copy(), z_temp.copy()
+            
+            for rot in combo["rotations"]:
+                x_rotated, y_rotated, z_rotated = rotate_points(
+                    x_rotated, y_rotated, z_rotated, 
+                    rot["angle"], rot["axis"]
+                )
+            
+            # Add trace with unique style
+            style = styles[idx % len(styles)]
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=x_rotated,
+                    y=y_rotated,
+                    z=z_rotated,
+                    mode='lines',
+                    line=dict(dash=style, width=1, color=color),
+                    name=f"{satellite_name} {combo['name']}",
+                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
+            )
+        
+        return fig
+        
+    except Exception as e:
+        print(f"Error in very_fine_pluto_rotations: {e}")
+        traceback.print_exc()
+        return fig
+
+def pluto_system_final_transform(satellite_name, planetary_params, color, fig=None, transform=None):
+    """
+    Apply a specific optimal transformation to Pluto's moons' orbits.
+    
+    Parameters:
+        satellite_name (str): Name of the satellite (Charon, Styx, Nix, Kerberos or Hydra)
+        planetary_params (dict): Dictionary containing orbital parameters
+        color (str): Color to use for the orbit lines
+        fig (plotly.graph_objects.Figure): Existing figure to add the orbit to
+        transform (dict, optional): Specific transformation to apply, with structure:
+            {
+                "x_angle": angle in degrees,
+                "y_angle": angle in degrees,
+                "z_angle": angle in degrees,
+                "order": list of axes in order of rotation, e.g. ['x', 'y', 'z']
+            }
+            
+    Returns:
+        plotly.graph_objects.Figure: Figure with the finalized orbit
+    """
+    if fig is None:
+        fig = go.Figure()
+    
+    try:
+        # Get orbital parameters
+        if satellite_name not in planetary_params:
+            print(f"Error: No orbital parameters found for {satellite_name}")
+            return fig
+            
+        orbital_params = planetary_params[satellite_name]
+        
+        # Extract orbital elements
+        a = orbital_params.get('a', 0)
+        e = orbital_params.get('e', 0)
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        
+        # Default transformation if none provided
+        if transform is None:
+            transform = {
+                "x_angle": -120,
+                "y_angle": -120,
+                "z_angle": -120,
+                "order": ['x', 'y', 'z']
+            }
+        
+        print(f"Applying final transformation to {satellite_name} orbit around Pluto")
+        print(f"Transformation: X={transform['x_angle']}°, Y={transform['y_angle']}°, Z={transform['z_angle']}°, Order={transform['order']}")
+        
+        # Generate ellipse in orbital plane
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+
+        # Standard orbital element rotation sequence
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+        
+        # Apply the custom transformation
+        x_rotated, y_rotated, z_rotated = x_temp.copy(), y_temp.copy(), z_temp.copy()
+        
+        # Convert transformation angles to radians
+        x_angle_rad = np.radians(transform['x_angle'])
+        y_angle_rad = np.radians(transform['y_angle'])
+        z_angle_rad = np.radians(transform['z_angle'])
+        
+        # Apply rotations in specified order
+        for axis in transform['order']:
+            if axis == 'x':
+                x_rotated, y_rotated, z_rotated = rotate_points(
+                    x_rotated, y_rotated, z_rotated, x_angle_rad, 'x'
+                )
+            elif axis == 'y':
+                x_rotated, y_rotated, z_rotated = rotate_points(
+                    x_rotated, y_rotated, z_rotated, y_angle_rad, 'y'
+                )
+            elif axis == 'z':
+                x_rotated, y_rotated, z_rotated = rotate_points(
+                    x_rotated, y_rotated, z_rotated, z_angle_rad, 'z'
+                )
+        
+        # Add the finalized orbit trace
+        fig.add_trace(
+            go.Scatter3d(
+                x=x_rotated,
+                y=y_rotated,
+                z=z_rotated,
+                mode='lines',
+                line=dict(width=2, color=color),
+                name=f"{satellite_name} Final",
+                text=[f"{satellite_name} Final Orbit"] * len(x_rotated),
+                customdata=[f"{satellite_name} Final Orbit"] * len(x_rotated),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+        
+        return fig
+    
+    except Exception as e:
+        print(f"Error in pluto_system_final_transform: {e}")
+        traceback.print_exc()
+        return fig

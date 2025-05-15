@@ -30,683 +30,9 @@ CENTER_BODY_RADII = {       # km
     'Neptune': 24622,
     'Pluto': 1188,
     'Bennu': 0.262,     # Bennu's mean radius
-    'Eris': 1163,
-    'Arrokoth': 0.0088  # Approximate mean radius
-}
-
-planetary_params = {
-    # Semi-major axis: This is one-half of the longest diameter of the elliptical orbit. It's essentially the average 
-    # of the periapsis (closest point to Saturn) and apoapsis (farthest point from Saturn) distances.
-    # IDs are NAIF IDs used by Horizons. The acronym NAIF stands for the Navigation and Ancillary Information Facility. 
-    # It is a group at NASA's Jet Propulsion Laboratory (JPL) that is responsible for developing and supporting the SPICE 
-    # (Spacecraft, Planet, Instrument, C-matrix, Events) information system. SPICE is used extensively by NASA and the 
-    # international space science community for mission planning and the analysis of scientific observations from space missions. 
-    # The NAIF IDs are numerical identifiers assigned to various celestial bodies, spacecraft, and instruments within the SPICE system. 
-    # These IDs provide a consistent and unambiguous way to refer to these objects in SPICE data files (kernels) and software.
-
-    'Mercury': {
-        'a': 0.387098,  # semi-major axis in AU
-        'e': 0.205630,  # eccentricity
-        'i': 7.005,     # inclination in degrees
-        'omega': 29.124, # argument of perihelion in degrees
-        'Omega': 48.331  # longitude of ascending node in degrees
-    },
-    'Venus': {
-        'a': 0.723332,
-        'e': 0.006772,
-        'i': 3.39471,
-        'omega': 54.884,
-        'Omega': 76.680
-    },
-    'Earth': {
-        'a': 1.000000,
-        'e': 0.016710,
-        'i': 0.00005,
-        'omega': 114.207,
-        'Omega': -11.26064
-    },
-    'Mars': {
-        'a': 1.523679,
-        'e': 0.093400,
-        'i': 1.850,
-        'omega': 286.502,
-        'Omega': 49.558
-    },
-    'Jupiter': {
-        'a': 5.204267,
-        'e': 0.048498,
-        'i': 1.303,
-        'omega': 273.867,
-        'Omega': 100.464
-    },
-    'Saturn': {
-        'a': 9.582486,
-        'e': 0.054150,
-        'i': 2.485,
-        'omega': 339.392,
-        'Omega': 113.665
-    },
-    'Uranus': {
-        'a': 19.191263,
-        'e': 0.047318,
-        'i': 0.773,
-        'omega': 96.998857,
-        'Omega': 74.006
-    },
-    'Neptune': {
-        'a': 30.068963,
-        'e': 0.008678,
-        'i': 1.770,
-        'omega': 276.336,
-        'Omega': 131.784
-    },
-    'Pluto': {
-        'a': 39.482117,
-        'e': 0.248808,
-        'i': 17.16,
-        'omega': 113.834,
-        'Omega': 110.299
-    },
-
-    'Planet 9': {
-    'a': 400,          # Semi-major axis in AU (estimates range from 400-800 AU)
-    'e': 0.6,          # Eccentricity (estimates range from 0.2-0.7)
-    'i': 20,           # Inclination in degrees (estimates range from 15-25 degrees)
-    'L': 238,          # Mean longitude at epoch in degrees
-    'omega': 150,      # Argument of perihelion in degrees
-    'Omega': 90        # Longitude of ascending node in degrees
-},
-    
-    # Dwarf Planets
-    'Ceres': {
-        'a': 2.7675,
-        'e': 0.076,
-        'i': 10.593,
-        'omega': 73.597,
-        'Omega': 80.393
-    },
-    'Haumea': {
-        'a': 43.13,
-        'e': 0.191,
-        'i': 28.20,
-        'omega': 240.20,
-        'Omega': 122.10
-    },
-    'Makemake': {   # 136472 Makemake (2005 FY9); Epoch 2018-Jan-10
-        'a': 45.6923640352447,                    # A
-        'e': .1551157031828145,                   # EC
-        'i': 28.98446068551257,                   # IN
-        'omega': 295.7568523219785,               # W
-        'Omega': 79.60732027458391                # OM
-    },
-    'Eris': {
-        'a': 67.78,
-        'e': 0.441,
-        'i': 44.03,
-        'omega': 150.977,
-        'Omega': 35.873
-    },
-    'Quaoar': {
-        'a': 43.325,
-        'e': 0.0392,
-        'i': 8.34,
-        'omega': 157.631,
-        'Omega': 188.809
-    },
-    'Sedna': {  # 90377 Sedna (2003 VB12); Epoch 2018-May-16
-        'a': 481.3036019474312,         # A
-        'e': .8418992747337005,         # EC
-        'i': 11.92926934569724,         # IN
-        'omega': 311.5908685997484,     # W
-        'Omega': 144.4059276991507      # OM
-    },
-    'Gonggong': {  # 225088 Gonggong (2007 OR10); Epoch 2017-Sep-25
-        'a': 67.15612088312527,     # A, semi-major axis in AU
-        'e': .5057697166633393,   # EC, eccentricity
-        'i': 30.86452616352285,     # IN, inclination in degrees
-        'omega': 207.2059900430104, # W, argument of perihelion in degrees
-        'Omega': 336.8262717815297  # OM, longitude of ascending node in degrees
-    },
-
-    'Orcus': {
-        'a': 39.419,     # semi-major axis in AU
-        'e': 0.226701,   # eccentricity
-        'i': 20.573,     # inclination in degrees
-        'omega': 72.400,  # argument of perihelion in degrees
-        'Omega': 268.457  # longitude of ascending node in degrees
-    },
-
-    'Ixion': {
-        'a': 39.648,     # semi-major axis in AU
-        'e': 0.242419,   # eccentricity
-        'i': 19.636,     # inclination in degrees
-        'omega': 300.273, # argument of perihelion in degrees
-        'Omega': 71.031   # longitude of ascending node in degrees
-    },
-
-    'MS4': {  # 307261 (2002 MS4); Epoch 2018-May-29
-        'a': 41.9417204244255,     # A, semi-major axis in AU
-        'e': .1397251099240261,   # EC, eccentricity
-        'i': 17.66789460477087,     # IN, inclination in degrees
-        'omega': 214.0813053057189, # W, argument of perihelion in degrees
-        'Omega': 215.9040968620575  # OM, longitude of ascending node in degrees
-    },
-
-    'Varuna': {
-        'a': 42.947,     # semi-major axis in AU
-        'e': 0.051739,   # eccentricity
-        'i': 17.200,     # inclination in degrees
-        'omega': 97.286,  # argument of perihelion in degrees
-        'Omega': 97.286   # longitude of ascending node in degrees
-    },
-
-    'GV9': {  # 90568 (2004 GV9); Epoch 2017-11-1   
-        'a': 42.26253681484609,     # A, semi-major axis in AU
-        'e': .08206106683377956,   # EC, eccentricity
-        'i': 21.93322237277237,     # IN, inclination in degrees
-        'omega': 295.190819856158, # W, argument of perihelion in degrees
-        'Omega': 250.6628794038891  # OM, longitude of ascending node in degrees
-    },
-
-    'Arrokoth': {                  # Epoch 2017-12-14, heliocentric
-        'a': 44.44519963724322,   # A, semi-major axis in AU
-        'e': .03868645692376498,   # EC, eccentricity
-        'i': 2.45301305206896,      # IN, inclination in degrees
-        'omega': 176.1507602341478, # W, argument of perihelion in degrees
-        'Omega': 158.939446659904   # OM, longitude of ascending node in degrees
-    },
-
-    # Asteroids
-    'Vesta': {
-        'a': 2.3617,
-        'e': 0.089,
-        'i': 7.155,
-        'omega': 151.216,
-        'Omega': 103.851
-    },
-
-    'Bennu': {
-        'a': 1.126391,    # semi-major axis in AU
-        'e': 0.203745,    # eccentricity
-        'i': 6.035,       # inclination in degrees
-        'omega': 66.223,  # argument of perihelion in degrees
-        'Omega': 2.061    # longitude of ascending node in degrees
-    },
-
-    'Šteins': {
-        'a': 2.363,      # semi-major axis in AU
-        'e': 0.146,      # eccentricity
-        'i': 9.944,      # inclination in degrees
-        'omega': 250.97,  # argument of perihelion in degrees
-        'Omega': 55.39    # longitude of ascending node in degrees
-    },
-
-    'Lutetia': {                  # Epoch 2017-10-12, heliocentric
-        'a': 2.434591597038037,   # Horizons: A, semi-major axis in AU
-        'e': .1644174522633922,   # Horizons: EC, eccentricity
-        'i': 3.063715677953934,      # Horizons: IN, inclination in degrees
-        'omega': 249.980528664283, # Horizons: W, argument of perihelion in degrees
-        'Omega': 80.87713180326485   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    'Apophis': {
-        'a': 0.922583,   # semi-major axis in AU
-        'e': 0.191481,   # eccentricity
-        'i': 3.331,      # inclination in degrees
-        'omega': 126.394, # argument of perihelion in degrees
-        'Omega': 204.061  # longitude of ascending node in degrees
-    },  
-
-    'Eros': {
-        'a': 1.458040,   # semi-major axis in AU
-        'e': 0.222868,   # eccentricity
-        'i': 10.829,     # inclination in degrees
-        'omega': 178.817, # argument of perihelion in degrees
-        'Omega': 304.435  # longitude of ascending node in degrees
-    },
-
-    'Ryugu': {
-        'a': 1.189562,   # semi-major axis in AU
-        'e': 0.190349,   # eccentricity
-        'i': 5.884,      # inclination in degrees
-        'omega': 211.421, # argument of perihelion in degrees
-        'Omega': 251.617  # longitude of ascending node in degrees
-    },
-
-    'Itokawa': {
-        'a': 1.324163,   # semi-major axis in AU
-        'e': 0.280164,   # eccentricity
-        'i': 1.622,      # inclination in degrees
-        'omega': 162.767, # argument of perihelion in degrees
-        'Omega': 69.095   # longitude of ascending node in degrees
-    },
-
-    '2024 YR4': {                  # Epoch 2025-1-25, heliocentric, solution date 2025-3-18
-        'a': 2.51634929076732,   # Horizons: A, semi-major axis in AU
-        'e': .6616057837023791,   # Horizons: EC, eccentricity
-        'i': 3.408279909719115,      # Horizons: IN, inclination in degrees
-        'omega': 134.3644319410849, # Horizons: W, argument of perihelion in degrees
-        'Omega': 271.3676930913076   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    '2024 PT5': {                  # Epoch 2024-10-20, heliocentric
-        'a': 1.012228628670663,   # Horizons: A, semi-major axis in AU
-        'e': .02141074038624791,   # Horizons: EC, eccentricity
-        'i': 1.518377382131216,      # Horizons: IN, inclination in degrees
-        'omega': 116.8074860094156, # Horizons: W, argument of perihelion in degrees
-        'Omega': 305.1069316209851   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    '2024 DW': {                  # Epoch 2024-2-19, heliocentric; solution date 2024-2-23
-        'a': 2.421098478271158,   # Horizons: A, semi-major axis in AU
-        'e': .6939958024514898,   # Horizons: EC, eccentricity
-        'i': .9861902430422796,      # Horizons: IN, inclination in degrees
-        'omega': 244.5179261214832, # Horizons: W, argument of perihelion in degrees
-        'Omega': 335.4879825233473   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    # Comets
-    'Churyumov': {                  # Epoch 2015-10-10, heliocentric (500@10) and geocentric (500)
-        'a': 3.462249489765068,   # Horizons: A, semi-major axis in AU
-        'e': .6409081306555051,   # Horizons: EC, eccentricity
-        'i': 7.040294906760007,      # Horizons: IN, inclination in degrees
-        'omega': 12.79824973415729, # Horizons: W, argument of perihelion in degrees
-        'Omega': 50.13557380441372   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    'Halley_geocentric': {         # Epoch 2017-10-13, geocentric -- not accurate for our plot
-        'a': 3.170639037258039,   # Horizons: A, semi-major axis in AU
-        'e': .1433170784128717,   # Horizons: EC, eccentricity
-        'i': 3.449227641924809,      # Horizons: IN, inclination in degrees
-        'omega': 188.324777427583, # Horizons: W, argument of perihelion in degrees
-        'Omega': 95.24615579501011   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    'Halley': {                  # Epoch 2068-02-21, heliocentric
-        'a': 17.93003431157555,   # Horizons: A, semi-major axis in AU
-        'e': .9679221169240834,   # Horizons: EC, eccentricity
-        'i': 162.1951462980701,      # Horizons: IN, inclination in degrees
-        'omega': 112.2128395742619, # Horizons: W, argument of perihelion in degrees
-        'Omega': 59.07198712310091   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    'Ikeya-Seki': {                  # Epoch 1965-10-7, heliocentric, (C/1965 S1-A)
-        'a': 91.59999999999813,   # Horizons: A, semi-major axis in AU
-        'e': .999915,   # Horizons: EC, eccentricity
-        'i': 141.8642,      # Horizons: IN, inclination in degrees
-        'omega': 69.04859999999999, # Horizons: W, argument of perihelion in degrees
-        'Omega': 346.9947   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    # Satellites
-
-    'Moon': {            # 301; Revised 7-31-2013, geocentric; source: https://ssd.jpl.nasa.gov/horizons/app.html#/
-#        'a': 384400,   # Horizons: A, semi-major axis in AU
-        'a': 0.002570,   # Horizons: A, semi-major axis in AU; 384400 km or 0.00257 au
-        'e': 0.0549,   # Horizons: EC, eccentricity; 0.05490 was 0.0554
-        'i': 5.145,      # Horizons: IN, inclination in degrees; 5.145 deg was 5.16
-        'omega': 318.15, # Horizons: W, argument of perihelion in degrees
-        'Omega': 125.08   # Horizons: OM, longitude of ascending node in degrees
-    },
-
-    # Mars' Moons
-
-    'Phobos': {
-#        'a': 9400,       # semi-major axis in km
-        'a': 0.0000628,       # semi-major axis in AU
-#        'a_parent': 2.76,      # semi-major axis in Mars radii
-        'e': 0.0151,           # eccentricity
-        'i': 1.093,            # inclination to Mars' equator in degrees
-        'omega': 216.3,      # argument of perihelion in degrees
-        'Omega': 169.2        # longitude of ascending node in degrees
-    },
-
-    'Deimos': {
-#        'a': 23500,       # semi-major axis in km
-        'a': 0.0001568,       # semi-major axis in AU
-#        'a_parent': 6.92,      # semi-major axis in Mars radii
-        'e': 0.00033,          # eccentricity
-        'i': 1.791,            # inclination to Mars' equator in degrees
-        'omega': 0,      # argument of perihelion in degrees
-        'Omega': 54.4       # longitude of ascending node in degrees
-    },
-
-    # Jupiter's Galilean Moons
-    'Io': {
-#        'a': 421800,         # semi-major axis in km
-        'a': 0.002819,         # semi-major axis in AU
-    #    'a_parent': 5.90,      # semi-major axis in Jupiter radii
-        'e': 0.0041,           # eccentricity
-        'i': 0.05,             # inclination to Jupiter's equator in degrees
-        'omega': 49.1,       # argument of perihelion in degrees
-        'Omega': 0.0        # longitude of ascending node in degrees
-    },
-
-    'Europa': {
-#        'a': 671100,         # semi-major axis in km
-        'a': 0.004486,         # semi-major axis in AU
-    #    'a_parent': 9.40,      # semi-major axis in Jupiter radii
-        'e': 0.0094,           # eccentricity
-        'i': 0.471,            # inclination to Jupiter's equator in degrees
-        'omega': 45.0,       # argument of perihelion in degrees
-        'Omega': 184.0       # longitude of ascending node in degrees
-    },
-
-    'Ganymede': {
-#        'a': 1070400,         # semi-major axis in km
-        'a': 0.007155,         # semi-major axis in AU
-    #    'a_parent': 14.99,     # semi-major axis in Jupiter radii
-        'e': 0.0013,           # eccentricity
-        'i': 0.204,            # inclination to Jupiter's equator in degrees
-        'omega': 198.3,      # argument of perihelion in degrees
-        'Omega': 58.5        # longitude of ascending node in degrees
-    },
-
-    'Callisto': {
-#        'a': 1882700,         # semi-major axis in km
-        'a': 0.012585,         # semi-major axis in AU
-    #    'a_parent': 26.37,     # semi-major axis in Jupiter radii
-        'e': 0.0074,           # eccentricity
-        'i': 0.205,            # inclination to Jupiter's equator in degrees
-        'omega': 43.8,       # argument of perihelion in degrees
-        'Omega': 309.1       # longitude of ascending node in degrees
-    },
-
-# Jupiter's Inner Moons associated with ring system
-    'Metis': {
-        'a': 0.000856,         # semi-major axis in AU (128,000 km)
-    #    'a_parent': 1.79,      # semi-major axis in Jupiter radii
-        'e': 0.0002,           # eccentricity (nearly circular)
-        'i': 0.06,             # inclination to Jupiter's equator in degrees
-        'omega': 16.63,        # argument of perihelion in degrees
-        'Omega': 68.9          # longitude of ascending node in degrees
-    },
-
-    'Adrastea': {
-        'a': 0.000864,         # semi-major axis in AU (129,000 km)
-    #    'a_parent': 1.81,      # semi-major axis in Jupiter radii
-        'e': 0.0015,           # eccentricity
-        'i': 0.03,             # inclination to Jupiter's equator in degrees
-        'omega': 234.0,        # argument of perihelion in degrees
-        'Omega': 33.5          # longitude of ascending node in degrees
-    },
-
-    'Amalthea': {
-        'a': 0.001217,         # semi-major axis in AU (182,000 km)
-    #    'a_parent': 2.54,      # semi-major axis in Jupiter radii
-        'e': 0.0032,           # eccentricity
-        'i': 0.374,            # inclination to Jupiter's equator in degrees
-        'omega': 155.87,       # argument of perihelion in degrees
-        'Omega': 108.05        # longitude of ascending node in degrees
-    },
-
-    'Thebe': {
-        'a': 0.001514,         # semi-major axis in AU (226,000 km)
-    #    'a_parent': 3.11,      # semi-major axis in Jupiter radii
-        'e': 0.0175,           # eccentricity
-        'i': 1.076,            # inclination to Jupiter's equator in degrees
-        'omega': 234.57,       # argument of perihelion in degrees
-        'Omega': 237.33        # longitude of ascending node in degrees
-    },
-
-    # Saturn's Major and Ring Moons
-
-    'Pan': {              # Revised: Oct 03, 2018; 618
-#        'a': 133584,         # semi-major axis in km 133.584(10^3)
-        'a': 0.0008930,         # semi-major axis in AU
-#        'a_parent': ,      # semi-major axis in Saturn radii
-        'e': 0,           # eccentricity not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-        'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-        'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-    },
-
-    'Daphnis': {              # Revised: Aug 08, 2019; 635
-#        'a': 136500,         # semi-major axis in km 136500 in https://ssd.jpl.nasa.gov/sats/elem/
-        'a': 0.0009124,         # semi-major axis in AU
-#        'a_parent': ,      # semi-major axis in Saturn radii
-        'e': 0,           # eccentricity not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-        'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-        'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-    },
-
-    'Prometheus': {              # Revised: Oct 03, 2018; 616
-#        'a': 139350,         # semi-major axis in km 139.35 (10^3) in https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'a': 0.0009315,         # semi-major axis in AU; Orbital period 0.612986 d
-#        'a_parent': ,      # semi-major axis in Saturn radii
-        'e': 0.0024,           # eccentricity in https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'omega': 341.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
-        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-    },
-
-    'Pandora': {              # Revised: Oct 03, 2018; 617
-#        'a': 141700,         # semi-major axis in km 141.70 (10^3) in https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'a': 0.0009472,         # semi-major axis in AU; Orbital period 0.628804 d
-#        'a_parent': ,      # semi-major axis in Saturn radii
-        'e': 0.0042,           # eccentricity in https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'omega': 217.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
-        'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
-    },
-
-    'Mimas': {              # revised 1-26-2022; 601
-#        'a': 185540,         # semi-major axis in km
-        'a': 0.001242,         # semi-major axis in AU
-#        'a_parent': 3.08,      # semi-major axis in Saturn radii
-        'e': 0.0196,           # eccentricity
-        'i': 1.572,            # inclination to Saturn's equator in degrees
-        'omega': 160.4,      # argument of perihelion in degrees; laplace
-        'Omega': 66.2       # longitude of ascending node in degrees
-    },
-
-    'Enceladus': {          # 602
-#        'a': 238400,         # semi-major axis in km
-        'a': 0.001587,         # semi-major axis in AU
-#        'a_parent': 3.95,      # semi-major axis in Saturn radii
-        'e': 0.0047,           # eccentricity
-        'i': 0.009,            # inclination to Saturn's equator in degrees
-        'omega': 119.5,      # argument of perihelion in degrees
-        'Omega': 0.0       # longitude of ascending node in degrees
-    },
-
-    'Tethys': {             # 603
-#        'a': 295000,         # semi-major axis in km
-        'a': 0.001970,         # semi-major axis in AU
-#        'a_parent': 4.89,      # semi-major axis in Saturn radii
-        'e': 0.001,           # eccentricity
-        'i': 1.091,            # inclination to Saturn's equator in degrees
-        'omega': 335.3,      # argument of perihelion in degrees
-        'Omega': 273.0       # longitude of ascending node in degrees
-    },
-
-    'Dione': {              # 604
-#        'a': 377700,         # semi-major axis in km
-        'a': 0.002525,         # semi-major axis in AU
-#        'a_parent': 6.26,      # semi-major axis in Saturn radii
-        'e': 0.0022,           # eccentricity
-        'i': 0.0,            # inclination to Saturn's equator in degrees
-        'omega': 116.0,      # argument of perihelion in degrees
-        'Omega': 0.0       # longitude of ascending node in degrees
-    },
-
-    'Rhea': {               # 605
-#        'a': 527200,         # semi-major axis in km
-        'a': 0.003524,         # semi-major axis in AU
-#        'a_parent': 8.74,      # semi-major axis in Saturn radii
-        'e': 0.0010,           # eccentricity
-        'i': 0.333,            # inclination to Saturn's equator in degrees
-        'omega': 44.3,      # argument of perihelion in degrees
-        'Omega': 133.7       # longitude of ascending node in degrees
-    },
-
-    'Titan': {              # 606
-#        'a': 1221900,         # semi-major axis in km
-        'a': 0.008168,         # semi-major axis in AU
-#        'a_parent': 20.27,     # semi-major axis in Saturn radii
-        'e': 0.0288,           # eccentricity
-        'i': 0.306,            # inclination to Saturn's equator in degrees
-        'omega': 78.3,      # argument of perihelion in degrees
-        'Omega': 78.6        # longitude of ascending node in degrees
-    },
-
-    'Hyperion': {              # 607; Revised: Jan 26, 2022; Orbital period 21.28 d
-#        'a': 1500933,         # semi-major axis in km; 1500.933(10^3); https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'a': 0.010033,         # semi-major axis in AU
-#        'a_parent': ,     # semi-major axis in Saturn radii
-        'e': 0.0232,           # eccentricity; https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'i': 0.615,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'omega': 214.0,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
-        'Omega': 87.1        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
-    },
-
-    'Iapetus': {              # 608; Revised: Jan 26, 2022; Orbital period 79.33 d
-#        'a': 3560840,         # semi-major axis in km; 3560.84 (10^3); https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'a': 0.02380,         # semi-major axis in AU
-#        'a_parent': ,     # semi-major axis in Saturn radii
-        'e': 0.0283,           # eccentricity; https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'i': 7.489,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
-        'omega': 254.5,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
-        'Omega': 86.5        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
-    },
-
-    'Phoebe': {             # 609
-#        'a': 12929400,          # semi-major axis in km
-        'a': 0.08650,          # semi-major axis in AU
-#        'a_parent': 214.7,     # semi-major axis in Saturn radii
-        'e': 0.1635,           # eccentricity
-        'i': 175.2,            # inclination to Saturn's equator in degrees (retrograde)
-        'omega': 240.3,      # argument of perihelion in degrees
-        'Omega': 192.7        # longitude of ascending node in degrees
-    },
-
-    # Uranus's Major Moons
-    'Miranda': {            # 705
-#        'a': 129900,         # semi-major axis in km
-        'a': 0.000868,         # semi-major axis in AU
-#        'a_parent': 5.0,       # semi-major axis in Uranus radii
-        'e': 0.0013,           # eccentricity
-        'i': 4.338,            # inclination to Uranus's equator in degrees
-        'omega': 155.6,       # argument of perihelion in degrees
-        'Omega': 100.6       # longitude of ascending node in degrees
-    },
-
-    'Ariel': {              # 701
-#        'a': 190900,         # semi-major axis in km
-        'a': 0.001276,         # semi-major axis in AU
-#        'a_parent': 7.35,      # semi-major axis in Uranus radii
-        'e': 0.0012,           # eccentricity
-        'i': 0.0,            # inclination to Uranus's equator in degrees
-        'omega': 83.3,      # argument of perihelion in degrees
-        'Omega': 0.0        # longitude of ascending node in degrees
-    },
-
-    'Umbriel': {            # 702
-#        'a': 266000,         # semi-major axis in km
-        'a': 0.001778,         # semi-major axis in AU
-#        'a_parent': 10.23,     # semi-major axis in Uranus radii
-        'e': 0.0039,           # eccentricity
-        'i': 0.1,            # inclination to Uranus's equator in degrees
-        'omega': 157.5,       # argument of perihelion in degrees
-        'Omega': 195.5        # longitude of ascending node in degrees
-    },
-
-    'Titania': {            # 703
-#        'a': 436300,         # semi-major axis in km
-        'a': 0.002914,         # semi-major axis in AU
-#        'a_parent': 16.77,     # semi-major axis in Uranus radii
-        'e': 0.001,           # eccentricity
-        'i': 0.1,            # inclination to Uranus's equator in degrees
-        'omega': 202.0,      # argument of perihelion in degrees
-        'Omega': 26.4        # longitude of ascending node in degrees
-    },
-
-    'Oberon': {             # 704
-#       'a': 583400,         # semi-major axis in km
-        'a': 0.003907,         # semi-major axis in AU
-#        'a_parent': 22.47,     # semi-major axis in Uranus radii
-        'e': 0.0008,           # eccentricity
-        'i': 0.058,            # inclination to Uranus's equator in degrees
-        'omega': 182.4,      # argument of perihelion in degrees
-        'Omega': 30.5       # longitude of ascending node in degrees
-    },
-
-    # Neptune's Major Moon
-    'Triton': {             # 801
-#        'a': 354800,         # semi-major axis in km
-        'a': 0.002371,         # semi-major axis in AU
-#        'a_parent': 14.33,     # semi-major axis in Neptune radii
-        'e': 0.000016,         # eccentricity (nearly circular)
-        'i': 157.3,          # inclination to Neptune's equator in degrees (retrograde)
-        'omega': 0.0,       # argument of perihelion in degrees
-        'Omega': 178.1       # longitude of ascending node in degrees
-    },
-
-    # Pluto's Moons
-    'Charon': {             # 901
-#        'a': 19600,         # semi-major axis in km
-        'a': 0.000127,         # semi-major axis in AU
-#        'a_parent': 16.4,      # semi-major axis in Pluto radii
-        'e': 0.0002,           # eccentricity (nearly circular)
-        'i': 0.001,            # inclination to Pluto's equator in degrees
-        'omega': 0.0,      # argument of perihelion in degrees
-        'Omega': 0.0       # longitude of ascending node in degrees
-    },
-
-    'Nix': {                # 902
-#        'a': 49300,         # semi-major axis in km
-        'a': 0.000242,         # semi-major axis in AU
-#        'a_parent': 31.3,      # semi-major axis in Pluto radii
-        'e': 0.015,           # eccentricity
-        'i': 0.0,            # inclination to Pluto's equator in degrees
-        'omega': 31.4,      # argument of perihelion in degrees
-        'Omega': 0.0         # longitude of ascending node in degrees
-    },
-
-    'Hydra': {              # 903; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
-#        'a': 65200,         # semi-major axis in km
-        'a': 0.0004358,         # semi-major axis in AU; 0.00043583
-#        'a_parent': 83.9,     # semi-major axis in Pluto radii
-        'e': 0.009,           # eccentricity
-        'i': 0.3,            # inclination to Pluto's equator in degrees
-        'omega': 139.3,      # argument of perihelion in degrees
-        'Omega': 114.3       # longitude of ascending node in degrees
-    },
-
-    # Eris's Moon
-    #'Dysnomia': {
-#        'a': 0.000364,         # semi-major axis in AU
-    #    'a': 0.000364,         # semi-major axis in AU
-#        'a_parent': 36.2,      # semi-major axis in Eris radii (estimate)
-    #    'e': 0.0062,           # eccentricity
-    #    'i': 78.29,            # inclination in degrees (to the ecliptic)
-    #    'omega': 139.65,       # argument of perihelion in degrees
-    #    'Omega': 29.43         # longitude of ascending node in degrees
-    #},
-
-}  
-
-parent_planets = {
-    'Earth': ['Moon'],
-    'Mars': ['Phobos', 'Deimos'],
-    'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
-    'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe', 'Pan', 'Daphnis', 'Prometheus',
-               'Pandora', 'Hyperion'],
-    'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon'],
-    'Neptune': ['Triton'],
-    'Pluto': ['Charon', 'Nix', 'Hydra'],
-    'Eris': ['Dysnomia']
-}
-
-planet_tilts = {        # degrees
-    'Earth': 0,         # 23.44 tilt not needed,  the moon is already defined in the ecliptic frame; using tilt does not align
-    'Mars': 25.19,     # 25.19 tilt; neither the positive nor the negative tilt align
-    'Jupiter': 3.13,    # tilt aligns well
-    'Saturn': -26.73,   # 26.73 tilt; the positive tilt does not align; the negative is much better
-    'Uranus': 97.77,   # 97.77 tilt; does not align either positive or negative
-    'Neptune': 28.32,   # 28.32; does not align well, but the negative tilt is worse
-    'Pluto': -122.53    # 122.53; does not align well, the negative is better
+    'Eris/Dysnomia': 1163,
+    'Arrokoth': 0.0088,  # Approximate mean radius
+    'Planet 9': 24000   # comes from models that assume Planet Nine has a mass around 5-10 Earth masses and an internal composition similar to Uranus and Neptune.
 }
 
 # Dictionary of known orbital periods for validation
@@ -722,7 +48,7 @@ KNOWN_ORBITAL_PERIODS = {
     'Neptune': 164.8,   # 60,193.0 days (164.8 years)
     'Pluto': 248.0,     # 90,582.0 days (248.0 years)
     
-    # Major satellites (already in Earth days)
+    # Major satellites (already in Earth days); https://ssd.jpl.nasa.gov/sats/elem/
     'Moon': 27.32,      # 27.32 days
     'Phobos': 0.32,     # 0.32 days (7.68 hours)
     'Deimos': 1.26,     # 1.26 days (30.24 hours)
@@ -752,10 +78,18 @@ KNOWN_ORBITAL_PERIODS = {
     'Umbriel': 4.14,    # 4.14 days (99.36 hours)
     'Titania': 8.71,    # 8.71 days
     'Oberon': 13.46,    # 13.46 days
-    'Triton': 5.88,     # 5.88 days (141.12 hours)
-    'Charon': 6.39,     # 6.39 days
+    'Portia': 0.513196,
+    'Mab': 0.923293,
+
+    'Triton': 5.88,     # 5.88 days (141.12 hours); https://ssd.jpl.nasa.gov/sats/elem/
+    'Despina': 0.334656,
+    'Galatea': 0.428744,
+
+    'Charon': 6.39,     # 6.39 days; https://ssd.jpl.nasa.gov/sats/elem/
+    'Styx': 20.16,     
     'Nix': 24.86,       # 24.86 days
     'Hydra': 38.20,     # 38.20 days
+    'Kerberos': 32.17,     
     'Dysnomia': 15.79,  # 15.79 days
     
     # Dwarf planets and KBOs (in Earth years)
@@ -1089,6 +423,7 @@ def color_map(planet):
         'Phobos': 'rgb(139, 0, 0)',
         'Deimos': 'rgb(105, 105, 105)',
         'Ceres': 'rgb(105, 105, 105)',
+
         'Jupiter': 'rgb(255, 165, 0)',
         'Io': 'rgb(255, 140, 0)',
         'Europa': 'rgb(173, 216, 230)',
@@ -1098,6 +433,7 @@ def color_map(planet):
         'Adrastea': 'rgb(190, 150, 130)',  # Light reddish-brown
         'Amalthea': 'rgb(200, 60, 50)',    # Red
         'Thebe': 'rgb(170, 110, 90)',       # Dark reddish-brown
+
         'Saturn': 'rgb(210, 180, 140)',
         'Titan': 'rgb(255, 215, 0)',
         'Enceladus': 'rgb(192, 192, 192)',
@@ -1113,20 +449,33 @@ def color_map(planet):
         'Iapetus': 'rgb(220, 220, 220)',        # Trailing Hemisphere: (220, 220, 220) (Light Gray/Whitish); 
                                                 # Leading Hemisphere (Cassini Regio): (50, 50, 50) (Very dark gray/almost black) 
         'Phoebe': 'cyan',
+
         'Uranus': 'rgb(173, 216, 230)',
         'Titania': 'rgb(221, 160, 221)',         
         'Oberon': 'rgb(128, 0, 128)',
         'Umbriel': 'rgb(148, 0, 211)',    
         'Ariel': 'rgb(144, 238, 144)',
         'Miranda': 'rgb(0, 128, 0)',
+        'Portia': 'rgb(150, 150, 150)',
+        'Mab': 'rgb(100, 100, 120)',
+
         'Neptune': 'rgb(0, 0, 255)',
         'Triton': 'rgb(0, 255, 255)',
+        'Despina': 'rgb(175, 175, 175)',
+        'Galatea': 'rgb(175, 175, 175)',
+
         'Pluto': 'rgb(205, 92, 92)',
-        'Planet 9': 'rgb(50, 100, 200)',  # A distinctive blue
-        'Charon': 'rgb(105, 105, 105)',
+        'Charon': 'rgb(169, 169, 169)',
+        'Styx': 'rgb(180, 180, 180)',
+        'Nix': 'rgb(200, 200, 200)',  
+        'Kerberos': 'rgb(170, 170, 170)',      
+        'Hydra': 'rgb(190, 190, 190)', 
+
+        'Planet 9': 'grey',  # grey
+
         'Haumea': 'rgb(128, 0, 128)',
         'Makemake': 'rgb(255, 192, 203)',
-        'Eris': 'rgb(144, 238, 144)',
+        'Eris': 'rgb(240, 240, 240)',
         'Voyager 1': 'white',
         'Voyager 2': 'gold',
         'Cassini': 'green',
@@ -1174,9 +523,7 @@ def color_map(planet):
         'DART': 'gold',
         'Lucy': 'green',
         'Gaia': 'red',
-        'Hayabusa2': 'cyan', 
-        'Nix': 'white',        
-        'Hydra': 'rgb(218, 165, 32)',  
+        'Hayabusa2': 'cyan',  
         'Quaoar': 'rgb(244, 164, 96)',
         'Dysnomia': 'white',
         'Sedna': 'rgb(135, 206, 235)',
@@ -1193,11 +540,24 @@ def color_map(planet):
 INFO = {
 # Celestial objects
         'Sun': 'The star at the center of our solar system. To display structure and atmosphere select "Solar Shells".',
+
         'Solar Shells': 'Solar structure and atmosphere, Oort cloud, and gravitational reach.',
-        'Mercury': 'The smallest planet and closest to the Sun.\n* Visualize shells at 0.002 AU.\n* Missions: Mariner, Messenger, BepiColombo',
-        'Venus': 'Second planet from the Sun, known for its thick atmosphere.\n* Visualize shells at 0.01 AU.\n' 
-        '* Missions: Pioneer Venus Orbiter, VERITAS, EnVision, Solar Orbiter',
-        'Earth': 'Our home planet, the third from the Sun.',
+
+        'Mercury': 'The smallest planet and closest to the Sun.\n' 
+        '* Mercury-centered: do not select Mercury; visualize shells at manual scale 0.002 AU.\n' 
+        '* Heliocentric: select Mercury with or without shells.\n' 
+        '* Missions: Mariner 10, Messenger, BepiColombo',
+
+        'Venus': 'Second planet from the Sun, known for its thick atmosphere.\n' 
+        '* Venus-centered: do not select Venus; visualize shells at 0.01 AU.\n'
+        '* Heliocentric: select Venus with or without shells.\n'  
+        '* Missions: Venera (USSR); Mariner 2, 5, 10; Pioneer Venus Project, Vega (USSR), Magellan, Galileo, Cassini-Huygens,\n' 
+        '  Venus Express, MESSENGER, Akatsuki, Parker Solar Probe, BepiColombo, DAVINCI, VERITAS, EnVision, Shukrayaan-1, Solar Orbiter.',
+
+        'Earth': 'Our home planet, the third from the Sun.\n' 
+        '* Earth-centered: do not select Earth; visualize shells at 0.02 AU.\n'
+        '* Heliocentric: select Earth with or without shells.\n'
+        '* Missions: Galileo, Cassini-Huygens, Rosetta, New Horizons, JUNO, Parker Solar Probe, Deep Impact, NEAR Shoemaker, Solar Orbiter.',
 
         'Moon': 'Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145° to the ecliptic plane, ' 
         'but approximately 28.545° to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4°). '
@@ -1244,7 +604,14 @@ INFO = {
         'In essence, 2024 DW was a relatively small asteroid that had a close encounter with Earth, providing astronomers with an ' 
         'opportunity to study near-Earth objects.',
 
-        'Mars': 'Known as the Red Planet, fourth planet from the Sun.',
+        'Mars': 'Known as the Red Planet, fourth planet from the Sun.\n' 
+        '* Mars-centered: do not select Mars; visualize shells at 0.01 AU.\n' 
+        '* Heliocentric: select Mars with or without shells.\n'
+        '* Missions: Mariner 4, 6, 7, 9; Mars 2, 3, 4, 6 and 7 (USSR); Viking 1 and 2; Mars Global Surveyor; 2001 Mars Odyssey;\n' 
+        '  Mars Express; Mars Reconnaissance Orbiter; Mars Orbiter Mission; MAVEN; ExoMars Trace Gas Orbiter; Hope Mars Mission (UAE);\n' 
+        '  Tianwen-1 Orbiter (China); Mars Pathfinder & Sojourner Rover; Spirit & Opportunity Rovers; Phoenix Lander; Curiosity Rover;\n' 
+        '  InSight Lander; Perseverance Rover & Ingenuity Helicopter; Tianwen-1 Lander & Zhurong Rover (China).',
+
         'Phobos': 'The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
         'Deimos': 'The smaller and more distant moon of Mars, with a stable orbit. Retrogade orbit.',
         'Ceres': 'The largest object in the asteroid belt, considered a dwarf planet.',
@@ -1281,8 +648,11 @@ INFO = {
         'Eros': 'Asteroid explored by NASA\'s NEAR Shoemaker spacecraft.',
         'Itokawa': 'Asteroid visited by the original Hayabusa mission.',
 
-        'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.\n' 
-        'Jupiter was visited by the Juno spacecraft, entering orbit on July 5, 2016.\n\n'
+        'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.\n'
+        '* Jupiter-centered: do not select Jupiter; visualize shells at 0.3 AU.\n'
+        '* Heliocentric: select Jupiter with or without shells.\n'
+        '* Missions: Pioneer 10 and 11; Voyager 1 and 2; Ulysses; Cassini-Huygens; New Horizons; Galileo;\n' 
+        '  Juno; JUpiter ICy moons Explorer (JUICE);Europa Clipper.\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
         'Metis': 'Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
@@ -1293,7 +663,13 @@ INFO = {
         'Europa': 'Jupiter moon. Covered with a smooth ice layer, potential subsurface ocean.',
         'Ganymede': 'Jupiter moon. The largest moon in the Solar System, bigger than Mercury.',
         'Callisto': 'Jupiter moon. Heavily cratered and geologically inactive.',
-        'Saturn': 'Known for its beautiful ring system, the sixth planet from the Sun.',
+
+        'Saturn': 'Known for its beautiful ring system, the sixth planet from the Sun.'
+        '* Saturn-centered: do not select Saturn; visualize shells at 0.3 AU.\n'
+        '* Heliocentric: select Saturn with or without shells.\n'
+        '* Missions: Pioneer 11; Voyager 1 and 2; Cassini-Huygens; Dragonfly (2028).\n\n'
+        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+
         'Titan': 'Saturn moon. The second-largest moon in the Solar System, with a thick atmosphere.',
         'Enceladus': 'Saturn moon. Known for its geysers ejecting water ice and vapor.',
         'Rhea': 'Saturn moon. Saturn\'s second-largest moon, with extensive cratered surfaces.',
@@ -1321,22 +697,53 @@ INFO = {
         'ridge that spans a significant portion of its circumference.',
     
         'Phoebe': 'Saturn moon. An irregular moon with a retrograde orbit around Saturn.',
-        'Uranus': 'The ice giant with a unique tilt, orbits the Sun on its side.',
+
+        'Uranus': 'The ice giant with a unique tilt, orbits the Sun on its side.'
+        '* Uranus-centered: do not select Uranus; visualize shells at 0.3 AU.\n'
+        '* Heliocentric: select Uranus with or without shells.\n'
+        '* Missions: Voyager 2; Uranus Orbiter and Probe (planned).\n\n'
+        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+
         'Titania': 'Uranus moon. The largest moon of Uranus, with a mix of heavily cratered and relatively younger regions.',    
         'Oberon': 'Uranus moon. The second-largest moon of Uranus, heavily cratered.',
         'Umbriel': 'Uranus moon. Features a dark surface with numerous impact craters.',  
         'Ariel': 'Uranus moon. Exhibits a mix of heavily cratered regions and younger surfaces.',
         'Miranda': 'Uranus moon. Known for its extreme geological features like canyons and terraced layers.',
-        'Neptune': 'The eighth and farthest known planet in the solar system.',
+        'Portia': 'Uranus moon, associated with outer ring Nu.',
+        'Mab': 'Uranus moon, associated with outer ring Mu.',
+
+        'Neptune': 'The eighth and farthest known planet in the solar system.'
+        '* Neptune-centered: do not select Neptune; visualize shells at 0.3 AU.\n'
+        '* Heliocentric: select Neptune with or without shells.\n'
+        '* Missions: Voyager 2; Neptune Orbiter and Probe (possible).\n\n'
+        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+
         'Triton': 'Neptune\'s largest moon, has a retrograde orbit and geysers suggesting geological activity.',
-        'Pluto': 'Once considered the ninth planet, now classified as a dwarf planet.',
-        'Charon': 'Pluto\'s largest moon, forming a binary system with Pluto.',
-        'Nix': 'One of Pluto\'s moons.',
-        'Hydra': 'Another of Pluto\'s moons',
+        'Despina': 'Irregularly shaped, likely icy and grayish, orbiting close to the planet and possibly contributing to its ring system',
+        'Galatea': 'Irregularly shaped, with an expected icy and grayish appearance, thought to shepherd the Adams ring arc.',
+
+        'Pluto': 'Once considered the ninth planet, now classified as a dwarf planet.'
+        '* Pluto-centered: do not select Pluto; visualize shells at 0.3 AU.\n'
+        '* Heliocentric: select Pluto with or without shells.\n'
+        '* Missions: New Horizons; Pluto Orbiter and Probe (possible).\n\n'
+        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+
+        'Charon': 'Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.',
+        'Styx': 'The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
+        'Nix': 'A small, elongated moon of Pluto with a chaotic rotation.',
+        'Kerberos': 'Pluto\'s second-smallest moon is thought to have a double-lobed shape.',
+        'Hydra': 'The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
         'Haumea': 'A dwarf planet known for its elongated shape and fast rotation.',
         'Makemake': 'A dwarf planet located in the Kuiper Belt, discovered in 2005.',
-        'Eris': 'A distant dwarf planet, more massive than Pluto.',
+
+        'Eris': 'A distant dwarf planet, more massive than Pluto.'
+        '* Eris/Dysnomia-centered: do not select Pluto; visualize shells at 0.1 AU.\n'
+        '* Heliocentric: select Eris with or without shells.\n'
+        '* Missions: Proposed.\n\n'
+        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+
         'Dysnomia': 'Eris\'s moon. Orbital period: 15.79 Earth days', 
+
         'Quaoar': 'A large Kuiper Belt object with a ring system.',
 
         'Sedna': 'A distant trans-Neptunian dwarf planet with a long orbit. \n* Sedna is a fascinating object with an incredibly ' 
@@ -1361,9 +768,21 @@ INFO = {
         '2002 MS4': 'A large unnumbered Kuiper Belt Object with no known moons.',  
         'Gonggong': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.',
 
-        'Planet 9 (Hypothetical)': 'Hypothetical planet proposed to explain the orbital clustering of some distant trans-Neptunian objects. ' 
-        'Estimated to be 5-10 Earth masses and orbit 400-800 AU from the Sun. As of 2025, it remains undetected.\n\n' 
-        'Select manual scaling of 800 AU to display the estimated orbit from Kuiper Belt disturbances.',        
+        'Planet 9': 'Hypothetical planet with a potential candidate identified in 2025 IRAS/AKARI infrared data. ' 
+        'Estimated to be 7-17 Earth masses (possibly Neptune-sized) at 500-700 AU from the Sun. ' 
+        'Last detected in the Eridanus constellation with two observations 23 years apart (1983 IRAS and 2006 AKARI). ' 
+        'If confirmed, its orbit would be much more distant than previously predicted, swinging between 280-1120 AU.\n\n' 
+        'This visualization shows a scientifically plausible position based on the 2025 study, but has significant uncertainty. ' 
+        'The exact position, orbit, and even existence of Planet 9 remain subject to confirmation. ' 
+        'The position shown is calculated to be consistent with the orbit derived from observed data points, ' 
+        'though only two observations (separated by 23 years) have been made so far.\n\n' 
+        '* Planet 9-centered: do not select Planet 9; visualize shells at 0.3 AU.\n'
+        '* Heliocentric: select Planet 9 with or without shells at 800 AU.\n'
+        '* Missions: None.\n\n'
+        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.'
+        'NOTE: The ideal orbit and estimated position will display in static plots. In animated plots, only the ideal orbit will display.\n\n' 
+        'NOTE: This visualization is our estimate and neither the ideal orbit nor position are fetched from JPL Horizons.\n\n' 
+        'Select manual scaling of 800 AU to fully display the estimated orbit.', 
 # Missions
         'Voyager 1': 'The farthest human-made object from Earth, exploring interstellar space. Voyager 1 is a ' 
         'space probe that was launched by NASA on September 5, 1977, to study the outer Solar System and interstellar space. It is the ' 
