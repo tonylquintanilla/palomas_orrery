@@ -168,6 +168,7 @@ def get_script_path(script_name):
     """
     return Path(__file__).parent / script_name
 
+
 def create_sun_visualization(fig, animate=False, frames=None):
     """
     Creates a visualization of the Sun's layers including photosphere, inner corona, and outer corona.
@@ -449,7 +450,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # Create a text list matching the number of points
         text_array_outer_corona = [outer_corona_info for _ in range(len(x))]
-        customdata_array_outer_corona = ["Sun: Outer Corona" for _ in range(len(x))]
+        customdata_array_outer_corona = ["Outer Corona" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -460,7 +461,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(25, 25, 112)',  # approximate visualization
                     opacity=0.3
                 ),
-                name='Sun: Outer Corona',
+                name='Outer Corona',
                 text=text_array_outer_corona,            # Replicated text
                 customdata=customdata_array_outer_corona, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -479,7 +480,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.3
                 ),
-                name='Sun: Outer Corona',
+                name='Outer Corona',
                 text=['Solar Outer Corona (extends to 50 solar radii or more, or 0.2 AU)'],
         #        hoverinfo='text',
                 hovertemplate='%{text}<extra></extra>',
@@ -492,7 +493,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # Create a text list matching the number of points
         text_array_inner_corona = [inner_corona_info for _ in range(len(x))]
-        customdata_array_inner_corona = ["Sun: Inner Corona" for _ in range(len(x))]
+        customdata_array_inner_corona = ["Inner Corona" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -503,7 +504,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(0, 0, 255)',  # Warmer tint
                     opacity=0.09
                 ),
-                name='Sun: Inner Corona',
+                name='Inner Corona',
                 text=text_array_inner_corona,            # Replicated text
                 customdata=customdata_array_inner_corona, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -522,7 +523,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.09
                 ),
-                name='Sun: Inner Corona',
+                name='Inner Corona Shell',
                 text=['Solar Inner Corona (extends to 2-3 solar radii)'],
                 hoverinfo='text',
                 showlegend=False
@@ -534,7 +535,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # Create a text list matching the number of points
         text_array_chromosphere = [chromosphere_info for _ in range(len(x))]
-        customdata_array_chromosphere = ["Sun: Chromosphere" for _ in range(len(x))]
+        customdata_array_chromosphere = ["Chromosphere" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -545,7 +546,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(30, 144, 255)',  # approximate visible
                     opacity=0.10
                 ),
-                name='Sun: Chromosphere',
+                name='Chromosphere',
                 text=text_array_chromosphere,            # Replicated text
                 customdata=customdata_array_chromosphere, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -564,7 +565,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=0.10
                 ),
-                name='Sun: Chromosphere',
+                name='Chromosphere Shell',
                 text=['Solar Chromosphere (surface temperature ~6,000 to 20,000 K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -576,7 +577,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # Create a text list matching the number of points
         text_array_photosphere = [photosphere_info for _ in range(len(x))]
-        customdata_array_photosphere = ["Sun: Photosphere" for _ in range(len(x))]
+        customdata_array_photosphere = ["Photosphere" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -587,7 +588,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(255, 244, 214)',  # Yellow approximates the visible color
                     opacity=1.0
                 ),
-                name='Sun: Photosphere',
+                name='Convective Zone and Photosphere',
                 text=text_array_photosphere,            # Replicated text
                 customdata=customdata_array_photosphere, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -606,7 +607,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Sun: Photosphere',
+                name='Photosphere',
                 text=['Solar Photosphere (surface temperature ~6,000K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -618,7 +619,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # Create a text list matching the number of points
         text_array_radiative_zone = [radiative_zone_info for _ in range(len(x))]
-        customdata_array_radiative_zone = ["Sun: Radiative Zone" for _ in range(len(x))]
+        customdata_array_radiative_zone = ["Radiative Zone" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -629,7 +630,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(30, 144, 255)',  # arbitrary color for contrast
                     opacity=1.0
                 ),
-                name='Sun: Radiative Zone',
+                name='Radiative Zone',
                 text=text_array_radiative_zone,            # Replicated text
                 customdata=customdata_array_radiative_zone, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -648,7 +649,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Sun: Radiative Zone',
+                name='Radiative Zone Shell',
                 text=['Solar Radiative Zone (extends to 0.2 to 0.7 solar radii)'],
                 hoverinfo='text',
                 showlegend=False
@@ -660,7 +661,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
 
         # Create a text list matching the number of points
         text_array_core = [core_info for _ in range(len(x))]
-        customdata_array_core = ["Sun: Core" for _ in range(len(x))]
+        customdata_array_core = ["Core" for _ in range(len(x))]
 
         traces.append(
             go.Scatter3d(
@@ -671,7 +672,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     color='rgb(70, 130, 180)',  
                     opacity=1.0
                 ),
-                name='Sun: Core',
+                name='Core',
                 text=text_array_core,            # Replicated text
                 customdata=customdata_array_core, # Replicated customdata
                 hovertemplate='%{text}<extra></extra>',
@@ -690,7 +691,7 @@ def create_sun_visualization(fig, animate=False, frames=None):
                     symbol='circle',
                     opacity=1.0
                 ),
-                name='Sun: Core',
+                name='Core Shell',
                 text=['Solar Core (temperature ~15M K)'],
                 hoverinfo='text',
                 showlegend=False
@@ -723,17 +724,17 @@ def create_sun_hover_text():
     """
     return {
         'photosphere': (
-            'Sun: Photosphere<br>'
+            'Solar Photosphere<br>'
             'Temperature: ~6,000K<br>'
             'Radius: 0.00465 AU'
         ),
         'inner_corona': (
-            'Sun: Inner Corona<br>'
+            'Inner Corona<br>'
             'Temperature: >2,000,000K<br>'
             'Extends to: 2-3 solar radii (~0.014 AU)'
         ),
         'outer_corona': (
-            'Sun: Outer Corona<br>'
+            'Outer Corona<br>'
             'Temperature: ~1,000,000K<br>'
             'Extends to: ~50 solar radii (~0.2 AU)'
         )
@@ -1144,12 +1145,12 @@ def plot_objects():
                 parent_planet_name = {
                     '399': 'Earth',
                     '499': 'Mars',
-                    '599': 'Jupiter',       # 599 or 5
+                    '599': 'Jupiter',
                     '699': 'Saturn',
                     '799': 'Uranus',
                     '899': 'Neptune',
                     '999': 'Pluto',
-                    '20136199': 'Eris'        
+                    '136199': 'Eris'
                 }.get(parent_planet_id)
 
                 # Only plot satellite trajectory if its parent is the center
@@ -2496,7 +2497,7 @@ auto_scale_radio.pack(anchor='w')
 CreateToolTip(auto_scale_radio, "Automatically adjust scale based on selected objects")
 
 manual_scale_radio = tk.Radiobutton(scale_frame, text="Or Manually Enter Scale of Your Plot in AU. Examples:\n" 
-"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s furthest orbit (aphelion): 936; Inner Oort Cloud: 2000 to 20000;\n" 
+"Solar Wind Termination Shock: 94; Solar Wind Heliopause: 123;\n Sedna\'s furthest orbit (aphelion): 936; Inner Limit of Oort Cloud: 2000;\n" 
 "Outer Oort Cloud Limit: 100000; The Sun's gravitational influence: 126000;\n Proxima Centauri: 268585; Alpha Centauri: 276643", 
 variable=scale_var, value='Manual')
 manual_scale_radio.pack(anchor='w')
@@ -3054,7 +3055,7 @@ objects = [
 
     {
     'name': 'Io', 
-    'id': '10260',        # 501
+    'id': '501', 
     'var': io_var, 
     'color': color_map('Io'), 
     'symbol': 'circle', 
