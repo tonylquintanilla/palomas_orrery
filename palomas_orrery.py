@@ -22,6 +22,7 @@ import subprocess
 import sys
 import math
 import json
+import orbit_data_manager
 from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points 
 from formatting_utils import format_maybe_float, format_km_float
 from planet_visualization import (
@@ -62,6 +63,7 @@ from planet_visualization import (
     mars_crust_info,
     mars_atmosphere_info,
     mars_upper_atmosphere_info,
+    mars_magnetosphere_info,
     mars_hill_sphere_info,
 
     jupiter_core_info,
@@ -87,7 +89,7 @@ from planet_visualization import (
     saturn_hill_sphere_info,
 
     uranus_core_info,
-    uranus_mantel_info,
+    uranus_mantle_info,
     uranus_cloud_layer_info,
     uranus_upper_atmosphere_info,
     uranus_ring_system_info,
@@ -96,7 +98,7 @@ from planet_visualization import (
     uranus_hill_sphere_info, 
 
     neptune_core_info,
-    neptune_mantel_info,
+    neptune_mantle_info,
     neptune_cloud_layer_info,
     neptune_upper_atmosphere_info,
     neptune_ring_system_info,
@@ -105,14 +107,14 @@ from planet_visualization import (
     neptune_hill_sphere_info,
 
     pluto_core_info,
-    pluto_mantel_info,
+    pluto_mantle_info,
     pluto_crust_info,
     pluto_haze_layer_info,
     pluto_atmosphere_info,
     pluto_hill_sphere_info,
 
     eris_core_info,
-    eris_mantel_info,
+    eris_mantle_info,
     eris_crust_info,
     eris_atmosphere_info,
     eris_hill_sphere_info, 
@@ -168,14 +170,14 @@ print("Interpreter:", sys.executable)
 print("Working directory:", os.getcwd())
 
 # File to persist orbit path data between sessions
-ORBIT_PATHS_FILE = "orbit_paths.json"
+# ORBIT_PATHS_FILE = "orbit_paths.json"
 
 # Create a global shutdown handler instance
 shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: May 12, 2025")
+root.title("Paloma's Orrery -- Updated: May 6, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -250,224 +252,16 @@ controls_canvas.bind("<Leave>", _unbound_mousewheel)
 # Set the canvas size to match available space
 controls_canvas.config(width=580, height=710)  # Adjust these values as needed
 
-# Near the top of your code, after the root is initialized:
+orbit_paths_over_time = None  # Will be set by orbit_data_manager
+
+# After creating the status_display widget, initialize the orbit_data_manager
 status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg='SystemButtonFace', fg='black')
-# Don't pack it here
+orbit_paths_over_time = orbit_data_manager.initialize(status_display)
 
 # OR alternatively, update the original status_label's text and have the display just show it:
-def update_status(text):
-    status_display.config(text=text)
-    status_display.config(text=text)
-
-def load_orbit_paths():
-    """Load orbit paths from file with backwards compatibility."""
-    try:
-        with open(ORBIT_PATHS_FILE, "r") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
-
-def save_orbit_paths(orbit_paths):
-    with open(ORBIT_PATHS_FILE, "w") as f:
-        json.dump(orbit_paths, f)
-
-# Load the stored orbit paths at startup
-orbit_paths_over_time = load_orbit_paths()
-
-class ScrollableFrame(tk.Frame):
-    """
-    A scrollable frame that can contain multiple widgets with a vertical scrollbar.
-    """
-    def __init__(self, container, *args, **kwargs):
-        super().__init__(container, *args, **kwargs)
-
-        # Canvas and Scrollbar
-        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
-        self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
-        self.canvas.configure(yscrollcommand=self.scrollbar.set) 
-
-        # Layout
-        self.canvas.pack(side="left", fill="both", expand=True)
-        self.scrollbar.pack(side="right", fill="y")
-
-        # Scrollable Frame
-        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
-        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
-
-        # Bind mousewheel to the canvas
-        self.canvas.bind("<Enter>", self._on_enter)
-        self.canvas.bind("<Leave>", self._on_leave)
-
-        # Update scroll region when the canvas size changes
-        self.canvas.bind(
-            "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-        )
-
-    def _on_mousewheel(self, event):
-        if event.delta:
-            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        elif event.num == 4:
-            self.canvas.yview_scroll(-1, "units")
-        elif event.num == 5:
-            self.canvas.yview_scroll(1, "units")
-
-    def _on_enter(self, event):
-        # Bind the mousewheel events
-        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
-        self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux
-        self.canvas.bind_all("<Button-5>", self._on_mousewheel)  # Linux
-
-    def _on_leave(self, event):
-        # Unbind mousewheel events
-        self.canvas.unbind_all("<MouseWheel>")
-        self.canvas.unbind_all("<Button-4>")
-        self.canvas.unbind_all("<Button-5>")   
-
-    def _on_enter(self, event):
-        # Bind the mouse wheel events when the cursor enters a widget
-        event.widget.bind_all("<MouseWheel>", self._on_mousewheel)
-        event.widget.bind_all("<Button-4>", self._on_mousewheel)
-        event.widget.bind_all("<Button-5>", self._on_mousewheel)
-
-    def _on_leave(self, event):
-        # Unbind the mouse wheel events when the cursor leaves a widget
-        event.widget.unbind_all("<MouseWheel>")
-        event.widget.unbind_all("<Button-4>")
-        event.widget.unbind_all("<Button-5>")
-
-input_frame = tk.Frame(root)
-input_frame.grid(row=0, column=0, padx=(10, 5), pady=(10, 10), sticky='n')
-
-# Configure grid weights within input_frame for proper spacing
-input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
-input_frame.grid_rowconfigure(1, weight=1)  # Row for __frame
-for col in range(0, 9):
-    input_frame.grid_columnconfigure(col, weight=1)  # Allow columns to expand if needed
-
-# Scrollable frame for celestial objects and missions
-scrollable_frame = ScrollableFrame(input_frame, width=430, height=710)  # Adjust width and height as needed
-scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
-
-# Prevent the ScrollableFrame from resizing based on its content
-scrollable_frame.config(width=430, height=710)
-scrollable_frame.pack_propagate(False)  # Disable automatic resizing
-
-# Optionally, set the inner frame size slightly smaller
-scrollable_frame.scrollable_frame.config(width=410, height=690)
-scrollable_frame.scrollable_frame.pack_propagate(False)
-
-# Scrollable frame for celestial objects and missions
-scrollable_frame = ScrollableFrame(input_frame)
-scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
-
-# Custom Tooltip Class
-
-class CreateToolTip(object):
-    """
-    Create a tooltip for a given widget with intelligent positioning to prevent clipping.
-    """
-
-    def __init__(self, widget, text='widget info'):
-        self.waittime = 500     # milliseconds
-        self.wraplength = 1000   # Reduced wraplength
-        self.widget = widget
-        self.text = text
-        self.widget.bind("<Enter>", self.enter)
-        self.widget.bind("<Leave>", self.leave)
-        self.id = None
-        self.tw = None
-
-    def enter(self, event=None):
-        self.schedule()
-
-    def leave(self, event=None):
-        self.unschedule()
-        self.hidetip()
-
-    def schedule(self):
-        self.unschedule()
-        self.id = self.widget.after(self.waittime, self.showtip)
-
-    def unschedule(self):
-        id_ = self.id
-        self.id = None
-        if id_:
-            self.widget.after_cancel(id_)
-
-    def showtip(self, event=None):
-        try:
-            # Get screen dimensions and taskbar height (estimated)
-            screen_width = self.widget.winfo_screenwidth()
-            screen_height = self.widget.winfo_screenheight()
-            taskbar_height = 40  # Estimated Windows taskbar height
-
-            # Create the tooltip window
-            self.tw = tk.Toplevel(self.widget)
-            self.tw.wm_overrideredirect(True)
-            
-            # Calculate usable screen height
-            usable_height = screen_height - taskbar_height
-
-            # Create the tooltip label
-            label = tk.Label(
-                self.tw,
-                text=self.text,
-                justify='left',
-                background='yellow',
-                relief='solid',
-                borderwidth=1,
-                wraplength=min(self.wraplength, screen_width - 100),
-                font=("Arial", 10, "normal")
-            )
-            label.pack(ipadx=1, ipady=1)
-
-            # Update the window to calculate its size
-            self.tw.update_idletasks()
-            tooltip_width = self.tw.winfo_width()
-            tooltip_height = self.tw.winfo_height()
-
-            # Initial x position - try positioning to the right of the widget first
-            x = self.widget.winfo_rootx() + self.widget.winfo_width() + 5
-
-            # If tooltip would extend beyond right edge, try positioning to the left of the widget
-            if x + tooltip_width > screen_width:
-                x = self.widget.winfo_rootx() - tooltip_width - 5
-
-            # If that would push it off the left edge, position at left screen edge with padding
-            if x < 0:
-                x = 5
-
-            # Calculate vertical position
-            y = self.widget.winfo_rooty()
-
-            # If tooltip is taller than available space, position at top of screen
-            if tooltip_height > usable_height:
-                y = 5  # Small padding from top
-            else:
-                # Center vertically relative to widget if space allows
-                widget_center = y + (self.widget.winfo_height() / 2)
-                y = widget_center - (tooltip_height / 2)
-                
-                # Ensure tooltip doesn't go below usable screen area
-                if y + tooltip_height > usable_height:
-                    y = usable_height - tooltip_height - 5
-
-                # Ensure tooltip doesn't go above top of screen
-                if y < 5:
-                    y = 5
-
-            # Position the tooltip
-            self.tw.wm_geometry(f"+{int(x)}+{int(y)}")
-
-        except Exception as e:
-            print(f"Error showing tooltip: {e}")
-            traceback.print_exc()
-
-    def hidetip(self):
-        if self.tw:
-            self.tw.destroy()
-        self.tw = None
+#def update_status(text):
+#    status_display.config(text=text)
+#    status_display.config(text=text)
 
 # Set inner planets selected by default
 sun_var = tk.IntVar(value=0)  
@@ -560,6 +354,8 @@ mars_crust_var = tk.IntVar(value=0)
 mars_atmosphere_var = tk.IntVar(value=0)
 # Mars upper atmosphere shell
 mars_upper_atmosphere_var = tk.IntVar(value=0)
+# Mars magnetosphere shell
+mars_magnetosphere_var = tk.IntVar(value=0)
 # Mars hill sphere shell
 mars_hill_sphere_var = tk.IntVar(value=0)
 
@@ -645,8 +441,8 @@ portia_var = tk.IntVar(value=0)
 mab_var = tk.IntVar(value=0)
 # uranus core shell
 uranus_core_var = tk.IntVar(value=0)
-# uranus mantel shell
-uranus_mantel_var = tk.IntVar(value=0)
+# uranus mantle shell
+uranus_mantle_var = tk.IntVar(value=0)
 # uranus cloud layer shell
 uranus_cloud_layer_var = tk.IntVar(value=0)
 # uranus upper atmosphere shell
@@ -667,8 +463,8 @@ despina_var = tk.IntVar(value=0)
 galatea_var = tk.IntVar(value=0)
 # neptune core shell
 neptune_core_var = tk.IntVar(value=0)
-# neptune mantel shell
-neptune_mantel_var = tk.IntVar(value=0)
+# neptune mantle shell
+neptune_mantle_var = tk.IntVar(value=0)
 # neptune cloud layer shell
 neptune_cloud_layer_var = tk.IntVar(value=0)
 # neptune upper atmosphere shell
@@ -691,8 +487,8 @@ kerberos_var = tk.IntVar(value=0)
 hydra_var = tk.IntVar(value=0)  
 # pluto core shell
 pluto_core_var = tk.IntVar(value=0)
-# pluto mantel shell
-pluto_mantel_var = tk.IntVar(value=0)
+# pluto mantle shell
+pluto_mantle_var = tk.IntVar(value=0)
 # pluto cloud layer shell
 pluto_crust_var = tk.IntVar(value=0)
 # pluto haze layer shell
@@ -718,8 +514,8 @@ eris2_var = tk.IntVar(value=0)      # for Eris-centered plots
 dysnomia_var = tk.IntVar(value=0)
 # eris core shell
 eris_core_var = tk.IntVar(value=0)
-# eris mantel shell
-eris_mantel_var = tk.IntVar(value=0)
+# eris mantle shell
+eris_mantle_var = tk.IntVar(value=0)
 # eris cloud layer shell
 eris_crust_var = tk.IntVar(value=0)
 # eris upper atmosphere shell
@@ -898,6 +694,7 @@ mars_shell_vars = {
     'mars_crust': mars_crust_var,
     'mars_atmosphere': mars_atmosphere_var,
     'mars_upper_atmosphere': mars_upper_atmosphere_var,
+    'mars_magnetosphere': mars_magnetosphere_var,
     'mars_hill_sphere': mars_hill_sphere_var
 }
 
@@ -929,7 +726,7 @@ saturn_shell_vars = {
 
 uranus_shell_vars = {
     'uranus_core': uranus_core_var,
-    'uranus_mantel': uranus_mantel_var,
+    'uranus_mantle': uranus_mantle_var,
     'uranus_cloud_layer': uranus_cloud_layer_var,
     'uranus_upper_atmosphere': uranus_upper_atmosphere_var,
     'uranus_ring_system': uranus_ring_system_var,
@@ -940,7 +737,7 @@ uranus_shell_vars = {
 
 neptune_shell_vars = {
     'neptune_core': neptune_core_var,
-    'neptune_mantel': neptune_mantel_var,
+    'neptune_mantle': neptune_mantle_var,
     'neptune_cloud_layer': neptune_cloud_layer_var,
     'neptune_upper_atmosphere': neptune_upper_atmosphere_var,
     'neptune_ring_system': neptune_ring_system_var,
@@ -951,7 +748,7 @@ neptune_shell_vars = {
 
 pluto_shell_vars = {
     'pluto_core': pluto_core_var,
-    'pluto_mantel': pluto_mantel_var,
+    'pluto_mantle': pluto_mantle_var,
     'pluto_crust': pluto_crust_var,
     'pluto_haze_layer': pluto_haze_layer_var,
     'pluto_atmosphere': pluto_atmosphere_var,
@@ -960,7 +757,7 @@ pluto_shell_vars = {
 
 eris_shell_vars = {
     'eris_core': eris_core_var,
-    'eris_mantel': eris_mantel_var,
+    'eris_mantle': eris_mantle_var,
     'eris_crust': eris_crust_var,
     'eris_atmosphere': eris_atmosphere_var,
     'eris_hill_sphere': eris_hill_sphere_var
@@ -1574,6 +1371,282 @@ objects = [
 
 ]
 
+refresh_choice = messagebox.askyesnocancel(
+    "Orbit Data Options",
+    "Would you like to update orbit data?\n\n"
+    "Yes - Only fetch new data\n"
+    "No - Use existing data without updates\n"
+    "Cancel - Completely refresh all data (takes several minutes)",
+    icon=messagebox.QUESTION
+)
+
+if refresh_choice is True:  # Yes - incremental update
+    # Call the incremental update with all necessary parameters
+    updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
+        object_list=objects,
+        center_object_name='Sun',
+        days_ahead=730,
+        planetary_params=planetary_params,
+        parent_planets=parent_planets,
+        root_widget=root
+    )
+    
+    status_display.config(
+        text=f"Updated {updated} orbit paths, {current} already current. "
+        f"Total objects: {total}. Saved ~{time_saved:.1f} hours of processing time."
+    )
+elif refresh_choice is False:  # No - use existing data
+    status_display.config(text="Using existing orbit data without updates.")
+else:  # Cancel - full refresh
+    # This is the legacy full refresh path
+    refresh_all = True
+    status_display.config(text="Full refresh selected. Fetching all orbit paths...")
+    
+    # Get center object info
+    center_object_info = next((obj for obj in objects if obj['name'] == 'Sun'), None)
+    center_id = 'Sun'
+    center_id_type = None
+    
+    # Count objects to update
+    objects_to_update = [obj for obj in objects if 'id' in obj and obj['name'] != 'Sun']
+    total_objects = len(objects_to_update)
+    updated_count = 0
+    
+    # For each object, fetch a complete new orbit path
+    for obj in objects_to_update:
+        orbit_key = f"{obj['name']}_Sun"
+        interval = orbit_data_manager.determine_interval_for_object(
+            obj, planetary_params, parent_planets
+        )
+        
+        status_display.config(text=f"Fetching data for {obj['name']} ({updated_count+1}/{total_objects})")
+        root.update()
+        
+        now = datetime.today()
+        end_date = now + timedelta(days=730)
+        
+        orbit_data_manager.fetch_complete_orbit_path(
+            obj, orbit_key, now, end_date, interval, center_id, center_id_type
+        )
+        updated_count += 1
+    
+    # Save the updated data
+    orbit_data_manager.save_orbit_paths()
+    
+    status_display.config(text=f"Completely refreshed {updated_count}/{total_objects} orbit paths.")
+
+"""
+def load_orbit_paths():
+    # Load orbit paths from file with backwards compatibility.
+    try:
+        with open(ORBIT_PATHS_FILE, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def save_orbit_paths(orbit_paths):
+    with open(ORBIT_PATHS_FILE, "w") as f:
+        json.dump(orbit_paths, f)
+
+# Load the stored orbit paths at startup
+orbit_paths_over_time = load_orbit_paths()
+"""
+
+class ScrollableFrame(tk.Frame):
+    """
+    A scrollable frame that can contain multiple widgets with a vertical scrollbar.
+    """
+    def __init__(self, container, *args, **kwargs):
+        super().__init__(container, *args, **kwargs)
+
+        # Canvas and Scrollbar
+        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
+        self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=self.scrollbar.set) 
+
+        # Layout
+        self.canvas.pack(side="left", fill="both", expand=True)
+        self.scrollbar.pack(side="right", fill="y")
+
+        # Scrollable Frame
+        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
+        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+
+        # Bind mousewheel to the canvas
+        self.canvas.bind("<Enter>", self._on_enter)
+        self.canvas.bind("<Leave>", self._on_leave)
+
+        # Update scroll region when the canvas size changes
+        self.canvas.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        )
+
+    def _on_mousewheel(self, event):
+        if event.delta:
+            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+        elif event.num == 4:
+            self.canvas.yview_scroll(-1, "units")
+        elif event.num == 5:
+            self.canvas.yview_scroll(1, "units")
+
+    def _on_enter(self, event):
+        # Bind the mousewheel events
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux
+        self.canvas.bind_all("<Button-5>", self._on_mousewheel)  # Linux
+
+    def _on_leave(self, event):
+        # Unbind mousewheel events
+        self.canvas.unbind_all("<MouseWheel>")
+        self.canvas.unbind_all("<Button-4>")
+        self.canvas.unbind_all("<Button-5>")   
+
+    def _on_enter(self, event):
+        # Bind the mouse wheel events when the cursor enters a widget
+        event.widget.bind_all("<MouseWheel>", self._on_mousewheel)
+        event.widget.bind_all("<Button-4>", self._on_mousewheel)
+        event.widget.bind_all("<Button-5>", self._on_mousewheel)
+
+    def _on_leave(self, event):
+        # Unbind the mouse wheel events when the cursor leaves a widget
+        event.widget.unbind_all("<MouseWheel>")
+        event.widget.unbind_all("<Button-4>")
+        event.widget.unbind_all("<Button-5>")
+
+input_frame = tk.Frame(root)
+input_frame.grid(row=0, column=0, padx=(10, 5), pady=(10, 10), sticky='n')
+
+# Configure grid weights within input_frame for proper spacing
+input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
+input_frame.grid_rowconfigure(1, weight=1)  # Row for __frame
+for col in range(0, 9):
+    input_frame.grid_columnconfigure(col, weight=1)  # Allow columns to expand if needed
+
+# Scrollable frame for celestial objects and missions
+scrollable_frame = ScrollableFrame(input_frame, width=430, height=710)  # Adjust width and height as needed
+scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
+
+# Prevent the ScrollableFrame from resizing based on its content
+scrollable_frame.config(width=430, height=710)
+scrollable_frame.pack_propagate(False)  # Disable automatic resizing
+
+# Optionally, set the inner frame size slightly smaller
+scrollable_frame.scrollable_frame.config(width=410, height=690)
+scrollable_frame.scrollable_frame.pack_propagate(False)
+
+# Scrollable frame for celestial objects and missions
+scrollable_frame = ScrollableFrame(input_frame)
+scrollable_frame.grid(row=1, column=0, columnspan=9, pady=(10, 5), sticky='nsew')
+
+# Custom Tooltip Class
+
+class CreateToolTip(object):
+    """
+    Create a tooltip for a given widget with intelligent positioning to prevent clipping.
+    """
+
+    def __init__(self, widget, text='widget info'):
+        self.waittime = 500     # milliseconds
+        self.wraplength = 1000   # Reduced wraplength
+        self.widget = widget
+        self.text = text
+        self.widget.bind("<Enter>", self.enter)
+        self.widget.bind("<Leave>", self.leave)
+        self.id = None
+        self.tw = None
+
+    def enter(self, event=None):
+        self.schedule()
+
+    def leave(self, event=None):
+        self.unschedule()
+        self.hidetip()
+
+    def schedule(self):
+        self.unschedule()
+        self.id = self.widget.after(self.waittime, self.showtip)
+
+    def unschedule(self):
+        id_ = self.id
+        self.id = None
+        if id_:
+            self.widget.after_cancel(id_)
+
+    def showtip(self, event=None):
+        try:
+            # Get screen dimensions and taskbar height (estimated)
+            screen_width = self.widget.winfo_screenwidth()
+            screen_height = self.widget.winfo_screenheight()
+            taskbar_height = 40  # Estimated Windows taskbar height
+
+            # Create the tooltip window
+            self.tw = tk.Toplevel(self.widget)
+            self.tw.wm_overrideredirect(True)
+            
+            # Calculate usable screen height
+            usable_height = screen_height - taskbar_height
+
+            # Create the tooltip label
+            label = tk.Label(
+                self.tw,
+                text=self.text,
+                justify='left',
+                background='yellow',
+                relief='solid',
+                borderwidth=1,
+                wraplength=min(self.wraplength, screen_width - 100),
+                font=("Arial", 10, "normal")
+            )
+            label.pack(ipadx=1, ipady=1)
+
+            # Update the window to calculate its size
+            self.tw.update_idletasks()
+            tooltip_width = self.tw.winfo_width()
+            tooltip_height = self.tw.winfo_height()
+
+            # Initial x position - try positioning to the right of the widget first
+            x = self.widget.winfo_rootx() + self.widget.winfo_width() + 5
+
+            # If tooltip would extend beyond right edge, try positioning to the left of the widget
+            if x + tooltip_width > screen_width:
+                x = self.widget.winfo_rootx() - tooltip_width - 5
+
+            # If that would push it off the left edge, position at left screen edge with padding
+            if x < 0:
+                x = 5
+
+            # Calculate vertical position
+            y = self.widget.winfo_rooty()
+
+            # If tooltip is taller than available space, position at top of screen
+            if tooltip_height > usable_height:
+                y = 5  # Small padding from top
+            else:
+                # Center vertically relative to widget if space allows
+                widget_center = y + (self.widget.winfo_height() / 2)
+                y = widget_center - (tooltip_height / 2)
+                
+                # Ensure tooltip doesn't go below usable screen area
+                if y + tooltip_height > usable_height:
+                    y = usable_height - tooltip_height - 5
+
+                # Ensure tooltip doesn't go above top of screen
+                if y < 5:
+                    y = 5
+
+            # Position the tooltip
+            self.tw.wm_geometry(f"+{int(x)}+{int(y)}")
+
+        except Exception as e:
+            print(f"Error showing tooltip: {e}")
+            traceback.print_exc()
+
+    def hidetip(self):
+        if self.tw:
+            self.tw.destroy()
+        self.tw = None
+
 # Ask the user whether to refresh all stored orbit paths (warn about delay)
 refresh_all = messagebox.askyesno(
     "Refresh Orbit Data",
@@ -1739,25 +1812,26 @@ def update_orbit_paths(center_object_name='Sun'):
     
     status_display.config(text=f"Orbit paths updated for {updated_count}/{total_objects} objects relative to {center_object_name}.")
     # Save the updated orbit paths to the JSON file
-    save_orbit_paths(orbit_paths_over_time)
+    orbit_data_manager.save_orbit_paths(orbit_paths_over_time)
 
 # Load the stored orbit paths at startup
-orbit_paths_over_time = load_orbit_paths()
+orbit_paths_over_time = orbit_data_manager.load_orbit_paths()
 
 # Now that 'objects' is defined, update orbit paths with Sun as center (default)
 update_orbit_paths('Sun')
 # update_orbit_paths()
 
+"""
 def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
-    """
-    For each object in objects_to_plot, if orbit path data exists in orbit_paths_over_time,
-    add a Scatter3d trace (static background line) for its orbit.
     
-    Parameters:
-        fig: plotly figure object
-        objects_to_plot: list of objects to plot orbits for
-        center_object_name: name of the central body (default: 'Sun')
-    """
+#    For each object in objects_to_plot, if orbit path data exists in orbit_paths_over_time,
+#    add a Scatter3d trace (static background line) for its orbit.
+    
+#    Parameters:
+#        fig: plotly figure object
+#        objects_to_plot: list of objects to plot orbits for
+#        center_object_name: name of the central body (default: 'Sun')
+    
 
     # Extract just the names from the objects_to_plot list
     selected_names = [obj['name'] for obj in objects_to_plot]
@@ -1836,8 +1910,45 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
             )
         else:
             print(f"No orbit path found for {name} relative to {center_object_name}")
+            """
 
+def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
+    """Plot orbit paths using data from orbit_data_manager."""
+    # Get orbit data in plot-ready format
+    plot_data = orbit_data_manager.get_orbit_data_for_plotting(objects_to_plot, center_object_name)
+    
+    for name, path_data in plot_data.items():
+        # Skip objects that are the center
+        if name == center_object_name:
+            continue
+            
+        # Check if this is a satellite of the center object
+        is_satellite_of_center = center_object_name in parent_planets and name in parent_planets.get(center_object_name, [])
+        
+        # Create the hover text arrays
+        if is_satellite_of_center:
+            hover_text = [f"{name} Orbit around {center_object_name}"] * len(path_data['x'])
+            orbit_name = f"{name} Orbit around {center_object_name}"
+        else:
+            hover_text = [f"{name} Orbit"] * len(path_data['x'])
+            orbit_name = f"{name} Orbit"
 
+        print(f"Plotting orbit for {name} relative to {center_object_name} ({len(path_data['x'])} points)")
+      
+        fig.add_trace(
+            go.Scatter3d(
+                x=path_data['x'],
+                y=path_data['y'],
+                z=path_data['z'],
+                mode='lines',
+                line=dict(width=1, color=color_map(name)),
+                name=orbit_name,
+                text=hover_text,
+                customdata=hover_text,
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
 
 # Suppress ErfaWarning messages
 warnings.simplefilter('ignore', ErfaWarning)
@@ -2564,6 +2675,9 @@ def plot_objects():
     def worker():
         try:
 
+            # Add explicit reference to avoid issues with nested scopes
+            global orbit_paths_over_time
+
             # Reset the global today or use a local today variable
             today = datetime.today()
 
@@ -2624,11 +2738,32 @@ def plot_objects():
                 else:
                     center_id = center_object_info['id']
                     center_id_type = center_object_info.get('id_type')
-    #            center_id = 'Sun' if center_object_name == 'Sun' else center_object_info['id']
-    #            center_id_type = None if center_object_name == 'Sun' else center_object_info.get('id_type')
             else:
                 center_id = 'Sun'
                 center_id_type = None
+
+            # INCREMENTAL UPDATE: Before using orbit paths, ensure we have updated data
+            selected_objects = [obj for obj in objects if obj['var'].get() == 1]
+            output_label.config(text="Checking for orbit data updates...")
+            progress_bar.step(10)
+            root.update_idletasks()
+            
+            # Call the incremental update for selected objects only
+            updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
+                object_list=selected_objects,
+                center_object_name=center_object_name,
+                days_ahead=730,
+                planetary_params=planetary_params,
+                parent_planets=parent_planets,
+                root_widget=root
+            )
+            
+            if updated > 0:
+                output_label.config(text=f"Updated {updated} orbit paths. Continuing with plot...")
+            else:
+                output_label.config(text="Using existing orbit data. Continuing with plot...")
+            progress_bar.step(10)
+            root.update_idletasks()
 
             # Define planets with shell visualizations
             planets_with_shells = {
@@ -3321,6 +3456,9 @@ def pad_trajectory(global_dates, object_start_date, object_end_date, object_id, 
 def animate_objects(step, label):
     def animation_worker():
         try:
+            # Global references
+            global orbit_paths_over_time
+
             # Initialize frames list at the beginning
             frames = []
 
@@ -3389,6 +3527,33 @@ def animate_objects(step, label):
                 int(entry_minute.get())
                 )
             dates_list = []
+
+            # [Code to generate dates_list based on step type]
+            # This calculates days_ahead implicitly through the generation of dates_list
+            days_ahead = 0
+            if dates_list:
+                days_ahead = (dates_list[-1] - dates_list[0]).days
+
+            # INCREMENTAL UPDATE: Before animating, ensure we have updated data
+            selected_objects = [obj for obj in objects if obj['var'].get() == 1]
+            output_label.config(text="Checking for orbit data updates for animation...")
+            root.update_idletasks()
+            
+            # Call the incremental update for selected objects only
+            updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
+                object_list=selected_objects,
+                center_object_name=center_object_name,
+                days_ahead=max(days_ahead, 730),  # Ensure we have enough data for the animation
+                planetary_params=planetary_params,
+                parent_planets=parent_planets,
+                root_widget=root
+            )
+            
+            if updated > 0:
+                output_label.config(text=f"Updated {updated} orbit paths. Creating animation...")
+            else:
+                output_label.config(text="Using existing orbit data. Creating animation...")
+            root.update_idletasks()
 
             if step == 'month':
                 # For months, properly handle month lengths
@@ -4421,6 +4586,10 @@ CreateToolTip(mars_atmosphere_checkbutton, mars_atmosphere_info)
 mars_upper_atmosphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Upper Atmosphere", variable=mars_upper_atmosphere_var)
 mars_upper_atmosphere_checkbutton.pack(anchor='w')
 CreateToolTip(mars_upper_atmosphere_checkbutton, mars_upper_atmosphere_info)
+# mars magnetosphere shell
+mars_magnetosphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Magnetosphere", variable=mars_magnetosphere_var)
+mars_magnetosphere_checkbutton.pack(anchor='w')
+CreateToolTip(mars_magnetosphere_checkbutton, mars_magnetosphere_info)
 # mars hill sphere shell
 mars_hill_sphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Hill Sphere", variable=mars_hill_sphere_var)
 mars_hill_sphere_checkbutton.pack(anchor='w')
@@ -4581,9 +4750,9 @@ uranus_core_checkbutton.pack(anchor='w')
 CreateToolTip(uranus_core_checkbutton, uranus_core_info)
 
 # uranus metallic hydrogen shell
-uranus_mantel_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Mantel", variable=uranus_mantel_var)
-uranus_mantel_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_mantel_checkbutton, uranus_mantel_info)
+uranus_mantle_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- mantle", variable=uranus_mantle_var)
+uranus_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(uranus_mantle_checkbutton, uranus_mantle_info)
 
 # uranus cloud layer shell
 uranus_cloud_layer_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Cloud Layer", variable=uranus_cloud_layer_var)
@@ -4635,9 +4804,9 @@ neptune_core_checkbutton.pack(anchor='w')
 CreateToolTip(neptune_core_checkbutton, neptune_core_info)
 
 # neptune metallic hydrogen shell
-neptune_mantel_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Mantel", variable=neptune_mantel_var)
-neptune_mantel_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_mantel_checkbutton, neptune_mantel_info)
+neptune_mantle_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- mantle", variable=neptune_mantle_var)
+neptune_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(neptune_mantle_checkbutton, neptune_mantle_info)
 
 # neptune cloud layer shell
 neptune_cloud_layer_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Cloud Layer", variable=neptune_cloud_layer_var)
@@ -4683,9 +4852,9 @@ pluto_core_checkbutton.pack(anchor='w')
 CreateToolTip(pluto_core_checkbutton, pluto_core_info)
 
 # pluto mantle shell
-pluto_mantel_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Mantel", variable=pluto_mantel_var)
-pluto_mantel_checkbutton.pack(anchor='w')
-CreateToolTip(pluto_mantel_checkbutton, pluto_mantel_info)
+pluto_mantle_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- mantle", variable=pluto_mantle_var)
+pluto_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(pluto_mantle_checkbutton, pluto_mantle_info)
 
 # pluto crust shell
 pluto_crust_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Crust", variable=pluto_crust_var)
@@ -4735,9 +4904,9 @@ eris_core_checkbutton.pack(anchor='w')
 CreateToolTip(eris_core_checkbutton, eris_core_info)
 
 # eris mantle shell
-eris_mantel_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Mantel", variable=eris_mantel_var)
-eris_mantel_checkbutton.pack(anchor='w')
-CreateToolTip(eris_mantel_checkbutton, eris_mantel_info)
+eris_mantle_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- mantle", variable=eris_mantle_var)
+eris_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(eris_mantle_checkbutton, eris_mantle_info)
 
 # eris crust shell
 eris_crust_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Crust", variable=eris_crust_var)
@@ -4911,9 +5080,10 @@ center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, value
 center_menu.pack(anchor='w')
 CreateToolTip(center_menu, "Select the object to center the plot on. DO NOT select the same object from the Select Objects check list.")
 
+"""
 # Define function to update orbit paths when the center object changes
 def on_center_change(*args):
-    """Update orbit paths when the center object is changed."""
+# Update orbit paths when the center object is changed.
     center_object = center_object_var.get()
     if center_object != 'Sun':
         # Only fetch non-Sun centered paths when needed to avoid excessive startup time
@@ -4921,6 +5091,29 @@ def on_center_change(*args):
         root.update()  # Force GUI to refresh
         update_orbit_paths(center_object)
         status_display.config(text=f"Orbit paths updated for center: {center_object}")
+        """
+
+def on_center_change(*args):
+    """Update orbit paths when the center object is changed."""
+    center_object = center_object_var.get()
+    if center_object != 'Sun':
+        # Only fetch non-Sun centered paths when needed to avoid excessive startup time
+        status_display.config(text=f"Updating orbit paths for center: {center_object}...")
+        root.update()  # Force GUI to refresh
+        
+        # Call the incremental update with the new center
+        updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
+            object_list=objects,
+            center_object_name=center_object,
+            days_ahead=730,
+            planetary_params=planetary_params,
+            parent_planets=parent_planets,
+            root_widget=root
+        )
+        
+        status_display.config(
+            text=f"Updated {updated} orbit paths, {current} already current for center: {center_object}"
+        )
 
 # Bind the center_object_var to the on_center_change function
 center_object_var.trace_add("write", on_center_change)

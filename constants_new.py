@@ -35,6 +35,30 @@ CENTER_BODY_RADII = {       # km
     'Planet 9': 24000   # comes from models that assume Planet Nine has a mass around 5-10 Earth masses and an internal composition similar to Uranus and Neptune.
 }
 
+"""
+parent_planets = {
+    'Earth': ['Moon'],
+    'Mars': ['Phobos', 'Deimos'],
+    'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
+    'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe', 'Pan', 'Daphnis', 'Prometheus',
+               'Pandora', 'Hyperion'],
+    'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon', 'Portia', 'Mab'],
+    'Neptune': ['Triton', 'Despina', 'Galatea'],
+    'Pluto': ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],
+    'Eris/Dysnomia': ['Dysnomia']
+}
+
+planet_tilts = {        # degrees
+    'Earth': 0,         # 23.44 tilt not needed,  the moon is already defined in the ecliptic frame; using tilt does not align
+    'Mars': 25.19,     # 25.19 tilt; neither the positive nor the negative tilt align
+    'Jupiter': 3.13,    # tilt aligns well
+    'Saturn': -26.73,   # 26.73 tilt; the positive tilt does not align; the negative is much better
+    'Uranus': 97.77,   # 97.77 tilt; does not align either positive or negative
+    'Neptune': 28.32,   # 28.32; does not align well, but the negative tilt is worse
+    'Pluto': -122.53    # 122.53; does not align well, the negative is better
+}
+"""
+
 # Dictionary of known orbital periods for validation
 KNOWN_ORBITAL_PERIODS = {
     # Planets (in Earth years)
@@ -649,7 +673,7 @@ INFO = {
         'Itokawa': 'Asteroid visited by the original Hayabusa mission.',
 
         'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.\n'
-        '* Jupiter-centered: do not select Jupiter; visualize shells at 0.3 AU.\n'
+        '* Jupiter-centered: do not select Jupiter; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Jupiter with or without shells.\n'
         '* Missions: Pioneer 10 and 11; Voyager 1 and 2; Ulysses; Cassini-Huygens; New Horizons; Galileo;\n' 
         '  Juno; JUpiter ICy moons Explorer (JUICE);Europa Clipper.\n\n'
@@ -665,7 +689,7 @@ INFO = {
         'Callisto': 'Jupiter moon. Heavily cratered and geologically inactive.',
 
         'Saturn': 'Known for its beautiful ring system, the sixth planet from the Sun.'
-        '* Saturn-centered: do not select Saturn; visualize shells at 0.3 AU.\n'
+        '* Saturn-centered: do not select Saturn; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Saturn with or without shells.\n'
         '* Missions: Pioneer 11; Voyager 1 and 2; Cassini-Huygens; Dragonfly (2028).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
@@ -699,7 +723,7 @@ INFO = {
         'Phoebe': 'Saturn moon. An irregular moon with a retrograde orbit around Saturn.',
 
         'Uranus': 'The ice giant with a unique tilt, orbits the Sun on its side.'
-        '* Uranus-centered: do not select Uranus; visualize shells at 0.3 AU.\n'
+        '* Uranus-centered: do not select Uranus; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Uranus with or without shells.\n'
         '* Missions: Voyager 2; Uranus Orbiter and Probe (planned).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
@@ -712,8 +736,8 @@ INFO = {
         'Portia': 'Uranus moon, associated with outer ring Nu.',
         'Mab': 'Uranus moon, associated with outer ring Mu.',
 
-        'Neptune': 'The eighth and farthest known planet in the solar system.'
-        '* Neptune-centered: do not select Neptune; visualize shells at 0.3 AU.\n'
+        'Neptune': 'The eighth and farthest known planet in the solar system.\n'
+        '* Neptune-centered: do not select Neptune; visualize shells at 1 AU.\n'
         '* Heliocentric: select Neptune with or without shells.\n'
         '* Missions: Voyager 2; Neptune Orbiter and Probe (possible).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
@@ -722,8 +746,8 @@ INFO = {
         'Despina': 'Irregularly shaped, likely icy and grayish, orbiting close to the planet and possibly contributing to its ring system',
         'Galatea': 'Irregularly shaped, with an expected icy and grayish appearance, thought to shepherd the Adams ring arc.',
 
-        'Pluto': 'Once considered the ninth planet, now classified as a dwarf planet.'
-        '* Pluto-centered: do not select Pluto; visualize shells at 0.3 AU.\n'
+        'Pluto': 'Once considered the ninth planet, now classified as a dwarf planet.\n'
+        '* Pluto-centered: do not select Pluto; visualize shells at 0.1 AU.\n'
         '* Heliocentric: select Pluto with or without shells.\n'
         '* Missions: New Horizons; Pluto Orbiter and Probe (possible).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
@@ -736,7 +760,7 @@ INFO = {
         'Haumea': 'A dwarf planet known for its elongated shape and fast rotation.',
         'Makemake': 'A dwarf planet located in the Kuiper Belt, discovered in 2005.',
 
-        'Eris': 'A distant dwarf planet, more massive than Pluto.'
+        'Eris': 'A distant dwarf planet, more massive than Pluto.\n'
         '* Eris/Dysnomia-centered: do not select Pluto; visualize shells at 0.1 AU.\n'
         '* Heliocentric: select Eris with or without shells.\n'
         '* Missions: Proposed.\n\n'
@@ -776,7 +800,7 @@ INFO = {
         'The exact position, orbit, and even existence of Planet 9 remain subject to confirmation. ' 
         'The position shown is calculated to be consistent with the orbit derived from observed data points, ' 
         'though only two observations (separated by 23 years) have been made so far.\n\n' 
-        '* Planet 9-centered: do not select Planet 9; visualize shells at 0.3 AU.\n'
+        '* Planet 9-centered: do not select Planet 9; visualize shells at 8 AU.\n'
         '* Heliocentric: select Planet 9 with or without shells at 800 AU.\n'
         '* Missions: None.\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.'
