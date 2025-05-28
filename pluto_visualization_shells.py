@@ -1,7 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (PLUTO_RADIUS_AU, create_sphere_points, create_sun_direction_indicator)
+from planet_visualization_utilities import (PLUTO_RADIUS_AU, create_sphere_points)
+from shared_utilities import create_sun_direction_indicator
 
 # Pluto Shell Creation Functions
 
@@ -384,7 +385,7 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
             showlegend=True
         )
     ]
-    
+        
     return traces
 
 pluto_atmosphere_info = (
@@ -460,15 +461,17 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace) 
 
     return traces
 
 pluto_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.\n" 
+            "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
 
             "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n" 
@@ -484,7 +487,7 @@ def create_pluto_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_info = {
         'radius_fraction': 4685, 
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
-        'opacity': 0.3,
+        'opacity': 0.25,
         'name': 'Hill Sphere',
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
@@ -525,9 +528,11 @@ def create_pluto_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace) 
 
     return traces

@@ -2,8 +2,9 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (URANUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, 
-                                            rotate_points, create_sun_direction_indicator)
+                                            rotate_points)
 from saturn_visualization_shells import create_ring_points_saturn
+from shared_utilities import create_sun_direction_indicator
 
 # Uranus Shell Creation Functions
 
@@ -375,15 +376,17 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
 
 uranus_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.02 AU TO VISUALIZE.\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
             "1.4 MB PER FRAME FOR HTML.\n\n"
 
             "Magnetic Field (Magnetosphere): Uranus possesses a unique and peculiar magnetic field. Unlike most planets, its \n" 
@@ -473,8 +476,10 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=300 * URANUS_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -651,8 +656,10 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius= 6.0 * URANUS_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -1021,15 +1028,17 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=102000 / KM_PER_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
 
 uranus_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.\n" 
+            "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
 
             "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity \n" 
@@ -1045,10 +1054,10 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_info = {
         'radius_fraction': 2770, 
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
-        'opacity': 0.3,
+        'opacity': 0.25,
         'name': 'Hill Sphere',
         'description': (
-            "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
+            "SET MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.<br><br>"
     "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity <br>" 
     "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10⁷ km, which corresponds to about <br>" 
     "2 770 Uranus radii (mean radius ≈25 360 km). This means that any moon or other object orbiting Uranus within this <br>" 
@@ -1091,8 +1100,11 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    # Add sun direction indicator scaled to this shell's radius
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 

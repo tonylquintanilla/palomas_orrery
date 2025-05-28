@@ -1,8 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, create_sun_direction_indicator)
-
+from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape)
+from shared_utilities import create_sun_direction_indicator
 
 # Earth Shell Creation Functions
 
@@ -491,10 +491,12 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace) 
 
     return traces
 
@@ -706,8 +708,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=100 * EARTH_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -756,7 +760,7 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
             marker=dict(
                 size=1.0,
                 color='rgb(0, 255, 0)',  # Green for Hill sphere
-                opacity=0.15
+                opacity=0.25
             ),
             name='Earth: Hill Sphere',
             text=[hover_text] * len(x),
@@ -766,10 +770,12 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=radius_au
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace) 
 
     return traces
 

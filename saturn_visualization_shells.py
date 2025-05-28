@@ -1,8 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (SATURN_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, 
-                                            rotate_points, create_sun_direction_indicator)
+from planet_visualization_utilities import (SATURN_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, rotate_points)
+from shared_utilities import create_sun_direction_indicator
 
 def create_ring_points_saturn (inner_radius, outer_radius, n_points, thickness=0):
     """
@@ -543,8 +543,10 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -589,7 +591,7 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0)):
             marker=dict(
                 size=2.0,
                 color='rgb(200, 200, 255)', # Light blue for magnetic field
-                opacity=0.3
+                opacity=0.25
             ),
             name='Saturn: Magnetosphere',
             text=["Saturn has a large magnetosphere, the region of space dominated by its magnetic field. Saturn's magnetic field is <br>" 
@@ -603,8 +605,10 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=500 * SATURN_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -705,8 +709,10 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=enceladus_torus_distance
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -836,15 +842,17 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius= 9.0 * SATURN_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
     
 saturn_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.\n" 
+            "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
 
             "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of \n" 
@@ -905,8 +913,11 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    # Add sun direction indicator scaled to this shell's radius
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -1112,8 +1123,10 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=480000 / KM_PER_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 

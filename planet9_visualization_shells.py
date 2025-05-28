@@ -1,7 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (PLANET9_RADIUS_AU, create_sphere_points, create_sun_direction_indicator)
+from planet_visualization_utilities import (PLANET9_RADIUS_AU, create_sphere_points)
+from shared_utilities import create_sun_direction_indicator
 
 # Planet 9
 

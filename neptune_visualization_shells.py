@@ -1,9 +1,9 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, create_sun_direction_indicator, 
-                                            rotate_points)
+from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, rotate_points)
 from saturn_visualization_shells import create_ring_points_saturn
+from shared_utilities import create_sun_direction_indicator
 
 # Neptune Shell Creation Functions
 
@@ -64,7 +64,7 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
 
 neptune_mantle_info = (
             "2.1 MB PER FRAME FOR HTML.\n\n"
-            "mantle: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. \n " 
+            "Mantle: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. \n " 
             "This layer constitutes the majority of Neptune's mass, about 10 to 15 Earth masses. The high pressure and temperature create \n" 
             "an environment where these \"icy\" materials exist in exotic phases, possibly including ionic water and superionic water. \n" 
             "Some theories suggest that at great depths within the mantle, methane may decompose, forming diamond crystals that could \n" 
@@ -379,8 +379,10 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -518,8 +520,10 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=600 * NEPTUNE_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
     
@@ -999,8 +1003,10 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
                                                  magnetic_tilt, azimuthal_angle)
     traces.extend(current_traces)
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius= 6.0 * NEPTUNE_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -1626,8 +1632,10 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=73000 / KM_PER_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -1650,7 +1658,7 @@ def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_info = {
         'radius_fraction': 4685, 
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
-        'opacity': 0.3,
+        'opacity': 0.25,
         'name': 'Hill Sphere',
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
@@ -1690,8 +1698,11 @@ def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    # Add sun direction indicator scaled to this shell's radius
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 

@@ -9,7 +9,9 @@ import math
 import numpy as np
 import plotly.graph_objs as go
 from constants_new import (
-    KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS, CENTER_BODY_RADII,
+    KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS, CENTER_BODY_RADII)
+
+from solar_visualization_shells import (
     # Sun information texts
     gravitational_influence_info_hover,
     outer_oort_info_hover,

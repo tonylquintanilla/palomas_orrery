@@ -1,7 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (ERIS_RADIUS_AU, create_sphere_points, create_sun_direction_indicator)
+from planet_visualization_utilities import (ERIS_RADIUS_AU, create_sphere_points)
+from shared_utilities import create_sun_direction_indicator
 
 # Eris Shell Creation Functions
 
@@ -100,7 +101,7 @@ def create_eris_mantle_shell(center_position=(0, 0, 0)):
         'radius_fraction': 0.66,  
         'color': 'rgb(150, 0, 0)',  # These still represent red but with a lower intensity,  
         'opacity': 0.9,
-        'name': 'mantle',
+        'name': 'Mantle',
         'description': (
             "Mantle: Surrounding the rocky core is a substantial mantle made of water ice. Unlike Pluto's ice shell, Eris's ice <br>" 
             "mantle is thought to be convecting. This means that the warmer ice closer to the core rises, while the colder ice near <br>" 
@@ -377,15 +378,17 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
 
 eris_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.\n" 
+            "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
 
             "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant \n" 
@@ -400,7 +403,7 @@ def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_info = {
         'radius_fraction': 6965, 
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
-        'opacity': 0.3,
+        'opacity': 0.25,
         'name': 'Hill Sphere',
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
@@ -442,9 +445,11 @@ def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace) 
 
     return traces

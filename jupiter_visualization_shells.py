@@ -1,8 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (JUPITER_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, 
-                                            create_sun_direction_indicator)
+from planet_visualization_utilities import (JUPITER_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
+from shared_utilities import create_sun_direction_indicator
 
 def create_ring_points_jupiter (inner_radius, outer_radius, n_points=100, thickness=0.01):
     """
@@ -428,8 +428,10 @@ def create_jupiter_upper_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -487,8 +489,10 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=500 * JUPITER_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -565,8 +569,10 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=io_torus_distance
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -574,6 +580,7 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
 
 jupiter_radiation_belts_info = (
             "560 KB PER FRAME FOR HTML.\n\n"
+            "Vizualize at a manual scale of 0.005 AU.\n\n"
             "Zones of trapped high-energy particles in Jupiter's magnetosphere"                     
 )
 
@@ -656,8 +663,10 @@ def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius= 6.0 * JUPITER_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -673,13 +682,13 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Jupiter's Hill sphere shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 750,  
+        'radius_fraction': 740,  
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
-        'opacity': 0.3,
+        'opacity': 0.25,
         'name': 'Hill Sphere',
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.<br><br>"
-            "Jupiter's Hill Sphere (extends to ~750 Jupiter radii)<br><br>"
+            "Jupiter's Hill Sphere (extends to ~740 Jupiter radii)<br><br>"
                 "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
@@ -719,7 +728,16 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
     ]
     
     # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+#    sun_traces = create_sun_direction_indicator(center_position)
+#    for trace in sun_traces:
+#        traces.append(trace)
+
+    # Add sun direction indicator scaled to this shell's radius
+
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
@@ -861,15 +879,17 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
             )
         )
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=226000 / KM_PER_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
 
 jupiter_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.4 AU TO VISUALIZE.\n"
             "1.4 MB PER FRAME FOR HTML.\n\n"
 
             "Jupiter's magnetosphere extends up to 100 Jupiter radii on the sunward side\n"

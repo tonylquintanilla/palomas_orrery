@@ -1,8 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (VENUS_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, create_sun_direction_indicator)
-
+from planet_visualization_utilities import (VENUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
+from shared_utilities import create_sun_direction_indicator
 
 # Venus Shell Creation Functions
 
@@ -282,7 +282,7 @@ def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
     """Creates Venus's lower atmosphere shell."""
     # Define layer properties
     layer_info = {
-        'radius_fraction': 1.02,  # Troposphere; actually only about 1% but displayed as 2% for visibility
+        'radius_fraction': 1.01,  
         'color': 'rgb(150, 200, 255)',  # Light blue for atmosphere
         'opacity': 0.5,
         'name': 'Lower Atmosphere',
@@ -419,15 +419,17 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace) 
 
     return traces
 
 venus_magnetosphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
+            "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
 
             "Venus has a very weak, induced magnetosphere. Unlike Earth's magnetic field, which is generated internally by its \n" 
             "liquid iron core, Venus's weak magnetosphere is formed by the interaction of the solar wind with the planet's \n" 
@@ -621,15 +623,17 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
         
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=60 * VENUS_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
 
 venus_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
+            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
             "Venus's Hill Sphere is the region where its gravitational influence is dominant over the gravitational influence of \n" 
             "the Sun. The size of the Hill sphere depends on its mass and its distance from the Sun. Venus's Hill sphere extends \n" 
             "to approximately 1 million kilometers from the planet. Within this sphere, Venus's gravity is the primary force \n" 
@@ -674,7 +678,7 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
             marker=dict(
                 size=1.0,
                 color='rgb(0, 255, 0)',  # Green for Hill sphere
-                opacity=0.15
+                opacity=0.25
             ),
             name='Venus: Hill Sphere',
             text=[hover_text] * len(x),
@@ -684,9 +688,11 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=radius_au
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace) 
 
     return traces

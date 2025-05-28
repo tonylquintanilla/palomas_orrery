@@ -25,6 +25,7 @@ import json
 import orbit_data_manager
 from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points 
 from formatting_utils import format_maybe_float, format_km_float
+from shared_utilities import create_sun_direction_indicator
 from planet_visualization import (
     create_celestial_body_visualization,
     create_planet_visualization,
@@ -123,10 +124,7 @@ from planet_visualization import (
     planet9_hill_sphere_info           
 )
 
-from constants_new import (
-    color_map,
-    note_text,
-    INFO,
+from solar_visualization_shells import (
     hover_text_sun,
     gravitational_influence_info,
     outer_oort_info,
@@ -139,19 +137,13 @@ from constants_new import (
     chromosphere_info,
     photosphere_info,
     radiative_zone_info,
-    core_info,
-    gravitational_influence_info_hover,
-    outer_oort_info_hover,
-    inner_oort_info_hover,
-    inner_limit_oort_info_hover,
-    solar_wind_info_hover,
-    termination_shock_info_hover,
-    outer_corona_info_hover,
-    inner_corona_info_hover,
-    chromosphere_info_hover,
-    photosphere_info_hover,
-    radiative_zone_info_hover,
-    core_info_hover,
+    core_info
+)
+
+from constants_new import (
+    color_map,
+    note_text,
+    INFO,
     CENTER_BODY_RADII,
     KM_PER_AU, 
     LIGHT_MINUTES_PER_AU,
@@ -177,7 +169,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: May 6, 2025")
+root.title("Paloma's Orrery -- Updated: May 21, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -588,7 +580,19 @@ vesta_var = tk.IntVar(value=0)
 bennu_var = tk.IntVar(value=0)  
 bennu2_var = tk.IntVar(value=0)  # Bennu as a center body
 
-steins_var = tk.IntVar(value=0) 
+steins_var = tk.IntVar(value=0)
+
+donaldjohanson_var = tk.IntVar(value=0)
+
+orus_var = tk.IntVar(value=0)
+
+polymele_var = tk.IntVar(value=0)
+
+eurybates_var = tk.IntVar(value=0)
+
+patroclus_var = tk.IntVar(value=0)
+
+leucus_var = tk.IntVar(value=0)
 
 lutetia_var = tk.IntVar(value=0) 
 
@@ -597,6 +601,8 @@ soho_var = tk.IntVar(value=0)
 ryugu_var = tk.IntVar(value=0)
 
 eros_var = tk.IntVar(value=0)
+
+dinkinesh_var = tk.IntVar(value=0)
 
 itokawa_var = tk.IntVar(value=0)
 
@@ -618,6 +624,8 @@ hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
 quaoar_var = tk.IntVar(value=0)
 
 sedna_var = tk.IntVar(value=0)
+
+of201_var = tk.IntVar(value=0)
 
 orcus_var = tk.IntVar(value=0)    # 0 means unselected by default
 
@@ -886,6 +894,11 @@ objects = [
     'mission_info': 'A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
     'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
 
+    {'name': '2017 OF201', 'id': '2017 OF201', 'var': of201_var, 'color': color_map('2017 OF201'), 'symbol': 'circle', 'is_mission': False, 
+    'id_type': 'smallbody', 
+    'mission_info': 'A extreme trans-Neptunian object with an extremely long orbit.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/2017_OF201#:~:text=2017%20OF201%20is%20an,have%20a%20directly%20estimated%20size.'},
+
     # Asteroids
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'is_mission': False,
     'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
@@ -922,6 +935,11 @@ objects = [
     'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
 
+    {'name': 'Dinkinesh', 'id': '152830', 'var': dinkinesh_var, 'color': color_map('Dinkinesh'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Dinkinesh was visited by the mission Lucy.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/dinkinesh/'},
+
     {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'is_mission': False, 
     'is_comet': False, 'id_type': 'smallbody', 
     'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
@@ -942,10 +960,40 @@ objects = [
      'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 
      'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
 
+    {'name': 'Donaldjohanson', 'id': '52246', 'var': donaldjohanson_var, 'color': color_map('Donaldjohanson'), 'symbol': 'circle-open', 'is_mission': False, 
+     'is_comet': False, 'id_type': 'smallbody',
+     'mission_info': 'Visited by the NASA Lucy spacecraft.', 
+     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
+
     {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'is_mission': False, 
     'is_comet': False, 'id_type': 'smallbody', 
     'mission_info': 'One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
     'mission_url': 'https://dawn.jpl.nasa.gov/'},
+
+    {'name': 'Eurybates', 'id': '3548', 'var': eurybates_var, 'color': color_map('Eurybates'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_url': 'https://www.nasa.gov/missions/hide-and-seek-how-nasas-lucy-mission-team-discovered-eurybates-satellite/'},
+
+    {'name': 'Patroclus', 'id': '617', 'var': patroclus_var, 'color': color_map('Patroclus'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_url': 'https://lucy.swri.edu/Patroclus.html'},
+
+    {'name': 'Polymele', 'id': '15094', 'var': polymele_var, 'color': color_map('Polymele'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_url': 'https://lucy.swri.edu/Polymele.html'},
+
+    {'name': 'Leucus', 'id': '11351', 'var': leucus_var, 'color': color_map('Leucus'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_url': 'https://lucy.swri.edu/Leucus.html'},
+
+    {'name': 'Orus', 'id': '21900', 'var': orus_var, 'color': color_map('Orus'), 'symbol': 'circle-open', 'is_mission': False, 
+    'is_comet': False, 'id_type': 'smallbody', 
+    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_url': 'https://lucy.swri.edu/Orus.html'},
 
     # Kuiper Belt Objects
 
@@ -2046,45 +2094,6 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
     
     return fig
 
-def create_sun_hover_text():
-    """
-    Creates hover text for the Sun visualization with information about each layer.
-    Future expansion could include dynamic temperature and size data.
-    
-    Returns:
-        dict: Hover text for each layer of the Sun
-    """
-    return {
-        'photosphere': (
-            'Solar Photosphere<br>'
-            'Temperature: ~6,000K<br>'
-            'Radius: 0.00465 AU'
-        ),
-        'inner_corona': (
-            'Inner Corona<br>'
-            'Temperature: >2,000,000K<br>'
-            'Extends to: 2-3 solar radii (~0.014 AU)'
-        ),
-        'outer_corona': (
-            'Outer Corona<br>'
-            'Temperature: ~1,000,000K<br>'
-            'Extends to: ~50 solar radii (~0.2 AU)'
-        )
-    }
-
-# In the create_corona_sphere function, increase the number of points
-def create_corona_sphere(radius, n_points=100):  # Increased from 50 to 100 points
-    """Create points for a sphere surface to represent corona layers."""
-    phi = np.linspace(0, 2*np.pi, n_points)
-    theta = np.linspace(-np.pi/2, np.pi/2, n_points)
-    phi, theta = np.meshgrid(phi, theta)
-
-    x = radius * np.cos(theta) * np.cos(phi)
-    y = radius * np.cos(theta) * np.sin(phi)
-    z = radius * np.sin(theta)
-    
-    return x.flatten(), y.flatten(), z.flatten()
-
 def get_default_camera():
     """Return the default orthographic camera settings for top-down view"""
     return {
@@ -2684,6 +2693,9 @@ def plot_objects():
             # Create figure object at the start
             fig = go.Figure()
 
+            # Add global sun direction indicator to the plot
+    #        fig = add_global_sun_direction_indicator(fig)
+
             # Generate default name with timestamp
             current_date = STATIC_TODAY
             default_name = f"solar_system_{current_date.strftime('%Y%m%d_%H%M')}"
@@ -3107,19 +3119,10 @@ def plot_objects():
                 'Planet 9': planet9_shell_vars               
             }
 
+            # Add Sun direction indicator for non-center planets with shells
             for planet_name, planet_data in planets_with_shells.items():
                 is_center = (center_object_name == planet_name)
                 
-                # Only add shells if the planet is the center -- removed
-        #        if is_center and planet_name in planet_shell_vars and not center_shells_added:
-        #            print(f"\nAdding shells for center planet {planet_name}")
-        #            fig = create_planet_visualization(
-        #                fig,                            # First parameter should be fig
-        #                planet_name,                    # Second parameter should be planet_name
-        #                planet_shell_vars[planet_name], # Third parameter should be shell_vars
-        #                center_position=(0, 0, 0)       # Named parameter can stay as is
-        #            )
-
                 # Modified condition: allow shells for any planet, not just the center
                 if planet_name in planet_shell_vars:
                     # For center planet, position at (0,0,0)
@@ -3136,6 +3139,8 @@ def plot_objects():
                         # Check if any shell for this planet is selected
                         if any(var.get() == 1 for var in planet_shell_vars[planet_name].values()):
                             print(f"\nAdding shells for non-center planet {planet_name}")
+                            
+                            # Always add the planet shells
                             fig = create_planet_visualization(
                                 fig,                            
                                 planet_name,                    
@@ -3143,6 +3148,19 @@ def plot_objects():
                                 center_position=planet_data['position']  # Use planet's position
                             )
 
+                            # Only add sun direction indicator when Sun is not the center
+                            if center_object_name != 'Sun':
+                                print(f"Adding Sun direction indicator for {planet_name}")
+                                sun_direction_traces = create_sun_direction_indicator(
+                                    center_position=planet_data['position'],
+                                    axis_range=axis_range,  # Pass the axis_range parameter
+                                    object_type=planet_name,
+                                    center_object=center_object_name
+                                )
+
+                                for trace in sun_direction_traces:
+                                    fig.add_trace(trace)
+                            
             # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
             plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #show_lines=True
@@ -4554,8 +4572,8 @@ earth_hill_sphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="
 earth_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_hill_sphere_checkbutton, earth_hill_sphere_info)
 create_celestial_checkbutton("- Moon", moon_var)
-create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)
 create_celestial_checkbutton("- 2024 PT5", pt5_var)
+create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)
 create_celestial_checkbutton("- 2024 YR4", yr4_var)
 
 create_celestial_checkbutton("Mars", mars_var)
@@ -4600,13 +4618,20 @@ create_celestial_checkbutton("- Deimos", deimos_var)
 # asteroids
 create_celestial_checkbutton("Apophis", apophis_var)
 create_celestial_checkbutton("Bennu", bennu_var)
-create_celestial_checkbutton("Ceres", ceres_var)
-create_celestial_checkbutton("Eros", eros_var)
-create_celestial_checkbutton("Itokawa", itokawa_var)
-create_celestial_checkbutton("Lutetia", lutetia_var)
 create_celestial_checkbutton("Ryugu", ryugu_var)
-create_celestial_checkbutton("Šteins", steins_var)
+create_celestial_checkbutton("Itokawa", itokawa_var)
+create_celestial_checkbutton("Eros", eros_var)
+create_celestial_checkbutton("Dinkinesh", dinkinesh_var)
 create_celestial_checkbutton("Vesta", vesta_var)
+create_celestial_checkbutton("Šteins", steins_var)
+create_celestial_checkbutton("Donaldjohanson", donaldjohanson_var)
+create_celestial_checkbutton("Lutetia", lutetia_var)
+create_celestial_checkbutton("Ceres", ceres_var)
+create_celestial_checkbutton("Orus", orus_var)
+create_celestial_checkbutton("Polymele", polymele_var)
+create_celestial_checkbutton("Eurybates", eurybates_var)
+create_celestial_checkbutton("Patroclus", patroclus_var)
+create_celestial_checkbutton("Leucus", leucus_var)
 
 # outer planets
 
@@ -4804,7 +4829,7 @@ neptune_core_checkbutton.pack(anchor='w')
 CreateToolTip(neptune_core_checkbutton, neptune_core_info)
 
 # neptune metallic hydrogen shell
-neptune_mantle_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- mantle", variable=neptune_mantle_var)
+neptune_mantle_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Mantle", variable=neptune_mantle_var)
 neptune_mantle_checkbutton.pack(anchor='w')
 CreateToolTip(neptune_mantle_checkbutton, neptune_mantle_info)
 
@@ -4882,17 +4907,16 @@ create_celestial_checkbutton("- Kerberos", kerberos_var)
 create_celestial_checkbutton("- Hydra", hydra_var)
 
 # Kuiper Belt Objects
-create_celestial_checkbutton("2004 GV9", gv9_var)
-create_celestial_checkbutton("2002 MS4", ms4_var)
-create_celestial_checkbutton("Arrokoth", arrokoth_var)
-create_celestial_checkbutton("Haumea", haumea_var)
-create_celestial_checkbutton("Ixion", ixion_var)
-create_celestial_checkbutton("Makemake", makemake_var)
 create_celestial_checkbutton("Orcus", orcus_var)
-create_celestial_checkbutton("Quaoar", quaoar_var)
+create_celestial_checkbutton("Ixion", ixion_var)
+create_celestial_checkbutton("2002 MS4", ms4_var)
+create_celestial_checkbutton("2004 GV9", gv9_var)
 create_celestial_checkbutton("Varuna", varuna_var)
+create_celestial_checkbutton("Haumea", haumea_var)
+create_celestial_checkbutton("Quaoar", quaoar_var)
+create_celestial_checkbutton("Arrokoth", arrokoth_var)
+create_celestial_checkbutton("Makemake", makemake_var)
 create_celestial_checkbutton("Gonggong", gonggong_var)
-
 create_celestial_checkbutton("Eris", eris_var)
 # Create a Frame specifically for the eris shell options (indented)
 eris_shell_options_frame = tk.Frame(celestial_frame)
@@ -4904,7 +4928,7 @@ eris_core_checkbutton.pack(anchor='w')
 CreateToolTip(eris_core_checkbutton, eris_core_info)
 
 # eris mantle shell
-eris_mantle_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- mantle", variable=eris_mantle_var)
+eris_mantle_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Mantle", variable=eris_mantle_var)
 eris_mantle_checkbutton.pack(anchor='w')
 CreateToolTip(eris_mantle_checkbutton, eris_mantle_info)
 
@@ -4924,6 +4948,10 @@ eris_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(eris_hill_sphere_checkbutton, eris_hill_sphere_info) 
 create_celestial_checkbutton("- Dysnomia", dysnomia_var)
 
+create_celestial_checkbutton("Sedna", sedna_var)
+
+create_celestial_checkbutton("2017 OF201", of201_var)
+
 create_celestial_checkbutton("Planet 9", planet9_var)
 # Create a Frame specifically for the planet9 shell options (indented)
 planet9_shell_options_frame = tk.Frame(celestial_frame)
@@ -4938,8 +4966,6 @@ CreateToolTip(planet9_surface_checkbutton, planet9_surface_info)
 planet9_hill_sphere_checkbutton = tk.Checkbutton(planet9_shell_options_frame, text="-- Hill Sphere", variable=planet9_hill_sphere_var)
 planet9_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(planet9_hill_sphere_checkbutton, planet9_hill_sphere_info) 
-
-create_celestial_checkbutton("Sedna", sedna_var)
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")

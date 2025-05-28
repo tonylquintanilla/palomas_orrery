@@ -1,8 +1,8 @@
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (MERCURY_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, 
-                                            create_sun_direction_indicator)
+from shared_utilities import create_sun_direction_indicator
+from planet_visualization_utilities import (MERCURY_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
 
 
 # Mercury Shell Creation Functions
@@ -378,15 +378,17 @@ def create_mercury_atmosphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=layer_radius
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
 
 mercury_magnetosphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
+            "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n" 
 
             "Magnetosphere: Mercury has a surprisingly active magnetosphere, given its small size and slow rotation. However, it is \n" 
             "significantly weaker and smaller than Earth's magnetosphere."
@@ -547,15 +549,17 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
         
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=100 * MERCURY_RADIUS_AU
+    )
     for trace in sun_traces:
         traces.append(trace)
 
     return traces
 
 mercury_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
+            "SET MANUAL SCALE TO AT LEAST 0.003 AU TO VISUALIZE.\n\n" 
             "Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it \n" 
             "where its gravity is the dominant gravitational force. Mercury certainly has a Hill sphere, but its size depends on \n" 
             "its mass and its distance from the Sun. Being the closest planet to the Sun, the Sun's powerful gravity limits the \n" 
@@ -565,7 +569,7 @@ mercury_hill_sphere_info = (
 def create_mercury_hill_sphere_shell(center_position=(0, 0, 0)):
     """Creates Mercury's Hill sphere."""
     # Hill sphere radius in Mercury radii
-    radius_fraction = 90  # Mercury's Hill sphere is about 235 Mercury radii
+    radius_fraction = 94.4  # Mercury's Hill sphere is about 90 Mercury radii
     
     # Calculate radius in AU
     radius_au = radius_fraction * MERCURY_RADIUS_AU
@@ -604,7 +608,7 @@ def create_mercury_hill_sphere_shell(center_position=(0, 0, 0)):
             marker=dict(
                 size=1.0,
                 color='rgb(0, 255, 0)',  # Green for Hill sphere
-                opacity=0.15
+                opacity=0.25
             ),
             name='Mercury: Hill Sphere',
             text=[hover_text] * len(x),
@@ -614,9 +618,12 @@ def create_mercury_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
+
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position, 
+        shell_radius=radius_au
+    )
     for trace in sun_traces:
-        traces.append(trace)
+        traces.append(trace)        
 
     return traces

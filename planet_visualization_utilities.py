@@ -10,22 +10,8 @@ import numpy as np
 import plotly.graph_objs as go
 from constants_new import (
     KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS,
-    CENTER_BODY_RADII,
-    # Sun information texts
-    gravitational_influence_info_hover,
-    outer_oort_info_hover,
-    inner_oort_info_hover,
-    inner_limit_oort_info_hover,
-    solar_wind_info_hover,
-    termination_shock_info_hover,
-    outer_corona_info_hover,
-    inner_corona_info_hover,
-    chromosphere_info_hover,
-    photosphere_info_hover,
-    radiative_zone_info_hover,
-    core_info_hover
+    CENTER_BODY_RADII
 )
-
 
 #####################################
 # Celestial Body Constants
@@ -276,7 +262,7 @@ def create_sphere_points(radius, n_points=50):
     
     return x.flatten(), y.flatten(), z.flatten()
 
-def create_sun_direction_indicator(center_position=(0, 0, 0)):
+def create_sun_direction_indicator_old(center_position=(0, 0, 0)):
     """Creates a visual indicator showing the direction to the Sun (along negative X-axis)."""
     center_x, center_y, center_z = center_position
     
