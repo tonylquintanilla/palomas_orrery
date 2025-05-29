@@ -1,290 +1,371 @@
 # Paloma's Orrery
 
-An interactive solar system visualization tool with support for stellar neighborhood mapping and Hertzsprung-Russell diagrams.
+**An Advanced Interactive Solar System and Stellar Visualization Suite**
 
-## Summary
+A comprehensive Python application that creates stunning 3D visualizations of our solar system and stellar neighborhood. This tool combines NASA JPL Horizons data with Hipparcos/Gaia catalogs to provide unprecedented interactive astronomical visualizations.
 
-A comprehensive Python application that visualizes the solar system using data from the JPL Horizons system, combined with stellar visualization capabilities using Hipparcos and Gaia data. The tool allows users to:
+## 🌟 Key Features
 
-1. Visualize and animate solar system objects:
-   - Planets, dwarf planets, and their major moons
-   - Asteroids and comets
-   - Space missions and their trajectories
-   - Sun's structure from core to heliopause
+### Solar System Visualization
+- **Real-time 3D positioning** of planets, moons, asteroids, and comets using NASA JPL Horizons data
+- **Multi-scale visualization** from planetary cores to the Oort Cloud (126,000 AU)
+- **Interactive animations** spanning minutes to years with customizable time steps
+- **Comprehensive mission tracking** for 25+ space missions (Voyager, Cassini, Parker Solar Probe, etc.)
+- **Detailed planetary shell systems** showing internal structure, atmospheres, and magnetospheres
+- **Comet trajectory visualization** including famous comets like Halley, Hale-Bopp, and NEOWISE
 
-2. Create stellar visualizations:
-   - 3D maps of the stellar neighborhood
-   - Distance-based visualizations up to 100 light-years
-   - Magnitude-limited views of visible stars
-   - Hertzsprung-Russell diagrams
-   - Messier object visualizations
+### Stellar Neighborhood Mapping
+- **3D stellar maps** up to 100 light-years from the Sun
+- **Magnitude-limited views** showing stars visible to the naked eye (magnitude ≤ 9)
+- **Temperature-based color coding** using black-body radiation (1,300K to 50,000K)
+- **Interactive camera controls** with notable star navigation
+- **Messier object integration** including nebulae, star clusters, and galaxies
 
-## Features
+### Hertzsprung-Russell Diagrams
+- **Interactive 2D stellar classification** plots
+- **Spectral type overlays** (O, B, A, F, G, K, M, L classes)
+- **Luminosity vs. temperature analysis** with stellar evolution insights
+- **Comprehensive data integration** from multiple astronomical catalogs
 
-- Real-time 3D visualization of celestial objects using NASA JPL Horizons data
-- Interactive plots with customizable views and scales
-- Solar system animation capabilities (hours/days/weeks/months/years)
-- Detailed visualization of the Sun's structure from core to Oort Cloud
-- Stellar neighborhood mapping up to 100 light-years
-- Hertzsprung-Russell diagrams for stellar classification
-- Support for both distance-based and apparent magnitude-based star plotting
-- Integration of Messier objects (nebulae and star clusters)
-- Interactive camera controls and notable star navigation
-- Click-to-copy star names and detailed hover information
-- Comprehensive data caching system for improved performance
+### Advanced Features
+- **Intelligent data caching** system for improved performance
+- **Incremental orbit updates** to minimize processing time
+- **Multi-threaded processing** with proper shutdown handling
+- **Export capabilities** (HTML, PNG, SVG formats)
+- **Professional hover information** with detailed astronomical data
+- **Copy-to-clipboard** functionality for star names and coordinates
 
-## Requirements
+## 🚀 Quick Start
 
-### Python Version
+### Prerequisites
 - Python 3.8 or higher
-
-### Required Libraries
-```
-numpy>=1.24.0
-pandas>=2.0.0
-plotly>=5.18.0
-astropy>=5.3.4
-astroquery>=0.4.6
-kaleido>=0.2.1  # Required for saving static images
-tk>=0.1.0
-python-dateutil>=2.8.2
-requests>=2.31.0
-ipython>=8.12.0
-scipy>=1.11.0
-```
+- 8GB+ RAM recommended for full magnitude range
+- Active internet connection for initial data fetching
 
 ### Installation
 
-1. Clone this repository:
+1. **Clone the repository:**
 ```bash
-git clone https://github.com/tonylquintanilla/palomas_orrery.git
+git clone https://github.com/yourusername/palomas_orrery.git
 cd palomas_orrery
 ```
 
-2. Install required packages:
+2. **Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-1. Run the main program:
+3. **Launch the application:**
 ```bash
 python palomas_orrery.py
 ```
 
-2. Using the Interface:
-   - Select celestial objects from the scrollable menu
-   - Choose a center object (default: Sun)
-   - Set the date and time for visualization
-   - Select scale options (Auto or Manual)
-   - Generate different types of visualizations:
-     * Solar System 3D plots
-     * Stellar neighborhood 3D plots (distance or magnitude based)
-     * Hertzsprung-Russell diagrams (2D)
+## 📋 System Requirements
 
-## Implementation Details
+### Core Dependencies
+```
+numpy>=1.24.0          # Numerical computations
+pandas>=2.0.0          # Data manipulation
+plotly>=5.18.0         # Interactive visualizations
+astropy>=5.3.4         # Astronomical calculations
+astroquery>=0.4.6      # Catalog queries
+astropy-healpix>=0.7   # Sky tessellation
+kaleido>=0.2.1         # Static image export
+```
 
-### Photometric Systems and Magnitude Handling
+### Optional but Recommended
+```
+scipy>=1.11.0          # Scientific computing
+matplotlib>=3.7.0      # Additional plotting
+jupyter>=1.0.0         # Notebook support
+ipython>=8.12.0        # Enhanced interactive shell
+```
 
-The program handles data from two major catalogs with different photometric systems:
+## 🎯 Usage Guide
 
-1. **Hipparcos Catalog**:
-   - Uses the Johnson-Cousins photometric system
-   - Directly provides standard V magnitudes (Vmag)
-   - Provides B magnitudes for B-V color index calculation
-   - Traditional system used in most historical astronomical observations
+### Main Interface (`palomas_orrery.py`)
 
-2. **Gaia Catalog**:
-   - Uses its own three-band photometric system:
-     * G (broad band covering most visible light)
-     * BP (Blue Photometer)
-     * RP (Red Photometer)
-   - V magnitudes must be estimated using the transformation:
-     ```python
-     V = G - (-0.0257 - 0.0924*(BP-RP) - 0.1623*(BP-RP)**2 + 0.0090*(BP-RP)**3)
-     ```
-   - Estimation is accurate to within a few hundredths of a magnitude for most stars
+1. **Solar System Visualization:**
+   - Select objects from the comprehensive scrollable menu
+   - Choose visualization date and time (UTC)
+   - Select center object (Sun, planets, moons, or asteroids)
+   - Configure scale (Auto or Manual in AU)
+   - Generate static plots or animations
 
-### Catalog Separation Logic
+2. **Stellar Visualizations:**
+   - Launch `star_visualization_gui.py` from the main interface
+   - Choose distance-based (up to 100 ly) or magnitude-based (up to mag 9) views
+   - Generate 3D stellar maps or 2D HR diagrams
 
-1. **Magnitude-based Selection (Default)**:
-   - Hipparcos catalog: Used exclusively for stars with Vmag ≤ 4.0
-   - Gaia catalog: Used exclusively for stars with Vmag > 4.0
-   - This prevents duplicate stars and ensures optimal data quality
+### Command Line Tools
 
-2. **Distance-based Selection**:
-   - Follows the same separation logic as magnitude-based selection
-   - Hipparcos for bright stars (Vmag ≤ 4.0)
-   - Gaia for fainter stars (Vmag > 4.0)
-   - Selection based on parallax measurements
+**3D Stellar Distance Visualization:**
+```bash
+python planetarium_distance.py 50  # Stars within 50 light-years
+```
 
-### Data Processing Pipeline
+**3D Magnitude-Limited Visualization:**
+```bash
+python planetarium_apparent_magnitude.py 4.5  # Stars brighter than magnitude 4.5
+python planetarium_apparent_magnitude.py 6 1000  # With manual scale of 1000 ly
+```
 
-1. **Data Acquisition**:
-   - Hipparcos data fetched first with appropriate magnitude/distance constraints
-   - Gaia data fetched with complementary constraints
-   - Data cached in VOTable format for future use
+**Hertzsprung-Russell Diagrams:**
+```bash
+python hr_diagram_distance.py 25     # HR diagram for stars within 25 ly
+python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than mag 5
+```
 
-2. **Catalog Processing**:
-   - Hipparcos stars:
-     * Bright stars (Vmag ≤ 1.73)
-     * Mid-range stars (1.73 < Vmag ≤ 4.0)
-   - Gaia stars:
-     * Faint stars (Vmag > 4.0)
+## 🏗️ Architecture Overview
 
-3. **Star Properties**:
-   - Properties fetched from SIMBAD database
-   - Cached in PKL format
-   - Includes:
-     * Spectral types
-     * B-V colors
-     * Object classifications
-     * Additional notes for notable stars
+### Core Modules
 
-### Technical Notes
+**`palomas_orrery.py`** - Main GUI application with comprehensive solar system controls
+- Object selection interface with 200+ celestial bodies
+- Animation controls (minutes to years)
+- Scale management and center object selection
+- Real-time JPL Horizons data integration
 
-1. **Magnitude Conversion**:
-   ```python
-   # Gaia G magnitude to Johnson V magnitude conversion
-   V = G - (-0.0257 - 0.0924*(BP-RP) - 0.1623*(BP-RP)**2 + 0.0090*(BP-RP)**3)
-   ```
+**`star_visualization_gui.py`** - Dedicated stellar visualization interface
+- Star search functionality across multiple catalogs
+- Distance and magnitude-based filtering
+- Interactive parameter controls
 
-2. **Magnitude Standardization**:
-   - All magnitudes standardized to `Apparent_Magnitude` column
-   - Used consistently across all visualization modes
-   - Facilitates proper star selection and display
+**Visualization Engines:**
+- `visualization_3d.py` - 3D stellar neighborhood rendering
+- `visualization_2d.py` - Hertzsprung-Russell diagram generation
+- `planet_visualization.py` - Planetary shell system rendering
+- `solar_visualization_shells.py` - Solar structure visualization
 
-3. **Temperature Estimation**:
-   - Primary: B-V color index when available
-   - Secondary: Spectral type
-   - Uses interpolation for missing data
-   - Required for both HR diagrams and 3D visualizations
+**Data Pipeline:**
+- `data_acquisition.py` - Multi-catalog stellar data fetching
+- `data_processing.py` - Coordinate transformations and filtering
+- `star_properties.py` - SIMBAD database integration
+- `stellar_parameters.py` - Temperature and luminosity calculations
 
-4. **Distance Calculations**:
-   - Parallax to distance conversion
-   - Error handling for uncertain measurements
-   - Light-year conversion factor: 3.26156
+**Infrastructure:**
+- `orbit_data_manager.py` - Intelligent orbit caching system
+- `shutdown_handler.py` - Thread-safe application management
+- `save_utils.py` - Export functionality
+- `messier_object_data_handler.py` - Non-stellar object integration
 
-## Data Files
+## 📊 Data Sources & Processing
 
-The program creates and uses several data cache files:
+### Astronomical Catalogs
+- **JPL Horizons System**: Real-time solar system positions
+- **Hipparcos Catalog**: 118,218 high-precision stellar positions
+- **Gaia DR3**: 1.8 billion stellar measurements
+- **SIMBAD Database**: Comprehensive stellar properties
+- **Messier Catalog**: Deep-sky objects and nebulae
 
-### VOTable Files (.vot)
-1. `hipparcos_data_magnitude.vot` (~193KB)
-2. `gaia_data_magnitude.vot` 
-   - ~1.2MB for magnitude 4 (default)
-   - Up to ~292MB for magnitude 9
-3. `hipparcos_data_distance.vot` (~30KB)
-4. `gaia_data_distance.vot` (~9.4MB)
+### Photometric Systems
+The application handles multiple photometric standards:
 
-### Property Cache Files (.pkl)
-1. `star_properties_magnitude.pkl` (~12MB)
-2. `star_properties_distance.pkl` (~1MB)
+**Hipparcos (Johnson-Cousins System):**
+- Direct V magnitudes for stars ≤ mag 4.0
+- B-V color indices for temperature estimation
+- High precision for bright stars
 
-Note: Files are created on first run and reused in subsequent sessions.
+**Gaia (Native Photometry):**
+- G, BP, RP band measurements
+- V magnitude estimation: `V = G - correction_factor(BP-RP)`
+- Used for stars > mag 4.0 to avoid duplicates
 
-## Performance Notes
+### Data Cache Management
+- **VOTable files** (.vot): Raw catalog data (30KB to 300MB)
+- **Pickle files** (.pkl): Processed star properties (1MB to 12MB)
+- **JSON files**: Orbit path data with incremental updates
+- **Automatic refresh**: Weekly updates recommended
 
-1. **Initial Load**:
-   - First run: 2-5 minutes for data fetching
-   - Subsequent runs: 5-10 seconds from cache
-   - Cache updates: Weekly recommended
+## 🎨 Visualization Features
 
-2. **Memory Usage**:
-   - Magnitude limit 4: ~100MB
-   - Magnitude limit 6: ~500MB
-   - Magnitude limit 9: ~2GB
+### Interactive Controls
+- **Multi-level zoom**: From planetary surfaces to galactic scales
+- **Time animation**: Customizable step sizes and frame counts
+- **Camera presets**: Navigate to notable stars and objects
+- **Hover information**: Detailed astronomical data on mouse-over
+- **Legend toggles**: Show/hide object categories
+- **Export options**: HTML, PNG, SVG formats
 
-3. **Visualization Response**:
-   - Interactive updates: <100ms
-   - Animation frames: 200-500ms
-   - Plot generation: 2-5 seconds
+### Scientific Accuracy
+- **Proper coordinate systems**: ICRS alignment with celestial sphere
+- **Realistic scaling**: True relative sizes and distances
+- **Temperature visualization**: Black-body radiation color mapping
+- **Orbital mechanics**: Kepler's laws implementation
+- **Light-time corrections**: Accurate positions for observation dates
 
-## Troubleshooting
+## 🔧 Configuration Options
 
-1. **Missing Star Data**:
-   - Check cache files are not corrupted
-   - Verify SIMBAD connection
-   - Confirm magnitude/distance limits
+### Solar System Plotting
+```python
+# Interval controls for orbit resolution
+comet_interval_divisor = 100      # Comet trajectory points
+mission_interval_divisor = 75     # Space mission paths  
+planet_interval_divisor = 50      # Planet orbit detail
+satellite_orbit_days = 56         # Moon observation period
+```
 
-2. **Visualization Issues**:
-   - Clear browser cache
-   - Check plotly.js loading
-   - Verify screen resolution settings
+### Stellar Visualization
+```python
+# Scale and magnitude limits
+max_distance_ly = 100             # Maximum distance filter
+max_apparent_magnitude = 9.0      # Naked-eye limit
+temperature_range = (1300, 50000) # Color mapping bounds
+```
 
-3. **Performance Problems**:
-   - Reduce number of selected objects
-   - Lower animation frame count
-   - Use manual scaling for large distances
+## 📈 Performance Optimization
 
-## Contributing
+### Initial Setup (First Run)
+- **Data fetching**: 2-5 minutes for complete catalogs
+- **Property caching**: 1-3 minutes for SIMBAD queries
+- **Index generation**: 30-60 seconds for search optimization
 
-1. **Code Style**:
-   - Follow PEP 8
-   - Use type hints
-   - Document complex algorithms
+### Subsequent Sessions
+- **Application launch**: 5-10 seconds from cache
+- **Plot generation**: 2-5 seconds typical
+- **Animation frames**: 200-500ms per frame
+- **Interactive updates**: <100ms response time
 
-2. **Testing**:
-   - Unit tests for core functions
-   - Integration tests for data pipeline
-   - Performance benchmarks
+### Memory Usage by Scope
+- **Distance 25 ly**: ~50MB RAM
+- **Distance 100 ly**: ~200MB RAM  
+- **Magnitude 4**: ~100MB RAM
+- **Magnitude 6**: ~500MB RAM
+- **Magnitude 9**: ~2GB RAM
 
-3. **Documentation**:
-   - Update README for new features
-   - Document API changes
-   - Maintain version history
+## ⚙️ Advanced Features
 
-## Data Sources
+### Orbit Data Management
+The system includes intelligent orbit caching with incremental updates:
+```python
+# Automatic detection of outdated orbit data
+# Selective updates for only changed objects
+# Time-based expiration with configurable thresholds
+# Backup and recovery for data integrity
+```
 
-- Solar system positions: [JPL Horizons System](https://ssd.jpl.nasa.gov/horizons/)
-- Stellar data:
-  * [Hipparcos Catalog](https://www.cosmos.esa.int/web/hipparcos)
-  * [Gaia DR3](https://www.cosmos.esa.int/web/gaia)
-- Object properties: [SIMBAD database](http://simbad.u-strasbg.fr/simbad/)
-- Messier objects: [SEDS Messier Database](http://www.messier.seds.org/)
+### Multi-threaded Architecture  
+- **Background data fetching** without GUI blocking
+- **Thread-safe visualization** rendering
+- **Graceful shutdown** handling with cleanup
+- **Memory management** for large datasets
 
-## License
+### Professional Export Pipeline
+- **Publication-quality** static images
+- **Interactive HTML** with full functionality  
+- **Batch processing** for animation sequences
+- **Custom templates** for presentations
 
-This project is licensed under the MIT License with Non-Commercial Use Restriction.
+## 🐛 Troubleshooting
 
-### Key Points:
-1. **Free for Non-Commercial Use**
-   - Academic research
-   - Personal projects
-   - Educational purposes
-   - Non-profit organizations
+### Common Issues
 
-2. **Commercial Use Requires Permission**
-   - Contact author for commercial licensing
-   - Written permission required
-   - Separate terms may apply
+**Slow Initial Loading:**
+- Ensure stable internet connection
+- Check firewall settings for astroquery
+- Verify disk space (2GB minimum)
 
-3. **Attribution Requirements**
-   - Must credit original author
-   - Must indicate modifications
-   - Must include license notice
+**Memory Errors with High Magnitudes:**
+- Reduce magnitude limit (try 6 instead of 9)
+- Close other applications
+- Consider 64-bit Python installation
 
-4. **Data Source Attributions Required**
-   - NASA/JPL-Caltech for Horizons data
-   - ESA for Hipparcos data
-   - ESA/Gaia/DPAC for Gaia data
-   - CDS, Strasbourg, France for SIMBAD data
+**Missing Star Data:**
+- Clear cache files in project directory
+- Restart application to refresh SIMBAD connection
+- Check for astroquery version compatibility
 
-### Third-Party Components:
-This software incorporates several open-source libraries:
-- NumPy (BSD 3-Clause)
-- Pandas (BSD 3-Clause)
-- Plotly (MIT)
-- Astropy (BSD 3-Clause)
-- Astroquery (BSD 3-Clause)
+**Visualization Performance:**
+- Use manual scaling for very large distances
+- Reduce animation frame counts for smoother playback
+- Enable hardware acceleration in browser
 
-For commercial licensing inquiries, contact:
-Tony Quintanilla (tonyquintanilla@gmail.com)
+### Cache Management
+```bash
+# Clear all cached data
+rm *.vot *.pkl orbit_paths.json
 
-See LICENSE.txt for complete terms.
+# Clear only stellar data
+rm star_properties_*.pkl
 
-## About
+# Clear only orbital data  
+rm orbit_paths.json
+```
 
-Created by Tony Quintanilla with assistance from ChatGPT, Claude and Gemini AI assistants.
-Updated February 17, 2025.
+## 🤝 Contributing
+
+### Development Setup
+1. **Fork the repository** and create a feature branch
+2. **Install development dependencies**: `pip install -r requirements-dev.txt`
+3. **Run tests**: `python -m pytest tests/`
+4. **Follow PEP 8** style guidelines
+5. **Add documentation** for new features
+
+### Code Structure Guidelines
+- **Modular design**: Separate concerns into focused modules
+- **Type hints**: Use for all function signatures
+- **Error handling**: Comprehensive exception management
+- **Documentation**: Docstrings for all public functions
+- **Testing**: Unit tests for core functionality
+
+### Feature Requests
+Popular enhancement requests:
+- **Additional catalog integration** (2MASS, WISE)
+- **Exoplanet visualizations**
+- **Variable star light curves**
+- **Binary star orbital mechanics**
+- **Galaxy structure mapping**
+
+## 📜 License & Attribution
+
+### License
+This project is licensed under the **MIT License with Non-Commercial Use Restriction**.
+
+**Free for:**
+- Academic research and education
+- Personal astronomical exploration  
+- Non-profit educational institutions
+- Open source contributions
+
+**Commercial use requires written permission** from the author.
+
+### Data Source Credits
+- **NASA/JPL-Caltech**: Horizons System ephemeris data
+- **ESA/Hipparcos**: High-precision stellar astrometry
+- **ESA/Gaia/DPAC**: Revolutionary stellar catalog
+- **CDS, Strasbourg**: SIMBAD astronomical database
+- **SEDS**: Messier catalog compilation
+
+### Acknowledgments
+Created by **Tony Quintanilla** with assistance from advanced AI systems (ChatGPT, Claude, Gemini, DeepSeek).
+
+Special thanks to:
+- NASA for open access to JPL Horizons
+- ESA for the transformative Hipparcos and Gaia missions
+- The astronomical community for open data sharing
+- Python scientific computing ecosystem maintainers
+
+---
+
+## 📞 Contact & Support
+
+**Author**: Tony Quintanilla  
+**Email**: tonyquintanilla@gmail.com  
+**Project Website**: [Paloma's Orrery](https://sites.google.com/view/tony-quintanilla)
+**GitHub page**: [Paloma's Orrery](https://tonylquintanilla.github.io/palomas_orrery/)
+
+**For support:**
+- Create an issue on GitHub
+- Check the troubleshooting section
+- Review existing documentation
+
+**For commercial licensing:**
+- Contact author directly
+- Include intended use case
+- Specify distribution requirements
+
+---
+
+*Last updated: May 2025*  
+*Version: 2.0.0*  
+*Python compatibility: 3.8+*
