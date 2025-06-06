@@ -1,3 +1,4 @@
+```markdown
 # Paloma's Orrery
 
 **An Advanced Interactive Solar System and Stellar Visualization Suite**
@@ -13,6 +14,7 @@ A comprehensive Python application that creates stunning 3D visualizations of ou
 - **Comprehensive mission tracking** for 25+ space missions (Voyager, Cassini, Parker Solar Probe, etc.)
 - **Detailed planetary shell systems** showing internal structure, atmospheres, and magnetospheres
 - **Comet trajectory visualization** including famous comets like Halley, Hale-Bopp, and NEOWISE
+- **Time-varying lunar orbit model** with perturbations for accurate Moon positioning
 
 ### Stellar Neighborhood Mapping
 - **3D stellar maps** up to 100 light-years from the Sun
@@ -28,12 +30,15 @@ A comprehensive Python application that creates stunning 3D visualizations of ou
 - **Comprehensive data integration** from multiple astronomical catalogs
 
 ### Advanced Features
-- **Intelligent data caching** system for improved performance
-- **Incremental orbit updates** to minimize processing time
+- **Smart selective caching** system that only updates selected objects
+- **Special fetch mode** for experimental plotting without cache modification
+- **Automatic cache backup** on startup with single backup file
+- **Weekly cache cleanup** removing data older than 30 days
 - **Multi-threaded processing** with proper shutdown handling
 - **Export capabilities** (HTML, PNG, SVG formats)
 - **Professional hover information** with detailed astronomical data
 - **Copy-to-clipboard** functionality for star names and coordinates
+- **Time-varying lunar orbit model** with perturbations for accurate Moon positioning
 
 ## 🚀 Quick Start
 
@@ -92,7 +97,13 @@ ipython>=8.12.0        # Enhanced interactive shell
    - Configure scale (Auto or Manual in AU)
    - Generate static plots or animations
 
-2. **Stellar Visualizations:**
+2. **Cache Management (New in v2.0):**
+   - **No startup dialogs** - application launches immediately
+   - **Selective updates** - only selected objects are updated when plotting
+   - **Special fetch mode** - experiment with different parameters without affecting cache
+   - **Automatic maintenance** - weekly cleanup of old data
+
+3. **Stellar Visualizations:**
    - Launch `star_visualization_gui.py` from the main interface
    - Choose distance-based (up to 100 ly) or magnitude-based (up to mag 9) views
    - Generate 3D stellar maps or 2D HR diagrams
@@ -125,6 +136,7 @@ python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than 
 - Animation controls (minutes to years)
 - Scale management and center object selection
 - Real-time JPL Horizons data integration
+- **New**: Smart cache management with selective updates
 
 **`star_visualization_gui.py`** - Dedicated stellar visualization interface
 - Star search functionality across multiple catalogs
@@ -136,6 +148,10 @@ python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than 
 - `visualization_2d.py` - Hertzsprung-Russell diagram generation
 - `planet_visualization.py` - Planetary shell system rendering
 - `solar_visualization_shells.py` - Solar structure visualization
+- **`idealized_orbits.py`** - Orbital mechanics and ideal orbit plotting
+  - Standard Keplerian orbit calculations
+  - Special Moon orbit model with time-varying elements
+  - Perturbation calculations for realistic lunar motion
 
 **Data Pipeline:**
 - `data_acquisition.py` - Multi-catalog stellar data fetching
@@ -144,7 +160,7 @@ python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than 
 - `stellar_parameters.py` - Temperature and luminosity calculations
 
 **Infrastructure:**
-- `orbit_data_manager.py` - Intelligent orbit caching system
+- `orbit_data_manager.py` - Intelligent orbit caching system with selective updates
 - `shutdown_handler.py` - Thread-safe application management
 - `save_utils.py` - Export functionality
 - `messier_object_data_handler.py` - Non-stellar object integration
@@ -171,11 +187,13 @@ The application handles multiple photometric standards:
 - V magnitude estimation: `V = G - correction_factor(BP-RP)`
 - Used for stars > mag 4.0 to avoid duplicates
 
-### Data Cache Management
-- **VOTable files** (.vot): Raw catalog data (30KB to 300MB)
-- **Pickle files** (.pkl): Processed star properties (1MB to 12MB)
-- **JSON files**: Orbit path data with incremental updates
-- **Automatic refresh**: Weekly updates recommended
+### Data Cache Management (Enhanced in v2.0)
+- **Automatic backup**: `orbit_paths_backup.json` created on startup
+- **Selective caching**: Only selected objects are updated
+- **Special fetch mode**: Temporary cache for experimentation
+- **Weekly cleanup**: Automatic removal of data older than 30 days
+- **Multi-line status display**: Color-coded operation history
+- **JSON files**: Orbit path data with metadata tracking
 
 ## 🎨 Visualization Features
 
@@ -193,6 +211,10 @@ The application handles multiple photometric standards:
 - **Temperature visualization**: Black-body radiation color mapping
 - **Orbital mechanics**: Kepler's laws implementation
 - **Light-time corrections**: Accurate positions for observation dates
+- **Moon orbit modeling**: Time-varying elements with solar perturbations
+  - Evection: Primary perturbation due to Sun's gravity
+  - Secular variations: Node regression and apsidal precession
+  - Dynamic eccentricity: Varies between 0.026 and 0.077
 
 ## 🔧 Configuration Options
 
@@ -205,6 +227,12 @@ planet_interval_divisor = 50      # Planet orbit detail
 satellite_orbit_days = 56         # Moon observation period
 ```
 
+### Orbit Path Fetching Controls (New)
+- **Start/End date offsets**: Dynamic date displays showing calculated dates
+- **Interval settings**: Customizable for different object types
+- **Special fetch mode**: Cyan-highlighted controls for experimental fetches
+- **Center-aware**: Settings apply to selected center object
+
 ### Stellar Visualization
 ```python
 # Scale and magnitude limits
@@ -216,12 +244,12 @@ temperature_range = (1300, 50000) # Color mapping bounds
 ## 📈 Performance Optimization
 
 ### Initial Setup (First Run)
-- **Data fetching**: 2-5 minutes for complete catalogs
-- **Property caching**: 1-3 minutes for SIMBAD queries
-- **Index generation**: 30-60 seconds for search optimization
+- **No startup delays**: Application launches immediately
+- **On-demand fetching**: Data retrieved only when needed
+- **Selective updates**: Only selected objects are processed
 
 ### Subsequent Sessions
-- **Application launch**: 5-10 seconds from cache
+- **Application launch**: 2-5 seconds from cache
 - **Plot generation**: 2-5 seconds typical
 - **Animation frames**: 200-500ms per frame
 - **Interactive updates**: <100ms response time
@@ -235,14 +263,37 @@ temperature_range = (1300, 50000) # Color mapping bounds
 
 ## ⚙️ Advanced Features
 
-### Orbit Data Management
-The system includes intelligent orbit caching with incremental updates:
+### Smart Cache Management (New in v2.0)
+The system includes intelligent orbit caching with selective updates:
 ```python
-# Automatic detection of outdated orbit data
-# Selective updates for only changed objects
-# Time-based expiration with configurable thresholds
-# Backup and recovery for data integrity
+# Only updates selected objects when plotting
+# Dialog asks user preference with "remember choice" option
+# Special fetch mode for experimentation without cache pollution
+# Automatic weekly cleanup of data older than 30 days
+# Single backup file maintained for safety
 ```
+
+### Moon Orbit Model (New in v2.0)
+Enhanced lunar orbit calculations with time-varying elements:
+```python
+# Calculates Moon's position using:
+# - Base orbital elements (a=0.00257 AU, e=0.0549, i=5.145°)
+# - Secular variations:
+#   - Node regression: -19.341°/century (18.6 year cycle)
+#   - Apsidal precession: +40.690°/century (8.85 year cycle)
+# - Major perturbations:
+#   - Evection: ±0.01098 eccentricity variation
+#   - Annual equation: ±0.00048 eccentricity variation
+# - Dynamic date-based calculations for any selected time
+```
+
+The Moon's idealized orbit now accurately reflects:
+- Proper inclination to the ecliptic plane (~5.145°)
+- Time-varying eccentricity (0.026 to 0.077)
+- Nodal regression and apsidal advance
+- Solar gravitational perturbations
+
+This ensures the Moon's plotted position closely matches ephemeris data for any date.
 
 ### Multi-threaded Architecture  
 - **Background data fetching** without GUI blocking
@@ -260,10 +311,10 @@ The system includes intelligent orbit caching with incremental updates:
 
 ### Common Issues
 
-**Slow Initial Loading:**
-- Ensure stable internet connection
-- Check firewall settings for astroquery
-- Verify disk space (2GB minimum)
+**No More Midnight Update Delays (Fixed in v2.0):**
+- System now only updates selected objects
+- No automatic full cache updates
+- Center changes don't trigger mass updates
 
 **Memory Errors with High Magnitudes:**
 - Reduce magnitude limit (try 6 instead of 9)
@@ -283,14 +334,23 @@ The system includes intelligent orbit caching with incremental updates:
 ### Cache Management
 ```bash
 # Clear all cached data
-rm *.vot *.pkl orbit_paths.json
-
-# Clear only stellar data
-rm star_properties_*.pkl
-
-# Clear only orbital data  
 rm orbit_paths.json
+
+# Restore from backup
+cp orbit_paths_backup.json orbit_paths.json
+
+# Clear temporary cache
+rm orbit_paths_temp.json
+
+# View cache statistics
+# Check terminal output on startup for detailed cache info
 ```
+
+### New Status Display
+The application now features a 3-line status display showing:
+- Current operation with color coding (green=success, blue=special, red=error)
+- Previous two operations with timestamps
+- Reference to terminal for detailed information
 
 ## 🤝 Contributing
 
@@ -315,6 +375,7 @@ Popular enhancement requests:
 - **Variable star light curves**
 - **Binary star orbital mechanics**
 - **Galaxy structure mapping**
+- ~~**Improved lunar orbit model**~~ ✓ Implemented in v2.0
 
 ## 📜 License & Attribution
 
@@ -366,6 +427,15 @@ Special thanks to:
 
 ---
 
-*Last updated: May 2025*  
+*Last updated: June 6, 2025*  
 *Version: 2.0.0*  
 *Python compatibility: 3.8+*
+
+### Version History
+- **v2.0.0** (December 2024)
+  - Added smart selective cache management
+  - Implemented time-varying Moon orbit model with perturbations
+  - Removed startup dialogs for faster launch
+  - Added weekly automatic cache cleanup
+  - Enhanced orbit accuracy for all dates
+```

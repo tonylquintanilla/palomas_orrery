@@ -89,6 +89,19 @@ from earth_visualization_shells import (create_earth_inner_core_shell,
                                         earth_magnetosphere_info, 
                                         earth_hill_sphere_info)
 
+from moon_visualization_shells import (create_moon_inner_core_shell, 
+                                        create_moon_outer_core_shell, 
+                                        create_moon_mantle_shell,
+                                        create_moon_crust_shell, 
+                                        create_moon_exosphere_shell,  
+                                        create_moon_hill_sphere_shell,
+                                        moon_inner_core_info, 
+                                        moon_outer_core_info,
+                                        moon_mantle_info, 
+                                        moon_crust_info, 
+                                        moon_exosphere_info,  
+                                        moon_hill_sphere_info)
+
 from mars_visualization_shells import (create_mars_inner_core_shell, 
                                         create_mars_outer_core_shell, 
                                         create_mars_mantle_shell,
@@ -243,6 +256,10 @@ VENUS_RADIUS_AU = VENUS_RADIUS_KM / KM_PER_AU
 # Earth Constants
 EARTH_RADIUS_KM = CENTER_BODY_RADII['Earth']
 EARTH_RADIUS_AU = EARTH_RADIUS_KM / KM_PER_AU
+
+# Moon Constants
+MOON_RADIUS_KM = CENTER_BODY_RADII['Moon']
+MOON_RADIUS_AU = MOON_RADIUS_KM / KM_PER_AU
 
 # Mars Constants
 MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']  # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
@@ -465,6 +482,24 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 elif shell_name == 'hill_sphere':
                     traces.extend(create_earth_hill_sphere_shell(center_position))
     
+    elif body_name == 'Moon':
+        # Handle moon visualization with its specific shells
+        for shell_name, var in shell_vars.items():
+            if var.get() == 1:
+    #            shell_name = shell_name.replace('moon_', '')
+                if shell_name == 'inner_core':
+                    traces.extend(create_moon_inner_core_shell(center_position))
+                elif shell_name == 'outer_core':
+                    traces.extend(create_moon_outer_core_shell(center_position))
+                elif shell_name == 'mantle':
+                    traces.extend(create_moon_mantle_shell(center_position))
+                elif shell_name == 'crust':
+                    traces.extend(create_moon_crust_shell(center_position))
+                elif shell_name == 'exosphere':
+                    traces.extend(create_moon_exosphere_shell(center_position))
+                elif shell_name == 'hill_sphere':
+                    traces.extend(create_moon_hill_sphere_shell(center_position))
+
     elif body_name == 'Mars':
         # Handle Mars visualization with its specific shells
         for shell_name, var in shell_vars.items():
@@ -724,6 +759,20 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         if shell_vars['earth_hill_sphere'].get() == 1:
             traces.extend(create_earth_hill_sphere_shell(center_position))
 
+    if planet_name == 'Moon':
+        if shell_vars['moon_inner_core'].get() == 1:
+            traces.extend(create_moon_inner_core_shell(center_position))
+        if shell_vars['moon_outer_core'].get() == 1:
+            traces.extend(create_moon_outer_core_shell(center_position))
+        if shell_vars['moon_mantle'].get() == 1:
+            traces.extend(create_moon_mantle_shell(center_position))
+        if shell_vars['moon_crust'].get() == 1:
+            traces.extend(create_moon_crust_shell(center_position))
+        if shell_vars['moon_exosphere'].get() == 1:
+            traces.extend(create_moon_exosphere_shell(center_position))
+        if shell_vars['moon_hill_sphere'].get() == 1:
+            traces.extend(create_moon_hill_sphere_shell(center_position))
+
     if planet_name == 'Mars':
         if shell_vars['mars_inner_core'].get() == 1:
             traces.extend(create_mars_inner_core_shell(center_position))
@@ -906,11 +955,11 @@ def create_planet_shell_traces(planet_name, shell_vars, center_position=(0, 0, 0
         if hasattr(trace, 'customdata'):
             if isinstance(trace.customdata, list):
                 # Make sure all customdata items reference the correct planet
-                trace.customdata = [str(item).replace("Mercury", planet_name).replace("Venus", planet_name).replace("Earth", planet_name)
+                trace.customdata = [str(item).replace("Mercury", planet_name).replace("Venus", planet_name).replace("Earth", planet_name).replace("Moon", planet_name)
                                     .replace("Mars", planet_name).replace("Jupiter", planet_name).replace("Saturn", planet_name)
                                     .replace("Uranus", planet_name).replace("Neptune", planet_name).replace("Pluto", planet_name)
                                     .replace("Eris/Dysnomia", planet_name).replace("Planet 9", planet_name)
-                            if "Mercury" in str(item) or "Venus" in str(item) or "Earth" in str(item) or "Mars" in str(item)
+                            if "Mercury" in str(item) or "Venus" in str(item) or "Earth" in str(item) or "Moon" in str(item) or "Mars" in str(item)
                                 or "Jupiter" in str(item) or "Saturn" in str(item) or "Uranus" in str(item) or "Neptune" in str(item)
                                 or "Pluto" in str(item) or "Eris/Dysnomia" in str(item) or "Planet 9" in str(item)
                             else str(item) for item in trace.customdata]

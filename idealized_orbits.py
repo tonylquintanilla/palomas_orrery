@@ -4,6 +4,7 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 import traceback  # Add this import
+from datetime import datetime
 from constants_new import color_map
 
 planetary_params = {
@@ -2036,7 +2037,159 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         print(f"Error plotting {satellite_name} orbit: {e}")
         return fig
 
-def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, planetary_params=None, parent_planets=None, color_map=None):
+# Add this function to idealized_orbits.py
+
+def calculate_moon_orbital_elements(date):
+    """
+    Calculate Moon's orbital elements for a specific date
+    Using time-varying mean elements with major perturbations
+    
+    Parameters:
+        date (datetime): Date for which to calculate elements
+        
+    Returns:
+        dict: Dictionary containing orbital elements {a, e, i, omega, Omega}
+    """
+    # Calculate Julian centuries since J2000.0
+    j2000 = datetime(2000, 1, 1, 12, 0, 0)  # J2000.0 epoch
+    T = (date - j2000).total_seconds() / (36525.0 * 86400.0)  # Julian centuries
+    
+    # Mean orbital elements with secular variations
+    # These values are from JPL and are relative to the ecliptic
+    a = 0.002570  # AU (384,400 km) - relatively stable
+    
+    # Base eccentricity with secular variation
+    e_base = 0.0549  # Mean eccentricity
+    
+    # Inclination to ecliptic (not Earth's equator!)
+    i = 5.145  # degrees - mean inclination to ecliptic
+    
+    # Node regression (retrograde motion)
+    # The Moon's node completes one cycle in about 18.6 years
+    Omega = 125.08 - 0.0529538083 * (date - j2000).days  # degrees/day
+    
+    # Apsidal precession
+    # The Moon's line of apsides completes one cycle in about 8.85 years  
+    omega = 318.15 + 0.1643573223 * (date - j2000).days  # degrees/day
+    
+    # Calculate perturbations for more accuracy
+    # Days since J2000
+    d = (date - j2000).days
+    
+    # Mean anomalies
+    M_moon = (134.963 + 13.064993 * d) % 360  # Moon's mean anomaly
+    M_sun = (357.529 + 0.98560028 * d) % 360   # Sun's mean anomaly
+    D = (297.850 + 12.190749 * d) % 360        # Mean elongation
+    
+    # Convert to radians
+    M_moon_rad = np.radians(M_moon)
+    M_sun_rad = np.radians(M_sun)
+    D_rad = np.radians(D)
+    
+    # Apply perturbations to eccentricity
+    # Evection (largest perturbation)
+    e_evection = 0.01098 * np.cos(2*D_rad - M_moon_rad)
+    e = e_base + e_evection
+    
+    # Ensure physical bounds
+    e = max(0.026, min(e, 0.077))
+    
+    # Normalize angles
+    omega = omega % 360.0
+    Omega = Omega % 360.0
+    
+    return {
+        'a': a,
+        'e': e,
+        'i': i,
+        'omega': omega,
+        'Omega': Omega
+    }
+
+def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None):
+    """
+    Plot the Moon's idealized orbit with time-varying elements and perturbations
+    
+    Parameters:
+        fig: Plotly figure object
+        date: datetime object for the calculation epoch
+        center_object_name: Name of the central body (should be 'Earth' for Moon)
+        color: Color for the orbit line
+    """
+    # Get time-varying orbital elements
+    elements = calculate_moon_orbital_elements(date)
+    
+    # Extract elements
+    a = elements['a']
+    e = elements['e']
+    i = elements['i']
+    omega = elements['omega']
+    Omega = elements['Omega']
+    
+    print(f"\nMoon orbital elements for {date.strftime('%Y-%m-%d')}:")
+    print(f"  a = {a:.6f} AU")
+    print(f"  e = {e:.4f}")
+    print(f"  i = {i:.2f}°")
+    print(f"  ω = {omega:.2f}°")
+    print(f"  Ω = {Omega:.2f}°")
+    
+    # Generate orbit points
+    theta = np.linspace(0, 2*np.pi, 360)
+    
+    # For better accuracy near perigee/apogee, add extra points
+    theta_extra = np.linspace(-0.1, 0.1, 20)
+    theta = np.sort(np.concatenate([theta, theta_extra]))
+    
+    # Calculate radius for each point
+    r = a * (1 - e**2) / (1 + e * np.cos(theta))
+    
+    # Convert to Cartesian coordinates in orbital plane
+    x_orbit = r * np.cos(theta)
+    y_orbit = r * np.sin(theta)
+    z_orbit = np.zeros_like(theta)
+    
+    # Apply orbital element rotations - matching the standard sequence
+    # Convert angles to radians
+    i_rad = np.radians(i)
+    omega_rad = np.radians(omega)
+    Omega_rad = np.radians(Omega)
+    
+    # Use the same rotation sequence as in the main orbit plotting
+    # 1. Rotate by argument of periapsis (ω) around z-axis
+    x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+    # 2. Rotate by inclination (i) around x-axis
+    x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+    # 3. Rotate by longitude of ascending node (Ω) around z-axis
+    x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+    
+    # Create hover text with date information
+    date_str = date.strftime('%Y-%m-%d %H:%M UTC')
+    hover_text = f"Moon Ideal Orbit<br>Date: {date_str}<br>e: {e:.4f}<br>i: {i:.2f}°"
+    
+    # Use default Moon color if not specified
+    if color is None:
+        from constants_new import color_map
+        color = color_map('Moon')
+    
+    # Add trace to figure
+    fig.add_trace(
+        go.Scatter3d(
+            x=x_final,
+            y=y_final,
+            z=z_final,
+            mode='lines',
+            line=dict(dash='dot', width=2, color=color),
+            name="Moon Ideal Orbit",
+            text=[hover_text] * len(x_final),
+            customdata=[hover_text] * len(x_final),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    )
+    
+    return fig
+
+def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, planetary_params=None, parent_planets=None, color_map=None, date=None):
     """
     Plot idealized orbits for planets, dwarf planets, asteroids, KBOs, and moons.
     For non-Sun centers, only plots moons of that center body.
@@ -2049,6 +2202,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
         planetary_params (dict): Dictionary of orbital parameters for each object
         parent_planets (dict): Dictionary mapping parent planets to their satellites
         color_map (callable): Function to get color for an object by name
+        date (datetime): Date for time-varying orbital elements (used for Moon)
         
     Returns:
         plotly.graph_objects.Figure: Figure with idealized orbits added
@@ -2063,6 +2217,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
     }
 
     plotted = []
+
+    # Add date parameter default
+    if date is None:
+        from datetime import datetime
+        date = datetime.now()
 
     # If objects parameter is None, handle gracefully
     if objects is None:
@@ -2083,35 +2242,33 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
     if color_map is None:
         from constants_new import color_map       
 
-    # If center is not the Sun, we only want to plot moons of that center
+    # In the section where we plot satellites of the center object:
     if center_id != 'Sun':
         # Get list of moons for this center
         moons = parent_planets.get(center_id, [])
         
         # Filter objects_to_plot to only include moons of this center
         objects_to_plot = [obj for obj in objects_to_plot if obj in moons]
-
-    # Special case for Pluto to test rotation combinations
-#    if center_id == 'Pluto':
-#        for moon_name in objects_to_plot:
-#            fig = test_pluto_moon_rotations(moon_name, planetary_params, color_map(moon_name), fig)
-#        else:
-
-            # For each satellite of the center object, use the standard function
+        
+        # For each satellite of the center object
         for moon_name in objects_to_plot:
             # Find the object in the objects list
             moon_info = next((obj for obj in objects if obj['name'] == moon_name), None)
             if moon_info is None:
                 continue
-                
-            # Use the satellite plotting function with built-in planet-specific transformations
-            fig = plot_satellite_orbit(
-                moon_name, 
-                planetary_params,
-                center_id, 
-                color_map(moon_name), 
-                fig
-            )
+            
+            # Special handling for Earth's Moon with time-varying elements
+            if moon_name == 'Moon' and center_id == 'Earth':
+                fig = plot_moon_ideal_orbit(fig, date, center_id, color_map(moon_name))
+            else:
+                # Use the standard satellite plotting function for other moons
+                fig = plot_satellite_orbit(
+                    moon_name, 
+                    planetary_params,
+                    center_id, 
+                    color_map(moon_name), 
+                    fig
+                )
             
             plotted.append(moon_name)
     

@@ -23,6 +23,8 @@ import sys
 import math
 import json
 import orbit_data_manager
+import shutil
+
 from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points 
 from formatting_utils import format_maybe_float, format_km_float
 from shared_utilities import create_sun_direction_indicator
@@ -57,6 +59,13 @@ from planet_visualization import (
     earth_upper_atmosphere_info,
     earth_magnetosphere_info,
     earth_hill_sphere_info,
+
+    moon_inner_core_info,
+    moon_outer_core_info,
+    moon_mantle_info,
+    moon_crust_info,
+    moon_exosphere_info,
+    moon_hill_sphere_info,
 
     mars_inner_core_info,
     mars_outer_core_info,
@@ -156,7 +165,12 @@ from save_utils import save_plot
 
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
-import sys, os          # troubleshooting VS
+# Add these constants after existing constants
+TEMP_CACHE_FILE = "orbit_paths_temp.json"
+CLEANUP_TRACKING_FILE = ".last_orbit_cleanup"
+temp_cache = {}  # In-memory temporary cache
+remember_update_choice = None  # Session memory for dialog choice
+update_choice_remembered = False  # Flag for remembering choice
 
 print("Interpreter:", sys.executable)
 print("Working directory:", os.getcwd())
@@ -169,7 +183,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: May 21, 2025")
+root.title("Paloma's Orrery -- Updated: June 2, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -212,6 +226,144 @@ controls_window = controls_canvas.create_window(
     width=controls_canvas.winfo_width(),  # Match canvas width
     tags="controls"  # Add a tag for easier reference
 )
+
+# Helper function to create backup
+def create_orbit_backup():
+    """Create a backup of orbit cache on startup"""
+    if os.path.exists('orbit_paths.json'):
+        try:
+            shutil.copy('orbit_paths.json', 'orbit_paths_backup.json')
+            file_size = os.path.getsize('orbit_paths.json') / (1024 * 1024)  # MB
+            message = f"Backup created: orbit_paths_backup.json ({file_size:.1f}MB)"
+            print(f"[STARTUP] {message}")
+            
+            # Print cache statistics to terminal
+            with open('orbit_paths.json', 'r') as f:
+                orbit_data = json.load(f)
+                print(f"[CACHE INFO] Total orbits cached: {len(orbit_data)}")
+                print("[CACHE INFO] To manually delete cache, remove 'orbit_paths.json' file")
+            
+            return message, 'info'
+                
+        except Exception as e:
+            error_msg = f"Warning: Could not create backup: {e}"
+            print(f"[ERROR] {error_msg}")
+            return error_msg, 'error'
+    else:
+        message = "No cache found. Will create new cache as needed."
+        print(f"[STARTUP] {message}")
+        return message, 'info'
+
+# Helper function for status display with history
+status_history = []
+def update_status_display(message, status_type='info'):
+    """Update status display with color coding and history"""
+    global status_history
+    
+    # Color mapping
+    color_map = {
+        'info': 'black',
+        'success': 'green',
+        'warning': 'orange',
+        'error': 'red',
+        'special': 'blue'
+    }
+    
+    # Add timestamp
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    status_entry = {
+        'time': timestamp,
+        'message': message,
+        'color': color_map.get(status_type, 'black')
+    }
+    
+    # Add to history (keep last 3)
+    status_history.append(status_entry)
+    if len(status_history) > 3:
+        status_history.pop(0)
+    
+    # Update display if status_display exists
+    if 'status_display' in globals() and status_display:
+        display_text = ""
+        for entry in status_history:
+            display_text += f"[{entry['time']}] {entry['message']}\n"
+        display_text += "Refer to terminal for more details"
+        
+        status_display.config(text=display_text)
+        
+        # Color the most recent line
+        if status_history:
+            status_display.config(fg=status_history[-1]['color'])
+
+# Weekly cleanup function -- deprecated
+def cleanup_old_orbits():
+    """Remove orbit data older than 30 days"""
+    try:
+        # Check if it's been 7 days since last cleanup
+        should_cleanup = True
+        if os.path.exists(CLEANUP_TRACKING_FILE):
+            with open(CLEANUP_TRACKING_FILE, 'r') as f:
+                last_cleanup = float(f.read())
+                days_since = (time.time() - last_cleanup) / (24 * 60 * 60)
+                should_cleanup = days_since >= 7
+        
+        if not should_cleanup:
+            return None, None
+        
+        # Load orbit data
+        if not os.path.exists('orbit_paths.json'):
+            return None, None
+            
+        with open('orbit_paths.json', 'r') as f:
+            orbit_data = json.load(f)
+        
+        initial_count = len(orbit_data)
+        cutoff_time = time.time() - (30 * 24 * 60 * 60)  # 30 days ago
+        cleaned_data = {}
+        
+        # Keep only recent data
+        for key, data in orbit_data.items():
+            # Add timestamp to old data if missing
+            if isinstance(data, dict) and 'last_accessed' not in data:
+                data['last_accessed'] = time.time()
+            
+            # Check age
+            if isinstance(data, dict) and 'last_accessed' in data:
+                if data['last_accessed'] > cutoff_time:
+                    cleaned_data[key] = data
+            else:
+                # Keep data without timestamp but add one
+                if isinstance(data, dict):
+                    data['last_accessed'] = time.time()
+                cleaned_data[key] = data
+        
+        removed_count = initial_count - len(cleaned_data)
+        
+        if removed_count > 0:
+            # Save cleaned data
+            with open('orbit_paths.json', 'w') as f:
+                json.dump(cleaned_data, f)
+            
+            message = f"Cleanup: Removed {removed_count} orbits older than 30 days"
+            print(f"[CLEANUP] {message}")
+            print(f"[CLEANUP] Remaining orbits: {len(cleaned_data)}")
+            
+            # Update tracking file
+            with open(CLEANUP_TRACKING_FILE, 'w') as f:
+                f.write(str(time.time()))
+                
+            return message, 'success'
+        
+        # Update tracking file even if nothing removed
+        with open(CLEANUP_TRACKING_FILE, 'w') as f:
+            f.write(str(time.time()))
+            
+        return None, None
+            
+    except Exception as e:
+        error_msg = f"Cleanup error: {e}"
+        print(f"[ERROR] {error_msg}")
+        return error_msg, 'error'
 
 def configure_controls_canvas(event):
     # Update the scrollregion to encompass the inner frame
@@ -303,8 +455,7 @@ venus_magnetosphere_var = tk.IntVar(value=0)
 # venus hill sphere shell
 venus_hill_sphere_var = tk.IntVar(value=0)
 
-earth_var = tk.IntVar(value=0)  # Set Earth to 1 to preselect it by default
-moon_var = tk.IntVar(value=0)  
+earth_var = tk.IntVar(value=0)   
 # near Earth asteroids
 pt5_var = tk.IntVar(value=0)
 yr4_var = tk.IntVar(value=0)
@@ -328,6 +479,21 @@ earth_upper_atmosphere_var = tk.IntVar(value=0)
 earth_magnetosphere_var = tk.IntVar(value=0)
 # Earth hill sphere shell
 earth_hill_sphere_var = tk.IntVar(value=0)
+
+moon_var = tk.IntVar(value=0) 
+# moon shells
+# moon inner core shell
+moon_inner_core_var = tk.IntVar(value=0)
+# moon outer core shell
+moon_outer_core_var = tk.IntVar(value=0)
+# moon mantle shell
+moon_mantle_var = tk.IntVar(value=0)
+# moon crust shell
+moon_crust_var = tk.IntVar(value=0)
+# moon exosphere shell
+moon_exosphere_var = tk.IntVar(value=0)
+# moon hill sphere shell
+moon_hill_sphere_var = tk.IntVar(value=0)
 
 mars_var = tk.IntVar(value=0)  # Set Mars to 1 to preselect it by default
 # Mars' Moons
@@ -528,6 +694,8 @@ juno_var = tk.IntVar(value=0)
 
 galileo_var = tk.IntVar(value=0)
 
+apollo11sivb_var = tk.IntVar(value=0)
+
 pioneer10_var = tk.IntVar(value=0)
 
 pioneer11_var = tk.IntVar(value=0)
@@ -693,6 +861,15 @@ earth_shell_vars = {
     'earth_upper_atmosphere': earth_upper_atmosphere_var,
     'earth_magnetosphere': earth_magnetosphere_var,
     'earth_hill_sphere': earth_hill_sphere_var
+}
+
+moon_shell_vars = {
+    'moon_inner_core': moon_inner_core_var,
+    'moon_outer_core': moon_outer_core_var,
+    'moon_mantle': moon_mantle_var,
+    'moon_crust': moon_crust_var,
+    'moon_exosphere': moon_exosphere_var,
+    'moon_hill_sphere': moon_hill_sphere_var
 }
 
 mars_shell_vars = {
@@ -1089,6 +1266,12 @@ objects = [
 
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
 
+    # Apollo 11 S-IVB (Spacecraft) -399110 Time Specification: Start=1969-07-16:40 UT , Stop=1969-07-28 00:06, Step=1 (hours) Revised: Mar 22, 2016  
+    {'name': 'Apollo 11 S-IVB', 'id': '-399110', 'var': apollo11sivb_var, 'color': color_map('Apollo 11 S-IVB'), 'symbol': 'diamond-open', 
+    'is_mission': True, 'id_type': 'id', 'start_date': datetime(1969, 7, 16, 17), 'end_date': datetime(1969, 7, 28, 0, 0), # splashdown 07-24 16:50
+    'mission_url': 'https://www.nasa.gov/mission/apollo-11/', 
+    'mission_info': 'This is the last and most powerful stage of the Saturn V rocket that propelled the Apollo 11 mission towards the Moon.'},
+
     {'name': 'Pioneer10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer10'), 'symbol': 'diamond-open', 
     'is_mission': True, 'id_type': 'id', 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 
     'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
@@ -1419,87 +1602,6 @@ objects = [
 
 ]
 
-refresh_choice = messagebox.askyesnocancel(
-    "Orbit Data Options",
-    "Would you like to update orbit data?\n\n"
-    "Yes - Only fetch new data\n"
-    "No - Use existing data without updates\n"
-    "Cancel - Completely refresh all data (takes several minutes)",
-    icon=messagebox.QUESTION
-)
-
-if refresh_choice is True:  # Yes - incremental update
-    # Call the incremental update with all necessary parameters
-    updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
-        object_list=objects,
-        center_object_name='Sun',
-        days_ahead=730,
-        planetary_params=planetary_params,
-        parent_planets=parent_planets,
-        root_widget=root
-    )
-    
-    status_display.config(
-        text=f"Updated {updated} orbit paths, {current} already current. "
-        f"Total objects: {total}. Saved ~{time_saved:.1f} hours of processing time."
-    )
-elif refresh_choice is False:  # No - use existing data
-    status_display.config(text="Using existing orbit data without updates.")
-else:  # Cancel - full refresh
-    # This is the legacy full refresh path
-    refresh_all = True
-    status_display.config(text="Full refresh selected. Fetching all orbit paths...")
-    
-    # Get center object info
-    center_object_info = next((obj for obj in objects if obj['name'] == 'Sun'), None)
-    center_id = 'Sun'
-    center_id_type = None
-    
-    # Count objects to update
-    objects_to_update = [obj for obj in objects if 'id' in obj and obj['name'] != 'Sun']
-    total_objects = len(objects_to_update)
-    updated_count = 0
-    
-    # For each object, fetch a complete new orbit path
-    for obj in objects_to_update:
-        orbit_key = f"{obj['name']}_Sun"
-        interval = orbit_data_manager.determine_interval_for_object(
-            obj, planetary_params, parent_planets
-        )
-        
-        status_display.config(text=f"Fetching data for {obj['name']} ({updated_count+1}/{total_objects})")
-        root.update()
-        
-        now = datetime.today()
-        end_date = now + timedelta(days=730)
-        
-        orbit_data_manager.fetch_complete_orbit_path(
-            obj, orbit_key, now, end_date, interval, center_id, center_id_type
-        )
-        updated_count += 1
-    
-    # Save the updated data
-    orbit_data_manager.save_orbit_paths()
-    
-    status_display.config(text=f"Completely refreshed {updated_count}/{total_objects} orbit paths.")
-
-"""
-def load_orbit_paths():
-    # Load orbit paths from file with backwards compatibility.
-    try:
-        with open(ORBIT_PATHS_FILE, "r") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
-
-def save_orbit_paths(orbit_paths):
-    with open(ORBIT_PATHS_FILE, "w") as f:
-        json.dump(orbit_paths, f)
-
-# Load the stored orbit paths at startup
-orbit_paths_over_time = load_orbit_paths()
-"""
-
 class ScrollableFrame(tk.Frame):
     """
     A scrollable frame that can contain multiple widgets with a vertical scrollbar.
@@ -1695,12 +1797,48 @@ class CreateToolTip(object):
             self.tw.destroy()
         self.tw = None
 
+"""
 # Ask the user whether to refresh all stored orbit paths (warn about delay)
 refresh_all = messagebox.askyesno(
     "Refresh Orbit Data",
     "Would you like to refresh all stored orbit paths from JPL Horizons?\n\n"
     "This may take several minutes. Choose 'No' to only fetch missing data."
 )
+"""
+
+# Create backup on startup
+message, msg_type = create_orbit_backup()
+update_status_display(message, msg_type)
+
+# Initialize orbit data manager without dialogs
+orbit_paths_over_time = orbit_data_manager.initialize(status_display)
+
+# Run cleanup if needed
+#cleanup_msg, cleanup_type = cleanup_old_orbits()
+#if cleanup_msg:
+#    update_status_display(cleanup_msg, cleanup_type)
+
+# Print cache health summary once per session
+if os.path.exists('orbit_paths.json'):
+    with open('orbit_paths.json', 'r') as f:
+        orbit_data = json.load(f)
+        
+    # Analyze cache by center object
+    center_stats = {}
+    for key in orbit_data.keys():
+        if '_' in key:
+            parts = key.split('_')
+            if len(parts) >= 2:
+                center = parts[1]
+                center_stats[center] = center_stats.get(center, 0) + 1
+    
+    print("\n[CACHE HEALTH SUMMARY]")
+    print(f"Total cached orbits: {len(orbit_data)}")
+    print("Orbits by center object:")
+    for center, count in sorted(center_stats.items()):
+        print(f"  {center}: {count} orbits")
+    print("\nNote: Cache can only be manually deleted by removing 'orbit_paths.json' file")
+    print("-" * 50)
 
 # CONSTANTS
 BUTTON_FONT = ("Arial", 10, "normal")  # You can adjust the font as needed
@@ -1801,7 +1939,7 @@ def update_orbit_paths(center_object_name='Sun'):
 #    end_date = now + datetime.timedelta(days=365)       # one year
     now = STATIC_TODAY
     start_date = now - datetime.timedelta(days=0)    # default start at now
-    end_date = now + datetime.timedelta(days=730)      # default 2 years or 730 days
+    end_date = now + datetime.timedelta(days=365)      # default 1 year or 365 days
     
     # Iterate over all objects in the 'objects' list
     for obj in objects:
@@ -1820,7 +1958,8 @@ def update_orbit_paths(center_object_name='Sun'):
         orbit_key = f"{obj['name']}_{center_object_name}"
 
         # If refresh_all is True or the object's orbit path is missing, fetch new data.
-        if refresh_all or (obj['name'] not in orbit_paths_over_time):
+#        if refresh_all or (obj['name'] not in orbit_paths_over_time):
+        if orbit_key not in orbit_paths_over_time:
             # Determine a suitable interval.
             # Use adaptive step sizing if available – for example, for high eccentricity objects use "12h" instead of "1d".
             interval = "1d"  # default interval
@@ -1866,31 +2005,27 @@ def update_orbit_paths(center_object_name='Sun'):
 orbit_paths_over_time = orbit_data_manager.load_orbit_paths()
 
 # Now that 'objects' is defined, update orbit paths with Sun as center (default)
-update_orbit_paths('Sun')
+# update_orbit_paths('Sun')
 # update_orbit_paths()
 
-"""
 def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
+    """Plot orbit paths using data from orbit_data_manager or temp cache."""
+    # Check if we're in special fetch mode
+    if special_fetch_var.get() == 1 and temp_cache:
+        # Use temp cache data
+        plot_data = {}
+        print(f"[PLOT ORBIT PATHS] Using temp cache with {len(temp_cache)} orbits")
+        for obj in objects_to_plot:
+            orbit_key = f"{obj['name']}_{center_object_name}"
+            if orbit_key in temp_cache:
+                plot_data[obj['name']] = temp_cache[orbit_key]
+                print(f"[PLOT ORBIT PATHS] Found {obj['name']} in temp cache with {len(temp_cache[orbit_key]['x'])} points")
+    else:
+        # Get orbit data in plot-ready format from main cache
+        plot_data = orbit_data_manager.get_orbit_data_for_plotting(objects_to_plot, center_object_name)
+        print(f"[PLOT ORBIT PATHS] Using main cache")
     
-#    For each object in objects_to_plot, if orbit path data exists in orbit_paths_over_time,
-#    add a Scatter3d trace (static background line) for its orbit.
-    
-#    Parameters:
-#        fig: plotly figure object
-#        objects_to_plot: list of objects to plot orbits for
-#        center_object_name: name of the central body (default: 'Sun')
-    
-
-    # Extract just the names from the objects_to_plot list
-    selected_names = [obj['name'] for obj in objects_to_plot]
-    
-    # Debug output to verify we're getting the right list of selected objects
-    print("\nSelected objects for orbit paths:")
-    for name in selected_names:
-        print(f"  - {name}")
-
-    for name in selected_names:
-
+    for name, path_data in plot_data.items():
         # Skip objects that are the center
         if name == center_object_name:
             continue
@@ -1898,70 +2033,34 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
         # Check if this is a satellite of the center object
         is_satellite_of_center = center_object_name in parent_planets and name in parent_planets.get(center_object_name, [])
         
-        # Generate a unique key for this object-center pair
-        orbit_key = f"{name}_{center_object_name}"
-        
-        # Check if we have the orbit path for this object-center combination
-        if orbit_key in orbit_paths_over_time:
-            path = orbit_paths_over_time[orbit_key]
-
-            # Create the hover text arrays - these need to match the number of points in the path
-            if is_satellite_of_center:
-                hover_text = [f"{name} Orbit around {center_object_name}"] * len(path['x'])
-                orbit_name = f"{name} Orbit around {center_object_name}"
-            else:
-                hover_text = [f"{name} Orbit"] * len(path['x'])
-                orbit_name = f"{name} Orbit"
-
-            print(f"Plotting orbit for {name} relative to {center_object_name} ({len(path['x'])} points)")
-      
-    #        # Create the hover text arrays - these need to match the number of points in the path
-    #        hover_text = [f"{name} Orbit"] * len(path['x'])
-
-            fig.add_trace(
-                go.Scatter3d(
-                    x=path['x'],
-                    y=path['y'],
-                    z=path['z'],
-                    mode='lines',
-                    line=dict(width=1, color=color_map(name)),  # uses the same color as defined in your code
-                    name=orbit_name,
-        #            name=f"{name} Orbit",
-                    text=hover_text,            # Add proper hover text array
-                    customdata=hover_text,      # Add same for customdata
-                    hovertemplate='%{text}<extra></extra>',
-        #            hovertemplate=f"{name} Orbit<extra></extra>",
-                    showlegend=True
-                )
-            )
-
-        # Fallback to old key format if the new format isn't found
-        elif name in orbit_paths_over_time:
-            path = orbit_paths_over_time[name]
-            
-            # Create the hover text arrays - these need to match the number of points in the path
-            hover_text = [f"{name} Orbit"] * len(path['x'])
-
-            fig.add_trace(
-                go.Scatter3d(
-                    x=path['x'],
-                    y=path['y'],
-                    z=path['z'],
-                    mode='lines',
-                    line=dict(width=1, color=color_map(name)),  # uses the same color as defined in your code
-                    name=f"{name} Orbit",
-                    text=hover_text,            # Add proper hover text array
-                    customdata=hover_text,      # Add same for customdata
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True
-                )
-            )
+        # Create the hover text arrays
+        if is_satellite_of_center:
+            hover_text = [f"{name} Orbit around {center_object_name}"] * len(path_data['x'])
+            orbit_name = f"{name} Orbit around {center_object_name}"
         else:
-            print(f"No orbit path found for {name} relative to {center_object_name}")
-            """
+            hover_text = [f"{name} Orbit"] * len(path_data['x'])
+            orbit_name = f"{name} Orbit"
 
+        print(f"Plotting orbit for {name} relative to {center_object_name} ({len(path_data['x'])} points)")
+      
+        fig.add_trace(
+            go.Scatter3d(
+                x=path_data['x'],
+                y=path_data['y'],
+                z=path_data['z'],
+                mode='lines',
+                line=dict(width=1, color=color_map(name)),
+                name=orbit_name,
+                text=hover_text,
+                customdata=hover_text,
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+
+"""
 def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
-    """Plot orbit paths using data from orbit_data_manager."""
+#    Plot orbit paths using data from orbit_data_manager.
     # Get orbit data in plot-ready format
     plot_data = orbit_data_manager.get_orbit_data_for_plotting(objects_to_plot, center_object_name)
     
@@ -1997,6 +2096,7 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
                 showlegend=True
             )
         )
+"""
 
 # Suppress ErfaWarning messages
 warnings.simplefilter('ignore', ErfaWarning)
@@ -2123,7 +2223,7 @@ def calculate_axis_range(objects_to_plot):
     
     return [-max_range, max_range]
 
-def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=False):
+def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=False, center_object_name='Sun'):
     """
     Plot actual orbit positions for selected objects.
     
@@ -2133,7 +2233,106 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
         dates_lists: dictionary mapping planet names to lists of dates
         center_id: ID of central body (default: 'Sun')
         show_lines: whether to show lines connecting points (default: False)
+        center_object_name: Name of the center object (default: 'Sun')
     """
+    # Check if we're in special fetch mode and should use temp cache
+    if special_fetch_var.get() == 1 and temp_cache:
+        # For special fetch mode, use the temp cache data directly
+        print("[SPECIAL FETCH MODE] Using temp cache for plot_actual_orbits")
+        print(f"[DEBUG] Temp cache keys: {list(temp_cache.keys())}")
+        print(f"[DEBUG] Looking for planets: {planets_to_plot}")
+        print(f"[DEBUG] Center object: {center_object_name}")
+        
+        for planet in planets_to_plot:
+            orbit_key = f"{planet}_{center_object_name}"
+            print(f"[DEBUG] Looking for key: {orbit_key}")
+            if orbit_key in temp_cache:
+                path_data = temp_cache[orbit_key]
+                x = path_data['x']
+                y = path_data['y'] 
+                z = path_data['z']
+                
+                if show_lines:
+                    mode = 'lines'
+                    line = dict(color=color_map(planet), width=1)
+                    marker = None
+                else:
+                    mode = 'markers'
+                    line = None
+                    marker = dict(color=color_map(planet), size=1)
+
+                # Create the hover text for the actual orbit
+                hover_text = f"{planet} Orbit"
+
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=x,
+                        y=y,
+                        z=z,
+                        mode=mode,
+                        line=line,
+                        marker=marker,
+                        name=f"{planet} Orbit",
+                        text=[hover_text] * len(x),
+                        customdata=[hover_text] * len(x),
+                        hovertemplate='%{text}<extra></extra>',
+                        showlegend=True
+                    )
+                )
+                print(f"[SPECIAL FETCH] Plotted {planet} orbit with {len(x)} points from temp cache")
+            else:
+                print(f"[SPECIAL FETCH] {planet} not found in temp cache")
+    else:
+        # Normal mode - use dates_lists and fetch_trajectory
+        print("[NORMAL MODE] Using dates_lists for plot_actual_orbits")
+        for planet in planets_to_plot:
+            dates_list = dates_lists.get(planet, [])
+            if not dates_list:
+                print(f"No dates available for {planet}, skipping.")
+                continue
+            print(f"[NORMAL MODE] {planet}: {len(dates_list)} dates from {dates_list[0]} to {dates_list[-1]}")
+            
+            obj_info = next((obj for obj in objects if obj['name'] == planet), None)
+            if not obj_info:
+                continue
+            trajectory = fetch_trajectory(obj_info['id'], dates_list, center_id=center_id, id_type=obj_info.get('id_type'))
+            # Now trajectory is a list of positions
+            if trajectory:
+                x = [pos['x'] for pos in trajectory if pos is not None]
+                y = [pos['y'] for pos in trajectory if pos is not None]
+                z = [pos['z'] for pos in trajectory if pos is not None]
+                if show_lines:                                                 # this code adds lines betwen the markers
+                    mode = 'lines'
+                    line = dict(color=color_map(planet), width=1)
+                    marker = None
+                else:
+                    mode = 'markers'
+                    line = None
+                    marker = dict(color=color_map(planet), size=1)
+
+                # Create the hover text for the actual orbit
+                hover_text = f"{planet} Orbit"
+
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=x,
+                        y=y,
+                        z=z,
+                        mode=mode,
+                        line=line,
+                        marker=marker,
+                        name=f"{planet} Orbit",
+                        text=[hover_text] * len(x),           # Add proper hover text
+                        customdata=[hover_text] * len(x),     # Same for customdata
+                        hovertemplate='%{text}<extra></extra>',
+                        showlegend=True
+                    )
+                )
+                print(f"[NORMAL MODE] Plotted {planet} orbit with {len(x)} points")
+
+"""
+def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=False):
+
     for planet in planets_to_plot:
         dates_list = dates_lists.get(planet, [])
         if not dates_list:
@@ -2177,6 +2376,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                     showlegend=True
                 )
             )
+"""
 
 def calculate_planet9_position_on_orbit(a=600, e=0.30, i=6, omega=150, Omega=90, theta=75):
     """
@@ -2669,6 +2869,7 @@ body_shells_config = {
     'Mercury': mercury_shell_vars,
     'Venus': venus_shell_vars,
     'Earth': earth_shell_vars,
+    'Moon': moon_shell_vars,
     'Mars': mars_shell_vars,
     'Jupiter': jupiter_shell_vars,
     'Saturn': saturn_shell_vars,
@@ -2754,26 +2955,134 @@ def plot_objects():
                 center_id = 'Sun'
                 center_id_type = None
 
-            # INCREMENTAL UPDATE: Before using orbit paths, ensure we have updated data
+# Get selected objects
             selected_objects = [obj for obj in objects if obj['var'].get() == 1]
-            output_label.config(text="Checking for orbit data updates...")
-            progress_bar.step(10)
-            root.update_idletasks()
             
-            # Call the incremental update for selected objects only
-            updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
-                object_list=selected_objects,
-                center_object_name=center_object_name,
-                days_ahead=730,
-                planetary_params=planetary_params,
-                parent_planets=parent_planets,
-                root_widget=root
-            )
+            if not selected_objects:
+                output_label.config(text="No objects selected for plotting")
+                progress_bar.stop()
+                return
+
+            # Check if we're in special fetch mode or normal mode
+            if special_fetch_var.get() == 0:  # Normal mode
+                # Check if any selected object needs updating
+                need_update = False
+                for obj in selected_objects:
+                    orbit_key = f"{obj['name']}_{center_object_name}"
+                    if orbit_key not in orbit_paths_over_time:
+                        need_update = True
+                        break
+                    # TODO: Could add more sophisticated checks here (date range, resolution, etc.)
+                
+                # Handle updates based on user preference
+                should_update = False
+                
+                if need_update and not update_choice_remembered:
+                    # Show dialog
+                    dialog = tk.Toplevel(root)
+                    dialog.title("Update Orbit Data?")
+                    dialog.geometry("400x200")
+                    
+                    message = tk.Label(dialog, 
+                        text=f"New orbit data is needed for {len(selected_objects)} selected objects.\n\n"
+                             f"Would you like to fetch updated data from JPL Horizons?",
+                        wraplength=350)
+                    message.pack(pady=20)
+                    
+                    remember_var = tk.IntVar(value=0)
+                    remember_check = tk.Checkbutton(dialog,
+                        text="Remember my choice for this session\n"
+                             "(Warning: This applies globally to all plots)",
+                        variable=remember_var)
+                    remember_check.pack(pady=10)
+                    
+                    button_frame = tk.Frame(dialog)
+                    button_frame.pack()
+                    
+                    user_choice = {'update': None}
+                    
+                    def on_yes():
+                        user_choice['update'] = True
+                        if remember_var.get() == 1:
+                            global remember_update_choice, update_choice_remembered
+                            remember_update_choice = True
+                            update_choice_remembered = True
+                        dialog.destroy()
+                    
+                    def on_no():
+                        user_choice['update'] = False
+                        if remember_var.get() == 1:
+                            global remember_update_choice, update_choice_remembered
+                            remember_update_choice = False
+                            update_choice_remembered = True
+                        dialog.destroy()
+                    
+                    tk.Button(button_frame, text="Yes - Update Cache", 
+                             command=on_yes, bg='light green').pack(side='left', padx=5)
+                    tk.Button(button_frame, text="No - Use Existing", 
+                             command=on_no, bg='light coral').pack(side='left', padx=5)
+                    
+                    dialog.wait_window()
+                    
+                    should_update = user_choice.get('update', False)
+                
+                elif need_update and update_choice_remembered:
+                    # Use remembered choice
+                    should_update = remember_update_choice
+                
+                # Perform update if needed
+                if should_update:
+                    update_status_display("Updating orbit cache for selected objects...", 'info')
+                    progress_bar.step(10)
+                    root.update_idletasks()
+                    
+                    updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
+                        object_list=selected_objects,
+                        center_object_name=center_object_name,
+                        days_ahead=int(end_date_entry.get()),
+                        planetary_params=planetary_params,
+                        parent_planets=parent_planets,
+                        root_widget=root
+                    )
+                    
+                    update_status_display(f"Cache updated: {updated} new, {current} current", 'success')
+                else:
+                    update_status_display("Using existing cache without updates", 'info')
+                    
+            else:  # Special fetch mode
+                update_status_display("Special fetch mode: Fetching data (not cached)...", 'special')
+                print(f"[SPECIAL FETCH] Getting data for {len(selected_objects)} objects")
+                
+                # Fetch to temp cache with custom settings
+                for obj in selected_objects:
+                    if obj['name'] != center_object_name:
+                        orbit_key = f"{obj['name']}_{center_object_name}"
+                        
+                        # Determine interval based on object type and GUI settings
+                        if obj['name'] in parent_planets.get(center_object_name, []):
+                            interval = satellite_interval_entry.get()
+                        elif obj.get('is_mission') or obj.get('is_comet'):
+                            interval = mission_comet_interval_entry.get()
+                        else:
+                            interval = default_interval_entry.get()
+                        
+                        # Calculate date range
+                        start_date = date_obj + timedelta(days=int(start_date_entry.get()))
+                        end_date = date_obj + timedelta(days=int(end_date_entry.get()))
+                        
+                        # Fetch without caching to main file
+                        orbit_data = fetch_orbit_path(obj, start_date, end_date, interval,
+                                                    center_id=center_id, id_type=obj.get('id_type'))
+                        if orbit_data:
+                            temp_cache[orbit_key] = orbit_data
+                
+                # Save temp cache
+                with open(TEMP_CACHE_FILE, 'w') as f:
+                    json.dump(temp_cache, f)
+                
+                update_status_display(f"Special fetch complete: {len(temp_cache)} orbits in temp cache", 'special')
+                print(f"[SPECIAL FETCH] Temp cache contains {len(temp_cache)} orbits")
             
-            if updated > 0:
-                output_label.config(text=f"Updated {updated} orbit paths. Continuing with plot...")
-            else:
-                output_label.config(text="Using existing orbit data. Continuing with plot...")
             progress_bar.step(10)
             root.update_idletasks()
 
@@ -2790,6 +3099,10 @@ def plot_objects():
                 'Earth': {
                     'position': None,  # Will be populated during animation
                     'shell_vars': earth_shell_vars
+                },
+                'Moon': {
+                    'position': None,  # Will be populated during animation
+                    'shell_vars': moon_shell_vars
                 },
                 'Mars': {
                     'position': None,  # Will be populated during animation
@@ -2890,7 +3203,7 @@ def plot_objects():
                         days_until_datetime_max = (datetime.max - date_obj).days
 
                         # List of objects known to work with their full orbital periods
-                        non_problematic_objects = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+                        non_problematic_objects = ['Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
 
                         if obj['name'] in non_problematic_objects:
                             # For well-established planets, use their full orbital period with system limits
@@ -3036,6 +3349,7 @@ def plot_objects():
                 'Mercury': mercury_shell_vars,
                 'Venus': venus_shell_vars,
                 'Earth': earth_shell_vars,
+                'Moon': moon_shell_vars,
                 'Mars': mars_shell_vars,
                 'Jupiter': jupiter_shell_vars,
                 'Saturn': saturn_shell_vars,
@@ -3109,6 +3423,7 @@ def plot_objects():
                 'Mercury': mercury_shell_vars,
                 'Venus': venus_shell_vars,
                 'Earth': earth_shell_vars,
+                'Moon': moon_shell_vars,
                 'Mars': mars_shell_vars,
                 'Jupiter': jupiter_shell_vars,
                 'Saturn': saturn_shell_vars,
@@ -3162,8 +3477,14 @@ def plot_objects():
                                     fig.add_trace(trace)
                             
             # Plot the actual orbits for selected objects
+    #        selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
+    #        plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #show_lines=True
+
+            # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
-            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #show_lines=True
+            # Pass center_object_name to plot_actual_orbits
+            print(f"[DEBUG] Calling plot_actual_orbits with center_object_name={center_object_name}")
+            plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name)       #show_lines=True
 
             # Refetch positions (so we can add them as Scatter3d traces)
             positions = {}
@@ -3207,7 +3528,27 @@ def plot_objects():
             # Reassign fig.data with center traces at the end
             fig.data = tuple(other_traces + center_traces)
 
-            # Now that the figure is ready, update layout with axis_range
+            # Find the section in plot_objects() where the figure layout is updated
+            # Replace the existing title line with this enhanced version:
+
+            # Calculate the end date for the title based on orbit data range
+            try:
+                # Get the end date offset from the GUI
+                end_date_offset = int(end_date_entry.get())
+                end_date = date_obj + timedelta(days=end_date_offset)
+                
+                # Format the title with date range
+                if end_date_offset == 0:
+                    # If no offset, just show the single date
+                    title_text = f"Paloma's Orrery for {date_obj.strftime('%B %d, %Y %H:%M')} UTC"
+                else:
+                    # Show date range for orbit data
+                    title_text = f"Paloma's Orrery for {date_obj.strftime('%B %d, %Y %H:%M')} through {end_date.strftime('%B %d, %Y')} UTC"
+            except ValueError:
+                # Fallback to original format if end_date_entry is invalid
+                title_text = f"Paloma's Orrery for {date_obj.strftime('%B %d, %Y %H:%M')} UTC"
+
+            # Update the figure layout section to use the new title:
             fig.update_layout(
                 scene=dict(
                     xaxis=dict(
@@ -3241,7 +3582,7 @@ def plot_objects():
                 plot_bgcolor='black',
                 title_font_color='white',
                 font_color='white',
-                title=f"Paloma's Orrery for {date_obj.strftime('%B %d, %Y %H:%M')} UTC",
+                title=title_text,  # Use the calculated title with date range
                 showlegend=True,
                 legend=dict(
                     font=dict(color='white'),
@@ -3277,7 +3618,7 @@ def plot_objects():
                     ),
                     dict(
                         text="Click on the legend items to<br>"
-                             "toggle them off and back on.",
+                            "toggle them off and back on.",
                         xref='paper',
                         yref='paper',
                         x=0.95,
@@ -3288,7 +3629,6 @@ def plot_objects():
                         xanchor='left',
                         yanchor='top'
                     ),
-
                 ]
             )
 
@@ -3296,11 +3636,10 @@ def plot_objects():
             selected_objects = [obj['name'] for obj in objects if obj['var'].get() == 1]
 
             # 6. Plot idealized orbits using your new logic
-    #        plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)    
 
             plot_idealized_orbits(fig, selected_objects, center_id=center_object_name, 
                                     objects=objects, planetary_params=planetary_params,
-                                    parent_planets=parent_planets, color_map=color_map)
+                                    parent_planets=parent_planets, color_map=color_map, date=date_obj)
 
             # Add URL buttons before showing/saving
             fig = add_url_buttons(fig, objects, selected_objects)
@@ -3532,7 +3871,7 @@ def animate_objects(step, label):
                 planet_interval_divisor = 50
                 sat_plot_orbit_days = 56
                 sat_plot_orbit_period = 1
-                end_date_offset = 730  # Default 2 years
+                end_date_offset = 365  # Default 1 year
                 start_date_offset = 0   # Default 0 days (from now)
                 output_label.config(text="Some invalid interval values, using defaults.")
 
@@ -3561,7 +3900,7 @@ def animate_objects(step, label):
             updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
                 object_list=selected_objects,
                 center_object_name=center_object_name,
-                days_ahead=max(days_ahead, 730),  # Ensure we have enough data for the animation
+                days_ahead=max(days_ahead, 365),  # Ensure we have enough data for the animation
                 planetary_params=planetary_params,
                 parent_planets=parent_planets,
                 root_widget=root
@@ -3619,6 +3958,10 @@ def animate_objects(step, label):
                 'Earth': {
                     'positions': [],  # Will be populated during animation
                     'shell_vars': earth_shell_vars
+                },
+                'Moon': {
+                    'positions': [],  # Will be populated during animation
+                    'shell_vars': moon_shell_vars
                 },
                 'Mars': {
                     'positions': [],  # Will be populated during animation
@@ -3723,6 +4066,7 @@ def animate_objects(step, label):
                 'Mercury': mercury_shell_vars,
                 'Venus': venus_shell_vars,
                 'Earth': earth_shell_vars,
+                'Moon': moon_shell_vars,
                 'Mars': mars_shell_vars,
                 'Jupiter': jupiter_shell_vars,
                 'Saturn': saturn_shell_vars,
@@ -3830,11 +4174,11 @@ def animate_objects(step, label):
                 for obj in objects
                 if obj['var'].get() == 1
             ]
-    ##        plot_idealized_orbits(fig, selected_objects, center_id=center_object_name)
             
             plot_idealized_orbits(fig, selected_objects, center_id=center_object_name, 
                           objects=objects, planetary_params=planetary_params,
-                          parent_planets=parent_planets, color_map=color_map)            
+                          parent_planets=parent_planets, color_map=color_map,
+                          date=dates_list[0] if dates_list else datetime.now())  # Use first animation date)            
 
             # Create initial traces for moving objects and store their indices
             trace_indices = {}  # Define trace_indices dictionary
@@ -4181,10 +4525,31 @@ def animate_objects(step, label):
     animation_thread = create_monitored_thread(shutdown_handler, animation_worker)
     animation_thread.start()
 
+"""
+def on_closing():
+#    Handle cleanup when the main window is closed.
+    try:
+        # Attempt to remove any temporary files
+        temp_files = ["palomas_orrery.html", "palomas_orrery_animation.html"]
+        for temp_file in temp_files:
+            try:
+                if os.path.exists(temp_file):
+                    os.remove(temp_file)
+            except:
+                pass
+    finally:
+        root.destroy()
+"""
+
 def on_closing():
     """Handle cleanup when the main window is closed."""
     try:
-        # Attempt to remove any temporary files
+        # Clean up temp cache
+        if os.path.exists(TEMP_CACHE_FILE):
+            os.remove(TEMP_CACHE_FILE)
+            print("[CLEANUP] Temporary cache file removed")
+        
+        # Existing cleanup code...
         temp_files = ["palomas_orrery.html", "palomas_orrery_animation.html"]
         for temp_file in temp_files:
             try:
@@ -4198,10 +4563,17 @@ def on_closing():
 # Add the closing protocol to the root window
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
+"""
 # Function to fill today's date into the entry fields
 def fill_now():
     now = datetime.now()
     update_date_fields(now)
+"""
+
+def fill_now():
+    now = datetime.now()
+    update_date_fields(now)
+    update_offset_date_displays()  # Add this line
 
 # Function to set Paloma's Birthday
 def set_palomas_birthday():
@@ -4378,7 +4750,7 @@ CreateToolTip(celestial_frame, "Select celestial bodies for plotting. Selected o
 
 def create_celestial_checkbutton(name, variable):
     # For main planets and Sun, make a bold label
-    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris', 'Planet 9']:
+    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Eris', 'Planet 9']:
         # Create frame to hold checkbox and label
         frame = tk.Frame(celestial_frame)
         frame.pack(anchor='w')
@@ -4571,7 +4943,36 @@ CreateToolTip(earth_magnetosphere_checkbutton, earth_magnetosphere_info)
 earth_hill_sphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Hill Sphere", variable=earth_hill_sphere_var)
 earth_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_hill_sphere_checkbutton, earth_hill_sphere_info)
-create_celestial_checkbutton("- Moon", moon_var)
+
+create_celestial_checkbutton("Moon", moon_var)
+# Create a Frame specifically for the moon shell options (indented)
+moon_shell_options_frame = tk.Frame(celestial_frame)
+moon_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
+# moon inner core shell
+moon_inner_core_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Inner Core", variable=moon_inner_core_var)
+moon_inner_core_checkbutton.pack(anchor='w')
+CreateToolTip(moon_inner_core_checkbutton, moon_inner_core_info)
+# moon outer core shell
+moon_outer_core_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Outer Core", variable=moon_outer_core_var)
+moon_outer_core_checkbutton.pack(anchor='w')
+CreateToolTip(moon_outer_core_checkbutton, moon_outer_core_info)
+# moon mantle shell
+moon_mantle_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Mantle", variable=moon_mantle_var)
+moon_mantle_checkbutton.pack(anchor='w')
+CreateToolTip(moon_mantle_checkbutton, moon_mantle_info)
+# moon crust shell
+moon_crust_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Crust", variable=moon_crust_var)
+moon_crust_checkbutton.pack(anchor='w')
+CreateToolTip(moon_crust_checkbutton, moon_crust_info)
+# moon exosphere shell
+moon_exosphere_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Exosphere", variable=moon_exosphere_var)
+moon_exosphere_checkbutton.pack(anchor='w')
+CreateToolTip(moon_exosphere_checkbutton, moon_exosphere_info)
+# moon hill sphere shell
+moon_hill_sphere_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Hill Sphere", variable=moon_hill_sphere_var)
+moon_hill_sphere_checkbutton.pack(anchor='w')
+CreateToolTip(moon_hill_sphere_checkbutton, moon_hill_sphere_info)
+
 create_celestial_checkbutton("- 2024 PT5", pt5_var)
 create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)
 create_celestial_checkbutton("- 2024 YR4", yr4_var)
@@ -4984,6 +5385,7 @@ def create_mission_checkbutton(name, variable, dates):
         tooltip_text += f"\nMore Info: {INFO['mission_url']}"
     CreateToolTip(checkbutton, tooltip_text)
 # Start dates are the day after launch to avoid missing Horizons data.
+create_mission_checkbutton("Apollo 11 S-IVB", apollo11sivb_var, "(1969-07-16:17 to 1969-07-28:00)")     # Time Specification: Start=1969-07-16 17 UT , Stop=1969-07-28 00, Step=1 (hours)
 create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2003-01-23)")
 create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
 create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-21 to 2029-12-31)")
@@ -5015,6 +5417,59 @@ comet_frame.pack(pady=(10, 5), fill='x')
 CreateToolTip(comet_frame, "Select comets for plotting. Selected objects will be plotted on the entered date, as well as ideal " 
               "orbits. Selected objects will be animated only over the fetched dates only if within their defined date ranges, and will " 
               "plot both actual and ideal orbits.")
+
+# These functions should be defined AFTER the GUI widgets exist
+
+def update_offset_date_displays():
+    """Update the date labels next to offset fields"""
+    try:
+        # Get base date from entry fields
+        base_date = datetime(
+            int(entry_year.get()),
+            int(entry_month.get()),
+            int(entry_day.get()),
+            int(entry_hour.get()),
+            int(entry_minute.get())
+        )
+        
+        # Update start date label
+        start_offset = int(start_date_entry.get())
+        start_date = base_date + timedelta(days=start_offset)
+        start_date_label_display.config(text=start_date.strftime("%B %d, %Y"))
+        
+        # Update end date label
+        end_offset = int(end_date_entry.get())
+        end_date = base_date + timedelta(days=end_offset)
+        end_date_label_display.config(text=end_date.strftime("%B %d, %Y"))
+        
+    except ValueError:
+        # Handle invalid input
+        start_date_label_display.config(text="Invalid date")
+        end_date_label_display.config(text="Invalid date")
+
+def toggle_special_fetch_mode():
+    """Toggle visual feedback for special fetch mode"""
+    if special_fetch_var.get() == 1:
+        # Cyan background for special mode
+        for widget in [start_date_entry, end_date_entry, default_interval_entry,
+                      eccentric_interval_entry, mission_comet_interval_entry, 
+                      satellite_interval_entry]:
+            widget.config(bg='cyan')
+        update_status_display("Special fetch mode ENABLED - data will NOT be cached", 'special')
+        print("[SPECIAL MODE] Enabled - subsequent fetches will use temporary cache")
+    else:
+        # Normal background
+        for widget in [start_date_entry, end_date_entry, default_interval_entry,
+                      eccentric_interval_entry, mission_comet_interval_entry, 
+                      satellite_interval_entry]:
+            widget.config(bg='white')
+        # Clear temp cache
+        global temp_cache
+        temp_cache = {}
+        if os.path.exists(TEMP_CACHE_FILE):
+            os.remove(TEMP_CACHE_FILE)
+        update_status_display("Special fetch mode DISABLED - temp cache cleared", 'info')
+        print("[SPECIAL MODE] Disabled - temporary cache cleared")
 
 # Updated create_comet_checkbutton function
 def create_comet_checkbutton(name, variable, dates, perihelion):
@@ -5120,26 +5575,17 @@ def on_center_change(*args):
         """
 
 def on_center_change(*args):
-    """Update orbit paths when the center object is changed."""
+    """Update frame title when the center object is changed."""
     center_object = center_object_var.get()
-    if center_object != 'Sun':
-        # Only fetch non-Sun centered paths when needed to avoid excessive startup time
-        status_display.config(text=f"Updating orbit paths for center: {center_object}...")
-        root.update()  # Force GUI to refresh
-        
-        # Call the incremental update with the new center
-        updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
-            object_list=objects,
-            center_object_name=center_object,
-            days_ahead=730,
-            planetary_params=planetary_params,
-            parent_planets=parent_planets,
-            root_widget=root
-        )
-        
-        status_display.config(
-            text=f"Updated {updated} orbit paths, {current} already current for center: {center_object}"
-        )
+    
+    # Just update the frame title, don't fetch any data
+    orbit_path_frame.config(text=f"Standard Orbit Path Fetching Controls for JSON Cache (Center: {center_object})")
+    
+    # Update status to show current center
+    update_status_display(f"Center changed to: {center_object}", 'info')
+    
+    # DO NOT call update_orbit_paths or update_orbit_paths_incrementally here!
+    # Data will be fetched when actually plotting with selected objects
 
 # Bind the center_object_var to the on_center_change function
 center_object_var.trace_add("write", on_center_change)
@@ -5196,9 +5642,34 @@ num_frames_entry.pack(anchor='w')
 num_frames_entry.insert(0, '29')  # Default number of frames
 CreateToolTip(num_frames_entry, "Do not exceed 130 to avoid timing out JPL Horizons' data fetch.")
 
+"""
 # Create a new frame for orbit path fetching controls
 orbit_path_frame = tk.LabelFrame(controls_frame, text="Orbit Path Fetching Controls")
 orbit_path_frame.pack(pady=(5, 5), fill='x')
+"""
+
+# Update the frame title
+orbit_path_frame = tk.LabelFrame(controls_frame, text="Standard Orbit Path Fetching Controls for JSON Cache")
+orbit_path_frame.pack(pady=(5, 5), fill='x')
+
+# Add special fetch checkbox ABOVE the frame
+special_fetch_var = tk.IntVar(value=0)
+special_fetch_check = tk.Checkbutton(
+    controls_frame,
+    text="Use updated Standard Orbit Path Fetching Controls for JSON Cache for a special fetch that will not be cached:",
+    variable=special_fetch_var,
+    command=toggle_special_fetch_mode,
+    font=("Arial", 9, "bold"),
+    fg='darkblue',
+    wraplength=400
+)
+special_fetch_check.pack(pady=(5, 0), fill='x')
+CreateToolTip(special_fetch_check,
+    "When checked:\n"
+    "• Fetches use the settings below for plotting\n"
+    "• Data is stored in temporary cache only\n"
+    "• Temp cache is cleared when unchecked or app closes\n"
+    "• Does not affect the main JSON cache file")
 
 # After orbit_path_frame, where you want to position the status frame:
 status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg='SystemButtonFace', fg='black')
@@ -5216,21 +5687,50 @@ status_display = tk.Label(
 )
 status_display.pack(anchor='w', padx=5, pady=5)
 
-# Add label and entry for start date timedelta
-start_date_label = tk.Label(orbit_path_frame, text="Start date offset from now (in days):")
-start_date_label.grid(row=0, column=0, padx=(5, 5), pady=(5, 2), sticky='w')
-start_date_entry = tk.Entry(orbit_path_frame, width=5)
-start_date_entry.grid(row=0, column=1, padx=(0, 5), pady=(5, 2), sticky='w')
-start_date_entry.insert(0, '0')  # Default value
+# Create frame for start date offset with date display
+start_date_frame = tk.Frame(orbit_path_frame)
+start_date_frame.grid(row=0, column=0, columnspan=2, padx=(5, 5), pady=(5, 2), sticky='w')
+
+start_date_label = tk.Label(start_date_frame, text="Start date offset from now (in days):")
+start_date_label.pack(side='left')
+
+start_date_entry = tk.Entry(start_date_frame, width=5)
+start_date_entry.pack(side='left', padx=(5, 5))
+start_date_entry.insert(0, '0')
+
+# Add label to show the calculated date
+start_date_label_display = tk.Label(start_date_frame, text="", fg='blue', font=("Arial", 9, "italic"))
+start_date_label_display.pack(side='left')
+
 CreateToolTip(start_date_label, "Number of days to look back from current date (negative value means looking into the past)")
 
-# Add label and entry for end date timedelta
-end_date_label = tk.Label(orbit_path_frame, text="End date offset from now (in days):")
-end_date_label.grid(row=1, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
-end_date_entry = tk.Entry(orbit_path_frame, width=5)
-end_date_entry.grid(row=1, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
-end_date_entry.insert(0, '730')  # Default value (2 years)
+# Create frame for end date offset with date display
+end_date_frame = tk.Frame(orbit_path_frame)
+end_date_frame.grid(row=1, column=0, columnspan=2, padx=(5, 5), pady=(2, 2), sticky='w')
+
+end_date_label = tk.Label(end_date_frame, text="End date offset from now (in days):")
+end_date_label.pack(side='left')
+
+end_date_entry = tk.Entry(end_date_frame, width=5)
+end_date_entry.pack(side='left', padx=(5, 5))
+end_date_entry.insert(0, '365')
+
+# Add label to show the calculated date
+end_date_label_display = tk.Label(end_date_frame, text="", fg='blue', font=("Arial", 9, "italic"))
+end_date_label_display.pack(side='left')
+
 CreateToolTip(end_date_label, "Number of days to look ahead from current date")
+
+# Bind update functions to the entry fields
+start_date_entry.bind('<KeyRelease>', lambda e: update_offset_date_displays())
+end_date_entry.bind('<KeyRelease>', lambda e: update_offset_date_displays())
+
+# Also update when the main date fields change
+for widget in [entry_year, entry_month, entry_day, entry_hour, entry_minute]:
+    widget.bind('<KeyRelease>', lambda e: update_offset_date_displays())
+
+# Schedule initial update after GUI is fully loaded
+root.after(100, update_offset_date_displays)
 
 # Add label and entry for default interval
 default_interval_label = tk.Label(orbit_path_frame, text="Default interval for orbit paths:")

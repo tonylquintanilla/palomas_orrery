@@ -45,6 +45,10 @@ VENUS_RADIUS_AU = VENUS_RADIUS_KM / KM_PER_AU
 EARTH_RADIUS_KM = CENTER_BODY_RADII['Earth']
 EARTH_RADIUS_AU = EARTH_RADIUS_KM / KM_PER_AU
 
+# Moon Constants
+MOON_RADIUS_KM = CENTER_BODY_RADII['Moon']
+MOON_RADIUS_AU = MOON_RADIUS_KM / KM_PER_AU
+
 # Mars Constants
 MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']  # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
 MARS_RADIUS_AU = MARS_RADIUS_KM / KM_PER_AU  # Convert to AU
