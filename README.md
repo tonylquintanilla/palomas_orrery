@@ -1,4 +1,3 @@
-```markdown
 # Paloma's Orrery
 
 **An Advanced Interactive Solar System and Stellar Visualization Suite**
@@ -6,6 +5,12 @@
 A comprehensive Python application that creates stunning 3D visualizations of our solar system and stellar neighborhood. This tool combines NASA JPL Horizons data with Hipparcos/Gaia catalogs to provide unprecedented interactive astronomical visualizations.
 
 ## 🌟 Key Features
+
+### Dual-Pipeline Architecture
+Paloma's Orrery employs a sophisticated dual-pipeline architecture that processes astronomical data through two specialized pathways:
+
+**🌟 Solar System Pipeline**: JPL Horizons ephemeris data → intelligent orbit management → planet visualization → animated solar system plots
+**⭐ Stellar Pipeline**: Star catalog data → stellar parameter calculation → 3D/2D visualization → interactive stellar maps and HR diagrams
 
 ### Solar System Visualization
 - **Real-time 3D positioning** of planets, moons, asteroids, and comets using NASA JPL Horizons data
@@ -35,7 +40,7 @@ A comprehensive Python application that creates stunning 3D visualizations of ou
 - **Automatic cache backup** on startup with single backup file
 - **Weekly cache cleanup** removing data older than 30 days
 - **Multi-threaded processing** with proper shutdown handling
-- **Export capabilities** (HTML, PNG, SVG formats)
+- **Export capabilities** (HTML, PNG, SVG formats plus JSON, VOTable, Pickle data files)
 - **Professional hover information** with detailed astronomical data
 - **Copy-to-clipboard** functionality for star names and coordinates
 - **Time-varying lunar orbit model** with perturbations for accurate Moon positioning
@@ -129,6 +134,14 @@ python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than 
 
 ## 🏗️ Architecture Overview
 
+### Dual-Pipeline Data Flow
+
+Paloma's Orrery employs a sophisticated dual-pipeline architecture that processes solar system and stellar data through separate but coordinated pathways:
+
+**Solar System Pipeline**: External data sources (JPL Horizons) → Data acquisition → Orbit data management → Solar visualization processing → Solar plot functions (plot_objects, animate_objects)
+
+**Stellar Pipeline**: External data sources (Hipparcos, Gaia, SIMBAD) → Data acquisition → Data processing → Parameter calculation & selection → Stellar visualization processing → Stellar plot functions (create_3d_visualization, create_hr_diagram)
+
 ### Core Modules
 
 **`palomas_orrery.py`** - Main GUI application with comprehensive solar system controls
@@ -154,7 +167,7 @@ python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than 
   - Perturbation calculations for realistic lunar motion
 
 **Data Pipeline:**
-- `data_acquisition.py` - Multi-catalog stellar data fetching
+- `data_acquisition.py` / `data_acquisition_distance.py` - Multi-catalog stellar data fetching
 - `data_processing.py` - Coordinate transformations and filtering
 - `star_properties.py` - SIMBAD database integration
 - `stellar_parameters.py` - Temperature and luminosity calculations
@@ -162,7 +175,7 @@ python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than 
 **Infrastructure:**
 - `orbit_data_manager.py` - Intelligent orbit caching system with selective updates
 - `shutdown_handler.py` - Thread-safe application management
-- `save_utils.py` - Export functionality
+- `save_utils.py` - Export functionality (plots and data files)
 - `messier_object_data_handler.py` - Non-stellar object integration
 
 ## 📊 Data Sources & Processing
@@ -203,7 +216,7 @@ The application handles multiple photometric standards:
 - **Camera presets**: Navigate to notable stars and objects
 - **Hover information**: Detailed astronomical data on mouse-over
 - **Legend toggles**: Show/hide object categories
-- **Export options**: HTML, PNG, SVG formats
+- **Export options**: HTML, PNG, SVG formats plus structured data files
 
 ### Scientific Accuracy
 - **Proper coordinate systems**: ICRS alignment with celestial sphere
@@ -302,8 +315,9 @@ This ensures the Moon's plotted position closely matches ephemeris data for any 
 - **Memory management** for large datasets
 
 ### Professional Export Pipeline
-- **Publication-quality** static images
+- **Publication-quality** static images (PNG, SVG)
 - **Interactive HTML** with full functionality  
+- **Structured data export** (JSON, VOTable, Pickle formats)
 - **Batch processing** for animation sequences
 - **Custom templates** for presentations
 
@@ -438,4 +452,3 @@ Special thanks to:
   - Removed startup dialogs for faster launch
   - Added weekly automatic cache cleanup
   - Enhanced orbit accuracy for all dates
-```
