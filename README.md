@@ -178,6 +178,92 @@ Paloma's Orrery employs a sophisticated dual-pipeline architecture that processe
 - `save_utils.py` - Export functionality (plots and data files)
 - `messier_object_data_handler.py` - Non-stellar object integration
 
+## 📦 Module Reference
+
+### Core Application Modules
+
+**`catalog_selection.py`** - Star selection and filtering logic for distance and magnitude-based queries
+
+**`constants_new.py`** - Physical constants, astronomical parameters, and object type mappings
+
+**`data_acquisition.py`** - Stellar data fetching from Hipparcos, Gaia, and SIMBAD catalogs (magnitude-based)
+
+**`data_acquisition_distance.py`** - Stellar data fetching optimized for distance-based queries
+
+**`data_processing.py`** - Coordinate transformations, unique ID generation, and stellar data preprocessing
+
+**`earth_visualization_shells.py`** - Create planetary structure shells.
+
+**`eris_visualization_shells.py`** - Create planetary structure shells.
+
+**`formatting_utils.py`** - Text formatting utilities for numerical values and hover text display
+
+**`hr_diagram_apparent_magnitude.py`** - Command-line tool for generating H-R diagrams based on apparent magnitude
+
+**`hr_diagram_distance.py`** - Command-line tool for generating H-R diagrams based on distance limits
+
+**`idealized_orbits.py`** - Orbital mechanics calculations and idealized orbit plotting, including time-varying Moon orbit model
+
+**`jupiter_visualization_shells.py`** - Create planetary structure shells.
+
+**`mars_visualization_shells.py`** - Create planetary structure shells.
+
+**`mercury_visualization_shells.py`** - Create planetary structure shells.
+
+**`messier_catalog.py`** - Catalog of selected Messier objects and location data.
+
+**`messier_object_data_handler.py`** - Integration and processing of Messier catalog deep-sky objects
+
+**`moon_visualization_shells.py`** - Create planetary structure shells.
+
+**`neptune_visualization_shells.py`** - Create planetary structure shells.
+
+**`orbit_data_manager.py`** - Intelligent JPL Horizons data caching with selective updates and automatic cleanup
+
+**`palomas_orrery.py`** - Main GUI application for solar system visualization and animation controls
+
+**`palomas_orrery_helpers.py`** - Helper functions directly called into palomas_orrery.py.
+
+**`planet_visualization.py`** - Planetary shell system rendering with internal structure visualization
+
+**`planet9_visualization_shells.py`** - Create planetary structure shells.
+
+**`planetarium_apparent_magnitude.py`** - Command-line 3D stellar visualization tool using apparent magnitude limits
+
+**`planetarium_distance.py`** - Command-line 3D stellar visualization tool using distance limits
+
+**`pluto_visualization_shells.py`** - Create planetary structure shells.
+
+**`saturn_visualization_shells.py`** - Create planetary structure shells.
+
+**`save_utils.py`** - Export functionality for plots and structured data files (PNG, HTML, JSON, VOTable, Pickle)
+
+**`shared_utilities.py`** - Shared functions.
+
+**`shutdown_handler.py`** - Thread-safe application shutdown and cleanup management
+
+**`solar_visualization_shells.py`** - Solar structure visualization with detailed shell system rendering
+
+**`star_notes.py`** - Educational content and unique notes for notable stars and astronomical objects
+
+**`star_properties.py`** - SIMBAD database integration for stellar property queries and caching
+
+**`star_visualization_gui.py`** - Dedicated GUI for stellar neighborhood exploration with search functionality
+
+**`stellar_parameters.py`** - Temperature and luminosity calculations using spectral types and photometric data
+
+**`uranus_visualization_shells.py`** - Create planetary structure shells.
+
+**`venus_visualization_shells.py`** - Create planetary structure shells.
+
+**`visualization_2d.py`** - Hertzsprung-Russell diagram generation with interactive stellar classification
+
+**`visualization_3d.py`** - 3D stellar neighborhood rendering with magnitude and temperature visualization
+
+**`visualization_core.py`** - Core visualization utilities shared between 2D and 3D stellar plotting modules
+
+**`visualization_utils.py`** - GUI utilities including scrollable frames, tooltips, clipboard support, and star search functionality
+
 ## 📊 Data Sources & Processing
 
 ### Astronomical Catalogs
