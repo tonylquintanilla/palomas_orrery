@@ -81,6 +81,78 @@ inner_limit_oort_info = (
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
 
+hills_cloud_torus_info = (
+            "Oort Cloud: Hills Cloud Torus:\n\n"
+
+            "Based on dynamical models showing the inner Oort Cloud is more disk-like due to galactic tides.\n"
+
+            "Structure:\n" 
+            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n"
+            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\n" 
+            "Key Characteristics:\n" 
+            "* Not uniform shells but complex, structured regions\n" 
+            "* Density varies significantly throughout\n" 
+            "* Influenced by galactic tides and stellar encounters\n" 
+            "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
+            "Scientific Evidence:\n" 
+            "* Comet orbital inclinations suggest spherical outer region\n" 
+            "* Jupiter-family comets indicate inner disk-like region\n" 
+            "* Computer simulations show tidal sculpting effects\n" 
+            "* Stellar encounter models predict clumpy structure\n" 
+            "Recent Discoveries:\n" 
+            "* Objects like Sedna may be inner Oort Cloud members\n" 
+            "* 2012 VP113 provides evidence for inner Oort population\n" 
+            "* NEOWISE survey improving population estimates"
+        )
+
+outer_oort_clumpy_info = (
+            "Oort Cloud: Clumpy Oort Cloud:\n\n"
+
+            "Reflects N-body simulations showing stellar encounters create density variations.\n"
+
+            "Structure:\n" 
+            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n"
+            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\n" 
+            "Key Characteristics:\n" 
+            "* Not uniform shells but complex, structured regions\n" 
+            "* Density varies significantly throughout\n" 
+            "* Influenced by galactic tides and stellar encounters\n" 
+            "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
+            "Scientific Evidence:\n" 
+            "* Comet orbital inclinations suggest spherical outer region\n" 
+            "* Jupiter-family comets indicate inner disk-like region\n" 
+            "* Computer simulations show tidal sculpting effects\n" 
+            "* Stellar encounter models predict clumpy structure\n" 
+            "Recent Discoveries:\n" 
+            "* Objects like Sedna may be inner Oort Cloud members\n" 
+            "* 2012 VP113 provides evidence for inner Oort population\n" 
+            "* NEOWISE survey improving population estimates"
+        )
+
+galactic_tide_info = (
+            "Oort Cloud: Galactic Tide Influenced Oort:\n\n"
+
+            "Shows how the Milky Way's gravity creates asymmetries.\n"
+
+            "Structure:\n" 
+            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n"
+            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\n" 
+            "Key Characteristics:\n" 
+            "* Not uniform shells but complex, structured regions\n" 
+            "* Density varies significantly throughout\n" 
+            "* Influenced by galactic tides and stellar encounters\n" 
+            "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
+            "Scientific Evidence:\n" 
+            "* Comet orbital inclinations suggest spherical outer region\n" 
+            "* Jupiter-family comets indicate inner disk-like region\n" 
+            "* Computer simulations show tidal sculpting effects\n" 
+            "* Stellar encounter models predict clumpy structure\n" 
+            "Recent Discoveries:\n" 
+            "* Objects like Sedna may be inner Oort Cloud members\n" 
+            "* 2012 VP113 provides evidence for inner Oort population\n" 
+            "* NEOWISE survey improving population estimates"
+        )
+
 solar_wind_info = (
             "Solar Wind: Heliopause:\n\n"
 
@@ -1044,3 +1116,324 @@ def create_sun_core_shell():
     ]
     
     return traces
+
+import numpy as np
+import plotly.graph_objs as go
+from planet_visualization_utilities import create_sphere_points, SOLAR_RADIUS_AU
+
+def create_sun_hills_cloud_torus(inner_radius=2000, outer_radius=20000, thickness_ratio=0.3):
+    """
+    Create a toroidal (doughnut-shaped) Hills Cloud structure.
+    FIXED VERSION - Returns proper Plotly trace objects.
+    
+    Parameters:
+    - inner_radius: Inner boundary in AU (default: 2000)
+    - outer_radius: Outer boundary in AU (default: 20000)
+    - thickness_ratio: Ratio of torus thickness to major radius (default: 0.3)
+    """
+    # Major radius (center to tube center)
+    major_radius = (inner_radius + outer_radius) / 2
+    # Minor radius (tube thickness)
+    minor_radius = (outer_radius - inner_radius) / 2 * thickness_ratio
+    
+    # Parametric equations for torus
+    n_points = 60
+    u = np.linspace(0, 2*np.pi, n_points)  # Around the tube
+    v = np.linspace(0, 2*np.pi, n_points)  # Around the major radius
+    
+    u, v = np.meshgrid(u, v)
+    
+    # Add some randomness to make it less perfect
+    noise_factor = 0.1
+    radius_variation = 1 + noise_factor * np.random.normal(0, 1, u.shape)
+    
+    x = (major_radius + minor_radius * np.cos(u)) * np.cos(v) * radius_variation
+    y = (major_radius + minor_radius * np.cos(u)) * np.sin(v) * radius_variation
+    z = minor_radius * np.sin(u) * radius_variation * 0.5  # Flatten slightly
+    
+    # Flatten the arrays to 1D
+    x_flat = x.flatten()
+    y_flat = y.flatten()
+    z_flat = z.flatten()
+    
+    # Create text and customdata arrays with same length as coordinates    
+    text_array = ['Hills Cloud (Inner Oort): Disk-like structure<br>' 
+                  '2,000-20,000 AU<br>'
+                  'More tightly bound to Solar System<br>'
+                  'Source of Jupiter-family comets<br>'
+                  'Toroidal shape due to galactic tides'] * len(x_flat)
+    customdata_array = ['Hills Cloud Torus'] * len(x_flat)
+
+    # Create the Plotly trace object
+    trace = go.Scatter3d(
+        x=x_flat, 
+        y=y_flat, 
+        z=z_flat,
+        mode='markers',
+        marker=dict(
+            size=1.5,
+            color='rgb(173, 216, 230)',  # Light blue
+            opacity=0.4,
+            symbol='circle'
+        ),
+        name='Hills Cloud (Inner Oort - Toroidal)',
+        text=text_array,
+        customdata=customdata_array,
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    )
+    
+    # Return a list containing the trace (consistent with other shell functions)
+    return [trace]
+
+def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=15):
+    """
+    Create a clumpy, asymmetric outer Oort Cloud with density variations.
+    FIXED VERSION - Returns proper Plotly trace objects.
+    """
+    points_x, points_y, points_z = [], [], []
+    
+    for i in range(n_clumps):
+        # Random clump center
+        clump_radius = np.random.uniform(radius_min, radius_max)
+        theta = np.random.uniform(0, 2*np.pi)
+        phi = np.random.uniform(-np.pi/2, np.pi/2)
+        
+        clump_center_x = clump_radius * np.cos(phi) * np.cos(theta)
+        clump_center_y = clump_radius * np.cos(phi) * np.sin(theta)
+        clump_center_z = clump_radius * np.sin(phi)
+        
+        # Generate points around clump center
+        n_points_in_clump = np.random.randint(50, 200)
+        clump_size = np.random.uniform(5000, 15000)  # AU
+        
+        for j in range(n_points_in_clump):
+            # Random point within clump
+            r = clump_size * np.random.beta(2, 5)  # Beta distribution for more realistic clustering
+            theta_local = np.random.uniform(0, 2*np.pi)
+            phi_local = np.random.uniform(-np.pi/2, np.pi/2)
+            
+            x = clump_center_x + r * np.cos(phi_local) * np.cos(theta_local)
+            y = clump_center_y + r * np.cos(phi_local) * np.sin(theta_local)
+            z = clump_center_z + r * np.sin(phi_local)
+            
+            # Ensure point is within Oort Cloud bounds
+            distance = np.sqrt(x**2 + y**2 + z**2)
+            if radius_min <= distance <= radius_max:
+                points_x.append(x)
+                points_y.append(y)
+                points_z.append(z)
+    
+    # Convert to numpy arrays
+    x = np.array(points_x)
+    y = np.array(points_y)
+    z = np.array(points_z)
+    
+    # Create text and customdata arrays
+    text_array = ['Outer Oort Cloud: Clumpy, asymmetric structure<br>' 
+                  '20,000-100,000+ AU<br>' 
+                  'Source of long-period comets<br>' 
+                  'Influenced by galactic tides and stellar encounters'] * len(x)
+    customdata_array = ['Outer Oort Cloud'] * len(x)
+    
+    # Create the Plotly trace
+    trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=1.0,
+            color='rgb(255, 255, 255)',  # White
+            opacity=0.3,
+            symbol='circle'
+        ),
+        name='Outer Oort Cloud (Clumpy)',
+        text=text_array,
+        customdata=customdata_array,
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    )
+    
+    # Return a list containing the trace (consistent with other shell functions)
+    return [trace]
+
+def create_sun_galactic_tide(radius=50000, n_points=2000):
+    """
+    Create Oort Cloud structure influenced by galactic tidal forces.
+    The galactic plane creates asymmetry in the distribution.
+    FIXED VERSION - Returns proper Plotly trace objects.
+    """
+    # Generate points in spherical coordinates
+    r = np.random.normal(radius, radius*0.3, n_points)
+    r = np.clip(r, radius*0.5, radius*1.5)  # Keep within reasonable bounds
+    
+    theta = np.random.uniform(0, 2*np.pi, n_points)
+    
+    # Galactic tide effect: fewer objects near galactic plane (z=0)
+    # Use a distribution that's depleted near z=0
+    phi_weights = np.linspace(-np.pi/2, np.pi/2, 100)
+    weights = 1 + 0.5 * np.abs(np.sin(phi_weights))  # More objects away from galactic plane
+    phi = np.random.choice(phi_weights, n_points, p=weights/weights.sum())
+    
+    x = r * np.cos(phi) * np.cos(theta)
+    y = r * np.cos(phi) * np.sin(theta)
+    z = r * np.sin(phi)
+    
+    # Create text and customdata arrays
+    text_array = ['Galactic Tide Influenced Objects<br>' 
+                  'Asymmetric distribution due to Milky Way\'s gravity<br>' 
+                  'Objects avoid galactic plane<br>~50,000 AU typical distance'] * len(x)
+    customdata_array = ['Galactic Tide Region'] * len(x)
+    
+    # Create the Plotly trace
+    trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=0.8,
+            color='rgb(255, 182, 193)',  # Light pink
+            opacity=0.2,
+            symbol='diamond'
+        ),
+        name='Galactic Tide Region',
+        text=text_array,
+        customdata=customdata_array,
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    )
+    
+    # Return a list containing the trace (consistent with other shell functions)
+    return [trace]
+
+def create_enhanced_oort_cloud_visualization():
+    """
+    Create a more scientifically accurate Oort Cloud visualization.
+    """
+    traces = []
+    
+    # 1. Hills Cloud (Inner Oort) - Toroidal structure
+    if True:  # Replace with your checkbox logic
+        x_hills, y_hills, z_hills = create_sun_hills_cloud_torus()
+        
+        traces.append(go.Scatter3d(
+            x=x_hills, y=y_hills, z=z_hills,
+            mode='markers',
+            marker=dict(
+                size=1.5,
+                color='rgb(173, 216, 230)',  # Light blue
+                opacity=0.4,
+                symbol='circle'
+            ),
+            name='Hills Cloud (Inner Oort - Toroidal)',
+            text=['Hills Cloud: Disk-like structure, 2,000-20,000 AU<br>More tightly bound to Solar System<br>Source of Jupiter-family comets'] * len(x_hills),
+            customdata=['Hills Cloud'] * len(x_hills),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        ))
+    
+    # 2. Outer Oort Cloud - Clumpy structure
+    if True:  # Replace with your checkbox logic
+        x_outer, y_outer, z_outer = create_sun_outer_oort_clumpy()
+        
+        traces.append(go.Scatter3d(
+            x=x_outer, y=y_outer, z=z_outer,
+            mode='markers',
+            marker=dict(
+                size=1.0,
+                color='rgb(255, 255, 255)',  # White
+                opacity=0.3,
+                symbol='circle'
+            ),
+            name='Outer Oort Cloud (Clumpy)',
+            text=['Outer Oort Cloud: Clumpy, asymmetric structure<br>20,000-100,000+ AU<br>Source of long-period comets<br>Influenced by galactic tides and stellar encounters'] * len(x_outer),
+            customdata=['Outer Oort Cloud'] * len(x_outer),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        ))
+    
+    # 3. Galactic tide influenced region
+    if True:  # Replace with your checkbox logic
+        x_tide, y_tide, z_tide = create_sun_galactic_tide()
+        
+        traces.append(go.Scatter3d(
+            x=x_tide, y=y_tide, z=z_tide,
+            mode='markers',
+            marker=dict(
+                size=0.8,
+                color='rgb(255, 182, 193)',  # Light pink
+                opacity=0.2,
+                symbol='diamond'
+            ),
+            name='Galactic Tide Region',
+            text=['Galactic Tide Influenced Objects<br>Asymmetric distribution due to Milky Way\'s gravity<br>Objects avoid galactic plane<br>~50,000 AU typical distance'] * len(x_tide),
+            customdata=['Galactic Tide Region'] * len(x_tide),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        ))
+    
+    return traces
+
+def create_oort_cloud_density_visualization():
+    """
+    Alternative approach: Show Oort Cloud as density gradients rather than discrete shells.
+    """
+    traces = []
+    
+    # Create multiple density layers
+    radii = [5000, 10000, 20000, 40000, 70000, 100000]
+    densities = [0.8, 0.6, 0.5, 0.3, 0.2, 0.1]  # Relative densities
+    
+    for i, (radius, density) in enumerate(zip(radii, densities)):
+        # Number of points proportional to density
+        n_points = int(500 * density)
+        
+        # Generate points with some randomness
+        theta = np.random.uniform(0, 2*np.pi, n_points)
+        phi = np.random.uniform(-np.pi/2, np.pi/2, n_points)
+        r = np.random.normal(radius, radius*0.1, n_points)
+        
+        x = r * np.cos(phi) * np.cos(theta)
+        y = r * np.cos(phi) * np.sin(theta)
+        z = r * np.sin(phi)
+        
+        traces.append(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=max(0.5, 2.0 * density),
+                color=f'rgba(255, 255, 255, {density})',
+                opacity=density,
+            ),
+            name=f'Oort Density Layer {i+1}',
+            text=[f'Oort Cloud Density Layer<br>Distance: ~{radius:,} AU<br>Relative density: {density:.1f}'] * len(x),
+            customdata=[f'Density Layer {i+1}'] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        ))
+    
+    return traces
+
+# Updated hover text with current scientific understanding
+enhanced_oort_hover_text = """
+<b>The Oort Cloud: Current Scientific Understanding</b><br><br>
+
+<b>Structure:</b><br>
+• <b>Hills Cloud (Inner Oort):</b> 2,000-20,000 AU, disk-like/toroidal<br>
+• <b>Outer Oort Cloud:</b> 20,000-100,000+ AU, roughly spherical but clumpy<br><br>
+
+<b>Key Characteristics:</b><br>
+• Not uniform shells but complex, structured regions<br>
+• Density varies significantly throughout<br>
+• Influenced by galactic tides and stellar encounters<br>
+• Contains an estimated 1-100 trillion objects >1km<br><br>
+
+<b>Scientific Evidence:</b><br>
+• Comet orbital inclinations suggest spherical outer region<br>
+• Jupiter-family comets indicate inner disk-like region<br>
+• Computer simulations show tidal sculpting effects<br>
+• Stellar encounter models predict clumpy structure<br><br>
+
+<b>Recent Discoveries:</b><br>
+• Objects like Sedna may be inner Oort Cloud members<br>
+• 2012 VP113 provides evidence for inner Oort population<br>
+• NEOWISE survey improving population estimates
+"""

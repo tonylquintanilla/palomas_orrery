@@ -35,9 +35,14 @@ from solar_visualization_shells import (create_sun_core_shell,
                                         create_sun_outer_corona_shell,
                                         create_sun_termination_shock_shell,
                                         create_sun_heliopause_shell,
+
                                         create_sun_inner_oort_limit_shell,
                                         create_sun_inner_oort_shell,
                                         create_sun_outer_oort_shell,
+
+                                        create_sun_hills_cloud_torus,
+                                        create_sun_outer_oort_clumpy,
+                                        create_sun_galactic_tide,
                                         create_sun_gravitational_shell)
 
 from mercury_visualization_shells import (create_mercury_inner_core_shell, 
@@ -314,7 +319,17 @@ def create_sun_visualization(fig, sun_shell_vars, animate=False, frames=None):
         # Order from outermost to innermost
         if sun_shell_vars['gravitational'].get() == 1:
             traces.extend(create_sun_gravitational_shell())
+
+        if sun_shell_vars['galactic_tide'].get() == 1:
+            traces.extend(create_sun_galactic_tide())    
+
+        if sun_shell_vars['outer_oort_clumpy'].get() == 1:
+            traces.extend(create_sun_outer_oort_clumpy())   
+
+        if sun_shell_vars['hills_cloud_torus'].get() == 1:
+            traces.extend(create_sun_hills_cloud_torus())       
             
+
         if sun_shell_vars['outer_oort'].get() == 1:
             traces.extend(create_sun_outer_oort_shell())
             
@@ -324,6 +339,7 @@ def create_sun_visualization(fig, sun_shell_vars, animate=False, frames=None):
         if sun_shell_vars['inner_oort_limit'].get() == 1:
             traces.extend(create_sun_inner_oort_limit_shell())
             
+
         if sun_shell_vars['heliopause'].get() == 1:
             traces.extend(create_sun_heliopause_shell())
             
@@ -409,12 +425,20 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                     traces.extend(create_sun_termination_shock_shell())
                 elif shell_name == 'heliopause':
                     traces.extend(create_sun_heliopause_shell())
+
                 elif shell_name == 'inner_oort_limit':
                     traces.extend(create_sun_inner_oort_limit_shell())
                 elif shell_name == 'inner_oort':
                     traces.extend(create_sun_inner_oort_shell())
                 elif shell_name == 'outer_oort':
                     traces.extend(create_sun_outer_oort_shell())
+
+                elif shell_name == 'hills_cloud_torus':
+                    traces.extend(create_sun_hills_cloud_torus())
+                elif shell_name == 'outer_oort_clumpy':
+                    traces.extend(create_sun_outer_oort_clumpy())
+                elif shell_name == 'galactic_tide':
+                    traces.extend(create_sun_galactic_tide())
                 elif shell_name == 'gravitational':
                     traces.extend(create_sun_gravitational_shell())
     

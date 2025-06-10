@@ -139,9 +139,14 @@ from planet_visualization import (
 from solar_visualization_shells import (
     hover_text_sun,
     gravitational_influence_info,
+    galactic_tide_info,
+    hills_cloud_torus_info,
+    outer_oort_clumpy_info,
+
     outer_oort_info,
     inner_oort_info,
     inner_limit_oort_info,
+
     solar_wind_info,
     termination_shock_info,
     outer_corona_info,
@@ -544,9 +549,14 @@ sun_inner_corona_var = tk.IntVar(value=0)
 sun_outer_corona_var = tk.IntVar(value=0)
 sun_termination_shock_var = tk.IntVar(value=0)
 sun_heliopause_var = tk.IntVar(value=0)
+
 sun_inner_oort_limit_var = tk.IntVar(value=0)
 sun_inner_oort_var = tk.IntVar(value=0)
 sun_outer_oort_var = tk.IntVar(value=0)
+
+sun_hills_cloud_torus_var = tk.IntVar(value=0)
+sun_outer_oort_clumpy_var = tk.IntVar(value=0)
+sun_galactic_tide_var = tk.IntVar(value=0)
 sun_gravitational_var = tk.IntVar(value=0)
 
 mercury_var = tk.IntVar(value=0) # default
@@ -942,9 +952,14 @@ ixion_var = tk.IntVar(value=0)
 
 sun_shell_vars = {
     'gravitational': sun_gravitational_var,
+    'outer_oort_clumpy': sun_outer_oort_clumpy_var,         # New
+    'hills_cloud_torus': sun_hills_cloud_torus_var,        # New
+    'galactic_tide': sun_galactic_tide_var,                 # New
+
     'outer_oort': sun_outer_oort_var,
     'inner_oort': sun_inner_oort_var,
     'inner_oort_limit': sun_inner_oort_limit_var,
+
     'heliopause': sun_heliopause_var,
     'termination_shock': sun_termination_shock_var,
     'outer_corona': sun_outer_corona_var,
@@ -2858,10 +2873,6 @@ def plot_objects():
                                     fig.add_trace(trace)
                             
             # Plot the actual orbits for selected objects
-    #        selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
-    #        plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True)       #show_lines=True
-
-            # Plot the actual orbits for selected objects
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
             # Pass center_object_name to plot_actual_orbits
             print(f"[DEBUG] Calling plot_actual_orbits with center_object_name={center_object_name}")
@@ -3839,9 +3850,14 @@ def toggle_all_shells():
     sun_outer_corona_var.set(state)
     sun_termination_shock_var.set(state)
     sun_heliopause_var.set(state)
+
     sun_inner_oort_limit_var.set(state)
     sun_inner_oort_var.set(state)
     sun_outer_oort_var.set(state)
+
+    sun_hills_cloud_torus_var.set(state) 
+    sun_outer_oort_clumpy_var.set(state)           
+    sun_galactic_tide_var.set(state)              
     sun_gravitational_var.set(state)
 
 # Function to handle mission selection (no longer adjusts date)
@@ -4060,9 +4076,21 @@ sun_inner_oort_limit_checkbutton = tk.Checkbutton(shell_options_frame, text="-- 
 sun_inner_oort_limit_checkbutton.pack(anchor='w')
 CreateToolTip(sun_inner_oort_limit_checkbutton, inner_limit_oort_info)
 
+sun_hills_cloud_torus_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Hills Cloud Torus", variable=sun_hills_cloud_torus_var)
+sun_hills_cloud_torus_checkbutton.pack(anchor='w')
+CreateToolTip(sun_hills_cloud_torus_checkbutton, hills_cloud_torus_info)
+
 sun_inner_oort_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inner Oort Cloud", variable=sun_inner_oort_var)
 sun_inner_oort_checkbutton.pack(anchor='w')
 CreateToolTip(sun_inner_oort_checkbutton, inner_oort_info)
+
+sun_outer_oort_clumpy_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Clumpy Oort Cloud", variable=sun_outer_oort_clumpy_var)
+sun_outer_oort_clumpy_checkbutton.pack(anchor='w')
+CreateToolTip(sun_outer_oort_clumpy_checkbutton, outer_oort_clumpy_info)
+
+sun_galactic_tide_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Galactic Tide Influence Oort", variable=sun_galactic_tide_var)
+sun_galactic_tide_checkbutton.pack(anchor='w')
+CreateToolTip(sun_galactic_tide_checkbutton, galactic_tide_info)
 
 sun_outer_oort_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Outer Oort Cloud", variable=sun_outer_oort_var)
 sun_outer_oort_checkbutton.pack(anchor='w')
