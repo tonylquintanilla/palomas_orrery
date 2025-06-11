@@ -15,11 +15,18 @@ Paloma's Orrery employs a sophisticated dual-pipeline architecture that processe
 ### Solar System Visualization
 - **Real-time 3D positioning** of planets, moons, asteroids, and comets using NASA JPL Horizons data
 - **Multi-scale visualization** from planetary cores to the Oort Cloud (126,000 AU)
+- **Enhanced Oort Cloud modeling** with scientifically accurate toroidal Hills Cloud, clumpy outer structure, and galactic tide effects
 - **Interactive animations** spanning minutes to years with customizable time steps
 - **Comprehensive mission tracking** for 25+ space missions (Voyager, Cassini, Parker Solar Probe, etc.)
 - **Detailed planetary shell systems** showing internal structure, atmospheres, and magnetospheres
 - **Comet trajectory visualization** including famous comets like Halley, Hale-Bopp, and NEOWISE
 - **Time-varying lunar orbit model** with perturbations for accurate Moon positioning
+
+### Advanced Oort Cloud Representation
+- **Hills Cloud (Toroidal Structure)**: 2,000-20,000 AU disk-like inner region influenced by galactic tides
+- **Outer Oort Cloud (Clumpy Structure)**: 20,000-100,000+ AU with realistic density variations and stellar encounter effects
+- **Galactic Tide Influenced Region**: Asymmetric distribution avoiding the galactic plane
+- **Density Gradient Visualization**: Multiple layers showing realistic population structure rather than simple spherical shells
 
 ### Stellar Neighborhood Mapping
 - **3D stellar maps** up to 100 light-years from the Sun
@@ -102,13 +109,19 @@ ipython>=8.12.0        # Enhanced interactive shell
    - Configure scale (Auto or Manual in AU)
    - Generate static plots or animations
 
-2. **Cache Management (New in v2.0):**
+2. **Enhanced Oort Cloud Options:**
+   - **Hills Cloud (Toroidal)**: Shows disk-like inner Oort Cloud structure (2,000-20,000 AU)
+   - **Outer Oort (Clumpy)**: Displays realistic non-uniform outer structure (20,000-100,000+ AU)
+   - **Galactic Tide Region**: Visualizes asymmetric distribution due to Milky Way gravity
+   - **Density Visualization**: Multiple layers showing population gradients
+
+3. **Cache Management (New in v2.0):**
    - **No startup dialogs** - application launches immediately
    - **Selective updates** - only selected objects are updated when plotting
    - **Special fetch mode** - experiment with different parameters without affecting cache
    - **Automatic maintenance** - weekly cleanup of old data
 
-3. **Stellar Visualizations:**
+4. **Stellar Visualizations:**
    - Launch `star_visualization_gui.py` from the main interface
    - Choose distance-based (up to 100 ly) or magnitude-based (up to mag 9) views
    - Generate 3D stellar maps or 2D HR diagrams
@@ -242,7 +255,7 @@ Paloma's Orrery employs a sophisticated dual-pipeline architecture that processe
 
 **`shutdown_handler.py`** - Thread-safe application shutdown and cleanup management
 
-**`solar_visualization_shells.py`** - Solar structure visualization with detailed shell system rendering
+**`solar_visualization_shells.py`** - Enhanced solar structure visualization with detailed shell system rendering and scientifically accurate Oort Cloud models
 
 **`star_notes.py`** - Educational content and unique notes for notable stars and astronomical objects
 
@@ -296,6 +309,29 @@ The application handles multiple photometric standards:
 
 ## 🎨 Visualization Features
 
+### Enhanced Oort Cloud Visualization
+The software now includes scientifically accurate Oort Cloud representations based on current research:
+
+**Hills Cloud (Inner Oort - Toroidal Structure):**
+- Disk-like/toroidal shape influenced by galactic tides (2,000-20,000 AU)
+- More tightly bound to Solar System
+- Primary source of Jupiter-family comets
+
+**Outer Oort Cloud (Clumpy Structure):**
+- Roughly spherical but highly non-uniform (20,000-100,000+ AU)
+- Sculpted by stellar encounters and galactic tides
+- Realistic density variations and clumping effects
+
+**Galactic Tide Influenced Region:**
+- Asymmetric distribution avoiding the galactic plane
+- Shows effect of Milky Way's gravitational field
+- Objects cluster away from galactic equator
+
+**Density Gradient Visualization:**
+- Multiple layers showing realistic population structure
+- Variable particle sizes reflecting local density
+- Transparency effects showing tenuous nature
+
 ### Interactive Controls
 - **Multi-level zoom**: From planetary surfaces to galactic scales
 - **Time animation**: Customizable step sizes and frame counts
@@ -314,6 +350,7 @@ The application handles multiple photometric standards:
   - Evection: Primary perturbation due to Sun's gravity
   - Secular variations: Node regression and apsidal precession
   - Dynamic eccentricity: Varies between 0.026 and 0.077
+- **Complex Oort Cloud structure**: Based on N-body simulations and observational constraints
 
 ## 🔧 Configuration Options
 
@@ -324,6 +361,23 @@ comet_interval_divisor = 100      # Comet trajectory points
 mission_interval_divisor = 75     # Space mission paths  
 planet_interval_divisor = 50      # Planet orbit detail
 satellite_orbit_days = 56         # Moon observation period
+```
+
+### Enhanced Oort Cloud Settings
+```python
+# Hills Cloud (Toroidal) parameters
+hills_inner_radius = 2000         # Inner boundary (AU)
+hills_outer_radius = 20000        # Outer boundary (AU)
+hills_thickness_ratio = 0.3       # Torus thickness factor
+
+# Outer Oort Cloud (Clumpy) parameters  
+outer_radius_min = 20000          # Inner boundary (AU)
+outer_radius_max = 100000         # Outer boundary (AU)
+clump_count = 15                  # Number of density clumps
+
+# Galactic tide region parameters
+tide_radius = 50000               # Typical distance (AU)
+galactic_asymmetry = True         # Enable asymmetric distribution
 ```
 
 ### Orbit Path Fetching Controls (New)
@@ -379,162 +433,4 @@ Enhanced lunar orbit calculations with time-varying elements:
 # - Base orbital elements (a=0.00257 AU, e=0.0549, i=5.145°)
 # - Secular variations:
 #   - Node regression: -19.341°/century (18.6 year cycle)
-#   - Apsidal precession: +40.690°/century (8.85 year cycle)
-# - Major perturbations:
-#   - Evection: ±0.01098 eccentricity variation
-#   - Annual equation: ±0.00048 eccentricity variation
-# - Dynamic date-based calculations for any selected time
-```
-
-The Moon's idealized orbit now accurately reflects:
-- Proper inclination to the ecliptic plane (~5.145°)
-- Time-varying eccentricity (0.026 to 0.077)
-- Nodal regression and apsidal advance
-- Solar gravitational perturbations
-
-This ensures the Moon's plotted position closely matches ephemeris data for any date.
-
-### Multi-threaded Architecture  
-- **Background data fetching** without GUI blocking
-- **Thread-safe visualization** rendering
-- **Graceful shutdown** handling with cleanup
-- **Memory management** for large datasets
-
-### Professional Export Pipeline
-- **Publication-quality** static images (PNG, SVG)
-- **Interactive HTML** with full functionality  
-- **Structured data export** (JSON, VOTable, Pickle formats)
-- **Batch processing** for animation sequences
-- **Custom templates** for presentations
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**No More Midnight Update Delays (Fixed in v2.0):**
-- System now only updates selected objects
-- No automatic full cache updates
-- Center changes don't trigger mass updates
-
-**Memory Errors with High Magnitudes:**
-- Reduce magnitude limit (try 6 instead of 9)
-- Close other applications
-- Consider 64-bit Python installation
-
-**Missing Star Data:**
-- Clear cache files in project directory
-- Restart application to refresh SIMBAD connection
-- Check for astroquery version compatibility
-
-**Visualization Performance:**
-- Use manual scaling for very large distances
-- Reduce animation frame counts for smoother playback
-- Enable hardware acceleration in browser
-
-### Cache Management
-```bash
-# Clear all cached data
-rm orbit_paths.json
-
-# Restore from backup
-cp orbit_paths_backup.json orbit_paths.json
-
-# Clear temporary cache
-rm orbit_paths_temp.json
-
-# View cache statistics
-# Check terminal output on startup for detailed cache info
-```
-
-### New Status Display
-The application now features a 3-line status display showing:
-- Current operation with color coding (green=success, blue=special, red=error)
-- Previous two operations with timestamps
-- Reference to terminal for detailed information
-
-## 🤝 Contributing
-
-### Development Setup
-1. **Fork the repository** and create a feature branch
-2. **Install development dependencies**: `pip install -r requirements-dev.txt`
-3. **Run tests**: `python -m pytest tests/`
-4. **Follow PEP 8** style guidelines
-5. **Add documentation** for new features
-
-### Code Structure Guidelines
-- **Modular design**: Separate concerns into focused modules
-- **Type hints**: Use for all function signatures
-- **Error handling**: Comprehensive exception management
-- **Documentation**: Docstrings for all public functions
-- **Testing**: Unit tests for core functionality
-
-### Feature Requests
-Popular enhancement requests:
-- **Additional catalog integration** (2MASS, WISE)
-- **Exoplanet visualizations**
-- **Variable star light curves**
-- **Binary star orbital mechanics**
-- **Galaxy structure mapping**
-- ~~**Improved lunar orbit model**~~ ✓ Implemented in v2.0
-
-## 📜 License & Attribution
-
-### License
-This project is licensed under the **MIT License with Non-Commercial Use Restriction**.
-
-**Free for:**
-- Academic research and education
-- Personal astronomical exploration  
-- Non-profit educational institutions
-- Open source contributions
-
-**Commercial use requires written permission** from the author.
-
-### Data Source Credits
-- **NASA/JPL-Caltech**: Horizons System ephemeris data
-- **ESA/Hipparcos**: High-precision stellar astrometry
-- **ESA/Gaia/DPAC**: Revolutionary stellar catalog
-- **CDS, Strasbourg**: SIMBAD astronomical database
-- **SEDS**: Messier catalog compilation
-
-### Acknowledgments
-Created by **Tony Quintanilla** with assistance from advanced AI systems (ChatGPT, Claude, Gemini, DeepSeek).
-
-Special thanks to:
-- NASA for open access to JPL Horizons
-- ESA for the transformative Hipparcos and Gaia missions
-- The astronomical community for open data sharing
-- Python scientific computing ecosystem maintainers
-
----
-
-## 📞 Contact & Support
-
-**Author**: Tony Quintanilla  
-**Email**: tonyquintanilla@gmail.com  
-**Project Website**: [Paloma's Orrery](https://sites.google.com/view/tony-quintanilla)
-**GitHub page**: [Paloma's Orrery](https://tonylquintanilla.github.io/palomas_orrery/)
-
-**For support:**
-- Create an issue on GitHub
-- Check the troubleshooting section
-- Review existing documentation
-
-**For commercial licensing:**
-- Contact author directly
-- Include intended use case
-- Specify distribution requirements
-
----
-
-*Last updated: June 6, 2025*  
-*Version: 2.0.0*  
-*Python compatibility: 3.8+*
-
-### Version History
-- **v2.0.0** (December 2024)
-  - Added smart selective cache management
-  - Implemented time-varying Moon orbit model with perturbations
-  - Removed startup dialogs for faster launch
-  - Added weekly automatic cache cleanup
-  - Enhanced orbit accuracy for all dates
+#   
