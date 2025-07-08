@@ -2,9 +2,9 @@
 
 ## A Journey Through Space and Time
 
-Paloma's Orrery is an advanced astronomical visualization software that brings the cosmos to your desktop. Named after the dove constellation Columba, this comprehensive tool transforms complex astronomical data into stunning, interactive visualizations of our solar system and stellar neighborhood.
+Paloma's Orrery is an advanced astronomical visualization software that brings the cosmos to your desktop. This comprehensive tool transforms complex astronomical data into stunning, interactive visualizations of our solar system and stellar neighborhood. The visualizations are created with a Python program with the assistance of AI assistants, including Claude, ChatGPT, Gemini and DeepSeek.
 
-Created by an astronautical engineer with a passion for space exploration, Paloma's Orrery bridges the gap between scientific accuracy and visual beauty, making astronomy accessible to educators, students, and space enthusiasts worldwide.
+Created by a civil and environmental engineer with a passion for space exploration, Paloma's Orrery bridges the gap between scientific accuracy and visual beauty, making astronomy accessible to educators, students, and space enthusiasts worldwide. 
 
 ## ✨ What Makes It Special
 
