@@ -7,6 +7,7 @@ using an incremental approach to minimize API calls and processing time.
 
 import json
 import os
+import shutil  # Add this - needed for file operations
 from datetime import datetime, timedelta
 import numpy as np
 from typing import Dict, List, Optional, Any, Tuple, Union
@@ -16,10 +17,8 @@ from astroquery.jplhorizons import Horizons
 from astropy.time import Time
 import plotly.graph_objs as go
 
-# Constants
-ORBIT_PATHS_FILE = "orbit_paths.json"
-DEFAULT_DAYS_AHEAD = 730  # Default to looking 2 years ahead
-MAX_DATA_AGE_DAYS = 90  # Maximum age for data before pruning (optional)
+        # Track which orbits we've already shown conversion messages for
+_conversion_messages_shown = set()
 
 # Global variables
 orbit_paths_over_time = {}
@@ -27,10 +26,59 @@ refresh_all = False
 status_display = None  # Will be set from the main module
 root = None  # Will be set from the main module
 center_object_var = None  # Will be set from the main module
+_startup_complete = False  # Add this line
+
+# Constants
+ORBIT_PATHS_FILE = "orbit_paths.json"
+DEFAULT_DAYS_AHEAD = 730  # Default to looking 2 years ahead
+MAX_DATA_AGE_DAYS = 90  # Maximum age for data before pruning (optional)
 
 # Add at module level:
 last_center_updated = None
 last_update_time = None
+
+def repair_cache_on_load():
+    """Load cache and remove only corrupted entries"""
+    if not os.path.exists('orbit_paths.json'):
+        return {}
+    
+    try:
+        with open('orbit_paths.json', 'r') as f:
+            cache_data = json.load(f)
+        
+        # Track what we remove
+        removed_entries = []
+        cleaned_cache = {}
+        
+        for orbit_key, orbit_data in cache_data.items():
+            try:
+                # Validate this entry
+                if isinstance(orbit_data, dict) and (
+                    'data_points' in orbit_data or  # New format
+                    ('x' in orbit_data and 'y' in orbit_data and 'z' in orbit_data)  # Old format
+                ):
+                    # Entry looks good, keep it
+                    cleaned_cache[orbit_key] = orbit_data
+                else:
+                    removed_entries.append(orbit_key)
+            except Exception:
+                # Any error processing this entry = corrupted
+                removed_entries.append(orbit_key)
+        
+        if removed_entries:
+            print(f"[CACHE REPAIR] Removed {len(removed_entries)} corrupted entries: {removed_entries}")
+            print(f"[CACHE REPAIR] Kept {len(cleaned_cache)} valid entries")
+            
+            # Save the cleaned cache back
+            with open('orbit_paths.json', 'w') as f:
+                json.dump(cleaned_cache, f)
+        
+        return cleaned_cache
+        
+    except json.JSONDecodeError:
+        # Entire file is corrupted
+        print("[CACHE ERROR] Entire cache file corrupted, starting fresh")
+        return {}
 
 def initialize(status_widget=None, root_widget=None, center_var=None, data_file=ORBIT_PATHS_FILE):
     """
@@ -53,40 +101,220 @@ def initialize(status_widget=None, root_widget=None, center_var=None, data_file=
     orbit_paths_over_time = load_orbit_paths(data_file)
     return orbit_paths_over_time
 
-
 def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
     """
-    Load orbit paths from file with backward compatibility.
+    Load orbit paths from file with automatic repair of corrupted entries.
     
     Parameters:
         file_path: Path to the orbit paths data file
         
     Returns:
-        dict: The loaded orbit paths data, converted to the new format if needed
+        dict: The loaded orbit paths data, with corrupted entries removed
     """
+    global status_display
+    
     try:
         with open(file_path, "r") as f:
             data = json.load(f)
             
-            # Check if data is in old format and convert if needed
-            if data and isinstance(data, dict):
-                first_key = next(iter(data), None)
-                if first_key and isinstance(data.get(first_key, {}), dict) and "x" in data.get(first_key, {}):
-                    # Old format detected, convert to new format
-                    return convert_to_new_format(data)
-            return data
+        if not isinstance(data, dict):
+            error_msg = "[CACHE ERROR] Cache file has invalid structure, starting fresh"
+            print(error_msg)
+            update_status(error_msg)
+            return {}
+            
+        # Validate and clean the data
+        cleaned_data = {}
+        removed_entries = []
+        total_entries = len(data)
+        
+        for orbit_key, orbit_data in data.items():
+            try:
+                # Basic validation
+                if not isinstance(orbit_data, dict):
+                    removed_entries.append((orbit_key, "Not a dictionary"))
+                    continue
+                
+                # Check for new format (time-indexed with data_points)
+                if "data_points" in orbit_data:
+                    if not isinstance(orbit_data["data_points"], dict):
+                        removed_entries.append((orbit_key, "Invalid data_points structure"))
+                        continue
+                    
+                    # Validate at least one data point
+                    if orbit_data["data_points"]:
+                        sample_key = next(iter(orbit_data["data_points"]))
+                        sample_point = orbit_data["data_points"][sample_key]
+                        
+                        if not isinstance(sample_point, dict) or \
+                           not all(k in sample_point for k in ['x', 'y', 'z']):
+                            removed_entries.append((orbit_key, "Invalid data point structure"))
+                            continue
+                    
+                    # Valid new format
+                    cleaned_data[orbit_key] = orbit_data
+                    
+                # Check for old format (arrays)
+                elif all(k in orbit_data for k in ['x', 'y', 'z']):
+                    # Validate arrays
+                    if not all(isinstance(orbit_data[k], list) for k in ['x', 'y', 'z']):
+                        removed_entries.append((orbit_key, "Invalid coordinate arrays"))
+                        continue
+                        
+                    # Check lengths match
+                    x_len = len(orbit_data['x'])
+                    y_len = len(orbit_data['y'])
+                    z_len = len(orbit_data['z'])
+                    
+                    if x_len != y_len or y_len != z_len:
+                        removed_entries.append((orbit_key, f"Mismatched array lengths: x={x_len}, y={y_len}, z={z_len}"))
+                        continue
+                        
+                    if x_len == 0:
+                        removed_entries.append((orbit_key, "Empty coordinate arrays"))
+                        continue
+                    
+                    if orbit_key not in _conversion_messages_shown and _startup_complete:
+                        print(f"Converting old format data for {orbit_key}")
+                        _conversion_messages_shown.add(orbit_key)
+
+                    converted = convert_single_orbit_to_new_format(orbit_key, orbit_data)
+                    if converted:
+                        cleaned_data[orbit_key] = converted
+                    else:
+                        removed_entries.append((orbit_key, "Failed to convert old format"))
+                        
+                else:
+                    removed_entries.append((orbit_key, "Missing required data fields"))
+                    
+            except Exception as e:
+                removed_entries.append((orbit_key, f"Validation error: {str(e)}"))
+        
+        # Report what was cleaned
+        if removed_entries:
+            # Console output
+            print(f"\n[CACHE REPAIR] Removed {len(removed_entries)} corrupted entries out of {total_entries}:")
+            for entry, reason in removed_entries[:5]:
+                print(f"  - {entry}: {reason}")
+            if len(removed_entries) > 5:
+                print(f"  ... and {len(removed_entries) - 5} more")
+            print(f"[CACHE REPAIR] Keeping {len(cleaned_data)} valid entries")
+            
+            # Status display output
+            status_msg = f"Cache repaired: removed {len(removed_entries)} corrupted entries, kept {len(cleaned_data)} valid"
+            update_status(status_msg)
+            
+            # Save cleaned data back to file
+            save_orbit_paths(cleaned_data, file_path)
+        else:
+            # Report success
+            if total_entries > 0:
+                status_msg = f"Cache loaded successfully: {total_entries} valid entries"
+                update_status(status_msg)
+        
+        return cleaned_data
+            
     except FileNotFoundError:
-        print(f"No existing orbit paths file found at {file_path}, creating new cache.")
+        msg = f"No existing orbit paths file found at {file_path}, creating new cache."
+        print(msg)
+        update_status("Starting with fresh cache (no existing file found)")
         return {}
+        
+    except json.JSONDecodeError as e:
+        error_msg = f"[CACHE ERROR] Cache file is corrupted: {e}"
+        print(error_msg)
+        update_status("Cache file corrupted - starting fresh")
+        
+        # Rename corrupted file instead of deleting
+        backup_name = file_path + '.corrupted.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+        try:
+            import shutil
+            shutil.move(file_path, backup_name)
+            backup_msg = f"[CACHE BACKUP] Corrupted file saved as: {backup_name}"
+            print(backup_msg)
+            update_status(f"Corrupted cache backed up, starting fresh")
+        except Exception as backup_error:
+            print(f"[CACHE BACKUP] Could not backup corrupted file: {backup_error}")
+            
+        return {}
+        
     except Exception as e:
-        print(f"Error loading orbit paths: {e}")
+        error_msg = f"Error loading orbit paths: {e}"
+        print(error_msg)
+        update_status("Error loading cache - check console for details")
         traceback.print_exc()
         return {}
 
+def convert_single_orbit_to_new_format(orbit_key, orbit_data):
+    """
+    Convert a single orbit from old format to new format.
+    
+    Parameters:
+        orbit_key: The key for this orbit (e.g., "Mars_Sun")
+        orbit_data: The old format data with x, y, z arrays
+        
+    Returns:
+        dict: Converted data in new format or None if conversion fails
+    """
+
+    global _conversion_messages_shown
+    
+    if orbit_key not in _conversion_messages_shown:
+        print(f"Converting old format data for {orbit_key}")
+        _conversion_messages_shown.add(orbit_key)
+    
+    try:
+        # Extract object and center names
+        if "_" in orbit_key:
+            obj_name, center_name = orbit_key.split("_", 1)
+        else:
+            obj_name, center_name = orbit_key, "Sun"
+        
+        # Get coordinate arrays
+        x_coords = orbit_data['x']
+        y_coords = orbit_data['y']
+        z_coords = orbit_data['z']
+        
+        num_points = len(x_coords)
+        if num_points == 0:
+            return None
+            
+        # Generate synthetic dates
+        today = datetime.today()
+        days_span = DEFAULT_DAYS_AHEAD
+        days_between = days_span / (num_points - 1) if num_points > 1 else 1
+        
+        data_points = {}
+        for i in range(num_points):
+            point_date = today - timedelta(days=days_span/2) + timedelta(days=i * days_between)
+            date_str = point_date.strftime("%Y-%m-%d")
+            
+            data_points[date_str] = {
+                "x": x_coords[i],
+                "y": y_coords[i],
+                "z": z_coords[i]
+            }
+        
+        return {
+            "data_points": data_points,
+            "metadata": {
+                "start_date": (today - timedelta(days=days_span/2)).strftime("%Y-%m-%d"),
+                "end_date": (today + timedelta(days=days_span/2)).strftime("%Y-%m-%d"),
+                "center_body": center_name,
+                "last_updated": today.strftime("%Y-%m-%d"),
+                "converted_from_old_format": True
+            }
+        }
+        
+    except Exception as e:
+        print(f"Error converting orbit {orbit_key}: {e}")
+        return None
+
+# Replace the save_orbit_paths function in orbit_data_manager.py with this safer version
 
 def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
     """
-    Save orbit paths data to file.
+    Save orbit paths data to file with safety checks.
     
     Parameters:
         data: Orbit paths data to save (defaults to global orbit_paths_over_time)
@@ -96,15 +324,78 @@ def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
     
     if data is None:
         data = orbit_paths_over_time
-        
+    
+    # Safety check: Don't save empty or tiny data over existing large file
+    if os.path.exists(file_path):
+        try:
+            current_size = os.path.getsize(file_path)
+            # Serialize data to check its size
+            data_str = json.dumps(data)
+            new_size = len(data_str)
+            
+            # If current file is > 1MB and new data is < 1KB, something's wrong
+            if current_size > 1_000_000 and new_size < 1000:
+                print(f"[SAFETY] Refusing to overwrite large file ({current_size:,} bytes) with small data ({new_size:,} bytes)")
+                print(f"[SAFETY] Data has only {len(data)} entries")
+                
+                # Create an emergency backup
+                emergency_backup = file_path + '.emergency.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+                shutil.copy2(file_path, emergency_backup)
+                print(f"[SAFETY] Created emergency backup: {emergency_backup}")
+                
+                # Still refuse to save
+                raise ValueError("Safety check failed: Attempting to save suspiciously small data over large file")
+        except (OSError, IOError) as e:
+            print(f"[WARNING] Could not check file size: {e}")
+    
+    # Create a temporary file first
+    temp_file = file_path + '.tmp'
+    backup_file = file_path + '.backup'
+    
     try:
-        with open(file_path, "w") as f:
+        # Write to temporary file
+        with open(temp_file, 'w') as f:
             json.dump(data, f)
+        
+        # Verify the temp file was written correctly
+        with open(temp_file, 'r') as f:
+            json.load(f)  # This will raise an exception if JSON is invalid
+        
+        # If original exists, create backup
+        if os.path.exists(file_path):
+            if os.path.exists(backup_file):
+                os.remove(backup_file)
+            shutil.move(file_path, backup_file)
+        
+        # Move temp file to final location
+        shutil.move(temp_file, file_path)
+        
         print(f"Orbit paths saved to {file_path}")
+        
+        # Clean up old backup if save was successful and new file is reasonable size
+        if os.path.exists(backup_file) and os.path.getsize(file_path) > 100:
+            os.remove(backup_file)
+            
     except Exception as e:
         print(f"Error saving orbit paths: {e}")
+        
+        # Try to restore from backup
+        if os.path.exists(backup_file):
+            try:
+                shutil.copy2(backup_file, file_path)
+                print(f"[RECOVERY] Restored from backup after save failure")
+            except Exception as restore_error:
+                print(f"[CRITICAL] Could not restore backup: {restore_error}")
+        
+        # Clean up temp file if it exists
+        if os.path.exists(temp_file):
+            try:
+                os.remove(temp_file)
+            except:
+                pass
+                
         traceback.print_exc()
-
+        raise  # Re-raise the exception
 
 def convert_to_new_format(old_data):
     """
@@ -491,19 +782,9 @@ def fetch_orbit_path_by_dates(obj_info, start_date, end_date, interval, center_i
         }
     }
 
-
 def merge_orbit_data(existing_data, new_data, new_start_date, new_end_date):
     """
     Merge new orbit data with existing data.
-    
-    Parameters:
-        existing_data: Existing orbit data
-        new_data: New orbit data to merge
-        new_start_date: Start date of new data
-        new_end_date: End date of new data
-        
-    Returns:
-        dict: Merged orbit data
     """
     if not new_data or "data_points" not in new_data:
         return existing_data
@@ -517,16 +798,15 @@ def merge_orbit_data(existing_data, new_data, new_start_date, new_end_date):
     # Add new data points
     merged_data["data_points"].update(new_data.get("data_points", {}))
     
-    # Update metadata
-    if isinstance(new_end_date, datetime):
-        merged_data["metadata"]["latest_date"] = new_end_date.strftime("%Y-%m-%d")
-    else:
-        merged_data["metadata"]["latest_date"] = new_end_date
+    # Update metadata to reflect the actual data range
+    all_dates = sorted(merged_data["data_points"].keys())
+    if all_dates:
+        merged_data["metadata"]["start_date"] = all_dates[0]
+        merged_data["metadata"]["end_date"] = all_dates[-1]
         
     merged_data["metadata"]["last_updated"] = datetime.today().strftime("%Y-%m-%d")
     
     return merged_data
-
 
 def fetch_complete_orbit_path(obj, orbit_key, today, end_window, interval, center_id, center_id_type):
     """
@@ -621,23 +901,21 @@ def get_planet9_data(center_object_name='Sun'):
         'range': 0
     }
 
-
 def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun", 
-                                     days_ahead=DEFAULT_DAYS_AHEAD, planetary_params=None, 
+                                     days_ahead=365, fetch_requests=None,
+                                     planetary_params=None, 
                                      parent_planets=None, root_widget=None):
     """
-    Incrementally update orbit paths by only fetching data for dates not already in the cache.
+    Update orbit paths incrementally, fetching only missing data.
     
     Parameters:
-        object_list: List of objects to update (defaults to all)
-        center_object_name: Name of central body (default: 'Sun')
-        days_ahead: Number of days to look ahead (default: 730)
+        object_list: List of objects to update
+        center_object_name: Name of central body
+        days_ahead: Default days to look ahead (used if fetch_requests is None)
+        fetch_requests: List of specific fetch requests with date ranges
         planetary_params: Dictionary of orbital parameters
         parent_planets: Dictionary mapping planets to their satellites
-        root_widget: Tkinter root for UI updates
-        
-    Returns:
-        tuple: (updated_count, already_current, total_objects, time_saved_hours)
+        root_widget: Root Tkinter widget for UI updates
     """
     global orbit_paths_over_time, root
     
@@ -663,6 +941,106 @@ def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun",
         center_id = 'Sun'
         center_id_type = None
     
+    # If we have specific fetch requests, use those instead of the default behavior
+    if fetch_requests:
+        updated_count = 0
+        time_saved_hours = 0
+        
+        for request in fetch_requests:
+            obj = request['object']
+            fetch_start = request['fetch_start']
+            fetch_end = request['fetch_end']
+            reason = request.get('reason', 'requested')
+            
+            orbit_key = f"{obj['name']}_{center_object_name}"
+            
+            # Determine appropriate interval
+            interval = determine_interval_for_object(obj, planetary_params, parent_planets)
+            
+            # Update status
+            days_to_fetch = (fetch_end - fetch_start).days + 1
+            update_status(f"Fetching {days_to_fetch} days for {obj['name']} ({reason})")
+            if root:
+                root.update()
+            
+            # Special handling for Planet 9
+            if obj.get('id') == 'planet9_placeholder':
+                # Calculate synthetic orbit
+                path_data = calculate_planet9_orbit(fetch_start, fetch_end, interval)
+                
+                # Convert to time-indexed format
+                new_data = {
+                    "data_points": {},
+                    "metadata": {
+                        "start_date": fetch_start.strftime("%Y-%m-%d"),
+                        "end_date": fetch_end.strftime("%Y-%m-%d"),
+                        "center_body": center_object_name,
+                        "last_updated": today.strftime("%Y-%m-%d")
+                    }
+                }
+                
+                # Convert array data to time-indexed format
+                num_points = len(path_data['x'])
+                if num_points > 0:
+                    days_span = (fetch_end - fetch_start).days
+                    days_between = days_span / (num_points - 1) if num_points > 1 else 1
+                    
+                    for i in range(num_points):
+                        point_date = fetch_start + timedelta(days=i * days_between)
+                        date_str = point_date.strftime("%Y-%m-%d")
+                        
+                        new_data["data_points"][date_str] = {
+                            "x": path_data['x'][i],
+                            "y": path_data['y'][i],
+                            "z": path_data['z'][i]
+                        }
+            else:
+                # Fetch the specific date range from JPL Horizons
+                new_data = fetch_orbit_path_by_dates(
+                    obj, fetch_start, fetch_end, interval,
+                    center_id=center_id, id_type=obj.get('id_type')
+                )
+            
+            if new_data:
+                # Check if we have existing data to merge with
+                if orbit_key in orbit_paths_over_time:
+                    # Calculate time saved by not re-fetching existing data
+                    existing_data = orbit_paths_over_time[orbit_key]
+                    existing_points = len(existing_data.get("data_points", {}))
+                    if existing_points > 0:
+                        # Estimate based on interval
+                        calls_saved = existing_points
+                        if interval == "12h":
+                            calls_saved /= 2
+                        elif interval == "6h":
+                            calls_saved /= 4
+                        elif interval == "1h":
+                            calls_saved /= 24
+                        
+                        # Each API call might take ~1-2 seconds
+                        time_saved_seconds = calls_saved * 1.5
+                        time_saved_hours += time_saved_seconds / 3600
+                    
+                    # Merge with existing data
+                    orbit_paths_over_time[orbit_key] = merge_orbit_data(
+                        orbit_paths_over_time[orbit_key], new_data,
+                        fetch_start, fetch_end
+                    )
+                else:
+                    # New entry
+                    orbit_paths_over_time[orbit_key] = new_data
+                
+                updated_count += 1
+        
+        # Save the updated data
+        save_orbit_paths(orbit_paths_over_time)
+        
+        update_status(f"Smart fetch complete: Updated {updated_count} orbits with minimal data fetching. "
+                     f"Saved approximately {time_saved_hours:.1f} hours of fetch time.")
+        
+        return updated_count, 0, len(fetch_requests), time_saved_hours
+    
+    # Otherwise, continue with the existing logic...
     # Default to all objects if none specified
     if not object_list:
         update_status("No object list provided, cannot update orbit paths incrementally.")
@@ -770,7 +1148,6 @@ def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun",
     )
     
     return updated_count, already_current, len(object_list), time_saved_hours
-
 
 def prune_old_data(max_age_days=MAX_DATA_AGE_DAYS):
     """

@@ -460,15 +460,31 @@ def color_map(planet):
         'Bepi': 'red',
         'SolO': 'red',
         'Akatsuki': 'cyan',
-        'Oumuamua': 'gold',
+
+        'EM-L1': 'cyan',        
+        'EM-L2': 'white',
+        'EM-L3': 'green',
+        'EM-L4': 'gold',
+        'EM-L5': 'red',
+        'L1': 'cyan',        
+        'L2': 'white',
+        'L3': 'green',
+        'L4': 'gold',
+        'L5': 'red',
+
+        'Kamo oalewa': 'cyan',
         '2024 DW': 'gold',
         '2024 PT5': 'red',
         '2024 YR4': 'green',
+
         'Apophis': 'red',
         'Vesta': 'cyan',
         'Bennu': 'white',
         'Lutetia': 'green',
         'Šteins': 'red',  
+
+        'Oumuamua': 'gold',
+        '3I/ATLAS': 'gold',
         'Ikeya-Seki': 'green',
         'West': 'red',
         'Halley': 'cyan',
@@ -587,6 +603,26 @@ INFO = {
         '  * Beresheet2 (Israel): Planned private lunar mission.\n' 
         '  * Lunar Gateway: A planned international space station in lunar orbit, supporting future human missions.',
 
+        'Kamo oalewa': 'Asteroid Kamo\'oalewa (469219 / 2016 HO3) is a near-Earth asteroid that has garnered significant scientific interest.\n' 
+        '* Classification and Orbit: Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects. \n' 
+        '  What makes it particularly unique is its status as Earth\'s best and most stable "quasi-satellite." This means it orbits the \n' 
+        '  Sun with parameters very similar to Earth\'s, appearing to "dance" around our planet in a looping, oscillating path. While it\'s \n' 
+        '  too distant to be gravitationally bound like a true moon, it remains relatively close to Earth, between 38 and 100 times the \n' 
+        '  distance of the Moon. Its orbit is relatively stable and is expected to remain in this configuration for hundreds of thousands of years.\n' 
+        '* Physical Characteristics: Kamo\'oalewa is estimated to be between 40-100 meters in diameter, making it one of the smallest \n' 
+        '  asteroids ever targeted for a mission. It\'s also a fast rotator, completing a rotation in approximately 28 minutes.\n' 
+        '* Mysterious Origin: One of the most intriguing aspects of Kamo\'oalewa is its potential origin. Research suggests that its \n' 
+        '  reflected light spectrum matches lunar rocks from NASA\'s Apollo missions. This has led to the hypothesis that Kamo\'oalewa \n' 
+        '  might be a fragment of our own Moon, ejected by an ancient impact. Confirmation of this theory through sample analysis would be \n' 
+        '  groundbreaking, as no other known asteroid has been definitively linked to lunar origins.\n' 
+        '* Tianwen-2 Mission: Tianwen-2 is China\'s ambitious deep space mission designed to explore asteroid Kamo\'oalewa and a main-belt \n' 
+        '  comet. The Tianwen-2 mission launched on May 28, 2025. The mission\'s initial target is Kamo\'oalewa. Tianwen-2 will rendezvous \n' 
+        '  with the asteroid in mid-2026 and spend about nine months in its vicinity. It aims to collect approximately 100 grams of \n' 
+        '  regolith (surface material) using both "touch-and-go" and "anchor-and-attach" methods. The "anchor-and-attach" method would be \n' 
+        '  a first for asteroid sampling. The collected samples are planned to be returned to Earth in November 2027. Analyzing these \n' 
+        '  samples will be crucial in determining Kamo\'oalewa\'s true origin (e.g., lunar fragment or main-belt asteroid) and providing \n' 
+        '  insights into the early solar system',
+
         '2024 PT5': 'In late September 2024, Earth temporarily captured a small asteroid into its orbit, leading to it being ' 
         'dubbed Earth\'s "second moon". The object\'s official designation is 2024 PT5, but it was also referred to as a ' 
         '"mini-moon" due to its small size. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
@@ -604,9 +640,9 @@ INFO = {
         '* It is estimated to be between 40 and 100 meters wide.\n' 
         '* It\'s next close approach is on December 17, 2028, 12:16 UTC at a distance from Earth\'s surface of about 8,007,000 km, ' 
         'according to JPL Horizons.\n'
-        '* As of February 27, 2025, YR4 is predicted to make its closest approach to Earth on December 22, 2032, 8:33 UTC. ' 
-        'JPL Horizons estimates a closest approach of about 263,000 km from Earth\'s surface. ' 
-        'And its closest approach to the Moon at 15:07 UTC of about 11,900 km.\n'
+        '* As of June 3, 2025, YR4 is predicted to make its closest approach to Earth on December 22, 2032, 8:36 UTC. ' 
+        'JPL Horizons estimates a closest approach of about 260,487 km from Earth\'s surface. ' 
+        'And its closest approach to the Moon on December 22, 2032 at 15:10 UTC of about 8,945 km from the surface.\n'
         '* NASA 2-24-25: "NASA has significantly lowered the risk of near-Earth asteroid 2024 YR4 as an impact threat to Earth for ' 
         'the foreseeable future. When first discovered, asteroid 2024 YR4 had a very small, but notable chance of impacting our ' 
         'planet in 2032. As observations of the asteroid continued to be submitted to the Minor Planet Center, experts at NASA ' 
@@ -626,6 +662,129 @@ INFO = {
         '* Tracking: NASA\'s Center for Near-Earth Object Studies (CNEOS) played a crucial role in tracking and calculating its orbit. ' 
         'In essence, 2024 DW was a relatively small asteroid that had a close encounter with Earth, providing astronomers with an ' 
         'opportunity to study near-Earth objects.',
+
+        'EM-L1': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L1; 3011; Earth-Moon Lagrange 1\n' 
+        '#1) The Earth-Moon Lagrange-1 point (EM-L1) is an equilibirium location where the Moon\'s gravitational field partially \n' 
+        '    counters that of the Earth.\n' 
+        '#2) This point is between the Earth and Moon, about 84.907% of the distance from the Earth\'s center in the direction of \n' 
+        '    the Moon\'s center (303000 to 345000 km from Earth, averaging ~327000 km), or 15.093% from the Moon in the direction \n' 
+        '    of the Earth (53800 to 61400 km from Moon, averaging ~58100 km).\n' 
+        '#3) EM-L1 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
+        '    whereupon it will move away.  In practice, there will always be some disturbance.',
+
+        'EM-L2': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L2; 3012; Earth-Moon Lagrange 2\n' 
+        '#1) The Earth-Moon Lagrange-2 point (EM-L2) is an equilibirium location where the Moon\'s gravitational field partially \n' 
+        '    counters that of the Earth.\n' 
+        '#2) This point is past the Moon on the Earth-Moon line, about 116.783% of the EM distance (416300 to 475000 km from Earth \n' 
+        '    center, averaging ~449600 km), or 16.783% of the EM distance from the Moon, in the direction away from the Earth \n' 
+        '    (59800 to 68300 km from Moon center, averaging ~64600 km).\n' 
+        '#3) EM-L2 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
+        '    whereupon it will move away.  In practice, there will always be some disturbance.', 
+
+        'EM-L3': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L3; 3013; Earth-Moon Lagrange 3\n' 
+        '#1) The Earth-Moon Lagrange-3 point (EM-L3) is an equilibirium location where the Moon\'s gravitational field partially \n' 
+        '    counters that of the Earth.\n'  
+        '#3) EM-L3 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
+        '    whereupon it will move away.  In practice, there will always be some disturbance.', 
+
+        'EM-L4': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L4; 3014; Earth-Moon Lagrange 4\n' 
+        '#1) The Earth-Moon Lagrange-4 point (EM-L4) is a location where the Moon\'s gravitational field partially counters that of \n' 
+        '    the Earth. EM-L4 is one of the stable "Trojan" points (along with EM-L5). Small perturbations can displace an object \n' 
+        '    from EM-L4, but it can return to the stable point.\n' 
+        '#2) EM-L4 lies 60 degrees ahead of the Earth-Moon system along the Moon\'s orbit in plane of the orbit. It is about 1 lunar \n' 
+        '    distance from the Earth and from the Moon (straight-lines), so 356000 to 407000 km, averaging 385000 km from Earth and \n' 
+        '    Moon centers, forming the apex of an equilateral triangle, with the Earth and Moon defining the base-line.',
+
+        'EM-L5': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L5; 3014; Earth-Moon Lagrange 5\n' 
+        '#1) The Earth-Moon Lagrange-5 point (EM-L5) is a location where the Moon\'s gravitational field partially counters that of \n' 
+        '    the Earth. EM-L5 is one of the stable "Trojan" points (along with EM-L4). Small perturbations can displace an object \n' 
+        '    from EM-L4, but it can return to the stable point.\n' 
+        '#2) EM-L5 lies 60 degrees behind the Earth-Moon system along the Moon\'s orbit in plane of the orbit. It is about 1 lunar \n' 
+        '    distance from the Earth and from the Moon (straight-lines), so 356000 to 407000 km, averaging 385000 km from Earth and \n' 
+        '    Moon centers, forming the apex of an equilateral triangle, with the Earth and Moon defining the base-line.',
+
+        'L1': 'From JPL Horizons ephemeris: Revised: Aug 29, 2013; SEMB-L1; 31; Sun & Earth-Moon Barycenter Lagrange 1\n' 
+        '#1) The Sun & Earth-Moon Barycenter Lagrange-1 point (SEMB-L1) is a location where the Earth\'s gravitational field partially \n' 
+        '    counters that of the Sun.\n' 
+        '#2) This L1 point is about 1.5 million km (~900,000 miles) away from the Earth in the direction of the Sun, or slightly less than \n' 
+        '    one percent of the way to the Sun (four times the distance from Earth to the Moon)\n' 
+        '#3) The solar wind reaches L1 about an hour before it reaches Earth, making it a good place to observe changes in solar activity \n' 
+        '    before the change propagates to the Earth. L1 provides an uninterrupted view of the Sun, being between the Earth and Sun.\n' 
+        '#4) L1 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, whereupon it \n' 
+        '    will move away. In practice, there will always be some disturbance. Further, since the Sun is a radio source, communications \n' 
+        '    with spacecraft at L1 are difficult to pick out against the background noise. Thus, spacecraft such as Genesis, WIND, SOHO, \n' 
+        '    and ACE are placed in "halo" orbits around the L1 point. SMART-1 flew through L1 prior to lunar impact.\n' 
+        '* SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the line between the Sun and the EMB.\n' 
+        '* For the unstable L1, L2, L3 points, they are more like moving "targets" that a spacecraft must constantly adjust to stay near.', 
+
+        'L2': 'Sun-Earth-Moon Barycenter Lagrange point 2. From JPL Horizons:\n' 
+        '#1) The Sun & Earth-Moon Barycenter Lagrange-2 (L2) point is a location where the Earth\'s gravitational field partially \n' 
+        '    counters that of the Sun.\n' 
+        '#2) This L2 point is about 1.5 million km (~900,000 miles) away from the Earth, opposite the direction of the Sun, or slightly \n' 
+        '    less than one percent of the Earth-Sun distance (four times the distance from Earth to the Moon)\n' 
+        '#3) L2 has been selected as the location of the next generation James Webb Space Telescope, was used by the Genesis spacecraft \n' 
+        '    on the return to Earth, and is (or will be) used for WMAP, Herschel, and Planck spacecraft.\n' 
+        '* SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the line between the Sun and the EMB.\n' 
+        '* For the unstable L1, L2, L3 points, they are more like moving "targets" that a spacecraft must constantly adjust to stay near.', 
+
+        'L3': 'Sun-Earth-Moon Barycenter Lagrange point 3. From JPL Horizons: The Sun & Earth-Moon Barycenter Lagrange-2 (L3) point is \n' 
+        'a location where the Earth\'s gravitational field partially counters that of the Sun.\n' 
+        '* Here\'s why you\'re observing that irregular motion for SEMB-L3, while the others (especially L4 and L5) appear to trace a \n' 
+        '  more circular path:\n' 
+        '  * L3\'s Unstable and Collinear Nature: L3, like L1 and L2, lies along the line connecting the two primary bodies (Sun and Earth-Moon Barycenter in \n' 
+        '      this case). These collinear points are inherently unstable equilibrium points. Any slight perturbation (and there are \n' 
+        '      many in the real solar system, from other planets, the Moon\'s wobble, solar wind pressure, etc.) will cause a body at \n' 
+        '      L3 to drift away from the exact point.\n' 
+        '  * "Hidden" from View: SEMB-L3 is on the opposite side of the Sun from the Earth. It\'s essentially orbiting the Sun at approximately the same \n' 
+        '      distance as Earth, but 180 degrees out of phase.\n' 
+        '  * The Dominant Influence of the Sun: The Sun\'s gravity is overwhelming. L3 is essentially a point that "tries" to stay at the same solar orbital distance as \n' 
+        '      Earth, but because it\'s behind the Sun, the gravitational pull from the Earth (and Moon) is very subtle and often \n' 
+        '      insufficient to perfectly hold it in a perfectly symmetric orbit around the Sun.\n' 
+        '  * Perturbations from Other Planets: While L1, L2, L4, and L5 also experience perturbations, L3 is particularly sensitive. The gravitational tugs from Venus, \n' 
+        '      Jupiter, and other planets, even though small, can have a noticeable effect on the precise location of the unstable L3 \n' 
+        '      point. These perturbations will cause L3\'s ideal position to constantly shift slightly, resulting in an "irregular" or \n' 
+        '      "wobbly" path when observed over time.\n' 
+        '  * Influence of the Moon\'s Orbit: Even though we use the Earth-Moon Barycenter (EMB) as the secondary body for SEMB-L* calculations, the Moon\'s actual \n' 
+        '      orbit around the Earth means that the "effective" secondary mass is constantly shifting slightly relative to the ideal \n' 
+        '      EMB point. This introduces a small, but continuous, perturbation on all the SEMB-L* points, which is more noticeable for \n' 
+        '      the unstable ones like L3.\n' 
+        '  *Reference Frame and "Ideal" Orbit: When you plot the L-points, you\'re usually plotting their positions in an inertial frame (like the Solar System Barycenter \n' 
+        '      frame). In this frame: SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the \n' 
+        '      line between the Sun and the EMB. SEMB-L4 and SEMB-L5 are the stable points. In an idealized circular restricted three-body \n' 
+        '      problem, they would form equilateral triangles with the two primaries and trace the same perfect circular orbit as the \n' 
+        '      secondary. In reality, they also exhibit small, stable librations (oscillations) around the ideal points, but their overall \n' 
+        '      path will closely follow the EMB\'s orbit. SEMB-L3\'s instability means it doesn\'t settle into such a neat pattern of \n' 
+        '      librations. Its position is constantly being nudged away from the ideal, resulting in a more complex, non-circular trajectory \n' 
+        '      that reflects these ongoing instabilities and perturbations. In essence, L3 is highly sensitive to the "messiness" of the real \n' 
+        '      solar system. While the mathematical definition of L3 exists, its physical location is constantly being pulled and pushed by \n' 
+        '      various gravitational forces, leading to the irregular path you observed. It\'s a fantastic demonstration of the difference \n' 
+        '      between idealized mathematical models and the complex reality of celestial mechanics!',
+
+        'L4': 'From JPL Horizons: Revised: Aug 29, 2013; SEMB-L4; 34; Sun & Earth-Moon Barycenter Lagrange 4\n' 
+        '#1) The Sun & Earth-Moon Barycenter Lagrange-4 (SEMB-L4) point is a location where the Earth\'s gravitational field partially \n' 
+        '    counters that of the Sun.  L4 is one of the stable "Trojan" points (along with L5). Small perturbations can displace an \n' 
+        '    object from L4, but it can return to the stable point.\n' 
+        '#2) L4 lies 60 degrees ahead of the Earth-Moon system along the heliocentric orbit in plane of the orbit. It is about 1 au \n' 
+        '    distant from the Earth (straight-line), forming the apex of an equilateral triangle, with the Sun and Earth-Moon barycenter \n' 
+        '    defining the base-line.\n' 
+        '#3) The STEREO-A spacecraft passes through L4.\n' 
+        '* SEMB-L4 and SEMB-L5 are the stable points. In an idealized circular restricted three-body problem, they would form \n' 
+        '  equilateral triangles with the two primaries and trace the same perfect circular orbit as the secondary. In reality, they \n' 
+        '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
+        '  the EMB\'s orbit.',  
+
+        'L5': 'From JPL Horizons:  Revised: Aug 29, 2013; SEMB-L5; 35; Sun & Earth-Moon Barycenter Lagrange 5\n' 
+        '#1) The Sun & Earth-Moon Barycenter Lagrange-5 (SEMB-L5) point is a location where the Earth\'s gravitational field partially \n' 
+        '    counters that of the Sun. L5 is one of the stable "Trojan" points (along with L4). Small perturbations will displace an \n' 
+        '    object from L5, but the object can return to the stable point.\n' 
+        '#2) L5 lies 60 degrees behind the Earth-Moon system along the heliocentric orbit and in the plane of the orbit. It is about \n' 
+        '    1 AU distant from the Earth (straight-line), forming the apex of an equilateral triangle, with the Sun and Earth-Moon \n' 
+        '    barycenter defining the base-line.\n' 
+        '#3) The STEREO-B spacecraft passes through L5.\n' 
+        '* SEMB-L4 and SEMB-L5 are the stable points. In an idealized circular restricted three-body problem, they would form \n' 
+        '  equilateral triangles with the two primaries and trace the same perfect circular orbit as the secondary. In reality, they \n' 
+        '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
+        '  the EMB\'s orbit.',        
 
         'Mars': 'Known as the Red Planet, fourth planet from the Sun.\n' 
         '* Mars-centered: do not select Mars; visualize shells at 0.01 AU.\n' 
@@ -1432,6 +1591,22 @@ INFO = {
         'Borisov': 'Second interstellar object detected.',
         
         'Oumuamua': 'First known interstellar object detected passing through the Solar System.',
+
+        '3I/ATLAS': 'The third known interstellar object detected passing through the Solar System.\n' 
+        'Here\'s a summary of what we know about 3I/ATLAS (C/2025 N1):\n' 
+        '* Interstellar Object: It is the third confirmed interstellar object discovered, hence its "3I/" designation. This means it \n' 
+        '  originated from outside our solar system and is currently just passing through.\n' 
+        '* Designations: 3I/ATLAS, Its official interstellar object designation. C/2025 N1 (ATLAS), Its official comet designation, \n' 
+        '  indicating it\'s a non-periodic comet discovered in the first half of July 2025 by the ATLAS survey. A11pl3Z, Its initial, \n' 
+        '  temporary designation.\n' 
+        '* Trajectory: It is on a hyperbolic trajectory, confirmed by its negative semi-major axis (A = -0.25996... au). This negative \n' 
+        '  value mathematically signifies an unbound orbit, meaning it will make one pass through our solar system and then escape, never \n' 
+        '  to return.\n' 
+        '* Perihelion: Its closest approach to the Sun (perihelion) is predicted to be around October 29, 2025, when it will be approximately \n' 
+        '  1.36 to 1.4 Astronomical Units (AU) from the Sun.\n' 
+        '* Discovery Data: The orbital elements and predictions for 3I/ATLAS are based on an observational data arc from June 14, 2025, to \n' 
+        '  July 3, 2025. This short observational period is sufficient for astronomers to calculate its orbit and predict future events \n' 
+        '  like perihelion.',        
 
         'ATLAS': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!',        
 

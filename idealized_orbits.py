@@ -199,12 +199,20 @@ planetary_params = {
     # Asteroids
 
     'Apophis': {
-        'a': 0.922583,   # semi-major axis in AU
-        'e': 0.191481,   # eccentricity
+        'a': 0.922583,   # Horizons: A, semi-major axis in AU
+        'e': 0.191481,   # Horizons: EC, eccentricity
         'i': 3.331,      # inclination in degrees
         'omega': 126.394, # argument of perihelion in degrees
         'Omega': 204.061  # longitude of ascending node in degrees
     },  
+
+    'Kamo oalewa': {     # 469219 Kamo`oalewa (2016 HO3)      2025-Jul-05 08:35:28        
+        'a': 1.00102447694204,   # Horizons: A, semi-major axis in AU
+        'e': .1040534310625292,   # Horizons: EC, eccentricity
+        'i': 7.773894173631178,      # Horizons: IN, inclination in degrees
+        'omega': 307.0951007739783, # Horizons: W, argument of perihelion in degrees
+        'Omega': 66.43991583004482   # Horizons: OM, longitude of ascending node in degrees
+    }, 
 
     '2024 PT5': {                  # Epoch 2024-10-20, heliocentric
         'a': 1.012228628670663,   # Horizons: A, semi-major axis in AU
@@ -278,12 +286,13 @@ planetary_params = {
         'Omega': 262.7951724145965     # OM - longitude of ascending node in degrees
     },
 
-    '2024 DW': {                  # Epoch 2024-2-19, heliocentric; solution date 2024-2-23
+    '2024 DW': {                  # 50613029 (2024 DW) 2025-Jul-05 10:27:18; Soln.date: 2024-Feb-23
         'a': 2.421098478271158,   # Horizons: A, semi-major axis in AU
         'e': .6939958024514898,   # Horizons: EC, eccentricity
         'i': .9861902430422796,      # Horizons: IN, inclination in degrees
         'omega': 244.5179261214832, # Horizons: W, argument of perihelion in degrees
-        'Omega': 335.4879825233473   # Horizons: OM, longitude of ascending node in degrees
+        'Omega': 335.4879825233473,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2024-02-19'  # Horizons: epoch
     },
 
     'Lutetia': {                  # Epoch 2017-10-12, heliocentric
@@ -294,12 +303,12 @@ planetary_params = {
         'Omega': 80.87713180326485   # Horizons: OM, longitude of ascending node in degrees
     },
 
-    '2024 YR4': {                  # Epoch 2025-1-25, heliocentric, solution date 2025-3-18
-        'a': 2.51634929076732,   # Horizons: A, semi-major axis in AU
-        'e': .6616057837023791,   # Horizons: EC, eccentricity
-        'i': 3.408279909719115,      # Horizons: IN, inclination in degrees
-        'omega': 134.3644319410849, # Horizons: W, argument of perihelion in degrees
-        'Omega': 271.3676930913076   # Horizons: OM, longitude of ascending node in degrees
+    '2024 YR4': {                  # Epoch 2025-1-30, heliocentric, solution date 2025-6-3
+        'a': 2.516308070047454,   # Horizons: A, semi-major axis in AU
+        'e': .6615999301423001,   # Horizons: EC, eccentricity
+        'i': 3.408259321981154,      # Horizons: IN, inclination in degrees
+        'omega': 134.3644983455991, # Horizons: W, argument of perihelion in degrees
+        'Omega': 271.3674693540159   # Horizons: OM, longitude of ascending node in degrees
     },
 
     'Ceres': {
@@ -384,6 +393,24 @@ planetary_params = {
         'omega': 69.04859999999999, # Horizons: W, argument of perihelion in degrees
         'Omega': 346.9947   # Horizons: OM, longitude of ascending node in degrees
     },
+
+    'NEOWISE': {                  # 2020-Jul-06.0000000, heliocentric, NEOWISE (C/2020 F3) 
+        'a': 358.4679565529321,   # Horizons: A, semi-major axis in AU
+        'e': .9991780262531292,   # Horizons: EC, eccentricity
+        'i': 128.9375027594809,      # Horizons: IN, inclination in degrees
+        'omega': 37.2786584481257, # Horizons: W, argument of perihelion in degrees
+        'Omega': 61.01042818536988   # Horizons: OM, longitude of ascending node in degrees
+    },    
+
+    # Interstellar objects; hyperbolic trajectories
+
+     '3I/ATLAS': {                  # 2025-Jul-01, heliocentric, ATLAS (C/2025 N1) 90004916
+        'a': -.2599636435166625,   # Horizons: A, semi-major axis in AU
+        'e': 6.297880223569178,   # Horizons: EC, eccentricity
+        'i': 175.1184534160558,      # Horizons: IN, inclination in degrees
+        'omega': 127.7776677558638, # Horizons: W, argument of perihelion in degrees
+        'Omega': 322.3053240978721   # Horizons: OM, longitude of ascending node in degrees
+    },    
 
     # Satellites
 
@@ -618,12 +645,12 @@ planetary_params = {
         'Omega': 86.5        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
     },
 
-    'Phoebe': {             # 609
-#        'a': 12929400,          # semi-major axis in km
-        'a': 0.08650,          # semi-major axis in AU
+    'Phoebe': {             # 609;  Revised: Jan 26, 2022 Phoebe / (Saturn) 609; Orbital period = 550.31 d
+#        'a': 12947780,          # semi-major axis in km; Semi-major axis, a (km)= 12947.78(10^3) 
+        'a': 0.08655,          # semi-major axis in AU
 #        'a_parent': 214.7,     # semi-major axis in Saturn radii
         'e': 0.1635,           # eccentricity
-        'i': 175.2,            # inclination to Saturn's equator in degrees (retrograde)
+        'i': 175.986,            # inclination to Saturn's equator in degrees (retrograde)
         'omega': 240.3,      # argument of perihelion in degrees
         'Omega': 192.7        # longitude of ascending node in degrees
     },
@@ -826,83 +853,211 @@ planet_poles = {
     'Pluto': {'ra': 132.99, 'dec': -6.16}
 }
 
-def plot_mars_satellite_orbit_refined(satellite_name, planetary_params, color, fig=None):
-    """Further refined approach for Mars satellites"""
-    if fig is None:
-        fig = go.Figure()
+def plot_hyperbolic_orbit(obj_name, params, color, fig):
+    """
+    Plot a hyperbolic orbit for interstellar objects or comets with e > 1.
     
+    For hyperbolic orbits, we only plot the portion of the trajectory that passes
+    through the solar system, not the entire (infinite) hyperbola.
+    
+    Parameters:
+        obj_name (str): Name of the object
+        params (dict): Orbital parameters including a, e, i, omega, Omega
+        color (str): Color for the orbit line
+        fig (plotly.graph_objects.Figure): Figure to add the orbit to
+    
+    Returns:
+        bool: True if successfully plotted, False otherwise
+    """
     try:
-        # Get orbital parameters
-        if satellite_name not in planetary_params:
-            print(f"Error: No orbital parameters found for {satellite_name}")
-            return fig
+        a = params.get('a', 0)  # Semi-major axis (negative for hyperbolic orbits)
+        e = params.get('e', 0)  # Eccentricity (> 1 for hyperbolic orbits)
+        i = params.get('i', 0)  # Inclination in degrees
+        omega = params.get('omega', 0)  # Argument of perihelion in degrees
+        Omega = params.get('Omega', 0)  # Longitude of ascending node in degrees
+        
+        # For hyperbolic orbits, a is negative and e > 1
+        if e <= 1:
+            print(f"Warning: {obj_name} has e={e}, not a hyperbolic orbit")
+            return False
             
-        orbital_params = planetary_params[satellite_name]
+        # Calculate perihelion distance
+        q = abs(a) * (e - 1)  # Perihelion distance for hyperbolic orbit
         
-        # Extract orbital elements
-        a = orbital_params.get('a', 0)
-        e = orbital_params.get('e', 0)
-        i = orbital_params.get('i', 0)
-        omega = orbital_params.get('omega', 0)
-        Omega = orbital_params.get('Omega', 0)
+        # For hyperbolic orbits, the true anomaly range where the object is bound
+        # to the solar system is limited by the asymptotic true anomaly
+        theta_inf = np.arccos(-1/e)  # Asymptotic true anomaly
         
-        # Generate ellipse in orbital plane
-        theta = np.linspace(0, 2*np.pi, 360)
-        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        # Create array of true anomaly values
+        # We'll plot from -theta_inf + small margin to +theta_inf - small margin
+        margin = 0.1  # radians
+        theta = np.linspace(-theta_inf + margin, theta_inf - margin, 500)
         
+        # Calculate radius for each true anomaly using hyperbolic orbit equation
+        # For hyperbolic orbits: r = a(e^2 - 1) / (1 + e*cos(theta))
+        # Since a is negative for hyperbolic orbits, we use abs(a)
+        r = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta))
+        
+        # Remove any invalid points (though there shouldn't be any with our theta range)
+        valid_points = r > 0
+        theta = theta[valid_points]
+        r = r[valid_points]
+        
+        # Convert to Cartesian coordinates in orbital plane
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
+        
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
-
-        # Standard orbital element rotation sequence
-        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
-        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
         
-        # Mars' orbit inclination to the ecliptic
-        mars_inclination = np.radians(1.85)
+        # Apply orbital element rotations (same as for elliptical orbits)
+        # Note: We need to import rotate_points from the main module
+        # For now, I'll include a simplified version
         
-        # Mars' longitude of ascending node
-        mars_node = np.radians(49.58)
+        # Rotation matrices
+        def rotate_z(angle):
+            return np.array([
+                [np.cos(angle), -np.sin(angle), 0],
+                [np.sin(angle), np.cos(angle), 0],
+                [0, 0, 1]
+            ])
         
-        # Apply Mars' orbital plane orientation
-        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, mars_node, 'z')
-        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, mars_inclination, 'x')
+        def rotate_x(angle):
+            return np.array([
+                [1, 0, 0],
+                [0, np.cos(angle), -np.sin(angle)],
+                [0, np.sin(angle), np.cos(angle)]
+            ])
         
-        # Mars' axial tilt relative to its orbital plane
-        mars_axial_tilt = np.radians(25.19)
+        # Apply rotations
+        # 1. Rotate by argument of perihelion (ω) around z-axis
+        rot_omega = rotate_z(omega_rad)
+        coords = np.vstack([x_orbit, y_orbit, z_orbit])
+        coords = rot_omega @ coords
         
-        # Apply Mars' axial tilt
-        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, mars_axial_tilt, 'x')
+        # 2. Rotate by inclination (i) around x-axis
+        rot_i = rotate_x(i_rad)
+        coords = rot_i @ coords
         
-        # Add the refined orbit trace to the figure
+        # 3. Rotate by longitude of ascending node (Ω) around z-axis
+        rot_Omega = rotate_z(Omega_rad)
+        coords = rot_Omega @ coords
+        
+        x_final, y_final, z_final = coords[0], coords[1], coords[2]
+        
+        # Create hover text with orbital information
+        hover_text = f"{obj_name} Hyperbolic Orbit<br>e={e:.3f}<br>q={q:.3f} AU<br>i={i:.1f}°"
+        
+        # Add trace to figure
         fig.add_trace(
             go.Scatter3d(
                 x=x_final,
                 y=y_final,
                 z=z_final,
                 mode='lines',
-                line=dict(dash='dashdot', width=2, color=color),
-                name=f"{satellite_name} Refined Orbit",
-                text=[f"{satellite_name} Refined Orbit"] * len(x_final),
-                customdata=[f"{satellite_name} Refined Orbit"] * len(x_final),
+                line=dict(
+                    dash='dot',
+                    width=2,
+                    color=color
+                ),
+                name=f"{obj_name} Ideal Orbit",
+                text=[hover_text] * len(x_final),
+                customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),
                 hovertemplate='%{text}<extra></extra>',
                 showlegend=True
             )
         )
+
+        # Optionally, add markers for perihelion and current position
+        # Perihelion is at theta = 0
+        perihelion_idx = np.argmin(np.abs(theta))
+        fig.add_trace(
+            go.Scatter3d(
+                x=[x_final[perihelion_idx]],
+                y=[y_final[perihelion_idx]],
+                z=[z_final[perihelion_idx]],
+                mode='markers',
+                marker=dict(
+                    size=4,
+                    color=color,
+                    symbol='diamond'
+                ),
+                name=f"{obj_name} Perihelion",
+                text=[f"{obj_name} Perihelion<br>q={q:.3f} AU"],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            )
+        )
         
-        return fig
-    
+        print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.3f}, q={q:.3f} AU")
+        return True
+        
     except Exception as e:
-        print(f"Error plotting refined Mars satellite {satellite_name}: {e}")
-        return fig
+        print(f"Error plotting hyperbolic orbit for {obj_name}: {e}")
+        return False        
+
+# this function adjusts the orbital elements for phobos and deimos based on perturbations
+def calculate_mars_satellite_elements(date, satellite_name):
+    """
+    Calculate time-varying orbital elements for Mars satellites
+    Similar to your Moon implementation but with Mars-specific perturbations
+    """
+    # Calculate days since revision date of ephemeris for Phobos and Deimos
+    base_epoch = datetime(2025, 6, 2, 0, 0, 0)
+
+    # Calculate days since the base epoch (NOT J2000!)
+    d = (date - base_epoch).days
     
-def test_mars_rotations(satellite_name, planetary_params, color, fig=None):
+    # Base elements
+    if satellite_name == 'Phobos':
+        a_base = 0.000062682  # AU
+        e_base = 0.0151
+        i_base = 1.082
+        omega_base = 216.3
+        Omega_base = 169.2
+        
+        # Mars J2-induced precession rates (much faster than Moon)
+        omega_rate = 27.0 / 365.25  # degrees/day (apsidal precession)
+        Omega_rate = -158.0 / 365.25  # degrees/day (node regression)
+        
+        # Tidal acceleration (Phobos spiraling inward)
+        # Semi-major axis decreases by ~1.8 cm/year
+        a_secular = -1.8e-5 / 149597870.7 / 365.25 * d  # AU change
+        
+    elif satellite_name == 'Deimos':
+        a_base = 0.0001568
+        e_base = 0.00033
+        i_base = 1.791
+        omega_base = 0.0
+        Omega_base = 54.4
+        
+        # Slower precession rates for more distant Deimos
+        omega_rate = 0.84 / 365.25  # degrees/day
+        Omega_rate = -7.6 / 365.25  # degrees/day
+        
+        # Minimal tidal effects
+        a_secular = 0
+    
+    # Apply secular changes
+    omega = (omega_base + omega_rate * d) % 360.0
+    Omega = (Omega_base + Omega_rate * d) % 360.0
+    a = a_base + a_secular
+    
+    # Could add periodic perturbations like you do for Moon
+    # Solar perturbations, Mars librations, etc.
+    
+    return {
+        'a': a,
+        'e': e_base,  # Could add eccentricity variations
+        'i': i_base,  # Could add inclination oscillations
+        'omega': omega,
+        'Omega': Omega
+    }
+    
+def test_mars_rotations(satellite_name, planetary_params, color, fig=None):     # test function only
     """Test multiple rotation combinations to find the best alignment"""
     if fig is None:
         fig = go.Figure()
@@ -1004,7 +1159,7 @@ def test_mars_rotations(satellite_name, planetary_params, color, fig=None):
         print(f"Error testing Mars rotations for {satellite_name}: {e}")
         return fig
 
-def plot_mars_satellite_orbit(satellite_name, planetary_params, color, fig=None):
+def plot_mars_satellite_orbit(satellite_name, planetary_params, color, fig=None):       # test function only
     """Special function just for Mars satellites with a different rotation sequence"""
     if fig is None:
         fig = go.Figure()
@@ -1131,139 +1286,6 @@ def plot_mars_satellite_orbit(satellite_name, planetary_params, color, fig=None)
     
     except Exception as e:
         print(f"Error plotting Mars satellite {satellite_name}: {e}")
-        return fig
-
-def plot_uranus_satellite_orbit_refined(satellite_name, planetary_params, color, fig=None):
-    """Refined approach for Uranus satellites to account for its extreme axial tilt and Laplace plane reference"""
-    if fig is None:
-        fig = go.Figure()
-    
-    try:
-        # Get orbital parameters
-        if satellite_name not in planetary_params:
-            print(f"Error: No orbital parameters found for {satellite_name}")
-            return fig
-            
-        orbital_params = planetary_params[satellite_name]
-        
-        # Extract orbital elements
-        a = orbital_params.get('a', 0)
-        e = orbital_params.get('e', 0)
-        i = orbital_params.get('i', 0)
-        omega = orbital_params.get('omega', 0)
-        Omega = orbital_params.get('Omega', 0)
-        
-        print(f"\nPlotting Uranus satellite: {satellite_name}")
-        print(f"Orbital elements: a={a}, e={e}, i={i}°, ω={omega}°, Ω={Omega}°")
-        
-        # Generate ellipse in orbital plane
-        theta = np.linspace(0, 2*np.pi, 360)
-        r = a * (1 - e**2) / (1 + e * np.cos(theta))
-        
-        x_orbit = r * np.cos(theta)
-        y_orbit = r * np.sin(theta)
-        z_orbit = np.zeros_like(theta)
-
-        # Convert angles to radians
-        i_rad = np.radians(i)
-        omega_rad = np.radians(omega)
-        Omega_rad = np.radians(Omega)
-
-        # STEP 1: Standard orbital element rotation sequence - this gives us the orbit in the Laplace plane
-        x_laplace, y_laplace, z_laplace = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
-        x_laplace, y_laplace, z_laplace = rotate_points(x_laplace, y_laplace, z_laplace, i_rad, 'x')
-        x_laplace, y_laplace, z_laplace = rotate_points(x_laplace, y_laplace, z_laplace, omega_rad, 'z')
-        
-        # STEP 2: Transform from Laplace plane to Uranus's equatorial plane
-        # For Uranus, the Laplace plane is approximately Uranus's equatorial plane for close satellites,
-        # so for the major moons we don't need a significant transformation here.
-        # However, we'll keep this step separate in case specific adjustments are needed for certain satellites.
-        x_equatorial, y_equatorial, z_equatorial = x_laplace, y_laplace, z_laplace
-        
-        # STEP 3: Transform from Uranus's equatorial plane to the ecliptic
-        # Get Uranus's pole orientation
-        uranus_pole = planet_poles['Uranus']
-        ra_pole = np.radians(uranus_pole['ra'])
-        dec_pole = np.radians(uranus_pole['dec'])
-        
-        # Calculate pole vector in cartesian coordinates
-        sin_dec = np.sin(dec_pole)
-        cos_dec = np.cos(dec_pole)
-        sin_ra = np.sin(ra_pole)
-        cos_ra = np.cos(ra_pole)
-        
-        # Uranus's north pole vector in ecliptic coordinates
-        x_pole = cos_dec * cos_ra
-        y_pole = cos_dec * sin_ra
-        z_pole = sin_dec
-        
-        print(f"Uranus pole vector: [{x_pole:.4f}, {y_pole:.4f}, {z_pole:.4f}]")
-        
-        # Normalize the pole vector
-        pole_norm = np.sqrt(x_pole**2 + y_pole**2 + z_pole**2)
-        x_pole /= pole_norm
-        y_pole /= pole_norm
-        z_pole /= pole_norm
-        
-        # Find the node vector (perpendicular to pole, in ecliptic plane)
-        # This corresponds to the intersection of Uranus's equator with the ecliptic
-        node_denom = np.sqrt(x_pole**2 + y_pole**2)
-        if node_denom > 0:
-            x_node = -y_pole / node_denom
-            y_node = x_pole / node_denom
-            z_node = 0
-            
-            # Calculate the equatorial plane's normal vector
-            # This is just the pole vector
-            equatorial_normal = np.array([x_pole, y_pole, z_pole])
-            
-            # The third vector of our basis (perpendicular to both node and pole)
-            third_vector = np.cross(equatorial_normal, np.array([x_node, y_node, z_node]))
-            
-            # Create a rotation matrix from equatorial to ecliptic
-            # Each row is one of our basis vectors
-            rotation_matrix = np.array([
-                [x_node, y_node, z_node],
-                [third_vector[0], third_vector[1], third_vector[2]],
-                [x_pole, y_pole, z_pole]
-            ])
-            
-            # Apply the rotation matrix
-            points = np.column_stack((x_equatorial, y_equatorial, z_equatorial))
-            transformed_points = np.dot(points, rotation_matrix)
-            
-            x_final = transformed_points[:, 0]
-            y_final = transformed_points[:, 1]
-            z_final = transformed_points[:, 2]
-            
-            print(f"Transformed using Uranus pole orientation")
-        else:
-            # Special case: pole is aligned with z-axis
-            x_final, y_final, z_final = x_equatorial, y_equatorial, z_equatorial
-            print(f"Special case: pole aligned with z-axis")
-            
-        # Add the refined orbit trace to the figure
-        fig.add_trace(
-            go.Scatter3d(
-                x=x_final,
-                y=y_final,
-                z=z_final,
-                mode='lines',
-                line=dict(dash='dashdot', width=2, color=color),
-                name=f"{satellite_name} Refined Orbit",
-                text=[f"{satellite_name} Refined Orbit"] * len(x_final),
-                customdata=[f"{satellite_name} Refined Orbit"] * len(x_final),
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
-            )
-        )
-        
-        print(f"Added refined orbit trace for {satellite_name}")
-        return fig
-    
-    except Exception as e:
-        print(f"Error plotting refined Uranus satellite {satellite_name}: {e}")
-        traceback.print_exc()  # This will print the full stack trace for better debugging
         return fig
 
 def test_uranus_equatorial_transformations(satellite_name, planetary_params, color, fig=None):
@@ -1548,7 +1570,7 @@ def debug_planet_transformation(planet_name):
         else:
             print("Cannot calculate node vector (pole is directly aligned with Z-axis)")
 
-def debug_mars_moons(satellites_data, parent_planets):
+def debug_mars_moons(satellites_data, parent_planets):          # test function only
     """Special debug function for Mars and its moons"""
     print("\n==== MARS SYSTEM DEBUG ====")
     
@@ -1594,7 +1616,7 @@ def debug_mars_moons(satellites_data, parent_planets):
             print(f"  If relative to Mars' equator, inclination to ecliptic would be ~{i_to_ecliptic:.2f}°")
             print(f"  If relative to ecliptic, inclination to Mars' equator would be ~{i_to_equator:.2f}°")
 
-def compare_transformation_methods(fig, satellites_data, parent_planets):
+def compare_transformation_methods(fig, satellites_data, parent_planets):       # test function only
     """Plot orbits with different transformation methods for comparison"""
     
     # Plot Mars moons with all transformation methods
@@ -1627,7 +1649,7 @@ def compare_transformation_methods(fig, satellites_data, parent_planets):
     
     return fig
 
-def test_mars_negative_tilt(fig, satellites_data):
+def test_mars_negative_tilt(fig, satellites_data):          # test function only
     """Test hypothesis that Mars needs a negative tilt application"""
     
     # Mars moons
@@ -1806,7 +1828,7 @@ def create_planet_transformation_matrix(planet_name):
     
     return transform_matrix
 
-def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig=None):
+def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig=None, date=None, days_to_plot=None):
     """
     Plot the idealized orbit of a satellite around its parent planet.
     
@@ -1841,8 +1863,44 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         print(f"\nPlotting {satellite_name} orbit around {parent_planet}")
         print(f"Orbital elements: a={a}, e={e}, i={i}°, ω={omega}°, Ω={Omega}°")
         
+        # Calculate angular range based on days_to_plot
+        if days_to_plot is not None and days_to_plot > 0:
+            # Get the satellite's orbital period
+            if 'orbital_period_days' in orbital_params:
+                period_days = orbital_params['orbital_period_days']
+            else:
+                # Use KNOWN_ORBITAL_PERIODS from constants_new.py
+                from constants_new import KNOWN_ORBITAL_PERIODS
+                
+                if satellite_name in KNOWN_ORBITAL_PERIODS:
+                    period_value = KNOWN_ORBITAL_PERIODS[satellite_name]
+                    # Check if it's in years (for planets) or days (for satellites)
+                    # Satellites have values < 1000, planets/dwarf planets have values > 1
+                    if satellite_name in ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 
+                                         'Uranus', 'Neptune', 'Pluto', 'Ceres', 'Eris', 'Haumea', 
+                                         'Makemake', 'Quaoar', 'Sedna', 'Orcus', 'Halley']:
+                        # Convert years to days
+                        period_days = period_value * 365.25
+                    else:
+                        # Already in days
+                        period_days = period_value
+                else:
+                    # Fallback for unknown satellites
+                    print(f"  Warning: No known period for {satellite_name}, using default")
+                    period_days = 10  # Default fallback
+            
+            orbital_fraction = days_to_plot / period_days
+            max_angle = 2 * np.pi * orbital_fraction
+            
+            # Generate orbit points only for the requested time range
+            num_points = max(30, int(360 * min(orbital_fraction, 1.0)))  # At least 30 points
+            theta = np.linspace(0, max_angle, num_points)
+            print(f"  Plotting {days_to_plot} days = {orbital_fraction:.2f} orbits (period: {period_days:.3f} days)")
+        else:
+            # Full orbit
+            theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
+
         # Generate ellipse in orbital plane
-        theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
         r = a * (1 - e**2) / (1 + e * np.cos(theta))
         
         x_orbit = r * np.cos(theta)
@@ -1903,9 +1961,69 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # A Y-axis rotation (not X) is needed because it represents a rotation around 
             # the ecliptic plane's normal axis, which correctly positions the orbital planes
             # of Phobos and Deimos relative to Mars' orbital plane.
+
+            # Transform from Mars equatorial to ecliptic coordinates
+            # Using Mars' axial tilt. Note: A small (~10-20°) offset remains
+            # between ideal and actual orbits, likely due to JPL's specific
+            # convention for defining the ascending node reference.
+
+            #Different reference conventions: JPL might use a slightly different convention for defining the ascending node that 
+            # we haven't identified         
+            # Small systematic errors: The ~10-20° offset might be inherent to how the orbital elements are defined
+            # Time-dependent effects: Small variations in Mars' orientation that aren't captured in a static transformation
+
+            # Your time-varying elements are working correctly:
+            # Ω change: -157.9° per year (matches expected -158°)
+            # ω change: 27.0° per year (matches expected +27°)
+            #This confirms the precession calculations are accurate.
+
+            if date is not None:
+                # Override static orbital elements with time-varying ones
+                orbital_params = calculate_mars_satellite_elements(date, satellite_name)
+                print(f"Using time-varying elements for {satellite_name} at {date}")
+                
+                # Re-extract the updated orbital elements
+                a = orbital_params.get('a', 0)
+                e = orbital_params.get('e', 0)
+                i = orbital_params.get('i', 0)
+                omega = orbital_params.get('omega', 0)
+                Omega = orbital_params.get('Omega', 0)
+                
+                # Regenerate the orbit with new elements
+                theta = np.linspace(0, 2*np.pi, 360)
+                r = a * (1 - e**2) / (1 + e * np.cos(theta))
+                
+                x_orbit = r * np.cos(theta)
+                y_orbit = r * np.sin(theta)
+                z_orbit = np.zeros_like(theta)
+                
+                # Convert updated angles to radians
+                i_rad = np.radians(i)
+                omega_rad = np.radians(omega)
+                Omega_rad = np.radians(Omega)
+                
+                # Apply standard orbital rotations with updated elements
+                x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
+                x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+                x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
+
+            # The Y-rotation of 25.19° suggests the node reference is already 
+            # aligned with the ecliptic in some way. However, there's still
+            # a visible offset in your plot.
+            
+            # Try this refined approach: -- not used because it does not resolve the discrepancy
+            # 1. First apply a small Z-rotation to account for the remaining offset
+    #        z_adjustment = np.radians(15)  # Tune this based on the visual offset. 
+    #        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, z_adjustment, 'z')
+            
+            # 2. Then apply the Mars tilt
+
             mars_y_rotation = np.radians(25.19)
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, mars_y_rotation, 'y')
-            print(f"Transformation applied: Mars with Y-axis rotation of 25.19°")    # originally 35.4
+            print(f"Transformation applied: Mars with Y-axis rotation of 25.19°")   
+
+    #        z_adjustment = np.radians(10)  # Shift the z adjustment after the y adjustment -- does not improve the discrepancy
+    #        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, z_adjustment, 'z') 
             
         elif parent_planet == 'Jupiter':
             # Use simple tilt for Jupiter (which works well)
@@ -1916,6 +2034,37 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             else:
                 x_final, y_final, z_final = x_temp, y_temp, z_temp
                 print("No transformation applied for Jupiter (missing tilt data)")
+
+        elif parent_planet == 'Saturn':
+            if satellite_name == 'Phoebe':
+                # Special transformation for Phoebe - irregular retrograde satellite
+                # From JPL Horizons header: "mean values with respect to local Laplace plane"
+                
+                # Transform from Laplace plane to ecliptic:
+                # 1. First align with Saturn's orbital plane
+                saturn_orbit_inc = np.radians(2.485)  # Saturn's orbital inclination
+                saturn_orbit_node = np.radians(113.665)  # Saturn's ascending node
+                
+                # 2. Apply a partial rotation between Saturn's equator and orbital plane
+                # Phoebe is far enough that Laplace plane is tilted from equatorial plane
+                laplace_tilt = np.radians(17.0)  # Increased from 15° based on residuals
+                
+                # 3. Additional node alignment correction
+                # Based on the Y-component difference in normals, we need a Z rotation
+                node_correction = np.radians(-30.0)  # Empirical adjustment
+                
+                # Apply transformations in sequence:
+                # a) Rotate from Laplace plane toward Saturn's orbital plane
+                x_rot1, y_rot1, z_rot1 = rotate_points(x_temp, y_temp, z_temp, -laplace_tilt, 'x')
+                
+                # b) Apply node correction to align ascending nodes
+                x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, node_correction, 'z')
+                
+                # c) Transform to ecliptic using Saturn's orbital elements
+                x_rot3, y_rot3, z_rot3 = rotate_points(x_rot2, y_rot2, z_rot2, -saturn_orbit_node, 'z')
+                x_final, y_final, z_final = rotate_points(x_rot3, y_rot3, z_rot3, -saturn_orbit_inc, 'x')
+                
+                print(f"Transformation applied: Phoebe from Laplace plane to ecliptic (enhanced)")
 
         elif parent_planet == 'Uranus':
             # Transformation from Uranus's equatorial frame to ecliptic frame:
@@ -2106,7 +2255,7 @@ def calculate_moon_orbital_elements(date):
         'Omega': Omega
     }
 
-def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None):
+def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, days_to_plot=None):
     """
     Plot the Moon's idealized orbit with time-varying elements and perturbations
     
@@ -2133,12 +2282,29 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None):
     print(f"  ω = {omega:.2f}°")
     print(f"  Ω = {Omega:.2f}°")
     
-    # Generate orbit points
-    theta = np.linspace(0, 2*np.pi, 360)
+    # Calculate angular range based on days_to_plot
+    if days_to_plot is not None and days_to_plot > 0:
+        # Moon's orbital period is approximately 27.321661 days
+        moon_period_days = 27.321661
+        orbital_fraction = days_to_plot / moon_period_days
+        max_angle = 2 * np.pi * orbital_fraction
+        
+    else:
+        # Default to one complete orbit
+        max_angle = 2 * np.pi
+        orbital_fraction = 1.0
     
-    # For better accuracy near perigee/apogee, add extra points
-    theta_extra = np.linspace(-0.1, 0.1, 20)
-    theta = np.sort(np.concatenate([theta, theta_extra]))
+    # Generate the orbit points
+    # Always use enough points for smooth display
+    if orbital_fraction < 1:
+        num_points = max(180, int(360 * orbital_fraction))  # At least 180 points
+    else:
+        # For multiple orbits, ensure at least 360 points per orbit
+        num_points = int(360 * max(1, orbital_fraction))
+        # Cap at a reasonable maximum to avoid performance issues
+        num_points = min(num_points, 7200)  # Max ~20 points per degree for 360 degrees
+    
+    theta = np.linspace(0, max_angle, num_points)
     
     # Calculate radius for each point
     r = a * (1 - e**2) / (1 + e * np.cos(theta))
@@ -2187,9 +2353,82 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None):
         )
     )
     
+    # Add markers at key points
+    # Perigee (closest approach)
+    perigee_idx = np.argmin(np.sqrt(x_final**2 + y_final**2 + z_final**2))
+    
+    fig.add_trace(
+        go.Scatter3d(
+            x=[x_final[perigee_idx]],
+            y=[y_final[perigee_idx]],
+            z=[z_final[perigee_idx]],
+            mode='markers',
+            marker=dict(
+                size=4,
+                color=color,
+                symbol='square-open'
+            ),
+            name=f"Moon Perigee",
+            text=[f"Moon Perigee<br>Distance: {r[perigee_idx]:.6f} AU"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        )
+    )
+    
+    print(f"  Generated {num_points} points for {orbital_fraction:.1f} orbits")
+
     return fig
 
-def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, planetary_params=None, parent_planets=None, color_map=None, date=None):
+def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points):
+    """
+    Generate points for a hyperbolic orbit trajectory.
+    Returns x, y, z coordinates in the heliocentric frame.
+    
+    Parameters:
+        a: Semi-major axis (negative for hyperbolic orbits)
+        e: Eccentricity (> 1 for hyperbolic orbits)
+        i: Inclination in degrees
+        omega: Argument of perihelion in degrees
+        Omega: Longitude of ascending node in degrees
+        rotate_points: Function to rotate points
+    
+    Returns:
+        tuple: (x_final, y_final, z_final, q) where q is perihelion distance
+    """
+    # Calculate perihelion distance
+    q = abs(a) * (e - 1)
+    
+    # For hyperbolic orbits, the true anomaly range is limited
+    theta_inf = np.arccos(-1/e)  # Asymptotic true anomaly
+    
+    # Create array of true anomaly values
+    margin = 0.1  # radians, to avoid numerical issues at asymptotes
+    theta = np.linspace(-theta_inf + margin, theta_inf - margin, 500)
+    
+    # Calculate radius for each true anomaly
+    r = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta))
+    
+    # Convert to Cartesian coordinates in orbital plane
+    x_orbit = r * np.cos(theta)
+    y_orbit = r * np.sin(theta)
+    z_orbit = np.zeros_like(theta)
+    
+    # Convert angles to radians
+    i_rad = np.radians(i)
+    omega_rad = np.radians(omega)
+    Omega_rad = np.radians(Omega)
+    
+    # Apply orbital element rotations
+    x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+    x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+    x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+    
+    return x_final, y_final, z_final, q
+
+
+def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, 
+                          planetary_params=None, parent_planets=None, color_map=None, 
+                          date=None, days_to_plot=None):
     """
     Plot idealized orbits for planets, dwarf planets, asteroids, KBOs, and moons.
     For non-Sun centers, only plots moons of that center body.
@@ -2217,6 +2456,13 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
     }
 
     plotted = []
+
+    # If days_to_plot not provided, try to get from GUI
+    if days_to_plot is None:
+#        try:
+#            days_to_plot = int(days_to_plot_entry.get())
+#        except:
+        days_to_plot = 365  # Default fallback
 
     # Add date parameter default
     if date is None:
@@ -2259,7 +2505,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
             
             # Special handling for Earth's Moon with time-varying elements
             if moon_name == 'Moon' and center_id == 'Earth':
-                fig = plot_moon_ideal_orbit(fig, date, center_id, color_map(moon_name))
+                fig = plot_moon_ideal_orbit(fig, date, center_id, color_map(moon_name), days_to_plot)
             else:
                 # Use the standard satellite plotting function for other moons
                 fig = plot_satellite_orbit(
@@ -2267,7 +2513,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
                     planetary_params,
                     center_id, 
                     color_map(moon_name), 
-                    fig
+                    fig,
+                    date=date,
+                    days_to_plot=days_to_plot  # PASS days_to_plot
                 )
             
             plotted.append(moon_name)
@@ -2313,6 +2561,78 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
             omega = params.get('omega', 0)
             Omega = params.get('Omega', 0)
 
+# In plot_idealized_orbits, add this check right after extracting orbital parameters:
+# (This goes after the lines that get a, e, i, omega, Omega values)
+
+# Check if this is a hyperbolic orbit (e > 1)
+            if e > 1:
+                try:
+                    x_final, y_final, z_final, q = generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points)
+                    
+                    epoch_str = ""
+                    if 'epoch' in params:
+                        epoch_str = f" (Epoch: {params['epoch']})"
+
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=x_final,
+                            y=y_final,
+                            z=z_final,
+                            mode='lines',
+                            line=dict(dash='dot', width=1, color=color_map(obj_name)),
+                            name=f"{obj_name} Ideal Orbit{epoch_str}",
+                            text=[f"{obj_name} Hyperbolic Orbit<br>e={e:.3f}<br>q={q:.3f} AU"] * len(x_final),
+                            customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=True                    
+                        )
+                    )
+                    
+                    # Calculate perihelion position explicitly at theta=0
+                    r_perihelion = abs(a) * (e**2 - 1) / (1 + e)  # At theta=0, cos(0)=1
+                    x_peri = r_perihelion
+                    y_peri = 0.0
+                    z_peri = 0.0
+                    
+                    # Convert angles to radians for rotation
+                    i_rad = np.radians(i)
+                    omega_rad = np.radians(omega)
+                    Omega_rad = np.radians(Omega)
+                    
+                    # Apply the same rotations as the orbit
+                    x_temp, y_temp, z_temp = rotate_points([x_peri], [y_peri], [z_peri], omega_rad, 'z')
+                    x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+                    x_peri_final, y_peri_final, z_peri_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+
+                    # Add a marker at perihelion
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=x_peri_final,
+                            y=y_peri_final,
+                            z=z_peri_final,
+                            mode='markers',
+                            marker=dict(
+                                size=4,
+                                color=color_map(obj_name),
+                                symbol='square-open'
+                            ),
+                            name=f"{obj_name} Perihelion",
+                            text=[f"{obj_name} Perihelion<br>q={q:.3f} AU"],
+                            hovertemplate='%{text}<extra></extra>',
+                            showlegend=False  # Avoid cluttering legend
+                        )
+                    )
+
+                    plotted.append(obj_name)
+                    print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.3f}, q={q:.3f} AU")
+                    
+                except Exception as err:
+                    print(f"Error plotting hyperbolic orbit for {obj_name}: {err}")
+                    skipped['error'].append(obj_name)
+                
+                continue  # Skip to next object, don't run elliptical orbit code
+            
+            # For elliptical orbits (e <= 1), continue with existing code:
             # Generate ellipse in orbital plane
             theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
             r = a * (1 - e**2) / (1 + e * np.cos(theta))
@@ -2320,6 +2640,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
             x_orbit = r * np.cos(theta)
             y_orbit = r * np.sin(theta)
             z_orbit = np.zeros_like(theta)
+
 
             # Convert angles to radians
             i_rad = np.radians(i)
@@ -2333,6 +2654,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
             # Then rotate by longitude of ascending node (Ω) around z-axis
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
 
+            # ADD THIS CODE to check for epoch
+            epoch_str = ""
+            if 'epoch' in params:
+                epoch_str = f" (Epoch: {params['epoch']})"
+
             fig.add_trace(
                 go.Scatter3d(
                     x=x_final,
@@ -2340,11 +2666,33 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, p
                     z=z_final,
                     mode='lines',
                     line=dict(dash='dot', width=1, color=color_map(obj_name)),
-                    name=f"{obj_name} Ideal Orbit",
+            #        name=f"{obj_name} Ideal Orbit",
+                    name=f"{obj_name} Ideal Orbit{epoch_str}",  # MODIFIED LINE - added {epoch_str}
                     text=[f"{obj_name} Ideal Orbit"] * len(x_final),
                     customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),
                     hovertemplate='%{text}<extra></extra>',
                     showlegend=True                    
+                )
+            )
+
+            perihelion_idx = np.argmin(np.abs(theta))  # Index closest to theta=0
+
+            # Add a marker at perihelion
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[x_final[perihelion_idx]],
+                    y=[y_final[perihelion_idx]],
+                    z=[z_final[perihelion_idx]],
+                    mode='markers',
+                    marker=dict(
+                        size=4,
+                        color=color_map(obj_name),
+                        symbol='square-open'
+                    ),
+                    name=f"{obj_name} Perihelion",
+                    text=[f"{obj_name} Perihelion<br>q={a*(1-e):.3f} AU"],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False  # Avoid cluttering legend
                 )
             )
 
@@ -2993,3 +3341,74 @@ def pluto_system_final_transform(satellite_name, planetary_params, color, fig=No
         print(f"Error in pluto_system_final_transform: {e}")
         traceback.print_exc()
         return fig
+    
+from datetime import datetime
+
+date1 = datetime(2025, 6, 17)
+date2 = datetime(2026, 6, 17)
+
+print("=== TESTING TIME-VARYING ELEMENTS ===")
+elements1 = calculate_mars_satellite_elements(date1, 'Phobos')
+elements2 = calculate_mars_satellite_elements(date2, 'Phobos')
+
+# Handle angle wraparound for Omega change
+omega_change = elements2['omega'] - elements1['omega']
+Omega_change = elements2['Omega'] - elements1['Omega']
+
+# Fix Omega wraparound
+if Omega_change > 180:
+    Omega_change -= 360
+elif Omega_change < -180:
+    Omega_change += 360
+
+print(f"Phobos Ω change over 1 year: {Omega_change:.1f}° (expected: ~-158°)")
+print(f"Phobos ω change over 1 year: {omega_change:.1f}° (expected: ~+27°)")
+
+# Also print the actual values for debugging
+print(f"\nDebug info:")
+print(f"Start: Ω={elements1['Omega']:.1f}°, ω={elements1['omega']:.1f}°")
+print(f"End:   Ω={elements2['Omega']:.1f}°, ω={elements2['omega']:.1f}°")
+
+# Test different epochs
+epochs = [
+    datetime(2025, 6, 17),   # Start of data
+    datetime(2026, 6, 17),   # Middle of data  
+    datetime(2027, 6, 17),   # End of data
+    datetime(2000, 1, 1, 12) # J2000.0
+]
+
+for epoch in epochs:
+    elements = calculate_mars_satellite_elements(epoch, 'Phobos')
+    print(f"Epoch {epoch}: Ω={elements['Omega']:.1f}°, ω={elements['omega']:.1f}°")
+
+def calculate_phoebe_correction_from_normals():
+    """
+    Calculate the optimal rotation to align ideal orbit with actual orbit
+    based on their normal vectors.
+    """
+    # Normal vectors from your output
+    n_actual = np.array([0.1242, 0.0025, 0.9922])
+    n_ideal = np.array([0.1814, -0.1036, 0.9779])
+    
+    # Calculate rotation axis and angle
+    rotation_axis = np.cross(n_ideal, n_actual)
+    rotation_axis = rotation_axis / np.linalg.norm(rotation_axis)
+    
+    cos_angle = np.dot(n_ideal, n_actual)
+    angle = np.arccos(np.clip(cos_angle, -1, 1))
+    
+    print(f"Rotation axis: {rotation_axis}")
+    print(f"Rotation angle: {np.degrees(angle):.2f}°")
+    
+    # Decompose into X, Y, Z rotations
+    # This is approximate but gives us insight
+    x_component = np.arcsin(rotation_axis[0]) * angle
+    y_component = np.arcsin(rotation_axis[1]) * angle  
+    z_component = np.arcsin(rotation_axis[2]) * angle
+    
+    print(f"Approximate decomposition:")
+    print(f"  X rotation: {np.degrees(x_component):.2f}°")
+    print(f"  Y rotation: {np.degrees(y_component):.2f}°")
+    print(f"  Z rotation: {np.degrees(z_component):.2f}°")
+    
+    return rotation_axis, angle

@@ -1,0 +1,14 @@
+🚀 ORRERY PROJECT RESOURCES:
+📁 GitHub: [your repository link]
+🌐 Live Demo: [your website link] 
+📱 Full Playlist: [your orrery playlist link]
+
+📝 IN THIS VIDEO:
+[Video-specific description here]
+
+⏰ TIMESTAMPS:
+0:00 Introduction
+2:15 Code demonstration
+[etc.]
+
+🔔 Subscribe for more astronomy coding content!

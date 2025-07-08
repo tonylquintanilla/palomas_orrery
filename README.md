@@ -1,436 +1,279 @@
-# Paloma's Orrery
+# 🌌 Paloma's Orrery
 
-**An Advanced Interactive Solar System and Stellar Visualization Suite**
+## A Journey Through Space and Time
 
-A comprehensive Python application that creates stunning 3D visualizations of our solar system and stellar neighborhood. This tool combines NASA JPL Horizons data with Hipparcos/Gaia catalogs to provide unprecedented interactive astronomical visualizations.
+Paloma's Orrery is an advanced astronomical visualization software that brings the cosmos to your desktop. Named after the dove constellation Columba, this comprehensive tool transforms complex astronomical data into stunning, interactive visualizations of our solar system and stellar neighborhood.
 
-## 🌟 Key Features
+Created by an astronautical engineer with a passion for space exploration, Paloma's Orrery bridges the gap between scientific accuracy and visual beauty, making astronomy accessible to educators, students, and space enthusiasts worldwide.
 
-### Dual-Pipeline Architecture
-Paloma's Orrery employs a sophisticated dual-pipeline architecture that processes astronomical data through two specialized pathways:
+## ✨ What Makes It Special
 
-**🌟 Solar System Pipeline**: JPL Horizons ephemeris data → intelligent orbit management → planet visualization → animated solar system plots
-**⭐ Stellar Pipeline**: Star catalog data → stellar parameter calculation → 3D/2D visualization → interactive stellar maps and HR diagrams
+### Scientific Accuracy Meets Visual Beauty
+- **Real astronomical data** from NASA JPL Horizons, ESA Hipparcos/Gaia, and SIMBAD databases
+- **Scientifically accurate Oort Cloud modeling** with new Hills Cloud, clumpy distributions, and galactic tide effects
+- **Time-accurate positioning** for planets, moons, asteroids, comets, and spacecraft from 1800-2200 CE
+- **Stellar neighborhood mapping** with accurate 3D positioning for 118,000+ stars from Hipparcos and Gaia catalogs
+- **Intelligent cache management** with selective updates and automatic data cleanup
+- **Enhanced orbital mechanics** with refined satellite orbits using JPL Horizons ephemeris corrections
 
-### Solar System Visualization
-- **Real-time 3D positioning** of planets, moons, asteroids, and comets using NASA JPL Horizons data
-- **Multi-scale visualization** from planetary cores to the Oort Cloud (126,000 AU)
-- **Enhanced Oort Cloud modeling** with scientifically accurate toroidal Hills Cloud, clumpy outer structure, and galactic tide effects
-- **Interactive animations** spanning minutes to years with customizable time steps
-- **Comprehensive mission tracking** for 25+ space missions (Voyager, Cassini, Parker Solar Probe, etc.)
-- **Detailed planetary shell systems** showing internal structure, atmospheres, and magnetospheres
-- **Comet trajectory visualization** including famous comets like Halley, Hale-Bopp, and NEOWISE
-- **Time-varying lunar orbit model** with perturbations for accurate Moon positioning
-
-### Advanced Oort Cloud Representation
-- **Hills Cloud (Toroidal Structure)**: 2,000-20,000 AU disk-like inner region influenced by galactic tides
-- **Outer Oort Cloud (Clumpy Structure)**: 20,000-100,000+ AU with realistic density variations and stellar encounter effects
-- **Galactic Tide Influenced Region**: Asymmetric distribution avoiding the galactic plane
-- **Density Gradient Visualization**: Multiple layers showing realistic population structure rather than simple spherical shells
-
-### Stellar Neighborhood Mapping
-- **3D stellar maps** up to 100 light-years from the Sun
-- **Magnitude-limited views** showing stars visible to the naked eye (magnitude ≤ 9)
-- **Temperature-based color coding** using black-body radiation (1,300K to 50,000K)
-- **Interactive camera controls** with notable star navigation
-- **Messier object integration** including nebulae, star clusters, and galaxies
-
-### Hertzsprung-Russell Diagrams
-- **Interactive 2D stellar classification** plots
-- **Spectral type overlays** (O, B, A, F, G, K, M, L classes)
-- **Luminosity vs. temperature analysis** with stellar evolution insights
-- **Comprehensive data integration** from multiple astronomical catalogs
-
-### Advanced Features
-- **Smart selective caching** system that only updates selected objects
+### Advanced Features & Intelligent Data Management
+- **Smart selective caching** system with intelligent updates - only fetches data for selected objects, avoiding unnecessary requests
 - **Special fetch mode** for experimental plotting without cache modification
-- **Automatic cache backup** on startup with single backup file
-- **Weekly cache cleanup** removing data older than 30 days
+- **Automatic cache backup** on startup with weekly cleanup of data older than 30 days
+- **Cache validation and repair** system that automatically detects and fixes corrupted data entries
 - **Multi-threaded processing** with proper shutdown handling
 - **Export capabilities** (HTML, PNG, SVG formats plus JSON, VOTable, Pickle data files)
 - **Professional hover information** with detailed astronomical data
 - **Copy-to-clipboard** functionality for star names and coordinates
-- **Time-varying lunar orbit model** with perturbations for accurate Moon positioning
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Python 3.8 or higher
-- 8GB+ RAM recommended for full magnitude range
-- Active internet connection for initial data fetching
-
-### Installation
-
-1. **Clone the repository:**
-```bash
-git clone https://github.com/yourusername/palomas_orrery.git
-cd palomas_orrery
-```
-
-2. **Install dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-3. **Launch the application:**
-```bash
-python palomas_orrery.py
-```
-
-## 📋 System Requirements
-
-### Core Dependencies
-```
-numpy>=1.24.0          # Numerical computations
-pandas>=2.0.0          # Data manipulation
-plotly>=5.18.0         # Interactive visualizations
-astropy>=5.3.4         # Astronomical calculations
-astroquery>=0.4.6      # Catalog queries
-astropy-healpix>=0.7   # Sky tessellation
-kaleido>=0.2.1         # Static image export
-```
-
-### Optional but Recommended
-```
-scipy>=1.11.0          # Scientific computing
-matplotlib>=3.7.0      # Additional plotting
-jupyter>=1.0.0         # Notebook support
-ipython>=8.12.0        # Enhanced interactive shell
-```
-
-## 🎯 Usage Guide
-
-### Main Interface (`palomas_orrery.py`)
-
-1. **Solar System Visualization:**
-   - Select objects from the comprehensive scrollable menu
-   - Choose visualization date and time (UTC)
-   - Select center object (Sun, planets, moons, or asteroids)
-   - Configure scale (Auto or Manual in AU)
-   - Generate static plots or animations
-
-2. **Enhanced Oort Cloud Options:**
-   - **Hills Cloud (Toroidal)**: Shows disk-like inner Oort Cloud structure (2,000-20,000 AU)
-   - **Outer Oort (Clumpy)**: Displays realistic non-uniform outer structure (20,000-100,000+ AU)
-   - **Galactic Tide Region**: Visualizes asymmetric distribution due to Milky Way gravity
-   - **Density Visualization**: Multiple layers showing population gradients
-
-3. **Cache Management (New in v2.0):**
-   - **No startup dialogs** - application launches immediately
-   - **Selective updates** - only selected objects are updated when plotting
-   - **Special fetch mode** - experiment with different parameters without affecting cache
-   - **Automatic maintenance** - weekly cleanup of old data
-
-4. **Stellar Visualizations:**
-   - Launch `star_visualization_gui.py` from the main interface
-   - Choose distance-based (up to 100 ly) or magnitude-based (up to mag 9) views
-   - Generate 3D stellar maps or 2D HR diagrams
-
-### Command Line Tools
-
-**3D Stellar Distance Visualization:**
-```bash
-python planetarium_distance.py 50  # Stars within 50 light-years
-```
-
-**3D Magnitude-Limited Visualization:**
-```bash
-python planetarium_apparent_magnitude.py 4.5  # Stars brighter than magnitude 4.5
-python planetarium_apparent_magnitude.py 6 1000  # With manual scale of 1000 ly
-```
-
-**Hertzsprung-Russell Diagrams:**
-```bash
-python hr_diagram_distance.py 25     # HR diagram for stars within 25 ly
-python hr_diagram_apparent_magnitude.py 5  # HR diagram for stars brighter than mag 5
-```
+- **Animation and Time Travel** - watch cosmic motions across timescales from minutes to years
 
 ## 🏗️ Architecture Overview
 
-### Dual-Pipeline Data Flow
+### Technical Innovation
+
+**Data Integration**: The software seamlessly integrates data from multiple authoritative sources:
+- **NASA JPL Horizons**: Real-time solar system ephemeris data
+- **ESA Hipparcos**: High-precision positions for bright stars (118,218 stars)
+- **ESA Gaia DR3**: Revolutionary stellar census data for 1.8 billion stars
+- **SIMBAD Database**: Comprehensive stellar properties and classifications
+- **Messier Catalog**: Deep-sky objects including nebulae, star clusters, and galaxies
+
+**Smart Processing Pipeline**: Raw astronomical data undergoes sophisticated processing through specialized modules. The solar system pipeline handles orbit caching with selective updates and Planet 9 synthesis, while the stellar pipeline manages coordinate transformations, spectral classification, and multi-catalog cross-matching.
+
+### Advanced Oort Cloud Modeling
+The enhanced Oort Cloud visualization represents a significant advancement in astronomical software, incorporating:
+- **Formation Physics**: The visualization reflects actual formation mechanisms - planetesimal scattering by giant planets, galactic tidal sculpting, and ongoing modification by stellar encounters
+- **Observational Constraints**: Recent discoveries of inner Oort Cloud objects like Sedna provide direct evidence for the complex structure
+- **Computational Validation**: Models incorporate results from N-body simulations showing how the original spherical population has been sculpted into the structured system observed today
+
+### System Architecture & Data Flow
+
+**Interactive Flowchart**: Explore the complete system architecture and data flow through our interactive Mermaid flowchart:
+**[📊 Paloma's Orrery System Architecture Flowchart](https://www.mermaidchart.com/app/projects/780c7ec0-84a7-4e38-9e06-9bbfdd985750/diagrams/cc451fa5-5fc2-497b-ab37-56813ad4620c/version/v0.1/edit)**
+
+This comprehensive flowchart visualizes:
+- **Dual-pipeline architecture** with solar system and stellar processing pathways
+- **Data source integration** from JPL Horizons, Hipparcos, Gaia, and SIMBAD
+- **Refined orbit system** with enhanced satellite positioning capabilities
+- **Module interconnections** showing how 50+ Python modules work together
+- **Output generation** paths for visualizations and data exports
+- **Interactive navigation** with clickable elements and detailed module descriptions
+
+## 🚀 Recent Improvements (July 2025)
+
+### Enhanced GUI and User Experience
+1. **Reorganized orbit data fetching interface**:
+   - Clear separation between cache management and fetch operations
+   - New "Fetch Special" mode for experimental plotting without affecting main cache
+   - Improved status display showing operation type and progress
+   - Color-coded status messages (blue for cache ops, purple for special fetch)
+
+2. **Streamlined cache update process**:
+   - Removed repetitive update dialogs
+   - "Remember my choice" option for session-wide preferences
+   - Selective object fetching - only downloads data for selected objects
+   - Clear indication of which objects need updates
+
+3. **Advanced interval controls**:
+   - Separate interval settings for different object types
+   - Fine-grained control: planets (1d-7d), satellites (1h-24h), comets (1h-7d)
+   - Custom intervals for eccentric orbits
+   - Intelligent defaults based on object characteristics
+
+### Robust Cache Management System
+1. **Cache validation and repair**:
+   - Automatic detection of corrupted JSON entries
+   - Graceful handling of mixed format data (old array-based vs new time-indexed)
+   - Automatic backup creation before repairs
+   - Detailed repair logs showing what was fixed
+
+2. **Safety mechanisms**:
+   - Prevention of accidental overwrites (won't save tiny data over large files)
+   - Atomic file operations using temporary files
+   - Emergency backup creation for suspicious operations
+   - Automatic format conversion for legacy data
+
+3. **Testing infrastructure**:
+   - Comprehensive test suite with 13+ tests for cache operations
+   - Isolated test environment preventing main file corruption
+   - Tests for corruption handling, format conversion, and incremental updates
+
+## 📁 File Status & Integration
+
+### Core Components
+
+**`orbit_data_manager.py`** ✅ **CRITICAL MODULE**
+- **Core functionality**: Manages all orbit data caching and JPL Horizons integration
+- **Recent enhancements**:
+  - Safe save mechanism with size checks
+  - Automatic corruption detection and repair
+  - Support for both old and new data formats
+  - Incremental update capabilities
+  - Proper error handling and backup creation
+
+**`test_orbit_cache.py`** ✅ **NEW TEST SUITE**
+- Comprehensive testing for cache functionality
+- Isolated test environment in `test_output/` directory
+- Tests corruption handling, format conversion, and updates
+- Ensures cache reliability and data integrity
+
+**`verify_orbit_cache.py`** ✅ **NEW UTILITY**
+- Safe verification tool for orbit cache health
+- Creates timestamped backups before verification
+- Reports statistics on cache contents
+- Optional repair mode for corrupted entries
+
+## 🚀 Installation & Quick Start
+
+### Requirements
+```bash
+# Core dependencies
+pip install numpy scipy matplotlib plotly
+pip install astropy astroquery jplephem skyfield
+pip install pandas pillow kaleido tenacity
 
-Paloma's Orrery employs a sophisticated dual-pipeline architecture that processes solar system and stellar data through separate but coordinated pathways:
+# GUI framework
+pip install tkinter  # Usually comes with Python
 
-**Solar System Pipeline**: External data sources (JPL Horizons) → Data acquisition → Orbit data management → Solar visualization processing → Solar plot functions (plot_objects, animate_objects)
-
-**Stellar Pipeline**: External data sources (Hipparcos, Gaia, SIMBAD) → Data acquisition → Data processing → Parameter calculation & selection → Stellar visualization processing → Stellar plot functions (create_3d_visualization, create_hr_diagram)
-
-### Core Modules
-
-**`palomas_orrery.py`** - Main GUI application with comprehensive solar system controls
-- Object selection interface with 200+ celestial bodies
-- Animation controls (minutes to years)
-- Scale management and center object selection
-- Real-time JPL Horizons data integration
-- **New**: Smart cache management with selective updates
-
-**`star_visualization_gui.py`** - Dedicated stellar visualization interface
-- Star search functionality across multiple catalogs
-- Distance and magnitude-based filtering
-- Interactive parameter controls
-
-**Visualization Engines:**
-- `visualization_3d.py` - 3D stellar neighborhood rendering
-- `visualization_2d.py` - Hertzsprung-Russell diagram generation
-- `planet_visualization.py` - Planetary shell system rendering
-- `solar_visualization_shells.py` - Solar structure visualization
-- **`idealized_orbits.py`** - Orbital mechanics and ideal orbit plotting
-  - Standard Keplerian orbit calculations
-  - Special Moon orbit model with time-varying elements
-  - Perturbation calculations for realistic lunar motion
-
-**Data Pipeline:**
-- `data_acquisition.py` / `data_acquisition_distance.py` - Multi-catalog stellar data fetching
-- `data_processing.py` - Coordinate transformations and filtering
-- `star_properties.py` - SIMBAD database integration
-- `stellar_parameters.py` - Temperature and luminosity calculations
-
-**Infrastructure:**
-- `orbit_data_manager.py` - Intelligent orbit caching system with selective updates
-- `shutdown_handler.py` - Thread-safe application management
-- `save_utils.py` - Export functionality (plots and data files)
-- `messier_object_data_handler.py` - Non-stellar object integration
-
-## 📦 Module Reference
-
-### Core Application Modules
-
-**`catalog_selection.py`** - Star selection and filtering logic for distance and magnitude-based queries
-
-**`constants_new.py`** - Physical constants, astronomical parameters, and object type mappings
-
-**`data_acquisition.py`** - Stellar data fetching from Hipparcos, Gaia, and SIMBAD catalogs (magnitude-based)
-
-**`data_acquisition_distance.py`** - Stellar data fetching optimized for distance-based queries
-
-**`data_processing.py`** - Coordinate transformations, unique ID generation, and stellar data preprocessing
-
-**`earth_visualization_shells.py`** - Create planetary structure shells.
-
-**`eris_visualization_shells.py`** - Create planetary structure shells.
-
-**`formatting_utils.py`** - Text formatting utilities for numerical values and hover text display
-
-**`hr_diagram_apparent_magnitude.py`** - Command-line tool for generating H-R diagrams based on apparent magnitude
-
-**`hr_diagram_distance.py`** - Command-line tool for generating H-R diagrams based on distance limits
-
-**`idealized_orbits.py`** - Orbital mechanics calculations and idealized orbit plotting, including time-varying Moon orbit model
-
-**`jupiter_visualization_shells.py`** - Create planetary structure shells.
-
-**`mars_visualization_shells.py`** - Create planetary structure shells.
-
-**`mercury_visualization_shells.py`** - Create planetary structure shells.
-
-**`messier_catalog.py`** - Catalog of selected Messier objects and location data.
-
-**`messier_object_data_handler.py`** - Integration and processing of Messier catalog deep-sky objects
-
-**`moon_visualization_shells.py`** - Create planetary structure shells.
-
-**`neptune_visualization_shells.py`** - Create planetary structure shells.
-
-**`orbit_data_manager.py`** - Intelligent JPL Horizons data caching with selective updates and automatic cleanup
-
-**`palomas_orrery.py`** - Main GUI application for solar system visualization and animation controls
-
-**`palomas_orrery_helpers.py`** - Helper functions directly called into palomas_orrery.py.
-
-**`planet_visualization.py`** - Planetary shell system rendering with internal structure visualization
-
-**`planet9_visualization_shells.py`** - Create planetary structure shells.
-
-**`planetarium_apparent_magnitude.py`** - Command-line 3D stellar visualization tool using apparent magnitude limits
-
-**`planetarium_distance.py`** - Command-line 3D stellar visualization tool using distance limits
-
-**`pluto_visualization_shells.py`** - Create planetary structure shells.
-
-**`saturn_visualization_shells.py`** - Create planetary structure shells.
-
-**`save_utils.py`** - Export functionality for plots and structured data files (PNG, HTML, JSON, VOTable, Pickle)
-
-**`shared_utilities.py`** - Shared functions.
-
-**`shutdown_handler.py`** - Thread-safe application shutdown and cleanup management
-
-**`solar_visualization_shells.py`** - Enhanced solar structure visualization with detailed shell system rendering and scientifically accurate Oort Cloud models
-
-**`star_notes.py`** - Educational content and unique notes for notable stars and astronomical objects
-
-**`star_properties.py`** - SIMBAD database integration for stellar property queries and caching
-
-**`star_visualization_gui.py`** - Dedicated GUI for stellar neighborhood exploration with search functionality
-
-**`stellar_parameters.py`** - Temperature and luminosity calculations using spectral types and photometric data
-
-**`uranus_visualization_shells.py`** - Create planetary structure shells.
-
-**`venus_visualization_shells.py`** - Create planetary structure shells.
-
-**`visualization_2d.py`** - Hertzsprung-Russell diagram generation with interactive stellar classification
-
-**`visualization_3d.py`** - 3D stellar neighborhood rendering with magnitude and temperature visualization
-
-**`visualization_core.py`** - Core visualization utilities shared between 2D and 3D stellar plotting modules
-
-**`visualization_utils.py`** - GUI utilities including scrollable frames, tooltips, clipboard support, and star search functionality
-
-## 📊 Data Sources & Processing
-
-### Astronomical Catalogs
-- **JPL Horizons System**: Real-time solar system positions
-- **Hipparcos Catalog**: 118,218 high-precision stellar positions
-- **Gaia DR3**: 1.8 billion stellar measurements
-- **SIMBAD Database**: Comprehensive stellar properties
-- **Messier Catalog**: Deep-sky objects and nebulae
-
-### Photometric Systems
-The application handles multiple photometric standards:
-
-**Hipparcos (Johnson-Cousins System):**
-- Direct V magnitudes for stars ≤ mag 4.0
-- B-V color indices for temperature estimation
-- High precision for bright stars
-
-**Gaia (Native Photometry):**
-- G, BP, RP band measurements
-- V magnitude estimation: `V = G - correction_factor(BP-RP)`
-- Used for stars > mag 4.0 to avoid duplicates
-
-### Data Cache Management (Enhanced in v2.0)
-- **Automatic backup**: `orbit_paths_backup.json` created on startup
-- **Selective caching**: Only selected objects are updated
-- **Special fetch mode**: Temporary cache for experimentation
-- **Weekly cleanup**: Automatic removal of data older than 30 days
-- **Multi-line status display**: Color-coded operation history
-- **JSON files**: Orbit path data with metadata tracking
-
-## 🎨 Visualization Features
-
-### Enhanced Oort Cloud Visualization
-The software now includes scientifically accurate Oort Cloud representations based on current research:
-
-**Hills Cloud (Inner Oort - Toroidal Structure):**
-- Disk-like/toroidal shape influenced by galactic tides (2,000-20,000 AU)
-- More tightly bound to Solar System
-- Primary source of Jupiter-family comets
-
-**Outer Oort Cloud (Clumpy Structure):**
-- Roughly spherical but highly non-uniform (20,000-100,000+ AU)
-- Sculpted by stellar encounters and galactic tides
-- Realistic density variations and clumping effects
-
-**Galactic Tide Influenced Region:**
-- Asymmetric distribution avoiding the galactic plane
-- Shows effect of Milky Way's gravitational field
-- Objects cluster away from galactic equator
-
-**Density Gradient Visualization:**
-- Multiple layers showing realistic population structure
-- Variable particle sizes reflecting local density
-- Transparency effects showing tenuous nature
-
-### Interactive Controls
-- **Multi-level zoom**: From planetary surfaces to galactic scales
-- **Time animation**: Customizable step sizes and frame counts
-- **Camera presets**: Navigate to notable stars and objects
-- **Hover information**: Detailed astronomical data on mouse-over
-- **Legend toggles**: Show/hide object categories
-- **Export options**: HTML, PNG, SVG formats plus structured data files
-
-### Scientific Accuracy
-- **Proper coordinate systems**: ICRS alignment with celestial sphere
-- **Realistic scaling**: True relative sizes and distances
-- **Temperature visualization**: Black-body radiation color mapping
-- **Orbital mechanics**: Kepler's laws implementation
-- **Light-time corrections**: Accurate positions for observation dates
-- **Moon orbit modeling**: Time-varying elements with solar perturbations
-  - Evection: Primary perturbation due to Sun's gravity
-  - Secular variations: Node regression and apsidal precession
-  - Dynamic eccentricity: Varies between 0.026 and 0.077
-- **Complex Oort Cloud structure**: Based on N-body simulations and observational constraints
-
-## 🔧 Configuration Options
-
-### Solar System Plotting
-```python
-# Interval controls for orbit resolution
-comet_interval_divisor = 100      # Comet trajectory points
-mission_interval_divisor = 75     # Space mission paths  
-planet_interval_divisor = 50      # Planet orbit detail
-satellite_orbit_days = 56         # Moon observation period
+# Optional for enhanced features
+pip install pickle  # For data serialization
 ```
 
-### Enhanced Oort Cloud Settings
+### Quick Start
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/tonylquintanilla/palomas_orrery.git
+   cd palomas_orrery
+   ```
+
+2. **Verify your orbit cache** (recommended after updates):
+   ```bash
+   python verify_orbit_cache.py
+   ```
+
+3. **Launch the main application**:
+   ```bash
+   python palomas_orrery.py
+   ```
+
+## 🎮 Using Paloma's Orrery
+
+### Main Interface Navigation
+
+1. **Object Selection:**
+   - Browse through categorized celestial objects
+   - Use checkboxes to select objects for plotting
+   - Special categories: Planets, Moons, Asteroids, Comets, Spacecraft, etc.
+
+2. **Cache Management:**
+   - **Update Cache**: Refreshes data for all objects (use sparingly)
+   - **Incremental Update**: Extends existing data to new dates
+   - **Fetch Special**: Experimental mode - doesn't affect main cache
+   - **Cache Info**: Shows current cache statistics
+
+3. **Plot Controls:**
+   - **Plot Selected**: Creates visualization with selected objects
+   - **Remember Update Choice**: Avoid repetitive dialogs
+   - **Interval Controls**: Adjust trajectory resolution by object type
+
+4. **Time Controls:**
+   - Date selector for any moment from 1800-2200 CE
+   - Animation controls with adjustable speed
+   - "Animate Birthdays" for special date sequences
+
+### Performance Tips
+
+1. **First Run**: 
+   - Start with a small selection of objects
+   - The cache builds incrementally as you use the software
+
+2. **Optimal Usage**:
+   - Use "Fetch Special" for experiments
+   - Select only objects you need to plot
+   - Use coarser intervals for long time spans
+
+3. **Cache Maintenance**:
+   - Automatic weekly cleanup removes old data
+   - Run `verify_orbit_cache.py` if you suspect issues
+   - Backups are created automatically
+
+## 🔧 Configuration & Customization
+
+### Interval Settings
 ```python
-# Hills Cloud (Toroidal) parameters
-hills_inner_radius = 2000         # Inner boundary (AU)
-hills_outer_radius = 20000        # Outer boundary (AU)
-hills_thickness_ratio = 0.3       # Torus thickness factor
-
-# Outer Oort Cloud (Clumpy) parameters  
-outer_radius_min = 20000          # Inner boundary (AU)
-outer_radius_max = 100000         # Outer boundary (AU)
-clump_count = 15                  # Number of density clumps
-
-# Galactic tide region parameters
-tide_radius = 50000               # Typical distance (AU)
-galactic_asymmetry = True         # Enable asymmetric distribution
+# In palomas_orrery.py - Adjust default intervals
+default_intervals = {
+    'planet': '1d',          # Daily positions for planets
+    'satellite': '2h',       # 2-hour intervals for moons
+    'comet': '6h',          # 6-hour intervals for comets
+    'spacecraft': '1d',      # Daily for spacecraft
+    'asteroid': '1d'         # Daily for asteroids
+}
 ```
 
-### Orbit Path Fetching Controls (New)
-- **Start/End date offsets**: Dynamic date displays showing calculated dates
-- **Interval settings**: Customizable for different object types
-- **Special fetch mode**: Cyan-highlighted controls for experimental fetches
-- **Center-aware**: Settings apply to selected center object
-
-### Stellar Visualization
+### Cache Settings
 ```python
-# Scale and magnitude limits
-max_distance_ly = 100             # Maximum distance filter
-max_apparent_magnitude = 9.0      # Naked-eye limit
-temperature_range = (1300, 50000) # Color mapping bounds
+# In orbit_data_manager.py
+CACHE_CLEANUP_DAYS = 30     # Days to keep old data
+CACHE_UPDATE_THRESHOLD = 7   # Days before suggesting update
 ```
 
-## 📈 Performance Optimization
+## 📊 Module Architecture
 
-### Initial Setup (First Run)
-- **No startup delays**: Application launches immediately
-- **On-demand fetching**: Data retrieved only when needed
-- **Selective updates**: Only selected objects are processed
+### Data Pipeline Modules
+- **`orbit_data_manager.py`**: Intelligent JPL Horizons caching with validation
+- **`data_acquisition.py`**: Stellar data from Hipparcos/Gaia
+- **`data_processing.py`**: Coordinate transformations and preprocessing
+- **`star_properties.py`**: SIMBAD integration for stellar properties
 
-### Subsequent Sessions
-- **Application launch**: 2-5 seconds from cache
-- **Plot generation**: 2-5 seconds typical
-- **Animation frames**: 200-500ms per frame
-- **Interactive updates**: <100ms response time
+### Visualization Engines
+- **`palomas_orrery.py`**: Main GUI and solar system visualization
+- **`star_visualization_gui.py`**: Stellar neighborhood explorer
+- **`visualization_3d.py`**: 3D stellar rendering
+- **`visualization_2d.py`**: HR diagram generation
+- **`planet_visualization.py`**: Planetary structure visualization
 
-### Memory Usage by Scope
-- **Distance 25 ly**: ~50MB RAM
-- **Distance 100 ly**: ~200MB RAM  
-- **Magnitude 4**: ~100MB RAM
-- **Magnitude 6**: ~500MB RAM
-- **Magnitude 9**: ~2GB RAM
+### Support Infrastructure
+- **`test_orbit_cache.py`**: Comprehensive cache testing
+- **`verify_orbit_cache.py`**: Cache health verification
+- **`shutdown_handler.py`**: Clean application termination
+- **`save_utils.py`**: Export functionality
 
-## ⚙️ Advanced Features
+## 🌟 Future Development
 
-### Smart Cache Management (New in v2.0)
-The system includes intelligent orbit caching with selective updates:
-```python
-# Only updates selected objects when plotting
-# Dialog asks user preference with "remember choice" option
-# Special fetch mode for experimentation without cache pollution
-# Automatic weekly cleanup of data older than 30 days
-# Single backup file maintained for safety
-```
+Planned enhancements include:
+- Integration of James Webb Space Telescope discoveries
+- Exoplanet system visualizations
+- Gravitational wave source mapping
+- Enhanced spacecraft trajectory planning tools
+- Real-time satellite tracking integration
+- Variable star light curve analysis
+- Binary system orbital mechanics
 
-### Moon Orbit Model (New in v2.0)
-Enhanced lunar orbit calculations with time-varying elements:
-```python
-# Calculates Moon's position using:
-# - Base orbital elements (a=0.00257 AU, e=0.0549, i=5.145°)
-# - Secular variations:
-#   - Node regression: -19.341°/century (18.6 year cycle)
-#   
+## 🎭 The Human Touch
+
+While built on rigorous astronomical data and sophisticated algorithms, Paloma's Orrery never loses sight of the human element in space exploration. Every spacecraft has a story, every star has unique characteristics, and every celestial dance unfolds according to the same physical laws that govern our daily lives.
+
+The recent GUI improvements exemplify this philosophy - instead of forcing users through repetitive dialogs, the software now remembers preferences and provides clear, color-coded feedback. The cache system protects valuable data while allowing experimentation, and the testing infrastructure ensures reliability.
+
+## 🌐 Resources
+
+### Visual Gallery
+Visit **[Paloma's Orrery Website](https://sites.google.com/view/tony-quintanilla)** for stunning visualization examples
+
+### Video Tutorials
+Watch demonstrations on the **[YouTube Playlist](https://www.youtube.com/playlist?list=PLEGbeeSDrKst8837R5builvhDlTs7Shpm)**
+
+### Source Code
+Complete code available on **[GitHub](https://github.com/tonylquintanilla/palomas_orrery)**
+
+### Community
+- Report issues on GitHub
+- Share your visualizations
+- Contribute improvements
+
+---
+
+*"The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself."* - Carl Sagan
+
+Paloma's Orrery: Making the universe accessible, one visualization at a time. 🌌
