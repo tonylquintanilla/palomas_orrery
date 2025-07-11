@@ -254,6 +254,14 @@ planetary_params = {
         'Omega': 304.435  # longitude of ascending node in degrees
     },
 
+    '2023 JF': {        # (2023 JF)  EPOCH=  2460073.5 ! 2023-May-09.00 (TDB)
+        'a': 1.680153966583222,   # A - semi-major axis in AU
+        'e': .409819444019783,   # EC - eccentricity
+        'i': 3.1489028778487,     # IN - inclination in degrees
+        'omega': 199.537622506113, # W - argument of perihelion in degrees
+        'Omega': 50.09327122563936  # OM - longitude of ascending node in degrees
+    },
+
     'Dinkinesh': {      # 152830 Dinkinesh (1999 VD57)
         'a': 2.191622877873451,   # A - semi-major axis in AU
         'e': .1121269945294693,   # EC - eccentricity

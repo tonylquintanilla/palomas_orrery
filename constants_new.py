@@ -473,8 +473,9 @@ def color_map(planet):
         'L5': 'red',
 
         'Kamo oalewa': 'cyan',
-        '2024 DW': 'gold',
         '2024 PT5': 'red',
+        '2023 JF': 'white',
+        '2024 DW': 'gold',        
         '2024 YR4': 'green',
 
         'Apophis': 'red',
@@ -634,6 +635,24 @@ INFO = {
         'not a permanent addition to our celestial neighborhood, its temporary presence provided scientists with a valuable ' 
         'opportunity to study near-Earth objects and learn more about the dynamics of our solar system.\n* Plot 2024 PT5 with' 
         'Earth as the center to see its close approach and also with the Sun as the center to see its orbit near Earth\'s.',
+
+        '2023 JF': 'Asteroid 2023 JF is a small near-Earth asteroid that made a close approach to Earth in May 2023. Here\'s a \n' 
+        'breakdown:\n' 
+        '* Size: It\'s estimated to be about 34 feet (10 meters) wide, roughly the size of a bus.\n' 
+        '* Classification: It\'s classified as a "Near Earth Asteroid" due to its orbit\'s proximity to Earth.\n' 
+        '* Close Approach to Earth and Moon:\n' 
+        '* Date of Close Approach: Asteroid 2023 JF flew past Earth on May 9, 2023 23:41.\n' 
+        '* Distance: At its closest, it was approximately 320,322 km away from Earth. This distance is closer than \n' 
+        '  the Moon\'s average orbit around Earth, which is about 384,400 km).\n' 
+        '  * Its closest approach to the Moon occurred on May 10, 2023 05:10 at a distance of 192,092 km.\n' 
+        '* Significance: While it came closer than the Moon, it passed at a safe distance and posed no risk of impact. These close \n' 
+        '  approaches by small asteroids are not uncommon. Astronomers use such events to study asteroids and practice planetary \n' 
+        '  defense measures. Even if an asteroid of this size were to enter Earth\'s atmosphere, it would largely disintegrate, with \n' 
+        '  some smaller fragments potentially falling as meteorites.\n\n' 
+        'It\'s important to distinguish 2023 JF from other similarly named asteroids that also made close approaches in 2023 or 2024, \n' 
+        'such as 2023 DZ2 (which passed at about half the Earth-Moon distance) or 2024 JF (which was expected to pass in May 2024). NASA \n' 
+        'and other space agencies continuously monitor Near-Earth Objects (NEOs) to track their movements and assess any potential impact \n' 
+        'risks.',
 
         '2024 YR4': '2024 YR4 is an asteroid that poses a potential risk to Earth, with a probability of nearly zero.\n' 
         '* It was discovered on December 27, 2024, with a close approach on December 25, 4:46 UTC at a distance of about 822,000 km.\n' 

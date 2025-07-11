@@ -1524,8 +1524,9 @@ earth_var = tk.IntVar(value=0)
 # near Earth asteroids
 kamooalewa_var = tk.IntVar(value=0)
 pt5_var = tk.IntVar(value=0)
-yr4_var = tk.IntVar(value=0)
+asteroid2023jf_var = tk.IntVar(value=0)
 asteroid_dw_var = tk.IntVar(value=0)
+yr4_var = tk.IntVar(value=0)
 
 # Lagrange Points
 # Earth-Moon Lagrange Points
@@ -2167,157 +2168,163 @@ objects = [
     # Lagrange Points
     # Earth-Moon Lagrange Points
     {'name': 'EM-L1', 'id': '3011', 'var': eml1_var, 'color': color_map('EM-L1'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},  
 
     {'name': 'EM-L2', 'id': '3012', 'var': eml2_var, 'color': color_map('EM-L2'), 'symbol': 'square-open', 'object_type': 'lagrange_point',   
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'}, 
 
     {'name': 'EM-L3', 'id': '3013', 'var': eml3_var, 'color': color_map('EM-L3'), 'symbol': 'square-open', 'object_type': 'lagrange_point',   
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
 
     {'name': 'EM-L4', 'id': '3014', 'var': eml4_var, 'color': color_map('EM-L4'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
 
     {'name': 'EM-L5', 'id': '3015', 'var': eml5_var, 'color': color_map('EM-L5'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},    
 
     # Sun-Earth-Moon-Barycenter Lagrange Points
     {'name': 'L1', 'id': '31', 'var': l1_var, 'color': color_map('L1'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L1 31
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-1 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L2', 'id': '32', 'var': l2_var, 'color': color_map('L2'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L2 32
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-2 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L3', 'id': '33', 'var': l3_var, 'color': color_map('L3'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L3 33
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-3 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L4', 'id': '34', 'var': l4_var, 'color': color_map('L4'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L4 34
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-4 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L5', 'id': '35', 'var': l5_var, 'color': color_map('L5'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L5 35
-    'is_comet': False, 'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
     'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-5 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     # Near-Earth Asteroids
     {'name': 'Kamo oalewa', 'id': '469219', 'var': kamooalewa_var, 'color': color_map('Kamo oalewa'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2032, 12, 31), 
+    'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2032, 12, 31), 
     # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-04. PREDICTS-> 2025-SEP-29
     'mission_info': 'Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.', 
     'mission_url': 'https://www.jpl.nasa.gov/news/small-asteroid-is-earths-constant-companion/'},
 
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
+    'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
     'mission_info': 'Closest approach to Earth 8-9-2024.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
 
-    {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 12, 24), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
+    {'name': '2023 JF', 'id': '50587237', 'var': asteroid2023jf_var, 'color': color_map('2023 JF'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    'id_type': 'smallbody', 'start_date': datetime(1962, 1, 20), 'end_date': datetime(2025, 10, 4),
+    # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-09. PREDICTS-> 2025-OCT-04
+    'mission_info': 'Asteroid 2023 JF flew past Earth on May 9, 2023.', 
+    'mission_url': 'https://www.nasa.gov/solar-system/near-earth-object-observations-program/#:~:text=The%20NEO%20Observations%20Program%20sponsors,the%20sky%20to%20determine%20their'},
 
     {'name': '2024 DW', 'id': '50613029', 'var': asteroid_dw_var, 'color': color_map('2024 DW'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2024, 2, 19), 'end_date': datetime(2032, 12, 31), 
+    'id_type': 'smallbody', 'start_date': datetime(2024, 2, 19), 'end_date': datetime(2032, 12, 31), 
     'mission_info': 'Closest approach to Earth 2-22-2024 approximately 5 UTC. Keplerian orbit perturbation from Jupiter.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20DW'},
 
+    {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'object_type': 'orbital',
+    'id_type': 'smallbody', 'start_date': datetime(2024, 12, 24), 'end_date': datetime(2032, 12, 31), 
+    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
+
     # Main Belt Asteroids
     {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'is_comet': False, 'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
+    'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
     'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 
     'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
 
     {'name': 'Bennu', 'id': '101955', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
 
     {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', # Bennu as a center object
+    'id_type': 'smallbody', # Bennu as a center object
     'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
 
     {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
 
     {'name': 'Dinkinesh', 'id': '152830', 'var': dinkinesh_var, 'color': color_map('Dinkinesh'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Dinkinesh was visited by the mission Lucy.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/dinkinesh/'},
 
     {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
     'mission_url': 'https://en.wikipedia.org/wiki/25143_Itokawa'},
 
     {'name': 'Lutetia', 'id': '21', 'var': lutetia_var, 'color': color_map('Lutetia'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Studied by European Space Agency\'s Rosetta mission.', 
     'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
 
     {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
     'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
 
     {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-     'is_comet': False, 'id_type': 'smallbody',
+     'id_type': 'smallbody',
      'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 
      'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
 
     {'name': 'Donaldjohanson', 'id': '52246', 'var': donaldjohanson_var, 'color': color_map('Donaldjohanson'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-     'is_comet': False, 'id_type': 'smallbody',
+     'id_type': 'smallbody',
      'mission_info': 'Visited by the NASA Lucy spacecraft.', 
      'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
 
     {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
     'mission_url': 'https://dawn.jpl.nasa.gov/'},
 
     # Trojan Asteroids
     {'name': 'Eurybates', 'id': '3548', 'var': eurybates_var, 'color': color_map('Eurybates'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://www.nasa.gov/missions/hide-and-seek-how-nasas-lucy-mission-team-discovered-eurybates-satellite/'},
 
     {'name': 'Patroclus', 'id': '617', 'var': patroclus_var, 'color': color_map('Patroclus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Patroclus.html'},
 
     {'name': 'Polymele', 'id': '15094', 'var': polymele_var, 'color': color_map('Polymele'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Polymele.html'},
 
     {'name': 'Leucus', 'id': '11351', 'var': leucus_var, 'color': color_map('Leucus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Leucus.html'},
 
     {'name': 'Orus', 'id': '21900', 'var': orus_var, 'color': color_map('Orus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'is_comet': False, 'id_type': 'smallbody', 
+    'id_type': 'smallbody', 
     'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Orus.html'},
 
@@ -4324,18 +4331,34 @@ def animate_objects(step, label):
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
                     obj_type = obj.get('object_type', 'orbital')
                     
+                    # For animations, we need to handle each type appropriately
                     if obj_type == 'trajectory':
-                        # Special handling for time-bounded objects
+                        # Time-bounded paths
                         start_date = obj.get('start_date', dates_list[0])
                         end_date = obj.get('end_date', dates_list[-1])
                         filtered_dates = [d for d in dates_list if start_date <= d <= end_date]
                         dates_lists[obj['name']] = filtered_dates if filtered_dates else [start_date]
-                    elif obj_type == 'orbital' and obj['name'] in planetary_params:
-                        # For animations, use the animation dates directly
+                        
+                    elif obj_type == 'satellite' and obj['name'] in parent_planets.get(center_object_name, []):
+                        # Satellites of the center object use animation dates
                         dates_lists[obj['name']] = dates_list
-                        print(f"[ANIMATION DEBUG] {obj['name']}: {len(dates_list)} animation dates")                   
+                        
+                    elif obj_type == 'orbital' and obj['name'] in planetary_params:
+                        # Planets, dwarf planets, TNOs use animation dates
+                        dates_lists[obj['name']] = dates_list
+                        
+                    elif obj_type == 'lagrange_point':
+                        # Lagrange points use animation dates
+                        dates_lists[obj['name']] = dates_list
+                        
+                    elif obj_type == 'fixed':
+                        # Fixed objects only need current frame date
+                        # This will be handled frame-by-frame
+                        dates_lists[obj['name']] = dates_list
+                        
                     else:
-                        # Use full animation dates for other types too
+                        # Default: use animation dates
+                        print(f"WARNING: Unknown object type '{obj_type}' for {obj['name']}")
                         dates_lists[obj['name']] = dates_list
 
             # Debug: Print what we're animating
@@ -4435,7 +4458,7 @@ def animate_objects(step, label):
                         )
                     )
 
-            # Create orbit path dates that match plot_objects behavior
+            # Also update the orbit path creation for animations to match plot_objects:
             orbit_dates_lists = {}
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
@@ -4446,9 +4469,25 @@ def animate_objects(step, label):
                         requested_days = settings['days_to_plot']
                         num_points = int(settings['orbital_points']) + 1
                         orbit_dates = [current_date + timedelta(days=float(d)) 
-                                     for d in np.linspace(0, requested_days, num=num_points)]
+                                    for d in np.linspace(0, requested_days, num=num_points)]
                         orbit_dates_lists[obj['name']] = orbit_dates
-                        print(f"[ANIMATION DEBUG] {obj['name']} orbit: {len(orbit_dates)} points over {requested_days} days")
+                    elif obj_type == 'satellite' and obj['name'] in parent_planets.get(center_object_name, []):
+                        # For satellites, use appropriate range
+                        requested_days = settings['days_to_plot']
+                        num_points = int(settings['satellite_points']) + 1
+                        orbit_dates = [current_date + timedelta(days=float(d)) 
+                                    for d in np.linspace(0, requested_days, num=num_points)]
+                        orbit_dates_lists[obj['name']] = orbit_dates
+                    elif obj_type == 'trajectory':
+                        # Use the object's date range
+                        start_date = obj.get('start_date', current_date)
+                        end_date = obj.get('end_date', current_date + timedelta(days=settings['days_to_plot']))
+                        total_days = (end_date - start_date).days
+                        if total_days > 0:
+                            num_points = int(settings['trajectory_points']) + 1
+                            orbit_dates = [start_date + timedelta(days=float(d)) 
+                                        for d in np.linspace(0, total_days, num=num_points)]
+                            orbit_dates_lists[obj['name']] = orbit_dates
                     else:
                         # Use appropriate dates for other object types
                         orbit_dates_lists[obj['name']] = dates_lists.get(obj['name'], dates_list)
@@ -5060,7 +5099,7 @@ end_entry_minute.grid(row=1, column=5, padx=(0,5))
 tk.Label(date_frame, text="Days to Plot:").grid(row=1, column=6, sticky='e', padx=(10,5))
 days_to_plot_entry = tk.Entry(date_frame, width=8)
 days_to_plot_entry.grid(row=1, column=7, padx=(0,5))
-days_to_plot_entry.insert(0, '365')
+days_to_plot_entry.insert(0, '28')
 
 # Horizons limit warning
 horizons_warning = tk.Label(date_frame, 
@@ -5397,6 +5436,7 @@ create_celestial_checkbutton("- L5", l5_var)
 # Near Earth asteroids
 create_celestial_checkbutton("- Kamo oalewa", kamooalewa_var)
 create_celestial_checkbutton("- 2024 PT5", pt5_var)
+create_celestial_checkbutton("- 2023 JF", asteroid2023jf_var)
 create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)
 create_celestial_checkbutton("- 2024 YR4", yr4_var)
 
@@ -6173,7 +6213,7 @@ num_frames_label = tk.Label(controls_frame, text="Enter Hours, Days, Weeks, Mont
 num_frames_label.pack(anchor='w')
 num_frames_entry = tk.Entry(controls_frame, width=5)
 num_frames_entry.pack(anchor='w')
-num_frames_entry.insert(0, '29')  # Default number of frames
+num_frames_entry.insert(0, '28')  # Default number of frames
 CreateToolTip(num_frames_entry, "Do not exceed 130 to avoid timing out JPL Horizons' data fetch.")
 
 """

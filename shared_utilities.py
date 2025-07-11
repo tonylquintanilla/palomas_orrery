@@ -126,7 +126,7 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
             width=3,
             dash='dash'
         ),
-        name='Sun Direction',
+        name='Sun Direction (local)',
 #        legendgroup='sun_direction',        # Add this line - shared legend group
         showlegend=True,                   
         hoverinfo='none'
