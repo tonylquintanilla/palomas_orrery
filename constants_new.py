@@ -493,10 +493,12 @@ def color_map(planet):
         'Hale-Bopp': 'gold',
         'McNaught': 'green',
         'NEOWISE': 'red',
+        'C/2025_K1': 'cyan',
         'Tsuchinshan': 'cyan',
         'ATLAS': 'white',
         'Churyumov': 'gold',
         'Borisov': 'red',
+
         'SOHO': 'white',
         'JamesWebb': 'gold',
         'Ryugu': 'gold',
@@ -1563,6 +1565,24 @@ INFO = {
         'McNaught': 'Known as the Great Comet of 2007. January 12, 2007.',
         
         'NEOWISE': 'Brightest comet visible from the Northern Hemisphere in decades.',
+
+        'C/2025_K1': 'Comet C/2025 K1 (ATLAS) is a recently discovered comet that is expected to become a notable object for \n' 
+        'observation in late 2025. Here\'s a breakdown of what we know:\n' 
+        '* Discovery and Classification: It was discovered on May 25, 2025, by the Asteroid Terrestrial-impact Last Alert System (ATLAS) \n' 
+        '  survey in Chile. It appears to be a dynamically new comet, meaning it\'s likely making its first close passage to the Sun.\n' 
+        '* Orbital Characteristics: Perihelion (closest approach to the Sun): October 8, 2025, at a distance of approximately 0.33 AU, \n' 
+        '  which is closer than Mercury\'s orbit. This close approach to the Sun is significant and could lead to substantial brightening.\n' 
+        '* Closest approach to Earth: November 24, 2025, at a distance of about 0.40 AU.\n' 
+        '* Eccentricity (e): The orbit is highly eccentric, 1.000251464554613 (July 11, 2025), indicating an unbound or nearly parabolic orbit.\n' 
+        '* Inclination (i): The orbital plane is highly inclined, 147.864867556013 degrees.\n' 
+        '* Visibility and Brightness: As of early July 2025, it\'s around magnitude 14-15, requiring a telescope for observation.\n' 
+        '* Predicted Peak Brightness: It\'s expected to brighten significantly as it approaches perihelion. Predictions suggest it could \n' 
+        '  reach a magnitude of around 5.2 to 8 in early October 2025.\n' 
+        '* Naked-eye visibility: While magnitude 5.2 is generally considered within naked-eye visibility under very dark skies, it\'s \n' 
+        '  more likely to be a binocular object for most observers, especially at its peak brightness.\n' 
+        '* Observing Locations: Early October (near perihelion), observers in northern latitudes will see it best in the morning sky. \n' 
+        '  Observers in southern latitudes can spot it in both the evening and morning skies.\n' 
+        '* August: It will be faint (around magnitude 13) and visible only from the Southern Hemisphere through large telescopes.',
         
         'Tsuchinshan-ATLAS': 'Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
         'and the Asteroid Terrestrial-impact Last Alert System (ATLAS) in South Africa in February 2023.\n * It originates from the ' 

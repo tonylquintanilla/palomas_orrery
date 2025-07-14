@@ -3,6 +3,7 @@
 import plotly.graph_objects as go
 import numpy as np
 from formatting_utils import format_maybe_float, format_km_float
+from idealized_orbits import planetary_params
 
 def add_hover_toggle_buttons(fig):     
     """
@@ -151,18 +152,27 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     distance_lh = format_maybe_float(distance_from_origin * LIGHT_MINUTES_PER_AU / 60)
     velocity_au = format_maybe_float(obj_data.get('velocity', 'N/A'))
     
-    # Calculate velocity in km/hr
+    # Calculate velocity in km/hr and km/sec
     velocity_km_hr = "N/A"
+    velocity_km_sec = "N/A"
     if isinstance(obj_data.get('velocity'), (int, float)):
-        velocity_km_hr = f"{obj_data.get('velocity') * KM_PER_AU / 24:,.2f}"
+        vel_km_hr_val = obj_data.get('velocity') * KM_PER_AU / 24
+        vel_km_sec_val = vel_km_hr_val / 3600
+        velocity_km_hr = f"{vel_km_hr_val:,.2f}"
+        velocity_km_sec = f"{vel_km_sec_val:.3f}"
     
     # Calculate surface distance if we have valid distance data
     center_radius_km = CENTER_BODY_RADII.get(center_object_name, 0)  # Default to 0 if center body not found
     surface_distance_str = "N/A"
     
-    if isinstance(distance_from_origin * KM_PER_AU, (int, float)) and (distance_from_origin * KM_PER_AU) > center_radius_km:
+#    if isinstance(distance_from_origin * KM_PER_AU, (int, float)) and (distance_from_origin * KM_PER_AU) > center_radius_km:
+    if isinstance(distance_from_origin * KM_PER_AU, (int, float)):
         surface_distance_km = (distance_from_origin * KM_PER_AU) - center_radius_km
         surface_distance_str = format_km_float(surface_distance_km)
+
+    # Add an explanatory note for negative values
+    if surface_distance_km < 0:
+        surface_distance_str += " (below mean datum)"       # This applies to the Mars Rover that is sitting below the datum.
     
     # Check if this is a planetary satellite
     is_satellite = False
@@ -246,7 +256,7 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
         f"Distance: {distance_lh} light-hours<br>"
         f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
         f"Velocity: {velocity_au} AU/day<br>"
-        f"Velocity: {velocity_km_hr} km/hr<br>"
+        f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
     )
     
     # Add orbital period information

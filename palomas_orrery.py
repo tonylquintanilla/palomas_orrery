@@ -206,19 +206,39 @@ def create_dates_list_for_object(obj, obj_type, date_obj,
     """
     Create a list of dates for plotting based on object type.
     """
+#    if obj_type == 'trajectory':
+        # Time-bounded paths
+#        start_date = obj.get('start_date', date_obj)
+#        end_date = obj.get('end_date', date_obj)
+#        total_days = (end_date - start_date).days
+        
+#        if total_days <= 0:
+#            return [start_date]
+        
     if obj_type == 'trajectory':
         # Time-bounded paths
-        start_date = obj.get('start_date', date_obj)
-        end_date = obj.get('end_date', date_obj)
+        # Check if object has specific start/end dates, otherwise use GUI settings
+        if 'start_date' in obj and 'end_date' in obj:
+            # Use object-specific dates
+            start_date = obj.get('start_date', date_obj)
+            end_date = obj.get('end_date', date_obj)
+        else:
+            # Use GUI-provided date range for objects without specific dates
+            start_date = settings['start_date']
+            end_date = settings['end_date']
+            
         total_days = (end_date - start_date).days
         
         if total_days <= 0:
-            return [start_date]
+            # If no valid range, use the requested days from GUI
+            requested_days = settings['days_to_plot']
+            end_date = start_date + timedelta(days=requested_days)
+            total_days = requested_days
         
         num_points = int(trajectory_points) + 1
         return [start_date + timedelta(days=float(d)) 
                 for d in np.linspace(0, total_days, num=num_points)]
-                
+                         
     elif obj_type == 'satellite' and obj['name'] in parent_planets.get(center_object_name, []):
         # Moons of the center object
         num_points = int(satellite_points) + 1
@@ -1813,6 +1833,8 @@ comet_mcnaught_var = tk.IntVar(value=0)
 
 comet_neowise_var = tk.IntVar(value=0)
 
+comet_2025k1_var = tk.IntVar(value=0)
+
 comet_tsuchinshan_atlas_var = tk.IntVar(value=0)
 
 comet_Churyumov_Gerasimenko_var = tk.IntVar(value=0)
@@ -2399,6 +2421,13 @@ objects = [
     'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades. Apparition C/2020 F3', 
     'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
 
+    {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var': comet_2025k1_var, 'color': color_map('C/2025_K1'), 'symbol': 'diamond', 
+    # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
+    'object_type': 'trajectory', 'id_type': 'smallbody', 
+    # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
+    'mission_info': 'A notable comet for observation in late 2025.', 
+    'mission_url': 'https://theskylive.com/c2025k1-info'},
+
     {'name': 'Tsuchinshan', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 10), 
     'end_date': datetime(2030, 12, 31), 
@@ -2422,9 +2451,11 @@ objects = [
     'mission_info': 'First known interstellar object detected passing through the Solar System.', 
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
 
-    {'name': '3I/ATLAS', 'id': '90004916', 'var': atlas3i_var, 'color': color_map('3I/ATLAS'), 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2025, 6, 15), 'end_date': datetime(2032, 12, 31),
-    # data arc: 2025-06-14 to 2025-07-03 
+    {'name': '3I/ATLAS', 'id': 'C/2025 N1', 'var': atlas3i_var, 'color': color_map('3I/ATLAS'), 'symbol': 'diamond', 
+    # JPL/HORIZONS                  ATLAS (C/2025 N1)            2025-Jul-11 12:19:05 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 
+    # 'start_date': datetime(2025, 5, 22), 'end_date': datetime(2032, 12, 31),
+    # data arc: 2025-05-22 to now 
     'mission_info': 'Third known interstellar object detected passing through the Solar System.', 
     'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
 
@@ -3668,16 +3699,40 @@ def plot_objects():
                     obj_type = obj.get('object_type', None)
 
                     # Replace this section in plot_objects():
+            #        if obj_type == 'trajectory':
+                        # Time-bounded paths
+            #            start_date = obj.get('start_date', date_obj)
+            #            end_date = obj.get('end_date', date_obj)
+            #            total_days = (end_date - start_date).days
+            #                        if total_days <= 0:
+            #                dates_list = [start_date]
+            #            else:
+            #                num_points = int(trajectory_points) + 1  # Use trajectory_points from settings
+            #                dates_list = [start_date + timedelta(days=float(d)) 
+            #                        for d in np.linspace(0, total_days, num=num_points)]
+                            
                     if obj_type == 'trajectory':
                         # Time-bounded paths
-                        start_date = obj.get('start_date', date_obj)
-                        end_date = obj.get('end_date', date_obj)
-                        total_days = (end_date - start_date).days
-                        if total_days <= 0:
-                            dates_list = [start_date]
+                        # Check if object has specific start/end dates
+                        if 'start_date' in obj and 'end_date' in obj:
+                            # Use object-specific dates
+                            start_date = obj.get('start_date', date_obj)
+                            end_date = obj.get('end_date', date_obj)
                         else:
-                            num_points = int(trajectory_points) + 1  # Use trajectory_points from settings
-                            dates_list = [start_date + timedelta(days=float(d)) 
+                            # Use GUI settings for objects without specific dates (like 3I/ATLAS)
+                            start_date = settings['start_date']
+                            end_date = settings['end_date']
+                            
+                        total_days = (end_date - start_date).days
+                        
+                        if total_days <= 0:
+                            # Use requested days from GUI
+                            requested_days = settings['days_to_plot']
+                            end_date = start_date + timedelta(days=requested_days)
+                            total_days = requested_days
+                            
+                        num_points = int(trajectory_points) + 1
+                        dates_list = [start_date + timedelta(days=float(d)) 
                                     for d in np.linspace(0, total_days, num=num_points)]
 
                     elif obj_type == 'satellite' and obj['name'] in parent_planets.get(center_object_name, []):
@@ -5929,6 +5984,8 @@ create_comet_checkbutton("Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(202
                          "April 28, 2024")
 create_comet_checkbutton("ATLAS", comet_atlas_var, "(2024-06-17 to 2029-12-31)", 
                          "January 13, 2025")
+create_comet_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
+                         "October 8, 2025")
 
 # Checkbuttons for interstellar objects
 interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Interstellar Objects")

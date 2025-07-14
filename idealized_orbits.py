@@ -369,7 +369,8 @@ planetary_params = {
         'Omega': 251.0747114724082   # Horizons: OM, longitude of ascending node in degrees
     },  
 
-    # Comets
+    # Comets with closed elliptical orbits; object type 'orbital'
+    
     'Churyumov': {                  # Epoch 2015-10-10, heliocentric (500@10) and geocentric (500)
         'a': 3.462249489765068,   # Horizons: A, semi-major axis in AU
         'e': .6409081306555051,   # Horizons: EC, eccentricity
@@ -410,14 +411,26 @@ planetary_params = {
         'Omega': 61.01042818536988   # Horizons: OM, longitude of ascending node in degrees
     },    
 
-    # Interstellar objects; hyperbolic trajectories
+    # Comets with parabolic trajectories, object type 'trajectory'
+
+     'C/2025_K1': {                  # ATLAS (C/2025 K1)            2025-Jul-11 21:59:05 
+        # Rec #:90004909 (+COV) Soln.date: 2025-Jul-10_13:42:09      # obs: 563 (93 days)
+        'a': -1328.874007526048,   # Horizons: A, semi-major axis in AU
+        'e': 1.000251464554613,   # Horizons: EC, eccentricity
+        'i': 147.864867556013,      # Horizons: IN, inclination in degrees
+        'omega': 271.0285208159306, # Horizons: W, argument of perihelion in degrees
+        'Omega': 97.55648983040697   # Horizons: OM, longitude of ascending node in degrees
+    },   
+
+    # Interstellar objects; hyperbolic trajectories, object type 'trajectory'
 
      '3I/ATLAS': {                  # 2025-Jul-01, heliocentric, ATLAS (C/2025 N1) 90004916
-        'a': -.2599636435166625,   # Horizons: A, semi-major axis in AU
-        'e': 6.297880223569178,   # Horizons: EC, eccentricity
-        'i': 175.1184534160558,      # Horizons: IN, inclination in degrees
-        'omega': 127.7776677558638, # Horizons: W, argument of perihelion in degrees
-        'Omega': 322.3053240978721   # Horizons: OM, longitude of ascending node in degrees
+         # Ephemeris / WWW_USER Fri Jul 11 12:19:05 2025 Pasadena, USA      / Horizons
+        'a': -.2636282119444073,   # Horizons: A, semi-major axis in AU
+        'e': 6.151136010582101,   # Horizons: EC, eccentricity
+        'i': 175.113183893991,      # Horizons: IN, inclination in degrees
+        'omega': 127.9882324877828, # Horizons: W, argument of perihelion in degrees
+        'Omega': 322.1637461140604   # Horizons: OM, longitude of ascending node in degrees
     },    
 
     # Satellites
