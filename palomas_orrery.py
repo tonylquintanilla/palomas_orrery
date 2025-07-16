@@ -1,4 +1,4 @@
-#Paloma's Orrery - Solar System Visualization Tool
+#Paloma's Orrery - Solar System Visualization Tool - Updated 7/14/25
 
 # Import necessary libraries
 import tkinter as tk
@@ -1179,7 +1179,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: July 2, 2025")
+root.title("Paloma's Orrery -- Updated: July 14, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:

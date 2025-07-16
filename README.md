@@ -269,7 +269,7 @@ This comprehensive flowchart illustrates how the program modules and functions w
 -   **Core functionality**: A command-line tool that generates a Hertzsprung-Russell (HR) diagram for stars within a user-specified distance from the Sun. It sources data from the Hipparcos and Gaia catalogs and performs the necessary calculations and processing to create the 2D plot.
 
 **`idealized_orbits.py`** ✅ **ORBITAL MECHANICS MODULE**
--   **Core functionality**: Contains the orbital elements (like semi-major axis, eccentricity, and inclination) for a wide range of solar system bodies, including planets, moons, and asteroids. It provides the foundational data for calculating and plotting idealized elliptical and hyperbolic orbits.
+-   **Core functionality**: Contains the orbital elements (like semi-major axis, eccentricity, and inclination) for a wide range of solar system bodies, including planets, moons, and asteroids. It provides the foundational data for calculating and plotting idealized elliptical and hyperbolic orbits. It also handles the complex transformations required to correctly orient satellite orbits around their parent planets. Includes refined transformation logic for the satellite systems of planets with significant axial tilts, such as Mars, Saturn, and Uranus.
 - Provides ideal orbital calculations from JPL Horizons ephemeris orbital elements.
 - NAIF ID system integration for consistent object identification.
 - Contains orbital element definitions for accurate elliptical and hyperbolic trajectory modeling for all supported JPL Horizons objects, including planets, moons, and comets.
