@@ -1,4 +1,4 @@
-#Paloma's Orrery - Solar System Visualization Tool - Updated 7/14/25
+#Paloma's Orrery - Solar System Visualization Tool
 
 # Import necessary libraries
 import tkinter as tk
@@ -1179,7 +1179,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: July 14, 2025")
+root.title("Paloma's Orrery -- Updated: July 2, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -4032,6 +4032,16 @@ def plot_objects():
                         obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
                     positions[obj['name']] = obj_data
 
+            # ADD THIS: Convert positions to the format needed by idealized_orbits
+            current_positions = {}
+            for obj_name, pos_data in positions.items():
+                if pos_data and 'x' in pos_data:
+                    current_positions[obj_name] = {
+                        'x': pos_data['x'],
+                        'y': pos_data['y'],
+                        'z': pos_data['z']
+                    }
+
             # Plot each celestial object
             for obj in objects:
                 if obj['var'].get() == 1 or obj['name'] == center_object_name:
@@ -4177,7 +4187,8 @@ def plot_objects():
             plot_idealized_orbits(fig, selected_objects, center_id=center_object_name, 
                                     objects=objects, planetary_params=planetary_params,
                                     parent_planets=parent_planets, color_map=color_map, 
-                                    date=date_obj, days_to_plot=settings['days_to_plot'])
+                                    date=date_obj, days_to_plot=settings['days_to_plot'],
+                                    current_positions=current_positions)
             
                     # Add refined orbits if we're centered on a planet with moons
             if center_object_name != 'Sun' and REFINED_AVAILABLE:
@@ -4454,6 +4465,23 @@ def animate_objects(step, label):
                             id_type=obj.get('id_type')
                         )
             
+            # Extract initial positions for idealized orbits
+            initial_positions = {}
+            for obj_name, trajectory in positions_over_time.items():
+                if trajectory and len(trajectory) > 0 and trajectory[0] is not None:
+                    initial_pos = trajectory[0]
+                    if 'x' in initial_pos and 'y' in initial_pos and 'z' in initial_pos:
+                        initial_positions[obj_name] = {
+                            'x': initial_pos['x'],
+                            'y': initial_pos['y'],
+                            'z': initial_pos['z']
+                        }
+            
+            # Add center object position
+            initial_positions[center_object_name] = {'x': 0, 'y': 0, 'z': 0}
+            
+            print(f"[ANIMATION DEBUG] Extracted initial positions for {len(initial_positions)} objects")
+
             # Add position data for center planet if it has shells
             if center_object_name in planets_with_shells:
                 # Create a list of positions at (0,0,0) for all frames
@@ -4568,7 +4596,8 @@ def animate_objects(step, label):
                 parent_planets=parent_planets,
                 color_map=color_map,
                 date=dates_list[0] if dates_list else datetime.now(),
-                days_to_plot=settings['days_to_plot']  
+                days_to_plot=settings['days_to_plot'],
+                current_positions=initial_positions  
             )
 
             print(f"[ANIMATION DEBUG] Figure has {len(fig.data)} traces after plot_idealized_orbits")

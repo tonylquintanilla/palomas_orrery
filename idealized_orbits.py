@@ -6,6 +6,7 @@ import plotly.graph_objs as go
 import traceback  # Add this import
 from datetime import datetime, timedelta
 from constants_new import color_map
+from apsidal_markers import add_perihelion_marker, add_apohelion_marker
 
 planetary_params = {
     # Semi-major axis: This is one-half of the longest diameter of the elliptical orbit. It's essentially the average 
@@ -1009,15 +1010,15 @@ def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):  # ADD date=
                 z=[z_final[perihelion_idx]],
                 mode='markers',
                 marker=dict(
-                    size=4,
+                    size=5,
                     color=color_map(obj_name),
                     symbol='square-open'
                     ),
                 name=f"{obj_name} Perihelion",
-        #        text=[f"{obj_name} Perihelion<br>q={q:.3f} AU"],
                 text=[f"{obj_name} Perihelion{perihelion_date_str}<br>q={q:.3f} AU"],
+                customdata=[f"{obj_name} Perihelion"],
                 hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+                showlegend=True
             )
         )
         
@@ -1857,7 +1858,8 @@ def create_planet_transformation_matrix(planet_name):
     
     return transform_matrix
 
-def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig=None, date=None, days_to_plot=None):
+def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig=None, 
+                         date=None, days_to_plot=None, current_position=None):
     """
     Plot the idealized orbit of a satellite around its parent planet.
     
@@ -1867,6 +1869,9 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         parent_planet (str): Name of the parent planet
         color (str): Color to use for the orbit line
         fig (plotly.graph_objects.Figure): Existing figure to add the orbit to
+        date (datetime): Date for the calculation
+        days_to_plot (float): Number of days to plot
+        current_position (dict): Current position with 'x', 'y', 'z' keys
         
     Returns:
         plotly.graph_objects.Figure: Figure with the satellite orbit added
@@ -2222,87 +2227,50 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         )
 
         # Add markers at key points
-        # Get semi-major axis in km for distance calculations
-    #    from constants_new import BODY_DATA, planet_gm
-        
+        # Get semi-major axis in km for distance calculations        
         # Convert semi-major axis from AU to km
         a_km = a * 149597870.7  # 1 AU = 149,597,870.7 km
         
-        # Periapsis (closest approach)
-        periapsis_idx = np.argmin(np.sqrt(x_final**2 + y_final**2 + z_final**2))
+        # Find periapsis (closest approach to parent)
+        periapsis_idx = np.argmin(r)
         
-        # Calculate date if available
-    #    periapsis_date_str = ""
-    #    if date is not None:
-    #        periapsis_date_str = f"<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}"
+        # Prepare orbital parameters for apsidal markers
+        orbital_params = planetary_params[satellite_name]
         
-        # Calculate periapsis distance
-        periapsis_distance_km = a_km * (1 - e)
-        
-        fig.add_trace(
-            go.Scatter3d(
-                x=[x_final[periapsis_idx]],
-                y=[y_final[periapsis_idx]],
-                z=[z_final[periapsis_idx]],
-                mode='markers',
-                marker=dict(
-                    size=4,
-                    color=color,
-                    symbol='square-open'
-                ),
-                name=f"{satellite_name} Periapsis",
-    #            text=[f"{satellite_name} Periapsis{periapsis_date_str}<br>Distance: {periapsis_distance_km:.0f} km"],
-                text=[f"{satellite_name} Periapsis<br>Distance: {periapsis_distance_km:.0f} km"],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
-            )
-        )
-        
-        # Apoapsis (farthest approach)
-        apoapsis_idx = np.argmax(np.sqrt(x_final**2 + y_final**2 + z_final**2))
-        
-        # Calculate date if available
-    #    apoapsis_date_str = ""
-    #    if date is not None:
-            # Estimate based on orbital position
-            # Use the actual orbital period if available
-    #        if 'orbital_period_days' in orbital_params:
-    #            orbital_period_days = orbital_params['orbital_period_days']
-    #        elif parent_planet in planet_gm:
-                # Calculate using Kepler's third law
-                # T = 2π√(a³/μ) where μ = GM
-    #            orbital_period_seconds = 2 * np.pi * np.sqrt((a_km * 1000)**3 / (planet_gm[parent_planet] * 1e9))
-    #            orbital_period_days = orbital_period_seconds / 86400
-    #        else:
-                # Fallback estimate
-    #            orbital_period_days = 1.0
-            
-    #        days_to_apoapsis = orbital_period_days * (apoapsis_idx / len(x_final))
-    #        apoapsis_date = date + timedelta(days=days_to_apoapsis)
-    #        apoapsis_date_str = f"<br>Date: {apoapsis_date.strftime('%Y-%m-%d %H:%M UTC')}"
-        
-        # Calculate apoapsis distance
-        apoapsis_distance_km = a_km * (1 + e)
-        
-        fig.add_trace(
-            go.Scatter3d(
-                x=[x_final[apoapsis_idx]],
-                y=[y_final[apoapsis_idx]],
-                z=[z_final[apoapsis_idx]],
-                mode='markers',
-                marker=dict(
-                    size=4,
-                    color=color,
-                    symbol='square-open'
-                ),
-                name=f"{satellite_name} Apoapsis",
-    #            text=[f"{satellite_name} Apoapsis{apoapsis_date_str}<br>Distance: {apoapsis_distance_km:.0f} km"],
-                text=[f"{satellite_name} Apoapsis<br>Distance: {apoapsis_distance_km:.0f} km"],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
-            )
+        # Add periapsis marker with proper date calculation
+        add_perihelion_marker(
+            fig,
+            x_final[periapsis_idx],
+            y_final[periapsis_idx],
+            z_final[periapsis_idx],
+            satellite_name,
+            a,
+            e,
+            date if date else datetime.now(),
+            current_position,
+            orbital_params,
+            lambda x: color,  # Simple color function
+            q=r[periapsis_idx]  # Pass the periapsis distance
         )
 
+        # Find apoapsis (farthest point from parent)
+        apoapsis_idx = np.argmax(r)
+        
+        # Add apoapsis marker with proper date calculation
+        add_apohelion_marker(
+            fig,
+            x_final[apoapsis_idx],
+            y_final[apoapsis_idx],
+            z_final[apoapsis_idx],
+            satellite_name,
+            a,
+            e,
+            date if date else datetime.now(),
+            current_position,
+            orbital_params,
+            lambda x: color  # Simple color function
+        )
+        
         return fig
     
     except Exception as e:
@@ -2378,7 +2346,7 @@ def calculate_moon_orbital_elements(date):
         'Omega': Omega
     }
 
-def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, days_to_plot=None):
+def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, days_to_plot=None, current_position=None):
     """
     Plot the Moon's idealized orbit with time-varying elements and perturbations
     
@@ -2387,6 +2355,8 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         date: datetime object for the calculation epoch
         center_object_name: Name of the central body (should be 'Earth' for Moon)
         color: Color for the orbit line
+        days_to_plot: Number of days to plot
+        current_position: Dict with 'x', 'y', 'z' keys for current position
     """
     # Get time-varying orbital elements
     elements = calculate_moon_orbital_elements(date)
@@ -2480,6 +2450,38 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     # Perigee (closest approach)
     perigee_idx = np.argmin(np.sqrt(x_final**2 + y_final**2 + z_final**2))
     
+    # Prepare orbital parameters for apsidal markers
+    orbital_params = {
+        'a': a,
+        'e': e,
+        'i': i,
+        'omega': omega,
+        'Omega': Omega
+    }
+    
+    # Debug print to verify position
+    if current_position:
+        print(f"Moon current position: x={current_position['x']:.6f}, y={current_position['y']:.6f}, z={current_position['z']:.6f} AU")
+    else:
+        print("Warning: No current position for Moon")
+
+    # Add perigee marker with proper date calculation
+    add_perihelion_marker(
+        fig,
+        x_final[perigee_idx],
+        y_final[perigee_idx],
+        z_final[perigee_idx],
+        'Moon',  # obj_name
+        a,
+        e,
+        date,
+        current_position,
+        orbital_params,
+        color_map if color is None else lambda x: color,  # Use provided color or color_map
+        q=r[perigee_idx]  # Pass the perigee distance
+    )
+
+    """
     fig.add_trace(
         go.Scatter3d(
             x=[x_final[perigee_idx]],
@@ -2487,21 +2489,38 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
             z=[z_final[perigee_idx]],
             mode='markers',
             marker=dict(
-                size=4,
+                size=5,
                 color=color,
                 symbol='square-open'
             ),
             name=f"Moon Perigee",
-    #        text=[f"Moon Perigee<br>Distance: {r[perigee_idx]:.6f} AU"],
             text=[f"Moon Perigee<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}<br>Distance: {r[perigee_idx]:.6f} AU"],
+            customdata=[f"Moon Perigee"],
             hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+            showlegend=True
         )
     )
+    """
     
     # Apogee (farthest approach)
     apogee_idx = np.argmax(np.sqrt(x_final**2 + y_final**2 + z_final**2))
     
+    # Add apogee marker with proper date calculation
+    add_apohelion_marker(
+        fig,
+        x_final[apogee_idx],
+        y_final[apogee_idx],
+        z_final[apogee_idx],
+        'Moon',  # obj_name
+        a,
+        e,
+        date,
+        current_position,
+        orbital_params,
+        color_map if color is None else lambda x: color  # Use provided color or color_map
+    )
+
+    """
     fig.add_trace(
         go.Scatter3d(
             x=[x_final[apogee_idx]],
@@ -2509,16 +2528,18 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
             z=[z_final[apogee_idx]],
             mode='markers',
             marker=dict(
-                size=4,
+                size=5,
                 color=color,
                 symbol='square-open'
             ),
             name=f"Moon Apogee",
             text=[f"Moon Apogee<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}<br>Distance: {r[apogee_idx]:.6f} AU"],
+            customdata=[f"Moon Apogee"],
             hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+            showlegend=True
         )
     )
+    """
 
     print(f"  Generated {num_points} points for {orbital_fraction:.1f} orbits")
 
@@ -2570,10 +2591,9 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points):
     
     return x_final, y_final, z_final, q
 
-
 def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, 
                           planetary_params=None, parent_planets=None, color_map=None, 
-                          date=None, days_to_plot=None):
+                          date=None, days_to_plot=None, current_positions=None):
     """
     Plot idealized orbits for planets, dwarf planets, asteroids, KBOs, and moons.
     For non-Sun centers, only plots moons of that center body.
@@ -2591,6 +2611,17 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
     Returns:
         plotly.graph_objects.Figure: Figure with idealized orbits added
     """
+    # If current_positions not provided, try to extract from objects parameter
+    if current_positions is None and objects is not None:
+        current_positions = {}
+        for obj in objects:
+            if hasattr(obj, 'name') and hasattr(obj, 'x') and hasattr(obj, 'y') and hasattr(obj, 'z'):
+                current_positions[obj.name] = {
+                    'x': obj.x,
+                    'y': obj.y, 
+                    'z': obj.z
+                }
+
     # Track skipped objects by category
     skipped = {
         'satellites': [],
@@ -2650,9 +2681,16 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             
             # Special handling for Earth's Moon with time-varying elements
             if moon_name == 'Moon' and center_id == 'Earth':
-                fig = plot_moon_ideal_orbit(fig, date, center_id, color_map(moon_name), days_to_plot)
+                # Get Moon's current position from current_positions
+                moon_current_pos = current_positions.get('Moon') if current_positions else None
+
+                fig = plot_moon_ideal_orbit(fig, date, center_id, color_map(moon_name), days_to_plot,
+                                            current_position=moon_current_pos)
             else:
                 # Use the standard satellite plotting function for other moons
+                # Get satellite's current position
+                satellite_current_pos = current_positions.get(moon_name) if current_positions else None
+
                 fig = plot_satellite_orbit(
                     moon_name, 
                     planetary_params,
@@ -2660,7 +2698,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     color_map(moon_name), 
                     fig,
                     date=date,
-                    days_to_plot=days_to_plot  # PASS days_to_plot
+                    days_to_plot=days_to_plot,
+                    current_position=satellite_current_pos
                 )
             
             plotted.append(moon_name)
@@ -2670,6 +2709,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
         for obj_name in objects_to_plot:
             # Find the object in the objects list
             obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
+            # Get current position for this object
+            current_pos = current_positions.get(obj_name) if current_positions else None
             if obj_info is None:
                 continue
                 
@@ -2705,9 +2746,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             i = params.get('i', 0)
             omega = params.get('omega', 0)
             Omega = params.get('Omega', 0)
-
-# In plot_idealized_orbits, add this check right after extracting orbital parameters:
-# (This goes after the lines that get a, e, i, omega, Omega values)
 
 # Check if this is a hyperbolic orbit (e > 1)
             if e > 1:
@@ -2749,29 +2787,24 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
                     x_peri_final, y_peri_final, z_peri_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
 
-                    # Calculate date for perihelion if available - MUST BE HERE, INSIDE THE TRY BLOCK
-                    perihelion_date_str = ""
-                    if date is not None:
-                        perihelion_date_str = f"<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}"
-
-                    # Add a marker at perihelion
-                    fig.add_trace(
-                        go.Scatter3d(
-                            x=x_peri_final,
-                            y=y_peri_final,
-                            z=z_peri_final,
-                            mode='markers',
-                            marker=dict(
-                                size=4,
-                                color=color_map(obj_name),
-                                symbol='square-open'
-                            ),
-                            name=f"{obj_name} Perihelion",
-                    #        text=[f"{obj_name} Perihelion<br>q={q:.3f} AU"],
-                            text=[f"{obj_name} Perihelion{perihelion_date_str}<br>q={q:.3f} AU"],
-                            hovertemplate='%{text}<extra></extra>',
-                            showlegend=False  # Avoid cluttering legend
-                        )
+                    # NEW CODE - Use the apsidal_markers module:
+                    # Get current position for this object
+                    current_pos = current_positions.get(obj_name) if current_positions else None
+                    
+                    # Add perihelion marker with proper date calculation
+                    add_perihelion_marker(
+                        fig, 
+                        x_peri_final[0],  # Note: x_peri_final is a list, so we take [0]
+                        y_peri_final[0],  # Same for y
+                        z_peri_final[0],  # Same for z
+                        obj_name, 
+                        a, 
+                        e, 
+                        date, 
+                        current_pos,
+                        params,  # Pass the full params dict
+                        color_map, 
+                        q=q  # Pass the perihelion distance we already calculated
                     )
 
                     plotted.append(obj_name)
@@ -2791,7 +2824,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             x_orbit = r * np.cos(theta)
             y_orbit = r * np.sin(theta)
             z_orbit = np.zeros_like(theta)
-
 
             # Convert angles to radians
             i_rad = np.radians(i)
@@ -2827,60 +2859,42 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
 
             perihelion_idx = np.argmin(np.abs(theta))  # Index closest to theta=0
 
-            # Add a marker at perihelion
-            perihelion_date_str = ""
-            if date is not None:
-                perihelion_date_str = f"<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}"
-
-            fig.add_trace(
-                go.Scatter3d(
-                    x=[x_final[perihelion_idx]],
-                    y=[y_final[perihelion_idx]],
-                    z=[z_final[perihelion_idx]],
-                    mode='markers',
-                    marker=dict(
-                        size=4,
-                        color=color_map(obj_name),
-                        symbol='square-open'
-                    ),
-                    name=f"{obj_name} Perihelion",
-        #            text=[f"{obj_name} Perihelion<br>q={a*(1-e):.3f} AU"],
-                    text=[f"{obj_name} Perihelion{perihelion_date_str}<br>q={a*(1-e):.3f} AU"],
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False  # Avoid cluttering legend
-                )
+            # NEW CODE - Use the apsidal_markers module:
+            # Get current position for this object
+            current_pos = current_positions.get(obj_name) if current_positions else None
+            
+            # Add perihelion marker with proper date calculation
+            add_perihelion_marker(
+                fig,
+                x_final[perihelion_idx],   # x coordinate at perihelion
+                y_final[perihelion_idx],   # y coordinate at perihelion
+                z_final[perihelion_idx],   # z coordinate at perihelion
+                obj_name, 
+                a, 
+                e, 
+                date, 
+                current_pos,              # Current position of the object
+                params,                   # Full orbital parameters
+                color_map                 # Color mapping function
             )
 
             # Apohelion (farthest point from Sun)
             apohelion_idx = np.argmin(np.abs(theta - np.pi))  # Index closest to theta=π
             
-            # Calculate the date for this point if available
-            date_str = ""
-            if date is not None:
-                # Estimate the date based on orbital position
-                # This is approximate - for exact dates you'd need ephemeris data
-                orbital_period_days = 365.25 * np.sqrt(a**3)  # Kepler's third law approximation
-                days_to_apohelion = orbital_period_days * (apohelion_idx / len(theta))
-                apohelion_date = date + timedelta(days=days_to_apohelion)
-                date_str = f"<br>Date: {apohelion_date.strftime('%Y-%m-%d %H:%M UTC')}"
-            
-            # Add a marker at apohelion
-            fig.add_trace(
-                go.Scatter3d(
-                    x=[x_final[apohelion_idx]],
-                    y=[y_final[apohelion_idx]],
-                    z=[z_final[apohelion_idx]],
-                    mode='markers',
-                    marker=dict(
-                        size=4,
-                        color=color_map(obj_name),
-                        symbol='square-open'
-                    ),
-                    name=f"{obj_name} Apohelion",
-                    text=[f"{obj_name} Apohelion{date_str}<br>Q={a*(1+e):.3f} AU"],
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=False
-                )
+            # NEW CODE - Use the apsidal_markers module:
+            # Add apohelion marker with proper date calculation
+            add_apohelion_marker(
+                fig,
+                x_final[apohelion_idx],    # x coordinate at apohelion
+                y_final[apohelion_idx],    # y coordinate at apohelion
+                z_final[apohelion_idx],    # z coordinate at apohelion
+                obj_name,
+                a,
+                e,
+                date,
+                current_pos,               # Current position of the object
+                params,                    # Full orbital parameters
+                color_map                  # Color mapping function
             )
 
             plotted.append(obj_name)

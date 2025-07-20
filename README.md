@@ -122,6 +122,18 @@ Created by a civil and environmental engineer with a passion for space explorati
    - Isolated test environment preventing main file corruption
    - Tests for corruption handling, format conversion, and incremental updates
 
+### Enhanced Orbital Mechanics and Visualization
+
+1. **Accurate apsidal date calculations**:
+   - Dynamic perihelion/apohelion date computation: Calculates actual dates when objects reach their closest and farthest points from the Sun based on their current orbital position
+   - Support for all orbit types: Handles elliptical orbits (planets, asteroids), hyperbolic orbits (some comets), and satellite orbits (moons with perigee/apogee)
+
+2. **Legend integration**: 
+   - Apsidal markers now appear in the plot legend for easy identification
+
+3. **Intelligent date display**: 
+   - Shows calculated future dates for perihelion/apohelion, with special handling for hyperbolic orbits that may never return
+
 ### Enhanced GUI (graphical user interface) and User Experience
 1. **Reorganized orbit data fetching interface**:
    - Clear separation between cache management and fetch operations
@@ -164,6 +176,7 @@ Created by a civil and environmental engineer with a passion for space explorati
    - **`test_orbit_cache.py`**: Comprehensive cache testing
    - **`verify_orbit_cache.py`**: Cache health verification
    - **`idealized_orbits.py`**: Theoretical orbital mechanics
+   - **`apsidal_markers.py`**: Orbital dynamics calculations for perihelion/apohelion dates
 - All visualizations: 
    - **`shutdown_handler.py`**: Clean application termination
    - **`save_utils.py`**: Export functionality
@@ -179,6 +192,12 @@ Created by a civil and environmental engineer with a passion for space explorati
 - **Messier Catalog**: Customized file of deep-sky objects including brighter nebulae, star clusters, and other objects
 
 **Smart Processing Pipeline**: Raw astronomical data undergoes sophisticated processing through specialized modules. The solar system pipeline handles orbit caching with selective updates, while the stellar pipeline manages spectral classification, and multi-catalog cross-matching.
+
+**Precise Orbital Mechanics**: The software now includes sophisticated orbital dynamics calculations through the apsidal markers system:
+- **Real-time orbital position analysis**: Calculates an object's true anomaly from its current 3D position.
+- **Keplerian time predictions**: Uses classical orbital mechanics to predict when objects will reach perihelion or apohelion.
+- **Adaptive calculations**: Different algorithms for elliptical vs. hyperbolic orbits, ensuring accuracy across all object types.
+- **Educational value**: Hover over apsidal markers to see exactly when planets and comets reach their orbital extremes.
 
 ### Advanced Oort Cloud Modeling
 The enhanced Oort Cloud visualization incorporates:
@@ -209,9 +228,19 @@ This comprehensive flowchart illustrates how the program modules and functions w
   - Lagrange point visualization system.
   - Enhanced animation controls with various time steps.
   - Integration of refined and idealized orbit plotting.
+  - Integration of dynamic apsidal date calculations for all orbital plots.
 
 **`star_visualization_gui.py`**
 -   **Core functionality**: Provides a dedicated GUI for stellar visualizations, launched from the main orrery application. It enables the creation of 2D H-R diagrams and 3D stellar neighborhood plots based on user-defined parameters like distance or apparent magnitude.
+
+**`apsidal_markers.py`** ✅ **ORBITAL DYNAMICS CALCULATOR**
+- **Core functionality**: Calculates accurate dates for perihelion, apohelion, perigee, and apogee based on current orbital positions and Keplerian mechanics.
+- **Key Features**:
+  - True anomaly calculation: Determines an object's current position in its orbit from 3D coordinates.
+  - Kepler's equation solver: Converts between true, eccentric, and mean anomalies for time calculations.
+  - Multi-orbit support: Handles elliptical orbits (e < 1) and hyperbolic trajectories (e ≥ 1).
+  - Automated marker generation: Creates properly formatted Plotly markers with hover text and date information.
+  - Satellite terminology: Automatically uses perigee/apogee for moon orbits instead of perihelion/apohelion.
 
 **`catalog_selection.py`** ✅ **STELLAR CATALOG MANAGEMENT**
 - **Core functionality**: A specialized module for the star visualization part of the application. It handles the logic for selecting stars from the Hipparcos and Gaia catalogs based on user criteria.
@@ -273,6 +302,7 @@ This comprehensive flowchart illustrates how the program modules and functions w
 - Provides ideal orbital calculations from JPL Horizons ephemeris orbital elements.
 - NAIF ID system integration for consistent object identification.
 - Contains orbital element definitions for accurate elliptical and hyperbolic trajectory modeling for all supported JPL Horizons objects, including planets, moons, and comets.
+-   **Recent enhancements**: Integration with apsidal_markers.py for accurate perihelion/apohelion date calculations based on current orbital positions.
 
 **`jupiter_visualization_shells.py`**
 -   **Core functionality**: Constructs the 3D visualization for Jupiter's complex structure, including its dense core, metallic and molecular hydrogen layers, vibrant cloud tops, extensive ring system, and powerful magnetosphere with its associated plasma torus and radiation belts.
@@ -614,6 +644,13 @@ For the best experience, you can also run the program from an editor like **VS C
 - Animation controls: enter the number of frames to animate in minutes, hours, days, weeks, months or years
 - Click "Plot Entered Date" for a static plot
 - Click one of the animation buttons, then "Play" in the Plotly HTML plot
+
+**Apsidal Markers:**
+- Plot any object with an orbit (planets, asteroids, comets)
+- Look for the square markers indicating perihelion/apohelion
+- Hover over markers to see the calculated dates
+- Note how dates change based on where the object currently is in its orbit
+- Observe special handling for hyperbolic objects that may show "Past perihelion"
 
 ### Performance Tips
 
