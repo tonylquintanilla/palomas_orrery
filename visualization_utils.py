@@ -123,7 +123,8 @@ def format_hover_text(obj_data, name, is_solar_system=False):
     
     return full_hover_text, minimal_hover_text
 
-def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, planetary_params, parent_planets, CENTER_BODY_RADII, KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS):
+def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, planetary_params, parent_planets, CENTER_BODY_RADII, 
+                               KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS):
     """
     Generate detailed hover text for celestial objects with comprehensive information.
     
@@ -208,14 +209,10 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     if obj_name in KNOWN_ORBITAL_PERIODS:
         known_value = KNOWN_ORBITAL_PERIODS[obj_name]
         
-        if is_satellite:
-            # For satellites, the values are in days
-            known_period = {
-                'days': known_value,
-                'years': known_value / 365.25
-            }
+        if known_value is None:
+            # Handle hyperbolic/parabolic objects
+            known_period = "N/A (hyperbolic/parabolic orbit)"
         else:
-            # For non-satellites, the values are in years
             known_period = {
                 'years': known_value,
                 'days': known_value * 365.25

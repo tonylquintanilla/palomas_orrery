@@ -152,6 +152,22 @@ Created by a civil and environmental engineer with a passion for space explorati
    - Fine-grained control: ellipical orbits (1d-7d), non-elliptical trajectories (1h-24h), moons (1h-7d)
    - Intelligent defaults based on object characteristics
 
+### Dynamic Apsidal Marker System
+1. **Real-time orbital calculations**:
+   - Automatically calculates and displays when objects reach perihelion/aphelion
+   - Works for all orbiting bodies: planets, asteroids, comets, and spacecraft
+   - Intelligent handling of elliptical and hyperbolic orbits
+
+2. **Dual marker system**:
+   - **Ideal apsidal points**: Calculated from orbital elements showing theoretical perihelion/aphelion positions
+   - **Actual apsidal markers**: Fetched from JPL Horizons for specific dates, showing true positions
+   - Visual validation: Compare ideal vs actual positions to verify orbital accuracy
+
+3. **Enhanced information display**:
+   - Hover over markers to see predicted dates and distances
+   - Actual measured distances displayed at true apsidal dates
+   - Automatic terminology adjustment (perihelion/aphelion for solar orbits, perigee/apogee for moons)
+
 ## 🏗️ Architecture Overview
 
 ### Data Pipeline Modules
@@ -199,6 +215,8 @@ Created by a civil and environmental engineer with a passion for space explorati
 - **Adaptive calculations**: Different algorithms for elliptical vs. hyperbolic orbits, ensuring accuracy across all object types.
 - **Educational value**: Hover over apsidal markers to see exactly when planets and comets reach their orbital extremes.
 
+**Apsidal Marker Validation**: The software now provides visual proof of its accuracy by displaying both theoretical and actual apsidal points. Users can see that the ideal orbital calculations (based on Keplerian mechanics) align precisely with actual JPL Horizons ephemeris data, building confidence in the visualizations when actual data is unavailable or for performance reasons.
+
 ### Advanced Oort Cloud Modeling
 The enhanced Oort Cloud visualization incorporates:
 - **Formation Physics**: The visualization reflects actual formation mechanisms - planetesimal scattering by giant planets, galactic tidal sculpting, and ongoing modification by stellar encounters
@@ -238,9 +256,11 @@ This comprehensive flowchart illustrates how the program modules and functions w
 - **Key Features**:
   - True anomaly calculation: Determines an object's current position in its orbit from 3D coordinates.
   - Kepler's equation solver: Converts between true, eccentric, and mean anomalies for time calculations.
+  - Dual marker system: Generates both ideal (calculated) and actual (measured) apsidal markers.
   - Multi-orbit support: Handles elliptical orbits (e < 1) and hyperbolic trajectories (e ≥ 1).
   - Automated marker generation: Creates properly formatted Plotly markers with hover text and date information.
   - Satellite terminology: Automatically uses perigee/apogee for moon orbits instead of perihelion/apohelion.
+  - Supports elliptical and hyperbolic orbits.
 
 **`catalog_selection.py`** ✅ **STELLAR CATALOG MANAGEMENT**
 - **Core functionality**: A specialized module for the star visualization part of the application. It handles the logic for selecting stars from the Hipparcos and Gaia catalogs based on user criteria.
@@ -648,9 +668,14 @@ For the best experience, you can also run the program from an editor like **VS C
 **Apsidal Markers:**
 - Plot any object with an orbit (planets, asteroids, comets)
 - Look for the square markers indicating perihelion/apohelion
-- Hover over markers to see the calculated dates
-- Note how dates change based on where the object currently is in its orbit
+- **Ideal markers**: Show theoretical apsidal points based on orbital elements
+- **Actual markers**: Display true positions on specific dates with measured distances
+- Hover over markers to see:
+  - Calculated or actual dates when the object reaches these points
+  - Precise distances in AU and kilometers
+  - Visual confirmation that ideal orbits match real ephemeris data
 - Observe special handling for hyperbolic objects that may show "Past perihelion"
+- Compare ideal vs actual positions to build confidence in the orbital calculations
 
 ### Performance Tips
 

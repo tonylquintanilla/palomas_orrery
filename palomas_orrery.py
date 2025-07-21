@@ -27,7 +27,8 @@ import shutil
 
 from palomas_orrery_helpers import (calculate_planet9_position_on_orbit, rotate_points2, calculate_axis_range,
                                     fetch_trajectory, fetch_orbit_path, pad_trajectory, add_url_buttons,
-                                    get_default_camera, print_planet_positions, create_orbit_backup, cleanup_old_orbits, show_animation_safely)
+                                    get_default_camera, print_planet_positions, create_orbit_backup, cleanup_old_orbits, 
+                                    show_animation_safely)
 from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points 
 from formatting_utils import format_maybe_float, format_km_float
 from shared_utilities import create_sun_direction_indicator
@@ -1140,7 +1141,7 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
 
 # ============= END REFINED ORBITS INTEGRATION =============
 
-DEFAULT_MARKER_SIZE = 6
+DEFAULT_MARKER_SIZE = 7
 HORIZONS_MAX_DATE = datetime(2199, 12, 29, 0, 0, 0)
 CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 
@@ -4047,11 +4048,11 @@ def plot_objects():
                 if obj['var'].get() == 1 or obj['name'] == center_object_name:
                     obj_data = positions.get(obj['name'])
                     if obj_data:
-                        marker_size = 6
+                        marker_size = DEFAULT_MARKER_SIZE
                         if obj['name'] == center_object_name:
-                            marker_size = 10
+                            marker_size = CENTER_MARKER_SIZE
                         elif obj['name'] == 'Moon' and center_object_name == 'Earth':
-                            marker_size = 6
+                            marker_size = DEFAULT_MARKER_SIZE
                         add_celestial_object(fig, 
                                              obj_data, 
                                              obj['name'], 
@@ -4140,7 +4141,31 @@ def plot_objects():
                 ),
                 annotations=[
                     dict(
-                        text="Data source: <a href='https://ssd.jpl.nasa.gov/horizons/app.html#/' target='_blank'>JPL Horizons</a>",
+                        text="<a href='https://tonylquintanilla.github.io/palomas_orrery/'>Paloma's Orrery GitHub Page</a>",
+                        xref='paper',
+                        yref='paper',
+                        x=0,
+                        y=0.4,
+                        showarrow=False,
+                        font=dict(size=12, color='white'),
+                        align='left',
+                        xanchor='left',
+                        yanchor='top'
+                    ),                    
+                    dict(
+                        text="<a href='https://sites.google.com/view/tony-quintanilla/home'>Paloma's Orrery Web Site</a>",
+                        xref='paper',
+                        yref='paper',
+                        x=0,
+                        y=0.45,
+                        showarrow=False,
+                        font=dict(size=12, color='white'),
+                        align='left',
+                        xanchor='left',
+                        yanchor='top'
+                    ),                    
+                    dict(
+                        text="<a href='https://ssd.jpl.nasa.gov/horizons/app.html#/' target='_blank'>JPL Horizons</a>",
                         xref='paper',
                         yref='paper',
                         x=0,
@@ -4152,7 +4177,7 @@ def plot_objects():
                         yanchor='top'
                     ),
                     dict(
-                        text="Search: <a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
+                        text="<a href='https://www.nasa.gov/' target='_blank'>NASA</a>",
                         xref='paper',
                         yref='paper',
                         x=0,
@@ -4188,7 +4213,7 @@ def plot_objects():
                                     objects=objects, planetary_params=planetary_params,
                                     parent_planets=parent_planets, color_map=color_map, 
                                     date=date_obj, days_to_plot=settings['days_to_plot'],
-                                    current_positions=current_positions)
+                                    current_positions=current_positions, fetch_position=fetch_position)
             
                     # Add refined orbits if we're centered on a planet with moons
             if center_object_name != 'Sun' and REFINED_AVAILABLE:

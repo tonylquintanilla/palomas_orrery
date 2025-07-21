@@ -59,74 +59,136 @@ planet_tilts = {        # degrees
 }
 """
 
-# Dictionary of known orbital periods for validation
 KNOWN_ORBITAL_PERIODS = {
-    # Planets (in Earth years)
-    'Mercury': 0.24,    # 87.6 days
-    'Venus': 0.62,      # 226.3 days
-    'Earth': 1.0,       # 365.25 days
-    'Mars': 1.88,       # 686.67 days
-    'Jupiter': 11.86,   # 4,330.6 days (11.86 years)
-    'Saturn': 29.46,    # 10,755.7 days (29.46 years)
-    'Uranus': 84.01,    # 30,684.7 days (84.01 years)
-    'Neptune': 164.8,   # 60,193.0 days (164.8 years)
-    'Pluto': 248.0,     # 90,582.0 days (248.0 years)
+    # Planets (converted from years to days)
+    'Mercury': 87.97,      # 0.24 * 365.25
+    'Venus': 224.46,       # 0.62 * 365.25
+    'Earth': 365.25,       # 1.0 * 365.25
+    'Mars': 686.67,        # 1.88 * 365.25
+    'Jupiter': 4331.87,    # 11.86 * 365.25
+    'Saturn': 10759.66,    # 29.46 * 365.25
+    'Uranus': 30685.15,    # 84.01 * 365.25
+    'Neptune': 60193.20,   # 164.8 * 365.25
     
-    # Major satellites (already in Earth days); https://ssd.jpl.nasa.gov/sats/elem/
-    'Moon': 27.32,      # 27.32 days
-    'Phobos': 0.32,     # 0.32 days (7.68 hours)
-    'Deimos': 1.26,     # 1.26 days (30.24 hours)
-    'Io': 1.77,         # 1.77 days (42.48 hours)
-    'Europa': 3.55,     # 3.55 days (85.2 hours)
-    'Ganymede': 7.15,   # 7.15 days
-    'Callisto': 16.69,  # 16.69 days
-    'Metis': 0.295,     # 0.295 days (7.08 hours)
-    'Adrastea': 0.298,  # 0.298 days (7.15 hours)
-    'Amalthea': 0.498,  # 0.498 days (11.95 hours)
-    'Thebe': 0.675,      # 0.675 days (16.20 hours)
-    'Titan': 15.95,     # 15.95 days
-    'Enceladus': 1.37,  # 1.37 days (32.88 hours)
-    'Rhea': 4.52,       # 4.52 days
-    'Dione': 2.74,      # 2.74 days (65.76 hours)
-    'Tethys': 1.89,     # 1.89 days (45.36 hours)
-    'Pan': 0.575051,        # https://ssd.jpl.nasa.gov/sats/elem/ and following
-    'Daphnis': 0.594080,
-    'Prometheus': 0.615878,
-    'Pandora': 0.631369,
-    'Hyperion': 21.276658,
-    'Iapetus': 79.331002,
-    'Mimas': 0.94,      # 0.94 days (22.56 hours)
-    'Phoebe': 550.56,   # 550.56 days (1.51 years)
-    'Miranda': 1.41,    # 1.41 days (33.84 hours)
-    'Ariel': 2.52,      # 2.52 days (60.48 hours)
-    'Umbriel': 4.14,    # 4.14 days (99.36 hours)
-    'Titania': 8.71,    # 8.71 days
-    'Oberon': 13.46,    # 13.46 days
-    'Portia': 0.513196,
-    'Mab': 0.923293,
-
-    'Triton': 5.88,     # 5.88 days (141.12 hours); https://ssd.jpl.nasa.gov/sats/elem/
-    'Despina': 0.334656,
-    'Galatea': 0.428744,
-
-    'Charon': 6.39,     # 6.39 days; https://ssd.jpl.nasa.gov/sats/elem/
-    'Styx': 20.16,     
-    'Nix': 24.86,       # 24.86 days
-    'Hydra': 38.20,     # 38.20 days
-    'Kerberos': 32.17,     
-    'Dysnomia': 15.79,  # 15.79 days
+    # Earth satellite
+    'Moon': 27.321582,
     
-    # Dwarf planets and KBOs (in Earth years)
-    'Ceres': 4.6,       # 1,680.15 days (4.6 years)
-    'Eris': 558.0,      # 203,809.50 days (558.0 years)
-    'Haumea': 284.0,    # 103,731.00 days (284.0 years)
-    'Makemake': 306.0,  # 111,766.50 days (306.0 years)
-    'Quaoar': 288.0,    # 105,192.00 days (288.0 years)
-    'Sedna': 11400.0,   # 4,163,850.00 days (11,400.0 years)
-    'Orcus': 247.0,      # 90,216.75 days (247.0 years)
-
-    # Comets
-    'Halley': 76        # Halley's orbital period varies. This is an average
+    # Mars satellites
+    'Phobos': 0.319,       # Verified from JPL
+    'Deimos': 1.263,       # Verified from JPL
+    
+    # Jupiter satellites
+    'Io': 1.769,           # 42.456 hours
+    'Europa': 3.551,       # 85.224 hours
+    'Ganymede': 7.155,     # 171.72 hours
+    'Callisto': 16.689,    # 400.536 hours
+    'Metis': 0.295,        # 7.08 hours
+    'Adrastea': 0.298,     # 7.15 hours
+    'Amalthea': 0.498,     # 11.95 hours
+    'Thebe': 0.675,        # 16.20 hours
+    
+    # Saturn satellites
+    'Mimas': 0.942,        # 22.61 hours
+    'Enceladus': 1.370,    # 32.88 hours
+    'Tethys': 1.888,       # 45.31 hours
+    'Dione': 2.737,        # 65.69 hours
+    'Rhea': 4.518,         # 108.43 hours
+    'Titan': 15.945,       # 382.68 hours
+    'Hyperion': 21.277,    # 510.65 hours
+    'Iapetus': 79.331,     # 1903.94 hours
+    'Phoebe': 550.56,      # 1.51 years
+    'Pan': 0.575,          # 13.80 hours
+    'Daphnis': 0.594,      # 14.26 hours
+    'Atlas': 0.602,        # 14.45 hours
+    'Prometheus': 0.616,   # 14.78 hours
+    'Pandora': 0.631,      # 15.14 hours
+    'Epimetheus': 0.694,   # 16.66 hours
+    'Janus': 0.695,        # 16.68 hours
+    
+    # Uranus satellites
+    'Miranda': 1.413,      # 33.91 hours
+    'Ariel': 2.520,        # 60.48 hours
+    'Umbriel': 4.144,      # 99.46 hours
+    'Titania': 8.706,      # 208.94 hours
+    'Oberon': 13.463,      # 323.11 hours
+    'Puck': 0.762,         # 18.29 hours
+    'Portia': 0.513,       # 12.31 hours
+    'Mab': 0.923,          # 22.15 hours
+    
+    # Neptune satellites  
+    'Triton': 5.877,       # 141.05 hours (retrograde)
+    'Despina': 0.335,      # 8.04 hours
+    'Galatea': 0.429,      # 10.30 hours
+    'Proteus': 1.122,      # 26.93 hours
+    'Larissa': 0.555,      # 13.32 hours
+    'Naiad': 0.294,        # 7.06 hours
+    
+    # Pluto satellites
+    'Charon': 6.387,       # 153.29 hours
+    'Styx': 20.162,        # 483.89 hours
+    'Nix': 24.856,         # 596.54 hours
+    'Kerberos': 32.168,    # 772.03 hours
+    'Hydra': 38.202,       # 916.85 hours
+    
+    # Eris satellite
+    'Dysnomia': 15.786,    # 378.86 hours
+    
+    # Dwarf planets and KBOs (converted from years to days)
+    'Pluto': 90582.00,     # 248.0 * 365.25
+    'Ceres': 1680.15,      # 4.6 * 365.25
+    'Eris': 203809.50,     # 558.0 * 365.25
+    'Haumea': 103731.00,   # 284.0 * 365.25
+    'Makemake': 111766.50, # 306.0 * 365.25
+    'Quaoar': 105192.00,   # 288.0 * 365.25
+    'Orcus': 90216.75,     # 247.0 * 365.25
+    'Sedna': 4163850.00,   # 11400.0 * 365.25
+    
+    # Asteroids
+    'Vesta': 1325.75,      # 3.63 * 365.25
+    'Pallas': 1685.37,     # 4.614 * 365.25
+    'Juno': 1591.93,       # 4.358 * 365.25  
+    'Hygiea': 2041.88,     # 5.592 * 365.25
+    'Psyche': 1825.01,     # 4.997 * 365.25
+    'Eros': 642.63,        # 1.76 * 365.25
+    'Itokawa': 556.38,     # 1.52 * 365.25
+    'Ryugu': 473.98,       # 1.30 * 365.25
+    'Bennu': 436.65,       # 1.20 * 365.25
+    'Apophis': 323.60,     # 0.89 * 365.25
+    'Phaethon': 523.42,    # 1.43 * 365.25
+    'Dinkinesh': 1387.50,  # 3.80 * 365.25
+    'Donaldjohanson': 1446.04, # 3.96 * 365.25
+    'Šteins': 1327.41,     # 3.64 * 365.25
+    'Lutetia': 1321.00,    # 3.62 * 365.25
+    
+    # Trojan asteroids (Jupiter's L4 and L5)
+    'Orus': 4274.32,       # 11.71 * 365.25
+    'Polymele': 4319.33,   # 11.83 * 365.25
+    'Eurybates': 4333.71,  # 11.87 * 365.25
+    'Patroclus': 4336.36,  # 11.88 * 365.25
+    'Leucus': 4352.24,     # 11.92 * 365.25
+    
+    # Near-Earth asteroids
+    '2024 YR4': 922.84,    # 2.53 * 365.25
+    '2024 PT5': 368.75,    # 1.01 * 365.25
+    '2023 JF': 493.37,     # 1.35 * 365.25
+    '2025 KV': 695.85,     # 1.91 * 365.25
+    
+    # Comets (converted from years to days where applicable)
+    'Halley': 27759.00,    # 76.0 * 365.25
+    'Hyakutake': 70071.50, # 191.86 * 365.25 (pre-1996 orbit)
+    'Hale-Bopp': 2520352.50, # 6900.0 * 365.25
+    'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
+    'West': 558203.00,     # 1528.0 * 365.25 (original orbit)
+    'McNaught': 92552.00,  # 253.5 * 365.25
+    'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
+    
+    # For hyperbolic/parabolic objects, period is undefined
+    # These are included for completeness but should be handled specially
+    'C/2025_K1': None,     # Parabolic comet
+    '3I/ATLAS': None,      # Interstellar object
+    
+    # Hypothetical
+    'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
 }
 
 # Mapping of SIMBAD object types to full descriptions

@@ -5,7 +5,7 @@ import math
 import plotly.graph_objs as go
 import traceback  # Add this import
 from datetime import datetime, timedelta
-from constants_new import color_map
+from constants_new import color_map, KNOWN_ORBITAL_PERIODS
 from apsidal_markers import add_perihelion_marker, add_apohelion_marker
 
 planetary_params = {
@@ -32,12 +32,19 @@ planetary_params = {
         'omega': 54.884,
         'Omega': 76.680
     },
-    'Earth': {
+    'Earth': {              #  2025-Jul-06
         'a': 1.000000,
         'e': 0.016710,
         'i': 0.00005,
         'omega': 114.207,
-        'Omega': -11.26064
+        'Omega': -11.26064,
+        'epoch': '2025-7-6',
+        'perihelion_dates': [
+        '2026-01-03',  # Following perihelion
+        ],
+        'aphelion_dates': [
+        '2026-07-06',  # Following aphelion
+        ]
     },
     'Mars': {
         'a': 1.523679,
@@ -439,10 +446,11 @@ planetary_params = {
     'Moon': {            # 301; Revised 7-31-2013, geocentric; source: https://ssd.jpl.nasa.gov/horizons/app.html#/
 #        'a': 384400,   # Horizons: A, semi-major axis in AU
         'a': 0.002570,   # Horizons: A, semi-major axis in AU; 384400 km or 0.00257 au
-        'e': 0.0549,   # Horizons: EC, eccentricity; 0.05490 was 0.0554
+        'e': 0.05490,   # Horizons: EC, eccentricity; 0.05490 was 0.0554
         'i': 5.145,      # Horizons: IN, inclination in degrees; 5.145 deg was 5.16
         'omega': 318.15, # Horizons: W, argument of perihelion in degrees
-        'Omega': 125.08   # Horizons: OM, longitude of ascending node in degrees
+        'Omega': 125.08,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2013-07-31'
     },
 
     # Mars' Moons
@@ -1908,13 +1916,11 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 
                 if satellite_name in KNOWN_ORBITAL_PERIODS:
                     period_value = KNOWN_ORBITAL_PERIODS[satellite_name]
-                    # Check if it's in years (for planets) or days (for satellites)
-                    # Satellites have values < 1000, planets/dwarf planets have values > 1
-                    if satellite_name in ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 
-                                         'Uranus', 'Neptune', 'Pluto', 'Ceres', 'Eris', 'Haumea', 
-                                         'Makemake', 'Quaoar', 'Sedna', 'Orcus', 'Halley']:
-                        # Convert years to days
-                        period_days = period_value * 365.25
+
+                    if period_value is None:
+                        # Handle hyperbolic/parabolic objects - use Kepler's law
+                        period_days = 365.25 * np.sqrt(abs(a)**3) if a else 365.25
+
                     else:
                         # Already in days
                         period_days = period_value
@@ -2377,8 +2383,8 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     
     # Calculate angular range based on days_to_plot
     if days_to_plot is not None and days_to_plot > 0:
-        # Moon's orbital period is approximately 27.321661 days
-        moon_period_days = 27.321661
+        # Get Moon's orbital period from constants
+        moon_period_days = KNOWN_ORBITAL_PERIODS.get('Moon', 27.321661)
         orbital_fraction = days_to_plot / moon_period_days
         max_angle = 2 * np.pi * orbital_fraction
         
@@ -2593,7 +2599,7 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points):
 
 def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, 
                           planetary_params=None, parent_planets=None, color_map=None, 
-                          date=None, days_to_plot=None, current_positions=None):
+                          date=None, days_to_plot=None, current_positions=None, fetch_position=None):
     """
     Plot idealized orbits for planets, dwarf planets, asteroids, KBOs, and moons.
     For non-Sun centers, only plots moons of that center body.
@@ -2611,6 +2617,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
     Returns:
         plotly.graph_objects.Figure: Figure with idealized orbits added
     """
+    # Create name to object mapping
+    obj_dict = {obj['name']: obj for obj in objects} if objects else {}
+
     # If current_positions not provided, try to extract from objects parameter
     if current_positions is None and objects is not None:
         current_positions = {}
@@ -2747,6 +2756,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             omega = params.get('omega', 0)
             Omega = params.get('Omega', 0)
 
+            # Add this debug line
+            print(f"\n[DEBUG] Processing {obj_name}")
+            print(f"[DEBUG] params keys: {params.keys()}")            
+
 # Check if this is a hyperbolic orbit (e > 1)
             if e > 1:
                 try:
@@ -2808,6 +2821,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
 
                     plotted.append(obj_name)
+
                     print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.3f}, q={q:.3f} AU")
                     
                 except Exception as err:
@@ -2896,6 +2910,57 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 params,                    # Full orbital parameters
                 color_map                  # Color mapping function
             )
+
+            # ADD THE ACTUAL APSIDAL MARKERS CODE HERE (moved from hyperbolic section)
+            # After adding ideal markers, add actual apsidal markers if dates are provided
+            if 'perihelion_dates' in params or 'aphelion_dates' in params:
+                print(f"\n[DEBUG] Found apsidal dates for {obj_name}")
+                print(f"  Perihelion dates: {params.get('perihelion_dates', [])}")
+                print(f"  Aphelion dates: {params.get('aphelion_dates', [])}")
+                
+                # Get the object ID for fetching positions
+                obj_id = None
+                id_type = None
+                for obj in objects:
+                    if obj['name'] == obj_name:
+                        obj_id = obj['id']
+                        id_type = obj.get('id_type', None)
+                        break
+                
+                if obj_id:
+                    # Import the functions we need
+                    from apsidal_markers import fetch_positions_for_apsidal_dates, add_actual_apsidal_markers
+
+                    # Use the passed fetch_position
+                    if fetch_position is None:
+                        print("ERROR: fetch_position not provided to plot_idealized_orbits")
+                        continue
+
+                    # Fetch positions for the apsidal dates
+                    positions_dict = fetch_positions_for_apsidal_dates(
+                        obj_id=obj_id,
+                        params=params,
+                        date_range=(date - timedelta(days=365), date + timedelta(days=365)),
+                        center_id=center_id,
+                        id_type=id_type,
+                        is_satellite=(obj_name in parent_planets.get(center_id, [])),
+                        fetch_position=fetch_position
+                    )
+                    
+                    print(f"  Fetched positions: {len(positions_dict)} dates")
+                    
+                    # Add the actual markers
+                    add_actual_apsidal_markers(
+                        fig=fig,
+                        obj_name=obj_name,
+                        params=params,
+                        date_range=(date - timedelta(days=365), date + timedelta(days=365)),
+                        positions_dict=positions_dict,
+                        color_map=color_map,
+                        center_body=center_id,
+                        is_satellite=(obj_name in parent_planets.get(center_id, []))
+                    )
+                    print(f"  Added actual apsidal markers for {obj_name}")
 
             plotted.append(obj_name)
 
