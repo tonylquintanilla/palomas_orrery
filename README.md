@@ -2,11 +2,12 @@
 
 ## Introduction
 
-Paloma's Orrery is an advanced astronomical visualization software that brings the cosmos to your desktop. This comprehensive tool transforms complex astronomical data into interactive visualizations of our solar system and stellar neighborhood. The visualizations are created with a Python program with the assistance of AI assistants, including Claude, ChatGPT, Gemini and DeepSeek. This Orrery is under active development as new functionalities, objects and visualizations are implemented.
+Paloma's Orrery is an advanced astronomical visualization software that brings the cosmos to your desktop. This comprehensive tool transforms complex astronomical data into interactive visualizations of our solar system and stellar neighborhood. The visualizations are created with a Python program with the assistance of AI assistants, including Anthropic's Claude, Google's Gemini, Open AI's ChatGPT, and DeepSeek, in order of participation. This Orrery is under active development as new functionalities, objects and visualizations are implemented.
 
 Created by a civil and environmental engineer with a passion for space exploration, Paloma's Orrery bridges the gap between scientific accuracy and visual beauty, making astronomy accessible to educators, students, and space enthusiasts.
 
--- Tony Quintanilla, Chicago, July 15, 2025
+-- Tony Quintanilla, Chicago, 
+   🚀 Updated: July 29, 2025 
 
    tonyquintanilla@gmail.com
    website: https://sites.google.com/view/tony-quintanilla
@@ -74,6 +75,12 @@ Created by a civil and environmental engineer with a passion for space explorati
 - **Hover information** with detailed astronomical data
 - **Copy-to-clipboard** functionality for star names and coordinates useful for additional searches
 - **Animation** - watch solar system bodies and space craft motions across timescales from minutes to years
+
+### Interactive Orbital Mechanics Visualization
+- **Educational Tool**: A dedicated interactive 3D visualization that shows how the six classical orbital elements (a, e, i, ω, Ω) define an object's orbit in space.
+- **Step-by-Step Transformations**: Clearly demonstrates the sequence of rotations (argument of periapsis, inclination, longitude of ascending node) that transform an orbit from its simple perifocal frame to its final, complex orientation in the ecliptic plane.
+- **Dynamic Center Body**: Intelligently plots satellite orbits (like the Moon's) around their parent planet instead of the Sun for a more intuitive and accurate local visualization.
+- **Conceptual Clarity**: Designed to help users build a strong intuition for complex orbital mechanics concepts.
 
 ## 🚀 Recent Improvements (July 2025)
 
@@ -359,6 +366,14 @@ This comprehensive flowchart illustrates how the program modules and functions w
   - Support for both old and new data formats
   - Incremental update capabilities
   - Proper error handling and backup creation
+
+**`orbital_param_viz.py`** ✅ **NEW: ORBITAL MECHANICS VISUALIZATION**
+- **Core functionality**: Provides a standalone, interactive 3D visualization to demonstrate the principles of orbital mechanics. It is launched from the main GUI.
+- **Key Features**:
+  - **Educational Focus**: Renders the step-by-step transformation of an orbit from its 2D perifocal frame to its final 3D ecliptic frame using the six Keplerian orbital elements.
+  - **Interactive Learning**: Allows users to select any celestial body and see how its unique orbital parameters define its path.
+  - **Dynamic Centering**: Automatically sets the central body to the parent planet for satellite visualizations (e.g., Moon around Earth).
+  - **Comprehensive Annotations**: Includes detailed on-screen text explaining each step of the transformation, making complex concepts accessible.
 
 **`orrery_integration.py`** ✅ **ORBIT SELECTION & INTEGRATION**
 - **Core functionality**: Acts as a bridge between the main orrery and the two orbit systems (`idealized_orbits` and `refined_orbits`).

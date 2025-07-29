@@ -13,7 +13,8 @@ import plotly.graph_objs as go
 import webbrowser
 import os
 import warnings
-from astropy.utils.exceptions import ErfaWarning
+# from astropy.utils.exceptions import ErfaWarning
+from erfa import ErfaWarning
 from astropy.time import Time
 import traceback
 import threading
@@ -24,7 +25,7 @@ import math
 import json
 import orbit_data_manager
 import shutil
-
+from orbital_param_viz import create_orbital_transformation_viz, create_orbital_viz_window 
 from palomas_orrery_helpers import (calculate_planet9_position_on_orbit, rotate_points2, calculate_axis_range,
                                     fetch_trajectory, fetch_orbit_path, pad_trajectory, add_url_buttons,
                                     get_default_camera, print_planet_positions, create_orbit_backup, cleanup_old_orbits, 
@@ -1180,7 +1181,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: July 2, 2025")
+root.title("Paloma's Orrery -- Updated: July 21, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -6564,6 +6565,16 @@ animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", com
 animate_year_button.grid(row=2, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_year_button, "Animate the motion over years. This may take a while due to the large number of positions fetched.")
 
+# Integration code for orbital parameter visualization in Paloma's Orrery
+
+def open_orbital_param_visualization():
+    """
+    Opens the orbital parameter visualization window by calling the
+    dedicated function in orbital_param_viz.py.
+    """
+    # This now correctly calls the updated UI function from the other module
+    create_orbital_viz_window(root, objects, planetary_params, parent_planets)
+
 # Add the function to call star_visualization_gui.py
 def open_star_visualization():
     try:
@@ -6572,6 +6583,20 @@ def open_star_visualization():
     except Exception as e:
         output_label.config(text=f"Error opening star visualization: {e}")
         print(f"Error opening star visualization: {e}")
+
+# Add Orbital Parameter Visualization button
+orbital_viz_button = tk.Button(
+    advance_buttons_frame,
+    text="Orbital Parameter Visualization",
+    command=open_orbital_param_visualization,
+    width=BUTTON_WIDTH*2 + 5,  # Make it span two columns
+    font=BUTTON_FONT,
+    bg='cyan', 
+    fg='black'
+)
+orbital_viz_button.grid(row=3, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
+CreateToolTip(orbital_viz_button, "Open an interactive visualization of orbital parameter transformations.")
+
 
 # Add Star Visualization button
 star_viz_button = tk.Button(
@@ -6585,7 +6610,7 @@ star_viz_button = tk.Button(
     bg='blue', 
     fg='white'
 )
-star_viz_button.grid(row=3, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
+star_viz_button.grid(row=4, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
 CreateToolTip(star_viz_button, "Open a specialized UI for 2D and 3D star visualizations, " 
               "including HR diagrams and stellar neighborhoods.")
 
