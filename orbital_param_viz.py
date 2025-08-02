@@ -66,11 +66,12 @@ def add_coordinate_frame(fig, name, color, R_transform, axis_length,
             textposition='top center',
             textfont=dict(size=14, color=color),
             opacity=opacity,
-            name=f'{name} axes' if i == 0 else '',  # Only show once in legend
+    #        name=f'{name} axes' if i == 0 else '',  # Only show once in legend
+            name=name if i == 0 else '',  # use the name directly            
             legendgroup=legendgroup,
             showlegend=(i == 0 and show_in_legend),
-            visible=visible if visible else 'legendonly',
-            hovertemplate=f'<b>{name} Frame</b><br>{axis_name}-axis<extra></extra>'
+            visible=visible,
+            hovertemplate=f'<b>{name} Frame</b><br>{axis_name}-axis'
         ))
         
         # Add arrow head using a small marker
@@ -87,7 +88,7 @@ def add_coordinate_frame(fig, name, color, R_transform, axis_length,
             opacity=opacity,
             showlegend=False,
             legendgroup=legendgroup,
-            visible=visible if visible else 'legendonly',
+            visible=visible,
             hoverinfo='skip'
         ))
 
@@ -117,7 +118,7 @@ def add_angle_arc(fig, angle_rad, radius, axis, color, label, start_angle=0,
         legendgroup=legendgroup,
         showlegend=show_in_legend,
         visible=True,
-        hovertemplate=f'<b>{label}</b><extra></extra>'
+        hovertemplate=f'<b>{label}</b>'
     ))
 
 def create_orbital_transformation_viz(fig, obj_name, planetary_params, 
@@ -196,23 +197,8 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         textposition='bottom center',
         name=center_object,
         showlegend=True,
-        hovertemplate=f'<b>{center_object}</b><br>Central body<extra></extra>'
+        hovertemplate=f'<b>{center_object}</b><br>Central body'
     ))
-
-    """
-    # Add central body (Sun)
-    fig.add_trace(go.Scatter3d(
-        x=[0], y=[0], z=[0],
-        mode='markers+text',
-        marker=dict(size=20, color='yellow', 
-                   line=dict(color='orange', width=2)),
-        text=[center_object],
-        textposition='bottom center',
-        name=center_object,
-        showlegend=True,
-        hovertemplate=f'<b>{center_object}</b><br>Central body<extra></extra>'
-    ))
-    """
     
     # Generate orbital points in perifocal frame
     if e < 1.0:
@@ -241,9 +227,14 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     R3 = rotation_matrix_z(Omega_rad)
     
     # Cumulative transformations
+#    R_after_omega = R1
+#    R_after_inclination = R2 @ R1
+#    R_final = R3 @ R2 @ R1
+
+    # Cumulative transformations
     R_after_omega = R1
-    R_after_inclination = R2 @ R1
-    R_final = R3 @ R2 @ R1
+    R_after_inclination = R1 @ R2  # Corrected order for intrinsic "hinge" tilt
+    R_final = R3 @ R_after_inclination # Apply final extrinsic swivel to the new result
     
     # For scaling, use periapsis for hyperbolas or semi-major axis for ellipses
     if e < 1.0:
@@ -265,8 +256,8 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     
     if show_axes:
         # 1. Ecliptic reference frame (gray, always visible)
-    #    add_coordinate_frame(fig, "Ecliptic Reference", "gray", np.eye(3), 
-    #                       axis_length * 1.2, opacity=0.4, line_width=2, visible=False)
+        add_coordinate_frame(fig, "Ecliptic Ref. (+X: Vernal Equinox)", "gray", np.eye(3), 
+                           axis_length * 1.2, opacity=0.4, line_width=2, visible=True)
         
         # 2. Perifocal frame (blue)
         add_coordinate_frame(fig, "1. Perifocal", "cyan", np.eye(3), 
@@ -274,17 +265,17 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         
         # 3. After ω rotation (purple)
         if show_steps and omega != 0:
-            add_coordinate_frame(fig, "2. After ω", "purple", R_after_omega, 
+            add_coordinate_frame(fig, "2. After ω rotation", "purple", R_after_omega, 
                                axis_length, opacity=0.7, visible=True)
         
         # 4. After ω and i rotation (orange)
         if show_steps and i != 0:
-            add_coordinate_frame(fig, "3. After ω and i rotation", "orange", 
+            add_coordinate_frame(fig, "3. After i rotation", "orange", 
                                R_after_inclination, axis_length, 
                                opacity=0.7, visible=True)
         
-        # 5. Final = Ecliptic (red)
-        add_coordinate_frame(fig, "4. Final (Ecliptic)", "red", R_final, 
+        # 5. Final = Ecliptic Frame (red)
+        add_coordinate_frame(fig, "4. After Ω rotation (Final)", "red", R_final, 
                            axis_length, opacity=0.8, visible=True)
     
     # Add orbits at each transformation stage
@@ -297,7 +288,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     #    legendgroup='transformations',
         showlegend=True,
         visible=True,
-        hovertemplate='<b>Perifocal Orbit</b><br>The orbit in its natural, un-rotated frame.<extra></extra>'
+        hovertemplate='<b>Perifocal Orbit</b><br>The orbit in its natural, un-rotated frame.'
     ))
     
     # Add periapsis/apoapsis markers in perifocal
@@ -312,7 +303,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
 #        legendgrouptitle_text='Orbital Points',
         showlegend=True,
         visible=True,
-        hovertemplate=f'<b>Periapsis</b><br>Distance: {r_peri:.3f} AU<br>Closest point to {center_object}<extra></extra>'
+        hovertemplate=f'<b>Periapsis</b><br>Distance: {r_peri:.3f} AU<br>Closest point to {center_object}'
     ))
     
     if e < 1.0:
@@ -326,7 +317,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
 #            legendgroup='apsides',
             showlegend=True,
             visible=True,
-            hovertemplate=f'<b>Apoapsis</b><br>Distance: {r_apo:.3f} AU<br>Farthest point from {center_object}<extra></extra>'
+            hovertemplate=f'<b>Apoapsis</b><br>Distance: {r_apo:.3f} AU<br>Farthest point from {center_object} (a, semi-major axis)'
         ))
     
 # 2. After ω rotation
@@ -340,7 +331,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             showlegend=True,
             visible=True,
             hovertemplate=f'<b>Orbit after ω rotation</b><br>'
-                          'Step 1: Orients the periapsis in the orbital plane.<extra></extra>'
+                          'Step 1: Orients the periapsis in the orbital plane.'
         ))
 
         # Add angle arc for ω
@@ -359,7 +350,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                 showlegend=True,
                 visible=True,
                 hovertext=f'<b>Argument of Periapsis (ω)</b><br>Rotation: {omega:.1f}°<br>'
-                          'Orients the periapsis relative to the line of nodes.<extra></extra>'
+                          'Orients the periapsis relative to the line of nodes.'
             ))
     
     # After ω and i rotation
@@ -374,7 +365,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             showlegend=True,
             visible=True,
             hovertemplate=f'<b>Orbit after ω and i rotation</b><br>' 
-            'Step 2: Applies the tilt to the orbital plane.<extra></extra>'
+            'Step 2: Applies the tilt to the orbital plane.'
         ))
     
     # Add inclination angle arc
@@ -402,7 +393,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             showlegend=True,
             visible=True,
             hovertext=f'<b>Inclination (i)</b><br>Angle: {i:.1f}°<br>' 
-            'Tilts the orbit relative to the ecliptic plane.<extra></extra>'
+            'Tilts the orbit relative to the ecliptic plane.'
         ))
 
     # 4. Final orbit
@@ -415,7 +406,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     #    legendgroup='transformations',
         showlegend=True,
         visible=True,
-        hovertemplate='<b>Final Orbit</b><br>In ecliptic coordinates<extra></extra>'
+        hovertemplate='<b>Final Orbit</b><br>In ecliptic coordinates'
     ))
     
     # Add Ω angle arc (longitude of ascending node)
@@ -435,7 +426,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             showlegend=True,
             visible=True,
             hovertext=f'<b>Longitude of Ascending Node (Ω)</b><br>Angle: {Omega:.1f}°<br>' 
-            'Orients the orbit within the ecliptic plane.<extra></extra>'
+            'Orients the orbit within the ecliptic frame.'
         ))
 
     # Add arc showing ω angle from ascending node to periapsis
@@ -499,7 +490,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                 y=arc_y_coords,
                 z=arc_z_coords,
                 mode='lines+text',
-                line=dict(color='red', width=2), 
+                line=dict(color='red', width=2, dash='dot'), 
                 text=[''] * (len(arc_x_coords) - 1) + [f'ω = {omega:.1f}°'],
                 textposition='bottom center', 
                 name=f'ω angle (orbital plane)',
@@ -511,7 +502,6 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             )
         )
 
-
     # Transform and add final periapsis/apoapsis markers
     peri_perifocal = np.array([r_peri, 0, 0])
     peri_final = R_final @ peri_perifocal
@@ -521,7 +511,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     apsides_y = [peri_final[1]]
     apsides_z = [peri_final[2]]
     apsides_text = ['Periapsis (final)']
-    apsides_hover = [f'<b>Periapsis (final)</b><br>Distance: {r_peri:.3f} AU from {center_object}<extra></extra>']
+    apsides_hover = [f'<b>Periapsis (final)</b><br>Distance: {r_peri:.3f} AU from {center_object}']
 
     if e < 1.0:
         apo_perifocal = np.array([-r_apo, 0, 0])
@@ -530,7 +520,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         apsides_y.append(apo_final[1])
         apsides_z.append(apo_final[2])
         apsides_text.append('Apoapsis (final)')
-        apsides_hover.append(f'<b>Apoapsis (final)</b><br>Distance: {r_apo:.3f} AU from {center_object}<extra></extra>')
+        apsides_hover.append(f'<b>Apoapsis (final)</b><br>Distance: {r_apo:.3f} AU from {center_object}')
 
     fig.add_trace(go.Scatter3d(
         x=apsides_x,
@@ -548,7 +538,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                 
     # Add line of nodes if inclined
     if i != 0:
-        nodes_length = 1.2 * a
+        nodes_length = 1.2 * abs(a)         # to ensure the length is always a positive value
         nodes_start = R3 @ np.array([-nodes_length, 0, 0])
         nodes_end = R3 @ np.array([nodes_length, 0, 0])
         
@@ -561,7 +551,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             name='Line of Nodes',
             showlegend=True,
             visible=True,
-            hovertemplate='<b>Line of Nodes</b><br>Intersection with ecliptic<extra></extra>'
+            hovertemplate='<b>Line of Nodes</b><br>Intersection with ecliptic plane'
         ))
         
         # Ascending node marker
@@ -575,7 +565,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             name='Ascending Node',
             showlegend=True,
             visible=True,
-            hovertemplate='<b>Ascending Node</b><br>Where orbit crosses ecliptic northward<extra></extra>'
+            hovertemplate='<b>Ascending Node</b><br>Where orbit crosses ecliptic plane northward'
         ))
     
     # Add current position if we have orbital period
@@ -584,12 +574,6 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             # Calculate mean anomaly at plot_date
             period_days = params['period']
             
-            # Get epoch (if available) or use J2000
-    #        if 'epoch' in params:
-    #            epoch = params['epoch']
-    #        else:
-    #            epoch = dt.datetime(2000, 1, 1, 12, 0, 0)  # J2000
-
             # Always use J2000 for calculation, regardless of what's in params
             epoch = dt.datetime(2000, 1, 1, 12, 0, 0)  # J2000                
             
@@ -629,22 +613,6 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             pos_final = R_final @ pos_perifocal
             
             x_final, y_final, z_final = pos_final[0], pos_final[1], pos_final[2]
-
-            """
-            # Transform to final frame
-            # Apply -omega rotation
-            x_temp = x_pf * np.cos(-omega_rad) - y_pf * np.sin(-omega_rad)
-            y_temp = x_pf * np.sin(-omega_rad) + y_pf * np.cos(-omega_rad)
-            
-            # Apply inclination
-            y_temp2 = y_temp * np.cos(i_rad)
-            z_temp2 = y_temp * np.sin(i_rad)
-            
-            # Apply Omega rotation
-            x_final = x_temp * np.cos(Omega_rad) - y_temp2 * np.sin(Omega_rad)
-            y_final = x_temp * np.sin(Omega_rad) + y_temp2 * np.cos(Omega_rad)
-            z_final = z_temp2
-            """
             
             # Add current position marker
             fig.add_trace(
@@ -658,66 +626,11 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                     showlegend=True,
             #        visible='legendonly',
                     hovertext=f'<b>{obj_name} Position</b><br>Date: {plot_date.strftime("%Y-%m-%d")}<br>' 
-                    'True Anomaly: {np.degrees(nu):.1f}°<extra></extra>'
+                    'True Anomaly: {np.degrees(nu):.1f}°'
                 )
             )
         except Exception as e:
             print(f"Could not calculate current position: {e}")
-
-    """    
-        # Reference direction indicator (vernal equinox)
-    fig.add_trace(
-            go.Scatter3d(
-                x=[0, 1.8*a],
-                y=[0, 0],
-                z=[0, 0],
-                mode='lines+text',
-                line=dict(color='green', width=3),
-                text=['', 'Reference Direction'],
-                textposition='top center',
-                name='Reference Direction',
-                showlegend=True,
-                visible=True,
-                hovertext='Vernal Equinox / First Point of Aries / ° in Pisces direction (reference for Ω)'
-            )
-        )
-
-    # Add direction of motion indicator
-    # Place it at 90 degrees past periapsis for visibility
-    motion_angle = -omega_rad + np.radians(90)
-    motion_r = a * (1 - e**2) / (1 + e * np.cos(np.radians(90)))
-    
-    # Point on orbit
-    motion_x = motion_r * np.cos(motion_angle)
-    motion_y = motion_r * np.sin(motion_angle)
-    
-    # Direction vector (tangent to orbit)
-    # For an ellipse, the tangent direction at angle θ is perpendicular to the radius vector
-    # but adjusted for the elliptical shape
-    motion_dir_angle = motion_angle + np.pi/2  # 90 degrees ahead
-    if i > 90:  # Retrograde orbit
-        motion_dir_angle = motion_angle - np.pi/2  # 90 degrees behind
-    
-    # Create a small arrow showing direction
-    arrow_length = 0.3 * a
-    arrow_end_x = motion_x + arrow_length * np.cos(motion_dir_angle)
-    arrow_end_y = motion_y + arrow_length * np.sin(motion_dir_angle)
-    
-    fig.add_trace(
-        go.Scatter3d(
-            x=[motion_x, arrow_end_x],
-            y=[motion_y, arrow_end_y],
-            z=[0, 0],
-            mode='lines+markers',
-            line=dict(color='green', width=4),
-            marker=dict(size=[0, 8], symbol=['circle', 'diamond'], color='green'),
-            name='Direction of Motion',
-            showlegend=True,
-            visible=True,
-            hovertext=f'Direction of orbital motion<br>{"Retrograde" if i > 90 else "Prograde"} orbit'
-        )
-    )
-    """
 
     # Add direction of motion indicator
     # Define the arrow in the perifocal frame at true anomaly nu = 90 degrees
@@ -731,9 +644,9 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     tangent_vec_pf = np.array([-np.sin(nu_motion), e + np.cos(nu_motion), 0])
     tangent_vec_pf /= np.linalg.norm(tangent_vec_pf)
 
-    # Reverse for retrograde orbits
-    if i > 90:
-        tangent_vec_pf = -tangent_vec_pf
+    # Reverse for retrograde orbits -- redundant, causes the retrograde to cancel
+#    if i > 90:
+#        tangent_vec_pf = -tangent_vec_pf
 
     arrow_len = 0.4 * a
     arrow_end_pf = pos_motion_pf + arrow_len * tangent_vec_pf
@@ -801,39 +714,42 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     
     # Add comprehensive annotation
     annotation_text = f"""<b>Orbital Transformation Visualization</b><br><br>
-<b>Orbital Elements:</b><br>
-• a = {a:.3f} AU (semi-major axis)<br>
-• e = {e:.4f} (eccentricity)<br>
-• i = {i:.1f}° (inclination)<br>
-• ω = {omega:.1f}° (argument of periapsis)<br>
-• Ω = {Omega:.1f}° (longitude of ascending node)<br><br>
+    <b>Orbital Elements:</b><br>
+    • a = {a:.3f} AU (semi-major axis)<br>
+    • e = {e:.4f} (eccentricity)<br>
+    • i = {i:.1f}° (inclination)<br>
+    • ω = {omega:.1f}° (argument of periapsis)<br>
+    • Ω = {Omega:.1f}° (longitude of ascending node)<br><br>
 
-<b>Coordinate Frame Transformations:</b><br>
-The final transformation is a product of three rotations:<br> 
-R = R_z(Ω) · R_x(i) · R_z(ω)<br><br>
+    <b>Coordinate Frame Transformations:</b><br>
+    The final transformation is a product of three rotations:<br>
+    R = R_z(Ω) · R_x(i) · R_z(ω)<br><br>
 
-1. <b>Perifocal Frame</b> (cyan) - Orbit's natural frame<br>
-   • Periapsis on +X axis<br><br>
+    1. <b>Perifocal Frame</b> (cyan) - The orbit's 2D blueprint.<br>
+    • Periapsis is aligned on the +X axis.<br><br>
 
-2. <b>After ω rotation</b> (purple) - First transformation<br>
-   • Rotates frame by ω around Z axis<br><br>
+    2. <b>After ω rotation</b> (purple) - Orients the ellipse.<br>
+    • Rotates the frame by ω around the Z-axis.<br>
+    <b>→ Sets the periapsis orientation within its orbital plane.</b><br><br>
 
-3. <b>After ω and i rotation</b> (orange) - Second transformation<br>
-   • Tilts frame by i around new X axis<br><br>
+    3. <b>After ω and i rotation</b> (orange) - Tilts the orbit.<br>
+    • Tilts the frame by i around the new X-axis (the "hinge").<br>
+    <b>→ Gives the orbit its tilt relative to the Ecliptic Plane.</b><br><br>
 
-4. <b>Final/Ecliptic Frame</b> (red) - Complete transformation<br>
-   • Rotates by Ω to align with ecliptic<br><br>
+    4. <b>Final/Ecliptic Frame</b> (red) - Swivels the orbit.<br>
+    • Rotates the tilted frame by Ω around the original (not orange) Z-axis.<br>
+    <b>→ Swivels the orbit into its final place in the Ecliptic Frame.</b><br><br>
 
-<b>Key Insight:</b> This visualization shows the sequence of<br> 
-rotations applied to the initial Perifocal Orbit (cyan) to <br>
-place it into its final orientation in the Ecliptic Frame (red).<br><br>
+    <b>Key Insight:</b> This visualization shows the sequence of<br> 
+    rotations applied to the initial Perifocal Orbit (cyan) to place it<br> 
+    into its final orientation in the Ecliptic Frame (red).<br><br>
 
-<b>Interactive:</b> Click legend items to show/hide elements."""
+    <b>Interactive:</b> Click legend items to show/hide elements."""
     
     fig.add_annotation(
         text=annotation_text,
         xref="paper", yref="paper",
-        x=0.98, y=0.98,
+        x=1.03, y=0.98,                 # x=0.98 originally
         xanchor="right", yanchor="top",
         showarrow=False,
         font=dict(size=11, family="Arial"),
@@ -1015,10 +931,10 @@ The final orbit is placed by applying three rotations to the initial perifocal o
    - Orients the periapsis within the orbital plane.
 
 2. Rotate by i (Inclination):
-   - Tilts the orbital plane relative to the ecliptic.
+   - Tilts the orbital plane relative to the ecliptic plane.
 
 3. Rotate by Ω (Longitude of Ascending Node):
-   - Rotates the tilted orbit to its final position in the ecliptic.  
+   - Rotates the tilted orbit to its final position in the ecliptic frame.  
 
 IMPORTANT: The coordinate systems rotate, not the orbit itself! The orbit maintains its shape and orientation relative to each coordinate frame.
 
@@ -1026,7 +942,8 @@ VISUAL ELEMENTS:
 
 • Coordinate Axes: Shows each reference frame
 • Orbital Curves: Shows orbit at each transformation stage
-• Periapsis/Apoapsis: Closest and farthest points
+• Periapsis: Closest point from the central object (Sun: perihelion, Earth: perigee)
+• Apoapsis: Farthest point from the central object (a, semi-major axis)
 • Line of Nodes: Where orbit crosses reference plane
 • Ascending Node: Where orbit goes above reference plane
 

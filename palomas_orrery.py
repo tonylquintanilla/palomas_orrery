@@ -175,6 +175,14 @@ from save_utils import save_plot
 
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
+import os
+import sys
+
+# Always run from the script's directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+print(f"Working directory set to: {os.getcwd()}")
+
 # ============= HELPER FUNCTIONS FOR PLOT_OBJECTS =============
 # Place this section after all imports but before the GUI initialization
 

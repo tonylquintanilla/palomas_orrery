@@ -78,7 +78,7 @@ Created by a civil and environmental engineer with a passion for space explorati
 
 ### Interactive Orbital Mechanics Visualization
 - **Educational Tool**: A dedicated interactive 3D visualization that shows how the six classical orbital elements (a, e, i, ω, Ω) define an object's orbit in space.
-- **Step-by-Step Transformations**: Clearly demonstrates the sequence of rotations (argument of periapsis, inclination, longitude of ascending node) that transform an orbit from its simple perifocal frame to its final, complex orientation in the ecliptic plane.
+- **Step-by-Step Transformations**: Clearly demonstrates the three key rotations—Argument of Periapsis (ω), Inclination (i), and Longitude of the Ascending Node (Ω)—that transform an orbit from its simple 2D blueprint (the Perifocal Frame) to its final 3D orientation in the Ecliptic Frame.
 - **Dynamic Center Body**: Intelligently plots satellite orbits (like the Moon's) around their parent planet instead of the Sun for a more intuitive and accurate local visualization.
 - **Conceptual Clarity**: Designed to help users build a strong intuition for complex orbital mechanics concepts.
 
@@ -128,6 +128,72 @@ Created by a civil and environmental engineer with a passion for space explorati
    - Comprehensive test suite with 13+ tests for cache operations
    - Isolated test environment preventing main file corruption
    - Tests for corruption handling, format conversion, and incremental updates
+
+3. **📊 Cache System & Data Management**:
+## Cache Overview
+Paloma's Orrery uses a sophisticated caching system to store orbital data locally, reducing API calls to JPL Horizons and improving performance.
+## Cache Features
+
+# Automatic Backup on Startup
+   - Creates orbit_paths_backup.json when launching the program
+   - Preserves your data in case of unexpected issues
+   - Example: [STARTUP] Backup created: orbit_paths_backup.json (92.0MB)
+
+# Data Validation & Repair
+   - Automatically validates cache integrity on load
+   - Repairs corrupted entries while preserving valid data
+   - Converts between old and new data formats automatically
+   - Corrupted files are renamed (.corrupted.TIMESTAMP) rather than deleted
+
+# Safety Mechanisms
+   - Multiple backup layers: startup backups, save backups, emergency backups
+   - Prevents accidental data loss (won't overwrite large cache with empty data)
+   - Automatic save operations using temporary files
+   - Automatic recovery from failed saves
+
+## Cache Messages Explained
+
+# During startup, you'll see informational messages:
+
+[STARTUP] - Backup creation status
+[CACHE INFO] - Cache statistics and information
+[CACHE HEALTH SUMMARY] - Detailed breakdown of cached orbits by center object
+[CACHE REPAIR] - Automatic repair operations (if needed)
+
+Example startup output:
+[STARTUP] Backup created: orbit_paths_backup.json (92.0MB)
+[CACHE INFO] Total orbits cached: 1351
+Cache loaded successfully: 1351 valid entries
+
+[CACHE HEALTH SUMMARY]
+Total cached orbits: 1351
+Orbits by center object:
+  Earth: 125 orbits
+  Jupiter: 101 orbits
+  Mars: 101 orbits
+  Sun: 125 orbits
+  ...
+
+# Cache Management
+   - Cache Location: orbit_paths.json in the program directory
+   - Backup Location: orbit_paths_backup.json (created on each startup)
+   - Cache Growth: Builds incrementally as you use the software
+   - Manual Deletion: Remove orbit_paths.json file to start fresh (do this selectively and carefully)
+   - Cache Persistence: Data is preserved between sessions and serves as a valuable astronomical archive
+
+# Performance Tips
+   - First Run: Start with a small selection of objects. The cache builds incrementally as you use the software
+
+# Optimal Usage:
+   - Use "Fetch Special" for experiments
+   - Select only objects you need to plot
+   - Use coarser intervals for long time spans
+
+# Cache Maintenance:
+   - Cache is precious data - treats cached orbit data as a valuable astronomical archive
+   - Cache grows as you use the software and serves as backup if JPL Horizons become unavailable or limited
+   - Manual cleanup option: If your cache gets too large, you can clean data older than 90 days by running Python and calling from        orbit_data_manager import prune_old_data; prune_old_data() (Developer note: This feature exists but creator avoids using it to preserve data)
+   - Multiple automatic backups created to protect against data loss
 
 ### Enhanced Orbital Mechanics and Visualization
 
@@ -368,7 +434,7 @@ This comprehensive flowchart illustrates how the program modules and functions w
   - Proper error handling and backup creation
 
 **`orbital_param_viz.py`** ✅ **NEW: ORBITAL MECHANICS VISUALIZATION**
-- **Core functionality**: Provides a standalone, interactive 3D visualization to demonstrate the principles of orbital mechanics. It is launched from the main GUI.
+- **Core functionality**: Provides a standalone, interactive 3D visualization to demonstrate the principles of orbital mechanics. It is launched from the main GUI. It provides an educational deep-dive into the three key rotational elements of an orbit: Argument of Periapsis (ω), Inclination (i), and Longitude of the Ascending Node (Ω).
 - **Key Features**:
   - **Educational Focus**: Renders the step-by-step transformation of an orbit from its 2D perifocal frame to its final 3D ecliptic frame using the six Keplerian orbital elements.
   - **Interactive Learning**: Allows users to select any celestial body and see how its unique orbital parameters define its path.
@@ -613,9 +679,21 @@ wheel>=0.41.0         # Built-package format
 
 ### Step 4: Run the Application
 
+## 🚀 Installation & Setup
+# Running the Program
+Important: The program must be run from its installation directory. When using VS Code or other IDEs:
+bash# Navigate to the orrery directory first
+cd /path/to/your/orrery/python palomas_orrery.py
+
 Navigate to the project folder in your File Explorer and double-click the **`palomas_orrery.py`** file. The application will start, and you can begin exploring\!
 
 For the best experience, you can also run the program from an editor like **VS Code**, which allows you to see all console output and error messages directly.
+
+# VS Code Users: 
+The program automatically changes to its installation directory on startup (as of July 2025). If you experience issues with cache files not being found, ensure you're running from the correct directory or configure VS Code to execute Python files in their containing directory:
+
+Settings → Search "python.terminal.executeInFileDir" → Check the box
+Or add to settings.json: "python.terminal.executeInFileDir": true
 
 **Explore solar visualizations**:
    - Select one or more planets from the object checkbutton list, "Select Solar Shells, Planets, Dwarf Planets, Moons..."
