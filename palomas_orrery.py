@@ -6580,8 +6580,82 @@ def open_orbital_param_visualization():
     Opens the orbital parameter visualization window by calling the
     dedicated function in orbital_param_viz.py.
     """
-    # This now correctly calls the updated UI function from the other module
-    create_orbital_viz_window(root, objects, planetary_params, parent_planets)
+    # Access global variables
+    global date_entry, center_object_var, objects
+    
+    # Collect current positions from the latest data
+    current_positions = {}
+    
+    # Get the current date being displayed
+    current_date = None
+    try:
+        current_date = datetime.strptime(date_entry.get(), '%Y-%m-%d')
+    except:
+        current_date = datetime.now()
+    
+    # Get the current center object
+    center = center_object_var.get() if center_object_var else 'Sun'
+    center_id = None
+    
+    # Find center object ID
+    for obj in objects:
+        if obj['name'] == center:
+            center_id = obj['id']
+            break
+    
+    if center_id is None:
+        center_id = 0  # Sun
+    
+    print(f"Fetching positions for orbital parameter visualization...")
+    print(f"  Date: {current_date.strftime('%Y-%m-%d')}")
+    print(f"  Center: {center} (ID: {center_id})")
+    
+    # Debug: Show all objects and their selection status
+    print(f"  Total objects: {len(objects)}")
+    selected_count = 0
+    
+    for obj in objects:
+        is_selected = obj['var'].get() == 1
+        if is_selected:
+            selected_count += 1
+            print(f"  Selected: {obj['name']} (ID: {obj['id']}, type: {obj.get('id_type', 'None')})")
+            
+            if obj['name'] != center:  # Don't fetch position for center object
+                try:
+                    # Use fetch_trajectory to get just one position
+                    dates_list = [current_date.strftime('%Y-%m-%d')]
+                    print(f"    Fetching trajectory for dates: {dates_list}")
+                    
+                    trajectory = fetch_trajectory(
+                        obj['id'], 
+                        dates_list,
+                        center_id=center_id,
+                        id_type=obj.get('id_type', None)
+                    )
+                    
+                    print(f"    Trajectory result: {trajectory}")
+                    
+                    if trajectory and len(trajectory) > 0 and trajectory[0] is not None:
+                        position = trajectory[0]
+                        if 'x' in position:
+                            current_positions[obj['name']] = position
+                            print(f"    Success: {obj['name']}: ({position['x']:.3f}, {position['y']:.3f}, {position['z']:.3f})")
+                        else:
+                            print(f"    No position data in trajectory for {obj['name']}")
+                    else:
+                        print(f"    Empty trajectory for {obj['name']}")
+                except Exception as e:
+                    print(f"    Error fetching position for {obj['name']}: {e}")
+                    import traceback
+                    traceback.print_exc()
+    
+    print(f"  Total selected objects: {selected_count}")
+    print(f"Passing {len(current_positions)} object positions to orbital viz")
+    
+    # Call the visualization window with current positions
+    create_orbital_viz_window(root, objects, planetary_params, parent_planets,
+                            current_positions=current_positions,
+                            current_date=current_date)
 
 # Add the function to call star_visualization_gui.py
 def open_star_visualization():

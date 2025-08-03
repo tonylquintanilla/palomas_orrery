@@ -6,8 +6,8 @@ from tkinter import ttk, messagebox
 import datetime as dt
 from constants_new import KNOWN_ORBITAL_PERIODS
 from shutdown_handler import show_figure_safely # Add this line
-# from idealized_orbits import parent_planets, planetary_params     
-# not needed because the dictionaries are being passed into its functions as an argument
+from apsidal_markers import add_perihelion_marker, add_apohelion_marker, calculate_apsidal_dates
+from constants_new import color_map
 
 def rotation_matrix_x(angle):
     """Create rotation matrix around X axis"""
@@ -124,7 +124,10 @@ def add_angle_arc(fig, angle_rad, radius, axis, color, label, start_angle=0,
 def create_orbital_transformation_viz(fig, obj_name, planetary_params, 
                                     show_steps=True, show_axes=True, 
                                     plot_date=None,
-                                    center_object='Sun', parent_planets=None):
+                                    center_object='Sun', parent_planets=None,
+                                    show_apsidal_markers=True,
+                                    current_position=None):                                    
+                            
     """
     Create a visualization showing how orbital parameters transform to 3D orbit.
     This version clearly shows the coordinate system transformations.
@@ -511,7 +514,89 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     apsides_y = [peri_final[1]]
     apsides_z = [peri_final[2]]
     apsides_text = ['Periapsis (final)']
-    apsides_hover = [f'<b>Periapsis (final)</b><br>Distance: {r_peri:.3f} AU from {center_object}']
+
+# Calculate apsidal dates if we have position information
+    perihelion_date_str = ""
+    aphelion_date_str = ""
+    
+    if plot_date is None:
+        plot_date = dt.datetime.now()
+    
+    print(f"DEBUG: Calculating apsidal dates for {obj_name}")
+    print(f"  plot_date: {plot_date}")
+    print(f"  current_position: {current_position}")
+    
+    # Try to calculate accurate dates if we have current position
+    if current_position and 'x' in current_position:
+        try:
+            from apsidal_markers import calculate_apsidal_dates
+            perihelion_date, aphelion_date = calculate_apsidal_dates(
+                plot_date,
+                current_position['x'],
+                current_position['y'],
+                current_position['z'],
+                a,
+                e,
+                i,
+                omega,
+                Omega,
+                obj_name
+            )
+            print(f"  Calculated dates - Perihelion: {perihelion_date}, Aphelion: {aphelion_date}")
+            if perihelion_date:
+                perihelion_date_str = f"<br>Date: {perihelion_date.strftime('%Y-%m-%d')}"
+            if aphelion_date and e < 1:
+                aphelion_date_str = f"<br>Date: {aphelion_date.strftime('%Y-%m-%d')}"
+            print(f"  Date strings - Perihelion: {perihelion_date_str}, Aphelion: {aphelion_date_str}")
+        except Exception as ex:
+            print(f"Could not calculate apsidal dates: {ex}")
+            import traceback
+            traceback.print_exc()
+    else:
+        print("  No current position available for date calculation")
+    
+# ONLY use estimates if we don't have calculated dates
+    if not perihelion_date_str or not aphelion_date_str:
+        # Simple estimation based on orbital period
+        if 'period' in params and params['period'] is not None:
+            try:
+                period_days = params['period']
+                # For demonstration, show estimated dates
+                # In reality, you'd need current mean anomaly to be accurate
+                if not perihelion_date_str:
+                    est_perihelion = plot_date + dt.timedelta(days=period_days/4)
+                    perihelion_date_str = f"<br>Next perihelion: ~{est_perihelion.strftime('%Y-%m-%d')} (estimate)"
+                if not aphelion_date_str:
+                    est_aphelion = plot_date + dt.timedelta(days=3*period_days/4)
+                    aphelion_date_str = f"<br>Next aphelion: ~{est_aphelion.strftime('%Y-%m-%d')} (estimate)"
+            except:
+                pass
+        
+        # Check if we have pre-calculated dates in params
+        if not perihelion_date_str and 'perihelion_dates' in params and params['perihelion_dates']:
+            # Find the next perihelion date after plot_date
+            for date_str in params['perihelion_dates']:
+                try:
+                    peri_date = dt.datetime.strptime(date_str, '%Y-%m-%d')
+                    if peri_date > plot_date:
+                        perihelion_date_str = f"<br>Next perihelion: {date_str}"
+                        break
+                except:
+                    pass
+        
+        if not aphelion_date_str and 'aphelion_dates' in params and params['aphelion_dates']:
+            # Find the next aphelion date after plot_date
+            for date_str in params['aphelion_dates']:
+                try:
+                    apo_date = dt.datetime.strptime(date_str, '%Y-%m-%d')
+                    if apo_date > plot_date:
+                        aphelion_date_str = f"<br>Next aphelion: {date_str}"
+                        break
+                except:
+                    pass
+
+    # CREATE apsides_hover OUTSIDE the if block
+    apsides_hover = [f'<b>Periapsis (final)</b><br>Distance: {r_peri:.3f} AU from {center_object}{perihelion_date_str}']
 
     if e < 1.0:
         apo_perifocal = np.array([-r_apo, 0, 0])
@@ -520,7 +605,8 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         apsides_y.append(apo_final[1])
         apsides_z.append(apo_final[2])
         apsides_text.append('Apoapsis (final)')
-        apsides_hover.append(f'<b>Apoapsis (final)</b><br>Distance: {r_apo:.3f} AU from {center_object}')
+        
+        apsides_hover.append(f'<b>Apoapsis (final)</b><br>Distance: {r_apo:.3f} AU from {center_object}{aphelion_date_str}')
 
     fig.add_trace(go.Scatter3d(
         x=apsides_x,
@@ -568,69 +654,29 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             hovertemplate='<b>Ascending Node</b><br>Where orbit crosses ecliptic plane northward'
         ))
     
-    # Add current position if we have orbital period
-    if 'period' in params and params['period'] is not None:
-        try:
-            # Calculate mean anomaly at plot_date
-            period_days = params['period']
-            
-            # Always use J2000 for calculation, regardless of what's in params
-            epoch = dt.datetime(2000, 1, 1, 12, 0, 0)  # J2000                
-            
-            # Time since epoch
-            time_diff = (plot_date - epoch).total_seconds() / 86400.0  # days
-            
-            # Mean motion (degrees per day)
-            n = 360.0 / period_days
-            
-            # Mean anomaly at plot_date
-            M0 = params.get('M', 0.0)  # Mean anomaly at epoch
-            M = (M0 + n * time_diff) % 360.0
-            M_rad = np.radians(M)
-            
-            # Solve Kepler's equation for eccentric anomaly
-            E = M_rad
-            for _ in range(10):  # Newton-Raphson iteration
-                E = E - (E - e * np.sin(E) - M_rad) / (1 - e * np.cos(E))
-            
-            # True anomaly
-            if e < 1:
-                nu = 2 * np.arctan2(np.sqrt(1 + e) * np.sin(E/2), 
-                                   np.sqrt(1 - e) * np.cos(E/2))
-            else:
-                # Hyperbolic case
-                nu = 2 * np.arctan2(np.sqrt(e + 1) * np.sinh(E/2),
-                                   np.sqrt(e - 1) * np.cosh(E/2))
-            
-            # Position in perifocal frame
-            r_current = a * (1 - e**2) / (1 + e * np.cos(nu))
-            x_pf = r_current * np.cos(nu)
-            y_pf = r_current * np.sin(nu)
-            z_pf = 0
-            
-            # Transform to final frame using the correct, pre-computed matrix
-            pos_perifocal = np.array([x_pf, y_pf, z_pf])
-            pos_final = R_final @ pos_perifocal
-            
-            x_final, y_final, z_final = pos_final[0], pos_final[1], pos_final[2]
-            
-            # Add current position marker
-            fig.add_trace(
-                go.Scatter3d(
-                    x=[x_final], y=[y_final], z=[z_final],
-                    mode='markers+text',
-                    marker=dict(size=8, color='red', symbol='circle'),
-                    text=[f'{obj_name}'],
-                    textposition='top center',
-                    name=f'{obj_name} (final)',
-                    showlegend=True,
-            #        visible='legendonly',
-                    hovertext=f'<b>{obj_name} Position</b><br>Date: {plot_date.strftime("%Y-%m-%d")}<br>' 
-                    'True Anomaly: {np.degrees(nu):.1f}°'
-                )
+# Add current position marker using the fetched position
+    if current_position and 'x' in current_position:
+        fig.add_trace(
+            go.Scatter3d(
+                x=[current_position['x']],
+                y=[current_position['y']], 
+                z=[current_position['z']],
+                mode='markers+text',
+                marker=dict(size=8, color='red', symbol='circle'),
+                text=[f'{obj_name}'],
+                textposition='top center',
+                name=f'{obj_name} (final)',
+                showlegend=True,
+                hovertext=f'<b>{obj_name} Position</b><br>'
+                         f'Date: {plot_date.strftime("%Y-%m-%d")}<br>'
+                         f'X: {current_position["x"]:.3f} AU<br>'
+                         f'Y: {current_position["y"]:.3f} AU<br>'
+                         f'Z: {current_position["z"]:.3f} AU<br>'
+                         f'Distance: {np.sqrt(current_position["x"]**2 + current_position["y"]**2 + current_position["z"]**2):.3f} AU'
             )
-        except Exception as e:
-            print(f"Could not calculate current position: {e}")
+        )
+    else:
+        print(f"Warning: No position data available for {obj_name}")
 
     # Add direction of motion indicator
     # Define the arrow in the perifocal frame at true anomaly nu = 90 degrees
@@ -762,11 +808,24 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     
     return fig
 
-def create_orbital_viz_window(root, objects, planetary_params, parent_planets=None):
+def create_orbital_viz_window(root, objects, planetary_params, parent_planets=None,
+                            current_positions=None, current_date=None):
     """
     Create a window for orbital parameter visualization.
     To be called from palomas_orrery.py
+    
+    Parameters:
+        root: Parent tkinter window
+        objects: List of celestial objects
+        planetary_params: Dictionary of orbital parameters
+        parent_planets: Dictionary mapping planets to their satellites
+        current_positions: Dictionary of current positions {name: {'x': x, 'y': y, 'z': z}}
+        current_date: Current date being displayed
     """
+    # Store these for use in create_visualization
+    stored_positions = current_positions or {}
+    stored_date = current_date or dt.datetime.now()
+
     # Create new window
     viz_window = tk.Toplevel(root)
     viz_window.title("Orbital Parameter Visualization")
@@ -800,6 +859,7 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     show_orbit_steps_var = tk.BooleanVar(value=True)
     show_coordinate_frames_var = tk.BooleanVar(value=True)
     show_final_only_var = tk.BooleanVar(value=False)
+    show_apsidal_markers_var = tk.BooleanVar(value=True)  # ADD THIS LINE
     
     ttk.Checkbutton(control_frame, text="Show Orbit Transformation Steps", 
                     variable=show_orbit_steps_var).grid(row=2, column=0, 
@@ -810,14 +870,17 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     ttk.Checkbutton(control_frame, text="Show Final Orbit Only (Simplified)", 
                     variable=show_final_only_var).grid(row=4, column=0, 
                                                        columnspan=3, padx=20, pady=2, sticky='w')
+    ttk.Checkbutton(control_frame, text="Show Perihelion/Aphelion Markers",   # ADD THESE LINES
+                    variable=show_apsidal_markers_var).grid(row=5, column=0, 
+                                                            columnspan=3, padx=20, pady=2, sticky='w')
     
     # Add separator
-    ttk.Separator(control_frame, orient='horizontal').grid(row=5, column=0, 
+    ttk.Separator(control_frame, orient='horizontal').grid(row=6, column=0, 
                                                           columnspan=3, sticky='ew', pady=10)
     
     # Orbital parameters display
     param_frame = ttk.LabelFrame(control_frame, text="Orbital Elements")
-    param_frame.grid(row=6, column=0, columnspan=3, padx=5, pady=5, sticky='ew')
+    param_frame.grid(row=7, column=0, columnspan=3, padx=5, pady=5, sticky='ew')
     
     # Parameter labels
     param_labels = {}
@@ -839,7 +902,7 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
         unit_label.grid(row=idx, column=2, padx=5, pady=2, sticky='w')
         param_labels[key] = value_label
     
-    # Create visualization button
+# Create visualization button
     def create_visualization():
         selected_obj = object_var.get()
         if not selected_obj:
@@ -861,12 +924,68 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
                     else:
                         label.config(text="---")
             
+            # Get current position for the selected object
+            current_position = None
+            current_date = stored_date  # Use the stored date
+            
+            # Check if we have a passed position for this object
+            if selected_obj in stored_positions:
+                current_position = stored_positions[selected_obj]
+                print(f"Using passed position for {selected_obj}: x={current_position['x']:.3f}, y={current_position['y']:.3f}, z={current_position['z']:.3f}")
+            else:
+                print(f"No position data passed for {selected_obj}, fetching now...")
+                
+                # Import fetch_trajectory from the main app
+                try:
+                    from palomas_orrery_helpers import fetch_trajectory
+                    
+                    # Get center info (assuming Sun for now)
+            #        center_id = 10  # Sun's ID
+                    center_id = '10'  # Sun's ID as a string
+                    
+                    # Find the object in the objects list
+                    obj_id = None
+                    id_type = None
+                    for obj in objects:
+                        if obj['name'] == selected_obj:
+                    #        obj_id = obj['id']
+                            obj_id = str(obj['id'])  # Ensure ID is a string too
+                            id_type = obj.get('id_type', None)
+                            break
+                    
+                    if obj_id:
+                        print(f"  Fetching position for {selected_obj} (ID: {obj_id})...")
+                        # Fetch the position
+                        trajectory = fetch_trajectory(
+                            obj_id,
+                            [current_date.strftime('%Y-%m-%d')],
+                            center_id=center_id,
+                            id_type=id_type
+                        )
+                        
+                        if trajectory and len(trajectory) > 0 and trajectory[0]:
+                            current_position = trajectory[0]
+                            if 'x' in current_position:
+                                print(f"  Fetched position: ({current_position['x']:.3f}, {current_position['y']:.3f}, {current_position['z']:.3f})")
+                            else:
+                                print(f"  Position data incomplete")
+                        else:
+                            print(f"  No position data returned")
+                    else:
+                        print(f"  Could not find object ID for {selected_obj}")
+                        
+                except Exception as ex:
+                    print(f"  Could not fetch current position: {ex}")
+                    import traceback
+                    traceback.print_exc()
+
             # Determine the correct boolean values based on the checkboxes
             show_final_only = show_final_only_var.get()
             
             # If "Show Final Only" is checked, it overrides the "Show Steps" option.
             show_steps_val = show_orbit_steps_var.get() and not show_final_only
             show_axes_val = show_coordinate_frames_var.get()
+            show_apsidal_val = show_apsidal_markers_var.get()            
 
             # Create an empty figure object to pass to the function.
             # The function will clear and build this figure internally.
@@ -879,10 +998,12 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
                 planetary_params,
                 show_steps=show_steps_val, # Corrected parameter name
                 show_axes=show_axes_val,    # Corrected parameter name
-                parent_planets=parent_planets # Add this argument
+                parent_planets=parent_planets, # Add this argument
+                show_apsidal_markers=show_apsidal_val,
+                plot_date=current_date,        # Changed from dt.datetime.now() to current_date
+                current_position=current_position  # Added this new parameter
             )
             
-        #    if fig:
             if fig.data:    
                 # Show in browser
                 # Generate a descriptive default filename for the plot
@@ -897,7 +1018,7 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     
     create_button = ttk.Button(control_frame, text="Create Visualization", 
                               command=create_visualization)
-    create_button.grid(row=7, column=0, columnspan=3, pady=20, padx=5)
+    create_button.grid(row=8, column=0, columnspan=3, pady=20, padx=5)
     
     # Information text
     info_frame = ttk.LabelFrame(main_frame, text="Understanding the Visualization")

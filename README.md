@@ -7,7 +7,7 @@ Paloma's Orrery is an advanced astronomical visualization software that brings t
 Created by a civil and environmental engineer with a passion for space exploration, Paloma's Orrery bridges the gap between scientific accuracy and visual beauty, making astronomy accessible to educators, students, and space enthusiasts.
 
 -- Tony Quintanilla, Chicago, 
-   🚀 Updated: July 29, 2025 
+   🚀 Updated: August 3, 2025 
 
    tonyquintanilla@gmail.com
    website: https://sites.google.com/view/tony-quintanilla
@@ -230,11 +230,13 @@ Orbits by center object:
    - Automatically calculates and displays when objects reach perihelion/aphelion
    - Works for all orbiting bodies: planets, asteroids, comets, and spacecraft
    - Intelligent handling of elliptical and hyperbolic orbits
+   - **Unified date calculations**: Both main plot and orbital parameter visualization show identical apsidal dates   
 
 2. **Dual marker system**:
    - **Ideal apsidal points**: Calculated from orbital elements showing theoretical perihelion/aphelion positions
    - **Actual apsidal markers**: Fetched from JPL Horizons for specific dates, showing true positions
    - Visual validation: Compare ideal vs actual positions to verify orbital accuracy
+   - **Consistent positioning**: All visualizations use actual JPL Horizons positions for accuracy
 
 3. **Enhanced information display**:
    - Hover over markers to see predicted dates and distances
@@ -270,6 +272,7 @@ Orbits by center object:
    - **`shutdown_handler.py`**: Clean application termination
    - **`save_utils.py`**: Export functionality
    - **`constants_new.py`**: Visual and physical constants; object descriptions for hovertext
+- **Cross-module data sharing**: Position and trajectory data fetched in the main application is efficiently passed to specialized visualizations, ensuring consistency and reducing computational overhead.
 
 ### Technical Innovation
 
@@ -281,6 +284,11 @@ Orbits by center object:
 - **Messier Catalog**: Customized file of deep-sky objects including brighter nebulae, star clusters, and other objects
 
 **Smart Processing Pipeline**: Raw astronomical data undergoes sophisticated processing through specialized modules. The solar system pipeline handles orbit caching with selective updates, while the stellar pipeline manages spectral classification, and multi-catalog cross-matching.
+
+**Unified Data Architecture**: The software maintains consistency across all visualization modes:
+- Position data fetched once from JPL Horizons is shared across all visualization windows
+- Apsidal date calculations use actual current positions for accuracy
+- Eliminates redundant API calls and ensures all views show identical information
 
 **Precise Orbital Mechanics**: The software now includes sophisticated orbital dynamics calculations through the apsidal markers system:
 - **Real-time orbital position analysis**: Calculates an object's true anomaly from its current 3D position.
@@ -433,13 +441,11 @@ This comprehensive flowchart illustrates how the program modules and functions w
   - Incremental update capabilities
   - Proper error handling and backup creation
 
-**`orbital_param_viz.py`** ✅ **NEW: ORBITAL MECHANICS VISUALIZATION**
-- **Core functionality**: Provides a standalone, interactive 3D visualization to demonstrate the principles of orbital mechanics. It is launched from the main GUI. It provides an educational deep-dive into the three key rotational elements of an orbit: Argument of Periapsis (ω), Inclination (i), and Longitude of the Ascending Node (Ω).
-- **Key Features**:
-  - **Educational Focus**: Renders the step-by-step transformation of an orbit from its 2D perifocal frame to its final 3D ecliptic frame using the six Keplerian orbital elements.
-  - **Interactive Learning**: Allows users to select any celestial body and see how its unique orbital parameters define its path.
-  - **Dynamic Centering**: Automatically sets the central body to the parent planet for satellite visualizations (e.g., Moon around Earth).
-  - **Comprehensive Annotations**: Includes detailed on-screen text explaining each step of the transformation, making complex concepts accessible.
+**`orbital_param_viz.py`** ✅ **Orbital transformation visualizer**
+- **Core functionality**: Interactive 3D visualization showing how Keplerian orbital elements transform orbits from perifocal to ecliptic reference frames.
+- **Key features**: Step-by-step rotation animations, coordinate frame displays, real-time parameter adjustments, accurate apsidal date calculations.
+- **Integration**: Launched from main GUI with automatic position data sharing, ensuring consistency across all visualizations.
+- **Data accuracy**: Uses actual JPL Horizons positions rather than approximate calculations for precise object placement.
 
 **`orrery_integration.py`** ✅ **ORBIT SELECTION & INTEGRATION**
 - **Core functionality**: Acts as a bridge between the main orrery and the two orbit systems (`idealized_orbits` and `refined_orbits`).
