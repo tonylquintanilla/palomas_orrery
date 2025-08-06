@@ -883,22 +883,10 @@ planet_poles = {
     'Pluto': {'ra': 132.99, 'dec': -6.16}
 }
 
-def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):  # ADD date=None parameter
-
+def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):
     """
     Plot a hyperbolic orbit for interstellar objects or comets with e > 1.
-    
-    For hyperbolic orbits, we only plot the portion of the trajectory that passes
-    through the solar system, not the entire (infinite) hyperbola.
-    
-    Parameters:
-        obj_name (str): Name of the object
-        params (dict): Orbital parameters including a, e, i, omega, Omega
-        color (str): Color for the orbit line
-        fig (plotly.graph_objects.Figure): Figure to add the orbit to
-    
-    Returns:
-        bool: True if successfully plotted, False otherwise
+    Enhanced version that handles high eccentricity cases.
     """
     try:
         a = params.get('a', 0)  # Semi-major axis (negative for hyperbolic orbits)
@@ -915,22 +903,63 @@ def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):  # ADD date=
         # Calculate perihelion distance
         q = abs(a) * (e - 1)  # Perihelion distance for hyperbolic orbit
         
+        # Determine a reasonable maximum distance to plot
+        # For high eccentricity, limit the visible range
+        if e > 10:
+            max_distance = min(50, q * 20)  # Very narrow trajectory
+        elif e > 5:
+            max_distance = min(100, q * 30)  # Narrow trajectory
+        else:
+            max_distance = 200  # Standard range for moderate eccentricity
+        
         # For hyperbolic orbits, the true anomaly range where the object is bound
         # to the solar system is limited by the asymptotic true anomaly
         theta_inf = np.arccos(-1/e)  # Asymptotic true anomaly
         
+        # Special handling for high eccentricity
+        if e > 5:
+            # Calculate angle where r = max_distance
+            cos_theta_max = ((abs(a) * (e**2 - 1) / max_distance) - 1) / e
+            
+            if -1 <= cos_theta_max <= 1:
+                theta_visible = np.arccos(cos_theta_max)
+                theta_limit = min(theta_inf - 0.01, theta_visible)
+            else:
+                # Very extreme case
+                theta_limit = min(theta_inf - 0.01, np.pi/6)  # Max 30 degrees
+            
+            margin = 0.01  # Small margin for extreme cases
+            num_points = 1000  # More points for smoother curve
+        else:
+            theta_limit = theta_inf
+            margin = 0.1  # Standard margin
+            num_points = 500
+        
         # Create array of true anomaly values
-        # We'll plot from -theta_inf + small margin to +theta_inf - small margin
-        margin = 0.1  # radians
-        theta = np.linspace(-theta_inf + margin, theta_inf - margin, 500)
+        theta = np.linspace(-theta_limit + margin, theta_limit - margin, num_points)
         
         # Calculate radius for each true anomaly using hyperbolic orbit equation
-        # For hyperbolic orbits: r = a(e^2 - 1) / (1 + e*cos(theta))
-        # Since a is negative for hyperbolic orbits, we use abs(a)
         r = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta))
         
-        # Remove any invalid points (though there shouldn't be any with our theta range)
-        valid_points = r > 0
+        # Filter points within reasonable range
+        valid_points = (r > 0) & (r <= max_distance)
+        
+        # Check if we have enough valid points
+        if np.sum(valid_points) < 20:
+            # Focus on perihelion region for extreme cases
+            print(f"Note: {obj_name} has extreme eccentricity (e={e:.2f}), showing perihelion region only")
+            theta_narrow = np.linspace(-0.1, 0.1, 100)
+            r_narrow = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta_narrow))
+            valid_narrow = (r_narrow > 0) & (r_narrow <= max_distance * 1.5)
+            
+            if np.sum(valid_narrow) > 5:
+                theta = theta_narrow[valid_narrow]
+                r = r_narrow[valid_narrow]
+                valid_points = np.ones_like(r, dtype=bool)
+            else:
+                print(f"Warning: Unable to plot meaningful trajectory for {obj_name} with e={e:.2f}")
+                return False
+        
         theta = theta[valid_points]
         r = r[valid_points]
         
@@ -944,98 +973,68 @@ def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):  # ADD date=
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
         
-        # Apply orbital element rotations (same as for elliptical orbits)
-        # Note: We need to import rotate_points from the main module
-        # For now, I'll include a simplified version
-        
-        # Rotation matrices
-        def rotate_z(angle):
-            return np.array([
-                [np.cos(angle), -np.sin(angle), 0],
-                [np.sin(angle), np.cos(angle), 0],
-                [0, 0, 1]
-            ])
-        
-        def rotate_x(angle):
-            return np.array([
-                [1, 0, 0],
-                [0, np.cos(angle), -np.sin(angle)],
-                [0, np.sin(angle), np.cos(angle)]
-            ])
-        
-        # Apply rotations
-        # 1. Rotate by argument of perihelion (ω) around z-axis
-        rot_omega = rotate_z(omega_rad)
-        coords = np.vstack([x_orbit, y_orbit, z_orbit])
-        coords = rot_omega @ coords
+        # Apply orbital element rotations
+        # 1. Rotate by argument of perihelion (omega) around z-axis
+        x1 = x_orbit * np.cos(omega_rad) - y_orbit * np.sin(omega_rad)
+        y1 = x_orbit * np.sin(omega_rad) + y_orbit * np.cos(omega_rad)
+        z1 = z_orbit
         
         # 2. Rotate by inclination (i) around x-axis
-        rot_i = rotate_x(i_rad)
-        coords = rot_i @ coords
+        x2 = x1
+        y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
+        z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
         
-        # 3. Rotate by longitude of ascending node (Ω) around z-axis
-        rot_Omega = rotate_z(Omega_rad)
-        coords = rot_Omega @ coords
+        # 3. Rotate by longitude of ascending node (Omega) around z-axis
+        x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+        y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+        z_final = z2
         
-        x_final, y_final, z_final = coords[0], coords[1], coords[2]
+        # Create hover text with eccentricity warning for extreme cases
+        if e > 10:
+            hover_text = f"{obj_name} Hyperbolic Orbit<br>EXTREME eccentricity: e={e:.2f}<br>Perihelion: q={q:.3f} AU<br>Nearly straight-line trajectory"
+        elif e > 5:
+            hover_text = f"{obj_name} Hyperbolic Orbit<br>High eccentricity: e={e:.2f}<br>Perihelion: q={q:.3f} AU<br>Very narrow trajectory"
+        else:
+            hover_text = f"{obj_name} Hyperbolic Orbit<br>Eccentricity: e={e:.2f}<br>Perihelion: q={q:.3f} AU"
         
-        # Create hover text with orbital information
-        hover_text = f"{obj_name} Hyperbolic Orbit<br>e={e:.3f}<br>q={q:.3f} AU<br>i={i:.1f}°"
+        # Add the trace to the figure
+        fig.add_trace(go.Scatter3d(
+            x=x_final,
+            y=y_final,
+            z=z_final,
+            mode='lines',
+            line=dict(
+                color=color,
+                width=2,
+                dash='dot'  # Dotted line for hyperbolic orbits
+            ),
+            name=f"{obj_name} orbit",
+            hovertemplate=hover_text + '<extra></extra>',
+            showlegend=True
+        ))
         
-        # Add trace to figure
-        fig.add_trace(
-            go.Scatter3d(
-                x=x_final,
-                y=y_final,
-                z=z_final,
-                mode='lines',
-                line=dict(
-                    dash='dot',
-                    width=2,
-                    color=color
-                ),
-                name=f"{obj_name} Ideal Orbit",
-                text=[hover_text] * len(x_final),
-                customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
-            )
-        )
-
-        # Optionally, add markers for perihelion and current position
-        # Perihelion is at theta = 0
-        perihelion_idx = np.argmin(np.abs(theta))
-
-        # Calculate date for perihelion if available
-        perihelion_date_str = ""
-        if date is not None:
-            perihelion_date_str = f"<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}"
-
-        fig.add_trace(
-            go.Scatter3d(
-                x=[x_final[perihelion_idx]],
-                y=[y_final[perihelion_idx]],
-                z=[z_final[perihelion_idx]],
-                mode='markers',
-                marker=dict(
-                    size=5,
-                    color=color_map(obj_name),
-                    symbol='square-open'
-                    ),
-                name=f"{obj_name} Perihelion",
-                text=[f"{obj_name} Perihelion{perihelion_date_str}<br>q={q:.3f} AU"],
-                customdata=[f"{obj_name} Perihelion"],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=True
-            )
-        )
+        # Add perihelion marker
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[len(x_final)//2]],  # Middle point (closest to perihelion)
+            y=[y_final[len(y_final)//2]],
+            z=[z_final[len(z_final)//2]],
+            mode='markers',
+            marker=dict(
+                size=6,
+                color='red',
+                symbol='diamond'
+            ),
+            name=f"{obj_name} perihelion",
+            hovertemplate=f"{obj_name} Perihelion<br>Distance: {q:.3f} AU<extra></extra>",
+            showlegend=False
+        ))
         
-        print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.3f}, q={q:.3f} AU")
+        print(f"Successfully plotted hyperbolic orbit for {obj_name}: e={e:.2f}, q={q:.3f} AU")
         return True
         
     except Exception as e:
-        print(f"Error plotting hyperbolic orbit for {obj_name}: {e}")
-        return False        
+        print(f"Error plotting hyperbolic orbit for {obj_name}: {str(e)}")
+        return False
 
 # this function adjusts the orbital elements for phobos and deimos based on perturbations
 def calculate_mars_satellite_elements(date, satellite_name):
@@ -2526,35 +2525,14 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         color_map if color is None else lambda x: color  # Use provided color or color_map
     )
 
-    """
-    fig.add_trace(
-        go.Scatter3d(
-            x=[x_final[apogee_idx]],
-            y=[y_final[apogee_idx]],
-            z=[z_final[apogee_idx]],
-            mode='markers',
-            marker=dict(
-                size=5,
-                color=color,
-                symbol='square-open'
-            ),
-            name=f"Moon Apogee",
-            text=[f"Moon Apogee<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}<br>Distance: {r[apogee_idx]:.6f} AU"],
-            customdata=[f"Moon Apogee"],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    )
-    """
-
     print(f"  Generated {num_points} points for {orbital_fraction:.1f} orbits")
 
     return fig
 
-def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points):
+def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_distance=100):
     """
     Generate points for a hyperbolic orbit trajectory.
-    Returns x, y, z coordinates in the heliocentric frame.
+    Enhanced to handle very high eccentricity cases.
     
     Parameters:
         a: Semi-major axis (negative for hyperbolic orbits)
@@ -2563,6 +2541,7 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points):
         omega: Argument of perihelion in degrees
         Omega: Longitude of ascending node in degrees
         rotate_points: Function to rotate points
+        max_distance: Maximum distance from Sun to plot (AU)
     
     Returns:
         tuple: (x_final, y_final, z_final, q) where q is perihelion distance
@@ -2573,12 +2552,63 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points):
     # For hyperbolic orbits, the true anomaly range is limited
     theta_inf = np.arccos(-1/e)  # Asymptotic true anomaly
     
+    # For very high eccentricity, we need special handling
+    if e > 5:
+        # High eccentricity: focus on the visible region
+        # Calculate the true anomaly where r = max_distance
+        # r = a(e^2 - 1) / (1 + e*cos(theta))
+        # Solving for theta: cos(theta) = (a(e^2 - 1)/r - 1) / e
+        
+        cos_theta_max = ((abs(a) * (e**2 - 1) / max_distance) - 1) / e
+        
+        if cos_theta_max >= -1 and cos_theta_max <= 1:
+            theta_visible = np.arccos(cos_theta_max)
+            # Use the smaller angle
+            theta_limit = min(theta_inf - 0.01, theta_visible)
+        else:
+            # Very extreme case - just show near perihelion
+            theta_limit = min(theta_inf - 0.01, np.pi/4)  # Max 45 degrees
+        
+        # Use more points for smoother curve
+        num_points = 1000
+    else:
+        # Standard approach for moderate eccentricity
+        theta_limit = theta_inf - 0.1  # Use 0.1 radian margin
+        num_points = 500
+    
     # Create array of true anomaly values
-    margin = 0.1  # radians, to avoid numerical issues at asymptotes
-    theta = np.linspace(-theta_inf + margin, theta_inf - margin, 500)
+    theta = np.linspace(-theta_limit, theta_limit, num_points)
     
     # Calculate radius for each true anomaly
     r = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta))
+    
+    # Filter out points that are too far from the Sun
+    valid_mask = (r > 0) & (r <= max_distance)
+    
+    # Check if we have enough valid points
+    if np.sum(valid_mask) < 50:
+        # If too few points, focus on perihelion region
+        if e > 10:
+            # For extremely high eccentricity, use very small angle range
+            theta_perihelion = np.linspace(-0.05, 0.05, 200)  # ±2.9 degrees
+        else:
+            # For high eccentricity, use small angle range
+            theta_perihelion = np.linspace(-np.pi/6, np.pi/6, 500)  # ±30 degrees
+        
+        r_perihelion = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta_perihelion))
+        valid_perihelion = (r_perihelion > 0) & (r_perihelion <= max_distance * 1.5)
+        
+        if np.sum(valid_perihelion) > 10:
+            theta = theta_perihelion[valid_perihelion]
+            r = r_perihelion[valid_perihelion]
+        else:
+            # Last resort: just create a small arc at perihelion
+            print(f"Warning: Extremely high eccentricity (e={e:.2f}), showing minimal trajectory")
+            theta = np.linspace(-0.01, 0.01, 20)
+            r = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta))
+    else:
+        theta = theta[valid_mask]
+        r = r[valid_mask]
     
     # Convert to Cartesian coordinates in orbital plane
     x_orbit = r * np.cos(theta)
@@ -2777,7 +2807,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             mode='lines',
                             line=dict(dash='dot', width=1, color=color_map(obj_name)),
                             name=f"{obj_name} Ideal Orbit{epoch_str}",
-                            text=[f"{obj_name} Hyperbolic Orbit<br>e={e:.3f}<br>q={q:.3f} AU"] * len(x_final),
+                            text=[f"{obj_name} Hyperbolic Orbit<br>eccentricity, e={e:.5f}<br>periapsis distance, q={q:.5f} AU"] * len(x_final),
                             customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),
                             hovertemplate='%{text}<extra></extra>',
                             showlegend=True                    
@@ -2822,7 +2852,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
 
                     plotted.append(obj_name)
 
-                    print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.3f}, q={q:.3f} AU")
+                    print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.5f}, q={q:.5f} AU")
                     
                 except Exception as err:
                     print(f"Error plotting hyperbolic orbit for {obj_name}: {err}")

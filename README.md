@@ -249,9 +249,18 @@ Orbits by center object:
 - Solar visualizations: 
    - **`orbit_data_manager.py`**: Intelligent JPL Horizons caching with validation
    - **`data_processing.py`**: Coordinate transformations and preprocessing
+   - **`test_orbit_cache.py`**: Comprehensive cache testing
+   - **`verify_orbit_cache`**.py: Cache health verification
+   - **`idealized_orbits.py`**: Theoretical orbital mechanics with enhanced hyperbolic orbit support
+   - **`orbital_param_viz.py`**: Interactive orbital parameter visualization with full conic section support
+   - **`apsidal_markers.py`**: Orbital dynamics calculations for perihelion/apohelion dates
 - Stellar visualizations:
    - **`data_acquisition.py`**: Stellar data from Hipparcos/Gaia
    - **`star_properties.py`**: SIMBAD integration for stellar properties
+- All visualizations:
+   - **`shutdown_handler.py`**: Clean application termination
+   - **`save_utils.py`**: Export functionality
+   - **`constants_new.py`**: Visual and physical constants; object descriptions for hovertext
 
 ### Visualization Engines
 - Solar visualizations:
@@ -446,6 +455,14 @@ This comprehensive flowchart illustrates how the program modules and functions w
 - **Key features**: Step-by-step rotation animations, coordinate frame displays, real-time parameter adjustments, accurate apsidal date calculations.
 - **Integration**: Launched from main GUI with automatic position data sharing, ensuring consistency across all visualizations.
 - **Data accuracy**: Uses actual JPL Horizons positions rather than approximate calculations for precise object placement.
+- **Eccentricity visualization**: Interactive slider showing orbit shapes from circle (e=0) through ellipse, to hyperbola (e>1)
+   - ***High eccentricity support***: Properly handles extreme hyperbolic orbits (e>5) including interstellar objects
+   - ***Near-parabolic orbit handling***: Accurate visualization of comets with eccentricity very close to 1.0
+   - ***Dual semi-major axis definitions***: Correctly distinguishes between:
+      - Orbital mechanics 'a' parameter (can be negative for hyperbolic orbits)
+      - Geometric semi-major axis (actual distance from center to vertex)
+   - ***Dynamic plot scaling***: Automatically adjusts view to show relevant features for all orbit types
+   - ***6-decimal precision***: Shows eccentricity to 6 decimal places for accurate near-parabolic cases
 
 **`orrery_integration.py`** ✅ **ORBIT SELECTION & INTEGRATION**
 - **Core functionality**: Acts as a bridge between the main orrery and the two orbit systems (`idealized_orbits` and `refined_orbits`).

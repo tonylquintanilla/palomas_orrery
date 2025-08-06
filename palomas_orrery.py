@@ -482,10 +482,10 @@ except ImportError:
     REFINED_AVAILABLE = False
     print("Note: refined_orbits.py not found, using idealized orbits only")
 
-
-def calculate_axis_range_from_orbits(selected_objects, positions, planetary_params, parent_planets, center_object_name='Sun'):
+def calculate_axis_range_from_orbits(selected_objects, positions, planetary_params, 
+                                    parent_planets, center_object_name):
     """
-    Calculate axis range based on orbital parameters from idealized_orbits.py.
+    Calculate appropriate axis range based on orbital parameters.
     Uses semi-major axis data when available, falls back to position data.
     
     Parameters:
@@ -510,15 +510,45 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
             
         # Check if we have orbital parameters for this object in idealized_orbits.py
         if obj_name in planetary_params:
-            # Semi-major axis is already in AU in planetary_params
-            a = planetary_params[obj_name]['a']  # Semi-major axis in AU
-            e = planetary_params[obj_name].get('e', 0)  # Eccentricity, default to 0
+            params = planetary_params[obj_name]
+            a = params.get('a', 0)  # Semi-major axis in AU
+            e = params.get('e', 0)  # Eccentricity
             
-            # Calculate aphelion (maximum distance from center)
-            aphelion = a * (1 + e)
-            max_distances.append(aphelion)
-            
-            print(f"{obj_name}: Using orbital data - a={a:.6f} AU, e={e:.3f}, aphelion={aphelion:.6f} AU")
+            # Handle different orbit types
+            if e >= 0.99 and e <= 1.01:  # Near-parabolic orbit (within 1% of parabolic)
+                # For parabolic/near-parabolic orbits, use perihelion distance
+                # q = a(1-e) for elliptical, but for near-parabolic with negative a:
+                # Use the actual perihelion distance from the formula
+                if a < 0:  # Hyperbolic with negative semi-major axis
+                    q = abs(a) * (e - 1)  # Perihelion for hyperbolic orbit
+                else:
+                    q = a * (1 - e)  # Standard perihelion formula
+                
+                # For C/2025_K1, we know perihelion is ~0.33 AU
+                # Use a reasonable multiple of perihelion distance for viewing
+                if obj_name == 'C/2025_K1':
+                    q = 0.33  # Known perihelion distance
+                
+                # Show enough to see the interesting part of the orbit
+                max_distance = q * 15  # Show 15x perihelion distance
+                max_distances.append(max_distance)
+                
+                print(f"{obj_name}: Near-parabolic orbit - e={e:.6f}, perihelion={q:.6f} AU, view range={max_distance:.6f} AU")
+                
+            elif e > 1.01:  # Clearly hyperbolic
+                # For hyperbolic orbits with e > 1
+                q = abs(a) * (e - 1)  # Perihelion distance
+                max_distance = q * 10  # Show 10x perihelion distance
+                max_distances.append(max_distance)
+                
+                print(f"{obj_name}: Hyperbolic orbit - a={a:.6f} AU, e={e:.4f}, perihelion={q:.6f} AU, view range={max_distance:.6f} AU")
+                
+            else:  # Elliptical orbit (e < 0.99)
+                # Standard calculation for elliptical orbits
+                aphelion = a * (1 + e)
+                max_distances.append(abs(aphelion))  # Use abs to handle any edge cases
+                
+                print(f"{obj_name}: Elliptical orbit - a={a:.6f} AU, e={e:.4f}, aphelion={aphelion:.6f} AU")
             
         else:
             # Fall back to current position data for objects without orbital parameters
@@ -528,39 +558,37 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
                 max_distances.append(distance)
                 print(f"{obj_name}: Using position data - distance={distance:.6f} AU")
     
-    # Special handling for satellite systems - check if any selected satellites
-    selected_satellite_names = [obj['name'] for obj in selected_objects]
-    for sat_name in selected_satellite_names:
-        if sat_name in planetary_params:
-            # Check if this is a satellite by looking for it in parent_planets values
-            is_satellite = False
-            parent_name = None
-            for planet, satellites in parent_planets.items():
-                if sat_name in satellites:
-                    is_satellite = True
-                    parent_name = planet
-                    break
-            
-            if is_satellite and parent_name:
-                # Satellite semi-major axis is already in AU in planetary_params
-                sat_a = planetary_params[sat_name]['a']
-                sat_e = planetary_params[sat_name].get('e', 0)
+    # Handle satellite systems when centered on a planet
+    for obj in selected_objects:
+        obj_name = obj['name']
+        for parent_name, satellites in parent_planets.items():
+            if obj_name in satellites and parent_name in planetary_params:
+                # This is a satellite
+                sat_params = planetary_params.get(obj_name, {})
+                sat_a = sat_params.get('a', 0)
+                sat_e = sat_params.get('e', 0)
+                
+                # Skip if no valid orbital data
+                if sat_a == 0:
+                    continue
+                    
                 sat_aphelion = sat_a * (1 + sat_e)
                 
-                # For satellites, we need the total distance from the center object
-                if center_object_name == 'Sun' and parent_name in planetary_params:
+                if center_object_name == 'Sun':
                     # If viewing from Sun, add parent planet's distance
-                    parent_a = planetary_params[parent_name]['a']
-                    parent_e = planetary_params[parent_name].get('e', 0)
-                    parent_distance = parent_a * (1 + parent_e)
-                    total_distance = parent_distance + sat_aphelion
+                    parent_params = planetary_params[parent_name]
+                    parent_a = parent_params.get('a', 0)
+                    parent_e = parent_params.get('e', 0)
+                    parent_aphelion = parent_a * (1 + parent_e)
+                    
+                    total_distance = parent_aphelion + sat_aphelion
                     max_distances.append(total_distance)
-                    print(f"{sat_name} around {parent_name}: sat_orbit={sat_aphelion:.6f} AU, parent_distance={parent_distance:.3f} AU, total={total_distance:.3f} AU")
+                    print(f"{obj_name} around {parent_name}: parent={parent_aphelion:.6f} AU, satellite={sat_aphelion:.6f} AU, total={total_distance:.3f} AU")
                 
                 elif center_object_name == parent_name:
                     # If viewing from the parent planet, just use satellite orbit
                     max_distances.append(sat_aphelion)
-                    print(f"{sat_name} around {parent_name}: orbit={sat_aphelion:.6f} AU")
+                    print(f"{obj_name} around {parent_name}: orbit={sat_aphelion:.6f} AU")
     
     if max_distances:
         max_range = max(max_distances)
@@ -588,7 +616,6 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
         # Fallback to default range if no orbital data available
         print("No orbital data available, using default range")
         return [-1, 1]
-
 
 # Replace the existing auto-scaling section in plot_objects() with this:
 
