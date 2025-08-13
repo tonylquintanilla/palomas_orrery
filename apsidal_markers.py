@@ -16,7 +16,307 @@ import plotly.graph_objects as go
 from constants_new import KNOWN_ORBITAL_PERIODS, color_map
 from datetime import datetime, timedelta
 
-# In apsidal_markers.py, add these functions:
+def add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_map):
+    """
+    Add legend entries explaining why actual apsidal markers aren't shown
+    when dates are outside JPL Horizons' range.
+    Now creates separate legend entries for perihelion and aphelion.
+    """
+    from datetime import datetime
+    import plotly.graph_objects as go
+    
+    # JPL Horizons data limit
+    JPL_MAX_DATE = datetime(2199, 12, 29)
+    JPL_MIN_DATE = datetime(1900, 1, 1)
+    
+    added_notes = False
+    
+    # Check and add perihelion note separately
+    if perihelion_date:
+        if perihelion_date > JPL_MAX_DATE:
+            date_str = perihelion_date.strftime('%Y-%m-%d')
+            note_text = f"{obj_name}: Next perihelion: {date_str} (beyond JPL limit)"
+            
+            # Add an invisible trace for perihelion
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[None],  # No actual points
+                    y=[None],
+                    z=[None],
+                    mode='markers',
+                    marker=dict(
+                        size=6,
+                        color=color_map(obj_name),
+                        symbol='square'  # Open square for perihelion
+                    ),
+                    name=note_text,
+                    showlegend=True,
+                    hoverinfo='skip'  # Don't show hover for this invisible trace
+                )
+            )
+            added_notes = True
+            
+        elif perihelion_date < JPL_MIN_DATE:
+            date_str = perihelion_date.strftime('%Y-%m-%d')
+            note_text = f"{obj_name}: Perihelion: {date_str} (before JPL limit)"
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[None],
+                    y=[None],
+                    z=[None],
+                    mode='markers',
+                    marker=dict(
+                        size=6,
+                        color=color_map(obj_name),
+                        symbol='square-open'
+                    ),
+                    name=note_text,
+                    showlegend=True,
+                    hoverinfo='skip'
+                )
+            )
+            added_notes = True
+    
+    # Check and add aphelion note separately
+    if aphelion_date:
+        if aphelion_date > JPL_MAX_DATE:
+            date_str = aphelion_date.strftime('%Y-%m-%d')
+            note_text = f"{obj_name}: Next aphelion: {date_str} (beyond JPL limit)"
+            
+            # Add an invisible trace for aphelion
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[None],  # No actual points
+                    y=[None],
+                    z=[None],
+                    mode='markers',
+                    marker=dict(
+                        size=6,
+                        color=color_map(obj_name),
+                        symbol='square'  # Solid square for aphelion
+                    ),
+                    name=note_text,
+                    showlegend=True,
+                    hoverinfo='skip'  # Don't show hover for this invisible trace
+                )
+            )
+            added_notes = True
+            
+        elif aphelion_date < JPL_MIN_DATE:
+            date_str = aphelion_date.strftime('%Y-%m-%d')
+            note_text = f"{obj_name}: Aphelion: {date_str} (before JPL limit)"
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[None],
+                    y=[None],
+                    z=[None],
+                    mode='markers',
+                    marker=dict(
+                        size=6,
+                        color=color_map(obj_name),
+                        symbol='square'
+                    ),
+                    name=note_text,
+                    showlegend=True,
+                    hoverinfo='skip'
+                )
+            )
+            added_notes = True
+    
+    return added_notes
+
+def compute_apsidal_dates_with_notes(obj_name, params, current_date=None):
+    """
+    Compute perihelion/aphelion dates from TP and orbital period.
+    Returns both the dates and whether they're within JPL range.
+    
+    Parameters:
+        obj_name: Name of the object
+        params: Dictionary containing TP
+        current_date: Current date (datetime object) to find next apsidal dates after
+    
+    Returns:
+        tuple: (perihelion_date, aphelion_date, perihelion_in_range, aphelion_in_range)
+    """
+    from astropy.time import Time
+    from constants_new import KNOWN_ORBITAL_PERIODS
+    from datetime import timedelta, datetime
+    
+    # JPL Horizons data limits
+    JPL_MIN_DATE = datetime(1900, 1, 1)
+    JPL_MAX_DATE = datetime(2199, 12, 29)
+    
+    if current_date is None:
+        current_date = datetime.now()
+    
+    next_perihelion = None
+    next_aphelion = None
+    perihelion_in_range = False
+    aphelion_in_range = False
+    
+    if 'TP' in params:
+        tp_jd = params['TP']
+        tp_time = Time(tp_jd, format='jd')
+        tp_datetime = tp_time.datetime
+        
+        # Get orbital period
+        if obj_name in KNOWN_ORBITAL_PERIODS and KNOWN_ORBITAL_PERIODS[obj_name] is not None:
+            period_days = KNOWN_ORBITAL_PERIODS[obj_name]
+            
+            # Find the next perihelion after current_date
+            perihelion = tp_datetime
+            while perihelion < current_date:
+                perihelion += timedelta(days=period_days)
+            next_perihelion = perihelion
+            
+            # Check if it's within JPL range
+            perihelion_in_range = JPL_MIN_DATE <= next_perihelion <= JPL_MAX_DATE
+            
+            # Calculate the corresponding aphelion (halfway through orbit)
+            # Only for elliptical orbits
+            if params.get('e', 0) < 1:
+                next_aphelion = next_perihelion + timedelta(days=period_days/2)
+                aphelion_in_range = JPL_MIN_DATE <= next_aphelion <= JPL_MAX_DATE
+    
+    return next_perihelion, next_aphelion, perihelion_in_range, aphelion_in_range
+
+def estimate_hyperbolic_perihelion_date(current_position, q, e, date):
+    """
+    Estimate perihelion date for hyperbolic orbits.
+    """
+    if not current_position or 'x' not in current_position or not date:
+        return "Date unknown"
+    
+    try:
+        current_dist = np.sqrt(
+            current_position['x']**2 + 
+            current_position['y']**2 + 
+            current_position['z']**2
+        )
+        
+        if current_dist > q:  # Still approaching perihelion
+            distance_to_go = current_dist - q
+            
+            # Rough velocity estimate for hyperbolic orbit (AU/day)
+            if e > 5:  # Very hyperbolic
+                estimated_velocity = 0.1
+            else:  # Near-parabolic
+                estimated_velocity = 0.05
+            
+            days_to_perihelion = distance_to_go / estimated_velocity
+            
+            if days_to_perihelion < 365:
+                perihelion_date = date + timedelta(days=days_to_perihelion)
+                return perihelion_date.strftime('%Y-%m-%d') + " (est)"
+            else:
+                return "Approaching"
+        else:
+            return "Near/Past perihelion"
+            
+    except Exception as e:
+        print(f"Error estimating hyperbolic perihelion: {e}")
+        return "Approaching"
+
+# In compute_apsidal_dates_from_tp function:
+def compute_apsidal_dates_from_tp(obj_name, params, current_date=None):
+    """
+    Compute the next perihelion/aphelion dates from TP with full time precision.
+    For hyperbolic/parabolic orbits (e >= 1), returns the single perihelion date.
+    For elliptical orbits (e < 1), computes based on orbital period.
+    """
+    from astropy.time import Time
+    from constants_new import KNOWN_ORBITAL_PERIODS
+    from datetime import timedelta, datetime
+    
+    # JPL Horizons data limits
+    JPL_MIN_DATE = datetime(1900, 1, 1)
+    JPL_MAX_DATE = datetime(2199, 12, 29)
+    
+    if current_date is None:
+        current_date = datetime.now()
+    
+    next_perihelion = None
+    next_aphelion = None
+    
+    if 'TP' not in params:
+        return None, None
+    
+    tp_jd = params['TP']
+    tp_time = Time(tp_jd, format='jd')
+    tp_datetime = tp_time.datetime  # This preserves full precision
+    
+    # Check eccentricity to determine orbit type
+    e = params.get('e', 0)
+    
+    # Also check if period is -1 (our flag for hyperbolic/parabolic)
+    period = KNOWN_ORBITAL_PERIODS.get(obj_name, None)
+    is_hyperbolic = (e >= 1) or (period == -1)
+    
+    if is_hyperbolic:
+        # HYPERBOLIC OR PARABOLIC ORBIT
+        # These objects make only one pass by the Sun
+        # TP is the exact date and time of perihelion passage
+        next_perihelion = tp_datetime  # Keep full datetime precision
+        
+        # No aphelion for hyperbolic/parabolic orbits
+        next_aphelion = None
+        
+        # Log the result with full precision
+        if JPL_MIN_DATE <= next_perihelion <= JPL_MAX_DATE:
+            # Format with milliseconds (remove last 3 digits of microseconds)
+            time_str = next_perihelion.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+            print(f"  {obj_name}: Hyperbolic/parabolic perihelion: {time_str} UTC")
+        else:
+            time_str = next_perihelion.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+            print(f"  {obj_name}: Hyperbolic/parabolic perihelion: {time_str} UTC (outside JPL range)")
+            
+    else:
+        # ELLIPTICAL ORBIT
+        # Get orbital period
+        if period and period > 0:  # Valid period
+            period_days = period
+            
+            # Find the next perihelion after current_date
+            perihelion = tp_datetime
+            while perihelion < current_date:
+                perihelion += timedelta(days=period_days)
+            next_perihelion = perihelion
+            
+            # Check if the next perihelion is beyond JPL range
+            if next_perihelion > JPL_MAX_DATE:
+                print(f"  {obj_name}: Next perihelion ({next_perihelion.strftime('%Y-%m-%d %H:%M:%S')}) is beyond JPL range")
+                
+                # Find the most recent perihelion within JPL range
+                perihelion = tp_datetime
+                most_recent_perihelion = None
+                while perihelion < JPL_MAX_DATE:
+                    if perihelion < current_date:
+                        most_recent_perihelion = perihelion
+                    perihelion += timedelta(days=period_days)
+                
+                if most_recent_perihelion:
+                    next_perihelion = most_recent_perihelion
+                    print(f"  Using most recent perihelion: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')}")
+                else:
+                    next_perihelion = tp_datetime
+                    print(f"  Using original TP date: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')}")
+            else:
+                print(f"  {obj_name}: Next perihelion: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')}")
+            
+            # Calculate the corresponding aphelion (halfway through orbit)
+            if next_perihelion:
+                next_aphelion = next_perihelion + timedelta(days=period_days/2)
+                
+                if next_aphelion > JPL_MAX_DATE:
+                    print(f"  {obj_name}: Aphelion ({next_aphelion.strftime('%Y-%m-%d %H:%M:%S')}) is beyond JPL range")
+                else:
+                    print(f"  {obj_name}: Next aphelion: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')}")
+        else:
+            print(f"  {obj_name}: No valid orbital period")
+    
+    return next_perihelion, next_aphelion
 
 def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict, color_map, 
                              center_body='Sun', is_satellite=False):
@@ -42,7 +342,17 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
     is_satellite : bool
         True if object is a satellite (use perigee/apogee instead of perihelion/aphelion)
     """
-    start_date, end_date = date_range
+    from datetime import datetime
+    import numpy as np
+    import plotly.graph_objects as go
+    
+    # Handle the case where date_range might be None
+    if date_range:
+        start_date, end_date = date_range
+    else:
+        # If no date range, we'll show all markers
+        start_date = None
+        end_date = None
     
     # Determine which date lists to use
     if is_satellite:
@@ -56,84 +366,99 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
         near_label = 'Perihelion'
         far_label = 'Aphelion'
     
-    # Convert string dates to datetime objects
-    near_dates = [datetime.strptime(d, '%Y-%m-%d') for d in near_dates]
-    far_dates = [datetime.strptime(d, '%Y-%m-%d') for d in far_dates]
-    
-    # Filter dates within the display range
-    near_dates = [d for d in near_dates if start_date <= d <= end_date]
-    far_dates = [d for d in far_dates if start_date <= d <= end_date]
-    
+    # Convert string dates to datetime objects for processing
+    # Handle both old format (%Y-%m-%d) and new format (%Y-%m-%d %H:%M:%S)
+
+    near_dates_dt = []
+    for d in near_dates:
+        try:
+            # Try full datetime format first
+            dt = datetime.strptime(d, '%Y-%m-%d %H:%M:%S')
+        except ValueError:
+            # Fall back to date-only format
+            dt = datetime.strptime(d, '%Y-%m-%d')
+        near_dates_dt.append(dt)
+
+    far_dates_dt = []
+    for d in far_dates:
+        try:
+            # Try full datetime format first
+            dt = datetime.strptime(d, '%Y-%m-%d %H:%M:%S')
+        except ValueError:
+            # Fall back to date-only format
+            dt = datetime.strptime(d, '%Y-%m-%d')
+        far_dates_dt.append(dt)
+
     # Add markers for near points (perihelion/perigee)
-    for date in near_dates:
-        date_str = date.strftime('%Y-%m-%d')
-        if date_str in positions_dict:
-            pos = positions_dict[date_str]
+    for i, date in enumerate(near_dates_dt):
+#        date_str = near_dates[i]  # Get the original string format
+        
+        # Extract just the date part for position lookup
+        date_key = date.strftime('%Y-%m-%d')
+        
+        if date_key in positions_dict:
+            pos = positions_dict[date_key]
             
             # Calculate distance from center
             distance_au = np.sqrt(pos['x']**2 + pos['y']**2 + pos['z']**2)
-    #        distance_km = distance_au * 149597870.7  # Convert AU to km
-
+            
+            # Display full datetime if available
+            date_display = date.strftime('%Y-%m-%d %H:%M:%S')
+            
             fig.add_trace(
                 go.Scatter3d(
                     x=[pos['x']],
                     y=[pos['y']],
                     z=[pos['z']],
-            #        mode='markers+text',
                     mode='markers',                    
                     marker=dict(
                         size=8,
-            #            color=color_map(obj_name),
                         color='white',                        
-                        symbol='square-open',
-                #        line=dict(color='white', width=2)
+                        symbol='square-open',  # Solid square for actual
                     ),
-                    text=f"⊙ {obj_name} {near_label}<br>{date_str} (actual)",
-                    textposition='top center',
-                    textfont=dict(size=10, color=color_map(obj_name)),
                     name=f"{obj_name} Actual {near_label}",
                     hovertemplate=(
                         f"<b>{obj_name} at {near_label}</b><br>"
-                        f"Date: {date_str} (actual)<br>"
-                        f"Distance from {center_body}: {distance_au:.3f} AU<br>"        # originally .6f
+                        f"Date: {date_display} UTC<br>"
+                        f"Distance from {center_body}: {distance_au:.6f} AU<br>"
                         "<extra></extra>"
                     ),
                     showlegend=True
                 )
             )
-    
+
     # Add markers for far points (aphelion/apogee)
-    for date in far_dates:
-        date_str = date.strftime('%Y-%m-%d')
-        if date_str in positions_dict:
-            pos = positions_dict[date_str]
+    for i, date in enumerate(far_dates_dt):
+        date_str = far_dates[i]  # Get the original string format
+        
+        # Extract just the date part for position lookup
+        date_key = date.strftime('%Y-%m-%d')
+        
+        if date_key in positions_dict:
+            pos = positions_dict[date_key]
             
             # Calculate distance from center
             distance_au = np.sqrt(pos['x']**2 + pos['y']**2 + pos['z']**2)
-    #        distance_km = distance_au * 149597870.7  # Convert AU to km
-
+            
+            # Display full datetime if available
+            date_display = date.strftime('%Y-%m-%d %H:%M:%S')
+            
             fig.add_trace(
                 go.Scatter3d(
                     x=[pos['x']],
                     y=[pos['y']],
                     z=[pos['z']],
-            #        mode='markers+text',
                     mode='markers',                    
                     marker=dict(
                         size=8,
-                #        color=color_map(obj_name),
                         color='white',                        
-                        symbol='square-open',
-                #        line=dict(color=color_map(obj_name), width=2)
+                        symbol='square-open',  # Solid square for actual
                     ),
-                    text=f"◯ {obj_name} {far_label}<br>{date_str} (actual)",
-                    textposition='top center',
-                    textfont=dict(size=10, color=color_map(obj_name)),
                     name=f"{obj_name} Actual {far_label}",
                     hovertemplate=(
                         f"<b>{obj_name} at {far_label}</b><br>"
-                        f"Date: {date_str} (actual)<br>"
-                        f"Distance from {center_body}: {distance_au:.3f} AU<br>"
+                        f"Date: {date_display} UTC<br>"
+                        f"Distance from {center_body}: {distance_au:.6f} AU<br>"
                         "<extra></extra>"
                     ),
                     showlegend=True
@@ -154,7 +479,9 @@ def fetch_positions_for_apsidal_dates(obj_id, params, date_range, center_id='Sun
         raise ValueError("fetch_position function must be provided")
 
     positions = {}
-    start_date, end_date = date_range
+
+    # Remove the line that unpacks date_range since we're not using it
+#    start_date, end_date = date_range
     
     # Get all apsidal dates
     if is_satellite:
@@ -162,14 +489,24 @@ def fetch_positions_for_apsidal_dates(obj_id, params, date_range, center_id='Sun
     else:
         all_dates = params.get('perihelion_dates', []) + params.get('aphelion_dates', [])
     
-    # Convert and filter dates
     for date_str in all_dates:
-        date_obj = datetime.strptime(date_str, '%Y-%m-%d')
-        if start_date <= date_obj <= end_date:
-            # Fetch position for this date
+        try:
+            # Try to parse with time first, then fall back to date-only
+            try:
+                date_obj = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+            
+            # Always fetch, no date range check
             pos_data = fetch_position(obj_id, date_obj, center_id=center_id, id_type=id_type)
             if pos_data and 'x' in pos_data:
-                positions[date_str] = pos_data
+                # Store with date-only key for compatibility
+                date_key = date_obj.strftime('%Y-%m-%d')
+                positions[date_key] = pos_data
+                print(f"    Fetched position for {date_str}")
+
+        except Exception as e:
+            print(f"    Could not fetch position for {date_str}: {e}")                
     
     return positions
 
@@ -404,35 +741,20 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
         print(f"Warning: Could not calculate apsidal dates for {body_name}: {ex}")
         return None, None
 
-
 def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position, 
-                         orbital_params, color_map, q=None):
+                        orbital_params, color_map, q=None):
     """
-    Add a perihelion/perigee marker to the plot with accurate date calculation.
-    
-    Parameters:
-        fig: Plotly figure object
-        x, y, z: Coordinates of perihelion point
-        obj_name: Name of the object
-        a: Semi-major axis
-        e: Eccentricity
-        date: Current date
-        current_position: Dict with 'x', 'y', 'z' keys for current position
-        orbital_params: Dict with orbital elements
-        color_map: Function to get color for object
-        q: Perihelion distance (optional, will be calculated if not provided)
-    
-    Returns:
-        None (modifies fig in place)
+    Add a perihelion/perigee marker with accurate date calculation.
+    Now handles full datetime precision from TP.
     """
     # Calculate perihelion distance if not provided
     if q is None:
-        q = a * (1 - e) if e < 1 else abs(a) * (e - 1)
+        q = a * (1 - e)
     
     # Calculate perihelion date
     perihelion_date_str = ""
-    if date is not None and current_position is not None:
-        perihelion_date, _ = calculate_apsidal_dates(
+    if date is not None and current_position is not None and e < 1:
+        perihelion_date, aphelion_date = calculate_apsidal_dates(
             date,
             current_position['x'],
             current_position['y'],
@@ -446,15 +768,51 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         )
         
         if perihelion_date is not None:
-            perihelion_date_str = f"<br>Date: {perihelion_date.strftime('%Y-%m-%d')}"
-        elif e >= 1:
-            perihelion_date_str = "<br>Past perihelion (hyperbolic)"
+            # For elliptical orbits with TP, we can calculate precise perihelion time
+            if 'TP' in orbital_params and obj_name in KNOWN_ORBITAL_PERIODS:
+                period_days = KNOWN_ORBITAL_PERIODS[obj_name]
+                if period_days and period_days not in [None, 1e99]:  # Valid period
+                    from astropy.time import Time
+                    from datetime import timedelta
+                    tp_time = Time(orbital_params['TP'], format='jd')
+                    tp_datetime = tp_time.datetime
+                    
+                    # Find the next perihelion after the current date
+                    precise_perihelion = tp_datetime
+                    while precise_perihelion < date:
+                        precise_perihelion += timedelta(days=period_days)
+                    
+                    perihelion_date_str = f"<br>Date: {precise_perihelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                else:
+                    # For objects without precise period info
+                    perihelion_date_str = f"<br>Date: {perihelion_date.strftime('%Y-%m-%d')}"
+            else:
+                # No TP available, use calculated date
+                perihelion_date_str = f"<br>Date: {perihelion_date.strftime('%Y-%m-%d')}"
+
+    # For hyperbolic orbits, use TP if available
+    elif 'TP' in orbital_params and e >= 1:
+        from astropy.time import Time
+        tp_time = Time(orbital_params['TP'], format='jd')
+        tp_datetime = tp_time.datetime
+        perihelion_date_str = f"<br>Date: {tp_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
     elif date is not None:
-        # Fallback to current date if position not available
         perihelion_date_str = f"<br>Date: {date.strftime('%Y-%m-%d')}"
     
-    # Determine label based on context
-    label = "Ideal Periapsis" 
+    # Accuracy note
+    accuracy_note = ""
+    if e > 0.15:  # High eccentricity
+        accuracy_note = "<br><i>Accuracy: ±0.002 AU (strong perturbations)</i>"
+    elif e > 0.05:  # Moderate eccentricity
+        accuracy_note = "<br><i>Accuracy: ±0.001 AU (moderate perturbations)</i>"
+    else:  # Low eccentricity
+        accuracy_note = "<br><i>Accuracy: ±0.0005 AU (minimal perturbations)</i>"
+    
+    # Determine label
+    label = "Ideal Periapsis"
+    
+    # Create hover text with all information
+    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q:.6f} AU{accuracy_note}"
     
     fig.add_trace(
         go.Scatter3d(
@@ -468,44 +826,30 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
                 symbol='square-open'
             ),
             name=f"{obj_name} {label}",
-            text=[f"{obj_name} {label}{perihelion_date_str}<br>q={q:.3f} AU"],
+            text=[hover_text],
             customdata=[label],
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
     )
 
-
 def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
                         orbital_params, color_map):
     """
     Add an apohelion/apogee marker to the plot with accurate date calculation.
-    
-    Parameters:
-        fig: Plotly figure object
-        x, y, z: Coordinates of apohelion point
-        obj_name: Name of the object
-        a: Semi-major axis
-        e: Eccentricity
-        date: Current date
-        current_position: Dict with 'x', 'y', 'z' keys for current position
-        orbital_params: Dict with orbital elements
-        color_map: Function to get color for object
-    
-    Returns:
-        None (modifies fig in place)
+    Now handles full datetime precision from TP.
     """
-    # Skip apohelion for hyperbolic orbits
-    if e >= 1:
+    # Calculate aphelion distance
+    if e < 1:
+        Q = a * (1 + e)
+    else:
+        # No aphelion for hyperbolic orbits
         return
     
-    # Calculate apohelion distance
-    Q = a * (1 + e)
-    
-    # Calculate apohelion date
-    date_str = ""
-    if date is not None and current_position is not None:
-        _, apohelion_date = calculate_apsidal_dates(
+    # Calculate aphelion date
+    aphelion_date_str = ""
+    if date is not None and current_position is not None and e < 1:
+        perihelion_date, aphelion_date = calculate_apsidal_dates(
             date,
             current_position['x'],
             current_position['y'],
@@ -518,17 +862,42 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
             obj_name
         )
         
-        if apohelion_date is not None:
-            date_str = f"<br>Date: {apohelion_date.strftime('%Y-%m-%d')}"
+        if aphelion_date is not None:
+            # For elliptical orbits with TP, we can calculate precise aphelion time
+            if 'TP' in orbital_params and obj_name in KNOWN_ORBITAL_PERIODS:
+                period_days = KNOWN_ORBITAL_PERIODS[obj_name]
+                if period_days and period_days != 1e99:  # Not a hyperbolic placeholder
+                    from astropy.time import Time
+                    from datetime import timedelta
+                    tp_time = Time(orbital_params['TP'], format='jd')
+                    tp_datetime = tp_time.datetime
+                    # Aphelion is half period after perihelion
+                    precise_aphelion = tp_datetime + timedelta(days=period_days/2)
+                    # Adjust for multiple orbits if needed
+                    while precise_aphelion < date:
+                        precise_aphelion += timedelta(days=period_days)
+                    aphelion_date_str = f"<br>Date: {precise_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                else:
+                    aphelion_date_str = f"<br>Date: {aphelion_date.strftime('%Y-%m-%d')}"
+            else:
+                aphelion_date_str = f"<br>Date: {aphelion_date.strftime('%Y-%m-%d')}"
     elif date is not None:
-        # Fallback calculation
-        orbital_period_days = 365.25 * np.sqrt(a**3)
-        # This is a rough estimate
-        apohelion_date = date + timedelta(days=orbital_period_days/2)
-        date_str = f"<br>Date: ~{apohelion_date.strftime('%Y-%m-%d')} (estimate)"
+        aphelion_date_str = f"<br>Date: {date.strftime('%Y-%m-%d')}"
     
-    # Determine label based on context
+    # Accuracy note
+    accuracy_note = ""
+    if e > 0.15:  # High eccentricity
+        accuracy_note = "<br><i>Accuracy: ±0.002 AU (strong perturbations)</i>"
+    elif e > 0.05:  # Moderate eccentricity
+        accuracy_note = "<br><i>Accuracy: ±0.001 AU (moderate perturbations)</i>"
+    else:  # Low eccentricity
+        accuracy_note = "<br><i>Accuracy: ±0.0005 AU (minimal perturbations)</i>"
+    
+    # Determine label
     label = "Ideal Apoapsis"
+    
+    # Create hover text
+    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q:.6f} AU{accuracy_note}"
     
     fig.add_trace(
         go.Scatter3d(
@@ -542,10 +911,11 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
                 symbol='square-open'
             ),
             name=f"{obj_name} {label}",
-            text=[f"{obj_name} {label}{date_str}<br>Q={Q:.3f} AU"],
+            text=[hover_text],
             customdata=[label],
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
     )
+
 

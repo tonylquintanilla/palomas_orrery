@@ -183,8 +183,10 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 print(f"Working directory set to: {os.getcwd()}")
 
-# ============= HELPER FUNCTIONS FOR PLOT_OBJECTS =============
-# Place this section after all imports but before the GUI initialization
+# DEBUG: Check if Mercury is in planetary_params
+print(f"[DEBUG] Mercury in planetary_params? {'Mercury' in planetary_params}")
+if 'Mercury' in planetary_params:
+    print(f"[DEBUG] Mercury params: {planetary_params['Mercury']}")
 
 def get_fetch_interval_for_type(obj_type, obj_name, trajectory_interval, 
                                 default_interval,    # removed eccentric_interval,
@@ -1341,7 +1343,16 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         if obj_name in KNOWN_ORBITAL_PERIODS:
             known_value = KNOWN_ORBITAL_PERIODS[obj_name]
 
-            if is_satellite:
+            # Check if the value is None (hyperbolic/parabolic objects)
+            if known_value is None:
+                # For hyperbolic objects, period is undefined
+                known_orbital_period = {
+                    'years': None,
+                    'days': None,
+                    'description': 'N/A (hyperbolic/parabolic orbit)'
+                }
+                orbital_period = 'N/A (hyperbolic)'
+            elif is_satellite:
                 # For satellites, the values are in days
                 known_orbital_period = {
                     'days': known_value,
@@ -1805,6 +1816,8 @@ haumea_var = tk.IntVar(value=0)
 
 makemake_var = tk.IntVar(value=0)
 
+ammonite_var = tk.IntVar(value=0)
+
 eris_var = tk.IntVar(value=0)       # for heliocentric plots
 eris2_var = tk.IntVar(value=0)      # for Eris-centered plots
 # Eris's Moon
@@ -1935,6 +1948,8 @@ hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
 quaoar_var = tk.IntVar(value=0)
 
 sedna_var = tk.IntVar(value=0)
+
+leleakuhonua_var = tk.IntVar(value=0)
 
 of201_var = tk.IntVar(value=0)
 
@@ -2219,6 +2234,11 @@ objects = [
     'mission_info': 'A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
     'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
 
+    {'name': 'Leleakuhonua', 'id': '2015 TG387', 'var': leleakuhonua_var, 'color': color_map('Leleakuhonua'), 'symbol': 'circle', 'object_type': 'orbital', 
+    'id_type': 'smallbody', 
+    'mission_info': 'A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/541132_Lele%C4%81k%C5%ABhonua'},
+
     {'name': '2017 OF201', 'id': '2017 OF201', 'var': of201_var, 'color': color_map('2017 OF201'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'A extreme trans-Neptunian object with an extremely long orbit.', 
@@ -2413,6 +2433,12 @@ objects = [
     'id_type': 'smallbody', 
     'mission_info': 'A significant Kuiper Belt Object with a rapid rotation period.', 
     'mission_url': 'https://en.wikipedia.org/wiki/20000_Varuna'},
+
+    {'name': 'Ammonite', 'id': '2023 KQ14', 'var': ammonite_var, 'color': color_map('Ammonite'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    # 136199 primary (required for Sun centered plots)
+    'id_type': 'smallbody', 
+    'mission_info': '2023 KQ14 and nicknamed "Ammonite," is classified as a "sednoid."', 
+    'mission_url': 'https://en.wikipedia.org/wiki/2023_KQ14'},     
 
     # Comets
 
@@ -5141,7 +5167,7 @@ def sync_end_date_from_days():
             days_to_plot_entry.insert(0, str(days))
             horizons_warning.config(text="⚠️ End date capped at Horizons limit!", fg='red')
         else:
-            horizons_warning.config(text="⚠️ JPL Horizons limits: Jan 1900 - Dec 2199", fg='orange')
+            horizons_warning.config(text="⚠️ JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199", fg='red')
         
         # Update end date fields
         end_entry_year.delete(0, tk.END)
@@ -5248,8 +5274,8 @@ days_to_plot_entry.insert(0, '28')
 
 # Horizons limit warning
 horizons_warning = tk.Label(date_frame, 
-    text="⚠️ JPL Horizons limits: Jan 1900 - Dec 2199",
-    fg='orange', font=("Arial", 8, "italic"))
+    text="⚠️ JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199",
+    fg='red', font=("Arial", 8, "italic"))
 horizons_warning.grid(row=2, column=0, columnspan=8, pady=(2,0))
 
 # Initialize the date fields with current values
@@ -5957,9 +5983,13 @@ eris_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(eris_hill_sphere_checkbutton, eris_hill_sphere_info) 
 create_celestial_checkbutton("- Dysnomia", dysnomia_var)
 
+create_celestial_checkbutton("Ammonite", ammonite_var)
+
 create_celestial_checkbutton("Sedna", sedna_var)
 
 create_celestial_checkbutton("2017 OF201", of201_var)
+
+create_celestial_checkbutton("Leleakuhonua", leleakuhonua_var)
 
 create_celestial_checkbutton("Planet 9", planet9_var)
 # Create a Frame specifically for the planet9 shell options (indented)
@@ -6113,7 +6143,7 @@ create_interstellar_checkbutton("Oumuamua", oumuamua_var, "(2017-10-14 to 2018-0
     "September 9, 2017")
 create_interstellar_checkbutton("Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-01)", 
     "December 8, 2019")
-create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-06-15 to 2025-7-02)",     # data arc: 2025-06-14 to 2025-07-03
+create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-05-22 to 2025-08-02)",     # 2025-Aug-07
     "October 29, 2025")     # predicted; this is a hyperbolic trajectory
 
 # These functions should be defined AFTER the GUI widgets exist

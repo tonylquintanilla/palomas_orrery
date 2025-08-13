@@ -61,14 +61,14 @@ planet_tilts = {        # degrees
 
 KNOWN_ORBITAL_PERIODS = {
     # Planets (converted from years to days)
-    'Mercury': 87.97,      # 0.24 * 365.25
-    'Venus': 224.46,       # 0.62 * 365.25
-    'Earth': 365.25,       # 1.0 * 365.25
-    'Mars': 686.67,        # 1.88 * 365.25
-    'Jupiter': 4331.87,    # 11.86 * 365.25
-    'Saturn': 10759.66,    # 29.46 * 365.25
-    'Uranus': 30685.15,    # 84.01 * 365.25
-    'Neptune': 60193.20,   # 164.8 * 365.25
+    'Mercury': 87.969,      
+    'Venus': 224.701,       
+    'Earth': 365.256,       
+    'Mars': 686.980,        
+    'Jupiter': 4332.589,    
+    'Saturn': 10759.22,   
+    'Uranus': 30688.5,    
+    'Neptune': 60189.0,   
     
     # Earth satellite
     'Moon': 27.321582,
@@ -134,15 +134,26 @@ KNOWN_ORBITAL_PERIODS = {
     'Dysnomia': 15.786,    # 378.86 hours
     
     # Dwarf planets and KBOs (converted from years to days)
-    'Pluto': 90582.00,     # 248.0 * 365.25
+    'Pluto': 90560.0,    
     'Ceres': 1680.15,      # 4.6 * 365.25
     'Eris': 203809.50,     # 558.0 * 365.25
     'Haumea': 103731.00,   # 284.0 * 365.25
     'Makemake': 111766.50, # 306.0 * 365.25
     'Quaoar': 105192.00,   # 288.0 * 365.25
     'Orcus': 90216.75,     # 247.0 * 365.25
+    'Ixion': 91184.74,
+    'MS4': 99210.94,
+    'GV9': 100351.43,
+    'Varuna': 102799.14,
+    'Arrokoth': 108224.98,
+    'Gonggong': 201010.45,
+    '2017 OF201': 10048413.07,
+
+    # Sednoid Trans-Neptunian Objects
+    'Ammonite': 1444383.67 ,     # PER 3954.53339 Julian years 
     'Sedna': 4163850.00,   # 11400.0 * 365.25
-    
+    'Leleakuhonua': 12643548.84594,  # Orbital period in days;  34616.15016 julian years x 365.25
+
     # Asteroids
     'Vesta': 1325.75,      # 3.63 * 365.25
     'Pallas': 1685.37,     # 4.614 * 365.25
@@ -183,9 +194,10 @@ KNOWN_ORBITAL_PERIODS = {
     'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
     
     # For hyperbolic/parabolic objects, period is undefined
-    # These are included for completeness but should be handled specially
-    'C/2025_K1': None,     # Parabolic comet
-    '3I/ATLAS': None,      # Interstellar object
+    'C/2025_K1': None,     # Parabolic comet - effectively infinite period
+    '3I/ATLAS': None,      # Interstellar object - effectively infinite period
+    'Oumuamua': None,      # Interstellar object - effectively infinite period  
+    'Borisov': None,       # Interstellar object - effectively infinite period
     
     # Hypothetical
     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
@@ -500,10 +512,7 @@ def color_map(planet):
         'Hydra': 'rgb(190, 190, 190)', 
 
         'Planet 9': 'grey',  # grey
-
-        'Haumea': 'rgb(128, 0, 128)',
-        'Makemake': 'rgb(255, 192, 203)',
-        'Eris': 'rgb(240, 240, 240)',
+       
         'Voyager 1': 'white',
         'Voyager 2': 'gold',
         'Cassini': 'green',
@@ -581,14 +590,19 @@ def color_map(planet):
         'Hayabusa2': 'cyan',  
         'Quaoar': 'rgb(244, 164, 96)',
         'Dysnomia': 'white',
-        'Sedna': 'rgb(135, 206, 235)',
-        '2017 OF201': 'rgb(150, 90, 60)',
         'Orcus': 'rgb(0, 100, 0)',
         'Varuna': 'rgb(218, 165, 32)',
         'Ixion': 'rgb(218, 165, 32)',
         'GV9': 'rgb(128, 0, 128)',
         'MS4': 'rgb(255, 0, 0)',  
-        'Gonggong': 'red',           
+        'Gonggong': 'red',    
+        'Haumea': 'rgb(128, 0, 128)',
+        'Makemake': 'rgb(255, 192, 203)',
+        'Eris': 'rgb(240, 240, 240)',
+        'Ammonite': 'rgb(255, 0, 0)', 
+        'Sedna': 'rgb(135, 206, 235)',
+        'Leleakuhonua': 'cyan',
+        '2017 OF201': 'rgb(150, 90, 60)',                       
     }
     return colors.get(planet, 'goldenrod')
 
@@ -1051,6 +1065,37 @@ INFO = {
 
         'Quaoar': 'A large Kuiper Belt object with a ring system.',
 
+        'Ammonite': '2023 KQ14 is an asteroid with an exceptionally eccentric and elongated orbit around the Sun. It belongs to a \n' 
+        'classification of objects known as sednoids because its orbit is highly detached from the influence of the giant planets. \n' 
+        '* The asteroid has a semi-major axis of 250.07 AU and an eccentricity of 0.737, with its closest approach to the Sun \n' 
+        '  (perihelion) at 65.76 AU and its farthest point (apoapsis) at 434.37 AU. \n' 
+        '* It takes approximately 3954.53 Julian years (about 1.44 million days) to complete a single orbit, and its orbital plane \n' 
+        '  is inclined by about 10.99 degrees relative to the ecliptic.\n' 
+        '* Based on a solution derived from 24 observations between 2005 and 2024, the asteroid has an absolute magnitude (H) of 6.77. \n' 
+        '  This value suggests an estimated diameter of between 100 and 200 kilometers, though other physical characteristics remain \n' 
+        '  unknown due to its extreme distance. Its next perihelion is predicted for early 2064, and its next apohelion for early 4041. \n' 
+        '  These long-term orbital predictions should be viewed with caution, as the orbit is subject to gravitational perturbations over \n' 
+        '  such a vast timescale. \n' 
+        '* The nickname "Ammonite" for asteroid 2023 KQ14 was given by the research team that discovered it as part of an international \n' 
+        '  astronomical survey project called FOSSIL (Formation of the Outer Solar System: An Icy Legacy). The name "Ammonite" is a \n' 
+        '  reference to the extinct marine animal known for its spiral shell. The nickname was chosen because the asteroid\'s unusual \n' 
+        '  orbit is seen as a "fossil" that preserves a record of the early solar system\'s formation. Like a fossil, the asteroid\'s \n' 
+        '  stable orbit provides clues about the conditions and gravitational forces present billions of years ago. \n' 
+        '* The FOSSIL project itself aims to find these "fossils" to understand the solar system\'s history. The discovery of Ammonite\'s \n' 
+        '  orbit, which is not aligned with other known sednoids, challenges the hypothesis of a distant "Planet Nine" and suggests that \n' 
+        '  the outer solar system\'s formation may have been more complex or influenced by other events, such as a passing star or a \n' 
+        '  vanished planet.\n' 
+        '* There aren\'t many known sednoids, but their unusual orbits make them a topic of great scientific interest. The most \n' 
+        '  prominent examples besides 2023 KQ14 include:\n' 
+        '  * 90377 Sedna: This is the prototype of the sednoid class, discovered in 2003. Its orbit is one of the most eccentric known \n' 
+        '    for a large object in the solar system, with a perihelion of about 76 AU and a semi-major axis of around 500 AU.\n' 
+        '  * 2012 VP113: Discovered in 2012 and nicknamed "Biden," this object has a perihelion of about 80 AU and a semi-major axis of \n' 
+        '    roughly 260 AU. It was the second sednoid discovered.\n' 
+        '  * Scientific significance: The discovery of these objects is significant because their orbits are all highly detached from the \n' 
+        '    gravitational influence of Neptune and appear to be unusually clustered in a similar orientation in space. This clustering is \n' 
+        '    a primary piece of evidence supporting the hypothesis of a massive, undiscovered planet—often called "Planet Nine"—that is \n' 
+        '    shaping the orbits of these distant objects.',        
+
         'Sedna': 'A distant trans-Neptunian dwarf planet with a long orbit. \n* Sedna is a fascinating object with an incredibly ' 
         'elongated orbit, meaning its distance from the Sun varies dramatically! \n* Mean distance to Sedna: 526 AU (approximately 79 ' 
         'billion kilometers) - This places it far beyond Pluto and the Kuiper Belt. \n* Perihelion (closest to the Sun): 76 AU ' 
@@ -1064,6 +1109,13 @@ INFO = {
         'gravitational pull of Neptune, unlike Kuiper Belt objects. Some astronomers even categorize it as an inner Oort Cloud ' 
         'object due to its immense distance. \n* As for its current distance, Sedna is currently at about 83.3 AU from the Sun. This ' 
         'means it\'s relatively close to its perihelion (closest point) and is currently moving closer to the Sun.',
+
+        'Leleakuhonua': 'Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
+        'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
+        'Extreme orbits make Sednoids "detached objects," meaning they are not significantly influenced by the gravity of the giant ' 
+        'planets like Neptune.\n' 
+        '* Leleākūhonua is considered a strong candidate for being a dwarf planet, but it is not officially recognized as one yet. ' 
+        '  Like Sedna, it\'s more accurately classified as a Trans-Neptunian Object (TNO) rather than a typical asteroid.',
 
         'Orcus': 'A large Kuiper Belt object with a moon named Vanth. Estimated to be about 910 km in diameter. ' 
         'Discovered on February 17, 2004.',

@@ -1351,22 +1351,22 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
             ax.plot([-r_apo, -2*c], [0, 0], 'g--', alpha=0.3, linewidth=1)
             
             # Add text box with definitions - positioned outside plot area
-            textstr = f'''Definitions:
-• {orbit_type}: A conic section with eccentricity e = {e:.6f}
-• Semi-major axis (a): Half the longest diameter of the ellipse
-    a = {a:.3f} AU
-• Semi-minor axis (b): Half the shortest diameter of the ellipse
-    b = {b:.3f} AU
-• Orbit Center: Geometric center of the ellipse at ({center_x:.3f}, 0) 
-• Foci: Two fixed points; the sum of distances from any
-    point on the ellipse to both foci = {2*a:.3f} AU (constant)
-• Periapsis: Closest point to the primary focus (Sun)
-    Distance = {r_peri:.3f} AU
-• Apoapsis: Farthest point from the primary focus
-    Distance = {r_apo:.3f} AU
-• Distance from center to foci: c = {c:.3f} AU
-• Focus separation: 2c = {2*c:.3f} AU
-• Eccentricity: e = c / a = {c / a:.4f}'''
+            textstr = f'''$\\mathbf{{Definitions}}$:
+            - $\\mathbf{{{orbit_type}}}$: A conic section with eccentricity e = {e:.6f}
+            - $\\mathbf{{Semi-major\\ axis\\ (a)}}$: Half the longest diameter of the ellipse
+                a = {a:.3f} AU
+            - $\\mathbf{{Semi-minor\\ axis\\ (b)}}$: Half the shortest diameter of the ellipse
+                b = {b:.3f} AU
+            - $\\mathbf{{Orbit\\ Center}}$: Geometric center of the ellipse at ({center_x:.3f}, 0) 
+            - $\\mathbf{{Foci}}$: Two fixed points; the sum of distances from any
+                point on the ellipse to both foci = {2*a:.3f} AU (constant)
+            - $\\mathbf{{Periapsis}}$: Closest point to the primary focus (Sun)
+                Distance = {r_peri:.3f} AU
+            - $\\mathbf{{Apoapsis}}$: Farthest point from the primary focus
+                Distance = {r_apo:.3f} AU
+            - $\\mathbf{{c,\\ distance\\ from\\ center\\ to\\ either\\ foci}}$: c = {c:.3f} AU
+            - $\\mathbf{{Focus\\ separation}}$: 2c = {2*c:.3f} AU
+            - $\\mathbf{{Eccentricity}}$: e = c / a = {c / a:.6f}'''
             
             props = dict(boxstyle='round', facecolor='wheat', alpha=0.8)
             ax.text(1.02, 0.98, textstr, transform=ax.transAxes, fontsize=8,
@@ -1496,40 +1496,32 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
                         # Calculate actual distances for clarity
                         geometric_a = abs(center_x) + r_peri  # Sum of absolute distances
                         
-                        textstr = f'''Definitions:
-        • Hyperbola: A conic section with eccentricity e = {e:.6f} > 1
-            Represents a fly-by trajectory with excess velocity
-            
-        • TWO definitions of semi-major axis 'a':
-        
-        1) Orbital mechanics 'a' (JPL parameter):
-            a = periapsis_x - center_x = {r_peri:.3f} - {center_x:.3f} = {a:.3f} AU
-            This is what's in the data, can be negative
-            
-        2) Geometric semi-major axis:
-            = |center to periapsis| = |{center_x:.3f}| + {r_peri:.3f} = {geometric_a:.3f} AU
-            This is the actual distance from center to vertex
-            
-        • Focus distance (c):
-            c = |a_orbital| × e = {a_abs:.3f} × {e:.6f} = {c:.3f} AU
-            This is the distance from center to focus (Sun)
-            
-        • Eccentricity relationship:
-            e = c / |a_orbital| = {c:.3f} / {a_abs:.3f} = {e:.6f} ✓
-            
-        • Key positions in plot:
-            Center: ({center_x:.3f}, 0) - LEFT of Sun
-            Sun (focus): (0, 0)
-            Periapsis/Vertex: ({r_peri:.3f}, 0) - RIGHT of Sun
-            
-        • Distance verification:
-            Center to Sun: {c:.3f} AU
-            Sun to Periapsis: {r_peri:.3f} AU
-            Center to Periapsis (geometric): {geometric_a:.3f} AU
-            
-        • Semi-minor axis (b): {b:.3f} AU
-            
-        • The object will escape on a hyperbolic path'''
+                        textstr = f'''$\\mathbf{{Definitions}}$:
+                        - $\\mathbf{{Hyperbola}}$: A conic section with eccentricity > 1; e = {e:.6f} 
+                            Represents a fly-by trajectory with excess velocity
+                            
+                        - $\\mathbf{{Semi-major\\ axis\\ 'a'}}$:
+
+                            1) Orbital mechanics, 'a' (in JPL Horizons ephemeris):
+                                Used in calculations; can be a negative sum relative to the Sun (0,0)
+                                Same definition: distance from geometric center to vertex (periapsis), but
+                                    uses the vector distances relative to the Sun, so
+                                a = distance from Sun to periapsis + (negative) distance from Sun to the center 
+                                    = {r_peri:.3f} + {center_x:.3f} = {a:.3f} AU
+                            
+                            2) Geometric, 'a' (same as for ellipses):
+                                This is the geometric distance from center to vertex (periapsis), or
+                                Half the major axis distance,
+                                a = distance from Sun to periapsis + (geometric) distance from Sun to the center 
+                                    = {r_peri:.3f} + |{center_x:.3f}|  = {geometric_a:.3f} AU
+                            
+                        - $\\mathbf{{Focus\\ distance\\ , c}}$:
+                            This is the distance from center to focus (Sun); uses absolute value of orbital mechanics, a
+                            c = |a| $\\cdot$ e = {a_abs:.3f} $\\cdot$ {e:.6f} = {c:.3f} AU ✓
+                            
+                        - $\\mathbf{{Eccentricity\\ , e}}$:
+                            Eccentricity definition; uses absolute value of orbital mechanics, a
+                            e = c / |a| = {c:.3f} / {a_abs:.3f} = {e:.6f} ✓'''
                         
                         props = dict(boxstyle='round', facecolor='wheat', alpha=0.8)
                         ax.text(1.02, 0.98, textstr, transform=ax.transAxes, fontsize=8,
@@ -1549,7 +1541,9 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
         ax.set_title(f'{selected_obj} - Orbital Shape vs Eccentricity\n{orbit_type}: e = {e:.6f}')
         
         # Position legend to avoid text box
-        ax.legend(loc='upper left', fontsize=9)
+    #    ax.legend(loc='upper left', fontsize=9)
+        # With this line to position the legend outside the plot area to the left:
+        ax.legend(bbox_to_anchor=(-0.15, 1), loc='upper right', fontsize=9)        
         
         # Add educational annotations at the bottom
         # Calculate the correct sum of distances for the current semi-major axis
@@ -1933,100 +1927,158 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     
     info_content = """# ORBITAL PARAMETER TRANSFORMATION VISUALIZATION
 
-This tool demonstrates how Keplerian orbital elements transform an orbit from its natural coordinate system (perifocal frame) to the standard ecliptic reference frame used in astronomy.
+    This tool demonstrates how Keplerian orbital elements transform an orbit from its natural coordinate system (perifocal frame) to the standard ecliptic reference frame used in astronomy.
 
-## KEY CONCEPTS
+    ## KEY CONCEPTS
 
-### Coordinate Frames
-• **Perifocal Frame (Cyan)**: The orbit's natural coordinate system
-  - X-axis points to periapsis (closest approach)
-  - Orbit lies in XY plane
-  - Specific to each individual orbit
-  - This is the orbit's "2D blueprint"
+    ### Coordinate Frames
+    • **Perifocal Frame (Cyan)**: The orbit's natural coordinate system
+    - X-axis points to periapsis (closest approach)
+    - Orbit lies in XY plane
+    - Specific to each individual orbit
+    - This is the orbit's "2D blueprint"
 
-• **Ecliptic Frame (Red)**: The standard reference frame
-  - XY plane is Earth's orbital plane
-  - X-axis points to vernal equinox (♈)
-  - Same for all objects in the solar system
-  - The universal coordinate system for astronomy
+    • **Ecliptic Frame (Red)**: The standard reference frame
+    - XY plane is Earth's orbital plane
+    - X-axis points to vernal equinox (♈)
+    - Same for all objects in the solar system
+    - The universal coordinate system for astronomy
 
-### TRANSFORMATION SEQUENCE
+    ### TRANSFORMATION SEQUENCE
 
-The visualization shows how three sequential rotations place the orbit into its final orientation:
-**R = Rz(Ω) · Rx(i) · Rz(ω)**
+    The visualization shows how three sequential rotations place the orbit into its final orientation:
+    **R = Rz(Ω) · Rx(i) · Rz(ω)**
 
-1. **Initial State (Cyan)**: Perifocal Frame
-   - The orbit in its simplest form
-   - Periapsis aligned on +X axis
+    1. **Initial State (Cyan)**: Perifocal Frame
+    - The orbit in its simplest form
+    - Periapsis aligned on +X axis
 
-2. **After ω rotation (Purple)**: Argument of Periapsis
-   - Rotates the frame by ω around Z-axis
-   - Sets the periapsis orientation within the orbital plane
+    2. **After ω rotation (Purple)**: Argument of Periapsis
+    - Rotates the frame by ω around Z-axis
+    - Sets the periapsis orientation within the orbital plane
 
-3. **After ω and i rotation (Orange)**: Inclination
-   - Tilts the frame by i around the new X-axis (the "hinge")
-   - Gives the orbit its tilt relative to the Ecliptic plane
+    3. **After ω and i rotation (Orange)**: Inclination
+    - Tilts the frame by i around the new X-axis (the "hinge")
+    - Gives the orbit its tilt relative to the Ecliptic plane
 
-4. **Final State (Red)**: Longitude of Ascending Node
-   - Rotates the tilted frame by Ω around the original Z-axis
-   - Swivels the orbit into its final position in the Ecliptic frame
+    4. **Final State (Red)**: Longitude of Ascending Node
+    - Rotates the tilted frame by Ω around the original Z-axis
+    - Swivels the orbit into its final position in the Ecliptic frame
 
-**Important**: The coordinate systems rotate, not the orbit itself! The orbit maintains its shape and orientation relative to each coordinate frame.
+    **Important**: The coordinate systems rotate, not the orbit itself! The orbit maintains its shape and orientation relative to each coordinate frame.
 
-## VISUAL ELEMENTS
+    ## VISUAL ELEMENTS
 
-• **Coordinate Axes**: Shows each reference frame's orientation
-• **Orbital Curves**: Displays orbit at each transformation stage
-• **Periapsis/Apoapsis Markers**: 
-  - Periapsis: Closest approach (perihelion for Sun, perigee for planets)
-  - Apoapsis: Farthest point (aphelion for Sun, apogee for planets)
-  - Hover over markers to see predicted dates and distances
-• **Current Position**: Shows the object's location at the selected date
-• **Line of Nodes**: Where orbit crosses the reference plane
-• **Ascending Node**: Where orbit rises above the reference plane
+    • **Coordinate Axes**: Shows each reference frame's orientation
+    • **Orbital Curves**: Displays orbit at each transformation stage
+    • **Periapsis/Apoapsis Markers**: 
+    - Periapsis: Closest approach (perihelion for Sun, perigee for planets)
+    - Apoapsis: Farthest point (aphelion for Sun, apogee for planets)
+    - Hover over markers to see predicted dates and distances
+    • **Current Position**: Shows the object's location at the selected date
+    • **Line of Nodes**: Where orbit crosses the reference plane
+    • **Ascending Node**: Where orbit rises above the reference plane
 
-## INTERACTIVE FEATURES
+    ## INTERACTIVE FEATURES
 
-• **3D Navigation**:
-  - Click and drag to rotate view
-  - Scroll to zoom in/out
-  - Double-click to reset view
+    • **3D Navigation**:
+    - Click and drag to rotate view
+    - Scroll to zoom in/out
+    - Double-click to reset view
 
-• **Display Options**:
-  - Toggle transformation steps on/off
-  - Show/hide coordinate frames
-  - Display final orbit only (simplified view)
-  - Toggle perihelion/aphelion markers
+    • **Display Options**:
+    - Toggle transformation steps on/off
+    - Show/hide coordinate frames
+    - Display final orbit only (simplified view)
+    - Toggle perihelion/aphelion markers
 
-• **Legend Interaction**:
-  - Click legend items to show/hide specific elements
-  - Useful for focusing on particular aspects of the transformation
+    • **Legend Interaction**:
+    - Click legend items to show/hide elements
+    - Useful for focusing on particular aspects of the transformation
 
-## REAL-TIME INTEGRATION
+    ## REAL-TIME INTEGRATION
 
-When launched from the main application:
-• Uses current date from the main plot
-• Shows actual object position at that date
-• Displays calculated apsidal dates (perihelion/aphelion)
-• All positions use JPL Horizons ephemeris data for accuracy
+    When launched from the main application:
+    • Uses current date from the main plot
+    • Shows actual object position at that date
+    • Displays calculated apsidal dates (perihelion/aphelion)
+    • All positions use JPL Horizons ephemeris data for accuracy
 
-## NOTE ON SATELLITE ORBITS
+    ## INTERACTIVE ORBITAL ECCENTRICITY VISUALIZATION
 
-This visualization shows idealized Keplerian orbits. Real satellite orbits (like the Moon's) are affected by:
-- Parent planet's equatorial bulge (oblateness)
-- Gravitational pull from the Sun
-- Perturbations from other nearby moons
-- Tidal forces and resonances
+    The **Interactive Orbital Eccentricity Visualization** is a companion tool that demonstrates how eccentricity affects orbital shape across all conic sections:
 
-The main application uses refined models (idealized_orbits.py) that account for these effects, providing more accurate satellite positions.
+    ### Purpose
+    • **Educational Focus**: Understand eccentricity's fundamental role in orbital mechanics
+    • **Complete Spectrum**: Visualize all conic sections from circles to hyperbolas
+    • **Interactive Learning**: Real-time manipulation of eccentricity values
 
-## EDUCATIONAL VALUE
+    ### Features
+    • **Dynamic Slider Control**: 
+    - Adjust eccentricity from 0 (perfect circle) to 10+ (extreme hyperbola)
+    - Real-time orbital shape updates
+    - Numerical input for precise values
 
-This visualization bridges the gap between:
-- **Abstract parameters** (a, e, i, ω, Ω) that define orbits mathematically
-- **Physical reality** of how celestial objects move through 3D space
+    • **Comprehensive Orbit Types**:
+    - **Circle** (e ≈ 0): Perfect circular orbits
+    - **Ellipse** (0 < e < 1): Bound, periodic orbits like planets
+    - **Parabola** (e = 1): Escape velocity trajectory
+    - **Hyperbola** (e > 1): Flyby trajectories with excess velocity
 
-By showing the step-by-step transformation, it helps develop intuition for how each parameter affects the final orbit orientation."""
+    • **Educational Annotations**:
+    - Real-time geometric calculations
+    - Focus positions and distances
+    - Apsidal distances (periapsis/apoapsis)
+    - Mathematical relationships (c = ae, sum of distances to foci)
+
+    • **Object Selection**: 
+    - Choose from real celestial objects
+    - See actual orbital parameters
+    - Compare theoretical shapes with real orbits
+
+    ### Key Learning Points
+    • **Eccentricity Scale**: 
+    - Earth: e = 0.0167 (nearly circular)
+    - Mars: e = 0.0934 (slightly elliptical)  
+    - Comets: e ≈ 0.8-0.99 (highly elliptical)
+    - Hyperbolic asteroids: e > 1 (escape trajectories)
+
+    • **Geometric Relationships**:
+    - Focus distance: c = a × e
+    - Semi-minor axis: b = a√(1-e²) for ellipses
+    - Periapsis distance: a(1-e) for bound orbits
+    - Apoapsis distance: a(1+e) for bound orbits
+
+    • **Physical Interpretation**:
+    - Low e: Stable, circular-like orbits
+    - High e: Eccentric orbits with dramatic distance variations
+    - e = 1: Minimum energy for escape
+    - e > 1: Excess kinetic energy, never returns
+
+    ### Integration with Main Visualization
+    • **Complementary Tools**: Use together to understand both shape (eccentricity) and orientation (other orbital elements)
+    • **Real Object Data**: Eccentricity values from actual celestial objects
+    • **Consistent Framework**: Same mathematical foundations and coordinate systems
+
+    This tool provides intuitive understanding of how a single parameter—eccentricity—determines whether an object follows a closed orbit around its primary or escapes to interstellar space.
+
+    ## NOTE ON SATELLITE ORBITS
+
+    This visualization shows idealized Keplerian orbits. Real satellite orbits (like the Moon's) are affected by:
+    - Parent planet's equatorial bulge (oblateness)
+    - Gravitational pull from the Sun
+    - Perturbations from other nearby moons
+    - Tidal forces and resonances
+
+    The main application uses refined models (idealized_orbits.py) that account for these effects, providing more accurate satellite positions.
+
+    ## EDUCATIONAL VALUE
+
+    This visualization bridges the gap between:
+    - **Abstract parameters** (a, e, i, ω, Ω) that define orbits mathematically
+    - **Physical reality** of how celestial objects move through 3D space
+
+    By showing the step-by-step transformation, it helps develop intuition for how each parameter affects the final orbit orientation."""
     
     info_text.insert('1.0', info_content)
     info_text.config(state='disabled')  # Make read-only

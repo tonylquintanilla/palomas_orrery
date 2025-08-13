@@ -7,7 +7,7 @@ Paloma's Orrery is an advanced astronomical visualization software that brings t
 Created by a civil and environmental engineer with a passion for space exploration, Paloma's Orrery bridges the gap between scientific accuracy and visual beauty, making astronomy accessible to educators, students, and space enthusiasts.
 
 -- Tony Quintanilla, Chicago, 
-   🚀 Updated: August 3, 2025 
+   🚀 Updated: August 10, 2025 
 
    tonyquintanilla@gmail.com
    website: https://sites.google.com/view/tony-quintanilla
@@ -337,20 +337,24 @@ This comprehensive flowchart illustrates how the program modules and functions w
   - Enhanced animation controls with various time steps.
   - Integration of refined and idealized orbit plotting.
   - Integration of dynamic apsidal date calculations for all orbital plots.
+  - Enhanced apsidal marker system with full datetime precision and hyperbolic orbit support
+  - Split legend entries for improved readability of out-of-range apsidal dates
+  - Validation system comparing ideal calculations with actual JPL Horizons positions
 
 **`star_visualization_gui.py`**
 -   **Core functionality**: Provides a dedicated GUI for stellar visualizations, launched from the main orrery application. It enables the creation of 2D H-R diagrams and 3D stellar neighborhood plots based on user-defined parameters like distance or apparent magnitude.
 
-**`apsidal_markers.py`** ✅ **ORBITAL DYNAMICS CALCULATOR**
-- **Core functionality**: Calculates accurate dates for perihelion, apohelion, perigee, and apogee based on current orbital positions and Keplerian mechanics.
-- **Key Features**:
-  - True anomaly calculation: Determines an object's current position in its orbit from 3D coordinates.
-  - Kepler's equation solver: Converts between true, eccentric, and mean anomalies for time calculations.
-  - Dual marker system: Generates both ideal (calculated) and actual (measured) apsidal markers.
-  - Multi-orbit support: Handles elliptical orbits (e < 1) and hyperbolic trajectories (e ≥ 1).
-  - Automated marker generation: Creates properly formatted Plotly markers with hover text and date information.
-  - Satellite terminology: Automatically uses perigee/apogee for moon orbits instead of perihelion/apohelion.
-  - Supports elliptical and hyperbolic orbits.
+**`apsidal_markers.py`** ✅ ORBITAL DYNAMICS CALCULATOR
+-  **Core functionality**: Calculates accurate dates for perihelion, apohelion, perigee, and apogee based on current orbital positions and Keplerian mechanics
+-  **Enhanced Features**:
+   - True anomaly calculation from 3D coordinates
+   - Full datetime precision using Time of Perihelion (TP) values
+   - Dual marker system: ideal (theoretical) and actual (JPL validated)
+   - Hyperbolic/parabolic orbit support for interstellar objects and long-period comets
+   - Automatic terminology switching (perihelion/aphelion vs perigee/apogee)
+   - Split legend entries for dates beyond JPL Horizons range
+   - Accuracy indicators based on orbital eccentricity
+   - Robust handling of edge cases (missing TP, dates beyond 2199, etc.)
 
 **`catalog_selection.py`** ✅ **STELLAR CATALOG MANAGEMENT**
 - **Core functionality**: A specialized module for the star visualization part of the application. It handles the logic for selecting stars from the Hipparcos and Gaia catalogs based on user criteria.
@@ -407,12 +411,25 @@ This comprehensive flowchart illustrates how the program modules and functions w
 **`hr_diagram_distance.py`**
 -   **Core functionality**: A command-line tool that generates a Hertzsprung-Russell (HR) diagram for stars within a user-specified distance from the Sun. It sources data from the Hipparcos and Gaia catalogs and performs the necessary calculations and processing to create the 2D plot.
 
-**`idealized_orbits.py`** ✅ **ORBITAL MECHANICS MODULE**
--   **Core functionality**: Contains the orbital elements (like semi-major axis, eccentricity, and inclination) for a wide range of solar system bodies, including planets, moons, and asteroids. It provides the foundational data for calculating and plotting idealized elliptical and hyperbolic orbits. It also handles the complex transformations required to correctly orient satellite orbits around their parent planets. Includes refined transformation logic for the satellite systems of planets with significant axial tilts, such as Mars, Saturn, and Uranus.
-- Provides ideal orbital calculations from JPL Horizons ephemeris orbital elements.
-- NAIF ID system integration for consistent object identification.
-- Contains orbital element definitions for accurate elliptical and hyperbolic trajectory modeling for all supported JPL Horizons objects, including planets, moons, and comets.
--   **Recent enhancements**: Integration with apsidal_markers.py for accurate perihelion/apohelion date calculations based on current orbital positions.
+**`idealized_orbits.py`** ✅ **THEORETICAL ORBITAL MECHANICS**
+- **Core functionality**: Provides theoretical orbital calculations for all solar system objects based on Keplerian mechanics.
+- **Key Features**:
+  - Orbital element calculations: Works with semi-major axis, eccentricity, inclination, argument of periapsis, and longitude of ascending node.
+  - Multi-body support: Handles planets, asteroids, comets, and satellites with appropriate transformations.
+  - Time-varying elements: Special handling for Moon, Phobos, and Deimos with perturbation models.
+  - **Enhanced hyperbolic orbit support**:
+    - Robust handling of extreme eccentricities (e > 10) including interstellar objects
+    - Adaptive trajectory plotting with intelligent distance limits based on eccentricity
+    - Special visualization for near-straight-line trajectories (very high e values)
+    - Accurate perihelion distance calculations using q = |a| × (e - 1)
+    - Dynamic point density adjustment for smoother hyperbolic curves
+    - Asymptotic true anomaly calculations to ensure valid orbit segments
+  - **Improved hyperbolic orbit visualization**:
+    - Dotted line style to distinguish from elliptical orbits
+    - Contextual hover text with eccentricity warnings for extreme cases
+    - Perihelion markers with diamond symbols for hyperbolic trajectories
+    - Automatic plot range scaling based on perihelion distance and eccentricity
+  - Visualization integration: Generates idealized orbit paths for comparison with actual ephemeris data.
 
 **`jupiter_visualization_shells.py`**
 -   **Core functionality**: Constructs the 3D visualization for Jupiter's complex structure, including its dense core, metallic and molecular hydrogen layers, vibrant cloud tops, extensive ring system, and powerful magnetosphere with its associated plasma torus and radiation belts.
@@ -782,16 +799,22 @@ Or add to settings.json: "python.terminal.executeInFileDir": true
 - Click one of the animation buttons, then "Play" in the Plotly HTML plot
 
 **Apsidal Markers:**
-- Plot any object with an orbit (planets, asteroids, comets)
-- Look for the square markers indicating perihelion/apohelion
-- **Ideal markers**: Show theoretical apsidal points based on orbital elements
-- **Actual markers**: Display true positions on specific dates with measured distances
-- Hover over markers to see:
-  - Calculated or actual dates when the object reaches these points
-  - Precise distances in AU and kilometers
-  - Visual confirmation that ideal orbits match real ephemeris data
-- Observe special handling for hyperbolic objects that may show "Past perihelion"
-- Compare ideal vs actual positions to build confidence in the orbital calculations
+- Comprehensive dual marker system for all orbiting bodies
+- Ideal markers (colored square-open): Theoretical positions from orbital elements
+- Full datetime precision (to the second) for objects with TP values
+- Date-only display for objects without Time of Perihelion data
+- Actual markers (white solid squares): Validated positions from JPL Horizons
+   - Confirms theoretical calculations match real ephemeris data
+   - Only displayed when dates fall within JPL range (1900-2199)
+- Smart date handling:
+   - Automatic calculation using orbital period and Time of Perihelion (TP)
+   - Split legend entries for readability when dates exceed JPL limits
+   - Example: Pluto shows separate lines for perihelion (2237) and aphelion (2361)
+- Special orbit types:
+   - Elliptical: Shows both perihelion and aphelion with precise timing
+   - Hyperbolic/Parabolic: Single perihelion passage with "one-time passage" notation
+   - Accuracy indicators based on eccentricity (±0.0005 to ±0.002 AU)
+- Hover for comprehensive data: dates, distances (AU and km), and orbital characteristics
 
 ### Performance Tips
 

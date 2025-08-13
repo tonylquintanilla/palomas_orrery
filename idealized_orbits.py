@@ -6,87 +6,154 @@ import plotly.graph_objs as go
 import traceback  # Add this import
 from datetime import datetime, timedelta
 from constants_new import color_map, KNOWN_ORBITAL_PERIODS
-from apsidal_markers import add_perihelion_marker, add_apohelion_marker
+from apsidal_markers import (
+    add_perihelion_marker,
+    add_apohelion_marker,
+    add_actual_apsidal_markers,
+    fetch_positions_for_apsidal_dates,
+    estimate_hyperbolic_perihelion_date,  # NEW
+    compute_apsidal_dates_from_tp,  # NEW
+    compute_apsidal_dates_with_notes, 
+    add_apsidal_range_note,
+)
 
 planetary_params = {
-    # Semi-major axis: This is one-half of the longest diameter of the elliptical orbit. It's essentially the average 
-    # of the periapsis (closest point to Saturn) and apoapsis (farthest point from Saturn) distances.
-    # IDs are NAIF IDs used by Horizons. The acronym NAIF stands for the Navigation and Ancillary Information Facility. 
-    # It is a group at NASA's Jet Propulsion Laboratory (JPL) that is responsible for developing and supporting the SPICE 
-    # (Spacecraft, Planet, Instrument, C-matrix, Events) information system. SPICE is used extensively by NASA and the 
-    # international space science community for mission planning and the analysis of scientific observations from space missions. 
-    # The NAIF IDs are numerical identifiers assigned to various celestial bodies, spacecraft, and instruments within the SPICE system. 
-    # These IDs provide a consistent and unambiguous way to refer to these objects in SPICE data files (kernels) and software.
+        #   Standard J2000 mean orbital elements for all planets. These are indeed in the ecliptic frame.
+        #   Source: NASA Planetary Fact Sheets: https://nssdc.gsfc.nasa.gov/planetary/factsheet/
+        #   JPL Approximate Positions: https://ssd.jpl.nasa.gov/planets/approx_pos.html
+        #   Here are the updated values with J2000.0 mean elements. 
 
-    'Mercury': {
-        'a': 0.387098,  # semi-major axis in AU
-        'e': 0.205630,  # eccentricity
-        'i': 7.005,     # inclination in degrees
-        'omega': 29.124, # argument of perihelion in degrees
-        'Omega': 48.331  # longitude of ascending node in degrees
+    # Saturn satellites
+#    'Atlas': 0.602,        # 14.45 hours
+#    'Epimetheus': 0.694,   # 16.66 hours
+#    'Janus': 0.695,        # 16.68 hours
+
+    # Uranus satellites
+#    'Puck': 0.762,         # 18.29 hours
+  
+    # Neptune satellites  
+#    'Proteus': 1.122,      # 26.93 hours
+#    'Larissa': 0.555,      # 13.32 hours
+#    'Naiad': 0.294,        # 7.06 hours
+    
+    # Asteroids
+#    'Pallas': 1685.37,     # 4.614 * 365.25
+#    'Juno': 1591.93,       # 4.358 * 365.25  
+#    'Hygiea': 2041.88,     # 5.592 * 365.25
+#    'Psyche': 1825.01,     # 4.997 * 365.25
+#    'Phaethon': 523.42,    # 1.43 * 365.25
+    
+    # Near-Earth asteroids
+#    '2025 KV': 695.85,     # 1.91 * 365.25
+    
+    # Comets (converted from years to days where applicable)
+#    'Hyakutake': 70071.50, # 191.86 * 365.25 (pre-1996 orbit)
+#    'Hale-Bopp': 2520352.50, # 6900.0 * 365.25
+#    'West': 558203.00,     # 1528.0 * 365.25 (original orbit)
+#    'McNaught': 92552.00,  # 253.5 * 365.25
+#    'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
+    
+    # For hyperbolic/parabolic objects, period is undefined
+#    'Oumuamua': 1e99,      # Interstellar object - effectively infinite period  
+#    'Borisov': 1e99,       # Interstellar object - effectively infinite period
+    
+'Mercury': {
+        'a': 0.38709927,      # semi-major axis in AU (J2000 mean)
+        'e': 0.20563593,      # eccentricity (J2000 mean)
+        'i': 7.00497902,      # inclination in degrees (J2000 mean)
+        'omega': 29.124,        # argument of perihelion in degrees (J2000 mean)
+        'Omega': 48.33076593, # longitude of ascending node in degrees (J2000 mean)
+        'epoch': '2024-03-27', # Date of perihelion passage for TP reference
+        'TP': 2460394.638,    # Time of perihelion (JD) - 2024-Mar-27
+        #     'Mercury': 87.969,  days    
     },
+    
     'Venus': {
-        'a': 0.723332,
-        'e': 0.006772,
-        'i': 3.39471,
-        'omega': 54.884,
-        'Omega': 76.680
+        'a': 0.72333566,
+        'e': 0.00677672,
+        'i': 3.39467605,
+        'omega': 54.852,  # Corrected:
+        'Omega': 76.67984255,
+        'epoch': '2024-08-03',  # Date of perihelion passage
+        'TP': 2460522.892,      # Time of perihelion - 2024-Aug-03
+        #     'Venus': 224.701, 
     },
-    'Earth': {              #  2025-Jul-06
-        'a': 1.000000,
-        'e': 0.016710,
-        'i': 0.00005,
-        'omega': 114.207,
-        'Omega': -11.26064,
-        'epoch': '2025-7-6',
-        'perihelion_dates': [
-        '2026-01-03',  # Following perihelion
-        ],
-        'aphelion_dates': [
-        '2026-07-06',  # Following aphelion
-        ]
+    
+    'Earth': {
+        'a': 1.00000261,
+        'e': 0.01671123,
+        'i': 0.00001531,       # Nearly zero in ecliptic frame
+        'omega': 102.93768193,  # Corrected from your 114.207
+        'Omega': 0.0,          # Undefined for Earth in ecliptic, set to 0
+        'epoch': '2025-01-03',  # Date of perihelion passage
+        'TP': 2460677.413,      # Time of perihelion - 2025-Jan-03
+        #     'Earth': 365.256,
     },
+    
     'Mars': {
-        'a': 1.523679,
-        'e': 0.093400,
-        'i': 1.850,
-        'omega': 286.502,
-        'Omega': 49.558
+        'a': 1.52371034,
+        'e': 0.09339410,
+        'i': 1.84969142,
+        'omega': 286.502,    # Corrected
+        'Omega': 49.55953891,
+        'epoch': '2024-10-05',  # Date of perihelion passage
+        'TP': 2460587.648,      # Time of perihelion - 2024-Oct-05
+        #     'Mars': 686.980,  
     },
+    
     'Jupiter': {
-        'a': 5.204267,
-        'e': 0.048498,
-        'i': 1.303,
-        'omega': 273.867,
-        'Omega': 100.464
+        'a': 5.20288700,
+        'e': 0.04838624,
+        'i': 1.30439695,
+        'omega': 273.867,      # This one was already correct!
+        'Omega': 100.47390909,
+        'epoch': '2023-01-21',  # Date of perihelion passage
+        'TP': 2459993.180,      # Time of perihelion - 2023-Jan-21
+        #     'Jupiter': 4332.589,  
     },
+    
     'Saturn': {
-        'a': 9.582486,
-        'e': 0.054150,
-        'i': 2.485,
-        'omega': 339.392,
-        'Omega': 113.665
+        'a': 9.53667594,
+        'e': 0.05386179,
+        'i': 2.48599187,
+        'omega': 339.392,      # This one was already correct!
+        'Omega': 113.66242448,
+        'epoch': '2003-06-27',  # Date of perihelion passage
+        'TP': 2452815.907,      # Time of perihelion - 2003-Jun-27
+        #     'Saturn': 10759.22,  
     },
+    
     'Uranus': {
-        'a': 19.191263,
-        'e': 0.047318,
-        'i': 0.773,
-        'omega': 96.998857,
-        'Omega': 74.006
+        'a': 19.18916464,
+        'e': 0.04725744,
+        'i': 0.77263783,
+        'omega': 96.998857,    # This one was already correct!
+        'Omega': 74.01692503,
+        'epoch': '2050-08-20',  # Date of perihelion passage
+        'TP': 2470213.857,      # Time of perihelion - 2050-Aug-20
+        #     'Uranus': 30688.5,    
     },
+    
     'Neptune': {
-        'a': 30.068963,
-        'e': 0.008678,
-        'i': 1.770,
-        'omega': 276.336,
-        'Omega': 131.784
+        'a': 30.06992276,
+        'e': 0.00859048,
+        'i': 1.77004347,
+        'omega': 276.340,      
+        'Omega': 131.78422574,
+        'epoch': '2042-09-04',  # Date of perihelion passage
+        'TP': 2468182.079,      # Time of perihelion - 2042-Sep-04
+        #     'Neptune': 60189.0,  
     },
+    
     'Pluto': {
-        'a': 39.482117,
-        'e': 0.248808,
-        'i': 17.16,
-        'omega': 113.834,
-        'Omega': 110.299
+        'a': 39.48211675,
+        'e': 0.24882730,
+        'i': 17.14001206,
+        'omega': 113.834,      # Close to correct (should be 113.76)
+        'Omega': 110.30393684,
+        'epoch': '1989-12-12',  # Date of perihelion passage
+        'TP': 2447891.824,      # Time of perihelion - 1989-Dec-12
+        #     'Pluto': 90560.0, 
     },
 
     'Planet 9': {
@@ -96,6 +163,7 @@ planetary_params = {
         'L': 238,          # Mean longitude at epoch in degrees (unchanged)
         'omega': 150,      # Argument of perihelion in degrees (unchanged)
         'Omega': 90        # Longitude of ascending node in degrees (unchanged)
+        #     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
     },
     
     # Dwarf Planets
@@ -106,6 +174,7 @@ planetary_params = {
         'i': 20.573,     # inclination in degrees
         'omega': 72.400,  # argument of perihelion in degrees
         'Omega': 268.457  # longitude of ascending node in degrees
+        #     'Orcus': 90216.75,     # 247.0 * 365.25
     },
 
     'Ixion': {
@@ -114,6 +183,7 @@ planetary_params = {
         'i': 19.636,     # inclination in degrees
         'omega': 300.273, # argument of perihelion in degrees
         'Omega': 71.031   # longitude of ascending node in degrees
+        # period — 91184.74 days (epoch 2025-08-12)
     },
 
     'MS4': {  # 307261 (2002 MS4); Epoch 2018-May-29
@@ -122,6 +192,7 @@ planetary_params = {
         'i': 17.66789460477087,     # IN, inclination in degrees
         'omega': 214.0813053057189, # W, argument of perihelion in degrees
         'Omega': 215.9040968620575  # OM, longitude of ascending node in degrees
+        # period — 99210.94 days (epoch 2025-08-12)
     },
 
     'GV9': {  # 90568 (2004 GV9); Epoch 2017-11-1   
@@ -130,6 +201,7 @@ planetary_params = {
         'i': 21.93322237277237,     # IN, inclination in degrees
         'omega': 295.190819856158, # W, argument of perihelion in degrees
         'Omega': 250.6628794038891  # OM, longitude of ascending node in degrees
+        # period — 100351.43 days (epoch 2025-08-12)
     },
 
     'Varuna': {
@@ -138,6 +210,7 @@ planetary_params = {
         'i': 17.200,     # inclination in degrees
         'omega': 97.286,  # argument of perihelion in degrees
         'Omega': 97.286   # longitude of ascending node in degrees
+        # period — 102799.14 days (epoch 2025-08-12)
     },
 
     'Haumea': {
@@ -145,7 +218,10 @@ planetary_params = {
         'e': 0.191,
         'i': 28.20,
         'omega': 240.20,
-        'Omega': 122.10
+        'Omega': 122.10,
+        'epoch': '2025-08-12',
+        'TP': 2500289.4542         # Next perihelion JD (2133-06-16 TDB)
+        #     'Haumea': 103731.00,   # 284.0 * 365.25
     },
 
     'Quaoar': {
@@ -154,6 +230,7 @@ planetary_params = {
         'i': 8.34,
         'omega': 157.631,
         'Omega': 188.809
+        #     'Quaoar': 105192.00,   # 288.0 * 365.25
     },
 
     'Arrokoth': {                  # Epoch 2017-12-14, heliocentric
@@ -162,6 +239,7 @@ planetary_params = {
         'i': 2.45301305206896,      # IN, inclination in degrees
         'omega': 176.1507602341478, # W, argument of perihelion in degrees
         'Omega': 158.939446659904   # OM, longitude of ascending node in degrees
+        # period — 108224.98 days (epoch 2025-08-12)
     },
 
     'Makemake': {   # 136472 Makemake (2005 FY9); Epoch 2018-Jan-10
@@ -169,7 +247,10 @@ planetary_params = {
         'e': .1551157031828145,                   # EC
         'i': 28.98446068551257,                   # IN
         'omega': 295.7568523219785,               # W
-        'Omega': 79.60732027458391                # OM
+        'Omega': 79.60732027458391,                # OM
+        'epoch': '2025-08-12',       # solution date      
+        'TP': 2520030.5498         # Next perihelion JD (2187-07-05 TDB)
+        #     'Makemake': 111766.50, # 306.0 * 365.25
     },
 
     'Gonggong': {  # 225088 Gonggong (2007 OR10); Epoch 2017-Sep-25
@@ -178,6 +259,7 @@ planetary_params = {
         'i': 30.86452616352285,     # IN, inclination in degrees
         'omega': 207.2059900430104, # W, argument of perihelion in degrees
         'Omega': 336.8262717815297  # OM, longitude of ascending node in degrees
+        # period — 201010.45 days (epoch 2025-08-12)
     },    
 
     'Eris': {
@@ -186,6 +268,18 @@ planetary_params = {
         'i': 44.03,
         'omega': 150.977,
         'Omega': 35.873
+        #     'Eris': 203809.50,     # 558.0 * 365.25
+    },
+
+    'Ammonite': {              #  2023 KQ14; Soln.date: 2025-Apr-29_21:35:00
+        'a': 250.0679474237761,         # A
+        'e': .7370249039390946,         # EC
+        'i': 10.99528818274681,         # IN
+        'omega': 199.2155526048832,     # W
+        'Omega': 72.0885184764268,      # OM
+        'epoch': '2025-4-29',
+        'TP': 2474830.256515193265  # Time of perihelion (JD)  
+        #     'Ammonite': 1444383.67 ,     # PER 3954.53339 Julian years 
     },
 
     'Sedna': {  # 90377 Sedna (2003 VB12); Epoch 2018-May-16
@@ -193,7 +287,10 @@ planetary_params = {
         'e': .8418992747337005,         # EC
         'i': 11.92926934569724,         # IN
         'omega': 311.5908685997484,     # W
-        'Omega': 144.4059276991507      # OM
+        'Omega': 144.4059276991507,      # OM
+        'epoch': '2025-08-12', 
+        'TP': 2479072.5781         # Next perihelion JD (2075-05-15 TDB)       
+        #     'Sedna': 4163850.00,   # 11400.0 * 365.25
     },
 
     '2017 OF201': {  # Epoch 2012-Jan-22.00
@@ -202,7 +299,19 @@ planetary_params = {
         'i': 16.20068039109616,         # IN
         'omega': 338.23502348994,     # W
         'Omega': 328.5637374192406      # OM
+        # period — 10048413.07 days (epoch 2025-08-12)
     },
+
+    'Leleakuhonua': {              #  541132 Leleakuhonua (2015 TG387) ; Soln.date: 2025-Jul-02_03:47:19
+        'a': 1062.136603634751,         # A
+        'e': .9390574940805684,         # EC
+        'i': 11.66948508856894,         # IN
+        'omega': 118.4456730982617,     # W
+        'Omega': 300.9623405298694,      # OM
+        'epoch': '2025-7-2',
+        'TP': 2480393.5636051819  # Time of perihelion (JD)
+        #     'Leleakuhonua': 12643548.84594,  # Orbital period in days;  34616.15016 julian years x 365.25
+    },    
 
     # Asteroids
 
@@ -211,7 +320,10 @@ planetary_params = {
         'e': 0.191481,   # Horizons: EC, eccentricity
         'i': 3.331,      # inclination in degrees
         'omega': 126.394, # argument of perihelion in degrees
-        'Omega': 204.061  # longitude of ascending node in degrees
+        'Omega': 204.061,  # longitude of ascending node in degrees
+        'epoch': '2025-08-12',
+        'TP': 2460719.3535595234   # 2025-Feb-12.8536 TDB (IAWN/Horizons)
+        #     'Apophis': 323.60,     # 0.89 * 365.25
     },  
 
     'Kamo oalewa': {     # 469219 Kamo`oalewa (2016 HO3)      2025-Jul-05 08:35:28        
@@ -220,6 +332,7 @@ planetary_params = {
         'i': 7.773894173631178,      # Horizons: IN, inclination in degrees
         'omega': 307.0951007739783, # Horizons: W, argument of perihelion in degrees
         'Omega': 66.43991583004482   # Horizons: OM, longitude of ascending node in degrees
+        # need period
     }, 
 
     '2024 PT5': {                  # Epoch 2024-10-20, heliocentric
@@ -228,6 +341,7 @@ planetary_params = {
         'i': 1.518377382131216,      # Horizons: IN, inclination in degrees
         'omega': 116.8074860094156, # Horizons: W, argument of perihelion in degrees
         'Omega': 305.1069316209851   # Horizons: OM, longitude of ascending node in degrees
+        #     '2024 PT5': 368.75,    # 1.01 * 365.25
     },
 
     'Bennu': {
@@ -236,6 +350,7 @@ planetary_params = {
         'i': 6.035,       # inclination in degrees
         'omega': 66.223,  # argument of perihelion in degrees
         'Omega': 2.061    # longitude of ascending node in degrees
+        #     'Bennu': 436.65,       # 1.20 * 365.25
     },
 
     'Ryugu': {
@@ -243,7 +358,10 @@ planetary_params = {
         'e': 0.190349,   # eccentricity
         'i': 5.884,      # inclination in degrees
         'omega': 211.421, # argument of perihelion in degrees
-        'Omega': 251.617  # longitude of ascending node in degrees
+        'Omega': 251.617,  # longitude of ascending node in degrees
+        'epoch': '2025-08-12',
+        'TP': 2460643.5508         # 2024-Nov-29 (TheSkyLive)
+        #     'Ryugu': 473.98,       # 1.30 * 365.25
     },
 
     'Itokawa': {
@@ -252,6 +370,7 @@ planetary_params = {
         'i': 1.622,      # inclination in degrees
         'omega': 162.767, # argument of perihelion in degrees
         'Omega': 69.095   # longitude of ascending node in degrees
+        #     'Itokawa': 556.38,     # 1.52 * 365.25
     },
 
     'Eros': {
@@ -259,7 +378,10 @@ planetary_params = {
         'e': 0.222868,   # eccentricity
         'i': 10.829,     # inclination in degrees
         'omega': 178.817, # argument of perihelion in degrees
-        'Omega': 304.435  # longitude of ascending node in degrees
+        'Omega': 304.435,  # longitude of ascending node in degrees
+        'epoch': '2025-08-12',
+        'TP': 2460445.7223         # 2024-May-15 (TheSkyLive)
+        #     'Eros': 642.63,        # 1.76 * 365.25
     },
 
     '2023 JF': {        # (2023 JF)  EPOCH=  2460073.5 ! 2023-May-09.00 (TDB)
@@ -268,6 +390,7 @@ planetary_params = {
         'i': 3.1489028778487,     # IN - inclination in degrees
         'omega': 199.537622506113, # W - argument of perihelion in degrees
         'Omega': 50.09327122563936  # OM - longitude of ascending node in degrees
+        #     '2023 JF': 493.37,     # 1.35 * 365.25
     },
 
     'Dinkinesh': {      # 152830 Dinkinesh (1999 VD57)
@@ -276,6 +399,7 @@ planetary_params = {
         'i': 2.093523142255687,     # IN - inclination in degrees
         'omega': 66.78467710309617, # W - argument of perihelion in degrees
         'Omega': 21.38248704730461  # OM - longitude of ascending node in degrees
+        #     'Dinkinesh': 1387.50,  # 3.80 * 365.25
     },    
 
     'Vesta': {
@@ -283,7 +407,10 @@ planetary_params = {
         'e': 0.089,
         'i': 7.155,
         'omega': 151.216,
-        'Omega': 103.851
+        'Omega': 103.851,
+        'epoch': '2025-08-12',
+        'TP': 2460902.9691         # 2025-Aug-15 (TheSkyLive)
+        #     'Vesta': 1325.75,      # 3.63 * 365.25
     },
 
     'Šteins': {
@@ -292,6 +419,7 @@ planetary_params = {
         'i': 9.944,      # inclination in degrees
         'omega': 250.97,  # argument of perihelion in degrees
         'Omega': 55.39    # longitude of ascending node in degrees
+        #     'Šteins': 1327.41,     # 3.64 * 365.25
     },
 
     'Donaldjohanson': {     # 52246 Donaldjohanson (1981 EQ5)
@@ -300,6 +428,7 @@ planetary_params = {
         'i': 4.423903983190933,      # IN - inclination in degrees
         'omega': 212.9285580998883,  # W - argument of perihelion in degrees
         'Omega': 262.7951724145965     # OM - longitude of ascending node in degrees
+        #     'Donaldjohanson': 1446.04, # 3.96 * 365.25
     },
 
     '2024 DW': {                  # 50613029 (2024 DW) 2025-Jul-05 10:27:18; Soln.date: 2024-Feb-23
@@ -309,6 +438,7 @@ planetary_params = {
         'omega': 244.5179261214832, # Horizons: W, argument of perihelion in degrees
         'Omega': 335.4879825233473,   # Horizons: OM, longitude of ascending node in degrees
         'epoch': '2024-02-19'  # Horizons: epoch
+        # need period
     },
 
     'Lutetia': {                  # Epoch 2017-10-12, heliocentric
@@ -317,6 +447,7 @@ planetary_params = {
         'i': 3.063715677953934,      # Horizons: IN, inclination in degrees
         'omega': 249.980528664283, # Horizons: W, argument of perihelion in degrees
         'Omega': 80.87713180326485   # Horizons: OM, longitude of ascending node in degrees
+        #     'Lutetia': 1321.00,    # 3.62 * 365.25
     },
 
     '2024 YR4': {                  # Epoch 2025-1-30, heliocentric, solution date 2025-6-3
@@ -324,7 +455,10 @@ planetary_params = {
         'e': .6615999301423001,   # Horizons: EC, eccentricity
         'i': 3.408259321981154,      # Horizons: IN, inclination in degrees
         'omega': 134.3644983455991, # Horizons: W, argument of perihelion in degrees
-        'Omega': 271.3674693540159   # Horizons: OM, longitude of ascending node in degrees
+        'Omega': 271.3674693540159,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-08-12',
+        'TP': 2462115.7385         # 2028-Dec-10 (TheSkyLive)
+        #     '2024 YR4': 922.84,    # 2.53 * 365.25
     },
 
     'Ceres': {
@@ -332,7 +466,10 @@ planetary_params = {
         'e': 0.076,
         'i': 10.593,
         'omega': 73.597,
-        'Omega': 80.393
+        'Omega': 80.393,
+        'epoch': '2025-08-12',
+        'TP': 2461601.4340         # 2027-Jul-14 (TheSkyLive)
+        #     'Ceres': 1680.15,      # 4.6 * 365.25
     },
 
     # Trojan Asteroids
@@ -343,6 +480,7 @@ planetary_params = {
         'i': 8.468402951870347,      # Horizons: IN, inclination in degrees
         'omega': 179.5712820784224, # Horizons: W, argument of perihelion in degrees
         'Omega': 258.5587182277959   # Horizons: OM, longitude of ascending node in degrees
+        #     'Orus': 4274.32,       # 11.71 * 365.25
     }, 
 
      'Polymele': {                  # 15094 Polymele (1999 WB2)
@@ -351,6 +489,7 @@ planetary_params = {
         'i': 12.98094196026331,      # Horizons: IN, inclination in degrees
         'omega': 5.149831531818331, # Horizons: W, argument of perihelion in degrees
         'Omega': 50.31413377311653   # Horizons: OM, longitude of ascending node in degrees
+        #     'Polymele': 4319.33,   # 11.83 * 365.25
     }, 
 
      'Eurybates': {                  # 3548 Eurybates (1973 SO)
@@ -359,6 +498,7 @@ planetary_params = {
         'i': 8.054169046592317,      # Horizons: IN, inclination in degrees
         'omega': 27.83332476783044, # Horizons: W, argument of perihelion in degrees
         'Omega': 43.54011293260102   # Horizons: OM, longitude of ascending node in degrees
+        #     'Eurybates': 4333.71,  # 11.87 * 365.25
     },  
 
      'Patroclus': {                  # 617 Patroclus (A906 UL) 
@@ -367,6 +507,7 @@ planetary_params = {
         'i': 22.05719746380513,      # Horizons: IN, inclination in degrees
         'omega': 307.9473518701323, # Horizons: W, argument of perihelion in degrees
         'Omega': 44.34955228487597   # Horizons: OM, longitude of ascending node in degrees
+        #     'Patroclus': 4336.36,  # 11.88 * 365.25
     }, 
 
      'Leucus': {                  # 11351 Leucus (1997 TS25)
@@ -375,6 +516,7 @@ planetary_params = {
         'i': 11.55528566945522,      # Horizons: IN, inclination in degrees
         'omega': 160.4023262565797, # Horizons: W, argument of perihelion in degrees
         'Omega': 251.0747114724082   # Horizons: OM, longitude of ascending node in degrees
+        #     'Leucus': 4352.24,     # 11.92 * 365.25
     },  
 
     # Comets with closed elliptical orbits; object type 'orbital'
@@ -385,6 +527,7 @@ planetary_params = {
         'i': 7.040294906760007,      # Horizons: IN, inclination in degrees
         'omega': 12.79824973415729, # Horizons: W, argument of perihelion in degrees
         'Omega': 50.13557380441372   # Horizons: OM, longitude of ascending node in degrees
+        # need period
     },
 
     'Halley_geocentric': {         # Epoch 2017-10-13, geocentric -- not accurate for our plot
@@ -401,6 +544,7 @@ planetary_params = {
         'i': 162.1951462980701,      # Horizons: IN, inclination in degrees
         'omega': 112.2128395742619, # Horizons: W, argument of perihelion in degrees
         'Omega': 59.07198712310091   # Horizons: OM, longitude of ascending node in degrees
+        #     'Halley': 27759.00,    # 76.0 * 365.25
     },
 
     'Ikeya-Seki': {                  # Epoch 1965-10-7, heliocentric, (C/1965 S1-A)
@@ -409,6 +553,7 @@ planetary_params = {
         'i': 141.8642,      # Horizons: IN, inclination in degrees
         'omega': 69.04859999999999, # Horizons: W, argument of perihelion in degrees
         'Omega': 346.9947   # Horizons: OM, longitude of ascending node in degrees
+        #     'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
     },
 
     'NEOWISE': {                  # 2020-Jul-06.0000000, heliocentric, NEOWISE (C/2020 F3) 
@@ -417,6 +562,7 @@ planetary_params = {
         'i': 128.9375027594809,      # Horizons: IN, inclination in degrees
         'omega': 37.2786584481257, # Horizons: W, argument of perihelion in degrees
         'Omega': 61.01042818536988   # Horizons: OM, longitude of ascending node in degrees
+        # need period
     },    
 
     # Comets with parabolic trajectories, object type 'trajectory'
@@ -427,18 +573,25 @@ planetary_params = {
         'e': 1.000251464554613,   # Horizons: EC, eccentricity
         'i': 147.864867556013,      # Horizons: IN, inclination in degrees
         'omega': 271.0285208159306, # Horizons: W, argument of perihelion in degrees
-        'Omega': 97.55648983040697   # Horizons: OM, longitude of ascending node in degrees
+        'Omega': 97.55648983040697,   # Horizons: OM, longitude of ascending node in degrees
+        #     'C/2025_K1': 1e99,     # Parabolic comet - effectively infinite period
+        # Next perihelion per current solutions is 2025-10-08; add JD+epoch.
+        'epoch': '2025-10-08',
+        'TP': 2460955.5  # 2025-10-08 00:00 UTC; replace with Horizons Tp for exact instant
+        # 'C/2025_K1': 1e99,
     },   
 
     # Interstellar objects; hyperbolic trajectories, object type 'trajectory'
 
-     '3I/ATLAS': {                  # 2025-Jul-01, heliocentric, ATLAS (C/2025 N1) 90004916
-         # Ephemeris / WWW_USER Fri Jul 11 12:19:05 2025 Pasadena, USA      / Horizons
-        'a': -.2636282119444073,   # Horizons: A, semi-major axis in AU
-        'e': 6.151136010582101,   # Horizons: EC, eccentricity
-        'i': 175.113183893991,      # Horizons: IN, inclination in degrees
-        'omega': 127.9882324877828, # Horizons: W, argument of perihelion in degrees
-        'Omega': 322.1637461140604   # Horizons: OM, longitude of ascending node in degrees
+     '3I/ATLAS': {                  # heliocentric, ATLAS (C/2025 N1) 90004922
+        'a': -.263877814449834,   # Horizons: A, semi-major axis in AU
+        'e': 6.14114298932642,   # Horizons: EC, eccentricity
+        'i': 175.1132447611479,      # Horizons: IN, inclination in degrees
+        'omega': 128.0088139262397, # Horizons: W, argument of perihelion in degrees
+        'Omega': 322.1596294584908,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-7-6',
+        'TP': 2460977.978711922653,  # Time of perihelion (JD)
+        #     '3I/ATLAS': 1e99,      # Interstellar object - effectively infinite period
     },    
 
     # Satellites
@@ -451,6 +604,7 @@ planetary_params = {
         'omega': 318.15, # Horizons: W, argument of perihelion in degrees
         'Omega': 125.08,   # Horizons: OM, longitude of ascending node in degrees
         'epoch': '2013-07-31'
+        #     'Moon': 27.321582,
     },
 
     # Mars' Moons
@@ -463,6 +617,7 @@ planetary_params = {
         'i': 1.082,            # inclination to Mars' equator in degrees
         'omega': 216.3,      # argument of perihelion in degrees
         'Omega': 169.2        # longitude of ascending node in degrees
+        #     'Phobos': 0.319,       # Verified from JPL
     },
 
     'Deimos': {             # 402; Revised: Sep 28, 2012
@@ -473,6 +628,7 @@ planetary_params = {
         'i': 1.791,            # inclination to Mars' equator in degrees
         'omega': 0,      # argument of perihelion in degrees
         'Omega': 54.4       # longitude of ascending node in degrees
+        #     'Deimos': 1.263,       # Verified from JPL
     },
 
     # Jupiter's Galilean Moons
@@ -484,6 +640,7 @@ planetary_params = {
         'i': 0.05,             # inclination to Jupiter's equator in degrees
         'omega': 49.1,       # argument of perihelion in degrees
         'Omega': 0.0        # longitude of ascending node in degrees
+        #     'Io': 1.769,           # 42.456 hours
     },
 
     'Europa': {
@@ -494,6 +651,7 @@ planetary_params = {
         'i': 0.471,            # inclination to Jupiter's equator in degrees
         'omega': 45.0,       # argument of perihelion in degrees
         'Omega': 184.0       # longitude of ascending node in degrees
+        #     'Europa': 3.551,       # 85.224 hours
     },
 
     'Ganymede': {
@@ -504,6 +662,7 @@ planetary_params = {
         'i': 0.204,            # inclination to Jupiter's equator in degrees
         'omega': 198.3,      # argument of perihelion in degrees
         'Omega': 58.5        # longitude of ascending node in degrees
+        #     'Ganymede': 7.155,     # 171.72 hours
     },
 
     'Callisto': {
@@ -514,6 +673,7 @@ planetary_params = {
         'i': 0.205,            # inclination to Jupiter's equator in degrees
         'omega': 43.8,       # argument of perihelion in degrees
         'Omega': 309.1       # longitude of ascending node in degrees
+        #     'Callisto': 16.689,    # 400.536 hours
     },
 
 # Jupiter's Inner Moons associated with ring system
@@ -524,6 +684,7 @@ planetary_params = {
         'i': 0.06,             # inclination to Jupiter's equator in degrees
         'omega': 16.63,        # argument of perihelion in degrees
         'Omega': 68.9          # longitude of ascending node in degrees
+        #     'Metis': 0.295,        # 7.08 hours
     },
 
     'Adrastea': {
@@ -533,6 +694,7 @@ planetary_params = {
         'i': 0.03,             # inclination to Jupiter's equator in degrees
         'omega': 234.0,        # argument of perihelion in degrees
         'Omega': 33.5          # longitude of ascending node in degrees
+        #     'Adrastea': 0.298,     # 7.15 hours
     },
 
     'Amalthea': {
@@ -542,6 +704,7 @@ planetary_params = {
         'i': 0.374,            # inclination to Jupiter's equator in degrees
         'omega': 155.87,       # argument of perihelion in degrees
         'Omega': 108.05        # longitude of ascending node in degrees
+        #     'Amalthea': 0.498,     # 11.95 hours
     },
 
     'Thebe': {
@@ -551,6 +714,7 @@ planetary_params = {
         'i': 1.076,            # inclination to Jupiter's equator in degrees
         'omega': 234.57,       # argument of perihelion in degrees
         'Omega': 237.33        # longitude of ascending node in degrees
+        #     'Thebe': 0.675,        # 16.20 hours
     },
 
     # Saturn's Major and Ring Moons
@@ -563,6 +727,7 @@ planetary_params = {
         'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
         'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
         'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        #     'Pan': 0.575,          # 13.80 hours
     },
 
     'Daphnis': {              # Revised: Aug 08, 2019; 635
@@ -573,6 +738,7 @@ planetary_params = {
         'i': 0,            # inclination to Saturn's equator in degrees not defined in Horizons; 0 in https://ssd.jpl.nasa.gov/sats/elem/
         'omega': 0,      # argument of perihelion in degrees; laplace; 0 in https://ssd.jpl.nasa.gov/sats/elem/
         'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        #     'Daphnis': 0.594,      # 14.26 hours
     },
 
     'Prometheus': {              # Revised: Oct 03, 2018; 616
@@ -583,6 +749,7 @@ planetary_params = {
         'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
         'omega': 341.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
         'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        #     'Prometheus': 0.616,   # 14.78 hours
     },
 
     'Pandora': {              # Revised: Oct 03, 2018; 617
@@ -593,6 +760,7 @@ planetary_params = {
         'i': 0,            # inclination to Saturn's equator in degrees in Horizons; in https://ssd.jpl.nasa.gov/horizons/app.html#/
         'omega': 217.9,      # argument of perihelion in degrees; laplace; in https://ssd.jpl.nasa.gov/sats/elem/
         'Omega': 0       # longitude of ascending node in degrees; 0 in https://ssd.jpl.nasa.gov/sats/elem/
+        #     'Pandora': 0.631,      # 15.14 hours
     },
 
     'Mimas': {              # revised 1-26-2022; 601
@@ -603,6 +771,7 @@ planetary_params = {
         'i': 1.572,            # inclination to Saturn's equator in degrees
         'omega': 160.4,      # argument of perihelion in degrees; laplace
         'Omega': 66.2       # longitude of ascending node in degrees
+        #     'Mimas': 0.942,        # 22.61 hours
     },
 
     'Enceladus': {          # 602
@@ -613,6 +782,7 @@ planetary_params = {
         'i': 0.009,            # inclination to Saturn's equator in degrees
         'omega': 119.5,      # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
+        #     'Enceladus': 1.370,    # 32.88 hours
     },
 
     'Tethys': {             # 603
@@ -623,6 +793,7 @@ planetary_params = {
         'i': 1.091,            # inclination to Saturn's equator in degrees
         'omega': 335.3,      # argument of perihelion in degrees
         'Omega': 273.0       # longitude of ascending node in degrees
+        #     'Tethys': 1.888,       # 45.31 hours
     },
 
     'Dione': {              # 604
@@ -633,6 +804,7 @@ planetary_params = {
         'i': 0.0,            # inclination to Saturn's equator in degrees
         'omega': 116.0,      # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
+        #     'Dione': 2.737,        # 65.69 hours
     },
 
     'Rhea': {               # 605
@@ -643,6 +815,7 @@ planetary_params = {
         'i': 0.333,            # inclination to Saturn's equator in degrees
         'omega': 44.3,      # argument of perihelion in degrees
         'Omega': 133.7       # longitude of ascending node in degrees
+        #     'Rhea': 4.518,         # 108.43 hours
     },
 
     'Titan': {              # 606
@@ -653,6 +826,7 @@ planetary_params = {
         'i': 0.306,            # inclination to Saturn's equator in degrees
         'omega': 78.3,      # argument of perihelion in degrees
         'Omega': 78.6        # longitude of ascending node in degrees
+        #     'Titan': 15.945,       # 382.68 hours
     },
 
     'Hyperion': {              # 607; Revised: Jan 26, 2022; Orbital period 21.28 d
@@ -663,6 +837,7 @@ planetary_params = {
         'i': 0.615,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
         'omega': 214.0,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
         'Omega': 87.1        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+        #     'Hyperion': 21.277,    # 510.65 hours
     },
 
     'Iapetus': {              # 608; Revised: Jan 26, 2022; Orbital period 79.33 d
@@ -673,6 +848,7 @@ planetary_params = {
         'i': 7.489,            # inclination to Saturn's equator in degrees; https://ssd.jpl.nasa.gov/horizons/app.html#/
         'omega': 254.5,      # argument of perihelion in degrees; https://ssd.jpl.nasa.gov/sats/elem/
         'Omega': 86.5        # longitude of ascending node in degrees; https://ssd.jpl.nasa.gov/sats/elem/
+        #     'Iapetus': 79.331,     # 1903.94 hours
     },
 
     'Phoebe': {             # 609;  Revised: Jan 26, 2022 Phoebe / (Saturn) 609; Orbital period = 550.31 d
@@ -683,6 +859,7 @@ planetary_params = {
         'i': 175.986,            # inclination to Saturn's equator in degrees (retrograde)
         'omega': 240.3,      # argument of perihelion in degrees
         'Omega': 192.7        # longitude of ascending node in degrees
+        #     'Phoebe': 550.56,      # 1.51 years
     },
 
     # Uranus's Major Moons
@@ -694,6 +871,7 @@ planetary_params = {
         'i': 4.338,            # inclination to Uranus's equator in degrees
         'omega': 155.6,       # argument of perihelion in degrees
         'Omega': 100.6       # longitude of ascending node in degrees
+        #     'Miranda': 1.413,      # 33.91 hours
     },
 
     'Ariel': {              # 701
@@ -704,6 +882,7 @@ planetary_params = {
         'i': 0.0,            # inclination to Uranus's equator in degrees
         'omega': 83.3,      # argument of perihelion in degrees
         'Omega': 0.0        # longitude of ascending node in degrees
+        #     'Ariel': 2.520,        # 60.48 hours
     },
 
     'Umbriel': {            # 702
@@ -714,6 +893,7 @@ planetary_params = {
         'i': 0.1,            # inclination to Uranus's equator in degrees
         'omega': 157.5,       # argument of perihelion in degrees
         'Omega': 195.5        # longitude of ascending node in degrees
+        #     'Umbriel': 4.144,      # 99.46 hours
     },
 
     'Titania': {            # 703
@@ -724,6 +904,7 @@ planetary_params = {
         'i': 0.1,            # inclination to Uranus's equator in degrees
         'omega': 202.0,      # argument of perihelion in degrees
         'Omega': 26.4        # longitude of ascending node in degrees
+        #     'Titania': 8.706,      # 208.94 hours
     },
 
     'Oberon': {             # 704
@@ -734,6 +915,7 @@ planetary_params = {
         'i': 0.058,            # inclination to Uranus's equator in degrees
         'omega': 182.4,      # argument of perihelion in degrees
         'Omega': 30.5       # longitude of ascending node in degrees
+        #     'Oberon': 13.463,      # 323.11 hours
     },
 
      'Portia': {             # 712
@@ -744,6 +926,7 @@ planetary_params = {
         'i': 0.0,            # inclination to Uranus's equator in degrees
         'omega': 0,      # argument of perihelion in degrees
         'Omega': 0       # longitude of ascending node in degrees
+        #     'Portia': 0.513,       # 12.31 hours
     },   
 
      'Mab': {             # 726
@@ -754,6 +937,7 @@ planetary_params = {
         'i': 0.1,            # inclination to Uranus's equator in degrees
         'omega': 237.9,      # argument of perihelion in degrees
         'Omega': 188.2       # longitude of ascending node in degrees
+        #     'Mab': 0.923,          # 22.15 hours
     },    
 
     # Neptune's Major Moon
@@ -765,6 +949,7 @@ planetary_params = {
         'i': 157.3,          # inclination to Neptune's equator in degrees (retrograde)
         'omega': 0.0,       # argument of perihelion in degrees
         'Omega': 178.1       # longitude of ascending node in degrees
+        #     'Triton': 5.877,       # 141.05 hours (retrograde)
     },
 
     'Despina': {             # 805
@@ -775,6 +960,7 @@ planetary_params = {
         'i': 0.0,          # inclination to Neptune's equator in degrees (retrograde)
         'omega': 0.0,       # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
+        #     'Despina': 0.335,      # 8.04 hours
     },
 
     'Galatea': {             # 806
@@ -785,6 +971,7 @@ planetary_params = {
         'i': 0.0,          # inclination to Neptune's equator in degrees (retrograde)
         'omega': 0.0,       # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
+        #     'Galatea': 0.429,      # 10.30 hours
     },
 
     # Pluto's Moons
@@ -796,6 +983,7 @@ planetary_params = {
         'i': 0.0,            # inclination to Pluto's equator in degrees
         'omega': 0.0,      # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
+        #     'Charon': 6.387,       # 153.29 hours
     },
 
     'Styx': {              # 905; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
@@ -806,6 +994,7 @@ planetary_params = {
         'i': 0.0,            # inclination to Pluto's equator in degrees
         'omega': 322.5,      # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
+        #     'Styx': 20.162,        # 483.89 hours
     },    
 
     'Nix': {                # 902; revised 4/3/2024 post-New Horizons
@@ -816,6 +1005,7 @@ planetary_params = {
         'i': 0.0,            # inclination to Pluto's equator in degrees
         'omega': 31.4,      # argument of perihelion in degrees
         'Omega': 0.0         # longitude of ascending node in degrees
+        #     'Nix': 24.856,         # 596.54 hours
     },
     'Kerberos': {              # 904; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
 #        'a': 58300,         # semi-major axis in km
@@ -825,6 +1015,7 @@ planetary_params = {
         'i': 0.4,            # inclination to Pluto's equator in degrees
         'omega': 32.1,      # argument of perihelion in degrees
         'Omega': 314.3       # longitude of ascending node in degrees
+        #     'Kerberos': 32.168,    # 772.03 hours
     },   
 
     'Hydra': {              # 903; revised 4-3-2024; Fit to post New Horizons encounter and Gaia data through 2023.
@@ -835,6 +1026,7 @@ planetary_params = {
         'i': 0.3,            # inclination to Pluto's equator in degrees
         'omega': 139.3,      # argument of perihelion in degrees
         'Omega': 114.3       # longitude of ascending node in degrees
+        #     'Hydra': 38.202,       # 916.85 hours
     },
 
     # Eris's Moon
@@ -846,6 +1038,7 @@ planetary_params = {
         'i': 78.29,            # inclination in degrees (to the ecliptic)
         'omega': 139.65,       # argument of perihelion in degrees
         'Omega': 29.43         # longitude of ascending node in degrees
+        #     'Dysnomia': 15.786,    # 378.86 hours
     },
 
 } 
@@ -947,7 +1140,7 @@ def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):
         # Check if we have enough valid points
         if np.sum(valid_points) < 20:
             # Focus on perihelion region for extreme cases
-            print(f"Note: {obj_name} has extreme eccentricity (e={e:.2f}), showing perihelion region only")
+            print(f"Note: {obj_name} has extreme eccentricity (e={e:.6f}), showing perihelion region only")
             theta_narrow = np.linspace(-0.1, 0.1, 100)
             r_narrow = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta_narrow))
             valid_narrow = (r_narrow > 0) & (r_narrow <= max_distance * 1.5)
@@ -957,7 +1150,7 @@ def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):
                 r = r_narrow[valid_narrow]
                 valid_points = np.ones_like(r, dtype=bool)
             else:
-                print(f"Warning: Unable to plot meaningful trajectory for {obj_name} with e={e:.2f}")
+                print(f"Warning: Unable to plot meaningful trajectory for {obj_name} with e={e:.6f}")
                 return False
         
         theta = theta[valid_points]
@@ -991,11 +1184,11 @@ def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):
         
         # Create hover text with eccentricity warning for extreme cases
         if e > 10:
-            hover_text = f"{obj_name} Hyperbolic Orbit<br>EXTREME eccentricity: e={e:.2f}<br>Perihelion: q={q:.3f} AU<br>Nearly straight-line trajectory"
+            hover_text = f"{obj_name} Hyperbolic Orbit<br>EXTREME eccentricity: e={e:.6f}<br>Perihelion: q={q:.6f} AU<br>Nearly straight-line trajectory"
         elif e > 5:
-            hover_text = f"{obj_name} Hyperbolic Orbit<br>High eccentricity: e={e:.2f}<br>Perihelion: q={q:.3f} AU<br>Very narrow trajectory"
+            hover_text = f"{obj_name} Hyperbolic Orbit<br>High eccentricity: e={e:.6f}<br>Perihelion: q={q:.6f} AU<br>Very narrow trajectory"
         else:
-            hover_text = f"{obj_name} Hyperbolic Orbit<br>Eccentricity: e={e:.2f}<br>Perihelion: q={q:.3f} AU"
+            hover_text = f"{obj_name} Hyperbolic Orbit<br>Eccentricity: e={e:.6f}<br>Perihelion: q={q:.6f} AU"
         
         # Add the trace to the figure
         fig.add_trace(go.Scatter3d(
@@ -1025,11 +1218,11 @@ def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):
                 symbol='diamond'
             ),
             name=f"{obj_name} perihelion",
-            hovertemplate=f"{obj_name} Perihelion<br>Distance: {q:.3f} AU<extra></extra>",
+            hovertemplate=f"{obj_name} Perihelion<br>Distance: {q:.6f} AU<extra></extra>",
             showlegend=False
         ))
         
-        print(f"Successfully plotted hyperbolic orbit for {obj_name}: e={e:.2f}, q={q:.3f} AU")
+        print(f"Successfully plotted hyperbolic orbit for {obj_name}: e={e:.6f}, q={q:.6f} AU")
         return True
         
     except Exception as e:
@@ -2375,7 +2568,7 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     
     print(f"\nMoon orbital elements for {date.strftime('%Y-%m-%d')}:")
     print(f"  a = {a:.6f} AU")
-    print(f"  e = {e:.4f}")
+    print(f"  e = {e:.6f}")
     print(f"  i = {i:.2f}°")
     print(f"  ω = {omega:.2f}°")
     print(f"  Ω = {Omega:.2f}°")
@@ -2428,7 +2621,7 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     
     # Create hover text with date information
     date_str = date.strftime('%Y-%m-%d %H:%M UTC')
-    hover_text = f"Moon Ideal Orbit<br>Date: {date_str}<br>e: {e:.4f}<br>i: {i:.2f}°"
+    hover_text = f"Moon Ideal Orbit<br>Date: {date_str}<br>e: {e:.6f}<br>i: {i:.2f}°"
     
     # Use default Moon color if not specified
     if color is None:
@@ -2603,7 +2796,7 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_d
             r = r_perihelion[valid_perihelion]
         else:
             # Last resort: just create a small arc at perihelion
-            print(f"Warning: Extremely high eccentricity (e={e:.2f}), showing minimal trajectory")
+            print(f"Warning: Extremely high eccentricity (e={e:.6f}), showing minimal trajectory")
             theta = np.linspace(-0.01, 0.01, 20)
             r = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta))
     else:
@@ -2647,6 +2840,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
     Returns:
         plotly.graph_objects.Figure: Figure with idealized orbits added
     """
+    # CRITICAL: Import numpy at the function level
+    import numpy as np
+    import plotly.graph_objects as go
+    from datetime import datetime, timedelta
+
     # Create name to object mapping
     obj_dict = {obj['name']: obj for obj in objects} if objects else {}
 
@@ -2667,7 +2865,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
         'comets': [],
         'missions': [],
         'no_params': [],
-        'invalid_orbit': []
+        'invalid_orbit': [],
+        'error': []  # ADD THIS LINE
     }
 
     plotted = []
@@ -2790,6 +2989,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             print(f"\n[DEBUG] Processing {obj_name}")
             print(f"[DEBUG] params keys: {params.keys()}")            
 
+# Improved code for the hyperbolic section in idealized_orbits.py
+# Based on the working pattern from orbital_param_viz.py
+
 # Check if this is a hyperbolic orbit (e > 1)
             if e > 1:
                 try:
@@ -2799,6 +3001,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     if 'epoch' in params:
                         epoch_str = f" (Epoch: {params['epoch']})"
 
+                    # Plot the hyperbolic orbit path
                     fig.add_trace(
                         go.Scatter3d(
                             x=x_final,
@@ -2807,13 +3010,73 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             mode='lines',
                             line=dict(dash='dot', width=1, color=color_map(obj_name)),
                             name=f"{obj_name} Ideal Orbit{epoch_str}",
-                            text=[f"{obj_name} Hyperbolic Orbit<br>eccentricity, e={e:.5f}<br>periapsis distance, q={q:.5f} AU"] * len(x_final),
+                            text=[f"{obj_name} Hyperbolic Orbit<br>eccentricity, e={e:.6f}<br>periapsis distance, q={q:.6f} AU"] * len(x_final),
                             customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),
                             hovertemplate='%{text}<extra></extra>',
                             showlegend=True                    
                         )
                     )
                     
+                    # ========== ADD ACTUAL POSITION MARKER - WITH FIX ==========
+                    # First try to get position from current_positions (this may fail for hyperbolic objects)
+                    current_pos = current_positions.get(obj_name) if current_positions else None
+                    
+                    # If position fetch failed (common for hyperbolic objects with None orbital period),
+                    # extract the position from the successfully plotted actual orbit
+                    if not current_pos or 'x' not in current_pos:
+                        print(f"  No position in current_positions for {obj_name}, checking plotted orbits...")
+                        
+                        # Look through all the traces that have been added to the figure
+                        for trace in fig.data:
+                            # Find the actual orbit trace for this object
+                            # The actual orbit is named like "C/2025_K1 Actual Orbit" or "3I/ATLAS Actual Orbit"
+                            if trace.name and obj_name in trace.name and 'Actual Orbit' in trace.name:
+                                # Check if this trace has coordinate data
+                                if hasattr(trace, 'x') and hasattr(trace, 'y') and hasattr(trace, 'z'):
+                                    if len(trace.x) > 0 and trace.x[0] is not None:
+                                        # Extract the first point (current position)
+                                        current_pos = {
+                                            'x': trace.x[0],
+                                            'y': trace.y[0],
+                                            'z': trace.z[0]
+                                        }
+                                        print(f"  Successfully extracted position from '{trace.name}'")
+                                        print(f"    Position: ({current_pos['x']:.6f}, {current_pos['y']:.6f}, {current_pos['z']:.6f}) AU")
+                                        break
+                    
+                    # Now plot the position marker if we have a position
+                    if current_pos and 'x' in current_pos:
+                        # Get the object info for color and symbol
+                        obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
+                        if obj_info:
+                            # Calculate distance for hover text
+                            distance = np.sqrt(current_pos['x']**2 + current_pos['y']**2 + current_pos['z']**2)
+                            hover_text = f"{obj_name}<br>Hyperbolic object<br>e={e:.6f}<br>Distance: {distance:.6f} AU"
+                            
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=[current_pos['x']],
+                                    y=[current_pos['y']],
+                                    z=[current_pos['z']],
+                                    mode='markers',
+                                    marker=dict(
+                                        size=6,
+                                        color=obj_info.get('color', color_map(obj_name)),
+                                        symbol=obj_info.get('symbol', 'circle')
+                                    ),
+                                    name=f"{obj_name}",
+                                    text=[hover_text],
+                                    hovertemplate='%{text}<extra></extra>',
+                                    showlegend=True
+                                )
+                            )
+                            print(f"  Added position marker for {obj_name}")
+                        else:
+                            print(f"  Warning: Could not find object info for {obj_name}")
+                    else:
+                        print(f"  Warning: Still no position available for {obj_name} after checking orbits")
+                    
+                    # ========== CONTINUE WITH PERIHELION MARKER CALCULATION ==========
                     # Calculate perihelion position explicitly at theta=0
                     r_perihelion = abs(a) * (e**2 - 1) / (1 + e)  # At theta=0, cos(0)=1
                     x_peri = r_perihelion
@@ -2830,32 +3093,130 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
                     x_peri_final, y_peri_final, z_peri_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
 
-                    # NEW CODE - Use the apsidal_markers module:
-                    # Get current position for this object
-                    current_pos = current_positions.get(obj_name) if current_positions else None
-                    
-                    # Add perihelion marker with proper date calculation
+                    # ========== IDEAL PERIHELION MARKER ==========
+                    # Use the standard add_perihelion_marker function for consistency
                     add_perihelion_marker(
-                        fig, 
-                        x_peri_final[0],  # Note: x_peri_final is a list, so we take [0]
-                        y_peri_final[0],  # Same for y
-                        z_peri_final[0],  # Same for z
-                        obj_name, 
-                        a, 
-                        e, 
-                        date, 
+                        fig,
+                        x_peri_final[0],
+                        y_peri_final[0],
+                        z_peri_final[0],
+                        obj_name,
+                        abs(a),  # Use absolute value of a for hyperbolic
+                        e,
+                        date,
                         current_pos,
-                        params,  # Pass the full params dict
-                        color_map, 
-                        q=q  # Pass the perihelion distance we already calculated
+                        params,
+                        color_map,
+                        q=q  # Pass the calculated perihelion distance
                     )
-
-                    plotted.append(obj_name)
-
-                    print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.5f}, q={q:.5f} AU")
                     
+                    # ========== GENERATE ACTUAL PERIHELION DATE FROM TP ==========
+                    if 'TP' in params:
+                        from datetime import timedelta
+                        from astropy.time import Time
+                        
+                        # For hyperbolic orbits, TP gives us the exact perihelion date and time
+                        tp_jd = params['TP']
+                        tp_time = Time(tp_jd, format='jd')
+                        perihelion_datetime = tp_time.datetime
+                        
+                        # Store with full precision for display
+                        params['perihelion_datetime'] = perihelion_datetime
+                        # Store as string for compatibility (with time)
+                        params['perihelion_dates'] = [perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')]
+                        print(f"  [HYPERBOLIC] Perihelion: {params['perihelion_dates'][0]} UTC")
+                    else:
+                        print(f"  [HYPERBOLIC] No TP in params for {obj_name}")
+                    
+                    # ========== SIMPLIFIED ACTUAL MARKER FETCHING FOR HYPERBOLIC ==========
+                    # This avoids the datetime parsing issues by fetching with date-only
+                    if 'perihelion_dates' in params:
+                        print(f"\n[DEBUG] Attempting simplified fetch for hyperbolic {obj_name}")
+                        
+                        # Get the full datetime string and extract just the date part
+                        perihelion_full = params['perihelion_dates'][0]
+                        perihelion_date_only = perihelion_full.split(' ')[0]  # Get just YYYY-MM-DD
+                        print(f"  Full datetime: {perihelion_full}")
+                        print(f"  Date only for fetch: {perihelion_date_only}")
+                        
+                        # Get object ID
+                        obj_id = None
+                        id_type = None
+                        for obj in objects:
+                            if obj['name'] == obj_name:
+                                obj_id = obj['id']
+                                id_type = obj.get('id_type', None)
+                                break
+                        
+                        print(f"  Object ID: {obj_id}, ID type: {id_type}")
+                        
+                        if obj_id and fetch_position:
+                            try:
+                                # Create a datetime object with just the date (midnight)
+                                from datetime import datetime
+                                date_obj = datetime.strptime(perihelion_date_only, '%Y-%m-%d')
+                                print(f"  Fetching position for {date_obj}")
+                                
+                                # Fetch the position
+                                pos_data = fetch_position(obj_id, date_obj, center_id=center_id, id_type=id_type)
+                                
+                                if pos_data and 'x' in pos_data:
+                                    print(f"  SUCCESS: Got position ({pos_data['x']:.3f}, {pos_data['y']:.3f}, {pos_data['z']:.3f})")
+                                    
+                                    # Calculate distance for hover text
+                                    import numpy as np
+                                    distance_au = np.sqrt(pos_data['x']**2 + pos_data['y']**2 + pos_data['z']**2)
+                                    distance_km = distance_au * 149597870.7
+                                    
+                                    # Manually add the actual perihelion marker
+                                    fig.add_trace(
+                                        go.Scatter3d(
+                                            x=[pos_data['x']],
+                                            y=[pos_data['y']],
+                                            z=[pos_data['z']],
+                                            mode='markers',
+                                            marker=dict(
+                                                size=8,
+                                                color='white',
+                                                symbol='square-open'
+                                            ),
+                                            name=f"{obj_name} Actual Perihelion",
+                                            hovertemplate=(
+                                                f"<b>{obj_name} at Perihelion (Actual)</b><br>"
+                                                f"Date/Time: {perihelion_full} UTC<br>"
+                                                f"Distance from {center_id}: {distance_au:.6f} AU<br>"
+                                                f"Distance: {distance_km:.0f} km<br>"
+                                                "<extra></extra>"
+                                            ),
+                                            showlegend=True
+                                        )
+                                    )
+                                    print(f"  Added actual perihelion marker for {obj_name}")
+                                else:
+                                    print(f"  WARNING: No position data returned for {obj_name}")
+                                    print(f"  This might be due to limited ephemeris data for this object")
+                                    
+                            except Exception as e:
+                                print(f"  ERROR fetching position: {e}")
+                                print(f"  Error type: {type(e).__name__}")
+                                
+                                # If it's still the NoneType * float error, it might be in fetch_position itself
+                                if "NoneType" in str(e) and "float" in str(e):
+                                    print(f"  This appears to be the period calculation issue")
+                                    print(f"  The object may have limited ephemeris data in JPL Horizons")
+                        else:
+                            if not obj_id:
+                                print(f"  Could not find object ID for {obj_name}")
+                            if not fetch_position:
+                                print(f"  fetch_position function not available")
+                    
+                    plotted.append(obj_name)
+                    print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.5f}, q={q:.5f} AU")
+
                 except Exception as err:
                     print(f"Error plotting hyperbolic orbit for {obj_name}: {err}")
+                    import traceback
+                    traceback.print_exc()
                     skipped['error'].append(obj_name)
                 
                 continue  # Skip to next object, don't run elliptical orbit code
@@ -2925,23 +3286,66 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             # Apohelion (farthest point from Sun)
             apohelion_idx = np.argmin(np.abs(theta - np.pi))  # Index closest to theta=π
             
-            # NEW CODE - Use the apsidal_markers module:
             # Add apohelion marker with proper date calculation
             add_apohelion_marker(
                 fig,
-                x_final[apohelion_idx],    # x coordinate at apohelion
-                y_final[apohelion_idx],    # y coordinate at apohelion
-                z_final[apohelion_idx],    # z coordinate at apohelion
+                x_final[apohelion_idx],
+                y_final[apohelion_idx],
+                z_final[apohelion_idx],
                 obj_name,
                 a,
                 e,
                 date,
-                current_pos,               # Current position of the object
-                params,                    # Full orbital parameters
-                color_map                  # Color mapping function
+                current_pos,
+                params,
+                color_map
             )
 
-            # ADD THE ACTUAL APSIDAL MARKERS CODE HERE (moved from hyperbolic section)
+            # ========== NEW: GENERATE APSIDAL DATES FROM TP ==========
+            # After adding ideal markers, generate actual dates from TP if available
+            if 'TP' in params:
+                from datetime import timedelta
+                
+                # Generate the next apsidal dates from TP
+        #        next_perihelion, next_aphelion = compute_apsidal_dates_from_tp(
+        #            obj_name,
+        #            params,
+        #            current_date=date  # Use the plot date
+        #        )
+                
+                # Add these single dates to params as lists for compatibility
+        #        if next_perihelion:
+        #            params['perihelion_dates'] = [next_perihelion.strftime('%Y-%m-%d')]
+        #            print(f"  Next perihelion: {params['perihelion_dates'][0]}")
+        #        if next_aphelion and e < 1:  # Only for elliptical orbits
+        #            params['aphelion_dates'] = [next_aphelion.strftime('%Y-%m-%d')]
+        #            print(f"  Next aphelion: {params['aphelion_dates'][0]}")
+
+                # Generate the next apsidal dates from TP with range checking
+                next_perihelion, next_aphelion, peri_in_range, apo_in_range = compute_apsidal_dates_with_notes(
+                    obj_name,
+                    params,
+                    current_date=date  # Use the plot date
+                )
+                
+                # In idealized_orbits.py, when storing apsidal dates:
+                if next_perihelion and peri_in_range:
+                    # Store with full datetime precision
+                    params['perihelion_dates'] = [next_perihelion.strftime('%Y-%m-%d %H:%M:%S')]
+                    print(f"  Next perihelion: {params['perihelion_dates'][0]}")
+                elif next_perihelion and not peri_in_range:
+                    print(f"  Next perihelion: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')} (outside JPL range)")
+                    
+                if next_aphelion and e < 1 and apo_in_range:
+                    # Store with full datetime precision
+                    params['aphelion_dates'] = [next_aphelion.strftime('%Y-%m-%d %H:%M:%S')]
+                    print(f"  Next aphelion: {params['aphelion_dates'][0]}")
+                elif next_aphelion and e < 1 and not apo_in_range:
+                    print(f"  Next aphelion: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')} (outside JPL range)")
+
+
+            # ========== EXISTING: PLOT ACTUAL APSIDAL MARKERS ==========
+            # This existing code will now work because we just added the dates above
             # After adding ideal markers, add actual apsidal markers if dates are provided
             if 'perihelion_dates' in params or 'aphelion_dates' in params:
                 print(f"\n[DEBUG] Found apsidal dates for {obj_name}")
@@ -2960,6 +3364,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 if obj_id:
                     # Import the functions we need
                     from apsidal_markers import fetch_positions_for_apsidal_dates, add_actual_apsidal_markers
+                    from datetime import datetime, timedelta
 
                     # Use the passed fetch_position
                     if fetch_position is None:
@@ -2970,7 +3375,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     positions_dict = fetch_positions_for_apsidal_dates(
                         obj_id=obj_id,
                         params=params,
-                        date_range=(date - timedelta(days=365), date + timedelta(days=365)),
+                #        date_range=(date - timedelta(days=365), date + timedelta(days=365)),
+                        date_range=None,  # Don't restrict by date range
                         center_id=center_id,
                         id_type=id_type,
                         is_satellite=(obj_name in parent_planets.get(center_id, [])),
@@ -2981,17 +3387,31 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     
                     # Add the actual markers
                     add_actual_apsidal_markers(
-                        fig=fig,
-                        obj_name=obj_name,
-                        params=params,
+                        fig,
+                        obj_name,
+                        params,
                         date_range=(date - timedelta(days=365), date + timedelta(days=365)),
                         positions_dict=positions_dict,
                         color_map=color_map,
                         center_body=center_id,
                         is_satellite=(obj_name in parent_planets.get(center_id, []))
                     )
-                    print(f"  Added actual apsidal markers for {obj_name}")
 
+            # ========== NEW: ADD LEGEND NOTES FOR OUT-OF-RANGE DATES ==========
+            # If we calculated dates but they're outside JPL range, add informative notes
+            if 'TP' in params:
+                # Check if we should add a note about out-of-range dates
+                if (next_perihelion and not peri_in_range) or (next_aphelion and not apo_in_range):
+                    from apsidal_markers import add_apsidal_range_note
+                    add_apsidal_range_note(
+                        fig,
+                        obj_name,
+                        next_perihelion if not peri_in_range else None,
+                        next_aphelion if not apo_in_range else None,
+                        color_map
+                    )
+
+            # Mark this object as successfully plotted
             plotted.append(obj_name)
 
     # Print summary of plotted and skipped objects
