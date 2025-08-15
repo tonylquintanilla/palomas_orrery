@@ -610,6 +610,77 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             'Step 2: Applies the tilt to the orbital plane.'
         ))
     
+# Fix for the inclination arc visibility issue in orbital_param_viz.py
+# Replace the existing inclination arc section (around line 340-365) with this improved version:
+
+    # Add inclination angle arc
+    if i != 0:
+        # The inclination arc should show the rotation around the X-axis (line of nodes)
+        # after the ω rotation has been applied
+        
+        # Make the arc radius larger for better visibility
+        inc_arc_r = 0.5 * scale_basis  # Increased from 0.3 * a for better visibility
+        
+        # Generate the arc in the YZ plane (rotation around X-axis)
+        inc_arc_angle = np.linspace(0, i_rad, 30)
+        
+        # Create arc points - starts from Y-axis and rotates toward Z-axis
+        inc_x = np.zeros_like(inc_arc_angle)
+        inc_y = inc_arc_r * np.cos(inc_arc_angle)
+        inc_z = inc_arc_r * np.sin(inc_arc_angle)
+        
+        # Transform the arc by the ω rotation to align with the line of nodes
+        inc_arc_coords = R_after_omega @ np.vstack([inc_x, inc_y, inc_z])
+        
+        # Add the inclination arc trace
+        fig.add_trace(go.Scatter3d(
+            x=inc_arc_coords[0],
+            y=inc_arc_coords[1],
+            z=inc_arc_coords[2],
+            mode='lines+markers+text',
+            line=dict(color='orange', width=4),  # Increased width from 3
+            marker=dict(
+                size=[0] * 29 + [6],  # Add a marker at the end
+                color='orange',
+                symbol='diamond'
+            ),
+            text=[''] * 29 + [f'i = {i:.1f}°'],
+            textposition='top center',
+            textfont=dict(size=12, color='orange'),
+            name=f'Inclination ({i:.1f}°)',
+            showlegend=True,
+            visible=True,
+            hovertemplate=f'<b>Inclination (i)</b><br>Angle: {i:.1f}°<br>' +
+                         'Tilts the orbit relative to the ecliptic plane.<br>' +
+                         'Rotation around the X-axis (line of nodes).'
+        ))
+        
+        # Optional: Add a visual guide line from origin to start of arc
+        # This helps show what plane the rotation is in
+        guide_start = R_after_omega @ np.array([0, inc_arc_r, 0])
+        fig.add_trace(go.Scatter3d(
+            x=[0, guide_start[0]],
+            y=[0, guide_start[1]],
+            z=[0, guide_start[2]],
+            mode='lines',
+            line=dict(color='orange', width=2, dash='dot'),
+            showlegend=False,
+            hovertemplate='Start of inclination rotation'
+        ))
+        
+        # Add another guide line to the end of the arc
+        guide_end = R_after_omega @ np.array([0, inc_arc_r * np.cos(i_rad), inc_arc_r * np.sin(i_rad)])
+        fig.add_trace(go.Scatter3d(
+            x=[0, guide_end[0]],
+            y=[0, guide_end[1]],
+            z=[0, guide_end[2]],
+            mode='lines',
+            line=dict(color='orange', width=2, dash='dot'),
+            showlegend=False,
+            hovertemplate='End of inclination rotation'
+        ))
+
+    """
     # Add inclination angle arc
     if i != 0:
         # Arc in the YZ plane after ω rotation
@@ -637,6 +708,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             hovertext=f'<b>Inclination (i)</b><br>Angle: {i:.1f}°<br>' 
             'Tilts the orbit relative to the ecliptic plane.'
         ))
+        """
 
     # 4. Final orbit
     coords_final = R_final @ np.vstack([x0, y0, z0])

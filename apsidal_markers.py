@@ -16,6 +16,113 @@ import plotly.graph_objects as go
 from constants_new import KNOWN_ORBITAL_PERIODS, color_map
 from datetime import datetime, timedelta
 
+def calculate_exact_apsides(a, e, i, omega, Omega, rotate_points):
+    """
+    Calculate exact apsidal positions at theta=0 (periapsis) and theta=pi (apoapsis).
+    Uses the mathematical fact that periapsis is always at true anomaly = 0
+    and apoapsis is always at true anomaly = pi.
+    
+    Parameters:
+        a: Semi-major axis (AU)
+        e: Eccentricity
+        i: Inclination (degrees)
+        omega: Argument of periapsis (degrees)
+        Omega: Longitude of ascending node (degrees)
+        rotate_points: Function to rotate points in 3D space
+        
+    Returns:
+        dict: {
+            'periapsis': {'x': float, 'y': float, 'z': float, 'distance': float},
+            'apoapsis': {'x': float, 'y': float, 'z': float, 'distance': float} or None
+        }
+    """
+    import numpy as np
+    
+    # Convert angles to radians for rotations
+    i_rad = np.radians(i)
+    omega_rad = np.radians(omega)
+    Omega_rad = np.radians(Omega)
+    
+    # ========== CALCULATE PERIAPSIS AT THETA=0 ==========
+    theta_periapsis = 0.0
+    
+    # Calculate radius at periapsis
+    if e < 1:  # Elliptical orbit
+        # r = a(1-e²)/(1+e*cos(θ)) at θ=0 becomes r = a(1-e²)/(1+e) = a(1-e)
+        r_periapsis = a * (1 - e)
+    else:  # Hyperbolic orbit (e >= 1)
+        # r = |a|(e²-1)/(1+e*cos(θ)) at θ=0 becomes r = |a|(e²-1)/(1+e) = |a|(e-1)
+        r_periapsis = abs(a) * (e - 1)
+    
+    # Position in orbital plane at theta=0
+    x_orbit_peri = r_periapsis  # r * cos(0) = r
+    y_orbit_peri = 0.0          # r * sin(0) = 0
+    z_orbit_peri = 0.0
+    
+    # Apply orbital element rotations to transform from orbital plane to 3D space
+    # 1. Rotate by argument of periapsis (ω) around z-axis
+    x_temp, y_temp, z_temp = rotate_points([x_orbit_peri], [y_orbit_peri], [z_orbit_peri], omega_rad, 'z')
+    # 2. Rotate by inclination (i) around x-axis
+    x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+    # 3. Rotate by longitude of ascending node (Ω) around z-axis
+    x_peri, y_peri, z_peri = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+    
+    # Extract single point (rotate_points returns arrays)
+    peri_x = x_peri[0]
+    peri_y = y_peri[0]
+    peri_z = z_peri[0]
+    peri_distance = np.sqrt(peri_x**2 + peri_y**2 + peri_z**2)
+    
+    # Create periapsis result
+    periapsis_result = {
+        'x': peri_x,
+        'y': peri_y,
+        'z': peri_z,
+        'distance': peri_distance
+    }
+    
+    # ========== CALCULATE APOAPSIS AT THETA=PI (for elliptical only) ==========
+    apoapsis_result = None
+    
+    if e < 1:  # Only elliptical orbits have apoapsis
+        theta_apoapsis = np.pi  # 180 degrees
+        
+        # Calculate radius at apoapsis
+        # r = a(1-e²)/(1+e*cos(θ)) at θ=π becomes r = a(1-e²)/(1-e) = a(1+e)
+        r_apoapsis = a * (1 + e)
+        
+        # Position in orbital plane at theta=pi
+        x_orbit_apo = r_apoapsis * np.cos(theta_apoapsis)  # r * cos(π) = -r
+        y_orbit_apo = r_apoapsis * np.sin(theta_apoapsis)  # r * sin(π) = 0
+        z_orbit_apo = 0.0
+        
+        # Apply orbital element rotations
+        # 1. Rotate by argument of periapsis (ω) around z-axis
+        x_temp, y_temp, z_temp = rotate_points([x_orbit_apo], [y_orbit_apo], [z_orbit_apo], omega_rad, 'z')
+        # 2. Rotate by inclination (i) around x-axis
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        # 3. Rotate by longitude of ascending node (Ω) around z-axis
+        x_apo, y_apo, z_apo = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+        
+        # Extract single point
+        apo_x = x_apo[0]
+        apo_y = y_apo[0]
+        apo_z = z_apo[0]
+        apo_distance = np.sqrt(apo_x**2 + apo_y**2 + apo_z**2)
+        
+        # Create apoapsis result
+        apoapsis_result = {
+            'x': apo_x,
+            'y': apo_y,
+            'z': apo_z,
+            'distance': apo_distance
+        }
+    
+    return {
+        'periapsis': periapsis_result,
+        'apoapsis': apoapsis_result
+    }
+
 def add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_map):
     """
     Add legend entries explaining why actual apsidal markers aren't shown

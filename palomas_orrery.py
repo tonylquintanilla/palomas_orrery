@@ -2484,26 +2484,28 @@ objects = [
     'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades. Apparition C/2020 F3', 
     'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
 
-    {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var': comet_2025k1_var, 'color': color_map('C/2025_K1'), 'symbol': 'diamond', 
-    # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
-    'object_type': 'trajectory', 'id_type': 'smallbody', 
-    # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-    'mission_info': 'A notable comet for observation in late 2025.', 
-    'mission_url': 'https://theskylive.com/c2025k1-info'},
-
     {'name': 'Tsuchinshan', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 10), 
     'end_date': datetime(2030, 12, 31), 
     'mission_info': 'Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
     'mission_url': 'https://en.wikipedia.org/wiki/C/2023_A3_(Tsuchinshan-ATLAS)'},
 
+# Interstellar and hyperbolic objects
+# Hyperbolic
+
     {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
     'mission_info': 'Notable for its bright and impressive tail.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
-# Interstellar objects
+    {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var': comet_2025k1_var, 'color': color_map('C/2025_K1'), 'symbol': 'diamond', 
+    # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
+    'object_type': 'trajectory', 'id_type': 'smallbody', 
+    # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
+    'mission_info': 'A notable comet for observation in late 2025.', 
+    'mission_url': 'https://theskylive.com/c2025k1-info'}, 
 
+# Hyperbolic and interstellar
     {'name': 'Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('Borisov'), 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 8, 31), 'end_date': datetime(2020, 10, 1), 
     'mission_info': 'The second interstellar object detected, after \'Oumuamua.', 
@@ -5383,7 +5385,6 @@ def create_celestial_checkbutton(name, variable):
 
 # Existing celestial checkbuttons
 create_celestial_checkbutton("Sun", sun_var)
-# create_celestial_checkbutton("- Solar Shells", sun_shells_var)
 
 # After the "- Solar Shells" checkbutton
 # First, modify the existing Solar Shells checkbutton to call toggle_all_shells
@@ -5457,7 +5458,7 @@ sun_gravitational_checkbutton.pack(anchor='w')
 CreateToolTip(sun_gravitational_checkbutton, gravitational_influence_info)
 
 # inner planets
-create_celestial_checkbutton("Mercury", mercury_var)
+create_celestial_checkbutton("Mercury", mercury_var)    # params
 # Create a Frame specifically for the mercury shell options (indented)
 mercury_shell_options_frame = tk.Frame(celestial_frame)
 mercury_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5490,7 +5491,7 @@ mercury_hill_sphere_checkbutton = tk.Checkbutton(mercury_shell_options_frame, te
 mercury_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(mercury_hill_sphere_checkbutton, mercury_hill_sphere_info)
 
-create_celestial_checkbutton("Venus", venus_var)
+create_celestial_checkbutton("Venus", venus_var)    # params
 # Create a Frame specifically for the venus shell options (indented)
 venus_shell_options_frame = tk.Frame(celestial_frame)
 venus_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5523,7 +5524,7 @@ venus_hill_sphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="
 venus_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(venus_hill_sphere_checkbutton, venus_hill_sphere_info)
 
-create_celestial_checkbutton("Earth", earth_var)
+create_celestial_checkbutton("Earth", earth_var)    # params
 # Create a Frame specifically for the Earth shell options (indented)
 earth_shell_options_frame = tk.Frame(celestial_frame)
 earth_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5564,7 +5565,7 @@ earth_hill_sphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="
 earth_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_hill_sphere_checkbutton, earth_hill_sphere_info)
 
-create_celestial_checkbutton("Moon", moon_var)
+create_celestial_checkbutton("Moon", moon_var)  # params
 # Create a Frame specifically for the moon shell options (indented)
 moon_shell_options_frame = tk.Frame(celestial_frame)
 moon_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5605,13 +5606,13 @@ create_celestial_checkbutton("- L3", l3_var)
 create_celestial_checkbutton("- L4", l4_var)
 create_celestial_checkbutton("- L5", l5_var)
 # Near Earth asteroids
-create_celestial_checkbutton("- Kamo oalewa", kamooalewa_var)
-create_celestial_checkbutton("- 2024 PT5", pt5_var)
-create_celestial_checkbutton("- 2023 JF", asteroid2023jf_var)
-create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)
-create_celestial_checkbutton("- 2024 YR4", yr4_var)
+create_celestial_checkbutton("- Kamo oalewa", kamooalewa_var)   # params
+create_celestial_checkbutton("- 2024 PT5", pt5_var) # params
+create_celestial_checkbutton("- 2023 JF", asteroid2023jf_var)   # params
+create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)  # params
+create_celestial_checkbutton("- 2024 YR4", yr4_var) # params
 
-create_celestial_checkbutton("Mars", mars_var)
+create_celestial_checkbutton("Mars", mars_var)  # params
 # Create a Frame specifically for the Mars shell options (indented)
 mars_shell_options_frame = tk.Frame(celestial_frame)
 mars_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5647,30 +5648,30 @@ CreateToolTip(mars_magnetosphere_checkbutton, mars_magnetosphere_info)
 mars_hill_sphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Hill Sphere", variable=mars_hill_sphere_var)
 mars_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(mars_hill_sphere_checkbutton, mars_hill_sphere_info)
-create_celestial_checkbutton("- Phobos", phobos_var)
-create_celestial_checkbutton("- Deimos", deimos_var)
+create_celestial_checkbutton("- Phobos", phobos_var)    # params
+create_celestial_checkbutton("- Deimos", deimos_var)    # params
 
 # asteroids
-create_celestial_checkbutton("Apophis", apophis_var)
-create_celestial_checkbutton("Bennu", bennu_var)
-create_celestial_checkbutton("Ryugu", ryugu_var)
-create_celestial_checkbutton("Itokawa", itokawa_var)
-create_celestial_checkbutton("Eros", eros_var)
-create_celestial_checkbutton("Dinkinesh", dinkinesh_var)
-create_celestial_checkbutton("Vesta", vesta_var)
-create_celestial_checkbutton("Šteins", steins_var)
-create_celestial_checkbutton("Donaldjohanson", donaldjohanson_var)
-create_celestial_checkbutton("Lutetia", lutetia_var)
-create_celestial_checkbutton("Ceres", ceres_var)
-create_celestial_checkbutton("Orus", orus_var)
-create_celestial_checkbutton("Polymele", polymele_var)
-create_celestial_checkbutton("Eurybates", eurybates_var)
-create_celestial_checkbutton("Patroclus", patroclus_var)
-create_celestial_checkbutton("Leucus", leucus_var)
+create_celestial_checkbutton("Apophis", apophis_var)    # params
+create_celestial_checkbutton("Bennu", bennu_var)    # params
+create_celestial_checkbutton("Ryugu", ryugu_var)    # params
+create_celestial_checkbutton("Itokawa", itokawa_var)    # params
+create_celestial_checkbutton("Eros", eros_var)  # params
+create_celestial_checkbutton("Dinkinesh", dinkinesh_var)    # params
+create_celestial_checkbutton("Vesta", vesta_var)    # params
+create_celestial_checkbutton("Šteins", steins_var)  # params
+create_celestial_checkbutton("Donaldjohanson", donaldjohanson_var)  # params
+create_celestial_checkbutton("Lutetia", lutetia_var)    # params
+create_celestial_checkbutton("Ceres", ceres_var)    # params
+create_celestial_checkbutton("Orus", orus_var)  # params
+create_celestial_checkbutton("Polymele", polymele_var)  # params
+create_celestial_checkbutton("Eurybates", eurybates_var)    # params
+create_celestial_checkbutton("Patroclus", patroclus_var)    # params
+create_celestial_checkbutton("Leucus", leucus_var)  # params
 
 # outer planets
 
-create_celestial_checkbutton("Jupiter", jupiter_var)
+create_celestial_checkbutton("Jupiter", jupiter_var)    # params
 # Create a Frame specifically for the Jupiter shell options (indented)
 jupiter_shell_options_frame = tk.Frame(celestial_frame)
 jupiter_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5723,16 +5724,16 @@ jupiter_hill_sphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, te
 jupiter_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(jupiter_hill_sphere_checkbutton, jupiter_hill_sphere_info)              
 
-create_celestial_checkbutton("- Metis", metis_var)      # 1.79 Jupiter radii, 128,000 km
-create_celestial_checkbutton("- Adrastea", adrastea_var)  # 1.81 Jupiter radii, 129,000 km
-create_celestial_checkbutton("- Amalthea", amalthea_var)  # 2.54 Jupiter radii, 182,000 km
-create_celestial_checkbutton("- Thebe", thebe_var)        # 3.11 Jupiter radii, 226,000 km
-create_celestial_checkbutton("- Io", io_var)              # 5.90 Jupiter radii, 422,000 km
-create_celestial_checkbutton("- Europa", europa_var)      # 9.40 Jupiter radii, 671,000 km
-create_celestial_checkbutton("- Ganymede", ganymede_var)  # 14.99 Jupiter radii, 1,070,000 km
-create_celestial_checkbutton("- Callisto", callisto_var)  # 26.37 Jupiter radii, 1,883,000 km
+create_celestial_checkbutton("- Metis", metis_var)      # params; 1.79 Jupiter radii, 128,000 km
+create_celestial_checkbutton("- Adrastea", adrastea_var)  # params; 1.81 Jupiter radii, 129,000 km
+create_celestial_checkbutton("- Amalthea", amalthea_var)  # params; 2.54 Jupiter radii, 182,000 km
+create_celestial_checkbutton("- Thebe", thebe_var)        # params; 3.11 Jupiter radii, 226,000 km
+create_celestial_checkbutton("- Io", io_var)              # params; 5.90 Jupiter radii, 422,000 km
+create_celestial_checkbutton("- Europa", europa_var)      # params; 9.40 Jupiter radii, 671,000 km
+create_celestial_checkbutton("- Ganymede", ganymede_var)  # params; 14.99 Jupiter radii, 1,070,000 km
+create_celestial_checkbutton("- Callisto", callisto_var)  # params; 26.37 Jupiter radii, 1,883,000 km
 
-create_celestial_checkbutton("Saturn", saturn_var)
+create_celestial_checkbutton("Saturn", saturn_var)  # params
 # Create a Frame specifically for the saturn shell options (indented)
 saturn_shell_options_frame = tk.Frame(celestial_frame)
 saturn_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5785,21 +5786,21 @@ saturn_hill_sphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text
 saturn_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(saturn_hill_sphere_checkbutton, saturn_hill_sphere_info) 
 
-create_celestial_checkbutton("- Pan", pan_var)
-create_celestial_checkbutton("- Daphnis", daphnis_var)
-create_celestial_checkbutton("- Prometheus", prometheus_var)
-create_celestial_checkbutton("- Pandora", pandora_var)
-create_celestial_checkbutton("- Mimas", mimas_var)
-create_celestial_checkbutton("- Enceladus", enceladus_var)
-create_celestial_checkbutton("- Tethys", tethys_var)
-create_celestial_checkbutton("- Dione", dione_var)
-create_celestial_checkbutton("- Rhea", rhea_var)
-create_celestial_checkbutton("- Titan", titan_var)
-create_celestial_checkbutton("- Hyperion", hyperion_var)
-create_celestial_checkbutton("- Iapetus", iapetus_var)
-create_celestial_checkbutton("- Phoebe", phoebe_var)
+create_celestial_checkbutton("- Pan", pan_var)  # params
+create_celestial_checkbutton("- Daphnis", daphnis_var)  # params
+create_celestial_checkbutton("- Prometheus", prometheus_var)    # params
+create_celestial_checkbutton("- Pandora", pandora_var)  # params
+create_celestial_checkbutton("- Mimas", mimas_var)  # params
+create_celestial_checkbutton("- Enceladus", enceladus_var)  # params
+create_celestial_checkbutton("- Tethys", tethys_var)    # params
+create_celestial_checkbutton("- Dione", dione_var)  # params
+create_celestial_checkbutton("- Rhea", rhea_var)    # params
+create_celestial_checkbutton("- Titan", titan_var)  # params
+create_celestial_checkbutton("- Hyperion", hyperion_var)    # params
+create_celestial_checkbutton("- Iapetus", iapetus_var)  # params
+create_celestial_checkbutton("- Phoebe", phoebe_var)    # params
 
-create_celestial_checkbutton("Uranus", uranus_var)
+create_celestial_checkbutton("Uranus", uranus_var)  # params
 # Create a Frame specifically for the uranus shell options (indented)
 uranus_shell_options_frame = tk.Frame(celestial_frame)
 uranus_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5844,15 +5845,15 @@ uranus_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(uranus_hill_sphere_checkbutton, uranus_hill_sphere_info) 
 
 # Uranus moons
-create_celestial_checkbutton("- Ariel", ariel_var)
-create_celestial_checkbutton("- Umbriel", umbriel_var)
-create_celestial_checkbutton("- Titania", titania_var)
-create_celestial_checkbutton("- Oberon", oberon_var)
-create_celestial_checkbutton("- Miranda", miranda_var)
-create_celestial_checkbutton("- Portia", portia_var)
-create_celestial_checkbutton("- Mab", mab_var)
+create_celestial_checkbutton("- Ariel", ariel_var)  # params
+create_celestial_checkbutton("- Umbriel", umbriel_var)  # params
+create_celestial_checkbutton("- Titania", titania_var)  # params
+create_celestial_checkbutton("- Oberon", oberon_var)    # params
+create_celestial_checkbutton("- Miranda", miranda_var)  # params
+create_celestial_checkbutton("- Portia", portia_var)    # params
+create_celestial_checkbutton("- Mab", mab_var)  # params
 
-create_celestial_checkbutton("Neptune", neptune_var)
+create_celestial_checkbutton("Neptune", neptune_var)    # params
 
 # Create a Frame specifically for the neptune shell options (indented)
 neptune_shell_options_frame = tk.Frame(celestial_frame)
@@ -5896,11 +5897,11 @@ CreateToolTip(neptune_magnetosphere_checkbutton, neptune_magnetosphere_info)
 neptune_hill_sphere_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Hill Sphere", variable=neptune_hill_sphere_var)
 neptune_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(neptune_hill_sphere_checkbutton, neptune_hill_sphere_info) 
-create_celestial_checkbutton("- Triton", triton_var)
-create_celestial_checkbutton("- Despina", despina_var)
-create_celestial_checkbutton("- Galatea", galatea_var)
+create_celestial_checkbutton("- Triton", triton_var)    # params
+create_celestial_checkbutton("- Despina", despina_var)  # params
+create_celestial_checkbutton("- Galatea", galatea_var)  # params
 
-create_celestial_checkbutton("Pluto", pluto_var)
+create_celestial_checkbutton("Pluto", pluto_var)    # params
 
 # Create a Frame specifically for the pluto shell options (indented)
 pluto_shell_options_frame = tk.Frame(celestial_frame)
@@ -5935,24 +5936,24 @@ CreateToolTip(pluto_atmosphere_checkbutton, pluto_atmosphere_info)
 pluto_hill_sphere_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Hill Sphere", variable=pluto_hill_sphere_var)
 pluto_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(pluto_hill_sphere_checkbutton, pluto_hill_sphere_info) 
-create_celestial_checkbutton("- Charon", charon_var)
-create_celestial_checkbutton("- Styx", styx_var)
-create_celestial_checkbutton("- Nix", nix_var)
-create_celestial_checkbutton("- Kerberos", kerberos_var)
-create_celestial_checkbutton("- Hydra", hydra_var)
+create_celestial_checkbutton("- Charon", charon_var)    # params
+create_celestial_checkbutton("- Styx", styx_var)    # params
+create_celestial_checkbutton("- Nix", nix_var)  # params
+create_celestial_checkbutton("- Kerberos", kerberos_var)    # params
+create_celestial_checkbutton("- Hydra", hydra_var)  # params
 
 # Kuiper Belt Objects
-create_celestial_checkbutton("Orcus", orcus_var)
-create_celestial_checkbutton("Ixion", ixion_var)
-create_celestial_checkbutton("2002 MS4", ms4_var)
-create_celestial_checkbutton("2004 GV9", gv9_var)
-create_celestial_checkbutton("Varuna", varuna_var)
-create_celestial_checkbutton("Haumea", haumea_var)
-create_celestial_checkbutton("Quaoar", quaoar_var)
-create_celestial_checkbutton("Arrokoth", arrokoth_var)
-create_celestial_checkbutton("Makemake", makemake_var)
-create_celestial_checkbutton("Gonggong", gonggong_var)
-create_celestial_checkbutton("Eris", eris_var)
+create_celestial_checkbutton("Orcus", orcus_var) # params
+create_celestial_checkbutton("Ixion", ixion_var)    # params
+create_celestial_checkbutton("2002 MS4", ms4_var)   # params
+create_celestial_checkbutton("2004 GV9", gv9_var)   # params
+create_celestial_checkbutton("Varuna", varuna_var)  # params
+create_celestial_checkbutton("Haumea", haumea_var)  # params
+create_celestial_checkbutton("Quaoar", quaoar_var)  # params
+create_celestial_checkbutton("Arrokoth", arrokoth_var)  # params
+create_celestial_checkbutton("Makemake", makemake_var)  # params
+create_celestial_checkbutton("Gonggong", gonggong_var)  # params
+create_celestial_checkbutton("Eris", eris_var)  # params
 # Create a Frame specifically for the eris shell options (indented)
 eris_shell_options_frame = tk.Frame(celestial_frame)
 eris_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -5981,17 +5982,17 @@ CreateToolTip(eris_atmosphere_checkbutton, eris_atmosphere_info)
 eris_hill_sphere_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Hill Sphere", variable=eris_hill_sphere_var)
 eris_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(eris_hill_sphere_checkbutton, eris_hill_sphere_info) 
-create_celestial_checkbutton("- Dysnomia", dysnomia_var)
+create_celestial_checkbutton("- Dysnomia", dysnomia_var)    # params
 
-create_celestial_checkbutton("Ammonite", ammonite_var)
+create_celestial_checkbutton("Ammonite", ammonite_var)  # params
 
-create_celestial_checkbutton("Sedna", sedna_var)
+create_celestial_checkbutton("Sedna", sedna_var)    # params
 
-create_celestial_checkbutton("2017 OF201", of201_var)
+create_celestial_checkbutton("2017 OF201", of201_var)   # params
 
-create_celestial_checkbutton("Leleakuhonua", leleakuhonua_var)
+create_celestial_checkbutton("Leleakuhonua", leleakuhonua_var)  # params
 
-create_celestial_checkbutton("Planet 9", planet9_var)
+create_celestial_checkbutton("Planet 9", planet9_var)   # params
 # Create a Frame specifically for the planet9 shell options (indented)
 planet9_shell_options_frame = tk.Frame(celestial_frame)
 planet9_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
@@ -6083,15 +6084,14 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
     CreateToolTip(checkbutton, tooltip_text)
 
 create_comet_checkbutton("67P/Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(2008-6-2 to 2023-4-25)", 
-    "August 13, 2015")
+    "August 13, 2015")  # params
     # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
 create_comet_checkbutton("Halley", comet_halley_var, "(1962-01-21 to 2061-7-28)",      
                          # initial start date 1982-11-26 to 1995-10-20. Horizons has 1962-01-20 and ongoing.
-                         "February 9, 1986")
+                         "February 9, 1986")    # params
+# there are also params for "halley geocentric"
 create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
-                         "October 21, 1965")
-create_comet_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
-                         "February 25, 1976")
+                         "October 21, 1965")    # params 
 create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1995-07-23 to 2001-12-31)", 
                          "April 1, 1997")
 create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
@@ -6099,18 +6099,16 @@ create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-
 create_comet_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
                          "January 12, 2007")
 create_comet_checkbutton("NEOWISE", comet_neowise_var, "(2020-03-27 to 2021-06-01)", 
-                         "July 3, 2020")
+                         "July 3, 2020")    # params
 create_comet_checkbutton("Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to 2029-12-31)", 
                          "April 28, 2024")
 create_comet_checkbutton("ATLAS", comet_atlas_var, "(2024-06-17 to 2029-12-31)", 
                          "January 13, 2025")
-create_comet_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
-                         "October 8, 2025")
 
 # Checkbuttons for interstellar objects
-interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Interstellar Objects")
+interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Hyperbolic Objects")
 interstellar_frame.pack(pady=(10, 5), fill='x')
-CreateToolTip(interstellar_frame, "Select interstellar objects for plotting. Selected objects will be plotted on the entered date, as well as ideal " 
+CreateToolTip(interstellar_frame, "Select hyperbolic objects for plotting. Selected objects will be plotted on the entered date, as well as ideal " 
               "orbits. Selected objects will be animated only over the fetched dates only if within their defined date ranges, and will " 
               "plot both actual and ideal orbits.")
 
@@ -6139,12 +6137,16 @@ def create_interstellar_checkbutton(name, variable, dates, perihelion):
     tooltip_text = f"{info_text}\nPerihelion: {perihelion}"
     CreateToolTip(checkbutton, tooltip_text)
 
+create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
+                         "October 8, 2025") # params
+create_interstellar_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
+                         "February 25, 1976")
 create_interstellar_checkbutton("Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
     "September 9, 2017")
 create_interstellar_checkbutton("Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-01)", 
     "December 8, 2019")
 create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-05-22 to 2025-08-02)",     # 2025-Aug-07
-    "October 29, 2025")     # predicted; this is a hyperbolic trajectory
+    "October 29, 2025")     # params; predicted; this is a hyperbolic trajectory
 
 # These functions should be defined AFTER the GUI widgets exist
 

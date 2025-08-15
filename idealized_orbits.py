@@ -57,7 +57,7 @@ planetary_params = {
 #    'Oumuamua': 1e99,      # Interstellar object - effectively infinite period  
 #    'Borisov': 1e99,       # Interstellar object - effectively infinite period
     
-'Mercury': {
+'Mercury': {    
         'a': 0.38709927,      # semi-major axis in AU (J2000 mean)
         'e': 0.20563593,      # eccentricity (J2000 mean)
         'i': 7.00497902,      # inclination in degrees (J2000 mean)
@@ -68,7 +68,7 @@ planetary_params = {
         #     'Mercury': 87.969,  days    
     },
     
-    'Venus': {
+    'Venus': {  
         'a': 0.72333566,
         'e': 0.00677672,
         'i': 3.39467605,
@@ -79,7 +79,7 @@ planetary_params = {
         #     'Venus': 224.701, 
     },
     
-    'Earth': {
+    'Earth': {  
         'a': 1.00000261,
         'e': 0.01671123,
         'i': 0.00001531,       # Nearly zero in ecliptic frame
@@ -90,6 +90,9 @@ planetary_params = {
         #     'Earth': 365.256,
     },
     
+# Langrange points do not have orbital parameters, EM-L1 to EM-L5 and L1 to L5, but maybe could
+# space missions do not have orbital parameters
+
     'Mars': {
         'a': 1.52371034,
         'e': 0.09339410,
@@ -565,7 +568,25 @@ planetary_params = {
         # need period
     },    
 
-    # Comets with parabolic trajectories, object type 'trajectory'
+# comets with checkbuttons that need orbital parameters: 
+# "Hale-Bopp", comet_hale_bopp_var, "(1995-07-23 to 2001-12-31)", 
+# "Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
+# "McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
+# "Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to 2029-12-31)", 
+# "ATLAS", comet_atlas_var, "(2024-06-17 to 2029-12-31)", 
+
+    # Comets with hyperbolic trajectories, object type 'trajectory'
+
+    'West': {                  # West (C/1975 V1-A) 
+        'a': -12220.2703313635,   # Horizons: A, semi-major axis in AU; hyperbolic/parabolic
+        'e': 1.000016087612074,   # Horizons: EC, eccentricity
+        'i': 43.07404350452942,      # Horizons: IN, inclination in degrees
+        'omega': 358.4317208087168, # Horizons: W, argument of perihelion in degrees
+        'Omega': 118.9175346769632,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': 2021-4-15,     # Rec #:90002073 (+COV) Soln.date: 2021-Apr-15_23:29:24  
+        'TP': 2442833.7219778746    # 1976-Feb-25.2219778746
+        # period None; hyperbolic/parabolic; after ejection from the solar system
+    }, 
 
      'C/2025_K1': {                  # ATLAS (C/2025 K1)            2025-Jul-11 21:59:05 
         # Rec #:90004909 (+COV) Soln.date: 2025-Jul-10_13:42:09      # obs: 563 (93 days)
@@ -594,9 +615,13 @@ planetary_params = {
         #     '3I/ATLAS': 1e99,      # Interstellar object - effectively infinite period
     },    
 
+# interstellar objects with hyperbolic orbits that need orbital parameters
+# "Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
+# "Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-01)", 
+
     # Satellites
 
-    'Moon': {            # 301; Revised 7-31-2013, geocentric; source: https://ssd.jpl.nasa.gov/horizons/app.html#/
+    'Moon': {   # button; 301; Revised 7-31-2013, geocentric; source: https://ssd.jpl.nasa.gov/horizons/app.html#/
 #        'a': 384400,   # Horizons: A, semi-major axis in AU
         'a': 0.002570,   # Horizons: A, semi-major axis in AU; 384400 km or 0.00257 au
         'e': 0.05490,   # Horizons: EC, eccentricity; 0.05490 was 0.0554
@@ -1076,158 +1101,68 @@ planet_poles = {
     'Pluto': {'ra': 132.99, 'dec': -6.16}
 }
 
-def plot_hyperbolic_orbit(obj_name, params, color, fig, date=None):
-    """
-    Plot a hyperbolic orbit for interstellar objects or comets with e > 1.
-    Enhanced version that handles high eccentricity cases.
-    """
-    try:
-        a = params.get('a', 0)  # Semi-major axis (negative for hyperbolic orbits)
-        e = params.get('e', 0)  # Eccentricity (> 1 for hyperbolic orbits)
-        i = params.get('i', 0)  # Inclination in degrees
-        omega = params.get('omega', 0)  # Argument of perihelion in degrees
-        Omega = params.get('Omega', 0)  # Longitude of ascending node in degrees
+import numpy as np
+from datetime import datetime, timedelta
+
+"""
+def find_ideal_apsides_on_orbit(x_orbit, y_orbit, z_orbit, obj_name, a, e, i, omega, Omega, 
+                                orbital_period_days=None, current_date=None):
+
+    # Calculate distances from origin (Sun/planet)
+    distances = np.sqrt(x_orbit**2 + y_orbit**2 + z_orbit**2)
+    
+    # Find index of minimum distance (periapsis)
+    periapsis_idx = np.argmin(distances)
+    periapsis_distance = distances[periapsis_idx]
+    
+    # Find index of maximum distance (apoapsis) - only for closed orbits
+    apoapsis_idx = None
+    apoapsis_distance = None
+    if e < 1:  # Elliptical orbit
+        apoapsis_idx = np.argmax(distances)
+        apoapsis_distance = distances[apoapsis_idx]
+    
+    # Prepare date strings
+    periapsis_date_str = "<br>At geometric periapsis"
+    apoapsis_date_str = "<br>At geometric apoapsis" if e < 1 else None
+    
+    # For elliptical orbits with known periods, estimate dates
+    if e < 1 and orbital_period_days and orbital_period_days > 0 and current_date:
+        # Estimate time to periapsis based on position index
+        num_points = len(x_orbit)
         
-        # For hyperbolic orbits, a is negative and e > 1
-        if e <= 1:
-            print(f"Warning: {obj_name} has e={e}, not a hyperbolic orbit")
-            return False
-            
-        # Calculate perihelion distance
-        q = abs(a) * (e - 1)  # Perihelion distance for hyperbolic orbit
+        # Fraction of orbit to periapsis
+        fraction_to_periapsis = periapsis_idx / num_points
+        days_to_periapsis = fraction_to_periapsis * orbital_period_days
+        estimated_periapsis_date = current_date + timedelta(days=days_to_periapsis)
+        periapsis_date_str = f"<br>Theoretical: ~{estimated_periapsis_date.strftime('%Y-%m-%d')}"
         
-        # Determine a reasonable maximum distance to plot
-        # For high eccentricity, limit the visible range
-        if e > 10:
-            max_distance = min(50, q * 20)  # Very narrow trajectory
-        elif e > 5:
-            max_distance = min(100, q * 30)  # Narrow trajectory
-        else:
-            max_distance = 200  # Standard range for moderate eccentricity
-        
-        # For hyperbolic orbits, the true anomaly range where the object is bound
-        # to the solar system is limited by the asymptotic true anomaly
-        theta_inf = np.arccos(-1/e)  # Asymptotic true anomaly
-        
-        # Special handling for high eccentricity
-        if e > 5:
-            # Calculate angle where r = max_distance
-            cos_theta_max = ((abs(a) * (e**2 - 1) / max_distance) - 1) / e
-            
-            if -1 <= cos_theta_max <= 1:
-                theta_visible = np.arccos(cos_theta_max)
-                theta_limit = min(theta_inf - 0.01, theta_visible)
-            else:
-                # Very extreme case
-                theta_limit = min(theta_inf - 0.01, np.pi/6)  # Max 30 degrees
-            
-            margin = 0.01  # Small margin for extreme cases
-            num_points = 1000  # More points for smoother curve
-        else:
-            theta_limit = theta_inf
-            margin = 0.1  # Standard margin
-            num_points = 500
-        
-        # Create array of true anomaly values
-        theta = np.linspace(-theta_limit + margin, theta_limit - margin, num_points)
-        
-        # Calculate radius for each true anomaly using hyperbolic orbit equation
-        r = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta))
-        
-        # Filter points within reasonable range
-        valid_points = (r > 0) & (r <= max_distance)
-        
-        # Check if we have enough valid points
-        if np.sum(valid_points) < 20:
-            # Focus on perihelion region for extreme cases
-            print(f"Note: {obj_name} has extreme eccentricity (e={e:.6f}), showing perihelion region only")
-            theta_narrow = np.linspace(-0.1, 0.1, 100)
-            r_narrow = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta_narrow))
-            valid_narrow = (r_narrow > 0) & (r_narrow <= max_distance * 1.5)
-            
-            if np.sum(valid_narrow) > 5:
-                theta = theta_narrow[valid_narrow]
-                r = r_narrow[valid_narrow]
-                valid_points = np.ones_like(r, dtype=bool)
-            else:
-                print(f"Warning: Unable to plot meaningful trajectory for {obj_name} with e={e:.6f}")
-                return False
-        
-        theta = theta[valid_points]
-        r = r[valid_points]
-        
-        # Convert to Cartesian coordinates in orbital plane
-        x_orbit = r * np.cos(theta)
-        y_orbit = r * np.sin(theta)
-        z_orbit = np.zeros_like(theta)
-        
-        # Convert angles to radians
-        i_rad = np.radians(i)
-        omega_rad = np.radians(omega)
-        Omega_rad = np.radians(Omega)
-        
-        # Apply orbital element rotations
-        # 1. Rotate by argument of perihelion (omega) around z-axis
-        x1 = x_orbit * np.cos(omega_rad) - y_orbit * np.sin(omega_rad)
-        y1 = x_orbit * np.sin(omega_rad) + y_orbit * np.cos(omega_rad)
-        z1 = z_orbit
-        
-        # 2. Rotate by inclination (i) around x-axis
-        x2 = x1
-        y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
-        z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
-        
-        # 3. Rotate by longitude of ascending node (Omega) around z-axis
-        x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
-        y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
-        z_final = z2
-        
-        # Create hover text with eccentricity warning for extreme cases
-        if e > 10:
-            hover_text = f"{obj_name} Hyperbolic Orbit<br>EXTREME eccentricity: e={e:.6f}<br>Perihelion: q={q:.6f} AU<br>Nearly straight-line trajectory"
-        elif e > 5:
-            hover_text = f"{obj_name} Hyperbolic Orbit<br>High eccentricity: e={e:.6f}<br>Perihelion: q={q:.6f} AU<br>Very narrow trajectory"
-        else:
-            hover_text = f"{obj_name} Hyperbolic Orbit<br>Eccentricity: e={e:.6f}<br>Perihelion: q={q:.6f} AU"
-        
-        # Add the trace to the figure
-        fig.add_trace(go.Scatter3d(
-            x=x_final,
-            y=y_final,
-            z=z_final,
-            mode='lines',
-            line=dict(
-                color=color,
-                width=2,
-                dash='dot'  # Dotted line for hyperbolic orbits
-            ),
-            name=f"{obj_name} orbit",
-            hovertemplate=hover_text + '<extra></extra>',
-            showlegend=True
-        ))
-        
-        # Add perihelion marker
-        fig.add_trace(go.Scatter3d(
-            x=[x_final[len(x_final)//2]],  # Middle point (closest to perihelion)
-            y=[y_final[len(y_final)//2]],
-            z=[z_final[len(z_final)//2]],
-            mode='markers',
-            marker=dict(
-                size=6,
-                color='red',
-                symbol='diamond'
-            ),
-            name=f"{obj_name} perihelion",
-            hovertemplate=f"{obj_name} Perihelion<br>Distance: {q:.6f} AU<extra></extra>",
-            showlegend=False
-        ))
-        
-        print(f"Successfully plotted hyperbolic orbit for {obj_name}: e={e:.6f}, q={q:.6f} AU")
-        return True
-        
-    except Exception as e:
-        print(f"Error plotting hyperbolic orbit for {obj_name}: {str(e)}")
-        return False
+        if apoapsis_idx is not None:
+            # Fraction of orbit to apoapsis
+            fraction_to_apoapsis = apoapsis_idx / num_points
+            days_to_apoapsis = fraction_to_apoapsis * orbital_period_days
+            estimated_apoapsis_date = current_date + timedelta(days=days_to_apoapsis)
+            apoapsis_date_str = f"<br>Theoretical: ~{estimated_apoapsis_date.strftime('%Y-%m-%d')}"
+    
+    return {
+        'periapsis': {
+            'x': x_orbit[periapsis_idx],
+            'y': y_orbit[periapsis_idx],
+            'z': z_orbit[periapsis_idx],
+            'distance': periapsis_distance,
+            'index': periapsis_idx,
+            'date_str': periapsis_date_str
+        },
+        'apoapsis': {
+            'x': x_orbit[apoapsis_idx] if apoapsis_idx is not None else None,
+            'y': y_orbit[apoapsis_idx] if apoapsis_idx is not None else None,
+            'z': z_orbit[apoapsis_idx] if apoapsis_idx is not None else None,
+            'distance': apoapsis_distance,
+            'index': apoapsis_idx,
+            'date_str': apoapsis_date_str
+        } if apoapsis_idx is not None else None
+    }
+"""
 
 # this function adjusts the orbital elements for phobos and deimos based on perturbations
 def calculate_mars_satellite_elements(date, satellite_name):
@@ -3016,99 +2951,68 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             showlegend=True                    
                         )
                     )
-                    
-                    # ========== ADD ACTUAL POSITION MARKER - WITH FIX ==========
-                    # First try to get position from current_positions (this may fail for hyperbolic objects)
-                    current_pos = current_positions.get(obj_name) if current_positions else None
-                    
-                    # If position fetch failed (common for hyperbolic objects with None orbital period),
-                    # extract the position from the successfully plotted actual orbit
-                    if not current_pos or 'x' not in current_pos:
-                        print(f"  No position in current_positions for {obj_name}, checking plotted orbits...")
-                        
-                        # Look through all the traces that have been added to the figure
-                        for trace in fig.data:
-                            # Find the actual orbit trace for this object
-                            # The actual orbit is named like "C/2025_K1 Actual Orbit" or "3I/ATLAS Actual Orbit"
-                            if trace.name and obj_name in trace.name and 'Actual Orbit' in trace.name:
-                                # Check if this trace has coordinate data
-                                if hasattr(trace, 'x') and hasattr(trace, 'y') and hasattr(trace, 'z'):
-                                    if len(trace.x) > 0 and trace.x[0] is not None:
-                                        # Extract the first point (current position)
-                                        current_pos = {
-                                            'x': trace.x[0],
-                                            'y': trace.y[0],
-                                            'z': trace.z[0]
-                                        }
-                                        print(f"  Successfully extracted position from '{trace.name}'")
-                                        print(f"    Position: ({current_pos['x']:.6f}, {current_pos['y']:.6f}, {current_pos['z']:.6f}) AU")
-                                        break
-                    
-                    # Now plot the position marker if we have a position
-                    if current_pos and 'x' in current_pos:
-                        # Get the object info for color and symbol
-                        obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
-                        if obj_info:
-                            # Calculate distance for hover text
-                            distance = np.sqrt(current_pos['x']**2 + current_pos['y']**2 + current_pos['z']**2)
-                            hover_text = f"{obj_name}<br>Hyperbolic object<br>e={e:.6f}<br>Distance: {distance:.6f} AU"
-                            
-                            fig.add_trace(
-                                go.Scatter3d(
-                                    x=[current_pos['x']],
-                                    y=[current_pos['y']],
-                                    z=[current_pos['z']],
-                                    mode='markers',
-                                    marker=dict(
-                                        size=6,
-                                        color=obj_info.get('color', color_map(obj_name)),
-                                        symbol=obj_info.get('symbol', 'circle')
-                                    ),
-                                    name=f"{obj_name}",
-                                    text=[hover_text],
-                                    hovertemplate='%{text}<extra></extra>',
-                                    showlegend=True
-                                )
-                            )
-                            print(f"  Added position marker for {obj_name}")
-                        else:
-                            print(f"  Warning: Could not find object info for {obj_name}")
-                    else:
-                        print(f"  Warning: Still no position available for {obj_name} after checking orbits")
-                    
-                    # ========== CONTINUE WITH PERIHELION MARKER CALCULATION ==========
-                    # Calculate perihelion position explicitly at theta=0
-                    r_perihelion = abs(a) * (e**2 - 1) / (1 + e)  # At theta=0, cos(0)=1
-                    x_peri = r_perihelion
-                    y_peri = 0.0
-                    z_peri = 0.0
-                    
-                    # Convert angles to radians for rotation
-                    i_rad = np.radians(i)
-                    omega_rad = np.radians(omega)
-                    Omega_rad = np.radians(Omega)
-                    
-                    # Apply the same rotations as the orbit
-                    x_temp, y_temp, z_temp = rotate_points([x_peri], [y_peri], [z_peri], omega_rad, 'z')
-                    x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-                    x_peri_final, y_peri_final, z_peri_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+                  
+                    # ========== CALCULATE EXACT PERIAPSIS AT THETA=0 FOR HYPERBOLIC ==========
+                    from apsidal_markers import calculate_exact_apsides
 
-                    # ========== IDEAL PERIHELION MARKER ==========
-                    # Use the standard add_perihelion_marker function for consistency
-                    add_perihelion_marker(
-                        fig,
-                        x_peri_final[0],
-                        y_peri_final[0],
-                        z_peri_final[0],
-                        obj_name,
-                        abs(a),  # Use absolute value of a for hyperbolic
-                        e,
-                        date,
-                        current_pos,
-                        params,
-                        color_map,
-                        q=q  # Pass the calculated perihelion distance
-                    )
+                    # Calculate exact apsidal positions (only periapsis for hyperbolic)
+                    apsides = calculate_exact_apsides(abs(a), e, i, omega, Omega, rotate_points)
+
+                    # ========== ADD IDEAL PERIAPSIS MARKER ==========
+                    if apsides['periapsis']:
+                        peri = apsides['periapsis']
+                        
+                        # Get date from TP for hyperbolic orbits
+                        date_str = ""
+                        if 'TP' in params:
+                            from astropy.time import Time
+                            tp_time = Time(params['TP'], format='jd')
+                            perihelion_datetime = tp_time.datetime
+                            date_str = f"<br>Date: {perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                            
+                            # Store for later use
+                            params['perihelion_datetime'] = perihelion_datetime
+                            params['perihelion_dates'] = [perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')]
+                        
+                        # Add perturbation assessment for hyperbolic orbits
+                        accuracy_note = ""
+                        if e > 10:
+                            accuracy_note = "<br><i>Note: Extreme eccentricity - strong perturbations expected</i>"
+                        elif e > 5:
+                            accuracy_note = "<br><i>Note: Very high eccentricity - significant perturbations expected</i>"
+                        elif e > 2:
+                            accuracy_note = "<br><i>Note: High eccentricity - moderate perturbations expected</i>"
+                        else:
+                            accuracy_note = "<br><i>Note: Near-parabolic - perturbations possible</i>"
+                        
+                        hover_text = (
+                            f"<b>{obj_name} Ideal Periapsis</b>"
+                            f"{date_str}"
+                            f"<br>q={peri['distance']:.6f} AU"
+                            f"<br>Theoretical minimum distance (θ=0°)"
+                            f"<br>One-time passage (hyperbolic)"
+                            f"<br>Unperturbed Keplerian position at actual periapsis time"
+                            f"{accuracy_note}"
+                        )
+                        
+                        fig.add_trace(
+                            go.Scatter3d(
+                                x=[peri['x']],
+                                y=[peri['y']],
+                                z=[peri['z']],
+                                mode='markers',
+                                marker=dict(
+                                    size=6,
+                                    color=color_map(obj_name),
+                                    symbol='square-open'
+                                ),
+                                name=f"{obj_name} Ideal Periapsis",
+                                text=hover_text,
+                                hoverinfo='text',
+                                showlegend=True
+                            )
+                        )
+                        print(f"  Added ideal periapsis for {obj_name} at distance {peri['distance']:.6f} AU (hyperbolic)")
                     
                     # ========== GENERATE ACTUAL PERIHELION DATE FROM TP ==========
                     if 'TP' in params:
@@ -3247,6 +3151,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             if 'epoch' in params:
                 epoch_str = f" (Epoch: {params['epoch']})"
 
+            # PLOT THE ORBIT LINE - THIS IS CRITICAL!
             fig.add_trace(
                 go.Scatter3d(
                     x=x_final,
@@ -3254,7 +3159,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     z=z_final,
                     mode='lines',
                     line=dict(dash='dot', width=1, color=color_map(obj_name)),
-                    name=f"{obj_name} Ideal Orbit{epoch_str}",  # MODIFIED LINE - added {epoch_str}
+                    name=f"{obj_name} Ideal Orbit{epoch_str}",
                     text=[f"{obj_name} Ideal Orbit"] * len(x_final),
                     customdata=[f"{obj_name} Ideal Orbit"] * len(x_final),
                     hovertemplate='%{text}<extra></extra>',
@@ -3262,65 +3167,106 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 )
             )
 
-            perihelion_idx = np.argmin(np.abs(theta))  # Index closest to theta=0
+            # ========== CALCULATE EXACT APSIDES AT THETA=0 AND THETA=PI ==========
+            from apsidal_markers import calculate_exact_apsides, compute_apsidal_dates_from_tp
 
-            # NEW CODE - Use the apsidal_markers module:
-            # Get current position for this object
-            current_pos = current_positions.get(obj_name) if current_positions else None
-            
-            # Add perihelion marker with proper date calculation
-            add_perihelion_marker(
-                fig,
-                x_final[perihelion_idx],   # x coordinate at perihelion
-                y_final[perihelion_idx],   # y coordinate at perihelion
-                z_final[perihelion_idx],   # z coordinate at perihelion
-                obj_name, 
-                a, 
-                e, 
-                date, 
-                current_pos,              # Current position of the object
-                params,                   # Full orbital parameters
-                color_map                 # Color mapping function
-            )
+            # Calculate exact apsidal positions
+            apsides = calculate_exact_apsides(a, e, i, omega, Omega, rotate_points)
 
-            # Apohelion (farthest point from Sun)
-            apohelion_idx = np.argmin(np.abs(theta - np.pi))  # Index closest to theta=π
-            
-            # Add apohelion marker with proper date calculation
-            add_apohelion_marker(
-                fig,
-                x_final[apohelion_idx],
-                y_final[apohelion_idx],
-                z_final[apohelion_idx],
-                obj_name,
-                a,
-                e,
-                date,
-                current_pos,
-                params,
-                color_map
-            )
+            # Get dates for the apsides
+            if 'TP' in params:
+                next_perihelion, next_aphelion = compute_apsidal_dates_from_tp(
+                    obj_name, params, current_date=date
+                )
+            else:
+                next_perihelion = next_aphelion = None
+
+            # ========== ADD IDEAL PERIAPSIS MARKER ==========
+            if apsides['periapsis']:
+                peri = apsides['periapsis']
+                
+                # Create hover text with date if available
+                date_str = ""
+                if next_perihelion:
+                    date_str = f"<br>Date: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                
+                # Add perturbation assessment
+                accuracy_note = ""
+                if e > 0.15:
+                    accuracy_note = "<br><i>Note: High eccentricity - strong perturbations expected</i>"
+                elif e > 0.05:
+                    accuracy_note = "<br><i>Note: Moderate eccentricity - perturbations expected</i>"
+                
+                hover_text = (
+                    f"<b>{obj_name} Ideal Periapsis</b>"
+                    f"{date_str}"
+                    f"<br>q={peri['distance']:.6f} AU"
+                    f"<br>Theoretical minimum distance (θ=0°)"
+                    f"<br>Unperturbed Keplerian position at actual periapsis time"
+                    f"{accuracy_note}"
+                )
+                
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=[peri['x']],
+                        y=[peri['y']],
+                        z=[peri['z']],
+                        mode='markers',
+                        marker=dict(
+                            size=6,
+                            color=color_map(obj_name),
+                            symbol='square-open'
+                        ),
+                        name=f"{obj_name} Ideal Periapsis",
+                        text=hover_text,
+                        hoverinfo='text',
+                        showlegend=True
+                    )
+                )
+                print(f"  Added ideal periapsis for {obj_name} at distance {peri['distance']:.6f} AU")
+
+            # ========== ADD IDEAL APOAPSIS MARKER ==========
+            if apsides['apoapsis']:
+                apo = apsides['apoapsis']
+                
+                # Create hover text with date if available
+                date_str = ""
+                if next_aphelion:
+                    date_str = f"<br>Date: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                
+                hover_text = (
+                    f"<b>{obj_name} Ideal Apoapsis</b>"
+                    f"{date_str}"
+                    f"<br>Q={apo['distance']:.6f} AU"
+                    f"<br>Theoretical maximum distance (θ=180°)"
+                    f"<br>Unperturbed Keplerian position at actual apoapsis time"
+                    f"{accuracy_note}"
+                )
+                
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=[apo['x']],
+                        y=[apo['y']],
+                        z=[apo['z']],
+                        mode='markers',
+                        marker=dict(
+                            size=6,
+                            color=color_map(obj_name),
+                            symbol='square-open'
+                        ),
+                        name=f"{obj_name} Ideal Apoapsis",
+                        text=hover_text,
+                        hoverinfo='text',
+                        showlegend=True
+                    )
+                )
+                print(f"  Added ideal apoapsis for {obj_name} at distance {apo['distance']:.6f} AU")
 
             # ========== NEW: GENERATE APSIDAL DATES FROM TP ==========
             # After adding ideal markers, generate actual dates from TP if available
             if 'TP' in params:
                 from datetime import timedelta
                 
-                # Generate the next apsidal dates from TP
-        #        next_perihelion, next_aphelion = compute_apsidal_dates_from_tp(
-        #            obj_name,
-        #            params,
-        #            current_date=date  # Use the plot date
-        #        )
-                
-                # Add these single dates to params as lists for compatibility
-        #        if next_perihelion:
-        #            params['perihelion_dates'] = [next_perihelion.strftime('%Y-%m-%d')]
-        #            print(f"  Next perihelion: {params['perihelion_dates'][0]}")
-        #        if next_aphelion and e < 1:  # Only for elliptical orbits
-        #            params['aphelion_dates'] = [next_aphelion.strftime('%Y-%m-%d')]
-        #            print(f"  Next aphelion: {params['aphelion_dates'][0]}")
-
                 # Generate the next apsidal dates from TP with range checking
                 next_perihelion, next_aphelion, peri_in_range, apo_in_range = compute_apsidal_dates_with_notes(
                     obj_name,

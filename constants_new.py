@@ -189,15 +189,16 @@ KNOWN_ORBITAL_PERIODS = {
     'Hyakutake': 70071.50, # 191.86 * 365.25 (pre-1996 orbit)
     'Hale-Bopp': 2520352.50, # 6900.0 * 365.25
     'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
-    'West': 558203.00,     # 1528.0 * 365.25 (original orbit)
+
     'McNaught': 92552.00,  # 253.5 * 365.25
     'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
     
     # For hyperbolic/parabolic objects, period is undefined
+    'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
     'C/2025_K1': None,     # Parabolic comet - effectively infinite period
-    '3I/ATLAS': None,      # Interstellar object - effectively infinite period
-    'Oumuamua': None,      # Interstellar object - effectively infinite period  
-    'Borisov': None,       # Interstellar object - effectively infinite period
+    '3I/ATLAS': None,      # Interstellar hyperbolic object - effectively infinite period
+    'Oumuamua': None,      # Interstellar hyperbolic object - effectively infinite period  
+    'Borisov': None,       # Interstellar hyperbolic object - effectively infinite period
     
     # Hypothetical
     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
@@ -1620,8 +1621,33 @@ INFO = {
         'Though it\'s still out there, with an orbital period estimated to be roughly 880 years, we won\'t see it again for a ' 
         'very long time.',
         
-        'West': 'Notable comet for its bright and impressive tail.',
-        
+        'West': 'Comet West, formally designated C/1975 V1-A, was a dazzling celestial visitor that became one of the most brilliant ' 
+        'comets of the 20th century. \n' 
+        '* Often referred to as a "great comet," it captivated observers in 1976 with its exceptional brightness, even becoming ' 
+        '  visible to the naked eye during daylight hours at its peak. \n' 
+        '* Discovered by Danish astronomer Richard M. West on August 10, 1975, at the European Southern Observatory in Chile, the ' 
+        '  comet was initially a faint object. However, as it journeyed closer to the sun, its brightness increased dramatically. By ' 
+        '  the time it reached its closest approach to the sun (perihelion) on February 25, 1976, it had transformed into a spectacular ' 
+        '  sight.\n' 
+        '* For a brief period, Comet West\'s brilliance rivaled that of the planet Venus, reaching an apparent magnitude of -3. This ' 
+        '  allowed for the rare spectacle of observing a comet in the daytime sky. Its broad, fan-shaped dust tail and a separate, slender ' 
+        '  plasma tail stretched across the heavens, creating a truly memorable display for those who witnessed it.\n' 
+        '* Shortly after its perihelion passage, in early March 1976, observations revealed that the comet\'s core had broken into at least ' 
+        '  four distinct pieces. This breakup was likely caused by the immense thermal and gravitational stresses it experienced during its ' 
+        '  close encounter with the sun.\n' 
+        '* Comet West started as a long-period comet, meaning it followed a highly elliptical orbit from far beyond the outer reaches of ' 
+        '  our solar system. Its orbit is also highly inclined relative to the plane of the planets.\n' 
+        '  * The "Original" Orbit (Before Entry): This is the path the comet was on before it entered the planetary region of our solar ' 
+        '    system. For Comet West, this original orbit was a very long-period ellipse. Eccentricity (e): ~0.999996 (less than 1). ' 
+        '    It was a bound member of the solar system, destined to return.\n' 
+        '  * The "Future" Orbit (After Exit): This is the path the comet is on after swinging by the Sun and getting a gravitational ' 
+        '    "kick" from the planets. As Comet West passed through, the gravity of the giant planets acted like a slingshot, ' 
+        '    accelerating it. This slight increase in energy was enough to change its orbit from a closed ellipse to an open hyperbola. ' 
+        '    Eccentricity (e): ~1.00001 (greater than 1). It is now on an escape trajectory and will be ejected from the solar system, ' 
+        '    never to return.\n' 
+        '  * In short: Comet West came in on an elliptical path but is going out on a hyperbolic one. It was a long-term member of our ' 
+        '    solar system that has now been permanently kicked out.',
+                
         'Halley': 'Most famous comet, returns every 76 years. ' 
         '* Orbital Period and Characteristics: Halley\'s Comet has an average orbital period of 76 Earth years. However, this period ' 
         'can vary due to the gravitational influence of planets, particularly Jupiter and Saturn.  In fact, the gravitational pull ' 
