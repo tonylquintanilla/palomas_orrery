@@ -25,6 +25,7 @@ import math
 import json
 import orbit_data_manager
 import shutil
+import copy
 from orbital_param_viz import create_orbital_transformation_viz, create_orbital_viz_window 
 from palomas_orrery_helpers import (calculate_planet9_position_on_orbit, rotate_points2, calculate_axis_range,
                                     fetch_trajectory, fetch_orbit_path, pad_trajectory, add_url_buttons,
@@ -1218,7 +1219,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: July 21, 2025")
+root.title("Paloma's Orrery -- Updated: August 17, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -1261,6 +1262,19 @@ controls_window = controls_canvas.create_window(
     width=controls_canvas.winfo_width(),  # Match canvas width
     tags="controls"  # Add a tag for easier reference
 )
+
+# ADD the scroll message as the FIRST element in controls_frame:
+# Add a scroll down message at the top of the center frame
+scroll_message = tk.Label(
+    controls_frame,
+    text="SCROLL DOWN TO SEE ALL PLOTTING OPTIONS",
+    fg='red',
+    bg='SystemButtonFace',
+    font=("Arial", 10, 
+    #      "bold"
+          )
+)
+scroll_message.pack(pady=(5, 10))  # Adjusted padding for top placement
 
 # Function to fetch the position of a celestial object for a specific date
 def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None):  
@@ -4277,7 +4291,10 @@ def plot_objects():
                                     objects=objects, planetary_params=planetary_params,
                                     parent_planets=parent_planets, color_map=color_map, 
                                     date=date_obj, days_to_plot=settings['days_to_plot'],
-                                    current_positions=current_positions, fetch_position=fetch_position)
+                                    current_positions=current_positions, 
+                                    fetch_position=fetch_position,
+                                    show_apsidal_markers=show_apsidal_markers_var.get()
+                                    )
             
                     # Add refined orbits if we're centered on a planet with moons
             if center_object_name != 'Sun' and REFINED_AVAILABLE:
@@ -4686,7 +4703,9 @@ def animate_objects(step, label):
                 color_map=color_map,
                 date=dates_list[0] if dates_list else datetime.now(),
                 days_to_plot=settings['days_to_plot'],
-                current_positions=initial_positions  
+                current_positions=initial_positions,
+                fetch_position=fetch_position,
+                show_apsidal_markers=show_apsidal_markers_var.get()  
             )
 
             print(f"[ANIMATION DEBUG] Figure has {len(fig.data)} traces after plot_idealized_orbits")
@@ -4761,6 +4780,10 @@ def animate_objects(step, label):
                 current_date = dates_list[i]
                 
                 print(f"[ANIMATION DEBUG] Creating frame {i+1}/{N} for date {current_date}")
+                
+                # Simply deep copy all traces - this preserves everything
+                for trace in fig.data:
+                    frame_data.append(copy.deepcopy(trace))
                 
                 # Update position traces for selected objects
                 for obj in objects:
@@ -5351,8 +5374,8 @@ CreateToolTip(scrollable_frame.scrollable_frame, "Use the scrollbar to see all o
               "Select a start date for plotting. The default start date is \'Now\'.")
 
 # Define selection variables for each object
-celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Solar Shells, Planets, Dwarf Planets, Moons, Asteroids, " 
-                                "Kuiper Belt Objects")
+celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, 
+                                text="Select Solar System Objects, and Solar and Planetary Structures, to Plot")
 celestial_frame.pack(pady=(10, 5), fill='x')
 CreateToolTip(celestial_frame, "Select celestial bodies for plotting. Selected objects will be plotted on the entered date, as well " 
               "as actual and ideal orbits. Selected objects will be animated only over the fetched dates, and will plot both actual and " 
@@ -5388,7 +5411,7 @@ create_celestial_checkbutton("Sun", sun_var)
 
 # After the "- Solar Shells" checkbutton
 # First, modify the existing Solar Shells checkbutton to call toggle_all_shells
-sun_shells_checkbutton = tk.Checkbutton(celestial_frame, text="- Solar Shells (All)", variable=sun_shells_var, command=toggle_all_shells)
+sun_shells_checkbutton = tk.Checkbutton(celestial_frame, text="- Solar System Structures:", variable=sun_shells_var, command=toggle_all_shells)
 sun_shells_checkbutton.pack(anchor='w')
 CreateToolTip(sun_shells_checkbutton, "Toggle all Sun shells on/off")
 
@@ -6282,14 +6305,14 @@ custom_scale_entry = tk.Entry(scale_frame, width=10)
 custom_scale_entry.pack(anchor='w')
 custom_scale_entry.insert(0, '10')  # Default scale value
 
-center_label = tk.Label(controls_frame, text="Select Center Object for Your Plot:")
-center_label.pack(anchor='w')
+# Create a frame for the center object selection
+center_frame = tk.LabelFrame(controls_frame, text="Select Center Object for Your Plot")
+center_frame.pack(pady=(5, 5), fill='x')
 
 center_object_var = tk.StringVar(value='Sun')
 center_options = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth/New_Horizons', 'Eris/Dysnomia', 'Planet 9'] 
-# A unique center for Eris is required using the satellite solution not the sun centered object.
-center_menu = ttk.Combobox(controls_frame, textvariable=center_object_var, values=center_options)
-center_menu.pack(anchor='w')
+center_menu = ttk.Combobox(center_frame, textvariable=center_object_var, values=center_options, width=20)
+center_menu.pack(padx=10, pady=5, anchor='w')
 CreateToolTip(center_menu, "Select the object to center the plot on. DO NOT select the same object from the Select Objects check list.")
 
 """
@@ -6321,6 +6344,21 @@ def on_center_change(*args):
 # Bind the center_object_var to the on_center_change function
 center_object_var.trace_add("write", on_center_change)
 
+show_apsidal_markers_var = tk.IntVar(value=0)  # Default to NOT showing markers (avoid clutter)
+
+# Create a LabelFrame for the apsidal checkbox (matches the style of interval_frame)
+apsidal_frame = tk.LabelFrame(controls_frame, text="Orbital Markers")
+apsidal_frame.pack(fill='x', pady=(5, 5))
+
+# Now create the checkbox inside this frame
+apsidal_checkbox = tk.Checkbutton(
+    apsidal_frame,
+    text="Show apsidal markers (perihelion/aphelion)",
+    variable=show_apsidal_markers_var,
+#    font=('Arial', 10)
+)
+apsidal_checkbox.pack(anchor='w', padx=10, pady=5)
+
 # Create a frame for the interval settings
 interval_frame = tk.LabelFrame(controls_frame, text="Display Settings - How many points to show from cached data")
 interval_frame.pack(pady=(5, 5), fill='x')
@@ -6342,7 +6380,7 @@ CreateToolTip(interval_frame,
 )
 
 # Orbital objects (planets, dwarf planets, TNOs)
-orbital_interval_label = tk.Label(interval_frame, text="Orbital objects - points to plot")
+orbital_interval_label = tk.Label(interval_frame, text="Orbital objects - points to plot:")
 orbital_interval_label.grid(row=0, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
 orbital_points_entry = tk.Entry(interval_frame, width=5)  # Renamed from planet_interval_entry
 orbital_points_entry.grid(row=0, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
@@ -6352,18 +6390,18 @@ CreateToolTip(orbital_interval_label,
 
 # Trajectory objects (combines comets, asteroids, missions, interstellar)
 trajectory_interval_label = tk.Label(interval_frame, text="Trajectory objects - points to plot:")
-trajectory_interval_label.grid(row=1, column=0, padx=(5, 5), pady=(5, 2), sticky='w')
+trajectory_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(5, 2), sticky='w')
 trajectory_points_entry = tk.Entry(interval_frame, width=5)  # This replaces both comet and mission entries
-trajectory_points_entry.grid(row=1, column=1, padx=(0, 5), pady=(5, 2), sticky='w')
+trajectory_points_entry.grid(row=2, column=1, padx=(0, 5), pady=(5, 2), sticky='w')
 trajectory_points_entry.insert(0, '50')  # Default value
 CreateToolTip(trajectory_interval_label, 
     "For missions, comets, asteroids, and interstellar objects. Higher value = more points = smoother orbit.")
 
 # Satellite settings remain the same but with clearer labels
 satellite_days_label = tk.Label(interval_frame, text="Satellite cache span (days):")
-satellite_days_label.grid(row=2, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+satellite_days_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
 satellite_days_entry = tk.Entry(interval_frame, width=5)  # Renamed from sat_days_entry
-satellite_days_entry.grid(row=2, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+satellite_days_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
 satellite_days_entry.insert(0, '50')  # Default value
 CreateToolTip(satellite_days_label, 
     "CACHE SETTINGS - Days of satellite orbit data to store in cache\n\n"
@@ -6374,9 +6412,9 @@ CreateToolTip(satellite_days_label,
     "Example: Set to 50 to cache ~2 lunar orbits worth of data")
 
 satellite_points_label = tk.Label(interval_frame, text="Satellite display resolution:")
-satellite_points_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 5), sticky='w')
+satellite_points_label.grid(row=4, column=0, padx=(5, 5), pady=(2, 5), sticky='w')
 satellite_points_entry = tk.Entry(interval_frame, width=5)  # Renamed from sat_period_entry
-satellite_points_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
+satellite_points_entry.grid(row=4, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
 satellite_points_entry.insert(0, '50')  # Default value (changed from '1' to match divisor pattern)
 CreateToolTip(satellite_points_label, 
     "DISPLAY RESOLUTION - Points to show from cached satellite data\n\n"
@@ -6387,11 +6425,14 @@ CreateToolTip(satellite_points_label,
     "Note: This is display resolution only. Actual date range\n"
     "shown is controlled by 'Days to Plot' setting above.")
 
-# Number of Frames
-num_frames_label = tk.Label(controls_frame, text="Enter Hours, Days, Weeks, Months or Years to Animate starting with \"Now\":")
-num_frames_label.pack(anchor='w')
-num_frames_entry = tk.Entry(controls_frame, width=5)
-num_frames_entry.pack(anchor='w')
+# Create a frame for animation settings
+animation_frame = tk.LabelFrame(controls_frame, text="Animation Settings")
+animation_frame.pack(pady=(5, 5), fill='x')
+
+num_frames_label = tk.Label(animation_frame, text="Enter Hours, Days, Weeks, Months or Years to Animate starting with \"Now\":")
+num_frames_label.pack(padx=10, pady=(5, 2), anchor='w')
+num_frames_entry = tk.Entry(animation_frame, width=5)
+num_frames_entry.pack(padx=10, pady=(2, 5), anchor='w')
 num_frames_entry.insert(0, '28')  # Default number of frames
 CreateToolTip(num_frames_entry, "Do not exceed 130 to avoid timing out JPL Horizons' data fetch.")
 
@@ -6402,7 +6443,7 @@ orbit_path_frame.pack(pady=(5, 5), fill='x')
 """
 
 # Create a frame for the interval settings
-orbit_path_frame = tk.LabelFrame(controls_frame, text="Data Fetching Settings - Resolution when getting data from JPL Horizons")
+orbit_path_frame = tk.LabelFrame(controls_frame, text="Data Fetching Settings: resolution when getting data from JPL Horizons")
 orbit_path_frame.pack(pady=(5, 5), fill='x')
 CreateToolTip(orbit_path_frame,
     "DATA FETCH RESOLUTION - Controls data retrieved from JPL Horizons\n\n"
@@ -6450,9 +6491,9 @@ status_display.destroy()  # Remove the old label
 status_display = tk.Label(
     status_frame, 
     text="Data Fetching Status", 
-    font=("Arial", 10), 
+#    font=("Arial", 10), 
     bg='SystemButtonFace', 
-    fg='black'
+    fg='green'
 )
 status_display.pack(anchor='w', padx=5, pady=5)
 
@@ -6460,11 +6501,13 @@ status_display.pack(anchor='w', padx=5, pady=5)
 special_fetch_var = tk.IntVar(value=0)
 special_fetch_check = tk.Checkbutton(
     orbit_path_frame,  # Now inside the frame
-    text="Use updated intervals below to fetch data (will not be cached)",
+    text="Use updated intervals below to fetch data (will not be cached):",
     variable=special_fetch_var,
     command=toggle_special_fetch_mode,
-    font=("Arial", 9, "bold"),
-    fg='darkblue',
+    font=("Arial", 9, 
+    #      "bold"
+          ),
+#    fg='darkblue',
     wraplength=350
 )
 special_fetch_check.grid(row=0, column=0, columnspan=2, padx=5, pady=(5, 5), sticky='w')
@@ -6488,15 +6531,15 @@ CreateToolTip(special_fetch_check,
 )
 
 # Add a separator line after the checkbox
-ttk.Separator(orbit_path_frame, orient='horizontal').grid(
-    row=1, column=0, columnspan=2, sticky='ew', padx=5, pady=(0, 5)
-)
+#ttk.Separator(orbit_path_frame, orient='horizontal').grid(
+#    row=1, column=0, columnspan=2, sticky='ew', padx=5, pady=(0, 5)
+#)
 
 # Default interval for orbital objects (row 2)
 default_interval_label = tk.Label(orbit_path_frame, text="Orbital objects interval (planets, asteroids, TNOs):")
-default_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+default_interval_label.grid(row=1, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
 default_interval_entry = tk.Entry(orbit_path_frame, width=5)
-default_interval_entry.grid(row=2, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+default_interval_entry.grid(row=1, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
 default_interval_entry.insert(0, '1d')
 CreateToolTip(default_interval_label, 
     "Interval for fetching orbital objects (planets, asteroids, TNOs).\n"
@@ -6504,9 +6547,9 @@ CreateToolTip(default_interval_label,
 
 # Trajectory interval (row 3)
 trajectory_interval_label = tk.Label(orbit_path_frame, text="Trajectory objects interval (missions, comets, interstellar):")
-trajectory_interval_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+trajectory_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
 trajectory_interval_entry = tk.Entry(orbit_path_frame, width=5)
-trajectory_interval_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+trajectory_interval_entry.grid(row=2, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
 trajectory_interval_entry.insert(0, '6h')
 CreateToolTip(trajectory_interval_label,
     "Interval for time-bounded trajectories.\n"
@@ -6515,23 +6558,13 @@ CreateToolTip(trajectory_interval_label,
 
 # Satellite interval (row 4)
 satellite_interval_label = tk.Label(orbit_path_frame, text="Satellite objects interval (moons):")
-satellite_interval_label.grid(row=4, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+satellite_interval_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
 satellite_interval_entry = tk.Entry(orbit_path_frame, width=5)
-satellite_interval_entry.grid(row=4, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
+satellite_interval_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
 satellite_interval_entry.insert(0, '1h')
 CreateToolTip(satellite_interval_label,
     "Interval for moon orbits around planets.\n"
     "Very fine resolution needed for fast-moving moons.")
-
-# Add a scroll down message right before the plotting buttons
-scroll_message = tk.Label(
-    controls_frame,
-    text="SCROLL DOWN TO SEE ALL PLOTTING BUTTONS",
-    fg='red',
-    bg='SystemButtonFace',
-    font=("Arial", 10, "bold")
-)
-scroll_message.pack(pady=(10, 5))
 
 # Paloma's Birthday button and its animation
 paloma_buttons_frame = tk.Frame(controls_frame)

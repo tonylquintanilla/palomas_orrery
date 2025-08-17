@@ -524,6 +524,7 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
                         symbol='square-open',  # Solid square for actual
                     ),
                     name=f"{obj_name} Actual {near_label}",
+                    text=[f"{obj_name} Actual {near_label}"],
                     hovertemplate=(
                         f"<b>{obj_name} at {near_label}</b><br>"
                         f"Date: {date_display} UTC<br>"
@@ -562,6 +563,7 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
                         symbol='square-open',  # Solid square for actual
                     ),
                     name=f"{obj_name} Actual {far_label}",
+                    text=[f"{obj_name} Actual {far_label}"],
                     hovertemplate=(
                         f"<b>{obj_name} at {far_label}</b><br>"
                         f"Date: {date_display} UTC<br>"

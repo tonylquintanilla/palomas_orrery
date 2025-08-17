@@ -1994,7 +1994,8 @@ def create_planet_transformation_matrix(planet_name):
     return transform_matrix
 
 def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig=None, 
-                         date=None, days_to_plot=None, current_position=None):
+                         date=None, days_to_plot=None, current_position=None,
+                         show_apsidal_markers=False):
     """
     Plot the idealized orbit of a satellite around its parent planet.
     
@@ -2371,38 +2372,40 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         orbital_params = planetary_params[satellite_name]
         
         # Add periapsis marker with proper date calculation
-        add_perihelion_marker(
-            fig,
-            x_final[periapsis_idx],
-            y_final[periapsis_idx],
-            z_final[periapsis_idx],
-            satellite_name,
-            a,
-            e,
-            date if date else datetime.now(),
-            current_position,
-            orbital_params,
-            lambda x: color,  # Simple color function
-            q=r[periapsis_idx]  # Pass the periapsis distance
-        )
+        if show_apsidal_markers:  # ADD THIS CONDITION
+            add_perihelion_marker(
+                fig,
+                x_final[periapsis_idx],
+                y_final[periapsis_idx],
+                z_final[periapsis_idx],
+                satellite_name,
+                a,
+                e,
+                date if date else datetime.now(),
+                current_position,
+                orbital_params,
+                lambda x: color,  # Simple color function
+                q=r[periapsis_idx]  # Pass the periapsis distance
+            )
 
         # Find apoapsis (farthest point from parent)
         apoapsis_idx = np.argmax(r)
         
         # Add apoapsis marker with proper date calculation
-        add_apohelion_marker(
-            fig,
-            x_final[apoapsis_idx],
-            y_final[apoapsis_idx],
-            z_final[apoapsis_idx],
-            satellite_name,
-            a,
-            e,
-            date if date else datetime.now(),
-            current_position,
-            orbital_params,
-            lambda x: color  # Simple color function
-        )
+        if show_apsidal_markers:  # ADD THIS CONDITION
+            add_apohelion_marker(
+                fig,
+                x_final[apoapsis_idx],
+                y_final[apoapsis_idx],
+                z_final[apoapsis_idx],
+                satellite_name,
+                a,
+                e,
+                date if date else datetime.now(),
+                current_position,
+                orbital_params,
+                lambda x: color  # Simple color function
+            )
         
         return fig
     
@@ -2479,7 +2482,8 @@ def calculate_moon_orbital_elements(date):
         'Omega': Omega
     }
 
-def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, days_to_plot=None, current_position=None):
+def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, days_to_plot=None, 
+                          current_position=None, show_apsidal_markers=False):
     """
     Plot the Moon's idealized orbit with time-varying elements and perturbations
     
@@ -2599,59 +2603,40 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         print("Warning: No current position for Moon")
 
     # Add perigee marker with proper date calculation
-    add_perihelion_marker(
-        fig,
-        x_final[perigee_idx],
-        y_final[perigee_idx],
-        z_final[perigee_idx],
-        'Moon',  # obj_name
-        a,
-        e,
-        date,
-        current_position,
-        orbital_params,
-        color_map if color is None else lambda x: color,  # Use provided color or color_map
-        q=r[perigee_idx]  # Pass the perigee distance
-    )
-
-    """
-    fig.add_trace(
-        go.Scatter3d(
-            x=[x_final[perigee_idx]],
-            y=[y_final[perigee_idx]],
-            z=[z_final[perigee_idx]],
-            mode='markers',
-            marker=dict(
-                size=5,
-                color=color,
-                symbol='square-open'
-            ),
-            name=f"Moon Perigee",
-            text=[f"Moon Perigee<br>Date: {date.strftime('%Y-%m-%d %H:%M UTC')}<br>Distance: {r[perigee_idx]:.6f} AU"],
-            customdata=[f"Moon Perigee"],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
+    if show_apsidal_markers:  # ADD THIS CONDITION
+        add_perihelion_marker(
+            fig,
+            x_final[perigee_idx],
+            y_final[perigee_idx],
+            z_final[perigee_idx],
+            'Moon',  # obj_name
+            a,
+            e,
+            date,
+            current_position,
+            orbital_params,
+            color_map if color is None else lambda x: color,  # Use provided color or color_map
+            q=r[perigee_idx]  # Pass the perigee distance
         )
-    )
-    """
     
     # Apogee (farthest approach)
     apogee_idx = np.argmax(np.sqrt(x_final**2 + y_final**2 + z_final**2))
     
     # Add apogee marker with proper date calculation
-    add_apohelion_marker(
-        fig,
-        x_final[apogee_idx],
-        y_final[apogee_idx],
-        z_final[apogee_idx],
-        'Moon',  # obj_name
-        a,
-        e,
-        date,
-        current_position,
-        orbital_params,
-        color_map if color is None else lambda x: color  # Use provided color or color_map
-    )
+    if show_apsidal_markers:  # ADD THIS CONDITION
+        add_apohelion_marker(
+            fig,
+            x_final[apogee_idx],
+            y_final[apogee_idx],
+            z_final[apogee_idx],
+            'Moon',  # obj_name
+            a,
+            e,
+            date,
+            current_position,
+            orbital_params,
+            color_map if color is None else lambda x: color  # Use provided color or color_map
+        )
 
     print(f"  Generated {num_points} points for {orbital_fraction:.1f} orbits")
 
@@ -2757,7 +2742,8 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_d
 
 def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, 
                           planetary_params=None, parent_planets=None, color_map=None, 
-                          date=None, days_to_plot=None, current_positions=None, fetch_position=None):
+                          date=None, days_to_plot=None, current_positions=None, fetch_position=None, 
+                          show_apsidal_markers=False):
     """
     Plot idealized orbits for planets, dwarf planets, asteroids, KBOs, and moons.
     For non-Sun centers, only plots moons of that center body.
@@ -2858,7 +2844,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 moon_current_pos = current_positions.get('Moon') if current_positions else None
 
                 fig = plot_moon_ideal_orbit(fig, date, center_id, color_map(moon_name), days_to_plot,
-                                            current_position=moon_current_pos)
+                                            current_position=moon_current_pos,
+                                            show_apsidal_markers=show_apsidal_markers)
             else:
                 # Use the standard satellite plotting function for other moons
                 # Get satellite's current position
@@ -2872,7 +2859,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     fig,
                     date=date,
                     days_to_plot=days_to_plot,
-                    current_position=satellite_current_pos
+                    current_position=satellite_current_pos,
+                    show_apsidal_markers=show_apsidal_markers
                 )
             
             plotted.append(moon_name)
@@ -2959,60 +2947,61 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     apsides = calculate_exact_apsides(abs(a), e, i, omega, Omega, rotate_points)
 
                     # ========== ADD IDEAL PERIAPSIS MARKER ==========
-                    if apsides['periapsis']:
-                        peri = apsides['periapsis']
-                        
-                        # Get date from TP for hyperbolic orbits
-                        date_str = ""
-                        if 'TP' in params:
-                            from astropy.time import Time
-                            tp_time = Time(params['TP'], format='jd')
-                            perihelion_datetime = tp_time.datetime
-                            date_str = f"<br>Date: {perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                    if show_apsidal_markers:  # ADD THIS CONDITION
+                        if apsides['periapsis']:
+                            peri = apsides['periapsis']
                             
-                            # Store for later use
-                            params['perihelion_datetime'] = perihelion_datetime
-                            params['perihelion_dates'] = [perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')]
-                        
-                        # Add perturbation assessment for hyperbolic orbits
-                        accuracy_note = ""
-                        if e > 10:
-                            accuracy_note = "<br><i>Note: Extreme eccentricity - strong perturbations expected</i>"
-                        elif e > 5:
-                            accuracy_note = "<br><i>Note: Very high eccentricity - significant perturbations expected</i>"
-                        elif e > 2:
-                            accuracy_note = "<br><i>Note: High eccentricity - moderate perturbations expected</i>"
-                        else:
-                            accuracy_note = "<br><i>Note: Near-parabolic - perturbations possible</i>"
-                        
-                        hover_text = (
-                            f"<b>{obj_name} Ideal Periapsis</b>"
-                            f"{date_str}"
-                            f"<br>q={peri['distance']:.6f} AU"
-                            f"<br>Theoretical minimum distance (θ=0°)"
-                            f"<br>One-time passage (hyperbolic)"
-                            f"<br>Unperturbed Keplerian position at actual periapsis time"
-                            f"{accuracy_note}"
-                        )
-                        
-                        fig.add_trace(
-                            go.Scatter3d(
-                                x=[peri['x']],
-                                y=[peri['y']],
-                                z=[peri['z']],
-                                mode='markers',
-                                marker=dict(
-                                    size=6,
-                                    color=color_map(obj_name),
-                                    symbol='square-open'
-                                ),
-                                name=f"{obj_name} Ideal Periapsis",
-                                text=hover_text,
-                                hoverinfo='text',
-                                showlegend=True
+                            # Get date from TP for hyperbolic orbits
+                            date_str = ""
+                            if 'TP' in params:
+                                from astropy.time import Time
+                                tp_time = Time(params['TP'], format='jd')
+                                perihelion_datetime = tp_time.datetime
+                                date_str = f"<br>Date: {perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                                
+                                # Store for later use
+                                params['perihelion_datetime'] = perihelion_datetime
+                                params['perihelion_dates'] = [perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')]
+                            
+                            # Add perturbation assessment for hyperbolic orbits
+                            accuracy_note = ""
+                            if e > 10:
+                                accuracy_note = "<br><i>Note: Extreme eccentricity - strong perturbations expected</i>"
+                            elif e > 5:
+                                accuracy_note = "<br><i>Note: Very high eccentricity - significant perturbations expected</i>"
+                            elif e > 2:
+                                accuracy_note = "<br><i>Note: High eccentricity - moderate perturbations expected</i>"
+                            else:
+                                accuracy_note = "<br><i>Note: Near-parabolic - perturbations possible</i>"
+                            
+                            hover_text = (
+                                f"<b>{obj_name} Ideal Periapsis</b>"
+                                f"{date_str}"
+                                f"<br>q={peri['distance']:.6f} AU"
+                                f"<br>Theoretical minimum distance (θ=0°)"
+                                f"<br>One-time passage (hyperbolic)"
+                                f"<br>Unperturbed Keplerian position at actual periapsis time"
+                                f"{accuracy_note}"
                             )
-                        )
-                        print(f"  Added ideal periapsis for {obj_name} at distance {peri['distance']:.6f} AU (hyperbolic)")
+                            
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=[peri['x']],
+                                    y=[peri['y']],
+                                    z=[peri['z']],
+                                    mode='markers',
+                                    marker=dict(
+                                        size=6,
+                                        color=color_map(obj_name),
+                                        symbol='square-open'
+                                    ),
+                                    name=f"{obj_name} Ideal Periapsis",
+                                    text=[hover_text],
+                                    hoverinfo='text',
+                                    showlegend=True
+                                )
+                            )
+                            print(f"  Added ideal periapsis for {obj_name} at distance {peri['distance']:.6f} AU (hyperbolic)")
                     
                     # ========== GENERATE ACTUAL PERIHELION DATE FROM TP ==========
                     if 'TP' in params:
@@ -3034,88 +3023,90 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     
                     # ========== SIMPLIFIED ACTUAL MARKER FETCHING FOR HYPERBOLIC ==========
                     # This avoids the datetime parsing issues by fetching with date-only
-                    if 'perihelion_dates' in params:
-                        print(f"\n[DEBUG] Attempting simplified fetch for hyperbolic {obj_name}")
-                        
-                        # Get the full datetime string and extract just the date part
-                        perihelion_full = params['perihelion_dates'][0]
-                        perihelion_date_only = perihelion_full.split(' ')[0]  # Get just YYYY-MM-DD
-                        print(f"  Full datetime: {perihelion_full}")
-                        print(f"  Date only for fetch: {perihelion_date_only}")
-                        
-                        # Get object ID
-                        obj_id = None
-                        id_type = None
-                        for obj in objects:
-                            if obj['name'] == obj_name:
-                                obj_id = obj['id']
-                                id_type = obj.get('id_type', None)
-                                break
-                        
-                        print(f"  Object ID: {obj_id}, ID type: {id_type}")
-                        
-                        if obj_id and fetch_position:
-                            try:
-                                # Create a datetime object with just the date (midnight)
-                                from datetime import datetime
-                                date_obj = datetime.strptime(perihelion_date_only, '%Y-%m-%d')
-                                print(f"  Fetching position for {date_obj}")
-                                
-                                # Fetch the position
-                                pos_data = fetch_position(obj_id, date_obj, center_id=center_id, id_type=id_type)
-                                
-                                if pos_data and 'x' in pos_data:
-                                    print(f"  SUCCESS: Got position ({pos_data['x']:.3f}, {pos_data['y']:.3f}, {pos_data['z']:.3f})")
+                    if show_apsidal_markers:  # ADD THIS CONDITION
+                        if 'perihelion_dates' in params:
+                            print(f"\n[DEBUG] Attempting simplified fetch for hyperbolic {obj_name}")
+                            
+                            # Get the full datetime string and extract just the date part
+                            perihelion_full = params['perihelion_dates'][0]
+                            perihelion_date_only = perihelion_full.split(' ')[0]  # Get just YYYY-MM-DD
+                            print(f"  Full datetime: {perihelion_full}")
+                            print(f"  Date only for fetch: {perihelion_date_only}")
+                            
+                            # Get object ID
+                            obj_id = None
+                            id_type = None
+                            for obj in objects:
+                                if obj['name'] == obj_name:
+                                    obj_id = obj['id']
+                                    id_type = obj.get('id_type', None)
+                                    break
+                            
+                            print(f"  Object ID: {obj_id}, ID type: {id_type}")
+                            
+                            if obj_id and fetch_position:
+                                try:
+                                    # Create a datetime object with just the date (midnight)
+                                    from datetime import datetime
+                                    date_obj = datetime.strptime(perihelion_date_only, '%Y-%m-%d')
+                                    print(f"  Fetching position for {date_obj}")
                                     
-                                    # Calculate distance for hover text
-                                    import numpy as np
-                                    distance_au = np.sqrt(pos_data['x']**2 + pos_data['y']**2 + pos_data['z']**2)
-                                    distance_km = distance_au * 149597870.7
+                                    # Fetch the position
+                                    pos_data = fetch_position(obj_id, date_obj, center_id=center_id, id_type=id_type)
                                     
-                                    # Manually add the actual perihelion marker
-                                    fig.add_trace(
-                                        go.Scatter3d(
-                                            x=[pos_data['x']],
-                                            y=[pos_data['y']],
-                                            z=[pos_data['z']],
-                                            mode='markers',
-                                            marker=dict(
-                                                size=8,
-                                                color='white',
-                                                symbol='square-open'
-                                            ),
-                                            name=f"{obj_name} Actual Perihelion",
-                                            hovertemplate=(
-                                                f"<b>{obj_name} at Perihelion (Actual)</b><br>"
-                                                f"Date/Time: {perihelion_full} UTC<br>"
-                                                f"Distance from {center_id}: {distance_au:.6f} AU<br>"
-                                                f"Distance: {distance_km:.0f} km<br>"
-                                                "<extra></extra>"
-                                            ),
-                                            showlegend=True
+                                    if pos_data and 'x' in pos_data:
+                                        print(f"  SUCCESS: Got position ({pos_data['x']:.3f}, {pos_data['y']:.3f}, {pos_data['z']:.3f})")
+                                        
+                                        # Calculate distance for hover text
+                                        import numpy as np
+                                        distance_au = np.sqrt(pos_data['x']**2 + pos_data['y']**2 + pos_data['z']**2)
+                                        distance_km = distance_au * 149597870.7
+                                        
+                                        # Manually add the actual perihelion marker
+                                        fig.add_trace(
+                                            go.Scatter3d(
+                                                x=[pos_data['x']],
+                                                y=[pos_data['y']],
+                                                z=[pos_data['z']],
+                                                mode='markers',
+                                                marker=dict(
+                                                    size=8,
+                                                    color='white',
+                                                    symbol='square-open'
+                                                ),
+                                                name=f"{obj_name} Actual Perihelion",
+                                                text=[f"{obj_name} Actual Perihelion"],
+                                                hovertemplate=(
+                                                    f"<b>{obj_name} at Perihelion (Actual)</b><br>"
+                                                    f"Date/Time: {perihelion_full} UTC<br>"
+                                                    f"Distance from {center_id}: {distance_au:.6f} AU<br>"
+                                                    f"Distance: {distance_km:.0f} km<br>"
+                                                    "<extra></extra>"
+                                                ),
+                                                showlegend=True
+                                            )
                                         )
-                                    )
-                                    print(f"  Added actual perihelion marker for {obj_name}")
-                                else:
-                                    print(f"  WARNING: No position data returned for {obj_name}")
-                                    print(f"  This might be due to limited ephemeris data for this object")
+                                        print(f"  Added actual perihelion marker for {obj_name}")
+                                    else:
+                                        print(f"  WARNING: No position data returned for {obj_name}")
+                                        print(f"  This might be due to limited ephemeris data for this object")
+                                        
+                                except Exception as e:
+                                    print(f"  ERROR fetching position: {e}")
+                                    print(f"  Error type: {type(e).__name__}")
                                     
-                            except Exception as e:
-                                print(f"  ERROR fetching position: {e}")
-                                print(f"  Error type: {type(e).__name__}")
-                                
-                                # If it's still the NoneType * float error, it might be in fetch_position itself
-                                if "NoneType" in str(e) and "float" in str(e):
-                                    print(f"  This appears to be the period calculation issue")
-                                    print(f"  The object may have limited ephemeris data in JPL Horizons")
-                        else:
-                            if not obj_id:
-                                print(f"  Could not find object ID for {obj_name}")
-                            if not fetch_position:
-                                print(f"  fetch_position function not available")
-                    
-                    plotted.append(obj_name)
-                    print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.5f}, q={q:.5f} AU")
+                                    # If it's still the NoneType * float error, it might be in fetch_position itself
+                                    if "NoneType" in str(e) and "float" in str(e):
+                                        print(f"  This appears to be the period calculation issue")
+                                        print(f"  The object may have limited ephemeris data in JPL Horizons")
+                            else:
+                                if not obj_id:
+                                    print(f"  Could not find object ID for {obj_name}")
+                                if not fetch_position:
+                                    print(f"  fetch_position function not available")
+                        
+                        plotted.append(obj_name)
+                        print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.5f}, q={q:.5f} AU")
 
                 except Exception as err:
                     print(f"Error plotting hyperbolic orbit for {obj_name}: {err}")
@@ -3182,89 +3173,100 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 next_perihelion = next_aphelion = None
 
             # ========== ADD IDEAL PERIAPSIS MARKER ==========
-            if apsides['periapsis']:
-                peri = apsides['periapsis']
-                
-                # Create hover text with date if available
-                date_str = ""
-                if next_perihelion:
-                    date_str = f"<br>Date: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
-                
-                # Add perturbation assessment
-                accuracy_note = ""
-                if e > 0.15:
-                    accuracy_note = "<br><i>Note: High eccentricity - strong perturbations expected</i>"
-                elif e > 0.05:
-                    accuracy_note = "<br><i>Note: Moderate eccentricity - perturbations expected</i>"
-                
-                hover_text = (
-                    f"<b>{obj_name} Ideal Periapsis</b>"
-                    f"{date_str}"
-                    f"<br>q={peri['distance']:.6f} AU"
-                    f"<br>Theoretical minimum distance (θ=0°)"
-                    f"<br>Unperturbed Keplerian position at actual periapsis time"
-                    f"{accuracy_note}"
-                )
-                
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[peri['x']],
-                        y=[peri['y']],
-                        z=[peri['z']],
-                        mode='markers',
-                        marker=dict(
-                            size=6,
-                            color=color_map(obj_name),
-                            symbol='square-open'
-                        ),
-                        name=f"{obj_name} Ideal Periapsis",
-                        text=hover_text,
-                        hoverinfo='text',
-                        showlegend=True
+            if show_apsidal_markers:  # ADD THIS CONDITION
+                if apsides['periapsis']:
+                    peri = apsides['periapsis']
+                    
+                    # Create hover text with date if available
+                    date_str = ""
+                    if next_perihelion:
+                        date_str = f"<br>Date: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                    
+                    # Add perturbation assessment
+                    accuracy_note = ""
+                    if e > 0.15:
+                        accuracy_note = "<br><i>Note: High eccentricity - strong perturbations expected</i>"
+                    elif e > 0.05:
+                        accuracy_note = "<br><i>Note: Moderate eccentricity - perturbations expected</i>"
+                    
+                    hover_text = (
+                        f"<b>{obj_name} Ideal Periapsis</b>"
+                        f"{date_str}"
+                        f"<br>q={peri['distance']:.6f} AU"
+                        f"<br>Theoretical minimum distance (θ=0°)"
+                        f"<br>Unperturbed Keplerian position at actual periapsis time"
+                        f"{accuracy_note}"
                     )
-                )
-                print(f"  Added ideal periapsis for {obj_name} at distance {peri['distance']:.6f} AU")
+                    
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[peri['x']],
+                            y=[peri['y']],
+                            z=[peri['z']],
+                            mode='markers',
+                            marker=dict(
+                                size=6,
+                                color=color_map(obj_name),
+                                symbol='square-open'
+                            ),
+                            name=f"{obj_name} Ideal Periapsis",
+                            text=[hover_text],
+                            hoverinfo='text',
+                            showlegend=True
+                        )
+                    )
+                    print(f"  Added ideal periapsis for {obj_name} at distance {peri['distance']:.6f} AU")
 
             # ========== ADD IDEAL APOAPSIS MARKER ==========
-            if apsides['apoapsis']:
-                apo = apsides['apoapsis']
-                
-                # Create hover text with date if available
-                date_str = ""
-                if next_aphelion:
-                    date_str = f"<br>Date: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
-                
-                hover_text = (
-                    f"<b>{obj_name} Ideal Apoapsis</b>"
-                    f"{date_str}"
-                    f"<br>Q={apo['distance']:.6f} AU"
-                    f"<br>Theoretical maximum distance (θ=180°)"
-                    f"<br>Unperturbed Keplerian position at actual apoapsis time"
-                    f"{accuracy_note}"
-                )
-                
-                fig.add_trace(
-                    go.Scatter3d(
-                        x=[apo['x']],
-                        y=[apo['y']],
-                        z=[apo['z']],
-                        mode='markers',
-                        marker=dict(
-                            size=6,
-                            color=color_map(obj_name),
-                            symbol='square-open'
-                        ),
-                        name=f"{obj_name} Ideal Apoapsis",
-                        text=hover_text,
-                        hoverinfo='text',
-                        showlegend=True
+            if show_apsidal_markers:  # ADD THIS CONDITION
+                if apsides['apoapsis']:
+                    apo = apsides['apoapsis']
+                    
+                    # Create hover text with date if available
+                    date_str = ""
+                    if next_aphelion:
+                        date_str = f"<br>Date: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                    
+                    hover_text = (
+                        f"<b>{obj_name} Ideal Apoapsis</b>"
+                        f"{date_str}"
+                        f"<br>Q={apo['distance']:.6f} AU"
+                        f"<br>Theoretical maximum distance (θ=180°)"
+                        f"<br>Unperturbed Keplerian position at actual apoapsis time"
+                        f"{accuracy_note}"
                     )
-                )
-                print(f"  Added ideal apoapsis for {obj_name} at distance {apo['distance']:.6f} AU")
+                    
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[apo['x']],
+                            y=[apo['y']],
+                            z=[apo['z']],
+                            mode='markers',
+                            marker=dict(
+                                size=6,
+                                color=color_map(obj_name),
+                                symbol='square-open'
+                            ),
+                            name=f"{obj_name} Ideal Apoapsis",
+                            text=[hover_text],
+                            hoverinfo='text',
+                            showlegend=True
+                        )
+                    )
+                    print(f"  Added ideal apoapsis for {obj_name} at distance {apo['distance']:.6f} AU")
+
+# Fix for idealized_orbits.py around lines 3200-3350
+# Replace the problematic section with this corrected version:
 
             # ========== NEW: GENERATE APSIDAL DATES FROM TP ==========
+            # Initialize these variables BEFORE any conditional logic
+            next_perihelion = None
+            next_aphelion = None
+            peri_in_range = False
+            apo_in_range = False
+            
             # After adding ideal markers, generate actual dates from TP if available
-            if 'TP' in params:
+            if show_apsidal_markers and 'TP' in params:
                 from datetime import timedelta
                 
                 # Generate the next apsidal dates from TP with range checking
@@ -3291,61 +3293,58 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
 
 
             # ========== EXISTING: PLOT ACTUAL APSIDAL MARKERS ==========
-            # This existing code will now work because we just added the dates above
-            # After adding ideal markers, add actual apsidal markers if dates are provided
-            if 'perihelion_dates' in params or 'aphelion_dates' in params:
-                print(f"\n[DEBUG] Found apsidal dates for {obj_name}")
-                print(f"  Perihelion dates: {params.get('perihelion_dates', [])}")
-                print(f"  Aphelion dates: {params.get('aphelion_dates', [])}")
-                
-                # Get the object ID for fetching positions
-                obj_id = None
-                id_type = None
-                for obj in objects:
-                    if obj['name'] == obj_name:
-                        obj_id = obj['id']
-                        id_type = obj.get('id_type', None)
-                        break
-                
-                if obj_id:
-                    # Import the functions we need
-                    from apsidal_markers import fetch_positions_for_apsidal_dates, add_actual_apsidal_markers
-                    from datetime import datetime, timedelta
-
-                    # Use the passed fetch_position
-                    if fetch_position is None:
-                        print("ERROR: fetch_position not provided to plot_idealized_orbits")
-                        continue
-
-                    # Fetch positions for the apsidal dates
-                    positions_dict = fetch_positions_for_apsidal_dates(
-                        obj_id=obj_id,
-                        params=params,
-                #        date_range=(date - timedelta(days=365), date + timedelta(days=365)),
-                        date_range=None,  # Don't restrict by date range
-                        center_id=center_id,
-                        id_type=id_type,
-                        is_satellite=(obj_name in parent_planets.get(center_id, [])),
-                        fetch_position=fetch_position
-                    )
+            if show_apsidal_markers:  # ADD THIS CONDITION
+                if 'perihelion_dates' in params or 'aphelion_dates' in params:
+                    print(f"\n[DEBUG] Found apsidal dates for {obj_name}")
+                    print(f"  Perihelion dates: {params.get('perihelion_dates', [])}")
+                    print(f"  Aphelion dates: {params.get('aphelion_dates', [])}")
                     
-                    print(f"  Fetched positions: {len(positions_dict)} dates")
+                    # Get the object ID for fetching positions
+                    obj_id = None
+                    id_type = None
+                    for obj in objects:
+                        if obj['name'] == obj_name:
+                            obj_id = obj['id']
+                            id_type = obj.get('id_type', None)
+                            break
                     
-                    # Add the actual markers
-                    add_actual_apsidal_markers(
-                        fig,
-                        obj_name,
-                        params,
-                        date_range=(date - timedelta(days=365), date + timedelta(days=365)),
-                        positions_dict=positions_dict,
-                        color_map=color_map,
-                        center_body=center_id,
-                        is_satellite=(obj_name in parent_planets.get(center_id, []))
-                    )
+                    if obj_id:
+                        # Import the functions we need
+                        from apsidal_markers import fetch_positions_for_apsidal_dates, add_actual_apsidal_markers
+                        from datetime import datetime, timedelta
+
+                        # Use the passed fetch_position
+                        if fetch_position is None:
+                            print("ERROR: fetch_position not provided to plot_idealized_orbits")
+                        else:
+                            # Fetch positions for the apsidal dates
+                            positions_dict = fetch_positions_for_apsidal_dates(
+                                obj_id=obj_id,
+                                params=params,
+                                date_range=None,  # Don't restrict by date range
+                                center_id=center_id,
+                                id_type=id_type,
+                                is_satellite=(obj_name in parent_planets.get(center_id, [])),
+                                fetch_position=fetch_position
+                            )
+                            
+                            print(f"  Fetched positions: {len(positions_dict)} dates")
+                            
+                            # Add the actual markers
+                            add_actual_apsidal_markers(
+                                fig,
+                                obj_name,
+                                params,
+                                date_range=(date - timedelta(days=365), date + timedelta(days=365)),
+                                positions_dict=positions_dict,
+                                color_map=color_map,
+                                center_body=center_id,
+                                is_satellite=(obj_name in parent_planets.get(center_id, []))
+                            )
 
             # ========== NEW: ADD LEGEND NOTES FOR OUT-OF-RANGE DATES ==========
-            # If we calculated dates but they're outside JPL range, add informative notes
-            if 'TP' in params:
+            # Only check these if show_apsidal_markers is True and we have TP
+            if show_apsidal_markers and 'TP' in params:
                 # Check if we should add a note about out-of-range dates
                 if (next_perihelion and not peri_in_range) or (next_aphelion and not apo_in_range):
                     from apsidal_markers import add_apsidal_range_note
@@ -3356,7 +3355,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         next_aphelion if not apo_in_range else None,
                         color_map
                     )
-
+                    
             # Mark this object as successfully plotted
             plotted.append(obj_name)
 
