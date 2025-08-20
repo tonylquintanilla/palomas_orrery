@@ -12,9 +12,11 @@ from apsidal_markers import (
     add_actual_apsidal_markers,
     fetch_positions_for_apsidal_dates,
     estimate_hyperbolic_perihelion_date,  # NEW
-    compute_apsidal_dates_from_tp,  # NEW
-    compute_apsidal_dates_with_notes, 
-    add_apsidal_range_note,
+    compute_apsidal_dates_from_tp,  # NEW 
+    add_apsidal_range_note, 
+    add_actual_apsidal_markers_enhanced,  # Add this
+    calculate_orbital_angle_shift,  # Add this
+    create_enhanced_apsidal_hover_text,  # Add this
 )
 
 planetary_params = {
@@ -165,19 +167,21 @@ planetary_params = {
         'i': 6,            # Inclination in degrees (2025 estimate: 6°)
         'L': 238,          # Mean longitude at epoch in degrees (unchanged)
         'omega': 150,      # Argument of perihelion in degrees (unchanged)
-        'Omega': 90        # Longitude of ascending node in degrees (unchanged)
+        'Omega': 90        # Longitude of ascending node in degrees (unchanged)        
         #     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
     },
     
     # Dwarf Planets
 
-    'Orcus': {
-        'a': 39.419,     # semi-major axis in AU
-        'e': 0.226701,   # eccentricity
-        'i': 20.573,     # inclination in degrees
-        'omega': 72.400,  # argument of perihelion in degrees
-        'Omega': 268.457  # longitude of ascending node in degrees
-        #     'Orcus': 90216.75,     # 247.0 * 365.25
+    'Orcus': {                      # 90482 Orcus (2004 DW)
+        'a': 39.39498513874738,                # A - semi-major axis in AU
+        'e': .220173694129795,                 # EC - eccentricity
+        'i': 20.58296889775066,                # IN - inclination in degrees
+        'omega': 72.38143133086857,            # W - argument of perihelion in degrees
+        'Omega': 268.7202801899987,            # OM - longitude of ascending node in degrees
+        'epoch': '2017-09-26',                 # 2017-Sep-26.00 for ephemeris
+        'TP': 2413410.1091600764,              # Time of perihelion - 1895-Aug-04.6091600764        
+        # Period: 90314.9912925 days, 247.26897 julian years * 365.25
     },
 
     'Ixion': {
@@ -345,6 +349,18 @@ planetary_params = {
         'omega': 116.8074860094156, # Horizons: W, argument of perihelion in degrees
         'Omega': 305.1069316209851   # Horizons: OM, longitude of ascending node in degrees
         #     '2024 PT5': 368.75,    # 1.01 * 365.25
+    },
+
+    '2025 PY1': {                         # osculating elements for 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
+        'a': 1.078452460125784,         # Horizons: A, semi-major axis in AU
+        'e': .2233327947850885,         # Horizons: EC, eccentricity
+        'i': 4.573408702272091,         # Horizons: IN, inclination in degrees
+        'omega': 267.1185311148099,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 145.4731476162657,     # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-8-18',            # osculating date: 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
+        'TP': 2460976.5756525602,     # 2025-10-28 1:48:56
+        'Tapo': 2461185.0875000,              # 2026-05-24 14:06      
+        # 409.072695,    # 1.11998 julian years
     },
 
     'Bennu': {
@@ -541,13 +557,16 @@ planetary_params = {
         'Omega': 95.24615579501011   # Horizons: OM, longitude of ascending node in degrees
     },
 
-    'Halley': {                  # Epoch 2068-02-21, heliocentric
-        'a': 17.93003431157555,   # Horizons: A, semi-major axis in AU
-        'e': .9679221169240834,   # Horizons: EC, eccentricity
-        'i': 162.1951462980701,      # Horizons: IN, inclination in degrees
-        'omega': 112.2128395742619, # Horizons: W, argument of perihelion in degrees
-        'Omega': 59.07198712310091   # Horizons: OM, longitude of ascending node in degrees
-        #     'Halley': 27759.00,    # 76.0 * 365.25
+    'Halley': {                         # Rec #:90000030; 1P/Halley; Soln.date: 2024-Apr-16_14:38:13; data arc: 1835-08-21 to 1994-01-11
+        'a': 17.85950919,         # Horizons: A, semi-major axis in AU
+        'e': 0.9678338727,         # Horizons: EC, eccentricity
+        'i': 162.1475927,         # Horizons: IN, inclination in degrees
+        'omega': 112.497549,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 59.59944738,     # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-7-6',            # osculating date: 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
+        'TP': 2474058.277997814585,     # 2061-08-21 18:40:19 
+        'Tapo': 2460856.0,              # 2025-06-29 12:00:00       
+        #     'Halley': 27731.29226,    # PER=75.924140333742 julian year * 365.25 = 27731.29226
     },
 
     'Ikeya-Seki': {                  # Epoch 1965-10-7, heliocentric, (C/1965 S1-A)
@@ -3224,15 +3243,34 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     
                     # Create hover text with date if available
                     date_str = ""
+                    position_description = ""
+                    
                     if next_aphelion:
                         date_str = f"<br>Date: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC"
-                    
+                        position_description = "<br>Unperturbed Keplerian position at actual apoapsis time"
+                    elif e < 1 and 'TP' in params:
+                        # Calculate Keplerian aphelion date if no Tapo provided
+                        from astropy.time import Time
+                        from datetime import timedelta
+                        from constants_new import KNOWN_ORBITAL_PERIODS
+                        
+                        # NOW check if obj_name is in it
+                        if obj_name in KNOWN_ORBITAL_PERIODS:
+                            period_days = KNOWN_ORBITAL_PERIODS.get(obj_name)
+                            if period_days and period_days not in [None, 1e99]:
+                                tp_time = Time(params['TP'], format='jd')
+                                tp_datetime = tp_time.datetime
+                                # Aphelion occurs at period/2 after perihelion for Keplerian orbit
+                                keplerian_aphelion = tp_datetime + timedelta(days=period_days/2)
+                                date_str = f"<br>Date: {keplerian_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC (Keplerian estimate)"
+                                position_description = "<br>Unperturbed Keplerian position at idealized apoapsis time"
+
                     hover_text = (
                         f"<b>{obj_name} Ideal Apoapsis</b>"
                         f"{date_str}"
                         f"<br>Q={apo['distance']:.6f} AU"
                         f"<br>Theoretical maximum distance (θ=180°)"
-                        f"<br>Unperturbed Keplerian position at actual apoapsis time"
+                        f"{position_description}"
                         f"{accuracy_note}"
                     )
                     
@@ -3269,12 +3307,16 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             if show_apsidal_markers and 'TP' in params:
                 from datetime import timedelta
                 
-                # Generate the next apsidal dates from TP with range checking
-                next_perihelion, next_aphelion, peri_in_range, apo_in_range = compute_apsidal_dates_with_notes(
-                    obj_name,
-                    params,
-                    current_date=date  # Use the plot date
+                # Get apsidal dates directly from TP and Tapo
+                next_perihelion, next_aphelion = compute_apsidal_dates_from_tp(
+                    obj_name, params, current_date=date
                 )
+
+                # Check JPL range if needed (optional)
+                JPL_MIN_DATE = datetime(1900, 1, 1)
+                JPL_MAX_DATE = datetime(2199, 12, 29)
+                peri_in_range = next_perihelion and JPL_MIN_DATE <= next_perihelion <= JPL_MAX_DATE
+                apo_in_range = next_aphelion and JPL_MIN_DATE <= next_aphelion <= JPL_MAX_DATE
                 
                 # In idealized_orbits.py, when storing apsidal dates:
                 if next_perihelion and peri_in_range:
@@ -3310,13 +3352,23 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     
                     if obj_id:
                         # Import the functions we need
-                        from apsidal_markers import fetch_positions_for_apsidal_dates, add_actual_apsidal_markers
+                        from apsidal_markers import fetch_positions_for_apsidal_dates, add_actual_apsidal_markers_enhanced, calculate_exact_apsides, compute_apsidal_dates_from_tp
                         from datetime import datetime, timedelta
 
                         # Use the passed fetch_position
                         if fetch_position is None:
                             print("ERROR: fetch_position not provided to plot_idealized_orbits")
                         else:
+                            # Calculate apsides HERE, right before use
+                            apsides = calculate_exact_apsides(
+                                params.get('a', a),
+                                params.get('e', e),
+                                params.get('i', i),
+                                params.get('omega', omega),
+                                params.get('Omega', Omega),
+                                rotate_points
+                            )
+                        
                             # Fetch positions for the apsidal dates
                             positions_dict = fetch_positions_for_apsidal_dates(
                                 obj_id=obj_id,
@@ -3331,7 +3383,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             print(f"  Fetched positions: {len(positions_dict)} dates")
                             
                             # Add the actual markers
-                            add_actual_apsidal_markers(
+                    #        add_actual_apsidal_markers(
+                            add_actual_apsidal_markers_enhanced(    
                                 fig,
                                 obj_name,
                                 params,
@@ -3339,7 +3392,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 positions_dict=positions_dict,
                                 color_map=color_map,
                                 center_body=center_id,
-                                is_satellite=(obj_name in parent_planets.get(center_id, []))
+                                is_satellite=(obj_name in parent_planets.get(center_id, [])),
+                                ideal_apsides=apsides,
+                                filter_by_date_range=False
                             )
 
             # ========== NEW: ADD LEGEND NOTES FOR OUT-OF-RANGE DATES ==========

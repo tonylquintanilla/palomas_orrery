@@ -140,7 +140,7 @@ KNOWN_ORBITAL_PERIODS = {
     'Haumea': 103731.00,   # 284.0 * 365.25
     'Makemake': 111766.50, # 306.0 * 365.25
     'Quaoar': 105192.00,   # 288.0 * 365.25
-    'Orcus': 90216.75,     # 247.0 * 365.25
+    'Orcus': 90314.9912925,     # 247.26897 * 365.25; 247.26897
     'Ixion': 91184.74,
     'MS4': 99210.94,
     'GV9': 100351.43,
@@ -181,11 +181,12 @@ KNOWN_ORBITAL_PERIODS = {
     # Near-Earth asteroids
     '2024 YR4': 922.84,    # 2.53 * 365.25
     '2024 PT5': 368.75,    # 1.01 * 365.25
+    '2025 PY1': 409.072695,    # days from PER in julian years
     '2023 JF': 493.37,     # 1.35 * 365.25
     '2025 KV': 695.85,     # 1.91 * 365.25
     
     # Comets (converted from years to days where applicable)
-    'Halley': 27759.00,    # 76.0 * 365.25
+    'Halley': 27731.29226,    # 75.92414033 * 365.25 = 27731.29226; EPOCH=  2439907.5 ! 1968-Feb-21.0000000
     'Hyakutake': 70071.50, # 191.86 * 365.25 (pre-1996 orbit)
     'Hale-Bopp': 2520352.50, # 6900.0 * 365.25
     'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
@@ -546,6 +547,7 @@ def color_map(planet):
 
         'Kamo oalewa': 'cyan',
         '2024 PT5': 'red',
+        '2025 PY1': 'white',
         '2023 JF': 'white',
         '2024 DW': 'gold',        
         '2024 YR4': 'green',
@@ -714,6 +716,8 @@ INFO = {
         'not a permanent addition to our celestial neighborhood, its temporary presence provided scientists with a valuable ' 
         'opportunity to study near-Earth objects and learn more about the dynamics of our solar system.\n* Plot 2024 PT5 with' 
         'Earth as the center to see its close approach and also with the Sun as the center to see its orbit near Earth\'s.',
+
+        '2025 PY1': 'Near-Earth asteroid.',
 
         '2023 JF': 'Asteroid 2023 JF is a small near-Earth asteroid that made a close approach to Earth in May 2023. Here\'s a \n' 
         'breakdown:\n' 

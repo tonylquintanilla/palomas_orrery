@@ -1606,6 +1606,7 @@ earth_var = tk.IntVar(value=0)
 # near Earth asteroids
 kamooalewa_var = tk.IntVar(value=0)
 pt5_var = tk.IntVar(value=0)
+py1_var = tk.IntVar(value=0)
 asteroid2023jf_var = tk.IntVar(value=0)
 asteroid_dw_var = tk.IntVar(value=0)
 yr4_var = tk.IntVar(value=0)
@@ -2233,7 +2234,7 @@ objects = [
     'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
     'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
 
-    {'name': 'Orcus', 'id': '90482', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Orcus', 'id': '2004 DW', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'A dwarf planet in the Kuiper Belt with a moon named Vanth.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
@@ -2322,6 +2323,12 @@ objects = [
     'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
     'mission_info': 'Closest approach to Earth 8-9-2024.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
+
+    {'name': '2025 PY1', 'id': '2025 PY1', 'var': py1_var, 'color': color_map('2025 PY1'), 'symbol': 'circle-open', 'object_type': 'orbital',
+    'id_type': 'smallbody', 
+#    'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
+    'mission_info': 'Near-Earth asteroid.',
+    'mission_url': 'https://www.jpl.nasa.gov/asteroid-watch/next-five-approaches/'},    
 
     {'name': '2023 JF', 'id': '50587237', 'var': asteroid2023jf_var, 'color': color_map('2023 JF'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 'start_date': datetime(1962, 1, 20), 'end_date': datetime(2025, 10, 4),
@@ -2473,8 +2480,8 @@ objects = [
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
 
     {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1962, 1, 22), 'end_date': datetime(2061, 7, 28), 
-    # initial start date 1982-11-26. Horizons has 1962-01-20
+    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(1994, 1, 11), 
+    # data arc: 1835-08-21 to 1994-01-11
     'mission_info': 'Most famous comet, returned in 1986 and will return in 2061.', 
     'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/halley-1986'},
 
@@ -5631,6 +5638,7 @@ create_celestial_checkbutton("- L5", l5_var)
 # Near Earth asteroids
 create_celestial_checkbutton("- Kamo oalewa", kamooalewa_var)   # params
 create_celestial_checkbutton("- 2024 PT5", pt5_var) # params
+create_celestial_checkbutton("- 2025 PY1", py1_var) # params
 create_celestial_checkbutton("- 2023 JF", asteroid2023jf_var)   # params
 create_celestial_checkbutton("- 2024 DW", asteroid_dw_var)  # params
 create_celestial_checkbutton("- 2024 YR4", yr4_var) # params
@@ -6109,9 +6117,9 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
 create_comet_checkbutton("67P/Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(2008-6-2 to 2023-4-25)", 
     "August 13, 2015")  # params
     # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
-create_comet_checkbutton("Halley", comet_halley_var, "(1962-01-21 to 2061-7-28)",      
-                         # initial start date 1982-11-26 to 1995-10-20. Horizons has 1962-01-20 and ongoing.
-                         "February 9, 1986")    # params
+create_comet_checkbutton("Halley", comet_halley_var, "(1900-1-1 to 1994-1-11)",      
+                         # data arc: 1835-08-21 to 1994-01-11
+                         "February 8, 1986")    # 1986-Feb-08.1983372075
 # there are also params for "halley geocentric"
 create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
                          "October 21, 1965")    # params 
