@@ -5244,7 +5244,7 @@ def sync_days_from_dates():
         pass
 
 # Define date labels and entries with reduced padding
-label_year = tk.Label(date_frame, text="Date(UTC) Year:")
+label_year = tk.Label(date_frame, text="Start Date (UTC) Year:")
 label_year.grid(row=0, column=0, padx=(0, 5), pady=2, sticky='e')
 
 entry_year = tk.Entry(date_frame, width=5)
@@ -5285,7 +5285,7 @@ now_button.grid(row=0, column=10, padx=(2, 0), pady=2, sticky='w')
 CreateToolTip(now_button, "Fill the current date and time")
 
 # END DATE ROW
-tk.Label(date_frame, text="End Date:").grid(row=1, column=0, sticky='e', padx=(0,5))
+tk.Label(date_frame, text="End Date (static plots):").grid(row=1, column=0, sticky='e', padx=(0,5))
 
 end_entry_year = tk.Entry(date_frame, width=5)
 end_entry_year.grid(row=1, column=1, padx=(0,2))
@@ -6806,7 +6806,12 @@ note_label = tk.Label(
     text="Note:",
     bg='SystemButtonFace',
     fg='black',
-    font=("Arial", 10, "normal")
+    font=(
+        "Arial",
+        10, 
+#          "normal"
+          "bold"          
+          )
 )
 note_label.pack(anchor='w', pady=(0, 5))  # Align to the left with padding below
 

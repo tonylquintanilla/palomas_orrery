@@ -348,109 +348,94 @@ class_mapping = {
             'VII': 'White dwarf. The small, dense remnants of low- to medium-mass stars after they have exhausted their nuclear fuel.',
         }
 
-# Note in note_frame
+# Updated note_text for the GUI note_frame in constants_new.py
+# Based on README updates and current capabilities as of August 2025
+
 note_text = (
-    "What's an orrery? \n\n"
+    "What's Paloma's Orrery? \n\n"
 
-    "An orrery is a model of the solar system! This model attempts to display celestial and human objects in both stationary " 
-    "and animated 3D plots over different periods of time. It uses real-time data from NASA's Jet Propulsion Laboratory's Horizon System " 
-    "to plot actual positions of objects. In addition, complete idealized orbits of the planets, asteroids, dwarf planets, and Kuiper " 
-    "belt objects are calculated from their orbital parameters using Kepler's equations. Explore! \n\n" 
+    "Paloma's Orrery is an advanced astronomical visualization tool that transforms real NASA/ESA data into interactive 3D and 2D "
+    "visualizations of the solar system and nearby stars! This model displays celestial objects and spacecraft in both stationary " 
+    "and animated plots over different time periods, using real-time data from NASA's Jet Propulsion Laboratory's Horizons System " 
+    "to plot actual positions. Complete idealized orbits of planets, asteroids, dwarf planets, and Kuiper belt objects are also "
+    "calculated from their orbital parameters using Kepler's equations. \n\n" 
 
-    "In addition to the solar system, you can also create 2D and 3D plots of our stellar neighborhood. There are four ways to do this: "
-    "by distance in light-years or by brightness as apparent magnitude, and in both modes in a 2D or a 3D plot.\n\n"
+    "STELLAR NEIGHBORHOOD VISUALIZATION:\n"
+    "Explore our cosmic neighborhood in four different ways: by distance (light-years) or brightness (apparent magnitude), "
+    "displayed in either 2D Hertzsprung-Russell diagrams or immersive 3D spatial plots. Plot stars up to 100 light-years away "
+    "to see the actual 3D structure and beginning shape of our galaxy!\n\n" 
 
-    "You can plot our stellar neighborhood up to 100 light-years away in 2D and 3D, with a user defined entry in light-years.\n\n" 
+    "DISTANCE MODE: See all stars within your selected distance from the Sun, revealing the true 3D structure of our local "
+    "stellar neighborhood. MAGNITUDE MODE: View stars by apparent brightness (how bright they appear to us), including "
+    "distant luminous giants thousands of light-years away alongside nearby dim stars. At higher magnitudes, you'll begin "
+    "to see the galaxy's shape and tilt! Warning: Higher magnitudes fetch more stars and take longer to plot.\n\n"
 
-    "The other way of selecting stars is by apparent magnitude. This method also plots 2D or 3D, but the star selection is quite " 
-    "different. Instead of seeing all stars within a certain distance from the Sun, you see all stars visible to the unaided eye up " 
-    "to a certain apparent, or visual magnitude, meaning how bright they appear, which is a function of how luminous they are and " 
-    "their distance from us.\n\n" 
+    "3D SPATIAL PLOTS: Experience stars in their actual 3D positions relative to the Sun. Use 'Move Camera to the Center' "
+    "to view from the Sun's position and see familiar constellations like Orion with M42 (Orion Nebula)! Toggle between "
+    "detailed hover information and star names only for clarity.\n\n"
     
-    "If you click the \"Move Camera to the Center\" button, the view will move to the position of the Sun.\n\n" 
+    "2D HERTZSPRUNG-RUSSELL DIAGRAMS: The classic scientific plot showing stellar luminosity vs. temperature, revealing "
+    "stellar types and evolutionary stages. Discover main sequence stars, giants, supergiants, and white dwarfs!\n\n" 
 
-    "The 3D plot is just that, you will "
-    "see stars plotted relative to the Sun in their actual positions, up to the selected distance in light-years, or up to the selected "
-    "apparent magnitude, regardless of the distance. In fact, you will begin to see the shape and tilt of the galaxy! You can also " 
-    "use a drop down menu of bright stars and Messier Objects that are plotted, which will allow you to point to that object!\n\n"
-    
-    "You can also see in all plots the hovertext with the stars' information, in some cases in detail as I add it. You can toggle " 
-    "between full hovertext information and just the star's name using the buttons, \"Full Star Info\" and \"Star Names Only\".\n\n"  
-    
-    "The 2D star plot is the classic Hertzprung-Russell diagram of stars plotted by "
-    "luminosity, or absolute magnitude, meaning how intrinsically bright the star is, and temperature, which is related to the star's "
-    "spectral class and color. This is a more scientific plot that reveals a lot about the "
-    "kind of stars they are, and their place in stellar evolution. The 2D plots can be done both by distance and apparent magnitude.\n\n" 
+    "MESSIER OBJECTS: In magnitude mode, plot famous non-stellar objects like nebulae, star clusters, and galaxies alongside "
+    "the stars. Perfect for exploring deep-sky objects visible to amateur astronomers!\n\n"
 
-    "More on the magnitude mode: You can select the magnitude "
-    "you wish to plot up to apparent magnitude 9, extremely faint stars, which is what you might be able to see from space, down to -1.44, which is the "
-    "apparent magnitude of the brightest star in the sky, Sirius, and everything in between as explained in the hovertext.\n\n" 
+    "ENHANCED PLANETARY SYSTEM (2025 UPDATE):\n"
+    "NEW! Comprehensive planetary interior visualization with individual shell structures for all major solar system bodies. "
+    "Toggle individual components like planetary cores, mantles, atmospheres, radiation belts, and plasma tori. The Sun is "
+    "visualized in unprecedented detail: core, radiative zone, convective zone, photosphere, chromosphere, inner/outer corona, "
+    "solar wind boundaries, termination shock, and heliopause. Manually select 100,000 AU scale to explore the vast "
+    "inner and outer Oort clouds - the source of comets!\n\n"
 
-    "One nice feature of the 3D apparent magnitude plot, is that you can also plot Messier non-stellar objects, such as nebula and " 
-    "open clusters! You can also see the stars in their "
-    "familiar constellations IF viewed from the Sun's position at the center of the plot. For example, if you use the \"Move Camera to " 
-    "Center\" button to move your view to the position of the Sun, and keep the default magnitude of 4 and select the manual scale default setting of "
-    "1400 light-years distance, you will see the familiar Orion constellation with M42 the Orion Nebula! You can see other constellations " 
-    "as well if you use the menu to select bright stars in a constellation. Hint: try the alpha stars! Experiment!\n\n"
-    
-    "A crucial difference between the magnitude plot and the distance plot is that some stars that are visible are extremely far away, " 
-    "thousands of light-years, yet will still be "
-    "visible because of how luminous they are, such as the Blue Supergiants! "
-    "On the other hand, nearer, fainter stars, may not be plotted at all, for example White Dwarfs. In fact, the greater the apparent magnitude " 
-    "that you select, you will fetch more faint stars, which are farther aways, and you will begin to see the shape and tilt of the " 
-    "galaxy! Warning: the higher the apparent magnitude you select, the more stars you will fetch and the longer your plot will take " 
-    "to create, up to a minute and a half at apparent magnitude 9, the limit of visibity in space, say from the Space Station.\n\n"
+    "ADVANCED SPACECRAFT TRACKING (2025 UPDATE):\n"
+    "Follow historic and active missions including Parker Solar Probe (touching the Sun's corona!), completed OSIRIS-REx "
+    "sample return from Bennu, ongoing OSIRIS-APEX mission to Apophis, Voyager 1&2 in interstellar space, Pioneer probes, "
+    "Galileo, Cassini, SOHO, Gaia, BepiColombo, Solar Orbiter, and many more. Watch real trajectories unfold over time!\n\n"
 
-    "If the star 3D or 2D star field gets too crowded and you wish to see more detail, reduce the light-year distance, the apparent "
-    "magnitude, or reduce the scale in light-years in the case of 3D apparent magnitude plots.\n\n" 
-    
-    "In the case of 3D plots, you can also toggle the hovertext from detailed descriptions " 
-    "to star name only using the \"Star Names Only\" toggle button.\n\n" 
+    "ROBUST DATA MANAGEMENT (2025 UPDATE):\n"
+    "Enhanced cache system with automatic validation, repair, and backup capabilities. Multi-threaded processing ensures "
+    "smooth performance while intelligent interval selection optimizes data fetching. Export capabilities include HTML, "
+    "PNG, JSON, VOTable, and Pickle formats for sharing and analysis.\n\n"
 
-    "In 3D plots, to see the star field from the view point of the Sun (us!) use the \"Move Camera to Center\" button.\n\n"
-    
-    "The color scales follow the color of the black body radiation associated with star temperature, in other words, the star\'s " 
-    "actual color. The Sun is colored chlorophyll green, to set it apart in the plot and because it represents the Sun\'s life-giving light! " 
-    "Plants have evolved to use the most abundant parts of the Sun's visible light spectrum for photosynthesis (red and blue) " 
-    "while reflecting the green light.\n\n"
+    "INTERACTIVE FEATURES:\n"
+    "• Animation: Watch solar system evolution from minutes to years\n"
+    "• Orbital Mechanics Visualization: Educational tool showing how orbital elements define spacecraft and planetary paths\n"
+    "• Lagrange Points: Explore gravitational balance points in Earth-Moon and Sun-Earth systems\n"
+    "• Apsidal Markers: See perihelion/aphelion points with intelligent date displays\n"
+    "• Copy-to-Clipboard: Easy sharing of star names and coordinates\n"
+    "• Advanced Hover Information: Detailed astronomical data with toggle controls\n\n"
 
-    "Solar System Objects:\nThe Solar sytem object selection menu is scrollable. Select the objects to plot.\n\n"  
+    "SOLAR SYSTEM OBJECTS:\n"
+    "The scrollable selection menu includes planets, moons (including all major Jovian and Saturnian satellites), asteroids, "
+    "trans-Neptunian objects, comets (including recent discoveries like interstellar visitor C/2025 N1), and active/historic "
+    "spacecraft missions. Select multiple objects to compare their motions and relationships.\n\n"
 
-    "Data availability is limited for space missions and comets. "
-    "Objects will only be plotted on dates the data is available. "
-    "For space missions and comets, be careful to enter a start date and number of days, weeks, months or years to plot that are " 
-    "within the timeframes of all the objects to plot to avoid plotting errors. "
-    "For dates beyond 2199-12-29, the Horizons system does not provide data for most objects. " 
-    "Objects like Dwarf Planet Sedna have orbital periods that are thousands of years long so the orbit will only plot partially " 
-    "with actual positions. Full ideal orbits estimated from their orbital parameters using Kepler\'s equations are also plotted. " 
-    "This is also the case for Dwarf Planet Pluto!\n\n"
+    "DATA AVAILABILITY & TIMEFRAMES:\n"
+    "Mission and comet data availability varies by object and time period. For spacecraft and comets, carefully select dates "
+    "within available data ranges to avoid plotting errors. The Horizons system provides data through 2199-12-29 for most "
+    "objects. Long-period objects like Sedna show partial actual positions plus complete idealized orbits calculated from "
+    "orbital parameters.\n\n"
 
-    "The Sun is visualized in detail with all its structural sections, core, radiative zone, convective zone and photosphere, "
-    "chromosphere, inner corona, outer corona, and solar wind (inner limit, termination shock and heliopause). See the hovertext.\n\n" 
-    
-    "We also visualize the inner and outer Oort clouds, the inferred source of comets. Manually select the scale "
-    "at 100000 AU to see this."
+    "COORDINATE SYSTEM:\n"
+    "Positions use the J2000 ecliptic coordinate system, aligned with Earth's orbital plane and fixed relative to stars as "
+    "of January 1, 2000. Coordinates are measured in Astronomical Units (AU) - approximately 149.6 million kilometers or "
+    "the average Earth-Sun distance.\n\n"
 
-    "This orrery is created using data from the JPL Horizons system (https://ssd.jpl.nasa.gov/horizons/app.html#/) "
-    "See the hyperlink on the orrery display. "
-    "Ensure you have an active internet connection, as data is fetched in real-time. Be patient when fetching a lot of object positions, " 
-    "especially non-animated plots that show actual positions. \n\n"
+    "PERFORMANCE TIPS:\n"
+    "• Use 'Move Camera to Center' to view from the Sun's perspective\n"
+    "• Reduce distance/magnitude limits for less crowded, more detailed views\n"
+    "• Toggle hover text complexity based on your needs\n"
+    "• Be patient with complex plots - quality visualization takes time!\n"
+    "• Ensure active internet connection for real-time data fetching\n\n"
 
-    "J2000 Ecliptic Coordinate System:\n" 
-    "Object positions are fetched from the JPL Horizons system, which by default provides data in the J2000 ecliptic coordinate system. "
-    "This is a celestial coordinate system that aligns with the plane of Earth's orbit around the Sun (the ecliptic) and is fixed " 
-    "relative to the stars as of the epoch J2000.0 (January 1, 2000).\n\n"
+    "Created by civil & environmental engineer Tony Quintanilla with AI assistance (Claude, ChatGPT, Gemini), continuously "
+    "updated through August 2025. MIT License - free to use, modify, and share.\n\n"
+    "Contact: tonyquintanilla@gmail.com\n"
+    "Data source: JPL Horizons System (https://ssd.jpl.nasa.gov/horizons/app.html#/)\n"
+    "Project page: https://tonylquintanilla.github.io/palomas_orrery/\n\n"
 
-    "Astronomical Units (AU):\n" 
-    "The x, y, and z coordinates are measured in Astronomical Units (AU). "
-    "One AU is approximately the average distance from the Earth to the Sun, about 149.6 million kilometers or 93 million miles.\n\n" 
-
-    "Explore and enjoy!\n\n"
-
-    "Python programming by Tony Quintanilla with assistance from Claude, ChatGPT and Gemini AI LLMs, January 2025. "
-    "Contact info: \"tonyquintanilla@gmail.com\"."
+    "Explore the cosmos and enjoy your journey through space and time!"
 )
-
 
 # Function to map celestial objects to colors
 def color_map(planet):
