@@ -214,8 +214,8 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
             known_period = "N/A (hyperbolic/parabolic orbit)"
         else:
             known_period = {
-                'years': known_value,
-                'days': known_value * 365.25
+                'days': known_value,
+                'years': known_value / 365.25
             }
     
     # Format known period

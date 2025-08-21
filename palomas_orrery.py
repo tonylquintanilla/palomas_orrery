@@ -1366,21 +1366,14 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
                     'description': 'N/A (hyperbolic/parabolic orbit)'
                 }
                 orbital_period = 'N/A (hyperbolic)'
-            elif is_satellite:
-                # For satellites, the values are in days
+
+            else:
+                # ALL values are standardized as days
                 known_orbital_period = {
                     'days': known_value,
                     'years': known_value / 365.25
                 }
-                # For satellites, use the known period as the main orbital_period
-                orbital_period = known_orbital_period['years']
-            else:
-                # For non-satellites, the values are in years
-                known_orbital_period = {
-                    'years': known_value,
-                    'days': known_value * 365.25
-                }
-                orbital_period = known_value  # Use the known value directly
+                orbital_period = known_value / 365.25       # Convert to years for display
                 
         # Only calculate the orbital period for non-satellites
         if not is_satellite and obj_name and obj_name in planetary_params:
@@ -1439,6 +1432,11 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
         KNOWN_ORBITAL_PERIODS
     )
     
+    if name == "Leleakuhonua":
+        print(f"[DEBUG HOVER] obj_data for Leleakuhonua: {obj_data}")
+        print(f"[DEBUG HOVER] known_orbital_period: {obj_data.get('known_orbital_period')}")
+        print(f"[DEBUG HOVER] calculated_orbital_period: {obj_data.get('calculated_orbital_period')}")
+
     # Add satellite note if present
     if satellite_note:
         full_hover_text += satellite_note
@@ -1968,6 +1966,8 @@ leleakuhonua_var = tk.IntVar(value=0)
 
 of201_var = tk.IntVar(value=0)
 
+chariklo_var = tk.IntVar(value=0)
+
 orcus_var = tk.IntVar(value=0)    # 0 means unselected by default
 
 varuna_var = tk.IntVar(value=0)
@@ -2190,6 +2190,13 @@ objects = [
     'mission_info': 'Hypothetical planet with estimated mass of 5-10 Earths at ~400-800 AU. Not yet directly observed. Visualization is our estimate and not from JPL Horizons.',
     'mission_url': 'https://en.wikipedia.org/wiki/Planet_Nine'},
 
+# Centaurs asteroids
+
+    {'name': 'Chariklo', 'id': '1997 CU26', 'var': chariklo_var, 'color': color_map('Chariklo'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    'id_type': 'smallbody', 
+    'mission_info': 'Large Centaur.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/10199-chariklo/'},
+
 # Dwarf planets
 
     {'name': 'Pluto', 'id': '999', 'var': pluto_var, 'color': color_map('Pluto'), 'symbol': 'circle', 'object_type': 'orbital', 
@@ -2229,7 +2236,7 @@ objects = [
     'mission_info': 'Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
 
-    {'name': 'MS4', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Mani', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
     'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
@@ -2475,7 +2482,8 @@ objects = [
     'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
 
     {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1995, 7, 24), 'end_date': datetime(2001, 12, 31), 
+    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1993, 4, 27), 'end_date': datetime(2022, 7, 9),
+    # data arc: 1993-04-27 to 2022-07-09 
     'mission_info': 'Visible to the naked eye for a record 18 months.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
 
@@ -5831,6 +5839,8 @@ create_celestial_checkbutton("- Hyperion", hyperion_var)    # params
 create_celestial_checkbutton("- Iapetus", iapetus_var)  # params
 create_celestial_checkbutton("- Phoebe", phoebe_var)    # params
 
+create_celestial_checkbutton("Chariklo", chariklo_var) # params
+
 create_celestial_checkbutton("Uranus", uranus_var)  # params
 # Create a Frame specifically for the uranus shell options (indented)
 uranus_shell_options_frame = tk.Frame(celestial_frame)
@@ -5976,7 +5986,7 @@ create_celestial_checkbutton("- Hydra", hydra_var)  # params
 # Kuiper Belt Objects
 create_celestial_checkbutton("Orcus", orcus_var) # params
 create_celestial_checkbutton("Ixion", ixion_var)    # params
-create_celestial_checkbutton("2002 MS4", ms4_var)   # params
+create_celestial_checkbutton("Mani", ms4_var)   # params
 create_celestial_checkbutton("2004 GV9", gv9_var)   # params
 create_celestial_checkbutton("Varuna", varuna_var)  # params
 create_celestial_checkbutton("Haumea", haumea_var)  # params
@@ -6123,8 +6133,9 @@ create_comet_checkbutton("Halley", comet_halley_var, "(1900-1-1 to 1994-1-11)",
 # there are also params for "halley geocentric"
 create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
                          "October 21, 1965")    # params 
-create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1995-07-23 to 2001-12-31)", 
-                         "April 1, 1997")
+create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1993-04-27 to 2022-07-09)", 
+                         "March 30, 1997")
+                        # data arc: 1993-04-27 to 2022-07-09; TP= 1997-Mar-29.6349071441
 create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
                          "May 1, 1996")
 create_comet_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 

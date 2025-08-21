@@ -141,9 +141,9 @@ KNOWN_ORBITAL_PERIODS = {
     'Makemake': 111766.50, # 306.0 * 365.25
     'Quaoar': 105192.00,   # 288.0 * 365.25
     'Orcus': 90314.9912925,     # 247.26897 * 365.25; 247.26897
-    'Ixion': 91184.74,
-    'MS4': 99210.94,
-    'GV9': 100351.43,
+    'Ixion': 91239.49018,       # PER= 249.80011 jy
+    'Mani': 99305.28767,        # PER= 271.88306 jy
+    'GV9': 100352.0613,         # PER= 274.74897 jy
     'Varuna': 102799.14,
     'Arrokoth': 108224.98,
     'Gonggong': 201010.45,
@@ -153,6 +153,9 @@ KNOWN_ORBITAL_PERIODS = {
     'Ammonite': 1444383.67 ,     # PER 3954.53339 Julian years 
     'Sedna': 4163850.00,   # 11400.0 * 365.25
     'Leleakuhonua': 12643548.84594,  # Orbital period in days;  34616.15016 julian years x 365.25
+
+    # Centaurs -- unstable objects between Jupiter and Neptune
+    'Chariklo': 22996.00,         # PER= 62.95962 jy = 22996.00121 days 
 
     # Asteroids
     'Vesta': 1325.75,      # 3.63 * 365.25
@@ -186,10 +189,10 @@ KNOWN_ORBITAL_PERIODS = {
     '2025 KV': 695.85,     # 1.91 * 365.25
     
     # Comets (converted from years to days where applicable)
-    'Halley': 27731.29226,    # 75.92414033 * 365.25 = 27731.29226; EPOCH=  2439907.5 ! 1968-Feb-21.0000000
-    'Hyakutake': 70071.50, # 191.86 * 365.25 (pre-1996 orbit)
-    'Hale-Bopp': 2520352.50, # 6900.0 * 365.25
-    'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
+    'Halley': 27731.29226,          # 75.92414033 * 365.25 = 27731.29226; EPOCH=  2439907.5 ! 1968-Feb-21.0000000
+    'Hyakutake': 70071.50,          # 191.86 * 365.25 (pre-1996 orbit)
+    'Hale-Bopp': 863279.5035,       # PER= 2363.5304681429 jy = 863279.5035
+    'Ikeya-Seki': 319800.00,        # 876.0 * 365.25 (estimate)
 
     'McNaught': 92552.00,  # 253.5 * 365.25
     'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
@@ -544,7 +547,7 @@ def color_map(planet):
         'Šteins': 'red',  
 
         'Oumuamua': 'gold',
-        '3I/ATLAS': 'gold',
+        '3I/ATLAS': 'red',
         'Ikeya-Seki': 'green',
         'West': 'red',
         'Halley': 'cyan',
@@ -578,11 +581,12 @@ def color_map(planet):
         'Hayabusa2': 'cyan',  
         'Quaoar': 'rgb(244, 164, 96)',
         'Dysnomia': 'white',
+        'Chariklo': 'rgb(100, 50, 50)',
         'Orcus': 'rgb(0, 100, 0)',
         'Varuna': 'rgb(218, 165, 32)',
         'Ixion': 'rgb(218, 165, 32)',
         'GV9': 'rgb(128, 0, 128)',
-        'MS4': 'rgb(255, 0, 0)',  
+        'Mani': 'rgb(255, 0, 0)',  
         'Gonggong': 'red',    
         'Haumea': 'rgb(128, 0, 128)',
         'Makemake': 'rgb(255, 192, 203)',
@@ -1100,12 +1104,25 @@ INFO = {
         'object due to its immense distance. \n* As for its current distance, Sedna is currently at about 83.3 AU from the Sun. This ' 
         'means it\'s relatively close to its perihelion (closest point) and is currently moving closer to the Sun.',
 
-        'Leleakuhonua': 'Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
+        'Leleakuhonua': '**SET MANUAL SCALE TO 2000 AU FOR FULL ORBIT**\n'
+        'Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
         'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
         'Extreme orbits make Sednoids "detached objects," meaning they are not significantly influenced by the gravity of the giant ' 
         'planets like Neptune.\n' 
         '* Leleākūhonua is considered a strong candidate for being a dwarf planet, but it is not officially recognized as one yet. ' 
         '  Like Sedna, it\'s more accurately classified as a Trans-Neptunian Object (TNO) rather than a typical asteroid.',
+
+        'Chariklo': 'Chariklo is the largest known centaur, a class of small solar system bodies that orbit the Sun between Jupiter ' 
+        'and Neptune.\n ' 
+        '* It has an average diameter of about 250 kilometers and a dark, reddish surface composed of water ice, silicate minerals, ' 
+        'and organic compounds.\n ' 
+        '* Rings: Chariklo is notable for being the first minor (not Dwarf) planet discovered to have rings, which were found in 2013 ' 
+        'during a stellar occultation.\n' 
+        '  The rings are believed to be made of water ice and other debris, possibly from a past ' 
+        'collision. The ring system consists of two narrow, dense bands:\n' 
+        '  * The inner ring, named Oiapoque, is about 7 kilometers wide.\n' 
+        '  * The outer ring, named Chui, is about 3 kilometers wide.\n' 
+        '  * These two rings are separated by a 9-kilometer gap and orbit at a distance of about 400 kilometers from Chariklo\'s center.',
 
         'Orcus': 'A large Kuiper Belt object with a moon named Vanth. Estimated to be about 910 km in diameter. ' 
         'Discovered on February 17, 2004.',
@@ -1116,7 +1133,7 @@ INFO = {
         'Varuna': 'A significant Kuiper Belt Object with a rapid rotation period.',
         'Ixion': 'A significant Kuiper Belt Object without a known moon.',
         '2004 GV9': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.',
-        '2002 MS4': 'A large unnumbered Kuiper Belt Object with no known moons.',  
+        'Mani': 'A large unnumbered Kuiper Belt Object with no known moons.',  
         'Gonggong': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.',
 
         'Planet 9': 'Hypothetical planet with a potential candidate identified in 2025 IRAS/AKARI infrared data. ' 
@@ -1689,7 +1706,8 @@ INFO = {
         
         'Hyakutake': 'Comet passed very close to Earth in 1996.',
         
-        'Hale-Bopp': 'Comet Hale-Bopp: Visible to the naked eye for 18 months.',
+        'Hale-Bopp': '**SET MANUAL SCALE TO 360 AU FOR FULL ORBIT**\n' 
+        'Comet Hale-Bopp: Visible to the naked eye for 18 months.',
         
         'McNaught': 'Known as the Great Comet of 2007. January 12, 2007.',
         
