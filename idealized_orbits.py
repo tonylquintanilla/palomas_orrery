@@ -32,7 +32,7 @@ planetary_params = {
 
     # Uranus satellites
 #    'Puck': 0.762,         # 18.29 hours
-# new uranus satellite found by Webb
+# new uranus satellite found by Webb number 29
   
     # Neptune satellites  
 #    'Proteus': 1.122,      # 26.93 hours
@@ -50,15 +50,8 @@ planetary_params = {
 #    '2025 KV': 695.85,     # 1.91 * 365.25
     
     # Comets (converted from years to days where applicable)
-#    'Hyakutake': 70071.50, # 191.86 * 365.25 (pre-1996 orbit)
-#    'West': 558203.00,     # 1528.0 * 365.25 (original orbit)
-#    'McNaught': 92552.00,  # 253.5 * 365.25
 #    'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
-    
-    # For hyperbolic/parabolic objects, period is undefined
-#    'Oumuamua': 1e99,      # Interstellar object - effectively infinite period  
-#    'Borisov': 1e99,       # Interstellar object - effectively infinite period
-    
+        
 'Mercury': {    
         'a': 0.38709927,      # semi-major axis in AU (J2000 mean)
         'e': 0.20563593,      # eccentricity (J2000 mean)
@@ -566,14 +559,6 @@ planetary_params = {
         # need period
     },
 
-    'Halley_geocentric': {         # Epoch 2017-10-13, geocentric -- not accurate for our plot
-        'a': 3.170639037258039,   # Horizons: A, semi-major axis in AU
-        'e': .1433170784128717,   # Horizons: EC, eccentricity
-        'i': 3.449227641924809,      # Horizons: IN, inclination in degrees
-        'omega': 188.324777427583, # Horizons: W, argument of perihelion in degrees
-        'Omega': 95.24615579501011   # Horizons: OM, longitude of ascending node in degrees
-    },
-
     'Halley': {                         # Rec #:90000030; 1P/Halley; Soln.date: 2024-Apr-16_14:38:13; data arc: 1835-08-21 to 1994-01-11
         'a': 17.85950919,         # Horizons: A, semi-major axis in AU
         'e': 0.9678338727,         # Horizons: EC, eccentricity
@@ -595,32 +580,41 @@ planetary_params = {
         #     'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
     },
 
-    'NEOWISE': {                  # 2020-Jul-06.0000000, heliocentric, NEOWISE (C/2020 F3) 
-        'a': 358.4679565529321,   # Horizons: A, semi-major axis in AU
-        'e': .9991780262531292,   # Horizons: EC, eccentricity
-        'i': 128.9375027594809,      # Horizons: IN, inclination in degrees
-        'omega': 37.2786584481257, # Horizons: W, argument of perihelion in degrees
-        'Omega': 61.01042818536988   # Horizons: OM, longitude of ascending node in degrees
-        # need period
-    },    
-
     'Hale-Bopp': {                          # Hale-Bopp (C/1995 O1)   
         'a': 177.4333839117583,             # Horizons: A, semi-major axis in AU
         'e': .9949810027633206,             # Horizons: EC, eccentricity
         'i': 89.28759424740302,             # Horizons: IN, inclination in degrees
         'omega': 130.4146670659176,         # Horizons: W, argument of perihelion in degrees
-        'Omega': 282.7334213961641 ,        # Horizons: OM, longitude of ascending node in degrees; >180 retrograde
+        'Omega': 282.7334213961641,        # Horizons: OM, longitude of ascending node in degrees; >180 retrograde
         'epoch': '2022-9-15',               # EPOCH=  2459837.5 ! 2022-Sep-15.0000000 (TDB)
         'TP': 2450537.1349071441,           # 1997-Mar-29.6349071441 
     #    'Tapo': ,                          # needed       
                                             # PER= 2363.5304681429 jy = 863279.5035
+    },                                        
+
+    'NEOWISE': {                  # 2020-Jul-06.0000000, heliocentric, NEOWISE (C/2020 F3) 
+        'a': 358.4679565529321,   # Horizons: A, semi-major axis in AU
+        'e': .9991780262531292,   # Horizons: EC, eccentricity
+        'i': 128.9375027594809,      # Horizons: IN, inclination in degrees
+        'omega': 37.2786584481257, # Horizons: W, argument of perihelion in degrees
+        'Omega': 61.01042818536988,   # Horizons: OM, longitude of ascending node in degrees
+        # need period
+    },    
+
+    'Hyakutake': {                          # Hyakutake (C/1996 B2)    
+        'a': 2124.755444396066,             # Horizons: A, semi-major axis in AU
+        'e': .9998916470450124,             # Horizons: EC, eccentricity
+        'i': 124.9220493922234,             # Horizons: IN, inclination in degrees
+        'omega': 130.1751209780967,         # Horizons: W, argument of perihelion in degrees
+        'Omega': 188.045131992156,          # Horizons: OM, longitude of ascending node in degrees; >180 retrograde
+        'epoch': '1996-3-15',               # EPOCH=  2450157.5 ! 1996-Mar-15.0000000 (TDB)
+        'TP': 2450204.8941449965,           # TP= 1996-May-01.3941449965 
+    #    'Tapo': ,                          # needed       
+                                            # PER= 97942.599927659 py = 35773534.62 days
     },
 
 # comets with checkbuttons that need orbital parameters: 
-# "Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
-# "McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
 # "Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to 2029-12-31)", 
-# "ATLAS", comet_atlas_var, "(2024-06-17 to 2029-12-31)", 
 
     # Comets with hyperbolic trajectories, object type 'trajectory'
 
@@ -633,6 +627,17 @@ planetary_params = {
         'epoch': 2021-4-15,     # Rec #:90002073 (+COV) Soln.date: 2021-Apr-15_23:29:24  
         'TP': 2442833.7219778746    # 1976-Feb-25.2219778746
         # period None; hyperbolic/parabolic; after ejection from the solar system
+    }, 
+
+    'McNaught': {                       # McNaught (C/2006 P1) 
+        'a': -9074.061068728695,        # Horizons: A, semi-major axis in AU; hyperbolic/parabolic
+        'e': 1.000018815882278,         # Horizons: EC, eccentricity
+        'i': 77.83700054890942,         # Horizons: IN, inclination in degrees
+        'omega': 155.9749681149126,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 267.4148026435385,     # Horizons: OM, longitude of ascending node in degrees; retrograde
+        'epoch': 2006-11-26,            # EPOCH=  2454065.5 ! 2006-Nov-26.0000000 (TDB)  
+        'TP': 2454113.2988436329        # TP= 2007-Jan-12.7988436329
+                                        # period None; hyperbolic/parabolic
     }, 
 
      'C/2025_K1': {                  # ATLAS (C/2025 K1)            2025-Jul-11 21:59:05 
@@ -651,20 +656,38 @@ planetary_params = {
 
     # Interstellar objects; hyperbolic trajectories, object type 'trajectory'
 
-     '3I/ATLAS': {                  # heliocentric, ATLAS (C/2025 N1) 90004922
-        'a': -.263877814449834,   # Horizons: A, semi-major axis in AU
-        'e': 6.14114298932642,   # Horizons: EC, eccentricity
-        'i': 175.1132447611479,      # Horizons: IN, inclination in degrees
-        'omega': 128.0088139262397, # Horizons: W, argument of perihelion in degrees
-        'Omega': 322.1596294584908,   # Horizons: OM, longitude of ascending node in degrees; >180 retrograde
-        'epoch': '2025-7-6',
-        'TP': 2460977.978711922653,  # Time of perihelion (JD)
-        #     '3I/ATLAS': 1e99,      # Interstellar object - effectively infinite period
-    },    
+     '1I/Oumuamua': {                   # 1I/'Oumuamua (A/2017 U1) 
+        'a': -1.27234500742808,         # Horizons: A, semi-major axis in AU; Hyperbolic orbit
+        'e': 1.201133796102373,         # Horizons: EC, eccentricity
+        'i': 122.7417062847286,         # Horizons: IN, inclination in degrees
+        'omega': 241.8105360304898,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 24.59690955523242,     # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2017-11-23',          # EPOCH=  2458080.5 ! 2017-Nov-23.00 (TDB)
+        'TP': 2458006.0073213754,       # Perihelion: 2017-Sep-09.5073213754
+                                        # Hyperbolic orbit
+    }, 
 
-# interstellar objects with hyperbolic orbits that need orbital parameters
-# "Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
-# "Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-01)", 
+     '2I/Borisov': {                    # Borisov (C/2019 Q4) 
+        'a': -.8514922551937886,        # Horizons: A, semi-major axis in AU; Hyperbolic orbit
+        'e': 3.356475782676596,         # Horizons: EC, eccentricity
+        'i': 44.05264247909138,         # Horizons: IN, inclination in degrees
+        'omega': 209.1236864378081,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 308.1477292269942,     # Horizons: OM, longitude of ascending node in degrees; retrograde
+        'epoch': '2020-1-5',            # EPOCH=  2458853.5 ! 2020-Jan-05.0000000 (TDB) 
+        'TP': 2458826.052845906,        # Perihelion: 2019-Dec-08.5528459060
+                                        # Hyperbolic orbit
+    },
+
+     '3I/ATLAS': {                      # heliocentric, ATLAS (C/2025 N1) 90004922
+        'a': -.263877814449834,         # Horizons: A, semi-major axis in AU; Hyperbolic orbit
+        'e': 6.14114298932642,          # Horizons: EC, eccentricity
+        'i': 175.1132447611479,         # Horizons: IN, inclination in degrees
+        'omega': 128.0088139262397,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 322.1596294584908,     # Horizons: OM, longitude of ascending node in degrees; >180 retrograde
+        'epoch': '2025-7-6',
+        'TP': 2460977.978711922653,     # Time of perihelion (JD)
+        #     '3I/ATLAS': 1e99,         # Interstellar object - effectively infinite period
+    },    
 
     # Satellites
 

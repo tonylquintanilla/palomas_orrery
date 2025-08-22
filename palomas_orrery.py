@@ -2194,7 +2194,7 @@ objects = [
 
     {'name': 'Chariklo', 'id': '1997 CU26', 'var': chariklo_var, 'color': color_map('Chariklo'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Large Centaur.', 
+    'mission_info': 'Large Centaur. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/10199-chariklo/'},
 
 # Dwarf planets
@@ -2228,7 +2228,7 @@ objects = [
 
     {'name': 'Gonggong', 'id': '2007 OR10', 'var': gonggong_var, 'color': color_map('Gonggong'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Dwarf planet in the Kuiper Belt with a highly inclined orbit.', 
+    'mission_info': 'Dwarf planet in the Kuiper Belt with a highly inclined orbit. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)'},
 
     {'name': 'Makemake', 'id': '136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
@@ -2238,12 +2238,12 @@ objects = [
 
     {'name': 'Mani', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
+    'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
 
     {'name': 'Orcus', 'id': '2004 DW', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A dwarf planet in the Kuiper Belt with a moon named Vanth.', 
+    'mission_info': 'A dwarf planet in the Kuiper Belt with a moon named Vanth. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
 
     {'name': 'Quaoar', 'id': '50000', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'object_type': 'orbital', 
@@ -2328,7 +2328,7 @@ objects = [
 
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 8-9-2024.',
+    'mission_info': 'Closest approach to Earth 8-9-2024. Retrograde (left-handed) orbit.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
 
     {'name': '2025 PY1', 'id': '2025 PY1', 'var': py1_var, 'color': color_map('2025 PY1'), 'symbol': 'circle-open', 'object_type': 'orbital',
@@ -2345,18 +2345,18 @@ objects = [
 
     {'name': '2024 DW', 'id': '50613029', 'var': asteroid_dw_var, 'color': color_map('2024 DW'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 2, 19), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 2-22-2024 approximately 5 UTC. Keplerian orbit perturbation from Jupiter.',
+    'mission_info': 'Closest approach to Earth 2-22-2024 approximately 5 UTC. Keplerian orbit perturbation from Jupiter. Retrograde (left-handed) orbit.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20DW'},
 
     {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 12, 24), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
+    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC. Retrograde (left-handed) orbit.',
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
 
     # Main Belt Asteroids
     {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
-    'mission_info': 'A near-Earth asteroid that will make a close approach in 2029.', 
+    'mission_info': 'A near-Earth asteroid that will make a close approach in 2029. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
 
     {'name': 'Bennu', 'id': '101955', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -2371,7 +2371,7 @@ objects = [
 
     {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
+    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
 
     {'name': 'Dinkinesh', 'id': '152830', 'var': dinkinesh_var, 'color': color_map('Dinkinesh'), 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -2391,7 +2391,7 @@ objects = [
 
     {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
+    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
 
     {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -2401,7 +2401,7 @@ objects = [
 
     {'name': 'Donaldjohanson', 'id': '52246', 'var': donaldjohanson_var, 'color': color_map('Donaldjohanson'), 'symbol': 'circle-open', 'object_type': 'orbital', 
      'id_type': 'smallbody',
-     'mission_info': 'Visited by the NASA Lucy spacecraft.', 
+     'mission_info': 'Visited by the NASA Lucy spacecraft. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
 
     {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -2435,7 +2435,7 @@ objects = [
     'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Orus.html'},
 
-    # Kuiper Belt Objects
+    # Kuiper Belt Objects or Trans-Neptunian Objects (TNOs)
 
     {'name': 'Arrokoth', 'id': '486958', 'var': arrokoth_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
@@ -2454,7 +2454,7 @@ objects = [
 
     {'name': 'GV9', 'id': '2004 GV9', 'var': gv9_var, 'color': color_map('GV9'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.', 
+    'mission_info': 'A binary Kuiper Belt Object providing precise mass measurements through its moon. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/(90568)_2004_GV9'},
 
     {'name': 'Varuna', 'id': '20000', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -2484,7 +2484,7 @@ objects = [
     {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1993, 4, 27), 'end_date': datetime(2022, 7, 9),
     # data arc: 1993-04-27 to 2022-07-09 
-    'mission_info': 'Visible to the naked eye for a record 18 months.', 
+    'mission_info': 'Visible to the naked eye for a record 18 months. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
 
     {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'diamond', 
@@ -2494,19 +2494,15 @@ objects = [
     'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/halley-1986'},
 
     {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1995, 12, 2), 'end_date': datetime(1996, 6, 1), 
-    'mission_info': 'Passed very close to Earth in 1996.', 
+    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1996, 1, 2), 'end_date': datetime(1996, 11, 1),
+    # data arc: 1996-01-01 to 1996-11-02 
+    'mission_info': 'Passed very close to Earth in 1996. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
 
     {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
-    'mission_info': 'One of the brightest comets of the 20th century.', 
+    'mission_info': 'One of the brightest comets of the 20th century. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/ikeya-seki-1965'},
-
-    {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2008, 6, 1), 
-    'mission_info': 'Known as the Great Comet of 2007.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/'}, 
 
     {'name': 'NEOWISE', 'id': '90004587', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'diamond', # C/2020 F3
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
@@ -2527,6 +2523,12 @@ objects = [
     'mission_info': 'Notable for its bright and impressive tail.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
+    {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'diamond', 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2007, 7, 10), 
+    # data arc: 2006-08-07 to 2007-07-11
+    'mission_info': 'Known as the Great Comet of 2007. Retrograde (left-handed) orbit.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},     
+
     {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var': comet_2025k1_var, 'color': color_map('C/2025_K1'), 'symbol': 'diamond', 
     # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
     'object_type': 'trajectory', 'id_type': 'smallbody', 
@@ -2535,22 +2537,25 @@ objects = [
     'mission_url': 'https://theskylive.com/c2025k1-info'}, 
 
 # Hyperbolic and interstellar
-    {'name': 'Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('Borisov'), 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 8, 31), 'end_date': datetime(2020, 10, 1), 
-    'mission_info': 'The second interstellar object detected, after \'Oumuamua.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
 
-    {'name': 'Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('Oumuamua'), 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1), 
+    {'name': '1I/Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('1I/Oumuamua'), 'symbol': 'diamond', 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1),
+    # data arc from 2017 October 14 to 2018 January 2 
     'mission_info': 'First known interstellar object detected passing through the Solar System.', 
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
+
+    {'name': '2I/Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('2I/Borisov'), 'symbol': 'diamond', 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 2, 25), 'end_date': datetime(2020, 9, 29), 
+    # data arc: 2019-02-24 to 2020-09-30
+    'mission_info': 'The second interstellar object detected, after \'1I/Oumuamua. Retrograde (left-handed) orbit.', 
+    'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
 
     {'name': '3I/ATLAS', 'id': 'C/2025 N1', 'var': atlas3i_var, 'color': color_map('3I/ATLAS'), 'symbol': 'diamond', 
     # JPL/HORIZONS                  ATLAS (C/2025 N1)            2025-Jul-11 12:19:05 
     'object_type': 'trajectory', 'id_type': 'smallbody', 
     # 'start_date': datetime(2025, 5, 22), 'end_date': datetime(2032, 12, 31),
     # data arc: 2025-05-22 to now 
-    'mission_info': 'Third known interstellar object detected passing through the Solar System.', 
+    'mission_info': 'Third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
 
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
@@ -2771,7 +2776,7 @@ objects = [
 
     {'name': 'Tethys', 'id': '603', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 1.89 Earth days.', 
+     'mission_info': 'Saturn orbital period: 1.89 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/tethys/'},
 
     {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'object_type': 'satellite', 
@@ -2801,7 +2806,7 @@ objects = [
 
     {'name': 'Phoebe', 'id': '609', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 550.56 Earth days.', 
+     'mission_info': 'Saturn orbital period: 550.56 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/phoebe/'},
 
     # Uranus's Major Moons
@@ -2813,7 +2818,7 @@ objects = [
 
     {'name': 'Umbriel', 'id': '702', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 4.14 Earth days.', 
+     'mission_info': 'Uranus orbital period: 4.14 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/umbriel/'},
 
     {'name': 'Titania', 'id': '703', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'object_type': 'satellite', 
@@ -2838,7 +2843,7 @@ objects = [
 
     {'name': 'Mab', 'id': '726', 'var': mab_var, 'color': color_map('Mab'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 0.923293 Earth days or 22.159 hours.',
+     'mission_info': 'Uranus orbital period: 0.923293 Earth days or 22.159 hours. Retrograde (left-handed) orbit.',
      'mission_url': 'https://science.nasa.gov/uranus/moons/mab/'},             
 
     # Neptune's Major Moons
@@ -2875,7 +2880,7 @@ objects = [
 
     {'name': 'Kerberos', 'id': '904', 'var': kerberos_var, 'color': color_map('Kerberos'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Pluto orbital period: 32.17 Earth days.', 
+     'mission_info': 'Pluto orbital period: 32.17 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/kerberos/'},
 
     {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'object_type': 'satellite', 
@@ -6124,22 +6129,20 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
     tooltip_text = f"{info_text}\nPerihelion: {perihelion}"
     CreateToolTip(checkbutton, tooltip_text)
 
-create_comet_checkbutton("67P/Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(2008-6-2 to 2023-4-25)", 
-    "August 13, 2015")  # params
-    # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
+create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
+                         "October 21, 1965")    # params 
 create_comet_checkbutton("Halley", comet_halley_var, "(1900-1-1 to 1994-1-11)",      
                          # data arc: 1835-08-21 to 1994-01-11
                          "February 8, 1986")    # 1986-Feb-08.1983372075
-# there are also params for "halley geocentric"
-create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
-                         "October 21, 1965")    # params 
+create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1996-01-02 to 1996-11-01)", 
+                         "May 1, 1996") # data arc: 1996-01-01 to 1996-11-02
 create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1993-04-27 to 2022-07-09)", 
                          "March 30, 1997")
                         # data arc: 1993-04-27 to 2022-07-09; TP= 1997-Mar-29.6349071441
-create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1995-12-01 to 1996-06-01)", 
-                         "May 1, 1996")
-create_comet_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-07 to 2008-06-01)", 
-                         "January 12, 2007")
+create_comet_checkbutton("67P/Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(2008-6-2 to 2023-4-25)", 
+                        "August 13, 2015")  # params
+    # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
+# there are also params for "halley geocentric"
 create_comet_checkbutton("NEOWISE", comet_neowise_var, "(2020-03-27 to 2021-06-01)", 
                          "July 3, 2020")    # params
 create_comet_checkbutton("Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to 2029-12-31)", 
@@ -6148,7 +6151,7 @@ create_comet_checkbutton("ATLAS", comet_atlas_var, "(2024-06-17 to 2029-12-31)",
                          "January 13, 2025")
 
 # Checkbuttons for interstellar objects
-interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Hyperbolic Objects")
+interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Hyperbolic Comets and Interstellar, I, Objects")
 interstellar_frame.pack(pady=(10, 5), fill='x')
 CreateToolTip(interstellar_frame, "Select hyperbolic objects for plotting. Selected objects will be plotted on the entered date, as well as ideal " 
               "orbits. Selected objects will be animated only over the fetched dates only if within their defined date ranges, and will " 
@@ -6179,14 +6182,17 @@ def create_interstellar_checkbutton(name, variable, dates, perihelion):
     tooltip_text = f"{info_text}\nPerihelion: {perihelion}"
     CreateToolTip(checkbutton, tooltip_text)
 
-create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
-                         "October 8, 2025") # params
 create_interstellar_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
                          "February 25, 1976")
-create_interstellar_checkbutton("Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
-    "September 9, 2017")
-create_interstellar_checkbutton("Borisov", comet_borisov_var, "(2019-08-30 to 2020-10-01)", 
-    "December 8, 2019")
+create_interstellar_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-08 to 2008-07-10)", 
+                         "January 12, 2007")        # data arc: 2006-08-07 to 2007-07-11
+create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
+                         "October 8, 2025") # params
+
+create_interstellar_checkbutton("1I/Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
+    "September 9, 2017")    # hyperbolic trajectory
+create_interstellar_checkbutton("2I/Borisov", comet_borisov_var, "(2019-02-24 to 2020-09-30)", 
+    "December 8, 2019") # data arc: 2019-02-24 to 2020-09-30; TP= 2019-Dec-08.5528459060; hyperbolic trajectory
 create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-05-22 to 2025-08-02)",     # 2025-Aug-07
     "October 29, 2025")     # params; predicted; this is a hyperbolic trajectory
 

@@ -190,19 +190,18 @@ KNOWN_ORBITAL_PERIODS = {
     
     # Comets (converted from years to days where applicable)
     'Halley': 27731.29226,          # 75.92414033 * 365.25 = 27731.29226; EPOCH=  2439907.5 ! 1968-Feb-21.0000000
-    'Hyakutake': 70071.50,          # 191.86 * 365.25 (pre-1996 orbit)
+    'Hyakutake': 35773534.62,       # PER= 97942.599927659 jy
     'Hale-Bopp': 863279.5035,       # PER= 2363.5304681429 jy = 863279.5035
     'Ikeya-Seki': 319800.00,        # 876.0 * 365.25 (estimate)
-
-    'McNaught': 92552.00,  # 253.5 * 365.25
     'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
     
     # For hyperbolic/parabolic objects, period is undefined
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
-    'C/2025_K1': None,     # Parabolic comet - effectively infinite period
-    '3I/ATLAS': None,      # Interstellar hyperbolic object - effectively infinite period
-    'Oumuamua': None,      # Interstellar hyperbolic object - effectively infinite period  
-    'Borisov': None,       # Interstellar hyperbolic object - effectively infinite period
+    'C/2025_K1': None,      # Parabolic comet - effectively infinite period
+    'McNaught': None,       # Parabolic comet - effectively infinite period    
+    '3I/ATLAS': None,       # Interstellar hyperbolic object - effectively infinite period
+    '1I/Oumuamua': None,    # Interstellar hyperbolic object - effectively infinite period  
+    '2I/Borisov': None,     # Interstellar hyperbolic object - effectively infinite period
     
     # Hypothetical
     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
@@ -546,7 +545,7 @@ def color_map(planet):
         'Lutetia': 'green',
         'Šteins': 'red',  
 
-        'Oumuamua': 'gold',
+        '1I/Oumuamua': 'gold',
         '3I/ATLAS': 'red',
         'Ikeya-Seki': 'green',
         'West': 'red',
@@ -559,7 +558,7 @@ def color_map(planet):
         'Tsuchinshan': 'cyan',
         'ATLAS': 'white',
         'Churyumov': 'gold',
-        'Borisov': 'red',
+        '2I/Borisov': 'red',
 
         'SOHO': 'white',
         'JamesWebb': 'gold',
@@ -696,7 +695,7 @@ INFO = {
 
         '2024 PT5': 'In late September 2024, Earth temporarily captured a small asteroid into its orbit, leading to it being ' 
         'dubbed Earth\'s "second moon". The object\'s official designation is 2024 PT5, but it was also referred to as a ' 
-        '"mini-moon" due to its small size. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
+        '"mini-moon" due to its small size. Retrograde (left-handed) orbit. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
         'small compared to our permanent Moon.\n* Origin: It belongs to the Arjuna asteroid belt, a group of asteroids that ' 
         'share similar orbits with Earth.\n* Closest approach August 9, 2024. \n* Temporary Capture: 2024 PT5 was only temporarily ' 
         'captured by Earth\'s gravity. ' 
@@ -726,7 +725,7 @@ INFO = {
         'and other space agencies continuously monitor Near-Earth Objects (NEOs) to track their movements and assess any potential impact \n' 
         'risks.',
 
-        '2024 YR4': '2024 YR4 is an asteroid that poses a potential risk to Earth, with a probability of nearly zero.\n' 
+        '2024 YR4': '2024 YR4 is an asteroid that poses a potential risk to Earth, with a probability of nearly zero. Retrograde (left-handed) orbit.\n' 
         '* It was discovered on December 27, 2024, with a close approach on December 25, 4:46 UTC at a distance of about 822,000 km.\n' 
         '* It is estimated to be between 40 and 100 meters wide.\n' 
         '* It\'s next close approach is on December 17, 2028, 12:16 UTC at a distance from Earth\'s surface of about 8,007,000 km, ' 
@@ -745,7 +744,7 @@ INFO = {
         'impact the Moon on Dec. 22, 2032. That probability is currently 1.7%."',
 
         '2024 DW': 'Close Flyby: Asteroid 2024 DW made a close approach to Earth on February 22, 2024. It passed within approximately ' 
-        '225,000 kilometers of Earth, which is closer than the Moon\'s average distance.\n' 
+        '225,000 kilometers of Earth, which is closer than the Moon\'s average distance. Retrograde (left-handed) orbit.\n' 
         '* Size: It\'s estimated to be about the size of a bus, roughly 13 meters in diameter.\n' 
         '* Safety: Despite its close proximity, it was determined that 2024 DW did not pose a threat to Earth.\n' 
         '* Discovery: The asteroid was discovered by astronomers working with the Mt. Lemmon Survey.\n' 
@@ -889,7 +888,7 @@ INFO = {
         'Deimos': 'The smaller and more distant moon of Mars, with a stable orbit. Retrogade orbit.',
         'Ceres': 'The largest object in the asteroid belt, considered a dwarf planet.',
 
-        'Apophis': 'Near-Earth asteroid with a close approach in 2029.\n\n' 
+        'Apophis': 'Near-Earth asteroid with a close approach in 2029. Retrograde (left-handed) orbit.\n\n' 
         '* Missions:\n' 
         '  * OSIRIS-APEX (Origins, Spectral Interpretation, Resource Identification, and Security – Apophis EXplorer) - NASA:\n' 
         '    Scheduled to rendezvous with Apophis shortly after its 2029 Earth close-approach.\n' 
@@ -924,8 +923,8 @@ INFO = {
 
         'Lutetia': 'A main-belt asteroid visited by the Rosetta spacecraft.', 
 
-        'Ryugu': 'Asteroid visited by the Japanese Hayabusa2 mission.',
-        'Eros': 'Asteroid explored by NASA\'s NEAR Shoemaker spacecraft.',
+        'Ryugu': 'Asteroid visited by the Japanese Hayabusa2 mission. Retrograde (left-handed) orbit.',
+        'Eros': 'Asteroid explored by NASA\'s NEAR Shoemaker spacecraft. Retrograde (left-handed) orbit.',
 
         'Dinkinesh': 'Asteroid Dinkinesh (Horizons ID 152830) is a small asteroid located in the inner main asteroid belt between \n' 
         'Mars and Jupiter. Its name means "you are wonderful" in Amharic, an Ethiopian language, and was given in honor of the Lucy \n' 
@@ -947,7 +946,7 @@ INFO = {
         '* Dinkinesh is also notable for being the smallest main belt asteroid ever visited by a spacecraft, providing valuable \n' 
         '  insights into how asteroids evolve, especially those that might eventually leave the main belt and become near-Earth asteroids.',
 
-        'Donaldjohanson': 'A main-belt asteroid visited by the Lucy spacecraft.',
+        'Donaldjohanson': 'A main-belt asteroid visited by the Lucy spacecraft. Retrograde (left-handed) orbit. ',
 
         'Eurybates': 'A trojan asteroid that will be visited by the Lucy spacecraft.',
 
@@ -987,7 +986,7 @@ INFO = {
         'Enceladus': 'Saturn moon. Known for its geysers ejecting water ice and vapor.',
         'Rhea': 'Saturn moon. Saturn\'s second-largest moon, with extensive cratered surfaces.',
         'Dione': 'Saturn moon. Features wispy terrains and numerous craters.',
-        'Tethys': 'Saturn moon. Notable for its large Ithaca Chasma canyon.',
+        'Tethys': 'Saturn moon. Notable for its large Ithaca Chasma canyon. Retrograde (left-handed) orbit.',
         'Mimas': 'Saturn moon. Known for the large Herschel Crater, resembling the Death Star.',
 
         'Pan': 'The innermost known moon of Saturn. It orbits within the Encke Gap of the A Ring and is responsible for keeping \n' 
@@ -1009,7 +1008,7 @@ INFO = {
         'its trailing hemisphere is bright white, likely due to the deposition of icy material. It also has a mysterious equatorial \n' 
         'ridge that spans a significant portion of its circumference.',
     
-        'Phoebe': 'Saturn moon. An irregular moon with a retrograde orbit around Saturn.',
+        'Phoebe': 'Saturn moon. An irregular moon with a retrograde orbit around Saturn. Retrograde (left-handed) orbit.',
 
         'Uranus': 'The ice giant with a unique tilt, orbits the Sun on its side.'
         '* Uranus-centered: do not select Uranus; visualize shells at 0.5 AU.\n'
@@ -1019,11 +1018,11 @@ INFO = {
 
         'Titania': 'Uranus moon. The largest moon of Uranus, with a mix of heavily cratered and relatively younger regions.',    
         'Oberon': 'Uranus moon. The second-largest moon of Uranus, heavily cratered.',
-        'Umbriel': 'Uranus moon. Features a dark surface with numerous impact craters.',  
+        'Umbriel': 'Uranus moon. Features a dark surface with numerous impact craters. Retrograde (left-handed) orbit.',  
         'Ariel': 'Uranus moon. Exhibits a mix of heavily cratered regions and younger surfaces.',
         'Miranda': 'Uranus moon. Known for its extreme geological features like canyons and terraced layers.',
         'Portia': 'Uranus moon, associated with outer ring Nu.',
-        'Mab': 'Uranus moon, associated with outer ring Mu.',
+        'Mab': 'Uranus moon, associated with outer ring Mu. Retrograde (left-handed) orbit.',
 
         'Neptune': 'The eighth and farthest known planet in the solar system.\n'
         '* Neptune-centered: do not select Neptune; visualize shells at 1 AU.\n'
@@ -1044,7 +1043,7 @@ INFO = {
         'Charon': 'Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.',
         'Styx': 'The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
         'Nix': 'A small, elongated moon of Pluto with a chaotic rotation.',
-        'Kerberos': 'Pluto\'s second-smallest moon is thought to have a double-lobed shape.',
+        'Kerberos': 'Pluto\'s second-smallest moon is thought to have a double-lobed shape. Retrograde (left-handed) orbit.',
         'Hydra': 'The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
         'Haumea': 'A dwarf planet known for its elongated shape and fast rotation.',
         'Makemake': 'A dwarf planet located in the Kuiper Belt, discovered in 2005.',
@@ -1057,7 +1056,7 @@ INFO = {
 
         'Dysnomia': 'Eris\'s moon. Orbital period: 15.79 Earth days', 
 
-        'Quaoar': 'A large Kuiper Belt object with a ring system.',
+        'Quaoar': 'A large Kuiper Belt object with a ring system. Retrograde (left-handed) orbit.',
 
         'Ammonite': '2023 KQ14 is an asteroid with an exceptionally eccentric and elongated orbit around the Sun. It belongs to a \n' 
         'classification of objects known as sednoids because its orbit is highly detached from the influence of the giant planets. \n' 
@@ -1108,12 +1107,12 @@ INFO = {
         'Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
         'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
         'Extreme orbits make Sednoids "detached objects," meaning they are not significantly influenced by the gravity of the giant ' 
-        'planets like Neptune.\n' 
+        'planets like Neptune. Retrograde (left-handed) orbit.\n' 
         '* Leleākūhonua is considered a strong candidate for being a dwarf planet, but it is not officially recognized as one yet. ' 
         '  Like Sedna, it\'s more accurately classified as a Trans-Neptunian Object (TNO) rather than a typical asteroid.',
 
         'Chariklo': 'Chariklo is the largest known centaur, a class of small solar system bodies that orbit the Sun between Jupiter ' 
-        'and Neptune.\n ' 
+        'and Neptune. Retrograde (left-handed) orbit.\n ' 
         '* It has an average diameter of about 250 kilometers and a dark, reddish surface composed of water ice, silicate minerals, ' 
         'and organic compounds.\n ' 
         '* Rings: Chariklo is notable for being the first minor (not Dwarf) planet discovered to have rings, which were found in 2013 ' 
@@ -1125,16 +1124,16 @@ INFO = {
         '  * These two rings are separated by a 9-kilometer gap and orbit at a distance of about 400 kilometers from Chariklo\'s center.',
 
         'Orcus': 'A large Kuiper Belt object with a moon named Vanth. Estimated to be about 910 km in diameter. ' 
-        'Discovered on February 17, 2004.',
+        'Discovered on February 17, 2004. Retrograde (left-handed) orbit.',
 
-        '2017 OF201': 'an extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter.\n\n' 
-        '* Visualize with a manual scale of at least 1500 AU.',
+        '2017 OF201': '**USE A MANUAL SCALE OF AT LEAST 1500 AU TO SEE THE FULL ORBIT**\n' 
+        'an extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter. Retrograde (left-handed) orbit.',
 
         'Varuna': 'A significant Kuiper Belt Object with a rapid rotation period.',
         'Ixion': 'A significant Kuiper Belt Object without a known moon.',
-        '2004 GV9': 'A binary Kuiper Belt Object providing precise mass measurements through its moon.',
-        'Mani': 'A large unnumbered Kuiper Belt Object with no known moons.',  
-        'Gonggong': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit.',
+        '2004 GV9': 'A binary Kuiper Belt Object providing precise mass measurements through its moon. Retrograde (left-handed) orbit.',
+        'Mani': 'A large unnumbered Kuiper Belt Object with no known moons. Retrograde (left-handed) orbit.',  
+        'Gonggong': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit. Retrograde (left-handed) orbit.',
 
         'Planet 9': 'Hypothetical planet with a potential candidate identified in 2025 IRAS/AKARI infrared data. ' 
         'Estimated to be 7-17 Earth masses (possibly Neptune-sized) at 500-700 AU from the Sun. ' 
@@ -1616,7 +1615,7 @@ INFO = {
         'Ikeya-Seki': 'Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
         'in 1965! It was one of the brightest comets of the 20th century and is a member of the Kreutz sungrazers, a family of ' 
         'comets believed to have originated from a larger comet that broke apart long ago. As a Kreutz sungrazer, it provided valuable ' 
-        'information about these comets and their origins.\n  Key dates and information:\n ' 
+        'information about these comets and their origins. Retrograde (left-handed) orbit.\n  Key dates and information:\n ' 
         '* September 18, 1965: Kaoru Ikeya and Tsutomu Seki, two amateur astronomers in Japan, independently discovered the comet. ' 
         'It was initially a faint telescopic object.\n * October 21, 1965: Ikeya-Seki reached perihelion, its closest point to the Sun.' 
         'It passed incredibly close, a mere 450,000 km (280,000 mi) above the Sun\'s surface! This made it briefly visible in daylight. ' 
@@ -1704,12 +1703,13 @@ INFO = {
         'Even more exciting, in 2134, Halley\'s Comet will pass very close to the earth (0.09 AU, or about 13 million km) and should ' 
         'be much brighter than in 2061 (apparent magnitude -2).',
         
-        'Hyakutake': 'Comet passed very close to Earth in 1996.',
+        'Hyakutake': 'Comet passed very close to Earth in 1996. Retrograde (left-handed) orbit.',
         
         'Hale-Bopp': '**SET MANUAL SCALE TO 360 AU FOR FULL ORBIT**\n' 
-        'Comet Hale-Bopp: Visible to the naked eye for 18 months.',
+        'Comet Hale-Bopp: Visible to the naked eye for 18 months. Retrograde (left-handed) orbit.',
         
-        'McNaught': 'Known as the Great Comet of 2007. January 12, 2007.',
+        'McNaught': '**USE MANUAL SCALE AT 40 AU TO SEE THE CURRENT POSITION**\n' 
+        'Known as the Great Comet of 2007. January 12, 2007. Retrograde (left-handed) orbit.',
         
         'NEOWISE': 'Brightest comet visible from the Northern Hemisphere in decades.',
 
@@ -1774,11 +1774,11 @@ INFO = {
         'our understanding of comets, their composition, and their role in the early solar system. The mission also demonstrated the ' 
         'feasibility of complex space maneuvers and the challenges of landing on a comet.',
         
-        'Borisov': 'Second interstellar object detected.',
+        '2I/Borisov': 'Second interstellar object detected. Retrograde (left-handed) orbit.',
         
-        'Oumuamua': 'First known interstellar object detected passing through the Solar System.',
+        '1I/Oumuamua': 'First known interstellar object detected passing through the Solar System.',
 
-        '3I/ATLAS': 'The third known interstellar object detected passing through the Solar System.\n' 
+        '3I/ATLAS': 'The third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.\n' 
         'Here\'s a summary of what we know about 3I/ATLAS (C/2025 N1):\n' 
         '* Interstellar Object: It is the third confirmed interstellar object discovered, hence its "3I/" designation. This means it \n' 
         '  originated from outside our solar system and is currently just passing through.\n' 
