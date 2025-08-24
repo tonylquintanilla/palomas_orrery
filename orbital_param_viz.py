@@ -324,9 +324,6 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         # Generate points within this range, leaving a small buffer to avoid infinity
         true_anomaly = np.linspace(-nu_max * 0.95, nu_max * 0.95, 200)
 
-    # Generate orbital points in perifocal frame
-#    true_anomaly = np.linspace(0, 2*np.pi, 100)
-
     r = a * (1 - e**2) / (1 + e * np.cos(true_anomaly))
     
     # Perifocal coordinates
@@ -334,39 +331,16 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     y0 = r * np.sin(true_anomaly)
     z0 = np.zeros_like(true_anomaly)
     
-    # Build transformation matrices
-    R1 = rotation_matrix_z(omega_rad)
-    R2 = rotation_matrix_x(i_rad)
-    R3 = rotation_matrix_z(Omega_rad)
+    # Build transformation matrices (CORRECTED TO STANDARD CONVENTION)
+    R1 = rotation_matrix_z(Omega_rad)  # First: Longitude of ascending node
+    R2 = rotation_matrix_x(i_rad)      # Second: Inclination
+    R3 = rotation_matrix_z(omega_rad)  # Third: Argument of periapsis
     
-    # Cumulative transformations
-#    R_after_omega = R1
-#    R_after_inclination = R2 @ R1
-#    R_final = R3 @ R2 @ R1
-
-    # Cumulative transformations
-    R_after_omega = R1
-    R_after_inclination = R1 @ R2  # Corrected order for intrinsic "hinge" tilt
-    R_final = R3 @ R_after_inclination # Apply final extrinsic swivel to the new result
+    # Cumulative transformations (STANDARD ASTRONOMICAL SEQUENCE)
+    R_after_Omega = R1                    # After Ω rotation
+    R_after_inclination = R1 @ R2         # After Ω and i rotations
+    R_final = R1 @ R2 @ R3                # Final: all three rotations
     
-    # For scaling, use periapsis for hyperbolas or semi-major axis for ellipses
-#    if e < 1.0:
-#        scale_basis = a  # Use semi-major axis for ellipses
-#    else:
-#        scale_basis = r_peri  # Use periapsis distance for hyperbolic orbits
-    
-    # Use absolute value of 'a' for scaling to handle hyperbolic orbits -- a is too small to see the orbit
-#    scale_basis = abs(a)
-    
-    # Coordinate frame axis length - scale with a buffer
-#    axis_length = scale_basis * 1.5     # 150% of semi-major axis for a good visual buffer
-
-    # Coordinate frame axis length - scale with a buffer
-#    axis_length = a * 1.5  # 150% of semi-major axis for a good visual buffer
-
-    # Coordinate frame axis length - extend to at least semi-major axis
-#    axis_length = max(a * 1.1, 0.5)  # At least 110% of semi-major axis
-
     # Calculate appropriate scale_basis for the visualization
     if e >= 0.99:  # Near-parabolic or hyperbolic orbit
         # For these orbits, use perihelion distance as reference
@@ -406,33 +380,20 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         add_coordinate_frame(fig, "1. Perifocal", "cyan", np.eye(3), 
                            axis_length, opacity=0.8, visible=True)
         
-        # 3. After ω rotation (purple)
-        if show_steps and omega != 0:
-            add_coordinate_frame(fig, "2. After ω rotation", "purple", R_after_omega, 
+        # 3. After Ω rotation (purple) - positions the line of nodes
+        if show_steps and Omega != 0:
+            add_coordinate_frame(fig, "2. After Ω rotation", "purple", R_after_Omega, 
                                axis_length, opacity=0.7, visible=True)
         
-        # 4. After ω and i rotation (orange)
+        # 4. After Ω and i rotation (orange) - tilts the orbital plane
         if show_steps and i != 0:
-            add_coordinate_frame(fig, "3. After i rotation", "orange", 
+            add_coordinate_frame(fig, "3. After Ω and i rotation", "orange", 
                                R_after_inclination, axis_length, 
                                opacity=0.7, visible=True)
         
-        # 5. Final = Ecliptic Frame (red)
-        add_coordinate_frame(fig, "4. After Ω rotation (Final)", "red", R_final, 
+        # 5. Final = After all rotations (red)
+        add_coordinate_frame(fig, "4. After ω rotation (Final)", "red", R_final, 
                            axis_length, opacity=0.8, visible=True)
-    
-    # Add orbits at each transformation stage
-    # 1. Perifocal orbit
-#    fig.add_trace(go.Scatter3d(
-#        x=x0, y=y0, z=z0,
-#        mode='lines',
-#        line=dict(color='cyan', width=4),
-#        name='1. Perifocal Frame',
-    #    legendgroup='transformations',
-#        showlegend=True,
-#        visible=True,
-#        hovertemplate='<b>Perifocal Orbit</b><br>The orbit in its natural, un-rotated frame.'
-#    ))
 
     # Add orbits at each transformation stage
     # 1. Perifocal orbit
@@ -562,52 +523,109 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         ))
     # ========== END OF NEW CODE ==========
     
-# 2. After ω rotation
+    # 2. After Ω rotation
     if show_steps:
-        coords1 = R_after_omega @ np.vstack([x0, y0, z0])
+        coords1 = R_after_Omega @ np.vstack([x0, y0, z0])
         fig.add_trace(go.Scatter3d(
             x=coords1[0], y=coords1[1], z=coords1[2],
             mode='lines',
             line=dict(color='purple', width=3, dash='dash'),
-            name=f'2. After ω rotation ({omega:.1f}°)',
+            name=f'2. After Ω rotation ({Omega:.1f}°)',
             showlegend=True,
             visible=True,
-            hovertemplate=f'<b>Orbit after ω rotation</b><br>'
-                          'Step 1: Orients the periapsis in the orbital plane.'
+            hovertemplate=f'<b>Orbit after Ω rotation</b><br>'
+                          'Step 1: Positions the line of nodes at longitude Ω.'
         ))
 
-        # Add angle arc for ω
-        if omega != 0:
-            omega_arc_angle = np.linspace(0, omega_rad, 30)
-            omega_arc_r = 0.25 * a
+        # Add angle arc for Ω (from vernal equinox to ascending node)
+        if Omega != 0:
+            Omega_arc_angle = np.linspace(0, Omega_rad, 30)
+            Omega_arc_r = 0.25 * scale_basis
             fig.add_trace(go.Scatter3d(
-                x=omega_arc_r * np.cos(omega_arc_angle),
-                y=omega_arc_r * np.sin(omega_arc_angle),
-                z=np.zeros_like(omega_arc_angle),
+                x=Omega_arc_r * np.cos(Omega_arc_angle),
+                y=Omega_arc_r * np.sin(Omega_arc_angle),
+                z=np.zeros_like(Omega_arc_angle),
                 mode='lines+text',
                 line=dict(color='purple', width=3),
-                text=[''] * 29 + [f'ω = {omega:.1f}°'],
+                text=[''] * 29 + [f'Ω = {Omega:.1f}°'],
                 textposition='top center',
-                name=f'ω angle ({omega:.1f}°)',
+                name=f'Ω angle ({Omega:.1f}°)',
                 showlegend=True,
                 visible=True,
-                hovertext=f'<b>Argument of Periapsis (ω)</b><br>Rotation: {omega:.1f}°<br>'
-                          'Orients the periapsis relative to the line of nodes.'
+                hovertext=f'<b>Longitude of Ascending Node (Ω)</b><br>Angle: {Omega:.1f}°<br>'
+                          'From vernal equinox to ascending node in ecliptic plane.'
             ))
     
-    # After ω and i rotation
+    # Fix for the line of nodes rendering issue in orbital_param_viz.py
+    # Replace the line of nodes section (around line where it says "Add line of nodes if inclined")
+
+    # Add line of nodes if inclined
+    if i != 0:
+        
+        # For near-parabolic and hyperbolic orbits, use a more reasonable scale
+        if e >= 0.99:  # Near-parabolic or hyperbolic
+            # For these orbits, use perihelion distance as reference
+            if a < 0:  # Hyperbolic with negative semi-major axis
+                q = abs(a) * (e - 1)  # Perihelion for hyperbolic
+            else:
+                q = a * (1 - e)  # Perihelion for near-parabolic
+            
+            # Special case for known comets
+            if obj_name == 'C/2025_K1':
+                q = 0.33  # Known perihelion
+            
+            # Use a reasonable multiple of perihelion for line length
+            nodes_length = max(3 * q, 1.0)  # At least 1 AU, at most 3x perihelion
+        else:
+            # For elliptical orbits, use the normal calculation
+            nodes_length = 1.2 * abs(a)
+        
+        # Ensure nodes_length is reasonable (cap at 10 AU for visualization)
+        nodes_length = min(nodes_length, 10.0)
+        
+        # CORRECTED: Line of nodes should be along x-axis after Ω rotation only
+        nodes_start = R_after_Omega @ np.array([-nodes_length, 0, 0])
+        nodes_end = R_after_Omega @ np.array([nodes_length, 0, 0])
+        
+        fig.add_trace(go.Scatter3d(
+            x=[nodes_start[0], nodes_end[0]],
+            y=[nodes_start[1], nodes_end[1]],
+            z=[nodes_start[2], nodes_end[2]],
+            mode='lines',
+            line=dict(color='purple', width=2, dash='dashdot'),
+            name='Line of Nodes',
+            showlegend=True,
+            visible=True,
+            hovertemplate='<b>Line of Nodes</b><br>Intersection with ecliptic plane'
+        ))
+        
+        # Ascending node marker (at +x after Ω rotation)
+        asc_node = R_after_Omega @ np.array([nodes_length, 0, 0])
+
+        fig.add_trace(go.Scatter3d(
+            x=[asc_node[0]], y=[asc_node[1]], z=[asc_node[2]],
+            mode='markers+text',
+            marker=dict(size=6, color='purple', symbol='square'),
+            text=['Ascending Node'],
+            textposition='top center',
+            name='Ascending Node',
+            showlegend=True,
+            visible=True,
+            hovertemplate='<b>Ascending Node</b><br>Where orbit crosses ecliptic plane northward'
+        ))
+
+    # After Ω and i rotation
     if show_steps:
         coords2 = R_after_inclination @ np.vstack([x0, y0, z0])
         fig.add_trace(go.Scatter3d(
             x=coords2[0], y=coords2[1], z=coords2[2],
             mode='lines',
             line=dict(color='orange', width=3, dash='dot'),
-            name=f'3. After ω and i rotation ({i:.1f}°)',
-    #        legendgroup='transformations',
+            name=f'3. After Ω and i rotation ({i:.1f}°)',
             showlegend=True,
             visible=True,
-            hovertemplate=f'<b>Orbit after ω and i rotation</b><br>' 
-            'Step 2: Applies the tilt to the orbital plane.'
+            hovertemplate=f'<b>Orbit after Ω and i rotation</b><br>' 
+            'Step 2: Tilts the orbital plane by inclination i.'
         ))
     
 # Fix for the inclination arc visibility issue in orbital_param_viz.py
@@ -630,7 +648,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         inc_z = inc_arc_r * np.sin(inc_arc_angle)
         
         # Transform the arc by the ω rotation to align with the line of nodes
-        inc_arc_coords = R_after_omega @ np.vstack([inc_x, inc_y, inc_z])
+        inc_arc_coords = R_after_Omega @ np.vstack([inc_x, inc_y, inc_z])
         
         # Add the inclination arc trace
         fig.add_trace(go.Scatter3d(
@@ -648,6 +666,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             textposition='top center',
             textfont=dict(size=12, color='orange'),
             name=f'Inclination ({i:.1f}°)',
+            legendgroup='inclination',
             showlegend=True,
             visible=True,
             hovertemplate=f'<b>Inclination (i)</b><br>Angle: {i:.1f}°<br>' +
@@ -657,58 +676,32 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         
         # Optional: Add a visual guide line from origin to start of arc
         # This helps show what plane the rotation is in
-        guide_start = R_after_omega @ np.array([0, inc_arc_r, 0])
+        guide_start = R_after_Omega @ np.array([0, inc_arc_r, 0])
         fig.add_trace(go.Scatter3d(
             x=[0, guide_start[0]],
             y=[0, guide_start[1]],
             z=[0, guide_start[2]],
             mode='lines',
             line=dict(color='orange', width=2, dash='dot'),
+            legendgroup='inclination',  # Same legendgroup         
             showlegend=False,
+            visible=True,
             hovertemplate='Start of inclination rotation'
         ))
         
         # Add another guide line to the end of the arc
-        guide_end = R_after_omega @ np.array([0, inc_arc_r * np.cos(i_rad), inc_arc_r * np.sin(i_rad)])
+        guide_end = R_after_Omega @ np.array([0, inc_arc_r * np.cos(i_rad), inc_arc_r * np.sin(i_rad)])
         fig.add_trace(go.Scatter3d(
             x=[0, guide_end[0]],
             y=[0, guide_end[1]],
             z=[0, guide_end[2]],
             mode='lines',
             line=dict(color='orange', width=2, dash='dot'),
-            showlegend=False,
+            legendgroup='inclination',  # Same legendgroup
+            showlegend=False,  # Don't show in legend
+            visible=True,
             hovertemplate='End of inclination rotation'
         ))
-
-    """
-    # Add inclination angle arc
-    if i != 0:
-        # Arc in the YZ plane after ω rotation
-        inc_arc_angle = np.linspace(0, i_rad, 30)
-        inc_arc_r = 0.3 * a
-        inc_y = inc_arc_r * np.cos(inc_arc_angle)
-        inc_z = inc_arc_r * np.sin(inc_arc_angle)
-        inc_x = np.zeros_like(inc_arc_angle)
-        
-        # Transform arc to after ω rotation
-        inc_arc_coords = R_after_omega @ np.vstack([inc_x, inc_y, inc_z])
-        
-        fig.add_trace(go.Scatter3d(
-            x=inc_arc_coords[0],
-            y=inc_arc_coords[1],
-            z=inc_arc_coords[2],
-            mode='lines+text',
-            line=dict(color='orange', width=3),
-            text=[''] * 29 + [f'i = {i:.1f}°'],
-            textposition='top center',
-            name=f'Inclination ({i:.1f}°)',
-    #        legendgroup='angles',
-            showlegend=True,
-            visible=True,
-            hovertext=f'<b>Inclination (i)</b><br>Angle: {i:.1f}°<br>' 
-            'Tilts the orbit relative to the ecliptic plane.'
-        ))
-        """
 
     # 4. Final orbit
     coords_final = R_final @ np.vstack([x0, y0, z0])
@@ -723,27 +716,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         hovertemplate='<b>Final Orbit</b><br>In ecliptic coordinates'
     ))
     
-    # Add Ω angle arc (longitude of ascending node)
-    if Omega != 0:
-        omega_big_arc_angle = np.linspace(0, Omega_rad, 30)
-    #    omega_big_arc_r = 0.35 * a
-        omega_big_arc_r = 0.35 * scale_basis  # Use scale_basis instead of a
-
-        fig.add_trace(go.Scatter3d(
-            x=omega_big_arc_r * np.cos(omega_big_arc_angle),
-            y=omega_big_arc_r * np.sin(omega_big_arc_angle),
-            z=np.zeros_like(omega_big_arc_angle),
-            mode='lines+text',
-            line=dict(color='red', width=4),
-            text=[''] * 29 + [f'Ω = {Omega:.1f}°'],
-            textposition='top center',
-            name=f'Ω angle ({Omega:.1f}°)',
-    #        legendgroup='angles',
-            showlegend=True,
-            visible=True,
-            hovertext=f'<b>Longitude of Ascending Node (Ω)</b><br>Angle: {Omega:.1f}°<br>' 
-            'Orients the orbit within the ecliptic frame.'
-        ))
+    # The Ω angle is already shown in step 2, no need to repeat it here
 
     # Add arc showing ω angle from ascending node to periapsis
     # This arc needs to be in the FINAL ORBITAL PLANE.
@@ -935,63 +908,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         visible=True,
         hovertemplate=apsides_hover
     ))
-                
-    # Fix for the line of nodes rendering issue in orbital_param_viz.py
-    # Replace the line of nodes section (around line where it says "Add line of nodes if inclined")
-
-    # Add line of nodes if inclined
-    if i != 0:
-        
-        # For near-parabolic and hyperbolic orbits, use a more reasonable scale
-        if e >= 0.99:  # Near-parabolic or hyperbolic
-            # For these orbits, use perihelion distance as reference
-            if a < 0:  # Hyperbolic with negative semi-major axis
-                q = abs(a) * (e - 1)  # Perihelion for hyperbolic
-            else:
-                q = a * (1 - e)  # Perihelion for near-parabolic
-            
-            # Special case for known comets
-            if obj_name == 'C/2025_K1':
-                q = 0.33  # Known perihelion
-            
-            # Use a reasonable multiple of perihelion for line length
-            nodes_length = max(3 * q, 1.0)  # At least 1 AU, at most 3x perihelion
-        else:
-            # For elliptical orbits, use the normal calculation
-            nodes_length = 1.2 * abs(a)
-        
-        # Ensure nodes_length is reasonable (cap at 10 AU for visualization)
-        nodes_length = min(nodes_length, 10.0)
-        
-        nodes_start = R3 @ np.array([-nodes_length, 0, 0])
-        nodes_end = R3 @ np.array([nodes_length, 0, 0])
-        
-        fig.add_trace(go.Scatter3d(
-            x=[nodes_start[0], nodes_end[0]],
-            y=[nodes_start[1], nodes_end[1]],
-            z=[nodes_start[2], nodes_end[2]],
-            mode='lines',
-            line=dict(color='red', width=2, dash='dashdot'),
-            name='Line of Nodes',
-            showlegend=True,
-            visible=True,
-            hovertemplate='<b>Line of Nodes</b><br>Intersection with ecliptic plane'
-        ))
-        
-        # Ascending node marker
-        asc_node = R3 @ np.array([nodes_length, 0, 0])
-        fig.add_trace(go.Scatter3d(
-            x=[asc_node[0]], y=[asc_node[1]], z=[asc_node[2]],
-            mode='markers+text',
-            marker=dict(size=6, color='red', symbol='square'),
-            text=['Ascending Node'],
-            textposition='top center',
-            name='Ascending Node',
-            showlegend=True,
-            visible=True,
-            hovertemplate='<b>Ascending Node</b><br>Where orbit crosses ecliptic plane northward'
-        ))
-    
+                    
 # Add current position marker using the fetched position
     if current_position and 'x' in current_position:
         fig.add_trace(
@@ -1028,10 +945,6 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     tangent_vec_pf = np.array([-np.sin(nu_motion), e + np.cos(nu_motion), 0])
     tangent_vec_pf /= np.linalg.norm(tangent_vec_pf)
 
-    # Reverse for retrograde orbits -- redundant, causes the retrograde to cancel
-#    if i > 90:
-#        tangent_vec_pf = -tangent_vec_pf
-
     arrow_len = 0.4 * a
     arrow_end_pf = pos_motion_pf + arrow_len * tangent_vec_pf
 
@@ -1061,8 +974,6 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     # Update layout
     # Set axis range to accommodate extended coordinate frames
     axis_range = scale_basis * 2.5 # Use a larger buffer to ensure everything fits
-
-#    axis_range = max(1.5 * scale_basis, 1.5 * axis_length)
     
     fig.update_layout(
         scene=dict(
@@ -1107,22 +1018,22 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
 
     <b>Coordinate Frame Transformations:</b><br>
     The final transformation is a product of three rotations:<br>
-    R = R_z(Ω) · R_x(i) · R_z(ω)<br><br>
+    R = R_z(ω) · R_x(i) · R_z(Ω)<br><br>
 
     1. <b>Perifocal Frame</b> (cyan) - The orbit's 2D blueprint.<br>
     • Periapsis is aligned on the +X axis.<br><br>
 
-    2. <b>After ω rotation</b> (purple) - Orients the ellipse.<br>
-    • Rotates the frame by ω around the Z-axis.<br>
-    <b>→ Sets the periapsis orientation within its orbital plane.</b><br><br>
+    2. <b>After Ω rotation</b> (purple) - Positions the line of nodes.<br>
+    • Rotates by Ω around the Z-axis (from vernal equinox to ascending node).<br>
+    <b>→ Sets where the orbit crosses the ecliptic plane.</b><br><br>
 
-    3. <b>After ω and i rotation</b> (orange) - Tilts the orbit.<br>
-    • Tilts the frame by i around the new X-axis (the "hinge").<br>
-    <b>→ Gives the orbit its tilt relative to the Ecliptic Plane.</b><br><br>
+    3. <b>After Ω and i rotation</b> (orange) - Tilts the orbit.<br>
+    • Tilts the frame by i around the line of nodes (X-axis after Ω rotation).<br>
+    <b>→ Gives the orbit its inclination relative to the ecliptic.</b><br><br>
 
-    4. <b>Final/Ecliptic Frame</b> (red) - Swivels the orbit.<br>
-    • Rotates the tilted frame by Ω around the original (not orange) Z-axis.<br>
-    <b>→ Swivels the orbit into its final place in the Ecliptic Frame.</b><br><br>
+    4. <b>After ω rotation (Final)</b> (red) - Final orientation.<br>
+    • Rotates by ω within the tilted orbital plane.<br>
+    <b>→ Positions the periapsis at angle ω from the ascending node.</b><br><br>    
 
     <b>Key Insight:</b> This visualization shows the sequence of<br> 
     rotations applied to the initial Perifocal Orbit (cyan) to place it<br> 
@@ -1640,6 +1551,234 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
         
         canvas.draw()
     
+    # Store figure reference for export
+    demo_window.fig = fig  # Store fig as an attribute of the window
+    
+    def save_visualization():
+        """Save the current eccentricity visualization using the standard save dialog."""
+        try:
+            import plotly.graph_objects as go
+            import numpy as np
+            
+            # Get current values
+            e_val = e_slider.get()
+            obj_name = object_var.get()
+            a = 1.0  # Default semi-major axis
+            
+            # Get actual semi-major axis if object is selected
+            if obj_name and obj_name in planetary_params and 'a' in planetary_params[obj_name]:
+                a = planetary_params[obj_name]['a']
+            
+            # Create a Plotly figure (not matplotlib)
+            plotly_fig = go.Figure()
+            
+            # Generate orbit points
+            theta = np.linspace(0, 2*np.pi, 1000)
+            
+            if e_val < 1.0:  # Ellipse
+                r = a * (1 - e_val**2) / (1 + e_val * np.cos(theta))
+                orbit_type = "Ellipse"
+            elif e_val == 1.0:  # Parabola
+                theta = np.linspace(-np.pi*0.99, np.pi*0.99, 1000)
+                r = 2*a / (1 + np.cos(theta))
+                orbit_type = "Parabola (escape)"
+            else:  # Hyperbola
+                max_angle = np.arccos(-1/e_val)
+                theta = np.linspace(-max_angle*0.95, max_angle*0.95, 1000)
+                r = a * (1 - e_val**2) / (1 + e_val * np.cos(theta))
+                orbit_type = "Hyperbola"
+            
+            x = r * np.cos(theta)
+            y = r * np.sin(theta)
+            
+            # Add the orbit
+            plotly_fig.add_trace(go.Scatter(
+                x=x, y=y,
+                mode='lines',
+                name=f'{orbit_type} (e={e_val:.6f})',
+                line=dict(color='green', width=3)
+            ))
+            
+            # Add reference circle
+            circle_theta = np.linspace(0, 2*np.pi, 100)
+            plotly_fig.add_trace(go.Scatter(
+                x=a * np.cos(circle_theta),
+                y=a * np.sin(circle_theta),
+                mode='lines',
+                name='Reference circle (e=0)',
+                line=dict(color='gray', width=1, dash='dash')
+            ))
+            
+            # Calculate key points
+            c = a * e_val
+            periapsis = a * (1 - e_val)
+            
+            # Add orbit center
+            plotly_fig.add_trace(go.Scatter(
+                x=[0], y=[0],
+                mode='markers+text',
+                name='Orbit Center',
+                marker=dict(size=8, color='black', symbol='cross'),
+                text=[''],
+                textposition='bottom center',
+                showlegend=True
+            ))
+            
+            # Primary focus (Sun)
+            plotly_fig.add_trace(go.Scatter(
+                x=[0], y=[0],
+                mode='markers+text',
+                name='Primary Focus (Sun)',
+                marker=dict(size=15, color='yellow', line=dict(color='orange', width=2)),
+                text=['Sun'],
+                textposition='bottom center'
+            ))
+            
+            # Empty focus for ellipse
+            if e_val > 0 and e_val < 1:
+                plotly_fig.add_trace(go.Scatter(
+                    x=[-2*c], y=[0],
+                    mode='markers+text',
+                    name='Empty Focus',
+                    marker=dict(size=8, color='lightgray', symbol='circle-open'),
+                    text=[''],
+                    textposition='bottom center'
+                ))
+            
+            # Periapsis
+            plotly_fig.add_trace(go.Scatter(
+                x=[periapsis], y=[0],
+                mode='markers+text',
+                name='Periapsis',
+                marker=dict(size=10, color='red'),
+                text=['Periapsis'],
+                textposition='top center'
+            ))
+            
+            # Apoapsis for closed orbits
+            if e_val < 1:
+                apoapsis = a * (1 + e_val)
+                plotly_fig.add_trace(go.Scatter(
+                    x=[-apoapsis], y=[0],
+                    mode='markers+text',
+                    name='Apoapsis',
+                    marker=dict(size=10, color='green'),
+                    text=['Apoapsis'],
+                    textposition='top center'
+                ))
+            
+            # Create formatted definitions text with better layout
+            b = a * np.sqrt(1 - e_val**2) if e_val < 1 else 0
+            
+            # Build the definitions text with cleaner formatting
+            if e_val < 1:
+                definitions_text = (
+                    f"<b>Definitions</b><br>"
+                    f"<b>• {orbit_type}</b>: e = {e_val:.6f}<br>"
+                    f"<b>• Semi-major axis (a)</b>: {a:.3f} AU<br>"
+                    f"<b>• Semi-minor axis (b)</b>: {b:.3f} AU<br>"
+                    f"<b>• Periapsis</b>: {periapsis:.3f} AU<br>"
+                    f"<b>• Apoapsis</b>: {apoapsis:.3f} AU<br>"
+                    f"<b>• Focal distance (c)</b>: {c:.3f} AU<br>"
+                    f"<b>• Focus separation</b>: {2*c:.3f} AU<br>"
+                    f"<b>• Eccentricity</b>: e = c/a = {e_val:.6f}"
+                )
+            else:
+                definitions_text = (
+                    f"<b>Definitions</b><br>"
+                    f"<b>• {orbit_type}</b>: e = {e_val:.6f}<br>"
+                    f"<b>• Semi-major axis (a)</b>: {a:.3f} AU<br>"
+                    f"<b>• Periapsis</b>: {periapsis:.3f} AU<br>"
+                    f"<b>• Focal distance (c)</b>: {c:.3f} AU<br>"
+                    f"<b>• Eccentricity</b>: e = c/a = {e_val:.6f}"
+                )
+            
+            # Set appropriate axis ranges - account for elongated orbits
+            if e_val <= 1:
+                x_range = 1.2 * a * (1 + e_val)  # Extra space for elongated orbits
+                y_range = 1.2 * a * np.sqrt(1 - e_val**2) if e_val < 1 else 1.2 * a
+                # Use the larger range to maintain aspect ratio
+                axis_range = max(x_range, y_range)
+            else:
+                axis_range = 2 * a
+                
+            # Update layout with title and definitions
+            title_text = "Orbital Shape vs Eccentricity"
+            if obj_name and obj_name != "None":
+                title_text = f"{obj_name} - {title_text}"
+                
+            plotly_fig.update_layout(
+                title=dict(
+                    text=f"{title_text}<br><sub>{orbit_type}: e = {e_val:.6f}</sub>",
+                    x=0.5,
+                    xanchor='center'
+                ),
+                xaxis=dict(
+                    title="Distance (AU)", 
+                    scaleanchor="y", 
+                    scaleratio=1,
+                    zeroline=True,
+                    zerolinecolor='lightgray',
+                    gridcolor='lightgray',
+                    range=[-axis_range, axis_range]
+                ),
+                yaxis=dict(
+                    title="Distance (AU)",
+                    zeroline=True,
+                    zerolinecolor='lightgray',
+                    gridcolor='lightgray',
+                    range=[-axis_range, axis_range]
+                ),
+                showlegend=True,
+                legend=dict(
+                    x=1.02,  # Position to the right of the plot
+                    y=0.98,
+                    xanchor='left',
+                    yanchor='top',
+                    bgcolor='rgba(255,255,255,0.9)',
+                    bordercolor='black',
+                    borderwidth=1
+                ),
+                hovermode='closest',
+                width=1350,  # Wider to accommodate right-side elements
+                height=700,
+                margin=dict(r=250, l=50, t=80, b=50),
+                annotations=[
+                    dict(
+                        text=definitions_text,
+                        xref="paper", yref="paper",
+                        x=1.02,  # Same x position as legend (right side)
+                        y=0.65,  # Position below legend
+                        xanchor='left', 
+                        yanchor='top',
+                        showarrow=False,
+                        bordercolor='black',
+                        borderwidth=1,
+                        bgcolor='rgba(255,240,200,0.95)',
+                        font=dict(size=11),
+                        align='left'
+                    )
+                ]
+            )
+            
+            # Generate filename with timestamp
+            from datetime import datetime
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            
+            if obj_name and obj_name != "None":
+                default_filename = f"Eccentricity_{obj_name}_e{e_val:.4f}_{timestamp}"
+            else:
+                default_filename = f"Eccentricity_e{e_val:.4f}_{timestamp}"
+            
+            # Use the existing show_figure_safely function
+            show_figure_safely(plotly_fig, default_filename)
+            
+        except Exception as e:
+            messagebox.showerror("Export Error", 
+                            f"Failed to export visualization:\n{str(e)}")
+            import traceback
+            traceback.print_exc()
+
     # Bind slider to update function
     e_slider.config(command=update_plot)
 
@@ -1713,6 +1852,16 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
     update_button = ttk.Button(select_frame, text="Update from Object", 
                               command=update_from_object, width=20)
     update_button.grid(row=0, column=3, padx=5, pady=5)
+    
+    # Add export button next to update button
+    export_button = ttk.Button(select_frame, text="Export Visualization", 
+                              command=save_visualization, width=20)
+    export_button.grid(row=0, column=4, padx=5, pady=5)
+    
+    # Add tooltip
+    CreateToolTip(export_button,
+        "Export the visualization as HTML or PNG.\n"
+        "Same options as the orbital parameter visualization.")    
     
     # Add the special case buttons below
     button_frame = ttk.Frame(control_frame)
@@ -2019,23 +2168,26 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     ### TRANSFORMATION SEQUENCE
 
     The visualization shows how three sequential rotations place the orbit into its final orientation:
-    **R = Rz(Ω) · Rx(i) · Rz(ω)**
+    **R = Rz(ω) · Rx(i) · Rz(Ω)**
 
     1. **Initial State (Cyan)**: Perifocal Frame
     - The orbit in its simplest form
     - Periapsis aligned on +X axis
 
-    2. **After ω rotation (Purple)**: Argument of Periapsis
-    - Rotates the frame by ω around Z-axis
-    - Sets the periapsis orientation within the orbital plane
+    2. **After Ω rotation (Purple)**: Longitude of Ascending Node
+    - Rotates the frame by Ω around Z-axis
+    - Positions the line of nodes at angle Ω from vernal equinox
+    - The X-axis after this rotation IS the line of nodes
 
-    3. **After ω and i rotation (Orange)**: Inclination
-    - Tilts the frame by i around the new X-axis (the "hinge")
-    - Gives the orbit its tilt relative to the Ecliptic plane
+    3. **After Ω and i rotation (Orange)**: Inclination
+    - Tilts the frame by i around the line of nodes (X-axis from step 2)
+    - Gives the orbit its inclination relative to the ecliptic plane
+    - The line of nodes remains fixed along the purple X-axis
 
-    4. **Final State (Red)**: Longitude of Ascending Node
-    - Rotates the tilted frame by Ω around the original Z-axis
-    - Swivels the orbit into its final position in the Ecliptic frame
+    4. **Final State (Red)**: Argument of Periapsis
+    - Rotates by ω within the tilted orbital plane
+    - Positions the periapsis at angle ω from the ascending node
+    - Completes the transformation to ecliptic coordinates
 
     **Important**: The coordinate systems rotate, not the orbit itself! The orbit maintains its shape and orientation relative to each coordinate frame.
 
@@ -2048,8 +2200,26 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     - Apoapsis: Farthest point (aphelion for Sun, apogee for planets)
     - Hover over markers to see predicted dates and distances
     • **Current Position**: Shows the object's location at the selected date
-    • **Line of Nodes**: Where orbit crosses the reference plane
+    • **Line of Nodes**: Where orbit crosses the reference plane (along purple X-axis)
     • **Ascending Node**: Where orbit rises above the reference plane
+
+    ## ANGULAR PARAMETERS EXPLAINED
+
+    • **Ω (Longitude of Ascending Node)**: 0°–360°
+    - Measured in the ecliptic plane
+    - From vernal equinox (♈) to ascending node
+    - Determines the orbit's "swivel" orientation
+
+    • **i (Inclination)**: 0°–180°
+    - Angle between orbital plane and ecliptic
+    - 0° = orbit in ecliptic plane
+    - 90° = polar orbit
+    - >90° = retrograde orbit
+
+    • **ω (Argument of Periapsis)**: 0°–360°
+    - Measured within the orbital plane
+    - From ascending node to periapsis
+    - Determines where closest approach occurs
 
     ## INTERACTIVE FEATURES
 
@@ -2074,65 +2244,7 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     • Uses current date from the main plot
     • Shows actual object position at that date
     • Displays calculated apsidal dates (perihelion/aphelion)
-    • All positions use JPL Horizons ephemeris data for accuracy
-
-    ## INTERACTIVE ORBITAL ECCENTRICITY VISUALIZATION
-
-    The **Interactive Orbital Eccentricity Visualization** is a companion tool that demonstrates how eccentricity affects orbital shape across all conic sections:
-
-    ### Purpose
-    • **Educational Focus**: Understand eccentricity's fundamental role in orbital mechanics
-    • **Complete Spectrum**: Visualize all conic sections from circles to hyperbolas
-    • **Interactive Learning**: Real-time manipulation of eccentricity values
-
-    ### Features
-    • **Dynamic Slider Control**: 
-    - Adjust eccentricity from 0 (perfect circle) to 10+ (extreme hyperbola)
-    - Real-time orbital shape updates
-    - Numerical input for precise values
-
-    • **Comprehensive Orbit Types**:
-    - **Circle** (e ≈ 0): Perfect circular orbits
-    - **Ellipse** (0 < e < 1): Bound, periodic orbits like planets
-    - **Parabola** (e = 1): Escape velocity trajectory
-    - **Hyperbola** (e > 1): Flyby trajectories with excess velocity
-
-    • **Educational Annotations**:
-    - Real-time geometric calculations
-    - Focus positions and distances
-    - Apsidal distances (periapsis/apoapsis)
-    - Mathematical relationships (c = ae, sum of distances to foci)
-
-    • **Object Selection**: 
-    - Choose from real celestial objects
-    - See actual orbital parameters
-    - Compare theoretical shapes with real orbits
-
-    ### Key Learning Points
-    • **Eccentricity Scale**: 
-    - Earth: e = 0.0167 (nearly circular)
-    - Mars: e = 0.0934 (slightly elliptical)  
-    - Comets: e ≈ 0.8-0.99 (highly elliptical)
-    - Hyperbolic asteroids: e > 1 (escape trajectories)
-
-    • **Geometric Relationships**:
-    - Focus distance: c = a × e
-    - Semi-minor axis: b = a√(1-e²) for ellipses
-    - Periapsis distance: a(1-e) for bound orbits
-    - Apoapsis distance: a(1+e) for bound orbits
-
-    • **Physical Interpretation**:
-    - Low e: Stable, circular-like orbits
-    - High e: Eccentric orbits with dramatic distance variations
-    - e = 1: Minimum energy for escape
-    - e > 1: Excess kinetic energy, never returns
-
-    ### Integration with Main Visualization
-    • **Complementary Tools**: Use together to understand both shape (eccentricity) and orientation (other orbital elements)
-    • **Real Object Data**: Eccentricity values from actual celestial objects
-    • **Consistent Framework**: Same mathematical foundations and coordinate systems
-
-    This tool provides intuitive understanding of how a single parameter—eccentricity—determines whether an object follows a closed orbit around its primary or escapes to interstellar space.
+    • Integrates with live orbital data
 
     ## NOTE ON SATELLITE ORBITS
 
@@ -2151,7 +2263,7 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     - **Physical reality** of how celestial objects move through 3D space
 
     By showing the step-by-step transformation, it helps develop intuition for how each parameter affects the final orbit orientation."""
-    
+
     info_text.insert('1.0', info_content)
     info_text.config(state='disabled')  # Make read-only
     
