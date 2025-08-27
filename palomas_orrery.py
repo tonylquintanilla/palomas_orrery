@@ -1409,15 +1409,108 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         print(f"Error fetching data for object {object_id} on {date_obj}: {e}")
         return None
 
-def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, hover_data="Full Object Info", 
-                         center_object_name=None):
+
+def fetch_radec_for_hover(object_id, date_obj, id_type=None):
+    """
+    Fetch RA/Dec and uncertainties for hover text
+    
+    Returns:
+        tuple: (ra_deg, dec_deg, ra_3sigma, dec_3sigma)
+    """
+    try:
+        if object_id == '399':  # Earth doesn't have Earth-centered coordinates
+            return None, None, None, None
+            
+        times = Time([date_obj])
+        epochs = times.jd.tolist()
+        
+        # Get Earth-centered ephemerides for apparent RA/Dec
+        earth_obj = Horizons(id=object_id, id_type=id_type, location='@399', epochs=epochs)
+        
+        # Request ephemerides with extra precision columns
+        # The quantities parameter requests specific columns including uncertainties
+        try:
+            ephemerides = earth_obj.ephemerides(quantities='1,2,36,37')
+            # 1=RA, 2=DEC, 36=RA_3sigma, 37=DEC_3sigma (check JPL docs for exact numbers)
+        except:
+            # Fallback to basic ephemerides if enhanced request fails
+            ephemerides = earth_obj.ephemerides()
+        
+        if len(ephemerides) == 0:
+            return None, None, None, None
+            
+        # Look for apparent coordinates
+        ra_deg = None
+        dec_deg = None
+        ra_3sigma = None
+        dec_3sigma = None
+        
+        if 'RA_app' in ephemerides.colnames:
+            ra_deg = float(ephemerides['RA_app'][0])
+        elif 'RA' in ephemerides.colnames:
+            ra_deg = float(ephemerides['RA'][0])
+            
+        if 'DEC_app' in ephemerides.colnames:
+            dec_deg = float(ephemerides['DEC_app'][0])
+        elif 'DEC' in ephemerides.colnames:
+            dec_deg = float(ephemerides['DEC'][0])
+        
+        # Extract uncertainties if available
+        if 'RA_3sigma' in ephemerides.colnames:
+            try:
+                val = ephemerides['RA_3sigma'][0]
+                # Check if it's 'n.a.' or similar non-numeric value
+                if val != 'n.a.' and val is not None:
+                    ra_3sigma = float(val)
+            except:
+                ra_3sigma = None
+        
+        if 'DEC_3sigma' in ephemerides.colnames:
+            try:
+                val = ephemerides['DEC_3sigma'][0]
+                if val != 'n.a.' and val is not None:
+                    dec_3sigma = float(val)
+            except:
+                dec_3sigma = None
+            
+        return ra_deg, dec_deg, ra_3sigma, dec_3sigma
+        
+    except Exception as e:
+        print(f"Could not fetch RA/Dec for {object_id}: {e}")
+        return None, None, None, None
+    
+
+def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_size=DEFAULT_MARKER_SIZE, 
+                         hover_data="Full Object Info", center_object_name=None):
     
     # Skip if there's no data
     if obj_data is None or obj_data['x'] is None:
         return
 
-    print(f"\nAdding trace for {name}:")
-    
+    # Get the object's ID for RA/Dec fetching
+    obj_info = next((obj for obj in objects if obj['name'] == name), None)
+
+    if obj_info:
+        # IMPORTANT: Add object_type to obj_data so it's available for precision calculation
+        if 'object_type' not in obj_data:
+            obj_data['object_type'] = obj_info.get('object_type', 'unknown')
+        
+        if hover_data == "Full Object Info":
+
+            # Fetch RA/Dec and uncertainties - NOW RECEIVING 4 VALUES
+            ra_deg, dec_deg, ra_3sigma, dec_3sigma = fetch_radec_for_hover(
+                obj_info['id'], 
+                get_date_from_gui(), 
+                obj_info.get('id_type')
+            )
+            
+            if ra_deg is not None and dec_deg is not None:
+                # Add RA/Dec and uncertainties to obj_data for hover text formatting
+                obj_data['ra'] = ra_deg
+                obj_data['dec'] = dec_deg
+                obj_data['ra_3sigma'] = ra_3sigma  # Add uncertainties
+                obj_data['dec_3sigma'] = dec_3sigma
+
     # Use the consolidated function for hover text
     full_hover_text, minimal_hover_text, satellite_note = format_detailed_hover_text(
         obj_data, 
@@ -2136,52 +2229,52 @@ objects = [
     # Existing Celestial Objects
     {'name': 'Sun', 'id': '10', 'var': sun_var, 'color': color_map('Sun'), 'symbol': 'circle', 'object_type': 'fixed', 
     'id_type': None, 
-    'mission_info': 'NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit. "', 
+    'mission_info': 'Horizons: 10. NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit. "', 
     'mission_url': 'https://science.nasa.gov/sun/'},
 
     {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
+    'mission_info': 'Horizons: 199. NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
     'mission_url': 'https://science.nasa.gov/mercury/'},
 
     {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
+    'mission_info': 'Horizons: 299. NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/venus/'},
 
     {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'Earth orbital period: 27.32 days.', 
+    'mission_info': 'Horizons: 399. Earth orbital period: 27.32 days.', 
      'mission_url': 'https://science.nasa.gov/earth/', 'mission_info': 'Our home planet.'},
 
     {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Earth orbital period: 27.32 days.', 
+     'mission_info': 'Horizons: 301. Earth orbital period: 27.32 days.', 
      'mission_url': 'https://science.nasa.gov/moon/', 'mission_info': 'NASA: "The Moon rotates exactly once each time it orbits our planet."'},
 
     {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Mars is one of the easiest planets to spot in the night sky — it looks like a bright red point of light."', 
+    'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky — it looks like a bright red point of light."', 
     'mission_url': 'https://science.nasa.gov/?search=mars'},
 
     {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Jupiter is the largest and oldest planet in our solar system."', 
+    'mission_info': 'Horizons: 599. NASA: "Jupiter is the largest and oldest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/?search=Jupiter'},
 
     {'name': 'Saturn', 'id': '699', 'var': saturn_var, 'color': color_map('Saturn'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
+    'mission_info': 'Horizons: 699. NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
     'mission_url': 'https://science.nasa.gov/saturn/'},
 
     {'name': 'Uranus', 'id': '799', 'var': uranus_var, 'color': color_map('Uranus'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
+    'mission_info': 'Horizons: 799. NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
     'mission_url': 'https://science.nasa.gov/uranus/'},
 
     {'name': 'Neptune', 'id': '899', 'var': neptune_var, 'color': color_map('Neptune'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
+    'mission_info': 'Horizons: 899. NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
     'mission_url': 'https://science.nasa.gov/neptune/'},
 
     {'name': 'Planet 9', 'id': 'planet9_placeholder', 'var': planet9_var, 'color': color_map('orbital'), 
@@ -2194,30 +2287,30 @@ objects = [
 
     {'name': 'Chariklo', 'id': '1997 CU26', 'var': chariklo_var, 'color': color_map('Chariklo'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Large Centaur. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 1997 CU26. Large Centaur. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/10199-chariklo/'},
 
 # Dwarf planets
 
     {'name': 'Pluto', 'id': '999', 'var': pluto_var, 'color': color_map('Pluto'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'NASA: "Pluto is a dwarf planet located in a distant region of our solar system beyond Neptune known as the Kuiper Belt."', 
+    'mission_info': 'Horizons: 999. NASA: "Pluto is a dwarf planet located in a distant region of our solar system beyond Neptune known as the Kuiper Belt."', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
 
-    {'name': 'Ceres', 'id': 'ceres', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Ceres', 'id': 'A801 AA', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture."', 
+    'mission_info': 'Horizons: A801 AA. NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture."', 
     'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
 
-    {'name': 'Haumea', 'id': '136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Haumea', 'id': '2003 EL61', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
+    'mission_info': 'Horizons: 2003 EL61. Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
 
-    {'name': 'Eris', 'id': '136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Eris', 'id': '2003 UB313', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'orbital', 
     # 136199 primary (required for Sun centered plots)
     'id_type': 'smallbody', 
-    'mission_info': 'Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
+    'mission_info': 'Horizons: 2003 UB313. Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
 
     {'name': 'Eris/Dysnomia', 'id': '20136199', 'var': eris2_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'satellite', 
@@ -2228,140 +2321,140 @@ objects = [
 
     {'name': 'Gonggong', 'id': '2007 OR10', 'var': gonggong_var, 'color': color_map('Gonggong'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Dwarf planet in the Kuiper Belt with a highly inclined orbit. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 2007 OR10. Dwarf planet in the Kuiper Belt with a highly inclined orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)'},
 
-    {'name': 'Makemake', 'id': '136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Makemake', 'id': '2005 FY9', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
+    'mission_info': 'Horizons: 2005 FY9. Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
 
     {'name': 'Mani', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'One of the largest unnumbered Kuiper Belt Objects with no known moons. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 2002 MS4. One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
     'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
 
     {'name': 'Orcus', 'id': '2004 DW', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A dwarf planet in the Kuiper Belt with a moon named Vanth. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 2004 DW.A dwarf planet in the Kuiper Belt with a moon named Vanth.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
 
-    {'name': 'Quaoar', 'id': '50000', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Quaoar', 'id': '2002 LM60', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A large Kuiper Belt object with a ring system.', 
+    'mission_info': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system.', 
     'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
 
-    {'name': 'Sedna', 'id': '90377', 'var': sedna_var, 'color': color_map('Sedna'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Sedna', 'id': '2003 VB12', 'var': sedna_var, 'color': color_map('Sedna'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
+    'mission_info': 'Horizons: 2003 VB12. A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
     'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
 
     {'name': 'Leleakuhonua', 'id': '2015 TG387', 'var': leleakuhonua_var, 'color': color_map('Leleakuhonua'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
+    'mission_info': 'Horizons: 2015 TG387. A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/541132_Lele%C4%81k%C5%ABhonua'},
 
     {'name': '2017 OF201', 'id': '2017 OF201', 'var': of201_var, 'color': color_map('2017 OF201'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A extreme trans-Neptunian object with an extremely long orbit.', 
+    'mission_info': 'Horizons: 2017 OF201. A extreme trans-Neptunian object with an extremely long orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/2017_OF201#:~:text=2017%20OF201%20is%20an,have%20a%20directly%20estimated%20size.'},
 
     # Lagrange Points
     # Earth-Moon Lagrange Points
     {'name': 'EM-L1', 'id': '3011', 'var': eml1_var, 'color': color_map('EM-L1'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
+    'mission_info': 'Horizons: 3011. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},  
 
     {'name': 'EM-L2', 'id': '3012', 'var': eml2_var, 'color': color_map('EM-L2'), 'symbol': 'square-open', 'object_type': 'lagrange_point',   
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
+    'mission_info': 'Horizons: 3012. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'}, 
 
     {'name': 'EM-L3', 'id': '3013', 'var': eml3_var, 'color': color_map('EM-L3'), 'symbol': 'square-open', 'object_type': 'lagrange_point',   
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
+    'mission_info': 'Horizons: 3013. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
 
     {'name': 'EM-L4', 'id': '3014', 'var': eml4_var, 'color': color_map('EM-L4'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
+    'mission_info': 'Horizons: 3014. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
 
     {'name': 'EM-L5', 'id': '3015', 'var': eml5_var, 'color': color_map('EM-L5'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
+    'mission_info': 'Horizons: 3015. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
     'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},    
 
     # Sun-Earth-Moon-Barycenter Lagrange Points
     {'name': 'L1', 'id': '31', 'var': l1_var, 'color': color_map('L1'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L1 31
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-1 point is where the Earth\'s gravitational field counters the Sun\'s',
+    'mission_info': 'Horizons: 31. The Sun & Earth-Moon Barycenter Lagrange-1 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L2', 'id': '32', 'var': l2_var, 'color': color_map('L2'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L2 32
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-2 point is where the Earth\'s gravitational field counters the Sun\'s',
+    'mission_info': 'Horizons: 32. The Sun & Earth-Moon Barycenter Lagrange-2 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L3', 'id': '33', 'var': l3_var, 'color': color_map('L3'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L3 33
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-3 point is where the Earth\'s gravitational field counters the Sun\'s',
+    'mission_info': 'Horizons: 33. The Sun & Earth-Moon Barycenter Lagrange-3 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L4', 'id': '34', 'var': l4_var, 'color': color_map('L4'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L4 34
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-4 point is where the Earth\'s gravitational field counters the Sun\'s',
+    'mission_info': 'Horizons: 34. The Sun & Earth-Moon Barycenter Lagrange-4 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     {'name': 'L5', 'id': '35', 'var': l5_var, 'color': color_map('L5'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L5 35
     'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'The Sun & Earth-Moon Barycenter Lagrange-5 point is where the Earth\'s gravitational field counters the Sun\'s',
+    'mission_info': 'Horizons: 35. The Sun & Earth-Moon Barycenter Lagrange-5 point is where the Earth\'s gravitational field counters the Sun\'s',
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     # Near-Earth Asteroids
-    {'name': 'Kamo oalewa', 'id': '469219', 'var': kamooalewa_var, 'color': color_map('Kamo oalewa'), 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': 'Kamo oalewa', 'id': '2016 HO3', 'var': kamooalewa_var, 'color': color_map('Kamo oalewa'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2032, 12, 31), 
     # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-04. PREDICTS-> 2025-SEP-29
-    'mission_info': 'Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.', 
+    'mission_info': 'Horizons: 2016 HO3. Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.', 
     'mission_url': 'https://www.jpl.nasa.gov/news/small-asteroid-is-earths-constant-companion/'},
 
     {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 8-9-2024. Retrograde (left-handed) orbit.',
+    'mission_info': 'Horizons: 2024 PT5. Closest approach to Earth 8-9-2024.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
 
     {'name': '2025 PY1', 'id': '2025 PY1', 'var': py1_var, 'color': color_map('2025 PY1'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
 #    'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Near-Earth asteroid.',
+    'mission_info': 'Horizons: 2025 PY1. Near-Earth asteroid.',
     'mission_url': 'https://www.jpl.nasa.gov/asteroid-watch/next-five-approaches/'},    
 
-    {'name': '2023 JF', 'id': '50587237', 'var': asteroid2023jf_var, 'color': color_map('2023 JF'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': '2023 JF', 'id': '2023 JF', 'var': asteroid2023jf_var, 'color': color_map('2023 JF'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 'start_date': datetime(1962, 1, 20), 'end_date': datetime(2025, 10, 4),
     # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-09. PREDICTS-> 2025-OCT-04
-    'mission_info': 'Asteroid 2023 JF flew past Earth on May 9, 2023.', 
+    'mission_info': 'Horizons: 2023 JF. Asteroid 2023 JF flew past Earth on May 9, 2023.', 
     'mission_url': 'https://www.nasa.gov/solar-system/near-earth-object-observations-program/#:~:text=The%20NEO%20Observations%20Program%20sponsors,the%20sky%20to%20determine%20their'},
 
-    {'name': '2024 DW', 'id': '50613029', 'var': asteroid_dw_var, 'color': color_map('2024 DW'), 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': '2024 DW', 'id': '2024 DW', 'var': asteroid_dw_var, 'color': color_map('2024 DW'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 2, 19), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 2-22-2024 approximately 5 UTC. Keplerian orbit perturbation from Jupiter. Retrograde (left-handed) orbit.',
+    'mission_info': 'Horizons: 2024 DW. Closest approach to Earth 2-22-2024 approximately 5 UTC. Keplerian orbit perturbation from Jupiter.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20DW'},
 
     {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 12, 24), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC. Retrograde (left-handed) orbit.',
+    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
 
     # Main Belt Asteroids
-    {'name': 'Apophis', 'id': '99942', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': 'Apophis', 'id': '2004 MN4', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
-    'mission_info': 'A near-Earth asteroid that will make a close approach in 2029. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029.', 
     'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
 
-    {'name': 'Bennu', 'id': '101955', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Bennu', 'id': '1999 RQ36', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
+    'mission_info': 'Horizons: 1999 RQ36. Studied by NASA\'s OSIRIS-REx mission.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
 
     {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -2369,77 +2462,77 @@ objects = [
     'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
 
-    {'name': 'Eros', 'id': '433', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Eros', 'id': 'A898 PA', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: A898 PA. First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
 
-    {'name': 'Dinkinesh', 'id': '152830', 'var': dinkinesh_var, 'color': color_map('Dinkinesh'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Dinkinesh', 'id': '1999 VD57', 'var': dinkinesh_var, 'color': color_map('Dinkinesh'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Dinkinesh was visited by the mission Lucy.', 
+    'mission_info': 'Horizons: 1999 VD57. Dinkinesh was visited by the mission Lucy.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/dinkinesh/'},
 
-    {'name': 'Itokawa', 'id': '25143', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Itokawa', 'id': '1998 SF36', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
+    'mission_info': 'Horizons: 1998 SF36. First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
     'mission_url': 'https://en.wikipedia.org/wiki/25143_Itokawa'},
 
-    {'name': 'Lutetia', 'id': '21', 'var': lutetia_var, 'color': color_map('Lutetia'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Lutetia', 'id': 'A852 VA', 'var': lutetia_var, 'color': color_map('Lutetia'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Studied by European Space Agency\'s Rosetta mission.', 
+    'mission_info': 'Horizons: A852 VA. Studied by European Space Agency\'s Rosetta mission.', 
     'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
 
-    {'name': 'Ryugu', 'id': '162173', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Ryugu', 'id': '1999 JU3', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 1999 JU3. Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
     'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
 
-    {'name': 'Šteins', 'id': '2867', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Šteins', 'id': '1969 VC', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'object_type': 'orbital', 
      'id_type': 'smallbody',
-     'mission_info': 'Visited by European Space Agency\'s Rosetta spacecraft.', 
+     'mission_info': 'Horizons: 1969 VC. Visited by European Space Agency\'s Rosetta spacecraft.', 
      'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
 
-    {'name': 'Donaldjohanson', 'id': '52246', 'var': donaldjohanson_var, 'color': color_map('Donaldjohanson'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Donaldjohanson', 'id': '1981 EQ5', 'var': donaldjohanson_var, 'color': color_map('Donaldjohanson'), 'symbol': 'circle-open', 'object_type': 'orbital', 
      'id_type': 'smallbody',
-     'mission_info': 'Visited by the NASA Lucy spacecraft. Retrograde (left-handed) orbit.', 
+     'mission_info': 'Horizons: 1981 EQ5. Visited by the NASA Lucy spacecraft.', 
      'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
 
-    {'name': 'Vesta', 'id': '4', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Vesta', 'id': 'A807 FA', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
+    'mission_info': 'Horizons: A807 FA. One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
     'mission_url': 'https://dawn.jpl.nasa.gov/'},
 
     # Trojan Asteroids
-    {'name': 'Eurybates', 'id': '3548', 'var': eurybates_var, 'color': color_map('Eurybates'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Eurybates', 'id': '1973 SO', 'var': eurybates_var, 'color': color_map('Eurybates'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_info': 'Horizons: 1973 SO. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://www.nasa.gov/missions/hide-and-seek-how-nasas-lucy-mission-team-discovered-eurybates-satellite/'},
 
-    {'name': 'Patroclus', 'id': '617', 'var': patroclus_var, 'color': color_map('Patroclus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Patroclus', 'id': 'A906 UL', 'var': patroclus_var, 'color': color_map('Patroclus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_info': 'Horizons: A906 UL. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Patroclus.html'},
 
-    {'name': 'Polymele', 'id': '15094', 'var': polymele_var, 'color': color_map('Polymele'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Polymele', 'id': '1999 WB2', 'var': polymele_var, 'color': color_map('Polymele'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_info': 'Horizons: 1999 WB2. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Polymele.html'},
 
-    {'name': 'Leucus', 'id': '11351', 'var': leucus_var, 'color': color_map('Leucus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Leucus', 'id': '1997 TS25', 'var': leucus_var, 'color': color_map('Leucus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_info': 'Horizons: 1997 TS25. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Leucus.html'},
 
-    {'name': 'Orus', 'id': '21900', 'var': orus_var, 'color': color_map('Orus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Orus', 'id': '1999 VQ10', 'var': orus_var, 'color': color_map('Orus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'mission_info': 'Horizons: 1999 VQ10. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
     'mission_url': 'https://lucy.swri.edu/Orus.html'},
 
     # Kuiper Belt Objects or Trans-Neptunian Objects (TNOs)
 
-    {'name': 'Arrokoth', 'id': '486958', 'var': arrokoth_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Arrokoth', 'id': '2014 MU69', 'var': arrokoth_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Arrokoth (2014 MU69) flyby from New Horizons on January 1, 2019.', 
+    'mission_info': 'Horizons: 2014 MU69. Arrokoth flyby from New Horizons on January 1, 2019.', 
     'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
 
     {'name': 'Arrokoth/New_Horizons', 'id': '2486958', 'var': arrokoth_new_horizons_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'object_type': 'trajectory', 
@@ -2449,70 +2542,70 @@ objects = [
 
     {'name': 'Ixion', 'id': '2001 KX76', 'var': ixion_var, 'color': color_map('Ixion'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A large Kuiper Belt object without a known moon.', 
+    'mission_info': 'Horizons: 2001 KX76. A large Kuiper Belt object without a known moon.', 
     'mission_url': 'https://en.wikipedia.org/wiki/28978_Ixion'},
 
     {'name': 'GV9', 'id': '2004 GV9', 'var': gv9_var, 'color': color_map('GV9'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A binary Kuiper Belt Object providing precise mass measurements through its moon. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon.', 
     'mission_url': 'https://en.wikipedia.org/wiki/(90568)_2004_GV9'},
 
-    {'name': 'Varuna', 'id': '20000', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Varuna', 'id': '2000 WR106', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'A significant Kuiper Belt Object with a rapid rotation period.', 
+    'mission_info': 'Horizons: 2000 WR106. A significant Kuiper Belt Object with a rapid rotation period.', 
     'mission_url': 'https://en.wikipedia.org/wiki/20000_Varuna'},
 
     {'name': 'Ammonite', 'id': '2023 KQ14', 'var': ammonite_var, 'color': color_map('Ammonite'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     # 136199 primary (required for Sun centered plots)
     'id_type': 'smallbody', 
-    'mission_info': '2023 KQ14 and nicknamed "Ammonite," is classified as a "sednoid."', 
+    'mission_info': 'Horizons: 2023 KQ14. Ammonite is classified as a sednoid, after Sedna.', 
     'mission_url': 'https://en.wikipedia.org/wiki/2023_KQ14'},     
 
     # Comets
 
-    {'name': 'ATLAS', 'id': 'DES=C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'diamond', 
+    {'name': 'ATLAS', 'id': 'C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2024, 6, 18), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
+    'mission_info': 'Horizons: C/2024 G3. Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/'},
 
-    {'name': 'Churyumov', 'id': '90000704', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 67P/Churyumov-Gerasimenko
+    {'name': 'Churyumov', 'id': '90000699', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 67P/Churyumov-Gerasimenko
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
-    # data arc: 2008-06-01 to 2023-04-26; Epoch: 2015-Oct-10
-    'mission_info': '67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft, August 2014 through September 2016.', 
+    # data arc: 2008-06-01 to 2023-04-26; Epoch: 2015-Oct-10; 67P; previously rec 90000704; record number needed to fetch Horizons data.
+    'mission_info': 'Horizons: 67P. 67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft, August 2014 through September 2016.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
 
     {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1993, 4, 27), 'end_date': datetime(2022, 7, 9),
     # data arc: 1993-04-27 to 2022-07-09 
-    'mission_info': 'Visible to the naked eye for a record 18 months. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/1995 O1. Visible to the naked eye for a record 18 months.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
 
-    {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'diamond', 
+    {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(1994, 1, 11), 
-    # data arc: 1835-08-21 to 1994-01-11
-    'mission_info': 'Most famous comet, returned in 1986 and will return in 2061.', 
+    # data arc: 1835-08-21 to 1994-01-11; 1P/Halley requires the record number to fetch position data for the 1986 apparition.
+    'mission_info': 'Horizons: 1P/Halley. Most famous comet, returned in 1986 and will return in 2061. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/halley-1986'},
 
     {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1996, 1, 2), 'end_date': datetime(1996, 11, 1),
     # data arc: 1996-01-01 to 1996-11-02 
-    'mission_info': 'Passed very close to Earth in 1996. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/1996 B2. Passed very close to Earth in 1996. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
 
     {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
-    'mission_info': 'One of the brightest comets of the 20th century. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/1965 S1-A. One of the brightest comets of the 20th century. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/ikeya-seki-1965'},
 
-    {'name': 'NEOWISE', 'id': '90004587', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'diamond', # C/2020 F3
+    {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'diamond', # C/2020 F3
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
-    'mission_info': 'Brightest comet visible from the Northern Hemisphere in decades. Apparition C/2020 F3', 
+    'mission_info': 'Horizons: C/2020 F3. Brightest comet visible from the Northern Hemisphere in decades. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
 
     {'name': 'Tsuchinshan', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2023, 1, 10), 
     'end_date': datetime(2030, 12, 31), 
-    'mission_info': 'Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
+    'mission_info': 'Horizons: C/2023 A3. Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
     'mission_url': 'https://en.wikipedia.org/wiki/C/2023_A3_(Tsuchinshan-ATLAS)'},
 
 # Interstellar and hyperbolic objects
@@ -2520,20 +2613,20 @@ objects = [
 
     {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
-    'mission_info': 'Notable for its bright and impressive tail.', 
+    'mission_info': 'Horizons: C/1975 V1. Notable for its bright and impressive tail.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
     {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2007, 7, 10), 
     # data arc: 2006-08-07 to 2007-07-11
-    'mission_info': 'Known as the Great Comet of 2007. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/2006 P1. Known as the Great Comet of 2007. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/'},     
 
     {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var': comet_2025k1_var, 'color': color_map('C/2025_K1'), 'symbol': 'diamond', 
     # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
     'object_type': 'trajectory', 'id_type': 'smallbody', 
     # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-    'mission_info': 'A notable comet for observation in late 2025.', 
+    'mission_info': 'Horizons: C/2025 K1. A notable comet for observation in late 2025. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://theskylive.com/c2025k1-info'}, 
 
 # Hyperbolic and interstellar
@@ -2541,13 +2634,13 @@ objects = [
     {'name': '1I/Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('1I/Oumuamua'), 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1),
     # data arc from 2017 October 14 to 2018 January 2 
-    'mission_info': 'First known interstellar object detected passing through the Solar System.', 
+    'mission_info': 'Horizons: A/2017 U1. First known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
 
     {'name': '2I/Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('2I/Borisov'), 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 2, 25), 'end_date': datetime(2020, 9, 29), 
     # data arc: 2019-02-24 to 2020-09-30
-    'mission_info': 'The second interstellar object detected, after \'1I/Oumuamua. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/2019 Q4. The second interstellar object detected, after \'1I/Oumuamua.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
 
     {'name': '3I/ATLAS', 'id': 'C/2025 N1', 'var': atlas3i_var, 'color': color_map('3I/ATLAS'), 'symbol': 'diamond', 
@@ -2555,7 +2648,7 @@ objects = [
     'object_type': 'trajectory', 'id_type': 'smallbody', 
     # 'start_date': datetime(2025, 5, 22), 'end_date': datetime(2032, 12, 31),
     # data arc: 2025-05-22 to now 
-    'mission_info': 'Third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/2025 N1. Third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
 
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
@@ -2692,200 +2785,200 @@ objects = [
     # Mars' Moons
     {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Mars orbital period: 0.32 Earth days.', 
+     'mission_info': 'Horizons: 401. Mars orbital period: 0.32 Earth days.', 
      'mission_url': 'https://science.nasa.gov/resource/martian-moon-phobos/'},
 
     {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Mars orbital period: 1.26 Earth days. Retrogade.', 
+     'mission_info': 'Horizons: 402. Mars orbital period: 1.26 Earth days. Retrogade.', 
      'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
 
 # Jupiter's Inner Ring Moons (Amalthea Group)
     {'name': 'Metis', 'id': '516', 'var': metis_var, 'color': color_map('Metis'), 'symbol': 'circle', 'object_type': 'satellite',
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 0.295 Earth days (7.08 hours).', 
+     'mission_info': 'Horizons: 516. Jupiter orbital period: 0.295 Earth days (7.08 hours).', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
 
     {'name': 'Adrastea', 'id': '515', 'var': adrastea_var, 'color': color_map('Adrastea'), 'symbol': 'circle', 'object_type': 'satellite',
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 0.298 Earth days (7.15 hours).', 
+     'mission_info': 'Horizons: 515. Jupiter orbital period: 0.298 Earth days (7.15 hours).', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
 
     {'name': 'Amalthea', 'id': '505', 'var': amalthea_var, 'color': color_map('Amalthea'), 'symbol': 'circle', 'object_type': 'satellite',
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 0.498 Earth days (11.95 hours).', 
+     'mission_info': 'Horizons: 505. Jupiter orbital period: 0.498 Earth days (11.95 hours).', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
 
     {'name': 'Thebe', 'id': '514', 'var': thebe_var, 'color': color_map('Thebe'), 'symbol': 'circle', 'object_type': 'satellite',
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 0.675 Earth days (16.20 hours).', 
+     'mission_info': 'Horizons: 514. Jupiter orbital period: 0.675 Earth days (16.20 hours).', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
 
     # Jupiter's Galilean Moons
     {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'object_type': 'satellite', # instead of 501 use 59901?
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 1.77 Earth days.', 
+     'mission_info': 'Horizons: 501. Jupiter orbital period: 1.77 Earth days.', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/io/'},
 
     {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'object_type': 'satellite',  # instead of id 502 use 59902?
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 3.55 Earth days.', 
+     'mission_info': 'Horizons: 502. Jupiter orbital period: 3.55 Earth days.', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/europa/'},
 
     {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'object_type': 'satellite', # instead of 503 use 59903?
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 7.15 Earth days.', 
+     'mission_info': 'Horizons: 503. Jupiter orbital period: 7.15 Earth days.', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/ganymede/'},
 
     {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'object_type': 'satellite', # instead of 504 use 59904?
      'id_type': None, 
-     'mission_info': 'Jupiter orbital period: 16.69 Earth days.', 
+     'mission_info': 'Horizons: 504. Jupiter orbital period: 16.69 Earth days.', 
      'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
 
     # Saturn's Major Moons
 
     {'name': 'Pan', 'id': '618', 'var': pan_var, 'color': color_map('Pan'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 0.58 Earth days.', 
+     'mission_info': 'Horizons: 618. Saturn orbital period: 0.58 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/pan/'},
 
     {'name': 'Daphnis', 'id': '635', 'var': daphnis_var, 'color': color_map('Daphnis'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 0.58 Earth days. No Horizons ephemeris after 1-16-2018.', 
+     'mission_info': 'Horizons: 635. Saturn orbital period: 0.58 Earth days. No Horizons ephemeris after 1-16-2018.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/daphnis/'},
 
     {'name': 'Prometheus', 'id': '616', 'var': prometheus_var, 'color': color_map('Prometheus'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 0.61 Earth days.', 
+     'mission_info': 'Horizons: 616. Saturn orbital period: 0.61 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/prometheus/'},
 
     {'name': 'Pandora', 'id': '617', 'var': pandora_var, 'color': color_map('Pandora'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 0.63 Earth days.', 
+     'mission_info': 'Horizons: 617. Saturn orbital period: 0.63 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/pandora/'},
 
     {'name': 'Mimas', 'id': '601', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 0.94 Earth days.', 
+     'mission_info': 'Horizons: 601. Saturn orbital period: 0.94 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/mimas/'},
 
     {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 1.37 Earth days.', 
+     'mission_info': 'Horizons: 602. Saturn orbital period: 1.37 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/enceladus/'},
 
     {'name': 'Tethys', 'id': '603', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 1.89 Earth days. Retrograde (left-handed) orbit.', 
+     'mission_info': 'Horizons 603. Saturn orbital period: 1.89 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/tethys/'},
 
     {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 2.74 Earth days.', 
+     'mission_info': 'Horizons: 604. Saturn orbital period: 2.74 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/dione/'},
 
     {'name': 'Rhea', 'id': '605', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 4.52 Earth days.', 
+     'mission_info': 'Horizons: 605. Saturn orbital period: 4.52 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/rhea/'},
 
     {'name': 'Titan', 'id': '606', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 15.95 Earth days.', 
+     'mission_info': 'Horizons: 606. Saturn orbital period: 15.95 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/titan/'},
 
     {'name': 'Hyperion', 'id': '607', 'var': hyperion_var, 'color': color_map('Hyperion'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 21 Earth days.', 
+     'mission_info': 'Horizons: 607. Saturn orbital period: 21 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/hyperion/'},
 
     {'name': 'Iapetus', 'id': '608', 'var': iapetus_var, 'color': color_map('Iapetus'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 79.33 Earth days.', 
+     'mission_info': 'Horizons: 608. Saturn orbital period: 79.33 Earth days.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/iapetus/'},
 
     {'name': 'Phoebe', 'id': '609', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Saturn orbital period: 550.56 Earth days. Retrograde (left-handed) orbit.', 
+     'mission_info': 'Horizons: 609. Saturn orbital period: 550.56 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/saturn/moons/phoebe/'},
 
     # Uranus's Major Moons
 
     {'name': 'Ariel', 'id': '701', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 2.52 Earth days.', 
+     'mission_info': 'Horizons: 701. Uranus orbital period: 2.52 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/ariel/'},
 
     {'name': 'Umbriel', 'id': '702', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 4.14 Earth days. Retrograde (left-handed) orbit.', 
+     'mission_info': 'Horizons: 702. Uranus orbital period: 4.14 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/umbriel/'},
 
     {'name': 'Titania', 'id': '703', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 8.71 Earth days.', 
+     'mission_info': 'Horizons: 703. Uranus orbital period: 8.71 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/titania/'},
 
     {'name': 'Oberon', 'id': '704', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 13.46 Earth days.', 
+     'mission_info': 'Horizons: 704. Uranus orbital period: 13.46 Earth days.', 
      'mission_url': 'https://science.nasa.gov/uranus/moons/oberon/'},
 
     {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 1.41 Earth days.',
+     'mission_info': 'Horizons: 705. Uranus orbital period: 1.41 Earth days.',
      'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},   
 
     {'name': 'Portia', 'id': '712', 'var': portia_var, 'color': color_map('Portia'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 0.513196 Earth days or 12.317 hours.',
+     'mission_info': 'Horizons: 712. Uranus orbital period: 0.513196 Earth days or 12.317 hours.',
      'mission_url': 'https://science.nasa.gov/uranus/moons/portia/'}, 
 
     {'name': 'Mab', 'id': '726', 'var': mab_var, 'color': color_map('Mab'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Uranus orbital period: 0.923293 Earth days or 22.159 hours. Retrograde (left-handed) orbit.',
+     'mission_info': 'Horizons: 726. Uranus orbital period: 0.923293 Earth days or 22.159 hours.',
      'mission_url': 'https://science.nasa.gov/uranus/moons/mab/'},             
 
     # Neptune's Major Moons
     {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Neptune orbital period: 5.88 Earth days.', 
+     'mission_info': 'Horizons: 801. Neptune orbital period: 5.88 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/neptune/moons/triton/'},
 
     {'name': 'Despina', 'id': '805', 'var': despina_var, 'color': color_map('Despina'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Neptune orbital period: 0.334656 Earth days.', 
+     'mission_info': 'Horizons: 805. Neptune orbital period: 0.334656 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/neptune/moons/despina/'},
 
     {'name': 'Galatea', 'id': '806', 'var': galatea_var, 'color': color_map('Galatea'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Neptune orbital period: 0.428744 Earth days.', 
+     'mission_info': 'Horizons: 806. Neptune orbital period: 0.428744 Earth days. Retrograde (left-handed) orbit.', 
      'mission_url': 'https://science.nasa.gov/neptune/moons/galatea/'},
 
     # Pluto's Moon
     {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Pluto orbital period: 6.39 Earth days.', 
+     'mission_info': 'Horizons: 901. Pluto orbital period: 6.39 Earth days.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/charon/'},
 
     {'name': 'Styx', 'id': '905', 'var': styx_var, 'color': color_map('Styx'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Pluto orbital period: 20.16 Earth days.', 
+     'mission_info': 'Horizons: 905. Pluto orbital period: 20.16 Earth days.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/styx/'},     
 
     {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Pluto orbital period: 24.86 Earth days.', 
+     'mission_info': 'Horizons: 902. Pluto orbital period: 24.86 Earth days.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/nix/'},
 
     {'name': 'Kerberos', 'id': '904', 'var': kerberos_var, 'color': color_map('Kerberos'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Pluto orbital period: 32.17 Earth days. Retrograde (left-handed) orbit.', 
+     'mission_info': 'Horizons: 904. Pluto orbital period: 32.17 Earth days.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/kerberos/'},
 
     {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': None, 
-     'mission_info': 'Pluto orbital period: 38.20 Earth days.', 
+     'mission_info': 'Horizons: 903. Pluto orbital period: 38.20 Earth days.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/'},
 
     # Eris's Moon
@@ -3891,10 +3984,27 @@ def plot_objects():
                         print(f"  Last date: {dates_list[-1]}")
                         # ========================================
 
-                    elif obj_type == 'fixed':
-                        if obj['name'] == 'Sun' and center_object_name == 'Sun':
+                #    elif obj_type == 'fixed':
+                #        if obj['name'] == 'Sun' and center_object_name == 'Sun':
                             # Sun at origin doesn't need trajectory
+                #            dates_list = [date_obj]
+
+                    elif obj_type == 'fixed':
+                        if obj['name'] == 'Sun':
+                            if center_object_name != 'Sun':
+                                # Sun needs trajectory when viewed from another center (e.g., Earth)
+                                requested_days = settings['days_to_plot']
+                                num_points = int(orbital_points) + 1
+                                dates_list = [date_obj + timedelta(days=float(d)) 
+                                            for d in np.linspace(0, requested_days, num=num_points)]
+                                print(f"Sun needs trajectory relative to {center_object_name}")
+                            else:
+                                # Sun at origin doesn't need trajectory
+                                dates_list = [date_obj]
+                        else:
+                            # Other fixed objects only need single date
                             dates_list = [date_obj]
+                            print(f"Fixed object {obj['name']}: single date point")
 
                     elif obj_type == 'lagrange_point':
                         # Lagrange points need dates to show their co-orbital motion
@@ -4543,11 +4653,28 @@ def animate_objects(step, label):
                         # Lagrange points use animation dates
                         dates_lists[obj['name']] = dates_list
                         
-                    elif obj_type == 'fixed':
+                #    elif obj_type == 'fixed':
                         # Fixed objects only need current frame date
                         # This will be handled frame-by-frame
-                        dates_lists[obj['name']] = dates_list
+                #        dates_lists[obj['name']] = dates_list
                         
+                    elif obj_type == 'fixed':
+                        if obj['name'] == 'Sun':
+                            if center_object_name != 'Sun':
+                                # Sun needs trajectory when viewed from another center
+                                # Use the animation dates_list that was already created
+                                dates_lists[obj['name']] = dates_list  # dates_list should be defined by now
+                                print(f"Sun will be animated relative to {center_object_name}")
+                            else:
+                                # Sun at center doesn't need animation
+                                # But still needs a dates list for frame generation
+                                dates_lists[obj['name']] = [dates_list[0]] if dates_list else [current_date]
+                        else:
+                            # Other fixed objects
+                            # Use single date repeated for each frame, or full dates_list
+                            dates_lists[obj['name']] = dates_list if dates_list else [current_date]
+                            print(f"Fixed object {obj['name']} using animation dates")
+
                     else:
                         # Default: use animation dates
                         print(f"WARNING: Unknown object type '{obj_type}' for {obj['name']}")
@@ -5992,7 +6119,7 @@ create_celestial_checkbutton("- Hydra", hydra_var)  # params
 create_celestial_checkbutton("Orcus", orcus_var) # params
 create_celestial_checkbutton("Ixion", ixion_var)    # params
 create_celestial_checkbutton("Mani", ms4_var)   # params
-create_celestial_checkbutton("2004 GV9", gv9_var)   # params
+create_celestial_checkbutton("GV9", gv9_var)   # params
 create_celestial_checkbutton("Varuna", varuna_var)  # params
 create_celestial_checkbutton("Haumea", haumea_var)  # params
 create_celestial_checkbutton("Quaoar", quaoar_var)  # params

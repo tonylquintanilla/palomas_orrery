@@ -600,7 +600,7 @@ def color_map(planet):
 # Dictionary mapping celestial object names to their descriptions
 INFO = {
 # Celestial objects
-        'Sun': 'The star at the center of our solar system. To display structure and atmosphere select "Solar Shells".\n\n'
+        'Sun': 'Horizons: 10. The star at the center of our solar system. To display structure and atmosphere select "Solar Shells".\n\n'
         '* Missions:\n' 
         '  * Pioneer 5 (NASA/DOD, 1960): Measured magnetic field phenomena, solar flare particles, and ionization.\n' 
         '  * Helios 1 & 2 (DFVLR/NASA, 1974 & 1976): Studied solar wind, magnetic and electric fields, cosmic rays, and dust.\n' 
@@ -620,23 +620,23 @@ INFO = {
 
         'Solar Shells': 'Solar structure and atmosphere, Oort cloud, and gravitational reach.',
 
-        'Mercury': 'The smallest planet and closest to the Sun.\n' 
+        'Mercury': 'Horizons: 199. The smallest planet and closest to the Sun.\n' 
         '* Mercury-centered: do not select Mercury; visualize shells at manual scale 0.002 AU.\n' 
         '* Heliocentric: select Mercury with or without shells.\n' 
         '* Missions: Mariner 10, Messenger, BepiColombo',
 
-        'Venus': 'Second planet from the Sun, known for its thick atmosphere.\n' 
+        'Venus': 'Horizons: 299. Second planet from the Sun, known for its thick atmosphere.\n' 
         '* Venus-centered: do not select Venus; visualize shells at 0.01 AU.\n'
         '* Heliocentric: select Venus with or without shells.\n'  
         '* Missions: Venera (USSR); Mariner 2, 5, 10; Pioneer Venus Project, Vega (USSR), Magellan, Galileo, Cassini-Huygens,\n' 
         '  Venus Express, MESSENGER, Akatsuki, Parker Solar Probe, BepiColombo, DAVINCI, VERITAS, EnVision, Shukrayaan-1, Solar Orbiter.',
 
-        'Earth': 'Our home planet, the third from the Sun.\n' 
+        'Earth': 'Horizons: 399. Our home planet, the third from the Sun.\n' 
         '* Earth-centered: do not select Earth; visualize shells at 0.02 AU.\n'
         '* Heliocentric: select Earth with or without shells.\n'
         '* Missions: Galileo, Cassini-Huygens, Rosetta, New Horizons, JUNO, Parker Solar Probe, Deep Impact, NEAR Shoemaker, Solar Orbiter.',
 
-        'Moon': 'Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145° to the ecliptic plane, ' 
+        'Moon': 'Horizons: 301. Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145° to the ecliptic plane, ' 
         'but approximately 28.545° to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4°). '
         'The Moon\'s orbital parameters are not fixed but vary significantly over time due to precession of the nodes, ' 
         'perturbations from the Sun\'s gravity, Earth\'s non-spherical shape, and other gravitational influences.\n\n' 
@@ -673,7 +673,7 @@ INFO = {
         '  * Beresheet2 (Israel): Planned private lunar mission.\n' 
         '  * Lunar Gateway: A planned international space station in lunar orbit, supporting future human missions.',
 
-        'Kamo oalewa': 'Asteroid Kamo\'oalewa (469219 / 2016 HO3) is a near-Earth asteroid that has garnered significant scientific interest.\n' 
+        'Kamo oalewa': 'Horizons: 2016 HO3. Asteroid Kamo\'oalewa (469219 / 2016 HO3) is a near-Earth asteroid that has garnered significant scientific interest.\n' 
         '* Classification and Orbit: Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects. \n' 
         '  What makes it particularly unique is its status as Earth\'s best and most stable "quasi-satellite." This means it orbits the \n' 
         '  Sun with parameters very similar to Earth\'s, appearing to "dance" around our planet in a looping, oscillating path. While it\'s \n' 
@@ -693,7 +693,7 @@ INFO = {
         '  samples will be crucial in determining Kamo\'oalewa\'s true origin (e.g., lunar fragment or main-belt asteroid) and providing \n' 
         '  insights into the early solar system',
 
-        '2024 PT5': 'In late September 2024, Earth temporarily captured a small asteroid into its orbit, leading to it being ' 
+        '2024 PT5': 'Horizons: 2024 PT5. In late September 2024, Earth temporarily captured a small asteroid into its orbit, leading to it being ' 
         'dubbed Earth\'s "second moon". The object\'s official designation is 2024 PT5, but it was also referred to as a ' 
         '"mini-moon" due to its small size. Retrograde (left-handed) orbit. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
         'small compared to our permanent Moon.\n* Origin: It belongs to the Arjuna asteroid belt, a group of asteroids that ' 
@@ -705,9 +705,9 @@ INFO = {
         'opportunity to study near-Earth objects and learn more about the dynamics of our solar system.\n* Plot 2024 PT5 with' 
         'Earth as the center to see its close approach and also with the Sun as the center to see its orbit near Earth\'s.',
 
-        '2025 PY1': 'Near-Earth asteroid.',
+        '2025 PY1': 'Horizons: 2025 PY1. Near-Earth asteroid.',
 
-        '2023 JF': 'Asteroid 2023 JF is a small near-Earth asteroid that made a close approach to Earth in May 2023. Here\'s a \n' 
+        '2023 JF': 'Horizons: 2023 JF. Asteroid 2023 JF is a small near-Earth asteroid that made a close approach to Earth in May 2023. Here\'s a \n' 
         'breakdown:\n' 
         '* Size: It\'s estimated to be about 34 feet (10 meters) wide, roughly the size of a bus.\n' 
         '* Classification: It\'s classified as a "Near Earth Asteroid" due to its orbit\'s proximity to Earth.\n' 
@@ -725,7 +725,7 @@ INFO = {
         'and other space agencies continuously monitor Near-Earth Objects (NEOs) to track their movements and assess any potential impact \n' 
         'risks.',
 
-        '2024 YR4': '2024 YR4 is an asteroid that poses a potential risk to Earth, with a probability of nearly zero. Retrograde (left-handed) orbit.\n' 
+        '2024 YR4': 'Horizons: 2024 YR4. 2024 YR4 is an asteroid that poses a potential risk to Earth, with a probability of nearly zero. Retrograde (left-handed) orbit.\n' 
         '* It was discovered on December 27, 2024, with a close approach on December 25, 4:46 UTC at a distance of about 822,000 km.\n' 
         '* It is estimated to be between 40 and 100 meters wide.\n' 
         '* It\'s next close approach is on December 17, 2028, 12:16 UTC at a distance from Earth\'s surface of about 8,007,000 km, ' 
@@ -743,7 +743,7 @@ INFO = {
         'Dec. 22, 2032, has moved farther away from the Earth. There still remains a very small chance for asteroid 2024 YR4 to ' 
         'impact the Moon on Dec. 22, 2032. That probability is currently 1.7%."',
 
-        '2024 DW': 'Close Flyby: Asteroid 2024 DW made a close approach to Earth on February 22, 2024. It passed within approximately ' 
+        '2024 DW': 'Horizons: 2024 DW. Close Flyby: Asteroid 2024 DW made a close approach to Earth on February 22, 2024. It passed within approximately ' 
         '225,000 kilometers of Earth, which is closer than the Moon\'s average distance. Retrograde (left-handed) orbit.\n' 
         '* Size: It\'s estimated to be about the size of a bus, roughly 13 meters in diameter.\n' 
         '* Safety: Despite its close proximity, it was determined that 2024 DW did not pose a threat to Earth.\n' 
@@ -753,7 +753,7 @@ INFO = {
         'In essence, 2024 DW was a relatively small asteroid that had a close encounter with Earth, providing astronomers with an ' 
         'opportunity to study near-Earth objects.',
 
-        'EM-L1': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L1; 3011; Earth-Moon Lagrange 1\n' 
+        'EM-L1': 'Horizons: 3011. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L1; 3011; Earth-Moon Lagrange 1\n' 
         '#1) The Earth-Moon Lagrange-1 point (EM-L1) is an equilibirium location where the Moon\'s gravitational field partially \n' 
         '    counters that of the Earth.\n' 
         '#2) This point is between the Earth and Moon, about 84.907% of the distance from the Earth\'s center in the direction of \n' 
@@ -762,7 +762,7 @@ INFO = {
         '#3) EM-L1 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
         '    whereupon it will move away.  In practice, there will always be some disturbance.',
 
-        'EM-L2': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L2; 3012; Earth-Moon Lagrange 2\n' 
+        'EM-L2': 'Horizons: 3012. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L2; 3012; Earth-Moon Lagrange 2\n' 
         '#1) The Earth-Moon Lagrange-2 point (EM-L2) is an equilibirium location where the Moon\'s gravitational field partially \n' 
         '    counters that of the Earth.\n' 
         '#2) This point is past the Moon on the Earth-Moon line, about 116.783% of the EM distance (416300 to 475000 km from Earth \n' 
@@ -771,13 +771,13 @@ INFO = {
         '#3) EM-L2 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
         '    whereupon it will move away.  In practice, there will always be some disturbance.', 
 
-        'EM-L3': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L3; 3013; Earth-Moon Lagrange 3\n' 
+        'EM-L3': 'Horizons: 3013. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L3; 3013; Earth-Moon Lagrange 3\n' 
         '#1) The Earth-Moon Lagrange-3 point (EM-L3) is an equilibirium location where the Moon\'s gravitational field partially \n' 
         '    counters that of the Earth.\n'  
         '#3) EM-L3 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
         '    whereupon it will move away.  In practice, there will always be some disturbance.', 
 
-        'EM-L4': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L4; 3014; Earth-Moon Lagrange 4\n' 
+        'EM-L4': 'Horizons: 3014. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L4; 3014; Earth-Moon Lagrange 4\n' 
         '#1) The Earth-Moon Lagrange-4 point (EM-L4) is a location where the Moon\'s gravitational field partially counters that of \n' 
         '    the Earth. EM-L4 is one of the stable "Trojan" points (along with EM-L5). Small perturbations can displace an object \n' 
         '    from EM-L4, but it can return to the stable point.\n' 
@@ -785,7 +785,7 @@ INFO = {
         '    distance from the Earth and from the Moon (straight-lines), so 356000 to 407000 km, averaging 385000 km from Earth and \n' 
         '    Moon centers, forming the apex of an equilateral triangle, with the Earth and Moon defining the base-line.',
 
-        'EM-L5': 'From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L5; 3014; Earth-Moon Lagrange 5\n' 
+        'EM-L5': 'Horizons: 3015. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L5; 3014; Earth-Moon Lagrange 5\n' 
         '#1) The Earth-Moon Lagrange-5 point (EM-L5) is a location where the Moon\'s gravitational field partially counters that of \n' 
         '    the Earth. EM-L5 is one of the stable "Trojan" points (along with EM-L4). Small perturbations can displace an object \n' 
         '    from EM-L4, but it can return to the stable point.\n' 
@@ -793,7 +793,7 @@ INFO = {
         '    distance from the Earth and from the Moon (straight-lines), so 356000 to 407000 km, averaging 385000 km from Earth and \n' 
         '    Moon centers, forming the apex of an equilateral triangle, with the Earth and Moon defining the base-line.',
 
-        'L1': 'From JPL Horizons ephemeris: Revised: Aug 29, 2013; SEMB-L1; 31; Sun & Earth-Moon Barycenter Lagrange 1\n' 
+        'L1': 'Horizons: 31. From JPL Horizons ephemeris: Revised: Aug 29, 2013; SEMB-L1; 31; Sun & Earth-Moon Barycenter Lagrange 1\n' 
         '#1) The Sun & Earth-Moon Barycenter Lagrange-1 point (SEMB-L1) is a location where the Earth\'s gravitational field partially \n' 
         '    counters that of the Sun.\n' 
         '#2) This L1 point is about 1.5 million km (~900,000 miles) away from the Earth in the direction of the Sun, or slightly less than \n' 
@@ -807,7 +807,7 @@ INFO = {
         '* SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the line between the Sun and the EMB.\n' 
         '* For the unstable L1, L2, L3 points, they are more like moving "targets" that a spacecraft must constantly adjust to stay near.', 
 
-        'L2': 'Sun-Earth-Moon Barycenter Lagrange point 2. From JPL Horizons:\n' 
+        'L2': 'Horizons: 32. Sun-Earth-Moon Barycenter Lagrange point 2. From JPL Horizons:\n' 
         '#1) The Sun & Earth-Moon Barycenter Lagrange-2 (L2) point is a location where the Earth\'s gravitational field partially \n' 
         '    counters that of the Sun.\n' 
         '#2) This L2 point is about 1.5 million km (~900,000 miles) away from the Earth, opposite the direction of the Sun, or slightly \n' 
@@ -817,7 +817,7 @@ INFO = {
         '* SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the line between the Sun and the EMB.\n' 
         '* For the unstable L1, L2, L3 points, they are more like moving "targets" that a spacecraft must constantly adjust to stay near.', 
 
-        'L3': 'Sun-Earth-Moon Barycenter Lagrange point 3. From JPL Horizons: The Sun & Earth-Moon Barycenter Lagrange-2 (L3) point is \n' 
+        'L3': 'Horizons: 33. Sun-Earth-Moon Barycenter Lagrange point 3. From JPL Horizons: The Sun & Earth-Moon Barycenter Lagrange-2 (L3) point is \n' 
         'a location where the Earth\'s gravitational field partially counters that of the Sun.\n' 
         '* Here\'s why you\'re observing that irregular motion for SEMB-L3, while the others (especially L4 and L5) appear to trace a \n' 
         '  more circular path:\n' 
@@ -850,7 +850,7 @@ INFO = {
         '      various gravitational forces, leading to the irregular path you observed. It\'s a fantastic demonstration of the difference \n' 
         '      between idealized mathematical models and the complex reality of celestial mechanics!',
 
-        'L4': 'From JPL Horizons: Revised: Aug 29, 2013; SEMB-L4; 34; Sun & Earth-Moon Barycenter Lagrange 4\n' 
+        'L4': 'Horizons: 34. From JPL Horizons: Revised: Aug 29, 2013; SEMB-L4; 34; Sun & Earth-Moon Barycenter Lagrange 4\n' 
         '#1) The Sun & Earth-Moon Barycenter Lagrange-4 (SEMB-L4) point is a location where the Earth\'s gravitational field partially \n' 
         '    counters that of the Sun.  L4 is one of the stable "Trojan" points (along with L5). Small perturbations can displace an \n' 
         '    object from L4, but it can return to the stable point.\n' 
@@ -863,7 +863,7 @@ INFO = {
         '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
         '  the EMB\'s orbit.',  
 
-        'L5': 'From JPL Horizons:  Revised: Aug 29, 2013; SEMB-L5; 35; Sun & Earth-Moon Barycenter Lagrange 5\n' 
+        'L5': 'Horizons: 35. From JPL Horizons:  Revised: Aug 29, 2013; SEMB-L5; 35; Sun & Earth-Moon Barycenter Lagrange 5\n' 
         '#1) The Sun & Earth-Moon Barycenter Lagrange-5 (SEMB-L5) point is a location where the Earth\'s gravitational field partially \n' 
         '    counters that of the Sun. L5 is one of the stable "Trojan" points (along with L4). Small perturbations will displace an \n' 
         '    object from L5, but the object can return to the stable point.\n' 
@@ -876,7 +876,7 @@ INFO = {
         '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
         '  the EMB\'s orbit.',        
 
-        'Mars': 'Known as the Red Planet, fourth planet from the Sun.\n' 
+        'Mars': 'Horizons: 499. Known as the Red Planet, fourth planet from the Sun.\n' 
         '* Mars-centered: do not select Mars; visualize shells at 0.01 AU.\n' 
         '* Heliocentric: select Mars with or without shells.\n'
         '* Missions: Mariner 4, 6, 7, 9; Mars 2, 3, 4, 6 and 7 (USSR); Viking 1 and 2; Mars Global Surveyor; 2001 Mars Odyssey;\n' 
@@ -884,20 +884,22 @@ INFO = {
         '  Tianwen-1 Orbiter (China); Mars Pathfinder & Sojourner Rover; Spirit & Opportunity Rovers; Phoenix Lander; Curiosity Rover;\n' 
         '  InSight Lander; Perseverance Rover & Ingenuity Helicopter; Tianwen-1 Lander & Zhurong Rover (China).',
 
-        'Phobos': 'The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
-        'Deimos': 'The smaller and more distant moon of Mars, with a stable orbit. Retrogade orbit.',
-        'Ceres': 'The largest object in the asteroid belt, considered a dwarf planet.',
+        'Phobos': 'Horizons: 401. The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
 
-        'Apophis': 'Near-Earth asteroid with a close approach in 2029. Retrograde (left-handed) orbit.\n\n' 
+        'Deimos': 'Horizons: 402. The smaller and more distant moon of Mars, with a stable orbit. Retrogade orbit.',
+
+        'Ceres': 'Horizons: A801 AA. The largest object in the asteroid belt, considered a dwarf planet.',
+
+        'Apophis': 'Horizons: 2004 MN4. Near-Earth asteroid with a close approach in 2029. Retrograde (left-handed) orbit.\n\n' 
         '* Missions:\n' 
         '  * OSIRIS-APEX (Origins, Spectral Interpretation, Resource Identification, and Security – Apophis EXplorer) - NASA:\n' 
         '    Scheduled to rendezvous with Apophis shortly after its 2029 Earth close-approach.\n' 
         '  * RAMSES (Rapid Apophis Mission for Space Safety) - ESA (European Space Agency): RAMSES to launch in April 2028 and arrive \n' 
         '    at Apophis in February 2029, giving it two months to study the asteroid before its close encounter with Earth.',
 
-        'Vesta': 'Asteroid visited by NASA\'s Dawn mission.',
+        'Vesta': 'Horizons: A807 FA. Asteroid visited by NASA\'s Dawn mission.',
 
-        'Bennu': 'A near-Earth asteroid studied by the OSIRIS-REx mission.\n' 
+        'Bennu': 'Horizons: 1999 RQ36. A near-Earth asteroid studied by the OSIRIS-REx mission.\n' 
         '* Type: Bennu is a near-Earth asteroid classified as a carbonaceous (C-type) asteroid. These types of asteroids are rich in ' 
         'carbon and other organic molecules, as well as hydrated minerals. They are considered to be some of the most primitive ' 
         'objects in the solar system, essentially time capsules from the early days of our planetary system\'s formation.\n' 
@@ -919,14 +921,15 @@ INFO = {
         'understand the properties of these types of asteroids in general, which is important for understanding the history of the solar ' 
         'system.', 
 
-        'Šteins': 'A main-belt asteroid visited by the Rosetta spacecraft.', 
+        'Šteins': 'Horizons: 1969 VC. A main-belt asteroid visited by the Rosetta spacecraft.', 
 
-        'Lutetia': 'A main-belt asteroid visited by the Rosetta spacecraft.', 
+        'Lutetia': 'Horizons: A852 VA. A main-belt asteroid visited by the Rosetta spacecraft.', 
 
-        'Ryugu': 'Asteroid visited by the Japanese Hayabusa2 mission. Retrograde (left-handed) orbit.',
-        'Eros': 'Asteroid explored by NASA\'s NEAR Shoemaker spacecraft. Retrograde (left-handed) orbit.',
+        'Ryugu': 'Horizons: 1999 JU3. Asteroid visited by the Japanese Hayabusa2 mission. Retrograde (left-handed) orbit.',
 
-        'Dinkinesh': 'Asteroid Dinkinesh (Horizons ID 152830) is a small asteroid located in the inner main asteroid belt between \n' 
+        'Eros': 'Horizons: A898 PA. Asteroid explored by NASA\'s NEAR Shoemaker spacecraft. Retrograde (left-handed) orbit.',
+
+        'Dinkinesh': 'Horizons: 1999 VD57. Asteroid Dinkinesh (Horizons ID 152830) is a small asteroid located in the inner main asteroid belt between \n' 
         'Mars and Jupiter. Its name means "you are wonderful" in Amharic, an Ethiopian language, and was given in honor of the Lucy \n' 
         'fossil, for which the Lucy mission is also named.\n' 
         '* The Lucy spacecraft launched on October 16, 2021, and is on a 12-year journey to explore a record-breaking number of \n' 
@@ -946,109 +949,129 @@ INFO = {
         '* Dinkinesh is also notable for being the smallest main belt asteroid ever visited by a spacecraft, providing valuable \n' 
         '  insights into how asteroids evolve, especially those that might eventually leave the main belt and become near-Earth asteroids.',
 
-        'Donaldjohanson': 'A main-belt asteroid visited by the Lucy spacecraft. Retrograde (left-handed) orbit. ',
+        'Donaldjohanson': 'Horizons: 1981 EQ5. A main-belt asteroid visited by the Lucy spacecraft. Retrograde (left-handed) orbit. ',
 
-        'Eurybates': 'A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Eurybates': 'Horizons: 1973 SO. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
-        'Patroclus': 'A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Patroclus': 'Horizons: A906 UL. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
-        'Polymele': 'A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Polymele': 'Horizons: 1999 WB2. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
-        'Orus': 'A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Orus': 'Horizons: 1999 VQ10. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
-        'Leucus': 'A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Leucus': 'Horizons: 1997 TS25. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
-        'Itokawa': 'Asteroid visited by the original Hayabusa mission.',
+        'Itokawa': 'Horizons: 1998 SF36. Asteroid visited by the original Hayabusa mission.',
 
-        'Jupiter': 'The largest planet in our solar system, famous for its Great Red Spot.\n'
+        'Jupiter': 'Horizons: 599. The largest planet in our solar system, famous for its Great Red Spot.\n'
         '* Jupiter-centered: do not select Jupiter; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Jupiter with or without shells.\n'
         '* Missions: Pioneer 10 and 11; Voyager 1 and 2; Ulysses; Cassini-Huygens; New Horizons; Galileo;\n' 
         '  Juno; JUpiter ICy moons Explorer (JUICE);Europa Clipper.\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Metis': 'Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
-        'Adrastea': 'Jupiter moon. Tiny moon orbiting near the outer edge of Jupiter\'s main ring, source of ring material.',
-        'Amalthea': 'Jupiter moon. Oddly shaped red moon associated with the Amalthea Gossamer Ring.',
-        'Thebe': 'Jupiter moon. Small irregular moon that supplies dust to the outermost Thebe Gossamer Ring.',        
-        'Io': 'Jupiter moon. The most volcanically active body in the Solar System.',
-        'Europa': 'Jupiter moon. Covered with a smooth ice layer, potential subsurface ocean.',
-        'Ganymede': 'Jupiter moon. The largest moon in the Solar System, bigger than Mercury.',
-        'Callisto': 'Jupiter moon. Heavily cratered and geologically inactive.',
+        'Metis': 'Horizons: 516. Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
+        'Adrastea': 'Horizons: 515. Jupiter moon. Tiny moon orbiting near the outer edge of Jupiter\'s main ring, source of ring material.',
+        'Amalthea': 'Horizons: 505. Jupiter moon. Oddly shaped red moon associated with the Amalthea Gossamer Ring.',
+        'Thebe': 'Horizons: 514. Jupiter moon. Small irregular moon that supplies dust to the outermost Thebe Gossamer Ring.',  
 
-        'Saturn': 'Known for its beautiful ring system, the sixth planet from the Sun.'
+        'Io': 'Horizons: 501. Jupiter moon. The most volcanically active body in the Solar System.',
+        'Europa': 'Horizons: 502. Jupiter moon. Covered with a smooth ice layer, potential subsurface ocean.',
+        'Ganymede': 'Horizons: 503. Jupiter moon. The largest moon in the Solar System, bigger than Mercury.',
+        'Callisto': 'Horizons: 504. Jupiter moon. Heavily cratered and geologically inactive.',
+
+        'Saturn': 'Horizons: 699. Known for its beautiful ring system, the sixth planet from the Sun.'
         '* Saturn-centered: do not select Saturn; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Saturn with or without shells.\n'
         '* Missions: Pioneer 11; Voyager 1 and 2; Cassini-Huygens; Dragonfly (2028).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Titan': 'Saturn moon. The second-largest moon in the Solar System, with a thick atmosphere.',
-        'Enceladus': 'Saturn moon. Known for its geysers ejecting water ice and vapor.',
-        'Rhea': 'Saturn moon. Saturn\'s second-largest moon, with extensive cratered surfaces.',
-        'Dione': 'Saturn moon. Features wispy terrains and numerous craters.',
-        'Tethys': 'Saturn moon. Notable for its large Ithaca Chasma canyon. Retrograde (left-handed) orbit.',
-        'Mimas': 'Saturn moon. Known for the large Herschel Crater, resembling the Death Star.',
+        'Titan': 'Horizons: 606. Saturn moon. The second-largest moon in the Solar System, with a thick atmosphere.',
 
-        'Pan': 'The innermost known moon of Saturn. It orbits within the Encke Gap of the A Ring and is responsible for keeping \n' 
+        'Enceladus': 'Horizons: 602. Saturn moon. Known for its geysers ejecting water ice and vapor.',
+
+        'Rhea': 'Horizons: 605. Saturn moon. Saturn\'s second-largest moon, with extensive cratered surfaces.',
+
+        'Dione': 'Horizons: 604. Saturn moon. Features wispy terrains and numerous craters.',
+
+        'Tethys': 'Horizons: 603. Saturn moon. Notable for its large Ithaca Chasma canyon. Retrograde (left-handed) orbit.',
+
+        'Mimas': 'Horizons: 601. Saturn moon. Known for the large Herschel Crater, resembling the Death Star.',
+
+        'Pan': 'Horizons: 618. The innermost known moon of Saturn. It orbits within the Encke Gap of the A Ring and is responsible for keeping \n' 
         'that gap relatively clear. It has a distinctive equatorial ridge, giving it a flattened, ravioli-like appearance.',
 
-        'Daphnis': 'A small moon that orbits within the Keeler Gap, a narrow gap in the outer part of Saturn\'s A Ring. Its \n' 
+        'Daphnis': 'Horizons: 635. A small moon that orbits within the Keeler Gap, a narrow gap in the outer part of Saturn\'s A Ring. Its \n' 
         'gravitational influence creates waves in the edges of the gap.', 
 
-        'Prometheus': 'An irregularly shaped inner moon that acts as a shepherd moon for the inner edge of Saturn\'s F Ring. \n' 
+        'Prometheus': 'Horizons:: 616. An irregularly shaped inner moon that acts as a shepherd moon for the inner edge of Saturn\'s F Ring. \n' 
         'Its slightly eccentric orbit leads to complex interactions with the ring material, creating kinks and streamers.',
 
-        'Pandora': 'Another irregularly shaped inner moon and the outer shepherd moon of Saturn\'s F Ring. Along with Prometheus, \n' 
+        'Pandora': 'Horizons: 617. Another irregularly shaped inner moon and the outer shepherd moon of Saturn\'s F Ring. Along with Prometheus, \n' 
         'it helps to confine the F Ring into a narrow band.',
 
-        'Hyperion': 'A mid-sized moon with a highly irregular shape and a chaotic rotation. Its surface is dark and reddish, \n' 
+        'Hyperion': 'Horizons: 607. A mid-sized moon with a highly irregular shape and a chaotic rotation. Its surface is dark and reddish, \n' 
         'possibly due to hydrocarbon deposits, and it has a very porous, sponge-like appearance with many deep craters.',
 
-        'Iapetus': 'A unique moon with a striking two-toned surface. Its leading hemisphere (Cassini Regio) is very dark, while \n' 
+        'Iapetus': 'Horizons: 608. A unique moon with a striking two-toned surface. Its leading hemisphere (Cassini Regio) is very dark, while \n' 
         'its trailing hemisphere is bright white, likely due to the deposition of icy material. It also has a mysterious equatorial \n' 
         'ridge that spans a significant portion of its circumference.',
     
-        'Phoebe': 'Saturn moon. An irregular moon with a retrograde orbit around Saturn. Retrograde (left-handed) orbit.',
+        'Phoebe': 'Horizons: 609. Saturn moon. An irregular moon with a retrograde orbit around Saturn. Retrograde (left-handed) orbit.',
 
-        'Uranus': 'The ice giant with a unique tilt, orbits the Sun on its side.'
+        'Uranus': 'Horizons: 799. The ice giant with a unique tilt, orbits the Sun on its side.'
         '* Uranus-centered: do not select Uranus; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Uranus with or without shells.\n'
         '* Missions: Voyager 2; Uranus Orbiter and Probe (planned).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Titania': 'Uranus moon. The largest moon of Uranus, with a mix of heavily cratered and relatively younger regions.',    
-        'Oberon': 'Uranus moon. The second-largest moon of Uranus, heavily cratered.',
-        'Umbriel': 'Uranus moon. Features a dark surface with numerous impact craters. Retrograde (left-handed) orbit.',  
-        'Ariel': 'Uranus moon. Exhibits a mix of heavily cratered regions and younger surfaces.',
-        'Miranda': 'Uranus moon. Known for its extreme geological features like canyons and terraced layers.',
-        'Portia': 'Uranus moon, associated with outer ring Nu.',
-        'Mab': 'Uranus moon, associated with outer ring Mu. Retrograde (left-handed) orbit.',
+        'Titania': 'Horizons: 701. Uranus moon. The largest moon of Uranus, with a mix of heavily cratered and relatively younger regions.',    
 
-        'Neptune': 'The eighth and farthest known planet in the solar system.\n'
+        'Oberon': 'Horizons: 702. Uranus moon. The second-largest moon of Uranus, heavily cratered.',
+
+        'Umbriel': 'Horizons: 703. Uranus moon. Features a dark surface with numerous impact craters. Retrograde (left-handed) orbit.', 
+
+        'Ariel': 'Horizons: 704. Uranus moon. Exhibits a mix of heavily cratered regions and younger surfaces.',
+
+        'Miranda': 'Horizons: 705. Uranus moon. Known for its extreme geological features like canyons and terraced layers.',
+
+        'Portia': 'Horizons 712. Uranus moon, associated with outer ring Nu.',
+
+        'Mab': 'horizons 726. Uranus moon, associated with outer ring Mu. Retrograde (left-handed) orbit.',
+
+        'Neptune': 'Horizons: 899. The eighth and farthest known planet in the solar system.\n'
         '* Neptune-centered: do not select Neptune; visualize shells at 1 AU.\n'
         '* Heliocentric: select Neptune with or without shells.\n'
         '* Missions: Voyager 2; Neptune Orbiter and Probe (possible).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Triton': 'Neptune\'s largest moon, has a retrograde orbit and geysers suggesting geological activity.',
-        'Despina': 'Irregularly shaped, likely icy and grayish, orbiting close to the planet and possibly contributing to its ring system',
-        'Galatea': 'Irregularly shaped, with an expected icy and grayish appearance, thought to shepherd the Adams ring arc.',
+        'Triton': 'Horizons: 801. Neptune\'s largest moon, has a retrograde orbit and geysers suggesting geological activity.',
 
-        'Pluto': 'Once considered the ninth planet, now classified as a dwarf planet.\n'
+        'Despina': 'Horizons: 805. Irregularly shaped, likely icy and grayish, orbiting close to the planet and possibly contributing to its ring system',
+
+        'Galatea': 'Horizons: 806. Irregularly shaped, with an expected icy and grayish appearance, thought to shepherd the Adams ring arc.',
+
+        'Pluto': 'Horizons: 999. Once considered the ninth planet, now classified as a dwarf planet.\n'
         '* Pluto-centered: do not select Pluto; visualize shells at 0.1 AU.\n'
         '* Heliocentric: select Pluto with or without shells.\n'
         '* Missions: New Horizons; Pluto Orbiter and Probe (possible).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Charon': 'Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.',
-        'Styx': 'The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
-        'Nix': 'A small, elongated moon of Pluto with a chaotic rotation.',
-        'Kerberos': 'Pluto\'s second-smallest moon is thought to have a double-lobed shape. Retrograde (left-handed) orbit.',
-        'Hydra': 'The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
-        'Haumea': 'A dwarf planet known for its elongated shape and fast rotation.',
-        'Makemake': 'A dwarf planet located in the Kuiper Belt, discovered in 2005.',
+        'Charon': 'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.',
 
-        'Eris': 'A distant dwarf planet, more massive than Pluto.\n'
+        'Styx': 'Horizons: 905. The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
+
+        'Nix': 'Horizons: 902. A small, elongated moon of Pluto with a chaotic rotation.',
+
+        'Kerberos': 'Horizons: 904. Pluto\'s second-smallest moon is thought to have a double-lobed shape. Retrograde (left-handed) orbit.',
+
+        'Hydra': 'Horizons: 903. The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
+
+        'Haumea': 'Horizons: 2003 EL61. A dwarf planet known for its elongated shape and fast rotation.',
+        
+        'Makemake': 'Horizons: 2005 FY9. A dwarf planet located in the Kuiper Belt, discovered in 2005.',
+
+        'Eris': 'Horizons: 2003 UB313. A distant dwarf planet, more massive than Pluto.\n'
         '* Eris/Dysnomia-centered: do not select Eris; visualize shells at 0.1 AU.\n'
         '* Heliocentric: select Eris with or without shells.\n'
         '* Missions: Proposed.\n\n'
@@ -1056,9 +1079,9 @@ INFO = {
 
         'Dysnomia': 'Eris\'s moon. Orbital period: 15.79 Earth days', 
 
-        'Quaoar': 'A large Kuiper Belt object with a ring system. Retrograde (left-handed) orbit.',
+        'Quaoar': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system. Retrograde (left-handed) orbit.',
 
-        'Ammonite': '2023 KQ14 is an asteroid with an exceptionally eccentric and elongated orbit around the Sun. It belongs to a \n' 
+        'Ammonite': 'Horizons: 2023 KQ14. Ammonite is an asteroid with an exceptionally eccentric and elongated orbit around the Sun. It belongs to a \n' 
         'classification of objects known as sednoids because its orbit is highly detached from the influence of the giant planets. \n' 
         '* The asteroid has a semi-major axis of 250.07 AU and an eccentricity of 0.737, with its closest approach to the Sun \n' 
         '  (perihelion) at 65.76 AU and its farthest point (apoapsis) at 434.37 AU. \n' 
@@ -1089,7 +1112,7 @@ INFO = {
         '    a primary piece of evidence supporting the hypothesis of a massive, undiscovered planet—often called "Planet Nine"—that is \n' 
         '    shaping the orbits of these distant objects.',        
 
-        'Sedna': 'A distant trans-Neptunian dwarf planet with a long orbit. \n* Sedna is a fascinating object with an incredibly ' 
+        'Sedna': 'Horizons: 2003 VB12. A distant trans-Neptunian dwarf planet with a long orbit. \n* Sedna is a fascinating object with an incredibly ' 
         'elongated orbit, meaning its distance from the Sun varies dramatically! \n* Mean distance to Sedna: 526 AU (approximately 79 ' 
         'billion kilometers) - This places it far beyond Pluto and the Kuiper Belt. \n* Perihelion (closest to the Sun): 76 AU ' 
         '\n* Aphelion (farthest from the Sun): A whopping 936 AU! \n* This makes it one of the most distant known objects in our solar system. ' 
@@ -1104,14 +1127,14 @@ INFO = {
         'means it\'s relatively close to its perihelion (closest point) and is currently moving closer to the Sun.',
 
         'Leleakuhonua': '**SET MANUAL SCALE TO 2000 AU FOR FULL ORBIT**\n'
-        'Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
+        'Horizons: 2015 TG387. Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
         'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
         'Extreme orbits make Sednoids "detached objects," meaning they are not significantly influenced by the gravity of the giant ' 
         'planets like Neptune. Retrograde (left-handed) orbit.\n' 
         '* Leleākūhonua is considered a strong candidate for being a dwarf planet, but it is not officially recognized as one yet. ' 
         '  Like Sedna, it\'s more accurately classified as a Trans-Neptunian Object (TNO) rather than a typical asteroid.',
 
-        'Chariklo': 'Chariklo is the largest known centaur, a class of small solar system bodies that orbit the Sun between Jupiter ' 
+        'Chariklo': 'Horizons: 1997 CU26. Chariklo is the largest known centaur, a class of small solar system bodies that orbit the Sun between Jupiter ' 
         'and Neptune. Retrograde (left-handed) orbit.\n ' 
         '* It has an average diameter of about 250 kilometers and a dark, reddish surface composed of water ice, silicate minerals, ' 
         'and organic compounds.\n ' 
@@ -1123,17 +1146,19 @@ INFO = {
         '  * The outer ring, named Chui, is about 3 kilometers wide.\n' 
         '  * These two rings are separated by a 9-kilometer gap and orbit at a distance of about 400 kilometers from Chariklo\'s center.',
 
-        'Orcus': 'A large Kuiper Belt object with a moon named Vanth. Estimated to be about 910 km in diameter. ' 
+        'Orcus': 'Horizons: 2004 DW. A large Kuiper Belt object with a moon named Vanth. Estimated to be about 910 km in diameter. ' 
         'Discovered on February 17, 2004. Retrograde (left-handed) orbit.',
 
         '2017 OF201': '**USE A MANUAL SCALE OF AT LEAST 1500 AU TO SEE THE FULL ORBIT**\n' 
-        'an extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter. Retrograde (left-handed) orbit.',
+        'Horizons: 2017 OF201. An extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter. Retrograde (left-handed) orbit.',
 
-        'Varuna': 'A significant Kuiper Belt Object with a rapid rotation period.',
-        'Ixion': 'A significant Kuiper Belt Object without a known moon.',
-        '2004 GV9': 'A binary Kuiper Belt Object providing precise mass measurements through its moon. Retrograde (left-handed) orbit.',
-        'Mani': 'A large unnumbered Kuiper Belt Object with no known moons. Retrograde (left-handed) orbit.',  
-        'Gonggong': 'One of the largest known Kuiper Belt Objects with a highly inclined orbit. Retrograde (left-handed) orbit.',
+        'Varuna': 'Horizons: 2000 WR106. A significant Kuiper Belt Object with a rapid rotation period.',
+
+        'Ixion': 'Horizons: 2001 KX76. A significant Kuiper Belt Object without a known moon.',
+
+        'GV9': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon. Retrograde (left-handed) orbit.',
+        'Mani': 'Horizons: 2002 MS4. A large unnumbered Kuiper Belt Object with no known moons. Retrograde (left-handed) orbit.',  
+        'Gonggong': 'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects with a highly inclined orbit. Retrograde (left-handed) orbit.',
 
         'Planet 9': 'Hypothetical planet with a potential candidate identified in 2025 IRAS/AKARI infrared data. ' 
         'Estimated to be 7-17 Earth masses (possibly Neptune-sized) at 500-700 AU from the Sun. ' 
@@ -1200,7 +1225,7 @@ INFO = {
         '* Continuing Mission: New Horizons is still traveling through the Kuiper Belt, and NASA may extend its mission to explore ' 
         'other distant objects in the future.',
 
-        'Arrokoth': 'Arrokoth is the most distant object ever visited by a spacecraft, New Horizons, on January 1, 2019.\n' 
+        'Arrokoth': 'Horizons: 2014 MU69. Arrokoth is the most distant object ever visited by a spacecraft, New Horizons, on January 1, 2019.\n' 
         '  * Official Name: Arrokoth (formerly known as Ultima Thule)\n' 
         '  * JPL Horizons Designation: (486958) 2014 MU69\n' 
         '  * Location: Kuiper Belt, a region beyond Neptune populated by icy bodies\n' 
@@ -1612,7 +1637,7 @@ INFO = {
         'Akatsuki': 'The Venus Climate Orbiter mission (PLANET-C), will study the atmospheric circulation of Venus over a nominal mission of 4.5 years.',
 
 # Comets        
-        'Ikeya-Seki': 'Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
+        'Ikeya-Seki': 'Horizons: C/1965 S1-A. Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
         'in 1965! It was one of the brightest comets of the 20th century and is a member of the Kreutz sungrazers, a family of ' 
         'comets believed to have originated from a larger comet that broke apart long ago. As a Kreutz sungrazer, it provided valuable ' 
         'information about these comets and their origins. Retrograde (left-handed) orbit.\n  Key dates and information:\n ' 
@@ -1626,7 +1651,7 @@ INFO = {
         'Though it\'s still out there, with an orbital period estimated to be roughly 880 years, we won\'t see it again for a ' 
         'very long time.',
         
-        'West': 'Comet West, formally designated C/1975 V1-A, was a dazzling celestial visitor that became one of the most brilliant ' 
+        'West': 'Horizons: C/1975 V1. Comet West, formally designated C/1975 V1-A, was a dazzling celestial visitor that became one of the most brilliant ' 
         'comets of the 20th century. \n' 
         '* Often referred to as a "great comet," it captivated observers in 1976 with its exceptional brightness, even becoming ' 
         '  visible to the naked eye during daylight hours at its peak. \n' 
@@ -1653,7 +1678,7 @@ INFO = {
         '  * In short: Comet West came in on an elliptical path but is going out on a hyperbolic one. It was a long-term member of our ' 
         '    solar system that has now been permanently kicked out.',
                 
-        'Halley': 'Most famous comet, returns every 76 years. ' 
+        'Halley': 'Horizons: 1P/Halley. Most famous comet, returns every 76 years. ' 
         '* Orbital Period and Characteristics: Halley\'s Comet has an average orbital period of 76 Earth years. However, this period ' 
         'can vary due to the gravitational influence of planets, particularly Jupiter and Saturn.  In fact, the gravitational pull ' 
         'of the major planets alters the orbital period from revolution to revolution. Measured from one perihelion passage to the ' 
@@ -1703,17 +1728,17 @@ INFO = {
         'Even more exciting, in 2134, Halley\'s Comet will pass very close to the earth (0.09 AU, or about 13 million km) and should ' 
         'be much brighter than in 2061 (apparent magnitude -2).',
         
-        'Hyakutake': 'Comet passed very close to Earth in 1996. Retrograde (left-handed) orbit.',
+        'Hyakutake': 'Horizons: C/1996 B2. Comet passed very close to Earth in 1996. Retrograde (left-handed) orbit.',
         
         'Hale-Bopp': '**SET MANUAL SCALE TO 360 AU FOR FULL ORBIT**\n' 
-        'Comet Hale-Bopp: Visible to the naked eye for 18 months. Retrograde (left-handed) orbit.',
+        'Horizons: C/1995 O1. Comet Hale-Bopp: Visible to the naked eye for 18 months. Retrograde (left-handed) orbit.',
         
         'McNaught': '**USE MANUAL SCALE AT 40 AU TO SEE THE CURRENT POSITION**\n' 
-        'Known as the Great Comet of 2007. January 12, 2007. Retrograde (left-handed) orbit.',
+        'Horizons: C/2006 P1. Known as the Great Comet of 2007. January 12, 2007. Retrograde (left-handed) orbit.',
         
-        'NEOWISE': 'Brightest comet visible from the Northern Hemisphere in decades.',
+        'NEOWISE': 'Horizons: C/2020 F3. Brightest comet visible from the Northern Hemisphere in decades.',
 
-        'C/2025_K1': 'Comet C/2025 K1 (ATLAS) is a recently discovered comet that is expected to become a notable object for \n' 
+        'C/2025_K1': 'Horizons: C/2025 K1. Comet C/2025 K1 (ATLAS) is a recently discovered comet that is expected to become a notable object for \n' 
         'observation in late 2025. Here\'s a breakdown of what we know:\n' 
         '* Discovery and Classification: It was discovered on May 25, 2025, by the Asteroid Terrestrial-impact Last Alert System (ATLAS) \n' 
         '  survey in Chile. It appears to be a dynamically new comet, meaning it\'s likely making its first close passage to the Sun.\n' 
@@ -1731,7 +1756,7 @@ INFO = {
         '  Observers in southern latitudes can spot it in both the evening and morning skies.\n' 
         '* August: It will be faint (around magnitude 13) and visible only from the Southern Hemisphere through large telescopes.',
         
-        'Tsuchinshan-ATLAS': 'Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
+        'Tsuchinshan-ATLAS': 'Horizons: C/2023 A3. Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
         'and the Asteroid Terrestrial-impact Last Alert System (ATLAS) in South Africa in February 2023.\n * It originates from the ' 
         'Oort cloud, meaning it takes tens of thousands of years to orbit the Sun.\n * It orbits the Sun in the opposite direction ' 
         'to most planets.\n * It reached its closest point to the Sun (perihelion) on September 27, 2024, at a distance of 0.39 AU\n ' 
@@ -1739,7 +1764,7 @@ INFO = {
         '* It was easily visible to the naked eye and presented a stunning sight with its long, wispy tail.\n * It made its closest ' 
         'approach to Earth on October 12, 2024. At that time, it was about 0.47 AU from Earth.',
         
-        '67P/Churyumov-Gerasimenko': 'Comet 67P/Churyumov-Gerasimenko visited by the Rosetta spacecraft.\n' 
+        '67P/Churyumov-Gerasimenko': 'Horizons: 67P. Comet 67P/Churyumov-Gerasimenko visited by the Rosetta spacecraft.\n' 
         '* Discovered: In 1969 by Soviet astronomers Klim Churyumov and Svetlana Gerasimenko.\n' 
         '* Type: A Jupiter-family comet, meaning its orbit is influenced by Jupiter\'s gravity.\n' 
         '* Origin: Likely from the Kuiper Belt, a region beyond Neptune populated by icy bodies.\n' 
@@ -1774,11 +1799,11 @@ INFO = {
         'our understanding of comets, their composition, and their role in the early solar system. The mission also demonstrated the ' 
         'feasibility of complex space maneuvers and the challenges of landing on a comet.',
         
-        '2I/Borisov': 'Second interstellar object detected. Retrograde (left-handed) orbit.',
+        '2I/Borisov': 'Horizons: C/2019 Q4. Second interstellar object detected. Retrograde (left-handed) orbit.',
         
-        '1I/Oumuamua': 'First known interstellar object detected passing through the Solar System.',
+        '1I/Oumuamua': 'Horizons: A/2017 U1. First known interstellar object detected passing through the Solar System.',
 
-        '3I/ATLAS': 'The third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.\n' 
+        '3I/ATLAS': 'Horizons: C/2025 N1. The third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.\n' 
         'Here\'s a summary of what we know about 3I/ATLAS (C/2025 N1):\n' 
         '* Interstellar Object: It is the third confirmed interstellar object discovered, hence its "3I/" designation. This means it \n' 
         '  originated from outside our solar system and is currently just passing through.\n' 
@@ -1794,7 +1819,7 @@ INFO = {
         '  July 3, 2025. This short observational period is sufficient for astronomers to calculate its orbit and predict future events \n' 
         '  like perihelion.',        
 
-        'ATLAS': 'Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!',        
+        'ATLAS': 'Horizons: C/2024 G3. Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!',        
 
 }
 

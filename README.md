@@ -1,4 +1,4 @@
-# Paloma's Orrery -- Updated 8/15/25
+# Paloma's Orrery -- Updated 8/26/25
 
 ## Table of Contents
 1. [Introduction](#introduction)  
@@ -31,7 +31,7 @@ MIT License — Free to use, modify, and share.
 **Website**: [Google Sites](https://sites.google.com/view/tony-quintanilla)  
 **GitHub Page**: [tonylquintanilla.github.io/palomas_orrery](https://tonylquintanilla.github.io/palomas_orrery/)  
 **GitHub Repository**: [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)  
-**Google Drive Repository**: https://drive.google.com/drive/folders/1jeqguLboO3H8Y0m1jJnGbNyyJrhhPMFU?usp=sharing
+**Google Drive Repository**: [Google Drive Folder](https://drive.google.com/drive/folders/1jeqguLboO3H8Y0m1jJnGbNyyJrhhPMFU?usp=sharing)
 **YouTube Playlist**: [@tony_quintanilla](https://www.youtube.com/@tony_quintanilla/featured)  
 
 ---
@@ -56,10 +56,11 @@ You can install everything at once by opening a Command Prompt, navigating to th
 
 Or open a Command Prompt and install step-by-step (recommended for beginners so you know what’s being added):  
 1. Install the core math libraries by typing `pip install numpy pandas scipy` and pressing Enter.  
-2. Install the astronomy libraries with `pip install astropy astroquery erfa`.  
-3. Install the visualization libraries using `pip install plotly kaleido pillow`.  
-4. Install the GUI library by typing `pip install customtkinter`.  
-5. Install web and data utilities using `pip install requests beautifulsoup4 html5lib python-dateutil pytz`.  
+2. Install the astronomy libraries with `pip install astropy astroquery`.  
+3. Install the astronomy libraries with `pip install erfa`.
+4. Install the visualization libraries using `pip install plotly kaleido pillow`.  
+5. Install the GUI library by typing `pip install customtkinter`.  
+6. Install web and data utilities using `pip install requests beautifulsoup4 html5lib python-dateutil pytz`.  
 
 ### 4. Run the Program
 You can run it three ways:  
@@ -85,6 +86,7 @@ You can run it three ways:
 - Comets & asteroids — plot accurate orbits from JPL Horizons.  
 - Lagrange points — visualize gravitational balance points in Earth–Moon and Sun–Earth systems.  
 - Animations — watch objects move over timescales from minutes to years.  
+- Celestial Coordinates - Right Ascension and Declination display with uncertainty estimates (±values represent JPL Horizons 3-sigma, JPL DE440/441 ephemeris, and typical confidence intervals).
 
 ---
 
@@ -109,7 +111,7 @@ In the main GUI, click “2D and 3D Star Visualizations” and choose a distance
 ### What Makes It Special
 
 #### Scientific Accuracy Meets Visual Beauty
-- Real astronomical data from NASA JPL Horizons, ESA Hipparcos/Gaia, and SIMBAD databases.  
+- Real astronomical data from NASA JPL Horizons, JPL 440/441 ephemeris, ESA Hipparcos/Gaia and SIMBAD databases.  
 - Time-accurate positioning for planets, moons, asteroids, comets, and spacecraft from JPL Horizons system.  
 - Stellar neighborhood mapping with accurate 3D positioning for 118,000+ stars from Hipparcos and Gaia catalogs.  
 - Intelligent cache management with selective updates and automatic data cleanup.  
@@ -186,12 +188,19 @@ In the main GUI, click “2D and 3D Star Visualizations” and choose a distance
 2. Dual marker system for ideal and actual apsidal points.  
 3. Enhanced information display with hover details.
 
+#### Right Ascension and Declination Coordinates
+1. Earth-centered apparent coordinates
+2. Uncertainty values represent JPL Horizons 3-sigma confidence intervals
+3. Sources: JPL Horizons real-time data, DE441 ephemeris precision, or typical class-based estimates
+
 ---
 
 ## Architecture Overview
 
 Paloma’s Orrery is modular by design, with separate Python files for each major functional area.  
 The architecture is divided into **Core**, **Visualization**, **Data Fetching**, **Utility**, and **GUI** layers.
+
+**📊 Visual Architecture Diagram**: [View the interactive Mermaid flowchart](https://www.mermaidchart.com/app/projects/780c7ec0-84a7-4e38-9e06-9bbfdd985750/diagrams/2c4e2ff3-5f91-4388-b3b1-50defaa41fd5/version/v0.1/edit) showing the complete module structure and data flow.
 
 1. **Core Modules** — Handle main logic, initialization, and object plotting.  
 2. **Visualization Modules** — Create plots, animations, and visual representations of planetary shells, orbits, and stars.  
@@ -244,6 +253,16 @@ The entry point. Manages the main GUI, object selection, date settings, and coor
 **`orbital_mechanics.py`**  
 - Demonstrates transformation from orbital elements to position in space.  
 - Visualizes inclination, longitude of ascending node, and argument of periapsis.
+
+**`celestial_coordinates.py`**
+- Calculates Earth-centered Right Ascension and Declination coordinates.
+- Provides uncertainty estimates based on JPL Horizons data.
+- Integrates coordinate display into hover text.
+
+**`orbit_data_manager.py`**
+- Handles efficient storage and retrieval of orbital path data.
+- Uses incremental approach to minimize API calls.
+- Manages orbit data caching and updates.
 
 ---
 

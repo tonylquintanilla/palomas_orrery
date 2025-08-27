@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import numpy as np
 from formatting_utils import format_maybe_float, format_km_float
 from idealized_orbits import planetary_params
+from celestial_coordinates import calculate_radec_for_position, format_radec_hover_component
 
 def add_hover_toggle_buttons(fig):     
     """
@@ -244,18 +245,36 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     obj_info = next((o for o in objects if o['name'] == obj_name), None)
     mission_info = obj_info.get('mission_info', '') if obj_info else ''
     
+    # ===== NEW: Calculate RA/Dec for full hover text =====
+    radec_component = format_radec_hover_component(obj_data, obj_name, compact=False)    
+        
     # Now build the hover text
-    full_hover_text = (
-        f"<b>{obj_name}</b><br><br>"
-        f"Distance from Center: {distance_au} AU<br>"
-        f"Distance: {distance_km} kilometers<br>"
-        f"Distance: {distance_lm} light-minutes<br>"
-        f"Distance: {distance_lh} light-hours<br>"
-        f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
-        f"Velocity: {velocity_au} AU/day<br>"
-        f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
-    )
+    if radec_component:
+            # If we have RA/Dec, include it
+        full_hover_text = (
+            f"<b>{obj_name}</b><br>"  # ← Note: Changed from "<br><br>" to "<br>"
+            f"{radec_component}<br><br>"  # ← NEW LINE: RA/Dec info
+            f"Distance from Center: {distance_au} AU<br>"
+            f"Distance: {distance_km} kilometers<br>"
+            f"Distance: {distance_lm} light-minutes<br>"
+            f"Distance: {distance_lh} light-hours<br>"
+            f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
+            f"Velocity: {velocity_au} AU/day<br>"
+            f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
+        )
     
+    else:
+        # If no RA/Dec available, keep original format
+        full_hover_text = (
+            f"<b>{obj_name}</b><br><br>"
+            f"Distance from Center: {distance_au} AU<br>"
+            f"Distance: {distance_km} kilometers<br>"
+            f"Distance: {distance_lm} light-minutes<br>"
+            f"Distance to Center Surface: {surface_distance_str} kilometers<br>"
+            f"Velocity: {velocity_au} AU/day<br>"
+            f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
+        )
+
     # Add orbital period information
     if is_satellite:
         full_hover_text += f"Calculated Orbital Period: N/A (satellite of {planet})<br>"
@@ -277,7 +296,13 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     if is_satellite and planet == center_object_name:
         satellite_note = f"<br>Moon of {center_object_name}"
     
+
+    # ===== NEW: Calculate RA/Dec for minimal hover text =====
+    radec_compact = format_radec_hover_component(obj_data, obj_name, compact=True)
+
     minimal_hover_text = f"<b>{obj_name}</b>"
+    if radec_compact:
+        minimal_hover_text += f"<br>{radec_compact}"  # ← NEW LINE   
     
     return full_hover_text, minimal_hover_text, satellite_note
 
