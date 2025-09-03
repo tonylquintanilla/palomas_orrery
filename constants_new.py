@@ -171,7 +171,7 @@ KNOWN_ORBITAL_PERIODS = {
     'Phaethon': 523.42,    # 1.43 * 365.25
     'Dinkinesh': 1387.50,  # 3.80 * 365.25
     'Donaldjohanson': 1446.04, # 3.96 * 365.25
-    'Šteins': 1327.41,     # 3.64 * 365.25
+    'Steins': 1327.41,     # 3.64 * 365.25
     'Lutetia': 1321.00,    # 3.62 * 365.25
     
     # Trojan asteroids (Jupiter's L4 and L5)
@@ -510,16 +510,18 @@ def color_map(planet):
         'Juno': 'cyan',
         'Galileo': 'white',
         'Apollo 11 S-IVB': 'cyan',        
-        'Pioneer10': 'red',
-        'Pioneer11': 'green',
-        'Europa': 'red',
+        'Pioneer 10': 'red',
+        'Pioneer 11': 'green',
+        'Clipper': 'red',
         'OSIRIS': 'cyan',
         'Parker': 'white',
         'JWST': 'gold',
         'Rosetta': 'white',
-        'Bepi': 'red',
+        'BepiColombo': 'red',
         'SolO': 'red',
+        'SOHO': 'green',
         'Akatsuki': 'cyan',
+        'MarsRover': 'white',
 
         'EM-L1': 'cyan',        
         'EM-L2': 'white',
@@ -543,7 +545,7 @@ def color_map(planet):
         'Vesta': 'cyan',
         'Bennu': 'white',
         'Lutetia': 'green',
-        'Šteins': 'red',  
+        'Steins': 'red',  
 
         '1I/Oumuamua': 'gold',
         '3I/ATLAS': 'red',
@@ -572,7 +574,6 @@ def color_map(planet):
         'Polymele': 'cyan',
         'Orus': 'pink',
         'Itokawa': 'red',
-        'Chang\'e': 'cyan',
         'MarsRover': 'white',
         'DART': 'gold',
         'Lucy': 'green',
@@ -921,7 +922,7 @@ INFO = {
         'understand the properties of these types of asteroids in general, which is important for understanding the history of the solar ' 
         'system.', 
 
-        'Šteins': 'Horizons: 1969 VC. A main-belt asteroid visited by the Rosetta spacecraft.', 
+        'Steins': 'Horizons: 1969 VC. A main-belt asteroid visited by the Rosetta spacecraft.', 
 
         'Lutetia': 'Horizons: A852 VA. A main-belt asteroid visited by the Rosetta spacecraft.', 
 
@@ -1176,7 +1177,9 @@ INFO = {
         'NOTE: This visualization is our estimate and neither the ideal orbit nor position are fetched from JPL Horizons.\n\n' 
         'Select manual scaling of 800 AU to fully display the estimated orbit.', 
 # Missions
-        'Voyager 1': 'The farthest human-made object from Earth, exploring interstellar space. Voyager 1 is a ' 
+
+        'Voyager 1': '***SET MANUAL SCALE TO 170 AU TO PLOT THE COMPLETE TRAJECTORY. PLOT WITH JUPITER AND SATURN.***\n'
+        'Horizons: -31. The farthest human-made object from Earth, exploring interstellar space. Voyager 1 is a ' 
         'space probe that was launched by NASA on September 5, 1977, to study the outer Solar System and interstellar space. It is the ' 
         'farthest human-made object from Earth, at a distance of 165.2 AU (24.7 billion km; 15.4 billion mi) as of October 2024.\n ' 
         'Here are some key dates in the Voyager 1 mission:\n * September 5, 1977, launched from Cape Canaveral, Florida.\n ' 
@@ -1191,9 +1194,11 @@ INFO = {
         'Earth. It is a testament to the ingenuity and perseverance of the scientists and engineers who designed, built, and operate ' 
         'it.',
 
-        'Voyager 2': 'The only spacecraft to visit all four gas giants: Jupiter, Saturn, Uranus, and Neptune.',
+        'Voyager 2': '***SET MANUAL SCALE TO 150 AU TO PLOT THE COMPLETE TRAJECTORY. PLOT WITH JUPITER, SATURN, URANUS AND NEPTUNE.***\n'
+        'Horizons: -32. The only spacecraft to visit all four gas giants: Jupiter, Saturn, Uranus, and Neptune.',
 
-        'Cassini': 'NASA: "A joint endeavor of NASA, ESA, and the Italian space agency (ASI), Cassini was a sophisticated robotic ' 
+        'Cassini': '***SET MANUAL SCALE TO 15 AU. PLOT WITH VENUS, EARTH, JUPITER AND SATURN.***\n'
+        'Horizons: -82. NASA: "A joint endeavor of NASA, ESA, and the Italian space agency (ASI), Cassini was a sophisticated robotic ' 
         'spacecraft sent to study Saturn and its complex system of rings and moons in unprecedented detail. Cassini carried a probe ' 
         'called Huygens to the Saturn system. The probe, which was built by ESA, parachuted to the surface of Saturn’s largest moon, ' 
         'Titan, in January 2005 — the most distant landing to date in our solar system. Huygens returned spectacular images and other ' 
@@ -1208,7 +1213,8 @@ INFO = {
         '* Saturn orbit insertion: June 30, 2004\n'
         '* Final transmission: September 15, 2017',
 
-        'New Horizons': 'New Horizons flew past Pluto in 2015, now exploring the Kuiper Belt.\n' 
+        'New Horizons': '***SET MANUAL SCALE TO 70 AU. PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n'
+        'Horizons: -98. New Horizons flew past Pluto in 2015, now exploring the Kuiper Belt.\n' 
         '* The New Horizons space probe is an interplanetary space probe built by the Applied Physics Laboratory of Johns Hopkins\n' 
         'University for NASA.\n' 
         '* It was launched on January 19, 2006 with the primary mission to conduct a flyby study of Pluto and its moons in the Kuiper Belt. ' 
@@ -1252,7 +1258,8 @@ INFO = {
         '      * Insights into Formation: Scientists are using the data to create models of how Arrokoth formed, which has implications ' 
         'for our understanding of planet formation in general.', 
 
-        'Juno': 'NASA\'s Juno mission is a spacecraft orbiting Jupiter to study the planet\'s origins, structure, atmosphere, and ' 
+        'Juno': '***PLOT WITH JUPITER.***\n'
+        'Horizons: -61. NASA\'s Juno mission is a spacecraft orbiting Jupiter to study the planet\'s origins, structure, atmosphere, and ' 
         'magnetosphere.\n'
         '* Key dates:\n' 
         '  * Juno launched on August 5, 2011.\n' 
@@ -1275,11 +1282,12 @@ INFO = {
         '  * Juno is currently in an extended mission, which will last until 2025. During this time, it will continue to study Jupiter\n' 
         '    and its moons, providing valuable insights into the formation and evolution of our solar system.',
 
-        'Galileo': 'Studied Jupiter and its major moons, including Europa and Ganymede.',
+        'Galileo': '***SET MANUAL SCALE TO 6 AU. PLOT WITH JUPITER.***\n'
+        'Horizons: -77. Studied Jupiter and its major moons, including Europa and Ganymede.',
 
         'Apollo 11 S-IVB': 
-        'MANUALLY SCALE TO 0.01 AU.\n'
-        '* SPACECRAFT TRAJECTORY: The trajectory here is a reconstruction of the Apollo 11 S-IVB stage Earth departure trajectory ' 
+        '***PLOT WITH THE EARTH AS CENTER AND THE MOON OR MANUALLY SCALE TO 0.01 AU***\n'
+        '* SPACECRAFT TRAJECTORY: Horizons: -399110. The trajectory here is a reconstruction of the Apollo 11 S-IVB stage Earth departure trajectory ' 
         'developed by Daniel R. Adamo. The trajectory spans the time interval from 1969-Jul-16 16:40 to July 28 00:06 GMT/UTC.\n' 
         '* The Apollo 11 S-IVB spacecraft, as defined in this JPL Horizons ephemeris, refers to the third stage of the Saturn V rocket ' 
         'used for the Apollo 11 mission. This is the last and most powerful stage of the Saturn V rocket that propelled the Apollo 11 ' 
@@ -1339,13 +1347,33 @@ INFO = {
         'landed in the Pacific Ocean. The Apollo 11 astronauts splashed down in the Pacific Ocean 2660 km east of Wake Island, 280 ' 
         'south of Johnston Atoll and 24 km from recovery ship USS Hornet. This marked the triumphant end of the Apollo 11 mission.',
         
-        'Pioneer 10': 'The first spacecraft to travel through the asteroid belt and make direct observations',
+        'Pioneer 10': '***PLOT WITH JUPITER. CURRENTLY AT 140 AU.***\n'
+        'Horizons: -23. The first spacecraft to travel through the asteroid belt and make direct observations\n' 
+        '* This mission was the first to be sent to the outer solar system and the first to investigate the planet Jupiter. After the ' 
+        'encounter, it followed an escape trajectory from the solar system.\n' 
+        '* The spacecraft achieved its closest approach to Jupiter on December 4, 1973 (UTC), when it reached approximately 2.8 Jovian ' 
+        'radii (about 200,000 km).\n' 
+        '* The last fully successful acquisition of signal was March 3, 2002.\n' 
+        '* Horizons: No ephemeris for target "Pioneer 10 (spacecraft)" after A.D. 2050-JAN-01 00:08:50.8161 UT',
         
-        'Pioneer 11': 'The first spacecraft to encounter Saturn and study its rings.',
+        'Pioneer 11': '***PLOT WITH SATURN. CURRENTLY AT 116 AU.\n'
+        'Horizons: -24. The first spacecraft to encounter Saturn and study its rings.',
         
-        'Europa-Clipper': 'Europa-Clipper is NASA\'s mission to explore Jupiter\'s moon Europa, launched October 14, 2024. No ephemeris available.',
+        'Europa-Clipper': '***SET MANUAL SCALE TO 5 AU. PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
+        'Horizons: -159. NASA\'s Europa Clipper spacecraft will carry a suite of science instruments to assess habitability of ' 
+        'Jupiter\'s ice-covered moon Europa (502) while confirming the existence and nature of an expected sub-surface ocean.\n' 
+        '* Launched: 2024-Oct-14 16:06 UTC (SpaceX Falcon Heavy, KSC LC-39A)\n' 
+        '* Mars gravity assist : 2025-Mar-01\n' 
+        '* Earth gravity assist: 2026-Dec-03\n' 
+        '* Arrival: 2030-Apr-11 (5.50 year time-of-flight)\n' 
+        '* End-of-mission: 2034-Sep (directed to Ganymede impact ~30d after E49\n' 
+        '* The spacecraft is expected to orbit Jupiter 75 times and conduct 49 flybys of Europa at altitudes as low as 25 km. This ' 
+        'will reduce exposure to the high levels of radiation Europa moves within.\n' 
+        '* Gravity-assists from Europa (49), Ganymede (7), and Callisto (9) will be used to target different Europa close approach ' 
+        'points on each flyby.',
         
-        'OSIRIS REx': 'OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
+        'OSIRIS REx': '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
+        'Horizons: -64. OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
         '* NASA information: "OSIRIS-REx ("Origins, Spectral Interpretation, Resource Identification, and Security-Regolith Explorer") explored 101955 ' 
         'Bennu (1999 RQ36), a carbonaceous B-type asteroid whose regolith may provide insights on the early history of the solar ' 
         'system. After the sample was returned to Earth, in 2023, the mission was retargeted to encounter asteroid Apophis in 2029 ' 
@@ -1380,7 +1408,8 @@ INFO = {
         'observing point, set the coordinate center to "@ 2101955". The Sample Return Capsule can be accessed as object \'-64090\' ' 
         'Apophis mission trajectory as object \'2099942\'',
 
-        'OSIRIS APEX': 'OSIRIS-APEX is a NASA mission that will study the asteroid Apophis.\n' 
+        'OSIRIS APEX': '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
+        'OSIRIS-APEX is a NASA mission that will study the asteroid Apophis.\n' 
         '* OSIRIS-REx\'s Legacy: OSIRIS-REx was a NASA mission that successfully traveled to the asteroid Bennu, collected a sample ' 
         'of its surface material, and returned it to Earth in September 2023. This was a landmark achievement in asteroid exploration.\n' 
         '* Spacecraft in Good Condition: After completing its primary mission, the OSIRIS-REx spacecraft was still in good working ' 
@@ -1418,7 +1447,7 @@ INFO = {
         'allowing scientists to study the material beneath.',
         
         'Parker Solar Probe':
-        'The Parker Solar Probe is studying the Sun\'s outer corona by flying closer to the Sun than any previous spacecraft.\n\n'
+        'Horizons: -96. The Parker Solar Probe is studying the Sun\'s outer corona by flying closer to the Sun than any previous spacecraft.\n\n'
         'Operating Region:\n'
         '* Sun\'s surface (photosphere): ~0.00465 AU\n'
         '* Inner corona: extends to ~2 to 3 solar radii or 0.01 AU\n'
@@ -1434,9 +1463,10 @@ INFO = {
         '* Final closest approach: 8.8 solar radii at 7AM EST on December 24, 2024\n\n'
         '* NOTE: To visualize the closest approach plot Paker on December 24, 2024, at 12 hours.',       
         
-        'James Webb Space Telescope': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope, orbiting Lagrange point 2.',
+        'James Webb Space Telescope': 'Horizons: -170. The James Webb Space Telescope is NASA\'s flagship infrared space telescope, orbiting Lagrange point 2.',
         
-        'Rosetta': 'European Space Agency mission that studied Comet 67p/Churyumov-Gerasimenko. The Rosetta mission significantly ' 
+        'Rosetta': '***SET MANUAL SCALE TO 6 AU. PLOT WITH EARTH, MARS, STEINS, LUTETIA AND COMET 67P/Churyumov-Gerasimenko.***\n'
+        'Horizons: -226. European Space Agency mission that studied Comet 67p/Churyumov-Gerasimenko. The Rosetta mission significantly ' 
         'advanced our understanding of comets and their role in the early solar system. Its data continues to be analyzed, providing ' 
         'valuable information for planetary science.\n' 
         '* Key Dates:\n' 
@@ -1465,7 +1495,8 @@ INFO = {
         '* Legacy: The Rosetta mission significantly advanced our understanding of comets and their role in the early solar system. ' 
         'Its data continues to be analyzed, providing valuable information for planetary science.', 
 
-        'BepiColombo': 'BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
+        'BepiColombo': '***SET MANUAL SCALE TO 1.5AU. PLOT WITH EARTH, VENUS AND MERCURY.***\n' 
+        'Horizons: -121. BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
         'It\'s a joint endeavor by the European Space Agency (ESA) and the Japan Aerospace Exploration Agency (JAXA).\n ' 
         '* The mission consists of two main spacecraft that journeyed to Mercury together: Mercury Planetary Orbiter (MPO) ' 
         'built by ESA, it will study Mercury\'s surface and internal composition. And Mercury Magnetospheric Orbiter (Mio) ' 
@@ -1509,9 +1540,11 @@ INFO = {
         'It\'s a complex dance with gravity, but this intricate approach is necessary to get BepiColombo into the right ' 
         'position to study Mercury effectively!',
         
-        'SOHO Solar Observatory': 'The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
+        'SOHO Solar Observatory': '***SET MANUAL SCALE TO 1.5 AU. PLOT WITH EARTH AND L1.***\n'
+        'Horizons: -21. The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
 
-        'Solar Orbiter': 'From JPL Horizons: Solar Orbiter ("Solo"), an ESA/NASA mission, was launched 2020-Feb-10 at 4:03 UTC from ' 
+        'Solar Orbiter': '***SET MANUAL SCALE TO AT LEAST 1.5 AU. PLOT WITH EARTH AND VENUS.***\n'
+        'Horizons: -144. From JPL Horizons: Solar Orbiter ("Solo"), an ESA/NASA mission, was launched 2020-Feb-10 at 4:03 UTC from ' 
         'Cape Canaveral, Florida\n' 
         '* The 7-year mission will provide close-up, high-latitude observations of the Sun from a highly elliptic orbit that ranges ' 
         'between 0.28 au at perihelion (~60 solar radii, inside Mercury''s orbit) and 1.2 au at aphelion.\n' 
@@ -1532,13 +1565,14 @@ INFO = {
         '  * 2029-Jun-10: Venus\n' 
         '  * 2030-Sep-02: Venus',
         
-        'Gaia': 'European Space Agency mission at L2 mapping the Milky Way.',
+        'Gaia': '***PLOT WITH L2 WHERE GAIA WAS STATIONED***\n'
+        'Horizons: -139479. European Space Agency mission at L2 mapping the Milky Way.\n' 
+        'Mission ended on 2025-3-28, but Horizons ephemeris is projected through 2125-3-28.',
         
-        'Hayabusa 2': 'Japan JAXA mission that returned samples from Ryugu.', 
-        
-        'Chang\'e': 'China\'s lunar exploration program.',
-        
-        'Perseverance Mars Rover': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. The NASA Mars Perseverance mission ' 
+        'Hayabusa 2': '***PLOT WITH ASTEROID RYUGU OR SET MANUAL SCALE TO 1.5 AU TO SEE FULL TRAJECTORY***\n'
+        'Horizons: -37. Japan JAXA mission that returned samples from Ryugu.', 
+                
+        'Perseverance Mars Rover': 'Horizons: -168. The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. The NASA Mars Perseverance mission ' 
         'is a robotic space mission currently underway, aimed at exploring the planet Mars and searching for signs of ancient ' 
         'microbial life.\n'
         '* Objective: To investigate the habitability of Mars in the ancient past, search for evidence of past microbial life, collect ' 
@@ -1578,7 +1612,7 @@ INFO = {
         '  collecting samples. The mission is expected to continue for several more years, and the collected samples are planned to ' 
         '  be returned to Earth in the 2030s through a joint mission with the European Space Agency.',
         
-        'DART': 'The NASA DART mission to test asteroid deflection.\n* The DART mission ' 
+        'DART': 'Horizons: -135. The NASA DART mission to test asteroid deflection.\n* The DART mission ' 
         '(Double Asteroid Redirection Test) was a groundbreaking NASA project that made history in planetary defense! It was the ' 
         'first-ever mission to test a method of deflecting an asteroid by intentionally crashing a spacecraft into it.\n' 
         '* Planetary Defense: The primary goal was to demonstrate the kinetic impactor technique as a viable method for deflecting ' 
@@ -1602,7 +1636,8 @@ INFO = {
         'celestial bodies.\n' 
         '* Scientific Research: The impact provided valuable data on the composition and structure of asteroids.',
         
-        'Lucy': 'The NASA Lucy mission exploring Trojan asteroids around Jupiter.\n' 
+        'Lucy': '***PLOT WITH EARTH, DINKINESH, DONALDJOHANSON, EURYBATES, POLYMELE, LEUCUS, ORUS, PATROCLUS-MENOETIUS, JUPITER***.\n'
+        'Horizons: -49. The NASA Lucy mission exploring Trojan asteroids around Jupiter.\n' 
         '* The Lucy mission is a groundbreaking NASA space probe that\'s on an ambitious journey to explore the Trojan asteroids, a \n' 
         '  unique population of asteroids that share Jupiter\'s orbit around the Sun. These "Trojan swarms" are like fossils of our \n' 
         '  early solar system, holding clues to the formation of the planets and the conditions that existed billions of years ago.\n' 
@@ -1634,7 +1669,8 @@ INFO = {
         '  * December 25, 2030: Third and final Earth gravity assist (Earth flyby). This will send Lucy to the second swarm of Trojan asteroids.\n' 
         '  * March 3, 2033: Flyby of the binary pair (617) Patroclus and Menoetius (Trojan asteroids, Trojan camp).',
 
-        'Akatsuki': 'The Venus Climate Orbiter mission (PLANET-C), will study the atmospheric circulation of Venus over a nominal mission of 4.5 years.',
+        'Akatsuki': '***SUGGESTED TO PLOT WITH EARTH AND VENUS TO VISUALIZE THE FULL TRAJECTORY***\n'
+        'Horizons: -5. The Venus Climate Orbiter mission (PLANET-C), will study the atmospheric circulation of Venus over a nominal mission of 4.5 years.',
 
 # Comets        
         'Ikeya-Seki': 'Horizons: C/1965 S1-A. Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 

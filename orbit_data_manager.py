@@ -733,6 +733,11 @@ def fetch_orbit_path_by_dates(obj_info, start_date, end_date, interval, center_i
     Returns:
         dict: Orbit data in time-indexed format
     """
+    # ADD THIS VALIDATION AT THE START
+    if start_date >= end_date:
+        print(f"WARNING: Invalid date range for {obj_info['name']}: start {start_date} >= end {end_date}")
+        return None  # Return None for invalid date ranges
+
     # Special case for Planet 9 - don't fetch from Horizons
     if obj_info.get('id') == 'planet9_placeholder':
         # For Planet 9, we'll create a synthetic orbit
@@ -951,6 +956,11 @@ def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun",
             fetch_start = request['fetch_start']
             fetch_end = request['fetch_end']
             reason = request.get('reason', 'requested')
+
+            # ADD THIS VALIDATION
+            if fetch_start >= fetch_end:
+                print(f"Skipping invalid fetch request for {obj['name']}: {fetch_start} to {fetch_end}")
+                continue            
             
             orbit_key = f"{obj['name']}_{center_object_name}"
             

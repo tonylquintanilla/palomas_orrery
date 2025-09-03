@@ -24,12 +24,7 @@ import pickle
 import re
 from typing import Dict, List, Optional
 from idealized_orbits import planetary_params, parent_planets
-from constants_new import (
-#    planetary_params,
-#    parent_planets,
-    color_map,
-    note_text,
-    INFO,
+from solar_visualization_shells import (
     hover_text_sun_and_corona,
     gravitational_influence_info,
     outer_oort_info,
@@ -42,7 +37,14 @@ from constants_new import (
     chromosphere_info,
     photosphere_info,
     radiative_zone_info,
-    core_info,
+    core_info,   
+)
+from constants_new import (
+#    planetary_params,
+#    parent_planets,
+    color_map,
+    note_text,
+    INFO,
     CENTER_BODY_RADII,
     KM_PER_AU, 
     LIGHT_MINUTES_PER_AU

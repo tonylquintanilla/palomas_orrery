@@ -2036,8 +2036,6 @@ dinkinesh_var = tk.IntVar(value=0)
 
 itokawa_var = tk.IntVar(value=0)
 
-change_var = tk.IntVar(value=0)
-
 perse_var = tk.IntVar(value=0)
 
 dart_var = tk.IntVar(value=0)
@@ -2487,7 +2485,7 @@ objects = [
     'mission_info': 'Horizons: 1999 JU3. Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
     'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
 
-    {'name': 'Šteins', 'id': '1969 VC', 'var': steins_var, 'color': color_map('Šteins'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Steins', 'id': '1969 VC', 'var': steins_var, 'color': color_map('Steins'), 'symbol': 'circle-open', 'object_type': 'orbital', 
      'id_type': 'smallbody',
      'mission_info': 'Horizons: 1969 VC. Visited by European Space Agency\'s Rosetta spacecraft.', 
      'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
@@ -2655,130 +2653,170 @@ objects = [
 
     # Apollo 11 S-IVB (Spacecraft) -399110 Time Specification: Start=1969-07-16:40 UT , Stop=1969-07-28 00:06, Step=1 (hours) Revised: Mar 22, 2016  
     {'name': 'Apollo 11 S-IVB', 'id': '-399110', 'var': apollo11sivb_var, 'color': color_map('Apollo 11 S-IVB'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1969, 7, 16, 17), 'end_date': datetime(1969, 7, 28, 0, 0), # splashdown 07-24 16:50
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1969, 7, 16), 'end_date': datetime(1969, 7, 28), # splashdown 07-24 16:50
     'mission_url': 'https://www.nasa.gov/mission/apollo-11/', 
-    'mission_info': 'This is the last and most powerful stage of the Saturn V rocket that propelled the Apollo 11 mission towards the Moon.'},
+    'mission_info': 'Horizons: -399110. This is the last and most powerful stage of the Saturn V rocket that propelled the Apollo 11 mission towards the Moon.'},
 
-    {'name': 'Pioneer10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer10'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2003, 1, 23, 8, 0), 
+    {'name': 'Pioneer 10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer 10'), 'symbol': 'diamond-open', 
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2002, 3, 3), 
+    # No ephemeris for target "Pioneer 10 (spacecraft)" prior to A.D. 1972-MAR-03 02:04:00.0000 UT
+    # No ephemeris for target "Pioneer 10 (spacecraft)" after A.D. 2050-JAN-01 00:08:50.8161 UT
     'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
+    'mission_info': 'Horizons: -23. First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
 
-    {'name': 'Pioneer11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer11'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1973, 4, 7), 'end_date': datetime(1995, 9, 30, 11, 0), 
+    {'name': 'Pioneer 11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer 11'), 'symbol': 'diamond-open', 
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1973, 4, 7), 'end_date': datetime(1995, 9, 29),
+    # No ephemeris for target "Pioneer 11 (spacecraft)" prior to A.D. 1973-APR-06 02:25:00.0000 UT
+    # Science operations and daily telemetry ceased on September 30, 1995 
     'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'First spacecraft to encounter Saturn and study its rings.'},
+    'mission_info': 'Horizons: -24. First spacecraft to encounter Saturn and study its rings.'},
 
     {'name': 'Voyager 1', 'id': '-31', 'var': voyager1_var, 'color': color_map('Voyager 1'), 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1977, 9, 6), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
+    'mission_info': 'Horizons: -31. Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
 
     {'name': 'Voyager 2', 'id': '-32', 'var': voyager2_var, 'color': color_map('Voyager 2'), 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1977, 8, 21), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Launched in 1977, Voyager 2 explored all four giant planets.'},
+    'mission_info': 'Horizons: -32. Launched in 1977, Voyager 2 explored all four giant planets.'},
 
     {'name': 'Galileo', 'id': '-77', 'var': galileo_var, 'color': color_map('Galileo'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'start_date': datetime(1989, 10, 19), 'end_date': datetime(2003, 9, 30), # no ephemeris after this date
+    'id_type': 'id', 'start_date': datetime(1989, 10, 20), 'end_date': datetime(2003, 9, 29),
+    # No ephemeris for target "Galileo (spacecraft)" prior to A.D. 1989-OCT-19 01:28:37.0780 UT
+    # No ephemeris for target "Galileo (spacecraft)" after A.D. 2003-SEP-30 11:58:55.8177 UT
     'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 
-    'mission_info': 'Galileo studied Jupiter and its moons from 1995 to 2003.'},
+    'mission_info': 'Horizons: -77. Galileo studied Jupiter and its moons from 1995 to 2003.'},
 
-    {'name': 'SOHO', 'id': '488', 'var': soho_var, 'color': color_map('SOHO'), 
-    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1995, 12, 3), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
+    {'name': 'SOHO', 'id': '-21', 'var': soho_var, 'color': color_map('SOHO'), 
+    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1995, 12, 3), 'end_date': datetime(2025, 9, 28), 
+    # No ephemeris for target "SOHO (spacecraft)" after A.D. 2025-SEP-29 23:50:00.0000 UT
+    'mission_info': 'Horizons: -21. The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
     'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
 
-    {'name': 'Cassini', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini-Huygens'), 'symbol': 'diamond-open', 
-     'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 15), 
+    {'name': 'Cassini', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini'), 'symbol': 'diamond-open', 
+     'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 14), 
+     # No ephemeris for target "Cassini (spacecraft)" after A.D. 2017-SEP-15 11:56:50.8176 UT
      'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 
-     'mission_info': 'Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
+     'mission_info': 'Horizons: -82. Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
 
     {'name': 'Rosetta', 'id': '-226', 'var': rosetta_var, 'color': color_map('Rosetta'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 5), 
+    'id_type': 'id', 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 4),
+    # No ephemeris for target "Rosetta (spacecraft)" prior to A.D. 2004-MAR-02 09:25:55.8146 UT
+    # No ephemeris for target "Rosetta (spacecraft)" after A.D. 2016-OCT-04 23:59:59.9997 UT
     'mission_url': 'https://rosetta.esa.int/', 
-    'mission_info': 'European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
+    'mission_info': 'Horizons: -226. European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
 
-    {'name': 'New Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('Horizons'), 'symbol': 'diamond-open', 
+    {'name': 'New Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('New Horizons'), 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
+    # No ephemeris for target "New Horizons (spacecraft)" prior to A.D. 2006-JAN-19 19:50:13.1460 UT
+    # No ephemeris for target "New Horizons (spacecraft)" after A.D. 2030-JAN-01 11:58:50.8161 UT
     'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
-    'mission_info': 'New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
+    'mission_info': 'Horizons: -98. New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
 
-    {'name': 'Chang\'e', 'id': 'Chang\'e', 'var': change_var, 'color': color_map('Chang\'e'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2007, 10, 25), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'China\'s lunar exploration program.', 
-    'mission_url': 'http://www.clep.org.cn/'},
-
-    {'name': 'Akatsuki', 'id': 'Akatsuki', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2010, 5, 21), 'end_date': datetime(2025, 3, 2), # end ephemeris
-    'mission_info': 'JAXA mission to study the atmospheric circulation of Venus', 
+    {'name': 'Akatsuki', 'id': '-5', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open',
+    # Akatsuki / VCO / Planet-C (spacecraft)           -5 
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2010, 5, 22), 'end_date': datetime(2025, 8, 22), 
+    # No ephemeris for target "Planet-C (spacecraft)" prior to A.D. 2010-MAY-21 00:51:00.0000 UT
+    # No ephemeris for target "Planet-C (spacecraft)" after A.D. 2025-AUG-23 23:58:50.8172 UT
+    'mission_info': 'Horizons: -5. JAXA mission to study the atmospheric circulation of Venus', 
     'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
 
     {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2025, 5, 10), 
+    'id_type': 'id', 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2028, 9, 30), 
+    # No ephemeris for target "Juno (spacecraft)" prior to A.D. 2011-AUG-05 17:18:06.0000 UT
+    # No ephemeris for target "Juno (spacecraft)" after A.D. 2028-SEP-30 23:58:50.8177 UT
     'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 
-    'mission_info': 'Juno studies Jupiter\'s atmosphere and magnetosphere.'},
+    'mission_info': 'Horizons: -61. Juno studies Jupiter\'s atmosphere and magnetosphere.'},
 
-    {'name': 'Gaia', 'id': 'Gaia', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'start_date': datetime(2013, 12, 20), 'end_date': datetime(2025, 7, 1),    # end ephemeris 
-    'mission_info': 'European Space Agency mission at L2 mapping the Milky Way.', 
+    {'name': 'Gaia', 'id': '-139479', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
+    'id_type': 'id', 'start_date': datetime(2013, 12, 20), 'end_date': datetime(2025, 3, 28),    # end of mission 2025-3-28
+    # No ephemeris for target "Gaia (spacecraft)" prior to A.D. 2013-DEC-19 09:54:19.5774 UT
+    #   ORB1_20250414_000001                            2013-Dec-19   2125-Mar-28 
+    'mission_info': 'Horizons: -139479. European Space Agency mission at L2 mapping the Milky Way.', 
     'mission_url': 'https://www.cosmos.esa.int/web/gaia'},
 
-    {'name': 'Hayabusa2', 'id': 'Hayabusa2', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2014, 12, 4), 'end_date': datetime(2020, 12, 5), 
-    'mission_info': 'JAXA mission that returned samples from Ryugu.', 
+    {'name': 'Hayabusa2', 'id': '-37', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2014, 12, 4), 'end_date': datetime(2025, 10, 29), 
+    # No ephemeris for target "Hayabusa 2 (spacecraft)" prior to A.D. 2014-DEC-03 06:13:46.0000 UT
+    # No ephemeris for target "Hayabusa 2 (spacecraft)" after A.D. 2025-OCT-30 23:58:50.8175 UT
+    'mission_info': 'Horizons: -37. JAXA mission that returned samples from Ryugu.', 
     'mission_url': 'https://hayabusa2.jaxa.jp/en/'},
 
     {'name': 'OSIRISREx', 'id': '-64', 'var': osiris_rex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2016, 9, 10), 'end_date': datetime(2023, 9, 24), 
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2016, 9, 9), 'end_date': datetime(2023, 9, 24), 
     'mission_url': 'https://science.nasa.gov/mission/osiris-rex/', 
-    'mission_info': 'OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
+    'mission_info': 'Horizons: -64. OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
 
     {'name': 'OSIRISAPE', 'id': '-64', 'var': osiris_apex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2029, 12, 31), 
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2030, 3, 1),
+    # No ephemeris for target "OSIRIS-REx (spacecraft)" after A.D. 2030-MAR-01 19:58:50.8146 UT 
     'mission_url': 'https://science.nasa.gov/category/missions/osiris-apex/', 
-    'mission_info': 'OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
+    'mission_info': 'Horizons: -64. OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
 
     {'name': 'Parker', 'id': '-96', 'var': parker_solar_probe_var, 'color': color_map('Parker Solar Probe'), 
-    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 12, 31), 
+    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 1, 31), 
+    # No ephemeris for target "Parker Solar Probe (spacecraft)" after A.D. 2029-FEB-01 00:00:00.0000 UT
     'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
-    'mission_info': 'The Parker Solar Probe mission is to study the outer corona of the Sun.'},
+    'mission_info': 'Horizons: -96. The Parker Solar Probe mission is to study the outer corona of the Sun.'},
 
     {'name': 'MarsRover', 'id': '-168', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', # Perseverance
     'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2026, 2, 19),    # end ephemeris
-    'mission_info': 'The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. Note: The elevation values shown (-4200m) <br>' 
+    # No ephemeris for target "Mars2020 (spacecraft)" after A.D. 2026-FEB-18 23:58:50.8148 UT
+    'mission_info': 'Horizons: -168. The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. Note: The elevation values shown (-4200m) <br>' 
     'differ from published scientific values for Jezero Crater (-2600m) due to different Mars reference systems. JPL <br>' 
     'Horizons uses one elevation datum, while scientific publications often use the Mars Orbiter Laser Altimeter (MOLA) reference areoid. <br>' 
     'The rover is correctly positioned relative to Mars, but the absolute elevation value has a systematic offset of approximately 1600m.', 
     'mission_url': 'https://mars.nasa.gov/mars2020/'},
 
     {'name': 'Lucy', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 1), 
-    'mission_info': 'Exploring Trojan asteroids around Jupiter.', 
+    'id_type': 'id', 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 2), 
+    # 2021-10-16 10:33:08.283 (min. for current target body)
+    # 2033-04-02 17:27:41.343 (max. for current target body)
+    'mission_info': 'Horizons: -49. Exploring Trojan asteroids around Jupiter.', 
     'mission_url': 'https://www.nasa.gov/lucy'},
 
     {'name': 'DART', 'id': '-135', 'var': dart_var, 'color': color_map('DART'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 25), 
-    'mission_info': 'NASA\'s mission to test asteroid deflection.', 
+    'id_type': 'id', 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 26), 
+    # No ephemeris for target "DART (spacecraft)" prior to A.D. 2021-NOV-24 07:16:43.8171 UT
+    # Impact: 26-Sep-2022 23:14:24.183  UTC (actual)
+    'mission_info': 'Horizons: -135. NASA\'s mission to test asteroid deflection.', 
     'mission_url': 'https://www.nasa.gov/dart'},
 
     {'name': 'JamesWebb', 'id': '-170', 'var': jwst_var, 'color': color_map('JamesWebb'), 
-    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2021, 12, 26), 'end_date': datetime(2029, 12, 31), 
+    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2021, 12, 26), 'end_date': datetime(2030, 8, 18), 
+    # 2021-12-25 13:01:09.184 (min. for current target body)
+    # 2030-08-18 00:01:09.183 (max. for current target body)
     'mission_url': 'https://science.nasa.gov/mission/webb/', 
-    'mission_info': 'The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
+    'mission_info': 'Horizons: -170. The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
 
     {'name': 'Clipper', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Clipper'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2030, 4, 1), 
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2031, 2, 7), 
+    # 2024-10-14 16:15:03.712 (min. for current target body)
+    # 2031-02-07 18:17:27.695 (max. for current target body)
+    # No ephemeris for target "Europa Clipper (spacecraft)" after A.D. 2031-FEB-07 18:16:18.5105 UT
     'mission_url': 'https://europa.nasa.gov/', 
-    'mission_info': 'Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
+    'mission_info': 'Horizons: -159. Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
 
-    {'name': 'Bepi', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('Bepi'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2018, 10, 20), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://sci.esa.int/web/bepicolombo', 'mission_info': 'BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
+    {'name': 'BepiColombo', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('BepiColombo'), 'symbol': 'diamond-open', 
+    # 'id': '-121', 2018-080A
+    'object_type': 'trajectory', 
+    'id_type': 'id',
+    'start_date': datetime(2018, 10, 21), 'end_date': datetime(2027, 4, 7), 
+    # 2018-10-20 02:13:28.719 (min. for current target body)
+    # 2027-04-07 00:01:09.186 (max. for current target body)
+    # No ephemeris for target "BepiColombo (Spacecraft)" after A.D. 2027-APR-06 23:59:59.9998 UT
+    'mission_url': 'https://sci.esa.int/web/bepicolombo', 
+    'mission_info': 'SPECIAL NOTE: KNOWN BUG. TRAJECTORY DOES NOT PLOT; SEE PRINTOUT.<br>' 
+    'Horizons: -121. BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
 
     {'name': 'SolO', 'id': '-144', 'var': solarorbiter_var, 'color': color_map('SolO'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20), 
-    'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 'mission_info': 'Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
+    'object_type': 'trajectory', 'id_type': 'id', 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20),
+    # 2020-02-10 04:56:58.855 (min. for current target body)
+    # 2030-11-20 04:03:15.162 (max. for current target body)
+    # No ephemeris for target "Solar Orbiter (spacecraft)" after A.D. 2030-NOV-20 04:02:05.9789 UT 
+    'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 
+    'mission_info': 'Horizons: -144. Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
         
     # --- Adding New Moons ---
 
@@ -5830,7 +5868,7 @@ create_celestial_checkbutton("Itokawa", itokawa_var)    # params
 create_celestial_checkbutton("Eros", eros_var)  # params
 create_celestial_checkbutton("Dinkinesh", dinkinesh_var)    # params
 create_celestial_checkbutton("Vesta", vesta_var)    # params
-create_celestial_checkbutton("Šteins", steins_var)  # params
+create_celestial_checkbutton("Steins", steins_var)  # params
 create_celestial_checkbutton("Donaldjohanson", donaldjohanson_var)  # params
 create_celestial_checkbutton("Lutetia", lutetia_var)    # params
 create_celestial_checkbutton("Ceres", ceres_var)    # params
@@ -6198,30 +6236,29 @@ def create_mission_checkbutton(name, variable, dates):
     CreateToolTip(checkbutton, tooltip_text)
 # Start dates are the day after launch to avoid missing Horizons data.
 create_mission_checkbutton("Apollo 11 S-IVB", apollo11sivb_var, "(1969-07-16:17 to 1969-07-28:00)")     # Time Specification: Start=1969-07-16 17 UT , Stop=1969-07-28 00, Step=1 (hours)
-create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2003-01-23)")
-create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-30)")
+create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2002-03-03)")
+create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-29)")
 create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-21 to 2029-12-31)")
 create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-06 to 2029-12-31)")
-create_mission_checkbutton("Galileo", galileo_var, "(1989-10-19 to 2003-09-30)")
-create_mission_checkbutton("SOHO Solar Observatory", soho_var, "(1995-12-3 to 2029-12-31)")
-create_mission_checkbutton("Cassini", cassini_var, "(1997-10-16 to 2017-09-15)")
-create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-02 to 2016-10-05)")
+create_mission_checkbutton("Galileo", galileo_var, "(1989-10-20 to 2003-09-29)")
+create_mission_checkbutton("SOHO Solar Observatory", soho_var, "(1995-12-3 to 2025-9-28)")
+create_mission_checkbutton("Cassini", cassini_var, "(1997-10-16 to 2017-09-14)")
+create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-03 to 2016-10-04)")
 create_mission_checkbutton("New Horizons", new_horizons_var, "(2006-01-19 to 2029-12-31)")
-create_mission_checkbutton("Chang'e", change_var, "(2007-10-25 to 2029-12-31)")
-create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to 2025-03-02)")
-create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to 2025-5-10)")
-create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-07-01)")
-create_mission_checkbutton("Hayabusa 2", hayabusa2_var, "(2014-12-04 to 2020-12-05)")
-create_mission_checkbutton("OSIRIS REx", osiris_rex_var, "(2016-09-10 to 2023-09-24)")
-create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to 2029-12-31)")
-create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2030-12-31)")
-create_mission_checkbutton("Solar Orbiter", solarorbiter_var, "(2020-02-10 to 2030-11-20)")
+create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to 2025-08-22)")
+create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to 2028-9-30)")
+create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-03-28)")
+create_mission_checkbutton("Hayabusa 2", hayabusa2_var, "(2014-12-04 to 2025-10-29)")
+create_mission_checkbutton("OSIRIS REx", osiris_rex_var, "(2016-09-9 to 2023-09-24)")
+create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to 2029-1-31)")
+create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2027-4-7)")
+create_mission_checkbutton("Solar Orbiter", solarorbiter_var, "(2020-02-11 to 2030-11-20)")
 create_mission_checkbutton("Perseverance Mars Rover", perse_var, "(2020-07-31 to 2026-2-19)")
-create_mission_checkbutton("Lucy", lucy_var, "(2021-10-18 to 2033-05-01)")
-create_mission_checkbutton("DART", dart_var, "(2021-11-26 to 2022-09-25)")
-create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to 2029-12-31)")
-create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2029-12-31)")
-create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to April 2030)")
+create_mission_checkbutton("Lucy", lucy_var, "(2021-10-17 to 2033-04-02)")
+create_mission_checkbutton("DART", dart_var, "(2021-11-25 to 2022-09-26)")
+create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to 2030-08-18)")
+create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2030-3-1)")
+create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to 2031-02-07)")
 
 # Checkbuttons for comets
 comet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Comets")

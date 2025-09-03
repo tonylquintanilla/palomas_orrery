@@ -1,4 +1,4 @@
-# Paloma's Orrery -- Updated 8/26/25
+# Paloma's Orrery -- Updated 8/27/25
 
 ## Table of Contents
 1. [Introduction](#introduction)  
@@ -92,17 +92,36 @@ You can run it three ways:
 
 ## Basic Usage Examples
 
-**Plot Planets**  
-Select one or more planets from the GUI’s object list and click “Plot Entered Date.”  
+### Viewing Planets
+1. Select planets from the checkboxes in the main window
+2. Set your desired date and time
+3. Click "Plot Entered Date" to generate visualization
+4. Use mouse to rotate, zoom, and pan the 3D plot
 
-**View Planetary Shells**  
-Set a planet as the center object, select the layers you want (core, mantle, atmosphere, etc.), then plot and rotate in 3D.  
+### Tracking Spacecraft
+1. Navigate to the spacecraft section in the scrollable panel
+2. Select missions (Voyager, Parker Solar Probe, etc.)
+3. Enable "Show Trajectory" for path visualization  
+4. Set date range using start/end date controls
+5. Plot to see historical or predicted positions
 
-**Track a Mission**  
-Select a spacecraft, set its date range, and plot to see its trajectory.  
+### Exploring Planetary Interiors
+1. Select a planet as the center object
+2. Check the shell options (core, mantle, atmosphere, etc.)
+3. Plot to see the layered structure
+4. Toggle shells on/off in the plot legend
 
-**Explore Stars**  
-In the main GUI, click “2D and 3D Star Visualizations” and choose a distance or brightness filter.  
+### Creating Animations
+1. Select objects to animate
+2. Set number of frames and time step
+3. Click animation buttons (daily, weekly, monthly, yearly)
+4. Animation opens in browser with playback controls
+
+### Star Visualizations
+1. Click "2D and 3D Star Visualizations" button
+2. Enter distance (light-years) or magnitude limit
+3. Choose between 3D plot or HR diagram
+4. Explore stellar neighborhoods or visible stars
 
 ---
 
@@ -216,87 +235,167 @@ This separation allows easier maintenance, testing, and feature expansion.
 
 ### Main Program
 **`palomas_orrery.py`**  
-The entry point. Manages the main GUI, object selection, date settings, and coordinates calls to the plotting and data-fetching modules.
+The entry point. Manages the main GUI, object selection, date settings, and coordinates all plotting and animation functions.
 
 ---
 
-### Core Modules
+### Core Helper Modules
 
-**`plot_objects.py`**  
-- Generates planetary, satellite, comet, asteroid, and spacecraft plots.  
-- Supports both actual (JPL Horizons) and idealized orbits.  
-- Handles apsidal markers, date lists, and trajectory plotting.
-
-**`animate_objects.py`**  
-- Creates time-stepped animations.  
-- Handles object movement, planetary shells, and legend updates over time.  
-- Supports Sun-centered and planet-centered views.
+**`palomas_orrery_helpers.py`**  
+- Helper functions for the main orrery application
+- Contains Planet 9 calculations, axis range calculations
+- Trajectory fetching and padding functions
+- Orbit backup and cleanup utilities
 
 **`idealized_orbits.py`**  
-- Plots idealized elliptical orbits using classical orbital elements.  
-- Displays periapsis/aphelion markers for educational purposes.
+- Plots idealized elliptical orbits using classical orbital elements
+- Contains planetary parameters, parent-planet relationships, and tilt angles
+- Displays periapsis/aphelion markers for educational purposes
+
+**`orbit_data_manager.py`**
+- Handles efficient storage and retrieval of orbital path data
+- Uses incremental approach to minimize API calls
+- Manages orbit data caching, updates, and repairs
+- Converts between time-indexed and array formats
 
 ---
 
 ### Visualization Modules
 
 **`planet_visualization.py`**  
-- Renders planetary shells (core, mantle, crust, atmosphere, magnetosphere).  
-- Supports gas giant atmospheric layers, radiation belts, plasma tori.  
-- Handles scaling, color, and transparency for shells.
+- Comprehensive planetary shell visualization system
+- Renders cores, mantles, crusts, atmospheres, magnetospheres
+- Supports gas giant atmospheric layers, radiation belts, plasma tori
+- Contains detailed info for all planetary bodies including the Sun
 
-**`star_visualization.py`**  
-- Produces 2D Hertzsprung–Russell diagrams.  
-- Generates 3D plots of local stellar neighborhoods using Hipparcos and Gaia data.  
-- Includes distance and magnitude filters.
+**`orbital_param_viz.py`**
+- Interactive orbital mechanics visualization
+- Demonstrates orbital element transformations
+- Shows inclination, longitude of ascending node, and argument of periapsis
 
-**`orbital_mechanics.py`**  
-- Demonstrates transformation from orbital elements to position in space.  
-- Visualizes inclination, longitude of ascending node, and argument of periapsis.
-
-**`celestial_coordinates.py`**
-- Calculates Earth-centered Right Ascension and Declination coordinates.
-- Provides uncertainty estimates based on JPL Horizons data.
-- Integrates coordinate display into hover text.
-
-**`orbit_data_manager.py`**
-- Handles efficient storage and retrieval of orbital path data.
-- Uses incremental approach to minimize API calls.
-- Manages orbit data caching and updates.
+**`star_visualization_gui.py`**
+- GUI for star visualizations (HR diagrams and 3D stellar maps)
+- Controls for distance and magnitude-based filtering
+- Integration with planetarium modules
 
 ---
 
-### Data Fetching Modules
+### Planetarium & Star Modules
 
-**`fetch_horizons_data.py`**  
-- Retrieves ephemerides from NASA JPL Horizons.  
-- Caches results locally.  
-- Supports both automatic and manual fetch modes.
+**`planetarium_distance.py`**
+- 3D visualization of stars within specified distance
+- Uses Hipparcos and Gaia data
 
-**`fetch_simbad_data.py`**  
-- Queries SIMBAD for stellar parameters.  
-- Retrieves spectral type, luminosity class, and other metadata.
+**`planetarium_apparent_magnitude.py`**
+- 3D visualization of stars brighter than specified magnitude
+- Includes Messier objects and notable stars
 
-**`fetch_gaia_data.py`**  
-- Retrieves star data from Gaia archive.  
-- Supports bulk retrieval for 3D star visualization.
+**`hr_diagram_distance.py`**
+- HR diagram for stars within specified distance
+- Color-magnitude relationships
+
+**`hr_diagram_apparent_magnitude.py`**
+- HR diagram for stars of specified brightness
+- Stellar classification visualization
+
+---
+
+### Data Processing Modules
+
+**`data_acquisition.py`** / **`data_acquisition_distance.py`**
+- Fetches stellar data from Vizier catalogs
+- Handles both distance and magnitude-based queries
+
+**`data_processing.py`**
+- Processes raw astronomical data
+- Calculates distances and coordinates
+- Aligns different catalog systems
+
+**`star_properties.py`**
+- Queries SIMBAD for stellar parameters
+- Manages star property caching
+
+**`stellar_parameters.py`**
+- Calculates stellar parameters (temperature, luminosity)
+- Estimates values from available data
+
+---
+
+### Visualization Support Modules
+
+**`visualization_2d.py`**
+- Creates 2D HR diagrams
+- Handles plotting configurations
+
+**`visualization_3d.py`**
+- Creates 3D stellar neighborhood plots
+- Manages 3D scene configurations
+
+**`visualization_core.py`**
+- Core visualization utilities
+- Hover text formatting
+- Data analysis functions
+
+**`visualization_utils.py`**
+- Additional visualization helpers
+- Toggle buttons and UI controls
 
 ---
 
 ### Utility Modules
 
-**`cache_management.py`**  
-- Handles saving, loading, and validating cached data.  
-- Detects corruption and repairs automatically.  
-- Supports manual cache clearing.
+**`formatting_utils.py`**
+- Number formatting utilities
+- Scientific notation converters
 
-**`shared_utilities.py`**  
-- Contains common functions shared across modules.  
-- Includes coordinate conversions, date handling, and math helpers.
+**`shared_utilities.py`**
+- Common functions shared across modules
+- Sun direction indicators and other helpers
 
-**`config.py`**  
-- Stores configuration constants (e.g., planetary parameters, color maps).
+**`save_utils.py`**
+- Plot saving functionality
+- HTML and image export support
 
+**`shutdown_handler.py`**
+- Thread management and cleanup
+- Safe figure display and closing
+
+**`celestial_coordinates.py`**
+- Calculates Earth-centered Right Ascension/Declination
+- Provides uncertainty estimates from JPL Horizons
+- Integrates coordinate display into hover text
+
+---
+
+### Special Purpose Modules
+
+**`refined_orbits.py`** / **`orrery_integration.py`**
+- Advanced orbit refinement system (optional)
+- Integration with ephemeris data
+
+**`create_ephemeris_database.py`**
+- Creates satellite ephemeris databases
+- Converts orbital parameters between formats
+
+**`messier_object_data_handler.py`**
+- Handles Messier catalog objects
+- Special visualization for deep-sky objects
+
+**`star_notes.py`**
+- Contains notes and information about notable stars
+- Used for hover text and descriptions
+
+**`constants_new.py`**
+- Constants for stellar classifications
+- Color mappings and type definitions
+
+---
+
+### Data Files (Not Python modules but important)
+- `orbit_paths.json` - Cached orbit data
+- `star_properties_distance.pkl` - Cached star properties by distance
+- `star_properties_magnitude.pkl` - Cached star properties by magnitude
+- `satellite_ephemerides.json` - Satellite orbital elements
 ---
 
 ### GUI Modules

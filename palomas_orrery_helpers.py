@@ -320,6 +320,26 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
     Returns:
         list: List of position dictionaries with complete orbital data
     """
+    # Debug output for BepiColombo
+    if object_id == '-121':
+        print(f"\nNOTE: BepiColombo trajectory has a known display bug.")
+        print(f"      Position marker shows correctly; trajectory line may not appear.")
+        print(f"      Debug: {len(dates_list)} dates requested from {dates_list[0].strftime('%Y-%m-%d')} to {dates_list[-1].strftime('%Y-%m-%d')}")
+    # KNOWN BUG: BepiColombo trajectory not plotting (as of Aug 2025)
+    # Symptoms:
+    #   - Current position marker displays correctly
+    #   - Trajectory path shows "No ephemeris available for -121"
+    #   - Issue specific to BepiColombo; other spacecraft work
+    #   - Verified data exists in Horizons through 2027-04-05
+    # 
+    # Attempted fixes that didn't work:
+    #   - Changing id_type (None, 'id', omitted)
+    #   - Converting to TDB time scale (broke ALL spacecraft)
+    #   - Using vectors vs ephemerides
+    #
+    # Workaround: BepiColombo shows current position only
+    # TODO: Revisit after other trajectory improvements        
+    
     # Skip trajectory fetching for Planet 9
     if object_id == 'planet9_placeholder':
         # Return a list of None values matching the length of dates_list
@@ -335,7 +355,7 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
         vectors = obj.vectors()
 
         # Use a small tolerance when matching returned JD to requested epochs
-        tolerance = 1e-5
+        tolerance = 1e-3    # original 1e-5 does not work for spacecraft BepiColombo; loosening the tolerance
         positions = [None] * len(epochs)
         
         print(f"\nProcessing trajectory for {object_id}:")
