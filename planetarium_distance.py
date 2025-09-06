@@ -36,6 +36,9 @@ from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, sho
 
 from catalog_selection import select_stars
 
+from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
+
+
 def process_stars(hip_data, gaia_data, max_light_years):
     """Process stars for distance-based 3D visualization with full count tracking."""
     # Use the unified selection function
@@ -87,13 +90,15 @@ def main():
             max_light_years = float(sys.argv[1])
             if max_light_years <= 0:
                 print("Please enter a positive number of light-years.")
-                print("Note: Current maximum reliable distance is 100 light-years.")
+                print("Note: Current maximum reliable distance is 100.1 light-years.")      # increasing limit from 100 to 100.1 ly
                 return
         except ValueError:
-            print("Invalid input for light-years limit. Using default value of 100.")
-            max_light_years = 100.0
+            print("Invalid input for light-years limit. Using default value of 100.1")
+            max_light_years = 100.1
     else:
-        max_light_years = 100.0  # Default value
+        # MODIFIED: No default - require explicit parameter
+        print("ERROR: Distance parameter required")
+        return  # Exit without running
 
     print(f"Filtering stars within {max_light_years} light-years.")
     start_time = time.time()
@@ -107,11 +112,14 @@ def main():
         hip_data_file = f'hipparcos_data_distance.vot'
         gaia_data_file = f'gaia_data_distance.vot'
         
-        # Load or fetch data with parallax constraint
-        hip_data = load_or_fetch_hipparcos_data(v, hip_data_file, 
-                                               parallax_constraint=f">={min_parallax_mas}")
-        gaia_data = load_or_fetch_gaia_data(v, gaia_data_file, 
-                                           parallax_constraint=f">={min_parallax_mas}")
+        hip_data = smart_load_or_fetch_hipparcos(v, hip_data_file, 
+                                                mode='distance',
+                                                limit_value=max_light_years,
+                                                parallax_constraint=f">={min_parallax_mas}")
+        gaia_data = smart_load_or_fetch_gaia(v, gaia_data_file, 
+                                            mode='distance',
+                                            limit_value=max_light_years,
+                                            parallax_constraint=f">={min_parallax_mas}")
 
         if hip_data is None and gaia_data is None:
             print("Error: Could not load or fetch data from either catalog.")
@@ -119,6 +127,37 @@ def main():
 
         print(f"Data acquisition completed in {time.time() - start_time:.2f} seconds.")
         
+        # ============ CACHE STATUS REPORT ============
+        from incremental_cache_manager import IncrementalCacheManager
+        cache_mgr = IncrementalCacheManager()
+
+        hip_status, hip_meta = cache_mgr.check_cache_validity(hip_data_file, 'distance', max_light_years)
+        gaia_status, gaia_meta = cache_mgr.check_cache_validity(gaia_data_file, 'distance', max_light_years)
+
+        print("\n" + "="*60)
+        print("CACHE STATUS REPORT")
+        print("="*60)
+        print(f"Hipparcos: {hip_status}")
+        if hip_meta:
+            print(f"  Cached: {hip_meta.entry_count} stars up to {hip_meta.limit_value} ly")
+            print(f"  Cache date: {hip_meta.query_date}")
+        print(f"Gaia: {gaia_status}")
+        if gaia_meta:
+            print(f"  Cached: {gaia_meta.entry_count} stars up to {gaia_meta.limit_value} ly")
+            print(f"  Cache date: {gaia_meta.query_date}")
+
+        # Explain what happened
+        if hip_status == 'expand' or gaia_status == 'expand':
+            print("\n✓ INCREMENTAL FETCH PERFORMED - only new data fetched")
+        elif hip_status == 'subset' or gaia_status == 'subset':
+            print("\n✓ FILTERED EXISTING CACHE - no network queries needed")
+        elif hip_status == 'exact' and gaia_status == 'exact':
+            print("\n✓ EXACT CACHE HIT - using existing data")
+        elif hip_status == 'missing' or gaia_status == 'missing':
+            print("\n⚠ FULL FETCH PERFORMED - no cache found")
+        print("="*60 + "\n")
+        # ============ END CACHE STATUS REPORT ============
+
         # Step 2: Data Processing
         print("Starting data processing...")
         process_start = time.time()
@@ -190,6 +229,16 @@ def main():
         
         # Store the mode in the DataFrame attributes
         combined_df.attrs['mode'] = 'distance'
+        # Flatten the analysis for visualization (ADD THIS SECTION)
+        flattened_analysis = {
+            'total_stars': analysis_results['data_quality']['total_stars'],
+            'plottable_hip': analysis_results['plottable']['hipparcos'],
+            'plottable_gaia': analysis_results['plottable']['gaia'],
+            'missing_temp': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_temp'],
+            'missing_lum': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_lum'],
+            'temp_le_zero': 0  # Or calculate from the data if needed
+        }
+        combined_df.attrs['analysis'] = flattened_analysis  # Use flattened version 
 
         final_counts = {
             'hip_bright_count': counts['hip_bright_count'],

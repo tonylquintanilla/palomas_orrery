@@ -5,10 +5,11 @@ import pandas as pd
 import re
 import plotly.graph_objects as go
 from constants_new import (
-    object_type_mapping, class_mapping, hover_text_sun, stellar_class_labels
+    object_type_mapping, class_mapping, stellar_class_labels
 )
 from stellar_parameters import calculate_stellar_parameters
 from star_notes import unique_notes
+from solar_visualization_shells import hover_text_sun
 
 def format_value(value, format_spec, default="Unknown"):
     """Format values consistently across visualizations."""
@@ -160,8 +161,8 @@ def analyze_star_counts(combined_df):
         'plottable_stars': np.sum(plottable),
         'plottable_hip': plottable_hip,
         'plottable_gaia': plottable_gaia,
-#        'missing_temp': len(combined_df) - np.sum(valid_temp),     # incorrect
-#        'missing_lum': np.sum(~has_lum),                           # incorrect
+        'missing_temp': np.sum(combined_df['Temperature'].isna()),  # Just NaN values
+        'missing_lum': np.sum(combined_df['Luminosity'].isna()),    # Just NaN values
         'temp_le_zero': np.sum(has_temp & ~valid_temp),
         'missing_temp_only': len(combined_df[combined_df['Temperature'].isna() & ~combined_df['Luminosity'].isna()]),
         'missing_lum_only': len(combined_df[~combined_df['Temperature'].isna() & combined_df['Luminosity'].isna()]),
@@ -351,6 +352,6 @@ def generate_star_count_text(counts_dict, combined_df=None):
         f"<br>     Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
         f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
         f"with the star name, for example: \"* alf Aql\", for star data (right-click will keep the hovertext box open to read the name). " 
-        f"<br>     -- Python script by Tony Quintanilla, with assistance from ChatGPT, Claude, Gemini, and DeepSeek, February 2025."
+        f"<br>     -- Python script by Tony Quintanilla, with assistance from Claude, ChatGPT, Gemini, and DeepSeek, September 2025."
         
     )

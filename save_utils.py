@@ -114,7 +114,7 @@ def handle_save(fig, default_name):
 def save_plot(fig, default_name):
     """
     Save plot with improved error handling and window management.
-    Now offers PNG save option upfront.
+    Simplified dialog flow matching show_figure_safely().
     
     Parameters:
         fig: plotly figure object
@@ -123,79 +123,99 @@ def save_plot(fig, default_name):
     Returns:
         bool: True if save was successful, False otherwise
     """
+    root = None
+    
     try:
-        # Create root window but keep it hidden
+        # Create root window for dialogs
         root = tk.Tk()
         root.withdraw()
+        root.attributes('-topmost', True)
         
-        # Make it appear on top of other windows
-        root.wm_attributes('-topmost', True)
-        
-        # Create a temporary window to force focus
-        temp = tk.Toplevel(root)
-        temp.wm_attributes('-topmost', True)
-        temp.focus_force()
-        temp.withdraw()
-        
-        # Ask for save format first
-        format_response = messagebox.askyesno(
-            "Save Format",
-            "Would you like to save as PNG?\n\n"
-            "Yes - Save as static PNG\n"
-            "No - Save as interactive HTML",
-            parent=temp
-        )
-        
-        if format_response:
-            # Save as PNG
-            file_path = filedialog.asksaveasfilename(
-                parent=temp,
-                initialfile=f"{default_name}.png",
-                defaultextension=".png",
-                filetypes=[("PNG files", "*.png")]
-            )
-            
-            if file_path:
-                try:
-                    print(f"Saving static image to {file_path}...")
-                    fig.write_image(file_path)
-                    print("Static image saved successfully.")
-                except ImportError:
-                    messagebox.showerror(
-                        "Missing Dependency",
-                        "The kaleido package is required for saving static images.\n"
-                        "Please install it with: pip install kaleido",
-                        parent=temp
-                    )
-        else:
-            # Save as HTML
-            file_path = filedialog.asksaveasfilename(
-                parent=temp,
-                initialfile=f"{default_name}.html",
-                defaultextension=".html",
-                filetypes=[("HTML files", "*.html")]
-            )
-            
-            if file_path:
-                print(f"Saving interactive plot to {file_path}...")
-                fig.write_html(file_path, include_plotlyjs='cdn', auto_play=False)
-                print("Interactive plot saved successfully.")
-                
-        return True
-        
-    except Exception as e:
-        print(f"Error saving plot: {e}")
-        messagebox.showerror(
-            "Save Error",
-            f"An error occurred while saving the plot:\n{str(e)}",
+        # Single initial dialog - do you want to save?
+        save_response = messagebox.askyesno(
+            "Save Visualization",
+            "Would you like to save this visualization?",
             parent=root
         )
+        
+        if save_response:
+            # Ask for format only if they want to save
+            format_choice = messagebox.askyesno(
+                "Save Format",
+                "Choose save format:\n\n"
+                "Yes - Static PNG image\n"
+                "No - Interactive HTML file",
+                parent=root
+            )
+            
+            if format_choice:  # User chose PNG
+                file_path = filedialog.asksaveasfilename(
+                    parent=root,
+                    initialfile=f"{default_name}.png",
+                    defaultextension=".png",
+                    filetypes=[("PNG files", "*.png")]
+                )
+                if file_path:
+                    try:
+                        print(f"Saving static image to {file_path}...")
+                        fig.write_image(file_path)
+                        print("Static image saved successfully.")
+                        return True
+                    except ImportError:
+                        messagebox.showerror(
+                            "Missing Dependency",
+                            "The kaleido package is required for saving static images.\n"
+                            "Please install it with: pip install kaleido",
+                            parent=root
+                        )
+                        return False
+                    except Exception as e:
+                        messagebox.showerror(
+                            "Save Error",
+                            f"Error saving PNG: {str(e)}",
+                            parent=root
+                        )
+                        return False
+            else:  # User chose HTML
+                file_path = filedialog.asksaveasfilename(
+                    parent=root,
+                    initialfile=f"{default_name}.html",
+                    defaultextension=".html",
+                    filetypes=[("HTML files", "*.html")]
+                )
+                if file_path:
+                    try:
+                        print(f"Saving interactive plot to {file_path}...")
+                        fig.write_html(file_path, include_plotlyjs='cdn', auto_play=False)
+                        print("Interactive plot saved successfully.")
+                        return True
+                    except Exception as e:
+                        messagebox.showerror(
+                            "Save Error",
+                            f"Error saving HTML: {str(e)}",
+                            parent=root
+                        )
+                        return False
+        else:
+            print("User chose not to save the visualization")
+            return True  # Not an error if user chooses not to save
+                
+    except Exception as e:
+        print(f"Error during save operation: {e}")
+        if root:
+            messagebox.showerror(
+                "Save Error",
+                f"An error occurred:\n{str(e)}",
+                parent=root
+            )
         return False
     
     finally:
+        # Clean up
         try:
-            if 'temp' in locals():
-                temp.destroy()
-            root.destroy()
+            if root:
+                root.destroy()
         except:
             pass
+    
+    return True

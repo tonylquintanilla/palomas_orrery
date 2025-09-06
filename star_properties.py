@@ -4,7 +4,9 @@ import time
 import re
 from astroquery.simbad import Simbad
 import numpy as np
+from simbad_manager import SimbadQueryManager, SimbadConfig
 
+# Replace query_simbad_for_star_properties with the one from enhanced_star_properties.py
 
 def parse_magnitude(value):
     if value is None:

@@ -71,7 +71,7 @@ warnings.simplefilter('ignore', ErfaWarning)
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Star Visualization -- Updated: February 22, 2025")
+root.title("Star Visualization -- Updated: September 5, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # root.configure(bg="lightblue")  # Set the background color of the root window
@@ -688,14 +688,15 @@ plot_controls_frame = ttk.Frame(root)
 plot_controls_frame.grid(row=0, column=1, padx=10, pady=10, sticky='n')
 
 # Move light year entry and button to middle column
-ly_entry_label = tk.Label(plot_controls_frame, text="Enter number of light-years to plot up to 100:")
+ly_entry_label = tk.Label(plot_controls_frame, text="Enter number of light-years to plot (max 100.1):")
+
 ly_entry_label.pack(pady=(0, 5))
 
 ly_entry = tk.Entry(plot_controls_frame)
 ly_entry.pack(pady=(0, 10))
 ly_entry.insert(0, '20')  # Default ly value
 
-
+"""
 # Function to call the planetarium_distance script with user input
 def call_planetarium_distance_script_with_input():
     try:
@@ -712,6 +713,27 @@ def call_planetarium_distance_script_with_input():
     except Exception as e:
         output_label.config(text=f"Error running planetarium_distance.py: {e}")
         print(f"Error running planetarium_distance.py: {e}")
+"""
+
+# FOR call_planetarium_distance_script_with_input():
+def call_planetarium_distance_script_with_input():          # increases fetch limit from 100 ly to 100.1 ly
+    try:
+        ly_value = ly_entry.get()
+        ly_value = float(ly_value)  # CHANGE: int to float for decimals
+        if ly_value <= 0:
+            output_label.config(text="Please enter a positive number of light-years.")
+            return
+        if ly_value > 100.1:  # ADD: Upper limit check
+            output_label.config(text="Please enter a number between 0.1 and 100.1 light-years.")
+            return
+        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
+        subprocess.run(['python', script_path, str(ly_value)])
+    except ValueError:
+        output_label.config(text="Please enter a valid number (e.g., 100 or 100.1)")  # CHANGE: Update message
+    except Exception as e:
+        output_label.config(text=f"Error running planetarium_distance.py: {e}")
+        print(f"Error running planetarium_distance.py: {e}")
+
 
 # Add plot buttons to middle column
 plot_button_3d = tk.Button(
@@ -728,6 +750,7 @@ plot_button_3d.pack(pady=(0, 10))
 CreateToolTip(plot_button_3d, "3D plot of stars within the selected distance from the Sun.")
 
 # Function to call the hr_diagram script with user input
+"""
 def call_hr_diagram_distance_script_with_input():
     try:
         mag_value = ly_entry.get()
@@ -739,10 +762,29 @@ def call_hr_diagram_distance_script_with_input():
         # Pass the light-years value as a command-line argument
         subprocess.run(['python', script_path, str(mag_value)])
     except ValueError:
-        output_label.config(text="Please enter the number of light-years to plot, up to 100.")
+        output_label.config(text="Please enter the number of light-years to plot, up to 100.1.")
     except Exception as e:
         output_label.config(text=f"Error running hr_diagram_distance.py: {e}")
         print(f"Error running hr_diagram_distance.py: {e}")
+"""        
+
+def call_hr_diagram_distance_script_with_input():
+    try:
+        ly_value = ly_entry.get()  # Also rename mag_value to ly_value for clarity
+        ly_value = float(ly_value)  # CHANGE: int to float
+        if ly_value <= 0:
+            output_label.config(text="Please enter a positive number of light-years.")
+            return
+        if ly_value > 100.1:  # ADD: Optional upper limit check
+            output_label.config(text="Please enter a number between 0.1 and 100.1 light-years.")
+            return
+        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
+        subprocess.run(['python', script_path, str(ly_value)])
+    except ValueError:
+        output_label.config(text="Please enter a valid number (e.g., 100 or 100.1)")
+    except Exception as e:
+        output_label.config(text=f"Error running hr_diagram_distance.py: {e}")
+        print(f"Error running hr_diagram_distance.py: {e}")        
 
 plot_button_2d = tk.Button(
     plot_controls_frame,

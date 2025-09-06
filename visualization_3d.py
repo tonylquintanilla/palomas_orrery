@@ -6,8 +6,9 @@ import re
 import plotly.graph_objects as go
 
 from constants_new import (
-    object_type_mapping, class_mapping, hover_text_sun, stellar_class_labels
+    object_type_mapping, class_mapping, stellar_class_labels
 )
+
 from save_utils import save_plot
 from star_notes import unique_notes
 from astropy.coordinates import SkyCoord
@@ -17,6 +18,8 @@ from visualization_core import (
     format_value, create_hover_text, prepare_temperature_colors,
     generate_star_count_text
 )
+
+from solar_visualization_shells import hover_text_sun
 
 def parse_stellar_classes(df):
     """Parse stellar classes from spectral types."""
@@ -53,23 +56,28 @@ def prepare_3d_data(combined_df, max_value, counts, mode=None):
     # Separate Messier objects from stars
     messier_objects = combined_df[messier_mask].copy() if messier_mask.any() else pd.DataFrame()
     stellar_objects = combined_df[~messier_mask].copy()
-    
-    # Process stellar objects
-    plottable_stars = stellar_objects[
-        ~pd.isna(stellar_objects['Temperature']) & 
-        ~pd.isna(stellar_objects['Luminosity']) & 
-        (stellar_objects['Temperature'] > 0)
-    ].copy()
-    
+
+    # Process stellar objects - include ALL stars for spatial completeness
+    plottable_stars = stellar_objects.copy()  # Use all stars
+
+    # Track which stars have temperature data
+    has_temp = ~pd.isna(plottable_stars['Temperature']) & (plottable_stars['Temperature'] > 0)
+
     print(f"\nProcessing stellar objects:")
     print(f"Total stars: {len(stellar_objects)}")
-    print(f"Plottable stars: {len(plottable_stars)}")
-    
-    # Temperature normalization for stars
+    print(f"Stars with temperature: {has_temp.sum()}")
+    print(f"Stars without temperature: {(~has_temp).sum()}")
+
+    # Temperature normalization ONLY for stars with temperature
     temp_min = 1300
     temp_max = 50000
+
+    # Create normalized temperature, keep NaN for missing values
     plottable_stars['Temperature_Clipped'] = plottable_stars['Temperature'].clip(lower=temp_min, upper=temp_max)
     plottable_stars['Temperature_Normalized'] = (plottable_stars['Temperature_Clipped'] - temp_min) / (temp_max - temp_min)
+
+    # Add flag for hover text and color assignment
+    plottable_stars['Has_Temperature'] = has_temp
 
     # Calculate marker sizes based on apparent magnitude
     def calculate_marker_size(app_mag, is_messier=False):
@@ -176,10 +184,16 @@ def create_hover_text(df, include_3d=False):
         hover_text = f'<b>{star_name}</b><br><br>'
         hover_text += f'{note}<br><br>'
         hover_text += f'Distance: {pc_str} pc ({ly_str} ly)<br>'
-        # Get values directly and format them if they exist
         hover_text += f'Object Type: {format_value(row.get("Object_Type_Desc"), "")}<br>'
         hover_text += f'Stellar Class: {format_value(row.get("Stellar_Class"), "")}<br>'
-        hover_text += f'Temperature: {format_value(row.get("Temperature"), ".0f")} K<br>'
+        
+        # Handle temperature with special message for stars without temperature data
+        has_temp = row.get('Has_Temperature', True)  # Default to True for backward compatibility
+        if has_temp:
+            hover_text += f'Temperature: {format_value(row.get("Temperature"), ".0f")} K<br>'
+        else:
+            hover_text += f'Temperature: Unknown (displayed in gray)<br>'
+        
         hover_text += f'Luminosity: {format_value(row.get("Luminosity"), ".6f")} Lsun<br>'
         hover_text += f'Absolute Magnitude: {format_value(row.get("Abs_Mag"), ".2f")}<br>'
         hover_text += f'Apparent Magnitude: {format_value(row.get("Apparent_Magnitude"), ".2f")}<br>'
@@ -474,7 +488,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
     # Create mask for regular stars (not Messier and not special)
     regular_stars_mask = ~(messier_mask | special_mask)
 
-    # First add regular stars trace
+    # First add regular stars trace with "gray stars"
     fig.add_trace(go.Scatter3d(
         x=combined_df[regular_stars_mask]['x'],
         y=combined_df[regular_stars_mask]['y'],
@@ -482,7 +496,10 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
         mode='markers',
         marker=dict(
             size=combined_df[regular_stars_mask]['Marker_Size'],
-            color=combined_df[regular_stars_mask]['Temperature_Normalized'],
+            # Use list comprehension directly
+            color=['gray' if not has_t else norm_t 
+                for has_t, norm_t in zip(combined_df[regular_stars_mask]['Has_Temperature'],
+                                        combined_df[regular_stars_mask]['Temperature_Normalized'])],
             colorscale=colorscale,
             cmin=0,
             cmax=1,
@@ -505,6 +522,25 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
         name='Stars',
         showlegend=True
     ))
+
+    # Calculate the count of stars without temperature
+    stars_without_temp_count = (~combined_df[regular_stars_mask]['Has_Temperature']).sum()
+
+    # Add legend entry for stars without temperature
+#    if stars_without_temp_count > 0:
+#        fig.add_trace(go.Scatter3d(
+#            x=[None],
+#            y=[None],
+#            z=[None],
+#            mode='markers',
+#            marker=dict(
+#                size=3,  # Small size to match typical faint stars
+#                color='gray',
+#            ),
+#            name=f'Stars without temperature ({stars_without_temp_count})',
+#            showlegend=True,
+#            hoverinfo='skip'
+#        ))
 
     # Add Sun trace
     fig.add_trace(go.Scatter3d(
@@ -611,26 +647,32 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
     
     # Set title and footer text based on mode
     if mode == 'distance':
-        title_text = f'Interactive 3D Visualization of Stars within {int(max_value)} Light-Years{scale_text}'
+#        title_text = f'Interactive 3D Visualization of Stars within {int(max_value)} Light-Years{scale_text}'
+        title_text = f"Interactive 3D Visualization of Stars within {max_value:.1f} Light-Years"
+
         footer_text = (
             f"This visualization shows <span style='color:red'>{len(combined_df):,d}</span> stars (of "
             f"<span style='color:red'>{analysis['total_stars']:,d}</span> unique stars detected) within "
-            f"<span style='color:red'>{int(max_value)}</span> light-years from the Sun. "
+        #    f"<span style='color:red'>{int(max_value)}</span> light-years from the Sun. "
+            f"<span style='color:red'>{max_value:.1f}</span> light-years from the Sun. "
+
             f"Catalog breakdown of plotted stars: <span style='color:red'>{analysis['plottable_hip']:,d}</span> from "
             f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a> and "
-            f"<span style='color:red'>{analysis['plottable_gaia']:,d}</span> from "
-            f"<a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a>. "
-            f"Data quality: <span style='color:red'>{analysis['missing_temp']:,d}</span> stars lack temperature data,<br>"
-            f"<span style='color:red'>{analysis['missing_lum']:,d}</span> lack luminosity data, and "
-            f"<span style='color:red'>{analysis['temp_le_zero']:,d}</span> have invalid temperatures. "
+            f"<span style='color:red'>{analysis['plottable_gaia']:,d}</span> with temperature and " 
+            f"<span style='color:red'>{analysis['missing_temp']:,d}</span> without temperature data<br>" 
+            f"(plotted uniformly small and gray) "
+            f"from <a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a>. "
+        #    f"<span style='color:red'>{analysis['missing_lum']:,d}</span> lack luminosity data, and "
+        #    f"<span style='color:red'>{analysis['temp_le_zero']:,d}</span> have invalid temperatures. "
             f"Star properties from <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> database. "
             f"Marker size indicates luminosity (1e-6 to 1e3 Lsun), "
             f"color indicates temperature based on black-body radiation (1,300K to 50,000K).<br>"
             f"The Sun is shown in chlorophyll green at the origin (0, 0, 0). "
-            f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude, Gemini, and DeepSeek, February 2025.<br>"
-            f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
-            f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
-            f"with the star name, for example: \"* alf Aql\", for star data. " 
+            f"Python script by Tony Quintanilla with assistance from Claude, ChatGPT, Gemini, and DeepSeek, September 2025.<br>"
+            f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>, "            
+            f"<a href='https://skyview.gsfc.nasa.gov/current/cgi/titlepage.pl' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA Skyview</a>, "
+            f"and <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
+            f"with the star name, for example: \"* alf Aql\". " 
             f"<span style='color:red'>Paloma's Orrery project website:</span> <a href='https://sites.google.com/view/tony-quintanilla' target='_blank' style='color:#1E90FF; text-decoration:underline;'>here</a>. "
         )
 
@@ -693,7 +735,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
         margin=dict(t=90, b=85),
         annotations=[
             dict(
-                text="Click on the legend items <br>to toggle them off or back on:",
+                text="Click on the legend items<br>to toggle them off or<br>back on:",
                 xref="paper",
                 yref="paper",
                 x=0.9,
@@ -841,11 +883,11 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
         ]
     )
 
-    default_name = (
-        f"3d_stars_magnitude_{max_value}" if combined_df.attrs['mode'] == 'magnitude'
-        else f"3d_stars_distance_{max_value}ly"
-    )
-    save_plot(fig, default_name)    
+#    default_name = (
+#        f"3d_stars_magnitude_{max_value}" if combined_df.attrs['mode'] == 'magnitude'
+#        else f"3d_stars_distance_{max_value}ly"
+#    )
+#    save_plot(fig, default_name)    
 
     # Print debug info about Messier objects
     print("\nChecking for Messier objects...")

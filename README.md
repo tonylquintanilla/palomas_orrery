@@ -74,7 +74,30 @@ You can run it three ways:
 - Start with a small selection of planets or moons.  
 - The first time you plot an object, the program will ask to fetch data from JPL Horizons — choose “Yes” to build your cache.  
 - On later runs, you can use the cached data for faster plotting.  
+- **For star visualizations**: Expanding distance or magnitude limits fetches only new stars, while reducing limits instantly filters cached data.
 - Hover over objects in the plot for extra information.  
+
+### Star Visualization First-Time Setup
+
+**Check for existing cache files first**:
+- Look for `star_properties_distance.pkl` and `star_properties_magnitude.pkl` in your project folder
+- If you downloaded the code from Google Drive or got it from someone else, you may already have these cache files (saving hours of setup!)
+- Check file sizes: A populated distance PKL is typically 1-2 MB, magnitude PKL can be 10+ MB
+- With existing PKL files, you can immediately visualize any distance/magnitude within the cached range
+
+**Initial cache building (if no PKL files exist)**:
+- The system includes rate limiting protection (progressive delays, batch processing)
+- A full 100.1 ly cache (~14,000 stars) takes 2-3 hours but won't trigger SIMBAD limits
+- Progress saves every 50 stars automatically
+- **Safe to stop anytime**: Press Ctrl+C to interrupt - all progress is saved and will resume from where you left off next time
+
+**Recommended approach for building cache from scratch**:
+1. Start with 20 light-years (~100 stars, 5 minutes)
+2. Expand to 50 light-years (adds ~1,500 stars, 15 minutes)
+3. Later expand to 100 light-years when you have time (or interrupt and resume as needed)
+4. Once cached, all future runs at any distance are instant
+
+**Tip**: If you accidentally start a large query, don't panic - just press Ctrl+C. Your partial cache is preserved and valuable. Next run will continue from where you stopped.
 
 ---
 
@@ -149,15 +172,17 @@ You can run it three ways:
 - Magnetosphere modeling including plasma torus systems around Jupiter and Saturn.  
 
 #### Advanced Features & Intelligent Data Management
-- Smart selective caching only fetches data for selected objects, avoiding unnecessary requests.  
-- Special fetch mode for experimental plotting without cache modification.  
-- Automatic cache backup on startup.  
+- Smart selective caching only fetches data for selected objects, avoiding unnecessary requests.
+- **Incremental catalog caching** fetches only new stars when expanding distance/magnitude limits.
+- **Automatic cache merging** combines old and new data, removing duplicates intelligently.
+- Special fetch mode for experimental plotting without cache modification.
+- Automatic cache backup on startup.
 - Cache validation and repair system that automatically detects and fixes corrupted data entries.  
 - Multi-threaded processing with proper shutdown handling.  
 - Export capabilities: HTML, PNG, plus JSON, VOTable, Pickle data files for caching.  
 - Hover information with detailed astronomical data.  
 - Copy-to-clipboard functionality for star names and coordinates.  
-- Animation — watch solar system bodies and spacecraft move across timescales from minutes to years.  
+- Animation — watch solar system bodies and spacecraft move across timescales from minutes to years. 
 
 #### Interactive Orbital Mechanics Visualization
 - Educational tool showing how the six classical orbital elements define an object's orbit in space.  
@@ -212,6 +237,18 @@ You can run it three ways:
 2. Uncertainty values represent JPL Horizons 3-sigma confidence intervals
 3. Sources: JPL Horizons real-time data, DE441 ephemeris precision, or typical class-based estimates
 
+#### Incremental Data Caching System
+1. Smart incremental fetching for stellar catalogs:
+   - Only fetches new data when expanding search radius or magnitude limit
+   - Filters cached data when reducing limits (no API calls needed)
+   - Tracks query parameters with metadata files
+   - Reduces data fetching by up to 99% for iterative exploration
+
+2. Safe SIMBAD query management:
+   - Prevents accidental mass queries with confirmation prompts
+   - Requires explicit parameters to prevent unintended cache rebuilds
+   - Progressive rate limiting between query batches
+   - Preserves existing PKL cache integrity
 ---
 
 ## Architecture Overview
@@ -310,6 +347,12 @@ The entry point. Manages the main GUI, object selection, date settings, and coor
 - Processes raw astronomical data
 - Calculates distances and coordinates
 - Aligns different catalog systems
+
+**`incremental_cache_manager.py`**
+- Manages incremental fetching for VizieR catalogs
+- Tracks cache metadata and query parameters
+- Handles expansion, contraction, and merging of stellar data
+- Minimizes API calls through intelligent cache reuse
 
 **`star_properties.py`**
 - Queries SIMBAD for stellar parameters

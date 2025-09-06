@@ -36,6 +36,8 @@ from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, sho
 
 from messier_object_data_handler import MessierObjectHandler  # Add this with other imports
 
+from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
+
 def convert_messier_to_df(messier_objects):
     """Convert Messier objects to a DataFrame format compatible with stellar data."""
     if not messier_objects:
@@ -112,9 +114,11 @@ def main():
             print("Invalid input for magnitude limit. Using default value of 4.")
             mag_limit = 3.5
             user_max_coord = None
+#    else:
+#        mag_limit = 3.5  # Default value
+#        user_max_coord = None
     else:
-        mag_limit = 3.5  # Default value
-        user_max_coord = None
+        return    # prevents running this module without gui input    
 
     print(f"Filtering stars and objects with apparent magnitude ≤ {mag_limit}.")
     start_time = time.time()
@@ -131,14 +135,46 @@ def main():
         gaia_data_file = 'gaia_data_magnitude.vot'
 
         # Load or fetch stellar data
-        hip_data = load_or_fetch_hipparcos_data(v, hip_data_file, mag_limit)
-        gaia_data = load_or_fetch_gaia_data(v, gaia_data_file, mag_limit)
+    #    hip_data = load_or_fetch_hipparcos_data(v, hip_data_file, mag_limit)
+    #    gaia_data = load_or_fetch_gaia_data(v, gaia_data_file, mag_limit)
+
+        hip_data = smart_load_or_fetch_hipparcos(v, hip_data_file,
+                                                mode='magnitude',
+                                                limit_value=mag_limit)
+        gaia_data = smart_load_or_fetch_gaia(v, gaia_data_file,
+                                            mode='magnitude',
+                                            limit_value=mag_limit)
 
         if hip_data is None and gaia_data is None:
             print("Error: Could not load or fetch data from either catalog.")
             return
 
         print(f"Data acquisition completed in {time.time() - start_time:.2f} seconds.")
+        
+        from incremental_cache_manager import IncrementalCacheManager
+        cache_mgr = IncrementalCacheManager()
+
+        hip_status, hip_meta = cache_mgr.check_cache_validity(hip_data_file, 'magnitude', mag_limit)
+        gaia_status, gaia_meta = cache_mgr.check_cache_validity(gaia_data_file, 'magnitude', mag_limit)
+
+        print("\n" + "="*60)
+        print("CACHE STATUS REPORT")
+        print("="*60)
+        print(f"Hipparcos: {hip_status}")
+        if hip_meta:
+            print(f"  Cached: {hip_meta.entry_count} stars up to magnitude {hip_meta.limit_value}")
+        print(f"Gaia: {gaia_status}")
+        if gaia_meta:
+            print(f"  Cached: {gaia_meta.entry_count} stars up to magnitude {gaia_meta.limit_value}")
+
+        if hip_status == 'expand' or gaia_status == 'expand':
+            print("\n✔ INCREMENTAL FETCH PERFORMED")
+        elif hip_status == 'subset' or gaia_status == 'subset':
+            print("\n✔ FILTERED EXISTING CACHE (no fetch needed)")
+        else:
+            print("\n✔ EXACT CACHE HIT - using existing data")
+        print("="*60 + "\n")
+
         
         # Step 3: Data Processing
         print("\nStarting data processing...")
@@ -208,15 +244,36 @@ def main():
         print("\nRunning analysis...")
         analyze_magnitude_distribution(combined_df, mag_limit)
         
+#        analysis_results = analyze_and_report_stars(
+#            combined_df,
+#            mode='magnitude',
+#            max_value=mag_limit
+#        )
+
+        # Parse stellar classes and set mode
+#        combined_df = parse_stellar_classes(combined_df)
+#        combined_df.attrs['mode'] = 'magnitude'
+
+        # Run comprehensive analysis
         analysis_results = analyze_and_report_stars(
             combined_df,
             mode='magnitude',
             max_value=mag_limit
         )
 
-        # Parse stellar classes and set mode
-        combined_df = parse_stellar_classes(combined_df)
+        # Store the mode in the DataFrame attributes
         combined_df.attrs['mode'] = 'magnitude'
+
+        # Flatten the analysis for visualization (ADD THIS SECTION)
+        flattened_analysis = {
+            'total_stars': analysis_results['data_quality']['total_stars'],
+            'plottable_hip': analysis_results['plottable']['hipparcos'],
+            'plottable_gaia': analysis_results['plottable']['gaia'],
+            'missing_temp': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_temp'],
+            'missing_lum': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_lum'],
+            'temp_le_zero': 0
+        }
+        combined_df.attrs['analysis'] = flattened_analysis
 
         # Step 9: Prepare Data for Visualization
         print("\nPreparing visualization data...")

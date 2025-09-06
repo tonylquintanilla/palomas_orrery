@@ -5,7 +5,7 @@ import pandas as pd
 import re
 import plotly.graph_objects as go
 from constants_new import (
-    object_type_mapping, class_mapping, hover_text_sun, stellar_class_labels
+    object_type_mapping, class_mapping, stellar_class_labels
 )
 import plotly.graph_objects as go
 from visualization_core import (
@@ -14,6 +14,7 @@ from visualization_core import (
 from save_utils import save_plot
 from star_notes import unique_notes
 from visualization_utils import add_hover_toggle_buttons, update_figure_frames, format_hover_text
+from solar_visualization_shells import hover_text_sun
 
 def prepare_2d_data(combined_data):
 #    """Prepare data specifically for 2D HR diagram plotting."""
@@ -336,7 +337,8 @@ def create_hr_diagram(combined_df, counts_dict, mag_limit=None, max_light_years=
     if mag_limit is not None:
         title_text = f'Hertzsprung-Russell Diagram of Unaided-Eye Visible Stars (Apparent Magnitude ≤ {mag_limit})'
     elif max_light_years is not None:
-        title_text = f'Hertzsprung-Russell Diagram of Stars within {int(max_light_years)} Light-Years'
+#        title_text = f'Hertzsprung-Russell Diagram of Stars within {int(max_light_years)} Light-Years'
+        title_text = f'Hertzsprung-Russell Diagram of Stars within {max_light_years:.1f} Light-Years'        
     else:
         title_text = 'Hertzsprung-Russell Diagram'
 

@@ -23,6 +23,7 @@ from visualization_core import analyze_magnitude_distribution, analyze_and_repor
 
 from visualization_2d import prepare_2d_data, create_hr_diagram
 
+from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
 
 def main():
     # Parse command-line arguments
@@ -36,8 +37,10 @@ def main():
         except ValueError:
             print("Invalid input for magnitude limit. Using default value of 4.")
             mag_limit = 4
+#    else:
+#        mag_limit = 4  # Default value
     else:
-        mag_limit = 4  # Default value
+        return      # prevents running this module without gui input
 
     print(f"Filtering stars with apparent magnitude ≤ {mag_limit}.")
     start_time = time.time()
@@ -50,8 +53,15 @@ def main():
         gaia_data_file = 'gaia_data_magnitude.vot'
 
         # Load or fetch data
-        hip_data = load_or_fetch_hipparcos_data(v, hip_data_file, mag_limit)
-        gaia_data = load_or_fetch_gaia_data(v, gaia_data_file, mag_limit)
+    #    hip_data = load_or_fetch_hipparcos_data(v, hip_data_file, mag_limit)
+    #    gaia_data = load_or_fetch_gaia_data(v, gaia_data_file, mag_limit)
+
+        hip_data = smart_load_or_fetch_hipparcos(v, hip_data_file,
+                                                mode='magnitude',
+                                                limit_value=mag_limit)
+        gaia_data = smart_load_or_fetch_gaia(v, gaia_data_file,
+                                            mode='magnitude',
+                                            limit_value=mag_limit)
 
         if hip_data is None and gaia_data is None:
             print("Error: Could not load or fetch data from either catalog.")
@@ -59,6 +69,30 @@ def main():
 
         print(f"Data acquisition completed in {time.time() - start_time:.2f} seconds.")
         
+        from incremental_cache_manager import IncrementalCacheManager
+        cache_mgr = IncrementalCacheManager()
+
+        hip_status, hip_meta = cache_mgr.check_cache_validity(hip_data_file, 'magnitude', mag_limit)
+        gaia_status, gaia_meta = cache_mgr.check_cache_validity(gaia_data_file, 'magnitude', mag_limit)
+
+        print("\n" + "="*60)
+        print("CACHE STATUS REPORT")
+        print("="*60)
+        print(f"Hipparcos: {hip_status}")
+        if hip_meta:
+            print(f"  Cached: {hip_meta.entry_count} stars up to magnitude {hip_meta.limit_value}")
+        print(f"Gaia: {gaia_status}")
+        if gaia_meta:
+            print(f"  Cached: {gaia_meta.entry_count} stars up to magnitude {gaia_meta.limit_value}")
+
+        if hip_status == 'expand' or gaia_status == 'expand':
+            print("\n✔ INCREMENTAL FETCH PERFORMED")
+        elif hip_status == 'subset' or gaia_status == 'subset':
+            print("\n✔ FILTERED EXISTING CACHE (no fetch needed)")
+        else:
+            print("\n✔ EXACT CACHE HIT - using existing data")
+        print("="*60 + "\n")
+
         # Step 2: Data Processing
         print("Starting data processing...")
         process_start = time.time()
@@ -126,6 +160,20 @@ def main():
             max_value=mag_limit
         )
         
+        # Store the mode in the DataFrame attributes
+        combined_df.attrs['mode'] = 'magnitude'
+
+        # Flatten the analysis for visualization
+        flattened_analysis = {
+            'total_stars': analysis_results['data_quality']['total_stars'],
+            'plottable_hip': analysis_results['plottable']['hipparcos'],
+            'plottable_gaia': analysis_results['plottable']['gaia'],
+            'missing_temp': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_temp'],
+            'missing_lum': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_lum'],
+            'temp_le_zero': 0
+        }
+        combined_df.attrs['analysis'] = flattened_analysis
+
         # Prepare data for visualization
         prepared_df = prepare_2d_data(combined_data)
         if prepared_df is None or len(prepared_df) == 0:

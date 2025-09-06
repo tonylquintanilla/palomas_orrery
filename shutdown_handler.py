@@ -72,81 +72,73 @@ def show_figure_safely(fig, default_name):
     import webbrowser
     import os
     import tempfile
+    import threading
 
-
-    # Create a single temporary file for browser display
+    # Create and display temporary HTML file
     temp_path = None
-
-    # First, create and display the temporary HTML file immediately
-#    with tempfile.NamedTemporaryFile(suffix='.html', delete=False) as tmp:
-#        temp_path = tmp.name
-#        fig.write_html(temp_path, include_plotlyjs='cdn', auto_play=False)
-#        webbrowser.open(f'file://{os.path.abspath(temp_path)}')
-
-    # Then handle the save options
-#    root = tk.Tk()
-#    root.withdraw()
-#    root.attributes('-topmost', True)
-
+    root = None
+    
     try:
-
         # First, create temporary file for browser display
         with tempfile.NamedTemporaryFile(suffix='.html', delete=False) as tmp:
             temp_path = tmp.name
-            # Write the figure to HTML with needed JavaScript
             fig.write_html(
                 temp_path,
                 include_plotlyjs=True,
                 config={'displayModeBar': True}
             )
-            
-        # Open in browser first - this happens regardless of save choices
+        
+        # Open in browser immediately
         webbrowser.open(f'file://{os.path.abspath(temp_path)}')
+        print(f"Visualization opened in browser")
 
-        # Now handle saving - create a new Tk root AFTER browser is opened
+        # Create root window for dialogs
         root = tk.Tk()
         root.withdraw()
         root.attributes('-topmost', True)
 
-        # PNG save option
+        # Single initial dialog - do you want to save?
         save_response = messagebox.askyesno(
-            "Save Plot",
-            "Would you like to save this plot as a PNG?\n\n"
-            "Yes - Save as PNG\n"
-            "No - Skip saving as PNG",
+            "Save Visualization",
+            "Would you like to save this visualization?",
             parent=root
         )
 
         if save_response:
-            # Save as PNG
-            file_path = filedialog.asksaveasfilename(
-                parent=root,
-                initialfile=f"{default_name}.png",
-                defaultextension=".png",
-                filetypes=[("PNG files", "*.png")]
-            )
-            if file_path:
-                try:
-                    fig.write_image(file_path)
-                    print(f"Plot saved as PNG: {file_path}")
-                except ImportError:
-                    messagebox.showerror(
-                        "Missing Dependency",
-                        "The kaleido package is required for saving static images.\n"
-                        "Please install it with: pip install kaleido",
-                        parent=root
-                    )
-
-        else:
-
-            # Option to save as HTML (only if PNG was declined)
-            html_response = messagebox.askyesno(
-                "Save Interactive Plot",
-                "Would you like to save the interactive HTML version?",
+            # Ask for format only if they want to save
+            format_choice = messagebox.askyesno(
+                "Save Format",
+                "Choose save format:\n\n"
+                "Yes - Static PNG image\n"
+                "No - Interactive HTML file",
                 parent=root
             )
-
-            if html_response:
+            
+            if format_choice:  # User chose PNG
+                file_path = filedialog.asksaveasfilename(
+                    parent=root,
+                    initialfile=f"{default_name}.png",
+                    defaultextension=".png",
+                    filetypes=[("PNG files", "*.png")]
+                )
+                if file_path:
+                    try:
+                        fig.write_image(file_path)
+                        print(f"Plot saved as PNG: {file_path}")
+                    except ImportError:
+                        messagebox.showerror(
+                            "Missing Dependency",
+                            "The kaleido package is required for saving static images.\n"
+                            "Please install it with: pip install kaleido",
+                            parent=root
+                        )
+                    except Exception as e:
+                        messagebox.showerror(
+                            "Save Error",
+                            f"Error saving PNG: {str(e)}",
+                            parent=root
+                        )
+            else:  # User chose HTML
                 file_path = filedialog.asksaveasfilename(
                     parent=root,
                     initialfile=f"{default_name}.html",
@@ -154,50 +146,43 @@ def show_figure_safely(fig, default_name):
                     filetypes=[("HTML files", "*.html")]
                 )
                 if file_path:
-                    # Save the complete figure with all data
-                    fig.write_html(
-                        file_path, 
-                        include_plotlyjs=True, 
-                        config={'displayModeBar': True}
-                    )
-                    print(f"Plot saved as HTML: {file_path}")
-
-        # Explicit root destroy
-        root.destroy()
+                    try:
+                        fig.write_html(file_path, include_plotlyjs='cdn', auto_play=False)
+                        print(f"Interactive plot saved to: {file_path}")
+                    except Exception as e:
+                        messagebox.showerror(
+                            "Save Error",
+                            f"Error saving HTML: {str(e)}",
+                            parent=root
+                        )
+        else:
+            print("User chose not to save the visualization")
 
     except Exception as e:
-        print(f"Error during save operation: {e}")
-        if 'root' in locals() and root.winfo_exists():
-            messagebox.showerror(
-                "Save Error",
-                f"An error occurred while saving:\n{str(e)}",
-                parent=root
-            )
-    #    finally:
-            root.destroy()
-
-    # Schedule cleanup outside try/except/finally
-    if temp_path and os.path.exists(temp_path):
-        # Create a separate root just for cleanup
-        cleanup_root = tk.Tk()
-        cleanup_root.withdraw()
-
+        print(f"Error during visualization/save operation: {e}")
+        import traceback
+        traceback.print_exc()
+    
+    finally:
+        # Clean up the Tk root window
+        try:
+            if root:
+                root.destroy()
+        except:
+            pass
+        
+        # Schedule cleanup of temporary file after a delay
         def cleanup_temp():
             try:
-                if os.path.exists(temp_path):
+                if temp_path and os.path.exists(temp_path):
                     os.unlink(temp_path)
-                    print(f"Temporary file deleted: {temp_path}")
+                    print(f"Cleaned up temporary file: {temp_path}")
             except Exception as e:
                 print(f"Error cleaning up temporary file: {e}")
-            finally:
-                cleanup_root.destroy()
-
-        # Create a new root for cleanup timer
-    #    cleanup_root = tk.Tk()
-    #    cleanup_root.withdraw()
-        # Delay cleanup to ensure browser has loaded the file
-        cleanup_root.after(5000, cleanup_temp)
-    #    cleanup_root.after(5100, cleanup_root.destroy)  # Destroy cleanup window after temp file deletion
-        cleanup_root.mainloop()  # This ensures the cleanup actually happens
-
+        
+        # Use a timer to delay cleanup, ensuring browser has time to load the file
+        if temp_path:
+            timer = threading.Timer(10.0, cleanup_temp)
+            timer.daemon = True
+            timer.start()
 
