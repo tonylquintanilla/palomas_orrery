@@ -181,7 +181,7 @@ def analyze_star_counts(combined_df):
     print(f"\nTemperature Analysis:")
     print(f"Stars with temperature data: {np.sum(has_temp)}")
     print(f"Stars with valid temperature > 0: {np.sum(valid_temp)}")
-    print(f"Stars with temperature ≤ 0: {np.sum(has_temp & ~valid_temp)}")
+    print(f"Stars with temperature <= 0: {np.sum(has_temp & ~valid_temp)}")
     
     # Luminosity analysis
     has_lum = ~pd.isna(combined_df['Luminosity'])
@@ -345,7 +345,7 @@ def analyze_and_report_stars(combined_df, mode='distance', max_value=None):
     gaia_mid = analysis['catalog_counts']['gaia']['mid']
     gaia_faint = analysis['catalog_counts']['gaia']['faint']
 
-    print(f"Hipparcos bright (≤1.73): {hip_bright:,d}")
+    print(f"Hipparcos bright (<= 1.73): {hip_bright:,d}")
     print(f"Mid-range stars (1.73-4.0):")
     print(f"  - From Hipparcos: {hip_mid:,d}")
     print(f"  - From Gaia: {gaia_mid:,d}")
@@ -393,9 +393,9 @@ def generate_star_count_text(counts_dict, combined_df=None):
     
     return (
         f"<br>     Total stars plotted: <span style='background-color: red; color: red'>{total_stars:,d}</span>: "
-        f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a> bright (Vmag ≤ 1.73): <span style='background-color: red; color: red'>{hip_bright}</span> stars. "
-        f"Hipparcos mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{hip_mid}</span> stars. "
-    #    f"<a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Gaia</a> mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{gaia_mid}</span> stars. "
+        f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a> bright (Vmag <= 1.73): <span style='background-color: red; color: red'>{hip_bright}</span> stars. "
+        f"Hipparcos mid (1.73 < Vmag <= 4.0): <span style='background-color: red; color: red'>{hip_mid}</span> stars. "
+    #    f"<a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Gaia</a> mid (1.73 < Vmag <= 4.0): <span style='background-color: red; color: red'>{gaia_mid}</span> stars. "
         f"<a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a> faint (Vmag > 4.0): <span style='background-color: red; color: red'>{gaia_faint}</span> stars."
         f"<br>     Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>, "
         f"<a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a>, "

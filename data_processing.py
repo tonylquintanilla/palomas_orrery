@@ -161,7 +161,7 @@ def select_stars_by_magnitude(hip_data, gaia_data, mag_limit):
     saturation effects. For stars in the range Vmag ~ 4 to 10, Gaia should be the preferred source due to its superior accuracy.
     For stars fainter than Vmag ~ 10, Gaia is far more accurate and essentially replaces Hipparcos. There are no Gaia stars below Vmag 1.73.
 
-    - Vmag ≤ 4: Hipparcos exclusively (no overlap with Gaia) 
+    - Vmag <= 4: Hipparcos exclusively (no overlap with Gaia) 
     - Vmag > 4: Gaia exclusively
     
     Parameters:
@@ -177,7 +177,7 @@ def select_stars_by_magnitude(hip_data, gaia_data, mag_limit):
 
     all_selected_stars = []
 
-    # --- 1. Hipparcos stars (Vmag ≤ 4) ---
+    # --- 1. Hipparcos stars (Vmag <= 4) ---
     if hip_data is not None:
         bright_mask = hip_data['Vmag'] <= 4  # No need to compare with mag_limit here
         bright_stars = hip_data[bright_mask]
@@ -185,7 +185,7 @@ def select_stars_by_magnitude(hip_data, gaia_data, mag_limit):
             bright_stars['Source_Catalog'] = 'Hipparcos'
             bright_stars['Apparent_Magnitude'] = bright_stars['Vmag']
             all_selected_stars.append(bright_stars)
-            print(f"Selected {len(bright_stars)} bright Hipparcos stars (Vmag ≤ 4)")
+            print(f"Selected {len(bright_stars)} bright Hipparcos stars (Vmag <= 4)")
 
     # --- 2. Gaia stars (Vmag > 4) ---
     if gaia_data is not None:
@@ -198,7 +198,7 @@ def select_stars_by_magnitude(hip_data, gaia_data, mag_limit):
             faint_stars['Source_Catalog'] = 'Gaia'
             faint_stars['Apparent_Magnitude'] = faint_stars['Estimated_Vmag']
             all_selected_stars.append(faint_stars)
-            print(f"Selected {len(faint_stars)} faint Gaia stars (4 < Vmag ≤ {mag_limit})")
+            print(f"Selected {len(faint_stars)} faint Gaia stars (4 < Vmag <= {mag_limit})")
 
     # Combine all selected stars
     if not all_selected_stars:
@@ -212,7 +212,7 @@ def select_stars_by_magnitude(hip_data, gaia_data, mag_limit):
     gaia_count = np.sum(combined_data['Source_Catalog'] == 'Gaia')
 
     print("\nFinal Selection Summary:")
-    print(f"Hipparcos stars (Vmag ≤ 4): {hip_count}")
+    print(f"Hipparcos stars (Vmag <= 4): {hip_count}")
     print(f"Gaia stars (Vmag > 4): {gaia_count}")
     print(f"Total stars: {len(combined_data)}")
 
@@ -284,7 +284,7 @@ def print_star_details(star):
 def select_stars_by_distance(hip_data, gaia_data, max_light_years):
     """
     Select stars based on distance criteria while maintaining clean catalog separation:
-    - Hipparcos: primary source for bright stars (Vmag ≤ 4.0)
+    - Hipparcos: primary source for bright stars (Vmag <= 4.0)
     - Gaia: primary source for faint stars (Vmag > 4.0)
     Both constrained by the specified distance.
     
@@ -300,16 +300,16 @@ def select_stars_by_distance(hip_data, gaia_data, max_light_years):
     print("\nSelecting stars by distance...")
     
     all_selected_stars = []
-    hip_bright_count = 0  # Vmag ≤ 1.73
-    hip_mid_count = 0     # 1.73 < Vmag ≤ 4.0
-    gaia_mid_count = 0    # 1.73 < Vmag ≤ 4.0
+    hip_bright_count = 0  # Vmag <= 1.73
+    hip_mid_count = 0     # 1.73 < Vmag <= 4.0
+    gaia_mid_count = 0    # 1.73 < Vmag <= 4.0
     gaia_faint_count = 0  # Vmag > 4.0
     
     # Process Hipparcos stars (for bright and mid-range stars)
     if hip_data is not None:
         # First filter by distance
         distance_mask = hip_data['Distance_ly'] <= max_light_years
-        mag_mask = hip_data['Vmag'] <= 4.0  # Hipparcos for Vmag ≤ 4.0 only
+        mag_mask = hip_data['Vmag'] <= 4.0  # Hipparcos for Vmag <= 4.0 only
         hip_stars = hip_data[distance_mask & mag_mask]
         
         if len(hip_stars) > 0:
@@ -367,9 +367,9 @@ def select_stars_by_distance(hip_data, gaia_data, max_light_years):
     }
     
     print("\nFinal Selection Summary:")
-    print(f"Hipparcos bright stars (Vmag ≤ 1.73): {hip_bright_count}")
-    print(f"Hipparcos mid-range stars (1.73 < Vmag ≤ 4.0): {hip_mid_count}")
-    print(f"Gaia mid-range stars (1.73 < Vmag ≤ 4.0): {gaia_mid_count}")
+    print(f"Hipparcos bright stars (Vmag <= 1.73): {hip_bright_count}")
+    print(f"Hipparcos mid-range stars (1.73 < Vmag <= 4.0): {hip_mid_count}")
+    print(f"Gaia mid-range stars (1.73 < Vmag <= 4.0): {gaia_mid_count}")
     print(f"Gaia faint stars (Vmag > 4.0): {gaia_faint_count}")
     print(f"Total stars: {len(combined_data)}")
     

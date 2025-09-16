@@ -40,7 +40,7 @@ def select_stars(hip_data, gaia_data, mode='magnitude', limit_value=None):
             primary_mask = hip_data['Vmag'] <= limit_value
             
         # Always apply magnitude-based catalog separation for Hipparcos
-        magnitude_mask = hip_data['Vmag'] <= 4.0  # Only use Hipparcos for Vmag ≤ 4.0
+        magnitude_mask = hip_data['Vmag'] <= 4.0  # Only use Hipparcos for Vmag <= 4.0
         
         # Combine masks
         hip_stars = hip_data[primary_mask & magnitude_mask]
@@ -96,8 +96,8 @@ def select_stars(hip_data, gaia_data, mode='magnitude', limit_value=None):
     
     # Print summary
     print("\nFinal Selection Summary:")
-    print(f"Hipparcos bright stars (Vmag ≤ 1.73): {counts['hip_bright_count']}")
-    print(f"Hipparcos mid-range stars (1.73 < Vmag ≤ 4.0): {counts['hip_mid_count']}")
+    print(f"Hipparcos bright stars (Vmag <= 1.73): {counts['hip_bright_count']}")
+    print(f"Hipparcos mid-range stars (1.73 < Vmag <= 4.0): {counts['hip_mid_count']}")
     print(f"Gaia faint stars (Vmag > 4.0): {counts['gaia_faint_count']}")
     print(f"Total stars: {counts['total_stars']}")
     
