@@ -123,7 +123,7 @@ def main():
     else:
         return    # prevents running this module without gui input    
 
-    print(f"Filtering stars and objects with apparent magnitude ≤ {mag_limit}.")
+    print(f"Filtering stars and objects with apparent magnitude <= {mag_limit}.")
     start_time = time.time()
 
     try:
@@ -171,11 +171,11 @@ def main():
             print(f"  Cached: {gaia_meta.entry_count} stars up to magnitude {gaia_meta.limit_value}")
 
         if hip_status == 'expand' or gaia_status == 'expand':
-            print("\n✔ INCREMENTAL FETCH PERFORMED")
+            print("\nOK INCREMENTAL FETCH PERFORMED")
         elif hip_status == 'subset' or gaia_status == 'subset':
-            print("\n✔ FILTERED EXISTING CACHE (no fetch needed)")
+            print("\nOK FILTERED EXISTING CACHE (no fetch needed)")
         else:
-            print("\n✔ EXACT CACHE HIT - using existing data")
+            print("\nOK EXACT CACHE HIT - using existing data")
         print("="*60 + "\n")
 
         
@@ -231,9 +231,15 @@ def main():
         from stellar_data_patches import apply_temperature_patches
         combined_df = apply_temperature_patches(combined_df)
 
-        config = SimbadConfig.load_from_file()
-        manager = SimbadQueryManager(config)
-        updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+#        config = SimbadConfig.load_from_file()
+#        manager = SimbadQueryManager(config)
+#        updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+
+        # Only update PKL if we actually added new stars to the dataset
+        if len([uid for uid in unique_ids if uid not in existing_properties]) > 0:
+            config = SimbadConfig.load_from_file()
+            manager = SimbadQueryManager(config)
+            updated_properties = manager.update_calculated_properties(combined_df, properties_file)
 
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")

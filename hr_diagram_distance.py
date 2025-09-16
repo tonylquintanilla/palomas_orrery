@@ -179,9 +179,15 @@ def main():
             print(f"Is Luminosity NaN? {pd.isna(mizar['Luminosity'].iloc[0])}")
             print(f"Abs_Mag: {mizar['Abs_Mag'].iloc[0]}")
 
-        config = SimbadConfig.load_from_file()
-        manager = SimbadQueryManager(config)
-        updated_properties = manager.update_calculated_properties(combined_df, properties_file)        
+#        config = SimbadConfig.load_from_file()
+#        manager = SimbadQueryManager(config)
+#        updated_properties = manager.update_calculated_properties(combined_df, properties_file)        
+
+        # Only update PKL if we actually added new stars to the dataset
+        if len([uid for uid in unique_ids if uid not in existing_properties]) > 0:
+            config = SimbadConfig.load_from_file()
+            manager = SimbadQueryManager(config)
+            updated_properties = manager.update_calculated_properties(combined_df, properties_file)
 
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")

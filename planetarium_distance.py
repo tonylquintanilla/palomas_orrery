@@ -151,13 +151,13 @@ def main():
 
         # Explain what happened
         if hip_status == 'expand' or gaia_status == 'expand':
-            print("\n✓ INCREMENTAL FETCH PERFORMED - only new data fetched")
+            print("\nOK INCREMENTAL FETCH PERFORMED - only new data fetched")
         elif hip_status == 'subset' or gaia_status == 'subset':
-            print("\n✓ FILTERED EXISTING CACHE - no network queries needed")
+            print("\nOK FILTERED EXISTING CACHE - no network queries needed")
         elif hip_status == 'exact' and gaia_status == 'exact':
-            print("\n✓ EXACT CACHE HIT - using existing data")
+            print("\nOK EXACT CACHE HIT - using existing data")
         elif hip_status == 'missing' or gaia_status == 'missing':
-            print("\n⚠ FULL FETCH PERFORMED - no cache found")
+            print("\nWarning: FULL FETCH PERFORMED - no cache found")
         print("="*60 + "\n")
         # ============ END CACHE STATUS REPORT ============
 
@@ -218,9 +218,15 @@ def main():
         from stellar_data_patches import apply_temperature_patches
         combined_df = apply_temperature_patches(combined_df)
 
-        config = SimbadConfig.load_from_file()
-        manager = SimbadQueryManager(config)
-        updated_properties = manager.update_calculated_properties(combined_df, properties_file)        
+#        config = SimbadConfig.load_from_file()
+#        manager = SimbadQueryManager(config)
+#        updated_properties = manager.update_calculated_properties(combined_df, properties_file)        
+
+        # Only update PKL if we actually added new stars to the dataset
+        if len([uid for uid in unique_ids if uid not in existing_properties]) > 0:
+            config = SimbadConfig.load_from_file()
+            manager = SimbadQueryManager(config)
+            updated_properties = manager.update_calculated_properties(combined_df, properties_file)
 
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")
