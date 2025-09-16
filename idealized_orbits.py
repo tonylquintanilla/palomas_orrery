@@ -18,6 +18,9 @@ from apsidal_markers import (
     calculate_orbital_angle_shift,  # Add this
     create_enhanced_apsidal_hover_text,  # Add this
 )
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 planetary_params = {
         #   Standard J2000 mean orbital elements for all planets. These are indeed in the ecliptic frame.
@@ -681,14 +684,15 @@ planetary_params = {
                                         # Hyperbolic orbit
     },
 
-     '3I/ATLAS': {                      # heliocentric, ATLAS (C/2025 N1) 90004922
-        'a': -.263877814449834,         # Horizons: A, semi-major axis in AU; Hyperbolic orbit
-        'e': 6.14114298932642,          # Horizons: EC, eccentricity
-        'i': 175.1132447611479,         # Horizons: IN, inclination in degrees
-        'omega': 128.0088139262397,     # Horizons: W, argument of perihelion in degrees
-        'Omega': 322.1596294584908,     # Horizons: OM, longitude of ascending node in degrees;  
-        'epoch': '2025-7-6',
-        'TP': 2460977.978711922653,     # Time of perihelion (JD)
+     '3I/ATLAS': {                      # heliocentric, ATLAS (C/2025 N1) 
+        # Rec #:90004914 (+COV) Soln.date: 2025-Sep-08_18:29:13     # obs: 603 (104 days)
+        'a': -.26391591751781,          # Horizons: A, semi-major axis in AU; Hyperbolic orbit
+        'e': 6.139587836355706,         # Horizons: EC, eccentricity
+        'i': 175.1131015287974,         # Horizons: IN, inclination in degrees
+        'omega': 128.0099421020839,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 322.1568699043938,     # Horizons: OM, longitude of ascending node in degrees;  
+        'epoch': '2025-7-22',
+        'TP': 2460977.9814392594,       # Time of perihelion (JD)
         #     '3I/ATLAS': 1e99,         # Interstellar object - effectively infinite period
     },    
 

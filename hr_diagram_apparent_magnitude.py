@@ -6,6 +6,7 @@ warnings.simplefilter('ignore', UnitsWarning)
 
 import sys
 import time
+import pandas as pd  # Add at top of file with other imports
 
 # Import modules
 from data_acquisition import initialize_vizier, load_or_fetch_hipparcos_data, load_or_fetch_gaia_data
@@ -24,6 +25,11 @@ from visualization_core import analyze_magnitude_distribution, analyze_and_repor
 from visualization_2d import prepare_2d_data, create_hr_diagram
 
 from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
+
+from simbad_manager import SimbadQueryManager, SimbadConfig
+
+from plot_data_exchange import PlotDataExchange
+
 
 def main():
     # Parse command-line arguments
@@ -146,6 +152,15 @@ def main():
 
         # Convert to pandas DataFrame for visualization
         combined_df = combined_data.to_pandas()
+
+        # Apply temperature patches for known problematic stars
+        from stellar_data_patches import apply_temperature_patches
+        combined_df = apply_temperature_patches(combined_df)
+
+        config = SimbadConfig.load_from_file()
+        manager = SimbadQueryManager(config)
+        updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")
             return
@@ -175,7 +190,8 @@ def main():
         combined_df.attrs['analysis'] = flattened_analysis
 
         # Prepare data for visualization
-        prepared_df = prepare_2d_data(combined_data)
+    #    prepared_df = prepare_2d_data(combined_data)
+        prepared_df = prepare_2d_data(combined_df)
         if prepared_df is None or len(prepared_df) == 0:
             print("No plottable stars found after data preparation.")
             return
@@ -222,6 +238,15 @@ def main():
             combined_df=prepared_df,
             counts_dict=final_counts,
             mag_limit=mag_limit
+        )
+
+        # Save plot data for GUI
+        PlotDataExchange.save_plot_data(
+            combined_df=combined_df,  # Use full combined_df, not prepared_df
+            counts_dict=final_counts,
+            processing_times={'total': time.time() - start_time},
+            mode='magnitude',
+            limit_value=mag_limit
         )
 
         print(f"Visualization completed in {time.time() - viz_start:.2f} seconds.")

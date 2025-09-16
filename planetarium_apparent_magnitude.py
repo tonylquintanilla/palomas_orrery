@@ -38,6 +38,9 @@ from messier_object_data_handler import MessierObjectHandler  # Add this with ot
 
 from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
 
+from simbad_manager import SimbadQueryManager, SimbadConfig
+
+
 def convert_messier_to_df(messier_objects):
     """Convert Messier objects to a DataFrame format compatible with stellar data."""
     if not messier_objects:
@@ -223,6 +226,15 @@ def main():
 
         # Step 6: Convert to DataFrame and validate
         combined_df = combined_data.to_pandas()
+
+        # Apply temperature patches for known problematic stars
+        from stellar_data_patches import apply_temperature_patches
+        combined_df = apply_temperature_patches(combined_df)
+
+        config = SimbadConfig.load_from_file()
+        manager = SimbadQueryManager(config)
+        updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")
             return
@@ -244,16 +256,6 @@ def main():
         print("\nRunning analysis...")
         analyze_magnitude_distribution(combined_df, mag_limit)
         
-#        analysis_results = analyze_and_report_stars(
-#            combined_df,
-#            mode='magnitude',
-#            max_value=mag_limit
-#        )
-
-        # Parse stellar classes and set mode
-#        combined_df = parse_stellar_classes(combined_df)
-#        combined_df.attrs['mode'] = 'magnitude'
-
         # Run comprehensive analysis
         analysis_results = analyze_and_report_stars(
             combined_df,
@@ -264,16 +266,62 @@ def main():
         # Store the mode in the DataFrame attributes
         combined_df.attrs['mode'] = 'magnitude'
 
+        # Debug star counts
+        print("\nDEBUG: Star count breakdown:")
+        print(f"Total combined_df: {len(combined_df)}")
+        print(f"Hipparcos stars: {len(combined_df[combined_df['Source_Catalog'] == 'Hipparcos'])}")
+        print(f"Gaia stars: {len(combined_df[combined_df['Source_Catalog'] == 'Gaia'])}")
+        print(f"Messier objects: {len(combined_df[combined_df['Source_Catalog'] == 'Messier'])}")
+        print(f"Other sources: {len(combined_df[~combined_df['Source_Catalog'].isin(['Hipparcos', 'Gaia', 'Messier'])])}")
+
+        # Check temperature distribution
+        print(f"\nTemperature data:")
+        print(f"Stars WITH valid temperature: {(combined_df['Temperature'] > 0).sum()}")
+        print(f"Stars WITHOUT valid temperature: {(~(combined_df['Temperature'] > 0)).sum()}")
+
+        # By catalog and temperature
+        for catalog in ['Hipparcos', 'Gaia']:
+            cat_df = combined_df[combined_df['Source_Catalog'] == catalog]
+            with_temp = (cat_df['Temperature'] > 0).sum()
+            without_temp = (~(cat_df['Temperature'] > 0)).sum()
+            print(f"{catalog}: {with_temp} with temp, {without_temp} without temp, total: {len(cat_df)}")
+
         # Flatten the analysis for visualization (ADD THIS SECTION)
+
+    #    flattened_analysis = {
+    #        'total_stars': analysis_results['data_quality']['total_stars'],
+    #        'plottable_hip': analysis_results['plottable']['hipparcos'],
+    #        'plottable_gaia': analysis_results['plottable']['gaia'],
+    #        'missing_temp': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_temp'],
+    #        'missing_lum': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_lum'],
+    #        'temp_le_zero': 0
+    #        }
+
+        # After creating combined_df, calculate real counts
+        hip_df = combined_df[combined_df['Source_Catalog'] == 'Hipparcos']
+        gaia_df = combined_df[combined_df['Source_Catalog'] == 'Gaia']
+
+        hip_total = len(hip_df)
+        gaia_with_temp = (gaia_df['Temperature'] > 0).sum()
+        gaia_without_temp = len(gaia_df) - gaia_with_temp
+
         flattened_analysis = {
-            'total_stars': analysis_results['data_quality']['total_stars'],
-            'plottable_hip': analysis_results['plottable']['hipparcos'],
-            'plottable_gaia': analysis_results['plottable']['gaia'],
-            'missing_temp': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_temp'],
-            'missing_lum': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_lum'],
+            'total_stars': len(combined_df),
+            'plottable_hip': hip_total,  # Use actual count: 518
+            'plottable_gaia': gaia_with_temp,  # 1,042
+            'missing_temp': gaia_without_temp,  # 17
+            'missing_lum': 0,
             'temp_le_zero': 0
         }
+
         combined_df.attrs['analysis'] = flattened_analysis
+
+        # Step 8.5: Add Has_Temperature flag for gray star display
+        combined_df['Has_Temperature'] = ~combined_df['Temperature'].isna() & (combined_df['Temperature'] > 0)
+
+        print(f"\nTemperature data availability:")
+        print(f"Stars with temperature data: {combined_df['Has_Temperature'].sum()}")
+        print(f"Stars without temperature data: {(~combined_df['Has_Temperature']).sum()}")
 
         # Step 9: Prepare Data for Visualization
         print("\nPreparing visualization data...")

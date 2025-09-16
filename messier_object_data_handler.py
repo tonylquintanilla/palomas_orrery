@@ -52,6 +52,8 @@ class MessierObjectHandler:
                             'distance_ly': data['distance_ly'],
                             'ra': data['ra'],
                             'dec': data['dec'],
+                            'ra_str': data['ra'],  # Original string format like '05h34m31.94s'
+                            'dec_str': data['dec'], # Original string format like '+22°00′52.2″'                            
                             'notes': data.get('notes', ''),
                             'size': data.get('size', None),
                             'age': data.get('age', None),
@@ -129,8 +131,10 @@ class MessierObjectHandler:
                             'type': data['type'],
                             'vmag': data['vmag'],
                             'distance_ly': data['distance_ly'],
-                            'ra': coords.ra.deg,
-                            'dec': coords.dec.deg,
+                            'ra': coords.ra.deg,      # Converted to degrees for calculations
+                            'dec': coords.dec.deg,    # Converted to degrees for calculations
+                            'ra_str': data['ra'],     # Keep original string for display
+                            'dec_str': data['dec'],   # Keep original string for display                            
                             'notes': data.get('notes', ''),
                             'size': data.get('size', None),
                             'age': data.get('age', None),
@@ -223,7 +227,8 @@ class MessierObjectHandler:
                 f"Apparent Magnitude: {row['vmag']:.1f}<br>"
         #        f"Distance: {row['Distance_ly']:.1f} ly<br>"
                 f"Distance: {row['Distance_pc']:.2f} pc ({row['Distance_ly']:.2f} ly)<br>"
-                f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly<br>"
+        #        f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly<br>"
+                f"RA: {row['ra_str']}, Dec: {row['dec_str']} (J2000)<br>"
                 f"{unique_notes.get(row['messier_id'], 'None')}<br>"  # Use unique_notes with messier_id
         #        f"Notes: {row['notes']}"
             ),
@@ -262,7 +267,8 @@ class MessierObjectHandler:
             f"Type: {row['type']}",
             f"Apparent Magnitude: {row['vmag']:.1f}",
             f"Distance: {row['distance_ly']:.1f} light-years",
-            f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly"
+        #    f"Position: ({row['x']:.1f}, {row['y']:.1f}, {row['z']:.1f}) ly"
+            f"RA: {row['ra_str']}, Dec: {row['dec_str']} (J2000)<br>"
             f"{unique_notes.get(row['messier_id'], 'None')}<br>"  # Use unique_notes with messier_id
         ]
         

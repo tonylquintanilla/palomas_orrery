@@ -7,6 +7,77 @@ from astropy.table import Table, vstack
 from astropy.coordinates import SkyCoord, Angle
 from astroquery.vizier import Vizier
 
+
+def convert_icrs_to_radec_strings(data):
+    """
+    Convert ICRS coordinates (decimal degrees) to formatted RA/Dec strings.
+    Works with astropy Table objects (not pandas DataFrames).
+    
+    Adds two new columns:
+    - ra_str: Right Ascension in format "HHh MMm SS.SSs"
+    - dec_str: Declination in format "±DD° MM' SS.S""
+    
+    Args:
+        data: Astropy Table with RA_ICRS and DE_ICRS columns
+    
+    Returns:
+        data: Same Table with added ra_str and dec_str columns
+    """
+    import numpy as np
+    from astropy.table import Column
+    
+    # Check if ICRS coordinates exist
+    if 'RA_ICRS' not in data.colnames or 'DE_ICRS' not in data.colnames:
+        print("Warning: No ICRS coordinates found in data")
+        return data
+    
+    # Initialize lists for new columns
+    ra_strings = []
+    dec_strings = []
+    
+    # Process each row (astropy Table iteration)
+    valid_coords = 0
+    for row in data:  # Just iterate directly over the table, no .iterrows()
+        ra_deg = row['RA_ICRS']
+        dec_deg = row['DE_ICRS']
+        
+        # Check for valid coordinates (not masked or NaN)
+        if (not np.ma.is_masked(ra_deg) and not np.ma.is_masked(dec_deg) and
+            np.isfinite(ra_deg) and np.isfinite(dec_deg)):
+            
+            # Convert RA from degrees to hours:minutes:seconds
+            ra_hours = ra_deg / 15.0
+            ra_h = int(ra_hours)
+            ra_m = int((ra_hours - ra_h) * 60)
+            ra_s = ((ra_hours - ra_h) * 60 - ra_m) * 60
+            
+            # Convert Dec from degrees to degrees:arcminutes:arcseconds
+            dec_sign = '+' if dec_deg >= 0 else '-'
+            dec_deg_abs = abs(dec_deg)
+            dec_d = int(dec_deg_abs)
+            dec_m = int((dec_deg_abs - dec_d) * 60)
+            dec_s = ((dec_deg_abs - dec_d) * 60 - dec_m) * 60
+            
+            # Format the strings
+            ra_strings.append(f"{ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s")
+            dec_strings.append(f"{dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\"")
+            valid_coords += 1
+        else:
+            ra_strings.append('')
+            dec_strings.append('')
+    
+    # Add columns to the astropy Table
+    data['ra_str'] = Column(ra_strings, dtype='U20')  # Unicode string, max 20 chars
+    data['dec_str'] = Column(dec_strings, dtype='U20')
+
+# Python objects (strings in this case), which pandas handles much better -- except this fix does not work
+#    data['ra_str'] = Column(ra_strings, dtype=object)
+#    data['dec_str'] = Column(dec_strings, dtype=object)
+    
+    print(f"Added RA/Dec strings for {valid_coords} objects")
+    return data
+
+
 def estimate_vmag_from_gaia(gaia_data):
     """
     Estimate V magnitude from Gaia G magnitude and BP-RP color.
@@ -386,6 +457,8 @@ def calculate_cartesian_coordinates(data):
     data['y'] = y
     data['z'] = z
     
+    data = convert_icrs_to_radec_strings(data)
+
     return data
 
 def validate_coordinates(data):

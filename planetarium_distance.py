@@ -4,6 +4,7 @@ import warnings
 from astropy.units import UnitsWarning
 warnings.simplefilter('ignore', UnitsWarning)
 import numpy as np  # Add this import
+import pandas as pd  # Add this import
 import sys
 import time
 import plotly.io as pio
@@ -37,6 +38,8 @@ from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, sho
 from catalog_selection import select_stars
 
 from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
+
+from simbad_manager import SimbadQueryManager, SimbadConfig
 
 
 def process_stars(hip_data, gaia_data, max_light_years):
@@ -210,9 +213,57 @@ def main():
 
         # Convert to pandas DataFrame for visualization
         combined_df = combined_data.to_pandas()
+
+        # Apply temperature patches for known problematic stars
+        from stellar_data_patches import apply_temperature_patches
+        combined_df = apply_temperature_patches(combined_df)
+
+        config = SimbadConfig.load_from_file()
+        manager = SimbadQueryManager(config)
+        updated_properties = manager.update_calculated_properties(combined_df, properties_file)        
+
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")
             return
+
+        # Debug: Find Hipparcos stars without temperature
+        print("\n" + "="*60)
+        print("DEBUG: Finding Hipparcos stars without temperature")
+        print("="*60)
+
+        hip_stars = combined_df[combined_df['Source_Catalog'] == 'Hipparcos']
+        hip_no_temp = hip_stars[(hip_stars['Temperature'].isna()) | (hip_stars['Temperature'] <= 0)]
+
+        print(f"Total Hipparcos stars: {len(hip_stars)}")
+        print(f"Hipparcos with valid temperature: {(hip_stars['Temperature'] > 0).sum()}")
+        print(f"Hipparcos without valid temperature: {len(hip_no_temp)}")
+
+        if len(hip_no_temp) > 0:
+            print("\nDetails of Hipparcos stars without temperature:")
+            for idx, star in hip_no_temp.iterrows():
+                print(f"\n  Star: {star.get('Star_Name', 'Unknown')}")
+                print(f"  HIP: {star.get('HIP', 'N/A')}")
+                print(f"  Vmag: {star.get('Vmag', 'N/A')}")
+                
+                # Safe distance formatting
+                distance = star.get('Distance_ly')
+                if distance is not None and not pd.isna(distance):
+                    print(f"  Distance: {distance:.1f} ly")
+                else:
+                    print(f"  Distance: N/A")
+                    
+                print(f"  Spectral Type: {star.get('Spectral_Type', 'N/A')}")
+                print(f"  B-V: {star.get('B_V', 'N/A')}")
+                print(f"  Temperature: {star.get('Temperature', 'N/A')}")
+                print(f"  Object Type: {star.get('Object_Type', 'N/A')}")
+                
+                # Check why temperature is missing
+                if pd.isna(star.get('B_mag')) or pd.isna(star.get('V_mag')):
+                    print(f"  Issue: Missing B or V magnitude (B={star.get('B_mag', 'N/A')}, V={star.get('V_mag', 'N/A')})")
+                if pd.isna(star.get('Spectral_Type')) or star.get('Spectral_Type') == '':
+                    print(f"  Issue: Missing spectral type")
+
+        print("="*60)
 
         # Analyze magnitude distribution
         analyze_magnitude_distribution(combined_df, mag_limit=None)
@@ -230,14 +281,24 @@ def main():
         # Store the mode in the DataFrame attributes
         combined_df.attrs['mode'] = 'distance'
         # Flatten the analysis for visualization (ADD THIS SECTION)
+
+        # Same logic for BOTH planetarium_distance.py and planetarium_apparent_magnitude.py
+        hip_df = combined_df[combined_df['Source_Catalog'] == 'Hipparcos']
+        gaia_df = combined_df[combined_df['Source_Catalog'] == 'Gaia']
+
+        hip_total = len(hip_df)
+        gaia_with_temp = (gaia_df['Temperature'] > 0).sum()
+        gaia_without_temp = len(gaia_df) - gaia_with_temp
+
         flattened_analysis = {
-            'total_stars': analysis_results['data_quality']['total_stars'],
-            'plottable_hip': analysis_results['plottable']['hipparcos'],
-            'plottable_gaia': analysis_results['plottable']['gaia'],
-            'missing_temp': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_temp'],
-            'missing_lum': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_lum'],
-            'temp_le_zero': 0  # Or calculate from the data if needed
+            'total_stars': len(combined_df),
+            'plottable_hip': hip_total,  # All Hipparcos stars
+            'plottable_gaia': gaia_with_temp,  # Gaia WITH temperature
+            'missing_temp': gaia_without_temp,  # Gaia WITHOUT temperature
+            'missing_lum': 0,
+            'temp_le_zero': 0
         }
+
         combined_df.attrs['analysis'] = flattened_analysis  # Use flattened version 
 
         final_counts = {

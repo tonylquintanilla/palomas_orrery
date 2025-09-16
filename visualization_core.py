@@ -16,7 +16,8 @@ def format_value(value, format_spec, default="Unknown"):
     if value is None or (isinstance(value, float) and np.isnan(value)):
         return default
     try:
-        return format_spec.format(value)
+    #    return format_spec.format(value)  # wrong
+        return format(value, format_spec)  # CORRECT
     except (ValueError, TypeError):
         return default
 
@@ -36,6 +37,53 @@ def create_hover_text(df, include_3d=False):
     
     for _, row in df.iterrows():
         hover_text = f'<b>{row["Star_Name"]}</b><br>'
+        
+        # ========== ROBUST RA/DEC HANDLING - ALWAYS WORKS ==========
+        ra_str = None
+        dec_str = None
+        
+        # Method 1: Try to get pre-computed strings if they exist
+        if 'ra_str' in df.columns:
+            try:
+                ra_val = row.get('ra_str', '')
+                dec_val = row.get('dec_str', '')
+                # Check if they're valid (not empty, not 'nan', not None)
+                if ra_val and str(ra_val).strip() and str(ra_val).strip().lower() not in ['nan', 'none', '']:
+                    ra_str = str(ra_val).strip()
+                    dec_str = str(dec_val).strip() if dec_val else ''
+            except:
+                pass  # If any error, fall through to Method 2
+        
+        # Method 2: Convert from ICRS coordinates if no valid strings
+        if not ra_str and 'RA_ICRS' in df.columns:
+            try:
+                ra_deg = row.get('RA_ICRS')
+                dec_deg = row.get('DE_ICRS')
+                
+                if pd.notna(ra_deg) and pd.notna(dec_deg):
+                    # Convert to sexagesimal
+                    ra_hours = float(ra_deg) / 15.0
+                    ra_h = int(ra_hours)
+                    ra_m = int((ra_hours - ra_h) * 60)
+                    ra_s = ((ra_hours - ra_h) * 60 - ra_m) * 60
+                    
+                    dec_deg_float = float(dec_deg)
+                    dec_sign = '+' if dec_deg_float >= 0 else '-'
+                    dec_abs = abs(dec_deg_float)
+                    dec_d = int(dec_abs)
+                    dec_m = int((dec_abs - dec_d) * 60)
+                    dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
+                    
+                    ra_str = f"{ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s"
+                    dec_str = f"{dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\""
+            except Exception as e:
+                # If conversion fails, just skip RA/Dec
+                pass
+        
+        # Add to hover text if we got valid coordinates
+        if ra_str and dec_str:
+            hover_text += f"RA: {ra_str}, Dec: {dec_str} (J2000)<br>"
+        # ========== END ROBUST RA/DEC SECTION ==========
         
         # Add coordinates if 3D
         if include_3d:
@@ -349,9 +397,10 @@ def generate_star_count_text(counts_dict, combined_df=None):
         f"Hipparcos mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{hip_mid}</span> stars. "
     #    f"<a href='https://vizier.cds.unistra.fr/viz-bin/VizieR-3'>Gaia</a> mid (1.73 < Vmag ≤ 4.0): <span style='background-color: red; color: red'>{gaia_mid}</span> stars. "
         f"<a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a> faint (Vmag > 4.0): <span style='background-color: red; color: red'>{gaia_faint}</span> stars."
-        f"<br>     Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
-        f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
-        f"with the star name, for example: \"* alf Aql\", for star data (right-click will keep the hovertext box open to read the name). " 
+        f"<br>     Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>, "
+        f"<a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a>, "
+        f"<a href='https://www.wikisky.org/?locale=EN' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Sky-Map</a>. "
+        f"For Simbad use the star name from Star Information, for example: \"* alf Aql\", for Sky-Map use the name or RA and Dec." 
         f"<br>     -- Python script by Tony Quintanilla, with assistance from Claude, ChatGPT, Gemini, and DeepSeek, September 2025."
         
     )

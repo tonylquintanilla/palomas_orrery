@@ -1,962 +1,1365 @@
-#Paloma's Orrery - Solar System Visualization Tool
+# star_visualization_gui.py - Final version with enhanced pickle file support
+# This GUI reads the enhanced pickle files that contain both raw and calculated data
 
-# Import necessary libraries
 import tkinter as tk
-from tkinter import ttk
-from astroquery.jplhorizons import Horizons
-import numpy as np
-from datetime import datetime, timedelta
-import calendar
-import plotly.graph_objs as go
-import webbrowser
-import os
-import warnings
-from astropy.utils.exceptions import ErfaWarning
-from astropy.time import Time
-import traceback
-from tkinter import scrolledtext
-import threading
-import time  # Used here for simulation purposes
+from tkinter import ttk, scrolledtext, messagebox
 import subprocess
+import os
 import sys
-import math
 import pickle
+import pandas as pd
+import numpy as np
 import re
+import webbrowser
 from typing import Dict, List, Optional
-from idealized_orbits import planetary_params, parent_planets
-from solar_visualization_shells import (
-    hover_text_sun_and_corona,
-    gravitational_influence_info,
-    outer_oort_info,
-    inner_oort_info,
-    inner_limit_oort_info,
-    solar_wind_info,
-    termination_shock_info,
-    outer_corona_info,
-    inner_corona_info,
-    chromosphere_info,
-    photosphere_info,
-    radiative_zone_info,
-    core_info,   
-)
-from constants_new import (
-#    planetary_params,
-#    parent_planets,
-    color_map,
-    note_text,
-    INFO,
-    CENTER_BODY_RADII,
-    KM_PER_AU, 
-    LIGHT_MINUTES_PER_AU
-)
-
 from star_notes import unique_notes
+import time
+from threading import Thread
 
-from visualization_utils import format_hover_text, add_hover_toggle_buttons
+# Import for expanding object types if needed
+from constants_new import object_type_mapping, class_mapping, stellar_class_labels
+from plot_data_report_widget import PlotDataReportWidget
+from plot_data_exchange import PlotDataExchange
 
-from save_utils import save_plot
 
-# At the very top of the file, after imports:
-from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
+class ScrollableFrame(ttk.Frame):
+    """A scrollable frame widget."""
+    def __init__(self, parent, **kw):
+        super().__init__(parent, **kw)
+        canvas = tk.Canvas(self, highlightthickness=0)
+        vbar = ttk.Scrollbar(self, orient="vertical", command=canvas.yview)
+        self.container = ttk.Frame(canvas)
+        self.container.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        canvas.create_window((0, 0), window=self.container, anchor="nw")
+        canvas.configure(yscrollcommand=vbar.set)
+        canvas.pack(side="left", fill="both", expand=True)
+        vbar.pack(side="right", fill="y")
+        
+        # Optional: mousewheel support
+        def _on_mousewheel(event):
+            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        canvas.bind_all("<MouseWheel>", _on_mousewheel)
 
-import sys, os          # troubleshooting VS
-print("Interpreter:", sys.executable)
-print("Working directory:", os.getcwd())
-
-# Create a global shutdown handler instance
-shutdown_handler = PlotlyShutdownHandler()
-
-# Suppress ErfaWarning messages
-warnings.simplefilter('ignore', ErfaWarning)
-
-# Initialize the main window
-root = tk.Tk()
-root.title("Star Visualization -- Updated: September 5, 2025")
-# Define 'today' once after initializing the main window
-today = datetime.today()
-# root.configure(bg="lightblue")  # Set the background color of the root window
-
-# Define a standard font and button width
-BUTTON_FONT = ("Arial", 10, "normal")  # You can adjust the font as needed
-BUTTON_WIDTH = 30  # Number of characters wide
-
-DEFAULT_MARKER_SIZE = 6
-HORIZONS_MAX_DATE = datetime(2199, 12, 29, 0, 0, 0)
-CENTER_MARKER_SIZE = 10  # For central objects like the Sun
-
-# constants_new
-LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
-KM_PER_AU = 149597870.7       # Kilometers per Astronomical Unit
-CORE_AU = 0.00093               # Core in AU, or approximately 0.2 Solar radii
-RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, or approximately 0.7 Solar radii
-SOLAR_RADIUS_AU = 0.00465047  # Sun's radius in AU
-INNER_LIMIT_OORT_CLOUD_AU = 2000   # Inner Oort cloud inner boundary in AU.
-INNER_OORT_CLOUD_AU = 20000   # Inner Oort cloud outer boundary in AU.
-OUTER_OORT_CLOUD_AU = 100000   # Oort cloud outer boundary in AU.
-GRAVITATIONAL_INFLUENCE_AU = 126000   # Sun's gravitational influence in AU.
-CHROMOSPHERE_RADII = 1.5    # The Chromosphere extends from about 1 to 1.5 solar radii or about 0.00465 - 0.0070 AU
-INNER_CORONA_RADII = 3  # Inner corona extends to 2 to 3 solar radii or about 0.01 AU
-OUTER_CORONA_RADII = 50       # Outer corona extends up to 50 solar radii or about 0.2 AU, more typically 10 to 20 solar radii
-TERMINATION_SHOCK_AU = 94       # Termination shock where the solar wind slows to subsonic speeds. 
-HELIOPAUSE_RADII = 26449         # Outer boundary of the solar wind and solar system, about 123 AU. 
-PARKER_CLOSEST_RADII = 8.2    # Parker's closest approach was 3.8 million miles on 12-24-24 at 6:53 AM EST (0.41 AU, 8.2 solar radii)
-
-# Custom Tooltip Class
-
-class CreateToolTip(object):
-    """
-    Create a tooltip for a given widget with intelligent positioning to prevent clipping.
-    """
-
-    def __init__(self, widget, text='widget info'):
-        self.waittime = 500     # milliseconds
-        self.wraplength = 1000   # Reduced wraplength
-        self.widget = widget
-        self.text = text
-        self.widget.bind("<Enter>", self.enter)
-        self.widget.bind("<Leave>", self.leave)
-        self.id = None
-        self.tw = None
-
-    def enter(self, event=None):
-        self.schedule()
-
-    def leave(self, event=None):
-        self.unschedule()
-        self.hidetip()
-
-    def schedule(self):
-        self.unschedule()
-        self.id = self.widget.after(self.waittime, self.showtip)
-
-    def unschedule(self):
-        id_ = self.id
-        self.id = None
-        if id_:
-            self.widget.after_cancel(id_)
-
-    def showtip(self, event=None):
-        try:
-            # Get screen dimensions and taskbar height (estimated)
-            screen_width = self.widget.winfo_screenwidth()
-            screen_height = self.widget.winfo_screenheight()
-            taskbar_height = 40  # Estimated Windows taskbar height
-
-            # Create the tooltip window
-            self.tw = tk.Toplevel(self.widget)
-            self.tw.wm_overrideredirect(True)
-            
-            # Calculate usable screen height
-            usable_height = screen_height - taskbar_height
-
-            # Create the tooltip label
-            label = tk.Label(
-                self.tw,
-                text=self.text,
-                justify='left',
-                background='yellow',
-                relief='solid',
-                borderwidth=1,
-                wraplength=min(self.wraplength, screen_width - 100),
-                font=("Arial", 10, "normal")
-            )
-            label.pack(ipadx=1, ipady=1)
-
-            # Update the window to calculate its size
-            self.tw.update_idletasks()
-            tooltip_width = self.tw.winfo_width()
-            tooltip_height = self.tw.winfo_height()
-
-            # Initial x position - try positioning to the right of the widget first
-            x = self.widget.winfo_rootx() + self.widget.winfo_width() + 5
-
-            # If tooltip would extend beyond right edge, try positioning to the left of the widget
-            if x + tooltip_width > screen_width:
-                x = self.widget.winfo_rootx() - tooltip_width - 5
-
-            # If that would push it off the left edge, position at left screen edge with padding
-            if x < 0:
-                x = 5
-
-            # Calculate vertical position
-            y = self.widget.winfo_rooty()
-
-            # If tooltip is taller than available space, position at top of screen
-            if tooltip_height > usable_height:
-                y = 5  # Small padding from top
-            else:
-                # Center vertically relative to widget if space allows
-                widget_center = y + (self.widget.winfo_height() / 2)
-                y = widget_center - (tooltip_height / 2)
-                
-                # Ensure tooltip doesn't go below usable screen area
-                if y + tooltip_height > usable_height:
-                    y = usable_height - tooltip_height - 5
-
-                # Ensure tooltip doesn't go above top of screen
-                if y < 5:
-                    y = 5
-
-            # Position the tooltip
-            self.tw.wm_geometry(f"+{int(x)}+{int(y)}")
-
-        except Exception as e:
-            print(f"Error showing tooltip: {e}")
-            traceback.print_exc()
-
-    def hidetip(self):
-        if self.tw:
-            self.tw.destroy()
-        self.tw = None
-
-class StarSearchFrame(ttk.Frame):
-    """Frame containing star search functionality."""
+class LazyStarPropertiesLoader:
+    """Loads star properties on-demand rather than all at startup."""
     
-    def __init__(self, parent, *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
-        self.parent = parent
-        
-        # Initialize search states
-        self.search_results: Dict[str, List[str]] = {
-            "Notable Stars": [],
-            "Stars by Distance": [],
-            "Stars by Magnitude": []
+    def __init__(self):
+        self.loaded_properties = {}
+        self.property_files = {
+            'distance': 'star_properties_distance.pkl',
+            'magnitude': 'star_properties_magnitude.pkl',
+            'notable': 'star_properties.pkl'
         }
+        self.file_stats = {}
+        self._scan_files()
+    
+    def _scan_files(self):
+        """Quick scan to get file stats without loading data."""
+        for key, filename in self.property_files.items():
+            if os.path.exists(filename):
+                size_mb = os.path.getsize(filename) / (1024 * 1024)
+                self.file_stats[key] = {
+                    'exists': True,
+                    'size_mb': size_mb,
+                    'filename': filename
+                }
+            else:
+                self.file_stats[key] = {
+                    'exists': False,
+                    'size_mb': 0,
+                    'filename': filename
+                }
+    
+    def get_properties(self, property_type='distance'):
+        """Load properties on-demand with caching."""
+        if property_type in self.loaded_properties:
+            return self.loaded_properties[property_type]
         
-        self.create_widgets()
+        if property_type not in self.property_files:
+            print(f"Unknown property type: {property_type}")
+            return {}
+        
+        filename = self.property_files[property_type]
+        if not os.path.exists(filename):
+            print(f"File not found: {filename}")
+            return {}
+        
+        print(f"Loading {property_type} properties (first access)...")
+        try:
+            with open(filename, 'rb') as f:
+                data = pickle.load(f)
+            
+            # Convert to consistent format
+            if isinstance(data, list):
+                properties = {}
+                for item in data:
+                    if isinstance(item, dict) and 'unique_id' in item:
+                        properties[item['unique_id']] = item
+            elif isinstance(data, dict):
+                properties = data
+            else:
+                properties = {}
+            
+            # Cache for future use
+            self.loaded_properties[property_type] = properties
+            print(f"  Loaded {len(properties)} stars from {filename}")
+            return properties
+            
+        except Exception as e:
+            print(f"Error loading {filename}: {e}")
+            return {}
+    
+    def get_star_count(self, property_type='distance'):
+        """Get count without loading data."""
+        if property_type in self.loaded_properties:
+            return len(self.loaded_properties[property_type])
+        
+        # For quick GUI display, return estimate based on file size
+        if property_type in self.file_stats and self.file_stats[property_type]['exists']:
+            # Rough estimate: ~100 bytes per star
+            size_bytes = self.file_stats[property_type]['size_mb'] * 1024 * 1024
+            return int(size_bytes / 100)
+        return 0
+    
+    def clear_cache(self, property_type=None):
+        """Clear cached data to free memory."""
+        if property_type:
+            if property_type in self.loaded_properties:
+                del self.loaded_properties[property_type]
+                print(f"Cleared cache for {property_type}")
+        else:
+            self.loaded_properties.clear()
+            print("Cleared all cached star properties")
+    
+    def get_status_summary(self):
+        """Get quick summary for GUI display."""
+        summary = []
+        for key, stats in self.file_stats.items():
+            if stats['exists']:
+                count = self.get_star_count(key)
+                loaded = key in self.loaded_properties
+                status = "loaded" if loaded else "available"
+                summary.append(f"{key.capitalize()}: ~{count} stars ({stats['size_mb']:.1f} MB) - {status}")
+            else:
+                summary.append(f"{key.capitalize()}: Not available")
+        return "\n".join(summary)
+
+
+class StarVisualizationSearchWidget(ttk.Frame):
+    """Search widget with unified display for all star information."""
+    
+    def __init__(self, parent):
+        super().__init__(parent)
+        
+        self.star_data = {}  # Just the names for search
+        self.star_full_data = {}  # Complete properties
+        
+        self.last_selected_star = None
+        self.last_selected_category = None
+        
+        # Load all data
         self.load_star_data()
+        
+        # Set up the UI
+        self.setup_ui()
 
-    def create_widgets(self):
-        """Create the search widgets for each category."""
-        # Main label
-        ttk.Label(
-            self,
-            text="(Ctrl+C for copy, Ctrl+X for cut, Ctrl+V for paste)",
-        ).pack(pady=(0, 10))
 
-        # Create search boxes for each category
-        self.search_frames = {}
+    def load_star_data(self):
+        """Load only star NAMES for search lists, not full data."""
+        # Initialize dictionaries
+        self.star_data = {}
+        self.star_full_data = {}  # Initialize empty - will load on demand
+        
+        # Notable stars - just names
+        self.star_data["Notable Stars"] = sorted(unique_notes.keys())
+        
+        # For distance/magnitude - only get names, not full data
+        for data_type, category in [('distance', 'Stars by Distance'), 
+                                    ('magnitude', 'Stars by Magnitude')]:
+            filename = f'star_properties_{data_type}.pkl'
+            if os.path.exists(filename):
+                try:
+                    with open(filename, 'rb') as f:
+                        data = pickle.load(f)
+                    if 'star_names' in data:
+                        self.star_data[category] = sorted(data['star_names'])
+                    else:
+                        self.star_data[category] = []
+                except:
+                    self.star_data[category] = []
+            else:
+                self.star_data[category] = []
+        
+        # Print summary - FIXED INDENTATION
+        print("\n" + "="*60)
+        print("STAR DATA LOADING SUMMARY")
+        print("="*60)
+        print(f"Notable Stars: {len(self.star_data.get('Notable Stars', []))} stars")
+        print(f"Stars by Distance: {len(self.star_data.get('Stars by Distance', []))} stars")  
+        print(f"Stars by Magnitude: {len(self.star_data.get('Stars by Magnitude', []))} stars")
+        print("="*60 + "\n")        
+            
+
+    def load_enhanced_pickle(self, filename: str) -> Dict:
+        """Load pickle file - handles both old and enhanced formats."""
+        if not os.path.exists(filename):
+            print(f"✗ {filename} not found")
+            return {}
+        
+        try:
+            with open(filename, 'rb') as f:
+                data = pickle.load(f)
+            
+            # Convert list format to dictionary keyed by star name
+            star_dict = {}
+            
+            if 'star_names' in data:
+                num_stars = len(data['star_names'])
+                
+                # Check if this is enhanced data
+                has_calculated = 'Temperature' in data
+                
+                if has_calculated:
+                    print(f"✓ Loaded {filename}: {num_stars} stars WITH calculated properties")
+                else:
+                    print(f"⚠ Loaded {filename}: {num_stars} stars (basic properties only)")
+                
+                for i in range(num_stars):
+                    star_name = data['star_names'][i]
+                    
+                    # Build star properties dictionary
+                    star_dict[star_name] = {
+                        'Star_Name': star_name,
+                        'unique_id': data.get('unique_ids', [None]*num_stars)[i],
+                        'spectral_type': data.get('spectral_types', [None]*num_stars)[i],
+                        'V_magnitude': data.get('V_magnitudes', [None]*num_stars)[i],
+                        'B_magnitude': data.get('B_magnitudes', [None]*num_stars)[i],
+                        'object_type': data.get('object_types', [None]*num_stars)[i],
+                        'distance_ly': data.get('distance_ly', [None]*num_stars)[i],
+                        'distance_pc': data.get('distance_pc', [None]*num_stars)[i],
+                    }
+                    
+                    # Add calculated properties if they exist
+                    if has_calculated:
+                        star_dict[star_name].update({
+                            'Temperature': data.get('Temperature', [None]*num_stars)[i],
+                            'Luminosity': data.get('Luminosity', [None]*num_stars)[i],
+                            'Abs_Mag': data.get('Abs_Mag', [None]*num_stars)[i],
+                            'RA_ICRS': data.get('RA_ICRS', [None]*num_stars)[i],
+                            'DE_ICRS': data.get('DE_ICRS', [None]*num_stars)[i],
+                            'ra_str': data.get('ra_str', [None]*num_stars)[i],
+                            'dec_str': data.get('dec_str', [None]*num_stars)[i],
+                            'Stellar_Class': data.get('Stellar_Class', [None]*num_stars)[i],
+                            'Object_Type_Desc': data.get('Object_Type_Desc', [None]*num_stars)[i],
+                            'Source_Catalog': data.get('Source_Catalog', [None]*num_stars)[i],
+                        })
+            
+            return star_dict
+            
+        except Exception as e:
+            print(f"Error loading {filename}: {e}")
+            return {}
+
+    def setup_ui(self):
+        """Set up the UI with single column layout."""
+        main_frame = ttk.Frame(self)
+        main_frame.pack(fill='both', expand=True, padx=5, pady=5)
+        
         self.search_vars = {}
-        self.search_entries = {}
         self.result_listboxes = {}
+        self.search_entries = {}
         
         categories = ["Notable Stars", "Stars by Distance", "Stars by Magnitude"]
         
         for category in categories:
-            # Create frame for this category
-            frame = ttk.LabelFrame(self, text=category)
-            frame.pack(fill='x', padx=5, pady=5)
-            self.search_frames[category] = frame
+            # Create labeled frame for each category
+            category_frame = ttk.LabelFrame(main_frame, text=category, padding=5)
+            category_frame.pack(fill='x', padx=5, pady=5)
             
-            # Create and bind search variable
+            # Search entry
+            search_frame = ttk.Frame(category_frame)
+            search_frame.pack(fill='x')
+            
+            ttk.Label(search_frame, text="Search:").pack(side='left')
             search_var = tk.StringVar()
-            search_var.trace_add('write', lambda *args, c=category: self.on_search_change(c))
+            search_entry = ttk.Entry(search_frame, textvariable=search_var, width=30)
+            search_entry.pack(side='left', fill='x', expand=True, padx=(5, 0))
+            
             self.search_vars[category] = search_var
+            self.search_entries[category] = search_entry
+            search_var.trace('w', lambda *args, cat=category: self.on_search_change(cat))
             
-            # Create search entry
-            entry = ttk.Entry(frame, textvariable=search_var)
-            entry.pack(fill='x', padx=5, pady=5)
-            self.search_entries[category] = entry
-            
-            # Create results listbox with scrollbar
-            list_frame = ttk.Frame(frame)
-            list_frame.pack(fill='both', expand=True, padx=5, pady=(0, 5))
+            # Results listbox (collapsible)
+            list_frame = ttk.Frame(category_frame)
+            list_frame.pack(fill='x', pady=(5, 0))
             
             scrollbar = ttk.Scrollbar(list_frame)
             scrollbar.pack(side='right', fill='y')
             
-            listbox = tk.Listbox(
-                list_frame,
-                height=5,
-                yscrollcommand=scrollbar.set,
-                exportselection=False
-            )
+            listbox = tk.Listbox(list_frame, yscrollcommand=scrollbar.set, height=4)
             listbox.pack(side='left', fill='both', expand=True)
             scrollbar.config(command=listbox.yview)
             
-            # Bind selection event
-            listbox.bind('<<ListboxSelect>>', 
-                        lambda e, c=category: self.on_select(c))
-            
-            # Add right-click menu for copy
-            self.create_right_click_menu(listbox)            
             self.result_listboxes[category] = listbox
-
-            # Add URL display for Notable Stars
-            if category == "Notable Stars":
-                # Create URL display frame
-                url_frame = ttk.Frame(frame)
-                url_frame.pack(fill='x', padx=5, pady=(0, 5))
-                
-                url_label = ttk.Label(url_frame, text="Associated URL:")
-                url_label.pack(anchor='w')
-                
-                # Create URL text widget with scrollbar
-                url_scroll = ttk.Scrollbar(url_frame, orient='horizontal')
-                url_scroll.pack(side='bottom', fill='x')
-                
-                self.url_display = tk.Text(
-                    url_frame,
-                    height=2,
-                    wrap='none',
-                    xscrollcommand=url_scroll.set
-                )
-                self.url_display.pack(fill='x', expand=True)
-                url_scroll.config(command=self.url_display.xview)
-                
-                # Add clipboard support to URL display
-                add_clipboard_support(self.url_display)
-
-    def extract_url(self, star_name):
-        """Extract URL from star notes if it exists."""
-        print(f"Extracting URL for star: {star_name}")  # Debug print
-        note = unique_notes.get(star_name, "")
-        print(f"Found note: {note[:100]}...")  # Debug print first 100 chars
-        
-        if note:
-            # Look for URLs in HTML anchor tags
-            url_match = re.search(r'<a href="([^"]+)">', note)
-            if url_match:
-                url = url_match.group(1)
-                print(f"Found URL: {url}")  # Debug print
-                return url
-            else:
-                print("No URL found in note")  # Debug print
-        return ""
-
-    def on_select(self, category: str):
-        """Handle selection from results listbox."""
-        print(f"\nSelection made in category: {category}")  # Debug print
-        listbox = self.result_listboxes[category]
-        try:
-            selection = listbox.get(listbox.curselection())
-            print(f"Selected item: {selection}")  # Debug print
+            listbox.bind('<<ListboxSelect>>', lambda e, cat=category: self.on_select(cat))
             
-            if selection:
-                # Copy selection to entry
-                self.search_vars[category].set(selection)
-                # Clear listbox
-                listbox.delete(0, tk.END)
-                
-                # Update URL display for Notable Stars
-                if category == "Notable Stars":
-                    print("Processing Notable Stars selection")  # Debug print
-                    url = self.extract_url(selection)
-                    if hasattr(self, 'url_display'):
-                        print("URL display widget exists")  # Debug print
-                        self.url_display.delete('1.0', tk.END)
-                        if url:
-                            print(f"Inserting URL: {url}")  # Debug print
-                            self.url_display.insert('1.0', url)
-                        else:
-                            print("No URL to display")  # Debug print
+            # Initially hide listbox
+            list_frame.pack_forget()
+            
+            # Show/hide listbox when typing
+            def toggle_listbox(cat, frame):
+                def handler(*args):
+                    if self.search_vars[cat].get():
+                        frame.pack(fill='x', pady=(5, 0))
                     else:
-                        print("ERROR: URL display widget not found")  # Debug print
-                        
-        except Exception as e:
-            print(f"Error in on_select: {e}")  # Debug print
-            traceback.print_exc()  # Print full traceback for debugging
-
-    def create_right_click_menu(self, listbox):
-        """Create right-click context menu for copying."""
-        menu = tk.Menu(self, tearoff=0)
-        menu.add_command(label="Copy", 
-                        command=lambda: self.copy_selection(listbox))
+                        frame.pack_forget()
+                return handler
+            
+            search_var.trace('w', toggle_listbox(category, list_frame))
         
-        # Bind right-click to show menu
-        listbox.bind("<Button-3>", 
-                    lambda e: self.show_menu(e, menu))
+        # Separator
+        ttk.Separator(main_frame, orient='horizontal').pack(fill='x', pady=10)
         
-        # Also bind Ctrl+C for copy
-        listbox.bind("<Control-c>", 
-                    lambda e: self.copy_selection(listbox))
+        # Combined information display
+        info_frame = ttk.LabelFrame(main_frame, text="Star Information", padding=5)
+        info_frame.pack(fill='both', expand=True, padx=5, pady=5)
         
-    def show_menu(self, event, menu):
-        """Show the context menu at mouse position."""
-        menu.post(event.x_root, event.y_root)
+        text_frame = ttk.Frame(info_frame)
+        text_frame.pack(fill='both', expand=True)
+        
+        v_scroll = ttk.Scrollbar(text_frame, orient='vertical')
+        v_scroll.pack(side='right', fill='y')
+        
+        h_scroll = ttk.Scrollbar(text_frame, orient='horizontal')
+        h_scroll.pack(side='bottom', fill='x')
+        
+        self.info_display = tk.Text(
+            text_frame,
+            height=27,
+            wrap='word',
+            yscrollcommand=v_scroll.set,
+            xscrollcommand=h_scroll.set,
+            font=('Consolas', 10)
+        )
+        self.info_display.pack(fill='both', expand=True)
+        v_scroll.config(command=self.info_display.yview)
+        h_scroll.config(command=self.info_display.xview)
+        
+        self.add_clipboard_support(self.info_display)
+        
+        # Initial message
+        self.info_display.insert('1.0', 
+            "Search for a star using any of the search fields above.\n\n"
+            "• Notable Stars: Stars with descriptions and notes\n"
+            "• Stars by Distance: Stars within specified distance range\n"
+            "• Stars by Magnitude: Stars brighter than specified magnitude\n\n"
+            "Start typing to see matching stars...")
 
-    def copy_selection(self, listbox):
-        """Copy selected item to clipboard."""
-        try:
-            selection = listbox.get(listbox.curselection())
-            if selection:
-                self.clipboard_clear()
-                self.clipboard_append(selection)
-        except:
-            pass
-
-    def load_star_data(self):
-        """Load star data from files."""
-        self.star_data = {
-            "Notable Stars": self.load_notable_stars(),
-            "Stars by Distance": self.load_pkl_stars('star_properties_distance.pkl'),
-            "Stars by Magnitude": self.load_pkl_stars('star_properties_magnitude.pkl')
-        }
-
-    def load_notable_stars(self) -> List[str]:
-        """Load notable stars from star_notes."""
-        try:
-            return sorted(unique_notes.keys())
-        except Exception as e:
-            print(f"Error loading notable stars: {e}")
-            return []
-
-#    def load_notable_stars(self) -> List[str]:
-#        """Load notable stars from star_notes.py."""
-#        try:
-#            with open('star_notes.py', 'r') as f:
-#                content = f.read()
-#            # Extract star names from the dictionary structure
-#            matches = re.findall(r"'([^']+)':\s*'<br>", content)
-#            return sorted(matches)
-#        except Exception as e:
-#            print(f"Error loading notable stars: {e}")
-#            return []
-
-    def load_pkl_stars(self, filename: str) -> List[str]:
-        """Load star names from pickle files."""
-        try:
-            with open(filename, 'rb') as f:
-                data = pickle.load(f)
-            return sorted(data.get('star_names', []))
-        except Exception as e:
-            print(f"Error loading {filename}: {e}")
-            return []
+        self.after(1000, lambda: print(f"Info display actual height: {self.info_display.winfo_height()} pixels"))
+        self.after(1000, lambda: print(f"Info frame height: {info_frame.winfo_height()} pixels"))
+        self.after(1000, lambda: print(f"Window height: {self.winfo_height()} pixels"))
 
     def on_search_change(self, category: str):
-        """Handle changes in search entry."""
+        """Handle search input."""
         search_term = self.search_vars[category].get().lower()
         listbox = self.result_listboxes[category]
         
-        # Clear current results
         listbox.delete(0, tk.END)
         
         if not search_term:
             return
-            
-        # Filter and display matching stars
+        
         matches = [
-            star for star in self.star_data[category]
+            star for star in self.star_data.get(category, [])
             if search_term in star.lower()
         ]
         
-        # Update listbox with matches
-        for star in matches[:50]:  # Limit to 50 results
+        for star in matches[:50]:
             listbox.insert(tk.END, star)
+        
+        if len(matches) == 1:
+            listbox.selection_set(0)
+
+    def on_select(self, category: str):
+        """Handle star selection."""
+        listbox = self.result_listboxes[category]
+        try:
+            selection = listbox.get(listbox.curselection())
+            
+            if selection:
+                self.search_vars[category].set(selection)
+                
+                for other_cat in self.search_vars:
+                    if other_cat != category:
+                        self.search_vars[other_cat].set("")
+                
+                self.last_selected_star = selection
+                self.last_selected_category = category
+                
+                for lb in self.result_listboxes.values():
+                    lb.delete(0, tk.END)
+                    lb.master.pack_forget()
+                
+                info_text = self.format_complete_star_info(selection, category)
+                self.info_display.delete('1.0', tk.END)
+                self.info_display.insert('1.0', info_text)
+                
+                self.highlight_urls(self.info_display)
+                
+        except:
+            pass
+
+
+    def format_complete_star_info(self, star_name: str, category: str) -> str:
+        """Format all available star information."""
+        output = []
+        output.append(f"{'='*60}")
+        output.append(f"{star_name}")
+        output.append(f"{'='*60}\n")
+        
+        # CHANGE: Always load on-demand, don't check self.star_full_data
+        star_props = self.load_single_star_properties(star_name, category)
+        
+        # If not found or incomplete, check other catalogs
+        if not star_props or len(star_props) < 5:
+            for other_category in ["Stars by Distance", "Stars by Magnitude"]:
+                if other_category != category:
+                    other_props = self.load_single_star_properties(star_name, other_category)
+                    if other_props and len(other_props) > len(star_props):
+                        star_props = other_props
+                        break
+        
+        # 1. RA/Dec Coordinates
+        ra_dec = self.format_ra_dec(star_props)
+        if ra_dec:
+            output.append("COORDINATES:")
+            output.append("-" * 40)
+            output.append(ra_dec)
+            output.append("")
+        
+        # 2. Core Properties
+        props_text = self.format_core_properties(star_props)
+        if props_text:
+            output.append("STAR PROPERTIES:")
+            output.append("-" * 40)
+            output.append(props_text)
+            output.append("")
+        
+        # 3. Description from unique_notes
+        note = unique_notes.get(star_name, "")
+        if note and note != "None.":
+            output.append("DESCRIPTION:")
+            output.append("-" * 40)
+            clean_note = self.clean_html_note(note)
+            output.append(clean_note)
+            output.append("")
+            
+            # 4. URL if present
+            url = self.extract_url(note)
+            if url:
+                output.append("REFERENCE URL:")
+                output.append("-" * 40)
+                output.append(url)
+                output.append("")
+        
+        # 5. Source information
+        output.append("-" * 60)
+        output.append(f"Search Category: {category}")
+        
+#        available_in = []
+#        if star_name in unique_notes:
+#            available_in.append("Notable Stars")
+#        if "Stars by Distance" in self.star_full_data and star_name in self.star_full_data["Stars by Distance"]:
+#            available_in.append("Distance Catalog")
+#        if "Stars by Magnitude" in self.star_full_data and star_name in self.star_full_data["Stars by Magnitude"]:
+#            available_in.append("Magnitude Catalog")
+
+        # CHANGE 3: Update the availability check to not rely on pre-loaded data
+        available_in = []
+        if star_name in unique_notes:
+            available_in.append("Notable Stars")
+
+        # Check if star exists in distance catalog
+        if self.check_star_exists(star_name, "Stars by Distance"):
+            available_in.append("Distance Catalog")
+
+        # Check if star exists in magnitude catalog  
+        if self.check_star_exists(star_name, "Stars by Magnitude"):
+            available_in.append("Magnitude Catalog")            
+        
+        if available_in:
+            output.append(f"Available in: {', '.join(available_in)}")
+        
+        return '\n'.join(output)
+
+    def check_star_exists(self, star_name: str, category: str) -> bool:
+        """Check if a star exists in a category without loading full data."""
+        return star_name in self.star_data.get(category, [])
+
+    def load_single_star_properties(self, star_name: str, category: str) -> dict:
+        """Load properties for a single star on-demand."""
+        
+        # Map category to file
+        file_map = {
+            "Stars by Distance": "star_properties_distance.pkl",
+            "Stars by Magnitude": "star_properties_magnitude.pkl",
+            "Notable Stars": "star_properties_distance.pkl"  # Try distance file for notable stars
+        }
+        
+        filename = file_map.get(category)
+        if not filename or not os.path.exists(filename):
+            return {}
+        
+        try:
+            with open(filename, 'rb') as f:
+                data = pickle.load(f)
+            
+            # Handle dictionary format (new enhanced format)
+            if isinstance(data, dict) and star_name in data:
+                return data[star_name]
+            
+            # Handle list format (old format)
+            if isinstance(data, dict) and 'star_names' in data:
+                try:
+                    idx = data['star_names'].index(star_name)
+                    props = {'Star_Name': star_name}
+                    
+                    # In load_single_star_properties(), fix the field mapping:
+                    for field in ['unique_ids', 'spectral_types', 'V_magnitudes', 'B_magnitudes',
+                                'object_types', 'distance_ly', 'distance_pc', 'Temperature',
+                                'Luminosity', 'Abs_Mag', 'RA_ICRS', 'DE_ICRS', 'ra_str',
+                                'dec_str', 'Stellar_Class', 'Object_Type_Desc', 'Source_Catalog']:
+                        if field in data and idx < len(data[field]):
+                            value = data[field][idx]
+                            # Better field mapping
+                            if field == 'unique_ids':
+                                key = 'unique_id'
+                            elif field == 'spectral_types':
+                                key = 'spectral_type'
+                            elif field == 'V_magnitudes':
+                                key = 'V_magnitude'
+                            elif field == 'B_magnitudes':
+                                key = 'B_magnitude'
+                            elif field == 'object_types':
+                                key = 'object_type'
+                            else:
+                                key = field  # Use as-is for other fields
+                            props[key] = value
+
+                    return props
+                except (ValueError, IndexError):
+                    pass
+        
+        except Exception as e:
+            print(f"Error loading {star_name} from {filename}: {e}")
+        
+        return {}
+
+    def format_ra_dec(self, star_props: Dict) -> Optional[str]:
+        """Format RA/Dec coordinates."""
+        # Try pre-formatted strings first (from enhanced data)
+        ra_str = star_props.get('ra_str')
+        dec_str = star_props.get('dec_str')
+        
+        if ra_str and dec_str and str(ra_str).lower() not in ['nan', 'none', '']:
+            return f"RA:  {ra_str}\nDec: {dec_str}\n{ra_str} {dec_str}\n(J2000 epoch)"
+        
+        # Try ICRS coordinates in degrees
+        ra_deg = star_props.get('RA_ICRS')
+        dec_deg = star_props.get('DE_ICRS')
+        
+        if ra_deg is not None and dec_deg is not None:
+            try:
+                ra_deg = float(ra_deg)
+                dec_deg = float(dec_deg)
+                
+                if not np.isnan(ra_deg) and not np.isnan(dec_deg):
+                    # Convert to sexagesimal
+                    ra_hours = ra_deg / 15.0
+                    ra_h = int(ra_hours)
+                    ra_m = int((ra_hours - ra_h) * 60)
+                    ra_s = ((ra_hours - ra_h) * 60 - ra_m) * 60
+                    
+                    dec_sign = '+' if dec_deg >= 0 else '-'
+                    dec_abs = abs(dec_deg)
+                    dec_d = int(dec_abs)
+                    dec_m = int((dec_abs - dec_d) * 60)
+                    dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
+                    
+                    ra_formatted = f"{ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s"
+                    dec_formatted = f"{dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\""
+                    
+                    return f"RA:  {ra_formatted}\nDec: {dec_formatted}\n(J2000 epoch)"
+            except:
+                pass
+        
+        return None
+
+    def format_core_properties(self, star_props: Dict) -> str:
+        """Format star properties - reads from enhanced pickle data."""
+        lines = []
+        
+        # Distance
+        distance_ly = star_props.get('distance_ly')
+        distance_pc = star_props.get('distance_pc')
+        
+        if distance_ly is not None and not pd.isna(distance_ly):
+            if distance_pc is None or pd.isna(distance_pc):
+                distance_pc = distance_ly / 3.26156
+            lines.append(f"Distance: {distance_pc:.2f} pc ({distance_ly:.2f} ly)")
+        elif distance_pc is not None and not pd.isna(distance_pc):
+            distance_ly = distance_pc * 3.26156
+            lines.append(f"Distance: {distance_pc:.2f} pc ({distance_ly:.2f} ly)")
+        
+        # Temperature (from enhanced data or basic)
+        temp = star_props.get('Temperature')
+        if temp is not None and not pd.isna(temp):
+            lines.append(f"Temperature: {temp:.0f} K")
+        
+        # Luminosity (from enhanced data)
+        lum = star_props.get('Luminosity')
+        if lum is not None and not pd.isna(lum):
+            lines.append(f"Luminosity: {lum:.6f} L☉")
+        
+        # Absolute Magnitude (from enhanced data)
+        abs_mag = star_props.get('Abs_Mag')
+        if abs_mag is not None and not pd.isna(abs_mag):
+            lines.append(f"Absolute Magnitude: {abs_mag:.2f}")
+        
+        # Apparent Magnitude
+        app_mag = star_props.get('V_magnitude')
+        if app_mag is not None and not pd.isna(app_mag):
+            lines.append(f"Apparent Magnitude: {app_mag:.2f}")
+        
+        # Spectral Type
+        spec_type = star_props.get('spectral_type')
+        if spec_type and str(spec_type) not in ['Unknown', 'nan', 'None']:
+            lines.append(f"Spectral Type: {spec_type}")
+        
+        # Stellar Class (from enhanced data or parse from spectral type)
+        stellar_class = star_props.get('Stellar_Class')
+        if stellar_class and str(stellar_class) not in ['Unknown', 'nan', 'None']:
+            # Get full description if available
+            if stellar_class in stellar_class_labels:
+                lines.append(f"Stellar Class: {stellar_class_labels[stellar_class]}")
+            else:
+                lines.append(f"Stellar Class: {stellar_class}")
+        
+        # Object Type (expanded from enhanced data or basic code)
+        obj_type = star_props.get('Object_Type_Desc')  # Try enhanced first
+        if not obj_type or pd.isna(obj_type):
+            obj_type_code = star_props.get('object_type')  # Fall back to code
+            if obj_type_code and str(obj_type_code) not in ['Unknown', 'nan', 'None']:
+                # Expand using mapping
+                codes = re.split(r'[;, ]+', str(obj_type_code))
+                descriptions = []
+                for code in codes:
+                    code = code.strip()
+                    descriptions.append(object_type_mapping.get(code, code))
+                obj_type = ', '.join(descriptions)
+        
+        if obj_type and str(obj_type) not in ['Unknown', 'nan', 'None']:
+            lines.append(f"Object Type: {obj_type}")
+        
+        # Source Catalog (from enhanced data or infer from unique_id)
+        source = star_props.get('Source_Catalog')
+        if source:
+            lines.append(f"Source Catalog: {source}")
+        else:
+            uid = star_props.get('unique_id')
+            if uid:
+                if uid.startswith('HIP'):
+                    lines.append("Source Catalog: Hipparcos")
+                elif uid.startswith('Gaia'):
+                    lines.append("Source Catalog: Gaia")
+        
+        return '\n'.join(lines)
+
+    def clean_html_note(self, note: str) -> str:
+        """Remove HTML tags from note content."""
+        clean = re.sub(r'<br\s*/?>', '\n', note)
+        clean = re.sub(r'<a\s+href="[^"]*"[^>]*>([^<]*)</a>', r'\1', clean)
+        clean = re.sub(r'<[^>]+>', '', clean)
+        clean = re.sub(r'\n\s*\n', '\n\n', clean)
+        return clean.strip()
+
+    def extract_url(self, note: str) -> Optional[str]:
+        """Extract URL from HTML anchor tags."""
+        url_match = re.search(r'<a href="([^"]+)">', note)
+        if url_match:
+            return url_match.group(1)
+        return None
+
+    def highlight_urls(self, text_widget):
+        """Make URLs clickable."""
+        content = text_widget.get('1.0', tk.END)
+        text_widget.tag_remove("url", "1.0", tk.END)
+        
+        url_pattern = r'https?://[^\s]+'
+        for match in re.finditer(url_pattern, content):
+            start_idx = f"1.0 + {match.start()} chars"
+            end_idx = f"1.0 + {match.end()} chars"
+            text_widget.tag_add("url", start_idx, end_idx)
+        
+        text_widget.tag_config("url", foreground="blue", underline=True)
+        
+        def open_url(event):
+            index = text_widget.index(f"@{event.x},{event.y}")
+            if "url" in text_widget.tag_names(index):
+                ranges = text_widget.tag_ranges("url")
+                for i in range(0, len(ranges), 2):
+                    if text_widget.compare(index, ">=", ranges[i]) and \
+                       text_widget.compare(index, "<=", ranges[i+1]):
+                        url = text_widget.get(ranges[i], ranges[i+1])
+                        webbrowser.open(url)
+                        break
+        
+        text_widget.tag_bind("url", "<Button-1>", open_url)
+        text_widget.tag_bind("url", "<Enter>", lambda e: text_widget.config(cursor="hand2"))
+        text_widget.tag_bind("url", "<Leave>", lambda e: text_widget.config(cursor=""))
+
+    def add_clipboard_support(self, widget):
+        """Add copy/paste support."""
+        def copy(event=None):
+            try:
+                selection = widget.get(tk.SEL_FIRST, tk.SEL_LAST)
+                widget.clipboard_clear()
+                widget.clipboard_append(selection)
+            except:
+                pass
+            return "break"
+        
+        def select_all(event=None):
+            widget.tag_add(tk.SEL, "1.0", tk.END)
+            widget.mark_set(tk.INSERT, "1.0")
+            widget.see(tk.INSERT)
+            return "break"
+        
+        widget.bind("<Control-c>", copy)
+        widget.bind("<Control-a>", select_all)
+        
+        menu = tk.Menu(widget, tearoff=0)
+        menu.add_command(label="Copy", command=copy)
+        menu.add_command(label="Select All", command=select_all)
+        
+        def show_menu(event):
+            menu.post(event.x_root, event.y_root)
+        
+        widget.bind("<Button-3>", show_menu)
 
     def get_selected_stars(self) -> Dict[str, Optional[str]]:
-        """Get currently selected stars for each category."""
+        """Get currently selected stars."""
         return {
             category: self.search_vars[category].get()
             for category in self.search_vars
         }
 
-def add_clipboard_support(entry_widget):
-    """Add copy/paste/cut support to an entry widget."""
+
+class StarVisualizationGUI(tk.Tk):
+    """Main GUI window with search and visualization controls."""
     
-    def copy(event=None):
-        """Copy selected text to clipboard."""
-        try:
-            selection = entry_widget.selection_get()
-            entry_widget.clipboard_clear()
-            entry_widget.clipboard_append(selection)
-        except:
-            pass  # No selection
-        return "break"
-    
-    def cut(event=None):
-        """Cut selected text to clipboard."""
-        try:
-            copy()
-            entry_widget.delete("sel.first", "sel.last")
-        except:
-            pass  # No selection
-        return "break"
-    
-    def paste(event=None):
-        """Paste clipboard content at cursor position or over selection."""
-        try:
-            # Get clipboard content
-            text = entry_widget.clipboard_get()
-            # If there's a selection, delete it first
-            try:
-                entry_widget.delete("sel.first", "sel.last")
-            except:
-                pass  # No selection
-            # Insert clipboard content
-            entry_widget.insert("insert", text)
-        except:
-            pass  # Empty clipboard or invalid content
-        return "break"
-
-    # Bind standard keyboard shortcuts
-    entry_widget.bind('<Control-c>', copy)
-    entry_widget.bind('<Control-x>', cut)
-    entry_widget.bind('<Control-v>', paste)
-    
-    # Create right-click menu
-    menu = tk.Menu(entry_widget, tearoff=0)
-    menu.add_command(label="Cut", command=cut)
-    menu.add_command(label="Copy", command=copy)
-    menu.add_command(label="Paste", command=paste)
-    
-    def show_menu(event):
-        menu.post(event.x_root, event.y_root)
-        return "break"
-    
-    # Bind right-click to show menu
-    entry_widget.bind('<Button-3>', show_menu)
-
-
-# Function to integrate the search frame into the main GUI
-def add_star_search_to_gui(root: tk.Tk) -> StarSearchFrame:
-    """Add star search functionality to the main GUI."""
-    # Create a new frame for the star search
-    search_frame = ttk.LabelFrame(root, text="Star Search")
-    search_frame.grid(row=0, column=0, padx=10, pady=10, sticky='nsew')
-    
-    # Create and return the StarSearchFrame
-    return StarSearchFrame(search_frame)
-
-class ScrollableFrame(tk.Frame):
-    """
-    A scrollable frame that can contain multiple widgets with a vertical scrollbar.
-    """
-    def __init__(self, container, *args, **kwargs):
-        super().__init__(container, *args, **kwargs)
-
-        # Canvas and Scrollbar
-        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
-        self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
-        self.canvas.configure(yscrollcommand=self.scrollbar.set) 
-
-        # Layout
-        self.canvas.pack(side="left", fill="both", expand=True)
-        self.scrollbar.pack(side="right", fill="y")
-
-        # Scrollable Frame
-        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
-        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
-
-        # Bind mousewheel to the canvas
-        self.canvas.bind("<Enter>", self._on_enter)
-        self.canvas.bind("<Leave>", self._on_leave)
-
-        # Update scroll region when the canvas size changes
-        self.canvas.bind(
-            "<Configure>",
-            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-        )
-
-    def _on_mousewheel(self, event):
-        if event.delta:
-            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        elif event.num == 4:
-            self.canvas.yview_scroll(-1, "units")
-        elif event.num == 5:
-            self.canvas.yview_scroll(1, "units")
-
-    def _on_enter(self, event):
-        # Bind the mousewheel events
-        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
-        self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux
-        self.canvas.bind_all("<Button-5>", self._on_mousewheel)  # Linux
-
-    def _on_leave(self, event):
-        # Unbind mousewheel events
-        self.canvas.unbind_all("<MouseWheel>")
-        self.canvas.unbind_all("<Button-4>")
-        self.canvas.unbind_all("<Button-5>")   
-
-    def _on_enter(self, event):
-        # Bind the mouse wheel events when the cursor enters a widget
-        event.widget.bind_all("<MouseWheel>", self._on_mousewheel)
-        event.widget.bind_all("<Button-4>", self._on_mousewheel)
-        event.widget.bind_all("<Button-5>", self._on_mousewheel)
-
-    def _on_leave(self, event):
-        # Unbind the mouse wheel events when the cursor leaves a widget
-        event.widget.unbind_all("<MouseWheel>")
-        event.widget.unbind_all("<Button-4>")
-        event.widget.unbind_all("<Button-5>")
-
-
-# Update grid configuration for three-column layout
-root.grid_rowconfigure(0, weight=1)  # Main content row
-root.grid_columnconfigure(0, weight=1)  # Star search column
-root.grid_columnconfigure(1, weight=1)  # Plot controls column
-root.grid_columnconfigure(2, weight=1)  # Note column
-
-# Create and position search frame in left column
-search_frame = ttk.LabelFrame(root, text="Star Search")
-search_frame.grid(row=0, column=0, padx=10, pady=10, sticky='nsew')
-
-# Initialize the star search
-star_search = StarSearchFrame(search_frame)
-star_search.pack(fill='both', expand=True)
-
-
-# Position controls_frame below input_frame
-controls_frame = tk.Frame(root)
-controls_frame.grid(row=2, column=0, padx=(5, 10), pady=(0, 10), sticky='n')  # Moved to row 2
-
-# Position note_frame to stretch full height
-note_frame = tk.Frame(root)
-note_frame.grid(row=0, column=2, rowspan=3, padx=(5, 10), pady=(10, 10), sticky='nsew')  # Added rowspan=3 and sticky='nsew'
-
-
-
-def get_default_camera():
-    """Return the default orthographic camera settings for top-down view"""
-    return {
-        "projection": {
-            "type": "orthographic"
-        },
-        # Looking straight down the z-axis
-        "eye": {"x": 0, "y": 0, "z": 1},  # Position above the x-y plane
-        "center": {"x": 0, "y": 0, "z": 0},  # Looking at origin
-        "up": {"x": 0, "y": 1, "z": 0}  # "Up" direction aligned with y-axis
-    }
-
-
-
-def format_maybe_float(value):
-    """
-    If 'value' is a numeric type (int or float), return it formatted
-    with 10 decimal places. Otherwise, return 'N/A'.
-    """
-    if isinstance(value, (int, float)):
-        return f"{value:.10f}"
-    return "N/A"
-
-def format_km_float(value):
-    """
-    Format kilometer values in scientific notation with 2 decimal places.
-    """
-    if isinstance(value, (int, float)):
-        return f"{value:.10e}"              # using .10e for scientific notation instead of .10f
-    return "N/A"
-
-
-def on_closing():
-    """Handle cleanup when the main window is closed."""
-    try:
-        # Attempt to remove any temporary files
-        temp_files = ["palomas_orrery.html", "palomas_orrery_animation.html"]
-        for temp_file in temp_files:
-            try:
-                if os.path.exists(temp_file):
-                    os.remove(temp_file)
-            except:
-                pass
-    finally:
-        root.destroy()
-
-# Add the closing protocol to the root window
-root.protocol("WM_DELETE_WINDOW", on_closing)
-
-    
-# Get the script's saved date for version control
-script_saved_date = datetime.now().strftime("%Y-%m-%d")
-
-# Exception handling for Tkinter
-# def report_callback_exception(self, exc, val, tb):
-def report_callback_exception(self, exc_type, exc_value, exc_traceback):
-    print('Exception in Tkinter callback')
-    traceback.print_exception(exc_type, exc_value, exc_traceback)
-
-root.report_callback_exception = report_callback_exception
-
-# Configure grid weights for responsive design
-root.grid_rowconfigure(0, weight=1)
-root.grid_columnconfigure(0, weight=1)
-root.grid_columnconfigure(1, weight=1)
-root.grid_columnconfigure(2, weight=1)
-
-input_frame = tk.Frame(root)
-input_frame.grid(row=0, column=0, padx=(10, 5), pady=(10, 10), sticky='n')
-
-# Configure grid weights within input_frame for proper spacing
-input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
-input_frame.grid_rowconfigure(1, weight=1)  # Row for __frame
-for col in range(0, 9):
-    input_frame.grid_columnconfigure(col, weight=1)  # Allow columns to expand if needed
-
-
-# Create middle column frame for plot controls
-plot_controls_frame = ttk.Frame(root)
-plot_controls_frame.grid(row=0, column=1, padx=10, pady=10, sticky='n')
-
-# Move light year entry and button to middle column
-ly_entry_label = tk.Label(plot_controls_frame, text="Enter number of light-years to plot (max 100.1):")
-
-ly_entry_label.pack(pady=(0, 5))
-
-ly_entry = tk.Entry(plot_controls_frame)
-ly_entry.pack(pady=(0, 10))
-ly_entry.insert(0, '20')  # Default ly value
-
-"""
-# Function to call the planetarium_distance script with user input
-def call_planetarium_distance_script_with_input():
-    try:
-        ly_value = ly_entry.get()
-        ly_value = int(ly_value)
-        if ly_value <= 0:
-            output_label.config(text="Please enter a positive number of light-years.")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
-        # Pass the light-years value as a command-line argument
-        subprocess.run(['python', script_path, str(ly_value)])
-    except ValueError:
-        output_label.config(text="Please enter the number of light-years to plot, up to 100.")
-    except Exception as e:
-        output_label.config(text=f"Error running planetarium_distance.py: {e}")
-        print(f"Error running planetarium_distance.py: {e}")
-"""
-
-# FOR call_planetarium_distance_script_with_input():
-def call_planetarium_distance_script_with_input():          # increases fetch limit from 100 ly to 100.1 ly
-    try:
-        ly_value = ly_entry.get()
-        ly_value = float(ly_value)  # CHANGE: int to float for decimals
-        if ly_value <= 0:
-            output_label.config(text="Please enter a positive number of light-years.")
-            return
-        if ly_value > 100.1:  # ADD: Upper limit check
-            output_label.config(text="Please enter a number between 0.1 and 100.1 light-years.")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
-        subprocess.run(['python', script_path, str(ly_value)])
-    except ValueError:
-        output_label.config(text="Please enter a valid number (e.g., 100 or 100.1)")  # CHANGE: Update message
-    except Exception as e:
-        output_label.config(text=f"Error running planetarium_distance.py: {e}")
-        print(f"Error running planetarium_distance.py: {e}")
-
-
-# Add plot buttons to middle column
-plot_button_3d = tk.Button(
-    plot_controls_frame,
-    text="3D Visualization of Stellar Neighborhood",
-    command=call_planetarium_distance_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-plot_button_3d.pack(pady=(0, 10))
-
-CreateToolTip(plot_button_3d, "3D plot of stars within the selected distance from the Sun.")
-
-# Function to call the hr_diagram script with user input
-"""
-def call_hr_diagram_distance_script_with_input():
-    try:
-        mag_value = ly_entry.get()
-        mag_value = int(mag_value)
-        if mag_value <= 0:
-            output_label.config(text="Please enter a positive number of light-years.")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
-        # Pass the light-years value as a command-line argument
-        subprocess.run(['python', script_path, str(mag_value)])
-    except ValueError:
-        output_label.config(text="Please enter the number of light-years to plot, up to 100.1.")
-    except Exception as e:
-        output_label.config(text=f"Error running hr_diagram_distance.py: {e}")
-        print(f"Error running hr_diagram_distance.py: {e}")
-"""        
-
-def call_hr_diagram_distance_script_with_input():
-    try:
-        ly_value = ly_entry.get()  # Also rename mag_value to ly_value for clarity
-        ly_value = float(ly_value)  # CHANGE: int to float
-        if ly_value <= 0:
-            output_label.config(text="Please enter a positive number of light-years.")
-            return
-        if ly_value > 100.1:  # ADD: Optional upper limit check
-            output_label.config(text="Please enter a number between 0.1 and 100.1 light-years.")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
-        subprocess.run(['python', script_path, str(ly_value)])
-    except ValueError:
-        output_label.config(text="Please enter a valid number (e.g., 100 or 100.1)")
-    except Exception as e:
-        output_label.config(text=f"Error running hr_diagram_distance.py: {e}")
-        print(f"Error running hr_diagram_distance.py: {e}")        
-
-plot_button_2d = tk.Button(
-    plot_controls_frame,
-    text="2D Visualization of Stellar Neighborhood",
-    command=call_hr_diagram_distance_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-plot_button_2d.pack(pady=(0, 20))
-
-CreateToolTip(plot_button_2d, "2D Hertzprung-Russell plot of stars within the selected distance from the Sun.")
-
-
-# Add scale options frame
-stellar_scale_frame = tk.LabelFrame(plot_controls_frame, text="Scale Options for Apparent Magnitude 3D Plots")
-stellar_scale_frame.pack(pady=(0, 10), fill='x')
-
-# Scale options remain the same, just moved to middle column
-stellar_scale_var = tk.StringVar(value='Auto')
-stellar_auto_scale = tk.Radiobutton(stellar_scale_frame, text="Automatic Scaling", 
-                                   variable=stellar_scale_var, value='Auto')
-stellar_auto_scale.pack(anchor='w')
-
-stellar_manual_scale = tk.Radiobutton(stellar_scale_frame, text="Manual Scale (Light-Years):", 
-                                     variable=stellar_scale_var, value='Manual')
-stellar_manual_scale.pack(anchor='w')
-
-stellar_scale_entry = tk.Entry(stellar_scale_frame, width=10)
-stellar_scale_entry.pack(pady=(0, 5))
-stellar_scale_entry.insert(0, '1400')
-
-
-CreateToolTip(stellar_auto_scale, "Automatically adjust scale based on the data range")
-
-CreateToolTip(stellar_manual_scale, "The range of the axes gets reduced to your input, so visible objects beyond that range will not display. ")
-
-def on_stellar_scale_change(*args):
-    """Enable/disable scale entry based on selected mode"""
-    stellar_scale_entry.config(state='normal' if stellar_scale_var.get() == 'Manual' else 'disabled')
-
-# Bind the scale variable to the callback
-stellar_scale_var.trace('w', on_stellar_scale_change)
-
-# Initial state setup
-on_stellar_scale_change()
-
-# Add magnitude controls
-mag_entry_label = tk.Label(plot_controls_frame, text="Enter maximum apparent magnitude (-1.44 to 9):")
-mag_entry_label.pack(pady=(0, 5))
-
-mag_entry = tk.Entry(plot_controls_frame)
-mag_entry.pack(pady=(0, 10))
-mag_entry.insert(0, '4')  # Default magnitude value
-
-# After creating entry widgets, add clipboard support:
-for entry in [ly_entry, mag_entry, stellar_scale_entry]:
-    add_clipboard_support(entry)
-
-def call_planetarium_apparent_magnitude_script_with_input():
-    try:
-        mag_value = mag_entry.get()
-        mag_value = float(mag_value)
-        if mag_value < -1.44 or mag_value > 9:
-            output_label.config(text="Please enter a magnitude between -1.44 and 9.")
-            return
-            
-        # Get scale value if manual mode is selected
-        user_scale = None
-        if stellar_scale_var.get() == 'Manual':
-            try:
-                user_scale = float(stellar_scale_entry.get())
-                if user_scale <= 0:
-                    output_label.config(text="Please enter a positive scale value.")
-                    return
-            except ValueError:
-                output_label.config(text="Invalid scale value.")
-                return
-                
-        script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
-        # Pass magnitude value as command-line argument
-        cmd = ['python', script_path, str(mag_value)]
-        if user_scale is not None:
-            cmd.append(str(user_scale))
-            
-        print(f"Running command: {' '.join(cmd)}")  # Debug print
-        subprocess.run(cmd)
+    def __init__(self):
+        super().__init__()
+        self.title("Star Visualization Control Panel")
+    #    self.geometry("850x1200")
+        self.geometry("1100x800")
+        self.minsize(980, 700)        
         
-    except ValueError:
-        output_label.config(text="Please enter a valid magnitude between -1.44 (brightest star Sirius) and 9.")
-    except Exception as e:
-        output_label.config(text=f"Error running planetarium_apparent_magnitude.py: {e}")
-        print(f"Error running planetarium_apparent_magnitude.py: {e}")
-        traceback.print_exc()  # Add this for more detailed error info
+        self.BUTTON_WIDTH = 35
+        self.BUTTON_FONT = ("Arial", 10, "normal")
+        
+        self.setup_ui()
 
-plot_button = tk.Button(
-    plot_controls_frame,  # Use plot_controls_frame as the parent
-    text="3D Visualization of Stars Visible Unaided",
-    command=call_planetarium_apparent_magnitude_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-
-# Change the grid placement to pack since we're using plot_controls_frame
-plot_button.pack(pady=(0, 10))
-CreateToolTip(plot_button, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less; stars and non-stellar objects " 
-              "-- long load time.")
+        # NEW: Check for and load last plot data after UI is ready
+        self.after(100, self.check_and_load_last_plot)
 
 
-# Function to call the hr_diagram script with user input
+    def run_visualization_with_console_output(self, script_path, args):
+        """Run visualization and print output to console."""
+        import subprocess
+        import sys
+        
+        result = subprocess.run(
+            [sys.executable, script_path] + args,
+            capture_output=True,
+            text=True
+        )
+        
+        print("\n" + "="*60)
+        print(f"Output from {script_path}:")
+        print("="*60)
+        if result.stdout:
+            print(result.stdout)
+        if result.stderr:
+            print("ERRORS:", result.stderr)
+        print("="*60 + "\n")
+        
+        return result.returncode == 0
 
-def call_hr_diagram_apparent_magnitude_script_with_input():
-    try:
-        mag_value = mag_entry.get()
-        mag_value = float(mag_value)
-        if mag_value < -1.44 or mag_value > 9:
-            output_label.config(text="Please enter a magnitude between -1.44 (brightest star Sirius) and 9. (ideal visibility and vision limit).")
-            return
-        script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
-        # Pass the magnitude value as a command-line argument
-        subprocess.run(['python', script_path, str(mag_value)])
-    except ValueError:
-        output_label.config(text="Please enter a valid magnitude between -1.44 (brightest star Sirius) and 9 (ideal visibility and vision limit).")
-    except Exception as e:
-        output_label.config(text=f"Error running hr_diagram_apparent_magnitude.py: {e}")
-        print(f"Error running hr_diagram_apparent_magnitude.py: {e}")
+    def check_and_load_last_plot(self):
+        """Check for and load the last plot data on startup."""
+        try:
+            # Try to load the last plot data
+            plot_data = PlotDataExchange.load_plot_data()
+            
+            if plot_data:
+                print("Found existing plot data, loading report...")
+                
+                # Create minimal DataFrame for report
+                import pandas as pd
+                
+                # Get data from the saved plot
+                temp_valid = plot_data.get('temp_valid', 0)
+                temp_missing = plot_data.get('temp_missing', 0)
+                lum_valid = plot_data.get('lum_valid', 0)
+                lum_missing = plot_data.get('lum_missing', 0)
+                total_stars = plot_data.get('total_stars', 0)
+                
+                # Create arrays for Temperature and Luminosity
+                temp_array = [1] * temp_valid + [0] * temp_missing
+                lum_array = [1] * lum_valid + [0] * lum_missing
+                
+                # Make sure arrays are the same length (use total_stars as reference)
+                if len(temp_array) < total_stars:
+                    temp_array.extend([0] * (total_stars - len(temp_array)))
+                if len(lum_array) < total_stars:
+                    lum_array.extend([0] * (total_stars - len(lum_array)))
+                    
+                # Trim if too long
+                temp_array = temp_array[:total_stars]
+                lum_array = lum_array[:total_stars]
+                
+                # Create DataFrame
+                pseudo_df = pd.DataFrame({
+                    'Temperature': temp_array,
+                    'Luminosity': lum_array
+                })
+                
+                # Add catalog information if available
+                if plot_data.get('catalog_counts'):
+                    catalogs = []
+                    for catalog, count in plot_data['catalog_counts'].items():
+                        catalogs.extend([catalog] * count)
+                    if catalogs:
+                        # Make sure catalog list matches DataFrame length
+                        if len(catalogs) > len(pseudo_df):
+                            catalogs = catalogs[:len(pseudo_df)]
+                        elif len(catalogs) < len(pseudo_df):
+                            # Pad with 'Unknown' if needed
+                            catalogs.extend(['Unknown'] * (len(pseudo_df) - len(catalogs)))
+                        pseudo_df['Source_Catalog'] = catalogs
+                
+                # Add magnitude stats if available
+                if plot_data.get('magnitude_stats'):
+                    mag_stats = plot_data['magnitude_stats']
+                    # Use mean if available, otherwise use a default
+                    mag_value = mag_stats.get('mean', 0) if mag_stats else 0
+                    pseudo_df['Apparent_Magnitude'] = [mag_value] * len(pseudo_df)
+                
+                # Update the report widget
+                self.plot_report.update_report(
+                    combined_df=pseudo_df,
+                    counts_dict=plot_data.get('counts_dict', {}),
+                    processing_times=plot_data.get('processing_times', {}),
+                    mode=plot_data.get('mode', 'unknown'),
+                    limit_value=plot_data.get('limit_value')
+                )
+                
+                # Update status to show last plot info
+                mode = plot_data.get('mode', 'unknown')
+                limit_value = plot_data.get('limit_value', 'N/A')
+                if mode == 'distance':
+                    self.status_label.config(
+                        text=f"Loaded last plot: {limit_value} ly distance",
+                        foreground="green"
+                    )
+                elif mode == 'magnitude':
+                    self.status_label.config(
+                        text=f"Loaded last plot: magnitude ≤ {limit_value}",
+                        foreground="green"
+                    )
+                else:
+                    self.status_label.config(
+                        text="Loaded last plot data",
+                        foreground="green"
+                    )
+                    
+                print(f"Plot report loaded: {mode} mode, limit={limit_value}")
+                
+            else:
+                print("No previous plot data found")
+                self.status_label.config(
+                    text="Ready - no previous plot data",
+                    foreground="blue"
+                )
+                
+        except Exception as e:
+            print(f"Error loading last plot data: {e}")
+            import traceback
+            traceback.print_exc()
+            self.status_label.config(
+                text="Ready",
+                foreground="green"
+            )
 
-plot_button_2d_mag = tk.Button(
-    plot_controls_frame,
-    text="2D Visualization of Stars Visible Unaided",
-    command=call_hr_diagram_apparent_magnitude_script_with_input,
-    bg='SystemButtonFace',
-    fg='blue',
-    width=BUTTON_WIDTH,
-    font=BUTTON_FONT
-)
-plot_button_2d_mag.pack(pady=(0, 20))
+    def setup_ui(self):
+        """Build the complete user interface."""
+        main_frame = ttk.Frame(self)
+        main_frame.pack(fill='both', expand=True, padx=10, pady=10)
+        
+        main_frame.grid_columnconfigure(0, weight=1)
+        main_frame.grid_columnconfigure(1, weight=1)
+        main_frame.grid_columnconfigure(2, weight=1)
+        
+        # LEFT COLUMN - Star Search
+        left_frame = ttk.Frame(main_frame)
+        left_frame.grid(row=0, column=0, sticky='nsew', padx=(0, 5))
+        
+        search_label = ttk.Label(left_frame, text="Star Search", font=("Arial", 12, "bold"))
+        search_label.pack(pady=(0, 10))
+        
+        self.search_widget = StarVisualizationSearchWidget(left_frame)
+        self.search_widget.pack(fill='both', expand=True)
+        
+        # MIDDLE COLUMN - Visualization Controls
+    #    middle_frame = ttk.Frame(main_frame)
+    #    middle_frame.grid(row=0, column=1, sticky='nsew', padx=5)
+        middle_scroll = ScrollableFrame(main_frame)
+        middle_scroll.grid(row=0, column=1, sticky='nsew', padx=5)
+        middle_frame = middle_scroll.container  # Use this as before        
+        
+        controls_label = ttk.Label(middle_frame, text="Visualization Controls", font=("Arial", 12, "bold"))
+        controls_label.pack(pady=(0, 10))
+        
+        # Distance controls
+        distance_frame = ttk.LabelFrame(middle_frame, text="Distance-based Visualization (4.25 through 100.1 light-years)", padding=10)
+        distance_frame.pack(fill='x', pady=(0, 10))
+        
+        ttk.Label(distance_frame, text="Distance (light-years):").pack(anchor='w')
+        self.ly_entry = ttk.Entry(distance_frame, width=20)
+        self.ly_entry.pack(fill='x', pady=(5, 10))
+        self.ly_entry.insert(0, "20")
+        
+        self.plot_3d_button = tk.Button(
+            distance_frame,
+            text="3D Stellar Neighborhood",
+            command=self.plot_3d_distance,
+            bg='SystemButtonFace',
+            fg='blue',
+            width=self.BUTTON_WIDTH,
+            font=self.BUTTON_FONT
+        )
+        self.plot_3d_button.pack(pady=(0, 5))
+        
+        self.plot_2d_button = tk.Button(
+            distance_frame,
+            text="2D HR Diagram",
+            command=self.plot_2d_distance,
+            bg='SystemButtonFace',
+            fg='blue',
+            width=self.BUTTON_WIDTH,
+            font=self.BUTTON_FONT
+        )
+        self.plot_2d_button.pack()
+        
+        # Magnitude controls
+        magnitude_frame = ttk.LabelFrame(middle_frame, text="Apparent Magnitude-based Visualization (-1.44 through 9)", padding=10)
+        magnitude_frame.pack(fill='x', pady=(0, 10))
 
-CreateToolTip(plot_button_2d_mag, "Space, 8.5-9; perfect, 6.7-7.5; rural, 6.5; suburbs, 5-5.5; urban, 4 or less -- long load time.")
+        # ADD: Scale options for magnitude visualization
+        scale_frame = ttk.LabelFrame(magnitude_frame, text="Scale Options", padding=5)
+        scale_frame.pack(fill='x', pady=(10, 0))
 
-# Status frame remains at bottom of middle column
-status_frame = tk.LabelFrame(plot_controls_frame, text="Output Messages")
-status_frame.pack(pady=(0, 10), fill='x')
+        self.scale_var = tk.StringVar(value='Auto')
+        self.auto_scale_radio = ttk.Radiobutton(
+            scale_frame, 
+            text="Automatic Scaling",
+            variable=self.scale_var, 
+            value='Auto'
+        )
+        self.auto_scale_radio.pack(anchor='w')
 
-output_label = tk.Label(status_frame, text="", fg='red', wraplength=400)
-output_label.pack(pady=5)
+        self.manual_scale_radio = ttk.Radiobutton(
+            scale_frame,
+            text="Manual Scale (Light-Years):",
+            variable=self.scale_var,
+            value='Manual'
+        )
+        self.manual_scale_radio.pack(anchor='w')
 
-progress_bar = ttk.Progressbar(status_frame, orient='horizontal', mode='indeterminate', length=300)
-progress_bar.pack(pady=5)
+        self.scale_entry = ttk.Entry(scale_frame, width=20)
+        self.scale_entry.pack(fill='x', pady=(5, 0))
+        self.scale_entry.insert(0, '1400')
+
+        # Enable/disable scale entry based on selection
+        def on_scale_change(*args):
+            self.scale_entry.config(
+                state='normal' if self.scale_var.get() == 'Manual' else 'disabled'
+            )
+
+        self.scale_var.trace('w', on_scale_change)
+        on_scale_change()  # Set initial state
+
+        # Then continue with existing magnitude entry label...        
+        
+        ttk.Label(magnitude_frame, text="Limiting Magnitude:").pack(anchor='w')
+        self.mag_entry = ttk.Entry(magnitude_frame, width=20)
+        self.mag_entry.pack(fill='x', pady=(5, 10))
+        self.mag_entry.insert(0, "4")
+        
+        self.plot_3d_mag_button = tk.Button(
+            magnitude_frame,
+            text="3D Visible Stars",
+            command=self.plot_3d_magnitude,
+            bg='SystemButtonFace',
+            fg='blue',
+            width=self.BUTTON_WIDTH,
+            font=self.BUTTON_FONT
+        )
+        self.plot_3d_mag_button.pack(pady=(0, 5))
+        
+        self.plot_2d_mag_button = tk.Button(
+            magnitude_frame,
+            text="2D HR Diagram (Visible)",
+            command=self.plot_2d_magnitude,
+            bg='SystemButtonFace',
+            fg='blue',
+            width=self.BUTTON_WIDTH,
+            font=self.BUTTON_FONT
+        )
+        self.plot_2d_mag_button.pack()
+        
+        # Status display
+        status_frame = ttk.LabelFrame(middle_frame, text="Status", padding=10)
+        status_frame.pack(fill='x', pady=(10, 0))
+        
+        self.status_label = ttk.Label(status_frame, text="Ready", foreground="green")
+        self.status_label.pack()
+        
+        # ADD THIS NEW SECTION - Plot Data Report Widget
+        self.plot_report = PlotDataReportWidget(middle_frame)
+        self.plot_report.pack(fill='both', expand=True, pady=(10, 0))
+
+        # RIGHT COLUMN - Notes
+        right_frame = ttk.Frame(main_frame)
+        right_frame.grid(row=0, column=2, sticky='nsew', padx=(5, 0))
+        
+        notes_label = ttk.Label(right_frame, text="Notes", font=("Arial", 12, "bold"))
+        notes_label.pack(pady=(0, 10))
+        
+        notes_text = scrolledtext.ScrolledText(right_frame, wrap='word', width=30, height=45)
+        notes_text.pack(fill='both', expand=True)
+        notes_text.insert('1.0', 
+            "Star Visualization Guide\n"
+            "========================\n\n"
+            "Distance Visualization:\n"
+            "- Enter distance in light-years\n"
+            "- Maximum: 100.1 light-years\n"
+            "- Shows: ~9,750 stars at max\n\n"
+            "Magnitude Visualization:\n"
+            "- Enter limiting magnitude (Vmag)\n"
+            "- Range: -1.44 to 9.0\n"
+            "- Shows: ~124,000 stars at Vmag 9\n\n"
+            "Description	           Vmag\n"
+            "--------------------   ---------\n"
+            "Earth orbit            8.0 - 9.0\n"
+            "Excellent dark sky	    7.6 - 8.0\n"
+            "Typical dark sky	      7.1 - 7.5\n"
+	        "Rural sky	             6.6 - 7.0\n"
+	        "Rural/suburban sky     6.1 - 6.5\n"
+	        "Suburban sky	          5.6 - 6.0\n"
+	        "Bright suburban sky	   5.1 - 5.5\n"
+	        "Suburban/urban sky	    4.6 - 5.0\n"
+	        "City sky	              4.1 - 4.5\n"
+	        "Inner-city sky	        < 4.0\n\n"
+            "Cache Management:\n"
+            "- Protected VOT/PKL files\n"
+            "- Automatic backups created\n"
+            "- Safe incremental updates\n"
+            "- No data loss on errors\n\n"
+            "Search Features:\n"
+            "- Search any star by name\n"
+            "- View properties and notes\n"
+            "- Click URLs to open in browser\n"
+            "- Coordinates in J2000 epoch\n\n"
+            "Data Quality:\n"
+            "- 77-99% stars have temperatures\n"
+            "- All stars have luminosity\n"
+            "- Enhanced stellar parameters\n"
+            "- Hipparcos + Gaia catalogs\n\n"
+            "Tips:\n"
+            "- Reducing limits uses cache only\n"
+            "- Progress saves automatically\n"
+            "- Safe to interrupt with Ctrl+C\n"
+        )
+        notes_text.config(state='disabled')
+
+    def plot_3d_distance(self):
+        """Launch 3D distance visualization."""
+        try:
+            ly_value = float(self.ly_entry.get())
+            if ly_value <= 0 or ly_value > 100.1:
+                self.status_label.config(text="Enter 0.1-100.1 light-years", foreground="red")
+                return
+            
+            script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
+            
+            # CHANGED: Add capture_output to capture the output
+            result = subprocess.run([sys.executable, script_path, str(ly_value)],
+                                capture_output=True, text=True)
+            
+            # NEW: Print all captured output to console
+            print("\n" + "="*60)
+            print(f"Output from planetarium_distance.py ({ly_value} ly):")
+            print("="*60)
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print("STDERR:")
+                print(result.stderr)
+            print("="*60 + "\n")
+            
+            # NEW: Check if successful
+            if result.returncode == 0:
+                self.status_label.config(text=f"Launched 3D plot ({ly_value} ly)", foreground="green")
+            else:
+                self.status_label.config(text="Error generating 3D plot", foreground="red")
+                
+        except ValueError:
+            self.status_label.config(text="Invalid distance value", foreground="red")
+        except Exception as e:
+            self.status_label.config(text=f"Error: {e}", foreground="red")
 
 
-# Note frame remains in right column
-note_frame = ttk.Frame(root)
-note_frame.grid(row=0, column=2, padx=10, pady=10, sticky='nsew')
+    def plot_2d_distance(self):
+        """Launch 2D HR diagram for distance and update report."""
+        try:
+            ly_value = float(self.ly_entry.get())
+            if ly_value <= 0 or ly_value > 100.1:
+                self.status_label.config(text="Enter 0.1-100.1 light-years", foreground="red")
+                return
+            
+            script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
+            
+            # Show processing status
+            self.status_label.config(text=f"Generating HR diagram ({ly_value} ly)...", foreground="blue")
+            self.update()  # Force GUI update
+            
+            # Capture output
+            result = subprocess.run([sys.executable, script_path, str(ly_value)], 
+                                capture_output=True, text=True)
+            
+            # NEW: Print all captured output to console
+            print("\n" + "="*60)
+            print(f"Output from hr_diagram_distance.py ({ly_value} ly):")
+            print("="*60)
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print("STDERR:")
+                print(result.stderr)
+            print("="*60 + "\n")
+            
+            # Check result and update accordingly
+            if result.returncode == 0:
+                self.status_label.config(text=f"HR diagram completed ({ly_value} ly)", foreground="green")
+                
+                # Load and display the plot data after a short delay
+                self.after(500, self.load_and_display_plot_report)
+            else:
+                self.status_label.config(text="Error generating plot", foreground="red")
+                # Error already printed above
+                
+        except ValueError:
+            self.status_label.config(text="Invalid distance value", foreground="red")
+        except Exception as e:
+            self.status_label.config(text=f"Error: {e}", foreground="red")
+            
 
-note_label = tk.Label(note_frame, text="Note:", font=("Arial", 10, "normal"))
-note_label.pack(anchor='w', pady=(0, 5))
+    def plot_3d_magnitude(self):
+        """Launch 3D magnitude visualization with scale options."""
+        try:
+            mag_value = float(self.mag_entry.get())
+            if mag_value < -1.44 or mag_value > 9:
+                self.status_label.config(text="Enter magnitude -1.44 to 9", foreground="red")
+                return
+            
+            # Build command with magnitude
+            script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
+            cmd = [sys.executable, script_path, str(mag_value)]
+            
+            # Check for scale value if manual mode selected
+            if hasattr(self, 'scale_var') and self.scale_var.get() == 'Manual':
+                try:
+                    scale_value = float(self.scale_entry.get())
+                    if scale_value > 0:
+                        cmd.append(str(scale_value))
+                    else:
+                        self.status_label.config(text="Scale must be positive", foreground="red")
+                        return
+                except ValueError:
+                    self.status_label.config(text="Invalid scale value", foreground="red")
+                    return
+            
+            # CHANGED: Capture output instead of just running
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            
+            # NEW: Print all captured output to console
+            print("\n" + "="*60)
+            print(f"Output from planetarium_apparent_magnitude.py (mag {mag_value}):")
+            print("="*60)
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print("STDERR:")
+                print(result.stderr)
+            print("="*60 + "\n")
+            
+            # Check if successful
+            if result.returncode == 0:
+                # Update status with scale info if manual
+                if hasattr(self, 'scale_var') and self.scale_var.get() == 'Manual':
+                    scale_value = float(self.scale_entry.get())
+                    self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, scale {scale_value} ly)", foreground="green")
+                else:
+                    self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, auto scale)", foreground="green")
+            else:
+                self.status_label.config(text="Error generating 3D plot", foreground="red")
+            
+        except ValueError:
+            self.status_label.config(text="Invalid magnitude value", foreground="red")
+        except Exception as e:
+            self.status_label.config(text=f"Error: {e}", foreground="red")
 
-note_text_widget = scrolledtext.ScrolledText(
-    note_frame,
-    wrap='word',
-    width=44,
-    height=44.5,
-    bg='SystemButtonFace'
-)
-note_text_widget.pack(expand=True, fill='both')
-note_text_widget.insert(tk.END, note_text)
-note_text_widget.config(state='disabled')
+
+    def plot_2d_magnitude(self):
+        """Launch 2D HR diagram for magnitude and update report."""
+        try:
+            mag_value = float(self.mag_entry.get())
+            if mag_value < -1.44 or mag_value > 9:
+                self.status_label.config(text="Enter magnitude -1.44 to 9", foreground="red")
+                return
+            
+            script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
+            
+            # Show processing status
+            self.status_label.config(text=f"Generating HR diagram (mag {mag_value})...", foreground="blue")
+            self.update()  # Force GUI update
+            
+            # Capture output
+            result = subprocess.run([sys.executable, script_path, str(mag_value)],
+                                capture_output=True, text=True)
+            
+            # NEW: Print all the captured output to console
+            print("\n" + "="*60)
+            print(f"Output from hr_diagram_apparent_magnitude.py (mag {mag_value}):")
+            print("="*60)
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print("STDERR:")
+                print(result.stderr)
+            print("="*60 + "\n")
+            
+            if result.returncode == 0:
+                self.status_label.config(text=f"HR diagram completed (mag {mag_value})", foreground="green")
+                
+                # Load and display the plot data after a short delay
+                self.after(500, self.load_and_display_plot_report)
+            else:
+                self.status_label.config(text="Error generating plot", foreground="red")
+                # Error already printed above, no need to print again
+                
+        except ValueError:
+            self.status_label.config(text="Invalid magnitude value", foreground="red")
+        except Exception as e:
+            self.status_label.config(text=f"Error: {e}", foreground="red")
 
 
-# Run the Tkinter main loop
-root.mainloop()
+    def load_and_display_plot_report(self):
+        """Load the plot data from the exchange file and update the report."""
+        try:
+            plot_data = PlotDataExchange.load_plot_data()
+            
+            if plot_data:
+                # Convert the loaded data to format expected by the report widget
+                import pandas as pd
+                
+                # Get data values with defaults
+                temp_valid = plot_data.get('temp_valid', 0)
+                temp_missing = plot_data.get('temp_missing', 0)
+                lum_valid = plot_data.get('lum_valid', 0)
+                lum_missing = plot_data.get('lum_missing', 0)
+                total_stars = plot_data.get('total_stars', 0)
+                
+                # Create pseudo DataFrame ensuring consistent length
+                if total_stars > 0:
+                    # Create arrays
+                    temp_array = [1] * temp_valid + [0] * temp_missing
+                    lum_array = [1] * lum_valid + [0] * lum_missing
+                    
+                    # Ensure arrays match total_stars length
+                    temp_array = (temp_array + [0] * total_stars)[:total_stars]
+                    lum_array = (lum_array + [0] * total_stars)[:total_stars]
+                    
+                    pseudo_df = pd.DataFrame({
+                        'Temperature': temp_array,
+                        'Luminosity': lum_array
+                    })
+                else:
+                    # Empty DataFrame if no stars
+                    pseudo_df = pd.DataFrame({
+                        'Temperature': [],
+                        'Luminosity': []
+                    })
+                
+                # Add catalog information if available
+                if plot_data.get('catalog_counts') and len(pseudo_df) > 0:
+                    catalogs = []
+                    for catalog, count in plot_data['catalog_counts'].items():
+                        catalogs.extend([catalog] * min(count, total_stars - len(catalogs)))
+                        if len(catalogs) >= total_stars:
+                            break
+                            
+                    # Pad or trim catalog list
+                    if len(catalogs) < len(pseudo_df):
+                        catalogs.extend(['Unknown'] * (len(pseudo_df) - len(catalogs)))
+                    elif len(catalogs) > len(pseudo_df):
+                        catalogs = catalogs[:len(pseudo_df)]
+                        
+                    pseudo_df['Source_Catalog'] = catalogs
+                
+                # Add magnitude stats if available
+                if plot_data.get('magnitude_stats') and len(pseudo_df) > 0:
+                    mag_stats = plot_data['magnitude_stats']
+                    mag_mean = mag_stats.get('mean', 0) if mag_stats else 0
+                    pseudo_df['Apparent_Magnitude'] = [mag_mean] * len(pseudo_df)
+                
+                # Update the report widget
+                self.plot_report.update_report(
+                    combined_df=pseudo_df,
+                    counts_dict=plot_data.get('counts_dict', {}),
+                    processing_times=plot_data.get('processing_times', {}),
+                    mode=plot_data.get('mode', 'unknown'),
+                    limit_value=plot_data.get('limit_value')
+                )
+                
+                print("Plot report updated successfully")
+                
+            else:
+                self.status_label.config(text="Could not load plot data", foreground="orange")
+                print("No plot data to load")
+                
+        except Exception as e:
+            print(f"Error in load_and_display_plot_report: {e}")
+            import traceback
+            traceback.print_exc()
+            self.status_label.config(text="Error loading plot data", foreground="red")
+
+
+if __name__ == "__main__":
+    app = StarVisualizationGUI()
+    app.mainloop()

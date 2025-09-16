@@ -1,4 +1,4 @@
-# Paloma's Orrery -- Updated 8/27/25
+# Paloma's Orrery -- Updated 9/15/25
 
 ## Table of Contents
 1. [Introduction](#introduction)  
@@ -75,7 +75,8 @@ You can run it three ways:
 - The first time you plot an object, the program will ask to fetch data from JPL Horizons — choose “Yes” to build your cache.  
 - On later runs, you can use the cached data for faster plotting.  
 - **For star visualizations**: Expanding distance or magnitude limits fetches only new stars, while reducing limits instantly filters cached data.
-- Hover over objects in the plot for extra information.  
+- Hover over objects in the plot for extra information.
+- **PKL files are permanent archives**: Once built, the `star_properties_distance.pkl` and `star_properties_magnitude.pkl` files remain stable and are only updated when fetching stars beyond current limits.  
 
 ### Star Visualization First-Time Setup
 
@@ -87,7 +88,7 @@ You can run it three ways:
 
 **Initial cache building (if no PKL files exist)**:
 - The system includes rate limiting protection (progressive delays, batch processing)
-- A full 100.1 ly cache (~14,000 stars) takes 2-3 hours but won't trigger SIMBAD limits
+- Won't trigger SIMBAD limits
 - Progress saves every 50 stars automatically
 - **Safe to stop anytime**: Press Ctrl+C to interrupt - all progress is saved and will resume from where you left off next time
 
@@ -109,7 +110,9 @@ You can run it three ways:
 - Comets & asteroids — plot accurate orbits from JPL Horizons.  
 - Lagrange points — visualize gravitational balance points in Earth–Moon and Sun–Earth systems.  
 - Animations — watch objects move over timescales from minutes to years.  
-- Celestial Coordinates - Right Ascension and Declination display with uncertainty estimates (±values represent JPL Horizons 3-sigma, JPL DE440/441 ephemeris, and typical confidence intervals).
+- Celestial Coordinates:
+  - Solar System Objects: Dynamic RA/Dec from JPL Horizons showing real-time apparent positions with uncertainty estimates
+  - Stars: Fixed RA/Dec (J2000) from Hipparcos/Gaia catalogs for telescope targeting
 
 ---
 
@@ -155,7 +158,7 @@ You can run it three ways:
 #### Scientific Accuracy Meets Visual Beauty
 - Real astronomical data from NASA JPL Horizons, JPL 440/441 ephemeris, ESA Hipparcos/Gaia and SIMBAD databases.  
 - Time-accurate positioning for planets, moons, asteroids, comets, and spacecraft from JPL Horizons system.  
-- Stellar neighborhood mapping with accurate 3D positioning for 118,000+ stars from Hipparcos and Gaia catalogs.  
+- Stellar neighborhood mapping with accurate 3D positioning for 123,000+ stars from Hipparcos and Gaia catalogs.  
 - Intelligent cache management with selective updates and automatic data cleanup.  
 - Enhanced orbital mechanics with actual and idealized orbits using JPL Horizons ephemerides.  
 
@@ -172,17 +175,19 @@ You can run it three ways:
 - Magnetosphere modeling including plasma torus systems around Jupiter and Saturn.  
 
 #### Advanced Features & Intelligent Data Management
-- Smart selective caching only fetches data for selected objects, avoiding unnecessary requests.
+- **Smart selective caching** only fetches data for selected objects, avoiding unnecessary requests.
 - **Incremental catalog caching** fetches only new stars when expanding distance/magnitude limits.
 - **Automatic cache merging** combines old and new data, removing duplicates intelligently.
-- Special fetch mode for experimental plotting without cache modification.
-- Automatic cache backup on startup.
-- Cache validation and repair system that automatically detects and fixes corrupted data entries.  
-- Multi-threaded processing with proper shutdown handling.  
-- Export capabilities: HTML, PNG, plus JSON, VOTable, Pickle data files for caching.  
-- Hover information with detailed astronomical data.  
-- Copy-to-clipboard functionality for star names and coordinates.  
-- Animation — watch solar system bodies and spacecraft move across timescales from minutes to years. 
+- **Special fetch mode** for experimental plotting without cache modification.
+- **Automatic cache backup** on startup.
+- **Cache validation** and repair system that automatically detects and fixes corrupted data entries.  
+- **Proper shutdown handling** with multi-threaded processing.  
+- **Export capabilities**: HTML, PNG, plus JSON, VOTable, Pickle data files for caching.  
+- **Hover information** with detailed astronomical data.  
+- **Copy-to-clipboard** functionality for star names and coordinates.  
+- **Animation** — watch solar system bodies and spacecraft move across timescales from minutes to years. 
+- **Catalog gap detection and patching** with automatic identification of missing stellar parameters and targeted fixes for known issues.
+- **Read-only PKL archives during visualization** prevents unnecessary file rewrites while preserving incremental expansion capability.
 
 #### Interactive Orbital Mechanics Visualization
 - Educational tool showing how the six classical orbital elements define an object's orbit in space.  
@@ -212,10 +217,42 @@ You can run it three ways:
 2. Enhanced celestial object catalog: Galilean moons, Jovian ring moons, Saturn's major moons, Martian moons, asteroids, extreme trans-Neptunian objects.  
 3. Lagrange point visualization for Earth-Moon and Sun-Earth-Moon barycenter systems.  
 
-#### Robust Cache Management
-1. Cache validation and repair with automatic detection, backup creation, and detailed logs.  
-2. Comprehensive test suite with isolated test environment.  
-3. Performance tips and safe manual deletion options.  
+### Enhanced Cache Management System
+1. **Safe file operations with data protection**:
+   - Atomic save operations using temporary files with verification
+   - Automatic data loss prevention (blocks saves losing >90% of data)
+   - Emergency backup creation for suspicious operations
+   - Timestamped protected backups for both PKL and VOT cache files
+
+2. **VOT cache protection for VizieR data**:
+   - Protected base VOT files from Hipparcos/Gaia catalogs
+   - Metadata tracking for all cache files with JSON sidecars
+   - Automatic recovery from corrupted files using backups
+   - Incremental merging of new catalog data without re-downloading
+
+3. **Unified cache integrity system**:
+   - `simbad_manager.py` now manages both PKL and VOT caches
+   - Comprehensive status reporting with `quick_cache_check()`
+   - `protect_all_star_data()` creates timestamped backups
+   - `rebuild_from_vot()` reconstructs PKL files from VOT caches
+
+4. **Enhanced star property files**:
+   - `star_properties_distance.pkl`: 18,363 stars within 100 light-years
+   - `star_properties_magnitude.pkl`: 202,178 stars to magnitude 9
+   - 77-99% of stars have calculated temperatures and luminosities
+   - Proper handling of both Hipparcos and Gaia catalog data
+
+5. **PKL File Management Optimization (September 2025)**:
+   - Visualization-only mode for PKL files: Visualizations now treat complete PKL archives as read-only
+   - Prevented unnecessary PKL rewrites: Removed redundant updates during normal visualization runs
+   - Preserved incremental expansion: System still correctly adds new stars when expanding search limits
+   - Performance improvement: Eliminated 2.6-31 MB file rewrites on every visualization  
+
+6. **Integrated plot data reporting**:
+   - Real-time analysis of plot data completeness
+   - Automatic detection of data quality issues
+   - Comprehensive reports accessible through GUI
+   - Exchange mechanism between standalone scripts and main GUI   
 
 #### Enhanced Orbital Mechanics and Visualization
 1. Accurate apsidal date calculations for elliptical, hyperbolic, and satellite orbits.  
@@ -233,9 +270,15 @@ You can run it three ways:
 3. Enhanced information display with hover details.
 
 #### Right Ascension and Declination Coordinates
-1. Earth-centered apparent coordinates
-2. Uncertainty values represent JPL Horizons 3-sigma confidence intervals
-3. Sources: JPL Horizons real-time data, DE441 ephemeris precision, or typical class-based estimates
+1. Solar System Objects:
+   - Earth-centered apparent coordinates updated in real-time
+   - Uncertainty values represent JPL Horizons 3-sigma confidence intervals
+   - Sources: JPL Horizons real-time data, DE441 ephemeris precision
+2. Stellar Objects:
+   - Fixed J2000 epoch coordinates from Hipparcos/Gaia ICRS positions
+   - Sexagesimal format (HH:MM:SS.SS, ±DD°MM'SS.S") for traditional astronomy use
+   - Displayed consistently across 2D HR diagrams and 3D stellar neighborhood plots
+   - Enables amateur astronomers to locate these stars and non-stellar objects with their telescopes
 
 #### Incremental Data Caching System
 1. Smart incremental fetching for stellar catalogs:
@@ -249,6 +292,17 @@ You can run it three ways:
    - Requires explicit parameters to prevent unintended cache rebuilds
    - Progressive rate limiting between query batches
    - Preserves existing PKL cache integrity
+
+#### Robust Handling of Incomplete Stellar Data
+1. Intelligent visualization of stars with missing parameters:
+   - 3D plots display stars without temperature data in gray while preserving spatial accuracy
+   - Ensures complete stellar neighborhood representation even with catalog gaps
+   - Temperature-based coloring (blue to red) only applied to stars with valid data
+
+2. Stellar data patching system for known catalog issues:
+   - Addresses gaps in major catalogs (e.g., Mizar lacking temperature in Hipparcos)
+   - Maintains clean catalog separation while fixing edge cases
+   - Ensures bright, well-known stars appear correctly in HR diagrams   
 ---
 
 ## Architecture Overview
@@ -256,13 +310,14 @@ You can run it three ways:
 Paloma’s Orrery is modular by design, with separate Python files for each major functional area.  
 The architecture is divided into **Core**, **Visualization**, **Data Fetching**, **Utility**, and **GUI** layers.
 
-**📊 Visual Architecture Diagram**: [View the interactive Mermaid flowchart](https://www.mermaidchart.com/app/projects/780c7ec0-84a7-4e38-9e06-9bbfdd985750/diagrams/2c4e2ff3-5f91-4388-b3b1-50defaa41fd5/version/v0.1/edit) showing the complete module structure and data flow.
+**📊 Visual Architecture Diagram**: [View the interactive Mermaid flowchart](https://www.mermaidchart.com/app/projects/780c7ec0-84a7-4e38-9e06-9bbfdd985750/diagrams/73798d8c-4061-4303-8c0d-ba991e7df08b/version/v0.1/edit) showing the complete code structure and data flow.
 
 1. **Core Modules** — Handle main logic, initialization, and object plotting.  
 2. **Visualization Modules** — Create plots, animations, and visual representations of planetary shells, orbits, and stars.  
 3. **Data Fetching Modules** — Retrieve astronomical data from JPL Horizons, SIMBAD, Gaia, and other databases.  
 4. **Utility Modules** — Handle caching, configuration, math utilities, and shared functions.  
 5. **GUI Modules** — Manage the user interface and event handling.
+6. **Cache Management Layer**: Sophisticated protection and validation system for all cached data
 
 This separation allows easier maintenance, testing, and feature expansion.
 
@@ -354,9 +409,17 @@ The entry point. Manages the main GUI, object selection, date settings, and coor
 - Handles expansion, contraction, and merging of stellar data
 - Minimizes API calls through intelligent cache reuse
 
-**`star_properties.py`**
-- Queries SIMBAD for stellar parameters
-- Manages star property caching
+**`star_properties.py`** / **`enhanced_star_properties.py`**
+- Original and enhanced versions for SIMBAD queries
+- Enhanced version adds incremental caching and smart fetching
+- Both maintain backward compatibility
+
+**`stellar_data_patches.py`**
+- Patches known gaps in stellar catalog data
+- Handles edge cases where bright stars lack essential parameters
+- Currently patches Mizar (HIP 65378) with correct temperature/luminosity
+- Extensible dictionary-based system for adding future corrections
+- Preserves catalog integrity while ensuring visualization completeness
 
 **`stellar_parameters.py`**
 - Calculates stellar parameters (temperature, luminosity)
@@ -410,6 +473,54 @@ The entry point. Manages the main GUI, object selection, date settings, and coor
 
 ---
 
+### Cache Management Modules
+
+**`vot_cache_manager.py`**
+- Safe management of VizieR VOT cache files
+- Implements atomic save operations with temporary files
+- Data loss prevention (blocks saves losing >90% of data)
+- Automatic backup creation and recovery
+- Metadata tracking with JSON sidecar files
+- Incremental merging of catalog data
+- Protected file management for base VOT archives
+
+**`simbad_manager.py`** (enhanced)
+- Unified management of SIMBAD queries and cache files
+- Rate limiting with token bucket algorithm (5 queries/second)
+- Configurable retry logic with exponential backoff
+- Progress tracking and batch processing
+- Integration with VOT cache manager
+- Methods for cache protection, validation, and rebuilding
+- Safe property file operations with atomic saves
+- PKL files treated as read-only during visualizations
+
+**`create_cache_backups.py`**
+- Utility script for creating protected backups
+- Calls `protect_all_star_data()` from simbad_manager
+- Creates timestamped copies of all cache files
+- Generates cache status report
+
+**`enhanced_star_properties.py`**
+- Enhanced version of star_properties.py with incremental caching
+- Integrates with both SIMBAD and incremental cache managers
+- Supports cache format migration and validation
+
+**`plot_data_exchange.py`**
+- Manages data exchange between subprocess scripts and GUI
+- Saves plot statistics and metadata to JSON
+- Enables post-plot analysis and reporting
+
+**`plot_data_report_widget.py`**
+- GUI widget for displaying comprehensive plot data reports
+- Shows data completeness metrics, quality indicators
+- Provides catalog coverage analysis and warnings
+
+**`gui_simbad_controls.py`**
+- GUI controls for SIMBAD query rate limiting
+- Configurable parameters for queries per second, batch size
+- Real-time query statistics and progress display
+---
+
 ### Special Purpose Modules
 
 **`refined_orbits.py`** / **`orrery_integration.py`**
@@ -436,9 +547,19 @@ The entry point. Manages the main GUI, object selection, date settings, and coor
 
 ### Data Files (Not Python modules but important)
 - `orbit_paths.json` - Cached orbit data
-- `star_properties_distance.pkl` - Cached star properties by distance
-- `star_properties_magnitude.pkl` - Cached star properties by magnitude
 - `satellite_ephemerides.json` - Satellite orbital elements
+- `hipparcos_data_distance.vot` - 2,461 Hipparcos stars to 100 ly
+- `gaia_data_distance.vot` - 10,072 Gaia stars to 100 ly  
+- `hipparcos_data_magnitude.vot` - 519 bright Hipparcos stars
+- `gaia_data_magnitude.vot` - 294,247 Gaia stars to magnitude 9
+- `star_properties_distance.pkl` - Enhanced properties for distance queries (9,700 stars)
+- `star_properties_magnitude.pkl` - Enhanced properties for magnitude queries (123,000 stars)
+- `*.protected_YYYYMMDD_HHMMSS` - Timestamped backup files
+- `*_metadata.json` - Cache metadata for validation
+- `simbad_config.pkl` - Saved configuration for SIMBAD queries
+- `last_plot_data.json` - Exchange file for plot statistics between scripts and GUI
+- `simbad_cache_index.json` - Index of cached SIMBAD object properties
+
 ---
 
 ### GUI Modules

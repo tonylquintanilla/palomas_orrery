@@ -1219,7 +1219,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: August 17, 2025")
+root.title("Paloma's Orrery -- Updated: September 15, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -2644,8 +2644,8 @@ objects = [
     {'name': '3I/ATLAS', 'id': 'C/2025 N1', 'var': atlas3i_var, 'color': color_map('3I/ATLAS'), 'symbol': 'diamond', 
     # JPL/HORIZONS                  ATLAS (C/2025 N1)            2025-Jul-11 12:19:05 
     'object_type': 'trajectory', 'id_type': 'smallbody', 
-    # 'start_date': datetime(2025, 5, 22), 'end_date': datetime(2032, 12, 31),
-    # data arc: 2025-05-22 to now 
+    # 'start_date': datetime(2025, 5, 15), 'end_date': datetime(2032, 12, 31),
+    # data arc: 2025-05-15 to now 
     'mission_info': 'Horizons: C/2025 N1. Third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
 
@@ -6357,7 +6357,8 @@ create_interstellar_checkbutton("1I/Oumuamua", oumuamua_var, "(2017-10-14 to 201
     "September 9, 2017")    # hyperbolic trajectory
 create_interstellar_checkbutton("2I/Borisov", comet_borisov_var, "(2019-02-24 to 2020-09-30)", 
     "December 8, 2019") # data arc: 2019-02-24 to 2020-09-30; TP= 2019-Dec-08.5528459060; hyperbolic trajectory
-create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-05-22 to 2025-08-02)",     # 2025-Aug-07
+create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-05-15 to 2025-08-27)",     
+    # soln ref.= JPL#26, data arc: 2025-05-15 to 2025-08-27
     "October 29, 2025")     # params; predicted; this is a hyperbolic trajectory
 
 # These functions should be defined AFTER the GUI widgets exist

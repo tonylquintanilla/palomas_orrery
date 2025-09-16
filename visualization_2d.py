@@ -9,19 +9,119 @@ from constants_new import (
 )
 import plotly.graph_objects as go
 from visualization_core import (
-    format_value, create_hover_text, prepare_temperature_colors, generate_star_count_text
+    format_value, prepare_temperature_colors, generate_star_count_text
 )
 from save_utils import save_plot
 from star_notes import unique_notes
 from visualization_utils import add_hover_toggle_buttons, update_figure_frames, format_hover_text
 from solar_visualization_shells import hover_text_sun
 
+
+def format_value(value, format_spec, default="Unknown"):
+    """Format a value using Python's built-in format function."""
+    if value is None or (isinstance(value, float) and np.isnan(value)):
+        return default
+    try:
+        return format(value, format_spec)  # Correct way!
+    except (ValueError, TypeError):
+        return default
+    
+
+def create_hover_text(df, include_3d=False):
+    """Create hover text with graceful handling of missing columns."""
+    hover_text_list = []
+
+    for _, row in df.iterrows():
+        star_name = row["Star_Name"]
+        note = unique_notes.get(star_name, "None.")
+
+        # Get distance values, defaulting to NaN
+        distance_pc = row.get('Distance_pc', np.nan)
+        distance_ly = row.get('Distance_ly', np.nan)
+
+        # Calculate ly if missing but we have pc
+        if pd.isna(distance_ly) and pd.notna(distance_pc):
+            distance_ly = distance_pc * 3.26156
+
+        # Format distance strings, handling NaN explicitly
+        pc_str = f"{distance_pc:.2f}" if pd.notna(distance_pc) else "Unknown"
+        ly_str = f"{distance_ly:.2f}" if pd.notna(distance_ly) else "Unknown"
+
+        # ========== BUILD HOVER TEXT WITH CLEANER LAYOUT ==========
+        
+        # 1. STAR NAME (no extra line break after)
+        hover_text = f'<b>{star_name}</b><br>'
+        
+        # 2. RA/DEC (right after name)
+        # Try pre-computed strings first
+        if 'ra_str' in row and row.get('ra_str'):
+            ra_str = str(row['ra_str']).strip()
+            dec_str = str(row['dec_str']).strip()
+            if ra_str and ra_str.lower() not in ['nan', 'none', '']:
+                hover_text += f"RA: {ra_str}, Dec: {dec_str} (J2000)<br>"
+        # Otherwise convert from ICRS coordinates
+        elif 'RA_ICRS' in row and pd.notna(row.get('RA_ICRS')):
+            ra_deg = float(row['RA_ICRS'])
+            dec_deg = float(row['DE_ICRS'])
+            
+            # Convert RA to hours:minutes:seconds
+            ra_hours = ra_deg / 15.0
+            ra_h = int(ra_hours)
+            ra_m = int((ra_hours - ra_h) * 60)
+            ra_s = ((ra_hours - ra_h) * 60 - ra_m) * 60
+            
+            # Convert Dec to degrees:arcminutes:arcseconds
+            dec_sign = '+' if dec_deg >= 0 else '-'
+            dec_abs = abs(dec_deg)
+            dec_d = int(dec_abs)
+            dec_m = int((dec_abs - dec_d) * 60)
+            dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
+            
+            hover_text += f"RA: {ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s, Dec: {dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\" (J2000)<br>"
+        
+        # 3. MAIN PROPERTIES (in logical order)
+        hover_text += f'Distance: {pc_str} pc ({ly_str} ly)<br>'
+        
+        # Temperature
+        has_temp = row.get('Has_Temperature', True)
+        if has_temp:
+            hover_text += f'Temperature: {format_value(row.get("Temperature"), ".0f")} K<br>'
+        else:
+            hover_text += f'Temperature: Unknown (displayed in gray)<br>'
+        
+        # Luminosity
+        hover_text += f'Luminosity: {format_value(row.get("Luminosity"), ".6f")} Lsun<br>'
+        
+        # Magnitudes
+        hover_text += f'Absolute Magnitude: {format_value(row.get("Abs_Mag"), ".2f")}<br>'
+        hover_text += f'Apparent Magnitude: {format_value(row.get("Apparent_Magnitude"), ".2f")}<br>'
+        
+        # Classifications
+        hover_text += f'Spectral Type: {format_value(row.get("Spectral_Type"), "")}<br>'
+        hover_text += f'Stellar Class: {format_value(row.get("Stellar_Class"), "")}<br>'
+        hover_text += f'Object Type: {format_value(row.get("Object_Type_Desc"), "")}<br>'
+        
+        # Source info
+        hover_text += f'Source Catalog: {format_value(row.get("Source_Catalog"), "")}<br>'
+        
+        # Marker size (if present)
+        if 'Marker_Size' in row.index:
+            hover_text += f'Marker Size: {format_value(row["Marker_Size"], ".2f")} px<br>'
+        
+        # 4. NOTE AT THE END (only if it's not the default "None.")
+        if note != "None.":
+            hover_text += f'<br>Note: {note}'
+
+        hover_text_list.append(hover_text)
+
+    return hover_text_list
+
+
 def prepare_2d_data(combined_data):
 #    """Prepare data specifically for 2D HR diagram plotting."""
-    # [Existing prepare_data_for_plotting code]
-# def prepare_data_for_plotting(combined_data):
+
     """Prepare data for plotting."""
-    combined_df = combined_data.to_pandas()
+    combined_df = combined_data  # Just assign it directly
     print("\nPreparing data for visualization...")
 
     # Filter out stars with non-positive temperatures
@@ -83,37 +183,12 @@ def prepare_2d_data(combined_data):
     combined_df['Marker_Size'] = combined_df['Apparent_Magnitude'].apply(apparent_magnitude_to_size)
 
     print("Creating hover texts...")
-    hover_texts = []
-    minimal_hover_texts = []  # Add this line
-    for _, row in combined_df.iterrows():
-        hover_text = (
-            f'<b>{row["Star_Name"]}</b><br><br>'
-            f'{unique_notes.get(row["Star_Name"], "None.")}<br><br>'
-
-            f'Distance: {format(row["Distance_pc"], ".2f") if pd.notna(row["Distance_pc"]) else "Unknown"} pc ({format(row["Distance_ly"], ".2f") if pd.notna(row["Distance_ly"]) else "Unknown"} ly)<br>'
-
-            f'Object Type: {row["Object_Type_Desc"]}<br>'
-            f'Stellar Class: {row["Stellar_Class"] if pd.notna(row["Stellar_Class"]) else "Unknown"}<br>'
-            f'Temperature: {format(row["Temperature"], ".0f")} K<br>'
-            f'Luminosity: {format(row["Luminosity"], ".6f")} Lsun<br>'
-            f'Absolute Magnitude: {format(row["Abs_Mag"], ".2f")}<br>'
-            f'Apparent Magnitude: {format(row["Apparent_Magnitude"], ".2f")}<br>'
-            f'Spectral Type: {row["Spectral_Type"]}<br>'
-            f'Source Catalog: {row["Source_Catalog"]}<br>'
-            f'Marker Size: {format(row["Marker_Size"], ".2f")} px<br>'
-        )
-        hover_texts.append(hover_text)
-
-        # Add minimal hover text
-        minimal_hover_text = f'<b>{row["Star_Name"]}</b>'
-        minimal_hover_texts.append(minimal_hover_text)
-
-    combined_df['Hover_Text'] = hover_texts
-    combined_df['Min_Hover_Text'] = minimal_hover_texts  # Add this line
+    combined_df['Hover_Text'] = create_hover_text(combined_df, include_3d=False)
+    minimal_hover_texts = [f'<b>{row["Star_Name"]}</b>' for _, row in combined_df.iterrows()]
+    combined_df['Min_Hover_Text'] = minimal_hover_texts
     print("Data preparation complete.")
+    
     return combined_df
-
-# visualization_2d.py
 
 def generate_footer_text(counts_dict, estimation_results=None, mag_limit=None, max_light_years=None):
     """Generate updated footer text including estimation information."""
@@ -239,9 +314,30 @@ def create_hr_diagram(combined_df, counts_dict, mag_limit=None, max_light_years=
     for catalog in ['Hipparcos', 'Gaia']:
         catalog_data = combined_df[combined_df['Source_Catalog'] == catalog]
         
-    # Plot stars for each catalog separately
-    for catalog in ['Hipparcos', 'Gaia']:
-        catalog_data = combined_df[combined_df['Source_Catalog'] == catalog]
+        # More comprehensive debug
+        print(f"\nProcessing {catalog}: {len(catalog_data)} stars")
+        
+        if catalog == 'Hipparcos':
+            # Check if Mizar is in combined_df at all
+            mizar_in_combined = combined_df[combined_df['HIP'] == 65378]
+            print(f"Mizar in combined_df: {len(mizar_in_combined)} entries")
+            if len(mizar_in_combined) > 0:
+                print(f"  Source_Catalog: {mizar_in_combined['Source_Catalog'].iloc[0]}")
+            
+            # Check if Mizar is in the filtered catalog_data
+            mizar = catalog_data[catalog_data['HIP'] == 65378]
+            print(f"Mizar in Hipparcos subset: {len(mizar)} entries")
+            
+            if len(mizar) > 0:
+                print(f"\nMizar plotting properties:")
+                print(f"  Temperature: {mizar['Temperature'].iloc[0]}")
+                print(f"  Luminosity: {mizar['Luminosity'].iloc[0]}")
+                print(f"  Marker_Size: {mizar['Marker_Size'].iloc[0]}")
+                print(f"  Temperature_Normalized: {mizar['Temperature_Normalized'].iloc[0]}")
+                print(f"  Hover_Text exists: {pd.notna(mizar['Hover_Text'].iloc[0])}")
+                print(f"  Min_Hover_Text exists: {pd.notna(mizar['Min_Hover_Text'].iloc[0])}")
+            else:
+                print("WARNING: Mizar NOT in Hipparcos trace!")
         
         fig.add_trace(go.Scatter(
             x=catalog_data['Temperature'],  # Remove log transform here

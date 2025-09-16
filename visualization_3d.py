@@ -15,8 +15,8 @@ from astropy.coordinates import SkyCoord
 import astropy.units as u
 
 from visualization_core import (
-    format_value, create_hover_text, prepare_temperature_colors,
-    generate_star_count_text
+    format_value, prepare_temperature_colors,
+    generate_star_count_text, 
 )
 
 from solar_visualization_shells import hover_text_sun
@@ -34,6 +34,29 @@ def parse_stellar_classes(df):
     
     df['Stellar_Class'] = df['Spectral_Type'].apply(parse_luminosity_class)
     return df
+
+def expand_object_type(ot):
+    """Expand object type codes to full descriptions."""
+    if ot is None or pd.isna(ot):
+        return 'Unknown'
+    ot_codes = re.split(r'[;, ]+', str(ot))
+    descriptions = []
+    for code in ot_codes:
+        code = code.strip()
+        if code in object_type_mapping:
+            desc = object_type_mapping[code]
+        else:
+            # Try partial matching
+            matched = False
+            for key in object_type_mapping:
+                if key in code:
+                    desc = object_type_mapping[key]
+                    matched = True
+                    break
+            if not matched:
+                desc = code
+        descriptions.append(desc)
+    return ', '.join(descriptions)
 
 def prepare_3d_data(combined_df, max_value, counts, mode=None):
     """Prepare data for 3D visualization with proper handling of Messier objects."""
@@ -57,6 +80,12 @@ def prepare_3d_data(combined_df, max_value, counts, mode=None):
     messier_objects = combined_df[messier_mask].copy() if messier_mask.any() else pd.DataFrame()
     stellar_objects = combined_df[~messier_mask].copy()
 
+    # Parse stellar classes to get descriptions
+    stellar_objects = parse_stellar_classes(stellar_objects)
+    
+    # Expand object types to get descriptions  
+    stellar_objects['Object_Type_Desc'] = stellar_objects['Object_Type'].apply(expand_object_type)
+    
     # Process stellar objects - include ALL stars for spatial completeness
     plottable_stars = stellar_objects.copy()  # Use all stars
 
@@ -160,7 +189,98 @@ def format_value(value, format_spec, default="Unknown"):
     except (ValueError, TypeError):
         return default
 
+# In visualization_3d.py - reorganized local create_hover_text with cleaner layout
+
 def create_hover_text(df, include_3d=False):
+    """Create hover text with graceful handling of missing columns."""
+    hover_text_list = []
+
+    for _, row in df.iterrows():
+        star_name = row["Star_Name"]
+        note = unique_notes.get(star_name, "None.")
+
+        # Get distance values, defaulting to NaN
+        distance_pc = row.get('Distance_pc', np.nan)
+        distance_ly = row.get('Distance_ly', np.nan)
+
+        # Calculate ly if missing but we have pc
+        if pd.isna(distance_ly) and pd.notna(distance_pc):
+            distance_ly = distance_pc * 3.26156
+
+        # Format distance strings, handling NaN explicitly
+        pc_str = f"{distance_pc:.2f}" if pd.notna(distance_pc) else "Unknown"
+        ly_str = f"{distance_ly:.2f}" if pd.notna(distance_ly) else "Unknown"
+
+        # ========== BUILD HOVER TEXT WITH CLEANER LAYOUT ==========
+        
+        # 1. STAR NAME (no extra line break after)
+        hover_text = f'<b>{star_name}</b><br>'
+        
+        # 2. RA/DEC (right after name)
+        # Try pre-computed strings first
+        if 'ra_str' in row and row.get('ra_str'):
+            ra_str = str(row['ra_str']).strip()
+            dec_str = str(row['dec_str']).strip()
+            if ra_str and ra_str.lower() not in ['nan', 'none', '']:
+                hover_text += f"RA: {ra_str}, Dec: {dec_str} (J2000)<br>"
+        # Otherwise convert from ICRS coordinates
+        elif 'RA_ICRS' in row and pd.notna(row.get('RA_ICRS')):
+            ra_deg = float(row['RA_ICRS'])
+            dec_deg = float(row['DE_ICRS'])
+            
+            # Convert RA to hours:minutes:seconds
+            ra_hours = ra_deg / 15.0
+            ra_h = int(ra_hours)
+            ra_m = int((ra_hours - ra_h) * 60)
+            ra_s = ((ra_hours - ra_h) * 60 - ra_m) * 60
+            
+            # Convert Dec to degrees:arcminutes:arcseconds
+            dec_sign = '+' if dec_deg >= 0 else '-'
+            dec_abs = abs(dec_deg)
+            dec_d = int(dec_abs)
+            dec_m = int((dec_abs - dec_d) * 60)
+            dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
+            
+            hover_text += f"RA: {ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s, Dec: {dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\" (J2000)<br>"
+        
+        # 3. MAIN PROPERTIES (in logical order)
+        hover_text += f'Distance: {pc_str} pc ({ly_str} ly)<br>'
+        
+        # Temperature
+        has_temp = row.get('Has_Temperature', True)
+        if has_temp:
+            hover_text += f'Temperature: {format_value(row.get("Temperature"), ".0f")} K<br>'
+        else:
+            hover_text += f'Temperature: Unknown (displayed in gray)<br>'
+        
+        # Luminosity
+        hover_text += f'Luminosity: {format_value(row.get("Luminosity"), ".6f")} Lsun<br>'
+        
+        # Magnitudes
+        hover_text += f'Absolute Magnitude: {format_value(row.get("Abs_Mag"), ".2f")}<br>'
+        hover_text += f'Apparent Magnitude: {format_value(row.get("Apparent_Magnitude"), ".2f")}<br>'
+        
+        # Classifications
+        hover_text += f'Spectral Type: {format_value(row.get("Spectral_Type"), "")}<br>'
+        hover_text += f'Stellar Class: {format_value(row.get("Stellar_Class"), "")}<br>'
+        hover_text += f'Object Type: {format_value(row.get("Object_Type_Desc"), "")}<br>'
+        
+        # Source info
+        hover_text += f'Source Catalog: {format_value(row.get("Source_Catalog"), "")}<br>'
+        
+        # Marker size (if present)
+        if 'Marker_Size' in row.index:
+            hover_text += f'Marker Size: {format_value(row["Marker_Size"], ".2f")} px<br>'
+        
+        # 4. NOTE AT THE END (only if it's not the default "None.")
+        if note != "None.":
+            hover_text += f'<br>Note: {note}'
+
+        hover_text_list.append(hover_text)
+
+    return hover_text_list
+
+def create_hover_text_old(df, include_3d=False):
     """Create hover text with graceful handling of missing columns."""
     hover_text_list = []
 
@@ -309,92 +429,6 @@ def create_notable_stars_list(combined_df, unique_notes, user_max_coord=None):
     print(f"\nTotal notable objects included: {len(notable_stars)}")
     return notable_stars
 
-'''
-def create_notable_stars_list(combined_df, unique_notes, user_max_coord=None):
-    """
-    Create list of notable stars, considering both magnitude/distance limits and manual scaling.
-    
-    Parameters:
-        combined_df: DataFrame containing star data
-        unique_notes: Dictionary of notable star descriptions
-        user_max_coord: Optional maximum coordinate value for manual scaling
-    """
-    notable_stars = []
-    mode = combined_df.attrs.get('mode', 'distance')
-    max_value = combined_df.attrs.get('max_value', 100.0)
-
-    print(f"\nCreating notable stars list:")
-    print(f"Mode: {mode}")
-    print(f"Max value: {max_value}")
-    if user_max_coord is not None:
-        print(f"Manual scale: ±{user_max_coord} light-years")
-
-    for star_name in sorted(unique_notes.keys()):
-        # Check if it's a Messier object
-        is_messier = star_name.startswith('M ') or star_name.startswith('M')
-
-        # Find the star in the combined_df
-        if is_messier:
-            messier_num = star_name.split()[1] if ' ' in star_name else star_name[1:]
-            star_data = combined_df[
-                combined_df['Star_Name'].str.contains(f"M{messier_num}", na=False)
-            ]
-        else:
-            star_data = combined_df[combined_df['Star_Name'] == star_name]
-
-        if not star_data.empty:
-            star_row = star_data.iloc[0]
-            
-            # Calculate absolute distance from origin
-            x = float(star_row['x'])
-            y = float(star_row['y'])
-            z = float(star_row['z'])
-            distance = np.sqrt(x*x + y*y + z*z)
-
-            # Apply filtering based on mode
-            should_include = True
-            if mode == 'distance':
-                if distance > max_value:
-                    print(f"Skipping {star_name} - beyond distance limit ({distance:.1f} > {max_value} ly)")
-                    should_include = False
-            elif mode == 'magnitude':
-                if star_row['Apparent_Magnitude'] > max_value and not is_messier:
-                    print(f"Skipping {star_name} - too faint (mag {star_row['Apparent_Magnitude']:.1f} > {max_value})")
-                    should_include = False
-
-            # Apply manual scale filtering if specified
-            if should_include and user_max_coord is not None:
-                if (abs(x) > user_max_coord or 
-                    abs(y) > user_max_coord or 
-                    abs(z) > user_max_coord):
-                    print(f"Skipping {star_name} - beyond manual scale (max coord: {max(abs(x), abs(y), abs(z)):.1f} > {user_max_coord} ly)")
-                    should_include = False
-
-            if should_include:
-                # Calculate direction unit vector for camera positioning
-                direction = {
-                    'x': x/distance,
-                    'y': y/distance,
-                    'z': z/distance
-                }
-                notable_stars.append({
-                    'label': star_name,
-                    'method': 'relayout',
-                    'args': [{
-                        'scene.camera': {
-                            'center': {'x': 0, 'y': 0, 'z': 0},
-                            'eye': {'x': -0.005 * direction['x'],
-                                  'y': -0.005 * direction['y'],
-                                  'z': -0.005 * direction['z']},
-                            'up': {'x': 0, 'y': 0, 'z': 1}
-                        }
-                    }]
-                })
-                print(f"Added {star_name} to notable stars list")
-
-    print(f"\nTotal notable objects included: {len(notable_stars)}")
-    return notable_stars
-    '''
 
 def create_3d_visualization(combined_df, max_value, user_max_coord=None):
     """
@@ -681,14 +715,17 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             messier_count = len(combined_df[combined_df['Source_Catalog'] == 'Messier'])
             
             title_text = f'Interactive 3D Visualization of Unaided-Eye Visible Stars<br>Apparent Magnitude ≤ {max_value}{scale_text}'
+
+            """
             footer_text = (    
                 f"This visualization shows <span style='color:red'>{len(combined_df):,d}</span> objects visible to the naked eye "
                 f"(apparent magnitude ≤ <span style='color:red'>{max_value}</span>). "
                 f"Catalog breakdown of plotted stars: <span style='color:red'>{analysis['plottable_hip']:,d}</span> from "
                 f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a> and "
                 f"<span style='color:red'>{analysis['plottable_gaia']:,d}</span> from "
+                f"<span style='color:red'>{analysis['missing_temp']:,d}</span> without temperature data<br>" 
                 f"<a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a>. "
-                f"<span style='color:red'>{messier_count}</span> Messier and other non-stellar objects are also displayed. "
+                f"<span style='color:red'>{messier_count}</span> Special and other non-stellar objects are also displayed. "
                 f"<a href='http://www.messier.seds.org/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>SEDS Messier Catalog</a>.<br>"
             #    f"Data quality: <span style='color:red'>{analysis['missing_temp']:,d}</span> stars lack temperature data, "
             #    f"<span style='color:red'>{analysis['missing_lum']:,d}</span> lack luminosity data. "
@@ -700,10 +737,35 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                 f"so the Milky Way is tilted approximately 63° with respect to the<br>celestial equator. "
                 f"Non-stellar object markers do not reflect object type, apparent magnitude or temperature, but are fixed. " 
                 f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude, Gemini AI, and DeepSeek February 2025.<br>"
-                f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>. "
-                f"Search: <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> "
-                f"with the star name, for example: \"* alf Aql\", for star data (right-click will keep the hovertext box open to read the name)."              
+                f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>, "
+                f"<a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a>, "
+                f"<a href='https://www.wikisky.org/?locale=EN' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Sky-Map</a>. "
+                f"For Simbad use the star name from Star Information, for example: \"* alf Aql\", for Sky-Map use the name or RA and Dec."              
             )
+            """
+
+            footer_text = (    
+                f"This visualization shows <span style='color:red'>{len(combined_df):,d}</span> objects visible to the naked eye "
+                f"(apparent magnitude ≤ <span style='color:red'>{max_value}</span>). "
+                f"Catalog breakdown: <span style='color:red'>{analysis['plottable_hip']:,d}</span> from "
+                f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a>, "
+                f"<span style='color:red'>{analysis['plottable_gaia'] + analysis['missing_temp']:,d}</span> from "
+                f"<a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a> "
+                f"(<span style='color:red'>{analysis['plottable_gaia']:,d}</span> with temperature, "
+                f"<span style='color:red'>{analysis['missing_temp']:,d}</span> without), and "
+                f"<span style='color:red'>{messier_count}</span> <a href='http://www.messier.seds.org/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Messier and non-stellar</a> objects. "
+                f"Star properties from <a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a> database.<br>"
+                f"Star marker size is inversely proportional to apparent magnitude (brighter stars appear larger). "
+                f"Star color indicates temperature based on black-body radiation (1,300K to 50,000K). "
+                f"Stars without temperature data are displayed in gray.<br>"
+                f"The Sun is shown in chlorophyll green at the origin (0, 0, 0). "
+                f"Python script by Tony Quintanilla with assistance from Claude, ChatGPT, Gemini, and DeepSeek, September 2025.<br>"
+                f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>, "
+                f"<a href='http://simbad.u-strasbg.fr/simbad/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Simbad</a>, "
+                f"<a href='https://www.wikisky.org/?locale=EN' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Sky-Map</a>. "
+                f"For Simbad use the star name from Star Information, for example: \"* alf Aql\", for Sky-Map use the name or RA and Dec."
+
+            )            
 
     # Update layout with centered axes
     fig.update_layout(
@@ -831,9 +893,14 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                     method="relayout",
                     args=[{
                         "scene.camera": {
-                            "center": {"x": 0, "y": 0, "z": 0},
-                            "eye": {"x": 0, "y": 0.05, "z": 0},       # "y": -0.005 places the camera just in front of the Sun
-                            "up": {"x": 0, "y": 0, "z": 1}
+                    #        "center": {"x": 0, "y": 0, "z": 0},
+                    #        "eye": {"x": 0, "y": 0.05, "z": 0},       # "y": -0.005 places the camera just in front of the Sun
+                    #        "up": {"x": 0, "y": 0, "z": 1}
+
+                            "eye": {"x": 0.001, "y": 0.001, "z": 0.001},  # Camera AT the Sun (tiny offset)
+                            "center": {"x": 1, "y": 0, "z": 0},  # Looking outward along x-axis
+                            "up": {"x": 0, "y": 0, "z": 1}  # Z is up
+
                         }
                     }]
                 )],
@@ -883,12 +950,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
         ]
     )
 
-#    default_name = (
-#        f"3d_stars_magnitude_{max_value}" if combined_df.attrs['mode'] == 'magnitude'
-#        else f"3d_stars_distance_{max_value}ly"
-#    )
-#    save_plot(fig, default_name)    
-
+    
     # Print debug info about Messier objects
     print("\nChecking for Messier objects...")
     messier_mask = combined_df['Source_Catalog'] == 'Messier'

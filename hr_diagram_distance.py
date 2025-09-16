@@ -31,6 +31,11 @@ from catalog_selection import select_stars
 
 from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
 
+from simbad_manager import SimbadQueryManager, SimbadConfig
+
+from plot_data_exchange import PlotDataExchange
+
+
 def main():
     # Parse command-line arguments for max light-years
     if len(sys.argv) > 1:
@@ -160,6 +165,24 @@ def main():
 
         # Convert to pandas DataFrame for visualization
         combined_df = combined_data.to_pandas()
+
+        # Apply temperature patches for known problematic stars
+        from stellar_data_patches import apply_temperature_patches
+        combined_df = apply_temperature_patches(combined_df)
+
+        # After applying the patch
+        mizar = combined_df[combined_df['HIP'] == 65378]
+        if len(mizar) > 0:
+            print(f"\nMizar data after patch:")
+            print(f"Temperature: {mizar['Temperature'].iloc[0]}")
+            print(f"Luminosity: {mizar['Luminosity'].iloc[0]}")
+            print(f"Is Luminosity NaN? {pd.isna(mizar['Luminosity'].iloc[0])}")
+            print(f"Abs_Mag: {mizar['Abs_Mag'].iloc[0]}")
+
+        config = SimbadConfig.load_from_file()
+        manager = SimbadQueryManager(config)
+        updated_properties = manager.update_calculated_properties(combined_df, properties_file)        
+
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")
             return
@@ -189,7 +212,8 @@ def main():
         combined_df.attrs['analysis'] = flattened_analysis
 
         # Prepare data for visualization
-        prepared_df = prepare_2d_data(combined_data)
+    #    prepared_df = prepare_2d_data(combined_data)
+        prepared_df = prepare_2d_data(combined_df)
         if prepared_df is None or len(prepared_df) == 0:
             print("No plottable stars found after data preparation.")
             return
@@ -221,43 +245,17 @@ def main():
             'source_counts': source_counts
         }
 
-        '''
-        # Calculate final counts for visualization
-        final_counts = {
-            'hip_bright_count': len(combined_df[
-                (combined_df['Source_Catalog'] == 'Hipparcos') & 
-                (combined_df['Apparent_Magnitude'] <= 1.73)
-            ]),
-            'hip_mid_count': len(combined_df[
-                (combined_df['Source_Catalog'] == 'Hipparcos') & 
-                (combined_df['Apparent_Magnitude'] > 1.73) & 
-                (combined_df['Apparent_Magnitude'] <= 4.0)
-            ]),
-            'gaia_mid_count': 0,  # We don't use Gaia stars in this range
+        # Right before creating the plot
+        print(f"\nTotal stars in dataframe: {len(combined_df)}")
+        print(f"Stars with both T and L: {len(combined_df[(combined_df['Temperature'] > 0) & (combined_df['Luminosity'] > 0)])}")
 
-            'gaia_faint_count': len(combined_df[
-                (combined_df['Source_Catalog'] == 'Gaia') & 
-                (combined_df['Apparent_Magnitude'] > 4.0)
-            ]),
-
-            'total_stars': (
-                # Only count stars we actually plot
-                len(combined_df[
-                    ((combined_df['Source_Catalog'] == 'Hipparcos') & 
-                    (combined_df['Apparent_Magnitude'] <= 4.0)) |
-                    ((combined_df['Source_Catalog'] == 'Gaia') & 
-                    (combined_df['Apparent_Magnitude'] > 4.0))
-                ])
-            ),
-
-            'total_stars': len(combined_df),
-            'plottable_count': plottable_count,
-            'missing_temp_only': estimation_results['final_missing_temp'],
-            'missing_lum_only': estimation_results['final_missing_lum'],
-            'estimation_results': estimation_results,
-            'source_counts': source_counts
-        }
-        '''
+        # Check if Mizar made it to plotting
+        mizar_in_plot = combined_df[combined_df['HIP'] == 65378]
+        if len(mizar_in_plot) > 0:
+            print(f"Mizar in final plot data: YES")
+            print(f"  Will plot at: T={mizar_in_plot['Temperature'].iloc[0]}, L={mizar_in_plot['Luminosity'].iloc[0]}")
+        else:
+            print(f"Mizar in final plot data: NO - FILTERED OUT!")
 
         # Create visualization
         create_hr_diagram(
@@ -265,6 +263,16 @@ def main():
             counts_dict=final_counts,
             max_light_years=max_light_years
         )
+
+        # Save plot data for GUI
+        PlotDataExchange.save_plot_data(
+            combined_df=combined_df,  # Use full combined_df, not prepared_df
+            counts_dict=final_counts,
+            processing_times={'total': time.time() - start_time},
+            mode='distance',
+            limit_value=max_light_years
+        )
+
         print(f"Visualization completed in {time.time() - viz_start:.2f} seconds.")
 
     except Exception as e:
