@@ -6,7 +6,37 @@ from astroquery.simbad import Simbad
 import numpy as np
 from simbad_manager import SimbadQueryManager, SimbadConfig
 
-# Replace query_simbad_for_star_properties with the one from enhanced_star_properties.py
+
+def get_column_value_safe(result_table, old_name, new_name):
+    """
+    Get column value from either old (uppercase) or new (lowercase) format.
+    Handles both SIMBAD API versions for backward compatibility.
+    """
+    # Try old format first (for consistency with existing code patterns)
+    if old_name in result_table.colnames:
+        value = result_table[old_name][0]
+    elif new_name in result_table.colnames:
+        value = result_table[new_name][0]
+    else:
+        return None
+    
+    # Decode bytes if necessary
+    if isinstance(value, bytes):
+        return value.decode('utf-8')
+    return value
+
+def create_custom_simbad():
+    """Create SIMBAD instance with proper field configuration for both old and new API."""
+    custom_simbad = Simbad()
+    custom_simbad.reset_votable_fields()
+    custom_simbad.ROW_LIMIT = 1
+    custom_simbad.TIMEOUT = 300
+    
+    # Use the new field names to avoid deprecation warnings
+    # These will work with new API, and we'll handle old format in get_column_value_safe
+    custom_simbad.add_votable_fields('ids', 'sp_type', 'B', 'V', 'otype')
+    return custom_simbad
+
 
 def parse_magnitude(value):
     if value is None:
@@ -153,22 +183,16 @@ def create_custom_simbad():
     custom_simbad.add_votable_fields('ids', 'sp', 'flux(V)', 'flux(B)', 'otype')
     return custom_simbad
 
+
 def query_simbad_for_star_properties(missing_ids, existing_properties, properties_file):
-    """Query Simbad for missing star properties."""
+    """Query Simbad for missing star properties with backward compatibility."""
     print(f"\nQuerying Simbad for {len(missing_ids)} missing star properties...")
     try:
         # Initialize supplemental data from Messier catalog
         from messier_catalog import messier_catalog, star_cluster_catalog
         supplemental_data = {**messier_catalog, **star_cluster_catalog}
 
-    #    custom_simbad = Simbad()
-        custom_simbad = create_custom_simbad()  # use the helper above
-
-    #    custom_simbad.ROW_LIMIT = 1
-    #    custom_simbad.TIMEOUT = 300
-    #    custom_simbad.add_votable_fields('ids', 'sp', 'flux(V)', 'flux(B)', 'otype')   
-        # removed 'dim' because it was causing the Simbad fetch to fail on MAIN_ID 
-        # removed deprecated dist, distance is generated from parallax
+        custom_simbad = create_custom_simbad()
 
         # Process in smaller batches to avoid timeouts
         batch_size = 50
@@ -192,19 +216,20 @@ def query_simbad_for_star_properties(missing_ids, existing_properties, propertie
                     result_table = custom_simbad.query_object(obj_name)
                     
                     if result_table is not None and len(result_table) > 0:
-                        # Extract main identifier
-                        star_name = result_table['MAIN_ID'][0]
-                        star_name = star_name.decode('utf-8') if isinstance(star_name, bytes) else star_name
+                        # Extract properties with backward compatibility
+                        # These work with both old uppercase and new lowercase columns
+                        star_name = get_column_value_safe(result_table, 'MAIN_ID', 'main_id')
+                        sp_type = get_column_value_safe(result_table, 'SP_TYPE', 'sp_type')
                         
-                        # Get SIMBAD properties
-                        sp_type = result_table['SP_TYPE'][0] if 'SP_TYPE' in result_table.colnames else None
-                        sp_type = sp_type.decode('utf-8') if isinstance(sp_type, bytes) else sp_type
+                        # Handle both old flux notation and new direct notation
+                        V_mag = get_column_value_safe(result_table, 'FLUX_V', 'V')
+                        B_mag = get_column_value_safe(result_table, 'FLUX_B', 'B')
                         
-                        V_mag = result_table['FLUX_V'][0] if 'FLUX_V' in result_table.colnames else None
-                        B_mag = result_table['FLUX_B'][0] if 'FLUX_B' in result_table.colnames else None
+                        otype = get_column_value_safe(result_table, 'OTYPE', 'otype')
                         
-                        otype = result_table['OTYPE'][0] if 'OTYPE' in result_table.colnames else None
-                        otype = otype.decode('utf-8') if isinstance(otype, bytes) else otype
+                        # If star_name is still None, use the object name
+                        if star_name is None:
+                            star_name = obj_name
                         
                         # For Messier objects, supplement missing data from our catalog
                         if messier_id and messier_id in supplemental_data:
@@ -315,9 +340,6 @@ def query_simbad_for_star_properties(missing_ids, existing_properties, propertie
         print(f"Error in Simbad query setup: {e}")
         return existing_properties
 
-    except Exception as e:
-        print(f"Error in Simbad query setup: {e}")
-        return existing_properties
 
 def assign_properties_to_data(combined_data, existing_properties, unique_ids):
     """Assign retrieved properties to the combined data with Messier object support."""

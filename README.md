@@ -1,4 +1,4 @@
-# Paloma's Orrery -- Updated 9/15/25
+# Paloma's Orrery -- Updated 9/19/25
 
 ## Table of Contents
 1. [Introduction](#introduction)  
@@ -55,12 +55,13 @@ Go to [GitHub Repository](https://github.com/tonylquintanilla/palomas_orrery), c
 You can install everything at once by opening a Command Prompt, navigating to the extracted folder, and typing `pip install -r requirements.txt`.  
 
 Or open a Command Prompt and install step-by-step (recommended for beginners so you know what’s being added):  
-1. Install the core math libraries by typing `pip install numpy pandas scipy` and pressing Enter.  
-2. Install the astronomy libraries with `pip install astropy astroquery`.  
-3. Install the astronomy libraries with `pip install erfa`.
-4. Install the visualization libraries using `pip install plotly kaleido pillow`.  
-5. Install the GUI library by typing `pip install customtkinter`.  
-6. Install web and data utilities using `pip install requests beautifulsoup4 html5lib python-dateutil pytz`.  
+1. Install the core math libraries by typing: `pip install numpy pandas scipy` and pressing Enter after each command ...  
+2. Install the astronomy libraries by typing: `pip install astropy astroquery`  
+3. Install the visualization libraries by typing: `pip install plotly pillow`  
+4. Install this version of kaleido for plotting by typing: `pip install kaleido==0.2.1`
+5. Install the GUI library by typing: `pip install customtkinter`  
+6. Install web and data utilities by typing: `pip install requests beautifulsoup4 python-dateutil pytz` 
+
 
 ### 4. Run the Program
 You can run it three ways:  
@@ -252,7 +253,21 @@ You can run it three ways:
    - Real-time analysis of plot data completeness
    - Automatic detection of data quality issues
    - Comprehensive reports accessible through GUI
-   - Exchange mechanism between standalone scripts and main GUI   
+   - Exchange mechanism between standalone scripts and main GUI  
+
+7. **Comprehensive Object Type Analysis**:
+   - Integrated `object_type_analyzer.py` for detailed stellar population analysis
+   - Automatic categorization of 20+ object types (binaries, variables, evolved stars)
+   - Diversity metrics calculation (Shannon entropy, Simpson index)
+   - High-interest research target identification
+   - Complete object type expansion before report generation
+   - `report_manager.py` for scientific report archival and retrieval    
+
+8. **Scientific Report Generation**:
+   - Comprehensive analysis reports for all stellar visualizations
+   - Object type distribution analysis with diversity metrics
+   - Automatic identification of rare and notable objects
+   - Report archival system for tracking analysis over time
 
 #### Enhanced Orbital Mechanics and Visualization
 1. Accurate apsidal date calculations for elliptical, hyperbolic, and satellite orbits.  
@@ -471,6 +486,18 @@ The entry point. Manages the main GUI, object selection, date settings, and coor
 - Provides uncertainty estimates from JPL Horizons
 - Integrates coordinate display into hover text
 
+**`object_type_analyzer.py`**
+- Analyzes stellar object type distributions
+- Calculates diversity metrics (Shannon entropy, Simpson index)
+- Categorizes objects into scientific groups
+- Identifies high-interest research targets
+- Provides utility function for expanding object type codes
+
+**`report_manager.py`**
+- Manages scientific report generation and archival
+- Saves reports as JSON with metadata
+- Archives reports with timestamps
+- Enables report comparison and analysis over time
 ---
 
 ### Cache Management Modules
@@ -559,6 +586,8 @@ The entry point. Manages the main GUI, object selection, date settings, and coor
 - `simbad_config.pkl` - Saved configuration for SIMBAD queries
 - `last_plot_data.json` - Exchange file for plot statistics between scripts and GUI
 - `simbad_cache_index.json` - Index of cached SIMBAD object properties
+- `last_plot_report.json` - Current scientific analysis report
+- `reports/` - Archive directory for timestamped scientific reports
 
 ---
 

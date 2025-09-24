@@ -20,6 +20,7 @@ from threading import Thread
 from constants_new import object_type_mapping, class_mapping, stellar_class_labels
 from plot_data_report_widget import PlotDataReportWidget
 from plot_data_exchange import PlotDataExchange
+from report_manager import ReportManager
 
 
 class ScrollableFrame(ttk.Frame):
@@ -802,6 +803,16 @@ class StarVisualizationGUI(tk.Tk):
     def check_and_load_last_plot(self):
         """Check for and load the last plot data on startup."""
         try:
+
+            # Try to load the scientific report first
+            report_mgr = ReportManager()
+            report_data = report_mgr.load_last_report()
+            
+            if report_data:
+                print("Found existing scientific report, loading...")
+                self.plot_report.display_report(report_data)
+                return
+
             # Try to load the last plot data
             plot_data = PlotDataExchange.load_plot_data()
             
@@ -868,9 +879,11 @@ class StarVisualizationGUI(tk.Tk):
                     limit_value=plot_data.get('limit_value')
                 )
                 
+                """
                 # Update status to show last plot info
                 mode = plot_data.get('mode', 'unknown')
                 limit_value = plot_data.get('limit_value', 'N/A')
+
                 if mode == 'distance':
                     self.status_label.config(
                         text=f"Loaded last plot: {limit_value} ly distance",
@@ -895,6 +908,7 @@ class StarVisualizationGUI(tk.Tk):
                     text="Ready - no previous plot data",
                     foreground="blue"
                 )
+                """
                 
         except Exception as e:
             print(f"Error loading last plot data: {e}")
@@ -935,7 +949,7 @@ class StarVisualizationGUI(tk.Tk):
         controls_label.pack(pady=(0, 10))
         
         # Distance controls
-        distance_frame = ttk.LabelFrame(middle_frame, text="Distance-based Visualization (4.25 through 100.1 light-years)", padding=10)
+        distance_frame = ttk.LabelFrame(middle_frame, text="Distance-based Visualization (4.25 through 100 light-years)", padding=10)
         distance_frame.pack(fill='x', pady=(0, 10))
         
         ttk.Label(distance_frame, text="Distance (light-years):").pack(anchor='w')
@@ -1057,7 +1071,7 @@ class StarVisualizationGUI(tk.Tk):
             "========================\n\n"
             "Distance Visualization:\n"
             "- Enter distance in light-years\n"
-            "- Maximum: 100.1 light-years\n"
+            "- Maximum: 100 light-years\n"
             "- Shows: ~9,750 stars at max\n\n"
             "Magnitude Visualization:\n"
             "- Enter limiting magnitude (Vmag)\n"
@@ -1074,7 +1088,8 @@ class StarVisualizationGUI(tk.Tk):
 	        "Bright suburban sky	   5.1 - 5.5\n"
 	        "Suburban/urban sky	    4.6 - 5.0\n"
 	        "City sky	              4.1 - 4.5\n"
-	        "Inner-city sky	        < 4.0\n\n"
+	        "Inner-city sky	        < 4.0\n"
+            "Brightest star, Sirius -1.44\n\n"
             "Cache Management:\n"
             "- Protected VOT/PKL files\n"
             "- Automatic backups created\n"
@@ -1102,9 +1117,16 @@ class StarVisualizationGUI(tk.Tk):
         try:
             ly_value = float(self.ly_entry.get())
             if ly_value <= 0 or ly_value > 100.1:
-                self.status_label.config(text="Enter 0.1-100.1 light-years", foreground="red")
+                self.status_label.config(text="Enter 4.25 - 100 light-years", foreground="red")
                 return
             
+            # ADD THIS - Update status IMMEDIATELY when button is clicked
+            self.status_label.config(
+                text=f"Generating 3D visualization for distance ≤ {ly_value} (~10-15 seconds)",
+                foreground="blue"
+            )
+            self.update()  # Force GUI to refresh NOW
+
             script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
             
             # CHANGED: Add capture_output to capture the output
@@ -1139,14 +1161,21 @@ class StarVisualizationGUI(tk.Tk):
         try:
             ly_value = float(self.ly_entry.get())
             if ly_value <= 0 or ly_value > 100.1:
-                self.status_label.config(text="Enter 0.1-100.1 light-years", foreground="red")
+                self.status_label.config(text="Enter 4.25 - 100 light-years", foreground="red")
                 return
             
+            # ADD THIS - Update status IMMEDIATELY when button is clicked
+            self.status_label.config(
+                text=f"Generating 2D visualization for distance ≤ {ly_value} (~5-10 seconds)",
+                foreground="blue"
+            )
+            self.update()  # Force GUI to refresh NOW
+
             script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
             
             # Show processing status
-            self.status_label.config(text=f"Generating HR diagram ({ly_value} ly)...", foreground="blue")
-            self.update()  # Force GUI update
+    #        self.status_label.config(text=f"Generating HR diagram ({ly_value} ly)...", foreground="blue")
+    #        self.update()  # Force GUI update
             
             # Capture output
             result = subprocess.run([sys.executable, script_path, str(ly_value)], 
@@ -1187,6 +1216,13 @@ class StarVisualizationGUI(tk.Tk):
                 self.status_label.config(text="Enter magnitude -1.44 to 9", foreground="red")
                 return
             
+            # ADD THIS - Update status IMMEDIATELY when button is clicked
+            self.status_label.config(
+                text=f"Generating 3D visualization for magnitude ≤ {mag_value} (~30-75 seconds)",
+                foreground="blue"
+            )
+            self.update()  # Force GUI to refresh NOW
+
             # Build command with magnitude
             script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
             cmd = [sys.executable, script_path, str(mag_value)]
@@ -1243,11 +1279,18 @@ class StarVisualizationGUI(tk.Tk):
                 self.status_label.config(text="Enter magnitude -1.44 to 9", foreground="red")
                 return
             
+            # ADD THIS - Update status IMMEDIATELY when button is clicked
+            self.status_label.config(
+                text=f"Generating 2D visualization for magnitude ≤ {mag_value} (~30-60 seconds)",
+                foreground="blue"
+            )
+            self.update()  # Force GUI to refresh NOW
+
             script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
             
             # Show processing status
-            self.status_label.config(text=f"Generating HR diagram (mag {mag_value})...", foreground="blue")
-            self.update()  # Force GUI update
+    #        self.status_label.config(text=f"Generating HR diagram (mag {mag_value})...", foreground="blue")
+    #        self.update()  # Force GUI update
             
             # Capture output
             result = subprocess.run([sys.executable, script_path, str(mag_value)],
@@ -1282,6 +1325,16 @@ class StarVisualizationGUI(tk.Tk):
     def load_and_display_plot_report(self):
         """Load the plot data from the exchange file and update the report."""
         try:
+
+            # Try to load the scientific report first
+            report_mgr = ReportManager()
+            report_data = report_mgr.load_last_report()
+            
+            if report_data:
+                print("Loading scientific report with object type analysis...")
+                self.plot_report.display_report(report_data)
+                return
+
             plot_data = PlotDataExchange.load_plot_data()
             
             if plot_data:

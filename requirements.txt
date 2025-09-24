@@ -6,11 +6,10 @@ scipy>=1.11.0         # Scientific computing
 # Astronomical calculations and data access
 astropy>=5.3.4        # Core astronomy library
 astroquery>=0.4.6     # Access to astronomical databases
-erfa>=2.0.0           # Essential astronomy functions (used in palomas_orrery.py)
 
 # Plotting and visualization
 plotly>=5.18.0        # Interactive plotting library
-kaleido>=0.2.1        # Required for saving static plotly images
+kaleido=0.2.1        # Required for saving static plotly images
 pillow>=10.0.0        # Image processing, required by kaleido
 
 # GUI and interface
@@ -24,30 +23,5 @@ pytz>=2023.3          # Timezone support
 # Network and web
 requests>=2.31.0      # HTTP library
 beautifulsoup4>=4.12.0  # HTML parsing for web scraping
-html5lib>=1.1         # HTML parsing backend
 
-# File formats and data handling
-h5py>=3.10.0          # HDF5 file format support
-astropy-healpix>=1.0.0  # HEALPix support for astronomy
-pyvo>=1.4             # Virtual Observatory access
 
-# Development and debugging (optional)
-ipython>=8.12.0       # Enhanced interactive Python shell
-jupyter>=1.0.0        # Notebook support (optional)
-
-# Testing and quality (optional for development)
-pytest>=7.4.0         # Testing framework
-flake8>=6.1.0         # Code linting
-
-# Optional but recommended for astronomy features
-astroplan>=0.9        # Observation planning
-regions>=0.7          # Astronomical region handling
-reproject>=0.13       # Astronomical image reprojection
-
-# Performance optimization (optional)
-numba>=0.57.0         # JIT compilation for faster computation
-dask>=2023.5.0        # Parallel computing
-
-# System and environment
-setuptools>=68.0.0    # Package installation tools
-wheel>=0.41.0         # Built-package format

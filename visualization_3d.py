@@ -876,80 +876,77 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                     }]
                 })
 
-# Get the list of notable stars considering both magnitude and scale limits
+    # Get the list of notable stars considering both magnitude and scale limits
     notable_stars = create_notable_stars_list(combined_df, unique_notes, user_max_coord)
-    
-    # Update layout with buttons and menus
-    fig.update_layout(
-        updatemenus=[
-            # Center button
-            dict(
-                type="buttons",
-                direction="left",
-                x=0.05,
-                y=1.15,
-                buttons=[dict(
-                    label="Move Camera to the Sun (Center)",
-                    method="relayout",
-                    args=[{
-                        "scene.camera": {
-                    #        "center": {"x": 0, "y": 0, "z": 0},
-                    #        "eye": {"x": 0, "y": 0.05, "z": 0},       # "y": -0.005 places the camera just in front of the Sun
-                    #        "up": {"x": 0, "y": 0, "z": 1}
 
-                            "eye": {"x": 0.001, "y": 0.001, "z": 0.001},  # Camera AT the Sun (tiny offset)
-                            "center": {"x": 1, "y": 0, "z": 0},  # Looking outward along x-axis
-                            "up": {"x": 0, "y": 0, "z": 1}  # Z is up
+    # Build updatemenus list conditionally (OUTSIDE of fig.update_layout)
+    updatemenus = [
+        # Center button (always present)
+        dict(
+            type="buttons",
+            direction="left",
+            x=0.05,
+            y=1.15,
+            buttons=[dict(
+                label="Move Camera to the Sun (Center)",
+                method="relayout",
+                args=[{
+                    "scene.camera": {
+                        "eye": {"x": 0.001, "y": 0.001, "z": 0.001},
+                        "center": {"x": 1, "y": 0, "z": 0},
+                        "up": {"x": 0, "y": 0, "z": 1}
+                    }
+                }]
+            )],
+            bgcolor='rgba(255,255,255,0.50)',
+            font=dict(color='blue'),
+            bordercolor='white',
+            borderwidth=1
+        ),
+        # Hover text controls (always present)
+        dict(
+            type="buttons",
+            direction="right",
+            x=0.2,
+            y=0.08,
+            buttons=[
+                dict(
+                    label="Full Star Info",
+                    method="update",
+                    args=[{"hovertemplate": '%{text}<extra></extra>'}]
+                ),
+                dict(
+                    label="Star Names Only",
+                    method="update",
+                    args=[{"hovertemplate": '%{customdata}<extra></extra>'}]
+                ),
+            ],
+            font=dict(color='blue'),
+            bgcolor='rgba(255,255,255,0.50)',
+            bordercolor='white',
+            borderwidth=1
+        )
+    ]
 
-                        }
-                    }]
-                )],
-                bgcolor='rgba(255,255,255,0.50)',
-                font=dict(color='blue'),
-                bordercolor='white',
-                borderwidth=1
-            ),
-            # Notable stars dropdown (only added if there are notable stars)
-            dict(
-                name="notable_stars",
-                type="dropdown",
-                direction="down",
-                x=0.01,
-                y=1.05,
-                buttons=notable_stars,
-                pad={"r": 10, "t": 10},
-                showactive=True,
-                bgcolor='rgba(255,255,255,0.50)',
-                font=dict(color='blue'),
-                bordercolor='white',
-                borderwidth=1
-            ) if notable_stars else None,
-            # Hover text controls
-            dict(
-                type="buttons",
-                direction="right",
-                x=0.2,
-                y=0.08,
-                buttons=[
-                    dict(
-                        label="Full Star Info",
-                        method="update",
-                        args=[{"hovertemplate": '%{text}<extra></extra>'}]
-                    ),
-                    dict(
-                        label="Star Names Only",
-                        method="update",
-                        args=[{"hovertemplate": '%{customdata}<extra></extra>'}]
-                    ),
-                ],
-                font=dict(color='blue'),
-                bgcolor='rgba(255,255,255,0.50)',
-                bordercolor='white',
-                borderwidth=1
-            ),
-        ]
-    )
+    # Only add notable stars dropdown if there are notable stars
+    if notable_stars:
+        updatemenus.insert(1, dict(
+            name="notable_stars",
+            type="dropdown",
+            direction="down",
+            x=0.01,
+            y=1.05,
+            buttons=notable_stars,
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            bgcolor='rgba(255,255,255,0.50)',
+            font=dict(color='blue'),
+            bordercolor='white',
+            borderwidth=1
+        ))
 
+    # NOW update layout with the built list
+    fig.update_layout(updatemenus=updatemenus)
     
     # Print debug info about Messier objects
     print("\nChecking for Messier objects...")
@@ -963,11 +960,4 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
     # Return the figure for any further processing
     return fig
 
-# In create_3d_visualization, after creating the figure
-    print("\nChecking for Messier objects...")
-    messier_mask = combined_df['Source_Catalog'] == 'Messier'
-    if messier_mask.any():
-        messier_data = combined_df[messier_mask]
-        print(f"Found {len(messier_data)} Messier objects to plot:")
-        for _, obj in messier_data.iterrows():
-            print(f"  {obj['Star_Name']}: ({obj['x']:.1f}, {obj['y']:.1f}, {obj['z']:.1f}) ly")
+

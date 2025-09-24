@@ -193,7 +193,8 @@ KNOWN_ORBITAL_PERIODS = {
     'Hyakutake': 35773534.62,       # PER= 97942.599927659 jy
     'Hale-Bopp': 863279.5035,       # PER= 2363.5304681429 jy = 863279.5035
     'Ikeya-Seki': 319800.00,        # 876.0 * 365.25 (estimate)
-    'ISON': 230970.00,     # 632.3 * 365.25 (pre-disruption)
+    'ISON': 230970.00,              # 632.3 * 365.25 (pre-disruption)
+    'C/2025_R2': 8237831.493,       # PER= 22553.953438133 jy
     
     # For hyperbolic/parabolic objects, period is undefined
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
@@ -561,6 +562,7 @@ def color_map(planet):
         'ATLAS': 'white',
         'Churyumov': 'gold',
         '2I/Borisov': 'red',
+        'C/2025_R2': 'gold',
 
         'SOHO': 'white',
         'JamesWebb': 'gold',
@@ -1767,9 +1769,11 @@ INFO = {
         'Hyakutake': 'Horizons: C/1996 B2. Comet passed very close to Earth in 1996. Retrograde (left-handed) orbit.',
         
         'Hale-Bopp': '**SET MANUAL SCALE TO 360 AU FOR FULL ORBIT**\n' 
+
         'Horizons: C/1995 O1. Comet Hale-Bopp: Visible to the naked eye for 18 months. Retrograde (left-handed) orbit.',
         
         'McNaught': '**USE MANUAL SCALE AT 40 AU TO SEE THE CURRENT POSITION**\n' 
+
         'Horizons: C/2006 P1. Known as the Great Comet of 2007. January 12, 2007. Retrograde (left-handed) orbit.',
         
         'NEOWISE': 'Horizons: C/2020 F3. Brightest comet visible from the Northern Hemisphere in decades.',
@@ -1849,13 +1853,30 @@ INFO = {
         '* Trajectory: It is on a hyperbolic trajectory, confirmed by its negative semi-major axis (A = -0.25996... au). This negative \n' 
         '  value mathematically signifies an unbound orbit, meaning it will make one pass through our solar system and then escape, never \n' 
         '  to return.\n' 
-        '* Perihelion: Its closest approach to the Sun (perihelion) is predicted to be around October 29, 2025, when it will be approximately \n' 
-        '  1.36 to 1.4 Astronomical Units (AU) from the Sun.\n' 
+        '* Perihelion: Its closest approach to the Sun (perihelion) is predicted to be around October 29, 2025 (11:33 UTC), when it will be approximately \n' 
+        '  1.356 Astronomical Units (AU), or 202.94 million km, from the Sun, and moving at 68 km/sec.\n'
+        '* Mars Periapsis: Its closest approach to Mars (periapsis) is predicted to be around October 3, 2025 (05:00 UTC), when it will be approximately \n'
+        '  0.194 Astronomical Units (AU), or 28.97 million km, from Mars.\n'
+        '  * The European Space Agency (ESA) is preparing to use its Mars orbiters, Mars Express and the ExoMars Trace Gas Orbiter (TGO), \n' 
+        '    to observe 3I/ATLAS.\n' 
         '* Discovery Data: The orbital elements and predictions for 3I/ATLAS are based on an observational data arc from June 14, 2025, to \n' 
         '  July 3, 2025. This short observational period is sufficient for astronomers to calculate its orbit and predict future events \n' 
         '  like perihelion.',        
 
-        'ATLAS': 'Horizons: C/2024 G3. Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!',        
+        'ATLAS': 'Horizons: C/2024 G3. Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
+
+        'C/2025_R2': 'Comet C/2025 R2 (SWAN) is a non-periodic comet that was discovered on September 11, 2025.\n' 
+        '* The discovery was made by Ukrainian amateur astronomer Vladimir Bezugly, who identified the comet in images from the Solar Wind ' 
+        'Anisotropies (SWAN) instrument aboard the Solar and Heliospheric Observatory (SOHO) spacecraft.\n' 
+        '* The comet has a long, impressive tail, which has been observed to be about 2 degrees long, or roughly the length of five full moons.\n' 
+        '* The comet reached its perihelion on September 12, 2025, at a distance of about 0.5 astronomical units (AU).\n' 
+        '* After its perihelion, it became more visible from Earth. Its closest approach to our planet is projected to occur around ' 
+        'October 19-21, 2025, at a distance of approximately 0.26 AU (39 million kilometers or 24 million miles).\n' 
+        '* Initially, the comet was best observed from the Southern Hemisphere, but as it moves away from the sun, it will become ' 
+        'easier to see from the Northern Hemisphere. It is currently visible through binoculars, and there is a possibility that it ' 
+        'could become bright enough to be seen with the naked eye under dark skies, potentially reaching an apparent magnitude of 4 or higher.\n' 
+        '* Its orbital period is uncertain, but estimates range from 1,400 to over 20,000 years.\n' 
+        '* There is also a chance that Earth may pass through debris from the comet, potentially causing a minor meteor shower around October 5, 2025.',
 
 }
 

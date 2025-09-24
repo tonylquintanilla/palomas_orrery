@@ -41,10 +41,72 @@ from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_
 
 from simbad_manager import SimbadQueryManager, SimbadConfig
 
+import sys
+import os
+
+# Fix Windows console encoding for Unicode symbols
+if sys.platform == 'win32':
+    # Set console code page to UTF-8
+    os.system('chcp 65001 > nul')
+    # Ensure Python uses UTF-8 for stdout
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+
+
+def ensure_cache_system_ready():
+    """
+    Minimal cache system initialization using existing modules.
+    Ensures PKL files exist and checks cache health.
+    """
+    import os
+    import pickle
+    
+    # Create empty PKL files if they don't exist
+    pkl_files = [
+        'star_properties_distance.pkl',
+        'star_properties_magnitude.pkl'
+    ]
+    
+    for pkl_file in pkl_files:
+        if not os.path.exists(pkl_file):
+            print(f"Creating missing cache: {pkl_file}")
+            with open(pkl_file, 'wb') as f:
+                pickle.dump({}, f)
+        
+    # Quick status check using existing module
+    try:
+        from simbad_manager import SimbadQueryManager, SimbadConfig
+        config = SimbadConfig()
+        manager = SimbadQueryManager(config)
+        
+        # Check if distance PKL has any data
+        props = manager.load_existing_properties('star_properties_distance.pkl')
+        if len(props) == 0:
+            print("\nWarning: star_properties_distance.pkl is empty")
+            print("  Stars will appear gray until properties are fetched from SIMBAD")
+            print("  Properties will be fetched automatically as you use the program")
+        else:
+            print(f"\n[OK] Loaded {len(props)} cached star properties")
+    except Exception as e:
+        # Silent fail is OK here - don't clutter output
+        pass
+
 
 def process_stars(hip_data, gaia_data, max_light_years):
-    """Process stars for distance-based 3D visualization with full count tracking."""
-    # Use the unified selection function
+    """
+    Complete star processing pipeline for distance-based 3D visualization.
+    Handles selection, coordinates, properties, and parameters.
+    
+    Returns:
+        combined_data: The processed star data
+        counts: Dictionary of star counts
+        unique_ids: List of unique star identifiers
+        existing_properties: Dictionary of existing star properties
+        missing_ids: List of IDs that were missing (for PKL update check)
+    """
+    
+    # Step 1: Select and combine stars from both catalogs
+    from catalog_selection import select_stars
     combined_data, counts = select_stars(
         hip_data, 
         gaia_data, 
@@ -53,37 +115,75 @@ def process_stars(hip_data, gaia_data, max_light_years):
     )
     
     if combined_data is None:
-        return None, {}
-
-    # Add 3D-specific processing
+        return None, {}, [], {}, []
+    
+    # Step 2: Calculate 3D cartesian coordinates
+    from data_processing import calculate_cartesian_coordinates
     combined_data = calculate_cartesian_coordinates(combined_data)
     
-    # Calculate stellar parameters
+    # Step 3: Load and query star properties from SIMBAD
+    from star_properties import (
+        load_existing_properties, 
+        generate_unique_ids, 
+        query_simbad_for_star_properties,
+        assign_properties_to_data
+    )
+    
+    properties_file = 'star_properties_distance.pkl'
+    existing_properties = load_existing_properties(properties_file)
+    unique_ids = generate_unique_ids(combined_data)
+    
+    # Find which stars need SIMBAD queries
+    missing_ids = [uid for uid in unique_ids if uid not in existing_properties]
+    
+    # DEBUG: Add this to see what's happening
+    print(f"DEBUG: Total stars: {len(unique_ids)}")
+    print(f"DEBUG: Stars in PKL: {len(existing_properties)}")
+    print(f"DEBUG: Missing from PKL: {len(missing_ids)}")
+    
+    if missing_ids:
+        print(f"Querying SIMBAD for {len(missing_ids)} stars...")
+        existing_properties = query_simbad_for_star_properties(
+            missing_ids, existing_properties, properties_file
+        )
+    
+    # Assign properties to the combined data
+    combined_data = assign_properties_to_data(combined_data, existing_properties, unique_ids)
+    
+    # Step 4: Calculate stellar parameters (temperature, luminosity)
+    from stellar_parameters import calculate_stellar_parameters
     combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
-
-    # Update counts with results from stellar parameter calculations
+    
+    # Step 5: Update counts with all the statistics
     counts['source_counts'] = source_counts
     counts['estimation_results'] = estimation_results
-
-    # Safely calculate plottable count only if columns exist
+    
+    # Calculate plottable count (stars with both temperature and luminosity)
     if 'Temperature' in combined_data.colnames and 'Luminosity' in combined_data.colnames:
+        import numpy as np
         plottable_mask = (
-            (~combined_data['Temperature'].isna()) &
-            (~combined_data['Luminosity'].isna())
+    #        (~combined_data['Temperature'].isna()) &
+    #        (~combined_data['Luminosity'].isna())
+            (~np.isnan(combined_data['Temperature'])) &
+            (~np.isnan(combined_data['Luminosity']))
         )
         counts['plottable_count'] = int(np.sum(plottable_mask))
     else:
         print("Warning: 'Temperature' or 'Luminosity' column not found in combined_data.")
         counts['plottable_count'] = 0
-
-    # Update missing parameter counts
-    counts['missing_temp_only'] = estimation_results['final_missing_temp']
-    counts['missing_lum_only'] = estimation_results['final_missing_lum']
-
-    return combined_data, counts
+    
+    counts['missing_temp_only'] = estimation_results.get('final_missing_temp', 0)
+    counts['missing_lum_only'] = estimation_results.get('final_missing_lum', 0)
+    
+    # Return all needed variables for PKL update check
+    return combined_data, counts, unique_ids, existing_properties, missing_ids
 
 
 def main():
+
+    # CALL THE CACHE INITIALIZATION HERE - FIRST THING IN main()
+    ensure_cache_system_ready()
+
     # Initialize shutdown handler
     shutdown_handler = PlotlyShutdownHandler()
 
@@ -165,49 +265,26 @@ def main():
         print("Starting data processing...")
         process_start = time.time()
 
+        # Prepare the data (distances and alignment)
         hip_data = calculate_distances(hip_data) if hip_data is not None else None
         gaia_data = calculate_distances(gaia_data) if gaia_data is not None else None
 
         if hip_data is not None:
             hip_data = align_coordinate_systems(hip_data)
-        
+
         if gaia_data is not None:
             gaia_data['Estimated_Vmag'] = estimate_vmag_from_gaia(gaia_data)
 
-        # Select stars and combine data
-        combined_data, counts = select_stars(hip_data, gaia_data, mode='distance', limit_value=max_light_years)
+        # Process everything - NOTE THE CHANGE HERE: now returns 5 values
+        combined_data, counts, unique_ids, existing_properties, missing_ids = process_stars(hip_data, gaia_data, max_light_years)
+
         if combined_data is None:
             print("No valid stars found to process. Exiting.")
             return
-            
-        combined_data = calculate_cartesian_coordinates(combined_data)
+
         print(f"Data processing completed in {time.time() - process_start:.2f} seconds.")
 
-        # Step 3: Star Properties
-        print("Retrieving star properties...")
-        properties_start = time.time()
-        
-        properties_file = f'star_properties_distance.pkl'
-        existing_properties = load_existing_properties(properties_file)
-        unique_ids = generate_unique_ids(combined_data)
-        
-        missing_ids = [uid for uid in unique_ids if uid not in existing_properties]
-        if missing_ids:
-            existing_properties = query_simbad_for_star_properties(
-                missing_ids, existing_properties, properties_file
-            )
-        
-        combined_data = assign_properties_to_data(combined_data, existing_properties, unique_ids)
-        print(f"Property retrieval completed in {time.time() - properties_start:.2f} seconds.")
-
-        # Step 4: Calculate Stellar Parameters
-        print("Calculating stellar parameters...")
-        params_start = time.time()
-        
-        combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
-        print(f"Parameter calculations completed in {time.time() - params_start:.2f} seconds.")
-
-        # Step 5: Analysis and Visualization
+        # Step 3: Analysis and Visualization
         print("Starting analysis and visualization...")
         viz_start = time.time()
 
@@ -218,15 +295,15 @@ def main():
         from stellar_data_patches import apply_temperature_patches
         combined_df = apply_temperature_patches(combined_df)
 
-#        config = SimbadConfig.load_from_file()
-#        manager = SimbadQueryManager(config)
-#        updated_properties = manager.update_calculated_properties(combined_df, properties_file)        
-
         # Only update PKL if we actually added new stars to the dataset
-        if len([uid for uid in unique_ids if uid not in existing_properties]) > 0:
+        if len(missing_ids) > 0:  # Now using missing_ids from process_stars
             config = SimbadConfig.load_from_file()
             manager = SimbadQueryManager(config)
+            properties_file = 'star_properties_distance.pkl'
             updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+            print(f"Updated PKL with calculated properties for {len(missing_ids)} new stars")
+        else:
+            print("No new stars added - PKL file unchanged")
 
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")

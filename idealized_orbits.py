@@ -616,7 +616,19 @@ planetary_params = {
         'epoch': '1996-3-15',               # EPOCH=  2450157.5 ! 1996-Mar-15.0000000 (TDB)
         'TP': 2450204.8941449965,           # TP= 1996-May-01.3941449965 
     #    'Tapo': ,                          # needed       
-                                            # PER= 97942.599927659 py = 35773534.62 days
+                                            # PER= 97942.599927659 jy = 35773534.62 days
+    },
+
+     'C/2025_R2': {                  # SWAN (C/2025 R2)  Rec #:90004920 (+COV) Soln.date: 2025-Sep-15_12:40:16  
+        # data arc: 2025-08-13 to 2025-09-14   obs: 83 (32 days
+        'a': 798.2574580972854,   # Horizons: A, semi-major axis in AU
+        'e': .9993692862141036,   # Horizons: EC, eccentricity
+        'i': 4.470167090495599,      # Horizons: IN, inclination in degrees
+        'omega': 307.7690351733913, # Horizons: W, argument of perihelion in degrees
+        'Omega': 335.6745583920674,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-09-13',
+        'TP': 2460931.1155318194  # 2025-Sep-12.6155318194
+        # PER= 22553.953438133 jy = 8237831.493 days
     },
 
 # comets with checkbuttons that need orbital parameters: 
@@ -660,6 +672,7 @@ planetary_params = {
         # 'C/2025_K1': 1e99,
     },   
 
+    
     # Interstellar objects; hyperbolic trajectories, object type 'trajectory'
 
      '1I/Oumuamua': {                   # 1I/'Oumuamua (A/2017 U1) 

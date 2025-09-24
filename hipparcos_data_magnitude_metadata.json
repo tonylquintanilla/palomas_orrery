@@ -1,0 +1,13 @@
+{
+  "catalog": "hipparcos",
+  "mode": "magnitude",
+  "limit_value": 9.0,
+  "min_parallax_mas": null,
+  "query_date": "2025-09-17 00:58:41",
+  "entry_count": 519,
+  "file_version": "2.0",
+  "actual_min_distance": null,
+  "actual_max_distance": null,
+  "actual_min_magnitude": -1.440000057220459,
+  "actual_max_magnitude": 4.0
+}

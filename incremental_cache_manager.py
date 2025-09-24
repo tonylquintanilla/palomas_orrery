@@ -516,6 +516,128 @@ def smart_load_or_fetch_gaia(v, gaia_data_file: str, mode: str,
     
     cache_mgr = IncrementalCacheManager()
     
+    # SPECIAL HANDLING FOR MAGNITUDE MODE
+    # If we have a comprehensive magnitude cache (>100MB), just use it
+    if mode == 'magnitude' and limit_value <= 9.0:
+        cache_path = os.path.join(cache_mgr.cache_dir, gaia_data_file)
+        if os.path.exists(cache_path):
+            file_size = os.path.getsize(cache_path)
+            # Check if this is the full cache (>100MB)
+            if file_size > 100_000_000:
+                logger.info(f"Using comprehensive Gaia magnitude cache (size: {file_size/1e6:.1f}MB)")
+                try:
+                    data = Table.read(cache_path, format='votable')
+                    
+                    # Filter to requested magnitude
+                    mag_col = None
+                    for col in ['Gmag', 'Estimated_Vmag']:
+                        if col in data.colnames:
+                            mag_col = col
+                            break
+                    
+                    if mag_col:
+                        mask = data[mag_col] <= limit_value
+                        filtered = data[mask]
+                        logger.info(f"Filtered Gaia cache from {len(data)} to {len(filtered)} stars <= mag {limit_value}")
+                        return filtered
+                    else:
+                        logger.warning("No magnitude column found in Gaia cache")
+                        return data
+                        
+                except Exception as e:
+                    logger.warning(f"Could not read Gaia cache, falling back to normal logic: {e}")
+    
+    # NORMAL CACHE LOGIC for all other cases
+    # Check cache status
+    status, metadata = cache_mgr.check_cache_validity(gaia_data_file, mode, limit_value)
+    
+    logger.info(f"Gaia cache status: {status}")
+    
+    if status == 'exact':
+        # Perfect match, just load
+        return cache_mgr.load_and_filter_cache(gaia_data_file, metadata, mode, limit_value)
+    
+    elif status == 'subset':
+        # Have more data than needed, filter it
+        return cache_mgr.load_and_filter_cache(gaia_data_file, metadata, mode, limit_value)
+    
+    elif status == 'expand':
+        # For magnitude mode, avoid re-fetching if we have a good cache
+        if mode == 'magnitude':
+            logger.info(f"Avoiding Gaia magnitude mode expansion - using existing cache")
+            if metadata:
+                return cache_mgr.load_and_filter_cache(gaia_data_file, metadata, mode, limit_value)
+        
+        # For distance mode, continue with incremental fetch
+        logger.info(f"Incremental fetch needed: {metadata.limit_value} -> {limit_value}")
+        
+        # Load existing data
+        existing_data = Table.read(os.path.join(cache_mgr.cache_dir, gaia_data_file),
+                                  format='votable')
+        
+        # Calculate parameters for incremental fetch
+        params = cache_mgr.calculate_incremental_query_params(
+            mode, metadata.limit_value, limit_value
+        )
+        
+        logger.info(f"Fetching {params['description']}")
+        
+        # Fetch only new data
+        # For now, fall back to full fetch (would need API modification)
+        new_data = load_or_fetch_gaia_data(
+            v, f"temp_{gaia_data_file}", mode=mode,
+            mag_limit=limit_value if mode == 'magnitude' else None,
+            parallax_constraint=kwargs.get('parallax_constraint')
+        )
+        
+        # Merge old and new data
+        if new_data is not None:
+            combined = cache_mgr.merge_tables(existing_data, new_data, mode)
+            
+            # Save merged data
+            min_parallax = None
+            if mode == 'distance':
+                min_parallax = (1 / (limit_value / 3.26156)) * 1000
+            
+            cache_mgr.save_data_with_metadata(
+                combined, gaia_data_file, 'gaia', mode,
+                limit_value, min_parallax
+            )
+            
+            return combined
+        
+        return existing_data
+    
+    else:  # 'missing' or 'invalid'
+        # Need full fetch
+        data = load_or_fetch_gaia_data(
+            v, gaia_data_file, mode=mode,
+            mag_limit=limit_value if mode == 'magnitude' else None,
+            parallax_constraint=kwargs.get('parallax_constraint')
+        )
+        
+        if data is not None:
+            # Save with metadata
+            min_parallax = None
+            if mode == 'distance':
+                min_parallax = (1 / (limit_value / 3.26156)) * 1000
+            
+            cache_mgr.save_data_with_metadata(
+                data, gaia_data_file, 'gaia', mode,
+                limit_value, min_parallax
+            )
+        
+        return data
+
+
+"""
+def smart_load_or_fetch_gaia(v, gaia_data_file: str, mode: str,
+                             limit_value: float, **kwargs) -> Optional[Table]:
+
+    from data_acquisition import load_or_fetch_gaia_data
+    
+    cache_mgr = IncrementalCacheManager()
+    
     # Check cache status
     status, metadata = cache_mgr.check_cache_validity(gaia_data_file, mode, limit_value)
     
@@ -590,6 +712,7 @@ def smart_load_or_fetch_gaia(v, gaia_data_file: str, mode: str,
             )
         
         return data
+        """
 
 
 # Example usage and testing

@@ -2,8 +2,8 @@
 
 import warnings
 from astropy.units import UnitsWarning
-
 warnings.simplefilter('ignore', UnitsWarning)
+
 from astroquery.simbad import Simbad
 from astropy.coordinates import SkyCoord
 import pandas as pd
@@ -14,7 +14,7 @@ import time
 import traceback
 import plotly.graph_objects as go
 
-# Import modules - using same structure as other planetarium modules
+# Import modules
 from data_acquisition import (
     initialize_vizier, load_or_fetch_hipparcos_data, load_or_fetch_gaia_data
 )
@@ -27,72 +27,144 @@ from star_properties import (
     assign_properties_to_data
 )
 from stellar_parameters import calculate_stellar_parameters
-
 from visualization_core import analyze_magnitude_distribution, analyze_and_report_stars
-
 from visualization_3d import prepare_3d_data, create_3d_visualization, parse_stellar_classes
-
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
-
-from messier_object_data_handler import MessierObjectHandler  # Add this with other imports
-
+from messier_object_data_handler import MessierObjectHandler
 from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
-
 from simbad_manager import SimbadQueryManager, SimbadConfig
 
+import os
 
-def convert_messier_to_df(messier_objects):
-    """Convert Messier objects to a DataFrame format compatible with stellar data."""
-    if not messier_objects:
-        return pd.DataFrame()
+# Fix Windows console encoding for Unicode symbols
+if sys.platform == 'win32':
+    # Set console code page to UTF-8
+    os.system('chcp 65001 > nul')
+    # Ensure Python uses UTF-8 for stdout
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+
+
+def ensure_cache_system_ready():
+    """
+    Minimal cache system initialization using existing modules.
+    Ensures PKL files exist and checks cache health.
+    """
+    import os
+    import pickle
+    
+    # Create empty PKL files if they don't exist
+    pkl_files = [
+        'star_properties_distance.pkl',
+        'star_properties_magnitude.pkl'
+    ]
+    
+    for pkl_file in pkl_files:
+        if not os.path.exists(pkl_file):
+            print(f"Creating missing cache: {pkl_file}")
+            with open(pkl_file, 'wb') as f:
+                pickle.dump({}, f)
         
-    # Create DataFrame with Messier data
-    messier_df = pd.DataFrame(messier_objects)
+    # Quick status check using existing module
+    try:
+        from simbad_manager import SimbadQueryManager, SimbadConfig
+        config = SimbadConfig()
+        manager = SimbadQueryManager(config)
+        
+        # Check if magnitude PKL has any data
+        props = manager.load_existing_properties('star_properties_magnitude.pkl')
+        if len(props) == 0:
+            print("\nWarning: star_properties_magnitude.pkl is empty")
+            print("  Stars will appear gray until properties are fetched from SIMBAD")
+            print("  Properties will be fetched automatically as you use the program")
+        else:
+            print(f"\n[OK] Loaded {len(props)} cached star properties")
+    except Exception as e:
+        # Silent fail is OK here - don't clutter output
+        pass
+
+
+def process_stars(hip_data, gaia_data, mag_limit):
+    """
+    Complete star processing pipeline for magnitude-based 3D visualization.
+    Handles selection, coordinates, properties, and parameters.
     
-    # Print incoming columns to debug
-    print("\nIncoming Messier DataFrame columns:", messier_df.columns.tolist())
+    Returns:
+        combined_data: The processed star data
+        counts: Dictionary of star counts
+        unique_ids: List of unique star identifiers
+        existing_properties: Dictionary of existing star properties
+        missing_ids: List of IDs that were missing (for PKL update check)
+    """
     
-    # Rename columns to match stellar data format
-    column_mapping = {
-        'vmag': 'Apparent_Magnitude',
-        'distance_ly': 'Distance_ly',  # Ensure correct capitalization
-        'type': 'Object_Type',       # Add type mapping
-        'name': 'Object_Name'        # Map name separately from Star_Name
-    }
-    messier_df = messier_df.rename(columns=column_mapping)
+    # Step 1: Select and combine stars from both catalogs
+    from data_processing import select_stars_by_magnitude
+    combined_data, counts = select_stars_by_magnitude(hip_data, gaia_data, mag_limit)
     
-    # Create Star_Name from messier_id and name
-    messier_df['Star_Name'] = messier_df.apply(
-        lambda row: f"{row['messier_id']}: {row['Object_Name']}", 
-        axis=1
+    if combined_data is None:
+        return None, {}, [], {}, []
+    
+    # Step 2: Calculate 3D cartesian coordinates
+    from data_processing import calculate_cartesian_coordinates
+    combined_data = calculate_cartesian_coordinates(combined_data)
+    
+    # Step 3: Load and query star properties from SIMBAD
+    from star_properties import (
+        load_existing_properties, 
+        generate_unique_ids, 
+        query_simbad_for_star_properties,
+        assign_properties_to_data
     )
     
-    # Ensure Source_Catalog is set correctly
-    messier_df['Source_Catalog'] = 'Messier'
+    properties_file = 'star_properties_magnitude.pkl'
+    existing_properties = load_existing_properties(properties_file)
+    unique_ids = generate_unique_ids(combined_data)
     
-    # Add required columns with placeholder values
-    messier_df['Temperature'] = np.nan
-    messier_df['Luminosity'] = np.nan
-    messier_df['Temperature_Normalized'] = 0.5  # Middle value for color scale
-    messier_df['Temperature_Method'] = 'none'
-    messier_df['Spectral_Type'] = None
-    messier_df['B_V'] = np.nan
-    messier_df['Abs_Mag'] = np.nan
+    # Find which stars need SIMBAD queries
+    missing_ids = [uid for uid in unique_ids if uid not in existing_properties]
     
-    # Calculate Distance_pc from Distance_ly
-    messier_df['Distance_pc'] = messier_df['Distance_ly'] / 3.26156
+    if missing_ids:
+        print(f"Querying SIMBAD for {len(missing_ids)} stars...")
+        existing_properties = query_simbad_for_star_properties(
+            missing_ids, existing_properties, properties_file
+        )
+    else:
+        print("All star properties are already cached.")
     
-    # Print final columns to debug
-    print("\nFinal Messier DataFrame columns:", messier_df.columns.tolist())
-    print(f"Number of Messier objects formatted: {len(messier_df)}")
-    for _, row in messier_df.iterrows():
-        print(f"  {row['messier_id']}: {row['Star_Name']}")
-        print(f"    Distance: {row['Distance_ly']:.1f} ly")
-        print(f"    Magnitude: {row['Apparent_Magnitude']:.1f}")
+    # Assign properties to the combined data
+    combined_data = assign_properties_to_data(combined_data, existing_properties, unique_ids)
     
-    return messier_df
+    # Step 4: Calculate stellar parameters (temperature, luminosity)
+    from stellar_parameters import calculate_stellar_parameters
+    combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
+    
+    # Step 5: Update counts with all the statistics
+    counts['source_counts'] = source_counts
+    counts['estimation_results'] = estimation_results
+    
+    # Calculate plottable count (stars with both temperature and luminosity)
+    if 'Temperature' in combined_data.colnames and 'Luminosity' in combined_data.colnames:
+        import numpy as np
+        plottable_mask = (
+            (~np.isnan(combined_data['Temperature'])) &
+            (~np.isnan(combined_data['Luminosity']))
+        )
+        counts['plottable_count'] = int(np.sum(plottable_mask))
+    else:
+        print("Warning: 'Temperature' or 'Luminosity' column not found in combined_data.")
+        counts['plottable_count'] = 0
+    
+    counts['missing_temp_only'] = estimation_results.get('final_missing_temp', 0)
+    counts['missing_lum_only'] = estimation_results.get('final_missing_lum', 0)
+    
+    # Return all needed variables for PKL update check
+    return combined_data, counts, unique_ids, existing_properties, missing_ids
+
 
 def main():
+    # CALL THE CACHE INITIALIZATION HERE - FIRST THING IN main()
+    ensure_cache_system_ready()
+    
     # Initialize shutdown handler
     shutdown_handler = PlotlyShutdownHandler()
 
@@ -117,9 +189,6 @@ def main():
             print("Invalid input for magnitude limit. Using default value of 4.")
             mag_limit = 3.5
             user_max_coord = None
-#    else:
-#        mag_limit = 3.5  # Default value
-#        user_max_coord = None
     else:
         return    # prevents running this module without gui input    
 
@@ -138,9 +207,6 @@ def main():
         gaia_data_file = 'gaia_data_magnitude.vot'
 
         # Load or fetch stellar data
-    #    hip_data = load_or_fetch_hipparcos_data(v, hip_data_file, mag_limit)
-    #    gaia_data = load_or_fetch_gaia_data(v, gaia_data_file, mag_limit)
-
         hip_data = smart_load_or_fetch_hipparcos(v, hip_data_file,
                                                 mode='magnitude',
                                                 limit_value=mag_limit)
@@ -154,6 +220,7 @@ def main():
 
         print(f"Data acquisition completed in {time.time() - start_time:.2f} seconds.")
         
+        # Cache status reporting
         from incremental_cache_manager import IncrementalCacheManager
         cache_mgr = IncrementalCacheManager()
 
@@ -171,81 +238,63 @@ def main():
             print(f"  Cached: {gaia_meta.entry_count} stars up to magnitude {gaia_meta.limit_value}")
 
         if hip_status == 'expand' or gaia_status == 'expand':
-            print("\nOK INCREMENTAL FETCH PERFORMED")
+            print("\n[OK] INCREMENTAL FETCH PERFORMED")
         elif hip_status == 'subset' or gaia_status == 'subset':
-            print("\nOK FILTERED EXISTING CACHE (no fetch needed)")
+            print("\n[OK] FILTERED EXISTING CACHE (no fetch needed)")
         else:
-            print("\nOK EXACT CACHE HIT - using existing data")
+            print("\n[OK] EXACT CACHE HIT - using existing data")
         print("="*60 + "\n")
-
         
         # Step 3: Data Processing
         print("\nStarting data processing...")
         process_start = time.time()
 
-        # Calculate distances and align coordinates
+        # Prepare the data (distances and alignment)
         hip_data = calculate_distances(hip_data) if hip_data is not None else None
         gaia_data = calculate_distances(gaia_data) if gaia_data is not None else None
 
         if hip_data is not None:
             hip_data = align_coordinate_systems(hip_data)
         
-        # Select stars and combine data
-        combined_data, counts = select_stars_by_magnitude(hip_data, gaia_data, mag_limit)
+        # Process all star data using consolidated function
+        combined_data, counts, unique_ids, existing_properties, missing_ids = process_stars(
+            hip_data, gaia_data, mag_limit
+        )
+        
         if combined_data is None:
             print("No valid stars found to process. Exiting.")
             return
-            
-        combined_data = calculate_cartesian_coordinates(combined_data)
+        
+        # Extract the nested values from counts for use later
+        source_counts = counts.get('source_counts', {})
+        estimation_results = counts.get('estimation_results', {})
+        
         print(f"Data processing completed in {time.time() - process_start:.2f} seconds.")
 
-        # Step 4: Star Properties
-        print("\nRetrieving star properties...")
-        properties_start = time.time()
-        
-        properties_file = 'star_properties_magnitude.pkl'
-        existing_properties = load_existing_properties(properties_file)
-        unique_ids = generate_unique_ids(combined_data)
-        
-        # Query properties for stars and handle Messier objects
-        missing_ids = [uid for uid in unique_ids if uid not in existing_properties]
-        if missing_ids:
-            existing_properties = query_simbad_for_star_properties(
-                missing_ids, existing_properties, properties_file
-            )
-        
-        combined_data = assign_properties_to_data(combined_data, existing_properties, unique_ids)
-        print(f"Property retrieval completed in {time.time() - properties_start:.2f} seconds.")
-
-        # Step 5: Calculate Stellar Parameters
-        print("\nCalculating stellar parameters...")
-        params_start = time.time()
-        
-        combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
-        print(f"Parameter calculations completed in {time.time() - params_start:.2f} seconds.")
-
-        # Step 6: Convert to DataFrame and validate
+        # Step 4: Convert to DataFrame and apply patches
         combined_df = combined_data.to_pandas()
 
         # Apply temperature patches for known problematic stars
         from stellar_data_patches import apply_temperature_patches
         combined_df = apply_temperature_patches(combined_df)
 
-#        config = SimbadConfig.load_from_file()
-#        manager = SimbadQueryManager(config)
-#        updated_properties = manager.update_calculated_properties(combined_df, properties_file)
-
+        # Define properties file for PKL update
+        properties_file = 'star_properties_magnitude.pkl'
+        
         # Only update PKL if we actually added new stars to the dataset
-        if len([uid for uid in unique_ids if uid not in existing_properties]) > 0:
+        if len(missing_ids) > 0:  # Now using missing_ids from process_stars
             config = SimbadConfig.load_from_file()
             manager = SimbadQueryManager(config)
             updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+            print(f"Updated PKL with calculated properties for {len(missing_ids)} new stars")
+        else:
+            print("No new stars added - PKL file unchanged")
 
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")
             return
 
-        # Step 7: Fetch and Process Messier Objects
+        # Step 5: Fetch and Process Messier Objects
         print("\nProcessing Messier objects...")
         messier_objects = messier_handler.get_visible_objects(mag_limit)
         
@@ -258,7 +307,7 @@ def main():
                 combined_df = pd.concat([combined_df, messier_df], ignore_index=True)
                 print(f"Added {len(messier_df)} Messier objects to visualization dataset")
 
-        # Step 8: Analysis
+        # Step 6: Analysis
         print("\nRunning analysis...")
         analyze_magnitude_distribution(combined_df, mag_limit)
         
@@ -278,32 +327,13 @@ def main():
         print(f"Hipparcos stars: {len(combined_df[combined_df['Source_Catalog'] == 'Hipparcos'])}")
         print(f"Gaia stars: {len(combined_df[combined_df['Source_Catalog'] == 'Gaia'])}")
         print(f"Messier objects: {len(combined_df[combined_df['Source_Catalog'] == 'Messier'])}")
-        print(f"Other sources: {len(combined_df[~combined_df['Source_Catalog'].isin(['Hipparcos', 'Gaia', 'Messier'])])}")
 
         # Check temperature distribution
         print(f"\nTemperature data:")
         print(f"Stars WITH valid temperature: {(combined_df['Temperature'] > 0).sum()}")
         print(f"Stars WITHOUT valid temperature: {(~(combined_df['Temperature'] > 0)).sum()}")
 
-        # By catalog and temperature
-        for catalog in ['Hipparcos', 'Gaia']:
-            cat_df = combined_df[combined_df['Source_Catalog'] == catalog]
-            with_temp = (cat_df['Temperature'] > 0).sum()
-            without_temp = (~(cat_df['Temperature'] > 0)).sum()
-            print(f"{catalog}: {with_temp} with temp, {without_temp} without temp, total: {len(cat_df)}")
-
-        # Flatten the analysis for visualization (ADD THIS SECTION)
-
-    #    flattened_analysis = {
-    #        'total_stars': analysis_results['data_quality']['total_stars'],
-    #        'plottable_hip': analysis_results['plottable']['hipparcos'],
-    #        'plottable_gaia': analysis_results['plottable']['gaia'],
-    #        'missing_temp': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_temp'],
-    #        'missing_lum': analysis_results['data_quality']['total_stars'] - analysis_results['data_quality']['valid_lum'],
-    #        'temp_le_zero': 0
-    #        }
-
-        # After creating combined_df, calculate real counts
+        # Calculate real counts for visualization
         hip_df = combined_df[combined_df['Source_Catalog'] == 'Hipparcos']
         gaia_df = combined_df[combined_df['Source_Catalog'] == 'Gaia']
 
@@ -313,23 +343,24 @@ def main():
 
         flattened_analysis = {
             'total_stars': len(combined_df),
-            'plottable_hip': hip_total,  # Use actual count: 518
-            'plottable_gaia': gaia_with_temp,  # 1,042
-            'missing_temp': gaia_without_temp,  # 17
+            'plottable_hip': hip_total,
+            'plottable_gaia': gaia_with_temp,
+            'missing_temp': gaia_without_temp,
             'missing_lum': 0,
             'temp_le_zero': 0
         }
 
         combined_df.attrs['analysis'] = flattened_analysis
 
-        # Step 8.5: Add Has_Temperature flag for gray star display
+        # Add Has_Temperature flag for gray star display
         combined_df['Has_Temperature'] = ~combined_df['Temperature'].isna() & (combined_df['Temperature'] > 0)
 
         print(f"\nTemperature data availability:")
         print(f"Stars with temperature data: {combined_df['Has_Temperature'].sum()}")
         print(f"Stars without temperature data: {(~combined_df['Has_Temperature']).sum()}")
 
-        # Step 9: Prepare Data for Visualization
+        
+        # Step 7: Prepare Data for Visualization
         print("\nPreparing visualization data...")
         prepared_df = prepare_3d_data(
             combined_df,
@@ -337,39 +368,34 @@ def main():
             counts=counts,
             mode='magnitude'
         )
-        
+
         if prepared_df is None or len(prepared_df) == 0:
             print("No plottable objects found after data preparation.")
             return
 
-        # Step 10: Create Visualization
+        # Step 8: Create Visualization
         print("\nCreating visualization...")
+        viz_start = time.time()  # ADD THIS LINE
 
-        # Create a class to hold the figure result
-        class ThreadResult:
-            def __init__(self):
-                self.figure = None
-
-        def visualize(result):
+        # Define the visualize function
+        def visualize():
             try:
-                result.figure = create_3d_visualization(prepared_df, mag_limit, user_max_coord=user_max_coord)
+                fig = create_3d_visualization(prepared_df, mag_limit, user_max_coord=user_max_coord)
+                
+                # Show and save figure safely
+                default_name = f"3d_stars_magnitude_{mag_limit}"
+                show_figure_safely(fig, default_name)
+                
             except Exception as e:
                 print(f"Error during visualization: {e}")
                 traceback.print_exc()
-                result.figure = None
-
-        # Create result holder
-        result = ThreadResult()
 
         # Run visualization in monitored thread
-        viz_thread = create_monitored_thread(shutdown_handler, visualize, result)
+        viz_thread = create_monitored_thread(shutdown_handler, visualize)
         viz_thread.start()
-        viz_thread.join()  # Wait for thread to complete
+        viz_thread.join()  # Wait for visualization to complete
 
-        # Show and save figure safely in main thread
-        if result.figure is not None:
-            default_name = f"3d_stars_magnitude_{mag_limit}"
-            show_figure_safely(result.figure, default_name)
+        print(f"\nVisualization completed in {time.time() - viz_start:.2f} seconds.")
 
     except Exception as e:
         print(f"Error during execution: {e}")

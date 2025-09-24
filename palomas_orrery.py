@@ -176,8 +176,13 @@ from save_utils import save_plot
 
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
-import os
-import sys
+# Fix Windows console encoding for Unicode symbols
+if sys.platform == 'win32':
+    # Set console code page to UTF-8
+    os.system('chcp 65001 > nul')
+    # Ensure Python uses UTF-8 for stdout
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
 
 # Always run from the script's directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -1983,6 +1988,8 @@ comet_halley_var = tk.IntVar(value=0)
 
 comet_hyakutake_var = tk.IntVar(value=0)
 
+comet_c2025r2_var = tk.IntVar(value=0)
+
 comet_hale_bopp_var = tk.IntVar(value=0)
 
 comet_mcnaught_var = tk.IntVar(value=0)
@@ -2573,7 +2580,7 @@ objects = [
     'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
 
     {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1993, 4, 27), 'end_date': datetime(2022, 7, 9),
+    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1993, 4, 28), 'end_date': datetime(2022, 7, 9),
     # data arc: 1993-04-27 to 2022-07-09 
     'mission_info': 'Horizons: C/1995 O1. Visible to the naked eye for a record 18 months.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
@@ -2589,6 +2596,12 @@ objects = [
     # data arc: 1996-01-01 to 1996-11-02 
     'mission_info': 'Horizons: C/1996 B2. Passed very close to Earth in 1996. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
+
+    {'name': 'C/2025_R2', 'id': 'C/2025 R2', 'var': comet_c2025r2_var, 'color': color_map('C/2025_R2'), 'symbol': 'diamond', 
+    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2025, 8, 14), 'end_date': datetime(2025, 9, 14),
+    # data arc: data arc: 2025-08-13 to 2025-09-14;  EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-SEP-19. PREDICTS-> 2025-DEC-15
+    'mission_info': 'Comet C/2025 R2 (SWAN) is a non-periodic comet that was discovered on September 11, 2025.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/C/2025_R2_(SWAN)'},    
 
     {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
@@ -6313,6 +6326,8 @@ create_comet_checkbutton("Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(202
                          "April 28, 2024")
 create_comet_checkbutton("ATLAS", comet_atlas_var, "(2024-06-17 to 2029-12-31)", 
                          "January 13, 2025")
+create_comet_checkbutton("C/2025_R2", comet_c2025r2_var, "(2025-08-14 to 2025-09-14)", 
+                         "September 12, 2025") # data arc: 2025-08-13 to 2025-09-14
 
 # Checkbuttons for interstellar objects
 interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Hyperbolic Comets and Interstellar, I, Objects")

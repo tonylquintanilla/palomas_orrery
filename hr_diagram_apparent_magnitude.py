@@ -7,6 +7,7 @@ warnings.simplefilter('ignore', UnitsWarning)
 import sys
 import time
 import pandas as pd  # Add at top of file with other imports
+from datetime import datetime
 
 # Import modules
 from data_acquisition import initialize_vizier, load_or_fetch_hipparcos_data, load_or_fetch_gaia_data
@@ -22,16 +23,156 @@ from stellar_parameters import calculate_stellar_parameters
 
 from visualization_core import analyze_magnitude_distribution, analyze_and_report_stars, generate_star_count_text
 
-from visualization_2d import prepare_2d_data, create_hr_diagram
-
 from incremental_cache_manager import smart_load_or_fetch_hipparcos, smart_load_or_fetch_gaia
 
 from simbad_manager import SimbadQueryManager, SimbadConfig
 
 from plot_data_exchange import PlotDataExchange
 
+import sys
+import os
+
+from object_type_analyzer import ObjectTypeAnalyzer
+
+from report_manager import ReportManager
+
+from stellar_data_patches import apply_temperature_patches
+
+from visualization_2d import prepare_2d_data, create_hr_diagram
+
+# Fix Windows console encoding for Unicode symbols
+if sys.platform == 'win32':
+    # Set console code page to UTF-8
+    os.system('chcp 65001 > nul')
+    # Ensure Python uses UTF-8 for stdout
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+
+
+def ensure_cache_system_ready():
+    """
+    Minimal cache system initialization using existing modules.
+    Ensures PKL files exist and checks cache health.
+    """
+    import os
+    import pickle
+    
+    # Create empty PKL files if they don't exist
+    pkl_files = [
+        'star_properties_distance.pkl',
+        'star_properties_magnitude.pkl'
+    ]
+    
+    for pkl_file in pkl_files:
+        if not os.path.exists(pkl_file):
+            print(f"Creating missing cache: {pkl_file}")
+            with open(pkl_file, 'wb') as f:
+                pickle.dump({}, f)
+        
+    # Quick status check using existing module
+    try:
+        from simbad_manager import SimbadQueryManager, SimbadConfig
+        config = SimbadConfig()
+        manager = SimbadQueryManager(config)
+        
+        # Check if magnitude PKL has any data
+        props = manager.load_existing_properties('star_properties_magnitude.pkl')
+        if len(props) == 0:
+            print("\nWarning: star_properties_magnitude.pkl is empty")
+            print("  Stars will appear gray until properties are fetched from SIMBAD")
+            print("  Properties will be fetched automatically as you use the program")
+        else:
+            print(f"\n[OK] Loaded {len(props)} cached star properties")
+    except Exception as e:
+        # Silent fail is OK here - don't clutter output
+        pass
+
+
+def process_stars(hip_data, gaia_data, mag_limit):
+    """
+    Complete star processing pipeline for magnitude-based visualization.
+    Handles selection, coordinates, properties, and parameters.
+    
+    Returns:
+        combined_data: The processed star data
+        counts: Dictionary of star counts
+        unique_ids: List of unique star identifiers
+        existing_properties: Dictionary of existing star properties
+        missing_ids: List of IDs that were missing (for PKL update check)
+    """
+    
+    # Step 1: Select and combine stars from both catalogs
+    from data_processing import select_stars_by_magnitude
+    combined_data, counts = select_stars_by_magnitude(hip_data, gaia_data, mag_limit)
+    
+    if combined_data is None:
+        return None, {}, [], {}, []
+    
+# After calling select_stars_by_magnitude (or process_stars)
+    print(f"\nDEBUG after select_stars_by_magnitude:")
+    print(f"  Combined data: {len(combined_data)} stars")
+
+    # Step 2: Calculate 3D cartesian coordinates
+    from data_processing import calculate_cartesian_coordinates
+    combined_data = calculate_cartesian_coordinates(combined_data)
+    
+    # Step 3: Load and query star properties from SIMBAD
+    from star_properties import (
+        load_existing_properties, 
+        generate_unique_ids, 
+        query_simbad_for_star_properties,
+        assign_properties_to_data
+    )
+    
+    properties_file = 'star_properties_magnitude.pkl'
+    existing_properties = load_existing_properties(properties_file)
+    unique_ids = generate_unique_ids(combined_data)
+    
+    # Find which stars need SIMBAD queries
+    missing_ids = [uid for uid in unique_ids if uid not in existing_properties]
+    
+    if missing_ids:
+        print(f"Querying SIMBAD for {len(missing_ids)} stars...")
+        existing_properties = query_simbad_for_star_properties(
+            missing_ids, existing_properties, properties_file
+        )
+    else:
+        print("All star properties are already cached.")
+    
+    # Assign properties to the combined data
+    combined_data = assign_properties_to_data(combined_data, existing_properties, unique_ids)
+    
+    # Step 4: Calculate stellar parameters (temperature, luminosity)
+    from stellar_parameters import calculate_stellar_parameters
+    combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
+    
+    # Step 5: Update counts with all the statistics
+    counts['source_counts'] = source_counts
+    counts['estimation_results'] = estimation_results
+    
+    # Calculate plottable count (stars with both temperature and luminosity)
+    if 'Temperature' in combined_data.colnames and 'Luminosity' in combined_data.colnames:
+        import numpy as np
+        plottable_mask = (
+            (~np.isnan(combined_data['Temperature'])) &
+            (~np.isnan(combined_data['Luminosity']))
+        )
+        counts['plottable_count'] = int(np.sum(plottable_mask))
+    else:
+        print("Warning: 'Temperature' or 'Luminosity' column not found in combined_data.")
+        counts['plottable_count'] = 0
+    
+    counts['missing_temp_only'] = estimation_results.get('final_missing_temp', 0)
+    counts['missing_lum_only'] = estimation_results.get('final_missing_lum', 0)
+    
+    # Return all needed variables for PKL update check
+    return combined_data, counts, unique_ids, existing_properties, missing_ids
+
 
 def main():
+# CALL THE CACHE INITIALIZATION HERE - FIRST THING IN main()
+    ensure_cache_system_ready()
+
     # Parse command-line arguments
     if len(sys.argv) > 1:
         try:
@@ -99,6 +240,37 @@ def main():
             print("\n✔ EXACT CACHE HIT - using existing data")
         print("="*60 + "\n")
 
+# Debug: Check what smart_load_or_fetch returned
+        import numpy as np
+        
+        if hip_data is not None:
+            print(f"\nDEBUG after smart_load_or_fetch:")
+            print(f"  Hipparcos: {len(hip_data)} stars returned")
+            if 'Vmag' in hip_data.colnames:
+                vmags = hip_data['Vmag']
+                print(f"    Vmag range: {np.min(vmags):.2f} to {np.max(vmags):.2f}")
+                print(f"    Stars <= {mag_limit}: {np.sum(vmags <= mag_limit)}")
+        
+        if gaia_data is not None:
+    #        print(f"  Gaia: {len(gaia_data)} stars returned")
+    #        if 'Gmag' in gaia_data.colnames:
+    #            gmags = gaia_data['Gmag']
+    #            print(f"    Gmag range: {np.min(gmags):.2f} to {np.max(gmags):.2f}")
+    #            print(f"    Stars <= {mag_limit}: {np.sum(gmags <= mag_limit)}")
+
+            # Debug output for Gaia
+            print(f"  Gaia: {len(gaia_data)} stars returned")
+            if len(gaia_data) > 0:
+                gmags = gaia_data['Gmag'].filled(np.nan)
+                gmags = gmags[~np.isnan(gmags)]  # Remove NaN values
+                if len(gmags) > 0:
+                    print(f"    Gmag range: {np.min(gmags):.2f} to {np.max(gmags):.2f}")
+                    print(f"    Stars <= {mag_limit}: {len(gaia_data)}")
+                else:
+                    print(f"    All Gmag values are NaN")
+            else:
+                print(f"    No stars found in magnitude range")                
+
         # Step 2: Data Processing
         print("Starting data processing...")
         process_start = time.time()
@@ -110,6 +282,9 @@ def main():
         if hip_data is not None:
             hip_data = align_coordinate_systems(hip_data)
         
+
+
+        """
         # Select stars and combine data
         combined_data, counts = select_stars_by_magnitude(hip_data, gaia_data, mag_limit)
         if combined_data is None:
@@ -145,6 +320,22 @@ def main():
 #        combined_data, source_counts = calculate_stellar_parameters(combined_data)
         combined_data, source_counts, estimation_results = calculate_stellar_parameters(combined_data)
         print(f"Parameter calculations completed in {time.time() - params_start:.2f} seconds.")
+        """
+
+# Process all star data using consolidated function
+        combined_data, counts, unique_ids, existing_properties, missing_ids = process_stars(
+            hip_data, gaia_data, mag_limit
+        )
+        
+        if combined_data is None:
+            print("No valid stars found to process. Exiting.")
+            return
+        
+        # Extract the nested values from counts for use later in the code
+        source_counts = counts.get('source_counts', {})
+        estimation_results = counts.get('estimation_results', {})
+        
+        print(f"Data processing completed in {time.time() - process_start:.2f} seconds.")
 
         # Step 5: Analysis and Visualization
         print("Starting analysis and visualization...")
@@ -157,15 +348,36 @@ def main():
         from stellar_data_patches import apply_temperature_patches
         combined_df = apply_temperature_patches(combined_df)
 
-#        config = SimbadConfig.load_from_file()
-#        manager = SimbadQueryManager(config)
-#        updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+# Expand object types BEFORE generating report
+    #    print("Expanding object type descriptions...")
+    #    if 'Object_Type' in combined_df.columns:
+    #        combined_df['Object_Type_Desc'] = combined_df['Object_Type'].apply(expand_object_type)
+    #        print(f"Expanded object types for {combined_df['Object_Type_Desc'].notna().sum()} stars")
+    #    else:
+    #        print("Warning: Object_Type column not found in combined_df")
+    #        print(f"Available columns: {combined_df.columns.tolist()}")
 
+        # Expand object types BEFORE generating report
+        print("Expanding object type descriptions...")
+        from object_type_analyzer import expand_object_type  # Import here, right before use
+        if 'Object_Type' in combined_df.columns:
+            combined_df['Object_Type_Desc'] = combined_df['Object_Type'].apply(expand_object_type)
+            print(f"Expanded object types for {combined_df['Object_Type_Desc'].notna().sum()} stars")
+        else:
+            print("Warning: Object_Type column not found in combined_df")
+            print(f"Available columns: {combined_df.columns.tolist()}")           
+
+# Define properties file for PKL update
+        properties_file = 'star_properties_magnitude.pkl'
+        
         # Only update PKL if we actually added new stars to the dataset
-        if len([uid for uid in unique_ids if uid not in existing_properties]) > 0:
+        if len(missing_ids) > 0:  # Now using missing_ids from process_stars
             config = SimbadConfig.load_from_file()
             manager = SimbadQueryManager(config)
             updated_properties = manager.update_calculated_properties(combined_df, properties_file)
+            print(f"Updated PKL with calculated properties for {len(missing_ids)} new stars")
+        else:
+            print("No new stars added - PKL file unchanged")
 
         if len(combined_df) == 0:
             print("No stars available for visualization after processing.")
@@ -194,6 +406,20 @@ def main():
             'temp_le_zero': 0
         }
         combined_df.attrs['analysis'] = flattened_analysis
+
+        # Generate comprehensive report using ObjectTypeAnalyzer
+        print("Generating comprehensive report...")
+        analyzer = ObjectTypeAnalyzer()
+        report_data = analyzer.generate_complete_report(
+            combined_df,
+            mode='magnitude',
+            limit_value=mag_limit
+        )
+        print(f"Report generated with {len(report_data['sections'])} sections")
+
+        # Save the scientific report
+        report_mgr = ReportManager()
+        report_mgr.save_report(report_data, archive=True)
 
         # Prepare data for visualization
     #    prepared_df = prepare_2d_data(combined_data)

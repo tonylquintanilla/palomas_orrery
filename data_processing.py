@@ -179,7 +179,8 @@ def select_stars_by_magnitude(hip_data, gaia_data, mag_limit):
 
     # --- 1. Hipparcos stars (Vmag <= 4) ---
     if hip_data is not None:
-        bright_mask = hip_data['Vmag'] <= 4  # No need to compare with mag_limit here
+#        bright_mask = hip_data['Vmag'] <= 4  # No need to compare with mag_limit here
+        bright_mask = (hip_data['Vmag'] <= 4) & (hip_data['Vmag'] <= mag_limit)
         bright_stars = hip_data[bright_mask]
         if len(bright_stars) > 0:
             bright_stars['Source_Catalog'] = 'Hipparcos'

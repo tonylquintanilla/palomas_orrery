@@ -2,18 +2,35 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext
 import time
 from datetime import datetime
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 import numpy as np
 import pandas as pd
 
+try:
+    from object_type_analyzer import ObjectTypeAnalyzer
+    ANALYZER_AVAILABLE = True
+except ImportError:
+    ANALYZER_AVAILABLE = False
+    print("Warning: ObjectTypeAnalyzer not found. Object type analysis will be limited.")
+
+from report_manager import ReportManager    
+
+
 class PlotDataReportWidget(ttk.Frame):
     """Widget for displaying comprehensive plot data report."""
+    
     
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
         self.setup_ui()
         self.last_report_data = None
         self.generation_time = None
+        
+        # Initialize the object type analyzer if available
+        if ANALYZER_AVAILABLE:
+            self.object_analyzer = ObjectTypeAnalyzer()
+        else:
+            self.object_analyzer = None           
         
     def setup_ui(self):
         """Set up the UI with scrollable text display."""
@@ -96,6 +113,7 @@ class PlotDataReportWidget(ttk.Frame):
             "* Processing diagnostics\n"
             "* Notable features and warnings")
         
+
     def _add_clipboard_support(self, widget):
         """Add clipboard and selection support to text widget."""
         def _copy(event=None):
@@ -295,28 +313,6 @@ class PlotDataReportWidget(ttk.Frame):
                 percent = (count / total_stars * 100) if total_stars > 0 else 0
                 report_lines.append(f"  {catalog}: {count:,d} ({percent:.1f}%)")
                 
-    #    if 'Apparent_Magnitude' in combined_df.columns:
-    #        mag_array = combined_df['Apparent_Magnitude'].dropna()
-    #        if len(mag_array) > 0:
-    #            mag_min = mag_array.min()
-    #            mag_max = mag_array.max()
-    #            mag_mean = mag_array.mean()
-    #            mag_median = mag_array.median()
-    #            mag_std = mag_array.std()
-                
-    #            report_lines.append("\nMagnitude Range:")
-    #            report_lines.append(f"  Brightest: {mag_min:.2f}")
-    #            report_lines.append(f"  Faintest: {mag_max:.2f}")
-    #            report_lines.append(f"  Mean: {mag_mean:.2f}")
-    #            report_lines.append(f"  Median: {mag_median:.2f}")
-    #            report_lines.append(f"  Std Dev: {mag_std:.2f}")
-    #        else:
-    #            report_lines.append("\nMagnitude Range:")
-    #            report_lines.append("  No magnitude data available")
-    #    else:
-    #        report_lines.append("\nMagnitude Range:")
-    #        report_lines.append("  No magnitude column found")
-
         report_lines.append("\n" + "-" * 52)  # Shortened by 1
         report_lines.append("5. PROCESSING DIAGNOSTICS")
         report_lines.append("-" * 52)  # Shortened by 1
@@ -335,36 +331,64 @@ class PlotDataReportWidget(ttk.Frame):
             report_lines.append("    - Visualization generation")
             report_lines.append("  (Times shown when available)")
 
-        
-        # Section 6: Notable Features
+    
+        # Section 6: Object Type Analysis
         report_lines.append("\n" + "-" * 52)
-        report_lines.append("6. NOTABLE FEATURES")
+        report_lines.append("6. OBJECT TYPE ANALYSIS")
         report_lines.append("-" * 52)
-        
-        # Count special star types
-        if 'Stellar_Class' in combined_df:
-            stellar_classes = combined_df['Stellar_Class'].value_counts()
-            
-            # Main sequence stars
-            ms_count = sum(stellar_classes.get(cls, 0) for cls in ['O', 'B', 'A', 'F', 'G', 'K', 'M'])
-            report_lines.append(f"\nMain Sequence Stars: ~{ms_count:,d}")
-            
-            # Giants and supergiants
-            giants = combined_df[combined_df['Stellar_Class'].str.contains('III', na=False)].shape[0]
-            supergiants = combined_df[combined_df['Stellar_Class'].str.contains('I', na=False) & 
-                                    ~combined_df['Stellar_Class'].str.contains('III|IV|V', na=False)].shape[0]
-            
-            if giants > 0:
-                report_lines.append(f"Giants (Class III): {giants:,d}")
-            if supergiants > 0:
-                report_lines.append(f"Supergiants (Class I): {supergiants:,d}")
-        
-        # White dwarfs
-        if 'Object_Type_Desc' in combined_df:
-            wd_count = combined_df['Object_Type_Desc'].str.contains('White Dwarf', na=False).sum()
-            if wd_count > 0:
-                report_lines.append(f"White Dwarfs: {wd_count:,d}")
-        
+
+        # DEBUG: See what columns we actually have
+        print("\n" + "="*60)
+        print("DEBUG: Object Type Analysis")
+        print("="*60)
+        print(f"Total columns in dataframe: {len(combined_df.columns)}")
+        print(f"All columns: {combined_df.columns.tolist()}")
+
+        # Check for any column with 'type' in name
+        type_cols = [col for col in combined_df.columns if 'type' in col.lower()]
+        print(f"Columns with 'type' in name: {type_cols}")
+
+        # Check for any column with 'object' in name  
+        obj_cols = [col for col in combined_df.columns if 'object' in col.lower()]
+        print(f"Columns with 'object' in name: {obj_cols}")
+
+        # Try to find the actual column
+        type_column = None
+        possible_names = ['Object_Type_Desc', 'Object_Type', 'object_type', 'Object Type', 
+                        'object_type_desc', 'ObjectType', 'otype']
+
+        for name in possible_names:
+            if name in combined_df.columns:
+                type_column = name
+                non_null = combined_df[name].notna().sum()
+                print(f"Found '{name}' with {non_null} non-null values")
+                if non_null > 0:
+                    print(f"Sample values: {combined_df[name].dropna().head(3).tolist()}")
+                    break
+
+        print("="*60)
+
+        # Now run the analysis if we found the column
+        if type_column and combined_df[type_column].notna().any():
+            if self.object_analyzer:
+                analysis_results = self.object_analyzer.analyze_distribution(combined_df[type_column])
+                analysis_lines = self.object_analyzer.format_report_section(analysis_results)
+                report_lines.extend(analysis_lines)
+                self.last_analysis_results = analysis_results
+            else:
+                # Simple fallback
+                object_types = combined_df[type_column].value_counts()
+                report_lines.append(f"\nFound {len(object_types)} unique object types")
+                for obj_type, count in object_types.head(5).items():
+                    report_lines.append(f"  • {obj_type}: {count}")
+        else:
+            report_lines.append("\n  Object type information not available in dataset")
+            if type_column:
+                report_lines.append(f"  Column '{type_column}' found but all values are null")
+            else:
+                report_lines.append(f"  No object type column found")
+                report_lines.append(f"  Searched for: {', '.join(possible_names[:3])}")
+
         # Section 7: Warnings and Recommendations
         report_lines.append("\n" + "-" * 52)
         report_lines.append("7. WARNINGS AND RECOMMENDATIONS")
@@ -444,10 +468,16 @@ class PlotDataReportWidget(ttk.Frame):
         self.refresh_button.config(state='normal')
         self.export_button.config(state='normal')
     
+
     def refresh_report(self):
         """Refresh the report with the last data."""
         if self.last_report_data:
-            self.update_report(**self.last_report_data)
+            if isinstance(self.last_report_data, dict) and 'metadata' in self.last_report_data:
+                # New format
+                self.display_report(self.last_report_data)
+            else:
+                # Old format
+                self.update_report(**self.last_report_data)            
     
     def export_report(self):
         """Export the report to a text file."""
@@ -476,6 +506,138 @@ class PlotDataReportWidget(ttk.Frame):
             except Exception as e:
                 self.status_label.config(text=f"Export failed: {str(e)}")
 
+    def display_report(self, report_data: Dict):
+        """Display pre-generated report from visualization script."""
+        self.last_report_data = report_data
+        self.generation_time = datetime.now()
+        
+        self.report_display.config(state='normal')
+        self.report_display.delete('1.0', tk.END)
+        
+        # Use the analyzer to format the complete report
+        if self.object_analyzer:
+            report_lines = self.object_analyzer.format_complete_report(report_data)
+        else:
+            # Fallback if analyzer not available
+            report_lines = self._format_basic_report(report_data)
+        
+        # Display with formatting
+        for line in report_lines:
+            if line.startswith("="):
+                self.report_display.insert(tk.END, line + '\n', 'header')
+            elif line.startswith("-"):
+                self.report_display.insert(tk.END, line + '\n', 'subheader')
+            elif any(line.startswith(f"{i}.") for i in range(1, 8)):
+                self.report_display.insert(tk.END, line + '\n', 'subheader')
+            elif "WARNING" in line or "CRITICAL" in line:
+                self.report_display.insert(tk.END, line + '\n', 'warning')
+            elif line.startswith("✓") or "OK" in line:
+                self.report_display.insert(tk.END, line + '\n', 'success')
+            elif line.startswith("→"):
+                self.report_display.insert(tk.END, line + '\n', 'info')
+            else:
+                self.report_display.insert(tk.END, line + '\n')
+        
+        self.report_display.config(state='disabled')
+        self.status_label.config(text=f"Report updated: {datetime.now().strftime('%H:%M:%S')}")
+        self.refresh_button.config(state='normal')
+        self.export_button.config(state='normal')
+
+    def update_report_from_exchange(self, exchange_data: Dict):
+        """Update report from exchange data - handles both old and new formats."""
+        if 'report_data' in exchange_data:
+            # New format with pre-generated report
+            self.display_report(exchange_data['report_data'])
+        elif 'plot_stats' in exchange_data:
+            # Handle intermediate format
+            self._handle_plot_stats(exchange_data['plot_stats'])
+        else:
+            # Old format - create pseudo dataframe and use old method
+            self._handle_legacy_format(exchange_data)
+
+    def _handle_plot_stats(self, plot_stats: Dict):
+        """Handle plot statistics format (intermediate)."""
+        # Create a minimal dataframe for backward compatibility
+        import pandas as pd
+        
+        total_stars = plot_stats.get('total_stars', 0)
+        temp_valid = plot_stats.get('temp_valid', 0)
+        lum_valid = plot_stats.get('lum_valid', 0)
+        
+        if total_stars > 0:
+            pseudo_df = pd.DataFrame({
+                'Temperature': [1] * temp_valid + [0] * (total_stars - temp_valid),
+                'Luminosity': [1] * lum_valid + [0] * (total_stars - lum_valid),
+                'Source_Catalog': ['Unknown'] * total_stars,
+                'Apparent_Magnitude': [0] * total_stars
+            })
+        else:
+            pseudo_df = pd.DataFrame()
+        
+        counts_dict = plot_stats.get('catalog_counts', {})
+        processing_times = plot_stats.get('processing_times', {})
+        mode = plot_stats.get('mode', 'unknown')
+        limit_value = plot_stats.get('limit_value', 0)
+        
+        self.update_report(pseudo_df, counts_dict, processing_times, mode, limit_value)
+
+    def _handle_legacy_format(self, exchange_data: Dict):
+        """Handle the original format for backward compatibility."""
+        # Similar to _handle_plot_stats but directly from exchange_data
+        import pandas as pd
+        
+        total_stars = exchange_data.get('total_stars', 0)
+        temp_valid = exchange_data.get('temp_valid', 0)
+        lum_valid = exchange_data.get('lum_valid', 0)
+        
+        if total_stars > 0:
+            pseudo_df = pd.DataFrame({
+                'Temperature': [1] * temp_valid + [0] * (total_stars - temp_valid),
+                'Luminosity': [1] * lum_valid + [0] * (total_stars - lum_valid)
+            })
+        else:
+            pseudo_df = pd.DataFrame()
+        
+        self.update_report(
+            pseudo_df,
+            exchange_data.get('counts_dict', {}),
+            exchange_data.get('processing_times', {}),
+            exchange_data.get('mode', 'unknown'),
+            exchange_data.get('limit_value', 0)
+        )
+
+    def _format_basic_report(self, report_data: Dict) -> List[str]:
+        """Fallback formatter if ObjectTypeAnalyzer is not available."""
+        lines = []
+        lines.append("=" * 46)
+        lines.append("PLOT DATA REPORT")
+        lines.append("=" * 46)
+        
+        metadata = report_data.get('metadata', {})
+        lines.append(f"Generated: {metadata.get('generation_time', 'Unknown')}")
+        lines.append(f"Mode: {metadata.get('mode', 'Unknown')}")
+        lines.append(f"Limit: {metadata.get('limit_value', 'Unknown')}")
+        lines.append("")
+        
+        lines.append("Note: Full analysis requires ObjectTypeAnalyzer module")
+        
+        return lines               
+
+
+    def refresh_from_file(self):
+        """Load and display the latest report from file."""
+        try:
+            from report_manager import ReportManager
+            report_mgr = ReportManager()
+            report_data = report_mgr.load_last_report()
+            
+            if report_data:
+                self.display_report(report_data)
+                print("Report refreshed from file")
+            else:
+                print("No report file found")
+        except ImportError:
+            print("ReportManager not available")
 
 # Integration function to add to star_visualization_gui.py
 def add_plot_report_to_gui(parent_frame, column=1, row=1):
