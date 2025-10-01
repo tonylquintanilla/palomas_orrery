@@ -9,7 +9,8 @@ astroquery>=0.4.6     # Access to astronomical databases
 
 # Plotting and visualization
 plotly>=5.18.0        # Interactive plotting library
-kaleido=0.2.1        # Required for saving static plotly images
+matplotlib>=3.7.0     # Traditional plotting library for orbit visualizations
+kaleido==0.2.1        # Required for saving static plotly images (exact version needed)
 pillow>=10.0.0        # Image processing, required by kaleido
 
 # GUI and interface
@@ -23,5 +24,3 @@ pytz>=2023.3          # Timezone support
 # Network and web
 requests>=2.31.0      # HTTP library
 beautifulsoup4>=4.12.0  # HTML parsing for web scraping
-
-

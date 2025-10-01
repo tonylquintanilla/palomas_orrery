@@ -52,12 +52,29 @@ Git makes it easy to download and update the project. If you prefer, you can ski
 
 1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
 2. Download the installer for Windows
-3. Run the installer and click "Next" through all the screens (default options are fine)
-4. **Verify Git is installed:**
-   - Press `Windows Key`, type `cmd`, and press Enter to open Command Prompt
+3. Run the installer:
+   - **Important:** When you see the screen asking about additional options, **check the box for "Additional icons → On the Desktop"**
+   - This creates a handy Git Bash shortcut on your desktop
+   - Click "Next" through the remaining screens (other defaults are fine)
+4. After installation completes, you should see a "Git Bash" icon on your desktop
+5. **Close any open Command Prompt windows** (this is important!)
+6. **Verify Git is installed:**
+   - Press `Windows Key`, type `cmd`, and press Enter to open a **new** Command Prompt
    - Type: `git --version`
    - You should see something like `git version 2.43.0`
-   - If you see an error, restart your computer and try again
+   
+   **If you still see "git is not recognized" in Command Prompt:**
+   - The installation might not have fully registered yet
+   - Try opening "Git Bash" from your desktop icon first
+   - In Git Bash, type: `git --version` - this should work
+   - Then close Command Prompt completely, wait 10 seconds, and open a fresh one
+   - Try `git --version` again in the new Command Prompt - it should work now
+   - If it still doesn't work, restart your computer
+
+**What's the difference between Command Prompt and Git Bash?**
+- **Command Prompt (cmd):** Windows' standard terminal - you'll use this for running Python
+- **Git Bash:** A Linux-style terminal that comes with Git - useful for Git commands and has Git pre-configured
+- Both work for this project, but Command Prompt is simpler for beginners
 
 **Don't want to use Git?** That's okay! Skip to Step 3, Option B to download as a ZIP file.
 
@@ -79,14 +96,17 @@ Python is the programming language that runs Paloma's Orrery.
    - Click "Close" when done
 
 3. **Verify Python is installed:**
-   - Press `Windows Key`, type `cmd`, and press Enter to open Command Prompt
+   - **Close any open Command Prompt windows first** (they won't see the new PATH until reopened)
+   - Press `Windows Key`, type `cmd`, and press Enter to open a **new** Command Prompt
    - Type: `python --version`
    - You should see: `Python 3.13.x` (or 3.11.x, 3.12.x)
    - Type: `pip --version`
    - You should see: `pip 24.x.x from ...`
    
    **If you see "python is not recognized":**
-   - Python wasn't added to PATH
+   - Python wasn't added to PATH, OR you're using an old Command Prompt window
+   - Close Command Prompt completely and open a new one
+   - If still not working: Python wasn't added to PATH during installation
    - Solution: Uninstall Python (Control Panel → Programs), then reinstall and make sure you check "Add Python to PATH"
 
 #### Step 3: Download Paloma's Orrery
