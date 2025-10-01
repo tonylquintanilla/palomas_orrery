@@ -355,6 +355,18 @@ planetary_params = {
         # need period
     }, 
 
+    '2025 PN7': {                  # Rec #:50615430 (+COV) Soln.date: 2025-Aug-31_07:21:10 # obs: 27 (2013-2025) mean elements
+        'a': 1.004188800489803,         # Horizons: A, semi-major axis in AU
+        'e': .1071782474710749,         # Horizons: EC, eccentricity
+        'i': 1.984028877925589,         # Horizons: IN, inclination in degrees
+        'omega': 82.04919713631394,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 113.0180181480993,     # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2023-Jul-06.00',            # osculating date: 2460131.5
+        'TP': 2460048.1958280094,     # 2023-Apr-13.6958280094
+    #    'Tapo':       
+        # PER= 1.00631 julian years 367.5547275 d
+    },
+
     '2024 PT5': {                  # Epoch 2024-10-20, heliocentric
         'a': 1.012228628670663,   # Horizons: A, semi-major axis in AU
         'e': .02141074038624791,   # Horizons: EC, eccentricity
@@ -373,7 +385,7 @@ planetary_params = {
         'epoch': '2025-8-18',            # osculating date: 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
         'TP': 2460976.5756525602,     # 2025-10-28 1:48:56
         'Tapo': 2461185.0875000,              # 2026-05-24 14:06      
-        # 409.072695,    # 1.11998 julian years
+        # 409.072695,    # PER= 1.00631 julian years
     },
 
     'Bennu': {
@@ -619,7 +631,7 @@ planetary_params = {
                                             # PER= 97942.599927659 jy = 35773534.62 days
     },
 
-     'C/2025_R2': {                  # SWAN (C/2025 R2)  Rec #:90004920 (+COV) Soln.date: 2025-Sep-15_12:40:16  
+     'SWAN': {                  # SWAN (C/2025 R2)  Rec #:90004920 (+COV) Soln.date: 2025-Sep-15_12:40:16  
         # data arc: 2025-08-13 to 2025-09-14   obs: 83 (32 days
         'a': 798.2574580972854,   # Horizons: A, semi-major axis in AU
         'e': .9993692862141036,   # Horizons: EC, eccentricity

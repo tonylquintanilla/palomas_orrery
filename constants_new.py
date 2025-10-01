@@ -182,11 +182,12 @@ KNOWN_ORBITAL_PERIODS = {
     'Leucus': 4352.24,     # 11.92 * 365.25
     
     # Near-Earth asteroids
-    '2024 YR4': 922.84,    # 2.53 * 365.25
-    '2024 PT5': 368.75,    # 1.01 * 365.25
-    '2025 PY1': 409.072695,    # days from PER in julian years
-    '2023 JF': 493.37,     # 1.35 * 365.25
-    '2025 KV': 695.85,     # 1.91 * 365.25
+    '2024 YR4': 922.84,         # 2.53 * 365.25
+    '2025 PN7': 367.5547275,    # 1.00631 * 365.25   
+    '2024 PT5': 368.75,         # 1.01 * 365.25
+    '2025 PY1': 409.072695,     # days from PER in julian years
+    '2023 JF': 493.37,          # 1.35 * 365.25
+    '2025 KV': 695.85,          # 1.91 * 365.25
     
     # Comets (converted from years to days where applicable)
     'Halley': 27731.29226,          # 75.92414033 * 365.25 = 27731.29226; EPOCH=  2439907.5 ! 1968-Feb-21.0000000
@@ -194,7 +195,7 @@ KNOWN_ORBITAL_PERIODS = {
     'Hale-Bopp': 863279.5035,       # PER= 2363.5304681429 jy = 863279.5035
     'Ikeya-Seki': 319800.00,        # 876.0 * 365.25 (estimate)
     'ISON': 230970.00,              # 632.3 * 365.25 (pre-disruption)
-    'C/2025_R2': 8237831.493,       # PER= 22553.953438133 jy
+    'SWAN': 8237831.493,       # PER= 22553.953438133 jy
     
     # For hyperbolic/parabolic objects, period is undefined
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
@@ -536,6 +537,7 @@ def color_map(planet):
         'L5': 'red',
 
         'Kamo oalewa': 'cyan',
+        '2025 PN7': 'gold',        
         '2024 PT5': 'red',
         '2025 PY1': 'white',
         '2023 JF': 'white',
@@ -562,7 +564,7 @@ def color_map(planet):
         'ATLAS': 'white',
         'Churyumov': 'gold',
         '2I/Borisov': 'red',
-        'C/2025_R2': 'gold',
+        'SWAN': 'gold',
 
         'SOHO': 'white',
         'JamesWebb': 'gold',
@@ -695,6 +697,29 @@ INFO = {
         '  a first for asteroid sampling. The collected samples are planned to be returned to Earth in November 2027. Analyzing these \n' 
         '  samples will be crucial in determining Kamo\'oalewa\'s true origin (e.g., lunar fragment or main-belt asteroid) and providing \n' 
         '  insights into the early solar system',
+
+        '2025 PN7': 'Near-Earth Asteroid 2025 PN7 is a small, newly discovered celestial object that has garnered significant interest ' 
+        'because of its unique orbital relationship with Earth. It is not a threat to our planet.\n' 
+        '* Discovery: 2025 PN7 was first observed on August 2, 2025, by the Pan-STARRS 1 telescope at the Haleakala Observatory in Hawaii.\n' 
+        '* Classification: It is classified as a "quasi-satellite" or "quasi-moon" of Earth. This means it orbits the Sun, not the Earth, ' 
+        'but it does so in a 1:1 orbital resonance, following a path so similar to Earth\'s that it appears to "hover" nearby from our ' 
+        'perspective.\n' 
+        '* Asteroid Group: It belongs to the Arjuna asteroid group, which are Near-Earth Objects (NEOs) with low-eccentricity and ' 
+        'low-inclination orbits that closely resemble Earth\'s.\n' 
+        '* Size: The asteroid is estimated to be approximately 19 meters in diameter, making it one of the smallest quasi-satellites ever ' 
+        'discovered.\n' 
+        '* Orbit: 2025 PN7 orbits the Sun in roughly the same amount of time as Earth (about one year). From our vantage point, it appears ' 
+        'to loop around our planet, though it is not gravitationally bound to it like our Moon.\n '
+        '* Distance: At its closest approach, it can come within approximately 299,000 km of Earth, a distance similar to that of the Moon. ' 
+        'At its farthest, it can be tens of millions of kilometers away.\n' 
+        '* Visibility: Due to its small size and faintness (with an apparent magnitude of around 26), it is only visible with very large, ' 
+        'professional telescopes.\n' 
+        '* Long-term Companion: Although only recently discovered, orbital analysis suggests that 2025 PN7 has likely been in its ' 
+        'quasi-satellite state for at least 60 years and is expected to remain in this relationship for approximately another 60 years ' 
+        'before its orbit shifts.\n' 
+        '* Scientific Value: Objects like 2025 PN7 are scientifically significant as they provide a natural laboratory for studying ' 
+        'orbital dynamics and how asteroids can transition between different types of orbits. Their stable, Earth-like orbits also make' 
+        'them potential targets for future space missions.',
 
         '2024 PT5': 'Horizons: 2024 PT5. In late September 2024, Earth temporarily captured a small asteroid into its orbit, leading to it being ' 
         'dubbed Earth\'s "second moon". The object\'s official designation is 2024 PT5, but it was also referred to as a ' 
@@ -893,7 +918,10 @@ INFO = {
 
         'Ceres': 'Horizons: A801 AA. The largest object in the asteroid belt, considered a dwarf planet.',
 
-        'Apophis': 'Horizons: 2004 MN4. Near-Earth asteroid with a close approach in 2029. Retrograde (left-handed) orbit.\n\n' 
+        'Apophis': '***SET MANUAL SCALE TO 0.005 AU TO SEE THE CLOSE APPROACH TO EARTH AND MOON***\n\n'
+        'Horizons: 2004 MN4. Near-Earth asteroid with a close approach in 2029. Retrograde (left-handed) orbit.\n' 
+        '* Closest approach to the Earth: 2029-04-13 21:46 UTC; approximately 31,600 km from the surface.\n'
+        '* Closest approach to the Moon: 2029-04-14 14:32 UTC; approximately 94,200 km from the surface.\n'
         '* Missions:\n' 
         '  * OSIRIS-APEX (Origins, Spectral Interpretation, Resource Identification, and Security – Apophis EXplorer) - NASA:\n' 
         '    Scheduled to rendezvous with Apophis shortly after its 2029 Earth close-approach.\n' 
@@ -1865,7 +1893,8 @@ INFO = {
 
         'ATLAS': 'Horizons: C/2024 G3. Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
 
-        'C/2025_R2': 'Comet C/2025 R2 (SWAN) is a non-periodic comet that was discovered on September 11, 2025.\n' 
+        'SWAN': '***TO VISUALIZE THE COMPLETE ORBIT, SET MANUAL SCALE TO AT LEAST 1500 AU***\n\n'
+        'Comet C/2025 R2 (SWAN) is a non-periodic comet that was discovered on September 11, 2025.\n' 
         '* The discovery was made by Ukrainian amateur astronomer Vladimir Bezugly, who identified the comet in images from the Solar Wind ' 
         'Anisotropies (SWAN) instrument aboard the Solar and Heliospheric Observatory (SOHO) spacecraft.\n' 
         '* The comet has a long, impressive tail, which has been observed to be about 2 degrees long, or roughly the length of five full moons.\n' 
