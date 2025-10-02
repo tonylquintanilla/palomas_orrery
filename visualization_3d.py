@@ -537,17 +537,30 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             colorscale=colorscale,
             cmin=0,
             cmax=1,
+
+    #        colorbar=dict(
+    #            title='K',
+    #            tickmode='array',
+    #            tickvals=[
+    #                (temp - temp_min) / (temp_max - temp_min)
+    #                for temp in sorted(temperature_colors.keys())
+    #            ],
+    #            ticktext=[f"{temp:,}" for temp in sorted(temperature_colors.keys())],
+    #            tickfont=dict(color='white'),
+    #            titlefont=dict(color='white')
+    #        ),
+
             colorbar=dict(
-                title='K',
+                title=dict(text='K', font=dict(color='white')),
                 tickmode='array',
                 tickvals=[
                     (temp - temp_min) / (temp_max - temp_min)
                     for temp in sorted(temperature_colors.keys())
                 ],
                 ticktext=[f"{temp:,}" for temp in sorted(temperature_colors.keys())],
-                tickfont=dict(color='white'),
-                titlefont=dict(color='white')
+                tickfont=dict(color='white')
             ),
+
             showscale=True,
         ),
         text=combined_df[regular_stars_mask]['Hover_Text'].values,

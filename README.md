@@ -122,7 +122,7 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
 2. **Open Command Prompt:**
    - Press `Windows Key`, type `cmd`, press Enter
 
-3. **Navigate to your chosen location:**
+3. **Navigate to where you want to save the project:**
    ```bash
    cd C:\Users\YourName\Documents
    ```
@@ -132,12 +132,29 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
    ```bash
    git clone https://github.com/tonylquintanilla/palomas_orrery.git
    ```
-   This will take 30-60 seconds to download.
+   This should only take a few seconds (the project itself is small - the large cache files come separately).
+   
+   Git will create a new folder called `palomas_orrery` and download all the files into it.
 
-5. **Enter the project folder:**
+5. **Enter the new project folder:**
+   
+   You should still be in your Documents folder. Now navigate into the new `palomas_orrery` folder that Git just created:
    ```bash
    cd palomas_orrery
    ```
+   
+   **If that doesn't work** (you get "The system cannot find the path specified"):
+   - You may have navigated away from Documents
+   - Use the full path instead:
+   ```bash
+   cd C:\Users\YourName\Documents\palomas_orrery
+   ```
+   (Replace `YourName` with your actual Windows username)
+   
+   **To verify you're in the right place:**
+   - Type: `dir` and press Enter
+   - You should see files like `palomas_orrery.py`, `requirements.txt`, and many `.py` files
+   - If you don't see these files, you're in the wrong folder
 
 **Option B - Download ZIP (No Git required):**
 
@@ -171,14 +188,35 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
    - Go to [github.com/tonylquintanilla/palomas_orrery/releases](https://github.com/tonylquintanilla/palomas_orrery/releases)
    - Find the latest release (look for v1.0.0 or higher)
    - Scroll down to **"Assets"**
-   - Click on `palomas_orrery_cache_v1.0.0.zip` to download (120 MB - may take 1-2 minutes)
+   - Click on `cache_files_compressed.zip` to download (117 MB - may take 1-2 minutes)
+   - **Note:** You'll also see "Source code (zip)" and "Source code (tar.gz)" - ignore these, you already have the code from Step 3
 
 2. **Extract cache files to your project folder:**
-   - Find the downloaded `palomas_orrery_cache_v1.0.0.zip` file
-   - Right-click on it and select **"Extract All..."**
-   - **IMPORTANT:** For the destination, navigate to your `palomas_orrery` (or `palomas_orrery-main`) folder
-   - The cache files should end up in the same folder as `palomas_orrery.py` (not in a subfolder!)
-   - Click **"Extract"**
+   - Find the downloaded `cache_files_compressed.zip` file (usually in your Downloads folder)
+   - **Important:** Don't just click to open it! You need to extract it properly.
+   
+   **To access the Extract menu:**
+   - **With a mouse:** Right-click on the ZIP file
+   - **With a trackpad:** Try one of these:
+     - Two-finger tap on the file
+     - Tap with two fingers simultaneously
+     - Click with one finger while holding a second finger on the trackpad
+     - OR use keyboard: Click the file once to select it, then press `Shift+F10`
+   
+   - You should see a context menu appear
+   - Look for **"Extract All..."** in the menu and click it
+   - A window will appear asking where to extract
+   - Click **"Browse..."** and navigate to your **`palomas_orrery` folder** (the main project folder where `palomas_orrery.py` is located)
+   - If you used Option B (ZIP download), your folder might be called `palomas_orrery-main` instead
+   - Click **"Select Folder"**, then click **"Extract"**
+   
+   **If you still can't find "Extract All..." or it's easier to just copy:**
+   - Single-click the ZIP file to open it (you'll see the contents)
+   - Press `Ctrl+A` to select all files inside
+   - Press `Ctrl+C` to copy them
+   - Open a new File Explorer window and navigate to your **`palomas_orrery` folder** (this is your main project folder)
+   - Press `Ctrl+V` to paste all the files there
+   - This works perfectly fine and is often simpler!
 
 3. **Verify the files are in the right place:**
    - Open your `palomas_orrery` folder in File Explorer
@@ -187,7 +225,9 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
      - `star_properties_distance.pkl` (from the cache)
      - `star_properties_magnitude.pkl` (from the cache)
      - Various `.vot` files (from the cache)
-   - If the cache files are in a subfolder, move them to the main folder
+     - Many other `.py` files (the program code)
+   - **Everything should be together in one folder** - the cache files and the Python code files should all be in the same `palomas_orrery` directory
+   - If the cache files are in a subfolder, move them up to the main `palomas_orrery` folder
 
 #### Step 5: Install Python Libraries
 
@@ -207,8 +247,18 @@ Python libraries (also called "packages") are additional tools that Paloma's Orr
    pip install -r requirements.txt
    ```
    This reads the `requirements.txt` file and installs everything automatically. This should take 2-5 minutes.
+   
+   **If you get an error like "= is not a valid operator. Did you mean == ?":**
+   - There's a typo in the requirements.txt file that needs fixing
+   - Fix it using Notepad:
+     1. Navigate to your `palomas_orrery` folder in File Explorer
+     2. Right-click on `requirements.txt` and select "Open with" → "Notepad"
+     3. Find the line that says `kaleido=0.2.1`
+     4. Change the single `=` to double `==` so it reads `kaleido==0.2.1`
+     5. Click File → Save, then close Notepad
+     6. Try the `pip install -r requirements.txt` command again
 
-   **If that doesn't work (you see errors), use the manual method:**
+   **If the simple command doesn't work for other reasons, use the manual method:**
    
    Copy this entire command and paste it into Command Prompt (right-click to paste):
    ```bash
@@ -274,13 +324,12 @@ You're almost there! Now let's start the program.
 
 #### Plotly or visualization errors
 
-**Problem:** Incompatible Python or Plotly version.
+**Problem:** Visualization features not working properly.
 
 **Solution:**
 1. Check your Python version: `python --version`
 2. Make sure it's 3.11, 3.12, or 3.13
-3. If you're using a brand new Python version (like 3.14 if it just came out), downgrade to 3.13
-4. Reinstall plotly and kaleido:
+3. Reinstall plotly and kaleido:
    ```bash
    pip uninstall plotly kaleido
    pip install plotly>=5.18.0 kaleido==0.2.1
@@ -359,6 +408,24 @@ Once everything is installed and the program is running:
 - **Storage:** 300MB (includes all cache files)
 - **Internet:** Required for initial download and for querying objects not in cache
 - **Display:** 1280×720 minimum resolution recommended
+
+### Optional: Installing a Code Editor
+
+While not required to run Paloma's Orrery, if you want to explore or modify the code, a good code editor makes it much easier:
+
+**Visual Studio Code (VS Code) - Recommended:**
+1. Download from [code.visualstudio.com](https://code.visualstudio.com/)
+2. Install with default options
+3. Open VS Code and install the Python extension (search for "Python" in the Extensions panel)
+4. You can then open your entire `palomas_orrery` folder in VS Code: File → Open Folder
+
+**Why use a code editor?**
+- Syntax highlighting makes code easier to read
+- Built-in error detection catches typos
+- Easy navigation between files
+- Integrated terminal
+
+**For now though:** Notepad works fine for small edits like fixing the requirements.txt file!
 
 ## Usage
 

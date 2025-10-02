@@ -349,16 +349,29 @@ def create_hr_diagram(combined_df, counts_dict, mag_limit=None, max_light_years=
                 colorscale=colorscale,
                 cmin=0,
                 cmax=1,
+
+        #        colorbar=dict(
+        #            title='Temperature (K)',
+        #            tickmode='array',
+        #            tickvals=[
+        #                (temp - temp_min) / (temp_max - temp_min)
+        #                for temp in sorted(temperature_colors.keys())
+        #            ],
+        #            ticktext=[f'{temp:,}' for temp in sorted(temperature_colors.keys())],
+        #            tickfont=dict(color='white'),
+        #            titlefont=dict(color='white')
+
                 colorbar=dict(
-                    title='Temperature (K)',
+                    title=dict(text='Temperature (K)', font=dict(color='white')),
                     tickmode='array',
                     tickvals=[
                         (temp - temp_min) / (temp_max - temp_min)
                         for temp in sorted(temperature_colors.keys())
                     ],
                     ticktext=[f'{temp:,}' for temp in sorted(temperature_colors.keys())],
-                    tickfont=dict(color='white'),
-                    titlefont=dict(color='white')
+                    tickfont=dict(color='white')
+        #        )
+
                 ) if catalog == 'Hipparcos' else None,
                 showscale=(catalog == 'Hipparcos'),
             ),
