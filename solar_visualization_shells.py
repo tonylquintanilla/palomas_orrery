@@ -975,7 +975,7 @@ def create_sun_outer_corona_shell():
             marker=dict(
                 size=0.75,
                 color='rgb(25, 25, 112)',
-                opacity=0.5
+                opacity=0.8
             ),
             name='Sun: Outer Corona',
             text=text_array,

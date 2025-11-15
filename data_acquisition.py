@@ -19,6 +19,7 @@ from astropy.table import Table
 from astropy.coordinates import Angle
 from astropy.io import votable
 from astropy.io.votable import parse_single_table
+from vot_cache_manager import VOTCacheManager
 
 # Optional: If big queries often fail, increase the default timeout or choose a different mirror.
 # Vizier.TIMEOUT = 300
@@ -84,7 +85,11 @@ def load_or_fetch_hipparcos_data(v, hip_data_file, mode='distance',
         hip_data = result[0]
         print(f"Number of Hipparcos entries fetched: {len(hip_data)}")
         # Save to disk
-        hip_data.write(hip_data_file, format='votable', overwrite=True)
+    #    hip_data.write(hip_data_file, format='votable', overwrite=True)
+        # Use safe save with protection against overwriting comprehensive caches
+        vot_mgr = VOTCacheManager()
+        vot_mgr.safe_save_vot(hip_data, hip_data_file)
+
         print(f"Saved Hipparcos data to {hip_data_file}")
         return hip_data
 
@@ -130,7 +135,11 @@ def load_or_fetch_gaia_data(v, gaia_data_file, mode='distance',
         gaia_data = result[0]
         print(f"Number of Gaia entries fetched: {len(gaia_data)}")
         # Save to disk
-        gaia_data.write(gaia_data_file, format='votable', overwrite=True)
+    #    gaia_data.write(gaia_data_file, format='votable', overwrite=True)
+        # Use safe save with protection against overwriting comprehensive caches
+        vot_mgr = VOTCacheManager()
+        vot_mgr.safe_save_vot(gaia_data, gaia_data_file)
+
         print(f"Saved Gaia data to {gaia_data_file}")
         return gaia_data
 

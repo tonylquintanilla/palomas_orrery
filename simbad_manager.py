@@ -190,7 +190,8 @@ class SimbadQueryManager:
         self.simbad = self._create_simbad_instance()
 
         # ADD THIS LINE - Initialize VOT cache manager
-        self.vot_manager = VOTCacheManager()
+#        self.vot_manager = VOTCacheManager()
+        self.vot_manager = VOTCacheManager(cache_dir='star_data')
         
         # ADD THIS LOG MESSAGE (optional)
         logger.info(f"VOT cache protection enabled")        
@@ -204,9 +205,8 @@ class SimbadQueryManager:
         
         # Protect PKL files
         pkl_files = [
-            'star_properties_distance.pkl',
-            'star_properties_magnitude.pkl',
-            'star_properties.pkl'
+            'star_data/star_properties_distance.pkl',
+            'star_data/star_properties_magnitude.pkl',
         ]
         
         for pkl_file in pkl_files:
@@ -520,16 +520,24 @@ class SimbadQueryManager:
             Dictionary of star properties
         """
         if mode == 'distance':
-            properties_file = 'star_properties_distance.pkl'
+            properties_file = 'star_data/star_properties_distance.pkl'
             vot_files = {
-                'hipparcos': 'hipparcos_data_distance.vot',
-                'gaia': 'gaia_data_distance.vot'
+    #            'hipparcos': 'hipparcos_data_distance.vot',
+    #            'gaia': 'gaia_data_distance.vot'
+
+                'hipparcos': 'star_data/hipparcos_data_distance.vot',
+                'gaia': 'star_data/gaia_data_distance.vot'
+
             }
         else:  # magnitude
-            properties_file = 'star_properties_magnitude.pkl'
+            properties_file = 'star_data/star_properties_magnitude.pkl'
             vot_files = {
-                'hipparcos': 'hipparcos_data_magnitude.vot',
-                'gaia': 'gaia_data_magnitude.vot'
+    #            'hipparcos': 'hipparcos_data_magnitude.vot',
+    #            'gaia': 'gaia_data_magnitude.vot'
+
+                'hipparcos': 'star_data/hipparcos_data_magnitude.vot',
+                'gaia': 'star_data/gaia_data_magnitude.vot'
+
             }
         
         # Check if rebuild is needed
@@ -690,9 +698,8 @@ class SimbadQueryManager:
         
         # Check PKL files
         pkl_files = [
-            'star_properties_distance.pkl',
-            'star_properties_magnitude.pkl',
-            'star_properties.pkl'
+            'star_data/star_properties_distance.pkl',
+            'star_data/star_properties_magnitude.pkl',
         ]
         
         for pkl_file in pkl_files:

@@ -44,7 +44,8 @@ class VOTCacheMetadata:
 class VOTCacheManager:
     """Manager for safe VOT cache file operations"""
     
-    def __init__(self, cache_dir: str = '.'):
+#    def __init__(self, cache_dir: str = '.'):
+    def __init__(self, cache_dir: str = 'star_data'):
         self.cache_dir = cache_dir
         self.metadata_suffix = '_metadata.json'
         self.backup_suffix = '.backup'
@@ -52,22 +53,22 @@ class VOTCacheManager:
         
         # Protected base VOT files (recovered archives)
         self.protected_files = {
-            'hipparcos_data_distance.vot': {
+            'star_data/hipparcos_data_distance.vot': {
                 'type': 'distance',
                 'limit': 100.1,  # 100.1 light-years
                 'catalog': 'hipparcos'
             },
-            'hipparcos_data_magnitude.vot': {
+            'star_data/hipparcos_data_magnitude.vot': {
                 'type': 'magnitude', 
                 'limit': 9.0,  # V magnitude 9
                 'catalog': 'hipparcos'
             },
-            'gaia_data_distance.vot': {
+            'star_data/gaia_data_distance.vot': {
                 'type': 'distance',
                 'limit': 100.1,
                 'catalog': 'gaia'
             },
-            'gaia_data_magnitude.vot': {
+            'star_data/gaia_data_magnitude.vot': {
                 'type': 'magnitude',
                 'limit': 9.0,
                 'catalog': 'gaia'
@@ -405,16 +406,24 @@ def integrate_vot_protection_with_simbad_manager(simbad_manager):
     def rebuild_properties_from_all_caches(self, mode='distance'):
         """Rebuild PKL properties from VOT and existing caches"""
         if mode == 'distance':
-            properties_file = 'star_properties_distance.pkl'
+            properties_file = 'star_data/star_properties_distance.pkl'
             vot_files = {
-                'hipparcos': 'hipparcos_data_distance.vot',
-                'gaia': 'gaia_data_distance.vot'
+        #        'hipparcos': 'hipparcos_data_distance.vot',
+        #        'gaia': 'gaia_data_distance.vot'
+
+                'hipparcos': 'star_data/hipparcos_data_distance.vot',
+                'gaia': 'star_data/gaia_data_distance.vot'
+
             }
         else:  # magnitude
-            properties_file = 'star_properties_magnitude.pkl'
+            properties_file = 'star_data/star_properties_magnitude.pkl'
             vot_files = {
-                'hipparcos': 'hipparcos_data_magnitude.vot',
-                'gaia': 'gaia_data_magnitude.vot'
+        #        'hipparcos': 'hipparcos_data_magnitude.vot',
+        #        'gaia': 'gaia_data_magnitude.vot'
+
+                'hipparcos': 'star_data/hipparcos_data_magnitude.vot',
+                'gaia': 'star_data/gaia_data_magnitude.vot'
+
             }
         
         return self.vot_manager.rebuild_pkl_from_caches(

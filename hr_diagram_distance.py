@@ -61,17 +61,40 @@ def ensure_cache_system_ready():
     import pickle
     
     # Create empty PKL files if they don't exist
-    pkl_files = [
-        'star_properties_distance.pkl',
-        'star_properties_magnitude.pkl'
-    ]
     
+    pkl_files = [
+        'star_data/star_properties_distance.pkl',
+        'star_data/star_properties_magnitude.pkl'
+    ] 
+   
     for pkl_file in pkl_files:
-        if not os.path.exists(pkl_file):
-            print(f"Creating missing cache: {pkl_file}")
-            with open(pkl_file, 'wb') as f:
-                pickle.dump({}, f)
+#        if not os.path.exists(pkl_file):
+#            print(f"Creating missing cache: {pkl_file}")
+#            with open(pkl_file, 'wb') as f:
+#                pickle.dump({}, f)
         
+        if not os.path.exists(pkl_file):
+            print(f"\n⚠️  WARNING: Cache file not found: {pkl_file}")
+            print(f"   This will create an EMPTY cache file.")
+            print(f"   If you have existing cache data, this may indicate a path problem.")
+            response = input(f"   Create empty cache at this location? (y/n): ")
+            if response.lower() == 'y':
+                print(f"   Creating empty cache: {pkl_file}")
+                with open(pkl_file, 'wb') as f:
+                    pickle.dump({}, f)
+            else:
+                print(f"   Skipping cache creation. Please check your file paths.")
+                print(f"   Expected location: {pkl_file}")
+        elif os.path.getsize(pkl_file) < 1000:  # Less than 1KB = suspicious
+                print(f"\n⚠️  WARNING: Cache file is suspiciously small: {pkl_file}")
+                print(f"   Current size: {os.path.getsize(pkl_file)} bytes")
+                print(f"   Expected: ~3MB (distance) or ~32MB (magnitude)")
+                print(f"   This may indicate corruption or path misconfiguration.")
+                response = input(f"   Continue anyway? (y/n): ")
+                if response.lower() != 'y':
+                    print(f"   Aborting. Please check your cache files.")
+                    sys.exit(1)        
+
     # Quick status check using existing module
     try:
         from simbad_manager import SimbadQueryManager, SimbadConfig
@@ -79,7 +102,7 @@ def ensure_cache_system_ready():
         manager = SimbadQueryManager(config)
         
         # Check if distance PKL has any data
-        props = manager.load_existing_properties('star_properties_distance.pkl')
+        props = manager.load_existing_properties('star_data/star_properties_distance.pkl')
         if len(props) == 0:
             print("\nWarning: star_properties_distance.pkl is empty")
             print("  Stars will appear gray until properties are fetched from SIMBAD")
@@ -128,7 +151,7 @@ def process_stars(hip_data, gaia_data, max_light_years):
         assign_properties_to_data
     )
     
-    properties_file = 'star_properties_distance.pkl'
+    properties_file = 'star_data/star_properties_distance.pkl'
     existing_properties = load_existing_properties(properties_file)
     unique_ids = generate_unique_ids(combined_data)
     
@@ -206,11 +229,11 @@ def main():
         hip_data_file = 'hipparcos_data_distance.vot'
         gaia_data_file = 'gaia_data_distance.vot'
         
+#        hip_data_file = 'star_data/hipparcos_data_distance.vot'
+#        gaia_data_file = 'star_data/gaia_data_distance.vot'
+
         # Load or fetch data with parallax constraint
         parallax_constraint = f">={min_parallax_mas}"
-
-    #    hip_data = fetch_hipparcos_data(v, hip_data_file, min_parallax_mas)
-    #    gaia_data = fetch_gaia_data(v, gaia_data_file, min_parallax_mas)
 
         hip_data = smart_load_or_fetch_hipparcos(v, hip_data_file,
                                                 mode='distance',
@@ -279,7 +302,7 @@ def main():
         print("Retrieving star properties...")
         properties_start = time.time()
         
-        properties_file = 'star_properties_distance.pkl'
+        properties_file = 'star_data/star_properties_distance.pkl'
         existing_properties = load_existing_properties(properties_file)
         unique_ids = generate_unique_ids(combined_data)
         
@@ -376,7 +399,7 @@ def main():
             print(f"Abs_Mag: {mizar['Abs_Mag'].iloc[0]}")
 
         # Define properties file for PKL update
-        properties_file = 'star_properties_distance.pkl'      
+        properties_file = 'star_data/star_properties_distance.pkl'      
 
         # Only update PKL if we actually added new stars to the dataset
 #        if len([uid for uid in unique_ids if uid not in existing_properties]) > 0:

@@ -491,12 +491,19 @@ class PlotDataReportWidget(ttk.Frame):
         mode = self.last_report_data.get('mode', 'unknown')
         default_name = f"plot_report_{mode}_{timestamp}.txt"
         
+#        filename = filedialog.asksaveasfilename(
+#            defaultextension=".txt",
+#            filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
+#            initialfile=default_name
+#        )
+        
         filename = filedialog.asksaveasfilename(
             defaultextension=".txt",
             filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
-            initialfile=default_name
+            initialfile=default_name,
+            initialdir="reports"
         )
-        
+
         if filename:
             try:
                 report_text = self.report_display.get('1.0', tk.END)

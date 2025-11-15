@@ -29,7 +29,8 @@ center_object_var = None  # Will be set from the main module
 _startup_complete = False  # Add this line
 
 # Constants
-ORBIT_PATHS_FILE = "orbit_paths.json"
+# ORBIT_PATHS_FILE = "orbit_paths.json"
+ORBIT_PATHS_FILE = "data/orbit_paths.json"
 DEFAULT_DAYS_AHEAD = 730  # Default to looking 2 years ahead
 MAX_DATA_AGE_DAYS = 90  # Maximum age for data before pruning (optional)
 
@@ -39,11 +40,13 @@ last_update_time = None
 
 def repair_cache_on_load():
     """Load cache and remove only corrupted entries"""
-    if not os.path.exists('orbit_paths.json'):
+#    if not os.path.exists('orbit_paths.json'):
+    if not os.path.exists('data/orbit_paths.json'):    
         return {}
     
     try:
-        with open('orbit_paths.json', 'r') as f:
+#        with open('orbit_paths.json', 'r') as f:
+        with open('data/orbit_paths.json', 'r') as f:
             cache_data = json.load(f)
         
         # Track what we remove
@@ -70,7 +73,8 @@ def repair_cache_on_load():
             print(f"[CACHE REPAIR] Kept {len(cleaned_cache)} valid entries")
             
             # Save the cleaned cache back
-            with open('orbit_paths.json', 'w') as f:
+    #        with open('orbit_paths.json', 'w') as f:
+            with open('data/orbit_paths.json', 'w') as f:
                 json.dump(cleaned_cache, f)
         
         return cleaned_cache
@@ -111,6 +115,10 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
     Returns:
         dict: The loaded orbit paths data, with corrupted entries removed
     """
+    print(f"\n{'='*60}")
+    print(f"LOADING ORBIT CACHE FROM: {file_path}")
+    print(f"{'='*60}\n")
+
     global status_display
     
     try:
@@ -205,7 +213,9 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
             update_status(status_msg)
             
             # Save cleaned data back to file
-            save_orbit_paths(cleaned_data, file_path)
+        #    save_orbit_paths(cleaned_data, file_path)  # removed for avoid cache overwrites
+            print(f"\n[SAFETY] Auto-save DISABLED. Original file preserved.")
+            print(f"[SAFETY] If entries are truly corrupted, use verify_orbit_cache.py to repair safely.")        
         else:
             # Report success
             if total_entries > 0:
@@ -325,28 +335,66 @@ def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
     if data is None:
         data = orbit_paths_over_time
     
-    # Safety check: Don't save empty or tiny data over existing large file
+    # ENHANCED SAFETY CHECK: Cache should never shrink significantly (we don't prune)
     if os.path.exists(file_path):
         try:
-            current_size = os.path.getsize(file_path)
+            existing_size = os.path.getsize(file_path)
+            existing_size_mb = existing_size / (1024 * 1024)
+            
             # Serialize data to check its size
             data_str = json.dumps(data)
-            new_size = len(data_str)
+            new_size = len(data_str.encode('utf-8'))
+            new_size_mb = new_size / (1024 * 1024)
             
-            # If current file is > 1MB and new data is < 1KB, something's wrong
-            if current_size > 1_000_000 and new_size < 1000:
-                print(f"[SAFETY] Refusing to overwrite large file ({current_size:,} bytes) with small data ({new_size:,} bytes)")
-                print(f"[SAFETY] Data has only {len(data)} entries")
+            # Count entries for better diagnostics
+            try:
+                with open(file_path, 'r') as f:
+                    existing_data = json.load(f)
+                    existing_entry_count = len(existing_data)
+            except:
+                existing_entry_count = "unknown"
+            
+            new_entry_count = len(data)
+            
+            # Calculate reduction percentage
+            size_reduction_percent = ((existing_size - new_size) / existing_size * 100) if existing_size > 0 else 0
+            
+            # CRITICAL: Any reduction > 5% is suspicious (cache should only grow)
+            if existing_size_mb > 1 and size_reduction_percent > 5:
+                error_msg = (
+                    f"\n{'='*70}\n"
+                    f"CRITICAL: BLOCKED CACHE OVERWRITE - SIZE REDUCTION DETECTED\n"
+                    f"{'='*70}\n"
+                    f"Existing: {existing_size_mb:.1f} MB ({existing_entry_count} entries)\n"
+                    f"New data: {new_size_mb:.1f} MB ({new_entry_count} entries)\n"
+                    f"Reduction: {size_reduction_percent:.1f}%\n"
+                    f"\n"
+                    f"This cache never prunes old data - it should only grow.\n"
+                    f"Size reduction indicates:\n"
+                    f"  - Validation incorrectly rejected entries during load\n"
+                    f"  - orbit_paths_over_time global wasn't fully loaded\n"
+                    f"  - Cache corruption or processing bug\n"
+                    f"\n"
+                    f"SAVE BLOCKED - Original cache preserved at {file_path}\n"
+                    f"{'='*70}\n"
+                )
+                print(error_msg)
                 
-                # Create an emergency backup
-                emergency_backup = file_path + '.emergency.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+                # Create emergency backup
+                emergency_backup = file_path + '.emergency_' + datetime.now().strftime('%Y%m%d_%H%M%S')
                 shutil.copy2(file_path, emergency_backup)
-                print(f"[SAFETY] Created emergency backup: {emergency_backup}")
+                print(f"[EMERGENCY BACKUP] Created: {emergency_backup}")
                 
-                # Still refuse to save
-                raise ValueError("Safety check failed: Attempting to save suspiciously small data over large file")
+                # Update status if available
+                update_status(f"SAVE BLOCKED: Cache shrunk by {size_reduction_percent:.1f}%")
+                
+                # Stop the save operation
+                raise ValueError(f"Safety check failed: Cache reduced by {size_reduction_percent:.1f}%")
+                
+        except ValueError:
+            raise  # Re-raise our safety exception
         except (OSError, IOError) as e:
-            print(f"[WARNING] Could not check file size: {e}")
+            print(f"[WARNING] Could not perform safety check: {e}")
     
     # Create a temporary file first
     temp_file = file_path + '.tmp'
@@ -519,6 +567,12 @@ def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', i
     # Handle special case for Planet 9 (calculated instead of fetched)
     if obj_info.get('id') == 'planet9_placeholder':
         return calculate_planet9_orbit(start_date, end_date, interval)
+    
+    # Skip JPL Horizons for exoplanets and binary stars - they use Keplerian orbit calculations
+    if obj_info.get('object_type') in ['exoplanet', 'exo_host_star']:
+        return None
+    if id_type in ['exoplanet', 'binary_star_a', 'binary_star_b', 'barycenter']:
+        return None    
     
     try:
         # Use the object's id and id_type
@@ -1158,58 +1212,6 @@ def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun",
     )
     
     return updated_count, already_current, len(object_list), time_saved_hours
-
-def prune_old_data(max_age_days=MAX_DATA_AGE_DAYS):
-    """
-    Prune very old data points to keep the file size manageable.
-    
-    Parameters:
-        max_age_days: Maximum age of data to keep (default: 90 days)
-        
-    Returns:
-        int: Number of data points pruned
-    """
-    global orbit_paths_over_time
-    
-    if not max_age_days or max_age_days <= 0:
-        return 0
-        
-    today = datetime.today()
-    cutoff_date = today - timedelta(days=max_age_days)
-    cutoff_str = cutoff_date.strftime("%Y-%m-%d")
-    
-    points_removed = 0
-    
-    for key, orbit_data in orbit_paths_over_time.items():
-        if "data_points" in orbit_data:
-            dates_to_remove = []
-            
-            for date_str in orbit_data["data_points"]:
-                try:
-                    point_date = datetime.strptime(date_str, "%Y-%m-%d")
-                    if point_date < cutoff_date:
-                        dates_to_remove.append(date_str)
-                except ValueError:
-                    # Skip invalid date formats
-                    continue
-            
-            # Remove old points
-            for date_str in dates_to_remove:
-                del orbit_data["data_points"][date_str]
-                points_removed += 1
-            
-            # Update metadata if points were removed
-            if dates_to_remove and orbit_data["data_points"]:
-                remaining_dates = [datetime.strptime(d, "%Y-%m-%d") for d in orbit_data["data_points"].keys()]
-                if remaining_dates:
-                    earliest_date = min(remaining_dates)
-                    orbit_data["metadata"]["earliest_date"] = earliest_date.strftime("%Y-%m-%d")
-    
-    # Save if changes were made
-    if points_removed > 0:
-        save_orbit_paths(orbit_paths_over_time)
-        
-    return points_removed
 
 
 def get_orbit_data_for_plotting(objects_to_plot, center_object_name='Sun'):

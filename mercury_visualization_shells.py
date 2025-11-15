@@ -162,12 +162,14 @@ def create_mercury_mantle_shell(center_position=(0, 0, 0)):
     return traces
 
 mercury_crust_info = (
+            "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin \n" 
             "compared to Earth's. There's also a theory that a significant portion of Mercury's crust might be made of diamonds, \n" 
             "formed by billions of years of meteorite impacts on a graphite-rich surface. About 35 km thick."
 )
 
 def create_mercury_crust_shell(center_position=(0, 0, 0)):
+
     """Creates Mercury's crust shell using Mesh3d for better performance with improved hover."""
     # Define layer properties
     layer_info = {
@@ -316,6 +318,7 @@ def create_mercury_crust_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 mercury_atmosphere_info = (
+            "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Exosphere: Unlike Earth's substantial atmosphere, Mercury has an extremely thin exosphere. This exosphere is not \n" 
             "dense enough to trap heat or offer significant protection from space. It is composed mostly of oxygen, sodium, \n" 
             "hydrogen, helium, and potassium atoms that have been blasted off the surface by the solar wind and micrometeoroid impacts."
@@ -385,6 +388,127 @@ def create_mercury_atmosphere_shell(center_position=(0, 0, 0)):
     for trace in sun_traces:
         traces.append(trace)
 
+    return traces
+
+
+mercury_sodium_tail_info = (
+            "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
+            "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT OR SET MANUAL SCALE TO 1.0 AU\n\n" 
+
+            "Sodium Tail: Mercury has a remarkable sodium tail that extends incredibly far into space - up to 10,000 Mercury radii \n"
+            "(approximately 24 million kilometers or 2.4 million km). This tail is created when sodium atoms from Mercury's exosphere \n"
+            "are pushed away by solar radiation pressure. The tail always points away from the Sun, similar to a comet's tail.\n\n"
+            "The sodium tail is highly dynamic and can vary significantly based on Mercury's position in its orbit and solar activity. \n"
+            "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
+)
+
+def create_mercury_sodium_tail(center_position=(0, 0, 0)):
+    """Creates Mercury's sodium tail visualization extending away from the Sun."""
+    
+    # Define layer properties
+    layer_info = {
+        'name': 'Sodium Tail',
+        'description': (
+            "Sodium Tail: Mercury has a remarkable sodium tail that extends incredibly far into space - up to 10,000 Mercury radii <br>"
+            "(approximately 24 million kilometers or 2.4 million km). This tail is created when sodium atoms from Mercury's exosphere <br>"
+            "are pushed away by solar radiation pressure. The tail always points away from the Sun, similar to a comet's tail.<br><br>"
+            "The sodium tail is highly dynamic and can vary significantly based on Mercury's position in its orbit and solar activity. <br>"
+            "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
+        )
+    }
+    
+    # Sodium tail extends up to ~10,000 Mercury radii away from the Sun
+    max_tail_length = 10000 * MERCURY_RADIUS_AU
+    
+    # Create a conical tail shape pointing away from the Sun
+    # Sun is at origin (0,0,0), so tail points away from (0,0,0) relative to Mercury's position
+    center_x, center_y, center_z = center_position
+    
+    # Calculate direction away from Sun (normalized)
+    distance = math.sqrt(center_x**2 + center_y**2 + center_z**2)
+    if distance > 0:
+        dir_x = center_x / distance
+        dir_y = center_y / distance
+        dir_z = center_z / distance
+    else:
+        # If Mercury is at origin, default to +x direction
+        dir_x, dir_y, dir_z = 1, 0, 0
+    
+    # Create tail as a cone of particles with varying density
+    num_particles = 500
+    tail_points_x = []
+    tail_points_y = []
+    tail_points_z = []
+    
+    for i in range(num_particles):
+        # Distance along tail (0 to max_tail_length)
+        tail_distance = (i / num_particles) * max_tail_length
+        
+        # Cone widens as it extends (opening angle ~5-10 degrees)
+        max_radius = tail_distance * math.tan(math.radians(7))
+        
+        # Random position within cone cross-section
+        theta = np.random.uniform(0, 2 * math.pi)
+        r = np.random.uniform(0, max_radius)
+        
+        # Create perpendicular vectors to tail direction
+        if abs(dir_z) < 0.9:
+            perp1_x = -dir_y
+            perp1_y = dir_x
+            perp1_z = 0
+        else:
+            perp1_x = 1
+            perp1_y = 0
+            perp1_z = -dir_x / dir_z if dir_z != 0 else 0
+        
+        # Normalize perp1
+        perp1_len = math.sqrt(perp1_x**2 + perp1_y**2 + perp1_z**2)
+        if perp1_len > 0:
+            perp1_x /= perp1_len
+            perp1_y /= perp1_len
+            perp1_z /= perp1_len
+        
+        # Cross product for second perpendicular
+        perp2_x = dir_y * perp1_z - dir_z * perp1_y
+        perp2_y = dir_z * perp1_x - dir_x * perp1_z
+        perp2_z = dir_x * perp1_y - dir_y * perp1_x
+        
+        # Position in tail
+        x = center_x + tail_distance * dir_x + r * (math.cos(theta) * perp1_x + math.sin(theta) * perp2_x)
+        y = center_y + tail_distance * dir_y + r * (math.cos(theta) * perp1_y + math.sin(theta) * perp2_y)
+        z = center_z + tail_distance * dir_z + r * (math.cos(theta) * perp1_z + math.sin(theta) * perp2_z)
+        
+        tail_points_x.append(x)
+        tail_points_y.append(y)
+        tail_points_z.append(z)
+    
+    # Create color gradient with alpha channel for fading effect
+    # RGBA colors where alpha decreases with distance
+    colors = []
+    for i in range(num_particles):
+        alpha = 0.6 * (1 - i/num_particles)**2  # Fades with distance
+        # Ensure alpha is at least 0.001 to avoid scientific notation issues
+        alpha = max(alpha, 0.001)
+        colors.append(f'rgba(255, 200, 100, {alpha:.3f})')
+    
+    traces = [
+        go.Scatter3d(
+            x=tail_points_x,
+            y=tail_points_y,
+            z=tail_points_z,
+            mode='markers',
+            marker=dict(
+                size=2.5,
+                color=colors,  # Use RGBA colors for per-point opacity
+            ),
+            name=f"Mercury: {layer_info['name']}",
+            text=[layer_info['description']] * len(tail_points_x),
+            customdata=[f"Mercury: {layer_info['name']}"] * len(tail_points_x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    ]
+    
     return traces
 
 mercury_magnetosphere_info = (

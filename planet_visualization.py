@@ -50,6 +50,7 @@ from mercury_visualization_shells import (create_mercury_inner_core_shell,
                                           create_mercury_mantle_shell, 
                                           create_mercury_crust_shell, 
                                           create_mercury_atmosphere_shell, 
+                                          create_mercury_sodium_tail,
                                           create_mercury_magnetosphere_shell, 
                                           create_mercury_hill_sphere_shell,
                                           mercury_inner_core_info, 
@@ -57,6 +58,7 @@ from mercury_visualization_shells import (create_mercury_inner_core_shell,
                                           mercury_mantle_info, 
                                           mercury_crust_info, 
                                           mercury_atmosphere_info, 
+                                          mercury_sodium_tail_info, 
                                           mercury_magnetosphere_info, 
                                           mercury_hill_sphere_info)
 
@@ -123,6 +125,19 @@ from mars_visualization_shells import (create_mars_inner_core_shell,
                                         mars_upper_atmosphere_info,
                                         mars_magnetosphere_info,                                           
                                         mars_hill_sphere_info)
+
+from asteroid_belt_visualization_shells import (
+                                        create_main_asteroid_belt,
+                                        create_hilda_group,
+                                        create_jupiter_trojans_greeks,
+                                        create_jupiter_trojans_trojans,
+                                        main_belt_info,
+                                        hilda_group_info,
+                                        jupiter_trojans_greeks_info,
+                                        jupiter_trojans_trojans_info,
+                                        get_jupiter_angle_from_data,
+                                        calculate_body_angle,
+                                        estimate_jupiter_angle_from_date)
 
 from jupiter_visualization_shells import (create_jupiter_core_shell, 
                                         create_jupiter_metallic_hydrogen_shell, 
@@ -345,6 +360,29 @@ def create_sun_visualization(fig, sun_shell_vars, animate=False, frames=None):
             
         if sun_shell_vars['termination_shock'].get() == 1:
             traces.extend(create_sun_termination_shock_shell())
+
+
+        if sun_shell_vars['trojans_greeks'].get() == 1:
+            # Get Jupiter's current position for L4 point calculation
+            jupiter_angle = 0  # Default angle
+            # If Jupiter data is available in the current context, calculate its angle
+            # This would need to be passed from the calling context
+            traces.extend(create_jupiter_trojans_greeks(jupiter_angle=jupiter_angle))
+        
+        if sun_shell_vars['trojans_trojans'].get() == 1:
+            # Get Jupiter's current position for L5 point calculation
+            jupiter_angle = 0  # Default angle
+            # If Jupiter data is available in the current context, calculate its angle
+            # This would need to be passed from the calling context
+            traces.extend(create_jupiter_trojans_trojans(jupiter_angle=jupiter_angle))
+
+
+        if sun_shell_vars['main_belt'].get() == 1:
+            traces.extend(create_main_asteroid_belt())
+        
+        if sun_shell_vars['hildas'].get() == 1:
+            traces.extend(create_hilda_group())
+
             
         if sun_shell_vars['outer_corona'].get() == 1:
             traces.extend(create_sun_outer_corona_shell())
@@ -378,6 +416,90 @@ def create_sun_visualization(fig, sun_shell_vars, animate=False, frames=None):
             frame_data.extend(traces)
             frame.data = frame_data
 
+    return fig
+
+def create_sun_corona_from_distance(fig, sun_shell_vars, sun_position):
+    """
+    Creates a simplified Sun corona visualization for non-Sun-centered views.
+    Uses a simpler particle representation that scales appropriately.
+    
+    Parameters:
+        fig: The plotly figure
+        sun_shell_vars: Dictionary of Sun shell selection variables
+        sun_position: (x, y, z) tuple of Sun's position in AU
+        
+    Returns:
+        Updated figure
+    """
+    import numpy as np
+    import plotly.graph_objects as go
+    
+    # Simple sphere generation at Sun's position
+    def create_offset_sphere(radius_au, n_points=30):
+        """Create sphere points offset to sun_position"""
+        phi = np.linspace(0, 2*np.pi, n_points)
+        theta = np.linspace(0, np.pi, n_points)
+        phi, theta = np.meshgrid(phi, theta)
+        
+        x = radius_au * np.sin(theta) * np.cos(phi) + sun_position[0]
+        y = radius_au * np.sin(theta) * np.sin(phi) + sun_position[1]
+        z = radius_au * np.cos(theta) + sun_position[2]
+        
+        return x.flatten(), y.flatten(), z.flatten()
+    
+    # Add selected layers (outermost to innermost)
+    if sun_shell_vars.get('outer_corona') and sun_shell_vars['outer_corona'].get() == 1:
+        radius = OUTER_CORONA_RADII * SOLAR_RADIUS_AU
+        x, y, z = create_offset_sphere(radius, n_points=30)
+        
+        fig.add_trace(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(size=0.5, color='rgba(255, 245, 200, 0.3)', opacity=0.3),
+            name='Sun: Outer Corona',
+            hovertemplate='Sun: Outer Corona<br>~10 solar radii<br>Temperature: ~2M K<extra></extra>',
+            showlegend=True
+        ))
+    
+    if sun_shell_vars.get('inner_corona') and sun_shell_vars['inner_corona'].get() == 1:
+        radius = INNER_CORONA_RADII * SOLAR_RADIUS_AU
+        x, y, z = create_offset_sphere(radius, n_points=30)
+        
+        fig.add_trace(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(size=0.75, color='rgba(255, 235, 180, 0.4)', opacity=0.4),
+            name='Sun: Inner Corona',
+            hovertemplate='Sun: Inner Corona<br>~3 solar radii<br>Temperature: 1-3M K<extra></extra>',
+            showlegend=True
+        ))
+    
+    if sun_shell_vars.get('chromosphere') and sun_shell_vars['chromosphere'].get() == 1:
+        radius = CHROMOSPHERE_RADII * SOLAR_RADIUS_AU
+        x, y, z = create_offset_sphere(radius, n_points=30)
+        
+        fig.add_trace(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(size=1.0, color='rgba(255, 100, 100, 0.5)', opacity=0.5),
+            name='Sun: Chromosphere',
+            hovertemplate='Sun: Chromosphere<br>~2000 km thick<br>Temperature: 4,000-20,000 K<extra></extra>',
+            showlegend=True
+        ))
+    
+    if sun_shell_vars.get('photosphere') and sun_shell_vars['photosphere'].get() == 1:
+        radius = SOLAR_RADIUS_AU
+        x, y, z = create_offset_sphere(radius, n_points=40)
+        
+        fig.add_trace(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(size=1.5, color='rgba(255, 220, 100, 0.8)', opacity=0.8),
+            name='Sun: Photosphere',
+            hovertemplate='Sun: Photosphere<br>Visible surface<br>Temperature: ~5,800 K<extra></extra>',
+            showlegend=True
+        ))
+    
     return fig
 
 def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None, center_position=(0, 0, 0)):
@@ -742,6 +864,8 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
             traces.extend(create_mercury_crust_shell(center_position))
         if shell_vars['mercury_atmosphere'].get() == 1:
             traces.extend(create_mercury_atmosphere_shell(center_position))
+        if shell_vars['mercury_sodium_tail'].get() == 1:  
+            traces.extend(create_mercury_sodium_tail(center_position))
         if shell_vars['mercury_magnetosphere'].get() == 1:
             traces.extend(create_mercury_magnetosphere_shell(center_position))
         if shell_vars['mercury_hill_sphere'].get() == 1:

@@ -77,6 +77,20 @@ planetary_params = {
         #     'Venus': 224.701, 
     },
     
+# Aten type near earth asteroids, a < 1.0 AU AND aphelion (Q) > 0.983 AU (Earth's perihelion) → cross Earth's orbit from inside
+
+    'Apophis': {
+        'a': 0.922583,   # Horizons: A, semi-major axis in AU
+        'e': 0.191481,   # Horizons: EC, eccentricity
+        'i': 3.331,      # inclination in degrees
+        'omega': 126.394, # argument of perihelion in degrees
+        'Omega': 204.061,  # longitude of ascending node in degrees;  
+        'epoch': '2025-08-12',
+        'TP': 2460719.3535595234   # 2025-Feb-12.8536 TDB (IAWN/Horizons)
+        #  PER     'Apophis': 323.60,     # 0.89 * 365.25
+        # aphelion (Q) = a * (1 + e) = 1.099 AU
+    }, 
+
     'Earth': {  
         'a': 1.00000261,
         'e': 0.01671123,
@@ -91,6 +105,133 @@ planetary_params = {
 # Langrange points do not have orbital parameters, EM-L1 to EM-L5 and L1 to L5, but maybe could
 # space missions do not have orbital parameters
 
+    # Apollos: a > 1.0 AU, Perihelion < 1.017 AU, → cross Earth's orbit from outside
+
+    '2024 DW': {                  # 50613029 (2024 DW) 2025-Jul-05 10:27:18; Soln.date: 2024-Feb-23
+        'a': 2.421098478271158,   # Horizons: A, semi-major axis in AU
+        'e': .6939958024514898,   # Horizons: EC, eccentricity
+        'i': .9861902430422796,      # Horizons: IN, inclination in degrees
+        'omega': 244.5179261214832, # Horizons: W, argument of perihelion in degrees
+        'Omega': 335.4879825233473,   # Horizons: OM, longitude of ascending node in degrees;  
+        'epoch': '2024-02-19'  # Horizons: epoch
+        # need period
+        # perihelion (q) = a * (1 - e) = 0.741
+    },
+
+    '2025 PY1': {                         # osculating elements for 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
+        'a': 1.078452460125784,         # Horizons: A, semi-major axis in AU
+        'e': .2233327947850885,         # Horizons: EC, eccentricity
+        'i': 4.573408702272091,         # Horizons: IN, inclination in degrees
+        'omega': 267.1185311148099,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 145.4731476162657,     # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-8-18',            # osculating date: 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
+        'TP': 2460976.5756525602,     # 2025-10-28 1:48:56
+        'Tapo': 2461185.0875000,              # 2026-05-24 14:06      
+        # 409.072695,    # PER= 1.00631 julian years
+        # perihelion (q) = a * (1 - e) = 0.838
+    },
+
+    '2024 YR4': {                  # Epoch 2025-1-30, heliocentric, solution date 2025-6-3
+        'a': 2.516308070047454,   # Horizons: A, semi-major axis in AU
+        'e': .6615999301423001,   # Horizons: EC, eccentricity
+        'i': 3.408259321981154,      # Horizons: IN, inclination in degrees
+        'omega': 134.3644983455991, # Horizons: W, argument of perihelion in degrees
+        'Omega': 271.3674693540159,   # Horizons: OM, longitude of ascending node in degrees;  
+        'epoch': '2025-08-12',
+        'TP': 2462115.7385         # 2028-Dec-10 (TheSkyLive)
+        #     '2024 YR4': 922.84,    # 2.53 * 365.25
+        # perihelion (q) = a * (1 - e) = 0.851
+    },
+
+    '2025 PN7': {                  # Rec #:50615430 (+COV) Soln.date: 2025-Aug-31_07:21:10 # obs: 27 (2013-2025) mean elements
+        'a': 1.004188800489803,         # Horizons: A, semi-major axis in AU
+        'e': .1071782474710749,         # Horizons: EC, eccentricity
+        'i': 1.984028877925589,         # Horizons: IN, inclination in degrees
+        'omega': 82.04919713631394,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 113.0180181480993,     # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2023-Jul-06.00',            # osculating date: 2460131.5
+        'TP': 2460048.1958280094,     # 2023-Apr-13.6958280094
+        #    'Tapo':       
+        # PER= 1.00631 julian years 367.5547275 d
+        # perihelion (q) = a * (1 - e) = 0.896
+    },
+
+    'Bennu': {
+        'a': 1.126391,    # semi-major axis in AU
+        'e': 0.203745,    # eccentricity
+        'i': 6.035,       # inclination in degrees
+        'omega': 66.223,  # argument of perihelion in degrees
+        'Omega': 2.061    # longitude of ascending node in degrees
+        # PER    'Bennu': 436.65,       # 1.20 * 365.25
+        # perihelion (q) = a * (1 - e) =  0.897
+    },
+
+    'Kamo oalewa': {     # 469219 Kamo`oalewa (2016 HO3)      2025-Jul-05 08:35:28        
+        'a': 1.00102447694204,   # Horizons: A, semi-major axis in AU
+        'e': .1040534310625292,   # Horizons: EC, eccentricity
+        'i': 7.773894173631178,      # Horizons: IN, inclination in degrees
+        'omega': 307.0951007739783, # Horizons: W, argument of perihelion in degrees
+        'Omega': 66.43991583004482   # Horizons: OM, longitude of ascending node in degrees
+        # need period
+        # perihelion (q) = a * (1 - e) = 0.897 
+    },     
+
+    'Itokawa': {
+        'a': 1.324163,   # semi-major axis in AU
+        'e': 0.280164,   # eccentricity
+        'i': 1.622,      # inclination in degrees
+        'omega': 162.767, # argument of perihelion in degrees
+        'Omega': 69.095   # longitude of ascending node in degrees
+        # PER: 556.38,     # 1.52 * 365.25
+        # perihelion (q) = a * (1 - e) = 0.953
+    },
+
+    'Ryugu': {
+        'a': 1.189562,   # semi-major axis in AU
+        'e': 0.190349,   # eccentricity
+        'i': 5.884,      # inclination in degrees
+        'omega': 211.421, # argument of perihelion in degrees
+        'Omega': 251.617,  # longitude of ascending node in degrees;  
+        'epoch': '2025-08-12',
+        'TP': 2460643.5508         # 2024-Nov-29 (TheSkyLive)
+        # PER: 473.98,       # 1.30 * 365.25
+        # perihelion (q) = a * (1 - e) = 0.963
+    },
+
+    '2024 PT5': {                  # Epoch 2024-10-20, heliocentric
+        'a': 1.012228628670663,   # Horizons: A, semi-major axis in AU
+        'e': .02141074038624791,   # Horizons: EC, eccentricity
+        'i': 1.518377382131216,      # Horizons: IN, inclination in degrees
+        'omega': 116.8074860094156, # Horizons: W, argument of perihelion in degrees
+        'Omega': 305.1069316209851   # Horizons: OM, longitude of ascending node in degrees;  
+        # PER: 368.75,    # 1.01 * 365.25
+        # perihelion (q) = a * (1 - e) = 0.990
+    },
+
+    '2023 JF': {        # (2023 JF)  EPOCH=  2460073.5 ! 2023-May-09.00 (TDB)
+        'a': 1.680153966583222,   # A - semi-major axis in AU
+        'e': .409819444019783,   # EC - eccentricity
+        'i': 3.1489028778487,     # IN - inclination in degrees
+        'omega': 199.537622506113, # W - argument of perihelion in degrees
+        'Omega': 50.09327122563936  # OM - longitude of ascending node in degrees
+        # PER     '2023 JF': 493.37,     # 1.35 * 365.25
+        # perihelion (q) = a * (1 - e) = 0.992
+    },
+
+    # Amor type near Earth asteroids; Perihelion > 1.017 AU and < 1.3 AU → approach but don't cross Earth's orbit
+
+    'Eros': {
+        'a': 1.458040,   # semi-major axis in AU
+        'e': 0.222868,   # eccentricity
+        'i': 10.829,     # inclination in degrees
+        'omega': 178.817, # argument of perihelion in degrees
+        'Omega': 304.435,  # longitude of ascending node in degrees;  
+        'epoch': '2025-08-12',
+        'TP': 2460445.7223         # 2024-May-15 (TheSkyLive)
+        # PER: 642.63,        # 1.76 * 365.25
+        # perihelion (q) = a * (1 - e) = 1.133
+    },
+
     'Mars': {
         'a': 1.52371034,
         'e': 0.09339410,
@@ -102,6 +243,88 @@ planetary_params = {
         #     'Mars': 686.980,  
     },
     
+    'Dinkinesh': {      # 152830 Dinkinesh (1999 VD57)
+        'a': 2.191622877873451,   # A - semi-major axis in AU
+        'e': .1121269945294693,   # EC - eccentricity
+        'i': 2.093523142255687,     # IN - inclination in degrees
+        'omega': 66.78467710309617, # W - argument of perihelion in degrees
+        'Omega': 21.38248704730461  # OM - longitude of ascending node in degrees
+        #     'Dinkinesh': 1387.50,  # 3.80 * 365.25
+    },    
+
+    'Vesta': {
+        'a': 2.3617,
+        'e': 0.089,
+        'i': 7.155,
+        'omega': 151.216,
+        'Omega': 103.851,
+        'epoch': '2025-08-12',
+        'TP': 2460902.9691         # 2025-Aug-15 (TheSkyLive)
+        #     'Vesta': 1325.75,      # 3.63 * 365.25
+    },
+
+    'Steins': {
+        'a': 2.363,      # semi-major axis in AU
+        'e': 0.146,      # eccentricity
+        'i': 9.944,      # inclination in degrees
+        'omega': 250.97,  # argument of perihelion in degrees
+        'Omega': 55.39    # longitude of ascending node in degrees
+        #     'Šteins': 1327.41,     # 3.64 * 365.25
+    },
+
+    'Donaldjohanson': {     # 52246 Donaldjohanson (1981 EQ5)
+        'a': 2.383273486221501,      # A - semi-major axis in AU
+        'e': .1874831199365464,      # EC - eccentricity
+        'i': 4.423903983190933,      # IN - inclination in degrees
+        'omega': 212.9285580998883,  # W - argument of perihelion in degrees
+        'Omega': 262.7951724145965     # OM - longitude of ascending node in degrees;  
+        #     'Donaldjohanson': 1446.04, # 3.96 * 365.25
+    },
+
+
+
+    'Lutetia': {                  # Epoch 2017-10-12, heliocentric
+        'a': 2.434591597038037,   # Horizons: A, semi-major axis in AU
+        'e': .1644174522633922,   # Horizons: EC, eccentricity
+        'i': 3.063715677953934,      # Horizons: IN, inclination in degrees
+        'omega': 249.980528664283, # Horizons: W, argument of perihelion in degrees
+        'Omega': 80.87713180326485   # Horizons: OM, longitude of ascending node in degrees
+        #     'Lutetia': 1321.00,    # 3.62 * 365.25
+    },
+
+
+
+    'Ceres': {
+        'a': 2.7675,
+        'e': 0.076,
+        'i': 10.593,
+        'omega': 73.597,
+        'Omega': 80.393,
+        'epoch': '2025-08-12',
+        'TP': 2461601.4340         # 2027-Jul-14 (TheSkyLive)
+        #     'Ceres': 1680.15,      # 4.6 * 365.25
+    },
+
+    # Trojan Asteroids
+
+     'Orus': {                  # 21900 Orus (1999 VQ10)
+        'a': 5.12481038867513,   # Horizons: A, semi-major axis in AU
+        'e': .03658969107145676,   # Horizons: EC, eccentricity
+        'i': 8.468402951870347,      # Horizons: IN, inclination in degrees
+        'omega': 179.5712820784224, # Horizons: W, argument of perihelion in degrees
+        'Omega': 258.5587182277959   # Horizons: OM, longitude of ascending node in degrees;  
+        #     'Orus': 4274.32,       # 11.71 * 365.25
+    }, 
+
+     'Polymele': {                  # 15094 Polymele (1999 WB2)
+        'a': 5.183610039255559,   # Horizons: A, semi-major axis in AU
+        'e': .09688597854047172,   # Horizons: EC, eccentricity
+        'i': 12.98094196026331,      # Horizons: IN, inclination in degrees
+        'omega': 5.149831531818331, # Horizons: W, argument of perihelion in degrees
+        'Omega': 50.31413377311653   # Horizons: OM, longitude of ascending node in degrees
+        #     'Polymele': 4319.33,   # 11.83 * 365.25
+    }, 
+
     'Jupiter': {
         'a': 5.20288700,
         'e': 0.04838624,
@@ -113,6 +336,47 @@ planetary_params = {
         #     'Jupiter': 4332.589,  
     },
     
+     'Eurybates': {                  # 3548 Eurybates (1973 SO)
+        'a': 5.209549873585049,   # Horizons: A, semi-major axis in AU
+        'e': .0911999243850036,   # Horizons: EC, eccentricity
+        'i': 8.054169046592317,      # Horizons: IN, inclination in degrees
+        'omega': 27.83332476783044, # Horizons: W, argument of perihelion in degrees
+        'Omega': 43.54011293260102   # Horizons: OM, longitude of ascending node in degrees
+        #     'Eurybates': 4333.71,  # 11.87 * 365.25
+    },  
+
+     'Patroclus': {                  # 617 Patroclus (A906 UL) 
+        'a': 5.212775153315913,   # Horizons: A, semi-major axis in AU
+        'e': .1394751015199425,   # Horizons: EC, eccentricity
+        'i': 22.05719746380513,      # Horizons: IN, inclination in degrees
+        'omega': 307.9473518701323, # Horizons: W, argument of perihelion in degrees
+        'Omega': 44.34955228487597   # Horizons: OM, longitude of ascending node in degrees
+        #     'Patroclus': 4336.36,  # 11.88 * 365.25
+    }, 
+
+     'Leucus': {                  # 11351 Leucus (1997 TS25)
+        'a': 5.2899315120334,   # Horizons: A, semi-major axis in AU
+        'e': .06389742479789216,   # Horizons: EC, eccentricity
+        'i': 11.55528566945522,      # Horizons: IN, inclination in degrees
+        'omega': 160.4023262565797, # Horizons: W, argument of perihelion in degrees
+        'Omega': 251.0747114724082   # Horizons: OM, longitude of ascending node in degrees;  
+        #     'Leucus': 4352.24,     # 11.92 * 365.25
+    },  
+
+    # Comets with closed elliptical orbits; object type 'orbital'
+    
+    'Churyumov': {                          # 67P/Churyumov-Gerasimenko
+        'a': 3.462249489765068,             # Horizons: A, semi-major axis in AU
+        'e': .6409081306555051,             # Horizons: EC, eccentricity
+        'i': 7.040294906760007,             # Horizons: IN, inclination in degrees
+        'omega': 12.79824973415729,         # Horizons: W, argument of perihelion in degrees
+        'Omega': 50.13557380441372,         # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2015-10-10',              # EPOCH=  2457305.5 ! 2015-Oct-10.0000000 (TDB)         
+        'TP': 2457247.5886578634,           # TP= 2015-Aug-13.0886578634
+    #    'Tapo': ,                          # needed for actual aphelion date
+                                            # PER= 6.4423711636744 jy =  2353.076068 days 
+    },
+
     'Saturn': {
         'a': 9.53667594,
         'e': 0.05386179,
@@ -133,6 +397,18 @@ planetary_params = {
         'epoch': '2017-12-4',           # EPOCH=  2458091.5 ! 2017-Dec-04.00 (TDB)
         'TP': 2453044.2465350656,       # Time of perihelion - 2004-Feb-08.7465350656
                                         # PER= 62.95962 jy = 22996.00121 days           
+    },
+
+    'Halley': {                         # Rec #:90000030; 1P/Halley; Soln.date: 2024-Apr-16_14:38:13; data arc: 1835-08-21 to 1994-01-11
+        'a': 17.85950919,               # Horizons: A, semi-major axis in AU
+        'e': 0.9678338727,              # Horizons: EC, eccentricity
+        'i': 162.1475927,               # Horizons: IN, inclination in degrees; Retrograde, i > 90. 
+        'omega': 112.497549,            # Horizons: W, argument of perihelion in degrees
+        'Omega': 59.59944738,           # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-7-6',            # osculating date: 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
+        'TP': 2474058.277997814585,     # 2061-08-21 18:40:19 
+        'Tapo': 2460856.0,              # 2025-06-29 12:00:00       
+        #     'Halley': 27731.29226,    # PER=75.924140333742 julian year * 365.25 = 27731.29226
     },
 
     'Uranus': {
@@ -156,28 +432,7 @@ planetary_params = {
         'TP': 2468182.079,      # Time of perihelion - 2042-Sep-04
         #     'Neptune': 60189.0,  
     },
-    
-    'Pluto': {
-        'a': 39.48211675,
-        'e': 0.24882730,
-        'i': 17.14001206,
-        'omega': 113.834,      # Close to correct (should be 113.76)
-        'Omega': 110.30393684,
-        'epoch': '1989-12-12',  # Date of perihelion passage
-        'TP': 2447891.824,      # Time of perihelion - 1989-Dec-12
-        #     'Pluto': 90560.0, 
-    },
-
-    'Planet 9': {
-        'a': 600,          # Semi-major axis in AU (updated to match 500-700 AU range from IRAS/AKARI study)
-        'e': 0.30,         # Eccentricity (slightly adjusted to align with 280-1120 AU perihelion/aphelion range)
-        'i': 6,            # Inclination in degrees (2025 estimate: 6°)
-        'L': 238,          # Mean longitude at epoch in degrees (unchanged)
-        'omega': 150,      # Argument of perihelion in degrees (unchanged)
-        'Omega': 90        # Longitude of ascending node in degrees (unchanged)        
-        #     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
-    },
-    
+        
     # Dwarf Planets
 
     'Orcus': {                      # 90482 Orcus (2004 DW)
@@ -189,6 +444,17 @@ planetary_params = {
         'epoch': '2017-09-26',                 # 2017-Sep-26.00 for ephemeris
         'TP': 2413410.1091600764,              # Time of perihelion - 1895-Aug-04.6091600764        
         # Period: 90314.9912925 days, 247.26897 julian years * 365.25
+    },
+
+    'Pluto': {
+        'a': 39.48211675,
+        'e': 0.24882730,
+        'i': 17.14001206,
+        'omega': 113.834,      # Close to correct (should be 113.76)
+        'Omega': 110.30393684,
+        'epoch': '1989-12-12',  # Date of perihelion passage
+        'TP': 2447891.824,      # Time of perihelion - 1989-Dec-12
+        #     'Pluto': 90560.0, 
     },
 
     'Ixion': {                          # 28978 Ixion (2001 KX76) 
@@ -291,6 +557,39 @@ planetary_params = {
         #     'Eris': 203809.50,     # 558.0 * 365.25
     },
 
+    'Ikeya-Seki': {                  # Epoch 1965-10-7, heliocentric, (C/1965 S1-A)
+        'a': 91.59999999999813,   # Horizons: A, semi-major axis in AU
+        'e': .999915,   # Horizons: EC, eccentricity
+        'i': 141.8642,      # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 69.04859999999999, # Horizons: W, argument of perihelion in degrees
+        'Omega': 346.9947   # Horizons: OM, longitude of ascending node in degrees;  
+        #     'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
+    },
+
+    'Lemmon': {                  # JPL/HORIZONS                 Lemmon (C/2025 A6)            2025-Oct-04 14:37:27 
+        # data arc: 2024-11-12 to 2025-10-03
+        'a': 122.0093217668137,   # Horizons: A, semi-major axis in AU
+        'e': .9956568328248036,   # Horizons: EC, eccentricity
+        'i': 143.6632748988036,      # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 132.9672366055109, # Horizons: W, argument of perihelion in degrees
+        'Omega': 108.0976178317535,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-Aug-10',
+        'TP': 2460988.0373512669  # 2025-Nov-08.5373512669
+        # PER= 1347.7139437075 jy = 492252.5179 days (see orbital parameters calcs)
+    },
+
+    'Hale-Bopp': {                          # Hale-Bopp (C/1995 O1)   
+        'a': 177.4333839117583,             # Horizons: A, semi-major axis in AU
+        'e': .9949810027633206,             # Horizons: EC, eccentricity
+        'i': 89.28759424740302,             # Horizons: IN, inclination in degrees
+        'omega': 130.4146670659176,         # Horizons: W, argument of perihelion in degrees
+        'Omega': 282.7334213961641,        # Horizons: OM, longitude of ascending node in degrees;  
+        'epoch': '2022-9-15',               # EPOCH=  2459837.5 ! 2022-Sep-15.0000000 (TDB)
+        'TP': 2450537.1349071441,           # 1997-Mar-29.6349071441 
+    #    'Tapo': ,                          # needed       
+                                            # PER= 2363.5304681429 jy = 863279.5035
+    },  
+
     'Ammonite': {              #  2023 KQ14; Soln.date: 2025-Apr-29_21:35:00
         'a': 250.0679474237761,         # A
         'e': .7370249039390946,         # EC
@@ -302,6 +601,15 @@ planetary_params = {
         #     'Ammonite': 1444383.67 ,     # PER 3954.53339 Julian years 
     },
 
+    'NEOWISE': {                  # 2020-Jul-06.0000000, heliocentric, NEOWISE (C/2020 F3) 
+        'a': 358.4679565529321,   # Horizons: A, semi-major axis in AU
+        'e': .9991780262531292,   # Horizons: EC, eccentricity
+        'i': 128.9375027594809,      # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 37.2786584481257, # Horizons: W, argument of perihelion in degrees
+        'Omega': 61.01042818536988,   # Horizons: OM, longitude of ascending node in degrees
+        # need period
+    }, 
+
     'Sedna': {  # 90377 Sedna (2003 VB12); Epoch 2018-May-16
         'a': 481.3036019474312,         # A
         'e': .8418992747337005,         # EC
@@ -312,6 +620,28 @@ planetary_params = {
         'TP': 2479072.5781         # Next perihelion JD (2075-05-15 TDB)       
         #     'Sedna': 4163850.00,   # 11400.0 * 365.25
     },
+
+    'Planet 9': {
+        'a': 600,          # Semi-major axis in AU (updated to match 500-700 AU range from IRAS/AKARI study)
+        'e': 0.30,         # Eccentricity (slightly adjusted to align with 280-1120 AU perihelion/aphelion range)
+        'i': 6,            # Inclination in degrees (2025 estimate: 6°)
+        'L': 238,          # Mean longitude at epoch in degrees (unchanged)
+        'omega': 150,      # Argument of perihelion in degrees (unchanged)
+        'Omega': 90        # Longitude of ascending node in degrees (unchanged)        
+        #     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
+    },
+
+    'SWAN': {                  # SWAN (C/2025 R2)  Rec #:90004920 (+COV) Soln.date: 2025-Sep-15_12:40:16  
+        # data arc: 2025-08-13 to 2025-09-14   obs: 83 (32 days
+        'a': 798.2574580972854,   # Horizons: A, semi-major axis in AU
+        'e': .9993692862141036,   # Horizons: EC, eccentricity
+        'i': 4.470167090495599,      # Horizons: IN, inclination in degrees
+        'omega': 307.7690351733913, # Horizons: W, argument of perihelion in degrees
+        'Omega': 335.6745583920674,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-09-13',
+        'TP': 2460931.1155318194  # 2025-Sep-12.6155318194
+        # PER= 22553.953438133 jy = 8237831.493 days
+    }, 
 
     '2017 OF201': {  # Epoch 2012-Jan-22.00
         'a': 911.3212633626483,         # A
@@ -333,296 +663,10 @@ planetary_params = {
         #     'Leleakuhonua': 12643548.84594,  # Orbital period in days;  34616.15016 julian years x 365.25
     },    
 
-    # Asteroids
-
-    'Apophis': {
-        'a': 0.922583,   # Horizons: A, semi-major axis in AU
-        'e': 0.191481,   # Horizons: EC, eccentricity
-        'i': 3.331,      # inclination in degrees
-        'omega': 126.394, # argument of perihelion in degrees
-        'Omega': 204.061,  # longitude of ascending node in degrees;  
-        'epoch': '2025-08-12',
-        'TP': 2460719.3535595234   # 2025-Feb-12.8536 TDB (IAWN/Horizons)
-        #     'Apophis': 323.60,     # 0.89 * 365.25
-    },  
-
-    'Kamo oalewa': {     # 469219 Kamo`oalewa (2016 HO3)      2025-Jul-05 08:35:28        
-        'a': 1.00102447694204,   # Horizons: A, semi-major axis in AU
-        'e': .1040534310625292,   # Horizons: EC, eccentricity
-        'i': 7.773894173631178,      # Horizons: IN, inclination in degrees
-        'omega': 307.0951007739783, # Horizons: W, argument of perihelion in degrees
-        'Omega': 66.43991583004482   # Horizons: OM, longitude of ascending node in degrees
-        # need period
-    }, 
-
-    '2025 PN7': {                  # Rec #:50615430 (+COV) Soln.date: 2025-Aug-31_07:21:10 # obs: 27 (2013-2025) mean elements
-        'a': 1.004188800489803,         # Horizons: A, semi-major axis in AU
-        'e': .1071782474710749,         # Horizons: EC, eccentricity
-        'i': 1.984028877925589,         # Horizons: IN, inclination in degrees
-        'omega': 82.04919713631394,     # Horizons: W, argument of perihelion in degrees
-        'Omega': 113.0180181480993,     # Horizons: OM, longitude of ascending node in degrees
-        'epoch': '2023-Jul-06.00',            # osculating date: 2460131.5
-        'TP': 2460048.1958280094,     # 2023-Apr-13.6958280094
-    #    'Tapo':       
-        # PER= 1.00631 julian years 367.5547275 d
-    },
-
-    '2024 PT5': {                  # Epoch 2024-10-20, heliocentric
-        'a': 1.012228628670663,   # Horizons: A, semi-major axis in AU
-        'e': .02141074038624791,   # Horizons: EC, eccentricity
-        'i': 1.518377382131216,      # Horizons: IN, inclination in degrees
-        'omega': 116.8074860094156, # Horizons: W, argument of perihelion in degrees
-        'Omega': 305.1069316209851   # Horizons: OM, longitude of ascending node in degrees;  
-        #     '2024 PT5': 368.75,    # 1.01 * 365.25
-    },
-
-    '2025 PY1': {                         # osculating elements for 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
-        'a': 1.078452460125784,         # Horizons: A, semi-major axis in AU
-        'e': .2233327947850885,         # Horizons: EC, eccentricity
-        'i': 4.573408702272091,         # Horizons: IN, inclination in degrees
-        'omega': 267.1185311148099,     # Horizons: W, argument of perihelion in degrees
-        'Omega': 145.4731476162657,     # Horizons: OM, longitude of ascending node in degrees
-        'epoch': '2025-8-18',            # osculating date: 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
-        'TP': 2460976.5756525602,     # 2025-10-28 1:48:56
-        'Tapo': 2461185.0875000,              # 2026-05-24 14:06      
-        # 409.072695,    # PER= 1.00631 julian years
-    },
-
-    'Bennu': {
-        'a': 1.126391,    # semi-major axis in AU
-        'e': 0.203745,    # eccentricity
-        'i': 6.035,       # inclination in degrees
-        'omega': 66.223,  # argument of perihelion in degrees
-        'Omega': 2.061    # longitude of ascending node in degrees
-        #     'Bennu': 436.65,       # 1.20 * 365.25
-    },
-
-    'Ryugu': {
-        'a': 1.189562,   # semi-major axis in AU
-        'e': 0.190349,   # eccentricity
-        'i': 5.884,      # inclination in degrees
-        'omega': 211.421, # argument of perihelion in degrees
-        'Omega': 251.617,  # longitude of ascending node in degrees;  
-        'epoch': '2025-08-12',
-        'TP': 2460643.5508         # 2024-Nov-29 (TheSkyLive)
-        #     'Ryugu': 473.98,       # 1.30 * 365.25
-    },
-
-    'Itokawa': {
-        'a': 1.324163,   # semi-major axis in AU
-        'e': 0.280164,   # eccentricity
-        'i': 1.622,      # inclination in degrees
-        'omega': 162.767, # argument of perihelion in degrees
-        'Omega': 69.095   # longitude of ascending node in degrees
-        #     'Itokawa': 556.38,     # 1.52 * 365.25
-    },
-
-    'Eros': {
-        'a': 1.458040,   # semi-major axis in AU
-        'e': 0.222868,   # eccentricity
-        'i': 10.829,     # inclination in degrees
-        'omega': 178.817, # argument of perihelion in degrees
-        'Omega': 304.435,  # longitude of ascending node in degrees;  
-        'epoch': '2025-08-12',
-        'TP': 2460445.7223         # 2024-May-15 (TheSkyLive)
-        #     'Eros': 642.63,        # 1.76 * 365.25
-    },
-
-    '2023 JF': {        # (2023 JF)  EPOCH=  2460073.5 ! 2023-May-09.00 (TDB)
-        'a': 1.680153966583222,   # A - semi-major axis in AU
-        'e': .409819444019783,   # EC - eccentricity
-        'i': 3.1489028778487,     # IN - inclination in degrees
-        'omega': 199.537622506113, # W - argument of perihelion in degrees
-        'Omega': 50.09327122563936  # OM - longitude of ascending node in degrees
-        #     '2023 JF': 493.37,     # 1.35 * 365.25
-    },
-
-    'Dinkinesh': {      # 152830 Dinkinesh (1999 VD57)
-        'a': 2.191622877873451,   # A - semi-major axis in AU
-        'e': .1121269945294693,   # EC - eccentricity
-        'i': 2.093523142255687,     # IN - inclination in degrees
-        'omega': 66.78467710309617, # W - argument of perihelion in degrees
-        'Omega': 21.38248704730461  # OM - longitude of ascending node in degrees
-        #     'Dinkinesh': 1387.50,  # 3.80 * 365.25
-    },    
-
-    'Vesta': {
-        'a': 2.3617,
-        'e': 0.089,
-        'i': 7.155,
-        'omega': 151.216,
-        'Omega': 103.851,
-        'epoch': '2025-08-12',
-        'TP': 2460902.9691         # 2025-Aug-15 (TheSkyLive)
-        #     'Vesta': 1325.75,      # 3.63 * 365.25
-    },
-
-    'Steins': {
-        'a': 2.363,      # semi-major axis in AU
-        'e': 0.146,      # eccentricity
-        'i': 9.944,      # inclination in degrees
-        'omega': 250.97,  # argument of perihelion in degrees
-        'Omega': 55.39    # longitude of ascending node in degrees
-        #     'Šteins': 1327.41,     # 3.64 * 365.25
-    },
-
-    'Donaldjohanson': {     # 52246 Donaldjohanson (1981 EQ5)
-        'a': 2.383273486221501,      # A - semi-major axis in AU
-        'e': .1874831199365464,      # EC - eccentricity
-        'i': 4.423903983190933,      # IN - inclination in degrees
-        'omega': 212.9285580998883,  # W - argument of perihelion in degrees
-        'Omega': 262.7951724145965     # OM - longitude of ascending node in degrees;  
-        #     'Donaldjohanson': 1446.04, # 3.96 * 365.25
-    },
-
-    '2024 DW': {                  # 50613029 (2024 DW) 2025-Jul-05 10:27:18; Soln.date: 2024-Feb-23
-        'a': 2.421098478271158,   # Horizons: A, semi-major axis in AU
-        'e': .6939958024514898,   # Horizons: EC, eccentricity
-        'i': .9861902430422796,      # Horizons: IN, inclination in degrees
-        'omega': 244.5179261214832, # Horizons: W, argument of perihelion in degrees
-        'Omega': 335.4879825233473,   # Horizons: OM, longitude of ascending node in degrees;  
-        'epoch': '2024-02-19'  # Horizons: epoch
-        # need period
-    },
-
-    'Lutetia': {                  # Epoch 2017-10-12, heliocentric
-        'a': 2.434591597038037,   # Horizons: A, semi-major axis in AU
-        'e': .1644174522633922,   # Horizons: EC, eccentricity
-        'i': 3.063715677953934,      # Horizons: IN, inclination in degrees
-        'omega': 249.980528664283, # Horizons: W, argument of perihelion in degrees
-        'Omega': 80.87713180326485   # Horizons: OM, longitude of ascending node in degrees
-        #     'Lutetia': 1321.00,    # 3.62 * 365.25
-    },
-
-    '2024 YR4': {                  # Epoch 2025-1-30, heliocentric, solution date 2025-6-3
-        'a': 2.516308070047454,   # Horizons: A, semi-major axis in AU
-        'e': .6615999301423001,   # Horizons: EC, eccentricity
-        'i': 3.408259321981154,      # Horizons: IN, inclination in degrees
-        'omega': 134.3644983455991, # Horizons: W, argument of perihelion in degrees
-        'Omega': 271.3674693540159,   # Horizons: OM, longitude of ascending node in degrees;  
-        'epoch': '2025-08-12',
-        'TP': 2462115.7385         # 2028-Dec-10 (TheSkyLive)
-        #     '2024 YR4': 922.84,    # 2.53 * 365.25
-    },
-
-    'Ceres': {
-        'a': 2.7675,
-        'e': 0.076,
-        'i': 10.593,
-        'omega': 73.597,
-        'Omega': 80.393,
-        'epoch': '2025-08-12',
-        'TP': 2461601.4340         # 2027-Jul-14 (TheSkyLive)
-        #     'Ceres': 1680.15,      # 4.6 * 365.25
-    },
-
-    # Trojan Asteroids
-
-     'Orus': {                  # 21900 Orus (1999 VQ10)
-        'a': 5.12481038867513,   # Horizons: A, semi-major axis in AU
-        'e': .03658969107145676,   # Horizons: EC, eccentricity
-        'i': 8.468402951870347,      # Horizons: IN, inclination in degrees
-        'omega': 179.5712820784224, # Horizons: W, argument of perihelion in degrees
-        'Omega': 258.5587182277959   # Horizons: OM, longitude of ascending node in degrees;  
-        #     'Orus': 4274.32,       # 11.71 * 365.25
-    }, 
-
-     'Polymele': {                  # 15094 Polymele (1999 WB2)
-        'a': 5.183610039255559,   # Horizons: A, semi-major axis in AU
-        'e': .09688597854047172,   # Horizons: EC, eccentricity
-        'i': 12.98094196026331,      # Horizons: IN, inclination in degrees
-        'omega': 5.149831531818331, # Horizons: W, argument of perihelion in degrees
-        'Omega': 50.31413377311653   # Horizons: OM, longitude of ascending node in degrees
-        #     'Polymele': 4319.33,   # 11.83 * 365.25
-    }, 
-
-     'Eurybates': {                  # 3548 Eurybates (1973 SO)
-        'a': 5.209549873585049,   # Horizons: A, semi-major axis in AU
-        'e': .0911999243850036,   # Horizons: EC, eccentricity
-        'i': 8.054169046592317,      # Horizons: IN, inclination in degrees
-        'omega': 27.83332476783044, # Horizons: W, argument of perihelion in degrees
-        'Omega': 43.54011293260102   # Horizons: OM, longitude of ascending node in degrees
-        #     'Eurybates': 4333.71,  # 11.87 * 365.25
-    },  
-
-     'Patroclus': {                  # 617 Patroclus (A906 UL) 
-        'a': 5.212775153315913,   # Horizons: A, semi-major axis in AU
-        'e': .1394751015199425,   # Horizons: EC, eccentricity
-        'i': 22.05719746380513,      # Horizons: IN, inclination in degrees
-        'omega': 307.9473518701323, # Horizons: W, argument of perihelion in degrees
-        'Omega': 44.34955228487597   # Horizons: OM, longitude of ascending node in degrees
-        #     'Patroclus': 4336.36,  # 11.88 * 365.25
-    }, 
-
-     'Leucus': {                  # 11351 Leucus (1997 TS25)
-        'a': 5.2899315120334,   # Horizons: A, semi-major axis in AU
-        'e': .06389742479789216,   # Horizons: EC, eccentricity
-        'i': 11.55528566945522,      # Horizons: IN, inclination in degrees
-        'omega': 160.4023262565797, # Horizons: W, argument of perihelion in degrees
-        'Omega': 251.0747114724082   # Horizons: OM, longitude of ascending node in degrees;  
-        #     'Leucus': 4352.24,     # 11.92 * 365.25
-    },  
-
-    # Comets with closed elliptical orbits; object type 'orbital'
-    
-    'Churyumov': {                          # 67P/Churyumov-Gerasimenko
-        'a': 3.462249489765068,             # Horizons: A, semi-major axis in AU
-        'e': .6409081306555051,             # Horizons: EC, eccentricity
-        'i': 7.040294906760007,             # Horizons: IN, inclination in degrees
-        'omega': 12.79824973415729,         # Horizons: W, argument of perihelion in degrees
-        'Omega': 50.13557380441372,         # Horizons: OM, longitude of ascending node in degrees
-        'epoch': '2015-10-10',              # EPOCH=  2457305.5 ! 2015-Oct-10.0000000 (TDB)         
-        'TP': 2457247.5886578634,           # TP= 2015-Aug-13.0886578634
-    #    'Tapo': ,                          # needed for actual aphelion date
-                                            # PER= 6.4423711636744 jy =  2353.076068 days 
-    },
-
-    'Halley': {                         # Rec #:90000030; 1P/Halley; Soln.date: 2024-Apr-16_14:38:13; data arc: 1835-08-21 to 1994-01-11
-        'a': 17.85950919,         # Horizons: A, semi-major axis in AU
-        'e': 0.9678338727,         # Horizons: EC, eccentricity
-        'i': 162.1475927,         # Horizons: IN, inclination in degrees; retrograde
-        'omega': 112.497549,     # Horizons: W, argument of perihelion in degrees
-        'Omega': 59.59944738,     # Horizons: OM, longitude of ascending node in degrees
-        'epoch': '2025-7-6',            # osculating date: 2460862.500000000 = A.D. 2025-Jul-06 00:00:00.0000 TDB
-        'TP': 2474058.277997814585,     # 2061-08-21 18:40:19 
-        'Tapo': 2460856.0,              # 2025-06-29 12:00:00       
-        #     'Halley': 27731.29226,    # PER=75.924140333742 julian year * 365.25 = 27731.29226
-    },
-
-    'Ikeya-Seki': {                  # Epoch 1965-10-7, heliocentric, (C/1965 S1-A)
-        'a': 91.59999999999813,   # Horizons: A, semi-major axis in AU
-        'e': .999915,   # Horizons: EC, eccentricity
-        'i': 141.8642,      # Horizons: IN, inclination in degrees
-        'omega': 69.04859999999999, # Horizons: W, argument of perihelion in degrees
-        'Omega': 346.9947   # Horizons: OM, longitude of ascending node in degrees;  
-        #     'Ikeya-Seki': 319800.00, # 876.0 * 365.25 (estimate)
-    },
-
-    'Hale-Bopp': {                          # Hale-Bopp (C/1995 O1)   
-        'a': 177.4333839117583,             # Horizons: A, semi-major axis in AU
-        'e': .9949810027633206,             # Horizons: EC, eccentricity
-        'i': 89.28759424740302,             # Horizons: IN, inclination in degrees
-        'omega': 130.4146670659176,         # Horizons: W, argument of perihelion in degrees
-        'Omega': 282.7334213961641,        # Horizons: OM, longitude of ascending node in degrees;  
-        'epoch': '2022-9-15',               # EPOCH=  2459837.5 ! 2022-Sep-15.0000000 (TDB)
-        'TP': 2450537.1349071441,           # 1997-Mar-29.6349071441 
-    #    'Tapo': ,                          # needed       
-                                            # PER= 2363.5304681429 jy = 863279.5035
-    },                                        
-
-    'NEOWISE': {                  # 2020-Jul-06.0000000, heliocentric, NEOWISE (C/2020 F3) 
-        'a': 358.4679565529321,   # Horizons: A, semi-major axis in AU
-        'e': .9991780262531292,   # Horizons: EC, eccentricity
-        'i': 128.9375027594809,      # Horizons: IN, inclination in degrees
-        'omega': 37.2786584481257, # Horizons: W, argument of perihelion in degrees
-        'Omega': 61.01042818536988,   # Horizons: OM, longitude of ascending node in degrees
-        # need period
-    },    
-
     'Hyakutake': {                          # Hyakutake (C/1996 B2)    
         'a': 2124.755444396066,             # Horizons: A, semi-major axis in AU
         'e': .9998916470450124,             # Horizons: EC, eccentricity
-        'i': 124.9220493922234,             # Horizons: IN, inclination in degrees
+        'i': 124.9220493922234,             # Horizons: IN, inclination in degrees; retrograde > 90
         'omega': 130.1751209780967,         # Horizons: W, argument of perihelion in degrees
         'Omega': 188.045131992156,          # Horizons: OM, longitude of ascending node in degrees;  
         'epoch': '1996-3-15',               # EPOCH=  2450157.5 ! 1996-Mar-15.0000000 (TDB)
@@ -630,21 +674,6 @@ planetary_params = {
     #    'Tapo': ,                          # needed       
                                             # PER= 97942.599927659 jy = 35773534.62 days
     },
-
-     'SWAN': {                  # SWAN (C/2025 R2)  Rec #:90004920 (+COV) Soln.date: 2025-Sep-15_12:40:16  
-        # data arc: 2025-08-13 to 2025-09-14   obs: 83 (32 days
-        'a': 798.2574580972854,   # Horizons: A, semi-major axis in AU
-        'e': .9993692862141036,   # Horizons: EC, eccentricity
-        'i': 4.470167090495599,      # Horizons: IN, inclination in degrees
-        'omega': 307.7690351733913, # Horizons: W, argument of perihelion in degrees
-        'Omega': 335.6745583920674,   # Horizons: OM, longitude of ascending node in degrees
-        'epoch': '2025-09-13',
-        'TP': 2460931.1155318194  # 2025-Sep-12.6155318194
-        # PER= 22553.953438133 jy = 8237831.493 days
-    },
-
-# comets with checkbuttons that need orbital parameters: 
-# "Tsuchinshan-ATLAS", comet_tsuchinshan_atlas_var, "(2023-01-09 to 2029-12-31)", 
 
     # Comets with hyperbolic trajectories, object type 'trajectory'
 
@@ -670,11 +699,33 @@ planetary_params = {
                                         # period None; hyperbolic/parabolic
     }, 
 
-     'C/2025_K1': {                  # ATLAS (C/2025 K1)            2025-Jul-11 21:59:05 
+    'ATLAS': {                  # ATLAS (C/2024 G3)             
+        # Rec #:90004845 (+COV) Soln.date: 2025-Apr-11_14:44:56    # obs: 299 (2024-2025)
+        'a': -7606.45306976526,   # Horizons: A, semi-major axis in AU
+        'e': 1.000012291218472,   # Horizons: EC, eccentricity
+        'i': 116.8510954925091,      # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 108.1253732077035, # Horizons: W, argument of perihelion in degrees
+        'Omega': 220.3320911080488,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2024-Jun-19',
+        'TP': 2460688.9243240277  # 2025-Jan-13.4243240277
+    },
+
+    'Tsuchinshan': {                    # Tsuchinshan-ATLAS (C/2023 A3)      2025-Oct-04 19:42:29             
+        # Rec #:90004783 (+COV) Soln.date: 2025-Oct-03_14:42:16   # obs: 7228 (2022-2025)
+        'a': -4088.071955049762,         # Horizons: A, semi-major axis in AU; hyperbolic; PER= 9.999999E99
+        'e': 1.0000957494372,         # Horizons: EC, eccentricity
+        'i': 139.1121557652439,         # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 308.491702255918,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 21.55947211343556,     # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2024-May-16',
+        'TP': 2460581.2407992561        # 2024-Sep-27.7407992561
+    },
+
+    'C/2025_K1': {                  # ATLAS (C/2025 K1)            2025-Jul-11 21:59:05 
         # Rec #:90004909 (+COV) Soln.date: 2025-Jul-10_13:42:09      # obs: 563 (93 days)
         'a': -1328.874007526048,   # Horizons: A, semi-major axis in AU
         'e': 1.000251464554613,   # Horizons: EC, eccentricity
-        'i': 147.864867556013,      # Horizons: IN, inclination in degrees
+        'i': 147.864867556013,      # Horizons: IN, inclination in degrees; retrograde > 90
         'omega': 271.0285208159306, # Horizons: W, argument of perihelion in degrees
         'Omega': 97.55648983040697,   # Horizons: OM, longitude of ascending node in degrees
         #     'C/2025_K1': 1e99,     # Parabolic comet - effectively infinite period
@@ -682,15 +733,27 @@ planetary_params = {
         'epoch': '2025-10-08',
         'TP': 2460955.5  # 2025-10-08 00:00 UTC; replace with Horizons Tp for exact instant
         # 'C/2025_K1': 1e99,
-    },   
+    },
 
-    
+    'Borisov': {                  # Borisov (C/2025 V1)           2025-Nov-11 16:37:03 
+        # Rec #:90004928 (+COV) Soln.date: 2025-Nov-05_13:13:07        # obs: 99 (7 days)
+        'a': -48.28030957635523,   # Horizons: A, semi-major axis in AU
+        'e': 1.009582732034413,   # Horizons: EC, eccentricity
+        'i': 112.7242744491862,      # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 47.54446487656067, # Horizons: W, argument of perihelion in degrees
+        'Omega': 91.89902555608872,   # Horizons: OM, longitude of ascending node in degrees
+        #     'C/2025_V1': 1e99,     # Parabolic comet - effectively infinite period
+        # Next perihelion per current solutions is 2025-Nov-16.5303735598; add JD+epoch.
+        'epoch': '2025-11-03',
+        'TP': 2460996.0303735598  # 2025-Nov-16.5303735598 UTC; replace with Horizons Tp for exact instant
+    },
+
     # Interstellar objects; hyperbolic trajectories, object type 'trajectory'
 
-     '1I/Oumuamua': {                   # 1I/'Oumuamua (A/2017 U1) 
+    '1I/Oumuamua': {                   # 1I/'Oumuamua (A/2017 U1) 
         'a': -1.27234500742808,         # Horizons: A, semi-major axis in AU; Hyperbolic orbit
         'e': 1.201133796102373,         # Horizons: EC, eccentricity
-        'i': 122.7417062847286,         # Horizons: IN, inclination in degrees
+        'i': 122.7417062847286,         # Horizons: IN, inclination in degrees; retrograde > 90
         'omega': 241.8105360304898,     # Horizons: W, argument of perihelion in degrees
         'Omega': 24.59690955523242,     # Horizons: OM, longitude of ascending node in degrees
         'epoch': '2017-11-23',          # EPOCH=  2458080.5 ! 2017-Nov-23.00 (TDB)
@@ -698,7 +761,7 @@ planetary_params = {
                                         # Hyperbolic orbit
     }, 
 
-     '2I/Borisov': {                    # Borisov (C/2019 Q4) 
+    '2I/Borisov': {                    # Borisov (C/2019 Q4) 
         'a': -.8514922551937886,        # Horizons: A, semi-major axis in AU; Hyperbolic orbit
         'e': 3.356475782676596,         # Horizons: EC, eccentricity
         'i': 44.05264247909138,         # Horizons: IN, inclination in degrees
@@ -709,15 +772,15 @@ planetary_params = {
                                         # Hyperbolic orbit
     },
 
-     '3I/ATLAS': {                      # heliocentric, ATLAS (C/2025 N1) 
-        # Rec #:90004914 (+COV) Soln.date: 2025-Sep-08_18:29:13     # obs: 603 (104 days)
-        'a': -.26391591751781,          # Horizons: A, semi-major axis in AU; Hyperbolic orbit
-        'e': 6.139587836355706,         # Horizons: EC, eccentricity
-        'i': 175.1131015287974,         # Horizons: IN, inclination in degrees
-        'omega': 128.0099421020839,     # Horizons: W, argument of perihelion in degrees
-        'Omega': 322.1568699043938,     # Horizons: OM, longitude of ascending node in degrees;  
-        'epoch': '2025-7-22',
-        'TP': 2460977.9814392594,       # Time of perihelion (JD)
+    '3I/ATLAS': {                      # heliocentric, ATLAS (C/2025 N1) 
+        # Rec #:90004917 (+COV) Soln.date: 2025-Oct-10_09:56:25     # obs: 646 (129 days)
+        'a': -.2639620678907299,          # Horizons: A, semi-major axis in AU; Hyperbolic orbit
+        'e': 6.137350157289094,         # Horizons: EC, eccentricity
+        'i': 175.1128577937168,         # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 128.0116082517727,     # Horizons: W, argument of perihelion in degrees
+        'Omega': 322.1522849649193,     # Horizons: OM, longitude of ascending node in degrees;  
+        'epoch': '2025-Jul-28',
+        'TP': 2460977.9835359612,       # Time of perihelion (JD) 2025-Oct-29.4835359612
         #     '3I/ATLAS': 1e99,         # Interstellar object - effectively infinite period
     },    
 
@@ -983,7 +1046,7 @@ planetary_params = {
         'a': 0.08655,          # semi-major axis in AU
 #        'a_parent': 214.7,     # semi-major axis in Saturn radii
         'e': 0.1635,           # eccentricity
-        'i': 175.986,            # inclination to Saturn's equator in degrees (retrograde)
+        'i': 175.986,            # inclination to Saturn's equator in degrees; retrograde > 90
         'omega': 240.3,      # argument of perihelion in degrees
         'Omega': 192.7        # longitude of ascending node in degrees;  
         #     'Phoebe': 550.56,      # 1.51 years
@@ -1073,7 +1136,7 @@ planetary_params = {
         'a': 0.002371,         # semi-major axis in AU
 #        'a_parent': 14.33,     # semi-major axis in Neptune radii
         'e': 0.000016,         # eccentricity (nearly circular)
-        'i': 157.3,          # inclination to Neptune's equator in degrees (retrograde)
+        'i': 157.3,          # inclination to Neptune's equator in degrees; retrograde > 90
         'omega': 0.0,       # argument of perihelion in degrees
         'Omega': 178.1       # longitude of ascending node in degrees
         #     'Triton': 5.877,       # 141.05 hours (retrograde)
@@ -1084,7 +1147,7 @@ planetary_params = {
         'a': 0.0003509,         # semi-major axis in AU
 #        'a_parent': ,     # semi-major axis in Neptune radii
         'e': 0.000,         # eccentricity (nearly circular)
-        'i': 0.0,          # inclination to Neptune's equator in degrees (retrograde)
+        'i': 0.0,          # inclination to Neptune's equator in degrees
         'omega': 0.0,       # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
         #     'Despina': 0.335,      # 8.04 hours
@@ -1095,7 +1158,7 @@ planetary_params = {
         'a': 0.0004144,         # semi-major axis in AU
 #        'a_parent': ,     # semi-major axis in Neptune radii
         'e': 0.000,         # eccentricity (nearly circular)
-        'i': 0.0,          # inclination to Neptune's equator in degrees (retrograde)
+        'i': 0.0,          # inclination to Neptune's equator in degrees
         'omega': 0.0,       # argument of perihelion in degrees
         'Omega': 0.0       # longitude of ascending node in degrees
         #     'Galatea': 0.429,      # 10.30 hours
@@ -2487,7 +2550,8 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 current_position,
                 orbital_params,
                 lambda x: color,  # Simple color function
-                q=r[periapsis_idx]  # Pass the periapsis distance
+                q=r[periapsis_idx], # Pass the periapsis distance
+                center_body=parent_planet  # Use parent planet for terminology
             )
 
         # Find apoapsis (farthest point from parent)
@@ -2506,7 +2570,8 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 date if date else datetime.now(),
                 current_position,
                 orbital_params,
-                lambda x: color  # Simple color function
+                lambda x: color,  # Simple color function
+                center_body=parent_planet  # Use parent planet for terminology
             )
         
         return fig
@@ -2718,7 +2783,8 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
             current_position,
             orbital_params,
             color_map if color is None else lambda x: color,  # Use provided color or color_map
-            q=r[perigee_idx]  # Pass the perigee distance
+            q=r[perigee_idx],  # Pass the perigee distance
+            center_body='Earth'  # Moon orbits Earth
         )
     
     # Apogee (farthest approach)
@@ -2737,7 +2803,8 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
             date,
             current_position,
             orbital_params,
-            color_map if color is None else lambda x: color  # Use provided color or color_map
+            color_map if color is None else lambda x: color,  # Use provided color or color_map
+            center_body='Earth'  # Moon orbits Earth
         )
 
     print(f"  Generated {num_points} points for {orbital_fraction:.1f} orbits")
@@ -4164,7 +4231,9 @@ def pluto_system_final_transform(satellite_name, planetary_params, color, fig=No
         print(f"Error in pluto_system_final_transform: {e}")
         traceback.print_exc()
         return fig
-    
+
+
+"""    
 from datetime import datetime
 
 date1 = datetime(2025, 6, 17)
@@ -4203,6 +4272,7 @@ epochs = [
 for epoch in epochs:
     elements = calculate_mars_satellite_elements(epoch, 'Phobos')
     print(f"Epoch {epoch}: Ω={elements['Omega']:.1f}°, ω={elements['omega']:.1f}°")
+"""
 
 def calculate_phoebe_correction_from_normals():
     """

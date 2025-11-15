@@ -24,3 +24,6 @@ pytz>=2023.3          # Timezone support
 # Network and web
 requests>=2.31.0      # HTTP library
 beautifulsoup4>=4.12.0  # HTML parsing for web scraping
+
+# Climate data processing
+openpyxl>=3.1.0       # Excel file parsing for NSIDC ice data (V4 format)

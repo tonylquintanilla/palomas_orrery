@@ -2,10 +2,13 @@
 __pycache__/
 *.pyc
 
-# Data files
-*.vot 
-*.pkl
+# Ignore large data cache folders
+data/
+star_data/
 
-# Plot outputs
-*.html
-*.png
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated reports
+reports/

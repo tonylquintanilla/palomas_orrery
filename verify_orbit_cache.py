@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-verify_orbit_cache.py - Safely verify and repair orbit_paths.json
+# verify_orbit_cache.py - Safely verify and repair orbit_paths.json
+verify_orbit_cache.py - Safely verify and repair data/orbit_paths.json
 
 This script will:
-1. Create a backup of your current orbit_paths.json
+# 1. Create a backup of your current orbit_paths.json
+1. Create a backup of your current data/orbit_paths.json
 2. Load and validate the file
 3. Report any issues found
 4. Optionally repair corrupted entries
@@ -32,7 +34,8 @@ def create_backup(file_path):
         print(f"✗ Failed to create backup: {e}")
         return None
 
-def verify_orbit_cache(file_path='orbit_paths.json', repair=False):
+# def verify_orbit_cache(file_path='orbit_paths.json', repair=False):
+def verify_orbit_cache(file_path='data/orbit_paths.json', repair=False):    
     """Verify the orbit cache file and optionally repair it."""
     
     print(f"\n{'='*60}")

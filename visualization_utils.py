@@ -65,6 +65,234 @@ def add_hover_toggle_buttons(fig):
     
     return fig
 
+def add_camera_center_button(fig, center_object_name='Sun'):
+    """
+    Add a button to move the camera to the center object.
+    
+    Places the camera AT the center object (like standing on it) looking outward,
+    rather than looking AT the center from outside.
+    
+    Parameters:
+        fig (plotly.graph_objects.Figure): The figure to add buttons to
+        center_object_name (str): Name of the center object (default: 'Sun')
+        
+    Returns:
+        plotly.graph_objects.Figure: The modified figure with camera center button
+    """
+    # Get existing updatemenus and convert to list
+    existing_menus = list(fig.layout.updatemenus) if hasattr(fig.layout, 'updatemenus') and fig.layout.updatemenus is not None else []
+    
+    # Capture the CURRENT axis ranges from the figure to preserve them
+    try:
+        if hasattr(fig.layout, 'scene') and hasattr(fig.layout.scene, 'xaxis'):
+            x_range = list(fig.layout.scene.xaxis.range)
+            y_range = list(fig.layout.scene.yaxis.range)
+            z_range = list(fig.layout.scene.zaxis.range)
+            has_ranges = True
+            print(f"[Camera Button] Preserving axis ranges: X={x_range}, Y={y_range}, Z={z_range}")
+        else:
+            has_ranges = False
+            print(f"[Camera Button] Warning: Could not read axis ranges")
+    except:
+        has_ranges = False
+        print(f"[Camera Button] Warning: Error reading axis ranges")
+    
+    # Build button args with camera AT the center looking along +X axis
+    # Eye at origin (the center object), looking along +X axis
+    # This puts you "at" the center object looking outward
+    button_args = {
+        "scene.camera": {
+            "eye": {"x": 0.001, "y": 0, "z": 0},  # AT the center (tiny offset to avoid singularity)
+            "center": {"x": 1, "y": 0, "z": 0},   # Looking along +X axis (toward RA=0°)
+            "up": {"x": 0, "y": 0, "z": 1}        # Z-axis is up
+        }
+    }
+    
+    # Add axis ranges if we successfully captured them
+    if has_ranges:
+        button_args["scene.xaxis.range"] = x_range
+        button_args["scene.yaxis.range"] = y_range
+        button_args["scene.zaxis.range"] = z_range
+    
+    # Create camera center button
+    camera_button = dict(
+        type="buttons",
+        direction="left",
+        x=0.05,
+        y=1.0,
+        buttons=[dict(
+    #        label=f"Move Camera to {center_object_name} (Center) along the +X axis (♈︎)",
+            label=f"Center (♈︎)",
+            method="relayout",
+            args=[button_args]
+        )],
+        bgcolor='rgba(255,255,255,0.50)',
+        font=dict(color='blue'),
+        bordercolor='white',
+        borderwidth=1
+    )
+    
+    # Add to existing menus
+    existing_menus.append(camera_button)
+    
+    # Update figure layout
+    fig.update_layout(updatemenus=existing_menus)
+    
+    return fig
+
+def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_objects=None):
+    """
+    Add buttons to point camera from center toward specific target objects.
+    
+    Parameters:
+        fig (plotly.graph_objects.Figure): The figure to add buttons to
+        positions (dict): Dictionary mapping object names to their position data
+                         Each position should have 'x', 'y', 'z' keys
+        center_object_name (str): Name of the center object (default: 'Sun')
+        target_objects (list): List of object names to create buttons for
+                              If None, creates buttons for all major planets
+        
+    Returns:
+        plotly.graph_objects.Figure: The modified figure with look-at buttons
+    """
+    # Get existing updatemenus and convert to list
+    existing_menus = list(fig.layout.updatemenus) if hasattr(fig.layout, 'updatemenus') and fig.layout.updatemenus is not None else []
+    
+    # Capture the CURRENT axis ranges from the figure to preserve them
+    try:
+        if hasattr(fig.layout, 'scene') and hasattr(fig.layout.scene, 'xaxis'):
+            x_range = list(fig.layout.scene.xaxis.range)
+            y_range = list(fig.layout.scene.yaxis.range)
+            z_range = list(fig.layout.scene.zaxis.range)
+            has_ranges = True
+        else:
+            has_ranges = False
+    except:
+        has_ranges = False
+    
+    # Default target objects if none specified (major planets + some interesting objects)
+    if target_objects is None:
+#        target_objects = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 
+#                         'Saturn', 'Uranus', 'Neptune', 'Pluto']
+    # AFTER (auto-detect all objects):
+        target_objects = [name for name in positions.keys() if name != center_object_name]
+        print(f"[Camera Buttons] Auto-detected {len(target_objects)} target objects from positions")        
+
+    
+    # Get center position (default to origin if not in positions)
+    center_pos = [0, 0, 0]
+    if center_object_name in positions and positions[center_object_name] is not None:
+        center_data = positions[center_object_name]
+        if isinstance(center_data, dict) and 'x' in center_data:
+            center_pos = [center_data['x'], center_data['y'], center_data['z']]
+    
+    # Create list of buttons
+    buttons = []
+    
+    # First button: Look along +X axis (original behavior)
+    button_args_x = {
+        "scene.camera": {
+            "eye": {"x": 0.001, "y": 0, "z": 0},
+            "center": {"x": 1, "y": 0, "z": 0},
+            "up": {"x": 0, "y": 0, "z": 1}
+        }
+    }
+    if has_ranges:
+        button_args_x["scene.xaxis.range"] = x_range
+        button_args_x["scene.yaxis.range"] = y_range
+        button_args_x["scene.zaxis.range"] = z_range
+    
+    buttons.append(dict(
+        label=f"View +X axis (♈︎) from {center_object_name}",
+        method="relayout",
+        args=[button_args_x]
+    ))
+    
+    # Add buttons for each target object
+    for target_name in target_objects:
+        if target_name not in positions or positions[target_name] is None:
+            continue
+            
+        target_data = positions[target_name]
+        if not isinstance(target_data, dict) or 'x' not in target_data:
+            continue
+        
+        target_pos = [target_data['x'], target_data['y'], target_data['z']]
+        
+        # Calculate direction vector from center to target
+        direction = np.array(target_pos) - np.array(center_pos)
+        distance = np.linalg.norm(direction)
+        
+        if distance < 1e-10:  # Too close, skip
+            continue
+        
+        # Normalize the direction
+        direction_norm = direction / distance
+        
+        # Place camera at center, looking toward target
+        # Use a small offset to avoid singularity at origin
+        camera_offset = 0.001
+        
+        # Camera position
+        eye_pos = {
+            'x': center_pos[0] + direction_norm[0] * camera_offset,
+            'y': center_pos[1] + direction_norm[1] * camera_offset,
+            'z': center_pos[2] + direction_norm[2] * camera_offset
+        }
+        
+        # Look at the target position
+        center_look = {
+            'x': target_pos[0],
+            'y': target_pos[1],
+            'z': target_pos[2]
+        }
+        
+        button_args = {
+            "scene.camera": {
+                "eye": eye_pos,
+                "center": center_look,
+                "up": {"x": 0, "y": 0, "z": 1}
+            }
+        }
+        
+        if has_ranges:
+            button_args["scene.xaxis.range"] = x_range
+            button_args["scene.yaxis.range"] = y_range
+            button_args["scene.zaxis.range"] = z_range
+        
+        buttons.append(dict(
+            label=f"View {target_name} from {center_object_name}",
+            method="relayout",
+            args=[button_args]
+        ))
+    
+    # Create dropdown menu with all buttons
+    if buttons:
+        camera_dropdown = dict(
+            type="dropdown",
+            direction="down",
+            x=0.02,
+            y=1.0,
+            xanchor="left",
+            yanchor="top",
+            buttons=buttons,
+            bgcolor='rgba(255,255,255,0.70)',
+            font=dict(color='blue'),
+            bordercolor='white',
+            borderwidth=1,
+            pad=dict(t=0, b=0)
+        )
+        
+        # Add to existing menus
+        existing_menus.append(camera_dropdown)
+        
+        # Update figure layout
+        fig.update_layout(updatemenus=existing_menus)
+        
+        print(f"[Camera Buttons] Added dropdown with {len(buttons)} view options")
+    
+    return fig
+
 def format_hover_text(obj_data, name, is_solar_system=False):
     """
     Format hover text consistently for different types of objects.
@@ -192,11 +420,14 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     # Calculate orbital period for non-satellites
     if not is_satellite and obj_name in planetary_params:
         a = planetary_params[obj_name]['a']  # Semi-major axis in AU
-        orbital_period_years = np.sqrt(a ** 3)  # Period in Earth years
-        calculated_period = {
-            'years': orbital_period_years,
-            'days': orbital_period_years * 365.25
-        }
+            
+        if a > 0:
+            orbital_period_years = np.sqrt(a ** 3)
+            calculated_period = {
+                'years': orbital_period_years,
+                'days': orbital_period_years * 365.25
+            }  # ✅ Correct indentation - closes the dict properly
+
     
     # Format calculated period
     if isinstance(calculated_period, dict):

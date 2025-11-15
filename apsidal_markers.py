@@ -16,6 +16,71 @@ import plotly.graph_objects as go
 from constants_new import KNOWN_ORBITAL_PERIODS, color_map
 from datetime import datetime, timedelta
 
+# ADD THIS TO YOUR apsidal_markers.py FILE
+# Place this section right after the imports, before any other function definitions
+
+# ========== APSIDAL TERMINOLOGY SYSTEM ==========
+# Maps central body to (periapsis_term, apoapsis_term)
+APSIDAL_TERMINOLOGY = {
+    'Sun': ('Perihelion', 'Aphelion'),
+    '10': ('Perihelion', 'Aphelion'),  # Sun by ID
+    'Mercury': ('Perihermion', 'Aphermion'),
+    '199': ('Perihermion', 'Aphermion'),  # Mercury by ID
+    'Venus': ('Pericytherion', 'Apocytherion'),
+    '299': ('Pericytherion', 'Apocytherion'),  # Venus by ID
+    'Earth': ('Perigee', 'Apogee'),
+    '399': ('Perigee', 'Apogee'),  # Earth by ID
+    'Moon': ('Periselene', 'Aposelene'),
+    '301': ('Periselene', 'Aposelene'),  # Moon by ID
+    'Mars': ('Periareion', 'Apoareion'),
+    '499': ('Periareion', 'Apoareion'),  # Mars by ID
+    'Jupiter': ('Perijove', 'Apojove'),
+    '599': ('Perijove', 'Apojove'),  # Jupiter by ID
+    'Saturn': ('Perisaturnium', 'Aposaturnium'),  # Also: Perichronon/Apochronon
+    '699': ('Perisaturnium', 'Aposaturnium'),  # Saturn by ID
+    'Uranus': ('Periuranion', 'Apouranion'),
+    '799': ('Periuranion', 'Apouranion'),  # Uranus by ID
+    'Neptune': ('Periposeidion', 'Apoposeidion'),
+    '899': ('Periposeidion', 'Apoposeidion'),  # Neptune by ID
+    'Pluto': ('Perihadion', 'Apohadion'),
+    '999': ('Perihadion', 'Apohadion'),  # Pluto by ID
+}
+
+def get_apsidal_terms(center_body):
+    """
+    Get appropriate apsidal terminology for a given central body.
+    
+    Parameters:
+        center_body: Name or ID of the central body (str or int)
+        
+    Returns:
+        tuple: (periapsis_term, apoapsis_term)
+        
+    Examples:
+        >>> get_apsidal_terms('Sun')
+        ('Perihelion', 'Aphelion')
+        >>> get_apsidal_terms('Jupiter')
+        ('Perijove', 'Apojove')
+        >>> get_apsidal_terms('599')  # Jupiter by ID
+        ('Perijove', 'Apojove')
+        >>> get_apsidal_terms('Ceres')  # Unknown body
+        ('Periapsis', 'Apoapsis')
+    """
+    # Convert to string if numeric ID
+    center_key = str(center_body)
+    
+    # Try exact match first
+    if center_key in APSIDAL_TERMINOLOGY:
+        return APSIDAL_TERMINOLOGY[center_key]
+    
+    # Try case-insensitive match for names
+    for key, value in APSIDAL_TERMINOLOGY.items():
+        if key.lower() == center_key.lower():
+            return value
+    
+    # Fallback to generic terms for unknown bodies
+    return ('Periapsis', 'Apoapsis')
+
 def calculate_orbital_angle_shift(ideal_pos, actual_pos):
     """
     Calculate the angular separation between ideal and actual positions.
@@ -947,12 +1012,29 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
         print(f"Warning: Could not calculate apsidal dates for {body_name}: {ex}")
         return None, None
 
+
 def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position, 
-                        orbital_params, color_map, q=None):
+                        orbital_params, color_map, q=None, center_body='Sun'):
     """
     Add a perihelion/perigee marker with accurate date calculation.
-    Now handles full datetime precision from TP.
+    Now handles full datetime precision from TP and uses proper apsidal terminology.
+    
+    Parameters:
+        fig: Plotly figure object
+        x, y, z: Position coordinates in AU
+        obj_name: Name of the orbiting object
+        a: Semi-major axis in AU
+        e: Eccentricity
+        date: Current date for calculation
+        current_position: Dictionary with 'x', 'y', 'z' keys
+        orbital_params: Full orbital parameters dictionary
+        color_map: Function to get color for object
+        q: Periapsis distance (calculated if None)
+        center_body: Name or ID of central body (Sun, Earth, Jupiter, etc.)
     """
+    # Get proper apsidal terminology
+    near_term, far_term = get_apsidal_terms(center_body)
+
     # Calculate perihelion distance if not provided
     if q is None:
         q = a * (1 - e)
@@ -1014,11 +1096,26 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     else:  # Low eccentricity
         accuracy_note = "<br><i>Accuracy: ±0.0005 AU (minimal perturbations)</i>"
     
-    # Determine label
-    label = "Ideal Periapsis"
+    # SAFETY: Ensure we always have some date string
+    if perihelion_date_str == "":
+        perihelion_date_str = "<br>Date: Not calculated"
+        print(f"WARNING: Could not calculate {near_term} date for {obj_name}", flush=True)
+    
+    # Use proper terminology for this central body
+    label = f"Ideal {near_term}"
     
     # Create hover text with all information
-    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q:.6f} AU{accuracy_note}"
+    # Ensure q is properly formatted
+    try:
+        q_str = f"{q:.6f}"
+    except:
+        q_str = str(q)
+        print(f"WARNING: Could not format q value for {obj_name}: {q}", flush=True)
+    
+    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q_str} AU{accuracy_note}"
+    
+    # DEBUG: Uncomment these lines to diagnose hover text issues
+    print(f"DEBUG: {obj_name} {label} hover text: {hover_text}", flush=True)
     
     fig.add_trace(
         go.Scatter3d(
@@ -1039,12 +1136,28 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         )
     )
 
+
 def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
-                        orbital_params, color_map):
+                        orbital_params, color_map, center_body='Sun'):
     """
     Add an apohelion/apogee marker to the plot with accurate date calculation.
-    Now handles full datetime precision from TP.
+    Now handles full datetime precision from TP and uses proper apsidal terminology.
+    
+    Parameters:
+        fig: Plotly figure object
+        x, y, z: Position coordinates in AU
+        obj_name: Name of the orbiting object
+        a: Semi-major axis in AU
+        e: Eccentricity
+        date: Current date for calculation
+        current_position: Dictionary with 'x', 'y', 'z' keys
+        orbital_params: Full orbital parameters dictionary
+        color_map: Function to get color for object
+        center_body: Name or ID of central body (Sun, Earth, Jupiter, etc.)
     """
+    # Get proper apsidal terminology
+    near_term, far_term = get_apsidal_terms(center_body)
+
     # Calculate aphelion distance
     if e < 1:
         Q = a * (1 + e)
@@ -1099,12 +1212,27 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     else:  # Low eccentricity
         accuracy_note = "<br><i>Accuracy: ±0.0005 AU (minimal perturbations)</i>"
     
-    # Determine label
-    label = "Ideal Apoapsis"
+    # SAFETY: Ensure we always have some date string
+    if aphelion_date_str == "":
+        aphelion_date_str = "<br>Date: Not calculated"
+        print(f"WARNING: Could not calculate {far_term} date for {obj_name}", flush=True)
+    
+    # Use proper terminology for this central body
+    label = f"Ideal {far_term}"
     
     # Create hover text
-    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q:.6f} AU{accuracy_note}"
+    # Ensure Q is properly formatted
+    try:
+        Q_str = f"{Q:.6f}"
+    except:
+        Q_str = str(Q)
+        print(f"WARNING: Could not format Q value for {obj_name}: {Q}", flush=True)
     
+    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q_str} AU{accuracy_note}"
+    
+    # DEBUG: Uncomment these lines to diagnose hover text issues
+    print(f"DEBUG: {obj_name} {label} hover text: {hover_text}", flush=True)
+   
     fig.add_trace(
         go.Scatter3d(
             x=[x],
@@ -1124,4 +1252,107 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         )
     )
 
-
+def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None):
+    """
+    Find and mark the closest approach point from trajectory data.
+    
+    Works for ANY object passing near ANY center body, regardless of whether
+    the object orbits that center. Uses proper astronomical terminology.
+    
+    Parameters:
+        fig: Plotly figure object
+        positions_dict: Dictionary with date keys and position values {'x':, 'y':, 'z':}
+        obj_name: Name of the object
+        center_body: Name or ID of central body (for terminology)
+        color_map: Function to get object color
+        date_range: Optional tuple (start_date, end_date) to filter positions
+    
+    Returns:
+        None (modifies fig in place)
+        
+    Examples:
+        - Comet C/2025 V1 closest approach to Earth → "Closest Approach (Perigee)"
+        - Asteroid flyby of Mars → "Closest Approach (Periareion)"
+        - Spacecraft encounter with Jupiter → "Closest Approach (Perijove)"
+    """
+    import numpy as np
+    from datetime import datetime
+    
+    if not positions_dict or len(positions_dict) == 0:
+        print(f"No trajectory data for closest approach of {obj_name}", flush=True)
+        return
+    
+    # Get terminology for this center body
+    near_term, far_term = get_apsidal_terms(center_body)
+    
+    # Calculate distances for all positions
+    dates = []
+    distances = []
+    positions = []
+    
+    for date_str, pos in positions_dict.items():
+        if date_range:
+            # Filter by date range if provided
+            try:
+                date = datetime.fromisoformat(date_str)
+                if not (date_range[0] <= date <= date_range[1]):
+                    continue
+            except:
+                pass  # If date parsing fails, include the position
+        
+        dates.append(date_str)
+        distance = np.sqrt(pos['x']**2 + pos['y']**2 + pos['z']**2)
+        distances.append(distance)
+        positions.append(pos)
+    
+    if len(distances) == 0:
+        print(f"No positions in date range for {obj_name} closest approach", flush=True)
+        return
+    
+    # Find closest approach
+    closest_idx = np.argmin(distances)
+    closest_date = dates[closest_idx]
+    closest_distance = distances[closest_idx]
+    closest_pos = positions[closest_idx]
+    
+    # Format date nicely
+    try:
+        date_obj = datetime.fromisoformat(closest_date)
+        date_str_formatted = date_obj.strftime('%Y-%m-%d %H:%M:%S UTC')
+    except:
+        date_str_formatted = closest_date
+    
+    # Create label using proper terminology
+    label = f"Closest Approach ({near_term})"
+    
+    # Create comprehensive hover text
+    km_distance = closest_distance * 149597870.7  # AU to km
+    hover_text = (
+        f"<b>{obj_name} {label}</b><br>"
+        f"Date: {date_str_formatted}<br>"
+        f"Distance from {center_body}: {closest_distance:.6f} AU<br>"
+        f"Distance: {km_distance:,.0f} km"
+    )
+    
+    # Add marker to plot - using diamond symbol to distinguish from apsidal markers
+    fig.add_trace(
+        go.Scatter3d(
+            x=[closest_pos['x']],
+            y=[closest_pos['y']],
+            z=[closest_pos['z']],
+            mode='markers',
+            marker=dict(
+                size=8,
+        #        color=color_map(obj_name),
+                color='white',
+                symbol='square-open',  # Different from apsidal markers (square-open)
+        #        line=dict(width=2, color='white')  # White outline for visibility
+            ),
+            name=f"{obj_name} {label}",
+            text=[hover_text],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        )
+    )
+    
+    print(f"✓ Added closest approach marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)

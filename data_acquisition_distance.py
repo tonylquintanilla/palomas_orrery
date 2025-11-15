@@ -4,6 +4,7 @@ import numpy as np
 from astropy.table import Table, vstack
 from astroquery.vizier import Vizier
 from astropy.coordinates import Angle
+from vot_cache_manager import VOTCacheManager
 
 def initialize_vizier():
     """Initialize Vizier with unlimited rows and all columns."""
@@ -34,7 +35,11 @@ def fetch_gaia_data(vizier, gaia_data_file, min_parallax_mas):
         print(f"Found {len(gaia_data)} Gaia stars")
         
         # Save the data
-        gaia_data.write(gaia_data_file, format='votable', overwrite=True)
+    #    gaia_data.write(gaia_data_file, format='votable', overwrite=True)
+        # Use safe save with protection against overwriting comprehensive caches
+        vot_mgr = VOTCacheManager()
+        vot_mgr.safe_save_vot(gaia_data, gaia_data_file)
+
         print(f"Saved Gaia data to {gaia_data_file}")
         
         return gaia_data
@@ -56,7 +61,11 @@ def fetch_hipparcos_data(vizier, hip_data_file, min_parallax_mas):
         print(f"Found {len(hip_data)} Hipparcos stars")
         
         # Save the data
-        hip_data.write(hip_data_file, format='votable', overwrite=True)
+    #    hip_data.write(hip_data_file, format='votable', overwrite=True)
+        # Use safe save with protection against overwriting comprehensive caches
+        vot_mgr = VOTCacheManager()
+        vot_mgr.safe_save_vot(hip_data, hip_data_file)
+
         print(f"Saved Hipparcos data to {hip_data_file}")
         
         return hip_data
@@ -179,9 +188,12 @@ def fetch_stellar_data(max_light_years):
         min_parallax_mas = calculate_parallax_limit(max_light_years)
         
         # Define data files
-        hip_data_file = 'hipparcos_data_distance.vot'
-        gaia_data_file = 'gaia_data_distance.vot'
+#        hip_data_file = 'hipparcos_data_distance.vot'
+#        gaia_data_file = 'gaia_data_distance.vot'
         
+        hip_data_file = 'star_data/hipparcos_data_distance.vot'
+        gaia_data_file = 'star_data/gaia_data_distance.vot'
+
         # Fetch data from both catalogs
         hip_data = fetch_hipparcos_data(vizier, hip_data_file, min_parallax_mas)
         gaia_data = fetch_gaia_data(vizier, gaia_data_file, min_parallax_mas)

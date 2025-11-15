@@ -116,7 +116,7 @@ KNOWN_ORBITAL_PERIODS = {
     'Mab': 0.923,          # 22.15 hours
     
     # Neptune satellites  
-    'Triton': 5.877,       # 141.05 hours (retrograde)
+    'Triton': 5.877,       # 141.05 hours 
     'Despina': 0.335,      # 8.04 hours
     'Galatea': 0.429,      # 10.30 hours
     'Proteus': 1.122,      # 26.93 hours
@@ -195,12 +195,15 @@ KNOWN_ORBITAL_PERIODS = {
     'Hale-Bopp': 863279.5035,       # PER= 2363.5304681429 jy = 863279.5035
     'Ikeya-Seki': 319800.00,        # 876.0 * 365.25 (estimate)
     'ISON': 230970.00,              # 632.3 * 365.25 (pre-disruption)
-    'SWAN': 8237831.493,       # PER= 22553.953438133 jy
+    'SWAN': 8237831.493,            # PER= 22553.953438133 jy
+    'Lemmon': 492252.5179,      # PER= 1347.7139437075 jy    
     
     # For hyperbolic/parabolic objects, period is undefined
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
-    'C/2025_K1': None,      # Parabolic comet - effectively infinite period
-    'McNaught': None,       # Parabolic comet - effectively infinite period    
+    'C/2025_K1': None,      # Hyperbolic comet - effectively infinite period
+    'Borisov': None,        # Hyperbolic comet - effectively infinite period    
+    'McNaught': None,       # Hyperbolic comet - effectively infinite period 
+    'ATLAS': None,          # Hyperbolic comet -- infinite period   PER= 9.999999E99
     '3I/ATLAS': None,       # Interstellar hyperbolic object - effectively infinite period
     '1I/Oumuamua': None,    # Interstellar hyperbolic object - effectively infinite period  
     '2I/Borisov': None,     # Interstellar hyperbolic object - effectively infinite period
@@ -560,11 +563,13 @@ def color_map(planet):
         'McNaught': 'green',
         'NEOWISE': 'red',
         'C/2025_K1': 'cyan',
+        'Borisov': 'green',        
         'Tsuchinshan': 'cyan',
         'ATLAS': 'white',
         'Churyumov': 'gold',
         '2I/Borisov': 'red',
         'SWAN': 'gold',
+        'Lemmon': 'green',        
 
         'SOHO': 'white',
         'JamesWebb': 'gold',
@@ -625,7 +630,8 @@ INFO = {
 
         'Solar Shells': 'Solar structure and atmosphere, Oort cloud, and gravitational reach.',
 
-        'Mercury': 'Horizons: 199. The smallest planet and closest to the Sun.\n' 
+        'Mercury': '***IF MERCURY IS THE CENTER OBJECT SET MANUAL SCALE TO 0.2 AU FOR BEST VISUALIZATION.***'
+        'Horizons: 199. The smallest planet and closest to the Sun.\n' 
         '* Mercury-centered: do not select Mercury; visualize shells at manual scale 0.002 AU.\n' 
         '* Heliocentric: select Mercury with or without shells.\n' 
         '* Missions: Mariner 10, Messenger, BepiColombo',
@@ -723,7 +729,7 @@ INFO = {
 
         '2024 PT5': 'Horizons: 2024 PT5. In late September 2024, Earth temporarily captured a small asteroid into its orbit, leading to it being ' 
         'dubbed Earth\'s "second moon". The object\'s official designation is 2024 PT5, but it was also referred to as a ' 
-        '"mini-moon" due to its small size. Retrograde (left-handed) orbit. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
+        '"mini-moon" due to its small size. \n* Size: It\'s estimated to be only about 11 meters wide, making it incredibly ' 
         'small compared to our permanent Moon.\n* Origin: It belongs to the Arjuna asteroid belt, a group of asteroids that ' 
         'share similar orbits with Earth.\n* Closest approach August 9, 2024. \n* Temporary Capture: 2024 PT5 was only temporarily ' 
         'captured by Earth\'s gravity. ' 
@@ -753,7 +759,17 @@ INFO = {
         'and other space agencies continuously monitor Near-Earth Objects (NEOs) to track their movements and assess any potential impact \n' 
         'risks.',
 
-        '2024 YR4': 'Horizons: 2024 YR4. 2024 YR4 is an asteroid that poses a potential risk to Earth, with a probability of nearly zero. Retrograde (left-handed) orbit.\n' 
+        '2024 YR4': 'Horizons: 2024 YR4. An extremely eccentric Apollo-type Near-Earth Asteroid and Mars-crosser.\n'
+        '* Orbital characteristics: With an eccentricity of 0.662, this asteroid has a highly stretched\n'
+        '  elliptical orbit, swinging from 0.851 AU (between Venus and Earth) out to 4.181 AU (well past\n'
+        '  Mars into the main asteroid belt). Orbital period: approximately 2.53 years.\n'
+        '* Classification: Apollo-type NEA (crosses Earth\'s orbit from outside) and Mars-crosser.\n'
+        '* Dynamical evolution: The high eccentricity suggests this asteroid underwent significant\n'
+        '  gravitational perturbations from planetary encounters, likely originating from the main belt\n'
+        '  and getting "scattered" into its current orbit.\n'
+        '* Next perihelion: December 10, 2028 - when it will swing closest to the Sun at 0.851 AU.\n'
+        '* Solar system native: Despite resembling a comet-like orbit, this is a bound object (e < 1.0)\n'
+        '  that remains in the solar system, unlike hyperbolic interstellar objects.'
         '* It was discovered on December 27, 2024, with a close approach on December 25, 4:46 UTC at a distance of about 822,000 km.\n' 
         '* It is estimated to be between 40 and 100 meters wide.\n' 
         '* It\'s next close approach is on December 17, 2028, 12:16 UTC at a distance from Earth\'s surface of about 8,007,000 km, ' 
@@ -771,15 +787,27 @@ INFO = {
         'Dec. 22, 2032, has moved farther away from the Earth. There still remains a very small chance for asteroid 2024 YR4 to ' 
         'impact the Moon on Dec. 22, 2032. That probability is currently 1.7%."',
 
-        '2024 DW': 'Horizons: 2024 DW. Close Flyby: Asteroid 2024 DW made a close approach to Earth on February 22, 2024. It passed within approximately ' 
-        '225,000 kilometers of Earth, which is closer than the Moon\'s average distance. Retrograde (left-handed) orbit.\n' 
-        '* Size: It\'s estimated to be about the size of a bus, roughly 13 meters in diameter.\n' 
-        '* Safety: Despite its close proximity, it was determined that 2024 DW did not pose a threat to Earth.\n' 
-        '* Discovery: The asteroid was discovered by astronomers working with the Mt. Lemmon Survey.\n' 
-        '* Orbit: It is an Apollo type asteroid. Meaning its orbit crosses earth\'s orbit.\n' 
-        '* Tracking: NASA\'s Center for Near-Earth Object Studies (CNEOS) played a crucial role in tracking and calculating its orbit. ' 
-        'In essence, 2024 DW was a relatively small asteroid that had a close encounter with Earth, providing astronomers with an ' 
-        'opportunity to study near-Earth objects.',
+        '2024 DW': 'Horizons: 2024 DW. A highly eccentric Apollo-type Near-Earth Asteroid and Mars-crosser.\n'
+            '* Orbital characteristics: With an eccentricity of 0.694, this asteroid has one of the most elliptical\n'
+            '  orbits among NEAs. It swings from 0.741 AU (inside Venus\'s orbit!) out to 4.101 AU (past Mars,\n'
+            '  reaching into the asteroid belt).\n'
+            '* Classification: Apollo-type NEA (crosses Earth\'s orbit from outside) and Mars-crosser.\n'
+            '* Origin: Likely a former main belt asteroid that was gravitationally perturbed by close encounters\n'
+            '  with planets (especially Jupiter or Mars) over millions of years, "kicking" it into this highly\n'
+            '  eccentric orbit.\n'
+            '* Close approach: Closest approach to Earth occurred on February 22, 2024 at approximately 5:00 UTC.\n'
+            '* Not interstellar: Despite its extreme orbit, this asteroid is bound to the Sun (e < 1.0) and is\n'
+            '  a permanent solar system resident, unlike interstellar visitors like \'Oumuamua (e ≈ 1.2) or\n'
+            '  2I/Borisov (e ≈ 3.4) which have hyperbolic orbits and escape the solar system.'
+            '* Close Flyby: Asteroid 2024 DW made a close approach to Earth on February 22, 2024. It passed within approximately ' 
+            '225,000 kilometers of Earth, which is closer than the Moon\'s average distance.\n' 
+            '* Size: It\'s estimated to be about the size of a bus, roughly 13 meters in diameter.\n' 
+            '* Safety: Despite its close proximity, it was determined that 2024 DW did not pose a threat to Earth.\n' 
+            '* Discovery: The asteroid was discovered by astronomers working with the Mt. Lemmon Survey.\n' 
+            '* Orbit: It is an Apollo type asteroid. Meaning its orbit crosses earth\'s orbit.\n' 
+            '* Tracking: NASA\'s Center for Near-Earth Object Studies (CNEOS) played a crucial role in tracking and calculating its orbit. ' 
+            'In essence, 2024 DW was a relatively small asteroid that had a close encounter with Earth, providing astronomers with an ' 
+            'opportunity to study near-Earth objects.',
 
         'EM-L1': 'Horizons: 3011. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L1; 3011; Earth-Moon Lagrange 1\n' 
         '#1) The Earth-Moon Lagrange-1 point (EM-L1) is an equilibirium location where the Moon\'s gravitational field partially \n' 
@@ -919,7 +947,17 @@ INFO = {
         'Ceres': 'Horizons: A801 AA. The largest object in the asteroid belt, considered a dwarf planet.',
 
         'Apophis': '***SET MANUAL SCALE TO 0.005 AU TO SEE THE CLOSE APPROACH TO EARTH AND MOON***\n\n'
-        'Horizons: 2004 MN4. Near-Earth asteroid with a close approach in 2029. Retrograde (left-handed) orbit.\n' 
+        'Horizons: 2004 MN4. The most famous Near-Earth Asteroid - an Aten-type that orbits mostly inside\n'
+        ' Earth\'s orbit but crosses outward.\n'
+        '* Size: Approximately 370 meters (1,210 feet) in diameter.\n'
+        '* Classification: Aten-type NEA (semi-major axis < 1.0 AU, aphelion > Earth\'s perihelion).\n'
+        '* Orbital characteristics: With e = 0.191, Apophis swings from 0.746 AU (inside Venus\'s orbit)\n'
+        '  to 1.099 AU (just outside Earth\'s orbit), with a period of 323.6 days.\n'
+        '* Close approaches: Will make very close approaches to Earth in 2029 (within 32,000 km - closer\n'
+        '  than geosynchronous satellites!) and 2036. The 2029 flyby will be visible to the naked eye.\n'
+        '* Impact risk: Once considered one of the most hazardous asteroids, refined orbit calculations\n'
+        '  have ruled out impact for at least 100 years.\n'
+        '* Named after: The Egyptian god of chaos and darkness, Apophis (Greek name for Apep).' 
         '* Closest approach to the Earth: 2029-04-13 21:46 UTC; approximately 31,600 km from the surface.\n'
         '* Closest approach to the Moon: 2029-04-14 14:32 UTC; approximately 94,200 km from the surface.\n'
         '* Missions:\n' 
@@ -956,9 +994,19 @@ INFO = {
 
         'Lutetia': 'Horizons: A852 VA. A main-belt asteroid visited by the Rosetta spacecraft.', 
 
-        'Ryugu': 'Horizons: 1999 JU3. Asteroid visited by the Japanese Hayabusa2 mission. Retrograde (left-handed) orbit.',
+        'Ryugu': 'Horizons: 1999 JU3. Asteroid visited by the Japanese Hayabusa2 mission.',
 
-        'Eros': 'Horizons: A898 PA. Asteroid explored by NASA\'s NEAR Shoemaker spacecraft. Retrograde (left-handed) orbit.',
+        'Eros': 'Horizons: A898 PA. The first Near-Earth Asteroid to be orbited and landed on by a spacecraft\n'
+        '  (NEAR Shoemaker mission, 2000-2001).\n'
+        '* Size: Approximately 16.8 × 8.2 × 8.2 km - one of the largest NEAs.\n'
+        '* Classification: Amor-type NEA (approaches but doesn\'t cross Earth\'s orbit). With perihelion\n'
+        '  at 1.133 AU and aphelion at 1.783 AU, Eros orbits entirely outside Earth but comes close.\n'
+        '* Composition: S-type (silicaceous) asteroid - rocky composition rich in silicate minerals and metals.\n'
+        '* Historical significance: First asteroid discovered to orbit closer to the Sun than Mars (1898).\n'
+        '* NEAR Shoemaker mission: NASA spacecraft orbited Eros for a year, then landed on Feb 12, 2001,\n'
+        '  becoming the first spacecraft to successfully land on an asteroid. Returned over 160,000 images.\n'
+        '* Scientific importance: Detailed study of Eros helped us understand asteroid composition, structure,\n'
+        '  and provided insights for planetary defense strategies.',
 
         'Dinkinesh': 'Horizons: 1999 VD57. Asteroid Dinkinesh (Horizons ID 152830) is a small asteroid located in the inner main asteroid belt between \n' 
         'Mars and Jupiter. Its name means "you are wonderful" in Amharic, an Ethiopian language, and was given in honor of the Lucy \n' 
@@ -980,7 +1028,7 @@ INFO = {
         '* Dinkinesh is also notable for being the smallest main belt asteroid ever visited by a spacecraft, providing valuable \n' 
         '  insights into how asteroids evolve, especially those that might eventually leave the main belt and become near-Earth asteroids.',
 
-        'Donaldjohanson': 'Horizons: 1981 EQ5. A main-belt asteroid visited by the Lucy spacecraft. Retrograde (left-handed) orbit. ',
+        'Donaldjohanson': 'Horizons: 1981 EQ5. A main-belt asteroid visited by the Lucy spacecraft. ',
 
         'Eurybates': 'Horizons: 1973 SO. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
@@ -1025,7 +1073,7 @@ INFO = {
 
         'Dione': 'Horizons: 604. Saturn moon. Features wispy terrains and numerous craters.',
 
-        'Tethys': 'Horizons: 603. Saturn moon. Notable for its large Ithaca Chasma canyon. Retrograde (left-handed) orbit.',
+        'Tethys': 'Horizons: 603. Saturn moon. Notable for its large Ithaca Chasma canyon.',
 
         'Mimas': 'Horizons: 601. Saturn moon. Known for the large Herschel Crater, resembling the Death Star.',
 
@@ -1048,7 +1096,7 @@ INFO = {
         'its trailing hemisphere is bright white, likely due to the deposition of icy material. It also has a mysterious equatorial \n' 
         'ridge that spans a significant portion of its circumference.',
     
-        'Phoebe': 'Horizons: 609. Saturn moon. An irregular moon with a retrograde orbit around Saturn. Retrograde (left-handed) orbit.',
+        'Phoebe': 'Horizons: 609. Retrograde, i > 90. Saturn moon. An irregular moon with a retrograde orbit around Saturn. Retrograde (left-handed) orbit.',
 
         'Uranus': 'Horizons: 799. The ice giant with a unique tilt, orbits the Sun on its side.'
         '* Uranus-centered: do not select Uranus; visualize shells at 0.5 AU.\n'
@@ -1060,7 +1108,7 @@ INFO = {
 
         'Oberon': 'Horizons: 702. Uranus moon. The second-largest moon of Uranus, heavily cratered.',
 
-        'Umbriel': 'Horizons: 703. Uranus moon. Features a dark surface with numerous impact craters. Retrograde (left-handed) orbit.', 
+        'Umbriel': 'Horizons: 703. Uranus moon. Features a dark surface with numerous impact craters.', 
 
         'Ariel': 'Horizons: 704. Uranus moon. Exhibits a mix of heavily cratered regions and younger surfaces.',
 
@@ -1068,7 +1116,7 @@ INFO = {
 
         'Portia': 'Horizons 712. Uranus moon, associated with outer ring Nu.',
 
-        'Mab': 'horizons 726. Uranus moon, associated with outer ring Mu. Retrograde (left-handed) orbit.',
+        'Mab': 'horizons 726. Uranus moon, associated with outer ring Mu.',
 
         'Neptune': 'Horizons: 899. The eighth and farthest known planet in the solar system.\n'
         '* Neptune-centered: do not select Neptune; visualize shells at 1 AU.\n'
@@ -1076,7 +1124,7 @@ INFO = {
         '* Missions: Voyager 2; Neptune Orbiter and Probe (possible).\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Triton': 'Horizons: 801. Neptune\'s largest moon, has a retrograde orbit and geysers suggesting geological activity.',
+        'Triton': 'Horizons: 801. Retrograde, i > 90. Neptune\'s largest moon, has a retrograde orbit and geysers suggesting geological activity.',
 
         'Despina': 'Horizons: 805. Irregularly shaped, likely icy and grayish, orbiting close to the planet and possibly contributing to its ring system',
 
@@ -1094,7 +1142,7 @@ INFO = {
 
         'Nix': 'Horizons: 902. A small, elongated moon of Pluto with a chaotic rotation.',
 
-        'Kerberos': 'Horizons: 904. Pluto\'s second-smallest moon is thought to have a double-lobed shape. Retrograde (left-handed) orbit.',
+        'Kerberos': 'Horizons: 904. Pluto\'s second-smallest moon is thought to have a double-lobed shape.',
 
         'Hydra': 'Horizons: 903. The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
 
@@ -1110,7 +1158,7 @@ INFO = {
 
         'Dysnomia': 'Eris\'s moon. Orbital period: 15.79 Earth days', 
 
-        'Quaoar': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system. Retrograde (left-handed) orbit.',
+        'Quaoar': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system.',
 
         'Ammonite': 'Horizons: 2023 KQ14. Ammonite is an asteroid with an exceptionally eccentric and elongated orbit around the Sun. It belongs to a \n' 
         'classification of objects known as sednoids because its orbit is highly detached from the influence of the giant planets. \n' 
@@ -1161,12 +1209,12 @@ INFO = {
         'Horizons: 2015 TG387. Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
         'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
         'Extreme orbits make Sednoids "detached objects," meaning they are not significantly influenced by the gravity of the giant ' 
-        'planets like Neptune. Retrograde (left-handed) orbit.\n' 
+        'planets like Neptune.\n' 
         '* Leleākūhonua is considered a strong candidate for being a dwarf planet, but it is not officially recognized as one yet. ' 
         '  Like Sedna, it\'s more accurately classified as a Trans-Neptunian Object (TNO) rather than a typical asteroid.',
 
         'Chariklo': 'Horizons: 1997 CU26. Chariklo is the largest known centaur, a class of small solar system bodies that orbit the Sun between Jupiter ' 
-        'and Neptune. Retrograde (left-handed) orbit.\n ' 
+        'and Neptune.\n ' 
         '* It has an average diameter of about 250 kilometers and a dark, reddish surface composed of water ice, silicate minerals, ' 
         'and organic compounds.\n ' 
         '* Rings: Chariklo is notable for being the first minor (not Dwarf) planet discovered to have rings, which were found in 2013 ' 
@@ -1178,18 +1226,18 @@ INFO = {
         '  * These two rings are separated by a 9-kilometer gap and orbit at a distance of about 400 kilometers from Chariklo\'s center.',
 
         'Orcus': 'Horizons: 2004 DW. A large Kuiper Belt object with a moon named Vanth. Estimated to be about 910 km in diameter. ' 
-        'Discovered on February 17, 2004. Retrograde (left-handed) orbit.',
+        'Discovered on February 17, 2004.',
 
         '2017 OF201': '**USE A MANUAL SCALE OF AT LEAST 1500 AU TO SEE THE FULL ORBIT**\n' 
-        'Horizons: 2017 OF201. An extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter. Retrograde (left-handed) orbit.',
+        'Horizons: 2017 OF201. An extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter.',
 
         'Varuna': 'Horizons: 2000 WR106. A significant Kuiper Belt Object with a rapid rotation period.',
 
         'Ixion': 'Horizons: 2001 KX76. A significant Kuiper Belt Object without a known moon.',
 
-        'GV9': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon. Retrograde (left-handed) orbit.',
-        'Mani': 'Horizons: 2002 MS4. A large unnumbered Kuiper Belt Object with no known moons. Retrograde (left-handed) orbit.',  
-        'Gonggong': 'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects with a highly inclined orbit. Retrograde (left-handed) orbit.',
+        'GV9': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon.',
+        'Mani': 'Horizons: 2002 MS4. A large unnumbered Kuiper Belt Object with no known moons.',  
+        'Gonggong': 'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects with a highly inclined orbit.',
 
         'Planet 9': 'Hypothetical planet with a potential candidate identified in 2025 IRAS/AKARI infrared data. ' 
         'Estimated to be 7-17 Earth masses (possibly Neptune-sized) at 500-700 AU from the Sun. ' 
@@ -1703,7 +1751,7 @@ INFO = {
         'Horizons: -5. The Venus Climate Orbiter mission (PLANET-C), will study the atmospheric circulation of Venus over a nominal mission of 4.5 years.',
 
 # Comets        
-        'Ikeya-Seki': 'Horizons: C/1965 S1-A. Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
+        'Ikeya-Seki': 'Horizons: C/1965 S1-A. retrograde > 90. Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
         'in 1965! It was one of the brightest comets of the 20th century and is a member of the Kreutz sungrazers, a family of ' 
         'comets believed to have originated from a larger comet that broke apart long ago. As a Kreutz sungrazer, it provided valuable ' 
         'information about these comets and their origins. Retrograde (left-handed) orbit.\n  Key dates and information:\n ' 
@@ -1744,7 +1792,7 @@ INFO = {
         '  * In short: Comet West came in on an elliptical path but is going out on a hyperbolic one. It was a long-term member of our ' 
         '    solar system that has now been permanently kicked out.',
                 
-        'Halley': 'Horizons: 1P/Halley. Most famous comet, returns every 76 years. ' 
+        'Halley': 'Horizons: 1P/Halley. retrograde > 90. Most famous comet, returns every 76 years. ' 
         '* Orbital Period and Characteristics: Halley\'s Comet has an average orbital period of 76 Earth years. However, this period ' 
         'can vary due to the gravitational influence of planets, particularly Jupiter and Saturn.  In fact, the gravitational pull ' 
         'of the major planets alters the orbital period from revolution to revolution. Measured from one perihelion passage to the ' 
@@ -1794,19 +1842,19 @@ INFO = {
         'Even more exciting, in 2134, Halley\'s Comet will pass very close to the earth (0.09 AU, or about 13 million km) and should ' 
         'be much brighter than in 2061 (apparent magnitude -2).',
         
-        'Hyakutake': 'Horizons: C/1996 B2. Comet passed very close to Earth in 1996. Retrograde (left-handed) orbit.',
+        'Hyakutake': 'Horizons: C/1996 B2. Retrograde > 90. Comet passed very close to Earth in 1996. Retrograde (left-handed) orbit.',
         
         'Hale-Bopp': '**SET MANUAL SCALE TO 360 AU FOR FULL ORBIT**\n' 
 
-        'Horizons: C/1995 O1. Comet Hale-Bopp: Visible to the naked eye for 18 months. Retrograde (left-handed) orbit.',
+        'Horizons: C/1995 O1. Comet Hale-Bopp: Visible to the naked eye for 18 months.',
         
         'McNaught': '**USE MANUAL SCALE AT 40 AU TO SEE THE CURRENT POSITION**\n' 
 
-        'Horizons: C/2006 P1. Known as the Great Comet of 2007. January 12, 2007. Retrograde (left-handed) orbit.',
+        'Horizons: C/2006 P1. Known as the Great Comet of 2007. January 12, 2007.',
         
-        'NEOWISE': 'Horizons: C/2020 F3. Brightest comet visible from the Northern Hemisphere in decades.',
+        'NEOWISE': 'Horizons: C/2020 F3. retrograde > 90. Brightest comet visible from the Northern Hemisphere in decades.',
 
-        'C/2025_K1': 'Horizons: C/2025 K1. Comet C/2025 K1 (ATLAS) is a recently discovered comet that is expected to become a notable object for \n' 
+        'C/2025_K1': 'Horizons: C/2025 K1. Retrograde > 90. Comet C/2025 K1 (ATLAS) is a recently discovered comet that is expected to become a notable object for \n' 
         'observation in late 2025. Here\'s a breakdown of what we know:\n' 
         '* Discovery and Classification: It was discovered on May 25, 2025, by the Asteroid Terrestrial-impact Last Alert System (ATLAS) \n' 
         '  survey in Chile. It appears to be a dynamically new comet, meaning it\'s likely making its first close passage to the Sun.\n' 
@@ -1824,6 +1872,15 @@ INFO = {
         '  Observers in southern latitudes can spot it in both the evening and morning skies.\n' 
         '* August: It will be faint (around magnitude 13) and visible only from the Southern Hemisphere through large telescopes.',
         
+        'Borisov': 'Horizons: C/2025 V1. Retrograde > 90. Comet C/2025 V1 (Borisov) was just discovered on November 2, 2025. It was \n' 
+        'found by the same Crimean astronomer, Gennadiy Borisov, who discovered the famous interstellar comet 2I/Borisov back in 2019.\n' 
+        '* Discovery: Found on November 2, 2025.\n' 
+        '* Closest Approach to Earth: It is making its closest pass by Earth today, November 11, 2025, at a safe distance of about 103 million km.\n' 
+        '* Origin: Unlike the 2019 comet, this new one is not considered interstellar. It has a very stretched, "nearly interstellar" \n' 
+        'orbit, but it most likely originated from the Oort Cloud, the most distant region of our own solar system.\n' 
+        '* Appearance: The comet has gained some attention because, similar to the interstellar object 3I/ATLAS, it appears to lack a \n' 
+        'prominent, visible tail. It is very faint (around 13.8 magnitude) and not visible to the naked eye.', 
+
         'Tsuchinshan-ATLAS': 'Horizons: C/2023 A3. Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
         'and the Asteroid Terrestrial-impact Last Alert System (ATLAS) in South Africa in February 2023.\n * It originates from the ' 
         'Oort cloud, meaning it takes tens of thousands of years to orbit the Sun.\n * It orbits the Sun in the opposite direction ' 
@@ -1867,11 +1924,11 @@ INFO = {
         'our understanding of comets, their composition, and their role in the early solar system. The mission also demonstrated the ' 
         'feasibility of complex space maneuvers and the challenges of landing on a comet.',
         
-        '2I/Borisov': 'Horizons: C/2019 Q4. Second interstellar object detected. Retrograde (left-handed) orbit.',
+        '2I/Borisov': 'Horizons: C/2019 Q4. Second interstellar object detected.',
         
-        '1I/Oumuamua': 'Horizons: A/2017 U1. First known interstellar object detected passing through the Solar System.',
+        '1I/Oumuamua': 'Horizons: A/2017 U1. Retrograde > 90. First known interstellar object detected passing through the Solar System.',
 
-        '3I/ATLAS': 'Horizons: C/2025 N1. The third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.\n' 
+        '3I/ATLAS': 'Horizons: C/2025 N1. Retrograde > 90. The third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.\n' 
         'Here\'s a summary of what we know about 3I/ATLAS (C/2025 N1):\n' 
         '* Interstellar Object: It is the third confirmed interstellar object discovered, hence its "3I/" designation. This means it \n' 
         '  originated from outside our solar system and is currently just passing through.\n' 
@@ -1889,12 +1946,38 @@ INFO = {
         '    to observe 3I/ATLAS.\n' 
         '* Discovery Data: The orbital elements and predictions for 3I/ATLAS are based on an observational data arc from June 14, 2025, to \n' 
         '  July 3, 2025. This short observational period is sufficient for astronomers to calculate its orbit and predict future events \n' 
-        '  like perihelion.',        
+        '  like perihelion.'
+        '* Discovery Data: The orbital elements and predictions for 3I/ATLAS are based on an observational data arc from June 14, 2025, to \n' 
+        '  July 3, 2025. This short observational period is sufficient for astronomers to calculate its orbit and predict future events \n' 
+        '  like perihelion.\n'
+        '* Composition (PRELIMINARY): JWST and SPHEREx observations reveal an unusually CO₂-rich coma with water ice present. This is \n'
+        '  extremely rare for comets, which are typically water-ice dominated. The CO₂ dominance allows the comet to remain active at \n'
+        '  greater distances from the Sun than typical comets.\n'
+        '* Appearance: Imaging shows a red-sloped, dust-rich appearance with a bright blue ion tail from CO₂+ and CO+ emissions.\n'
+        '* Anti-tail: Some reports mention a possible anti-tail feature (dust structure along orbital plane), pending confirmation.\n'
+        '* Note: Tail length measurements are preliminary and model-based; official measurements pending ESA/NOIRLab/HST data releases.',        
 
-        'ATLAS': 'Horizons: C/2024 G3. Comet C/2024 G3 (ATLAS) is creating quite a buzz in the Southern Hemisphere!', 
+        'ATLAS': '***HYPERBOLIC TRAJECTORY. TO VISUALIZE CURRENT POSITION PLOT OTHER OBJECTS OR MANUAL SCALE TO AT LEAST 5 AU***\n\n'
+        'Horizons: C/2024 G3. Retrograde > 90. The Great Comet of 2025. Comet C/2024 G3 (ATLAS) created quite a buzz in the Southern Hemisphere!\n'
+        '* Comet C/2024 G3 (ATLAS) is a non-periodic comet that gained attention as it approached the Sun in early 2025. It was considered ' 
+        'the brightest comet of 2025 and was even visible to the naked eye.\n' 
+        '* The comet was discovered on April 5, 2024, by the Asteroid Terrestrial-impact Last Alert System (ATLAS). Its name, C/2024 G3, ' 
+        'follows a standard convention: C/ denotes a non-periodic comet, meaning it has an orbital period of over 200 years. 2024 is the ' 
+        'year of its discovery. G3 indicates it was the third comet discovered in the first half of April.\n' 
+        '* Comet C/2024 G3 is a "sunskirter," meaning its orbit takes it very close to the Sun, but not as close as a "sungrazer." It ' 
+        'reached its closest point to the Sun, or perihelion, on January 13, 2025, at a distance of about 0.09 AU (14 million km). For ' 
+        'perspective, this is over three times closer to the Sun than Mercury gets.\n' 
+        '* Its close approach to the Sun caused it to brighten dramatically, reaching an apparent magnitude of around -3.8, which is ' 
+        'comparable to Venus. Its brightness was also enhanced by a phenomenon called forward scattering, where dust particles in the ' 
+        'comet\'s tail scatter sunlight toward the observer. Due to its position close to the Sun in the sky, observing it from the ' 
+        'Northern Hemisphere was difficult, but it provided a spectacular view for observers in the Southern Hemisphere, especially in the ' 
+        'evening sky after perihelion.\n' 
+        '* Comet C/2024 G3\'s close encounter with the Sun caused its nucleus, the comet\'s "heart," to heat up and likely disintegrate. ' 
+        'While the bright pseudo-nucleus disappeared, the comet\'s tail remained a stunning sight for observers. Despite this, it\'s ' 
+        'believed that the comet has survived a similar close approach to the Sun before, with an orbital period estimated at around 160,000 years.', 
 
         'SWAN': '***TO VISUALIZE THE COMPLETE ORBIT, SET MANUAL SCALE TO AT LEAST 1500 AU***\n\n'
-        'Comet C/2025 R2 (SWAN) is a non-periodic comet that was discovered on September 11, 2025.\n' 
+        'Horizons: C/2025 R2. Comet C/2025 R2 (SWAN) is a non-periodic comet that was discovered on September 11, 2025.\n' 
         '* The discovery was made by Ukrainian amateur astronomer Vladimir Bezugly, who identified the comet in images from the Solar Wind ' 
         'Anisotropies (SWAN) instrument aboard the Solar and Heliospheric Observatory (SOHO) spacecraft.\n' 
         '* The comet has a long, impressive tail, which has been observed to be about 2 degrees long, or roughly the length of five full moons.\n' 
@@ -1906,6 +1989,85 @@ INFO = {
         'could become bright enough to be seen with the naked eye under dark skies, potentially reaching an apparent magnitude of 4 or higher.\n' 
         '* Its orbital period is uncertain, but estimates range from 1,400 to over 20,000 years.\n' 
         '* There is also a chance that Earth may pass through debris from the comet, potentially causing a minor meteor shower around October 5, 2025.',
+
+        'Lemmon': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 250 AU.***\n\n'
+        'Horizons: C/2025 A6. Retrograde orbit; i>90. Comet C/2025 A6 (Lemmon) is a non-periodic comet discovered by the Mount Lemmon Survey. It\'s ' 
+        'currently inbound, making it one of the most anticipated comets of 2025 for Northern Hemisphere observers.\n'
+        '* The comet was initially spotted as a faint asteroid-like object on January 3, 2025, but pre-discovery images from as far ' 
+        'back as November 12, 2024, were later found. Its inbound orbit is highly elongated, with a period of about 1,350 years. After ' 
+        'its upcoming pass by the Sun, its orbital period will shorten to approximately 1,150 years.\n' 
+        '* The comet\'s brightness is notoriously unpredictable, but current estimates are more optimistic than the initial predictions. ' 
+        'It was originally expected to only reach an apparent magnitude of 10, but some recent forecasts suggest it could reach a magnitude ' 
+        'of 2.5 to 4, which would make it potentially visible to the naked eye from dark skies. The human eye can typically see objects up ' 
+        'to magnitude 6.5 under ideal conditions.\n' 
+        '* Closest Approach to Earth: October 21, 2025, at a distance of about 90 million km.\n' 
+        '* Closest Approach to the Sun (Perihelion): November 8, 2025.\n' 
+        '* As it approaches the Sun, the comet is brightening as its coma, a cloud of gas and dust, expands. Photos have shown it with a ' 
+        'striking lime-green glow, likely caused by the presence of diatomic carbon in its coma. It also has a distinct tail, which is ' 
+        'being shaped by solar radiation and the solar wind.\n' 
+        '* For Northern Hemisphere observers, the comet will be visible in the morning sky until mid-October, when it will become visible ' 
+        'in the evening sky. Currently, it is located in the constellation of Leo Minor, and by October 6, it will enter Ursa Major (where ' 
+        'the Big Dipper is located). On October 16, it will pass close to the star Cor Caroli.',
+
+    # Exoplanet systems
+        'TRAPPIST-1': 'M8V red dwarf at 40.5 ly. 7 Earth-sized planets, 3 in habitable zone.',
+        'TRAPPIST-1 b': 'Innermost planet, 1.5 day period. Too hot (400 K).',
+        'TRAPPIST-1 c': '2.4 day period. No significant atmosphere (JWST).',
+        'TRAPPIST-1 d': '★ HABITABLE ZONE (inner edge). 4.0 day period.',
+        'TRAPPIST-1 e': '★ PRIME HABITABLE ZONE CANDIDATE! Most likely liquid water. 6.1 days.',
+        'TRAPPIST-1 f': '★ HABITABLE ZONE. 9.2 day period. May have water.',
+        'TRAPPIST-1 g': '★ HABITABLE ZONE (outer edge). 12.4 day period.',
+        'TRAPPIST-1 h': 'Outermost, 18.8 day period. Too cold (173 K).',
+        
+        'TOI-1338 Binary': 
+        '***IMPORTANT: RE-SET THE CENTER OBJECT FROM \"Sun\" TO THE EXO-PLANET SYSTEM IN THE \"Select Center Object for Your Plot\" DROP DOWN MENU***\n\n'
+        'A rare multi-planet circumbinary system at a distance of 1,292 ly. Two planets orbit the two stars from a stable ' 
+        'distance, safely outside the central instability zone (0.18-0.35 AU). The entire system is coplanar (edge-on), ' 
+        'which is why transits are visible from Earth.\n' 
+        '* Barycenter: The center of mass that both stars and the planets orbit. When selected as the center object, the stars appear to "dance" ' 
+        'around this point (the origin, 0, 0, 0), completing one orbit every 14.6 days. This demonstrates true binary star dynamics.\n'
+        '  * Shared Period: The time it takes for Star A to complete one orbit around the barycenter is precisely the same time it takes for Star B ' 
+        'to complete its orbit around the barycenter. This is necessary to keep the stars perpetually on opposite sides of the barycenter, ' 
+        'maintaining the system\'s balance.\n' 
+        '  * Different Radius (Semi-major Axis): The size of each star\'s orbit is inversely proportional to its mass. The more massive star ' 
+        '(like TOI-1338 A) has a smaller semi-major axis, meaning it orbits closer to the barycenter. The less massive star (like TOI-1338 B) has ' 
+        'a larger semi-major axis, meaning it orbits farther from the barycenter. For example, in the TOI-1338 system, both Star A and Star B ' 
+        'complete one orbit in 14.6 days (the binary period)\n'
+        '  * Angular Rotation (around barycenter): both stars: +19.95°/day (identical!); both rotating counter-clockwise; both have same angular velocity\n'
+        '  * Planetary Orbital Stability: The instability zone is a region surrounding a binary star pair where an orbiting planet would be dynamically ' 
+        'unstable and quickly ejected from the system due to the stars'' powerful, rapidly varying gravitational pull. For circumbinary systems like ' 
+        'TOI-1338, the distance to the edge of the instability zone is typically 2 to 4 times the binary star separation, or, when measured in time, 3 ' 
+        'to 8 times the binary orbital period.\n' 
+        '   * Stability in TOI-1338: Planets are consistently found orbiting close to the stability limit. The planets in the TOI-1338 system are safely ' 
+        'outside this region: TOI-1338 b (Inner Planet) orbits at 0.461 AU. Its orbit is roughly 5.2 times the binary separation TOI-1338 c (Outer ' 
+        'Planet) orbits at 0.76 AU. Its orbit is about 8.6 times the binary separation Since both planets have semi-major axes significantly larger ' 
+        'than the estimated instability range of 0.176-0.352 AU, their orbits are dynamically stable.\n'
+        '* TOI-1338 A: Primary star, G-type, 1.1 solar masses.\n' 
+        '* TOI-1338 B: Secondary star, M-type Red Dwarf, 0.3 solar masses.\n' 
+        '* Two planets orbit the system\'s barycenter and are examples of how planets can form and remain stable in the dynamically challenging ' 
+        'environment of a binary star system.',
+        'TOI-1338 b': 'Planet b was the first planet confirmed in the system and is notable for its discovery story and its proximity to the stars.\n' 
+        '* Size and Type: It is a Neptune-sized planet, roughly 6.9 times larger than Earth.\n' 
+        '* Its mass is around 11.3 Earth masses.\n' 
+        '* Discovery: It was discovered in 2020 via the transit method using data from the Transiting Exoplanet Survey Satellite (TESS) satellite. ' 
+        'It made headlines because it was found by Wolf Cukier, a 17-year-old high school intern at NASA.\n' 
+        '* Orbit:Period: It completes one orbit in approximately 95.2 days.\n' 
+        '* Distance: It orbits at 0.461 AU from the system\'s barycenter.\n' 
+        '* Stability: Its orbit is considered stable, even though it lies close to the dynamical instability zone.\n' 
+        '* Transits: Since the system is edge-on, the planet transits (passes in front of) the primary star (A). Its transits ' 
+        'are irregular and vary in depth and duration because both host stars are constantly moving in their own 14.6-day orbit.',
+        'TOI-1338 c': 'Planet c was the second planet confirmed in the system, making TOI-1338 only the second confirmed multi-planet circumbinary ' 
+        'system at the time of its discovery.\n' 
+        '* Size and Type: It is a Jupiter-mass gas giant. Its mass is significantly larger than planet b, at around 75.4 Earth masses.\n' 
+        '* Discovery: It was discovered later, in 2023, using the Radial Velocity (RV) method. This was the first detection of a circumbinary planet ' 
+        'using RV observations alone. The RV method detected the star\'s wobble caused by the planet\'s gravitational pull.\n' 
+        '* Period: It has a wider orbit with a period of approximately 215.5 days.\n' 
+        '* Distance: It orbits farther out from the barycenter than planet b, at 0.794 AU.\n' 
+        '* Configuration: Like planet b, it is coplanar (or nearly so) with the binary stars and planet b.\n', 
+        
+        'Proxima Centauri': 'NEAREST star! M5.5V red dwarf at 4.24 ly.',
+        'Proxima b': '★ HABITABLE ZONE. NEAREST EXOPLANET! 11.2 day period.',
+        'Proxima d': 'Sub-Earth mass (0.26 M⊕). Lightest RV-detected planet. 5.1 days.',
 
 }
 

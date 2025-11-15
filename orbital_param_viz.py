@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.patches import Ellipse, Arc
 import matplotlib.patches as mpatches
+from coordinate_system_guide import create_coordinate_system_guide
 
 class CreateToolTip(object):
     """
@@ -985,6 +986,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         ),
         title=dict(
             text=f"Orbital Parameter Transformation: {obj_name}<br><sub>Date: {plot_date.strftime('%Y-%m-%d %H:%M UTC')}</sub>",
+    #        text=f"Orbital Parameter Transformation: {obj_name}<br><sub>Date: {plot_date.strftime('%Y-%m-%d UTC')}</sub>",            
             x=0.5,
             xanchor='center'
         ),
@@ -2097,7 +2099,8 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
                 show_axes=show_axes_val,    # Corrected parameter name
                 parent_planets=parent_planets, # Add this argument
                 show_apsidal_markers=show_apsidal_val,
-                plot_date=current_date,        # Changed from dt.datetime.now() to current_date
+        #        plot_date=current_date,        # Changed from dt.datetime.now() to current_date
+                plot_date=stored_date,
                 current_position=current_position  # Added this new parameter
             )
             
@@ -2138,6 +2141,26 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
         "Launch an interactive visualization showing how eccentricity\n"
         "affects orbital shape from circle (e=0) through ellipse,\n"
         "parabola (e=1), to hyperbola (e>1).")
+
+    # Add the Coordinate System Reference Guide button
+    coord_guide_button = ttk.Button(
+        control_frame, 
+        text="Coordinate System Reference Guide", 
+        command=create_coordinate_system_guide,
+        width=40
+    )
+    coord_guide_button.grid(row=10, column=0, columnspan=3, pady=10, padx=5)
+
+    # Add tooltip for the coordinate system guide button
+    CreateToolTip(coord_guide_button, 
+        "Open a comprehensive reference guide explaining the J2000\n"
+        "Ecliptic coordinate system used throughout Paloma's Orrery.\n\n"
+        "Learn about:\n"
+        "  • What the coordinate axes represent\n"
+        "  • Why this reference frame is used\n"
+        "  • How it applies to orbital mechanics\n"
+        "  • The J2000.0 reference epoch"
+    )
 
     # Information text
     info_frame = ttk.LabelFrame(main_frame, text="Understanding the Visualization")

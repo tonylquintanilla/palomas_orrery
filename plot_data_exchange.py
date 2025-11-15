@@ -8,7 +8,8 @@ import numpy as np
 class PlotDataExchange:
     """Exchange plot data between subprocess scripts and GUI."""
     
-    EXCHANGE_FILE = "last_plot_data.json"
+#    EXCHANGE_FILE = "last_plot_data.json"
+    EXCHANGE_FILE = "reports/last_plot_data.json"
     
     @classmethod
     def save_plot_data(cls, combined_df: pd.DataFrame, counts_dict: Dict,

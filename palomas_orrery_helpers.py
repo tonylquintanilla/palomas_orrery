@@ -39,6 +39,7 @@ from planet_visualization import (
     mercury_mantle_info,
     mercury_crust_info,
     mercury_atmosphere_info,
+    mercury_sodium_tail_info,
     mercury_magnetosphere_info,
     mercury_hill_sphere_info,
 
@@ -324,28 +325,20 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
     if object_id == '-121':
         print(f"\nNOTE: BepiColombo trajectory has a known display bug.")
         print(f"      Position marker shows correctly; trajectory line may not appear.")
-        print(f"      Debug: {len(dates_list)} dates requested from {dates_list[0].strftime('%Y-%m-%d')} to {dates_list[-1].strftime('%Y-%m-%d')}")
-    # KNOWN BUG: BepiColombo trajectory not plotting (as of Aug 2025)
-    # Symptoms:
-    #   - Current position marker displays correctly
-    #   - Trajectory path shows "No ephemeris available for -121"
-    #   - Issue specific to BepiColombo; other spacecraft work
-    #   - Verified data exists in Horizons through 2027-04-05
-    # 
-    # Attempted fixes that didn't work:
-    #   - Changing id_type (None, 'id', omitted)
-    #   - Converting to TDB time scale (broke ALL spacecraft)
-    #   - Using vectors vs ephemerides
-    #
-    # Workaround: BepiColombo shows current position only
-    # TODO: Revisit after other trajectory improvements        
+        print(f"      Debug: {len(dates_list)} dates requested from {dates_list[0].strftime('%Y-%m-%d')} to {dates_list[-1].strftime('%Y-%m-%d')}")      
     
     # Skip trajectory fetching for Planet 9
     if object_id == 'planet9_placeholder':
         # Return a list of None values matching the length of dates_list
         return [None] * len(dates_list)
 
+    # Skip trajectory fetching for exoplanets (not in JPL Horizons database)
+    if id_type == 'exoplanet':
+        # Exoplanets use separate orbital calculation system
+        return [None] * len(dates_list)
+    
     try:
+
         # Convert dates to Julian Date
         times = Time(dates_list)
         epochs = times.jd.tolist()
@@ -621,7 +614,8 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
         if obj['var'].get() == 1 and ('mission_url' in obj or 'url' in obj):          # adds urls for any object   
             url_objects.append({
                 'name': obj['name'],
-                'url': obj.get('mission_url') or obj.get('url')                        # Use either URL field
+                'url': obj.get('mission_url') or obj.get('url'),                        # Use either URL field
+        #        'is_earth': obj['name'].lower() == 'earth'  # ← NEW LINE ADDED FOR EARTH DATA VISUALIZATION
             })
     
     # Remove duplicates while preserving order
@@ -641,7 +635,7 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
 
     # Add URL buttons while preserving existing annotations
     for idx, obj in enumerate(url_objects):
-        padded_name = obj['name'].ljust(12)  # This adds spaces to make it exactly 12 chars
+        padded_name = obj['name'].ljust(11)  # This adds spaces to make it exactly 12 chars
         # Determine row and position within row
         row = idx // max_per_row
         position_in_row = idx % max_per_row
@@ -650,20 +644,38 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
         # Calculate y position based on row (row 0 is at y=0, row 1 is at y=-0.05)
         button_y = 0.07 - (row * 0.06)
         
+        # ↓↓↓ NEW CONDITIONAL BLOCK ADDED FOR EARTH SYSTEM VISUALIZATION ↓↓↓
+        # Earth gets special styling - professional double border with ocean blue
+        if obj.get('is_earth', False):
+            border_color = '#4AFF00'  # chlorophyll green
+            border_width = 2          # Double border
+            bg_color = 'rgba(46, 134, 171, 0.15)'  # Light blue tint
+            text_color = '#2E86AB'
+        else:
+            # Standard styling for other objects
+            border_color = '#1E90FF'
+            border_width = 1
+            bg_color = 'rgba(255, 255, 255, 0.1)'
+            text_color = '#1E90FF'
+        # ↑↑↑ END NEW BLOCK ↑↑↑
+
         annotations.append(dict(
-    #        text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF;'>{obj['name']}</a>",
-    #        text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF;'>{padded_name}</a>",
-            text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF; font-family:monospace;'>{padded_name}</a>",  # uniform
+    #        text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF; font-family:monospace;'>{padded_name}</a>",  # uniform
+            text=f"<a href='{obj['url']}' target='_blank' style='color:{text_color}; font-family:monospace;'>{padded_name}</a>",  # uniform
             xref='paper',
             yref='paper',
             x=button_x,
             y=button_y,  
             showarrow=False,
-            font=dict(size=12, color='#1E90FF'),
+    #        font=dict(size=12, color='#1E90FF'),
+            font=dict(size=12, color=text_color),  # ← CHANGED
             align='left',
-            bgcolor='rgba(255, 255, 255, 0.1)',
-            bordercolor='#1E90FF',
-            borderwidth=1,
+    #        bgcolor='rgba(255, 255, 255, 0.1)',
+            bgcolor=bg_color,          # ← CHANGED (uses variable)
+    #        bordercolor='#1E90FF',
+            bordercolor=border_color,  # ← CHANGED (uses variable)
+    #        borderwidth=1,
+            borderwidth=border_width,  # ← CHANGED (uses variable - 2 for Earth!)
             borderpad=4,
             xanchor='left',
             yanchor='middle'
@@ -718,18 +730,24 @@ def print_planet_positions(positions):
 # Helper function to create backup
 def create_orbit_backup():
     """Create a backup of orbit cache on startup"""
-    if os.path.exists('orbit_paths.json'):
+#    if os.path.exists('orbit_paths.json'):
+    if os.path.exists('data/orbit_paths.json'):
         try:
-            shutil.copy('orbit_paths.json', 'orbit_paths_backup.json')
-            file_size = os.path.getsize('orbit_paths.json') / (1024 * 1024)  # MB
-            message = f"Backup created: orbit_paths_backup.json ({file_size:.1f}MB)"
+    #        shutil.copy('orbit_paths.json', 'orbit_paths_backup.json')
+            shutil.copy('data/orbit_paths.json', 'data/orbit_paths_backup.json')
+    #        file_size = os.path.getsize('orbit_paths.json') / (1024 * 1024)  # MB
+            file_size = os.path.getsize('data/orbit_paths.json') / (1024 * 1024)  # MB
+    #        message = f"Backup created: orbit_paths_backup.json ({file_size:.1f}MB)"
+            message = f"Backup created: data/orbit_paths_backup.json ({file_size:.1f}MB)"
             print(f"[STARTUP] {message}")
             
             # Print cache statistics to terminal
-            with open('orbit_paths.json', 'r') as f:
+    #        with open('orbit_paths.json', 'r') as f:
+            with open('data/orbit_paths.json', 'r') as f:
                 orbit_data = json.load(f)
                 print(f"[CACHE INFO] Total orbits cached: {len(orbit_data)}")
-                print("[CACHE INFO] To manually delete cache, remove 'orbit_paths.json' file")
+    #            print("[CACHE INFO] To manually delete cache, remove 'orbit_paths.json' file")
+                print("[CACHE INFO] To manually delete cache, remove 'data/orbit_paths.json' file")
             
             return message, 'info'
                 
@@ -758,10 +776,12 @@ def cleanup_old_orbits():
             return None, None
         
         # Load orbit data
-        if not os.path.exists('orbit_paths.json'):
+    #    if not os.path.exists('orbit_paths.json'):
+        if not os.path.exists('data/orbit_paths.json'):
             return None, None
             
-        with open('orbit_paths.json', 'r') as f:
+    #    with open('orbit_paths.json', 'r') as f:
+        with open('data/orbit_paths.json', 'r') as f:
             orbit_data = json.load(f)
         
         initial_count = len(orbit_data)
@@ -788,7 +808,8 @@ def cleanup_old_orbits():
         
         if removed_count > 0:
             # Save cleaned data
-            with open('orbit_paths.json', 'w') as f:
+    #        with open('orbit_paths.json', 'w') as f:
+            with open('data/orbit_paths.json', 'w') as f:
                 json.dump(cleaned_data, f)
             
             message = f"Cleanup: Removed {removed_count} orbits older than 30 days"

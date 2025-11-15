@@ -97,11 +97,12 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
         plot_scale = min_scale
         print(f"Sun direction indicator: Adjusted to minimum scale = {plot_scale:.5f} AU")
     
-    # Create a line pointing in the negative X direction (toward Sun)
-    sun_direction_x = [center_x, center_x - plot_scale]  # Line from body toward Sun
+    # Create a line pointing in the POSITIVE X direction (toward vernal equinox)
+    # +X points toward the vernal equinox (♈) - the direction from Earth to Sun on March 20
+    sun_direction_x = [center_x, center_x + plot_scale]  # Line points in +X direction
     sun_direction_y = [center_y, center_y]
     sun_direction_z = [center_z, center_z]
-    
+
     # Format the scale value for display - use scientific notation for very large values
     if plot_scale >= 1000:
         scale_text = f"{plot_scale:.2e} AU"
@@ -109,13 +110,14 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
         # Show more decimal places for smaller values
         decimal_places = 5 if plot_scale < 0.1 else 2
         scale_text = f"{plot_scale:.{decimal_places}f} AU"
-    
+
     # Info text for the hover
-    info_text = "Direction to Sun: In the solar system, the Sun would be located in the negative X direction.<br><br>" \
-                "This directional indicator helps visualize the orientation of celestial bodies relative to the Sun.<br><br>" \
+    info_text = "Vernal Equinox Direction (+X): Points toward the First Point of Aries (♈).<br>" \
+                "This is the direction from Earth to the Sun at the vernal equinox (around March 20).<br>" \
+                "The +X axis defines celestial longitude 0° in the J2000 ecliptic coordinate system.<br>" \
                 f"Current indicator length: {scale_text}"
-    
-    # Create the Sun direction indicator line (without text)
+
+    # Create the vernal equinox direction indicator line
     indicator_trace = go.Scatter3d(
         x=sun_direction_x,
         y=sun_direction_y,
@@ -126,43 +128,12 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
             width=3,
             dash='dash'
         ),
-        name='Sun Direction (local)',
-#        legendgroup='sun_direction',        # Add this line - shared legend group
-        showlegend=True,                   
-        hoverinfo='none'
+
+        name='Vernal Equinox Direction (+X)',
+        text=[info_text] * len(sun_direction_x),  # Add hover text
+        hovertemplate='%{text}<extra></extra>',    # Enable hover with template
+        showlegend=True
     )
-    
-    """
-    # Create arrowhead marker at the end of the line
-#    arrow_size = max(6, min(12, plot_scale * 80))  # Scale arrowhead size based on line length
-    sun_symbol_trace = go.Scatter3d(
-        x=[sun_direction_x[1]],
-        y=[sun_direction_y[1]],
-        z=[sun_direction_z[1]],
-        mode='markers+text',
-        marker=dict(
-#            size=arrow_size,
-            size=6,            
-            color='yellow',
-            symbol='x',  # Using diamond for arrowhead appearance
-            line=dict(
-                color='orange',
-                width=2
-            )
-        ),
-        text=['Sun'],
-        textposition='top right',  # Position text better relative to marker
-        textfont=dict(
-            color='yellow',
-            size=14,
-        ),
-        name='Sun Direction',
-#        legendgroup='sun_direction',        # Add this line - same group as the line
-        hoverinfo='text',
-        hovertext=info_text,  # Assign hover text to this marker
-        showlegend=True  # Show in legend
-    )
-    """
-    
-#    return [indicator_trace, sun_symbol_trace]
+
     return [indicator_trace]
+

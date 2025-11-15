@@ -62,7 +62,8 @@ class CacheMetadata:
 class IncrementalCacheManager:
     """Manages incremental caching for stellar catalog data."""
     
-    def __init__(self, cache_dir: str = "."):
+#    def __init__(self, cache_dir: str = "."):
+    def __init__(self, cache_dir: str = "star_data"):
         """
         Initialize cache manager.
         
@@ -350,7 +351,8 @@ class IncrementalCacheManager:
 class SimbadCacheManager:
     """Manages caching for SIMBAD property queries."""
     
-    def __init__(self, cache_dir: str = "."):
+#    def __init__(self, cache_dir: str = "."):
+    def __init__(self, cache_dir: str = "star_data"):
         """Initialize SIMBAD cache manager."""
         self.cache_dir = cache_dir
         self.cache_index_file = os.path.join(cache_dir, "simbad_cache_index.json")
@@ -416,6 +418,7 @@ class SimbadCacheManager:
 
 # Integration functions for existing code
 
+
 def smart_load_or_fetch_hipparcos(v, hip_data_file: str, mode: str,
                                   limit_value: float, **kwargs) -> Optional[Table]:
     """
@@ -427,9 +430,57 @@ def smart_load_or_fetch_hipparcos(v, hip_data_file: str, mode: str,
     
     cache_mgr = IncrementalCacheManager()
     
+    # ADD THIS BLOCK (before existing "Check cache status" line):
+    # COMPREHENSIVE CACHE PROTECTION
+    # If we have a large comprehensive cache, just filter it instead of fetching
+    cache_path = os.path.join(cache_mgr.cache_dir, hip_data_file)
+    if os.path.exists(cache_path):
+        file_size = os.path.getsize(cache_path)
+        
+        # Check if this is a comprehensive cache (>1MB = likely complete)
+        # Hipparcos has ~118,000 stars, comprehensive cache should be 100KB-1MB+
+        if file_size > 1_000_000:  # >1MB
+            # For magnitude mode with reasonable limits
+            if mode == 'magnitude' and limit_value <= 10.0:
+                logger.info(f"Using comprehensive Hipparcos magnitude cache (size: {file_size/1e6:.1f}MB)")
+                try:
+                    data = Table.read(cache_path, format='votable')
+                    
+                    # Filter to requested magnitude
+                    if 'Vmag' in data.colnames:
+                        mask = data['Vmag'] <= limit_value
+                        filtered = data[mask]
+                        logger.info(f"Filtered Hipparcos cache from {len(data)} to {len(filtered)} stars <= mag {limit_value}")
+                        return filtered
+                    else:
+                        logger.warning("No Vmag column found in Hipparcos cache")
+                        return data
+                        
+                except Exception as e:
+                    logger.warning(f"Could not read Hipparcos cache, falling back to normal logic: {e}")
+            
+            # For distance mode with reasonable limits
+            elif mode == 'distance' and limit_value <= 150:  # Within 150 light-years
+                logger.info(f"Using comprehensive Hipparcos distance cache (size: {file_size/1e6:.1f}MB)")
+                try:
+                    data = Table.read(cache_path, format='votable')
+                    
+                    # Filter to requested distance
+                    if 'Distance_ly' in data.colnames:
+                        mask = data['Distance_ly'] <= limit_value
+                        filtered = data[mask]
+                        logger.info(f"Filtered Hipparcos cache from {len(data)} to {len(filtered)} stars <= {limit_value} ly")
+                        return filtered
+                    else:
+                        logger.warning("No Distance_ly column found in Hipparcos cache")
+                        return data
+                        
+                except Exception as e:
+                    logger.warning(f"Could not read Hipparcos cache, falling back to normal logic: {e}")
+    
     # Check cache status
     status, metadata = cache_mgr.check_cache_validity(hip_data_file, mode, limit_value)
-    
+   
     logger.info(f"Hipparcos cache status: {status}")
     
     if status == 'exact':
@@ -515,15 +566,18 @@ def smart_load_or_fetch_gaia(v, gaia_data_file: str, mode: str,
     from data_acquisition import load_or_fetch_gaia_data
     
     cache_mgr = IncrementalCacheManager()
-    
-    # SPECIAL HANDLING FOR MAGNITUDE MODE
-    # If we have a comprehensive magnitude cache (>100MB), just use it
-    if mode == 'magnitude' and limit_value <= 9.0:
-        cache_path = os.path.join(cache_mgr.cache_dir, gaia_data_file)
-        if os.path.exists(cache_path):
-            file_size = os.path.getsize(cache_path)
-            # Check if this is the full cache (>100MB)
-            if file_size > 100_000_000:
+        
+    # COMPREHENSIVE CACHE PROTECTION
+    # If we have a large comprehensive cache, just filter it instead of fetching
+    cache_path = os.path.join(cache_mgr.cache_dir, gaia_data_file)
+    if os.path.exists(cache_path):
+        file_size = os.path.getsize(cache_path)
+        
+        # Check if this is a comprehensive cache
+        # Gaia has millions of stars, comprehensive cache is >10MB
+        if file_size > 10_000_000:  # >10MB
+            # For magnitude mode with reasonable limits
+            if mode == 'magnitude' and limit_value <= 9.0:
                 logger.info(f"Using comprehensive Gaia magnitude cache (size: {file_size/1e6:.1f}MB)")
                 try:
                     data = Table.read(cache_path, format='votable')
@@ -546,7 +600,26 @@ def smart_load_or_fetch_gaia(v, gaia_data_file: str, mode: str,
                         
                 except Exception as e:
                     logger.warning(f"Could not read Gaia cache, falling back to normal logic: {e}")
-    
+            
+            # For distance mode with reasonable limits
+            elif mode == 'distance' and limit_value <= 150:  # Within 150 light-years
+                logger.info(f"Using comprehensive Gaia distance cache (size: {file_size/1e6:.1f}MB)")
+                try:
+                    data = Table.read(cache_path, format='votable')
+                    
+                    # Filter to requested distance
+                    if 'Distance_ly' in data.colnames:
+                        mask = data['Distance_ly'] <= limit_value
+                        filtered = data[mask]
+                        logger.info(f"Filtered Gaia cache from {len(data)} to {len(filtered)} stars <= {limit_value} ly")
+                        return filtered
+                    else:
+                        logger.warning("No Distance_ly column found in Gaia cache")
+                        return data
+                        
+                except Exception as e:
+                    logger.warning(f"Could not read Gaia cache, falling back to normal logic: {e}")
+
     # NORMAL CACHE LOGIC for all other cases
     # Check cache status
     status, metadata = cache_mgr.check_cache_validity(gaia_data_file, mode, limit_value)

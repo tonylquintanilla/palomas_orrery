@@ -22,7 +22,8 @@ class ReportManager:
         """
         self.reports_dir = Path(reports_dir)
         self.reports_dir.mkdir(exist_ok=True)
-        self.last_report_file = "last_plot_report.json"
+    #    self.last_report_file = "last_plot_report.json"
+        self.last_report_file = str(self.reports_dir / "last_plot_report.json")
     
     def save_report(self, report_data: Dict, archive: bool = True) -> str:
         """
