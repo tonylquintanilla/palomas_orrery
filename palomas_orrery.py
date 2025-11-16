@@ -7832,7 +7832,7 @@ CreateToolTip(apsidal_checkbox,
 # Add closest approach marker checkbox
 closest_approach_checkbox = tk.Checkbutton(
     apsidal_frame,
-    text="Show closest approach markers (any object)",
+    text="Show closest plotted point markers (any object)",
     variable=show_closest_approach_var,
 #    font=('Arial', 10)
 )

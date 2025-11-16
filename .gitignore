@@ -1,10 +1,10 @@
-# Python cache
+# Python cache -- auto generated files
 __pycache__/
 *.pyc
 
-# Ignore large data cache folders
+# Ignore large data cache folders due to large file sizes
 data/
 star_data/
 
-# Generated reports
+# Generated reports from 2d star visualizations
 reports/

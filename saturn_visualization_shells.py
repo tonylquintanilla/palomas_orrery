@@ -266,7 +266,7 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
             "  think of the surface of a rocky planet like Earth.<br>" 
             "* Gradual Transition: Saturn's atmosphere transitions gradually from a gaseous state in the upper layers to a denser, <br>" 
             "  liquid state deeper within the planet. There's no sharp boundary or interface where you'd suddenly go from atmosphere <br>" 
-            "  to a solid or liquid \"surface.\<br>" 
+            "  to a solid or liquid \"surface.\"<br>" 
             "* Increasing Pressure and Density: As you descend into Saturn's atmosphere, the pressure and density increase dramatically. <br>" 
             "  The gases become compressed until they behave more like a fluid. Eventually, the pressure becomes so immense that <br>" 
             "  hydrogen transitions into a liquid metallic state.<br>" 

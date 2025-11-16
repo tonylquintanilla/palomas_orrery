@@ -1872,7 +1872,9 @@ INFO = {
         '  Observers in southern latitudes can spot it in both the evening and morning skies.\n' 
         '* August: It will be faint (around magnitude 13) and visible only from the Southern Hemisphere through large telescopes.',
         
-        'Borisov': 'Horizons: C/2025 V1. Retrograde > 90. Comet C/2025 V1 (Borisov) was just discovered on November 2, 2025. It was \n' 
+        'Borisov': 
+        '*** SET MANUAL SCALE TO AT LEAST 50 AU TO SEE FULL HYPERBOLIC ORBIT AS ESTIMATED SO FAR BY JPL***\n\n'
+        'Horizons: C/2025 V1. Retrograde > 90. Comet C/2025 V1 (Borisov) was just discovered on November 2, 2025. It was \n' 
         'found by the same Crimean astronomer, Gennadiy Borisov, who discovered the famous interstellar comet 2I/Borisov back in 2019.\n' 
         '* Discovery: Found on November 2, 2025.\n' 
         '* Closest Approach to Earth: It is making its closest pass by Earth today, November 11, 2025, at a safe distance of about 103 million km.\n' 

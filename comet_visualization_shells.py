@@ -268,6 +268,7 @@ def create_comet_nucleus(center_position=(0, 0, 0), nucleus_size_km=5, comet_nam
         ),
         name=f'{comet_name}: Nucleus',
         text=[description],
+        customdata=[f'{comet_name}: Nucleus'], 
         hovertemplate='%{text}<extra></extra>',
         showlegend=True
     )
@@ -354,6 +355,7 @@ def create_comet_coma(center_position=(0, 0, 0), coma_radius_km=100000,
         ),
         name=f'{comet_name}: Coma',
         text=[description] * len(coma_points_x),
+        customdata=[f'{comet_name}: Coma'] * len(coma_points_x), 
         hovertemplate='%{text}<extra></extra>',
         showlegend=True
     )
@@ -524,6 +526,7 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
         ),
         name=f'{comet_name}: Dust Tail',
         text=[description] * len(tail_points_x),
+        customdata=[f'{comet_name}: Dust Tail'] * len(tail_points_x),
         hovertemplate='%{text}<extra></extra>',
         showlegend=True
     )
@@ -655,6 +658,7 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
         ),
         name=f'{comet_name}: Ion Tail',
         text=[description] * len(tail_points_x),
+        customdata=[f'{comet_name}: Ion Tail'] * len(tail_points_x),
         hovertemplate='%{text}<extra></extra>',
         showlegend=True
     )

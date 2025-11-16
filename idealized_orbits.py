@@ -3166,7 +3166,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     ),
                                     name=f"{obj_name} Ideal Periapsis",
                                     text=[hover_text],
-                                    hoverinfo='text',
+                            #        hoverinfo='text',
+                                    customdata=[f"{obj_name} Ideal Periapsis"],
+                                    hovertemplate='%{text}<extra></extra>',                                    
                                     showlegend=True
                                 )
                             )
@@ -3243,15 +3245,17 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                                     color='white',
                                                     symbol='square-open'
                                                 ),
+                                                
                                                 name=f"{obj_name} Actual Perihelion",
-                                                text=[f"{obj_name} Actual Perihelion"],
-                                                hovertemplate=(
+                                                text=[
                                                     f"<b>{obj_name} at Perihelion (Actual)</b><br>"
                                                     f"Date/Time: {perihelion_full} UTC<br>"
                                                     f"Distance from {center_id}: {distance_au:.6f} AU<br>"
-                                                    f"Distance: {distance_km:.0f} km<br>"
-                                                    "<extra></extra>"
-                                                ),
+                                                    f"Distance: {distance_km:.0f} km"
+                                                ],  # Full hover content in text
+                                                customdata=[f"{obj_name} Actual Perihelion"],  # Added customdata
+                                                hovertemplate='%{text}<extra></extra>',  # Standard template
+
                                                 showlegend=True
                                             )
                                         )
@@ -3380,7 +3384,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             ),
                             name=f"{obj_name} Ideal Periapsis",
                             text=[hover_text],
-                            hoverinfo='text',
+                    #        hoverinfo='text',
+                            customdata=[f"{obj_name} Ideal Periapsis"],
+                            hovertemplate='%{text}<extra></extra>',
                             showlegend=True
                         )
                     )
@@ -3461,7 +3467,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             ),
                             name=f"{obj_name} Ideal Apoapsis",
                             text=[hover_text],
-                            hoverinfo='text',
+                    #        hoverinfo='text',
+                            customdata=[f"{obj_name} Ideal Apoapsis"],
+                            hovertemplate='%{text}<extra></extra>',
                             showlegend=True
                         )
                     )

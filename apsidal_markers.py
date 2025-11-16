@@ -263,7 +263,9 @@ def add_actual_apsidal_markers_enhanced(fig, obj_name, params, date_range, posit
                     symbol='square-open'
                 ),
                 name=f"{obj_name} {near_label}",
-                hovertemplate=hover_text + "<extra></extra>",
+                text=[hover_text],
+                customdata=[f"{obj_name} {near_label}"],  # Added
+                hovertemplate='%{text}<extra></extra>',   # Fixed format
                 showlegend=True
             ))
     
@@ -299,7 +301,9 @@ def add_actual_apsidal_markers_enhanced(fig, obj_name, params, date_range, posit
                     symbol='square-open'
                 ),
                 name=f"{obj_name} {far_label}",
-                hovertemplate=hover_text + "<extra></extra>",
+                text=[hover_text],
+                customdata=[f"{obj_name} {far_label}"],  # Added
+                hovertemplate='%{text}<extra></extra>',   # Fixed format
                 showlegend=True
             ))
 
@@ -685,15 +689,15 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
                         color='white',                        
                         symbol='square-open',  # Solid square for actual
                     ),
+
                     name=f"{obj_name} Actual {near_label}",
-                    text=[f"{obj_name} Actual {near_label}"],
-                    hovertemplate=(
-                        f"<b>{obj_name} at {near_label}</b><br>"
+                    text=[f"<b>{obj_name} at {near_label}</b><br>"
                         f"Date: {date_display} UTC<br>"
-                        f"Distance from {center_body}: {distance_au:.6f} AU<br>"
-                        "<extra></extra>"
-                    ),
+                        f"Distance from {center_body}: {distance_au:.6f} AU"],
+                    customdata=[f"{obj_name} Actual {near_label}"],  
+                    hovertemplate='%{text}<extra></extra>',
                     showlegend=True
+
                 )
             )
 
@@ -724,15 +728,16 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
                         color='white',                        
                         symbol='square-open',  # open square for actual
                     ),
-                    name=f"{obj_name} Actual {far_label}",
-                    text=[f"{obj_name} Actual {far_label}"],
-                    hovertemplate=(
-                        f"<b>{obj_name} at {far_label}</b><br>"
+
+                    name=f"{obj_name} Actual {far_label}",  # Fixed: far_label
+                    text=[f"<b>{obj_name} at {far_label}</b><br>"  # Fixed: far_label
                         f"Date: {date_display} UTC<br>"
-                        f"Distance from {center_body}: {distance_au:.6f} AU<br>"
-                        "<extra></extra>"
-                    ),
+                        f"Distance from {center_body}: {distance_au:.6f} AU"],
+                    customdata=[f"{obj_name} Actual {far_label}"],  # Fixed: far_label                    
+
+                    hovertemplate='%{text}<extra></extra>',
                     showlegend=True
+
                 )
             )
 
@@ -1130,7 +1135,8 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
             ),
             name=f"{obj_name} {label}",
             text=[hover_text],
-            customdata=[label],
+        #    customdata=[label],
+            customdata=[f"{obj_name} {label}"],
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
@@ -1246,7 +1252,8 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
             ),
             name=f"{obj_name} {label}",
             text=[hover_text],
-            customdata=[label],
+        #    customdata=[label],
+            customdata=[f"{obj_name} {label}"],
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
@@ -1254,7 +1261,7 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
 
 def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None):
     """
-    Find and mark the closest approach point from trajectory data.
+    Find and mark the closest plotted approach point from trajectory data.
     
     Works for ANY object passing near ANY center body, regardless of whether
     the object orbits that center. Uses proper astronomical terminology.
@@ -1271,15 +1278,15 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         None (modifies fig in place)
         
     Examples:
-        - Comet C/2025 V1 closest approach to Earth → "Closest Approach (Perigee)"
-        - Asteroid flyby of Mars → "Closest Approach (Periareion)"
-        - Spacecraft encounter with Jupiter → "Closest Approach (Perijove)"
+        - Comet C/2025 V1 closest plotted point to Earth → "Closest Plotted (Perigee)"
+        - Asteroid flyby of Mars → "Closest Plotted (Periareion)"
+        - Spacecraft encounter with Jupiter → "Closest Plotted (Perijove)"
     """
     import numpy as np
     from datetime import datetime
     
     if not positions_dict or len(positions_dict) == 0:
-        print(f"No trajectory data for closest approach of {obj_name}", flush=True)
+        print(f"No trajectory data for closest plotted of {obj_name}", flush=True)
         return
     
     # Get terminology for this center body
@@ -1306,10 +1313,10 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         positions.append(pos)
     
     if len(distances) == 0:
-        print(f"No positions in date range for {obj_name} closest approach", flush=True)
+        print(f"No positions in date range for {obj_name} closest plotted", flush=True)
         return
     
-    # Find closest approach
+    # Find closest plotted point
     closest_idx = np.argmin(distances)
     closest_date = dates[closest_idx]
     closest_distance = distances[closest_idx]
@@ -1323,7 +1330,8 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         date_str_formatted = closest_date
     
     # Create label using proper terminology
-    label = f"Closest Approach ({near_term})"
+#    label = f"Closest Plotted ({near_term})"
+    label = f"Closest Plotted Point"
     
     # Create comprehensive hover text
     km_distance = closest_distance * 149597870.7  # AU to km
@@ -1350,9 +1358,10 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
             ),
             name=f"{obj_name} {label}",
             text=[hover_text],
+            customdata=[f"{obj_name} {label}"],
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
     )
     
-    print(f"✓ Added closest approach marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)
+    print(f"✓ Added closest plotted marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)
