@@ -6,9 +6,5 @@ __pycache__/
 data/
 star_data/
 
-# Python cache
-__pycache__/
-*.pyc
-
 # Generated reports
 reports/
