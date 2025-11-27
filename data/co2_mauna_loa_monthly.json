@@ -1,0 +1,8126 @@
+{
+  "metadata": {
+    "dataset_name": "mauna_loa_co2_monthly",
+    "description": "Monthly atmospheric CO\u2082 concentrations from Mauna Loa Observatory, Hawaii",
+    "source": {
+      "organization": "NOAA Global Monitoring Laboratory",
+      "url": "https://gml.noaa.gov/ccgg/trends/",
+      "data_url": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt",
+      "citation": "Keeling, C.D., S.C. Piper, R.B. Bacastow, et al. Atmospheric CO\u2082 concentrations from Mauna Loa Observatory. NOAA Global Monitoring Laboratory."
+    },
+    "cached_date": "2025-11-04T23:26:07.636007",
+    "record_count": 810,
+    "temporal_range": {
+      "start": "1958-03",
+      "end": "2025-08"
+    },
+    "units": "ppm (parts per million)",
+    "measurement_method": "Non-dispersive infrared spectroscopy",
+    "baseline": "Direct atmospheric measurement",
+    "license": "Public domain - U.S. Government data",
+    "threat_status": "Mauna Loa Observatory threatened with closure (August 2025 lease expiration)",
+    "preservation_priority": "CRITICAL - 67-year continuous record at risk"
+  },
+  "data": [
+    {
+      "year": 1958,
+      "month": 3,
+      "decimal_date": 1958.2027,
+      "co2_ppm": 315.71,
+      "co2_deseasonalized": 314.44,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 4,
+      "decimal_date": 1958.2877,
+      "co2_ppm": 317.45,
+      "co2_deseasonalized": 315.16,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 5,
+      "decimal_date": 1958.3699,
+      "co2_ppm": 317.51,
+      "co2_deseasonalized": 314.69,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 6,
+      "decimal_date": 1958.4548,
+      "co2_ppm": 317.27,
+      "co2_deseasonalized": 315.15,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 7,
+      "decimal_date": 1958.537,
+      "co2_ppm": 315.87,
+      "co2_deseasonalized": 315.2,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 8,
+      "decimal_date": 1958.6219,
+      "co2_ppm": 314.93,
+      "co2_deseasonalized": 316.21,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 9,
+      "decimal_date": 1958.7068,
+      "co2_ppm": 313.21,
+      "co2_deseasonalized": 316.11,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 10,
+      "decimal_date": 1958.789,
+      "co2_ppm": 312.42,
+      "co2_deseasonalized": 315.41,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 11,
+      "decimal_date": 1958.874,
+      "co2_ppm": 313.33,
+      "co2_deseasonalized": 315.21,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1958,
+      "month": 12,
+      "decimal_date": 1958.9562,
+      "co2_ppm": 314.67,
+      "co2_deseasonalized": 315.43,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 1,
+      "decimal_date": 1959.0411,
+      "co2_ppm": 315.58,
+      "co2_deseasonalized": 315.52,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 2,
+      "decimal_date": 1959.126,
+      "co2_ppm": 316.49,
+      "co2_deseasonalized": 315.84,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 3,
+      "decimal_date": 1959.2027,
+      "co2_ppm": 316.65,
+      "co2_deseasonalized": 315.37,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 4,
+      "decimal_date": 1959.2877,
+      "co2_ppm": 317.72,
+      "co2_deseasonalized": 315.42,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 5,
+      "decimal_date": 1959.3699,
+      "co2_ppm": 318.29,
+      "co2_deseasonalized": 315.46,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 6,
+      "decimal_date": 1959.4548,
+      "co2_ppm": 318.15,
+      "co2_deseasonalized": 316.0,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 7,
+      "decimal_date": 1959.537,
+      "co2_ppm": 316.54,
+      "co2_deseasonalized": 315.87,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 8,
+      "decimal_date": 1959.6219,
+      "co2_ppm": 314.8,
+      "co2_deseasonalized": 316.09,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 9,
+      "decimal_date": 1959.7068,
+      "co2_ppm": 313.84,
+      "co2_deseasonalized": 316.75,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 10,
+      "decimal_date": 1959.789,
+      "co2_ppm": 313.33,
+      "co2_deseasonalized": 316.34,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 11,
+      "decimal_date": 1959.874,
+      "co2_ppm": 314.81,
+      "co2_deseasonalized": 316.69,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1959,
+      "month": 12,
+      "decimal_date": 1959.9562,
+      "co2_ppm": 315.58,
+      "co2_deseasonalized": 316.35,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 1,
+      "decimal_date": 1960.041,
+      "co2_ppm": 316.43,
+      "co2_deseasonalized": 316.38,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 2,
+      "decimal_date": 1960.1257,
+      "co2_ppm": 316.98,
+      "co2_deseasonalized": 316.33,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 3,
+      "decimal_date": 1960.2049,
+      "co2_ppm": 317.58,
+      "co2_deseasonalized": 316.27,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 4,
+      "decimal_date": 1960.2896,
+      "co2_ppm": 319.03,
+      "co2_deseasonalized": 316.7,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 5,
+      "decimal_date": 1960.3716,
+      "co2_ppm": 320.03,
+      "co2_deseasonalized": 317.19,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 6,
+      "decimal_date": 1960.4563,
+      "co2_ppm": 319.58,
+      "co2_deseasonalized": 317.45,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 7,
+      "decimal_date": 1960.5383,
+      "co2_ppm": 318.18,
+      "co2_deseasonalized": 317.54,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 8,
+      "decimal_date": 1960.623,
+      "co2_ppm": 315.9,
+      "co2_deseasonalized": 317.22,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 9,
+      "decimal_date": 1960.7077,
+      "co2_ppm": 314.17,
+      "co2_deseasonalized": 317.1,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 10,
+      "decimal_date": 1960.7896,
+      "co2_ppm": 313.83,
+      "co2_deseasonalized": 316.85,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 11,
+      "decimal_date": 1960.8743,
+      "co2_ppm": 315.0,
+      "co2_deseasonalized": 316.89,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1960,
+      "month": 12,
+      "decimal_date": 1960.9563,
+      "co2_ppm": 316.19,
+      "co2_deseasonalized": 316.96,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 1,
+      "decimal_date": 1961.0411,
+      "co2_ppm": 316.89,
+      "co2_deseasonalized": 316.84,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 2,
+      "decimal_date": 1961.126,
+      "co2_ppm": 317.7,
+      "co2_deseasonalized": 317.05,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 3,
+      "decimal_date": 1961.2027,
+      "co2_ppm": 318.54,
+      "co2_deseasonalized": 317.25,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 4,
+      "decimal_date": 1961.2877,
+      "co2_ppm": 319.48,
+      "co2_deseasonalized": 317.16,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 5,
+      "decimal_date": 1961.3699,
+      "co2_ppm": 320.58,
+      "co2_deseasonalized": 317.73,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 6,
+      "decimal_date": 1961.4548,
+      "co2_ppm": 319.77,
+      "co2_deseasonalized": 317.61,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 7,
+      "decimal_date": 1961.537,
+      "co2_ppm": 318.56,
+      "co2_deseasonalized": 317.89,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 8,
+      "decimal_date": 1961.6219,
+      "co2_ppm": 316.79,
+      "co2_deseasonalized": 318.09,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 9,
+      "decimal_date": 1961.7068,
+      "co2_ppm": 314.99,
+      "co2_deseasonalized": 317.92,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 10,
+      "decimal_date": 1961.789,
+      "co2_ppm": 315.31,
+      "co2_deseasonalized": 318.34,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 11,
+      "decimal_date": 1961.874,
+      "co2_ppm": 316.1,
+      "co2_deseasonalized": 318.0,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1961,
+      "month": 12,
+      "decimal_date": 1961.9562,
+      "co2_ppm": 317.01,
+      "co2_deseasonalized": 317.78,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 1,
+      "decimal_date": 1962.0411,
+      "co2_ppm": 317.94,
+      "co2_deseasonalized": 317.89,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 2,
+      "decimal_date": 1962.126,
+      "co2_ppm": 318.55,
+      "co2_deseasonalized": 317.89,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 3,
+      "decimal_date": 1962.2027,
+      "co2_ppm": 319.68,
+      "co2_deseasonalized": 318.39,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 4,
+      "decimal_date": 1962.2877,
+      "co2_ppm": 320.57,
+      "co2_deseasonalized": 318.24,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 5,
+      "decimal_date": 1962.3699,
+      "co2_ppm": 321.02,
+      "co2_deseasonalized": 318.16,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 6,
+      "decimal_date": 1962.4548,
+      "co2_ppm": 320.62,
+      "co2_deseasonalized": 318.45,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 7,
+      "decimal_date": 1962.537,
+      "co2_ppm": 319.61,
+      "co2_deseasonalized": 318.94,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 8,
+      "decimal_date": 1962.6219,
+      "co2_ppm": 317.4,
+      "co2_deseasonalized": 318.71,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 9,
+      "decimal_date": 1962.7068,
+      "co2_ppm": 316.24,
+      "co2_deseasonalized": 319.18,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 10,
+      "decimal_date": 1962.789,
+      "co2_ppm": 315.42,
+      "co2_deseasonalized": 318.46,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 11,
+      "decimal_date": 1962.874,
+      "co2_ppm": 316.69,
+      "co2_deseasonalized": 318.59,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1962,
+      "month": 12,
+      "decimal_date": 1962.9562,
+      "co2_ppm": 317.7,
+      "co2_deseasonalized": 318.47,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 1,
+      "decimal_date": 1963.0411,
+      "co2_ppm": 318.74,
+      "co2_deseasonalized": 318.69,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 2,
+      "decimal_date": 1963.126,
+      "co2_ppm": 319.07,
+      "co2_deseasonalized": 318.41,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 3,
+      "decimal_date": 1963.2027,
+      "co2_ppm": 319.86,
+      "co2_deseasonalized": 318.57,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 4,
+      "decimal_date": 1963.2877,
+      "co2_ppm": 321.38,
+      "co2_deseasonalized": 319.05,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 5,
+      "decimal_date": 1963.3699,
+      "co2_ppm": 322.24,
+      "co2_deseasonalized": 319.38,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 6,
+      "decimal_date": 1963.4548,
+      "co2_ppm": 321.49,
+      "co2_deseasonalized": 319.31,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 7,
+      "decimal_date": 1963.537,
+      "co2_ppm": 319.74,
+      "co2_deseasonalized": 319.07,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 8,
+      "decimal_date": 1963.6219,
+      "co2_ppm": 317.77,
+      "co2_deseasonalized": 319.07,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 9,
+      "decimal_date": 1963.7068,
+      "co2_ppm": 316.21,
+      "co2_deseasonalized": 319.16,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 10,
+      "decimal_date": 1963.789,
+      "co2_ppm": 315.99,
+      "co2_deseasonalized": 319.03,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 11,
+      "decimal_date": 1963.874,
+      "co2_ppm": 317.07,
+      "co2_deseasonalized": 318.98,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1963,
+      "month": 12,
+      "decimal_date": 1963.9562,
+      "co2_ppm": 318.35,
+      "co2_deseasonalized": 319.13,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 1,
+      "decimal_date": 1964.041,
+      "co2_ppm": 319.57,
+      "co2_deseasonalized": 319.52,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 2,
+      "decimal_date": 1964.1257,
+      "co2_ppm": 320.04,
+      "co2_deseasonalized": 319.37,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 3,
+      "decimal_date": 1964.2049,
+      "co2_ppm": 320.75,
+      "co2_deseasonalized": 319.41,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 4,
+      "decimal_date": 1964.2896,
+      "co2_ppm": 321.84,
+      "co2_deseasonalized": 319.46,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 5,
+      "decimal_date": 1964.3716,
+      "co2_ppm": 322.25,
+      "co2_deseasonalized": 319.37,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 6,
+      "decimal_date": 1964.4563,
+      "co2_ppm": 321.89,
+      "co2_deseasonalized": 319.73,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 7,
+      "decimal_date": 1964.5383,
+      "co2_ppm": 320.44,
+      "co2_deseasonalized": 319.79,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 8,
+      "decimal_date": 1964.623,
+      "co2_ppm": 318.69,
+      "co2_deseasonalized": 320.03,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 9,
+      "decimal_date": 1964.7077,
+      "co2_ppm": 316.71,
+      "co2_deseasonalized": 319.67,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 10,
+      "decimal_date": 1964.7896,
+      "co2_ppm": 316.87,
+      "co2_deseasonalized": 319.93,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 11,
+      "decimal_date": 1964.8743,
+      "co2_ppm": 317.68,
+      "co2_deseasonalized": 319.59,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1964,
+      "month": 12,
+      "decimal_date": 1964.9563,
+      "co2_ppm": 318.71,
+      "co2_deseasonalized": 319.49,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 1,
+      "decimal_date": 1965.0411,
+      "co2_ppm": 319.44,
+      "co2_deseasonalized": 319.38,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 2,
+      "decimal_date": 1965.126,
+      "co2_ppm": 320.44,
+      "co2_deseasonalized": 319.79,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 3,
+      "decimal_date": 1965.2027,
+      "co2_ppm": 320.89,
+      "co2_deseasonalized": 319.59,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 4,
+      "decimal_date": 1965.2877,
+      "co2_ppm": 322.14,
+      "co2_deseasonalized": 319.79,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 5,
+      "decimal_date": 1965.3699,
+      "co2_ppm": 322.17,
+      "co2_deseasonalized": 319.28,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 6,
+      "decimal_date": 1965.4548,
+      "co2_ppm": 321.87,
+      "co2_deseasonalized": 319.68,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 7,
+      "decimal_date": 1965.537,
+      "co2_ppm": 321.21,
+      "co2_deseasonalized": 320.53,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 8,
+      "decimal_date": 1965.6219,
+      "co2_ppm": 318.87,
+      "co2_deseasonalized": 320.18,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 9,
+      "decimal_date": 1965.7068,
+      "co2_ppm": 317.82,
+      "co2_deseasonalized": 320.78,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 10,
+      "decimal_date": 1965.789,
+      "co2_ppm": 317.3,
+      "co2_deseasonalized": 320.37,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 11,
+      "decimal_date": 1965.874,
+      "co2_ppm": 318.87,
+      "co2_deseasonalized": 320.79,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1965,
+      "month": 12,
+      "decimal_date": 1965.9562,
+      "co2_ppm": 319.42,
+      "co2_deseasonalized": 320.2,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 1,
+      "decimal_date": 1966.0411,
+      "co2_ppm": 320.62,
+      "co2_deseasonalized": 320.57,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 2,
+      "decimal_date": 1966.126,
+      "co2_ppm": 321.6,
+      "co2_deseasonalized": 320.94,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 3,
+      "decimal_date": 1966.2027,
+      "co2_ppm": 322.39,
+      "co2_deseasonalized": 321.08,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 4,
+      "decimal_date": 1966.2877,
+      "co2_ppm": 323.7,
+      "co2_deseasonalized": 321.34,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 5,
+      "decimal_date": 1966.3699,
+      "co2_ppm": 324.08,
+      "co2_deseasonalized": 321.18,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 6,
+      "decimal_date": 1966.4548,
+      "co2_ppm": 323.75,
+      "co2_deseasonalized": 321.55,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 7,
+      "decimal_date": 1966.537,
+      "co2_ppm": 322.37,
+      "co2_deseasonalized": 321.69,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 8,
+      "decimal_date": 1966.6219,
+      "co2_ppm": 320.36,
+      "co2_deseasonalized": 321.68,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 9,
+      "decimal_date": 1966.7068,
+      "co2_ppm": 318.64,
+      "co2_deseasonalized": 321.61,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 10,
+      "decimal_date": 1966.789,
+      "co2_ppm": 318.1,
+      "co2_deseasonalized": 321.18,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 11,
+      "decimal_date": 1966.874,
+      "co2_ppm": 319.78,
+      "co2_deseasonalized": 321.71,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1966,
+      "month": 12,
+      "decimal_date": 1966.9562,
+      "co2_ppm": 321.02,
+      "co2_deseasonalized": 321.81,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 1,
+      "decimal_date": 1967.0411,
+      "co2_ppm": 322.33,
+      "co2_deseasonalized": 322.28,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 2,
+      "decimal_date": 1967.126,
+      "co2_ppm": 322.5,
+      "co2_deseasonalized": 321.83,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 3,
+      "decimal_date": 1967.2027,
+      "co2_ppm": 323.03,
+      "co2_deseasonalized": 321.72,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 4,
+      "decimal_date": 1967.2877,
+      "co2_ppm": 324.41,
+      "co2_deseasonalized": 322.05,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 5,
+      "decimal_date": 1967.3699,
+      "co2_ppm": 325.0,
+      "co2_deseasonalized": 322.09,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 6,
+      "decimal_date": 1967.4548,
+      "co2_ppm": 324.09,
+      "co2_deseasonalized": 321.89,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 7,
+      "decimal_date": 1967.537,
+      "co2_ppm": 322.54,
+      "co2_deseasonalized": 321.86,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 8,
+      "decimal_date": 1967.6219,
+      "co2_ppm": 320.92,
+      "co2_deseasonalized": 322.24,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 9,
+      "decimal_date": 1967.7068,
+      "co2_ppm": 319.25,
+      "co2_deseasonalized": 322.24,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 10,
+      "decimal_date": 1967.789,
+      "co2_ppm": 319.39,
+      "co2_deseasonalized": 322.48,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 11,
+      "decimal_date": 1967.874,
+      "co2_ppm": 320.73,
+      "co2_deseasonalized": 322.66,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1967,
+      "month": 12,
+      "decimal_date": 1967.9562,
+      "co2_ppm": 321.96,
+      "co2_deseasonalized": 322.74,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 1,
+      "decimal_date": 1968.041,
+      "co2_ppm": 322.57,
+      "co2_deseasonalized": 322.51,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 2,
+      "decimal_date": 1968.1257,
+      "co2_ppm": 323.15,
+      "co2_deseasonalized": 322.48,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 3,
+      "decimal_date": 1968.2049,
+      "co2_ppm": 323.89,
+      "co2_deseasonalized": 322.55,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 4,
+      "decimal_date": 1968.2896,
+      "co2_ppm": 325.02,
+      "co2_deseasonalized": 322.63,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 5,
+      "decimal_date": 1968.3716,
+      "co2_ppm": 325.57,
+      "co2_deseasonalized": 322.66,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 6,
+      "decimal_date": 1968.4563,
+      "co2_ppm": 325.36,
+      "co2_deseasonalized": 323.17,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 7,
+      "decimal_date": 1968.5383,
+      "co2_ppm": 324.14,
+      "co2_deseasonalized": 323.48,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 8,
+      "decimal_date": 1968.623,
+      "co2_ppm": 322.11,
+      "co2_deseasonalized": 323.46,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 9,
+      "decimal_date": 1968.7077,
+      "co2_ppm": 320.33,
+      "co2_deseasonalized": 323.33,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 10,
+      "decimal_date": 1968.7896,
+      "co2_ppm": 320.25,
+      "co2_deseasonalized": 323.34,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 11,
+      "decimal_date": 1968.8743,
+      "co2_ppm": 321.32,
+      "co2_deseasonalized": 323.26,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1968,
+      "month": 12,
+      "decimal_date": 1968.9563,
+      "co2_ppm": 322.89,
+      "co2_deseasonalized": 323.68,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 1,
+      "decimal_date": 1969.0411,
+      "co2_ppm": 324.0,
+      "co2_deseasonalized": 323.95,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 2,
+      "decimal_date": 1969.126,
+      "co2_ppm": 324.41,
+      "co2_deseasonalized": 323.75,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 3,
+      "decimal_date": 1969.2027,
+      "co2_ppm": 325.63,
+      "co2_deseasonalized": 324.31,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 4,
+      "decimal_date": 1969.2877,
+      "co2_ppm": 326.66,
+      "co2_deseasonalized": 324.28,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 5,
+      "decimal_date": 1969.3699,
+      "co2_ppm": 327.38,
+      "co2_deseasonalized": 324.46,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 6,
+      "decimal_date": 1969.4548,
+      "co2_ppm": 326.71,
+      "co2_deseasonalized": 324.49,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 7,
+      "decimal_date": 1969.537,
+      "co2_ppm": 325.88,
+      "co2_deseasonalized": 325.19,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 8,
+      "decimal_date": 1969.6219,
+      "co2_ppm": 323.66,
+      "co2_deseasonalized": 324.99,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 9,
+      "decimal_date": 1969.7068,
+      "co2_ppm": 322.38,
+      "co2_deseasonalized": 325.38,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 10,
+      "decimal_date": 1969.789,
+      "co2_ppm": 321.78,
+      "co2_deseasonalized": 324.89,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 11,
+      "decimal_date": 1969.874,
+      "co2_ppm": 322.85,
+      "co2_deseasonalized": 324.8,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1969,
+      "month": 12,
+      "decimal_date": 1969.9562,
+      "co2_ppm": 324.11,
+      "co2_deseasonalized": 324.91,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 1,
+      "decimal_date": 1970.0411,
+      "co2_ppm": 325.06,
+      "co2_deseasonalized": 325.01,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 2,
+      "decimal_date": 1970.126,
+      "co2_ppm": 325.99,
+      "co2_deseasonalized": 325.31,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 3,
+      "decimal_date": 1970.2027,
+      "co2_ppm": 326.93,
+      "co2_deseasonalized": 325.61,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 4,
+      "decimal_date": 1970.2877,
+      "co2_ppm": 328.13,
+      "co2_deseasonalized": 325.75,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 5,
+      "decimal_date": 1970.3699,
+      "co2_ppm": 328.08,
+      "co2_deseasonalized": 325.15,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 6,
+      "decimal_date": 1970.4548,
+      "co2_ppm": 327.67,
+      "co2_deseasonalized": 325.44,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 7,
+      "decimal_date": 1970.537,
+      "co2_ppm": 326.34,
+      "co2_deseasonalized": 325.65,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 8,
+      "decimal_date": 1970.6219,
+      "co2_ppm": 324.68,
+      "co2_deseasonalized": 326.02,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 9,
+      "decimal_date": 1970.7068,
+      "co2_ppm": 323.1,
+      "co2_deseasonalized": 326.11,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 10,
+      "decimal_date": 1970.789,
+      "co2_ppm": 323.06,
+      "co2_deseasonalized": 326.18,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 11,
+      "decimal_date": 1970.874,
+      "co2_ppm": 324.01,
+      "co2_deseasonalized": 325.96,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1970,
+      "month": 12,
+      "decimal_date": 1970.9562,
+      "co2_ppm": 325.13,
+      "co2_deseasonalized": 325.93,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 1,
+      "decimal_date": 1971.0411,
+      "co2_ppm": 326.17,
+      "co2_deseasonalized": 326.12,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 2,
+      "decimal_date": 1971.126,
+      "co2_ppm": 326.69,
+      "co2_deseasonalized": 326.01,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 3,
+      "decimal_date": 1971.2027,
+      "co2_ppm": 327.18,
+      "co2_deseasonalized": 325.85,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 4,
+      "decimal_date": 1971.2877,
+      "co2_ppm": 327.78,
+      "co2_deseasonalized": 325.39,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 5,
+      "decimal_date": 1971.3699,
+      "co2_ppm": 328.93,
+      "co2_deseasonalized": 325.99,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 6,
+      "decimal_date": 1971.4548,
+      "co2_ppm": 328.57,
+      "co2_deseasonalized": 326.34,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 7,
+      "decimal_date": 1971.537,
+      "co2_ppm": 327.36,
+      "co2_deseasonalized": 326.67,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 8,
+      "decimal_date": 1971.6219,
+      "co2_ppm": 325.43,
+      "co2_deseasonalized": 326.77,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 9,
+      "decimal_date": 1971.7068,
+      "co2_ppm": 323.36,
+      "co2_deseasonalized": 326.38,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 10,
+      "decimal_date": 1971.789,
+      "co2_ppm": 323.56,
+      "co2_deseasonalized": 326.69,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 11,
+      "decimal_date": 1971.874,
+      "co2_ppm": 324.8,
+      "co2_deseasonalized": 326.75,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1971,
+      "month": 12,
+      "decimal_date": 1971.9562,
+      "co2_ppm": 326.01,
+      "co2_deseasonalized": 326.81,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 1,
+      "decimal_date": 1972.041,
+      "co2_ppm": 326.77,
+      "co2_deseasonalized": 326.71,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 2,
+      "decimal_date": 1972.1257,
+      "co2_ppm": 327.63,
+      "co2_deseasonalized": 326.96,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 3,
+      "decimal_date": 1972.2049,
+      "co2_ppm": 327.75,
+      "co2_deseasonalized": 326.39,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 4,
+      "decimal_date": 1972.2896,
+      "co2_ppm": 329.72,
+      "co2_deseasonalized": 327.3,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 5,
+      "decimal_date": 1972.3716,
+      "co2_ppm": 330.07,
+      "co2_deseasonalized": 327.12,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 6,
+      "decimal_date": 1972.4563,
+      "co2_ppm": 329.09,
+      "co2_deseasonalized": 326.87,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 7,
+      "decimal_date": 1972.5383,
+      "co2_ppm": 328.04,
+      "co2_deseasonalized": 327.38,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 8,
+      "decimal_date": 1972.623,
+      "co2_ppm": 326.32,
+      "co2_deseasonalized": 327.69,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 9,
+      "decimal_date": 1972.7077,
+      "co2_ppm": 324.84,
+      "co2_deseasonalized": 327.88,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 10,
+      "decimal_date": 1972.7896,
+      "co2_ppm": 325.2,
+      "co2_deseasonalized": 328.33,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 11,
+      "decimal_date": 1972.8743,
+      "co2_ppm": 326.5,
+      "co2_deseasonalized": 328.46,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1972,
+      "month": 12,
+      "decimal_date": 1972.9563,
+      "co2_ppm": 327.55,
+      "co2_deseasonalized": 328.35,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 1,
+      "decimal_date": 1973.0411,
+      "co2_ppm": 328.55,
+      "co2_deseasonalized": 328.49,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 2,
+      "decimal_date": 1973.126,
+      "co2_ppm": 329.57,
+      "co2_deseasonalized": 328.89,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 3,
+      "decimal_date": 1973.2027,
+      "co2_ppm": 330.3,
+      "co2_deseasonalized": 328.97,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 4,
+      "decimal_date": 1973.2877,
+      "co2_ppm": 331.5,
+      "co2_deseasonalized": 329.1,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 5,
+      "decimal_date": 1973.3699,
+      "co2_ppm": 332.48,
+      "co2_deseasonalized": 329.52,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 6,
+      "decimal_date": 1973.4548,
+      "co2_ppm": 332.07,
+      "co2_deseasonalized": 329.83,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 7,
+      "decimal_date": 1973.537,
+      "co2_ppm": 330.87,
+      "co2_deseasonalized": 330.18,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 8,
+      "decimal_date": 1973.6219,
+      "co2_ppm": 329.31,
+      "co2_deseasonalized": 330.66,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 9,
+      "decimal_date": 1973.7068,
+      "co2_ppm": 327.52,
+      "co2_deseasonalized": 330.56,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 10,
+      "decimal_date": 1973.789,
+      "co2_ppm": 327.19,
+      "co2_deseasonalized": 330.33,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 11,
+      "decimal_date": 1973.874,
+      "co2_ppm": 328.17,
+      "co2_deseasonalized": 330.13,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1973,
+      "month": 12,
+      "decimal_date": 1973.9562,
+      "co2_ppm": 328.65,
+      "co2_deseasonalized": 329.45,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1974,
+      "month": 1,
+      "decimal_date": 1974.0411,
+      "co2_ppm": 329.36,
+      "co2_deseasonalized": 329.3,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1974,
+      "month": 2,
+      "decimal_date": 1974.126,
+      "co2_ppm": 330.71,
+      "co2_deseasonalized": 330.03,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1974,
+      "month": 3,
+      "decimal_date": 1974.2027,
+      "co2_ppm": 331.49,
+      "co2_deseasonalized": 330.15,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1974,
+      "month": 4,
+      "decimal_date": 1974.2877,
+      "co2_ppm": 332.65,
+      "co2_deseasonalized": 330.24,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": -0.99
+    },
+    {
+      "year": 1974,
+      "month": 5,
+      "decimal_date": 1974.375,
+      "co2_ppm": 333.19,
+      "co2_deseasonalized": 330.22,
+      "days": 13,
+      "std_dev": 0.31,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1974,
+      "month": 6,
+      "decimal_date": 1974.4583,
+      "co2_ppm": 332.2,
+      "co2_deseasonalized": 329.79,
+      "days": 25,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1974,
+      "month": 7,
+      "decimal_date": 1974.5417,
+      "co2_ppm": 331.07,
+      "co2_deseasonalized": 330.21,
+      "days": 24,
+      "std_dev": 0.24,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1974,
+      "month": 8,
+      "decimal_date": 1974.625,
+      "co2_ppm": 329.15,
+      "co2_deseasonalized": 330.54,
+      "days": 26,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1974,
+      "month": 9,
+      "decimal_date": 1974.7083,
+      "co2_ppm": 327.33,
+      "co2_deseasonalized": 330.44,
+      "days": 22,
+      "std_dev": 0.47,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1974,
+      "month": 10,
+      "decimal_date": 1974.7917,
+      "co2_ppm": 327.28,
+      "co2_deseasonalized": 330.53,
+      "days": 24,
+      "std_dev": 0.22,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1974,
+      "month": 11,
+      "decimal_date": 1974.875,
+      "co2_ppm": 328.31,
+      "co2_deseasonalized": 330.5,
+      "days": 26,
+      "std_dev": 0.43,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1974,
+      "month": 12,
+      "decimal_date": 1974.9583,
+      "co2_ppm": 329.58,
+      "co2_deseasonalized": 330.54,
+      "days": 29,
+      "std_dev": 0.29,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1975,
+      "month": 1,
+      "decimal_date": 1975.0417,
+      "co2_ppm": 330.73,
+      "co2_deseasonalized": 330.84,
+      "days": 29,
+      "std_dev": 0.43,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1975,
+      "month": 2,
+      "decimal_date": 1975.125,
+      "co2_ppm": 331.46,
+      "co2_deseasonalized": 330.85,
+      "days": 26,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1975,
+      "month": 3,
+      "decimal_date": 1975.2083,
+      "co2_ppm": 331.94,
+      "co2_deseasonalized": 330.37,
+      "days": 17,
+      "std_dev": 0.33,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1975,
+      "month": 4,
+      "decimal_date": 1975.2917,
+      "co2_ppm": 333.11,
+      "co2_deseasonalized": 330.53,
+      "days": 23,
+      "std_dev": 0.59,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1975,
+      "month": 5,
+      "decimal_date": 1975.375,
+      "co2_ppm": 333.95,
+      "co2_deseasonalized": 330.98,
+      "days": 28,
+      "std_dev": 0.35,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1975,
+      "month": 6,
+      "decimal_date": 1975.4583,
+      "co2_ppm": 333.42,
+      "co2_deseasonalized": 331.01,
+      "days": 27,
+      "std_dev": 0.48,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1975,
+      "month": 7,
+      "decimal_date": 1975.5417,
+      "co2_ppm": 331.97,
+      "co2_deseasonalized": 331.12,
+      "days": 24,
+      "std_dev": 0.45,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1975,
+      "month": 8,
+      "decimal_date": 1975.625,
+      "co2_ppm": 329.95,
+      "co2_deseasonalized": 331.33,
+      "days": 24,
+      "std_dev": 0.47,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1975,
+      "month": 9,
+      "decimal_date": 1975.7083,
+      "co2_ppm": 328.49,
+      "co2_deseasonalized": 331.6,
+      "days": 22,
+      "std_dev": 0.53,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1975,
+      "month": 10,
+      "decimal_date": 1975.7917,
+      "co2_ppm": 328.36,
+      "co2_deseasonalized": 331.61,
+      "days": 11,
+      "std_dev": 0.21,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1975,
+      "month": 11,
+      "decimal_date": 1975.875,
+      "co2_ppm": 329.38,
+      "co2_deseasonalized": 331.57,
+      "days": 18,
+      "std_dev": 0.31,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1975,
+      "month": 12,
+      "decimal_date": 1975.9583,
+      "co2_ppm": 330.78,
+      "co2_deseasonalized": 331.74,
+      "days": -1,
+      "std_dev": -9.99,
+      "uncertainty": 0.0
+    },
+    {
+      "year": 1976,
+      "month": 1,
+      "decimal_date": 1976.0417,
+      "co2_ppm": 331.56,
+      "co2_deseasonalized": 331.67,
+      "days": 19,
+      "std_dev": 0.23,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1976,
+      "month": 2,
+      "decimal_date": 1976.125,
+      "co2_ppm": 332.74,
+      "co2_deseasonalized": 332.14,
+      "days": 22,
+      "std_dev": 0.49,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1976,
+      "month": 3,
+      "decimal_date": 1976.2083,
+      "co2_ppm": 333.36,
+      "co2_deseasonalized": 331.79,
+      "days": 18,
+      "std_dev": 0.52,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1976,
+      "month": 4,
+      "decimal_date": 1976.2917,
+      "co2_ppm": 334.74,
+      "co2_deseasonalized": 332.16,
+      "days": 18,
+      "std_dev": 0.77,
+      "uncertainty": 0.35
+    },
+    {
+      "year": 1976,
+      "month": 5,
+      "decimal_date": 1976.375,
+      "co2_ppm": 334.72,
+      "co2_deseasonalized": 331.75,
+      "days": 21,
+      "std_dev": 0.56,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1976,
+      "month": 6,
+      "decimal_date": 1976.4583,
+      "co2_ppm": 333.97,
+      "co2_deseasonalized": 331.56,
+      "days": 15,
+      "std_dev": 0.21,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1976,
+      "month": 7,
+      "decimal_date": 1976.5417,
+      "co2_ppm": 333.08,
+      "co2_deseasonalized": 332.23,
+      "days": 15,
+      "std_dev": 0.24,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1976,
+      "month": 8,
+      "decimal_date": 1976.625,
+      "co2_ppm": 330.68,
+      "co2_deseasonalized": 332.07,
+      "days": 23,
+      "std_dev": 0.51,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1976,
+      "month": 9,
+      "decimal_date": 1976.7083,
+      "co2_ppm": 328.96,
+      "co2_deseasonalized": 332.07,
+      "days": 13,
+      "std_dev": 0.69,
+      "uncertainty": 0.37
+    },
+    {
+      "year": 1976,
+      "month": 10,
+      "decimal_date": 1976.7917,
+      "co2_ppm": 328.72,
+      "co2_deseasonalized": 331.98,
+      "days": 19,
+      "std_dev": 0.57,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1976,
+      "month": 11,
+      "decimal_date": 1976.875,
+      "co2_ppm": 330.16,
+      "co2_deseasonalized": 332.35,
+      "days": 25,
+      "std_dev": 0.36,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1976,
+      "month": 12,
+      "decimal_date": 1976.9583,
+      "co2_ppm": 331.62,
+      "co2_deseasonalized": 332.59,
+      "days": 20,
+      "std_dev": 0.38,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1977,
+      "month": 1,
+      "decimal_date": 1977.0417,
+      "co2_ppm": 332.68,
+      "co2_deseasonalized": 332.77,
+      "days": 23,
+      "std_dev": 0.4,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1977,
+      "month": 2,
+      "decimal_date": 1977.125,
+      "co2_ppm": 333.17,
+      "co2_deseasonalized": 332.58,
+      "days": 20,
+      "std_dev": 0.34,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1977,
+      "month": 3,
+      "decimal_date": 1977.2083,
+      "co2_ppm": 334.96,
+      "co2_deseasonalized": 333.4,
+      "days": 23,
+      "std_dev": 0.51,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1977,
+      "month": 4,
+      "decimal_date": 1977.2917,
+      "co2_ppm": 336.14,
+      "co2_deseasonalized": 333.54,
+      "days": 20,
+      "std_dev": 0.5,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1977,
+      "month": 5,
+      "decimal_date": 1977.375,
+      "co2_ppm": 336.93,
+      "co2_deseasonalized": 334.0,
+      "days": 20,
+      "std_dev": 0.31,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1977,
+      "month": 6,
+      "decimal_date": 1977.4583,
+      "co2_ppm": 336.17,
+      "co2_deseasonalized": 333.79,
+      "days": 22,
+      "std_dev": 0.4,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1977,
+      "month": 7,
+      "decimal_date": 1977.5417,
+      "co2_ppm": 334.89,
+      "co2_deseasonalized": 334.01,
+      "days": 20,
+      "std_dev": 0.23,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1977,
+      "month": 8,
+      "decimal_date": 1977.625,
+      "co2_ppm": 332.56,
+      "co2_deseasonalized": 333.91,
+      "days": 18,
+      "std_dev": 0.46,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1977,
+      "month": 9,
+      "decimal_date": 1977.7083,
+      "co2_ppm": 331.29,
+      "co2_deseasonalized": 334.36,
+      "days": 19,
+      "std_dev": 0.46,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1977,
+      "month": 10,
+      "decimal_date": 1977.7917,
+      "co2_ppm": 331.28,
+      "co2_deseasonalized": 334.51,
+      "days": 23,
+      "std_dev": 0.29,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1977,
+      "month": 11,
+      "decimal_date": 1977.875,
+      "co2_ppm": 332.46,
+      "co2_deseasonalized": 334.68,
+      "days": 21,
+      "std_dev": 0.43,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1977,
+      "month": 12,
+      "decimal_date": 1977.9583,
+      "co2_ppm": 333.6,
+      "co2_deseasonalized": 334.58,
+      "days": 25,
+      "std_dev": 0.36,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1978,
+      "month": 1,
+      "decimal_date": 1978.0417,
+      "co2_ppm": 334.94,
+      "co2_deseasonalized": 335.01,
+      "days": 22,
+      "std_dev": 0.52,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1978,
+      "month": 2,
+      "decimal_date": 1978.125,
+      "co2_ppm": 335.26,
+      "co2_deseasonalized": 334.6,
+      "days": 25,
+      "std_dev": 0.5,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1978,
+      "month": 3,
+      "decimal_date": 1978.2083,
+      "co2_ppm": 336.66,
+      "co2_deseasonalized": 335.0,
+      "days": 28,
+      "std_dev": 0.59,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1978,
+      "month": 4,
+      "decimal_date": 1978.2917,
+      "co2_ppm": 337.69,
+      "co2_deseasonalized": 335.07,
+      "days": 18,
+      "std_dev": 0.44,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1978,
+      "month": 5,
+      "decimal_date": 1978.375,
+      "co2_ppm": 338.02,
+      "co2_deseasonalized": 335.08,
+      "days": 26,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1978,
+      "month": 6,
+      "decimal_date": 1978.4583,
+      "co2_ppm": 338.01,
+      "co2_deseasonalized": 335.6,
+      "days": 17,
+      "std_dev": 0.31,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1978,
+      "month": 7,
+      "decimal_date": 1978.5417,
+      "co2_ppm": 336.5,
+      "co2_deseasonalized": 335.65,
+      "days": 20,
+      "std_dev": 0.32,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1978,
+      "month": 8,
+      "decimal_date": 1978.625,
+      "co2_ppm": 334.42,
+      "co2_deseasonalized": 335.87,
+      "days": 19,
+      "std_dev": 0.32,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1978,
+      "month": 9,
+      "decimal_date": 1978.7083,
+      "co2_ppm": 332.36,
+      "co2_deseasonalized": 335.51,
+      "days": 17,
+      "std_dev": 0.75,
+      "uncertainty": 0.35
+    },
+    {
+      "year": 1978,
+      "month": 10,
+      "decimal_date": 1978.7917,
+      "co2_ppm": 332.45,
+      "co2_deseasonalized": 335.72,
+      "days": 21,
+      "std_dev": 0.34,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1978,
+      "month": 11,
+      "decimal_date": 1978.875,
+      "co2_ppm": 333.76,
+      "co2_deseasonalized": 335.99,
+      "days": 24,
+      "std_dev": 0.25,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1978,
+      "month": 12,
+      "decimal_date": 1978.9583,
+      "co2_ppm": 334.91,
+      "co2_deseasonalized": 335.87,
+      "days": 26,
+      "std_dev": 0.33,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1979,
+      "month": 1,
+      "decimal_date": 1979.0417,
+      "co2_ppm": 336.14,
+      "co2_deseasonalized": 336.22,
+      "days": 27,
+      "std_dev": 0.55,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1979,
+      "month": 2,
+      "decimal_date": 1979.125,
+      "co2_ppm": 336.69,
+      "co2_deseasonalized": 336.0,
+      "days": 25,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1979,
+      "month": 3,
+      "decimal_date": 1979.2083,
+      "co2_ppm": 338.27,
+      "co2_deseasonalized": 336.56,
+      "days": 21,
+      "std_dev": 0.63,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 1979,
+      "month": 4,
+      "decimal_date": 1979.2917,
+      "co2_ppm": 338.82,
+      "co2_deseasonalized": 336.11,
+      "days": 24,
+      "std_dev": 0.67,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 1979,
+      "month": 5,
+      "decimal_date": 1979.375,
+      "co2_ppm": 339.24,
+      "co2_deseasonalized": 336.24,
+      "days": 20,
+      "std_dev": 0.5,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1979,
+      "month": 6,
+      "decimal_date": 1979.4583,
+      "co2_ppm": 339.26,
+      "co2_deseasonalized": 336.83,
+      "days": 19,
+      "std_dev": 0.35,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1979,
+      "month": 7,
+      "decimal_date": 1979.5417,
+      "co2_ppm": 337.54,
+      "co2_deseasonalized": 336.69,
+      "days": 26,
+      "std_dev": 0.59,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1979,
+      "month": 8,
+      "decimal_date": 1979.625,
+      "co2_ppm": 335.72,
+      "co2_deseasonalized": 337.2,
+      "days": 24,
+      "std_dev": 0.6,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1979,
+      "month": 9,
+      "decimal_date": 1979.7083,
+      "co2_ppm": 333.97,
+      "co2_deseasonalized": 337.19,
+      "days": 19,
+      "std_dev": 0.65,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 1979,
+      "month": 10,
+      "decimal_date": 1979.7917,
+      "co2_ppm": 334.24,
+      "co2_deseasonalized": 337.57,
+      "days": 25,
+      "std_dev": 0.42,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1979,
+      "month": 11,
+      "decimal_date": 1979.875,
+      "co2_ppm": 335.32,
+      "co2_deseasonalized": 337.59,
+      "days": 27,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1979,
+      "month": 12,
+      "decimal_date": 1979.9583,
+      "co2_ppm": 336.81,
+      "co2_deseasonalized": 337.83,
+      "days": 22,
+      "std_dev": 0.23,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1980,
+      "month": 1,
+      "decimal_date": 1980.0417,
+      "co2_ppm": 337.9,
+      "co2_deseasonalized": 338.13,
+      "days": 29,
+      "std_dev": 0.57,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1980,
+      "month": 2,
+      "decimal_date": 1980.125,
+      "co2_ppm": 338.34,
+      "co2_deseasonalized": 337.85,
+      "days": 26,
+      "std_dev": 0.49,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1980,
+      "month": 3,
+      "decimal_date": 1980.2083,
+      "co2_ppm": 340.07,
+      "co2_deseasonalized": 338.51,
+      "days": 23,
+      "std_dev": 0.54,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1980,
+      "month": 4,
+      "decimal_date": 1980.2917,
+      "co2_ppm": 340.93,
+      "co2_deseasonalized": 338.31,
+      "days": 24,
+      "std_dev": 0.29,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1980,
+      "month": 5,
+      "decimal_date": 1980.375,
+      "co2_ppm": 341.45,
+      "co2_deseasonalized": 338.4,
+      "days": 24,
+      "std_dev": 0.54,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1980,
+      "month": 6,
+      "decimal_date": 1980.4583,
+      "co2_ppm": 341.36,
+      "co2_deseasonalized": 338.85,
+      "days": 20,
+      "std_dev": 0.39,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1980,
+      "month": 7,
+      "decimal_date": 1980.5417,
+      "co2_ppm": 339.45,
+      "co2_deseasonalized": 338.56,
+      "days": 26,
+      "std_dev": 0.6,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1980,
+      "month": 8,
+      "decimal_date": 1980.625,
+      "co2_ppm": 337.67,
+      "co2_deseasonalized": 339.07,
+      "days": 16,
+      "std_dev": 1.05,
+      "uncertainty": 0.5
+    },
+    {
+      "year": 1980,
+      "month": 9,
+      "decimal_date": 1980.7083,
+      "co2_ppm": 336.25,
+      "co2_deseasonalized": 339.38,
+      "days": 15,
+      "std_dev": 0.69,
+      "uncertainty": 0.34
+    },
+    {
+      "year": 1980,
+      "month": 10,
+      "decimal_date": 1980.7917,
+      "co2_ppm": 336.14,
+      "co2_deseasonalized": 339.4,
+      "days": 26,
+      "std_dev": 0.26,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1980,
+      "month": 11,
+      "decimal_date": 1980.875,
+      "co2_ppm": 337.3,
+      "co2_deseasonalized": 339.46,
+      "days": 27,
+      "std_dev": 0.26,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1980,
+      "month": 12,
+      "decimal_date": 1980.9583,
+      "co2_ppm": 338.29,
+      "co2_deseasonalized": 339.26,
+      "days": 24,
+      "std_dev": 0.25,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1981,
+      "month": 1,
+      "decimal_date": 1981.0417,
+      "co2_ppm": 339.29,
+      "co2_deseasonalized": 339.42,
+      "days": 28,
+      "std_dev": 0.39,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1981,
+      "month": 2,
+      "decimal_date": 1981.125,
+      "co2_ppm": 340.55,
+      "co2_deseasonalized": 339.98,
+      "days": 25,
+      "std_dev": 0.65,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1981,
+      "month": 3,
+      "decimal_date": 1981.2083,
+      "co2_ppm": 341.63,
+      "co2_deseasonalized": 340.08,
+      "days": 25,
+      "std_dev": 0.48,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1981,
+      "month": 4,
+      "decimal_date": 1981.2917,
+      "co2_ppm": 342.6,
+      "co2_deseasonalized": 339.98,
+      "days": 26,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1981,
+      "month": 5,
+      "decimal_date": 1981.375,
+      "co2_ppm": 343.04,
+      "co2_deseasonalized": 339.97,
+      "days": 30,
+      "std_dev": 0.19,
+      "uncertainty": 0.07
+    },
+    {
+      "year": 1981,
+      "month": 6,
+      "decimal_date": 1981.4583,
+      "co2_ppm": 342.54,
+      "co2_deseasonalized": 340.06,
+      "days": 25,
+      "std_dev": 0.29,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1981,
+      "month": 7,
+      "decimal_date": 1981.5417,
+      "co2_ppm": 340.82,
+      "co2_deseasonalized": 339.92,
+      "days": 24,
+      "std_dev": 0.46,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1981,
+      "month": 8,
+      "decimal_date": 1981.625,
+      "co2_ppm": 338.48,
+      "co2_deseasonalized": 339.87,
+      "days": 25,
+      "std_dev": 0.48,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1981,
+      "month": 9,
+      "decimal_date": 1981.7083,
+      "co2_ppm": 336.95,
+      "co2_deseasonalized": 340.17,
+      "days": 27,
+      "std_dev": 0.55,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1981,
+      "month": 10,
+      "decimal_date": 1981.7917,
+      "co2_ppm": 337.05,
+      "co2_deseasonalized": 340.39,
+      "days": 25,
+      "std_dev": 0.39,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1981,
+      "month": 11,
+      "decimal_date": 1981.875,
+      "co2_ppm": 338.58,
+      "co2_deseasonalized": 340.75,
+      "days": 26,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1981,
+      "month": 12,
+      "decimal_date": 1981.9583,
+      "co2_ppm": 339.91,
+      "co2_deseasonalized": 340.85,
+      "days": 20,
+      "std_dev": 0.28,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1982,
+      "month": 1,
+      "decimal_date": 1982.0417,
+      "co2_ppm": 340.93,
+      "co2_deseasonalized": 341.09,
+      "days": 28,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1982,
+      "month": 2,
+      "decimal_date": 1982.125,
+      "co2_ppm": 341.76,
+      "co2_deseasonalized": 341.16,
+      "days": 24,
+      "std_dev": 0.49,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1982,
+      "month": 3,
+      "decimal_date": 1982.2083,
+      "co2_ppm": 342.78,
+      "co2_deseasonalized": 341.18,
+      "days": 17,
+      "std_dev": 0.41,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1982,
+      "month": 4,
+      "decimal_date": 1982.2917,
+      "co2_ppm": 343.96,
+      "co2_deseasonalized": 341.32,
+      "days": 7,
+      "std_dev": 0.42,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 1982,
+      "month": 5,
+      "decimal_date": 1982.375,
+      "co2_ppm": 344.77,
+      "co2_deseasonalized": 341.67,
+      "days": 27,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1982,
+      "month": 6,
+      "decimal_date": 1982.4583,
+      "co2_ppm": 343.88,
+      "co2_deseasonalized": 341.43,
+      "days": 27,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1982,
+      "month": 7,
+      "decimal_date": 1982.5417,
+      "co2_ppm": 342.42,
+      "co2_deseasonalized": 341.61,
+      "days": 28,
+      "std_dev": 0.35,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1982,
+      "month": 8,
+      "decimal_date": 1982.625,
+      "co2_ppm": 340.24,
+      "co2_deseasonalized": 341.64,
+      "days": 25,
+      "std_dev": 0.61,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1982,
+      "month": 9,
+      "decimal_date": 1982.7083,
+      "co2_ppm": 338.37,
+      "co2_deseasonalized": 341.56,
+      "days": 21,
+      "std_dev": 0.59,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1982,
+      "month": 10,
+      "decimal_date": 1982.7917,
+      "co2_ppm": 338.41,
+      "co2_deseasonalized": 341.77,
+      "days": 26,
+      "std_dev": 0.5,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1982,
+      "month": 11,
+      "decimal_date": 1982.875,
+      "co2_ppm": 339.44,
+      "co2_deseasonalized": 341.59,
+      "days": 24,
+      "std_dev": 0.39,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1982,
+      "month": 12,
+      "decimal_date": 1982.9583,
+      "co2_ppm": 340.78,
+      "co2_deseasonalized": 341.71,
+      "days": 26,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1983,
+      "month": 1,
+      "decimal_date": 1983.0417,
+      "co2_ppm": 341.57,
+      "co2_deseasonalized": 341.75,
+      "days": 28,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1983,
+      "month": 2,
+      "decimal_date": 1983.125,
+      "co2_ppm": 342.78,
+      "co2_deseasonalized": 342.25,
+      "days": 24,
+      "std_dev": 0.37,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1983,
+      "month": 3,
+      "decimal_date": 1983.2083,
+      "co2_ppm": 343.37,
+      "co2_deseasonalized": 341.85,
+      "days": 27,
+      "std_dev": 0.88,
+      "uncertainty": 0.32
+    },
+    {
+      "year": 1983,
+      "month": 4,
+      "decimal_date": 1983.2917,
+      "co2_ppm": 345.4,
+      "co2_deseasonalized": 342.76,
+      "days": 23,
+      "std_dev": 0.29,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1983,
+      "month": 5,
+      "decimal_date": 1983.375,
+      "co2_ppm": 346.14,
+      "co2_deseasonalized": 342.97,
+      "days": 28,
+      "std_dev": 0.51,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1983,
+      "month": 6,
+      "decimal_date": 1983.4583,
+      "co2_ppm": 345.76,
+      "co2_deseasonalized": 343.3,
+      "days": 20,
+      "std_dev": 0.3,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1983,
+      "month": 7,
+      "decimal_date": 1983.5417,
+      "co2_ppm": 344.32,
+      "co2_deseasonalized": 343.56,
+      "days": 22,
+      "std_dev": 0.57,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1983,
+      "month": 8,
+      "decimal_date": 1983.625,
+      "co2_ppm": 342.51,
+      "co2_deseasonalized": 343.89,
+      "days": 16,
+      "std_dev": 0.73,
+      "uncertainty": 0.35
+    },
+    {
+      "year": 1983,
+      "month": 9,
+      "decimal_date": 1983.7083,
+      "co2_ppm": 340.46,
+      "co2_deseasonalized": 343.59,
+      "days": 15,
+      "std_dev": 0.5,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1983,
+      "month": 10,
+      "decimal_date": 1983.7917,
+      "co2_ppm": 340.53,
+      "co2_deseasonalized": 343.86,
+      "days": 20,
+      "std_dev": 0.31,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1983,
+      "month": 11,
+      "decimal_date": 1983.875,
+      "co2_ppm": 341.79,
+      "co2_deseasonalized": 343.92,
+      "days": 27,
+      "std_dev": 0.33,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1983,
+      "month": 12,
+      "decimal_date": 1983.9583,
+      "co2_ppm": 343.2,
+      "co2_deseasonalized": 344.12,
+      "days": 21,
+      "std_dev": 0.25,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1984,
+      "month": 1,
+      "decimal_date": 1984.0417,
+      "co2_ppm": 344.21,
+      "co2_deseasonalized": 344.32,
+      "days": 23,
+      "std_dev": 0.4,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1984,
+      "month": 2,
+      "decimal_date": 1984.125,
+      "co2_ppm": 344.92,
+      "co2_deseasonalized": 344.39,
+      "days": 23,
+      "std_dev": 0.32,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1984,
+      "month": 3,
+      "decimal_date": 1984.2083,
+      "co2_ppm": 345.68,
+      "co2_deseasonalized": 344.26,
+      "days": 19,
+      "std_dev": 0.3,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1984,
+      "month": 4,
+      "decimal_date": 1984.2917,
+      "co2_ppm": 347.38,
+      "co2_deseasonalized": 344.75,
+      "days": 2,
+      "std_dev": -9.99,
+      "uncertainty": 0.0
+    },
+    {
+      "year": 1984,
+      "month": 5,
+      "decimal_date": 1984.375,
+      "co2_ppm": 347.77,
+      "co2_deseasonalized": 344.59,
+      "days": 20,
+      "std_dev": 0.42,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1984,
+      "month": 6,
+      "decimal_date": 1984.4583,
+      "co2_ppm": 347.16,
+      "co2_deseasonalized": 344.73,
+      "days": 20,
+      "std_dev": 0.31,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1984,
+      "month": 7,
+      "decimal_date": 1984.5417,
+      "co2_ppm": 345.79,
+      "co2_deseasonalized": 345.02,
+      "days": 18,
+      "std_dev": 0.33,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1984,
+      "month": 8,
+      "decimal_date": 1984.625,
+      "co2_ppm": 343.74,
+      "co2_deseasonalized": 345.12,
+      "days": 12,
+      "std_dev": 0.45,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1984,
+      "month": 9,
+      "decimal_date": 1984.7083,
+      "co2_ppm": 341.59,
+      "co2_deseasonalized": 344.76,
+      "days": 14,
+      "std_dev": 0.72,
+      "uncertainty": 0.37
+    },
+    {
+      "year": 1984,
+      "month": 10,
+      "decimal_date": 1984.7917,
+      "co2_ppm": 341.86,
+      "co2_deseasonalized": 345.19,
+      "days": 12,
+      "std_dev": 0.36,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1984,
+      "month": 11,
+      "decimal_date": 1984.875,
+      "co2_ppm": 343.31,
+      "co2_deseasonalized": 345.41,
+      "days": 18,
+      "std_dev": 0.41,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1984,
+      "month": 12,
+      "decimal_date": 1984.9583,
+      "co2_ppm": 345.0,
+      "co2_deseasonalized": 345.88,
+      "days": 14,
+      "std_dev": 0.53,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 1985,
+      "month": 1,
+      "decimal_date": 1985.0417,
+      "co2_ppm": 345.48,
+      "co2_deseasonalized": 345.59,
+      "days": 25,
+      "std_dev": 0.38,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1985,
+      "month": 2,
+      "decimal_date": 1985.125,
+      "co2_ppm": 346.41,
+      "co2_deseasonalized": 345.92,
+      "days": 15,
+      "std_dev": 0.37,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1985,
+      "month": 3,
+      "decimal_date": 1985.2083,
+      "co2_ppm": 347.91,
+      "co2_deseasonalized": 346.56,
+      "days": 17,
+      "std_dev": 0.34,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1985,
+      "month": 4,
+      "decimal_date": 1985.2917,
+      "co2_ppm": 348.66,
+      "co2_deseasonalized": 346.08,
+      "days": 21,
+      "std_dev": 0.61,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1985,
+      "month": 5,
+      "decimal_date": 1985.375,
+      "co2_ppm": 349.28,
+      "co2_deseasonalized": 346.12,
+      "days": 20,
+      "std_dev": 0.51,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1985,
+      "month": 6,
+      "decimal_date": 1985.4583,
+      "co2_ppm": 348.65,
+      "co2_deseasonalized": 346.23,
+      "days": 21,
+      "std_dev": 0.34,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1985,
+      "month": 7,
+      "decimal_date": 1985.5417,
+      "co2_ppm": 346.9,
+      "co2_deseasonalized": 346.08,
+      "days": 17,
+      "std_dev": 0.36,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1985,
+      "month": 8,
+      "decimal_date": 1985.625,
+      "co2_ppm": 345.26,
+      "co2_deseasonalized": 346.57,
+      "days": 16,
+      "std_dev": 0.57,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 1985,
+      "month": 9,
+      "decimal_date": 1985.7083,
+      "co2_ppm": 343.47,
+      "co2_deseasonalized": 346.59,
+      "days": 24,
+      "std_dev": 0.57,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1985,
+      "month": 10,
+      "decimal_date": 1985.7917,
+      "co2_ppm": 343.35,
+      "co2_deseasonalized": 346.6,
+      "days": 20,
+      "std_dev": 0.29,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1985,
+      "month": 11,
+      "decimal_date": 1985.875,
+      "co2_ppm": 344.73,
+      "co2_deseasonalized": 346.82,
+      "days": 21,
+      "std_dev": 0.4,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1985,
+      "month": 12,
+      "decimal_date": 1985.9583,
+      "co2_ppm": 346.12,
+      "co2_deseasonalized": 347.04,
+      "days": 26,
+      "std_dev": 0.62,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1986,
+      "month": 1,
+      "decimal_date": 1986.0417,
+      "co2_ppm": 346.78,
+      "co2_deseasonalized": 346.82,
+      "days": 25,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1986,
+      "month": 2,
+      "decimal_date": 1986.125,
+      "co2_ppm": 347.48,
+      "co2_deseasonalized": 346.98,
+      "days": 25,
+      "std_dev": 0.45,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1986,
+      "month": 3,
+      "decimal_date": 1986.2083,
+      "co2_ppm": 348.25,
+      "co2_deseasonalized": 346.93,
+      "days": 16,
+      "std_dev": 0.7,
+      "uncertainty": 0.34
+    },
+    {
+      "year": 1986,
+      "month": 4,
+      "decimal_date": 1986.2917,
+      "co2_ppm": 349.86,
+      "co2_deseasonalized": 347.29,
+      "days": 19,
+      "std_dev": 0.38,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1986,
+      "month": 5,
+      "decimal_date": 1986.375,
+      "co2_ppm": 350.52,
+      "co2_deseasonalized": 347.42,
+      "days": 18,
+      "std_dev": 0.31,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1986,
+      "month": 6,
+      "decimal_date": 1986.4583,
+      "co2_ppm": 349.98,
+      "co2_deseasonalized": 347.61,
+      "days": 17,
+      "std_dev": 0.25,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1986,
+      "month": 7,
+      "decimal_date": 1986.5417,
+      "co2_ppm": 348.25,
+      "co2_deseasonalized": 347.43,
+      "days": 20,
+      "std_dev": 0.47,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1986,
+      "month": 8,
+      "decimal_date": 1986.625,
+      "co2_ppm": 346.17,
+      "co2_deseasonalized": 347.51,
+      "days": 18,
+      "std_dev": 0.48,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1986,
+      "month": 9,
+      "decimal_date": 1986.7083,
+      "co2_ppm": 345.48,
+      "co2_deseasonalized": 348.61,
+      "days": 17,
+      "std_dev": 0.63,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 1986,
+      "month": 10,
+      "decimal_date": 1986.7917,
+      "co2_ppm": 344.82,
+      "co2_deseasonalized": 348.04,
+      "days": 25,
+      "std_dev": 0.32,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1986,
+      "month": 11,
+      "decimal_date": 1986.875,
+      "co2_ppm": 346.22,
+      "co2_deseasonalized": 348.28,
+      "days": 21,
+      "std_dev": 0.3,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1986,
+      "month": 12,
+      "decimal_date": 1986.9583,
+      "co2_ppm": 347.48,
+      "co2_deseasonalized": 348.36,
+      "days": 24,
+      "std_dev": 0.35,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1987,
+      "month": 1,
+      "decimal_date": 1987.0417,
+      "co2_ppm": 348.73,
+      "co2_deseasonalized": 348.66,
+      "days": 25,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1987,
+      "month": 2,
+      "decimal_date": 1987.125,
+      "co2_ppm": 348.92,
+      "co2_deseasonalized": 348.24,
+      "days": 25,
+      "std_dev": 0.58,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1987,
+      "month": 3,
+      "decimal_date": 1987.2083,
+      "co2_ppm": 349.81,
+      "co2_deseasonalized": 348.39,
+      "days": 21,
+      "std_dev": 0.35,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1987,
+      "month": 4,
+      "decimal_date": 1987.2917,
+      "co2_ppm": 351.4,
+      "co2_deseasonalized": 348.84,
+      "days": 26,
+      "std_dev": 0.68,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1987,
+      "month": 5,
+      "decimal_date": 1987.375,
+      "co2_ppm": 352.15,
+      "co2_deseasonalized": 349.09,
+      "days": 28,
+      "std_dev": 0.37,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1987,
+      "month": 6,
+      "decimal_date": 1987.4583,
+      "co2_ppm": 351.58,
+      "co2_deseasonalized": 349.29,
+      "days": 22,
+      "std_dev": 0.21,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1987,
+      "month": 7,
+      "decimal_date": 1987.5417,
+      "co2_ppm": 350.21,
+      "co2_deseasonalized": 349.51,
+      "days": 17,
+      "std_dev": 0.73,
+      "uncertainty": 0.34
+    },
+    {
+      "year": 1987,
+      "month": 8,
+      "decimal_date": 1987.625,
+      "co2_ppm": 348.2,
+      "co2_deseasonalized": 349.65,
+      "days": 15,
+      "std_dev": 0.85,
+      "uncertainty": 0.42
+    },
+    {
+      "year": 1987,
+      "month": 9,
+      "decimal_date": 1987.7083,
+      "co2_ppm": 346.66,
+      "co2_deseasonalized": 349.85,
+      "days": 23,
+      "std_dev": 0.61,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1987,
+      "month": 10,
+      "decimal_date": 1987.7917,
+      "co2_ppm": 346.72,
+      "co2_deseasonalized": 349.96,
+      "days": 22,
+      "std_dev": 0.41,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1987,
+      "month": 11,
+      "decimal_date": 1987.875,
+      "co2_ppm": 348.08,
+      "co2_deseasonalized": 350.15,
+      "days": 23,
+      "std_dev": 0.33,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1987,
+      "month": 12,
+      "decimal_date": 1987.9583,
+      "co2_ppm": 349.28,
+      "co2_deseasonalized": 350.14,
+      "days": 27,
+      "std_dev": 0.2,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 1988,
+      "month": 1,
+      "decimal_date": 1988.0417,
+      "co2_ppm": 350.51,
+      "co2_deseasonalized": 350.49,
+      "days": 24,
+      "std_dev": 0.21,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 1988,
+      "month": 2,
+      "decimal_date": 1988.125,
+      "co2_ppm": 351.7,
+      "co2_deseasonalized": 350.99,
+      "days": 23,
+      "std_dev": 0.57,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1988,
+      "month": 3,
+      "decimal_date": 1988.2083,
+      "co2_ppm": 352.5,
+      "co2_deseasonalized": 350.99,
+      "days": 25,
+      "std_dev": 0.78,
+      "uncertainty": 0.3
+    },
+    {
+      "year": 1988,
+      "month": 4,
+      "decimal_date": 1988.2917,
+      "co2_ppm": 353.67,
+      "co2_deseasonalized": 351.03,
+      "days": 27,
+      "std_dev": 0.48,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1988,
+      "month": 5,
+      "decimal_date": 1988.375,
+      "co2_ppm": 354.35,
+      "co2_deseasonalized": 351.22,
+      "days": 28,
+      "std_dev": 0.37,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1988,
+      "month": 6,
+      "decimal_date": 1988.4583,
+      "co2_ppm": 353.88,
+      "co2_deseasonalized": 351.55,
+      "days": 26,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1988,
+      "month": 7,
+      "decimal_date": 1988.5417,
+      "co2_ppm": 352.8,
+      "co2_deseasonalized": 352.16,
+      "days": 27,
+      "std_dev": 0.49,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1988,
+      "month": 8,
+      "decimal_date": 1988.625,
+      "co2_ppm": 350.49,
+      "co2_deseasonalized": 352.01,
+      "days": 26,
+      "std_dev": 0.62,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1988,
+      "month": 9,
+      "decimal_date": 1988.7083,
+      "co2_ppm": 348.97,
+      "co2_deseasonalized": 352.18,
+      "days": 26,
+      "std_dev": 0.47,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1988,
+      "month": 10,
+      "decimal_date": 1988.7917,
+      "co2_ppm": 349.37,
+      "co2_deseasonalized": 352.62,
+      "days": 26,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1988,
+      "month": 11,
+      "decimal_date": 1988.875,
+      "co2_ppm": 350.42,
+      "co2_deseasonalized": 352.53,
+      "days": 25,
+      "std_dev": 0.2,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 1988,
+      "month": 12,
+      "decimal_date": 1988.9583,
+      "co2_ppm": 351.62,
+      "co2_deseasonalized": 352.52,
+      "days": 28,
+      "std_dev": 0.36,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1989,
+      "month": 1,
+      "decimal_date": 1989.0417,
+      "co2_ppm": 353.07,
+      "co2_deseasonalized": 352.99,
+      "days": 28,
+      "std_dev": 0.45,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1989,
+      "month": 2,
+      "decimal_date": 1989.125,
+      "co2_ppm": 353.43,
+      "co2_deseasonalized": 352.69,
+      "days": 25,
+      "std_dev": 0.38,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1989,
+      "month": 3,
+      "decimal_date": 1989.2083,
+      "co2_ppm": 354.08,
+      "co2_deseasonalized": 352.6,
+      "days": 29,
+      "std_dev": 0.53,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1989,
+      "month": 4,
+      "decimal_date": 1989.2917,
+      "co2_ppm": 355.72,
+      "co2_deseasonalized": 353.07,
+      "days": 28,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1989,
+      "month": 5,
+      "decimal_date": 1989.375,
+      "co2_ppm": 355.95,
+      "co2_deseasonalized": 352.78,
+      "days": 27,
+      "std_dev": 0.49,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1989,
+      "month": 6,
+      "decimal_date": 1989.4583,
+      "co2_ppm": 355.44,
+      "co2_deseasonalized": 353.06,
+      "days": 26,
+      "std_dev": 0.42,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1989,
+      "month": 7,
+      "decimal_date": 1989.5417,
+      "co2_ppm": 354.05,
+      "co2_deseasonalized": 353.38,
+      "days": 26,
+      "std_dev": 0.41,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1989,
+      "month": 8,
+      "decimal_date": 1989.625,
+      "co2_ppm": 351.84,
+      "co2_deseasonalized": 353.43,
+      "days": 25,
+      "std_dev": 0.48,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1989,
+      "month": 9,
+      "decimal_date": 1989.7083,
+      "co2_ppm": 350.09,
+      "co2_deseasonalized": 353.37,
+      "days": 24,
+      "std_dev": 0.69,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 1989,
+      "month": 10,
+      "decimal_date": 1989.7917,
+      "co2_ppm": 350.33,
+      "co2_deseasonalized": 353.57,
+      "days": 25,
+      "std_dev": 0.34,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1989,
+      "month": 11,
+      "decimal_date": 1989.875,
+      "co2_ppm": 351.55,
+      "co2_deseasonalized": 353.68,
+      "days": 27,
+      "std_dev": 0.36,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1989,
+      "month": 12,
+      "decimal_date": 1989.9583,
+      "co2_ppm": 352.91,
+      "co2_deseasonalized": 353.84,
+      "days": 27,
+      "std_dev": 0.48,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1990,
+      "month": 1,
+      "decimal_date": 1990.0417,
+      "co2_ppm": 353.86,
+      "co2_deseasonalized": 353.78,
+      "days": 25,
+      "std_dev": 0.34,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1990,
+      "month": 2,
+      "decimal_date": 1990.125,
+      "co2_ppm": 355.1,
+      "co2_deseasonalized": 354.37,
+      "days": 28,
+      "std_dev": 0.66,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1990,
+      "month": 3,
+      "decimal_date": 1990.2083,
+      "co2_ppm": 355.75,
+      "co2_deseasonalized": 354.27,
+      "days": 27,
+      "std_dev": 0.57,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1990,
+      "month": 4,
+      "decimal_date": 1990.2917,
+      "co2_ppm": 356.38,
+      "co2_deseasonalized": 353.76,
+      "days": 28,
+      "std_dev": 0.55,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1990,
+      "month": 5,
+      "decimal_date": 1990.375,
+      "co2_ppm": 357.38,
+      "co2_deseasonalized": 354.23,
+      "days": 28,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1990,
+      "month": 6,
+      "decimal_date": 1990.4583,
+      "co2_ppm": 356.39,
+      "co2_deseasonalized": 354.02,
+      "days": 29,
+      "std_dev": 0.4,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1990,
+      "month": 7,
+      "decimal_date": 1990.5417,
+      "co2_ppm": 354.89,
+      "co2_deseasonalized": 354.24,
+      "days": 30,
+      "std_dev": 0.89,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 1990,
+      "month": 8,
+      "decimal_date": 1990.625,
+      "co2_ppm": 353.06,
+      "co2_deseasonalized": 354.68,
+      "days": 22,
+      "std_dev": 0.62,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1990,
+      "month": 9,
+      "decimal_date": 1990.7083,
+      "co2_ppm": 351.38,
+      "co2_deseasonalized": 354.69,
+      "days": 27,
+      "std_dev": 0.72,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 1990,
+      "month": 10,
+      "decimal_date": 1990.7917,
+      "co2_ppm": 351.69,
+      "co2_deseasonalized": 354.94,
+      "days": 28,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1990,
+      "month": 11,
+      "decimal_date": 1990.875,
+      "co2_ppm": 353.14,
+      "co2_deseasonalized": 355.18,
+      "days": 24,
+      "std_dev": 0.2,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 1990,
+      "month": 12,
+      "decimal_date": 1990.9583,
+      "co2_ppm": 354.41,
+      "co2_deseasonalized": 355.26,
+      "days": 28,
+      "std_dev": 0.51,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1991,
+      "month": 1,
+      "decimal_date": 1991.0417,
+      "co2_ppm": 354.93,
+      "co2_deseasonalized": 354.9,
+      "days": 28,
+      "std_dev": 0.51,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1991,
+      "month": 2,
+      "decimal_date": 1991.125,
+      "co2_ppm": 355.82,
+      "co2_deseasonalized": 355.11,
+      "days": 26,
+      "std_dev": 0.54,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1991,
+      "month": 3,
+      "decimal_date": 1991.2083,
+      "co2_ppm": 357.33,
+      "co2_deseasonalized": 355.79,
+      "days": 30,
+      "std_dev": 0.73,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1991,
+      "month": 4,
+      "decimal_date": 1991.2917,
+      "co2_ppm": 358.77,
+      "co2_deseasonalized": 356.13,
+      "days": 30,
+      "std_dev": 0.66,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1991,
+      "month": 5,
+      "decimal_date": 1991.375,
+      "co2_ppm": 359.23,
+      "co2_deseasonalized": 356.1,
+      "days": 29,
+      "std_dev": 0.52,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1991,
+      "month": 6,
+      "decimal_date": 1991.4583,
+      "co2_ppm": 358.23,
+      "co2_deseasonalized": 355.88,
+      "days": 29,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1991,
+      "month": 7,
+      "decimal_date": 1991.5417,
+      "co2_ppm": 356.3,
+      "co2_deseasonalized": 355.69,
+      "days": 24,
+      "std_dev": 0.46,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1991,
+      "month": 8,
+      "decimal_date": 1991.625,
+      "co2_ppm": 353.97,
+      "co2_deseasonalized": 355.59,
+      "days": 23,
+      "std_dev": 0.39,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1991,
+      "month": 9,
+      "decimal_date": 1991.7083,
+      "co2_ppm": 352.34,
+      "co2_deseasonalized": 355.66,
+      "days": 27,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1991,
+      "month": 10,
+      "decimal_date": 1991.7917,
+      "co2_ppm": 352.43,
+      "co2_deseasonalized": 355.69,
+      "days": 27,
+      "std_dev": 0.25,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1991,
+      "month": 11,
+      "decimal_date": 1991.875,
+      "co2_ppm": 353.89,
+      "co2_deseasonalized": 355.87,
+      "days": 28,
+      "std_dev": 0.25,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1991,
+      "month": 12,
+      "decimal_date": 1991.9583,
+      "co2_ppm": 355.21,
+      "co2_deseasonalized": 356.02,
+      "days": 30,
+      "std_dev": 0.34,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1992,
+      "month": 1,
+      "decimal_date": 1992.0417,
+      "co2_ppm": 356.34,
+      "co2_deseasonalized": 356.29,
+      "days": 31,
+      "std_dev": 0.6,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1992,
+      "month": 2,
+      "decimal_date": 1992.125,
+      "co2_ppm": 357.21,
+      "co2_deseasonalized": 356.47,
+      "days": 27,
+      "std_dev": 0.56,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1992,
+      "month": 3,
+      "decimal_date": 1992.2083,
+      "co2_ppm": 357.97,
+      "co2_deseasonalized": 356.38,
+      "days": 24,
+      "std_dev": 0.72,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 1992,
+      "month": 4,
+      "decimal_date": 1992.2917,
+      "co2_ppm": 359.22,
+      "co2_deseasonalized": 356.51,
+      "days": 27,
+      "std_dev": 0.53,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1992,
+      "month": 5,
+      "decimal_date": 1992.375,
+      "co2_ppm": 359.71,
+      "co2_deseasonalized": 356.52,
+      "days": 26,
+      "std_dev": 0.74,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 1992,
+      "month": 6,
+      "decimal_date": 1992.4583,
+      "co2_ppm": 359.44,
+      "co2_deseasonalized": 357.07,
+      "days": 30,
+      "std_dev": 0.49,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1992,
+      "month": 7,
+      "decimal_date": 1992.5417,
+      "co2_ppm": 357.15,
+      "co2_deseasonalized": 356.58,
+      "days": 25,
+      "std_dev": 0.63,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1992,
+      "month": 8,
+      "decimal_date": 1992.625,
+      "co2_ppm": 354.99,
+      "co2_deseasonalized": 356.67,
+      "days": 24,
+      "std_dev": 0.62,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1992,
+      "month": 9,
+      "decimal_date": 1992.7083,
+      "co2_ppm": 353.01,
+      "co2_deseasonalized": 356.36,
+      "days": 25,
+      "std_dev": 0.98,
+      "uncertainty": 0.38
+    },
+    {
+      "year": 1992,
+      "month": 10,
+      "decimal_date": 1992.7917,
+      "co2_ppm": 353.41,
+      "co2_deseasonalized": 356.72,
+      "days": 29,
+      "std_dev": 0.56,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1992,
+      "month": 11,
+      "decimal_date": 1992.875,
+      "co2_ppm": 354.42,
+      "co2_deseasonalized": 356.48,
+      "days": 29,
+      "std_dev": 0.34,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1992,
+      "month": 12,
+      "decimal_date": 1992.9583,
+      "co2_ppm": 355.68,
+      "co2_deseasonalized": 356.5,
+      "days": 31,
+      "std_dev": 0.32,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1993,
+      "month": 1,
+      "decimal_date": 1993.0417,
+      "co2_ppm": 357.1,
+      "co2_deseasonalized": 357.06,
+      "days": 28,
+      "std_dev": 0.58,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1993,
+      "month": 2,
+      "decimal_date": 1993.125,
+      "co2_ppm": 357.42,
+      "co2_deseasonalized": 356.54,
+      "days": 28,
+      "std_dev": 0.49,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1993,
+      "month": 3,
+      "decimal_date": 1993.2083,
+      "co2_ppm": 358.59,
+      "co2_deseasonalized": 356.88,
+      "days": 30,
+      "std_dev": 0.72,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 1993,
+      "month": 4,
+      "decimal_date": 1993.2917,
+      "co2_ppm": 359.39,
+      "co2_deseasonalized": 356.71,
+      "days": 25,
+      "std_dev": 0.53,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1993,
+      "month": 5,
+      "decimal_date": 1993.375,
+      "co2_ppm": 360.3,
+      "co2_deseasonalized": 357.14,
+      "days": 30,
+      "std_dev": 0.45,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1993,
+      "month": 6,
+      "decimal_date": 1993.4583,
+      "co2_ppm": 359.64,
+      "co2_deseasonalized": 357.24,
+      "days": 28,
+      "std_dev": 0.35,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1993,
+      "month": 7,
+      "decimal_date": 1993.5417,
+      "co2_ppm": 357.45,
+      "co2_deseasonalized": 356.87,
+      "days": 25,
+      "std_dev": 0.78,
+      "uncertainty": 0.3
+    },
+    {
+      "year": 1993,
+      "month": 8,
+      "decimal_date": 1993.625,
+      "co2_ppm": 355.76,
+      "co2_deseasonalized": 357.44,
+      "days": 27,
+      "std_dev": 0.62,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1993,
+      "month": 9,
+      "decimal_date": 1993.7083,
+      "co2_ppm": 354.14,
+      "co2_deseasonalized": 357.51,
+      "days": 23,
+      "std_dev": 0.73,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 1993,
+      "month": 10,
+      "decimal_date": 1993.7917,
+      "co2_ppm": 354.23,
+      "co2_deseasonalized": 357.61,
+      "days": 28,
+      "std_dev": 0.29,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1993,
+      "month": 11,
+      "decimal_date": 1993.875,
+      "co2_ppm": 355.53,
+      "co2_deseasonalized": 357.65,
+      "days": 29,
+      "std_dev": 0.26,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1993,
+      "month": 12,
+      "decimal_date": 1993.9583,
+      "co2_ppm": 357.03,
+      "co2_deseasonalized": 357.92,
+      "days": 29,
+      "std_dev": 0.28,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1994,
+      "month": 1,
+      "decimal_date": 1994.0417,
+      "co2_ppm": 358.36,
+      "co2_deseasonalized": 358.25,
+      "days": 27,
+      "std_dev": 0.33,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1994,
+      "month": 2,
+      "decimal_date": 1994.125,
+      "co2_ppm": 359.04,
+      "co2_deseasonalized": 358.21,
+      "days": 25,
+      "std_dev": 0.5,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1994,
+      "month": 3,
+      "decimal_date": 1994.2083,
+      "co2_ppm": 360.11,
+      "co2_deseasonalized": 358.41,
+      "days": 29,
+      "std_dev": 0.82,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 1994,
+      "month": 4,
+      "decimal_date": 1994.2917,
+      "co2_ppm": 361.36,
+      "co2_deseasonalized": 358.59,
+      "days": 28,
+      "std_dev": 0.5,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1994,
+      "month": 5,
+      "decimal_date": 1994.375,
+      "co2_ppm": 361.78,
+      "co2_deseasonalized": 358.59,
+      "days": 30,
+      "std_dev": 0.45,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1994,
+      "month": 6,
+      "decimal_date": 1994.4583,
+      "co2_ppm": 360.94,
+      "co2_deseasonalized": 358.57,
+      "days": 27,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1994,
+      "month": 7,
+      "decimal_date": 1994.5417,
+      "co2_ppm": 359.51,
+      "co2_deseasonalized": 358.91,
+      "days": 31,
+      "std_dev": 0.41,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1994,
+      "month": 8,
+      "decimal_date": 1994.625,
+      "co2_ppm": 357.59,
+      "co2_deseasonalized": 359.29,
+      "days": 24,
+      "std_dev": 0.43,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1994,
+      "month": 9,
+      "decimal_date": 1994.7083,
+      "co2_ppm": 355.86,
+      "co2_deseasonalized": 359.31,
+      "days": 24,
+      "std_dev": 0.58,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1994,
+      "month": 10,
+      "decimal_date": 1994.7917,
+      "co2_ppm": 356.21,
+      "co2_deseasonalized": 359.63,
+      "days": 28,
+      "std_dev": 0.28,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1994,
+      "month": 11,
+      "decimal_date": 1994.875,
+      "co2_ppm": 357.65,
+      "co2_deseasonalized": 359.8,
+      "days": 28,
+      "std_dev": 0.51,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1994,
+      "month": 12,
+      "decimal_date": 1994.9583,
+      "co2_ppm": 359.1,
+      "co2_deseasonalized": 359.96,
+      "days": 28,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1995,
+      "month": 1,
+      "decimal_date": 1995.0417,
+      "co2_ppm": 360.04,
+      "co2_deseasonalized": 359.91,
+      "days": 30,
+      "std_dev": 0.47,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1995,
+      "month": 2,
+      "decimal_date": 1995.125,
+      "co2_ppm": 361.0,
+      "co2_deseasonalized": 360.18,
+      "days": 28,
+      "std_dev": 0.52,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1995,
+      "month": 3,
+      "decimal_date": 1995.2083,
+      "co2_ppm": 361.98,
+      "co2_deseasonalized": 360.37,
+      "days": 29,
+      "std_dev": 0.78,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 1995,
+      "month": 4,
+      "decimal_date": 1995.2917,
+      "co2_ppm": 363.44,
+      "co2_deseasonalized": 360.76,
+      "days": 29,
+      "std_dev": 0.65,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1995,
+      "month": 5,
+      "decimal_date": 1995.375,
+      "co2_ppm": 363.83,
+      "co2_deseasonalized": 360.73,
+      "days": 29,
+      "std_dev": 0.66,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1995,
+      "month": 6,
+      "decimal_date": 1995.4583,
+      "co2_ppm": 363.33,
+      "co2_deseasonalized": 360.98,
+      "days": 27,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1995,
+      "month": 7,
+      "decimal_date": 1995.5417,
+      "co2_ppm": 361.78,
+      "co2_deseasonalized": 361.1,
+      "days": 28,
+      "std_dev": 0.36,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1995,
+      "month": 8,
+      "decimal_date": 1995.625,
+      "co2_ppm": 359.33,
+      "co2_deseasonalized": 360.93,
+      "days": 24,
+      "std_dev": 0.7,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 1995,
+      "month": 9,
+      "decimal_date": 1995.7083,
+      "co2_ppm": 358.32,
+      "co2_deseasonalized": 361.7,
+      "days": 24,
+      "std_dev": 0.68,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 1995,
+      "month": 10,
+      "decimal_date": 1995.7917,
+      "co2_ppm": 358.14,
+      "co2_deseasonalized": 361.52,
+      "days": 29,
+      "std_dev": 0.26,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1995,
+      "month": 11,
+      "decimal_date": 1995.875,
+      "co2_ppm": 359.61,
+      "co2_deseasonalized": 361.75,
+      "days": 26,
+      "std_dev": 0.24,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1995,
+      "month": 12,
+      "decimal_date": 1995.9583,
+      "co2_ppm": 360.82,
+      "co2_deseasonalized": 361.67,
+      "days": 30,
+      "std_dev": 0.36,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1996,
+      "month": 1,
+      "decimal_date": 1996.0417,
+      "co2_ppm": 362.2,
+      "co2_deseasonalized": 361.98,
+      "days": 29,
+      "std_dev": 0.38,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1996,
+      "month": 2,
+      "decimal_date": 1996.125,
+      "co2_ppm": 363.36,
+      "co2_deseasonalized": 362.47,
+      "days": 28,
+      "std_dev": 0.55,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1996,
+      "month": 3,
+      "decimal_date": 1996.2083,
+      "co2_ppm": 364.28,
+      "co2_deseasonalized": 362.64,
+      "days": 28,
+      "std_dev": 0.67,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1996,
+      "month": 4,
+      "decimal_date": 1996.2917,
+      "co2_ppm": 364.69,
+      "co2_deseasonalized": 361.99,
+      "days": 29,
+      "std_dev": 0.59,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 1996,
+      "month": 5,
+      "decimal_date": 1996.375,
+      "co2_ppm": 365.25,
+      "co2_deseasonalized": 362.23,
+      "days": 30,
+      "std_dev": 0.57,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1996,
+      "month": 6,
+      "decimal_date": 1996.4583,
+      "co2_ppm": 365.06,
+      "co2_deseasonalized": 362.82,
+      "days": 30,
+      "std_dev": 0.38,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1996,
+      "month": 7,
+      "decimal_date": 1996.5417,
+      "co2_ppm": 363.69,
+      "co2_deseasonalized": 362.98,
+      "days": 31,
+      "std_dev": 0.32,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1996,
+      "month": 8,
+      "decimal_date": 1996.625,
+      "co2_ppm": 361.55,
+      "co2_deseasonalized": 363.13,
+      "days": 27,
+      "std_dev": 0.49,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1996,
+      "month": 9,
+      "decimal_date": 1996.7083,
+      "co2_ppm": 359.69,
+      "co2_deseasonalized": 363.14,
+      "days": 25,
+      "std_dev": 0.75,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 1996,
+      "month": 10,
+      "decimal_date": 1996.7917,
+      "co2_ppm": 359.72,
+      "co2_deseasonalized": 363.12,
+      "days": 29,
+      "std_dev": 0.32,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1996,
+      "month": 11,
+      "decimal_date": 1996.875,
+      "co2_ppm": 361.04,
+      "co2_deseasonalized": 363.18,
+      "days": 29,
+      "std_dev": 0.29,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1996,
+      "month": 12,
+      "decimal_date": 1996.9583,
+      "co2_ppm": 362.39,
+      "co2_deseasonalized": 363.23,
+      "days": 29,
+      "std_dev": 0.36,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 1997,
+      "month": 1,
+      "decimal_date": 1997.0417,
+      "co2_ppm": 363.24,
+      "co2_deseasonalized": 363.03,
+      "days": 31,
+      "std_dev": 0.4,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1997,
+      "month": 2,
+      "decimal_date": 1997.125,
+      "co2_ppm": 364.21,
+      "co2_deseasonalized": 363.4,
+      "days": 28,
+      "std_dev": 0.62,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1997,
+      "month": 3,
+      "decimal_date": 1997.2083,
+      "co2_ppm": 364.65,
+      "co2_deseasonalized": 363.02,
+      "days": 31,
+      "std_dev": 0.4,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1997,
+      "month": 4,
+      "decimal_date": 1997.2917,
+      "co2_ppm": 366.49,
+      "co2_deseasonalized": 363.82,
+      "days": 21,
+      "std_dev": 0.46,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1997,
+      "month": 5,
+      "decimal_date": 1997.375,
+      "co2_ppm": 366.77,
+      "co2_deseasonalized": 363.87,
+      "days": 29,
+      "std_dev": 0.53,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 1997,
+      "month": 6,
+      "decimal_date": 1997.4583,
+      "co2_ppm": 365.73,
+      "co2_deseasonalized": 363.56,
+      "days": 27,
+      "std_dev": 0.23,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1997,
+      "month": 7,
+      "decimal_date": 1997.5417,
+      "co2_ppm": 364.46,
+      "co2_deseasonalized": 363.74,
+      "days": 24,
+      "std_dev": 0.47,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 1997,
+      "month": 8,
+      "decimal_date": 1997.625,
+      "co2_ppm": 362.4,
+      "co2_deseasonalized": 363.98,
+      "days": 25,
+      "std_dev": 0.57,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1997,
+      "month": 9,
+      "decimal_date": 1997.7083,
+      "co2_ppm": 360.44,
+      "co2_deseasonalized": 363.83,
+      "days": 26,
+      "std_dev": 0.63,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1997,
+      "month": 10,
+      "decimal_date": 1997.7917,
+      "co2_ppm": 360.97,
+      "co2_deseasonalized": 364.28,
+      "days": 27,
+      "std_dev": 0.32,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 1997,
+      "month": 11,
+      "decimal_date": 1997.875,
+      "co2_ppm": 362.65,
+      "co2_deseasonalized": 364.71,
+      "days": 30,
+      "std_dev": 0.31,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 1997,
+      "month": 12,
+      "decimal_date": 1997.9583,
+      "co2_ppm": 364.51,
+      "co2_deseasonalized": 365.28,
+      "days": 30,
+      "std_dev": 0.41,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1998,
+      "month": 1,
+      "decimal_date": 1998.0417,
+      "co2_ppm": 365.39,
+      "co2_deseasonalized": 365.19,
+      "days": 30,
+      "std_dev": 0.43,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 1998,
+      "month": 2,
+      "decimal_date": 1998.125,
+      "co2_ppm": 366.1,
+      "co2_deseasonalized": 365.29,
+      "days": 28,
+      "std_dev": 0.62,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1998,
+      "month": 3,
+      "decimal_date": 1998.2083,
+      "co2_ppm": 367.36,
+      "co2_deseasonalized": 365.73,
+      "days": 31,
+      "std_dev": 0.82,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 1998,
+      "month": 4,
+      "decimal_date": 1998.2917,
+      "co2_ppm": 368.79,
+      "co2_deseasonalized": 366.17,
+      "days": 29,
+      "std_dev": 0.63,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1998,
+      "month": 5,
+      "decimal_date": 1998.375,
+      "co2_ppm": 369.56,
+      "co2_deseasonalized": 366.68,
+      "days": 30,
+      "std_dev": 0.77,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 1998,
+      "month": 6,
+      "decimal_date": 1998.4583,
+      "co2_ppm": 369.13,
+      "co2_deseasonalized": 366.95,
+      "days": 28,
+      "std_dev": 0.24,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1998,
+      "month": 7,
+      "decimal_date": 1998.5417,
+      "co2_ppm": 367.98,
+      "co2_deseasonalized": 367.29,
+      "days": 23,
+      "std_dev": 0.65,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 1998,
+      "month": 8,
+      "decimal_date": 1998.625,
+      "co2_ppm": 366.1,
+      "co2_deseasonalized": 367.69,
+      "days": 30,
+      "std_dev": 0.3,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1998,
+      "month": 9,
+      "decimal_date": 1998.7083,
+      "co2_ppm": 364.16,
+      "co2_deseasonalized": 367.51,
+      "days": 28,
+      "std_dev": 0.4,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1998,
+      "month": 10,
+      "decimal_date": 1998.7917,
+      "co2_ppm": 364.54,
+      "co2_deseasonalized": 367.82,
+      "days": 30,
+      "std_dev": 0.26,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1998,
+      "month": 11,
+      "decimal_date": 1998.875,
+      "co2_ppm": 365.67,
+      "co2_deseasonalized": 367.7,
+      "days": 23,
+      "std_dev": 0.25,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1998,
+      "month": 12,
+      "decimal_date": 1998.9583,
+      "co2_ppm": 367.3,
+      "co2_deseasonalized": 368.05,
+      "days": 26,
+      "std_dev": 0.36,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1999,
+      "month": 1,
+      "decimal_date": 1999.0417,
+      "co2_ppm": 368.35,
+      "co2_deseasonalized": 368.13,
+      "days": 27,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 1999,
+      "month": 2,
+      "decimal_date": 1999.125,
+      "co2_ppm": 369.28,
+      "co2_deseasonalized": 368.46,
+      "days": 21,
+      "std_dev": 0.47,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 1999,
+      "month": 3,
+      "decimal_date": 1999.2083,
+      "co2_ppm": 369.84,
+      "co2_deseasonalized": 368.24,
+      "days": 25,
+      "std_dev": 0.81,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 1999,
+      "month": 4,
+      "decimal_date": 1999.2917,
+      "co2_ppm": 371.15,
+      "co2_deseasonalized": 368.62,
+      "days": 29,
+      "std_dev": 0.67,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 1999,
+      "month": 5,
+      "decimal_date": 1999.375,
+      "co2_ppm": 371.12,
+      "co2_deseasonalized": 368.31,
+      "days": 26,
+      "std_dev": 0.59,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 1999,
+      "month": 6,
+      "decimal_date": 1999.4583,
+      "co2_ppm": 370.46,
+      "co2_deseasonalized": 368.29,
+      "days": 26,
+      "std_dev": 0.44,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 1999,
+      "month": 7,
+      "decimal_date": 1999.5417,
+      "co2_ppm": 369.61,
+      "co2_deseasonalized": 368.93,
+      "days": 27,
+      "std_dev": 0.63,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 1999,
+      "month": 8,
+      "decimal_date": 1999.625,
+      "co2_ppm": 367.06,
+      "co2_deseasonalized": 368.63,
+      "days": 25,
+      "std_dev": 0.38,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 1999,
+      "month": 9,
+      "decimal_date": 1999.7083,
+      "co2_ppm": 364.95,
+      "co2_deseasonalized": 368.28,
+      "days": 28,
+      "std_dev": 0.74,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 1999,
+      "month": 10,
+      "decimal_date": 1999.7917,
+      "co2_ppm": 365.52,
+      "co2_deseasonalized": 368.8,
+      "days": 31,
+      "std_dev": 0.28,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 1999,
+      "month": 11,
+      "decimal_date": 1999.875,
+      "co2_ppm": 366.88,
+      "co2_deseasonalized": 368.86,
+      "days": 28,
+      "std_dev": 0.25,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 1999,
+      "month": 12,
+      "decimal_date": 1999.9583,
+      "co2_ppm": 368.26,
+      "co2_deseasonalized": 368.93,
+      "days": 26,
+      "std_dev": 0.29,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2000,
+      "month": 1,
+      "decimal_date": 2000.0417,
+      "co2_ppm": 369.45,
+      "co2_deseasonalized": 369.24,
+      "days": 26,
+      "std_dev": 0.48,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2000,
+      "month": 2,
+      "decimal_date": 2000.125,
+      "co2_ppm": 369.71,
+      "co2_deseasonalized": 368.99,
+      "days": 19,
+      "std_dev": 0.48,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2000,
+      "month": 3,
+      "decimal_date": 2000.2083,
+      "co2_ppm": 370.75,
+      "co2_deseasonalized": 369.24,
+      "days": 30,
+      "std_dev": 0.47,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2000,
+      "month": 4,
+      "decimal_date": 2000.2917,
+      "co2_ppm": 371.98,
+      "co2_deseasonalized": 369.44,
+      "days": 27,
+      "std_dev": 0.58,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2000,
+      "month": 5,
+      "decimal_date": 2000.375,
+      "co2_ppm": 371.75,
+      "co2_deseasonalized": 368.87,
+      "days": 28,
+      "std_dev": 0.53,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2000,
+      "month": 6,
+      "decimal_date": 2000.4583,
+      "co2_ppm": 371.87,
+      "co2_deseasonalized": 369.66,
+      "days": 28,
+      "std_dev": 0.24,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 2000,
+      "month": 7,
+      "decimal_date": 2000.5417,
+      "co2_ppm": 370.02,
+      "co2_deseasonalized": 369.36,
+      "days": 25,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2000,
+      "month": 8,
+      "decimal_date": 2000.625,
+      "co2_ppm": 368.27,
+      "co2_deseasonalized": 369.87,
+      "days": 27,
+      "std_dev": 0.42,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2000,
+      "month": 9,
+      "decimal_date": 2000.7083,
+      "co2_ppm": 367.15,
+      "co2_deseasonalized": 370.46,
+      "days": 25,
+      "std_dev": 0.36,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2000,
+      "month": 10,
+      "decimal_date": 2000.7917,
+      "co2_ppm": 367.18,
+      "co2_deseasonalized": 370.42,
+      "days": 30,
+      "std_dev": 0.27,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 2000,
+      "month": 11,
+      "decimal_date": 2000.875,
+      "co2_ppm": 368.53,
+      "co2_deseasonalized": 370.48,
+      "days": 25,
+      "std_dev": 0.3,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2000,
+      "month": 12,
+      "decimal_date": 2000.9583,
+      "co2_ppm": 369.83,
+      "co2_deseasonalized": 370.46,
+      "days": 30,
+      "std_dev": 0.38,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2001,
+      "month": 1,
+      "decimal_date": 2001.0417,
+      "co2_ppm": 370.76,
+      "co2_deseasonalized": 370.6,
+      "days": 30,
+      "std_dev": 0.56,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2001,
+      "month": 2,
+      "decimal_date": 2001.125,
+      "co2_ppm": 371.69,
+      "co2_deseasonalized": 370.95,
+      "days": 26,
+      "std_dev": 0.61,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2001,
+      "month": 3,
+      "decimal_date": 2001.2083,
+      "co2_ppm": 372.63,
+      "co2_deseasonalized": 371.06,
+      "days": 26,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2001,
+      "month": 4,
+      "decimal_date": 2001.2917,
+      "co2_ppm": 373.55,
+      "co2_deseasonalized": 370.99,
+      "days": 29,
+      "std_dev": 0.56,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2001,
+      "month": 5,
+      "decimal_date": 2001.375,
+      "co2_ppm": 374.03,
+      "co2_deseasonalized": 371.11,
+      "days": 24,
+      "std_dev": 0.41,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2001,
+      "month": 6,
+      "decimal_date": 2001.4583,
+      "co2_ppm": 373.4,
+      "co2_deseasonalized": 371.18,
+      "days": 26,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2001,
+      "month": 7,
+      "decimal_date": 2001.5417,
+      "co2_ppm": 371.68,
+      "co2_deseasonalized": 371.08,
+      "days": 25,
+      "std_dev": 0.62,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2001,
+      "month": 8,
+      "decimal_date": 2001.625,
+      "co2_ppm": 369.78,
+      "co2_deseasonalized": 371.39,
+      "days": 27,
+      "std_dev": 0.6,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2001,
+      "month": 9,
+      "decimal_date": 2001.7083,
+      "co2_ppm": 368.34,
+      "co2_deseasonalized": 371.61,
+      "days": 28,
+      "std_dev": 0.49,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2001,
+      "month": 10,
+      "decimal_date": 2001.7917,
+      "co2_ppm": 368.61,
+      "co2_deseasonalized": 371.85,
+      "days": 31,
+      "std_dev": 0.33,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2001,
+      "month": 11,
+      "decimal_date": 2001.875,
+      "co2_ppm": 369.94,
+      "co2_deseasonalized": 371.92,
+      "days": 24,
+      "std_dev": 0.24,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 2001,
+      "month": 12,
+      "decimal_date": 2001.9583,
+      "co2_ppm": 371.42,
+      "co2_deseasonalized": 372.09,
+      "days": 29,
+      "std_dev": 0.4,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2002,
+      "month": 1,
+      "decimal_date": 2002.0417,
+      "co2_ppm": 372.7,
+      "co2_deseasonalized": 372.48,
+      "days": 28,
+      "std_dev": 0.52,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2002,
+      "month": 2,
+      "decimal_date": 2002.125,
+      "co2_ppm": 373.37,
+      "co2_deseasonalized": 372.49,
+      "days": 28,
+      "std_dev": 0.66,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2002,
+      "month": 3,
+      "decimal_date": 2002.2083,
+      "co2_ppm": 374.3,
+      "co2_deseasonalized": 372.61,
+      "days": 24,
+      "std_dev": 0.62,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2002,
+      "month": 4,
+      "decimal_date": 2002.2917,
+      "co2_ppm": 375.19,
+      "co2_deseasonalized": 372.54,
+      "days": 29,
+      "std_dev": 0.55,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2002,
+      "month": 5,
+      "decimal_date": 2002.375,
+      "co2_ppm": 375.93,
+      "co2_deseasonalized": 372.98,
+      "days": 29,
+      "std_dev": 0.57,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2002,
+      "month": 6,
+      "decimal_date": 2002.4583,
+      "co2_ppm": 375.69,
+      "co2_deseasonalized": 373.46,
+      "days": 28,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2002,
+      "month": 7,
+      "decimal_date": 2002.5417,
+      "co2_ppm": 374.16,
+      "co2_deseasonalized": 373.58,
+      "days": 25,
+      "std_dev": 0.47,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2002,
+      "month": 8,
+      "decimal_date": 2002.625,
+      "co2_ppm": 372.03,
+      "co2_deseasonalized": 373.7,
+      "days": 28,
+      "std_dev": 0.65,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2002,
+      "month": 9,
+      "decimal_date": 2002.7083,
+      "co2_ppm": 370.92,
+      "co2_deseasonalized": 374.29,
+      "days": 23,
+      "std_dev": 0.74,
+      "uncertainty": 0.3
+    },
+    {
+      "year": 2002,
+      "month": 10,
+      "decimal_date": 2002.7917,
+      "co2_ppm": 370.73,
+      "co2_deseasonalized": 374.06,
+      "days": 31,
+      "std_dev": 0.62,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2002,
+      "month": 11,
+      "decimal_date": 2002.875,
+      "co2_ppm": 372.43,
+      "co2_deseasonalized": 374.52,
+      "days": 29,
+      "std_dev": 0.43,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2002,
+      "month": 12,
+      "decimal_date": 2002.9583,
+      "co2_ppm": 373.98,
+      "co2_deseasonalized": 374.72,
+      "days": 31,
+      "std_dev": 0.46,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2003,
+      "month": 1,
+      "decimal_date": 2003.0417,
+      "co2_ppm": 375.07,
+      "co2_deseasonalized": 374.82,
+      "days": 30,
+      "std_dev": 0.51,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2003,
+      "month": 2,
+      "decimal_date": 2003.125,
+      "co2_ppm": 375.82,
+      "co2_deseasonalized": 374.95,
+      "days": 27,
+      "std_dev": 0.58,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2003,
+      "month": 3,
+      "decimal_date": 2003.2083,
+      "co2_ppm": 376.64,
+      "co2_deseasonalized": 374.99,
+      "days": 28,
+      "std_dev": 0.63,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2003,
+      "month": 4,
+      "decimal_date": 2003.2917,
+      "co2_ppm": 377.92,
+      "co2_deseasonalized": 375.24,
+      "days": 27,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2003,
+      "month": 5,
+      "decimal_date": 2003.375,
+      "co2_ppm": 378.78,
+      "co2_deseasonalized": 375.73,
+      "days": 30,
+      "std_dev": 0.78,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2003,
+      "month": 6,
+      "decimal_date": 2003.4583,
+      "co2_ppm": 378.46,
+      "co2_deseasonalized": 376.22,
+      "days": 25,
+      "std_dev": 0.39,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2003,
+      "month": 7,
+      "decimal_date": 2003.5417,
+      "co2_ppm": 376.88,
+      "co2_deseasonalized": 376.37,
+      "days": 29,
+      "std_dev": 0.7,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2003,
+      "month": 8,
+      "decimal_date": 2003.625,
+      "co2_ppm": 374.57,
+      "co2_deseasonalized": 376.27,
+      "days": 23,
+      "std_dev": 0.57,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2003,
+      "month": 9,
+      "decimal_date": 2003.7083,
+      "co2_ppm": 373.34,
+      "co2_deseasonalized": 376.65,
+      "days": 25,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2003,
+      "month": 10,
+      "decimal_date": 2003.7917,
+      "co2_ppm": 373.31,
+      "co2_deseasonalized": 376.65,
+      "days": 30,
+      "std_dev": 0.33,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2003,
+      "month": 11,
+      "decimal_date": 2003.875,
+      "co2_ppm": 374.84,
+      "co2_deseasonalized": 376.99,
+      "days": 26,
+      "std_dev": 0.45,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2003,
+      "month": 12,
+      "decimal_date": 2003.9583,
+      "co2_ppm": 376.17,
+      "co2_deseasonalized": 376.93,
+      "days": 27,
+      "std_dev": 0.4,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2004,
+      "month": 1,
+      "decimal_date": 2004.0417,
+      "co2_ppm": 377.17,
+      "co2_deseasonalized": 376.96,
+      "days": 30,
+      "std_dev": 0.45,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2004,
+      "month": 2,
+      "decimal_date": 2004.125,
+      "co2_ppm": 378.05,
+      "co2_deseasonalized": 377.19,
+      "days": 29,
+      "std_dev": 0.74,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2004,
+      "month": 3,
+      "decimal_date": 2004.2083,
+      "co2_ppm": 379.06,
+      "co2_deseasonalized": 377.4,
+      "days": 27,
+      "std_dev": 0.84,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 2004,
+      "month": 4,
+      "decimal_date": 2004.2917,
+      "co2_ppm": 380.54,
+      "co2_deseasonalized": 377.8,
+      "days": 26,
+      "std_dev": 0.52,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2004,
+      "month": 5,
+      "decimal_date": 2004.375,
+      "co2_ppm": 380.8,
+      "co2_deseasonalized": 377.66,
+      "days": 28,
+      "std_dev": 0.61,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2004,
+      "month": 6,
+      "decimal_date": 2004.4583,
+      "co2_ppm": 379.87,
+      "co2_deseasonalized": 377.57,
+      "days": 21,
+      "std_dev": 0.47,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2004,
+      "month": 7,
+      "decimal_date": 2004.5417,
+      "co2_ppm": 377.65,
+      "co2_deseasonalized": 377.12,
+      "days": 25,
+      "std_dev": 0.5,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2004,
+      "month": 8,
+      "decimal_date": 2004.625,
+      "co2_ppm": 376.17,
+      "co2_deseasonalized": 377.9,
+      "days": 16,
+      "std_dev": 0.45,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2004,
+      "month": 9,
+      "decimal_date": 2004.7083,
+      "co2_ppm": 374.43,
+      "co2_deseasonalized": 377.8,
+      "days": 15,
+      "std_dev": 0.56,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 2004,
+      "month": 10,
+      "decimal_date": 2004.7917,
+      "co2_ppm": 374.63,
+      "co2_deseasonalized": 377.99,
+      "days": 29,
+      "std_dev": 0.19,
+      "uncertainty": 0.07
+    },
+    {
+      "year": 2004,
+      "month": 11,
+      "decimal_date": 2004.875,
+      "co2_ppm": 376.33,
+      "co2_deseasonalized": 378.49,
+      "days": 29,
+      "std_dev": 0.62,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2004,
+      "month": 12,
+      "decimal_date": 2004.9583,
+      "co2_ppm": 377.68,
+      "co2_deseasonalized": 378.48,
+      "days": 30,
+      "std_dev": 0.29,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 2005,
+      "month": 1,
+      "decimal_date": 2005.0417,
+      "co2_ppm": 378.63,
+      "co2_deseasonalized": 378.37,
+      "days": 31,
+      "std_dev": 0.32,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2005,
+      "month": 2,
+      "decimal_date": 2005.125,
+      "co2_ppm": 379.91,
+      "co2_deseasonalized": 379.1,
+      "days": 24,
+      "std_dev": 0.6,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2005,
+      "month": 3,
+      "decimal_date": 2005.2083,
+      "co2_ppm": 380.95,
+      "co2_deseasonalized": 379.45,
+      "days": 26,
+      "std_dev": 1.16,
+      "uncertainty": 0.44
+    },
+    {
+      "year": 2005,
+      "month": 4,
+      "decimal_date": 2005.2917,
+      "co2_ppm": 382.48,
+      "co2_deseasonalized": 379.84,
+      "days": 26,
+      "std_dev": 0.53,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2005,
+      "month": 5,
+      "decimal_date": 2005.375,
+      "co2_ppm": 382.64,
+      "co2_deseasonalized": 379.49,
+      "days": 31,
+      "std_dev": 0.61,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2005,
+      "month": 6,
+      "decimal_date": 2005.4583,
+      "co2_ppm": 382.4,
+      "co2_deseasonalized": 380.07,
+      "days": 28,
+      "std_dev": 0.21,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 2005,
+      "month": 7,
+      "decimal_date": 2005.5417,
+      "co2_ppm": 380.93,
+      "co2_deseasonalized": 380.38,
+      "days": 29,
+      "std_dev": 0.38,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2005,
+      "month": 8,
+      "decimal_date": 2005.625,
+      "co2_ppm": 378.93,
+      "co2_deseasonalized": 380.61,
+      "days": 26,
+      "std_dev": 0.53,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2005,
+      "month": 9,
+      "decimal_date": 2005.7083,
+      "co2_ppm": 376.89,
+      "co2_deseasonalized": 380.2,
+      "days": 27,
+      "std_dev": 0.51,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2005,
+      "month": 10,
+      "decimal_date": 2005.7917,
+      "co2_ppm": 377.19,
+      "co2_deseasonalized": 380.5,
+      "days": 14,
+      "std_dev": 0.15,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 2005,
+      "month": 11,
+      "decimal_date": 2005.875,
+      "co2_ppm": 378.54,
+      "co2_deseasonalized": 380.69,
+      "days": 23,
+      "std_dev": 0.45,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2005,
+      "month": 12,
+      "decimal_date": 2005.9583,
+      "co2_ppm": 380.31,
+      "co2_deseasonalized": 381.09,
+      "days": 26,
+      "std_dev": 0.39,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2006,
+      "month": 1,
+      "decimal_date": 2006.0417,
+      "co2_ppm": 381.58,
+      "co2_deseasonalized": 381.33,
+      "days": 24,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2006,
+      "month": 2,
+      "decimal_date": 2006.125,
+      "co2_ppm": 382.4,
+      "co2_deseasonalized": 381.58,
+      "days": 25,
+      "std_dev": 0.51,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2006,
+      "month": 3,
+      "decimal_date": 2006.2083,
+      "co2_ppm": 382.86,
+      "co2_deseasonalized": 381.32,
+      "days": 29,
+      "std_dev": 0.55,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2006,
+      "month": 4,
+      "decimal_date": 2006.2917,
+      "co2_ppm": 384.8,
+      "co2_deseasonalized": 382.11,
+      "days": 25,
+      "std_dev": 0.49,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2006,
+      "month": 5,
+      "decimal_date": 2006.375,
+      "co2_ppm": 385.22,
+      "co2_deseasonalized": 382.06,
+      "days": 24,
+      "std_dev": 0.45,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2006,
+      "month": 6,
+      "decimal_date": 2006.4583,
+      "co2_ppm": 384.24,
+      "co2_deseasonalized": 381.93,
+      "days": 28,
+      "std_dev": 0.43,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2006,
+      "month": 7,
+      "decimal_date": 2006.5417,
+      "co2_ppm": 382.65,
+      "co2_deseasonalized": 382.1,
+      "days": 24,
+      "std_dev": 0.32,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2006,
+      "month": 8,
+      "decimal_date": 2006.625,
+      "co2_ppm": 380.6,
+      "co2_deseasonalized": 382.27,
+      "days": 27,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2006,
+      "month": 9,
+      "decimal_date": 2006.7083,
+      "co2_ppm": 379.04,
+      "co2_deseasonalized": 382.35,
+      "days": 25,
+      "std_dev": 0.42,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2006,
+      "month": 10,
+      "decimal_date": 2006.7917,
+      "co2_ppm": 379.33,
+      "co2_deseasonalized": 382.66,
+      "days": 23,
+      "std_dev": 0.4,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2006,
+      "month": 11,
+      "decimal_date": 2006.875,
+      "co2_ppm": 380.35,
+      "co2_deseasonalized": 382.52,
+      "days": 29,
+      "std_dev": 0.39,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2006,
+      "month": 12,
+      "decimal_date": 2006.9583,
+      "co2_ppm": 382.02,
+      "co2_deseasonalized": 382.84,
+      "days": 27,
+      "std_dev": 0.38,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2007,
+      "month": 1,
+      "decimal_date": 2007.0417,
+      "co2_ppm": 383.1,
+      "co2_deseasonalized": 382.88,
+      "days": 24,
+      "std_dev": 0.76,
+      "uncertainty": 0.3
+    },
+    {
+      "year": 2007,
+      "month": 2,
+      "decimal_date": 2007.125,
+      "co2_ppm": 384.12,
+      "co2_deseasonalized": 383.22,
+      "days": 21,
+      "std_dev": 0.81,
+      "uncertainty": 0.34
+    },
+    {
+      "year": 2007,
+      "month": 3,
+      "decimal_date": 2007.2083,
+      "co2_ppm": 384.81,
+      "co2_deseasonalized": 383.17,
+      "days": 27,
+      "std_dev": 0.63,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2007,
+      "month": 4,
+      "decimal_date": 2007.2917,
+      "co2_ppm": 386.73,
+      "co2_deseasonalized": 383.95,
+      "days": 25,
+      "std_dev": 0.76,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 2007,
+      "month": 5,
+      "decimal_date": 2007.375,
+      "co2_ppm": 386.78,
+      "co2_deseasonalized": 383.56,
+      "days": 29,
+      "std_dev": 0.64,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2007,
+      "month": 6,
+      "decimal_date": 2007.4583,
+      "co2_ppm": 386.33,
+      "co2_deseasonalized": 384.06,
+      "days": 26,
+      "std_dev": 0.42,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2007,
+      "month": 7,
+      "decimal_date": 2007.5417,
+      "co2_ppm": 384.73,
+      "co2_deseasonalized": 384.25,
+      "days": 27,
+      "std_dev": 0.44,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2007,
+      "month": 8,
+      "decimal_date": 2007.625,
+      "co2_ppm": 382.24,
+      "co2_deseasonalized": 383.95,
+      "days": 22,
+      "std_dev": 0.64,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2007,
+      "month": 9,
+      "decimal_date": 2007.7083,
+      "co2_ppm": 381.2,
+      "co2_deseasonalized": 384.56,
+      "days": 21,
+      "std_dev": 0.45,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2007,
+      "month": 10,
+      "decimal_date": 2007.7917,
+      "co2_ppm": 381.37,
+      "co2_deseasonalized": 384.72,
+      "days": 29,
+      "std_dev": 0.19,
+      "uncertainty": 0.07
+    },
+    {
+      "year": 2007,
+      "month": 11,
+      "decimal_date": 2007.875,
+      "co2_ppm": 382.7,
+      "co2_deseasonalized": 384.9,
+      "days": 30,
+      "std_dev": 0.31,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2007,
+      "month": 12,
+      "decimal_date": 2007.9583,
+      "co2_ppm": 384.19,
+      "co2_deseasonalized": 385.07,
+      "days": 22,
+      "std_dev": 0.34,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2008,
+      "month": 1,
+      "decimal_date": 2008.0417,
+      "co2_ppm": 385.78,
+      "co2_deseasonalized": 385.54,
+      "days": 31,
+      "std_dev": 0.56,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2008,
+      "month": 2,
+      "decimal_date": 2008.125,
+      "co2_ppm": 386.06,
+      "co2_deseasonalized": 385.2,
+      "days": 26,
+      "std_dev": 0.58,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2008,
+      "month": 3,
+      "decimal_date": 2008.2083,
+      "co2_ppm": 386.28,
+      "co2_deseasonalized": 384.72,
+      "days": 30,
+      "std_dev": 0.6,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2008,
+      "month": 4,
+      "decimal_date": 2008.2917,
+      "co2_ppm": 387.33,
+      "co2_deseasonalized": 384.71,
+      "days": 22,
+      "std_dev": 1.19,
+      "uncertainty": 0.49
+    },
+    {
+      "year": 2008,
+      "month": 5,
+      "decimal_date": 2008.375,
+      "co2_ppm": 388.78,
+      "co2_deseasonalized": 385.69,
+      "days": 25,
+      "std_dev": 0.57,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2008,
+      "month": 6,
+      "decimal_date": 2008.4583,
+      "co2_ppm": 387.99,
+      "co2_deseasonalized": 385.68,
+      "days": 23,
+      "std_dev": 0.49,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2008,
+      "month": 7,
+      "decimal_date": 2008.5417,
+      "co2_ppm": 386.61,
+      "co2_deseasonalized": 386.05,
+      "days": 10,
+      "std_dev": 0.96,
+      "uncertainty": 0.58
+    },
+    {
+      "year": 2008,
+      "month": 8,
+      "decimal_date": 2008.625,
+      "co2_ppm": 384.32,
+      "co2_deseasonalized": 385.98,
+      "days": 25,
+      "std_dev": 0.66,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2008,
+      "month": 9,
+      "decimal_date": 2008.7083,
+      "co2_ppm": 383.41,
+      "co2_deseasonalized": 386.69,
+      "days": 27,
+      "std_dev": 0.34,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2008,
+      "month": 10,
+      "decimal_date": 2008.7917,
+      "co2_ppm": 383.22,
+      "co2_deseasonalized": 386.5,
+      "days": 23,
+      "std_dev": 0.27,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2008,
+      "month": 11,
+      "decimal_date": 2008.875,
+      "co2_ppm": 384.41,
+      "co2_deseasonalized": 386.59,
+      "days": 28,
+      "std_dev": 0.29,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2008,
+      "month": 12,
+      "decimal_date": 2008.9583,
+      "co2_ppm": 385.79,
+      "co2_deseasonalized": 386.64,
+      "days": 29,
+      "std_dev": 0.27,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 2009,
+      "month": 1,
+      "decimal_date": 2009.0417,
+      "co2_ppm": 387.17,
+      "co2_deseasonalized": 386.86,
+      "days": 30,
+      "std_dev": 0.38,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2009,
+      "month": 2,
+      "decimal_date": 2009.125,
+      "co2_ppm": 387.7,
+      "co2_deseasonalized": 386.81,
+      "days": 26,
+      "std_dev": 0.49,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2009,
+      "month": 3,
+      "decimal_date": 2009.2083,
+      "co2_ppm": 389.04,
+      "co2_deseasonalized": 387.54,
+      "days": 28,
+      "std_dev": 0.68,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2009,
+      "month": 4,
+      "decimal_date": 2009.2917,
+      "co2_ppm": 389.76,
+      "co2_deseasonalized": 387.15,
+      "days": 29,
+      "std_dev": 0.85,
+      "uncertainty": 0.3
+    },
+    {
+      "year": 2009,
+      "month": 5,
+      "decimal_date": 2009.375,
+      "co2_ppm": 390.36,
+      "co2_deseasonalized": 387.24,
+      "days": 30,
+      "std_dev": 0.51,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2009,
+      "month": 6,
+      "decimal_date": 2009.4583,
+      "co2_ppm": 389.7,
+      "co2_deseasonalized": 387.46,
+      "days": 29,
+      "std_dev": 0.6,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2009,
+      "month": 7,
+      "decimal_date": 2009.5417,
+      "co2_ppm": 388.24,
+      "co2_deseasonalized": 387.77,
+      "days": 22,
+      "std_dev": 0.31,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2009,
+      "month": 8,
+      "decimal_date": 2009.625,
+      "co2_ppm": 386.29,
+      "co2_deseasonalized": 387.99,
+      "days": 28,
+      "std_dev": 0.62,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2009,
+      "month": 9,
+      "decimal_date": 2009.7083,
+      "co2_ppm": 384.95,
+      "co2_deseasonalized": 388.22,
+      "days": 28,
+      "std_dev": 0.56,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2009,
+      "month": 10,
+      "decimal_date": 2009.7917,
+      "co2_ppm": 384.64,
+      "co2_deseasonalized": 387.88,
+      "days": 30,
+      "std_dev": 0.31,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2009,
+      "month": 11,
+      "decimal_date": 2009.875,
+      "co2_ppm": 386.23,
+      "co2_deseasonalized": 388.36,
+      "days": 30,
+      "std_dev": 0.29,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 2009,
+      "month": 12,
+      "decimal_date": 2009.9583,
+      "co2_ppm": 387.63,
+      "co2_deseasonalized": 388.43,
+      "days": 20,
+      "std_dev": 0.47,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2010,
+      "month": 1,
+      "decimal_date": 2010.0417,
+      "co2_ppm": 388.91,
+      "co2_deseasonalized": 388.62,
+      "days": 30,
+      "std_dev": 0.92,
+      "uncertainty": 0.32
+    },
+    {
+      "year": 2010,
+      "month": 2,
+      "decimal_date": 2010.125,
+      "co2_ppm": 390.41,
+      "co2_deseasonalized": 389.47,
+      "days": 20,
+      "std_dev": 1.31,
+      "uncertainty": 0.56
+    },
+    {
+      "year": 2010,
+      "month": 3,
+      "decimal_date": 2010.2083,
+      "co2_ppm": 391.37,
+      "co2_deseasonalized": 389.85,
+      "days": 25,
+      "std_dev": 1.05,
+      "uncertainty": 0.4
+    },
+    {
+      "year": 2010,
+      "month": 4,
+      "decimal_date": 2010.2917,
+      "co2_ppm": 392.67,
+      "co2_deseasonalized": 390.12,
+      "days": 26,
+      "std_dev": 0.65,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2010,
+      "month": 5,
+      "decimal_date": 2010.375,
+      "co2_ppm": 393.21,
+      "co2_deseasonalized": 390.09,
+      "days": 29,
+      "std_dev": 0.65,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2010,
+      "month": 6,
+      "decimal_date": 2010.4583,
+      "co2_ppm": 392.38,
+      "co2_deseasonalized": 390.1,
+      "days": 28,
+      "std_dev": 0.42,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2010,
+      "month": 7,
+      "decimal_date": 2010.5417,
+      "co2_ppm": 390.41,
+      "co2_deseasonalized": 389.93,
+      "days": 29,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2010,
+      "month": 8,
+      "decimal_date": 2010.625,
+      "co2_ppm": 388.54,
+      "co2_deseasonalized": 390.21,
+      "days": 26,
+      "std_dev": 0.41,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2010,
+      "month": 9,
+      "decimal_date": 2010.7083,
+      "co2_ppm": 387.03,
+      "co2_deseasonalized": 390.32,
+      "days": 29,
+      "std_dev": 0.55,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2010,
+      "month": 10,
+      "decimal_date": 2010.7917,
+      "co2_ppm": 387.43,
+      "co2_deseasonalized": 390.72,
+      "days": 31,
+      "std_dev": 0.27,
+      "uncertainty": 0.09
+    },
+    {
+      "year": 2010,
+      "month": 11,
+      "decimal_date": 2010.875,
+      "co2_ppm": 388.87,
+      "co2_deseasonalized": 390.99,
+      "days": 29,
+      "std_dev": 0.42,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2010,
+      "month": 12,
+      "decimal_date": 2010.9583,
+      "co2_ppm": 389.99,
+      "co2_deseasonalized": 390.8,
+      "days": 29,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2011,
+      "month": 1,
+      "decimal_date": 2011.0417,
+      "co2_ppm": 391.5,
+      "co2_deseasonalized": 391.19,
+      "days": 29,
+      "std_dev": 0.88,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 2011,
+      "month": 2,
+      "decimal_date": 2011.125,
+      "co2_ppm": 392.05,
+      "co2_deseasonalized": 391.12,
+      "days": 28,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2011,
+      "month": 3,
+      "decimal_date": 2011.2083,
+      "co2_ppm": 392.8,
+      "co2_deseasonalized": 391.27,
+      "days": 29,
+      "std_dev": 0.97,
+      "uncertainty": 0.35
+    },
+    {
+      "year": 2011,
+      "month": 4,
+      "decimal_date": 2011.2917,
+      "co2_ppm": 393.44,
+      "co2_deseasonalized": 390.83,
+      "days": 28,
+      "std_dev": 0.73,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2011,
+      "month": 5,
+      "decimal_date": 2011.375,
+      "co2_ppm": 394.41,
+      "co2_deseasonalized": 391.24,
+      "days": 29,
+      "std_dev": 0.93,
+      "uncertainty": 0.33
+    },
+    {
+      "year": 2011,
+      "month": 6,
+      "decimal_date": 2011.4583,
+      "co2_ppm": 393.95,
+      "co2_deseasonalized": 391.64,
+      "days": 28,
+      "std_dev": 0.45,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2011,
+      "month": 7,
+      "decimal_date": 2011.5417,
+      "co2_ppm": 392.72,
+      "co2_deseasonalized": 392.24,
+      "days": 26,
+      "std_dev": 0.71,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2011,
+      "month": 8,
+      "decimal_date": 2011.625,
+      "co2_ppm": 390.33,
+      "co2_deseasonalized": 392.04,
+      "days": 27,
+      "std_dev": 0.42,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2011,
+      "month": 9,
+      "decimal_date": 2011.7083,
+      "co2_ppm": 389.28,
+      "co2_deseasonalized": 392.6,
+      "days": 26,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2011,
+      "month": 10,
+      "decimal_date": 2011.7917,
+      "co2_ppm": 389.19,
+      "co2_deseasonalized": 392.53,
+      "days": 30,
+      "std_dev": 0.17,
+      "uncertainty": 0.06
+    },
+    {
+      "year": 2011,
+      "month": 11,
+      "decimal_date": 2011.875,
+      "co2_ppm": 390.48,
+      "co2_deseasonalized": 392.64,
+      "days": 28,
+      "std_dev": 0.26,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 2011,
+      "month": 12,
+      "decimal_date": 2011.9583,
+      "co2_ppm": 392.06,
+      "co2_deseasonalized": 392.86,
+      "days": 26,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2012,
+      "month": 1,
+      "decimal_date": 2012.0417,
+      "co2_ppm": 393.31,
+      "co2_deseasonalized": 393.07,
+      "days": 30,
+      "std_dev": 0.77,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2012,
+      "month": 2,
+      "decimal_date": 2012.125,
+      "co2_ppm": 394.04,
+      "co2_deseasonalized": 393.2,
+      "days": 26,
+      "std_dev": 1.19,
+      "uncertainty": 0.45
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "decimal_date": 2012.2083,
+      "co2_ppm": 394.59,
+      "co2_deseasonalized": 392.99,
+      "days": 30,
+      "std_dev": 0.63,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "decimal_date": 2012.2917,
+      "co2_ppm": 396.38,
+      "co2_deseasonalized": 393.65,
+      "days": 29,
+      "std_dev": 0.59,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "decimal_date": 2012.375,
+      "co2_ppm": 396.93,
+      "co2_deseasonalized": 393.73,
+      "days": 30,
+      "std_dev": 0.5,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "decimal_date": 2012.4583,
+      "co2_ppm": 395.91,
+      "co2_deseasonalized": 393.63,
+      "days": 28,
+      "std_dev": 0.59,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "decimal_date": 2012.5417,
+      "co2_ppm": 394.56,
+      "co2_deseasonalized": 394.12,
+      "days": 26,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "decimal_date": 2012.625,
+      "co2_ppm": 392.59,
+      "co2_deseasonalized": 394.37,
+      "days": 30,
+      "std_dev": 0.52,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "decimal_date": 2012.7083,
+      "co2_ppm": 391.32,
+      "co2_deseasonalized": 394.75,
+      "days": 26,
+      "std_dev": 0.42,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "decimal_date": 2012.7917,
+      "co2_ppm": 391.27,
+      "co2_deseasonalized": 394.64,
+      "days": 28,
+      "std_dev": 0.23,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "decimal_date": 2012.875,
+      "co2_ppm": 393.2,
+      "co2_deseasonalized": 395.25,
+      "days": 29,
+      "std_dev": 0.53,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "decimal_date": 2012.9583,
+      "co2_ppm": 394.57,
+      "co2_deseasonalized": 395.27,
+      "days": 29,
+      "std_dev": 0.44,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "decimal_date": 2013.0417,
+      "co2_ppm": 395.78,
+      "co2_deseasonalized": 395.62,
+      "days": 28,
+      "std_dev": 0.6,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "decimal_date": 2013.125,
+      "co2_ppm": 397.03,
+      "co2_deseasonalized": 396.23,
+      "days": 25,
+      "std_dev": 0.57,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "decimal_date": 2013.2083,
+      "co2_ppm": 397.66,
+      "co2_deseasonalized": 396.07,
+      "days": 30,
+      "std_dev": 0.71,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "decimal_date": 2013.2917,
+      "co2_ppm": 398.64,
+      "co2_deseasonalized": 395.79,
+      "days": 22,
+      "std_dev": 0.59,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "decimal_date": 2013.375,
+      "co2_ppm": 400.02,
+      "co2_deseasonalized": 396.64,
+      "days": 28,
+      "std_dev": 0.37,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "decimal_date": 2013.4583,
+      "co2_ppm": 398.81,
+      "co2_deseasonalized": 396.48,
+      "days": 26,
+      "std_dev": 0.43,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "decimal_date": 2013.5417,
+      "co2_ppm": 397.51,
+      "co2_deseasonalized": 397.13,
+      "days": 21,
+      "std_dev": 0.52,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2013,
+      "month": 8,
+      "decimal_date": 2013.625,
+      "co2_ppm": 395.39,
+      "co2_deseasonalized": 397.27,
+      "days": 27,
+      "std_dev": 0.45,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2013,
+      "month": 9,
+      "decimal_date": 2013.7083,
+      "co2_ppm": 393.72,
+      "co2_deseasonalized": 397.24,
+      "days": 26,
+      "std_dev": 0.35,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "decimal_date": 2013.7917,
+      "co2_ppm": 393.9,
+      "co2_deseasonalized": 397.25,
+      "days": 28,
+      "std_dev": 0.16,
+      "uncertainty": 0.06
+    },
+    {
+      "year": 2013,
+      "month": 11,
+      "decimal_date": 2013.875,
+      "co2_ppm": 395.36,
+      "co2_deseasonalized": 397.35,
+      "days": 30,
+      "std_dev": 0.6,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "decimal_date": 2013.9583,
+      "co2_ppm": 397.03,
+      "co2_deseasonalized": 397.78,
+      "days": 30,
+      "std_dev": 0.48,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "decimal_date": 2014.0417,
+      "co2_ppm": 398.04,
+      "co2_deseasonalized": 397.74,
+      "days": 31,
+      "std_dev": 0.49,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "decimal_date": 2014.125,
+      "co2_ppm": 398.27,
+      "co2_deseasonalized": 397.45,
+      "days": 27,
+      "std_dev": 0.51,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "decimal_date": 2014.2083,
+      "co2_ppm": 399.91,
+      "co2_deseasonalized": 398.37,
+      "days": 22,
+      "std_dev": 0.84,
+      "uncertainty": 0.34
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "decimal_date": 2014.2917,
+      "co2_ppm": 401.51,
+      "co2_deseasonalized": 398.63,
+      "days": 26,
+      "std_dev": 0.5,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "decimal_date": 2014.375,
+      "co2_ppm": 401.96,
+      "co2_deseasonalized": 398.56,
+      "days": 22,
+      "std_dev": 0.51,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "decimal_date": 2014.4583,
+      "co2_ppm": 401.43,
+      "co2_deseasonalized": 399.1,
+      "days": 28,
+      "std_dev": 0.36,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "decimal_date": 2014.5417,
+      "co2_ppm": 399.27,
+      "co2_deseasonalized": 398.85,
+      "days": 25,
+      "std_dev": 0.55,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2014,
+      "month": 8,
+      "decimal_date": 2014.625,
+      "co2_ppm": 397.18,
+      "co2_deseasonalized": 399.07,
+      "days": 22,
+      "std_dev": 0.28,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "decimal_date": 2014.7083,
+      "co2_ppm": 395.54,
+      "co2_deseasonalized": 399.11,
+      "days": 21,
+      "std_dev": 0.54,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "decimal_date": 2014.7917,
+      "co2_ppm": 396.16,
+      "co2_deseasonalized": 399.58,
+      "days": 24,
+      "std_dev": 0.73,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "decimal_date": 2014.875,
+      "co2_ppm": 397.4,
+      "co2_deseasonalized": 399.49,
+      "days": 27,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "decimal_date": 2014.9583,
+      "co2_ppm": 399.08,
+      "co2_deseasonalized": 399.81,
+      "days": 29,
+      "std_dev": 0.6,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "decimal_date": 2015.0417,
+      "co2_ppm": 400.18,
+      "co2_deseasonalized": 399.92,
+      "days": 30,
+      "std_dev": 0.55,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "decimal_date": 2015.125,
+      "co2_ppm": 400.55,
+      "co2_deseasonalized": 399.77,
+      "days": 28,
+      "std_dev": 0.63,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "decimal_date": 2015.2083,
+      "co2_ppm": 401.74,
+      "co2_deseasonalized": 400.22,
+      "days": 24,
+      "std_dev": 1.02,
+      "uncertainty": 0.4
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "decimal_date": 2015.2917,
+      "co2_ppm": 403.35,
+      "co2_deseasonalized": 400.46,
+      "days": 26,
+      "std_dev": 0.86,
+      "uncertainty": 0.32
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "decimal_date": 2015.375,
+      "co2_ppm": 404.15,
+      "co2_deseasonalized": 400.7,
+      "days": 30,
+      "std_dev": 0.32,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "decimal_date": 2015.4583,
+      "co2_ppm": 402.97,
+      "co2_deseasonalized": 400.65,
+      "days": 29,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "decimal_date": 2015.5417,
+      "co2_ppm": 401.46,
+      "co2_deseasonalized": 401.11,
+      "days": 24,
+      "std_dev": 0.57,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "decimal_date": 2015.625,
+      "co2_ppm": 399.11,
+      "co2_deseasonalized": 401.04,
+      "days": 28,
+      "std_dev": 0.74,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "decimal_date": 2015.7083,
+      "co2_ppm": 397.82,
+      "co2_deseasonalized": 401.43,
+      "days": 25,
+      "std_dev": 0.32,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "decimal_date": 2015.7917,
+      "co2_ppm": 398.49,
+      "co2_deseasonalized": 401.89,
+      "days": 28,
+      "std_dev": 0.56,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "decimal_date": 2015.875,
+      "co2_ppm": 400.27,
+      "co2_deseasonalized": 402.24,
+      "days": 25,
+      "std_dev": 0.58,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "decimal_date": 2015.9583,
+      "co2_ppm": 402.06,
+      "co2_deseasonalized": 402.72,
+      "days": 30,
+      "std_dev": 0.67,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "decimal_date": 2016.0417,
+      "co2_ppm": 402.73,
+      "co2_deseasonalized": 402.45,
+      "days": 27,
+      "std_dev": 0.56,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "decimal_date": 2016.125,
+      "co2_ppm": 404.25,
+      "co2_deseasonalized": 403.4,
+      "days": 25,
+      "std_dev": 1.11,
+      "uncertainty": 0.43
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "decimal_date": 2016.2083,
+      "co2_ppm": 405.06,
+      "co2_deseasonalized": 403.54,
+      "days": 28,
+      "std_dev": 0.81,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "decimal_date": 2016.2917,
+      "co2_ppm": 407.6,
+      "co2_deseasonalized": 404.77,
+      "days": 23,
+      "std_dev": 1.04,
+      "uncertainty": 0.41
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "decimal_date": 2016.375,
+      "co2_ppm": 407.9,
+      "co2_deseasonalized": 404.41,
+      "days": 29,
+      "std_dev": 0.5,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "decimal_date": 2016.4583,
+      "co2_ppm": 406.99,
+      "co2_deseasonalized": 404.59,
+      "days": 26,
+      "std_dev": 0.6,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "decimal_date": 2016.5417,
+      "co2_ppm": 404.59,
+      "co2_deseasonalized": 404.24,
+      "days": 28,
+      "std_dev": 0.88,
+      "uncertainty": 0.32
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "decimal_date": 2016.625,
+      "co2_ppm": 402.45,
+      "co2_deseasonalized": 404.41,
+      "days": 24,
+      "std_dev": 0.6,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "decimal_date": 2016.7083,
+      "co2_ppm": 401.23,
+      "co2_deseasonalized": 404.85,
+      "days": 25,
+      "std_dev": 0.44,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "decimal_date": 2016.7917,
+      "co2_ppm": 401.79,
+      "co2_deseasonalized": 405.23,
+      "days": 29,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "decimal_date": 2016.875,
+      "co2_ppm": 403.72,
+      "co2_deseasonalized": 405.74,
+      "days": 27,
+      "std_dev": 0.72,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "decimal_date": 2016.9583,
+      "co2_ppm": 404.64,
+      "co2_deseasonalized": 405.33,
+      "days": 29,
+      "std_dev": 0.44,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "decimal_date": 2017.0417,
+      "co2_ppm": 406.36,
+      "co2_deseasonalized": 406.04,
+      "days": 27,
+      "std_dev": 0.68,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "decimal_date": 2017.125,
+      "co2_ppm": 406.66,
+      "co2_deseasonalized": 405.8,
+      "days": 26,
+      "std_dev": 0.71,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "decimal_date": 2017.2083,
+      "co2_ppm": 407.54,
+      "co2_deseasonalized": 406.05,
+      "days": 24,
+      "std_dev": 1.03,
+      "uncertainty": 0.4
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "decimal_date": 2017.2917,
+      "co2_ppm": 409.22,
+      "co2_deseasonalized": 406.37,
+      "days": 26,
+      "std_dev": 0.86,
+      "uncertainty": 0.32
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "decimal_date": 2017.375,
+      "co2_ppm": 409.89,
+      "co2_deseasonalized": 406.37,
+      "days": 27,
+      "std_dev": 0.57,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "decimal_date": 2017.4583,
+      "co2_ppm": 409.08,
+      "co2_deseasonalized": 406.68,
+      "days": 26,
+      "std_dev": 0.54,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "decimal_date": 2017.5417,
+      "co2_ppm": 407.33,
+      "co2_deseasonalized": 407.01,
+      "days": 28,
+      "std_dev": 0.61,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "decimal_date": 2017.625,
+      "co2_ppm": 405.32,
+      "co2_deseasonalized": 407.31,
+      "days": 29,
+      "std_dev": 0.32,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "decimal_date": 2017.7083,
+      "co2_ppm": 403.57,
+      "co2_deseasonalized": 407.17,
+      "days": 26,
+      "std_dev": 0.37,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "decimal_date": 2017.7917,
+      "co2_ppm": 403.82,
+      "co2_deseasonalized": 407.23,
+      "days": 27,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "decimal_date": 2017.875,
+      "co2_ppm": 405.31,
+      "co2_deseasonalized": 407.36,
+      "days": 26,
+      "std_dev": 0.41,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "decimal_date": 2017.9583,
+      "co2_ppm": 407.0,
+      "co2_deseasonalized": 407.71,
+      "days": 31,
+      "std_dev": 0.57,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "decimal_date": 2018.0417,
+      "co2_ppm": 408.15,
+      "co2_deseasonalized": 407.83,
+      "days": 29,
+      "std_dev": 0.55,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "decimal_date": 2018.125,
+      "co2_ppm": 408.52,
+      "co2_deseasonalized": 407.61,
+      "days": 28,
+      "std_dev": 0.52,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "decimal_date": 2018.2083,
+      "co2_ppm": 409.59,
+      "co2_deseasonalized": 408.06,
+      "days": 29,
+      "std_dev": 0.65,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "decimal_date": 2018.2917,
+      "co2_ppm": 410.45,
+      "co2_deseasonalized": 407.65,
+      "days": 21,
+      "std_dev": 0.9,
+      "uncertainty": 0.38
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "decimal_date": 2018.375,
+      "co2_ppm": 411.44,
+      "co2_deseasonalized": 407.98,
+      "days": 24,
+      "std_dev": 0.86,
+      "uncertainty": 0.33
+    },
+    {
+      "year": 2018,
+      "month": 6,
+      "decimal_date": 2018.4583,
+      "co2_ppm": 410.99,
+      "co2_deseasonalized": 408.6,
+      "days": 29,
+      "std_dev": 0.61,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2018,
+      "month": 7,
+      "decimal_date": 2018.5417,
+      "co2_ppm": 408.9,
+      "co2_deseasonalized": 408.6,
+      "days": 27,
+      "std_dev": 0.46,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2018,
+      "month": 8,
+      "decimal_date": 2018.625,
+      "co2_ppm": 407.16,
+      "co2_deseasonalized": 409.17,
+      "days": 31,
+      "std_dev": 0.28,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 2018,
+      "month": 9,
+      "decimal_date": 2018.7083,
+      "co2_ppm": 405.71,
+      "co2_deseasonalized": 409.3,
+      "days": 29,
+      "std_dev": 0.45,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2018,
+      "month": 10,
+      "decimal_date": 2018.7917,
+      "co2_ppm": 406.19,
+      "co2_deseasonalized": 409.56,
+      "days": 30,
+      "std_dev": 0.32,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2018,
+      "month": 11,
+      "decimal_date": 2018.875,
+      "co2_ppm": 408.21,
+      "co2_deseasonalized": 410.24,
+      "days": 24,
+      "std_dev": 0.56,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2018,
+      "month": 12,
+      "decimal_date": 2018.9583,
+      "co2_ppm": 409.27,
+      "co2_deseasonalized": 409.99,
+      "days": 30,
+      "std_dev": 0.5,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2019,
+      "month": 1,
+      "decimal_date": 2019.0417,
+      "co2_ppm": 411.03,
+      "co2_deseasonalized": 410.69,
+      "days": 26,
+      "std_dev": 1.26,
+      "uncertainty": 0.47
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "decimal_date": 2019.125,
+      "co2_ppm": 411.96,
+      "co2_deseasonalized": 410.97,
+      "days": 27,
+      "std_dev": 1.14,
+      "uncertainty": 0.42
+    },
+    {
+      "year": 2019,
+      "month": 3,
+      "decimal_date": 2019.2083,
+      "co2_ppm": 412.18,
+      "co2_deseasonalized": 410.71,
+      "days": 28,
+      "std_dev": 1.12,
+      "uncertainty": 0.4
+    },
+    {
+      "year": 2019,
+      "month": 4,
+      "decimal_date": 2019.2917,
+      "co2_ppm": 413.54,
+      "co2_deseasonalized": 410.92,
+      "days": 27,
+      "std_dev": 0.6,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "decimal_date": 2019.375,
+      "co2_ppm": 414.86,
+      "co2_deseasonalized": 411.47,
+      "days": 28,
+      "std_dev": 0.5,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "decimal_date": 2019.4583,
+      "co2_ppm": 414.15,
+      "co2_deseasonalized": 411.74,
+      "days": 27,
+      "std_dev": 0.36,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "decimal_date": 2019.5417,
+      "co2_ppm": 411.96,
+      "co2_deseasonalized": 411.64,
+      "days": 25,
+      "std_dev": 0.81,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "decimal_date": 2019.625,
+      "co2_ppm": 410.17,
+      "co2_deseasonalized": 412.1,
+      "days": 29,
+      "std_dev": 0.32,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "decimal_date": 2019.7083,
+      "co2_ppm": 408.76,
+      "co2_deseasonalized": 412.26,
+      "days": 29,
+      "std_dev": 0.35,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "decimal_date": 2019.7917,
+      "co2_ppm": 408.74,
+      "co2_deseasonalized": 412.09,
+      "days": 29,
+      "std_dev": 0.31,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2019,
+      "month": 11,
+      "decimal_date": 2019.875,
+      "co2_ppm": 410.47,
+      "co2_deseasonalized": 412.5,
+      "days": 26,
+      "std_dev": 0.4,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "decimal_date": 2019.9583,
+      "co2_ppm": 411.97,
+      "co2_deseasonalized": 412.71,
+      "days": 31,
+      "std_dev": 0.4,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2020,
+      "month": 1,
+      "decimal_date": 2020.0417,
+      "co2_ppm": 413.59,
+      "co2_deseasonalized": 413.22,
+      "days": 29,
+      "std_dev": 0.73,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2020,
+      "month": 2,
+      "decimal_date": 2020.125,
+      "co2_ppm": 414.32,
+      "co2_deseasonalized": 413.4,
+      "days": 28,
+      "std_dev": 0.69,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2020,
+      "month": 3,
+      "decimal_date": 2020.2083,
+      "co2_ppm": 414.72,
+      "co2_deseasonalized": 413.35,
+      "days": 26,
+      "std_dev": 0.32,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2020,
+      "month": 4,
+      "decimal_date": 2020.2917,
+      "co2_ppm": 416.42,
+      "co2_deseasonalized": 413.92,
+      "days": 28,
+      "std_dev": 0.65,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2020,
+      "month": 5,
+      "decimal_date": 2020.375,
+      "co2_ppm": 417.28,
+      "co2_deseasonalized": 413.98,
+      "days": 27,
+      "std_dev": 0.61,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2020,
+      "month": 6,
+      "decimal_date": 2020.4583,
+      "co2_ppm": 416.58,
+      "co2_deseasonalized": 414.15,
+      "days": 27,
+      "std_dev": 0.44,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2020,
+      "month": 7,
+      "decimal_date": 2020.5417,
+      "co2_ppm": 414.58,
+      "co2_deseasonalized": 414.19,
+      "days": 30,
+      "std_dev": 0.57,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2020,
+      "month": 8,
+      "decimal_date": 2020.625,
+      "co2_ppm": 412.75,
+      "co2_deseasonalized": 414.6,
+      "days": 25,
+      "std_dev": 0.25,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 2020,
+      "month": 9,
+      "decimal_date": 2020.7083,
+      "co2_ppm": 411.5,
+      "co2_deseasonalized": 414.9,
+      "days": 29,
+      "std_dev": 0.31,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2020,
+      "month": 10,
+      "decimal_date": 2020.7917,
+      "co2_ppm": 411.49,
+      "co2_deseasonalized": 414.79,
+      "days": 30,
+      "std_dev": 0.22,
+      "uncertainty": 0.08
+    },
+    {
+      "year": 2020,
+      "month": 11,
+      "decimal_date": 2020.875,
+      "co2_ppm": 413.1,
+      "co2_deseasonalized": 415.11,
+      "days": 27,
+      "std_dev": 0.81,
+      "uncertainty": 0.3
+    },
+    {
+      "year": 2020,
+      "month": 12,
+      "decimal_date": 2020.9583,
+      "co2_ppm": 414.23,
+      "co2_deseasonalized": 414.91,
+      "days": 30,
+      "std_dev": 0.48,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2021,
+      "month": 1,
+      "decimal_date": 2021.0417,
+      "co2_ppm": 415.49,
+      "co2_deseasonalized": 415.23,
+      "days": 29,
+      "std_dev": 0.44,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "decimal_date": 2021.125,
+      "co2_ppm": 416.72,
+      "co2_deseasonalized": 415.8,
+      "days": 28,
+      "std_dev": 1.02,
+      "uncertainty": 0.37
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "decimal_date": 2021.2083,
+      "co2_ppm": 417.61,
+      "co2_deseasonalized": 416.17,
+      "days": 28,
+      "std_dev": 0.86,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "decimal_date": 2021.2917,
+      "co2_ppm": 419.01,
+      "co2_deseasonalized": 416.59,
+      "days": 24,
+      "std_dev": 1.12,
+      "uncertainty": 0.44
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "decimal_date": 2021.375,
+      "co2_ppm": 419.09,
+      "co2_deseasonalized": 415.88,
+      "days": 28,
+      "std_dev": 0.9,
+      "uncertainty": 0.32
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "decimal_date": 2021.4583,
+      "co2_ppm": 418.93,
+      "co2_deseasonalized": 416.48,
+      "days": 29,
+      "std_dev": 0.65,
+      "uncertainty": 0.23
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "decimal_date": 2021.5417,
+      "co2_ppm": 416.9,
+      "co2_deseasonalized": 416.48,
+      "days": 31,
+      "std_dev": 0.71,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "decimal_date": 2021.625,
+      "co2_ppm": 414.42,
+      "co2_deseasonalized": 416.27,
+      "days": 25,
+      "std_dev": 0.74,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "decimal_date": 2021.7083,
+      "co2_ppm": 413.26,
+      "co2_deseasonalized": 416.63,
+      "days": 27,
+      "std_dev": 0.29,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "decimal_date": 2021.7917,
+      "co2_ppm": 413.9,
+      "co2_deseasonalized": 417.14,
+      "days": 29,
+      "std_dev": 0.35,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "decimal_date": 2021.875,
+      "co2_ppm": 414.97,
+      "co2_deseasonalized": 416.92,
+      "days": 30,
+      "std_dev": 0.36,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "decimal_date": 2021.9583,
+      "co2_ppm": 416.67,
+      "co2_deseasonalized": 417.37,
+      "days": 28,
+      "std_dev": 0.48,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "decimal_date": 2022.0417,
+      "co2_ppm": 418.13,
+      "co2_deseasonalized": 417.82,
+      "days": 30,
+      "std_dev": 0.72,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "decimal_date": 2022.125,
+      "co2_ppm": 419.24,
+      "co2_deseasonalized": 418.3,
+      "days": 27,
+      "std_dev": 0.92,
+      "uncertainty": 0.34
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "decimal_date": 2022.2083,
+      "co2_ppm": 418.76,
+      "co2_deseasonalized": 417.3,
+      "days": 30,
+      "std_dev": 0.78,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "decimal_date": 2022.2917,
+      "co2_ppm": 420.19,
+      "co2_deseasonalized": 417.68,
+      "days": 28,
+      "std_dev": 0.86,
+      "uncertainty": 0.31
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "decimal_date": 2022.375,
+      "co2_ppm": 420.97,
+      "co2_deseasonalized": 417.72,
+      "days": 31,
+      "std_dev": 0.75,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "decimal_date": 2022.4583,
+      "co2_ppm": 420.94,
+      "co2_deseasonalized": 418.49,
+      "days": 28,
+      "std_dev": 0.3,
+      "uncertainty": 0.11
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "decimal_date": 2022.5417,
+      "co2_ppm": 418.85,
+      "co2_deseasonalized": 418.43,
+      "days": 27,
+      "std_dev": 0.57,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "decimal_date": 2022.625,
+      "co2_ppm": 417.15,
+      "co2_deseasonalized": 419.03,
+      "days": 27,
+      "std_dev": 0.37,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "decimal_date": 2022.7083,
+      "co2_ppm": 415.91,
+      "co2_deseasonalized": 419.32,
+      "days": 28,
+      "std_dev": 0.41,
+      "uncertainty": 0.15
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "decimal_date": 2022.7917,
+      "co2_ppm": 415.74,
+      "co2_deseasonalized": 419.03,
+      "days": 30,
+      "std_dev": 0.27,
+      "uncertainty": 0.1
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "decimal_date": 2022.875,
+      "co2_ppm": 417.47,
+      "co2_deseasonalized": 419.49,
+      "days": 25,
+      "std_dev": 0.52,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "decimal_date": 2022.9583,
+      "co2_ppm": 418.99,
+      "co2_deseasonalized": 419.71,
+      "days": 24,
+      "std_dev": 0.57,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "decimal_date": 2023.0417,
+      "co2_ppm": 419.47,
+      "co2_deseasonalized": 419.16,
+      "days": 31,
+      "std_dev": 0.4,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "decimal_date": 2023.125,
+      "co2_ppm": 420.31,
+      "co2_deseasonalized": 419.37,
+      "days": 23,
+      "std_dev": 0.7,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "decimal_date": 2023.2083,
+      "co2_ppm": 420.99,
+      "co2_deseasonalized": 419.53,
+      "days": 30,
+      "std_dev": 0.74,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "decimal_date": 2023.2917,
+      "co2_ppm": 423.31,
+      "co2_deseasonalized": 420.8,
+      "days": 27,
+      "std_dev": 0.56,
+      "uncertainty": 0.21
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "decimal_date": 2023.375,
+      "co2_ppm": 424.0,
+      "co2_deseasonalized": 420.76,
+      "days": 31,
+      "std_dev": 0.7,
+      "uncertainty": 0.24
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "decimal_date": 2023.4583,
+      "co2_ppm": 423.68,
+      "co2_deseasonalized": 421.23,
+      "days": 29,
+      "std_dev": 0.57,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "decimal_date": 2023.5417,
+      "co2_ppm": 421.83,
+      "co2_deseasonalized": 421.41,
+      "days": 21,
+      "std_dev": 0.48,
+      "uncertainty": 0.2
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "decimal_date": 2023.625,
+      "co2_ppm": 419.68,
+      "co2_deseasonalized": 421.56,
+      "days": 21,
+      "std_dev": 0.45,
+      "uncertainty": 0.19
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "decimal_date": 2023.7083,
+      "co2_ppm": 418.51,
+      "co2_deseasonalized": 421.92,
+      "days": 18,
+      "std_dev": 0.3,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "decimal_date": 2023.7917,
+      "co2_ppm": 418.82,
+      "co2_deseasonalized": 422.11,
+      "days": 27,
+      "std_dev": 0.47,
+      "uncertainty": 0.17
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "decimal_date": 2023.875,
+      "co2_ppm": 420.46,
+      "co2_deseasonalized": 422.48,
+      "days": 21,
+      "std_dev": 0.91,
+      "uncertainty": 0.38
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "decimal_date": 2023.9583,
+      "co2_ppm": 421.86,
+      "co2_deseasonalized": 422.57,
+      "days": 20,
+      "std_dev": 0.69,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 2024,
+      "month": 1,
+      "decimal_date": 2024.0417,
+      "co2_ppm": 422.8,
+      "co2_deseasonalized": 422.5,
+      "days": 27,
+      "std_dev": 0.7,
+      "uncertainty": 0.26
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "decimal_date": 2024.125,
+      "co2_ppm": 424.55,
+      "co2_deseasonalized": 423.62,
+      "days": 22,
+      "std_dev": 1.24,
+      "uncertainty": 0.51
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "decimal_date": 2024.2083,
+      "co2_ppm": 425.38,
+      "co2_deseasonalized": 423.92,
+      "days": 22,
+      "std_dev": 0.99,
+      "uncertainty": 0.4
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "decimal_date": 2024.2917,
+      "co2_ppm": 426.51,
+      "co2_deseasonalized": 424.01,
+      "days": 22,
+      "std_dev": 0.99,
+      "uncertainty": 0.4
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "decimal_date": 2024.375,
+      "co2_ppm": 426.9,
+      "co2_deseasonalized": 423.65,
+      "days": 29,
+      "std_dev": 0.76,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "decimal_date": 2024.4583,
+      "co2_ppm": 426.91,
+      "co2_deseasonalized": 424.46,
+      "days": 20,
+      "std_dev": 0.65,
+      "uncertainty": 0.28
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "decimal_date": 2024.5417,
+      "co2_ppm": 425.55,
+      "co2_deseasonalized": 425.13,
+      "days": 24,
+      "std_dev": 0.69,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "decimal_date": 2024.625,
+      "co2_ppm": 422.99,
+      "co2_deseasonalized": 424.87,
+      "days": 22,
+      "std_dev": 1.08,
+      "uncertainty": 0.44
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "decimal_date": 2024.7083,
+      "co2_ppm": 422.03,
+      "co2_deseasonalized": 425.45,
+      "days": 18,
+      "std_dev": 0.41,
+      "uncertainty": 0.18
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "decimal_date": 2024.7917,
+      "co2_ppm": 422.38,
+      "co2_deseasonalized": 425.68,
+      "days": 22,
+      "std_dev": 0.35,
+      "uncertainty": 0.14
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "decimal_date": 2024.875,
+      "co2_ppm": 423.85,
+      "co2_deseasonalized": 425.87,
+      "days": 24,
+      "std_dev": 0.33,
+      "uncertainty": 0.13
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "decimal_date": 2024.9583,
+      "co2_ppm": 425.4,
+      "co2_deseasonalized": 426.12,
+      "days": 28,
+      "std_dev": 0.7,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "decimal_date": 2025.0417,
+      "co2_ppm": 426.65,
+      "co2_deseasonalized": 426.35,
+      "days": 29,
+      "std_dev": 0.62,
+      "uncertainty": 0.22
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "decimal_date": 2025.125,
+      "co2_ppm": 427.09,
+      "co2_deseasonalized": 426.15,
+      "days": 24,
+      "std_dev": 0.64,
+      "uncertainty": 0.25
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "decimal_date": 2025.2083,
+      "co2_ppm": 428.15,
+      "co2_deseasonalized": 426.68,
+      "days": 27,
+      "std_dev": 1.13,
+      "uncertainty": 0.41
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "decimal_date": 2025.2917,
+      "co2_ppm": 429.64,
+      "co2_deseasonalized": 427.13,
+      "days": 23,
+      "std_dev": 0.73,
+      "uncertainty": 0.29
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "decimal_date": 2025.375,
+      "co2_ppm": 430.51,
+      "co2_deseasonalized": 427.26,
+      "days": 23,
+      "std_dev": 0.39,
+      "uncertainty": 0.16
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "decimal_date": 2025.4583,
+      "co2_ppm": 429.61,
+      "co2_deseasonalized": 427.16,
+      "days": 26,
+      "std_dev": 0.71,
+      "uncertainty": 0.27
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "decimal_date": 2025.5417,
+      "co2_ppm": 427.87,
+      "co2_deseasonalized": 427.45,
+      "days": 24,
+      "std_dev": 0.31,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "decimal_date": 2025.625,
+      "co2_ppm": 425.48,
+      "co2_deseasonalized": 427.36,
+      "days": 24,
+      "std_dev": 0.36,
+      "uncertainty": 0.14
+    }
+  ]
+}

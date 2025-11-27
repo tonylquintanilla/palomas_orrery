@@ -69,8 +69,8 @@ def repair_cache_on_load():
                 removed_entries.append(orbit_key)
         
         if removed_entries:
-            print(f"[CACHE REPAIR] Removed {len(removed_entries)} corrupted entries: {removed_entries}")
-            print(f"[CACHE REPAIR] Kept {len(cleaned_cache)} valid entries")
+            print(f"[CACHE REPAIR] Removed {len(removed_entries)} corrupted entries: {removed_entries}", flush=True)
+            print(f"[CACHE REPAIR] Kept {len(cleaned_cache)} valid entries", flush=True)
             
             # Save the cleaned cache back
     #        with open('orbit_paths.json', 'w') as f:
@@ -81,7 +81,7 @@ def repair_cache_on_load():
         
     except json.JSONDecodeError:
         # Entire file is corrupted
-        print("[CACHE ERROR] Entire cache file corrupted, starting fresh")
+        print("[CACHE ERROR] Entire cache file corrupted, starting fresh", flush=True)
         return {}
 
 def initialize(status_widget=None, root_widget=None, center_var=None, data_file=ORBIT_PATHS_FILE):
@@ -115,9 +115,9 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
     Returns:
         dict: The loaded orbit paths data, with corrupted entries removed
     """
-    print(f"\n{'='*60}")
-    print(f"LOADING ORBIT CACHE FROM: {file_path}")
-    print(f"{'='*60}\n")
+    print(f"\n{'='*60}", flush=True)
+    print(f"LOADING ORBIT CACHE FROM: {file_path}", flush=True)
+    print(f"{'='*60}\n", flush=True)
 
     global status_display
     
@@ -127,7 +127,7 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
             
         if not isinstance(data, dict):
             error_msg = "[CACHE ERROR] Cache file has invalid structure, starting fresh"
-            print(error_msg)
+            print(error_msg, flush=True)
             update_status(error_msg)
             return {}
             
@@ -183,7 +183,7 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
                         continue
                     
                     if orbit_key not in _conversion_messages_shown and _startup_complete:
-                        print(f"Converting old format data for {orbit_key}")
+                        print(f"Converting old format data for {orbit_key}", flush=True)
                         _conversion_messages_shown.add(orbit_key)
 
                     converted = convert_single_orbit_to_new_format(orbit_key, orbit_data)
@@ -201,12 +201,12 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
         # Report what was cleaned
         if removed_entries:
             # Console output
-            print(f"\n[CACHE REPAIR] Removed {len(removed_entries)} corrupted entries out of {total_entries}:")
+            print(f"\n[CACHE REPAIR] Removed {len(removed_entries)} corrupted entries out of {total_entries}:", flush=True)
             for entry, reason in removed_entries[:5]:
-                print(f"  - {entry}: {reason}")
+                print(f"  - {entry}: {reason}", flush=True)
             if len(removed_entries) > 5:
-                print(f"  ... and {len(removed_entries) - 5} more")
-            print(f"[CACHE REPAIR] Keeping {len(cleaned_data)} valid entries")
+                print(f"  ... and {len(removed_entries) - 5} more", flush=True)
+            print(f"[CACHE REPAIR] Keeping {len(cleaned_data)} valid entries", flush=True)
             
             # Status display output
             status_msg = f"Cache repaired: removed {len(removed_entries)} corrupted entries, kept {len(cleaned_data)} valid"
@@ -214,8 +214,8 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
             
             # Save cleaned data back to file
         #    save_orbit_paths(cleaned_data, file_path)  # removed for avoid cache overwrites
-            print(f"\n[SAFETY] Auto-save DISABLED. Original file preserved.")
-            print(f"[SAFETY] If entries are truly corrupted, use verify_orbit_cache.py to repair safely.")        
+            print(f"\n[SAFETY] Auto-save DISABLED. Original file preserved.", flush=True)
+            print(f"[SAFETY] If entries are truly corrupted, use verify_orbit_cache.py to repair safely.", flush=True)        
         else:
             # Report success
             if total_entries > 0:
@@ -225,32 +225,104 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
         return cleaned_data
             
     except FileNotFoundError:
+        # Try backup files before giving up
+        backup_file = file_path + '.backup'
+        backup_old_file = file_path + '.backup_old'
+        
+        # Try backup first
+        if os.path.exists(backup_file):
+            try:
+                with open(backup_file, 'r') as f:
+                    data = json.load(f)
+                print(f"✓ Recovered from {os.path.basename(backup_file)}", flush=True)
+                update_status(f"Recovered from backup file")
+                
+                # Restore to main file
+                shutil.copy2(backup_file, file_path)
+                return data
+            except Exception as e:
+                print(f"⚠ Backup also unavailable: {e}", flush=True)
+        
+        # Try old backup
+        if os.path.exists(backup_old_file):
+            try:
+                with open(backup_old_file, 'r') as f:
+                    data = json.load(f)
+                print(f"✓ Recovered from {os.path.basename(backup_old_file)}", flush=True)
+                update_status(f"Recovered from old backup file")
+                
+                # Restore to main file
+                shutil.copy2(backup_old_file, file_path)
+                return data
+            except Exception as e:
+                print(f"⚠ Old backup also unavailable: {e}", flush=True)
+        
+        # All failed - truly no existing file
         msg = f"No existing orbit paths file found at {file_path}, creating new cache."
-        print(msg)
+        print(msg, flush=True)
         update_status("Starting with fresh cache (no existing file found)")
         return {}
         
     except json.JSONDecodeError as e:
         error_msg = f"[CACHE ERROR] Cache file is corrupted: {e}"
-        print(error_msg)
-        update_status("Cache file corrupted - starting fresh")
+        print(error_msg, flush=True)
         
-        # Rename corrupted file instead of deleting
+        # Before giving up, try the backup hierarchy
+        backup_file = file_path + '.backup'
+        backup_old_file = file_path + '.backup_old'
+        
+        # Try backup first
+        if os.path.exists(backup_file):
+            try:
+                with open(backup_file, 'r') as f:
+                    data = json.load(f)
+                print(f"✓ Recovered from {os.path.basename(backup_file)}", flush=True)
+                update_status("Recovered from backup after corruption")
+                
+                # Save the corrupted main file
+                corrupted_name = file_path + '.corrupted.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+                shutil.move(file_path, corrupted_name)
+                print(f"Corrupted file saved as: {corrupted_name}", flush=True)
+                
+                # Restore backup to main
+                shutil.copy2(backup_file, file_path)
+                return data
+            except Exception as backup_e:
+                print(f"⚠ Backup also corrupted: {backup_e}", flush=True)
+        
+        # Try old backup
+        if os.path.exists(backup_old_file):
+            try:
+                with open(backup_old_file, 'r') as f:
+                    data = json.load(f)
+                print(f"✓ Recovered from {os.path.basename(backup_old_file)}", flush=True)
+                update_status("Recovered from old backup after double corruption")
+                
+                # Save the corrupted main file
+                corrupted_name = file_path + '.corrupted.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+                shutil.move(file_path, corrupted_name)
+                print(f"Corrupted file saved as: {corrupted_name}", flush=True)
+                
+                # Restore old backup to main
+                shutil.copy2(backup_old_file, file_path)
+                return data
+            except Exception as old_backup_e:
+                print(f"✗ All backups corrupted: {old_backup_e}", flush=True)
+        
+        # All failed - save corrupted file and start fresh
+        update_status("All cache files corrupted - starting fresh")
         backup_name = file_path + '.corrupted.' + datetime.now().strftime('%Y%m%d_%H%M%S')
         try:
-            import shutil
             shutil.move(file_path, backup_name)
-            backup_msg = f"[CACHE BACKUP] Corrupted file saved as: {backup_name}"
-            print(backup_msg)
-            update_status(f"Corrupted cache backed up, starting fresh")
+            print(f"[CACHE BACKUP] Corrupted file saved as: {backup_name}", flush=True)
         except Exception as backup_error:
             print(f"[CACHE BACKUP] Could not backup corrupted file: {backup_error}")
-            
+        
         return {}
         
     except Exception as e:
         error_msg = f"Error loading orbit paths: {e}"
-        print(error_msg)
+        print(error_msg, flush=True)
         update_status("Error loading cache - check console for details")
         traceback.print_exc()
         return {}
@@ -270,7 +342,7 @@ def convert_single_orbit_to_new_format(orbit_key, orbit_data):
     global _conversion_messages_shown
     
     if orbit_key not in _conversion_messages_shown:
-        print(f"Converting old format data for {orbit_key}")
+        print(f"Converting old format data for {orbit_key}", flush=True)
         _conversion_messages_shown.add(orbit_key)
     
     try:
@@ -317,7 +389,7 @@ def convert_single_orbit_to_new_format(orbit_key, orbit_data):
         }
         
     except Exception as e:
-        print(f"Error converting orbit {orbit_key}: {e}")
+        print(f"Error converting orbit {orbit_key}: {e}", flush=True)
         return None
 
 # Replace the save_orbit_paths function in orbit_data_manager.py with this safer version
@@ -378,12 +450,12 @@ def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
                     f"SAVE BLOCKED - Original cache preserved at {file_path}\n"
                     f"{'='*70}\n"
                 )
-                print(error_msg)
+                print(error_msg, flush=True)
                 
                 # Create emergency backup
                 emergency_backup = file_path + '.emergency_' + datetime.now().strftime('%Y%m%d_%H%M%S')
                 shutil.copy2(file_path, emergency_backup)
-                print(f"[EMERGENCY BACKUP] Created: {emergency_backup}")
+                print(f"[EMERGENCY BACKUP] Created: {emergency_backup}", flush=True)
                 
                 # Update status if available
                 update_status(f"SAVE BLOCKED: Cache shrunk by {size_reduction_percent:.1f}%")
@@ -394,46 +466,51 @@ def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
         except ValueError:
             raise  # Re-raise our safety exception
         except (OSError, IOError) as e:
-            print(f"[WARNING] Could not perform safety check: {e}")
+            print(f"[WARNING] Could not perform safety check: {e}", flush=True)
     
     # Create a temporary file first
     temp_file = file_path + '.tmp'
     backup_file = file_path + '.backup'
+    backup_old_file = file_path + '.backup_old'  # NEW - second generation
     
     try:
-        # Write to temporary file
+        # Step 1: Write to temporary file
         with open(temp_file, 'w') as f:
             json.dump(data, f)
         
-        # Verify the temp file was written correctly
+        # Step 2: Verify the temp file was written correctly
         with open(temp_file, 'r') as f:
             json.load(f)  # This will raise an exception if JSON is invalid
         
-        # If original exists, create backup
-        if os.path.exists(file_path):
-            if os.path.exists(backup_file):
-                os.remove(backup_file)
-            shutil.move(file_path, backup_file)
+        # Step 3: Rotate backups: backup → backup_old
+        if os.path.exists(backup_file):
+            if os.path.exists(backup_old_file):
+                os.remove(backup_old_file)  # Remove oldest backup
+            shutil.copy2(backup_file, backup_old_file)  # Preserve backup as backup_old
+            print(f"  Rotated: {os.path.basename(backup_file)} → {os.path.basename(backup_old_file)}", flush=True)
         
-        # Move temp file to final location
+        # Step 4: Current → backup
+        if os.path.exists(file_path):
+            shutil.copy2(file_path, backup_file)  # Copy (not move) current to backup
+            print(f"  Backed up: {os.path.basename(file_path)} → {os.path.basename(backup_file)}", flush=True)
+        
+        # Step 5: Temp → current (atomic on most systems)
         shutil.move(temp_file, file_path)
         
-        print(f"Orbit paths saved to {file_path}")
+        print(f"✓ Saved: {os.path.basename(file_path)} (2-gen protected)", flush=True)
         
-        # Clean up old backup if save was successful and new file is reasonable size
-        if os.path.exists(backup_file) and os.path.getsize(file_path) > 100:
-            os.remove(backup_file)
+        # NOTE: We do NOT delete backups - they persist as safety nets!    
             
     except Exception as e:
-        print(f"Error saving orbit paths: {e}")
+        print(f"Error saving orbit paths: {e}", flush=True)
         
         # Try to restore from backup
         if os.path.exists(backup_file):
             try:
                 shutil.copy2(backup_file, file_path)
-                print(f"[RECOVERY] Restored from backup after save failure")
+                print(f"[RECOVERY] Restored from backup after save failure", flush=True)
             except Exception as restore_error:
-                print(f"[CRITICAL] Could not restore backup: {restore_error}")
+                print(f"[CRITICAL] Could not restore backup: {restore_error}", flush=True)
         
         # Clean up temp file if it exists
         if os.path.exists(temp_file):
@@ -459,7 +536,7 @@ def convert_to_new_format(old_data):
     today = datetime.today()
     today_str = today.strftime("%Y-%m-%d")
     
-    print("Converting orbit data to new time-indexed format...")
+    print("Converting orbit data to new time-indexed format...", flush=True)
     
     for key, coords in old_data.items():
         # Skip entries that don't have coordinate data
@@ -505,7 +582,7 @@ def convert_to_new_format(old_data):
                 }
             }
     
-    print(f"Converted {len(new_data)} orbit paths to new format.")
+    print(f"Converted {len(new_data)} orbit paths to new format.", flush=True)
     return new_data
 
 
@@ -601,7 +678,7 @@ def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', i
         
         return {'x': x_coords, 'y': y_coords, 'z': z_coords}
     except Exception as e:
-        print(f"Error fetching orbit path for {obj_info['name']}: {e}")
+        print(f"Error fetching orbit path for {obj_info['name']}: {e}", flush=True)
         traceback.print_exc()
         return None
 
@@ -758,7 +835,7 @@ def update_status(message):
         message: Status message to display
     """
     # Always print to console for logging
-    print(message)
+    print(message, flush=True)
     
     # Update status display if available
     global status_display, root
@@ -770,7 +847,7 @@ def update_status(message):
                 root.update_idletasks()  # Use update_idletasks instead of update
         except Exception as e:
             # Just print the error, don't try to update the display again
-            print(f"Error updating status display: {e}")
+            print(f"Error updating status display: {e}", flush=True)
 
 def fetch_orbit_path_by_dates(obj_info, start_date, end_date, interval, center_id='@0', id_type=None):
     """
@@ -789,7 +866,7 @@ def fetch_orbit_path_by_dates(obj_info, start_date, end_date, interval, center_i
     """
     # ADD THIS VALIDATION AT THE START
     if start_date >= end_date:
-        print(f"WARNING: Invalid date range for {obj_info['name']}: start {start_date} >= end {end_date}")
+        print(f"WARNING: Invalid date range for {obj_info['name']}: start {start_date} >= end {end_date}", flush=True)
         return None  # Return None for invalid date ranges
 
     # Special case for Planet 9 - don't fetch from Horizons
@@ -1013,7 +1090,7 @@ def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun",
 
             # ADD THIS VALIDATION
             if fetch_start >= fetch_end:
-                print(f"Skipping invalid fetch request for {obj['name']}: {fetch_start} to {fetch_end}")
+                print(f"Skipping invalid fetch request for {obj['name']}: {fetch_start} to {fetch_end}", flush=True)
                 continue            
             
             orbit_key = f"{obj['name']}_{center_object_name}"
@@ -1427,9 +1504,9 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
     """
     # Debug output to verify we're getting the right list of selected objects
     selected_names = [obj['name'] for obj in objects_to_plot]
-    print("\nSelected objects for orbit paths:")
+    print("\nSelected objects for orbit paths:", flush=True)
     for name in selected_names:
-        print(f"  - {name}")
+        print(f"  - {name}", flush=True)
 
     for name in selected_names:
         # Skip objects that are the center
@@ -1453,7 +1530,7 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
             dates = sorted(data_points.keys())
             
             if not dates:
-                print(f"No data points found for {name} relative to {center_object_name}")
+                print(f"No data points found for {name} relative to {center_object_name}", flush=True)
                 continue
                 
             # Reconstruct coordinate arrays
@@ -1475,7 +1552,7 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
                 hover_text = [f"{name} Orbit"] * len(x_coords)
                 orbit_name = f"{name} Orbit"
 
-            print(f"Plotting orbit for {name} relative to {center_object_name} ({len(x_coords)} points)")
+            print(f"Plotting orbit for {name} relative to {center_object_name} ({len(x_coords)} points)", flush=True)
             
             # Get color if color_map is provided
             color = 'white'  # Default color
@@ -1529,6 +1606,139 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
                 )
             )
         else:
-            print(f"No orbit path found for {name} relative to {center_object_name}")
+            print(f"No orbit path found for {name} relative to {center_object_name}", flush=True)
             
     return fig
+
+
+# ============================================================================
+# OSCULATING ELEMENTS FETCHER (Fixed: Column Names & Units)
+# ============================================================================
+
+def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
+    """
+    Query JPL Horizons for osculating orbital elements (Keplerian).
+    Called by osculating_cache_manager.py.
+    
+    Parameters:
+        horizons_id (str): Horizons ID to query (e.g., 'C/2025 N1', '199', '-23')
+        id_type (str): Horizons ID type ('smallbody', 'majorbody', 'id', etc.)
+        date_str (str, optional): Date string in 'YYYY-MM-DD' format (defaults to today)
+    
+    Returns:
+        dict: Orbital elements with metadata
+    
+    Fixes applied:
+    1. Uses astropy.time for Julian Date conversion (fixes TLIST error)
+    2. Handles flexible column names (e.g., 'a' vs 'A', 'incl' vs 'IN')
+    3. Auto-detects and converts KM to AU for Major Bodies
+    4. Uses proper Horizons ID and ID type for unambiguous queries
+    """
+    from astroquery.jplhorizons import Horizons
+    from datetime import datetime
+    from astropy.time import Time
+    
+    # Default to today if no date provided
+    if date_str is None:
+        date_str = datetime.now().strftime('%Y-%m-%d')
+    
+    # ===== ADD THIS ENTIRE BLOCK =====
+    # Determine the correct location/center based on object ID
+    location = '@sun'  # Default for planets, asteroids, comets, spacecraft
+    
+    # Satellites: Extract parent planet from 3-digit ID (e.g., 301 → Earth)
+    if horizons_id.isdigit() and len(horizons_id) == 3:
+        parent_id_map = {
+            '3': '399',   # Earth
+            '4': '499',   # Mars
+            '5': '599',   # Jupiter
+            '6': '699',   # Saturn
+            '7': '799',   # Uranus
+            '8': '899',   # Neptune
+            '9': '999',   # Pluto
+        }
+        first_digit = horizons_id[0]
+        if first_digit in parent_id_map:
+            location = '@' + parent_id_map[first_digit]
+    
+    # Handle Eris/Dysnomia (special case - Dysnomia orbits Eris)
+    elif horizons_id in ['136199', '20136199']:
+        location = '@136199'  # Relative to Eris
+    # ===== END OF NEW BLOCK =====
+
+#    print(f"  [Horizons Query] ID: {horizons_id} | Type: {id_type} | Date: {date_str}")
+    print(f"  [Horizons Query] ID: {horizons_id} | Type: {id_type} | Location: {location} | Date: {date_str}", flush=True)
+    
+    try:
+        # Convert string date to Julian Date to prevent formatting errors
+        dt = Time(date_str)
+        epoch_jd = dt.jd
+        
+        # Define the query with proper ID and ID type
+    #    obj = Horizons(id=horizons_id, id_type=id_type, location='@sun', epochs=epoch_jd)
+        obj = Horizons(id=horizons_id, id_type=id_type, location=location, epochs=epoch_jd)
+        
+        # Fetch ELEMENTS
+        el = obj.elements()
+        
+        if len(el) == 0:
+            raise ValueError(f"No elements returned for {horizons_id}")
+            
+        # Get the first row
+        row = el[0]
+        
+        # --- Helper to safely get column values ---
+        def get_col(candidates):
+            for name in candidates:
+                if name in row.colnames:
+                    return float(row[name])
+            # Debug: Print available columns if key not found
+            print(f"    [DEBUG] Available columns: {row.colnames}", flush=True)
+            raise KeyError(f"Could not find any of {candidates} in Horizons response")
+
+        # --- Extract Values (Handling Name Variations) ---
+        a_val = get_col(['a', 'A'])           # Semi-major axis
+        e_val = get_col(['e', 'EC'])          # Eccentricity
+        i_val = get_col(['incl', 'IN', 'i'])  # Inclination
+        w_val = get_col(['w', 'W', 'omega'])  # Arg of Perihelion
+        om_val = get_col(['Omega', 'OM'])     # Longitude of Ascending Node
+        tp_val = get_col(['Tp_jd', 'Tp', 'TP']) # Time of Perihelion (JD)
+
+        # --- Unit Conversion (KM -> AU) ---
+        # Major bodies (like Mercury) often return 'a' in km (e.g., 5.7e7 km).
+        # We need AU (e.g., 0.387 AU). 1 AU approx 1.496e8 km.
+        # Threshold: If a > 10000, it's definitely meters or km, not AU.
+        
+        KM_TO_AU = 1.0 / 149597870.7
+        
+        if abs(a_val) > 10000: 
+            print(f"    [Unit Conv] converting 'a' from {a_val} (likely km) to AU", flush=True)
+            a_val = a_val * KM_TO_AU
+
+        result = {
+            'a': a_val,
+            'e': e_val,
+            'i': i_val,
+            'omega': w_val,
+            'Omega': om_val,
+            'TP': tp_val,
+            'epoch': f"{date_str} osc.",
+            'solution_date': datetime.now().strftime('%Y-%m-%d'),
+            'horizons_id': str(horizons_id)  # Store the actual ID we queried
+        }
+        
+        # Attempt to add optional data (Perihelion Distance q)
+        try:
+             q_val = get_col(['q', 'QR'])
+             # Apply same unit conversion check for q
+             if abs(q_val) > 10000:
+                 q_val = q_val * KM_TO_AU
+             result['q'] = q_val
+        except KeyError:
+             pass
+        
+        return result
+        
+    except Exception as e:
+        print(f"  [Horizons Error] Could not fetch elements: {e}", flush=True)
+        raise e

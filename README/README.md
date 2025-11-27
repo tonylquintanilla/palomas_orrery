@@ -1,4 +1,6 @@
-# Paloma's Orrery -- Last updated: November 15, 2025
+# Last updated: November 26, 2025
+
+# Paloma's Orrery
 
 An advanced astronomical visualization tool that transforms NASA/ESA data into interactive 3D and 2D visualizations of the solar system and stellar neighborhood.
 
@@ -6,21 +8,17 @@ An advanced astronomical visualization tool that transforms NASA/ESA data into i
 
 Created by Tony Quintanilla with assistance from Claude, ChatGPT, Gemini, and DeepSeek AI assistants.
 
-## Platform
-
-Important: Windows 10/11 only. Not built for macOS or Linux
-
 ## Table of Contents
 
-1.  [Overview](#overview)
-2.  [Quick Start & Installation (Main Gate)](#quick-start--installation-main-gate)
-3.  [For Developers: Installing from GitHub (Side Gate)](#for-developers-installing-from-github-side-gate)
-4.  [Usage](#usage)
-5.  [Features](#features)
-6.  [Architecture](#architecture)
-7.  [Earth System Visualization](#earth-system-visualization)
-8.  [Module Reference](#module-reference)
-9.  [Data Files](#data-files)
+1. [Overview](#overview)
+2. [Quick Start](#quick-start)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Features](#features)
+6. [Architecture](#architecture)
+7. [Earth System Visualization](#earth-system-visualization)
+8. [Module Reference](#module-reference)
+9. [Data Files](#data-files)
 10. [Contributing](#contributing)
 11. [License](#license)
 12. [Contact](#contact)
@@ -35,6 +33,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Interactive 3D solar system with 100+ objects
 - Comet visualization with dual-tail structures (dust and ion tails)
 - Exoplanet system visualization (11 planets in 3 systems including binary stars)
+- Pluto-Charon binary planet visualization with true barycentric orbital mechanics
 - Stellar neighborhood mapping (123,000+ stars)
 - Planetary and solar interior visualizations (with reference-frame independent rendering)
 - HR diagrams and stellar analysis
@@ -42,151 +41,345 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 
 **Resources:**
 
-- [Google Drive Repository](https://drive.google.com/drive/folders/1pt_RZxxxZOIaCxao_iWy17x0GFkwTf6h?usp=sharing)
+- [GitHub Repository](https://github.com/tonylquintanilla/palomas_orrery)
 - [Project Website](https://tonylquintanilla.github.io/palomas_orrery/)
 - [Instagram: @palomas_orrery](https://www.instagram.com/palomas_orrery/)
 - [Video Tutorials](https://www.youtube.com/@tony_quintanilla/featured)
-- [GitHub Repository](https://github.com/tonylquintanilla/palomas_orrery)
-
 - Contact: <tonyquintanilla@gmail.com>
 
----
+## Quick Start
 
-## 🚀 Quick Start & Installation (Main Gate)
-
-Welcome! Since you are reading this file, you have already downloaded and unzipped the project. Your first step is to install the software needed to run it.
-
-Again, Paloma's Orrery has been developed using Python in a Windows-only environment.
-
-### Step 1: Install Python
-
-If you already have Python 3.11, 3.12, or 3.13, you can skip this step.
-
-Python is the programming language that runs Paloma's Orrery.
-
-1.  **Download Python:**
-    * Go to [python.org/downloads](https://www.python.org/downloads/)
-    * Download **Python 3.13.x** (or Python 3.11.x or 3.12.x - all work great)
-    * **Important:** Avoid brand-new Python versions that just came out - wait 1-2 months for libraries to catch up
-
-2.  **Install Python:**
-    * Run the downloaded installer
-    * **✅ CRITICAL:** Check the box that says **"Add Python to PATH"** at the bottom
-    * **✅ Also check:** "Install pip"
-    * Click **"Install Now"**
-    * Wait for installation to complete (2-3 minutes)
-    * Click "Close" when done
-
-3.  **Verify Python is installed:**
-    * **Close any open Command Prompt windows first** (they won't see the new PATH until reopened)
-    * Press `Windows Key`, type `cmd`, and press Enter to open a **new** Command Prompt
-    * Type: `python --version`
-    * You should see: `Python 3.13.x` (or 3.11.x, 3.12.x)
-    * Type: `pip --version`
-    * You should see: `pip 24.x.x from ...`
-    **If you see "python is not recognized":**
-    * Python wasn't added to PATH, OR you're using an old Command Prompt window
-    * Close Command Prompt completely and open a new one
-    * If still not working: Python wasn't added to PATH during installation
-    * Solution: Uninstall Python (Control Panel → Programs), then reinstall and make sure you check "Add Python to PATH"
-
-### Step 2: Install Python Libraries
-
-These are additional tools that Paloma's Orrery needs to run.
-
-1.  **Open a Command Prompt:**
-    * Press `Windows Key`, type `cmd`, and press Enter.
-
-2.  **Navigate to your Project Folder:**
-    * In the Command Prompt, type `cd` followed by the path to your unzipped folder. For example:
-        ```bash
-        cd C:\Users\YourName\Documents\palomas_orrery
-        ```
-    * (Replace `YourName` and the path with your actual folder location).
-    * **Tip:** You can also type `cd ` (with a space) and then drag the `palomas_orrery` folder from File Explorer into the Command Prompt window.
-
-3.  **Install all libraries at once:**
-    * With your Command Prompt in the `palomas_orrery` folder, type this command and press Enter:
-        ```bash
-        pip install -r requirements.txt
-        ```
-    * This reads the `requirements.txt` file and installs everything automatically. This should take 2-5 minutes.
-    * You'll see lines of text scrolling by. It's done when you see "Successfully installed..."
-
-    * Alternative (Manual Method): If the command above fails for any reason, you can install the packages manually. Copy the entire command and paste it into your Command Prompt.
-         ```bash
-         pip install numpy>=1.24.0 pandas>=2.0.0 scipy>=1.11.0 astropy>=5.3.4 astroquery>=0.4.6 plotly>=5.18.0 kaleido==0.2.1 pillow>=10.0.0 matplotlib>=3.7.0 customtkinter>=5.2.0 requests>=2.31.0 beautifulsoup4>=4.12.0 python-dateutil>=2.8.2 pytz>=2023.3 openpyxl>=3.1.0
-         ```
-
-### Step 3: Run Paloma's Orrery
-
-You're all set! The easiest way to start the program is by using the Windows batch file, !_run_palomas_orrery.bat. If you order your files alphabetically by Name, it should be at the top.
-
-1.  **Open your `palomas_orrery` folder** in Windows File Explorer.
-2.  Find the file named **`!_run_palomas_orrery.bat`**.
-3.  **Double-click `!_run_palomas_orrery.bat`** to start the program.
-
-A launcher window will appear, check for Python, and then start the main application.
-
-(Note: Windows may show a security warning indicating "Unknown Publisher". Click "Run" to start the program.)
-
----
-
-## 🔑 For Developers: Installing from GitHub (Side Gate)
-
-This is the "side gate" for developers. This repository contains the most up-to-date **source code**.
-
-**IMPORTANT:** Due to file size limits, the required large data files (cache, etc.) are **not** included in this repository. You must download them separately from the **"Releases"** page.
-
-### Quick Start (for experienced Python users)
+**For experienced Python users:**
 
 ```bash
 # 1. Install Python 3.11-3.13 with PATH enabled
-
-# 2. Clone this repository (the code)
-git clone [https://github.com/tonylquintanilla/palomas_orrery.git](https://github.com/tonylquintanilla/palomas_orrery.git)
+# 2. Clone repository
+git clone https://github.com/tonylquintanilla/palomas_orrery.git
 cd palomas_orrery
 
-# 3. Download the Data Files
-# Go to the "Releases" tab or this link:
-# [https://github.com/tonylquintanilla/palomas_orrery/releases](https://github.com/tonylquintanilla/palomas_orrery/releases)
-# Download the data .zip file from the latest release (e.g., v2.0.0).
-# Unzip the `data/` and `star_data/` folders into this directory.
+# 3. Download cache files from releases page
+# https://github.com/tonylquintanilla/palomas_orrery/releases
+# Extract cache_files_compressed.zip to project folder
 
 # 4. Install dependencies
 pip install -r requirements.txt
 
-# 5. Run the batch file (or the .py script)
-!_run_palomas_orrery.bat
+# 5. Run
+python palomas_orrery.py
 ```
 
----
+**New to Python?** See the [detailed installation guide below Ã¢â€ â€œ](#installation)
+
+## Installation
+
+### Prerequisites
+
+- **Windows 10/11** (Mac/Linux also supported)
+- **Python 3.11 to 3.13** (tested and verified compatible)
+  - As of October 2025, Python 3.13 is recommended
+  - Python 3.14 was just released - wait 1-2 months before using it
+- **Git** (optional but recommended)
+- **520MB free disk space** (includes all cache files and code)
+- **Internet connection** (for initial setup and fetching new objects)
+
+### Step-by-Step Installation Guide for Beginners
+
+This guide assumes you're new to Python and command-line tools. We'll walk through everything!
+
+#### Step 1: Install Git (Optional but Recommended)
+
+Git makes it easy to download and update the project. If you prefer, you can skip this and download a ZIP file instead (see Step 3, Option B).
+
+**To install Git:**
+
+1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
+2. Download the installer for Windows
+3. Run the installer:
+   - **Important:** When you see the screen asking about additional options, **check the box for "Additional icons Ã¢â€ â€™ On the Desktop"**
+   - This creates a handy Git Bash shortcut on your desktop
+   - Click "Next" through the remaining screens (other defaults are fine)
+4. After installation completes, you should see a "Git Bash" icon on your desktop
+5. **Close any open Command Prompt windows** (this is important!)
+6. **Verify Git is installed:**
+   - Press `Windows Key`, type `cmd`, and press Enter to open a **new** Command Prompt
+   - Type: `git --version`
+   - You should see something like `git version 2.43.0`
+   **If you still see "git is not recognized" in Command Prompt:**
+   - The installation might not have fully registered yet
+   - Try opening "Git Bash" from your desktop icon first
+   - In Git Bash, type: `git --version` - this should work
+   - Then close Command Prompt completely, wait 10 seconds, and open a fresh one
+   - Try `git --version` again in the new Command Prompt - it should work now
+   - If it still doesn't work, restart your computer
+
+**What's the difference between Command Prompt and Git Bash?**
+
+- **Command Prompt (cmd):** Windows' standard terminal - you'll use this for running Python
+- **Git Bash:** A Linux-style terminal that comes with Git - useful for Git commands and has Git pre-configured
+- Both work for this project, but Command Prompt is simpler for beginners
+
+**Don't want to use Git?** That's okay! Skip to Step 3, Option B to download as a ZIP file.
+
+#### Step 2: Install Python
+
+Python is the programming language that runs Paloma's Orrery.
+
+1. **Download Python:**
+   - Go to [python.org/downloads](https://www.python.org/downloads/)
+   - Download **Python 3.13.x** (or Python 3.11.x or 3.12.x - all work great)
+   - **Important:** Avoid brand-new Python versions that just came out - wait 1-2 months for libraries to catch up
+
+2. **Install Python:**
+   - Run the downloaded installer
+   - **Ã¢Å“â€¦ CRITICAL:** Check the box that says **"Add Python to PATH"** at the bottom
+   - **Ã¢Å“â€¦ Also check:** "Install pip"
+   - Click **"Install Now"**
+   - Wait for installation to complete (2-3 minutes)
+   - Click "Close" when done
+
+3. **Verify Python is installed:**
+   - **Close any open Command Prompt windows first** (they won't see the new PATH until reopened)
+   - Press `Windows Key`, type `cmd`, and press Enter to open a **new** Command Prompt
+   - Type: `python --version`
+   - You should see: `Python 3.13.x` (or 3.11.x, 3.12.x)
+   - Type: `pip --version`
+   - You should see: `pip 24.x.x from ...`
+   **If you see "python is not recognized":**
+   - Python wasn't added to PATH, OR you're using an old Command Prompt window
+   - Close Command Prompt completely and open a new one
+   - If still not working: Python wasn't added to PATH during installation
+   - Solution: Uninstall Python (Control Panel Ã¢â€ â€™ Programs), then reinstall and make sure you check "Add Python to PATH"
+
+#### Step 3: Download Paloma's Orrery
+
+You have two options: use Git (easier for updates) or download a ZIP file (simpler if you're not familiar with Git).
+
+**Option A - Using Git (Recommended if you installed Git):**
+
+1. **Choose where to save the project:**
+   - Common locations: `C:\Users\YourName\Documents` or `C:\Projects`
+   - For this example, we'll use Documents
+
+2. **Open Command Prompt:**
+   - Press `Windows Key`, type `cmd`, press Enter
+
+3. **Navigate to where you want to save the project:**
+
+   ```bash
+   cd C:\Users\YourName\Documents
+   ```
+
+   (Replace `YourName` with your actual Windows username)
+
+   **Note:** When you see code blocks labeled `bash`, it means these are commands to type in Command Prompt (or Terminal on Mac/Linux). Just type the command and press Enter - don't type the word "bash"!
+
+4. **Download the project:**
+
+   ```bash
+   git clone https://github.com/tonylquintanilla/palomas_orrery.git
+   ```
+
+   This should only take a few seconds (the project itself is small - the large cache files come separately).
+
+   Git will create a new folder called `palomas_orrery` and download all the files into it.
+
+5. **Enter the new project folder:**
+
+   You should still be in your Documents folder. Now navigate into the new `palomas_orrery` folder that Git just created:
+
+   ```bash
+   cd palomas_orrery
+   ```
+
+   **If that doesn't work** (you get "The system cannot find the path specified"):
+   - You may have navigated away from Documents
+   - Use the full path instead:
+  
+   ```bash
+   cd C:\Users\YourName\Documents\palomas_orrery
+   ```
+
+   (Replace `YourName` with your actual Windows username)
+
+   **To verify you're in the right place:**
+   - Type: `dir` and press Enter
+   - You should see files like `palomas_orrery.py`, `requirements.txt`, and many `.py` files
+   - If you don't see these files, you're in the wrong folder
+
+**Option B - Download ZIP (No Git required):**
+
+1. **Download the project:**
+   - Go to [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)
+   - Click the green **"Code"** button (top right of the file list)
+   - Click **"Download ZIP"**
+   - The file `palomas_orrery-main.zip` will download (about 50 MB)
+
+2. **Extract the ZIP file:**
+   - Find the downloaded file (usually in your Downloads folder)
+   - Right-click on `palomas_orrery-main.zip`
+   - Select **"Extract All..."**
+   - Choose where to extract (e.g., `C:\Users\YourName\Documents`)
+   - Click **"Extract"**
+   - Windows will create a folder called `palomas_orrery-main`
+
+3. **Navigate to the folder in Command Prompt:**
+   - Press `Windows Key`, type `cmd`, press Enter
+   - Type:
+  
+   ```bash
+   cd C:\Users\YourName\Documents\palomas_orrery-main
+   ```
+
+   (Adjust the path to wherever you extracted the files)
+
+#### Step 4: Download Cache Files
+
+**These files are required for star visualizations to work!** They contain pre-downloaded astronomical data so you don't have to wait hours fetching it yourself.
+
+1. **Download the cache:**
+   - Go to [github.com/tonylquintanilla/palomas_orrery/releases](https://github.com/tonylquintanilla/palomas_orrery/releases)
+   - Find the latest release (look for v1.0.0 or higher)
+   - Scroll down to **"Assets"**
+   - Click on `cache_files_compressed.zip` to download (117 MB - may take 1-2 minutes)
+   - **Note:** You'll also see "Source code (zip)" and "Source code (tar.gz)" - ignore these, you already have the code from Step 3
+
+2. **Extract cache files to your project folder:**
+   - Find the downloaded `cache_files_compressed.zip` file (usually in your Downloads folder)
+   - **Important:** Don't just click to open it! You need to extract it properly.
+
+   **To extract:**
+   - Right-click (or two-finger tap on trackpad) on the ZIP file
+   - Select **"Extract All..."** from the menu
+   - A window will appear asking where to extract
+   - Click **"Browse..."** and navigate to your **`palomas_orrery` folder** (the main project folder where `palomas_orrery.py` is located)
+   - If you used Option B (ZIP download), your folder might be called `palomas_orrery-main` instead
+   - Click **"Select Folder"**, then click **"Extract"**
+
+   **Alternative method if you prefer:**
+   - Single-click the ZIP file to open it (you'll see the contents)
+   - Press `Ctrl+A` to select all files inside
+   - Press `Ctrl+C` to copy them
+   - Open a new File Explorer window and navigate to your **`palomas_orrery` folder**
+   - Press `Ctrl+V` to paste all the files there
+
+3. **Verify the files are in the right place:**
+   - Open your `palomas_orrery` folder in File Explorer
+   - You should see files like:
+     - `palomas_orrery.py` (the main program)
+     - `star_properties_distance.pkl` (from the cache)
+     - `star_properties_magnitude.pkl` (from the cache)
+     - Various `.vot` files (from the cache)
+     - Many other `.py` files (the program code)
+   - **Everything should be together in one folder** - the cache files and the Python code files should all be in the same `palomas_orrery` directory
+   - If the cache files are in a subfolder, move them up to the main `palomas_orrery` folder
+
+#### Step 5: Install Python Libraries
+
+Python libraries (also called "packages") are additional tools that Paloma's Orrery needs to run. We'll install them all at once.
+
+1. **Make sure you're in the project folder:**
+   - In Command Prompt, type:
+  
+   ```bash
+   cd C:\Users\YourName\Documents\palomas_orrery
+   ```
+
+   (Or `palomas_orrery-main` if you downloaded the ZIP)
+
+2. **Install all libraries at once:**
+
+   **First, try this simple command:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   This reads the `requirements.txt` file and installs everything automatically. This should take 2-5 minutes.
+
+   **If you get an error like "= is not a valid operator. Did you mean == ?":**
+   - There's a typo in the requirements.txt file that needs fixing
+   - Fix it using Notepad:
+     1. Navigate to your `palomas_orrery` folder in File Explorer
+     2. Right-click on `requirements.txt` and select "Open with" Ã¢â€ â€™ "Notepad"
+     3. Find the line that says `kaleido=0.2.1`
+     4. Change the single `=` to double `==` so it reads `kaleido==0.2.1`
+     5. Click File Ã¢â€ â€™ Save, then close Notepad
+     6. Try the `pip install -r requirements.txt` command again
+
+   **If the simple command doesn't work for other reasons, use the manual method:**
+
+   Copy this entire command and paste it into Command Prompt (right-click to paste):
+
+   ```bash
+   pip install numpy>=1.24.0 pandas>=2.0.0 scipy>=1.11.0 astropy>=5.3.4 astroquery>=0.4.6 plotly>=5.18.0 kaleido==0.2.1 pillow>=10.0.0 matplotlib>=3.7.0 customtkinter>=5.2.0 requests>=2.31.0 beautifulsoup4>=4.12.0 python-dateutil>=2.8.2 pytz>=2023.3 openpyxl>=3.1.0
+   ```
+
+   Press Enter and wait. This will take 3-7 minutes depending on your internet speed.
+
+3. **What you'll see during installation:**
+   - Lines of text scrolling by (this is normal!)
+   - "Collecting [package name]..." - downloading the library
+   - "Installing collected packages..." - setting them up
+   - "Successfully installed..." at the end - you're done!
+
+4. **If you see errors:**
+   - **"pip is not recognized":** Python wasn't added to PATH. Reinstall Python with "Add to PATH" checked.
+   - **"Could not install X":** Try installing that specific package separately: `pip install X`
+   - **Permission errors:** Try running Command Prompt as Administrator (right-click cmd Ã¢â€ â€™ "Run as administrator")
+
+#### Step 6: Run Paloma's Orrery
+
+You're almost there! Now let's start the program.
+
+1. **Make sure you're in the project folder:**
+
+   ```bash
+   cd C:\Users\YourName\Documents\palomas_orrery
+   ```
+
+2. **Start the program:**
+
+   ```bash
+   python palomas_orrery.py
+   ```
+
+3. **What to expect:**
+   - Command Prompt will show some loading messages (10-30 seconds)
+   - A new window will appear with the Paloma's Orrery interface
+   - The window has tabs at the top and controls for selecting celestial objects
+
+4. **Important notes:**
+   - **Always use** `python palomas_orrery.py` from Command Prompt to run the program
+   - **Don't** try to run it by double-clicking `palomas_orrery.py` in File Explorer - this may cause crashes
+   - Keep Command Prompt open while using the program - closing it will close Paloma's Orrery
 
 ### Common Installation Issues
 
+For detailed troubleshooting, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md). Here are the most common issues:
+
 **"python is not recognized"**
 
-* **Cause:** Python wasn't added to PATH during installation.
-* **Solution:** Reinstall Python (see Step 1) and make sure you check "Add Python to PATH".
+- Python wasn't added to PATH during installation
+- Solution: Reinstall Python and check "Add Python to PATH"
 
 **"No module named [something]"**
 
-* **Cause:** A required library is missing. You may have missed "Step 2: Install Python Libraries".
-* **Solution:** Open Command Prompt in the project folder and run `pip install [missing-module-name]`, or just run `pip install -r requirements.txt` again.
+- A required library is missing
+- Solution: `pip install [missing-module-name]`
 
-**"Cache files not found" or "FileNotFoundError"**
+**"Cache files not found"**
 
-* **For Google Drive Users:** You may have unzipped the folder incorrectly. Make sure all subfolders (like `data/` and `star_data/`) are in the *same main folder* as `!_run_palomas_orrery.bat`.
-* **For GitHub Users:** You forgot to download the cache. The `git clone` command only downloads the code. You must *also* go to the "Releases" page, download the cache ZIP, and unzip its contents into your project folder.
+- Cache files aren't in the correct location
+- Solution: Make sure PKL and VOT files are in the same folder as `palomas_orrery.py`
 
 ### System Requirements Summary
 
-- **Operating System:** Windows 10/11 only. Not built for macOS or Linux
+- **Operating System:** Windows 10/11, macOS 10.14+, or Linux
 - **Python Version:** 3.11, 3.12, or 3.13 (thoroughly tested)
 - **Memory (RAM):** 2GB minimum, 4GB recommended for large star datasets
 - **Storage:** 520MB free disk space (includes all cache files and Python code)
 - **Internet:** Required for initial download and for querying objects not in cache
-- **Display:** 1280×720 minimum resolution recommended
+- **Display:** 1280Ã—720 minimum resolution recommended
 
 ### Optional: Installing a Code Editor
 
@@ -197,7 +390,7 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 1. Download from [code.visualstudio.com](https://code.visualstudio.com/)
 2. Install with default options
 3. Open VS Code and install the Python extension (search for "Python" in the Extensions panel; View/Extensions)
-4. You can then open your entire `palomas_orrery` folder in VS Code: File â†’ Open Folder
+4. You can then open your entire `palomas_orrery` folder in VS Code: File Ã¢â€ â€™ Open Folder
 
 **Why use a code editor?**
 
@@ -254,9 +447,9 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 
 **Earth System Data:**
 
-1. Look for the green 🌍 indicator next to Earth's shell checkbox
+1. Look for the green ðŸŒÂ indicator next to Earth's shell checkbox
 2. Enable to access climate data visualizations
-3. View the Keeling Curve (CO₂ measurements from 1958-2025)
+3. View the Keeling Curve (COâ‚‚ measurements from 1958-2025)
 4. See [climate_readme.md](climate_readme.md) for complete documentation
 
 ### Advanced Features
@@ -272,6 +465,7 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 - **Heliocentric:** Sun-centered view (default)
 - **Barycentric:** Solar system center of mass
 - **Planet-centered:** View from any planet's perspective
+- **Pluto-Charon Barycenter:** True binary planet view showing both Pluto and Charon orbiting their common center of mass (the only true binary in our solar system!)
 
 **Lagrange Points:**
 
@@ -281,9 +475,9 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 
 **Orbital Markers:**
 
-- Enable apsidal markers to see perihelion/aphelion points for ideal orbits and when actual perihelion dates are available
-- Shows closest/farthest points for objects orbiting the Sun and planets for the actual plotted orbit
-- Includes date and distance information for each marker
+- Enable apsidal markers to see perihelion/aphelion points
+- Shows closest/farthest points from the Sun
+- Includes date information for each marker
 
 **Solar Structure Visualization:**
 
@@ -307,7 +501,7 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 | **Data Source** | Real-time JPL Horizons ephemerides with automatic caching |
 | **Time Range** | Historical and future dates through 2199-12-29 |
 | **Scales** | Inner planets to 100,000 AU Oort cloud visualization |
-| **Reference Frames** | Heliocentric, barycentric, planet-centered views |
+| **Reference Frames** | Heliocentric, barycentric, planet-centered, Pluto-Charon barycenter (binary planet) views |
 | **Orbit Calculation** | Both actual positions and idealized Keplerian orbits |
 | **Caching System** | Intelligent incremental updates with automatic backup |
 
@@ -315,7 +509,7 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 
 - **Systems:** 3 confirmed exoplanet systems (TRAPPIST-1, TOI-1338, Proxima Centauri)
 - **Planets:** 11 exoplanets with accurate Keplerian orbital mechanics
-- **Orbital Mechanics:** Full 6-parameter Keplerian orbits (a, e, i, ω, Ω, M₀) with time evolution
+- **Orbital Mechanics:** Full 6-parameter Keplerian orbits (a, e, i, Ï‰, Î©, Mâ‚€) with time evolution
 - **Binary Stars:** Circumbinary planet support with dual-star orbital dynamics (TOI-1338)
 - **Host Stars:** Temperature-based coloring from cool red M-dwarfs (2,800K) to hot blue stars
 - **Visualization Modes:**
@@ -332,8 +526,8 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 
 - **Dual-Tail Structure:** Scientifically accurate rendering of both comet tail types
   - Dust Tail (Type II): Curved golden/yellow tail from reflected sunlight
-  - Ion Tail (Type I): Straight blue plasma tail from CO⁺ emissions
-  - Green coma from C₂ (dicarbon) fluorescence near nucleus
+  - Ion Tail (Type I): Straight blue plasma tail from COâº emissions
+  - Green coma from Câ‚‚ (dicarbon) fluorescence near nucleus
 - **Astrophotography Colors:** Tail colors match long-exposure photography appearance
   - Dust tails: Whitish-yellow/gold reflecting full visible spectrum (400-700nm)
   - Ion tails: Blue from carbon monoxide ions (400-460nm emission)
@@ -397,7 +591,8 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 |------|-------------|
 | **Orbital Parameter Visualization** | Interactive 3D demonstration of Keplerian elements (inclination, longitude of ascending node, argument of periapsis) showing transformation from perifocal to J2000 Ecliptic frame |
 | **Interactive Eccentricity Demo** | Visual exploration of orbit shapes from circles (e=0) through ellipses, parabolas (e=1), to hyperbolas (e>1) |
-| **Coordinate System Reference Guide** | Comprehensive visualization of J2000 Ecliptic system with detailed axis explanations (+X Vernal Equinox, +Y 90Â° ahead, +Z Ecliptic North) |
+| **Coordinate System Reference Guide** | Comprehensive visualization of J2000 Ecliptic system with detailed axis explanations (+X Vernal Equinox, +Y 90Ã‚Â° ahead, +Z Ecliptic North) |
+| **Pluto-Charon Binary System** | Three-view visualization demonstrating true barycentric orbital mechanics - switch from Pluto-centered to barycenter-centered view to see Pluto's own orbit revealed (like shifting from geocentric to heliocentric thinking!) |
 
 ### Data Sources
 
@@ -405,21 +600,9 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 - [Gaia EDR3](https://www.cosmos.esa.int/web/gaia) - Stellar positions and photometry
 - [Hipparcos](https://www.cosmos.esa.int/web/hipparcos/catalogues) - Bright star catalog
 - [SIMBAD](https://simbad.u-strasbg.fr/simbad/) - Astronomical database
-- [Scripps CO₂ Program](https://scrippsco2.ucsd.edu/) - Mauna Loa atmospheric data
+- [Scripps COâ‚‚ Program](https://scrippsco2.ucsd.edu/) - Mauna Loa atmospheric data
 
 ## Architecture
-
-### System Design
-
-Paloma's Orrery follows a clean 10-layer architecture with three parallel data pipelines (Solar System, Stellar, Earth System) processing different astronomical data through common infrastructure layers.
-
-**For complete architectural documentation:**
-
-- **[MODULE_INDEX.md](MODULE_INDEX.md#system-architecture-overview)** - Layer descriptions and module distribution
-- **[architecture_directory_tree_style.md](architecture_directory_tree_style.md)** - Directory-tree style architecture visualization  
-- **[palomas_orrery_flowchart_v13_vertical.md](palomas_orrery_flowchart_v13_vertical.md)** - Interactive Mermaid flowchart
-
-**Key Insight:** The cache management layer (Layer 3) provides defense-in-depth data protection with validation, atomic saves, backups, and automatic repair mechanisms.
 
 ### Data Flow
 
@@ -447,7 +630,7 @@ Interactive visualizations documenting Earth's changing systems - because **data
 
 **Climate & Atmosphere:**
 
-1. **The Keeling Curve:** Atmospheric CO₂ from Mauna Loa Observatory (1958-2025)
+1. **The Keeling Curve:** Atmospheric COâ‚‚ from Mauna Loa Observatory (1958-2025)
    - Monthly resolution with seasonal variations
    - Clear visualization of 400+ ppm threshold crossing
    - Interactive zoom and data exploration
@@ -514,7 +697,7 @@ See [climate_readme.md](climate_readme.md) for complete technical documentation,
 
 **Data Sources:**
 
-- Scripps CO₂ Program at Mauna Loa Observatory
+- Scripps COâ‚‚ Program at Mauna Loa Observatory
 - NOAA Global Monitoring Laboratory
 - Additional sources as datasets are integrated
 
@@ -568,7 +751,7 @@ The following sections highlight the primary modules organized by function. Use 
 | `stellar_parameters.py` | Temperature, luminosity, and HR calculations |
 | `celestial_coordinates.py` | RA/Dec coordinate system conversions |
 | `stellar_data_patches.py` | Data quality improvements and corrections |
-| `fetch_climate_data.py` | Climate data fetcher (Mauna Loa CO₂) |
+| `fetch_climate_data.py` | Climate data fetcher (Mauna Loa COâ‚‚) |
 
 ### Orbital Calculations
 
@@ -593,40 +776,39 @@ The following sections highlight the primary modules organized by function. Use 
 ### Project Directory Structure
 
 palomas_orrery/
-├── *.py                      # Python source code
-├── !_run_palomas_orrery.bat  # Windows launcher
-├── README/                   # Documentation
-│   ├── README.md
-│   ├── paleoclimate_readme.md
-│   └── climate_readme.md
-├── data/                     # All program data files
-│   ├── orbit_paths.json (~94 MB)
-│   ├── orbit_paths_backup.json
-│   ├── Climate monitoring (automated)
-│   │   ├── co2_mauna_loa_monthly.json
-│   │   ├── temperature_giss_monthly.json
-│   │   ├── arctic_ice_extent_monthly.json
-│   │   └── sea_level_gmsl_monthly.json
-│   ├── Climate monitoring (manual)
-│   │   ├── ocean_ph_hot_monthly.json
-│   │   └── 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
-│   └── Paleoclimate data
-│       ├── epica_co2_800kyr.json
-│       ├── lr04_benthic_stack.json
-│       ├── temp12k_allmethods_percentiles.csv
-│       └── 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
-├── star_data/                # Protected stellar cache (Module 4 - Nov 2025)
-│   ├── star_properties_distance.pkl (2.6 MB)
-│   ├── star_properties_magnitude.pkl (31.8 MB)
-│   ├── hipparcos_data_distance.vot (899 KB)
-│   ├── hipparcos_data_magnitude.vot (193 KB)
-│   ├── gaia_data_distance.vot (9.8 MB)
-│   ├── gaia_data_magnitude.vot (291 MB)
-│   └── *_metadata.json files
-└── reports/                  # Generated analysis reports (Module 3 - Nov 2025)
-    ├── last_plot_report.json
-    ├── last_plot_data.json
-    └── report_*.json (archived with timestamps)
+â”œâ”€â”€ *.py                    # Python source code
+â”œâ”€â”€ README/                 # Documentation
+â”‚   â”œâ”€â”€ README.md
+â”‚   â”œâ”€â”€ paleoclimate_readme.md
+â”‚   â””â”€â”€ climate_readme.md
+â”œâ”€â”€ data/                   # All program data files
+â”‚   â”œâ”€â”€ orbit_paths.json (~94 MB)
+â”‚   â”œâ”€â”€ orbit_paths_backup.json
+â”‚   â”œâ”€â”€ Climate monitoring (automated)
+â”‚   â”‚   â”œâ”€â”€ co2_mauna_loa_monthly.json
+â”‚   â”‚   â”œâ”€â”€ temperature_giss_monthly.json
+â”‚   â”‚   â”œâ”€â”€ arctic_ice_extent_monthly.json
+â”‚   â”‚   â””â”€â”€ sea_level_gmsl_monthly.json
+â”‚   â”œâ”€â”€ Climate monitoring (manual)
+â”‚   â”‚   â”œâ”€â”€ ocean_ph_hot_monthly.json
+â”‚   â”‚   â””â”€â”€ 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
+â”‚   â””â”€â”€ Paleoclimate data
+â”‚       â”œâ”€â”€ epica_co2_800kyr.json
+â”‚       â”œâ”€â”€ lr04_benthic_stack.json
+â”‚       â”œâ”€â”€ temp12k_allmethods_percentiles.csv
+â”‚       â””â”€â”€ 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
+â”œâ”€â”€ star_data/              # Protected stellar cache (Module 4 - Nov 2025)
+â”‚   â”œâ”€â”€ star_properties_distance.pkl (2.6 MB)
+â”‚   â”œâ”€â”€ star_properties_magnitude.pkl (31.8 MB)
+â”‚   â”œâ”€â”€ hipparcos_data_distance.vot (899 KB)
+â”‚   â”œâ”€â”€ hipparcos_data_magnitude.vot (193 KB)
+â”‚   â”œâ”€â”€ gaia_data_distance.vot (9.8 MB)
+â”‚   â”œâ”€â”€ gaia_data_magnitude.vot (291 MB)
+â”‚   â””â”€â”€ *_metadata.json files
+â””â”€â”€ reports/                # Generated analysis reports (Module 3 - Nov 2025)
+    â”œâ”€â”€ last_plot_report.json
+    â”œâ”€â”€ last_plot_data.json
+    â””â”€â”€ report_*.json (archived with timestamps)
 
 ### Cache Files (Included in Release)
 
@@ -651,7 +833,7 @@ palomas_orrery/
 - `satellite_ephemerides.json` - Satellite orbital elements and physical properties
 - `*_metadata.json` - Cache validation metadata and timestamps
 - `orrery_config.json` - User preferences and display settings
-- `co2_mauna_loa_monthly.json` - Monthly atmospheric CO₂ measurements (1958-2025)
+- `co2_mauna_loa_monthly.json` - Monthly atmospheric COâ‚‚ measurements (1958-2025)
 
 ### Generated Reports
 
@@ -667,7 +849,7 @@ palomas_orrery/
 | Magnitude PKL | 32 MB | Stars to mag 9.0 |
 | VOTable files | 1-291 MB each | Raw catalog data |
 | Orbit cache | 96+ MB | Planetary ephemerides |
-| Climate data | <1 MB | CO₂ measurements |
+| Climate data | <1 MB | COâ‚‚ measurements |
 
 ## Contributing
 
@@ -680,6 +862,7 @@ Contributions are welcome! This project is maintained by a single developer but 
 - Improved stellar classification algorithms
 - Exoplanetary system support
 - Performance optimizations for large datasets
+- Cross-platform testing (Mac, Linux)
 - Documentation improvements
 - Climate data integration (temperature, sea level, ice extent)
 
@@ -713,7 +896,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)  
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)  
 
-**Last Updated:** November 2025
+**Last Updated:** November 2025 (v1.3 - Pluto-Charon Binary System)
 
 ---
 
@@ -723,7 +906,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - [ESA Gaia Mission](https://www.cosmos.esa.int/web/gaia) for stellar data
 - [VizieR catalog service](https://vizier.cds.unistra.fr/) (CDS, Strasbourg)
 - [SIMBAD astronomical database](https://simbad.u-strasbg.fr/simbad/)
-- [Scripps CO₂ Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
+- [Scripps COâ‚‚ Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
 - [Astropy](https://www.astropy.org/) and [Astroquery](https://astroquery.readthedocs.io/) development teams
 - [Plotly](https://plotly.com/) visualization library
 - AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/), [DeepSeek](https://www.deepseek.com/)

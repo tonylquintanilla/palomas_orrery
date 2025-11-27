@@ -1130,11 +1130,26 @@ INFO = {
 
         'Galatea': 'Horizons: 806. Irregularly shaped, with an expected icy and grayish appearance, thought to shepherd the Adams ring arc.',
 
-        'Pluto': 'Horizons: 999. Once considered the ninth planet, now classified as a dwarf planet.\n'
-        '* Pluto-centered: do not select Pluto; visualize shells at 0.1 AU.\n'
-        '* Heliocentric: select Pluto with or without shells.\n'
-        '* Missions: New Horizons; Pluto Orbiter and Probe (possible).\n\n'
-        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+        'Pluto': 
+        '***SET MANUAL SCALE TO .002 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n'
+        '***VISUALIZE PLUTO\'S FULL STRUCTURE WITH SHELLS AT 0.1 AU***\n\n'
+        'Horizons: 999. Dwarf planet in a TRUE BINARY system with Charon.\n\n'
+        'THREE VIEW MODES:\n'
+        '• Heliocentric (Sun-centered): Select Pluto to see its orbit around the Sun.\n'
+        '• Pluto-centered: Do NOT select Pluto; shows moons orbiting Pluto.\n'
+        '   Like geocentric view - convenient but hides real mechanics.\n'
+        '• Barycenter-centered: Select "Pluto-Charon Barycenter" as center.\n'
+        '  and select Pluto and its moons to see TRUE orbits.\n'
+        '   • Shows TRUE orbital mechanics - both Pluto AND Charon orbit in a dance\n'
+        '     around their common center of mass (barycenter)! This is why Pluto-Charon is\n'
+        '     called a binary planet: the barycenter is OUTSIDE Pluto.\n\n'
+        'BINARY PLANET PHYSICS:\n'
+        '• Barycenter: 2,035 km from Pluto\'s center (outside its 1,188 km radius!)\n'
+        '• Pluto orbits barycenter: ~2,100 km radius\n'
+        '• Charon orbits barycenter: ~17,500 km radius (same period: 6.387 days)\n'
+        '• Compare: Earth-Moon barycenter is inside Earth - not a true binary.\n\n'
+        'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.\n\n'
+        'HTML: ~22 MB per frame with all shells/moons.',        
 
         'Charon': 'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.',
 

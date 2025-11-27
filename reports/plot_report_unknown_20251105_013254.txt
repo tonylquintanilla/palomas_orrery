@@ -1,0 +1,68 @@
+==============================================
+PLOT DATA REPORT
+==============================================
+Generated: 2025-11-05T01:32:23.842956
+Plot Mode: magnitude
+Limiting Magnitude: 1.0
+
+----------------------------------------------------
+1. BASIC PLOT STATISTICS
+----------------------------------------------------
+Total Stars in Dataset: 15
+
+Catalog Distribution:
+  Hipparcos: 15 (100.0%)
+
+----------------------------------------------------
+2. DATA COMPLETENESS METRICS
+----------------------------------------------------
+
+Temperature Data:
+  Valid: 15 (100.0%)
+  Missing: 0
+
+Luminosity Data:
+  Valid: 15 (100.0%)
+  Missing: 0
+
+----------------------------------------------------
+6. OBJECT TYPE ANALYSIS
+----------------------------------------------------
+
+Analysis Summary: 100.0% objects typed. dominated by binary/multiple systems (60.0%). moderate diversity (h'=2.36). 1 high-interest research targets
+
+Total objects: 15
+Objects with type data: 15 (100.0%)
+Unique object types: 7
+
+Diversity Metrics:
+  - Diversity Score: 18/100
+  - Shannon Entropy: 2.359
+  - Simpson Index: 0.810
+
+Object Categories:
+  - Binary/Multiple Systems: 9 (60.0%)
+  - Variable Stars: 5 (33.3%)
+  - Normal Stars: 1 (6.7%)
+
+Most Common Types:
+  1. Variable Star: 5 (33.3%)
+  2. Spectroscopic Binary Star. A typ...: 5 (33.3%)
+  3. Be Star. Spectral type of B. Emi...: 1 (6.7%)
+  4. Blue Supergiant Star: 1 (6.7%)
+  5. Red Supergiant Star: 1 (6.7%)
+
+High-Interest Research Targets:
+  - Be Star. Spectral type of B...: 1 (interest: 7/10)
+
+----------------------------------------------------
+7. WARNINGS AND RECOMMENDATIONS
+----------------------------------------------------
+
+INFO: Data from single catalog only (Hipparcos)
+  -> Results may be biased to catalog selection criteria
+
+==============================================
+END OF REPORT
+==============================================
+

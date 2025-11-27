@@ -1,0 +1,13 @@
+{
+  "catalog": "gaia",
+  "mode": "distance",
+  "limit_value": 5.0,
+  "min_parallax_mas": 652.312,
+  "query_date": "2025-11-05 21:53:28",
+  "entry_count": 1,
+  "file_version": "2.0",
+  "actual_min_distance": null,
+  "actual_max_distance": null,
+  "actual_min_magnitude": null,
+  "actual_max_magnitude": null
+}

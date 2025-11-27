@@ -1,0 +1,108 @@
+{
+  "metadata": {
+    "mode": "magnitude",
+    "limit_value": 0.0,
+    "total_stars": 4,
+    "generation_time": "2025-11-06T00:33:29.215249",
+    "generated_by": "visualization_script"
+  },
+  "sections": {
+    "basic_stats": {
+      "total_stars": 4,
+      "mode": "magnitude",
+      "limit_value": 0.0,
+      "catalog_distribution": {
+        "Hipparcos": 4
+      }
+    },
+    "completeness": {
+      "temperature": {
+        "valid": 4,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "luminosity": {
+        "valid": 4,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "plottable": {
+        "count": 4,
+        "percentage": 100.0
+      }
+    },
+    "quality": {
+      "anomalies": [],
+      "statistics": {
+        "temperature": {
+          "min": 4250.69369488885,
+          "max": 10381.76635368606,
+          "mean": 6908.388229635151,
+          "median": 6500.546434982847
+        }
+      }
+    },
+    "catalog_coverage": {
+      "sources": {
+        "Hipparcos": {
+          "count": 4,
+          "percentage": 100.0
+        }
+      },
+      "magnitude_stats": {
+        "min": -1.440000057220459,
+        "max": -0.009999999776482582,
+        "mean": -0.5299999713897705
+      }
+    },
+    "processing": {
+      "total": 0
+    },
+    "object_analysis": {
+      "total_count": 4,
+      "typed_count": 4,
+      "category_counts": {
+        "Variable Stars": 0,
+        "Binary/Multiple Systems": 3,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 1,
+        "Unknown": 0
+      },
+      "category_percentages": {
+        "Variable Stars": 0,
+        "Binary/Multiple Systems": 75.0,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 25.0,
+        "Unknown": 0
+      },
+      "type_counts": {
+        "Spectroscopic Binary Star. A type of binary star system<br> that can only be identified by analyzing its light spectrum.": 2,
+        "Star": 1,
+        "Red Giant Branch Star. Low- to intermediate-mass stars, like our Sun.<br> RGB stars have already finished fusing hydrogen into helium in their cores.<br> This marks the end of their main-sequence lifetime. They have a non-fusing)<br> helium core surrounded by a shell where hydrogen fusion continues. When the<br> core hydrogen is depleted, the core contracts and heats up, and the star's<br> outer layers expand dramatically. This expansion causes the star's surface<br> temperature to cool, radiating a reddish color. The star becomes much more<br> luminous overall due to its increased size. This process moves the star off<br> the main sequence and onto the subgiant branch and then into the red giant<br> Eventually, the core becomes hot and dense enough to ignite helium fusion.<br> This leads to horizontal or the asymptotic giant branch. Ultimately, the<br> star's core will become a white dwarf, a small, dense remnant.": 1
+      },
+      "notable_objects": [],
+      "diversity_score": 34,
+      "shannon_entropy": 1.5,
+      "simpson_index": 0.833,
+      "research_targets": [],
+      "summary": "100.0% objects typed. dominated by binary/multiple systems (75.0%). low diversity (h'=1.50)",
+      "timestamp": "2025-11-06T00:33:29.218370"
+    },
+    "warnings": [
+      {
+        "level": "warning",
+        "message": "Limited dataset with only 4 stars",
+        "recommendation": "Consider expanding search criteria for richer visualization"
+      },
+      {
+        "level": "info",
+        "message": "Data from single catalog only (Hipparcos)",
+        "recommendation": "Results may be biased to catalog selection criteria"
+      }
+    ]
+  }
+}

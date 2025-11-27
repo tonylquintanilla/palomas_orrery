@@ -83,7 +83,7 @@ def get_apsidal_terms(center_body):
 
 def calculate_orbital_angle_shift(ideal_pos, actual_pos):
     """
-    Calculate the angular separation between ideal and actual positions.
+    Calculate the angular separation between Keplerian and actual positions.
     Both positions should be dictionaries with 'x', 'y', 'z' keys.
     """
     import numpy as np
@@ -123,20 +123,31 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
     actual_r = np.sqrt(actual_pos['x']**2 + actual_pos['y']**2 + actual_pos['z']**2)
     
     hover_text = f"<b>{obj_name} {marker_type}</b><br>"
-    hover_text += f"Date: {date}<br>"
+    hover_text += f"Date: {date}<br>"        
     hover_text += f"Distance from {center_body}: {actual_r:.6f} AU<br>"
+    
+    # DEBUG: Log all conditions for perturbation analysis
+    print(f"[HOVER DEBUG] {obj_name} {marker_type}:", flush=True)
+    print(f"  ideal_pos is not None: {ideal_pos is not None}", flush=True)
+    print(f"  params is not None: {params is not None}", flush=True)
+    if params:
+        print(f"  'epoch' in params: {'epoch' in params}", flush=True)
+        if 'epoch' in params:
+            print(f"  epoch value: {params['epoch']}", flush=True)
     
     # Add perturbation analysis if we have ideal position
     if ideal_pos and params and 'epoch' in params:
         angle_deg, delta_r, ideal_r, actual_r = calculate_orbital_angle_shift(ideal_pos, actual_pos)
+        print(f"  angle_deg: {angle_deg:.3f}°", flush=True)
         
         # Determine if this is significant
-        if angle_deg > 0.5:  # More than 0.5 degrees
+
+        # Determine if this is significant
+        epoch = params.get('epoch', 'unknown')
+        
+        if angle_deg > 0.5:  # Significant perturbation detected
             hover_text += "<br><b>Perturbation Analysis:</b><br>"
-            
-            # Add epoch information
-            epoch = params.get('epoch', 'unknown')
-            hover_text += f"Ideal orbit epoch: {epoch}<br>"
+            hover_text += f"Keplerian orbit epoch: {epoch}<br>"
             
             # Add angular shift
             if angle_deg > 10:
@@ -144,10 +155,10 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
             elif angle_deg > 5:
                 hover_text += f"Angular shift: {angle_deg:.1f}° (moderate)<br>"
             else:
-                hover_text += f"Angular shift: {angle_deg:.1f}° (low)<br>"
+                hover_text += f"Angular shift: {angle_deg:.3f}° (low)<br>"
             
             # Add distance comparison
-            hover_text += f"Ideal distance: {ideal_r:.6f} AU<br>"
+            hover_text += f"Keplerian distance: {ideal_r:.6f} AU<br>"
             hover_text += f"Actual distance: {actual_r:.6f} AU<br>"
             hover_text += f"Difference: {delta_r:.6f} AU<br>"
             
@@ -168,14 +179,25 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
             if params.get('e', 0) > 0.9:
                 hover_text += "<br><i>High eccentricity makes this object<br>"
                 hover_text += "particularly sensitive to perturbations</i><br>"
-    
+            
+        else:  # Low deviation at this point
+            hover_text += "<br><b>Perturbation Analysis:</b><br>"
+            hover_text += f"Keplerian orbit epoch: {epoch}<br>"
+            hover_text += f"Angular shift: {angle_deg:.3f}° (low)<br>"
+            hover_text += f"Keplerian distance: {ideal_r:.6f} AU<br>"
+            hover_text += f"Actual distance: {actual_r:.6f} AU<br>"
+            hover_text += f"Difference: {delta_r:.6f} AU<br>"
+            hover_text += "<i>Note: Low deviation expected near epoch.<br>"
+            hover_text += "Osculating orbit is calibrated to match<br>"
+            hover_text += "position & velocity at this moment.</i><br>"
+
     return hover_text
 
 def add_actual_apsidal_markers_enhanced(fig, obj_name, params, date_range, positions_dict, 
                                        color_map, center_body='Sun', is_satellite=False,
                                        ideal_apsides=None, filter_by_date_range=True):
     """
-    Enhanced version that compares actual vs ideal positions.
+    Enhanced version that compares actual vs Keplerian positions.
     Maintains all original parameters for backward compatibility.
     
     Parameters:
@@ -187,25 +209,35 @@ def add_actual_apsidal_markers_enhanced(fig, obj_name, params, date_range, posit
         color_map: Function to get color for object
         center_body: Name of central body (Sun, planet, etc.)
         is_satellite: Boolean indicating if this is a satellite
-        ideal_apsides: Dictionary with 'periapsis' and 'apoapsis' ideal positions
+        ideal_apsides: Dictionary with 'periapsis' and 'apoapsis' Keplerian positions
         filter_by_date_range: If False, plot all apsidal dates in positions_dict
             regardless of date_range (useful for future apsides)
     """
     from datetime import datetime
     import plotly.graph_objects as go
+      
+    # Get parent-specific terminology (same as ideal markers)
+#    near_term, far_term = get_apsidal_terms(center_body)
+#    near_label = f"Actual {near_term}"
+#    far_label = f"Actual {far_term}"
+
+    # Get parent-specific terminology (same as ideal markers)
+    near_term, far_term = get_apsidal_terms(center_body)
     
-    # Determine labels based on whether it's a satellite
-    if is_satellite:
-        near_label = "Actual Perigee"
-        far_label = "Actual Apogee"
-        near_dates = params.get('perigee_dates', [])
-        far_dates = params.get('apogee_dates', [])
+    # Add epoch to label if available
+    epoch = params.get('epoch', '')
+    if epoch:
+        epoch_suffix = f" (Epoch: {epoch})"
     else:
-        near_label = "Actual Perihelion"
-        far_label = "Actual Aphelion"
-        near_dates = params.get('perihelion_dates', [])
-        far_dates = params.get('aphelion_dates', [])
+        epoch_suffix = ""
     
+    near_label = f"Keplerian {near_term}{epoch_suffix}"
+    far_label = f"Keplerian {far_term}{epoch_suffix}"
+
+    # Use same key names for ALL objects
+    near_dates = params.get('perihelion_dates', [])
+    far_dates = params.get('aphelion_dates', [])
+
     # Convert date strings to datetime objects for comparison
     near_dates_dt = []
     for d in near_dates:
@@ -559,7 +591,7 @@ def estimate_hyperbolic_perihelion_date(current_position, q, e, date):
             return "Near/Past perihelion"
             
     except Exception as e:
-        print(f"Error estimating hyperbolic perihelion: {e}")
+        print(f"Error estimating hyperbolic perihelion: {e}", flush=True)
         return "Approaching"
 
 def compute_apsidal_dates_from_tp(obj_name, params, current_date=None):
@@ -577,17 +609,17 @@ def compute_apsidal_dates_from_tp(obj_name, params, current_date=None):
         tp_jd = params['TP']
         tp_time = Time(tp_jd, format='jd')
         next_perihelion = tp_time.datetime
-        print(f"  {obj_name}: Using TP for perihelion: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"  {obj_name}: Using TP for perihelion: {next_perihelion.strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
     
     # Handle aphelion from Tapo
     if 'Tapo' in params:
         tapo_jd = params['Tapo']
         tapo_time = Time(tapo_jd, format='jd')
         next_aphelion = tapo_time.datetime
-        print(f"  {obj_name}: Using Tapo for aphelion: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"  {obj_name}: Using Tapo for aphelion: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
     elif params.get('e', 0) < 1:
         # Only print warning for elliptical orbits (which should have aphelion)
-        print(f"  {obj_name}: No Tapo provided - actual aphelion marker will not be plotted")
+        print(f"  {obj_name}: No Tapo provided - actual aphelion marker will not be plotted", flush=True)
     
     return next_perihelion, next_aphelion
 
@@ -687,7 +719,7 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
                     marker=dict(
                         size=8,
                         color='white',                        
-                        symbol='square-open',  # Solid square for actual
+                        symbol='square-open',  
                     ),
 
                     name=f"{obj_name} Actual {near_label}",
@@ -760,11 +792,14 @@ def fetch_positions_for_apsidal_dates(obj_id, params, date_range, center_id='Sun
 #    start_date, end_date = date_range
     
     # Get all apsidal dates
-    if is_satellite:
-        all_dates = params.get('perigee_dates', []) + params.get('apogee_dates', [])
-    else:
-        all_dates = params.get('perihelion_dates', []) + params.get('aphelion_dates', [])
+#    if is_satellite:
+#        all_dates = params.get('perigee_dates', []) + params.get('apogee_dates', [])
+#    else:
+#        all_dates = params.get('perihelion_dates', []) + params.get('aphelion_dates', [])
     
+    # Use perihelion/aphelion for all objects (satellites and planets)
+    all_dates = params.get('perihelion_dates', []) + params.get('aphelion_dates', [])
+
     for date_str in all_dates:
         try:
             # Try to parse with time first, then fall back to date-only
@@ -779,10 +814,10 @@ def fetch_positions_for_apsidal_dates(obj_id, params, date_range, center_id='Sun
                 # Store with date-only key for compatibility
                 date_key = date_obj.strftime('%Y-%m-%d')
                 positions[date_key] = pos_data
-                print(f"    Fetched position for {date_str}")
+                print(f"    Fetched position for {date_str}", flush=True)
 
         except Exception as e:
-            print(f"    Could not fetch position for {date_str}: {e}")                
+            print(f"    Could not fetch position for {date_str}: {e}", flush=True)                
     
     return positions
 
@@ -996,7 +1031,7 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
             orbital_period_days = get_orbital_period_days(body_name, a)
         except ValueError:
             # If body not found and no semi-major axis, use default
-            print(f"Warning: Using Kepler's law for unknown body {body_name}")
+            print(f"Warning: Using Kepler's law for unknown body {body_name}", flush=True)
             orbital_period_days = 365.25 * np.sqrt(abs(a)**3)
 
         # Convert current position to mean anomaly
@@ -1014,7 +1049,7 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
         return perihelion_date, apohelion_date
         
     except Exception as ex:
-        print(f"Warning: Could not calculate apsidal dates for {body_name}: {ex}")
+        print(f"Warning: Could not calculate apsidal dates for {body_name}: {ex}", flush=True)
         return None, None
 
 
@@ -1107,7 +1142,7 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         print(f"WARNING: Could not calculate {near_term} date for {obj_name}", flush=True)
     
     # Use proper terminology for this central body
-    label = f"Ideal {near_term}"
+    label = f"Keplerian {near_term}"
     
     # Create hover text with all information
     # Ensure q is properly formatted
@@ -1224,7 +1259,7 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         print(f"WARNING: Could not calculate {far_term} date for {obj_name}", flush=True)
     
     # Use proper terminology for this central body
-    label = f"Ideal {far_term}"
+    label = f"Keplerian {far_term}"
     
     # Create hover text
     # Ensure Q is properly formatted
@@ -1351,8 +1386,8 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
             mode='markers',
             marker=dict(
                 size=8,
-        #        color=color_map(obj_name),
-                color='white',
+                color=color_map(obj_name),
+        #        color='white',                
                 symbol='square-open',  # Different from apsidal markers (square-open)
         #        line=dict(width=2, color='white')  # White outline for visibility
             ),

@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "mode": "distance",
+    "limit_value": 10.0,
+    "total_stars": 11,
+    "generation_time": "2025-09-19T07:48:03.750541",
+    "generated_by": "visualization_script"
+  },
+  "sections": {
+    "basic_stats": {
+      "total_stars": 11,
+      "mode": "distance",
+      "limit_value": 10.0,
+      "catalog_distribution": {
+        "Hipparcos_bright": 3,
+        "Hipparcos_mid": 0,
+        "Gaia_mid": 0,
+        "Gaia_faint": 8,
+        "total": 11
+      }
+    },
+    "completeness": {
+      "temperature": {
+        "valid": 11,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "luminosity": {
+        "valid": 11,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "plottable": {
+        "count": 11,
+        "percentage": 100.0
+      }
+    },
+    "quality": {
+      "anomalies": [],
+      "statistics": {
+        "temperature": {
+          "min": 2833.3333333333335,
+          "max": 12045.640483553836,
+          "mean": 5131.901673539353,
+          "median": 3567.660764442069
+        }
+      }
+    },
+    "catalog_coverage": {
+      "sources": {
+        "Gaia": {
+          "count": 8,
+          "percentage": 72.7
+        },
+        "Hipparcos": {
+          "count": 3,
+          "percentage": 27.3
+        }
+      },
+      "magnitude_stats": {
+        "min": -1.440000057220459,
+        "max": 13.633510047625446,
+        "mean": 7.874590797709056
+      }
+    },
+    "processing": {
+      "total": 1.1612999439239502
+    },
+    "object_analysis": {
+      "total_count": 11,
+      "typed_count": 11,
+      "category_counts": {
+        "Variable Stars": 7,
+        "Binary/Multiple Systems": 4,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 0,
+        "Unknown": 0
+      },
+      "category_percentages": {
+        "Variable Stars": 63.64,
+        "Binary/Multiple Systems": 36.36,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 0,
+        "Unknown": 0
+      },
+      "type_counts": {
+        "Eruptive Variable Star": 6,
+        "Spectroscopic Binary Star. A type of binary star system<br> that can only be identified by analyzing its light spectrum.": 2,
+        "High Proper-Motion Star": 1,
+        "White Dwarf": 1,
+        "Variable Star": 1
+      },
+      "notable_objects": [],
+      "diversity_score": 10,
+      "shannon_entropy": 1.868,
+      "simpson_index": 0.709,
+      "research_targets": [],
+      "summary": "100.0% objects typed. dominated by variable stars (63.6%). moderate diversity (h'=1.87)",
+      "timestamp": "2025-09-19T07:48:03.752476"
+    },
+    "warnings": [
+      {
+        "level": "ok",
+        "message": "No warnings - data quality appears good"
+      }
+    ]
+  }
+}

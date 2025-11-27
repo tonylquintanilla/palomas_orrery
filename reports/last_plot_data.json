@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-11-09T13:44:25.149855",
+  "mode": "distance",
+  "limit_value": 20.0,
+  "total_stars": 99,
+  "temp_valid": 96,
+  "temp_missing": 3,
+  "lum_valid": 99,
+  "lum_missing": 0,
+  "catalog_counts": {
+    "Gaia": 90,
+    "Hipparcos": 9
+  },
+  "magnitude_stats": {
+    "min": -1.440000057220459,
+    "max": 22.122843383828055,
+    "mean": 10.300089355249668,
+    "median": 10.241681112101361,
+    "std": 4.977693523173987
+  },
+  "counts_dict": {
+    "hip_bright_count": 5,
+    "hip_mid_count": 4,
+    "gaia_mid_count": 0,
+    "gaia_faint_count": 90,
+    "total_stars": 99,
+    "plottable_count": 96,
+    "missing_temp_only": 3,
+    "missing_lum_only": 0,
+    "estimation_results": {
+      "initial_missing_temp": 3,
+      "recovered_temp": 96,
+      "final_missing_temp": 3,
+      "initial_missing_lum": 0,
+      "recovered_lum": 99,
+      "final_missing_lum": 0,
+      "bright_star_estimates": 0
+    },
+    "source_counts": {
+      "bv_matched": 65,
+      "bv_only": 10,
+      "spectral_type_hot": 0,
+      "spectral_type_cool": 5,
+      "spectral_type_only": 12,
+      "spectral_type_disagreement": 4,
+      "none": 3
+    }
+  },
+  "processing_times": {
+    "total": 3.9068427085876465
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "mode": "magnitude",
+    "limit_value": 1.0,
+    "total_stars": 15,
+    "generation_time": "2025-11-05T01:32:23.842956",
+    "generated_by": "visualization_script"
+  },
+  "sections": {
+    "basic_stats": {
+      "total_stars": 15,
+      "mode": "magnitude",
+      "limit_value": 1.0,
+      "catalog_distribution": {
+        "Hipparcos": 15
+      }
+    },
+    "completeness": {
+      "temperature": {
+        "valid": 15,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "luminosity": {
+        "valid": 15,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "plottable": {
+        "count": 15,
+        "percentage": 100.0
+      }
+    },
+    "quality": {
+      "anomalies": [
+        {
+          "type": "parallax_uncertainty",
+          "description": "1 stars with parallax error > 20%",
+          "severity": "warning"
+        }
+      ],
+      "statistics": {
+        "temperature": {
+          "min": 3368.086769470249,
+          "max": 28888.88888888889,
+          "mean": 11830.666264694695,
+          "median": 8011.383319447137
+        }
+      }
+    },
+    "catalog_coverage": {
+      "sources": {
+        "Hipparcos": {
+          "count": 15,
+          "percentage": 100.0
+        }
+      },
+      "magnitude_stats": {
+        "min": -1.440000057220459,
+        "max": 0.9800000190734863,
+        "mean": 0.23066666722297668
+      }
+    },
+    "processing": {
+      "total": 0
+    },
+    "object_analysis": {
+      "total_count": 15,
+      "typed_count": 15,
+      "category_counts": {
+        "Variable Stars": 5,
+        "Binary/Multiple Systems": 9,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 1,
+        "Unknown": 0
+      },
+      "category_percentages": {
+        "Variable Stars": 33.33,
+        "Binary/Multiple Systems": 60.0,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 6.67,
+        "Unknown": 0
+      },
+      "type_counts": {
+        "Variable Star": 5,
+        "Spectroscopic Binary Star. A type of binary star system<br> that can only be identified by analyzing its light spectrum.": 5,
+        "Be Star. Spectral type of B. Emission lines in its spectrum<br> indicate the presence of hot, glowing gas around the star.": 1,
+        "Blue Supergiant Star": 1,
+        "Red Supergiant Star": 1,
+        "Star": 1,
+        "Red Giant Branch Star. Low- to intermediate-mass stars, like our Sun.<br> RGB stars have already finished fusing hydrogen into helium in their cores.<br> This marks the end of their main-sequence lifetime. They have a non-fusing)<br> helium core surrounded by a shell where hydrogen fusion continues. When the<br> core hydrogen is depleted, the core contracts and heats up, and the star's<br> outer layers expand dramatically. This expansion causes the star's surface<br> temperature to cool, radiating a reddish color. The star becomes much more<br> luminous overall due to its increased size. This process moves the star off<br> the main sequence and onto the subgiant branch and then into the red giant<br> Eventually, the core becomes hot and dense enough to ignite helium fusion.<br> This leads to horizontal or the asymptotic giant branch. Ultimately, the<br> star's core will become a white dwarf, a small, dense remnant.": 1
+      },
+      "notable_objects": [],
+      "diversity_score": 18,
+      "shannon_entropy": 2.359,
+      "simpson_index": 0.81,
+      "research_targets": [
+        {
+          "type": "Be Star. Spectral type of B. Emission lines in its spectrum<br> indicate the presence of hot, glowing gas around the star.",
+          "count": 1,
+          "interest_score": 7
+        }
+      ],
+      "summary": "100.0% objects typed. dominated by binary/multiple systems (60.0%). moderate diversity (h'=2.36). 1 high-interest research targets",
+      "timestamp": "2025-11-05T01:32:23.861976"
+    },
+    "warnings": [
+      {
+        "level": "info",
+        "message": "Data from single catalog only (Hipparcos)",
+        "recommendation": "Results may be biased to catalog selection criteria"
+      }
+    ]
+  }
+}

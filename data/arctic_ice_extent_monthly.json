@@ -1,0 +1,3389 @@
+{
+  "metadata": {
+    "dataset_name": "arctic_sea_ice_extent",
+    "description": "Arctic sea ice extent from satellite observations (monthly data)",
+    "source": {
+      "organization": "National Snow and Ice Data Center (NSIDC)",
+      "url": "https://nsidc.org/data/seaice_index/",
+      "data_url": "https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_by_Year_G02135_v4.0.xlsx",
+      "citation": "Fetterer, F., K. Knowles, W. N. Meier, M. Savoie, A. K. Windnagel, and T. Stafford. 2025. Sea Ice Index, Version 4. Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center. doi:10.7265/a98x-0f50"
+    },
+    "cached_date": "2025-11-04T23:26:09.675197",
+    "record_count": 560,
+    "temporal_range": {
+      "start": "1979-01",
+      "end": "2025-10"
+    },
+    "units": "million km\u00b2",
+    "measurement_method": "Satellite passive microwave observations (SMMR, SSM/I, SSMIS)",
+    "baseline": "Sea ice extent from 1979-present",
+    "version": "V4.0",
+    "format": "Excel (XLSX) parsed to JSON",
+    "migration_note": "NSIDC migrated from V3 (CSV/FTP) to V4 (Excel/HTTPS) in December 2023",
+    "license": "Public domain - U.S. Government data",
+    "threat_status": "Dataset downgraded to \"Basic\" service level; NSIDC facing funding constraints (2025)",
+    "preservation_priority": "CRITICAL - 47-year continuous satellite record, shows dramatic climate change"
+  },
+  "data": [
+    {
+      "year": 1979,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 15.41
+    },
+    {
+      "year": 1979,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 16.18
+    },
+    {
+      "year": 1979,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 16.34
+    },
+    {
+      "year": 1979,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.45
+    },
+    {
+      "year": 1979,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.86
+    },
+    {
+      "year": 1979,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.53
+    },
+    {
+      "year": 1979,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.31
+    },
+    {
+      "year": 1979,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 8.04
+    },
+    {
+      "year": 1979,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.05
+    },
+    {
+      "year": 1979,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.75
+    },
+    {
+      "year": 1979,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.94
+    },
+    {
+      "year": 1979,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.34
+    },
+    {
+      "year": 1980,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.86
+    },
+    {
+      "year": 1980,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.96
+    },
+    {
+      "year": 1980,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 16.04
+    },
+    {
+      "year": 1980,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.43
+    },
+    {
+      "year": 1980,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.79
+    },
+    {
+      "year": 1980,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.21
+    },
+    {
+      "year": 1980,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.1
+    },
+    {
+      "year": 1980,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.98
+    },
+    {
+      "year": 1980,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.67
+    },
+    {
+      "year": 1980,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.18
+    },
+    {
+      "year": 1980,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.38
+    },
+    {
+      "year": 1980,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.59
+    },
+    {
+      "year": 1981,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.91
+    },
+    {
+      "year": 1981,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.6
+    },
+    {
+      "year": 1981,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.63
+    },
+    {
+      "year": 1981,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.01
+    },
+    {
+      "year": 1981,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.8
+    },
+    {
+      "year": 1981,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.43
+    },
+    {
+      "year": 1981,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.27
+    },
+    {
+      "year": 1981,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.84
+    },
+    {
+      "year": 1981,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.14
+    },
+    {
+      "year": 1981,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.86
+    },
+    {
+      "year": 1981,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.93
+    },
+    {
+      "year": 1981,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.34
+    },
+    {
+      "year": 1982,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 15.18
+    },
+    {
+      "year": 1982,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.97
+    },
+    {
+      "year": 1982,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 16.04
+    },
+    {
+      "year": 1982,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.47
+    },
+    {
+      "year": 1982,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.97
+    },
+    {
+      "year": 1982,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.48
+    },
+    {
+      "year": 1982,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.37
+    },
+    {
+      "year": 1982,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 8.14
+    },
+    {
+      "year": 1982,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.3
+    },
+    {
+      "year": 1982,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.42
+    },
+    {
+      "year": 1982,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.63
+    },
+    {
+      "year": 1982,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.64
+    },
+    {
+      "year": 1983,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.94
+    },
+    {
+      "year": 1983,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 16.01
+    },
+    {
+      "year": 1983,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 16.09
+    },
+    {
+      "year": 1983,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.17
+    },
+    {
+      "year": 1983,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.49
+    },
+    {
+      "year": 1983,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.3
+    },
+    {
+      "year": 1983,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.57
+    },
+    {
+      "year": 1983,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 8.19
+    },
+    {
+      "year": 1983,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.39
+    },
+    {
+      "year": 1983,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.33
+    },
+    {
+      "year": 1983,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.46
+    },
+    {
+      "year": 1983,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.3
+    },
+    {
+      "year": 1984,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.47
+    },
+    {
+      "year": 1984,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.3
+    },
+    {
+      "year": 1984,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.58
+    },
+    {
+      "year": 1984,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.02
+    },
+    {
+      "year": 1984,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.58
+    },
+    {
+      "year": 1984,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.15
+    },
+    {
+      "year": 1984,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.98
+    },
+    {
+      "year": 1984,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.77
+    },
+    {
+      "year": 1984,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.8
+    },
+    {
+      "year": 1984,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.56
+    },
+    {
+      "year": 1984,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.84
+    },
+    {
+      "year": 1984,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.99
+    },
+    {
+      "year": 1985,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.72
+    },
+    {
+      "year": 1985,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.47
+    },
+    {
+      "year": 1985,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.89
+    },
+    {
+      "year": 1985,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.36
+    },
+    {
+      "year": 1985,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 14.07
+    },
+    {
+      "year": 1985,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.22
+    },
+    {
+      "year": 1985,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.74
+    },
+    {
+      "year": 1985,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.4
+    },
+    {
+      "year": 1985,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.7
+    },
+    {
+      "year": 1985,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.55
+    },
+    {
+      "year": 1985,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.03
+    },
+    {
+      "year": 1985,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.05
+    },
+    {
+      "year": 1986,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.89
+    },
+    {
+      "year": 1986,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.79
+    },
+    {
+      "year": 1986,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.91
+    },
+    {
+      "year": 1986,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.06
+    },
+    {
+      "year": 1986,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.38
+    },
+    {
+      "year": 1986,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.98
+    },
+    {
+      "year": 1986,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.15
+    },
+    {
+      "year": 1986,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.98
+    },
+    {
+      "year": 1986,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.41
+    },
+    {
+      "year": 1986,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.48
+    },
+    {
+      "year": 1986,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.45
+    },
+    {
+      "year": 1986,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.22
+    },
+    {
+      "year": 1987,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.97
+    },
+    {
+      "year": 1987,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 16.05
+    },
+    {
+      "year": 1987,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.82
+    },
+    {
+      "year": 1987,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.21
+    },
+    {
+      "year": 1987,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.74
+    },
+    {
+      "year": 1987,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.49
+    },
+    {
+      "year": 1987,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.33
+    },
+    {
+      "year": 1987,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.63
+    },
+    {
+      "year": 1987,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.28
+    },
+    {
+      "year": 1987,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.05
+    },
+    {
+      "year": 1987,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.22
+    },
+    {
+      "year": 1988,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.58
+    },
+    {
+      "year": 1988,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.96
+    },
+    {
+      "year": 1988,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.12
+    },
+    {
+      "year": 1988,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.56
+    },
+    {
+      "year": 1988,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.94
+    },
+    {
+      "year": 1988,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.81
+    },
+    {
+      "year": 1988,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.89
+    },
+    {
+      "year": 1988,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.37
+    },
+    {
+      "year": 1988,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.13
+    },
+    {
+      "year": 1988,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.33
+    },
+    {
+      "year": 1988,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.63
+    },
+    {
+      "year": 1989,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.96
+    },
+    {
+      "year": 1989,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.49
+    },
+    {
+      "year": 1989,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.42
+    },
+    {
+      "year": 1989,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.33
+    },
+    {
+      "year": 1989,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.04
+    },
+    {
+      "year": 1989,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.24
+    },
+    {
+      "year": 1989,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.13
+    },
+    {
+      "year": 1989,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.88
+    },
+    {
+      "year": 1989,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.01
+    },
+    {
+      "year": 1989,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.83
+    },
+    {
+      "year": 1989,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.12
+    },
+    {
+      "year": 1989,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.39
+    },
+    {
+      "year": 1990,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.78
+    },
+    {
+      "year": 1990,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.58
+    },
+    {
+      "year": 1990,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.87
+    },
+    {
+      "year": 1990,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.65
+    },
+    {
+      "year": 1990,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.23
+    },
+    {
+      "year": 1990,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.64
+    },
+    {
+      "year": 1990,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.25
+    },
+    {
+      "year": 1990,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.8
+    },
+    {
+      "year": 1990,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.14
+    },
+    {
+      "year": 1990,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.48
+    },
+    {
+      "year": 1990,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.07
+    },
+    {
+      "year": 1990,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.11
+    },
+    {
+      "year": 1991,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.36
+    },
+    {
+      "year": 1991,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.25
+    },
+    {
+      "year": 1991,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.42
+    },
+    {
+      "year": 1991,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.86
+    },
+    {
+      "year": 1991,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.47
+    },
+    {
+      "year": 1991,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.11
+    },
+    {
+      "year": 1991,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.51
+    },
+    {
+      "year": 1991,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.42
+    },
+    {
+      "year": 1991,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.47
+    },
+    {
+      "year": 1991,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.54
+    },
+    {
+      "year": 1991,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.88
+    },
+    {
+      "year": 1991,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.95
+    },
+    {
+      "year": 1992,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.64
+    },
+    {
+      "year": 1992,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.46
+    },
+    {
+      "year": 1992,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.48
+    },
+    {
+      "year": 1992,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.68
+    },
+    {
+      "year": 1992,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.22
+    },
+    {
+      "year": 1992,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.15
+    },
+    {
+      "year": 1992,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.32
+    },
+    {
+      "year": 1992,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.92
+    },
+    {
+      "year": 1992,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.47
+    },
+    {
+      "year": 1992,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.32
+    },
+    {
+      "year": 1992,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.38
+    },
+    {
+      "year": 1992,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.41
+    },
+    {
+      "year": 1993,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.9
+    },
+    {
+      "year": 1993,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.69
+    },
+    {
+      "year": 1993,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.81
+    },
+    {
+      "year": 1993,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.08
+    },
+    {
+      "year": 1993,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.37
+    },
+    {
+      "year": 1993,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.87
+    },
+    {
+      "year": 1993,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.48
+    },
+    {
+      "year": 1993,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.33
+    },
+    {
+      "year": 1993,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.4
+    },
+    {
+      "year": 1993,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.79
+    },
+    {
+      "year": 1993,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.32
+    },
+    {
+      "year": 1993,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.32
+    },
+    {
+      "year": 1994,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.73
+    },
+    {
+      "year": 1994,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.56
+    },
+    {
+      "year": 1994,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.55
+    },
+    {
+      "year": 1994,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.89
+    },
+    {
+      "year": 1994,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.62
+    },
+    {
+      "year": 1994,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.02
+    },
+    {
+      "year": 1994,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.93
+    },
+    {
+      "year": 1994,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.64
+    },
+    {
+      "year": 1994,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.14
+    },
+    {
+      "year": 1994,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.91
+    },
+    {
+      "year": 1994,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 11.12
+    },
+    {
+      "year": 1994,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.27
+    },
+    {
+      "year": 1995,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.59
+    },
+    {
+      "year": 1995,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.23
+    },
+    {
+      "year": 1995,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.26
+    },
+    {
+      "year": 1995,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.45
+    },
+    {
+      "year": 1995,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.97
+    },
+    {
+      "year": 1995,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.44
+    },
+    {
+      "year": 1995,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.99
+    },
+    {
+      "year": 1995,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.74
+    },
+    {
+      "year": 1995,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.08
+    },
+    {
+      "year": 1995,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.83
+    },
+    {
+      "year": 1995,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.76
+    },
+    {
+      "year": 1995,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.92
+    },
+    {
+      "year": 1996,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.18
+    },
+    {
+      "year": 1996,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.15
+    },
+    {
+      "year": 1996,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.12
+    },
+    {
+      "year": 1996,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.22
+    },
+    {
+      "year": 1996,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.09
+    },
+    {
+      "year": 1996,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 12.08
+    },
+    {
+      "year": 1996,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 10.16
+    },
+    {
+      "year": 1996,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 8.18
+    },
+    {
+      "year": 1996,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 7.58
+    },
+    {
+      "year": 1996,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 9.16
+    },
+    {
+      "year": 1996,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.4
+    },
+    {
+      "year": 1996,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.86
+    },
+    {
+      "year": 1997,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.42
+    },
+    {
+      "year": 1997,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.44
+    },
+    {
+      "year": 1997,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.47
+    },
+    {
+      "year": 1997,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.56
+    },
+    {
+      "year": 1997,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.18
+    },
+    {
+      "year": 1997,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.74
+    },
+    {
+      "year": 1997,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.41
+    },
+    {
+      "year": 1997,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.29
+    },
+    {
+      "year": 1997,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.69
+    },
+    {
+      "year": 1997,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.34
+    },
+    {
+      "year": 1997,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.68
+    },
+    {
+      "year": 1997,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 13.08
+    },
+    {
+      "year": 1998,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.72
+    },
+    {
+      "year": 1998,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.75
+    },
+    {
+      "year": 1998,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.6
+    },
+    {
+      "year": 1998,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.89
+    },
+    {
+      "year": 1998,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.59
+    },
+    {
+      "year": 1998,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.71
+    },
+    {
+      "year": 1998,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.41
+    },
+    {
+      "year": 1998,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.51
+    },
+    {
+      "year": 1998,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.54
+    },
+    {
+      "year": 1998,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.45
+    },
+    {
+      "year": 1998,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.44
+    },
+    {
+      "year": 1998,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.76
+    },
+    {
+      "year": 1999,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.36
+    },
+    {
+      "year": 1999,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.31
+    },
+    {
+      "year": 1999,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.4
+    },
+    {
+      "year": 1999,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 15.08
+    },
+    {
+      "year": 1999,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.75
+    },
+    {
+      "year": 1999,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.78
+    },
+    {
+      "year": 1999,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.49
+    },
+    {
+      "year": 1999,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.23
+    },
+    {
+      "year": 1999,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.12
+    },
+    {
+      "year": 1999,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.6
+    },
+    {
+      "year": 1999,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.8
+    },
+    {
+      "year": 1999,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.64
+    },
+    {
+      "year": 2000,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.22
+    },
+    {
+      "year": 2000,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.14
+    },
+    {
+      "year": 2000,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.22
+    },
+    {
+      "year": 2000,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.56
+    },
+    {
+      "year": 2000,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.15
+    },
+    {
+      "year": 2000,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.66
+    },
+    {
+      "year": 2000,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.51
+    },
+    {
+      "year": 2000,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.17
+    },
+    {
+      "year": 2000,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.25
+    },
+    {
+      "year": 2000,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.38
+    },
+    {
+      "year": 2000,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.32
+    },
+    {
+      "year": 2000,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.64
+    },
+    {
+      "year": 2001,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.2
+    },
+    {
+      "year": 2001,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.21
+    },
+    {
+      "year": 2001,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.52
+    },
+    {
+      "year": 2001,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.86
+    },
+    {
+      "year": 2001,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.51
+    },
+    {
+      "year": 2001,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.46
+    },
+    {
+      "year": 2001,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.07
+    },
+    {
+      "year": 2001,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 7.46
+    },
+    {
+      "year": 2001,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.73
+    },
+    {
+      "year": 2001,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.3
+    },
+    {
+      "year": 2001,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.66
+    },
+    {
+      "year": 2001,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.49
+    },
+    {
+      "year": 2002,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.27
+    },
+    {
+      "year": 2002,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.34
+    },
+    {
+      "year": 2002,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.35
+    },
+    {
+      "year": 2002,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.3
+    },
+    {
+      "year": 2002,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.97
+    },
+    {
+      "year": 2002,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.58
+    },
+    {
+      "year": 2002,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.27
+    },
+    {
+      "year": 2002,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.6
+    },
+    {
+      "year": 2002,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 5.83
+    },
+    {
+      "year": 2002,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 8.16
+    },
+    {
+      "year": 2002,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.34
+    },
+    {
+      "year": 2002,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.61
+    },
+    {
+      "year": 2003,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.39
+    },
+    {
+      "year": 2003,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 15.19
+    },
+    {
+      "year": 2003,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.48
+    },
+    {
+      "year": 2003,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.51
+    },
+    {
+      "year": 2003,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.02
+    },
+    {
+      "year": 2003,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.6
+    },
+    {
+      "year": 2003,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.21
+    },
+    {
+      "year": 2003,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.94
+    },
+    {
+      "year": 2003,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 6.12
+    },
+    {
+      "year": 2003,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.85
+    },
+    {
+      "year": 2003,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.12
+    },
+    {
+      "year": 2003,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.59
+    },
+    {
+      "year": 2004,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 14.03
+    },
+    {
+      "year": 2004,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.91
+    },
+    {
+      "year": 2004,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.99
+    },
+    {
+      "year": 2004,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.99
+    },
+    {
+      "year": 2004,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.56
+    },
+    {
+      "year": 2004,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.45
+    },
+    {
+      "year": 2004,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 9.43
+    },
+    {
+      "year": 2004,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.86
+    },
+    {
+      "year": 2004,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 5.98
+    },
+    {
+      "year": 2004,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.92
+    },
+    {
+      "year": 2004,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.34
+    },
+    {
+      "year": 2004,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.55
+    },
+    {
+      "year": 2005,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.66
+    },
+    {
+      "year": 2005,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.37
+    },
+    {
+      "year": 2005,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.69
+    },
+    {
+      "year": 2005,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.09
+    },
+    {
+      "year": 2005,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.91
+    },
+    {
+      "year": 2005,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.16
+    },
+    {
+      "year": 2005,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.65
+    },
+    {
+      "year": 2005,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.3
+    },
+    {
+      "year": 2005,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 5.5
+    },
+    {
+      "year": 2005,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.35
+    },
+    {
+      "year": 2005,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.22
+    },
+    {
+      "year": 2005,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.23
+    },
+    {
+      "year": 2006,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.47
+    },
+    {
+      "year": 2006,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.32
+    },
+    {
+      "year": 2006,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.42
+    },
+    {
+      "year": 2006,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.91
+    },
+    {
+      "year": 2006,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.52
+    },
+    {
+      "year": 2006,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.92
+    },
+    {
+      "year": 2006,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.46
+    },
+    {
+      "year": 2006,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.5
+    },
+    {
+      "year": 2006,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 5.86
+    },
+    {
+      "year": 2006,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.54
+    },
+    {
+      "year": 2006,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.66
+    },
+    {
+      "year": 2006,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.96
+    },
+    {
+      "year": 2007,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.7
+    },
+    {
+      "year": 2007,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.51
+    },
+    {
+      "year": 2007,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.54
+    },
+    {
+      "year": 2007,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.85
+    },
+    {
+      "year": 2007,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.78
+    },
+    {
+      "year": 2007,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.22
+    },
+    {
+      "year": 2007,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.94
+    },
+    {
+      "year": 2007,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.34
+    },
+    {
+      "year": 2007,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.27
+    },
+    {
+      "year": 2007,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.04
+    },
+    {
+      "year": 2007,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.76
+    },
+    {
+      "year": 2007,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.03
+    },
+    {
+      "year": 2008,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.89
+    },
+    {
+      "year": 2008,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.95
+    },
+    {
+      "year": 2008,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.18
+    },
+    {
+      "year": 2008,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.35
+    },
+    {
+      "year": 2008,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.97
+    },
+    {
+      "year": 2008,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.21
+    },
+    {
+      "year": 2008,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.68
+    },
+    {
+      "year": 2008,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.91
+    },
+    {
+      "year": 2008,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.69
+    },
+    {
+      "year": 2008,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.35
+    },
+    {
+      "year": 2008,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.34
+    },
+    {
+      "year": 2008,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.36
+    },
+    {
+      "year": 2009,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.91
+    },
+    {
+      "year": 2009,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.81
+    },
+    {
+      "year": 2009,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.98
+    },
+    {
+      "year": 2009,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.5
+    },
+    {
+      "year": 2009,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.19
+    },
+    {
+      "year": 2009,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.32
+    },
+    {
+      "year": 2009,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.46
+    },
+    {
+      "year": 2009,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.14
+    },
+    {
+      "year": 2009,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 5.26
+    },
+    {
+      "year": 2009,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.92
+    },
+    {
+      "year": 2009,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.77
+    },
+    {
+      "year": 2009,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.2
+    },
+    {
+      "year": 2010,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.74
+    },
+    {
+      "year": 2010,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.58
+    },
+    {
+      "year": 2010,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.14
+    },
+    {
+      "year": 2010,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.66
+    },
+    {
+      "year": 2010,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.87
+    },
+    {
+      "year": 2010,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.59
+    },
+    {
+      "year": 2010,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.07
+    },
+    {
+      "year": 2010,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.88
+    },
+    {
+      "year": 2010,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.87
+    },
+    {
+      "year": 2010,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.98
+    },
+    {
+      "year": 2010,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.61
+    },
+    {
+      "year": 2010,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.83
+    },
+    {
+      "year": 2011,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.46
+    },
+    {
+      "year": 2011,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.36
+    },
+    {
+      "year": 2011,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.55
+    },
+    {
+      "year": 2011,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.11
+    },
+    {
+      "year": 2011,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.68
+    },
+    {
+      "year": 2011,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.75
+    },
+    {
+      "year": 2011,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.72
+    },
+    {
+      "year": 2011,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.5
+    },
+    {
+      "year": 2011,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.56
+    },
+    {
+      "year": 2011,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.46
+    },
+    {
+      "year": 2011,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.77
+    },
+    {
+      "year": 2011,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.15
+    },
+    {
+      "year": 2012,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.73
+    },
+    {
+      "year": 2012,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.55
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.2
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.63
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.01
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.67
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.67
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 4.72
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 3.57
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 5.89
+    },
+    {
+      "year": 2012,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.39
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.01
+    },
+    {
+      "year": 2013,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.7
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.72
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 15.03
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.3
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 13.0
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.36
+    },
+    {
+      "year": 2013,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.13
+    },
+    {
+      "year": 2013,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.01
+    },
+    {
+      "year": 2013,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 5.21
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.46
+    },
+    {
+      "year": 2013,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.94
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.18
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.65
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.42
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.76
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.09
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.7
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 11.03
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.11
+    },
+    {
+      "year": 2014,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 6.08
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 5.22
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 7.23
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 10.12
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.35
+    },
+    {
+      "year": 2015,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.6
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.4
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.37
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.89
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.47
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.88
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.38
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.6
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.62
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.97
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.85
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.04
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.46
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.2
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.4
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.68
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 11.92
+    },
+    {
+      "year": 2016,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.41
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.94
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.37
+    },
+    {
+      "year": 2016,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.53
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.08
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 8.66
+    },
+    {
+      "year": 2016,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.46
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.19
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.12
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.29
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.75
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.63
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.76
+    },
+    {
+      "year": 2017,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.94
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.48
+    },
+    {
+      "year": 2017,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.82
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.77
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.49
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.74
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.08
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 13.97
+    },
+    {
+      "year": 2018,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.3
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.7
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.23
+    },
+    {
+      "year": 2018,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.78
+    },
+    {
+      "year": 2018,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.27
+    },
+    {
+      "year": 2018,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.62
+    },
+    {
+      "year": 2018,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.79
+    },
+    {
+      "year": 2018,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.13
+    },
+    {
+      "year": 2018,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.82
+    },
+    {
+      "year": 2018,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.86
+    },
+    {
+      "year": 2019,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.57
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.39
+    },
+    {
+      "year": 2019,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.57
+    },
+    {
+      "year": 2019,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.43
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.19
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.59
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.59
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.03
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.36
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 5.74
+    },
+    {
+      "year": 2019,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.35
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.9
+    },
+    {
+      "year": 2020,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.64
+    },
+    {
+      "year": 2020,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.64
+    },
+    {
+      "year": 2020,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.73
+    },
+    {
+      "year": 2020,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.62
+    },
+    {
+      "year": 2020,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.34
+    },
+    {
+      "year": 2020,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.59
+    },
+    {
+      "year": 2020,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.29
+    },
+    {
+      "year": 2020,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.07
+    },
+    {
+      "year": 2020,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.0
+    },
+    {
+      "year": 2020,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 5.33
+    },
+    {
+      "year": 2020,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 8.98
+    },
+    {
+      "year": 2020,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.73
+    },
+    {
+      "year": 2021,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.5
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.39
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.66
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.79
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.68
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.77
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.65
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.71
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.95
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.82
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.83
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 12.15
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.87
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.61
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.59
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.99
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.88
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.88
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.29
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.95
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.9
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.66
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.72
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.89
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.36
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.19
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.43
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.92
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.82
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.99
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 8.21
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.51
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.38
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.41
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.68
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.98
+    },
+    {
+      "year": 2024,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.92
+    },
+    {
+      "year": 2024,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 14.61
+    },
+    {
+      "year": 2024,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.87
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 14.04
+    },
+    {
+      "year": 2024,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.73
+    },
+    {
+      "year": 2024,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.85
+    },
+    {
+      "year": 2024,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.87
+    },
+    {
+      "year": 2024,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.13
+    },
+    {
+      "year": 2024,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.35
+    },
+    {
+      "year": 2024,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 5.93
+    },
+    {
+      "year": 2024,
+      "month": 11,
+      "month_name": "November",
+      "extent_million_km2": 9.15
+    },
+    {
+      "year": 2024,
+      "month": 12,
+      "month_name": "December",
+      "extent_million_km2": 11.41
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.11
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "month_name": "February",
+      "extent_million_km2": 13.74
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "month_name": "March",
+      "extent_million_km2": 14.12
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "month_name": "April",
+      "extent_million_km2": 13.83
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "month_name": "May",
+      "extent_million_km2": 12.49
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "month_name": "June",
+      "extent_million_km2": 10.4
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "month_name": "July",
+      "extent_million_km2": 7.66
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "month_name": "August",
+      "extent_million_km2": 5.39
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "month_name": "September",
+      "extent_million_km2": 4.75
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "month_name": "October",
+      "extent_million_km2": 6.32
+    }
+  ]
+}

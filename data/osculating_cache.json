@@ -1,0 +1,1052 @@
+{
+  "_metadata": {
+    "cache_version": "1.0",
+    "created": "2025-11-19T00:19:43.829823",
+    "description": "Auto-updated cache of osculating orbital elements from JPL Horizons",
+    "note": "Elements can be copied to idealized_orbits.py for manual backup"
+  },
+  "Mercury": {
+    "elements": {
+      "a": 0.3870976797465114,
+      "e": 0.205646452098598,
+      "i": 7.003435947746738,
+      "omega": 29.19870363470051,
+      "Omega": 48.29886296031125,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.976701497
+    },
+    "metadata": {
+      "fetched": "2025-11-23T21:38:38.987201",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "199",
+      "display_name": "Mercury",
+      "refresh_interval_days": 7
+    }
+  },
+  "Venus": {
+    "elements": {
+      "a": 0.7233283932485881,
+      "e": 0.006781156311007498,
+      "i": 3.394398672136299,
+      "omega": 54.7965645268597,
+      "Omega": 76.60714454982796,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2460950.865872837
+    },
+    "metadata": {
+      "fetched": "2025-11-19T10:58:44.455539",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "299",
+      "display_name": "Venus",
+      "refresh_interval_days": 30
+    }
+  },
+  "Earth": {
+    "elements": {
+      "a": 1.000829755476275,
+      "e": 0.01716370545440338,
+      "i": 0.002932375551635058,
+      "omega": 303.4562046009678,
+      "Omega": 157.4900084972377,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2461042.219362564
+    },
+    "metadata": {
+      "fetched": "2025-11-19T21:46:07.172252",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "399",
+      "display_name": "Earth",
+      "refresh_interval_days": 30
+    }
+  },
+  "Mars": {
+    "elements": {
+      "a": 1.523679010869277,
+      "e": 0.09348658356708267,
+      "i": 1.84750396159993,
+      "omega": 286.6304915891267,
+      "Omega": 49.4835701724921,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2461125.81575729
+    },
+    "metadata": {
+      "fetched": "2025-11-19T01:09:29.169359",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "499",
+      "refresh_interval_days": 30
+    }
+  },
+  "Pluto": {
+    "elements": {
+      "a": 39.63375606559131,
+      "e": 0.2505533812571034,
+      "i": 17.36785524787575,
+      "omega": 114.2544346931308,
+      "Omega": 110.4846023623535,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2447902.083724303
+    },
+    "metadata": {
+      "fetched": "2025-11-19T11:01:27.356350",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "999",
+      "display_name": "Pluto",
+      "refresh_interval_days": 30
+    }
+  },
+  "Apophis": {
+    "elements": {
+      "a": 0.9223802428087367,
+      "e": 0.1911664369820553,
+      "i": 3.340959279612172,
+      "omega": 126.6728632048394,
+      "Omega": 203.8996757936686,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2461042.918268677
+    },
+    "metadata": {
+      "fetched": "2025-11-19T10:58:49.317807",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "2004 MN4",
+      "display_name": "Apophis",
+      "refresh_interval_days": 30
+    }
+  },
+  "2024 YR4": {
+    "elements": {
+      "a": 2.515837587269246,
+      "e": 0.6614737512847282,
+      "i": 3.40816098686493,
+      "omega": 134.3659934531092,
+      "Omega": 271.3638157463567,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2460636.893381335
+    },
+    "metadata": {
+      "fetched": "2025-11-19T10:59:33.493911",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "2024 YR4",
+      "display_name": "2024 YR4",
+      "refresh_interval_days": 7
+    }
+  },
+  "Uranus": {
+    "elements": {
+      "a": 19.2858516179904,
+      "e": 0.04669692919146819,
+      "i": 0.7729815868661819,
+      "omega": 91.22993219604774,
+      "Omega": 74.01256446790252,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2469677.915562707
+    },
+    "metadata": {
+      "fetched": "2025-11-19T11:00:17.465310",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "799",
+      "display_name": "Uranus",
+      "refresh_interval_days": 30
+    }
+  },
+  "Chariklo": {
+    "elements": {
+      "a": 15.74002169013283,
+      "e": 0.1702396392593915,
+      "i": 23.43029338425828,
+      "omega": 241.2247307209777,
+      "Omega": 300.4752069947158,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2452956.475159506
+    },
+    "metadata": {
+      "fetched": "2025-11-19T11:00:19.808639",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "1997 CU26",
+      "display_name": "Chariklo",
+      "refresh_interval_days": 30
+    }
+  },
+  "Eris": {
+    "elements": {
+      "a": 67.99698918617695,
+      "e": 0.4369508882657686,
+      "i": 43.86836773298936,
+      "omega": 150.7320692459139,
+      "Omega": 36.02739665017921,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2545510.27876841
+    },
+    "metadata": {
+      "fetched": "2025-11-19T23:15:09.464491",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "2003 UB313",
+      "display_name": "Eris",
+      "refresh_interval_days": 30
+    }
+  },
+  "Sedna": {
+    "elements": {
+      "a": 549.5910584729946,
+      "e": 0.8613094933113745,
+      "i": 11.9259249165382,
+      "omega": 311.0089632796224,
+      "Omega": 144.478373870352,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2479203.83631858
+    },
+    "metadata": {
+      "fetched": "2025-11-19T11:01:32.596590",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "2003 VB12",
+      "display_name": "Sedna",
+      "refresh_interval_days": 30
+    }
+  },
+  "Halley": {
+    "elements": {
+      "a": 17.85894021250601,
+      "e": 0.9679416334908967,
+      "i": 162.1575707718558,
+      "omega": 112.421159803461,
+      "Omega": 59.52285186721399,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2474052.410750431
+    },
+    "metadata": {
+      "fetched": "2025-11-19T11:02:35.089580",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "90000030",
+      "display_name": "Halley",
+      "refresh_interval_days": 30
+    }
+  },
+  "Lemmon": {
+    "elements": {
+      "a": 117.3507277287372,
+      "e": 0.99548454381891,
+      "i": 143.6637568024263,
+      "omega": 132.9630169322232,
+      "Omega": 108.0980473561072,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2460988.038093367
+    },
+    "metadata": {
+      "fetched": "2025-11-26T09:40:45.935756",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "C/2025 A6",
+      "display_name": "Lemmon",
+      "refresh_interval_days": 30
+    }
+  },
+  "SWAN": {
+    "elements": {
+      "a": 84.51414372187473,
+      "e": 0.9940354000519928,
+      "i": 4.47282296121381,
+      "omega": 308.3515832676258,
+      "Omega": 335.331202235872,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2460931.342336306
+    },
+    "metadata": {
+      "fetched": "2025-11-26T09:40:47.276655",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "C/2025 R2",
+      "display_name": "SWAN",
+      "refresh_interval_days": 30
+    }
+  },
+  "Borisov": {
+    "elements": {
+      "a": -56.13706425026254,
+      "e": 1.008241458164147,
+      "i": 112.7086710900724,
+      "omega": 47.56676473061933,
+      "Omega": 91.8837792539464,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2460996.0402831
+    },
+    "metadata": {
+      "fetched": "2025-11-26T09:40:49.227464",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "C/2025 V1",
+      "display_name": "Borisov",
+      "refresh_interval_days": 30
+    }
+  },
+  "3I/ATLAS": {
+    "elements": {
+      "a": -0.2639158784350306,
+      "e": 6.139746611668026,
+      "i": 175.1132314195557,
+      "omega": 128.0030668402997,
+      "Omega": 322.1536951950829,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2460977.981236358
+    },
+    "metadata": {
+      "fetched": "2025-11-26T09:40:50.639588",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "C/2025 N1",
+      "display_name": "3I/ATLAS",
+      "refresh_interval_days": 1
+    }
+  },
+  "Voyager 1": {
+    "elements": {
+      "a": -3.21681452601079,
+      "e": 3.694427942864689,
+      "i": 35.7898275484284,
+      "omega": 338.0215698785171,
+      "Omega": 179.1015353958718,
+      "epoch": "2025-11-19 osc.",
+      "TP": 2444230.99984433
+    },
+    "metadata": {
+      "fetched": "2025-11-19T11:13:52.899624",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-19",
+      "horizons_id": "-31",
+      "display_name": "Voyager 1",
+      "refresh_interval_days": 30
+    }
+  },
+  "Moon": {
+    "elements": {
+      "a": 0.002577552585399519,
+      "e": 0.05288576610564369,
+      "i": 5.001283733932705,
+      "omega": 81.15185431691047,
+      "Omega": 344.4415320702121,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461014.138801794
+    },
+    "metadata": {
+      "fetched": "2025-11-23T21:39:30.520254",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "301",
+      "display_name": "Moon",
+      "refresh_interval_days": 1
+    }
+  },
+  "Phobos": {
+    "elements": {
+      "a": 6.269075975919506e-05,
+      "e": 0.01518705127139772,
+      "i": 27.62260497116074,
+      "omega": 140.7291209585959,
+      "Omega": 81.60464838356371,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.566589534
+    },
+    "metadata": {
+      "fetched": "2025-11-23T21:40:26.589711",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "401",
+      "display_name": "Phobos",
+      "refresh_interval_days": 30
+    }
+  },
+  "Deimos": {
+    "elements": {
+      "a": 0.0001568194342116092,
+      "e": 0.000324282343997389,
+      "i": 24.18561387750198,
+      "omega": 31.95086633202236,
+      "Omega": 81.1562843975596,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.549034463
+    },
+    "metadata": {
+      "fetched": "2025-11-23T21:40:27.154829",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "402",
+      "display_name": "Deimos",
+      "refresh_interval_days": 30
+    }
+  },
+  "Metis": {
+    "elements": {
+      "a": 0.0008615143926036402,
+      "e": 0.007481612667197757,
+      "i": 2.213115103489843,
+      "omega": 328.2613800955765,
+      "Omega": 337.9803343521862,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.504802707
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:05.772385",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "516",
+      "display_name": "Metis",
+      "refresh_interval_days": 30
+    }
+  },
+  "Adrastea": {
+    "elements": {
+      "a": 0.0008681575206091785,
+      "e": 0.007458840311378567,
+      "i": 2.215670767525874,
+      "omega": 185.4339107430019,
+      "Omega": 337.9954792041977,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.499060051
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:06.380733",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "515",
+      "display_name": "Adrastea",
+      "refresh_interval_days": 30
+    }
+  },
+  "Amalthea": {
+    "elements": {
+      "a": 0.001216579663040331,
+      "e": 0.006750418015106122,
+      "i": 2.581815543651814,
+      "omega": 126.8484374594997,
+      "Omega": 339.7662749287875,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.507385597
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:06.931133",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "505",
+      "display_name": "Amalthea",
+      "refresh_interval_days": 30
+    }
+  },
+  "Thebe": {
+    "elements": {
+      "a": 0.001486614726053158,
+      "e": 0.01726070821688147,
+      "i": 1.16926933612015,
+      "omega": 221.0279213733788,
+      "Omega": 330.2446903125251,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.676254915
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:07.475878",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "514",
+      "display_name": "Thebe",
+      "refresh_interval_days": 30
+    }
+  },
+  "Io": {
+    "elements": {
+      "a": 0.002821123612672723,
+      "e": 0.00448739311194167,
+      "i": 2.203927457089045,
+      "omega": 282.5630428232364,
+      "Omega": 338.4605963720252,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461002.234400198
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:07.975535",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "501",
+      "display_name": "Io",
+      "refresh_interval_days": 30
+    }
+  },
+  "Europa": {
+    "elements": {
+      "a": 0.004487567160530523,
+      "e": 0.009099731662800486,
+      "i": 2.159472359786793,
+      "omega": 104.3682471430913,
+      "Omega": 325.9191496143092,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461003.941576195
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:08.460781",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "502",
+      "display_name": "Europa",
+      "refresh_interval_days": 30
+    }
+  },
+  "Ganymede": {
+    "elements": {
+      "a": 0.007155588558812345,
+      "e": 0.001970965095234579,
+      "i": 2.338523798075942,
+      "omega": 342.0902238393846,
+      "Omega": 339.2567062790395,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461005.334131546
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:08.938118",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "503",
+      "display_name": "Ganymede",
+      "refresh_interval_days": 30
+    }
+  },
+  "Callisto": {
+    "elements": {
+      "a": 0.01258842243234129,
+      "e": 0.007351062412798496,
+      "i": 1.951450154028208,
+      "omega": 31.14261814226499,
+      "Omega": 336.6982585868042,
+      "epoch": "2025-11-23 osc.",
+      "TP": 2461004.367402397
+    },
+    "metadata": {
+      "fetched": "2025-11-23T22:30:09.520679",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-23",
+      "horizons_id": "504",
+      "display_name": "Callisto",
+      "refresh_interval_days": 30
+    }
+  },
+  "Pan": {
+    "elements": {
+      "a": 0.0008974963419387192,
+      "e": 0.005053256330942496,
+      "i": 28.05173721147295,
+      "omega": 147.8196223953123,
+      "Omega": 169.5234568608295,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.500046173
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:01.572840",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "618",
+      "display_name": "Pan",
+      "refresh_interval_days": 30
+    }
+  },
+  "Prometheus": {
+    "elements": {
+      "a": 0.0009360410113140548,
+      "e": 0.006762004626365634,
+      "i": 28.04655890571502,
+      "omega": 106.1265822074406,
+      "Omega": 169.5107855769871,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.512898205
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:02.952951",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "616",
+      "display_name": "Prometheus",
+      "refresh_interval_days": 30
+    }
+  },
+  "Pandora": {
+    "elements": {
+      "a": 0.0009515718281148615,
+      "e": 0.006187939290179924,
+      "i": 28.03624943226156,
+      "omega": 329.5210463159747,
+      "Omega": 169.6252184563574,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.424520039
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:03.495536",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "617",
+      "display_name": "Pandora",
+      "refresh_interval_days": 30
+    }
+  },
+  "Mimas": {
+    "elements": {
+      "a": 0.001243599746628442,
+      "e": 0.02221933688731393,
+      "i": 29.28471099023432,
+      "omega": 211.3031849876282,
+      "Omega": 171.5754158288788,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.501722098
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:03.750510",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "601",
+      "display_name": "Mimas",
+      "refresh_interval_days": 30
+    }
+  },
+  "Enceladus": {
+    "elements": {
+      "a": 0.001593708791338692,
+      "e": 0.006127615394909492,
+      "i": 28.05410847244178,
+      "omega": 93.79915247203853,
+      "Omega": 169.5168549778865,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.431168726
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:03.994235",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "602",
+      "display_name": "Enceladus",
+      "refresh_interval_days": 30
+    }
+  },
+  "Tethys": {
+    "elements": {
+      "a": 0.001971792731208853,
+      "e": 0.001142319870729649,
+      "i": 27.12559083533583,
+      "omega": 271.7793787341985,
+      "Omega": 170.7745479913119,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.532556129
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:04.258510",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "603",
+      "display_name": "Tethys",
+      "refresh_interval_days": 30
+    }
+  },
+  "Dione": {
+    "elements": {
+      "a": 0.002524394555569109,
+      "e": 0.001734501484072453,
+      "i": 28.02458878334451,
+      "omega": 237.8370770007935,
+      "Omega": 169.5271948376131,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461004.548417268
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:04.526135",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "604",
+      "display_name": "Dione",
+      "refresh_interval_days": 30
+    }
+  },
+  "Rhea": {
+    "elements": {
+      "a": 0.003524236728960744,
+      "e": 0.001009943757226906,
+      "i": 28.23807801243921,
+      "omega": 183.0795423680196,
+      "Omega": 170.0426297050722,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461002.282363222
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:04.936575",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "605",
+      "display_name": "Rhea",
+      "refresh_interval_days": 30
+    }
+  },
+  "Titan": {
+    "elements": {
+      "a": 0.00816816511205054,
+      "e": 0.02869400688376999,
+      "i": 27.70929835055437,
+      "omega": 177.8489763403632,
+      "Omega": 169.076819402157,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461009.946274554
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:05.408537",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "606",
+      "display_name": "Titan",
+      "refresh_interval_days": 30
+    }
+  },
+  "Hyperion": {
+    "elements": {
+      "a": 0.009877423767204609,
+      "e": 0.09504594752066856,
+      "i": 27.051910401606,
+      "omega": 85.67332949233929,
+      "Omega": 169.4773356156675,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.300318131
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:05.955672",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "607",
+      "display_name": "Hyperion",
+      "refresh_interval_days": 30
+    }
+  },
+  "Iapetus": {
+    "elements": {
+      "a": 0.02380377415203162,
+      "e": 0.02863148773150517,
+      "i": 16.99713364019284,
+      "omega": 231.7422590038919,
+      "Omega": 138.9018511096766,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461019.169164978
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:06.445521",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "608",
+      "display_name": "Iapetus",
+      "refresh_interval_days": 30
+    }
+  },
+  "Phoebe": {
+    "elements": {
+      "a": 0.08632914945901833,
+      "e": 0.1801579343001428,
+      "i": 172.8523657444101,
+      "omega": 11.88192984163122,
+      "Omega": 270.8645430705955,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2460827.247361147
+    },
+    "metadata": {
+      "fetched": "2025-11-24T01:53:06.903941",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "609",
+      "display_name": "Phoebe",
+      "refresh_interval_days": 30
+    }
+  },
+  "Ariel": {
+    "elements": {
+      "a": 0.001276378600661798,
+      "e": 0.0004011229231401637,
+      "i": 97.7148646048805,
+      "omega": 206.4776568538672,
+      "Omega": 167.6643121272389,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461004.041849198
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:31:36.733037",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "701",
+      "display_name": "Ariel",
+      "refresh_interval_days": 30
+    }
+  },
+  "Umbriel": {
+    "elements": {
+      "a": 0.001778021289561761,
+      "e": 0.003885256521639915,
+      "i": 97.71107835254135,
+      "omega": 66.44996422995715,
+      "Omega": 167.7240156669656,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461004.087370427
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:31:38.526052",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "702",
+      "display_name": "Umbriel",
+      "refresh_interval_days": 30
+    }
+  },
+  "Titania": {
+    "elements": {
+      "a": 0.002916528146514506,
+      "e": 0.0009064494241713179,
+      "i": 97.76356208843013,
+      "omega": 288.4566821056733,
+      "Omega": 167.6420343992943,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2460999.862574606
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:31:39.848491",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "703",
+      "display_name": "Titania",
+      "refresh_interval_days": 30
+    }
+  },
+  "Oberon": {
+    "elements": {
+      "a": 0.003900536538471914,
+      "e": 0.00245444348917931,
+      "i": 97.90550831046097,
+      "omega": 198.1202855301732,
+      "Omega": 167.7099706428798,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461004.069759795
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:31:41.054067",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "704",
+      "display_name": "Oberon",
+      "refresh_interval_days": 30
+    }
+  },
+  "Miranda": {
+    "elements": {
+      "a": 0.00086813071004474,
+      "e": 0.001073796686079842,
+      "i": 99.33820150680975,
+      "omega": 50.88893539558301,
+      "Omega": 163.4789246726193,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461002.937655345
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:31:42.388298",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "705",
+      "display_name": "Miranda",
+      "refresh_interval_days": 30
+    }
+  },
+  "Portia": {
+    "elements": {
+      "a": 0.0004422429556539049,
+      "e": 0.002769319366916387,
+      "i": 98.78782761687125,
+      "omega": 25.95902076851683,
+      "Omega": 165.1657311547727,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.274102288
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:31:43.799165",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "712",
+      "display_name": "Portia",
+      "refresh_interval_days": 30
+    }
+  },
+  "Mab": {
+    "elements": {
+      "a": 0.0006536011087648638,
+      "e": 0.005960514546528455,
+      "i": 97.07891396984581,
+      "omega": 311.2818050254389,
+      "Omega": 165.9097261508627,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.643362316
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:31:45.216608",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "726",
+      "display_name": "Mab",
+      "refresh_interval_days": 30
+    }
+  },
+  "Triton": {
+    "elements": {
+      "a": 0.002371464874181832,
+      "e": 3.228302460521827e-05,
+      "i": 129.1448052914234,
+      "omega": 257.26035958981,
+      "Omega": 222.6283230934703,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.75121261
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:50:13.330084",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "801",
+      "display_name": "Triton",
+      "refresh_interval_days": 30
+    }
+  },
+  "Despina": {
+    "elements": {
+      "a": 0.0003515294367130668,
+      "e": 0.001254494165934051,
+      "i": 28.50455181133084,
+      "omega": 222.3936733573487,
+      "Omega": 48.94449006762311,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.484193102
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:50:14.641746",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "805",
+      "display_name": "Despina",
+      "refresh_interval_days": 30
+    }
+  },
+  "Galatea": {
+    "elements": {
+      "a": 0.0004144782323475817,
+      "e": 0.0008757509763000027,
+      "i": 28.53937262648158,
+      "omega": 23.29059390542058,
+      "Omega": 49.02149702264575,
+      "epoch": "2025-11-24 osc.",
+      "TP": 2461003.484613682
+    },
+    "metadata": {
+      "fetched": "2025-11-24T21:50:16.082572",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-24",
+      "horizons_id": "806",
+      "display_name": "Galatea",
+      "refresh_interval_days": 30
+    }
+  },
+  "Charon": {
+    "elements": {
+      "a": 0.0001309895689517164,
+      "e": 0.000160908800585328,
+      "i": 112.8878100971763,
+      "omega": 172.7449383444585,
+      "Omega": 227.3930039508872,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2461008.228292676
+    },
+    "metadata": {
+      "fetched": "2025-11-26T22:48:53.675731",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "901",
+      "display_name": "Charon",
+      "refresh_interval_days": 30
+    }
+  },
+  "Styx": {
+    "elements": {
+      "a": 0.0003506027582989434,
+      "e": 0.2197469557103848,
+      "i": 112.9114075251617,
+      "omega": 328.0238430801591,
+      "Omega": 227.3472509846606,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2461007.394956571
+    },
+    "metadata": {
+      "fetched": "2025-11-26T22:48:54.345873",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "905",
+      "display_name": "Styx",
+      "refresh_interval_days": 30
+    }
+  },
+  "Nix": {
+    "elements": {
+      "a": 0.0006794475692600622,
+      "e": 0.5090480661922092,
+      "i": 112.8874175032381,
+      "omega": 352.5030476873562,
+      "Omega": 227.370102652107,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2461006.393916553
+    },
+    "metadata": {
+      "fetched": "2025-11-26T22:48:55.057968",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "902",
+      "display_name": "Nix",
+      "refresh_interval_days": 30
+    }
+  },
+  "Kerberos": {
+    "elements": {
+      "a": 0.0006763126181631281,
+      "e": 0.4324251996315168,
+      "i": 113.2242617818807,
+      "omega": 344.4519314892719,
+      "Omega": 227.6051231418123,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2461007.34896677
+    },
+    "metadata": {
+      "fetched": "2025-11-26T22:48:55.736097",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "904",
+      "display_name": "Kerberos",
+      "refresh_interval_days": 30
+    }
+  },
+  "Hydra": {
+    "elements": {
+      "a": 0.000462943030388331,
+      "e": 0.1738156240719816,
+      "i": 112.5860362074979,
+      "omega": 44.07504492895175,
+      "Omega": 227.4246066514232,
+      "epoch": "2025-11-26 osc.",
+      "TP": 2460998.408353034
+    },
+    "metadata": {
+      "fetched": "2025-11-26T22:48:56.479929",
+      "source": "JPL Horizons",
+      "solution_date": "2025-11-26",
+      "horizons_id": "903",
+      "display_name": "Hydra",
+      "refresh_interval_days": 30
+    }
+  }
+}

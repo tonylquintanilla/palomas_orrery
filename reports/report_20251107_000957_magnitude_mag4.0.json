@@ -1,0 +1,150 @@
+{
+  "metadata": {
+    "mode": "magnitude",
+    "limit_value": 4.0,
+    "total_stars": 518,
+    "generation_time": "2025-11-07T00:09:57.475531",
+    "generated_by": "visualization_script"
+  },
+  "sections": {
+    "basic_stats": {
+      "total_stars": 518,
+      "mode": "magnitude",
+      "limit_value": 4.0,
+      "catalog_distribution": {
+        "Hipparcos": 518
+      }
+    },
+    "completeness": {
+      "temperature": {
+        "valid": 517,
+        "missing": 1,
+        "percentage": 99.8
+      },
+      "luminosity": {
+        "valid": 517,
+        "missing": 1,
+        "percentage": 99.8
+      },
+      "temperature_sources": {
+        "patched": 1
+      },
+      "plottable": {
+        "count": 516,
+        "percentage": 99.6
+      }
+    },
+    "quality": {
+      "anomalies": [
+        {
+          "type": "extreme_temperature",
+          "description": "1 stars with T > 40,000 K",
+          "severity": "info"
+        },
+        {
+          "type": "parallax_uncertainty",
+          "description": "49 stars with parallax error > 20%",
+          "severity": "warning"
+        }
+      ],
+      "statistics": {
+        "temperature": {
+          "min": 2977.777777777778,
+          "max": 41111.11111111111,
+          "mean": 10352.726969441319,
+          "median": 6827.436509849479
+        }
+      }
+    },
+    "catalog_coverage": {
+      "sources": {
+        "Hipparcos": {
+          "count": 518,
+          "percentage": 100.0
+        }
+      },
+      "magnitude_stats": {
+        "min": -1.440000057220459,
+        "max": 4.0,
+        "mean": 3.140733480453491
+      }
+    },
+    "processing": {
+      "total": 0
+    },
+    "object_analysis": {
+      "total_count": 518,
+      "typed_count": 518,
+      "category_counts": {
+        "Variable Stars": 102,
+        "Binary/Multiple Systems": 365,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 51,
+        "Unknown": 0
+      },
+      "category_percentages": {
+        "Variable Stars": 19.69,
+        "Binary/Multiple Systems": 70.46,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 9.85,
+        "Unknown": 0
+      },
+      "type_counts": {
+        "High Proper-Motion Star": 164,
+        "Variable Star": 94,
+        "Spectroscopic Binary Star. A type of binary star system<br> that can only be identified by analyzing its light spectrum.": 84,
+        "Unknown/Unclassified": 64,
+        "Star": 51,
+        "Be Star. Spectral type of B. Emission lines in its spectrum<br> indicate the presence of hot, glowing gas around the star.": 23,
+        "Blue Supergiant Star": 10,
+        "Red Supergiant Star": 7,
+        "Classical Cepheid Variable Star": 5,
+        "Red Giant Branch Star. Low- to intermediate-mass stars, like our Sun.<br> RGB stars have already finished fusing hydrogen into helium in their cores.<br> This marks the end of their main-sequence lifetime. They have a non-fusing)<br> helium core surrounded by a shell where hydrogen fusion continues. When the<br> core hydrogen is depleted, the core contracts and heats up, and the star's<br> outer layers expand dramatically. This expansion causes the star's surface<br> temperature to cool, radiating a reddish color. The star becomes much more<br> luminous overall due to its increased size. This process moves the star off<br> the main sequence and onto the subgiant branch and then into the red giant<br> Eventually, the core becomes hot and dense enough to ignite helium fusion.<br> This leads to horizontal or the asymptotic giant branch. Ultimately, the<br> star's core will become a white dwarf, a small, dense remnant.": 3,
+        "Yellow Supergiant Star": 2,
+        "Horizontal Branch star": 2,
+        "High-Mass X-ray Binary system": 1,
+        "Young Stellar Object": 1,
+        "Eclipsing Binary Star System": 1,
+        "Cepheid Variable Star": 1,
+        "Wolf-Rayet Star": 1,
+        "Emission Lines Star": 1,
+        "Eruptive Variable Star": 1,
+        "Mira Variable Star": 1
+      },
+      "notable_objects": [],
+      "diversity_score": 42,
+      "shannon_entropy": 2.819,
+      "simpson_index": 0.814,
+      "research_targets": [
+        {
+          "type": "Be Star. Spectral type of B. Emission lines in its spectrum<br> indicate the presence of hot, glowing gas around the star.",
+          "count": 23,
+          "interest_score": 7
+        },
+        {
+          "type": "Classical Cepheid Variable Star",
+          "count": 5,
+          "interest_score": 6
+        },
+        {
+          "type": "Cepheid Variable Star",
+          "count": 1,
+          "interest_score": 6
+        }
+      ],
+      "summary": "100.0% objects typed. dominated by binary/multiple systems (70.5%). high diversity (h'=2.82). 3 high-interest research targets",
+      "timestamp": "2025-11-07T00:09:57.482207"
+    },
+    "warnings": [
+      {
+        "level": "info",
+        "message": "Data from single catalog only (Hipparcos)",
+        "recommendation": "Results may be biased to catalog selection criteria"
+      }
+    ]
+  }
+}

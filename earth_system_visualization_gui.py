@@ -25,6 +25,7 @@ except ImportError:
 from paleoclimate_visualization import create_paleoclimate_visualization
 from paleoclimate_dual_scale import create_paleoclimate_dual_scale_visualization
 from paleoclimate_visualization_full import create_paleoclimate_visualization as create_phanerozoic_viz
+from energy_imbalance import create_energy_imbalance_visualization
 from save_utils import save_plot
 
 try:
@@ -1550,6 +1551,18 @@ def open_ice_viz():
     except Exception as e:
         messagebox.showerror("Error", f"Failed to create visualization:\n{str(e)}")
 
+def open_energy_imbalance():
+    """Open energy imbalance visualization in browser"""
+    try:
+        fig = create_energy_imbalance_visualization()
+        if fig:
+            fig.show()
+        else:
+            messagebox.showerror("Data Not Found",
+                "Required climate data not found. Please run fetch_climate_data.py first.")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to create visualization:\n{str(e)}")
+
 def run_update_in_thread(update_button, status_label, window):
     """Run climate data update in background thread"""
     try:
@@ -1624,7 +1637,7 @@ def open_earth_system_gui(parent=None):
     window = tk.Toplevel(parent) if parent else tk.Tk()
     window.title("🌍 Earth System Visualization")
 
-    window.geometry("1200x790+150+0")  # Wider window for two columns "WIDTHxHEIGHT+X_POSITION+Y_POSITION"
+    window.geometry("1200x900+150+0")  # Wider window for two columns "WIDTHxHEIGHT+X_POSITION+Y_POSITION"
     
     # Header
     header_frame = tk.Frame(window, bg='#2E86AB', height=80)
@@ -1652,7 +1665,7 @@ def open_earth_system_gui(parent=None):
     # Description
     desc_label = tk.Label(content_frame,
                          text="Select a visualization to explore Earth's changing systems.\n"
-                              "Each chart shows critical data about our planet's health.",
+                         "Each chart shows critical data about our planet's health.",
                          font=('Arial', 10),
                          justify='left',
                          wraplength=550)
@@ -1688,7 +1701,8 @@ def open_earth_system_gui(parent=None):
                             font=('Arial', 8, 'italic'),
                             bg='#E8F5E9',
                             fg='#666')
-    sealevel_note.pack(pady=(0, 10))
+#    sealevel_note.pack(pady=(0, 10))
+    sealevel_note.pack(pady=(0, 5))
 
     status_label = tk.Label(update_frame,
                            text="",
@@ -1697,16 +1711,16 @@ def open_earth_system_gui(parent=None):
                            fg='#666')
     status_label.pack(pady=(0, 5))
     
-    # Separator
-    separator = tk.Frame(content_frame, height=2, bg='#ccc')
-    separator.pack(fill='x', pady=10)
+    # Separator -- removed for cleaner layout
+#    separator = tk.Frame(content_frame, height=2, bg='#ccc')
+#    separator.pack(fill='x', pady=10)
     
-# Section label
-    section_label = tk.Label(content_frame,
-                            text="Available Visualizations:",
-                            font=('Arial', 11, 'bold'),
-                            justify='left')
-    section_label.pack(anchor='w', pady=(5, 10))
+    # Section label -- removed for cleaner layout
+#    section_label = tk.Label(content_frame,
+#                            text="Available Visualizations:",
+#                            font=('Arial', 11, 'bold'),
+#                            justify='left')
+#    section_label.pack(anchor='w', pady=(5, 10))
     
     # Create frame for two-column layout
     buttons_frame = tk.Frame(content_frame)
@@ -1779,6 +1793,19 @@ def open_earth_system_gui(parent=None):
                            pady=8,
                            command=open_warming_stripes)
     stripes_btn.pack(fill='x', pady=2)
+
+    # Energy Imbalance button - the explainer showing mechanism
+    energy_btn = tk.Button(left_column,
+                        text='Energy Imbalance: The Climate Mechanism',
+                        font=('Arial', 10),
+                        bg='#FF8C00',
+                        fg='white',
+                        activebackground='#E07B00',
+                        cursor='hand2',
+                        padx=15,
+                        pady=8,
+                        command=open_energy_imbalance)
+    energy_btn.pack(fill='x', pady=(10, 2))
 
     # Climate History and Projections section
     history_label = tk.Label(left_column,

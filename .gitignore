@@ -1,10 +1,16 @@
-# Python cache -- auto generated files
+# Python cache
 __pycache__/
 *.pyc
 
-# Ignore large data cache folders due to large file sizes
-data/
-star_data/
+# Data files
+*.vot 
+*.pkl
 
-# Generated reports from 2d star visualizations
-reports/
+# Plot outputs
+*.html
+*.png
+
+# Orbit position cache (in /data/ directory)
+data/orbit_paths.backup_old
+
+

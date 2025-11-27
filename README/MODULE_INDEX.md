@@ -1,6 +1,6 @@
 # Paloma's Orrery - Complete Module Index
 
-**Last Updated:** November 6, 2025
+**Last Updated:** November 26, 2025
 
 Quick-reference guide to all Python modules in the project. Use your browser's find function (Ctrl+F / Cmd+F) to search for keywords like "save", "cache", "orbit", "visualization", etc.
 
@@ -18,10 +18,10 @@ For detailed documentation on primary modules, see [README.md](README.md#module-
 
 **Module Organization:**
 
-- Total modules: 79 Python files
-- Active production modules: 74
-- Development/testing modules: 5
-- Obsolete/unused modules: 2
+- Total modules: 81 Python files
+- Active production modules: 75
+- Development/testing modules: 3
+- Obsolete/reference modules: 3 (retained for historical reference)
 
 ---
 
@@ -63,16 +63,23 @@ For detailed documentation on primary modules, see [README.md](README.md#module-
 
 ---
 
-## Cache Management (4 modules)
+## Cache Management (5 modules + 1 critical data file)
 
 | Module | Description |
 |--------|-------------|
 | `vot_cache_manager.py` | VizieR VOTable cache management with atomic saves and validation |
 | `incremental_cache_manager.py` | Smart incremental fetching for stellar datasets, avoiding redundant queries |
+| `osculating_cache_manager.py` | Osculating orbital elements cache with epoch tracking, auto-refresh intervals, and atomic saves. Stores JPL Horizons osculating elements for 40+ objects with per-object refresh policies |
 | `climate_cache_manager.py` | Climate data cache manager with automated validation and update checking |
 | `verify_orbit_cache.py` | Orbit cache validation and repair utility with integrity checking |
 
-**Note:** `orbit_data_manager.py` handles orbit caching but is listed under Data Acquisition as its primary function.
+**Critical Data File:**
+
+| File | Description |
+|------|-------------|
+| `osculating_cache.json` | **Backbone of the osculating orbit system.** Contains JPL Horizons orbital elements (a, e, i, ω, Ω, TP) for 40+ objects including planets, moons, asteroids, and comets. Provides epoch tracking and per-object refresh intervals. Used by `idealized_orbits.py` for Keplerian orbit calculations, apsidal markers, dual-orbit visualizations, and the Pluto-Charon barycenter system. Managed by `osculating_cache_manager.py`. |
+
+**Note:** `orbit_data_manager.py` handles trajectory/position caching but is listed under Data Acquisition as its primary function.
 
 ---
 
@@ -133,16 +140,24 @@ Interior cross-section visualizations for solar system bodies with scientificall
 
 ---
 
-## Coordinate Systems & Orbital Mechanics (6 modules)
+## Coordinate Systems & Orbital Mechanics (5 modules)
 
 | Module | Description |
 |--------|-------------|
 | `celestial_coordinates.py` | RA/Dec coordinate system conversions and transformations between reference frames |
-| `apsidal_markers.py` | Periapsis/apoapsis markers with body-specific terminology |
-| `idealized_orbits.py` | Idealized Keplerian orbit calculations for perfect elliptical paths |
-| `refined_orbits.py` | Refined orbital calculations accounting for perturbations and real-world effects |
+| `orbital_elements.py` | Central repository for orbital parameters, parent-satellite relationships (`parent_planets` dictionary), and planet tilts. Includes Pluto-Charon barycenter for binary planet mode |
+| `apsidal_markers.py` | Periapsis/apoapsis markers with body-specific terminology (perihelion/perigee/periareion) and perturbation analysis |
+| `idealized_orbits.py` | **Core orbit visualization engine.** Keplerian orbit calculations using osculating elements from `osculating_cache.json`. Supports dual-orbit systems, apsidal markers, and multi-center modes (including Pluto-Charon barycenter) |
 | `orrery_integration.py` | Integration module for combining orbital data into orrery visualization |
-| `inclination_test.py` | Test module for orbital inclination calculations and coordinate transformations |
+
+**Critical Data Infrastructure:**
+
+| File | Description |
+|------|-------------|
+| `osculating_cache.json` | Real-time JPL Horizons orbital elements for 40+ objects. The osculating elements (a, e, i, ω, Ω, TP) enable accurate Keplerian orbit rendering with epoch-aware visualization |
+| `osculating_cache_manager.py` | Cache manager with atomic saves, epoch tracking, and configurable refresh intervals (weekly for planets, daily for active moons) |
+
+**Note:** `refined_orbits.py` and `inclination_test.py` moved to Obsolete/Reference section.
 
 ---
 
@@ -202,6 +217,33 @@ Interior cross-section visualizations for solar system bodies with scientificall
 
 ---
 
+---
+
+## Obsolete & Reference Modules (3 modules)
+
+These modules are no longer actively used in the production codebase but are retained in the repository for historical reference, educational value, or potential future reuse.
+
+| Module | Status | Replaced By | Notes |
+|--------|--------|-------------|-------|
+| `refined_orbits.py` | Obsolete | `idealized_orbits.py` + `osculating_cache_manager.py` | Original perturbation-based orbit system. Superseded by the osculating orbit approach which uses real-time JPL Horizons elements instead of analytical perturbation calculations. Retained as reference for perturbation theory implementation. |
+| `gui_simbad_controls.py` | Obsolete | Integrated into main GUI | Original standalone SIMBAD control panel. Functionality merged into `palomas_orrery.py`. |
+| `save_utils_before_simplification.py` | Obsolete | `save_utils.py` | Pre-refactoring version of save utilities. Retained to document the simplification process. |
+
+**Development/Testing Modules (not for production):**
+
+| Module | Purpose |
+|--------|---------|
+| `inclination_test.py` | Test harness for orbital inclination calculations and coordinate transformations. Used during development of satellite visualization systems. |
+| `create_ephemeris_database.py` | One-time utility for building satellite ephemeris database. Run once to generate `satellite_ephemerides.json`. |
+| `create_cache_backups.py` | Maintenance utility for creating stellar data backups (PKL/VOT files). Run manually for data protection. |
+
+**Why Retain Obsolete Modules?**
+
+1. **Historical Reference:** Documents evolution of the codebase
+2. **Educational Value:** Shows alternative approaches (e.g., perturbation theory vs. osculating elements)
+3. **Fallback Option:** Code can be revived if needed for specific use cases
+4. **Attribution:** Preserves contribution history
+
 ## Summary Statistics
 
 - **Total Python Modules:** 79
@@ -229,7 +271,8 @@ Use Ctrl+F (Windows/Linux) or Cmd+F (Mac) to search for:
 - **Cache Management:** `vot_cache_manager.py`, `incremental_cache_manager.py`, `orbit_data_manager.py`
 - **Coordinates:** `celestial_coordinates.py`, `exoplanet_coordinates.py`
 - **Climate Data:** `fetch_climate_data.py`, `earth_system_visualization_gui.py`, `climate_cache_manager.py`
-- **Orbits:** `orbit_data_manager.py`, `idealized_orbits.py`, `refined_orbits.py`, `orbital_param_viz.py`
+- **Orbits:** `orbit_data_manager.py`, `orbital_elements.py`, `idealized_orbits.py`, `orrery_integration.py`, `orbital_param_viz.py`
+- **Osculating:** `osculating_cache_manager.py`, `osculating_cache.json`, `idealized_orbits.py`, `apsidal_markers.py`
 - **Stars:** `star_properties.py`, `stellar_parameters.py`, `star_visualization_gui.py`
 - **HR Diagram:** `hr_diagram_distance.py`, `hr_diagram_apparent_magnitude.py`, `visualization_2d.py`
 - **SIMBAD:** `simbad_manager.py`, `gui_simbad_controls.py`
@@ -379,4 +422,4 @@ Also available: `palomas_orrery_flowchart_v13_vertical.md` for Mermaid flowchart
 
 ---
 
-Generated November 6, 2025 for Paloma's Orrery project
+Generated November 26, 2025 for Paloma's Orrery project

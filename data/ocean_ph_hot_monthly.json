@@ -1,0 +1,2100 @@
+{
+  "metadata": {
+    "dataset_name": "data/ocean_ph_hot_monthly",
+    "description": "Ocean surface pH measurements from Hawaii Ocean Time-series",
+    "source": {
+      "organization": "BCO-DMO (Biological and Chemical Oceanography Data Management Office)",
+      "data_source": "Hawaii Ocean Time-series (HOT) Program",
+      "station": "Station ALOHA (22\u00b045'N, 158\u00b0W)",
+      "url": "https://www.bco-dmo.org/dataset/3773",
+      "hot_program_url": "https://hahana.soest.hawaii.edu/hot/",
+      "citation": "Hawaii Ocean Time-series (HOT), University of Hawaii. Data accessed via BCO-DMO dataset 3773."
+    },
+    "parameters": {
+      "measurement": "pH (total scale)",
+      "location": "Surface ocean (< 50m depth)",
+      "frequency": "Monthly sampling",
+      "method": "Spectrophotometric",
+      "aggregation": "Monthly averages of surface measurements"
+    },
+    "time_range": {
+      "start": "1991-02",
+      "end": "2023-12",
+      "record_count": 257
+    },
+    "statistics": {
+      "first_ph": 8.2319,
+      "latest_ph": 8.05,
+      "ph_change": -0.1819,
+      "years_span": 32,
+      "annual_rate": -0.005684
+    },
+    "context": {
+      "pre_industrial_ph": 8.2,
+      "current_decline": 0.1,
+      "threat": "Ocean acidification threatens marine ecosystems",
+      "impact": "pH is logarithmic: 0.1 unit drop = 30% increase in acidity",
+      "rate": "Faster than any time in 300 million years"
+    },
+    "last_updated": "2025-11-04T23:41:52.623953",
+    "cache_file": "data/ocean_ph_hot_monthly.json"
+  },
+  "records": [
+    {
+      "year": 1991,
+      "month": 2,
+      "date": "1991-02",
+      "ph_total": 8.2319,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 3,
+      "date": "1991-03",
+      "ph_total": 8.2108,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 4,
+      "date": "1991-04",
+      "ph_total": 8.1974,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 5,
+      "date": "1991-05",
+      "ph_total": 8.231,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 6,
+      "date": "1991-06",
+      "ph_total": 8.2312,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 7,
+      "date": "1991-07",
+      "ph_total": 8.2376,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 8,
+      "date": "1991-08",
+      "ph_total": 8.2712,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 9,
+      "date": "1991-09",
+      "ph_total": 8.2664,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 10,
+      "date": "1991-10",
+      "ph_total": 8.2497,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1991,
+      "month": 12,
+      "date": "1991-12",
+      "ph_total": 8.2657,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 4,
+      "date": "1992-04",
+      "ph_total": 8.0918,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 6,
+      "date": "1992-06",
+      "ph_total": 8.0976,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 7,
+      "date": "1992-07",
+      "ph_total": 8.0988,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 8,
+      "date": "1992-08",
+      "ph_total": 8.1077,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 9,
+      "date": "1992-09",
+      "ph_total": 8.1133,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 10,
+      "date": "1992-10",
+      "ph_total": 8.0833,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 11,
+      "date": "1992-11",
+      "ph_total": 8.1102,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1992,
+      "month": 12,
+      "date": "1992-12",
+      "ph_total": 8.1044,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1993,
+      "month": 1,
+      "date": "1993-01",
+      "ph_total": 8.0929,
+      "num_measurements": 19,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1993,
+      "month": 2,
+      "date": "1993-02",
+      "ph_total": 8.0955,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1993,
+      "month": 4,
+      "date": "1993-04",
+      "ph_total": 8.0928,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1993,
+      "month": 5,
+      "date": "1993-05",
+      "ph_total": 8.097,
+      "num_measurements": 2,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1993,
+      "month": 10,
+      "date": "1993-10",
+      "ph_total": 8.1171,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1994,
+      "month": 7,
+      "date": "1994-07",
+      "ph_total": 8.1041,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1994,
+      "month": 8,
+      "date": "1994-08",
+      "ph_total": 8.1112,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1994,
+      "month": 9,
+      "date": "1994-09",
+      "ph_total": 8.1124,
+      "num_measurements": 11,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1994,
+      "month": 10,
+      "date": "1994-10",
+      "ph_total": 8.1096,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1994,
+      "month": 11,
+      "date": "1994-11",
+      "ph_total": 8.1087,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 2,
+      "date": "1995-02",
+      "ph_total": 8.0916,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 3,
+      "date": "1995-03",
+      "ph_total": 8.0867,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 4,
+      "date": "1995-04",
+      "ph_total": 8.088,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 5,
+      "date": "1995-05",
+      "ph_total": 8.0904,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 7,
+      "date": "1995-07",
+      "ph_total": 8.0971,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 8,
+      "date": "1995-08",
+      "ph_total": 8.1003,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 9,
+      "date": "1995-09",
+      "ph_total": 8.1048,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 10,
+      "date": "1995-10",
+      "ph_total": 8.1053,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1995,
+      "month": 11,
+      "date": "1995-11",
+      "ph_total": 8.1081,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 1,
+      "date": "1996-01",
+      "ph_total": 8.1037,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 3,
+      "date": "1996-03",
+      "ph_total": 8.0874,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 4,
+      "date": "1996-04",
+      "ph_total": 8.097,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 5,
+      "date": "1996-05",
+      "ph_total": 8.0977,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 6,
+      "date": "1996-06",
+      "ph_total": 8.0984,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 7,
+      "date": "1996-07",
+      "ph_total": 8.1041,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 8,
+      "date": "1996-08",
+      "ph_total": 8.1067,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 9,
+      "date": "1996-09",
+      "ph_total": 8.1137,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 10,
+      "date": "1996-10",
+      "ph_total": 8.1169,
+      "num_measurements": 13,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1996,
+      "month": 12,
+      "date": "1996-12",
+      "ph_total": 8.1052,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 1,
+      "date": "1997-01",
+      "ph_total": 8.0972,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 2,
+      "date": "1997-02",
+      "ph_total": 8.0749,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 3,
+      "date": "1997-03",
+      "ph_total": 8.0664,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 4,
+      "date": "1997-04",
+      "ph_total": 8.0695,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 5,
+      "date": "1997-05",
+      "ph_total": 8.0849,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 6,
+      "date": "1997-06",
+      "ph_total": 8.1026,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 7,
+      "date": "1997-07",
+      "ph_total": 8.1011,
+      "num_measurements": 11,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 8,
+      "date": "1997-08",
+      "ph_total": 8.0986,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 9,
+      "date": "1997-09",
+      "ph_total": 8.1067,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1997,
+      "month": 12,
+      "date": "1997-12",
+      "ph_total": 8.1052,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1998,
+      "month": 1,
+      "date": "1998-01",
+      "ph_total": 8.09,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1998,
+      "month": 2,
+      "date": "1998-02",
+      "ph_total": 8.0843,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1998,
+      "month": 3,
+      "date": "1998-03",
+      "ph_total": 8.096,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1998,
+      "month": 4,
+      "date": "1998-04",
+      "ph_total": 8.089,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1998,
+      "month": 5,
+      "date": "1998-05",
+      "ph_total": 8.0836,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 1998,
+      "month": 6,
+      "date": "1998-06",
+      "ph_total": 8.0863,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2003,
+      "month": 6,
+      "date": "2003-06",
+      "ph_total": 8.0946,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2003,
+      "month": 7,
+      "date": "2003-07",
+      "ph_total": 8.0838,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2003,
+      "month": 8,
+      "date": "2003-08",
+      "ph_total": 8.0932,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2003,
+      "month": 10,
+      "date": "2003-10",
+      "ph_total": 8.057,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2003,
+      "month": 11,
+      "date": "2003-11",
+      "ph_total": 8.1058,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2003,
+      "month": 12,
+      "date": "2003-12",
+      "ph_total": 8.095,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 1,
+      "date": "2004-01",
+      "ph_total": 8.0886,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 2,
+      "date": "2004-02",
+      "ph_total": 8.0968,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 3,
+      "date": "2004-03",
+      "ph_total": 8.0872,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 4,
+      "date": "2004-04",
+      "ph_total": 8.0916,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 5,
+      "date": "2004-05",
+      "ph_total": 8.094,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 6,
+      "date": "2004-06",
+      "ph_total": 8.1,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 7,
+      "date": "2004-07",
+      "ph_total": 8.1042,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 8,
+      "date": "2004-08",
+      "ph_total": 8.1014,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 9,
+      "date": "2004-09",
+      "ph_total": 8.1114,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 10,
+      "date": "2004-10",
+      "ph_total": 8.1048,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 11,
+      "date": "2004-11",
+      "ph_total": 8.1034,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2004,
+      "month": 12,
+      "date": "2004-12",
+      "ph_total": 8.098,
+      "num_measurements": 2,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 1,
+      "date": "2005-01",
+      "ph_total": 8.095,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 2,
+      "date": "2005-02",
+      "ph_total": 8.0883,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 3,
+      "date": "2005-03",
+      "ph_total": 8.0853,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 5,
+      "date": "2005-05",
+      "ph_total": 8.0923,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 6,
+      "date": "2005-06",
+      "ph_total": 8.0872,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 7,
+      "date": "2005-07",
+      "ph_total": 8.0895,
+      "num_measurements": 2,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 8,
+      "date": "2005-08",
+      "ph_total": 8.0998,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 9,
+      "date": "2005-09",
+      "ph_total": 8.106,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 10,
+      "date": "2005-10",
+      "ph_total": 8.1005,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 11,
+      "date": "2005-11",
+      "ph_total": 8.0942,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2005,
+      "month": 12,
+      "date": "2005-12",
+      "ph_total": 8.096,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 1,
+      "date": "2006-01",
+      "ph_total": 8.0757,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 2,
+      "date": "2006-02",
+      "ph_total": 8.0803,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 3,
+      "date": "2006-03",
+      "ph_total": 8.0854,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 4,
+      "date": "2006-04",
+      "ph_total": 8.0833,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 5,
+      "date": "2006-05",
+      "ph_total": 8.0728,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 6,
+      "date": "2006-06",
+      "ph_total": 8.0892,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 7,
+      "date": "2006-07",
+      "ph_total": 8.0867,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 8,
+      "date": "2006-08",
+      "ph_total": 8.0973,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 9,
+      "date": "2006-09",
+      "ph_total": 8.0865,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 10,
+      "date": "2006-10",
+      "ph_total": 8.096,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 11,
+      "date": "2006-11",
+      "ph_total": 8.09,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2006,
+      "month": 12,
+      "date": "2006-12",
+      "ph_total": 8.0795,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 2,
+      "date": "2007-02",
+      "ph_total": 8.0863,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 3,
+      "date": "2007-03",
+      "ph_total": 8.0708,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 5,
+      "date": "2007-05",
+      "ph_total": 8.0769,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 6,
+      "date": "2007-06",
+      "ph_total": 8.0883,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 7,
+      "date": "2007-07",
+      "ph_total": 8.0882,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 8,
+      "date": "2007-08",
+      "ph_total": 8.0937,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 9,
+      "date": "2007-09",
+      "ph_total": 8.0892,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 10,
+      "date": "2007-10",
+      "ph_total": 8.0832,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 11,
+      "date": "2007-11",
+      "ph_total": 8.0947,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2007,
+      "month": 12,
+      "date": "2007-12",
+      "ph_total": 8.0851,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 1,
+      "date": "2008-01",
+      "ph_total": 8.0758,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 2,
+      "date": "2008-02",
+      "ph_total": 8.0732,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 5,
+      "date": "2008-05",
+      "ph_total": 8.0708,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 6,
+      "date": "2008-06",
+      "ph_total": 8.0822,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 7,
+      "date": "2008-07",
+      "ph_total": 8.0817,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 8,
+      "date": "2008-08",
+      "ph_total": 8.085,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 10,
+      "date": "2008-10",
+      "ph_total": 8.0973,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 11,
+      "date": "2008-11",
+      "ph_total": 8.0707,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2008,
+      "month": 12,
+      "date": "2008-12",
+      "ph_total": 8.0847,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 1,
+      "date": "2009-01",
+      "ph_total": 8.0775,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 2,
+      "date": "2009-02",
+      "ph_total": 8.0763,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 4,
+      "date": "2009-04",
+      "ph_total": 8.0607,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 5,
+      "date": "2009-05",
+      "ph_total": 8.0635,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 7,
+      "date": "2009-07",
+      "ph_total": 8.0715,
+      "num_measurements": 8,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 8,
+      "date": "2009-08",
+      "ph_total": 8.0805,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 9,
+      "date": "2009-09",
+      "ph_total": 8.0798,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 11,
+      "date": "2009-11",
+      "ph_total": 8.1436,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2009,
+      "month": 12,
+      "date": "2009-12",
+      "ph_total": 8.0705,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 3,
+      "date": "2010-03",
+      "ph_total": 8.0847,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 4,
+      "date": "2010-04",
+      "ph_total": 8.0657,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 5,
+      "date": "2010-05",
+      "ph_total": 8.0667,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 6,
+      "date": "2010-06",
+      "ph_total": 8.0557,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 7,
+      "date": "2010-07",
+      "ph_total": 8.0772,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 8,
+      "date": "2010-08",
+      "ph_total": 8.0777,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 9,
+      "date": "2010-09",
+      "ph_total": 8.0747,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 10,
+      "date": "2010-10",
+      "ph_total": 8.082,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2010,
+      "month": 11,
+      "date": "2010-11",
+      "ph_total": 8.0767,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 1,
+      "date": "2011-01",
+      "ph_total": 8.0765,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 2,
+      "date": "2011-02",
+      "ph_total": 8.0777,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 3,
+      "date": "2011-03",
+      "ph_total": 8.0707,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 4,
+      "date": "2011-04",
+      "ph_total": 8.069,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 5,
+      "date": "2011-05",
+      "ph_total": 8.0807,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 7,
+      "date": "2011-07",
+      "ph_total": 8.0818,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 8,
+      "date": "2011-08",
+      "ph_total": 8.083,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 9,
+      "date": "2011-09",
+      "ph_total": 8.092,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 11,
+      "date": "2011-11",
+      "ph_total": 8.0831,
+      "num_measurements": 11,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2011,
+      "month": 12,
+      "date": "2011-12",
+      "ph_total": 8.0683,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 1,
+      "date": "2012-01",
+      "ph_total": 8.0665,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 3,
+      "date": "2012-03",
+      "ph_total": 8.0645,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 4,
+      "date": "2012-04",
+      "ph_total": 8.0703,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 5,
+      "date": "2012-05",
+      "ph_total": 8.0627,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 6,
+      "date": "2012-06",
+      "ph_total": 8.0632,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 7,
+      "date": "2012-07",
+      "ph_total": 8.0767,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 8,
+      "date": "2012-08",
+      "ph_total": 8.068,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 9,
+      "date": "2012-09",
+      "ph_total": 8.0638,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 10,
+      "date": "2012-10",
+      "ph_total": 8.0653,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2012,
+      "month": 12,
+      "date": "2012-12",
+      "ph_total": 8.071,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 2,
+      "date": "2013-02",
+      "ph_total": 8.0595,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 3,
+      "date": "2013-03",
+      "ph_total": 8.0602,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 4,
+      "date": "2013-04",
+      "ph_total": 8.0552,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 5,
+      "date": "2013-05",
+      "ph_total": 8.061,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 6,
+      "date": "2013-06",
+      "ph_total": 8.068,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 9,
+      "date": "2013-09",
+      "ph_total": 8.0781,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 10,
+      "date": "2013-10",
+      "ph_total": 8.0836,
+      "num_measurements": 11,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 11,
+      "date": "2013-11",
+      "ph_total": 8.0817,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2013,
+      "month": 12,
+      "date": "2013-12",
+      "ph_total": 8.0827,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 1,
+      "date": "2014-01",
+      "ph_total": 8.0739,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 2,
+      "date": "2014-02",
+      "ph_total": 8.0666,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 3,
+      "date": "2014-03",
+      "ph_total": 8.0694,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 4,
+      "date": "2014-04",
+      "ph_total": 8.0664,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 5,
+      "date": "2014-05",
+      "ph_total": 8.0703,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 6,
+      "date": "2014-06",
+      "ph_total": 8.0658,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 7,
+      "date": "2014-07",
+      "ph_total": 8.0708,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 9,
+      "date": "2014-09",
+      "ph_total": 8.0856,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 10,
+      "date": "2014-10",
+      "ph_total": 8.0929,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 11,
+      "date": "2014-11",
+      "ph_total": 8.0887,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2014,
+      "month": 12,
+      "date": "2014-12",
+      "ph_total": 8.0769,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 2,
+      "date": "2015-02",
+      "ph_total": 8.0661,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 3,
+      "date": "2015-03",
+      "ph_total": 8.068,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 4,
+      "date": "2015-04",
+      "ph_total": 8.0714,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 5,
+      "date": "2015-05",
+      "ph_total": 8.0725,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 6,
+      "date": "2015-06",
+      "ph_total": 8.0764,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 7,
+      "date": "2015-07",
+      "ph_total": 8.0723,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 8,
+      "date": "2015-08",
+      "ph_total": 8.077,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 9,
+      "date": "2015-09",
+      "ph_total": 8.0897,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 10,
+      "date": "2015-10",
+      "ph_total": 8.077,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 11,
+      "date": "2015-11",
+      "ph_total": 8.0925,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2015,
+      "month": 12,
+      "date": "2015-12",
+      "ph_total": 8.0863,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 1,
+      "date": "2016-01",
+      "ph_total": 8.0814,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 2,
+      "date": "2016-02",
+      "ph_total": 8.0813,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 3,
+      "date": "2016-03",
+      "ph_total": 8.0777,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 4,
+      "date": "2016-04",
+      "ph_total": 8.0692,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 5,
+      "date": "2016-05",
+      "ph_total": 8.0724,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 7,
+      "date": "2016-07",
+      "ph_total": 8.0727,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 8,
+      "date": "2016-08",
+      "ph_total": 8.0779,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 10,
+      "date": "2016-10",
+      "ph_total": 8.0856,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2016,
+      "month": 11,
+      "date": "2016-11",
+      "ph_total": 8.0801,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 1,
+      "date": "2017-01",
+      "ph_total": 8.068,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 2,
+      "date": "2017-02",
+      "ph_total": 8.0667,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 3,
+      "date": "2017-03",
+      "ph_total": 8.0683,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 4,
+      "date": "2017-04",
+      "ph_total": 8.0704,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 5,
+      "date": "2017-05",
+      "ph_total": 8.0726,
+      "num_measurements": 9,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 6,
+      "date": "2017-06",
+      "ph_total": 8.0773,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 8,
+      "date": "2017-08",
+      "ph_total": 8.0759,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 10,
+      "date": "2017-10",
+      "ph_total": 8.0841,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 11,
+      "date": "2017-11",
+      "ph_total": 8.0823,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2017,
+      "month": 12,
+      "date": "2017-12",
+      "ph_total": 8.0731,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 1,
+      "date": "2018-01",
+      "ph_total": 8.0773,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 2,
+      "date": "2018-02",
+      "ph_total": 8.061,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 4,
+      "date": "2018-04",
+      "ph_total": 8.0579,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 5,
+      "date": "2018-05",
+      "ph_total": 8.0606,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 6,
+      "date": "2018-06",
+      "ph_total": 8.0679,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 7,
+      "date": "2018-07",
+      "ph_total": 8.0689,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 9,
+      "date": "2018-09",
+      "ph_total": 8.0729,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2018,
+      "month": 11,
+      "date": "2018-11",
+      "ph_total": 8.0669,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 1,
+      "date": "2019-01",
+      "ph_total": 8.0703,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 2,
+      "date": "2019-02",
+      "ph_total": 8.0553,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 5,
+      "date": "2019-05",
+      "ph_total": 8.0584,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 6,
+      "date": "2019-06",
+      "ph_total": 8.067,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 7,
+      "date": "2019-07",
+      "ph_total": 8.0687,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 8,
+      "date": "2019-08",
+      "ph_total": 8.0764,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 9,
+      "date": "2019-09",
+      "ph_total": 8.0823,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 10,
+      "date": "2019-10",
+      "ph_total": 8.0838,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2019,
+      "month": 12,
+      "date": "2019-12",
+      "ph_total": 8.0777,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2020,
+      "month": 1,
+      "date": "2020-01",
+      "ph_total": 8.0732,
+      "num_measurements": 12,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2020,
+      "month": 2,
+      "date": "2020-02",
+      "ph_total": 8.069,
+      "num_measurements": 1,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2020,
+      "month": 7,
+      "date": "2020-07",
+      "ph_total": 8.0717,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2020,
+      "month": 8,
+      "date": "2020-08",
+      "ph_total": 8.0769,
+      "num_measurements": 10,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2020,
+      "month": 9,
+      "date": "2020-09",
+      "ph_total": 8.0794,
+      "num_measurements": 11,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2020,
+      "month": 11,
+      "date": "2020-11",
+      "ph_total": 8.0791,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2020,
+      "month": 12,
+      "date": "2020-12",
+      "ph_total": 8.0706,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 1,
+      "date": "2021-01",
+      "ph_total": 8.0666,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "date": "2021-02",
+      "ph_total": 8.062,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "date": "2021-03",
+      "ph_total": 8.053,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "date": "2021-04",
+      "ph_total": 8.054,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "date": "2021-05",
+      "ph_total": 8.057,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "date": "2021-06",
+      "ph_total": 8.0578,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "date": "2021-07",
+      "ph_total": 8.0595,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "date": "2021-10",
+      "ph_total": 8.065,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "date": "2021-12",
+      "ph_total": 8.0596,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "date": "2022-03",
+      "ph_total": 8.0566,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "date": "2022-05",
+      "ph_total": 8.047,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "date": "2022-07",
+      "ph_total": 8.0053,
+      "num_measurements": 13,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "date": "2022-08",
+      "ph_total": 8.068,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "date": "2022-09",
+      "ph_total": 8.0633,
+      "num_measurements": 4,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "date": "2023-01",
+      "ph_total": 8.053,
+      "num_measurements": 3,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "date": "2023-03",
+      "ph_total": 8.0442,
+      "num_measurements": 5,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "date": "2023-05",
+      "ph_total": 8.0412,
+      "num_measurements": 6,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "date": "2023-08",
+      "ph_total": 8.058,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "date": "2023-09",
+      "ph_total": 8.0659,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "date": "2023-10",
+      "ph_total": 8.073,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "date": "2023-11",
+      "ph_total": 8.0627,
+      "num_measurements": 14,
+      "source": "HOT Station ALOHA"
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "date": "2023-12",
+      "ph_total": 8.05,
+      "num_measurements": 7,
+      "source": "HOT Station ALOHA"
+    }
+  ]
+}

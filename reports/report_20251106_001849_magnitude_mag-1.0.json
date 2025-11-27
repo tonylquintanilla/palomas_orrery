@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "mode": "magnitude",
+    "limit_value": -1.0,
+    "total_stars": 1,
+    "generation_time": "2025-11-06T00:18:49.362166",
+    "generated_by": "visualization_script"
+  },
+  "sections": {
+    "basic_stats": {
+      "total_stars": 1,
+      "mode": "magnitude",
+      "limit_value": -1.0,
+      "catalog_distribution": {
+        "Hipparcos": 1
+      }
+    },
+    "completeness": {
+      "temperature": {
+        "valid": 1,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "luminosity": {
+        "valid": 1,
+        "missing": 0,
+        "percentage": 100.0
+      },
+      "plottable": {
+        "count": 1,
+        "percentage": 100.0
+      }
+    },
+    "quality": {
+      "anomalies": [],
+      "statistics": {
+        "temperature": {
+          "min": 10381.76635368606,
+          "max": 10381.76635368606,
+          "mean": 10381.76635368606,
+          "median": 10381.76635368606
+        }
+      }
+    },
+    "catalog_coverage": {
+      "sources": {
+        "Hipparcos": {
+          "count": 1,
+          "percentage": 100.0
+        }
+      },
+      "magnitude_stats": {
+        "min": -1.440000057220459,
+        "max": -1.440000057220459,
+        "mean": -1.440000057220459
+      }
+    },
+    "processing": {
+      "total": 0
+    },
+    "object_analysis": {
+      "total_count": 1,
+      "typed_count": 1,
+      "category_counts": {
+        "Variable Stars": 0,
+        "Binary/Multiple Systems": 1,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 0,
+        "Unknown": 0
+      },
+      "category_percentages": {
+        "Variable Stars": 0,
+        "Binary/Multiple Systems": 100.0,
+        "Evolved Stars": 0,
+        "Young Stellar Objects": 0,
+        "Peculiar/Special Objects": 0,
+        "Normal Stars": 0,
+        "Unknown": 0
+      },
+      "type_counts": {
+        "Spectroscopic Binary Star. A type of binary star system<br> that can only be identified by analyzing its light spectrum.": 1
+      },
+      "notable_objects": [],
+      "diversity_score": 2,
+      "shannon_entropy": -0.0,
+      "simpson_index": 0.0,
+      "research_targets": [],
+      "summary": "100.0% objects typed. dominated by binary/multiple systems (100.0%). low diversity (h'=-0.00)",
+      "timestamp": "2025-11-06T00:18:49.364054"
+    },
+    "warnings": [
+      {
+        "level": "critical",
+        "message": "Only 1 star(s) in dataset - insufficient for meaningful visualization",
+        "recommendation": "Increase magnitude limit or distance range"
+      },
+      {
+        "level": "info",
+        "message": "Data from single catalog only (Hipparcos)",
+        "recommendation": "Results may be biased to catalog selection criteria"
+      }
+    ]
+  }
+}

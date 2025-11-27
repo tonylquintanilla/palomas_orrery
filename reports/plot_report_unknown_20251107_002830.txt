@@ -1,0 +1,68 @@
+==============================================
+PLOT DATA REPORT
+==============================================
+Generated: 2025-11-07T00:27:32.028581
+Plot Mode: distance
+Distance Limit: 20.0 ly
+
+----------------------------------------------------
+1. BASIC PLOT STATISTICS
+----------------------------------------------------
+Total Stars in Dataset: 99
+
+Catalog Distribution:
+  Hipparcos_bright: 5 (5.1%)
+  Hipparcos_mid: 4 (4.0%)
+  Gaia_mid: 0 (0.0%)
+  Gaia_faint: 90 (90.9%)
+  total: 99 (100.0%)
+
+----------------------------------------------------
+2. DATA COMPLETENESS METRICS
+----------------------------------------------------
+
+Temperature Data:
+  Valid: 96 (97.0%)
+  Missing: 3
+
+Luminosity Data:
+  Valid: 99 (100.0%)
+  Missing: 0
+
+----------------------------------------------------
+6. OBJECT TYPE ANALYSIS
+----------------------------------------------------
+
+Analysis Summary: 100.0% objects typed. dominated by binary/multiple systems (59.6%). moderate diversity (h'=2.33)
+
+Total objects: 99
+Objects with type data: 99 (100.0%)
+Unique object types: 8
+
+Diversity Metrics:
+  - Diversity Score: 16/100
+  - Shannon Entropy: 2.334
+  - Simpson Index: 0.750
+
+Object Categories:
+  - Binary/Multiple Systems: 59 (59.6%)
+  - Variable Stars: 39 (39.4%)
+  - Normal Stars: 1 (1.0%)
+
+Most Common Types:
+  1. High Proper-Motion Star: 39 (39.4%)
+  2. Eruptive Variable Star: 28 (28.3%)
+  3. Variable Star: 11 (11.1%)
+  4. Spectroscopic Binary Star. A typ...: 5 (5.1%)
+  5. Low-Mass Star: 5 (5.1%)
+
+----------------------------------------------------
+7. WARNINGS AND RECOMMENDATIONS
+----------------------------------------------------
+
+OK: No warnings - data quality appears good
+
+==============================================
+END OF REPORT
+==============================================
+

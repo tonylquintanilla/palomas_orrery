@@ -401,7 +401,7 @@ def create_energy_imbalance_visualization():
             x=years_ohc,
             y=ohc_zj,
             mode='lines',
-            name='Ocean Heat Content (0-2000m)',
+            name='Ocean Heat Content (OHC) (0-2000m)',
             line=dict(color='#4169E1', width=2.5, dash='dot'),  # Royal blue, dotted, thicker
             hovertemplate='Year: %{x:.1f}<br>Ocean Heat Content: %{y:.1f} ZJ<extra></extra>',
             yaxis='y2',  # Use secondary y-axis
@@ -420,7 +420,7 @@ def create_energy_imbalance_visualization():
             x=years_ohc,
             y=ohc_trend,
             mode='lines',
-            name='Acceleration Trend',
+            name='OHC Trend (Quadratic Fit)',
             line=dict(color='#4169E1', width=1, dash='dash'),  # Light touch
             opacity=0.6,
             hovertemplate='Year: %{x:.1f}<br>Trend: %{y:.1f} ZJ<extra></extra>',
@@ -483,7 +483,8 @@ def create_energy_imbalance_visualization():
     fig.update_layout(
         title={
             'text': "<b>Earth's Energy Imbalance & Temperature (2005-2025)</b><br>"
-                   "<i>Cause and Effect: Energy drives temperature change</i><br>"
+            #       "<i>Cause and Effect: Energy drives temperature change</i><br>"
+                   "<i>Energy drives temperature change -- <b>every tenth matters!</b></i><br>"                   
                    "<span style='font-size:11px; color:#666;'>Data: NASA GISS (temperature) | NOAA NCEI (Ocean Heat Content 0-2000m)</span>",
             'x': 0.5,
             'xanchor': 'center',
@@ -528,6 +529,7 @@ def create_energy_imbalance_visualization():
         secondary_y=False
     )
     
+    """
     # 0b. Calculate average annual Ocean Heat Content accumulation for comparison
     # Ocean Heat Content went from ~10 ZJ (2005) to ~33 ZJ (2025) = 23 ZJ over 20 years
     ohc_start = ohc_zj[0]
@@ -611,7 +613,218 @@ def create_energy_imbalance_visualization():
         xref='x',
         yref='y2'  # Use secondary y-axis (Ocean Heat Content scale)
     )
+    """
     
+    # CORRECTED ANNOTATION SECTION FOR energy_imbalance.py
+    # Replace lines 530-613 with this code
+
+    # Calculate key values from actual data
+    ohc_start = ohc_zj[0]
+    ohc_end = ohc_zj[-1]
+    years_span = years_ohc[-1] - years_ohc[0]
+    total_accumulation = ohc_end - ohc_start
+    avg_annual_ohc = total_accumulation / years_span
+
+    # Get the quadratic fit coefficients (already calculated in line 415)
+    # coefs = np.polyfit(years_ohc, ohc_zj, 2)
+    # ohc_trend = np.polyval(coefs, years_ohc)
+
+    # Calculate instantaneous slopes of the quadratic at 5-year intervals
+    # For quadratic y = a*x² + b*x + c, the derivative (slope) is: dy/dx = 2*a*x + b
+    def quadratic_slope(x, coefs):
+        """Calculate instantaneous slope of quadratic at point x"""
+        return 2 * coefs[0] * x + coefs[1]
+
+    # Tony's empirically-determined values from sampling the trend line
+    # These represent the instantaneous slope of the quadratic at each point
+    slope_2010 = 1.00  # ZJ/yr
+    slope_2015 = 1.06  # ZJ/yr
+    slope_2020 = 1.10  # ZJ/yr
+    slope_2025 = 1.14  # ZJ/yr
+
+    # Find OHC values at 5-year intervals (from trend line or data)
+    # We'll use the actual data points closest to these years
+    def get_closest_value(year_target):
+        """Get OHC value at year closest to target"""
+        idx = np.argmin(np.abs(years_ohc - year_target))
+        return ohc_zj[idx]
+
+    ohc_2005 = ohc_start  # 9.0 ZJ
+    ohc_2010 = get_closest_value(2010.2)  # ~14.9 ZJ
+    ohc_2015 = get_closest_value(2015.2)  # ~20.2 ZJ (from trend, or ~23.4 actual)
+    ohc_2020 = get_closest_value(2020.2)  # ~25.7 ZJ
+    ohc_2025 = ohc_end  # 31.9 ZJ
+
+    # ANNOTATION 1: Five-year progression markers along OHC line
+    # These show the relentless accumulation and increasing rate
+
+    # 2005.2 - Starting point (boundary condition)
+    fig.add_annotation(
+        x=2005.2,
+        y=ohc_2005,
+        text=f'March 2005: {ohc_2005:.1f} ZJ<br><i>Start</i>',
+        showarrow=True,
+        arrowhead=2,
+        arrowsize=0.8,
+        arrowwidth=1,
+        arrowcolor='#4169E1',
+        ax=0,
+        ay=-60,
+        font=dict(size=7, color='#4169E1'),
+        bgcolor='rgba(255,255,255,0.85)',
+        bordercolor='#4169E1',
+        borderwidth=1,
+        align='center',
+        xref='x',
+        yref='y2'
+    )
+
+    # 2010.2 - First interval
+    fig.add_annotation(
+        x=2010.2,
+        y=ohc_2010,
+        text=f'March 2010: {ohc_2010:.1f} ZJ<br><i>Rate: {slope_2010:.2f} ZJ/yr</i>',
+        showarrow=True,
+        arrowhead=2,
+        arrowsize=0.8,
+        arrowwidth=1,
+        arrowcolor='#4169E1',
+        ax=-50,
+        ay=-40,
+        font=dict(size=7, color='#4169E1'),
+        bgcolor='rgba(255,255,255,0.85)',
+        bordercolor='#4169E1',
+        borderwidth=1,
+        align='left',
+        xref='x',
+        yref='y2'
+    )
+
+    # 2015.2 - Midpoint
+    fig.add_annotation(
+        x=2015.2,
+        y=ohc_2015,
+        text=f'March 2015: {ohc_2015:.1f} ZJ<br><i>Rate: {slope_2015:.2f} ZJ/yr</i>',
+        showarrow=True,
+        arrowhead=2,
+        arrowsize=0.8,
+        arrowwidth=1,
+        arrowcolor='#4169E1',
+        ax=50,
+        ay=-40,
+        font=dict(size=7, color='#4169E1'),
+        bgcolor='rgba(255,255,255,0.85)',
+        bordercolor='#4169E1',
+        borderwidth=1,
+        align='right',
+        xref='x',
+        yref='y2'
+    )
+
+    # 2020.2 - Recent interval
+    fig.add_annotation(
+        x=2020.2,
+        y=ohc_2020,
+        text=f'March 2020: {ohc_2020:.1f} ZJ<br><i>Rate: {slope_2020:.2f} ZJ/yr</i>',
+        showarrow=True,
+        arrowhead=2,
+        arrowsize=0.8,
+        arrowwidth=1,
+        arrowcolor='#4169E1',
+        ax=-50,
+        ay=-40,
+        font=dict(size=7, color='#4169E1'),
+        bgcolor='rgba(255,255,255,0.85)',
+        bordercolor='#4169E1',
+        borderwidth=1,
+        align='left',
+        xref='x',
+        yref='y2'
+    )
+
+    # 2025.2 - Current endpoint (boundary condition)
+    fig.add_annotation(
+        x=2025.2,
+    #    y=ohc_2025,
+        y=31.9,
+    #    text=f'March 2025: {ohc_2025:.1f} ZJ<br><i>Rate: {slope_2025:.2f} ZJ/yr</i>',
+        text=f'March 2025: {31.9:.1f} ZJ<br><i>Rate: {slope_2025:.2f} ZJ/yr</i>',
+        showarrow=True,
+        arrowhead=2,
+        arrowsize=0.8,
+        arrowwidth=1,
+        arrowcolor='#4169E1',
+        ax=0,
+        ay=80,
+        font=dict(size=7, color='#4169E1'),
+        bgcolor='rgba(255,255,255,0.85)',
+        bordercolor='#4169E1',
+        borderwidth=1,
+        align='center',
+        xref='x',
+        yref='y2'
+    )
+
+    # ANNOTATION 2: Trend line explanation (small note near the trend line)
+#    fig.add_annotation(
+#        x=2012.0,
+#        y=16.0,
+#        text='<i>Dashed line: Quadratic fit<br>(shows acceleration)</i>',
+#        showarrow=False,
+#        font=dict(size=7, color='#4169E1'),
+#        bgcolor='rgba(255,255,255,0.7)',
+#        bordercolor='#4169E1',
+#        borderwidth=0.5,
+#        align='center',
+#        xref='x',
+#        yref='y2'
+#    )
+
+    # ANNOTATION 3: Scale Comparison (updated with corrected values)
+#    pipeline_warming = 0.4  # Conservative estimate
+    pipeline_warming = 0.6  # Hansen et al. (2005) - Earth's Energy Imbalance
+
+    fig.add_annotation(
+    #    x=year_2025,
+        x=2025.2,
+    #    y=32.7,  # Position near top of Ocean Heat Content scale
+        y=31.9,
+        text=f'<b>Scale Comparison:</b><br>'
+            f'Humanity\'s annual energy use: ~0.6 ZJ/yr<br>'
+            f'Ocean heat accumulation<br>'
+    #        f'(March 2005 - March 2025): ~{avg_annual_ohc:.2f} ZJ/yr<br>'
+            f'(March 2005 - March 2025): ~ 1.08 ZJ/yr<br>'
+    #        f'<i>Ocean absorbs ~{avg_annual_ohc/0.6:.0f}× human energy use!</i><br><br>'
+            f'<i>Ocean absorbs ~{1.075/0.6:.0f}× human energy use!</i><br>'
+            f'<b>Total Accumulation (2005-2025):</b><br>'
+    #        f'Final: {ohc_2025:.1f} ZJ (2025)<br>'
+    #        f'March 2025: {31.9:.1f} ZJ<br>'            
+    #        f'Accumulated: {total_accumulation:.1f} ZJ<br>'
+            f'Accumulated since March 2005: {22.9:.1f} ZJ<br>'            
+            f'Acceleration: {slope_2010:.2f} → {slope_2025:.2f} ZJ/yr (+{100*(slope_2025-slope_2010)/slope_2010:.0f}%)<br>',
+    #        f'<b>Pipeline Warming:</b><br>'        # this comment needs more developement
+    #        f'<i>~{pipeline_warming:.1f}°C committed warming (2005)<br>still unrealized in atmosphere</i>',
+        showarrow=True,
+        arrowhead=2,
+        arrowsize=1,
+        arrowwidth=1.5,
+        arrowcolor='#4169E1',
+        ax=-145,
+        ay=-60,
+        font=dict(size=8, color='#4169E1'),
+        bgcolor='rgba(255,255,255,0.95)',
+        bordercolor='#4169E1',
+        borderwidth=1.5,
+        align='left',
+        xref='x',
+        yref='y2'  # Use secondary y-axis (Ocean Heat Content scale)
+    )
+
+    # Note: The old "Integration Baseline" annotation has been replaced by the
+    # five-year progression markers above, which show the accumulation more clearly.
+    # The "Scale Comparison" now includes the final value, total accumulation,
+    # and acceleration information.
+
     # 1. Paris Agreement (2015)
     fig.add_annotation(
         x=2015,
@@ -654,9 +867,9 @@ def create_energy_imbalance_visualization():
     # 2. Present (2025) - use actual data values
     fig.add_annotation(
         x=year_2025,  # Use actual decimal year position
-        y=1.3,
-        text=f'2025 (Most Recent)<br>Imbalance: {imbalance_2025:.2f} W/m²<br>Temp: +{temp_2025:.2f}°C',
-        showarrow=True,
+        y=0.6,
+        text=f'April 2025<br>Imbalance: {imbalance_2025:.2f} W/m²<br>Temp: +{temp_2025:.2f}°C',
+        showarrow=False,
         arrowhead=2,
         arrowsize=1,
         arrowwidth=2,
@@ -688,11 +901,15 @@ def create_energy_imbalance_visualization():
             ' *<b>La Niña (Blue Bands):</b> The ocean absorbs more solar energy, temporarily <b>increasing the EEI</b> (Orange line peaks) while **cooling the atmosphere** (GMST dips).<br>' 
             ' *<b>El Niño (Orange Bands):</b> The ocean releases stored heat into the atmosphere, causing atmospheric temperature to <b>peak</b> (GMST peaks) while the planet temporarily reflects more sunlight, **decreasing the EEI** (Orange line dips).<br>'            
             '<b>Key Insight:</b> The atmospheric temperature (GMST) swings are merely a *redistribution* of heat. The net positive accumulation shown by the rising **OHC** demonstrates the growing total committed warming stored in the climate system.<br>' 
-    #        '<b>Data Sources:</b> Temperature: NASA GISS Surface Temperature Analysis (GISTEMP v4) | Ocean Heat Content: NOAA NCEI (0-2000m, Levitus et al.)',
-             '<b>Data Sources:</b> '
-             'Temperature: <a href="https://data.giss.nasa.gov/gistemp/">NASA GISS Surface Temperature Analysis (GISTEMP v4)</a> | '
-             'Ocean Heat Content: <a href="https://www.ncei.noaa.gov/access/global-ocean-heat-content/">NOAA NCEI Ocean Heat Content (0-2000m, Levitus et al.)</a>',
 
+    #         '<b>Data Sources:</b> '
+    #         'Temperature: <a href="https://data.giss.nasa.gov/gistemp/">NASA GISS Surface Temperature Analysis (GISTEMP v4)</a> | '
+    #         'Ocean Heat Content: <a href="https://www.ncei.noaa.gov/access/global-ocean-heat-content/">NOAA NCEI Ocean Heat Content (0-2000m, Levitus et al.)</a>',
+
+            '<b>Data Sources:</b> '
+            'Temperature: <a href="https://data.giss.nasa.gov/gistemp/">NASA GISS Surface Temperature Analysis (GISTEMP v4)</a> | '
+            'Ocean Heat Content: <a href="https://www.ncei.noaa.gov/access/global-ocean-heat-content/">NOAA NCEI Ocean Heat Content (0-2000m, Levitus et al.)</a> | '
+            'Pipeline Warming: <a href="https://doi.org/10.1126/science.1110252">Hansen et al. (2005), Science</a>',
 
 
         showarrow=False,
