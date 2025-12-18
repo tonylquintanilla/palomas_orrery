@@ -5,12 +5,16 @@ __pycache__/
 # Data files
 *.vot 
 *.pkl
+*.csv
 
 # Plot outputs
 *.html
 *.png
 
-# Orbit position cache (in /data/ directory)
-data/orbit_paths.backup_old
+# Backup files
+*.backup
+*.backup_old
+*_backup
+data/*verify_backup*
 
 
