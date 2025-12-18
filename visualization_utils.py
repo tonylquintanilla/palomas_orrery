@@ -414,31 +414,52 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
             break
     
     # Get orbital period information
-    calculated_period = "N/A"
+#    calculated_period = "N/A"
     known_period = "N/A"
     
     # Calculate orbital period for non-satellites
-    if not is_satellite and obj_name in planetary_params:
-        a = planetary_params[obj_name]['a']  # Semi-major axis in AU
+#    if not is_satellite and obj_name in planetary_params:
+#        a = planetary_params[obj_name]['a']  # Semi-major axis in AU
             
-        if a > 0:
-            orbital_period_years = np.sqrt(a ** 3)
-            calculated_period = {
-                'years': orbital_period_years,
-                'days': orbital_period_years * 365.25
-            }  # ✅ Correct indentation - closes the dict properly
+#       if a > 0:
+#            orbital_period_years = np.sqrt(a ** 3)
+#            calculated_period = {
+#                'years': orbital_period_years,
+#                'days': orbital_period_years * 365.25
+#            }  # ✅ Correct indentation - closes the dict properly
 
     
     # Format calculated period
-    if isinstance(calculated_period, dict):
-        calc_years = calculated_period.get('years')
-        calc_days = calculated_period.get('days')
-        calculated_period_str = f"{calc_years:.4f} Earth years ({calc_days:.2f} days)"
-    else:
-        calculated_period_str = str(calculated_period)
+#    if isinstance(calculated_period, dict):
+#        calc_years = calculated_period.get('years')
+#        calc_days = calculated_period.get('days')
+#        calculated_period_str = f"{calc_years:.4f} Earth years ({calc_days:.2f} days)"
+#    else:
+#        calculated_period_str = str(calculated_period)
     
     # Get known orbital period if available
-    if obj_name in KNOWN_ORBITAL_PERIODS:
+#    if obj_name in KNOWN_ORBITAL_PERIODS:
+#        known_value = KNOWN_ORBITAL_PERIODS[obj_name]
+        
+#        if known_value is None:
+            # Handle hyperbolic/parabolic objects
+#            known_period = "N/A (hyperbolic/parabolic orbit)"
+#        else:
+#            known_period = {
+#                'days': known_value,
+#                'years': known_value / 365.25
+#            }
+    
+    # Get known orbital period if available
+    # Context-aware: Pluto uses barycentric period (6.387 days) when centered on Pluto-Charon Barycenter
+    if obj_name == 'Pluto' and center_object_name == 'Pluto-Charon Barycenter':
+        # Pluto orbits the barycenter with the same period as Charon (6.387 days)
+        known_value = 6.387  # Binary orbital period, same as Charon
+        known_period = {
+            'days': known_value,
+            'years': known_value / 365.25
+        }
+    elif obj_name in KNOWN_ORBITAL_PERIODS:
         known_value = KNOWN_ORBITAL_PERIODS[obj_name]
         
         if known_value is None:
@@ -449,7 +470,7 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
                 'days': known_value,
                 'years': known_value / 365.25
             }
-    
+
     # Format known period
     if isinstance(known_period, dict):
         known_years = known_period.get('years')
@@ -459,19 +480,20 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
         known_period_str = str(known_period)
     
     # Calculate percent difference between calculated and known orbital periods
-    period_diff_percent = "N/A"
-    if (not is_satellite and 
-        isinstance(calculated_period, dict) and 
-        isinstance(known_period, dict) and
-        isinstance(calculated_period.get('years'), (int, float)) and 
-        isinstance(known_period.get('years'), (int, float)) and
-        known_period.get('years') != 0):
+#    period_diff_percent = "N/A"
+#    if (not is_satellite and 
+#        isinstance(calculated_period, dict) and 
+#        isinstance(known_period, dict) and
+#        isinstance(calculated_period.get('years'), (int, float)) and 
+#        isinstance(known_period.get('years'), (int, float)) and
+#        known_period.get('years') != 0):
         
-        calc_years = calculated_period.get('years')
-        known_years = known_period.get('years')
-        period_diff = abs(calc_years - known_years)
-        period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
-    
+#        calc_years = calculated_period.get('years')
+#        known_years = known_period.get('years')
+#        period_diff = abs(calc_years - known_years)
+#        period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
+
+
     # Find the object's info in the objects list
     obj_info = next((o for o in objects if o['name'] == obj_name), None)
     mission_info = obj_info.get('mission_info', '') if obj_info else ''
@@ -507,17 +529,24 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
         )
 
     # Add orbital period information
-    if is_satellite:
-        full_hover_text += f"Calculated Orbital Period: N/A (satellite of {planet})<br>"
-    else:
-        full_hover_text += f"Calculated Orbital Period: {calculated_period_str}<br>"
+    # Only show "satellite of" message when actually viewing from the parent body
+    # (e.g., Pluto is in parent_planets under Pluto-Charon Barycenter, but when
+    # viewing from Sun, we should show its heliocentric period)
+#    if is_satellite and planet == center_object_name:
+#        full_hover_text += f"Calculated Orbital Period: N/A (satellite of {planet})<br>"
+
+#    else:
+#        full_hover_text += f"Calculated Orbital Period: {calculated_period_str}<br>"
     
     # Add known period if available
-    if period_diff_percent != "N/A":
-        full_hover_text += f"Known Orbital Period: {known_period_str} (Percent difference: {period_diff_percent}%)"
-    else:
-        full_hover_text += f"Known Orbital Period: {known_period_str}"
+#    if period_diff_percent != "N/A":
+#        full_hover_text += f"Known Orbital Period: {known_period_str} (Percent difference: {period_diff_percent}%)"
+#    else:
+#        full_hover_text += f"Known Orbital Period: {known_period_str}"
     
+    # Add orbital period information (known period only)
+    full_hover_text += f"Known Orbital Period: {known_period_str}"
+
     # Add mission_info if it exists
     if mission_info:
         full_hover_text += f"<br>{mission_info}"

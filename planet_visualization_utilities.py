@@ -73,8 +73,9 @@ NEPTUNE_RADIUS_AU = NEPTUNE_RADIUS_KM / KM_PER_AU  # Convert to AU
 PLUTO_RADIUS_KM = CENTER_BODY_RADII['Pluto']  # Equatorial radius in km
 PLUTO_RADIUS_AU = PLUTO_RADIUS_KM / KM_PER_AU  # Convert to AU
 
-# Eris/Dysnomia Constants
-ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris/Dysnomia']  # Equatorial radius in km
+# Eris Constants
+# ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris/Dysnomia']  # Equatorial radius in km
+ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris']  # Equatorial radius in km
 ERIS_RADIUS_AU = ERIS_RADIUS_KM / KM_PER_AU  # Convert to AU
 
 # Planet 9 Constants

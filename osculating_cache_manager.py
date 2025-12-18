@@ -28,6 +28,43 @@ except ImportError:
     print("Warning: Could not import orbital_elements - fallback unavailable")
     FALLBACK_ELEMENTS = {}
 
+
+def get_cache_key(obj_name, center_body=None):
+    """
+    Generate cache key for an object, optionally with center body suffix.
+    
+    This enables storing different osculating elements for the same object
+    relative to different centers (e.g., heliocentric vs barycentric).
+    
+    Parameters:
+        obj_name (str): Display name of object (e.g., 'Pluto', 'Charon')
+        center_body (str, optional): Center body ID (e.g., '@9', '@sun', '9', 'sun')
+    
+    Returns:
+        str: Cache key
+    
+    Examples:
+        get_cache_key('Pluto')           -> 'Pluto'       (heliocentric default)
+        get_cache_key('Pluto', '@sun')   -> 'Pluto'       (explicit heliocentric)
+        get_cache_key('Pluto', '@9')     -> 'Pluto@9'     (barycentric)
+        get_cache_key('Charon', '@9')    -> 'Charon@9'    (barycentric)
+        get_cache_key('Charon', '@999')  -> 'Charon@999'  (Pluto body-centered)
+    """
+    # Heliocentric is the default - no suffix needed
+    if center_body is None:
+        return obj_name
+    
+    # Normalize: remove @ prefix if present
+    center = center_body.lstrip('@').lower()
+    
+    # These all mean heliocentric - no suffix
+    if center in ['sun', '0', '10', 'ssb']:  # SSB = Solar System Barycenter
+        return obj_name
+    
+    # Non-heliocentric center - add suffix
+    return f"{obj_name}@{center_body.lstrip('@')}"
+
+
 # Cache file paths
 CACHE_DIR = Path(__file__).parent / 'data'  # data/ subdirectory
 CACHE_FILE = CACHE_DIR / 'osculating_cache.json'
@@ -263,7 +300,8 @@ def calculate_age_days(cache_entry):
     except:
         return None
 
-def check_cache_status(obj_name):
+#def check_cache_status(obj_name):
+def check_cache_status(obj_name, center_body=None):
     """
     Check cache status for an object.
     
@@ -278,11 +316,15 @@ def check_cache_status(obj_name):
             - is_fresh (bool)
             - status_text (str): "✓ Fresh" or "⚠ Update recommended" or "Not in cache"
     """
+
     cache = load_cache()
+
+    cache_key = get_cache_key(obj_name, center_body)
     
     recommended_days = get_refresh_interval(obj_name)
     
-    if obj_name not in cache or obj_name.startswith('_'):
+    if cache_key not in cache or cache_key.startswith('_'):
+
         return {
             'exists': False,
             'age_days': None,
@@ -291,7 +333,8 @@ def check_cache_status(obj_name):
             'status_text': 'Not in cache'
         }
     
-    age_days = calculate_age_days(cache[obj_name])
+#    age_days = calculate_age_days(cache[obj_name])
+    age_days = calculate_age_days(cache[cache_key])
     
     if age_days is None:
         return {
@@ -317,7 +360,8 @@ def check_cache_status(obj_name):
 # FETCHING FROM JPL HORIZONS
 # ============================================================================
 
-def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', date=None):
+#def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', date=None):
+def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', date=None, center_body=None):
     """
     Fetch osculating elements from JPL Horizons.
     
@@ -328,6 +372,8 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         id_type (str): Horizons ID type - 'smallbody', 'majorbody', 'id', etc.
                        Default: 'smallbody'
         date (datetime, optional): Date for osculating elements (default: today)
+        center_body (str, optional): Override center body (e.g., '@9' for Pluto barycenter)
+                                     If None, auto-detects based on object ID.
     
     Returns:
         dict: Cache entry with elements and metadata, or None if fetch fails
@@ -336,6 +382,7 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         - obj_name is used for display and metadata (e.g., '3I/ATLAS')
         - horizons_id is passed to JPL Horizons query (e.g., 'C/2025 N1')
         - The actual Horizons ID used is stored in metadata['horizons_id']
+        - center_body enables fetching barycentric elements for binary systems
     """
     if date is None:
         date = datetime.now()
@@ -354,7 +401,8 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
             print(f"   Using Horizons ID: {query_id} (id_type: {id_type})", flush=True)
         
         # Query JPL Horizons using proper ID and type
-        result = query_horizons_elements(query_id, id_type, date_str)
+    #    result = query_horizons_elements(query_id, id_type, date_str)
+        result = query_horizons_elements(query_id, id_type, date_str, center_body=center_body)
         
         # Package the result
         cache_entry = {
@@ -366,7 +414,10 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
                 'Omega': result['Omega'],
                 'epoch': f"{date_str} osc.",
                 'TP': result.get('TP'),
+                'MA': result.get('MA'),      # Mean anomaly at epoch (degrees)
+                'TA': result.get('TA'),      # True anomaly at epoch (degrees)
             },
+
             'metadata': {
                 'fetched': datetime.now().isoformat(),
                 'source': 'JPL Horizons',
@@ -374,7 +425,9 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
                 'horizons_id': query_id,  # Store the actual ID we queried with
                 'display_name': obj_name,  # Store the display name separately
                 'refresh_interval_days': get_refresh_interval(obj_name),
+                'center_body': result.get('center_body', '@sun'),  # Store which center was used
             }
+
         }
         
         # Add optional metadata if available
@@ -443,9 +496,8 @@ def format_interval_string(interval_days):
     else:
         return f"Every {interval_days} days"
 
-# def get_elements_with_prompt(obj_name, parent_window=None):
-# def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', parent_window=None): 
-def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', plot_date=None, parent_window=None):   
+# def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', plot_date=None, parent_window=None):   
+def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', plot_date=None, parent_window=None, center_body=None):
     """
     Get orbital elements with user prompt - ALWAYS prompts with information.
     
@@ -480,8 +532,12 @@ def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', pl
     """
     
     # Check cache status
-    status = check_cache_status(obj_name)
+#    status = check_cache_status(obj_name)
     
+    # Check cache status (center-body aware)
+    cache_key = get_cache_key(obj_name, center_body)
+    status = check_cache_status(obj_name, center_body)
+
     # Build dialog message
     if status['exists']:
         age_str = format_age_string(status['age_days'])
@@ -517,21 +573,34 @@ def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', pl
             print(f"  Using Horizons ID: {query_id} (id_type: {id_type})", flush=True)
 
         # Fetch fresh elements
-#        fresh_entry = fetch_osculating_elements(obj_name)
 
         # Pass horizons_id for query, but obj_name for metadata/display
+#        fresh_entry = fetch_osculating_elements(
+#            obj_name, 
+#            horizons_id=horizons_id, 
+#            id_type=id_type,
+#            date=plot_date
+#        )        
+        
         fresh_entry = fetch_osculating_elements(
             obj_name, 
             horizons_id=horizons_id, 
             id_type=id_type,
-            date=plot_date
-        )        
-        
+            date=plot_date,
+            center_body=center_body
+        )
+
         if fresh_entry:
-            # Update cache
+    #        # Update cache
+    #        cache = load_cache()
+    #        cache[obj_name] = fresh_entry
+    #        save_cache(cache)
+
+            # Update cache with center-aware key
             cache = load_cache()
-            cache[obj_name] = fresh_entry
+            cache[cache_key] = fresh_entry
             save_cache(cache)
+
             return fresh_entry['elements']
         else:
             # Fetch failed - fall back

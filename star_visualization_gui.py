@@ -1,5 +1,8 @@
 # star_visualization_gui.py - Final version with enhanced pickle file support
 # This GUI reads the enhanced pickle files that contain both raw and calculated data
+# 
+# UPDATED: November 28, 2025 - Added PyInstaller frozen executable support
+# When running as exe, plotting modules are called directly instead of via subprocess
 
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
@@ -21,6 +24,36 @@ from constants_new import object_type_mapping, class_mapping, stellar_class_labe
 from plot_data_report_widget import PlotDataReportWidget
 from plot_data_exchange import PlotDataExchange
 from report_manager import ReportManager
+
+
+# ============================================================
+# PyInstaller Support - Detect frozen executable
+# ============================================================
+
+def is_frozen():
+    """Check if running as a PyInstaller frozen executable."""
+    return getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
+
+# Set working directory to script location (works for both Python and frozen exe)
+# This ensures relative paths (star_data/, reports/, etc.) work correctly
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+print(f"Working directory set to: {os.getcwd()}")
+
+# Import plotting modules for frozen exe (can't use subprocess)
+if is_frozen():
+    try:
+        import hr_diagram_distance
+        import hr_diagram_apparent_magnitude  
+        import planetarium_distance
+        import planetarium_apparent_magnitude
+        PLOTTING_MODULES_AVAILABLE = True
+        print("Plotting modules loaded for frozen executable")
+    except ImportError as e:
+        print(f"Warning: Could not import plotting modules: {e}")
+        PLOTTING_MODULES_AVAILABLE = False
+else:
+    PLOTTING_MODULES_AVAILABLE = False
 
 
 class ScrollableFrame(ttk.Frame):
@@ -50,9 +83,9 @@ class LazyStarPropertiesLoader:
     def __init__(self):
         self.loaded_properties = {}
         self.property_files = {
-            'distance': 'star_properties_distance.pkl',
-            'magnitude': 'star_properties_magnitude.pkl',
-            'notable': 'star_properties.pkl'
+            'distance': 'star_data/star_properties_distance.pkl',
+            'magnitude': 'star_data/star_properties_magnitude.pkl',
+            'notable': 'star_data/star_properties.pkl'
         }
         self.file_stats = {}
         self._scan_files()
@@ -180,7 +213,7 @@ class StarVisualizationSearchWidget(ttk.Frame):
         # For distance/magnitude - only get names, not full data
         for data_type, category in [('distance', 'Stars by Distance'), 
                                     ('magnitude', 'Stars by Magnitude')]:
-            filename = f'star_properties_{data_type}.pkl'
+            filename = f'star_data/star_properties_{data_type}.pkl'
             if os.path.exists(filename):
                 try:
                     with open(filename, 'rb') as f:
@@ -470,14 +503,6 @@ class StarVisualizationSearchWidget(ttk.Frame):
         output.append("-" * 60)
         output.append(f"Search Category: {category}")
         
-#        available_in = []
-#        if star_name in unique_notes:
-#            available_in.append("Notable Stars")
-#        if "Stars by Distance" in self.star_full_data and star_name in self.star_full_data["Stars by Distance"]:
-#            available_in.append("Distance Catalog")
-#        if "Stars by Magnitude" in self.star_full_data and star_name in self.star_full_data["Stars by Magnitude"]:
-#            available_in.append("Magnitude Catalog")
-
         # CHANGE 3: Update the availability check to not rely on pre-loaded data
         available_in = []
         if star_name in unique_notes:
@@ -505,9 +530,9 @@ class StarVisualizationSearchWidget(ttk.Frame):
         
         # Map category to file
         file_map = {
-            "Stars by Distance": "star_properties_distance.pkl",
-            "Stars by Magnitude": "star_properties_magnitude.pkl",
-            "Notable Stars": "star_properties_distance.pkl"  # Try distance file for notable stars
+            "Stars by Distance": "star_data/star_properties_distance.pkl",
+            "Stars by Magnitude": "star_data/star_properties_magnitude.pkl",
+            "Notable Stars": "star_data/star_properties_distance.pkl"  # Try distance file for notable stars
         }
         
         filename = file_map.get(category)
@@ -765,7 +790,6 @@ class StarVisualizationGUI(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Star Visualization Control Panel")
-    #    self.geometry("850x1200")
         self.geometry("1100x800")
         self.minsize(980, 700)        
         
@@ -879,37 +903,6 @@ class StarVisualizationGUI(tk.Tk):
                     limit_value=plot_data.get('limit_value')
                 )
                 
-                """
-                # Update status to show last plot info
-                mode = plot_data.get('mode', 'unknown')
-                limit_value = plot_data.get('limit_value', 'N/A')
-
-                if mode == 'distance':
-                    self.status_label.config(
-                        text=f"Loaded last plot: {limit_value} ly distance",
-                        foreground="green"
-                    )
-                elif mode == 'magnitude':
-                    self.status_label.config(
-                        text=f"Loaded last plot: magnitude ≤ {limit_value}",
-                        foreground="green"
-                    )
-                else:
-                    self.status_label.config(
-                        text="Loaded last plot data",
-                        foreground="green"
-                    )
-                    
-                print(f"Plot report loaded: {mode} mode, limit={limit_value}")
-                
-            else:
-                print("No previous plot data found")
-                self.status_label.config(
-                    text="Ready - no previous plot data",
-                    foreground="blue"
-                )
-                """
-                
         except Exception as e:
             print(f"Error loading last plot data: {e}")
             import traceback
@@ -939,11 +932,9 @@ class StarVisualizationGUI(tk.Tk):
         self.search_widget.pack(fill='both', expand=True)
         
         # MIDDLE COLUMN - Visualization Controls
-    #    middle_frame = ttk.Frame(main_frame)
-    #    middle_frame.grid(row=0, column=1, sticky='nsew', padx=5)
         middle_scroll = ScrollableFrame(main_frame)
         middle_scroll.grid(row=0, column=1, sticky='nsew', padx=5)
-        middle_frame = middle_scroll.container  # Use this as before        
+        middle_frame = middle_scroll.container
         
         controls_label = ttk.Label(middle_frame, text="Visualization Controls", font=("Arial", 12, "bold"))
         controls_label.pack(pady=(0, 10))
@@ -1016,8 +1007,6 @@ class StarVisualizationGUI(tk.Tk):
 
         self.scale_var.trace('w', on_scale_change)
         on_scale_change()  # Set initial state
-
-        # Then continue with existing magnitude entry label...        
         
         ttk.Label(magnitude_frame, text="Limiting Magnitude:").pack(anchor='w')
         self.mag_entry = ttk.Entry(magnitude_frame, width=20)
@@ -1082,13 +1071,13 @@ class StarVisualizationGUI(tk.Tk):
             "Earth orbit            8.0 - 9.0\n"
             "Excellent dark sky	    7.6 - 8.0\n"
             "Typical dark sky	      7.1 - 7.5\n"
-	        "Rural sky	             6.6 - 7.0\n"
-	        "Rural/suburban sky     6.1 - 6.5\n"
-	        "Suburban sky	          5.6 - 6.0\n"
-	        "Bright suburban sky	   5.1 - 5.5\n"
-	        "Suburban/urban sky	    4.6 - 5.0\n"
-	        "City sky	              4.1 - 4.5\n"
-	        "Inner-city sky	        < 4.0\n"
+            "Rural sky	             6.6 - 7.0\n"
+            "Rural/suburban sky     6.1 - 6.5\n"
+            "Suburban sky	          5.6 - 6.0\n"
+            "Bright suburban sky	   5.1 - 5.5\n"
+            "Suburban/urban sky	    4.6 - 5.0\n"
+            "City sky	              4.1 - 4.5\n"
+            "Inner-city sky	        < 4.0\n"
             "Brightest star, Sirius -1.44\n\n"
             "Cache Management:\n"
             "- Protected VOT/PKL files\n"
@@ -1112,6 +1101,10 @@ class StarVisualizationGUI(tk.Tk):
         )
         notes_text.config(state='disabled')
 
+    # ============================================================
+    # PLOTTING METHODS - Updated for PyInstaller support
+    # ============================================================
+
     def plot_3d_distance(self):
         """Launch 3D distance visualization."""
         try:
@@ -1120,36 +1113,48 @@ class StarVisualizationGUI(tk.Tk):
                 self.status_label.config(text="Enter 4.25 - 100 light-years", foreground="red")
                 return
             
-            # ADD THIS - Update status IMMEDIATELY when button is clicked
             self.status_label.config(
                 text=f"Generating 3D visualization for distance ≤ {ly_value} (~10-15 seconds)",
                 foreground="blue"
             )
-            self.update()  # Force GUI to refresh NOW
+            self.update()
 
-            script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
-            
-            # CHANGED: Add capture_output to capture the output
-            result = subprocess.run([sys.executable, script_path, str(ly_value)],
-                                capture_output=True, text=True)
-            
-            # NEW: Print all captured output to console
-            print("\n" + "="*60)
-            print(f"Output from planetarium_distance.py ({ly_value} ly):")
-            print("="*60)
-            if result.stdout:
-                print(result.stdout)
-            if result.stderr:
-                print("STDERR:")
-                print(result.stderr)
-            print("="*60 + "\n")
-            
-            # NEW: Check if successful
-            if result.returncode == 0:
-                self.status_label.config(text=f"Launched 3D plot ({ly_value} ly)", foreground="green")
+            if is_frozen() and PLOTTING_MODULES_AVAILABLE:
+                # Running as exe - call function directly
+                print(f"Running planetarium_distance.main() directly (frozen exe)")
+                old_argv = sys.argv
+                sys.argv = ['planetarium_distance.py', str(ly_value)]
+                try:
+                    planetarium_distance.main()
+                    self.status_label.config(text=f"Launched 3D plot ({ly_value} ly)", foreground="green")
+                except Exception as e:
+                    print(f"Error in planetarium_distance: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    self.status_label.config(text="Error generating 3D plot", foreground="red")
+                finally:
+                    sys.argv = old_argv
             else:
-                self.status_label.config(text="Error generating 3D plot", foreground="red")
+                # Running as Python script - use subprocess
+                script_path = os.path.join(os.path.dirname(__file__), 'planetarium_distance.py')
+                result = subprocess.run([sys.executable, script_path, str(ly_value)],
+                                    capture_output=True, text=True)
                 
+                print("\n" + "="*60)
+                print(f"Output from planetarium_distance.py ({ly_value} ly):")
+                print("="*60)
+                if result.stdout:
+                    print(result.stdout)
+                if result.stderr:
+                    print("STDERR:")
+                    print(result.stderr)
+                print("="*60 + "\n")
+                
+                if result.returncode == 0:
+                    self.status_label.config(text=f"Launched 3D plot ({ly_value} ly)", foreground="green")
+                else:
+                    self.status_label.config(text="Error generating 3D plot", foreground="red")
+                    
         except ValueError:
             self.status_label.config(text="Invalid distance value", foreground="red")
         except Exception as e:
@@ -1164,44 +1169,50 @@ class StarVisualizationGUI(tk.Tk):
                 self.status_label.config(text="Enter 4.25 - 100 light-years", foreground="red")
                 return
             
-            # ADD THIS - Update status IMMEDIATELY when button is clicked
             self.status_label.config(
                 text=f"Generating 2D visualization for distance ≤ {ly_value} (~5-10 seconds)",
                 foreground="blue"
             )
-            self.update()  # Force GUI to refresh NOW
+            self.update()
 
-            script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
-            
-            # Show processing status
-    #        self.status_label.config(text=f"Generating HR diagram ({ly_value} ly)...", foreground="blue")
-    #        self.update()  # Force GUI update
-            
-            # Capture output
-            result = subprocess.run([sys.executable, script_path, str(ly_value)], 
-                                capture_output=True, text=True)
-            
-            # NEW: Print all captured output to console
-            print("\n" + "="*60)
-            print(f"Output from hr_diagram_distance.py ({ly_value} ly):")
-            print("="*60)
-            if result.stdout:
-                print(result.stdout)
-            if result.stderr:
-                print("STDERR:")
-                print(result.stderr)
-            print("="*60 + "\n")
-            
-            # Check result and update accordingly
-            if result.returncode == 0:
-                self.status_label.config(text=f"HR diagram completed ({ly_value} ly)", foreground="green")
-                
-                # Load and display the plot data after a short delay
-                self.after(500, self.load_and_display_plot_report)
+            if is_frozen() and PLOTTING_MODULES_AVAILABLE:
+                # Running as exe - call function directly
+                print(f"Running hr_diagram_distance.main() directly (frozen exe)")
+                old_argv = sys.argv
+                sys.argv = ['hr_diagram_distance.py', str(ly_value)]
+                try:
+                    hr_diagram_distance.main()
+                    self.status_label.config(text=f"HR diagram completed ({ly_value} ly)", foreground="green")
+                    self.after(500, self.load_and_display_plot_report)
+                except Exception as e:
+                    print(f"Error in hr_diagram_distance: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    self.status_label.config(text="Error generating plot", foreground="red")
+                finally:
+                    sys.argv = old_argv
             else:
-                self.status_label.config(text="Error generating plot", foreground="red")
-                # Error already printed above
+                # Running as Python script - use subprocess
+                script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_distance.py')
+                result = subprocess.run([sys.executable, script_path, str(ly_value)], 
+                                    capture_output=True, text=True)
                 
+                print("\n" + "="*60)
+                print(f"Output from hr_diagram_distance.py ({ly_value} ly):")
+                print("="*60)
+                if result.stdout:
+                    print(result.stdout)
+                if result.stderr:
+                    print("STDERR:")
+                    print(result.stderr)
+                print("="*60 + "\n")
+                
+                if result.returncode == 0:
+                    self.status_label.config(text=f"HR diagram completed ({ly_value} ly)", foreground="green")
+                    self.after(500, self.load_and_display_plot_report)
+                else:
+                    self.status_label.config(text="Error generating plot", foreground="red")
+                    
         except ValueError:
             self.status_label.config(text="Invalid distance value", foreground="red")
         except Exception as e:
@@ -1216,55 +1227,73 @@ class StarVisualizationGUI(tk.Tk):
                 self.status_label.config(text="Enter magnitude -1.44 to 9", foreground="red")
                 return
             
-            # ADD THIS - Update status IMMEDIATELY when button is clicked
             self.status_label.config(
                 text=f"Generating 3D visualization for magnitude ≤ {mag_value} (~30-75 seconds)",
                 foreground="blue"
             )
-            self.update()  # Force GUI to refresh NOW
+            self.update()
 
-            # Build command with magnitude
-            script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
-            cmd = [sys.executable, script_path, str(mag_value)]
-            
-            # Check for scale value if manual mode selected
+            # Get scale value if manual mode
+            scale_value = None
             if hasattr(self, 'scale_var') and self.scale_var.get() == 'Manual':
                 try:
                     scale_value = float(self.scale_entry.get())
-                    if scale_value > 0:
-                        cmd.append(str(scale_value))
-                    else:
+                    if scale_value <= 0:
                         self.status_label.config(text="Scale must be positive", foreground="red")
                         return
                 except ValueError:
                     self.status_label.config(text="Invalid scale value", foreground="red")
                     return
-            
-            # CHANGED: Capture output instead of just running
-            result = subprocess.run(cmd, capture_output=True, text=True)
-            
-            # NEW: Print all captured output to console
-            print("\n" + "="*60)
-            print(f"Output from planetarium_apparent_magnitude.py (mag {mag_value}):")
-            print("="*60)
-            if result.stdout:
-                print(result.stdout)
-            if result.stderr:
-                print("STDERR:")
-                print(result.stderr)
-            print("="*60 + "\n")
-            
-            # Check if successful
-            if result.returncode == 0:
-                # Update status with scale info if manual
-                if hasattr(self, 'scale_var') and self.scale_var.get() == 'Manual':
-                    scale_value = float(self.scale_entry.get())
-                    self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, scale {scale_value} ly)", foreground="green")
+
+            if is_frozen() and PLOTTING_MODULES_AVAILABLE:
+                # Running as exe - call function directly
+                print(f"Running planetarium_apparent_magnitude.main() directly (frozen exe)")
+                old_argv = sys.argv
+                if scale_value:
+                    sys.argv = ['planetarium_apparent_magnitude.py', str(mag_value), str(scale_value)]
                 else:
-                    self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, auto scale)", foreground="green")
+                    sys.argv = ['planetarium_apparent_magnitude.py', str(mag_value)]
+                try:
+                    planetarium_apparent_magnitude.main()
+                    if scale_value:
+                        self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, scale {scale_value} ly)", foreground="green")
+                    else:
+                        self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, auto scale)", foreground="green")
+                except Exception as e:
+                    print(f"Error in planetarium_apparent_magnitude: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    self.status_label.config(text="Error generating 3D plot", foreground="red")
+                finally:
+                    sys.argv = old_argv
             else:
-                self.status_label.config(text="Error generating 3D plot", foreground="red")
-            
+                # Running as Python script - use subprocess
+                script_path = os.path.join(os.path.dirname(__file__), 'planetarium_apparent_magnitude.py')
+                cmd = [sys.executable, script_path, str(mag_value)]
+                
+                if scale_value:
+                    cmd.append(str(scale_value))
+                
+                result = subprocess.run(cmd, capture_output=True, text=True)
+                
+                print("\n" + "="*60)
+                print(f"Output from planetarium_apparent_magnitude.py (mag {mag_value}):")
+                print("="*60)
+                if result.stdout:
+                    print(result.stdout)
+                if result.stderr:
+                    print("STDERR:")
+                    print(result.stderr)
+                print("="*60 + "\n")
+                
+                if result.returncode == 0:
+                    if scale_value:
+                        self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, scale {scale_value} ly)", foreground="green")
+                    else:
+                        self.status_label.config(text=f"Launched 3D plot (mag {mag_value}, auto scale)", foreground="green")
+                else:
+                    self.status_label.config(text="Error generating 3D plot", foreground="red")
+                
         except ValueError:
             self.status_label.config(text="Invalid magnitude value", foreground="red")
         except Exception as e:
@@ -1279,43 +1308,50 @@ class StarVisualizationGUI(tk.Tk):
                 self.status_label.config(text="Enter magnitude -1.44 to 9", foreground="red")
                 return
             
-            # ADD THIS - Update status IMMEDIATELY when button is clicked
             self.status_label.config(
                 text=f"Generating 2D visualization for magnitude ≤ {mag_value} (~30-60 seconds)",
                 foreground="blue"
             )
-            self.update()  # Force GUI to refresh NOW
+            self.update()
 
-            script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
-            
-            # Show processing status
-    #        self.status_label.config(text=f"Generating HR diagram (mag {mag_value})...", foreground="blue")
-    #        self.update()  # Force GUI update
-            
-            # Capture output
-            result = subprocess.run([sys.executable, script_path, str(mag_value)],
-                                capture_output=True, text=True)
-            
-            # NEW: Print all the captured output to console
-            print("\n" + "="*60)
-            print(f"Output from hr_diagram_apparent_magnitude.py (mag {mag_value}):")
-            print("="*60)
-            if result.stdout:
-                print(result.stdout)
-            if result.stderr:
-                print("STDERR:")
-                print(result.stderr)
-            print("="*60 + "\n")
-            
-            if result.returncode == 0:
-                self.status_label.config(text=f"HR diagram completed (mag {mag_value})", foreground="green")
-                
-                # Load and display the plot data after a short delay
-                self.after(500, self.load_and_display_plot_report)
+            if is_frozen() and PLOTTING_MODULES_AVAILABLE:
+                # Running as exe - call function directly
+                print(f"Running hr_diagram_apparent_magnitude.main() directly (frozen exe)")
+                old_argv = sys.argv
+                sys.argv = ['hr_diagram_apparent_magnitude.py', str(mag_value)]
+                try:
+                    hr_diagram_apparent_magnitude.main()
+                    self.status_label.config(text=f"HR diagram completed (mag {mag_value})", foreground="green")
+                    self.after(500, self.load_and_display_plot_report)
+                except Exception as e:
+                    print(f"Error in hr_diagram_apparent_magnitude: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    self.status_label.config(text="Error generating plot", foreground="red")
+                finally:
+                    sys.argv = old_argv
             else:
-                self.status_label.config(text="Error generating plot", foreground="red")
-                # Error already printed above, no need to print again
+                # Running as Python script - use subprocess
+                script_path = os.path.join(os.path.dirname(__file__), 'hr_diagram_apparent_magnitude.py')
+                result = subprocess.run([sys.executable, script_path, str(mag_value)],
+                                    capture_output=True, text=True)
                 
+                print("\n" + "="*60)
+                print(f"Output from hr_diagram_apparent_magnitude.py (mag {mag_value}):")
+                print("="*60)
+                if result.stdout:
+                    print(result.stdout)
+                if result.stderr:
+                    print("STDERR:")
+                    print(result.stderr)
+                print("="*60 + "\n")
+                
+                if result.returncode == 0:
+                    self.status_label.config(text=f"HR diagram completed (mag {mag_value})", foreground="green")
+                    self.after(500, self.load_and_display_plot_report)
+                else:
+                    self.status_label.config(text="Error generating plot", foreground="red")
+                    
         except ValueError:
             self.status_label.config(text="Invalid magnitude value", foreground="red")
         except Exception as e:
@@ -1414,5 +1450,7 @@ class StarVisualizationGUI(tk.Tk):
 
 
 if __name__ == "__main__":
+    import multiprocessing
+    multiprocessing.freeze_support()
     app = StarVisualizationGUI()
     app.mainloop()

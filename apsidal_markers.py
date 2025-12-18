@@ -446,11 +446,16 @@ def calculate_exact_apsides(a, e, i, omega, Omega, rotate_points):
         'apoapsis': apoapsis_result
     }
 
-def add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_map):
+#def add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_map):
+def add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_map, fetch_failed=False):
     """
     Add legend entries explaining why actual apsidal markers aren't shown
     when dates are outside JPL Horizons' range.
     Now creates separate legend entries for perihelion and aphelion.
+
+    Parameters:
+        fetch_failed: If True, indicates the fetch failed even though dates may be
+                     within general JPL range (e.g., satellite ephemeris ended earlier)    
     """
     from datetime import datetime
     import plotly.graph_objects as go
@@ -460,7 +465,7 @@ def add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_
     JPL_MIN_DATE = datetime(1900, 1, 1)
     
     added_notes = False
-    
+              
     # Check and add perihelion note separately
     if perihelion_date:
         if perihelion_date > JPL_MAX_DATE:
@@ -485,8 +490,33 @@ def add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_
                 )
             )
             added_notes = True
+        
+        elif fetch_failed:
+            # Fetch failed even though date is within general JPL range
+            # (e.g., satellite ephemeris has shorter coverage)
+            date_str = perihelion_date.strftime('%Y-%m-%d')
+            note_text = f"{obj_name}: Perihelion: {date_str} (beyond ephemeris limit)"
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[None],
+                    y=[None],
+                    z=[None],
+                    mode='markers',
+                    marker=dict(
+                        size=6,
+                        color=color_map(obj_name),
+                        symbol='square-open'
+                    ),
+                    name=note_text,
+                    showlegend=True,
+                    hoverinfo='skip'
+                )
+            )
+            added_notes = True
             
         elif perihelion_date < JPL_MIN_DATE:
+
             date_str = perihelion_date.strftime('%Y-%m-%d')
             note_text = f"{obj_name}: Perihelion: {date_str} (before JPL limit)"
             

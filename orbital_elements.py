@@ -1211,15 +1211,57 @@ planetary_params = {
     },
 
     # Eris's Moon
-    'Dysnomia': {
+#    'Dysnomia': {
 #        'a': 0.000364,         # semi-major axis in km
-        'a': 0.000364,         # semi-major axis in AU
+#        'a': 0.000364,         # semi-major axis in AU
 #        'a_parent': 36.2,      # semi-major axis in Eris radii (estimate)
-        'e': 0.0062,           # eccentricity
-        'i': 78.29,            # inclination in degrees (to the ecliptic)
-        'omega': 139.65,       # argument of perihelion in degrees
-        'Omega': 29.43         # longitude of ascending node in degrees
+#        'e': 0.0062,           # eccentricity
+#        'i': 78.29,            # inclination in degrees (to the ecliptic)
+#        'omega': 139.65,       # argument of perihelion in degrees
+#        'Omega': 29.43         # longitude of ascending node in degrees
         #     'Dysnomia': 15.786,    # 378.86 hours
+#    },
+
+    'Dysnomia': {
+        'a': 0.000249,         # semi-major axis in AU (37,300 km)
+        'e': 0.0062,           # eccentricity
+        'i': 78.29,            # inclination in degrees (to Eris heliocentric orbit)
+        'omega': 139.65,       # argument of periapsis in degrees
+        'Omega': 29.43,        # longitude of ascending node in degrees
+        'orbital_period_days': 15.786,  # 378.86 hours
+    },    
+
+    # Haumea's Moons
+    "Hi'iaka": {
+        'a': 0.0003246,        # semi-major axis in AU (~49,500 km)
+        'e': 0.0513,           # eccentricity
+        'i': 126.356,          # inclination in degrees (to ecliptic)
+        'omega': 154.1,        # argument of periapsis in degrees
+        'Omega': 206.766,      # longitude of ascending node in degrees
+        'orbital_period_days': 49.12,
+    },
+
+    'Namaka': {
+        'a': 0.0001652,        # semi-major axis in AU (~25,657 km)
+        'e': 0.249,            # eccentricity (highly elliptical)
+        'i': 113.013,          # inclination in degrees (to ecliptic)
+        'omega': 178.9,        # argument of periapsis in degrees
+        'Omega': 205.016,      # longitude of ascending node in degrees
+        'orbital_period_days': 18.28,
+        # Note: Namaka's orbit is non-Keplerian due to Hi'iaka perturbations
+    },
+
+# Makemake's Moon
+    'MK2': {
+        'a': 0.0001487,        # semi-major axis in AU (22,250 km ± 780 km)
+        'e': 0.0,              # eccentricity (best fit is circular)
+        'i': 74.0,             # inclination to ecliptic in degrees (63°-87° range, uncertain)
+        'omega': 0.0,          # argument of periapsis (undefined for circular orbit)
+        'Omega': 0.0,          # longitude of ascending node (unknown - edge-on to Earth)
+        'orbital_period_days': 18.023,  # ± 0.017 days
+        # Source: arXiv:2509.05880 (Sept 2025) - preliminary Hubble analysis
+        # Note: Orbit is edge-on to Earth (83.7° ± 1.0° relative to line of sight)
+        # JPL Horizons has no satellite ephemeris for MK2 as of late 2025
     },
 
 } 
@@ -1234,7 +1276,9 @@ parent_planets = {
     'Neptune': ['Triton', 'Despina', 'Galatea'],
     'Pluto': ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],
     'Pluto-Charon Barycenter': ['Pluto', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],  # Binary planet mode
-    'Eris': ['Dysnomia']
+    'Eris': ['Dysnomia'],
+    'Haumea': ["Hi'iaka", 'Namaka'],
+    'Makemake': ['MK2']
 }
 
 # Dictionary of planet tilts (degrees)

@@ -1,4 +1,4 @@
-# Last updated: November 26, 2025
+# Last updated: December 8, 2025
 
 # Paloma's Orrery
 
@@ -34,6 +34,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Comet visualization with dual-tail structures (dust and ion tails)
 - Exoplanet system visualization (11 planets in 3 systems including binary stars)
 - Pluto-Charon binary planet visualization with true barycentric orbital mechanics
+- TNO satellite systems (Eris/Dysnomia, Haumea/Hi'iaka/Namaka, Makemake/MK2)
 - Stellar neighborhood mapping (123,000+ stars)
 - Planetary and solar interior visualizations (with reference-frame independent rendering)
 - HR diagrams and stellar analysis
@@ -68,7 +69,7 @@ pip install -r requirements.txt
 python palomas_orrery.py
 ```
 
-**New to Python?** See the [detailed installation guide below Ã¢â€ â€œ](#installation)
+**New to Python?** See the [detailed installation guide below](#installation)
 
 ## Installation
 
@@ -95,7 +96,7 @@ Git makes it easy to download and update the project. If you prefer, you can ski
 1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
 2. Download the installer for Windows
 3. Run the installer:
-   - **Important:** When you see the screen asking about additional options, **check the box for "Additional icons Ã¢â€ â€™ On the Desktop"**
+   - **Important:** When you see the screen asking about additional options, **check the box for "Additional icons → On the Desktop"**
    - This creates a handy Git Bash shortcut on your desktop
    - Click "Next" through the remaining screens (other defaults are fine)
 4. After installation completes, you should see a "Git Bash" icon on your desktop
@@ -131,8 +132,8 @@ Python is the programming language that runs Paloma's Orrery.
 
 2. **Install Python:**
    - Run the downloaded installer
-   - **Ã¢Å“â€¦ CRITICAL:** Check the box that says **"Add Python to PATH"** at the bottom
-   - **Ã¢Å“â€¦ Also check:** "Install pip"
+   - **CRITICAL:** Check the box that says **"Add Python to PATH"** at the bottom
+   - **Also check:** "Install pip"
    - Click **"Install Now"**
    - Wait for installation to complete (2-3 minutes)
    - Click "Close" when done
@@ -148,7 +149,7 @@ Python is the programming language that runs Paloma's Orrery.
    - Python wasn't added to PATH, OR you're using an old Command Prompt window
    - Close Command Prompt completely and open a new one
    - If still not working: Python wasn't added to PATH during installation
-   - Solution: Uninstall Python (Control Panel Ã¢â€ â€™ Programs), then reinstall and make sure you check "Add Python to PATH"
+   - Solution: Uninstall Python (Control Panel → Programs), then reinstall and make sure you check "Add Python to PATH"
 
 #### Step 3: Download Paloma's Orrery
 
@@ -183,220 +184,157 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
 
    Git will create a new folder called `palomas_orrery` and download all the files into it.
 
-5. **Enter the new project folder:**
-
-   You should still be in your Documents folder. Now navigate into the new `palomas_orrery` folder that Git just created:
+5. **Navigate into the project folder:**
 
    ```bash
    cd palomas_orrery
    ```
 
-   **If that doesn't work** (you get "The system cannot find the path specified"):
-   - You may have navigated away from Documents
-   - Use the full path instead:
-  
+**Option B - Download as ZIP file (No Git required):**
+
+1. Go to [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)
+2. Click the green **"Code"** button
+3. Select **"Download ZIP"**
+4. Extract the ZIP file to your preferred location
+5. Rename the extracted folder from `palomas_orrery-main` to `palomas_orrery`
+6. Open Command Prompt and navigate to the extracted folder:
+
    ```bash
    cd C:\Users\YourName\Documents\palomas_orrery
    ```
-
-   (Replace `YourName` with your actual Windows username)
-
-   **To verify you're in the right place:**
-   - Type: `dir` and press Enter
-   - You should see files like `palomas_orrery.py`, `requirements.txt`, and many `.py` files
-   - If you don't see these files, you're in the wrong folder
-
-**Option B - Download ZIP (No Git required):**
-
-1. **Download the project:**
-   - Go to [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)
-   - Click the green **"Code"** button (top right of the file list)
-   - Click **"Download ZIP"**
-   - The file `palomas_orrery-main.zip` will download (about 50 MB)
-
-2. **Extract the ZIP file:**
-   - Find the downloaded file (usually in your Downloads folder)
-   - Right-click on `palomas_orrery-main.zip`
-   - Select **"Extract All..."**
-   - Choose where to extract (e.g., `C:\Users\YourName\Documents`)
-   - Click **"Extract"**
-   - Windows will create a folder called `palomas_orrery-main`
-
-3. **Navigate to the folder in Command Prompt:**
-   - Press `Windows Key`, type `cmd`, press Enter
-   - Type:
-  
-   ```bash
-   cd C:\Users\YourName\Documents\palomas_orrery-main
-   ```
-
-   (Adjust the path to wherever you extracted the files)
 
 #### Step 4: Download Cache Files
 
-**These files are required for star visualizations to work!** They contain pre-downloaded astronomical data so you don't have to wait hours fetching it yourself.
+The cache files contain pre-processed stellar data and orbital calculations. Without them, the first run would take hours to download and process everything!
 
-1. **Download the cache:**
-   - Go to [github.com/tonylquintanilla/palomas_orrery/releases](https://github.com/tonylquintanilla/palomas_orrery/releases)
-   - Find the latest release (look for v1.0.0 or higher)
-   - Scroll down to **"Assets"**
-   - Click on `cache_files_compressed.zip` to download (117 MB - may take 1-2 minutes)
-   - **Note:** You'll also see "Source code (zip)" and "Source code (tar.gz)" - ignore these, you already have the code from Step 3
+1. **Go to the releases page:**
+   - Visit [github.com/tonylquintanilla/palomas_orrery/releases](https://github.com/tonylquintanilla/palomas_orrery/releases)
+   
+2. **Download the cache file:**
+   - Look for `cache_files_compressed.zip` (approximately 150-200 MB)
+   - Click to download
 
-2. **Extract cache files to your project folder:**
-   - Find the downloaded `cache_files_compressed.zip` file (usually in your Downloads folder)
-   - **Important:** Don't just click to open it! You need to extract it properly.
+3. **Extract to project folder:**
+   - Open the ZIP file
+   - Extract ALL contents directly into your `palomas_orrery` folder
+   - The folder structure should look like:
+     ```
+     palomas_orrery/
+     ├── palomas_orrery.py
+     ├── data/
+     │   └── orbit_paths.json
+     ├── star_data/
+     │   ├── star_properties_distance.pkl
+     │   └── gaia_data_distance.vot
+     └── ... (other files)
+     ```
 
-   **To extract:**
-   - Right-click (or two-finger tap on trackpad) on the ZIP file
-   - Select **"Extract All..."** from the menu
-   - A window will appear asking where to extract
-   - Click **"Browse..."** and navigate to your **`palomas_orrery` folder** (the main project folder where `palomas_orrery.py` is located)
-   - If you used Option B (ZIP download), your folder might be called `palomas_orrery-main` instead
-   - Click **"Select Folder"**, then click **"Extract"**
+4. **Verify the files are in place:**
+   - You should see `star_data/` folder with `.pkl` and `.vot` files
+   - You should see `data/orbit_paths.json` (this is the largest file, ~96 MB)
 
-   **Alternative method if you prefer:**
-   - Single-click the ZIP file to open it (you'll see the contents)
-   - Press `Ctrl+A` to select all files inside
-   - Press `Ctrl+C` to copy them
-   - Open a new File Explorer window and navigate to your **`palomas_orrery` folder**
-   - Press `Ctrl+V` to paste all the files there
+#### Step 5: Install Dependencies
 
-3. **Verify the files are in the right place:**
-   - Open your `palomas_orrery` folder in File Explorer
-   - You should see files like:
-     - `palomas_orrery.py` (the main program)
-     - `star_properties_distance.pkl` (from the cache)
-     - `star_properties_magnitude.pkl` (from the cache)
-     - Various `.vot` files (from the cache)
-     - Many other `.py` files (the program code)
-   - **Everything should be together in one folder** - the cache files and the Python code files should all be in the same `palomas_orrery` directory
-   - If the cache files are in a subfolder, move them up to the main `palomas_orrery` folder
-
-#### Step 5: Install Python Libraries
-
-Python libraries (also called "packages") are additional tools that Paloma's Orrery needs to run. We'll install them all at once.
+Python packages are like add-ons that provide extra functionality. Paloma's Orrery needs several of these.
 
 1. **Make sure you're in the project folder:**
-   - In Command Prompt, type:
-  
-   ```bash
-   cd C:\Users\YourName\Documents\palomas_orrery
-   ```
+   - In Command Prompt, you should see something like `C:\Users\YourName\Documents\palomas_orrery>`
+   - If not, navigate there with `cd C:\Users\YourName\Documents\palomas_orrery`
 
-   (Or `palomas_orrery-main` if you downloaded the ZIP)
-
-2. **Install all libraries at once:**
-
-   **First, try this simple command:**
+2. **Install all required packages:**
 
    ```bash
    pip install -r requirements.txt
    ```
 
-   This reads the `requirements.txt` file and installs everything automatically. This should take 2-5 minutes.
+   This will download and install all necessary packages. It may take 2-5 minutes depending on your internet connection.
 
-   **If you get an error like "= is not a valid operator. Did you mean == ?":**
-   - There's a typo in the requirements.txt file that needs fixing
-   - Fix it using Notepad:
-     1. Navigate to your `palomas_orrery` folder in File Explorer
-     2. Right-click on `requirements.txt` and select "Open with" Ã¢â€ â€™ "Notepad"
-     3. Find the line that says `kaleido=0.2.1`
-     4. Change the single `=` to double `==` so it reads `kaleido==0.2.1`
-     5. Click File Ã¢â€ â€™ Save, then close Notepad
-     6. Try the `pip install -r requirements.txt` command again
+   **What you'll see:** A lot of text scrolling by as packages are downloaded and installed. This is normal!
 
-   **If the simple command doesn't work for other reasons, use the manual method:**
+   **If you see errors:** Most common issues:
+   - "pip is not recognized" → Python wasn't installed correctly. Go back to Step 2.
+   - Network errors → Check your internet connection and try again
+   - Permission errors → Try running Command Prompt as Administrator
 
-   Copy this entire command and paste it into Command Prompt (right-click to paste):
-
-   ```bash
-   pip install numpy>=1.24.0 pandas>=2.0.0 scipy>=1.11.0 astropy>=5.3.4 astroquery>=0.4.6 plotly>=5.18.0 kaleido==0.2.1 pillow>=10.0.0 matplotlib>=3.7.0 customtkinter>=5.2.0 requests>=2.31.0 beautifulsoup4>=4.12.0 python-dateutil>=2.8.2 pytz>=2023.3 openpyxl>=3.1.0
-   ```
-
-   Press Enter and wait. This will take 3-7 minutes depending on your internet speed.
-
-3. **What you'll see during installation:**
-   - Lines of text scrolling by (this is normal!)
-   - "Collecting [package name]..." - downloading the library
-   - "Installing collected packages..." - setting them up
-   - "Successfully installed..." at the end - you're done!
-
-4. **If you see errors:**
-   - **"pip is not recognized":** Python wasn't added to PATH. Reinstall Python with "Add to PATH" checked.
-   - **"Could not install X":** Try installing that specific package separately: `pip install X`
-   - **Permission errors:** Try running Command Prompt as Administrator (right-click cmd Ã¢â€ â€™ "Run as administrator")
+3. **Verify installation:**
+   - After installation completes, you should see "Successfully installed" messages
+   - No red error text at the end means success!
 
 #### Step 6: Run Paloma's Orrery
 
-You're almost there! Now let's start the program.
+You're ready to launch!
 
-1. **Make sure you're in the project folder:**
-
-   ```bash
-   cd C:\Users\YourName\Documents\palomas_orrery
-   ```
-
-2. **Start the program:**
+1. **Start the application:**
 
    ```bash
    python palomas_orrery.py
    ```
 
-3. **What to expect:**
-   - Command Prompt will show some loading messages (10-30 seconds)
-   - A new window will appear with the Paloma's Orrery interface
-   - The window has tabs at the top and controls for selecting celestial objects
+2. **What happens next:**
+   - A GUI window will appear with the main control panel
+   - The first time you run, it may take 30-60 seconds to initialize caches
+   - You'll see a three-panel interface with object selection, controls, and notes
 
-4. **Important notes:**
-   - **Always use** `python palomas_orrery.py` from Command Prompt to run the program
-   - **Don't** try to run it by double-clicking `palomas_orrery.py` in File Explorer - this may cause crashes
-   - Keep Command Prompt open while using the program - closing it will close Paloma's Orrery
+3. **Try your first visualization:**
+   - Check the boxes for a few planets (Mercury, Venus, Earth, Mars)
+   - Click "Plot Entered Date"
+   - An interactive 3D visualization will appear in your browser!
 
-### Common Installation Issues
+**Congratulations!** You've successfully installed Paloma's Orrery!
 
-For detailed troubleshooting, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md). Here are the most common issues:
+### Troubleshooting
 
 **"python is not recognized"**
-
 - Python wasn't added to PATH during installation
-- Solution: Reinstall Python and check "Add Python to PATH"
+- Solution: Uninstall Python, reinstall with "Add Python to PATH" checked
 
-**"No module named [something]"**
+**"pip install" fails with permission errors**
+- Try: `pip install --user -r requirements.txt`
+- Or run Command Prompt as Administrator
 
-- A required library is missing
-- Solution: `pip install [missing-module-name]`
+**Application won't start**
+- Make sure you're in the correct folder
+- Check that all cache files were extracted properly
+- Try: `python -c "import tkinter"` to verify tkinter is installed
 
-**"Cache files not found"**
+**Visualization doesn't appear**
+- Check that your default browser is working
+- The plot opens as an HTML file in your browser
 
-- Cache files aren't in the correct location
-- Solution: Make sure PKL and VOT files are in the same folder as `palomas_orrery.py`
+**"Module not found" errors**
+- Some packages may not have installed correctly
+- Try: `pip install [module_name]` for the specific missing module
 
-### System Requirements Summary
+### Updating the Application
 
-- **Operating System:** Windows 10/11, macOS 10.14+, or Linux
-- **Python Version:** 3.11, 3.12, or 3.13 (thoroughly tested)
-- **Memory (RAM):** 2GB minimum, 4GB recommended for large star datasets
-- **Storage:** 520MB free disk space (includes all cache files and Python code)
-- **Internet:** Required for initial download and for querying objects not in cache
-- **Display:** 1280Ã—720 minimum resolution recommended
+**If you used Git:**
 
-### Optional: Installing a Code Editor
+```bash
+cd palomas_orrery
+git pull
+pip install -r requirements.txt  # In case new dependencies were added
+```
 
-While not required to run Paloma's Orrery, if you want to explore or modify the code, a good code editor makes it much easier:
+**If you downloaded ZIP:**
 
-**Visual Studio Code (VS Code) - Recommended:**
+1. Download the new ZIP from GitHub
+2. Extract and replace files (keep your cache files!)
+3. Run `pip install -r requirements.txt` if requirements changed
 
-1. Download from [code.visualstudio.com](https://code.visualstudio.com/)
-2. Install with default options
-3. Open VS Code and install the Python extension (search for "Python" in the Extensions panel; View/Extensions)
-4. You can then open your entire `palomas_orrery` folder in VS Code: File Ã¢â€ â€™ Open Folder
+### Alternative IDEs
 
-**Why use a code editor?**
+While Command Prompt works fine, you might prefer a more visual development environment:
 
-- Syntax highlighting makes code easier to read
-- Built-in error detection catches typos
-- Easy navigation between files
+**VS Code (Recommended):**
+- Download from [code.visualstudio.com](https://code.visualstudio.com/)
+- Install the Python extension
+- Open the `palomas_orrery` folder
+- Use the integrated terminal
+
+**PyCharm:**
+- Download from [jetbrains.com/pycharm](https://www.jetbrains.com/pycharm/)
+- Open the project folder
+- Configure Python interpreter
 - Integrated terminal
 
 ## Usage
@@ -447,9 +385,9 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 
 **Earth System Data:**
 
-1. Look for the green ðŸŒÂ indicator next to Earth's shell checkbox
+1. Look for the green 🌍 indicator next to Earth's shell checkbox
 2. Enable to access climate data visualizations
-3. View the Keeling Curve (COâ‚‚ measurements from 1958-2025)
+3. View the Keeling Curve (CO₂ measurements from 1958-2025)
 4. See [climate_readme.md](climate_readme.md) for complete documentation
 
 ### Advanced Features
@@ -466,6 +404,7 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 - **Barycentric:** Solar system center of mass
 - **Planet-centered:** View from any planet's perspective
 - **Pluto-Charon Barycenter:** True binary planet view showing both Pluto and Charon orbiting their common center of mass (the only true binary in our solar system!)
+- **TNO-centered:** View Eris, Haumea, or Makemake with their moons
 
 **Lagrange Points:**
 
@@ -501,15 +440,23 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 | **Data Source** | Real-time JPL Horizons ephemerides with automatic caching |
 | **Time Range** | Historical and future dates through 2199-12-29 |
 | **Scales** | Inner planets to 100,000 AU Oort cloud visualization |
-| **Reference Frames** | Heliocentric, barycentric, planet-centered, Pluto-Charon barycenter (binary planet) views |
-| **Orbit Calculation** | Both actual positions and idealized Keplerian orbits |
+| **Reference Frames** | Heliocentric, barycentric, planet-centered, Pluto-Charon barycenter (binary planet), TNO-centered views |
+| **Orbit Calculation** | Both actual positions and idealized Keplerian orbits using osculating elements |
 | **Caching System** | Intelligent incremental updates with automatic backup |
+
+**TNO Satellite Systems:**
+
+- **Eris/Dysnomia:** Distant dwarf planet with its moon (JPL ephemeris)
+- **Haumea/Hi'iaka/Namaka:** Elongated dwarf planet with two moons (JPL ephemeris)
+- **Makemake/MK2:** Dwarf planet with dark, recently-discovered moon (analytical orbit from 2025 Hubble analysis - no JPL ephemeris yet!)
+- **View modes:** See satellites from heliocentric or TNO-centered perspectives
+- **Analytical fallback:** Objects without JPL data calculated from published orbital elements
 
 **Exoplanet Visualization:**
 
 - **Systems:** 3 confirmed exoplanet systems (TRAPPIST-1, TOI-1338, Proxima Centauri)
 - **Planets:** 11 exoplanets with accurate Keplerian orbital mechanics
-- **Orbital Mechanics:** Full 6-parameter Keplerian orbits (a, e, i, Ï‰, Î©, Mâ‚€) with time evolution
+- **Orbital Mechanics:** Full 6-parameter Keplerian orbits (a, e, i, ω, Ω, M₀) with time evolution
 - **Binary Stars:** Circumbinary planet support with dual-star orbital dynamics (TOI-1338)
 - **Host Stars:** Temperature-based coloring from cool red M-dwarfs (2,800K) to hot blue stars
 - **Visualization Modes:**
@@ -526,8 +473,8 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 
 - **Dual-Tail Structure:** Scientifically accurate rendering of both comet tail types
   - Dust Tail (Type II): Curved golden/yellow tail from reflected sunlight
-  - Ion Tail (Type I): Straight blue plasma tail from COâº emissions
-  - Green coma from Câ‚‚ (dicarbon) fluorescence near nucleus
+  - Ion Tail (Type I): Straight blue plasma tail from CO⁺ emissions
+  - Green coma from C₂ (dicarbon) fluorescence near nucleus
 - **Astrophotography Colors:** Tail colors match long-exposure photography appearance
   - Dust tails: Whitish-yellow/gold reflecting full visible spectrum (400-700nm)
   - Ion tails: Blue from carbon monoxide ions (400-460nm emission)
@@ -591,8 +538,9 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 |------|-------------|
 | **Orbital Parameter Visualization** | Interactive 3D demonstration of Keplerian elements (inclination, longitude of ascending node, argument of periapsis) showing transformation from perifocal to J2000 Ecliptic frame |
 | **Interactive Eccentricity Demo** | Visual exploration of orbit shapes from circles (e=0) through ellipses, parabolas (e=1), to hyperbolas (e>1) |
-| **Coordinate System Reference Guide** | Comprehensive visualization of J2000 Ecliptic system with detailed axis explanations (+X Vernal Equinox, +Y 90Ã‚Â° ahead, +Z Ecliptic North) |
+| **Coordinate System Reference Guide** | Comprehensive visualization of J2000 Ecliptic system with detailed axis explanations (+X Vernal Equinox, +Y 90° ahead, +Z Ecliptic North) |
 | **Pluto-Charon Binary System** | Three-view visualization demonstrating true barycentric orbital mechanics - switch from Pluto-centered to barycenter-centered view to see Pluto's own orbit revealed (like shifting from geocentric to heliocentric thinking!) |
+| **TNO Satellite Systems** | Visualize distant dwarf planet moons, including MK2 using cutting-edge 2025 Hubble orbital analysis |
 
 ### Data Sources
 
@@ -600,7 +548,8 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 - [Gaia EDR3](https://www.cosmos.esa.int/web/gaia) - Stellar positions and photometry
 - [Hipparcos](https://www.cosmos.esa.int/web/hipparcos/catalogues) - Bright star catalog
 - [SIMBAD](https://simbad.u-strasbg.fr/simbad/) - Astronomical database
-- [Scripps COâ‚‚ Program](https://scrippsco2.ucsd.edu/) - Mauna Loa atmospheric data
+- [Scripps CO₂ Program](https://scrippsco2.ucsd.edu/) - Mauna Loa atmospheric data
+- [arXiv preprints](https://arxiv.org/) - Latest orbital solutions for newly-discovered objects
 
 ## Architecture
 
@@ -619,6 +568,7 @@ While not required to run Paloma's Orrery, if you want to explore or modify the 
 - **Compressed storage:** Efficient binary formats (PKL, VOTable)
 - **Rate limiting:** Respectful API usage with automatic throttling
 - **Batch processing:** Group queries for efficiency
+- **Analytical fallback:** Calculate orbits locally when API data unavailable
 
 ## Earth System Visualization
 
@@ -630,7 +580,7 @@ Interactive visualizations documenting Earth's changing systems - because **data
 
 **Climate & Atmosphere:**
 
-1. **The Keeling Curve:** Atmospheric COâ‚‚ from Mauna Loa Observatory (1958-2025)
+1. **The Keeling Curve:** Atmospheric CO₂ from Mauna Loa Observatory (1958-2025)
    - Monthly resolution with seasonal variations
    - Clear visualization of 400+ ppm threshold crossing
    - Interactive zoom and data exploration
@@ -648,62 +598,57 @@ Interactive visualizations documenting Earth's changing systems - because **data
 4. **Warming Stripes:** Ed Hawkins-style climate communication
    - Visual representation of temperature changes over time
    - Minimal design for maximum impact
-   - Annual temperature data encoded as color stripes
-
-5. **Paleoclimate History:** Deep-time climate context (65 million years to present)
-   - Cenozoic Era temperature reconstruction
-   - Geological period markers and context
-   - Shows natural climate variability and current unprecedented rate of change
 
 **Cryosphere:**
 
-6. **Arctic Sea Ice Extent:** September minimum measurements (1979-2024)
-   - Dramatic decline visualization
-   - Statistical trend analysis with uncertainty bands
-   - Critical indicator of polar amplification
+5. **Arctic Sea Ice Extent:** NSIDC satellite data (1979-2025)
+   - Monthly Arctic ice coverage
+   - September minimum tracking
+   - Decadal decline visualization
 
-**Ocean Systems:**
+**Sea Level:**
 
-7. **Global Mean Sea Level Rise:** Satellite altimetry and tide gauge data (1880-2023)
-   - Acceleration of sea level rise clearly visible
-   - Multiple data source integration
-   - Projection markers for future scenarios
+6. **Sea Level Rise:** NASA/TOPEX satellite altimetry (1993-2025)
+   - Global mean sea level change
+   - Acceleration trends
+   - Millimeter precision measurements
 
-8. **Ocean Acidification:** Surface ocean pH measurements (1988-2023)
-   - Hawaii Ocean Time-series data from Station ALOHA
-   - Shows consistent decline in ocean pH
-   - Critical for marine ecosystem health
+**Ocean Health:**
 
-**Earth System:**
+7. **Ocean Acidification:** Hawaii Ocean Time-series surface pH (1988-2025)
+   - Monthly pH measurements
+   - CO₂ absorption impact on ocean chemistry
+   - Trend analysis
 
-9. **Planetary Boundaries:** Stockholm Resilience Centre framework (2025)
-   - 9 Earth system processes that regulate planetary stability
-   - Current status: 6 of 9 boundaries transgressed
-   - Visual representation of safe operating space for humanity
+**Deep Time:**
 
-**Integration:** Access via Earth's shell checkbox (green indicator)
+8. **Paleoclimate 800kyr:** Antarctic ice core CO₂ reconstruction
+   - EPICA Dome C 800,000-year record
+   - Glacial-interglacial cycles
+   - Context for modern CO₂ levels
 
-- Seamlessly integrated with solar system visualization
-- Hub interface with organized categories
-- One-click data updates for automated sources
+9. **Cenozoic Temperature:** 65 million years of climate context
+   - Full Cenozoic Era reconstruction
+   - Major climate events (PETM, EECO)
+   - Long-term cooling trend into ice ages
 
-**Why This Matters:**
+### Why This Matters
 
-Climate and Earth-science observatories provide irreplaceable long-term baseline data. Programs like the Keeling Curve (continuous since 1958) and satellite monitoring systems face potential defunding. This hub preserves and visualizes critical measurements that document planetary change.
+This project began as astronomical visualization but expanded to climate data preservation as datasets began disappearing from government websites. The Earth System module serves three purposes:
 
-**Documentation:**
-
-See [climate_readme.md](climate_readme.md) for complete technical documentation, data sources, and update procedures.
+1. **Educational:** Clear visualizations of climate science data
+2. **Preservation:** Local copies of critical datasets
+3. **Context:** Show Earth as just another planet we can study scientifically
 
 **Data Sources:**
 
-- Scripps COâ‚‚ Program at Mauna Loa Observatory
+- Scripps CO₂ Program at Mauna Loa Observatory
 - NOAA Global Monitoring Laboratory
 - Additional sources as datasets are integrated
 
 ## Module Reference
 
-**For a complete index of all 79 Python modules in the project, see [MODULE_INDEX.md](MODULE_INDEX.md).**
+**For a complete index of all 81 Python modules in the project, see [MODULE_INDEX.md](MODULE_INDEX.md).**
 
 The following sections highlight the primary modules organized by function. Use MODULE_INDEX.md to search for specific functionality (save, cache, coordinates, etc.) or to understand the complete codebase structure.
 
@@ -711,8 +656,7 @@ The following sections highlight the primary modules organized by function. Use 
 
 | Module | Purpose |
 |--------|---------|
-| `palomas_orrery.py` | Main application launcher and entry point |
-| `gui_main.py` | Primary user interface with tkinter/customtkinter |
+| `palomas_orrery.py` | Main application (~420KB, 8,700+ lines) - GUI, plot_objects(), animate_objects() |
 | `data_acquisition.py` | VizieR catalog queries (Gaia, Hipparcos) |
 | `data_processing.py` | Coordinate transformations and calculations |
 | `simbad_manager.py` | SIMBAD API integration with rate limiting |
@@ -725,11 +669,9 @@ The following sections highlight the primary modules organized by function. Use 
 | `visualization_2d.py` | Hertzsprung-Russell diagram generation |
 | `visualization_3d.py` | Interactive 3D stellar neighborhood plots |
 | `visualization_core.py` | Common plotting utilities and styling |
-| `planetary_shells.py` | Planetary interior cross-section rendering |
-| `solar_visualization_shells.py` | Solar interior and corona visualization (reference-frame independent) |
-| `comet_visualization_shells.py` | Scientifically accurate comet rendering with dual-tail structures (dust/ion) |
+| `*_visualization_shells.py` | Planetary interior cross-sections (12 modules) |
+| `comet_visualization_shells.py` | Scientifically accurate comet rendering with dual-tail structures |
 | `orbital_param_viz.py` | Orbital element visualization |
-| `coordinate_system_guide.py` | J2000 Ecliptic coordinate system reference guide |
 | `earth_system_visualization_gui.py` | Earth system data hub with climate visualizations |
 
 ### Cache Management
@@ -738,7 +680,8 @@ The following sections highlight the primary modules organized by function. Use 
 |--------|---------|
 | `vot_cache_manager.py` | VizieR cache with atomic saves and validation |
 | `incremental_cache_manager.py` | Smart incremental fetching for stellar datasets |
-| `orbit_data_manager.py` | Orbit path caching with safety protections and incremental updates |
+| `osculating_cache_manager.py` | Osculating elements cache with center-body aware keys |
+| `orbit_data_manager.py` | Orbit path caching with safety protections |
 | `create_cache_backups.py` | Stellar data (PKL/VOT) backup creation utility |
 | `verify_orbit_cache.py` | Orbit cache validation and repair utility |
 
@@ -751,16 +694,16 @@ The following sections highlight the primary modules organized by function. Use 
 | `stellar_parameters.py` | Temperature, luminosity, and HR calculations |
 | `celestial_coordinates.py` | RA/Dec coordinate system conversions |
 | `stellar_data_patches.py` | Data quality improvements and corrections |
-| `fetch_climate_data.py` | Climate data fetcher (Mauna Loa COâ‚‚) |
+| `fetch_climate_data.py` | Climate data fetcher (Mauna Loa CO₂) |
 
 ### Orbital Calculations
 
 | Module | Purpose |
 |--------|---------|
-| `idealized_orbits.py` | Simplified circular/elliptical orbits |
-| `refined_orbits.py` | High-precision orbital mechanics |
+| `idealized_orbits.py` | Core orbit visualization - Keplerian calculations, osculating elements, TNO satellites, analytical fallback |
+| `orbital_elements.py` | Orbital parameters, parent_planets dictionary, TNO moon elements |
 | `orrery_integration.py` | Integration layer for orbit selection |
-| `create_ephemeris_database.py` | Satellite ephemeris database builder |
+| `apsidal_markers.py` | Perihelion/aphelion markers with perturbation analysis |
 
 ### Exoplanet Modules
 
@@ -775,40 +718,42 @@ The following sections highlight the primary modules organized by function. Use 
 
 ### Project Directory Structure
 
+```
 palomas_orrery/
-â”œâ”€â”€ *.py                    # Python source code
-â”œâ”€â”€ README/                 # Documentation
-â”‚   â”œâ”€â”€ README.md
-â”‚   â”œâ”€â”€ paleoclimate_readme.md
-â”‚   â””â”€â”€ climate_readme.md
-â”œâ”€â”€ data/                   # All program data files
-â”‚   â”œâ”€â”€ orbit_paths.json (~94 MB)
-â”‚   â”œâ”€â”€ orbit_paths_backup.json
-â”‚   â”œâ”€â”€ Climate monitoring (automated)
-â”‚   â”‚   â”œâ”€â”€ co2_mauna_loa_monthly.json
-â”‚   â”‚   â”œâ”€â”€ temperature_giss_monthly.json
-â”‚   â”‚   â”œâ”€â”€ arctic_ice_extent_monthly.json
-â”‚   â”‚   â””â”€â”€ sea_level_gmsl_monthly.json
-â”‚   â”œâ”€â”€ Climate monitoring (manual)
-â”‚   â”‚   â”œâ”€â”€ ocean_ph_hot_monthly.json
-â”‚   â”‚   â””â”€â”€ 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
-â”‚   â””â”€â”€ Paleoclimate data
-â”‚       â”œâ”€â”€ epica_co2_800kyr.json
-â”‚       â”œâ”€â”€ lr04_benthic_stack.json
-â”‚       â”œâ”€â”€ temp12k_allmethods_percentiles.csv
-â”‚       â””â”€â”€ 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
-â”œâ”€â”€ star_data/              # Protected stellar cache (Module 4 - Nov 2025)
-â”‚   â”œâ”€â”€ star_properties_distance.pkl (2.6 MB)
-â”‚   â”œâ”€â”€ star_properties_magnitude.pkl (31.8 MB)
-â”‚   â”œâ”€â”€ hipparcos_data_distance.vot (899 KB)
-â”‚   â”œâ”€â”€ hipparcos_data_magnitude.vot (193 KB)
-â”‚   â”œâ”€â”€ gaia_data_distance.vot (9.8 MB)
-â”‚   â”œâ”€â”€ gaia_data_magnitude.vot (291 MB)
-â”‚   â””â”€â”€ *_metadata.json files
-â””â”€â”€ reports/                # Generated analysis reports (Module 3 - Nov 2025)
-    â”œâ”€â”€ last_plot_report.json
-    â”œâ”€â”€ last_plot_data.json
-    â””â”€â”€ report_*.json (archived with timestamps)
+├── *.py                    # Python source code
+├── README/                 # Documentation
+│   ├── README.md
+│   ├── paleoclimate_readme.md
+│   └── climate_readme.md
+├── data/                   # All program data files
+│   ├── orbit_paths.json (~94 MB)
+│   ├── orbit_paths_backup.json
+│   ├── Climate monitoring (automated)
+│   │   ├── co2_mauna_loa_monthly.json
+│   │   ├── temperature_giss_monthly.json
+│   │   ├── arctic_ice_extent_monthly.json
+│   │   └── sea_level_gmsl_monthly.json
+│   ├── Climate monitoring (manual)
+│   │   ├── ocean_ph_hot_monthly.json
+│   │   └── 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
+│   └── Paleoclimate data
+│       ├── epica_co2_800kyr.json
+│       ├── lr04_benthic_stack.json
+│       ├── temp12k_allmethods_percentiles.csv
+│       └── 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
+├── star_data/              # Protected stellar cache
+│   ├── star_properties_distance.pkl (2.6 MB)
+│   ├── star_properties_magnitude.pkl (31.8 MB)
+│   ├── hipparcos_data_distance.vot (899 KB)
+│   ├── hipparcos_data_magnitude.vot (193 KB)
+│   ├── gaia_data_distance.vot (9.8 MB)
+│   ├── gaia_data_magnitude.vot (291 MB)
+│   └── *_metadata.json files
+└── reports/                # Generated analysis reports
+    ├── last_plot_report.json
+    ├── last_plot_data.json
+    └── report_*.json (archived with timestamps)
+```
 
 ### Cache Files (Included in Release)
 
@@ -828,12 +773,18 @@ palomas_orrery/
 - Automatic backup created on startup
 - Used for recovery if cache becomes corrupted
 
+**osculating_cache.json**
+
+- JPL Horizons orbital elements (a, e, i, ω, Ω, TP) for 40+ objects
+- Epoch tracking and per-object refresh intervals
+- Center-body aware keys for barycenter views
+
 ### Configuration Files
 
 - `satellite_ephemerides.json` - Satellite orbital elements and physical properties
 - `*_metadata.json` - Cache validation metadata and timestamps
 - `orrery_config.json` - User preferences and display settings
-- `co2_mauna_loa_monthly.json` - Monthly atmospheric COâ‚‚ measurements (1958-2025)
+- `co2_mauna_loa_monthly.json` - Monthly atmospheric CO₂ measurements (1958-2025)
 
 ### Generated Reports
 
@@ -849,7 +800,8 @@ palomas_orrery/
 | Magnitude PKL | 32 MB | Stars to mag 9.0 |
 | VOTable files | 1-291 MB each | Raw catalog data |
 | Orbit cache | 96+ MB | Planetary ephemerides |
-| Climate data | <1 MB | COâ‚‚ measurements |
+| Osculating cache | <1 MB | Orbital elements |
+| Climate data | <1 MB | CO₂ measurements |
 
 ## Contributing
 
@@ -896,7 +848,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)  
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)  
 
-**Last Updated:** November 2025 (v1.3 - Pluto-Charon Binary System)
+**Last Updated:** December 2025 (v1.5 - TNO Satellites & Analytical Fallback)
 
 ---
 
@@ -906,7 +858,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - [ESA Gaia Mission](https://www.cosmos.esa.int/web/gaia) for stellar data
 - [VizieR catalog service](https://vizier.cds.unistra.fr/) (CDS, Strasbourg)
 - [SIMBAD astronomical database](https://simbad.u-strasbg.fr/simbad/)
-- [Scripps COâ‚‚ Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
+- [Scripps CO₂ Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
 - [Astropy](https://www.astropy.org/) and [Astroquery](https://astroquery.readthedocs.io/) development teams
 - [Plotly](https://plotly.com/) visualization library
 - AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/), [DeepSeek](https://www.deepseek.com/)

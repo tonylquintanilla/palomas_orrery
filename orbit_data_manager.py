@@ -586,7 +586,8 @@ def convert_to_new_format(old_data):
     return new_data
 
 
-def determine_interval_for_object(obj, orbital_params=None, parent_planets=None):
+# def determine_interval_for_object(obj, orbital_params=None, parent_planets=None):
+def determine_interval_for_object(obj, orbital_params=None, parent_planets=None, center_object_name=None):    # fixes pluto as satellite issue for fetching intervals
     """
     Determine appropriate time interval for fetching orbit data.
     
@@ -614,9 +615,13 @@ def determine_interval_for_object(obj, orbital_params=None, parent_planets=None)
         interval = "6h"
     
     # Check if this is a satellite of the center object
-    elif parent_planets and any(obj['name'] in moons for planet, moons in parent_planets.items()):
-        interval = "1h"
+#    elif parent_planets and any(obj['name'] in moons for planet, moons in parent_planets.items()):
+#        interval = "1h"
     
+    elif parent_planets and center_object_name and center_object_name in parent_planets:    # fixes pluto as satellite issue for fetching intervals
+        if obj['name'] in parent_planets[center_object_name]:
+            interval = "1h"
+
     # Check for high eccentricity objects
     elif orbital_params and obj['name'] in orbital_params:
         e = orbital_params[obj['name']].get('e', 0)
@@ -1615,7 +1620,8 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
 # OSCULATING ELEMENTS FETCHER (Fixed: Column Names & Units)
 # ============================================================================
 
-def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
+# def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
+def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, center_body=None):
     """
     Query JPL Horizons for osculating orbital elements (Keplerian).
     Called by osculating_cache_manager.py.
@@ -1624,15 +1630,18 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
         horizons_id (str): Horizons ID to query (e.g., 'C/2025 N1', '199', '-23')
         id_type (str): Horizons ID type ('smallbody', 'majorbody', 'id', etc.)
         date_str (str, optional): Date string in 'YYYY-MM-DD' format (defaults to today)
+        center_body (str, optional): Override center body for elements (e.g., '@9' for Pluto barycenter)
+                                     If None, auto-detects based on object ID.
     
     Returns:
-        dict: Orbital elements with metadata
+        dict: Orbital elements with metadata including 'center_body' used
     
     Fixes applied:
     1. Uses astropy.time for Julian Date conversion (fixes TLIST error)
     2. Handles flexible column names (e.g., 'a' vs 'A', 'incl' vs 'IN')
     3. Auto-detects and converts KM to AU for Major Bodies
     4. Uses proper Horizons ID and ID type for unambiguous queries
+    5. Supports explicit center_body override for barycentric elements
     """
     from astroquery.jplhorizons import Horizons
     from datetime import datetime
@@ -1642,12 +1651,14 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
     if date_str is None:
         date_str = datetime.now().strftime('%Y-%m-%d')
     
+    """
     # ===== ADD THIS ENTIRE BLOCK =====
     # Determine the correct location/center based on object ID
     location = '@sun'  # Default for planets, asteroids, comets, spacecraft
     
     # Satellites: Extract parent planet from 3-digit ID (e.g., 301 → Earth)
-    if horizons_id.isdigit() and len(horizons_id) == 3:
+#    if horizons_id.isdigit() and len(horizons_id) == 3:
+    if horizons_id.isdigit() and len(horizons_id) == 3 and not horizons_id.endswith('99'):
         parent_id_map = {
             '3': '399',   # Earth
             '4': '499',   # Mars
@@ -1665,10 +1676,57 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
     elif horizons_id in ['136199', '20136199']:
         location = '@136199'  # Relative to Eris
     # ===== END OF NEW BLOCK =====
+    """
 
-#    print(f"  [Horizons Query] ID: {horizons_id} | Type: {id_type} | Date: {date_str}")
-    print(f"  [Horizons Query] ID: {horizons_id} | Type: {id_type} | Location: {location} | Date: {date_str}", flush=True)
+# ===== LOCATION/CENTER DETERMINATION =====
+    # Determine the correct location/center based on object ID
+    location = '@sun'  # Default for planets, asteroids, comets, spacecraft
     
+    # Satellites: Extract parent planet from 3-digit ID (e.g., 301 → Earth)
+    # EXCLUDE planets themselves (x99 pattern: 199, 299, 399, etc.)
+    if horizons_id.isdigit() and len(horizons_id) == 3 and not horizons_id.endswith('99'):
+        parent_id_map = {
+            '3': '399',   # Earth
+            '4': '499',   # Mars
+            '5': '599',   # Jupiter
+            '6': '699',   # Saturn
+            '7': '799',   # Uranus
+            '8': '899',   # Neptune
+            '9': '999',   # Pluto
+        }
+        first_digit = horizons_id[0]
+        if first_digit in parent_id_map:
+            location = '@' + parent_id_map[first_digit]
+    
+    # Handle Dysnomia (Eris's moon) - orbits Eris barycenter
+    elif horizons_id == '120136199':
+        location = '@20136199'  # Relative to Eris system barycenter
+    
+    # Handle Hi'iaka (Haumea's outer moon)
+    elif horizons_id == '120136108':
+        location = '@20136108'  # Relative to Haumea system barycenter
+    
+    # Handle Namaka (Haumea's inner moon)
+    elif horizons_id == '220136108':
+        location = '@20136108'  # Relative to Haumea system barycenter
+    
+    # Handle MK2 (Makemake's moon)
+    elif horizons_id == '120136472':
+        location = '@20136472'  # Relative to Makemake system barycenter
+
+    # ===== END OF LOCATION BLOCK =====
+#    print(f"  [Horizons Query] ID: {horizons_id} | Type: {id_type} | Location: {location} | Date: {date_str}", flush=True)
+    
+    # Override location if center_body explicitly provided
+    if center_body is not None:
+        if center_body.startswith('@'):
+            location = center_body
+        else:
+            location = '@' + center_body
+        print(f"  [Horizons Query] Using explicit center_body override: {location}", flush=True)
+
+    print(f"  [Horizons Query] ID: {horizons_id} | Type: {id_type} | Location: {location} | Date: {date_str}", flush=True)
+
     try:
         # Convert string date to Julian Date to prevent formatting errors
         dt = Time(date_str)
@@ -1704,6 +1762,18 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
         om_val = get_col(['Omega', 'OM'])     # Longitude of Ascending Node
         tp_val = get_col(['Tp_jd', 'Tp', 'TP']) # Time of Perihelion (JD)
 
+        # Mean and True Anomaly (for phase verification)
+        # These tell us WHERE on the ellipse the object is at epoch
+        try:
+            ma_val = get_col(['MA', 'M', 'meanAnomaly'])
+        except KeyError:
+            ma_val = None
+        
+        try:
+            ta_val = get_col(['TA', 'nu', 'trueAnomaly'])
+        except KeyError:
+            ta_val = None
+
         # --- Unit Conversion (KM -> AU) ---
         # Major bodies (like Mercury) often return 'a' in km (e.g., 5.7e7 km).
         # We need AU (e.g., 0.387 AU). 1 AU approx 1.496e8 km.
@@ -1714,7 +1784,7 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
         if abs(a_val) > 10000: 
             print(f"    [Unit Conv] converting 'a' from {a_val} (likely km) to AU", flush=True)
             a_val = a_val * KM_TO_AU
-
+        
         result = {
             'a': a_val,
             'e': e_val,
@@ -1722,11 +1792,14 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None):
             'omega': w_val,
             'Omega': om_val,
             'TP': tp_val,
+            'MA': ma_val,      # Mean anomaly at epoch (degrees) - for time propagation
+            'TA': ta_val,      # True anomaly at epoch (degrees) - for position verification
             'epoch': f"{date_str} osc.",
             'solution_date': datetime.now().strftime('%Y-%m-%d'),
-            'horizons_id': str(horizons_id)  # Store the actual ID we queried
+            'horizons_id': str(horizons_id),  # Store the actual ID we queried
+            'center_body': location           # Store which center was used
         }
-        
+
         # Attempt to add optional data (Perihelion Distance q)
         try:
              q_val = get_col(['q', 'QR'])

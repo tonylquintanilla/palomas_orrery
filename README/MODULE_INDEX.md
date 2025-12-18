@@ -1,375 +1,176 @@
-# Paloma's Orrery - Complete Module Index
+# MODULE_INDEX.md Update Document
 
+**Date:** December 8, 2025  
+**Based on:** Flowchart v15 architecture
+
+---
+
+## Summary of Changes Needed
+
+| Line(s) | Current | Update To |
+|---------|---------|-----------|
+| 4 | November 26, 2025 | December 8, 2025 |
+| 32 | 8,289 lines | 8,700+ lines |
+| 72 | Basic description | Add `get_cache_key()`, center-body awareness |
+| 148 | Basic description | Add TNO satellites, MK2 analytical params |
+| 150 | Missing TNO/fallback | Add `plot_tno_satellite_orbit()`, `ANALYTICAL_FALLBACK` |
+| 157-158 | Basic description | Add center-body keys, `get_cache_key()` |
+| 376 | `refined_orbits.py` | `idealized_orbits.py` (refined is obsolete) |
+| 392, 420 | flowchart v13 | flowchart v15 |
+| 425 | November 26, 2025 | December 8, 2025 |
+
+---
+
+## 1. UPDATE HEADER (Line 4)
+
+**Replace:**
+```
 **Last Updated:** November 26, 2025
+```
 
-Quick-reference guide to all Python modules in the project. Use your browser's find function (Ctrl+F / Cmd+F) to search for keywords like "save", "cache", "orbit", "visualization", etc.
-
-For detailed documentation on primary modules, see [README.md](README.md#module-reference).
-
----
-
-## Important Notes
-
-**Development vs. Production Files:**
-
-- **Testing modules** (`*_test.py`, `inclination_test.py`) - Development/debugging only, not required for normal application use
-- **Obsolete modules** (`gui_simbad_controls.py`, `save_utils_before_simplification.py`) - Not imported or used in current codebase
-- **Utility scripts** (`create_cache_backups.py`) - Simple standalone scripts for maintenance tasks
-
-**Module Organization:**
-
-- Total modules: 81 Python files
-- Active production modules: 75
-- Development/testing modules: 3
-- Obsolete/reference modules: 3 (retained for historical reference)
+**With:**
+```
+**Last Updated:** December 8, 2025
+```
 
 ---
 
-## Core Application (3 modules)
+## 2. UPDATE CORE APPLICATION - palomas_orrery.py (Line 32)
 
-| Module | Description |
-|--------|-------------|
+**Replace:**
+```
 | `palomas_orrery.py` | **Primary GUI and solar system visualization engine** (404KB, 8,289 lines). Main application with three-column tkinter layout: object selection panels for celestial bodies/missions/comets/exoplanets (left), scrollable control panels for date/time/animation/scale settings (center), and notes panel (right). Core visualization functions: `plot_objects()` generates static 3D views using JPL Horizons data, `animate_objects()` creates frame-by-frame animations. Launches three specialized GUIs: `star_visualization_gui.py` (HR diagrams and stellar neighborhoods), `earth_system_visualization_gui.py` (climate data hub), and `orbital_param_viz.py` (orbital mechanics visualization). *Note: In retrospect, plot_objects and animate_objects could have been separate modules but remain as core 1,200+ line functions.* |
-| `palomas_orrery_helpers.py` | Helper functions for main application including coordinate transformations, trajectory fetching, orbit backup utilities, and visualization utilities |
-| `shutdown_handler.py` | Graceful application shutdown management and cleanup routines |
+```
+
+**With:**
+```
+| `palomas_orrery.py` | **Primary GUI and solar system visualization engine** (~420KB, 8,700+ lines). Main application with three-column tkinter layout: object selection panels for celestial bodies/missions/comets/exoplanets (left), scrollable control panels for date/time/animation/scale settings (center), and notes panel (right). Core visualization functions: `plot_objects()` generates static 3D views using JPL Horizons data, `animate_objects()` creates frame-by-frame animations. Supports TNO satellite systems (Eris/Dysnomia, Haumea/Hi'iaka/Namaka, Makemake/MK2) with `ANALYTICAL_ANIMATION_FALLBACK` for objects without JPL ephemeris. Launches three specialized GUIs: `star_visualization_gui.py` (HR diagrams and stellar neighborhoods), `earth_system_visualization_gui.py` (climate data hub), and `orbital_param_viz.py` (orbital mechanics visualization). *Note: In retrospect, plot_objects and animate_objects could have been separate modules but remain as core 1,200+ line functions.* |
+```
 
 ---
 
-## Data Acquisition (6 modules)
+## 3. UPDATE CACHE MANAGEMENT - osculating_cache_manager.py (Line 72)
 
-| Module | Description |
-|--------|-------------|
-| `data_acquisition.py` | VizieR catalog queries for Gaia and Hipparcos stellar data with rate limiting |
-| `data_acquisition_distance.py` | Distance-based stellar data fetching with configurable radius queries |
-| `simbad_manager.py` | SIMBAD astronomical database API integration with comprehensive rate limiting and error handling |
-| `orbit_data_manager.py` | JPL Horizons orbital data fetching, caching, and incremental updates for solar system objects |
-| `fetch_climate_data.py` | Climate data acquisition from multiple sources (COâ‚‚, temperature, sea level, ice extent, ocean pH) |
-| `fetch_paleoclimate_data.py` | Deep-time paleoclimate data fetching (Cenozoic Era temperature reconstructions) |
-
----
-
-## Data Processing & Analysis (8 modules)
-
-| Module | Description |
-|--------|-------------|
-| `data_processing.py` | Core data processing including coordinate transformations and stellar parameter calculations |
-| `object_type_analyzer.py` | Stellar classification and spectral type analysis with luminosity class determination |
-| `stellar_parameters.py` | Temperature, luminosity, and HR diagram calculations using stellar physics |
-| `stellar_data_patches.py` | Data quality improvements and corrections for known stellar catalog issues |
-| `enhanced_star_properties.py` | Enhanced stellar property calculations with incremental VizieR caching integration |
-| `star_properties.py` | Core stellar property calculations and data structure definitions |
-| `star_notes.py` | Comprehensive documentation of named stars with cultural and astronomical significance |
-| `messier_object_data_handler.py` | Messier catalog object data processing and management |
-
----
-
-## Cache Management (5 modules + 1 critical data file)
-
-| Module | Description |
-|--------|-------------|
-| `vot_cache_manager.py` | VizieR VOTable cache management with atomic saves and validation |
-| `incremental_cache_manager.py` | Smart incremental fetching for stellar datasets, avoiding redundant queries |
+**Replace:**
+```
 | `osculating_cache_manager.py` | Osculating orbital elements cache with epoch tracking, auto-refresh intervals, and atomic saves. Stores JPL Horizons osculating elements for 40+ objects with per-object refresh policies |
-| `climate_cache_manager.py` | Climate data cache manager with automated validation and update checking |
-| `verify_orbit_cache.py` | Orbit cache validation and repair utility with integrity checking |
+```
 
-**Critical Data File:**
+**With:**
+```
+| `osculating_cache_manager.py` | Osculating orbital elements cache with epoch tracking, auto-refresh intervals, and atomic saves. Stores JPL Horizons osculating elements for 40+ objects with per-object refresh policies. Includes `get_cache_key()` helper for center-body aware caching (e.g., `"Charon@9"` for barycenter view vs `"Charon"` for Pluto-centered view) |
+```
 
-| File | Description |
-|------|-------------|
+---
+
+## 4. UPDATE CRITICAL DATA FILE - osculating_cache.json (Line 80)
+
+**Replace:**
+```
 | `osculating_cache.json` | **Backbone of the osculating orbit system.** Contains JPL Horizons orbital elements (a, e, i, ω, Ω, TP) for 40+ objects including planets, moons, asteroids, and comets. Provides epoch tracking and per-object refresh intervals. Used by `idealized_orbits.py` for Keplerian orbit calculations, apsidal markers, dual-orbit visualizations, and the Pluto-Charon barycenter system. Managed by `osculating_cache_manager.py`. |
+```
 
-**Note:** `orbit_data_manager.py` handles trajectory/position caching but is listed under Data Acquisition as its primary function.
-
----
-
-## Visualization - Core (4 modules)
-
-| Module | Description |
-|--------|-------------|
-| `visualization_2d.py` | 2D visualization including Hertzsprung-Russell diagrams with interactive features |
-| `visualization_3d.py` | Interactive 3D stellar neighborhood plots with camera controls and filtering |
-| `visualization_core.py` | Common plotting utilities, color schemes, and styling functions shared across visualizations |
-| `visualization_utils.py` | Utility functions for plot management, save dialogs, and figure display |
+**With:**
+```
+| `osculating_cache.json` | **Backbone of the osculating orbit system.** Contains JPL Horizons orbital elements (a, e, i, ω, Ω, TP) for 40+ objects including planets, moons, asteroids, and comets. Provides epoch tracking and per-object refresh intervals. Supports center-body aware cache keys (e.g., `"Charon@9"` for barycenter-relative elements). Used by `idealized_orbits.py` for Keplerian orbit calculations, apsidal markers, dual-orbit visualizations, TNO satellite systems, and the Pluto-Charon barycenter system. Managed by `osculating_cache_manager.py`. |
+```
 
 ---
 
-## Visualization - Planetary Shells (11 modules)
+## 5. UPDATE COORDINATE SYSTEMS & ORBITAL MECHANICS - orbital_elements.py (Line 148)
 
-Interior cross-section visualizations for solar system bodies with scientifically accurate layer structures:
-
-| Module | Description |
-|--------|-------------|
-| `solar_visualization_shells.py` | Solar interior and corona visualization with reference-frame independent rendering |
-| `mercury_visualization_shells.py` | Mercury interior structure with large iron core and sodium tail visualization |
-| `venus_visualization_shells.py` | Venus interior structure with thick atmosphere and cloud layers |
-| `earth_visualization_shells.py` | Earth interior structure with crust, mantle, outer/inner core layers |
-| `mars_visualization_shells.py` | Mars interior structure with oxidized crust and smaller core |
-| `jupiter_visualization_shells.py` | Jupiter interior with metallic hydrogen layers and Great Red Spot |
-| `saturn_visualization_shells.py` | Saturn interior structure with extensive ring system visualization |
-| `uranus_visualization_shells.py` | Uranus interior with ice mantle and extreme axial tilt representation |
-| `neptune_visualization_shells.py` | Neptune interior structure with dynamic atmosphere features |
-| `pluto_visualization_shells.py` | Pluto-Charon system interior structures with binary planet dynamics |
-| `eris_visualization_shells.py` | Eris interior structure for the largest known dwarf planet |
-
----
-
-## Visualization - Specialized (8 modules)
-
-| Module | Description |
-|--------|-------------|
-| `orbital_param_viz.py` | Orbital element visualization with interactive parameter exploration |
-| `comet_visualization_shells.py` | Scientifically accurate comet rendering with dual-tail structures (dust and ion tails) |
-| `asteroid_belt_visualization_shells.py` | Asteroid belt visualization including Main Belt, Hildas, and Jupiter Trojans |
-| `planet9_visualization_shells.py` | Hypothetical Planet 9 visualization with orbit uncertainty visualization |
-| `moon_visualization_shells.py` | Lunar interior structure and orbital mechanics visualization |
-| `earth_system_visualization_gui.py` | Earth system data hub with 9 climate visualizations and interactive controls |
-| `paleoclimate_visualization_full.py` | Comprehensive paleoclimate visualization with geological period markers |
-| `paleoclimate_dual_scale.py` | Dual-scale paleoclimate plots showing recent and deep-time climate data |
-
----
-
-## HR Diagrams & Stellar Visualizations (4 modules)
-
-| Module | Description |
-|--------|-------------|
-| `hr_diagram_distance.py` | Hertzsprung-Russell diagram for stars within specified distance from Sun |
-| `hr_diagram_apparent_magnitude.py` | HR diagram using apparent magnitude for observational comparison |
-| `planetarium_distance.py` | Planetarium-style visualization of nearby stellar neighborhood with distance filtering |
-| `planetarium_apparent_magnitude.py` | Planetarium view using apparent magnitude for sky-as-seen representation |
-
----
-
-## Coordinate Systems & Orbital Mechanics (5 modules)
-
-| Module | Description |
-|--------|-------------|
-| `celestial_coordinates.py` | RA/Dec coordinate system conversions and transformations between reference frames |
+**Replace:**
+```
 | `orbital_elements.py` | Central repository for orbital parameters, parent-satellite relationships (`parent_planets` dictionary), and planet tilts. Includes Pluto-Charon barycenter for binary planet mode |
-| `apsidal_markers.py` | Periapsis/apoapsis markers with body-specific terminology (perihelion/perigee/periareion) and perturbation analysis |
+```
+
+**With:**
+```
+| `orbital_elements.py` | Central repository for orbital parameters, parent-satellite relationships (`parent_planets` dictionary), and planet tilts. Includes Pluto-Charon barycenter for binary planet mode, TNO satellite orbital elements (Dysnomia, Hi'iaka, Namaka, MK2), and analytical parameters for objects without JPL ephemeris (MK2 from arXiv:2509.05880) |
+```
+
+---
+
+## 6. UPDATE COORDINATE SYSTEMS & ORBITAL MECHANICS - idealized_orbits.py (Line 150)
+
+**Replace:**
+```
 | `idealized_orbits.py` | **Core orbit visualization engine.** Keplerian orbit calculations using osculating elements from `osculating_cache.json`. Supports dual-orbit systems, apsidal markers, and multi-center modes (including Pluto-Charon barycenter) |
-| `orrery_integration.py` | Integration module for combining orbital data into orrery visualization |
+```
 
-**Critical Data Infrastructure:**
+**With:**
+```
+| `idealized_orbits.py` | **Core orbit visualization engine.** Keplerian orbit calculations using osculating elements from `osculating_cache.json`. Supports dual-orbit systems, apsidal markers, and multi-center modes (including Pluto-Charon barycenter). Includes `plot_tno_satellite_orbit()` for TNO moon visualization and `ANALYTICAL_FALLBACK_SATELLITES` list for objects without JPL ephemeris (e.g., MK2 calculated from published orbital elements) |
+```
 
-| File | Description |
-|------|-------------|
-| `osculating_cache.json` | Real-time JPL Horizons orbital elements for 40+ objects. The osculating elements (a, e, i, ω, Ω, TP) enable accurate Keplerian orbit rendering with epoch-aware visualization |
+---
+
+## 7. UPDATE CRITICAL DATA INFRASTRUCTURE - osculating_cache_manager.py (Line 158)
+
+**Replace:**
+```
 | `osculating_cache_manager.py` | Cache manager with atomic saves, epoch tracking, and configurable refresh intervals (weekly for planets, daily for active moons) |
-
-**Note:** `refined_orbits.py` and `inclination_test.py` moved to Obsolete/Reference section.
-
----
-
-## Exoplanet Systems (4 modules)
-
-| Module | Description |
-|--------|-------------|
-| `exoplanet_systems.py` | Complete exoplanet system definitions including binary star systems |
-| `exoplanet_orbits.py` | Exoplanet orbital mechanics calculations and visualization |
-| `exoplanet_coordinates.py` | Coordinate transformations for exoplanetary systems |
-| `exoplanet_stellar_properties.py` | Host star properties and system parameters for confirmed exoplanets |
-
----
-
-## User Interface Components (5 modules)
-
-| Module | Description |
-|--------|-------------|
-| `star_visualization_gui.py` | Star visualization control panel with filtering and selection options |
-| `gui_simbad_controls.py` | **[OBSOLETE - NOT USED]** SIMBAD query interface controls (functionality now integrated into star_visualization_gui.py) |
-| `catalog_selection.py` | User interface for selecting stellar catalogs (Gaia, Hipparcos, combined) |
-| `plot_data_report_widget.py` | Widget for displaying statistical reports and data summaries |
-| `report_manager.py` | Report generation system with scientific statistics and formatting |
-
----
-
-## Utilities & Helpers (8 modules)
-
-| Module | Description |
-|--------|-------------|
-| `save_utils.py` | Plot saving utilities with format selection (PNG, HTML) and error handling dialogs |
-| `save_utils_before_simplification.py` | **[OBSOLETE - OLD VERSION]** Previous version of save_utils.py before simplification (not imported by any module) |
-| `create_cache_backups.py` | **[UTILITY SCRIPT]** Simple utility to create timestamped backups of stellar cache data (calls protect_all_star_data) |
-| `shared_utilities.py` | Common utility functions shared across multiple modules |
-| `formatting_utils.py` | Text and number formatting utilities for consistent display |
-| `planet_visualization_utilities.py` | Helper functions for planetary visualization rendering |
-| `planet_visualization.py` | Planetary visualization rendering and animation utilities |
-| `plot_data_exchange.py` | Data exchange protocol for passing plot data between modules |
-| `constants_new.py` | Physical constants, orbital parameters, and configuration values (174KB - comprehensive) |
-
----
-
-## Data Conversion (1 module)
-
-| Module | Description |
-|--------|-------------|
-| `convert_hot_ph_to_json.py` | Convert Hawaii Ocean Time-series (HOT) pH data from CSV/TXT to JSON format |
-
----
-
-## Catalogs & Reference Data (2 modules)
-
-| Module | Description |
-|--------|-------------|
-| `messier_catalog.py` | Complete Messier catalog definitions with object types and coordinates |
-| `create_ephemeris_database.py` | Satellite ephemeris database creation from multiple JPL sources |
-
----
-
----
-
-## Obsolete & Reference Modules (3 modules)
-
-These modules are no longer actively used in the production codebase but are retained in the repository for historical reference, educational value, or potential future reuse.
-
-| Module | Status | Replaced By | Notes |
-|--------|--------|-------------|-------|
-| `refined_orbits.py` | Obsolete | `idealized_orbits.py` + `osculating_cache_manager.py` | Original perturbation-based orbit system. Superseded by the osculating orbit approach which uses real-time JPL Horizons elements instead of analytical perturbation calculations. Retained as reference for perturbation theory implementation. |
-| `gui_simbad_controls.py` | Obsolete | Integrated into main GUI | Original standalone SIMBAD control panel. Functionality merged into `palomas_orrery.py`. |
-| `save_utils_before_simplification.py` | Obsolete | `save_utils.py` | Pre-refactoring version of save utilities. Retained to document the simplification process. |
-
-**Development/Testing Modules (not for production):**
-
-| Module | Purpose |
-|--------|---------|
-| `inclination_test.py` | Test harness for orbital inclination calculations and coordinate transformations. Used during development of satellite visualization systems. |
-| `create_ephemeris_database.py` | One-time utility for building satellite ephemeris database. Run once to generate `satellite_ephemerides.json`. |
-| `create_cache_backups.py` | Maintenance utility for creating stellar data backups (PKL/VOT files). Run manually for data protection. |
-
-**Why Retain Obsolete Modules?**
-
-1. **Historical Reference:** Documents evolution of the codebase
-2. **Educational Value:** Shows alternative approaches (e.g., perturbation theory vs. osculating elements)
-3. **Fallback Option:** Code can be revived if needed for specific use cases
-4. **Attribution:** Preserves contribution history
-
-## Summary Statistics
-
-- **Total Python Modules:** 79
-- **Active Production Modules:** 74
-- **Development/Testing Modules:** 5 (cache_test, test_orbit_cache, simbad_test, simbad_test_2, inclination_test)
-- **Obsolete/Unused Modules:** 2 (gui_simbad_controls, save_utils_before_simplification)
-- **Total Lines of Code:** ~15,000+ (estimated from file sizes)
-- **Largest Module:** `palomas_orrery.py` (404KB, 8,289 lines - main GUI and visualization engine)
-- **Most Complex:** `constants_new.py` (174KB - comprehensive orbital parameters and physical constants)
-- **Visualization Modules:** 27 (including planetary shells, HR diagrams, and specialized visualizations)
-
-**Obsolete/Development Modules:**
-
-- `gui_simbad_controls.py` - Functionality integrated into star_visualization_gui.py
-- `save_utils_before_simplification.py` - Old version of save_utils.py
-- Testing modules (simbad_test.py, simbad_test_2.py, cache_test.py, test_orbit_cache.py, inclination_test.py) - Development/debugging only
-
----
-
-## Quick Search Keywords
-
-Use Ctrl+F (Windows/Linux) or Cmd+F (Mac) to search for:
-
-- **Save/Export:** `save_utils.py`, `visualization_utils.py`
-- **Cache Management:** `vot_cache_manager.py`, `incremental_cache_manager.py`, `orbit_data_manager.py`
-- **Coordinates:** `celestial_coordinates.py`, `exoplanet_coordinates.py`
-- **Climate Data:** `fetch_climate_data.py`, `earth_system_visualization_gui.py`, `climate_cache_manager.py`
-- **Orbits:** `orbit_data_manager.py`, `orbital_elements.py`, `idealized_orbits.py`, `orrery_integration.py`, `orbital_param_viz.py`
-- **Osculating:** `osculating_cache_manager.py`, `osculating_cache.json`, `idealized_orbits.py`, `apsidal_markers.py`
-- **Stars:** `star_properties.py`, `stellar_parameters.py`, `star_visualization_gui.py`
-- **HR Diagram:** `hr_diagram_distance.py`, `hr_diagram_apparent_magnitude.py`, `visualization_2d.py`
-- **SIMBAD:** `simbad_manager.py`, `gui_simbad_controls.py`
-- **JPL Horizons:** `orbit_data_manager.py`, `create_ephemeris_database.py`
-- **Exoplanets:** `exoplanet_systems.py`, `exoplanet_orbits.py`, `exoplanet_stellar_properties.py`
-
----
-
-## System Architecture Overview
-
-**10-Layer Vertical Design:**
-
-The project follows a clean layered architecture with clear data flow from external sources (top) to final outputs (bottom). Each layer has specific responsibilities:
-
-```
-Layer 1: External Data Sources (4 sources)
-   ↓
-Layer 2: Data Acquisition (6 modules)
-   ↓
-Layer 3: Cache Management (4 managers + 2 utilities)
-   ↓
-Layer 4: Data Processing (8 modules)
-   ↓
-Layer 5: Visualization Preparation (27+ modules)
-   ↓
-Layer 6: User Interface (8+ GUIs)
-   ↓
-Layer 7: Reporting & Data Exchange (3 modules)
-   ↓
-Layer 8: Utilities & Support (5 modules)
-   ↓
-Layer 9: Configuration (2 modules)
-   ↓
-Layer 10: Final Outputs (files and directories)
 ```
 
-**Module Distribution by Layer:**
+**With:**
+```
+| `osculating_cache_manager.py` | Cache manager with atomic saves, epoch tracking, and configurable refresh intervals (weekly for planets, daily for active moons). Includes `get_cache_key(object_name, center_body)` for center-body aware caching to support barycenter views |
+```
 
-- **Layer 2 (Acquisition):** 6 modules specialized by data type (orbit, stellar, climate, Messier)
-- **Layer 3 (Cache):** 4 cache managers + 2 utilities (backups, verification) - "Defense-in-Depth"
-- **Layer 4 (Processing):** 8 modules for coordinate math, stellar physics, orbital mechanics
-- **Layer 5 (Viz Prep):** 27 modules including 12 planetary shells, 4 exoplanet modules, specialized visualizations
-- **Layer 6 (UI):** 1 main GUI (8,289 lines) + 7 specialized visualization interfaces
-- **Layer 7 (Reporting):** 3 modules for data exchange and statistical reporting
-- **Layer 8 (Utils):** 5 cross-cutting utilities supporting multiple layers
-- **Layer 9 (Config):** 2 large reference files (constants_new.py is 174KB)
-- **Layer 10 (Outputs):** PNG/HTML plots, JSON data, reports, cache directories
+---
 
-**Three Parallel Pipelines:**
+## 8. ADD NEW SECTION: TNO Satellite Systems (After Line 161, before Exoplanet Systems)
 
-The system supports three major data pipelines that flow through these layers:
+**Insert new section:**
 
-1. **Solar System Pipeline** (30+ modules)
-   - Sources: JPL Horizons
-   - Flow: Horizons → orbit_data_manager → orbit_cache → refined_orbits → planet_visualization → palomas_orrery → plot_objects() → PNG/HTML
-   - Output: 3D orrery visualizations, animations, planetary shells
+```markdown
+---
 
-2. **Stellar Pipeline** (15+ modules)
-   - Sources: Gaia, Hipparcos, SIMBAD
-   - Flow: Catalogs → data_acquisition → vot_cache_manager → stellar_parameters → visualization_3d/2d → star_visualization_gui → HR diagrams
-   - Output: 3D star maps, HR diagrams, stellar neighborhoods
+## TNO Satellite Systems 🆕
 
-3. **Earth System Pipeline** (3+ modules, growing)
-   - Sources: NOAA, NASA GISS, NSIDC, others
-   - Flow: Climate sources → fetch_climate_data → climate_cache_manager → earth_system_visualization_gui → 9 visualizations
-   - Output: Climate data preservation hub with CO₂, temperature, sea ice, ocean pH, planetary boundaries, etc.
+The orrery visualizes Trans-Neptunian Object satellite systems with full orbital mechanics:
 
-**Integration Points:**
+| System | Satellites | Data Source |
+|--------|------------|-------------|
+| Eris | Dysnomia | JPL Horizons osculating elements |
+| Haumea | Hi'iaka, Namaka | JPL Horizons osculating elements |
+| Makemake | MK2 | Analytical fallback (arXiv:2509.05880) |
 
-- **Main GUI (palomas_orrery.py)** - Master integration launching all three pipelines (404KB, 8,289 lines)
-- **Constants (constants_new.py)** - Feeds all pipelines with physical parameters (174KB reference data)
-- **Utilities** - Provide cross-cutting support (save, format, shutdown) across layers 5-10
-- **Cache Layer (Layer 3)** - Protects data integrity for all pipelines with validation and repair
+**Analytical Fallback Architecture:**
 
-**Architectural Strengths:**
+For satellites without JPL Horizons ephemeris (like MK2), the system calculates orbits from published orbital elements:
 
-1. **Modularity:** New visualizations can be added to Layer 5 without touching other layers
-2. **Robustness:** Cache validation at Layer 3 prevents corrupted data from reaching processing
-3. **Maintainability:** Clear layer boundaries make debugging straightforward
-4. **Extensibility:** New data sources integrate at Layers 1-2 without refactoring downstream
-5. **Testability:** Each layer can be validated independently
-6. **Defense-in-Depth:** Multi-layer cache protection (atomic saves, validation, backups, repair)
+```
+ANALYTICAL_FALLBACK_SATELLITES = ['MK2']  # In idealized_orbits.py
+ANALYTICAL_ANIMATION_FALLBACK = ['MK2']   # In palomas_orrery.py
+```
 
-**Module Complexity Analysis:**
+**Data Flow (MK2 example):**
+```
+User selects MK2 → fetch_trajectory() → JPL returns empty
+    ↓
+Check ANALYTICAL_ANIMATION_FALLBACK → MK2 listed
+    ↓
+Load elements from orbital_elements.py (arXiv source)
+    ↓
+Calculate Keplerian orbit analytically
+    ↓
+Display with "Analytical Orbit" attribution
+```
 
-*Largest Modules (by size/lines):*
-- `palomas_orrery.py` - 8,289 lines (main GUI, plot_objects(), animate_objects())
-- `constants_new.py` - 174KB (comprehensive orbital parameters and physical constants)
-- Visualization modules - typically 500-1,500 lines each
-- Shell modules - typically 200-400 lines each (12 modules for planetary interiors)
+**Key Files:**
+- `orbital_elements.py` - MK2 orbital parameters (a, e, i, P)
+- `idealized_orbits.py` - `plot_tno_satellite_orbit()`, fallback logic
+- `palomas_orrery.py` - Animation fallback with velocity calculation
+- `constants_new.py` - TNO moon descriptions and metadata
+```
 
-*Most Interconnected Modules:*
-- `constants_new.py` - Referenced by layers 4-6 (cross-cutting configuration)
-- `palomas_orrery.py` - Integrates all three pipelines (master controller)
-- `visualization_core.py` - Shared utilities for all visualization types
-- Cache managers - Protect data flow between layers 2-4 (critical infrastructure)
+---
 
+## 9. FIX DATA FLOW EXAMPLE (Lines 373-381)
+
+**Replace:**
+```
 *Example Data Flow (Mars Visualization):*
 ```
 User clicks "Mars" → palomas_orrery.py (L6) → orbit_data_manager (L2) 
@@ -379,47 +180,133 @@ User clicks "Mars" → palomas_orrery.py (L6) → orbit_data_manager (L2)
 
 Time: Milliseconds (cached) or 1-2 seconds (fresh API call)
 ```
+```
 
-**For Visual Architecture:**
+**With:**
+```
+*Example Data Flow (Mars Visualization):*
+```
+User clicks "Mars" → palomas_orrery.py (L6) → orbit_data_manager (L2) 
+→ [check cache] → orbit_cache/mars.json (L3) → idealized_orbits.py (L4) 
+→ planet_visualization.py (L5) → plot_objects() (L6) → Plotly render 
+→ save_utils.py (L8) → PNG/HTML output (L10)
 
-See `architecture_ascii_visualization.md` for a complete ASCII art diagram showing all 10 layers with box-drawing characters that renders in any markdown viewer. The diagram includes:
-- Complete layer-by-layer breakdown with module details
-- Three parallel pipeline visualizations
-- Integration points and data flow examples
-- Module distribution charts
-- Architectural insights and benefits
+Time: Milliseconds (cached) or 1-2 seconds (fresh API call)
+```
 
+*Example Data Flow (MK2 - Analytical Fallback):* 🆕
+```
+User selects "MK2" → palomas_orrery.py (L6) → fetch_trajectory() (L2)
+→ JPL Horizons returns empty → Check ANALYTICAL_FALLBACK list
+→ Load from orbital_elements.py (L4) → Calculate Keplerian orbit
+→ idealized_orbits.py plot_tno_satellite_orbit() (L4)
+→ plot_objects() (L6) → Plotly render with "Analytical" attribution
+
+Time: Milliseconds (no API call - calculated from stored elements)
+```
+```
+
+---
+
+## 10. UPDATE FLOWCHART REFERENCES (Lines 392, 420)
+
+**Replace (Line 392):**
+```
 Also available: `palomas_orrery_flowchart_v13_vertical.md` for Mermaid flowchart with detailed module-level connections.
+```
 
----
+**With:**
+```
+Also available: `palomas_orrery_flowchart_v15_vertical.md` for Mermaid flowchart with detailed module-level connections including TNO satellites, center-body aware caching, and analytical fallback architecture.
+```
 
-## File Organization Notes
-
-**Naming Conventions:**
-
-- `*_visualization_shells.py` - Planetary interior cross-sections
-- `*_cache_manager.py` - Cache management systems
-- `hr_diagram_*.py` - Hertzsprung-Russell diagram variants
-- `exoplanet_*.py` - Exoplanet system modules
-- `*_test.py` - Testing and validation scripts
-
-**Integration Points:**
-
-- Main entry: `palomas_orrery.py`
-- Data flow: acquisition â†’ processing â†’ caching â†’ visualization
-- UI: Various `*_gui.py` modules for different panels
-- Utilities: `*_utils.py` for shared functionality
-
----
-
-## See Also
-
-- [README.md](README.md) - Project overview, installation, and quick start
-- [climate_readme.md](climate_readme.md) - Climate data documentation
-- [architecture_ascii_visualization.md](architecture_ascii_visualization.md) - Complete ASCII art system architecture diagram
+**Replace (Line 420):**
+```
 - [palomas_orrery_flowchart_v13_vertical.md](palomas_orrery_flowchart_v13_vertical.md) - Vertical Mermaid flowchart with detailed connections
-- [working_protocol_v2_3.md](working_protocol_v2_3.md) - Development collaboration protocol
+```
+
+**With:**
+```
+- [palomas_orrery_flowchart_v15_vertical.md](palomas_orrery_flowchart_v15_vertical.md) - Vertical Mermaid flowchart with detailed connections (TNO satellites, analytical fallback)
+```
 
 ---
 
+## 11. UPDATE GENERATED DATE (Line 425)
+
+**Replace:**
+```
 Generated November 26, 2025 for Paloma's Orrery project
+```
+
+**With:**
+```
+Generated December 8, 2025 for Paloma's Orrery project
+```
+
+---
+
+## 12. UPDATE MODULE COUNTS (Line 21-24)
+
+**Replace:**
+```
+**Module Organization:**
+
+- Total modules: 81 Python files
+- Active production modules: 75
+- Development/testing modules: 3
+- Obsolete/reference modules: 3 (retained for historical reference)
+```
+
+**With:**
+```
+**Module Organization:**
+
+- Total modules: 81 Python files
+- Active production modules: 75
+- Development/testing modules: 3
+- Obsolete/reference modules: 3 (retained for historical reference)
+
+**Recent Architectural Additions (Dec 2025):**
+- TNO satellite visualization system
+- Center-body aware osculating cache
+- Analytical orbit fallback for objects without JPL ephemeris
+```
+
+---
+
+## Summary of All Changes
+
+| Section | Changes |
+|---------|---------|
+| Header | Date updated to Dec 8, 2025 |
+| Core Application | palomas_orrery.py size/lines updated, TNO systems added |
+| Cache Management | `get_cache_key()` and center-body awareness documented |
+| Critical Data | osculating_cache.json center-body keys documented |
+| Orbital Mechanics | orbital_elements.py TNO/MK2 params added |
+| Orbital Mechanics | idealized_orbits.py TNO function and fallback added |
+| **New Section** | TNO Satellite Systems with fallback architecture |
+| Data Flow | Fixed obsolete refined_orbits.py reference, added MK2 example |
+| References | Flowchart v13 → v15 |
+| Footer | Generated date updated |
+| Module Organization | Added recent architectural additions note |
+
+---
+
+## Validation Against Flowchart v15
+
+| Flowchart Element | MODULE_INDEX Coverage |
+|-------------------|----------------------|
+| arXiv as data source | ✅ TNO section mentions arXiv:2509.05880 |
+| `get_cache_key()` | ✅ osculating_cache_manager.py description |
+| Center-body aware keys | ✅ Both cache manager and JSON file descriptions |
+| `plot_tno_satellite_orbit()` | ✅ idealized_orbits.py description |
+| `ANALYTICAL_FALLBACK_SATELLITES` | ✅ New TNO section + idealized_orbits.py |
+| `ANALYTICAL_ANIMATION_FALLBACK` | ✅ palomas_orrery.py description + TNO section |
+| TNO satellite systems | ✅ New dedicated section |
+| Updated line counts | ✅ 8,700+ lines noted |
+
+---
+
+*Document prepared by Claude for Tony's Paloma's Orrery project*  
+*December 8, 2025*

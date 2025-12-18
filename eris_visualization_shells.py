@@ -75,9 +75,9 @@ def create_eris_core_shell(center_position=(0, 0, 0)):
                 color=layer_info['color'],
                 opacity=layer_info['opacity']
             ),
-            name=f"Eris/Dysnomia: {layer_info['name']}",
+            name=f"Eris: {layer_info['name']}",
             text=[layer_info['description']] * len(x),
-            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            customdata=[f"Eris: {layer_info['name']}"] * len(x),
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
@@ -132,9 +132,9 @@ def create_eris_mantle_shell(center_position=(0, 0, 0)):
                 color=layer_info['color'],
                 opacity=layer_info['opacity']
             ),
-            name=f"Eris/Dysnomia: {layer_info['name']}",
+            name=f"Eris: {layer_info['name']}",
             text=[layer_info['description']] * len(x),
-            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            customdata=[f"Eris: {layer_info['name']}"] * len(x),
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
@@ -217,7 +217,7 @@ def create_eris_crust_shell(center_position=(0, 0, 0)):
         k=[idx[2] for idx in indices],
         color=layer_info['color'],
         opacity=layer_info['opacity'],
-        name=f"Eris/Dysnomia: {layer_info['name']}",
+        name=f"Eris: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -277,7 +277,7 @@ def create_eris_crust_shell(center_position=(0, 0, 0)):
     hover_texts = [layer_info['description']] * len(x_hover)
 
     # Just the name for "Object Names Only" mode
-    layer_name = f"Eris/Dysnomia: {layer_info['name']}"
+    layer_name = f"Eris: {layer_info['name']}"
     minimal_hover_texts = [layer_name] * len(x_hover)
 
     # Create hover trace with direct text assignment
@@ -295,7 +295,7 @@ def create_eris_crust_shell(center_position=(0, 0, 0)):
                 color='black'
             )
         ),
-        name=f"Eris/Dysnomia: {layer_info['name']} (Info)",
+        name=f"Eris: {layer_info['name']} (Info)",
         text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
         customdata=minimal_hover_texts,  # For "Object Names Only" mode
         hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
@@ -370,9 +370,9 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
                 color=layer_info['color'],
                 opacity=layer_info['opacity']
             ),
-            name=f"Eris/Dysnomia: {layer_info['name']}",
+            name=f"Eris: {layer_info['name']}",
             text=[layer_info['description']] * len(x),
-            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            customdata=[f"Eris: {layer_info['name']}"] * len(x),
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )
@@ -437,9 +437,9 @@ def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
                 color=layer_info['color'],
                 opacity=layer_info['opacity']
             ),
-            name=f"Eris/Dysnomia: {layer_info['name']}",
+            name=f"Eris: {layer_info['name']}",
             text=[layer_info['description']] * len(x),
-            customdata=[f"Eris/Dysnomia: {layer_info['name']}"] * len(x),
+            customdata=[f"Eris: {layer_info['name']}"] * len(x),
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
         )

@@ -259,14 +259,6 @@ def create_dates_list_for_object(obj, obj_type, date_obj,
     """
     Create a list of dates for plotting based on object type.
     """
-#    if obj_type == 'trajectory':
-        # Time-bounded paths
-#        start_date = obj.get('start_date', date_obj)
-#        end_date = obj.get('end_date', date_obj)
-#        total_days = (end_date - start_date).days
-        
-#        if total_days <= 0:
-#            return [start_date]
         
     if obj_type == 'trajectory':
         # Time-bounded paths
@@ -280,7 +272,9 @@ def create_dates_list_for_object(obj, obj_type, date_obj,
             start_date = settings['start_date']
             end_date = settings['end_date']
             
-        total_days = (end_date - start_date).days
+    #    total_days = (end_date - start_date).days
+        # Use total_seconds() to preserve fractional days
+        total_days = (end_date - start_date).total_seconds() / 86400
         
         if total_days <= 0:
             # If no valid range, use the requested days from GUI
@@ -449,8 +443,15 @@ def get_interval_settings():
             settings['start_date'] = datetime(1900, 1, 1)
         if settings['end_date'] > HORIZONS_MAX_DATE:
             settings['end_date'] = HORIZONS_MAX_DATE
-            settings['days_to_plot'] = (settings['end_date'] - settings['start_date']).days
+
+        #    settings['days_to_plot'] = (settings['end_date'] - settings['start_date']).days
+            # Use total_seconds() to preserve fractional days (e.g., 28 hours = 1.167 days, not 1 day)
+        #    settings['days_to_plot'] = (settings['end_date'] - settings['start_date']).total_seconds() / 86400
         
+        # Always recalculate days_to_plot from actual date range
+        # Use total_seconds() to preserve fractional days (e.g., 28 hours = 1.167 days, not 1 day)
+        settings['days_to_plot'] = (settings['end_date'] - settings['start_date']).total_seconds() / 86400
+
         return settings, None  # No error
         
     except (ValueError, TypeError) as e:
@@ -792,7 +793,9 @@ def calculate_satellite_precession_info(selected_objects, start_date, end_date, 
     MAX_PRECESSION = 10.0  # Adjust this threshold as needed
     
     # Calculate days in the selected range
-    days_to_plot = (end_date - start_date).days
+#    days_to_plot = (end_date - start_date).days
+    # Use total_seconds() to preserve fractional days
+    days_to_plot = (end_date - start_date).total_seconds() / 86400
     years_to_plot = days_to_plot / 365.25
     
     # Check each selected object
@@ -1988,13 +1991,16 @@ planet9_surface_var = tk.IntVar(value=0)
 planet9_hill_sphere_var = tk.IntVar(value=0)
 
 haumea_var = tk.IntVar(value=0)
+hiiaka_var = tk.IntVar(value=0)
+namaka_var = tk.IntVar(value=0)
 
 makemake_var = tk.IntVar(value=0)
+mk2_var = tk.IntVar(value=0)
 
 ammonite_var = tk.IntVar(value=0)
 
-eris_var = tk.IntVar(value=0)       # for heliocentric plots
-eris2_var = tk.IntVar(value=0)      # for Eris-centered plots
+eris_var = tk.IntVar(value=0)       
+# eris2_var = tk.IntVar(value=0)      # for Eris-centered plots
 # Eris's Moon
 dysnomia_var = tk.IntVar(value=0)
 # eris core shell
@@ -2417,22 +2423,34 @@ objects = [
     'mission_info': 'Horizons: A801 AA. NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture."', 
     'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
 
-    {'name': 'Haumea', 'id': '2003 EL61', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2003 EL61. Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
+#    {'name': 'Haumea', 'id': '2003 EL61', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
+#    'id_type': 'smallbody', 
+#    'mission_info': 'Horizons: 2003 EL61. Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
+#    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
 
-    {'name': 'Eris', 'id': '2003 UB313', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Haumea', 'id': '20136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
+    'id_type': 'majorbody',
+    'helio_id': '2003 EL61',  # For Sun-centered plots
+    'mission_info': 'Horizons: 136108 Haumea. Egg-shaped dwarf planet with rings and two moons. Fastest rotating large body in the solar system (3.9 hour day).', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},    
+
+#    {'name': 'Eris', 'id': '2003 UB313', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'orbital', 
     # 136199 primary (required for Sun centered plots)
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2003 UB313. Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
+#    'id_type': 'smallbody', 
+#    'mission_info': 'Horizons: 2003 UB313. Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
+#    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
 
-    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var': eris2_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'satellite', 
+    {'name': 'Eris', 'id': '20136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'orbital', 
+    'id_type': 'majorbody',
+    'helio_id': '2003 UB313',  # For Sun-centered plots
+    'mission_info': 'Horizons: 136199 Eris. Most massive dwarf planet (27% more than Pluto). Three times farther from the Sun than Pluto.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},    
+
+#    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var': eris2_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'satellite', 
     # 20136199 satellite solution (required for Eris centered plots) 
-    'id_type': 'smallbody', 
-    'mission_info': 'Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
+#    'id_type': 'smallbody', 
+#    'mission_info': 'Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
+#    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
 
     {'name': 'Gonggong', 'id': '2007 OR10', 'var': gonggong_var, 'color': color_map('Gonggong'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
@@ -2443,6 +2461,13 @@ objects = [
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2005 FY9. Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
+
+#    Note: JPL has no satellite ephemeris for Makemake yet (MK2 discovered 2015)
+#    {'name': 'Makemake', 'id': '20136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
+#    'id_type': 'majorbody',
+#    'helio_id': '2005 FY9',  # For Sun-centered plots
+#    'mission_info': 'Horizons: 136472 Makemake. Second-brightest Kuiper Belt object. Has one known moon (MK2).', 
+#    'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},    
 
     {'name': 'Mani', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
@@ -2781,7 +2806,8 @@ objects = [
     {'name': '1I/Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('1I/Oumuamua'), 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1),
     # data arc from 2017 October 14 to 2018 January 2 
-    'mission_info': 'Horizons: A/2017 U1. Retrograde. Hyperbolic. First known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: A/2017 U1. Retrograde. Hyperbolic. First known interstellar object detected passing through<br>' 
+    'the Solar System. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
 
     {'name': '2I/Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('2I/Borisov'), 'symbol': 'diamond', 
@@ -2795,7 +2821,8 @@ objects = [
     'object_type': 'trajectory', 'id_type': 'smallbody', 
     # 'start_date': datetime(2025, 5, 15), 'end_date': datetime(2032, 12, 31),
     # data arc: 2025-05-15 to 2025-09-21
-    'mission_info': 'Horizons: C/2025 N1. Retrograde. Hyperbolic. Third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/2025 N1. Retrograde. Hyperbolic. Third known interstellar object detected passing through<br>'  
+    'the Solar System. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
 
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
@@ -3168,10 +3195,34 @@ objects = [
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/'},
 
     # Eris's Moon
+#    {'name': 'Dysnomia', 'id': '120136199', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'object_type': 'satellite', 
+#     'id_type': 'majorbody', 
+#     'mission_info': 'Eris orbital period: 15.79 Earth days.', 
+#     'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
+
+    # Eris's Moon
     {'name': 'Dysnomia', 'id': '120136199', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': 'majorbody', 
-     'mission_info': 'Eris orbital period: 15.79 Earth days.', 
+     'mission_info': 'Eris\'s moon. Period: 15.79 days. Both tidally locked. Diameter ~700 km.', 
      'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
+
+    # Haumea's Moons
+    {'name': "Hi'iaka", 'id': '120136108', 'var': hiiaka_var, 'color': color_map("Hi'iaka"), 'symbol': 'circle', 'object_type': 'satellite', 
+     'id_type': 'majorbody', 
+     'mission_info': 'Haumea\'s outer moon. Period: 49 days. Diameter ~310 km. Named for Hawaiian goddess of childbirth.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
+
+    {'name': 'Namaka', 'id': '220136108', 'var': namaka_var, 'color': color_map('Namaka'), 'symbol': 'circle', 'object_type': 'satellite', 
+     'id_type': 'majorbody', 
+     'mission_info': 'Haumea\'s inner moon. Period: 18 days. Diameter ~170 km. Eccentric orbit perturbed by Hi\'iaka.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
+
+    # Makemake's Moon
+    {'name': 'MK2', 'id': '120136472', 'var': mk2_var, 'color': color_map('MK2'), 'symbol': 'circle', 'object_type': 'satellite', 
+     'id_type': 'majorbody', 
+     'mission_info': 'Makemake\'s moon (S/2015 (136472) 1). Discovered 2015 by Hubble. Period: 18.023 days. Distance: ~22,250 km. Orbit edge-on to Earth.<br>' 
+     'Very dark surface (~4% reflectivity), diameter ~175 km. No JPL ephemeris available - orbit from 2025 Hubble analysis.', 
+     'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
 
 # ============== EXOPLANET SYSTEMS ==============
     
@@ -3800,7 +3851,18 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             if obj_info.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:    
                 continue
 
-            trajectory = fetch_trajectory(obj_info['id'], dates_list, center_id=center_id, id_type=obj_info.get('id_type'))
+            # Use helio_id for Sun-centered plots if available (longer ephemeris coverage)
+            # System barycenter IDs (e.g., 20136108) only have data to ~2030
+            # Heliocentric IDs (e.g., 2003 EL61) have data to ~2500
+            fetch_id = obj_info['id']
+            fetch_id_type = obj_info.get('id_type')
+            if center_object_name == 'Sun' and 'helio_id' in obj_info:
+                fetch_id = obj_info['helio_id']
+                fetch_id_type = 'smallbody'  # helio_ids are smallbody designations
+            
+            trajectory = fetch_trajectory(fetch_id, dates_list, center_id=center_id, id_type=fetch_id_type)
+
+        #    trajectory = fetch_trajectory(obj_info['id'], dates_list, center_id=center_id, id_type=obj_info.get('id_type'))
             # Now trajectory is a list of positions
             if trajectory:
                 x = [pos['x'] for pos in trajectory if pos is not None]
@@ -3872,7 +3934,7 @@ body_shells_config = {
     'Uranus': uranus_shell_vars,
     'Neptune': neptune_shell_vars,
     'Pluto': pluto_shell_vars,
-    'Eris/Dysnomia': eris_shell_vars,
+    'Eris': eris_shell_vars,
     'Planet 9': planet9_shell_vars
     # Add more celestial bodies here as shell systems are developed
 }
@@ -3893,6 +3955,15 @@ def plot_objects():
     selected_objects_for_prefetch = [obj for obj in objects if obj['var'].get() == 1]
     center_object_name = center_object_var.get()
     
+    # Determine center_body for osculating elements based on view
+    # This affects which reference frame the elements use
+    if center_object_name == 'Pluto-Charon Barycenter':
+        osculating_center_body = '@9'  # Barycentric elements
+    elif center_object_name == 'Pluto':
+        osculating_center_body = '@999'  # Pluto-centered elements
+    else:
+        osculating_center_body = None  # Default (heliocentric or auto-detect)
+
     # Get the plot date for osculating elements
     try:
         plot_date = get_date_from_gui()
@@ -3932,18 +4003,38 @@ def plot_objects():
                     print(f"[DEBUG] Using Horizons ID: {horizons_id} (type: {id_type})", flush=True)
                     
                     # Trigger the GUI prompt with proper Horizons ID
+            #        fresh_elements = get_elements_with_prompt(
+            #            obj_name, 
+            #            horizons_id=horizons_id,
+            #            id_type=id_type,
+            #            plot_date=plot_date,
+            #            parent_window=root
+            #        )
+
+                    # Determine if this object needs barycentric elements
+                    # Pluto system objects need center_body when viewing from barycenter
+                    obj_center_body = None
+                    if center_object_name in ['Pluto-Charon Barycenter', 'Pluto']:
+                        # Check if this is a Pluto system object (Pluto, Charon, or outer moons)
+                        pluto_system_ids = ['999', '901', '902', '903', '904', '905']  # Pluto, Charon, Nix, Hydra, Kerberos, Styx
+                        if str(horizons_id) in pluto_system_ids:
+                            obj_center_body = osculating_center_body
+                    
+                    # Trigger the GUI prompt with proper Horizons ID and center
                     fresh_elements = get_elements_with_prompt(
                         obj_name, 
                         horizons_id=horizons_id,
                         id_type=id_type,
                         plot_date=plot_date,
-                        parent_window=root
+                        parent_window=root,
+                        center_body=obj_center_body
                     )
+
                 else:
                     # Fallback to old behavior if object not found
                     print(f"[WARNING] Object dictionary not found for {obj_name}, using name as ID", flush=True)
-            #        fresh_elements = get_elements_with_prompt(obj_name, parent_window=root)
-                    fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root)
+            #        fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root)
+                    fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root, center_body=osculating_center_body)
                 
                 # Update working copy
                 active_planetary_params[obj_name] = fresh_elements
@@ -4297,7 +4388,7 @@ def plot_objects():
                     'position': None,  # Will be populated during animation
                     'shell_vars': pluto_shell_vars
                 },
-                'Eris/Dysnomia': {
+                'Eris': {
                     'position': None,  # Will be populated during animation
                     'shell_vars': eris_shell_vars
                 },
@@ -4354,7 +4445,9 @@ def plot_objects():
                             start_date = settings['start_date']
                             end_date = settings['end_date']
                             
-                        total_days = (end_date - start_date).days
+                    #    total_days = (end_date - start_date).days
+                        # Use total_seconds() to preserve fractional days
+                        total_days = (end_date - start_date).total_seconds() / 86400
                         
                         if total_days <= 0:
                             # Use requested days from GUI
@@ -4365,18 +4458,19 @@ def plot_objects():
                         num_points = int(trajectory_points) + 1
                         dates_list = [start_date + timedelta(days=float(d)) 
                                     for d in np.linspace(0, total_days, num=num_points)]
-
-                    elif obj_type == 'satellite' and obj['name'] in parent_planets.get(center_object_name, []):
-                        # Moons of the center object
-                        num_points = int(satellite_points) + 1  # Use satellite_points from settings
-                #        actual_days = int(days_to_plot_entry.get())  # Get the actual requested days
+                        
+                    # Check if this object is a satellite of the current center              
+                    # (regardless of object_type - e.g., Pluto is 'orbital' but orbits the barycenter)
+                    elif obj['name'] in parent_planets.get(center_object_name, []):
+                        # Moons/orbiters of the center object - use satellite settings
+                        num_points = int(satellite_points) + 1
                         actual_days_to_plot = settings['days_to_plot'] 
                         dates_list = [date_obj + timedelta(days=float(d)) 
-                #                    for d in np.linspace(0, satellite_days, num=num_points)]
                                     for d in np.linspace(0, actual_days_to_plot, num=num_points)]
 
-                    elif obj_type == 'orbital' and obj['name'] in planetary_params:
-                        
+            #        elif obj_type == 'orbital' and obj['name'] in planetary_params:
+                    elif obj_type == 'orbital' and obj['name'] in active_planetary_params:      # uses osculating elements
+
                         # Get the raw days_to_plot value
                         raw_days = int(days_to_plot_entry.get())
                         settings_days = settings['days_to_plot']
@@ -4386,7 +4480,8 @@ def plot_objects():
                         # ==========================================
                         
                         # Planets, dwarf planets, TNOs
-                        a = planetary_params[obj['name']]['a']
+            #            a = planetary_params[obj['name']]['a']
+                        a = active_planetary_params[obj['name']]['a']
                         
                         if a > 0:  # Only for elliptical orbits
                             orbital_period_years = np.sqrt(a ** 3)
@@ -4516,12 +4611,10 @@ def plot_objects():
             if scale_var.get() == 'Auto':
                 selected_objects = [obj for obj in objects if obj['var'].get() == 1]
 
-                # Check if plotting exoplanets (use independent frames)
-            #    has_exoplanets = any(obj.get('object_type') in ['exoplanet', 'exo_host_star'] 
-            #                        for obj in selected_objects)
-
                 axis_range = calculate_axis_range_from_orbits(
-                    selected_objects, positions, planetary_params, 
+            #        selected_objects, positions, planetary_params, 
+                    selected_objects, positions, active_planetary_params,
+
                     parent_planets, center_object_name
     )
 
@@ -4552,7 +4645,7 @@ def plot_objects():
                 'Uranus': uranus_shell_vars,
                 'Neptune': neptune_shell_vars,
                 'Pluto': pluto_shell_vars,
-                'Eris/Dysnomia': eris_shell_vars,
+                'Eris': eris_shell_vars,
                 'Planet 9': planet9_shell_vars               
                 # Add more planets here as shell systems are developed
             }
@@ -4631,7 +4724,7 @@ def plot_objects():
                 'Uranus': uranus_shell_vars,
                 'Neptune': neptune_shell_vars,
                 'Pluto': pluto_shell_vars,
-                'Eris/Dysnomia': eris_shell_vars,
+                'Eris': eris_shell_vars,
                 'Planet 9': planet9_shell_vars               
             }
 
@@ -5175,6 +5268,15 @@ def animate_objects(step, label):
     selected_objects_for_prefetch = [obj for obj in objects if obj['var'].get() == 1]
     center_object_name = center_object_var.get()
     
+    # Determine center_body for osculating elements based on view
+    # This affects which reference frame the elements use
+    if center_object_name == 'Pluto-Charon Barycenter':
+        osculating_center_body = '@9'  # Barycentric elements
+    elif center_object_name == 'Pluto':
+        osculating_center_body = '@999'  # Pluto-centered elements
+    else:
+        osculating_center_body = None  # Default (heliocentric or auto-detect)
+
     # Get the animation start date for osculating elements
     try:
         plot_date = get_date_from_gui()
@@ -5206,18 +5308,30 @@ def animate_objects(step, label):
                     
                     print(f"[ANIMATION PRE-FETCH] Using Horizons ID: {horizons_id} (type: {id_type})", flush=True)
                     
-                    # Get elements with proper Horizons ID
+                    # Determine if this object needs barycentric elements
+                    # Pluto system objects need center_body when viewing from barycenter
+                    obj_center_body = None
+                    if center_object_name in ['Pluto-Charon Barycenter', 'Pluto']:
+                        # Check if this is a Pluto system object (Pluto, Charon, or outer moons)
+                        pluto_system_ids = ['999', '901', '902', '903', '904', '905']  # Pluto, Charon, Nix, Hydra, Kerberos, Styx
+                        if str(horizons_id) in pluto_system_ids:
+                            obj_center_body = osculating_center_body
+                    
+                    # Get elements with proper Horizons ID and center body
                     fresh_elements = get_elements_with_prompt(
                         obj_name, 
                         horizons_id=horizons_id,
                         id_type=id_type,
                         plot_date=plot_date,
-                        parent_window=root
+                        parent_window=root,
+                        center_body=obj_center_body
                     )
+
                 else:
                     # Fallback to old behavior
                     print(f"[ANIMATION PRE-FETCH] ⚠ Object dictionary not found for {obj_name}, using name as ID", flush=True)
-                    fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root)
+            #        fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root)
+                    fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root, center_body=osculating_center_body)
                 
                 active_planetary_params[obj_name] = fresh_elements
                 print(f"[ANIMATION PRE-FETCH] ✓ {obj_name}: Updated", flush=True)
@@ -5361,7 +5475,7 @@ def animate_objects(step, label):
                 'Uranus': {'positions': [], 'shell_vars': uranus_shell_vars},
                 'Neptune': {'positions': [], 'shell_vars': neptune_shell_vars},
                 'Pluto': {'positions': [], 'shell_vars': pluto_shell_vars},
-                'Eris/Dysnomia': {'positions': [], 'shell_vars': eris_shell_vars},
+                'Eris': {'positions': [], 'shell_vars': eris_shell_vars},
                 'Planet 9': {'positions': [], 'shell_vars': planet9_shell_vars}
             }
             
@@ -5509,7 +5623,9 @@ def animate_objects(step, label):
                         # Satellites of the center object use animation dates
                         dates_lists[obj['name']] = dates_list
                         
-                    elif obj_type == 'orbital' and obj['name'] in planetary_params:
+            #        elif obj_type == 'orbital' and obj['name'] in planetary_params:
+                    elif obj_type == 'orbital' and obj['name'] in active_planetary_params:      # uses osculating elements
+
                         # Planets, dwarf planets, TNOs use animation dates
                         dates_lists[obj['name']] = dates_list
                         
@@ -5560,23 +5676,135 @@ def animate_objects(step, label):
                         obj_start = obj.get('start_date', dates_list[0])
                         obj_end = obj.get('end_date', dates_list[-1])
 
+                        # Use helio_id for Sun-centered plots if available
+                        fetch_id = obj['id']
+                        fetch_id_type = obj.get('id_type')
+                        if center_object_name == 'Sun' and 'helio_id' in obj:
+                            fetch_id = obj['helio_id']
+                            fetch_id_type = 'smallbody'
+                        
                         positions_over_time[obj['name']] = pad_trajectory(
                             dates_list, 
                             obj_start,
                             obj_end,
-                            obj['id'], 
+                            fetch_id, 
                             center_id, 
-                            obj.get('id_type')
+                            fetch_id_type
                         )
+                    
                     else:
                         # Fetch positions for the animation dates
+                        # Use helio_id for Sun-centered plots if available (longer ephemeris coverage)
+                        # System barycenter IDs (e.g., 20136108) only have data to ~2030
+                        # Heliocentric IDs (e.g., 2003 EL61) have data to ~2500
+                        fetch_id = obj['id']
+                        fetch_id_type = obj.get('id_type')
+                        if center_object_name == 'Sun' and 'helio_id' in obj:
+                            fetch_id = obj['helio_id']
+                            fetch_id_type = 'smallbody'  # helio_ids are smallbody designations
+                        
                         positions_over_time[obj['name']] = fetch_trajectory(
-                            obj['id'], 
+                            fetch_id, 
                             obj_dates, 
                             center_id=center_id, 
-                            id_type=obj.get('id_type')
+                            id_type=fetch_id_type
                         )
-            
+
+
+                        # Fallback for satellites without JPL ephemeris (e.g., MK2)
+                        # ═══════════════════════════════════════════════════════════
+                        # IMPORTANT: This solution is tailored specifically for MK2:
+                        #   1. Assumes circular orbit (e=0): mean anomaly = true anomaly
+                        #   2. Uses J2000.0 as reference epoch with M₀=0° (arbitrary)
+                        #   3. Orbital elements from arXiv:2509.05880 (Sept 2025)
+                        # 
+                        # For other objects, you may need to:
+                        #   - Solve Kepler's equation for eccentric anomaly (if e > 0)
+                        #   - Use object-specific reference epoch and M₀
+                        #   - Apply different coordinate transformations
+                        # ═══════════════════════════════════════════════════════════
+                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2']  # Expandable - see notes above
+                        
+                        if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
+                            # Check if fetch_trajectory returned empty/None
+                            traj = positions_over_time.get(obj['name'])
+                            if not traj or all(p is None for p in traj):
+                                print(f"  ⚠ No JPL data for {obj['name']}, calculating analytical positions...", flush=True)
+                                
+                                from orbital_elements import planetary_params
+                                if obj['name'] in planetary_params:
+                                    elements = planetary_params[obj['name']]
+                                    a = elements.get('a', 0)
+                                    e = elements.get('e', 0)
+                                    i = elements.get('i', 0)
+                                    omega = elements.get('omega', 0)
+                                    Omega = elements.get('Omega', 0)
+                                    orbital_period = elements.get('orbital_period_days', 18.023)
+                                    
+                                    # Pre-calculate rotation angles (convert to radians)
+                                    i_rad = np.radians(i)
+                                    omega_rad = np.radians(omega)
+                                    Omega_rad = np.radians(Omega)
+                                    
+                                    # Reference epoch: J2000.0
+                                    j2000 = datetime(2000, 1, 1, 12, 0, 0)
+                                    
+                                    # Mean motion (degrees per day)
+                                    n = 360.0 / orbital_period
+                                    
+                                    # Calculate position for each animation date
+                                    analytical_positions = []
+                                    for anim_date in obj_dates:
+                                        # Days since J2000
+                                        delta_days = (anim_date - j2000).total_seconds() / 86400.0
+                                        
+                                        # Mean anomaly (for circular orbit, true anomaly = mean anomaly)
+                                        M = (n * delta_days) % 360.0
+                                        true_anomaly = np.radians(M)
+                                        
+                                        # Position in orbital plane (circular: r = a)
+                                        r = a * (1 - e**2) / (1 + e * np.cos(true_anomaly)) if e > 0 else a
+                                        x_orb = r * np.cos(true_anomaly)
+                                        y_orb = r * np.sin(true_anomaly)
+                                        z_orb = 0.0
+                                        
+                                        # Apply 3D rotations
+                                        # Rotation 1: ω around z
+                                        x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
+                                        y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
+                                        z1 = z_orb
+                                        
+                                        # Rotation 2: i around x
+                                        x2 = x1
+                                        y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
+                                        z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
+                                        
+                                        # Rotation 3: Ω around z
+                                        x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+                                        y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+                                        z_final = z2
+                                        
+                                #        analytical_positions.append({
+                                #            'x': x_final,
+                                #            'y': y_final,
+                                #            'z': z_final,
+                                #            'date': anim_date
+                                #        })
+                                    
+                                        # Calculate velocity for circular orbit: v = 2πa / P
+                                        v_au_day = 2 * np.pi * a / orbital_period
+                                        
+                                        analytical_positions.append({
+                                            'x': x_final,
+                                            'y': y_final,
+                                            'z': z_final,
+                                            'velocity': v_au_day,  # AU/day - expected by hover text
+                                            'date': anim_date
+                                        })
+
+                                    positions_over_time[obj['name']] = analytical_positions
+                                    print(f"  ✓ Generated {len(analytical_positions)} analytical positions for {obj['name']}", flush=True)
+
             # Extract initial positions for idealized orbits
             initial_positions = {}
             for obj_name, trajectory in positions_over_time.items():
@@ -5657,21 +5885,30 @@ def animate_objects(step, label):
                                 )
 
             # Also update the orbit path creation for animations to match plot_objects:
+            # For animations, calculate the actual span from animation dates, not days_to_plot
+        #    animation_span_days = (dates_list[-1] - dates_list[0]).days if len(dates_list) > 1 else settings['days_to_plot']
+            # Use total_seconds() to preserve fractional days (e.g., 27 hours = 1.125 days, not 1 day)
+            animation_span_days = (dates_list[-1] - dates_list[0]).total_seconds() / 86400 if len(dates_list) > 1 else settings['days_to_plot']
+            
             orbit_dates_lists = {}
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
                     obj_type = obj.get('object_type', 'orbital')
                     
-                    if obj_type == 'orbital' and obj['name'] in planetary_params:
-                        # Use the full days_to_plot range for orbit display
-                        requested_days = settings['days_to_plot']
+        #            if obj_type == 'orbital' and obj['name'] in planetary_params:
+                    if obj_type == 'orbital' and obj['name'] in active_planetary_params:    
+                        # Use the full animation span for orbit display (not days_to_plot)
+                        requested_days = animation_span_days
+
                         num_points = int(settings['orbital_points']) + 1
                         orbit_dates = [current_date + timedelta(days=float(d)) 
                                     for d in np.linspace(0, requested_days, num=num_points)]
                         orbit_dates_lists[obj['name']] = orbit_dates
+
                     elif obj_type == 'satellite' and obj['name'] in parent_planets.get(center_object_name, []):
-                        # For satellites, use appropriate range
-                        requested_days = settings['days_to_plot']
+                        # For satellites, use full animation span
+                        requested_days = animation_span_days
+
                         num_points = int(settings['satellite_points']) + 1
                         orbit_dates = [current_date + timedelta(days=float(d)) 
                                     for d in np.linspace(0, requested_days, num=num_points)]
@@ -5912,7 +6149,8 @@ def animate_objects(step, label):
                             obj_name, 
                             center_object_name,
                             objects,
-                            planetary_params,
+                    #        planetary_params,
+                            active_planetary_params,
                             parent_planets,
                             CENTER_BODY_RADII,
                             KM_PER_AU,
@@ -6079,7 +6317,8 @@ def animate_objects(step, label):
                                         obj_name, 
                                         center_object_name,
                                         objects,
-                                        planetary_params,
+                                #        planetary_params,
+                                        active_planetary_params,
                                         parent_planets,
                                         CENTER_BODY_RADII,
                                         KM_PER_AU,
@@ -6135,12 +6374,14 @@ def animate_objects(step, label):
                     print(f"[EXOPLANET ANIMATION] Using exoplanet axis range: ±{axis_range[1]:.4f} AU", flush=True)
                 else:
                     axis_range = get_animation_axis_range(
-                        scale_var, custom_scale_entry, objects, planetary_params, 
+            #            scale_var, custom_scale_entry, objects, planetary_params, 
+                        scale_var, custom_scale_entry, objects, active_planetary_params,
                         parent_planets, center_object_name
                     )
             else:
                 axis_range = get_animation_axis_range(
-                    scale_var, custom_scale_entry, objects, planetary_params, 
+            #        scale_var, custom_scale_entry, objects, planetary_params, 
+                    scale_var, custom_scale_entry, objects, active_planetary_params,
                     parent_planets, center_object_name
                 )
 
@@ -6820,7 +7061,9 @@ CreateToolTip(celestial_frame, "Select celestial bodies for plotting. Selected o
 
 def create_celestial_checkbutton(name, variable):
     # For main planets and Sun, make a bold label
-    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth/New_Horizons', 'Eris/Dysnomia', 'Planet 9']:
+#    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth/New_Horizons', 'Eris', 'Planet 9']:
+    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 
+                'Arrokoth/New_Horizons', 'Eris', 'Haumea', 'Makemake', 'Planet 9']:
         # Create frame to hold checkbox and label
         frame = tk.Frame(celestial_frame)
         frame.pack(anchor='w')
@@ -7529,16 +7772,24 @@ kuiper_belt_label = tk.Label(celestial_frame, text="Kuiper Belt Objects (KBOs):"
 kuiper_belt_label.pack(anchor='w', pady=(5, 0))
 
 # Kuiper Belt Objects
-create_celestial_checkbutton("Orcus", orcus_var) # params
-create_celestial_checkbutton("Ixion", ixion_var)    # params
-create_celestial_checkbutton("Mani", ms4_var)   # params
-create_celestial_checkbutton("GV9", gv9_var)   # params
-create_celestial_checkbutton("Varuna", varuna_var)  # params
-create_celestial_checkbutton("Haumea", haumea_var)  # params
-create_celestial_checkbutton("Quaoar", quaoar_var)  # params
-create_celestial_checkbutton("Arrokoth", arrokoth_var)  # params
-create_celestial_checkbutton("Makemake", makemake_var)  # params
-create_celestial_checkbutton("Gonggong", gonggong_var)  # params
+create_celestial_checkbutton("Orcus", orcus_var)            # params
+create_celestial_checkbutton("Ixion", ixion_var)            # params
+create_celestial_checkbutton("Mani", ms4_var)               # params
+create_celestial_checkbutton("GV9", gv9_var)                # params
+create_celestial_checkbutton("Varuna", varuna_var)          # params
+
+create_celestial_checkbutton("Haumea", haumea_var)          # params
+create_celestial_checkbutton("- Hi'iaka", hiiaka_var)       # Haumea moon
+create_celestial_checkbutton("- Namaka", namaka_var)        # Haumea moon
+
+create_celestial_checkbutton("Quaoar", quaoar_var)          # params
+create_celestial_checkbutton("Arrokoth", arrokoth_var)      # params
+
+create_celestial_checkbutton("Makemake", makemake_var)      # params
+create_celestial_checkbutton("- MK2", mk2_var)              # Makemake moon
+
+create_celestial_checkbutton("Gonggong", gonggong_var)      # params
+
 create_celestial_checkbutton("Eris", eris_var)  # params
 # Create a Frame specifically for the eris shell options (indented)
 eris_shell_options_frame = tk.Frame(celestial_frame)
@@ -7959,9 +8210,10 @@ center_object_var = tk.StringVar(value='Sun')
 
 # Build center options dynamically: Solar System + Exoplanet hosts
 solar_system_centers = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 
-                       'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 
-                       'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Pluto-Charon Barycenter',
-                       'Arrokoth/New_Horizons', 'Eris/Dysnomia', 'Planet 9']
+                    'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 
+                    'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Pluto-Charon Barycenter',
+                    #   'Arrokoth/New_Horizons', 'Eris', 'Planet 9']
+                    'Arrokoth/New_Horizons', 'Haumea', 'Makemake', 'Eris', 'Planet 9']
 
 # Add exoplanet host stars from objects list
 exoplanet_host_stars = [obj['name'] for obj in objects 
@@ -8453,14 +8705,20 @@ def open_orbital_param_visualization():
                             current_positions=current_positions,
                             current_date=current_date)
 
-# Add the function to call star_visualization_gui.py
+
 def open_star_visualization():
-    try:
-        script_path = os.path.join(os.path.dirname(__file__), 'star_visualization_gui.py')
-        subprocess.Popen(['python', script_path])
-    except Exception as e:
-        output_label.config(text=f"Error opening star visualization: {e}")
-        print(f"Error opening star visualization: {e}", flush=True)
+    """Inform user about standalone Star Visualization executable."""
+    message = """Star Visualization is available as a separate executable.
+
+Please run 'star_visualization.exe' from the same folder as this application.
+
+The Star Visualization provides:
+- 2D and 3D stellar neighborhood plots
+- HR diagrams by distance or magnitude
+- Star search and property lookup
+- Data for 123,000+ stars"""
+    
+    messagebox.showinfo("Star Visualization", message)
 
 # Add Orbital Parameter Visualization button
 orbital_viz_button = tk.Button(

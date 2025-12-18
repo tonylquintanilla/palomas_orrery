@@ -305,8 +305,8 @@ NEPTUNE_RADIUS_AU = NEPTUNE_RADIUS_KM / KM_PER_AU  # Convert to AU
 PLUTO_RADIUS_KM = CENTER_BODY_RADII['Pluto']  # Equatorial radius in km
 PLUTO_RADIUS_AU = PLUTO_RADIUS_KM / KM_PER_AU  # Convert to AU
 
-# Eris/Dysnomia Constants
-ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris/Dysnomia']  # Equatorial radius in km
+# Eris Constants
+ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris']  # Equatorial radius in km
 ERIS_RADIUS_AU = ERIS_RADIUS_KM / KM_PER_AU  # Convert to AU
 
 # Planet 9 Constants
@@ -782,7 +782,7 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 elif shell_name == 'hill_sphere':
                     traces.extend(create_pluto_hill_sphere_shell(center_position))
 
-    elif body_name == 'Eris/Dysnomia':
+    elif body_name == 'Eris':
         # Handle eris visualization with its specific shells
         for shell_name, var in shell_vars.items():
             if var.get() == 1:
@@ -1033,7 +1033,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         if shell_vars['pluto_hill_sphere'].get() == 1:
             traces.extend(create_pluto_hill_sphere_shell(center_position))
 
-    if planet_name == 'Eris/Dysnomia':
+    if planet_name == 'Eris':
         if shell_vars['eris_core'].get() == 1:
             traces.extend(create_eris_core_shell(center_position))
         if shell_vars['eris_mantle'].get() == 1:
@@ -1106,10 +1106,10 @@ def create_planet_shell_traces(planet_name, shell_vars, center_position=(0, 0, 0
                 trace.customdata = [str(item).replace("Mercury", planet_name).replace("Venus", planet_name).replace("Earth", planet_name).replace("Moon", planet_name)
                                     .replace("Mars", planet_name).replace("Jupiter", planet_name).replace("Saturn", planet_name)
                                     .replace("Uranus", planet_name).replace("Neptune", planet_name).replace("Pluto", planet_name)
-                                    .replace("Eris/Dysnomia", planet_name).replace("Planet 9", planet_name)
+                                    .replace("Eris", planet_name).replace("Planet 9", planet_name)
                             if "Mercury" in str(item) or "Venus" in str(item) or "Earth" in str(item) or "Moon" in str(item) or "Mars" in str(item)
                                 or "Jupiter" in str(item) or "Saturn" in str(item) or "Uranus" in str(item) or "Neptune" in str(item)
-                                or "Pluto" in str(item) or "Eris/Dysnomia" in str(item) or "Planet 9" in str(item)
+                                or "Pluto" in str(item) or "Eris" in str(item) or "Planet 9" in str(item)
                             else str(item) for item in trace.customdata]
         
         # Set correct hovertemplate

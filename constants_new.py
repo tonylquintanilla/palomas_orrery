@@ -30,7 +30,9 @@ CENTER_BODY_RADII = {       # km
     'Neptune': 24622,
     'Pluto': 1188,
     'Bennu': 0.262,     # Bennu's mean radius
-    'Eris/Dysnomia': 1163,
+    'Eris': 1163,
+    'Haumea': 816,         # Mean radius (highly ellipsoidal: 1050x840x537 km)
+    'Makemake': 715,       # Mean radius
     'Arrokoth': 0.0088,  # Approximate mean radius
     'Planet 9': 24000   # comes from models that assume Planet Nine has a mass around 5-10 Earth masses and an internal composition similar to Uranus and Neptune.
 }
@@ -45,7 +47,9 @@ parent_planets = {
     'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon', 'Portia', 'Mab'],
     'Neptune': ['Triton', 'Despina', 'Galatea'],
     'Pluto': ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],
-    'Eris/Dysnomia': ['Dysnomia']
+    'Eris': ['Dysnomia'],
+    'Haumea': ["Hi'iaka", 'Namaka'],
+    'Makemake': ['MK2']
 }
 
 planet_tilts = {        # degrees
@@ -129,9 +133,16 @@ KNOWN_ORBITAL_PERIODS = {
     'Nix': 24.856,         # 596.54 hours
     'Kerberos': 32.168,    # 772.03 hours
     'Hydra': 38.202,       # 916.85 hours
-    
+        
     # Eris satellite
     'Dysnomia': 15.786,    # 378.86 hours
+    
+    # Haumea satellites
+    "Hi'iaka": 49.12,      # ~49 days
+    'Namaka': 18.28,       # ~18 days (non-Keplerian due to Hi'iaka)
+    
+    # Makemake satellite
+    'MK2': 18.0,           # Based on arXiv:2509.05880 (Sept 2025)
     
     # Dwarf planets and KBOs (converted from years to days)
     'Pluto': 90560.0,    
@@ -590,6 +601,9 @@ def color_map(planet):
         'Hayabusa2': 'cyan',  
         'Quaoar': 'rgb(244, 164, 96)',
         'Dysnomia': 'white',
+        "Hi'iaka": 'rgb(200, 180, 220)',    # Light purple (Haumea family)
+        'Namaka': 'rgb(180, 160, 200)',     # Slightly darker purple
+        'MK2': 'rgb(80, 80, 80)',           # Very dark (low albedo)        
         'Chariklo': 'rgb(100, 50, 50)',
         'Orcus': 'rgb(0, 100, 0)',
         'Varuna': 'rgb(218, 165, 32)',
@@ -1161,17 +1175,26 @@ INFO = {
 
         'Hydra': 'Horizons: 903. The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
 
-        'Haumea': 'Horizons: 2003 EL61. A dwarf planet known for its elongated shape and fast rotation.',
-        
-        'Makemake': 'Horizons: 2005 FY9. A dwarf planet located in the Kuiper Belt, discovered in 2005.',
+        'Haumea': 
+        '***JPL DOES NOT HAVE DATA FOR THIS OBJECT PAST 2030-1-31***\n\n'
+        'Horizons: 2003 EL61. A dwarf planet known for its elongated shape and fast rotation.',
 
-        'Eris': 'Horizons: 2003 UB313. A distant dwarf planet, more massive than Pluto.\n'
-        '* Eris/Dysnomia-centered: do not select Eris; visualize shells at 0.1 AU.\n'
+        "Hi'iaka": 'Haumea\'s outer moon. Period: 49 days. Diameter ~310 km. Named for Hawaiian goddess.',
+        'Namaka': 'Haumea\'s inner moon. Period: 18 days. Diameter ~170 km. Orbit perturbed by Hi\'iaka.',        
+        
+        'Makemake': 'Horizons: 2005 FY9. Dwarf planet in the Kuiper Belt, second-brightest KBO after Pluto. Has one known moon (MK2).',
+        'MK2': 'Makemake\'s moon (S/2015 (136472) 1). Period: 18.0 days. Distance: ~22,250 km. Orbit edge-on to Earth. Very dark surface ' 
+        '(~4% reflectivity), diameter ~175 km. No JPL ephemeris - uses 2025 Hubble orbital solution.',
+
+        'Eris': 
+        '***JPL DOES NOT HAVE DATA FOR THIS OBJECT PAST 2030-1-31***\n\n'        
+        'Horizons: 2003 UB313. A distant dwarf planet, more massive than Pluto.\n'
+        '* Eris-centered: do not select Eris; visualize shells at 0.1 AU.\n'
         '* Heliocentric: select Eris with or without shells.\n'
         '* Missions: Proposed.\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Dysnomia': 'Eris\'s moon. Orbital period: 15.79 Earth days', 
+        'Dysnomia': 'Eris\'s moon. Period: 15.79 days. Diameter ~700 km. Both bodies tidally locked.',
 
         'Quaoar': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system.',
 

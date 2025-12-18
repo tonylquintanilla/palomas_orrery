@@ -61,6 +61,13 @@ PLUTO_MOONS = ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
 # For barycenter mode: objects that orbit the Pluto system barycenter
 PLUTO_BARYCENTER_ORBITERS = ['Pluto', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
 
+# TNO (Trans-Neptunian Object) satellite systems - osculating only
+# These use JPL satellite ephemeris solutions (not small body solutions)
+ERIS_MOONS = ['Dysnomia']
+HAUMEA_MOONS = ["Hi'iaka", 'Namaka']
+MAKEMAKE_MOONS = ['MK2']
+TNO_MOONS = ERIS_MOONS + HAUMEA_MOONS + MAKEMAKE_MOONS
+
 def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     """
     Get appropriate perturbation note for planet's Keplerian orbit hover text.
@@ -962,13 +969,18 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         
         # Check if we have cached elements
         if satellite_name in cache:
-            elements = cache[satellite_name]['elements']  # Access 'elements' sub-dict
-            print(f"  ✓ Using cached osculating elements", flush=True)
+            elements = cache[satellite_name]['elements']
+            epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
+            print(f"  ✓ Using cached osculating elements (epoch: {epoch})", flush=True)
+        elif satellite_name in planetary_params:
+            # Fallback to hardcoded analytical elements
+            elements = planetary_params[satellite_name]
+            epoch = 'analytical'
+            print(f"  ⚠ Using fallback analytical elements from planetary_params", flush=True)
         else:
-            print(f"  Warning: No osculating elements in cache for {satellite_name}", flush=True)
-            print(f"  This shouldn't happen - pre-fetch should have loaded them!", flush=True)
+            print(f"  ⚠ No elements available for {satellite_name}, skipping orbit plot", flush=True)
             return fig
-        
+
         # Extract elements
         a = elements.get('a', 0)  # AU
         e = elements.get('e', 0)
@@ -1508,10 +1520,22 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     
     try:
         # Always load cache - we need it for angular elements even in barycenter mode
-        from osculating_cache_manager import load_cache
+    #    from osculating_cache_manager import load_cache
+    #    cache = load_cache()
+        
+        from osculating_cache_manager import load_cache, get_cache_key
         cache = load_cache()
         
+        # Determine cache key suffix based on view mode
+        if is_barycenter_mode:
+            center_suffix = '@9'  # Barycentric view
+        else:
+            center_suffix = '@999'  # Pluto-centered view (or None for default)
+
         # Determine which orbital elements to use
+
+
+        """
         if is_barycenter_mode and object_name in ['Pluto', 'Charon']:
             # BARYCENTER MODE for Pluto/Charon:
             # - Semi-major axis: CALCULATED from mass ratio (different from Pluto-centered)
@@ -1544,16 +1568,79 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             
             print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
             print(f"  i={i:.2f}°, Ω={Omega:.2f}°, ω={omega:.2f}° (from cache)", flush=True)
+            """
+        
+
+        if is_barycenter_mode and object_name in ['Pluto', 'Charon']:
+            # BARYCENTER MODE for Pluto/Charon:
+            # Try to use barycentric osculating elements from cache first
+            # Fall back to calculated values if not available
             
+            cache_key = get_cache_key(object_name, '@9')  # e.g., 'Pluto@9', 'Charon@9'
+            
+            if cache_key in cache:
+                # USE ACTUAL BARYCENTRIC OSCULATING ELEMENTS
+                elements = cache[cache_key]['elements']
+                a = elements.get('a', 0)
+                e = elements.get('e', BINARY_PARAMS['eccentricity'])
+                i = elements.get('i', BINARY_PARAMS['inclination_ecliptic'])
+                omega = elements.get('omega', BINARY_PARAMS['omega'])
+                Omega = elements.get('Omega', BINARY_PARAMS['Omega_ecliptic'])
+                epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
+                print(f"\n[BARYCENTER MODE] {object_name}: using barycentric osculating elements ({cache_key})", flush=True)
+                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  e={e:.6f}, i={i:.2f}°, Ω={Omega:.2f}°, ω={omega:.2f}°", flush=True)
+            else:
+                # FALLBACK: Calculate from mass ratio + angular elements from Pluto-centered cache
+                print(f"\n[BARYCENTER MODE] {object_name}: no barycentric cache ({cache_key}), using calculated values", flush=True)
+                
+                # Calculate semi-major axis from mass ratio
+                if object_name == 'Pluto':
+                    a = separation * mass_ratio / (1 + mass_ratio)  # ~0.0000142 AU
+                else:  # Charon
+                    a = separation * 1.0 / (1 + mass_ratio)  # ~0.000117 AU
+                
+                e = BINARY_PARAMS['eccentricity']  # Nearly circular
+                
+                # Get angular elements from Charon's Pluto-centered cache (defines the orbital plane)
+                if 'Charon' in cache:
+                    cached_elements = cache['Charon']['elements']
+                    i = cached_elements.get('i', BINARY_PARAMS['inclination_ecliptic'])
+                    omega = cached_elements.get('omega', BINARY_PARAMS['omega'])
+                    Omega = cached_elements.get('Omega', BINARY_PARAMS['Omega_ecliptic'])
+                    epoch = cached_elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
+                    print(f"  Using Charon's Pluto-centered angular elements as fallback", flush=True)
+                else:
+                    # Final fallback to approximations
+                    i = BINARY_PARAMS['inclination_ecliptic']
+                    omega = BINARY_PARAMS['omega']
+                    Omega = BINARY_PARAMS['Omega_ecliptic']
+                    epoch = f"{date.strftime('%Y-%m-%d')} (approx)"
+                    print(f"  Using fallback angular elements (no cache)", flush=True)
+                
+                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  i={i:.2f}°, Ω={Omega:.2f}°, ω={omega:.2f}° (from cache)", flush=True)
+
         else:
             # PLUTO-CENTERED MODE or outer moons:
-            # Use cached osculating elements directly
+            # Use cached osculating elements with appropriate center
+            
+            # Determine the correct cache key based on view
+            if is_barycenter_mode:
+                cache_key = get_cache_key(object_name, '@9')  # e.g., 'Styx@9'
+                fallback_key = object_name  # Fall back to Pluto-centered if barycentric not available
+            else:
+                cache_key = object_name  # Pluto-centered (default)
+                fallback_key = None
             
             print(f"\n[OSCULATING] Loading cached elements for {object_name}...", flush=True)
             
-            if object_name in cache:
-                elements = cache[object_name]['elements']
-                print(f"  ✓ Using cached osculating elements", flush=True)
+            if cache_key in cache:
+                elements = cache[cache_key]['elements']
+                print(f"  ✓ Using cached osculating elements ({cache_key})", flush=True)
+            elif fallback_key and fallback_key in cache:
+                elements = cache[fallback_key]['elements']
+                print(f"  ⚠ Using fallback cache key ({fallback_key}) - barycentric elements not cached", flush=True)
             else:
                 # Try fetching from planetary_params for moons
                 if object_name in planetary_params:
@@ -1602,8 +1689,9 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         
         # Determine line style
         if is_barycenter_mode and object_name in ['Pluto', 'Charon']:
-            # Solid lines for the binary pair in barycenter mode
-            line_style = dict(color=color, width=2)
+            # Dashed lines for osculating orbits (to distinguish from actual orbits)
+            line_style = dict(color=color, width=2, dash='dash')
+
             orbit_label = f'{object_name} Osculating Orbit (Epoch: {epoch})'
 
         else:
@@ -1622,11 +1710,458 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             showlegend=True
         ))
         
-        print(f"  ✓ Orbit plotted (ecliptic frame)", flush=True)
-        return fig
+#        print(f"  ✓ Orbit plotted (ecliptic frame)", flush=True)
+#        return fig
+
+        # Add apsidal markers using standard method
+        if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
+            from apsidal_markers import add_perihelion_marker, add_apohelion_marker
+            
+            # Find periapsis and apoapsis indices
+            periapsis_idx = np.argmin(r)
+            apoapsis_idx = np.argmax(r)
+            
+            # Build orbital parameters dict for apsidal marker functions
+            orbital_params = {
+                'a': a,
+                'e': e,
+                'i': i,
+                'omega': omega,
+                'Omega': Omega
+            }
+            
+            # Determine center body for proper terminology
+            center_body = center_id if center_id != 'Pluto-Charon Barycenter' else 'Pluto-Charon Barycenter'
+            
+            # Add periapsis marker
+            add_perihelion_marker(
+                fig,
+                x_final[periapsis_idx],
+                y_final[periapsis_idx],
+                z_final[periapsis_idx],
+                object_name,
+                a,
+                e,
+                date if date else datetime.now(),
+                {'x': x_final[periapsis_idx], 'y': y_final[periapsis_idx], 'z': z_final[periapsis_idx]},
+                orbital_params,
+                lambda x: color,
+                q=r[periapsis_idx],
+                center_body=center_body
+            )
+            
+            # Add apoapsis marker
+            add_apohelion_marker(
+                fig,
+                x_final[apoapsis_idx],
+                y_final[apoapsis_idx],
+                z_final[apoapsis_idx],
+                object_name,
+                a,
+                e,
+                date if date else datetime.now(),
+                {'x': x_final[apoapsis_idx], 'y': y_final[apoapsis_idx], 'z': z_final[apoapsis_idx]},
+                orbital_params,
+                lambda x: color,
+                center_body=center_body
+            )
         
+        print(f"  [OK] Orbit plotted (ecliptic frame)", flush=True)
+        return fig
+
     except Exception as e:
         print(f"Error plotting orbit for {object_name}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return fig
+
+
+def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show_apsidal_markers=False):
+    """
+    Plot osculating orbit for TNO (Trans-Neptunian Object) satellites.
+    
+    Handles satellites of:
+    - Eris (Dysnomia)
+    - Haumea (Hi'iaka, Namaka)
+    - Makemake (MK2)
+    
+    All use JPL satellite ephemeris solutions with barycenter-relative positioning.
+    Osculating elements from JPL Horizons are in ECLIPTIC frame (J2000.0).
+    
+    Unlike major planet moons, TNO satellites have no reliable analytical elements,
+    so we display osculating orbits ONLY (no dual-orbit comparison).
+    """
+    
+    # JPL Horizons IDs for TNO satellites (satellite ephemeris solutions)
+    TNO_SATELLITE_IDS = {
+        # Eris system (barycenter: 20136199)
+        'Dysnomia': '120136199',
+        # Haumea system (barycenter: 20136108)
+        "Hi'iaka": '120136108',
+        'Namaka': '220136108',
+        # Makemake system (barycenter: 20136472)
+        'MK2': '120136472',
+    }
+    
+    horizons_id = TNO_SATELLITE_IDS.get(satellite_name)
+    if not horizons_id:
+        print(f"Warning: No Horizons ID for TNO satellite {satellite_name}", flush=True)
+        return fig
+    
+    try:
+        # Load osculating cache
+        from osculating_cache_manager import load_cache
+        cache = load_cache()
+        
+        print(f"\n[TNO SATELLITE] Loading cached elements for {satellite_name}...", flush=True)
+        
+        if satellite_name in cache:
+            elements = cache[satellite_name]['elements']
+            epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
+            print(f"  ✓ Using cached osculating elements (epoch: {epoch})", flush=True)
+            
+            a = elements.get('a', 0)
+            e = elements.get('e', 0)
+            i = elements.get('i', 0)
+            omega = elements.get('omega', 0)
+            Omega = elements.get('Omega', 0)
+            orbit_source = "osculating"
+            
+    #    else:
+    #        print(f"  ⚠ No cached elements for {satellite_name}, skipping orbit plot", flush=True)
+    #        return fig
+        
+        else:
+            # Check for analytical fallback (satellites without JPL ephemeris)
+            # ═══════════════════════════════════════════════════════════════════
+            # IMPORTANT: This solution is tailored specifically for MK2:
+            #   1. Assumes circular orbit (e=0): mean anomaly = true anomaly  
+            #   2. Uses J2000.0 as reference epoch with M₀=0° (arbitrary phase)
+            #   3. Orbital elements from arXiv:2509.05880 (Sept 2025)
+            #
+            # For other objects, you may need to:
+            #   - Solve Kepler's equation for eccentric anomaly (if e > 0)
+            #   - Use object-specific reference epoch and M₀
+            #   - Apply different coordinate transformations
+            # ═══════════════════════════════════════════════════════════════════
+            ANALYTICAL_FALLBACK_SATELLITES = ['MK2']  # Expandable - see notes above
+           
+            if satellite_name in ANALYTICAL_FALLBACK_SATELLITES:
+                print(f"  ⚠ No JPL ephemeris for {satellite_name}, using analytical elements", flush=True)
+                from orbital_elements import planetary_params
+                
+                if satellite_name in planetary_params:
+                    elements = planetary_params[satellite_name]
+                    epoch = "Analytical (2025 preliminary)"
+                    orbit_source = "analytical"
+                    
+                    a = elements.get('a', 0)
+                    e = elements.get('e', 0)
+                    i = elements.get('i', 0)
+                    omega = elements.get('omega', 0)
+                    Omega = elements.get('Omega', 0)
+                    
+                    print(f"  ✓ Using analytical elements from planetary_params", flush=True)
+                else:
+                    print(f"  ⚠ No analytical elements for {satellite_name}, skipping orbit plot", flush=True)
+                    return fig
+            else:
+                print(f"  ⚠ No cached elements for {satellite_name}, skipping orbit plot", flush=True)
+                return fig
+
+        print(f"  Elements: a={a:.6f} AU, e={e:.4f}, i={i:.2f}°, ω={omega:.2f}°, Ω={Omega:.2f}°", flush=True)
+        
+        # Generate orbit points
+        theta = np.linspace(0, 2*np.pi, 360)
+        
+        # Skip if semi-major axis is invalid
+        if a <= 0:
+            print(f"  ⚠ Invalid semi-major axis for {satellite_name}", flush=True)
+            return fig
+            
+        # Calculate orbit in orbital plane
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+        
+        # Convert angles to radians
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        # Apply 3D rotation (standard Keplerian to ecliptic transformation)
+        # Rotation 1: Around z-axis by argument of periapsis (ω)
+        x1 = x_orbit * np.cos(omega_rad) - y_orbit * np.sin(omega_rad)
+        y1 = x_orbit * np.sin(omega_rad) + y_orbit * np.cos(omega_rad)
+        z1 = z_orbit
+        
+        # Rotation 2: Around x-axis by inclination (i)
+        x2 = x1
+        y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
+        z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
+        
+        # Rotation 3: Around z-axis by longitude of ascending node (Ω)
+        x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+        y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+        z_final = z2
+        
+        """
+        # Create hover text
+        hover_text = (
+            f"<b>{satellite_name} Osculating Orbit</b><br>"
+            f"Parent: {parent_name}<br>"
+            f"Epoch: {epoch}<br>"
+            f"<br>"
+            f"<b>Orbital Elements (JPL):</b><br>"
+            f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
+            f"e = {e:.4f}<br>"
+            f"i = {i:.2f}°<br>"
+            f"ω = {omega:.2f}°<br>"
+            f"Ω = {Omega:.2f}°<br>"
+            f"<br>"
+            f"<i>Osculating orbit from JPL Horizons<br>"
+            f"satellite ephemeris solution</i>"
+        )
+        """
+
+        # Create hover text based on orbit source; currently this is for Makemake MK2 only
+        if orbit_source == "analytical":
+            hover_text = (
+                f"<b>{satellite_name} Analytical Orbit</b><br>"
+                f"Parent: {parent_name}<br>"
+                f"Source: {epoch}<br>"
+                f"<br>"
+                f"<b>Orbital Elements for MK2:</b><br>"
+                f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
+                f"e = {e:.4f}<br>"
+                f"i = {i:.2f}°<br>"
+                f"ω = {omega:.2f}°<br>"
+                f"Ω = {Omega:.2f}°<br>"
+                f"<br>"
+                f"<i>No JPL ephemeris available for MK2:<br>"
+                f"Based on arXiv:2509.05880 (Sept 2025)<br>"
+                f"preliminary Hubble orbital solution.<br>"
+                f"Inclination uncertain (63°-87° range).<br>"
+                f"No apsides because e=0.</i>"
+            )
+        else:
+            hover_text = (
+                f"<b>{satellite_name} Osculating Orbit</b><br>"
+                f"Parent: {parent_name}<br>"
+                f"Epoch: {epoch}<br>"
+                f"<br>"
+                f"<b>Orbital Elements (JPL):</b><br>"
+                f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
+                f"e = {e:.4f}<br>"
+                f"i = {i:.2f}°<br>"
+                f"ω = {omega:.2f}°<br>"
+                f"Ω = {Omega:.2f}°<br>"
+                f"<br>"
+                f"<i>Osculating orbit from JPL Horizons<br>"
+                f"satellite ephemeris solution</i>"
+            )
+
+        # Add orbit trace
+        trace_name = f"{satellite_name} {'Analytical' if orbit_source == 'analytical' else 'Osculating'} Orbit"
+        fig.add_trace(go.Scatter3d(
+            x=x_final.tolist(),
+            y=y_final.tolist(),
+            z=z_final.tolist(),
+            mode='lines',
+            line=dict(color=color, width=2, dash='dash'),
+            name=trace_name,
+            text=[hover_text] * len(x_final),
+            customdata=[trace_name] * len(x_final),
+            hoverinfo='text',
+            showlegend=True
+        ))
+        
+        print(f"  ✓ Plotted {satellite_name} {orbit_source} orbit", flush=True)
+
+        # For analytical fallback satellites (MK2 only at this time), calculate and plot current position
+        if orbit_source == "analytical":
+            # Get orbital period from elements
+            orbital_period = elements.get('orbital_period_days', 18.023)  # Default to MK2's period
+            
+            # Reference epoch: J2000.0 (2000-01-01 12:00 TDB), assume M₀ = 0°
+            from datetime import datetime
+            j2000 = datetime(2000, 1, 1, 12, 0, 0)
+            
+            # Calculate days since J2000
+            delta_days = (date - j2000).total_seconds() / 86400.0
+            
+            # Mean motion (degrees per day)
+            n = 360.0 / orbital_period
+            
+            # Mean anomaly at current date (for circular orbit, true anomaly = mean anomaly)
+            M = (n * delta_days) % 360.0
+            true_anomaly = np.radians(M)
+            
+            # Position in orbital plane (circular orbit: r = a)
+            r_current = a  # For e=0, r is constant
+            x_pos = r_current * np.cos(true_anomaly)
+            y_pos = r_current * np.sin(true_anomaly)
+            z_pos = 0.0
+            
+            # Apply same 3D rotation as orbit path
+            # Rotation 1: Around z-axis by ω
+            x1 = x_pos * np.cos(omega_rad) - y_pos * np.sin(omega_rad)
+            y1 = x_pos * np.sin(omega_rad) + y_pos * np.cos(omega_rad)
+            z1 = z_pos
+            
+            # Rotation 2: Around x-axis by i
+            x2 = x1
+            y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
+            z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
+            
+            # Rotation 3: Around z-axis by Ω
+            x_current = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+            y_current = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+            z_current = z2
+            
+            # Create position marker hover text
+            pos_hover = (
+                f"<b>{satellite_name}</b><br>"
+                f"Date: {date.strftime('%Y-%m-%d %H:%M UTC')}<br>"
+                f"<br>"
+                f"MK2 Position: Calculated from analytical orbit<br>"
+                f"Mean anomaly: {M:.1f}°<br>"
+                f"Period: {orbital_period:.3f} days<br>"
+                f"<br>"
+                f"<i>⚠ MK2 position assumes M₀=0° at J2000.0<br>"
+                f"Actual phase unknown - for visualization only</i>"
+            )
+            
+            # Add position marker
+            fig.add_trace(go.Scatter3d(
+                x=[x_current],
+                y=[y_current],
+                z=[z_current],
+                mode='markers',
+                marker=dict(size=6, color=color, symbol='circle'),
+                name=satellite_name,
+                text=[pos_hover],
+                hoverinfo='text',
+                showlegend=True
+            ))
+            
+            print(f"  ✓ Added {satellite_name} position marker (M={M:.1f}°, assumed phase)", flush=True)
+
+
+        """
+        # Add orbit trace
+        fig.add_trace(go.Scatter3d(
+            x=x_final.tolist(),
+            y=y_final.tolist(),
+            z=z_final.tolist(),
+            mode='lines',
+            line=dict(color=color, width=2, dash='dash'),
+            name=f"{satellite_name} Osculating Orbit",
+            text=[hover_text] * len(x_final),
+            customdata=[f"{satellite_name} Osculating Orbit"] * len(x_final),
+            hoverinfo='text',
+            showlegend=True
+        ))
+        
+        print(f"  ✓ Plotted {satellite_name} osculating orbit", flush=True)
+        
+        # Add apsidal markers if requested
+        if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
+            # Periapsis point (theta = 0)
+            r_peri = a * (1 - e)
+            peri_x = r_peri * (np.cos(Omega_rad) * np.cos(omega_rad) - 
+                              np.sin(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
+            peri_y = r_peri * (np.sin(Omega_rad) * np.cos(omega_rad) + 
+                              np.cos(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
+            peri_z = r_peri * np.sin(omega_rad) * np.sin(i_rad)
+            
+            fig.add_trace(go.Scatter3d(
+                x=[peri_x], y=[peri_y], z=[peri_z],
+                mode='markers',
+                marker=dict(size=5, color=color, symbol='diamond'),
+                name=f"{satellite_name} Periapsis",
+                text=[f"{satellite_name} Periapsis<br>r = {r_peri:.6f} AU"],
+                hoverinfo='text',
+                showlegend=True
+            ))
+            
+            # Apoapsis point (theta = π)
+            r_apo = a * (1 + e)
+            apo_x = -r_peri * (np.cos(Omega_rad) * np.cos(omega_rad) - 
+                             np.sin(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
+            apo_y = -r_peri * (np.sin(Omega_rad) * np.cos(omega_rad) + 
+                             np.cos(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
+            apo_z = -r_peri * np.sin(omega_rad) * np.sin(i_rad)
+            
+            fig.add_trace(go.Scatter3d(
+                x=[apo_x], y=[apo_y], z=[apo_z],
+                mode='markers',
+                marker=dict(size=5, color=color, symbol='square'),
+                name=f"{satellite_name} Apoapsis",
+                text=[f"{satellite_name} Apoapsis<br>r = {r_apo:.6f} AU"],
+                hoverinfo='text',
+                showlegend=True
+            ))
+        
+        return fig
+        """
+
+        # Add apsidal markers using standard method
+        if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits (like MK2) because every point is at the same distance.
+    #    if show_apsidal_markers:  # Skip for nearly circular orbits    
+            from apsidal_markers import add_perihelion_marker, add_apohelion_marker
+            
+            # Find periapsis and apoapsis indices
+            periapsis_idx = np.argmin(r)
+            apoapsis_idx = np.argmax(r)
+            
+            # Build orbital parameters dict for apsidal marker functions
+            orbital_params = {
+                'a': a,
+                'e': e,
+                'i': i,
+                'omega': omega,
+                'Omega': Omega
+            }
+            
+            # Add periapsis marker
+            add_perihelion_marker(
+                fig,
+                x_final[periapsis_idx],
+                y_final[periapsis_idx],
+                z_final[periapsis_idx],
+                satellite_name,
+                a,
+                e,
+                date if date else datetime.now(),
+                {'x': x_final[periapsis_idx], 'y': y_final[periapsis_idx], 'z': z_final[periapsis_idx]},
+                orbital_params,
+                lambda x: color,
+                q=r[periapsis_idx],
+                center_body=parent_name
+            )
+            
+            # Add apoapsis marker
+            add_apohelion_marker(
+                fig,
+                x_final[apoapsis_idx],
+                y_final[apoapsis_idx],
+                z_final[apoapsis_idx],
+                satellite_name,
+                a,
+                e,
+                date if date else datetime.now(),
+                {'x': x_final[apoapsis_idx], 'y': y_final[apoapsis_idx], 'z': z_final[apoapsis_idx]},
+                orbital_params,
+                lambda x: color,
+                center_body=parent_name
+            )
+        
+        return fig        
+        
+    except Exception as e:
+        print(f"Error plotting TNO satellite orbit for {satellite_name}: {e}", flush=True)
         import traceback
         traceback.print_exc()
         return fig
@@ -3088,7 +3623,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     current_position=satellite_current_pos,
                     show_apsidal_markers=show_apsidal_markers
                 )
-                
+                                
                 # Plot osculating orbit (JPL elements - dashed line)
                 # Get Horizons ID from objects list
                 horizons_id = None
@@ -3217,7 +3752,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             # Two modes: traditional Pluto-centered, or barycenter-centered
             
             # Mode 1: Barycenter-centered (binary planet mode)
-            if center_id == 'Pluto-Charon Barycenter' and moon_name in PLUTO_BARYCENTER_ORBITERS:
+        #    if center_id == 'Pluto-Charon Barycenter' and moon_name in PLUTO_BARYCENTER_ORBITERS:
+            elif center_id == 'Pluto-Charon Barycenter' and moon_name in PLUTO_BARYCENTER_ORBITERS:
                 # In barycenter mode, BOTH Pluto and Charon orbit the barycenter
                 # Plus the four smaller moons (Styx, Nix, Kerberos, Hydra)
                 if date:
@@ -3254,6 +3790,21 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 if moon_name == 'Charon':
                     charon_pos = current_positions.get('Charon') if current_positions else None
                     fig = add_pluto_barycenter_marker(fig, date, charon_position=charon_pos)
+
+            # Special handling for TNO satellites (Eris, Haumea, Makemake moons)
+            # These have no reliable analytical elements - osculating only
+            elif moon_name in TNO_MOONS:
+                if date:
+                    fig = plot_tno_satellite_orbit(
+                        fig,
+                        moon_name,
+                        center_id,  # parent name
+                        date,
+                        color_map(moon_name),
+                        show_apsidal_markers=show_apsidal_markers
+                    )
+                else:
+                    print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
 
             else:
                 # Use the standard satellite plotting function for other moons
@@ -3427,16 +3978,19 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 continue
 
             # Check if this is a satellite of another object (but not of the center)
+            # Only skip if object_type is 'satellite' - this excludes primary bodies like Pluto
+            # which appear in parent_planets['Pluto-Charon Barycenter'] for binary visualization
             is_satellite_of_another = False
-            for planet, moons in parent_planets.items():
-                if obj_name in moons and planet != center_id:
-                    is_satellite_of_another = True
-                    break
+            if obj_info.get('object_type') == 'satellite':
+                for planet, moons in parent_planets.items():
+                    if obj_name in moons and planet != center_id:
+                        is_satellite_of_another = True
+                        break
 
             if is_satellite_of_another:
-                # If we're centered on the Sun, skip satellites of other objects
+                # Skip satellites when centered on Sun (they orbit their parent, not Sun directly)
                 skipped['satellites'].append(obj_name)
-                continue            
+                continue
 
             elif obj_info.get('is_mission', False):
                 skipped['missions'].append(obj_name)
@@ -3944,9 +4498,44 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 is_satellite=(obj_name in parent_planets.get(center_id, [])),
                                 fetch_position=fetch_position
                             )
-                            
+                                                        
                             print(f"  Fetched positions: {len(positions_dict)} dates", flush=True)
                             
+                            # Check if fetch failed for dates that passed the initial range check
+                            # This handles satellite ephemeris with shorter ranges than general JPL
+                            perihelion_dates = params.get('perihelion_dates', [])
+                            aphelion_dates = params.get('aphelion_dates', [])
+                            expected_dates = len(perihelion_dates) + len(aphelion_dates)
+                            
+                            if expected_dates > 0 and len(positions_dict) == 0:
+                                # Fetch failed - likely satellite ephemeris range exceeded
+                                print(f"  ⚠ Fetch failed for {obj_name} apsidal dates - ephemeris range exceeded", flush=True)
+                                from apsidal_markers import add_apsidal_range_note
+                                
+                                # Get the dates that failed
+                                failed_peri = None
+                                failed_apo = None
+                                if perihelion_dates:
+                                    try:
+                                        failed_peri = datetime.strptime(perihelion_dates[0], '%Y-%m-%d %H:%M:%S')
+                                    except:
+                                        pass
+                                if aphelion_dates:
+                                    try:
+                                        failed_apo = datetime.strptime(aphelion_dates[0], '%Y-%m-%d %H:%M:%S')
+                                    except:
+                                        pass
+                                                            
+                                # Add the range note with appropriate message
+                                add_apsidal_range_note(
+                                    fig,
+                                    obj_name,
+                                    failed_peri,
+                                    failed_apo,
+                                    color_map,
+                                    fetch_failed=True  # Indicates ephemeris limit, not JPL general limit
+                                )
+
                             # DEBUG: Check what we're passing to enhanced markers
                             print(f"[DEBUG] Calling enhanced markers for {obj_name}:", flush=True)
                             print(f"  params has epoch: {'epoch' in params}", flush=True)
