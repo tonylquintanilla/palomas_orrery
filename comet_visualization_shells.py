@@ -120,22 +120,46 @@ HISTORICAL_TAIL_DATA = {
     # - ESA Mars flyby (Oct 3, 2025): Imaged at ~30M km, no tail length released
     # - Colors reflect red-sloped, dust-rich appearance in imaging
     # - Anti-tail feature mentioned in some reports, not yet confirmed
-    # Data arc: 2025-05-15 to 2025-09-21 (646 observations over 129 days)
+    # Data arc: 2025-05-15 to 2025-09-21 (646 observations over 129 days)    
 
-        'max_dust_tail_length_mkm': 8,  # PRELIMINARY: model-based estimate
-        'max_ion_tail_length_mkm': 15,  # PRELIMINARY: model-based, multi-million km extent
-        'peak_brightness_mag': 12.3,  # M1 from JPL Horizons (total magnitude model)
-        'perihelion_distance_au': 1.356,  # Oct 29, 2025, QR from JPL Horizons
-        'description': "3I/ATLAS (C/2025 N1) - Interstellar; e~6.14, i~175°. "
-                    "JWST & SPHEREx: CO₂-dominated coma with H₂O, CO present; "
-                    "tail extents still TBD from official releases.",
-        'coma_color': 'green',  # Red-sloped, dust-rich appearance in observations
-        'dust_tail_color': 'yellow',  # Red-sloped dust tail
-        'ion_tail_color': 'blue',  # CO₂+/CO+ emissions
-        'hyperbolic': True,  # e = 6.137 (highly hyperbolic)
-        'co2_rich': True,  # JWST/SPHEREx confirmed
-        'preliminary_data': True,  # Flag for tail measurement uncertainty
-        'max_active_distance_au': 2.5  # Conservative estimate for CO₂-driven activity
+    #    'max_dust_tail_length_mkm': 8,  # PRELIMINARY: model-based estimate
+    #    'max_ion_tail_length_mkm': 15,  # PRELIMINARY: model-based, multi-million km extent
+    #    'peak_brightness_mag': 12.3,  # M1 from JPL Horizons (total magnitude model)
+    #    'perihelion_distance_au': 1.356,  # Oct 29, 2025, QR from JPL Horizons
+    #    'description': "3I/ATLAS (C/2025 N1) - Interstellar; e~6.14, i~175°. "
+    #                "JWST & SPHEREx: CO₂-dominated coma with H₂O, CO present; "
+    #                "tail extents still TBD from official releases.",
+    #    'coma_color': 'green',  # Red-sloped, dust-rich appearance in observations
+    #    'dust_tail_color': 'yellow',  # Red-sloped dust tail
+    #    'ion_tail_color': 'blue',  # CO₂+/CO+ emissions
+    #    'hyperbolic': True,  # e = 6.137 (highly hyperbolic)
+    #    'co2_rich': True,  # JWST/SPHEREx confirmed
+    #    'preliminary_data': True,  # Flag for tail measurement uncertainty
+    #    'max_active_distance_au': 2.5  # Conservative estimate for CO₂-driven activity
+
+# 3I/ATLAS UPDATED DATA (December 2025):
+        # - Perihelion: Oct 29.48, 2025 at 1.356 AU (between Mars and Earth)
+        # - Closest to Earth: Dec 19, 2025 (~1.8 AU)
+        # - Dynamics: e ~ 6.14, v_inf ~ 58 km/s (Fastest interstellar object yet)
+        # - Size: Nucleus estimated < 5.6 km (Jewitt et al. 2025)
+        
+        'max_dust_tail_length_mkm': 12,  # Increased based on post-perihelion "smoking tail" reports
+        'max_ion_tail_length_mkm': 25,  # Models adjusted for high gas/nickel production
+        'peak_brightness_mag': 9.5,      # Observed peak near perihelion
+        'perihelion_distance_au': 1.356,
+        'description': "3I/ATLAS (C/2025 N1) - Third confirmed interstellar object. "
+                       "Post-perihelion 'greening' due to C2 release; "
+                       "CO2-dominated (8:1 ratio over water). High non-gravitational "
+                       "acceleration observed due to complex outgassing jets."
+                       "Anti-tail: gray/faint silver, visible perspective feature in Nov 2025 images.",
+        'coma_color': '#50FF78',          # UPDATED: Shifted from red/green to distinct green post-perihelion. Bright Green: Dominated by C2 emissions.
+        'dust_tail_color': '#F5EBB4',     # Retains standard reflected sunlight profile. Pale Yellow-White: Reflective sunlight off dust particles.
+        'ion_tail_color': '#55AAFF',      # UPDATED: Bluer than Sun; consistent with gas emission. 
+                                            # Azure/Cyan: "Vividly blue" and "sharply defined" in images from the Virtual Telescope Project.
+        'hyperbolic': True,
+        'co2_rich': True,
+        'preliminary_data': False,          # Data now well-constrained by Gemini/Hubble/Webb
+        'max_active_distance_au': 5.5       # Increased: Activity noted out to ~6 AU inbound
     },
 
     'default': {

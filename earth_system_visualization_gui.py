@@ -25,6 +25,7 @@ except ImportError:
 from paleoclimate_visualization import create_paleoclimate_visualization
 from paleoclimate_dual_scale import create_paleoclimate_dual_scale_visualization
 from paleoclimate_visualization_full import create_paleoclimate_visualization as create_phanerozoic_viz
+from paleoclimate_human_origins_full import create_paleoclimate_visualization as create_human_origins_viz
 from energy_imbalance import create_energy_imbalance_visualization
 from save_utils import save_plot
 
@@ -1494,6 +1495,27 @@ def open_phanerozoic_viz():
     except Exception as e:
         messagebox.showerror("Visualization Error", f"Could not create Phanerozoic visualization:\n{str(e)}")        
 
+def open_human_origins_viz():
+    """Open Paleoclimate + Human Origins visualization (540 Ma + 25 hominin species)"""
+    try:
+        fig = create_human_origins_viz()
+        if fig:
+            fig.show()
+            # Save to output directory
+            save_plot(fig, "paleoclimate_human_origins")
+        else:
+            messagebox.showerror(
+                "Data Not Available",
+                "Paleoclimate data not found.\n\n"
+                "Please ensure the following files exist:\n"
+                "• data/8c__Phanerozoic_Pole_to_Equator_Temperatures.csv\n"
+                "• data/lr04_benthic_stack.json\n"
+                "• data/temp12k_allmethods_percentiles.csv (optional)\n"
+                "• data/temperature_giss_monthly.json (optional)"
+            )
+    except Exception as e:
+        messagebox.showerror("Visualization Error", f"Could not create Human Origins visualization:\n{str(e)}")        
+
 def open_sea_level_viz():
     """Open sea level visualization in browser"""
     try:
@@ -1852,6 +1874,19 @@ def open_earth_system_gui(parent=None):
                          pady=8,
                          command=open_phanerozoic_viz)
     paleo_phan_btn.pack(fill='x', pady=2)
+
+    # Paleoclimate HUMAN ORIGINS button
+    human_origins_btn = tk.Button(right_column,
+                         text='🧬 Human Origins (540 Ma + Evolution)',
+                         font=('Arial', 10),
+                         bg='#8B4513',  # Saddle brown - earthy/fossil color
+                         fg='white',
+                         activebackground='#A0522D',
+                         cursor='hand2',
+                         padx=15,
+                         pady=8,
+                         command=open_human_origins_viz)
+    human_origins_btn.pack(fill='x', pady=2)
 
     # RIGHT COLUMN
     # Cryosphere section

@@ -8212,8 +8212,8 @@ center_object_var = tk.StringVar(value='Sun')
 solar_system_centers = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 
                     'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 
                     'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Pluto-Charon Barycenter',
-                    #   'Arrokoth/New_Horizons', 'Eris', 'Planet 9']
-                    'Arrokoth/New_Horizons', 'Haumea', 'Makemake', 'Eris', 'Planet 9']
+                    'Arrokoth/New_Horizons', 'Haumea', 'Makemake', 'Eris'
+                    ]
 
 # Add exoplanet host stars from objects list
 exoplanet_host_stars = [obj['name'] for obj in objects 

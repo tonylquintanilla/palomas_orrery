@@ -1,13 +1,13 @@
 # 🦴 Paleoclimate Visualizations for Paloma's Orrery
 
-**Complete Package | Updated November 8, 2025**  
-*Now with full Phanerozoic coverage (540 Ma), regional climate bands, warm period context, UNEP 2025 climate projections, and scientific accuracy*
+**Complete Package | Updated December 2025**  
+*Now with full Phanerozoic coverage (540 Ma), Human Origins evolution markers (25 species), Marine Isotope Stages, 2025 research integration, and climate-driven evolution story*
 
 ---
 
 ## 📦 Package Contents
 
-### 🚀 Core Files (three visualization variants):
+### 🚀 Core Files (four visualization variants):
 
 **1. paleoclimate_visualization.py** - Original Cenozoic visualization
 - Coverage: 66 Ma (Cenozoic Era) to present
@@ -17,10 +17,15 @@
 - Coverage: Modern (1880-2025) + Deep Time (66 Ma)
 - Focus: Direct comparison of timescales
 
-**3. paleoclimate_visualization_v2.py** - **Full Phanerozoic + Human History**
+**3. paleoclimate_visualization_full.py** - **Full Phanerozoic + Human History**
 - Coverage: 540 Ma (Cambrian Explosion) to 2025 CE
 - Focus: Complete animal life history + human-scale climate events
-- **NEW**: Interactive timeline + Medieval/Holocene events
+- Interactive timeline + Medieval/Holocene events
+
+**4. paleoclimate_human_origins_v9.py** - **🆕 Climate-Driven Human Evolution**
+- Coverage: 540 Ma to present + 25 hominin species markers
+- Focus: How Pleistocene climate pulses shaped human evolution
+- Features: MIS stages, ghost populations, 2025 research integration
 - **Featured in this README**
 
 ### 📊 Required Data Files:
@@ -66,7 +71,8 @@ palomas_orrery/
 ├── fetch_climate_data.py                   (fetches GISS to data/)
 ├── paleoclimate_visualization.py
 ├── paleoclimate_dual_scale.py
-└── paleoclimate_visualization_full.py
+├── paleoclimate_visualization_full.py
+└── paleoclimate_human_origins_v9.py        # 🆕 Human evolution layer
 ```
 
 ### 📚 Documentation:
@@ -179,7 +185,115 @@ Temp
 
 ---
 
-## 📊 Five Temperature Datasets + Climate Projections (Integrated)
+## 🧬 Human Origins Visualization (NEW - December 2025)
+
+### paleoclimate_human_origins_v9.py - **Climate-Driven Evolution**
+
+The paleoclimate visualization now includes a comprehensive hominin evolution layer, showing how Pleistocene climate pulses shaped human evolution. This transforms the climate chart into a story about *us*.
+
+### What's Included:
+
+**25 Hominin Markers** (19 fossil-confirmed + 6 ghost populations):
+
+| Category | Count | Examples |
+|----------|-------|----------|
+| Early Hominoids | 2 | Proconsul (21 Ma), Morotopithecus |
+| Early Hominins | 4 | Sahelanthropus, Ardipithecus |
+| Australopithecines | 3 | A. afarensis ("Lucy"), A. africanus |
+| Homo (fossil) | 10 | H. erectus, H. longi, H. sapiens, H. floresiensis |
+| Ghost Populations | 6 | Population A/B, Deep Denisovan, SE Asian Ghost |
+
+**Marine Isotope Stages (MIS)** - The "heartbeat" of Pleistocene climate:
+- 10 major stages from MIS 1 (Holocene) to MIS 12
+- Warm periods (odd numbers): Corridors open, expansions
+- Cold periods (even numbers): Refugia, bottlenecks
+- Visual bands showing glacial/interglacial cycles
+
+**Climate Events:**
+- 🌋 Toba Supereruption (74 ka) - VEI-8, bottleneck hypothesis
+- 🌿 Green Sahara windows (MIS 5e & Holocene) - Migration corridors
+
+### Visual Design:
+
+**Marker Types:**
+- ▲ **Filled triangles**: Fossil-confirmed species (19)
+- △ **Open triangles**: Ghost populations - DNA evidence only (6)
+
+**Positioning:**
+- Markers clustered near y = -10 line
+- Manual `y_offset` values for precise staggering
+- Vertical guide lines connect to MIS context above
+
+**MIS Bands:**
+- 🔴 Warm/interglacial: Tomato fill, diamond markers
+- 🔵 Cold/glacial: Cornflower blue fill, square markers
+- Hoverable with time ranges and significance
+
+### 2025 Research Integration:
+
+The visualization incorporates groundbreaking 2025 findings:
+
+**Yunxian 2 Skull** (Feng et al., Science, Sept 2025):
+- Reclassified Dragon Man clade (H. longi) to 1 Ma
+- Pushes Neanderthal divergence to ~1.38 Ma
+- H. heidelbergensis now flagged as possible side-branch
+
+**Cambridge Two-Population Origin** (Cousins et al., Nature Genetics, March 2025):
+- H. sapiens = merger of two African populations
+- Split ~1.5 Ma, reunited ~300 ka
+- 80:20 ratio (Pop A: 80%, Pop B: 20% with brain genes)
+
+**Five-Branch Model** (Natural History Museum 2025):
+1. Asian H. erectus (ancient survivors)
+2. H. heidelbergensis (side-branch?)
+3. H. neanderthalensis (European)
+4. H. longi / Denisovans (East Asian)
+5. H. sapiens (African)
+
+### Ghost Populations Explained:
+
+| Population | Split Time | Evidence | Story |
+|------------|------------|----------|-------|
+| "Superarchaic" | 2.0 Ma | Denisovan DNA | Possibly late H. erectus |
+| West African | 0.7 Ma | Yoruba/Mende DNA | 2-19% ancestry, unknown archaic |
+| Population A (80%) | 1.5 Ma | Sapiens genome | Major ancestor, also → Neanderthals |
+| Population B (20%) | 1.5 Ma | Sapiens genome | Minor ancestor, brain genes |
+| "Deep Denisovan" (D2) | 0.28 Ma | Papuan/Filipino DNA | Divergent Denisovan lineage |
+| SE Asian Archaic | ~0.15 Ma | SE Asian DNA | Unknown — erectus? floresiensis? |
+
+### Island Southeast Asia - Parallel Evolution:
+
+Two remarkable "island rule" species now included:
+- **H. floresiensis** (190-50 ka): "The Hobbit" of Flores — survived until sapiens arrived!
+- **H. luzonensis** (67 ka): Philippines discovery (2019) — parallel dwarfism
+
+### The Story It Tells:
+
+The Pleistocene wasn't a single-file march of species but a **braided stream** of populations mixing, separating, and remixing across Africa and Eurasia.
+
+**MIS cold periods** → Sahara impassable → Populations isolated → Ghost splits
+**MIS warm periods** → Green Sahara → Corridors open → Populations merge
+
+The LR04 benthic trace IS the MIS signal — now annotated to show what those wiggles meant for human evolution.
+
+### Key Hover Information:
+
+Each marker includes:
+- Species name and age
+- Key sites and discoveries
+- Significance for human evolution
+- 2025 updates where applicable
+- Source citations
+
+### Integration:
+
+The human origins layer integrates seamlessly with existing paleoclimate features:
+- Same log-scale x-axis (deep time to present)
+- Same temperature y-axis (evolution responds to climate)
+- Hominin markers at bottom, MIS context in middle, temperature above
+- All interactive (hover for details)
+
+---
 
 ### 1. Phanerozoic Reconstruction (Scotese et al. 2021)
 - **Coverage**: 540 Ma to 0 Ma (full range, filtered to show >2 Ma)
@@ -616,6 +730,27 @@ UNEP 2025 data shows current policies trajectory (2.6-3.3°C) is more pessimisti
 **Why This Matters:**
 Shows that modern warming is unprecedented in human civilization's timeframe. The warmest natural Holocene period (+0.53C) is less than half current warming. This contextualizes "unprecedented" claims with visual evidence.
 
+### December 2025 - v9 Human Origins Layer
+
+**Added:**
+✅ 25 hominin species markers (19 fossil + 6 ghost populations)  
+✅ Marine Isotope Stages (MIS) - 10 major glacial/interglacial cycles  
+✅ Climate events (Toba supereruption, Green Sahara windows)  
+✅ 2025 research integration (Yunxian 2, Five-Branch Model, Cambridge two-population)  
+✅ Island SE Asia species (H. floresiensis, H. luzonensis)  
+✅ Ghost populations (Superarchaic, West African, Pop A/B, Deep Denisovan, SE Asian)  
+✅ Visual differentiation (filled vs open triangles)  
+✅ Manual y_offset positioning for clean marker display  
+✅ Formatted hovertext with citations  
+✅ MIS warm/cold bands with hoverable context  
+
+**Story:**
+✅ Climate-driven human evolution narrative  
+✅ "Braided stream" of populations mixing and separating  
+✅ Sahara as climate gate (open/closed corridors)  
+✅ Ghost populations reveal complexity invisible in fossil record  
+✅ Island dwarfism parallel evolution  
+
 ### October 31, 2025 - v2 Phanerozoic Extension
 
 **Added:**
@@ -681,14 +816,18 @@ Shows that modern warming is unprecedented in human civilization's timeframe. Th
 ## 📊 Technical Specs
 
 **Data Sources**: 5 integrated datasets (4 historical + 1 future projections)  
+**Hominin Species**: 25 markers (19 fossil + 6 ghost populations)  
+**MIS Stages**: 10 glacial/interglacial cycles  
+**Climate Events**: 3 (Toba, Green Sahara × 2)  
 **Data Formats**: CSV (Scotese), JSON (LR04, GISS), CSV (Holocene)  
 **Visualization**: Plotly (interactive, zoomable, hoverable)  
-**Integration**: Three visualization variants  
+**Integration**: Four visualization variants  
 **File Size**: ~60 KB code + ~600 KB data  
 **Dependencies**: NumPy, Plotly, csv module (all in your project)  
 **Time to integrate**: ~10 minutes  
-**Interactive Elements**: 25+ hoverable annotations  
+**Interactive Elements**: 50+ hoverable annotations  
 **Timescales**: 4 (540 Ma, Pleistocene, Holocene, Modern)  
+**Research Integration**: 2025 (Yunxian 2, Cambridge two-population)  
 
 ---
 
@@ -782,11 +921,15 @@ Shows that modern warming is unprecedented in human civilization's timeframe. Th
 This isn't just adding a chart. It's:
 
 - **540 million years** of Earth's climate history
+- **25 hominin species** showing climate-driven evolution
 - **Five datasets** working together seamlessly (4 historical + projections)
 - **UNEP 2025** climate projections showing where we're headed
+- **Marine Isotope Stages** - the Pleistocene "heartbeat"
+- **Ghost populations** revealing hidden human diversity
+- **2025 research** integration (Yunxian 2, two-population origin)
 - **25+ interactive elements** for deep learning
 - **Timeline** connecting deep time to human experience
-- **Human stories** (Vikings, agriculture, civilization)
+- **Human stories** (Vikings, agriculture, civilization, evolution)
 - **Honest science** showing methods and uncertainties
 - **Interactive learning** via hoverable annotations
 - **Context** for understanding modern change
@@ -812,20 +955,24 @@ All with **minimal integration work** (~10 minutes).
 9. **Zoom to see human-scale events!**
 10. Explore 540 million years!
 11. Hover over the "?" symbols!
-12. Show Paloma the "double hump"!
-13. **Show her how Vikings came and went with climate!**
-14. **Show her the Younger Dryas flip that made civilization possible!**
+12. **Hover over the hominin triangles!**
+13. **See how MIS stages shaped human evolution!**
+14. Show Paloma the "double hump"!
+15. **Show her how Vikings came and went with climate!**
+16. **Show her the Younger Dryas flip that made civilization possible!**
+17. **Show her how WE emerged from the braided stream!**
 
 ---
 
-*From Cambrian Explosion to modern climate change, from deep time to human history, now in Paloma's Orrery.*
+*From Cambrian Explosion to modern climate change, from deep time to human origins, now in Paloma's Orrery.*
 
 **Package by**: Claude & Tony  
-**Updated**: November 8, 2025  
-**Following**: Working Protocol v2.3.1  
+**Updated**: December 2025  
+**Following**: Working Protocol v3.2  
 **Philosophy**: Data Preservation is Climate Action  
 **New Philosophy**: Climate History is Human History  
+**Evolution Philosophy**: The Pleistocene wasn't a march but a braided stream  
 **Scientific Principle**: Regional ≠ Global Climate  
 **Uncertainty**: Normal and Expected!  
 
-**Everything you need is documented here. Let's explore deep time AND human time!** 🦴🌍📊
+**Everything you need is documented here. Let's explore deep time, human time, AND human origins!** 🦴🧬🌍📊
