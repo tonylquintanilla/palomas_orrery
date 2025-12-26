@@ -201,7 +201,8 @@ from constants_new import (
     KNOWN_ORBITAL_PERIODS
 )
 
-from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, format_detailed_hover_text)
+# from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, format_detailed_hover_text)
+from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, add_fly_to_object_buttons, format_detailed_hover_text)
 
 from save_utils import save_plot
 
@@ -554,7 +555,7 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
         # Hydra (most distant) orbits at ~0.000436 AU
         # Add buffer for comfortable viewing
         max_range = 0.00065  # ~1.5x Hydra's orbit
-        print(f"[SCALING] Pluto-Charon Barycenter mode: using fixed range ±{max_range:.6f} AU", flush=True)
+        print(f"[SCALING] Pluto-Charon Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
         return [-max_range, max_range]
 
     max_distances = []
@@ -668,7 +669,7 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
         print(f"\nAutomatic scaling calculation:", flush=True)
         print(f"  Maximum orbital distance: {max_range:.6f} AU", flush=True)
         print(f"  Buffer factor: {buffer_factor}", flush=True)
-        print(f"  Final axis range: ±{max_range_with_buffer:.6f} AU", flush=True)
+        print(f"  Final axis range: +/-{max_range_with_buffer:.6f} AU", flush=True)
         
         return axis_range
     else:
@@ -811,7 +812,7 @@ def calculate_satellite_precession_info(selected_objects, start_date, end_date, 
             precession_rate = satellite_precession_rates[obj_name]
             total_precession = precession_rate * years_to_plot
             
-            # Calculate recommended maximum days for 10° precession
+            # Calculate recommended maximum days for 10 deg precession
             max_years = MAX_PRECESSION / precession_rate
             max_days = int(max_years * 365.25)
             
@@ -824,18 +825,18 @@ def calculate_satellite_precession_info(selected_objects, start_date, end_date, 
             if total_precession > MAX_PRECESSION:
                 # Warning format (exceeds recommended)
                 info_msg = (
-                    f"⚠️ {obj_name}:\n"
-                    f"  • Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
-                    f"  • Precession: {total_precession:.1f}° (EXCEEDS recommended {MAX_PRECESSION}°)\n"
-                    f"  • Recommended: ≤{max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION}° precession"
+                    f"? {obj_name}:\n"
+                    f"  ? Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
+                    f"  ? Precession: {total_precession:.1f} deg (EXCEEDS recommended {MAX_PRECESSION} deg)\n"
+                    f"  ? Recommended: ?{max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION} deg precession"
                 )
             else:
                 # Info format (within recommended)
                 info_msg = (
-                    f"ℹ️ {obj_name}:\n"
-                    f"  • Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
-                    f"  • Precession: {total_precession:.1f}° (within recommended {MAX_PRECESSION}°)\n"
-                    f"  • Maximum recommended: {max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION}° precession"
+                    f"? {obj_name}:\n"
+                    f"  ? Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
+                    f"  ? Precession: {total_precession:.1f} deg (within recommended {MAX_PRECESSION} deg)\n"
+                    f"  ? Maximum recommended: {max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION} deg precession"
                 )
             
             info_messages.append(info_msg)
@@ -975,9 +976,9 @@ def plot_refined_orbits_for_moons(fig, moon_names, center_id, color_map, orbit_d
                 print(f"  Mean difference: {mean_diff * 149597870.7:.1f} km ({mean_diff:.6f} AU)", flush=True)
                 
                 if max_diff < 1e-10:
-                    print("  ⚠️ WARNING: Refined orbit is identical to Keplerian orbit!", flush=True)
+                    print("  ? WARNING: Refined orbit is identical to Keplerian orbit!", flush=True)
                 else:
-                    print("  ✓ Refined orbit differs from Keplerian orbit", flush=True)
+                    print("  ?? Refined orbit differs from Keplerian orbit", flush=True)
             
             # Add trace with distinctive style
             fig.add_trace(
@@ -1006,11 +1007,11 @@ def plot_refined_orbits_for_moons(fig, moon_names, center_id, color_map, orbit_d
                     opacity=0.9
                 )
             )
-            print(f"\n✓ Added refined orbit trace for {moon_name}", flush=True)
+            print(f"\n?? Added refined orbit trace for {moon_name}", flush=True)
             print(f"{'='*60}", flush=True)
             
         except Exception as e:
-            print(f"\n✗ Could not add refined orbit for {moon_name}: {e}", flush=True)
+            print(f"\n?? Could not add refined orbit for {moon_name}: {e}", flush=True)
             import traceback
             traceback.print_exc()
             print(f"{'='*60}", flush=True)
@@ -1157,7 +1158,7 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
         
         # Check if normals are already very close
         if abs(dot_product) > 0.9999:  # Normals are essentially the same
-            print("Normals are already aligned (angle < 0.01°), no correction needed", flush=True)
+            print("Normals are already aligned (angle < 0.01 deg), no correction needed", flush=True)
             return idealized
         
         # Calculate the rotation axis
@@ -1169,18 +1170,15 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
             angle = np.arccos(np.clip(dot_product, -1, 1))
             
             print(f"Rotation axis: [{axis[0]:.4f}, {axis[1]:.4f}, {axis[2]:.4f}]", flush=True)
-            print(f"Rotation angle: {np.degrees(angle):.2f}° ({angle:.6f} radians)", flush=True)
+            print(f"Rotation angle: {np.degrees(angle):.2f} deg ({angle:.6f} radians)", flush=True)
             
             # Create the rotation correction
             correction = Rotation.from_rotvec(angle * axis)
-            print(f"Created rotation correction of {np.degrees(angle):.2f}°", flush=True)
+            print(f"Created rotation correction of {np.degrees(angle):.2f} deg", flush=True)
             
             # Test the correction
             test_ideal = ideal_positions[0] - ideal_centroid
             test_corrected = correction.apply(test_ideal)
-            print(f"\nTest correction:", flush=True)
-            print(f"  Original: {test_ideal}", flush=True)
-            print(f"  Corrected: {test_corrected}", flush=True)
         else:
             print("Rotation axis has zero magnitude, normals are parallel", flush=True)
             
@@ -1222,7 +1220,7 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
     
     # Verify the refined orbit
     if correction is not None:
-        print("\n✓ Refined orbit function created WITH correction", flush=True)
+        print("\n?? Refined orbit function created WITH correction", flush=True)
         
         # Test comparison
         test_t = np.linspace(0, 2*np.pi, 8)
@@ -1232,7 +1230,7 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
             diff = np.linalg.norm(ideal_pos - refined_pos) * 149597870.7  # km
             print(f"  t={t:.2f}: difference = {diff:.1f} km", flush=True)
     else:
-        print("\n✗ Refined orbit function created WITHOUT correction (identical to Keplerian)", flush=True)
+        print("\n?? Refined orbit function created WITHOUT correction (identical to Keplerian)", flush=True)
     
     return refined_orbit
 
@@ -1584,11 +1582,6 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
         KNOWN_ORBITAL_PERIODS
     )
     
-    if name == "Leleakuhonua":
-        print(f"[DEBUG HOVER] obj_data for Leleakuhonua: {obj_data}", flush=True)
-        print(f"[DEBUG HOVER] known_orbital_period: {obj_data.get('known_orbital_period')}", flush=True)
-        print(f"[DEBUG HOVER] calculated_orbital_period: {obj_data.get('calculated_orbital_period')}", flush=True)
-
     # Add satellite note if present
     if satellite_note:
         full_hover_text += satellite_note
@@ -2368,7 +2361,7 @@ objects = [
 
     {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky — it looks like a bright red point of light."', 
+    'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky ?? it looks like a bright red point of light."', 
     'mission_url': 'https://science.nasa.gov/?search=mars'},
 
     {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'object_type': 'orbital', 
@@ -2420,7 +2413,8 @@ objects = [
 
     {'name': 'Ceres', 'id': 'A801 AA', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Horizons: A801 AA. NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture."', 
+    'center_id': '2000001',  # Numeric ID for use as Horizons center    
+    'mission_info': 'Horizons: A801 AA. NASA: "Ceres was the first object discovered in the main asteroid belt. Dawn spacecraft orbited Ceres from 2015 to 2018."', 
     'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
 
 #    {'name': 'Haumea', 'id': '2003 EL61', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
@@ -2594,32 +2588,37 @@ objects = [
 
     # Main Belt Asteroids
     {'name': 'Apophis', 'id': '2004 MN4', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 'start_date': datetime(2004, 6, 20), 'end_date': datetime(2036, 1, 1), 
-    'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029.', 
+    'id_type': 'smallbody', 
+    'center_id': '2099942',  # Numeric ID for use as Horizons center
+    'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target', 
     'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
 
     {'name': 'Bennu', 'id': '1999 RQ36', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
+    'center_id': '2101955',  # Numeric ID for use as Horizons center
     'mission_info': 'Horizons: 1999 RQ36. Studied by NASA\'s OSIRIS-REx mission.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
 
-    {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', # Bennu as a center object
-    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
+#    {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
+#    'id_type': 'smallbody', # Bennu as a center object
+#    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
+#    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
 
     {'name': 'Eros', 'id': 'A898 PA', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    'id_type': 'smallbody',
+    'center_id': '2000433',  # Numeric ID for use as Horizons center 
     'mission_info': 'Horizons: A898 PA. First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
 
     {'name': 'Dinkinesh', 'id': '1999 VD57', 'var': dinkinesh_var, 'color': color_map('Dinkinesh'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    'id_type': 'smallbody',
+    'center_id': '2152830',  # Numeric ID for use as Horizons center
     'mission_info': 'Horizons: 1999 VD57. Dinkinesh was visited by the mission Lucy.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/dinkinesh/'},
 
     {'name': 'Itokawa', 'id': '1998 SF36', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    'id_type': 'smallbody',
+    'center_id': '2025143',  # Numeric ID for use as Horizons center 
     'mission_info': 'Horizons: 1998 SF36. First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
     'mission_url': 'https://en.wikipedia.org/wiki/25143_Itokawa'},
 
@@ -2629,7 +2628,8 @@ objects = [
     'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
 
     {'name': 'Ryugu', 'id': '1999 JU3', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    'id_type': 'smallbody',
+    'center_id': '2162173',  # Numeric ID for use as Horizons center  
     'mission_info': 'Horizons: 1999 JU3. Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
     'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
 
@@ -2644,7 +2644,8 @@ objects = [
      'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
 
     {'name': 'Vesta', 'id': 'A807 FA', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    'id_type': 'smallbody',
+    'center_id': '2000004',  # Numeric ID for use as Horizons center 
     'mission_info': 'Horizons: A807 FA. One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
     'mission_url': 'https://dawn.jpl.nasa.gov/'},
 
@@ -2710,7 +2711,8 @@ objects = [
     # Comets
 
     {'name': 'Churyumov', 'id': '90000699', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 67P/Churyumov-Gerasimenko
-    'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
+    'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 
+    'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
     # data arc: 2008-06-01 to 2023-04-26; Epoch: 2015-Oct-10; 67P; previously rec 90000704; record number needed to fetch Horizons data.
     'mission_info': 'Horizons: 67P. 67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft, August 2014 through September 2016.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
@@ -3220,6 +3222,7 @@ objects = [
     # Makemake's Moon
     {'name': 'MK2', 'id': '120136472', 'var': mk2_var, 'color': color_map('MK2'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': 'majorbody', 
+     'center_id': '2152830',  # Numeric ID for use as Horizons center body
      'mission_info': 'Makemake\'s moon (S/2015 (136472) 1). Discovered 2015 by Hubble. Period: 18.023 days. Distance: ~22,250 km. Orbit edge-on to Earth.<br>' 
      'Very dark surface (~4% reflectivity), diameter ~175 km. No JPL ephemeris available - orbit from 2025 Hubble analysis.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
@@ -3254,7 +3257,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.02227, 'period_days': 4.04961,
      'in_habitable_zone': True,
-     'mission_info': '★ IN HABITABLE ZONE ★ Inner edge, 4.0 day period. May have water.',
+     'mission_info': '?? IN HABITABLE ZONE ?? Inner edge, 4.0 day period. May have water.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7915/trappist-1-d/'},
     
     {'name': 'TRAPPIST-1 e', 'id': 'trappist1e', 'var': trappist1e_var,
@@ -3262,7 +3265,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.02925, 'period_days': 6.09965,
      'in_habitable_zone': True,
-     'mission_info': '★ IN HABITABLE ZONE ★ PRIME CANDIDATE! Most likely to have liquid water. 6.1 day period.',
+     'mission_info': '?? IN HABITABLE ZONE ?? PRIME CANDIDATE! Most likely to have liquid water. 6.1 day period.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7916/trappist-1-e/'},
     
     {'name': 'TRAPPIST-1 f', 'id': 'trappist1f', 'var': trappist1f_var,
@@ -3270,7 +3273,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.03849, 'period_days': 9.20669,
      'in_habitable_zone': True,
-     'mission_info': '★ IN HABITABLE ZONE ★ 9.2 day period. May have significant water content.',
+     'mission_info': '?? IN HABITABLE ZONE ?? 9.2 day period. May have significant water content.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7917/trappist-1-f/'},
     
     {'name': 'TRAPPIST-1 g', 'id': 'trappist1g', 'var': trappist1g_var,
@@ -3278,7 +3281,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.04683, 'period_days': 12.35294,
      'in_habitable_zone': True,
-     'mission_info': '★ IN HABITABLE ZONE ★ Outer edge, 12.4 day period. May have subsurface ocean.',
+     'mission_info': '?? IN HABITABLE ZONE ?? Outer edge, 12.4 day period. May have subsurface ocean.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7918/trappist-1-g/'},
     
     {'name': 'TRAPPIST-1 h', 'id': 'trappist1h', 'var': trappist1h_var,
@@ -3336,7 +3339,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'proxima',
      'semi_major_axis_au': 0.04856, 'period_days': 11.18427,
      'in_habitable_zone': True,
-     'mission_info': '★ IN HABITABLE ZONE ★ NEAREST EXOPLANET! 11.2 day period. Stellar flares may challenge habitability.',
+     'mission_info': '?? IN HABITABLE ZONE ?? NEAREST EXOPLANET! 11.2 day period. Stellar flares may challenge habitability.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7167/proxima-centauri-b/'},
     
     {'name': 'Proxima Centauri d', 'id': 'proximad', 'var': proximad_var,
@@ -3344,7 +3347,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'proxima',
      'semi_major_axis_au': 0.029, 'period_days': 5.122,
      'in_habitable_zone': False,
-     'mission_info': 'Sub-Earth mass planet (0.26 M⊕). Lightest planet detected by radial velocity method.',
+     'mission_info': 'Sub-Earth mass planet (0.26 M??). Lightest planet detected by radial velocity method.',
      'mission_url': 'https://www.eso.org/public/news/eso2202/'},
 
 ]
@@ -3618,7 +3621,8 @@ def update_orbit_paths(center_object_name='Sun'):
     # Get center object info
     center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
     if center_object_info:
-        center_id = center_object_info['id']
+#        center_id = center_object_info['id']
+        center_id = center_object_info.get('center_id', center_object_info['id'])
         center_id_type = center_object_info.get('id_type')
     else:
         center_id = 'Sun'
@@ -3651,7 +3655,7 @@ def update_orbit_paths(center_object_name='Sun'):
 #        if refresh_all or (obj['name'] not in orbit_paths_over_time):
         if orbit_key not in orbit_paths_over_time:
             # Determine a suitable interval.
-            # Use adaptive step sizing if available – for example, for high eccentricity objects use "12h" instead of "1d".
+            # Use adaptive step sizing if available ?? for example, for high eccentricity objects use "12h" instead of "1d".
             interval = "1d"  # default interval
 
             if obj['name'] in planetary_params:
@@ -3751,7 +3755,9 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
 # Suppress ErfaWarning messages
 warnings.simplefilter('ignore', ErfaWarning)
         
-def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=True, center_object_name='Sun', show_closest_approach=False):
+# def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=True, center_object_name='Sun', show_closest_approach=False):
+def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_lines=True, center_object_name='Sun', show_closest_approach=False, trajectory_marker_color=None):
+
     """
     Plot actual orbit positions for selected objects.
     
@@ -3804,9 +3810,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         showlegend=True
                     )
                 )
-                print(f"[SPECIAL FETCH] Plotted {planet} orbit with {len(x)} points from temp cache", flush=True)
             else:
-                print(f"[SPECIAL FETCH] {planet} not found in temp cache", flush=True)
 
 # Add closest approach marker if enabled
                 if show_closest_approach:
@@ -3868,17 +3872,51 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 x = [pos['x'] for pos in trajectory if pos is not None]
                 y = [pos['y'] for pos in trajectory if pos is not None]
                 z = [pos['z'] for pos in trajectory if pos is not None]
+
+            # Determine trace color - use trajectory_marker_color for trajectory objects if set
+                obj_type = obj_info.get('object_type', 'orbital')
+                trace_color = trajectory_marker_color if (obj_type == 'trajectory' and trajectory_marker_color) else color_map(planet)
+                
                 if show_lines:                                                 # this code adds lines betwen the markers
                     mode = 'lines'
-                    line = dict(color=color_map(planet), width=2)
+                    line = dict(color=trace_color, width=2)
                     marker = None
                 else:
                     mode = 'markers'
                     line = None
-                    marker = dict(color=color_map(planet), size=2)
+                    marker = dict(color=trace_color, size=2)
 
-                # Create the hover text for the actual orbit
-                hover_text = f"{planet} Orbit"
+                # Create the hover text and legend name for the actual orbit
+                # For trajectory objects: "Plotted Period" if trajectory_marker_color is set (animate), "Full Mission" otherwise (static)
+                if obj_type == 'trajectory':
+                    if trajectory_marker_color:
+                        hover_text = f"{planet} Plotted Period"
+                        legend_name = f"{planet} Plotted Period"
+                    else:
+                        hover_text = f"{planet} Full Mission"
+                        legend_name = f"{planet} Full Mission"
+                else:
+                    hover_text = f"{planet} Orbit"
+                    legend_name = f"{planet} Actual Orbit"
+                
+        #        if show_lines:                                                 # this code adds lines betwen the markers
+        #            mode = 'lines'
+        #            line = dict(color=color_map(planet), width=2)
+        #            marker = None
+        #        else:
+        #            mode = 'markers'
+        #            line = None
+        #            marker = dict(color=color_map(planet), size=2)
+
+                # Create the hover text and legend name for the actual orbit
+                # For trajectory objects, use "Plotted Period" to distinguish from "Full Mission"
+        #        obj_type = obj_info.get('object_type', 'orbital')
+        #        if obj_type == 'trajectory':
+        #            hover_text = f"{planet} Plotted Period"
+        #            legend_name = f"{planet} Plotted Period"
+        #        else:
+        #            hover_text = f"{planet} Orbit"
+        #            legend_name = f"{planet} Actual Orbit"
 
                 fig.add_trace(
                     go.Scatter3d(
@@ -3888,7 +3926,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         mode=mode,
                         line=line,
                         marker=marker,
-                        name=f"{planet} Actual Orbit",
+                        name=legend_name,
                         text=[hover_text] * len(x),           # Add proper hover text
                         customdata=[hover_text] * len(x),     # Same for customdata
                         hovertemplate='%{text}<extra></extra>',
@@ -3912,14 +3950,26 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                             }
                     
                     # Add the marker
+            #        add_closest_approach_marker(
+            #            fig=fig,
+            #            positions_dict=positions_dict,
+            #            obj_name=planet,
+            #            center_body=center_object_name,
+            #            color_map=color_map,
+            #            date_range=(dates_list[0], dates_list[-1]) if dates_list else None
+            #        )            
+
+                    # Add the marker - use trajectory_marker_color for trajectory objects
+                    marker_color = trajectory_marker_color if obj_type == 'trajectory' else None
                     add_closest_approach_marker(
                         fig=fig,
                         positions_dict=positions_dict,
                         obj_name=planet,
                         center_body=center_object_name,
                         color_map=color_map,
-                        date_range=(dates_list[0], dates_list[-1]) if dates_list else None
-                    )                
+                        date_range=(dates_list[0], dates_list[-1]) if dates_list else None,
+                        marker_color=marker_color
+                    )                     
 
 # Define dictionary mapping all celestial bodies to their shell variable dictionaries
 body_shells_config = {
@@ -3942,11 +3992,10 @@ body_shells_config = {
 
 def plot_objects():
     # DEBUG: Heartbeat check - confirms button click works
-    print("\n[DEBUG] plot_objects() called", flush=True) 
     
-    # ═══════════════════════════════════════════════════════════════════════
+    # ???????????????????????????????????????????????????????????????????????
     # PRE-FETCH OSCULATING ELEMENTS ON MAIN THREAD
-    # ═══════════════════════════════════════════════════════════════════════
+    # ???????????????????????????????????????????????????????????????????????
     
     # Create working copy of planetary_params
     active_planetary_params = planetary_params.copy()
@@ -3983,14 +4032,11 @@ def plot_objects():
     
     # Debug: Print the state of variables to console
     is_normal_mode = (special_fetch_var.get() == 0)
-    print(f"[DEBUG] Special Fetch Mode: {'ON' if not is_normal_mode else 'OFF'} (Value: {special_fetch_var.get()})", flush=True)
-    print(f"[DEBUG] Objects to check: {pre_fetch_objects}", flush=True)
 
     if is_normal_mode and pre_fetch_objects:
         print(f"[PRE-FETCH] Checking osculating elements for {len(pre_fetch_objects)} objects...", flush=True)
                         
         for obj_name in pre_fetch_objects:
-            print(f"[DEBUG] Processing {obj_name}...", flush=True)
             try:
                 # Find the object dictionary to get its Horizons ID
                 obj_dict = next((obj for obj in selected_objects_for_prefetch 
@@ -4000,7 +4046,6 @@ def plot_objects():
                     horizons_id = obj_dict.get('id', obj_name)
                     id_type = obj_dict.get('id_type', 'smallbody')
                     
-                    print(f"[DEBUG] Using Horizons ID: {horizons_id} (type: {id_type})", flush=True)
                     
                     # Trigger the GUI prompt with proper Horizons ID
             #        fresh_elements = get_elements_with_prompt(
@@ -4042,25 +4087,18 @@ def plot_objects():
                 # DEBUG: Validation
                 if obj_name == 'Mercury':
                     ecc = fresh_elements.get('e', 0)
-                    print(f"[DEBUG] Mercury eccentricity: {ecc}", flush=True)
                     if ecc >= 0.7:
                         print(f"[WARNING] Mercury is using MANUAL FALLBACK data (e={ecc})", flush=True)
                         messagebox.showwarning("Fetch Failed", f"Could not fetch fresh data for {obj_name}.\nSystem is using manual fallback (e={ecc}).\nCheck internet connection or Horizons availability.")
                     else:
                         print(f"[SUCCESS] Mercury fetched fresh data (e={ecc})", flush=True)
                 
-                print(f"[PRE-FETCH] ✓ {obj_name}: Updated", flush=True)
+                print(f"[PRE-FETCH] ?? {obj_name}: Updated", flush=True)
                     
             except Exception as e:
-                print(f"[PRE-FETCH] ⚠ {obj_name} Error: {e}", flush=True)
+                print(f"[PRE-FETCH] ? {obj_name} Error: {e}", flush=True)
                 traceback.print_exc()
-    else:
-        if not is_normal_mode:
-            print("[DEBUG] Skipping pre-fetch: Special Fetch Mode is active", flush=True)
-        elif not pre_fetch_objects:
-            print("[DEBUG] Skipping pre-fetch: No applicable objects selected", flush=True)
-    
-    # ═══════════════════════════════════════════════════════════════════════
+    # ???????????????????????????????????????????????????????????????????????
         
     def worker():
         try:
@@ -4136,7 +4174,8 @@ def plot_objects():
                     center_id = 'Sun'
                     center_id_type = None
                 else:
-                    center_id = center_object_info['id']
+            #        center_id = center_object_info['id']
+                    center_id = center_object_info.get('center_id', center_object_info['id'])
                     center_id_type = center_object_info.get('id_type')
             else:
                 center_id = 'Sun'
@@ -4293,7 +4332,6 @@ def plot_objects():
                     
             else:  # Special fetch mode
                 update_status_display("Special fetch mode: Fetching data (not cached)...", 'special')
-                print(f"[SPECIAL FETCH] Getting data for {len(selected_objects)} objects", flush=True)
                 
                 # In special fetch mode, determine interval based on object type
                 for obj in selected_objects:
@@ -4341,7 +4379,6 @@ def plot_objects():
                     json.dump(temp_cache, f)
                 
                 update_status_display(f"Special fetch complete: {len(temp_cache)} orbits in temp cache", 'special')
-                print(f"[SPECIAL FETCH] Temp cache contains {len(temp_cache)} orbits", flush=True)
             
             progress_bar.step(10)
             root.update_idletasks()
@@ -4522,6 +4559,11 @@ def plot_objects():
 
                     elif obj_type == 'fixed':
                         if obj['name'] == 'Sun':
+
+                            if is_exoplanet_mode:
+                                print(f"Skipping Sun in exoplanet animation mode", flush=True)
+                                continue
+
                             if center_object_name != 'Sun':
                                 # Sun needs trajectory when viewed from another center (e.g., Earth)
                                 requested_days = settings['days_to_plot']
@@ -4789,10 +4831,98 @@ def plot_objects():
             ]
 
             # Pass center_object_name to plot_actual_orbits
-    #        plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name)       #show_lines=True
+
             plot_actual_orbits(fig, selected_planets, dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name, show_closest_approach=show_closest_approach_var.get())
 
+            # ADD PLOTTED PERIOD OVERLAY FOR TRAJECTORY OBJECTS (yellow highlight)
+            # This shows the GUI-selected date range overlaid on the full mission
+            trajectory_objects = [obj for obj in selected_objects 
+                                 if obj.get('object_type') == 'trajectory' 
+                                 and obj['name'] != center_object_name]
+            
+            if trajectory_objects:
+                print(f"\n[PLOTTED PERIOD] Adding yellow overlay for {len(trajectory_objects)} trajectory objects...", flush=True)
+                
+                for obj in trajectory_objects:
+                    obj_name = obj['name']
+                    
+                    # Get mission bounds
+                    mission_start = obj.get('start_date', settings['start_date'])
+                    mission_end = obj.get('end_date', settings['end_date'])
+                    
+                    # Calculate plotted period (GUI dates clipped to mission bounds)
+                    plot_start = max(settings['start_date'], mission_start)
+                    plot_end = min(settings['end_date'], mission_end)
+                    
+                    # Skip if plotted period doesn't overlap with mission
+                    if plot_start >= plot_end:
+                        print(f"[PLOTTED PERIOD] {obj_name}: No overlap with mission dates, skipping", flush=True)
+                        continue
+                    
+                    # Calculate dates for plotted period
+                    plot_days = (plot_end - plot_start).total_seconds() / 86400
+                    num_points = int(trajectory_points) + 1
+                    plotted_dates = [plot_start + timedelta(days=float(d)) 
+                                    for d in np.linspace(0, plot_days, num=num_points)]
+                    
+                    # Use helio_id for Sun-centered plots if available
+                    fetch_id = obj['id']
+                    fetch_id_type = obj.get('id_type')
+                    if center_object_name == 'Sun' and 'helio_id' in obj:
+                        fetch_id = obj['helio_id']
+                        fetch_id_type = 'smallbody'
+                    
+                    # Fetch trajectory for plotted period
+                    trajectory = fetch_trajectory(fetch_id, plotted_dates, center_id=center_id, id_type=fetch_id_type)
+                    
+                    if trajectory:
+                        x = [pos['x'] for pos in trajectory if pos is not None]
+                        y = [pos['y'] for pos in trajectory if pos is not None]
+                        z = [pos['z'] for pos in trajectory if pos is not None]
+                        
+                        if x:
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=x,
+                                    y=y,
+                                    z=z,
+                                    mode='lines',
+                                    line=dict(color='yellow', width=2),
+                                    opacity=1.0,
+                                    name=f"{obj_name} Plotted Period",
+                                    text=[f"{obj_name} Plotted Period"] * len(x),
+                                    hovertemplate='%{text}<extra></extra>',
+                                    showlegend=True
+                                )
+                            )
+                            print(f"[PLOTTED PERIOD] {obj_name}: {len(x)} points from {plot_start.strftime('%Y-%m-%d')} to {plot_end.strftime('%Y-%m-%d')}", flush=True)
+                            
+                            # Add yellow closest approach marker for Plotted Period
+                            if show_closest_approach_var.get():
+                                from apsidal_markers import add_closest_approach_marker
+                                
+                                # Build positions_dict from trajectory data
+                                positions_dict = {}
+                                for i in range(len(x)):
+                                    if i < len(plotted_dates):
+                                        positions_dict[plotted_dates[i].isoformat()] = {
+                                            'x': x[i],
+                                            'y': y[i],
+                                            'z': z[i]
+                                        }
+                                
+                                add_closest_approach_marker(
+                                    fig=fig,
+                                    positions_dict=positions_dict,
+                                    obj_name=obj_name,
+                                    center_body=center_object_name,
+                                    color_map=color_map,
+                                    date_range=(plotted_dates[0], plotted_dates[-1]) if plotted_dates else None,
+                                    marker_color='yellow'  # Yellow for Plotted Period
+                                )
+
             positions = {}
+
             for obj in objects:
                 if not obj['var'].get():
                     continue
@@ -4936,7 +5066,7 @@ def plot_objects():
                         text=(
                             "<b>Coordinate System (J2000 Ecliptic):</b><br><br>"
 
-                            "<b>+X:</b> Toward RA=0° (&#9800;) - same for all objects<br><br>"
+                            "<b>+X:</b> Toward RA=0 deg (&#9800;) - same for all objects<br><br>"
 
                             + "<b>+Z:</b> Ecliptic North perpendicular to Earth's orbit<br>"
                             + ("<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For exoplanets: line of sight from star to Earth)</i><br><br>" 
@@ -4952,7 +5082,7 @@ def plot_objects():
                         xref='paper',
                         yref='paper',
                         x=-0.04,
-                        y=0.9,  
+                        y=0.80,  
                         showarrow=False,
                         font=dict(size=11, color='white'),
                         align='left',
@@ -5188,7 +5318,7 @@ def plot_objects():
                             print(f"  Origin: Host star at (0, 0, 0)", flush=True)
                             print(f"  XY plane: Sky plane (perpendicular to Earth)", flush=True)
                             print(f"  Z axis: Toward Earth", flush=True)
-                            print(f"  Axis range: ±{exo_axis_range:.4f} AU\n", flush=True)
+                            print(f"  Axis range: +/-{exo_axis_range:.4f} AU\n", flush=True)
                 
                 except Exception as e:
                     print(f"Error plotting exoplanet systems: {e}", flush=True)
@@ -5198,9 +5328,11 @@ def plot_objects():
 
             # Add URL buttons before showing/saving
             fig = add_url_buttons(fig, objects, selected_objects)
-        #    fig = add_camera_center_button(fig, center_object_name)
+
             # Add camera view buttons with dropdown for different target objects
             fig = add_look_at_object_buttons(fig, positions, center_object_name)            
+           
+            fig = add_fly_to_object_buttons(fig, positions, center_object_name)  # NEW
 
             # ============ ADD COMET TAILS INTEGRATION ============
             # Conservative comet tail integration
@@ -5258,9 +5390,9 @@ def plot_objects():
 # Replace the problematic section (around line 4200-4600) with:
 
 def animate_objects(step, label):
-    # ═══════════════════════════════════════════════════════════════════════
+    # ???????????????????????????????????????????????????????????????????????
     # PRE-FETCH OSCULATING ELEMENTS ON MAIN THREAD (Threading Fix)
-    # ═══════════════════════════════════════════════════════════════════════
+    # ???????????????????????????????????????????????????????????????????????
     # Create working copy of planetary_params with fresh data (same as plot_objects)
     active_planetary_params = planetary_params.copy()
     
@@ -5329,16 +5461,16 @@ def animate_objects(step, label):
 
                 else:
                     # Fallback to old behavior
-                    print(f"[ANIMATION PRE-FETCH] ⚠ Object dictionary not found for {obj_name}, using name as ID", flush=True)
+                    print(f"[ANIMATION PRE-FETCH] ? Object dictionary not found for {obj_name}, using name as ID", flush=True)
             #        fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root)
                     fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root, center_body=osculating_center_body)
                 
                 active_planetary_params[obj_name] = fresh_elements
-                print(f"[ANIMATION PRE-FETCH] ✓ {obj_name}: Updated", flush=True)
+                print(f"[ANIMATION PRE-FETCH] ?? {obj_name}: Updated", flush=True)
             except Exception as e:
-                print(f"[ANIMATION PRE-FETCH] ⚠ {obj_name}: {e}", flush=True)
+                print(f"[ANIMATION PRE-FETCH] ? {obj_name}: {e}", flush=True)
 
-    # ═══════════════════════════════════════════════════════════════════════
+    # ???????????????????????????????????????????????????????????????????????
     
     def animation_worker():
         try:
@@ -5376,7 +5508,8 @@ def animate_objects(step, label):
                     center_id = 'Sun'
                     center_id_type = None
                 else:
-                    center_id = center_object_info['id']
+            #        center_id = center_object_info['id']
+                    center_id = center_object_info.get('center_id', center_object_info['id'])
                     center_id_type = center_object_info.get('id_type')
             else:
                 center_id = 'Sun'
@@ -5405,7 +5538,6 @@ def animate_objects(step, label):
                 settings['days_to_plot'] = gui_days
             
             # Debug output
-            print(f"\n[ANIMATION DEBUG] ====== ANIMATION SETTINGS ======", flush=True)
             print(f"Days to Plot: {settings['days_to_plot']}", flush=True)
             print(f"Number of Frames: {N}", flush=True)
             print(f"Animation Step: {label}", flush=True)
@@ -5425,8 +5557,6 @@ def animate_objects(step, label):
             # Generate animation frame dates
             dates_list = create_animation_dates(current_date, step, N)
 
-            print(f"[ANIMATION DEBUG] Created {len(dates_list)} animation dates", flush=True)
-            print(f"[ANIMATION DEBUG] From {dates_list[0]} to {dates_list[-1]}", flush=True)
 
             # Calculate days_ahead
             days_ahead = 0
@@ -5635,6 +5765,11 @@ def animate_objects(step, label):
                         
                     elif obj_type == 'fixed':
                         if obj['name'] == 'Sun':
+
+                            if is_exoplanet_mode:
+                                print(f"Skipping Sun in exoplanet animation mode", flush=True)
+                                continue
+
                             if center_object_name != 'Sun':
                                 # Sun needs trajectory when viewed from another center
                                 # Use the animation dates_list that was already created
@@ -5656,19 +5791,16 @@ def animate_objects(step, label):
                         dates_lists[obj['name']] = dates_list
 
             # Debug: Print what we're animating
-            print(f"\n[ANIMATION DEBUG] Objects to animate:", flush=True)
             for name, dates in dates_lists.items():
                 print(f"  {name}: {len(dates)} dates", flush=True)
 
             # Fetch trajectory data for all selected objects
-            print(f"\n[ANIMATION DEBUG] Fetching trajectories...", flush=True)
             positions_over_time = {}
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
                     # Use the dates from dates_lists
                     obj_dates = dates_lists.get(obj['name'], dates_list)
                     
-                    print(f"[ANIMATION DEBUG] Fetching {obj['name']} for {len(obj_dates)} dates", flush=True)
                     
                     # Handle objects with date ranges
                     if 'start_date' in obj or 'end_date' in obj:
@@ -5712,24 +5844,24 @@ def animate_objects(step, label):
 
 
                         # Fallback for satellites without JPL ephemeris (e.g., MK2)
-                        # ═══════════════════════════════════════════════════════════
+                        # ???????????????????????????????????????????????????????????
                         # IMPORTANT: This solution is tailored specifically for MK2:
                         #   1. Assumes circular orbit (e=0): mean anomaly = true anomaly
-                        #   2. Uses J2000.0 as reference epoch with M₀=0° (arbitrary)
+                        #   2. Uses J2000.0 as reference epoch with M??=0 deg (arbitrary)
                         #   3. Orbital elements from arXiv:2509.05880 (Sept 2025)
                         # 
                         # For other objects, you may need to:
                         #   - Solve Kepler's equation for eccentric anomaly (if e > 0)
-                        #   - Use object-specific reference epoch and M₀
+                        #   - Use object-specific reference epoch and M??
                         #   - Apply different coordinate transformations
-                        # ═══════════════════════════════════════════════════════════
+                        # ???????????????????????????????????????????????????????????
                         ANALYTICAL_ANIMATION_FALLBACK = ['MK2']  # Expandable - see notes above
                         
                         if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
                             # Check if fetch_trajectory returned empty/None
                             traj = positions_over_time.get(obj['name'])
                             if not traj or all(p is None for p in traj):
-                                print(f"  ⚠ No JPL data for {obj['name']}, calculating analytical positions...", flush=True)
+                                print(f"  ? No JPL data for {obj['name']}, calculating analytical positions...", flush=True)
                                 
                                 from orbital_elements import planetary_params
                                 if obj['name'] in planetary_params:
@@ -5769,7 +5901,7 @@ def animate_objects(step, label):
                                         z_orb = 0.0
                                         
                                         # Apply 3D rotations
-                                        # Rotation 1: ω around z
+                                        # Rotation 1: ? around z
                                         x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
                                         y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
                                         z1 = z_orb
@@ -5779,7 +5911,7 @@ def animate_objects(step, label):
                                         y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
                                         z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
                                         
-                                        # Rotation 3: Ω around z
+                                        # Rotation 3: Omega around z
                                         x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
                                         y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
                                         z_final = z2
@@ -5791,7 +5923,7 @@ def animate_objects(step, label):
                                 #            'date': anim_date
                                 #        })
                                     
-                                        # Calculate velocity for circular orbit: v = 2πa / P
+                                        # Calculate velocity for circular orbit: v = 2?a / P
                                         v_au_day = 2 * np.pi * a / orbital_period
                                         
                                         analytical_positions.append({
@@ -5803,7 +5935,7 @@ def animate_objects(step, label):
                                         })
 
                                     positions_over_time[obj['name']] = analytical_positions
-                                    print(f"  ✓ Generated {len(analytical_positions)} analytical positions for {obj['name']}", flush=True)
+                                    print(f"  ?? Generated {len(analytical_positions)} analytical positions for {obj['name']}", flush=True)
 
             # Extract initial positions for idealized orbits
             initial_positions = {}
@@ -5820,7 +5952,6 @@ def animate_objects(step, label):
             # Add center object position
             initial_positions[center_object_name] = {'x': 0, 'y': 0, 'z': 0}
             
-            print(f"[ANIMATION DEBUG] Extracted initial positions for {len(initial_positions)} objects", flush=True)
 
             # Add position data for center planet if it has shells
             if center_object_name in planets_with_shells:
@@ -5833,18 +5964,54 @@ def animate_objects(step, label):
                     })
                 positions_over_time[center_object_name] = center_positions
             
-            print(f"\n[ANIMATION DEBUG] Fetched positions for {len(positions_over_time)} objects", flush=True)
 
             # Initialize figure
             fig = go.Figure()
 
-            # Add center marker for Sun (or other center objects without shells)
-            if center_object_name == 'Sun':
-                # Check if Sun shells are being displayed
-                sun_has_shells = any(var.get() == 1 for var in sun_shell_vars.values())
+            # =================================================================
+            # STATIC CENTER SHELLS - Added once, not duplicated in frames
+            # This enables shell visualizations in animations without memory explosion
+            # =================================================================
+            # Define planet shell configuration (same as plot_objects)
+            animation_shell_config = {
+                'Mercury': mercury_shell_vars,
+                'Venus': venus_shell_vars,
+                'Earth': earth_shell_vars,
+                'Moon': moon_shell_vars,
+                'Mars': mars_shell_vars,
+                'Jupiter': jupiter_shell_vars,
+                'Saturn': saturn_shell_vars,
+                'Uranus': uranus_shell_vars,
+                'Neptune': neptune_shell_vars,
+                'Pluto': pluto_shell_vars,
+                'Eris': eris_shell_vars,
+                'Planet 9': planet9_shell_vars
+            }
+
+            # Flag to track if shells have been added for center object
+            center_shells_added = False
+
+            # Add Sun visualization if needed
+            if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
+                fig = create_sun_visualization(fig, sun_shell_vars)
+                center_shells_added = True
+                print(f"[ANIMATION] Added Sun shells ({len(fig.data)} static traces)", flush=True)
                 
-                if not sun_has_shells:
-                    # Add Sun marker at center
+            # Add planet visualization if the center is a planet with shells
+            elif center_object_name in animation_shell_config:
+                shell_vars = animation_shell_config[center_object_name]
+                if any(var.get() == 1 for var in shell_vars.values()):
+                    fig = create_planet_visualization(fig, center_object_name, shell_vars)
+                    center_shells_added = True
+                    print(f"[ANIMATION] Added {center_object_name} shells ({len(fig.data)} static traces)", flush=True)
+
+            # Track where static traces end - frames will only update traces after this point
+            static_trace_count = len(fig.data)
+
+            # Add center marker only if shells haven't been added
+            if not center_shells_added:
+                if center_object_name == 'Sun':
+                    # Just add the central Sun marker if shells not selected
                     fig.add_trace(
                         go.Scatter3d(
                             x=[0], y=[0], z=[0],
@@ -5860,29 +6027,29 @@ def animate_objects(step, label):
                             showlegend=True
                         )
                     )
-
-            else:
-                            # Add center marker for non-Sun objects
-                            center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
-                            if center_object_info:
-                                # Check if color is transparent to hide legend
-                                is_transparent = 'rgba(0,0,0,0)' in str(center_object_info['color']).replace(' ', '')
-                                
-                                fig.add_trace(
-                                    go.Scatter3d(
-                                        x=[0], y=[0], z=[0],
-                                        mode='markers',
-                                        marker=dict(
-                                            color=center_object_info['color'],
-                                            size=12,
-                                            symbol=center_object_info['symbol']
-                                        ),
-                                        name=center_object_name,
-                                        text=[f"{center_object_name} system <br>center of gravity<br>(barycenter)"],
-                                        hovertemplate='%{text}<extra></extra>',
-                                        showlegend=not is_transparent  # Hide legend if transparent
-                                    )
-                                )
+                else:
+                    # Add center marker for non-Sun objects
+                    center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
+                    if center_object_info:
+                        # Check if color is transparent to hide legend
+                        is_transparent = 'rgba(0,0,0,0)' in str(center_object_info['color']).replace(' ', '')
+                        
+                        fig.add_trace(
+                            go.Scatter3d(
+                                x=[0], y=[0], z=[0],
+                                mode='markers',
+                                marker=dict(
+                                    color=center_object_info['color'],
+                                    size=12,
+                                    symbol=center_object_info['symbol']
+                                ),
+                                name=center_object_name,
+                                # FIXED: Barycenter text only for multi-body systems, not single bodies like Bennu
+                                text=[f"{center_object_name} system <br>center of gravity<br>(barycenter)"] if 'Barycenter' in center_object_name else [center_object_name],
+                                hovertemplate='%{text}<extra></extra>',
+                                showlegend=not is_transparent  # Hide legend if transparent
+                            )
+                        )
 
             # Also update the orbit path creation for animations to match plot_objects:
             # For animations, calculate the actual span from animation dates, not days_to_plot
@@ -5891,6 +6058,9 @@ def animate_objects(step, label):
             animation_span_days = (dates_list[-1] - dates_list[0]).total_seconds() / 86400 if len(dates_list) > 1 else settings['days_to_plot']
             
             orbit_dates_lists = {}
+            # NEW: Separate dict for trajectory context layers (full mission)
+            trajectory_context_dates = {}
+            
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
                     obj_type = obj.get('object_type', 'orbital')
@@ -5914,31 +6084,132 @@ def animate_objects(step, label):
                                     for d in np.linspace(0, requested_days, num=num_points)]
                         orbit_dates_lists[obj['name']] = orbit_dates
                     elif obj_type == 'trajectory':
-                        # Use the object's date range
-                        start_date = obj.get('start_date', current_date)
-                        end_date = obj.get('end_date', current_date + timedelta(days=settings['days_to_plot']))
-                        total_days = (end_date - start_date).days
-                        if total_days > 0:
-                            num_points = int(settings['trajectory_points']) + 1
-                            orbit_dates = [start_date + timedelta(days=float(d)) 
-                                        for d in np.linspace(0, total_days, num=num_points)]
-                            orbit_dates_lists[obj['name']] = orbit_dates
+                        # TWO-LAYER TRAJECTORY SYSTEM:
+                        # Context layer: Full mission (faded background)
+                        # Detail layer: Plotted Period only (solid, for fine resolution)
+                        
+                        mission_start = obj.get('start_date', current_date)
+                        mission_end = obj.get('end_date', current_date + timedelta(days=settings['days_to_plot']))
+                        mission_days = (mission_end - mission_start).total_seconds() / 86400
+                        
+                        num_points = int(settings['trajectory_points']) + 1
+                        
+                        # CONTEXT: Full mission trajectory (for background/context)
+                        if mission_days > 0:
+                            context_dates = [mission_start + timedelta(days=float(d)) 
+                                           for d in np.linspace(0, mission_days, num=num_points)]
+                            trajectory_context_dates[obj['name']] = context_dates
+                            print(f"[TRAJECTORY] {obj['name']} context: {num_points} points over {mission_days:.1f} days (full mission)", flush=True)
+                        
+                        # DETAIL: Plotted Period only (for fine resolution)
+                        # Clip to mission bounds
+                        detail_start = max(current_date, mission_start)
+                        animation_end = current_date + timedelta(days=animation_span_days)
+                        detail_end = min(animation_end, mission_end)
+                        detail_days = (detail_end - detail_start).total_seconds() / 86400
+                        
+                        if detail_days > 0:
+                            detail_dates = [detail_start + timedelta(days=float(d)) 
+                                          for d in np.linspace(0, detail_days, num=num_points)]
+                            orbit_dates_lists[obj['name']] = detail_dates
+                            print(f"[TRAJECTORY] {obj['name']} detail: {num_points} points over {detail_days:.1f} days (plotted period)", flush=True)
+                        else:
+                            # Plotted Period doesn't overlap with mission - use mission dates
+                            orbit_dates_lists[obj['name']] = trajectory_context_dates.get(obj['name'], [current_date])
                     else:
                         # Use appropriate dates for other object types
                         orbit_dates_lists[obj['name']] = dates_lists.get(obj['name'], dates_list)
 
-            # Plot actual orbits using the orbit_dates_lists
-            selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
-    #        plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True)
-            plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True, show_closest_approach=show_closest_approach_var.get())
+            # PLOT TRAJECTORY CONTEXT LAYERS (Full Mission - faded background)
+            # This provides mission context while detail layer shows plotted period
+            if trajectory_context_dates:
+                print(f"\n[TRAJECTORY CONTEXT] Plotting {len(trajectory_context_dates)} full mission trajectories...", flush=True)
+                for obj_name, context_dates in trajectory_context_dates.items():
+                    obj_info = next((obj for obj in objects if obj['name'] == obj_name), None)
+                    if not obj_info or not context_dates:
+                        continue
+                    
+                    # Get fetch ID (use helio_id for Sun-centered if available)
+                    fetch_id = obj_info['id']
+                    fetch_id_type = obj_info.get('id_type')
+                    if center_object_name == 'Sun' and 'helio_id' in obj_info:
+                        fetch_id = obj_info['helio_id']
+                        fetch_id_type = 'smallbody'
+                    
+                    # Fetch trajectory for context layer
+                    context_trajectory = fetch_trajectory(fetch_id, context_dates, center_id=center_id, id_type=fetch_id_type)
+                    
+                    if context_trajectory:
+                        x = [pos['x'] for pos in context_trajectory if pos is not None]
+                        y = [pos['y'] for pos in context_trajectory if pos is not None]
+                        z = [pos['z'] for pos in context_trajectory if pos is not None]
+                        
+                        if x:  # Only plot if we have data
+                            # Get base color and create faded version
+                            base_color = color_map(obj_name)
+                            
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=x,
+                                    y=y,
+                                    z=z,
+                                    mode='lines',
+                                    line=dict(
+                                        color=base_color,
+                                        width=2,  # Thinner than detail
+                                #        dash='dot'  # Dotted line for context
+                                    ),
+                                #    opacity=0.5,  # Faded
+                                    opacity=1.0,  
+                                    name=f"{obj_name} Full Mission",
+                                    text=[f"{obj_name} Full Mission Trajectory"] * len(x),
+                                    hovertemplate='%{text}<extra></extra>',
+                                    showlegend=True
+                                )
+                            )
 
-            print(f"[ANIMATION DEBUG] Figure has {len(fig.data)} traces after plot_actual_orbits", flush=True)
+                            print(f"[TRAJECTORY CONTEXT] Plotted {obj_name} full mission: {len(x)} points", flush=True)
+                            
+                            # Add closest approach marker for Full Mission (base color)
+                            if show_closest_approach_var.get():
+                                from apsidal_markers import add_closest_approach_marker
+                                
+                                # Build positions_dict from context trajectory data
+                                positions_dict = {}
+                                for i in range(len(x)):
+                                    if i < len(context_dates):
+                                        positions_dict[context_dates[i].isoformat()] = {
+                                            'x': x[i],
+                                            'y': y[i],
+                                            'z': z[i]
+                                        }
+                                
+                                add_closest_approach_marker(
+                                    fig=fig,
+                                    positions_dict=positions_dict,
+                                    obj_name=obj_name,
+                                    center_body=center_object_name,
+                                    color_map=color_map,
+                                    date_range=(context_dates[0], context_dates[-1]) if context_dates else None,
+                                    marker_color=base_color  # Use base color for Full Mission
+                                )
+
+            # Plot actual orbits using the orbit_dates_lists (DETAIL layer for trajectories)
+
+            selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
+            # FIXED: Added center_object_name - was defaulting to 'Sun' causing wrong hover text
+    #        plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name, show_closest_approach=show_closest_approach_var.get())
+    #        plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name, show_closest_approach=show_closest_approach_var.get(), trajectory_style='plotted_period')
+            # Pass yellow marker color for trajectory Plotted Period traces
+            plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name, show_closest_approach=show_closest_approach_var.get(), trajectory_marker_color='yellow')
+    
             for i, trace in enumerate(fig.data):
-                print(f"  Trace {i}: {trace.name} (mode: {trace.mode})", flush=True)      
+                trace_type = type(trace).__name__
+                trace_mode = getattr(trace, 'mode', 'N/A')  # Mesh3d has no mode
+                print(f"  Trace {i}: {trace.name} ({trace_type}, mode: {trace_mode})", flush=True)
 
             # ADD THIS SECTION - Plot idealized orbits
             selected_object_names = [obj['name'] for obj in selected_objects]  # Convert to names list
-            print(f"\n[ANIMATION DEBUG] Plotting Keplerian orbits for: {selected_object_names}", flush=True)
             plot_idealized_orbits(
                 fig, 
                 selected_object_names,  # Use the names list
@@ -5955,7 +6226,6 @@ def animate_objects(step, label):
                 parent_window=root  
             )
 
-            print(f"[ANIMATION DEBUG] Figure has {len(fig.data)} traces after plot_idealized_orbits", flush=True)
             for i, trace in enumerate(fig.data):
                 print(f"  Trace {i}: {trace.name}", flush=True)      
 
@@ -5967,7 +6237,6 @@ def animate_objects(step, label):
             for idx, trace in enumerate(fig.data):
                 if trace.name == 'Pluto-Charon Barycenter':
                     trace_indices['Pluto-Charon Barycenter'] = idx
-                    print(f"[ANIMATION DEBUG] Found Pluto-Charon Barycenter trace at index {idx}", flush=True)
                     break
 
             # Add exoplanet traces if in exoplanet mode
@@ -6047,9 +6316,9 @@ def animate_objects(step, label):
                                 from formatting_utils import format_maybe_float
                                 hover_text += f"Period: {planet_data['period_days']:.2f} days<br>"
                                 hover_text += f"Semi-major axis: {planet_data['semi_major_axis_au']:.4f} AU<br>"
-                                hover_text += f"Mass: {format_maybe_float(planet_data.get('mass_earth'))} M⊕<br>"
+                                hover_text += f"Mass: {format_maybe_float(planet_data.get('mass_earth'))} M??<br>"
                                 if planet_data.get('in_habitable_zone'):
-                                    hover_text += "<br><b>☀ IN HABITABLE ZONE ☀</b>"
+                                    hover_text += "<br><b>?? IN HABITABLE ZONE ??</b>"
                             
                             trace = go.Scatter3d(
                                 x=[first_pos['x']],
@@ -6106,8 +6375,8 @@ def animate_objects(step, label):
                                 hover_text = f"<b>{star_name}</b><br>"
                                 hover_text += f"Spectral Type: {star_data.get('spectral_type', 'Unknown')}<br>"
                                 hover_text += f"Temperature: {teff} K<br>"
-                                hover_text += f"Mass: {star_data.get('mass_solar', 1.0):.2f} M☉<br>"
-                                hover_text += f"Luminosity: {luminosity:.3f} L☉"
+                                hover_text += f"Mass: {star_data.get('mass_solar', 1.0):.2f} M??<br>"
+                                hover_text += f"Luminosity: {luminosity:.3f} L??"
                                 
                                 trace = go.Scatter3d(
                                     x=[first_pos['x']],
@@ -6191,8 +6460,6 @@ def animate_objects(step, label):
                         fig.add_trace(trace)
                         trace_indices[obj_name] = len(fig.data) - 1
 
-            print(f"[ANIMATION DEBUG] Created {len(trace_indices)} initial traces", flush=True)
-            print(f"[ANIMATION DEBUG] Creating frames...", flush=True)
             
             # ============ ADD COMET TAILS INTEGRATION ============
             # Conservative comet tail integration for first frame
@@ -6227,57 +6494,76 @@ def animate_objects(step, label):
             # ============ END COMET TAILS INTEGRATION ============
 
             # NOW create frames - after trace_indices has been defined
+            # =================================================================
+            # OPTIMIZATION: Only include dynamic traces in frames
+            # Static shell traces (indices 0 to static_trace_count-1) are not duplicated
+            # This dramatically reduces memory for animations with shell visualizations
+            # =================================================================
+            dynamic_trace_indices = list(range(static_trace_count, len(fig.data)))
+            print(f"[ANIMATION] Static traces: 0-{static_trace_count-1} ({static_trace_count} traces)", flush=True)
+            print(f"[ANIMATION] Dynamic traces: {static_trace_count}-{len(fig.data)-1} ({len(dynamic_trace_indices)} traces)", flush=True)
+            
+            # Helper function to convert absolute trace index to frame_data index
+            def to_frame_idx(absolute_idx):
+                """Convert absolute fig.data index to frame_data index.
+                Returns None if this is a static trace (not in frame_data)."""
+                if absolute_idx >= static_trace_count:
+                    return absolute_idx - static_trace_count
+                return None  # Static trace, not in frame_data
+            
             for i in range(N):
-                frame_data = list(fig.data)  # Start with all base traces
+                # Only copy dynamic traces (skip static shell traces at indices 0 to static_trace_count-1)
+                frame_data = [copy.deepcopy(fig.data[idx]) for idx in dynamic_trace_indices]
                 current_date = dates_list[i]
-                
-                print(f"[ANIMATION DEBUG] Creating frame {i+1}/{N} for date {current_date}", flush=True)
-                
-                # Simply deep copy all traces - this preserves everything
-                for trace in fig.data:
-                    frame_data.append(copy.deepcopy(trace))
                 
                 # Update position traces for selected objects
                 # First, update exoplanet positions
                 for obj_name in exoplanet_positions_over_time:
                     if obj_name in trace_indices:
                         trace_idx = trace_indices[obj_name]
+                        frame_idx = to_frame_idx(trace_idx)
+                        if frame_idx is None:
+                            continue  # Skip static traces
                         positions = exoplanet_positions_over_time[obj_name]
                         
                         if i < len(positions):
                             pos = positions[i]
-                            frame_data[trace_idx].x = [pos['x']]
-                            frame_data[trace_idx].y = [pos['y']]
-                            frame_data[trace_idx].z = [pos['z']]
-                            frame_data[trace_idx].visible = True
+                            frame_data[frame_idx].x = [pos['x']]
+                            frame_data[frame_idx].y = [pos['y']]
+                            frame_data[frame_idx].z = [pos['z']]
+                            frame_data[frame_idx].visible = True
                         else:
-                            frame_data[trace_idx].visible = False
+                            frame_data[frame_idx].visible = False
                 
                 # Update binary star positions
                 for star_name in binary_star_positions_over_time:
                     if star_name in trace_indices:
                         trace_idx = trace_indices[star_name]
+                        frame_idx = to_frame_idx(trace_idx)
+                        if frame_idx is None:
+                            continue  # Skip static traces
                         positions = binary_star_positions_over_time[star_name]
                         
                         if i < len(positions):
                             pos = positions[i]
-                            frame_data[trace_idx].x = [pos['x']]
-                            frame_data[trace_idx].y = [pos['y']]
-                            frame_data[trace_idx].z = [pos['z']]
-                            frame_data[trace_idx].visible = True
+                            frame_data[frame_idx].x = [pos['x']]
+                            frame_data[frame_idx].y = [pos['y']]
+                            frame_data[frame_idx].z = [pos['z']]
+                            frame_data[frame_idx].visible = True
                         else:
-                            frame_data[trace_idx].visible = False
+                            frame_data[frame_idx].visible = False
 
                 # Update Pluto-Charon Barycenter position (derived from Charon)
-                # In Pluto-centered view, barycenter is at fixed distance along Pluto→Charon direction
+                # In Pluto-centered view, barycenter is at fixed distance along Pluto-Charon direction
                 if 'Pluto-Charon Barycenter' in trace_indices and center_object_name == 'Pluto':
                     trace_idx = trace_indices['Pluto-Charon Barycenter']
+                    frame_idx = to_frame_idx(trace_idx)
                     charon_positions = positions_over_time.get('Charon')
                     
-                    if charon_positions and i < len(charon_positions) and charon_positions[i] is not None:
+                    if frame_idx is not None and charon_positions and i < len(charon_positions) and charon_positions[i] is not None:
                         charon_pos = charon_positions[i]
                         if 'x' in charon_pos:
-                            # Barycenter distance from Pluto center: ~2,050 km ≈ 0.0000137 AU
+                            # Barycenter distance from Pluto center: ~2,050 km = 0.0000137 AU
                             BARYCENTER_DIST_AU = 0.0000137
                             
                             # Calculate unit vector from Pluto toward Charon
@@ -6290,12 +6576,12 @@ def animate_objects(step, label):
                                 bary_y = BARYCENTER_DIST_AU * (cy / charon_dist)
                                 bary_z = BARYCENTER_DIST_AU * (cz / charon_dist)
                                 
-                                frame_data[trace_idx].x = [bary_x]
-                                frame_data[trace_idx].y = [bary_y]
-                                frame_data[trace_idx].z = [bary_z]
-                                frame_data[trace_idx].visible = True
+                                frame_data[frame_idx].x = [bary_x]
+                                frame_data[frame_idx].y = [bary_y]
+                                frame_data[frame_idx].z = [bary_z]
+                                frame_data[frame_idx].visible = True
 
-                                # Then update regular solar system objects
+                # Then update regular solar system objects
                 for obj in objects:
                         if obj['var'].get() == 1 and obj['name'] != center_object_name:
                             obj_name = obj['name']
@@ -6306,6 +6592,9 @@ def animate_objects(step, label):
                                         
                             if obj_name in positions_over_time and obj_name in trace_indices:
                                 trace_idx = trace_indices[obj_name]
+                                frame_idx = to_frame_idx(trace_idx)
+                                if frame_idx is None:
+                                    continue  # Skip static traces
                                 obj_positions = positions_over_time[obj_name]
                                             
                                 if i < len(obj_positions) and obj_positions[i] is not None and 'x' in obj_positions[i]:
@@ -6331,22 +6620,24 @@ def animate_objects(step, label):
                                         full_hover_text += satellite_note
 
                                     # Update the trace with new position data
-                                    frame_data[trace_idx].x = [obj_data['x']]
-                                    frame_data[trace_idx].y = [obj_data['y']]
-                                    frame_data[trace_idx].z = [obj_data['z']]
-                                    frame_data[trace_idx].text = [full_hover_text]
-                                    frame_data[trace_idx].customdata = [minimal_hover_text]
-                                    frame_data[trace_idx].visible = True
+                                    frame_data[frame_idx].x = [obj_data['x']]
+                                    frame_data[frame_idx].y = [obj_data['y']]
+                                    frame_data[frame_idx].z = [obj_data['z']]
+                                    frame_data[frame_idx].text = [full_hover_text]
+                                    frame_data[frame_idx].customdata = [minimal_hover_text]
+                                    frame_data[frame_idx].visible = True
                                 else:
                                     # If position is missing for this frame, make the object invisible
-                                    frame_data[trace_idx].visible = False
+                                    frame_data[frame_idx].visible = False
 
+                # Create frame with selective trace update
+                # The traces parameter tells Plotly which fig.data indices this frame updates
                 frames.append(go.Frame(
                     data=frame_data,
+                    traces=dynamic_trace_indices,  # Only update dynamic traces, not static shells
                     name=str(dates_list[i].strftime('%Y-%m-%d %H:%M'))
                 ))
 
-            print(f"[ANIMATION DEBUG] Created {len(frames)} frames", flush=True)
 
             # Get axis range using orbital parameters (same as static plots)
             if is_exoplanet_mode and exo_objects:
@@ -6371,7 +6662,7 @@ def animate_objects(step, label):
                     axis_range = calculate_exoplanet_axis_range(all_exo_planets)
                     # Convert to list for Plotly
                     axis_range = [-axis_range, axis_range]
-                    print(f"[EXOPLANET ANIMATION] Using exoplanet axis range: ±{axis_range[1]:.4f} AU", flush=True)
+                    print(f"[EXOPLANET ANIMATION] Using exoplanet axis range: +/-{axis_range[1]:.4f} AU", flush=True)
                 else:
                     axis_range = get_animation_axis_range(
             #            scale_var, custom_scale_entry, objects, planetary_params, 
@@ -6506,7 +6797,7 @@ def animate_objects(step, label):
                                                 'transition': {'duration': 0}}])
                         ],
                         x=0.1,
-                        y=0.9
+                        y=0.85
                     )
                 ]
             )
@@ -6529,7 +6820,6 @@ def animate_objects(step, label):
             # First, assign frames to the figure
             fig.frames = frames
 
-            print("[ANIMATION DEBUG] Animation setup complete", flush=True)            
 
             # Then update layout with sliders
             fig.update_layout(sliders=sliders)
@@ -6538,20 +6828,27 @@ def animate_objects(step, label):
             fig.layout.sliders[0].active = 0
 
             # Explicitly sync the displayed data with the first frame's data
+            # Note: frames now only contain dynamic traces, so we need to map indices
             for obj_name, trace_idx in trace_indices.items():
-                if trace_idx < len(fig.data) and 0 < len(frames) and trace_idx < len(frames[0].data):
-                    fig.data[trace_idx].x = frames[0].data[trace_idx].x
-                    fig.data[trace_idx].y = frames[0].data[trace_idx].y
-                    fig.data[trace_idx].z = frames[0].data[trace_idx].z
-                    fig.data[trace_idx].text = frames[0].data[trace_idx].text
-                    fig.data[trace_idx].customdata = frames[0].data[trace_idx].customdata
-                    fig.data[trace_idx].visible = frames[0].data[trace_idx].visible
+                frame_idx = trace_idx - static_trace_count  # Convert to frame index
+                if (trace_idx >= static_trace_count and  # Only dynamic traces
+                    trace_idx < len(fig.data) and 
+                    len(frames) > 0 and 
+                    frame_idx < len(frames[0].data)):
+                    fig.data[trace_idx].x = frames[0].data[frame_idx].x
+                    fig.data[trace_idx].y = frames[0].data[frame_idx].y
+                    fig.data[trace_idx].z = frames[0].data[frame_idx].z
+                    fig.data[trace_idx].text = frames[0].data[frame_idx].text
+                    fig.data[trace_idx].customdata = frames[0].data[frame_idx].customdata
+                    fig.data[trace_idx].visible = frames[0].data[frame_idx].visible
 
             # Add hover toggle buttons
             fig = add_hover_toggle_buttons(fig)
-        #    fig = add_camera_center_button(fig, center_object_name)
+
             # Add camera view buttons with dropdown for different target objects
             fig = add_look_at_object_buttons(fig, initial_positions, center_object_name)            
+          
+            fig = add_fly_to_object_buttons(fig, initial_positions, center_object_name)  # NEW
 
             # Add URL buttons before showing/saving
             fig = add_url_buttons(fig, objects, selected_objects)            
@@ -6864,9 +7161,9 @@ def sync_end_date_from_days():
             days = (end - start).days
             days_to_plot_entry.delete(0, tk.END)
             days_to_plot_entry.insert(0, str(days))
-            horizons_warning.config(text="⚠️ End date capped at Horizons limit!", fg='red')
+            horizons_warning.config(text="? End date capped at Horizons limit!", fg='red')
         else:
-            horizons_warning.config(text="⚠️ JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199", fg='red')
+            horizons_warning.config(text="? JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199", fg='red')
         
         # Update end date fields
         end_entry_year.delete(0, tk.END)
@@ -6902,7 +7199,7 @@ def sync_days_from_dates():
         days = (end - start).days
         
         if days < 0:
-            horizons_warning.config(text="⚠️ End date must be after start date!", fg='red')
+            horizons_warning.config(text="? End date must be after start date!", fg='red')
             days = 0
         
         days_to_plot_entry.delete(0, tk.END)
@@ -6977,7 +7274,7 @@ CreateToolTip(vernal_equinox_button, "Fill the next vernal equinox (March equino
 
 # Horizons limit warning
 horizons_warning = tk.Label(date_frame, 
-    text="⚠️ JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199",
+    text="? JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199",
     fg='red', font=("Arial", 8, "italic"))
 horizons_warning.grid(row=2, column=0, columnspan=8, pady=(2,0))
 
@@ -7001,9 +7298,9 @@ def sync_end_date_from_days():
             days = (end - start).days
             days_to_plot_entry.delete(0, tk.END)
             days_to_plot_entry.insert(0, str(days))
-            horizons_warning.config(text="⚠️ End date capped at Horizons limit!", fg='red')
+            horizons_warning.config(text="? End date capped at Horizons limit!", fg='red')
         else:
-            horizons_warning.config(text="⚠️ JPL Horizons limits: Jan 1900 - Dec 2199", fg='orange')
+            horizons_warning.config(text="? JPL Horizons limits: Jan 1900 - Dec 2199", fg='orange')
         
         # Update end date fields
         end_entry_year.delete(0, tk.END)
@@ -7328,7 +7625,7 @@ CreateToolTip(earth_crust_checkbutton, earth_crust_info)
 earth_system_viz_checkbutton = tk.Checkbutton(
     earth_shell_options_frame, 
 #    text="-- Earth System Visualization", 
-    text="-- 🌍 Earth System Visualization",  # Earth emoji
+    text="-- ?? Earth System Visualization",  # Earth emoji
     variable=earth_system_viz_var,
     font=('Arial', 9, 
     #      'bold'
@@ -7345,7 +7642,7 @@ CreateToolTip(
     earth_system_viz_checkbutton,
     "***CLICK ONCE -- NO NEED TO PLOT***\n\n" 
     "Open Earth System Visualization hub showing climate data visualizations.\n"
-    "Currently includes the Keeling Curve (Mauna Loa CO₂ 1958-2025).\n"
+    "Currently includes the Keeling Curve (Mauna Loa CO?? 1958-2025).\n"
     "\"Data preservation is climate action.\""
 )
 
@@ -8006,115 +8303,18 @@ create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-05-15 to 2025-08
 
 # These functions should be defined AFTER the GUI widgets exist
 
+# =============================================================================
+# DEPRECATED: toggle_special_fetch_mode
+# No longer needed with two-layer trajectory system. Commented out Dec 2024.
+# =============================================================================
 def toggle_special_fetch_mode():
-    """Toggle visual feedback for special fetch mode"""
-    if special_fetch_var.get() == 1:
-        # Cyan background for special mode
-        for widget in [default_interval_entry,
-                      trajectory_interval_entry,
-                      satellite_interval_entry]:
-            widget.config(bg='cyan')
-
-        update_status_display("Special fetch mode ENABLED - data will NOT be cached", 'special')
-        print("[SPECIAL MODE] Enabled - subsequent fetches will use temporary cache", flush=True)
-        
-        # Check for satellite precession warnings
-        try:
-            # Get selected objects
-            selected_objects = [obj for obj in objects if obj['var'].get() == 1]
-            center_object_name = center_object_var.get()
-            
-            # Get the dates directly
-            start_date = get_date_from_gui()
-            end_date = get_end_date_from_gui()
-            
-            # Calculate precession info
-            info_messages = calculate_satellite_precession_info(
-                selected_objects, 
-                start_date, 
-                end_date,
-                center_object_name
-            )
-                        
-            if info_messages:
-                # Create a popup window for the precession information
-                precession_window = tk.Toplevel(root)
-                precession_window.title("Satellite Orbit Precession Information")
-                precession_window.geometry("600x400")
-                
-                # Create scrolled text widget
-                text_widget = scrolledtext.ScrolledText(
-                    precession_window,
-                    wrap='word',
-                    width=70,
-                    height=20,
-                    font=("Arial", 10)
-                )
-                text_widget.pack(padx=10, pady=10, fill='both', expand=True)
-                
-                # Add the information
-                text_widget.insert(tk.END, "ORBITAL PRECESSION INFORMATION:\n\n")
-                
-                has_warnings = False
-                for info in info_messages:
-                    if "⚠️" in info:
-                        has_warnings = True
-                        # Insert warning messages in orange
-                        text_widget.insert(tk.END, info + "\n\n", "warning")
-                    else:
-                        # Insert info messages in blue
-                        text_widget.insert(tk.END, info + "\n\n", "info")
-                
-                # Configure tags for coloring
-                text_widget.tag_config("warning", foreground="orange")
-                text_widget.tag_config("info", foreground="blue")
-                
-                # Make read-only
-                text_widget.config(state='disabled')
-                
-                # Add OK button
-                ok_button = tk.Button(
-                    precession_window,
-                    text="OK - I understand",
-                    command=precession_window.destroy,
-                    bg='lightblue'
-                )
-                ok_button.pack(pady=5)
-                
-                # Also update status display with summary
-                if has_warnings:
-                    update_status_display(
-                        f"⚠️ Precession warnings for {len([m for m in info_messages if '⚠️' in m])} satellites - see popup",
-                        'warning'
-                    )
-                else:
-                    update_status_display(
-                        f"ℹ️ Precession info shown for {len(info_messages)} satellites",
-                        'info'
-                    )
-                    
-        except Exception as e:
-            print(f"Error checking precession: {e}", flush=True)
-            
-    else:
-        # Normal background
-        for widget in [default_interval_entry,
-                      trajectory_interval_entry,
-                      satellite_interval_entry]:
-            widget.config(bg='white')
-
-        # Clear temp cache
-        global temp_cache
-        temp_cache = {}
-        if os.path.exists(TEMP_CACHE_FILE):
-            os.remove(TEMP_CACHE_FILE)
-        update_status_display("Special fetch mode DISABLED - temp cache cleared", 'info')
-        print("[SPECIAL MODE] Disabled - temporary cache cleared", flush=True)
+    """DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail"""
+    pass  # Function kept as stub for compatibility but does nothing
 
 
 # ============== EXOPLANETARY SYSTEMS GUI ==============
 exoplanet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, 
-                                text="Exoplanetary Systems 🌍🌠")
+                                text="Exoplanetary Systems ????")
 exoplanet_frame.pack(pady=(10, 5), fill='x')
 CreateToolTip(exoplanet_frame, 
               "***IMPORTANT: RE-SET THE CENTER OBJECT FROM \"Sun\" TO THE EXO-PLANET SYSTEM\n" 
@@ -8150,7 +8350,7 @@ create_exoplanet_checkbutton("TRAPPIST-1 System (40.5 ly)", trappist1_star_var, 
 create_exoplanet_checkbutton("  - TRAPPIST-1 b (1.5d)", trappist1b_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 c (2.4d)", trappist1c_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 d (4.0d) [HZ]", trappist1d_var)
-create_exoplanet_checkbutton("  - TRAPPIST-1 e (6.1d) [HZ] ★", trappist1e_var)
+create_exoplanet_checkbutton("  - TRAPPIST-1 e (6.1d) [HZ] ??", trappist1e_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 f (9.2d) [HZ]", trappist1f_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 g (12.4d) [HZ]", trappist1g_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 h (18.8d)", trappist1h_var)
@@ -8171,7 +8371,7 @@ tk.Label(exoplanet_frame, text="").pack()  # Spacer
 # Proxima Centauri System (4.24 light-years - NEAREST!)
 create_exoplanet_checkbutton("Proxima Centauri (4.24 ly) NEAREST!", proxima_star_var, is_star=True)
 #create_exoplanet_checkbutton("  - Proxima Centauri (star)", proxima_star_var)
-create_exoplanet_checkbutton("  - Proxima b (11.2d) [HZ] ★", proximab_var)
+create_exoplanet_checkbutton("  - Proxima b (11.2d) [HZ] ??", proximab_var)
 create_exoplanet_checkbutton("  - Proxima d (5.1d)", proximad_var)
 
 
@@ -8208,22 +8408,40 @@ center_frame.pack(pady=(5, 5), fill='x')
 
 center_object_var = tk.StringVar(value='Sun')
 
-# Build center options dynamically: Solar System + Exoplanet hosts
-solar_system_centers = ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 
-                    'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 
-                    'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Pluto-Charon Barycenter',
-                    'Arrokoth/New_Horizons', 'Haumea', 'Makemake', 'Eris'
-                    ]
+# Build center options - only objects with numeric IDs can be Horizons centers
+# Objects with center_id field can also be centers (uses numeric ID when centering)
+def can_be_horizons_center(obj):
+    """Check if object can be used as Horizons coordinate center."""
+    excluded_object_types = {'hypothetical', 'exoplanet', 'exo_host_star', 
+                             'exo_barycenter', 'exo_binary_star'}
+    if obj.get('object_type') in excluded_object_types:
+        return False
+    
+    # Has explicit center_id? Can be centered
+    if obj.get('center_id'):
+        return True
+    
+    # Otherwise check if main ID is numeric (negative allowed for spacecraft)
+    obj_id = str(obj.get('id', ''))
+    id_to_check = obj_id.lstrip('-')
+    return id_to_check.isdigit()
 
-# Add exoplanet host stars from objects list
+# center_options = [obj['name'] for obj in objects if can_be_horizons_center(obj)]
+
+# print(f"[CENTER MENU] Available centers: {center_options}", flush=True)
+
+# Solar system centers (uses Horizons)
+solar_system_centers = [obj['name'] for obj in objects if can_be_horizons_center(obj)]
+
+# Add exoplanet host stars (uses Keplerian orbits, not Horizons)
 exoplanet_host_stars = [obj['name'] for obj in objects 
                         if obj.get('object_type') in ['exo_host_star', 'exo_barycenter']]                        
 
-# Combine: Solar System first, then exoplanet hosts
+# Combine both
 center_options = solar_system_centers + exoplanet_host_stars
-#center_options = solar_system_centers 
 
 print(f"[CENTER MENU] Available centers: {center_options}", flush=True)
+
 
 center_menu = ttk.Combobox(center_frame, textvariable=center_object_var, 
                           values=center_options, width=25)
@@ -8282,10 +8500,10 @@ CreateToolTip(apsidal_checkbox,
     "APSIDAL MARKERS (for objects orbiting the center)\n\n"
     "Shows perihelion/aphelion (or perigee/apogee, perijove/apojove, etc.)\n"
     "calculated from orbital elements.\n\n"
-    "• Uses proper terminology for each central body\n"
-    "• Independent of plot date range\n"
-    "• Shows true orbital apsides whenever they occur\n"
-    "• Best for: Planets, moons, satellites in bound orbits\n\n"
+    "? Uses proper terminology for each central body\n"
+    "? Independent of plot date range\n"
+    "? Shows true orbital apsides whenever they occur\n"
+    "? Best for: Planets, moons, satellites in bound orbits\n\n"
     "Two types:\n"
     "  Keplerian: Calculated from Keplerian elements (geometric)\n"
     "  Actual: From JPL ephemeris with perturbations (when available)")
@@ -8303,54 +8521,61 @@ closest_approach_checkbox.pack(anchor='w', padx=10, pady=5)
 CreateToolTip(closest_approach_checkbox,
     "CLOSEST APPROACH MARKERS (for flybys and encounters)\n\n"
     "Shows the minimum distance point within the plotted trajectory.\n\n"
-    "• Uses proper terminology for each central body\n"
-    "• Based on actual JPL ephemeris positions\n"
-    "• ⚠️ LIMITED TO PLOTTED DATE RANGE\n"
-    "• Updates automatically as JPL refines orbits\n\n"
+    "? Uses proper terminology for each central body\n"
+    "? Based on actual JPL ephemeris positions\n"
+    "? ? LIMITED TO PLOTTED DATE RANGE\n"
+    "? Updates automatically as JPL refines orbits\n\n"
     "Best for:\n"
-    "  • Comets/asteroids passing near planets\n"
-    "  • Spacecraft encounters and flybys\n"
-    "  • Near-Earth object tracking\n\n"
+    "  ? Comets/asteroids passing near planets\n"
+    "  ? Spacecraft encounters and flybys\n"
+    "  ? Near-Earth object tracking\n\n"
     "Note: For bound orbits (planets, moons), use apsidal markers instead\n"
     "as they find true perihelion/aphelion independent of date range.")
 
-# Create a frame for the interval settings
-interval_frame = tk.LabelFrame(controls_frame, text="Display Settings - How many points to show from cached data")
+# Create a frame for the display resolution settings
+interval_frame = tk.LabelFrame(controls_frame, text="Display Resolution (10-100 points recommended)")
 interval_frame.pack(pady=(5, 5), fill='x')
 CreateToolTip(interval_frame, 
-    "DISPLAY RESOLUTION - Controls how many points are shown in your plots\n\n"
-    "These settings determine the visual smoothness of orbits and trajectories:\n"
-    "• Higher numbers = more points = smoother curves but slower rendering\n"
-    "• Lower numbers = fewer points = faster rendering but angular orbits\n\n"
-    "RECOMMENDED SETTINGS:\n"
-    "• Trajectory objects (missions/comets): 50-100 for smooth paths\n"
-    "• Orbital objects (planets): 50-365 depending on how much orbit to show\n"
-    "• Satellites: 50-100 points over your selected days for smooth orbits\n\n"
-    "TIPS:\n"
-    "• For full planetary orbits, use 365 points (1 per degree)\n"
-    "• For fast animations, reduce points to 20-30 for better performance\n"
-    "• For publication-quality plots, increase to 100-200 points\n\n"
-    "NOTE: These settings work together with fetch intervals below.\n"
-    "You can only display data that exists in your cache!"
+    "DISPLAY RESOLUTION - Number of points to fetch and display\n\n"
+    "These settings control trajectory detail level:\n"
+    "- Higher numbers = smoother curves but slower rendering\n"
+    "- Lower numbers = faster rendering but angular orbits\n\n"
+    "RECOMMENDED RANGE: 10-100 points\n"
+    "- Default: 50 points (good balance)\n"
+    "- Minimum: 10 points (fast, coarse)\n"
+    "- Maximum: 100 points (detailed, slower)\n\n"
+    "OBJECT TYPES:\n"
+    "- Orbital: Planets, dwarf planets, TNOs\n"
+    "- Trajectory: Missions, comets, interstellar objects\n"
+    "- Satellite: Moons orbiting the center body\n\n"
+    "NOTE: Trajectory objects now use a TWO-LAYER system:\n"
+    "- Full Mission layer (dotted) shows complete trajectory\n"
+    "- Plotted Period layer (solid) shows viewed dates in detail"
 )
 
 # Orbital objects (planets, dwarf planets, TNOs)
-orbital_interval_label = tk.Label(interval_frame, text="Orbital objects - points to plot:")
+orbital_interval_label = tk.Label(interval_frame, text="Orbital objects (10-100):")
 orbital_interval_label.grid(row=0, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
 orbital_points_entry = tk.Entry(interval_frame, width=5)  # Renamed from planet_interval_entry
 orbital_points_entry.grid(row=0, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
 orbital_points_entry.insert(0, '50')  # Default value
 CreateToolTip(orbital_interval_label, 
-    "For planets, dwarf planets, and trans-Neptunian objects. Higher value = more points = smoother orbit.")
+    "Points to fetch for planets, dwarf planets, and TNOs.\n"
+    "Higher value = more points = smoother orbit curves.\n"
+    "Recommended: 50 for normal use, up to 100 for detailed views.")
 
 # Trajectory objects (combines comets, asteroids, missions, interstellar)
-trajectory_interval_label = tk.Label(interval_frame, text="Trajectory objects - points to plot:")
+trajectory_interval_label = tk.Label(interval_frame, text="Trajectory objects (10-100):")
 trajectory_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(5, 2), sticky='w')
 trajectory_points_entry = tk.Entry(interval_frame, width=5)  # This replaces both comet and mission entries
 trajectory_points_entry.grid(row=2, column=1, padx=(0, 5), pady=(5, 2), sticky='w')
 trajectory_points_entry.insert(0, '50')  # Default value
 CreateToolTip(trajectory_interval_label, 
-    "For missions, comets, asteroids, and interstellar objects. Higher value = more points = smoother orbit.")
+    "Points to fetch for missions, comets, and interstellar objects.\n\n"
+    "TWO-LAYER SYSTEM:\n"
+    "- Full Mission layer uses these points spread across entire trajectory\n"
+    "- Plotted Period layer uses these points for just the viewed dates\n"
+    "This gives you both context AND fine detail automatically.")
 
 # Satellite settings remain the same but with clearer labels
 satellite_days_label = tk.Label(interval_frame, text="Satellite cache span (days):")
@@ -8361,24 +8586,20 @@ satellite_days_entry.insert(0, '50')  # Default value
 CreateToolTip(satellite_days_label, 
     "CACHE SETTINGS - Days of satellite orbit data to store in cache\n\n"
     "This controls how much satellite trajectory data is fetched and cached:\n"
-    "• Recommended: 30-90 days for good coverage\n"
-    "• Longer spans = more complete orbits in cache\n"
-    "• Does NOT affect display range (use 'Days to Plot' for that)\n\n"
+    "? Recommended: 30-90 days for good coverage\n"
+    "? Longer spans = more complete orbits in cache\n"
+    "? Does NOT affect display range (use 'Days to Plot' for that)\n\n"
     "Example: Set to 50 to cache ~2 lunar orbits worth of data")
 
-satellite_points_label = tk.Label(interval_frame, text="Satellite display resolution:")
+satellite_points_label = tk.Label(interval_frame, text="Satellite objects (10-100):")
 satellite_points_label.grid(row=4, column=0, padx=(5, 5), pady=(2, 5), sticky='w')
 satellite_points_entry = tk.Entry(interval_frame, width=5)  # Renamed from sat_period_entry
 satellite_points_entry.grid(row=4, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
 satellite_points_entry.insert(0, '50')  # Default value (changed from '1' to match divisor pattern)
 CreateToolTip(satellite_points_label, 
-    "DISPLAY RESOLUTION - Points to show from cached satellite data\n\n"
-    "Controls visual smoothness of satellite orbits:\n"
-    "• 20-30 points: Fast rendering, angular orbits\n"
-    "• 50-100 points: Smooth orbits (recommended)\n"
-    "• 100+ points: Very smooth but slower\n\n"
-    "Note: This is display resolution only. Actual date range\n"
-    "shown is controlled by 'Days to Plot' setting above.")
+    "Points to fetch for moons orbiting the center body.\n"
+    "Higher value = more points = smoother orbit curves.\n"
+    "Recommended: 50 for normal use, up to 100 for detailed views.")
 
 # Create a frame for animation settings
 animation_frame = tk.LabelFrame(controls_frame, text="Animation Settings")
@@ -8388,7 +8609,7 @@ num_frames_label = tk.Label(animation_frame, text="Enter Hours, Days, Weeks, Mon
 num_frames_label.pack(padx=10, pady=(5, 2), anchor='w')
 num_frames_entry = tk.Entry(animation_frame, width=5)
 num_frames_entry.pack(padx=10, pady=(2, 5), anchor='w')
-num_frames_entry.insert(0, '28')  # Default number of frames
+num_frames_entry.insert(0, '29')  # Default number of frames
 CreateToolTip(num_frames_entry, "Do not exceed 130 to avoid timing out JPL Horizons' data fetch.")
 
 """
@@ -8397,26 +8618,23 @@ orbit_path_frame = tk.LabelFrame(controls_frame, text="Orbit Path Fetching Contr
 orbit_path_frame.pack(pady=(5, 5), fill='x')
 """
 
-# Create a frame for the interval settings
-orbit_path_frame = tk.LabelFrame(controls_frame, text="Data Fetching Settings: resolution when getting data from JPL Horizons")
+# Create a frame for the display resolution settings
+orbit_path_frame = tk.LabelFrame(controls_frame, text="Display Resolution Settings")
 orbit_path_frame.pack(pady=(5, 5), fill='x')
 CreateToolTip(orbit_path_frame,
-    "DATA FETCH RESOLUTION - Controls data retrieved from JPL Horizons\n\n"
-    "These intervals determine how often data points are fetched and cached:\n"
-    "• Smaller intervals = more data points = larger cache but more accurate\n"
-    "• Larger intervals = fewer points = smaller cache but less detail\n\n"
-    "RECOMMENDED INTERVALS:\n"
-    "• Orbital objects: '1d' (daily) for planets, '12h' for eccentric orbits\n"
-    "• Trajectories: '6h' for missions, '2h' near comet perihelion\n"
-    "• Satellites: '1h' or less for close moons (Phobos needs '15m')\n\n"
-    "EXAMPLES:\n"
-    "• Earth for 1 year with '1d' = 365 data points\n"
-    "• Phobos for 7 days with '1h' = 168 data points\n"
-    "• Comet near Sun with '2h' = 12 points per day\n\n"
-    "IMPORTANT:\n"
-    "• Your display settings above are limited by this data\n"
-    "• Can't show hourly positions if you only fetched daily data\n"
-    "• Balance accuracy needs with storage space"
+    "DISPLAY RESOLUTION - Controls number of points fetched and displayed\n\n"
+    "These settings determine trajectory detail level:\n"
+    "- Higher values = smoother curves but slower rendering\n"
+    "- Lower values = faster but less detail\n\n"
+    "RECOMMENDED RANGE: 10-100 points\n"
+    "- Default: 51 points (good balance)\n"
+    "- Minimum: 10 points (fast, coarse)\n"
+    "- Maximum: 100 points (detailed, slower)\n\n"
+    "NOTE: For trajectory objects (missions, comets), the system\n"
+    "automatically creates TWO layers:\n"
+    "- Full Mission: dotted line showing complete trajectory\n"
+    "- Plotted Period: solid line with fine detail for viewed dates\n\n"
+    "This provides both context and detail without manual tuning."
 )
 
 # After orbit_path_frame, where you want to position the status frame:
@@ -8452,74 +8670,83 @@ status_display = tk.Label(
 )
 status_display.pack(anchor='w', padx=5, pady=5)
 
+# =============================================================================
+# DEPRECATED: Special Fetch Mode and Interval Settings
+# The two-layer trajectory system provides automatic detail resolution,
+# making manual interval control unnecessary. Commented out Dec 2024.
+# =============================================================================
 # Add special fetch checkbox INSIDE the orbit_path_frame at the top
-special_fetch_var = tk.IntVar(value=0)
-special_fetch_check = tk.Checkbutton(
-    orbit_path_frame,  # Now inside the frame
-    text="Use updated intervals below to fetch data (will not be cached):",
-    variable=special_fetch_var,
-    command=toggle_special_fetch_mode,
-    font=("Arial", 9, 
-    #      "bold"
-          ),
-#    fg='darkblue',
-    wraplength=350
-)
-special_fetch_check.grid(row=0, column=0, columnspan=2, padx=5, pady=(5, 5), sticky='w')
-CreateToolTip(special_fetch_check,
-    "SPECIAL FETCH MODE - For temporary custom data needs\n\n"
-    "When checked:\n"
-    "• Uses the intervals below instead of standard cached data\n"
-    "• Perfect for testing different resolutions\n"
-    "• Data is NOT saved to permanent cache\n"
-    "• Useful for detailed analysis of specific time periods\n\n"
-    "WHEN TO USE:\n"
-    "• Studying satellite orbits with precession\n"
-    "• Analyzing spacecraft encounters needing fine detail\n"
-    "• Investigating comet behavior near perihelion\n"
-    "• Testing optimal intervals before updating main cache\n\n"
-    "EXAMPLES:\n"
-    "• Phobos with '15m' intervals to see orbital precession\n"
-    "• Parker Solar Probe with '1h' during close approach\n"
-    "• Comet with '30m' intervals during outburst\n\n"
-    "NOTE: Uncheck between uses to clear temporary cache"
-)
+special_fetch_var = tk.IntVar(value=0)  # Keep variable but always disabled
+# special_fetch_check = tk.Checkbutton(
+#     orbit_path_frame,  # Now inside the frame
+#     text="Use updated intervals below to fetch data (will not be cached):",
+#     variable=special_fetch_var,
+#     command=toggle_special_fetch_mode,
+#     font=("Arial", 9, 
+#     #      "bold"
+#           ),
+# #    fg='darkblue',
+#     wraplength=350
+# )
+# special_fetch_check.grid(row=0, column=0, columnspan=2, padx=5, pady=(5, 5), sticky='w')
+# CreateToolTip(special_fetch_check,
+#     "SPECIAL FETCH MODE - For temporary custom data needs\n\n"
+#     "When checked:\n"
+#     "- Uses the intervals below instead of standard cached data\n"
+#     "- Perfect for testing different resolutions\n"
+#     "- Data is NOT saved to permanent cache\n"
+#     "- Useful for detailed analysis of specific time periods\n\n"
+#     "WHEN TO USE:\n"
+#     "- Studying satellite orbits with precession\n"
+#     "- Analyzing spacecraft encounters needing fine detail\n"
+#     "- Investigating comet behavior near perihelion\n"
+#     "- Testing optimal intervals before updating main cache\n\n"
+#     "EXAMPLES:\n"
+#     "- Phobos with '15m' intervals to see orbital precession\n"
+#     "- Parker Solar Probe with '1h' during close approach\n"
+#     "- Comet with '30m' intervals during outburst\n\n"
+#     "NOTE: Uncheck between uses to clear temporary cache"
+# )
 
 # Add a separator line after the checkbox
 #ttk.Separator(orbit_path_frame, orient='horizontal').grid(
 #    row=1, column=0, columnspan=2, sticky='ew', padx=5, pady=(0, 5)
 #)
 
+# DEPRECATED: Interval entries - no longer needed with two-layer trajectory system
 # Default interval for orbital objects (row 2)
-default_interval_label = tk.Label(orbit_path_frame, text="Orbital objects interval (planets, asteroids, TNOs):")
-default_interval_label.grid(row=1, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
-default_interval_entry = tk.Entry(orbit_path_frame, width=5)
-default_interval_entry.grid(row=1, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+# default_interval_label = tk.Label(orbit_path_frame, text="Orbital objects interval (planets, asteroids, TNOs):")
+# default_interval_label.grid(row=1, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+default_interval_entry = tk.Entry(orbit_path_frame, width=5)  # Keep for code compatibility
+# default_interval_entry.grid(row=1, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
 default_interval_entry.insert(0, '1d')
-CreateToolTip(default_interval_label, 
-    "Interval for fetching orbital objects (planets, asteroids, TNOs).\n"
-    "Examples: '1d' = daily, '12h' = twice daily, '6h' = 4x daily")
+# CreateToolTip(default_interval_label, 
+#     "Interval for fetching orbital objects (planets, asteroids, TNOs).\n"
+#     "Examples: '1d' = daily, '12h' = twice daily, '6h' = 4x daily")
 
 # Trajectory interval (row 3)
-trajectory_interval_label = tk.Label(orbit_path_frame, text="Trajectory objects interval (missions, comets, interstellar):")
-trajectory_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
-trajectory_interval_entry = tk.Entry(orbit_path_frame, width=5)
-trajectory_interval_entry.grid(row=2, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
+# trajectory_interval_label = tk.Label(orbit_path_frame, text="Trajectory objects interval (missions, comets, interstellar):")
+# trajectory_interval_label.grid(row=2, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+trajectory_interval_entry = tk.Entry(orbit_path_frame, width=5)  # Keep for code compatibility
+# trajectory_interval_entry.grid(row=2, column=1, padx=(0, 5), pady=(2, 2), sticky='w')
 trajectory_interval_entry.insert(0, '6h')
-CreateToolTip(trajectory_interval_label,
-    "Interval for time-bounded trajectories.\n"
-    "Includes spacecraft missions, comets during apparitions,\n"
-    "and interstellar objects passing through.")
+# CreateToolTip(trajectory_interval_label,
+#     "Interval for time-bounded trajectories.\n"
+#     "Includes spacecraft missions, comets during apparitions,\n"
+#     "and interstellar objects passing through.")
 
 # Satellite interval (row 4)
-satellite_interval_label = tk.Label(orbit_path_frame, text="Satellite objects interval (moons):")
-satellite_interval_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
-satellite_interval_entry = tk.Entry(orbit_path_frame, width=5)
-satellite_interval_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
+# satellite_interval_label = tk.Label(orbit_path_frame, text="Satellite objects interval (moons):")
+# satellite_interval_label.grid(row=3, column=0, padx=(5, 5), pady=(2, 2), sticky='w')
+satellite_interval_entry = tk.Entry(orbit_path_frame, width=5)  # Keep for code compatibility
+# satellite_interval_entry.grid(row=3, column=1, padx=(0, 5), pady=(2, 5), sticky='w')
 satellite_interval_entry.insert(0, '1h')
-CreateToolTip(satellite_interval_label,
-    "Interval for moon orbits around planets.\n"
-    "Very fine resolution needed for fast-moving moons.")
+# CreateToolTip(satellite_interval_label,
+#     "Interval for moon orbits around planets.\n"
+#     "Very fine resolution needed for fast-moving moons.")
+# =============================================================================
+# END DEPRECATED SECTION
+# =============================================================================
 
 # Paloma's Birthday button and its animation
 paloma_buttons_frame = tk.Frame(controls_frame)

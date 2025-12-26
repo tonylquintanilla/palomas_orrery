@@ -1488,7 +1488,9 @@ INFO = {
         '* Gravity-assists from Europa (49), Ganymede (7), and Callisto (9) will be used to target different Europa close approach ' 
         'points on each flyby.',
         
-        'OSIRIS REx': '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
+        'OSIRIS REx': 
+        '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
+        '***SET MANUAL SCALE TO 0.00003 AU TO SEE ARRIVAL AT BENNU***\n\n'
         'Horizons: -64. OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
         '* NASA information: "OSIRIS-REx ("Origins, Spectral Interpretation, Resource Identification, and Security-Regolith Explorer") explored 101955 ' 
         'Bennu (1999 RQ36), a carbonaceous B-type asteroid whose regolith may provide insights on the early history of the solar ' 
@@ -1498,9 +1500,9 @@ INFO = {
         '  * 2016  Sep 08 23:05 Launch from Cape Canaveral\n' 
         '  * 2017  Sep 22 16:52 Earth flyby and gravity assist 23,592 km from geocenter\n' 
         '  * 2018  August, Bennu approach phase\n' 
-        '  *       October, Rendevous with asteroid\n' 
+        '  *       October, Approach to asteroid\n' 
         '  *       November, Estimate mass, shape, and spin state models\n' 
-        '  *       December 3, Proximity operations began. Closest approach from December 4, 13:00 to 21:00. This marked the start ' 
+        '  *       December 3, Arrival. Proximity operations began. Closest approach from December 4, 13:00 to 21:00. This marked the start ' 
         'of its detailed study of the asteroid.\n' 
         '  * 2019  January, Begin detailed mapping; identify candidate sample sites\n' 
         '  *       May, Sorties to examine 4 candidate sample sites\n' 

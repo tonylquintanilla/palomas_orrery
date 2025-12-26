@@ -103,7 +103,7 @@ def add_camera_center_button(fig, center_object_name='Sun'):
     button_args = {
         "scene.camera": {
             "eye": {"x": 0.001, "y": 0, "z": 0},  # AT the center (tiny offset to avoid singularity)
-            "center": {"x": 1, "y": 0, "z": 0},   # Looking along +X axis (toward RA=0°)
+            "center": {"x": 1, "y": 0, "z": 0},   # Looking along +X axis (toward RA=0deg)
             "up": {"x": 0, "y": 0, "z": 1}        # Z-axis is up
         }
     }
@@ -121,8 +121,8 @@ def add_camera_center_button(fig, center_object_name='Sun'):
         x=0.05,
         y=1.0,
         buttons=[dict(
-    #        label=f"Move Camera to {center_object_name} (Center) along the +X axis (♈︎)",
-            label=f"Center (♈︎)",
+    #        label=f"Move Camera to {center_object_name} (Center) along the +X axis (Aries)",
+            label=f"Center (Aries)",
             method="relayout",
             args=[button_args]
         )],
@@ -203,7 +203,7 @@ def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_
         button_args_x["scene.zaxis.range"] = z_range
     
     buttons.append(dict(
-        label=f"View +X axis (♈︎) from {center_object_name}",
+        label=f"View +X axis (Aries) from {center_object_name}",
         method="relayout",
         args=[button_args_x]
     ))
@@ -292,6 +292,175 @@ def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_
         print(f"[Camera Buttons] Added dropdown with {len(buttons)} view options")
     
     return fig
+
+
+def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_objects=None, 
+                               fly_distance=0.1, distance_scale_factor=0.05):
+    """
+    Add buttons to fly the camera TO specific target objects, keeping focus on the object.
+    
+    Unlike add_look_at_object_buttons (which views FROM center TOWARD target),
+    this places the camera NEAR the target looking AT the target.
+    
+    Parameters:
+        fig (plotly.graph_objects.Figure): The figure to add buttons to
+        positions (dict): Dictionary mapping object names to their position data
+                         Each position should have 'x', 'y', 'z' keys
+        center_object_name (str): Name of the center object (default: 'Sun')
+        target_objects (list): List of object names to create buttons for
+                              If None, creates buttons for all objects in positions
+        fly_distance (float): Base distance from object for camera (AU), default 0.1
+        distance_scale_factor (float): Scale factor for distance-based offset, default 0.05
+                                       Camera distance = fly_distance + (object_distance * scale_factor)
+        
+    Returns:
+        plotly.graph_objects.Figure: The modified figure with fly-to buttons
+    """
+    # Get existing updatemenus and convert to list
+    existing_menus = list(fig.layout.updatemenus) if hasattr(fig.layout, 'updatemenus') and fig.layout.updatemenus is not None else []
+    
+    # Default target objects if none specified
+    if target_objects is None:
+        target_objects = [name for name in positions.keys() if name != center_object_name]
+        print(f"[Fly To Buttons] Auto-detected {len(target_objects)} target objects from positions")
+    
+    # Get center position (default to origin if not in positions)
+    center_pos = np.array([0.0, 0.0, 0.0])
+    if center_object_name in positions and positions[center_object_name] is not None:
+        center_data = positions[center_object_name]
+        if isinstance(center_data, dict) and 'x' in center_data:
+            center_pos = np.array([center_data['x'], center_data['y'], center_data['z']])
+    
+    # Create list of buttons
+    buttons = []
+        
+    # Capture original axis ranges for "Full View" button
+    try:
+        orig_x_range = list(fig.layout.scene.xaxis.range) if fig.layout.scene.xaxis.range else None
+        orig_y_range = list(fig.layout.scene.yaxis.range) if fig.layout.scene.yaxis.range else None
+        orig_z_range = list(fig.layout.scene.zaxis.range) if fig.layout.scene.zaxis.range else None
+    except:
+        orig_x_range = orig_y_range = orig_z_range = None
+    
+    # Add "Full View" button first if we have original ranges
+    if orig_x_range and orig_y_range and orig_z_range:
+        buttons.append(dict(
+            label="Return to Full View",
+            method="relayout",
+            args=[{
+                "scene.camera": {
+                    "eye": {"x": 1.5, "y": 1.5, "z": 1.2},
+                    "center": {"x": 0, "y": 0, "z": 0},
+                    "up": {"x": 0, "y": 0, "z": 1}
+                },
+                "scene.xaxis.range": orig_x_range,
+                "scene.yaxis.range": orig_y_range,
+                "scene.zaxis.range": orig_z_range,
+                "scene.aspectmode": "cube",
+                "scene.aspectratio": {"x": 1, "y": 1, "z": 1}
+            }]
+        ))
+    
+    # Add buttons for each target object
+    for target_name in target_objects:
+        if target_name not in positions or positions[target_name] is None:
+            continue
+            
+        target_data = positions[target_name]
+        if not isinstance(target_data, dict) or 'x' not in target_data:
+            continue
+        
+        target_pos = np.array([target_data['x'], target_data['y'], target_data['z']])
+        
+        # Calculate direction vector from target to center (camera will be on this side)
+        direction_to_center = center_pos - target_pos
+        distance_from_center = np.linalg.norm(direction_to_center)
+        
+        if distance_from_center < 1e-10:  # Target is at center, skip
+            continue
+        
+        # Normalize the direction
+        direction_norm = direction_to_center / distance_from_center
+        
+        # Calculate camera offset distance (closer for nearby objects, slightly further for distant)
+        view_radius = fly_distance + (distance_from_center * distance_scale_factor)
+
+        # Zoom axis ranges to target area
+        new_x_range = [float(target_pos[0]) - view_radius, float(target_pos[0]) + view_radius]
+        new_y_range = [float(target_pos[1]) - view_radius, float(target_pos[1]) + view_radius]
+        new_z_range = [float(target_pos[2]) - view_radius, float(target_pos[2]) + view_radius]
+        
+        button_args = {
+            "scene.camera": {
+                "eye": {"x": 1.5, "y": 1.5, "z": 1.2},
+                "center": {"x": 0, "y": 0, "z": 0},
+                "up": {"x": 0, "y": 0, "z": 1}
+            },
+            "scene.xaxis.range": new_x_range,
+            "scene.yaxis.range": new_y_range,
+            "scene.zaxis.range": new_z_range,
+            "scene.aspectmode": "cube",
+            "scene.aspectratio": {"x": 1, "y": 1, "z": 1}            
+        }
+        
+        # Format distance for label
+        if distance_from_center < 0.01:
+            dist_str = f"{distance_from_center*149597870.7:.0f} km"  # Convert AU to km
+        elif distance_from_center < 1:
+            dist_str = f"{distance_from_center:.3f} AU"
+        else:
+            dist_str = f"{distance_from_center:.2f} AU"
+        
+        buttons.append(dict(
+            label=f"Fly to {target_name} ({dist_str})",
+            method="relayout",
+            args=[button_args]
+        ))
+    
+    # Sort buttons by distance for easier navigation
+    def extract_distance(button):
+        label = button['label']
+        if "Full View" in label:
+            return -1  # Keep Full View first
+        try:
+            # Extract the part in parentheses
+            dist_part = label.split('(')[1].split(')')[0]
+            if 'km' in dist_part:
+                return float(dist_part.replace(' km', '').replace(',', '')) / 149597870.7
+            else:
+                return float(dist_part.replace(' AU', ''))
+        except:
+            return float('inf')
+    
+    buttons.sort(key=extract_distance)
+    
+    # Create dropdown menu with all buttons
+    if buttons:
+        fly_to_dropdown = dict(
+            type="dropdown",
+            direction="down",
+            x=0.02,
+            y=0.92,  # Position below the "View from" dropdown
+            xanchor="left",
+            yanchor="top",
+            buttons=buttons,
+            bgcolor='rgba(255,255,200,0.85)',  # Slightly yellow to distinguish from View dropdown
+            font=dict(color='darkgreen'),
+            bordercolor='green',
+            borderwidth=1,
+            pad=dict(t=0, b=0)
+        )
+        
+        # Add to existing menus
+        existing_menus.append(fly_to_dropdown)
+        
+        # Update figure layout
+        fig.update_layout(updatemenus=existing_menus)
+        
+        print(f"[Fly To Buttons] Added dropdown with {len(buttons)} fly-to options")
+    
+    return fig
+
 
 def format_hover_text(obj_data, name, is_solar_system=False):
     """
@@ -426,7 +595,7 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
 #            calculated_period = {
 #                'years': orbital_period_years,
 #                'days': orbital_period_years * 365.25
-#            }  # ✅ Correct indentation - closes the dict properly
+#            }  # OK: Correct indentation - closes the dict properly
 
     
     # Format calculated period
@@ -505,8 +674,8 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     if radec_component:
             # If we have RA/Dec, include it
         full_hover_text = (
-            f"<b>{obj_name}</b><br>"  # ← Note: Changed from "<br><br>" to "<br>"
-            f"{radec_component}<br><br>"  # ← NEW LINE: RA/Dec info
+            f"<b>{obj_name}</b><br>"  # <- Note: Changed from "<br><br>" to "<br>"
+            f"{radec_component}<br><br>"  # <- NEW LINE: RA/Dec info
             f"Distance from Center: {distance_au} AU<br>"
             f"Distance: {distance_km} kilometers<br>"
             f"Distance: {distance_lm} light-minutes<br>"
@@ -562,7 +731,7 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
 
     minimal_hover_text = f"<b>{obj_name}</b>"
     if radec_compact:
-        minimal_hover_text += f"<br>{radec_compact}"  # ← NEW LINE   
+        minimal_hover_text += f"<br>{radec_compact}"  # <- NEW LINE   
     
     return full_hover_text, minimal_hover_text, satellite_note
 

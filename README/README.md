@@ -1,4 +1,4 @@
-# Last updated: December 8, 2025
+# Last updated: December 25, 2025
 
 # Paloma's Orrery
 
@@ -37,6 +37,8 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - TNO satellite systems (Eris/Dysnomia, Haumea/Hi'iaka/Namaka, Makemake/MK2)
 - Stellar neighborhood mapping (123,000+ stars)
 - Planetary and solar interior visualizations (with reference-frame independent rendering)
+- Spacecraft trajectory two-layer visualization (full mission + plotted period)
+- Animation system with static shell optimization (45% memory reduction)
 - HR diagrams and stellar analysis
 - Climate data preservation hub
 
@@ -46,7 +48,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - [Project Website](https://tonylquintanilla.github.io/palomas_orrery/)
 - [Instagram: @palomas_orrery](https://www.instagram.com/palomas_orrery/)
 - [Video Tutorials](https://www.youtube.com/@tony_quintanilla/featured)
-- Contact: <tonyquintanilla@gmail.com>
+- Contact: tonyquintanilla@gmail.com
 
 ## Quick Start
 
@@ -96,7 +98,7 @@ Git makes it easy to download and update the project. If you prefer, you can ski
 1. Go to [git-scm.com/downloads](https://git-scm.com/downloads)
 2. Download the installer for Windows
 3. Run the installer:
-   - **Important:** When you see the screen asking about additional options, **check the box for "Additional icons → On the Desktop"**
+   - **Important:** When you see the screen asking about additional options, **check the box for "Additional icons -> On the Desktop"**
    - This creates a handy Git Bash shortcut on your desktop
    - Click "Next" through the remaining screens (other defaults are fine)
 4. After installation completes, you should see a "Git Bash" icon on your desktop
@@ -149,7 +151,7 @@ Python is the programming language that runs Paloma's Orrery.
    - Python wasn't added to PATH, OR you're using an old Command Prompt window
    - Close Command Prompt completely and open a new one
    - If still not working: Python wasn't added to PATH during installation
-   - Solution: Uninstall Python (Control Panel → Programs), then reinstall and make sure you check "Add Python to PATH"
+   - Solution: Uninstall Python (Control Panel -> Programs), then reinstall and make sure you check "Add Python to PATH"
 
 #### Step 3: Download Paloma's Orrery
 
@@ -220,18 +222,18 @@ The cache files contain pre-processed stellar data and orbital calculations. Wit
    - The folder structure should look like:
      ```
      palomas_orrery/
-     ├── palomas_orrery.py
-     ├── data/
-     │   └── orbit_paths.json
-     ├── star_data/
-     │   ├── star_properties_distance.pkl
-     │   └── gaia_data_distance.vot
-     └── ... (other files)
+     |- palomas_orrery.py
+     |- data/
+     |   |- orbit_paths.json
+     |- star_data/
+     |   |- star_properties_distance.pkl
+     |   |- gaia_data_distance.vot
+     |- ... (other files)
      ```
 
 4. **Verify the files are in place:**
    - You should see `star_data/` folder with `.pkl` and `.vot` files
-   - You should see `data/orbit_paths.json` (this is the largest file, ~96 MB)
+   - You should see `data/orbit_paths.json` (this is the largest file, ~94 MB)
 
 #### Step 5: Install Dependencies
 
@@ -252,9 +254,9 @@ Python packages are like add-ons that provide extra functionality. Paloma's Orre
    **What you'll see:** A lot of text scrolling by as packages are downloaded and installed. This is normal!
 
    **If you see errors:** Most common issues:
-   - "pip is not recognized" → Python wasn't installed correctly. Go back to Step 2.
-   - Network errors → Check your internet connection and try again
-   - Permission errors → Try running Command Prompt as Administrator
+   - "pip is not recognized" -> Python wasn't installed correctly. Go back to Step 2.
+   - Network errors -> Check your internet connection and try again
+   - Permission errors -> Try running Command Prompt as Administrator
 
 3. **Verify installation:**
    - After installation completes, you should see "Successfully installed" messages
@@ -362,6 +364,9 @@ While Command Prompt works fine, you might prefer a more visual development envi
    - James Webb Space Telescope
 3. Enable trajectory visualization to see their paths
 4. Set date range to view historical positions or future predictions
+5. In static and animated plots, see two trajectory layers:
+   - **Full Mission** (mission color) - Complete trajectory from launch to end
+   - **Plotted Period** (yellow) - Just the dates you selected
 
 **Star Visualizations:**
 
@@ -385,9 +390,9 @@ While Command Prompt works fine, you might prefer a more visual development envi
 
 **Earth System Data:**
 
-1. Look for the green 🌍 indicator next to Earth's shell checkbox
+1. Look for the green Earth indicator next to Earth's shell checkbox
 2. Enable to access climate data visualizations
-3. View the Keeling Curve (CO₂ measurements from 1958-2025)
+3. View the Keeling Curve (CO2 measurements from 1958-2025)
 4. See [climate_readme.md](climate_readme.md) for complete documentation
 
 ### Advanced Features
@@ -397,6 +402,7 @@ While Command Prompt works fine, you might prefer a more visual development envi
 - Use time step controls to animate orbital motion
 - Watch days, months, or years of evolution
 - Follow spacecraft trajectories through their missions
+- Shell visualizations (rings, atmospheres, radiation belts) now appear in animations without memory explosion
 
 **Coordinate System Options:**
 
@@ -456,7 +462,7 @@ While Command Prompt works fine, you might prefer a more visual development envi
 
 - **Systems:** 3 confirmed exoplanet systems (TRAPPIST-1, TOI-1338, Proxima Centauri)
 - **Planets:** 11 exoplanets with accurate Keplerian orbital mechanics
-- **Orbital Mechanics:** Full 6-parameter Keplerian orbits (a, e, i, ω, Ω, M₀) with time evolution
+- **Orbital Mechanics:** Full 6-parameter Keplerian orbits (a, e, i, omega, Omega, M0) with time evolution
 - **Binary Stars:** Circumbinary planet support with dual-star orbital dynamics (TOI-1338)
 - **Host Stars:** Temperature-based coloring from cool red M-dwarfs (2,800K) to hot blue stars
 - **Visualization Modes:**
@@ -473,8 +479,8 @@ While Command Prompt works fine, you might prefer a more visual development envi
 
 - **Dual-Tail Structure:** Scientifically accurate rendering of both comet tail types
   - Dust Tail (Type II): Curved golden/yellow tail from reflected sunlight
-  - Ion Tail (Type I): Straight blue plasma tail from CO⁺ emissions
-  - Green coma from C₂ (dicarbon) fluorescence near nucleus
+  - Ion Tail (Type I): Straight blue plasma tail from CO+ emissions
+  - Green coma from C2 (dicarbon) fluorescence near nucleus
 - **Astrophotography Colors:** Tail colors match long-exposure photography appearance
   - Dust tails: Whitish-yellow/gold reflecting full visible spectrum (400-700nm)
   - Ion tails: Blue from carbon monoxide ions (400-460nm emission)
@@ -526,6 +532,7 @@ While Command Prompt works fine, you might prefer a more visual development envi
 | **Camera View Selector** | Dropdown menu to view any object from center position - point camera from Sun toward Earth, Mars, or any plotted object |
 | **Object Selection** | Multi-select with legend toggles |
 | **Time Animation** | Watch orbital evolution over days to years |
+| **Animation Shells** | Static planetary shells in animations without memory explosion - shells rendered once, positions animate |
 | **Lagrange Points** | L1-L5 visualization for Earth-Moon and Sun-Earth systems |
 | **Apsidal Markers** | Perihelion/aphelion indicators with dates |
 | **Advanced Hover Info** | Detailed astronomical data with toggle controls |
@@ -538,7 +545,7 @@ While Command Prompt works fine, you might prefer a more visual development envi
 |------|-------------|
 | **Orbital Parameter Visualization** | Interactive 3D demonstration of Keplerian elements (inclination, longitude of ascending node, argument of periapsis) showing transformation from perifocal to J2000 Ecliptic frame |
 | **Interactive Eccentricity Demo** | Visual exploration of orbit shapes from circles (e=0) through ellipses, parabolas (e=1), to hyperbolas (e>1) |
-| **Coordinate System Reference Guide** | Comprehensive visualization of J2000 Ecliptic system with detailed axis explanations (+X Vernal Equinox, +Y 90° ahead, +Z Ecliptic North) |
+| **Coordinate System Reference Guide** | Comprehensive visualization of J2000 Ecliptic system with detailed axis explanations (+X Vernal Equinox, +Y 90 deg ahead, +Z Ecliptic North) |
 | **Pluto-Charon Binary System** | Three-view visualization demonstrating true barycentric orbital mechanics - switch from Pluto-centered to barycenter-centered view to see Pluto's own orbit revealed (like shifting from geocentric to heliocentric thinking!) |
 | **TNO Satellite Systems** | Visualize distant dwarf planet moons, including MK2 using cutting-edge 2025 Hubble orbital analysis |
 
@@ -548,7 +555,7 @@ While Command Prompt works fine, you might prefer a more visual development envi
 - [Gaia EDR3](https://www.cosmos.esa.int/web/gaia) - Stellar positions and photometry
 - [Hipparcos](https://www.cosmos.esa.int/web/hipparcos/catalogues) - Bright star catalog
 - [SIMBAD](https://simbad.u-strasbg.fr/simbad/) - Astronomical database
-- [Scripps CO₂ Program](https://scrippsco2.ucsd.edu/) - Mauna Loa atmospheric data
+- [Scripps CO2 Program](https://scrippsco2.ucsd.edu/) - Mauna Loa atmospheric data
 - [arXiv preprints](https://arxiv.org/) - Latest orbital solutions for newly-discovered objects
 
 ## Architecture
@@ -569,6 +576,7 @@ While Command Prompt works fine, you might prefer a more visual development envi
 - **Rate limiting:** Respectful API usage with automatic throttling
 - **Batch processing:** Group queries for efficiency
 - **Analytical fallback:** Calculate orbits locally when API data unavailable
+- **Static shell optimization:** Animation shells rendered once, not per-frame (45% memory reduction)
 
 ## Earth System Visualization
 
@@ -576,11 +584,11 @@ While Command Prompt works fine, you might prefer a more visual development envi
 
 Interactive visualizations documenting Earth's changing systems - because **data preservation is climate action**.
 
-**Current Features (9 Active Visualizations):**
+**Current Features (10 Active Visualizations):**
 
 **Climate & Atmosphere:**
 
-1. **The Keeling Curve:** Atmospheric CO₂ from Mauna Loa Observatory (1958-2025)
+1. **The Keeling Curve:** Atmospheric CO2 from Mauna Loa Observatory (1958-2025)
    - Monthly resolution with seasonal variations
    - Clear visualization of 400+ ppm threshold crossing
    - Interactive zoom and data exploration
@@ -617,20 +625,28 @@ Interactive visualizations documenting Earth's changing systems - because **data
 
 7. **Ocean Acidification:** Hawaii Ocean Time-series surface pH (1988-2025)
    - Monthly pH measurements
-   - CO₂ absorption impact on ocean chemistry
+   - CO2 absorption impact on ocean chemistry
    - Trend analysis
 
 **Deep Time:**
 
-8. **Paleoclimate 800kyr:** Antarctic ice core CO₂ reconstruction
+8. **Paleoclimate 800kyr:** Antarctic ice core CO2 reconstruction
    - EPICA Dome C 800,000-year record
    - Glacial-interglacial cycles
-   - Context for modern CO₂ levels
+   - Context for modern CO2 levels
 
 9. **Cenozoic Temperature:** 65 million years of climate context
    - Full Cenozoic Era reconstruction
    - Major climate events (PETM, EECO)
    - Long-term cooling trend into ice ages
+
+**Human Origins:**
+
+10. **Climate-Driven Human Evolution:** 540 Ma to present with 25 hominin species
+    - Marine Isotope Stage (MIS) glacial/interglacial cycles
+    - Ghost populations from DNA evidence
+    - Climate pulses that shaped human evolution
+    - 2025 research integration (Yunxian 2, two-population origin)
 
 ### Why This Matters
 
@@ -642,7 +658,7 @@ This project began as astronomical visualization but expanded to climate data pr
 
 **Data Sources:**
 
-- Scripps CO₂ Program at Mauna Loa Observatory
+- Scripps CO2 Program at Mauna Loa Observatory
 - NOAA Global Monitoring Laboratory
 - Additional sources as datasets are integrated
 
@@ -656,7 +672,7 @@ The following sections highlight the primary modules organized by function. Use 
 
 | Module | Purpose |
 |--------|---------|
-| `palomas_orrery.py` | Main application (~420KB, 8,700+ lines) - GUI, plot_objects(), animate_objects() |
+| `palomas_orrery.py` | Main application (~450KB, 9,000+ lines) - GUI, plot_objects(), animate_objects(), trajectory layers, animation shells |
 | `data_acquisition.py` | VizieR catalog queries (Gaia, Hipparcos) |
 | `data_processing.py` | Coordinate transformations and calculations |
 | `simbad_manager.py` | SIMBAD API integration with rate limiting |
@@ -694,7 +710,7 @@ The following sections highlight the primary modules organized by function. Use 
 | `stellar_parameters.py` | Temperature, luminosity, and HR calculations |
 | `celestial_coordinates.py` | RA/Dec coordinate system conversions |
 | `stellar_data_patches.py` | Data quality improvements and corrections |
-| `fetch_climate_data.py` | Climate data fetcher (Mauna Loa CO₂) |
+| `fetch_climate_data.py` | Climate data fetcher (Mauna Loa CO2) |
 
 ### Orbital Calculations
 
@@ -720,39 +736,39 @@ The following sections highlight the primary modules organized by function. Use 
 
 ```
 palomas_orrery/
-├── *.py                    # Python source code
-├── README/                 # Documentation
-│   ├── README.md
-│   ├── paleoclimate_readme.md
-│   └── climate_readme.md
-├── data/                   # All program data files
-│   ├── orbit_paths.json (~94 MB)
-│   ├── orbit_paths_backup.json
-│   ├── Climate monitoring (automated)
-│   │   ├── co2_mauna_loa_monthly.json
-│   │   ├── temperature_giss_monthly.json
-│   │   ├── arctic_ice_extent_monthly.json
-│   │   └── sea_level_gmsl_monthly.json
-│   ├── Climate monitoring (manual)
-│   │   ├── ocean_ph_hot_monthly.json
-│   │   └── 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
-│   └── Paleoclimate data
-│       ├── epica_co2_800kyr.json
-│       ├── lr04_benthic_stack.json
-│       ├── temp12k_allmethods_percentiles.csv
-│       └── 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
-├── star_data/              # Protected stellar cache
-│   ├── star_properties_distance.pkl (2.6 MB)
-│   ├── star_properties_magnitude.pkl (31.8 MB)
-│   ├── hipparcos_data_distance.vot (899 KB)
-│   ├── hipparcos_data_magnitude.vot (193 KB)
-│   ├── gaia_data_distance.vot (9.8 MB)
-│   ├── gaia_data_magnitude.vot (291 MB)
-│   └── *_metadata.json files
-└── reports/                # Generated analysis reports
-    ├── last_plot_report.json
-    ├── last_plot_data.json
-    └── report_*.json (archived with timestamps)
+|- *.py                    # Python source code
+|- README/                 # Documentation
+|   |- README.md
+|   |- paleoclimate_readme.md
+|   |- climate_readme.md
+|- data/                   # All program data files
+|   |- orbit_paths.json (~94 MB)
+|   |- orbit_paths_backup.json
+|   |- Climate monitoring (automated)
+|   |   |- co2_mauna_loa_monthly.json
+|   |   |- temperature_giss_monthly.json
+|   |   |- arctic_ice_extent_monthly.json
+|   |   |- sea_level_gmsl_monthly.json
+|   |- Climate monitoring (manual)
+|   |   |- ocean_ph_hot_monthly.json
+|   |   |- 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
+|   |- Paleoclimate data
+|       |- epica_co2_800kyr.json
+|       |- lr04_benthic_stack.json
+|       |- temp12k_allmethods_percentiles.csv
+|       |- 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
+|- star_data/              # Protected stellar cache
+|   |- star_properties_distance.pkl (2.6 MB)
+|   |- star_properties_magnitude.pkl (31.8 MB)
+|   |- hipparcos_data_distance.vot (899 KB)
+|   |- hipparcos_data_magnitude.vot (193 KB)
+|   |- gaia_data_distance.vot (9.8 MB)
+|   |- gaia_data_magnitude.vot (291 MB)
+|   |- *_metadata.json files
+|- reports/                # Generated analysis reports
+    |- last_plot_report.json
+    |- last_plot_data.json
+    |- report_*.json (archived with timestamps)
 ```
 
 ### Cache Files (Included in Release)
@@ -762,7 +778,7 @@ palomas_orrery/
 - `hipparcos_*.vot` - Hipparcos catalog data (bright stars)
 - `gaia_*.vot` - Gaia EDR3 catalog data (faint stars)
 
-**orbit_paths.json** (~96 MB typical)
+**orbit_paths.json** (~94 MB typical)
 
 - Time-indexed orbital position data for 1000+ objects
 - Supports multiple reference frames (Sun, planets, moons)
@@ -775,7 +791,7 @@ palomas_orrery/
 
 **osculating_cache.json**
 
-- JPL Horizons orbital elements (a, e, i, ω, Ω, TP) for 40+ objects
+- JPL Horizons orbital elements (a, e, i, omega, Omega, TP) for 40+ objects
 - Epoch tracking and per-object refresh intervals
 - Center-body aware keys for barycenter views
 
@@ -784,7 +800,7 @@ palomas_orrery/
 - `satellite_ephemerides.json` - Satellite orbital elements and physical properties
 - `*_metadata.json` - Cache validation metadata and timestamps
 - `orrery_config.json` - User preferences and display settings
-- `co2_mauna_loa_monthly.json` - Monthly atmospheric CO₂ measurements (1958-2025)
+- `co2_mauna_loa_monthly.json` - Monthly atmospheric CO2 measurements (1958-2025)
 
 ### Generated Reports
 
@@ -799,9 +815,9 @@ palomas_orrery/
 | Distance PKL | 3 MB | Stars within 100 ly |
 | Magnitude PKL | 32 MB | Stars to mag 9.0 |
 | VOTable files | 1-291 MB each | Raw catalog data |
-| Orbit cache | 96+ MB | Planetary ephemerides |
+| Orbit cache | 94+ MB | Planetary ephemerides |
 | Osculating cache | <1 MB | Orbital elements |
-| Climate data | <1 MB | CO₂ measurements |
+| Climate data | <1 MB | CO2 measurements |
 
 ## Contributing
 
@@ -820,7 +836,7 @@ Contributions are welcome! This project is maintained by a single developer but 
 
 **How to Contribute:**
 
-Suggestions are welcome: <tonyquintanilla@gmail.com>
+Suggestions are welcome: tonyquintanilla@gmail.com
 
 **Bug Reports:**
 
@@ -841,14 +857,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Contact
 
-**Author:** Tony Quintanilla  
-**Email:** <tonyquintanilla@gmail.com>  
-**GitHub:** [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)  
-**Website:** [tonylquintanilla.github.io/palomas_orrery](https://tonylquintanilla.github.io/palomas_orrery/)  
-**Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)  
-**YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)  
+**Author:** Tony Quintanilla
+**Email:** tonyquintanilla@gmail.com
+**GitHub:** [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)
+**Website:** [tonylquintanilla.github.io/palomas_orrery](https://tonylquintanilla.github.io/palomas_orrery/)
+**Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
+**YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** December 2025 (v1.5 - TNO Satellites & Analytical Fallback)
+**Last Updated:** December 2025 (v1.9 - Trajectory Two-Layer System & Animation Shells)
 
 ---
 
@@ -858,7 +874,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - [ESA Gaia Mission](https://www.cosmos.esa.int/web/gaia) for stellar data
 - [VizieR catalog service](https://vizier.cds.unistra.fr/) (CDS, Strasbourg)
 - [SIMBAD astronomical database](https://simbad.u-strasbg.fr/simbad/)
-- [Scripps CO₂ Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
+- [Scripps CO2 Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
 - [Astropy](https://www.astropy.org/) and [Astroquery](https://astroquery.readthedocs.io/) development teams
 - [Plotly](https://plotly.com/) visualization library
 - AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/), [DeepSeek](https://www.deepseek.com/)

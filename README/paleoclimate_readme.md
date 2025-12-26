@@ -22,10 +22,11 @@
 - Focus: Complete animal life history + human-scale climate events
 - Interactive timeline + Medieval/Holocene events
 
-**4. paleoclimate_human_origins_v9.py** - **🆕 Climate-Driven Human Evolution**
+**4. paleoclimate_human_origins_full.py** - **🆕 Climate-Driven Human Evolution**
 - Coverage: 540 Ma to present + 25 hominin species markers
 - Focus: How Pleistocene climate pulses shaped human evolution
 - Features: MIS stages, ghost populations, 2025 research integration
+- **GUI Integration**: 🧬 Human Origins button in Earth System Visualization
 - **Featured in this README**
 
 ### 📊 Required Data Files:
@@ -61,18 +62,19 @@
 **File structure:**
 ```
 palomas_orrery/
-├── data/                                   # All paleoclimate data ✨
+├── data/                                   # All paleoclimate data
 │   ├── 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
 │   ├── lr04_benthic_stack.json
 │   ├── epica_co2_800kyr.json
 │   ├── temperature_giss_monthly.json       # NASA GISS (required)
 │   └── temp12k_allmethods_percentiles.csv (optional)
+├── earth_system_visualization_gui.py       # Main GUI (has Human Origins button)
 ├── fetch_paleoclimate_data.py             (fetches to data/)
 ├── fetch_climate_data.py                   (fetches GISS to data/)
 ├── paleoclimate_visualization.py
 ├── paleoclimate_dual_scale.py
 ├── paleoclimate_visualization_full.py
-└── paleoclimate_human_origins_v9.py        # 🆕 Human evolution layer
+└── paleoclimate_human_origins_full.py      # 🆕 Human evolution layer
 ```
 
 ### 📚 Documentation:
@@ -86,7 +88,7 @@ palomas_orrery/
 
 ```bash
 # 1. Copy files to your project
-cp paleoclimate_visualization_v2.py /your/project/
+cp paleoclimate_human_origins_full.py /your/project/
 mkdir -p /your/project/data/
 cp 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv /your/project/data/
 cp fetch_paleoclimate_data.py /your/project/
@@ -99,23 +101,66 @@ curl -O https://www.ncei.noaa.gov/pub/data/paleo/reconstructions/kaufman2020/tem
 
 # 4. Edit earth_system_visualization_gui.py
 #    Add import:
-from paleoclimate_visualization_v2 import create_paleoclimate_visualization as create_phanerozoic_viz
+from paleoclimate_human_origins_full import create_paleoclimate_visualization as create_human_origins_viz
 
-#    Add function and button (see integration guide)
+#    Add function and button (see GUI Integration section below)
 
 # 5. Test it!
 python earth_system_visualization_gui.py
-# Click: 🦴 Paleoclimate: Phanerozoic (540 Ma - Full History)
+# Click: 🧬 Human Origins (540 Ma + Evolution)
 ```
 
 ---
 
-## 🎯 What You Get (v2 - Phanerozoic)
+## 🖥️ GUI Integration
 
-### Three Visualization Options in Your GUI:
+The Human Origins visualization is integrated into `earth_system_visualization_gui.py`:
+
+### Import (line 28)
+```python
+from paleoclimate_human_origins_full import create_paleoclimate_visualization as create_human_origins_viz
+```
+
+### Function
+```python
+def open_human_origins_viz():
+    """Open Paleoclimate + Human Origins visualization (540 Ma + 25 hominin species)"""
+    try:
+        fig = create_human_origins_viz()
+        if fig:
+            fig.show()
+            save_plot(fig, "paleoclimate_human_origins")
+        else:
+            messagebox.showerror("Data Not Available", 
+                "Paleoclimate data not found. See data requirements.")
+    except Exception as e:
+        messagebox.showerror("Visualization Error", f"Could not create visualization:\n{str(e)}")
+```
+
+### Button
+```python
+human_origins_btn = tk.Button(left_column,
+                     text='🧬 Human Origins (540 Ma + Evolution)',
+                     font=('Arial', 10),
+                     bg='#8B4513',  # Saddle brown - earthy/fossil color
+                     fg='white',
+                     activebackground='#A0522D',
+                     cursor='hand2',
+                     padx=15,
+                     pady=8,
+                     command=open_human_origins_viz)
+human_origins_btn.pack(fill='x', pady=2)
+```
+
+---
+
+## 🎯 What You Get
+
+### Four Visualization Options in Your GUI:
 1. **🦕 Cenozoic** (66 Ma) - Brown button - Original version
 2. **🦕 Dual Scale** (Modern + Deep Time) - Gold button - Hybrid view
-3. **🦴 Phanerozoic** (540 Ma) - Dark Blue button - **FULL HISTORY**
+3. **🦴 Phanerozoic** (540 Ma) - Dark Blue button - Full climate history
+4. **🧬 Human Origins** (540 Ma + Evolution) - Saddle Brown button - **FEATURED**
 
 ### The Phanerozoic Visualization Shows:
 
@@ -834,20 +879,20 @@ Shows that modern warming is unprecedented in human civilization's timeframe. Th
 ## ✅ Testing Checklist
 
 **Files in place:**
-- [ ] `paleoclimate_visualization_v2.py` in project root
-- [ ] `8c__Phanerozoic_Pole_to_Equator_Temperatures.csv` in project root
+- [ ] `paleoclimate_human_origins_full.py` in project root
+- [ ] `8c__Phanerozoic_Pole_to_Equator_Temperatures.csv` in `data/`
 - [ ] `fetch_paleoclimate_data.py` in project root
-- [ ] `temp12k_allmethods_percentiles.csv` in project root (optional)
+- [ ] `temp12k_allmethods_percentiles.csv` in `data/` (optional)
 
 **Data downloaded:**
 - [ ] LR04 data fetcher run successfully
-- [ ] `paleoclimate_data/` directory created
-- [ ] Scotese CSV file present
+- [ ] `data/` directory created with all JSON files
+- [ ] Scotese CSV file present in `data/`
 
 **GUI integration:**
 - [ ] Import added to earth_system_visualization_gui.py
-- [ ] Function `open_phanerozoic_viz()` added
-- [ ] Button added (dark blue, 🦴 icon)
+- [ ] Function `open_human_origins_viz()` added
+- [ ] Button added (saddle brown, 🧬 icon)
 - [ ] Button appears in GUI below other paleoclimate buttons
 
 **Visualization features:**
@@ -866,23 +911,28 @@ Shows that modern warming is unprecedented in human civilization's timeframe. Th
 - [ ] Geologic periods color-coded
 - [ ] Era labels visible (Paleozoic, Mesozoic, Cenozoic)
 
-**NEW features (November 1-2):**
+**Human Origins features (December 2025):**
+- [ ] Hominin markers visible near y = -10 line
+- [ ] 19 filled triangles (fossil species)
+- [ ] 6 open triangles (ghost populations)
+- [ ] Markers staggered vertically for readability
+- [ ] Vertical guide lines from markers to top
+- [ ] Hover shows species name, age, notes, citations
+- [ ] MIS warm bands visible (tomato fill, diamonds)
+- [ ] MIS cold bands visible (blue fill, squares)
+- [ ] Climate event markers visible (Toba, Green Sahara)
+- [ ] Legend includes: Hominin Evolution, Ghost Populations, MIS Warm/Cold
+- [ ] Can identify H. floresiensis (190 ka) and H. luzonensis (67 ka)
+- [ ] Ghost populations show 👻 emoji in hover
+- [ ] 2025 research updates show 🆕 emoji
+- [ ] Revised species show ⚠️ emoji (heidelbergensis)
+
+**Timeline features:**
 - [ ] Timeline markers visible (2025, 2015, 1925, 1025, etc.)
 - [ ] Hover over timeline markers shows educational text
-- [ ] Younger Dryas THREE nested turquoise bands visible (not single trace)
-- [ ] YD bands show Global (~1C), Regional (~4C), Greenland (~9C)
-- [ ] YD bands stay ABOVE Ice Age minimum (physically accurate!)
-- [ ] Eemian Interglacial annotation visible (red/tomato color)
-- [ ] Holocene Thermal Maximum annotation visible (green)
-- [ ] Medieval Warm Period annotation visible (orange)
-- [ ] Little Ice Age annotation visible (blue)
+- [ ] Younger Dryas THREE nested turquoise bands visible
 - [ ] All human-scale events have hover text
-- [ ] Can zoom to see Younger Dryas → Holocene flip
-- [ ] Can zoom to see Medieval → Little Ice Age transition
-- [ ] Can see HTM peak (~6,700 ya) in green Kaufman curve
-- [ ] Can see Eemian peak (~125,000 ya) in red benthic curve
-- [ ] Modern line (+1.28C) clearly exceeds HTM (+0.53C) and Eemian (+0.6C)
-- [ ] Timeline connects deep time to human history
+- [ ] Timeline connects deep time to human evolution
 
 ---
 
@@ -913,6 +963,22 @@ Shows that modern warming is unprecedented in human civilization's timeframe. Th
 ### Human-scale events not visible
 → Zoom to Holocene/recent period (last 20,000 years)  
 → Events appear when appropriately zoomed
+
+### Hominin markers overlapping
+→ Markers have manual `y_offset` values in HOMININ_SPECIES  
+→ Edit `y_offset` field (positive = up, negative = down) to adjust
+
+### Ghost populations not distinguishable
+→ Ghost populations use open triangles (△) vs filled (▲)  
+→ Check `evidence` field is set to `'dna_only'`
+
+### MIS bands not visible
+→ MIS stages only cover Pleistocene (~0.5 Ma to present)  
+→ Zoom to recent times to see glacial/interglacial bands
+
+### Import error for paleoclimate_human_origins_full
+→ Ensure file is in project root directory  
+→ Check filename matches exactly (no version numbers)
 
 ---
 

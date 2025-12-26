@@ -124,7 +124,8 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
     
     hover_text = f"<b>{obj_name} {marker_type}</b><br>"
     hover_text += f"Date: {date}<br>"        
-    hover_text += f"Distance from {center_body}: {actual_r:.6f} AU<br>"
+#    hover_text += f"Distance from {center_body}: {actual_r:.6f} AU<br>"
+    hover_text += f"Distance from center: {actual_r:.9f} AU<br>"
     
     # DEBUG: Log all conditions for perturbation analysis
     print(f"[HOVER DEBUG] {obj_name} {marker_type}:", flush=True)
@@ -138,7 +139,7 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
     # Add perturbation analysis if we have ideal position
     if ideal_pos and params and 'epoch' in params:
         angle_deg, delta_r, ideal_r, actual_r = calculate_orbital_angle_shift(ideal_pos, actual_pos)
-        print(f"  angle_deg: {angle_deg:.3f}°", flush=True)
+        print(f"  angle_deg: {angle_deg:.3f} deg", flush=True)
         
         # Determine if this is significant
 
@@ -151,11 +152,11 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
             
             # Add angular shift
             if angle_deg > 10:
-                hover_text += f"<b>Angular shift: {angle_deg:.1f}°</b> (high)<br>"
+                hover_text += f"<b>Angular shift: {angle_deg:.1f} deg</b> (high)<br>"
             elif angle_deg > 5:
-                hover_text += f"Angular shift: {angle_deg:.1f}° (moderate)<br>"
+                hover_text += f"Angular shift: {angle_deg:.1f} deg (moderate)<br>"
             else:
-                hover_text += f"Angular shift: {angle_deg:.3f}° (low)<br>"
+                hover_text += f"Angular shift: {angle_deg:.3f} deg (low)<br>"
             
             # Add distance comparison
             hover_text += f"Keplerian distance: {ideal_r:.6f} AU<br>"
@@ -183,7 +184,7 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
         else:  # Low deviation at this point
             hover_text += "<br><b>Perturbation Analysis:</b><br>"
             hover_text += f"Keplerian orbit epoch: {epoch}<br>"
-            hover_text += f"Angular shift: {angle_deg:.3f}° (low)<br>"
+            hover_text += f"Angular shift: {angle_deg:.3f} deg (low)<br>"
             hover_text += f"Keplerian distance: {ideal_r:.6f} AU<br>"
             hover_text += f"Actual distance: {actual_r:.6f} AU<br>"
             hover_text += f"Difference: {delta_r:.6f} AU<br>"
@@ -371,10 +372,10 @@ def calculate_exact_apsides(a, e, i, omega, Omega, rotate_points):
     
     # Calculate radius at periapsis
     if e < 1:  # Elliptical orbit
-        # r = a(1-e²)/(1+e*cos(θ)) at θ=0 becomes r = a(1-e²)/(1+e) = a(1-e)
+        # r = a(1-e^2)/(1+e*cos(theta)) at theta=0 becomes r = a(1-e^2)/(1+e) = a(1-e)
         r_periapsis = a * (1 - e)
     else:  # Hyperbolic orbit (e >= 1)
-        # r = |a|(e²-1)/(1+e*cos(θ)) at θ=0 becomes r = |a|(e²-1)/(1+e) = |a|(e-1)
+        # r = |a|(e^2-1)/(1+e*cos(theta)) at theta=0 becomes r = |a|(e^2-1)/(1+e) = |a|(e-1)
         r_periapsis = abs(a) * (e - 1)
     
     # Position in orbital plane at theta=0
@@ -383,11 +384,11 @@ def calculate_exact_apsides(a, e, i, omega, Omega, rotate_points):
     z_orbit_peri = 0.0
     
     # Apply orbital element rotations to transform from orbital plane to 3D space
-    # 1. Rotate by argument of periapsis (ω) around z-axis
+    # 1. Rotate by argument of periapsis (?) around z-axis
     x_temp, y_temp, z_temp = rotate_points([x_orbit_peri], [y_orbit_peri], [z_orbit_peri], omega_rad, 'z')
     # 2. Rotate by inclination (i) around x-axis
     x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-    # 3. Rotate by longitude of ascending node (Ω) around z-axis
+    # 3. Rotate by longitude of ascending node (Omega) around z-axis
     x_peri, y_peri, z_peri = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
     
     # Extract single point (rotate_points returns arrays)
@@ -411,20 +412,20 @@ def calculate_exact_apsides(a, e, i, omega, Omega, rotate_points):
         theta_apoapsis = np.pi  # 180 degrees
         
         # Calculate radius at apoapsis
-        # r = a(1-e²)/(1+e*cos(θ)) at θ=π becomes r = a(1-e²)/(1-e) = a(1+e)
+        # r = a(1-e^2)/(1+e*cos(theta)) at theta=? becomes r = a(1-e^2)/(1-e) = a(1+e)
         r_apoapsis = a * (1 + e)
         
         # Position in orbital plane at theta=pi
-        x_orbit_apo = r_apoapsis * np.cos(theta_apoapsis)  # r * cos(π) = -r
-        y_orbit_apo = r_apoapsis * np.sin(theta_apoapsis)  # r * sin(π) = 0
+        x_orbit_apo = r_apoapsis * np.cos(theta_apoapsis)  # r * cos(?) = -r
+        y_orbit_apo = r_apoapsis * np.sin(theta_apoapsis)  # r * sin(?) = 0
         z_orbit_apo = 0.0
         
         # Apply orbital element rotations
-        # 1. Rotate by argument of periapsis (ω) around z-axis
+        # 1. Rotate by argument of periapsis (?) around z-axis
         x_temp, y_temp, z_temp = rotate_points([x_orbit_apo], [y_orbit_apo], [z_orbit_apo], omega_rad, 'z')
         # 2. Rotate by inclination (i) around x-axis
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-        # 3. Rotate by longitude of ascending node (Ω) around z-axis
+        # 3. Rotate by longitude of ascending node (Omega) around z-axis
         x_apo, y_apo, z_apo = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
         
         # Extract single point
@@ -755,7 +756,8 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
                     name=f"{obj_name} Actual {near_label}",
                     text=[f"<b>{obj_name} at {near_label}</b><br>"
                         f"Date: {date_display} UTC<br>"
-                        f"Distance from {center_body}: {distance_au:.6f} AU"],
+                #        f"Distance from {center_body}: {distance_au:.6f} AU"],
+                        f"Distance from center: {distance_au:.9f} AU"],
                     customdata=[f"{obj_name} Actual {near_label}"],  
                     hovertemplate='%{text}<extra></extra>',
                     showlegend=True
@@ -794,7 +796,8 @@ def add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict
                     name=f"{obj_name} Actual {far_label}",  # Fixed: far_label
                     text=[f"<b>{obj_name} at {far_label}</b><br>"  # Fixed: far_label
                         f"Date: {date_display} UTC<br>"
-                        f"Distance from {center_body}: {distance_au:.6f} AU"],
+                #        f"Distance from {center_body}: {distance_au:.6f} AU"],
+                        f"Distance from center: {distance_au:.9f} AU"],
                     customdata=[f"{obj_name} Actual {far_label}"],  # Fixed: far_label                    
 
                     hovertemplate='%{text}<extra></extra>',
@@ -880,8 +883,8 @@ def get_orbital_period_days(body_name, semi_major_axis_au=None):
         return period
     elif semi_major_axis_au:
         # Use Kepler's third law as fallback for unknown bodies
-        # P² = a³ (where P is in years and a is in AU)
-        # So P_days = 365.25 * sqrt(a³)
+        # P^2 = a (where P is in years and a is in AU)
+        # So P_days = 365.25 * sqrt(a)
         return 365.25 * np.sqrt(abs(semi_major_axis_au)**3)
     else:
         raise ValueError(f"Unknown body {body_name} and no semi-major axis provided")
@@ -899,7 +902,7 @@ def calculate_true_anomaly_from_position(x, y, z, a, e, i, omega, Omega):
         Omega: Longitude of ascending node (degrees)
     
     Returns:
-        float: True anomaly in radians (0 to 2π)
+        float: True anomaly in radians (0 to 2?)
     """
     # Convert angles to radians
     i_rad = np.radians(i)
@@ -924,7 +927,7 @@ def calculate_true_anomaly_from_position(x, y, z, a, e, i, omega, Omega):
     # Calculate true anomaly
     true_anomaly = np.arctan2(y_orbital, x_orbital)
     
-    # Ensure positive angle (0 to 2π)
+    # Ensure positive angle (0 to 2?)
     if true_anomaly < 0:
         true_anomaly += 2 * np.pi
     
@@ -1072,7 +1075,7 @@ def calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omeg
         days_to_perihelion = calculate_time_to_anomaly(M_current, 0, orbital_period_days)
         perihelion_date = date + timedelta(days=days_to_perihelion)
         
-        # Apohelion is at M = π
+        # Apohelion is at M = ?
         days_to_apohelion = calculate_time_to_anomaly(M_current, np.pi, orbital_period_days)
         apohelion_date = date + timedelta(days=days_to_apohelion)
         
@@ -1160,11 +1163,11 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     # Accuracy note
     accuracy_note = ""
     if e > 0.15:  # High eccentricity
-        accuracy_note = "<br><i>Accuracy: ±0.002 AU (strong perturbations)</i>"
+        accuracy_note = "<br><i>Accuracy: +/-0.002 AU (strong perturbations)</i>"
     elif e > 0.05:  # Moderate eccentricity
-        accuracy_note = "<br><i>Accuracy: ±0.001 AU (moderate perturbations)</i>"
+        accuracy_note = "<br><i>Accuracy: +/-0.001 AU (moderate perturbations)</i>"
     else:  # Low eccentricity
-        accuracy_note = "<br><i>Accuracy: ±0.0005 AU (minimal perturbations)</i>"
+        accuracy_note = "<br><i>Accuracy: +/-0.0005 AU (minimal perturbations)</i>"
     
     # SAFETY: Ensure we always have some date string
     if perihelion_date_str == "":
@@ -1277,11 +1280,11 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     # Accuracy note
     accuracy_note = ""
     if e > 0.15:  # High eccentricity
-        accuracy_note = "<br><i>Accuracy: ±0.002 AU (strong perturbations)</i>"
+        accuracy_note = "<br><i>Accuracy: +/-0.002 AU (strong perturbations)</i>"
     elif e > 0.05:  # Moderate eccentricity
-        accuracy_note = "<br><i>Accuracy: ±0.001 AU (moderate perturbations)</i>"
+        accuracy_note = "<br><i>Accuracy: +/-0.001 AU (moderate perturbations)</i>"
     else:  # Low eccentricity
-        accuracy_note = "<br><i>Accuracy: ±0.0005 AU (minimal perturbations)</i>"
+        accuracy_note = "<br><i>Accuracy: +/-0.0005 AU (minimal perturbations)</i>"
     
     # SAFETY: Ensure we always have some date string
     if aphelion_date_str == "":
@@ -1324,7 +1327,9 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         )
     )
 
-def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None):
+# def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None):
+def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None, marker_color=None):
+
     """
     Find and mark the closest plotted approach point from trajectory data.
     
@@ -1343,9 +1348,9 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         None (modifies fig in place)
         
     Examples:
-        - Comet C/2025 V1 closest plotted point to Earth → "Closest Plotted (Perigee)"
-        - Asteroid flyby of Mars → "Closest Plotted (Periareion)"
-        - Spacecraft encounter with Jupiter → "Closest Plotted (Perijove)"
+        - Comet C/2025 V1 closest plotted point to Earth ?? "Closest Plotted (Perigee)"
+        - Asteroid flyby of Mars ?? "Closest Plotted (Periareion)"
+        - Spacecraft encounter with Jupiter ?? "Closest Plotted (Perijove)"
     """
     import numpy as np
     from datetime import datetime
@@ -1400,11 +1405,28 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
     
     # Create comprehensive hover text
     km_distance = closest_distance * 149597870.7  # AU to km
+    
+    # Use appropriate precision based on distance scale
+    if closest_distance < 0.0001:  # Less than ~15,000 km - show scientific notation
+        au_str = f"{closest_distance:.2e} AU"
+    elif closest_distance < 0.001:  # Less than ~150,000 km - show 8 decimal places
+        au_str = f"{closest_distance:.8f} AU"
+    else:
+        au_str = f"{closest_distance:.6f} AU"
+    
+    # Show km with appropriate precision
+    if km_distance < 10:
+        km_str = f"{km_distance:.2f} km"
+    elif km_distance < 1000:
+        km_str = f"{km_distance:.1f} km"
+    else:
+        km_str = f"{km_distance:,.0f} km"
+    
     hover_text = (
         f"<b>{obj_name} {label}</b><br>"
         f"Date: {date_str_formatted}<br>"
-        f"Distance from {center_body}: {closest_distance:.6f} AU<br>"
-        f"Distance: {km_distance:,.0f} km"
+        f"Distance from center: {au_str}<br>"
+        f"Distance from center: {km_str}"
     )
     
     # Add marker to plot - using diamond symbol to distinguish from apsidal markers
@@ -1416,10 +1438,9 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
             mode='markers',
             marker=dict(
                 size=8,
-                color=color_map(obj_name),
-        #        color='white',                
+        #        color=color_map(obj_name),
+                color=marker_color if marker_color else color_map(obj_name),               
                 symbol='square-open',  # Different from apsidal markers (square-open)
-        #        line=dict(width=2, color='white')  # White outline for visibility
             ),
             name=f"{obj_name} {label}",
             text=[hover_text],
@@ -1429,4 +1450,4 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         )
     )
     
-    print(f"✓ Added closest plotted marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)
+    print(f"?? Added closest plotted marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)
