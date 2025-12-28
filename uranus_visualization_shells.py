@@ -12,7 +12,7 @@ uranus_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and \n" 
             "metallic iron-nickel. It's estimated to have a mass roughly equivalent to that of Earth. Temperatures near the core can \n" 
-            "reach incredibly high values, around 4982°C (5255 K) degrees Celsius."
+            "reach incredibly high values, around 4982 degC (5255 K) degrees Celsius."
 )
 
 def create_uranus_core_shell(center_position=(0, 0, 0)):
@@ -20,13 +20,13 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
     # Define layer properties
     layer_info = {
         'radius_fraction': 0.2,  # Approximately 20% of Uranus's radius
-        'color': 'rgb(255, 215, 0)',  # estimated black body color at about 4982°C (5255 K)
+        'color': 'rgb(255, 215, 0)',  # estimated black body color at about 4982 degC (5255 K)
         'opacity': 1.0,
         'name': 'Core',
         'description': (
             "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and <br>" 
             "metallic iron-nickel. It's estimated to have a mass roughly equivalent to that of Earth. Temperatures near the core can <br>" 
-            "reach incredibly high values, around 4982°C (5255 K) degrees Celsius."
+            "reach incredibly high values, around 4982 degC (5255 K) degrees Celsius."
         )
     }
     
@@ -169,7 +169,7 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
             "  defined at the 1 bar pressure level as approximately 25,559 kilometers, the equivalent radius at the top of the <br>" 
             "  troposphere (or cloud layer, which is within the upper troposphere) would be approximately 25,559 km + 50 km = 25,609 <br>" 
             "  kilometers. Therefore, the radius at the top of the troposphere is about 25,609 kilometers. To express this as a <br>" 
-            "  fraction of Uranus' radius at the 1 bar level: Fraction = 25,609 km / 25,559 km ≈ 1.002."
+            "  fraction of Uranus' radius at the 1 bar level: Fraction = 25,609 km / 25,559 km ~ 1.002."
             )
     }
     
@@ -307,12 +307,12 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
 
 uranus_upper_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
-            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H₂): Making up about 83% of the atmosphere; \n" 
-            "Helium (He): Constituting around 15%; Methane (CH₄): Present in smaller amounts, around 2.3%. This methane absorbs red \n" 
-            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H₂O) and ammonia (NH₃) are also present \n" 
+            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H2): Making up about 83% of the atmosphere; \n" 
+            "Helium (He): Constituting around 15%; Methane (CH4): Present in smaller amounts, around 2.3%. This methane absorbs red \n" 
+            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H2O) and ammonia (NH3) are also present \n" 
             "in small quantities. Other hydrocarbons like ethane, acetylene, and methyl acetylene exist in trace amounts, formed by \n" 
             "the breakdown of methane by sunlight. The atmosphere lacks the prominent banding seen on Jupiter and Saturn but does \n" 
-            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224 °C), making it the coldest planetary \n" 
+            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224  degC), making it the coldest planetary \n" 
             "atmosphere in our solar system. The atmosphere is layered into a troposphere, stratosphere, and thermosphere."
 )
 
@@ -325,21 +325,21 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
         'opacity': 0.5,
         'name': 'Upper Atmosphere',
         'description': (
-            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H₂): Making up about 83% of the atmosphere; <br>" 
-            "Helium (He): Constituting around 15%; Methane (CH₄): Present in smaller amounts, around 2.3%. This methane absorbs red <br>" 
-            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H₂O) and ammonia (NH₃) are also present <br>" 
+            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H2): Making up about 83% of the atmosphere; <br>" 
+            "Helium (He): Constituting around 15%; Methane (CH4): Present in smaller amounts, around 2.3%. This methane absorbs red <br>" 
+            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H2O) and ammonia (NH3) are also present <br>" 
             "in small quantities. Other hydrocarbons like ethane, acetylene, and methyl acetylene exist in trace amounts, formed by <br>" 
             "the breakdown of methane by sunlight. The atmosphere lacks the prominent banding seen on Jupiter and Saturn but does <br>" 
-            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224 °C), making it the coldest planetary <br>" 
+            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224  degC), making it the coldest planetary <br>" 
             "atmosphere in our solar system. The atmosphere is layered into a troposphere, stratosphere, and thermosphere.<br>" 
             "* The altitude of the top of Uranus' thermosphere is not as sharply defined as the tropopause. The thermosphere <br>" 
             "  gradually transitions into the exosphere. The stratosphere extends up to about 4,000 kilometers above the 1 bar <br>" 
             "  level. The thermosphere and exosphere then extend from this altitude outwards. Some sources suggest the thermosphere <br>" 
             "  can reach as high as two Uranus radii from the planet's center.<br>" 
-            "* Top of Stratosphere (approximate lower bound of Thermosphere): Radius at 1 bar level: ≈ 25,559 km; Altitude of <br>" 
-            "  stratopause: ≈ 4,000 km; Equivalent radius: 25,559 km + 4,000 km = 29,559 kilometers; Fraction of Uranus' radius <br>" 
-            "  (at 1 bar): 29,559 km / 25,559 km ≈ 1.157.<br>" 
-            "* Outer Extent of Thermosphere/Exosphere (approximate upper bound): Radius at 1 bar level: ≈ 25,559 km; Two Uranus radii <br>" 
+            "* Top of Stratosphere (approximate lower bound of Thermosphere): Radius at 1 bar level: ~ 25,559 km; Altitude of <br>" 
+            "  stratopause: ~ 4,000 km; Equivalent radius: 25,559 km + 4,000 km = 29,559 kilometers; Fraction of Uranus' radius <br>" 
+            "  (at 1 bar): 29,559 km / 25,559 km ~ 1.157.<br>" 
+            "* Outer Extent of Thermosphere/Exosphere (approximate upper bound): Radius at 1 bar level: ~ 25,559 km; Two Uranus radii <br>" 
             "  from the center: 2 * 25,559 km = 51,118 kilometers. Therefore, the equivalent radius at the top of the thermosphere <br>" 
             "  (or more accurately, the extended thermosphere/exosphere region) is estimated to range from approximately 1.16 to 2.0 <br>" 
             "  times the radius of Uranus as defined at the 1 bar pressure level. This indicates that the thermosphere of Uranus is a <br>" 
@@ -709,10 +709,10 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
     Uranus Ring System Transformation:
 
     For proper alignment with satellite orbits, Uranus's ring system requires a specific 
-    compound rotation approach due to the planet's extreme axial tilt (97.77°).
+    compound rotation approach due to the planet's extreme axial tilt (97.77 deg).
 
     The transformation uses these key elements:
-    1. A 105° rotation around the X-axis followed by a 105° rotation around the Y-axis
+    1. A 105 deg rotation around the X-axis followed by a 105 deg rotation around the Y-axis
     (empirically determined to match satellite orbit alignment)
     2. Converting point coordinates to NumPy arrays before rotation
     3. Applying center position offset to the final coordinates after both rotations
@@ -721,7 +721,7 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
     radiation belts) share the same reference frame, correctly representing the planet's
     unique orientation in space.
 
-    NOTE: The 105° value, rather than the nominal 97.77° axial tilt, accounts for the 
+    NOTE: The 105 deg value, rather than the nominal 97.77 deg axial tilt, accounts for the 
     specific reference frame conversion between Uranus's equatorial plane and the
     ecliptic coordinate system used for visualization.
     
@@ -1042,8 +1042,8 @@ uranus_hill_sphere_info = (
             "1.3 MB PER FRAME FOR HTML.\n\n"
 
             "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity \n" 
-            "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02×10⁷ km, which corresponds to about \n" 
-            "2 770 Uranus radii (mean radius ≈25 360 km). This means that any moon or other object orbiting Uranus within this \n" 
+            "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10^7 km, which corresponds to about \n" 
+            "2 770 Uranus radii (mean radius ~25 360 km). This means that any moon or other object orbiting Uranus within this \n" 
             "sphere is primarily gravitationally bound to the planet. The major moons and rings of Uranus lie well within its Hill \n" 
             "sphere."                     
 )
@@ -1059,15 +1059,15 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.<br><br>"
     "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity <br>" 
-    "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10⁷ km, which corresponds to about <br>" 
-    "2 770 Uranus radii (mean radius ≈25 360 km). This means that any moon or other object orbiting Uranus within this <br>" 
+    "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10^7 km, which corresponds to about <br>" 
+    "2 770 Uranus radii (mean radius ~25 360 km). This means that any moon or other object orbiting Uranus within this <br>" 
     "sphere is primarily gravitationally bound to the planet. The major moons and rings of Uranus lie well within its Hill Sphere<br><br>" 
                 "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
                 "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
-                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
+                "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
         )
     }
         

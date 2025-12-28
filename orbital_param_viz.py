@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.patches import Ellipse, Arc
 import matplotlib.patches as mpatches
-from coordinate_system_guide import create_coordinate_system_guide
 
 class CreateToolTip(object):
     """
@@ -142,7 +141,7 @@ def add_coordinate_frame(fig, name, color, R_transform, axis_length,
     
     Parameters:
         fig: Plotly figure
-        name: Name of the frame (e.g., 'Perifocal', 'After ω')
+        name: Name of the frame (e.g., 'Perifocal', 'After omega')
         color: Color for the axes
         R_transform: 3x3 rotation matrix
         axis_length: Length of the axes
@@ -338,8 +337,8 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     R3 = rotation_matrix_z(omega_rad)  # Third: Argument of periapsis
     
     # Cumulative transformations (STANDARD ASTRONOMICAL SEQUENCE)
-    R_after_Omega = R1                    # After Ω rotation
-    R_after_inclination = R1 @ R2         # After Ω and i rotations
+    R_after_Omega = R1                    # After Omega rotation
+    R_after_inclination = R1 @ R2         # After Omega and i rotations
     R_final = R1 @ R2 @ R3                # Final: all three rotations
     
     # Calculate appropriate scale_basis for the visualization
@@ -381,19 +380,19 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         add_coordinate_frame(fig, "1. Perifocal", "cyan", np.eye(3), 
                            axis_length, opacity=0.8, visible=True)
         
-        # 3. After Ω rotation (purple) - positions the line of nodes
+        # 3. After Omega rotation (purple) - positions the line of nodes
         if show_steps and Omega != 0:
-            add_coordinate_frame(fig, "2. After Ω rotation", "purple", R_after_Omega, 
+            add_coordinate_frame(fig, "2. After Omega rotation", "purple", R_after_Omega, 
                                axis_length, opacity=0.7, visible=True)
         
-        # 4. After Ω and i rotation (orange) - tilts the orbital plane
+        # 4. After Omega and i rotation (orange) - tilts the orbital plane
         if show_steps and i != 0:
-            add_coordinate_frame(fig, "3. After Ω and i rotation", "orange", 
+            add_coordinate_frame(fig, "3. After Omega and i rotation", "orange", 
                                R_after_inclination, axis_length, 
                                opacity=0.7, visible=True)
         
         # 5. Final = After all rotations (red)
-        add_coordinate_frame(fig, "4. After ω rotation (Final)", "red", R_final, 
+        add_coordinate_frame(fig, "4. After omega rotation (Final)", "red", R_final, 
                            axis_length, opacity=0.8, visible=True)
 
     # Add orbits at each transformation stage
@@ -401,14 +400,14 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     # Create the equation string based on orbit type
     if e < 1.0:  # Elliptical orbit
         orbit_type = "Ellipse"
-        equation = "r = a(1 - e²) / (1 + e·cos(ν))"
+        equation = "r = a(1 - e^2) / (1 + e*cos(nu))"
     elif e == 1.0:  # Parabolic orbit
         orbit_type = "Parabola"
-        equation = "r = 2p / (1 + cos(ν))"
+        equation = "r = 2p / (1 + cos(nu))"
         p_value = a * (1 - e**2)  # semi-latus rectum
     else:  # Hyperbolic orbit
         orbit_type = "Hyperbola"
-        equation = "r = a(1 - e²) / (1 + e·cos(ν))"
+        equation = "r = a(1 - e^2) / (1 + e*cos(nu))"
     
     fig.add_trace(go.Scatter3d(
         x=x0, y=y0, z=z0,
@@ -423,21 +422,21 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             '<b>Orbit Equation (Polar form):</b><br>' +
             f'{equation}<br><br>' +
             '<b>Where:</b><br>' +
-            f'• r = radius from focus ({center_object})<br>' +
-            f'• ν = true anomaly (angle from periapsis)<br>' +
-            f'• a = {a:.3f} AU (semi-major axis)<br>' +
-            f'• e = {e:.6f} (eccentricity)<br>' +
-            (f'• p = {p_value:.3f} AU (semi-latus rectum)<br>' if e == 1.0 else '') +
-            '<br><b>True anomaly (ν):</b><br>' +
+            f'* r = radius from focus ({center_object})<br>' +
+            f'* nu = true anomaly (angle from periapsis)<br>' +
+            f'* a = {a:.3f} AU (semi-major axis)<br>' +
+            f'* e = {e:.6f} (eccentricity)<br>' +
+            (f'* p = {p_value:.3f} AU (semi-latus rectum)<br>' if e == 1.0 else '') +
+            '<br><b>True anomaly (nu):</b><br>' +
             'The angle measured from periapsis to the<br>' +
             'current position along the orbit, in the<br>' +
             'direction of motion.<br>' +
             '<br><b>Eccentricity (e):</b><br>' +
             'A measure of how elongated the orbit is:<br>' +
-            '• e = 0: perfect circle<br>' +
-            '• 0 < e < 1: ellipse<br>' +
-            '• e = 1: parabola<br>' +
-            '• e > 1: hyperbola<br>' +
+            '* e = 0: perfect circle<br>' +
+            '* 0 < e < 1: ellipse<br>' +
+            '* e = 1: parabola<br>' +
+            '* e > 1: hyperbola<br>' +
             '<br><b>Eccentricity from apsides:</b><br>' +
             (f'e = (r_apo - r_peri) / (r_apo + r_peri)<br>' +
              f'e = ({r_apo:.3f} - {r_peri:.3f}) / ({r_apo:.3f} + {r_peri:.3f})<br>' +
@@ -483,7 +482,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         # The semi-major axis is the distance from the center of the ellipse to either end
         # In the perifocal frame with focus at origin:
         # - Center of ellipse is at (-a*e, 0, 0)
-        # - The semi-major axis extends from the center ±a along the major axis
+        # - The semi-major axis extends from the center +/-a along the major axis
         
         # Method 1: Show semi-major axis from focus to a reference point
         # This shows the actual semi-major axis length 'a'
@@ -524,21 +523,21 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         ))
     # ========== END OF NEW CODE ==========
     
-    # 2. After Ω rotation
+    # 2. After Omega rotation
     if show_steps:
         coords1 = R_after_Omega @ np.vstack([x0, y0, z0])
         fig.add_trace(go.Scatter3d(
             x=coords1[0], y=coords1[1], z=coords1[2],
             mode='lines',
             line=dict(color='purple', width=3, dash='dash'),
-            name=f'2. After Ω rotation ({Omega:.1f}°)',
+            name=f'2. After Omega rotation ({Omega:.1f} deg)',
             showlegend=True,
             visible=True,
-            hovertemplate=f'<b>Orbit after Ω rotation</b><br>'
-                          'Step 1: Positions the line of nodes at longitude Ω.'
+            hovertemplate=f'<b>Orbit after Omega rotation</b><br>'
+                          'Step 1: Positions the line of nodes at longitude Omega.'
         ))
 
-        # Add angle arc for Ω (from vernal equinox to ascending node)
+        # Add angle arc for Omega (from vernal equinox to ascending node)
         if Omega != 0:
             Omega_arc_angle = np.linspace(0, Omega_rad, 30)
             Omega_arc_r = 0.25 * scale_basis
@@ -548,12 +547,12 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                 z=np.zeros_like(Omega_arc_angle),
                 mode='lines+text',
                 line=dict(color='purple', width=3),
-                text=[''] * 29 + [f'Ω = {Omega:.1f}°'],
+                text=[''] * 29 + [f'Omega = {Omega:.1f} deg'],
                 textposition='top center',
-                name=f'Ω angle ({Omega:.1f}°)',
+                name=f'Omega angle ({Omega:.1f} deg)',
                 showlegend=True,
                 visible=True,
-                hovertext=f'<b>Longitude of Ascending Node (Ω)</b><br>Angle: {Omega:.1f}°<br>'
+                hovertext=f'<b>Longitude of Ascending Node (Omega)</b><br>Angle: {Omega:.1f} deg<br>'
                           'From vernal equinox to ascending node in ecliptic plane.'
             ))
     
@@ -584,7 +583,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         # Ensure nodes_length is reasonable (cap at 10 AU for visualization)
         nodes_length = min(nodes_length, 10.0)
         
-        # CORRECTED: Line of nodes should be along x-axis after Ω rotation only
+        # CORRECTED: Line of nodes should be along x-axis after Omega rotation only
         nodes_start = R_after_Omega @ np.array([-nodes_length, 0, 0])
         nodes_end = R_after_Omega @ np.array([nodes_length, 0, 0])
         
@@ -600,7 +599,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             hovertemplate='<b>Line of Nodes</b><br>Intersection with ecliptic plane'
         ))
         
-        # Ascending node marker (at +x after Ω rotation)
+        # Ascending node marker (at +x after Omega rotation)
         asc_node = R_after_Omega @ np.array([nodes_length, 0, 0])
 
         fig.add_trace(go.Scatter3d(
@@ -615,17 +614,17 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
             hovertemplate='<b>Ascending Node</b><br>Where orbit crosses ecliptic plane northward'
         ))
 
-    # After Ω and i rotation
+    # After Omega and i rotation
     if show_steps:
         coords2 = R_after_inclination @ np.vstack([x0, y0, z0])
         fig.add_trace(go.Scatter3d(
             x=coords2[0], y=coords2[1], z=coords2[2],
             mode='lines',
             line=dict(color='orange', width=3, dash='dot'),
-            name=f'3. After Ω and i rotation ({i:.1f}°)',
+            name=f'3. After Omega and i rotation ({i:.1f} deg)',
             showlegend=True,
             visible=True,
-            hovertemplate=f'<b>Orbit after Ω and i rotation</b><br>' 
+            hovertemplate=f'<b>Orbit after Omega and i rotation</b><br>' 
             'Step 2: Tilts the orbital plane by inclination i.'
         ))
     
@@ -635,7 +634,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     # Add inclination angle arc
     if i != 0:
         # The inclination arc should show the rotation around the X-axis (line of nodes)
-        # after the ω rotation has been applied
+        # after the omega rotation has been applied
         
         # Make the arc radius larger for better visibility
         inc_arc_r = 0.5 * scale_basis  # Increased from 0.3 * a for better visibility
@@ -648,7 +647,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         inc_y = inc_arc_r * np.cos(inc_arc_angle)
         inc_z = inc_arc_r * np.sin(inc_arc_angle)
         
-        # Transform the arc by the ω rotation to align with the line of nodes
+        # Transform the arc by the omega rotation to align with the line of nodes
         inc_arc_coords = R_after_Omega @ np.vstack([inc_x, inc_y, inc_z])
         
         # Add the inclination arc trace
@@ -663,14 +662,14 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                 color='orange',
                 symbol='diamond'
             ),
-            text=[''] * 29 + [f'i = {i:.1f}°'],
+            text=[''] * 29 + [f'i = {i:.1f} deg'],
             textposition='top center',
             textfont=dict(size=12, color='orange'),
-            name=f'Inclination ({i:.1f}°)',
+            name=f'Inclination ({i:.1f} deg)',
             legendgroup='inclination',
             showlegend=True,
             visible=True,
-            hovertemplate=f'<b>Inclination (i)</b><br>Angle: {i:.1f}°<br>' +
+            hovertemplate=f'<b>Inclination (i)</b><br>Angle: {i:.1f} deg<br>' +
                          'Tilts the orbit relative to the ecliptic plane.<br>' +
                          'Rotation around the X-axis (line of nodes).'
         ))
@@ -717,9 +716,9 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         hovertemplate='<b>Final Orbit</b><br>In ecliptic coordinates'
     ))
     
-    # The Ω angle is already shown in step 2, no need to repeat it here
+    # The Omega angle is already shown in step 2, no need to repeat it here
 
-    # Add arc showing ω angle from ascending node to periapsis
+    # Add arc showing omega angle from ascending node to periapsis
     # This arc needs to be in the FINAL ORBITAL PLANE.
 
     if omega != 0:
@@ -782,14 +781,14 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
                 z=arc_z_coords,
                 mode='lines+text',
                 line=dict(color='red', width=2, dash='dot'), 
-                text=[''] * (len(arc_x_coords) - 1) + [f'ω = {omega:.1f}°'],
+                text=[''] * (len(arc_x_coords) - 1) + [f'omega = {omega:.1f} deg'],
                 textposition='bottom center', 
-                name=f'ω angle (orbital plane)',
+                name=f'omega angle (orbital plane)',
                 showlegend=True,
                 visible=True,
-                hovertext=f'<b>Argument of Periapsis (ω)</b><br>'
+                hovertext=f'<b>Argument of Periapsis (omega)</b><br>'
                         f'Angle from Ascending Node to Periapsis.<br>'
-                        f'Measured in the orbital plane.<br>Value: {omega:.1f}°'
+                        f'Measured in the orbital plane.<br>Value: {omega:.1f} deg'
             )
         )
 
@@ -969,7 +968,7 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
         # Corrected: Provide text as a list for the two points
         text=['',  # No text for the start of the arrow
             f'Direction of Motion<br>'  # Text for the arrowhead
-            f'Orbit is {"Retrograde (i > 90°)" if i > 90 else "Prograde (i < 90°)"}']
+            f'Orbit is {"Retrograde (i > 90 deg)" if i > 90 else "Prograde (i < 90 deg)"}']
     ))
 
     # Update layout
@@ -1012,30 +1011,30 @@ def create_orbital_transformation_viz(fig, obj_name, planetary_params,
     # Add comprehensive annotation
     annotation_text = f"""<b>Orbital Transformation Visualization</b><br><br>
     <b>Orbital Elements:</b><br>
-    • a = {a:.3f} AU (semi-major axis)<br>
-    • e = {e:.6f} (eccentricity)<br>
-    • i = {i:.1f}° (inclination)<br>
-    • ω = {omega:.1f}° (argument of periapsis)<br>
-    • Ω = {Omega:.1f}° (longitude of ascending node)<br><br>
+    * a = {a:.3f} AU (semi-major axis)<br>
+    * e = {e:.6f} (eccentricity)<br>
+    * i = {i:.1f} deg (inclination)<br>
+    * omega = {omega:.1f} deg (argument of periapsis)<br>
+    * Omega = {Omega:.1f} deg (longitude of ascending node)<br><br>
 
     <b>Coordinate Frame Transformations:</b><br>
     The final transformation is a product of three rotations:<br>
-    R = R_z(ω) · R_x(i) · R_z(Ω)<br><br>
+    R = R_z(omega) * R_x(i) * R_z(Omega)<br><br>
 
     1. <b>Perifocal Frame</b> (cyan) - The orbit's 2D blueprint.<br>
-    • Periapsis is aligned on the +X axis.<br><br>
+    * Periapsis is aligned on the +X axis.<br><br>
 
-    2. <b>After Ω rotation</b> (purple) - Positions the line of nodes.<br>
-    • Rotates by Ω around the Z-axis (from vernal equinox to ascending node).<br>
-    <b>→ Sets where the orbit crosses the ecliptic plane.</b><br><br>
+    2. <b>After Omega rotation</b> (purple) - Positions the line of nodes.<br>
+    * Rotates by Omega around the Z-axis (from vernal equinox to ascending node).<br>
+    <b>[OK] Sets where the orbit crosses the ecliptic plane.</b><br><br>
 
-    3. <b>After Ω and i rotation</b> (orange) - Tilts the orbit.<br>
-    • Tilts the frame by i around the line of nodes (X-axis after Ω rotation).<br>
-    <b>→ Gives the orbit its inclination relative to the ecliptic.</b><br><br>
+    3. <b>After Omega and i rotation</b> (orange) - Tilts the orbit.<br>
+    * Tilts the frame by i around the line of nodes (X-axis after Omega rotation).<br>
+    <b>[OK] Gives the orbit its inclination relative to the ecliptic.</b><br><br>
 
-    4. <b>After ω rotation (Final)</b> (red) - Final orientation.<br>
-    • Rotates by ω within the tilted orbital plane.<br>
-    <b>→ Positions the periapsis at angle ω from the ascending node.</b><br><br>    
+    4. <b>After omega rotation (Final)</b> (red) - Final orientation.<br>
+    * Rotates by omega within the tilted orbital plane.<br>
+    <b>[OK] Positions the periapsis at angle omega from the ascending node.</b><br><br>    
 
     <b>Key Insight:</b> This visualization shows the sequence of<br> 
     rotations applied to the initial Perifocal Orbit (cyan) to place it<br> 
@@ -1274,7 +1273,7 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
         if e > 10 and plot_range < 2.0:
             plot_range = 2.0  # Minimum 2 AU range for visibility
         
-        print(f"DEBUG: Final plot_range = ±{plot_range:.3f} AU")
+        print(f"DEBUG: Final plot_range = +/-{plot_range:.3f} AU")
         
         # Set up the plot with dynamic scaling
         ax.set_xlim(-plot_range, plot_range)
@@ -1384,7 +1383,7 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
                         # Valid angle range for hyperbola
                         theta_max = np.arccos(-1/e)
                         
-                        print(f"DEBUG: Hyperbola params - a={a}, a_abs={a_abs}, e={e}, theta_max={np.degrees(theta_max)}°")
+                        print(f"DEBUG: Hyperbola params - a={a}, a_abs={a_abs}, e={e}, theta_max={np.degrees(theta_max)} deg")
                         print(f"DEBUG: b={b:.3f}, c={c:.3f}, r_peri={r_peri:.3f}, plot_range={plot_range:.3f}")
                         
                         # Generate angles for the hyperbola
@@ -1461,7 +1460,7 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
                         if abs(c) < plot_range * 2:  # Only if center is reasonably close
                             x_asym = np.linspace(-plot_range, plot_range, 100)
                             # Asymptotes pass through the center at (-c, 0)
-                            # Slope is ±b/a
+                            # Slope is +/-b/a
                             y_asym_upper = (b/a_abs) * (x_asym + c)
                             y_asym_lower = -(b/a_abs) * (x_asym + c)
                             
@@ -1502,11 +1501,11 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
                             
                         - $\\mathbf{{Focus\\ distance\\ , c}}$:
                             This is the distance from center to focus (Sun); uses absolute value of orbital mechanics, a
-                            c = |a| $\\cdot$ e = {a_abs:.3f} $\\cdot$ {e:.6f} = {c:.3f} AU ✓
+                            c = |a| $\\cdot$ e = {a_abs:.3f} $\\cdot$ {e:.6f} = {c:.3f} AU [OK]
                             
                         - $\\mathbf{{Eccentricity\\ , e}}$:
                             Eccentricity definition; uses absolute value of orbital mechanics, a
-                            e = c / |a| = {c:.3f} / {a_abs:.3f} = {e:.6f} ✓'''
+                            e = c / |a| = {c:.3f} / {a_abs:.3f} = {e:.6f} [OK]'''
                         
                         props = dict(boxstyle='round', facecolor='wheat', alpha=0.8)
                         ax.text(1.02, 0.98, textstr, transform=ax.transAxes, fontsize=8,
@@ -1676,23 +1675,23 @@ def create_eccentricity_demo_window(parent, objects=None, planetary_params_overr
             if e_val < 1:
                 definitions_text = (
                     f"<b>Definitions</b><br>"
-                    f"<b>• {orbit_type}</b>: e = {e_val:.6f}<br>"
-                    f"<b>• Semi-major axis (a)</b>: {a:.3f} AU<br>"
-                    f"<b>• Semi-minor axis (b)</b>: {b:.3f} AU<br>"
-                    f"<b>• Periapsis</b>: {periapsis:.3f} AU<br>"
-                    f"<b>• Apoapsis</b>: {apoapsis:.3f} AU<br>"
-                    f"<b>• Focal distance (c)</b>: {c:.3f} AU<br>"
-                    f"<b>• Focus separation</b>: {2*c:.3f} AU<br>"
-                    f"<b>• Eccentricity</b>: e = c/a = {e_val:.6f}"
+                    f"<b>* {orbit_type}</b>: e = {e_val:.6f}<br>"
+                    f"<b>* Semi-major axis (a)</b>: {a:.3f} AU<br>"
+                    f"<b>* Semi-minor axis (b)</b>: {b:.3f} AU<br>"
+                    f"<b>* Periapsis</b>: {periapsis:.3f} AU<br>"
+                    f"<b>* Apoapsis</b>: {apoapsis:.3f} AU<br>"
+                    f"<b>* Focal distance (c)</b>: {c:.3f} AU<br>"
+                    f"<b>* Focus separation</b>: {2*c:.3f} AU<br>"
+                    f"<b>* Eccentricity</b>: e = c/a = {e_val:.6f}"
                 )
             else:
                 definitions_text = (
                     f"<b>Definitions</b><br>"
-                    f"<b>• {orbit_type}</b>: e = {e_val:.6f}<br>"
-                    f"<b>• Semi-major axis (a)</b>: {a:.3f} AU<br>"
-                    f"<b>• Periapsis</b>: {periapsis:.3f} AU<br>"
-                    f"<b>• Focal distance (c)</b>: {c:.3f} AU<br>"
-                    f"<b>• Eccentricity</b>: e = c/a = {e_val:.6f}"
+                    f"<b>* {orbit_type}</b>: e = {e_val:.6f}<br>"
+                    f"<b>* Semi-major axis (a)</b>: {a:.3f} AU<br>"
+                    f"<b>* Periapsis</b>: {periapsis:.3f} AU<br>"
+                    f"<b>* Focal distance (c)</b>: {c:.3f} AU<br>"
+                    f"<b>* Eccentricity</b>: e = c/a = {e_val:.6f}"
                 )
             
             # Set appropriate axis ranges - account for elongated orbits
@@ -1972,9 +1971,9 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     param_names = [
         ('a', 'Semi-major axis:', 'AU'),
         ('e', 'Eccentricity:', ''),
-        ('i', 'Inclination:', '°'),
-        ('omega', 'Arg. of Periapsis (ω):', '°'),
-        ('Omega', 'Long. of Asc. Node (Ω):', '°'),
+        ('i', 'Inclination:', ' deg'),
+        ('omega', 'Arg. of Periapsis (omega):', ' deg'),
+        ('Omega', 'Long. of Asc. Node (Omega):', ' deg'),
         ('period', 'Orbital Period:', 'days')
     ]
     
@@ -2142,26 +2141,6 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
         "affects orbital shape from circle (e=0) through ellipse,\n"
         "parabola (e=1), to hyperbola (e>1).")
 
-    # Add the Coordinate System Reference Guide button
-    coord_guide_button = ttk.Button(
-        control_frame, 
-        text="Coordinate System Reference Guide", 
-        command=create_coordinate_system_guide,
-        width=40
-    )
-    coord_guide_button.grid(row=10, column=0, columnspan=3, pady=10, padx=5)
-
-    # Add tooltip for the coordinate system guide button
-    CreateToolTip(coord_guide_button, 
-        "Open a comprehensive reference guide explaining the J2000\n"
-        "Ecliptic coordinate system used throughout Paloma's Orrery.\n\n"
-        "Learn about:\n"
-        "  • What the coordinate axes represent\n"
-        "  • Why this reference frame is used\n"
-        "  • How it applies to orbital mechanics\n"
-        "  • The J2000.0 reference epoch"
-    )
-
     # Information text
     info_frame = ttk.LabelFrame(main_frame, text="Understanding the Visualization")
     info_frame.pack(side='right', fill='both', expand=True)
@@ -2176,98 +2155,98 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     ## KEY CONCEPTS
 
     ### Coordinate Frames
-    • **Perifocal Frame (Cyan)**: The orbit's natural coordinate system
+    * **Perifocal Frame (Cyan)**: The orbit's natural coordinate system
     - X-axis points to periapsis (closest approach)
     - Orbit lies in XY plane
     - Specific to each individual orbit
     - This is the orbit's "2D blueprint"
 
-    • **Ecliptic Frame (Red)**: The standard reference frame
+    * **Ecliptic Frame (Red)**: The standard reference frame
     - XY plane is Earth's orbital plane
-    - X-axis points to vernal equinox (♈)
+    - X-axis points to vernal equinox ([ARIES])
     - Same for all objects in the solar system
     - The universal coordinate system for astronomy
 
     ### TRANSFORMATION SEQUENCE
 
     The visualization shows how three sequential rotations place the orbit into its final orientation:
-    **R = Rz(ω) · Rx(i) · Rz(Ω)**
+    **R = Rz(omega) * Rx(i) * Rz(Omega)**
 
     1. **Initial State (Cyan)**: Perifocal Frame
     - The orbit in its simplest form
     - Periapsis aligned on +X axis
 
-    2. **After Ω rotation (Purple)**: Longitude of Ascending Node
-    - Rotates the frame by Ω around Z-axis
-    - Positions the line of nodes at angle Ω from vernal equinox
+    2. **After Omega rotation (Purple)**: Longitude of Ascending Node
+    - Rotates the frame by Omega around Z-axis
+    - Positions the line of nodes at angle Omega from vernal equinox
     - The X-axis after this rotation IS the line of nodes
 
-    3. **After Ω and i rotation (Orange)**: Inclination
+    3. **After Omega and i rotation (Orange)**: Inclination
     - Tilts the frame by i around the line of nodes (X-axis from step 2)
     - Gives the orbit its inclination relative to the ecliptic plane
     - The line of nodes remains fixed along the purple X-axis
 
     4. **Final State (Red)**: Argument of Periapsis
-    - Rotates by ω within the tilted orbital plane
-    - Positions the periapsis at angle ω from the ascending node
+    - Rotates by omega within the tilted orbital plane
+    - Positions the periapsis at angle omega from the ascending node
     - Completes the transformation to ecliptic coordinates
 
     **Important**: The coordinate systems rotate, not the orbit itself! The orbit maintains its shape and orientation relative to each coordinate frame.
 
     ## VISUAL ELEMENTS
 
-    • **Coordinate Axes**: Shows each reference frame's orientation
-    • **Orbital Curves**: Displays orbit at each transformation stage
-    • **Periapsis/Apoapsis Markers**: 
+    * **Coordinate Axes**: Shows each reference frame's orientation
+    * **Orbital Curves**: Displays orbit at each transformation stage
+    * **Periapsis/Apoapsis Markers**: 
     - Periapsis: Closest approach (perihelion for Sun, perigee for planets)
     - Apoapsis: Farthest point (aphelion for Sun, apogee for planets)
     - Hover over markers to see predicted dates and distances
-    • **Current Position**: Shows the object's location at the selected date
-    • **Line of Nodes**: Where orbit crosses the reference plane (along purple X-axis)
-    • **Ascending Node**: Where orbit rises above the reference plane
+    * **Current Position**: Shows the object's location at the selected date
+    * **Line of Nodes**: Where orbit crosses the reference plane (along purple X-axis)
+    * **Ascending Node**: Where orbit rises above the reference plane
 
     ## ANGULAR PARAMETERS EXPLAINED
 
-    • **Ω (Longitude of Ascending Node)**: 0°–360°
+    * **Omega (Longitude of Ascending Node)**: 0 deg-360 deg
     - Measured in the ecliptic plane
-    - From vernal equinox (♈) to ascending node
+    - From vernal equinox ([ARIES]) to ascending node
     - Determines the orbit's "swivel" orientation
 
-    • **i (Inclination)**: 0°–180°
+    * **i (Inclination)**: 0 deg-180 deg
     - Angle between orbital plane and ecliptic
-    - 0° = orbit in ecliptic plane
-    - 90° = polar orbit
-    - >90° = retrograde orbit
+    - 0 deg = orbit in ecliptic plane
+    - 90 deg = polar orbit
+    - >90 deg = retrograde orbit
 
-    • **ω (Argument of Periapsis)**: 0°–360°
+    * **omega (Argument of Periapsis)**: 0 deg-360 deg
     - Measured within the orbital plane
     - From ascending node to periapsis
     - Determines where closest approach occurs
 
     ## INTERACTIVE FEATURES
 
-    • **3D Navigation**:
+    * **3D Navigation**:
     - Click and drag to rotate view
     - Scroll to zoom in/out
     - Double-click to reset view
 
-    • **Display Options**:
+    * **Display Options**:
     - Toggle transformation steps on/off
     - Show/hide coordinate frames
     - Display final orbit only (simplified view)
     - Toggle perihelion/aphelion markers
 
-    • **Legend Interaction**:
+    * **Legend Interaction**:
     - Click legend items to show/hide elements
     - Useful for focusing on particular aspects of the transformation
 
     ## REAL-TIME INTEGRATION
 
     When launched from the main application:
-    • Uses current date from the main plot
-    • Shows actual object position at that date
-    • Displays calculated apsidal dates (perihelion/aphelion)
-    • Integrates with live orbital data
+    * Uses current date from the main plot
+    * Shows actual object position at that date
+    * Displays calculated apsidal dates (perihelion/aphelion)
+    * Integrates with live orbital data
 
     ## NOTE ON SATELLITE ORBITS
 
@@ -2282,7 +2261,7 @@ def create_orbital_viz_window(root, objects, planetary_params, parent_planets=No
     ## EDUCATIONAL VALUE
 
     This visualization bridges the gap between:
-    - **Abstract parameters** (a, e, i, ω, Ω) that define orbits mathematically
+    - **Abstract parameters** (a, e, i, omega, Omega) that define orbits mathematically
     - **Physical reality** of how celestial objects move through 3D space
 
     By showing the step-by-step transformation, it helps develop intuition for how each parameter affects the final orbit orientation."""

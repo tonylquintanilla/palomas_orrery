@@ -68,7 +68,7 @@ planetary_params = {
         #     'Venus': 224.701, 
     },
     
-# Aten type near earth asteroids, a < 1.0 AU AND aphelion (Q) > 0.983 AU (Earth's perihelion) → cross Earth's orbit from inside
+# Aten type near earth asteroids, a < 1.0 AU AND aphelion (Q) > 0.983 AU (Earth's perihelion) [OK] cross Earth's orbit from inside
 
     'Apophis': {
         'a': 0.922583,   # Horizons: A, semi-major axis in AU
@@ -96,7 +96,7 @@ planetary_params = {
 # Langrange points do not have orbital parameters, EM-L1 to EM-L5 and L1 to L5, but maybe could
 # space missions do not have orbital parameters
 
-    # Apollos: a > 1.0 AU, Perihelion < 1.017 AU, → cross Earth's orbit from outside
+    # Apollos: a > 1.0 AU, Perihelion < 1.017 AU, [OK] cross Earth's orbit from outside
 
     '2024 DW': {                  # 50613029 (2024 DW) 2025-Jul-05 10:27:18; Soln.date: 2024-Feb-23
         'a': 2.421098478271158,   # Horizons: A, semi-major axis in AU
@@ -209,7 +209,7 @@ planetary_params = {
         # perihelion (q) = a * (1 - e) = 0.992
     },
 
-    # Amor type near Earth asteroids; Perihelion > 1.017 AU and < 1.3 AU → approach but don't cross Earth's orbit
+    # Amor type near Earth asteroids; Perihelion > 1.017 AU and < 1.3 AU [OK] approach but don't cross Earth's orbit
 
     'Eros': {
         'a': 1.458040,   # semi-major axis in AU
@@ -260,7 +260,7 @@ planetary_params = {
         'i': 9.944,      # inclination in degrees
         'omega': 250.97,  # argument of perihelion in degrees
         'Omega': 55.39    # longitude of ascending node in degrees
-        #     'Šteins': 1327.41,     # 3.64 * 365.25
+        #     'Steins': 1327.41,     # 3.64 * 365.25
     },
 
     'Donaldjohanson': {     # 52246 Donaldjohanson (1981 EQ5)
@@ -456,7 +456,7 @@ planetary_params = {
         'Omega': 70.99623775199329,     # OM - longitude of ascending node in degrees
         'epoch': '2017-09-7',           # EPOCH=  2458003.5 ! 2017-Sep-07.00 (TDB) 
         'TP': 2477290.5810889825,       # TP= 2070-Jun-28.0810889825        
-        # period —  PER= 249.80011
+        # period -  PER= 249.80011
     },
 
     'Mani': {                           # 307261 Mani (2002 MS4) 
@@ -467,7 +467,7 @@ planetary_params = {
         'Omega': 215.9145112848788,     # OM, longitude of ascending node in degrees; 
         'epoch': '2018-09-17',          # EPOCH=  2458378.5 ! 2018-Sep-17.00 (TDB) 
         'TP': 2496542.2060495983,       # TP= 2123-Mar-14.7060495983 
-                                        # period — PER= 271.88306 jy = 99305.28767
+                                        # period - PER= 271.88306 jy = 99305.28767
     },
 
     'GV9': {                            # 90568 (2004 GV9)   
@@ -478,7 +478,7 @@ planetary_params = {
         'Omega': 250.6682664772548,     # OM, longitude of ascending node in degrees;
         'epoch': '2018-3-9',            # EPOCH=  2458186.5 ! 2018-Mar-09.00 (TDB)
         'TP': 2448321.5580008202,       # TP= 1991-Mar-06.0580008202
-                                        # period — PER= 274.74897 jy = 100352.0613 days
+                                        # period - PER= 274.74897 jy = 100352.0613 days
     },
 
     'Varuna': {
@@ -487,7 +487,7 @@ planetary_params = {
         'i': 17.200,     # inclination in degrees
         'omega': 97.286,  # argument of perihelion in degrees
         'Omega': 97.286   # longitude of ascending node in degrees
-        # period — 102799.14 days (epoch 2025-08-12)
+        # period - 102799.14 days (epoch 2025-08-12)
     },
 
     'Haumea': {
@@ -516,7 +516,7 @@ planetary_params = {
         'i': 2.45301305206896,      # IN, inclination in degrees
         'omega': 176.1507602341478, # W, argument of perihelion in degrees
         'Omega': 158.939446659904   # OM, longitude of ascending node in degrees
-        # period — 108224.98 days (epoch 2025-08-12)
+        # period - 108224.98 days (epoch 2025-08-12)
     },
 
     'Makemake': {   # 136472 Makemake (2005 FY9); Epoch 2018-Jan-10
@@ -536,7 +536,7 @@ planetary_params = {
         'i': 30.86452616352285,     # IN, inclination in degrees
         'omega': 207.2059900430104, # W, argument of perihelion in degrees
         'Omega': 336.8262717815297  # OM, longitude of ascending node in degrees; 
-        # period — 201010.45 days (epoch 2025-08-12)
+        # period - 201010.45 days (epoch 2025-08-12)
     },    
 
     'Eris': {
@@ -615,7 +615,7 @@ planetary_params = {
     'Planet 9': {
         'a': 600,          # Semi-major axis in AU (updated to match 500-700 AU range from IRAS/AKARI study)
         'e': 0.30,         # Eccentricity (slightly adjusted to align with 280-1120 AU perihelion/aphelion range)
-        'i': 6,            # Inclination in degrees (2025 estimate: 6°)
+        'i': 6,            # Inclination in degrees (2025 estimate: 6 deg)
         'L': 238,          # Mean longitude at epoch in degrees (unchanged)
         'omega': 150,      # Argument of perihelion in degrees (unchanged)
         'Omega': 90        # Longitude of ascending node in degrees (unchanged)        
@@ -640,7 +640,7 @@ planetary_params = {
         'i': 16.20068039109616,         # IN
         'omega': 338.23502348994,     # W
         'Omega': 328.5637374192406      # OM 
-        # period — 10048413.07 days (epoch 2025-08-12)
+        # period - 10048413.07 days (epoch 2025-08-12)
     },
 
     'Leleakuhonua': {                   #  541132 Leleakuhonua (2015 TG387) ; Soln.date: 2025-Jul-02_03:47:19
@@ -1251,17 +1251,15 @@ planetary_params = {
         # Note: Namaka's orbit is non-Keplerian due to Hi'iaka perturbations
     },
 
-# Makemake's Moon
+    # Makemake's Moon
     'MK2': {
-        'a': 0.0001487,        # semi-major axis in AU (22,250 km ± 780 km)
-        'e': 0.0,              # eccentricity (best fit is circular)
-        'i': 74.0,             # inclination to ecliptic in degrees (63°-87° range, uncertain)
-        'omega': 0.0,          # argument of periapsis (undefined for circular orbit)
-        'Omega': 0.0,          # longitude of ascending node (unknown - edge-on to Earth)
-        'orbital_period_days': 18.023,  # ± 0.017 days
-        # Source: arXiv:2509.05880 (Sept 2025) - preliminary Hubble analysis
-        # Note: Orbit is edge-on to Earth (83.7° ± 1.0° relative to line of sight)
-        # JPL Horizons has no satellite ephemeris for MK2 as of late 2025
+        'a': 0.00014,          # semi-major axis in AU (~21,000 km, estimated)
+        'e': 0.0,              # eccentricity (assumed circular, poorly constrained)
+        'i': 0.0,              # inclination unknown
+        'omega': 0.0,          # argument of periapsis unknown
+        'Omega': 0.0,          # longitude of ascending node unknown
+        'orbital_period_days': 12.4,
+        # Note: MK2 orbital elements poorly constrained - use osculating when available
     },
 
 } 

@@ -23,6 +23,7 @@ import subprocess
 import sys
 import math
 import json
+import platform
 import orbit_data_manager
 import shutil
 import copy
@@ -825,18 +826,18 @@ def calculate_satellite_precession_info(selected_objects, start_date, end_date, 
             if total_precession > MAX_PRECESSION:
                 # Warning format (exceeds recommended)
                 info_msg = (
-                    f"? {obj_name}:\n"
-                    f"  ? Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
-                    f"  ? Precession: {total_precession:.1f} deg (EXCEEDS recommended {MAX_PRECESSION} deg)\n"
-                    f"  ? Recommended: ?{max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION} deg precession"
+                    f"WARNING: {obj_name}:\n"
+                    f"  - Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
+                    f"  - Precession: {total_precession:.1f} deg (EXCEEDS recommended {MAX_PRECESSION} deg)\n"
+                    f"  - Recommended: <={max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION} deg precession"
                 )
             else:
                 # Info format (within recommended)
                 info_msg = (
-                    f"? {obj_name}:\n"
-                    f"  ? Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
-                    f"  ? Precession: {total_precession:.1f} deg (within recommended {MAX_PRECESSION} deg)\n"
-                    f"  ? Maximum recommended: {max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION} deg precession"
+                    f"WARNING: {obj_name}:\n"
+                    f"  - Selected range: {days_to_plot} days = {orbits_in_range:.0f} orbits\n"
+                    f"  - Precession: {total_precession:.1f} deg (within recommended {MAX_PRECESSION} deg)\n"
+                    f"  - Maximum recommended: {max_days} days = {recommended_orbits:.0f} orbits for {MAX_PRECESSION} deg precession"
                 )
             
             info_messages.append(info_msg)
@@ -976,9 +977,9 @@ def plot_refined_orbits_for_moons(fig, moon_names, center_id, color_map, orbit_d
                 print(f"  Mean difference: {mean_diff * 149597870.7:.1f} km ({mean_diff:.6f} AU)", flush=True)
                 
                 if max_diff < 1e-10:
-                    print("  ? WARNING: Refined orbit is identical to Keplerian orbit!", flush=True)
+                    print("  - WARNING: Refined orbit is identical to Keplerian orbit!", flush=True)
                 else:
-                    print("  ?? Refined orbit differs from Keplerian orbit", flush=True)
+                    print("  -> Refined orbit differs from Keplerian orbit", flush=True)
             
             # Add trace with distinctive style
             fig.add_trace(
@@ -1007,11 +1008,11 @@ def plot_refined_orbits_for_moons(fig, moon_names, center_id, color_map, orbit_d
                     opacity=0.9
                 )
             )
-            print(f"\n?? Added refined orbit trace for {moon_name}", flush=True)
+            print(f"\n-> Added refined orbit trace for {moon_name}", flush=True)
             print(f"{'='*60}", flush=True)
             
         except Exception as e:
-            print(f"\n?? Could not add refined orbit for {moon_name}: {e}", flush=True)
+            print(f"\n-> Could not add refined orbit for {moon_name}: {e}", flush=True)
             import traceback
             traceback.print_exc()
             print(f"{'='*60}", flush=True)
@@ -1220,7 +1221,7 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
     
     # Verify the refined orbit
     if correction is not None:
-        print("\n?? Refined orbit function created WITH correction", flush=True)
+        print("\n-> Refined orbit function created WITH correction", flush=True)
         
         # Test comparison
         test_t = np.linspace(0, 2*np.pi, 8)
@@ -1230,7 +1231,7 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
             diff = np.linalg.norm(ideal_pos - refined_pos) * 149597870.7  # km
             print(f"  t={t:.2f}: difference = {diff:.1f} km", flush=True)
     else:
-        print("\n?? Refined orbit function created WITHOUT correction (identical to Keplerian)", flush=True)
+        print("\n-> Refined orbit function created WITHOUT correction (identical to Keplerian)", flush=True)
     
     return refined_orbit
 
@@ -1275,7 +1276,7 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: October 11, 2025")
+root.title("Paloma's Orrery -- Updated: December 25, 2025")
 # Define 'today' once after initializing the main window
 today = datetime.today()
 # Add this line:
@@ -1293,9 +1294,14 @@ controls_container.pack_propagate(False)
 controls_container.grid_propagate(False)
 controls_container.config(width=450, height=750)  # Wider container
 
+# Let container size based on content, with minimum dimensions
+#controls_container.config(height=750)
+#controls_container.grid_columnconfigure(0, weight=1)  # Let canvas column expand
+
 # Create a canvas inside the container
 controls_canvas = tk.Canvas(controls_container, bg='SystemButtonFace')
-controls_scrollbar = tk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, width=16)
+# controls_scrollbar = tk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, width=16)
+controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview)
 
 # Configure the canvas
 controls_canvas.configure(yscrollcommand=controls_scrollbar.set)
@@ -1662,23 +1668,52 @@ def configure_controls_canvas(event):
 controls_frame.bind("<Configure>", configure_controls_canvas)
 
 # Bind mousewheel scrolling
-def _on_mousewheel(event):
-    controls_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+#def _on_mousewheel(event):
+#    controls_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
-controls_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+#controls_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
+# Unbind the mousewheel when mouse leaves the canvas
+#def _unbound_mousewheel(event):
+#    controls_canvas.unbind_all("<MouseWheel>")
+
+#def _bound_mousewheel(event):
+#    controls_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
+#controls_canvas.bind("<Enter>", _bound_mousewheel)
+#controls_canvas.bind("<Leave>", _unbound_mousewheel)
+
+# Bind mousewheel scrolling - cross-platform compatible
+def _on_mousewheel(event):
+    # macOS returns delta of 1/-1, Windows returns 120/-120
+    if platform.system() == 'Darwin':  # macOS
+        controls_canvas.yview_scroll(int(-1 * event.delta), "units")
+    elif event.num == 4:  # Linux scroll up
+        controls_canvas.yview_scroll(-1, "units")
+    elif event.num == 5:  # Linux scroll down
+        controls_canvas.yview_scroll(1, "units")
+    else:  # Windows
+        controls_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
 # Unbind the mousewheel when mouse leaves the canvas
 def _unbound_mousewheel(event):
     controls_canvas.unbind_all("<MouseWheel>")
+    controls_canvas.unbind_all("<Button-4>")
+    controls_canvas.unbind_all("<Button-5>")
 
 def _bound_mousewheel(event):
     controls_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+    controls_canvas.bind_all("<Button-4>", _on_mousewheel)  # Linux scroll up
+    controls_canvas.bind_all("<Button-5>", _on_mousewheel)  # Linux scroll down
 
 controls_canvas.bind("<Enter>", _bound_mousewheel)
 controls_canvas.bind("<Leave>", _unbound_mousewheel)
 
 # Set the canvas size to match available space
-controls_canvas.config(width=580, height=710)  # Adjust these values as needed
+# The container and pack(fill="both", expand=True) handle sizing
+# controls_canvas.config(height=710)
+# Set the canvas size to match available space (leave room for scrollbar)
+controls_canvas.config(width=430, height=710)  # 450 container - 16 scrollbar - 4 padding
 
 orbit_paths_over_time = None  # Will be set by orbit_data_manager
 
@@ -2361,7 +2396,7 @@ objects = [
 
     {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
-    'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky ?? it looks like a bright red point of light."', 
+    'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light."', 
     'mission_url': 'https://science.nasa.gov/?search=mars'},
 
     {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'object_type': 'orbital', 
@@ -3257,7 +3292,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.02227, 'period_days': 4.04961,
      'in_habitable_zone': True,
-     'mission_info': '?? IN HABITABLE ZONE ?? Inner edge, 4.0 day period. May have water.',
+     'mission_info': '* IN HABITABLE ZONE * Inner edge, 4.0 day period. May have water.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7915/trappist-1-d/'},
     
     {'name': 'TRAPPIST-1 e', 'id': 'trappist1e', 'var': trappist1e_var,
@@ -3265,7 +3300,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.02925, 'period_days': 6.09965,
      'in_habitable_zone': True,
-     'mission_info': '?? IN HABITABLE ZONE ?? PRIME CANDIDATE! Most likely to have liquid water. 6.1 day period.',
+     'mission_info': '* IN HABITABLE ZONE * PRIME CANDIDATE! Most likely to have liquid water. 6.1 day period.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7916/trappist-1-e/'},
     
     {'name': 'TRAPPIST-1 f', 'id': 'trappist1f', 'var': trappist1f_var,
@@ -3273,7 +3308,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.03849, 'period_days': 9.20669,
      'in_habitable_zone': True,
-     'mission_info': '?? IN HABITABLE ZONE ?? 9.2 day period. May have significant water content.',
+     'mission_info': '* IN HABITABLE ZONE * 9.2 day period. May have significant water content.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7917/trappist-1-f/'},
     
     {'name': 'TRAPPIST-1 g', 'id': 'trappist1g', 'var': trappist1g_var,
@@ -3281,7 +3316,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'trappist1',
      'semi_major_axis_au': 0.04683, 'period_days': 12.35294,
      'in_habitable_zone': True,
-     'mission_info': '?? IN HABITABLE ZONE ?? Outer edge, 12.4 day period. May have subsurface ocean.',
+     'mission_info': '* IN HABITABLE ZONE * Outer edge, 12.4 day period. May have subsurface ocean.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7918/trappist-1-g/'},
     
     {'name': 'TRAPPIST-1 h', 'id': 'trappist1h', 'var': trappist1h_var,
@@ -3339,7 +3374,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'proxima',
      'semi_major_axis_au': 0.04856, 'period_days': 11.18427,
      'in_habitable_zone': True,
-     'mission_info': '?? IN HABITABLE ZONE ?? NEAREST EXOPLANET! 11.2 day period. Stellar flares may challenge habitability.',
+     'mission_info': '* IN HABITABLE ZONE * NEAREST EXOPLANET! 11.2 day period. Stellar flares may challenge habitability.',
      'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7167/proxima-centauri-b/'},
     
     {'name': 'Proxima Centauri d', 'id': 'proximad', 'var': proximad_var,
@@ -3347,7 +3382,7 @@ objects = [
      'id_type': 'exoplanet', 'system_id': 'proxima',
      'semi_major_axis_au': 0.029, 'period_days': 5.122,
      'in_habitable_zone': False,
-     'mission_info': 'Sub-Earth mass planet (0.26 M??). Lightest planet detected by radial velocity method.',
+     'mission_info': 'Sub-Earth mass planet (0.26 Mearth). Lightest planet detected by radial velocity method.',
      'mission_url': 'https://www.eso.org/public/news/eso2202/'},
 
 ]
@@ -3382,13 +3417,25 @@ class ScrollableFrame(tk.Frame):
             lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
         )
 
+#    def _on_mousewheel(self, event):
+#        if event.delta:
+#            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+#        elif event.num == 4:
+#            self.canvas.yview_scroll(-1, "units")
+#        elif event.num == 5:
+#            self.canvas.yview_scroll(1, "units")
+
     def _on_mousewheel(self, event):
-        if event.delta:
-            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        elif event.num == 4:
+        # Cross-platform mousewheel handling
+        # macOS returns delta of 1/-1, Windows returns 120/-120
+        if platform.system() == 'Darwin':  # macOS
+            self.canvas.yview_scroll(int(-1 * event.delta), "units")
+        elif event.num == 4:  # Linux scroll up
             self.canvas.yview_scroll(-1, "units")
-        elif event.num == 5:
+        elif event.num == 5:  # Linux scroll down
             self.canvas.yview_scroll(1, "units")
+        elif event.delta:  # Windows
+            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
     def _on_enter(self, event):
         # Bind the mousewheel events
@@ -3595,7 +3642,7 @@ if os.path.exists('data/orbit_paths.json'):
 
 # CONSTANTS
 BUTTON_FONT = ("Arial", 10, "normal")  # You can adjust the font as needed
-BUTTON_WIDTH = 17  # Number of characters wide
+BUTTON_WIDTH = 14  # Number of characters wide
 
 # Add a pulsating effect to the progress bar during long operations
 def pulse_progress_bar():
@@ -3655,7 +3702,7 @@ def update_orbit_paths(center_object_name='Sun'):
 #        if refresh_all or (obj['name'] not in orbit_paths_over_time):
         if orbit_key not in orbit_paths_over_time:
             # Determine a suitable interval.
-            # Use adaptive step sizing if available ?? for example, for high eccentricity objects use "12h" instead of "1d".
+            # Use adaptive step sizing if available -- for example, for high eccentricity objects use "12h" instead of "1d".
             interval = "1d"  # default interval
 
             if obj['name'] in planetary_params:
@@ -3993,9 +4040,9 @@ body_shells_config = {
 def plot_objects():
     # DEBUG: Heartbeat check - confirms button click works
     
-    # ???????????????????????????????????????????????????????????????????????
+    # =========================================================================
     # PRE-FETCH OSCULATING ELEMENTS ON MAIN THREAD
-    # ???????????????????????????????????????????????????????????????????????
+    # =========================================================================
     
     # Create working copy of planetary_params
     active_planetary_params = planetary_params.copy()
@@ -4093,12 +4140,12 @@ def plot_objects():
                     else:
                         print(f"[SUCCESS] Mercury fetched fresh data (e={ecc})", flush=True)
                 
-                print(f"[PRE-FETCH] ?? {obj_name}: Updated", flush=True)
+                print(f"[PRE-FETCH] OK: {obj_name}: Updated", flush=True)
                     
             except Exception as e:
-                print(f"[PRE-FETCH] ? {obj_name} Error: {e}", flush=True)
+                print(f"[PRE-FETCH] ERROR: {obj_name}: {e}", flush=True)
                 traceback.print_exc()
-    # ???????????????????????????????????????????????????????????????????????
+    # =========================================================================
         
     def worker():
         try:
@@ -5364,15 +5411,17 @@ def plot_objects():
             # Use show_figure_safely to handle both display and save options
             show_figure_safely(fig, default_name)
 
-            output_label.config(text="Plotting complete.")
-            progress_bar.stop()
+            # Schedule GUI updates on main thread (required for macOS)
+            root.after(0, lambda: output_label.config(text="Plotting complete."))
+            root.after(0, lambda: progress_bar.stop())
 
         except Exception as e:
-            output_label.config(text=f"Error during plotting: {e}")
+            # Schedule GUI updates on main thread (required for macOS)
+            root.after(0, lambda msg=str(e): output_label.config(text=f"Error during plotting: {msg}"))
             print(f"Error during plotting: {e}", flush=True)
             traceback.print_exc()
-            progress_bar.stop()
-
+            root.after(0, lambda: progress_bar.stop())
+            
     # Instead of threading.Thread(...).start(), use create_monitored_thread
     plot_thread = create_monitored_thread(shutdown_handler, worker)
     plot_thread.start()
@@ -5390,9 +5439,9 @@ def plot_objects():
 # Replace the problematic section (around line 4200-4600) with:
 
 def animate_objects(step, label):
-    # ???????????????????????????????????????????????????????????????????????
+    # =========================================================================
     # PRE-FETCH OSCULATING ELEMENTS ON MAIN THREAD (Threading Fix)
-    # ???????????????????????????????????????????????????????????????????????
+    # =========================================================================
     # Create working copy of planetary_params with fresh data (same as plot_objects)
     active_planetary_params = planetary_params.copy()
     
@@ -5466,11 +5515,11 @@ def animate_objects(step, label):
                     fresh_elements = get_elements_with_prompt(obj_name, plot_date=plot_date, parent_window=root, center_body=osculating_center_body)
                 
                 active_planetary_params[obj_name] = fresh_elements
-                print(f"[ANIMATION PRE-FETCH] ?? {obj_name}: Updated", flush=True)
+                print(f"[ANIMATION PRE-FETCH] OK: {obj_name}: Updated", flush=True)
             except Exception as e:
-                print(f"[ANIMATION PRE-FETCH] ? {obj_name}: {e}", flush=True)
+                print(f"[ANIMATION PRE-FETCH] ERROR: {obj_name}: {e}", flush=True)
 
-    # ???????????????????????????????????????????????????????????????????????
+    # =========================================================================
     
     def animation_worker():
         try:
@@ -5844,24 +5893,24 @@ def animate_objects(step, label):
 
 
                         # Fallback for satellites without JPL ephemeris (e.g., MK2)
-                        # ???????????????????????????????????????????????????????????
+                        # ===================================================================
                         # IMPORTANT: This solution is tailored specifically for MK2:
                         #   1. Assumes circular orbit (e=0): mean anomaly = true anomaly
-                        #   2. Uses J2000.0 as reference epoch with M??=0 deg (arbitrary)
+                        #   2. Uses J2000.0 as reference epoch with MA=0 deg (arbitrary)
                         #   3. Orbital elements from arXiv:2509.05880 (Sept 2025)
                         # 
                         # For other objects, you may need to:
                         #   - Solve Kepler's equation for eccentric anomaly (if e > 0)
-                        #   - Use object-specific reference epoch and M??
+                        #   - Use object-specific reference epoch and MA
                         #   - Apply different coordinate transformations
-                        # ???????????????????????????????????????????????????????????
+                        # ===================================================================
                         ANALYTICAL_ANIMATION_FALLBACK = ['MK2']  # Expandable - see notes above
                         
                         if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
                             # Check if fetch_trajectory returned empty/None
                             traj = positions_over_time.get(obj['name'])
                             if not traj or all(p is None for p in traj):
-                                print(f"  ? No JPL data for {obj['name']}, calculating analytical positions...", flush=True)
+                                print(f"  - No JPL data for {obj['name']}, calculating analytical positions...", flush=True)
                                 
                                 from orbital_elements import planetary_params
                                 if obj['name'] in planetary_params:
@@ -5935,7 +5984,7 @@ def animate_objects(step, label):
                                         })
 
                                     positions_over_time[obj['name']] = analytical_positions
-                                    print(f"  ?? Generated {len(analytical_positions)} analytical positions for {obj['name']}", flush=True)
+                                    print(f"  -> Generated {len(analytical_positions)} analytical positions for {obj['name']}", flush=True)
 
             # Extract initial positions for idealized orbits
             initial_positions = {}
@@ -6316,9 +6365,9 @@ def animate_objects(step, label):
                                 from formatting_utils import format_maybe_float
                                 hover_text += f"Period: {planet_data['period_days']:.2f} days<br>"
                                 hover_text += f"Semi-major axis: {planet_data['semi_major_axis_au']:.4f} AU<br>"
-                                hover_text += f"Mass: {format_maybe_float(planet_data.get('mass_earth'))} M??<br>"
+                                hover_text += f"Mass: {format_maybe_float(planet_data.get('mass_earth'))} Mearth<br>"
                                 if planet_data.get('in_habitable_zone'):
-                                    hover_text += "<br><b>?? IN HABITABLE ZONE ??</b>"
+                                    hover_text += "<br><b>* IN HABITABLE ZONE *</b>"
                             
                             trace = go.Scatter3d(
                                 x=[first_pos['x']],
@@ -6375,8 +6424,8 @@ def animate_objects(step, label):
                                 hover_text = f"<b>{star_name}</b><br>"
                                 hover_text += f"Spectral Type: {star_data.get('spectral_type', 'Unknown')}<br>"
                                 hover_text += f"Temperature: {teff} K<br>"
-                                hover_text += f"Mass: {star_data.get('mass_solar', 1.0):.2f} M??<br>"
-                                hover_text += f"Luminosity: {luminosity:.3f} L??"
+                                hover_text += f"Mass: {star_data.get('mass_solar', 1.0):.2f} Mearth<br>"
+                                hover_text += f"Luminosity: {luminosity:.3f} Lsun"
                                 
                                 trace = go.Scatter3d(
                                     x=[first_pos['x']],
@@ -6858,17 +6907,17 @@ def animate_objects(step, label):
             default_name = f"{center_object_name}_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
             show_animation_safely(fig, default_name)
 
-            # Update output_label with instructions
-            output_label.config(
+            # Update output_label with instructions (schedule on main thread for macOS)
+            root.after(0, lambda: output_label.config(
                 text=f"Animation of objects around {center_object_name} opened in browser."
-            )
-            progress_bar.stop()
+            ))
+            root.after(0, lambda: progress_bar.stop())
 
         except Exception as e:
-            output_label.config(text=f"Error during animation: {e}")
+            root.after(0, lambda msg=str(e): output_label.config(text=f"Error during animation: {msg}"))
             print(f"Error during animation: {e}", flush=True)
             traceback.print_exc()
-            progress_bar.stop()
+            root.after(0, lambda: progress_bar.stop())        
 
     # Create and start monitored thread
     animation_thread = create_monitored_thread(shutdown_handler, animation_worker)
@@ -7161,9 +7210,9 @@ def sync_end_date_from_days():
             days = (end - start).days
             days_to_plot_entry.delete(0, tk.END)
             days_to_plot_entry.insert(0, str(days))
-            horizons_warning.config(text="? End date capped at Horizons limit!", fg='red')
+            horizons_warning.config(text="WARNING: End date capped at Horizons limit!", fg='red')
         else:
-            horizons_warning.config(text="? JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199", fg='red')
+            horizons_warning.config(text="WARNING: JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199", fg='red')
         
         # Update end date fields
         end_entry_year.delete(0, tk.END)
@@ -7199,7 +7248,7 @@ def sync_days_from_dates():
         days = (end - start).days
         
         if days < 0:
-            horizons_warning.config(text="? End date must be after start date!", fg='red')
+            horizons_warning.config(text="WARNING: End date must be after start date!", fg='red')
             days = 0
         
         days_to_plot_entry.delete(0, tk.END)
@@ -7274,7 +7323,7 @@ CreateToolTip(vernal_equinox_button, "Fill the next vernal equinox (March equino
 
 # Horizons limit warning
 horizons_warning = tk.Label(date_frame, 
-    text="? JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199",
+    text="WARNING: JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199",
     fg='red', font=("Arial", 8, "italic"))
 horizons_warning.grid(row=2, column=0, columnspan=8, pady=(2,0))
 
@@ -7298,9 +7347,9 @@ def sync_end_date_from_days():
             days = (end - start).days
             days_to_plot_entry.delete(0, tk.END)
             days_to_plot_entry.insert(0, str(days))
-            horizons_warning.config(text="? End date capped at Horizons limit!", fg='red')
+            horizons_warning.config(text="WARNING: End date capped at Horizons limit!", fg='red')
         else:
-            horizons_warning.config(text="? JPL Horizons limits: Jan 1900 - Dec 2199", fg='orange')
+            horizons_warning.config(text="WARNING: JPL Horizons limits: Jan 1900 - Dec 2199", fg='orange')
         
         # Update end date fields
         end_entry_year.delete(0, tk.END)
@@ -7625,7 +7674,7 @@ CreateToolTip(earth_crust_checkbutton, earth_crust_info)
 earth_system_viz_checkbutton = tk.Checkbutton(
     earth_shell_options_frame, 
 #    text="-- Earth System Visualization", 
-    text="-- ?? Earth System Visualization",  # Earth emoji
+    text="-- Earth System Visualization",  # Earth emoji
     variable=earth_system_viz_var,
     font=('Arial', 9, 
     #      'bold'
@@ -7642,7 +7691,7 @@ CreateToolTip(
     earth_system_viz_checkbutton,
     "***CLICK ONCE -- NO NEED TO PLOT***\n\n" 
     "Open Earth System Visualization hub showing climate data visualizations.\n"
-    "Currently includes the Keeling Curve (Mauna Loa CO?? 1958-2025).\n"
+    "Currently includes the Keeling Curve (Mauna Loa CO2 1958-2025).\n"
     "\"Data preservation is climate action.\""
 )
 
@@ -8314,7 +8363,7 @@ def toggle_special_fetch_mode():
 
 # ============== EXOPLANETARY SYSTEMS GUI ==============
 exoplanet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, 
-                                text="Exoplanetary Systems ????")
+                                text="Exoplanetary Systems")
 exoplanet_frame.pack(pady=(10, 5), fill='x')
 CreateToolTip(exoplanet_frame, 
               "***IMPORTANT: RE-SET THE CENTER OBJECT FROM \"Sun\" TO THE EXO-PLANET SYSTEM\n" 
@@ -8350,7 +8399,7 @@ create_exoplanet_checkbutton("TRAPPIST-1 System (40.5 ly)", trappist1_star_var, 
 create_exoplanet_checkbutton("  - TRAPPIST-1 b (1.5d)", trappist1b_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 c (2.4d)", trappist1c_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 d (4.0d) [HZ]", trappist1d_var)
-create_exoplanet_checkbutton("  - TRAPPIST-1 e (6.1d) [HZ] ??", trappist1e_var)
+create_exoplanet_checkbutton("  - TRAPPIST-1 e (6.1d) [HZ] *", trappist1e_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 f (9.2d) [HZ]", trappist1f_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 g (12.4d) [HZ]", trappist1g_var)
 create_exoplanet_checkbutton("  - TRAPPIST-1 h (18.8d)", trappist1h_var)
@@ -8371,7 +8420,7 @@ tk.Label(exoplanet_frame, text="").pack()  # Spacer
 # Proxima Centauri System (4.24 light-years - NEAREST!)
 create_exoplanet_checkbutton("Proxima Centauri (4.24 ly) NEAREST!", proxima_star_var, is_star=True)
 #create_exoplanet_checkbutton("  - Proxima Centauri (star)", proxima_star_var)
-create_exoplanet_checkbutton("  - Proxima b (11.2d) [HZ] ??", proximab_var)
+create_exoplanet_checkbutton("  - Proxima b (11.2d) [HZ] *", proximab_var)
 create_exoplanet_checkbutton("  - Proxima d (5.1d)", proximad_var)
 
 
@@ -8387,8 +8436,12 @@ auto_scale_radio = tk.Radiobutton(scale_frame, text="Automatic scaling of your p
 auto_scale_radio.pack(anchor='w')
 CreateToolTip(auto_scale_radio, "Automatically adjust scale based on selected objects")
 
+#manual_scale_radio = tk.Radiobutton(scale_frame, text="Or manually enter scale of your plot in AU. See hovertext for suggestions.", 
+#variable=scale_var, value='Manual')
+
 manual_scale_radio = tk.Radiobutton(scale_frame, text="Or manually enter scale of your plot in AU. See hovertext for suggestions.", 
-variable=scale_var, value='Manual')
+variable=scale_var, value='Manual', wraplength=350, justify='left')
+
 manual_scale_radio.pack(anchor='w')
 
 CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \n* Mercury: 0.39 AU\n* Venus: 0.72 AU\n* Earth: 1 AU\n"
@@ -8500,10 +8553,10 @@ CreateToolTip(apsidal_checkbox,
     "APSIDAL MARKERS (for objects orbiting the center)\n\n"
     "Shows perihelion/aphelion (or perigee/apogee, perijove/apojove, etc.)\n"
     "calculated from orbital elements.\n\n"
-    "? Uses proper terminology for each central body\n"
-    "? Independent of plot date range\n"
-    "? Shows true orbital apsides whenever they occur\n"
-    "? Best for: Planets, moons, satellites in bound orbits\n\n"
+    "- Uses proper terminology for each central body\n"
+    "- Independent of plot date range\n"
+    "- Shows true orbital apsides whenever they occur\n"
+    "- Best for: Planets, moons, satellites in bound orbits\n\n"
     "Two types:\n"
     "  Keplerian: Calculated from Keplerian elements (geometric)\n"
     "  Actual: From JPL ephemeris with perturbations (when available)")
@@ -8521,14 +8574,14 @@ closest_approach_checkbox.pack(anchor='w', padx=10, pady=5)
 CreateToolTip(closest_approach_checkbox,
     "CLOSEST APPROACH MARKERS (for flybys and encounters)\n\n"
     "Shows the minimum distance point within the plotted trajectory.\n\n"
-    "? Uses proper terminology for each central body\n"
-    "? Based on actual JPL ephemeris positions\n"
-    "? ? LIMITED TO PLOTTED DATE RANGE\n"
-    "? Updates automatically as JPL refines orbits\n\n"
+    "- Uses proper terminology for each central body\n"
+    "- Based on actual JPL ephemeris positions\n"
+    "- NOTE: LIMITED TO PLOTTED DATE RANGE\n"
+    "- Updates automatically as JPL refines orbits\n\n"
     "Best for:\n"
-    "  ? Comets/asteroids passing near planets\n"
-    "  ? Spacecraft encounters and flybys\n"
-    "  ? Near-Earth object tracking\n\n"
+    "  - Comets/asteroids passing near planets\n"
+    "  - Spacecraft encounters and flybys\n"
+    "  - Near-Earth object tracking\n\n"
     "Note: For bound orbits (planets, moons), use apsidal markers instead\n"
     "as they find true perihelion/aphelion independent of date range.")
 
@@ -8586,9 +8639,9 @@ satellite_days_entry.insert(0, '50')  # Default value
 CreateToolTip(satellite_days_label, 
     "CACHE SETTINGS - Days of satellite orbit data to store in cache\n\n"
     "This controls how much satellite trajectory data is fetched and cached:\n"
-    "? Recommended: 30-90 days for good coverage\n"
-    "? Longer spans = more complete orbits in cache\n"
-    "? Does NOT affect display range (use 'Days to Plot' for that)\n\n"
+    "- Recommended: 30-90 days for good coverage\n"
+    "- Longer spans = more complete orbits in cache\n"
+    "- Does NOT affect display range (use 'Days to Plot' for that)\n\n"
     "Example: Set to 50 to cache ~2 lunar orbits worth of data")
 
 satellite_points_label = tk.Label(interval_frame, text="Satellite objects (10-100):")
@@ -8605,7 +8658,8 @@ CreateToolTip(satellite_points_label,
 animation_frame = tk.LabelFrame(controls_frame, text="Animation Settings")
 animation_frame.pack(pady=(5, 5), fill='x')
 
-num_frames_label = tk.Label(animation_frame, text="Enter Hours, Days, Weeks, Months or Years to Animate starting with \"Now\":")
+#num_frames_label = tk.Label(animation_frame, text="Enter Hours, Days, Weeks, Months or Years to Animate starting with \"Now\":")
+num_frames_label = tk.Label(animation_frame, text="Enter Hours, Days, Weeks, Months or Years to Animate starting with \"Now\":", wraplength=350, justify='left')
 num_frames_label.pack(padx=10, pady=(5, 2), anchor='w')
 num_frames_entry = tk.Entry(animation_frame, width=5)
 num_frames_entry.pack(padx=10, pady=(2, 5), anchor='w')
@@ -8647,7 +8701,7 @@ output_label = tk.Label(
     text="Will fetch live data from NASA's Jet Propulsion Laboratory at Caltech. Please be patient ...",
     fg='red',
     bg='SystemButtonFace',  # Match the background of the LabelFrame
-    wraplength=400,  # Increased wraplength for better readability
+    wraplength=300,  # Increased wraplength for better readability
     justify='left',
     anchor='w'
 )
@@ -8767,7 +8821,7 @@ CreateToolTip(plot_button, "Plot the positions of selected objects on the select
 
 paloma_birthday_button = tk.Button(
     paloma_buttons_frame, 
-    text="Enter Paloma's Birthday", 
+    text="Paloma's Birthday", 
     command=set_palomas_birthday, 
     bg='pink', 
     fg='blue',
@@ -8783,7 +8837,7 @@ CreateToolTip(
 
 animate_paloma_button = tk.Button(
     paloma_buttons_frame, 
-    text="Animate Birthdays", 
+    text="Animate", 
     command=animate_palomas_birthday, 
     bg='pink', 
     fg='blue',

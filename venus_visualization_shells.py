@@ -272,8 +272,8 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
 venus_atmosphere_info = (
             "Venus boasts an extremely dense atmosphere, about 90 times the pressure of Earth's atmosphere at the surface. It is \n" 
             "composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace amounts of other gases, \n" 
-            "including sulfuric acid clouds that completely enshroud the planet. This thick, CO₂-rich atmosphere creates a runaway \n" 
-            "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464°C. The \n" 
+            "including sulfuric acid clouds that completely enshroud the planet. This thick, CO2-rich atmosphere creates a runaway \n" 
+            "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464 degC. The \n" 
             "upper atmosphere exhibits a phenomenon called \"super-rotation,\" where winds blow much faster than the planet's slow \n" 
             "rotation."
 )
@@ -289,8 +289,8 @@ def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
         'description': (
             "Venus boasts an extremely dense atmosphere, about 90 times the pressure of Earth's atmosphere at the surface. It is <br>" 
             "composed primarily of carbon dioxide (about 96.5%) and nitrogen (about 3.5%), with trace amounts of other gases, <br>" 
-            "including sulfuric acid clouds that completely enshroud the planet. This thick, CO₂-rich atmosphere creates a runaway <br>" 
-            "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464°C. The <br>" 
+            "including sulfuric acid clouds that completely enshroud the planet. This thick, CO2-rich atmosphere creates a runaway <br>" 
+            "greenhouse effect, making Venus the hottest planet in our solar system with surface temperatures around 464 degC. The <br>" 
             "upper atmosphere exhibits a phenomenon called \"super-rotation,\" where winds blow much faster than the planet's slow <br>" 
             "rotation.<br><br>"
             "The \"lower atmosphere\" of Venus is generally considered to be the troposphere, which extends from the surface up to \n" 
@@ -356,7 +356,7 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
             "  around 90-100 km. So, the mesosphere extends up to about 1.5-1.6% of Venus's radius.<br>" 
             "* Thermosphere (approximately 90-100 km to 200+ km): Above the mesosphere, the temperature increases significantly with <br>" 
             "  altitude due to the absorption of solar extreme ultraviolet (EUV) radiation. This is the thermosphere. Unlike Earth's <br>" 
-            "  thermosphere, Venus's thermosphere is surprisingly cold, with average temperatures around 300 K (27°C), and even colder on <br>" 
+            "  thermosphere, Venus's thermosphere is surprisingly cold, with average temperatures around 300 K (27 degC), and even colder on <br>" 
             "  the night side (the \"cryosphere\" around 90-120 km can reach extremely low temperatures). This is due to efficient <br>" 
             "  radiative cooling by carbon dioxide. The thermosphere is also where significant day-night differences in temperature and <br>" 
             "  density occur due to Venus's slow rotation. A global circulation pattern moves hot air from the dayside to the nightside <br>" 
@@ -494,7 +494,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
             "  conditions. It can be pushed closer to the planet during periods of high solar wind pressure.<br>" 
             "* Magnetotail: The magnetotail extends far downstream from Venus, in the anti-sunward direction. Its length is much more <br>" 
             "  variable and can stretch to many Venus radii. Some observations have suggested that the magnetotail can extend to at <br>" 
-            "  least ∼45 radii and possibly even further during active solar wind conditions.<br>" 
+            "  least ~45 radii and possibly even further during active solar wind conditions.<br>" 
             "  * Estimating the precise base radius and end radius of Venus's induced magnetotail is challenging due to its dynamic <br>" 
             "    nature and dependence on the ever-changing solar wind conditions. Unlike Earth's magnetotail, which is anchored by <br>" 
             "    a strong internal magnetic field, Venus's magnetotail is constantly being shaped and influenced by the solar wind <br>" 
@@ -507,9 +507,9 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
             "    * End Radius (Length): The length of Venus's magnetotail is highly variable and can extend to significant distances <br>" 
             "      downstream. Recent flybys by spacecraft like Solar Orbiter have provided new insights into the far reaches of the <br>" 
             "      tail. Observations have detected the presence of the magnetotail and its boundaries (bow shock and induced <br>" 
-            "      magnetospheric boundary) extending to at least 60 Venus radii (∼363,120 km) downstream. There is even some evidence <br>" 
+            "      magnetospheric boundary) extending to at least 60 Venus radii (~363,120 km) downstream. There is even some evidence <br>" 
             "      suggesting that under certain solar wind conditions, the tail might extend even further, possibly up to or beyond 100 <br>" 
-            "      Venus radii. One study of Mariner 10 data suggested possible detection of the tail as far as ∼100 radii downstream. <br>" 
+            "      Venus radii. One study of Mariner 10 data suggested possible detection of the tail as far as ~100 radii downstream. <br>" 
             "      * Dynamic Nature: The solar wind's pressure, speed, and the orientation of the IMF constantly buffet Venus's induced <br>" 
             "        magnetosphere, causing significant variations in its size and shape.<br>" 
             "      * Boundary Identification: Defining the exact outer boundary of the magnetotail can be challenging as the plasma <br>" 
@@ -518,7 +518,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
             "        not been as extensively sampled as Earth's.<br>" 
             "    * Estimating the width of Venus's magnetotail at distances of 45 to 60 Venus radii is challenging due to the <br>" 
             "      limited number of direct observations so far out in the tail. Most detailed studies have focused on the near-<br>" 
-            "      Venus magnetotail (within ∼10 to 12 radii). However, recent flybys, particularly by Solar Orbiter, are providing <br>" 
+            "      Venus magnetotail (within ~10 to 12 radii). However, recent flybys, particularly by Solar Orbiter, are providing <br>" 
             "      new insights.<br>" 
             "      * Overall Expansion: The induced magnetotail of Venus is known to flare or expand as it extends downstream from <br>" 
             "        the planet. This is a common feature of magnetotails formed by the interaction of the solar wind with a planetary <br>" 
@@ -528,7 +528,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
             "        (which would give a total width of roughly 30-40 radii if we assume some symmetry around the tail axis). The induced <br>" 
             "        magnetospheric boundary (IMB), which is inside the bow shock, was still detected at 20 radii downstream in this study, <br>" 
             "        but its width at larger distances was not specifically quantified.<br>" 
-            "      * Earlier Estimates: Older studies based on Pioneer Venus Orbiter data, which primarily sampled the tail up to ∼12 radii, <br>" 
+            "      * Earlier Estimates: Older studies based on Pioneer Venus Orbiter data, which primarily sampled the tail up to ~12 radii, <br>" 
             "        found the tail to be about 4 radii wide and 3.2 radii high at that distance. Extrapolating this far out is difficult <br>" 
             "        due to the flaring. Therefore, a reasonable estimate for the width of Venus's magnetotail at 45 to 60 Venus radii <br>" 
             "        would likely be on the order of tens of Venus radii, possibly in the range of 20 to 40 radii or even wider, based on <br>" 
@@ -539,7 +539,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
             "* Dayside (from the center): Extends to roughly 1.3 - 1.7 radii at the bow shock and about 1.05 - 1.1 radii at the <br>" 
             "  magnetopause.<br>"
             "  The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.<br>" 
-            "* Nightside (magnetotail): Can extend to at least tens of Venus radii, with estimates reaching up to ∼45 radii or <br>" 
+            "* Nightside (magnetotail): Can extend to at least tens of Venus radii, with estimates reaching up to ~45 radii or <br>" 
             "  more under certain solar wind conditions.<br>" 
             "The size and shape of Venus's induced magnetosphere are highly dynamic, constantly being shaped by the ever-changing <br>" 
             "solar wind."]
@@ -597,7 +597,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
     
     bow_shock_text = ["Bow Shock: The bow shock, which is the outermost boundary where the supersonic solar wind is slowed and <br>" 
                       "deflected by Venus, typically stands off a few thousand kilometers above the dayside surface. At the subsolar <br>" 
-                      "point (the point directly facing the Sun), it's often located around ∼0.3 to 0.7 radii above the surface, or <br>" 
+                      "point (the point directly facing the Sun), it's often located around ~0.3 to 0.7 radii above the surface, or <br>" 
                       "about 1.3 to 1.7 radii from the planet's center. However, this distance can vary significantly with solar wind <br>" 
                       "conditions.<br>"
                       "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."]
@@ -665,7 +665,7 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
                 "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
-                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
+                "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
                 )
     
     # Create the trace

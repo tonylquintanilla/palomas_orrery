@@ -54,13 +54,13 @@ def fetch_ocean_ph_bcodmo():
     try:
         response = requests.get(api_url, timeout=30)
         response.raise_for_status()
-        print("✓ BCO-DMO download successful")
+        print("[OK] BCO-DMO download successful")
         
         lines = response.text.split('\n')
         return parse_carbonate_data(lines, source='BCO-DMO')
         
     except requests.exceptions.RequestException as e:
-        print(f"✗ BCO-DMO fetch failed: {e}")
+        print(f"[FAIL] BCO-DMO fetch failed: {e}")
         return None
 
 def fetch_ocean_ph_hot_direct():
@@ -77,14 +77,14 @@ def fetch_ocean_ph_hot_direct():
             # Check if this looks like data (not HTML)
             if 'text/plain' in response.headers.get('Content-Type', '') or \
                not response.text.strip().startswith('<'):
-                print(f"✓ HOT direct download successful from {url}")
+                print(f"[OK] HOT direct download successful from {url}")
                 lines = response.text.split('\n')
                 return parse_carbonate_data(lines, source='HOT')
                 
         except Exception as e:
             continue
     
-    print("✗ No direct HOT URL worked")
+    print("[FAIL] No direct HOT URL worked")
     return None
 
 def parse_carbonate_data(lines, source='Unknown'):
@@ -124,7 +124,7 @@ def parse_carbonate_data(lines, source='Unknown'):
                         col_map['ph'] = idx
             
             header_found = True
-            print(f"✓ Identified columns: {col_map}")
+            print(f"[OK] Identified columns: {col_map}")
             continue
         
         if not header_found or line.startswith('#'):
@@ -182,7 +182,7 @@ def parse_carbonate_data(lines, source='Unknown'):
             unique_records.append(r)
             seen.add(key)
     
-    print(f"✓ Parsed {len(unique_records)} unique monthly records")
+    print(f"[OK] Parsed {len(unique_records)} unique monthly records")
     return unique_records
 
 def create_ph_metadata(records):
@@ -200,7 +200,7 @@ def create_ph_metadata(records):
         'description': 'Ocean surface pH measurements from Hawaii Ocean Time-series',
         'source': {
             'organization': 'University of Hawaii - HOT Program',
-            'station': 'Station ALOHA (22°45\'N, 158°W)',
+            'station': 'Station ALOHA (22 deg45\'N, 158 degW)',
             'url': 'https://hahana.soest.hawaii.edu/hot/',
             'data_providers': [
                 'BCO-DMO: https://www.bco-dmo.org/dataset/3773',
@@ -255,11 +255,11 @@ def fetch_ocean_ph():
     # If still no data, provide manual instructions
     if not records:
         print()
-        print("✗ Automated fetch failed")
+        print("[FAIL] Automated fetch failed")
         print()
         print("MANUAL DOWNLOAD OPTION:")
         print("1. Visit: https://www.bco-dmo.org/dataset/3773")
-        print("2. Click 'Get Data' → Download CSV")
+        print("2. Click 'Get Data' [OK] Download CSV")
         print("3. Save as 'hot_carbonate_data.txt'")
         print("4. Run: python convert_hot_ph_to_json.py")
         print()
@@ -279,20 +279,20 @@ def fetch_nasa_sea_level():
     local_file = "nasa_earthdata_sea_level_data.txt"
     
     if os.path.exists(local_file):
-        print(f"✓ Found local file: {local_file}")
+        print(f"[OK] Found local file: {local_file}")
         try:
             with open(local_file, 'r') as f:
                 lines = f.readlines()
         except Exception as e:
-            print(f"✗ Error reading local file: {e}")
+            print(f"[FAIL] Error reading local file: {e}")
             return []
     else:
-        print(f"✗ File not found: {local_file}")
+        print(f"[FAIL] File not found: {local_file}")
         print(f"  Please download from: https://science.nasa.gov/earth/explore/earth-indicators/sea-level/")
         print(f"  Save as: {local_file}")
         return []
     
-    print(f"✓ Read {len(lines)} lines")
+    print(f"[OK] Read {len(lines)} lines")
     
     records = []
     
@@ -338,7 +338,7 @@ def fetch_nasa_sea_level():
         except (ValueError, IndexError):
             continue  # Skip malformed lines
     
-    print(f"✓ Parsed {len(records)} records")
+    print(f"[OK] Parsed {len(records)} records")
     return records
 
 def status_print(msg):
@@ -361,14 +361,14 @@ def fetch_mauna_loa_co2(status_callback=None):
             status_callback(msg)
         status_print(msg)
     
-    status("Fetching Mauna Loa CO₂ monthly data...")
+    status("Fetching Mauna Loa CO2 monthly data...")
     
     try:
         response = requests.get(MAUNA_LOA_URL, timeout=30)
         response.raise_for_status()
         
         lines = response.text.strip().split('\n')
-        print(f"✓ Download successful ({len(lines)} lines)")
+        print(f"[OK] Download successful ({len(lines)} lines)")
         
         records = []
         
@@ -396,8 +396,8 @@ def fetch_mauna_loa_co2(status_callback=None):
                         'year': year,
                         'month': month,
                         'decimal_date': round(decimal_date, 4),
-                        'co2_ppm': round(average, 2),  # ← Field name MUST be 'co2_ppm'
-                        'co2_deseasonalized': round(deseasonalized, 2),  # ← Field name MUST be 'co2_deseasonalized'
+                        'co2_ppm': round(average, 2),  # <- Field name MUST be 'co2_ppm'
+                        'co2_deseasonalized': round(deseasonalized, 2),  # <- Field name MUST be 'co2_deseasonalized'
                         # Always include these fields (even if missing = -1, -9.99, -0.99)
                         'days': int(parts[5]) if len(parts) >= 6 else -1,
                         'std_dev': round(float(parts[6]), 2) if len(parts) >= 7 else -9.99,
@@ -409,11 +409,11 @@ def fetch_mauna_loa_co2(status_callback=None):
                 except (ValueError, IndexError):
                     continue
         
-        print(f"✓ Parsed {len(records)} records")
+        print(f"[OK] Parsed {len(records)} records")
         return records
         
     except requests.exceptions.RequestException as e:
-        print(f"✗ Error fetching CO₂ data: {e}")
+        print(f"[FAIL] Error fetching CO2 data: {e}")
         return []
 
 def fetch_nasa_giss_temperature(status_callback=None):
@@ -438,7 +438,7 @@ def fetch_nasa_giss_temperature(status_callback=None):
         with urllib.request.urlopen(req, timeout=30) as response:
             data = response.read().decode('utf-8')
         
-        status("✓ Download complete")
+        status("[OK] Download complete")
         status("Parsing temperature data...")
         
         # Rest of the function stays the same...
@@ -468,13 +468,13 @@ def fetch_nasa_giss_temperature(status_callback=None):
             except (ValueError, IndexError):
                 continue
         
-        status(f"✓ Parsed {len(records)} temperature records")
+        status(f"[OK] Parsed {len(records)} temperature records")
         
         metadata = create_temperature_metadata(records)
         return records, metadata
         
     except Exception as e:
-        status(f"✗ Failed to fetch temperature data: {e}")
+        status(f"[FAIL] Failed to fetch temperature data: {e}")
         return None, None
 
 def fetch_arctic_ice():
@@ -489,13 +489,13 @@ def fetch_arctic_ice():
         try:
             import openpyxl
         except ImportError:
-            print("✗ openpyxl not found. Install with: pip install openpyxl")
+            print("[FAIL] openpyxl not found. Install with: pip install openpyxl")
             return []
         
         # Download Excel file
         response = requests.get(NSIDC_V4_URL, timeout=60)
         response.raise_for_status()
-        print(f"✓ Download successful ({len(response.content)} bytes)")
+        print(f"[OK] Download successful ({len(response.content)} bytes)")
         
         # Save to temporary file
         temp_file = "temp_ice_data.xlsx"
@@ -507,12 +507,12 @@ def fetch_arctic_ice():
         
         # Use NH-Extent sheet (Northern Hemisphere extent)
         if 'NH-Extent' not in workbook.sheetnames:
-            print(f"✗ 'NH-Extent' sheet not found. Available sheets: {workbook.sheetnames}")
+            print(f"[FAIL] 'NH-Extent' sheet not found. Available sheets: {workbook.sheetnames}")
             os.remove(temp_file)
             return []
         
         sheet = workbook['NH-Extent']
-        print("✓ Parsing monthly data from 'NH-Extent' sheet...")
+        print("[OK] Parsing monthly data from 'NH-Extent' sheet...")
         
         records = []
         
@@ -524,7 +524,7 @@ def fetch_arctic_ice():
             try:
                 year = int(row[0])  # First column is year
                 
-                # Columns 1-12 are monthly extent values (million km²)
+                # Columns 1-12 are monthly extent values (million km^2)
                 months = [
                     ('January', 1), ('February', 2), ('March', 3), ('April', 4),
                     ('May', 5), ('June', 6), ('July', 7), ('August', 8),
@@ -551,14 +551,14 @@ def fetch_arctic_ice():
         # Clean up temp file
         os.remove(temp_file)
         
-        print(f"✓ Parsed {len(records)} records (all 12 months)")
+        print(f"[OK] Parsed {len(records)} records (all 12 months)")
         return records
         
     except requests.exceptions.RequestException as e:
-        print(f"✗ Error fetching Arctic ice data: {e}")
+        print(f"[FAIL] Error fetching Arctic ice data: {e}")
         return []
     except Exception as e:
-        print(f"✗ Error parsing Excel file: {e}")
+        print(f"[FAIL] Error parsing Excel file: {e}")
         if os.path.exists("temp_ice_data.xlsx"):
             os.remove("temp_ice_data.xlsx")
         return []
@@ -567,12 +567,12 @@ def create_co2_metadata(records):
     """Create metadata for CO2 dataset"""
     return {
         'dataset_name': 'mauna_loa_co2_monthly',
-        'description': 'Monthly atmospheric CO₂ concentrations from Mauna Loa Observatory, Hawaii',
+        'description': 'Monthly atmospheric CO2 concentrations from Mauna Loa Observatory, Hawaii',
         'source': {
             'organization': 'NOAA Global Monitoring Laboratory',
             'url': 'https://gml.noaa.gov/ccgg/trends/',
             'data_url': MAUNA_LOA_URL,
-            'citation': 'Keeling, C.D., S.C. Piper, R.B. Bacastow, et al. Atmospheric CO₂ concentrations from Mauna Loa Observatory. NOAA Global Monitoring Laboratory.'
+            'citation': 'Keeling, C.D., S.C. Piper, R.B. Bacastow, et al. Atmospheric CO2 concentrations from Mauna Loa Observatory. NOAA Global Monitoring Laboratory.'
         },
         'cached_date': datetime.now().isoformat(),
         'record_count': len(records),
@@ -604,10 +604,10 @@ def create_temperature_metadata(records):
             'start': f"{records[0]['year']}-{records[0]['month']:02d}",
             'end': f"{records[-1]['year']}-{records[-1]['month']:02d}"
         },
-        'units': 'degrees Celsius (°C)',
+        'units': 'degrees Celsius ( degC)',
         'measurement_method': 'Combined land-surface air and sea-surface water temperature anomalies',
-        'baseline': '1951-1980 average (0°C reference)',
-        'baseline_note': 'Pre-industrial baseline (~1850-1900) is approximately -0.3°C relative to this baseline',
+        'baseline': '1951-1980 average (0 degC reference)',
+        'baseline_note': 'Pre-industrial baseline (~1850-1900) is approximately -0.3 degC relative to this baseline',
         'license': 'Public domain - U.S. Government data',
         'threat_status': 'NASA Earth Science faces 52% budget cuts; GISS institutional future uncertain (August 2025)',
         'preservation_priority': 'CRITICAL - 145-year record, James Hansen legacy dataset'
@@ -630,7 +630,7 @@ def create_ice_metadata(records):
             'start': f"{records[0]['year']}-{records[0]['month']:02d}",
             'end': f"{records[-1]['year']}-{records[-1]['month']:02d}"
         },
-        'units': 'million km²',
+        'units': 'million km^2',
         'measurement_method': 'Satellite passive microwave observations (SMMR, SSM/I, SSMIS)',
         'baseline': 'Sea ice extent from 1979-present',
         'version': 'V4.0',
@@ -676,7 +676,7 @@ def save_cache(output_file, records, metadata_func):
     """
     
     if not records:
-        print(f"✗ No records to save for {output_file}")
+        print(f"[FAIL] No records to save for {output_file}")
         return False
     
     # Create metadata
@@ -742,7 +742,7 @@ def save_cache(output_file, records, metadata_func):
         
         # 5. Handle dangerous saves
         if dangerous_save:
-            print(f"\n⚠️  SAVE BLOCKED for {output_file}")
+            print(f"\n[WARN]  SAVE BLOCKED for {output_file}")
             for msg in warning_messages:
                 print(f"   {msg}")
             
@@ -763,14 +763,14 @@ def save_cache(output_file, records, metadata_func):
         # 7. Move temp file to final location (atomic operation)
         shutil.move(temp_file, output_file)
         
-        print(f"✓ Saved successfully")
+        print(f"[OK] Saved successfully")
         print(f"  File size: {new_size / 1024:.1f} KB")
         print(f"  Records: {new_count}")
         
         return True
         
     except Exception as e:
-        print(f"✗ Error saving {output_file}: {e}")
+        print(f"[FAIL] Error saving {output_file}: {e}")
         
         # Clean up temp file
         if os.path.exists(temp_file):
@@ -794,13 +794,13 @@ def main():
     
     results = []
     
-    # 1. Fetch CO₂ data
-    print("1. Fetching Mauna Loa CO₂ monthly data...")
+    # 1. Fetch CO2 data
+    print("1. Fetching Mauna Loa CO2 monthly data...")
     co2_records = fetch_mauna_loa_co2()
     
     if co2_records:
         success = save_cache(CO2_OUTPUT_FILE, co2_records, create_co2_metadata)
-        results.append(("CO₂", len(co2_records), success))
+        results.append(("CO2", len(co2_records), success))
         
         if success and co2_records:
             latest = co2_records[-1]
@@ -809,11 +809,11 @@ def main():
             increase = latest['co2_ppm'] - first['co2_ppm']
             years = latest['year'] - first['year']
             
-    #        print(f"\nLatest CO₂ measurement: {latest['trend']} ppm")
-            print(f"Latest CO₂ measurement: {latest['co2_ppm']:.2f} ppm")
+    #        print(f"\nLatest CO2 measurement: {latest['trend']} ppm")
+            print(f"Latest CO2 measurement: {latest['co2_ppm']:.2f} ppm")
             print(f"{years}-year increase: +{increase:.2f} ppm\n")
     else:
-        results.append(("CO₂", 0, False))
+        results.append(("CO2", 0, False))
     
     # 2. Fetch temperature data
     print("2. Fetching NASA GISS temperature data...")
@@ -831,9 +831,9 @@ def main():
             warming = latest['anomaly_c'] - first['anomaly_c']
             years = latest['year'] - first['year']
             
-    #        print(f"\nLatest temperature anomaly: +{latest['anomaly_celsius']}°C")
-            print(f"Latest temperature anomaly: +{latest['anomaly_c']:.2f}°C")
-            print(f"{years}-year warming: +{warming:.2f}°C\n")
+    #        print(f"\nLatest temperature anomaly: +{latest['anomaly_celsius']} degC")
+            print(f"Latest temperature anomaly: +{latest['anomaly_c']:.2f} degC")
+            print(f"{years}-year warming: +{warming:.2f} degC\n")
     else:
         results.append(("Temperature", 0, False))
     
@@ -854,8 +854,8 @@ def main():
                 change = latest['extent_million_km2'] - first['extent_million_km2']
                 years = latest['year'] - first['year']
                 
-                print(f"\nLatest September ice extent: {latest['extent_million_km2']} million km²")
-                print(f"{years}-year change: {change:.2f} million km² ({change/first['extent_million_km2']*100:.1f}%)\n")
+                print(f"\nLatest September ice extent: {latest['extent_million_km2']} million km^2")
+                print(f"{years}-year change: {change:.2f} million km^2 ({change/first['extent_million_km2']*100:.1f}%)\n")
     else:
         results.append(("Arctic Ice", 0, False))
     
@@ -910,7 +910,7 @@ def main():
     print("=" * 60)
     
     for dataset, count, success in results:
-        status = "✓" if success else "✗"
+        status = "[OK]" if success else "[FAIL]"
         print(f"{status} {dataset}: {count} records")
     
     print()

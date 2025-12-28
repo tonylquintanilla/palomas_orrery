@@ -19,7 +19,6 @@ from astropy.table import Table
 from astropy.coordinates import Angle
 from astropy.io import votable
 from astropy.io.votable import parse_single_table
-from vot_cache_manager import VOTCacheManager
 
 # Optional: If big queries often fail, increase the default timeout or choose a different mirror.
 # Vizier.TIMEOUT = 300
@@ -85,11 +84,7 @@ def load_or_fetch_hipparcos_data(v, hip_data_file, mode='distance',
         hip_data = result[0]
         print(f"Number of Hipparcos entries fetched: {len(hip_data)}")
         # Save to disk
-    #    hip_data.write(hip_data_file, format='votable', overwrite=True)
-        # Use safe save with protection against overwriting comprehensive caches
-        vot_mgr = VOTCacheManager()
-        vot_mgr.safe_save_vot(hip_data, hip_data_file)
-
+        hip_data.write(hip_data_file, format='votable', overwrite=True)
         print(f"Saved Hipparcos data to {hip_data_file}")
         return hip_data
 
@@ -135,11 +130,7 @@ def load_or_fetch_gaia_data(v, gaia_data_file, mode='distance',
         gaia_data = result[0]
         print(f"Number of Gaia entries fetched: {len(gaia_data)}")
         # Save to disk
-    #    gaia_data.write(gaia_data_file, format='votable', overwrite=True)
-        # Use safe save with protection against overwriting comprehensive caches
-        vot_mgr = VOTCacheManager()
-        vot_mgr.safe_save_vot(gaia_data, gaia_data_file)
-
+        gaia_data.write(gaia_data_file, format='votable', overwrite=True)
         print(f"Saved Gaia data to {gaia_data_file}")
         return gaia_data
 
@@ -247,7 +238,7 @@ def load_stellar_data(mode='distance', max_value=20.0,
         gaia_data = load_or_fetch_gaia_data(
             v, gaia_file, mode='magnitude', mag_limit=max_value
         )
-        # You can do extra processing if needed—like distance calculation if 'Plx' is present
+        # You can do extra processing if needed-like distance calculation if 'Plx' is present
         if gaia_data is not None:
             gaia_data['Estimated_Vmag'] = estimate_vmag_from_gaia(gaia_data)
         return hip_data, gaia_data

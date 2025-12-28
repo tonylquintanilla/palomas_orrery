@@ -219,7 +219,7 @@ def create_temperature_viz():
         mode='lines',
         name='Temperature Anomaly',
         line=dict(color='#C1121F', width=2),
-        hovertemplate='Date: %{x:.2f}<br>Anomaly: %{y:.2f}°C<extra></extra>'
+        hovertemplate='Date: %{x:.2f}<br>Anomaly: %{y:.2f} degC<extra></extra>'
     ))
     
     # Add current value marker
@@ -231,7 +231,7 @@ def create_temperature_viz():
         mode='markers',
         name='Current',
         marker=dict(color='#8B0000', size=10, symbol='diamond'),
-        hovertemplate=f"Current: +{latest['anomaly_c']:.2f}°C<extra></extra>"
+        hovertemplate=f"Current: +{latest['anomaly_c']:.2f} degC<extra></extra>"
     ))
     
     # Add baseline and reference lines
@@ -246,11 +246,11 @@ def create_temperature_viz():
             #      annotation=dict(yshift=-10, xshift=5))
     
     fig.add_hline(y=1.5, line_dash="dash", line_color="orange",
-                  annotation_text="Paris Agreement 1.5°C target",
+                  annotation_text="Paris Agreement 1.5 degC target",
                   annotation_position="top right")
     
     fig.add_hline(y=2.0, line_dash="dash", line_color="red",
-                  annotation_text="Paris Agreement 2.0°C limit",
+                  annotation_text="Paris Agreement 2.0 degC limit",
                   annotation_position="top right")
     
     # Calculate statistics
@@ -264,11 +264,11 @@ def create_temperature_viz():
     # Add info box
     info_text = (
         f"<b>Global Temperature</b><br>"
-        f"Current: +{latest['anomaly_c']:.2f}°C<br>"
-        f"vs Pre-industrial: +{vs_preindustrial:.2f}°C<br>"
-        f"{years}-yr warming: +{warming:.2f}°C<br>"
-        f"Progress to 1.5°C: {progress_15:.0f}%<br>"
-        f"Progress to 2.0°C: {progress_20:.0f}%<br>"
+        f"Current: +{latest['anomaly_c']:.2f} degC<br>"
+        f"vs Pre-industrial: +{vs_preindustrial:.2f} degC<br>"
+        f"{years}-yr warming: +{warming:.2f} degC<br>"
+        f"Progress to 1.5 degC: {progress_15:.0f}%<br>"
+        f"Progress to 2.0 degC: {progress_20:.0f}%<br>"
         f"(Baseline: 1951-1980 avg)"
     )
     
@@ -307,13 +307,13 @@ def create_temperature_viz():
     # Layout
     fig.update_layout(
         title={
-            'text': "Global Mean Surface Temperature Anomaly (1880-2025)<br><sub>1951-1980 baseline is ~0.3°C warmer than pre-industrial (1850-1900). Aerosol masking effect visible 1950-1980. Data updates monthly with 1-2 month lag for quality control.</sub>",
+            'text': "Global Mean Surface Temperature Anomaly (1880-2025)<br><sub>1951-1980 baseline is ~0.3 degC warmer than pre-industrial (1850-1900). Aerosol masking effect visible 1950-1980. Data updates monthly with 1-2 month lag for quality control.</sub>",
             'x': 0.5,
             'xanchor': 'center',
             'font': {'size': 14, 'color': '#1a1a1a'}
         },
         xaxis_title="Year (decimal notation: 2024.96 = late December)",
-        yaxis_title="Temperature Anomaly (°C)",
+        yaxis_title="Temperature Anomaly ( degC)",
         template="plotly_white",
         width=1200,
         height=700,
@@ -373,7 +373,7 @@ def create_monthly_temperature_lines():
     
     def get_temperature_color(index, total):
         """Generate color from blue (cold) through green/yellow to red (hot)."""
-        hue = 240 - (index / total * 240)  # 240° (blue) to 0° (red)
+        hue = 240 - (index / total * 240)  # 240 deg (blue) to 0 deg (red)
         hue = hue / 360.0
         saturation = 0.85
         value = 0.9
@@ -402,7 +402,7 @@ def create_monthly_temperature_lines():
             showlegend=True,
             hovertemplate='<b>Year:</b> %{fullData.name}<br>' +
                           '<b>Month:</b> %{x}<br>' +
-                          '<b>Anomaly:</b> %{y:.2f}°C<br>' +
+                          '<b>Anomaly:</b> %{y:.2f} degC<br>' +
                           '<extra></extra>'
         ))
     
@@ -410,7 +410,7 @@ def create_monthly_temperature_lines():
     fig.update_layout(
         title=dict(
             text="Monthly Temperature Anomalies: Historical Context (1880-2025)<br>" +
-                 "<sub>Color spectrum: Blue (cooler) †’ Red (warmer) showing warming trend over time</sub><br>" +
+                 "<sub>Color spectrum: Blue (cooler) -> Red (warmer) showing warming trend over time</sub><br>" +
                  f"<sub>Data Source: {metadata['source']['organization']} | Baseline: 1951-1980</sub>",
             x=0.5,
             xanchor='center',
@@ -427,7 +427,7 @@ def create_monthly_temperature_lines():
             gridcolor='rgba(128, 128, 128, 0.2)'
         ),
         yaxis=dict(
-            title="Temperature Anomaly (°C)",
+            title="Temperature Anomaly ( degC)",
             showgrid=True,
             gridwidth=1,
             gridcolor='rgba(128, 128, 128, 0.2)'
@@ -511,7 +511,7 @@ def create_warming_stripes():
         colorscale='RdBu_r',  # Red-Blue reversed (red = hot)
         zmid=0,
         colorbar=dict(
-            title="Anomaly (°C)",
+            title="Anomaly ( degC)",
             titleside="right",
             tickmode="linear",
             tick0=-1,
@@ -521,7 +521,7 @@ def create_warming_stripes():
         zmax=1.5,
         hovertemplate='<b>Year:</b> %{y}<br>' +
                       '<b>Month:</b> %{x}<br>' +
-                      '<b>Anomaly:</b> %{z:.2f}°C<br>' +
+                      '<b>Anomaly:</b> %{z:.2f} degC<br>' +
                       '<extra></extra>'
     ))
     
@@ -623,7 +623,7 @@ def create_ice_viz():
         name='September Minimum',
         line=dict(color='#00B4D8', width=2),
         marker=dict(size=6, color='#00B4D8'),
-        hovertemplate='<b>%{x}</b><br>Extent: %{y:.2f} million km²<extra></extra>'
+        hovertemplate='<b>%{x}</b><br>Extent: %{y:.2f} million km^2<extra></extra>'
     ))
     
     # Add trend line
@@ -633,14 +633,14 @@ def create_ice_viz():
         mode='lines',
         name='Trend',
         line=dict(color='#03045E', width=2, dash='dash'),
-        hovertemplate='Trend: %{y:.2f} million km²<extra></extra>'
+        hovertemplate='Trend: %{y:.2f} million km^2<extra></extra>'
     ))
     
     # Add 2012 record low annotation
     fig.add_annotation(
         x=2012,
         y=min_extent,
-        text=f"Record Low: {min_extent:.2f}M km²<br>September 2012",
+        text=f"Record Low: {min_extent:.2f}M km^2<br>September 2012",
         showarrow=True,
         arrowhead=2,
         arrowsize=1,
@@ -666,7 +666,7 @@ def create_ice_viz():
             showgrid=True
         ),
         yaxis=dict(
-            title='Sea Ice Extent (million km²)',
+            title='Sea Ice Extent (million km^2)',
             gridcolor='lightgray',
             showgrid=True
         ),
@@ -690,9 +690,9 @@ def create_ice_viz():
     info_text = (
         f"<b>September Minimum</b><br>"
         f"(Annual low point)<br><br>"
-        f"<b>2025:</b> {latest_extent:.2f} million km²<br>"
-        f"<b>1979:</b> {first_extent:.2f} million km²<br>"
-        f"<b>Decline:</b> -{decline:.2f} million km² ({pct_decline:.1f}%)<br>"
+        f"<b>2025:</b> {latest_extent:.2f} million km^2<br>"
+        f"<b>1979:</b> {first_extent:.2f} million km^2<br>"
+        f"<b>Decline:</b> -{decline:.2f} million km^2 ({pct_decline:.1f}%)<br>"
         f"<b>Trend:</b> -12.1% per decade<br><br>"
         f"<i>Dataset contains all 12 months<br>"
         f"(561 records total)</i>"
@@ -713,7 +713,7 @@ def create_ice_viz():
     
     # Add data source note - top left (UPDATED - crisis resolved!)
     source_note = (
-        "<b>✅ Automated Data Retrieval Working</b><br>"
+        "<b>[OK] Automated Data Retrieval Working</b><br>"
         "- NSIDC V4.0 Excel format (Oct 2024)<br>"
         "- Migrated from V3 CSV to V4 XLSX<br>"
         "- FTP deprecated HTTPS active<br>"
@@ -743,7 +743,7 @@ def create_ice_viz():
         f"<b>Data File:</b> <a href='{source_url}'>Sea_Ice_Index_Monthly_Data_by_Year_G02135_v4.0.xlsx</a><br>"
         f"<b>Citation:</b> {citation}<br>"
         f"<b>Format:</b> Excel (XLSX) parsed with openpyxl | <b>Sheet:</b> NH-Extent | <b>Records:</b> {len(records)} monthly values (1979-2025)<br>"
-        f"<b>Note:</b> September minimum represents annual low point. March maximum typically 15-16 million km²."
+        f"<b>Note:</b> September minimum represents annual low point. March maximum typically 15-16 million km^2."
     )
     
     fig.add_annotation(
@@ -797,7 +797,7 @@ def create_sea_level_viz():
     
     # Calculate statistics
     # Convert cm to mm (data comes in as gmsl_smoothed_cm)
-    sea_level_mm = [r['gmsl_smoothed_cm'] * 10 for r in records]  # œ… Convert cm to mm
+    sea_level_mm = [r['gmsl_smoothed_cm'] * 10 for r in records]  # [OK] Convert cm to mm
     first_mm = sea_level_mm[0]
     latest_mm = sea_level_mm[-1]
     first_year = records[0]['year']
@@ -1064,7 +1064,7 @@ def create_ph_viz():
         f"<br>"
         f"<b>Understanding pH</b><br>"
         f"<i>pH scale: Lower = More acidic</i><br>"
-        f"<i>Logarithmic: 0.1 drop = 30% †’ acidity</i><br>"
+        f"<i>Logarithmic: 0.1 drop = 30% -> acidity</i><br>"
         f"<i>Fastest change in 300M years</i>"
     )
     
@@ -1163,7 +1163,7 @@ def create_planetary_boundaries_viz():
     if co2_data and co2_data.get('data'):
         latest_co2 = co2_data['data'][-1]['co2_ppm']    
 
-    # ---------- SRC 2025 normalized values (boundary=1.0, high-riskÃ¢€°Ë†1.6) ----------
+    # ---------- SRC 2025 normalized values (boundary=1.0, high-risk~ deg~1.6) ----------
     SRC = {
         "CLIMATE_RF": 2.56,   # Radiative forcing
         "CLIMATE_CO2": 1.44,  # CO2 concentration
@@ -1175,7 +1175,7 @@ def create_planetary_boundaries_viz():
         "FRESH_BLUE": 1.16,   # surface/groundwater
         "LAND": 1.46,
         "BIO_FUNC": 2.00,     # functional diversity
-        "BIO_GEN": 1.60,      # genetic diversity (Ã¢€°Ë†)
+        "BIO_GEN": 1.60,      # genetic diversity (~ deg~)
         "BIOGEO_P": 2.14,
         "BIOGEO_N": 2.82
     }
@@ -1254,7 +1254,7 @@ def create_planetary_boundaries_viz():
         hoverinfo='skip', showlegend=False
     ))
 
-    # polar geometry €” centers + tiny gap so separators read cleanly
+    # polar geometry -> centers + tiny gap so separators read cleanly
     N = len(boundaries)
     base_wedge_width = 360.0 / N
     theta_positions = [i * base_wedge_width for i in range(N)]
@@ -1331,7 +1331,7 @@ def create_planetary_boundaries_viz():
     live_count = sum(1 for b in boundaries if b['value_raw'] is not None)
     live_text = "<b>Planetary Health Check 2025</b><br><br>7/9 boundaries transgressed"
     if latest_temp_c is not None:
-        live_text += f"<br>Temp anomaly (live): <b>{latest_temp_c:.3f}°C</b>"
+        live_text += f"<br>Temp anomaly (live): <b>{latest_temp_c:.3f} degC</b>"
     if ph_drop is not None:
         live_text += f"<br>Ocean pH decline (live): <b>{ph_drop:.3f}</b>"
 #        "</b> (norm {min(ph_drop/0.10,3.0):.2f})"
@@ -1487,10 +1487,10 @@ def open_phanerozoic_viz():
                 "Data Not Available",
                 "Phanerozoic temperature data not found.\n\n"
                 "Required files:\n"
-                "• data/8c__Phanerozoic_Pole_to_Equator_Temperatures.csv\n"
-                "• data/lr04_benthic_stack.json\n"
-                "• data/temp12k_allmethods_percentiles.csv (optional)\n"
-                "• data/temperature_giss_monthly.json (optional)"
+                "* data/8c__Phanerozoic_Pole_to_Equator_Temperatures.csv\n"
+                "* data/lr04_benthic_stack.json\n"
+                "* data/temp12k_allmethods_percentiles.csv (optional)\n"
+                "* data/temperature_giss_monthly.json (optional)"
             )
     except Exception as e:
         messagebox.showerror("Visualization Error", f"Could not create Phanerozoic visualization:\n{str(e)}")        
@@ -1508,10 +1508,10 @@ def open_human_origins_viz():
                 "Data Not Available",
                 "Paleoclimate data not found.\n\n"
                 "Please ensure the following files exist:\n"
-                "• data/8c__Phanerozoic_Pole_to_Equator_Temperatures.csv\n"
-                "• data/lr04_benthic_stack.json\n"
-                "• data/temp12k_allmethods_percentiles.csv (optional)\n"
-                "• data/temperature_giss_monthly.json (optional)"
+                "* data/8c__Phanerozoic_Pole_to_Equator_Temperatures.csv\n"
+                "* data/lr04_benthic_stack.json\n"
+                "* data/temp12k_allmethods_percentiles.csv (optional)\n"
+                "* data/temperature_giss_monthly.json (optional)"
             )
     except Exception as e:
         messagebox.showerror("Visualization Error", f"Could not create Human Origins visualization:\n{str(e)}")        
@@ -1595,7 +1595,7 @@ def run_update_in_thread(update_button, status_label, window):
         response = messagebox.askyesno(
             "Update Climate Data",
             "This will download the latest climate data from NASA, NOAA, and NSIDC.\n\n"
-            "±ï¸ Expected time: ~30 seconds\n"
+            " Expected time: ~30 seconds\n"
             "Datasets: CO2, Temperature, Arctic Ice\n\n"
             "Progress will be shown in the console window.\n\n"
             "Continue with update?",
@@ -1606,7 +1606,7 @@ def run_update_in_thread(update_button, status_label, window):
             return  # User clicked No
         
         # Disable button during update
-        update_button.config(state='disabled', text='Ã¢³ Updating...')
+        update_button.config(state='disabled', text=' Updating...')
         status_label.config(text="Updating... (check console for progress)")
         
         def update_thread():
@@ -1614,7 +1614,7 @@ def run_update_in_thread(update_button, status_label, window):
             success, message, details = climate_cache_manager.update_climate_data()
             
             # Re-enable button and show result (using window.after for thread safety)
-            window.after(0, lambda: update_button.config(state='normal', text='ðŸ”„ Update Climate Data'))
+            window.after(0, lambda: update_button.config(state='normal', text=' Update Climate Data'))
             window.after(0, lambda: status_label.config(text=""))
             
             if success:
@@ -1624,13 +1624,13 @@ def run_update_in_thread(update_button, status_label, window):
                     detail_msg += "\n\nDetails:\n"
                     for dataset, info in details.items():
                         if info.get('success'):
-                            detail_msg += f"  œ… {dataset.upper()}: {info['records']} records\n"
+                            detail_msg += f"  [OK] {dataset.upper()}: {info['records']} records\n"
                         else:
-                            detail_msg += f"  Ã¢Å’ {dataset.upper()}: {info.get('error', 'Failed')}\n"
+                            detail_msg += f"  [FAIL]' {dataset.upper()}: {info.get('error', 'Failed')}\n"
                 
-                window.after(0, lambda: messagebox.showinfo("œ… Update Complete", detail_msg))
+                window.after(0, lambda: messagebox.showinfo("[OK] Update Complete", detail_msg))
             else:
-                window.after(0, lambda: messagebox.showerror("Ã¢Å’ Update Failed", message))
+                window.after(0, lambda: messagebox.showerror("[FAIL]' Update Failed", message))
         
         # Start thread
         thread = threading.Thread(target=update_thread, daemon=True)
@@ -1642,7 +1642,7 @@ def run_update_in_thread(update_button, status_label, window):
             "Run fetch_climate_data.py manually to update data.")
     except Exception as e:
         messagebox.showerror("Error", f"Update failed:\n{str(e)}")
-        update_button.config(state='normal', text='ðŸ”„ Update Climate Data')
+        update_button.config(state='normal', text=' Update Climate Data')
         status_label.config(text="")
 
 def open_earth_system_gui(parent=None):
@@ -1657,7 +1657,7 @@ def open_earth_system_gui(parent=None):
     
     # Create window
     window = tk.Toplevel(parent) if parent else tk.Tk()
-    window.title("🌍 Earth System Visualization")
+    window.title("[EARTH] Earth System Visualization")
 
     window.geometry("1200x900+150+0")  # Wider window for two columns "WIDTHxHEIGHT+X_POSITION+Y_POSITION"
     
@@ -1700,9 +1700,9 @@ def open_earth_system_gui(parent=None):
     update_button = tk.Button(update_frame,
                              text='Update Climate Data',
                              font=('Arial', 11, 'bold'),
-                             bg='#4CAF50',
-                             fg='white',
-                             activebackground='#45a049',
+                             bg='#90EE90',
+                             fg='black',
+                             activebackground='#7BC97B',
                              cursor='hand2',
                              padx=20,
                              pady=10,
@@ -1768,9 +1768,9 @@ def open_earth_system_gui(parent=None):
     keeling_button = tk.Button(left_column,
                               text='The Keeling Curve (Mauna Loa CO2)',
                               font=('Arial', 10),
-                              bg='#2E86AB',
-                              fg='white',
-                              activebackground='#1a5f7a',
+                              bg='#FFB6A3',
+                              fg='black',
+                              activebackground='#E8A090',
                               cursor='hand2',
                               padx=15,
                               pady=8,
@@ -1781,9 +1781,9 @@ def open_earth_system_gui(parent=None):
     temp_button = tk.Button(left_column,
                            text='Global Temperature Anomalies',
                            font=('Arial', 10),
-                           bg='#C1121F',
-                           fg='white',
-                           activebackground='#8B0000',
+                           bg='#FFB6A3',
+                           fg='black',
+                           activebackground='#E8A090',
                            cursor='hand2',
                            padx=15,
                            pady=8,
@@ -1794,9 +1794,9 @@ def open_earth_system_gui(parent=None):
     monthly_btn = tk.Button(left_column,
                            text='Monthly Temperature: Year-over-Year',
                            font=('Arial', 10),
-                           bg='#E67E22',
-                           fg='white',
-                           activebackground='#CA6F1E',
+                           bg='#FFB6A3',
+                           fg='black',
+                           activebackground='#E8A090',
                            cursor='hand2',
                            padx=15,
                            pady=8,
@@ -1807,9 +1807,9 @@ def open_earth_system_gui(parent=None):
     stripes_btn = tk.Button(left_column,
                            text='Warming Stripes (Ed Hawkins Style)',
                            font=('Arial', 10),
-                           bg='#8E44AD',
-                           fg='white',
-                           activebackground='#7D3C98',
+                           bg='#FFB6A3',
+                           fg='black',
+                           activebackground='#E8A090',
                            cursor='hand2',
                            padx=15,
                            pady=8,
@@ -1820,9 +1820,9 @@ def open_earth_system_gui(parent=None):
     energy_btn = tk.Button(left_column,
                         text='Energy Imbalance: The Climate Mechanism',
                         font=('Arial', 10),
-                        bg='#FF8C00',
-                        fg='white',
-                        activebackground='#E07B00',
+                        bg='#FFB6A3',
+                        fg='black',
+                        activebackground='#E8A090',
                         cursor='hand2',
                         padx=15,
                         pady=8,
@@ -1840,9 +1840,9 @@ def open_earth_system_gui(parent=None):
     paleo_btn = tk.Button(left_column,
                          text='Paleoclimate: Cenozoic Climate History',
                          font=('Arial', 10),
-                         bg='#6B4423',
-                         fg='white',
-                         activebackground='#4A2F19',
+                         bg='#DEB887',
+                         fg='black',
+                         activebackground='#C9A676',
                          cursor='hand2',
                          padx=15,
                          pady=8,
@@ -1853,9 +1853,9 @@ def open_earth_system_gui(parent=None):
     paleo_dual_btn = tk.Button(left_column,
                          text='Paleoclimate: Dual Scale (Modern + Deep Time)',
                          font=('Arial', 10),
-                         bg='#8B6914',
-                         fg='white',
-                         activebackground='#6B4F0F',
+                         bg='#DEB887',
+                         fg='black',
+                         activebackground='#C9A676',
                          cursor='hand2',
                          padx=15,
                          pady=8,
@@ -1866,9 +1866,9 @@ def open_earth_system_gui(parent=None):
     paleo_phan_btn = tk.Button(left_column,
                          text='Paleoclimate: Full History (540 Ma - Present)',
                          font=('Arial', 10),
-                         bg='#003049',  # Dark blue to match Scotese curve color
-                         fg='white',
-                         activebackground='#001F2E',
+                         bg='#DEB887',
+                         fg='black',
+                         activebackground='#C9A676',
                          cursor='hand2',
                          padx=15,
                          pady=8,
@@ -1877,11 +1877,11 @@ def open_earth_system_gui(parent=None):
 
     # Paleoclimate HUMAN ORIGINS button
     human_origins_btn = tk.Button(right_column,
-                         text='🧬 Human Origins (540 Ma + Evolution)',
+                         text='[DNA] Human Origins (540 Ma + Evolution)',
                          font=('Arial', 10),
-                         bg='#8B4513',  # Saddle brown - earthy/fossil color
-                         fg='white',
-                         activebackground='#A0522D',
+                         bg='#DEB887',
+                         fg='black',
+                         activebackground='#C9A676',
                          cursor='hand2',
                          padx=15,
                          pady=8,
@@ -1900,9 +1900,9 @@ def open_earth_system_gui(parent=None):
     ice_button = tk.Button(right_column,
                           text='Arctic Sea Ice Extent (September Minimum)',
                           font=('Arial', 10),
-                          bg='#00B4D8',
-                          fg='white',
-                          activebackground='#0096C7',
+                          bg='#87CEEB',
+                          fg='black',
+                          activebackground='#72B8D4',
                           cursor='hand2',
                           padx=15,
                           pady=8,
@@ -1920,9 +1920,9 @@ def open_earth_system_gui(parent=None):
     sealevel_button = tk.Button(right_column,
                             text='Global Mean Sea Level Rise',
                             font=('Arial', 10),
-                            bg='#006994',
-                            fg='white',
-                            activebackground='#004D6B',
+                            bg='#87CEEB',
+                            fg='black',
+                            activebackground='#72B8D4',
                             cursor='hand2',
                             padx=15,
                             pady=8,
@@ -1933,9 +1933,9 @@ def open_earth_system_gui(parent=None):
     ph_button = tk.Button(right_column,
                         text='Ocean Acidification',
                         font=('Arial', 10),
-                        bg='#0077BE',  # Ocean blue
-                        fg='white',
-                        activebackground='#005A8C',
+                        bg='#87CEEB',
+                        fg='black',
+                        activebackground='#72B8D4',
                         cursor='hand2',
                         padx=15,
                         pady=8,
@@ -1953,9 +1953,9 @@ def open_earth_system_gui(parent=None):
     pb_button = tk.Button(right_column,
                          text='Planetary Boundaries (SRC Framework)',
                          font=('Arial', 10),
-                         bg='#27AE60',  # Earth green
-                         fg='white',
-                         activebackground='#229954',
+                         bg='#98FB98',
+                         fg='black',
+                         activebackground='#82E082',
                          cursor='hand2',
                          padx=15,
                          pady=8,

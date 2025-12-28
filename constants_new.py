@@ -416,12 +416,12 @@ note_text = (
     "PNG, JSON, VOTable, and Pickle formats for sharing and analysis.\n\n"
 
     "INTERACTIVE FEATURES:\n"
-    "• Animation: Watch solar system evolution from minutes to years\n"
-    "• Orbital Mechanics Visualization: Educational tool showing how orbital elements define spacecraft and planetary paths\n"
-    "• Lagrange Points: Explore gravitational balance points in Earth-Moon and Sun-Earth systems\n"
-    "• Apsidal Markers: See perihelion/aphelion points with intelligent date displays\n"
-    "• Copy-to-Clipboard: Easy sharing of star names and coordinates\n"
-    "• Advanced Hover Information: Detailed astronomical data with toggle controls\n\n"
+    "* Animation: Watch solar system evolution from minutes to years\n"
+    "* Orbital Mechanics Visualization: Educational tool showing how orbital elements define spacecraft and planetary paths\n"
+    "* Lagrange Points: Explore gravitational balance points in Earth-Moon and Sun-Earth systems\n"
+    "* Apsidal Markers: See perihelion/aphelion points with intelligent date displays\n"
+    "* Copy-to-Clipboard: Easy sharing of star names and coordinates\n"
+    "* Advanced Hover Information: Detailed astronomical data with toggle controls\n\n"
 
     "SOLAR SYSTEM OBJECTS:\n"
     "The scrollable selection menu includes planets, moons (including all major Jovian and Saturnian satellites), asteroids, "
@@ -440,11 +440,11 @@ note_text = (
     "the average Earth-Sun distance.\n\n"
 
     "PERFORMANCE TIPS:\n"
-    "• Use 'Move Camera to Center' to view from the Sun's perspective\n"
-    "• Reduce distance/magnitude limits for less crowded, more detailed views\n"
-    "• Toggle hover text complexity based on your needs\n"
-    "• Be patient with complex plots - quality visualization takes time!\n"
-    "• Ensure active internet connection for real-time data fetching\n\n"
+    "* Use 'Move Camera to Center' to view from the Sun's perspective\n"
+    "* Reduce distance/magnitude limits for less crowded, more detailed views\n"
+    "* Toggle hover text complexity based on your needs\n"
+    "* Be patient with complex plots - quality visualization takes time!\n"
+    "* Ensure active internet connection for real-time data fetching\n\n"
 
     "Created by civil & environmental engineer Tony Quintanilla with AI assistance (Claude, ChatGPT, Gemini), continuously "
     "updated through August 2025. MIT License - free to use, modify, and share.\n\n"
@@ -661,8 +661,8 @@ INFO = {
         '* Heliocentric: select Earth with or without shells.\n'
         '* Missions: Galileo, Cassini-Huygens, Rosetta, New Horizons, JUNO, Parker Solar Probe, Deep Impact, NEAR Shoemaker, Solar Orbiter.',
 
-        'Moon': 'Horizons: 301. Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145° to the ecliptic plane, ' 
-        'but approximately 28.545° to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4°). '
+        'Moon': 'Horizons: 301. Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145 deg to the ecliptic plane, ' 
+        'but approximately 28.545 deg to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4 deg). '
         'The Moon\'s orbital parameters are not fixed but vary significantly over time due to precession of the nodes, ' 
         'perturbations from the Sun\'s gravity, Earth\'s non-spherical shape, and other gravitational influences.\n\n' 
         'Missions: Early Pioneers (1950s-1960s):\n' 
@@ -794,8 +794,8 @@ INFO = {
         '* NASA 2-24-25: "NASA has significantly lowered the risk of near-Earth asteroid 2024 YR4 as an impact threat to Earth for ' 
         'the foreseeable future. When first discovered, asteroid 2024 YR4 had a very small, but notable chance of impacting our ' 
         'planet in 2032. As observations of the asteroid continued to be submitted to the Minor Planet Center, experts at NASA ' 
-        'Jet Propulsion Laboratory\’s (JPL\’s) Center for Near-Earth Object Studies were able to calculate more precise models ' 
-        'of the asteroid\’s trajectory and now have updated its impact probability on Dec. 22, 2032 to only 0.004% and found there ' 
+        'Jet Propulsion Laboratory\'s (JPL\'s) Center for Near-Earth Object Studies were able to calculate more precise models ' 
+        'of the asteroid\'s trajectory and now have updated its impact probability on Dec. 22, 2032 to only 0.004% and found there ' 
         'is no significant potential for this asteroid to impact our planet for the next century. The latest observations have ' 
         'further reduced the uncertainty of its future trajectory, and the range of possible locations the asteroid could be on ' 
         'Dec. 22, 2032, has moved farther away from the Earth. There still remains a very small chance for asteroid 2024 YR4 to ' 
@@ -811,8 +811,8 @@ INFO = {
             '  eccentric orbit.\n'
             '* Close approach: Closest approach to Earth occurred on February 22, 2024 at approximately 5:00 UTC.\n'
             '* Not interstellar: Despite its extreme orbit, this asteroid is bound to the Sun (e < 1.0) and is\n'
-            '  a permanent solar system resident, unlike interstellar visitors like \'Oumuamua (e ≈ 1.2) or\n'
-            '  2I/Borisov (e ≈ 3.4) which have hyperbolic orbits and escape the solar system.'
+            '  a permanent solar system resident, unlike interstellar visitors like \'Oumuamua (e ~ 1.2) or\n'
+            '  2I/Borisov (e ~ 3.4) which have hyperbolic orbits and escape the solar system.'
             '* Close Flyby: Asteroid 2024 DW made a close approach to Earth on February 22, 2024. It passed within approximately ' 
             '225,000 kilometers of Earth, which is closer than the Moon\'s average distance.\n' 
             '* Size: It\'s estimated to be about the size of a bus, roughly 13 meters in diameter.\n' 
@@ -975,7 +975,7 @@ INFO = {
         '* Closest approach to the Earth: 2029-04-13 21:46 UTC; approximately 31,600 km from the surface.\n'
         '* Closest approach to the Moon: 2029-04-14 14:32 UTC; approximately 94,200 km from the surface.\n'
         '* Missions:\n' 
-        '  * OSIRIS-APEX (Origins, Spectral Interpretation, Resource Identification, and Security – Apophis EXplorer) - NASA:\n' 
+        '  * OSIRIS-APEX (Origins, Spectral Interpretation, Resource Identification, and Security - Apophis EXplorer) - NASA:\n' 
         '    Scheduled to rendezvous with Apophis shortly after its 2029 Earth close-approach.\n' 
         '  * RAMSES (Rapid Apophis Mission for Space Safety) - ESA (European Space Agency): RAMSES to launch in April 2028 and arrive \n' 
         '    at Apophis in February 2029, giving it two months to study the asteroid before its close encounter with Earth.',
@@ -1012,7 +1012,7 @@ INFO = {
 
         'Eros': 'Horizons: A898 PA. The first Near-Earth Asteroid to be orbited and landed on by a spacecraft\n'
         '  (NEAR Shoemaker mission, 2000-2001).\n'
-        '* Size: Approximately 16.8 × 8.2 × 8.2 km - one of the largest NEAs.\n'
+        '* Size: Approximately 16.8 x 8.2 x 8.2 km - one of the largest NEAs.\n'
         '* Classification: Amor-type NEA (approaches but doesn\'t cross Earth\'s orbit). With perihelion\n'
         '  at 1.133 AU and aphelion at 1.783 AU, Eros orbits entirely outside Earth but comes close.\n'
         '* Composition: S-type (silicaceous) asteroid - rocky composition rich in silicate minerals and metals.\n'
@@ -1149,19 +1149,19 @@ INFO = {
         '***VISUALIZE PLUTO\'S FULL STRUCTURE WITH SHELLS AT 0.1 AU***\n\n'
         'Horizons: 999. Dwarf planet in a TRUE BINARY system with Charon.\n\n'
         'THREE VIEW MODES:\n'
-        '• Heliocentric (Sun-centered): Select Pluto to see its orbit around the Sun.\n'
-        '• Pluto-centered: Do NOT select Pluto; shows moons orbiting Pluto.\n'
+        '* Heliocentric (Sun-centered): Select Pluto to see its orbit around the Sun.\n'
+        '* Pluto-centered: Do NOT select Pluto; shows moons orbiting Pluto.\n'
         '   Like geocentric view - convenient but hides real mechanics.\n'
-        '• Barycenter-centered: Select "Pluto-Charon Barycenter" as center.\n'
+        '* Barycenter-centered: Select "Pluto-Charon Barycenter" as center.\n'
         '  and select Pluto and its moons to see TRUE orbits.\n'
-        '   • Shows TRUE orbital mechanics - both Pluto AND Charon orbit in a dance\n'
+        '   * Shows TRUE orbital mechanics - both Pluto AND Charon orbit in a dance\n'
         '     around their common center of mass (barycenter)! This is why Pluto-Charon is\n'
         '     called a binary planet: the barycenter is OUTSIDE Pluto.\n\n'
         'BINARY PLANET PHYSICS:\n'
-        '• Barycenter: 2,035 km from Pluto\'s center (outside its 1,188 km radius!)\n'
-        '• Pluto orbits barycenter: ~2,100 km radius\n'
-        '• Charon orbits barycenter: ~17,500 km radius (same period: 6.387 days)\n'
-        '• Compare: Earth-Moon barycenter is inside Earth - not a true binary.\n\n'
+        '* Barycenter: 2,035 km from Pluto\'s center (outside its 1,188 km radius!)\n'
+        '* Pluto orbits barycenter: ~2,100 km radius\n'
+        '* Charon orbits barycenter: ~17,500 km radius (same period: 6.387 days)\n'
+        '* Compare: Earth-Moon barycenter is inside Earth - not a true binary.\n\n'
         'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.\n\n'
         'HTML: ~22 MB per frame with all shells/moons.',        
 
@@ -1226,7 +1226,7 @@ INFO = {
         '    roughly 260 AU. It was the second sednoid discovered.\n' 
         '  * Scientific significance: The discovery of these objects is significant because their orbits are all highly detached from the \n' 
         '    gravitational influence of Neptune and appear to be unusually clustered in a similar orientation in space. This clustering is \n' 
-        '    a primary piece of evidence supporting the hypothesis of a massive, undiscovered planet—often called "Planet Nine"—that is \n' 
+        '    a primary piece of evidence supporting the hypothesis of a massive, undiscovered planet-often called "Planet Nine"-that is \n' 
         '    shaping the orbits of these distant objects.',        
 
         'Sedna': 'Horizons: 2003 VB12. A distant trans-Neptunian dwarf planet with a long orbit. \n* Sedna is a fascinating object with an incredibly ' 
@@ -1248,7 +1248,7 @@ INFO = {
         'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
         'Extreme orbits make Sednoids "detached objects," meaning they are not significantly influenced by the gravity of the giant ' 
         'planets like Neptune.\n' 
-        '* Leleākūhonua is considered a strong candidate for being a dwarf planet, but it is not officially recognized as one yet. ' 
+        '* Leleakuhonua is considered a strong candidate for being a dwarf planet, but it is not officially recognized as one yet. ' 
         '  Like Sedna, it\'s more accurately classified as a Trans-Neptunian Object (TNO) rather than a typical asteroid.',
 
         'Chariklo': 'Horizons: 1997 CU26. Chariklo is the largest known centaur, a class of small solar system bodies that orbit the Sun between Jupiter ' 
@@ -1316,9 +1316,9 @@ INFO = {
         'Cassini': '***SET MANUAL SCALE TO 15 AU. PLOT WITH VENUS, EARTH, JUPITER AND SATURN.***\n'
         'Horizons: -82. NASA: "A joint endeavor of NASA, ESA, and the Italian space agency (ASI), Cassini was a sophisticated robotic ' 
         'spacecraft sent to study Saturn and its complex system of rings and moons in unprecedented detail. Cassini carried a probe ' 
-        'called Huygens to the Saturn system. The probe, which was built by ESA, parachuted to the surface of Saturn’s largest moon, ' 
-        'Titan, in January 2005 — the most distant landing to date in our solar system. Huygens returned spectacular images and other ' 
-        'science results during a two-and-a-half-hour descent through Titan’s hazy atmosphere, before coming to rest amid rounded ' 
+        'called Huygens to the Saturn system. The probe, which was built by ESA, parachuted to the surface of Saturn\'s largest moon, ' 
+        'Titan, in January 2005 - the most distant landing to date in our solar system. Huygens returned spectacular images and other ' 
+        'science results during a two-and-a-half-hour descent through Titan\'s hazy atmosphere, before coming to rest amid rounded ' 
         'cobbles of ice on a floodplain damp with liquid methane. Cassini completed its initial four-year mission in June 2008 and ' 
         'earned two mission extensions. Key discoveries during its 13 years at Saturn included a global ocean with strong indications ' 
         'of hydrothermal activity within Enceladus and liquid methane seas on Titan. The mission ended on Sept. 15, 2017."\n' 
@@ -1631,14 +1631,14 @@ INFO = {
         'insertion around Mercury later in 2025.'
         '* BepiColombo is scheduled to arrive at Mercury in December 2025. Once there, the two orbiters will separate and ' 
         'enter their respective orbits around Mercury.\n ' 
-        '* Challenges: Mercury experiences scorching temperatures of over 400°C (750°F). The spacecraft needs special ' 
+        '* Challenges: Mercury experiences scorching temperatures of over 400 degC (750 degF). The spacecraft needs special ' 
         'protection from the Sun\'s powerful radiation. Mercury\'s proximity to the Sun creates a strong gravitational pull.\n ' 
         '* BepiColombo is the most comprehensive mission to Mercury to date, with two orbiters providing a detailed view of ' 
         'the planet and its environment. It\'s a prime example of international cooperation in space exploration.\n ' 
         '* Timeline:\n ' 
         '  * According to this model, the closest flyby of Mercury by BepiColombo occurred on January 8th, 2025, 6 UTC. ' 
         'During this flyby, the spacecraft came within approximately 0.00001829 AU from Mercury\'s surface: 0.00001829 AU = 2,736 km ' 
-        '(from Mercury\'s center), Mercury radius = 2,440 km, actual flyby altitude ≈ 296 km above Mercury\'s surface!\n ' 
+        '(from Mercury\'s center), Mercury radius = 2,440 km, actual flyby altitude ~ 296 km above Mercury\'s surface!\n ' 
         '  * This is the statement from ESA, \"On 8 January 2025, the ESA/JAXA BepiColombo mission will fly just 295 km above ' 
         'Mercury\'s surface, with a closest approach scheduled for 06:59 CET (05:59 UTC). It will use this opportunity to ' 
         'photograph Mercury, make unique measurements of the planet\'s environment, and fine-tune science instrument operations ' 
@@ -1992,10 +1992,10 @@ INFO = {
         '* Discovery Data: The orbital elements and predictions for 3I/ATLAS are based on an observational data arc from June 14, 2025, to \n' 
         '  July 3, 2025. This short observational period is sufficient for astronomers to calculate its orbit and predict future events \n' 
         '  like perihelion.\n'
-        '* Composition (PRELIMINARY): JWST and SPHEREx observations reveal an unusually CO₂-rich coma with water ice present. This is \n'
-        '  extremely rare for comets, which are typically water-ice dominated. The CO₂ dominance allows the comet to remain active at \n'
+        '* Composition (PRELIMINARY): JWST and SPHEREx observations reveal an unusually CO2-rich coma with water ice present. This is \n'
+        '  extremely rare for comets, which are typically water-ice dominated. The CO2 dominance allows the comet to remain active at \n'
         '  greater distances from the Sun than typical comets.\n'
-        '* Appearance: Imaging shows a red-sloped, dust-rich appearance with a bright blue ion tail from CO₂+ and CO+ emissions.\n'
+        '* Appearance: Imaging shows a red-sloped, dust-rich appearance with a bright blue ion tail from CO2+ and CO+ emissions.\n'
         '* Anti-tail: Some reports mention a possible anti-tail feature (dust structure along orbital plane), pending confirmation.\n'
         '* Note: Tail length measurements are preliminary and model-based; official measurements pending ESA/NOIRLab/HST data releases.',        
 
@@ -2055,10 +2055,10 @@ INFO = {
         'TRAPPIST-1': 'M8V red dwarf at 40.5 ly. 7 Earth-sized planets, 3 in habitable zone.',
         'TRAPPIST-1 b': 'Innermost planet, 1.5 day period. Too hot (400 K).',
         'TRAPPIST-1 c': '2.4 day period. No significant atmosphere (JWST).',
-        'TRAPPIST-1 d': '★ HABITABLE ZONE (inner edge). 4.0 day period.',
-        'TRAPPIST-1 e': '★ PRIME HABITABLE ZONE CANDIDATE! Most likely liquid water. 6.1 days.',
-        'TRAPPIST-1 f': '★ HABITABLE ZONE. 9.2 day period. May have water.',
-        'TRAPPIST-1 g': '★ HABITABLE ZONE (outer edge). 12.4 day period.',
+        'TRAPPIST-1 d': '[STAR] HABITABLE ZONE (inner edge). 4.0 day period.',
+        'TRAPPIST-1 e': '[STAR] PRIME HABITABLE ZONE CANDIDATE! Most likely liquid water. 6.1 days.',
+        'TRAPPIST-1 f': '[STAR] HABITABLE ZONE. 9.2 day period. May have water.',
+        'TRAPPIST-1 g': '[STAR] HABITABLE ZONE (outer edge). 12.4 day period.',
         'TRAPPIST-1 h': 'Outermost, 18.8 day period. Too cold (173 K).',
         
         'TOI-1338 Binary': 
@@ -2075,7 +2075,7 @@ INFO = {
         '(like TOI-1338 A) has a smaller semi-major axis, meaning it orbits closer to the barycenter. The less massive star (like TOI-1338 B) has ' 
         'a larger semi-major axis, meaning it orbits farther from the barycenter. For example, in the TOI-1338 system, both Star A and Star B ' 
         'complete one orbit in 14.6 days (the binary period)\n'
-        '  * Angular Rotation (around barycenter): both stars: +19.95°/day (identical!); both rotating counter-clockwise; both have same angular velocity\n'
+        '  * Angular Rotation (around barycenter): both stars: +19.95 deg/day (identical!); both rotating counter-clockwise; both have same angular velocity\n'
         '  * Planetary Orbital Stability: The instability zone is a region surrounding a binary star pair where an orbiting planet would be dynamically ' 
         'unstable and quickly ejected from the system due to the stars'' powerful, rapidly varying gravitational pull. For circumbinary systems like ' 
         'TOI-1338, the distance to the edge of the instability zone is typically 2 to 4 times the binary star separation, or, when measured in time, 3 ' 
@@ -2108,8 +2108,8 @@ INFO = {
         '* Configuration: Like planet b, it is coplanar (or nearly so) with the binary stars and planet b.\n', 
         
         'Proxima Centauri': 'NEAREST star! M5.5V red dwarf at 4.24 ly.',
-        'Proxima b': '★ HABITABLE ZONE. NEAREST EXOPLANET! 11.2 day period.',
-        'Proxima d': 'Sub-Earth mass (0.26 M⊕). Lightest RV-detected planet. 5.1 days.',
+        'Proxima b': '[STAR] HABITABLE ZONE. NEAREST EXOPLANET! 11.2 day period.',
+        'Proxima d': 'Sub-Earth mass (0.26 M[EARTH]). Lightest RV-detected planet. 5.1 days.',
 
 }
 

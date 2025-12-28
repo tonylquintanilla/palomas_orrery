@@ -240,7 +240,7 @@ class StarVisualizationSearchWidget(ttk.Frame):
     def load_enhanced_pickle(self, filename: str) -> Dict:
         """Load pickle file - handles both old and enhanced formats."""
         if not os.path.exists(filename):
-            print(f"✗ {filename} not found")
+            print(f"[FAIL] {filename} not found")
             return {}
         
         try:
@@ -257,9 +257,9 @@ class StarVisualizationSearchWidget(ttk.Frame):
                 has_calculated = 'Temperature' in data
                 
                 if has_calculated:
-                    print(f"✓ Loaded {filename}: {num_stars} stars WITH calculated properties")
+                    print(f"[OK] Loaded {filename}: {num_stars} stars WITH calculated properties")
                 else:
-                    print(f"⚠ Loaded {filename}: {num_stars} stars (basic properties only)")
+                    print(f"[WARN] Loaded {filename}: {num_stars} stars (basic properties only)")
                 
                 for i in range(num_stars):
                     star_name = data['star_names'][i]
@@ -387,9 +387,9 @@ class StarVisualizationSearchWidget(ttk.Frame):
         # Initial message
         self.info_display.insert('1.0', 
             "Search for a star using any of the search fields above.\n\n"
-            "• Notable Stars: Stars with descriptions and notes\n"
-            "• Stars by Distance: Stars within specified distance range\n"
-            "• Stars by Magnitude: Stars brighter than specified magnitude\n\n"
+            "* Notable Stars: Stars with descriptions and notes\n"
+            "* Stars by Distance: Stars within specified distance range\n"
+            "* Stars by Magnitude: Stars brighter than specified magnitude\n\n"
             "Start typing to see matching stars...")
 
         self.after(1000, lambda: print(f"Info display actual height: {self.info_display.winfo_height()} pixels"))
@@ -616,7 +616,7 @@ class StarVisualizationSearchWidget(ttk.Frame):
                     dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
                     
                     ra_formatted = f"{ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s"
-                    dec_formatted = f"{dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\""
+                    dec_formatted = f"{dec_sign}{dec_d:02d} deg {dec_m:02d}' {dec_s:04.1f}\""
                     
                     return f"RA:  {ra_formatted}\nDec: {dec_formatted}\n(J2000 epoch)"
             except:
@@ -648,7 +648,7 @@ class StarVisualizationSearchWidget(ttk.Frame):
         # Luminosity (from enhanced data)
         lum = star_props.get('Luminosity')
         if lum is not None and not pd.isna(lum):
-            lines.append(f"Luminosity: {lum:.6f} L☉")
+            lines.append(f"Luminosity: {lum:.6f} L[SUN]")
         
         # Absolute Magnitude (from enhanced data)
         abs_mag = star_props.get('Abs_Mag')
@@ -1114,7 +1114,7 @@ class StarVisualizationGUI(tk.Tk):
                 return
             
             self.status_label.config(
-                text=f"Generating 3D visualization for distance ≤ {ly_value} (~10-15 seconds)",
+                text=f"Generating 3D visualization for distance <= {ly_value} (~10-15 seconds)",
                 foreground="blue"
             )
             self.update()
@@ -1170,7 +1170,7 @@ class StarVisualizationGUI(tk.Tk):
                 return
             
             self.status_label.config(
-                text=f"Generating 2D visualization for distance ≤ {ly_value} (~5-10 seconds)",
+                text=f"Generating 2D visualization for distance <= {ly_value} (~5-10 seconds)",
                 foreground="blue"
             )
             self.update()
@@ -1228,7 +1228,7 @@ class StarVisualizationGUI(tk.Tk):
                 return
             
             self.status_label.config(
-                text=f"Generating 3D visualization for magnitude ≤ {mag_value} (~30-75 seconds)",
+                text=f"Generating 3D visualization for magnitude <= {mag_value} (~30-75 seconds)",
                 foreground="blue"
             )
             self.update()
@@ -1309,7 +1309,7 @@ class StarVisualizationGUI(tk.Tk):
                 return
             
             self.status_label.config(
-                text=f"Generating 2D visualization for magnitude ≤ {mag_value} (~30-60 seconds)",
+                text=f"Generating 2D visualization for magnitude <= {mag_value} (~30-60 seconds)",
                 foreground="blue"
             )
             self.update()

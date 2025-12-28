@@ -98,7 +98,7 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
         print(f"Sun direction indicator: Adjusted to minimum scale = {plot_scale:.5f} AU")
     
     # Create a line pointing in the POSITIVE X direction (toward vernal equinox)
-    # +X points toward the vernal equinox (♈) - the direction from Earth to Sun on March 20
+    # +X points toward the vernal equinox ([ARIES]) - the direction from Earth to Sun on March 20
     sun_direction_x = [center_x, center_x + plot_scale]  # Line points in +X direction
     sun_direction_y = [center_y, center_y]
     sun_direction_z = [center_z, center_z]
@@ -112,9 +112,9 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
         scale_text = f"{plot_scale:.{decimal_places}f} AU"
 
     # Info text for the hover
-    info_text = "Vernal Equinox Direction (+X): Points toward the First Point of Aries (♈).<br>" \
+    info_text = "Vernal Equinox Direction (+X): Points toward the First Point of Aries ([ARIES]).<br>" \
                 "This is the direction from Earth to the Sun at the vernal equinox (around March 20).<br>" \
-                "The +X axis defines celestial longitude 0° in the J2000 ecliptic coordinate system.<br>" \
+                "The +X axis defines celestial longitude 0 deg in the J2000 ecliptic coordinate system.<br>" \
                 f"Current indicator length: {scale_text}"
 
     # Create the vernal equinox direction indicator line

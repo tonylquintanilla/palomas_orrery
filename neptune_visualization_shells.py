@@ -11,7 +11,7 @@ neptune_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. \n" 
             "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million \n" 
-            "bars (700 GPa), and the temperature could be as high as 5,100 °C."
+            "bars (700 GPa), and the temperature could be as high as 5,100  degC."
 )
 
 def create_neptune_core_shell(center_position=(0, 0, 0)):
@@ -19,13 +19,13 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
     # Define layer properties
     layer_info = {
         'radius_fraction': 0.25,  # Approximately 25% of Neptune's radius
-        'color': 'rgb(255, 215, 0)',  # estimated black body color at about 5100°C 
+        'color': 'rgb(255, 215, 0)',  # estimated black body color at about 5100 degC 
         'opacity': 1.0,
         'name': 'Core',
         'description': (
             "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. <br>" 
             "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million <br>" 
-            "bars (700 GPa), and the temperature could be as high as 5,100 °C.<br>" 
+            "bars (700 GPa), and the temperature could be as high as 5,100  degC.<br>" 
             "* While there isn't a single, precisely agreed-upon value for Neptune's core radius, estimates suggest that the rocky <br>" 
             "  core makes up a relatively small fraction of the planet's total radius."
         )
@@ -89,8 +89,8 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
             "  80-85% of Neptune's total radius.<br>" 
             "* It's important to remember that this is still an estimate based on our current understanding of Neptune's interior. <br>" 
             "  The transition from the dense fluid mantle to the gaseous atmosphere is likely a gradual one.<br>" 
-            "* The temperature within Neptune's mantle is incredibly high, ranging from approximately 2,000 K (around 1,700 °C) to <br>" 
-            "  5,000 K (around 4,700 °C). It's important to understand that Neptune's mantle isn't a solid, icy layer like the name <br>" 
+            "* The temperature within Neptune's mantle is incredibly high, ranging from approximately 2,000 K (around 1,700  degC) to <br>" 
+            "  5,000 K (around 4,700  degC). It's important to understand that Neptune's mantle isn't a solid, icy layer like the name <br>" 
             "  \"ice giant\" might suggest. Instead, it's a hot, dense fluid composed primarily of water, methane, and ammonia under <br>" 
             "  immense pressure. This high pressure actually raises the freezing point of these substances significantly. So, even at <br>" 
             "  these high temperatures, they can exist in a fluid or even superionic state."
@@ -331,7 +331,7 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
             "* Temperature: The upper atmospheres of Uranus and Neptune are known to be inexplicably hot, suggesting significant <br>" 
             "  energy input that could lead to a more extended thermosphere than expected based solely on solar heating.<br>" 
             "* Estimated Height: The thermosphere on Neptune likely extends a significant distance above the 1-bar radius.<br>" 
-            "  * The thermosphere begins at pressures below 10⁻⁵ to 10⁻⁴ bars (1 to 10 Pa).<br>" 
+            "  * The thermosphere begins at pressures below 10^-^5 to 10^-^4 bars (1 to 10 Pa).<br>" 
             "  * Barometric Formula: We'll use a simplified version of the barometric formula, which relates pressure and altitude in <br>" 
             "    an atmosphere.<br>" 
             "    * The pressure at a certain altitude in an atmosphere is equal to the pressure at a reference altitude multiplied <br>" 
@@ -489,12 +489,12 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0)):
     
     # Detailed description for hover information with explicit sun direction note
     magnetosphere_text = [
-        "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted (47° from its rotation axis) and <br>"
+        "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted (47 deg from its rotation axis) and <br>"
         "significantly offset from the planet's center by more than half a Neptune radius. This creates an extremely asymmetric magnetosphere <br>"
         "that varies greatly depending on Neptune's rotation.<br><br>"
         "In this scientifically accurate model:<br>"
         "- The bow shock faces the Sun (negative X-axis) as it would in reality, shaped by the solar wind<br>"
-        "- The internal magnetosphere shows Neptune's unique magnetic field configuration with its 47° tilt and offset<br>"
+        "- The internal magnetosphere shows Neptune's unique magnetic field configuration with its 47 deg tilt and offset<br>"
         "- The magnetotail stretches away from the Sun but is influenced by Neptune's unusual field<br><br>"
         "This unusual magnetic environment was discovered by Voyager 2 during its 1989 flyby and makes Neptune's magnetosphere <br>"
         "one of the most complex and dynamic in our solar system."
@@ -642,7 +642,7 @@ def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimut
             dash='dash'
         ),
         name='Neptune: Magnetic Axis',
-        text=["Neptune's magnetic axis is tilted 47° from its rotation axis"] * 3,
+        text=["Neptune's magnetic axis is tilted 47 deg from its rotation axis"] * 3,
         hovertemplate='%{text}<extra></extra>',
         showlegend=True
     )
@@ -807,7 +807,7 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
                           "  shapes that account for the unusual magnetic field.<br>" 
                           "* Magnetotail stretching for the outer plasma sheet.<br>" 
                           "* Funnel-shaped polar cusps.<br>" 
-                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "* Maintaining proper magnetic field geometry: 47 deg tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
                           "  from the planet's center.<br>" 
                           "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
                           "  data and subsequent scientific analysis."
@@ -829,7 +829,7 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
                           "  shapes that account for the unusual magnetic field.<br>" 
                           "* Magnetotail stretching for the outer plasma sheet.<br>" 
                           "* Funnel-shaped polar cusps.<br>" 
-                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "* Maintaining proper magnetic field geometry: 47 deg tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
                           "  from the planet's center.<br>" 
                           "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
                           "  data and subsequent scientific analysis."                          
@@ -851,7 +851,7 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
                           "  shapes that account for the unusual magnetic field.<br>" 
                           "* Magnetotail stretching for the outer plasma sheet.<br>" 
                           "* Funnel-shaped polar cusps.<br>" 
-                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "* Maintaining proper magnetic field geometry: 47 deg tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
                           "  from the planet's center.<br>" 
                           "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
                           "  data and subsequent scientific analysis."
@@ -874,7 +874,7 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
                           "  shapes that account for the unusual magnetic field.<br>" 
                           "* Magnetotail stretching for the outer plasma sheet.<br>" 
                           "* Funnel-shaped polar cusps.<br>" 
-                          "* Maintaining proper magnetic field geometry: 47° tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
+                          "* Maintaining proper magnetic field geometry: 47 deg tilt from the rotation axis; 0.55 Neptune radii offset <br>" 
                           "  from the planet's center.<br>" 
                           "* Given the scarcity of direct measurements, this represents our best current understanding based on Voyager 2 <br>" 
                           "  data and subsequent scientific analysis."
@@ -1068,7 +1068,7 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
                 radius = params['start_radius'] + (params['end_radius'] - params['start_radius']) * t
                 
                 # Add curvature to field line
-                angle_offset = 0.4 * np.sin(np.pi * t)  # Max 0.4 radians (~23°) curvature
+                angle_offset = 0.4 * np.sin(np.pi * t)  # Max 0.4 radians (~23 deg) curvature
                 current_angle = angle + angle_offset
                 
                 # Calculate position
@@ -1166,12 +1166,12 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
         
     Notes:
         Neptune's ring system requires specific transformations to correctly align
-        with its axial tilt (28.32°) and pole orientation. Unlike Uranus (which has
-        an extreme axial tilt of ~98°), Neptune's rings require a different approach.
+        with its axial tilt (28.32 deg) and pole orientation. Unlike Uranus (which has
+        an extreme axial tilt of ~98 deg), Neptune's rings require a different approach.
         
         The transformation uses:
         1. Standard orbital element rotations for each ring
-        2. Application of Neptune's pole direction (RA: 299.36°, Dec: 43.46°)
+        2. Application of Neptune's pole direction (RA: 299.36 deg, Dec: 43.46 deg)
         3. Proper offsetting relative to Neptune's center
     """
     traces = []
@@ -1275,7 +1275,7 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             'name': 'Arago Ring',
             'description': (
                 "Arago Ring: A narrow ring located at the outer edge of the Lassell Ring, about 57,600 km from Neptune's center.<br>" 
-                "* Named after François Arago, a French mathematician, physicist, and astronomer.<br>" 
+                "* Named after Francois Arago, a French mathematician, physicist, and astronomer.<br>" 
                 "* Approximately 100 km in width.<br>" 
                 "* Less prominent than the Leverrier and Adams rings.<br>" 
                 "* Discovery: First observed by Voyager 2 in 1989, though initially not designated as a separate ring.<br><br>"
@@ -1305,7 +1305,7 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
                 "Adams Ring (1989N1R): Neptune's outermost and most prominent discrete ring, located about 62,930 km from Neptune's center.<br>" 
                 "* Named after John Couch Adams, who independently predicted Neptune's existence around the same time as Le Verrier.<br>" 
                 "* Has a variable width of approximately 35-50 km, but contains distinctive arc segments.<br>" 
-                "* Contains five prominent arc segments (Courage, Liberté, Egalité 1 & 2, and Fraternité) that are denser than the rest of the ring.<br>" 
+                "* Contains five prominent arc segments (Courage, Liberte, Egalite 1 & 2, and Fraternite) that are denser than the rest of the ring.<br>" 
                 "* These arcs are confined by gravitational resonances with the moon Galatea.<br>"
                 "* Most studied of Neptune's rings, with observations from both Voyager 2 and Earth-based telescopes.<br>"
                 "* Discovery: Its bright arcs were first detected from Earth in 1984, then confirmed by Voyager 2 in 1989.<br><br>"
@@ -1336,7 +1336,7 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             'description': (
                 "Courage Arc: The smallest and faintest of the five arcs in Neptune's Adams Ring.<br>" 
                 "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
-                "* Spans approximately 1,000 km (4° of arc) along the ring.<br>" 
+                "* Spans approximately 1,000 km (4 deg of arc) along the ring.<br>" 
                 "* Named after one of the three civic virtues from the motto of the French Republic.<br>"
                 "* The least stable of the arcs, showing significant changes since its discovery.<br>"
                 "* Discovery: First imaged by Voyager 2 in 1989.<br><br>"
@@ -1363,11 +1363,11 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             'arc_center': 8.0,         # Center angle of the arc in degrees
             'color': 'rgb(200, 200, 200)',  
             'opacity': 0.7,
-            'name': 'Liberté Arc',
+            'name': 'Liberte Arc',
             'description': (
-                "Liberté Arc: The second arc in Neptune's Adams Ring.<br>" 
+                "Liberte Arc: The second arc in Neptune's Adams Ring.<br>" 
                 "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
-                "* Spans approximately 1,100 km (4.5° of arc) along the ring.<br>" 
+                "* Spans approximately 1,100 km (4.5 deg of arc) along the ring.<br>" 
                 "* Named after 'Liberty' from the motto of the French Republic ('Liberty, Equality, Fraternity').<br>"
                 "* Shows brightness variations along its length.<br>"
                 "* Has shown evolutionary changes since its discovery, with variations in brightness and length.<br><br>"
@@ -1394,13 +1394,13 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             'arc_center': 14.0,        # Center angle of the arc in degrees
             'color': 'rgb(200, 200, 200)',  
             'opacity': 0.7,
-            'name': 'Égalité 1 Arc',
+            'name': 'Egalite 1 Arc',
             'description': (
-                "Égalité 1 Arc: One of two 'Equality' arcs in Neptune's Adams Ring.<br>" 
+                "Egalite 1 Arc: One of two 'Equality' arcs in Neptune's Adams Ring.<br>" 
                 "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
-                "* Spans approximately 1,000 km (4.2° of arc) along the ring.<br>" 
+                "* Spans approximately 1,000 km (4.2 deg of arc) along the ring.<br>" 
                 "* Named after 'Equality' from the motto of the French Republic.<br>"
-                "* Together with Égalité 2, forms a pair of similar arcs separated by a small gap.<br>"
+                "* Together with Egalite 2, forms a pair of similar arcs separated by a small gap.<br>"
                 "* Has shown some changes in structure since the Voyager 2 observations.<br><br>"
                 "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
                 "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
@@ -1425,14 +1425,14 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             'arc_center': 22.0,        # Center angle of the arc in degrees
             'color': 'rgb(200, 200, 200)',  
             'opacity': 0.7,
-            'name': 'Égalité 2 Arc',
+            'name': 'Egalite 2 Arc',
             'description': (
-                "Égalité 2 Arc: The second 'Equality' arc in Neptune's Adams Ring.<br>" 
+                "Egalite 2 Arc: The second 'Equality' arc in Neptune's Adams Ring.<br>" 
                 "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
-                "* Spans approximately 1,000 km (4° of arc) along the ring.<br>" 
+                "* Spans approximately 1,000 km (4 deg of arc) along the ring.<br>" 
                 "* Named after 'Equality' from the motto of the French Republic.<br>"
-                "* Follows closely after Égalité 1, separated by a small gap.<br>"
-                "* The pair of Égalité arcs may be maintained by resonances with nearby moons.<br><br>"
+                "* Follows closely after Egalite 1, separated by a small gap.<br>"
+                "* The pair of Egalite arcs may be maintained by resonances with nearby moons.<br><br>"
                 "Unlike Triton, Neptune's rings lie in Neptune's equatorial plane, as is typical for planetary ring systems. This is <br>" 
                 "due to the physical processes that form and maintain rings - they tend to settle into the equatorial plane due to the <br>" 
                 "planet's rotational bulge. The other regular satellites of Neptune (like Proteus, Larissa, Galatea, and Despina) orbit <br>" 
@@ -1456,11 +1456,11 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             'arc_center': 40.0,        # Center angle of the arc in degrees
             'color': 'rgb(200, 200, 200)',  
             'opacity': 0.7,
-            'name': 'Fraternité Arc',
+            'name': 'Fraternite Arc',
             'description': (
-                "Fraternité Arc: The longest and most prominent arc in Neptune's Adams Ring.<br>" 
+                "Fraternite Arc: The longest and most prominent arc in Neptune's Adams Ring.<br>" 
                 "* Located within the Adams Ring at a distance of about 62,930 km from Neptune's center.<br>" 
-                "* Spans approximately 2,200 km (9° of arc) along the ring, making it the longest arc.<br>" 
+                "* Spans approximately 2,200 km (9 deg of arc) along the ring, making it the longest arc.<br>" 
                 "* Named after 'Fraternity' from the motto of the French Republic.<br>"
                 "* The brightest and most stable of Neptune's ring arcs.<br>"
                 "* Discovery: It was the first arc detected from Earth-based observations in 1984.<br><br>"
@@ -1576,18 +1576,18 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
         z = np.array(z)
         
         # TRANSFORMATION APPROACH:
-        # Neptune's pole is oriented at RA=299.36°, DEC=43.46°
+        # Neptune's pole is oriented at RA=299.36 deg, DEC=43.46 deg
         # We'll use a transformation sequence to correctly orient the rings
         
         # Step 1: Rotate around z-axis by the Right Ascension
     #    x_rot1, y_rot1, z_rot1 = rotate_points(x, y, z, pole_ra, 'z')
         
-        # Step 2: Rotate around x-axis by (90° - Declination)
+        # Step 2: Rotate around x-axis by (90 deg - Declination)
         # This aligns the z-axis with Neptune's pole
     #    x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, np.radians(90) - pole_dec, 'x')
         
         # Step 3: Apply final adjustment based on Neptune's specific orientation
-        # This 25° rotation adjusts for the reference frame of Neptune's ring observations
+        # This 25 deg rotation adjusts for the reference frame of Neptune's ring observations
     #    x_final, y_final, z_final = rotate_points(x_rot2, y_rot2, z_rot2, np.radians(25), 'z')
 
         # SIMPLIFIED TRANSFORMATION:
@@ -1596,11 +1596,11 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
         
         # Transform ring coordinates to align with Neptune's equatorial plane
         # These angles were empirically determined to match the orbital plane of Despina and Galatea
-        # First rotation: 32° around x-axis provides the primary tilt 
+        # First rotation: 32 deg around x-axis provides the primary tilt 
         tilt_angle = np.radians(32)
         x_rot1, y_rot1, z_rot1 = rotate_points(x, y, z, tilt_angle, 'x')
 
-        # Second rotation: 34° around z-axis aligns with the final orientation
+        # Second rotation: 34 deg around z-axis aligns with the final orientation
         final_orientation = np.radians(34)
         x_final, y_final, z_final = rotate_points(x_rot1, y_rot1, z_rot1, final_orientation, 'z')
         

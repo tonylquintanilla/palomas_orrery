@@ -11,7 +11,7 @@ including:
 Mathematics based on:
 - Murray & Dermott (1999): Solar System Dynamics
 - Keplerian orbital elements standard notation
-- Rotation sequence: Î© (ascending node) â†’ i (inclination) â†’ Ï‰ (argument of periapsis)
+- Rotation sequence: Omega (ascending node) -> i (inclination) -> omega (argument of periapsis)
 
 Created: October 21, 2025
 Author: Tony Quintanilla with Claude AI
@@ -146,11 +146,11 @@ def calculate_keplerian_orbit(a, e, i_deg, omega_deg, Omega_deg,
     z_orb = np.zeros_like(x_orb)
     
     # Apply standard rotation sequence to transform to 3D frame
-    # 1. Rotate by argument of periastron (Ï‰) about Z-axis
+    # 1. Rotate by argument of periastron (omega) about Z-axis
     # 2. Rotate by inclination (i) about X-axis  
-    # 3. Rotate by longitude of ascending node (Î©) about Z-axis
+    # 3. Rotate by longitude of ascending node (Omega) about Z-axis
     
-    # Rotation 1: Ï‰ about Z-axis
+    # Rotation 1: omega about Z-axis
     x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
     y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
     z1 = z_orb
@@ -160,7 +160,7 @@ def calculate_keplerian_orbit(a, e, i_deg, omega_deg, Omega_deg,
     y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
     z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
     
-    # Rotation 3: Î© about Z-axis
+    # Rotation 3: Omega about Z-axis
     x = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
     y = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
     z = z2
@@ -194,7 +194,7 @@ def calculate_planet_position(a, e, i_deg, omega_deg, Omega_deg,
     
     # Mean anomaly
     M = n * dt_days
-    M = M % (2 * np.pi)  # Wrap to [0, 2Ï€]
+    M = M % (2 * np.pi)  # Wrap to [0, 2pi]
     
     # Solve for eccentric anomaly
     E = solve_kepler_equation(M, e)
@@ -215,7 +215,7 @@ def calculate_planet_position(a, e, i_deg, omega_deg, Omega_deg,
     omega_rad = np.radians(omega_deg)
     Omega_rad = np.radians(Omega_deg)
     
-    # Rotation by Ï‰
+    # Rotation by omega
     x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
     y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
     z1 = z_orb
@@ -225,7 +225,7 @@ def calculate_planet_position(a, e, i_deg, omega_deg, Omega_deg,
     y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
     z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
     
-    # Rotation by Î©
+    # Rotation by Omega
     x = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
     y = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
     z = z2
@@ -290,7 +290,7 @@ def calculate_binary_star_position(star_params, date, epoch,
     
     For binary stars, both stars must have the same true anomaly at any instant
     (they orbit together), but they're on opposite sides of the barycenter.
-    We achieve this by calculating the orbit normally, then applying a 180°
+    We achieve this by calculating the orbit normally, then applying a 180 deg
     rotation if this is the secondary star.
     
     Parameters:
@@ -306,7 +306,7 @@ def calculate_binary_star_position(star_params, date, epoch,
     a = star_params['a']
     e = star_params['e']
     period = star_params['period']
-    phase_offset_deg = star_params['phase']  # ✅ Keep in degrees: 0° for A, 180° for B
+    phase_offset_deg = star_params['phase']  # [OK] Keep in degrees: 0 deg for A, 180 deg for B
     
     # For simplicity, assume omega = 0 for binary orbit
     omega_deg = 0.0
@@ -324,21 +324,21 @@ def calculate_binary_star_position(star_params, date, epoch,
     # Mean motion (radians per day)
     n = 2 * np.pi / period
     
-    # ✅ KEY FIX: Mean anomaly is SAME for both stars
+    # [OK] KEY FIX: Mean anomaly is SAME for both stars
     M = n * dt_days
-    M = M % (2 * np.pi)  # Wrap to [0, 2π]
+    M = M % (2 * np.pi)  # Wrap to [0, 2pi]
     
     # Solve for eccentric anomaly
     E = solve_kepler_equation(M, e)
     
-    # ✅ KEY FIX: True anomaly is SAME for both stars (they orbit together)
+    # [OK] KEY FIX: True anomaly is SAME for both stars (they orbit together)
     nu = calculate_true_anomaly(E, e)
     
     # Distance from focus (barycenter)
     r = a * (1 - e**2) / (1 + e * np.cos(nu))
     
-    # ✅ KEY FIX: Apply phase offset to TRUE ANOMALY in orbital plane
-    # This puts Star B 180° ahead of Star A in their shared orbit
+    # [OK] KEY FIX: Apply phase offset to TRUE ANOMALY in orbital plane
+    # This puts Star B 180 deg ahead of Star A in their shared orbit
     nu_with_offset = nu + np.radians(phase_offset_deg)
     x_orb = r * np.cos(nu_with_offset)
     y_orb = r * np.sin(nu_with_offset)
@@ -349,7 +349,7 @@ def calculate_binary_star_position(star_params, date, epoch,
     omega_rad = np.radians(omega_deg)
     Omega_rad = np.radians(Omega_deg)
     
-    # Rotation by ω (argument of periapsis)
+    # Rotation by omega (argument of periapsis)
     x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
     y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
     z1 = z_orb
@@ -359,7 +359,7 @@ def calculate_binary_star_position(star_params, date, epoch,
     y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
     z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
     
-    # Rotation by Ω (longitude of ascending node)
+    # Rotation by Omega (longitude of ascending node)
     x = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
     y = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
     z = z2
@@ -439,14 +439,14 @@ def plot_exoplanet_orbits(fig, exoplanet_objects, host_star_system, date,
             hover_text += f"Eccentricity: {e:.4f}{e_note}<br>"
             
             i_note = " (assumed edge-on)" if planet.get('i_assumed') else ""
-            hover_text += f"Inclination: {i:.1f}Â°{i_note}<br>"
+            hover_text += f"Inclination: {i:.1f} deg deg{i_note}<br>"
             
-            hover_text += f"<br>Mass: {format_maybe_float(planet.get('mass_earth'))} MâŠ•<br>"
-            hover_text += f"Radius: {format_maybe_float(planet.get('radius_earth'))} RâŠ•<br>"
+            hover_text += f"<br>Mass: {format_maybe_float(planet.get('mass_earth'))} [EARTH]<br>"
+            hover_text += f"Radius: {format_maybe_float(planet.get('radius_earth'))} [EARTH]<br>"
             hover_text += f"Temp: {planet.get('equilibrium_temp_k')} K<br>"
             
             if planet.get('in_habitable_zone'):
-                hover_text += "<br><b>â˜… IN HABITABLE ZONE â˜…</b><br>"
+                hover_text += "<br><b>[STAR] IN HABITABLE ZONE [STAR]</b><br>"
             
             hover_text += f"<br>Discovery: {planet['discovery_method']} ({planet['discovery_year']})"
             
@@ -516,7 +516,7 @@ def plot_binary_host_stars(fig, host_star_system, date, show_orbits=True, show_m
             marker_size = 10
             hover_text = (f"<b>{host_star_system['name']}</b><br>"
                          f"Spectral type: {host_star_system['spectral_type']}<br>"
-                         f"Mass: {host_star_system['mass_solar']:.2f} M☉")
+                         f"Mass: {host_star_system['mass_solar']:.2f} M[SUN]")
         
         fig.add_trace(go.Scatter3d(
             x=[0], y=[0], z=[0],
@@ -561,7 +561,7 @@ def plot_binary_host_stars(fig, host_star_system, date, show_orbits=True, show_m
         size_A = 10
         hover_A = (f"<b>{star_A['name']}</b><br>"
                   f"Type: {star_A['spectral_type']}<br>"
-                  f"Mass: {star_A['mass_solar']:.2f} M☉")
+                  f"Mass: {star_A['mass_solar']:.2f} M[SUN]")
     
     # Plot Star A orbit (using calculated color)
     if show_orbits:
@@ -611,7 +611,7 @@ def plot_binary_host_stars(fig, host_star_system, date, show_orbits=True, show_m
         size_B = 7
         hover_B = (f"<b>{star_B['name']}</b><br>"
                   f"Type: {star_B['spectral_type']}<br>"
-                  f"Mass: {star_B['mass_solar']:.2f} M☉")
+                  f"Mass: {star_B['mass_solar']:.2f} M[SUN]")
 
     # Plot Star B orbit (using calculated color)
     if show_orbits:
@@ -623,7 +623,7 @@ def plot_binary_host_stars(fig, host_star_system, date, show_orbits=True, show_m
             binary_params['star_B']['period'],
             epoch, date
         )
-        # Apply 180° phase shift
+        # Apply 180 deg phase shift
         x_B, y_B = -x_B, -y_B
         
         fig.add_trace(go.Scatter3d(
@@ -677,7 +677,7 @@ def calculate_exoplanet_axis_range(exoplanet_objects):
         exoplanet_objects: list - Planet data dictionaries
         
     Returns:
-        float: Axis range (Â±value in AU)
+        float: Axis range ( deg+/-value in AU)
     """
     if not exoplanet_objects:
         return 1.0  # Default 1 AU
@@ -745,4 +745,4 @@ if __name__ == "__main__":
     print(f"Star B semi-major axis: {binary_params['star_B']['a']:.4f} AU")
     print(f"Binary period: {binary_params['star_A']['period']:.2f} days")
     
-    print("\nâœ“ All tests passed!")
+    print("\n[OK] All tests passed!")

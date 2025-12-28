@@ -150,7 +150,7 @@ def create_moon_mantle_shell(center_position=(0, 0, 0)):
             "  conditions. Its primary emission would be in the infrared spectrum, invisible to the human eye. For the bulk of the <br>" 
             "  mantle, it is primarily composed of silicate rocks like olivine and pyroxene. When seen in rock samples, these tend <br>" 
             "  to be dark greenish to black (e.g., peridotite).<br>" 
-            "* Outer boundary of the mantle (base of the crust) as a fraction of Rm: 1677.4 km/1737.4 km≈0.9655"
+            "* Outer boundary of the mantle (base of the crust) as a fraction of Rm: 1677.4 km/1737.4 km~0.9655"
         )
     }
     

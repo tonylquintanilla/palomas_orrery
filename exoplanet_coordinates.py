@@ -131,9 +131,9 @@ def radec_to_cartesian(ra_deg, dec_deg, distance_au):
     
     Coordinate system (J2000 equatorial):
     - Origin: Solar System barycenter
-    - X-axis: Points to vernal equinox (RA=0°, Dec=0°)
-    - Y-axis: Points to RA=90°, Dec=0°
-    - Z-axis: Points to north celestial pole (Dec=+90°)
+    - X-axis: Points to vernal equinox (RA=0 deg, Dec=0 deg)
+    - Y-axis: Points to RA=90 deg, Dec=0 deg
+    - Z-axis: Points to north celestial pole (Dec=+90 deg)
     
     Parameters:
         ra_deg: float - Right ascension (degrees)
@@ -285,7 +285,7 @@ def create_local_frame_description(host_star_data):
         'xy_plane': 'Sky plane (perpendicular to Earth line of sight)',
         'z_axis': 'Toward Earth (positive = toward observer)',
         'line_of_sight_ra': f"{ra_h:02d}h {ra_m:02d}m {ra_s:04.1f}s",
-        'line_of_sight_dec': f"{dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\"",
+        'line_of_sight_dec': f"{dec_sign}{dec_d:02d} deg {dec_m:02d}' {dec_s:04.1f}\"",
         'note': 'Independent frame - NOT aligned with Solar System ecliptic'
     }
     
@@ -364,7 +364,7 @@ def calculate_tangential_velocity(pmra_mas_yr, pmdec_mas_yr, distance_pc):
     # Convert to radians/year
     pm_rad_yr = pm_arcsec_yr * (np.pi / 648000.0)
     
-    # Tangential velocity = distance × angular velocity
+    # Tangential velocity = distance x angular velocity
     # 1 AU/year = 4.74 km/s
     velocity_au_yr = distance_pc * 206265 * pm_rad_yr
     velocity_km_s = velocity_au_yr * 4.74
@@ -423,7 +423,7 @@ if __name__ == "__main__":
     # Position at J2000
     ra_2000 = star_data['ra']
     dec_2000 = star_data['dec']
-    print(f"\nPosition at J2000: RA={ra_2000:.6f}°, Dec={dec_2000:.6f}°")
+    print(f"\nPosition at J2000: RA={ra_2000:.6f} deg, Dec={dec_2000:.6f} deg")
     
     # Position at 2050 (50 years later)
     date_2050 = datetime(2050, 1, 1, tzinfo=timezone.utc)
@@ -436,8 +436,8 @@ if __name__ == "__main__":
     delta_ra = ra_2050 - ra_2000
     delta_dec = dec_2050 - dec_2000
     
-    print(f"Position at 2050: RA={ra_2050:.6f}°, Dec={dec_2050:.6f}°")
-    print(f"Change: ΔRA={delta_ra:.6f}° ({delta_ra*3600:.2f}\"), ΔDec={delta_dec:.6f}° ({delta_dec*3600:.2f}\")")
+    print(f"Position at 2050: RA={ra_2050:.6f} deg, Dec={dec_2050:.6f} deg")
+    print(f"Change: DeltaRA={delta_ra:.6f} deg ({delta_ra*3600:.2f}\"), DeltaDec={delta_dec:.6f} deg ({delta_dec*3600:.2f}\")")
     
     # Tangential velocity
     v_tan = calculate_tangential_velocity(
@@ -485,7 +485,7 @@ if __name__ == "__main__":
     dec_orig = -5.04
     dist_orig = 12.43
     
-    print(f"Original: RA={ra_orig:.2f}°, Dec={dec_orig:.2f}°, Distance={dist_orig:.2f} pc")
+    print(f"Original: RA={ra_orig:.2f} deg, Dec={dec_orig:.2f} deg, Distance={dist_orig:.2f} pc")
     
     # Convert to Cartesian
     x, y, z = radec_to_cartesian(ra_orig, dec_orig, dist_orig)
@@ -493,17 +493,17 @@ if __name__ == "__main__":
     
     # Convert back
     ra_back, dec_back, dist_back = cartesian_to_radec(x, y, z)
-    print(f"Round-trip: RA={ra_back:.2f}°, Dec={dec_back:.2f}°, Distance={dist_back:.2f} pc")
+    print(f"Round-trip: RA={ra_back:.2f} deg, Dec={dec_back:.2f} deg, Distance={dist_back:.2f} pc")
     
     # Check accuracy
     ra_error = abs(ra_back - ra_orig)
     dec_error = abs(dec_back - dec_orig)
     dist_error = abs(dist_back - dist_orig)
     
-    print(f"Errors: ΔRA={ra_error:.6f}°, ΔDec={dec_error:.6f}°, ΔDist={dist_error:.6f} pc")
+    print(f"Errors: DeltaRA={ra_error:.6f} deg, DeltaDec={dec_error:.6f} deg, DeltaDist={dist_error:.6f} pc")
     
     if ra_error < 1e-6 and dec_error < 1e-6 and dist_error < 1e-6:
-        print("✓ Round-trip accuracy excellent!")
+        print("[OK] Round-trip accuracy excellent!")
     
     # Test 5: Local frame description
     print("\n5. Local Coordinate Frame Description")
@@ -514,4 +514,4 @@ if __name__ == "__main__":
         print(f"  {key}: {value}")
     
     print("\n" + "=" * 60)
-    print("✓ All coordinate tests passed!")
+    print("[OK] All coordinate tests passed!")

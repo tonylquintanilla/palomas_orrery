@@ -522,22 +522,14 @@ class SimbadQueryManager:
         if mode == 'distance':
             properties_file = 'star_data/star_properties_distance.pkl'
             vot_files = {
-    #            'hipparcos': 'hipparcos_data_distance.vot',
-    #            'gaia': 'gaia_data_distance.vot'
-
-                'hipparcos': 'star_data/hipparcos_data_distance.vot',
-                'gaia': 'star_data/gaia_data_distance.vot'
-
+                'hipparcos': 'hipparcos_data_distance.vot',
+                'gaia': 'gaia_data_distance.vot'
             }
         else:  # magnitude
             properties_file = 'star_data/star_properties_magnitude.pkl'
             vot_files = {
-    #            'hipparcos': 'hipparcos_data_magnitude.vot',
-    #            'gaia': 'gaia_data_magnitude.vot'
-
-                'hipparcos': 'star_data/hipparcos_data_magnitude.vot',
-                'gaia': 'star_data/gaia_data_magnitude.vot'
-
+                'hipparcos': 'hipparcos_data_magnitude.vot',
+                'gaia': 'gaia_data_magnitude.vot'
             }
         
         # Check if rebuild is needed
@@ -752,14 +744,14 @@ class SimbadQueryManager:
         for file, info in integrity['pkl_files'].items():
             lines.append(f"\n{file}:")
             if info['status'] == 'valid':
-                lines.append(f"  ✓ Status: VALID")
-                lines.append(f"  • Entries: {info['entries']:,}")
-                lines.append(f"  • Size: {info['size_mb']:.2f} MB")
+                lines.append(f"  [OK] Status: VALID")
+                lines.append(f"  * Entries: {info['entries']:,}")
+                lines.append(f"  * Size: {info['size_mb']:.2f} MB")
             elif info['status'] == 'missing':
-                lines.append(f"  ✗ Status: MISSING")
+                lines.append(f"  [FAIL] Status: MISSING")
             else:
-                lines.append(f"  ⚠ Status: CORRUPTED")
-                lines.append(f"  • Error: {info.get('error', 'Unknown')}")
+                lines.append(f"  [WARN] Status: CORRUPTED")
+                lines.append(f"  * Error: {info.get('error', 'Unknown')}")
         
         # VOT Files Section
         lines.append("\n" + "=" * 40)
@@ -768,13 +760,13 @@ class SimbadQueryManager:
         for file, info in integrity['vot_files'].items():
             lines.append(f"\n{file}:")
             if info['status'] == 'valid':
-                lines.append(f"  ✓ Status: VALID")
-                lines.append(f"  • Entries: {info['entries']:,}")
-                lines.append(f"  • Columns: {', '.join(info.get('columns', []))}")
+                lines.append(f"  [OK] Status: VALID")
+                lines.append(f"  * Entries: {info['entries']:,}")
+                lines.append(f"  * Columns: {', '.join(info.get('columns', []))}")
             elif info['status'] == 'missing':
-                lines.append(f"  ✗ Status: MISSING")
+                lines.append(f"  [FAIL] Status: MISSING")
             else:
-                lines.append(f"  ⚠ Status: CORRUPTED")
+                lines.append(f"  [WARN] Status: CORRUPTED")
         
         # Summary Section
         lines.append("\n" + "=" * 40)
@@ -784,11 +776,11 @@ class SimbadQueryManager:
         lines.append(f"Total VOT entries: {integrity['summary']['total_vot_entries']:,}")
         
         if integrity['summary']['issues_found']:
-            lines.append(f"\n⚠ Issues found ({len(integrity['summary']['issues_found'])}):")
+            lines.append(f"\n[WARN] Issues found ({len(integrity['summary']['issues_found'])}):")
             for issue in integrity['summary']['issues_found']:
-                lines.append(f"  • {issue}")
+                lines.append(f"  * {issue}")
         else:
-            lines.append("\n✓ All cache files are healthy")
+            lines.append("\n[OK] All cache files are healthy")
         
         lines.append("=" * 70)
         

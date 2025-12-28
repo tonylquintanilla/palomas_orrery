@@ -241,7 +241,7 @@ def create_hover_text(df, include_3d=False):
             dec_m = int((dec_abs - dec_d) * 60)
             dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
             
-            hover_text += f"RA: {ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s, Dec: {dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\" (J2000)<br>"
+            hover_text += f"RA: {ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s, Dec: {dec_sign}{dec_d:02d} deg {dec_m:02d}' {dec_s:04.1f}\" (J2000)<br>"
         
         # 3. MAIN PROPERTIES (in logical order)
         hover_text += f'Distance: {pc_str} pc ({ly_str} ly)<br>'
@@ -344,7 +344,7 @@ def create_notable_stars_list(combined_df, unique_notes, user_max_coord=None):
     print(f"Mode: {mode}")
     print(f"Max distance: {max_value} light-years")
     if user_max_coord is not None:
-        print(f"Display boundaries: ±{user_max_coord} light-years")
+        print(f"Display boundaries: +/-{user_max_coord} light-years")
 
     for star_name in sorted(unique_notes.keys()):
         # Check if it's a non-stellar object (Messier, NGC, or IC or special objects labeled X)
@@ -401,7 +401,7 @@ def create_notable_stars_list(combined_df, unique_notes, user_max_coord=None):
                 if (abs(x) > user_max_coord or 
                     abs(y) > user_max_coord or 
                     abs(z) > user_max_coord):
-                    print(f"Skipping {star_name} - outside display boundaries (±{user_max_coord} ly)")
+                    print(f"Skipping {star_name} - outside display boundaries (+/-{user_max_coord} ly)")
                     should_include = False
 
             if should_include:
@@ -448,9 +448,9 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
     
     # Calculate axis ranges and determine scale text
     if user_max_coord is not None:
-        print(f"Using user-defined scale: ±{user_max_coord} light-years")
+        print(f"Using user-defined scale: +/-{user_max_coord} light-years")
         axis_range = [-user_max_coord, user_max_coord]
-        scale_text = f" (Scale: ±{user_max_coord} light-years, manual)"
+        scale_text = f" (Scale: +/-{user_max_coord} light-years, manual)"
     else:
         # Calculate automatically from data
         max_coord = max(
@@ -460,9 +460,9 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
         )
         # Add some padding for better visualization
         max_coord = max_coord * 1.1
-        print(f"Using automatic scale: ±{max_coord:.2f} light-years")
+        print(f"Using automatic scale: +/-{max_coord:.2f} light-years")
         axis_range = [-max_coord, max_coord]
-        scale_text = f" (Scale: ±{max_coord:.1f} light-years, auto)"
+        scale_text = f" (Scale: +/-{max_coord:.1f} light-years, auto)"
     
     # Set default analysis results if not present in DataFrame attributes
     analysis = combined_df.attrs.get('analysis', {
@@ -727,12 +727,12 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             # Count Messier objects
             messier_count = len(combined_df[combined_df['Source_Catalog'] == 'Messier'])
             
-            title_text = f'Interactive 3D Visualization of Unaided-Eye Visible Stars<br>Apparent Magnitude ≤ {max_value}{scale_text}'
+            title_text = f'Interactive 3D Visualization of Unaided-Eye Visible Stars<br>Apparent Magnitude <= {max_value}{scale_text}'
 
             """
             footer_text = (    
                 f"This visualization shows <span style='color:red'>{len(combined_df):,d}</span> objects visible to the naked eye "
-                f"(apparent magnitude ≤ <span style='color:red'>{max_value}</span>). "
+                f"(apparent magnitude <= <span style='color:red'>{max_value}</span>). "
                 f"Catalog breakdown of plotted stars: <span style='color:red'>{analysis['plottable_hip']:,d}</span> from "
                 f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a> and "
                 f"<span style='color:red'>{analysis['plottable_gaia']:,d}</span> from "
@@ -747,7 +747,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
                 f"Star color indicates temperature based on black-body radiation (scale: 1,300K to 50,000K).<br>"
                 f"The Sun is shown in chlorophyll green (source of life's energy!) at the origin of the plot (0, 0, 0). "
                 f"The plot coordinates are standardized to the International Celestial Reference System, "
-                f"so the Milky Way is tilted approximately 63° with respect to the<br>celestial equator. "
+                f"so the Milky Way is tilted approximately 63 deg with respect to the<br>celestial equator. "
                 f"Non-stellar object markers do not reflect object type, apparent magnitude or temperature, but are fixed. " 
                 f"Python script by Tony Quintanilla with assistance from ChatGPT, Claude, Gemini AI, and DeepSeek February 2025.<br>"
                 f"Search: <a href='https://www.nasa.gov/' target='_blank' style='color:#1E90FF; text-decoration:underline;'>NASA</a>, "
@@ -759,7 +759,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
 
             footer_text = (    
                 f"This visualization shows <span style='color:red'>{len(combined_df):,d}</span> objects visible to the naked eye "
-                f"(apparent magnitude ≤ <span style='color:red'>{max_value}</span>). "
+                f"(apparent magnitude <= <span style='color:red'>{max_value}</span>). "
                 f"Catalog breakdown: <span style='color:red'>{analysis['plottable_hip']:,d}</span> from "
                 f"<a href='https://www.cosmos.esa.int/web/hipparcos/catalogues' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Hipparcos</a>, "
                 f"<span style='color:red'>{analysis['plottable_gaia'] + analysis['missing_temp']:,d}</span> from "
@@ -825,7 +825,7 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             dict(       # target marker 
                 x=0.500,
                 y=0.505,
-                text='<span style="vertical-align:1em;">◇</span>',
+                text='<span style="vertical-align:1em;">-></span>',
                 showarrow=False,
                 xref='paper',
                 yref='paper',

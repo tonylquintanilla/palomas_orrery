@@ -570,7 +570,7 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
                           "  magnetosphere, allowing more solar wind particles to reach the planet's surface and contribute to its exosphere.<br>" 
                           "* No Stable Radiation Belts: Unlike Earth's Van Allen radiation belts, Mercury's small and dynamic magnetosphere <br>" 
                           "  doesn't have stable regions for trapping high-energy particles for extended periods.<br><br>" 
-                          "Estimating the dimensions of Mercury's magnetosphere in terms of Mercury radii (≈2440 km) involves <br>" 
+                          "Estimating the dimensions of Mercury's magnetosphere in terms of Mercury radii (~2440 km) involves <br>" 
                           "considering its interaction with the solar wind, which is quite dynamic. However, based on observations <br>" 
                           "from the MESSENGER and BepiColombo missions, we can provide some approximate ranges and typical values:<br>" 
                           "* Sunward Distance (to the Bow Shock): The bow shock is the outermost boundary where the supersonic solar <br>" 
@@ -718,7 +718,7 @@ def create_mercury_hill_sphere_shell(center_position=(0, 0, 0)):
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
                 "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
-                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's.")
+                "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's.")
     
     hover_customdata = ["Hill Sphere"]
 

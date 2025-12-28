@@ -140,7 +140,7 @@ def load_projection_scenarios():
     
     SSP scenarios based on:
     IPCC AR6 Working Group I, Chapter 4, Table 4.2 - Global mean surface air 
-    temperature anomalies (°C) relative to 1850-1900 baseline.
+    temperature anomalies ( degC) relative to 1850-1900 baseline.
     
     Data source: Lee, J.-Y., J. Marotzke, et al. (2021): Future Global Climate: 
     Scenario-based Projections and Near-term Information. In Climate Change 2021: 
@@ -213,7 +213,7 @@ def load_projection_scenarios():
     import numpy as np
     
     for scenario in scenarios:
-        # Start from current conditions (approximately 1.2°C in 2025)
+        # Start from current conditions (approximately 1.2 degC in 2025)
         # Then use IPCC values at period endpoints: 2040, 2060, 2100
         extended_years = [2025] + ipcc_years
         extended_temps = [1.2] + scenario['ipcc_temps']
@@ -329,7 +329,7 @@ def create_paleoclimate_dual_scale_visualization():
             mode='lines',
             name='Paleoclimate (LR04)',
             line=dict(color='#2E86AB', width=1.5),
-            hovertemplate='<b>%{x:.3f} Ma</b><br>Temp: %{y:.2f}°C<extra></extra>',
+            hovertemplate='<b>%{x:.3f} Ma</b><br>Temp: %{y:.2f} degC<extra></extra>',
             showlegend=True
         ),
         row=1, col=1
@@ -350,7 +350,7 @@ def create_paleoclimate_dual_scale_visualization():
                 mode='lines',
                 name='Holocene (Kaufman 2020)',
                 line=dict(color='#A06CD5', width=2),
-                hovertemplate='<b>%{x:.6f} Ma</b><br>Temp: %{y:.2f}°C<extra></extra>',
+                hovertemplate='<b>%{x:.6f} Ma</b><br>Temp: %{y:.2f} degC<extra></extra>',
                 showlegend=True
             ),
             row=1, col=1
@@ -391,7 +391,7 @@ def create_paleoclimate_dual_scale_visualization():
                 mode='lines',
                 name='Instrumental (NASA GISS)',
                 line=dict(color='#D32F2F', width=2.5),
-                hovertemplate='<b>%{x:.9f} Ma</b><br>Temp: %{y:.2f}°C<extra></extra>',
+                hovertemplate='<b>%{x:.9f} Ma</b><br>Temp: %{y:.2f} degC<extra></extra>',
                 showlegend=True
             ),
             row=1, col=1
@@ -421,7 +421,7 @@ def create_paleoclimate_dual_scale_visualization():
                 mode='lines',
                 name='Instrumental (NASA GISS)',
                 line=dict(color='#D32F2F', width=2.5),
-                hovertemplate='<b>Year %{x}</b><br>Temp: %{y:.2f}°C<extra></extra>',
+                hovertemplate='<b>Year %{x}</b><br>Temp: %{y:.2f} degC<extra></extra>',
                 showlegend=False  # Hide from legend (already shown in left plot)
             ),
             row=1, col=2
@@ -441,7 +441,7 @@ def create_paleoclimate_dual_scale_visualization():
                 mode='lines',
                 name='Holocene (Kaufman 2020)',  # Same name as left plot
                 line=dict(color='#A06CD5', width=2),
-                hovertemplate='<b>Year %{x}</b><br>Temp: %{y:.2f}°C<extra></extra>',
+                hovertemplate='<b>Year %{x}</b><br>Temp: %{y:.2f} degC<extra></extra>',
                 showlegend=False  # Hide from legend (already shown in left plot)
             ),
             row=1, col=2
@@ -539,7 +539,7 @@ def create_paleoclimate_dual_scale_visualization():
     
     # Both plots use same y-axis for temperature
     fig.update_yaxes(
-        title_text="Temperature Anomaly (°C, relative to 1850-1900)",
+        title_text="Temperature Anomaly ( degC, relative to 1850-1900)",
         showgrid=True,
         gridwidth=1,
         gridcolor='lightgray',
@@ -629,7 +629,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
 
-    # Add 3.3°C peak 90% chance - left plot
+    # Add 3.3 degC peak 90% chance - left plot
     fig.add_shape(
         type="line",
         xref="paper",
@@ -645,7 +645,7 @@ def create_paleoclimate_dual_scale_visualization():
         )
     )
     
-    # Add 2.8°C peak 66% chance - left plot
+    # Add 2.8 degC peak 66% chance - left plot
     fig.add_shape(
         type="line",
         xref="paper",
@@ -661,7 +661,7 @@ def create_paleoclimate_dual_scale_visualization():
         )
     )
 
-    # Add 2.6°C peak 50% chance - left plot
+    # Add 2.6 degC peak 50% chance - left plot
     fig.add_shape(
         type="line",
         xref="paper",
@@ -682,7 +682,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.25,
         y=2.85,
-        text="Current policies continuing: peak warming over the 21st century, 2.6°C (50%), 2.8°C (66%), 3.3°C (90%)",
+        text="Current policies continuing: peak warming over the 21st century, 2.6 degC (50%), 2.8 degC (66%), 3.3 degC (90%)",
         showarrow=False,
         bgcolor="rgba(255,255,255,0)",
         font=dict(size=9, color='black'),
@@ -690,7 +690,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
 
-    # Add 1.28°C today - left plot
+    # Add 1.28 degC today - left plot
     fig.add_shape(
         type="line",
         xref="paper",
@@ -711,7 +711,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.50,
         y=0.90,
-        text="1.28°C Current Anomaly",
+        text="1.28 degC Current Anomaly",
         showarrow=False,
         bgcolor="rgba(255,255,255,0)",
         font=dict(size=9, color='green'),
@@ -719,7 +719,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
 
-    # Add 1.28°C today - right plot
+    # Add 1.28 degC today - right plot
     fig.add_shape(
         type="line",
         xref="paper",
@@ -740,7 +740,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.80,
         y=-5.20,
-        text="1.28°C Current Anomaly",
+        text="1.28 degC Current Anomaly",
         showarrow=False,
         bgcolor="rgba(255,255,255,0.8)",
         font=dict(size=9, color='green'),
@@ -748,7 +748,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
 
-    # Add 1.5°C threshold line (Paris Agreement) - spans both plots
+    # Add 1.5 degC threshold line (Paris Agreement) - spans both plots
     fig.add_shape(
         type="line",
         xref="paper",
@@ -769,7 +769,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.80,
         y=-4.30,
-        text="1.5°C Target",
+        text="1.5 degC Target",
         showarrow=False,
         bgcolor="rgba(255,255,255,0.8)",
         font=dict(size=9, color='orange'),
@@ -777,7 +777,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
     
-    # Add 2°C threshold line - spans both plots
+    # Add 2 degC threshold line - spans both plots
     fig.add_shape(
         type="line",
         xref="paper",
@@ -798,7 +798,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.80,
         y=-3.25,
-        text="2°C Limit",
+        text="2 degC Limit",
         showarrow=False,
         bgcolor="rgba(255,255,255,0.8)",
         font=dict(size=9, color='red'),
@@ -806,7 +806,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
     
-    # Add 3.3°C trajectory line - spans both plots
+    # Add 3.3 degC trajectory line - spans both plots
     fig.add_shape(
         type="line",
         xref="paper",
@@ -827,7 +827,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.88,
         y=-0.50,
-        text="Peak: 3.3°C (90%)",
+        text="Peak: 3.3 degC (90%)",
         showarrow=False,
         bgcolor="rgba(0,0,0,0)",
         font=dict(size=9, color='black'),
@@ -835,7 +835,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
 
-    # Add 2.8°C trajectory line - spans both plots
+    # Add 2.8 degC trajectory line - spans both plots
     fig.add_shape(
         type="line",
         xref="paper",
@@ -856,7 +856,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.88,
         y=-1.50,
-        text="Peak: 2.8°C (66%)",
+        text="Peak: 2.8 degC (66%)",
         showarrow=False,
         bgcolor="rgba(0,0,0,0)",
         font=dict(size=9, color='black'),
@@ -864,7 +864,7 @@ def create_paleoclimate_dual_scale_visualization():
         yanchor='bottom'
     )
 
-    # Add 2.6°C trajectory line - spans both plots
+    # Add 2.6 degC trajectory line - spans both plots
     fig.add_shape(
         type="line",
         xref="paper",
@@ -885,7 +885,7 @@ def create_paleoclimate_dual_scale_visualization():
         yref="y",
         x=0.88,
         y=-1.90,
-        text="Peak: 2.6°C (50%)",
+        text="Peak: 2.6 degC (50%)",
         showarrow=False,
         bgcolor="rgba(0,0,0,0)",
         font=dict(size=9, color='black'),
@@ -1072,13 +1072,13 @@ def main():
     fig = create_paleoclimate_dual_scale_visualization()
     
     if fig:
-        print("✓ Visualization created successfully")
+        print("[OK] Visualization created successfully")
         # Offer to save
         save_plot(fig, "paleoclimate_dual_scale")
         print("Opening in browser...")
         fig.show()
     else:
-        print("✗ Could not create visualization - check if data is cached")
+        print("[FAIL] Could not create visualization - check if data is cached")
 
 if __name__ == '__main__':
     main()

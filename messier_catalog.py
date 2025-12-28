@@ -7,7 +7,7 @@ messier_catalog = {
         'vmag': 8.4,
         'distance_ly': 6500,
         'ra': '05h34m31.94s',
-        'dec': '+22°00′52.2″',
+        'dec': '+22 deg00 arcmin52.2 arcsec',
         'notes': 'Remnant of supernova observed in 1054 AD. Contains a pulsar.',
     },
     'M8': {
@@ -16,7 +16,7 @@ messier_catalog = {
         'vmag': 6.0,
         'distance_ly': 5200,
         'ra': '18h03m37s',
-        'dec': '-24°23′12″',
+        'dec': '-24 deg23 arcmin12 arcsec',
         'notes': 'Contains many young stars. Active star formation region.',
     },
     'M16': {
@@ -25,7 +25,7 @@ messier_catalog = {
         'vmag': 6.0,
         'distance_ly': 7000,
         'ra': '18h18m48s',
-        'dec': '-13°47′00″',
+        'dec': '-13 deg47 arcmin00 arcsec',
         'notes': 'Famous for the "Pillars of Creation" imaged by Hubble.',
     },
     'M17': {
@@ -34,7 +34,7 @@ messier_catalog = {
         'vmag': 6.0,
         'distance_ly': 5500,
         'ra': '18h20m26s',
-        'dec': '-16°10′36″',
+        'dec': '-16 deg10 arcmin36 arcsec',
         'notes': 'Also known as Swan Nebula. Active star formation region.',
     },
     'M20': {
@@ -43,7 +43,7 @@ messier_catalog = {
         'vmag': 6.3,
         'distance_ly': 5200,
         'ra': '18h02m23s',
-        'dec': '-23°01′48″',
+        'dec': '-23 deg01 arcmin48 arcsec',
         'notes': 'Combination of emission and reflection nebula divided by dark dust lanes.',
     },
     'M27': {
@@ -52,7 +52,7 @@ messier_catalog = {
         'vmag': 7.5,
         'distance_ly': 1360,
         'ra': '19h59m36.3s',
-        'dec': '+22°43′16″',
+        'dec': '+22 deg43 arcmin16 arcsec',
         'notes': 'First planetary nebula ever discovered.',
     },
     'M42': {
@@ -61,7 +61,7 @@ messier_catalog = {
         'vmag': 4.0,
         'distance_ly': 1344,
         'ra': '05h35m17.3s',
-        'dec': '-05°23′28″',
+        'dec': '-05 deg23 arcmin28 arcsec',
         'notes': 'Brightest diffuse nebula in the sky. Contains the Trapezium Cluster.',
     },
     'M43': {
@@ -70,7 +70,7 @@ messier_catalog = {
         'vmag': 9.0,
         'distance_ly': 1600,
         'ra': '05h35m31.3s',
-        'dec': '-05°16′03″',
+        'dec': '-05 deg16 arcmin03 arcsec',
         'notes': 'Part of the Orion Nebula complex.',
     },
     'M57': {
@@ -79,7 +79,7 @@ messier_catalog = {
         'vmag': 8.8,
         'distance_ly': 2300,
         'ra': '18h53m35.1s',
-        'dec': '+33°01′45″',
+        'dec': '+33 deg01 arcmin45 arcsec',
         'notes': 'Classic example of a planetary nebula.',
     },
     'M76': {
@@ -88,7 +88,7 @@ messier_catalog = {
         'vmag': 10.1,
         'distance_ly': 3400,
         'ra': '01h42m19.9s',
-        'dec': '+51°34′31″',
+        'dec': '+51 deg34 arcmin31 arcsec',
         'notes': 'Also known as Cork Nebula or Butterfly Nebula.',
     },
     'M78': {
@@ -97,7 +97,7 @@ messier_catalog = {
         'vmag': 8.3,
         'distance_ly': 1600,
         'ra': '05h46m45.8s',
-        'dec': '+00°04′48″',
+        'dec': '+00 deg04 arcmin48 arcsec',
         'notes': 'Brightest reflection nebula in the sky.',
     },
     'M97': {
@@ -106,7 +106,7 @@ messier_catalog = {
         'vmag': 9.9,
         'distance_ly': 2600,
         'ra': '11h14m47.7s',
-        'dec': '+55°01′09″',
+        'dec': '+55 deg01 arcmin09 arcsec',
         'notes': 'Resembles an owl\'s face with large dark eyes.',
     }
 }
@@ -119,7 +119,7 @@ star_cluster_catalog = {
         'vmag': 4.2,
         'distance_ly': 1600,
         'ra': '17h40m20.8s',
-        'dec': '-32°15′12″',
+        'dec': '-32 deg15 arcmin12 arcsec',
         'notes': 'Contains about 80 stars. Resembles a butterfly.',
     },
     'M7': {
@@ -128,7 +128,7 @@ star_cluster_catalog = {
         'vmag': 3.3,
         'distance_ly': 980,
         'ra': '17h53m51.2s',
-        'dec': '-34°47′34″',
+        'dec': '-34 deg47 arcmin34 arcsec',
         'notes': 'Visible to naked eye. Known to Ptolemy in 130 AD.',
     },
     'M11': {
@@ -137,7 +137,7 @@ star_cluster_catalog = {
         'vmag': 5.8,
         'distance_ly': 6200,
         'ra': '18h51m05s',
-        'dec': '-06°16′12″',
+        'dec': '-06 deg16 arcmin12 arcsec',
         'notes': 'Rich, compact cluster. Contains about 3000 stars.',
     },
     'M44': {
@@ -146,7 +146,7 @@ star_cluster_catalog = {
         'vmag': 3.7,
         'distance_ly': 577,
         'ra': '08h40m6.0s',
-        'dec': '+19°59′00″',
+        'dec': '+19 deg59 arcmin00 arcsec',
         'notes': 'Open cluster in Cancer.',
     },
     'M45': {
@@ -155,12 +155,12 @@ star_cluster_catalog = {
         'vmag': 1.6,
         'distance_ly': 440,
         'ra': '03h47m0s',
-        'dec': '+24°07′00″',
+        'dec': '+24 deg07 arcmin00 arcsec',
         'notes': 'Open cluste in Taurus.',
     },
 }
 
-# Additional bright galactic objects (vmag ≤ 9.0)
+# Additional bright galactic objects (vmag <= 9.0)
 
 bright_planetaries = {
     'NGC 7293': {
@@ -169,7 +169,7 @@ bright_planetaries = {
         'vmag': 7.6,
         'distance_ly': 650,
         'ra': '22h29m38.6s',
-        'dec': '-20°50′14″',
+        'dec': '-20 deg50 arcmin14 arcsec',
         'notes': 'Nearest bright planetary nebula to Earth. Appears as a large, ring-like structure.',
     },
     'NGC 3242': {
@@ -178,7 +178,7 @@ bright_planetaries = {
         'vmag': 8.6,
         'distance_ly': 1400,
         'ra': '10h24m46.1s',
-        'dec': '-18°38′33″',
+        'dec': '-18 deg38 arcmin33 arcsec',
         'notes': 'Appears similar in size to Jupiter through a telescope. Shows a distinctive blue-green color.',
     },
     'NGC 2392': {
@@ -187,7 +187,7 @@ bright_planetaries = {
         'vmag': 9.0,
         'distance_ly': 2870,
         'ra': '07h29m10.8s',
-        'dec': '+20°54′42.5″',
+        'dec': '+20 deg54 arcmin42.5 arcsec',
         'notes': 'Distinctive appearance resembling a face surrounded by a fur parka hood.',
     },
 }
@@ -199,7 +199,7 @@ bright_open_clusters = {
         'vmag': 5.7,
         'distance_ly': 1300,
         'ra': '01h57m41s',
-        'dec': '+37°47′06″',
+        'dec': '+37 deg47 arcmin06 arcsec',
         'notes': 'One of the oldest known open clusters, estimated age of 1.6 billion years.',
     },
     'NGC 2451': {
@@ -208,7 +208,7 @@ bright_open_clusters = {
         'vmag': 2.8,
         'distance_ly': 850,
         'ra': '07h45m15s',
-        'dec': '-37°58′03″',
+        'dec': '-37 deg58 arcmin03 arcsec',
         'notes': 'One of the brightest open clusters in the sky, visible to naked eye.',
     },
     'NGC 2477': {
@@ -217,7 +217,7 @@ bright_open_clusters = {
         'vmag': 5.8,
         'distance_ly': 4300,
         'ra': '07h52m10s',
-        'dec': '-38°31′48″',
+        'dec': '-38 deg31 arcmin48 arcsec',
         'notes': 'Rich open cluster containing thousands of stars, sometimes called the Southern Beehive.',
     },
 }
@@ -229,7 +229,7 @@ bright_nebulae = {
         'vmag': 3.9,
         'distance_ly': 2700,
         'ra': '06h41m06s',
-        'dec': '+09°53′00″',
+        'dec': '+09 deg53 arcmin00 arcsec',
         'notes': 'Part of the Christmas Tree Cluster, includes distinctive cone-shaped dark nebula.',
     },
     'IC 2944': {
@@ -238,7 +238,7 @@ bright_nebulae = {
         'vmag': 4.5,
         'distance_ly': 6500,
         'ra': '11h36m16s',
-        'dec': '-63°02′00″',
+        'dec': '-63 deg02 arcmin00 arcsec',
         'notes': 'Contains distinctive dark globules known as Thackeray\'s Globules.',
     },
     'IC 405': {
@@ -247,7 +247,7 @@ bright_nebulae = {
         'vmag': 6.0,
         'distance_ly': 1500,
         'ra': '05h16m12s',
-        'dec': '+34°16′00″',
+        'dec': '+34 deg16 arcmin00 arcsec',
         'notes': 'Illuminated by the hot star AE Aurigae, appears reddish in photographs.',
     },
     'X Sgr A*': {
@@ -256,7 +256,7 @@ bright_nebulae = {
         'vmag': 0,                           # Apparent visual magnitude is not applicable to black holes
         'distance_ly': 26000,                 # Distance to the Galactic Center
         'ra': '17h 45m 40.04s',
-        'dec': '-29° 00′ 28.1″',
+        'dec': '-29 deg 00 arcmin 28.1 arcsec',
         'notes': 'Supermassive black hole at the center of the Milky Way galaxy.',
     },
     'X Stephenson 2-18': {
@@ -265,7 +265,7 @@ bright_nebulae = {
         'vmag': 0,                          # Apparent visual magnitude is difficult to determine precisely and varies
         'distance_ly': 18900,               # Distance estimates vary
         'ra': '18h 39m 11s',
-        'dec': '-05° 57′ 31″',
+        'dec': '-05 deg 57 arcmin 31 arcsec',
         'notes': 'One of the largest known stars, a red supergiant in the constellation Scutum.',
     },
 

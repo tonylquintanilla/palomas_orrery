@@ -234,28 +234,28 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
             try:
                 with open(backup_file, 'r') as f:
                     data = json.load(f)
-                print(f"✓ Recovered from {os.path.basename(backup_file)}", flush=True)
+                print(f"[OK] Recovered from {os.path.basename(backup_file)}", flush=True)
                 update_status(f"Recovered from backup file")
                 
                 # Restore to main file
                 shutil.copy2(backup_file, file_path)
                 return data
             except Exception as e:
-                print(f"⚠ Backup also unavailable: {e}", flush=True)
+                print(f"[WARN] Backup also unavailable: {e}", flush=True)
         
         # Try old backup
         if os.path.exists(backup_old_file):
             try:
                 with open(backup_old_file, 'r') as f:
                     data = json.load(f)
-                print(f"✓ Recovered from {os.path.basename(backup_old_file)}", flush=True)
+                print(f"[OK] Recovered from {os.path.basename(backup_old_file)}", flush=True)
                 update_status(f"Recovered from old backup file")
                 
                 # Restore to main file
                 shutil.copy2(backup_old_file, file_path)
                 return data
             except Exception as e:
-                print(f"⚠ Old backup also unavailable: {e}", flush=True)
+                print(f"[WARN] Old backup also unavailable: {e}", flush=True)
         
         # All failed - truly no existing file
         msg = f"No existing orbit paths file found at {file_path}, creating new cache."
@@ -276,7 +276,7 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
             try:
                 with open(backup_file, 'r') as f:
                     data = json.load(f)
-                print(f"✓ Recovered from {os.path.basename(backup_file)}", flush=True)
+                print(f"[OK] Recovered from {os.path.basename(backup_file)}", flush=True)
                 update_status("Recovered from backup after corruption")
                 
                 # Save the corrupted main file
@@ -288,14 +288,14 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
                 shutil.copy2(backup_file, file_path)
                 return data
             except Exception as backup_e:
-                print(f"⚠ Backup also corrupted: {backup_e}", flush=True)
+                print(f"[WARN] Backup also corrupted: {backup_e}", flush=True)
         
         # Try old backup
         if os.path.exists(backup_old_file):
             try:
                 with open(backup_old_file, 'r') as f:
                     data = json.load(f)
-                print(f"✓ Recovered from {os.path.basename(backup_old_file)}", flush=True)
+                print(f"[OK] Recovered from {os.path.basename(backup_old_file)}", flush=True)
                 update_status("Recovered from old backup after double corruption")
                 
                 # Save the corrupted main file
@@ -307,7 +307,7 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
                 shutil.copy2(backup_old_file, file_path)
                 return data
             except Exception as old_backup_e:
-                print(f"✗ All backups corrupted: {old_backup_e}", flush=True)
+                print(f"[FAIL] All backups corrupted: {old_backup_e}", flush=True)
         
         # All failed - save corrupted file and start fresh
         update_status("All cache files corrupted - starting fresh")
@@ -482,22 +482,22 @@ def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
         with open(temp_file, 'r') as f:
             json.load(f)  # This will raise an exception if JSON is invalid
         
-        # Step 3: Rotate backups: backup → backup_old
+        # Step 3: Rotate backups: backup [OK] backup_old
         if os.path.exists(backup_file):
             if os.path.exists(backup_old_file):
                 os.remove(backup_old_file)  # Remove oldest backup
             shutil.copy2(backup_file, backup_old_file)  # Preserve backup as backup_old
-            print(f"  Rotated: {os.path.basename(backup_file)} → {os.path.basename(backup_old_file)}", flush=True)
+            print(f"  Rotated: {os.path.basename(backup_file)} [OK] {os.path.basename(backup_old_file)}", flush=True)
         
-        # Step 4: Current → backup
+        # Step 4: Current [OK] backup
         if os.path.exists(file_path):
             shutil.copy2(file_path, backup_file)  # Copy (not move) current to backup
-            print(f"  Backed up: {os.path.basename(file_path)} → {os.path.basename(backup_file)}", flush=True)
+            print(f"  Backed up: {os.path.basename(file_path)} [OK] {os.path.basename(backup_file)}", flush=True)
         
-        # Step 5: Temp → current (atomic on most systems)
+        # Step 5: Temp [OK] current (atomic on most systems)
         shutil.move(temp_file, file_path)
         
-        print(f"✓ Saved: {os.path.basename(file_path)} (2-gen protected)", flush=True)
+        print(f"[OK] Saved: {os.path.basename(file_path)} (2-gen protected)", flush=True)
         
         # NOTE: We do NOT delete backups - they persist as safety nets!    
             
@@ -1656,7 +1656,7 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
     # Determine the correct location/center based on object ID
     location = '@sun'  # Default for planets, asteroids, comets, spacecraft
     
-    # Satellites: Extract parent planet from 3-digit ID (e.g., 301 → Earth)
+    # Satellites: Extract parent planet from 3-digit ID (e.g., 301 [OK] Earth)
 #    if horizons_id.isdigit() and len(horizons_id) == 3:
     if horizons_id.isdigit() and len(horizons_id) == 3 and not horizons_id.endswith('99'):
         parent_id_map = {
@@ -1682,7 +1682,7 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
     # Determine the correct location/center based on object ID
     location = '@sun'  # Default for planets, asteroids, comets, spacecraft
     
-    # Satellites: Extract parent planet from 3-digit ID (e.g., 301 → Earth)
+    # Satellites: Extract parent planet from 3-digit ID (e.g., 301 [OK] Earth)
     # EXCLUDE planets themselves (x99 pattern: 199, 299, 399, etc.)
     if horizons_id.isdigit() and len(horizons_id) == 3 and not horizons_id.endswith('99'):
         parent_id_map = {

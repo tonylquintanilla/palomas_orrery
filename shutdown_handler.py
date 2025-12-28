@@ -92,7 +92,16 @@ def show_figure_safely(fig, default_name):
         webbrowser.open(f'file://{os.path.abspath(temp_path)}')
         print(f"Visualization opened in browser")
 
-        # Create root window for dialogs
+        # Check if we're in the main thread - dialogs crash macOS if called from worker thread
+        import platform
+        in_main_thread = threading.current_thread() is threading.main_thread()
+        
+        if not in_main_thread and platform.system() == 'Darwin':
+            # On macOS, skip save dialog when in worker thread to avoid crash
+            print("Save dialog skipped (macOS thread safety) - use File menu in browser to save")
+            return
+        
+        # Create root window for dialogs (only safe on main thread or non-macOS)
         root = tk.Tk()
         root.withdraw()
         root.attributes('-topmost', True)

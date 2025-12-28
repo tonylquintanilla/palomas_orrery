@@ -66,7 +66,7 @@ def ensure_cache_system_ready():
 #                pickle.dump({}, f)
         
         if not os.path.exists(pkl_file):
-            print(f"\n⚠️  WARNING: Cache file not found: {pkl_file}")
+            print(f"\n[WARN]  WARNING: Cache file not found: {pkl_file}")
             print(f"   This will create an EMPTY cache file.")
             print(f"   If you have existing cache data, this may indicate a path problem.")
             response = input(f"   Create empty cache at this location? (y/n): ")
@@ -78,7 +78,7 @@ def ensure_cache_system_ready():
                 print(f"   Skipping cache creation. Please check your file paths.")
                 print(f"   Expected location: {pkl_file}")
         elif os.path.getsize(pkl_file) < 1000:  # Less than 1KB = suspicious
-                print(f"\n⚠️  WARNING: Cache file is suspiciously small: {pkl_file}")
+                print(f"\n[WARN]  WARNING: Cache file is suspiciously small: {pkl_file}")
                 print(f"   Current size: {os.path.getsize(pkl_file)} bytes")
                 print(f"   Expected: ~3MB (distance) or ~32MB (magnitude)")
                 print(f"   This may indicate corruption or path misconfiguration.")

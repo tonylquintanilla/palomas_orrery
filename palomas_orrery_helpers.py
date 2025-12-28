@@ -303,7 +303,7 @@ def calculate_axis_range(objects_to_plot):
     # Print debug info
     print(f"\nAxis range calculation:")
     print(f"Maximum orbit (AU): {max_orbit}")
-    print(f"Range with padding: ±{max_range}")
+    print(f"Range with padding:  deg+/-{max_range}")
     
     return [-max_range, max_range]
     
@@ -615,7 +615,7 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
             url_objects.append({
                 'name': obj['name'],
                 'url': obj.get('mission_url') or obj.get('url'),                        # Use either URL field
-        #        'is_earth': obj['name'].lower() == 'earth'  # ← NEW LINE ADDED FOR EARTH DATA VISUALIZATION
+        #        'is_earth': obj['name'].lower() == 'earth'  # <- NEW LINE ADDED FOR EARTH DATA VISUALIZATION
             })
     
     # Remove duplicates while preserving order
@@ -644,7 +644,7 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
         # Calculate y position based on row (row 0 is at y=0, row 1 is at y=-0.05)
         button_y = 0.07 - (row * 0.06)
         
-        # ↓↓↓ NEW CONDITIONAL BLOCK ADDED FOR EARTH SYSTEM VISUALIZATION ↓↓↓
+        # >>>>>>>>> NEW CONDITIONAL BLOCK ADDED FOR EARTH SYSTEM VISUALIZATION >>>>>>>>>
         # Earth gets special styling - professional double border with ocean blue
         if obj.get('is_earth', False):
             border_color = '#4AFF00'  # chlorophyll green
@@ -657,7 +657,7 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
             border_width = 1
             bg_color = 'rgba(255, 255, 255, 0.1)'
             text_color = '#1E90FF'
-        # ↑↑↑ END NEW BLOCK ↑↑↑
+        # <<<<<<<<< END NEW BLOCK <<<<<<<<<
 
         annotations.append(dict(
     #        text=f"<a href='{obj['url']}' target='_blank' style='color:#1E90FF; font-family:monospace;'>{padded_name}</a>",  # uniform
@@ -668,14 +668,14 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
             y=button_y,  
             showarrow=False,
     #        font=dict(size=12, color='#1E90FF'),
-            font=dict(size=12, color=text_color),  # ← CHANGED
+            font=dict(size=12, color=text_color),  # <- CHANGED
             align='left',
     #        bgcolor='rgba(255, 255, 255, 0.1)',
-            bgcolor=bg_color,          # ← CHANGED (uses variable)
+            bgcolor=bg_color,          # <- CHANGED (uses variable)
     #        bordercolor='#1E90FF',
-            bordercolor=border_color,  # ← CHANGED (uses variable)
+            bordercolor=border_color,  # <- CHANGED (uses variable)
     #        borderwidth=1,
-            borderwidth=border_width,  # ← CHANGED (uses variable - 2 for Earth!)
+            borderwidth=border_width,  # <- CHANGED (uses variable - 2 for Earth!)
             borderpad=4,
             xanchor='left',
             yanchor='middle'
@@ -840,6 +840,21 @@ def show_animation_safely(fig, default_name):
     import webbrowser
     import os
     import tempfile
+    import threading
+    import platform
+    
+    # Check if we're in the main thread - dialogs crash macOS if called from worker thread
+    in_main_thread = threading.current_thread() is threading.main_thread()
+    
+    if not in_main_thread and platform.system() == 'Darwin':
+        # On macOS, skip save dialog and just show animation in browser
+        with tempfile.NamedTemporaryFile(suffix='.html', delete=False) as tmp:
+            temp_path = tmp.name
+            fig.write_html(temp_path, include_plotlyjs='cdn', auto_play=False)
+            webbrowser.open(f'file://{os.path.abspath(temp_path)}')
+            print(f"Animation opened in browser")
+            print("Save dialog skipped (macOS thread safety) - use File menu in browser to save")
+        return
     
     root = tk.Tk()
     root.withdraw()

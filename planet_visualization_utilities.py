@@ -323,7 +323,7 @@ def create_sun_direction_indicator_old(center_position=(0, 0, 0)):
         "Direction to Sun: In the solar system, the Sun would be located in the negative X direction.<br><br>"
         "Neptune's magnetosphere orientation: This scientifically accurate visualization shows:<br>"
         "1. The bow shock facing the Sun, as it would in reality<br>"
-        "2. Neptune's unique magnetic field (47° tilt, 0.55 radius offset)<br>"
+        "2. Neptune's unique magnetic field (47 deg tilt, 0.55 radius offset)<br>"
         "3. A magnetotail that stretches away from the Sun but is influenced by Neptune's unusual field<br><br>"
         "This complex interaction creates a magnetosphere unlike any other in our solar system."
     ]

@@ -75,7 +75,7 @@ def create_hover_text(df, include_3d=False):
                     dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
                     
                     ra_str = f"{ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s"
-                    dec_str = f"{dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\""
+                    dec_str = f"{dec_sign}{dec_d:02d} deg {dec_m:02d}' {dec_s:04.1f}\""
             except Exception as e:
                 # If conversion fails, just skip RA/Dec
                 pass

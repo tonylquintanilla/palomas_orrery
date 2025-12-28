@@ -99,7 +99,7 @@ HOMININ_SPECIES = [
     # Earliest possible hominins - Late Miocene
     {'name': 'Sahelanthropus tchadensis', 'age_ma': 7.0, 'category': 'early_hominin', 'evidence': 'fossil',
      'y_offset': 0.0,
-     'note': 'Oldest possible hominin ("Toumaï").<br>Chad, 7.2-6.8 Ma.<br>Debated bipedality.<br><i>Source: Brunet et al. 2002, Nature</i>'},
+     'note': 'Oldest possible hominin ("Toumai").<br>Chad, 7.2-6.8 Ma.<br>Debated bipedality.<br><i>Source: Brunet et al. 2002, Nature</i>'},
     {'name': 'Orrorin tugenensis', 'age_ma': 6.0, 'category': 'early_hominin', 'evidence': 'fossil',
      'y_offset': 0.7,  # Slight stagger
      'note': '"Millennium Man" from Kenya.<br>Femur suggests bipedality.<br>6.1-5.8 Ma.<br><i>Source: Senut et al. 2001</i>'},
@@ -133,13 +133,13 @@ HOMININ_SPECIES = [
      'note': 'First to leave Africa, control fire.<br>Worldwide spread. 1.9 Ma - 110 ka.<br>One of five major Homo branches (2025 model).<br>Asian populations persisted alongside later species.<br><i>Source: Smithsonian Human Origins</i>'},
     {'name': 'Homo heidelbergensis', 'age_ma': 0.7, 'category': 'homo', 'evidence': 'fossil',
      'y_offset': 0.0,
-     'note': '⚠️ STATUS REVISED (2025): May be specialized<br>side-branch, not direct ancestor of sapiens.<br>Europe/Africa. 700-200 ka.<br>New divergence dates push common ancestors<br>back to >1 Ma, before heidelbergensis existed.<br><i>Source: Feng et al. 2025, Science; Stringer</i>'},
+     'note': '[WARN] STATUS REVISED (2025): May be specialized<br>side-branch, not direct ancestor of sapiens.<br>Europe/Africa. 700-200 ka.<br>New divergence dates push common ancestors<br>back to >1 Ma, before heidelbergensis existed.<br><i>Source: Feng et al. 2025, Science; Stringer</i>'},
     {'name': 'Homo neanderthalensis', 'age_ma': 0.43, 'category': 'homo', 'evidence': 'fossil',
      'y_offset': 0.0,
      'note': 'European branch of Homo.<br>Earliest traits: Sima de los Huesos, Spain.<br>Classic Neanderthals 130-40 ka.<br>NEW: Diverged ~1.38 Ma (Yunxian 2 analysis).<br>Interbred with sapiens (~2% non-African DNA).<br><i>Source: Feng et al. 2025, Science</i>'},
     {'name': 'Homo longi', 'age_ma': 1.0, 'category': 'homo', 'evidence': 'fossil',
      'y_offset': 0.0,  # Slight stagger
-     'note': '🆕 "Dragon Man" clade (named 2021).<br>Yunxian 2 skull (1 Ma) is earliest member.<br>Diverged from sapiens lineage ~1.32 Ma.<br>Includes Denisovans as late members.<br>Sister group to H. sapiens, not Neanderthals.<br><i>Source: Feng et al. 2025, Science</i>'},
+     'note': '[SKULL] "Dragon Man" clade (named 2021).<br>Yunxian 2 skull (1 Ma) is earliest member.<br>Diverged from sapiens lineage ~1.32 Ma.<br>Includes Denisovans as late members.<br>Sister group to H. sapiens, not Neanderthals.<br><i>Source: Feng et al. 2025, Science</i>'},
     {'name': 'Homo sapiens', 'age_ma': 0.315, 'category': 'homo', 'evidence': 'fossil',
      'y_offset': 0.0,  # Stagger from neanderthalensis
      'note': 'Anatomically modern humans.<br>Jebel Irhoud, Morocco. ~315 ka.<br>NEW: Result of merger between two populations<br>that split ~1.5 Ma and reunited ~300 ka (80:20 ratio).<br><i>Source: Cousins et al. 2025, Nature Genetics</i>'},
@@ -150,10 +150,10 @@ HOMININ_SPECIES = [
     # Island Southeast Asia - remarkable parallel evolution
     {'name': 'Homo floresiensis', 'age_ma': 0.19, 'category': 'homo', 'evidence': 'fossil',
      'y_offset': 0.0,  # Stagger from sapiens/Denisovans cluster
-     'note': '🏝️ "The Hobbit" of Flores, Indonesia.<br>~1m tall — island dwarfism or ancient lineage?<br>Survived until ~50 ka — COEXISTED with sapiens!<br>Sophisticated tools despite small brain.<br>190-50 ka (Liang Bua cave).<br><i>Source: Brown et al. 2004, Nature</i>'},
+     'note': '[ISLAND] "The Hobbit" of Flores, Indonesia.<br>~1m tall - island dwarfism or ancient lineage?<br>Survived until ~50 ka - COEXISTED with sapiens!<br>Sophisticated tools despite small brain.<br>190-50 ka (Liang Bua cave).<br><i>Source: Brown et al. 2004, Nature</i>'},
     {'name': 'Homo luzonensis', 'age_ma': 0.067, 'category': 'homo', 'evidence': 'fossil',
      'y_offset': 0.0,  # Isolated in time, no stagger needed
-     'note': '🏝️ Philippines hominin (discovered 2019).<br>Callao Cave, Luzon. Small-bodied like floresiensis.<br>Mix of primitive and modern features.<br>Parallel island evolution — "Island Rule."<br>~67 ka — also coexisted with sapiens.<br><i>Source: Détroit et al. 2019, Nature</i>'},
+     'note': '[ISLAND] Philippines hominin (discovered 2019).<br>Callao Cave, Luzon. Small-bodied like floresiensis.<br>Mix of primitive and modern features.<br>Parallel island evolution - "Island Rule."<br>~67 ka - also coexisted with sapiens.<br><i>Source: Detroit et al. 2019, Nature</i>'},
     
     # =====================================================================
     # GHOST POPULATIONS (open triangle markers)
@@ -162,24 +162,24 @@ HOMININ_SPECIES = [
     
     {'name': '"Superarchaic" Ghost', 'age_ma': 2.0, 'category': 'ghost', 'evidence': 'dna_only',
      'y_offset': 0.7,  # Stagger from erectus
-     'note': '👻 GHOST POPULATION (no fossils recovered)<br>Detected via DNA signatures in Denisovans.<br>Split from human lineage 2.2-1.8 Ma.<br>Possibly late H. erectus populations in Asia.<br>Contributed DNA to Neanderthal-Denisovan ancestor.<br><i>Source: Rogers et al. 2020, Science Advances</i>'},
+     'note': '[GHOST] GHOST POPULATION (no fossils recovered)<br>Detected via DNA signatures in Denisovans.<br>Split from human lineage 2.2-1.8 Ma.<br>Possibly late H. erectus populations in Asia.<br>Contributed DNA to Neanderthal-Denisovan ancestor.<br><i>Source: Rogers et al. 2020, Science Advances</i>'},
     {'name': 'West African Ghost', 'age_ma': 0.7, 'category': 'ghost', 'evidence': 'dna_only',
      'y_offset': 0.7,  # Stagger from heidelbergensis
-     'note': '👻 GHOST POPULATION (no fossils recovered)<br>Detected in Yoruba, Mende, other West Africans.<br>2-19% of ancestry from unknown archaic hominin.<br>Split 360 ka - 1.02 Ma; introgressed 0-124 ka.<br>Genes enriched for tumor suppression, hormones.<br><i>Source: Durvasula & Sankararaman 2020,<br>Science Advances</i>'},
+     'note': '[GHOST] GHOST POPULATION (no fossils recovered)<br>Detected in Yoruba, Mende, other West Africans.<br>2-19% of ancestry from unknown archaic hominin.<br>Split 360 ka - 1.02 Ma; introgressed 0-124 ka.<br>Genes enriched for tumor suppression, hormones.<br><i>Source: Durvasula & Sankararaman 2020,<br>Science Advances</i>'},
     {'name': 'Population A (80%)', 'age_ma': 1.5, 'category': 'ghost', 'evidence': 'dna_only',
      'y_offset': 0.0,
-     'note': '👻 GHOST POPULATION (no fossils recovered)<br>🆕 Major ancestor of H. sapiens (80% of genome).<br>Split from Population B ~1.5 Ma in Africa.<br>Severe bottleneck after split, then slow growth.<br>Also ancestral to Neanderthals and Denisovans.<br>Merged with Pop. B ~300 ka to form sapiens.<br><i>Source: Cousins et al. 2025, Nature Genetics</i>'},
+     'note': '[GHOST] GHOST POPULATION (no fossils recovered)<br>[SKULL] Major ancestor of H. sapiens (80% of genome).<br>Split from Population B ~1.5 Ma in Africa.<br>Severe bottleneck after split, then slow growth.<br>Also ancestral to Neanderthals and Denisovans.<br>Merged with Pop. B ~300 ka to form sapiens.<br><i>Source: Cousins et al. 2025, Nature Genetics</i>'},
     {'name': 'Population B (20%)', 'age_ma': 1.5, 'category': 'ghost', 'evidence': 'dna_only',
      'y_offset': 0.7,  # Stagger from Pop A (same age!)
-     'note': '👻 GHOST POPULATION (no fossils recovered)<br>🆕 Minor ancestor of H. sapiens (20% of genome).<br>Split from Population A ~1.5 Ma in Africa.<br>Genes concentrated in brain function and<br>neural processing—may have been crucial<br>for cognitive evolution.<br>Merged with Pop. A ~300 ka to form sapiens.<br><i>Source: Cousins et al. 2025, Nature Genetics</i>'},
+     'note': '[GHOST] GHOST POPULATION (no fossils recovered)<br>[SKULL] Minor ancestor of H. sapiens (20% of genome).<br>Split from Population A ~1.5 Ma in Africa.<br>Genes concentrated in brain function and<br>neural processing-may have been crucial<br>for cognitive evolution.<br>Merged with Pop. A ~300 ka to form sapiens.<br><i>Source: Cousins et al. 2025, Nature Genetics</i>'},
     
     # Southeast Asian ghost populations
     {'name': '"Deep Denisovan" (D2)', 'age_ma': 0.28, 'category': 'ghost', 'evidence': 'dna_only',
      'y_offset': 1.4,  # Stagger from Denisovans/sapiens cluster
-     'note': '👻 GHOST POPULATION (no fossils recovered)<br>🌏 Deeply divergent Denisovan lineage.<br>Split from Altai Denisovans ~280 ka.<br>Detected in Papuans, Filipinos (up to 4%).<br>Suggests multiple Denisovan populations across<br>SE Asia, not just Siberian group.<br><i>Source: Jacobs et al. 2019, Cell</i>'},
+     'note': '[GHOST] GHOST POPULATION (no fossils recovered)<br>[DNA] Deeply divergent Denisovan lineage.<br>Split from Altai Denisovans ~280 ka.<br>Detected in Papuans, Filipinos (up to 4%).<br>Suggests multiple Denisovan populations across<br>SE Asia, not just Siberian group.<br><i>Source: Jacobs et al. 2019, Cell</i>'},
     {'name': 'SE Asian Archaic Ghost', 'age_ma': 0.15, 'category': 'ghost', 'evidence': 'dna_only',
      'y_offset': 0.0,  # Stagger from floresiensis
-     'note': '👻 GHOST POPULATION (no fossils recovered)<br>🌏 Unknown archaic detected in SE Asians.<br>More divergent than Denisovans — possibly<br>from H. erectus descendants or floresiensis-<br>related populations. Controversial but intriguing.<br>May explain unique adaptations in region.<br><i>Source: Teixeira et al. 2021; Mondal et al. 2019</i>'},
+     'note': '[GHOST] GHOST POPULATION (no fossils recovered)<br>[DNA] Unknown archaic detected in SE Asians.<br>More divergent than Denisovans - possibly<br>from H. erectus descendants or floresiensis-<br>related populations. Controversial but intriguing.<br>May explain unique adaptations in region.<br><i>Source: Teixeira et al. 2021; Mondal et al. 2019</i>'},
 ]
 
 # =========================================================================
@@ -203,21 +203,21 @@ MIS_STAGES = [
     {'name': 'MIS 3', 'start_ma': 0.057, 'end_ma': 0.029, 'type': 'warm',
      'note': 'Interstadial (variable climate)<br>H. sapiens expands into Europe.<br>Coexistence with Neanderthals.<br>Cave art, symbolic behavior flourishes.'},
     {'name': 'MIS 4', 'start_ma': 0.071, 'end_ma': 0.057, 'type': 'cold',
-     'note': 'Glacial period<br>⚠️ TOBA SUPERERUPTION (~74 ka)<br>Possible population bottleneck.<br>Volcanic winter, 6-10 year impact.'},
+     'note': 'Glacial period<br>[WARN] TOBA SUPERERUPTION (~74 ka)<br>Possible population bottleneck.<br>Volcanic winter, 6-10 year impact.'},
     
     # MIS 5 complex (substages)
     {'name': 'MIS 5a-d', 'start_ma': 0.130, 'end_ma': 0.071, 'type': 'warm',
      'note': 'Interglacial complex (variable)<br>Multiple warm/cool oscillations.<br>Sapiens and Neanderthals interbreed.<br>Out of Africa migrations begin.'},
     {'name': 'MIS 5e', 'start_ma': 0.130, 'end_ma': 0.115, 'type': 'warm',
-     'note': '🌍 EEMIAN INTERGLACIAL<br>Last time as warm as today (naturally).<br>"Green Sahara" - corridor OPEN.<br>First major H. sapiens expansion.<br>Hippos in the Thames, lions in Alaska.'},
+     'note': '[EARTH] EEMIAN INTERGLACIAL<br>Last time as warm as today (naturally).<br>"Green Sahara" - corridor OPEN.<br>First major H. sapiens expansion.<br>Hippos in the Thames, lions in Alaska.'},
     
     # Deeper time
     {'name': 'MIS 6', 'start_ma': 0.191, 'end_ma': 0.130, 'type': 'cold',
-     'note': '❄️ PENULTIMATE GLACIAL<br>Severe cold; Sahara impassable.<br>Populations isolated in refugia.<br>May have triggered 80/20 ghost split<br>that later formed H. sapiens.'},
+     'note': '[SNOW] PENULTIMATE GLACIAL<br>Severe cold; Sahara impassable.<br>Populations isolated in refugia.<br>May have triggered 80/20 ghost split<br>that later formed H. sapiens.'},
     {'name': 'MIS 7', 'start_ma': 0.243, 'end_ma': 0.191, 'type': 'warm',
      'note': 'Interglacial<br>Corridor open; population mixing.<br>Early H. sapiens features emerging<br>in African fossil record.'},
     {'name': 'MIS 11', 'start_ma': 0.424, 'end_ma': 0.374, 'type': 'warm',
-     'note': '🌡️ SUPER-INTERGLACIAL<br>Longest warm period of Pleistocene.<br>~50,000 years of warmth.<br>H. heidelbergensis flourishing.<br>Best analog for future climate?'},
+     'note': '[SUN] SUPER-INTERGLACIAL<br>Longest warm period of Pleistocene.<br>~50,000 years of warmth.<br>H. heidelbergensis flourishing.<br>Best analog for future climate?'},
     {'name': 'MIS 12', 'start_ma': 0.478, 'end_ma': 0.424, 'type': 'cold',
      'note': 'Severe glacial period<br>One of the coldest of Pleistocene.<br>Major evolutionary pressure.'},
 ]
@@ -225,31 +225,31 @@ MIS_STAGES = [
 # Special climate events (not MIS stages but significant)
 CLIMATE_EVENTS = [
     {'name': 'Toba Supereruption', 'age_ma': 0.074, 'type': 'catastrophe',
-     'note': '🌋 TOBA SUPERERUPTION (~74 ka)<br>Largest eruption in 2 million years.<br>Volcanic Explosivity Index 8.<br>6-10 year volcanic winter.<br>Proposed genetic bottleneck in humans<br>(debated but significant).<br><i>Source: Ambrose 1998; Rampino & Self 1992</i>'},
+     'note': '[VOLCANO] TOBA SUPERERUPTION (~74 ka)<br>Largest eruption in 2 million years.<br>Volcanic Explosivity Index 8.<br>6-10 year volcanic winter.<br>Proposed genetic bottleneck in humans<br>(debated but significant).<br><i>Source: Ambrose 1998; Rampino & Self 1992</i>'},
     {'name': 'Green Sahara (MIS 5e)', 'age_ma': 0.125, 'type': 'corridor',
-     'note': '🌿 GREEN SAHARA WINDOW<br>Sahara transforms to grassland/lakes.<br>Migration corridor OPEN.<br>H. sapiens expands into Levant.<br>First wave Out of Africa.<br><i>Source: Drake et al. 2011</i>'},
+     'note': '[TREE] GREEN SAHARA WINDOW<br>Sahara transforms to grassland/lakes.<br>Migration corridor OPEN.<br>H. sapiens expands into Levant.<br>First wave Out of Africa.<br><i>Source: Drake et al. 2011</i>'},
     {'name': 'Green Sahara (Holocene)', 'age_ma': 0.009, 'type': 'corridor',
-     'note': '🌿 AFRICAN HUMID PERIOD<br>Sahara green again (~11-5 ka).<br>Lakes, rivers, human settlements.<br>Cattle herding, rock art.<br>Ended ~5,500 ya → desertification.<br><i>Source: deMenocal et al. 2000</i>'},
+     'note': '[TREE] AFRICAN HUMID PERIOD<br>Sahara green again (~11-5 ka).<br>Lakes, rivers, human settlements.<br>Cattle herding, rock art.<br>Ended ~5,500 ya [OK] desertification.<br><i>Source: deMenocal et al. 2000</i>'},
 ]
 
 def d18o_to_temperature_approx(d18o_values):
     """
-    Convert benthic δ18O to approximate temperature anomaly
+    Convert benthic delta18O to approximate temperature anomaly
     
-    This is a simplified conversion. Benthic δ18O reflects both 
+    This is a simplified conversion. Benthic delta18O reflects both 
     ice volume and deep ocean temperature. The relationship varies
     over time, but rough approximation:
-    - Higher δ18O = More ice + Colder temperatures
-    - Lower δ18O = Less ice + Warmer temperatures
+    - Higher delta18O = More ice + Colder temperatures
+    - Lower delta18O = Less ice + Warmer temperatures
     
-    Using simplified conversion: ~4-5°C per 1‰ change
+    Using simplified conversion: ~4-5 degC per 1 permil change
     Normalized to show relative changes from present
     """
-    # Modern benthic δ18O is around 3.2‰
+    # Modern benthic delta18O is around 3.2 permil
     modern_d18o = 3.23  # From LR04 data at 0 ka
     
-    # Convert to temperature anomaly (inverted because higher δ18O = colder)
-    # Using ~4.5°C per 1‰ as approximation
+    # Convert to temperature anomaly (inverted because higher delta18O = colder)
+    # Using ~4.5 degC per 1 permil as approximation
     temp_anomaly = -(np.array(d18o_values) - modern_d18o) * 4.5
     
     return temp_anomaly
@@ -487,7 +487,7 @@ def create_paleoclimate_visualization():
         scotese_temps = scotese_temps_raw + scotese_offset
         
         # Filter to use Scotese data for deep time (>2 Ma)
-        # Scotese method: Lithologic indicators + Köppen belts (~5 Myr resolution)
+        # Scotese method: Lithologic indicators + Koppen belts (~5 Myr resolution)
         # Optimized for deep time patterns, not high-resolution recent climate
         # Use LR04/Holocene/Modern for <2 Ma (higher temporal resolution)
         mask = scotese_ages_ma >= 2.0
@@ -509,8 +509,8 @@ def create_paleoclimate_visualization():
                 mode='lines',
                 name='Phanerozoic Global Temperature (Scotese et al. 2021)',
                 line=dict(color='#003049', width=2),
-        #        hovertemplate='Age: %{x:.1f} Ma<br>Temp Anomaly: %{y:.1f}°C<extra></extra>'
-                hovertemplate='Age: %{x:.1f} Ma<br>Temp Anomaly: %{y:.1f}°C<br><i>~5 Myr resolution (deep time method)</i><extra></extra>'
+        #        hovertemplate='Age: %{x:.1f} Ma<br>Temp Anomaly: %{y:.1f} degC<extra></extra>'
+                hovertemplate='Age: %{x:.1f} Ma<br>Temp Anomaly: %{y:.1f} degC<br><i>~5 Myr resolution (deep time method)</i><extra></extra>'
             ),
             secondary_y=False
         )
@@ -523,7 +523,7 @@ def create_paleoclimate_visualization():
             mode='lines',
             name='Paleoclimate Benthic Stack (Lisiecki & Raymo 2005)',
             line=dict(color='#C1121F', width=1.5),
-            hovertemplate='Age: %{x:.3f} Ma<br>Temp Anomaly: %{y:.1f}°C<extra></extra>'
+            hovertemplate='Age: %{x:.3f} Ma<br>Temp Anomaly: %{y:.1f} degC<extra></extra>'
         ),
         secondary_y=False
     )
@@ -552,7 +552,7 @@ def create_paleoclimate_visualization():
                 mode='lines',
                 name='Holocene Reconstruction (Kaufman 2020)',
                 line=dict(color="#2CC174", width=2),
-                hovertemplate='Age: %{x:.6f} Ma<br>Temp Anomaly: %{y:.2f}°C<extra></extra>'
+                hovertemplate='Age: %{x:.6f} Ma<br>Temp Anomaly: %{y:.2f} degC<extra></extra>'
             ),
             secondary_y=False
         )
@@ -562,7 +562,7 @@ def create_paleoclimate_visualization():
 
         # Normalize instrumental data to pre-industrial
         # NASA GISS is relative to 1951-1980, need to shift to 1850-1900
-        # From literature: 1951-1980 was ~0.7°C warmer than 1850-1900
+        # From literature: 1951-1980 was ~0.7 degC warmer than 1850-1900
         giss_to_preindustrial_offset = 0.7
         modern_temps_normalized = [t + giss_to_preindustrial_offset - preindustrial_offset 
                                    for t in modern_temps]
@@ -574,7 +574,7 @@ def create_paleoclimate_visualization():
                 mode='lines',
                 name='Instrumental Record 1880-2025 (NASA GISS)',
                 line=dict(color="#3586B5", width=3),  # Bright orange-red
-                hovertemplate='Year: %{customdata}<br>Temp Anomaly: %{y:.2f}°C<extra></extra>',
+                hovertemplate='Year: %{customdata}<br>Temp Anomaly: %{y:.2f} degC<extra></extra>',
                 customdata=[2025 - int(age * 1_000_000) for age in modern_ages_ma]
             ),
             secondary_y=False
@@ -587,7 +587,7 @@ def create_paleoclimate_visualization():
         yd_start = 0.0129  # 12,900 years ago
         yd_end = 0.0117    # 11,700 years ago
         
-        # Band 1: Global average cooling (~0.5-1.5°C)
+        # Band 1: Global average cooling (~0.5-1.5 degC)
         # Subtle signal when averaged over entire planet
         fig.add_trace(
             go.Scatter(
@@ -597,14 +597,14 @@ def create_paleoclimate_visualization():
                 fillcolor='rgba(0,206,209,0.1)',  # Very light turquoise
                 line=dict(width=0),
                 mode='lines',
-                name='YD Global (~1°C)',
+                name='YD Global (~1 degC)',
                 showlegend=False,
-                hovertemplate='Younger Dryas (Global)<br>Estimated: 0.5-1.5°C cooling<br><i>Global average signal</i><extra></extra>'
+                hovertemplate='Younger Dryas (Global)<br>Estimated: 0.5-1.5 degC cooling<br><i>Global average signal</i><extra></extra>'
             ),
             secondary_y=False
         )
         
-        # Band 2: Northern Hemisphere mid-latitudes (Europe & North America, ~2-6°C)
+        # Band 2: Northern Hemisphere mid-latitudes (Europe & North America, ~2-6 degC)
         # Regional cooling where most humans lived
         fig.add_trace(
             go.Scatter(
@@ -614,14 +614,14 @@ def create_paleoclimate_visualization():
                 fillcolor='rgba(0,206,209,0.4)',  # Medium turquoise
                 line=dict(width=0),
                 mode='lines',
-                name='YD Regional (~4°C)',
+                name='YD Regional (~4 degC)',
                 showlegend=False,
-                hovertemplate='Younger Dryas (Regional)<br>Europe & North America: 2-6°C cooling<br><i>Mid-latitude Northern Hemisphere</i><extra></extra>'
+                hovertemplate='Younger Dryas (Regional)<br>Europe & North America: 2-6 degC cooling<br><i>Mid-latitude Northern Hemisphere</i><extra></extra>'
             ),
             secondary_y=False
         )
         
-        # Band 3: Greenland/North Atlantic extreme (~8-10°C)
+        # Band 3: Greenland/North Atlantic extreme (~8-10 degC)
         # Maximum regional impact from ice core records
         fig.add_trace(
             go.Scatter(
@@ -631,9 +631,9 @@ def create_paleoclimate_visualization():
                 fillcolor='rgba(0,206,209,0.9)',  # Darker turquoise
                 line=dict(width=0),
                 mode='lines',
-                name='YD Greenland (~9°C)',
+                name='YD Greenland (~9 degC)',
                 showlegend=False,
-                hovertemplate='Younger Dryas (Greenland)<br>GISP2 ice core: 8-10°C cooling<br><i>Maximum regional impact</i><extra></extra>'
+                hovertemplate='Younger Dryas (Greenland)<br>GISP2 ice core: 8-10 degC cooling<br><i>Maximum regional impact</i><extra></extra>'
             ),
             secondary_y=False
         )
@@ -888,10 +888,10 @@ def create_paleoclimate_visualization():
             bordercolor='red',
             borderwidth=1,
             hovertext='<b>Present Day (2025 CE)</b><br>'
-                      'Global temp: +1.28°C above pre-industrial<br>'
-                      'Atmospheric CO₂: ~425 ppm<br>'
+                      'Global temp: +1.28 degC above pre-industrial<br>'
+                      'Atmospheric CO2: ~425 ppm<br>'
                       'Warmest decade in recorded history<br>'
-                      'Rate of change: ~0.2°C per decade<br>'
+                      'Rate of change: ~0.2 degC per decade<br>'
                       'Unprecedented in Holocene stability',
             hoverlabel=dict(bgcolor='rgba(220,20,60,0.9)', font_size=11)
         )
@@ -916,7 +916,7 @@ def create_paleoclimate_visualization():
             borderwidth=1,
             hovertext='<b>2015 CE</b><br>'
                       'Year of Paris Climate Agreement<br>'
-                      'Global temp: +1.0°C above pre-industrial<br>'
+                      'Global temp: +1.0 degC above pre-industrial<br>'
                       'Hottest year on record (at the time)<br>'
                       '196 nations commit to climate action<br>'
                       'Beginning of renewable energy surge',
@@ -943,10 +943,10 @@ def create_paleoclimate_visualization():
             borderwidth=1,
             hovertext='<b>1925 CE</b><br>'
                       'The Roaring Twenties<br>'
-                      'Global temp: ~0.1°C above pre-industrial<br>'
+                      'Global temp: ~0.1 degC above pre-industrial<br>'
                       'World population: 2 billion<br>'
                       'Early automobile age begins<br>'
-                      'CO₂ starting to rise from coal use<br>'
+                      'CO2 starting to rise from coal use<br>'
                       'Beginning of modern warming signal',
             hoverlabel=dict(bgcolor='rgba(220,20,60,0.9)', font_size=11)
         )
@@ -1031,7 +1031,7 @@ def create_paleoclimate_visualization():
                       'Neanderthals in Europe<br>'
                       'Sea levels ~100m lower than today<br>'
                       'Massive ice sheets cover continents<br>'
-                      'Temp ~5-10°C colder than present',
+                      'Temp ~5-10 degC colder than present',
             hoverlabel=dict(bgcolor='rgba(220,20,60,0.9)', font_size=11)
         )  
 
@@ -1114,8 +1114,8 @@ def create_paleoclimate_visualization():
                       'Dinosaurs at peak diversity<br>'
                       'No polar ice caps<br>'
                       'Sea levels 200m higher than today<br>'
-                      'CO₂ ~4x higher than pre-industrial<br>'
-                      'Temp ~10°C warmer than present',
+                      'CO2 ~4x higher than pre-industrial<br>'
+                      'Temp ~10 degC warmer than present',
             hoverlabel=dict(bgcolor='rgba(220,20,60,0.9)', font_size=11)
         ) 
 
@@ -1266,10 +1266,10 @@ def create_paleoclimate_visualization():
         secondary_y=False
     )
     
-    # ax=0, ay=-40 → Straight down ⬇️
-    # ax=40, ay=0 → Straight right ➡️
-    # ax=40, ay=-60 → Diagonal up-right ↗️
-    # ax=-40, ay=40 → Diagonal down-left ↙️
+    # ax=0, ay=-40 [OK] Straight down [DOWN]
+    # ax=40, ay=0 [OK] Straight right [RIGHT]
+    # ax=40, ay=-60 [OK] Diagonal up-right [UP-RIGHT]
+    # ax=-40, ay=40 [OK] Diagonal down-left [DOWN-LEFT]
 
     # Anthropocene (recent, so use arrow like others)
     fig.add_annotation(
@@ -1291,7 +1291,7 @@ def create_paleoclimate_visualization():
                   'Proposed start: 1950 CE (Great Acceleration)<br>'
                   'Human activity dominates Earth system<br>'
                   'Nuclear testing, plastic, concrete markers<br>'
-                  'CO₂ rising faster than any natural event<br>'
+                  'CO2 rising faster than any natural event<br>'
                   'Sixth mass extinction underway<br>'
                   'Geologists debate: new epoch or event?',
         hoverlabel=dict(bgcolor='rgba(220,20,60,0.9)', font_size=11)
@@ -1377,9 +1377,9 @@ def create_paleoclimate_visualization():
         borderwidth=1,          
         hovertext='<b>Younger Dryas (12,900-11,700 years ago)</b><br>'
                   'Abrupt cooling event with regional variations:<br>'
-                  '  • <b>Global</b>: ~1°C cooling (averaged)<br>'
-                  '  • <b>Europe/N. America</b>: 2-6°C cooling<br>'
-                  '  • <b>Greenland</b>: 8-10°C cooling (ice cores)<br>'
+                  '  * <b>Global</b>: ~1 degC cooling (averaged)<br>'
+                  '  * <b>Europe/N. America</b>: 2-6 degC cooling<br>'
+                  '  * <b>Greenland</b>: 8-10 degC cooling (ice cores)<br>'
                   '<i>Brief event smoothed in 100-year resolution data</i><br>'
                   'Meltwater disrupted Gulf Stream circulation<br>'
                   'Led to megafauna extinctions & agricultural origins<br>'
@@ -1407,7 +1407,7 @@ def create_paleoclimate_visualization():
         borderwidth=1,
         hovertext='<b>Holocene Begins (11,700 years ago)</b><br>'
                   'End of last glacial period<br>'
-                  'Rapid warming of ~5°C in centuries<br>'
+                  'Rapid warming of ~5 degC in centuries<br>'
                   'Ice sheets retreat, sea level rises 120m<br>'
                   'Stable, warm climate enables agriculture<br>'
                   'Human civilization flourishes<br>'
@@ -1451,12 +1451,12 @@ def create_paleoclimate_visualization():
                     'Vikings settled Greenland, agricultural boom<br>'
                     '<br>'
                     '<b>Temperature Ranges (see horizontal bands):</b><br>'
-                    '• Regional (light orange): +0.3 to +0.5°C<br>'
-                    '• Global average (dark orange): +0.1 to +0.2°C<br>'
+                    '* Regional (light orange): +0.3 to +0.5 degC<br>'
+                    '* Global average (dark orange): +0.1 to +0.2 degC<br>'
                     '<br>'
                     '<i>Note: Century-scale event smoothed in 100-yr data</i><br>'
                     'Shows: Small global changes = large regional impacts<br>'
-                    '<b>🔍 Zoom to 500-1500 CE to see temperature bands clearly!</b><br>'
+                    '<b>[ZOOM] Zoom to 500-1500 CE to see temperature bands clearly!</b><br>'
                     '<b>Orange vertical region shows event duration</b>',
             hoverlabel=dict(bgcolor='rgba(255,140,0,0.9)', font_size=11)
         )
@@ -1464,7 +1464,7 @@ def create_paleoclimate_visualization():
 # Medieval Warm Period - Temperature Range Bands
     # Showing BOTH regional and global ranges with nested opacity
     
-    # Regional range (North Atlantic/Europe): ~+0.3 to +0.5°C
+    # Regional range (North Atlantic/Europe): ~+0.3 to +0.5 degC
     # Lighter, wider band showing local impact
     fig.add_shape(
         type="rect",
@@ -1479,7 +1479,7 @@ def create_paleoclimate_visualization():
         layer="below"
     )
     
-    # Global range: ~+0.1 to +0.2°C
+    # Global range: ~+0.1 to +0.2 degC
     # Darker, narrower band showing planetary average
     fig.add_shape(
         type="rect",
@@ -1530,12 +1530,12 @@ def create_paleoclimate_visualization():
                   'Viking Greenland abandoned, Thames froze, famines<br>'
                   '<br>'
                   '<b>Temperature Ranges (see horizontal bands):</b><br>'
-                  '• Regional (light blue): -0.5 to -1.0°C<br>'
-                  '• Global average (dark blue): -0.2 to -0.3°C<br>'
+                  '* Regional (light blue): -0.5 to -1.0 degC<br>'
+                  '* Global average (dark blue): -0.2 to -0.3 degC<br>'
                   '<br>'
                   '<i>Note: Best visible in regional high-res proxies</i><br>'
                   'Even small global changes affect civilizations<br>'
-                  '<b>🔍 Zoom to 1200-1900 CE to see temperature bands clearly!</b><br>'
+                  '<b>[ZOOM] Zoom to 1200-1900 CE to see temperature bands clearly!</b><br>'
                   '<b>Blue vertical region shows event duration</b>',
         hoverlabel=dict(bgcolor='rgba(65,105,225,0.9)', font_size=11)
     )
@@ -1543,7 +1543,7 @@ def create_paleoclimate_visualization():
 # Little Ice Age - Temperature Range Bands
     # Showing BOTH regional and global ranges with nested opacity
     
-    # Regional range (North Atlantic/Europe): ~-0.5 to -1.0°C
+    # Regional range (North Atlantic/Europe): ~-0.5 to -1.0 degC
     # Lighter, wider band showing local impact
     fig.add_shape(
         type="rect",
@@ -1558,7 +1558,7 @@ def create_paleoclimate_visualization():
         layer="below"
     )
     
-    # Global range: ~-0.2 to -0.3°C
+    # Global range: ~-0.2 to -0.3 degC
     # Darker, narrower band showing planetary average
     fig.add_shape(
         type="rect",
@@ -1605,7 +1605,7 @@ def create_paleoclimate_visualization():
         bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,
         hovertext='<b>PETM - Paleocene-Eocene Thermal Maximum</b><br>'
                   '~56 million years ago<br>'
-                  'Rapid warming of ~5-8°C in <10,000 years<br>'
+                  'Rapid warming of ~5-8 degC in <10,000 years<br>'
                   'Massive carbon release (volcanic/methane)<br>'
                   'Ocean acidification, deep-sea extinctions<br>'
                   'Mammals diversified and spread globally<br>'
@@ -1626,7 +1626,7 @@ def create_paleoclimate_visualization():
         hovertext='<b>Grande Coupure - The "Great Cut"</b><br>'
                   '~34 million years ago (Eocene-Oligocene)<br>'
                   'Abrupt cooling, ice sheets form on Antarctica<br>'
-                  'Drop of ~4°C in less than 400,000 years<br>'
+                  'Drop of ~4 degC in less than 400,000 years<br>'
                   'Opening of Drake Passage (Antarctica-S.America)<br>'
                   'Circumpolar current isolates Antarctica<br>'
                   'Major faunal turnover in Europe',
@@ -1665,19 +1665,17 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(90),
         y=20,
-        text='CTM',
+        text='?',
         showarrow=False,
-    #    font=dict(size=16, color='#7FC64E'),  # Cretaceous green
-        font=dict(size=9, color='#333'),
-        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,
-    #    bgcolor='rgba(255,255,255,0.9)',
-    #    bordercolor='#7FC64E',
-    #    borderwidth=2,
+        font=dict(size=16, color='#7FC64E'),  # Cretaceous green
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='#7FC64E',
+        borderwidth=2,
         borderpad=4,
         hovertext='<b>Cretaceous Thermal Maximum (~90 Ma)</b><br>'
                   'Peak Mesozoic greenhouse conditions<br>'
-                  'Global temp ~20°C above pre-industrial<br>'
-                  'High CO₂, no polar ice, warm oceans<br>'
+                  'Global temp ~20 degC above pre-industrial<br>'
+                  'High CO2, no polar ice, warm oceans<br>'
                   'Dinosaurs thrived in hot world',
         hoverlabel=dict(bgcolor='rgba(127,198,78,0.9)', font_size=11)
     )
@@ -1686,22 +1684,20 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(252),
         y=25.5,
-        text='P-T Ext.',
+        text='?',
         showarrow=False,
-    #    font=dict(size=16, color='#F04028'),  # Permian red
-        font=dict(size=9, color='#333'),
-        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,
-    #    bgcolor='rgba(255,255,255,0.9)',
-    #    bordercolor='#F04028',
-    #    borderwidth=2,
+        font=dict(size=16, color='#F04028'),  # Permian red
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='#F04028',
+        borderwidth=2,
         borderpad=4,
         hovertext='<b>Permian-Triassic Extinction (~252 Ma)</b><br>'
                   'The "Great Dying" - worst mass extinction<br>'
                   '~96% of marine species extinct<br>'
                   '~70% of terrestrial vertebrates extinct<br>'
                   'Caused by Siberian Traps volcanism<br>'
-                  'Massive CO₂ release, ocean anoxia<br>'
-                  'Global temp ~28°C (peak hothouse)',
+                  'Massive CO2 release, ocean anoxia<br>'
+                  'Global temp ~28 degC (peak hothouse)',
         hoverlabel=dict(bgcolor='rgba(240,64,40,0.9)', font_size=11)
     )
     
@@ -1709,21 +1705,19 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(300),
         y=-3.5,
-        text='Icehouse',
+        text='?',
         showarrow=False,
-    #    font=dict(size=16, color='#67A599'),  # Carboniferous teal
-        font=dict(size=9, color='#333'),
-        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,
-    #    bgcolor='rgba(255,255,255,0.9)',
-    #    bordercolor='#67A599',
-    #    borderwidth=2,
+        font=dict(size=16, color='#67A599'),  # Carboniferous teal
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='#67A599',
+        borderwidth=2,
         borderpad=4,
         hovertext='<b>Carboniferous Icehouse (~300 Ma)</b><br>'
                   'The "Coal Age" - vast tropical forests<br>'
                   'Trees evolved lignin (hard to decompose)<br>'
-                  'Massive carbon burial → coal deposits<br>'
-                  'Drew down atmospheric CO₂<br>'
-                  'Triggered glaciation (~12°C drop)<br>'
+                  'Massive carbon burial [OK] coal deposits<br>'
+                  'Drew down atmospheric CO2<br>'
+                  'Triggered glaciation (~12 degC drop)<br>'
                   'First forests changed the planet!',
         hoverlabel=dict(bgcolor='rgba(103,165,153,0.9)', font_size=11)
     )
@@ -1732,18 +1726,16 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(445),
         y=-8,
-        text='Glaciation',
+        text='?',
         showarrow=False,
-    #    font=dict(size=16, color='#009270'),  # Ordovician green
-        font=dict(size=9, color='#333'),
-        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,
-    #    bgcolor='rgba(255,255,255,0.9)',
-    #    bordercolor='#009270',
-    #    borderwidth=2,
+        font=dict(size=16, color='#009270'),  # Ordovician green
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='#009270',
+        borderwidth=2,
         borderpad=4,
         hovertext='<b>Late Ordovician Glaciation (~445 Ma)</b><br>'
                   'First major Phanerozoic icehouse<br>'
-                  'Rapid cooling to ~5°C<br>'
+                  'Rapid cooling to ~5 degC<br>'
                   'Massive ice sheets on Gondwana<br>'
                   'Sea level drop of ~100m<br>'
                   'End-Ordovician mass extinction<br>'
@@ -1755,27 +1747,25 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(201),
         y=18,
-        text='Triassic Ext.',
+        text='?',
         showarrow=False,
-    #    font=dict(size=16, color='#812B92'),  # Triassic purple
-        font=dict(size=9, color='#333'),
-        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,
-    #    bgcolor='rgba(255,255,255,0.9)',
-    #    bordercolor='#812B92',
-    #    borderwidth=2,
+        font=dict(size=16, color='#812B92'),  # Triassic purple
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='#812B92',
+        borderwidth=2,
         borderpad=4,
         hovertext='<b>End-Triassic Extinction (~201 Ma)</b><br>'
                   'One of the "Big Five" mass extinctions<br>'
                   '~75% of species extinct<br>'
                   'Caused by CAMP volcanism<br>'
                   '(Central Atlantic Magmatic Province)<br>'
-                  'CO₂ spike, ocean acidification<br>'
+                  'CO2 spike, ocean acidification<br>'
                   'Opened ecological space for dinosaurs',
         hoverlabel=dict(bgcolor='rgba(129,43,146,0.9)', font_size=11)
     )
         
 
-    # Add 3.3°C
+    # Add 3.3 degC
     fig.add_shape(
         type="line",
         xref="paper",
@@ -1791,7 +1781,7 @@ def create_paleoclimate_visualization():
         )
     )
     
-    # Add 2.8°C 
+    # Add 2.8 degC 
 #    fig.add_shape(
 #        type="line",
 #        xref="paper",
@@ -1812,7 +1802,7 @@ def create_paleoclimate_visualization():
         yref="y",
         x=0.80,
         y=3.40,
-        text="Current Policies (UNEP): 2.6°C - 3.3°C",
+        text="Current Policies (UNEP): 2.6 degC - 3.3 degC",
         showarrow=False,
         bgcolor="rgba(255,255,255,0)",
         font=dict(size=9, color='red'),
@@ -1820,7 +1810,7 @@ def create_paleoclimate_visualization():
         yanchor='bottom'
     )
 
-    # Add 2.6°C 
+    # Add 2.6 degC 
     fig.add_shape(
         type="line",
         xref="paper",
@@ -1841,7 +1831,7 @@ def create_paleoclimate_visualization():
 #        yref="y",
 #        x=0.82,
 #        y=3.10,
-#        text="2.5°C to 2.9°C Trajectory",
+#        text="2.5 degC to 2.9 degC Trajectory",
 #        showarrow=False,
 #        bgcolor="rgba(255,255,255,0.8)",
 #        font=dict(size=9, color='black'),
@@ -1849,7 +1839,7 @@ def create_paleoclimate_visualization():
 #        yanchor='bottom'
 #    )
 
-    # Add 1.28°C current anomaly line - spans both plots
+    # Add 1.28 degC current anomaly line - spans both plots
     fig.add_shape(
         type="line",
         xref="paper",
@@ -1870,7 +1860,7 @@ def create_paleoclimate_visualization():
         yref="y",
         x=0.80,
         y=1.40,
-        text="1.28°C -- Current Anomaly",
+        text="1.28 degC -- Current Anomaly",
         showarrow=False,
         bgcolor="rgba(255,255,255,0)",
         font=dict(size=9, color='green'),
@@ -1878,7 +1868,7 @@ def create_paleoclimate_visualization():
         yanchor='bottom'
     )
 
-    # Add 0°C baseline - spans both plots
+    # Add 0 degC baseline - spans both plots
     fig.add_shape(
         type="line",
         xref="paper",
@@ -1899,7 +1889,7 @@ def create_paleoclimate_visualization():
         yref="y",
         x=0.80,
         y=-1.0,
-        text="0°C -- 1850 - 1900 Baseline",
+        text="0 degC -- 1850 - 1900 Baseline",
         showarrow=False,
         bgcolor="rgba(255,255,255,0)",
         font=dict(size=9, color='black'),
@@ -1910,33 +1900,33 @@ def create_paleoclimate_visualization():
     info_text = (
         "<b>Earth's Climate History and Human Origins</b><br>"
         "<br>"
-        "🌍 <b>Phanerozoic:</b> Scotese et al. 2021 (540 Ma); "
-        "   <i>Method: Lithologic indicators + δ¹⁸O + models</i><br>"
-        "🔊 <b>Paleoclimate:</b> LR04 Benthic Stack (5.3 Ma); "
-        "   <i>Method: Benthic foraminifera δ¹⁸O</i><br>"
-        "❄️ <b>Younger Dryas:</b> Alley (GISP2 ice core, 2000); "
-        "   <i>Method: Greenland ice core δ¹⁸O</i><br>"
-        "🏔️ <b>Holocene:</b> Kaufman et al. 2020 (12 ka); "
+        "[EARTH] <b>Phanerozoic:</b> Scotese et al. 2021 (540 Ma); "
+        "   <i>Method: Lithologic indicators + delta^18O + models</i><br>"
+        "[CLOCK] <b>Paleoclimate:</b> LR04 Benthic Stack (5.3 Ma); "
+        "   <i>Method: Benthic foraminifera delta^18O</i><br>"
+        "[SNOW] <b>Younger Dryas:</b> Alley (GISP2 ice core, 2000); "
+        "   <i>Method: Greenland ice core delta^18O</i><br>"
+        "[TEMP] <b>Holocene:</b> Kaufman et al. 2020 (12 ka); "
         "   <i>Method: Multi-proxy (pollen, sediments, biomarkers)</i><br>"
-        "🌡️ <b>Modern:</b> NASA GISS (1880-2025); "
+        "[SUN] <b>Modern:</b> NASA GISS (1880-2025); "
         "   <i>Method: Instrumental (thermometers, satellites)</i><br>"
-        "⏱️ Time Span: 540 Ma to 2100 CE<br>"
-        "📏 Baseline: Pre-industrial (1850-1900)<br>"
+        "* Time Span: 540 Ma to 2100 CE<br>"
+        "[CHART] Baseline: Pre-industrial (1850-1900)<br>"
         "<br>"
-#        "ℹ️ <b>Overlapping curves show method differences</b> "
+#        "[INFO] <b>Overlapping curves show method differences</b> "
 #        "   Scientific uncertainty is normal and expected!<br>"
 #        "<br>"
-        "💡 <b>Proxy Handoffs:</b> Each dataset ends where higher-resolution methods begin<br>"
+        "[*] <b>Proxy Handoffs:</b> Each dataset ends where higher-resolution methods begin<br>"
 #        "<br>"
 
-#        "• Phanerozoic 'double hump' (540 Ma)<br>"
-#        "• Mesozoic greenhouse (252-66 Ma)<br>"
-#        "• Ice age cycles (last 2.6 Ma)<br>"
-#        "• Holocene stability (last 12,000 years)<br>"
+#        "* Phanerozoic 'double hump' (540 Ma)<br>"
+#        "* Mesozoic greenhouse (252-66 Ma)<br>"
+#        "* Ice age cycles (last 2.6 Ma)<br>"
+#        "* Holocene stability (last 12,000 years)<br>"
 #        "<br>"
-        "💡 <b>Key Insight:</b> The Holocene's stable climate "
+        "[*] <b>Key Insight:</b> The Holocene's stable climate "
         "enabled human civilization to flourish.<br>"
-        "🔍 <b>Use zoom to explore details!</b>"
+        "[ZOOM] <b>Use zoom to explore details!</b>"
     )    
 
     fig.add_annotation(
@@ -1964,7 +1954,7 @@ def create_paleoclimate_visualization():
     )   
 
     fig.update_yaxes(
-        title_text="Temperature Anomaly (°C, relative to present)",
+        title_text="Temperature Anomaly ( degC, relative to present)",
         secondary_y=False,
         showgrid=True,
         gridwidth=1,
@@ -2018,13 +2008,13 @@ def main():
     fig = create_paleoclimate_visualization()
     
     if fig:
-        print("✓ Visualization created successfully")
+        print("[OK] Visualization created successfully")
         # Offer to save
         save_plot(fig, "paleoclimate_540Ma_to_present")        
         print("Opening in browser...")
         fig.show()
     else:
-        print("✗ Could not create visualization - check if data is cached")
+        print("[FAIL] Could not create visualization - check if data is cached")
         print(f"Expected data file: {LR04_CACHE}")
 
 if __name__ == '__main__':

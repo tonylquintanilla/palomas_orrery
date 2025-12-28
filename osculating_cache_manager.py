@@ -158,13 +158,13 @@ def save_cache(cache):
     Process:
         1. Write to temp file
         2. Validate temp file
-        3. Rotate: backup → backup_old
-        4. Copy: current → backup
-        5. Move: temp → current
+        3. Rotate: backup [OK] backup_old
+        4. Copy: current [OK] backup
+        5. Move: temp [OK] current
     
     Recovery:
-        - If current corrupted → use backup
-        - If backup corrupted → use backup_old
+        - If current corrupted [OK] use backup
+        - If backup corrupted [OK] use backup_old
     
     Parameters:
         cache (dict): Cache data to save
@@ -181,24 +181,24 @@ def save_cache(cache):
         with open(TEMP_FILE, 'r') as f:
             json.load(f)  # Will raise exception if invalid JSON
         
-        # Step 3: Rotate backups: backup → backup_old
+        # Step 3: Rotate backups: backup [OK] backup_old
         if BACKUP_FILE.exists():
             if BACKUP_OLD.exists():
                 BACKUP_OLD.unlink()  # Remove oldest backup
             shutil.copy2(BACKUP_FILE, BACKUP_OLD)
-            print(f"  Rotated: {BACKUP_FILE.name} → {BACKUP_OLD.name}")
+            print(f"  Rotated: {BACKUP_FILE.name} [OK] {BACKUP_OLD.name}")
         
-        # Step 4: Current → backup
+        # Step 4: Current [OK] backup
         if CACHE_FILE.exists():
             shutil.copy2(CACHE_FILE, BACKUP_FILE)
-            print(f"  Backed up: {CACHE_FILE.name} → {BACKUP_FILE.name}")
+            print(f"  Backed up: {CACHE_FILE.name} [OK] {BACKUP_FILE.name}")
         
-        # Step 5: Temp → current (atomic on most systems)
+        # Step 5: Temp [OK] current (atomic on most systems)
         TEMP_FILE.replace(CACHE_FILE)
-        print(f"✓ Saved: {CACHE_FILE.name} (2-gen protected)")
+        print(f"[OK] Saved: {CACHE_FILE.name} (2-gen protected)")
         
     except Exception as e:
-        print(f"✗ Save failed: {e}")
+        print(f"[FAIL] Save failed: {e}")
         
         # Clean up temp file
         if TEMP_FILE.exists():
@@ -208,10 +208,10 @@ def save_cache(cache):
         if not CACHE_FILE.exists():
             if BACKUP_FILE.exists():
                 shutil.copy2(BACKUP_FILE, CACHE_FILE)
-                print(f"✓ Recovered from {BACKUP_FILE.name}")
+                print(f"[OK] Recovered from {BACKUP_FILE.name}")
             elif BACKUP_OLD.exists():
                 shutil.copy2(BACKUP_OLD, CACHE_FILE)
-                print(f"✓ Recovered from {BACKUP_OLD.name}")
+                print(f"[OK] Recovered from {BACKUP_OLD.name}")
         
         raise
 
@@ -235,36 +235,36 @@ def load_cache():
             with open(CACHE_FILE, 'r') as f:
                 return json.load(f)
         except Exception as e:
-            print(f"⚠ Main cache corrupted: {e}")
+            print(f"[WARN] Main cache corrupted: {e}")
     
     # Try backup
     if BACKUP_FILE.exists():
         try:
             with open(BACKUP_FILE, 'r') as f:
                 cache = json.load(f)
-            print(f"✓ Recovered from {BACKUP_FILE.name}")
+            print(f"[OK] Recovered from {BACKUP_FILE.name}")
             
             # Restore to main file
             shutil.copy2(BACKUP_FILE, CACHE_FILE)
             return cache
         except Exception as e:
-            print(f"⚠ Backup also corrupted: {e}")
+            print(f"[WARN] Backup also corrupted: {e}")
     
     # Try old backup
     if BACKUP_OLD.exists():
         try:
             with open(BACKUP_OLD, 'r') as f:
                 cache = json.load(f)
-            print(f"✓ Recovered from {BACKUP_OLD.name}")
+            print(f"[OK] Recovered from {BACKUP_OLD.name}")
             
             # Restore to main file
             shutil.copy2(BACKUP_OLD, CACHE_FILE)
             return cache
         except Exception as e:
-            print(f"✗ All backups corrupted: {e}")
+            print(f"[FAIL] All backups corrupted: {e}")
     
     # All failed - return empty cache
-    print("⚠ No valid cache found - starting fresh")
+    print("[WARN] No valid cache found - starting fresh")
     return create_empty_cache()
 
 def create_empty_cache():
@@ -314,7 +314,7 @@ def check_cache_status(obj_name, center_body=None):
             - age_days (int or None)
             - recommended_days (int)
             - is_fresh (bool)
-            - status_text (str): "✓ Fresh" or "⚠ Update recommended" or "Not in cache"
+            - status_text (str): "[OK] Fresh" or "[WARN] Update recommended" or "Not in cache"
     """
 
     cache = load_cache()
@@ -346,7 +346,7 @@ def check_cache_status(obj_name, center_body=None):
         }
     
     is_fresh = age_days < recommended_days
-    status_text = "✓ Fresh" if is_fresh else "⚠ Update recommended"
+    status_text = "[OK] Fresh" if is_fresh else "[WARN] Update recommended"
     
     return {
         'exists': True,
@@ -396,7 +396,7 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         # Import here to avoid circular dependency
         from orbit_data_manager import query_horizons_elements
         
-        print(f"⟳ Fetching osculating elements for {obj_name} from JPL Horizons...", flush=True)
+        print(f"[...] Fetching osculating elements for {obj_name} from JPL Horizons...", flush=True)
         if horizons_id and horizons_id != obj_name:
             print(f"   Using Horizons ID: {query_id} (id_type: {id_type})", flush=True)
         
@@ -436,11 +436,11 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         if 'arc_days' in result:
             cache_entry['metadata']['arc_days'] = result['arc_days']
         
-        print(f"✓ Fetched elements (solution date: {cache_entry['metadata']['solution_date']})", flush=True)
+        print(f"[OK] Fetched elements (solution date: {cache_entry['metadata']['solution_date']})", flush=True)
         return cache_entry
         
     except Exception as e:
-        print(f"✗ Failed to fetch elements for {obj_name}: {e}")
+        print(f"[FAIL] Failed to fetch elements for {obj_name}: {e}")
         return None
 
 # ============================================================================
@@ -604,7 +604,7 @@ def get_elements_with_prompt(obj_name, horizons_id=None, id_type='smallbody', pl
             return fresh_entry['elements']
         else:
             # Fetch failed - fall back
-            print(f"⚠ Fetch failed - falling back to cached/manual elements")
+            print(f"[WARN] Fetch failed - falling back to cached/manual elements")
             return get_fallback_elements(obj_name)
         
     else:  # User clicked NO
@@ -629,12 +629,12 @@ def get_fallback_elements(obj_name):
     if obj_name in cache and not obj_name.startswith('_'):
         age = calculate_age_days(cache[obj_name])
         age_str = format_age_string(age) if age else "unknown age"
-        print(f"✓ Using cached elements ({age_str})")
+        print(f"[OK] Using cached elements ({age_str})")
         return cache[obj_name]['elements']
     
     # Try manual dictionary
     if obj_name in FALLBACK_ELEMENTS:
-        print(f"⚠ Using manual dictionary backup for {obj_name}")
+        print(f"[WARN] Using manual dictionary backup for {obj_name}")
         return FALLBACK_ELEMENTS[obj_name]
     
     # Nothing available
@@ -709,7 +709,7 @@ if __name__ == '__main__':
     ]
     for obj, expected, reason in test_cases:
         actual = get_refresh_interval(obj)
-        status = "✓" if actual == expected else "✗"
+        status = "[OK]" if actual == expected else "[FAIL]"
         print(f"  {status} {obj}: {actual}d (expected {expected}d via {reason})")
     print()
     

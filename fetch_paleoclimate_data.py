@@ -36,7 +36,7 @@ def ensure_data_dir():
 def fetch_lr04_data():
     """
     Fetch LR04 benthic stack data (5.3 Ma - present)
-    Benthic δ18O is proxy for ice volume and deep ocean temperature
+    Benthic delta18O is proxy for ice volume and deep ocean temperature
     """
     print("\n" + "="*70)
     print("FETCHING LR04 BENTHIC STACK")
@@ -78,7 +78,7 @@ def fetch_lr04_data():
                 'doi': '10.1029/2004PA001071',
                 'citation': 'Lisiecki, L.E. and M.E. Raymo. 2005. A Pliocene-Pleistocene stack of 57 globally distributed benthic D18O records. Paleoceanography, 20, PA1003.',
                 'data_url': LR04_URL,
-                'description': 'LR04 benthic δ18O stack - proxy for ice volume and deep ocean temperature',
+                'description': 'LR04 benthic delta18O stack - proxy for ice volume and deep ocean temperature',
                 'time_range': '5.3 Ma to present',
                 'downloaded': datetime.now().isoformat(),
                 'record_count': len(records)
@@ -90,22 +90,22 @@ def fetch_lr04_data():
         with open(LR04_CACHE, 'w') as f:
             json.dump(cache_data, f, indent=2)
         
-        print(f"✓ Downloaded {len(records):,} records")
-        print(f"✓ Time range: {records[0]['age_ka_bp']:.1f} ka BP to {records[-1]['age_ka_bp']:.1f} ka BP")
-        print(f"✓ Cached to: {LR04_CACHE}")
+        print(f"[OK] Downloaded {len(records):,} records")
+        print(f"[OK] Time range: {records[0]['age_ka_bp']:.1f} ka BP to {records[-1]['age_ka_bp']:.1f} ka BP")
+        print(f"[OK] Cached to: {LR04_CACHE}")
         
         return True
         
     except Exception as e:
-        print(f"✗ Error fetching LR04 data: {e}")
+        print(f"[FAIL] Error fetching LR04 data: {e}")
         return False
 
 def fetch_epica_co2_data():
     """
-    Fetch EPICA Dome C CO₂ data (800 ka - present)
+    Fetch EPICA Dome C CO2 data (800 ka - present)
     """
     print("\n" + "="*70)
-    print("FETCHING EPICA DOME C CO₂ DATA")
+    print("FETCHING EPICA DOME C CO2 DATA")
     print("="*70)
     
     try:
@@ -144,11 +144,11 @@ def fetch_epica_co2_data():
         if records:
             cache_data = {
                 'metadata': {
-                    'source': 'Lüthi et al. (2008)',
+                    'source': 'Luthi et al. (2008)',
                     'doi': '10.1038/nature06949',
-                    'citation': 'Lüthi, D., et al. 2008. High-resolution carbon dioxide concentration record 650,000-800,000 years before present. Nature, Vol. 453, pp. 379-382.',
+                    'citation': 'Luthi, D., et al. 2008. High-resolution carbon dioxide concentration record 650,000-800,000 years before present. Nature, Vol. 453, pp. 379-382.',
                     'data_url': EPICA_CO2_URL,
-                    'description': 'EPICA Dome C ice core 800,000-year CO₂ record',
+                    'description': 'EPICA Dome C ice core 800,000-year CO2 record',
                     'time_range': '800 ka to present',
                     'downloaded': datetime.now().isoformat(),
                     'record_count': len(records)
@@ -159,15 +159,15 @@ def fetch_epica_co2_data():
             with open(EPICA_CO2_CACHE, 'w') as f:
                 json.dump(cache_data, f, indent=2)
             
-            print(f"✓ Downloaded {len(records):,} records")
-            print(f"✓ Cached to: {EPICA_CO2_CACHE}")
+            print(f"[OK] Downloaded {len(records):,} records")
+            print(f"[OK] Cached to: {EPICA_CO2_CACHE}")
             return True
         else:
-            print("✗ No data records found")
+            print("[FAIL] No data records found")
             return False
             
     except Exception as e:
-        print(f"✗ Error fetching EPICA CO₂ data: {e}")
+        print(f"[FAIL] Error fetching EPICA CO2 data: {e}")
         print("  Note: URL may need adjustment or data may require manual download")
         return False
 
@@ -182,20 +182,20 @@ def main():
     
     results = {
         'LR04 Stack': fetch_lr04_data(),
-        'EPICA CO₂': fetch_epica_co2_data()
+        'EPICA CO2': fetch_epica_co2_data()
     }
     
     print("\n" + "="*70)
     print("SUMMARY")
     print("="*70)
     for name, success in results.items():
-        status = "✓ SUCCESS" if success else "✗ FAILED"
+        status = "[OK] SUCCESS" if success else "[FAIL] FAILED"
         print(f"{name}: {status}")
     
     print("\nNext steps:")
     print("1. Check cached files in:", PALEO_DATA_DIR)
     print("2. Manual data may be needed for deep Cenozoic (66 Ma)")
-    print("3. Temperature proxies may need conversion from δ18O")
+    print("3. Temperature proxies may need conversion from delta18O")
 
 if __name__ == '__main__':
     main()

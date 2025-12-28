@@ -23,10 +23,10 @@ def calculate_body_angle(x, y):
         y (float): y-coordinate in AU
         
     Returns:
-        float: Angle in radians (0 to 2π)
+        float: Angle in radians (0 to 2pi)
     """
     angle = np.arctan2(y, x)
-    # Ensure angle is in range [0, 2π]
+    # Ensure angle is in range [0, 2pi]
     if angle < 0:
         angle += 2 * np.pi
     return angle
@@ -256,7 +256,7 @@ def create_hilda_group(center_position=(0, 0, 0)):
     
     # Hildas form three concentrations 120 degrees apart
     # These correspond to stable points in the 3:2 resonance
-    concentration_angles = [0, 2*np.pi/3, 4*np.pi/3]  # 0°, 120°, 240°
+    concentration_angles = [0, 2*np.pi/3, 4*np.pi/3]  # 0 deg, 120 deg, 240 deg
     
     hilda_x = []
     hilda_y = []
@@ -289,7 +289,7 @@ def create_hilda_group(center_position=(0, 0, 0)):
     # Create hover text
     hilda_text = ["Hilda Family: Asteroids in 3:2 resonance with Jupiter at ~3.97 AU.<br>"
                   "Forms distinctive triangular pattern with three main concentrations<br>"
-                  "120° apart. Mostly D-type (dark, reddish) asteroids."] * len(hilda_x)
+                  "120 deg apart. Mostly D-type (dark, reddish) asteroids."] * len(hilda_x)
     hilda_customdata = ['Hilda Family'] * len(hilda_x)
     
     traces = [
@@ -327,7 +327,7 @@ def create_hilda_group(center_position=(0, 0, 0)):
 jupiter_trojans_greeks_info = (
     "***PLOT WITH JUPITER OR MANUAL SCALE AT LEAST 6 AU***\n"
     "10-15 MB PER FRAME FOR HTML.\n\n"
-    "The Jupiter Trojans at the L4 Lagrange point (leading Jupiter by 60°) are traditionally\n"
+    "The Jupiter Trojans at the L4 Lagrange point (leading Jupiter by 60 deg) are traditionally\n"
     "called the 'Greek camp' after Greek heroes from the Iliad. This stable gravitational point\n"
     "at Jupiter's orbital distance (~5.2 AU) traps thousands of asteroids in a cloud formation.\n"
     "The L4 Greeks slightly outnumber the L5 Trojans. Notable members include 588 Achilles,\n"
@@ -381,7 +381,7 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
     
     # Create hover text
     trojan_text = ["Jupiter Trojans (L4 - Greeks): Asteroids trapped at Jupiter's leading<br>"
-                   "Lagrange point (L4), 60° ahead. Called 'Greek camp' after Iliad heroes.<br>"
+                   "Lagrange point (L4), 60 deg ahead. Called 'Greek camp' after Iliad heroes.<br>"
                    "Contains thousands of D-type asteroids, targets of NASA's Lucy mission."] * len(trojan_x)
     trojan_customdata = ['Jupiter Trojans (Greeks - L4)'] * len(trojan_x)
     
@@ -419,7 +419,7 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
 
 jupiter_trojans_trojans_info = (
     "10-15 MB PER FRAME FOR HTML.\n\n"
-    "The Jupiter Trojans at the L5 Lagrange point (trailing Jupiter by 60°) are traditionally\n"
+    "The Jupiter Trojans at the L5 Lagrange point (trailing Jupiter by 60 deg) are traditionally\n"
     "called the 'Trojan camp' after Trojan heroes from the Iliad. This stable gravitational point\n"
     "at Jupiter's orbital distance (~5.2 AU) is slightly less populated than L4. Notable members\n"
     "include 884 Priamus, 1172 Aeneas, and 911 Agamemnon. The L5 camp has about 40% fewer asteroids\n"
@@ -473,7 +473,7 @@ def create_jupiter_trojans_trojans(center_position=(0, 0, 0), jupiter_angle=0):
     
     # Create hover text
     trojan_text = ["Jupiter Trojans (L5 - Trojans): Asteroids trapped at Jupiter's trailing<br>"
-                   "Lagrange point (L5), 60° behind. Called 'Trojan camp' after Iliad heroes.<br>"
+                   "Lagrange point (L5), 60 deg behind. Called 'Trojan camp' after Iliad heroes.<br>"
                    "Slightly less populated than L4, contains D-type asteroids."] * len(trojan_x)
     trojan_customdata = ['Jupiter Trojans (Trojans - L5)'] * len(trojan_x)
     

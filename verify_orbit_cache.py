@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """
-# verify_orbit_cache.py - Safely verify and repair orbit_paths.json
-verify_orbit_cache.py - Safely verify and repair data/orbit_paths.json
+verify_orbit_cache.py - Safely verify and repair orbit_paths.json
 
 This script will:
-# 1. Create a backup of your current orbit_paths.json
-1. Create a backup of your current data/orbit_paths.json
+1. Create a backup of your current orbit_paths.json
 2. Load and validate the file
 3. Report any issues found
 4. Optionally repair corrupted entries
@@ -28,14 +26,13 @@ def create_backup(file_path):
     try:
         shutil.copy2(file_path, backup_name)
         size_mb = os.path.getsize(file_path) / (1024 * 1024)
-        print(f"✓ Created backup: {backup_name} ({size_mb:.1f} MB)")
+        print(f"[OK] Created backup: {backup_name} ({size_mb:.1f} MB)")
         return backup_name
     except Exception as e:
-        print(f"✗ Failed to create backup: {e}")
+        print(f"[FAIL] Failed to create backup: {e}")
         return None
 
-# def verify_orbit_cache(file_path='orbit_paths.json', repair=False):
-def verify_orbit_cache(file_path='data/orbit_paths.json', repair=False):    
+def verify_orbit_cache(file_path='orbit_paths.json', repair=False):
     """Verify the orbit cache file and optionally repair it."""
     
     print(f"\n{'='*60}")
@@ -53,32 +50,32 @@ def verify_orbit_cache(file_path='data/orbit_paths.json', repair=False):
     # Step 2: Check file exists and size
     print("\nStep 2: Checking file...")
     if not os.path.exists(file_path):
-        print(f"✗ File not found: {file_path}")
+        print(f"[FAIL] File not found: {file_path}")
         return
         
     file_size = os.path.getsize(file_path)
     file_size_mb = file_size / (1024 * 1024)
-    print(f"✓ File exists: {file_size:,} bytes ({file_size_mb:.1f} MB)")
+    print(f"[OK] File exists: {file_size:,} bytes ({file_size_mb:.1f} MB)")
     
     # Step 3: Load and parse JSON
     print("\nStep 3: Loading JSON...")
     try:
         with open(file_path, 'r') as f:
             data = json.load(f)
-        print(f"✓ JSON is valid")
+        print(f"[OK] JSON is valid")
     except json.JSONDecodeError as e:
-        print(f"✗ JSON is corrupted: {e}")
+        print(f"[FAIL] JSON is corrupted: {e}")
         print(f"\nFile appears to be corrupted beyond simple repair.")
         print(f"You should restore from backup: {backup_file}")
         return
     except Exception as e:
-        print(f"✗ Error reading file: {e}")
+        print(f"[FAIL] Error reading file: {e}")
         return
     
     # Step 4: Validate structure
     print("\nStep 4: Validating orbit data structure...")
     if not isinstance(data, dict):
-        print(f"✗ Root structure is not a dictionary")
+        print(f"[FAIL] Root structure is not a dictionary")
         return
         
     total_entries = len(data)
@@ -164,7 +161,7 @@ def verify_orbit_cache(file_path='data/orbit_paths.json', repair=False):
             with open(repair_file, 'w') as f:
                 json.dump(data, f)
             
-            print(f"✓ Repaired data saved to: {repair_file}")
+            print(f"[OK] Repaired data saved to: {repair_file}")
             print(f"  Remaining entries: {len(data)}")
             print(f"\nTo use the repaired file:")
             print(f"  1. Verify the repaired file looks correct")

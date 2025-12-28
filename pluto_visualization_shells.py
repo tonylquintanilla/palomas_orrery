@@ -309,7 +309,7 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
 pluto_haze_layer_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
             "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
-            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
             "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
             "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
             "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
@@ -327,16 +327,16 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
         'name': 'Haze Layer',
         'description': (
             "Haze Layer: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
-            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
             "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
             "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
             "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
             "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature <br>" 
             "inversion, possibly caused by the presence of methane.<br>" 
-            "* Composition and Formation: Pluto's atmosphere is primarily nitrogen (N₂) with smaller amounts of methane (CH₄) and <br>" 
+            "* Composition and Formation: Pluto's atmosphere is primarily nitrogen (N2) with smaller amounts of methane (CH4) and <br>" 
             "  carbon monoxide (CO). The haze is thought to form when ultraviolet sunlight and high-energy radiation (like cosmic <br>" 
             "  rays) break apart methane molecules in the upper atmosphere. This breakdown leads to the formation of more complex <br>" 
-            "  hydrocarbon gases, such as acetylene (C₂H₂) and ethylene (C₂H₄), as well as heavier compounds called tholins. As these <br>" 
+            "  hydrocarbon gases, such as acetylene (C2H2) and ethylene (C2H4), as well as heavier compounds called tholins. As these <br>" 
             "  hydrocarbons drift to the lower, colder parts of the atmosphere, they condense into tiny ice particles, forming the haze. <br>" 
             "  Continued exposure to ultraviolet sunlight then chemically converts these haze particles into the dark, reddish-brown tholins <br>" 
             "  that contribute to the color of Pluto's surface.<br>" 
@@ -352,7 +352,7 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
             "  sticking together (coagulation).<br>" 
             "* Temperature Regulation: By absorbing infrared light, the haze can influence the atmospheric temperature profile, potentially <br>" 
             "  keeping the upper atmosphere cooler than it otherwise would be.<br>" 
-            "* Haze Layers: Within the lower atmosphere, haze layers extend up to about 200 km altitude. This is approximately: ≈0.17 So, <br>" 
+            "* Haze Layers: Within the lower atmosphere, haze layers extend up to about 200 km altitude. This is approximately: ~0.17 So, <br>" 
             "  the distinct haze layers reach about 0.17 Pluto radii above the surface." 
         )
     }
@@ -391,7 +391,7 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
 pluto_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
             "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
-            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
             "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
             "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
             "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
@@ -409,7 +409,7 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
         'name': 'Atmosphere',
         'description': (
             "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
-            "of nitrogen (N₂), with smaller amounts of methane (CH₄) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
             "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
             "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
             "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
@@ -420,11 +420,11 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
             "(approximately 1188 km):<br>" 
             "* Significant Atmosphere: The atmosphere, composed primarily of nitrogen with traces of methane and carbon monoxide, has <br>" 
             "  been detected extending up to 1700 km above the surface (the exobase).<br>" 
-            "* In Pluto radii: To express this as a fraction of Pluto's radius: ≈1.43.<br>" 
+            "* In Pluto radii: To express this as a fraction of Pluto's radius: ~1.43.<br>" 
             "* Outer Limits: Some research suggests that the outer, most tenuous parts of Pluto's atmosphere might extend even further, <br>" 
             "  perhaps to several times Pluto's radius, gradually merging with the vacuum of space. One New Horizons science brief even <br>" 
             "  mentioned an outer limit potentially as far as seven times Pluto's radius, although this is very ill-defined.<br>" 
-            "* Haze Layers: Within the lower atmosphere, haze layers extend up to about 200 km altitude. This is approximately: ≈0.17 So, <br>" 
+            "* Haze Layers: Within the lower atmosphere, haze layers extend up to about 200 km altitude. This is approximately: ~0.17 So, <br>" 
             "  the distinct haze layers reach about 0.17 Pluto radii above the surface.<br>" 
             "In summary, while the bulk of Pluto's atmosphere is very thin, its outer reaches are quite extended. For a general extent, <br>" 
             "considering the exobase, the atmosphere reaches about 0.43 Pluto radii above the surface, or 1.43 Pluto radii from the center. <br>" 

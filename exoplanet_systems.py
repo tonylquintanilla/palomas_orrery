@@ -56,7 +56,7 @@ TRAPPIST1_SYSTEM = {
         
         # Position (J2000.0 epoch)
         'ra': 346.62201667,  # degrees (23h 06m 29.28s)
-        'dec': -5.04138889,   # degrees (-05° 02' 29.0")
+        'dec': -5.04138889,   # degrees (-05 deg 02' 29.0")
         'distance_pc': 12.43,
         
         # Proper motion (for animation across time)
@@ -66,11 +66,11 @@ TRAPPIST1_SYSTEM = {
         
         # Stellar properties
         'spectral_type': 'M8V',
-        'mass_solar': 0.0898,      # ±0.0023 solar masses
-        'radius_solar': 0.1192,     # ±0.0013 solar radii
-        'teff_k': 2566,             # ±26 K
+        'mass_solar': 0.0898,      # +/-0.0023 solar masses
+        'radius_solar': 0.1192,     # +/-0.0013 solar radii
+        'teff_k': 2566,             # +/-26 K
         'luminosity_solar': 0.000525,
-        'age_gyr': 7.6,             # ±2.2 Gyr
+        'age_gyr': 7.6,             # +/-2.2 Gyr
         
         # Habitable zone boundaries (conservative estimate)
         'habitable_zone_inner_au': 0.025,
@@ -88,17 +88,17 @@ TRAPPIST1_SYSTEM = {
             'letter': 'b',
             
             # Orbital elements
-            'period_days': 1.51087081,       # ±0.00000060
-            'semi_major_axis_au': 0.01154,   # ±0.00004
-            'eccentricity': 0.00622,         # ±0.00304
-            'inclination_deg': 89.728,       # ±0.087 (edge-on, transiting)
+            'period_days': 1.51087081,       # +/-0.00000060
+            'semi_major_axis_au': 0.01154,   # +/-0.00004
+            'eccentricity': 0.00622,         # +/-0.00304
+            'inclination_deg': 89.728,       # +/-0.087 (edge-on, transiting)
             'omega_deg': 0.0,                # Not well constrained, assume 0
             'Omega_deg': 0.0,                # Sky-plane orientation
             'epoch': TRAPPIST1_DISCOVERY_EPOCH,
             
             # Physical properties
-            'mass_earth': 1.374,      # ±0.069
-            'radius_earth': 1.116,    # ±0.014
+            'mass_earth': 1.374,      # +/-0.069
+            'radius_earth': 1.116,    # +/-0.014
             'density_earth': 0.98,    # Relative to Earth
             'equilibrium_temp_k': 400,
             'insolation_earth': 4.25, # Stellar flux relative to Earth
@@ -400,9 +400,9 @@ TOI1338_SYSTEM = {
             'letter': 'b',
             
             # Orbital elements (around binary barycenter)
-            'period_days': 95.196,           # ±0.024
-            'semi_major_axis_au': 0.4607,    # ±0.0058
-            'eccentricity': 0.09,            # ±0.03
+            'period_days': 95.196,           # +/-0.024
+            'semi_major_axis_au': 0.4607,    # +/-0.0058
+            'eccentricity': 0.09,            # +/-0.03
             'inclination_deg': 89.0,         # Nearly edge-on
             'omega_deg': 0.0,                # Not well constrained
             'Omega_deg': 0.0,
@@ -439,7 +439,7 @@ TOI1338_SYSTEM = {
             'letter': 'c',
             
             # Orbital elements (confirmed 2023)
-            'period_days': 215.5,            # ±2.5
+            'period_days': 215.5,            # +/-2.5
             'semi_major_axis_au': 0.76,      # Estimated
             'eccentricity': 0.0,             # Assumed circular
             'inclination_deg': 89.5,         # Assumed similar to b
@@ -474,7 +474,7 @@ TOI1338_SYSTEM = {
 # ============================================================================
 # PROXIMA CENTAURI SYSTEM
 # ============================================================================
-# Discovery: Anglada-Escudé et al. 2016, Nature 536, 437-440
+# Discovery: Anglada-Escude et al. 2016, Nature 536, 437-440
 # Location: 1.30 pc (4.24 ly) - NEAREST star system
 # Spectral type: M5.5Ve red dwarf
 # Notable: Nearest exoplanet, high proper motion, potentially habitable
@@ -502,7 +502,7 @@ PROXIMA_SYSTEM = {
         
         # Position (J2000.0 epoch)
         'ra': 217.42894167,  # degrees (14h 29m 42.95s)
-        'dec': -62.67948333, # degrees (-62° 40' 46.14")
+        'dec': -62.67948333, # degrees (-62 deg 40' 46.14")
         'distance_pc': 1.3012,
         
         # Proper motion (VERY HIGH - nearest star)
@@ -686,4 +686,4 @@ if __name__ == "__main__":
         
         for planet in system['planets']:
             hz_mark = " [HZ]" if planet.get('in_habitable_zone') else ""
-            print(f"    • {planet['name']}: {planet['period_days']:.2f} days{hz_mark}")
+            print(f"    * {planet['name']}: {planet['period_days']:.2f} days{hz_mark}")

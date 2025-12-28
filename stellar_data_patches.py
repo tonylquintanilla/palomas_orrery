@@ -28,7 +28,7 @@ def apply_temperature_patches(data):
             
             if needs_lum:
                 data.loc[mask, 'Luminosity'] = lum
-                print(f"  Patched luminosity for HIP {hip_id}: {lum} L☉")
+                print(f"  Patched luminosity for HIP {hip_id}: {lum} L[SUN]")
             
             # Also patch spectral type if missing
             if 'Spectral_Type' in data.columns and pd.isna(data.loc[mask, 'Spectral_Type'].iloc[0]):

@@ -1348,9 +1348,9 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         None (modifies fig in place)
         
     Examples:
-        - Comet C/2025 V1 closest plotted point to Earth ?? "Closest Plotted (Perigee)"
-        - Asteroid flyby of Mars ?? "Closest Plotted (Periareion)"
-        - Spacecraft encounter with Jupiter ?? "Closest Plotted (Perijove)"
+        - Comet C/2025 V1 closest plotted point to Earth -> "Closest Plotted (Perigee)"
+        - Asteroid flyby of Mars -> "Closest Plotted (Periareion)"
+        - Spacecraft encounter with Jupiter -> "Closest Plotted (Perijove)"
     """
     import numpy as np
     from datetime import datetime
@@ -1450,4 +1450,4 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         )
     )
     
-    print(f"?? Added closest plotted marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)
+    print(f"-> Added closest plotted marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)

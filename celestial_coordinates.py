@@ -26,14 +26,14 @@ def format_ra_dec_string(ra_hours, ra_minutes, ra_seconds,
     # Format RA string (HH:MM:SS.SS)
     ra_string = f"{ra_hours:02d}h {ra_minutes:02d}m {ra_seconds:0{4+precision_ra_sec}.{precision_ra_sec}f}s"
     
-    # Format Dec string (+/-DD° MM' SS.S")
+    # Format Dec string (+/-DD deg MM' SS.S")
     dec_sign = '+' if dec_degrees >= 0 else ''
     if dec_degrees < 0 and dec_arcmin == 0 and dec_arcsec < 1:
         # Handle case where declination is slightly negative but rounds to 0
         dec_sign = '-'
-        dec_string = f"{dec_sign}{abs(dec_degrees):02d}° {dec_arcmin:02d}' {dec_arcsec:0{3+precision_dec_arcsec}.{precision_dec_arcsec}f}\""
+        dec_string = f"{dec_sign}{abs(dec_degrees):02d} deg {dec_arcmin:02d}' {dec_arcsec:0{3+precision_dec_arcsec}.{precision_dec_arcsec}f}\""
     else:
-        dec_string = f"{dec_sign}{dec_degrees:02d}° {abs(dec_arcmin):02d}' {abs(dec_arcsec):0{3+precision_dec_arcsec}.{precision_dec_arcsec}f}\""
+        dec_string = f"{dec_sign}{dec_degrees:02d} deg {abs(dec_arcmin):02d}' {abs(dec_arcsec):0{3+precision_dec_arcsec}.{precision_dec_arcsec}f}\""
     
     return ra_string, dec_string
 
@@ -52,7 +52,7 @@ def format_ra_dec_decimal(ra_decimal_hours, dec_decimal_degrees, precision=6):
     """
     ra_string = f"{ra_decimal_hours:.{precision}f}h"
     dec_sign = '+' if dec_decimal_degrees >= 0 else ''
-    dec_string = f"{dec_sign}{dec_decimal_degrees:.{precision}f}°"
+    dec_string = f"{dec_sign}{dec_decimal_degrees:.{precision}f} deg"
     
     return ra_string, dec_string
 
@@ -80,7 +80,7 @@ def extract_jpl_radec(obj_data):
         
         # Format with high precision since this is from JPL
         ra_string = f"{ra_hours:02d}h {ra_minutes:02d}m {ra_seconds:06.3f}s"
-        dec_string = f"{'+' if dec_degrees >= 0 else ''}{dec_degrees:02d}° {abs(dec_arcmin):02d}' {abs(dec_arcsec):05.2f}\""
+        dec_string = f"{'+' if dec_degrees >= 0 else ''}{dec_degrees:02d} deg {abs(dec_arcmin):02d}' {abs(dec_arcsec):05.2f}\""
         
         return ra_string, dec_string
     
@@ -390,7 +390,7 @@ def get_precision_note(obj_data, obj_name=None):
         obj_name (str): Name of the object (optional but recommended)
         
     Returns:
-        str: Formatted precision string (e.g., "±0.5″" or "±10″")
+        str: Formatted precision string (e.g., "+/-0.5 arcsec" or "+/-10 arcsec")
     """
     
     # 1. Check for actual 3-sigma uncertainties from JPL
@@ -403,17 +403,17 @@ def get_precision_note(obj_data, obj_name=None):
         
         # Format based on magnitude
         if max_sigma < 0.001:
-            return f"±{max_sigma:.4f}″"
+            return f"+/-{max_sigma:.4f} arcsec"
         elif max_sigma < 0.01:
-            return f"±{max_sigma:.3f}″"
+            return f"+/-{max_sigma:.3f} arcsec"
         elif max_sigma < 0.1:
-            return f"±{max_sigma:.2f}″"
+            return f"+/-{max_sigma:.2f} arcsec"
         elif max_sigma < 1:
-            return f"±{max_sigma:.2f}″"
+            return f"+/-{max_sigma:.2f} arcsec"
         elif max_sigma < 10:
-            return f"±{max_sigma:.1f}″"
+            return f"+/-{max_sigma:.1f} arcsec"
         else:
-            return f"±{max_sigma:.0f}″"
+            return f"+/-{max_sigma:.0f} arcsec"
     
     # 2. Check if this is a known major body
     if obj_name and obj_name in MAJOR_BODY_UNCERTAINTIES:
@@ -421,34 +421,34 @@ def get_precision_note(obj_data, obj_name=None):
         
         # Format based on magnitude
         if uncertainty < 0.001:
-            return f"±{uncertainty:.4f}″"
+            return f"+/-{uncertainty:.4f} arcsec"
         elif uncertainty < 0.01:
-            return f"±{uncertainty:.3f}″"
+            return f"+/-{uncertainty:.3f} arcsec"
         elif uncertainty < 0.1:
-            return f"±{uncertainty:.2f}″"
+            return f"+/-{uncertainty:.2f} arcsec"
         elif uncertainty < 1:
-            return f"±{uncertainty:.1f}″"
+            return f"+/-{uncertainty:.1f} arcsec"
         else:
-            return f"±{uncertainty:.0f}″"
+            return f"+/-{uncertainty:.0f} arcsec"
     
     # 3. Fallback to type-based estimates
     obj_type = obj_data.get('object_type', 'unknown')
     
     if obj_type == 'satellite':
-        return "±0.1″"  # Most moons are well-tracked
+        return "+/-0.1 arcsec"  # Most moons are well-tracked
     elif obj_type == 'orbital':
         # Check if it might be an asteroid/comet by name pattern
         if obj_name:
             # Common patterns for minor bodies
             if any(char.isdigit() for char in obj_name[:4]):  # Starts with number (e.g., "2023 FY")
-                return "±10″"  # New discovery uncertainty
+                return "+/-10 arcsec"  # New discovery uncertainty
             elif '/' in obj_name:  # Comet designation (e.g., "C/2023 A1")
-                return "±5″"
-        return "±1″"  # Default for established orbital bodies
+                return "+/-5 arcsec"
+        return "+/-1 arcsec"  # Default for established orbital bodies
     elif obj_type == 'trajectory':
-        return "±5″"  # Spacecraft, comets
+        return "+/-5 arcsec"  # Spacecraft, comets
     else:
-        return "±10″"  # Unknown/other
+        return "+/-10 arcsec"  # Unknown/other
 
 
 def format_radec_hover_component(obj_data, obj_name=None, compact=False):

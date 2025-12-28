@@ -275,7 +275,7 @@ class PlotDataReportWidget(ttk.Frame):
                 lum_extreme_high = (lum_array > 100000).sum()
                 
                 if lum_negative > 0:
-                    anomalies.append(f"  Warning: {lum_negative} stars with L ≤ 0 (impossible - calculation errors)")
+                    anomalies.append(f"  Warning: {lum_negative} stars with L <= 0 (impossible - calculation errors)")
                 if lum_extreme_low > 0:
                     anomalies.append(f"  Warning: {lum_extreme_low} stars with L < 0.00001 Lsun (very faint white dwarfs or errors)")
                 if lum_extreme_high > 0:
@@ -380,7 +380,7 @@ class PlotDataReportWidget(ttk.Frame):
                 object_types = combined_df[type_column].value_counts()
                 report_lines.append(f"\nFound {len(object_types)} unique object types")
                 for obj_type, count in object_types.head(5).items():
-                    report_lines.append(f"  • {obj_type}: {count}")
+                    report_lines.append(f"  * {obj_type}: {count}")
         else:
             report_lines.append("\n  Object type information not available in dataset")
             if type_column:
@@ -538,9 +538,9 @@ class PlotDataReportWidget(ttk.Frame):
                 self.report_display.insert(tk.END, line + '\n', 'subheader')
             elif "WARNING" in line or "CRITICAL" in line:
                 self.report_display.insert(tk.END, line + '\n', 'warning')
-            elif line.startswith("✓") or "OK" in line:
+            elif line.startswith("[OK]") or "OK" in line:
                 self.report_display.insert(tk.END, line + '\n', 'success')
-            elif line.startswith("→"):
+            elif line.startswith("[OK]"):
                 self.report_display.insert(tk.END, line + '\n', 'info')
             else:
                 self.report_display.insert(tk.END, line + '\n')

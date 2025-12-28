@@ -51,10 +51,10 @@ SATURN_MOONS = ['Pan', 'Daphnis', 'Prometheus', 'Pandora', 'Mimas', 'Enceladus',
 URANUS_MOONS = ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon', 'Portia', 'Mab'] 
 
 # Neptune moons for osculating-only dual orbit system
-# Note: Triton is retrograde (i~157°), Nereid highly eccentric (e~0.75) - both work with standard Keplerian
+# Note: Triton is retrograde (i~157 deg), Nereid highly eccentric (e~0.75) - both work with standard Keplerian
 NEPTUNE_MOONS = ['Triton', 'Nereid', 'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus']
 
-# Pluto moons - osculating-only display (pole RA=132.99° far from ecliptic ~270°)
+# Pluto moons - osculating-only display (pole RA=132.99 deg far from ecliptic ~270 deg)
 # Note: When "Pluto-Charon Barycenter" is center, Charon and Pluto both orbit the barycenter
 PLUTO_MOONS = ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
 
@@ -84,8 +84,8 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
         return (
             "<br><br><i>Osculating orbit 'kisses' actual position at epoch,<br>"
             "then diverges as perturbations accumulate from:<br>"
-            "• Gravitational tugs from other planets<br>"
-            "• Solar oblateness (equatorial bulge effect)<br>"
+            "* Gravitational tugs from other planets<br>"
+            "* Solar oblateness (equatorial bulge effect)<br>"
             "<br>It fits only the present position, not past or future positions.</i>"
         )
     
@@ -94,66 +94,66 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
         'Mercury': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Venus and Jupiter gravitational tugs<br>"
-            "• Relativistic precession (+43″/century)<br>"
+            "* Venus and Jupiter gravitational tugs<br>"
+            "* Relativistic precession (+43 arcsec/century)<br>"
             "  - Einstein's General Relativity effect<br>"
-            "• High eccentricity amplifies perturbations</i>"
+            "* High eccentricity amplifies perturbations</i>"
         ),
         'Venus': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Earth and Jupiter gravitational tugs<br>"
-            "• Nearly circular orbit (e ≈ 0.007)<br>"
-            "• Most stable inner planet orbit</i>"
+            "* Earth and Jupiter gravitational tugs<br>"
+            "* Nearly circular orbit (e ~ 0.007)<br>"
+            "* Most stable inner planet orbit</i>"
         ),
         'Earth': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Moon's gravitational influence<br>"
-            "• Jupiter and Venus gravitational tugs<br>"
-            "• Axial precession (25,772 year cycle)</i>"
+            "* Moon's gravitational influence<br>"
+            "* Jupiter and Venus gravitational tugs<br>"
+            "* Axial precession (25,772 year cycle)</i>"
         ),
         'Mars': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Jupiter gravitational tugs (largest)<br>"
-            "• Earth and Venus effects<br>"
-            "• Eccentricity varies 0.000-0.140 over ~2 Myr</i>"
+            "* Jupiter gravitational tugs (largest)<br>"
+            "* Earth and Venus effects<br>"
+            "* Eccentricity varies 0.000-0.140 over ~2 Myr</i>"
         ),
         'Jupiter': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Saturn gravitational interaction<br>"
-            "• Great Inequality (900-year cycle)<br>"
-            "• Dominates inner solar system dynamics</i>"
+            "* Saturn gravitational interaction<br>"
+            "* Great Inequality (900-year cycle)<br>"
+            "* Dominates inner solar system dynamics</i>"
         ),
         'Saturn': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Jupiter gravitational interaction<br>"
-            "• Great Inequality (900-year cycle)<br>"
-            "• 5:2 resonance with Jupiter</i>"
+            "* Jupiter gravitational interaction<br>"
+            "* Great Inequality (900-year cycle)<br>"
+            "* 5:2 resonance with Jupiter</i>"
         ),
         'Uranus': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Jupiter and Saturn gravitational tugs<br>"
-            "• Neptune interaction<br>"
-            "• Extreme axial tilt (98°)</i>"
+            "* Jupiter and Saturn gravitational tugs<br>"
+            "* Neptune interaction<br>"
+            "* Extreme axial tilt (98 deg)</i>"
         ),
         'Neptune': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Jupiter and Saturn gravitational tugs<br>"
-            "• Uranus interaction<br>"
-            "• 3:2 resonance captures Pluto</i>"
+            "* Jupiter and Saturn gravitational tugs<br>"
+            "* Uranus interaction<br>"
+            "* 3:2 resonance captures Pluto</i>"
         ),
         'Pluto': (
             "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
             "Major perturbations from:<br>"
-            "• Neptune 3:2 mean motion resonance<br>"
-            "• High eccentricity (e ≈ 0.25)<br>"
-            "• High inclination (i ≈ 17°)</i>"
+            "* Neptune 3:2 mean motion resonance<br>"
+            "* High eccentricity (e ~ 0.25)<br>"
+            "* High inclination (i ~ 17 deg)</i>"
         ),
     }
     
@@ -236,7 +236,7 @@ def calculate_jupiter_satellite_elements(date, satellite_name):
         satellite_name: Name of Jupiter moon
         
     Returns:
-        dict: Orbital elements with time-varying Ω and ω
+        dict: Orbital elements with time-varying Omega and omega
     """
     from datetime import datetime
     
@@ -665,7 +665,7 @@ def debug_planet_transformation(planet_name):
         ra_pole = np.radians(pole['ra'])
         dec_pole = np.radians(pole['dec'])
         
-        print(f"\nPole direction: RA = {pole['ra']}°, Dec = {pole['dec']}°", flush=True)
+        print(f"\nPole direction: RA = {pole['ra']} deg, Dec = {pole['dec']} deg", flush=True)
         
         # Calculate pole vector
         sin_dec = np.sin(dec_pole)
@@ -711,7 +711,7 @@ def debug_planet_transformation(planet_name):
             dot_product = np.dot(simple_z, complex_z)
             angle = np.arccos(min(1, max(-1, dot_product))) * 180 / np.pi
             
-            print(f"\nAngle between simple and complex transformations: {angle:.2f}°", flush=True)
+            print(f"\nAngle between simple and complex transformations: {angle:.2f} deg", flush=True)
         else:
             print("Cannot calculate node vector (pole is directly aligned with Z-axis)", flush=True)
 
@@ -757,9 +757,9 @@ def debug_mars_moons(satellites_data, parent_planets):          # test function 
                                       np.sin(i_rad) * np.sin(mars_tilt)) * 180/np.pi
             
             print(f"\n{moon}:", flush=True)
-            print(f"  Stated inclination: {i}°", flush=True)
-            print(f"  If relative to Mars' equator, inclination to ecliptic would be ~{i_to_ecliptic:.2f}°", flush=True)
-            print(f"  If relative to ecliptic, inclination to Mars' equator would be ~{i_to_equator:.2f}°", flush=True)
+            print(f"  Stated inclination: {i} deg", flush=True)
+            print(f"  If relative to Mars' equator, inclination to ecliptic would be ~{i_to_ecliptic:.2f} deg", flush=True)
+            print(f"  If relative to ecliptic, inclination to Mars' equator would be ~{i_to_equator:.2f} deg", flush=True)
 
 def compare_transformation_methods(fig, satellites_data, parent_planets):       # test function only
     """Plot orbits with different transformation methods for comparison"""
@@ -926,10 +926,10 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
     This is DIFFERENT from analytical elements which are in Jupiter equatorial frame.
     
     Pattern follows Mars moons:
-    - Analytical: Parent equatorial → ecliptic (needs rotation)
+    - Analytical: Parent equatorial [OK] ecliptic (needs rotation)
     - Osculating: Already in ecliptic (NO rotation!)
     
-    Special case: Thebe shows anomalous behavior (i_osc ≈ i_analytical)
+    Special case: Thebe shows anomalous behavior (i_osc ~ i_analytical)
     
     Parameters:
         fig: Plotly figure to add trace to
@@ -971,14 +971,14 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         if satellite_name in cache:
             elements = cache[satellite_name]['elements']
             epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
-            print(f"  ✓ Using cached osculating elements (epoch: {epoch})", flush=True)
+            print(f"  [OK] Using cached osculating elements (epoch: {epoch})", flush=True)
         elif satellite_name in planetary_params:
             # Fallback to hardcoded analytical elements
             elements = planetary_params[satellite_name]
             epoch = 'analytical'
-            print(f"  ⚠ Using fallback analytical elements from planetary_params", flush=True)
+            print(f"  [WARN] Using fallback analytical elements from planetary_params", flush=True)
         else:
-            print(f"  ⚠ No elements available for {satellite_name}, skipping orbit plot", flush=True)
+            print(f"  [WARN] No elements available for {satellite_name}, skipping orbit plot", flush=True)
             return fig
 
         # Extract elements
@@ -990,7 +990,7 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         epoch = elements.get('epoch', 'unknown')
        
         print(f"\nPlotting osculating orbit for {satellite_name}", flush=True)
-        print(f"  Inclination: {i:.4f}° (ecliptic frame)", flush=True)
+        print(f"  Inclination: {i:.4f} deg (ecliptic frame)", flush=True)
         print(f"  Epoch: {epoch}", flush=True)
         
         # Generate orbit points
@@ -1007,16 +1007,16 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         Omega_rad = np.radians(Omega)
         
         # CRITICAL: Osculating elements rotation sequence
-        # Different from analytical! (ω, i, Ω vs Ω, i, ω)
+        # Different from analytical! (omega, i, Omega vs Omega, i, omega)
         # This is the "inside-out" sequence
         
-        # 1. Argument of periapsis (ω) around z-axis
+        # 1. Argument of periapsis (omega) around z-axis
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
         
         # 2. Inclination (i) around x-axis
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
         
-        # 3. Longitude of ascending node (Ω) around z-axis
+        # 3. Longitude of ascending node (Omega) around z-axis
         x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
         
         # CRITICAL: NO Jupiter rotation!
@@ -1025,7 +1025,7 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         
         # Special case for Thebe (anomalous behavior)
         if satellite_name == 'Thebe':
-            # Thebe's osculating i ≈ 1.18° suggests Jupiter equatorial frame
+            # Thebe's osculating i ~ 1.18 deg suggests Jupiter equatorial frame
             # Apply Jupiter rotation like analytical orbit
             jupiter_tilt = np.radians(3.13)
             # x_final, y_final, z_final = rotate_points(x_final, y_final, z_final, jupiter_tilt, 'y')
@@ -1038,10 +1038,10 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             "from JPL Horizons at specific epoch.<br>"
             "Shows exact orbital state at epoch time.<br>"
             "<br>Incorporates all physical effects:<br>"
-            "• Jupiter equatorial bulge gravitational field (largest effect)<br>"
-            "• Solar perturbations<br>"
-            "• Other Galilean moon perturbations<br>"
-            "• Tidal effects<br>"
+            "* Jupiter equatorial bulge gravitational field (largest effect)<br>"
+            "* Solar perturbations<br>"
+            "* Other Galilean moon perturbations<br>"
+            "* Tidal effects<br>"
             "<br>Reference frame: Ecliptic J2000.0<br>"
             "No Jupiter rotation applied</i>"
         )
@@ -1052,7 +1052,7 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             f"Epoch: {epoch}<br>"
             f"a={a:.6f} AU<br>"
             f"e={e:.6f}<br>"
-            f"i={i:.4f}° (ecliptic)"
+            f"i={i:.4f} deg (ecliptic)"
             f"{osculating_note}"
         )
         
@@ -1070,7 +1070,7 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             showlegend=True
         ))
         
-        print(f"  ✓ Osculating orbit plotted (ecliptic frame, no Jupiter rotation)", flush=True)
+        print(f"  [OK] Osculating orbit plotted (ecliptic frame, no Jupiter rotation)", flush=True)
         
         return fig
         
@@ -1119,11 +1119,11 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         
         if satellite_name in cache:
             elements = cache[satellite_name]['elements']
-            print(f"  ✓ Using cached osculating elements", flush=True)
+            print(f"  [OK] Using cached osculating elements", flush=True)
         elif satellite_name == 'Daphnis':
             # Daphnis special case - no ephemeris after 2018-01-17
-            print(f"  ⚠ Daphnis: JPL ephemeris ends 2018-01-17 (Cassini mission end)", flush=True)
-            print(f"  ⚠ No current osculating elements available", flush=True)
+            print(f"  [WARN] Daphnis: JPL ephemeris ends 2018-01-17 (Cassini mission end)", flush=True)
+            print(f"  [WARN] No current osculating elements available", flush=True)
             
             # Add informational marker at approximate Keeler Gap location
             daphnis_a = 0.0009124  # Approximate semi-major axis in AU
@@ -1132,9 +1132,9 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
             daphnis_info = (
                 f"<b>Daphnis (S/2005 S1)</b><br>"
                 f"Keeler Gap moon - ~8 km diameter<br>"
-                f"a ≈ 136,500 km (0.000912 AU)<br>"
+                f"a ~ 136,500 km (0.000912 AU)<br>"
                 f"Period: ~0.594 days<br>"
-                f"<br><i>⚠ JPL ephemeris limited to 2018-01-17<br>"
+                f"<br><i>[WARN] JPL ephemeris limited to 2018-01-17<br>"
                 f"(Cassini mission end). Current orbital<br>"
                 f"elements unavailable. Discovered 2005.</i>"
             )
@@ -1150,7 +1150,7 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
                 hovertemplate='%{text}<extra></extra>',
                 showlegend=True
             ))
-            print(f"  ✓ Added Daphnis informational marker", flush=True)
+            print(f"  [OK] Added Daphnis informational marker", flush=True)
             return fig
         else:
             print(f"  Warning: No osculating elements in cache for {satellite_name}", flush=True)
@@ -1163,7 +1163,7 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         Omega = elements.get('Omega', 0)
         epoch = elements.get('epoch', 'unknown')
        
-        print(f"  Plotting osculating: i={i:.4f}° (ecliptic), epoch={epoch}", flush=True)
+        print(f"  Plotting osculating: i={i:.4f} deg (ecliptic), epoch={epoch}", flush=True)
         
         theta = np.linspace(0, 2*np.pi, 360)
         r = a * (1 - e**2) / (1 + e * np.cos(theta))
@@ -1176,7 +1176,7 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
         
-        # Rotation sequence: ω, i, Ω (inside-out for osculating)
+        # Rotation sequence: omega, i, Omega (inside-out for osculating)
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
         x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
@@ -1188,8 +1188,8 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
                 f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f}° (retrograde, J2000 ecliptic)<br>"
-                f"ω={omega:.2f}°, Ω={Omega:.2f}°<br>"
+                f"i={i:.4f} deg (retrograde, J2000 ecliptic)<br>"
+                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
                 f"<br><i>Phoebe: Irregular retrograde satellite<br>"
                 f"Period: ~550 days | Discovered: 1899<br>"
                 f"Osculating elements from JPL Horizons.</i>"
@@ -1199,12 +1199,12 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
                 f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f}° (J2000 ecliptic)<br>"
-                f"ω={omega:.2f}°, Ω={Omega:.2f}°<br>"
+                f"i={i:.4f} deg (J2000 ecliptic)<br>"
+                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
                 f"<br><i>Osculating = instantaneous Keplerian fit<br>"
                 f"from JPL Horizons orbital elements.<br>"
                 f"Saturn analytical orbits not shown due to<br>"
-                f"reference frame complexity (pole RA=40.58°).</i>"
+                f"reference frame complexity (pole RA=40.58 deg).</i>"
             )
 
         fig.add_trace(go.Scatter3d(
@@ -1218,7 +1218,7 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
             showlegend=True
         ))
         
-        print(f"  ✓ Osculating orbit plotted (ecliptic frame)", flush=True)
+        print(f"  [OK] Osculating orbit plotted (ecliptic frame)", flush=True)
         return fig
         
     except Exception as e:
@@ -1234,7 +1234,7 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
     CRITICAL: Uranus moon osculating elements are in ECLIPTIC frame (J2000.0)
     No planet-specific rotation needed - standard Keplerian sequence only.
     
-    Uranus's extreme axial tilt (97.77°) and pole RA (257.31°) make analytical
+    Uranus's extreme axial tilt (97.77 deg) and pole RA (257.31 deg) make analytical
     reference frame transformations extremely complex. Osculating elements from
     JPL Horizons are already in ecliptic frame and provide excellent alignment.
     
@@ -1264,7 +1264,7 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         
         if satellite_name in cache:
             elements = cache[satellite_name]['elements']
-            print(f"  ✓ Using cached osculating elements", flush=True)
+            print(f"  [OK] Using cached osculating elements", flush=True)
         else:
             print(f"  Warning: No osculating elements in cache for {satellite_name}", flush=True)
             print(f"  Hint: Use osculating cache manager to fetch from JPL Horizons (ID: {horizons_id})", flush=True)
@@ -1277,7 +1277,7 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         Omega = elements.get('Omega', 0)
         epoch = elements.get('epoch', 'unknown')
        
-        print(f"  Plotting osculating: i={i:.4f}° (ecliptic), epoch={epoch}", flush=True)
+        print(f"  Plotting osculating: i={i:.4f} deg (ecliptic), epoch={epoch}", flush=True)
         
         theta = np.linspace(0, 2*np.pi, 360)
         r = a * (1 - e**2) / (1 + e * np.cos(theta))
@@ -1290,24 +1290,24 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
         
-        # Standard Keplerian rotation sequence: ω, i, Ω
+        # Standard Keplerian rotation sequence: omega, i, Omega
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
         x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
         
         # NO Uranus rotation - osculating already in ecliptic!
-        # (Uranus analytical orbits not shown due to extreme 98° tilt complexity)
+        # (Uranus analytical orbits not shown due to extreme 98 deg tilt complexity)
         
         hover_text_osc = (
             f"<b>{satellite_name} Osculating Orbit</b><br>"
             f"Epoch: {epoch}<br>"
             f"a={a:.6f} AU, e={e:.6f}<br>"
-            f"i={i:.4f}° (J2000 ecliptic)<br>"
-            f"ω={omega:.2f}°, Ω={Omega:.2f}°<br>"
+            f"i={i:.4f} deg (J2000 ecliptic)<br>"
+            f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
             f"<br><i>Osculating = instantaneous Keplerian fit<br>"
             f"from JPL Horizons orbital elements.<br>"
             f"Uranus analytical orbits not shown due to<br>"
-            f"extreme axial tilt (97.77°) complexity.</i>"
+            f"extreme axial tilt (97.77 deg) complexity.</i>"
         )
 
         fig.add_trace(go.Scatter3d(
@@ -1321,7 +1321,7 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
             showlegend=True
         ))
         
-        print(f"  ✓ Osculating orbit plotted (ecliptic frame)", flush=True)
+        print(f"  [OK] Osculating orbit plotted (ecliptic frame)", flush=True)
         return fig
         
     except Exception as e:
@@ -1337,14 +1337,14 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
     CRITICAL: Neptune moon osculating elements are in ECLIPTIC frame (J2000.0)
     No planet-specific rotation needed - standard Keplerian sequence only.
     
-    Neptune's pole RA (299.36°) is ~29° from ecliptic pole, and Triton's retrograde
+    Neptune's pole RA (299.36 deg) is ~29 deg from ecliptic pole, and Triton's retrograde
     orbit makes analytical transformations complex. Osculating elements from JPL
     Horizons are already in ecliptic frame and handle retrograde orbits automatically.
     
     Following Saturn/Uranus pattern: osculating-only approach.
     
     Special moons:
-    - Triton: Retrograde (i~157°) - largest, doomed to break up in ~3.6 billion years
+    - Triton: Retrograde (i~157 deg) - largest, doomed to break up in ~3.6 billion years
     - Nereid: Highly eccentric (e~0.75) - captured object
     """
     
@@ -1372,7 +1372,7 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         
         if satellite_name in cache:
             elements = cache[satellite_name]['elements']
-            print(f"  ✓ Using cached osculating elements", flush=True)
+            print(f"  [OK] Using cached osculating elements", flush=True)
         else:
             print(f"  Warning: No osculating elements in cache for {satellite_name}", flush=True)
             print(f"  Hint: Use osculating cache manager to fetch from JPL Horizons (ID: {horizons_id})", flush=True)
@@ -1385,7 +1385,7 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         Omega = elements.get('Omega', 0)
         epoch = elements.get('epoch', 'unknown')
        
-        print(f"  Plotting osculating: i={i:.4f}° (ecliptic), epoch={epoch}", flush=True)
+        print(f"  Plotting osculating: i={i:.4f} deg (ecliptic), epoch={epoch}", flush=True)
         
         theta = np.linspace(0, 2*np.pi, 360)
         r = a * (1 - e**2) / (1 + e * np.cos(theta))
@@ -1398,8 +1398,8 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
         
-        # Standard Keplerian rotation sequence: ω, i, Ω
-        # Retrograde orbits (i > 90°) handled automatically
+        # Standard Keplerian rotation sequence: omega, i, Omega
+        # Retrograde orbits (i > 90 deg) handled automatically
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
         x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
@@ -1412,8 +1412,8 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
                 f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f}° (retrograde, J2000 ecliptic)<br>"
-                f"ω={omega:.2f}°, Ω={Omega:.2f}°<br>"
+                f"i={i:.4f} deg (retrograde, J2000 ecliptic)<br>"
+                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
                 f"<br><i>Triton: Neptune's largest moon<br>"
                 f"Retrograde orbit - likely captured Kuiper Belt object<br>"
                 f"Spiraling inward, will break up in ~3.6 billion years<br>"
@@ -1424,9 +1424,9 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
                 f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f}° (J2000 ecliptic)<br>"
-                f"ω={omega:.2f}°, Ω={Omega:.2f}°<br>"
-                f"<br><i>Nereid: Highly eccentric orbit (e≈0.75)<br>"
+                f"i={i:.4f} deg (J2000 ecliptic)<br>"
+                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
+                f"<br><i>Nereid: Highly eccentric orbit (e~0.75)<br>"
                 f"Most eccentric known moon in solar system<br>"
                 f"Likely perturbed by Triton's capture</i>"
             )
@@ -1435,8 +1435,8 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
                 f"<b>{satellite_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
                 f"a={a:.6f} AU, e={e:.6f}<br>"
-                f"i={i:.4f}° (J2000 ecliptic)<br>"
-                f"ω={omega:.2f}°, Ω={Omega:.2f}°<br>"
+                f"i={i:.4f} deg (J2000 ecliptic)<br>"
+                f"omega={omega:.2f} deg, Omega={Omega:.2f} deg<br>"
                 f"<br><i>Osculating = instantaneous Keplerian fit<br>"
                 f"from JPL Horizons orbital elements.<br>"
                 f"Neptune analytical orbits not shown due to<br>"
@@ -1454,7 +1454,7 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             showlegend=True
         ))
         
-        print(f"  ✓ Osculating orbit plotted (ecliptic frame)", flush=True)
+        print(f"  [OK] Osculating orbit plotted (ecliptic frame)", flush=True)
         return fig
         
     except Exception as e:
@@ -1483,7 +1483,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     - Period: 6.387 days (both tidally locked)
     - Mass ratio: M_Charon/M_Pluto = 0.122
     - Barycenter: 2,035 km from Pluto center (OUTSIDE Pluto's 1,188 km radius!)
-    - System inclination to ecliptic: ~119.6° (retrograde)
+    - System inclination to ecliptic: ~119.6 deg (retrograde)
     """
     
     # Horizons IDs for Pluto system objects
@@ -1539,7 +1539,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         if is_barycenter_mode and object_name in ['Pluto', 'Charon']:
             # BARYCENTER MODE for Pluto/Charon:
             # - Semi-major axis: CALCULATED from mass ratio (different from Pluto-centered)
-            # - Angular elements (i, ω, Ω): FROM CACHE (same orbital plane regardless of center)
+            # - Angular elements (i, omega, Omega): FROM CACHE (same orbital plane regardless of center)
             
             # Calculate semi-major axis from mass ratio
             if object_name == 'Pluto':
@@ -1567,7 +1567,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                 print(f"\n[BARYCENTER MODE] {object_name}: using fallback angular elements (no cache)", flush=True)
             
             print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
-            print(f"  i={i:.2f}°, Ω={Omega:.2f}°, ω={omega:.2f}° (from cache)", flush=True)
+            print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg (from cache)", flush=True)
             """
         
 
@@ -1589,7 +1589,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                 epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
                 print(f"\n[BARYCENTER MODE] {object_name}: using barycentric osculating elements ({cache_key})", flush=True)
                 print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
-                print(f"  e={e:.6f}, i={i:.2f}°, Ω={Omega:.2f}°, ω={omega:.2f}°", flush=True)
+                print(f"  e={e:.6f}, i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
             else:
                 # FALLBACK: Calculate from mass ratio + angular elements from Pluto-centered cache
                 print(f"\n[BARYCENTER MODE] {object_name}: no barycentric cache ({cache_key}), using calculated values", flush=True)
@@ -1619,7 +1619,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                     print(f"  Using fallback angular elements (no cache)", flush=True)
                 
                 print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
-                print(f"  i={i:.2f}°, Ω={Omega:.2f}°, ω={omega:.2f}° (from cache)", flush=True)
+                print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg (from cache)", flush=True)
 
         else:
             # PLUTO-CENTERED MODE or outer moons:
@@ -1637,15 +1637,15 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             
             if cache_key in cache:
                 elements = cache[cache_key]['elements']
-                print(f"  ✓ Using cached osculating elements ({cache_key})", flush=True)
+                print(f"  [OK] Using cached osculating elements ({cache_key})", flush=True)
             elif fallback_key and fallback_key in cache:
                 elements = cache[fallback_key]['elements']
-                print(f"  ⚠ Using fallback cache key ({fallback_key}) - barycentric elements not cached", flush=True)
+                print(f"  [WARN] Using fallback cache key ({fallback_key}) - barycentric elements not cached", flush=True)
             else:
                 # Try fetching from planetary_params for moons
                 if object_name in planetary_params:
                     elements = planetary_params[object_name]
-                    print(f"  ✓ Using analytical elements from planetary_params", flush=True)
+                    print(f"  [OK] Using analytical elements from planetary_params", flush=True)
                 else:
                     print(f"  Warning: No osculating elements in cache for {object_name}", flush=True)
                     return fig
@@ -1662,7 +1662,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             print(f"  Warning: Zero semi-major axis for {object_name}", flush=True)
             return fig
         
-        print(f"  Plotting: a={a:.7f} AU, i={i:.4f}° (ecliptic), epoch={epoch}", flush=True)
+        print(f"  Plotting: a={a:.7f} AU, i={i:.4f} deg (ecliptic), epoch={epoch}", flush=True)
         
         # Generate orbital path
         theta = np.linspace(0, 2*np.pi, 360)
@@ -1710,7 +1710,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             showlegend=True
         ))
         
-#        print(f"  ✓ Orbit plotted (ecliptic frame)", flush=True)
+#        print(f"  [OK] Orbit plotted (ecliptic frame)", flush=True)
 #        return fig
 
         # Add apsidal markers using standard method
@@ -1818,65 +1818,26 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         if satellite_name in cache:
             elements = cache[satellite_name]['elements']
             epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
-            print(f"  ✓ Using cached osculating elements (epoch: {epoch})", flush=True)
+            print(f"  [OK] Using cached osculating elements (epoch: {epoch})", flush=True)
             
             a = elements.get('a', 0)
             e = elements.get('e', 0)
             i = elements.get('i', 0)
             omega = elements.get('omega', 0)
             Omega = elements.get('Omega', 0)
-            orbit_source = "osculating"
             
-    #    else:
-    #        print(f"  ⚠ No cached elements for {satellite_name}, skipping orbit plot", flush=True)
-    #        return fig
-        
         else:
-            # Check for analytical fallback (satellites without JPL ephemeris)
-            # ═══════════════════════════════════════════════════════════════════
-            # IMPORTANT: This solution is tailored specifically for MK2:
-            #   1. Assumes circular orbit (e=0): mean anomaly = true anomaly  
-            #   2. Uses J2000.0 as reference epoch with M₀=0° (arbitrary phase)
-            #   3. Orbital elements from arXiv:2509.05880 (Sept 2025)
-            #
-            # For other objects, you may need to:
-            #   - Solve Kepler's equation for eccentric anomaly (if e > 0)
-            #   - Use object-specific reference epoch and M₀
-            #   - Apply different coordinate transformations
-            # ═══════════════════════════════════════════════════════════════════
-            ANALYTICAL_FALLBACK_SATELLITES = ['MK2']  # Expandable - see notes above
-           
-            if satellite_name in ANALYTICAL_FALLBACK_SATELLITES:
-                print(f"  ⚠ No JPL ephemeris for {satellite_name}, using analytical elements", flush=True)
-                from orbital_elements import planetary_params
-                
-                if satellite_name in planetary_params:
-                    elements = planetary_params[satellite_name]
-                    epoch = "Analytical (2025 preliminary)"
-                    orbit_source = "analytical"
-                    
-                    a = elements.get('a', 0)
-                    e = elements.get('e', 0)
-                    i = elements.get('i', 0)
-                    omega = elements.get('omega', 0)
-                    Omega = elements.get('Omega', 0)
-                    
-                    print(f"  ✓ Using analytical elements from planetary_params", flush=True)
-                else:
-                    print(f"  ⚠ No analytical elements for {satellite_name}, skipping orbit plot", flush=True)
-                    return fig
-            else:
-                print(f"  ⚠ No cached elements for {satellite_name}, skipping orbit plot", flush=True)
-                return fig
-
-        print(f"  Elements: a={a:.6f} AU, e={e:.4f}, i={i:.2f}°, ω={omega:.2f}°, Ω={Omega:.2f}°", flush=True)
+            print(f"  [WARN] No cached elements for {satellite_name}, skipping orbit plot", flush=True)
+            return fig
+        
+        print(f"  Elements: a={a:.6f} AU, e={e:.4f}, i={i:.2f} deg, omega={omega:.2f} deg, Omega={Omega:.2f} deg", flush=True)
         
         # Generate orbit points
         theta = np.linspace(0, 2*np.pi, 360)
         
         # Skip if semi-major axis is invalid
         if a <= 0:
-            print(f"  ⚠ Invalid semi-major axis for {satellite_name}", flush=True)
+            print(f"  [WARN] Invalid semi-major axis for {satellite_name}", flush=True)
             return fig
             
         # Calculate orbit in orbital plane
@@ -1891,7 +1852,7 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         Omega_rad = np.radians(Omega)
         
         # Apply 3D rotation (standard Keplerian to ecliptic transformation)
-        # Rotation 1: Around z-axis by argument of periapsis (ω)
+        # Rotation 1: Around z-axis by argument of periapsis (omega)
         x1 = x_orbit * np.cos(omega_rad) - y_orbit * np.sin(omega_rad)
         y1 = x_orbit * np.sin(omega_rad) + y_orbit * np.cos(omega_rad)
         z1 = z_orbit
@@ -1901,12 +1862,11 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
         z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
         
-        # Rotation 3: Around z-axis by longitude of ascending node (Ω)
+        # Rotation 3: Around z-axis by longitude of ascending node (Omega)
         x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
         y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
         z_final = z2
         
-        """
         # Create hover text
         hover_text = (
             f"<b>{satellite_name} Osculating Orbit</b><br>"
@@ -1916,140 +1876,14 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             f"<b>Orbital Elements (JPL):</b><br>"
             f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
             f"e = {e:.4f}<br>"
-            f"i = {i:.2f}°<br>"
-            f"ω = {omega:.2f}°<br>"
-            f"Ω = {Omega:.2f}°<br>"
+            f"i = {i:.2f} deg<br>"
+            f"omega = {omega:.2f} deg<br>"
+            f"Omega = {Omega:.2f} deg<br>"
             f"<br>"
             f"<i>Osculating orbit from JPL Horizons<br>"
             f"satellite ephemeris solution</i>"
         )
-        """
-
-        # Create hover text based on orbit source; currently this is for Makemake MK2 only
-        if orbit_source == "analytical":
-            hover_text = (
-                f"<b>{satellite_name} Analytical Orbit</b><br>"
-                f"Parent: {parent_name}<br>"
-                f"Source: {epoch}<br>"
-                f"<br>"
-                f"<b>Orbital Elements for MK2:</b><br>"
-                f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
-                f"e = {e:.4f}<br>"
-                f"i = {i:.2f}°<br>"
-                f"ω = {omega:.2f}°<br>"
-                f"Ω = {Omega:.2f}°<br>"
-                f"<br>"
-                f"<i>No JPL ephemeris available for MK2:<br>"
-                f"Based on arXiv:2509.05880 (Sept 2025)<br>"
-                f"preliminary Hubble orbital solution.<br>"
-                f"Inclination uncertain (63°-87° range).<br>"
-                f"No apsides because e=0.</i>"
-            )
-        else:
-            hover_text = (
-                f"<b>{satellite_name} Osculating Orbit</b><br>"
-                f"Parent: {parent_name}<br>"
-                f"Epoch: {epoch}<br>"
-                f"<br>"
-                f"<b>Orbital Elements (JPL):</b><br>"
-                f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
-                f"e = {e:.4f}<br>"
-                f"i = {i:.2f}°<br>"
-                f"ω = {omega:.2f}°<br>"
-                f"Ω = {Omega:.2f}°<br>"
-                f"<br>"
-                f"<i>Osculating orbit from JPL Horizons<br>"
-                f"satellite ephemeris solution</i>"
-            )
-
-        # Add orbit trace
-        trace_name = f"{satellite_name} {'Analytical' if orbit_source == 'analytical' else 'Osculating'} Orbit"
-        fig.add_trace(go.Scatter3d(
-            x=x_final.tolist(),
-            y=y_final.tolist(),
-            z=z_final.tolist(),
-            mode='lines',
-            line=dict(color=color, width=2, dash='dash'),
-            name=trace_name,
-            text=[hover_text] * len(x_final),
-            customdata=[trace_name] * len(x_final),
-            hoverinfo='text',
-            showlegend=True
-        ))
         
-        print(f"  ✓ Plotted {satellite_name} {orbit_source} orbit", flush=True)
-
-        # For analytical fallback satellites (MK2 only at this time), calculate and plot current position
-        if orbit_source == "analytical":
-            # Get orbital period from elements
-            orbital_period = elements.get('orbital_period_days', 18.023)  # Default to MK2's period
-            
-            # Reference epoch: J2000.0 (2000-01-01 12:00 TDB), assume M₀ = 0°
-            from datetime import datetime
-            j2000 = datetime(2000, 1, 1, 12, 0, 0)
-            
-            # Calculate days since J2000
-            delta_days = (date - j2000).total_seconds() / 86400.0
-            
-            # Mean motion (degrees per day)
-            n = 360.0 / orbital_period
-            
-            # Mean anomaly at current date (for circular orbit, true anomaly = mean anomaly)
-            M = (n * delta_days) % 360.0
-            true_anomaly = np.radians(M)
-            
-            # Position in orbital plane (circular orbit: r = a)
-            r_current = a  # For e=0, r is constant
-            x_pos = r_current * np.cos(true_anomaly)
-            y_pos = r_current * np.sin(true_anomaly)
-            z_pos = 0.0
-            
-            # Apply same 3D rotation as orbit path
-            # Rotation 1: Around z-axis by ω
-            x1 = x_pos * np.cos(omega_rad) - y_pos * np.sin(omega_rad)
-            y1 = x_pos * np.sin(omega_rad) + y_pos * np.cos(omega_rad)
-            z1 = z_pos
-            
-            # Rotation 2: Around x-axis by i
-            x2 = x1
-            y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
-            z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
-            
-            # Rotation 3: Around z-axis by Ω
-            x_current = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
-            y_current = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
-            z_current = z2
-            
-            # Create position marker hover text
-            pos_hover = (
-                f"<b>{satellite_name}</b><br>"
-                f"Date: {date.strftime('%Y-%m-%d %H:%M UTC')}<br>"
-                f"<br>"
-                f"MK2 Position: Calculated from analytical orbit<br>"
-                f"Mean anomaly: {M:.1f}°<br>"
-                f"Period: {orbital_period:.3f} days<br>"
-                f"<br>"
-                f"<i>⚠ MK2 position assumes M₀=0° at J2000.0<br>"
-                f"Actual phase unknown - for visualization only</i>"
-            )
-            
-            # Add position marker
-            fig.add_trace(go.Scatter3d(
-                x=[x_current],
-                y=[y_current],
-                z=[z_current],
-                mode='markers',
-                marker=dict(size=6, color=color, symbol='circle'),
-                name=satellite_name,
-                text=[pos_hover],
-                hoverinfo='text',
-                showlegend=True
-            ))
-            
-            print(f"  ✓ Added {satellite_name} position marker (M={M:.1f}°, assumed phase)", flush=True)
-
-
-        """
         # Add orbit trace
         fig.add_trace(go.Scatter3d(
             x=x_final.tolist(),
@@ -2064,8 +1898,9 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             showlegend=True
         ))
         
-        print(f"  ✓ Plotted {satellite_name} osculating orbit", flush=True)
+        print(f"  [OK] Plotted {satellite_name} osculating orbit", flush=True)
         
+        """
         # Add apsidal markers if requested
         if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
             # Periapsis point (theta = 0)
@@ -2086,7 +1921,7 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
                 showlegend=True
             ))
             
-            # Apoapsis point (theta = π)
+            # Apoapsis point (theta = pi)
             r_apo = a * (1 + e)
             apo_x = -r_peri * (np.cos(Omega_rad) * np.cos(omega_rad) - 
                              np.sin(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
@@ -2108,8 +1943,8 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         """
 
         # Add apsidal markers using standard method
-        if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits (like MK2) because every point is at the same distance.
-    #    if show_apsidal_markers:  # Skip for nearly circular orbits    
+    #    if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
+        if show_apsidal_markers:  # Skip for nearly circular orbits    
             from apsidal_markers import add_perihelion_marker, add_apohelion_marker
             
             # Find periapsis and apoapsis indices
@@ -2177,10 +2012,10 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
             f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
             f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
             f"e = {e:.4f} (nearly circular)<br>"
-            f"i = {i:.1f}° to ecliptic <i>[osculating]</i><br>"
+            f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
             f"Period: {binary_params['period_days']:.3f} days<br><br>"
             f"<b>Why Pluto's orbit is smaller:</b><br>"
-            f"<i>Pluto is ~8× more massive than Charon,<br>"
+            f"<i>Pluto is ~8x more massive than Charon,<br>"
             f"so it orbits closer to the barycenter.<br>"
             f"Like a heavy adult on a see-saw sitting<br>"
             f"closer to the pivot point!</i><br><br>"
@@ -2200,7 +2035,7 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
             f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
             f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
             f"e = {e:.4f} (nearly circular)<br>"
-            f"i = {i:.1f}° to ecliptic <i>[osculating]</i><br>"
+            f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
             f"Period: {binary_params['period_days']:.3f} days<br><br>"
             f"<b>Why Charon's orbit is larger:</b><br>"
             f"<i>Charon is only 12% of Pluto's mass,<br>"
@@ -2224,14 +2059,14 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
             f"<i>(around Pluto-Charon barycenter)</i><br><br>"
             f"a = {a:.7f} AU ({a * 149597870.7:.0f} km)<br>"
             f"e = {e:.4f}<br>"
-            f"i = {i:.2f}° to ecliptic<br><br>"
+            f"i = {i:.2f} deg to ecliptic<br><br>"
             f"<b>Orbital Resonance:</b><br>"
             f"<i>The outer moons orbit in near-resonance<br>"
             f"with Charon's 6.387-day period:<br>"
-            f"• Styx: ~3:1 (~20.2 days)<br>"
-            f"• Nix: ~4:1 (~24.9 days)<br>"
-            f"• Kerberos: ~5:1 (~32.2 days)<br>"
-            f"• Hydra: ~6:1 (~38.2 days)</i><br><br>"
+            f"* Styx: ~3:1 (~20.2 days)<br>"
+            f"* Nix: ~4:1 (~24.9 days)<br>"
+            f"* Kerberos: ~5:1 (~32.2 days)<br>"
+            f"* Hydra: ~6:1 (~38.2 days)</i><br><br>"
             f"<b>Why orbits diverge:</b><br>"
             f"<i>Osculating orbit 'kisses' actual position<br>"
             f"at epoch. Perturbations from Pluto-Charon<br>"
@@ -2248,10 +2083,10 @@ def _build_pluto_centered_hover_text(object_name, a, e, i, epoch):
             f"<i>(around Pluto center)</i><br><br>"
             f"Epoch: {epoch}<br>"
             f"a = {a:.6f} AU, e = {e:.6f}<br>"
-            f"i = {i:.4f}° (J2000 ecliptic)<br>"
+            f"i = {i:.4f} deg (J2000 ecliptic)<br>"
             f"Period: 6.387 days (tidally locked)<br><br>"
             f"<b>Why orbit appears non-circular:</b><br>"
-            f"<i>Charon's orbit is nearly circular (e≈0.0002),<br>"
+            f"<i>Charon's orbit is nearly circular (e~0.0002),<br>"
             f"but we're viewing from Pluto's CENTER,<br>"
             f"not the barycenter. Pluto itself moves<br>"
             f"in a small counter-orbit, making Charon's<br>"
@@ -2263,14 +2098,14 @@ def _build_pluto_centered_hover_text(object_name, a, e, i, epoch):
             f"<i>(around Pluto center)</i><br><br>"
             f"Epoch: {epoch}<br>"
             f"a = {a:.6f} AU, e = {e:.6f}<br>"
-            f"i = {i:.4f}° (J2000 ecliptic)<br><br>"
+            f"i = {i:.4f} deg (J2000 ecliptic)<br><br>"
             f"<b>Why orbits diverge:</b><br>"
             f"<i>'Osculating' means 'kissing' - this ellipse<br>"
             f"matches position & velocity at epoch only.<br>"
             f"Real orbits deviate due to:<br>"
-            f"• Charon's gravity (11.7% of Pluto's mass)<br>"
-            f"• Orbital resonances between moons<br>"
-            f"• The Pluto-Charon binary 'wobble'<br>"
+            f"* Charon's gravity (11.7% of Pluto's mass)<br>"
+            f"* Orbital resonances between moons<br>"
+            f"* The Pluto-Charon binary 'wobble'<br>"
             f"The divergence you see IS the perturbation!</i>"
         )
 
@@ -2287,8 +2122,8 @@ def add_pluto_barycenter_marker(fig, date, charon_position=None):
         charon_position: Dict with Charon's x, y, z position (if available)
     """
     # Barycenter distance from Pluto center in AU
-    # Calculation: separation × (m_charon / (m_pluto + m_charon))
-    # = 19,596 km × (0.122 / 1.122) ≈ 2,131 km ≈ 0.0000142 AU
+    # Calculation: separation x (m_charon / (m_pluto + m_charon))
+    # = 19,596 km x (0.122 / 1.122) ~ 2,131 km ~ 0.0000142 AU
     BARYCENTER_DIST_AU = 0.0000142
     
     if charon_position and charon_position.get('x') is not None:
@@ -2338,7 +2173,7 @@ def add_pluto_barycenter_marker(fig, date, charon_position=None):
         showlegend=True
     ))
     
-    print(f"  ✓ Added barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
+    print(f"  [OK] Added barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
     
     return fig
 
@@ -2435,7 +2270,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         Omega = orbital_params.get('Omega', 0)  # Longitude of ascending node in degrees
         
         print(f"\nPlotting {satellite_name} orbit around {parent_planet}", flush=True)
-        print(f"Orbital elements: a={a}, e={e}, i={i}°, ω={omega}°, Ω={Omega}°", flush=True)
+        print(f"Orbital elements: a={a}, e={e}, i={i} deg, omega={omega} deg, Omega={Omega} deg", flush=True)
         
         # Calculate angular range based on days_to_plot
         if days_to_plot is not None and days_to_plot > 0:
@@ -2485,18 +2320,18 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         Omega_rad = np.radians(Omega)
 
         # Standard orbital element rotation sequence
-        # 1. Longitude of ascending node (Ω) around z-axis
+        # 1. Longitude of ascending node (Omega) around z-axis
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
         # 2. Inclination (i) around x-axis
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-        # 3. Argument of periapsis (ω) around z-axis
+        # 3. Argument of periapsis (omega) around z-axis
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
         
         # Transformation from a planet's equatorial frame to ecliptic frame:
         # 
         # This solution follows an important pattern we discovered across multiple planetary systems:
-        # - For Mars satellites: Y-axis rotation of 25.19° (Mars's axial tilt) aligns orbits properly
-        # - For Uranus satellites: Matching X and Y rotations of 97.77° (Uranus's axial tilt) creates proper alignment
+        # - For Mars satellites: Y-axis rotation of 25.19 deg (Mars's axial tilt) aligns orbits properly
+        # - For Uranus satellites: Matching X and Y rotations of 97.77 deg (Uranus's axial tilt) creates proper alignment
         #
         # General principle: When satellite orbital elements are defined in a planet's equatorial reference frame
         # (as documented by JPL), the transformation to the ecliptic frame must incorporate the planet's axial tilt
@@ -2510,10 +2345,10 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
 
         # Apply transformation based on the planet
         if parent_planet == 'Mars':
-            # This 25° value is particularly interesting because it's very close to Mars' axial tilt of 25.19°. 
+            # This 25 deg value is particularly interesting because it's very close to Mars' axial tilt of 25.19 deg. 
             # This suggests there might be a direct relationship between Mars' axial tilt and the reference frame used 
-            # for defining its satellites' orbital elements. The fact that Deimos aligns better at 25° while Phobos aligns 
-            # better at 26° could be related to: 1) Small differences in how each moon's orbital elements were measured or 
+            # for defining its satellites' orbital elements. The fact that Deimos aligns better at 25 deg while Phobos aligns 
+            # better at 26 deg could be related to: 1) Small differences in how each moon's orbital elements were measured or 
             # calculated. 2) The fact that Phobos orbits much closer to Mars and might be more affected by Mars' non-spherical 
             # gravity field 3) Possible time-dependent variations in the orbital planes. To put this discovery in context: we've 
             # essentially found that Mars' moons' orbital elements are defined in a reference frame that requires a Y-axis 
@@ -2521,13 +2356,13 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # visualization. This makes intuitive sense astronomically, as it suggests the orbital elements are defined relative 
             # to Mars' equatorial plane.
             #
-            # Using Mars' exact axial tilt (25.19°) as the Y-axis rotation value creates a perfect astronomical justification 
+            # Using Mars' exact axial tilt (25.19 deg) as the Y-axis rotation value creates a perfect astronomical justification 
             # for the transformation. It strongly suggests that the orbital elements for Mars' satellites are indeed defined 
             # relative to Mars' equatorial plane, which makes sense from a planetary science perspective.
             #
             # "Reference Frame Note: The orbital elements for Mars' satellites (Phobos and Deimos) are provided relative to 
             # Mars' equatorial plane. When transforming these elements to ecliptic coordinates for visualization, a rotation 
-            # of 25.19° around the Y-axis (equivalent to Mars' axial tilt) should be applied after the standard orbital element 
+            # of 25.19 deg around the Y-axis (equivalent to Mars' axial tilt) should be applied after the standard orbital element 
             # rotations."
             # 
             # A Y-axis rotation (not X) is needed because it represents a rotation around 
@@ -2535,18 +2370,18 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # of Phobos and Deimos relative to Mars' orbital plane.
 
             # Transform from Mars equatorial to ecliptic coordinates
-            # Using Mars' axial tilt. Note: A small (~10-20°) offset remains
+            # Using Mars' axial tilt. Note: A small (~10-20 deg) offset remains
             # between Keplerian and actual orbits, likely due to JPL's specific
             # convention for defining the ascending node reference.
 
             #Different reference conventions: JPL might use a slightly different convention for defining the ascending node that 
             # we haven't identified         
-            # Small systematic errors: The ~10-20° offset might be inherent to how the orbital elements are defined
+            # Small systematic errors: The ~10-20 deg offset might be inherent to how the orbital elements are defined
             # Time-dependent effects: Small variations in Mars' orientation that aren't captured in a static transformation
 
             # Your time-varying elements are working correctly:
-            # Ω change: -157.9° per year (matches expected -158°)
-            # ω change: 27.0° per year (matches expected +27°)
+            # Omega change: -157.9 deg per year (matches expected -158 deg)
+            # omega change: 27.0 deg per year (matches expected +27 deg)
             #This confirms the precession calculations are accurate.
 
             if date is not None:
@@ -2561,7 +2396,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 omega = orbital_params.get('omega', 0)
                 Omega = orbital_params.get('Omega', 0)
                 
-                print(f"  Time-varying: a={a:.6f} AU, e={e:.6f}, i={i:.2f}°, ω={omega:.2f}°, Ω={Omega:.2f}°", flush=True)
+                print(f"  Time-varying: a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg, omega={omega:.2f} deg, Omega={Omega:.2f} deg", flush=True)
 
                 # Regenerate the orbit with new elements
                 theta = np.linspace(0, 2*np.pi, 360)
@@ -2581,7 +2416,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
                 x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
 
-            # The Y-rotation of 25.19° suggests the node reference is already 
+            # The Y-rotation of 25.19 deg suggests the node reference is already 
             # aligned with the ecliptic in some way. However, there's still
             # a visible offset in your plot.
             
@@ -2594,7 +2429,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
 
             mars_y_rotation = np.radians(25.19)
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, mars_y_rotation, 'y')
-            print(f"Transformation applied: Mars with Y-axis rotation of 25.19°", flush=True)   
+            print(f"Transformation applied: Mars with Y-axis rotation of 25.19 deg", flush=True)   
 
     #        z_adjustment = np.radians(10)  # Shift the z adjustment after the y adjustment -- does not improve the discrepancy
     #        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, z_adjustment, 'z') 
@@ -2618,7 +2453,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                     omega = time_varying_params.get('omega', 0)
                     Omega = time_varying_params.get('Omega', 0)
                     
-                    print(f"  Mean elements: a={a:.6f} AU, e={e:.6f}, i={i:.4f}° (Jupiter eq)", flush=True)
+                    print(f"  Mean elements: a={a:.6f} AU, e={e:.6f}, i={i:.4f} deg (Jupiter eq)", flush=True)
                     
                     # Regenerate orbit with updated elements
                     theta = np.linspace(0, 2*np.pi, 360)
@@ -2640,7 +2475,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # Transform from Jupiter equatorial to ecliptic
             jupiter_tilt = np.radians(3.13)
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, jupiter_tilt, 'x')
-            print(f"  Transform: Jupiter equatorial → ecliptic (3.13° X-rotation)", flush=True)
+            print(f"  Transform: Jupiter equatorial [OK] ecliptic (3.13 deg X-rotation)", flush=True)
 
         elif parent_planet == 'Saturn':
             if satellite_name == 'Phoebe':
@@ -2654,7 +2489,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 
                 # 2. Apply a partial rotation between Saturn's equator and orbital plane
                 # Phoebe is far enough that Laplace plane is tilted from equatorial plane
-                laplace_tilt = np.radians(17.0)  # Increased from 15° based on residuals
+                laplace_tilt = np.radians(17.0)  # Increased from 15 deg based on residuals
                 
                 # 3. Additional node alignment correction
                 # Based on the Y-component difference in normals, we need a Z rotation
@@ -2691,7 +2526,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                         omega = time_varying_params.get('omega', 0)
                         Omega = time_varying_params.get('Omega', 0)
                         
-                        print(f"  Mean elements: a={a:.6f} AU, e={e:.6f}, i={i:.4f}° (Saturn eq)", flush=True)
+                        print(f"  Mean elements: a={a:.6f} AU, e={e:.6f}, i={i:.4f} deg (Saturn eq)", flush=True)
                         
                         # Regenerate FULL orbit with updated elements
                         theta = np.linspace(0, 2*np.pi, 360)
@@ -2713,7 +2548,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 # Transform from Saturn equatorial to ecliptic (same as Jupiter pattern)
                 saturn_tilt = np.radians(-26.73)  # Saturn's axial tilt (negative for correct direction)
                 x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, saturn_tilt, 'x')
-                print(f"  Transform: Saturn equatorial → ecliptic (-26.73° X-rotation)", flush=True)
+                print(f"  Transform: Saturn equatorial [OK] ecliptic (-26.73 deg X-rotation)", flush=True)
 
         elif parent_planet == 'Uranus':
             # Transformation from Uranus's equatorial frame to ecliptic frame:
@@ -2723,20 +2558,20 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # to the ecliptic reference frame used in our visualization.
             #
             # Our optimal transformation uses two sequential rotations:
-            # 1. First rotation (X+): 105° rotation around the X-axis
-            # 2. Second rotation (Y+): 105° rotation around the Y-axis
+            # 1. First rotation (X+): 105 deg rotation around the X-axis
+            # 2. Second rotation (Y+): 105 deg rotation around the Y-axis
             #
-            # This compound rotation of 105° (rather than Uranus's nominal axial tilt of 97.77°)
+            # This compound rotation of 105 deg (rather than Uranus's nominal axial tilt of 97.77 deg)
             # was determined through empirical testing to provide the best alignment between
-            # Keplerian and actual satellite orbits. The 7° difference may account for:
+            # Keplerian and actual satellite orbits. The 7 deg difference may account for:
             #   - Reference frame subtleties not captured in simple transformations
             #   - Uranus's magnetic field orientation (which is offset from its rotation axis)
             #   - The combined effect of Uranus's obliquity and orbital inclination
             #   - Possible reference epoch differences
             #
             # This solution follows a pattern we discovered across planetary systems:
-            # - For Mars: Y-axis rotation of ~25° (Mars's axial tilt) aligns satellite orbits
-            # - For Uranus: Matching X and Y rotations of 105° creates optimal alignment
+            # - For Mars: Y-axis rotation of ~25 deg (Mars's axial tilt) aligns satellite orbits
+            # - For Uranus: Matching X and Y rotations of 105 deg creates optimal alignment
             #
             # The need for dual-axis rotation reflects Uranus's unique 3D orientation
             # in space, where its equatorial plane is nearly perpendicular to its orbital plane.
@@ -2749,7 +2584,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # Then apply rotation around y-axis with the same angle
             x_final, y_final, z_final = rotate_points(x_rot1, y_rot1, z_rot1, np.radians(uranus_tilt), 'y')
             
-            print(f"Transformation applied: Uranus with X and Y rotations of {uranus_tilt}°", flush=True)
+            print(f"Transformation applied: Uranus with X and Y rotations of {uranus_tilt} deg", flush=True)
             
             # This transformation was determined by testing and provides the best visual alignment
             # between the Keplerian orbits and the actual orbits of Uranian satellites
@@ -2765,17 +2600,17 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 ra_pole = np.radians(planet_poles['Neptune']['ra'])
                 x_rot1, y_rot1, z_rot1 = rotate_points(x_temp, y_temp, z_temp, ra_pole, 'z')
                 
-                # Step 2: Rotate around x-axis by (90° - Neptune's pole Declination)
+                # Step 2: Rotate around x-axis by (90 deg - Neptune's pole Declination)
                 # This tilts the orbital plane to match Neptune's equatorial tilt relative to the ecliptic
                 dec_pole = np.radians(90 - planet_poles['Neptune']['dec'])
                 x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, dec_pole, 'x')
                 
-                # Step 3: Fine-tuning with a 3° z-axis rotation
+                # Step 3: Fine-tuning with a 3 deg z-axis rotation
                 # This small adjustment compensates for reference frame differences between
                 # Neptune's pole coordinates and Triton's orbital elements
                 x_final, y_final, z_final = rotate_points(x_rot2, y_rot2, z_rot2, np.radians(3), 'z')
                 
-                print(f"Transformation applied: Triton with Neptune pole orientation + 3° z-axis adjustment", flush=True)
+                print(f"Transformation applied: Triton with Neptune pole orientation + 3 deg z-axis adjustment", flush=True)
             else:
                 # Standard transformation for other Neptune satellites
                 tilt_rad = np.radians(planet_tilts['Neptune'])
@@ -2803,7 +2638,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # Use recorded tilt for other planets
             tilt_rad = np.radians(planet_tilts[parent_planet])
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, tilt_rad, 'x')
-            print(f"Transformation applied: {parent_planet} with tilt={planet_tilts[parent_planet]}°", flush=True)
+            print(f"Transformation applied: {parent_planet} with tilt={planet_tilts[parent_planet]} deg", flush=True)
             
         else:
             # No transformation for planets without tilt data
@@ -2822,10 +2657,10 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 "<br><br><i>Analytical orbit uses time-varying elements<br>"
                 "calculated for this specific date.<br>"
                 "<br>Elements updated based on secular variations:<br>"
-                "• Apsidal precession (ω changes with time)<br>"
-                "• Nodal regression (Ω changes with time)<br>"
-                "• Mars equatorial bulge gravitational field effects<br>"
-                "• Solar gravitational perturbations<br>"
+                "* Apsidal precession (omega changes with time)<br>"
+                "* Nodal regression (Omega changes with time)<br>"
+                "* Mars equatorial bulge gravitational field effects<br>"
+                "* Solar gravitational perturbations<br>"
                 "<br>Shows general orbital geometry valid<br>"
                 "over months for this epoch.</i>"
             )
@@ -2835,7 +2670,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 f"Elements calculated for: {date_str}<br>"
                 f"a={a:.6f} AU<br>"
                 f"e={e:.6f}<br>"
-                f"i={i:.2f}°"
+                f"i={i:.2f} deg"
                 f"{analytical_note}"
             )
 
@@ -2857,12 +2692,12 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 "<br><br><i>Analytical orbit uses mean elements<br>"
                 "in Jupiter equatorial frame.<br>"
                 "<br>Mean orbital parameters account for:<br>"
-                "• Jupiter equatorial bulge gravitational field (oblateness)<br>"
-                "• Time-averaged perturbations<br>"
-                "• Orbital precession effects<br>"
-                "• Other Galilean moon interactions<br>"
+                "* Jupiter equatorial bulge gravitational field (oblateness)<br>"
+                "* Time-averaged perturbations<br>"
+                "* Orbital precession effects<br>"
+                "* Other Galilean moon interactions<br>"
                 "<br>Transformed from Jupiter equatorial<br>"
-                "to ecliptic frame (+3.13° tilt).<br>"
+                "to ecliptic frame (+3.13 deg tilt).<br>"
                 "<br>Shows time-averaged orbital geometry<br>"
                 "valid over orbital periods.</i>"
             )
@@ -2873,7 +2708,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 f"Calculation date: {date_str}<br>"
                 f"a={a:.6f} AU<br>"
                 f"e={e:.6f}<br>"
-                f"i={i:.2f}° (before transform)"
+                f"i={i:.2f} deg (before transform)"
                 f"{analytical_note}"
             )
             
@@ -2888,11 +2723,11 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # All other satellites - use epoch from data if it exists
             if epoch_from_data:
                 # Epoch exists in data - use it
-                hover_text = f"{satellite_name} Analytical Orbit<br>Epoch: {epoch_from_data}<br>a={a:.6f} AU<br>e={e:.6f}<br>i={i:.2f}°"
+                hover_text = f"{satellite_name} Analytical Orbit<br>Epoch: {epoch_from_data}<br>a={a:.6f} AU<br>e={e:.6f}<br>i={i:.2f} deg"
                 orbit_label = f"{satellite_name} Analytical Orbit (Epoch: {epoch_from_data})"
             else:
                 # No epoch in data - don't show one
-                hover_text = f"{satellite_name} Analytical Orbit<br>a={a:.6f} AU<br>e={e:.6f}<br>i={i:.2f}°"
+                hover_text = f"{satellite_name} Analytical Orbit<br>a={a:.6f} AU<br>e={e:.6f}<br>i={i:.2f} deg"
                 orbit_label = f"{satellite_name} Analytical Orbit"
 
         # Add the orbit trace to the figure
@@ -3081,9 +2916,9 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
     print(f"  Epoch: {epoch_osc}", flush=True)
     print(f"  a = {a_osc:.6f} AU", flush=True)
     print(f"  e = {e_osc:.6f}", flush=True)
-    print(f"  i = {i_osc:.2f}°", flush=True)
-    print(f"  ω = {omega_osc:.2f}°", flush=True)
-    print(f"  Ω = {Omega_osc:.2f}°", flush=True)
+    print(f"  i = {i_osc:.2f} deg", flush=True)
+    print(f"  omega = {omega_osc:.2f} deg", flush=True)
+    print(f"  Omega = {Omega_osc:.2f} deg", flush=True)
     
     # Generate orbit points (full orbit)
     theta = np.linspace(0, 2*np.pi, 360)
@@ -3102,19 +2937,19 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
     Omega_rad_osc = np.radians(Omega_osc)
     
 # Standard orbital rotation sequence
-    # NOTE: JPL osculating elements for Mars satellites come in ECLIPTIC frame (i ≈ 27°)
-    # This is DIFFERENT from analytical elements which are in Mars equatorial frame (i ≈ 1-2°)
+    # NOTE: JPL osculating elements for Mars satellites come in ECLIPTIC frame (i ~ 27 deg)
+    # This is DIFFERENT from analytical elements which are in Mars equatorial frame (i ~ 1-2 deg)
     # Therefore we do NOT apply the Mars Y-rotation here!
     
-    # 1. Rotate by argument of periapsis (ω) around z-axis
+    # 1. Rotate by argument of periapsis (omega) around z-axis
     x_temp, y_temp, z_temp = rotate_points(x_orbit_osc, y_orbit_osc, z_orbit_osc, omega_rad_osc, 'z')
     # 2. Rotate by inclination (i) around x-axis  
     x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad_osc, 'x')
-    # 3. Rotate by longitude of ascending node (Ω) around z-axis
+    # 3. Rotate by longitude of ascending node (Omega) around z-axis
     x_final_osc, y_final_osc, z_final_osc = rotate_points(x_temp, y_temp, z_temp, Omega_rad_osc, 'z')
     
     # NO Mars Y-rotation needed - elements are already in ecliptic frame!
-    print(f"  Note: Osculating elements are in ecliptic frame (i={i_osc:.2f}°), no Mars rotation applied", flush=True)
+    print(f"  Note: Osculating elements are in ecliptic frame (i={i_osc:.2f} deg), no Mars rotation applied", flush=True)
     
     # Create hover text
     date_str = date.strftime('%Y-%m-%d %H:%M UTC')
@@ -3123,17 +2958,17 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
         "from JPL Horizons at specific epoch.<br>"
         "Shows exact orbital state at epoch time.<br>"
         "<br>Incorporates all physical effects:<br>"
-        "• Mars equatorial bulge gravitational field<br>"
-        "• Solar perturbations<br>"
-        "• Tidal effects<br>"
-        "• N-body gravitational interactions</i>"
+        "* Mars equatorial bulge gravitational field<br>"
+        "* Solar perturbations<br>"
+        "* Tidal effects<br>"
+        "* N-body gravitational interactions</i>"
     )
     hover_text_osc = (
         f"{satellite_name} Osculating Orbit<br>"
         f"Epoch: {epoch_osc}<br>"
         f"a={a_osc:.6f} AU<br>"
         f"e={e_osc:.6f}<br>"
-        f"i={i_osc:.2f}°"
+        f"i={i_osc:.2f} deg"
         f"{osculating_note}"
     )
     
@@ -3153,7 +2988,7 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
         )
     )
     
-    print(f"  ✓ Added osculating orbit trace for {satellite_name}", flush=True)
+    print(f"  [OK] Added osculating orbit trace for {satellite_name}", flush=True)
     
     return fig
 
@@ -3216,9 +3051,9 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     print(f"\n[ANALYTICAL] Moon orbital elements for {date.strftime('%Y-%m-%d')}:", flush=True)
     print(f"  a = {a_ana:.6f} AU", flush=True)
     print(f"  e = {e_ana:.6f}", flush=True)
-    print(f"  i = {i_ana:.2f}°", flush=True)
-    print(f"  ω = {omega_ana:.2f}°", flush=True)
-    print(f"  Ω = {Omega_ana:.2f}°", flush=True)
+    print(f"  i = {i_ana:.2f} deg", flush=True)
+    print(f"  omega = {omega_ana:.2f} deg", flush=True)
+    print(f"  Omega = {Omega_ana:.2f} deg", flush=True)
     
     # Calculate analytical orbit
     r_ana = a_ana * (1 - e_ana**2) / (1 + e_ana * np.cos(theta))
@@ -3242,15 +3077,15 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         "<br><br><i>Analytical orbit uses time-varying elements<br>"
         "calculated for this specific date.<br>"
         "<br>Elements updated based on secular variations:<br>"
-        "• Apsidal precession (ω changes with time)<br>"
-        "• Nodal regression (Ω changes with time)<br>"
-        "• Solar gravitational perturbations<br>"
-        "• Earth's gravitational effects<br>"
+        "* Apsidal precession (omega changes with time)<br>"
+        "* Nodal regression (Omega changes with time)<br>"
+        "* Solar gravitational perturbations<br>"
+        "* Earth's gravitational effects<br>"
         "<br>Shows general orbital geometry valid<br>"
         "over months for this epoch.</i>"
     )
 
-    hover_text_ana = f"Moon Analytical Orbit<br>Date: {date_str}<br>a={a_ana:.6f} AU<br>e={e_ana:.6f}<br>i={i_ana:.2f}°{analytical_note}"
+    hover_text_ana = f"Moon Analytical Orbit<br>Date: {date_str}<br>a={a_ana:.6f} AU<br>e={e_ana:.6f}<br>i={i_ana:.2f} deg{analytical_note}"
     
     # Add analytical trace
     fig.add_trace(
@@ -3285,9 +3120,9 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         print(f"  Epoch: {epoch_osc}", flush=True)
         print(f"  a = {a_osc:.6f} AU", flush=True)
         print(f"  e = {e_osc:.6f}", flush=True)
-        print(f"  i = {i_osc:.2f}°", flush=True)
-        print(f"  ω = {omega_osc:.2f}°", flush=True)
-        print(f"  Ω = {Omega_osc:.2f}°", flush=True)
+        print(f"  i = {i_osc:.2f} deg", flush=True)
+        print(f"  omega = {omega_osc:.2f} deg", flush=True)
+        print(f"  Omega = {Omega_osc:.2f} deg", flush=True)
         
         # Calculate osculating orbit
         r_osc = a_osc * (1 - e_osc**2) / (1 + e_osc * np.cos(theta))
@@ -3308,14 +3143,14 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         osculating_note = (
             "<br><br><i>Osculating orbit 'kisses' actual position at epoch,<br>"
             "then diverges as perturbations accumulate from:<br>"
-            "• Solar gravity (largest effect)<br>"
-            "• Earth's oblateness (J2 - equatorial bulge)<br>"
-            "  causes nodal precession (Ω rotates ~19.3°/yr)<br>"
-            "• Tidal forces<br>"
+            "* Solar gravity (largest effect)<br>"
+            "* Earth's oblateness (J2 - equatorial bulge)<br>"
+            "  causes nodal precession (Omega rotates ~19.3 deg/yr)<br>"
+            "* Tidal forces<br>"
             "<br>It fits only the present position, not past or future positions.<br>"
             "<br>See 'Orbital Parameter Visualization' for equatorial bulge details</i>"
         )
-        hover_text_osc = f"Moon Osculating Orbit<br>Epoch: {epoch_osc}<br>a={a_osc:.6f} AU<br>e={e_osc:.6f}<br>i={i_osc:.2f}°{osculating_note}"
+        hover_text_osc = f"Moon Osculating Orbit<br>Epoch: {epoch_osc}<br>a={a_osc:.6f} AU<br>e={e_osc:.6f}<br>i={i_osc:.2f} deg{osculating_note}"
         
         # Add osculating trace with different line style
         fig.add_trace(
@@ -3460,10 +3295,10 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_d
         # If too few points, focus on perihelion region
         if e > 10:
             # For extremely high eccentricity, use very small angle range
-            theta_perihelion = np.linspace(-0.05, 0.05, 200)  # ±2.9 degrees
+            theta_perihelion = np.linspace(-0.05, 0.05, 200)  # +/-2.9 degrees
         else:
             # For high eccentricity, use small angle range
-            theta_perihelion = np.linspace(-np.pi/6, np.pi/6, 500)  # ±30 degrees
+            theta_perihelion = np.linspace(-np.pi/6, np.pi/6, 500)  # +/-30 degrees
         
         r_perihelion = abs(a) * (e**2 - 1) / (1 + e * np.cos(theta_perihelion))
         valid_perihelion = (r_perihelion > 0) & (r_perihelion <= max_distance * 1.5)
@@ -3680,14 +3515,14 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 satellite_current_pos = current_positions.get(moon_name) if current_positions else None
                 
                 # DECISION: Skip analytical orbits for Saturn moons
-                # Saturn's pole orientation (RA=40.58°) is far from ecliptic pole (~270°),
+                # Saturn's pole orientation (RA=40.58 deg) is far from ecliptic pole (~270 deg),
                 # making reference frame transformation complex. Osculating elements from
                 # JPL are already in ecliptic frame and provide excellent alignment.
                 # See: SATURN_IMPLEMENTATION_HANDOFF.md for technical details.
                 
                 # Special handling for Daphnis - no ephemeris after 2018
                 if moon_name == 'Daphnis':
-                    print(f"  [DAPHNIS] ⚠ JPL ephemeris ends 2018-01-17 (Cassini mission end)", flush=True)
+                    print(f"  [DAPHNIS] [WARN] JPL ephemeris ends 2018-01-17 (Cassini mission end)", flush=True)
                     print(f"  [DAPHNIS] Limited orbital data - osculating orbit may not be available", flush=True)
                 
                 # Plot osculating orbit ONLY (JPL elements - dashed line, already ecliptic)
@@ -3708,7 +3543,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 satellite_current_pos = current_positions.get(moon_name) if current_positions else None
                 
                 # DECISION: Skip analytical orbits for Uranus moons
-                # Uranus's extreme axial tilt (97.77°) makes reference frame transformation
+                # Uranus's extreme axial tilt (97.77 deg) makes reference frame transformation
                 # extremely complex. Osculating elements from JPL are already in ecliptic
                 # frame and provide excellent alignment.
                 # See: SATELLITE_DUAL_ORBIT_HANDOFF.md for technical details.
@@ -3731,7 +3566,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 satellite_current_pos = current_positions.get(moon_name) if current_positions else None
                 
                 # DECISION: Skip analytical orbits for Neptune moons
-                # Neptune's pole RA (299.36°) and Triton's retrograde orbit make
+                # Neptune's pole RA (299.36 deg) and Triton's retrograde orbit make
                 # analytical transformations complex. Osculating elements from JPL
                 # are already in ecliptic frame and handle retrograde automatically.
                 # See: SATELLITE_DUAL_ORBIT_HANDOFF.md for technical details.
@@ -3772,7 +3607,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             # Mode 2: Traditional Pluto-centered (for compatibility)
             elif moon_name in PLUTO_MOONS and center_id == 'Pluto':
                 # Skip analytical orbit - only plot osculating
-                # (Pluto pole RA=132.99° far from ecliptic, analytical transformations fail)
+                # (Pluto pole RA=132.99 deg far from ecliptic, analytical transformations fail)
                 if date:
                     fig = plot_pluto_barycenter_orbit(
                         fig,
@@ -3851,7 +3686,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     with open(cache_path, 'r') as f:
                         osc_cache = json.load(f)
             except Exception as e:
-                print(f"  ⚠ Could not load osculating cache: {e}")
+                print(f"  [WARN] Could not load osculating cache: {e}")
             
             for moon_name in plotted:
                 moon_info = next((obj for obj in objects if obj['name'] == moon_name), None)
@@ -3951,16 +3786,16 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                             filter_by_date_range=False
                                         )
                                         
-                                        print(f"  ✓ Added actual apsidal markers for {moon_name}", flush=True)
+                                        print(f"  [OK] Added actual apsidal markers for {moon_name}", flush=True)
                                     else:
-                                        print(f"  ⚠ No positions fetched for {moon_name}", flush=True)
+                                        print(f"  [WARN] No positions fetched for {moon_name}", flush=True)
                                         
                                 except Exception as e:
-                                    print(f"  ⚠ Error adding actual markers for {moon_name}: {e}", flush=True)
+                                    print(f"  [WARN] Error adding actual markers for {moon_name}: {e}", flush=True)
                                     import traceback
                                     traceback.print_exc()
                         else:
-                            print(f"  ⚠ {moon_name} has no TP in params or osculating cache", flush=True)
+                            print(f"  [WARN] {moon_name} has no TP in params or osculating cache", flush=True)
 
     # If center is the Sun, plot orbits for selected heliocentric objects
     else:
@@ -4008,7 +3843,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 Omega = params.get('Omega', 0)
             else:
                 # Object not available anywhere
-                print(f"⚠ Skipping {obj_name}: No parameters found", flush=True)
+                print(f"[WARN] Skipping {obj_name}: No parameters found", flush=True)
                 skipped['no_params'].append(obj_name)
                 continue
 
@@ -4083,7 +3918,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 f"<b>{obj_name} Keplerian Periapsis</b>"
                                 f"{date_str}"
                                 f"<br>q={peri['distance']:.6f} AU"
-                                f"<br>Theoretical minimum distance (θ=0°)"
+                                f"<br>Theoretical minimum distance (theta=0 deg)"
                                 f"<br>One-time passage (hyperbolic)"
                                 f"<br>Unperturbed Keplerian position at actual periapsis time"
                                 f"{accuracy_note}"
@@ -4239,11 +4074,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             omega_rad = np.radians(omega)
             Omega_rad = np.radians(Omega)
 
-            # Rotate ellipse by argument of periapsis (ω) around z-axis
+            # Rotate ellipse by argument of periapsis (omega) around z-axis
             x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
             # Then rotate by inclination (i) around x-axis
             x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
-            # Then rotate by longitude of ascending node (Ω) around z-axis
+            # Then rotate by longitude of ascending node (Omega) around z-axis
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
 
             # ADD THIS CODE to check for epoch
@@ -4261,7 +4096,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     line=dict(dash='dot', width=1, color=color_map(obj_name)),
                     name=f"{obj_name} Keplerian Orbit{epoch_str}",
             #        text=[f"{obj_name} Keplerian Orbit"] * len(x_final),
-                    text=[f"{obj_name} Keplerian Orbit<br>a={a:.6f} AU, e={e:.6f}, i={i:.2f}°{get_planet_perturbation_note(obj_name)}"] * len(x_final),
+                    text=[f"{obj_name} Keplerian Orbit<br>a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg{get_planet_perturbation_note(obj_name)}"] * len(x_final),
                     customdata=[f"{obj_name} Keplerian Orbit"] * len(x_final),
                     hovertemplate='%{text}<extra></extra>',
                     showlegend=True                    
@@ -4303,7 +4138,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         f"<b>{obj_name} Keplerian Periapsis</b>"
                         f"{date_str}"
                         f"<br>q={peri['distance']:.6f} AU"
-                        f"<br>Theoretical minimum distance (θ=0°)"
+                        f"<br>Theoretical minimum distance (theta=0 deg)"
                         f"<br>Unperturbed Keplerian position at actual periapsis time"
                         f"{accuracy_note}"
                     )
@@ -4386,7 +4221,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         f"<b>{obj_name} Keplerian Apoapsis</b>"
                         f"{date_str}"
                         f"<br>Q={apo['distance']:.6f} AU"
-                        f"<br>Theoretical maximum distance (θ=180°)"
+                        f"<br>Theoretical maximum distance (theta=180 deg)"
                         f"{position_description}"
                         f"{accuracy_note}"
                     )
@@ -4509,7 +4344,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             
                             if expected_dates > 0 and len(positions_dict) == 0:
                                 # Fetch failed - likely satellite ephemeris range exceeded
-                                print(f"  ⚠ Fetch failed for {obj_name} apsidal dates - ephemeris range exceeded", flush=True)
+                                print(f"  [WARN] Fetch failed for {obj_name} apsidal dates - ephemeris range exceeded", flush=True)
                                 from apsidal_markers import add_apsidal_range_note
                                 
                                 # Get the dates that failed
@@ -4768,7 +4603,7 @@ def test_pluto_moon_rotations(satellite_name, planetary_params, color, fig=None)
         Omega = orbital_params.get('Omega', 0)
         
         print(f"Testing fine-tuned XYZ rotations for {satellite_name} orbit around Pluto", flush=True)
-        print(f"Orbital elements: a={a}, e={e}, i={i}°, ω={omega}°, Ω={Omega}°", flush=True)
+        print(f"Orbital elements: a={a}, e={e}, i={i} deg, omega={omega} deg, Omega={Omega} deg", flush=True)
         
         # Generate ellipse in orbital plane
         theta = np.linspace(0, 2*np.pi, 360)
@@ -5155,7 +4990,7 @@ def pluto_system_final_transform(satellite_name, planetary_params, color, fig=No
             }
         
         print(f"Applying final transformation to {satellite_name} orbit around Pluto", flush=True)
-        print(f"Transformation: X={transform['x_angle']}°, Y={transform['y_angle']}°, Z={transform['z_angle']}°, Order={transform['order']}", flush=True)
+        print(f"Transformation: X={transform['x_angle']} deg, Y={transform['y_angle']} deg, Z={transform['z_angle']} deg, Order={transform['order']}", flush=True)
         
         # Generate ellipse in orbital plane
         theta = np.linspace(0, 2*np.pi, 360)
@@ -5239,7 +5074,7 @@ def calculate_phoebe_correction_from_normals():
     angle = np.arccos(np.clip(cos_angle, -1, 1))
     
     print(f"Rotation axis: {rotation_axis}", flush=True)
-    print(f"Rotation angle: {np.degrees(angle):.2f}°", flush=True)
+    print(f"Rotation angle: {np.degrees(angle):.2f} deg", flush=True)
     
     # Decompose into X, Y, Z rotations
     # This is approximate but gives us insight
@@ -5248,8 +5083,8 @@ def calculate_phoebe_correction_from_normals():
     z_component = np.arcsin(rotation_axis[2]) * angle
     
     print(f"Approximate decomposition:")
-    print(f"  X rotation: {np.degrees(x_component):.2f}°", flush=True)
-    print(f"  Y rotation: {np.degrees(y_component):.2f}°", flush=True)
-    print(f"  Z rotation: {np.degrees(z_component):.2f}°", flush=True)
+    print(f"  X rotation: {np.degrees(x_component):.2f} deg", flush=True)
+    print(f"  Y rotation: {np.degrees(y_component):.2f} deg", flush=True)
+    print(f"  Z rotation: {np.degrees(z_component):.2f} deg", flush=True)
     
     return rotation_axis, angle

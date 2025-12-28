@@ -266,7 +266,7 @@ def create_satellite_ephemerides():
             elements = sat['orbital_elements']
             print(f"\n{sat['name']} ({sat['primary']}):")
             print(f"  Semi-major axis: {elements.get('semi_major_axis_km', 'N/A'):,.1f} km")
-            print(f"  Inclination: {elements.get('inclination_deg', 'N/A'):.3f}°")
+            print(f"  Inclination: {elements.get('inclination_deg', 'N/A'):.3f} deg")
             print(f"  Source: {sat['source']}")
 
 

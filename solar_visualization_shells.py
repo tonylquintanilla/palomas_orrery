@@ -28,8 +28,8 @@ gravitational_influence_info = (
             "the Heliopause. This is why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part\n" 
             "of our Solar System, even though we've never directly observed the Oort Cloud. The distinction comes down to\n" 
             "different types of influence:\n" 
-            "* Particle/plasma influence (solar wind) → ends at Heliopause;\n" 
-            "* gravitational influence → extends much further, including Sedna and the theoretical Oort Cloud.\n\n" 
+            "* Particle/plasma influence (solar wind) [OK] ends at Heliopause;\n" 
+            "* gravitational influence [OK] extends much further, including Sedna and the theoretical Oort Cloud.\n\n" 
             
             "So the Solar System is generally considered to extend at least as far as these gravitationally bound objects,\n" 
             "even beyond the Heliopause. Sedna is one of our first glimpses into this very distant region that may connect\n" 
@@ -42,7 +42,7 @@ outer_oort_info = (
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
             "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\n\n"
 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.\n" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
             "periods exceeding 200 years.\n\n" 
 
@@ -58,7 +58,7 @@ inner_oort_info = (
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
             "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\n" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.\n" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
             "periods exceeding 200 years.\n\n" 
 
@@ -72,7 +72,7 @@ inner_limit_oort_info = (
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
             "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\n" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.\n" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
             "periods exceeding 200 years.\n\n" 
 
@@ -383,8 +383,8 @@ gravitational_influence_info_hover = (
             "the Heliopause. This is why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part<br>" 
             "of our Solar System, even though we've never directly observed the Oort Cloud. The distinction comes down to<br>" 
             "different types of influence:<br>" 
-            "* Particle/plasma influence (solar wind) → ends at Heliopause;<br>" 
-            "* gravitational influence → extends much further, including Sedna and the theoretical Oort Cloud.<br><br>" 
+            "* Particle/plasma influence (solar wind) [OK] ends at Heliopause;<br>" 
+            "* gravitational influence [OK] extends much further, including Sedna and the theoretical Oort Cloud.<br><br>" 
             
             "So the Solar System is generally considered to extend at least as far as these gravitationally bound objects,<br>" 
             "even beyond the Heliopause. Sedna is one of our first glimpses into this very distant region that may connect<br>" 
@@ -397,7 +397,7 @@ outer_oort_info_hover = (
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
             "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br><br>"
 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
@@ -413,7 +413,7 @@ inner_oort_info_hover = (
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
             "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
@@ -427,7 +427,7 @@ inner_limit_oort_info_hover = (
 
             "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
             "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
-            "Predominantly composed of cometary nuclei—small, icy bodies made of water ice, ammonia, and methane.<br>" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
             "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
             "periods exceeding 200 years.<br><br>" 
 
@@ -1417,23 +1417,23 @@ enhanced_oort_hover_text = """
 <b>The Oort Cloud: Current Scientific Understanding</b><br><br>
 
 <b>Structure:</b><br>
-• <b>Hills Cloud (Inner Oort):</b> 2,000-20,000 AU, disk-like/toroidal<br>
-• <b>Outer Oort Cloud:</b> 20,000-100,000+ AU, roughly spherical but clumpy<br><br>
+* <b>Hills Cloud (Inner Oort):</b> 2,000-20,000 AU, disk-like/toroidal<br>
+* <b>Outer Oort Cloud:</b> 20,000-100,000+ AU, roughly spherical but clumpy<br><br>
 
 <b>Key Characteristics:</b><br>
-• Not uniform shells but complex, structured regions<br>
-• Density varies significantly throughout<br>
-• Influenced by galactic tides and stellar encounters<br>
-• Contains an estimated 1-100 trillion objects >1km<br><br>
+* Not uniform shells but complex, structured regions<br>
+* Density varies significantly throughout<br>
+* Influenced by galactic tides and stellar encounters<br>
+* Contains an estimated 1-100 trillion objects >1km<br><br>
 
 <b>Scientific Evidence:</b><br>
-• Comet orbital inclinations suggest spherical outer region<br>
-• Jupiter-family comets indicate inner disk-like region<br>
-• Computer simulations show tidal sculpting effects<br>
-• Stellar encounter models predict clumpy structure<br><br>
+* Comet orbital inclinations suggest spherical outer region<br>
+* Jupiter-family comets indicate inner disk-like region<br>
+* Computer simulations show tidal sculpting effects<br>
+* Stellar encounter models predict clumpy structure<br><br>
 
 <b>Recent Discoveries:</b><br>
-• Objects like Sedna may be inner Oort Cloud members<br>
-• 2012 VP113 provides evidence for inner Oort population<br>
-• NEOWISE survey improving population estimates
+* Objects like Sedna may be inner Oort Cloud members<br>
+* 2012 VP113 provides evidence for inner Oort population<br>
+* NEOWISE survey improving population estimates
 """

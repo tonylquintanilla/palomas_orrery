@@ -70,7 +70,7 @@ def ensure_cache_system_ready():
 #                pickle.dump({}, f)
         
         if not os.path.exists(pkl_file):
-            print(f"\n⚠️  WARNING: Cache file not found: {pkl_file}")
+            print(f"\n[WARN]  WARNING: Cache file not found: {pkl_file}")
             print(f"   This will create an EMPTY cache file.")
             print(f"   If you have existing cache data, this may indicate a path problem.")
             response = input(f"   Create empty cache at this location? (y/n): ")
@@ -82,7 +82,7 @@ def ensure_cache_system_ready():
                 print(f"   Skipping cache creation. Please check your file paths.")
                 print(f"   Expected location: {pkl_file}")
         elif os.path.getsize(pkl_file) < 1000:  # Less than 1KB = suspicious
-                print(f"\n⚠️  WARNING: Cache file is suspiciously small: {pkl_file}")
+                print(f"\n[WARN]  WARNING: Cache file is suspiciously small: {pkl_file}")
                 print(f"   Current size: {os.path.getsize(pkl_file)} bytes")
                 print(f"   Expected: ~3MB (distance) or ~32MB (magnitude)")
                 print(f"   This may indicate corruption or path misconfiguration.")
@@ -211,7 +211,7 @@ def main():
     else:
         return      # prevents running this module without gui input
 
-    print(f"Filtering stars with apparent magnitude ≤ {mag_limit}.")
+    print(f"Filtering stars with apparent magnitude <= {mag_limit}.")
     start_time = time.time()
 
     try:
@@ -254,11 +254,11 @@ def main():
             print(f"  Cached: {gaia_meta.entry_count} stars up to magnitude {gaia_meta.limit_value}")
 
         if hip_status == 'expand' or gaia_status == 'expand':
-            print("\n✔ INCREMENTAL FETCH PERFORMED")
+            print("\n[OK] INCREMENTAL FETCH PERFORMED")
         elif hip_status == 'subset' or gaia_status == 'subset':
-            print("\n✔ FILTERED EXISTING CACHE (no fetch needed)")
+            print("\n[OK] FILTERED EXISTING CACHE (no fetch needed)")
         else:
-            print("\n✔ EXACT CACHE HIT - using existing data")
+            print("\n[OK] EXACT CACHE HIT - using existing data")
         print("="*60 + "\n")
 
 # Debug: Check what smart_load_or_fetch returned

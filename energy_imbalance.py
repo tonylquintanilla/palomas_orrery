@@ -53,10 +53,10 @@ def load_ocean_heat_content():
         # Using gradient (centered difference)
         ohc_rate_zj_per_year = np.gradient(df['ohc'].values, df['decimal_year'].values)
         
-        # Convert to W/m²
+        # Convert to W/m^2
         # 1 ZJ = 10^22 J
-        # Earth surface area = 5.1 × 10^14 m²
-        # 1 year = 365.25 × 24 × 3600 seconds
+        # Earth surface area = 5.1 x 10^14 m^2
+        # 1 year = 365.25 x 24 x 3600 seconds
         
         earth_surface_m2 = 5.1e14
         seconds_per_year = 365.25 * 24 * 3600
@@ -107,8 +107,8 @@ def create_energy_imbalance_visualization():
     Create energy imbalance visualization (2005-2025)
     
     Dual Y-axis plot showing:
-    - Left: Temperature anomaly (°C)
-    - Right: Energy imbalance (W/m²)
+    - Left: Temperature anomaly ( degC)
+    - Right: Energy imbalance (W/m^2)
     
     Demonstrates the relationship between energy accumulation (cause)
     and temperature change (effect), revealing climate system inertia.
@@ -140,45 +140,45 @@ def create_energy_imbalance_visualization():
     # Each event includes characteristics explaining what made it unique
     enso_events = [
         {
-            'start': 2006.5, 'end': 2007.2, 'type': 'El Niño',  # Back to original coordinates
-            'color': 'rgba(255, 140, 0, 0.15)', 'label': '06/07 EÑ',
-            'hover': '2006-07 El Niño: Moderate event. Followed 2005-06 La Niña. Brief but contributed to 2006 being 6th warmest year on record.'
+            'start': 2006.5, 'end': 2007.2, 'type': 'El Nino',  # Back to original coordinates
+            'color': 'rgba(255, 140, 0, 0.15)', 'label': '06/07 EN',
+            'hover': '2006-07 El Nino: Moderate event. Followed 2005-06 La Nina. Brief but contributed to 2006 being 6th warmest year on record.'
         },
         {
-            'start': 2007.5, 'end': 2008.2, 'type': 'La Niña', 
+            'start': 2007.5, 'end': 2008.2, 'type': 'La Nina', 
             'color': 'rgba(70, 130, 180, 0.15)', 'label': '07/08 LN',
-            'hover': '2007-08 La Niña: Moderate event. Cooled global temperatures but 2008 still among top 10 warmest years - showing baseline warming trend.'
+            'hover': '2007-08 La Nina: Moderate event. Cooled global temperatures but 2008 still among top 10 warmest years - showing baseline warming trend.'
         },
         {
-            'start': 2009.5, 'end': 2010.3, 'type': 'El Niño', 
-            'color': 'rgba(255, 140, 0, 0.15)', 'label': '09/10 EÑ',
-            'hover': '2009-10 El Niño: Moderate-Strong event. Made 2010 tied for warmest year on record (with 2005). Ended prolonged neutral/La Niña conditions.'
+            'start': 2009.5, 'end': 2010.3, 'type': 'El Nino', 
+            'color': 'rgba(255, 140, 0, 0.15)', 'label': '09/10 EN',
+            'hover': '2009-10 El Nino: Moderate-Strong event. Made 2010 tied for warmest year on record (with 2005). Ended prolonged neutral/La Nina conditions.'
         },
         {
-            'start': 2010.5, 'end': 2012.2, 'type': 'La Niña', 
+            'start': 2010.5, 'end': 2012.2, 'type': 'La Nina', 
             'color': 'rgba(70, 130, 180, 0.15)', 'label': '10/12 (L) LN',
-            'hover': '2010-12 La Niña: LONG multi-year event (rare). Strong cooling yet 2010 still warmest on record. Demonstrates how much baseline warming has occurred.'
+            'hover': '2010-12 La Nina: LONG multi-year event (rare). Strong cooling yet 2010 still warmest on record. Demonstrates how much baseline warming has occurred.'
         },
         {
-            'start': 2015.5, 'end': 2016.3, 'type': 'El Niño', 
-            'color': 'rgba(255, 140, 0, 0.15)', 'label': '15/16 (S) EÑ',
-            'hover': '2015-16 El Niño: SUPER event - one of strongest on record (with 1997-98, 1982-83). Made 2016 hottest year ever recorded. Massive global temperature spike.'
+            'start': 2015.5, 'end': 2016.3, 'type': 'El Nino', 
+            'color': 'rgba(255, 140, 0, 0.15)', 'label': '15/16 (S) EN',
+            'hover': '2015-16 El Nino: SUPER event - one of strongest on record (with 1997-98, 1982-83). Made 2016 hottest year ever recorded. Massive global temperature spike.'
         },
         {
-            'start': 2016.5, 'end': 2017.2, 'type': 'La Niña', 
+            'start': 2016.5, 'end': 2017.2, 'type': 'La Nina', 
             'color': 'rgba(70, 130, 180, 0.15)', 'label': '16/17 LN',
-            'hover': '2016-17 La Niña: Brief weak event following super El Niño. Cooled temperatures but 2017 still 3rd warmest on record (behind 2016, 2015).'
+            'hover': '2016-17 La Nina: Brief weak event following super El Nino. Cooled temperatures but 2017 still 3rd warmest on record (behind 2016, 2015).'
         },
-        # Skipping 2018/2019 Weak El Niño for clarity/space
+        # Skipping 2018/2019 Weak El Nino for clarity/space
         {
-            'start': 2020.5, 'end': 2023.3, 'type': 'La Niña', 
+            'start': 2020.5, 'end': 2023.3, 'type': 'La Nina', 
             'color': 'rgba(70, 130, 180, 0.15)', 'label': '20/23 (3xL) LN',
-            'hover': '2020-23 La Niña: UNPRECEDENTED triple-dip - 3 consecutive years (extremely rare). Despite strong cooling, 2020-2023 all in top 10 warmest years. Shows inexorable warming trend.'
+            'hover': '2020-23 La Nina: UNPRECEDENTED triple-dip - 3 consecutive years (extremely rare). Despite strong cooling, 2020-2023 all in top 10 warmest years. Shows inexorable warming trend.'
         },
         {
-            'start': 2023.5, 'end': 2024.3, 'type': 'El Niño', 
-            'color': 'rgba(255, 140, 0, 0.15)', 'label': '23/24 EÑ',
-            'hover': '2023-24 El Niño: Moderate-Strong event. Made 2023 hottest year on record by large margin, breaking 2016 record. Combined with long-term warming trend.'
+            'start': 2023.5, 'end': 2024.3, 'type': 'El Nino', 
+            'color': 'rgba(255, 140, 0, 0.15)', 'label': '23/24 EN',
+            'hover': '2023-24 El Nino: Moderate-Strong event. Made 2023 hottest year on record by large margin, breaking 2016 record. Combined with long-term warming trend.'
         },
     ]
     
@@ -217,7 +217,7 @@ def create_energy_imbalance_visualization():
             secondary_y=False  # Use primary y-axis (temperature scale)
         )
         # Add annotation for label at bottom (simplified) with hover info
-        label_text = 'El Niño' if event['type'] == 'El Niño' else 'La Niña'
+        label_text = 'El Nino' if event['type'] == 'El Nino' else 'La Nina'
         enso_annotations.append(
             dict(
                 x=(event['start'] + event['end']) / 2,  # Center of band
@@ -255,7 +255,7 @@ def create_energy_imbalance_visualization():
             name='Air Temperature Anomaly (GMST)',  # Clarified
             line=dict(color='#DC143C', width=3),  # Crimson
             marker=dict(size=6, color='#DC143C'),
-            hovertemplate='Year: %{x:.0f}<br>Air Temp: %{y:.2f}°C<extra></extra>',
+            hovertemplate='Year: %{x:.0f}<br>Air Temp: %{y:.2f} degC<extra></extra>',
             legendgroup='measurements',
             legendgrouptitle_text='Measurements'
         ),
@@ -386,7 +386,7 @@ def create_energy_imbalance_visualization():
             name='Energy Imbalance (from ocean heat uptake)',
             line=dict(color='#FF8C00', width=3),  # Dark orange
             marker=dict(size=5, color='#FF8C00'),
-            hovertemplate='Year: %{x:.1f}<br>Imbalance: %{y:.2f} W/m²<extra></extra>',
+            hovertemplate='Year: %{x:.1f}<br>Imbalance: %{y:.2f} W/m^2<extra></extra>',
             legendgroup='measurements'
         ),
         secondary_y=True
@@ -460,7 +460,7 @@ def create_energy_imbalance_visualization():
     )
     
     fig.update_yaxes(
-        title_text="<b>Global Mean Surface Temperature Anomaly (°C)</b><br><i>GMST (NASA GISS)</i>",
+        title_text="<b>Global Mean Surface Temperature Anomaly ( degC)</b><br><i>GMST (NASA GISS)</i>",
         secondary_y=False,
         gridcolor='lightgray',
         showgrid=True,
@@ -470,7 +470,7 @@ def create_energy_imbalance_visualization():
     )
     
     fig.update_yaxes(
-        title_text="<b>Energy Imbalance (W/m²)</b><br>"
+        title_text="<b>Energy Imbalance (W/m^2)</b><br>"
                 "<b>Ocean Heat Content (ZJ)</b><br>",
         #           "<i>Ocean Heat Uptake/Release (0-2000m)</i>",
         secondary_y=True,
@@ -539,8 +539,8 @@ def create_energy_imbalance_visualization():
     
     # Add humanity energy comparison annotation
     # Calculate committed "pipeline" warming from stored Ocean Heat Content
-    # Rough estimate: Ocean Heat Content capacity ~4000 J/(kg·K), mass ~1.4e21 kg for 0-2000m
-    # Stored excess heat ~23 ZJ, implies ~0.4°C committed warming in pipeline
+    # Rough estimate: Ocean Heat Content capacity ~4000 J/(kg*K), mass ~1.4e21 kg for 0-2000m
+    # Stored excess heat ~23 ZJ, implies ~0.4 degC committed warming in pipeline
     pipeline_warming = 0.4  # Conservative estimate
     
     fig.add_annotation(
@@ -549,10 +549,10 @@ def create_energy_imbalance_visualization():
         text=f'<b>Scale Comparison:</b><br>'
              f'Humanity\'s annual energy use: ~0.6 ZJ/yr<br>'
              f'Ocean Heat Content accumulation: ~{avg_annual_ohc:.1f} ZJ/yr<br>'
-             f'<i>Ocean absorbs ~{avg_annual_ohc/0.6:.0f}× human energy use!</i><br><br>'
+             f'<i>Ocean absorbs ~{avg_annual_ohc/0.6:.0f}x human energy use!</i><br><br>'
              f'<b>Pipeline Warming:</b><br>'
              f'Stored heat: {ohc_end - ohc_start:.1f} ZJ since 2005<br>'
-             f'<i>~{pipeline_warming:.1f}°C committed warming<br>still unrealized in atmosphere</i>',
+             f'<i>~{pipeline_warming:.1f} degC committed warming<br>still unrealized in atmosphere</i>',
         showarrow=True,
         arrowhead=2,
         arrowsize=1,
@@ -597,7 +597,7 @@ def create_energy_imbalance_visualization():
         text=f'<b>Integration Baseline</b><br>'
              f'Starting: {ohc_baseline:.1f} ZJ (2005)<br>'
              f'Accumulated: {total_accumulation:.1f} ZJ (20 yrs)<br>'
-             f'<i>Trend: {slope_first:.2f}→{slope_second:.2f} ZJ/yr<br>(increasing rate)</i>',
+             f'<i>Trend: {slope_first:.2f}[OK]{slope_second:.2f} ZJ/yr<br>(increasing rate)</i>',
         showarrow=True,
         arrowhead=2,
         arrowsize=1,
@@ -630,7 +630,7 @@ def create_energy_imbalance_visualization():
     # ohc_trend = np.polyval(coefs, years_ohc)
 
     # Calculate instantaneous slopes of the quadratic at 5-year intervals
-    # For quadratic y = a*x² + b*x + c, the derivative (slope) is: dy/dx = 2*a*x + b
+    # For quadratic y = a*x^2 + b*x + c, the derivative (slope) is: dy/dx = 2*a*x + b
     def quadratic_slope(x, coefs):
         """Calculate instantaneous slope of quadratic at point x"""
         return 2 * coefs[0] * x + coefs[1]
@@ -794,16 +794,16 @@ def create_energy_imbalance_visualization():
             f'Ocean heat accumulation<br>'
     #        f'(March 2005 - March 2025): ~{avg_annual_ohc:.2f} ZJ/yr<br>'
             f'(March 2005 - March 2025): ~ 1.08 ZJ/yr<br>'
-    #        f'<i>Ocean absorbs ~{avg_annual_ohc/0.6:.0f}× human energy use!</i><br><br>'
-            f'<i>Ocean absorbs ~{1.075/0.6:.0f}× human energy use!</i><br>'
+    #        f'<i>Ocean absorbs ~{avg_annual_ohc/0.6:.0f}x human energy use!</i><br><br>'
+            f'<i>Ocean absorbs ~{1.075/0.6:.0f}x human energy use!</i><br>'
             f'<b>Total Accumulation (2005-2025):</b><br>'
     #        f'Final: {ohc_2025:.1f} ZJ (2025)<br>'
     #        f'March 2025: {31.9:.1f} ZJ<br>'            
     #        f'Accumulated: {total_accumulation:.1f} ZJ<br>'
             f'Accumulated since March 2005: {22.9:.1f} ZJ<br>'            
-            f'Acceleration: {slope_2010:.2f} → {slope_2025:.2f} ZJ/yr (+{100*(slope_2025-slope_2010)/slope_2010:.0f}%)<br>',
+            f'Acceleration: {slope_2010:.2f} [OK] {slope_2025:.2f} ZJ/yr (+{100*(slope_2025-slope_2010)/slope_2010:.0f}%)<br>',
     #        f'<b>Pipeline Warming:</b><br>'        # this comment needs more developement
-    #        f'<i>~{pipeline_warming:.1f}°C committed warming (2005)<br>still unrealized in atmosphere</i>',
+    #        f'<i>~{pipeline_warming:.1f} degC committed warming (2005)<br>still unrealized in atmosphere</i>',
         showarrow=True,
         arrowhead=2,
         arrowsize=1,
@@ -868,7 +868,7 @@ def create_energy_imbalance_visualization():
     fig.add_annotation(
         x=year_2025,  # Use actual decimal year position
         y=0.6,
-        text=f'April 2025<br>Imbalance: {imbalance_2025:.2f} W/m²<br>Temp: +{temp_2025:.2f}°C',
+        text=f'April 2025<br>Imbalance: {imbalance_2025:.2f} W/m^2<br>Temp: +{temp_2025:.2f} degC',
         showarrow=False,
         arrowhead=2,
         arrowsize=1,
@@ -889,17 +889,17 @@ def create_energy_imbalance_visualization():
         xref='paper',
         yref='paper',
         text=
-    #    '<b>The Causal Chain:</b> Greenhouse gases (CO₂, CH₄) trap outgoing radiation → Earth\'s energy imbalance (more in than out) → '
-    #         '~90% of excess energy absorbed by oceans (0-2000m layer acts as heat reservoir) → atmospheric temperature rises with lag.<br>'
+    #    '<b>The Causal Chain:</b> Greenhouse gases (CO2, CH4) trap outgoing radiation [OK] Earth\'s energy imbalance (more in than out) [OK] '
+    #         '~90% of excess energy absorbed by oceans (0-2000m layer acts as heat reservoir) [OK] atmospheric temperature rises with lag.<br>'
     #         '<b>Visual Guide:</b> Red shading = ocean warming periods (absorbing energy). Blue = cooling periods (releasing energy). '
-    #         'Net red dominance → blue dotted line rises (cumulative heat storage grows) → continued atmospheric warming as stored heat eventually releases.<br>'
+    #         'Net red dominance [OK] blue dotted line rises (cumulative heat storage grows) [OK] continued atmospheric warming as stored heat eventually releases.<br>'
 
-            '<b>The Causal Chain:</b> The accumulation of greenhouse gases (CO₂, CH₄) creates a sustained <b>Planetary Energy Imbalance (EEI)</b> (Orange line). Over 90% of this excess energy is absorbed by the' 
+            '<b>The Causal Chain:</b> The accumulation of greenhouse gases (CO2, CH4) creates a sustained <b>Planetary Energy Imbalance (EEI)</b> (Orange line). Over 90% of this excess energy is absorbed by the' 
             'deep ocean, driving the rise of the <b>Ocean Heat Content (OHC)</b>.<br>' 
 
-    #        '<b>ENSO & The Trade-off:</b> The El Niño-La Niña oscillation modulates this energy flow:<br>' 
-            ' *<b>La Niña (Blue Bands):</b> The ocean absorbs more solar energy, temporarily <b>increasing the EEI</b> (Orange line peaks) while **cooling the atmosphere** (GMST dips).<br>' 
-            ' *<b>El Niño (Orange Bands):</b> The ocean releases stored heat into the atmosphere, causing atmospheric temperature to <b>peak</b> (GMST peaks) while the planet temporarily reflects more sunlight, **decreasing the EEI** (Orange line dips).<br>'            
+    #        '<b>ENSO & The Trade-off:</b> The El Nino-La Nina oscillation modulates this energy flow:<br>' 
+            ' *<b>La Nina (Blue Bands):</b> The ocean absorbs more solar energy, temporarily <b>increasing the EEI</b> (Orange line peaks) while **cooling the atmosphere** (GMST dips).<br>' 
+            ' *<b>El Nino (Orange Bands):</b> The ocean releases stored heat into the atmosphere, causing atmospheric temperature to <b>peak</b> (GMST peaks) while the planet temporarily reflects more sunlight, **decreasing the EEI** (Orange line dips).<br>'            
             '<b>Key Insight:</b> The atmospheric temperature (GMST) swings are merely a *redistribution* of heat. The net positive accumulation shown by the rising **OHC** demonstrates the growing total committed warming stored in the climate system.<br>' 
 
     #         '<b>Data Sources:</b> '
@@ -939,12 +939,12 @@ def main():
             # Fallback: save as HTML without dialog
             output_file = 'energy_imbalance_2005_2025.html'
             fig.write_html(output_file)
-            print(f"✓ Saved to: {output_file}")
+            print(f"[OK] Saved to: {output_file}")
         
-        print("✓ Energy imbalance visualization created successfully")
+        print("[OK] Energy imbalance visualization created successfully")
         return True
     else:
-        print("✗ Could not create visualization")
+        print("[FAIL] Could not create visualization")
         return False
 
 if __name__ == '__main__':

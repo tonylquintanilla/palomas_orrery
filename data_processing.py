@@ -15,7 +15,7 @@ def convert_icrs_to_radec_strings(data):
     
     Adds two new columns:
     - ra_str: Right Ascension in format "HHh MMm SS.SSs"
-    - dec_str: Declination in format "±DD° MM' SS.S""
+    - dec_str: Declination in format "+/-DD deg MM' SS.S""
     
     Args:
         data: Astropy Table with RA_ICRS and DE_ICRS columns
@@ -60,7 +60,7 @@ def convert_icrs_to_radec_strings(data):
             
             # Format the strings
             ra_strings.append(f"{ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s")
-            dec_strings.append(f"{dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\"")
+            dec_strings.append(f"{dec_sign}{dec_d:02d} deg {dec_m:02d}' {dec_s:04.1f}\"")
             valid_coords += 1
         else:
             ra_strings.append('')
@@ -276,7 +276,7 @@ def print_star_details(star):
     print(f"\nStar: {star['Star_Name']}")
     print(f"Gmag: {star['Gmag']:.2f}")
     print(f"Estimated Vmag: {star['Estimated_Vmag']:.2f}")
-    print(f"Parallax: {star['Plx']:.3f} ± {star['e_Plx']:.3f} mas")
+    print(f"Parallax: {star['Plx']:.3f} +/- {star['e_Plx']:.3f} mas")
     print(f"Temperature: {star['Temperature']:.0f}K")
     print(f"Luminosity: {star['Luminosity']:.3f} Lsun")
 

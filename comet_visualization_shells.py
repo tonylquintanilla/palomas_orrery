@@ -112,11 +112,11 @@ HISTORICAL_TAIL_DATA = {
     # JPL Horizons: C/2025 N1, Rec #90004917, Soln.date: 2025-Oct-10
     # - Perihelion: Oct 29.48, 2025 (TP=2460977.9835 JD) at QR=1.356 AU
     # - Eccentricity: e=6.137 (highly hyperbolic, interstellar origin confirmed)
-    # - Inclination: i=175.1° (retrograde orbit)
+    # - Inclination: i=175.1 deg (retrograde orbit)
     # - Total magnitude: M1=12.3 (Horizons comet model)
-    # - Composition: CO₂-rich with H₂O present (JWST/SPHEREx confirmed)
+    # - Composition: CO2-rich with H2O present (JWST/SPHEREx confirmed)
     # - Tail lengths: No official measurements; values are model-based estimates
-    # - SPHEREx measured CO₂ coma radius: ~3.5×10⁵ km (~0.0023 AU)
+    # - SPHEREx measured CO2 coma radius: ~3.5x10^5 km (~0.0023 AU)
     # - ESA Mars flyby (Oct 3, 2025): Imaged at ~30M km, no tail length released
     # - Colors reflect red-sloped, dust-rich appearance in imaging
     # - Anti-tail feature mentioned in some reports, not yet confirmed
@@ -126,16 +126,16 @@ HISTORICAL_TAIL_DATA = {
     #    'max_ion_tail_length_mkm': 15,  # PRELIMINARY: model-based, multi-million km extent
     #    'peak_brightness_mag': 12.3,  # M1 from JPL Horizons (total magnitude model)
     #    'perihelion_distance_au': 1.356,  # Oct 29, 2025, QR from JPL Horizons
-    #    'description': "3I/ATLAS (C/2025 N1) - Interstellar; e~6.14, i~175°. "
-    #                "JWST & SPHEREx: CO₂-dominated coma with H₂O, CO present; "
+    #    'description': "3I/ATLAS (C/2025 N1) - Interstellar; e~6.14, i~175 deg. "
+    #                "JWST & SPHEREx: CO2-dominated coma with H2O, CO present; "
     #                "tail extents still TBD from official releases.",
     #    'coma_color': 'green',  # Red-sloped, dust-rich appearance in observations
     #    'dust_tail_color': 'yellow',  # Red-sloped dust tail
-    #    'ion_tail_color': 'blue',  # CO₂+/CO+ emissions
+    #    'ion_tail_color': 'blue',  # CO2+/CO+ emissions
     #    'hyperbolic': True,  # e = 6.137 (highly hyperbolic)
     #    'co2_rich': True,  # JWST/SPHEREx confirmed
     #    'preliminary_data': True,  # Flag for tail measurement uncertainty
-    #    'max_active_distance_au': 2.5  # Conservative estimate for CO₂-driven activity
+    #    'max_active_distance_au': 2.5  # Conservative estimate for CO2-driven activity
 
 # 3I/ATLAS UPDATED DATA (December 2025):
         # - Perihelion: Oct 29.48, 2025 at 1.356 AU (between Mars and Earth)
@@ -766,7 +766,7 @@ comet_visualization_info = {
         "* Dust Tail (yellowish): Curved tail following orbital path, up to 10 million km\n"
         "* Ion Tail (bluish): Straight tail pointing away from Sun, up to 20 million km\n"
         "* Coma: Fuzzy atmosphere around nucleus, up to 100,000 km radius\n"
-        "* Nucleus: 15×8×8 km 'dirty snowball'\n\n"
+        "* Nucleus: 15x8x8 km 'dirty snowball'\n\n"
         "Tail brightness and length scale with distance from the Sun.\n"
         "Most active at perihelion (0.586 AU from Sun)."
     ),
@@ -917,22 +917,22 @@ def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name
     
     # Print diagnostic info
     print(f"\n[COMET VIZ] {comet_name} at {distance_au:.2f} AU from Sun")
-    print(f"  Nucleus: ✓ Always visible")
+    print(f"  Nucleus: [OK] Always visible")
     
     if features_visible['coma']:
-        print(f"  Coma: ✓ Visible")
+        print(f"  Coma: [OK] Visible")
     else:
-        print(f"  Coma: ✗ Too far (needs <{COMET_FEATURE_THRESHOLDS['coma']} AU)")
+        print(f"  Coma: [FAIL] Too far (needs <{COMET_FEATURE_THRESHOLDS['coma']} AU)")
     
     if features_visible['dust_tail']:
-        print(f"  Dust tail: ✓ Visible")
+        print(f"  Dust tail: [OK] Visible")
     else:
-        print(f"  Dust tail: ✗ Too far (needs <{COMET_FEATURE_THRESHOLDS['dust_tail']} AU)")
+        print(f"  Dust tail: [FAIL] Too far (needs <{COMET_FEATURE_THRESHOLDS['dust_tail']} AU)")
     
     if features_visible['ion_tail']:
-        print(f"  Ion tail: ✓ Visible")
+        print(f"  Ion tail: [OK] Visible")
     else:
-        print(f"  Ion tail: ✗ Too far (needs <{COMET_FEATURE_THRESHOLDS['ion_tail']} AU)")
+        print(f"  Ion tail: [FAIL] Too far (needs <{COMET_FEATURE_THRESHOLDS['ion_tail']} AU)")
     
     # If comet is very far, show nucleus + legend entries for missing features
     if distance_au > COMET_FEATURE_THRESHOLDS['coma']:
@@ -969,7 +969,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name
             hoverinfo='skip'
         ))
         
-        print(f"  → Added nucleus only with legend entries for missing features")
+        print(f"  [OK] Added nucleus only with legend entries for missing features")
         return fig
     
     # Comet is active - create visualization with available features
@@ -1048,11 +1048,11 @@ def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name
                 hoverinfo='skip'
             ))
         
-        print(f"  → Activity factor: {activity_factor:.1%}")
-        print(f"  → Added {len(traces)} visualization traces")
+        print(f"  [OK] Activity factor: {activity_factor:.1%}")
+        print(f"  [OK] Added {len(traces)} visualization traces")
         
     except Exception as e:
-        print(f"  ✗ Error creating comet visualization: {e}")
+        print(f"  [FAIL] Error creating comet visualization: {e}")
         import traceback
         traceback.print_exc()
     

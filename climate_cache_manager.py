@@ -1,215 +1,168 @@
-# climate_cache_manager.py
 """
-Climate Data Cache Manager for Paloma's Orrery
-Handles safe updates to climate data caches with atomic saves and validation.
+Climate Cache Manager for Paloma's Orrery
+Manages safe updates of climate data caches with validation and rollback.
 
-Follows the same safety protocols as orbit_data_manager.py:
-- Never overwrites large files with small data
-- Creates backups before updates
-- Validates data before saving
-- Uses atomic file operations (temp file -> backup -> move)
-
-Data preservation is climate action.
+Updated December 2025 - Fixed API calls to match fetch_climate_data.py
 """
 
-import json
 import os
-import sys
+import json
+import inspect
 
-
-# Output Files
-CO2_OUTPUT_FILE = "co2_mauna_loa_monthly.json"
-TEMP_OUTPUT_FILE = "temperature_giss_monthly.json"
-ICE_OUTPUT_FILE = "arctic_ice_extent_monthly.json"
-
-# Minimum acceptable file sizes (bytes)
-MIN_CO2_SIZE = 30_000  # ~30 KB minimum
-MIN_TEMP_SIZE = 60_000  # ~60 KB minimum
-MIN_ICE_SIZE = 20_000   # ~20 KB minimum
+# Output file paths - now in data/ subdirectory
+CO2_OUTPUT_FILE = "data/co2_mauna_loa_monthly.json"
+TEMP_OUTPUT_FILE = "data/temperature_giss_monthly.json"
+ICE_OUTPUT_FILE = "data/arctic_ice_extent_monthly.json"
 
 
 def update_climate_data(status_callback=None):
     """
-    Update climate data by directly calling fetch_climate_data functions.
-    
-    This avoids subprocess issues on Windows by importing and calling directly.
-    
+    Update all climate datasets by importing and calling fetch functions directly.
     Returns: (success, message, details)
     """
+    def status(msg):
+        if status_callback:
+            status_callback(msg)
+        print(msg)
+    
     print("\n" + "="*70)
     print("CLIMATE DATA UPDATE")
     print("="*70)
-    print()
     
-    if status_callback:
-        status_callback("Fetching latest climate data...")
-    
-    # Import the fetch module
     try:
-        print("Attempting to import fetch_climate_data module...")
+        # Try to import the fetch module
+        status("Attempting to import fetch_climate_data module...")
         import fetch_climate_data
-        print("✓ Successfully loaded fetch_climate_data module")
+        status("[OK] Successfully loaded fetch_climate_data module")
     except ImportError as e:
         error_msg = f"Could not import fetch_climate_data: {e}"
-        print(f"✗ {error_msg}")
-        return False, error_msg, None
-    except Exception as e:
-        error_msg = f"Error importing fetch_climate_data: {e}"
-        print(f"✗ {error_msg}")
-        import traceback
-        traceback.print_exc()
-        return False, error_msg, None
+        status(f"[FAIL] {error_msg}")
+        return False, error_msg, {}
     
-    # Track results
-    results = {}
+    results = {
+        'co2': {'success': False},
+        'temperature': {'success': False},
+        'ice': {'success': False}
+    }
     
     # ========== FETCH CO2 DATA ==========
     print("\n" + "="*60)
-    print("1. Fetching Mauna Loa CO₂ monthly data...")
+    print("1. Fetching Mauna Loa CO2 monthly data...")
     print("="*60)
     
-    if status_callback:
-        status_callback("Downloading CO₂ data from NOAA...")
-    
     try:
-        # Check if function accepts status_callback parameter
-        import inspect
-        sig = inspect.signature(fetch_climate_data.fetch_mauna_loa_co2)
-        has_callback = 'status_callback' in sig.parameters
+        status("Downloading CO2 data from NOAA...")
         
-        if has_callback:
-            co2_records, co2_metadata = fetch_climate_data.fetch_mauna_loa_co2(status_callback)
-        else:
-            co2_records, co2_metadata = fetch_climate_data.fetch_mauna_loa_co2()
+        # fetch_mauna_loa_co2 returns just records (not a tuple)
+        co2_records = fetch_climate_data.fetch_mauna_loa_co2()
         
-        if not co2_records or not co2_metadata:
-            raise Exception("No CO₂ data returned")
+        if not co2_records:
+            raise Exception("No CO2 data returned")
         
-        if status_callback:
-            status_callback("Validating and saving CO₂ data...")
+        status(f"[OK] Fetched {len(co2_records)} CO2 records")
         
-        # Save using fetch_climate_data's save_cache function
-        if fetch_climate_data.save_cache(CO2_OUTPUT_FILE, co2_records, co2_metadata):
+        # save_cache expects: (filename, records, metadata_func)
+        # Pass the function, not the result
+        if fetch_climate_data.save_cache(CO2_OUTPUT_FILE, co2_records, fetch_climate_data.create_co2_metadata):
             latest = co2_records[-1]
-            print(f"✓ CO₂ updated: {latest['co2_ppm']:.2f} ppm")
-            
-            if status_callback:
-                status_callback(f"✓ CO₂ updated: {latest['co2_ppm']:.2f} ppm")
+            co2_value = latest.get('co2_ppm', latest.get('average', 0))
+            status(f"[OK] CO2 updated: {co2_value:.2f} ppm")
             
             results['co2'] = {
                 'success': True,
                 'records': len(co2_records),
-                'latest': latest['co2_ppm']
+                'latest': co2_value
             }
         else:
-            raise Exception("Failed to save CO₂ data")
+            raise Exception("Failed to save CO2 data")
         
     except Exception as e:
-        print(f"✗ CO₂ fetch failed: {e}")
-        import traceback
-        traceback.print_exc()
-        results['co2'] = {
-            'success': False,
-            'error': str(e)
-        }
+        error_msg = str(e)
+        status(f"[FAIL] CO2 fetch failed: {error_msg}")
+        results['co2'] = {'success': False, 'error': error_msg}
     
     # ========== FETCH TEMPERATURE DATA ==========
     print("\n" + "="*60)
     print("2. Fetching NASA GISS temperature anomaly data...")
     print("="*60)
     
-    if status_callback:
-        status_callback("Downloading temperature data from NASA GISS...")
-    
     try:
-        import inspect
-        sig = inspect.signature(fetch_climate_data.fetch_nasa_giss_temperature)
-        has_callback = 'status_callback' in sig.parameters
+        status("Downloading temperature data from NASA GISS...")
         
-        if has_callback:
-            temp_records, temp_metadata = fetch_climate_data.fetch_nasa_giss_temperature(status_callback)
-        else:
-            temp_records, temp_metadata = fetch_climate_data.fetch_nasa_giss_temperature()
+        # fetch_nasa_giss_temperature returns (records, metadata) tuple
+        temp_records, temp_metadata = fetch_climate_data.fetch_nasa_giss_temperature()
         
-        if not temp_records or not temp_metadata:
+        if not temp_records:
             raise Exception("No temperature data returned")
         
-        if status_callback:
-            status_callback("Validating and saving temperature data...")
+        status(f"[OK] Fetched {len(temp_records)} temperature records")
         
-        # Save using fetch_climate_data's save_cache function
-        if fetch_climate_data.save_cache(TEMP_OUTPUT_FILE, temp_records, temp_metadata):
+        # For temperature, we already have metadata, so pass it as a lambda
+        if fetch_climate_data.save_cache(TEMP_OUTPUT_FILE, temp_records, lambda r: temp_metadata):
             latest = temp_records[-1]
-            print(f"✓ Temperature updated: {latest['anomaly_c']:+.2f}°C")
-            
-            if status_callback:
-                status_callback(f"✓ Temperature updated: {latest['anomaly_c']:+.2f}°C")
+            temp_value = latest.get('anomaly_c', latest.get('anomaly_celsius', 0))
+            status(f"[OK] Temperature updated: {temp_value:+.2f} deg C")
             
             results['temperature'] = {
                 'success': True,
                 'records': len(temp_records),
-                'latest': latest['anomaly_c']
+                'latest': temp_value
             }
         else:
             raise Exception("Failed to save temperature data")
         
     except Exception as e:
-        print(f"✗ Temperature fetch failed: {e}")
-        import traceback
-        traceback.print_exc()
-        results['temperature'] = {
-            'success': False,
-            'error': str(e)
-        }
+        error_msg = str(e)
+        status(f"[FAIL] Temperature fetch failed: {error_msg}")
+        results['temperature'] = {'success': False, 'error': error_msg}
     
     # ========== FETCH ARCTIC ICE DATA ==========
     print("\n" + "="*60)
     print("3. Fetching Arctic sea ice extent data...")
     print("="*60)
     
-    if status_callback:
-        status_callback("Downloading Arctic ice data from NSIDC...")
-    
     try:
-        import inspect
-        sig = inspect.signature(fetch_climate_data.fetch_arctic_sea_ice)
-        has_callback = 'status_callback' in sig.parameters
+        status("Downloading Arctic ice data from NSIDC...")
         
-        if has_callback:
-            ice_records, ice_metadata = fetch_climate_data.fetch_arctic_sea_ice(status_callback)
+        # Function is fetch_arctic_ice (not fetch_arctic_sea_ice)
+        # Returns just records (like CO2)
+        ice_records = fetch_climate_data.fetch_arctic_ice()
+        
+        if not ice_records:
+            raise Exception("No ice data returned")
+        
+        status(f"[OK] Fetched {len(ice_records)} ice records")
+        
+        # Use create_ice_metadata function if it exists, otherwise create inline
+        if hasattr(fetch_climate_data, 'create_ice_metadata'):
+            metadata_func = fetch_climate_data.create_ice_metadata
         else:
-            ice_records, ice_metadata = fetch_climate_data.fetch_arctic_sea_ice()
+            # Inline metadata function
+            def metadata_func(records):
+                return {
+                    'source': 'NSIDC Sea Ice Index V4',
+                    'url': 'https://nsidc.org/data/seaice_index',
+                    'units': 'million km^2',
+                    'records': len(records)
+                }
         
-        if not ice_records or not ice_metadata:
-            raise Exception("No Arctic ice data returned")
-        
-        if status_callback:
-            status_callback("Validating and saving Arctic ice data...")
-        
-        # Save using fetch_climate_data's save_cache function
-        if fetch_climate_data.save_cache(ICE_OUTPUT_FILE, ice_records, ice_metadata):
+        if fetch_climate_data.save_cache(ICE_OUTPUT_FILE, ice_records, metadata_func):
             latest = ice_records[-1]
-            print(f"✓ Arctic ice updated: {latest['extent_million_km2']:.2f} million km²")
-            
-            if status_callback:
-                status_callback(f"✓ Arctic ice updated: {latest['extent_million_km2']:.2f} million km²")
+            ice_value = latest.get('extent', latest.get('extent_million_km2', 0))
+            status(f"[OK] Arctic ice updated: {ice_value:.2f} million km^2")
             
             results['ice'] = {
                 'success': True,
                 'records': len(ice_records),
-                'latest': latest['extent_million_km2']
+                'latest': ice_value
             }
         else:
-            raise Exception("Failed to save Arctic ice data")
+            raise Exception("Failed to save ice data")
         
     except Exception as e:
-        print(f"✗ Arctic ice fetch failed: {e}")
-        import traceback
-        traceback.print_exc()
-        results['ice'] = {
-            'success': False,
-            'error': str(e)
-        }
+        error_msg = str(e)
+        status(f"[FAIL] Arctic ice fetch failed: {error_msg}")
+        results['ice'] = {'success': False, 'error': error_msg}
     
     # ========== SUMMARY ==========
     print("\n" + "="*60)
@@ -220,40 +173,31 @@ def update_climate_data(status_callback=None):
     total_count = len(results)
     
     for dataset, result in results.items():
-        status = '✅' if result.get('success', False) else '❌'
-        print(f"{status} {dataset.upper()}: {'SUCCESS' if result.get('success', False) else 'FAILED'}")
-        if result.get('success', False):
+        status_str = '[OK]' if result.get('success', False) else '[FAIL]'
+        print(f"{status_str} {dataset.upper()}: ", end='')
+        if result.get('success'):
+            print(f"SUCCESS")
             print(f"    Records: {result.get('records', 'N/A')}")
             print(f"    Latest: {result.get('latest', 'N/A')}")
+        else:
+            print(f"FAILED - {result.get('error', 'Unknown error')}")
     
-    print()
+    all_success = success_count == total_count
     
-    if success_count == total_count:
-        summary = (f"All datasets updated successfully! "
-                  f"CO₂: {results['co2']['records']} records ({results['co2']['latest']:.2f} ppm), "
-                  f"Temp: {results['temperature']['records']} records ({results['temperature']['latest']:+.2f}°C), "
-                  f"Ice: {results['ice']['records']} records ({results['ice']['latest']:.2f} million km²)")
-        print("✅ All datasets updated successfully!")
-        return True, summary, results
-    elif success_count > 0:
-        summary = f"Partial update: {success_count}/{total_count} datasets updated successfully"
-        print(f"⚠️  {summary}")
-        return True, summary, results
+    if all_success:
+        message = "All datasets updated successfully!"
+        status(f"[OK] {message}")
     else:
-        summary = "Update failed: No datasets were successfully updated"
-        print(f"✗ {summary}")
-        return False, summary, results
-
-
-if __name__ == "__main__":
-    """Test the update function"""
-    success, message, details = update_climate_data()
-    print(f"\nFinal result: {'SUCCESS' if success else 'FAILED'}")
+        message = f"{success_count}/{total_count} datasets updated"
+        status(f"[WARN] {message}")
+    
+    print(f"\nFinal result: {'SUCCESS' if all_success else 'PARTIAL'}")
     print(f"Message: {message}")
     
-    if details:
-        print("\nDetails:")
-        for dataset, result in details.items():
-            print(f"  {dataset}: {result}")
-    
-    sys.exit(0 if success else 1)
+    return all_success, message, results
+
+
+if __name__ == '__main__':
+    success, message, details = update_climate_data()
+    print(f"\nResult: {success}")
+    print(f"Message: {message}")

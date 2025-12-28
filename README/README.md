@@ -1,4 +1,4 @@
-# Last updated: December 25, 2025
+# Last updated: December 27, 2025
 
 # Paloma's Orrery
 
@@ -48,12 +48,26 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - [Project Website](https://tonylquintanilla.github.io/palomas_orrery/)
 - [Instagram: @palomas_orrery](https://www.instagram.com/palomas_orrery/)
 - [Video Tutorials](https://www.youtube.com/@tony_quintanilla/featured)
-- Contact: tonyquintanilla@gmail.com
+- Contact: <tonyquintanilla@gmail.com>
 
 ## Quick Start
 
-**For experienced Python users:**
+### Standalone Executables (No Python Required)
 
+Download from the [GitHub Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases):
+
+| Platform | Download | Size |
+|----------|----------|------|
+| Windows 10/11 | `Palomas_Orrery_v2.2.0_Windows.zip` | ~300 MB |
+| macOS 10.15+ | `Palomas_Orrery_v2.2.0_macOS.zip` | ~300 MB |
+
+**Windows:** Extract, double-click `START_HERE.bat`
+
+**macOS:** Extract, double-click `start_orrery.command` (right-click -> Open first time to bypass Gatekeeper)
+
+### Python Source Code
+
+**For experienced Python users:**
 ```bash
 # 1. Install Python 3.11-3.13 with PATH enabled
 # 2. Clone repository
@@ -77,7 +91,7 @@ python palomas_orrery.py
 
 ### Prerequisites
 
-- **Windows 10/11** (Mac/Linux also supported)
+- **Windows 10/11 or macOS 10.15+** (Linux untested but should work)
 - **Python 3.11 to 3.13** (tested and verified compatible)
   - As of October 2025, Python 3.13 is recommended
   - Python 3.14 was just released - wait 1-2 months before using it
@@ -211,7 +225,7 @@ The cache files contain pre-processed stellar data and orbital calculations. Wit
 
 1. **Go to the releases page:**
    - Visit [github.com/tonylquintanilla/palomas_orrery/releases](https://github.com/tonylquintanilla/palomas_orrery/releases)
-   
+
 2. **Download the cache file:**
    - Look for `cache_files_compressed.zip` (approximately 150-200 MB)
    - Click to download
@@ -306,6 +320,13 @@ You're ready to launch!
 **"Module not found" errors**
 - Some packages may not have installed correctly
 - Try: `pip install [module_name]` for the specific missing module
+
+**macOS Gatekeeper warning**
+- First launch shows "cannot be verified" warning
+- Solution: Right-click -> Open -> Open (only needed once per app)
+
+**macOS Tkinter not found**
+- Install via Homebrew: `brew install python-tk@3.12`
 
 ### Updating the Application
 
@@ -830,13 +851,13 @@ Contributions are welcome! This project is maintained by a single developer but 
 - Improved stellar classification algorithms
 - Exoplanetary system support
 - Performance optimizations for large datasets
-- Cross-platform testing (Mac, Linux)
+- Cross-platform testing (Linux - Windows & macOS now supported!)
 - Documentation improvements
 - Climate data integration (temperature, sea level, ice extent)
 
 **How to Contribute:**
 
-Suggestions are welcome: tonyquintanilla@gmail.com
+Suggestions are welcome: <tonyquintanilla@gmail.com>
 
 **Bug Reports:**
 
@@ -858,13 +879,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Contact
 
 **Author:** Tony Quintanilla
-**Email:** tonyquintanilla@gmail.com
+**Email:** <tonyquintanilla@gmail.com>
 **GitHub:** [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)
 **Website:** [tonylquintanilla.github.io/palomas_orrery](https://tonylquintanilla.github.io/palomas_orrery/)
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** December 2025 (v1.9 - Trajectory Two-Layer System & Animation Shells)
+**Last Updated:** December 2025 (v2.2.0 - Cross-Platform Release with Trajectory Visualization)
 
 ---
 
@@ -877,4 +898,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - [Scripps CO2 Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
 - [Astropy](https://www.astropy.org/) and [Astroquery](https://astroquery.readthedocs.io/) development teams
 - [Plotly](https://plotly.com/) visualization library
-- AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/), [DeepSeek](https://www.deepseek.com/)
+- AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/)
+- Cross-platform compatibility (Windows & macOS) achieved December 2025

@@ -53,7 +53,7 @@ class MessierObjectHandler:
                             'ra': data['ra'],
                             'dec': data['dec'],
                             'ra_str': data['ra'],  # Original string format like '05h34m31.94s'
-                            'dec_str': data['dec'], # Original string format like '+22°00′52.2″'                            
+                            'dec_str': data['dec'], # Original string format like '+22 deg00 arcmin52.2 arcsec'                            
                             'notes': data.get('notes', ''),
                             'size': data.get('size', None),
                             'age': data.get('age', None),

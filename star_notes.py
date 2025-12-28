@@ -2,7 +2,7 @@
 unique_notes = {
 
         '* alf And': 
-        '<br><br>α Andromeda or Alpha Andromeda, better known as Alpheratz or Sirrah. It\'s the brightest star in <br>' 
+        '<br><br>alpha Andromeda or Alpha Andromeda, better known as Alpheratz or Sirrah. It\'s the brightest star in <br>' 
         'the constellation Andromeda, but it\'s also considered part of the constellation Pegasus. In <br>' 
         'fact, it forms the top left corner of the Great Square of Pegasus asterism. Alpheratz is a <br>' 
         'blue-white subgiant star, meaning it\'s hotter and more massive than our Sun, and it\'s <br>' 
@@ -49,7 +49,7 @@ unique_notes = {
         '* lam Aqr': '<br>Hydor or Lambda Aquarii',
 
         '* alf Aql': 
-        '<br>α Aquilae or Alpha Aquilae, also known as Altair.<br> ' 
+        '<br>alpha Aquilae or Alpha Aquilae, also known as Altair.<br> ' 
         '* Fast spinner: Altair is completes a rotation in just 8.9 hours! This rapid spin causes it to have a flattened shape<br> ' 
         '  with its equatorial diameter being significantly larger than its polar diameter.<br> ' 
         '* Hot and bright: Altair is a white main-sequence star of spectral type A7V. It\'s about 1.8 times more massive than<br> ' 
@@ -81,7 +81,7 @@ unique_notes = {
         '* lam Ari': '<br>Lambda Arietis',
 
         '* alf Aur': 
-        '<br>α Auriga or Alpha Auriga, better known as Capella.<br> ' 
+        '<br>alpha Auriga or Alpha Auriga, better known as Capella.<br> ' 
         '* Spectroscopic binary: Capella consists of two pairs of binary stars.<br> ' 
         '* Capella Aa and Ab: The main pair are two yellow giant stars orbiting each other closely. They are both about 2.5 times<br> ' 
         '  more massive than our Sun and have evolved off the main sequence.<br> ' 
@@ -103,7 +103,7 @@ unique_notes = {
         '* 14 Aur': '<br>14 Aurigae',
 
         '* alf Boo': 
-        '<br>α Bootes or Alpha Bootes is also known as Arcturus. It is the fourth brightest star in the entire<br> ' 
+        '<br>alpha Bootes or Alpha Bootes is also known as Arcturus. It is the fourth brightest star in the entire<br> ' 
         'Arcturus is an orange giant star, in a later stage of its life compared to our Sun.<br> ' 
         '* Distance: About 37 light-years away from Earth.<br> ' 
         '* Mass: Around 1.1 solar masses.<br> ' 
@@ -133,11 +133,11 @@ unique_notes = {
         '* gam Cap': '<br>Nashira',  
 
         '* del Cap': 
-        '<br>Delta Capricorni (δ Cap) also known as Deneb Algedi, a star in the constellation Capricornus.<br>'
+        '<br>Delta Capricorni (delta Cap) also known as Deneb Algedi, a star in the constellation Capricornus.<br>'
         '* Multiple Star System: Delta Capricorni is actually a complex multiple star system. It consists of:<br> ' 
-        '  * δ Cap A: A yellow-white giant star.<br> ' 
-        '  * δ Cap B: A fainter companion that orbits δ Cap A. This companion is itself a binary star (two stars orbiting each other).<br> ' 
-        '* Variable Star: The primary star, δ Cap A, is classified as an eclipsing binary. This means that the two stars in the δ Cap B<br> ' 
+        '  * delta Cap A: A yellow-white giant star.<br> ' 
+        '  * delta Cap B: A fainter companion that orbits delta Cap A. This companion is itself a binary star (two stars orbiting each other).<br> ' 
+        '* Variable Star: The primary star, delta Cap A, is classified as an eclipsing binary. This means that the two stars in the delta Cap B<br> ' 
         '  system periodically pass in front of each other from our perspective, causing slight dips in the overall brightness of the<br> ' 
         '  system.<br> ' 
         '* Visibility: Delta Capricorni is visible to the naked eye, but it\'s not particularly bright. It has an apparent magnitude<br> ' 
@@ -147,7 +147,7 @@ unique_notes = {
         '* zet Cap': '<br>Marakk',
  
         '* alf Car': 
-        '<br>α Carina or Alpha Carina, better known as Canopus, is the second brightest star in the entire<br> ' 
+        '<br>alpha Carina or Alpha Carina, better known as Canopus, is the second brightest star in the entire<br> ' 
         'night sky, after Sirius. Canopus is a yellow-white supergiant star, much larger and more luminous<br> ' 
         'than our Sun, and in a later stage of its stellar evolution.<br> ' 
         '* Distance: About 310 light-years away from Earth.<br> ' 
@@ -158,7 +158,7 @@ unique_notes = {
         '<a href="https://en.wikipedia.org/wiki/Canopus">',
 
         '* bet Car': 
-        '<br>β Carinae or Beta Carinae, better known as Miaplacidus.<br>' 
+        '<br>beta Carinae or Beta Carinae, better known as Miaplacidus.<br>' 
         '* One of the brightest stars: Miaplacidus shines brightly in the night sky, ranking as the 28th brightest star overall.<br>' 
         '* Blue-white giant: It\'s a blue-white giant star of spectral type A2 III, meaning it\'s hotter, larger, and more<br>' 
         '  massive than our Sun.<br>' 
@@ -194,7 +194,7 @@ unique_notes = {
         '* rho Cas': '<br>Rho Cassiopeiae',
 
         '* alf Cen A': 
-        '<br>α Centauri or Alpha Centauri A, is part of the Alpha Centauri system, the<br> ' 
+        '<br>alpha Centauri or Alpha Centauri A, is part of the Alpha Centauri system, the<br> ' 
         '  closest star system to the Sun. It consists of Alpha Centauri A and B, and<br> ' 
         '  Proxima Centauri. A and B orbit each other, while Proxima orbits the A-B pair.<br>' 
         '  Alpha Centauri is the closest star system to our own, located just about 4.37<br> ' 
@@ -212,30 +212,30 @@ unique_notes = {
         '<a href="https://en.wikipedia.org/wiki/Alpha_Centauri">',
 
         '* alf Cen B': 
-        '<br>α Centauri B or Alpha Centauri B.<br>' 
+        '<br>alpha Centauri B or Alpha Centauri B.<br>' 
         '* Red dwarf companion to Alpha Centauri A. Alpha Centauri B is a fascinating star and a crucial component of the Alpha<br>' 
         '  Centauri system, the closest star system to our own!<br>' 
         '* Closest stellar neighbor: Alpha Centauri is a triple star system located just 4.37 light-years away from Earth. It<br>' 
         '  consists of three stars: Alpha Centauri A, Alpha Centauri B, and Proxima Centauri.<br>' 
         '* Binary pair: Alpha Centauri A and B form a binary pair, orbiting each other closely with a period of about 80 years.<br>' 
-        '* Smaller and cooler than the Sun: α Centauri B is a K-type main-sequence star, which means it\'s smaller and cooler<br>' 
+        '* Smaller and cooler than the Sun: alpha Centauri B is a K-type main-sequence star, which means it\'s smaller and cooler<br>' 
         '  than our Sun. It has about 90% of the Sun\'s mass and about 50% of its luminosity.<br>' 
         '* Exoplanet Candidate:<br>' 
-        '  * Alpha Centauri Bc: In 2021 Bc, was detected orbiting α Centauri B. This candidate is estimated to be about six times<br>' 
+        '  * Alpha Centauri Bc: In 2021 Bc, was detected orbiting alpha Centauri B. This candidate is estimated to be about six times<br>' 
         '    the mass of Earth.'
         '<a href="https://en.wikipedia.org/wiki/Alpha_Centauri">',
 
         '* bet Cen': 
-        '<br>Beta Centauri, or β Cen. Beta Centauri is also known by the proper name Hadar or Agena, derived from<br> ' 
-        'an Arabic word meaning "ground." It\'s actually a triple star system! The two main stars (β Cen A and β Cen B)<br> ' 
-        'orbit each other closely, and a much fainter third star (β Cen C) orbits the pair at a greater distance.<br> ' 
+        '<br>Beta Centauri, or beta Cen. Beta Centauri is also known by the proper name Hadar or Agena, derived from<br> ' 
+        'an Arabic word meaning "ground." It\'s actually a triple star system! The two main stars (beta Cen A and beta Cen B)<br> ' 
+        'orbit each other closely, and a much fainter third star (beta Cen C) orbits the pair at a greater distance.<br> ' 
         'Found in the constellation Centaurus, it\'s easily visible to the naked eye in the Southern Hemisphere.<br> ' 
         '* Distance: About 525 light-years away.<br> ' 
-        '* The Main Stars (β Cen A and B): Both are hot, blue-white stars much larger and more massive than our Sun.<br> ' 
+        '* The Main Stars (beta Cen A and B): Both are hot, blue-white stars much larger and more massive than our Sun.<br> ' 
         '* Luminosity: They are incredibly luminous, thousands of times brighter than the Sun.<br> ' 
         '* Spectral type: Classified as B1 III, indicating they are giant stars that have evolved off the main sequence.<br> ' 
         '* Young stars: Estimated to be only 10 to 20 million years old, compared to our 4.6 billion-year-old Sun.<br> ' 
-        '* Circumstellar disks: Both β Cen A and B might have disks of dust and gas orbiting them.'
+        '* Circumstellar disks: Both beta Cen A and B might have disks of dust and gas orbiting them.'
         '<a href="https://en.wikipedia.org/wiki/Beta_Centauri">',
 
         '* alf Cep': '<br>Alderamin',
@@ -265,7 +265,7 @@ unique_notes = {
         '* gam Cir': '<br>Gamma Circini', 
 
         '* alf CMa': 
-        '<br>α Canis Majoris or Alpha Canis Majoris, also known as Sirius, is the brightest star as<br> ' 
+        '<br>alpha Canis Majoris or Alpha Canis Majoris, also known as Sirius, is the brightest star as<br> ' 
         'seen from Earth. It is a binary star system, with a White Dwarf companion.<br> ' 
         'Sirius shines with a brilliant white light that\'s easily visible even from<br> ' 
         'light-polluted areas. It\'s a main-sequence star, meaning it\'s fusing hydrogen.<br> ' 
@@ -285,7 +285,7 @@ unique_notes = {
         '<a href="https://en.wikipedia.org/wiki/Sirius">',
 
         '* eps CMa': 
-        '<br>ε Canis Majoris or Epsilon Canis Majoris, better known as Adhara.<br>' 
+        '<br>epsilon Canis Majoris or Epsilon Canis Majoris, better known as Adhara.<br>' 
         '* Adhara is the second-brightest star in the constellation Canis Major, the Great Dog, after Sirius.<br>' 
         '* One of the most luminous stars: It\'s also one of the most intrinsically luminous stars visible to the naked eye. It<br>' 
         '  shines with a luminosity roughly 25,000 times that of our Sun!<br>' 
@@ -298,7 +298,7 @@ unique_notes = {
         '<a href="https://en.wikipedia.org/wiki/Epsilon_Canis_Majoris">',
 
         '* del CMa': 
-        '<br>δ Canis Majoris or Delta Canis Majoris, also known as Wezen.<br>' 
+        '<br>delta Canis Majoris or Delta Canis Majoris, also known as Wezen.<br>' 
         '* One of the brightest stars: It\'s one of the brightest stars in Canis Major and is the 35th brightest star in the<br>' 
         '  entire night sky.<br>' 
         '* Yellow-white supergiant: Wezen is a yellow-white supergiant of spectral type F8 Ia. This means it\'s much hotter,<br>' 
@@ -320,12 +320,12 @@ unique_notes = {
         '* ome CMa': '<br>Omicron2 Canis Majoris', 
 
         '* ksi02 CMa': 
-        '<br>Also Xi2 Canis Majoris. Xi2 Canis Majoris, which is Latinized from ξ2 Canis Majoris, is an astrometric binary star<br>'
+        '<br>Also Xi2 Canis Majoris. Xi2 Canis Majoris, which is Latinized from xi2 Canis Majoris, is an astrometric binary star<br>'
         'system in the southern constellation of Canis Major.<br>' 
         '<a href="https://en.wikipedia.org/wiki/Xi2_Canis_Majoris">',
 
         '* alf CMi': 
-        '<br>α Canis Minoris or Alpha Canis Minoris, also known as Procyon. <br> ' 
+        '<br>alpha Canis Minoris or Alpha Canis Minoris, also known as Procyon. <br> ' 
         '* Eighth brightest star: Procyon shines brightly in our night sky, ranking as the eighth-brightest star overall.<br> ' 
         '* Nearby neighbor: Located just 11.46 light-years away, Procyon is one of the closest stars to our solar system.<br> ' 
         '* Binary system: Procyon is a binary star system, consisting of two stars:<br> ' 
@@ -363,7 +363,7 @@ unique_notes = {
         '* alf Cru': '<br>Acrux',
 
         '* bet Cru': 
-        '<br>β Crucis or Beta Crucis, more commonly known as Mimosa or Becrux.<br>' 
+        '<br>beta Crucis or Beta Crucis, more commonly known as Mimosa or Becrux.<br>' 
         '* 20th brightest star: Mimosa shines brilliantly, ranking as the 20th brightest star in the entire night sky.<br> ' 
         '* Blue giant: It\'s a blue giant star of spectral type B0.5 III, meaning it\'s much hotter, larger, and more massive than our Sun.<br>' 
         '* Part of a system: Mimosa is actually a binary star system, or possibly even a triple system. The main star, Mimosa A, has a<br>' 
@@ -405,7 +405,7 @@ unique_notes = {
         '* alf CVn': '<br>Cor Caroli',         
 
         '* alf Cyg': 
-        '<br>α Cygnus or Alpha Cygnus, also known as Deneb or Arided.<br> '
+        '<br>alpha Cygnus or Alpha Cygnus, also known as Deneb or Arided.<br> '
         '* One of the most luminous stars: Deneb is a blue-white supergiant, one of the most luminous stars known in the Milky Way<br> ' 
         '  galaxy. It\'s estimated to be at least 50,000 times more luminous than our Sun.<br> ' 
         '* Immense size: Though its exact size is also subject to some uncertainty due to its distance, Deneb is thought to have a<br> ' 
@@ -458,7 +458,7 @@ unique_notes = {
         '* gam Equ': '<br>Gamma Equulei', 
 
         '* alf Eri': 
-        '<br>α Eridani, or Alpha Eridani, often shortened to α Eri, and more famously known as Achernar! Its name comes from<br> ' 
+        '<br>alpha Eridani, or Alpha Eridani, often shortened to alpha Eri, and more famously known as Achernar! Its name comes from<br> ' 
         '  an Arabic phrase meaning "the end of the river," <br> ' 
         '* A Rapidly Rotating Giant: Achernar is notable for its extremely rapid rotation. It spins so fast that it\'s<br> ' 
         '  significantly flattened at its poles and bulges at the equator, more like a lentil than a sphere.<br> ' 
@@ -494,14 +494,14 @@ unique_notes = {
         '* e Eri': '<br>Also known as 82 Eridani.',
 
         '* omi02 Eri': 
-        '<br>ο² Eridani A, also known as Keid. It is a K1V-type main-<br>' 
+        '<br>omicron^2 Eridani A, also known as Keid. It is a K1V-type main-<br>' 
         'sequence star (specifically K1V). it has a radius about 85 percent of the <br>' 
-        'Sun and a mass around 82 percent of the Sun. ο² Eri A is in the triple star <br>'
-        'ο² Eridani. It is estimated to be around 5.7 billion years old. Unlike its <br>' 
-        'White Dwarf companion (B) and Red Dwarf companion (C), ο² Eri A does not <br>' 
+        'Sun and a mass around 82 percent of the Sun. omicron^2 Eri A is in the triple star <br>'
+        'omicron^2 Eridani. It is estimated to be around 5.7 billion years old. Unlike its <br>' 
+        'White Dwarf companion (B) and Red Dwarf companion (C), omicron^2 Eri A does not <br>' 
         'exhibit dramatic flares or significant variability. As a K-type main-sequence <br>' 
         'star, it has a longer lifespan than our Sun. It will continue fusing hydrogen <br>' 
-        'in its core for many billions of years. ο² Eri A was featured as the location <br>' 
+        'in its core for many billions of years. omicron^2 Eri A was featured as the location <br>' 
         'of the fictional planet Vulcan in the Star Trek universe.'
         '<a href="https://en.wikipedia.org/wiki/40_Eridani">',
 
@@ -512,14 +512,14 @@ unique_notes = {
         'type, indicating a hydrogen-rich atmosphere. Even though a white dwarf <br>' 
         'has fused most of its hydrogen, the "hydrogen-rich atmosphere" is a <br>' 
         'result of gravitational settling and represents a thin outer layer. <br>' 
-        'ο² Eri B is very small. It has about 68% the mass of our Sun, packed <br>' 
+        'omicron^2 Eri B is very small. It has about 68% the mass of our Sun, packed <br>' 
         'into that an Earth-sized volume! This makes it incredibly dense. It is <br>' 
         'very faint, shining primarily due to stored heat rather than ongoing <br>' 
-        'fusion. It is part of the triple star system ο² Eridani. It is estimated <br>' 
-        'to be around 4 billion years old. ο² Eri A, the primary star in the <br>' 
+        'fusion. It is part of the triple star system omicron^2 Eridani. It is estimated <br>' 
+        'to be around 4 billion years old. omicron^2 Eri A, the primary star in the <br>' 
         'system, a K-type main-sequence star, is slightly smaller and cooler than <br>' 
-        'our Sun. ο² Eri C is a red dwarf star, much smaller and cooler than both <br>' 
-        'A and B. ο² Eri B and C form a close binary pair that orbits around the <br>' 
+        'our Sun. omicron^2 Eri C is a red dwarf star, much smaller and cooler than both <br>' 
+        'A and B. omicron^2 Eri B and C form a close binary pair that orbits around the <br>' 
         'primary star A at a considerable distance.'
         '<a href="https://en.wikipedia.org/wiki/40_Eridani">',
 
@@ -530,7 +530,7 @@ unique_notes = {
         '* nu For': '<br>Nu Fornacis', 
 
         '* alf Gem': 
-        '<br>α Gem or alpha Gemini, better known as Castor.<br>' 
+        '<br>alpha Gem or alpha Gemini, better known as Castor.<br>' 
         '* Gemini\'s Head: Castor marks the head of one of the twins in the constellation Gemini.<br>' 
         '* Sextuple star system: While it appears as a single star to the naked eye, Castor is actually a system of six stars!<br>' 
         '  It consists of three binary pairs that orbit each other.<br>' 
@@ -547,13 +547,13 @@ unique_notes = {
         '* Near Pollux: It\'s located near its "twin" star, Pollux, which is slightly brighter and has a more orange hue.'
         '<a href="https://en.wikipedia.org/wiki/Castor_(star)">',
  
-        '* bet Gem': '<br>β Geminorum or Beta Geminorum, better known as Pollux.<br>' 
+        '* bet Gem': '<br>beta Geminorum or Beta Geminorum, better known as Pollux.<br>' 
         '* Orange giant: Pollux is an evolved star that has moved off the main sequence and expanded into an orange giant. It\'s<br>' 
         '  about twice as massive as our Sun and has a diameter roughly nine times larger.<br>' 
         '* Cooler than the Sun: Pollux is cooler than our Sun, with a surface temperature of about 4,865 Kelvin. This gives it a<br>' 
         '  distinctive orange hue.<br> ' 
         '* 17th brightest star: Pollux shines brightly, ranking as the 17th brightest star in the entire night sky.<br>' 
-        '* Exoplanet Host: In 2006, astronomers discovered an exoplanet orbiting Pollux. This planet, designated Pollux b (or β<br>' 
+        '* Exoplanet Host: In 2006, astronomers discovered an exoplanet orbiting Pollux. This planet, designated Pollux b (or beta<br>' 
         '  Geminorum b), is a gas giant with a mass at least 2.3 times that of Jupiter. It orbits Pollux at a distance of about 1.64<br>' 
         '  astronomical units (AU), taking approximately 590 days to complete one orbit.<br>' 
         '* Future evolution: Pollux will eventually exhaust its nuclear fuel and shed its outer layers, leaving behind a white dwarf', 
@@ -588,17 +588,17 @@ unique_notes = {
         '* bet Ind': '<br>Beta Indi', 
 
         '* eps Ind': '<br>Also known as Epsilon Indi. Epsilon Indi is actually a triple <br>' 
-        'star system, consisting of: ε Indi A, the main, K-type main-sequence star. <br>' 
-        'ε Indi Ba and Bb are a binary pair of brown dwarfs orbiting ε Indi A at a <br>' 
+        'star system, consisting of: epsilon Indi A, the main, K-type main-sequence star. <br>' 
+        'epsilon Indi Ba and Bb are a binary pair of brown dwarfs orbiting epsilon Indi A at a <br>' 
         'considerable distance. Brown dwarfs are "failed stars" that are not massive <br>' 
-        'enough to sustain hydrogen fusion in their cores. ε Indi B (Ba and Bb) are <br>' 
+        'enough to sustain hydrogen fusion in their cores. epsilon Indi B (Ba and Bb) are <br>' 
         'approximately 69 and 49 times the mass of Jupiter, respectively with an <br>' 
-        'orbital period around ε Indi A estimated to be tens of thousands of years.',
+        'orbital period around epsilon Indi A estimated to be tens of thousands of years.',
 
         '* alf Lac': '<br>Alpha Lacertae', 
         '* bet Lac': '<br>Beta Lacertae', 
  
-        '* alf Leo': '<br>α Leo or Alpha Leo, is more formally known as Regulus or Cor Leonis, and it\'s the brightest star in the constellation <br>' 
+        '* alf Leo': '<br>alpha Leo or Alpha Leo, is more formally known as Regulus or Cor Leonis, and it\'s the brightest star in the constellation <br>' 
         'Leo the Lion. Regulus is a quadruple star system, with four stars orbiting each other: Regulus A: The main component <br>' 
         'and the one we see as the bright "star." It\'s a blue-white main-sequence star, much hotter and larger than our Sun. <br>' 
         'Regulus B: A faint white dwarf companion to Regulus A. They orbit each other very closely. Regulus C and D: A pair of <br>' 
@@ -660,7 +660,7 @@ unique_notes = {
         '* alf Lyn': '<br>Alpha Lyncis', 
         '* 31 Lyn': '<br>31 Lyncis', 
 
-        '* alf Lyr': '<br>α Lyr, Alpha Lyrae, more commonly known as Vega.<br> ' 
+        '* alf Lyr': '<br>alpha Lyr, Alpha Lyrae, more commonly known as Vega.<br> ' 
         '* Fifth brightest star: Vega shines brilliantly in our night sky, ranking as the fifth-brightest star overall and the<br> ' 
         '  second-brightest in the northern celestial hemisphere.<br> ' 
         '* Close proximity: Located a mere 25 light-years away, Vega is considered one of our closest stellar neighbors.<br> ' 
@@ -712,7 +712,7 @@ unique_notes = {
         '* zet Oph': '<br>Zeta Ophiuchi',
         '* lam Oph': '<br>Marfik',
 
-        '* alf Ori': '<br>α Ori, Alpha Orionis, better known by its captivating name Betelgeuse.<br> ' 
+        '* alf Ori': '<br>alpha Ori, Alpha Orionis, better known by its captivating name Betelgeuse.<br> ' 
         '* Immense size: Betelgeuse is classified as a red supergiant, one of the largest and most luminous stars known. If it<br> ' 
         '  were placed at the center of our solar system, its surface would extend beyond the orbit of Jupiter!<br> ' 
         '* Cool but bright: Despite its cool surface temperature of about 3,500 Kelvin, Betelgeuse is incredibly luminous,<br> ' 
@@ -727,7 +727,7 @@ unique_notes = {
         '  years. This event will be a spectacular sight, visible even during the day. After the supernova, Betelgeuse will likely<br> ' 
         '  leave behind a neutron star or a black hole.',
 
-        '* bet Ori': '<br>β Ori, Beta Orionis, better known as Rigel.<br> ' 
+        '* bet Ori': '<br>beta Ori, Beta Orionis, better known as Rigel.<br> ' 
         '* Massive and luminous: Rigel is a blue supergiant, a star that has evolved off the main sequence and expanded<br> ' 
         '  significantly. It\'s estimated to be around 17 times more massive than our Sun and a staggering 66,000 times more luminous!<br> ' 
         '* Intense heat: With a surface temperature of about 11,000 Kelvin, it shines with a brilliant blue-white light.<br> ' 
@@ -740,7 +740,7 @@ unique_notes = {
         '* Short lifespan: Rigel is destined to have a relatively short lifespan compared to our Sun. It will likely end its life<br> ' 
         '  in a supernova explosion, possibly leaving behind a neutron star or black hole.',
 
-        '* gam Ori': '<br>γ Orionis or Gamma Orionis, better known as Bellatrix.<br>' 
+        '* gam Ori': '<br>gamma Orionis or Gamma Orionis, better known as Bellatrix.<br>' 
         '* Orion\'s Shoulder: Bellatrix is located in the constellation Orion, marking the hunter\'s left shoulder.<br>' 
         '* Third brightest in Orion: It\'s the third-brightest star in Orion, after Rigel and Betelgeuse, and the 27th brightest<br>' 
         '  star in the entire night sky.<br>' 
@@ -753,7 +753,7 @@ unique_notes = {
         '  stage of its stellar life cycle.<br>' 
         '* Future evolution: Bellatrix is expected to eventually end its life as a massive white dwarf.',
 
-        '* del Ori': '<br>δ Ori or delta Orionis, better known as Mintaka.<br>' 
+        '* del Ori': '<br>delta Ori or delta Orionis, better known as Mintaka.<br>' 
         '* Mintaka is a star system that marks the westernmost point of Orion\'s Belt<br>' 
         '* While it appears as a single star to the naked eye, Mintaka is actually a multiple star system of six or more stars!<br>' 
         '* Mintaka Aa1, Aa2, and Ab: The main component is itself a triple star system. Aa1 and Aa2 are two close binary stars<br>' 
@@ -766,7 +766,7 @@ unique_notes = {
         '* Powerful stellar winds: Like other massive stars, these stars have powerful stellar winds that expel material into space.<br>' 
         '* Distance: Mintaka is located about 900 light-years away from Earth.',
 
-        '* eps Ori': '<br>ε Orionis or Epsilon Orionis, more commonly known as Alnilam.<br>' 
+        '* eps Ori': '<br>epsilon Orionis or Epsilon Orionis, more commonly known as Alnilam.<br>' 
         '* Fourth brightest in Orion: It\'s the fourth-brightest star in the constellation Orion and the 29th brightest star in the<br>' 
         '  entire night sky.<br>' 
         '* Blue supergiant: Alnilam is a blue supergiant of spectral type B0 Ia. This means it\'s incredibly hot, massive, and luminous.<br>' 
@@ -779,7 +779,7 @@ unique_notes = {
         '  life in a spectacular supernova explosion.<br>' 
         '* Surrounded by nebulosity: Alnilam is surrounded by a faint reflection nebula, NGC 1990, which is illuminated by the star\'s light.',
       
-        '* zet Ori': '<br>ζ Orionis or Zeta Orionis, more commonly known as Alnitak.<br>' 
+        '* zet Ori': '<br>zeta Orionis or Zeta Orionis, more commonly known as Alnitak.<br>' 
         '* Orion\'s Belt: Alnitak is one of the three stars that form Orion\'s Belt, the prominent line of stars across the<br>' 
         '  Hunter\'s waist.' 
         '* Triple star system: While it appears as a single star to the naked eye, Alnitak is actually a triple star system.<br>' 
@@ -806,7 +806,7 @@ unique_notes = {
         '* sig Ori': '<br>Sigma Orionis',
         '* tau Ori': '<br>Tau Orionis',
 
-        '* iot Ori': '<br>ι Ori or iota Orionis, which goes by the name Hatysa.<br>' 
+        '* iot Ori': '<br>iota Ori or iota Orionis, which goes by the name Hatysa.<br>' 
         '* Hatysa is situated within Orion\'s Sword, a prominent asterism hanging from Orion\'s Belt.<br>' 
         '* Multiple star system: It\'s not just one star, but a complex system containing at least four stars!<br>' 
         '* Hatysa A: This is the main component, and it\'s itself a triple star system!<br>' 
@@ -868,7 +868,7 @@ unique_notes = {
         '* gam Pic': '<br>Gamma Pictoris',
         '* del Pic': '<br>Delta Pictoris',
 
-        '* alf PsA': '<br>α Piscis Austrinus or Alpha Piscis Austrinus, also known as Fomalhaut.<br> ' 
+        '* alf PsA': '<br>alpha Piscis Austrinus or Alpha Piscis Austrinus, also known as Fomalhaut.<br> ' 
         '* Relatively young: Fomalhaut is a young star, estimated to be around 440 million years old. This is quite young compared<br> ' 
         '  to our Sun\'s 4.6 billion years.<br> ' 
         '* Nearby and bright: Located about 25 light-years away, Fomalhaut is relatively close to our solar system and shines brightly<br> ' 
@@ -897,7 +897,7 @@ unique_notes = {
         '* ome Psc': '<br>Omega Piscium',
         '* alf Pup': '<br>Alpha Puppis',
 
-        '* zet Pup': '<br>Zeta Puppis (ζ Pup), also known by its beautiful traditional name Naos. Shining with an apparent<br> ' 
+        '* zet Pup': '<br>Zeta Puppis (zeta Pup), also known by its beautiful traditional name Naos. Shining with an apparent<br> ' 
         'magnitude of 2.25. It\'s the brightest star in the constellation Puppis (the Stern) and one of the most luminous stars<br> ' 
         'visible to the naked eye.<br> '
         '* Massive and hot: Naos is an O-type star, meaning it\'s incredibly hot and massive.<br> ' 
@@ -944,7 +944,7 @@ unique_notes = {
         '* psi Sgr': '<br>Psi Sagittarii',
         '* ome Sgr': '<br>Omega Sagittarii',
 
-        '* alf Sco': '<br>α Scorpius or Alpha Scorpius, better known as Antares. It\'s a red supergiant.<br> ' 
+        '* alf Sco': '<br>alpha Scorpius or Alpha Scorpius, better known as Antares. It\'s a red supergiant.<br> ' 
         '* Immense size: Antares is one of the largest known stars in the Milky Way galaxy. If it were placed at the center of our<br>' 
         '  solar system, its surface would extend beyond the orbit of Mars!<br> ' 
         '* Red hue and luminosity: It\'s a red supergiant, meaning it\'s relatively cool compared to other stars (about 3,400 Kelvin),<br>' 
@@ -959,7 +959,7 @@ unique_notes = {
         '* Future supernova: Antares is expected to explode as a supernova sometime in the astronomically near future.<br>' 
         '* Stellar winds: Like other massive stars, Antares has powerful stellar winds that expel material into space.',
 
-        '* lam Sco': '<br>Lambda Scorpii (λ Scorpii), which also goes by the traditional name Shaula.<br>' 
+        '* lam Sco': '<br>Lambda Scorpii (lambda Scorpii), which also goes by the traditional name Shaula.<br>' 
         '* Blue subgiant: Shaula is a blue subgiant star of spectral type B1.5 IV. This means it\'s much hotter and more massive than<br>' 
         '  our Sun, and it\'s in a stage of its life where it\'s starting to evolve off the main sequence.<br>' 
         '* Part of a system: It\'s actually a multiple star system, consisting of at least three stars. The main star, Shaula A, has<br>' 
@@ -999,7 +999,7 @@ unique_notes = {
         '* 18 Sex': '<br>18 Sextantis',
         '* 27 Sex': '<br>27 Sextantis',
 
-        '* alf Tau': '<br>α Taurus or Alpha Taurus, is better known as Aldebaran. <br>' 
+        '* alf Tau': '<br>alpha Taurus or Alpha Taurus, is better known as Aldebaran. <br>' 
         'It\'s the brightest star in the constellation Taurus (the Bull) <br>' 
         'and one of the easiest stars to spot. Aldebaran is an orange giant star, <br>' 
         'meaning it\'s in a later stage of its life compared to our Sun. Distance: About 65 light-years <br>' 
@@ -1016,7 +1016,7 @@ unique_notes = {
         'and then follow the line of Orion\'s belt stars upward. The first bright, orange-ish star you <br>' 
         'encounter is Aldebaran. It marks the eye of the bull in the constellation Taurus.',
 
-        '* bet Tau': '<br>β Tauri or Beta Tauri, better known as Elnath.<br>' 
+        '* bet Tau': '<br>beta Tauri or Beta Tauri, better known as Elnath.<br>' 
         '* Second brightest in Taurus: Elnath shines brightly, ranking as the second-brightest star in Taurus, after Aldebaran.<br>' 
         '* Giant star: It\'s a blue-white giant star of spectral type B7 III. This means it\'s much hotter, larger, and more<br>' 
         '  massive than our Sun.<br>' 
@@ -1090,7 +1090,7 @@ unique_notes = {
         '* phi Vel': '<br>Phi Velorum',
         '* ome Vel': '<br>Omega Velorum',
 
-        '* alf Vir': '<br>α Virginis or Alpha Virginis, which is better known by its beautiful name Spica or Azimech.<br> ' 
+        '* alf Vir': '<br>alpha Virginis or Alpha Virginis, which is better known by its beautiful name Spica or Azimech.<br> ' 
         '* Close-knit pair: Spica is a binary system composed of two stars orbiting incredibly close to each other.<br> ' 
         '  They\'re so close that they can\'t be resolved as separate stars even with powerful telescopes. We know they\'re<br> ' 
         '  a pair due to their combined spectrum and how their light varies.<br> ' 

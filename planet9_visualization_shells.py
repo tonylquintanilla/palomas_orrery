@@ -222,7 +222,7 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
             "  Planet Nine's orbit isn't a perfect circle but more of an oval shape (we call this eccentricity, and we're assuming <br>" 
             "  it's 0.30), the closest it gets to the Sun is a bit less than this average. To account for this, we consider the distance <br>" 
             "  at its closest approach, which is roughly its average distance multiplied by (one minus the eccentricity), <br>" 
-            "  so 600AU×(1−0.30)=600AU×0.70=420AU. This closest distance is important because the Sun's gravity is strongest there, <br>" 
+            "  so 600AUx(1-0.30)=600AUx0.70=420AU. This closest distance is important because the Sun's gravity is strongest there, <br>" 
             "  making it harder for Planet Nine to hold onto moons. Now, we also need to consider how strong Planet Nine's gravity is <br>" 
             "  compared to the Sun's. We're assuming Planet Nine has a mass of 6 times the mass of the Earth. The Sun, of course, is <br>" 
             "  vastly more massive.<br>" 

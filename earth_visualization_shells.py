@@ -8,7 +8,7 @@ from shared_utilities import create_sun_direction_indicator
 
 earth_inner_core_info = (
             "Earth's inner core is a solid sphere composed primarily of iron and nickel.\n"
-            "Despite incredible pressure, temperatures of 5,400°C (9,800°F) keep it nearly\n"
+            "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly\n"
             "at melting point. It rotates slightly faster than the rest of Earth, creating\n"
             "complex dynamics in Earth's magnetic field. The inner core is approximately\n"
             "1,220 km (760 miles) in radius."
@@ -24,7 +24,7 @@ def create_earth_inner_core_shell(center_position=(0, 0, 0)):
         'name': 'Inner Core',
         'description': (
             "Earth's inner core is a solid sphere composed primarily of iron and nickel.<br>"
-            "Despite incredible pressure, temperatures of 5,400°C (9,800°F) keep it nearly<br>"
+            "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly<br>"
             "at melting point. It rotates slightly faster than the rest of Earth, creating<br>"
             "complex dynamics in Earth's magnetic field. The inner core is approximately<br>"
             "1,220 km (760 miles) in radius."
@@ -67,7 +67,7 @@ earth_outer_core_info = (
             "Convection currents in this highly conductive fluid generate Earth's\n"
             "magnetic field through a process called the geodynamo. It extends from\n"
             "1,220 to 3,500 km from Earth's center and has temperatures ranging from\n"
-            "4,500°C (8,100°F) to 5,400°C (9,800°F)."
+            "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF)."
 )
 
 def create_earth_outer_core_shell(center_position=(0, 0, 0)):
@@ -83,7 +83,7 @@ def create_earth_outer_core_shell(center_position=(0, 0, 0)):
             "Convection currents in this highly conductive fluid generate Earth's<br>"
             "magnetic field through a process called the geodynamo. It extends from<br>"
             "1,220 to 3,500 km from Earth's center and has temperatures ranging from<br>"
-            "4,500°C (8,100°F) to 5,400°C (9,800°F)."
+            "4,500 degC (8,100 degF) to 5,400 degC (9,800 degF)."
         )
     }
     
@@ -122,7 +122,7 @@ earth_lower_mantle_info = (
             "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.\n"
             "Despite being solid, it flows very slowly through convection, driving plate tectonics.\n"
             "This region extends from 660 to 2,900 km below Earth's surface and experiences\n"
-            "temperatures from 2,200°C to 4,500°C (4,000°F to 8,100°F) and extreme pressure."
+            "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure."
 )
 
 def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
@@ -137,7 +137,7 @@ def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
             "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.<br>"
             "Despite being solid, it flows very slowly through convection, driving plate tectonics.<br>"
             "This region extends from 660 to 2,900 km below Earth's surface and experiences<br>"
-            "temperatures from 2,200°C to 4,500°C (4,000°F to 8,100°F) and extreme pressure."
+            "temperatures from 2,200 degC to 4,500 degC (4,000 degF to 8,100 degF) and extreme pressure."
         )
     }
     
@@ -176,7 +176,7 @@ earth_upper_mantle_info = (
             "The upper mantle includes the asthenosphere, a partially molten layer where\n"
             "most magma originates. This region flows more readily than the lower mantle,\n"
             "allowing tectonic plates to move. It extends from about 30 to 660 km below\n"
-            "the surface, with temperatures from 500°C to 2,200°C (900°F to 4,000°F)."
+            "the surface, with temperatures from 500 degC to 2,200 degC (900 degF to 4,000 degF)."
 )
 
 def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
@@ -191,7 +191,7 @@ def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
             "The upper mantle includes the asthenosphere, a partially molten layer where<br>"
             "most magma originates. This region flows more readily than the lower mantle,<br>"
             "allowing tectonic plates to move. It extends from about 30 to 660 km below<br>"
-            "the surface, with temperatures from 500°C to 2,200°C (900°F to 4,000°F)."
+            "the surface, with temperatures from 500 degC to 2,200 degC (900 degF to 4,000 degF)."
         )
     }
     
@@ -230,7 +230,7 @@ earth_crust_info = (
             "Earth's crust is the thin, solid outer layer where humans live. It's divided into\n"
             "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)\n"
             "made primarily of granite. The crust contains all known life and the accessible portion\n"
-            "of Earth's geological resources. Surface temperatures range from -80°C to 60°C (-112°F to 140°F)."
+            "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF)."
 )
 
 def create_earth_crust_shell(center_position=(0, 0, 0)):
@@ -247,7 +247,7 @@ def create_earth_crust_shell(center_position=(0, 0, 0)):
             "Earth's crust is the thin, solid outer layer where humans live. It's divided into<br>"
             "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)<br>"
             "made primarily of granite. The crust contains all known life and the accessible portion<br>"
-            "of Earth's geological resources. Surface temperatures range from -80°C to 60°C (-112°F to 140°F)."
+            "of Earth's geological resources. Surface temperatures range from -80 degC to 60 degC (-112 degF to 140 degF)."
         )
     }
     
@@ -387,7 +387,7 @@ earth_atmosphere_info = (
             "The lower atmosphere includes the troposphere (0-12 km) where weather occurs, and\n"
             "the stratosphere (12-50 km) which contains the ozone layer. These regions contain\n"
             "99% of atmospheric mass, primarily nitrogen and oxygen. Temperature varies from\n"
-            "about 15°C (59°F) at sea level to -60°C (-76°F) at the stratopause."
+            "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the stratopause."
 )
 
 def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
@@ -402,7 +402,7 @@ def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
             "The lower atmosphere includes the troposphere (0-12 km) where weather occurs, and<br>"
             "the stratosphere (12-50 km) which contains the ozone layer. These regions contain<br>"
             "99% of atmospheric mass, primarily nitrogen and oxygen. Temperature varies from<br>"
-            "about 15°C (59°F) at sea level to -60°C (-76°F) at the stratopause."
+            "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the stratopause."
         )
     }
     
@@ -441,7 +441,7 @@ earth_upper_atmosphere_info = (
             "The upper atmosphere extends from 50 km to about 1,000 km altitude. It includes\n"
             "the mesosphere where meteors burn up, the thermosphere where the aurora occurs and\n"
             "the International Space Station orbits, and the exosphere which gradually transitions\n"
-            "to space. In the thermosphere, temperatures can reach 2,000°C (3,600°F), though the\n"
+            "to space. In the thermosphere, temperatures can reach 2,000 degC (3,600 degF), though the\n"
             "gas is so thin that it would feel cold to human skin."
 )
 
@@ -457,7 +457,7 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
             "The upper atmosphere extends from 50 km to about 1,000 km altitude. It includes<br>"
             "the mesosphere where meteors burn up, the thermosphere where the aurora occurs and<br>"
             "the International Space Station orbits, and the exosphere which gradually transitions<br>"
-            "to space. In the thermosphere, temperatures can reach 2,000°C (3,600°F), though the<br>"
+            "to space. In the thermosphere, temperatures can reach 2,000 degC (3,600 degF), though the<br>"
             "gas is so thin that it would feel cold to human skin."
         )
     }
@@ -747,7 +747,7 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
                 "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
-                "cube root of (planet mass ÷ [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."                  
+                "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."                  
                 )
     
     # Create the trace

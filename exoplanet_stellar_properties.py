@@ -232,8 +232,8 @@ def calculate_host_star_properties(host_star_data):
     temp = properties['temperature']
     
     if radius_solar and temp and not np.isnan(radius_solar) and not np.isnan(temp):
-        # Stefan-Boltzmann law: L = 4π R² σ T⁴
-        # In solar units: L/L☉ = (R/R☉)² × (T/T☉)⁴
+        # Stefan-Boltzmann law: L = 4pi R^2 sigma T^4
+        # In solar units: L/L[SUN] = (R/R[SUN])^2 x (T/T[SUN])^4
         T_sun = 5772  # K
         properties['luminosity'] = (radius_solar ** 2) * ((temp / T_sun) ** 4)
     elif 'luminosity_solar' in host_star_data:
@@ -321,7 +321,7 @@ def create_exoplanet_host_star_hover_text(host_star_data, system_data, enhanced_
     # Luminosity
     lum = enhanced_properties.get('luminosity')
     if lum and not np.isnan(lum):
-        hover_text += f'Luminosity: {format_value(lum, ".6f")} L☉<br>'
+        hover_text += f'Luminosity: {format_value(lum, ".6f")} L[SUN]<br>'
     
     # Magnitudes
     abs_mag = enhanced_properties.get('abs_magnitude')
@@ -349,11 +349,11 @@ def create_exoplanet_host_star_hover_text(host_star_data, system_data, enhanced_
     # Mass and Radius (physical properties)
     mass = host_star_data.get('mass_solar')
     if mass:
-        hover_text += f'Mass: {format_value(mass, ".3f")} M☉<br>'
+        hover_text += f'Mass: {format_value(mass, ".3f")} M[SUN]<br>'
     
     radius = host_star_data.get('radius_solar')
     if radius:
-        hover_text += f'Radius: {format_value(radius, ".3f")} R☉<br>'
+        hover_text += f'Radius: {format_value(radius, ".3f")} R[SUN]<br>'
     
     # Age (if available)
     age = host_star_data.get('age_gyr')
@@ -377,7 +377,7 @@ def create_exoplanet_host_star_hover_text(host_star_data, system_data, enhanced_
     if notable_features:
         hover_text += '<br>Note:<br>'
         for feature in notable_features:
-            hover_text += f'• {feature}<br>'
+            hover_text += f'* {feature}<br>'
     
     # Mission info (if available)
     mission_info = host_star_data.get('mission_info')
@@ -423,17 +423,17 @@ def create_binary_star_hover_text(star_data, star_label, system_data, enhanced_p
     # Mass
     mass = star_data.get('mass_solar')
     if mass:
-        hover_text += f'Mass: {format_value(mass, ".3f")} M☉<br>'
+        hover_text += f'Mass: {format_value(mass, ".3f")} M[SUN]<br>'
     
     # Radius
     radius = star_data.get('radius_solar')
     if radius:
-        hover_text += f'Radius: {format_value(radius, ".3f")} R☉<br>'
+        hover_text += f'Radius: {format_value(radius, ".3f")} R[SUN]<br>'
     
     # Luminosity
     lum = enhanced_properties.get('luminosity')
     if lum and not np.isnan(lum):
-        hover_text += f'Luminosity: {format_value(lum, ".6f")} L☉<br>'
+        hover_text += f'Luminosity: {format_value(lum, ".6f")} L[SUN]<br>'
     
     # System context
     hover_text += f'<br>System: {system_data.get("system_name", "Unknown")}<br>'
@@ -571,7 +571,7 @@ if __name__ == '__main__':
     print(f"Temperature: {props['temperature']:.0f} K (source: {props['temperature_source']})")
     print(f"Color: {props['color']}")
     print(f"Stellar Class: {props['stellar_class']}")
-    print(f"Luminosity: {props['luminosity']:.6f} L☉")
+    print(f"Luminosity: {props['luminosity']:.6f} L[SUN]")
     print(f"Absolute Magnitude: {props['abs_magnitude']:.2f}")
     print(f"Apparent Magnitude: {props['apparent_magnitude']:.2f}")
     
@@ -592,7 +592,7 @@ if __name__ == '__main__':
     print(f"Temperature: {props['temperature']:.0f} K (source: {props['temperature_source']})")
     print(f"Color: {props['color']}")
     print(f"Stellar Class: {props['stellar_class']}")
-    print(f"Luminosity: {props['luminosity']:.6f} L☉")
+    print(f"Luminosity: {props['luminosity']:.6f} L[SUN]")
     
     # Test case 3: Temperature color interpolation
     print("\nTest 3: Temperature Color Scale")

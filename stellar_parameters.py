@@ -292,7 +292,7 @@ def calculate_stellar_parameters(combined_data):
         else:
             initial_missing_lum += 1
 
-        # If luminosity is missing and star is bright (Vmag ≤ 2.5), attempt estimation
+        # If luminosity is missing and star is bright (Vmag <= 2.5), attempt estimation
         if np.isnan(L_Lsun) and Vmag is not None and Vmag <= 2.5 and sp_type is not None:
             try:
                 sp_type = str(sp_type).strip().upper()

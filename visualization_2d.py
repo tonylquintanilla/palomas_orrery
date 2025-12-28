@@ -77,7 +77,7 @@ def create_hover_text(df, include_3d=False):
             dec_m = int((dec_abs - dec_d) * 60)
             dec_s = ((dec_abs - dec_d) * 60 - dec_m) * 60
             
-            hover_text += f"RA: {ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s, Dec: {dec_sign}{dec_d:02d}° {dec_m:02d}' {dec_s:04.1f}\" (J2000)<br>"
+            hover_text += f"RA: {ra_h:02d}h {ra_m:02d}m {ra_s:05.2f}s, Dec: {dec_sign}{dec_d:02d} deg {dec_m:02d}' {dec_s:04.1f}\" (J2000)<br>"
         
         # 3. MAIN PROPERTIES (in logical order)
         hover_text += f'Distance: {pc_str} pc ({ly_str} ly)<br>'
@@ -216,7 +216,7 @@ def generate_footer_text(counts_dict, estimation_results=None, mag_limit=None, m
             "relationship between a star's surface temperature and its luminosity (intrinsic brightness). The H-R diagram illustrates the life "
             "cycles of stars. As stars age, they move to different<br>regions on the diagram, providing insights into their evolutionary stages.<br>"
 
-            f"     We are plotting stars with apparent magnitude (Vmag) ≤ <span style='color:red;'>{mag_limit}</span>. " 
+            f"     We are plotting stars with apparent magnitude (Vmag) <= <span style='color:red;'>{mag_limit}</span>. " 
    
             "* Star properties from <a href='https://simbad.u-strasbg.fr/simbad/'>Simbad</a>. "
             "Temperature was estimated using B-V color index, spectral type, or <a href='https://www.cosmos.esa.int/gaia' target='_blank' style='color:#1E90FF; text-decoration:underline;'>Gaia</a> BP-RP color. "
@@ -444,7 +444,7 @@ def create_hr_diagram(combined_df, counts_dict, mag_limit=None, max_light_years=
 
 # Determine the title based on the provided parameters
     if mag_limit is not None:
-        title_text = f'Hertzsprung-Russell Diagram of Unaided-Eye Visible Stars (Apparent Magnitude ≤ {mag_limit})'
+        title_text = f'Hertzsprung-Russell Diagram of Unaided-Eye Visible Stars (Apparent Magnitude <= {mag_limit})'
     elif max_light_years is not None:
 #        title_text = f'Hertzsprung-Russell Diagram of Stars within {int(max_light_years)} Light-Years'
         title_text = f'Hertzsprung-Russell Diagram of Stars within {max_light_years:.1f} Light-Years'        
