@@ -83,7 +83,7 @@ class PlotDataReportWidget(ttk.Frame):
             xscrollcommand=h_scroll.set,
             font=('Consolas', 10),
     #        bg='#f5f5f5',
-    #        bg='SystemButtonFace',
+    #        bg='gray90',
             bg='white',
             state='normal'  
         )

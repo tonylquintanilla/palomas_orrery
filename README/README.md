@@ -1,4 +1,4 @@
-# Last updated: December 27, 2025
+# Last updated: January 8, 2026
 
 # Paloma's Orrery
 
@@ -17,11 +17,12 @@ Created by Tony Quintanilla with assistance from Claude, ChatGPT, Gemini, and De
 5. [Features](#features)
 6. [Architecture](#architecture)
 7. [Earth System Visualization](#earth-system-visualization)
-8. [Module Reference](#module-reference)
-9. [Data Files](#data-files)
-10. [Contributing](#contributing)
-11. [License](#license)
-12. [Contact](#contact)
+8. [Galactic Center Visualization](#galactic-center-visualization)
+9. [Module Reference](#module-reference)
+10. [Data Files](#data-files)
+11. [Contributing](#contributing)
+12. [License](#license)
+13. [Contact](#contact)
 
 ## Overview
 
@@ -35,12 +36,14 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Exoplanet system visualization (11 planets in 3 systems including binary stars)
 - Pluto-Charon binary planet visualization with true barycentric orbital mechanics
 - TNO satellite systems (Eris/Dysnomia, Haumea/Hi'iaka/Namaka, Makemake/MK2)
+- Galactic Center visualization (S-stars orbiting Sagittarius A*)
 - Stellar neighborhood mapping (123,000+ stars)
 - Planetary and solar interior visualizations (with reference-frame independent rendering)
 - Spacecraft trajectory two-layer visualization (full mission + plotted period)
 - Animation system with static shell optimization (45% memory reduction)
 - HR diagrams and stellar analysis
 - Climate data preservation hub
+- Unified save system with CDN/offline HTML options
 
 **Resources:**
 
@@ -58,25 +61,26 @@ Download from the [GitHub Releases page](https://github.com/tonylquintanilla/pal
 
 | Platform | Download | Size |
 |----------|----------|------|
-| Windows 10/11 | `Palomas_Orrery_v2.2.0_Windows.zip` | ~300 MB |
-| macOS 10.15+ | `Palomas_Orrery_v2.2.0_macOS.zip` | ~300 MB |
+| Windows 10/11 | `palomas_orrery.zip` | ~469 MB |
+| macOS 10.15+ | [Available from webpage](https://sites.google.com/view/tony-quintanilla) | ~300 MB |
+| Linux | Python source only | See below |
 
 **Windows:** Extract, double-click `START_HERE.bat`
 
-**macOS:** Extract, double-click `start_orrery.command` (right-click -> Open first time to bypass Gatekeeper)
+**macOS:** Download from [Tony's webpage](https://sites.google.com/view/tony-quintanilla) (iCloud link). Extract, double-click `start_orrery.command` (right-click -> Open first time to bypass Gatekeeper)
 
-### Python Source Code
+**Linux:** See [Linux Installation](#linux-installation) below
 
-**For experienced Python users:**
+### Python Source Code (All Platforms)
+
+Download `palomas_orrery_2_1_zip.zip` (~222 MB) from the [Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases). This includes all Python code AND data files.
+
+**Quick start:**
 ```bash
-# 1. Install Python 3.11-3.13 with PATH enabled
-# 2. Clone repository
-git clone https://github.com/tonylquintanilla/palomas_orrery.git
+# 1. Extract the ZIP file
+# 2. Install Python 3.11-3.13 with PATH enabled
+# 3. Open terminal in the extracted folder
 cd palomas_orrery
-
-# 3. Download cache files from releases page
-# https://github.com/tonylquintanilla/palomas_orrery/releases
-# Extract cache_files_compressed.zip to project folder
 
 # 4. Install dependencies
 pip install -r requirements.txt
@@ -85,13 +89,69 @@ pip install -r requirements.txt
 python palomas_orrery.py
 ```
 
+**Alternative (git clone):** Clone the repo for code only, then copy `data/` and `star_data/` folders from the release ZIP.
+
 **New to Python?** See the [detailed installation guide below](#installation)
+
+### Linux Installation
+
+Download `palomas_orrery_2_1_zip.zip` from the [Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases) and extract it.
+
+**Ubuntu/Debian:**
+```bash
+# 1. Install system dependencies
+sudo apt update
+sudo apt install python3 python3-pip python3-tk
+
+# 2. Navigate to extracted folder
+cd palomas_orrery
+
+# 3. Install Python dependencies
+pip install -r requirements.txt
+
+# 4. Run
+python3 palomas_orrery.py
+```
+
+**Fedora/RHEL:**
+```bash
+sudo dnf install python3 python3-pip python3-tkinter
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S python python-pip tk
+```
+
+**Note:** The `python3-tk` (or equivalent) package is required - it provides the GUI toolkit and is not included in pip.
+
+### Staying Up to Date
+
+**Releases** (v2.2.0, etc.) include everything: Python code and seed data files (orbit cache, stellar catalogs, climate data).
+
+**Between releases**, the GitHub repository has the latest Python code. Data files aren't in the repo - they're generated and updated locally through your own use (fetching new objects, etc.).
+
+**To get code updates after installing from a release:**
+
+```bash
+cd palomas_orrery
+git init
+git remote add origin https://github.com/tonylquintanilla/palomas_orrery.git
+git pull origin main
+```
+
+**For future updates:**
+```bash
+git pull
+```
+
+Your data files are preserved - only Python code and README files are updated.
 
 ## Installation
 
 ### Prerequisites
 
-- **Windows 10/11 or macOS 10.15+** (Linux untested but should work)
+- **Windows 10/11, macOS 10.15+, or Linux** (all tested and supported)
 - **Python 3.11 to 3.13** (tested and verified compatible)
   - As of October 2025, Python 3.13 is recommended
   - Python 3.14 was just released - wait 1-2 months before using it
@@ -181,201 +241,149 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
    - Press `Windows Key`, type `cmd`, press Enter
 
 3. **Navigate to where you want to save the project:**
-
    ```bash
-   cd C:\Users\YourName\Documents
+   cd Documents
    ```
 
-   (Replace `YourName` with your actual Windows username)
-
-   **Note:** When you see code blocks labeled `bash`, it means these are commands to type in Command Prompt (or Terminal on Mac/Linux). Just type the command and press Enter - don't type the word "bash"!
-
-4. **Download the project:**
-
+4. **Clone the repository:**
    ```bash
    git clone https://github.com/tonylquintanilla/palomas_orrery.git
    ```
 
-   This should only take a few seconds (the project itself is small - the large cache files come separately).
-
-   Git will create a new folder called `palomas_orrery` and download all the files into it.
-
 5. **Navigate into the project folder:**
-
    ```bash
    cd palomas_orrery
    ```
 
-**Option B - Download as ZIP file (No Git required):**
+**Option B - Download ZIP (No Git Required):**
 
 1. Go to [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)
-2. Click the green **"Code"** button
-3. Select **"Download ZIP"**
-4. Extract the ZIP file to your preferred location
-5. Rename the extracted folder from `palomas_orrery-main` to `palomas_orrery`
-6. Open Command Prompt and navigate to the extracted folder:
-
+2. Click the green "Code" button
+3. Click "Download ZIP"
+4. Extract the ZIP file to your Documents folder
+5. Open Command Prompt and navigate to the folder:
    ```bash
-   cd C:\Users\YourName\Documents\palomas_orrery
+   cd Documents\palomas_orrery-main
    ```
 
-#### Step 4: Download Cache Files
+#### Step 4: Download Data Files
 
-The cache files contain pre-processed stellar data and orbital calculations. Without them, the first run would take hours to download and process everything!
+The git repository contains code only. Data files are available from the releases page.
 
-1. **Go to the releases page:**
-   - Visit [github.com/tonylquintanilla/palomas_orrery/releases](https://github.com/tonylquintanilla/palomas_orrery/releases)
+1. Go to the [Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases)
+2. Download the latest release ZIP (e.g., `Palomas_Orrery_v2.2.0_Windows.zip`)
+3. Extract ONLY these folders into your `palomas_orrery` directory:
+   - `data/` (orbit_paths.json and climate data)
+   - `star_data/` (stellar catalog files)
 
-2. **Download the cache file:**
-   - Look for `cache_files_compressed.zip` (approximately 150-200 MB)
-   - Click to download
+**Alternative:** Download the full release ZIP and use it directly instead of git clone - it includes everything.
 
-3. **Extract to project folder:**
-   - Open the ZIP file
-   - Extract ALL contents directly into your `palomas_orrery` folder
-   - The folder structure should look like:
-     ```
-     palomas_orrery/
-     |- palomas_orrery.py
-     |- data/
-     |   |- orbit_paths.json
-     |- star_data/
-     |   |- star_properties_distance.pkl
-     |   |- gaia_data_distance.vot
-     |- ... (other files)
-     ```
+#### Step 5: Install Python Dependencies
 
-4. **Verify the files are in place:**
-   - You should see `star_data/` folder with `.pkl` and `.vot` files
-   - You should see `data/orbit_paths.json` (this is the largest file, ~94 MB)
-
-#### Step 5: Install Dependencies
-
-Python packages are like add-ons that provide extra functionality. Paloma's Orrery needs several of these.
+The program needs several Python libraries to run.
 
 1. **Make sure you're in the project folder:**
-   - In Command Prompt, you should see something like `C:\Users\YourName\Documents\palomas_orrery>`
-   - If not, navigate there with `cd C:\Users\YourName\Documents\palomas_orrery`
+   ```bash
+   cd Documents\palomas_orrery
+   ```
 
-2. **Install all required packages:**
-
+2. **Install all required libraries:**
    ```bash
    pip install -r requirements.txt
    ```
-
-   This will download and install all necessary packages. It may take 2-5 minutes depending on your internet connection.
-
-   **What you'll see:** A lot of text scrolling by as packages are downloaded and installed. This is normal!
-
-   **If you see errors:** Most common issues:
-   - "pip is not recognized" -> Python wasn't installed correctly. Go back to Step 2.
-   - Network errors -> Check your internet connection and try again
-   - Permission errors -> Try running Command Prompt as Administrator
+   - This will download and install about 15 libraries
+   - It may take 2-5 minutes depending on your internet speed
+   - You'll see lots of text scrolling by - that's normal!
 
 3. **Verify installation:**
-   - After installation completes, you should see "Successfully installed" messages
-   - No red error text at the end means success!
+   ```bash
+   pip list
+   ```
+   - You should see libraries like: astropy, astroquery, plotly, numpy, pandas
 
-#### Step 6: Run Paloma's Orrery
+#### Step 6: Run Paloma's Orrery!
 
 You're ready to launch!
 
-1. **Start the application:**
-
-   ```bash
-   python palomas_orrery.py
-   ```
-
-2. **What happens next:**
-   - A GUI window will appear with the main control panel
-   - The first time you run, it may take 30-60 seconds to initialize caches
-   - You'll see a three-panel interface with object selection, controls, and notes
-
-3. **Try your first visualization:**
-   - Check the boxes for a few planets (Mercury, Venus, Earth, Mars)
-   - Click "Plot Entered Date"
-   - An interactive 3D visualization will appear in your browser!
-
-**Congratulations!** You've successfully installed Paloma's Orrery!
-
-### Troubleshooting
-
-**"python is not recognized"**
-- Python wasn't added to PATH during installation
-- Solution: Uninstall Python, reinstall with "Add Python to PATH" checked
-
-**"pip install" fails with permission errors**
-- Try: `pip install --user -r requirements.txt`
-- Or run Command Prompt as Administrator
-
-**Application won't start**
-- Make sure you're in the correct folder
-- Check that all cache files were extracted properly
-- Try: `python -c "import tkinter"` to verify tkinter is installed
-
-**Visualization doesn't appear**
-- Check that your default browser is working
-- The plot opens as an HTML file in your browser
-
-**"Module not found" errors**
-- Some packages may not have installed correctly
-- Try: `pip install [module_name]` for the specific missing module
-
-**macOS Gatekeeper warning**
-- First launch shows "cannot be verified" warning
-- Solution: Right-click -> Open -> Open (only needed once per app)
-
-**macOS Tkinter not found**
-- Install via Homebrew: `brew install python-tk@3.12`
-
-### Updating the Application
-
-**If you used Git:**
-
 ```bash
-cd palomas_orrery
-git pull
-pip install -r requirements.txt  # In case new dependencies were added
+python palomas_orrery.py
 ```
 
-**If you downloaded ZIP:**
+**What to expect:**
+- First launch may take 30-60 seconds as caches are loaded
+- The main window will appear with checkboxes for planets and other objects
+- Select objects you want to visualize
+- Click "Plot" to see a 3D visualization in your browser
 
-1. Download the new ZIP from GitHub
-2. Extract and replace files (keep your cache files!)
-3. Run `pip install -r requirements.txt` if requirements changed
+**Troubleshooting first run:**
+- If you see "ModuleNotFoundError": Run `pip install -r requirements.txt` again
+- If the window doesn't appear: Check for error messages in Command Prompt
+- If plots don't open: Make sure you have a default web browser set
 
-### Alternative IDEs
+### macOS-Specific Notes
 
-While Command Prompt works fine, you might prefer a more visual development environment:
+**Installing Python on macOS:**
 
-**VS Code (Recommended):**
-- Download from [code.visualstudio.com](https://code.visualstudio.com/)
-- Install the Python extension
-- Open the `palomas_orrery` folder
-- Use the integrated terminal
+1. **Option A - Using Homebrew (Recommended):**
+   ```bash
+   # Install Homebrew if you don't have it
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   
+   # Install Python
+   brew install python@3.13
+   ```
 
-**PyCharm:**
-- Download from [jetbrains.com/pycharm](https://www.jetbrains.com/pycharm/)
-- Open the project folder
-- Configure Python interpreter
-- Integrated terminal
+2. **Option B - Download from python.org:**
+   - Go to [python.org/downloads](https://www.python.org/downloads/)
+   - Download the macOS installer
+   - Run the installer package
+
+**Running on macOS:**
+
+```bash
+# Navigate to project folder
+cd ~/Documents/palomas_orrery
+
+# Install dependencies
+pip3 install -r requirements.txt
+
+# Run
+python3 palomas_orrery.py
+```
+
+**Note:** Use `python3` and `pip3` instead of `python` and `pip` on macOS.
 
 ## Usage
 
 ### Basic Operations
 
-**Plotting Solar System Objects:**
+**Creating a Solar System Plot:**
 
-1. In the main window, you'll see checkboxes for various celestial objects
-2. Select the objects you want to visualize (planets, moons, asteroids, etc.)
-3. Set the date and time using the date picker controls
-4. Click "Plot Entered Date"
-5. An interactive 3D plot will appear where you can:
-   - Click and drag to rotate the view
-   - Scroll to zoom in/out
-   - Click planet names in the legend to show/hide them
+1. Launch the application
+2. Check the boxes for objects you want to see (planets, asteroids, comets)
+3. Set your preferred date range
+4. Choose a center object (Sun by default)
+5. Click "Plot" to generate the visualization
+6. Save your visualization when prompted
 
-**Tracking Spacecraft:**
+**Saving Visualizations:**
+
+When you create any visualization, a save dialog appears with three options:
+- **Interactive HTML - Standard (~10 KB):** Small file, requires internet to view
+- **Interactive HTML - Offline (~5 MB):** Larger file, works without internet
+- **Static PNG image:** Non-interactive image file
+
+The save dialog remembers your last save location within each session.
+
+**Animating Orbital Motion:**
+
+1. Select your objects
+2. Choose an animation time step (day, week, month, year)
+3. Click the animation button
+4. Watch objects move along their orbits
+5. Save the animation as an interactive HTML file
+
+**Spacecraft Trajectories:**
 
 1. Navigate to the spacecraft section
 2. Select missions like:
@@ -448,234 +456,99 @@ While Command Prompt works fine, you might prefer a more visual development envi
 **Solar Structure Visualization:**
 
 - Toggle individual Sun layers (core, radiative zone, convective zone)
-- View solar atmosphere (photosphere, chromosphere, corona)
-- Explore solar wind boundaries and heliosphere
+- View semi-transparent overlays on solar system plots
+- Accurate relative scaling
 
-**Data Export:**
+**Exoplanet Systems:**
 
-- Copy star names and coordinates to clipboard
-- Save plots as PNG (static images) or HTML (interactive)
-- Export data as JSON, VOTable, or Pickle formats
+- Three fully modeled systems available:
+  - **TRAPPIST-1:** 7 Earth-sized planets in tight orbits
+  - **TOI-1338:** Circumbinary planet (orbits two stars)
+  - **Kepler-16:** "Tatooine" - planet with binary star sunset
+- Includes binary star orbital mechanics
+- Temperature-based star coloring
 
 ## Features
 
 ### Solar System Visualization
 
-| Feature | Description |
-|---------|-------------|
-| **Objects** | 100+ celestial bodies: all planets, major moons, asteroids, comets, dwarf planets, spacecraft |
-| **Data Source** | Real-time JPL Horizons ephemerides with automatic caching |
-| **Time Range** | Historical and future dates through 2199-12-29 |
-| **Scales** | Inner planets to 100,000 AU Oort cloud visualization |
-| **Reference Frames** | Heliocentric, barycentric, planet-centered, Pluto-Charon barycenter (binary planet), TNO-centered views |
-| **Orbit Calculation** | Both actual positions and idealized Keplerian orbits using osculating elements |
-| **Caching System** | Intelligent incremental updates with automatic backup |
+- **100+ Solar System Objects:** Major planets, dwarf planets, asteroids, comets
+- **Real-time Ephemerides:** Direct JPL Horizons API integration
+- **Osculating Elements:** Properly calculated orbital paths
+- **Lagrange Points:** L1-L5 for Earth-Moon and Sun-Earth systems
+- **Trajectory Visualization:** Historical and predicted spacecraft paths
+- **Animation System:** Time-evolution with optimized shell rendering
 
-**TNO Satellite Systems:**
+### Stellar Neighborhood
 
-- **Eris/Dysnomia:** Distant dwarf planet with its moon (JPL ephemeris)
-- **Haumea/Hi'iaka/Namaka:** Elongated dwarf planet with two moons (JPL ephemeris)
-- **Makemake/MK2:** Dwarf planet with dark, recently-discovered moon (analytical orbit from 2025 Hubble analysis - no JPL ephemeris yet!)
-- **View modes:** See satellites from heliocentric or TNO-centered perspectives
-- **Analytical fallback:** Objects without JPL data calculated from published orbital elements
+- **123,000+ Stars:** Combined Gaia DR3 and Hipparcos catalogs
+- **HR Diagrams:** Temperature-luminosity relationship visualization
+- **3D Star Maps:** Interactive exploration of nearby space
+- **Stellar Classification:** Spectral types with accurate colors
+- **Proper Motion:** Star movement over time
 
-**Exoplanet Visualization:**
+### Planetary Science
 
-- **Systems:** 3 confirmed exoplanet systems (TRAPPIST-1, TOI-1338, Proxima Centauri)
-- **Planets:** 11 exoplanets with accurate Keplerian orbital mechanics
-- **Orbital Mechanics:** Full 6-parameter Keplerian orbits (a, e, i, omega, Omega, M0) with time evolution
-- **Binary Stars:** Circumbinary planet support with dual-star orbital dynamics (TOI-1338)
-- **Host Stars:** Temperature-based coloring from cool red M-dwarfs (2,800K) to hot blue stars
-- **Visualization Modes:**
-  - System barycenter view (orbital motion around center of mass)
-  - Individual star centering for binary systems
-  - Planet orbit traces with customizable time spans
-- **Physical Properties:** Planet radii, masses, equilibrium temperatures in hover data
-- **Habitable Zones:** Visual markers for potentially life-supporting orbital regions
-- **Animation Support:** Time-evolution showing planetary and stellar motion
-- **Scientific Accuracy:** Data from NASA Exoplanet Archive and published literature
-- See [exoplanet_readme.md](exoplanet_readme.md) for complete technical documentation
+- **Interior Models:** Cross-sections of all major bodies
+- **Atmosphere Visualization:** Gas giants and terrestrial planets
+- **Ring Systems:** Saturn, Uranus, Neptune with accurate parameters
+- **Satellite Systems:** Major moons with orbital mechanics
 
-**Comet Visualization:**
+### Earth System Science
 
-- **Dual-Tail Structure:** Scientifically accurate rendering of both comet tail types
-  - Dust Tail (Type II): Curved golden/yellow tail from reflected sunlight
-  - Ion Tail (Type I): Straight blue plasma tail from CO+ emissions
-  - Green coma from C2 (dicarbon) fluorescence near nucleus
-- **Astrophotography Colors:** Tail colors match long-exposure photography appearance
-  - Dust tails: Whitish-yellow/gold reflecting full visible spectrum (400-700nm)
-  - Ion tails: Blue from carbon monoxide ions (400-460nm emission)
-- **Activity Scaling:** Tail brightness and length scale dynamically with solar distance
-  - Maximum activity at perihelion
-  - Tails fade beyond ~3 AU from Sun
-- **Historical Comets:** Catalog includes famous comets with accurate tail parameters
-  - Halley's Comet (76-year period)
-  - Hale-Bopp (Great Comet of 1997)
-  - NEOWISE (C/2020 F3)
-  - Lemmon (C/2025 A6) - currently visible in 2025
-  - Hyakutake (record 580 million km ion tail)
-  - Ikeya-Seki (Great Sungrazer of 1965)
-- **Physical Components:** Toggle individual features on/off
-  - Nucleus marker
-  - Coma (fuzzy atmosphere)
-  - Dust tail
-  - Ion tail
-  - Sun direction indicator
-- **Real-Time Positions:** JPL Horizons ephemerides for accurate comet tracking
-- **Educational Tool:** Color-coded to match what astrophotography reveals vs. naked-eye appearance
+- **Climate Data Hub:** CO2, temperature, sea level, ice extent
+- **Paleoclimate Records:** 540 million years of Earth history
+- **Data Preservation:** Systematic archiving of threatened datasets
 
-### Stellar Astronomy
+### Galactic Center
 
-| Feature | Description |
-|---------|-------------|
-| **Star Catalogs** | 123,000 stars (magnitude 9.0), 9,700 within 100 light-years |
-| **Visualizations** | HR diagrams, 3D spatial maps, constellation views |
-| **Data Sources** | Gaia EDR3, Hipparcos, SIMBAD integration |
-| **Deep Sky Objects** | Messier catalog (nebulae, clusters, galaxies) in magnitude mode |
-| **Filtering** | By distance (light-years) or apparent magnitude |
-| **Classification** | Spectral types, luminosity classes, evolutionary stages |
-
-### Planetary Features
-
-| Feature | Description |
-|---------|-------------|
-| **Interior Structures** | Multi-layer visualization for all major bodies |
-| **Solar Detail** | 11-zone Sun model from core to heliosphere |
-| **Radiation Belts** | Van Allen belts, Jovian plasma tori |
-| **Atmospheres** | Individual atmospheric shell visualization |
-| **Ring Systems** | Saturn, Jupiter, Uranus, Neptune rings |
-
-### Interactive Features
-
-| Feature | Description |
-|---------|-------------|
-| **3D Rotation & Zoom** | Full camera control with mouse/trackpad |
-| **Camera View Selector** | Dropdown menu to view any object from center position - point camera from Sun toward Earth, Mars, or any plotted object |
-| **Object Selection** | Multi-select with legend toggles |
-| **Time Animation** | Watch orbital evolution over days to years |
-| **Animation Shells** | Static planetary shells in animations without memory explosion - shells rendered once, positions animate |
-| **Lagrange Points** | L1-L5 visualization for Earth-Moon and Sun-Earth systems |
-| **Apsidal Markers** | Perihelion/aphelion indicators with dates |
-| **Advanced Hover Info** | Detailed astronomical data with toggle controls |
-| **Data Export** | PNG, HTML, JSON, VOTable, Pickle formats |
-| **Copy to Clipboard** | Easy sharing of star names and coordinates |
-
-### Educational Tools
-
-| Tool | Description |
-|------|-------------|
-| **Orbital Parameter Visualization** | Interactive 3D demonstration of Keplerian elements (inclination, longitude of ascending node, argument of periapsis) showing transformation from perifocal to J2000 Ecliptic frame |
-| **Interactive Eccentricity Demo** | Visual exploration of orbit shapes from circles (e=0) through ellipses, parabolas (e=1), to hyperbolas (e>1) |
-| **Coordinate System Reference Guide** | Comprehensive visualization of J2000 Ecliptic system with detailed axis explanations (+X Vernal Equinox, +Y 90 deg ahead, +Z Ecliptic North) |
-| **Pluto-Charon Binary System** | Three-view visualization demonstrating true barycentric orbital mechanics - switch from Pluto-centered to barycenter-centered view to see Pluto's own orbit revealed (like shifting from geocentric to heliocentric thinking!) |
-| **TNO Satellite Systems** | Visualize distant dwarf planet moons, including MK2 using cutting-edge 2025 Hubble orbital analysis |
-
-### Data Sources
-
-- [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/app.html#/) - Planetary ephemerides
-- [Gaia EDR3](https://www.cosmos.esa.int/web/gaia) - Stellar positions and photometry
-- [Hipparcos](https://www.cosmos.esa.int/web/hipparcos/catalogues) - Bright star catalog
-- [SIMBAD](https://simbad.u-strasbg.fr/simbad/) - Astronomical database
-- [Scripps CO2 Program](https://scrippsco2.ucsd.edu/) - Mauna Loa atmospheric data
-- [arXiv preprints](https://arxiv.org/) - Latest orbital solutions for newly-discovered objects
+- **S-Star Visualization:** Stars orbiting Sagittarius A* black hole
+- **Relativistic Effects:** Schwarzschild precession (rosette patterns)
+- **Observational Fidelity:** Phase offsets from real periapsis measurements
+- **Newton vs Einstein:** Visual comparison of orbital predictions
 
 ## Architecture
 
-### Data Flow
+### Design Philosophy
 
-1. **Acquisition:** Fetch astronomical data from JPL Horizons, VizieR catalogs, and SIMBAD
-2. **Processing:** Calculate positions, velocities, and stellar parameters
-3. **Caching:** Store processed data with metadata for instant reuse
-4. **Visualization:** Generate interactive Plotly visualizations
-5. **Analysis:** Create scientific reports and statistical summaries
+- **Accuracy First:** All calculations use established astronomical methods
+- **Visual Clarity:** Complex data presented intuitively
+- **Offline Capability:** Works without internet after initial setup
+- **Cross-Platform:** Windows and macOS supported
 
-### Performance Optimizations
+### Technical Stack
 
-- **Incremental caching:** Only fetch new data, reuse existing
-- **Smart cache management:** Automatic validation and repair
-- **Compressed storage:** Efficient binary formats (PKL, VOTable)
-- **Rate limiting:** Respectful API usage with automatic throttling
-- **Batch processing:** Group queries for efficiency
-- **Analytical fallback:** Calculate orbits locally when API data unavailable
-- **Static shell optimization:** Animation shells rendered once, not per-frame (45% memory reduction)
+- **Python 3.11-3.13:** Core language
+- **Plotly:** Interactive 3D visualizations
+- **CustomTkinter:** Modern GUI framework
+- **Astropy/Astroquery:** Astronomical calculations and data access
+- **NumPy/Pandas:** Numerical computing and data handling
+
+### Data Pipeline
+
+1. **Acquisition:** JPL Horizons, VizieR, SIMBAD queries
+2. **Caching:** Local storage with validation and backup
+3. **Processing:** Coordinate transforms, orbital calculations
+4. **Visualization:** Interactive HTML with Plotly
+5. **Export:** CDN or offline HTML, PNG images
 
 ## Earth System Visualization
 
-### Climate Data Preservation Hub
+Access the Earth System Hub from the main interface to explore climate data:
 
-Interactive visualizations documenting Earth's changing systems - because **data preservation is climate action**.
+**Current Monitoring (1958-present):**
 
-**Current Features (10 Active Visualizations):**
+- Atmospheric CO2 (Mauna Loa Observatory)
+- Global temperature anomalies (NASA GISS)
+- Arctic sea ice extent (NSIDC)
+- Global mean sea level (NOAA)
 
-**Climate & Atmosphere:**
+**Paleoclimate Records:**
 
-1. **The Keeling Curve:** Atmospheric CO2 from Mauna Loa Observatory (1958-2025)
-   - Monthly resolution with seasonal variations
-   - Clear visualization of 400+ ppm threshold crossing
-   - Interactive zoom and data exploration
-
-2. **Global Temperature Anomalies:** NASA GISS land-ocean temperature index (1880-2025)
-   - Annual and decadal trends
-   - Pre-industrial baseline comparison
-   - Paris Agreement target thresholds
-
-3. **Monthly Temperature Progression:** Year-over-year temperature comparison
-   - Each line represents one year's temperature journey
-   - Reveals seasonal patterns and warming acceleration
-   - Color-coded by decade for trend visualization
-
-4. **Warming Stripes:** Ed Hawkins-style climate communication
-   - Visual representation of temperature changes over time
-   - Minimal design for maximum impact
-
-**Cryosphere:**
-
-5. **Arctic Sea Ice Extent:** NSIDC satellite data (1979-2025)
-   - Monthly Arctic ice coverage
-   - September minimum tracking
-   - Decadal decline visualization
-
-**Sea Level:**
-
-6. **Sea Level Rise:** NASA/TOPEX satellite altimetry (1993-2025)
-   - Global mean sea level change
-   - Acceleration trends
-   - Millimeter precision measurements
-
-**Ocean Health:**
-
-7. **Ocean Acidification:** Hawaii Ocean Time-series surface pH (1988-2025)
-   - Monthly pH measurements
-   - CO2 absorption impact on ocean chemistry
-   - Trend analysis
-
-**Deep Time:**
-
-8. **Paleoclimate 800kyr:** Antarctic ice core CO2 reconstruction
-   - EPICA Dome C 800,000-year record
-   - Glacial-interglacial cycles
-   - Context for modern CO2 levels
-
-9. **Cenozoic Temperature:** 65 million years of climate context
-   - Full Cenozoic Era reconstruction
-   - Major climate events (PETM, EECO)
-   - Long-term cooling trend into ice ages
-
-**Human Origins:**
-
-10. **Climate-Driven Human Evolution:** 540 Ma to present with 25 hominin species
-    - Marine Isotope Stage (MIS) glacial/interglacial cycles
-    - Ghost populations from DNA evidence
-    - Climate pulses that shaped human evolution
-    - 2025 research integration (Yunxian 2, two-population origin)
-
-### Why This Matters
-
-This project began as astronomical visualization but expanded to climate data preservation as datasets began disappearing from government websites. The Earth System module serves three purposes:
-
-1. **Educational:** Clear visualizations of climate science data
-2. **Preservation:** Local copies of critical datasets
-3. **Context:** Show Earth as just another planet we can study scientifically
+- 800,000-year ice core CO2 (EPICA Dome C)
+- 5 million-year benthic stack (LR04)
+- 12,000-year Holocene reconstruction (Temp12k)
+- 540 million-year Phanerozoic temperatures
 
 **Data Sources:**
 
@@ -683,9 +556,46 @@ This project began as astronomical visualization but expanded to climate data pr
 - NOAA Global Monitoring Laboratory
 - Additional sources as datasets are integrated
 
+## Galactic Center Visualization
+
+The Galactic Center modules visualize S-stars orbiting Sagittarius A*, the supermassive black hole at the center of our galaxy.
+
+**Features:**
+
+- **The Fantastic Four:** S2, S62, S4711, S4714 - stars with the most extreme orbits
+- **Relativistic Precession:** General relativity causes orbits to precess, creating rosette patterns
+- **Observational Data:** Orbital phases calculated from actual periapsis measurements (GRAVITY Collaboration)
+- **Unified Colorscale:** Compare precession rates visually across different stars
+
+**Modules:**
+
+| Module | Purpose |
+|--------|---------|
+| `sgr_a_star_data.py` | S-star catalog with orbital parameters and physical properties |
+| `sgr_a_visualization_core.py` | Static visualization of S-star orbits |
+| `sgr_a_visualization_animation.py` | Animated orbital motion (Kepler's Second Law) |
+| `sgr_a_visualization_precession.py` | Schwarzschild precession and Newton vs Einstein comparison |
+| `sgr_a_grand_tour.py` | Complete dashboard with mode switching and zoom controls |
+
+**Running Galactic Center Visualizations:**
+
+```bash
+# Static visualization
+python sgr_a_visualization_core.py
+
+# Animated orbits
+python sgr_a_visualization_animation.py
+
+# Relativistic precession
+python sgr_a_visualization_precession.py
+
+# Complete Grand Tour dashboard
+python sgr_a_grand_tour.py
+```
+
 ## Module Reference
 
-**For a complete index of all 81 Python modules in the project, see [MODULE_INDEX.md](MODULE_INDEX.md).**
+**For a complete index of all Python modules in the project, see [MODULE_INDEX.md](MODULE_INDEX.md).**
 
 The following sections highlight the primary modules organized by function. Use MODULE_INDEX.md to search for specific functionality (save, cache, coordinates, etc.) or to understand the complete codebase structure.
 
@@ -710,6 +620,33 @@ The following sections highlight the primary modules organized by function. Use 
 | `comet_visualization_shells.py` | Scientifically accurate comet rendering with dual-tail structures |
 | `orbital_param_viz.py` | Orbital element visualization |
 | `earth_system_visualization_gui.py` | Earth system data hub with climate visualizations |
+| `coordinate_system_guide.py` | Educational J2000 ecliptic coordinate reference |
+
+### Galactic Center Modules
+
+| Module | Purpose |
+|--------|---------|
+| `sgr_a_star_data.py` | S-star catalog with orbital and physical properties |
+| `sgr_a_visualization_core.py` | Static S-star orbit visualization |
+| `sgr_a_visualization_animation.py` | Animated orbital motion with Kepler's Second Law |
+| `sgr_a_visualization_precession.py` | Schwarzschild precession and Newton vs Einstein |
+| `sgr_a_grand_tour.py` | Complete Galactic Center dashboard |
+
+### Save and Export Utilities
+
+| Module | Purpose |
+|--------|---------|
+| `save_utils.py` | Unified save system for all visualizations - CDN/offline HTML, PNG export, session directory memory, cross-platform dialogs |
+| `shutdown_handler.py` | Graceful shutdown, thread management, delegates to save_utils |
+| `palomas_orrery_helpers.py` | Animation helpers, show_animation_safely delegates to save_utils |
+
+**Save System Features:**
+
+- **Three HTML options:** Standard CDN (~10 KB), Offline (~5 MB), or PNG
+- **Session memory:** Remembers last save directory within each session
+- **Cross-platform:** Works on Windows, macOS, and Linux
+- **Thread-safe:** Handles macOS worker thread restrictions gracefully
+- **17 modules** use the unified save system
 
 ### Cache Management
 
@@ -851,7 +788,7 @@ Contributions are welcome! This project is maintained by a single developer but 
 - Improved stellar classification algorithms
 - Exoplanetary system support
 - Performance optimizations for large datasets
-- Cross-platform testing (Linux - Windows & macOS now supported!)
+- Cross-platform testing (Windows, macOS & Linux all supported!)
 - Documentation improvements
 - Climate data integration (temperature, sea level, ice extent)
 
@@ -885,7 +822,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** December 2025 (v2.2.0 - Cross-Platform Release with Trajectory Visualization)
+**Last Updated:** January 2026 (v2.3.0 - Galactic Center & Unified Save System)
 
 ---
 
@@ -896,7 +833,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - [VizieR catalog service](https://vizier.cds.unistra.fr/) (CDS, Strasbourg)
 - [SIMBAD astronomical database](https://simbad.u-strasbg.fr/simbad/)
 - [Scripps CO2 Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
+- [GRAVITY Collaboration](https://www.mpe.mpg.de/ir/gravity) for S-star orbital data
 - [Astropy](https://www.astropy.org/) and [Astroquery](https://astroquery.readthedocs.io/) development teams
 - [Plotly](https://plotly.com/) visualization library
 - AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/)
-- Cross-platform compatibility (Windows & macOS) achieved December 2025
+- Cross-platform compatibility (Windows, macOS & Linux) achieved January 2026

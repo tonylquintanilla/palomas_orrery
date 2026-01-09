@@ -825,11 +825,12 @@ def create_3d_visualization(combined_df, max_value, user_max_coord=None):
             dict(       # target marker 
                 x=0.500,
                 y=0.505,
-                text='<span style="vertical-align:1em;">-></span>',
+        #        text='<span style="vertical-align:1em;">-></span>',
+                text='<span style="vertical-align:1em;"><></span>',                
                 showarrow=False,
                 xref='paper',
                 yref='paper',
-                font=dict(size=70, color='rgba(0, 255, 255, 1.0)')  # Semi-transparent blue-green
+                font=dict(size=60, color='rgba(0, 255, 255, 0.5)')  # Semi-transparent blue-green
             ),
 
         ]

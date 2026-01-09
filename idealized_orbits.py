@@ -61,12 +61,22 @@ PLUTO_MOONS = ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
 # For barycenter mode: objects that orbit the Pluto system barycenter
 PLUTO_BARYCENTER_ORBITERS = ['Pluto', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
 
+# Orcus-Vanth binary system
+# Note: When "Orcus-Vanth Barycenter" is center, both Orcus and Vanth orbit the barycenter
+# Orcus-Vanth has the HIGHEST mass ratio (16%) of any known planet/dwarf planet system!
+ORCUS_BARYCENTER_ORBITERS = ['Orcus', 'Vanth']
+
 # TNO (Trans-Neptunian Object) satellite systems - osculating only
+
 # These use JPL satellite ephemeris solutions (not small body solutions)
 ERIS_MOONS = ['Dysnomia']
+GONGGONG_MOONS = ['Xiangliu']
+ORCUS_MOONS = ['Vanth']
+QUAOAR_MOONS = ['Weywot']
 HAUMEA_MOONS = ["Hi'iaka", 'Namaka']
 MAKEMAKE_MOONS = ['MK2']
-TNO_MOONS = ERIS_MOONS + HAUMEA_MOONS + MAKEMAKE_MOONS
+
+TNO_MOONS = ERIS_MOONS + HAUMEA_MOONS + MAKEMAKE_MOONS + GONGGONG_MOONS + ORCUS_MOONS + QUAOAR_MOONS
 
 def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     """
@@ -1782,6 +1792,9 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
     
     Handles satellites of:
     - Eris (Dysnomia)
+    - Gonggong (Xiangliu)
+    - Orcus (Vanth)
+    - Quaoar (Weywot)
     - Haumea (Hi'iaka, Namaka)
     - Makemake (MK2)
     
@@ -1796,6 +1809,12 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
     TNO_SATELLITE_IDS = {
         # Eris system (barycenter: 20136199)
         'Dysnomia': '120136199',
+        # Gonggong system (barycenter: 20137863)
+        'Xiangliu': '92250881',
+        # Orcus system (barycenter: 20137111)
+        'Vanth': '120090482',
+        # Quaoar system (barycenter: 20136826)
+        'Weywot': '120050000',
         # Haumea system (barycenter: 20136108)
         "Hi'iaka": '120136108',
         'Namaka': '220136108',
@@ -1815,9 +1834,53 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         
         print(f"\n[TNO SATELLITE] Loading cached elements for {satellite_name}...", flush=True)
         
-        if satellite_name in cache:
+        # These TNO moons have no usable JPL parent-centered ephemeris
+        # Horizons returns heliocentric data which is wrong for satellite visualization
+        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+
+        if satellite_name in ANALYTICAL_ONLY_SATELLITES and satellite_name in planetary_params:
+            # Force analytical path - skip cache even if present
+            elements = planetary_params[satellite_name]
+            epoch = "analytical (J2000, theta=0)"
+            orbit_type = "Analytical"
+
+            if satellite_name == 'MK2':
+                orbit_source = ("Analytical orbit from Hubble observations<br>"
+                               "(Bamberger 2025, arXiv:2509.05880)<br>"
+                               "No JPL ephemeris available<br>"
+                               "<i>Orientation unconstrained</i>")
+            elif satellite_name == 'Xiangliu':
+                orbit_source = ("Analytical orbit from Hubble observations<br>"
+                               "(Kiss et al. 2017)<br>"
+                               "No JPL ephemeris available<br>"
+                               "<i>Orientation unconstrained</i>")
+            elif satellite_name == 'Vanth':
+                orbit_source = ("Analytical orbit from Hubble observations<br>"
+                               "(Brown et al. 2010)<br>"
+                               "Heliocentric JPL ephemeris not useful<br>"
+                               "<i>Orientation unconstrained</i>")
+            elif satellite_name == 'Weywot':
+                orbit_source = ("Analytical orbit from occultation data<br>"
+                               "(Fraser et al. 2013, updated 2019)<br>"
+                               "Heliocentric JPL ephemeris not useful<br>"
+                               "<i>Orientation unconstrained</i>")
+            else:
+                orbit_source = ("Analytical orbit from idealized elements<br>"
+                               "(No JPL ephemeris available)<br>"
+                               "<i>Orientation unconstrained</i>")
+            print(f"  [WARN] Using analytical elements for {satellite_name} (no usable JPL ephemeris)", flush=True)
+            
+            a = elements.get('a', 0)
+            e = elements.get('e', 0)
+            i = elements.get('i', 0)
+            omega = elements.get('omega', 0)
+            Omega = elements.get('Omega', 0)
+
+        elif satellite_name in cache:
             elements = cache[satellite_name]['elements']
             epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
+            orbit_type = "Osculating"
+            orbit_source = "Osculating orbit from JPL Horizons<br>satellite ephemeris solution"            
             print(f"  [OK] Using cached osculating elements (epoch: {epoch})", flush=True)
             
             a = elements.get('a', 0)
@@ -1826,10 +1889,52 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             omega = elements.get('omega', 0)
             Omega = elements.get('Omega', 0)
             
-        else:
-            print(f"  [WARN] No cached elements for {satellite_name}, skipping orbit plot", flush=True)
-            return fig
+    #    else:
+    #        print(f"  [WARN] No cached elements for {satellite_name}, skipping orbit plot", flush=True)
+    #        return fig
         
+        elif satellite_name in planetary_params:
+            # Fallback to idealized elements when osculating cache is empty
+            elements = planetary_params[satellite_name]
+            epoch = "analytical (J2000, theta=0)"
+            orbit_type = "Analytical"
+
+            if satellite_name == 'MK2':
+                orbit_source = ("Analytical orbit from Hubble observations<br>"
+                               "(Bamberger 2025, arXiv:2509.05880)<br>"
+                               "No JPL ephemeris available<br>"
+                               "<i>Orientation unconstrained</i>")
+            elif satellite_name == 'Xiangliu':
+                orbit_source = ("Analytical orbit from Hubble observations<br>"
+                               "(Kiss et al. 2017)<br>"
+                               "No JPL ephemeris available<br>"
+                               "<i>Orientation unconstrained</i>")
+            elif satellite_name == 'Vanth':
+                orbit_source = ("Analytical orbit from Hubble observations<br>"
+                               "(Brown et al. 2010)<br>"
+                               "Heliocentric JPL ephemeris not useful<br>"
+                               "<i>Orientation unconstrained</i>")
+            elif satellite_name == 'Weywot':
+                orbit_source = ("Analytical orbit from occultation data<br>"
+                               "(Fraser et al. 2013, updated 2019)<br>"
+                               "Heliocentric JPL ephemeris not useful<br>"
+                               "<i>Orientation unconstrained</i>")
+            else:
+                orbit_source = ("Analytical orbit from idealized elements<br>"
+                               "(No JPL ephemeris available)<br>"
+                               "<i>Orientation unconstrained</i>")
+            print(f"  [WARN] No cached osculating elements for {satellite_name}, using fallback idealized elements", flush=True)
+            
+            a = elements.get('a', 0)
+            e = elements.get('e', 0)
+            i = elements.get('i', 0)
+            omega = elements.get('omega', 0)
+            Omega = elements.get('Omega', 0)
+            
+        else:
+            print(f"  [WARN] No elements for {satellite_name}, skipping orbit plot", flush=True)
+            return fig
+
         print(f"  Elements: a={a:.6f} AU, e={e:.4f}, i={i:.2f} deg, omega={omega:.2f} deg, Omega={Omega:.2f} deg", flush=True)
         
         # Generate orbit points
@@ -1869,19 +1974,18 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         
         # Create hover text
         hover_text = (
-            f"<b>{satellite_name} Osculating Orbit</b><br>"
+            f"<b>{satellite_name} {orbit_type} Orbit</b><br>"
             f"Parent: {parent_name}<br>"
             f"Epoch: {epoch}<br>"
             f"<br>"
-            f"<b>Orbital Elements (JPL):</b><br>"
+            f"<b>Orbital Elements:</b><br>"
             f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
             f"e = {e:.4f}<br>"
             f"i = {i:.2f} deg<br>"
             f"omega = {omega:.2f} deg<br>"
             f"Omega = {Omega:.2f} deg<br>"
             f"<br>"
-            f"<i>Osculating orbit from JPL Horizons<br>"
-            f"satellite ephemeris solution</i>"
+            f"<i>{orbit_source}</i>"
         )
         
         # Add orbit trace
@@ -1891,56 +1995,14 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             z=z_final.tolist(),
             mode='lines',
             line=dict(color=color, width=2, dash='dash'),
-            name=f"{satellite_name} Osculating Orbit",
+            name=f"{satellite_name} {orbit_type} Orbit",
             text=[hover_text] * len(x_final),
-            customdata=[f"{satellite_name} Osculating Orbit"] * len(x_final),
+            customdata=[f"{satellite_name} {orbit_type} Orbit"] * len(x_final),
             hoverinfo='text',
             showlegend=True
         ))
         
-        print(f"  [OK] Plotted {satellite_name} osculating orbit", flush=True)
-        
-        """
-        # Add apsidal markers if requested
-        if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
-            # Periapsis point (theta = 0)
-            r_peri = a * (1 - e)
-            peri_x = r_peri * (np.cos(Omega_rad) * np.cos(omega_rad) - 
-                              np.sin(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
-            peri_y = r_peri * (np.sin(Omega_rad) * np.cos(omega_rad) + 
-                              np.cos(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
-            peri_z = r_peri * np.sin(omega_rad) * np.sin(i_rad)
-            
-            fig.add_trace(go.Scatter3d(
-                x=[peri_x], y=[peri_y], z=[peri_z],
-                mode='markers',
-                marker=dict(size=5, color=color, symbol='diamond'),
-                name=f"{satellite_name} Periapsis",
-                text=[f"{satellite_name} Periapsis<br>r = {r_peri:.6f} AU"],
-                hoverinfo='text',
-                showlegend=True
-            ))
-            
-            # Apoapsis point (theta = pi)
-            r_apo = a * (1 + e)
-            apo_x = -r_peri * (np.cos(Omega_rad) * np.cos(omega_rad) - 
-                             np.sin(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
-            apo_y = -r_peri * (np.sin(Omega_rad) * np.cos(omega_rad) + 
-                             np.cos(Omega_rad) * np.sin(omega_rad) * np.cos(i_rad))
-            apo_z = -r_peri * np.sin(omega_rad) * np.sin(i_rad)
-            
-            fig.add_trace(go.Scatter3d(
-                x=[apo_x], y=[apo_y], z=[apo_z],
-                mode='markers',
-                marker=dict(size=5, color=color, symbol='square'),
-                name=f"{satellite_name} Apoapsis",
-                text=[f"{satellite_name} Apoapsis<br>r = {r_apo:.6f} AU"],
-                hoverinfo='text',
-                showlegend=True
-            ))
-        
-        return fig
-        """
+        print(f"  [OK] Plotted {satellite_name} {orbit_type.lower()} orbit", flush=True)
 
         # Add apsidal markers using standard method
     #    if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
@@ -2174,6 +2236,297 @@ def add_pluto_barycenter_marker(fig, date, charon_position=None):
     ))
     
     print(f"  [OK] Added barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
+    
+    return fig
+
+def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Orcus'):
+    """
+    Plot osculating orbit for objects in the Orcus-Vanth binary system.
+    
+    Supports TWO center modes:
+    1. center_id='Orcus' - Traditional view, Vanth orbits Orcus
+    2. center_id='Orcus-Vanth Barycenter' - Binary view, BOTH objects orbit barycenter
+    
+    Orcus-Vanth has the HIGHEST mass ratio (16%) of any known planet/dwarf planet system!
+    
+    Binary System Parameters (from ALMA 2016 & Brown et al. 2010):
+    - Total separation: 9,000 km = 0.0000601 AU
+    - Period: 9.54 days (both likely tidally locked)
+    - Mass ratio: M_Vanth/M_Orcus = 0.16 (highest known!)
+    - Barycenter: ~1,230 km from Orcus center (OUTSIDE Orcus's ~455 km radius!)
+    - Vanth from barycenter: ~7,770 km
+    - System inclination to ecliptic: ~90 deg (face-on from Earth)
+    """
+
+    # Horizons IDs for Orcus system objects  
+    # NOTE: JPL Horizons has specific IDs for Orcus system:
+    #   '90482;' or '20090482' = satellite solution barycenter (use this as center!)
+    #   '920090482' = primary body (Orcus)
+    #   '120090482' = Vanth satellite
+    ORCUS_SYSTEM_IDS = {
+        'Orcus': '920090482',    # PRIMARY body ID (not small body designation)
+        'Vanth': '120090482',    # Satellite ephemeris solution
+    }
+    
+    # Binary system physical parameters (from ALMA 2016 and Brown et al. 2010)
+
+    BINARY_PARAMS = {
+        'separation_au': 0.0000601,       # 9,000 km total separation
+        'period_days': 9.54,              # Orbital period
+        'mass_ratio': 0.16,               # M_Vanth / M_Orcus (HIGHEST KNOWN!)
+        'eccentricity': 0.007,            # Nearly circular
+        # Angular elements derived from JPL Vanth positions to match orbit plane
+        # Fitted to ensure JPL position vectors lie in the drawn orbit plane
+        'inclination_ecliptic': 83.0,     # Fitted to JPL positions (Jan 2026)
+        'Omega_ecliptic': 216.0,          # Fitted to JPL positions
+    #    'omega': 0.0,                     # Argument of periapsis (circular orbit)
+        'omega': 65.0,                    # Fitted to align orbit with JPL positions
+    }
+
+    mass_ratio = BINARY_PARAMS['mass_ratio']
+    separation = BINARY_PARAMS['separation_au']
+    
+    horizons_id = ORCUS_SYSTEM_IDS.get(object_name)
+    if not horizons_id:
+        print(f"Warning: No Horizons ID for {object_name}", flush=True)
+        return fig
+    
+    is_barycenter_mode = (center_id == 'Orcus-Vanth Barycenter')
+    
+    try:
+        from osculating_cache_manager import load_cache, get_cache_key
+        cache = load_cache()
+        
+        if is_barycenter_mode and object_name in ['Orcus', 'Vanth']:
+            # BARYCENTER MODE for Orcus/Vanth:
+            # Calculate semi-major axis from mass ratio
+            # Orcus is closer to barycenter (13.7% of separation)
+            # Vanth is farther (86.3% of separation)
+            
+            if object_name == 'Orcus':
+                # Orcus orbits closer to barycenter
+                a = separation * mass_ratio / (1 + mass_ratio)  # ~0.00000822 AU (~1,230 km)
+            else:  # Vanth
+                # Vanth orbits farther from barycenter
+                a = separation * 1.0 / (1 + mass_ratio)  # ~0.0000518 AU (~7,770 km)
+            
+            e = BINARY_PARAMS['eccentricity']
+            
+            # IMPORTANT: For barycenter mode, ALWAYS use analytical binary orbit elements!
+            # The cached elements are for Vanth's orbit relative to Orcus in heliocentric frame,
+            # NOT the binary orbit plane orientation. The binary orbit is face-on (i=90 deg).
+            i = BINARY_PARAMS['inclination_ecliptic']
+            omega = BINARY_PARAMS['omega']
+            Omega = BINARY_PARAMS['Omega_ecliptic']
+            epoch = f"{date.strftime('%Y-%m-%d')} (binary orbit)"
+            print(f"\n[ORCUS BARYCENTER MODE] {object_name}: using analytical binary orbit elements", flush=True)
+    #        print(f"  (NOTE: Binary orbit is face-on from Earth, i=90 deg to ecliptic)", flush=True)
+            print(f"  (NOTE: Binary orbit i={i:.1f} deg, Omega={Omega:.1f} deg to ecliptic)", flush=True)
+            
+            print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+    #        print(f"  i={i:.2f} deg (face-on!), Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
+            print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
+        
+        else:
+            # ORCUS-CENTERED MODE or non-barycenter lookup
+            # Use cached osculating elements or analytical fallback
+            
+            print(f"\n[OSCULATING] Loading cached elements for {object_name}...", flush=True)
+            
+            if object_name in cache:
+                elements = cache[object_name]['elements']
+                print(f"  [OK] Using cached osculating elements", flush=True)
+            elif object_name in planetary_params:
+                elements = planetary_params[object_name]
+                print(f"  [OK] Using analytical elements from planetary_params", flush=True)
+            else:
+                print(f"  Warning: No elements found for {object_name}", flush=True)
+                return fig
+            
+            a = elements.get('a', 0)
+            e = elements.get('e', 0)
+            i = elements.get('i', BINARY_PARAMS['inclination_ecliptic'])
+            omega = elements.get('omega', 0)
+            Omega = elements.get('Omega', 0)
+            epoch = elements.get('epoch', 'analytical')
+        
+        # Skip if no valid semi-major axis
+        if a == 0:
+            print(f"  Warning: Zero semi-major axis for {object_name}", flush=True)
+            return fig
+        
+        print(f"  Plotting: a={a:.7f} AU, i={i:.4f} deg (ecliptic), epoch={epoch}", flush=True)
+        
+        # Generate orbital path
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+        
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        # Standard Keplerian rotation sequence
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+        
+        # Build hover text based on mode
+        if is_barycenter_mode:
+            if object_name == 'Orcus':
+                hover_text_osc = (
+                    f"<b>{object_name} ALMA Orbit (Brown & Butler 2023)</b><br>"
+                    f"<br>Orbital radius: {a:.7f} AU ({a * 149597870.7:.1f} km)<br>"
+                    f"Period: {BINARY_PARAMS['period_days']:.2f} days<br>"
+                    f"Eccentricity: ~0.007 (nearly circular)<br>"
+                    f"Inclination: {i:.1f} deg, Omega: {Omega:.1f} deg<br>"
+                    f"<br><b>Binary System - Highest Mass Ratio Known!</b><br>"
+                    f"Mass ratio (Vanth/Orcus): 0.16 +/- 0.02<br>"
+                    f"(Charon/Pluto is only 0.12)<br>"
+                    f"Orcus orbits 13.7% of separation from barycenter<br>"
+                    f"Barycenter is OUTSIDE Orcus surface (~455 km radius)!<br>"
+                    f"<br><b>Position: Derived from Vanth</b><br>"
+                    f"<i>Vanth position from JPL Horizons (ID 120090482).<br>"
+                    f"Orcus derived assuming tidal lock (180 deg opposite).<br>"
+                    f"Positions projected onto ALMA orbit radii.</i><br>"
+                    f"<br><b>Orbit Plane:</b><br>"
+                    f"<i>i, Omega fitted to JPL Vanth positions (Jan 2026)<br>"
+                    f"to ensure markers lie on drawn orbit circles.</i><br>"
+                    f"<br><b>Data Sources:</b><br>"
+                    f"Orbit radii: Brown & Butler 2023, PSJ 4:193<br>"
+                    f"Orbit plane: Fitted to JPL satellite solution<br>"
+                    f"Positions: JPL Horizons ID 120090482"
+                )
+            else:  # Vanth
+                hover_text_osc = (
+                    f"<b>{object_name} ALMA Orbit (Brown & Butler 2023)</b><br>"
+                    f"<br>Orbital radius: {a:.7f} AU ({a * 149597870.7:.1f} km)<br>"
+                    f"Period: {BINARY_PARAMS['period_days']:.2f} days<br>"
+                    f"Eccentricity: ~0.007 (nearly circular)<br>"
+                    f"Inclination: {i:.1f} deg, Omega: {Omega:.1f} deg<br>"
+                    f"<br><b>Binary System - Highest Mass Ratio Known!</b><br>"
+                    f"Mass ratio (Vanth/Orcus): 0.16 +/- 0.02<br>"
+                    f"(Charon/Pluto is only 0.12)<br>"
+                    f"Vanth orbits 86.3% of separation from barycenter<br>"
+                    f"Diameter: 443 +/- 10 km (nearly half of Orcus!)<br>"
+                    f"Likely a largely-intact impactor from giant collision<br>"
+                    f"<br><b>Position: From JPL Horizons</b><br>"
+                    f"<i>Vanth position from JPL satellite solution (ID 120090482)<br>"
+                    f"projected onto ALMA orbit radius.</i><br>"
+                    f"<br><b>Orbit Plane:</b><br>"
+                    f"<i>i, Omega fitted to JPL Vanth positions (Jan 2026)<br>"
+                    f"to ensure markers lie on drawn orbit circles.</i><br>"
+                    f"<br><b>Data Sources:</b><br>"
+                    f"Orbit radii: Brown & Butler 2023, PSJ 4:193<br>"
+                    f"Orbit plane: Fitted to JPL satellite solution<br>"
+                    f"Positions: JPL Horizons ID 120090482"
+                )
+
+        else:
+            hover_text_osc = (
+                f"<b>{object_name} Osculating Orbit</b><br>"
+                f"Epoch: {epoch}<br>"
+                f"<br>a={a:.7f} AU ({a * 149597870.7:.1f} km)<br>"
+                f"e={e:.6f}<br>"
+                f"i={i:.2f} deg"
+            )
+                
+        # Determine line style
+        if is_barycenter_mode:
+            line_style = dict(color=color, width=2, dash='dash')
+            orbit_label = f'{object_name} ALMA Orbit (Brown & Butler 2023)'
+        else:
+            line_style = dict(color=color, width=1, dash='dash')
+            orbit_label = f'{object_name} Osculating Orbit (Epoch: {epoch})'
+
+        # Add orbit trace
+        fig.add_trace(go.Scatter3d(
+            x=x_final, y=y_final, z=z_final,
+            mode='lines',
+            line=line_style,
+            name=orbit_label,
+            text=[hover_text_osc] * len(x_final),
+            customdata=[hover_text_osc] * len(x_final),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        ))
+        
+        print(f"  [OK] Added {object_name} orbit (center: {center_id})", flush=True)
+        return fig
+        
+    except Exception as e:
+        print(f"Error plotting {object_name} orbit: {e}", flush=True)
+        traceback.print_exc()
+        return fig
+
+
+def add_orcus_barycenter_marker(fig, date, vanth_position=None):
+    """
+    Add the Orcus-Vanth barycenter marker to Orcus-centered view.
+    
+    The barycenter is ~1,230 km from Orcus's center toward Vanth.
+    This is OUTSIDE Orcus's surface (radius ~455 km)!
+    
+    Parameters:
+        fig: Plotly figure
+        date: Current date for position calculation
+        vanth_position: Dict with Vanth's x, y, z position (if available)
+    """
+    # Barycenter distance from Orcus center in AU
+    # Calculation: separation x (m_vanth / (m_orcus + m_vanth))
+    # = 9,000 km x (0.16 / 1.16) ~ 1,241 km ~ 0.0000083 AU
+    BARYCENTER_DIST_AU = 0.0000083
+    
+    if vanth_position and vanth_position.get('x') is not None:
+        # Calculate unit vector from Orcus toward Vanth
+        vx, vy, vz = vanth_position['x'], vanth_position['y'], vanth_position['z']
+        vanth_dist = (vx**2 + vy**2 + vz**2)**0.5
+        
+        if vanth_dist > 0:
+            # Barycenter is along the Orcus-Vanth line
+            bary_x = BARYCENTER_DIST_AU * (vx / vanth_dist)
+            bary_y = BARYCENTER_DIST_AU * (vy / vanth_dist)
+            bary_z = BARYCENTER_DIST_AU * (vz / vanth_dist)
+        else:
+            bary_x, bary_y, bary_z = BARYCENTER_DIST_AU, 0, 0
+    else:
+        # Fallback: place on +X axis
+        bary_x, bary_y, bary_z = BARYCENTER_DIST_AU, 0, 0
+    
+    hover_text = (
+        f"<b>Orcus-Vanth Barycenter</b><br>"
+        f"<i>Center of mass - HIGHEST mass ratio binary!</i><br><br>"
+        f"Distance from Orcus center: ~1,230 km<br>"
+        f"Distance from Orcus surface: ~775 km<br>"
+        f"<br><b>Why this matters:</b><br>"
+        f"<i>The barycenter is OUTSIDE Orcus!<br>"
+        f"Both Orcus and Vanth orbit this point.<br>"
+        f"Mass ratio: 16% (higher than Pluto-Charon!)<br><br>"
+        f"ALMA 2016 directly resolved this<br>"
+        f"barycentric wobble for the first time.<br><br>"
+        f"Vanth is likely an intact impactor<br>"
+        f"from a giant collision early in<br>"
+        f"solar system history.</i>"
+    )
+    
+    fig.add_trace(go.Scatter3d(
+        x=[bary_x], y=[bary_y], z=[bary_z],
+        mode='markers',
+        marker=dict(
+            size=8,
+            color=color_map('Orcus'),
+            symbol='square-open',
+        ),
+        name='Orcus-Vanth Barycenter',
+        text=[hover_text],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    ))
+    
+    print(f"  [OK] Added Orcus-Vanth barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
     
     return fig
 
@@ -3626,9 +3979,49 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     charon_pos = current_positions.get('Charon') if current_positions else None
                     fig = add_pluto_barycenter_marker(fig, date, charon_position=charon_pos)
 
-            # Special handling for TNO satellites (Eris, Haumea, Makemake moons)
+            # Special handling for Orcus-Vanth BINARY SYSTEM
+            # Two modes: traditional Orcus-centered, or barycenter-centered
+            # Orcus-Vanth has the HIGHEST mass ratio (16%) of any known system!
+            
+            # Mode 1: Barycenter-centered (binary dwarf planet mode)
+            elif center_id == 'Orcus-Vanth Barycenter' and moon_name in ORCUS_BARYCENTER_ORBITERS:
+                # In barycenter mode, BOTH Orcus and Vanth orbit the barycenter
+                if date:
+                    fig = plot_orcus_barycenter_orbit(
+                        fig,
+                        moon_name,  # Can be 'Orcus' or 'Vanth'
+                        date,
+                        color_map(moon_name),
+                        show_apsidal_markers=show_apsidal_markers,
+                        center_id=center_id
+                    )
+                else:
+                    print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
+            
+            # Mode 2: Traditional Orcus-centered (Vanth orbits Orcus)
+            elif moon_name == 'Vanth' and center_id == 'Orcus':
+                # Plot Vanth's orbit around Orcus using the new function
+                if date:
+                    fig = plot_orcus_barycenter_orbit(
+                        fig,
+                        moon_name,
+                        date,
+                        color_map(moon_name),
+                        show_apsidal_markers=show_apsidal_markers,
+                        center_id=center_id
+                    )
+                    
+                    # Add barycenter marker for Orcus-centered view
+                    vanth_pos = current_positions.get('Vanth') if current_positions else None
+                    fig = add_orcus_barycenter_marker(fig, date, vanth_position=vanth_pos)
+                else:
+                    print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
+
+            # Special handling for TNO satellites (Eris, Haumea, Makemake, etc. moons)
             # These have no reliable analytical elements - osculating only
-            elif moon_name in TNO_MOONS:
+            # Note: Vanth is now handled above, but other TNO moons still use this path
+            elif moon_name in TNO_MOONS and moon_name != 'Vanth':
+
                 if date:
                     fig = plot_tno_satellite_orbit(
                         fig,
@@ -3696,8 +4089,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     
                     if moon_params:
 
-# For satellites, get TP and epoch from osculating cache if not in params
-                        if 'TP' not in moon_params and moon_name in osc_cache:
+                        # For satellites, get TP and epoch from osculating cache if not in params
+                        # Skip for analytical-only satellites (their osculating cache has wrong heliocentric data)
+                        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+                        if 'TP' not in moon_params and moon_name in osc_cache and moon_name not in ANALYTICAL_ONLY_SATELLITES:
+
                             try:
                                 osc_elements = osc_cache[moon_name].get('elements', {})
                                 if 'TP' in osc_elements:

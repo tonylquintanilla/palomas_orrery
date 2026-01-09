@@ -162,7 +162,7 @@ from constants_new import (
 
 from visualization_utils import (format_hover_text, add_hover_toggle_buttons, format_detailed_hover_text)
 
-from save_utils import save_plot
+from save_utils import save_plot, show_and_save as _show_and_save_impl
 
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
@@ -834,80 +834,18 @@ def cleanup_old_orbits():
         return error_msg, 'error'
     
 def show_animation_safely(fig, default_name):
-    """Show and optionally save an animated Plotly figure with proper cleanup."""
-    import tkinter as tk
-    from tkinter import filedialog, messagebox
-    import webbrowser
-    import os
-    import tempfile
-    import threading
-    import platform
+    """
+    Show and optionally save an animation.
     
-    # Check if we're in the main thread - dialogs crash macOS if called from worker thread
-    in_main_thread = threading.current_thread() is threading.main_thread()
+    This function now delegates to the consolidated save_utils module
+    while maintaining backward compatibility.
     
-    if not in_main_thread and platform.system() == 'Darwin':
-        # On macOS, skip save dialog and just show animation in browser
-        with tempfile.NamedTemporaryFile(suffix='.html', delete=False) as tmp:
-            temp_path = tmp.name
-            fig.write_html(temp_path, include_plotlyjs='cdn', auto_play=False)
-            webbrowser.open(f'file://{os.path.abspath(temp_path)}')
-            print(f"Animation opened in browser")
-            print("Save dialog skipped (macOS thread safety) - use File menu in browser to save")
-        return
+    Parameters:
+        fig: Plotly figure object with animation
+        default_name: Default filename without extension
     
-    root = tk.Tk()
-    root.withdraw()
-    root.attributes('-topmost', True)
-
-    save_response = messagebox.askyesno(
-        "Save Animation",
-        "Would you like to save this animation as an interactive HTML file?\n"
-        "Click 'Yes' to save, or 'No' to continue without saving.",
-        parent=root
-    )
-    
-    try:
-
-        if save_response:
-            # Get save location from user
-            file_path = filedialog.asksaveasfilename(
-                parent=root,
-                initialfile=f"{default_name}.html",
-                defaultextension=".html",
-                filetypes=[("HTML files", "*.html")]
-            )
-            
-            if file_path:
-                # Save directly to user's chosen location
-                fig.write_html(file_path, include_plotlyjs='cdn', auto_play=False)
-                print(f"Animation saved to {file_path}")
-                webbrowser.open(f'file://{os.path.abspath(file_path)}')
-        else:
-
-            # If user doesn't want to save, just display the animation temporarily
-            with tempfile.NamedTemporaryFile(suffix='.html', delete=False) as tmp:
-                temp_path = tmp.name
-                fig.write_html(temp_path, include_plotlyjs='cdn', auto_play=False)
-                webbrowser.open(f'file://{os.path.abspath(temp_path)}')
-                
-                # Schedule cleanup of temporary file
-                def cleanup_temp():
-                    try:
-                        if os.path.exists(temp_path):
-                            os.unlink(temp_path)
-                    except Exception as e:
-                        print(f"Error cleaning up temporary file: {e}")
-                
-                # Schedule cleanup after a delay to ensure browser has loaded the file
-                root.after(5000, cleanup_temp)
-    
-    except Exception as e:
-        messagebox.showerror(
-            "Save Error",
-            f"An error occurred:\n{str(e)}",
-            parent=root
-        )
-    finally:
-        root.destroy()
+    Returns:
+        str or None: Path to saved file, or None if not saved
+    """
+    return _show_and_save_impl(fig, default_name)
 

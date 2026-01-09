@@ -9,7 +9,11 @@ import numpy as np
 import webbrowser
 import tempfile
 import os
-
+import os
+import tkinter as tk
+from tkinter import filedialog, messagebox
+import threading
+import platform
 
 def create_coordinate_system_diagram():
     """
@@ -607,15 +611,52 @@ Practical guide for understanding different reference frames</li>
 </html>
 """
     
-    # Save to temporary file and open in browser
+# Save to temporary file and open in browser
     temp_file = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.html', encoding='utf-8')
     temp_file.write(html_content)
     temp_file.close()
     
     # Open in default browser
     webbrowser.open('file://' + temp_file.name)
-    
     print(f"Coordinate System Reference Guide opened in browser: {temp_file.name}")
+    
+    # Offer save dialog (skip on macOS worker thread)
+    in_main_thread = threading.current_thread() is threading.main_thread()
+    if platform.system() == 'Darwin' and not in_main_thread:
+        print("Save dialog skipped (macOS thread safety) - use File > Save As in browser")
+        return
+    
+    root = None
+    try:
+        root = tk.Tk()
+        root.withdraw()
+        root.attributes('-topmost', True)
+        
+        save_response = messagebox.askyesno(
+            "Save Reference Guide",
+            "Would you like to save this reference guide?",
+            parent=root
+        )
+        
+        if save_response:
+            file_path = filedialog.asksaveasfilename(
+                parent=root,
+                initialfile="coordinate_system_guide.html",
+                defaultextension=".html",
+                filetypes=[("HTML files", "*.html")]
+            )
+            if file_path:
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(html_content)
+                print(f"Reference guide saved to: {file_path}")
+    except Exception as e:
+        print(f"Error during save: {e}")
+    finally:
+        if root:
+            try:
+                root.destroy()
+            except:
+                pass
 
 
 if __name__ == "__main__":

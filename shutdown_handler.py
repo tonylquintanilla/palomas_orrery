@@ -10,6 +10,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
 from contextlib import contextmanager
+from save_utils import show_and_save as _show_and_save_impl
 
 class PlotlyShutdownHandler:
     """Handles graceful shutdown for Plotly visualizations and associated threads."""
@@ -66,132 +67,20 @@ def create_monitored_thread(handler, target_func, *args, **kwargs):
     return thread
 
 def show_figure_safely(fig, default_name):
-    """Show and optionally save a Plotly figure with proper cleanup."""
-    import tkinter as tk
-    from tkinter import filedialog, messagebox
-    import webbrowser
-    import os
-    import tempfile
-    import threading
-
-    # Create and display temporary HTML file
-    temp_path = None
-    root = None
+    """
+    Show and optionally save a Plotly figure with proper cleanup.
     
-    try:
-        # First, create temporary file for browser display
-        with tempfile.NamedTemporaryFile(suffix='.html', delete=False) as tmp:
-            temp_path = tmp.name
-            fig.write_html(
-                temp_path,
-                include_plotlyjs=True,
-                config={'displayModeBar': True}
-            )
-        
-        # Open in browser immediately
-        webbrowser.open(f'file://{os.path.abspath(temp_path)}')
-        print(f"Visualization opened in browser")
-
-        # Check if we're in the main thread - dialogs crash macOS if called from worker thread
-        import platform
-        in_main_thread = threading.current_thread() is threading.main_thread()
-        
-        if not in_main_thread and platform.system() == 'Darwin':
-            # On macOS, skip save dialog when in worker thread to avoid crash
-            print("Save dialog skipped (macOS thread safety) - use File menu in browser to save")
-            return
-        
-        # Create root window for dialogs (only safe on main thread or non-macOS)
-        root = tk.Tk()
-        root.withdraw()
-        root.attributes('-topmost', True)
-
-        # Single initial dialog - do you want to save?
-        save_response = messagebox.askyesno(
-            "Save Visualization",
-            "Would you like to save this visualization?",
-            parent=root
-        )
-
-        if save_response:
-            # Ask for format only if they want to save
-            format_choice = messagebox.askyesno(
-                "Save Format",
-                "Choose save format:\n\n"
-                "Yes - Static PNG image\n"
-                "No - Interactive HTML file",
-                parent=root
-            )
-            
-            if format_choice:  # User chose PNG
-                file_path = filedialog.asksaveasfilename(
-                    parent=root,
-                    initialfile=f"{default_name}.png",
-                    defaultextension=".png",
-                    filetypes=[("PNG files", "*.png")]
-                )
-                if file_path:
-                    try:
-                        fig.write_image(file_path)
-                        print(f"Plot saved as PNG: {file_path}")
-                    except ImportError:
-                        messagebox.showerror(
-                            "Missing Dependency",
-                            "The kaleido package is required for saving static images.\n"
-                            "Please install it with: pip install kaleido",
-                            parent=root
-                        )
-                    except Exception as e:
-                        messagebox.showerror(
-                            "Save Error",
-                            f"Error saving PNG: {str(e)}",
-                            parent=root
-                        )
-            else:  # User chose HTML
-                file_path = filedialog.asksaveasfilename(
-                    parent=root,
-                    initialfile=f"{default_name}.html",
-                    defaultextension=".html",
-                    filetypes=[("HTML files", "*.html")]
-                )
-                if file_path:
-                    try:
-                        fig.write_html(file_path, include_plotlyjs='cdn', auto_play=False)
-                        print(f"Interactive plot saved to: {file_path}")
-                    except Exception as e:
-                        messagebox.showerror(
-                            "Save Error",
-                            f"Error saving HTML: {str(e)}",
-                            parent=root
-                        )
-        else:
-            print("User chose not to save the visualization")
-
-    except Exception as e:
-        print(f"Error during visualization/save operation: {e}")
-        import traceback
-        traceback.print_exc()
+    This function now delegates to the consolidated save_utils module
+    while maintaining backward compatibility.
     
-    finally:
-        # Clean up the Tk root window
-        try:
-            if root:
-                root.destroy()
-        except:
-            pass
-        
-        # Schedule cleanup of temporary file after a delay
-        def cleanup_temp():
-            try:
-                if temp_path and os.path.exists(temp_path):
-                    os.unlink(temp_path)
-                    print(f"Cleaned up temporary file: {temp_path}")
-            except Exception as e:
-                print(f"Error cleaning up temporary file: {e}")
-        
-        # Use a timer to delay cleanup, ensuring browser has time to load the file
-        if temp_path:
-            timer = threading.Timer(10.0, cleanup_temp)
-            timer.daemon = True
-            timer.start()
+    Parameters:
+        fig: Plotly figure object
+        default_name: Default filename without extension
+    
+    Returns:
+        str or None: Path to saved file, or None if not saved
+    """
+    return _show_and_save_impl(fig, default_name)
+
+
 

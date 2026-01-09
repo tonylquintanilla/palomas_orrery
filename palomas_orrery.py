@@ -559,6 +559,15 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
         print(f"[SCALING] Pluto-Charon Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
         return [-max_range, max_range]
 
+    # Special case: Orcus-Vanth Barycenter centered view
+    # Use fixed range appropriate for the binary dwarf planet system (~0.00015 AU scale)
+    if center_object_name == 'Orcus-Vanth Barycenter':
+        # Vanth orbits at ~0.0000601 AU from barycenter (~7,770 km from barycenter)
+        # Add buffer for comfortable viewing - scale to see both orbits clearly
+        max_range = 0.00015  # ~2.5x Vanth's orbital radius from barycenter
+        print(f"[SCALING] Orcus-Vanth Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
+        return [-max_range, max_range]
+
     max_distances = []
     
     # Get orbital distances for selected objects
@@ -1299,7 +1308,7 @@ controls_container.config(width=450, height=750)  # Wider container
 #controls_container.grid_columnconfigure(0, weight=1)  # Let canvas column expand
 
 # Create a canvas inside the container
-controls_canvas = tk.Canvas(controls_container, bg='SystemButtonFace')
+controls_canvas = tk.Canvas(controls_container, bg='gray90')
 # controls_scrollbar = tk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, width=16)
 controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview)
 
@@ -1309,12 +1318,12 @@ controls_canvas.pack(side="left", fill="both", expand=True)
 controls_scrollbar.pack(side="right", fill="y")
 
 # Create the frame that will contain all the controls
-controls_frame = tk.Frame(controls_canvas, bg='SystemButtonFace')
+controls_frame = tk.Frame(controls_canvas, bg='gray90')
 
 # Add these lines after controls_frame is created
-controls_container.configure(bg='SystemButtonFace')
-controls_canvas.configure(bg='SystemButtonFace')
-controls_frame.configure(bg='SystemButtonFace')
+controls_container.configure(bg='gray90')
+controls_canvas.configure(bg='gray90')
+controls_frame.configure(bg='gray90')
 
 # Update the canvas window creation with explicit width
 controls_window = controls_canvas.create_window(
@@ -1331,7 +1340,7 @@ scroll_message = tk.Label(
     controls_frame,
     text="SCROLL DOWN TO SEE ALL PLOTTING OPTIONS",
     fg='red',
-    bg='SystemButtonFace',
+    bg='gray90',
     font=("Arial", 10, 
     #      "bold"
           )
@@ -1718,7 +1727,7 @@ controls_canvas.config(width=430, height=710)  # 450 container - 16 scrollbar - 
 orbit_paths_over_time = None  # Will be set by orbit_data_manager
 
 # After creating the status_display widget, initialize the orbit_data_manager
-status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg='SystemButtonFace', fg='black')
+status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg='gray90', fg='black')
 
 # orbit_paths_over_time = orbit_data_manager.initialize(status_display)  # removed because it is redundant
 
@@ -2159,6 +2168,7 @@ hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
 
 # Define IntVar variables for Kuiper Belt Objects
 quaoar_var = tk.IntVar(value=0)
+weywot_var = tk.IntVar(value=0)
 
 sedna_var = tk.IntVar(value=0)
 
@@ -2169,6 +2179,8 @@ of201_var = tk.IntVar(value=0)
 chariklo_var = tk.IntVar(value=0)
 
 orcus_var = tk.IntVar(value=0)    # 0 means unselected by default
+vanth_var = tk.IntVar(value=0)
+orcus_barycenter_var = tk.IntVar(value=0)   # Orcus-Vanth Barycenter
 
 varuna_var = tk.IntVar(value=0)
 
@@ -2179,6 +2191,7 @@ ms4_var = tk.IntVar(value=0)
 dw_var = tk.IntVar(value=0)
 
 gonggong_var = tk.IntVar(value=0)
+xiangliu_var = tk.IntVar(value=0)
 
 arrokoth_var = tk.IntVar(value=0)
 arrokoth_new_horizons_var = tk.IntVar(value=0)
@@ -2483,11 +2496,13 @@ objects = [
 
     {'name': 'Gonggong', 'id': '2007 OR10', 'var': gonggong_var, 'color': color_map('Gonggong'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
+    'center_id': '20225088', # Numeric ID for use as Horizons center; Gonggong's moon Xiangliu
     'mission_info': 'Horizons: 2007 OR10. Dwarf planet in the Kuiper Belt with a highly inclined orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)'},
 
-    {'name': 'Makemake', 'id': '2005 FY9', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    {'name': 'Makemake', 'id': '20136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
+    'id_type': 'majorbody',
+    'helio_id': '2005 FY9',  # For Sun-centered plots; 
     'mission_info': 'Horizons: 2005 FY9. Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
 
@@ -2503,13 +2518,26 @@ objects = [
     'mission_info': 'Horizons: 2002 MS4. One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
     'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
 
-    {'name': 'Orcus', 'id': '2004 DW', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    {'name': 'Orcus', 'id': '920090482', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
+    'center_id': '920090482', # PRIMARY body ID for use as Horizons center (not small body designation)
+    'helio_id': '2004 DW',
+    'helio_id_type': 'smallbody',
+#    {'name': 'Orcus', 'id': '2004 DW', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
+#    'id_type': 'smallbody', 
+#    'center_id': '2090482', # Numeric ID for use as Horizons center; Orcus's moon Vanth
     'mission_info': 'Horizons: 2004 DW.A dwarf planet in the Kuiper Belt with a moon named Vanth.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
 
+    # NEW: Orcus-Vanth Barycenter - HIGHEST mass ratio binary system in the solar system!
+    {
+#    'name': 'Orcus-Vanth Barycenter', 'id': '2090482', 'var': orcus_barycenter_var, 
+    'name': 'Orcus-Vanth Barycenter', 'id': '20090482', 'var': orcus_barycenter_var,
+     'color': color_map('Orcus'), 'symbol': 'square-open', 'object_type': 'barycenter',
+     'description': 'Center of mass for Orcus-Vanth binary system (16% mass ratio - highest known!)'},
+
     {'name': 'Quaoar', 'id': '2002 LM60', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
+    'center_id': '2050000', # Numeric ID for use as Horizons center; Quaoar's moon Weywot
     'mission_info': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system.', 
     'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
 
@@ -3243,6 +3271,24 @@ objects = [
      'mission_info': 'Eris\'s moon. Period: 15.79 days. Both tidally locked. Diameter ~700 km.', 
      'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
 
+    # Gonggong's Moon
+    {'name': 'Xiangliu', 'id': '120225088', 'var': xiangliu_var, 'color': color_map('Xiangliu'), 'symbol': 'circle', 'object_type': 'satellite', # id is provisional
+     'id_type': 'majorbody', 
+     'mission_info': 'Gonggong\'s moon. Period: 25.22 days. Diameter ~100 km.', 
+     'mission_url': 'https://en.wikipedia.org/wiki/Xiangliu_(moon)'},
+
+    # Orcus's Moon
+    {'name': 'Vanth', 'id': '120090482', 'var': vanth_var, 'color': color_map('Van'), 'symbol': 'circle', 'object_type': 'satellite', 
+     'id_type': 'majorbody', 
+     'mission_info': 'Orcus\'s moon. Period: 9.54 days. Diameter ~440 km.', 
+     'mission_url': 'https://en.wikipedia.org/wiki/Vanth_(moon)'},
+
+    # Quaoar's Moon
+    {'name': 'Weywot', 'id': '120050000', 'var': weywot_var, 'color': color_map('Weywot'), 'symbol': 'circle', 'object_type': 'satellite', 
+     'id_type': 'majorbody', 
+     'mission_info': 'Quaoar\'s moon. Period: 12.44 days. Diameter ~170 km.', 
+     'mission_url': 'https://en.wikipedia.org/wiki/Weywot'},    
+
     # Haumea's Moons
     {'name': "Hi'iaka", 'id': '120136108', 'var': hiiaka_var, 'color': color_map("Hi'iaka"), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': 'majorbody', 
@@ -3257,7 +3303,6 @@ objects = [
     # Makemake's Moon
     {'name': 'MK2', 'id': '120136472', 'var': mk2_var, 'color': color_map('MK2'), 'symbol': 'circle', 'object_type': 'satellite', 
      'id_type': 'majorbody', 
-     'center_id': '2152830',  # Numeric ID for use as Horizons center body
      'mission_info': 'Makemake\'s moon (S/2015 (136472) 1). Discovered 2015 by Hubble. Period: 18.023 days. Distance: ~22,250 km. Orbit edge-on to Earth.<br>' 
      'Very dark surface (~4% reflectivity), diameter ~175 km. No JPL ephemeris available - orbit from 2025 Hubble analysis.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
@@ -3395,7 +3440,7 @@ class ScrollableFrame(tk.Frame):
         super().__init__(container, *args, **kwargs)
 
         # Canvas and Scrollbar
-        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
+        self.canvas = tk.Canvas(self, bg='gray90')
         self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self.scrollbar.set) 
 
@@ -3404,7 +3449,7 @@ class ScrollableFrame(tk.Frame):
         self.scrollbar.pack(side="right", fill="y")
 
         # Scrollable Frame
-        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
+        self.scrollable_frame = tk.Frame(self.canvas, bg='gray90')
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
 
         # Bind mousewheel to the canvas
@@ -3902,6 +3947,14 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             if obj_info.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:    
                 continue
 
+            # Skip actual orbit plotting for Orcus-Vanth Barycenter mode
+            # JPL Horizons satellite solution defines Orcus PRIMARY (920090482) at the barycenter,
+            # so trajectory queries return 0,0,0 for Orcus. Vanth's cached trajectory is relative
+            # to wrong center (heliocentric). Use analytical binary orbits instead (see osculating).
+            if center_object_name == 'Orcus-Vanth Barycenter' and planet in ['Orcus', 'Vanth']:
+                print(f"[ORCUS-VANTH] Skipping actual orbit for {planet} - using analytical binary orbit only", flush=True)
+                continue
+
             # Use helio_id for Sun-centered plots if available (longer ephemeris coverage)
             # System barycenter IDs (e.g., 20136108) only have data to ~2030
             # Heliocentric IDs (e.g., 2003 EL61) have data to ~2500
@@ -4057,6 +4110,17 @@ def plot_objects():
         osculating_center_body = '@9'  # Barycentric elements
     elif center_object_name == 'Pluto':
         osculating_center_body = '@999'  # Pluto-centered elements
+
+#    elif center_object_name == 'Orcus-Vanth Barycenter':
+#        osculating_center_body = '@2090482'  # Orcus-Vanth barycentric (uses Orcus numeric ID)
+#    elif center_object_name == 'Orcus':
+#        osculating_center_body = '@2090482'  # Orcus-centered elements
+
+    elif center_object_name == 'Orcus-Vanth Barycenter':
+        osculating_center_body = '@20090482'  # Orcus-Vanth satellite solution barycenter
+    elif center_object_name == 'Orcus':
+        osculating_center_body = '@920090482'  # Orcus PRIMARY body (not small body)
+
     else:
         osculating_center_body = None  # Default (heliocentric or auto-detect)
 
@@ -4067,10 +4131,13 @@ def plot_objects():
         print(f"[WARNING] Could not get plot date from GUI: {e}, using today", flush=True)
         plot_date = datetime.now()
 
+    # These TNO moons have no usable JPL parent-centered ephemeris
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+
     # Filter objects that need osculating elements
     pre_fetch_objects = [
         obj['name'] for obj in selected_objects_for_prefetch 
-    #    if obj.get('object_type') in ['orbital', 'satellite']
+        if obj['name'] not in SKIP_HORIZONS_PREFETCH  # Add this filter
         if obj.get('object_type') in ['orbital', 'satellite', 'trajectory', 'lagrange_point']
         and obj['name'] != center_object_name
         and obj.get('object_type') not in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']
@@ -4093,26 +4160,23 @@ def plot_objects():
                     horizons_id = obj_dict.get('id', obj_name)
                     id_type = obj_dict.get('id_type', 'smallbody')
                     
-                    
-                    # Trigger the GUI prompt with proper Horizons ID
-            #        fresh_elements = get_elements_with_prompt(
-            #            obj_name, 
-            #            horizons_id=horizons_id,
-            #            id_type=id_type,
-            #            plot_date=plot_date,
-            #            parent_window=root
-            #        )
-
                     # Determine if this object needs barycentric elements
                     # Pluto system objects need center_body when viewing from barycenter
                     obj_center_body = None
+
                     if center_object_name in ['Pluto-Charon Barycenter', 'Pluto']:
-                        # Check if this is a Pluto system object (Pluto, Charon, or outer moons)
-                        pluto_system_ids = ['999', '901', '902', '903', '904', '905']  # Pluto, Charon, Nix, Hydra, Kerberos, Styx
+                        pluto_system_ids = ['999', '901', '902', '903', '904', '905']   # Pluto, Charon, Styx, Nix, Kerberos, Hydra
                         if str(horizons_id) in pluto_system_ids:
+                            obj_center_body = osculating_center_body
+                    elif center_object_name in ['Orcus-Vanth Barycenter', 'Orcus']:
+                        # Check if this is an Orcus system object (Orcus or Vanth)
+                #        orcus_system_ids = ['2090482', '120090482']  # Orcus, Vanth
+                        orcus_system_ids = ['920090482', '120090482', '2004 DW']  # Orcus primary, Vanth, Orcus small body
+                        if str(horizons_id) in orcus_system_ids:
                             obj_center_body = osculating_center_body
                     
                     # Trigger the GUI prompt with proper Horizons ID and center
+
                     fresh_elements = get_elements_with_prompt(
                         obj_name, 
                         horizons_id=horizons_id,
@@ -4247,11 +4311,17 @@ def plot_objects():
                 cache_start_date = settings['start_date']  # Or get_date_from_gui()
                 cache_end_date = settings['end_date']      # Or get_end_date_from_gui()
 
+                # These TNO moons have no usable JPL parent-centered ephemeris
+                SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+                
                 for obj in selected_objects:
                     # Skip exoplanet objects - they don't use JPL Horizons
-            #        if obj.get('object_type') in ['exoplanet', 'exo_host_star']:
                     if obj.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:    
-                        continue                    
+                        continue
+                    # Skip TNO moons that use analytical orbits only
+                    if obj['name'] in SKIP_HORIZONS_TRAJECTORY:
+                        continue
+
                     orbit_key = f"{obj['name']}_{center_object_name}"
                     
                     # Check if orbit exists in cache
@@ -4684,10 +4754,19 @@ def plot_objects():
                         }
                 elif obj['name'] == center_object_name:
 
-            #        if obj['name'] == center_object_name:
                         obj_data = {'x': 0, 'y': 0, 'z': 0}
+            #    else:
+            #            obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
+
                 else:
-                        obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
+                        # Use helio_id for Sun-centered plots if available
+                        fetch_id = obj['id']
+                        fetch_id_type = obj.get('id_type', None)
+                        if center_object_name == 'Sun' and 'helio_id' in obj:
+                            fetch_id = obj['helio_id']
+                            fetch_id_type = 'smallbody'
+                        obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
+
                 positions[obj['name']] = obj_data
 
                     # Store positions for planets with shells
@@ -4977,10 +5056,116 @@ def plot_objects():
                 if obj['name'] != center_object_name and obj.get('system_id', 'solar') != center_system_id:
                     continue
                 
+                # Special handling for Orcus-Vanth barycenter mode
+                # Vanth position from JPL, Orcus derived (180 deg opposite, tidally locked)
+                if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
+                    # Only fetch once (when we hit either object), calculate both positions
+
+                    if 'Vanth' not in positions and 'Orcus' not in positions:
+                        # Fetch Vanth from JPL (120090482 @ 20090482)
+                        vanth_raw = fetch_position('120090482', date_obj, center_id='20090482', id_type=None)
+                        if vanth_raw and 'x' in vanth_raw:
+                            # ALMA orbit radii (Brown & Butler 2023)
+                            VANTH_DIST_ALMA_AU = 0.0000518615  # 7,758 km
+                            ORCUS_DIST_ALMA_AU = 0.0000082329  # 1,232 km
+                            
+                            # Orbit plane parameters (fitted to JPL positions Jan 2026)
+                            i_rad = np.radians(83.0)
+                            Omega_rad = np.radians(216.0)
+                            
+                            # Orbit plane normal vector
+                            orbit_normal = np.array([
+                                np.sin(i_rad) * np.sin(Omega_rad),
+                                -np.sin(i_rad) * np.cos(Omega_rad),
+                                np.cos(i_rad)
+                            ])
+                            
+                            # Get Vanth's JPL position
+                            vanth_vec = np.array([vanth_raw['x'], vanth_raw['y'], vanth_raw['z']])
+                            
+                            # Project onto orbit plane (remove out-of-plane component)
+                            vanth_in_plane = vanth_vec - np.dot(vanth_vec, orbit_normal) * orbit_normal
+                            vanth_in_plane_dist = np.linalg.norm(vanth_in_plane)
+                            
+                            if vanth_in_plane_dist > 0:
+                                vanth_unit = vanth_in_plane / vanth_in_plane_dist
+                                
+                                # Project Vanth onto ALMA orbit radius
+                                vanth_projected = vanth_unit * VANTH_DIST_ALMA_AU
+                                positions['Vanth'] = {
+                                    'x': float(vanth_projected[0]),
+                                    'y': float(vanth_projected[1]),
+                                    'z': float(vanth_projected[2])
+                                }
+                                
+                                # Derive Orcus (180 deg opposite)
+                                orcus_projected = -vanth_unit * ORCUS_DIST_ALMA_AU
+                                positions['Orcus'] = {
+                                    'x': float(orcus_projected[0]),
+                                    'y': float(orcus_projected[1]),
+                                    'z': float(orcus_projected[2])
+                                }
+
+                                print(f"  [ORCUS-VANTH] Vanth from JPL, Orcus derived (180 deg opposite)", flush=True)
+                                print(f"    Vanth: ({positions['Vanth']['x']*149597870.7:.1f}, {positions['Vanth']['y']*149597870.7:.1f}, {positions['Vanth']['z']*149597870.7:.1f}) km", flush=True)
+                                print(f"    Orcus: ({positions['Orcus']['x']*149597870.7:.1f}, {positions['Orcus']['y']*149597870.7:.1f}, {positions['Orcus']['z']*149597870.7:.1f}) km", flush=True)
+                    continue  # Skip normal position fetching for both
+
                 if obj['name'] == center_object_name:
                     obj_data = {'x': 0, 'y': 0, 'z': 0}
+                
                 else:
-                    obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
+                    # Use helio_id for Sun-centered plots if available
+                    fetch_id = obj['id']
+                    fetch_id_type = obj.get('id_type', None)
+                    if center_object_name == 'Sun' and 'helio_id' in obj:
+                        fetch_id = obj['helio_id']
+                        fetch_id_type = 'smallbody'
+                    obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
+
+                # Fallback for satellites without JPL ephemeris (e.g., MK2)
+                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+                if obj_data is None and obj['name'] in ANALYTICAL_POSITION_FALLBACK:
+                    from orbital_elements import planetary_params
+                    if obj['name'] in planetary_params:
+                        elements = planetary_params[obj['name']]
+                        a = elements.get('a', 0)
+                        e = elements.get('e', 0)
+                        i_deg = elements.get('i', 0)
+                        omega_deg = elements.get('omega', 0)
+                        Omega_deg = elements.get('Omega', 0)
+                        orbital_period = elements.get('orbital_period_days', 12.4)
+                        
+                        # Reference epoch: J2000.0 with MA=0 (arbitrary)
+                        j2000 = datetime(2000, 1, 1, 12, 0, 0)
+                        delta_days = (date_obj - j2000).total_seconds() / 86400.0
+                        
+                        # Mean motion and mean anomaly
+                        n = 360.0 / orbital_period
+                        M = (n * delta_days) % 360.0
+                        true_anomaly = np.radians(M)  # For circular orbit
+                        
+                        # Position in orbital plane
+                        r = a if e == 0 else a * (1 - e**2) / (1 + e * np.cos(true_anomaly))
+                        x_orb = r * np.cos(true_anomaly)
+                        y_orb = r * np.sin(true_anomaly)
+                        
+                        # Apply 3D rotations
+                        i_rad = np.radians(i_deg)
+                        omega_rad = np.radians(omega_deg)
+                        Omega_rad = np.radians(Omega_deg)
+                        
+                        x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
+                        y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
+                        x2 = x1
+                        y2 = y1 * np.cos(i_rad)
+                        z2 = y1 * np.sin(i_rad)
+                        x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+                        y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+                        
+                        obj_data = {'x': x_final, 'y': y_final, 'z': z2}
+                        print(f"  [ANALYTICAL] Calculated position for {obj['name']}: ({x_final:.6f}, {y_final:.6f}, {z2:.6f}) AU", flush=True)
+                
                 positions[obj['name']] = obj_data
 
             # ADD THIS: Convert positions to the format needed by idealized_orbits
@@ -5001,6 +5186,11 @@ def plot_objects():
                 # Skip exoplanet objects - they're handled in dedicated exoplanet block
                 if obj.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:
                     continue
+
+                # Skip position markers for Orcus/Vanth in barycenter mode
+                # JPL data is unavailable for this view - see osculating orbit hovertext for details
+            #    if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
+            #        continue
 
                 if obj['name'] == center_object_name or (obj['var'].get() == 1 and same_system):
 
@@ -5465,9 +5655,12 @@ def animate_objects(step, label):
         print(f"[ANIMATION PRE-FETCH] Could not get start date: {e}, using today", flush=True)
         plot_date = datetime.now()
 
+    # These TNO moons have no usable JPL parent-centered ephemeris
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+
     pre_fetch_objects = [
         obj['name'] for obj in selected_objects_for_prefetch 
-    #    if obj.get('object_type') in ['orbital', 'satellite']
+        if obj['name'] not in SKIP_HORIZONS_PREFETCH
         if obj.get('object_type') in ['orbital', 'satellite', 'trajectory', 'lagrange_point']
         and obj['name'] != center_object_name
         and obj.get('object_type') not in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']
@@ -5842,15 +6035,81 @@ def animate_objects(step, label):
             # Debug: Print what we're animating
             for name, dates in dates_lists.items():
                 print(f"  {name}: {len(dates)} dates", flush=True)
-
+                    
             # Fetch trajectory data for all selected objects
             positions_over_time = {}
+            
+            # Special handling for Orcus-Vanth barycenter mode animation
+            # Fetch Vanth trajectory once, derive Orcus positions (180° opposite)
+
+            if center_object_name == 'Orcus-Vanth Barycenter':
+                # ALMA orbit radii (Brown & Butler 2023)
+                VANTH_DIST_ALMA_AU = 0.0000518615  # 7,758 km
+                ORCUS_DIST_ALMA_AU = 0.0000082329  # 1,232 km
+                
+                # Orbit plane parameters (fitted to JPL positions Jan 2026)
+                i_rad = np.radians(83.0)
+                Omega_rad = np.radians(216.0)
+                orbit_normal = np.array([
+                    np.sin(i_rad) * np.sin(Omega_rad),
+                    -np.sin(i_rad) * np.cos(Omega_rad),
+                    np.cos(i_rad)
+                ])
+                
+                # Fetch Vanth trajectory from JPL
+                vanth_trajectory = fetch_trajectory('120090482', dates_list, center_id='20090482', id_type=None)
+                
+                if vanth_trajectory:
+                    vanth_positions = []
+                    orcus_positions = []
+                    
+                    for pos in vanth_trajectory:
+                        if pos and 'x' in pos:
+                            # Get Vanth's JPL position and project onto orbit plane
+                            vanth_vec = np.array([pos['x'], pos['y'], pos['z']])
+                            vanth_in_plane = vanth_vec - np.dot(vanth_vec, orbit_normal) * orbit_normal
+                            vanth_in_plane_dist = np.linalg.norm(vanth_in_plane)
+                            
+                            if vanth_in_plane_dist > 0:
+                                vanth_unit = vanth_in_plane / vanth_in_plane_dist
+                                
+                                # Project Vanth onto ALMA orbit radius
+                                vanth_proj = vanth_unit * VANTH_DIST_ALMA_AU
+                                vanth_positions.append({
+                                    'x': float(vanth_proj[0]),
+                                    'y': float(vanth_proj[1]),
+                                    'z': float(vanth_proj[2])
+                                })
+                                
+                                # Derive Orcus (180 deg opposite)
+                                orcus_proj = -vanth_unit * ORCUS_DIST_ALMA_AU
+                                orcus_positions.append({
+                                    'x': float(orcus_proj[0]),
+                                    'y': float(orcus_proj[1]),
+                                    'z': float(orcus_proj[2])
+                                })
+                            else:
+                                vanth_positions.append(None)
+                                orcus_positions.append(None)
+                        else:
+                            vanth_positions.append(None)
+                            orcus_positions.append(None)
+                    
+                    positions_over_time['Vanth'] = vanth_positions
+                    positions_over_time['Orcus'] = orcus_positions
+                    print(f"  [ORCUS-VANTH ANIMATION] Generated {len(vanth_positions)} positions for Vanth and Orcus", flush=True)
+                    print(f"    Vanth: JPL positions projected onto ALMA radius ({VANTH_DIST_ALMA_AU*149597870.7:.0f} km)", flush=True)
+                    print(f"    Orcus: Derived (180 deg opposite) at ALMA radius ({ORCUS_DIST_ALMA_AU*149597870.7:.0f} km)", flush=True)
+            
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
+                    # Skip Orcus/Vanth if already handled above
+                    if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
+                        continue
+                    
                     # Use the dates from dates_lists
-                    obj_dates = dates_lists.get(obj['name'], dates_list)
-                    
-                    
+                    obj_dates = dates_lists.get(obj['name'], dates_list)         
+
                     # Handle objects with date ranges
                     if 'start_date' in obj or 'end_date' in obj:
                         # Get start/end dates with fallbacks
@@ -5904,8 +6163,9 @@ def animate_objects(step, label):
                         #   - Use object-specific reference epoch and MA
                         #   - Apply different coordinate transformations
                         # ===================================================================
-                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2']  # Expandable - see notes above
-                        
+
+                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']  # TNO moons without usable JPL ephemeris
+
                         if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
                             # Check if fetch_trajectory returned empty/None
                             traj = positions_over_time.get(obj['name'])
@@ -6453,6 +6713,11 @@ def animate_objects(step, label):
                 # Skip exoplanet objects - already handled above
                 if obj.get('object_type') == 'exoplanet':
                     continue
+
+                # Skip position markers for Orcus/Vanth in barycenter mode
+                # JPL data is unavailable for this view - analytical orbits shown instead
+        #        if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
+        #            continue
 
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
                     obj_name = obj['name']
@@ -7406,10 +7671,11 @@ CreateToolTip(celestial_frame, "Select celestial bodies for plotting. Selected o
               "Keplerian orbits.")
 
 def create_celestial_checkbutton(name, variable):
-    # For main planets and Sun, make a bold label
-#    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 'Arrokoth/New_Horizons', 'Eris', 'Planet 9']:
+    # For main planets, dwarf planet with satellites, and Sun, make a bold label
+        
     if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 
-                'Arrokoth/New_Horizons', 'Eris', 'Haumea', 'Makemake', 'Planet 9']:
+                'Arrokoth/New_Horizons', 'Eris', 'Haumea', 'Makemake', 'Gonggong', 'Orcus', 'Quaoar']:
+
         # Create frame to hold checkbox and label
         frame = tk.Frame(celestial_frame)
         frame.pack(anchor='w')
@@ -8119,6 +8385,8 @@ kuiper_belt_label.pack(anchor='w', pady=(5, 0))
 
 # Kuiper Belt Objects
 create_celestial_checkbutton("Orcus", orcus_var)            # params
+create_celestial_checkbutton("- Vanth", vanth_var)           
+
 create_celestial_checkbutton("Ixion", ixion_var)            # params
 create_celestial_checkbutton("Mani", ms4_var)               # params
 create_celestial_checkbutton("GV9", gv9_var)                # params
@@ -8129,12 +8397,15 @@ create_celestial_checkbutton("- Hi'iaka", hiiaka_var)       # Haumea moon
 create_celestial_checkbutton("- Namaka", namaka_var)        # Haumea moon
 
 create_celestial_checkbutton("Quaoar", quaoar_var)          # params
+create_celestial_checkbutton("- Weywot", weywot_var)           
+
 create_celestial_checkbutton("Arrokoth", arrokoth_var)      # params
 
 create_celestial_checkbutton("Makemake", makemake_var)      # params
 create_celestial_checkbutton("- MK2", mk2_var)              # Makemake moon
 
 create_celestial_checkbutton("Gonggong", gonggong_var)      # params
+create_celestial_checkbutton("- Xiangliu", xiangliu_var)    # Gonggong moon
 
 create_celestial_checkbutton("Eris", eris_var)  # params
 # Create a Frame specifically for the eris shell options (indented)
@@ -8393,6 +8664,28 @@ def create_exoplanet_checkbutton(name, variable, is_star=False):
         info_text = INFO.get(name.strip('- '), "Exoplanet")
         CreateToolTip(checkbutton, info_text)
 
+def open_star_visualization():
+    """Inform user about standalone Star Visualization executable."""
+    # Platform-aware executable name
+    if platform.system() == 'Darwin':  # macOS
+        exe_name = "star_visualization.app (or run star_visualization_gui.py)"
+    elif platform.system() == 'Windows':
+        exe_name = "star_visualization.exe"
+    else:  # Linux
+        exe_name = "star_visualization_gui.py"
+    
+    message = f"""Star Visualization is available as a separate application.
+
+Please run '{exe_name}' from the same folder as this application.
+
+The Star Visualization provides:
+- 2D and 3D stellar neighborhood plots
+- HR diagrams by distance or magnitude
+- Star search and property lookup
+- Data for 123,000+ stars"""
+    
+    messagebox.showinfo("Star Visualization", message)
+
 # TRAPPIST-1 System (40.5 light-years)
 create_exoplanet_checkbutton("TRAPPIST-1 System (40.5 ly)", trappist1_star_var, is_star=True)
 #create_exoplanet_checkbutton("  - TRAPPIST-1 (star)", trappist1_star_var)
@@ -8423,6 +8716,139 @@ create_exoplanet_checkbutton("Proxima Centauri (4.24 ly) NEAREST!", proxima_star
 create_exoplanet_checkbutton("  - Proxima b (11.2d) [HZ] *", proximab_var)
 create_exoplanet_checkbutton("  - Proxima d (5.1d)", proximad_var)
 
+# --- START OF CODE TO INSERT ---
+
+#tk.Label(exoplanet_frame, text="").pack()  # Spacer
+#tk.Label(exoplanet_frame, text="--- Beyond Exoplanets ---", 
+#         font=("Arial", 9, "italic")).pack()
+
+# ============== GALACTIC CENTER (Sgr A*) ==============
+galactic_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, 
+                               text="Galactic Center: Sagittarius A*")
+galactic_frame.pack(pady=(10, 5), fill='x')
+
+CreateToolTip(galactic_frame, 
+    "Explore the S-stars orbiting the supermassive black hole at the center of the Milky Way!\n\n"
+    "Sagittarius A* is a 4 million solar mass black hole. The S-stars orbit so close that they:\n"
+    "  - Reach speeds up to 8% the speed of light\n"
+    "  - Exhibit measurable General Relativistic effects (precession)\n"
+    "  - Proved Einstein right in 2018 and 2020\n\n"
+    "Features two visualization modes:\n"
+    "  - Orbital Dynamics: Watch the Keplerian 'whoosh' animation\n"
+    "  - Einstein's Laboratory: See the relativistic rosette pattern\n\n"
+    "Opens in your web browser as an interactive 3D visualization.")
+
+def launch_galactic_center():
+    """Launch the Sagittarius A* Grand Tour visualization."""
+    import os
+    import webbrowser
+    
+    # Path to the HTML file (same directory as this script)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    html_path = os.path.join(script_dir, "sgr_a_grand_tour.html")
+    
+    # Check if HTML exists
+    if os.path.exists(html_path):
+        # Open in default browser
+        webbrowser.open('file://' + os.path.realpath(html_path))
+        print(f"[GALACTIC CENTER] Opened visualization: {html_path}", flush=True)
+    else:
+        # Try to generate it
+        print(f"[GALACTIC CENTER] HTML not found, attempting to generate...", flush=True)
+        try:
+            # Import and run the generator
+            import sgr_a_grand_tour as sgr
+            fig = sgr.create_grand_tour_dashboard()
+            fig.write_html(html_path)
+            print(f"[GALACTIC CENTER] Generated: {html_path}", flush=True)
+            webbrowser.open('file://' + os.path.realpath(html_path))
+        except ImportError as e:
+            print(f"[GALACTIC CENTER] ERROR: Missing module - {e}", flush=True)
+            print("Please ensure sgr_a_grand_tour.py and dependencies are in the same folder.", flush=True)
+            # Show error dialog
+            import tkinter.messagebox as messagebox
+            messagebox.showerror("Galactic Center", 
+                f"Could not launch visualization.\n\n"
+                f"Missing module: {e}\n\n"
+                f"Please ensure these files are in the same folder:\n"
+                f"- sgr_a_star_data.py\n"
+                f"- sgr_a_visualization_core.py\n"
+                f"- sgr_a_grand_tour.py")
+        except Exception as e:
+            print(f"[GALACTIC CENTER] ERROR: {e}", flush=True)
+            import tkinter.messagebox as messagebox
+            messagebox.showerror("Galactic Center", f"Error launching visualization:\n{e}")
+
+# Info label
+sgr_info_label = tk.Label(galactic_frame, 
+    text="S-Stars: Stars orbiting the supermassive black hole (4M solar masses)",
+    font=("Arial", 9), fg="black")
+sgr_info_label.pack(anchor='w', padx=5)
+
+# Star list (informational)
+star_info = tk.Label(galactic_frame,
+    text="  S2: 16yr orbit, 2.5% c  |  S62: 9.9yr, 6.8% c\n"
+         "  S4711: 7.6yr (fastest)  |  S4714: 12yr, 8% c (speed demon)",
+    font=("Arial", 8), fg="black", justify='left')
+star_info.pack(anchor='w', padx=10)
+
+# Launch button
+launch_button = tk.Button(galactic_frame, 
+    text="Launch Galactic Center Visualization",
+    command=launch_galactic_center,
+    bg='#1a1a2e', fg='white',  # Dark space-like colors
+    activebackground='#16213e',
+    font=("Arial", 10, "bold"),
+    cursor="hand2")
+launch_button.pack(pady=10, padx=20, fill='x')
+
+CreateToolTip(launch_button,
+    "Opens an interactive 3D visualization in your web browser.\n\n"
+    "Controls:\n"
+    "  - Dropdown (top-left): Switch between Animation and Rosette views\n"
+    "  - Play/Pause: Animate orbital motion\n"
+    "  - Zoom dropdown: Jump to periapsis regions\n"
+    "  - Drag to rotate, scroll to zoom\n\n"
+    "Based on observations from GRAVITY Collaboration and Peissker et al.")
+
+# --- END OF CODE TO INSERT ---
+
+# ============== STELLAR NEIGHBORHOOD ==============
+stellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, 
+                              text="Stellar Neighborhood Visualization")
+stellar_frame.pack(pady=(10, 5), fill='x')
+
+CreateToolTip(stellar_frame,
+    "***Run the star_visualization program separately***\n\n"       
+    "Explore the stellar neighborhood surrounding our Solar System!\n"
+    "The Star Visualization provides:\n"
+    "  - 2D and 3D plots of nearby stars (up to 100+ light-years)\n"
+    "  - HR diagrams showing stellar evolution\n"
+    "  - Star search and property lookup\n"
+    "  - Data for 123,000+ stars from Hipparcos and Gaia catalogs\n\n"
+    "Runs as a separate program alongside this application.")
+
+# Info label
+stellar_info_label = tk.Label(stellar_frame, 
+    text="Stellar data from Hipparcos and Gaia missions (123,000+ stars)",
+    font=("Arial", 9), fg="black")
+stellar_info_label.pack(anchor='w', padx=5)
+
+# Launch button
+#stellar_launch_button = tk.Button(stellar_frame, 
+#    text="Launch Star Visualization",
+#    command=open_star_visualization,
+#    bg='blue', fg='white',
+#    activebackground='#16213e',
+#    font=("Arial", 10, "bold"),
+#    cursor="hand2")
+#stellar_launch_button.pack(pady=10, padx=20, fill='x')
+
+#CreateToolTip(stellar_launch_button,
+#    "Opens the Star Visualization application.\n\n"
+#    "Please run star_visualization.exe from the same folder.")
+
+# --- END OF BEYOND EXOPLANETS SECTION ---
 
 # Controls in controls_frame (Scale Options and beyond)
 
@@ -8692,7 +9118,7 @@ CreateToolTip(orbit_path_frame,
 )
 
 # After orbit_path_frame, where you want to position the status frame:
-status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg='SystemButtonFace', fg='black')
+status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg='gray90', fg='black')
 status_frame.pack(pady=(5, 5), fill='x')
 
 # NOW create the output_label inside the status_frame
@@ -8700,7 +9126,7 @@ output_label = tk.Label(
     status_frame,
     text="Will fetch live data from NASA's Jet Propulsion Laboratory at Caltech. Please be patient ...",
     fg='red',
-    bg='SystemButtonFace',  # Match the background of the LabelFrame
+    bg='gray90',  # Match the background of the LabelFrame
     wraplength=300,  # Increased wraplength for better readability
     justify='left',
     anchor='w'
@@ -8719,7 +9145,7 @@ status_display = tk.Label(
     status_frame, 
     text="Data Fetching Status", 
 #    font=("Arial", 10), 
-    bg='SystemButtonFace', 
+    bg='gray90', 
     fg='green'
 )
 status_display.pack(anchor='w', padx=5, pady=5)
@@ -8813,7 +9239,7 @@ plot_button = tk.Button(
     command=plot_objects, 
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='SystemButtonFace', 
+    bg='gray90', 
     fg='blue'
 )
 plot_button.pack(side='left', padx=(0, 5), pady=(5, 0))
@@ -8863,7 +9289,7 @@ animate_minute_button = tk.Button(
     command=animate_one_minute,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='SystemButtonFace', 
+    bg='gray90', 
     fg='blue'
 )
 animate_minute_button.grid(row=0, column=0, padx=(0, 5), pady=(5, 0))
@@ -8877,27 +9303,27 @@ animate_hour_button = tk.Button(
     command=animate_one_hour,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='SystemButtonFace', 
+    bg='gray90', 
     fg='blue'
 )
 animate_hour_button.grid(row=0, column=1, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_hour_button, "Animate the motion over hours. Shows position every hour.")
 
 # First Row of Animate Buttons: "Animate Days" and "Animate Weeks"
-animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
 animate_day_button.grid(row=1, column=0, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_day_button, "Animate the motion over days. This may take a while due to the large number of positions fetched.")
 
-animate_week_button = tk.Button(advance_buttons_frame, text="Animate Weeks", command=animate_one_week, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_week_button = tk.Button(advance_buttons_frame, text="Animate Weeks", command=animate_one_week, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
 animate_week_button.grid(row=1, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_week_button, "Animate the motion over weeks. This may take a while due to the large number of positions fetched.")
 
 # Second Row of Animate Buttons: "Animate Months" and "Animate Years"
-animate_month_button = tk.Button(advance_buttons_frame, text="Animate Months", command=animate_one_month, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_month_button = tk.Button(advance_buttons_frame, text="Animate Months", command=animate_one_month, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
 animate_month_button.grid(row=2, column=0, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_month_button, "Animate the motion over months. This may take a while due to the large number of positions fetched.")
 
-animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", command=animate_one_year, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
+animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", command=animate_one_year, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
 animate_year_button.grid(row=2, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_year_button, "Animate the motion over years. This may take a while due to the large number of positions fetched.")
 
@@ -8987,19 +9413,19 @@ def open_orbital_param_visualization():
                             current_date=current_date)
 
 
-def open_star_visualization():
-    """Inform user about standalone Star Visualization executable."""
-    message = """Star Visualization is available as a separate executable.
+#def open_star_visualization():
+#    """Inform user about standalone Star Visualization executable."""
+#    message = """Star Visualization is available as a separate executable.
 
-Please run 'star_visualization.exe' from the same folder as this application.
+#Please run 'star_visualization.exe' from the same folder as this application.
 
-The Star Visualization provides:
-- 2D and 3D stellar neighborhood plots
-- HR diagrams by distance or magnitude
-- Star search and property lookup
-- Data for 123,000+ stars"""
+#The Star Visualization provides:
+#- 2D and 3D stellar neighborhood plots
+#- HR diagrams by distance or magnitude
+#- Star search and property lookup
+#- Data for 123,000+ stars"""
     
-    messagebox.showinfo("Star Visualization", message)
+#    messagebox.showinfo("Star Visualization", message)
 
 # Add Orbital Parameter Visualization button
 orbital_viz_button = tk.Button(
@@ -9016,20 +9442,20 @@ CreateToolTip(orbital_viz_button, "Open an interactive visualization of orbital 
 
 
 # Add Star Visualization button
-star_viz_button = tk.Button(
-    advance_buttons_frame, 
-    text="2D and 3D Star Visualizations", 
-    command=open_star_visualization,
-    width=BUTTON_WIDTH*2 + 5,  # Make it span two columns
-    font=BUTTON_FONT, 
-#    bg='SystemButtonFace', 
+#star_viz_button = tk.Button(
+#    advance_buttons_frame, 
+#    text="2D and 3D Star Visualizations", 
+#    command=open_star_visualization,
+#    width=BUTTON_WIDTH*2 + 5,  # Make it span two columns
+#    font=BUTTON_FONT, 
+#    bg='gray90', 
 #    fg='blue'
-    bg='blue', 
-    fg='white'
-)
-star_viz_button.grid(row=4, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
-CreateToolTip(star_viz_button, "Open a specialized UI for 2D and 3D star visualizations, " 
-              "including HR diagrams and stellar neighborhoods.")
+#    bg='blue', 
+#    fg='white'
+#)
+#star_viz_button.grid(row=4, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
+#CreateToolTip(star_viz_button, "Open a specialized UI for 2D and 3D star visualizations, " 
+#              "including HR diagrams and stellar neighborhoods.")
 
 # Create a Frame for the note (right column)
 note_frame = tk.Frame(root)
@@ -9039,7 +9465,7 @@ note_frame.grid(row=0, column=2, padx=(5, 10), pady=(10, 10), sticky='n')
 note_label = tk.Label(
     note_frame,
     text="Note:",
-    bg='SystemButtonFace',
+    bg='gray90',
     fg='black',
     font=(
         "Arial",
@@ -9056,7 +9482,7 @@ note_text_widget = scrolledtext.ScrolledText(
     wrap='word',
     width=44,
     height=44.5,
-    bg='SystemButtonFace',
+    bg='gray90',
     fg='black',
     insertbackground='white'
 )

@@ -37,32 +37,6 @@ CENTER_BODY_RADII = {       # km
     'Planet 9': 24000   # comes from models that assume Planet Nine has a mass around 5-10 Earth masses and an internal composition similar to Uranus and Neptune.
 }
 
-"""
-parent_planets = {
-    'Earth': ['Moon'],
-    'Mars': ['Phobos', 'Deimos'],
-    'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
-    'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe', 'Pan', 'Daphnis', 'Prometheus',
-               'Pandora', 'Hyperion'],
-    'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon', 'Portia', 'Mab'],
-    'Neptune': ['Triton', 'Despina', 'Galatea'],
-    'Pluto': ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],
-    'Eris': ['Dysnomia'],
-    'Haumea': ["Hi'iaka", 'Namaka'],
-    'Makemake': ['MK2']
-}
-
-planet_tilts = {        # degrees
-    'Earth': 0,         # 23.44 tilt not needed,  the moon is already defined in the ecliptic frame; using tilt does not align
-    'Mars': 25.19,     # 25.19 tilt; neither the positive nor the negative tilt align
-    'Jupiter': 3.13,    # tilt aligns well
-    'Saturn': -26.73,   # 26.73 tilt; the positive tilt does not align; the negative is much better
-    'Uranus': 97.77,   # 97.77 tilt; does not align either positive or negative
-    'Neptune': 28.32,   # 28.32; does not align well, but the negative tilt is worse
-    'Pluto': -122.53    # 122.53; does not align well, the negative is better
-}
-"""
-
 KNOWN_ORBITAL_PERIODS = {
     # Planets (converted from years to days)
     'Mercury': 87.969,      
@@ -137,6 +111,15 @@ KNOWN_ORBITAL_PERIODS = {
     # Eris satellite
     'Dysnomia': 15.786,    # 378.86 hours
     
+    # Gonggong satellite
+    'Xiangliu': 25.22,      # Based on arXiv:2305.17175 (May 2023)
+
+    # Orcus satellite
+    'Vanth': 9.54,         # Based on arXiv:1509.01719 (Sept 2015)
+
+    # Quaoar satellite
+    'Weywot': 12.44,       # Based on arXiv:astro-ph/0405636 (May 2004)
+
     # Haumea satellites
     "Hi'iaka": 49.12,      # ~49 days
     'Namaka': 18.28,       # ~18 days (non-Keplerian due to Hi'iaka)
@@ -601,6 +584,9 @@ def color_map(planet):
         'Hayabusa2': 'cyan',  
         'Quaoar': 'rgb(244, 164, 96)',
         'Dysnomia': 'white',
+        'Xiangliu': 'rgb(210, 105, 30)',
+        'Vanth': 'rgb(169, 169, 169)',
+        'Weywot': 'rgb(205, 133, 63)',
         "Hi'iaka": 'rgb(200, 180, 220)',    # Light purple (Haumea family)
         'Namaka': 'rgb(180, 160, 200)',     # Slightly darker purple
         'MK2': 'rgb(80, 80, 80)',           # Very dark (low albedo)        
@@ -1148,6 +1134,13 @@ INFO = {
         '***SET MANUAL SCALE TO .002 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n'
         '***VISUALIZE PLUTO\'S FULL STRUCTURE WITH SHELLS AT 0.1 AU***\n\n'
         'Horizons: 999. Dwarf planet in a TRUE BINARY system with Charon.\n\n'
+        'ORBITAL RESONANCE:\n'
+        '* Pluto is a PLUTINO - locked in 3:2 resonance with Neptune.\n'
+        '* Makes 2 orbits for every 3 of Neptune\'s (period: 248 years).\n'
+        '* Currently moving toward aphelion (49 AU, ~2114).\n'
+        '* Perihelion was 1989 (30 AU - closer than Neptune!).\n'
+        '* ANTI-PLUTO: Orcus is in the SAME resonance but 180 deg out of phase!\n'
+        '   When Pluto is at perihelion, Orcus is at aphelion, and vice versa.\n\n'        
         'THREE VIEW MODES:\n'
         '* Heliocentric (Sun-centered): Select Pluto to see its orbit around the Sun.\n'
         '* Pluto-centered: Do NOT select Pluto; shows moons orbiting Pluto.\n'
@@ -1158,6 +1151,7 @@ INFO = {
         '     around their common center of mass (barycenter)! This is why Pluto-Charon is\n'
         '     called a binary planet: the barycenter is OUTSIDE Pluto.\n\n'
         'BINARY PLANET PHYSICS:\n'
+        '* Mass ratio: Charon/Pluto = 12%\n'
         '* Barycenter: 2,035 km from Pluto\'s center (outside its 1,188 km radius!)\n'
         '* Pluto orbits barycenter: ~2,100 km radius\n'
         '* Charon orbits barycenter: ~17,500 km radius (same period: 6.387 days)\n'
@@ -1165,7 +1159,8 @@ INFO = {
         'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.\n\n'
         'HTML: ~22 MB per frame with all shells/moons.',        
 
-        'Charon': 'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.',
+        'Charon': 'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.\n'
+        'Period: 6.387 days. Distance: 19,596 km. Mass ratio to Pluto: 12% (highest was 12% until Orcus-Vanth at 16%).',
 
         'Styx': 'Horizons: 905. The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
 
@@ -1196,7 +1191,18 @@ INFO = {
 
         'Dysnomia': 'Eris\'s moon. Period: 15.79 days. Diameter ~700 km. Both bodies tidally locked.',
 
-        'Quaoar': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system.',
+        'Quaoar': 'Horizons: 2002 LM60. A classical Kuiper Belt cubewano (~1090 km diameter) with TWO rings discovered 2023. '
+        'Named after the Tongva (Native American) creator god. Surface has crystalline water ice. '
+        'Unusual: rings exist beyond Roche limit where they should accrete into moons. '
+        'Discovered June 2002 by Trujillo and Brown. Orbital period: 286 years. Low eccentricity (0.04). '
+        'Potentially has a second small moon detected in 2025 occultation.',
+
+        'Weywot': 'Quaoar\'s confirmed moon, named after the Tongva sky god (son of Quaoar). '
+        'Discovered Feb 2006 by Brown in Hubble images. '
+        'Period: 12.4 days. Distance: ~13,300 km. Diameter: ~170 km. Very dark (albedo ~4%). '
+        'Nearly circular orbit (e~0.01, updated from 2019 occultations). Inclined ~15 deg to ecliptic. '
+        'In 6:1 resonance with Quaoar\'s outer ring, possibly helping maintain it. '
+        'Fraser et al. 2013, updated 2019.',
 
         'Ammonite': 'Horizons: 2023 KQ14. Ammonite is an asteroid with an exceptionally eccentric and elongated orbit around the Sun. It belongs to a \n' 
         'classification of objects known as sednoids because its orbit is highly detached from the influence of the giant planets. \n' 
@@ -1263,8 +1269,61 @@ INFO = {
         '  * The outer ring, named Chui, is about 3 kilometers wide.\n' 
         '  * These two rings are separated by a 9-kilometer gap and orbit at a distance of about 400 kilometers from Chariklo\'s center.',
 
-        'Orcus': 'Horizons: 2004 DW. A large Kuiper Belt object with a moon named Vanth. Estimated to be about 910 km in diameter. ' 
-        'Discovered on February 17, 2004.',
+        'Orcus': 
+        '***SET MANUAL SCALE TO .00015 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n\n'
+        'Horizons: 2004 DW. The "ANTI-PLUTO" - a plutino in 3:2 Neptune resonance.\n\n'
+        'ORBITAL RESONANCE:\n'
+        '* Same 3:2 resonance as Pluto, but 180 deg OUT OF PHASE!\n'
+        '* When Pluto is at perihelion, Orcus is at aphelion (and vice versa).\n'
+        '* Aphelion: 2019 (48 AU). Perihelion: ~1895/~2142 (30 AU).\n'
+        '* Orbital period: 247 years (same as Pluto).\n\n'
+        'BINARY SYSTEM (highest mass ratio known!):\n'
+        '* Vanth/Orcus mass ratio: 16% (higher than Charon/Pluto at 12%)\n'
+        '* Barycenter is OUTSIDE Orcus (~1,230 km from center)\n'
+        '* Both bodies orbit around the barycenter\n'
+        '* System likely doubly tidally locked\n\n'
+        'THREE VIEW MODES:\n'
+        '* Heliocentric: Select Orcus to see orbit around Sun.\n'
+        '* Orcus-centered: Do NOT select Orcus; shows Vanth orbiting Orcus.\n'
+        '* Barycenter-centered: Select "Orcus-Vanth Barycenter" as center\n'
+        '  and select Orcus and Vanth to see TRUE binary orbits.\n\n'
+        'Diameter: ~910 km. Surface: neutral gray with water ice (possibly cryovolcanic).\n'
+        'Discovered Feb 17, 2004 by Brown, Trujillo, and Rabinowitz.\n'
+        'Named after the Etruscan god of the underworld.',
+
+        'Vanth': 'Horizons: 120090482. Orcus\'s moon, forming the HIGHEST MASS RATIO binary in the solar system!\n\n'
+        'BINARY SYSTEM PHYSICS:\n'
+        '* Mass ratio: 16% of Orcus (higher than Charon\'s 12% of Pluto!)\n'
+        '* Separation: 9,000 km total\n'
+        '* Vanth orbits barycenter at: ~7,770 km (86.3% of separation)\n'
+        '* Orcus orbits barycenter at: ~1,230 km (13.7% of separation)\n'
+        '* Period: 9.54 days (both tidally locked)\n'
+        '* Eccentricity: ~0.007 (nearly circular)\n'
+        '* Inclination: 90 deg to ecliptic (face-on from Earth!)\n\n'
+        'UNIQUE FEATURES:\n'
+        '* Barycenter is OUTSIDE Orcus - true binary system\n'
+        '* ALMA 2016 resolved the barycentric orbital motion\n'
+        '* Likely intact impactor from giant collision\n'
+        '* Mutual events begin ~2082 when orbit becomes edge-on\n\n'
+        'Discovered Nov 2005 by Brown in Hubble images. Announced Feb 2007.\n'
+        'Diameter: ~443 km (occultation 2017). Named after Etruscan psychopomp (guide of the dead).',
+
+        'Orcus-Vanth Barycenter': 
+        'Center of mass for the Orcus-Vanth binary system - the HIGHEST MASS RATIO binary in the solar system!\n\n'
+        'BINARY SYSTEM:\n'
+        '* Mass ratio: Vanth/Orcus = 16% (vs Charon/Pluto = 12%)\n'
+        '* The barycenter is OUTSIDE Orcus (~1,230 km from Orcus center)\n'
+        '* Orcus orbits barycenter at ~1,230 km radius\n'
+        '* Vanth orbits barycenter at ~7,770 km radius\n'
+        '* Period: 9.54 days (same period, opposite sides)\n'
+        '* Orbit inclination: 90 deg (perpendicular to ecliptic - face-on from Earth!)\n\n'
+        'WHY THIS MATTERS:\n'
+        '* Like Pluto-Charon, but with even MORE extreme mass ratio\n'
+        '* ALMA 2016 resolved the barycentric wobble directly\n'
+        '* Likely formed by giant impact (intact impactor hypothesis)\n'
+        '* System probably doubly tidally locked\n\n'
+        'Select this as center, then select Orcus and Vanth to see\n'
+        'both objects orbiting their common center of mass.',
 
         '2017 OF201': '**USE A MANUAL SCALE OF AT LEAST 1500 AU TO SEE THE FULL ORBIT**\n' 
         'Horizons: 2017 OF201. An extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter.',
@@ -1275,7 +1334,18 @@ INFO = {
 
         'GV9': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon.',
         'Mani': 'Horizons: 2002 MS4. A large unnumbered Kuiper Belt Object with no known moons.',  
-        'Gonggong': 'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects with a highly inclined orbit.',
+
+        'Gonggong': 'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects (~1230 km diameter) with a highly inclined orbit (30.9 deg). '
+        'Named after the Chinese water god known for causing floods and chaos. '
+        'Surface is extremely red due to tholins and water ice, suggesting possible past cryovolcanism. '
+        'Slow rotation period (~22 hours) likely caused by tidal forces from its moon Xiangliu. '
+        'Currently near aphelion at ~52.7 AU (May 2033). Orbital period: 550 years. Eccentricity: 0.50.',
+
+        'Xiangliu': 'Gonggong\'s only moon, named after the nine-headed serpent minister in Chinese mythology. '
+        'Discovered 2016 by Kiss et al. in Hubble images from 2010. '
+        'Period: 25.22 days. Distance: ~24,000 km. Diameter: ~100 km (albedo-dependent). '
+        'Highly eccentric orbit (e~0.29) and inclined 83 deg to ecliptic (nearly pole-on from Earth). '
+        'No JPL ephemeris available. Elements from Kiss et al. 2017.',
 
         'Planet 9': 'Hypothetical planet with a potential candidate identified in 2025 IRAS/AKARI infrared data. ' 
         'Estimated to be 7-17 Earth masses (possibly Neptune-sized) at 500-700 AU from the Sun. ' 

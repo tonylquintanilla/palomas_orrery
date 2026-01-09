@@ -952,7 +952,7 @@ class StarVisualizationGUI(tk.Tk):
             distance_frame,
             text="3D Stellar Neighborhood",
             command=self.plot_3d_distance,
-            bg='SystemButtonFace',
+            bg='gray90',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT
@@ -963,7 +963,7 @@ class StarVisualizationGUI(tk.Tk):
             distance_frame,
             text="2D HR Diagram",
             command=self.plot_2d_distance,
-            bg='SystemButtonFace',
+            bg='gray90',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT
@@ -1017,7 +1017,7 @@ class StarVisualizationGUI(tk.Tk):
             magnitude_frame,
             text="3D Visible Stars",
             command=self.plot_3d_magnitude,
-            bg='SystemButtonFace',
+            bg='gray90',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT
@@ -1028,7 +1028,7 @@ class StarVisualizationGUI(tk.Tk):
             magnitude_frame,
             text="2D HR Diagram (Visible)",
             command=self.plot_2d_magnitude,
-            bg='SystemButtonFace',
+            bg='gray90',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT

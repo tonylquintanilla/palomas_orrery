@@ -289,6 +289,19 @@ def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_
         # Update figure layout
         fig.update_layout(updatemenus=existing_menus)
         
+        # Add target marker annotation at screen center
+        fig.add_annotation(
+            dict(       # target marker 
+                x=0.6,
+                y=0.5085,
+                text='<span style="vertical-align:1em;"><></span>',                
+                showarrow=False,
+                xref='paper',
+                yref='paper',
+                font=dict(size=60, color='rgba(0, 255, 255, 0.5)')  # Semi-transparent cyan
+            )
+        )
+
         print(f"[Camera Buttons] Added dropdown with {len(buttons)} view options")
     
     return fig

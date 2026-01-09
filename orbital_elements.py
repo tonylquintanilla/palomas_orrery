@@ -1231,6 +1231,39 @@ planetary_params = {
         'orbital_period_days': 15.786,  # 378.86 hours
     },    
 
+    # Gonggong's Moon
+    'Xiangliu': {
+        'a': 0.0001606,        # semi-major axis in AU (24,021 km)
+        'e': 0.29,             # eccentricity (highly eccentric)
+        'i': 83.0,             # inclination to ecliptic (degrees)
+        'omega': 0.0,          # argument of periapsis (unknown)
+        'Omega': 0.0,          # longitude of ascending node (unknown)
+        'orbital_period_days': 25.22,
+        # Note: No JPL ephemeris. Elements from Kiss et al. 2017
+    },
+
+    # Orcus's Moon
+    'Vanth': {
+        'a': 0.0000602,        # semi-major axis in AU (9,000 km)
+        'e': 0.007,            # eccentricity (nearly circular)
+        'i': 90.0,             # inclination to ecliptic (face-on from Earth)
+        'omega': 0.0,          # argument of periapsis
+        'Omega': 0.0,          # longitude of ascending node
+        'orbital_period_days': 9.54,
+        # Note: Orbit perpendicular to ecliptic. Brown et al. 2010
+    },
+
+    # Quaoar's Moon
+    'Weywot': {
+        'a': 0.0000889,        # semi-major axis in AU (13,300 km)
+        'e': 0.011,            # eccentricity (updated 2019, nearly circular)
+        'i': 15.0,             # inclination to ecliptic (degrees)
+        'omega': 0.0,          # argument of periapsis
+        'Omega': 0.0,          # longitude of ascending node
+        'orbital_period_days': 12.4,
+        # Note: 2019 occultation data refined orbit. Fraser et al. 2013
+    },
+
     # Haumea's Moons
     "Hi'iaka": {
         'a': 0.0003246,        # semi-major axis in AU (~49,500 km)
@@ -1251,15 +1284,15 @@ planetary_params = {
         # Note: Namaka's orbit is non-Keplerian due to Hi'iaka perturbations
     },
 
-    # Makemake's Moon
     'MK2': {
-        'a': 0.00014,          # semi-major axis in AU (~21,000 km, estimated)
-        'e': 0.0,              # eccentricity (assumed circular, poorly constrained)
-        'i': 0.0,              # inclination unknown
-        'omega': 0.0,          # argument of periapsis unknown
-        'Omega': 0.0,          # longitude of ascending node unknown
-        'orbital_period_days': 12.4,
-        # Note: MK2 orbital elements poorly constrained - use osculating when available
+        'a': 0.0001487,        # semi-major axis in AU (22,250 km from arXiv:2509.05880)
+        'e': 0.0,              # eccentricity (assumed circular - best fit)
+        'i': 83.7,             # inclination relative to sky plane (arXiv:2509.05880)
+        'omega': 0.0,          # argument of periapsis (undefined for circular orbit)
+        'Omega': 0.0,          # longitude of ascending node (unknown - needs pole solution)
+        'orbital_period_days': 18.023,  # from arXiv:2509.05880
+        # Note: i=83.7 deg is relative to line of sight (edge-on), not ecliptic
+        # Full pole solution needed for ecliptic-frame elements
     },
 
 } 
@@ -1275,6 +1308,11 @@ parent_planets = {
     'Pluto': ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],
     'Pluto-Charon Barycenter': ['Pluto', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],  # Binary planet mode
     'Eris': ['Dysnomia'],
+    'Gonggong': ['Xiangliu'],
+    'Orcus': ['Vanth'],
+    'Orcus': ['Vanth'],
+    'Orcus-Vanth Barycenter': ['Orcus', 'Vanth'],  # Binary dwarf planet mode
+    'Quaoar': ['Weywot'],
     'Haumea': ["Hi'iaka", 'Namaka'],
     'Makemake': ['MK2']
 }
