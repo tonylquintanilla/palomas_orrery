@@ -17,6 +17,9 @@ pillow>=10.0.0        # Image processing, required by kaleido
 # Note: tkinter is included with Python standard library, no need to install separately
 customtkinter>=5.2.0  # Modern themed widgets for tkinter
 
+# Interactive shell
+ipython>=8.0.0        # Enhanced interactive Python shell
+
 # Date and time handling
 python-dateutil>=2.8.2  # Extended datetime functionality
 pytz>=2023.3          # Timezone support
