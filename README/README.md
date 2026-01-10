@@ -1,4 +1,4 @@
-# Last updated: January 8, 2026
+# Last updated: January 9, 2026
 
 # Paloma's Orrery
 
@@ -69,7 +69,7 @@ Download from the [GitHub Releases page](https://github.com/tonylquintanilla/pal
 
 **macOS:** Download from [Tony's webpage](https://sites.google.com/view/tony-quintanilla) (iCloud link). Extract, double-click `start_orrery.command` (right-click -> Open first time to bypass Gatekeeper)
 
-**Linux:** See [Linux Installation](#linux-installation) below
+**Linux:** See [Linux Installation](#linux-installation) below. After setup, double-click `start_orrery.desktop` to launch.
 
 ### Python Source Code (All Platforms)
 
@@ -137,7 +137,7 @@ sudo pacman -S python python-pip tk
 |----------|------|-------|
 | Windows | `UPDATE_CODE.bat` | Double-click |
 | macOS | `update_code.sh` | Double-click (or run in terminal) |
-| Linux | `Update Code.desktop` | Double-click (may need to right-click → "Allow Launching" first) |
+| Linux | `update_code.desktop` | Double-click (may need to right-click → "Allow Launching" first) |
 
 The script automatically connects to GitHub and pulls the latest Python and README files. Your data files are preserved.
 
