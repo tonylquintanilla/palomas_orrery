@@ -127,25 +127,39 @@ sudo pacman -S python python-pip tk
 
 ### Staying Up to Date
 
-**Releases** (v2.2.0, etc.) include everything: Python code and seed data files (orbit cache, stellar catalogs, climate data).
+**Releases** (v2.1.0, etc.) include everything: Python code and seed data files (orbit cache, stellar catalogs, climate data).
 
-**Between releases**, the GitHub repository has the latest Python code. Data files aren't in the repo - they're generated and updated locally through your own use (fetching new objects, etc.).
+**Between releases**, the GitHub repository has the latest Python code. Data files aren't in the repo (via .gitignore) - they're generated and updated locally through your own use.
 
-**To get code updates after installing from a release:**
+**Easy update (recommended):**
+
+| Platform | File | Usage |
+|----------|------|-------|
+| Windows | `UPDATE_CODE.bat` | Double-click |
+| macOS | `update_code.sh` | Double-click (or run in terminal) |
+| Linux | `Update Code.desktop` | Double-click (may need to right-click → "Allow Launching" first) |
+
+The script automatically connects to GitHub and pulls the latest Python and README files. Your data files are preserved.
+
+**Manual update (if you prefer):**
 
 ```bash
 cd palomas_orrery
+
+# First time only:
 git init
 git remote add origin https://github.com/tonylquintanilla/palomas_orrery.git
-git pull origin main
-```
+git fetch origin
+git reset --hard origin/main
 
-**For future updates:**
-```bash
+# Future updates:
 git pull
 ```
 
-Your data files are preserved - only Python code and README files are updated.
+**What gets updated:**
+- Python files (`*.py`) - updated to latest
+- README files - updated to latest  
+- Data files (`data/`, `star_data/`) - preserved (not in repo)
 
 ## Installation
 
