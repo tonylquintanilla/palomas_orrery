@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Paloma's Orrery
+Comment=Launch Paloma's Orrery
+Exec=sh -c 'cd "$(dirname "$(readlink -f "%k")")" && python3 palomas_orrery.py'
+Icon=planetarium
+Terminal=true
+Type=Application
+Categories=Science;Education;
