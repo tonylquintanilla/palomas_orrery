@@ -1285,27 +1285,97 @@ shutdown_handler = PlotlyShutdownHandler()
 
 # Initialize the main window
 root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: December 25, 2025")
-# Define 'today' once after initializing the main window
+root.title("Paloma's Orrery -- Updated: January 10, 2026")
+
+# ============================================================================
+# WINDOW GEOMETRY AND CONFIG MANAGEMENT
+# ============================================================================
+
+# Config file in application directory for easy access
+CONFIG_FILE = os.path.join(os.getcwd(), 'window_config.json')
+print(f"Window config file: {CONFIG_FILE}", flush=True)
+
+def load_window_config():
+    """Load saved window geometry and sash positions from config file."""
+    try:
+        if os.path.exists(CONFIG_FILE):
+            with open(CONFIG_FILE, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        print(f"Note: Could not load window config: {e}", flush=True)
+    return None
+
+def save_window_config():
+    """Save current window geometry and sash positions to config file."""
+    try:
+        sash_positions = []
+        try:
+            for i in range(2):
+                sash_positions.append(main_paned.sash_coord(i)[0])
+        except:
+            pass
+        config = {
+            'geometry': root.geometry(),
+            'state': root.state(),
+            'platform': platform.system(),
+            'sash_positions': sash_positions
+        }
+        with open(CONFIG_FILE, 'w') as f:
+            json.dump(config, f, indent=2)
+        print(f"Window config saved to {CONFIG_FILE}", flush=True)
+    except Exception as e:
+        print(f"Note: Could not save window config: {e}", flush=True)
+
+if platform.system() == 'Linux':
+    DEFAULT_GEOMETRY = "1500x850"
+    MIN_WIDTH, MIN_HEIGHT = 1200, 700
+    DEFAULT_SASH = [480, 980]
+elif platform.system() == 'Darwin':
+    DEFAULT_GEOMETRY = "1450x830"
+    MIN_WIDTH, MIN_HEIGHT = 1150, 680
+    DEFAULT_SASH = [450, 930]
+else:
+    DEFAULT_GEOMETRY = "1400x800"
+    MIN_WIDTH, MIN_HEIGHT = 1100, 650
+    DEFAULT_SASH = [420, 880]
+
+saved_config = load_window_config()
+if saved_config and saved_config.get('platform') == platform.system():
+    try:
+        root.geometry(saved_config['geometry'])
+        print(f"Restored window geometry: {saved_config['geometry']}", flush=True)
+        # Restore maximized state if it was saved
+        if saved_config.get('state') == 'zoomed':
+            root.after(100, lambda: root.state('zoomed'))
+            print("Window will be maximized", flush=True)
+    except:
+        root.geometry(DEFAULT_GEOMETRY)
+else:
+    root.geometry(DEFAULT_GEOMETRY)
+    print(f"Using default geometry: {DEFAULT_GEOMETRY}", flush=True)
+
+root.minsize(MIN_WIDTH, MIN_HEIGHT)
+root.resizable(True, True)
+
+# Note: on_closing defined later in file (includes cleanup + save_window_config)
+
+# ============================================================================
+# PANEDWINDOW LAYOUT - User-resizable columns
+# ============================================================================
+
+main_paned = tk.PanedWindow(root, orient=tk.HORIZONTAL, sashwidth=8,
+                            sashrelief=tk.RAISED, bg='gray70')
+main_paned.pack(fill=tk.BOTH, expand=True, padx=2, pady=2)
+
+# ============================================================================
+
 today = datetime.today()
-# Add this line:
-STATIC_TODAY = today  # Static reference date for orbit calculations
+STATIC_TODAY = today
 
-# First, create a container frame for the controls column
-controls_container = tk.Frame(root)
-controls_container.grid(row=0, column=1, padx=(5, 10), pady=(10, 10), sticky='n')
-
-# Add these lines after creating controls_container
-controls_container.grid_propagate(False)
-
-# And add this to make it expand properly:
+# Middle column - Controls
+controls_container = tk.Frame(main_paned, bg='gray90')
 controls_container.pack_propagate(False)
-controls_container.grid_propagate(False)
-controls_container.config(width=450, height=750)  # Wider container
-
-# Let container size based on content, with minimum dimensions
-#controls_container.config(height=750)
-#controls_container.grid_columnconfigure(0, weight=1)  # Let canvas column expand
+controls_container.config(width=450, height=750)
 
 # Create a canvas inside the container
 controls_canvas = tk.Canvas(controls_container, bg='gray90')
@@ -3506,8 +3576,8 @@ class ScrollableFrame(tk.Frame):
         event.widget.unbind_all("<Button-4>")
         event.widget.unbind_all("<Button-5>")
 
-input_frame = tk.Frame(root)
-input_frame.grid(row=0, column=0, padx=(10, 5), pady=(10, 10), sticky='n')
+# Left column - Object selection
+input_frame = tk.Frame(main_paned, bg='gray90')
 
 # Configure grid weights within input_frame for proper spacing
 input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
@@ -3945,14 +4015,6 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
 
             # Skip exoplanet objects - they don't use JPL Horizons
             if obj_info.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:    
-                continue
-
-            # Skip actual orbit plotting for Orcus-Vanth Barycenter mode
-            # JPL Horizons satellite solution defines Orcus PRIMARY (920090482) at the barycenter,
-            # so trajectory queries return 0,0,0 for Orcus. Vanth's cached trajectory is relative
-            # to wrong center (heliocentric). Use analytical binary orbits instead (see osculating).
-            if center_object_name == 'Orcus-Vanth Barycenter' and planet in ['Orcus', 'Vanth']:
-                print(f"[ORCUS-VANTH] Skipping actual orbit for {planet} - using analytical binary orbit only", flush=True)
                 continue
 
             # Use helio_id for Sun-centered plots if available (longer ephemeris coverage)
@@ -5056,63 +5118,11 @@ def plot_objects():
                 if obj['name'] != center_object_name and obj.get('system_id', 'solar') != center_system_id:
                     continue
                 
-                # Special handling for Orcus-Vanth barycenter mode
-                # Vanth position from JPL, Orcus derived (180 deg opposite, tidally locked)
-                if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
-                    # Only fetch once (when we hit either object), calculate both positions
-
-                    if 'Vanth' not in positions and 'Orcus' not in positions:
-                        # Fetch Vanth from JPL (120090482 @ 20090482)
-                        vanth_raw = fetch_position('120090482', date_obj, center_id='20090482', id_type=None)
-                        if vanth_raw and 'x' in vanth_raw:
-                            # ALMA orbit radii (Brown & Butler 2023)
-                            VANTH_DIST_ALMA_AU = 0.0000518615  # 7,758 km
-                            ORCUS_DIST_ALMA_AU = 0.0000082329  # 1,232 km
-                            
-                            # Orbit plane parameters (fitted to JPL positions Jan 2026)
-                            i_rad = np.radians(83.0)
-                            Omega_rad = np.radians(216.0)
-                            
-                            # Orbit plane normal vector
-                            orbit_normal = np.array([
-                                np.sin(i_rad) * np.sin(Omega_rad),
-                                -np.sin(i_rad) * np.cos(Omega_rad),
-                                np.cos(i_rad)
-                            ])
-                            
-                            # Get Vanth's JPL position
-                            vanth_vec = np.array([vanth_raw['x'], vanth_raw['y'], vanth_raw['z']])
-                            
-                            # Project onto orbit plane (remove out-of-plane component)
-                            vanth_in_plane = vanth_vec - np.dot(vanth_vec, orbit_normal) * orbit_normal
-                            vanth_in_plane_dist = np.linalg.norm(vanth_in_plane)
-                            
-                            if vanth_in_plane_dist > 0:
-                                vanth_unit = vanth_in_plane / vanth_in_plane_dist
-                                
-                                # Project Vanth onto ALMA orbit radius
-                                vanth_projected = vanth_unit * VANTH_DIST_ALMA_AU
-                                positions['Vanth'] = {
-                                    'x': float(vanth_projected[0]),
-                                    'y': float(vanth_projected[1]),
-                                    'z': float(vanth_projected[2])
-                                }
-                                
-                                # Derive Orcus (180 deg opposite)
-                                orcus_projected = -vanth_unit * ORCUS_DIST_ALMA_AU
-                                positions['Orcus'] = {
-                                    'x': float(orcus_projected[0]),
-                                    'y': float(orcus_projected[1]),
-                                    'z': float(orcus_projected[2])
-                                }
-
-                                print(f"  [ORCUS-VANTH] Vanth from JPL, Orcus derived (180 deg opposite)", flush=True)
-                                print(f"    Vanth: ({positions['Vanth']['x']*149597870.7:.1f}, {positions['Vanth']['y']*149597870.7:.1f}, {positions['Vanth']['z']*149597870.7:.1f}) km", flush=True)
-                                print(f"    Orcus: ({positions['Orcus']['x']*149597870.7:.1f}, {positions['Orcus']['y']*149597870.7:.1f}, {positions['Orcus']['z']*149597870.7:.1f}) km", flush=True)
-                    continue  # Skip normal position fetching for both
-
                 if obj['name'] == center_object_name:
                     obj_data = {'x': 0, 'y': 0, 'z': 0}
+
+        #        else:
+        #            obj_data = fetch_position(obj['id'], date_obj, center_id=center_id, id_type=obj.get('id_type', None))
                 
                 else:
                     # Use helio_id for Sun-centered plots if available
@@ -5186,11 +5196,6 @@ def plot_objects():
                 # Skip exoplanet objects - they're handled in dedicated exoplanet block
                 if obj.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:
                     continue
-
-                # Skip position markers for Orcus/Vanth in barycenter mode
-                # JPL data is unavailable for this view - see osculating orbit hovertext for details
-            #    if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
-            #        continue
 
                 if obj['name'] == center_object_name or (obj['var'].get() == 1 and same_system):
 
@@ -6035,81 +6040,15 @@ def animate_objects(step, label):
             # Debug: Print what we're animating
             for name, dates in dates_lists.items():
                 print(f"  {name}: {len(dates)} dates", flush=True)
-                    
+
             # Fetch trajectory data for all selected objects
             positions_over_time = {}
-            
-            # Special handling for Orcus-Vanth barycenter mode animation
-            # Fetch Vanth trajectory once, derive Orcus positions (180° opposite)
-
-            if center_object_name == 'Orcus-Vanth Barycenter':
-                # ALMA orbit radii (Brown & Butler 2023)
-                VANTH_DIST_ALMA_AU = 0.0000518615  # 7,758 km
-                ORCUS_DIST_ALMA_AU = 0.0000082329  # 1,232 km
-                
-                # Orbit plane parameters (fitted to JPL positions Jan 2026)
-                i_rad = np.radians(83.0)
-                Omega_rad = np.radians(216.0)
-                orbit_normal = np.array([
-                    np.sin(i_rad) * np.sin(Omega_rad),
-                    -np.sin(i_rad) * np.cos(Omega_rad),
-                    np.cos(i_rad)
-                ])
-                
-                # Fetch Vanth trajectory from JPL
-                vanth_trajectory = fetch_trajectory('120090482', dates_list, center_id='20090482', id_type=None)
-                
-                if vanth_trajectory:
-                    vanth_positions = []
-                    orcus_positions = []
-                    
-                    for pos in vanth_trajectory:
-                        if pos and 'x' in pos:
-                            # Get Vanth's JPL position and project onto orbit plane
-                            vanth_vec = np.array([pos['x'], pos['y'], pos['z']])
-                            vanth_in_plane = vanth_vec - np.dot(vanth_vec, orbit_normal) * orbit_normal
-                            vanth_in_plane_dist = np.linalg.norm(vanth_in_plane)
-                            
-                            if vanth_in_plane_dist > 0:
-                                vanth_unit = vanth_in_plane / vanth_in_plane_dist
-                                
-                                # Project Vanth onto ALMA orbit radius
-                                vanth_proj = vanth_unit * VANTH_DIST_ALMA_AU
-                                vanth_positions.append({
-                                    'x': float(vanth_proj[0]),
-                                    'y': float(vanth_proj[1]),
-                                    'z': float(vanth_proj[2])
-                                })
-                                
-                                # Derive Orcus (180 deg opposite)
-                                orcus_proj = -vanth_unit * ORCUS_DIST_ALMA_AU
-                                orcus_positions.append({
-                                    'x': float(orcus_proj[0]),
-                                    'y': float(orcus_proj[1]),
-                                    'z': float(orcus_proj[2])
-                                })
-                            else:
-                                vanth_positions.append(None)
-                                orcus_positions.append(None)
-                        else:
-                            vanth_positions.append(None)
-                            orcus_positions.append(None)
-                    
-                    positions_over_time['Vanth'] = vanth_positions
-                    positions_over_time['Orcus'] = orcus_positions
-                    print(f"  [ORCUS-VANTH ANIMATION] Generated {len(vanth_positions)} positions for Vanth and Orcus", flush=True)
-                    print(f"    Vanth: JPL positions projected onto ALMA radius ({VANTH_DIST_ALMA_AU*149597870.7:.0f} km)", flush=True)
-                    print(f"    Orcus: Derived (180 deg opposite) at ALMA radius ({ORCUS_DIST_ALMA_AU*149597870.7:.0f} km)", flush=True)
-            
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    # Skip Orcus/Vanth if already handled above
-                    if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
-                        continue
-                    
                     # Use the dates from dates_lists
-                    obj_dates = dates_lists.get(obj['name'], dates_list)         
-
+                    obj_dates = dates_lists.get(obj['name'], dates_list)
+                    
+                    
                     # Handle objects with date ranges
                     if 'start_date' in obj or 'end_date' in obj:
                         # Get start/end dates with fallbacks
@@ -6714,11 +6653,6 @@ def animate_objects(step, label):
                 if obj.get('object_type') == 'exoplanet':
                     continue
 
-                # Skip position markers for Orcus/Vanth in barycenter mode
-                # JPL data is unavailable for this view - analytical orbits shown instead
-        #        if center_object_name == 'Orcus-Vanth Barycenter' and obj['name'] in ['Orcus', 'Vanth']:
-        #            continue
-
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
                     obj_name = obj['name']
                     obj_positions = positions_over_time.get(obj_name)
@@ -7191,6 +7125,9 @@ def animate_objects(step, label):
 def on_closing():
     """Handle cleanup when the main window is closed."""
     try:
+        # Save window geometry and sash positions
+        save_window_config()
+        
         # Clean up temp cache
         if os.path.exists(TEMP_CACHE_FILE):
             os.remove(TEMP_CACHE_FILE)
@@ -7439,18 +7376,11 @@ def report_callback_exception(self, exc_type, exc_value, exc_traceback):
 
 root.report_callback_exception = report_callback_exception
 
-# Configure grid weights for responsive design
-root.grid_rowconfigure(0, weight=1)
-root.grid_columnconfigure(0, weight=1)
-root.grid_columnconfigure(1, weight=1)
-root.grid_columnconfigure(2, weight=1)
+# Grid weights no longer needed - using PanedWindow layout
 
 # Enhanced date frame with start date, end date, and days to plot
 date_frame = tk.Frame(input_frame)
 date_frame.grid(row=0, column=0, columnspan=9, padx=(0, 0), pady=2, sticky='w')
-
-# START DATE ROW
-tk.Label(date_frame, text="Start Date (UTC):").grid(row=0, column=0, sticky='e', padx=(0,5))
 
 def get_end_date_from_gui():
     """Get end date from GUI fields"""
@@ -7521,76 +7451,82 @@ def sync_days_from_dates():
     except ValueError:
         pass
 
-# Define date labels and entries with reduced padding
-label_year = tk.Label(date_frame, text="Start Date (UTC) Year:")
-label_year.grid(row=0, column=0, padx=(0, 5), pady=2, sticky='e')
+# ============================================================================
+# COMPACT DATE ENTRY LAYOUT - ISO format style (YYYY-MM-DD HH:MM)
+# ============================================================================
+
+# START DATE ROW (Row 0)
+tk.Label(date_frame, text="Start (UTC):").grid(row=0, column=0, padx=(0, 5), pady=2, sticky='e')
 
 entry_year = tk.Entry(date_frame, width=5)
-entry_year.grid(row=0, column=1, padx=(0, 5), pady=2, sticky='w')
+entry_year.grid(row=0, column=1, padx=(0, 0), pady=2, sticky='w')
 entry_year.insert(0, today.year)
 
-label_month = tk.Label(date_frame, text="Month:")
-label_month.grid(row=0, column=2, padx=(0, 5), pady=2, sticky='e')
+tk.Label(date_frame, text="-").grid(row=0, column=2, padx=0, pady=2)
 
-entry_month = tk.Entry(date_frame, width=5)
-entry_month.grid(row=0, column=3, padx=(0, 5), pady=2, sticky='w')
+entry_month = tk.Entry(date_frame, width=3)
+entry_month.grid(row=0, column=3, padx=(0, 0), pady=2, sticky='w')
 entry_month.insert(0, today.month)
 
-label_day = tk.Label(date_frame, text="Day:")
-label_day.grid(row=0, column=4, padx=(0, 5), pady=2, sticky='e')
+tk.Label(date_frame, text="-").grid(row=0, column=4, padx=0, pady=2)
 
-entry_day = tk.Entry(date_frame, width=5)
+entry_day = tk.Entry(date_frame, width=3)
 entry_day.grid(row=0, column=5, padx=(0, 5), pady=2, sticky='w')
 entry_day.insert(0, today.day)
 
-label_hour = tk.Label(date_frame, text="Hour:")
-label_hour.grid(row=0, column=6, padx=(0, 5), pady=2, sticky='e')
-
-entry_hour = tk.Entry(date_frame, width=5)
-entry_hour.grid(row=0, column=7, padx=(0, 5), pady=2, sticky='w')
+entry_hour = tk.Entry(date_frame, width=3)
+entry_hour.grid(row=0, column=6, padx=(0, 0), pady=2, sticky='w')
 entry_hour.insert(0, '0')
 
-label_minute = tk.Label(date_frame, text="Minute:")
-label_minute.grid(row=0, column=8, padx=(0, 5), pady=2, sticky='e')
+tk.Label(date_frame, text=":").grid(row=0, column=7, padx=0, pady=2)
 
-entry_minute = tk.Entry(date_frame, width=5)
-entry_minute.grid(row=0, column=9, padx=(0, 5), pady=2, sticky='w')
-entry_minute.insert(0, '0')  # Default to 0 minutes
+entry_minute = tk.Entry(date_frame, width=3)
+entry_minute.grid(row=0, column=8, padx=(0, 5), pady=2, sticky='w')
+entry_minute.insert(0, '0')
 
-# "Now" button with minimal padding
-now_button = tk.Button(date_frame, text="Now", command=fill_now)
-now_button.grid(row=0, column=10, padx=(2, 0), pady=2, sticky='w')
+now_button = tk.Button(date_frame, text="Now", command=fill_now, width=4)
+now_button.grid(row=0, column=9, padx=(5, 5), pady=2, sticky='w')
 CreateToolTip(now_button, "Fill the current date and time")
 
-# END DATE ROW
-tk.Label(date_frame, text="End Date (static plots):").grid(row=1, column=0, sticky='e', padx=(0,5))
-
-end_entry_year = tk.Entry(date_frame, width=5)
-end_entry_year.grid(row=1, column=1, padx=(0,2))
-end_entry_month = tk.Entry(date_frame, width=5)
-end_entry_month.grid(row=1, column=2, padx=(0,2))
-end_entry_day = tk.Entry(date_frame, width=5)
-end_entry_day.grid(row=1, column=3, padx=(0,2))
-end_entry_hour = tk.Entry(date_frame, width=5)
-end_entry_hour.grid(row=1, column=4, padx=(0,2))
-end_entry_minute = tk.Entry(date_frame, width=5)
-end_entry_minute.grid(row=1, column=5, padx=(0,5))
-
-# DAYS TO PLOT
-tk.Label(date_frame, text="Days to Plot:").grid(row=1, column=6, sticky='e', padx=(10,5))
-days_to_plot_entry = tk.Entry(date_frame, width=8)
-days_to_plot_entry.grid(row=1, column=7, padx=(0,5))
-days_to_plot_entry.insert(0, '28')
-
-vernal_equinox_button = tk.Button(date_frame, text="Next Vernal Equinox", command=fill_next_vernal_equinox)
-vernal_equinox_button.grid(row=1, column=8, columnspan=2, padx=(10, 0), pady=2, sticky='w')
+vernal_equinox_button = tk.Button(date_frame, text="Vernal Eq", command=fill_next_vernal_equinox, width=8)
+vernal_equinox_button.grid(row=0, column=10, padx=(0, 0), pady=2, sticky='w')
 CreateToolTip(vernal_equinox_button, "Fill the next vernal equinox (March equinox) date and time")
 
-# Horizons limit warning
+# END DATE ROW (Row 1)
+tk.Label(date_frame, text="End:").grid(row=1, column=0, sticky='e', padx=(0, 5), pady=2)
+
+end_entry_year = tk.Entry(date_frame, width=5)
+end_entry_year.grid(row=1, column=1, padx=(0, 0), pady=2)
+
+tk.Label(date_frame, text="-").grid(row=1, column=2, padx=0, pady=2)
+
+end_entry_month = tk.Entry(date_frame, width=3)
+end_entry_month.grid(row=1, column=3, padx=(0, 0), pady=2)
+
+tk.Label(date_frame, text="-").grid(row=1, column=4, padx=0, pady=2)
+
+end_entry_day = tk.Entry(date_frame, width=3)
+end_entry_day.grid(row=1, column=5, padx=(0, 5), pady=2)
+
+end_entry_hour = tk.Entry(date_frame, width=3)
+end_entry_hour.grid(row=1, column=6, padx=(0, 0), pady=2)
+
+tk.Label(date_frame, text=":").grid(row=1, column=7, padx=0, pady=2)
+
+end_entry_minute = tk.Entry(date_frame, width=3)
+end_entry_minute.grid(row=1, column=8, padx=(0, 5), pady=2)
+
+tk.Label(date_frame, text="Days:").grid(row=1, column=9, sticky='e', padx=(5, 2), pady=2)
+
+days_to_plot_entry = tk.Entry(date_frame, width=5)
+days_to_plot_entry.grid(row=1, column=10, padx=(0, 0), pady=2, sticky='w')
+days_to_plot_entry.insert(0, '28')
+
+# Horizons limit warning (Row 2)
 horizons_warning = tk.Label(date_frame, 
-    text="WARNING: JPL Horizons limits for actual position plots: Jan 1900 - Dec 2199",
+    text="JPL Horizons limits: Jan 1900 - Dec 2199",
     fg='red', font=("Arial", 8, "italic"))
-horizons_warning.grid(row=2, column=0, columnspan=8, pady=(2,0))
+horizons_warning.grid(row=2, column=0, columnspan=11, pady=(2, 0), sticky='w')
 
 # Initialize the date fields with current values
 fill_now()  # This will set start date to now and calculate end date
@@ -9457,9 +9393,8 @@ CreateToolTip(orbital_viz_button, "Open an interactive visualization of orbital 
 #CreateToolTip(star_viz_button, "Open a specialized UI for 2D and 3D star visualizations, " 
 #              "including HR diagrams and stellar neighborhoods.")
 
-# Create a Frame for the note (right column)
-note_frame = tk.Frame(root)
-note_frame.grid(row=0, column=2, padx=(5, 10), pady=(10, 10), sticky='n')
+# Right column - Notes
+note_frame = tk.Frame(main_paned, bg='gray90')
 
 # Add the "Note" Label
 note_label = tk.Label(
@@ -9493,6 +9428,34 @@ note_text_widget.insert(tk.END, note_text)
 
 # Make the ScrolledText widget read-only
 note_text_widget.config(state='disabled')
+
+# ============================================================================
+# ADD PANES TO PANEDWINDOW AND RESTORE SASH POSITIONS
+# ============================================================================
+
+main_paned.add(input_frame, minsize=300, sticky='nsew')
+main_paned.add(controls_container, minsize=350, sticky='nsew')
+main_paned.add(note_frame, minsize=250, sticky='nsew')
+
+def restore_sash_positions():
+    try:
+        positions = None
+        if saved_config and saved_config.get('platform') == platform.system():
+            positions = saved_config.get('sash_positions')
+        if positions and len(positions) >= 2:
+            main_paned.sash_place(0, positions[0], 0)
+            main_paned.sash_place(1, positions[1], 0)
+            print(f"Restored sash positions: {positions}", flush=True)
+        else:
+            main_paned.sash_place(0, DEFAULT_SASH[0], 0)
+            main_paned.sash_place(1, DEFAULT_SASH[1], 0)
+            print(f"Using default sash positions: {DEFAULT_SASH}", flush=True)
+    except Exception as e:
+        print(f"Note: Could not restore sash positions: {e}", flush=True)
+
+root.after(100, restore_sash_positions)
+
+# ============================================================================
 
 # Run the Tkinter main loop
 root.mainloop()

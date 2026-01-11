@@ -352,91 +352,76 @@ class_mapping = {
 # Updated note_text for the GUI note_frame in constants_new.py
 # Based on README updates and current capabilities as of August 2025
 
-note_text = (
-    "What's Paloma's Orrery? \n\n"
+# Updated note_text for the GUI note_frame in constants_new.py
+# Based on README updates - January 2026
 
-    "Paloma's Orrery is an advanced astronomical visualization tool that transforms real NASA/ESA data into interactive 3D and 2D "
-    "visualizations of the solar system and nearby stars! This model displays celestial objects and spacecraft in both stationary " 
-    "and animated plots over different time periods, using real-time data from NASA's Jet Propulsion Laboratory's Horizons System " 
-    "to plot actual positions. Complete idealized orbits of planets, asteroids, dwarf planets, and Kuiper belt objects are also "
-    "calculated from their orbital parameters using Kepler's equations. \n\n" 
+note_text = (
+    "What's Paloma's Orrery (updated 1/11/2026)?\n\n"
+
+    "An interactive astronomical visualization tool that transforms real NASA/ESA data into Plotly 3D and 2D "
+    "visualizations of the solar system and stellar neighborhood. Created by civil & environmental engineer "
+    "Tony Quintanilla with AI assistance (Claude, ChatGPT, Gemini, DeepSeek).\n\n"
+
+    "KEY CAPABILITIES:\n"
+    "- Real-time planetary and spacecraft positions from JPL Horizons\n"
+    "- Interactive 3D solar system with 100+ objects\n"
+    "- Comet visualization with dual-tail structures\n"
+    "- Exoplanet systems (TRAPPIST-1, TOI-1338, Proxima Centauri)\n"
+    "- Galactic Center visualization (S-stars orbiting Sgr A*)\n"
+    "- Stellar neighborhood mapping (123,000+ stars)\n"
+    "- Planetary and solar interior visualizations\n"
+    "- HR diagrams and stellar analysis\n"
+    "- Earth science data preservation hub\n\n"
 
     "STELLAR NEIGHBORHOOD VISUALIZATION:\n"
-    "Explore our cosmic neighborhood in four different ways: by distance (light-years) or brightness (apparent magnitude), "
-    "displayed in either 2D Hertzsprung-Russell diagrams or immersive 3D spatial plots. Plot stars up to 100 light-years away "
-    "to see the actual 3D structure and beginning shape of our galaxy!\n\n" 
+    "Explore our cosmic neighborhood by distance (light-years) or brightness (apparent magnitude), "
+    "in 2D HR diagrams or immersive 3D spatial plots. Plot stars up to 100 light-years away "
+    "to see the actual 3D structure of our galaxy!\n\n"
 
-    "DISTANCE MODE: See all stars within your selected distance from the Sun, revealing the true 3D structure of our local "
-    "stellar neighborhood. MAGNITUDE MODE: View stars by apparent brightness (how bright they appear to us), including "
-    "distant luminous giants thousands of light-years away alongside nearby dim stars. At higher magnitudes, you'll begin "
-    "to see the galaxy's shape and tilt! Warning: Higher magnitudes fetch more stars and take longer to plot.\n\n"
+    "GALACTIC CENTER (NEW 2026):\n"
+    "Visualize the S-stars orbiting Sagittarius A*, the supermassive black hole at the center of our galaxy. "
+    "Watch S2's 16-year orbit with Schwarzschild precession. Compare velocities up to 7,650 km/s "
+    "(2.5% speed of light) with unified color scaling.\n\n"
 
-    "3D SPATIAL PLOTS: Experience stars in their actual 3D positions relative to the Sun. Use 'Move Camera to the Center' "
-    "to view from the Sun's position and see familiar constellations like Orion with M42 (Orion Nebula)! Toggle between "
-    "detailed hover information and star names only for clarity.\n\n"
-    
-    "2D HERTZSPRUNG-RUSSELL DIAGRAMS: The classic scientific plot showing stellar luminosity vs. temperature, revealing "
-    "stellar types and evolutionary stages. Discover main sequence stars, giants, supergiants, and white dwarfs!\n\n" 
+    "EXOPLANET SYSTEMS (NEW 2025-2026):\n"
+    "Explore 11 exoplanets across 3 systems including TRAPPIST-1 (7 rocky worlds), "
+    "TOI-1338 (circumbinary planet), and Proxima Centauri b. Binary star animations "
+    "show real orbital mechanics.\n\n"
 
-    "MESSIER OBJECTS: In magnitude mode, plot famous non-stellar objects like nebulae, star clusters, and galaxies alongside "
-    "the stars. Perfect for exploring deep-sky objects visible to amateur astronomers!\n\n"
+    "PLANETARY INTERIORS:\n"
+    "Comprehensive shell structures for all major bodies. Toggle cores, mantles, atmospheres, "
+    "radiation belts, and plasma tori. The Sun visualized from core to Oort Cloud at 100,000 AU scale!\n\n"
 
-    "ENHANCED PLANETARY SYSTEM (2025 UPDATE):\n"
-    "NEW! Comprehensive planetary interior visualization with individual shell structures for all major solar system bodies. "
-    "Toggle individual components like planetary cores, mantles, atmospheres, radiation belts, and plasma tori. The Sun is "
-    "visualized in unprecedented detail: core, radiative zone, convective zone, photosphere, chromosphere, inner/outer corona, "
-    "solar wind boundaries, termination shock, and heliopause. Manually select 100,000 AU scale to explore the vast "
-    "inner and outer Oort clouds - the source of comets!\n\n"
-
-    "ADVANCED SPACECRAFT TRACKING (2025 UPDATE):\n"
-    "Follow historic and active missions including Parker Solar Probe (touching the Sun's corona!), completed OSIRIS-REx "
-    "sample return from Bennu, ongoing OSIRIS-APEX mission to Apophis, Voyager 1&2 in interstellar space, Pioneer probes, "
-    "Galileo, Cassini, SOHO, Gaia, BepiColombo, Solar Orbiter, and many more. Watch real trajectories unfold over time!\n\n"
-
-    "ROBUST DATA MANAGEMENT (2025 UPDATE):\n"
-    "Enhanced cache system with automatic validation, repair, and backup capabilities. Multi-threaded processing ensures "
-    "smooth performance while intelligent interval selection optimizes data fetching. Export capabilities include HTML, "
-    "PNG, JSON, VOTable, and Pickle formats for sharing and analysis.\n\n"
+    "SPACECRAFT TRACKING:\n"
+    "Follow historic and active missions: Parker Solar Probe, OSIRIS-REx/APEX, Voyagers, "
+    "Pioneers, Galileo, Cassini, JWST, Europa Clipper, and many more.\n\n"
 
     "INTERACTIVE FEATURES:\n"
-    "* Animation: Watch solar system evolution from minutes to years\n"
-    "* Orbital Mechanics Visualization: Educational tool showing how orbital elements define spacecraft and planetary paths\n"
-    "* Lagrange Points: Explore gravitational balance points in Earth-Moon and Sun-Earth systems\n"
-    "* Apsidal Markers: See perihelion/aphelion points with intelligent date displays\n"
-    "* Copy-to-Clipboard: Easy sharing of star names and coordinates\n"
-    "* Advanced Hover Information: Detailed astronomical data with toggle controls\n\n"
+    "- Animation from minutes to years\n"
+    "- Orbital mechanics visualization\n"
+    "- Lagrange points (Earth-Moon, Sun-Earth)\n"
+    "- Apsidal markers (perihelion/aphelion)\n"
+    "- Resizable GUI columns (drag dividers!)\n"
+    "- Window layout saved between sessions\n\n"
 
-    "SOLAR SYSTEM OBJECTS:\n"
-    "The scrollable selection menu includes planets, moons (including all major Jovian and Saturnian satellites), asteroids, "
-    "trans-Neptunian objects, comets (including recent discoveries like interstellar visitor C/2025 N1), and active/historic "
-    "spacecraft missions. Select multiple objects to compare their motions and relationships.\n\n"
+    "CROSS-PLATFORM:\n"
+    "Runs on Windows, macOS, and Linux. Window geometry and column sizes "
+    "are saved automatically to window_config.json.\n\n"
 
-    "DATA AVAILABILITY & TIMEFRAMES:\n"
-    "Mission and comet data availability varies by object and time period. For spacecraft and comets, carefully select dates "
-    "within available data ranges to avoid plotting errors. The Horizons system provides data through 2199-12-29 for most "
-    "objects. Long-period objects like Sedna show partial actual positions plus complete idealized orbits calculated from "
-    "orbital parameters.\n\n"
+    "DATA & COORDINATES:\n"
+    "J2000 ecliptic coordinates in AU. JPL Horizons data through 2199. "
+    "Spacecraft/comet data varies by object - check available date ranges.\n\n"
 
-    "COORDINATE SYSTEM:\n"
-    "Positions use the J2000 ecliptic coordinate system, aligned with Earth's orbital plane and fixed relative to stars as "
-    "of January 1, 2000. Coordinates are measured in Astronomical Units (AU) - approximately 149.6 million kilometers or "
-    "the average Earth-Sun distance.\n\n"
+    "RESOURCES:\n"
+    "GitHub: github.com/tonylquintanilla/palomas_orrery\n"
+    "Website: tonylquintanilla.github.io/palomas_orrery/\n"
+    "Instagram: @palomas_orrery\n"
+    "Contact: tonyquintanilla@gmail.com\n\n"
 
-    "PERFORMANCE TIPS:\n"
-    "* Use 'Move Camera to Center' to view from the Sun's perspective\n"
-    "* Reduce distance/magnitude limits for less crowded, more detailed views\n"
-    "* Toggle hover text complexity based on your needs\n"
-    "* Be patient with complex plots - quality visualization takes time!\n"
-    "* Ensure active internet connection for real-time data fetching\n\n"
-
-    "Created by civil & environmental engineer Tony Quintanilla with AI assistance (Claude, ChatGPT, Gemini), continuously "
-    "updated through August 2025. MIT License - free to use, modify, and share.\n\n"
-    "Contact: tonyquintanilla@gmail.com\n"
-    "Data source: JPL Horizons System (https://ssd.jpl.nasa.gov/horizons/app.html#/)\n"
-    "Project page: https://tonylquintanilla.github.io/palomas_orrery/\n\n"
-
-    "Explore the cosmos and enjoy your journey through space and time!"
+    "MIT License - free to use, modify, and share.\n"
+    "Explore the cosmos!"
 )
+
 
 # Function to map celestial objects to colors
 def color_map(planet):

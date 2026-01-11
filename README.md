@@ -1,4 +1,4 @@
-# Last updated: January 9, 2026
+# Last updated: January 11, 2026
 
 # Paloma's Orrery
 
@@ -44,6 +44,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - HR diagrams and stellar analysis
 - Climate data preservation hub
 - Unified save system with CDN/offline HTML options
+- Resizable GUI columns with persistent window layout
 
 **Resources:**
 
@@ -95,19 +96,19 @@ python palomas_orrery.py
 
 ### Linux Installation
 
-Download `palomas_orrery_2_1_zip.zip` from the [Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases) and extract it.
+Download the latest release ZIP from the [Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases) and extract it.
 
-**Ubuntu/Debian:**
+**Ubuntu/Debian (tested on Linux Mint 22):**
 ```bash
 # 1. Install system dependencies
 sudo apt update
-sudo apt install python3 python3-pip python3-tk
+sudo apt install python3 python3-pip python3-tk python3-pil.imagetk
 
 # 2. Navigate to extracted folder
-cd palomas_orrery
+cd palomas_orrery_cross_platform
 
-# 3. Install Python dependencies
-pip install -r requirements.txt
+# 3. Install Python dependencies (--break-system-packages required on modern Ubuntu/Debian)
+pip install -r requirements.txt --break-system-packages
 
 # 4. Run
 python3 palomas_orrery.py
@@ -115,15 +116,29 @@ python3 palomas_orrery.py
 
 **Fedora/RHEL:**
 ```bash
-sudo dnf install python3 python3-pip python3-tkinter
+sudo dnf install python3 python3-pip python3-tkinter python3-pillow-tk
+pip install -r requirements.txt
 ```
 
 **Arch Linux:**
 ```bash
-sudo pacman -S python python-pip tk
+sudo pacman -S python python-pip tk python-pillow
+pip install -r requirements.txt
 ```
 
-**Note:** The `python3-tk` (or equivalent) package is required - it provides the GUI toolkit and is not included in pip.
+**Important Notes:**
+
+- `python3-tk` provides the GUI toolkit (not available via pip)
+- `python3-pil.imagetk` provides ImageTk for matplotlib's Tk backend
+- The `--break-system-packages` flag is required on Ubuntu 24.04+ and Debian 12+ due to PEP 668 (externally managed environments). This is safe for desktop applications.
+
+**Known Linux Display Issues:**
+
+The GUI may have minor cosmetic issues on some Linux window managers:
+- Middle column buttons may appear slightly clipped
+- Text panels may overflow their borders slightly
+
+These are cosmetic only - all functionality works correctly. The visualizations open in your web browser and display perfectly.
 
 ### Staying Up to Date
 
@@ -773,6 +788,8 @@ palomas_orrery/
 - `*_metadata.json` - Cache validation metadata and timestamps
 - `orrery_config.json` - User preferences and display settings
 - `co2_mauna_loa_monthly.json` - Monthly atmospheric CO2 measurements (1958-2025)
+- `window_config.json` - Main GUI window geometry, maximized state, and column sash positions
+- `star_viz_config.json` - Star visualization GUI window layout
 
 ### Generated Reports
 
@@ -836,7 +853,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** January 2026 (v2.3.0 - Galactic Center & Unified Save System)
+**Last Updated:** January 2026 (v2.3.1 - Galactic Center, Unified Save System & Resizable GUI)
 
 ---
 

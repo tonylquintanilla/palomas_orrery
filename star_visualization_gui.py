@@ -17,6 +17,8 @@ import webbrowser
 from typing import Dict, List, Optional
 from star_notes import unique_notes
 import time
+import json
+import platform
 from threading import Thread
 
 # Import for expanding object types if needed
@@ -789,17 +791,115 @@ class StarVisualizationGUI(tk.Tk):
     
     def __init__(self):
         super().__init__()
-        self.title("Star Visualization Control Panel")
-        self.geometry("1100x800")
-        self.minsize(980, 700)        
+        self.title("Star Visualization Control Panel -- Updated: January 10, 2026")
+        
+        # ====================================================================
+        # WINDOW GEOMETRY AND CONFIG MANAGEMENT
+        # ====================================================================
+        
+        # Config file in application directory
+        self.CONFIG_FILE = os.path.join(os.getcwd(), 'star_viz_config.json')
+        print(f"Window config file: {self.CONFIG_FILE}", flush=True)
+        
+        # Platform-aware defaults
+        if platform.system() == 'Linux':
+            DEFAULT_GEOMETRY = "1200x850"
+            MIN_WIDTH, MIN_HEIGHT = 1050, 700
+            self.DEFAULT_SASH = [380, 780]
+        elif platform.system() == 'Darwin':
+            DEFAULT_GEOMETRY = "1150x830"
+            MIN_WIDTH, MIN_HEIGHT = 1000, 680
+            self.DEFAULT_SASH = [360, 750]
+        else:  # Windows
+            DEFAULT_GEOMETRY = "1100x800"
+            MIN_WIDTH, MIN_HEIGHT = 980, 650
+            self.DEFAULT_SASH = [340, 720]
+        
+        # Load saved config
+        self.saved_config = self.load_window_config()
+        if self.saved_config and self.saved_config.get('platform') == platform.system():
+            try:
+                self.geometry(self.saved_config['geometry'])
+                print(f"Restored window geometry: {self.saved_config['geometry']}", flush=True)
+                # Restore maximized state if it was saved
+                if self.saved_config.get('state') == 'zoomed':
+                    self.after(100, lambda: self.state('zoomed'))
+                    print("Window will be maximized", flush=True)
+            except:
+                self.geometry(DEFAULT_GEOMETRY)
+        else:
+            self.geometry(DEFAULT_GEOMETRY)
+            print(f"Using default geometry: {DEFAULT_GEOMETRY}", flush=True)
+        
+        self.minsize(MIN_WIDTH, MIN_HEIGHT)
+        self.resizable(True, True)
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        
+        # ====================================================================
         
         self.BUTTON_WIDTH = 35
         self.BUTTON_FONT = ("Arial", 10, "normal")
         
         self.setup_ui()
-
-        # NEW: Check for and load last plot data after UI is ready
-        self.after(100, self.check_and_load_last_plot)
+        
+        # Restore sash positions after UI is built
+        self.after(100, self.restore_sash_positions)
+        
+        # Check for and load last plot data after UI is ready
+        self.after(200, self.check_and_load_last_plot)
+    
+    def load_window_config(self):
+        """Load saved window geometry and sash positions."""
+        try:
+            if os.path.exists(self.CONFIG_FILE):
+                with open(self.CONFIG_FILE, 'r') as f:
+                    return json.load(f)
+        except Exception as e:
+            print(f"Note: Could not load window config: {e}", flush=True)
+        return None
+    
+    def save_window_config(self):
+        """Save window geometry and sash positions."""
+        try:
+            sash_positions = []
+            try:
+                for i in range(2):
+                    sash_positions.append(self.main_paned.sash_coord(i)[0])
+            except:
+                pass
+            config = {
+                'geometry': self.geometry(),
+                'state': self.state(),
+                'platform': platform.system(),
+                'sash_positions': sash_positions
+            }
+            with open(self.CONFIG_FILE, 'w') as f:
+                json.dump(config, f, indent=2)
+            print(f"Window config saved to {self.CONFIG_FILE}", flush=True)
+        except Exception as e:
+            print(f"Note: Could not save window config: {e}", flush=True)
+    
+    def restore_sash_positions(self):
+        """Restore saved sash positions."""
+        try:
+            positions = None
+            if self.saved_config and self.saved_config.get('platform') == platform.system():
+                positions = self.saved_config.get('sash_positions')
+            if positions and len(positions) >= 2:
+                self.main_paned.sash_place(0, positions[0], 0)
+                self.main_paned.sash_place(1, positions[1], 0)
+                print(f"Restored sash positions: {positions}", flush=True)
+            else:
+                self.main_paned.sash_place(0, self.DEFAULT_SASH[0], 0)
+                self.main_paned.sash_place(1, self.DEFAULT_SASH[1], 0)
+                print(f"Using default sash positions: {self.DEFAULT_SASH}", flush=True)
+        except Exception as e:
+            print(f"Note: Could not restore sash positions: {e}", flush=True)
+    
+    def on_closing(self):
+        """Save config and close."""
+        self.save_window_config()
+        self.destroy()
 
 
     def run_visualization_with_console_output(self, script_path, args):
@@ -914,16 +1014,13 @@ class StarVisualizationGUI(tk.Tk):
 
     def setup_ui(self):
         """Build the complete user interface."""
-        main_frame = ttk.Frame(self)
-        main_frame.pack(fill='both', expand=True, padx=10, pady=10)
-        
-        main_frame.grid_columnconfigure(0, weight=1)
-        main_frame.grid_columnconfigure(1, weight=1)
-        main_frame.grid_columnconfigure(2, weight=1)
+        # Create PanedWindow for resizable columns
+        self.main_paned = tk.PanedWindow(self, orient=tk.HORIZONTAL, sashwidth=8,
+                                         sashrelief=tk.RAISED, bg='gray70')
+        self.main_paned.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         
         # LEFT COLUMN - Star Search
-        left_frame = ttk.Frame(main_frame)
-        left_frame.grid(row=0, column=0, sticky='nsew', padx=(0, 5))
+        left_frame = ttk.Frame(self.main_paned)
         
         search_label = ttk.Label(left_frame, text="Star Search", font=("Arial", 12, "bold"))
         search_label.pack(pady=(0, 10))
@@ -932,8 +1029,7 @@ class StarVisualizationGUI(tk.Tk):
         self.search_widget.pack(fill='both', expand=True)
         
         # MIDDLE COLUMN - Visualization Controls
-        middle_scroll = ScrollableFrame(main_frame)
-        middle_scroll.grid(row=0, column=1, sticky='nsew', padx=5)
+        middle_scroll = ScrollableFrame(self.main_paned)
         middle_frame = middle_scroll.container
         
         controls_label = ttk.Label(middle_frame, text="Visualization Controls", font=("Arial", 12, "bold"))
@@ -952,7 +1048,7 @@ class StarVisualizationGUI(tk.Tk):
             distance_frame,
             text="3D Stellar Neighborhood",
             command=self.plot_3d_distance,
-            bg='gray90',
+            bg='SystemButtonFace',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT
@@ -963,7 +1059,7 @@ class StarVisualizationGUI(tk.Tk):
             distance_frame,
             text="2D HR Diagram",
             command=self.plot_2d_distance,
-            bg='gray90',
+            bg='SystemButtonFace',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT
@@ -1017,7 +1113,7 @@ class StarVisualizationGUI(tk.Tk):
             magnitude_frame,
             text="3D Visible Stars",
             command=self.plot_3d_magnitude,
-            bg='gray90',
+            bg='SystemButtonFace',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT
@@ -1028,7 +1124,7 @@ class StarVisualizationGUI(tk.Tk):
             magnitude_frame,
             text="2D HR Diagram (Visible)",
             command=self.plot_2d_magnitude,
-            bg='gray90',
+            bg='SystemButtonFace',
             fg='blue',
             width=self.BUTTON_WIDTH,
             font=self.BUTTON_FONT
@@ -1047,8 +1143,7 @@ class StarVisualizationGUI(tk.Tk):
         self.plot_report.pack(fill='both', expand=True, pady=(10, 0))
 
         # RIGHT COLUMN - Notes
-        right_frame = ttk.Frame(main_frame)
-        right_frame.grid(row=0, column=2, sticky='nsew', padx=(5, 0))
+        right_frame = ttk.Frame(self.main_paned)
         
         notes_label = ttk.Label(right_frame, text="Notes", font=("Arial", 12, "bold"))
         notes_label.pack(pady=(0, 10))
@@ -1100,6 +1195,11 @@ class StarVisualizationGUI(tk.Tk):
             "- Safe to interrupt with Ctrl+C\n"
         )
         notes_text.config(state='disabled')
+        
+        # Add frames to PanedWindow
+        self.main_paned.add(left_frame, minsize=250, sticky='nsew')
+        self.main_paned.add(middle_scroll, minsize=300, sticky='nsew')
+        self.main_paned.add(right_frame, minsize=200, sticky='nsew')
 
     # ============================================================
     # PLOTTING METHODS - Updated for PyInstaller support
