@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Stellar Visualization
+Comment=Launch Paloma's Orrery Stellar Neighborhood Visualization
+Icon=applications-science
+Exec=bash -c 'cd "$(dirname "%k")" && python3 star_visualization_gui.py'
+Terminal=false
+Categories=Science;Education;
