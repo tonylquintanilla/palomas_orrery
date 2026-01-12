@@ -1374,8 +1374,11 @@ STATIC_TODAY = today
 
 # Middle column - Controls
 controls_container = tk.Frame(main_paned, bg='gray90')
-controls_container.pack_propagate(False)
-controls_container.config(width=450, height=750)
+#controls_container.pack_propagate(False)
+#controls_container.config(width=450, height=750)
+
+controls_container.pack_propagate(True)  # Allow container to resize
+# Remove the fixed width - let PanedWindow control it
 
 # Create a canvas inside the container
 controls_canvas = tk.Canvas(controls_container, bg='gray90')
