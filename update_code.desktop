@@ -1,8 +1,9 @@
 [Desktop Entry]
-Name=Update Orrery Code
-Comment=Update Python code from GitHub
-Exec=sh -c 'cd "$(dirname "$(readlink -f "%k")")" && chmod +x update_code.sh && ./update_code.sh'
-Icon=system-software-update
-Terminal=true
+Version=1.0
 Type=Application
+Name=Update Orrery Code
+Comment=Pull latest code from GitHub
+Icon=system-software-update
+Exec=bash -c 'cd "$(dirname "%k")" && chmod +x update_code.sh && ./update_code.sh; read -p "Press Enter to close..."'
+Terminal=true
 Categories=Utility;
