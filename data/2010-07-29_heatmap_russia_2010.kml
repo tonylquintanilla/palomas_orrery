@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="950">
+        <name>russia_2010 Heatmap (2010-07-29)</name>
+        <GroundOverlay id="951">
+            <name>Thermal Overlay</name>
+            <Icon id="952">
+                <href>2010-07-29_heatmap_russia_2010.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>64.0</north>
+                <south>50.0</south>
+                <east>53.0</east>
+                <west>25.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

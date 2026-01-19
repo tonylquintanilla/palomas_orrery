@@ -1,0 +1,3648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Style id="48">
+            <IconStyle id="49">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="50">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="51">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="54">
+            <IconStyle id="55">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="56">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="57">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="60">
+            <IconStyle id="61">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="62">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="63">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="66">
+            <IconStyle id="67">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="68">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="69">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="72">
+            <IconStyle id="73">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="74">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="75">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="78">
+            <IconStyle id="79">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="80">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="81">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="84">
+            <IconStyle id="85">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="86">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="87">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="90">
+            <IconStyle id="91">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="92">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="93">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="96">
+            <IconStyle id="97">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="98">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="99">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="102">
+            <IconStyle id="103">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="104">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="105">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="108">
+            <IconStyle id="109">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="110">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="111">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="114">
+            <IconStyle id="115">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="116">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="117">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="120">
+            <IconStyle id="121">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="122">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="123">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="126">
+            <IconStyle id="127">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="128">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="129">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="132">
+            <IconStyle id="133">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="134">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="135">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="138">
+            <IconStyle id="139">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="140">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="141">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="144">
+            <IconStyle id="145">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="146">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="147">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="150">
+            <IconStyle id="151">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="152">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="153">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="156">
+            <IconStyle id="157">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="158">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="159">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="162">
+            <IconStyle id="163">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="164">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="165">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="168">
+            <IconStyle id="169">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="170">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="171">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="174">
+            <IconStyle id="175">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="176">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="177">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="180">
+            <IconStyle id="181">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="182">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="183">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="186">
+            <IconStyle id="187">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="188">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="189">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="192">
+            <IconStyle id="193">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="194">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="195">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="198">
+            <IconStyle id="199">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="200">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="201">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="204">
+            <IconStyle id="205">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="206">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="207">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="210">
+            <IconStyle id="211">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="212">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="213">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="216">
+            <IconStyle id="217">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="218">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="219">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="222">
+            <IconStyle id="223">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="224">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="225">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="228">
+            <IconStyle id="229">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="230">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="231">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="234">
+            <IconStyle id="235">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="236">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="237">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="240">
+            <IconStyle id="241">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="242">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="243">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="246">
+            <IconStyle id="247">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="248">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="249">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="252">
+            <IconStyle id="253">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="254">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="255">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="258">
+            <IconStyle id="259">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="260">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="261">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="264">
+            <IconStyle id="265">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="266">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="267">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="270">
+            <IconStyle id="271">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="272">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="273">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="276">
+            <IconStyle id="277">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="278">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="279">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="282">
+            <IconStyle id="283">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="284">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="285">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="288">
+            <IconStyle id="289">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="290">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="291">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="294">
+            <IconStyle id="295">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="296">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="297">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="300">
+            <IconStyle id="301">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="302">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="303">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="306">
+            <IconStyle id="307">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="308">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="309">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="312">
+            <IconStyle id="313">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="314">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="315">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="318">
+            <IconStyle id="319">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="320">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="321">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="324">
+            <IconStyle id="325">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="326">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="327">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="330">
+            <IconStyle id="331">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="332">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="333">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="336">
+            <IconStyle id="337">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="338">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="339">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="342">
+            <IconStyle id="343">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="344">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="345">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="348">
+            <IconStyle id="349">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="350">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="351">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="354">
+            <IconStyle id="355">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="356">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="357">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="360">
+            <IconStyle id="361">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="362">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="363">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="366">
+            <IconStyle id="367">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="368">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="369">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="372">
+            <IconStyle id="373">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="374">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="375">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="378">
+            <IconStyle id="379">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="380">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="381">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="384">
+            <IconStyle id="385">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="386">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="387">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="390">
+            <IconStyle id="391">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="392">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="393">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="396">
+            <IconStyle id="397">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="398">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="399">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="402">
+            <IconStyle id="403">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="404">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="405">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="408">
+            <IconStyle id="409">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="410">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="411">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="414">
+            <IconStyle id="415">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="416">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="417">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="420">
+            <IconStyle id="421">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="422">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="423">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="426">
+            <IconStyle id="427">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="428">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="429">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="432">
+            <IconStyle id="433">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="434">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="435">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="438">
+            <IconStyle id="439">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="440">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="441">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="444">
+            <IconStyle id="445">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="446">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="447">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="450">
+            <IconStyle id="451">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="452">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="453">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="456">
+            <IconStyle id="457">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="458">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="459">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="462">
+            <IconStyle id="463">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="464">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="465">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="468">
+            <IconStyle id="469">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="470">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="471">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="474">
+            <IconStyle id="475">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="476">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="477">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="480">
+            <IconStyle id="481">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="482">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="483">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="486">
+            <IconStyle id="487">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="488">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="489">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="492">
+            <IconStyle id="493">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="494">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="495">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="498">
+            <IconStyle id="499">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="500">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="501">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="504">
+            <IconStyle id="505">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="506">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="507">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="510">
+            <IconStyle id="511">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="512">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="513">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="516">
+            <IconStyle id="517">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="518">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="519">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="522">
+            <IconStyle id="523">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="524">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="525">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="528">
+            <IconStyle id="529">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="530">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="531">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="534">
+            <IconStyle id="535">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="536">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="537">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="540">
+            <IconStyle id="541">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="542">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="543">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="546">
+            <IconStyle id="547">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="548">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="549">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="552">
+            <IconStyle id="553">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="554">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="555">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="558">
+            <IconStyle id="559">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="560">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="561">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="564">
+            <IconStyle id="565">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="566">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="567">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="570">
+            <IconStyle id="571">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="572">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="573">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="576">
+            <IconStyle id="577">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="578">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="579">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="582">
+            <IconStyle id="583">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="584">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="585">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="588">
+            <IconStyle id="589">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="590">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="591">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="594">
+            <IconStyle id="595">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="596">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="597">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="600">
+            <IconStyle id="601">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="602">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="603">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="606">
+            <IconStyle id="607">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="608">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="609">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="612">
+            <IconStyle id="613">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="614">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="615">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="618">
+            <IconStyle id="619">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="620">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="621">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="624">
+            <IconStyle id="625">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="626">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="627">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <Style id="630">
+            <IconStyle id="631">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="632">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle id="633">
+                <color>ff00a5ff</color>
+                <colorMode>normal</colorMode>
+            </LineStyle>
+        </Style>
+        <name>amazon_drought_2025 Spikes (2025-09-15)</name>
+        <ScreenOverlay id="2">
+            <name>Legend</name>
+            <Icon id="3">
+                <href>legend_risk_index_cited.png</href>
+            </Icon>
+            <overlayXY x="0" y="0.1" xunits="fraction" yunits="fraction"/>
+            <screenXY x="0" y="0.1" xunits="fraction" yunits="fraction"/>
+        </ScreenOverlay>
+        <ScreenOverlay id="4">
+            <name>Scenario Intel</name>
+            <Icon id="5">
+                <href>2025-09-15_intel_amazon_drought_2025.png</href>
+            </Icon>
+            <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+            <screenXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+        </ScreenOverlay>
+        <Placemark id="47">
+            <name>25.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 37.3449010680417%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#48</styleUrl>
+            <Point id="46">
+                <coordinates>-71.0,5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="53">
+            <name>25.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 39.607747528938674%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#54</styleUrl>
+            <Point id="52">
+                <coordinates>-69.0,5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="59">
+            <name>25.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 33.47976317229148%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#60</styleUrl>
+            <Point id="58">
+                <coordinates>-63.0,5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="65">
+            <name>26.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 46.53561221272212%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#66</styleUrl>
+            <Point id="64">
+                <coordinates>-59.0,5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="71">
+            <name>25.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 38.211769125108255%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#72</styleUrl>
+            <Point id="70">
+                <coordinates>-57.0,5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="77">
+            <name>25.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 39.88887404853199%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#78</styleUrl>
+            <Point id="76">
+                <coordinates>-55.0,5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="83">
+            <name>25.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 35.66245529959783%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#84</styleUrl>
+            <Point id="82">
+                <coordinates>-51.0,5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="89">
+            <name>25.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 36.008321706750046%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#90</styleUrl>
+            <Point id="88">
+                <coordinates>-73.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="95">
+            <name>25.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 39.417260220349704%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#96</styleUrl>
+            <Point id="94">
+                <coordinates>-71.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="101">
+            <name>25.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 41.18867587491053%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#102</styleUrl>
+            <Point id="100">
+                <coordinates>-69.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="107">
+            <name>27.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;27.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 55.5940046775131%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#108</styleUrl>
+            <Point id="106">
+                <coordinates>-67.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="113">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 44.765467028245034%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#114</styleUrl>
+            <Point id="112">
+                <coordinates>-65.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="119">
+            <name>24.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 22.737310601481102%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#120</styleUrl>
+            <Point id="118">
+                <coordinates>-63.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="125">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 44.919818868878245%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#126</styleUrl>
+            <Point id="124">
+                <coordinates>-61.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="131">
+            <name>24.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 27.326635240919906%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#132</styleUrl>
+            <Point id="130">
+                <coordinates>-59.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="137">
+            <name>24.8</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.8°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 31.173033666699013%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#138</styleUrl>
+            <Point id="136">
+                <coordinates>-51.0,3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="143">
+            <name>24.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 23.033589354470347%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#144</styleUrl>
+            <Point id="142">
+                <coordinates>-75.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="149">
+            <name>25.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 41.46311035762078%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#150</styleUrl>
+            <Point id="148">
+                <coordinates>-73.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="155">
+            <name>25.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 34.79100587934213%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#156</styleUrl>
+            <Point id="154">
+                <coordinates>-71.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="161">
+            <name>26.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 51.05255987848527%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#162</styleUrl>
+            <Point id="160">
+                <coordinates>-69.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="167">
+            <name>26.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 46.38450736935138%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#168</styleUrl>
+            <Point id="166">
+                <coordinates>-67.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="173">
+            <name>24.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 28.4254115363212%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#174</styleUrl>
+            <Point id="172">
+                <coordinates>-65.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="179">
+            <name>25.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 37.59441008302551%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#180</styleUrl>
+            <Point id="178">
+                <coordinates>-63.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="185">
+            <name>25.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 38.78336243500817%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#186</styleUrl>
+            <Point id="184">
+                <coordinates>-61.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="191">
+            <name>24.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 27.601923954540396%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#192</styleUrl>
+            <Point id="190">
+                <coordinates>-57.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="197">
+            <name>24.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 29.608566802236425%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#198</styleUrl>
+            <Point id="196">
+                <coordinates>-51.0,1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="203">
+            <name>25.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 37.117213152225325%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#204</styleUrl>
+            <Point id="202">
+                <coordinates>-75.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="209">
+            <name>25.8</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.8°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 42.13467400323694%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#210</styleUrl>
+            <Point id="208">
+                <coordinates>-73.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="215">
+            <name>25.8</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.8°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 42.36865341256413%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#216</styleUrl>
+            <Point id="214">
+                <coordinates>-71.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="221">
+            <name>25.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 38.29503382030922%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#222</styleUrl>
+            <Point id="220">
+                <coordinates>-69.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="227">
+            <name>26.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 45.71760313700881%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#228</styleUrl>
+            <Point id="226">
+                <coordinates>-67.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="233">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 44.09199562246321%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#234</styleUrl>
+            <Point id="232">
+                <coordinates>-65.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="239">
+            <name>25.9</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.9°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 43.04150123720021%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#240</styleUrl>
+            <Point id="238">
+                <coordinates>-63.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="245">
+            <name>27.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;27.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 59.08904363187095%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#246</styleUrl>
+            <Point id="244">
+                <coordinates>-61.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="251">
+            <name>27.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;27.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 58.71467233505423%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#252</styleUrl>
+            <Point id="250">
+                <coordinates>-59.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="257">
+            <name>24.8</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.8°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 31.47412151236833%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#258</styleUrl>
+            <Point id="256">
+                <coordinates>-57.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="263">
+            <name>24.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 30.182407004332234%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#264</styleUrl>
+            <Point id="262">
+                <coordinates>-55.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="269">
+            <name>24.8</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.8°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 31.390354022931216%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#270</styleUrl>
+            <Point id="268">
+                <coordinates>-53.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="275">
+            <name>25.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 38.51575191010694%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#276</styleUrl>
+            <Point id="274">
+                <coordinates>-51.0,-1.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="281">
+            <name>25.9</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.9°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 43.25812680189962%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#282</styleUrl>
+            <Point id="280">
+                <coordinates>-75.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="287">
+            <name>26.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 48.026975540334305%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#288</styleUrl>
+            <Point id="286">
+                <coordinates>-73.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="293">
+            <name>25.9</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.9°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 43.41039342603711%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#294</styleUrl>
+            <Point id="292">
+                <coordinates>-71.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="299">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 44.49039194454423%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#300</styleUrl>
+            <Point id="298">
+                <coordinates>-69.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="305">
+            <name>26.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 49.28207391622479%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#306</styleUrl>
+            <Point id="304">
+                <coordinates>-67.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="311">
+            <name>26.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 45.809005194752494%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#312</styleUrl>
+            <Point id="310">
+                <coordinates>-65.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="317">
+            <name>25.9</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.9°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 43.41039342603711%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#318</styleUrl>
+            <Point id="316">
+                <coordinates>-63.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="323">
+            <name>26.9</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.9°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 54.46747186747649%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#324</styleUrl>
+            <Point id="322">
+                <coordinates>-61.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="329">
+            <name>26.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 46.74575943019599%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#330</styleUrl>
+            <Point id="328">
+                <coordinates>-59.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="335">
+            <name>27.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;27.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 62.00545571270367%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#336</styleUrl>
+            <Point id="334">
+                <coordinates>-57.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="341">
+            <name>25.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 36.66192328380408%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#342</styleUrl>
+            <Point id="340">
+                <coordinates>-55.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="347">
+            <name>25.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 36.92568507303149%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#348</styleUrl>
+            <Point id="346">
+                <coordinates>-53.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="353">
+            <name>24.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 24.627122957773018%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#354</styleUrl>
+            <Point id="352">
+                <coordinates>-51.0,-3.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="359">
+            <name>26.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 45.135565209840166%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#360</styleUrl>
+            <Point id="358">
+                <coordinates>-75.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="365">
+            <name>26.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 47.63940253456028%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#366</styleUrl>
+            <Point id="364">
+                <coordinates>-73.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="371">
+            <name>26.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 46.842175317611876%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#372</styleUrl>
+            <Point id="370">
+                <coordinates>-71.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="377">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 44.617278362969756%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#378</styleUrl>
+            <Point id="376">
+                <coordinates>-69.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="383">
+            <name>26.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 46.04365111644475%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#384</styleUrl>
+            <Point id="382">
+                <coordinates>-67.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="389">
+            <name>25.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 41.60497566053437%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#390</styleUrl>
+            <Point id="388">
+                <coordinates>-65.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="395">
+            <name>26.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 48.23218369520568%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#396</styleUrl>
+            <Point id="394">
+                <coordinates>-63.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="401">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 44.95509834094883%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#402</styleUrl>
+            <Point id="400">
+                <coordinates>-61.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="407">
+            <name>27.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;27.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 60.43164189033894%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#408</styleUrl>
+            <Point id="406">
+                <coordinates>-59.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="413">
+            <name>25.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 33.207892136925565%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#414</styleUrl>
+            <Point id="412">
+                <coordinates>-57.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="419">
+            <name>24.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 30.554213939978286%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#420</styleUrl>
+            <Point id="418">
+                <coordinates>-55.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="425">
+            <name>25.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 34.26325750044875%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#426</styleUrl>
+            <Point id="424">
+                <coordinates>-53.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="431">
+            <name>24.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 28.528057084737945%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#432</styleUrl>
+            <Point id="430">
+                <coordinates>-51.0,-5.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="437">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 44.25230517708702%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#438</styleUrl>
+            <Point id="436">
+                <coordinates>-75.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="443">
+            <name>25.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 38.916755587016205%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#444</styleUrl>
+            <Point id="442">
+                <coordinates>-73.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="449">
+            <name>26.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 49.6000894382379%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#450</styleUrl>
+            <Point id="448">
+                <coordinates>-71.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="455">
+            <name>25.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 38.050440125821005%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#456</styleUrl>
+            <Point id="454">
+                <coordinates>-69.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="461">
+            <name>25.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 36.35973824220081%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#462</styleUrl>
+            <Point id="460">
+                <coordinates>-67.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="467">
+            <name>25.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 35.56094648805879%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#468</styleUrl>
+            <Point id="466">
+                <coordinates>-65.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="473">
+            <name>25.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 39.881966814368155%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#474</styleUrl>
+            <Point id="472">
+                <coordinates>-63.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="479">
+            <name>26.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 45.74393730458893%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#480</styleUrl>
+            <Point id="478">
+                <coordinates>-61.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="485">
+            <name>26.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;26.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 43.913630444945184%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#486</styleUrl>
+            <Point id="484">
+                <coordinates>-59.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="491">
+            <name>24.8</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.8°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 31.438999533586593%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#492</styleUrl>
+            <Point id="490">
+                <coordinates>-55.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="497">
+            <name>24.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 25.465004103113504%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#498</styleUrl>
+            <Point id="496">
+                <coordinates>-53.0,-7.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="503">
+            <name>25.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 33.97390151442015%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#504</styleUrl>
+            <Point id="502">
+                <coordinates>-75.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="509">
+            <name>25.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 41.46311035762078%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#510</styleUrl>
+            <Point id="508">
+                <coordinates>-73.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="515">
+            <name>25.9</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.9°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 43.69582600512432%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#516</styleUrl>
+            <Point id="514">
+                <coordinates>-71.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="521">
+            <name>25.9</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.9°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 42.95374886274882%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#522</styleUrl>
+            <Point id="520">
+                <coordinates>-69.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="527">
+            <name>25.4</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.4°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 37.2912639155469%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#528</styleUrl>
+            <Point id="526">
+                <coordinates>-67.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="533">
+            <name>24.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 28.075482794076795%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#534</styleUrl>
+            <Point id="532">
+                <coordinates>-65.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="539">
+            <name>25.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 35.14696242182944%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#540</styleUrl>
+            <Point id="538">
+                <coordinates>-63.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="545">
+            <name>26.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 46.842175317611876%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#546</styleUrl>
+            <Point id="544">
+                <coordinates>-61.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="551">
+            <name>26.6</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.6°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 51.183309648594346%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#552</styleUrl>
+            <Point id="550">
+                <coordinates>-59.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="557">
+            <name>25.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 35.33537955536754%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#558</styleUrl>
+            <Point id="556">
+                <coordinates>-57.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="563">
+            <name>24.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 23.37261396451803%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#564</styleUrl>
+            <Point id="562">
+                <coordinates>-53.0,-9.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="569">
+            <name>24.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 29.45426464091546%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#570</styleUrl>
+            <Point id="568">
+                <coordinates>-71.0,-11.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="575">
+            <name>25.5</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.5°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 38.34675348165896%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#576</styleUrl>
+            <Point id="574">
+                <coordinates>-69.0,-11.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="581">
+            <name>26.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 46.65573965956796%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#582</styleUrl>
+            <Point id="580">
+                <coordinates>-67.0,-11.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="587">
+            <name>24.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 29.504012784327966%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#588</styleUrl>
+            <Point id="586">
+                <coordinates>-65.0,-11.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="593">
+            <name>25.7</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.7°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 41.032036833409904%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#594</styleUrl>
+            <Point id="592">
+                <coordinates>-63.0,-11.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="599">
+            <name>25.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 33.35468968588604%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#600</styleUrl>
+            <Point id="598">
+                <coordinates>-61.0,-11.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="605">
+            <name>24.0</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;24.0°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 22.734527445842467%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#606</styleUrl>
+            <Point id="604">
+                <coordinates>-53.0,-11.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="611">
+            <name>25.2</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.2°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 35.485273931130834%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#612</styleUrl>
+            <Point id="610">
+                <coordinates>-67.0,-13.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="617">
+            <name>25.8</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.8°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 42.26778445567672%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#618</styleUrl>
+            <Point id="616">
+                <coordinates>-65.0,-13.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="623">
+            <name>26.3</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FF0000;"&gt;26.3°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FF0000;"&gt;HIGH RISK (Carter/Foster)&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;SEVERE STRESS:&lt;/b&gt;&lt;br&gt;Continuous physical activity dangerous (Foster). Vulnerable hearts fail (Carter).&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FF0000; height: 100%; width: 47.974389089615876%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#624</styleUrl>
+            <Point id="622">
+                <coordinates>-63.0,-13.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="629">
+            <name>25.1</name>
+            <description>
+    &lt;div style="font-family: Arial, sans-serif; width: 300px; padding: 10px;"&gt;
+        &lt;h2 style="margin: 0; color: #FFA500;"&gt;25.1°C&lt;/h2&gt;
+        &lt;h4 style="margin: 0; color: #555;"&gt;WET BULB TEMPERATURE&lt;/h4&gt;
+        &lt;hr&gt;
+        &lt;p style="font-weight: bold; color: #FFA500;"&gt;CAUTION&lt;/p&gt;
+        &lt;p style="font-size: 13px;"&gt;&lt;b&gt;ELEVATED STRESS:&lt;/b&gt;&lt;br&gt;Prolonged exposure may cause fatigue.&lt;/p&gt;
+        &lt;div style="background-color: #ddd; height: 15px; width: 100%; border-radius: 5px; margin-top: 10px;"&gt;
+            &lt;div style="background-color: #FFA500; height: 100%; width: 34.857922411084516%; border-radius: 5px;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p style="font-size: 10px; color: #666; text-align: right;"&gt;Bio-Limit: 31°C (Vecellio et al.)&lt;/p&gt;
+    &lt;/div&gt;
+    </description>
+            <styleUrl>#630</styleUrl>
+            <Point id="628">
+                <coordinates>-61.0,-13.0,0.0</coordinates>
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

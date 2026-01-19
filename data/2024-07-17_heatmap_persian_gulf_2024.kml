@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="185">
+        <name>persian_gulf_2024 Heatmap (2024-07-17)</name>
+        <GroundOverlay id="186">
+            <name>Thermal Overlay</name>
+            <Icon id="187">
+                <href>2024-07-17_heatmap_persian_gulf_2024.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>35.0</north>
+                <south>21.0</south>
+                <east>59.0</east>
+                <west>45.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

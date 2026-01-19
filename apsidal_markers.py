@@ -1451,3 +1451,274 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
     )
     
     print(f"-> Added closest plotted marker for {obj_name} to {center_body}: {closest_distance:.6f} AU on {date_str_formatted}", flush=True)
+
+# ========== KEPLERIAN POSITION CALCULATION ==========
+
+def solve_kepler_equation(M, e, tolerance=1e-10, max_iterations=100):
+    """
+    Solve Kepler's equation M = E - e*sin(E) for eccentric anomaly E.
+    Uses Newton-Raphson iteration.
+    
+    Parameters:
+        M: Mean anomaly in radians
+        e: Eccentricity (must be < 1 for elliptical orbits)
+        tolerance: Convergence tolerance
+        max_iterations: Maximum iterations before giving up
+        
+    Returns:
+        E: Eccentric anomaly in radians
+    """
+    import numpy as np
+    
+    # Initial guess (good for small eccentricity)
+    E = M if e < 0.8 else np.pi
+    
+    for _ in range(max_iterations):
+        f = E - e * np.sin(E) - M
+        f_prime = 1 - e * np.cos(E)
+        delta = f / f_prime
+        E = E - delta
+        if abs(delta) < tolerance:
+            break
+    
+    return E
+
+
+def eccentric_to_true_anomaly(E, e):
+    """
+    Convert eccentric anomaly to true anomaly.
+    
+    Parameters:
+        E: Eccentric anomaly in radians
+        e: Eccentricity
+        
+    Returns:
+        theta: True anomaly in radians
+    """
+    import numpy as np
+    
+    # Use the half-angle formula for numerical stability
+    theta = 2 * np.arctan2(
+        np.sqrt(1 + e) * np.sin(E / 2),
+        np.sqrt(1 - e) * np.cos(E / 2)
+    )
+    
+    return theta
+
+
+def calculate_keplerian_position(orbital_params, current_datetime, rotate_points):
+    """
+    Calculate the Keplerian (analytical) position of an object at a given time.
+    
+    This uses the cached osculating elements (a, e, i, omega, Omega, MA, epoch)
+    to compute where the object should be based purely on two-body orbital mechanics.
+    
+    Parameters:
+        orbital_params: Dictionary containing:
+            - a: Semi-major axis (AU)
+            - e: Eccentricity
+            - i: Inclination (degrees)
+            - omega: Argument of periapsis (degrees)  
+            - Omega: Longitude of ascending node (degrees)
+            - MA: Mean anomaly at epoch (degrees)
+            - epoch: Epoch date string (e.g., "2026-01-10 osc.")
+        current_datetime: datetime object for the desired time
+        rotate_points: Function to rotate points in 3D space
+        
+    Returns:
+        dict: {'x': float, 'y': float, 'z': float, 'distance': float, 
+               'true_anomaly_deg': float, 'calculation_details': str}
+        or None if calculation fails
+    """
+    import numpy as np
+    from datetime import datetime
+    from constants_new import KNOWN_ORBITAL_PERIODS
+    
+    try:
+        # Extract orbital elements
+        a = orbital_params.get('a')
+        e = orbital_params.get('e')
+        i = orbital_params.get('i', 0)
+        omega = orbital_params.get('omega', 0)
+        Omega = orbital_params.get('Omega', 0)
+        MA_epoch_deg = orbital_params.get('MA')  # Mean anomaly at epoch in degrees
+        epoch_str = orbital_params.get('epoch', '')
+        
+        # Validate required parameters
+        if a is None or e is None or MA_epoch_deg is None:
+            print(f"[KEPLERIAN POS] Missing required orbital elements (a={a}, e={e}, MA={MA_epoch_deg})", flush=True)
+            return None
+        
+        if e >= 1:
+            print(f"[KEPLERIAN POS] Hyperbolic orbit (e={e}) - position calculation not supported", flush=True)
+            return None
+        
+        # Parse epoch date
+        # Handle various epoch formats like "2026-01-10 osc." or "2026-01-10"
+        epoch_date_str = epoch_str.replace(' osc.', '').strip()
+        try:
+            epoch_datetime = datetime.strptime(epoch_date_str, '%Y-%m-%d')
+        except ValueError:
+            try:
+                epoch_datetime = datetime.strptime(epoch_date_str, '%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                print(f"[KEPLERIAN POS] Could not parse epoch date: {epoch_str}", flush=True)
+                return None
+        
+        # Calculate time elapsed since epoch (in days)
+        delta_t_days = (current_datetime - epoch_datetime).total_seconds() / 86400.0
+        
+        # Get orbital period to calculate mean motion
+        # Try to get from params first, then from KNOWN_ORBITAL_PERIODS
+        period_days = orbital_params.get('orbital_period_days')
+        if period_days is None:
+            # Calculate from semi-major axis using Kepler's 3rd law
+            # P^2 = a^3 (for heliocentric, P in years, a in AU)
+            period_years = np.sqrt(a**3)
+            period_days = period_years * 365.25
+        
+        # Calculate mean motion (radians per day)
+        n = 2 * np.pi / period_days
+        
+        # Calculate current mean anomaly
+        MA_epoch_rad = np.radians(MA_epoch_deg)
+        MA_current_rad = (MA_epoch_rad + n * delta_t_days) % (2 * np.pi)
+        
+        # Solve Kepler's equation to get eccentric anomaly
+        E = solve_kepler_equation(MA_current_rad, e)
+        
+        # Convert to true anomaly
+        theta = eccentric_to_true_anomaly(E, e)
+        
+        # Calculate radius at this true anomaly
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        # Position in orbital plane
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = 0.0
+        
+        # Convert angles to radians for rotation
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        # Apply orbital element rotations (same sequence as calculate_exact_apsides)
+        # 1. Rotate by argument of periapsis (omega) around z-axis
+        x_temp, y_temp, z_temp = rotate_points([x_orbit], [y_orbit], [z_orbit], omega_rad, 'z')
+        # 2. Rotate by inclination (i) around x-axis
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        # 3. Rotate by longitude of ascending node (Omega) around z-axis
+        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+        
+        # Extract single point
+        x = x_final[0]
+        y = y_final[0]
+        z = z_final[0]
+        distance = np.sqrt(x**2 + y**2 + z**2)
+        
+        # Build calculation details for hover text
+        details = (f"Epoch: {epoch_str}<br>"
+                   f"Days since epoch: {delta_t_days:.2f}<br>"
+                   f"Mean Anomaly: {np.degrees(MA_current_rad):.2f} deg<br>"
+                   f"True Anomaly: {np.degrees(theta):.2f} deg")
+        
+        return {
+            'x': x,
+            'y': y,
+            'z': z,
+            'distance': distance,
+            'true_anomaly_deg': np.degrees(theta),
+            'calculation_details': details
+        }
+        
+    except Exception as ex:
+        print(f"[KEPLERIAN POS] Error calculating position: {ex}", flush=True)
+        return None
+
+
+def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetime, 
+                                   rotate_points, center_body='Sun'):
+    """
+    Add a Keplerian (analytical) current position marker to the plot.
+    
+    This marker shows where the object should be based purely on two-body
+    orbital mechanics, calculated from cached osculating elements.
+    
+    The marker is:
+    - White color (to distinguish from object's actual color)
+    - Standard circle symbol (consistent with other position markers)
+    - Default visibility: legendonly (user can toggle on)
+    - Label: "{Object} Keplerian Position"
+    
+    Parameters:
+        fig: Plotly figure object
+        obj_name: Name of the object
+        orbital_params: Dictionary of orbital elements (from osculating cache)
+        current_datetime: datetime for position calculation
+        rotate_points: Function to rotate points in 3D space
+        center_body: Name of central body (for terminology)
+        
+    Returns:
+        bool: True if marker was added, False otherwise
+    """
+    import plotly.graph_objects as go
+    import numpy as np
+    
+    # Calculate the Keplerian position
+    position = calculate_keplerian_position(orbital_params, current_datetime, rotate_points)
+    
+    if position is None:
+        print(f"[KEPLERIAN POS] Could not calculate position for {obj_name}", flush=True)
+        return False
+    
+    # Get epoch for label
+    epoch_str = orbital_params.get('epoch', 'unknown')
+    
+    # Format current datetime for hover
+    current_str = current_datetime.strftime('%Y-%m-%d %H:%M:%S UTC')
+    
+    # Build comprehensive hover text
+    hover_text = (
+        f"<b>{obj_name} Keplerian Position</b><br>"
+        f"<i>(Calculated from osculating elements)</i><br>"
+        f"<br>"
+        f"Current time: {current_str}<br>"
+        f"Distance from center: {position['distance']:.6f} AU<br>"
+        f"<br>"
+        f"<b>Calculation Details:</b><br>"
+        f"{position['calculation_details']}<br>"
+        f"<br>"
+        f"<i>Note: This is the analytically calculated<br>"
+        f"position assuming pure two-body motion.<br>"
+        f"Compare with actual position to see<br>"
+        f"perturbation effects.</i>"
+    )
+    
+    # Create label
+    label = f"Keplerian Position (Epoch: {epoch_str})"
+    
+    # Add marker to plot
+    fig.add_trace(
+        go.Scatter3d(
+            x=[position['x']],
+            y=[position['y']],
+            z=[position['z']],
+            mode='markers',
+            marker=dict(
+                size=8,
+                color='white',  # White to distinguish from object color
+                symbol='circle',  # Standard circle
+                line=dict(color='gray', width=1)  # Subtle outline for visibility
+            ),
+            name=f"{obj_name} {label}",
+            text=[hover_text],
+            customdata=[f"{obj_name} {label}"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True,
+            visible='legendonly'  # Hidden by default, user can toggle on
+        )
+    )
+    
+    print(f"[KEPLERIAN POS] Added marker for {obj_name} at distance {position['distance']:.6f} AU (TA={position['true_anomaly_deg']:.1f} deg)", flush=True)
+    return True

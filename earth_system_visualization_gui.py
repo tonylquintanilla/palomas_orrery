@@ -9,6 +9,7 @@ import tkinter as tk
 from tkinter import messagebox
 import webbrowser
 import json
+import subprocess
 import os
 import threading
 import queue
@@ -26,6 +27,7 @@ from paleoclimate_visualization import create_paleoclimate_visualization
 from paleoclimate_dual_scale import create_paleoclimate_dual_scale_visualization
 from paleoclimate_visualization_full import create_paleoclimate_visualization as create_phanerozoic_viz
 from paleoclimate_human_origins_full import create_paleoclimate_visualization as create_human_origins_viz
+from paleoclimate_wet_bulb_full import create_paleoclimate_visualization as create_wet_bulb_viz
 from energy_imbalance import create_energy_imbalance_visualization
 from save_utils import save_plot
 
@@ -1645,6 +1647,39 @@ def run_update_in_thread(update_button, status_label, window):
         update_button.config(state='normal', text=' Update Climate Data')
         status_label.config(text="")
 
+def open_wet_bulb_viz():
+    """Open Wet Bulb Temperature paleoclimate visualization"""
+    try:
+        fig = create_wet_bulb_viz()
+        if fig:
+            fig.show()
+            save_plot(fig, "paleoclimate_wet_bulb")
+        else:
+            messagebox.showerror(
+                "Data Not Available",
+                "Wet bulb temperature data not found.\n\n"
+                "Required files:\n"
+                "* data/8c__Phanerozoic_Pole_to_Equator_Temperatures.csv\n"
+                "* data/lr04_benthic_stack.json"
+            )
+    except Exception as e:
+        messagebox.showerror("Visualization Error", f"Could not create Wet Bulb visualization:\n{str(e)}")
+
+def open_google_earth_controller():
+    """Launch the Google Earth KML layer controller"""
+    try:
+        # Get the directory where this script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        controller_path = os.path.join(script_dir, 'earth_system_controller.py')
+        
+        if os.path.exists(controller_path):
+            subprocess.Popen(['python', controller_path], cwd=script_dir)
+        else:
+            messagebox.showerror("Not Found", 
+                f"Could not find earth_system_controller.py\nExpected at: {controller_path}")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to launch controller: {e}")
+
 def open_earth_system_gui(parent=None):
     """
     Open Earth System Visualization hub window
@@ -1942,7 +1977,7 @@ def open_earth_system_gui(parent=None):
                         command=open_ph_viz)
     ph_button.pack(fill='x', pady=2) 
 
-     # Earth System section (NEW!)
+    # Earth System section (NEW!)
     earth_system_label = tk.Label(right_column,
                                   text="Earth System:",
                                   font=('Arial', 10, 'bold'),
@@ -1962,9 +1997,40 @@ def open_earth_system_gui(parent=None):
                          command=open_planetary_boundaries)
     pb_button.pack(fill='x', pady=2)   
 
+    # Google Earth Layers section
+    ge_label = tk.Label(right_column,
+                        text="Google Earth Heat Wave Layers (Google Earth Pro preinstalled required):",
+                        font=('Arial', 10, 'bold'),
+                        justify='left')
+    ge_label.pack(anchor='w', pady=(10, 5))
+    
+    ge_button = tk.Button(right_column,
+                         text='KML Layer Launcher in Google Earth Pro',
+                         font=('Arial', 10),
+                         bg='gray90',
+                         fg='black',
+                         activebackground='#CCCCCC',
+                         cursor='hand2',
+                         padx=15,
+                         pady=8,
+                         command=open_google_earth_controller)
+    ge_button.pack(fill='x', pady=2)
+
+    # Wet Bulb Temperature button
+    wetbulb_button = tk.Button(right_column,
+                         text='Wet Bulb Temperature (Human Survivability)',
+                         font=('Arial', 10),
+                         bg='gray90',
+                         fg='black',
+                         activebackground='#CCCCCC',
+                         cursor='hand2',
+                         padx=15,
+                         pady=8,
+                         command=open_wet_bulb_viz)
+    wetbulb_button.pack(fill='x', pady=2)
 
     footer_label = tk.Label(content_frame,
-                        text="10 of 10 visualizations active",  
+                        text="12 of 12 visualizations active",  
                         font=('Arial', 9),
                         fg='#666',
                         justify='center')   

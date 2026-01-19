@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="356">
+        <name>us_1980 Heatmap (1980-07-15)</name>
+        <GroundOverlay id="357">
+            <name>Thermal Overlay</name>
+            <Icon id="358">
+                <href>1980-07-15_heatmap_us_1980.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>40.0</north>
+                <south>32.0</south>
+                <east>-86.0</east>
+                <west>-98.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

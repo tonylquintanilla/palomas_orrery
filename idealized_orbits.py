@@ -4791,8 +4791,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 filter_by_date_range=False
                             )
 
-            # ========== NEW: ADD LEGEND NOTES FOR OUT-OF-RANGE DATES ==========
-            # Only check these if show_apsidal_markers is True and we have TP
             if show_apsidal_markers and 'TP' in params:
                 # Check if we should add a note about out-of-range dates
                 if (next_perihelion and not peri_in_range) or (next_aphelion and not apo_in_range):
@@ -4804,6 +4802,39 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         next_aphelion if not apo_in_range else None,
                         color_map
                     )
+
+            # ========== NEW: ADD KEPLERIAN POSITION MARKER ==========
+            # This shows the analytically calculated current position
+            # based on osculating elements - visible in legend, hidden by default
+            if 'MA' in params and 'epoch' in params:
+                try:
+                    from apsidal_markers import add_keplerian_position_marker
+                    add_keplerian_position_marker(
+                        fig,
+                        obj_name,
+                        params,
+                        date,  # Current datetime
+                        rotate_points,
+                        center_body=center_id
+                    )
+                except Exception as kep_err:
+                    print(f"[KEPLERIAN POS] Error adding marker for {obj_name}: {kep_err}", flush=True)
+                    
+            # Mark this object as successfully plotted
+
+            # ========== NEW: ADD LEGEND NOTES FOR OUT-OF-RANGE DATES ==========
+            # Only check these if show_apsidal_markers is True and we have TP
+        #    if show_apsidal_markers and 'TP' in params:
+        #        # Check if we should add a note about out-of-range dates
+        #        if (next_perihelion and not peri_in_range) or (next_aphelion and not apo_in_range):
+        #            from apsidal_markers import add_apsidal_range_note
+        #            add_apsidal_range_note(
+        #                fig,
+        #                obj_name,
+        #                next_perihelion if not peri_in_range else None,
+        #                next_aphelion if not apo_in_range else None,
+        #                color_map
+        #            )
                     
             # Mark this object as successfully plotted
             plotted.append(obj_name)

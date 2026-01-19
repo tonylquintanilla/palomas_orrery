@@ -896,6 +896,38 @@ def create_paleoclimate_visualization():
             hoverlabel=dict(bgcolor='rgba(220,20,60,0.9)', font_size=11)
         )
 
+        # =====================================================================
+        # RECENT HEAT EVENTS - Reference to Earth System Controller
+        # Add this after the existing annotations (around line 1765)
+        # =====================================================================
+
+        # Recent Heat Events marker (clusters all modern events)
+        fig.add_annotation(
+            x=np.log10(0.000005),  # visible near right edge
+            y=6.0,  # Slightly above current anomaly line
+            text='VIEW HEAT WAVES',
+            showarrow=False,
+            font=dict(size=9, color='#FF4500'),  # Orange-red
+            bgcolor='rgba(255,255,255,0.9)',
+            bordercolor='#FF4500',
+            borderwidth=2,
+            borderpad=4,
+            hovertext='<b>View Recent Extreme Heat Events in Google Earth</b><br>'
+                    '<br>'
+                    '1995: Chicago Heat Wave (739 deaths)<br>'
+                    '2003: Europe Heat Wave (70,000+ deaths)<br>'
+                    '2021: Pacific NW Heat Dome (1,200+ deaths)<br>'
+                    '2022: China Yangtze Basin (70-day event)<br>'
+                    '2023: Amazon "Boiling River"<br>'
+                    '2024: Mali/Sahel, Delhi Heat Belt, Persian Gulf<br>'
+                    '2025: Pakistan Heat Wave<br>'
+                    '<br>'
+                    '<b>KML layers available in data/ folder</b><br>'
+                    'Use KML Layer Controller in Earth System Visualization to open<br>'
+                    'Note: Google Earth Pro preinstalled required to open KML files',
+            hoverlabel=dict(bgcolor='rgba(255,69,0,0.9)', font_size=11, font_color='white')
+        )
+
         # Add annotation for 10 years ago (2015) - positioned at far right
         fig.add_annotation(
             x=np.log10(0.00001),  # Use log10 for log-scale x-axis
@@ -1665,12 +1697,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(90),
         y=20,
-        text='?',
+        text='CTM',
         showarrow=False,
-        font=dict(size=16, color='#7FC64E'),  # Cretaceous green
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#7FC64E',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),
+    #    font=dict(size=16, color='#7FC64E'),  # Cretaceous green
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#7FC64E',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Cretaceous Thermal Maximum (~90 Ma)</b><br>'
                   'Peak Mesozoic greenhouse conditions<br>'
@@ -1684,12 +1718,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(252),
         y=25.5,
-        text='?',
+        text='P-T Ext.',
         showarrow=False,
-        font=dict(size=16, color='#F04028'),  # Permian red
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#F04028',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#F04028'),  # Permian red
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#F04028',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Permian-Triassic Extinction (~252 Ma)</b><br>'
                   'The "Great Dying" - worst mass extinction<br>'
@@ -1705,12 +1741,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(300),
         y=-3.5,
-        text='?',
+        text='Icenhouse',
         showarrow=False,
-        font=dict(size=16, color='#67A599'),  # Carboniferous teal
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#67A599',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#67A599'),  # Carboniferous teal
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#67A599',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Carboniferous Icehouse (~300 Ma)</b><br>'
                   'The "Coal Age" - vast tropical forests<br>'
@@ -1726,12 +1764,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(445),
         y=-8,
-        text='?',
+        text='Glaciation',
         showarrow=False,
-        font=dict(size=16, color='#009270'),  # Ordovician green
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#009270',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#009270'),  # Ordovician green
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#009270',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Late Ordovician Glaciation (~445 Ma)</b><br>'
                   'First major Phanerozoic icehouse<br>'
@@ -1747,12 +1787,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(201),
         y=18,
-        text='?',
+        text='E-T Ext.',
         showarrow=False,
-        font=dict(size=16, color='#812B92'),  # Triassic purple
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#812B92',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#812B92'),  # Triassic purple
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#812B92',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>End-Triassic Extinction (~201 Ma)</b><br>'
                   'One of the "Big Five" mass extinctions<br>'
@@ -1800,7 +1842,7 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         xref="paper",
         yref="y",
-        x=0.80,
+        x=0.77,
         y=3.40,
         text="Current Policies (UNEP): 2.6 degC - 3.3 degC",
         showarrow=False,
@@ -1932,7 +1974,7 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         text=info_text,
         xref="paper", yref="paper",
-        x=0.54, y=0.95,
+        x=0.50, y=0.95,
         xanchor="left", yanchor="top",
         bgcolor="rgba(255,255,255,0.9)",
         bordercolor="#2E86AB",

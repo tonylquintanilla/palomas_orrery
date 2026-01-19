@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="152">
+        <name>japan_2018 Heatmap (2018-07-23)</name>
+        <GroundOverlay id="153">
+            <name>Thermal Overlay</name>
+            <Icon id="154">
+                <href>2018-07-23_heatmap_japan_2018.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>40.0</north>
+                <south>34.0</south>
+                <east>144.0</east>
+                <west>130.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

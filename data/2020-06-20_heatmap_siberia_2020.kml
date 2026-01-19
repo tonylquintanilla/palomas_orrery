@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="149">
+        <name>siberia_2020 Heatmap (2020-06-20)</name>
+        <GroundOverlay id="150">
+            <name>Thermal Overlay</name>
+            <Icon id="151">
+                <href>2020-06-20_heatmap_siberia_2020.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>72.0</north>
+                <south>70.0</south>
+                <east>141.0</east>
+                <west>125.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

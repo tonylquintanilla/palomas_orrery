@@ -13,6 +13,9 @@ matplotlib>=3.7.0     # Traditional plotting library for orbit visualizations
 kaleido==0.2.1        # Required for saving static plotly images (exact version needed)
 pillow>=10.0.0        # Image processing, required by kaleido
 
+# Geospatial and Earth System
+simplekml>=1.3.6      # KML generation for Google Earth visualizations
+
 # GUI and interface
 # Note: tkinter is included with Python standard library, no need to install separately
 customtkinter>=5.2.0  # Modern themed widgets for tkinter

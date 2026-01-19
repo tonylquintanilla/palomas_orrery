@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="458">
+        <name>chicago_1995 Heatmap (1995-07-13)</name>
+        <GroundOverlay id="459">
+            <name>Thermal Overlay</name>
+            <Icon id="460">
+                <href>1995-07-13_heatmap_chicago_1995.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>50.0</north>
+                <south>32.0</south>
+                <east>-82.0</east>
+                <west>-100.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

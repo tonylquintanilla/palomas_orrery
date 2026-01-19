@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="152">
+        <name>athens_1987 Heatmap (1987-07-27)</name>
+        <GroundOverlay id="153">
+            <name>Thermal Overlay</name>
+            <Icon id="154">
+                <href>1987-07-27_heatmap_athens_1987.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>41.0</north>
+                <south>37.0</south>
+                <east>25.0</east>
+                <west>20.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

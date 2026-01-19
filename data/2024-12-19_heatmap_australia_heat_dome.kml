@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="2387">
+        <name>australia_heat_dome Heatmap (2024-12-19)</name>
+        <GroundOverlay id="2388">
+            <name>Thermal Overlay</name>
+            <Icon id="2389">
+                <href>2024-12-19_heatmap_australia_heat_dome.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>5.0</north>
+                <south>-35.0</south>
+                <east>176.0</east>
+                <west>-180.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

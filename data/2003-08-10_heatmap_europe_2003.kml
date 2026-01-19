@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="365">
+        <name>europe_2003 Heatmap (2003-08-10)</name>
+        <GroundOverlay id="366">
+            <name>Thermal Overlay</name>
+            <Icon id="367">
+                <href>2003-08-10_heatmap_europe_2003.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>53.0</north>
+                <south>41.0</south>
+                <east>13.0</east>
+                <west>-5.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

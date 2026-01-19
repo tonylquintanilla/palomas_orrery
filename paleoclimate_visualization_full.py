@@ -1268,12 +1268,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(90),
         y=20,
-        text='?',
+        text='CTM',
         showarrow=False,
-        font=dict(size=16, color='#7FC64E'),  # Cretaceous green
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#7FC64E',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),
+    #    font=dict(size=16, color='#7FC64E'),  # Cretaceous green
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#7FC64E',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Cretaceous Thermal Maximum (~90 Ma)</b><br>'
                   'Peak Mesozoic greenhouse conditions<br>'
@@ -1287,12 +1289,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(252),
         y=25.5,
-        text='?',
+        text='P-T Ext.',
         showarrow=False,
-        font=dict(size=16, color='#F04028'),  # Permian red
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#F04028',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#F04028'),  # Permian red
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#F04028',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Permian-Triassic Extinction (~252 Ma)</b><br>'
                   'The "Great Dying" - worst mass extinction<br>'
@@ -1308,12 +1312,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(300),
         y=-3.5,
-        text='?',
+        text='Icenhouse',
         showarrow=False,
-        font=dict(size=16, color='#67A599'),  # Carboniferous teal
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#67A599',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#67A599'),  # Carboniferous teal
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#67A599',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Carboniferous Icehouse (~300 Ma)</b><br>'
                   'The "Coal Age" - vast tropical forests<br>'
@@ -1329,12 +1335,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(445),
         y=-8,
-        text='?',
+        text='Glaciation',
         showarrow=False,
-        font=dict(size=16, color='#009270'),  # Ordovician green
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#009270',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#009270'),  # Ordovician green
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#009270',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>Late Ordovician Glaciation (~445 Ma)</b><br>'
                   'First major Phanerozoic icehouse<br>'
@@ -1350,12 +1358,14 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         x=np.log10(201),
         y=18,
-        text='?',
+        text='E-T Ext.',
         showarrow=False,
-        font=dict(size=16, color='#812B92'),  # Triassic purple
-        bgcolor='rgba(255,255,255,0.9)',
-        bordercolor='#812B92',
-        borderwidth=2,
+        font=dict(size=9, color='#333'),        
+    #    font=dict(size=16, color='#812B92'),  # Triassic purple
+        bgcolor='rgba(255,255,255,0.8)', bordercolor='#333', borderwidth=1,    
+    #    bgcolor='rgba(255,255,255,0.9)',
+    #    bordercolor='#812B92',
+    #    borderwidth=2,
         borderpad=4,
         hovertext='<b>End-Triassic Extinction (~201 Ma)</b><br>'
                   'One of the "Big Five" mass extinctions<br>'
@@ -1535,7 +1545,7 @@ def create_paleoclimate_visualization():
     fig.add_annotation(
         text=info_text,
         xref="paper", yref="paper",
-        x=0.25, y=0.95,
+        x=0.50, y=0.95,
         xanchor="left", yanchor="top",
         bgcolor="rgba(255,255,255,0.9)",
         bordercolor="#2E86AB",

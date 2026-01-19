@@ -2,7 +2,7 @@
 
 **Complete Guide: Educational Foundation + Technical Implementation**
 
-**Last Updated:** January 8, 2026 (v2.2 - Orcus-Vanth Orbit Plane Fitting)  
+**Last Updated:** January 14, 2026 (v2.3 - Keplerian Position Marker)  
 **Project:** Paloma's Orrery - Astronomical Visualization Suite  
 **Created by:** Tony (with Claude)
 
@@ -339,7 +339,90 @@ For e = 0:
 
 ---
 
-## 14. TNO Moon Analytical Fallback: Why It's Needed (v2.0)
+## 14. Keplerian Position Marker (v2.3)
+
+### The Problem
+
+When the network fails (JPL Horizons unreachable), the orrery cannot fetch:
+- Current position (single point for "today")
+- Actual orbit trajectory (vector data)
+
+But we still have **cached osculating elements** with everything needed to calculate position analytically.
+
+### The Solution
+
+Calculate current position from cached osculating elements using Kepler's equation:
+
+```
+Cached: a, e, i, omega, Omega, MA (at epoch), epoch date
+Current MA = epoch MA + (2*pi / period) * days_since_epoch
+Solve: MA -> Eccentric Anomaly -> True Anomaly -> 3D Position
+```
+
+### The Math Pipeline
+
+```python
+# 1. Propagate mean anomaly
+n = 2 * pi / period_days           # Mean motion
+MA_now = MA_epoch + n * delta_t    # Current mean anomaly
+
+# 2. Solve Kepler's equation (Newton-Raphson)
+E = solve_kepler_equation(MA_now, e)
+
+# 3. Convert to true anomaly
+theta = 2 * arctan2(sqrt(1+e)*sin(E/2), sqrt(1-e)*cos(E/2))
+
+# 4. Calculate radius
+r = a * (1 - e^2) / (1 + e * cos(theta))
+
+# 5. Apply orbital rotations (omega, i, Omega)
+position = rotate_to_3d(r, theta, omega, i, Omega)
+```
+
+### Marker Appearance
+
+| Property | Value | Reason |
+|----------|-------|--------|
+| Color | White | Distinguishes from object's actual color |
+| Symbol | Circle | Consistent with other position markers |
+| Default | Hidden (`legendonly`) | Doesn't clutter plot |
+| Label | `"{Object} Keplerian Position (Epoch: {date})"` | Matches apsidal pattern |
+
+### Use Cases
+
+1. **Network failure** - Toggle on to see estimated position when JPL is unreachable
+2. **Educational** - Compare Keplerian vs actual position to visualize perturbation effects
+3. **Offline demos** - Show "where things are now" without internet
+
+### Hover Text Details
+
+The marker provides comprehensive calculation details:
+- Current time
+- Distance from center
+- Days since epoch
+- Mean anomaly (propagated)
+- True anomaly (calculated)
+- Note explaining this is two-body approximation
+
+### For Paloma
+
+*"When we can't reach NASA's computers to ask 'where is Earth right now?', we can figure it out ourselves using math! We know Earth's orbit shape from a few days ago, and we know how fast it moves, so we can calculate where it should be today. It's like knowing your friend walks one block per minute - even if you can't see them, you can guess where they are!"*
+
+### Implementation
+
+**New functions in `apsidal_markers.py`:**
+- `solve_kepler_equation()` - Newton-Raphson solver
+- `eccentric_to_true_anomaly()` - Anomaly conversion
+- `calculate_keplerian_position()` - Full position calculation
+- `add_keplerian_position_marker()` - Adds trace to plot
+
+**Integration in `idealized_orbits.py`:**
+- Called after apsidal markers, when `MA` and `epoch` exist in params
+- Uses same rotation sequence as `calculate_exact_apsides()`
+
+---
+
+## 15. TNO Moon Analytical Fallback: Why It's Needed (v2.0)
 
 ### The Core Problem
 
@@ -367,7 +450,7 @@ if elements['a'] > 1.0:  # Semi-major axis > 1 AU
 
 ---
 
-## 15. Vector Subtraction Experiment (v2.0)
+## 16. Vector Subtraction Experiment (v2.0)
 
 ### The Idea
 
@@ -391,7 +474,7 @@ JPL returns the **combined barycenter** position, not separate satellite + prima
 
 ---
 
-## 16. Trajectory Two-Layer System (v1.8)
+## 17. Trajectory Two-Layer System (v1.8)
 
 ### The Problem
 
@@ -414,7 +497,7 @@ Both static and animated plots should look identical; only animation differs.
 
 ---
 
-## 17. Static Shells in Animations (v1.9)
+## 18. Static Shells in Animations (v1.9)
 
 ### The Problem
 
@@ -443,7 +526,7 @@ frame = go.Frame(
 
 ---
 
-## 18. Orcus-Vanth Orbit Plane Fitting (v2.2)
+## 19. Orcus-Vanth Orbit Plane Fitting (v2.2)
 
 ### The Multi-Source Data Challenge
 
@@ -512,7 +595,7 @@ BINARY_PARAMS = {
 
 ---
 
-## 19. Lessons Learned: Multi-Source Data Integration
+## 20. Lessons Learned: Multi-Source Data Integration
 
 ### The Problem Pattern
 
@@ -538,7 +621,7 @@ Multiple data sources may use:
 
 ---
 
-## 20. Scientific Validation
+## 21. Scientific Validation
 
 ### Accuracy by Object Type
 
@@ -559,7 +642,7 @@ Multiple data sources may use:
 
 ---
 
-## 21. Living Science Philosophy
+## 22. Living Science Philosophy
 
 Paloma's Orrery deliberately shows the **edge of scientific knowledge**:
 
@@ -627,6 +710,7 @@ Paloma's Orrery combines educational clarity with technical accuracy to visualiz
 | 2.0 | Jan 3, 2026 | TNO moon analytical fallback, vector subtraction |
 | 2.1 | Jan 8, 2026 | Orcus-Vanth barycenter mode (initial) |
 | 2.2 | Jan 8, 2026 | Orcus-Vanth orbit plane fitting |
+| 2.3 | Jan 14, 2026 | Keplerian Position Marker (offline resilience) |
 
 ---
 
@@ -641,12 +725,13 @@ Paloma's Orrery combines educational clarity with technical accuracy to visualiz
 *"The data exists. The API doesn't serve it."* - Jan 3, 2026
 *"We are moving beyond Horizons!"* - Tony, Jan 3, 2026
 *"We are living science here and sharing it."* - Tony, Jan 8, 2026
+*"Network down? Kepler still works."* - Jan 14, 2026
 
 ---
 
-**Document Version:** 2.2 (Orcus-Vanth Orbit Plane Fitting)  
-**Date:** January 8, 2026  
+**Document Version:** 2.3 (Keplerian Position Marker)  
+**Date:** January 14, 2026  
 **Maintained By:** Tony  
 **Contributors:** Claude (AI assistant)
 
-*"The orbit sizes are from ALMA. The positions are from JPL. The fit makes them work together."*
+*"Network down? Kepler still works."*

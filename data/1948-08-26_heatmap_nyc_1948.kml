@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="470">
+        <name>nyc_1948 Heatmap (1948-08-26)</name>
+        <GroundOverlay id="471">
+            <name>Thermal Overlay</name>
+            <Icon id="472">
+                <href>1948-08-26_heatmap_nyc_1948.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>45.0</north>
+                <south>38.0</south>
+                <east>-71.0</east>
+                <west>-80.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

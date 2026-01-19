@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="635">
+        <name>amazon_drought_2025 Heatmap (2025-09-15)</name>
+        <GroundOverlay id="636">
+            <name>Thermal Overlay</name>
+            <Icon id="637">
+                <href>2025-09-15_heatmap_amazon_drought_2025.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>5.0</north>
+                <south>-13.0</south>
+                <east>-51.0</east>
+                <west>-75.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

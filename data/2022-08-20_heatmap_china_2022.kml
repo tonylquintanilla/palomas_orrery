@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="242">
+        <name>china_2022 Heatmap (2022-08-20)</name>
+        <GroundOverlay id="243">
+            <name>Thermal Overlay</name>
+            <Icon id="244">
+                <href>2022-08-20_heatmap_china_2022.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>34.0</north>
+                <south>28.0</south>
+                <east>122.0</east>
+                <west>104.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

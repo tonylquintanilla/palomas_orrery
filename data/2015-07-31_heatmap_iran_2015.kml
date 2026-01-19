@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="386">
+        <name>iran_2015 Heatmap (2015-07-31)</name>
+        <GroundOverlay id="387">
+            <name>Thermal Overlay</name>
+            <Icon id="388">
+                <href>2015-07-31_heatmap_iran_2015.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>34.0</north>
+                <south>23.0</south>
+                <east>57.0</east>
+                <west>44.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

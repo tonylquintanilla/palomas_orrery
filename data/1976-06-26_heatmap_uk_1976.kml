@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="242">
+        <name>uk_1976 Heatmap (1976-06-26)</name>
+        <GroundOverlay id="243">
+            <name>Thermal Overlay</name>
+            <Icon id="244">
+                <href>1976-06-26_heatmap_uk_1976.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>53.0</north>
+                <south>49.0</south>
+                <east>4.0</east>
+                <west>-3.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

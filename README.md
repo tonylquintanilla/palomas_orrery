@@ -1,4 +1,4 @@
-# Last updated: January 11, 2026
+# Last updated: January 18, 2026
 
 # Paloma's Orrery
 
@@ -43,6 +43,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Animation system with static shell optimization (45% memory reduction)
 - HR diagrams and stellar analysis
 - Climate data preservation hub
+- Forensic Heat Wave Analysis: 3D KML generator for wet-bulb temperature extremes
 - Unified save system with CDN/offline HTML options
 - Resizable GUI columns with persistent window layout
 
@@ -77,6 +78,7 @@ Download from the [GitHub Releases page](https://github.com/tonylquintanilla/pal
 Download `palomas_orrery_2_1_zip.zip` (~222 MB) from the [Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases). This includes all Python code AND data files.
 
 **Quick start:**
+
 ```bash
 # 1. Extract the ZIP file
 # 2. Install Python 3.11-3.13 with PATH enabled
@@ -99,6 +101,7 @@ python palomas_orrery.py
 Download the latest release ZIP from the [Releases page](https://github.com/tonylquintanilla/palomas_orrery/releases) and extract it.
 
 **Ubuntu/Debian (tested on Linux Mint 22):**
+
 ```bash
 # 1. Install system dependencies
 sudo apt update
@@ -115,12 +118,14 @@ python3 palomas_orrery.py
 ```
 
 **Fedora/RHEL:**
+
 ```bash
 sudo dnf install python3 python3-pip python3-tkinter python3-pillow-tk
 pip install -r requirements.txt
 ```
 
 **Arch Linux:**
+
 ```bash
 sudo pacman -S python python-pip tk python-pillow
 pip install -r requirements.txt
@@ -135,6 +140,7 @@ pip install -r requirements.txt
 **Known Linux Display Issues:**
 
 The GUI may have minor cosmetic issues on some Linux window managers:
+
 - Middle column buttons may appear slightly clipped
 - Text panels may overflow their borders slightly
 
@@ -172,6 +178,7 @@ git pull
 ```
 
 **What gets updated:**
+
 - Python files (`*.py`) - updated to latest
 - README files - updated to latest  
 - Data files (`data/`, `star_data/`) - preserved (not in repo)
@@ -182,11 +189,12 @@ git pull
 
 - **Windows 10/11, macOS 10.15+, or Linux** (all tested and supported)
 - **Python 3.11 to 3.13** (tested and verified compatible)
-  - As of October 2025, Python 3.13 is recommended
+  - As of January 2026, Python 3.13 is recommended
   - Python 3.14 was just released - wait 1-2 months before using it
 - **Git** (optional but recommended)
 - **520MB free disk space** (includes all cache files and code)
 - **Internet connection** (for initial setup and fetching new objects)
+- - **Google Earth Pro** (optional, free) - Required only for viewing Forensic Heat Wave KML visualizations. Download from [google.com/earth/versions](https://www.google.com/earth/versions/#earth-pro)
 
 ### Step-by-Step Installation Guide for Beginners
 
@@ -270,16 +278,19 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
    - Press `Windows Key`, type `cmd`, press Enter
 
 3. **Navigate to where you want to save the project:**
+
    ```bash
    cd Documents
    ```
 
 4. **Clone the repository:**
+
    ```bash
    git clone https://github.com/tonylquintanilla/palomas_orrery.git
    ```
 
 5. **Navigate into the project folder:**
+
    ```bash
    cd palomas_orrery
    ```
@@ -291,6 +302,7 @@ You have two options: use Git (easier for updates) or download a ZIP file (simpl
 3. Click "Download ZIP"
 4. Extract the ZIP file to your Documents folder
 5. Open Command Prompt and navigate to the folder:
+
    ```bash
    cd Documents\palomas_orrery-main
    ```
@@ -312,25 +324,30 @@ The git repository contains code only. Data files are available from the release
 The program needs several Python libraries to run.
 
 1. **Make sure you're in the project folder:**
+
    ```bash
    cd Documents\palomas_orrery
    ```
 
 2. **Install all required libraries:**
+
    ```bash
    pip install -r requirements.txt
    ```
+
    - This will download and install about 15 libraries
    - It may take 2-5 minutes depending on your internet speed
    - You'll see lots of text scrolling by - that's normal!
 
 3. **Verify installation:**
+
    ```bash
    pip list
    ```
+
    - You should see libraries like: astropy, astroquery, plotly, numpy, pandas
 
-#### Step 6: Run Paloma's Orrery!
+#### Step 6: Run Paloma's Orrery
 
 You're ready to launch!
 
@@ -339,12 +356,14 @@ python palomas_orrery.py
 ```
 
 **What to expect:**
+
 - First launch may take 30-60 seconds as caches are loaded
 - The main window will appear with checkboxes for planets and other objects
 - Select objects you want to visualize
 - Click "Plot" to see a 3D visualization in your browser
 
 **Troubleshooting first run:**
+
 - If you see "ModuleNotFoundError": Run `pip install -r requirements.txt` again
 - If the window doesn't appear: Check for error messages in Command Prompt
 - If plots don't open: Make sure you have a default web browser set
@@ -354,6 +373,7 @@ python palomas_orrery.py
 **Installing Python on macOS:**
 
 1. **Option A - Using Homebrew (Recommended):**
+
    ```bash
    # Install Homebrew if you don't have it
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -398,6 +418,7 @@ python3 palomas_orrery.py
 **Saving Visualizations:**
 
 When you create any visualization, a save dialog appears with three options:
+
 - **Interactive HTML - Standard (~10 KB):** Small file, requires internet to view
 - **Interactive HTML - Offline (~5 MB):** Larger file, works without internet
 - **Static PNG image:** Non-interactive image file
@@ -528,6 +549,7 @@ The save dialog remembers your last save location within each session.
 - **Climate Data Hub:** CO2, temperature, sea level, ice extent
 - **Paleoclimate Records:** 540 million years of Earth history
 - **Data Preservation:** Systematic archiving of threatened datasets
+- **Forensic Heat Analysis:** Visualizes "invisible" wet-bulb temperature disasters (1948–2025).
 
 ### Galactic Center
 
@@ -543,7 +565,7 @@ The save dialog remembers your last save location within each session.
 - **Accuracy First:** All calculations use established astronomical methods
 - **Visual Clarity:** Complex data presented intuitively
 - **Offline Capability:** Works without internet after initial setup
-- **Cross-Platform:** Windows and macOS supported
+- **Cross-Platform:** Windows, macOS, and Linux supported
 
 ### Technical Stack
 
@@ -571,6 +593,14 @@ Access the Earth System Hub from the main interface to explore climate data:
 - Global temperature anomalies (NASA GISS)
 - Arctic sea ice extent (NSIDC)
 - Global mean sea level (NOAA)
+
+**Forensic Heat Wave Analysis:**
+- **Tool:** `earth_system_generator.py`
+- **Output:** 3D KML layers for Google Earth Pro (Spikes, Heatmap, Impact)
+- **Viewer:** [Google Earth Pro](https://www.google.com/earth/versions/#earth-pro) (free desktop application, required to view KML layers)
+- **Scope:** 27 historical and modern events (NYC 1948 to US Grid 2025)
+- **Metric:** Wet-Bulb Temperature ($T_w$) vs. Biological Limits (31 degC)
+- **Documentation:** See [wet_bulb_temperature_readme.md](wet_bulb_temperature_readme.md)
 
 **Paleoclimate Records:**
 
@@ -632,7 +662,7 @@ The following sections highlight the primary modules organized by function. Use 
 
 | Module | Purpose |
 |--------|---------|
-| `palomas_orrery.py` | Main application (~450KB, 9,000+ lines) - GUI, plot_objects(), animate_objects(), trajectory layers, animation shells |
+| `palomas_orrery.py` | Main application (~471KB, 9,464 lines) - GUI, plot_objects(), animate_objects(), trajectory layers, animation shells |
 | `data_acquisition.py` | VizieR catalog queries (Gaia, Hipparcos) |
 | `data_processing.py` | Coordinate transformations and calculations |
 | `simbad_manager.py` | SIMBAD API integration with rate limiting |
@@ -645,7 +675,7 @@ The following sections highlight the primary modules organized by function. Use 
 | `visualization_2d.py` | Hertzsprung-Russell diagram generation |
 | `visualization_3d.py` | Interactive 3D stellar neighborhood plots |
 | `visualization_core.py` | Common plotting utilities and styling |
-| `*_visualization_shells.py` | Planetary interior cross-sections (12 modules) |
+| `*_visualization_shells.py` | Planetary interior cross-sections (15 modules) |
 | `comet_visualization_shells.py` | Scientifically accurate comet rendering with dual-tail structures |
 | `orbital_param_viz.py` | Orbital element visualization |
 | `earth_system_visualization_gui.py` | Earth system data hub with climate visualizations |
@@ -744,6 +774,11 @@ palomas_orrery/
 |       |- lr04_benthic_stack.json
 |       |- temp12k_allmethods_percentiles.csv
 |       |- 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
+|   |- Heat Wave Analysis
+|       |- weather_cache_*.json       # Cached ERA5 data
+|       |- *_spikes_*.kml             # Generated risk layers
+|       |- *_impact_*.kml             # Generated population layers
+|       |- *_heatmap_*.kml            # Generated thermal layers
 |- star_data/              # Protected stellar cache
 |   |- star_properties_distance.pkl (2.6 MB)
 |   |- star_properties_magnitude.pkl (31.8 MB)
@@ -836,7 +871,7 @@ Suggestions are welcome: <tonyquintanilla@gmail.com>
 
 MIT License
 
-Copyright (c) 2025 Tony Quintanilla
+Copyright (c) 2025-2026 Tony Quintanilla
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

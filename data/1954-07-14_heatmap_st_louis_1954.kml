@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="98">
+        <name>st_louis_1954 Heatmap (1954-07-14)</name>
+        <GroundOverlay id="99">
+            <name>Thermal Overlay</name>
+            <Icon id="100">
+                <href>1954-07-14_heatmap_st_louis_1954.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>42.0</north>
+                <south>35.0</south>
+                <east>-87.0</east>
+                <west>-94.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

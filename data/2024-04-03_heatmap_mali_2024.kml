@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1127">
+        <name>mali_2024 Heatmap (2024-04-03)</name>
+        <GroundOverlay id="1128">
+            <name>Thermal Overlay</name>
+            <Icon id="1129">
+                <href>2024-04-03_heatmap_mali_2024.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>18.0</north>
+                <south>5.0</south>
+                <east>9.0</east>
+                <west>-17.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

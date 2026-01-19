@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="212">
+        <name>st_louis_nyc_1966 Heatmap (1966-07-12)</name>
+        <GroundOverlay id="213">
+            <name>Thermal Overlay</name>
+            <Icon id="214">
+                <href>1966-07-12_heatmap_st_louis_nyc_1966.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>42.0</north>
+                <south>38.0</south>
+                <east>-75.0</east>
+                <west>-91.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>
