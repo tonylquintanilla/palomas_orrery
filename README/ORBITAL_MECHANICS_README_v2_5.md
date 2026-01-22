@@ -2,7 +2,7 @@
 
 **Complete Guide: Educational Foundation + Technical Implementation**
 
-**Last Updated:** January 14, 2026 (v2.3 - Keplerian Position Marker)  
+**Last Updated:** January 21, 2026 (v2.5 - Apsidal Surface Distance)  
 **Project:** Paloma's Orrery - Astronomical Visualization Suite  
 **Created by:** Tony (with Claude)
 
@@ -199,10 +199,27 @@ Orcus and Vanth form a remarkable binary - often called the "Anti-Pluto" because
 | Source | Data Type | Usage |
 |--------|-----------|-------|
 | JPL Horizons | Ephemeris, osculating elements | Real-time positions |
+| Project Pluto (Bill Gray) | Pseudo-MPEC orbital elements | Pre-Horizons discoveries |
+| Minor Planet Center (MPC) | Discovery astrometry, NEOCP | New object confirmation |
 | Hipparcos/Gaia | Stellar positions, parallax | Star visualization |
 | SIMBAD | Stellar properties | Star classification |
 | arXiv preprints | Latest orbital solutions | Cutting-edge objects |
 | Published papers | Orbital elements | TNO moons, binaries |
+
+### Pre-Horizons Data Pipeline
+
+When JPL Horizons hasn't yet generated an entry (often 48-72 hours after discovery), authoritative sources are:
+
+1. **Project Pluto Pseudo-MPEC** - Bill Gray's service computes orbit solutions immediately from raw observatory astrometry, often days before official MPECs
+2. **Minor Planet Center NEOCP** - Lists raw observations; experts refine orbits on mailing lists like Comets-ML
+
+**Example: 6AC4721 (C/2026 A1)**
+- Discovered: January 13, 2026 (station W94, Chile)
+- Project Pluto solution available: January 14, 2026
+- Paloma's Orrery visualization: January 14, 2026
+- JPL Horizons entry: Pending
+
+**Caveat:** Always verify coordinate frame. Project Pluto may provide Equatorial or Ecliptic J2000 - check before importing. The 6AC4721 elements (i=144.51°, Ω=9.28°) were confirmed Ecliptic J2000.
 
 ### The Dual ID Pattern
 
@@ -683,6 +700,8 @@ Paloma's Orrery combines educational clarity with technical accuracy to visualiz
 
 ### Online Resources
 - [JPL Horizons System](https://ssd.jpl.nasa.gov/horizons/)
+- [Project Pluto (Bill Gray)](https://www.projectpluto.com/) - Pseudo-MPECs for new discoveries
+- [Minor Planet Center](https://www.minorplanetcenter.net/) - NEOCP and official designations
 - [Astropy](https://www.astropy.org/)
 
 ### Key Papers
@@ -711,6 +730,90 @@ Paloma's Orrery combines educational clarity with technical accuracy to visualiz
 | 2.1 | Jan 8, 2026 | Orcus-Vanth barycenter mode (initial) |
 | 2.2 | Jan 8, 2026 | Orcus-Vanth orbit plane fitting |
 | 2.3 | Jan 14, 2026 | Keplerian Position Marker (offline resilience) |
+| 2.4 | Jan 20, 2026 | Near-parabolic orbit theta sampling fix |
+| 2.5 | Jan 21, 2026 | Apsidal surface distance in hover text |
+
+---
+
+## 23. Near-Parabolic Orbit Theta Sampling (v2.4)
+
+### The Problem
+
+For the newly discovered sungrazer comet 6AC4721 (C/2026 A1), the Keplerian apoapsis marker wasn't on the orbit trace - it was floating 70+ AU away!
+
+### Root Cause: Missing θ=π in Orbit Array
+
+The standard orbit generation used:
+```python
+theta = np.linspace(0, 2*np.pi, 360)  # 360 points
+```
+
+This creates 360 points from 0 to 2π **inclusive**, meaning:
+- theta[0] = 0
+- theta[180] ≈ 3.15 radians (NOT π = 3.14159...)
+- theta[359] = 2π
+
+For normal orbits, this is fine. But for near-parabolic orbits (e > 0.99), the radius changes **dramatically** near θ=π:
+
+| True Anomaly | Radius (6AC4721) |
+|--------------|------------------|
+| θ = 179.5° | ~110 AU |
+| θ = 180.0° (exactly) | ~180 AU |
+
+The orbit trace was sampling at θ=179.5° but the apoapsis marker was correctly calculated at θ=π exactly!
+
+### The Fix
+
+For near-parabolic orbits (e > 0.99), explicitly include θ=π:
+
+```python
+if e > 0.99:
+    # Ensure theta=pi is included for near-parabolic orbits
+    theta_first_half = np.linspace(0, np.pi, 181)  # 0 to π inclusive
+    theta_second_half = np.linspace(np.pi, 2*np.pi, 181)[1:]  # π to 2π, excluding π
+    theta = np.concatenate([theta_first_half, theta_second_half])
+else:
+    theta = np.linspace(0, 2*np.pi, 360)
+```
+
+### Result
+
+The Keplerian orbit trace now passes through the exact apoapsis point, and the apoapsis marker sits correctly on the orbit line.
+
+### Broader Application: TNO Satellites
+
+The same fix was applied to `plot_tno_satellite_orbit` for eccentric moons like Xiangliu (e=0.29):
+
+```python
+# For eccentric orbits (e > 0.1), ensure theta=pi is included
+if e > 0.1:
+    theta_first_half = np.linspace(0, np.pi, 181)
+    theta_second_half = np.linspace(np.pi, 2*np.pi, 181)[1:]
+    theta = np.concatenate([theta_first_half, theta_second_half])
+else:
+    theta = np.linspace(0, 2*np.pi, 360)
+```
+
+| Satellite | e | Benefits from fix? |
+|-----------|------|-------------------|
+| Xiangliu | 0.29 | Yes - significant eccentricity |
+| Weywot | 0.011 | No - nearly circular |
+| Vanth | 0.007 | No - nearly circular |
+| MK2 | 0.0 | No - circular |
+
+**Why different thresholds?**
+- **e > 0.99** for comets: Only extreme near-parabolic orbits have dramatic radius jumps
+- **e > 0.1** for TNO satellites: More conservative for small-scale orbits where precision matters
+
+### The Bigger Picture: Orbits Before Horizons
+
+With this fix plus the analytical orbit fallback system, Paloma's Orrery can now visualize objects that **don't yet exist in JPL Horizons**. When 6AC4721 was discovered on January 13, 2026, we had orbital elements from the discovery report within days - but JPL won't add it to Horizons until it receives an official designation. 
+
+We're no longer limited by API availability. If you have orbital elements, you have an orbit.
+
+### For Paloma
+
+*"Imagine drawing a circle by connecting 360 dots. If you skip the dot at exactly 6 o'clock, you won't notice. But if you're drawing a REALLY stretched oval and skip the dot at the far end, you might miss the tip entirely! That's what happened with 6AC4721 - we fixed it by making sure we always include that important dot."*
 
 ---
 
@@ -726,12 +829,80 @@ Paloma's Orrery combines educational clarity with technical accuracy to visualiz
 *"We are moving beyond Horizons!"* - Tony, Jan 3, 2026
 *"We are living science here and sharing it."* - Tony, Jan 8, 2026
 *"Network down? Kepler still works."* - Jan 14, 2026
+*"We have an orbit before JPL even has an object in Horizons!"* - Tony, Jan 20, 2026
+*"Every tenth matters."* - On climate science, Jan 15, 2026
 
 ---
 
-**Document Version:** 2.3 (Keplerian Position Marker)  
-**Date:** January 14, 2026  
+## 24. Apsidal Surface Distance (v2.5)
+
+### The Feature
+
+Apsidal markers (perihelion, aphelion, periapsis, apoapsis) now display **distance from the center body's surface** in addition to distance from center. This makes close approaches viscerally meaningful - especially for sun-grazing comets where the difference between "0.005 AU" and "50,000 km from the solar surface" tells a very different story.
+
+### Implementation
+
+The hover text for all apsidal markers now includes:
+```
+Distance from center: 0.307498 AU
+Distance from surface: 0.302839 AU (45,298,123 km)
+```
+
+Surface distance is calculated using the `CENTER_BODY_RADII` dictionary in `constants_new.py`:
+
+| Body | Radius (km) |
+|------|-------------|
+| Sun | 696,340 |
+| Mercury | 2,440 |
+| Venus | 6,052 |
+| Earth | 6,371 |
+| Moon | 1,737 |
+| Mars | 3,396 |
+| Jupiter | 71,492 |
+| Saturn | 58,232 |
+| Uranus | 25,362 |
+| Neptune | 24,622 |
+| Pluto | 1,188 |
+
+### Osculating vs Keplerian: Visible Differences
+
+An interesting educational outcome: the surface distance reveals differences between orbital calculation methods.
+
+For Mercury at perihelion:
+- **Keplerian Perihelion** (osculating elements at epoch): Shows the instantaneous orbit including perturbation effects
+- **Keplerian Periapsis** (pure θ=0 calculation): Shows the idealized two-body solution
+
+These produce slightly different perihelion distances. For Mercury, the difference is small (~100 km). For sun-grazing comets, the difference can be dramatic - and seeing it in kilometers from the solar surface makes the distinction tangible.
+
+### Where It Appears
+
+Surface distance is shown in hover text for:
+
+| Marker Type | Source Function | File |
+|-------------|-----------------|------|
+| Keplerian Perihelion (with epoch) | `create_enhanced_apsidal_hover_text` | apsidal_markers.py |
+| Keplerian Periapsis | inline hover text | idealized_orbits.py |
+| Keplerian Apoapsis | inline hover text | idealized_orbits.py |
+
+### For Paloma
+
+*"When a comet flies past the Sun, saying it passed at '0.005 AU' doesn't mean much. But saying it flew just 50,000 kilometers above the Sun's surface - that's close enough to feel the heat! The new hover text shows both numbers so you can really understand how close 'close' is."*
+
+### Technical Note
+
+The conversion uses the IAU definition: **1 AU = 149,597,870.7 km**
+
+```python
+center_radius_au = center_radius_km / 149597870.7
+surface_distance_au = perihelion_distance - center_radius_au
+surface_distance_km = surface_distance_au * 149597870.7
+```
+
+---
+
+**Document Version:** 2.5 (Apsidal Surface Distance)  
+**Date:** January 21, 2026  
 **Maintained By:** Tony  
 **Contributors:** Claude (AI assistant)
 
-*"Network down? Kepler still works."*
+*"We have an orbit before JPL even has an object in Horizons!"*

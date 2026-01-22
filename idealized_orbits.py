@@ -1938,8 +1938,16 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         print(f"  Elements: a={a:.6f} AU, e={e:.4f}, i={i:.2f} deg, omega={omega:.2f} deg, Omega={Omega:.2f} deg", flush=True)
         
         # Generate orbit points
-        theta = np.linspace(0, 2*np.pi, 360)
-        
+    #    theta = np.linspace(0, 2*np.pi, 360)
+                
+        # For eccentric orbits (e > 0.1), ensure theta=pi is included for accurate apoapsis
+        if e > 0.1:
+            theta_first_half = np.linspace(0, np.pi, 181)
+            theta_second_half = np.linspace(np.pi, 2*np.pi, 181)[1:]
+            theta = np.concatenate([theta_first_half, theta_second_half])
+        else:
+            theta = np.linspace(0, 2*np.pi, 360)
+
         # Skip if semi-major axis is invalid
         if a <= 0:
             print(f"  [WARN] Invalid semi-major axis for {satellite_name}", flush=True)
@@ -4458,9 +4466,22 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             
             # For elliptical orbits (e <= 1), continue with existing code:
             # Generate ellipse in orbital plane
-            theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
-            r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        #    theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
+        #    r = a * (1 - e**2) / (1 + e * np.cos(theta))
             
+            # For elliptical orbits (e <= 1), continue with existing code:
+            # Generate ellipse in orbital plane
+            # CRITICAL FIX: For near-parabolic orbits (e > 0.99), ensure theta=pi is included
+            # Otherwise the orbit trace won't pass through the exact apoapsis point
+            if e > 0.99:
+                # For near-parabolic: create array that includes exactly 0, pi, and 2*pi
+                theta_first_half = np.linspace(0, np.pi, 181)  # 0 to pi, including both endpoints
+                theta_second_half = np.linspace(np.pi, 2*np.pi, 181)[1:]  # pi to 2*pi, excluding pi (already included)
+                theta = np.concatenate([theta_first_half, theta_second_half])
+            else:
+                theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
+            r = a * (1 - e**2) / (1 + e * np.cos(theta))
+
             x_orbit = r * np.cos(theta)
             y_orbit = r * np.sin(theta)
             z_orbit = np.zeros_like(theta)
@@ -4530,15 +4551,35 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     elif e > 0.05:
                         accuracy_note = "<br><i>Note: Moderate eccentricity - perturbations expected</i>"
                     
+            #        hover_text = (
+            #            f"<b>{obj_name} Keplerian Periapsis</b>"
+            #            f"{date_str}"
+            #            f"<br>q={peri['distance']:.6f} AU"
+            #            f"<br>Theoretical minimum distance (theta=0 deg)"
+            #            f"<br>Unperturbed Keplerian position at actual periapsis time"
+            #            f"{accuracy_note}"
+            #        )
+                    
+                    # Calculate distance from surface if center body radius is known
+                    from constants_new import CENTER_BODY_RADII
+                    surface_distance_text = ""
+                    if center_id in CENTER_BODY_RADII:
+                        center_radius_km = CENTER_BODY_RADII[center_id]
+                        center_radius_au = center_radius_km / 149597870.7
+                        surface_distance_au = peri['distance'] - center_radius_au
+                        surface_distance_km = surface_distance_au * 149597870.7
+                        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
+                    
                     hover_text = (
                         f"<b>{obj_name} Keplerian Periapsis</b>"
                         f"{date_str}"
                         f"<br>q={peri['distance']:.6f} AU"
+                        f"{surface_distance_text}"
                         f"<br>Theoretical minimum distance (theta=0 deg)"
                         f"<br>Unperturbed Keplerian position at actual periapsis time"
                         f"{accuracy_note}"
                     )
-                    
+
                     fig.add_trace(
                         go.Scatter3d(
                             x=[peri['x']],
@@ -4613,15 +4654,35 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         #        date_str = f"<br>Date: {keplerian_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC (Keplerian estimate)"
                         #        position_description = "<br>Unperturbed Keplerian position at Keplerian apoapsis time"
 
+            #        hover_text = (
+            #            f"<b>{obj_name} Keplerian Apoapsis</b>"
+            #            f"{date_str}"
+            #            f"<br>Q={apo['distance']:.6f} AU"
+            #            f"<br>Theoretical maximum distance (theta=180 deg)"
+            #            f"{position_description}"
+            #            f"{accuracy_note}"
+            #        )
+                    
+                    # Calculate distance from surface if center body radius is known
+                    from constants_new import CENTER_BODY_RADII
+                    surface_distance_text = ""
+                    if center_id in CENTER_BODY_RADII:
+                        center_radius_km = CENTER_BODY_RADII[center_id]
+                        center_radius_au = center_radius_km / 149597870.7
+                        surface_distance_au = apo['distance'] - center_radius_au
+                        surface_distance_km = surface_distance_au * 149597870.7
+                        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
+                    
                     hover_text = (
                         f"<b>{obj_name} Keplerian Apoapsis</b>"
                         f"{date_str}"
                         f"<br>Q={apo['distance']:.6f} AU"
+                        f"{surface_distance_text}"
                         f"<br>Theoretical maximum distance (theta=180 deg)"
                         f"{position_description}"
                         f"{accuracy_note}"
                     )
-                    
+
                     fig.add_trace(
                         go.Scatter3d(
                             x=[apo['x']],

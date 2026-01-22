@@ -600,11 +600,26 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
                     q = 0.33  # Known perihelion distance
                 
                 # Show enough to see the interesting part of the orbit
+        #        max_distance = q * 15  # Show 15x perihelion distance
+        #        max_distances.append(max_distance)
+                
+        #        print(f"{obj_name}: Near-parabolic orbit - e={e:.6f}, perihelion={q:.6f} AU, view range={max_distance:.6f} AU", flush=True)
+                
+                # Show enough to see the interesting part of the orbit
                 max_distance = q * 15  # Show 15x perihelion distance
+                
+                # Also check current position - comet might be much farther out right now
+                obj_data = positions.get(obj_name)
+                if obj_data and obj_data.get('x') is not None:
+                    current_distance = (obj_data['x']**2 + obj_data['y']**2 + obj_data['z']**2)**0.5
+                    if current_distance > max_distance:
+                        max_distance = current_distance * 1.3  # Use current position with buffer
+                        print(f"{obj_name}: Near-parabolic orbit - using current position {current_distance:.6f} AU (> perihelion-based range)", flush=True)
+                
                 max_distances.append(max_distance)
                 
                 print(f"{obj_name}: Near-parabolic orbit - e={e:.6f}, perihelion={q:.6f} AU, view range={max_distance:.6f} AU", flush=True)
-                
+
             elif e > 1.01:  # Clearly hyperbolic
                 # For hyperbolic orbits with e > 1
                 q = abs(a) * (e - 1)  # Perihelion distance
@@ -1554,6 +1569,88 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         print(f"Error fetching data for object {object_id} on {date_obj}: {e}", flush=True)
         return None
 
+def calculate_analytical_position(obj_name, date_obj, center_id='Sun'):
+    """
+    Calculate position from analytical orbital elements when Horizons is unavailable.
+    
+    Uses the mean anomaly (MA) at epoch to propagate the position to any date.
+    This is the fallback for newly discovered objects not yet in JPL Horizons.
+    
+    Parameters:
+        obj_name: Name of the object (must be in planetary_params with 'MA')
+        date_obj: datetime object for the desired position
+        center_id: Center body (only 'Sun' supported for heliocentric objects)
+        
+    Returns:
+        dict with x, y, z, range, velocity fields, or None if calculation fails
+    """
+    from apsidal_markers import calculate_keplerian_position
+    from idealized_orbits import rotate_points
+    
+    if obj_name not in planetary_params:
+        print(f"[ANALYTICAL POS] {obj_name} not in planetary_params", flush=True)
+        return None
+    
+    params = planetary_params[obj_name]
+    
+    # Check for required elements including MA
+    if 'MA' not in params:
+        print(f"[ANALYTICAL POS] {obj_name} missing MA (mean anomaly) - cannot calculate position", flush=True)
+        return None
+    
+    if 'epoch' not in params:
+        print(f"[ANALYTICAL POS] {obj_name} missing epoch - cannot calculate position", flush=True)
+        return None
+    
+    try:
+        # Use the Keplerian position calculator from apsidal_markers
+        position = calculate_keplerian_position(params, date_obj, rotate_points)
+        
+        if position is None:
+            return None
+        
+        # Build return dict matching fetch_position() format
+        x, y, z = position['x'], position['y'], position['z']
+        distance = position['distance']
+        
+        # Calculate approximate velocity from orbital elements
+        # v = sqrt(GM * (2/r - 1/a)) for vis-viva equation
+        # Using GM_sun in AU^3/day^2 units
+        a = params.get('a', 1.0)
+        GM_sun_au3_day2 = 2.959122e-4  # GM in AU^3/day^2
+        if a > 0 and distance > 0:
+            v_au_day = np.sqrt(GM_sun_au3_day2 * (2/distance - 1/a))
+            v_km_s = v_au_day * KM_PER_AU / 86400.0
+        else:
+            v_km_s = 0
+        
+        result = {
+            'x': x,
+            'y': y,
+            'z': z,
+            'range': distance,
+            'range_rate': None,  # Not calculated
+            'vx': None,  # Direction unknown without more computation
+            'vy': None,
+            'vz': None,
+            'velocity': v_km_s,
+            'distance_km': distance * KM_PER_AU,
+            'distance_lm': distance * LIGHT_MINUTES_PER_AU,
+            'distance_lh': (distance * LIGHT_MINUTES_PER_AU) / 60,
+            'mission_info': f"Position calculated from analytical elements (Epoch: {params.get('epoch')})",
+            'calculated_orbital_period': {'years': np.sqrt(a**3), 'days': np.sqrt(a**3) * 365.25} if a > 0 else None,
+            'analytical_position': True,  # Flag this as analytical
+            'calculation_details': position.get('calculation_details', '')
+        }
+        
+        print(f"[ANALYTICAL POS] {obj_name}: x={x:.6f}, y={y:.6f}, z={z:.6f} AU (r={distance:.3f} AU)", flush=True)
+        return result
+        
+    except Exception as e:
+        print(f"[ANALYTICAL POS] Error calculating position for {obj_name}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return None
 
 def fetch_radec_for_hover(object_id, date_obj, id_type=None):
     """
@@ -2169,6 +2266,12 @@ comet_halley_var = tk.IntVar(value=0)
 comet_hyakutake_var = tk.IntVar(value=0)
 
 comet_c2025r2_var = tk.IntVar(value=0)
+
+comet_c2025r3_var = tk.IntVar(value=0)
+
+comet_6ac4721_var = tk.IntVar(value=0)
+
+comet_c2026a1_var = tk.IntVar(value=0)
 
 comet_hale_bopp_var = tk.IntVar(value=0)
 
@@ -2848,7 +2951,7 @@ objects = [
 
     {'name': 'Churyumov', 'id': '90000699', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 67P/Churyumov-Gerasimenko
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 
-    'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
+    #'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
     # data arc: 2008-06-01 to 2023-04-26; Epoch: 2015-Oct-10; 67P; previously rec 90000704; record number needed to fetch Horizons data.
     'mission_info': 'Horizons: 67P. 67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft, August 2014 through September 2016.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
@@ -2860,13 +2963,15 @@ objects = [
     'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
 
     {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'diamond',
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(1994, 1, 11), 
+    'object_type': 'orbital', 'id_type': 'smallbody', 
+    #'start_date': datetime(1900, 1, 1), 'end_date': datetime(1994, 1, 11), 
     # data arc: 1835-08-21 to 1994-01-11; 1P/Halley requires the record number to fetch position data for the 1986 apparition.
     'mission_info': 'Horizons: 1P/Halley. Retrograde. Most famous comet, returned in 1986 and will return in 2061. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/halley-1986'},
 
     {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1996, 1, 2), 'end_date': datetime(1996, 11, 1),
+    'object_type': 'orbital', 'id_type': 'smallbody', 
+    #'start_date': datetime(1996, 1, 2), 'end_date': datetime(1996, 11, 1),
     # data arc: 1996-01-01 to 1996-11-02 
     'mission_info': 'Horizons: C/1996 B2. Retrograde. Passed very close to Earth in 1996. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
@@ -2880,20 +2985,34 @@ objects = [
     'mission_url': 'https://apod.nasa.gov/apod/ap250930.html'},      
 
     {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
+    'object_type': 'orbital', 'id_type': 'smallbody', 
+    #'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
     'mission_info': 'Horizons: C/1965 S1-A. Retrograde. One of the brightest comets of the 20th century. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/ikeya-seki-1965'},
 
     {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'diamond', # C/2020 F3
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
+    'object_type': 'orbital', 'id_type': 'smallbody', 
+    #'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
     'mission_info': 'Horizons: C/2020 F3. Retrograde. Brightest comet visible from the Northern Hemisphere in decades. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
 
     {'name': 'SWAN', 'id': 'C/2025 R2', 'var': comet_c2025r2_var, 'color': color_map('SWAN'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(2025, 8, 14), 'end_date': datetime(2025, 9, 14),
+    'object_type': 'orbital', 'id_type': 'smallbody', 
+    #'start_date': datetime(2025, 8, 14), 'end_date': datetime(2025, 9, 14),
     # data arc: data arc: 2025-08-13 to 2025-09-14;  EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-SEP-19. PREDICTS-> 2025-DEC-15
     'mission_info': 'Horizons: C/2025 R2 (SWAN). This is a non-periodic comet that was discovered on September 11, 2025.', 
     'mission_url': 'https://en.wikipedia.org/wiki/C/2025_R2_(SWAN)'},     
+
+    {'name': '6AC4721', 'id': 'none', 'var': comet_6ac4721_var, 'color': color_map('6AC4721'), 'symbol': 'diamond',    # C/2026 A1 in Horizons
+    'object_type': 'orbital', 'id_type': 'smallbody', 
+    #'start_date': datetime(2026, 1, 13), 'end_date': datetime(2026, 1, 19),
+    'mission_info': 'Kreutz sungrazer found at an unusually large distance from the Sun. Discovered by the 6AC4721 survey.',  
+    'mission_url': 'https://en.wikipedia.org/wiki/C/2026_A1_(MAPS)'},      
+
+    {'name': 'MAPS', 'id': 'C/2026 A1', 'var': comet_c2026a1_var, 'color': color_map('MAPS'), 'symbol': 'diamond',    # C/2026 A1 in Horizons
+    'object_type': 'orbital', 'id_type': 'smallbody', 
+    'mission_info': 'Kreutz sungrazer comet discovered on 13 January 2026 from the AMACS1 Observatory in the Atacama Desert, Chile.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/C/2026_A1_(MAPS)'},      
 
 
 # Interstellar and hyperbolic objects
@@ -2932,6 +3051,11 @@ objects = [
     'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic. A notable comet for observation in late 2025. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://theskylive.com/c2025k1-info'}, 
 
+    {'name': 'PANSTARRS', 'id': 'C/2025 R3', 'var': comet_c2025r3_var, 'color': color_map('PANSTARRS'), 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
+    'object_type': 'trajectory', 'id_type': 'smallbody', 
+    'mission_info': 'Horizons: C/2025 R3 (PANSTARRS). Retrograde. Hyperbolic. This is a non-periodic comet that was discovered on September 8, 2025.', 
+    'mission_url': 'https://www.space.com/astronomy/comets/will-comet-c-2025-r3-panstarrs-be-the-great-comet-of-2026'},
+
     {'name': 'Borisov', 'id': 'C/2025 V1', 'var': comet_2025v1_var, 'color': color_map('Borisov'), 'symbol': 'diamond', 
     # Borisov (C/2025 V1) 2025-Nov-11 16:37:03; data arc: 2025-10-29 to 2025-11-05
     'object_type': 'trajectory', 'id_type': 'smallbody', 
@@ -2957,7 +3081,7 @@ objects = [
     {'name': '3I/ATLAS', 'id': 'C/2025 N1', 'var': atlas3i_var, 'color': color_map('3I/ATLAS'), 'symbol': 'diamond', 
     # JPL/HORIZONS                  ATLAS (C/2025 N1)            2025-Oct-28 14:32:30
     'object_type': 'trajectory', 'id_type': 'smallbody', 
-    # 'start_date': datetime(2025, 5, 15), 'end_date': datetime(2032, 12, 31),
+    'start_date': datetime(2025, 5, 15), 'end_date': datetime(2032, 12, 31),
     # data arc: 2025-05-15 to 2025-09-21
     'mission_info': 'Horizons: C/2025 N1. Retrograde. Hyperbolic. Third known interstellar object detected passing through<br>'  
     'the Solar System. Retrograde (left-handed) orbit.', 
@@ -3980,7 +4104,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
 # Add closest approach marker if enabled
                 if show_closest_approach:
                     from apsidal_markers import add_closest_approach_marker
-                    from datetime import datetime
+            #        from datetime import datetime
                     
                     # For special fetch, build positions_dict from temp cache data
                     # Note: temp_cache may not have dates, so we'll use indices
@@ -4031,15 +4155,20 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             
             trajectory = fetch_trajectory(fetch_id, dates_list, center_id=center_id, id_type=fetch_id_type)
 
-        #    trajectory = fetch_trajectory(obj_info['id'], dates_list, center_id=center_id, id_type=obj_info.get('id_type'))
-            # Now trajectory is a list of positions
+            # Now trajectory is a list of positions - extract valid positions
+            x, y, z = [], [], []
             if trajectory:
                 x = [pos['x'] for pos in trajectory if pos is not None]
                 y = [pos['y'] for pos in trajectory if pos is not None]
                 z = [pos['z'] for pos in trajectory if pos is not None]
 
-            # Determine trace color - use trajectory_marker_color for trajectory objects if set
-                obj_type = obj_info.get('object_type', 'orbital')
+            # Determine object type (needed for both JPL and analytical paths)
+            obj_type = obj_info.get('object_type', 'orbital')
+            
+            # Only create trace if we have actual positions from JPL
+            if x:
+                # Determine trace color - use trajectory_marker_color for trajectory objects if set
+
                 trace_color = trajectory_marker_color if (obj_type == 'trajectory' and trajectory_marker_color) else color_map(planet)
                 
                 if show_lines:                                                 # this code adds lines betwen the markers
@@ -4064,25 +4193,6 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                     hover_text = f"{planet} Orbit"
                     legend_name = f"{planet} Actual Orbit"
                 
-        #        if show_lines:                                                 # this code adds lines betwen the markers
-        #            mode = 'lines'
-        #            line = dict(color=color_map(planet), width=2)
-        #            marker = None
-        #        else:
-        #            mode = 'markers'
-        #            line = None
-        #            marker = dict(color=color_map(planet), size=2)
-
-                # Create the hover text and legend name for the actual orbit
-                # For trajectory objects, use "Plotted Period" to distinguish from "Full Mission"
-        #        obj_type = obj_info.get('object_type', 'orbital')
-        #        if obj_type == 'trajectory':
-        #            hover_text = f"{planet} Plotted Period"
-        #            legend_name = f"{planet} Plotted Period"
-        #        else:
-        #            hover_text = f"{planet} Orbit"
-        #            legend_name = f"{planet} Actual Orbit"
-
                 fig.add_trace(
                     go.Scatter3d(
                         x=x,
@@ -4097,10 +4207,11 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         hovertemplate='%{text}<extra></extra>',
                         showlegend=True
                     )
-                )
+
+            )
                 print(f"[NORMAL MODE] Plotted {planet} orbit with {len(x)} points", flush=True)
 
-# Add closest approach marker if enabled
+                # Add closest approach marker if enabled
                 if show_closest_approach:
                     from apsidal_markers import add_closest_approach_marker
                     
@@ -4114,16 +4225,6 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                                 'z': z[i]
                             }
                     
-                    # Add the marker
-            #        add_closest_approach_marker(
-            #            fig=fig,
-            #            positions_dict=positions_dict,
-            #            obj_name=planet,
-            #            center_body=center_object_name,
-            #            color_map=color_map,
-            #            date_range=(dates_list[0], dates_list[-1]) if dates_list else None
-            #        )            
-
                     # Add the marker - use trajectory_marker_color for trajectory objects
                     marker_color = trajectory_marker_color if obj_type == 'trajectory' else None
                     add_closest_approach_marker(
@@ -4135,6 +4236,126 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         date_range=(dates_list[0], dates_list[-1]) if dates_list else None,
                         marker_color=marker_color
                     )                     
+
+            # ===================================================================
+            # ANALYTICAL FALLBACK: For objects without JPL ephemeris
+            # Creates "Analytical Orbit" trace from orbital elements
+            # ===================================================================
+            if not x:
+
+                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
+                if planet in ANALYTICAL_POSITION_FALLBACK:
+                    from orbital_elements import planetary_params
+                    if planet in planetary_params:
+                        print(f"[ANALYTICAL ORBIT] Calculating analytical positions for {planet}...", flush=True)
+                        elements = planetary_params[planet]
+                        a = elements.get('a', 0)
+                        e = elements.get('e', 0)
+                        i_deg = elements.get('i', 0)
+                        omega_deg = elements.get('omega', 0)
+                        Omega_deg = elements.get('Omega', 0)
+                        
+                        # Get orbital period
+                        if 'orbital_period_days' in elements:
+                            orbital_period = elements['orbital_period_days']
+                        elif a > 0:
+                            orbital_period = np.sqrt(a**3) * 365.25
+                        else:
+                            orbital_period = 365.25
+                        
+                        # Reference epoch and mean anomaly
+                        if 'MA' in elements and 'epoch' in elements:
+                            MA_epoch = elements['MA']
+                            epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
+                            try:
+                                ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
+                            except ValueError:
+                                ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
+                        else:
+                            MA_epoch = 0.0
+                            ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
+                        
+                        # Pre-calculate rotation angles
+                        i_rad = np.radians(i_deg)
+                        omega_rad = np.radians(omega_deg)
+                        Omega_rad = np.radians(Omega_deg)
+                        n = 360.0 / orbital_period  # Mean motion
+                        
+                        # Calculate positions for all dates
+                        x, y, z = [], [], []
+                        for date_obj in dates_list:
+                            delta_days = (date_obj - ref_epoch).total_seconds() / 86400.0
+                            M_deg = (MA_epoch + n * delta_days) % 360.0
+                            M_rad = np.radians(M_deg)
+                            
+                            # Solve Kepler's equation
+                            if e > 0.01:
+                                E = M_rad if e < 0.8 else np.pi
+                                for _ in range(50):
+                                    f = E - e * np.sin(E) - M_rad
+                                    f_prime = 1 - e * np.cos(E)
+                                    if abs(f_prime) < 1e-12:
+                                        break
+                                    E = E - f / f_prime
+                                    if abs(f / f_prime) < 1e-10:
+                                        break
+                                true_anomaly = 2 * np.arctan2(
+                                    np.sqrt(1 + e) * np.sin(E / 2),
+                                    np.sqrt(1 - e) * np.cos(E / 2)
+                                )
+                            else:
+                                true_anomaly = M_rad
+                            
+                            # Position in orbital plane
+                            r = a * (1 - e**2) / (1 + e * np.cos(true_anomaly)) if e > 0 else a
+                            x_orb = r * np.cos(true_anomaly)
+                            y_orb = r * np.sin(true_anomaly)
+                            
+                            # Apply 3D rotations
+                            x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
+                            y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
+                            x2 = x1
+                            y2 = y1 * np.cos(i_rad)
+                            z2 = y1 * np.sin(i_rad)
+                            x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+                            y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+                            
+                            x.append(x_final)
+                            y.append(y_final)
+                            z.append(z2)
+                        
+                        # Create trace with same styling as Actual Orbit
+                        obj_type = obj_info.get('object_type', 'orbital')
+                        trace_color = trajectory_marker_color if (obj_type == 'trajectory' and trajectory_marker_color) else color_map(planet)
+                        
+                        if show_lines:
+                            mode = 'lines'
+                            line = dict(color=trace_color, width=2)
+                            marker = None
+                        else:
+                            mode = 'markers'
+                            line = None
+                            marker = dict(color=trace_color, size=2)
+                        
+                        hover_text = f"{planet} Analytical Orbit"
+                        legend_name = f"{planet} Analytical Orbit"
+                        
+                        fig.add_trace(
+                            go.Scatter3d(
+                                x=x,
+                                y=y,
+                                z=z,
+                                mode=mode,
+                                line=line,
+                                marker=marker,
+                                name=legend_name,
+                                text=[hover_text] * len(x),
+                                customdata=[hover_text] * len(x),
+                                hovertemplate='%{text}<extra></extra>',
+                                showlegend=True
+                            )
+                        )
+                        print(f"[ANALYTICAL ORBIT] Plotted {planet} analytical orbit with {len(x)} points", flush=True)
 
 # Define dictionary mapping all celestial bodies to their shell variable dictionaries
 body_shells_config = {
@@ -4638,19 +4859,6 @@ def plot_objects():
                     
                                         # Get object type (with fallback for backward compatibility)
                     obj_type = obj.get('object_type', None)
-
-                    # Replace this section in plot_objects():
-            #        if obj_type == 'trajectory':
-                        # Time-bounded paths
-            #            start_date = obj.get('start_date', date_obj)
-            #            end_date = obj.get('end_date', date_obj)
-            #            total_days = (end_date - start_date).days
-            #                        if total_days <= 0:
-            #                dates_list = [start_date]
-            #            else:
-            #                num_points = int(trajectory_points) + 1  # Use trajectory_points from settings
-            #                dates_list = [start_date + timedelta(days=float(d)) 
-            #                        for d in np.linspace(0, total_days, num=num_points)]
                             
                     if obj_type == 'trajectory':
                         # Time-bounded paths
@@ -4831,6 +5039,94 @@ def plot_objects():
                             fetch_id = obj['helio_id']
                             fetch_id_type = 'smallbody'
                         obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
+                        
+                        # Fallback to analytical position for objects not in Horizons (e.g., 6AC4721)
+                        if obj_data is None and obj['name'] in active_planetary_params and 'MA' in active_planetary_params[obj['name']]:
+                            print(f"  - No JPL data for {obj['name']}, calculating analytical position from MA...", flush=True)
+                            elements = active_planetary_params[obj['name']]
+                            a = elements.get('a', 0)
+                            e = elements.get('e', 0)
+                            i_deg = elements.get('i', 0)
+                            omega_deg = elements.get('omega', 0)
+                            Omega_deg = elements.get('Omega', 0)
+                            MA_epoch = elements.get('MA', 0)
+                            
+                            # Get orbital period
+                            if 'orbital_period_days' in elements:
+                                orbital_period = elements['orbital_period_days']
+                            elif a > 0:
+                                orbital_period = np.sqrt(a**3) * 365.25
+                            else:
+                                orbital_period = 365.25
+                            
+                            # Get reference epoch
+                            if 'epoch' in elements:
+                                epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
+                                try:
+                                    ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
+                                except ValueError:
+                                    ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
+                            else:
+                                ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
+                            
+                            # Calculate position
+                            delta_days = (date_obj - ref_epoch).total_seconds() / 86400.0
+                            n = 360.0 / orbital_period
+                            M_deg = (MA_epoch + n * delta_days) % 360.0
+                            M_rad = np.radians(M_deg)
+                            
+                            # Solve Kepler's equation
+                            if e > 0.01:
+                                E = M_rad if e < 0.8 else np.pi
+                                for _ in range(50):
+                                    f = E - e * np.sin(E) - M_rad
+                                    f_prime = 1 - e * np.cos(E)
+                                    if abs(f_prime) < 1e-12:
+                                        break
+                                    E = E - f / f_prime
+                                    if abs(f / f_prime) < 1e-10:
+                                        break
+                                true_anomaly = 2 * np.arctan2(
+                                    np.sqrt(1 + e) * np.sin(E / 2),
+                                    np.sqrt(1 - e) * np.cos(E / 2)
+                                )
+                            else:
+                                true_anomaly = M_rad
+                            
+                            # Position in orbital plane
+                            r = a * (1 - e**2) / (1 + e * np.cos(true_anomaly)) if e > 0 else a
+                            x_orb = r * np.cos(true_anomaly)
+                            y_orb = r * np.sin(true_anomaly)
+                            
+                            # Rotation angles
+                            i_rad = np.radians(i_deg)
+                            omega_rad = np.radians(omega_deg)
+                            Omega_rad = np.radians(Omega_deg)
+                            
+                            # Apply rotations
+                            x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
+                            y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
+                            x2 = x1
+                            y2 = y1 * np.cos(i_rad)
+                            z2 = y1 * np.sin(i_rad)
+                            x_final = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+                            y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+                            z_final = z2
+                            
+                            # Velocity (vis-viva)
+                            GM_sun = 2.959122e-4
+                            v_au_day = np.sqrt(GM_sun * (2/r - 1/a)) if a > 0 else 0
+                            
+                            obj_data = {
+                                'x': x_final, 'y': y_final, 'z': z_final,
+                                'range': r,
+                                'velocity': v_au_day,
+                                'distance_km': r * KM_PER_AU,
+                                'distance_lm': r * LIGHT_MINUTES_PER_AU,
+                                'distance_lh': (r * LIGHT_MINUTES_PER_AU) / 60,
+                                'analytical_position': True
+                            }
+                            print(f"  -> Analytical position: x={x_final:.4f}, y={y_final:.4f}, z={z_final:.4f} AU (r={r:.3f} AU)", flush=True)                        
 
                 positions[obj['name']] = obj_data
 
@@ -5136,8 +5432,8 @@ def plot_objects():
                         fetch_id_type = 'smallbody'
                     obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
 
-                # Fallback for satellites without JPL ephemeris (e.g., MK2)
-                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+                # Fallback for objects without JPL ephemeris (e.g., MK2, 6AC4721)
+                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
                 if obj_data is None and obj['name'] in ANALYTICAL_POSITION_FALLBACK:
                     from orbital_elements import planetary_params
                     if obj['name'] in planetary_params:
@@ -5147,16 +5443,52 @@ def plot_objects():
                         i_deg = elements.get('i', 0)
                         omega_deg = elements.get('omega', 0)
                         Omega_deg = elements.get('Omega', 0)
-                        orbital_period = elements.get('orbital_period_days', 12.4)
                         
-                        # Reference epoch: J2000.0 with MA=0 (arbitrary)
-                        j2000 = datetime(2000, 1, 1, 12, 0, 0)
-                        delta_days = (date_obj - j2000).total_seconds() / 86400.0
+                        # Get orbital period - calculate from a if not provided
+                        if 'orbital_period_days' in elements:
+                            orbital_period = elements['orbital_period_days']
+                        elif a > 0:
+                            orbital_period = np.sqrt(a**3) * 365.25
+                        else:
+                            orbital_period = 12.4  # Default fallback
                         
-                        # Mean motion and mean anomaly
+                        # Reference epoch and mean anomaly
+                        # Use object's values if available, else J2000 with MA=0
+                        if 'MA' in elements and 'epoch' in elements:
+                            MA_epoch = elements['MA']
+                            epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
+                            try:
+                                ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
+                            except ValueError:
+                                ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
+                        else:
+                            MA_epoch = 0.0
+                            ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
+                        
+                        delta_days = (date_obj - ref_epoch).total_seconds() / 86400.0
+                        
+                        # Mean motion and current mean anomaly
                         n = 360.0 / orbital_period
-                        M = (n * delta_days) % 360.0
-                        true_anomaly = np.radians(M)  # For circular orbit
+                        M_deg = (MA_epoch + n * delta_days) % 360.0
+                        M_rad = np.radians(M_deg)
+                        
+                        # Solve Kepler's equation if e > 0.01
+                        if e > 0.01:
+                            E = M_rad if e < 0.8 else np.pi
+                            for _ in range(50):
+                                f = E - e * np.sin(E) - M_rad
+                                f_prime = 1 - e * np.cos(E)
+                                if abs(f_prime) < 1e-12:
+                                    break
+                                E = E - f / f_prime
+                                if abs(f / f_prime) < 1e-10:
+                                    break
+                            true_anomaly = 2 * np.arctan2(
+                                np.sqrt(1 + e) * np.sin(E / 2),
+                                np.sqrt(1 - e) * np.cos(E / 2)
+                            )
+                        else:
+                            true_anomaly = M_rad
                         
                         # Position in orbital plane
                         r = a if e == 0 else a * (1 - e**2) / (1 + e * np.cos(true_anomaly))
@@ -6092,21 +6424,15 @@ def animate_objects(step, label):
                             id_type=fetch_id_type
                         )
 
-
-                        # Fallback for satellites without JPL ephemeris (e.g., MK2)
+                        # Fallback for objects without JPL ephemeris
                         # ===================================================================
-                        # IMPORTANT: This solution is tailored specifically for MK2:
-                        #   1. Assumes circular orbit (e=0): mean anomaly = true anomaly
-                        #   2. Uses J2000.0 as reference epoch with MA=0 deg (arbitrary)
-                        #   3. Orbital elements from arXiv:2509.05880 (Sept 2025)
-                        # 
-                        # For other objects, you may need to:
-                        #   - Solve Kepler's equation for eccentric anomaly (if e > 0)
-                        #   - Use object-specific reference epoch and MA
-                        #   - Apply different coordinate transformations
+                        # Handles two cases:
+                        #   1. TNO moons (circular orbits): Uses J2000 epoch, MA=0
+                        #   2. Objects with MA in elements: Uses object's epoch and MA,
+                        #      solves Kepler's equation for eccentric orbits
                         # ===================================================================
 
-                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']  # TNO moons without usable JPL ephemeris
+                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']  # Objects without usable JPL ephemeris
 
                         if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
                             # Check if fetch_trajectory returned empty/None
@@ -6122,37 +6448,81 @@ def animate_objects(step, label):
                                     i = elements.get('i', 0)
                                     omega = elements.get('omega', 0)
                                     Omega = elements.get('Omega', 0)
-                                    orbital_period = elements.get('orbital_period_days', 18.023)
+                                    
+                                    # Get orbital period - calculate from a if not provided
+                                    if 'orbital_period_days' in elements:
+                                        orbital_period = elements['orbital_period_days']
+                                    elif a > 0:
+                                        # Kepler's 3rd law: P^2 = a^3 (P in years, a in AU)
+                                        orbital_period = np.sqrt(a**3) * 365.25
+                                    else:
+                                        orbital_period = 18.023  # Default fallback
                                     
                                     # Pre-calculate rotation angles (convert to radians)
                                     i_rad = np.radians(i)
                                     omega_rad = np.radians(omega)
                                     Omega_rad = np.radians(Omega)
                                     
-                                    # Reference epoch: J2000.0
-                                    j2000 = datetime(2000, 1, 1, 12, 0, 0)
+                                    # Reference epoch and mean anomaly at epoch
+                                    # Use object's values if available, else J2000 with MA=0
+                                    if 'MA' in elements and 'epoch' in elements:
+                                        MA_epoch = elements['MA']
+                                        epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
+                                        try:
+                                            ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
+                                        except ValueError:
+                                            ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
+                                    else:
+                                        MA_epoch = 0.0
+                                        ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
                                     
                                     # Mean motion (degrees per day)
                                     n = 360.0 / orbital_period
                                     
+                                    # GM of Sun in AU^3/day^2 for velocity calculation
+                                    GM_sun = 2.959122e-4
+                                    
                                     # Calculate position for each animation date
                                     analytical_positions = []
                                     for anim_date in obj_dates:
-                                        # Days since J2000
-                                        delta_days = (anim_date - j2000).total_seconds() / 86400.0
+                                        # Days since reference epoch
+                                        delta_days = (anim_date - ref_epoch).total_seconds() / 86400.0
                                         
-                                        # Mean anomaly (for circular orbit, true anomaly = mean anomaly)
-                                        M = (n * delta_days) % 360.0
-                                        true_anomaly = np.radians(M)
+                                        # Current mean anomaly
+                                        M_deg = (MA_epoch + n * delta_days) % 360.0
+                                        M_rad = np.radians(M_deg)
                                         
-                                        # Position in orbital plane (circular: r = a)
+                                        # Solve Kepler's equation if e > 0.01
+                                        if e > 0.01:
+                                            # Newton-Raphson iteration
+                                            E = M_rad if e < 0.8 else np.pi
+                                            for _ in range(50):
+                                                f = E - e * np.sin(E) - M_rad
+                                                f_prime = 1 - e * np.cos(E)
+                                                if abs(f_prime) < 1e-12:
+                                                    break
+                                                delta = f / f_prime
+                                                E = E - delta
+                                                if abs(delta) < 1e-10:
+                                                    break
+                                            
+                                            # Convert eccentric anomaly to true anomaly
+                                            true_anomaly = 2 * np.arctan2(
+                                                np.sqrt(1 + e) * np.sin(E / 2),
+                                                np.sqrt(1 - e) * np.cos(E / 2)
+                                            )
+                                        else:
+                                            # For near-circular orbits, mean anomaly ~ true anomaly
+                                            true_anomaly = M_rad
+                                        
+                                        # Position in orbital plane
                                         r = a * (1 - e**2) / (1 + e * np.cos(true_anomaly)) if e > 0 else a
                                         x_orb = r * np.cos(true_anomaly)
                                         y_orb = r * np.sin(true_anomaly)
                                         z_orb = 0.0
                                         
                                         # Apply 3D rotations
-                                        # Rotation 1: ? around z
+                                        # Rotation 1: omega around z
                                         x1 = x_orb * np.cos(omega_rad) - y_orb * np.sin(omega_rad)
                                         y1 = x_orb * np.sin(omega_rad) + y_orb * np.cos(omega_rad)
                                         z1 = z_orb
@@ -6167,26 +6537,23 @@ def animate_objects(step, label):
                                         y_final = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
                                         z_final = z2
                                         
-                                #        analytical_positions.append({
-                                #            'x': x_final,
-                                #            'y': y_final,
-                                #            'z': z_final,
-                                #            'date': anim_date
-                                #        })
-                                    
-                                        # Calculate velocity for circular orbit: v = 2?a / P
-                                        v_au_day = 2 * np.pi * a / orbital_period
+                                        # Calculate velocity (vis-viva for elliptical, circular approx for e~0)
+                                        if e > 0.01 and a > 0:
+                                            v_au_day = np.sqrt(GM_sun * (2/r - 1/a))
+                                        else:
+                                            v_au_day = 2 * np.pi * a / orbital_period
                                         
                                         analytical_positions.append({
                                             'x': x_final,
                                             'y': y_final,
                                             'z': z_final,
                                             'velocity': v_au_day,  # AU/day - expected by hover text
+                                            'range': r,
                                             'date': anim_date
                                         })
 
                                     positions_over_time[obj['name']] = analytical_positions
-                                    print(f"  -> Generated {len(analytical_positions)} analytical positions for {obj['name']}", flush=True)
+                                    print(f"  -> Generated {len(analytical_positions)} analytical positions for {obj['name']} (e={e:.5f})", flush=True)
 
             # Extract initial positions for idealized orbits
             initial_positions = {}
@@ -8498,6 +8865,12 @@ create_comet_checkbutton("Lemmon", comet_lemmon_var, "(2024-11-12 to 2029-12-31)
 create_comet_checkbutton("SWAN", comet_c2025r2_var, "(2025-08-14 to 2025-09-14)", 
                          "September 12, 2025") # data arc: 2025-08-13 to 2025-09-14
 
+create_comet_checkbutton("6AC4721", comet_6ac4721_var, "(2026-01-13 to 2026-01-19)", 
+                         "April 4, 2026") 
+
+create_comet_checkbutton("MAPS", comet_c2026a1_var, "(2026-01-13 to 2026-01-20)", 
+                         "April 4, 2026, at 13:36 UTC") 
+
 # Checkbuttons for interstellar objects
 interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Hyperbolic Comets and Interstellar, I, Objects")
 interstellar_frame.pack(pady=(10, 5), fill='x')
@@ -8546,6 +8919,9 @@ create_interstellar_checkbutton("ATLAS", comet_atlas_var, "(2024-04-05 to 2025-1
 
 create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
                          "October 8, 2025") # params
+
+create_interstellar_checkbutton("PANSTARRS", comet_c2025r3_var, "(2025-09-07 to 2026-01-11)", 
+                         "April 19, 2026 at 21:31 UTC") # data arc: 2025-09-07 to 2026-01-11
 
 create_interstellar_checkbutton("Borisov", comet_2025v1_var, "(2025-10-29 to 2029-12-31)", 
                          "November 16, 2025") # params

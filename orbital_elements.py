@@ -634,6 +634,44 @@ planetary_params = {
         # PER= 22553.953438133 jy = 8237831.493 days
     }, 
 
+    'PANSTARRS': {                  # PANSTARRS (C/2025 R3)   Rec #:90004930 (+COV) Soln.date: 2026-Jan-13_08:12:19 
+        # data arc: 2025-09-07 to 2026-01-11   
+        'a': -1517.905498054856,   # Horizons: A, semi-major axis in AU; negative for hyperbolic
+        'e': 1.000328480251838,   # Horizons: EC, eccentricity
+        'i': 124.7293449694749,      # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 162.226608108783, # Horizons: W, argument of perihelion in degrees
+        'Omega': 38.69210120731782,   # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2025-Nov-05',
+        'TP': 2461150.3967522238  # 2026-Apr-19.8967522238
+        # PER= HYPERBOLIC
+    },
+
+    '6AC4721': {                            # preliminary C/2026 A1 not in Horizons. Source: MPEC 2026-A49, discovered 2026-01-13
+        'a': 89.88,                         # Horizons: A, semi-major axis in AU
+        'e': 0.99994,                       # Horizons: EC, eccentricity
+        'i': 144.51,                        # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 87.97,                     # Horizons: W, argument of perihelion in degrees
+        'Omega': 9.28,                      # Horizons: OM, longitude of ascending node in degrees
+        'MA': 359.907,                       # Mean Anomaly (degrees) at Epoch 2026-Jan-14.0; calculated from perihelion date
+        'epoch': '2026-01-14',               
+        'TP': 2461134.92,                   # Corresponds to April 4, 2026, at 10:04 UTC
+    #    'Tapo':     
+        # PER= 852 years
+    },        
+
+    'MAPS': {                               # C/2026 A1, discovered 2026-01-13
+        'a': 109.4482298572126,             # Horizons: A, semi-major axis in AU
+        'e': .9999501049489632,             # Horizons: EC, eccentricity
+        'i': 144.5100163985513,             # Horizons: IN, inclination in degrees; retrograde > 90
+        'omega': 86.48357844330381,         # Horizons: W, argument of perihelion in degrees
+        'Omega': 7.887906287190159,         # Horizons: OM, longitude of ascending node in degrees
+    #    'MA': 359.9323712193677,           # Mean Anomaly (degrees) at Epoch 2026-Jan-14.0; calculated from perihelion date
+        'epoch': '2026-Jan-16',               
+        'TP': 2461135.0670770155,           # Corresponds to 2026-Apr-04.5670770155 UTC
+    #    'Tapo':     
+    # PER= 1145.0417320858 years
+    }, 
+
     '2017 OF201': {  # Epoch 2012-Jan-22.00
         'a': 911.3212633626483,         # A
         'e': .95044195853967,         # EC

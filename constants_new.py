@@ -190,7 +190,9 @@ KNOWN_ORBITAL_PERIODS = {
     'Ikeya-Seki': 319800.00,        # 876.0 * 365.25 (estimate)
     'ISON': 230970.00,              # 632.3 * 365.25 (pre-disruption)
     'SWAN': 8237831.493,            # PER= 22553.953438133 jy
-    'Lemmon': 492252.5179,      # PER= 1347.7139437075 jy    
+    '6AC4721': 311232,              # Approximate period for sungrazer comet C/2026 A1. This is equivalent to roughly 852.1 years.
+    'MAPS': 418226.4926,            # Approximate period for sungrazer comet C/2026 A1. This is equivalent to roughly 1145.041732 years.    
+    'Lemmon': 492252.5179,          # PER= 1347.7139437075 jy    
     
     # For hyperbolic/parabolic objects, period is undefined
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
@@ -198,6 +200,7 @@ KNOWN_ORBITAL_PERIODS = {
     'Borisov': None,        # Hyperbolic comet - effectively infinite period    
     'McNaught': None,       # Hyperbolic comet - effectively infinite period 
     'ATLAS': None,          # Hyperbolic comet -- infinite period   PER= 9.999999E99
+    'PANSTARRS': None,      # PER= 9.999999E99 jy (hyperbolic)
     '3I/ATLAS': None,       # Interstellar hyperbolic object - effectively infinite period
     '1I/Oumuamua': None,    # Interstellar hyperbolic object - effectively infinite period  
     '2I/Borisov': None,     # Interstellar hyperbolic object - effectively infinite period
@@ -548,6 +551,9 @@ def color_map(planet):
         'Churyumov': 'gold',
         '2I/Borisov': 'red',
         'SWAN': 'gold',
+        'PANSTARRS': 'green',
+        '6AC4721': 'cyan',
+        'MAPS': 'cyan',
         'Lemmon': 'green',        
 
         'SOHO': 'white',
@@ -2086,6 +2092,30 @@ INFO = {
         'could become bright enough to be seen with the naked eye under dark skies, potentially reaching an apparent magnitude of 4 or higher.\n' 
         '* Its orbital period is uncertain, but estimates range from 1,400 to over 20,000 years.\n' 
         '* There is also a chance that Earth may pass through debris from the comet, potentially causing a minor meteor shower around October 5, 2025.',
+
+        'PANSTARRS': 
+        # '***TO VISUALIZE THE COMPLETE ORBIT, SET MANUAL SCALE TO AT LEAST 1500 AU***\n\n'
+        'Horizons: C/2025 R3. Comet C/2025 R3 (PANSTARRS) is a non-periodic comet that was discovered on September 8, 2025.\n' 
+        '* The discovery was made by the Pan-STARRS survey team, who identified the comet in images from the Pan-STARRS telescope.\n' 
+        '* The comet has a long, impressive tail, which has been observed to be about 2 degrees long, or roughly the length of five full moons.\n' 
+        '* The comet reached its perihelion on April 19, 2026, at a distance of about 0.5 astronomical units (AU).\n' 
+        '* After its perihelion, it became more visible from Earth. Its closest approach to our planet is projected to occur around ' 
+        'May 19-21, 2026, at a distance of approximately 0.26 AU (39 million kilometers or 24 million miles).\n' 
+        '* Initially, the comet was best observed from the Southern Hemisphere, but as it moves away from the sun, it will become ' 
+        'easier to see from the Northern Hemisphere. It is currently visible through binoculars, and there is a possibility that it ' 
+        'could become bright enough to be seen with the naked eye under dark skies, potentially reaching an apparent magnitude of 4 or higher.\n' 
+        '* Its orbital period is uncertain (hyperbolic), but estimates range from 1,400 to over 20,000 years.\n', 
+
+        '6AC4721': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
+        'Comet provisionally designated 6AC4721 (expected to be formally designated C/2026 A1), which was discovered just days ago on ' 
+        'January 13, 2026. This discovery has generated significant excitement in the astronomical community because it appears to be a Kreutz sungrazer ' 
+        'found at an unusually large distance from the Sun, suggesting it could be a substantial object.',
+
+        'MAPS': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
+        'Horizons: C/2026 A1. Comet MAPS (C/2026 A1) is a recently discovered comet that has garnered significant attention due to its unique characteristics. \n'
+        'Comet provisionally designated 6AC4721 (expected to be formally designated C/2026 A1), which was discovered just days ago on ' 
+        'January 13, 2026. This discovery has generated significant excitement in the astronomical community because it appears to be a Kreutz sungrazer ' 
+        'found at an unusually large distance from the Sun, suggesting it could be a substantial object.',
 
         'Lemmon': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 250 AU.***\n\n'
         'Horizons: C/2025 A6. Retrograde orbit; i>90. Comet C/2025 A6 (Lemmon) is a non-periodic comet discovered by the Mount Lemmon Survey. It\'s ' 

@@ -13,7 +13,7 @@ This module provides functions to:
 
 import numpy as np
 import plotly.graph_objects as go
-from constants_new import KNOWN_ORBITAL_PERIODS, color_map
+from constants_new import KNOWN_ORBITAL_PERIODS, color_map, CENTER_BODY_RADII
 from datetime import datetime, timedelta
 
 # ADD THIS TO YOUR apsidal_markers.py FILE
@@ -126,8 +126,17 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
     hover_text += f"Date: {date}<br>"        
 #    hover_text += f"Distance from {center_body}: {actual_r:.6f} AU<br>"
     hover_text += f"Distance from center: {actual_r:.9f} AU<br>"
+        
+    # Add distance from surface for perihelion if center body radius is known
+    if is_perihelion and center_body in CENTER_BODY_RADII:
+        center_radius_km = CENTER_BODY_RADII[center_body]
+        center_radius_au = center_radius_km / 149597870.7  # km to AU
+        surface_distance_au = actual_r - center_radius_au
+        surface_distance_km = surface_distance_au * 149597870.7
+        hover_text += f"Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)<br>"
     
     # DEBUG: Log all conditions for perturbation analysis
+
     print(f"[HOVER DEBUG] {obj_name} {marker_type}:", flush=True)
     print(f"  ideal_pos is not None: {ideal_pos is not None}", flush=True)
     print(f"  params is not None: {params is not None}", flush=True)
@@ -1185,7 +1194,18 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         q_str = str(q)
         print(f"WARNING: Could not format q value for {obj_name}: {q}", flush=True)
     
-    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q_str} AU{accuracy_note}"
+    # Calculate distance from surface if center body radius is known
+    surface_distance_text = ""
+    print(f"DEBUG SURFACE: center_body='{center_body}', in CENTER_BODY_RADII={center_body in CENTER_BODY_RADII}", flush=True)  # TEMP DEBUG
+    if center_body in CENTER_BODY_RADII:
+        center_radius_km = CENTER_BODY_RADII[center_body]
+        center_radius_au = center_radius_km / 149597870.7  # km to AU
+        surface_distance_au = q - center_radius_au
+        surface_distance_km = surface_distance_au * 149597870.7
+        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
+    
+    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q_str} AU{surface_distance_text}{accuracy_note}"
+#    hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q_str} AU{accuracy_note}"
     
     # DEBUG: Uncomment these lines to diagnose hover text issues
     print(f"DEBUG: {obj_name} {label} hover text: {hover_text}", flush=True)
@@ -1293,6 +1313,8 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     
     # Use proper terminology for this central body
     label = f"Keplerian {far_term}"
+        
+
     
     # Create hover text
     # Ensure Q is properly formatted
@@ -1302,8 +1324,18 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         Q_str = str(Q)
         print(f"WARNING: Could not format Q value for {obj_name}: {Q}", flush=True)
     
-    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q_str} AU{accuracy_note}"
+    # Calculate distance from surface if center body radius is known
+    surface_distance_text = ""
+    if center_body in CENTER_BODY_RADII:
+        center_radius_km = CENTER_BODY_RADII[center_body]
+        center_radius_au = center_radius_km / 149597870.7  # km to AU
+        surface_distance_au = Q - center_radius_au
+        surface_distance_km = surface_distance_au * 149597870.7
+        surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
     
+    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q_str} AU{surface_distance_text}{accuracy_note}"
+#    hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q_str} AU{accuracy_note}"
+
     # DEBUG: Uncomment these lines to diagnose hover text issues
     print(f"DEBUG: {obj_name} {label} hover text: {hover_text}", flush=True)
    
