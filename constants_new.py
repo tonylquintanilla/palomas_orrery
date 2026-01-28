@@ -5,11 +5,34 @@
 import numpy as np
 from datetime import datetime, timedelta
 
-DEFAULT_MARKER_SIZE = 6
+DEFAULT_MARKER_SIZE = 7
 HORIZONS_MAX_DATE = datetime(2199, 12, 29, 0, 0, 0)
 CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
 KM_PER_AU = 149597870.7   # Approximate kilometers per Astronomical Unit
+
+# Solar structure (in AU unless noted)
+CORE_AU = 0.00093               # Core in AU, or approximately 0.2 Solar radii
+RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, or approximately 0.7 Solar radii
+SOLAR_RADIUS_AU = 0.00465047    # Sun's radius in AU
+
+# Solar atmosphere (in solar radii)
+CHROMOSPHERE_RADII = 1.5        # Chromosphere extends from about 1 to 1.5 solar radii
+INNER_CORONA_RADII = 3          # Inner corona extends to 2 to 3 solar radii
+OUTER_CORONA_RADII = 50         # Outer corona extends up to 50 solar radii
+
+# Heliosphere boundaries (in AU)
+TERMINATION_SHOCK_AU = 94       # Where solar wind slows to subsonic speeds
+HELIOPAUSE_RADII = 26449        # Outer boundary of solar wind, about 123 AU
+
+# Oort Cloud and gravitational influence (in AU)
+INNER_LIMIT_OORT_CLOUD_AU = 2000    # Inner Oort cloud inner boundary
+INNER_OORT_CLOUD_AU = 20000         # Inner Oort cloud outer boundary
+OUTER_OORT_CLOUD_AU = 100000        # Oort cloud outer boundary
+GRAVITATIONAL_INFLUENCE_AU = 126000 # Sun's gravitational influence
+
+# Spacecraft reference
+PARKER_CLOSEST_RADII = 8.2      # Parker's closest approach 12-24-24 (0.41 AU, 8.2 solar radii)
 
 # Orbital parameters for planets and dwarf planets
 # https://ssd.jpl.nasa.gov/sats/elem/
@@ -173,6 +196,7 @@ KNOWN_ORBITAL_PERIODS = {
     'Polymele': 4319.33,   # 11.83 * 365.25
     'Eurybates': 4333.71,  # 11.87 * 365.25
     'Patroclus': 4336.36,  # 11.88 * 365.25
+    'Menoetius': 4336.36,  # 11.88 * 365.25
     'Leucus': 4352.24,     # 11.92 * 365.25
     
     # Near-Earth asteroids
@@ -500,6 +524,7 @@ def color_map(planet):
         'Pioneer 10': 'red',
         'Pioneer 11': 'green',
         'Clipper': 'red',
+        'JUICE': 'blue', 
         'OSIRIS': 'cyan',
         'Parker': 'white',
         'JWST': 'gold',
@@ -564,6 +589,7 @@ def color_map(planet):
         'Donaldjohanson': 'red',
         'Eurybates': 'green',
         'Patroclus': 'white',
+        'Menoetius': 'red',
         'Leucus': 'gold',
         'Polymele': 'cyan',
         'Orus': 'pink',
@@ -1023,7 +1049,13 @@ INFO = {
 
         'Eurybates': 'Horizons: 1973 SO. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
-        'Patroclus': 'Horizons: A906 UL. A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Patroclus': '***SET MANUAL SCALE TO 10 TO SEE JUPITER AND CLOSEST LUCY APPROACHES IN MARCH 2033***\n'
+        '***TO SEE CLOSEST LUCY APPROACH SET DATES NEAR MARCH 3, 2033 17:27, WITH BARYCENTER***\n\n'
+        'Horizons: A906 UL. A trojan asteroid that will be visited by the Lucy spacecraft. Binary companion to Menoetius.',
+
+        'Menoetius': '***SET MANUAL SCALE TO 10 TO SEE JUPITER AND CLOSEST LUCY APPROACHES IN MARCH 2033***\n'
+        '***TO SEE CLOSEST LUCY APPROACH SET DATES NEAR MARCH 3, 2033 17:27, WITH BARYCENTER***\n\n'
+        'Horizons: 2010 TT191. A trojan asteroid that will be visited by the Lucy spacecraft. Binary companion to Patroclus.',
 
         'Polymele': 'Horizons: 1999 WB2. A trojan asteroid that will be visited by the Lucy spacecraft.',
 
@@ -1037,7 +1069,7 @@ INFO = {
         '* Jupiter-centered: do not select Jupiter; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Jupiter with or without shells.\n'
         '* Missions: Pioneer 10 and 11; Voyager 1 and 2; Ulysses; Cassini-Huygens; New Horizons; Galileo;\n' 
-        '  Juno; JUpiter ICy moons Explorer (JUICE);Europa Clipper.\n\n'
+        '  Juno; JUpiter ICy moons Explorer (JUICE); Europa Clipper.\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
         'Metis': 'Horizons: 516. Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
@@ -1536,6 +1568,36 @@ INFO = {
         'Pioneer 11': '***PLOT WITH SATURN. CURRENTLY AT 116 AU.\n'
         'Horizons: -24. The first spacecraft to encounter Saturn and study its rings.',
         
+        'JUICE': '***SET MANUAL SCALE TO 5 AU. PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
+        'Horizons: -28.   The JUICE orbiter will investigate Ganymede and evaluate its potential to support life.\n' 
+        '* The Jupiter Icy moons Explorer ("JUICE") is an ESA mission launched April 14, 2023 @ 12:14 UTC from French Guiana (ELA-3) on ' 
+        'an Ariane 5. Its period and area of operations will overlap with NASA\'s Europa Clipper mission launching in 2024.\n' 
+        '* JUICE is planned to arrive at Jupiter in July 2031, and will perform multiple flybys of Europa, Callisto, and Ganymede before '
+        'entering orbit around Ganymede in December 2034. The nominal mission duration is three and a half years, with possible extensions.\n'
+        '* Main science objectives for Ganymede (and Callisto to lesser extent):\n'
+        '  * Characterize ocean layers & detect detect any subsurface water reservoirs\n'
+        '  * Topographical, geological and compositional mapping of surface\n'
+        '  * Study the physical properties of the icy crusts \n'
+        '  * Characterisation of internal mass distribution and dynamics\n'
+        '  * Investigate Ganymede\'s tenuous atmosphere\n'
+        '  * Study Ganymede\'s magnetic field and interactions with Jovian magnetosphere\n'
+        '* For Europa, the focus is on the chemistry essential to life. JUICE will also provide the first subsurface sounding of the moon, and determination of icy '
+        'crust thickness over the most recently active regions.\n'
+        '* JUICE will have four gravity assist flybys of Venus and Earth and pass through the asteroid Main-Belt twice before arriving at Jupiter in July, 2031. ' 
+        '  * There will be a Ganymede flyby 7.5 hours prior to Jupiter orbit insertion.\n'
+        '  * The first Europa flyby will be in July 2032. The spacecraft will be placed in a high inclination orbit to allow exploration of Jupiter\'s polar regions '
+        '  and to study Jupiter\'s magnetosphere.' 
+        ' * There will be a total of 35 flybys of the three moons over 3.5 years. In December 2034, the spacecraft will enter orbit around Ganymede, becoming ' 
+        'the first spacecraft to orbit a moon other than Earth\'s.\n'
+        '* Key Mission Events:\n'
+        '  * Launch: 2023 Apr 14, 12:14 UTC (Ariane 5, Kourou)\n'
+        '  * 2024 Aug: Earth-Moon system (gravity-assist)\n'
+        '  * 2025 Aug: Venus (gravity assist)\n'
+        '  * 2026 Sep: Earth #2 (gravity assist)\n'
+        '  * 2029 Jan: Earth #3 (gravity assist)\n'
+        '  * 2029 Oct: Asteroid 223 Rosa [PROPOSED]\n'
+        '  * 2031+   : more then 25 gravity assists, two Europa flybys',
+
         'Europa-Clipper': '***SET MANUAL SCALE TO 5 AU. PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
         'Horizons: -159. NASA\'s Europa Clipper spacecraft will carry a suite of science instruments to assess habitability of ' 
         'Jupiter\'s ice-covered moon Europa (502) while confirming the existence and nature of an expected sub-surface ocean.\n' 
@@ -1712,7 +1774,11 @@ INFO = {
         'The two orbiters (MPO and Mio) will then separate and begin their individual science missions.\n ' 
         '  * The BepiColombo mission has a planned duration of one Earth year of scientific observations at Mercury. This ' 
         'nominal mission is set to begin in April 2027, after the orbiters have settled into their final orbits and ' 
-        'completed their commissioning phase.\n ' 
+        'completed their commissioning phase.\n '
+        '    * The Mercury Planetary Orbiter (MPO) (-2000121)  will enter a low-altitude, nearly circular orbit, allowing it to ' 
+        'closely study Mercury\'s surface and internal structure.\n '
+        '    * The Mercury Magnetospheric Orbiter (Mio) (-2000122) will enter a more elliptical orbit, enabling it to '
+        'investigate Mercury\'s magnetic field and its interaction with the solar wind from various distances.\n '
         '  * If the spacecraft remain in good health and there\'s continued scientific interest, the mission could be ' 
         'prolonged for another one to two years. This would allow scientists to gather even more data and further deepen ' 
         'our understanding of Mercury.\n '

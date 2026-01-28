@@ -1,32 +1,57 @@
 #Paloma's Orrery - Solar System Visualization Tool
-
+# annotated by Tony working with Claude 
 # Import necessary libraries
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
-from tkinter import scrolledtext
-from astroquery.jplhorizons import Horizons
-import numpy as np
-from datetime import datetime, timedelta
-import calendar
-import plotly.graph_objs as go
-import webbrowser
-import os
-import warnings
+import tkinter as tk                                        # Import whole library, give it a nickname; python's gui toolkit
+from tkinter import ttk                                     # Import just ONE thing from a library; more sophisticated gui elements
+from tkinter import messagebox                              # allows diaglog boxes
+from tkinter import scrolledtext                            # allows text boxes that can be scrolled
+from astroquery.jplhorizons import Horizons                 # we are importing from astroquery the subpackage jplhorizons and specifically the Horizons class
+                                                            # that handles how we structure queries from JPL Horizons. Horizons is the same system used by NASA!
+import numpy as np                                          # we are importing numpy using its standard nickname np; numbpy efficiently handles math function and arrays
+from datetime import datetime, timedelta                    # from datetime we are importing two classes. datetime allows us to define a moment in time.
+                                                            # timedelta allows us to define a time increment. these can be used in various functions with arguments. 
+import calendar                                             # handles calendar functions 
+import plotly.graph_objs as go                              # we are importing the MIT licensed plotly library and its subpackage graph_objs with the nickname go 
+                                                            # we will use go with various classes to create graphical objects
+import webbrowser                                           # opens urls in your default browser 
+import os                                                   # Import whole library, no nickname. this is a key import that allows interaction with the user's 
+                                                            # operating system and file structure. 
+import warnings                                             # handles warnings to the user
 # from astropy.utils.exceptions import ErfaWarning
-from erfa import ErfaWarning
-from astropy.time import Time
-import traceback
-import threading
-import time  # Used here for simulation purposes
-import subprocess
-import sys
-import math
-import json
-import platform
-import orbit_data_manager
-import shutil
-import copy
+# from erfa import ErfaWarning
+# ErfaWarning - for suppressing astronomy library warnings about "dubious" dates.
+# Import path has changed across versions (astropy → erfa → erfa.core).
+try:
+    from erfa.core import ErfaWarning
+except ImportError:
+    from erfa import ErfaWarning                            # deprecation warnings are internal to astropy/erfa; this is safe to ignore: 
+                                                            # WARNING: AstropyDeprecationWarning: Importing ErfaWarning from astropy.utils.exceptions was 
+                                                            # deprecated in version 6.1 and will stop working in a future version. Instead, please use 
+                                                            # from erfa import ErfaWarning -- which we do
+
+from astropy.time import Time                               # from the astropy library we are importing the Time class to handle conversion to julian dates for 
+                                                            # Horizons queries
+import traceback                                            # provides the user information about where the program errors occured without stopping the program
+import threading                                            # this is an unused import that is a legacy import. threading allows processes to run in the background 
+                                                            # for processing efficiency. however, threading is handled differently in different platforms such as 
+                                                            # windows and macOS. now we use threading in a safe way in other modules such as shutdown_handler.py.
+import time                                                 # this is an unused import. time allows time to be used in function where time intervals are needed, such
+                                                            # as pausing to prevent a rate limiting error. time is used in other modules such as orbit_data_manager.py.
+                                                            # time may have been used in debugging at some point and is a legacy import.
+import subprocess                                           # this is an unused import. it allows python to call other programs. it is not used in this module, but it
+                                                            # is used in other modules such as star_visualization.py, which was originally part of this main gui.
+import sys                                                  # handles system specific functions 
+import math                                                 # unused import. handles basic math functions and was likely used in early version before moving to numpy
+import json                                                 # reads and writes json files 
+import platform                                             # detects what operating system you are working in 
+import orbit_data_manager                                   # Import YOUR OWN module (a .py file you wrote)
+import shutil                                               # this is an unused import. it handles comples file operations but these function were split off to other
+                                                            # modules such as orbit_data_manager.py and save_utils.py for better organization.
+import copy                                                 # is is actually used even though greyed out. it allows copying of python objects. 
+from celestial_objects import (                             # importing definitions and functions.  
+    OBJECT_DEFINITIONS, build_objects_list, get_all_var_names,
+    SHELL_DEFINITIONS, build_shell_checkboxes  # Phase 2
+)
 from osculating_cache_manager import get_elements_with_prompt
 from orbital_param_viz import create_orbital_transformation_viz, create_orbital_viz_window 
 from palomas_orrery_helpers import (calculate_planet9_position_on_orbit, rotate_points2, calculate_axis_range,
@@ -50,7 +75,7 @@ from comet_visualization_shells import (
     add_comet_tails_to_figure,           
     COMET_FEATURE_THRESHOLDS     
 )
-from planet_visualization import (
+from planet_visualization import (              # the gryed out imports are created in runtime with celestial_objects.py
     create_celestial_body_visualization,
     create_planet_visualization,
     create_planet_shell_traces,
@@ -178,7 +203,7 @@ from solar_visualization_shells import (
     core_info
 )
 
-from asteroid_belt_visualization_shells import (
+from asteroid_belt_visualization_shells import (            # the greyed out imports are used in planet_visualization.py at runtime
     create_main_asteroid_belt,
     create_hilda_group,
     create_jupiter_trojans_greeks,
@@ -193,13 +218,34 @@ from asteroid_belt_visualization_shells import (
 )
 
 from constants_new import (
+    DEFAULT_MARKER_SIZE,
     color_map,
     note_text,
     INFO,
     CENTER_BODY_RADII,
     KM_PER_AU, 
     LIGHT_MINUTES_PER_AU,
-    KNOWN_ORBITAL_PERIODS
+    KNOWN_ORBITAL_PERIODS,
+    HORIZONS_MAX_DATE,
+    CENTER_MARKER_SIZE,
+    # Solar structure
+    CORE_AU,
+    RADIATIVE_ZONE_AU,
+    SOLAR_RADIUS_AU,
+    # Solar atmosphere
+    CHROMOSPHERE_RADII,
+    INNER_CORONA_RADII,
+    OUTER_CORONA_RADII,
+    # Heliosphere
+    TERMINATION_SHOCK_AU,
+    HELIOPAUSE_RADII,
+    # Oort Cloud
+    INNER_LIMIT_OORT_CLOUD_AU,
+    INNER_OORT_CLOUD_AU,
+    OUTER_OORT_CLOUD_AU,
+    GRAVITATIONAL_INFLUENCE_AU,
+    # Spacecraft
+    PARKER_CLOSEST_RADII
 )
 
 # from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, format_detailed_hover_text)
@@ -218,6 +264,7 @@ except ImportError:
     print("Note: earth_system_visualization_gui.py not found", flush=True)    
 
 # Fix Windows console encoding for Unicode symbols
+# Without this fix, printing "Declination: 45°" would crash on Windows.
 if sys.platform == 'win32':
     # Set console code page to UTF-8
     os.system('chcp 65001 > nul')
@@ -226,13 +273,13 @@ if sys.platform == 'win32':
     sys.stderr.reconfigure(encoding='utf-8')
 
 # Always run from the script's directory
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
-print(f"Working directory set to: {os.getcwd()}", flush=True)
+script_dir = os.path.dirname(os.path.abspath(__file__))                             # Get the directory where the script is located
+os.chdir(script_dir)                                                                # Change working directory to script's location
+print(f"Working directory set to: {os.getcwd()}", flush=True)                       # Print confirmation immediately (don't buffer)
 
 
 def get_fetch_interval_for_type(obj_type, obj_name, trajectory_interval, 
-                                default_interval,    # removed eccentric_interval,
+                                default_interval,                                   # removed eccentric_interval,
                                 satellite_interval, planetary_params):
     """
     Get the appropriate fetch interval based on object type.
@@ -566,6 +613,15 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
         # Add buffer for comfortable viewing - scale to see both orbits clearly
         max_range = 0.00015  # ~2.5x Vanth's orbital radius from barycenter
         print(f"[SCALING] Orcus-Vanth Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
+        return [-max_range, max_range]
+
+    # Special case: Patroclus-Menoetius Barycenter centered view
+    # Binary Trojan asteroid system (Lucy target, March 2033)
+    if center_object_name == 'Patroclus-Menoetius Barycenter':
+        # Binary separation ~692.5 km = 0.00000463 AU
+        # Add buffer for comfortable viewing - scale to see both objects clearly
+        max_range = 0.000012  # ~2.5x binary separation
+        print(f"[SCALING] Patroclus-Menoetius Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
         return [-max_range, max_range]
 
     max_distances = []
@@ -1261,27 +1317,6 @@ def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data,
 
 # ============= END REFINED ORBITS INTEGRATION =============
 
-DEFAULT_MARKER_SIZE = 7
-HORIZONS_MAX_DATE = datetime(2199, 12, 29, 0, 0, 0)
-CENTER_MARKER_SIZE = 10  # For central objects like the Sun
-
-# Constants
-LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
-KM_PER_AU = 149597870.7       # Kilometers per Astronomical Unit
-CORE_AU = 0.00093               # Core in AU, or approximately 0.2 Solar radii
-RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, or approximately 0.7 Solar radii
-SOLAR_RADIUS_AU = 0.00465047  # Sun's radius in AU
-INNER_LIMIT_OORT_CLOUD_AU = 2000   # Inner Oort cloud inner boundary in AU.
-INNER_OORT_CLOUD_AU = 20000   # Inner Oort cloud outer boundary in AU.
-OUTER_OORT_CLOUD_AU = 100000   # Oort cloud outer boundary in AU.
-GRAVITATIONAL_INFLUENCE_AU = 126000   # Sun's gravitational influence in AU.
-CHROMOSPHERE_RADII = 1.5    # The Chromosphere extends from about 1 to 1.5 solar radii or about 0.00465 - 0.0070 AU
-INNER_CORONA_RADII = 3  # Inner corona extends to 2 to 3 solar radii or about 0.01 AU
-OUTER_CORONA_RADII = 50       # Outer corona extends up to 50 solar radii or about 0.2 AU, more typically 10 to 20 solar radii
-TERMINATION_SHOCK_AU = 94       # Termination shock where the solar wind slows to subsonic speeds. 
-HELIOPAUSE_RADII = 26449         # Outer boundary of the solar wind and solar system, about 123 AU. 
-PARKER_CLOSEST_RADII = 8.2    # Parker's closest approach was 3.8 million miles on 12-24-24 at 6:53 AM EST (0.41 AU, 8.2 solar radii)
-
 # Add these constants after existing constants
 TEMP_CACHE_FILE = "orbit_paths_temp.json"
 CLEANUP_TRACKING_FILE = ".last_orbit_cleanup"
@@ -1298,9 +1333,15 @@ print("Working directory:", os.getcwd(), flush=True)
 # Create a global shutdown handler instance
 shutdown_handler = PlotlyShutdownHandler()
 
+# ============================================================================
+# MAIN WINDOW INITIALIZATION    
+# ============================================================================
+
 # Initialize the main window
-root = tk.Tk()
-root.title("Paloma's Orrery -- Updated: January 10, 2026")
+root = tk.Tk()                                                                  # this creates the main window. everthing below to root.mainloop() is setup.
+                                                                                # functions, widgets, and variable are defined but are not run until the mainloop
+                                                                                # is started. 
+root.title("Paloma's Orrery -- Updated: January 26, 2026")
 
 # ============================================================================
 # WINDOW GEOMETRY AND CONFIG MANAGEMENT
@@ -2257,6 +2298,8 @@ solarorbiter_var = tk.IntVar(value=0)
 
 akatsuki_var = tk.IntVar(value=0)
 
+juice_var = tk.IntVar(value=0)
+
 comet_ikeya_seki_var = tk.IntVar(value=0)
 
 comet_west_var = tk.IntVar(value=0)
@@ -2315,6 +2358,10 @@ polymele_var = tk.IntVar(value=0)
 eurybates_var = tk.IntVar(value=0)
 
 patroclus_var = tk.IntVar(value=0)
+
+menoetius_var = tk.IntVar(value=0)
+
+patroclus_barycenter_var = tk.IntVar(value=0)   # Patroclus-Menoetius Barycenter
 
 leucus_var = tk.IntVar(value=0)
 
@@ -2555,1079 +2602,14 @@ proxima_star_var = tk.IntVar(value=0)
 proximab_var = tk.IntVar(value=0)
 proximad_var = tk.IntVar(value=0)
 
-# Define the list of objects
-objects = [
-    # Existing Celestial Objects
-    {'name': 'Sun', 'id': '10', 'var': sun_var, 'color': color_map('Sun'), 'symbol': 'circle', 'object_type': 'fixed', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 10. NASA: "The Sun\'s gravity holds the solar system together, keeping everything in its orbit. "', 
-    'mission_url': 'https://science.nasa.gov/sun/'},
 
-    {'name': 'Mercury', 'id': '199', 'var': mercury_var, 'color': color_map('Mercury'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 199. NASA: "Mercury is the smallest planet in our solar system and the nearest to the Sun."', 
-    'mission_url': 'https://science.nasa.gov/mercury/'},
+# Build vars_dict from all IntVar variables defined above
+_var_names = get_all_var_names()
+vars_dict = {name: globals()[name] for name in _var_names if name in globals()}
 
-    {'name': 'Venus', 'id': '299', 'var': venus_var, 'color': color_map('Venus'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 299. NASA: "Venus is the second planet from the Sun, and the sixth largest planet. It\'s the hottest planet in our solar system."', 
-    'mission_url': 'https://science.nasa.gov/venus/'},
+# Build objects list from definitions
+objects = build_objects_list(OBJECT_DEFINITIONS, vars_dict, color_map)
 
-    {'name': 'Earth', 'id': '399', 'var': earth_var, 'color': color_map('Earth'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 399. Earth orbital period: 27.32 days.', 
-     'mission_url': 'https://science.nasa.gov/earth/', 'mission_info': 'Our home planet.'},
-
-    {'name': 'Moon', 'id': '301', 'var': moon_var, 'color': color_map('Moon'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 301. Earth orbital period: 27.32 days.', 
-     'mission_url': 'https://science.nasa.gov/moon/', 'mission_info': 'NASA: "The Moon rotates exactly once each time it orbits our planet."'},
-
-    {'name': 'Mars', 'id': '499', 'var': mars_var, 'color': color_map('Mars'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light."', 
-    'mission_url': 'https://science.nasa.gov/?search=mars'},
-
-    {'name': 'Jupiter', 'id': '599', 'var': jupiter_var, 'color': color_map('Jupiter'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 599. NASA: "Jupiter is the largest and oldest planet in our solar system."', 
-    'mission_url': 'https://science.nasa.gov/?search=Jupiter'},
-
-    {'name': 'Saturn', 'id': '699', 'var': saturn_var, 'color': color_map('Saturn'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 699. NASA: "Saturn is the sixth planet from the Sun and the second largest planet in our solar system."', 
-    'mission_url': 'https://science.nasa.gov/saturn/'},
-
-    {'name': 'Uranus', 'id': '799', 'var': uranus_var, 'color': color_map('Uranus'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 799. NASA: "Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth."', 
-    'mission_url': 'https://science.nasa.gov/uranus/'},
-
-    {'name': 'Neptune', 'id': '899', 'var': neptune_var, 'color': color_map('Neptune'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': None, 
-    'mission_info': 'Horizons: 899. NASA: "Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun."', 
-    'mission_url': 'https://science.nasa.gov/neptune/'},
-
-    {'name': 'Planet 9', 'id': 'planet9_placeholder', 'var': planet9_var, 'color': color_map('orbital'), 
-    'symbol': 'circle', 'object_type': 'hypothetical', 
-    'id_type': None, 
-    'mission_info': 'Hypothetical planet with estimated mass of 5-10 Earths at ~400-800 AU. Not yet directly observed. Visualization is our estimate and not from JPL Horizons.',
-    'mission_url': 'https://en.wikipedia.org/wiki/Planet_Nine'},
-
-# Centaurs asteroids
-
-    {'name': 'Chariklo', 'id': '1997 CU26', 'var': chariklo_var, 'color': color_map('Chariklo'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1997 CU26. Large Centaur. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/10199-chariklo/'},
-
-# Dwarf planets
-
-# Original Pluto (keep as-is)
-    {'name': 'Pluto', 'id': '999', 'var': pluto_var, 
-     'color': color_map('Pluto'), 'symbol': 'circle', 'object_type': 'orbital', 
-     'id_type': None, 
-     'mission_info': 'Horizons: 999. NASA: "Pluto is a dwarf planet located in a distant region of our solar system beyond Neptune known as the Kuiper Belt."', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
-
-    # NEW: Pluto-Charon Barycenter
-    {'name': 'Pluto-Charon Barycenter', 'id': '9', 'var': pluto_barycenter_var, 
-     'color': color_map('Pluto'), 'symbol': 'square-open', 'object_type': 'barycenter',
-     'description': 'Center of mass for Pluto-Charon binary planet system'},
-
-    {'name': 'Ceres', 'id': 'A801 AA', 'var': ceres_var, 'color': color_map('Ceres'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'center_id': '2000001',  # Numeric ID for use as Horizons center    
-    'mission_info': 'Horizons: A801 AA. NASA: "Ceres was the first object discovered in the main asteroid belt. Dawn spacecraft orbited Ceres from 2015 to 2018."', 
-    'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
-
-#    {'name': 'Haumea', 'id': '2003 EL61', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
-#    'id_type': 'smallbody', 
-#    'mission_info': 'Horizons: 2003 EL61. Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
-#    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
-
-    {'name': 'Haumea', 'id': '20136108', 'var': haumea_var, 'color': color_map('Haumea'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'majorbody',
-    'helio_id': '2003 EL61',  # For Sun-centered plots
-    'mission_info': 'Horizons: 136108 Haumea. Egg-shaped dwarf planet with rings and two moons. Fastest rotating large body in the solar system (3.9 hour day).', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},    
-
-#    {'name': 'Eris', 'id': '2003 UB313', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'orbital', 
-    # 136199 primary (required for Sun centered plots)
-#    'id_type': 'smallbody', 
-#    'mission_info': 'Horizons: 2003 UB313. Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
-#    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
-
-    {'name': 'Eris', 'id': '20136199', 'var': eris_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'majorbody',
-    'helio_id': '2003 UB313',  # For Sun-centered plots
-    'mission_info': 'Horizons: 136199 Eris. Most massive dwarf planet (27% more than Pluto). Three times farther from the Sun than Pluto.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},    
-
-#    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var': eris2_var, 'color': color_map('Eris'), 'symbol': 'circle', 'object_type': 'satellite', 
-    # 20136199 satellite solution (required for Eris centered plots) 
-#    'id_type': 'smallbody', 
-#    'mission_info': 'Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
-#    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
-
-    {'name': 'Gonggong', 'id': '2007 OR10', 'var': gonggong_var, 'color': color_map('Gonggong'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'center_id': '20225088', # Numeric ID for use as Horizons center; Gonggong's moon Xiangliu
-    'mission_info': 'Horizons: 2007 OR10. Dwarf planet in the Kuiper Belt with a highly inclined orbit.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)'},
-
-    {'name': 'Makemake', 'id': '20136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'majorbody',
-    'helio_id': '2005 FY9',  # For Sun-centered plots; 
-    'mission_info': 'Horizons: 2005 FY9. Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
-
-#    Note: JPL has no satellite ephemeris for Makemake yet (MK2 discovered 2015)
-#    {'name': 'Makemake', 'id': '20136472', 'var': makemake_var, 'color': color_map('Makemake'), 'symbol': 'circle', 'object_type': 'orbital', 
-#    'id_type': 'majorbody',
-#    'helio_id': '2005 FY9',  # For Sun-centered plots
-#    'mission_info': 'Horizons: 136472 Makemake. Second-brightest Kuiper Belt object. Has one known moon (MK2).', 
-#    'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},    
-
-    {'name': 'Mani', 'id': '2002 MS4', 'var': ms4_var, 'color': color_map('MS4'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2002 MS4. One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
-    'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
-
-    {'name': 'Orcus', 'id': '920090482', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'center_id': '920090482', # PRIMARY body ID for use as Horizons center (not small body designation)
-    'helio_id': '2004 DW',
-    'helio_id_type': 'smallbody',
-#    {'name': 'Orcus', 'id': '2004 DW', 'var': orcus_var, 'color': color_map('Orcus'), 'symbol': 'circle', 'object_type': 'orbital', 
-#    'id_type': 'smallbody', 
-#    'center_id': '2090482', # Numeric ID for use as Horizons center; Orcus's moon Vanth
-    'mission_info': 'Horizons: 2004 DW.A dwarf planet in the Kuiper Belt with a moon named Vanth.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
-
-    # NEW: Orcus-Vanth Barycenter - HIGHEST mass ratio binary system in the solar system!
-    {
-#    'name': 'Orcus-Vanth Barycenter', 'id': '2090482', 'var': orcus_barycenter_var, 
-    'name': 'Orcus-Vanth Barycenter', 'id': '20090482', 'var': orcus_barycenter_var,
-     'color': color_map('Orcus'), 'symbol': 'square-open', 'object_type': 'barycenter',
-     'description': 'Center of mass for Orcus-Vanth binary system (16% mass ratio - highest known!)'},
-
-    {'name': 'Quaoar', 'id': '2002 LM60', 'var': quaoar_var, 'color': color_map('Quaoar'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'center_id': '2050000', # Numeric ID for use as Horizons center; Quaoar's moon Weywot
-    'mission_info': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system.', 
-    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
-
-    {'name': 'Sedna', 'id': '2003 VB12', 'var': sedna_var, 'color': color_map('Sedna'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2003 VB12. A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
-    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
-
-    {'name': 'Leleakuhonua', 'id': '2015 TG387', 'var': leleakuhonua_var, 'color': color_map('Leleakuhonua'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2015 TG387. A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/541132_Lele%C4%81k%C5%ABhonua'},
-
-    {'name': '2017 OF201', 'id': '2017 OF201', 'var': of201_var, 'color': color_map('2017 OF201'), 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2017 OF201. A extreme trans-Neptunian object with an extremely long orbit.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/2017_OF201#:~:text=2017%20OF201%20is%20an,have%20a%20directly%20estimated%20size.'},
-
-    # Lagrange Points
-    # Earth-Moon Lagrange Points
-    {'name': 'EM-L1', 'id': '3011', 'var': eml1_var, 'color': color_map('EM-L1'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3011. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},  
-
-    {'name': 'EM-L2', 'id': '3012', 'var': eml2_var, 'color': color_map('EM-L2'), 'symbol': 'square-open', 'object_type': 'lagrange_point',   
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3012. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'}, 
-
-    {'name': 'EM-L3', 'id': '3013', 'var': eml3_var, 'color': color_map('EM-L3'), 'symbol': 'square-open', 'object_type': 'lagrange_point',   
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3013. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
-
-    {'name': 'EM-L4', 'id': '3014', 'var': eml4_var, 'color': color_map('EM-L4'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3014. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
-
-    {'name': 'EM-L5', 'id': '3015', 'var': eml5_var, 'color': color_map('EM-L5'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3015. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},    
-
-    # Sun-Earth-Moon-Barycenter Lagrange Points
-    {'name': 'L1', 'id': '31', 'var': l1_var, 'color': color_map('L1'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L1 31
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 31. The Sun & Earth-Moon Barycenter Lagrange-1 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
-
-    {'name': 'L2', 'id': '32', 'var': l2_var, 'color': color_map('L2'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L2 32
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 32. The Sun & Earth-Moon Barycenter Lagrange-2 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
-
-    {'name': 'L3', 'id': '33', 'var': l3_var, 'color': color_map('L3'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L3 33
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 33. The Sun & Earth-Moon Barycenter Lagrange-3 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
-
-    {'name': 'L4', 'id': '34', 'var': l4_var, 'color': color_map('L4'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L4 34
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 34. The Sun & Earth-Moon Barycenter Lagrange-4 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
-
-    {'name': 'L5', 'id': '35', 'var': l5_var, 'color': color_map('L5'), 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L5 35
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 35. The Sun & Earth-Moon Barycenter Lagrange-5 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
-
-    # Near-Earth Asteroids
-    {'name': 'Kamo oalewa', 'id': '2016 HO3', 'var': kamooalewa_var, 'color': color_map('Kamo oalewa'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2032, 12, 31), 
-    # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-04. PREDICTS-> 2025-SEP-29
-    'mission_info': 'Horizons: 2016 HO3. Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.', 
-    'mission_url': 'https://www.jpl.nasa.gov/news/small-asteroid-is-earths-constant-companion/'},
-
-    {'name': '2025 PN7', 'id': '2025 PN7', 'var': pn7_var, 'color': color_map('2025 PN7'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 
-    # 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31),   # full date range
-    'mission_info': '2025 PN7 is a small near-Earth asteroid and the most recently discovered quasi-satellite of Earth.',
-    'mission_url': 'https://en.wikipedia.org/wiki/2025_PN7'},
-
-    {'name': '2024 PT5', 'id': '2024 PT5', 'var': pt5_var, 'color': color_map('2024 PT5'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Horizons: 2024 PT5. Closest approach to Earth 8-9-2024.',
-    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
-
-    {'name': '2025 PY1', 'id': '2025 PY1', 'var': py1_var, 'color': color_map('2025 PY1'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 
-#    'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Horizons: 2025 PY1. Near-Earth asteroid.',
-    'mission_url': 'https://www.jpl.nasa.gov/asteroid-watch/next-five-approaches/'},    
-
-    {'name': '2023 JF', 'id': '2023 JF', 'var': asteroid2023jf_var, 'color': color_map('2023 JF'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 'start_date': datetime(1962, 1, 20), 'end_date': datetime(2025, 10, 4),
-    # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-09. PREDICTS-> 2025-OCT-04
-    'mission_info': 'Horizons: 2023 JF. Asteroid 2023 JF flew past Earth on May 9, 2023.', 
-    'mission_url': 'https://www.nasa.gov/solar-system/near-earth-object-observations-program/#:~:text=The%20NEO%20Observations%20Program%20sponsors,the%20sky%20to%20determine%20their'},
-
-    {'name': '2024 DW', 'id': '2024 DW', 'var': asteroid_dw_var, 'color': color_map('2024 DW'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 'start_date': datetime(2024, 2, 19), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Horizons: 2024 DW. Closest approach to Earth 2-22-2024 approximately 5 UTC. Keplerian orbit perturbation from Jupiter.',
-    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20DW'},
-
-    {'name': '2024 YR4', 'id': '2024 YR4', 'var': yr4_var, 'color': color_map('2024 YR4'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 'start_date': datetime(2024, 12, 24), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
-
-    # Main Belt Asteroids
-    {'name': 'Apophis', 'id': '2004 MN4', 'var': apophis_var, 'color': color_map('Apophis'), 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 
-    'center_id': '2099942',  # Numeric ID for use as Horizons center
-    'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target', 
-    'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
-
-    {'name': 'Bennu', 'id': '1999 RQ36', 'var': bennu_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'center_id': '2101955',  # Numeric ID for use as Horizons center
-    'mission_info': 'Horizons: 1999 RQ36. Studied by NASA\'s OSIRIS-REx mission.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
-
-#    {'name': 'Bennu/OSIRIS', 'id': '2101955', 'var': bennu2_var, 'color': color_map('Bennu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-#    'id_type': 'smallbody', # Bennu as a center object
-#    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
-#    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
-
-    {'name': 'Eros', 'id': 'A898 PA', 'var': eros_var, 'color': color_map('Eros'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody',
-    'center_id': '2000433',  # Numeric ID for use as Horizons center 
-    'mission_info': 'Horizons: A898 PA. First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
-
-    {'name': 'Dinkinesh', 'id': '1999 VD57', 'var': dinkinesh_var, 'color': color_map('Dinkinesh'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody',
-    'center_id': '2152830',  # Numeric ID for use as Horizons center
-    'mission_info': 'Horizons: 1999 VD57. Dinkinesh was visited by the mission Lucy.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/dinkinesh/'},
-
-    {'name': 'Itokawa', 'id': '1998 SF36', 'var': itokawa_var, 'color': color_map('Itokawa'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody',
-    'center_id': '2025143',  # Numeric ID for use as Horizons center 
-    'mission_info': 'Horizons: 1998 SF36. First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/25143_Itokawa'},
-
-    {'name': 'Lutetia', 'id': 'A852 VA', 'var': lutetia_var, 'color': color_map('Lutetia'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: A852 VA. Studied by European Space Agency\'s Rosetta mission.', 
-    'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
-
-    {'name': 'Ryugu', 'id': '1999 JU3', 'var': ryugu_var, 'color': color_map('Ryugu'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody',
-    'center_id': '2162173',  # Numeric ID for use as Horizons center  
-    'mission_info': 'Horizons: 1999 JU3. Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
-
-    {'name': 'Steins', 'id': '1969 VC', 'var': steins_var, 'color': color_map('Steins'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-     'id_type': 'smallbody',
-     'mission_info': 'Horizons: 1969 VC. Visited by European Space Agency\'s Rosetta spacecraft.', 
-     'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
-
-    {'name': 'Donaldjohanson', 'id': '1981 EQ5', 'var': donaldjohanson_var, 'color': color_map('Donaldjohanson'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-     'id_type': 'smallbody',
-     'mission_info': 'Horizons: 1981 EQ5. Visited by the NASA Lucy spacecraft.', 
-     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
-
-    {'name': 'Vesta', 'id': 'A807 FA', 'var': vesta_var, 'color': color_map('Vesta'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody',
-    'center_id': '2000004',  # Numeric ID for use as Horizons center 
-    'mission_info': 'Horizons: A807 FA. One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
-    'mission_url': 'https://dawn.jpl.nasa.gov/'},
-
-    # Trojan Asteroids
-    {'name': 'Eurybates', 'id': '1973 SO', 'var': eurybates_var, 'color': color_map('Eurybates'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1973 SO. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
-    'mission_url': 'https://www.nasa.gov/missions/hide-and-seek-how-nasas-lucy-mission-team-discovered-eurybates-satellite/'},
-
-    {'name': 'Patroclus', 'id': 'A906 UL', 'var': patroclus_var, 'color': color_map('Patroclus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: A906 UL. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
-    'mission_url': 'https://lucy.swri.edu/Patroclus.html'},
-
-    {'name': 'Polymele', 'id': '1999 WB2', 'var': polymele_var, 'color': color_map('Polymele'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1999 WB2. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
-    'mission_url': 'https://lucy.swri.edu/Polymele.html'},
-
-    {'name': 'Leucus', 'id': '1997 TS25', 'var': leucus_var, 'color': color_map('Leucus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1997 TS25. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
-    'mission_url': 'https://lucy.swri.edu/Leucus.html'},
-
-    {'name': 'Orus', 'id': '1999 VQ10', 'var': orus_var, 'color': color_map('Orus'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1999 VQ10. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
-    'mission_url': 'https://lucy.swri.edu/Orus.html'},
-
-    # Kuiper Belt Objects or Trans-Neptunian Objects (TNOs)
-
-    {'name': 'Arrokoth', 'id': '2014 MU69', 'var': arrokoth_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2014 MU69. Arrokoth flyby from New Horizons on January 1, 2019.', 
-    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
-
-    {'name': 'Arrokoth/New_Horizons', 'id': '2486958', 'var': arrokoth_new_horizons_var, 'color': color_map('Arrokoth'), 'symbol': 'circle-open', 'object_type': 'trajectory', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Arrokoth (2014 MU69) flyby from New Horizons on January 1, 2019.', 
-    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
-
-    {'name': 'Ixion', 'id': '2001 KX76', 'var': ixion_var, 'color': color_map('Ixion'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2001 KX76. A large Kuiper Belt object without a known moon.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/28978_Ixion'},
-
-    {'name': 'GV9', 'id': '2004 GV9', 'var': gv9_var, 'color': color_map('GV9'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/(90568)_2004_GV9'},
-
-    {'name': 'Varuna', 'id': '2000 WR106', 'var': varuna_var, 'color': color_map('Varuna'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2000 WR106. A significant Kuiper Belt Object with a rapid rotation period.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/20000_Varuna'},
-
-    {'name': 'Ammonite', 'id': '2023 KQ14', 'var': ammonite_var, 'color': color_map('Ammonite'), 'symbol': 'circle-open', 'object_type': 'orbital', 
-    # 136199 primary (required for Sun centered plots)
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2023 KQ14. Ammonite is classified as a sednoid, after Sedna.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/2023_KQ14'},     
-
-    # Comets
-
-    {'name': 'Churyumov', 'id': '90000699', 'var': comet_Churyumov_Gerasimenko_var, 'color': color_map('Churyumov'), # 67P/Churyumov-Gerasimenko
-    'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 
-    #'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
-    # data arc: 2008-06-01 to 2023-04-26; Epoch: 2015-Oct-10; 67P; previously rec 90000704; record number needed to fetch Horizons data.
-    'mission_info': 'Horizons: 67P. 67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft, August 2014 through September 2016.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
-
-    {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var': comet_hale_bopp_var, 'color': color_map('Hale-Bopp'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1993, 4, 28), 'end_date': datetime(2022, 7, 9),
-    # data arc: 1993-04-27 to 2022-07-09 
-    'mission_info': 'Horizons: C/1995 O1. Visible to the naked eye for a record 18 months.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/'},
-
-    {'name': 'Halley', 'id': '90000030', 'var': comet_halley_var, 'color': color_map('Halley'), 'symbol': 'diamond',
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    #'start_date': datetime(1900, 1, 1), 'end_date': datetime(1994, 1, 11), 
-    # data arc: 1835-08-21 to 1994-01-11; 1P/Halley requires the record number to fetch position data for the 1986 apparition.
-    'mission_info': 'Horizons: 1P/Halley. Retrograde. Most famous comet, returned in 1986 and will return in 2061. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/halley-1986'},
-
-    {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var': comet_hyakutake_var, 'color': color_map('Hyakutake'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    #'start_date': datetime(1996, 1, 2), 'end_date': datetime(1996, 11, 1),
-    # data arc: 1996-01-01 to 1996-11-02 
-    'mission_info': 'Horizons: C/1996 B2. Retrograde. Passed very close to Earth in 1996. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
-
-    {'name': 'Lemmon', 'id': 'C/2025 A6', 'var': comet_lemmon_var, 'color': color_map('Lemmon'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    # 'start_date': datetime(2024, 11, 12), 'end_date': datetime(2029, 12, 31), # all dates are valid in Horizons
-    #  data arc: 2024-11-12 to 2025-10-03
-    # PREDICTS-> 2025-DEC-29    Rec #:90004893 (+COV) Soln.date: 2025-Oct-03_14:42:16    # obs: 758 (2024-2025)
-    'mission_info': 'Horizons: C/2025 A6. Retrograde. In Fall 2025, Comet Lemmon is brightening and moving into morning northern skies.', 
-    'mission_url': 'https://apod.nasa.gov/apod/ap250930.html'},      
-
-    {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var': comet_ikeya_seki_var, 'color': color_map('Ikeya-Seki'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    #'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
-    'mission_info': 'Horizons: C/1965 S1-A. Retrograde. One of the brightest comets of the 20th century. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/ikeya-seki-1965'},
-
-    {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var': comet_neowise_var, 'color': color_map('NEOWISE'), 'symbol': 'diamond', # C/2020 F3
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    #'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
-    'mission_info': 'Horizons: C/2020 F3. Retrograde. Brightest comet visible from the Northern Hemisphere in decades. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
-
-    {'name': 'SWAN', 'id': 'C/2025 R2', 'var': comet_c2025r2_var, 'color': color_map('SWAN'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    #'start_date': datetime(2025, 8, 14), 'end_date': datetime(2025, 9, 14),
-    # data arc: data arc: 2025-08-13 to 2025-09-14;  EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-SEP-19. PREDICTS-> 2025-DEC-15
-    'mission_info': 'Horizons: C/2025 R2 (SWAN). This is a non-periodic comet that was discovered on September 11, 2025.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/C/2025_R2_(SWAN)'},     
-
-    {'name': '6AC4721', 'id': 'none', 'var': comet_6ac4721_var, 'color': color_map('6AC4721'), 'symbol': 'diamond',    # C/2026 A1 in Horizons
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    #'start_date': datetime(2026, 1, 13), 'end_date': datetime(2026, 1, 19),
-    'mission_info': 'Kreutz sungrazer found at an unusually large distance from the Sun. Discovered by the 6AC4721 survey.',  
-    'mission_url': 'https://en.wikipedia.org/wiki/C/2026_A1_(MAPS)'},      
-
-    {'name': 'MAPS', 'id': 'C/2026 A1', 'var': comet_c2026a1_var, 'color': color_map('MAPS'), 'symbol': 'diamond',    # C/2026 A1 in Horizons
-    'object_type': 'orbital', 'id_type': 'smallbody', 
-    'mission_info': 'Kreutz sungrazer comet discovered on 13 January 2026 from the AMACS1 Observatory in the Atacama Desert, Chile.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/C/2026_A1_(MAPS)'},      
-
-
-# Interstellar and hyperbolic objects
-
-# Hyperbolic solar
-
-    {'name': 'West', 'id': 'C/1975 V1', 'var': comet_west_var, 'color': color_map('Comet West'), 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
-    'mission_info': 'Horizons: C/1975 V1. Hyperbolic. Notable for its bright and impressive tail.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
-
-    {'name': 'McNaught', 'id': 'C/2006 P1', 'var': comet_mcnaught_var, 'color': color_map('McNaught'), 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2007, 7, 10), 
-    # data arc: 2006-08-07 to 2007-07-11
-    'mission_info': 'Horizons: C/2006 P1. Hyperbolic. Known as the Great Comet of 2007. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},  
-
-     {'name': 'Tsuchinshan', 'id': 'C/2023 A3', 'var': comet_tsuchinshan_atlas_var, 'color': color_map('Tsuchinsh'), 
-    'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', # check object type should be 'trajectory'
-    'start_date': datetime(2023, 1, 10), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'Horizons: C/2023 A3. Retrograde. Hyperbolic. Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/C/2023_A3_(Tsuchinshan-ATLAS)'},      
-
-    {'name': 'ATLAS', 'id': 'C/2024 G3', 'var': comet_atlas_var, 'color': color_map('ATLAS'), 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', # check object type should be 'trajectory'
-    # 'start_date': datetime(2024, 6, 18), 'end_date': datetime(2029, 12, 31), # all dates are valid in Horizons
-    # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-OCT-03. PREDICTS-> 2025-DEC-29
-    # data arc: 2024-04-05 to 2025-01-01
-    'mission_info': 'Horizons: C/2024 G3. Retrograde. Hyperbolic. The Great Comet of 2025. Comet C/2024 G3 (ATLAS) created quite a buzz in the Southern Hemisphere!', 
-    'mission_url': 'https://en.wikipedia.org/wiki/C/2024_G3_(ATLAS)'},
-
-    {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var': comet_2025k1_var, 'color': color_map('C/2025_K1'), 'symbol': 'diamond', 
-    # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
-    'object_type': 'trajectory', 'id_type': 'smallbody', 
-    # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic. A notable comet for observation in late 2025. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://theskylive.com/c2025k1-info'}, 
-
-    {'name': 'PANSTARRS', 'id': 'C/2025 R3', 'var': comet_c2025r3_var, 'color': color_map('PANSTARRS'), 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
-    'object_type': 'trajectory', 'id_type': 'smallbody', 
-    'mission_info': 'Horizons: C/2025 R3 (PANSTARRS). Retrograde. Hyperbolic. This is a non-periodic comet that was discovered on September 8, 2025.', 
-    'mission_url': 'https://www.space.com/astronomy/comets/will-comet-c-2025-r3-panstarrs-be-the-great-comet-of-2026'},
-
-    {'name': 'Borisov', 'id': 'C/2025 V1', 'var': comet_2025v1_var, 'color': color_map('Borisov'), 'symbol': 'diamond', 
-    # Borisov (C/2025 V1) 2025-Nov-11 16:37:03; data arc: 2025-10-29 to 2025-11-05
-    'object_type': 'trajectory', 'id_type': 'smallbody', 
-    # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-    'mission_info': 'Horizons: C/2025 V1. Retrograde. Hyperbolic. Discovered 11-2-2025. Most likely originated from the Oort Cloud.', 
-    'mission_url': 'https://theskylive.com/planetarium?obj=c2025v1'},
-
-# Hyperbolic and interstellar
-
-    {'name': '1I/Oumuamua', 'id': 'A/2017 U1', 'var': oumuamua_var, 'color': color_map('1I/Oumuamua'), 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1),
-    # data arc from 2017 October 14 to 2018 January 2 
-    'mission_info': 'Horizons: A/2017 U1. Retrograde. Hyperbolic. First known interstellar object detected passing through<br>' 
-    'the Solar System. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
-
-    {'name': '2I/Borisov', 'id': 'C/2019 Q4', 'var': comet_borisov_var, 'color': color_map('2I/Borisov'), 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 2, 25), 'end_date': datetime(2020, 9, 29), 
-    # data arc: 2019-02-24 to 2020-09-30
-    'mission_info': 'Horizons: C/2019 Q4. Hyperbolic. The second interstellar object detected, after \'1I/Oumuamua.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
-
-    {'name': '3I/ATLAS', 'id': 'C/2025 N1', 'var': atlas3i_var, 'color': color_map('3I/ATLAS'), 'symbol': 'diamond', 
-    # JPL/HORIZONS                  ATLAS (C/2025 N1)            2025-Oct-28 14:32:30
-    'object_type': 'trajectory', 'id_type': 'smallbody', 
-    'start_date': datetime(2025, 5, 15), 'end_date': datetime(2032, 12, 31),
-    # data arc: 2025-05-15 to 2025-09-21
-    'mission_info': 'Horizons: C/2025 N1. Retrograde. Hyperbolic. Third known interstellar object detected passing through<br>'  
-    'the Solar System. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
-
-    # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01
-
-    # Apollo 11 S-IVB (Spacecraft) -399110 Time Specification: Start=1969-07-16:40 UT , Stop=1969-07-28 00:06, Step=1 (hours) Revised: Mar 22, 2016  
-    {'name': 'Apollo 11 S-IVB', 'id': '-399110', 'var': apollo11sivb_var, 'color': color_map('Apollo 11 S-IVB'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1969, 7, 16), 'end_date': datetime(1969, 7, 28), # splashdown 07-24 16:50
-    'mission_url': 'https://www.nasa.gov/mission/apollo-11/', 
-    'mission_info': 'Horizons: -399110. This is the last and most powerful stage of the Saturn V rocket that propelled the Apollo 11 mission towards the Moon.'},
-
-    {'name': 'Pioneer 10', 'id': '-23', 'var': pioneer10_var, 'color': color_map('Pioneer 10'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2002, 3, 3), 
-    # No ephemeris for target "Pioneer 10 (spacecraft)" prior to A.D. 1972-MAR-03 02:04:00.0000 UT
-    # No ephemeris for target "Pioneer 10 (spacecraft)" after A.D. 2050-JAN-01 00:08:50.8161 UT
-    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'Horizons: -23. First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
-
-    {'name': 'Pioneer 11', 'id': '-24', 'var': pioneer11_var, 'color': color_map('Pioneer 11'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1973, 4, 7), 'end_date': datetime(1995, 9, 29),
-    # No ephemeris for target "Pioneer 11 (spacecraft)" prior to A.D. 1973-APR-06 02:25:00.0000 UT
-    # Science operations and daily telemetry ceased on September 30, 1995 
-    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'Horizons: -24. First spacecraft to encounter Saturn and study its rings.'},
-
-    {'name': 'Voyager 1', 'id': '-31', 'var': voyager1_var, 'color': color_map('Voyager 1'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 9, 6), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Horizons: -31. Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
-
-    {'name': 'Voyager 2', 'id': '-32', 'var': voyager2_var, 'color': color_map('Voyager 2'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 8, 21), 'end_date': datetime(2029, 12, 31), 
-    'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Horizons: -32. Launched in 1977, Voyager 2 explored all four giant planets.'},
-
-    {'name': 'Galileo', 'id': '-77', 'var': galileo_var, 'color': color_map('Galileo'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(1989, 10, 20), 'end_date': datetime(2003, 9, 29),
-    # No ephemeris for target "Galileo (spacecraft)" prior to A.D. 1989-OCT-19 01:28:37.0780 UT
-    # No ephemeris for target "Galileo (spacecraft)" after A.D. 2003-SEP-30 11:58:55.8177 UT
-    'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 
-    'mission_info': 'Horizons: -77. Galileo studied Jupiter and its moons from 1995 to 2003.'},
-
-    {'name': 'SOHO', 'id': '-21', 'var': soho_var, 'color': color_map('SOHO'), 
-    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1995, 12, 3), 'end_date': datetime(2025, 9, 28), 
-    # No ephemeris for target "SOHO (spacecraft)" after A.D. 2025-SEP-29 23:50:00.0000 UT
-    'mission_info': 'Horizons: -21. The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
-    'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
-
-    {'name': 'Cassini', 'id': '-82', 'var': cassini_var, 'color': color_map('Cassini'), 'symbol': 'diamond-open', 
-     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 14), 
-     # No ephemeris for target "Cassini (spacecraft)" after A.D. 2017-SEP-15 11:56:50.8176 UT
-     'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 
-     'mission_info': 'Horizons: -82. Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
-
-    {'name': 'Rosetta', 'id': '-226', 'var': rosetta_var, 'color': color_map('Rosetta'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 4),
-    # No ephemeris for target "Rosetta (spacecraft)" prior to A.D. 2004-MAR-02 09:25:55.8146 UT
-    # No ephemeris for target "Rosetta (spacecraft)" after A.D. 2016-OCT-04 23:59:59.9997 UT
-    'mission_url': 'https://rosetta.esa.int/', 
-    'mission_info': 'Horizons: -226. European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
-
-    {'name': 'New Horizons', 'id': '-98', 'var': new_horizons_var, 'color': color_map('New Horizons'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
-    # No ephemeris for target "New Horizons (spacecraft)" prior to A.D. 2006-JAN-19 19:50:13.1460 UT
-    # No ephemeris for target "New Horizons (spacecraft)" after A.D. 2030-JAN-01 11:58:50.8161 UT
-    'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
-    'mission_info': 'Horizons: -98. New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
-
-    {'name': 'Akatsuki', 'id': '-5', 'var': akatsuki_var, 'color': color_map('Akatsuki'), 'symbol': 'diamond-open',
-    # Akatsuki / VCO / Planet-C (spacecraft)           -5 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2010, 5, 22), 'end_date': datetime(2025, 8, 22), 
-    # No ephemeris for target "Planet-C (spacecraft)" prior to A.D. 2010-MAY-21 00:51:00.0000 UT
-    # No ephemeris for target "Planet-C (spacecraft)" after A.D. 2025-AUG-23 23:58:50.8172 UT
-    'mission_info': 'Horizons: -5. JAXA mission to study the atmospheric circulation of Venus', 
-    'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
-
-    {'name': 'Juno', 'id': '-61', 'var': juno_var, 'color': color_map('Juno'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2028, 9, 30), 
-    # No ephemeris for target "Juno (spacecraft)" prior to A.D. 2011-AUG-05 17:18:06.0000 UT
-    # No ephemeris for target "Juno (spacecraft)" after A.D. 2028-SEP-30 23:58:50.8177 UT
-    'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 
-    'mission_info': 'Horizons: -61. Juno studies Jupiter\'s atmosphere and magnetosphere.'},
-
-    {'name': 'Gaia', 'id': '-139479', 'var': gaia_var, 'color': color_map('Gaia'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2013, 12, 20), 'end_date': datetime(2025, 3, 28),    # end of mission 2025-3-28
-    # No ephemeris for target "Gaia (spacecraft)" prior to A.D. 2013-DEC-19 09:54:19.5774 UT
-    #   ORB1_20250414_000001                            2013-Dec-19   2125-Mar-28 
-    'mission_info': 'Horizons: -139479. European Space Agency mission at L2 mapping the Milky Way.', 
-    'mission_url': 'https://www.cosmos.esa.int/web/gaia'},
-
-    {'name': 'Hayabusa2', 'id': '-37', 'var': hayabusa2_var, 'color': color_map('Hayabusa2'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2014, 12, 4), 'end_date': datetime(2025, 10, 29), 
-    # No ephemeris for target "Hayabusa 2 (spacecraft)" prior to A.D. 2014-DEC-03 06:13:46.0000 UT
-    # No ephemeris for target "Hayabusa 2 (spacecraft)" after A.D. 2025-OCT-30 23:58:50.8175 UT
-    'mission_info': 'Horizons: -37. JAXA mission that returned samples from Ryugu.', 
-    'mission_url': 'https://hayabusa2.jaxa.jp/en/'},
-
-    {'name': 'OSIRISREx', 'id': '-64', 'var': osiris_rex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2016, 9, 9), 'end_date': datetime(2023, 9, 24), 
-    'mission_url': 'https://science.nasa.gov/mission/osiris-rex/', 
-    'mission_info': 'Horizons: -64. OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
-
-    {'name': 'OSIRISAPE', 'id': '-64', 'var': osiris_apex_var, 'color': color_map('OSIRIS'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2030, 3, 1),
-    # No ephemeris for target "OSIRIS-REx (spacecraft)" after A.D. 2030-MAR-01 19:58:50.8146 UT 
-    'mission_url': 'https://science.nasa.gov/category/missions/osiris-apex/', 
-    'mission_info': 'Horizons: -64. OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
-
-    {'name': 'Parker', 'id': '-96', 'var': parker_solar_probe_var, 'color': color_map('Parker Solar Probe'), 
-    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 1, 31), 
-    # No ephemeris for target "Parker Solar Probe (spacecraft)" after A.D. 2029-FEB-01 00:00:00.0000 UT
-    'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
-    'mission_info': 'Horizons: -96. The Parker Solar Probe mission is to study the outer corona of the Sun.'},
-
-    {'name': 'MarsRover', 'id': '-168', 'var': perse_var, 'color': color_map('MarsRover'), 'symbol': 'diamond-open', # Perseverance
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2026, 2, 19),    # end ephemeris
-    # No ephemeris for target "Mars2020 (spacecraft)" after A.D. 2026-FEB-18 23:58:50.8148 UT
-    'mission_info': 'Horizons: -168. The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. Note: The elevation values shown (-4200m) <br>' 
-    'differ from published scientific values for Jezero Crater (-2600m) due to different Mars reference systems. JPL <br>' 
-    'Horizons uses one elevation datum, while scientific publications often use the Mars Orbiter Laser Altimeter (MOLA) reference areoid. <br>' 
-    'The rover is correctly positioned relative to Mars, but the absolute elevation value has a systematic offset of approximately 1600m.', 
-    'mission_url': 'https://mars.nasa.gov/mars2020/'},
-
-    {'name': 'Lucy', 'id': '-49', 'var': lucy_var, 'color': color_map('Lucy'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 2), 
-    # 2021-10-16 10:33:08.283 (min. for current target body)
-    # 2033-04-02 17:27:41.343 (max. for current target body)
-    'mission_info': 'Horizons: -49. Exploring Trojan asteroids around Jupiter.', 
-    'mission_url': 'https://www.nasa.gov/lucy'},
-
-    {'name': 'DART', 'id': '-135', 'var': dart_var, 'color': color_map('DART'), 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 26), 
-    # No ephemeris for target "DART (spacecraft)" prior to A.D. 2021-NOV-24 07:16:43.8171 UT
-    # Impact: 26-Sep-2022 23:14:24.183  UTC (actual)
-    'mission_info': 'Horizons: -135. NASA\'s mission to test asteroid deflection.', 
-    'mission_url': 'https://www.nasa.gov/dart'},
-
-    {'name': 'JamesWebb', 'id': '-170', 'var': jwst_var, 'color': color_map('JamesWebb'), 
-    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 12, 26), 'end_date': datetime(2030, 8, 18), 
-    # 2021-12-25 13:01:09.184 (min. for current target body)
-    # 2030-08-18 00:01:09.183 (max. for current target body)
-    'mission_url': 'https://science.nasa.gov/mission/webb/', 
-    'mission_info': 'Horizons: -170. The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
-
-    {'name': 'Clipper', 'id': '-159', 'var': europa_clipper_var, 'color': color_map('Clipper'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2031, 2, 7), 
-    # 2024-10-14 16:15:03.712 (min. for current target body)
-    # 2031-02-07 18:17:27.695 (max. for current target body)
-    # No ephemeris for target "Europa Clipper (spacecraft)" after A.D. 2031-FEB-07 18:16:18.5105 UT
-    'mission_url': 'https://europa.nasa.gov/', 
-    'mission_info': 'Horizons: -159. Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
-
-    {'name': 'BepiColombo', 'id': '-121', 'var': bepicolombo_var, 'color': color_map('BepiColombo'), 'symbol': 'diamond-open', 
-    # 'id': '-121', 2018-080A
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True,
-    'start_date': datetime(2018, 10, 21), 'end_date': datetime(2027, 4, 7), 
-    # 2018-10-20 02:13:28.719 (min. for current target body)
-    # 2027-04-07 00:01:09.186 (max. for current target body)
-    # No ephemeris for target "BepiColombo (Spacecraft)" after A.D. 2027-APR-06 23:59:59.9998 UT
-    'mission_url': 'https://sci.esa.int/web/bepicolombo', 
-    'mission_info': 'SPECIAL NOTE: KNOWN BUG. TRAJECTORY DOES NOT PLOT; SEE PRINTOUT.<br>' 
-    'Horizons: -121. BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
-
-    {'name': 'SolO', 'id': '-144', 'var': solarorbiter_var, 'color': color_map('SolO'), 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20),
-    # 2020-02-10 04:56:58.855 (min. for current target body)
-    # 2030-11-20 04:03:15.162 (max. for current target body)
-    # No ephemeris for target "Solar Orbiter (spacecraft)" after A.D. 2030-NOV-20 04:02:05.9789 UT 
-    'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 
-    'mission_info': 'Horizons: -144. Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
-        
-    # --- Adding New Moons ---
-
-    # Mars' Moons
-    {'name': 'Phobos', 'id': '401', 'var': phobos_var, 'color': color_map('Phobos'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 401. Mars orbital period: 0.32 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/resource/martian-moon-phobos/'},
-
-    {'name': 'Deimos', 'id': '402', 'var': deimos_var, 'color': color_map('Deimos'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 402. Mars orbital period: 1.26 Earth days. Retrogade.', 
-     'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
-
-# Jupiter's Inner Ring Moons (Amalthea Group)
-    {'name': 'Metis', 'id': '516', 'var': metis_var, 'color': color_map('Metis'), 'symbol': 'circle', 'object_type': 'satellite',
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 516. Jupiter orbital period: 0.295 Earth days (7.08 hours).', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
-
-    {'name': 'Adrastea', 'id': '515', 'var': adrastea_var, 'color': color_map('Adrastea'), 'symbol': 'circle', 'object_type': 'satellite',
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 515. Jupiter orbital period: 0.298 Earth days (7.15 hours).', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
-
-    {'name': 'Amalthea', 'id': '505', 'var': amalthea_var, 'color': color_map('Amalthea'), 'symbol': 'circle', 'object_type': 'satellite',
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 505. Jupiter orbital period: 0.498 Earth days (11.95 hours).', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
-
-    {'name': 'Thebe', 'id': '514', 'var': thebe_var, 'color': color_map('Thebe'), 'symbol': 'circle', 'object_type': 'satellite',
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 514. Jupiter orbital period: 0.675 Earth days (16.20 hours).', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/'},
-
-    # Jupiter's Galilean Moons
-    {'name': 'Io', 'id': '501', 'var': io_var, 'color': color_map('Io'), 'symbol': 'circle', 'object_type': 'satellite', # instead of 501 use 59901?
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 501. Jupiter orbital period: 1.77 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/io/'},
-
-    {'name': 'Europa', 'id': '502', 'var': europa_var, 'color': color_map('Europa'), 'symbol': 'circle', 'object_type': 'satellite',  # instead of id 502 use 59902?
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 502. Jupiter orbital period: 3.55 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/europa/'},
-
-    {'name': 'Ganymede', 'id': '503', 'var': ganymede_var, 'color': color_map('Ganymede'), 'symbol': 'circle', 'object_type': 'satellite', # instead of 503 use 59903?
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 503. Jupiter orbital period: 7.15 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/ganymede/'},
-
-    {'name': 'Callisto', 'id': '504', 'var': callisto_var, 'color': color_map('Callisto'), 'symbol': 'circle', 'object_type': 'satellite', # instead of 504 use 59904?
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 504. Jupiter orbital period: 16.69 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/jupiter/jupiter-moons/callisto/'},
-
-    # Saturn's Major Moons
-
-    {'name': 'Pan', 'id': '618', 'var': pan_var, 'color': color_map('Pan'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 618. Saturn orbital period: 0.58 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/pan/'},
-
-    {'name': 'Daphnis', 'id': '635', 'var': daphnis_var, 'color': color_map('Daphnis'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 635. Saturn orbital period: 0.58 Earth days. No Horizons ephemeris after 1-16-2018.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/daphnis/'},
-
-    {'name': 'Prometheus', 'id': '616', 'var': prometheus_var, 'color': color_map('Prometheus'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 616. Saturn orbital period: 0.61 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/prometheus/'},
-
-    {'name': 'Pandora', 'id': '617', 'var': pandora_var, 'color': color_map('Pandora'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 617. Saturn orbital period: 0.63 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/pandora/'},
-
-    {'name': 'Mimas', 'id': '601', 'var': mimas_var, 'color': color_map('Mimas'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 601. Saturn orbital period: 0.94 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/mimas/'},
-
-    {'name': 'Enceladus', 'id': '602', 'var': enceladus_var, 'color': color_map('Enceladus'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 602. Saturn orbital period: 1.37 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/enceladus/'},
-
-    {'name': 'Tethys', 'id': '603', 'var': tethys_var, 'color': color_map('Tethys'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons 603. Saturn orbital period: 1.89 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/tethys/'},
-
-    {'name': 'Dione', 'id': '604', 'var': dione_var, 'color': color_map('Dione'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 604. Saturn orbital period: 2.74 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/dione/'},
-
-    {'name': 'Rhea', 'id': '605', 'var': rhea_var, 'color': color_map('Rhea'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 605. Saturn orbital period: 4.52 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/rhea/'},
-
-    {'name': 'Titan', 'id': '606', 'var': titan_var, 'color': color_map('Titan'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 606. Saturn orbital period: 15.95 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/titan/'},
-
-    {'name': 'Hyperion', 'id': '607', 'var': hyperion_var, 'color': color_map('Hyperion'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 607. Saturn orbital period: 21 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/hyperion/'},
-
-    {'name': 'Iapetus', 'id': '608', 'var': iapetus_var, 'color': color_map('Iapetus'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 608. Saturn orbital period: 79.33 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/iapetus/'},
-
-    {'name': 'Phoebe', 'id': '609', 'var': phoebe_var, 'color': color_map('Phoebe'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 609. Retrograde. Saturn orbital period: 550.56 Earth days. Retrograde (left-handed) orbit.', 
-     'mission_url': 'https://science.nasa.gov/saturn/moons/phoebe/'},
-
-    # Uranus's Major Moons
-
-    {'name': 'Ariel', 'id': '701', 'var': ariel_var, 'color': color_map('Ariel'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 701. Uranus orbital period: 2.52 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/ariel/'},
-
-    {'name': 'Umbriel', 'id': '702', 'var': umbriel_var, 'color': color_map('Umbriel'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 702. Uranus orbital period: 4.14 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/umbriel/'},
-
-    {'name': 'Titania', 'id': '703', 'var': titania_var, 'color': color_map('Titania'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 703. Uranus orbital period: 8.71 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/titania/'},
-
-    {'name': 'Oberon', 'id': '704', 'var': oberon_var, 'color': color_map('Oberon'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 704. Uranus orbital period: 13.46 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/uranus/moons/oberon/'},
-
-    {'name': 'Miranda', 'id': '705', 'var': miranda_var, 'color': color_map('Miranda'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 705. Uranus orbital period: 1.41 Earth days.',
-     'mission_url': 'https://science.nasa.gov/uranus/moons/miranda/'},   
-
-    {'name': 'Portia', 'id': '712', 'var': portia_var, 'color': color_map('Portia'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 712. Uranus orbital period: 0.513196 Earth days or 12.317 hours.',
-     'mission_url': 'https://science.nasa.gov/uranus/moons/portia/'}, 
-
-    {'name': 'Mab', 'id': '726', 'var': mab_var, 'color': color_map('Mab'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 726. Uranus orbital period: 0.923293 Earth days or 22.159 hours.',
-     'mission_url': 'https://science.nasa.gov/uranus/moons/mab/'},             
-
-    # Neptune's Major Moons
-    {'name': 'Triton', 'id': '801', 'var': triton_var, 'color': color_map('Triton'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 801. Retrograde. Neptune orbital period: 5.88 Earth days. Retrograde (left-handed) orbit.', 
-     'mission_url': 'https://science.nasa.gov/neptune/moons/triton/'},
-
-    {'name': 'Despina', 'id': '805', 'var': despina_var, 'color': color_map('Despina'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 805. Neptune orbital period: 0.334656 Earth days. Retrograde (left-handed) orbit.', 
-     'mission_url': 'https://science.nasa.gov/neptune/moons/despina/'},
-
-    {'name': 'Galatea', 'id': '806', 'var': galatea_var, 'color': color_map('Galatea'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 806. Neptune orbital period: 0.428744 Earth days. Retrograde (left-handed) orbit.', 
-     'mission_url': 'https://science.nasa.gov/neptune/moons/galatea/'},
-
-    # Pluto's Moon
-    {'name': 'Charon', 'id': '901', 'var': charon_var, 'color': color_map('Charon'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 901. Pluto orbital period: 6.39 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/charon/'},
-
-    {'name': 'Styx', 'id': '905', 'var': styx_var, 'color': color_map('Styx'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 905. Pluto orbital period: 20.16 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/styx/'},     
-
-    {'name': 'Nix', 'id': '902', 'var': nix_var, 'color': color_map('Nix'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 902. Pluto orbital period: 24.86 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/nix/'},
-
-    {'name': 'Kerberos', 'id': '904', 'var': kerberos_var, 'color': color_map('Kerberos'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 904. Pluto orbital period: 32.17 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/kerberos/'},
-
-    {'name': 'Hydra', 'id': '903', 'var': hydra_var, 'color': color_map('Hydra'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 903. Pluto orbital period: 38.20 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/'},
-
-    # Eris's Moon
-#    {'name': 'Dysnomia', 'id': '120136199', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'object_type': 'satellite', 
-#     'id_type': 'majorbody', 
-#     'mission_info': 'Eris orbital period: 15.79 Earth days.', 
-#     'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
-
-    # Eris's Moon
-    {'name': 'Dysnomia', 'id': '120136199', 'var': dysnomia_var, 'color': color_map('Dysnomia'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Eris\'s moon. Period: 15.79 days. Both tidally locked. Diameter ~700 km.', 
-     'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
-
-    # Gonggong's Moon
-    {'name': 'Xiangliu', 'id': '120225088', 'var': xiangliu_var, 'color': color_map('Xiangliu'), 'symbol': 'circle', 'object_type': 'satellite', # id is provisional
-     'id_type': 'majorbody', 
-     'mission_info': 'Gonggong\'s moon. Period: 25.22 days. Diameter ~100 km.', 
-     'mission_url': 'https://en.wikipedia.org/wiki/Xiangliu_(moon)'},
-
-    # Orcus's Moon
-    {'name': 'Vanth', 'id': '120090482', 'var': vanth_var, 'color': color_map('Van'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Orcus\'s moon. Period: 9.54 days. Diameter ~440 km.', 
-     'mission_url': 'https://en.wikipedia.org/wiki/Vanth_(moon)'},
-
-    # Quaoar's Moon
-    {'name': 'Weywot', 'id': '120050000', 'var': weywot_var, 'color': color_map('Weywot'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Quaoar\'s moon. Period: 12.44 days. Diameter ~170 km.', 
-     'mission_url': 'https://en.wikipedia.org/wiki/Weywot'},    
-
-    # Haumea's Moons
-    {'name': "Hi'iaka", 'id': '120136108', 'var': hiiaka_var, 'color': color_map("Hi'iaka"), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Haumea\'s outer moon. Period: 49 days. Diameter ~310 km. Named for Hawaiian goddess of childbirth.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
-
-    {'name': 'Namaka', 'id': '220136108', 'var': namaka_var, 'color': color_map('Namaka'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Haumea\'s inner moon. Period: 18 days. Diameter ~170 km. Eccentric orbit perturbed by Hi\'iaka.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
-
-    # Makemake's Moon
-    {'name': 'MK2', 'id': '120136472', 'var': mk2_var, 'color': color_map('MK2'), 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Makemake\'s moon (S/2015 (136472) 1). Discovered 2015 by Hubble. Period: 18.023 days. Distance: ~22,250 km. Orbit edge-on to Earth.<br>' 
-     'Very dark surface (~4% reflectivity), diameter ~175 km. No JPL ephemeris available - orbit from 2025 Hubble analysis.', 
-     'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},
-
-# ============== EXOPLANET SYSTEMS ==============
-    
-    # TRAPPIST-1 System (40.5 light-years)
-    {'name': 'TRAPPIST-1', 'id': 'trappist1_star', 'var': trappist1_star_var,
-     'color': 'rgba(0,0,0,0)', 'symbol': 'circle', 'object_type': 'exo_host_star',
-     'id_type': 'host_star', 'system_id': 'trappist1',
-     'mission_info': 'M8V red dwarf at 40.5 light-years hosting 7 Earth-sized planets, 3 in habitable zone.',
-     'mission_url': 'https://exoplanets.nasa.gov/trappist1/'},
-    
-    {'name': 'TRAPPIST-1 b', 'id': 'trappist1b', 'var': trappist1b_var,
-     'color': 'lightblue', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'trappist1',
-     'semi_major_axis_au': 0.01154, 'period_days': 1.51087,
-     'in_habitable_zone': False,
-     'mission_info': 'Innermost planet, 1.5 day period. Too hot for liquid water (400 K).',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7913/trappist-1-b/'},
-    
-    {'name': 'TRAPPIST-1 c', 'id': 'trappist1c', 'var': trappist1c_var,
-     'color': 'lightblue', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'trappist1',
-     'semi_major_axis_au': 0.01580, 'period_days': 2.42182,
-     'in_habitable_zone': False,
-     'mission_info': '2.4 day period. JWST observations show no significant atmosphere.',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7914/trappist-1-c/'},
-    
-    {'name': 'TRAPPIST-1 d', 'id': 'trappist1d', 'var': trappist1d_var,
-     'color': 'green', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'trappist1',
-     'semi_major_axis_au': 0.02227, 'period_days': 4.04961,
-     'in_habitable_zone': True,
-     'mission_info': '* IN HABITABLE ZONE * Inner edge, 4.0 day period. May have water.',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7915/trappist-1-d/'},
-    
-    {'name': 'TRAPPIST-1 e', 'id': 'trappist1e', 'var': trappist1e_var,
-     'color': 'green', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'trappist1',
-     'semi_major_axis_au': 0.02925, 'period_days': 6.09965,
-     'in_habitable_zone': True,
-     'mission_info': '* IN HABITABLE ZONE * PRIME CANDIDATE! Most likely to have liquid water. 6.1 day period.',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7916/trappist-1-e/'},
-    
-    {'name': 'TRAPPIST-1 f', 'id': 'trappist1f', 'var': trappist1f_var,
-     'color': 'green', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'trappist1',
-     'semi_major_axis_au': 0.03849, 'period_days': 9.20669,
-     'in_habitable_zone': True,
-     'mission_info': '* IN HABITABLE ZONE * 9.2 day period. May have significant water content.',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7917/trappist-1-f/'},
-    
-    {'name': 'TRAPPIST-1 g', 'id': 'trappist1g', 'var': trappist1g_var,
-     'color': 'green', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'trappist1',
-     'semi_major_axis_au': 0.04683, 'period_days': 12.35294,
-     'in_habitable_zone': True,
-     'mission_info': '* IN HABITABLE ZONE * Outer edge, 12.4 day period. May have subsurface ocean.',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7918/trappist-1-g/'},
-    
-    {'name': 'TRAPPIST-1 h', 'id': 'trappist1h', 'var': trappist1h_var,
-     'color': 'lightblue', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'trappist1',
-     'semi_major_axis_au': 0.06189, 'period_days': 18.76712,
-     'in_habitable_zone': False,
-     'mission_info': 'Outermost planet, 18.8 day period. Too cold for liquid water (173 K).',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7919/trappist-1-h/'},
-    
-    # TOI-1338 System (1,292 light-years, Binary + Circumbinary)
-    {'name': 'TOI-1338 A/B', 'id': 'toi1338_barycenter', 'var': toi1338_barycenter_var,
-     'color': 'white', 'symbol': 'square-open', 'object_type': 'exo_barycenter',
-     'id_type': 'barycenter', 'system_id': 'toi1338',
-     'mission_info': 'Binary system barycenter (center of mass). Both stars orbit this point.',
-     'mission_url': 'https://exoplanets.nasa.gov/news/1644/discovery-alert-first-planet-found-by-tess/'},
-    
-    {'name': 'TOI-1338 A (G-type)', 'id': 'toi1338_starA', 'var': toi1338_starA_var,
-     'color': 'yellow', 'symbol': 'circle', 'object_type': 'exo_binary_star',
-     'id_type': 'binary_star_a', 'system_id': 'toi1338',
-     'mission_info': 'Primary star in binary system. G-type, 1.1 solar masses, like our Sun.',
-     'mission_url': 'https://exoplanets.nasa.gov/news/1644/discovery-alert-first-planet-found-by-tess/'},
-    
-    {'name': 'TOI-1338 B (M-type)', 'id': 'toi1338_starB', 'var': toi1338_starB_var,
-     'color': 'orange', 'symbol': 'circle', 'object_type': 'exo_binary_star',
-     'id_type': 'binary_star_b', 'system_id': 'toi1338',
-     'mission_info': 'Secondary star in binary. M-type red dwarf, 0.3 solar masses. Binary period: 14.6 days.',
-     'mission_url': 'https://exoplanets.nasa.gov/news/1644/discovery-alert-first-planet-found-by-tess/'},
-    
-    {'name': 'TOI-1338 b', 'id': 'toi1338b', 'var': toi1338b_var,
-     'color': 'lightblue', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'toi1338',
-     'semi_major_axis_au': 0.4607, 'period_days': 95.196,
-     'in_habitable_zone': False,
-     'mission_info': 'Neptune-sized circumbinary planet. Discovered by Wolf Cukier (17-year-old TESS intern)!',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/8452/toi-1338-b/'},
-    
-    {'name': 'TOI-1338 c', 'id': 'toi1338c', 'var': toi1338c_var,
-     'color': 'lightblue', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'toi1338',
-     'semi_major_axis_au': 0.76, 'period_days': 215.5,
-     'in_habitable_zone': False,
-     'mission_info': 'Jupiter-mass circumbinary planet. Confirmed 2023. Only second known multi-planet circumbinary system.',
-     'mission_url': 'https://arxiv.org/abs/2305.16894'},
-    
-    # Proxima Centauri System (4.24 light-years - NEAREST!)
-    {'name': 'Proxima Centauri', 'id': 'proxima_star', 'var': proxima_star_var,
-     'color': 'rgba(0,0,0,0)', 'symbol': 'circle', 'object_type': 'exo_host_star',
-     'id_type': 'host_star', 'system_id': 'proxima',
-     'mission_info': 'NEAREST star to the Sun! M5.5V red dwarf at 4.24 light-years. Part of Alpha Centauri system.',
-     'mission_url': 'https://exoplanets.nasa.gov/proxima-b/'},
-    
-    {'name': 'Proxima Centauri b', 'id': 'proximab', 'var': proximab_var,
-     'color': 'green', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'proxima',
-     'semi_major_axis_au': 0.04856, 'period_days': 11.18427,
-     'in_habitable_zone': True,
-     'mission_info': '* IN HABITABLE ZONE * NEAREST EXOPLANET! 11.2 day period. Stellar flares may challenge habitability.',
-     'mission_url': 'https://exoplanets.nasa.gov/exoplanet-catalog/7167/proxima-centauri-b/'},
-    
-    {'name': 'Proxima Centauri d', 'id': 'proximad', 'var': proximad_var,
-     'color': 'lightblue', 'symbol': 'circle', 'object_type': 'exoplanet',
-     'id_type': 'exoplanet', 'system_id': 'proxima',
-     'semi_major_axis_au': 0.029, 'period_days': 5.122,
-     'in_habitable_zone': False,
-     'mission_info': 'Sub-Earth mass planet (0.26 Mearth). Lightest planet detected by radial velocity method.',
-     'mission_url': 'https://www.eso.org/public/news/eso2202/'},
-
-]
 
 class ScrollableFrame(tk.Frame):
     """
@@ -4397,15 +3379,13 @@ def plot_objects():
     elif center_object_name == 'Pluto':
         osculating_center_body = '@999'  # Pluto-centered elements
 
-#    elif center_object_name == 'Orcus-Vanth Barycenter':
-#        osculating_center_body = '@2090482'  # Orcus-Vanth barycentric (uses Orcus numeric ID)
-#    elif center_object_name == 'Orcus':
-#        osculating_center_body = '@2090482'  # Orcus-centered elements
-
     elif center_object_name == 'Orcus-Vanth Barycenter':
         osculating_center_body = '@20090482'  # Orcus-Vanth satellite solution barycenter
     elif center_object_name == 'Orcus':
         osculating_center_body = '@920090482'  # Orcus PRIMARY body (not small body)
+
+    elif center_object_name == 'Patroclus-Menoetius Barycenter':
+        osculating_center_body = '@20000617'  # Patroclus-Menoetius satellite solution barycenter
 
     else:
         osculating_center_body = None  # Default (heliocentric or auto-detect)
@@ -4456,11 +3436,14 @@ def plot_objects():
                             obj_center_body = osculating_center_body
                     elif center_object_name in ['Orcus-Vanth Barycenter', 'Orcus']:
                         # Check if this is an Orcus system object (Orcus or Vanth)
-                #        orcus_system_ids = ['2090482', '120090482']  # Orcus, Vanth
                         orcus_system_ids = ['920090482', '120090482', '2004 DW']  # Orcus primary, Vanth, Orcus small body
                         if str(horizons_id) in orcus_system_ids:
                             obj_center_body = osculating_center_body
-                    
+                    elif center_object_name == 'Patroclus-Menoetius Barycenter':
+                        # Check if this is a Patroclus system object (Patroclus or Menoetius)
+                        patroclus_system_ids = ['920000617', '120000617', 'A906 UL']  # Patroclus primary, Menoetius, smallbody
+                        if str(horizons_id) in patroclus_system_ids:
+                            obj_center_body = osculating_center_body                    
                     # Trigger the GUI prompt with proper Horizons ID and center
 
                     fresh_elements = get_elements_with_prompt(
@@ -4539,11 +3522,17 @@ def plot_objects():
             
             # CRITICAL FIX: Ensure we have the correct days_to_plot
             # Double-check by reading directly from GUI
-            gui_days = int(days_to_plot_entry.get())
-            if settings['days_to_plot'] != gui_days:
-                print(f"[WARNING] Settings mismatch: settings={settings['days_to_plot']}, GUI={gui_days}", flush=True)
-                settings['days_to_plot'] = gui_days
-            
+        #    gui_days = int(days_to_plot_entry.get())
+        #    if settings['days_to_plot'] != gui_days:
+        #        print(f"[WARNING] Settings mismatch: settings={settings['days_to_plot']}, GUI={gui_days}", flush=True)
+        #        settings['days_to_plot'] = gui_days
+
+            # Debug check - don't override the precise calculated value from date range
+            gui_days = int(days_to_plot_entry.get()) if days_to_plot_entry.get() else 0
+            if int(settings['days_to_plot']) != gui_days:
+                print(f"[INFO] days_to_plot: calculated={settings['days_to_plot']:.6f} days ({settings['days_to_plot']*24*60:.1f} min), GUI shows={gui_days} days", flush=True)
+            # Note: Don't override - calculated value preserves sub-day precision for flybys     
+
             # Extract the values
             trajectory_points = settings['trajectory_points']
             orbital_points = settings['orbital_points']
@@ -5985,6 +4974,10 @@ def animate_objects(step, label):
         osculating_center_body = '@9'  # Barycentric elements
     elif center_object_name == 'Pluto':
         osculating_center_body = '@999'  # Pluto-centered elements
+    elif center_object_name == 'Orcus-Vanth Barycenter':
+        osculating_center_body = '@20090482'  # Orcus-Vanth satellite solution barycenter
+    elif center_object_name == 'Patroclus-Menoetius Barycenter':
+        osculating_center_body = '@20000617'  # Patroclus-Menoetius satellite solution barycenter        
     else:
         osculating_center_body = None  # Default (heliocentric or auto-detect)
 
@@ -6030,7 +5023,15 @@ def animate_objects(step, label):
                         pluto_system_ids = ['999', '901', '902', '903', '904', '905']  # Pluto, Charon, Nix, Hydra, Kerberos, Styx
                         if str(horizons_id) in pluto_system_ids:
                             obj_center_body = osculating_center_body
-                    
+                    elif center_object_name == 'Orcus-Vanth Barycenter':
+                        orcus_system_ids = ['920090482', '120090482', '2004 DW']
+                        if str(horizons_id) in orcus_system_ids:
+                            obj_center_body = osculating_center_body
+                    elif center_object_name == 'Patroclus-Menoetius Barycenter':
+                        patroclus_system_ids = ['920000617', '120000617', 'A906 UL']
+                        if str(horizons_id) in patroclus_system_ids:
+                            obj_center_body = osculating_center_body                    
+
                     # Get elements with proper Horizons ID and center body
                     fresh_elements = get_elements_with_prompt(
                         obj_name, 
@@ -6114,11 +5115,17 @@ def animate_objects(step, label):
                 return
             
             # Apply fix for days_to_plot
-            gui_days = int(days_to_plot_entry.get())
-            if settings['days_to_plot'] != gui_days:
-                print(f"[ANIMATION WARNING] Settings mismatch: settings={settings['days_to_plot']}, GUI={gui_days}", flush=True)
-                settings['days_to_plot'] = gui_days
-            
+        #    gui_days = int(days_to_plot_entry.get())
+        #    if settings['days_to_plot'] != gui_days:
+        #        print(f"[ANIMATION WARNING] Settings mismatch: settings={settings['days_to_plot']}, GUI={gui_days}", flush=True)
+        #        settings['days_to_plot'] = gui_days
+
+            # Debug check - don't override the precise calculated value from date range
+            gui_days = int(days_to_plot_entry.get()) if days_to_plot_entry.get() else 0
+            if int(settings['days_to_plot']) != gui_days:
+                print(f"[INFO] Animation days_to_plot: calculated={settings['days_to_plot']:.6f} days ({settings['days_to_plot']*24*60:.1f} min), GUI shows={gui_days} days", flush=True)
+            # Note: Don't override - calculated value preserves sub-day precision for flybys       
+
             # Debug output
             print(f"Days to Plot: {settings['days_to_plot']}", flush=True)
             print(f"Number of Frames: {N}", flush=True)
@@ -8143,74 +7150,10 @@ CreateToolTip(sun_gravitational_checkbutton, gravitational_influence_info)
 
 # inner planets
 create_celestial_checkbutton("Mercury", mercury_var)    # params
-# Create a Frame specifically for the mercury shell options (indented)
-mercury_shell_options_frame = tk.Frame(celestial_frame)
-mercury_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-# mercury inner core shell
-mercury_inner_core_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Inner Core", variable=mercury_inner_core_var)
-mercury_inner_core_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_inner_core_checkbutton, mercury_inner_core_info)
-# mercury outer core shell
-mercury_outer_core_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Outer Core", variable=mercury_outer_core_var)
-mercury_outer_core_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_outer_core_checkbutton, mercury_outer_core_info)
-# mercury lower mantle shell
-mercury_mantle_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Mantle", variable=mercury_mantle_var)
-mercury_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_mantle_checkbutton, mercury_mantle_info)
-# mercury crust shell
-mercury_crust_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Crust", variable=mercury_crust_var)
-mercury_crust_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_crust_checkbutton, mercury_crust_info)
-# mercury atmosphere shell
-mercury_atmosphere_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Exosphere", variable=mercury_atmosphere_var)
-mercury_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_atmosphere_checkbutton, mercury_atmosphere_info)
-# mercury sodium tail shell
-mercury_sodium_tail_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Sodium Tail", variable=mercury_sodium_tail_var)
-mercury_sodium_tail_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_sodium_tail_checkbutton, mercury_sodium_tail_info)
-# mercury magnetosphere shell
-mercury_magnetosphere_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Magnetosphere", variable=mercury_magnetosphere_var)
-mercury_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_magnetosphere_checkbutton, mercury_magnetosphere_info)
-# mercury hill sphere shell
-mercury_hill_sphere_checkbutton = tk.Checkbutton(mercury_shell_options_frame, text="-- Hill Sphere", variable=mercury_hill_sphere_var)
-mercury_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(mercury_hill_sphere_checkbutton, mercury_hill_sphere_info)
+build_shell_checkboxes('Mercury', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
 create_celestial_checkbutton("Venus", venus_var)    # params
-# Create a Frame specifically for the venus shell options (indented)
-venus_shell_options_frame = tk.Frame(celestial_frame)
-venus_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-# venus core shell
-venus_core_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Core", variable=venus_core_var)
-venus_core_checkbutton.pack(anchor='w')
-CreateToolTip(venus_core_checkbutton, venus_core_info)
-# venus mantle shell
-venus_mantle_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Mantle", variable=venus_mantle_var)
-venus_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(venus_mantle_checkbutton, venus_mantle_info)
-# venus crust shell
-venus_crust_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Crust", variable=venus_crust_var)
-venus_crust_checkbutton.pack(anchor='w')
-CreateToolTip(venus_crust_checkbutton, venus_crust_info)
-# venus atmosphere shell
-venus_atmosphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Atmosphere", variable=venus_atmosphere_var)
-venus_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(venus_atmosphere_checkbutton, venus_atmosphere_info)
-# venus upper atmosphere shell
-venus_upper_atmosphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Upper Atmosphere", variable=venus_upper_atmosphere_var)
-venus_upper_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(venus_upper_atmosphere_checkbutton, venus_upper_atmosphere_info)
-# venus magnetosphere shell
-venus_magnetosphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Magnetosphere", variable=venus_magnetosphere_var)
-venus_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(venus_magnetosphere_checkbutton, venus_magnetosphere_info)
-# venus hill sphere shell
-venus_hill_sphere_checkbutton = tk.Checkbutton(venus_shell_options_frame, text="-- Hill Sphere", variable=venus_hill_sphere_var)
-venus_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(venus_hill_sphere_checkbutton, venus_hill_sphere_info)
+build_shell_checkboxes('Venus', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
 # Aten-type Near-Earth Asteroids (orbit inside Earth)
 aten_nea_label = tk.Label(celestial_frame, text="Near-Earth Asteroids (Aten-type, a < 1.0 AU AND Q > 0.983 AU):", font=("Arial", 9, "bold"))
@@ -8285,33 +7228,7 @@ earth_hill_sphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_hill_sphere_checkbutton, earth_hill_sphere_info)
 
 create_celestial_checkbutton("Moon", moon_var)  # params
-# Create a Frame specifically for the moon shell options (indented)
-moon_shell_options_frame = tk.Frame(celestial_frame)
-moon_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-# moon inner core shell
-moon_inner_core_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Inner Core", variable=moon_inner_core_var)
-moon_inner_core_checkbutton.pack(anchor='w')
-CreateToolTip(moon_inner_core_checkbutton, moon_inner_core_info)
-# moon outer core shell
-moon_outer_core_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Outer Core", variable=moon_outer_core_var)
-moon_outer_core_checkbutton.pack(anchor='w')
-CreateToolTip(moon_outer_core_checkbutton, moon_outer_core_info)
-# moon mantle shell
-moon_mantle_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Mantle", variable=moon_mantle_var)
-moon_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(moon_mantle_checkbutton, moon_mantle_info)
-# moon crust shell
-moon_crust_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Crust", variable=moon_crust_var)
-moon_crust_checkbutton.pack(anchor='w')
-CreateToolTip(moon_crust_checkbutton, moon_crust_info)
-# moon exosphere shell
-moon_exosphere_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Exosphere", variable=moon_exosphere_var)
-moon_exosphere_checkbutton.pack(anchor='w')
-CreateToolTip(moon_exosphere_checkbutton, moon_exosphere_info)
-# moon hill sphere shell
-moon_hill_sphere_checkbutton = tk.Checkbutton(moon_shell_options_frame, text="-- Hill Sphere", variable=moon_hill_sphere_var)
-moon_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(moon_hill_sphere_checkbutton, moon_hill_sphere_info)
+build_shell_checkboxes('Moon', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
 # Apollo/Amor-type Near-Earth Asteroids (orbit crosses or outside Earth)
 earth_moon_lagrange_label = tk.Label(celestial_frame, text="Earth-Moon Lagrange Points:", font=("Arial", 9, "bold"))
@@ -8355,41 +7272,7 @@ apollo_nea_label.pack(anchor='w', pady=(5, 0))
 create_celestial_checkbutton("Eros", eros_var)  # params
 
 create_celestial_checkbutton("Mars", mars_var)  # params
-# Create a Frame specifically for the Mars shell options (indented)
-mars_shell_options_frame = tk.Frame(celestial_frame)
-mars_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-# Mars inner core shell
-mars_inner_core_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Inner Core", variable=mars_inner_core_var)
-mars_inner_core_checkbutton.pack(anchor='w')
-CreateToolTip(mars_inner_core_checkbutton, mars_inner_core_info)
-# Mars outer core shell
-mars_outer_core_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Outer Core", variable=mars_outer_core_var)
-mars_outer_core_checkbutton.pack(anchor='w')
-CreateToolTip(mars_outer_core_checkbutton, mars_outer_core_info)
-# Mars mantle shell
-mars_mantle_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Mantle", variable=mars_mantle_var)
-mars_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(mars_mantle_checkbutton, mars_mantle_info)
-# mars crust shell
-mars_crust_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Crust", variable=mars_crust_var)
-mars_crust_checkbutton.pack(anchor='w')
-CreateToolTip(mars_crust_checkbutton, mars_crust_info)
-# mars atmosphere shell
-mars_atmosphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Atmosphere", variable=mars_atmosphere_var)
-mars_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(mars_atmosphere_checkbutton, mars_atmosphere_info)
-# mars upper atmosphere shell
-mars_upper_atmosphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Upper Atmosphere", variable=mars_upper_atmosphere_var)
-mars_upper_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(mars_upper_atmosphere_checkbutton, mars_upper_atmosphere_info)
-# mars magnetosphere shell
-mars_magnetosphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Magnetosphere", variable=mars_magnetosphere_var)
-mars_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(mars_magnetosphere_checkbutton, mars_magnetosphere_info)
-# mars hill sphere shell
-mars_hill_sphere_checkbutton = tk.Checkbutton(mars_shell_options_frame, text="-- Hill Sphere", variable=mars_hill_sphere_var)
-mars_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(mars_hill_sphere_checkbutton, mars_hill_sphere_info)
+build_shell_checkboxes('Mars', celestial_frame, globals(), globals(), tk, CreateToolTip)
 create_celestial_checkbutton("- Phobos", phobos_var)    # params
 create_celestial_checkbutton("- Deimos", deimos_var)    # params
 
@@ -8407,61 +7290,12 @@ create_celestial_checkbutton("Orus", orus_var)  # params
 create_celestial_checkbutton("Polymele", polymele_var)  # params
 create_celestial_checkbutton("Eurybates", eurybates_var)    # params
 create_celestial_checkbutton("Patroclus", patroclus_var)    # params
+create_celestial_checkbutton("Menoetius", menoetius_var)    # params
 create_celestial_checkbutton("Leucus", leucus_var)  # params
 
 # outer planets
 create_celestial_checkbutton("Jupiter", jupiter_var)    # params
-# Create a Frame specifically for the Jupiter shell options (indented)
-jupiter_shell_options_frame = tk.Frame(celestial_frame)
-jupiter_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-
-# Jupiter core shell
-jupiter_core_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Core", variable=jupiter_core_var)
-jupiter_core_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_core_checkbutton, jupiter_core_info)
-
-# Jupiter metallic hydrogen shell
-jupiter_metallic_hydrogen_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Metallic Hydrogen Layer", variable=jupiter_metallic_hydrogen_var)
-jupiter_metallic_hydrogen_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_metallic_hydrogen_checkbutton, jupiter_metallic_hydrogen_info)
-
-# Jupiter molecular hydrogen shell
-jupiter_molecular_hydrogen_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Molecular Hydrogen Layer", variable=jupiter_molecular_hydrogen_var)
-jupiter_molecular_hydrogen_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_molecular_hydrogen_checkbutton, jupiter_molecular_hydrogen_info)
-
-# Jupiter cloud layer shell
-jupiter_cloud_layer_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Cloud Layer", variable=jupiter_cloud_layer_var)
-jupiter_cloud_layer_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_cloud_layer_checkbutton, jupiter_cloud_layer_info)
-
-# Jupiter upper atmosphere shell
-jupiter_upper_atmosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Upper Atmosphere", variable=jupiter_upper_atmosphere_var)
-jupiter_upper_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_upper_atmosphere_checkbutton, jupiter_upper_atmosphere_info)
-
-# Jupiter ring system shell
-jupiter_ring_system_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Ring System", variable=jupiter_ring_system_var)
-jupiter_ring_system_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_ring_system_checkbutton, jupiter_ring_system_info)
-
-jupiter_radiation_belts_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Radiation Belts", variable=jupiter_radiation_belts_var)
-jupiter_radiation_belts_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_radiation_belts_checkbutton, jupiter_radiation_belts_info)
-
-jupiter_io_plasma_torus_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Io Plasma Torus", variable=jupiter_io_plasma_torus_var)
-jupiter_io_plasma_torus_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_io_plasma_torus_checkbutton, jupiter_io_plasma_torus_info)
-
-# Jupiter magnetosphere components
-jupiter_magnetosphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Magnetosphere", variable=jupiter_magnetosphere_var)
-jupiter_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_magnetosphere_checkbutton, jupiter_magnetosphere_info)
-
-# Jupiter hill_sphere shell
-jupiter_hill_sphere_checkbutton = tk.Checkbutton(jupiter_shell_options_frame, text="-- Hill Sphere", variable=jupiter_hill_sphere_var)
-jupiter_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(jupiter_hill_sphere_checkbutton, jupiter_hill_sphere_info)    
+build_shell_checkboxes('Jupiter', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
 create_celestial_checkbutton("- Metis", metis_var)      # params; 1.79 Jupiter radii, 128,000 km
 create_celestial_checkbutton("- Adrastea", adrastea_var)  # params; 1.81 Jupiter radii, 129,000 km
@@ -8473,57 +7307,7 @@ create_celestial_checkbutton("- Ganymede", ganymede_var)  # params; 14.99 Jupite
 create_celestial_checkbutton("- Callisto", callisto_var)  # params; 26.37 Jupiter radii, 1,883,000 km
 
 create_celestial_checkbutton("Saturn", saturn_var)  # params
-# Create a Frame specifically for the saturn shell options (indented)
-saturn_shell_options_frame = tk.Frame(celestial_frame)
-saturn_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-
-# saturn core shell
-saturn_core_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Core", variable=saturn_core_var)
-saturn_core_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_core_checkbutton, saturn_core_info)
-
-# saturn metallic hydrogen shell
-saturn_metallic_hydrogen_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Metallic Hydrogen Layer", variable=saturn_metallic_hydrogen_var)
-saturn_metallic_hydrogen_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_metallic_hydrogen_checkbutton, saturn_metallic_hydrogen_info)
-
-# saturn molecular hydrogen shell
-saturn_molecular_hydrogen_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Molecular Hydrogen Layer", variable=saturn_molecular_hydrogen_var)
-saturn_molecular_hydrogen_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_molecular_hydrogen_checkbutton, saturn_molecular_hydrogen_info)
-
-# saturn cloud layer shell
-saturn_cloud_layer_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Cloud Layer", variable=saturn_cloud_layer_var)
-saturn_cloud_layer_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_cloud_layer_checkbutton, saturn_cloud_layer_info)
-
-# saturn upper atmosphere shell
-saturn_upper_atmosphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Upper Atmosphere", variable=saturn_upper_atmosphere_var)
-saturn_upper_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_upper_atmosphere_checkbutton, saturn_upper_atmosphere_info)
-
-# saturn ring system shell
-saturn_ring_system_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Ring System", variable=saturn_ring_system_var)
-saturn_ring_system_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_ring_system_checkbutton, saturn_ring_system_info)
-
-saturn_radiation_belts_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Radiation Belts", variable=saturn_radiation_belts_var)
-saturn_radiation_belts_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_radiation_belts_checkbutton, saturn_radiation_belts_info)
-
-saturn_enceladus_plasma_torus_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Enceladus Plasma Torus", variable=saturn_enceladus_plasma_torus_var)
-saturn_enceladus_plasma_torus_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_enceladus_plasma_torus_checkbutton, saturn_enceladus_plasma_torus_info)
-
-# saturn magnetosphere components
-saturn_magnetosphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Magnetosphere", variable=saturn_magnetosphere_var)
-saturn_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_magnetosphere_checkbutton, saturn_magnetosphere_info)
-
-# saturn hill_sphere shell
-saturn_hill_sphere_checkbutton = tk.Checkbutton(saturn_shell_options_frame, text="-- Hill Sphere", variable=saturn_hill_sphere_var)
-saturn_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(saturn_hill_sphere_checkbutton, saturn_hill_sphere_info) 
+build_shell_checkboxes('Saturn', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
 create_celestial_checkbutton("- Pan", pan_var)  # params
 create_celestial_checkbutton("- Daphnis", daphnis_var)  # params
@@ -8545,48 +7329,7 @@ centaurs_label.pack(anchor='w', pady=(5, 0))
 create_celestial_checkbutton("Chariklo", chariklo_var) # params
 
 create_celestial_checkbutton("Uranus", uranus_var)  # params
-# Create a Frame specifically for the uranus shell options (indented)
-uranus_shell_options_frame = tk.Frame(celestial_frame)
-uranus_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-
-# uranus core shell
-uranus_core_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Core", variable=uranus_core_var)
-uranus_core_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_core_checkbutton, uranus_core_info)
-
-# uranus metallic hydrogen shell
-uranus_mantle_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- mantle", variable=uranus_mantle_var)
-uranus_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_mantle_checkbutton, uranus_mantle_info)
-
-# uranus cloud layer shell
-uranus_cloud_layer_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Cloud Layer", variable=uranus_cloud_layer_var)
-uranus_cloud_layer_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_cloud_layer_checkbutton, uranus_cloud_layer_info)
-
-# uranus upper atmosphere shell
-uranus_upper_atmosphere_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Upper Atmosphere", variable=uranus_upper_atmosphere_var)
-uranus_upper_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_upper_atmosphere_checkbutton, uranus_upper_atmosphere_info)
-
-# uranus ring system shell
-uranus_ring_system_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Ring System", variable=uranus_ring_system_var)
-uranus_ring_system_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_ring_system_checkbutton, uranus_ring_system_info)
-
-uranus_radiation_belts_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Radiation Belts", variable=uranus_radiation_belts_var)
-uranus_radiation_belts_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_radiation_belts_checkbutton, uranus_radiation_belts_info)
-
-# uranus magnetosphere components
-uranus_magnetosphere_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Magnetosphere", variable=uranus_magnetosphere_var)
-uranus_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_magnetosphere_checkbutton, uranus_magnetosphere_info)
-
-# uranus hill_sphere shell
-uranus_hill_sphere_checkbutton = tk.Checkbutton(uranus_shell_options_frame, text="-- Hill Sphere", variable=uranus_hill_sphere_var)
-uranus_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(uranus_hill_sphere_checkbutton, uranus_hill_sphere_info) 
+build_shell_checkboxes('Uranus', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
 # Uranus moons
 create_celestial_checkbutton("- Ariel", ariel_var)  # params
@@ -8598,88 +7341,13 @@ create_celestial_checkbutton("- Portia", portia_var)    # params
 create_celestial_checkbutton("- Mab", mab_var)  # params
 
 create_celestial_checkbutton("Neptune", neptune_var)    # params
-
-# Create a Frame specifically for the neptune shell options (indented)
-neptune_shell_options_frame = tk.Frame(celestial_frame)
-neptune_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-
-# neptune core shell
-neptune_core_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Core", variable=neptune_core_var)
-neptune_core_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_core_checkbutton, neptune_core_info)
-
-# neptune metallic hydrogen shell
-neptune_mantle_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Mantle", variable=neptune_mantle_var)
-neptune_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_mantle_checkbutton, neptune_mantle_info)
-
-# neptune cloud layer shell
-neptune_cloud_layer_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Cloud Layer", variable=neptune_cloud_layer_var)
-neptune_cloud_layer_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_cloud_layer_checkbutton, neptune_cloud_layer_info)
-
-# neptune upper atmosphere shell
-neptune_upper_atmosphere_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Upper Atmosphere", variable=neptune_upper_atmosphere_var)
-neptune_upper_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_upper_atmosphere_checkbutton, neptune_upper_atmosphere_info)
-
-# neptune ring system shell
-neptune_ring_system_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Ring System", variable=neptune_ring_system_var)
-neptune_ring_system_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_ring_system_checkbutton, neptune_ring_system_info)
-
-neptune_radiation_belts_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Radiation Belts", variable=neptune_radiation_belts_var)
-neptune_radiation_belts_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_radiation_belts_checkbutton, neptune_radiation_belts_info)
-
-# neptune magnetosphere components
-neptune_magnetosphere_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Magnetosphere", variable=neptune_magnetosphere_var)
-neptune_magnetosphere_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_magnetosphere_checkbutton, neptune_magnetosphere_info)
-
-# neptune hill_sphere shell
-neptune_hill_sphere_checkbutton = tk.Checkbutton(neptune_shell_options_frame, text="-- Hill Sphere", variable=neptune_hill_sphere_var)
-neptune_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(neptune_hill_sphere_checkbutton, neptune_hill_sphere_info) 
+build_shell_checkboxes('Neptune', celestial_frame, globals(), globals(), tk, CreateToolTip)
 create_celestial_checkbutton("- Triton", triton_var)    # params
 create_celestial_checkbutton("- Despina", despina_var)  # params
 create_celestial_checkbutton("- Galatea", galatea_var)  # params
 
 create_celestial_checkbutton("Pluto", pluto_var)    # params
-
-# Create a Frame specifically for the pluto shell options (indented)
-pluto_shell_options_frame = tk.Frame(celestial_frame)
-pluto_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-
-# pluto core shell
-pluto_core_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Core", variable=pluto_core_var)
-pluto_core_checkbutton.pack(anchor='w')
-CreateToolTip(pluto_core_checkbutton, pluto_core_info)
-
-# pluto mantle shell
-pluto_mantle_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- mantle", variable=pluto_mantle_var)
-pluto_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(pluto_mantle_checkbutton, pluto_mantle_info)
-
-# pluto crust shell
-pluto_crust_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Crust", variable=pluto_crust_var)
-pluto_crust_checkbutton.pack(anchor='w')
-CreateToolTip(pluto_crust_checkbutton, pluto_crust_info)
-
-# pluto haze layer shell
-pluto_haze_layer_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Haze Layer", variable=pluto_haze_layer_var)
-pluto_haze_layer_checkbutton.pack(anchor='w')
-CreateToolTip(pluto_haze_layer_checkbutton, pluto_haze_layer_info)
-
-# pluto atmosphere shell
-pluto_atmosphere_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Atmosphere", variable=pluto_atmosphere_var)
-pluto_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(pluto_atmosphere_checkbutton, pluto_atmosphere_info)
-
-# pluto hill_sphere shell
-pluto_hill_sphere_checkbutton = tk.Checkbutton(pluto_shell_options_frame, text="-- Hill Sphere", variable=pluto_hill_sphere_var)
-pluto_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(pluto_hill_sphere_checkbutton, pluto_hill_sphere_info) 
+build_shell_checkboxes('Pluto', celestial_frame, globals(), globals(), tk, CreateToolTip)
 create_celestial_checkbutton("- Charon", charon_var)    # params
 create_celestial_checkbutton("- Styx", styx_var)    # params
 create_celestial_checkbutton("- Nix", nix_var)  # params
@@ -8714,34 +7382,7 @@ create_celestial_checkbutton("Gonggong", gonggong_var)      # params
 create_celestial_checkbutton("- Xiangliu", xiangliu_var)    # Gonggong moon
 
 create_celestial_checkbutton("Eris", eris_var)  # params
-# Create a Frame specifically for the eris shell options (indented)
-eris_shell_options_frame = tk.Frame(celestial_frame)
-eris_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-
-# eris core shell
-eris_core_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Core", variable=eris_core_var)
-eris_core_checkbutton.pack(anchor='w')
-CreateToolTip(eris_core_checkbutton, eris_core_info)
-
-# eris mantle shell
-eris_mantle_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Mantle", variable=eris_mantle_var)
-eris_mantle_checkbutton.pack(anchor='w')
-CreateToolTip(eris_mantle_checkbutton, eris_mantle_info)
-
-# eris crust shell
-eris_crust_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Crust", variable=eris_crust_var)
-eris_crust_checkbutton.pack(anchor='w')
-CreateToolTip(eris_crust_checkbutton, eris_crust_info)
-
-# eris atmosphere shell
-eris_atmosphere_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Atmosphere", variable=eris_atmosphere_var)
-eris_atmosphere_checkbutton.pack(anchor='w')
-CreateToolTip(eris_atmosphere_checkbutton, eris_atmosphere_info)
-
-# eris hill_sphere shell
-eris_hill_sphere_checkbutton = tk.Checkbutton(eris_shell_options_frame, text="-- Hill Sphere", variable=eris_hill_sphere_var)
-eris_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(eris_hill_sphere_checkbutton, eris_hill_sphere_info) 
+build_shell_checkboxes('Eris', celestial_frame, globals(), globals(), tk, CreateToolTip)
 create_celestial_checkbutton("- Dysnomia", dysnomia_var)    # params
 
 create_celestial_checkbutton("Ammonite", ammonite_var)  # params
@@ -8753,19 +7394,7 @@ create_celestial_checkbutton("2017 OF201", of201_var)   # params
 create_celestial_checkbutton("Leleakuhonua", leleakuhonua_var)  # params
 
 create_celestial_checkbutton("Planet 9", planet9_var)   # params
-# Create a Frame specifically for the planet9 shell options (indented)
-planet9_shell_options_frame = tk.Frame(celestial_frame)
-planet9_shell_options_frame.pack(padx=(20, 0), anchor='w')  # Indent by 20 pixels
-
-# planet9 surface shell
-planet9_surface_checkbutton = tk.Checkbutton(planet9_shell_options_frame, text="-- Surface", variable=planet9_surface_var)
-planet9_surface_checkbutton.pack(anchor='w')
-CreateToolTip(planet9_surface_checkbutton, planet9_surface_info)
-
-# planet9 hill_sphere shell
-planet9_hill_sphere_checkbutton = tk.Checkbutton(planet9_shell_options_frame, text="-- Hill Sphere", variable=planet9_hill_sphere_var)
-planet9_hill_sphere_checkbutton.pack(anchor='w')
-CreateToolTip(planet9_hill_sphere_checkbutton, planet9_hill_sphere_info) 
+build_shell_checkboxes('Planet 9', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
 # Checkbuttons for missions
 mission_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Space Missions")
@@ -8806,6 +7435,7 @@ create_mission_checkbutton("Perseverance Mars Rover", perse_var, "(2020-07-31 to
 create_mission_checkbutton("Lucy", lucy_var, "(2021-10-17 to 2033-04-02)")
 create_mission_checkbutton("DART", dart_var, "(2021-11-25 to 2022-09-26)")
 create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to 2030-08-18)")
+create_mission_checkbutton("JUICE", juice_var, "(2023-04-15 to 2031-07-21)")
 create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2030-3-1)")
 create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to 2031-02-07)")
 
@@ -9211,6 +7841,11 @@ def can_be_horizons_center(obj):
     if obj.get('object_type') in excluded_object_types:
         return False
     
+    # Explicitly exclude binary system components (use barycenter instead)
+    excluded_names = {'Patroclus', 'Menoetius'}
+    if obj.get('name') in excluded_names:
+        return False
+
     # Has explicit center_id? Can be centered
     if obj.get('center_id'):
         return True
@@ -9836,5 +8471,5 @@ root.after(100, restore_sash_positions)
 
 # ============================================================================
 
-# Run the Tkinter main loop
+# Run the Tkinter main loop. Continues until the window is closed. There can be nothing written after this or the program will exit immediately.
 root.mainloop()

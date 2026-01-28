@@ -336,14 +336,33 @@ planetary_params = {
         #     'Eurybates': 4333.71,  # 11.87 * 365.25
     },  
 
-     'Patroclus': {                  # 617 Patroclus (A906 UL) 
-        'a': 5.212775153315913,   # Horizons: A, semi-major axis in AU
-        'e': .1394751015199425,   # Horizons: EC, eccentricity
-        'i': 22.05719746380513,      # Horizons: IN, inclination in degrees
-        'omega': 307.9473518701323, # Horizons: W, argument of perihelion in degrees
-        'Omega': 44.34955228487597   # Horizons: OM, longitude of ascending node in degrees
-        #     'Patroclus': 4336.36,  # 11.88 * 365.25
+    # Patroclus-Menoetius Binary System (Jupiter L5 Trojan)
+    # Heliocentric elements from JPL Horizons satellite solution barycenter (20000617)
+    # Source: JPL#82, Soln.date: 2022-Aug-09
+    'Patroclus': {                  # 617 Patroclus (920000617) - Primary body
+        'a': 5.212775041416492,    # Horizons barycenter: A, semi-major axis in AU
+        'e': 0.1394751648774633,   # Horizons: EC, eccentricity
+        'i': 22.05719641611838,    # Horizons: IN, inclination in degrees
+        'omega': 307.9473718922942, # Horizons: W, argument of perihelion in degrees
+        'Omega': 44.3495507311498,  # Horizons: OM, longitude of ascending node in degrees
+        'epoch': '2021-May-09',     # EPOCH= 2459343.5
+        'TP': 2460486.2370467782,   # Time of perihelion
+        # Orbital period: 11.90 years (4336 days)
+        # Physical: D=113 km, GM=0.0740606 km3/s2, ROTPER=102.8 h (tidally locked)
     }, 
+
+    # Menoetius heliocentric elements - these capture the binary wobble around Sun
+    # For barycenter-centered view, use local orbital elements below
+    'Menoetius': {                  # (617) Patroclus I Menoetius (120000617)
+        'a': 5.212775041416492,    # Same as system barycenter for heliocentric fallback
+        'e': 0.1394751648774633,   
+        'i': 22.05719641611838,    
+        'omega': 307.9473718922942, 
+        'Omega': 44.3495507311498,  
+        'epoch': '2021-May-09',
+        'TP': 2460486.2370467782,
+        # Physical: D=104 km, GM=0.020917 km3/s2
+    },
 
      'Leucus': {                  # 11351 Leucus (1997 TS25)
         'a': 5.2899315120334,   # Horizons: A, semi-major axis in AU
@@ -936,6 +955,36 @@ planetary_params = {
         #     'Thebe': 0.675,        # 16.20 hours
     },
 
+    # Patroclus-Menoetius Binary System - LOCAL orbital elements
+    # For barycenter-centered view of the binary
+    # Source: Brozovic et al. 2024, AJ 167:104 "Orbit of the Patroclus-Menoetius Binary System"
+    # Also: Grundy et al. 2018, Icarus 305; Descamps et al. 2020, Icarus
+    'Menoetius_local': {
+        'a': 0.000004630,          # semi-major axis in AU (692.5 +/- 4.0 km)
+        'e': 0.004,                # eccentricity (nearly circular, +/- 0.004)
+        'i': 106.1,                # inclination to ecliptic in degrees
+                                   # Derived from pole: R.A.=178.0 deg, Dec=-74.1 deg (ICRF)
+                                   # Ecliptic pole coords: lambda=235.3, beta=-62.4 deg
+        'omega': 0.0,              # argument of periapsis (undefined for near-circular)
+        'Omega': 235.3,            # longitude of ascending node (from ecliptic lambda)
+        'orbital_period_days': 4.282680,  # +/- 0.000063 days (doubly synchronous)
+        # Note: System is tidally locked - both bodies rotate with same period as orbit
+        # Mass ratio: Patroclus 77.98%, Menoetius 22.02%
+        # Menoetius distance from barycenter: ~152 km (22% of 692.5 km separation)
+        # Patroclus distance from barycenter: ~540 km (78% of 692.5 km separation)
+    },
+    
+    # Patroclus local orbit (offset from barycenter in opposite direction)
+    'Patroclus_local': {
+        'a': 0.000004630,          # Same separation, opposite side
+        'e': 0.004,                
+        'i': 106.1,                
+        'omega': 180.0,            # 180 degrees opposite Menoetius
+        'Omega': 235.3,            
+        'orbital_period_days': 4.282680,
+        # Patroclus orbits barycenter at ~540 km (78% mass fraction)
+    },
+
     # Saturn's Major and Ring Moons
 
     'Pan': {              # Revised: Oct 03, 2018; 618
@@ -1339,6 +1388,7 @@ parent_planets = {
     'Earth': ['Moon'],
     'Mars': ['Phobos', 'Deimos'],
     'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
+    'Patroclus-Menoetius Barycenter': ['Patroclus', 'Menoetius'],  # Binary Trojan asteroid (Lucy target)   
     'Saturn': ['Titan', 'Enceladus', 'Rhea', 'Dione', 'Tethys', 'Mimas', 'Iapetus', 'Phoebe', 'Pan', 'Daphnis', 'Prometheus',
                'Pandora', 'Hyperion'],
     'Uranus': ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon', 'Portia', 'Mab'],
@@ -1348,9 +1398,8 @@ parent_planets = {
     'Eris': ['Dysnomia'],
     'Gonggong': ['Xiangliu'],
     'Orcus': ['Vanth'],
-    'Orcus': ['Vanth'],
     'Orcus-Vanth Barycenter': ['Orcus', 'Vanth'],  # Binary dwarf planet mode
-    'Quaoar': ['Weywot'],
+    'Quaoar': ['Weywot'],    
     'Haumea': ["Hi'iaka", 'Namaka'],
     'Makemake': ['MK2']
 }

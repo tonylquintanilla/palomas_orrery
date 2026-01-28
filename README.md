@@ -1,4 +1,4 @@
-# Last updated: January 18, 2026
+# Last updated: January 25, 2026
 
 # Paloma's Orrery
 
@@ -662,7 +662,8 @@ The following sections highlight the primary modules organized by function. Use 
 
 | Module | Purpose |
 |--------|---------|
-| `palomas_orrery.py` | Main application (~471KB, 9,464 lines) - GUI, plot_objects(), animate_objects(), trajectory layers, animation shells |
+| `palomas_orrery.py` | Main application (~8,400 lines) - GUI, plot_objects(), animate_objects(), trajectory layers, animation shells |
+| `celestial_objects.py` | Object and shell definitions data module (169 objects, 78 shell checkboxes) - separated from GUI for maintainability |
 | `data_acquisition.py` | VizieR catalog queries (Gaia, Hipparcos) |
 | `data_processing.py` | Coordinate transformations and calculations |
 | `simbad_manager.py` | SIMBAD API integration with rate limiting |

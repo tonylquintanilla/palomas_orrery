@@ -69,6 +69,7 @@ ORCUS_BARYCENTER_ORBITERS = ['Orcus', 'Vanth']
 # TNO (Trans-Neptunian Object) satellite systems - osculating only
 
 # These use JPL satellite ephemeris solutions (not small body solutions)
+PATROCLUS_BARYCENTER_ORBITERS = ['Patroclus', 'Menoetius']
 ERIS_MOONS = ['Dysnomia']
 GONGGONG_MOONS = ['Xiangliu']
 ORCUS_MOONS = ['Vanth']
@@ -2538,6 +2539,256 @@ def add_orcus_barycenter_marker(fig, date, vanth_position=None):
     
     return fig
 
+def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Patroclus-Menoetius Barycenter'):
+    """
+    Plot analytical orbit for objects in the Patroclus-Menoetius binary Trojan system.
+    
+    When "Patroclus-Menoetius Barycenter" is the center:
+    - Patroclus orbits the barycenter (~152 km from center, 78% of mass)
+    - Menoetius orbits the barycenter (~540 km from center, 22% of mass)
+    
+    Binary System Parameters (from Brozovic et al. 2024, AJ 167:104):
+    - Total separation: 692.5 +/- 4.0 km = 0.00000463 AU
+    - Period: 4.282680 +/- 0.000063 days (doubly synchronous)
+    - Mass ratio: M_Patroclus/M_total = 0.7798, M_Menoetius/M_total = 0.2202
+    - Eccentricity: 0.004 +/- 0.004 (nearly circular)
+    - System GM: 0.09498 km^3/s^2
+    
+    Orbital plane orientation from JPL Horizons osculating elements:
+    - Inclination: 152.53 deg (to J2000 ecliptic)
+    - Longitude of Ascending Node: 324.12 deg
+    
+    Phase reference from JPL Horizons vectors (Patroclus @ barycenter):
+    - Epoch: 2033-Mar-03 00:00:00 TDB (JD 2463659.5)
+    - Position: X=104.24, Y=-109.12, Z=14.35 km
+    """
+    import numpy as np
+    import plotly.graph_objects as go
+    from datetime import datetime
+    
+    # Binary system physical parameters (from Brozovic et al. 2024)
+    BINARY_PARAMS = {
+        'separation_km': 692.5,               # Total separation in km
+        'separation_au': 692.5 / 149597870.7, # 0.00000463 AU
+        'period_days': 4.282680,              # Orbital period (doubly synchronous)
+        'mass_fraction_patroclus': 0.7798,    # Patroclus mass / total mass
+        'mass_fraction_menoetius': 0.2202,    # Menoetius mass / total mass
+        'eccentricity': 0.004,                # Nearly circular
+        # Orbital plane from JPL Horizons osculating elements (barycenter-centered):
+        'inclination_ecliptic': 152.53,       # From Horizons IN value
+        'Omega_ecliptic': 324.12,             # From Horizons OM value
+        'omega': 0.0,                         # Argument of periapsis (undefined for circular)
+    }
+    
+    # Phase reference from JPL Horizons vectors
+    # Patroclus position relative to barycenter on 2033-Mar-03 00:00:00 TDB
+    PHASE_REFERENCE = {
+        'jd_epoch': 2463659.5,                # 2033-Mar-03 00:00:00 TDB
+        'patroclus_x_km': 104.2448,           # X position (km)
+        'patroclus_y_km': -109.1216,          # Y position (km)  
+        'patroclus_z_km': 14.3532,            # Z position (km)
+    }
+    
+    separation = BINARY_PARAMS['separation_au']
+    
+    is_barycenter_mode = (center_id == 'Patroclus-Menoetius Barycenter')
+    
+    if not is_barycenter_mode:
+        print(f"Warning: plot_patroclus_barycenter_orbit only supports barycenter mode", flush=True)
+        return fig
+    
+    if object_name not in ['Patroclus', 'Menoetius']:
+        print(f"Warning: {object_name} is not part of Patroclus-Menoetius system", flush=True)
+        return fig
+    
+    try:
+        # Calculate semi-major axis from mass fractions
+        # Heavier body (Patroclus, 78%) is CLOSER to barycenter
+        # Lighter body (Menoetius, 22%) is FARTHER from barycenter
+        if object_name == 'Patroclus':
+            a = separation * BINARY_PARAMS['mass_fraction_menoetius']  # ~152 km
+            phase_offset = 0.0  # Patroclus is the reference
+        else:  # Menoetius
+            a = separation * BINARY_PARAMS['mass_fraction_patroclus']  # ~540 km
+            phase_offset = 180.0  # Menoetius is opposite Patroclus
+        
+        e = BINARY_PARAMS['eccentricity']
+        i = BINARY_PARAMS['inclination_ecliptic']
+        omega = BINARY_PARAMS['omega']
+        Omega = BINARY_PARAMS['Omega_ecliptic']
+        period = BINARY_PARAMS['period_days']
+        
+        # Calculate the reference phase angle from Horizons position
+        # First, we need to transform the ecliptic XYZ to orbital plane coordinates
+        # to find the true anomaly at the reference epoch
+        
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        # Reference position in ecliptic coordinates (km -> AU)
+        ref_x = PHASE_REFERENCE['patroclus_x_km'] / 149597870.7
+        ref_y = PHASE_REFERENCE['patroclus_y_km'] / 149597870.7
+        ref_z = PHASE_REFERENCE['patroclus_z_km'] / 149597870.7
+        
+        # Inverse rotation: Ecliptic -> Orbital plane
+        # Step 1: Rotate by -Omega around Z
+        x1 = ref_x * np.cos(-Omega_rad) - ref_y * np.sin(-Omega_rad)
+        y1 = ref_x * np.sin(-Omega_rad) + ref_y * np.cos(-Omega_rad)
+        z1 = ref_z
+        
+        # Step 2: Rotate by -i around X
+        x2 = x1
+        y2 = y1 * np.cos(-i_rad) - z1 * np.sin(-i_rad)
+        z2 = y1 * np.sin(-i_rad) + z1 * np.cos(-i_rad)
+        
+        # Step 3: Rotate by -omega around Z
+        x_orb = x2 * np.cos(-omega_rad) - y2 * np.sin(-omega_rad)
+        y_orb = x2 * np.sin(-omega_rad) + y2 * np.cos(-omega_rad)
+        
+        # Now x_orb, y_orb are in the orbital plane
+        # The true anomaly at reference epoch
+        ref_true_anomaly = np.degrees(np.arctan2(y_orb, x_orb))
+        
+        # Calculate current epoch's Julian Date
+        # Python datetime to JD approximation
+        jd_2000 = 2451545.0  # J2000.0 = 2000-Jan-01 12:00:00
+        days_since_2000 = (date - datetime(2000, 1, 1, 12, 0, 0)).total_seconds() / 86400.0
+        current_jd = jd_2000 + days_since_2000
+        
+        # Days elapsed since reference epoch
+        days_elapsed = current_jd - PHASE_REFERENCE['jd_epoch']
+        
+        # Orbital phase change (degrees) - for nearly circular orbit, mean anomaly ~ true anomaly
+        phase_change = 360.0 * (days_elapsed / period)
+        
+        # Current true anomaly for this object
+        current_phase = ref_true_anomaly + phase_change + phase_offset
+        
+        epoch_str = f"{date.strftime('%Y-%m-%d')} osc."
+        
+        print(f"\n[PATROCLUS BARYCENTER] {object_name}: using Brozovic et al. 2024 + Horizons phase", flush=True)
+        print(f"  a = {a:.10f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+        print(f"  e = {e:.4f}, i = {i:.1f} deg, Omega = {Omega:.1f} deg", flush=True)
+        print(f"  Reference phase (Patroclus): {ref_true_anomaly:.1f} deg at JD {PHASE_REFERENCE['jd_epoch']}", flush=True)
+        print(f"  Days from reference: {days_elapsed:.2f}, Phase change: {phase_change:.1f} deg", flush=True)
+        print(f"  Current phase for {object_name}: {current_phase % 360:.1f} deg", flush=True)
+        
+        # Generate ellipse points starting from current phase
+        # This ensures the orbit is drawn in the correct orientation
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        # Orbital plane coordinates (periapsis along x-axis)
+        x_orb = r * np.cos(theta)
+        y_orb = r * np.sin(theta)
+        z_orb = np.zeros_like(theta)
+        
+        # Rotate to ecliptic frame using standard orbital element rotations
+        x_ecl, y_ecl, z_ecl = [], [], []
+        for x0, y0, z0 in zip(x_orb, y_orb, z_orb):
+            # Rotation by argument of periapsis (omega)
+            x1 = x0 * np.cos(omega_rad) - y0 * np.sin(omega_rad)
+            y1 = x0 * np.sin(omega_rad) + y0 * np.cos(omega_rad)
+            z1 = z0
+            
+            # Rotation by inclination (i)
+            x2 = x1
+            y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
+            z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
+            
+            # Rotation by longitude of ascending node (Omega)
+            x3 = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+            y3 = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+            z3 = z2
+            
+            x_ecl.append(x3)
+            y_ecl.append(y3)
+            z_ecl.append(z3)
+        
+        # Create hover text
+        hover_text = (
+            f"<b>{object_name} Analytical Orbit</b><br>"
+            f"Binary orbit around barycenter<br>"
+            f"a = {a*149597870.7:.1f} km ({a:.2e} AU)<br>"
+            f"P = {period:.3f} days<br>"
+            f"e = {e:.4f}<br>"
+            f"i = {i:.1f} deg (to ecliptic)<br>"
+            f"Source: Brozovic et al. 2024 (AJ 167:104)"
+        )
+        
+        # Plot the orbit
+        fig.add_trace(
+            go.Scatter3d(
+                x=x_ecl,
+                y=y_ecl,
+                z=z_ecl,
+                mode='lines',
+                line=dict(color=color, width=2, dash='dot'),
+                name=f"{object_name} Analytical Orbit (Epoch: {epoch_str})",
+                text=[hover_text] * len(x_ecl),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+        
+        print(f"  [OK] Plotted {object_name} analytical orbit ({len(x_ecl)} points)", flush=True)
+        
+        # Add current position marker based on calculated phase
+        if show_apsidal_markers:
+            # Calculate current position using current_phase
+            current_phase_rad = np.radians(current_phase)
+            r_current = a * (1 - e**2) / (1 + e * np.cos(current_phase_rad))
+            
+            # Position in orbital plane
+            x_pos = r_current * np.cos(current_phase_rad)
+            y_pos = r_current * np.sin(current_phase_rad)
+            z_pos = 0
+            
+            # Rotate to ecliptic
+            x1 = x_pos * np.cos(omega_rad) - y_pos * np.sin(omega_rad)
+            y1 = x_pos * np.sin(omega_rad) + y_pos * np.cos(omega_rad)
+            z1 = z_pos
+            
+            x2 = x1
+            y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
+            z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
+            
+            x_curr_ecl = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+            y_curr_ecl = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+            z_curr_ecl = z2
+            
+            pos_hover = (
+                f"<b>{object_name} Keplerian Position</b><br>"
+                f"Phase: {current_phase % 360:.1f} deg<br>"
+                f"r = {r_current*149597870.7:.1f} km ({r_current:.2e} AU)<br>"
+                f"e = {e:.4f} (nearly circular)<br>"
+                f"<i>Note: For nearly circular orbits, periapsis is undefined.</i><br>"
+                f"<i>This marker shows the current calculated position,</i><br>"
+                f"<i>which should match the Horizons actual position.</i>"
+            )
+            
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[x_curr_ecl],
+                    y=[y_curr_ecl],
+                    z=[z_curr_ecl],
+                    mode='markers',
+                    marker=dict(color=color, size=6, symbol='square'),
+                    name=f"{object_name} Keplerian Periapsis",
+                    text=[pos_hover],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=True
+                )
+            )
+        
+    except Exception as ex:
+        import traceback
+        print(f"Error plotting {object_name} barycenter orbit: {ex}", flush=True)
+        traceback.print_exc()
+    
+    return fig
+
 def create_planet_transformation_matrix(planet_name):
     """
     Create a transformation matrix for a planet based on its pole direction.
@@ -4024,6 +4275,23 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     fig = add_orcus_barycenter_marker(fig, date, vanth_position=vanth_pos)
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
+
+            # Special handling for Patroclus-Menoetius BINARY TROJAN SYSTEM (Lucy target)
+            # Source: Brozovic et al. 2024 (AJ 167:104)
+            # Binary separation: 692.5 km, Period: 4.283 days
+            elif center_id == 'Patroclus-Menoetius Barycenter' and moon_name in PATROCLUS_BARYCENTER_ORBITERS:
+                # In barycenter mode, BOTH Patroclus and Menoetius orbit the barycenter
+                if date:
+                    fig = plot_patroclus_barycenter_orbit(
+                        fig,
+                        moon_name,  # Can be 'Patroclus' or 'Menoetius'
+                        date,
+                        color_map(moon_name),
+                        show_apsidal_markers=show_apsidal_markers,
+                        center_id=center_id
+                    )
+                else:
+                    print(f"  Warning: Could not plot analytical orbit for {moon_name} (missing date)", flush=True)
 
             # Special handling for TNO satellites (Eris, Haumea, Makemake, etc. moons)
             # These have no reliable analytical elements - osculating only

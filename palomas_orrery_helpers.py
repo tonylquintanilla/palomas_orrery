@@ -13,7 +13,14 @@ import plotly.graph_objs as go
 import webbrowser
 import os
 import warnings
-from astropy.utils.exceptions import ErfaWarning
+# from astropy.utils.exceptions import ErfaWarning
+# ErfaWarning - for suppressing astronomy library warnings about "dubious" dates.
+# Import path has changed across versions (astropy → erfa → erfa.core).
+try:
+    from erfa.core import ErfaWarning
+except ImportError:
+    from erfa import ErfaWarning
+
 from astropy.time import Time
 import traceback
 import threading
@@ -151,13 +158,34 @@ from solar_visualization_shells import (
 )
 
 from constants_new import (
+    DEFAULT_MARKER_SIZE,
     color_map,
     note_text,
     INFO,
     CENTER_BODY_RADII,
     KM_PER_AU, 
     LIGHT_MINUTES_PER_AU,
-    KNOWN_ORBITAL_PERIODS
+    KNOWN_ORBITAL_PERIODS,
+    HORIZONS_MAX_DATE,
+    CENTER_MARKER_SIZE,
+    # Solar structure
+    CORE_AU,
+    RADIATIVE_ZONE_AU,
+    SOLAR_RADIUS_AU,
+    # Solar atmosphere
+    CHROMOSPHERE_RADII,
+    INNER_CORONA_RADII,
+    OUTER_CORONA_RADII,
+    # Heliosphere
+    TERMINATION_SHOCK_AU,
+    HELIOPAUSE_RADII,
+    # Oort Cloud
+    INNER_LIMIT_OORT_CLOUD_AU,
+    INNER_OORT_CLOUD_AU,
+    OUTER_OORT_CLOUD_AU,
+    GRAVITATIONAL_INFLUENCE_AU,
+    # Spacecraft
+    PARKER_CLOSEST_RADII
 )
 
 from visualization_utils import (format_hover_text, add_hover_toggle_buttons, format_detailed_hover_text)
@@ -166,26 +194,6 @@ from save_utils import save_plot, show_and_save as _show_and_save_impl
 
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
-DEFAULT_MARKER_SIZE = 6
-HORIZONS_MAX_DATE = datetime(2199, 12, 29, 0, 0, 0)
-CENTER_MARKER_SIZE = 10  # For central objects like the Sun
-
-# Constants
-LIGHT_MINUTES_PER_AU = 8.3167  # Approximate light-minutes per Astronomical Unit
-KM_PER_AU = 149597870.7       # Kilometers per Astronomical Unit
-CORE_AU = 0.00093               # Core in AU, or approximately 0.2 Solar radii
-RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, or approximately 0.7 Solar radii
-SOLAR_RADIUS_AU = 0.00465047  # Sun's radius in AU
-INNER_LIMIT_OORT_CLOUD_AU = 2000   # Inner Oort cloud inner boundary in AU.
-INNER_OORT_CLOUD_AU = 20000   # Inner Oort cloud outer boundary in AU.
-OUTER_OORT_CLOUD_AU = 100000   # Oort cloud outer boundary in AU.
-GRAVITATIONAL_INFLUENCE_AU = 126000   # Sun's gravitational influence in AU.
-CHROMOSPHERE_RADII = 1.5    # The Chromosphere extends from about 1 to 1.5 solar radii or about 0.00465 - 0.0070 AU
-INNER_CORONA_RADII = 3  # Inner corona extends to 2 to 3 solar radii or about 0.01 AU
-OUTER_CORONA_RADII = 50       # Outer corona extends up to 50 solar radii or about 0.2 AU, more typically 10 to 20 solar radii
-TERMINATION_SHOCK_AU = 94       # Termination shock where the solar wind slows to subsonic speeds. 
-HELIOPAUSE_RADII = 26449         # Outer boundary of the solar wind and solar system, about 123 AU. 
-PARKER_CLOSEST_RADII = 8.2    # Parker's closest approach was 3.8 million miles on 12-24-24 at 6:53 AM EST (0.41 AU, 8.2 solar radii)
 
 # Add these constants after existing constants
 TEMP_CACHE_FILE = "orbit_paths_temp.json"
