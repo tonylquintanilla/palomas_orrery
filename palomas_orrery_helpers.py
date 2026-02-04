@@ -603,6 +603,7 @@ def pad_trajectory(global_dates, object_start_date, object_end_date, object_id, 
     
     return padded_positions
 
+
 def add_url_buttons(fig, objects_to_plot, selected_objects):
     """
     Add URL buttons for missions and objects in solar system visualizations.
@@ -616,16 +617,29 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
     Returns:
         plotly.graph_objects.Figure: The modified figure with URL buttons added
     """
+    import os
+    
     # Collect objects with URLs that are currently selected
     url_objects = []
     for obj in objects_to_plot:
         if obj['var'].get() == 1 and ('mission_url' in obj or 'url' in obj):          # adds urls for any object   
+            raw_url = obj.get('mission_url') or obj.get('url')
+            
+            # Handle local HTML files - convert to file:// URL
+            if raw_url and raw_url.endswith('.html') and not raw_url.startswith('http'):
+                # Get absolute path relative to the script location
+                script_dir = os.path.dirname(os.path.abspath(__file__))
+                local_path = os.path.join(script_dir, raw_url)
+                url = 'file://' + os.path.realpath(local_path)
+            else:
+                url = raw_url
+            
             url_objects.append({
                 'name': obj['name'],
-                'url': obj.get('mission_url') or obj.get('url'),                        # Use either URL field
+                'url': url,
         #        'is_earth': obj['name'].lower() == 'earth'  # <- NEW LINE ADDED FOR EARTH DATA VISUALIZATION
             })
-    
+
     # Remove duplicates while preserving order
     seen = set()
     url_objects = [x for x in url_objects if x['name'] not in seen and not seen.add(x['name'])]

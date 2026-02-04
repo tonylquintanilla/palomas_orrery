@@ -2,7 +2,7 @@
 
 **Complete Guide: Educational Foundation + Technical Implementation**
 
-**Last Updated:** January 27, 2026 (v2.6 - Patroclus-Menoetius Binary & Lucy Flyby)  
+**Last Updated:** February 2, 2026 (v2.8 - TNO Barycenter Cleanup: The Barycenter Rule)  
 **Project:** Paloma's Orrery - Astronomical Visualization Suite  
 **Created by:** Tony (with Claude)
 
@@ -113,9 +113,35 @@ Think of a see-saw:
 
 *"Only the barycenter approach represents the actual orbital mechanics!"* - Nov 26, 2025
 
+### The Barycenter Rule (v2.8)
+
+Not every binary system needs a barycenter view. The test is simple: **is the barycenter outside the primary body?**
+
+The barycenter offset from the primary is:
+
+```
+offset = separation * mass_ratio / (1 + mass_ratio)
+```
+
+If offset < primary radius, the primary barely wobbles and barycenter mode shows nothing useful.
+
+| System | Mass Ratio | Bary Offset | Body Radius | Barycenter Mode? |
+|--------|-----------|-------------|-------------|------------------|
+| Pluto-Charon | 0.122 | 2,035 km | 1,188 km | **YES** - outside body |
+| Orcus-Vanth | 0.16 | ~4,000 km | ~458 km | **YES** - outside body |
+| Patroclus-Menoetius | ~0.28 | ~150 km | ~57 km | **YES** - outside body |
+| Haumea system | 0.005 | ~244 km | ~861 km | No - inside body |
+| Eris-Dysnomia | ~0.0085 | ~314 km | 1,163 km | No - inside body |
+| Gonggong-Xiangliu | ~0.013 | ~312 km | ~615 km | No - inside body |
+| Quaoar-Weywot | ~0.004 | ~7 km | ~545 km | No - inside body |
+
+*"Just because Horizons has a barycenter solution doesn't mean you should use it!"* - Feb 2, 2026
+
 ### For Paloma
 
-*"Imagine you and a friend holding hands and spinning around. The spot where your hands grip - that's the barycenter! If your friend is almost as big as you, you BOTH swing around that grip point. That's what Pluto and Charon do!"*
+*"Imagine you and a friend holding hands and spinning around. The spot where your hands grip - that's the barycenter! If your friend is almost as big as you, you BOTH swing around that grip point. That's what Pluto and Charon do!*
+
+*But if your friend is MUCH lighter than you, the balance point barely moves from where you're sitting -- you'd barely wobble! So we only show the 'balance point view' when the balance point is actually out in the open between the two dancers. For the others, we just show the big one sitting still with the little one orbiting around it."*
 
 ---
 
@@ -180,9 +206,35 @@ Orcus and Vanth form a remarkable binary - often called the "Anti-Pluto" because
 
 **Key insight:** The barycenter is OUTSIDE Orcus's surface (~455 km radius). Both bodies visibly orbit a point in empty space between them.
 
+### Barycenter Visualization: The JPL Resolution (v2.7)
+
+The orrery visualizes the Orcus-Vanth system using **pure JPL Horizons data** from the satellite solution:
+
+**The JPL ID Discovery:**
+
+| Component | Horizons ID | Queryable at Barycenter? |
+|-----------|------------|--------------------------|
+| Barycenter | `20090482` | N/A (IS the center) |
+| Orcus (primary) | `920090482` | **No** - returns "out of bounds" error |
+| Vanth (satellite) | `120090482` | **Yes** - full ephemeris available |
+
+Unlike Patroclus (`920000617` works fine), Orcus's primary body ID cannot be queried when centered on the barycenter. This is a JPL Horizons limitation, not a physics limitation.
+
+**The Derivation Method:**
+
+Since Vanth's positions are available, we derive Orcus's position using the mass ratio:
+
+```
+Orcus position = -Vanth position x 0.16 (mass ratio)
+```
+
+This works because in a two-body barycentric frame, the primary is always opposite the secondary, scaled by the mass ratio. The derivation is applied at five locations in the code: the Actual Orbit trace, position marker, hover text, plotted period overlay, and animation trajectory.
+
+**Historical Note:** The original implementation (Jan 2026) used ALMA orbit circles with JPL providing only angular position (theta), projected onto the published radii. When we discovered that Vanth's ID (`120090482`) returns valid barycentric positions, we switched to pure JPL data. The ALMA circles were removed as redundant - they were a workaround for missing JPL barycentric data that is no longer missing.
+
 ### For Paloma
 
-*"Orcus and Vanth are like a tiny version of Pluto and Charon, dancing around each other way out in the Kuiper Belt. Scientists used a giant telescope called ALMA to watch Orcus wobble back and forth, and from that wobble they figured out exactly how heavy both of them are!"*
+*"Orcus and Vanth are like a tiny version of Pluto and Charon, dancing around each other way out in the Kuiper Belt. Scientists used a giant telescope called ALMA to watch Orcus wobble back and forth, and from that wobble they figured out exactly how heavy both of them are! NASA's computers can track Vanth directly, but for Orcus we have to figure out where it is by knowing it's always on the opposite side of the dance from Vanth."*
 
 ---
 
@@ -258,15 +310,17 @@ When new objects are discovered (comets, asteroids), they often don't appear in 
 
 ## 10. Binary System Visualization Architecture
 
-### The Three Binary Systems
+### The Three Barycenter Systems
 
-Paloma's Orrery supports barycenter-centered visualization for three binary systems:
+Paloma's Orrery supports barycenter-centered visualization for three binary systems where the barycenter lies outside the primary body (see The Barycenter Rule, Section 5):
 
-| System | Implementation | Data Source |
-|--------|----------------|-------------|
-| Pluto-Charon | Horizons ephemeris | JPL satellite solution |
-| Orcus-Vanth | Horizons + analytical | Brown & Butler 2023 |
-| Patroclus-Menoetius | Horizons + analytical | Brozović et al. 2024 |
+| System | Implementation | Data Source | Mass Ratio |
+|--------|----------------|-------------|------------|
+| Pluto-Charon | Horizons ephemeris | JPL satellite solution | 0.122 |
+| Orcus-Vanth | Horizons (derived) | JPL satellite solution | 0.16 |
+| Patroclus-Menoetius | Horizons + analytical | Brozovic et al. 2024 | ~0.28 |
+
+Four additional TNO systems (Eris-Dysnomia, Haumea, Gonggong-Xiangliu, Quaoar-Weywot) have barycenter IDs in JPL Horizons but are visualized as primary-centered only because their barycenters fall inside the primary body.
 
 ### Dual Data Approach
 
@@ -285,6 +339,68 @@ For analytical orbits to match Horizons positions, we need to know **where on th
 - **Mean anomaly at epoch (M₀)** - Angular position at reference time
 
 For nearly circular orbits (like Patroclus-Menoetius with e=0.004), periapsis is poorly defined. Instead, we use a **reference position from Horizons** to establish the orbital phase.
+
+### JPL Horizons Binary ID Scheme
+
+JPL Horizons uses a systematic ID convention for binary asteroid/TNO systems. This was decoded from JPL's own Lucy trajectory documentation and validated empirically:
+
+| Component | ID Pattern | Description |
+|-----------|-----------|-------------|
+| System barycenter | `20XXXXXX` | Center of mass of the system |
+| Primary body center | `920XXXXXX` | Surface/center of the larger body |
+| Secondary body | `120XXXXXX` | Satellite ephemeris solution |
+
+Where `XXXXXX` is the minor planet number (e.g., `000617` for Patroclus, `090482` for Orcus, `003548` for Eurybates).
+
+**Verified Systems:**
+
+| System | Barycenter | Primary | Secondary | Bary Mode? |
+|--------|-----------|---------|-----------|------------|
+| Patroclus-Menoetius | `20000617` | `920000617` | `120000617` | **Yes** |
+| Orcus-Vanth | `20090482` | `920090482` | `120090482` | **Yes** |
+| Quaoar-Weywot | `20050000` | `920050000` | `120050000` | No (inside body) |
+| Haumea system | `20136108` | `920136108` | `120136108` | No (inside body) |
+| Eris-Dysnomia | `20136199` | `920136199` | `120136199` | No (inside body) |
+| Gonggong-Xiangliu | `20225088` | `920225088` | `120225088` | No (inside body) |
+| Eurybates-Queta | `20003548` | `920003548` | `120003548` (untested) | TBD |
+| Polymele-Shaun | `20015094` | `920015094` | `120015094` (untested) | TBD |
+
+### Universal Query Strategy for Binary Systems
+
+Not all IDs are queryable in all configurations. Discovered empirically:
+
+- `920000617` (Patroclus) works as query target at barycenter
+- `920090482` (Orcus) does NOT work - returns "IOBJ out of bounds"
+- `120XXXXXX` (secondary) IDs appear more reliable across systems
+
+**The Universal Approach:**
+
+```
+1. TRY the direct ID (920XXXXXX for primary, 120XXXXXX for secondary)
+2. IF query fails or returns all zeros:
+   a. Fetch the OTHER component's positions (120XXXXXX is safest)
+   b. Derive: primary_pos = -secondary_pos * mass_ratio
+   c. Flag data as derived (for hover text transparency)
+3. ALWAYS center queries on the barycenter ID (20XXXXXX)
+```
+
+The derivation works because in a two-body barycentric frame, the primary is always opposite the secondary, scaled by the mass ratio. This is not an approximation - it's exact for the two-body problem.
+
+**Implementation Pattern (palomas_orrery.py):**
+
+The derivation must be applied at **five locations** in the code wherever position/trajectory data is fetched:
+
+1. `plot_actual_orbits()` - Orbit trace
+2. First position loop - `positions` dict
+3. Second position loop - Hover text data
+4. Plotted Period overlay - Yellow trajectory highlight
+5. Animation - Frame-by-frame positions
+
+Missing any location causes that specific visualization element to show zeros while others work correctly.
+
+### For Paloma
+
+*"When NASA's computers can track both dancers in a binary, we just ask for their positions directly. But sometimes they can only track one dancer. No problem! If you know where one dancer is and how heavy they both are, you can figure out exactly where the other one must be - always on the opposite side of their shared balance point."*
 
 ---
 
@@ -338,6 +454,8 @@ This enables visualization of events like the Lucy flyby of Patroclus-Menoetius 
 | 2.4 | Jan 20, 2026 | Near-parabolic orbit theta sampling fix |
 | 2.5 | Jan 21, 2026 | Apsidal surface distance in hover text |
 | **2.6** | **Jan 27, 2026** | **Patroclus-Menoetius binary system, Lucy flyby visualization** |
+| **2.7** | **Jan 31, 2026** | **Orcus-Vanth JPL orbit resolution: pure JPL data, ALMA circles removed** |
+| **2.8** | **Feb 2, 2026** | **TNO Barycenter Cleanup: The Barycenter Rule. Removed Eris, Haumea, Gonggong, Quaoar barycenters (inside body). Only Pluto-Charon, Orcus-Vanth, Patroclus-Menoetius remain.** |
 
 ---
 
@@ -488,12 +606,14 @@ The `fractional_day` fix ensures that date ranges like "17:00 to 18:00" are pres
 *"We have an orbit before JPL even has an object in Horizons!"* - Tony, Jan 20, 2026
 *"Every tenth matters."* - On climate science, Jan 15, 2026
 *"For nearly circular orbits, periapsis is undefined."* - Jan 27, 2026
+*"Can't query the primary? Derive it from the secondary."* - Jan 31, 2026
+*"Just because Horizons has a barycenter solution doesn't mean you should use it!"* - Feb 2, 2026
 
 ---
 
-**Document Version:** 2.6 (Patroclus-Menoetius Binary & Lucy Flyby)  
-**Date:** January 27, 2026  
+**Document Version:** 2.8 (TNO Barycenter Cleanup)  
+**Date:** February 2, 2026  
 **Maintained By:** Tony  
 **Contributors:** Claude (AI assistant)
 
-*"For nearly circular orbits, periapsis is undefined - but the dance goes on."*
+*"Just because Horizons has a barycenter solution doesn't mean you should use it!"*

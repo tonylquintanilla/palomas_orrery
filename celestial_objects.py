@@ -39,6 +39,13 @@ OBJECT_DEFINITIONS = [
      'mission_info': 'Horizons: 301. Earth orbital period: 27.32 days.', 
      'mission_url': 'https://science.nasa.gov/moon/', 'mission_info': 'NASA: "The Moon rotates exactly once each time it orbits our planet."'},
 
+    # Earth-Moon Barycenter - highest mass ratio of any PLANET-moon system (1.23%)
+    # Barycenter is INSIDE Earth (~4,670 km from center, ~1,700 km below surface)
+    # JPL Horizons ID: 3 (Earth-Moon system barycenter)
+    {'name': 'Earth-Moon Barycenter', 'id': '3', 'var_name': 'earth_moon_barycenter_var',
+     'color_key': 'Earth', 'symbol': 'square-open', 'object_type': 'barycenter',
+     'mission_info': 'Center of mass for the Earth-Moon system. Period: 27.32 days. Highest mass ratio (1.23%) of any planet-moon system!'},
+
     {'name': 'Mars', 'id': '499', 'var_name': 'mars_var', 'color_key': 'Mars', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
     'mission_info': 'Horizons: 499. NASA: "Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light."', 
@@ -50,10 +57,14 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://science.nasa.gov/?search=Jupiter'},
 
     # Trojan Asteroids
+    # Lucy L4 Trojan Targets (Leading Jupiter Trojans)
+    # All have center_id to enable asteroid-centered flyby visualization
+    
     {'name': 'Eurybates', 'id': '1973 SO', 'var_name': 'eurybates_var', 'color_key': 'Eurybates', 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1973 SO. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
-    'mission_url': 'https://www.nasa.gov/missions/hide-and-seek-how-nasas-lucy-mission-team-discovered-eurybates-satellite/'},
+    'id_type': 'smallbody',
+    'center_id': '920003548',  # Numeric ID for use as Horizons center (3548 Eurybates)
+    'mission_info': 'Lucy flyby: Aug 12, 2027. D~64 km, C-type. Has satellite Queta (~1 km). First C-type Trojan to be visited.', 
+    'mission_url': 'https://lucy.swri.edu/Eurybates.html'},
 
     # Patroclus-Menoetius Binary System (Lucy Mission target - flyby March 2, 2033)
     # Source: JPL Horizons satellite solution (JPL#82), Brozovic et al. 2024 (AJ 167:104)
@@ -63,7 +74,7 @@ OBJECT_DEFINITIONS = [
      'color_key': 'Patroclus', 'symbol': 'square-open', 'object_type': 'barycenter',
      'id_type': 'majorbody',
      'start_date': datetime(2000, 1, 1, 12, 0), 'end_date': datetime(2050, 12, 1, 0, 0),
-     'description': 'Center of mass for Patroclus-Menoetius binary Trojan system. Lucy flyby: March 2, 2033.',
+     'mission_info': 'Center of mass for Patroclus-Menoetius binary Trojan system. Lucy flyby: March 3, 2033.',
      'mission_info': 'System barycenter. First known binary Jupiter Trojan. Evidence suggests primordial formation ~4.5 Gyr ago.',
      'mission_url': 'https://lucy.swri.edu/targets/Patroclus-Menoetius.html'},
 
@@ -72,32 +83,35 @@ OBJECT_DEFINITIONS = [
      'id_type': 'majorbody',
      'helio_id': 'A906 UL',           # For Sun-centered plots (smallbody solution)
      'helio_id_type': 'smallbody',
-     # NO center_id - Patroclus is not a valid center, use barycenter instead
+     'center_id': '920000617',  # Patroclus body center (for Lucy trajectory)
      'start_date': datetime(2000, 1, 1, 12, 0), 'end_date': datetime(2050, 12, 1, 0, 0),
-     'mission_info': 'Primary body of binary Trojan. D=113 km, GM=0.074 km3/s2. Lucy flyby target.',
+     'mission_info': 'Primary body of binary Trojan. D=113 km. Binary period: 4.28 days. Lucy flyby: March 3, 2033.',
      'mission_url': 'https://lucy.swri.edu/targets/Patroclus-Menoetius.html'},
 
     {'name': 'Menoetius', 'id': '120000617', 'var_name': 'menoetius_var', 'color_key': 'Menoetius', 
      'symbol': 'circle-open', 'object_type': 'orbital',
      'id_type': 'majorbody',
-     # NO center_id - Menoetius is not a valid center
+     'center_id': '120000617',  # Menoetius body center (for Lucy trajectory)
      'start_date': datetime(2000, 1, 1, 12, 0), 'end_date': datetime(2050, 12, 1, 0, 0),
-     'mission_info': 'Secondary body of binary Trojan. D=104 km, GM=0.021 km3/s2. Named for Patroclus\'s father in mythology.',
+     'mission_info': 'Secondary body of binary Trojan. D=104 km. Binary period: 4.28 days. Named for Patroclus\'s father.',
      'mission_url': 'https://lucy.swri.edu/targets/Patroclus-Menoetius.html'},   
 
     {'name': 'Polymele', 'id': '1999 WB2', 'var_name': 'polymele_var', 'color_key': 'Polymele', 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1999 WB2. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'id_type': 'smallbody',
+    'center_id': '920015094',  # Numeric ID for use as Horizons center (15094 Polymele)
+    'mission_info': 'Lucy flyby: Sep 15, 2027. D~21 km, P-type. Has satellite Shaun (~5 km, discovered 2022 via occultation).', 
     'mission_url': 'https://lucy.swri.edu/Polymele.html'},
 
     {'name': 'Leucus', 'id': '1997 TS25', 'var_name': 'leucus_var', 'color_key': 'Leucus', 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1997 TS25. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'id_type': 'smallbody',
+    'center_id': '20011351',  # Numeric ID for use as Horizons center (11351 Leucus)
+    'mission_info': 'Lucy flyby: Apr 18, 2028. D~40 km, D-type. Extremely slow rotator (~446 hours). Dark, primitive surface.', 
     'mission_url': 'https://lucy.swri.edu/Leucus.html'},
 
     {'name': 'Orus', 'id': '1999 VQ10', 'var_name': 'orus_var', 'color_key': 'Orus', 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1999 VQ10. Trojan asteroid that will be visited by the NASA Lucy spacecraft.', 
+    'id_type': 'smallbody',
+    'center_id': '20021900',  # Numeric ID for use as Horizons center (21900 Orus)
+    'mission_info': 'Lucy flyby: Nov 11, 2028. D~51 km, D-type. Last L4 Trojan visit before heading to L5.', 
     'mission_url': 'https://lucy.swri.edu/Orus.html'},
 
     {'name': 'Saturn', 'id': '699', 'var_name': 'saturn_var', 'color_key': 'Saturn', 'symbol': 'circle', 'object_type': 'orbital', 
@@ -134,13 +148,13 @@ OBJECT_DEFINITIONS = [
     {'name': 'Pluto', 'id': '999', 'var_name': 'pluto_var', 
      'color_key': 'Pluto', 'symbol': 'circle', 'object_type': 'orbital', 
      'id_type': None, 
-     'mission_info': 'Horizons: 999. NASA: "Pluto is a dwarf planet located in a distant region of our solar system beyond Neptune known as the Kuiper Belt."', 
+     'mission_info': 'Horizons: 999. Dwarf planet in the Kuiper Belt. Barycentric period: 6.39 days (orbits Pluto-Charon center of mass with Charon).', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
 
     # NEW: Pluto-Charon Barycenter
     {'name': 'Pluto-Charon Barycenter', 'id': '9', 'var_name': 'pluto_barycenter_var', 
      'color_key': 'Pluto', 'symbol': 'square-open', 'object_type': 'barycenter',
-     'description': 'Center of mass for Pluto-Charon binary planet system'},
+     'mission_info': 'Center of mass for Pluto-Charon binary planet system. System period: 6.39 days.'},
 
     {'name': 'Ceres', 'id': 'A801 AA', 'var_name': 'ceres_var', 'color_key': 'Ceres', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
@@ -153,23 +167,36 @@ OBJECT_DEFINITIONS = [
 #    'mission_info': 'Horizons: 2003 EL61. Haumea is an oval-shaped dwarf planet that is one of the fastest rotating large objects in our solar system.', 
 #    'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
 
-    {'name': 'Haumea', 'id': '20136108', 'var_name': 'haumea_var', 'color_key': 'Haumea', 'symbol': 'circle', 'object_type': 'orbital', 
+    # Haumea System (136108 Haumea) - has 2 moons
+    # Pattern: Barycenter 20XXXXXX, Primary 920XXXXXX, First moon 120XXXXXX, Second moon 220XXXXXX
+#    {'name': 'Haumea System Barycenter', 'id': '20136108', 'var_name': 'haumea_barycenter_var',
+#     'color_key': 'Haumea', 'symbol': 'square-open', 'object_type': 'barycenter',
+#     'id_type': 'majorbody',
+#     'mission_info': 'Center of mass for Haumea triple system. Moon periods: Hi\'iaka 49 days, Namaka 18 days.'},
+
+    {'name': 'Haumea', 'id': '920136108', 'var_name': 'haumea_var', 
+    'color_key': 'Haumea', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'majorbody',
-    'helio_id': '2003 EL61',  # For Sun-centered plots
-    'mission_info': 'Horizons: 136108 Haumea. Egg-shaped dwarf planet with rings and two moons. Fastest rotating large body in the solar system (3.9 hour day).', 
+    'helio_id': '2003 EL61',  # For Sun-centered plots (smallbody solution)
+    'helio_id_type': 'smallbody',
+    'center_id': '920136108',  # Haumea body center (for centered views)
+    'mission_info': 'Horizons: 136108 Haumea. Egg-shaped dwarf planet with rings. Moon periods: Hi\'iaka 49 days, Namaka 18 days. Rotation: 3.9 hours.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},    
 
-#    {'name': 'Eris', 'id': '2003 UB313', 'var_name': 'eris_var', 'color_key': 'Eris', 'symbol': 'circle', 'object_type': 'orbital', 
-    # 136199 primary (required for Sun centered plots)
-#    'id_type': 'smallbody', 
-#    'mission_info': 'Horizons: 2003 UB313. Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
-#    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
+    # Eris-Dysnomia Binary System (136199 Eris)
+    # Pattern: Barycenter 20XXXXXX, Primary 920XXXXXX, Secondary 120XXXXXX
+#    {'name': 'Eris-Dysnomia Barycenter', 'id': '20136199', 'var_name': 'eris_barycenter_var',
+#     'color_key': 'Eris', 'symbol': 'square-open', 'object_type': 'barycenter',
+#     'id_type': 'majorbody',
+#     'mission_info': 'Center of mass for Eris-Dysnomia system. Binary period: 15.79 days.'},
 
-    {'name': 'Eris', 'id': '20136199', 'var_name': 'eris_var', 'color_key': 'Eris', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Eris', 'id': '920136199', 'var_name': 'eris_var', 'color_key': 'Eris', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'majorbody',
-    'helio_id': '2003 UB313',  # For Sun-centered plots
-    'mission_info': 'Horizons: 136199 Eris. Most massive dwarf planet (27% more than Pluto). Three times farther from the Sun than Pluto.', 
-    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},    
+    'helio_id': '2003 UB313',  # For Sun-centered plots (smallbody solution)
+    'helio_id_type': 'smallbody',
+    'center_id': '920136199',  # Eris body center (for centered views)
+    'mission_info': 'Horizons: 136199 Eris. Most massive dwarf planet (27% more than Pluto). Binary period with Dysnomia: 15.79 days.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
 
 #    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var_name': 'eris2_var', 'color_key': 'Eris', 'symbol': 'circle', 'object_type': 'satellite', 
     # 20136199 satellite solution (required for Eris centered plots) 
@@ -177,10 +204,22 @@ OBJECT_DEFINITIONS = [
 #    'mission_info': 'Eris is a dwarf planet about the same size as Pluto, but it\'s three times farther from the Sun.', 
 #    'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
 
-    {'name': 'Gonggong', 'id': '2007 OR10', 'var_name': 'gonggong_var', 'color_key': 'Gonggong', 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'center_id': '20225088', # Numeric ID for use as Horizons center; Gonggong's moon Xiangliu
-    'mission_info': 'Horizons: 2007 OR10. Dwarf planet in the Kuiper Belt with a highly inclined orbit.', 
+    # Gonggong-Xiangliu Binary System (225088 Gonggong)
+    # Pattern: Barycenter 20XXXXXX, Primary 920XXXXXX, Secondary 120XXXXXX
+    # NOTE: Gonggong-Xiangliu Barycenter removed - mass ratio ~0.013 means barycenter is
+    # only ~312 km from Gonggong's center (inside the ~615 km body). Not visually meaningful.
+    # Use Gonggong-centered mode instead (Xiangliu orbiting Gonggong).
+    # {'name': 'Gonggong-Xiangliu Barycenter', 'id': '20225088', 'var_name': 'gonggong_barycenter_var',
+    #  'color_key': 'Gonggong', 'symbol': 'square-open', 'object_type': 'barycenter',
+    #  'id_type': 'majorbody',
+    #  'mission_info': 'Center of mass for Gonggong-Xiangliu system. Binary period: 25.22 days.'},
+
+    {'name': 'Gonggong', 'id': '920225088', 'var_name': 'gonggong_var', 'color_key': 'Gonggong', 'symbol': 'circle', 'object_type': 'orbital', 
+    'id_type': 'majorbody',
+    'helio_id': '2007 OR10',  # For Sun-centered plots (smallbody solution)
+    'helio_id_type': 'smallbody',
+    'center_id': '920225088',  # Gonggong body center (for centered views)
+    'mission_info': 'Horizons: 225088 Gonggong. Dwarf planet with highly inclined orbit. Binary period with Xiangliu: 25.22 days.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)'},
 
     {'name': 'Makemake', 'id': '20136472', 'var_name': 'makemake_var', 'color_key': 'Makemake', 'symbol': 'circle', 'object_type': 'orbital', 
@@ -208,7 +247,7 @@ OBJECT_DEFINITIONS = [
 #    {'name': 'Orcus', 'id': '2004 DW', 'var_name': 'orcus_var', 'color_key': 'Orcus', 'symbol': 'circle', 'object_type': 'orbital', 
 #    'id_type': 'smallbody', 
 #    'center_id': '2090482', # Numeric ID for use as Horizons center; Orcus's moon Vanth
-    'mission_info': 'Horizons: 2004 DW.A dwarf planet in the Kuiper Belt with a moon named Vanth.', 
+    'mission_info': 'Horizons: 90482 Orcus. Dwarf planet with moon Vanth. Binary period: 9.54 days. Highest mass ratio (~16%) of any known binary.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
 
     # NEW: Orcus-Vanth Barycenter - HIGHEST mass ratio binary system in the solar system!
@@ -216,12 +255,19 @@ OBJECT_DEFINITIONS = [
 #    'name': 'Orcus-Vanth Barycenter', 'id': '2090482', 'var_name': 'orcus_barycenter_var', 
     'name': 'Orcus-Vanth Barycenter', 'id': '20090482', 'var_name': 'orcus_barycenter_var',
      'color_key': 'Orcus', 'symbol': 'square-open', 'object_type': 'barycenter',
-     'description': 'Center of mass for Orcus-Vanth binary system (16% mass ratio - highest known!)'},
+     'mission_info': 'Center of mass for Orcus-Vanth binary system. Binary period: 9.54 days. Highest mass ratio (16%)!'},
 
-    {'name': 'Quaoar', 'id': '2002 LM60', 'var_name': 'quaoar_var', 'color_key': 'Quaoar', 'symbol': 'circle', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
-    'center_id': '2050000', # Numeric ID for use as Horizons center; Quaoar's moon Weywot
-    'mission_info': 'Horizons: 2002 LM60. A large Kuiper Belt object with a ring system.', 
+    # Quaoar (50000 Quaoar)
+    # NOTE: Quaoar-Weywot Barycenter removed - mass ratio ~0.004 means barycenter is
+    # only ~7 km from Quaoar's center (inside the 1,090 km body). Not visually meaningful.
+    # Use Quaoar-centered mode instead (Weywot orbiting Quaoar).
+
+    {'name': 'Quaoar', 'id': '920050000', 'var_name': 'quaoar_var', 'color_key': 'Quaoar', 'symbol': 'circle', 'object_type': 'orbital', 
+    'id_type': 'majorbody',
+    'helio_id': '2002 LM60',  # For Sun-centered plots (smallbody solution)
+    'helio_id_type': 'smallbody',
+    'center_id': '920050000',  # Quaoar body center (for centered views)
+    'mission_info': 'Horizons: 50000 Quaoar. Kuiper Belt dwarf planet with ring system (discovered 2023). Binary period with Weywot: 12.44 days.', 
     'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
 
     {'name': 'Sedna', 'id': '2003 VB12', 'var_name': 'sedna_var', 'color_key': 'Sedna', 'symbol': 'circle', 'object_type': 'orbital', 
@@ -358,7 +404,7 @@ OBJECT_DEFINITIONS = [
 
     {'name': 'Dinkinesh', 'id': '1999 VD57', 'var_name': 'dinkinesh_var', 'color_key': 'Dinkinesh', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
-    'center_id': '2152830',  # Numeric ID for use as Horizons center
+    'center_id': '20152830',  # Numeric ID for use as Horizons center
     'mission_info': 'Horizons: 1999 VD57. Dinkinesh was visited by the mission Lucy.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/dinkinesh/'},
 
@@ -386,7 +432,8 @@ OBJECT_DEFINITIONS = [
 
     {'name': 'Donaldjohanson', 'id': '1981 EQ5', 'var_name': 'donaldjohanson_var', 'color_key': 'Donaldjohanson', 'symbol': 'circle-open', 'object_type': 'orbital', 
      'id_type': 'smallbody',
-     'mission_info': 'Horizons: 1981 EQ5. Visited by the NASA Lucy spacecraft.', 
+     'center_id': '20052246',  # Numeric ID for use as Horizons center (52246 Donaldjohanson)
+     'mission_info': 'Lucy flyby: Apr 20, 2025. D~4 km, C-type. Named for paleoanthropologist who discovered "Lucy" fossil.', 
      'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
 
     {'name': 'Vesta', 'id': 'A807 FA', 'var_name': 'vesta_var', 'color_key': 'Vesta', 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -398,13 +445,9 @@ OBJECT_DEFINITIONS = [
     # Kuiper Belt Objects or Trans-Neptunian Objects (TNOs)
 
     {'name': 'Arrokoth', 'id': '2014 MU69', 'var_name': 'arrokoth_var', 'color_key': 'Arrokoth', 'symbol': 'circle-open', 'object_type': 'orbital', 
-    'id_type': 'smallbody', 
+    'id_type': 'smallbody',
+    'center_id': '2486958', 
     'mission_info': 'Horizons: 2014 MU69. Arrokoth flyby from New Horizons on January 1, 2019.', 
-    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
-
-    {'name': 'Arrokoth/New_Horizons', 'id': '2486958', 'var_name': 'arrokoth_new_horizons_var', 'color_key': 'Arrokoth', 'symbol': 'circle-open', 'object_type': 'trajectory', 
-    'id_type': 'smallbody', 
-    'mission_info': 'Arrokoth (2014 MU69) flyby from New Horizons on January 1, 2019.', 
     'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
 
     {'name': 'Ixion', 'id': '2001 KX76', 'var_name': 'ixion_var', 'color_key': 'Ixion', 'symbol': 'circle-open', 'object_type': 'orbital', 
@@ -682,11 +725,12 @@ OBJECT_DEFINITIONS = [
     {'name': 'MarsRover', 'id': '-168', 'var_name': 'perse_var', 'color_key': 'MarsRover', 'symbol': 'diamond-open', # Perseverance
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2026, 2, 19),    # end ephemeris
     # No ephemeris for target "Mars2020 (spacecraft)" after A.D. 2026-FEB-18 23:58:50.8148 UT
-    'mission_info': 'Horizons: -168. The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. Note: The elevation values shown (-4200m) <br>' 
-    'differ from published scientific values for Jezero Crater (-2600m) due to different Mars reference systems. JPL <br>' 
-    'Horizons uses one elevation datum, while scientific publications often use the Mars Orbiter Laser Altimeter (MOLA) reference areoid. <br>' 
-    'The rover is correctly positioned relative to Mars, but the absolute elevation value has a systematic offset of approximately 1600m.', 
-    'mission_url': 'https://mars.nasa.gov/mars2020/'},
+    'mission_info': 'Horizons: -168. The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter.<br><br>'
+    '<b>HISTORIC MILESTONE - December 8, 2025:</b> First AI-planned drive on another planet! Engineers at NASA JPL used Claude <br>'
+    'to plot a 400-meter route across the Martian surface. This was planned through conversation, not code.<br><br>'
+    'Note: The elevation values shown (-4200m) differ from published scientific values for Jezero Crater (-2600m) due to different <br>'
+    'Mars reference systems. JPL Horizons uses one elevation datum, while scientific publications often use the MOLA reference areoid.',
+    'mission_url': 'mars_milestone.html'},  # Local HTML milestone graphic (contains link to NASA)
 
     {'name': 'Lucy', 'id': '-49', 'var_name': 'lucy_var', 'color_key': 'Lucy', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 2), 
@@ -951,36 +995,42 @@ OBJECT_DEFINITIONS = [
 
     # Eris's Moon
     {'name': 'Dysnomia', 'id': '120136199', 'var_name': 'dysnomia_var', 'color_key': 'Dysnomia', 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
+     'id_type': 'majorbody',
+     'center_id': '120136199',  # Dysnomia body center (following 120XXXXXX pattern)
      'mission_info': 'Eris\'s moon. Period: 15.79 days. Both tidally locked. Diameter ~700 km.', 
      'mission_url': 'https://science.nasa.gov/resource/hubble-view-of-eris-and-dysnomia/'},
 
     # Gonggong's Moon
-    {'name': 'Xiangliu', 'id': '120225088', 'var_name': 'xiangliu_var', 'color_key': 'Xiangliu', 'symbol': 'circle', 'object_type': 'satellite', # id is provisional
-     'id_type': 'majorbody', 
+    {'name': 'Xiangliu', 'id': '120225088', 'var_name': 'xiangliu_var', 'color_key': 'Xiangliu', 'symbol': 'circle', 'object_type': 'satellite',
+     'id_type': 'majorbody',
+     'center_id': '120225088',  # Xiangliu body center (following 120XXXXXX pattern)
      'mission_info': 'Gonggong\'s moon. Period: 25.22 days. Diameter ~100 km.', 
      'mission_url': 'https://en.wikipedia.org/wiki/Xiangliu_(moon)'},
 
     # Orcus's Moon
     {'name': 'Vanth', 'id': '120090482', 'var_name': 'vanth_var', 'color_key': 'Van', 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Orcus\'s moon. Period: 9.54 days. Diameter ~440 km.', 
+     'id_type': 'majorbody',
+     'center_id': '120090482',  # Vanth body center (following 120XXXXXX pattern)
+     'mission_info': 'Orcus\'s moon. Period: 9.54 days. Diameter ~440 km. Highest mass ratio (~16%) of any known binary system.', 
      'mission_url': 'https://en.wikipedia.org/wiki/Vanth_(moon)'},
 
     # Quaoar's Moon
     {'name': 'Weywot', 'id': '120050000', 'var_name': 'weywot_var', 'color_key': 'Weywot', 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
+     'id_type': 'majorbody',
+     'center_id': '120050000',  # Weywot body center (following 120XXXXXX pattern)
      'mission_info': 'Quaoar\'s moon. Period: 12.44 days. Diameter ~170 km.', 
      'mission_url': 'https://en.wikipedia.org/wiki/Weywot'},    
 
     # Haumea's Moons
     {'name': "Hi'iaka", 'id': '120136108', 'var_name': 'hiiaka_var', 'color_key': "Hi'iaka", 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
+     'id_type': 'majorbody',
+     'center_id': '120136108',  # Hi'iaka body center (following 120XXXXXX pattern)
      'mission_info': 'Haumea\'s outer moon. Period: 49 days. Diameter ~310 km. Named for Hawaiian goddess of childbirth.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
 
     {'name': 'Namaka', 'id': '220136108', 'var_name': 'namaka_var', 'color_key': 'Namaka', 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
+     'id_type': 'majorbody',
+     'center_id': '220136108',  # Namaka body center (220XXXXXX pattern for second moon)
      'mission_info': 'Haumea\'s inner moon. Period: 18 days. Diameter ~170 km. Eccentric orbit perturbed by Hi\'iaka.', 
      'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},
 

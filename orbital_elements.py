@@ -1386,6 +1386,7 @@ planetary_params = {
 
 parent_planets = {
     'Earth': ['Moon'],
+    'Earth-Moon Barycenter': ['Earth', 'Moon'],  # Binary system mode - both orbit barycenter    
     'Mars': ['Phobos', 'Deimos'],
     'Jupiter': ['Io', 'Europa', 'Ganymede', 'Callisto', 'Metis', 'Adrastea', 'Amalthea', 'Thebe'],
     'Patroclus-Menoetius Barycenter': ['Patroclus', 'Menoetius'],  # Binary Trojan asteroid (Lucy target)   
@@ -1396,11 +1397,16 @@ parent_planets = {
     'Pluto': ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],
     'Pluto-Charon Barycenter': ['Pluto', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra'],  # Binary planet mode
     'Eris': ['Dysnomia'],
+#    'Eris-Dysnomia Barycenter': ['Eris', 'Dysnomia'],  # Binary dwarf planet mode
     'Gonggong': ['Xiangliu'],
+#    'Gonggong-Xiangliu Barycenter': ['Gonggong', 'Xiangliu'],  # Binary dwarf planet mode
     'Orcus': ['Vanth'],
     'Orcus-Vanth Barycenter': ['Orcus', 'Vanth'],  # Binary dwarf planet mode
-    'Quaoar': ['Weywot'],    
+    'Quaoar': ['Weywot'],
+#    'Quaoar-Weywot Barycenter': ['Quaoar', 'Weywot'],  # Binary dwarf planet mode
+#   Quaoar-Weywot Barycenter removed - mass ratio ~0.004, barycenter offset ~7 km
     'Haumea': ["Hi'iaka", 'Namaka'],
+#    'Haumea System Barycenter': ['Haumea', "Hi'iaka", 'Namaka'],  # Triple system mode
     'Makemake': ['MK2']
 }
 

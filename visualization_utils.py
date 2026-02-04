@@ -661,21 +661,6 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     else:
         known_period_str = str(known_period)
     
-    # Calculate percent difference between calculated and known orbital periods
-#    period_diff_percent = "N/A"
-#    if (not is_satellite and 
-#        isinstance(calculated_period, dict) and 
-#        isinstance(known_period, dict) and
-#        isinstance(calculated_period.get('years'), (int, float)) and 
-#        isinstance(known_period.get('years'), (int, float)) and
-#        known_period.get('years') != 0):
-        
-#        calc_years = calculated_period.get('years')
-#        known_years = known_period.get('years')
-#        period_diff = abs(calc_years - known_years)
-#        period_diff_percent = f"{(period_diff / known_years * 100):.2f}"
-
-
     # Find the object's info in the objects list
     obj_info = next((o for o in objects if o['name'] == obj_name), None)
     mission_info = obj_info.get('mission_info', '') if obj_info else ''
@@ -709,25 +694,18 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
             f"Velocity: {velocity_au} AU/day<br>"
             f"Velocity: {velocity_km_hr} km/hr ({velocity_km_sec} km/sec)<br>"
         )
-
-    # Add orbital period information
-    # Only show "satellite of" message when actually viewing from the parent body
-    # (e.g., Pluto is in parent_planets under Pluto-Charon Barycenter, but when
-    # viewing from Sun, we should show its heliocentric period)
-#    if is_satellite and planet == center_object_name:
-#        full_hover_text += f"Calculated Orbital Period: N/A (satellite of {planet})<br>"
-
-#    else:
-#        full_hover_text += f"Calculated Orbital Period: {calculated_period_str}<br>"
-    
-    # Add known period if available
-#    if period_diff_percent != "N/A":
-#        full_hover_text += f"Known Orbital Period: {known_period_str} (Percent difference: {period_diff_percent}%)"
-#    else:
-#        full_hover_text += f"Known Orbital Period: {known_period_str}"
     
     # Add orbital period information (known period only)
     full_hover_text += f"Known Orbital Period: {known_period_str}"
+    
+    # Add derivation note for Orcus when derived from Vanth
+    if obj_data.get('derived_from_vanth'):
+        full_hover_text += (
+            f"<br><br><b>Position: Derived from Vanth</b><br>"
+            f"JPL cannot query Orcus (920090482) at barycenter.<br>"
+            f"Derived: Orcus pos = -Vanth pos x 0.16 (mass ratio)<br>"
+            f"Data: JPL Horizons ID 120090482"
+        )
 
     # Add mission_info if it exists
     if mission_info:

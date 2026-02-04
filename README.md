@@ -1,4 +1,4 @@
-# Last updated: January 25, 2026
+# Last updated: February 4, 2026
 
 # Paloma's Orrery
 
@@ -18,11 +18,12 @@ Created by Tony Quintanilla with assistance from Claude, ChatGPT, Gemini, and De
 6. [Architecture](#architecture)
 7. [Earth System Visualization](#earth-system-visualization)
 8. [Galactic Center Visualization](#galactic-center-visualization)
-9. [Module Reference](#module-reference)
-10. [Data Files](#data-files)
-11. [Contributing](#contributing)
-12. [License](#license)
-13. [Contact](#contact)
+9. [Social Media Export](#social-media-export)
+10. [Module Reference](#module-reference)
+11. [Data Files](#data-files)
+12. [Contributing](#contributing)
+13. [License](#license)
+14. [Contact](#contact)
 
 ## Overview
 
@@ -45,6 +46,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Climate data preservation hub
 - Forensic Heat Wave Analysis: 3D KML generator for wet-bulb temperature extremes
 - Unified save system with CDN/offline HTML options
+- Social media export: 9:16 portrait HTML for Instagram Reels and YouTube Shorts
 - Resizable GUI columns with persistent window layout
 
 **Resources:**
@@ -652,6 +654,25 @@ python sgr_a_visualization_precession.py
 python sgr_a_grand_tour.py
 ```
 
+## Social Media Export
+
+Export any orrery visualization as a 9:16 portrait HTML file for Instagram Reels and YouTube Shorts. The social view splits the screen into a 3D scene (top 60%) and a persistent info panel (bottom 40%) that displays the rich data normally hidden in ephemeral hover tooltips.
+
+**How to use:** Click **Social Media Export** in the GUI, select which objects to include, choose a save location, and the HTML opens in your browser. Record with any screen capture tool at 1080x1920 resolution. No cropping needed -- the layout is locked to 9:16 with invisible black margins.
+
+**Key features:**
+
+- 9:16 portrait layout locked via CSS (works in any browser window size)
+- Persistent info panel shows object name, coordinates, distance, velocity
+- Click or hover to select objects; panel holds last selection
+- Animation support with Play/Pause and date slider
+- Camera angle preserved during animation playback
+- Trace selection dialog to choose which objects appear
+- Save dialog with timestamped defaults and directory memory
+- CDN (~10 KB) or offline (~5 MB) Plotly.js options
+
+See [social_media_readme.md](social_media_readme.md) for full documentation.
+
 ## Module Reference
 
 **For a complete index of all Python modules in the project, see [MODULE_INDEX.md](MODULE_INDEX.md).**
@@ -697,6 +718,7 @@ The following sections highlight the primary modules organized by function. Use 
 | Module | Purpose |
 |--------|---------|
 | `save_utils.py` | Unified save system for all visualizations - CDN/offline HTML, PNG export, session directory memory, cross-platform dialogs |
+| `social_media_export.py` | 9:16 portrait HTML export for Instagram Reels / YouTube Shorts with persistent info panel |
 | `shutdown_handler.py` | Graceful shutdown, thread management, delegates to save_utils |
 | `palomas_orrery_helpers.py` | Animation helpers, show_animation_safely delegates to save_utils |
 
@@ -757,6 +779,7 @@ palomas_orrery/
 |- *.py                    # Python source code
 |- README/                 # Documentation
 |   |- README.md
+|   |- social_media_readme.md
 |   |- paleoclimate_readme.md
 |   |- climate_readme.md
 |- data/                   # All program data files
@@ -889,7 +912,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** January 2026 (v2.3.1 - Galactic Center, Unified Save System & Resizable GUI)
+**Last Updated:** February 2026 (v2.4.0 - Social Media Export, Galactic Center, Unified Save System & Resizable GUI)
 
 ---
 

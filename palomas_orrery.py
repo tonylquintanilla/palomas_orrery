@@ -599,30 +599,50 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
 
     # Special case: Pluto-Charon Barycenter centered view
     # Use fixed range appropriate for the binary planet system (~0.0005 AU scale)
-    if center_object_name == 'Pluto-Charon Barycenter':
+#    if center_object_name == 'Pluto-Charon Barycenter':
         # Hydra (most distant) orbits at ~0.000436 AU
         # Add buffer for comfortable viewing
-        max_range = 0.00065  # ~1.5x Hydra's orbit
-        print(f"[SCALING] Pluto-Charon Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
-        return [-max_range, max_range]
+#        max_range = 0.00065  # ~1.5x Hydra's orbit
+#        print(f"[SCALING] Pluto-Charon Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
+#        return [-max_range, max_range]
 
     # Special case: Orcus-Vanth Barycenter centered view
     # Use fixed range appropriate for the binary dwarf planet system (~0.00015 AU scale)
-    if center_object_name == 'Orcus-Vanth Barycenter':
+#    if center_object_name == 'Orcus-Vanth Barycenter':
         # Vanth orbits at ~0.0000601 AU from barycenter (~7,770 km from barycenter)
         # Add buffer for comfortable viewing - scale to see both orbits clearly
-        max_range = 0.00015  # ~2.5x Vanth's orbital radius from barycenter
-        print(f"[SCALING] Orcus-Vanth Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
-        return [-max_range, max_range]
+#        max_range = 0.00015  # ~2.5x Vanth's orbital radius from barycenter
+#        print(f"[SCALING] Orcus-Vanth Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
+#        return [-max_range, max_range]
 
     # Special case: Patroclus-Menoetius Barycenter centered view
     # Binary Trojan asteroid system (Lucy target, March 2033)
-    if center_object_name == 'Patroclus-Menoetius Barycenter':
+#    if center_object_name == 'Patroclus-Menoetius Barycenter':
         # Binary separation ~692.5 km = 0.00000463 AU
         # Add buffer for comfortable viewing - scale to see both objects clearly
-        max_range = 0.000012  # ~2.5x binary separation
-        print(f"[SCALING] Patroclus-Menoetius Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
-        return [-max_range, max_range]
+#        max_range = 0.000012  # ~2.5x binary separation
+#        print(f"[SCALING] Patroclus-Menoetius Barycenter mode: using fixed range +/-{max_range:.6f} AU", flush=True)
+#        return [-max_range, max_range]
+
+    # Generic barycenter handling: if center is a barycenter in parent_planets,
+    # use the children's orbital elements (which are barycentric, not heliocentric)
+    if center_object_name in parent_planets:
+        children = parent_planets[center_object_name]
+        child_distances = []
+        for child_name in children:
+            if child_name in planetary_params:
+                child_params = planetary_params[child_name]
+                child_a = child_params.get('a', 0)
+                child_e = child_params.get('e', 0)
+                if child_a > 0:
+                    child_apoapsis = child_a * (1 + child_e)
+                    child_distances.append(child_apoapsis)
+                    print(f"[SCALING] {center_object_name} child '{child_name}': a={child_a:.6f} AU, apoapsis={child_apoapsis:.6f} AU", flush=True)
+        
+        if child_distances:
+            max_range = max(child_distances) * 1.5  # 1.5x buffer for comfortable viewing
+            print(f"[SCALING] {center_object_name} mode: using range +/-{max_range:.6f} AU (based on children's orbits)", flush=True)
+            return [-max_range, max_range]
 
     max_distances = []
     
@@ -1948,6 +1968,13 @@ status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10),
 #    status_display.config(text=text)
 
 # Set inner planets selected by default
+
+#   This creates a special integer that:
+#   - Lives in both Python AND Tcl/Tk
+#   - Can be read, for example: mercury_var.get() → 0 or 1
+#   - Can be set: mercury_var.set(1)
+#   - Widgets can WATCH it for changes
+
 sun_var = tk.IntVar(value=0)  
 sun_shells_var = tk.IntVar(value=0)  
 sun_core_var = tk.IntVar(value=0)
@@ -2063,6 +2090,9 @@ moon_crust_var = tk.IntVar(value=0)
 moon_exosphere_var = tk.IntVar(value=0)
 # moon hill sphere shell
 moon_hill_sphere_var = tk.IntVar(value=0)
+
+# Earth-Moon Barycenter
+earth_moon_barycenter_var = tk.IntVar(value=0)   # Earth-Moon Barycenter
 
 mars_var = tk.IntVar(value=0)  # Set Mars to 1 to preselect it by default
 # Mars' Moons
@@ -2238,6 +2268,7 @@ planet9_surface_var = tk.IntVar(value=0)
 # planet9 hill_sphere shell
 planet9_hill_sphere_var = tk.IntVar(value=0)
 
+# haumea_barycenter_var = tk.IntVar(value=0)   # Haumea System Barycenter
 haumea_var = tk.IntVar(value=0)
 hiiaka_var = tk.IntVar(value=0)
 namaka_var = tk.IntVar(value=0)
@@ -2247,6 +2278,7 @@ mk2_var = tk.IntVar(value=0)
 
 ammonite_var = tk.IntVar(value=0)
 
+# eris_barycenter_var = tk.IntVar(value=0)   # Eris-Dysnomia Barycenter
 eris_var = tk.IntVar(value=0)       
 # eris2_var = tk.IntVar(value=0)      # for Eris-centered plots
 # Eris's Moon
@@ -2345,7 +2377,7 @@ apophis_var = tk.IntVar(value=0)
 vesta_var = tk.IntVar(value=0)
 
 bennu_var = tk.IntVar(value=0)  
-bennu2_var = tk.IntVar(value=0)  # Bennu as a center body
+# bennu2_var = tk.IntVar(value=0)  # Bennu as a center body; retired
 
 steins_var = tk.IntVar(value=0)
 
@@ -2390,6 +2422,8 @@ gaia_var = tk.IntVar(value=0)
 hayabusa2_var = tk.IntVar(value=0)  # 0 means unselected by default
 
 # Define IntVar variables for Kuiper Belt Objects
+# quaoar_barycenter_var = tk.IntVar(value=0)   # Quaoar-Weywot Barycenter
+# quaoar_barycenter_var removed - Quaoar-Weywot Barycenter not visually meaningful (mass ratio ~0.004)
 quaoar_var = tk.IntVar(value=0)
 weywot_var = tk.IntVar(value=0)
 
@@ -2413,6 +2447,7 @@ ms4_var = tk.IntVar(value=0)
 
 dw_var = tk.IntVar(value=0)
 
+# gonggong_barycenter_var = tk.IntVar(value=0)   # Gonggong-Xiangliu Barycenter removed (barycenter inside body)
 gonggong_var = tk.IntVar(value=0)
 xiangliu_var = tk.IntVar(value=0)
 
@@ -3136,6 +3171,32 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 fetch_id_type = 'smallbody'  # helio_ids are smallbody designations
             
             trajectory = fetch_trajectory(fetch_id, dates_list, center_id=center_id, id_type=fetch_id_type)
+            
+            # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
+            # Derive Orcus trajectory from Vanth using mass ratio
+            if planet == 'Orcus' and center_object_name == 'Orcus-Vanth Barycenter':
+                traj_all_zeros = trajectory and all(
+                    (pos is None or (pos.get('x', 0) == 0 and pos.get('y', 0) == 0 and pos.get('z', 0) == 0))
+                    for pos in trajectory
+                )
+                if not trajectory or traj_all_zeros:
+                    print(f"  - Deriving Orcus trajectory from Vanth (mass ratio method)...", flush=True)
+                    vanth_trajectory = fetch_trajectory('120090482', dates_list, center_id=center_id, id_type=None)
+                    if vanth_trajectory:
+                        mass_ratio = 0.16
+                        trajectory = []
+                        for vanth_pos in vanth_trajectory:
+                            if vanth_pos and vanth_pos.get('x') != 0:
+                                trajectory.append({
+                                    'x': -vanth_pos['x'] * mass_ratio,
+                                    'y': -vanth_pos['y'] * mass_ratio,
+                                    'z': -vanth_pos['z'] * mass_ratio
+                                })
+                            else:
+                                trajectory.append({'x': 0, 'y': 0, 'z': 0})
+                        print(f"  -> Derived {len(trajectory)} Orcus positions from Vanth", flush=True)
+
+            # Now trajectory is a list of positions - extract valid positions
 
             # Now trajectory is a list of positions - extract valid positions
             x, y, z = [], [], []
@@ -3171,10 +3232,33 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                     else:
                         hover_text = f"{planet} Full Mission"
                         legend_name = f"{planet} Full Mission"
-                else:
-                    hover_text = f"{planet} Orbit"
-                    legend_name = f"{planet} Actual Orbit"
                 
+                else:
+                    # Orcus-Vanth barycenter mode: explain derivation method
+                    if planet == 'Orcus' and center_object_name == 'Orcus-Vanth Barycenter':
+                        hover_text = (
+                            f"<b>{planet} Orbit (Derived from Vanth)</b><br>"
+                            f"<br>JPL Horizons cannot query Orcus (920090482) at barycenter.<br>"
+                            f"Orbit derived from Vanth (120090482) positions:<br>"
+                            f"Orcus position = -Vanth position x mass ratio (0.16)<br>"
+                            f"<br>Assumes tidal lock: Orcus always 180 deg opposite Vanth.<br>"
+                            f"Mass ratio: M_Vanth/M_Orcus = 0.16 +/- 0.02<br>"
+                            f"(Highest known ratio - even higher than Charon/Pluto!)<br>"
+                            f"<br>Data: JPL Horizons satellite solution"
+                        )
+                    elif planet == 'Vanth' and center_object_name == 'Orcus-Vanth Barycenter':
+                        hover_text = (
+                            f"<b>{planet} Orbit (JPL Horizons)</b><br>"
+                            f"<br>Direct from JPL satellite solution (ID 120090482)<br>"
+                            f"centered on Orcus-Vanth Barycenter (20090482).<br>"
+                            f"<br>Vanth: 443 +/- 10 km diameter (nearly half of Orcus!)<br>"
+                            f"Likely a largely-intact impactor from giant collision.<br>"
+                            f"<br>Data: JPL Horizons satellite solution"
+                        )
+                    else:
+                        hover_text = f"{planet} Orbit"
+                    legend_name = f"{planet} Actual Orbit"
+
                 fig.add_trace(
                     go.Scatter3d(
                         x=x,
@@ -3225,7 +3309,8 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             # ===================================================================
             if not x:
 
-                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
+            #    ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
+                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong', '6AC4721']  # Weywot removed - JPL data works at Quaoar
                 if planet in ANALYTICAL_POSITION_FALLBACK:
                     from orbital_elements import planetary_params
                     if planet in planetary_params:
@@ -3305,39 +3390,47 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                             x.append(x_final)
                             y.append(y_final)
                             z.append(z2)
-                        
-                        # Create trace with same styling as Actual Orbit
-                        obj_type = obj_info.get('object_type', 'orbital')
-                        trace_color = trajectory_marker_color if (obj_type == 'trajectory' and trajectory_marker_color) else color_map(planet)
-                        
-                        if show_lines:
-                            mode = 'lines'
-                            line = dict(color=trace_color, width=2)
-                            marker = None
-                        else:
-                            mode = 'markers'
-                            line = None
-                            marker = dict(color=trace_color, size=2)
-                        
-                        hover_text = f"{planet} Analytical Orbit"
-                        legend_name = f"{planet} Analytical Orbit"
-                        
-                        fig.add_trace(
-                            go.Scatter3d(
-                                x=x,
-                                y=y,
-                                z=z,
-                                mode=mode,
-                                line=line,
-                                marker=marker,
-                                name=legend_name,
-                                text=[hover_text] * len(x),
-                                customdata=[hover_text] * len(x),
-                                hovertemplate='%{text}<extra></extra>',
-                                showlegend=True
+                                                
+                        # Skip orbit trace if satellite's orbit is already drawn by plot_tno_satellite_orbit
+                        # (avoids duplicate "Analytical Orbit" in legend)
+                        is_satellite_of_center = planet in parent_planets.get(center_object_name, [])
+                        if not is_satellite_of_center:
+
+                            # Create trace with same styling as Actual Orbit
+                            obj_type = obj_info.get('object_type', 'orbital')
+                            trace_color = trajectory_marker_color if (obj_type == 'trajectory' and trajectory_marker_color) else color_map(planet)
+                            
+                            if show_lines:
+                                mode = 'lines'
+                                line = dict(color=trace_color, width=2)
+                                marker = None
+                            else:
+                                mode = 'markers'
+                                line = None
+                                marker = dict(color=trace_color, size=2)
+                            
+                            hover_text = f"{planet} Analytical Orbit"
+                            legend_name = f"{planet} Analytical Orbit"
+                            
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=x,
+                                    y=y,
+                                    z=z,
+                                    mode=mode,
+                                    line=line,
+                                    marker=marker,
+                                    name=legend_name,
+                                    text=[hover_text] * len(x),
+                                    customdata=[hover_text] * len(x),
+                                    hovertemplate='%{text}<extra></extra>',
+                                    showlegend=True
+                                )
                             )
-                        )
-                        print(f"[ANALYTICAL ORBIT] Plotted {planet} analytical orbit with {len(x)} points", flush=True)
+
+                            print(f"[ANALYTICAL ORBIT] Plotted {planet} analytical orbit with {len(x)} points", flush=True)
+                        else:
+                            print(f"[ANALYTICAL ORBIT] Skipped orbit trace for {planet} (drawn by plot_tno_satellite_orbit)", flush=True)                            
 
 # Define dictionary mapping all celestial bodies to their shell variable dictionaries
 body_shells_config = {
@@ -3356,6 +3449,39 @@ body_shells_config = {
     'Planet 9': planet9_shell_vars
     # Add more celestial bodies here as shell systems are developed
 }
+
+# =========================================================================
+# SOCIAL MEDIA EXPORT
+# =========================================================================
+# Module-level storage for the last plotted figure
+_last_plotted_fig = [None]  # List wrapper for mutability in nested scope
+_last_plot_name = ['']
+
+def export_social_view():
+    """Export the last plotted figure as a social media view."""
+    if _last_plotted_fig[0] is None:
+        import tkinter.messagebox as messagebox
+        messagebox.showinfo("Social Media View",
+            "No figure available.\n\n"
+            "Plot or animate first, then export.")
+        return
+
+    from social_media_export import show_trace_selection_dialog, export_social_html
+
+    # Show trace selection dialog
+    selected = show_trace_selection_dialog(_last_plotted_fig[0], parent=root)
+    if selected is None:
+        print("[SOCIAL MEDIA] Export cancelled.", flush=True)
+        return
+
+    # Generate output path from last plot name
+    output_name = _last_plot_name[0] + '_social.html' if _last_plot_name[0] else 'orrery_social_view.html'
+
+    export_social_html(
+        _last_plotted_fig[0],
+    #    output_path=output_name,
+        trace_names=selected
+    )
 
 
 def plot_objects():
@@ -3387,6 +3513,11 @@ def plot_objects():
     elif center_object_name == 'Patroclus-Menoetius Barycenter':
         osculating_center_body = '@20000617'  # Patroclus-Menoetius satellite solution barycenter
 
+    elif center_object_name == 'Earth-Moon Barycenter':
+        osculating_center_body = '@3'  # Earth-Moon system barycenter
+    elif center_object_name == 'Earth':
+        osculating_center_body = '@399'  # Earth body center (for Moon's osculating elements)
+
     else:
         osculating_center_body = None  # Default (heliocentric or auto-detect)
 
@@ -3398,7 +3529,8 @@ def plot_objects():
         plot_date = datetime.now()
 
     # These TNO moons have no usable JPL parent-centered ephemeris
-    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+#    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong']  # Weywot removed - JPL data works at Quaoar
 
     # Filter objects that need osculating elements
     pre_fetch_objects = [
@@ -3443,7 +3575,12 @@ def plot_objects():
                         # Check if this is a Patroclus system object (Patroclus or Menoetius)
                         patroclus_system_ids = ['920000617', '120000617', 'A906 UL']  # Patroclus primary, Menoetius, smallbody
                         if str(horizons_id) in patroclus_system_ids:
-                            obj_center_body = osculating_center_body                    
+                            obj_center_body = osculating_center_body       
+                    elif center_object_name in ['Earth-Moon Barycenter', 'Earth']:
+                        earth_moon_system_ids = ['399', '301']  # Earth, Moon
+                        if str(horizons_id) in earth_moon_system_ids:
+                            obj_center_body = osculating_center_body                            
+
                     # Trigger the GUI prompt with proper Horizons ID and center
 
                     fresh_elements = get_elements_with_prompt(
@@ -3587,7 +3724,8 @@ def plot_objects():
                 cache_end_date = settings['end_date']      # Or get_end_date_from_gui()
 
                 # These TNO moons have no usable JPL parent-centered ephemeris
-                SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+        #        SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+                SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong']  # Weywot removed - JPL data works at Quaoar
                 
                 for obj in selected_objects:
                     # Skip exoplanet objects - they don't use JPL Horizons
@@ -4029,6 +4167,49 @@ def plot_objects():
                             fetch_id_type = 'smallbody'
                         obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
                         
+                        # Special case: Orcus at Orcus-Vanth Barycenter - derive from Vanth's position
+                        # JPL doesn't have 920090482 as a valid target, but 120090482 (Vanth) works
+                        # Orcus is on opposite side of barycenter at 1/mass_ratio of Vanth's distance
+
+                        orcus_needs_derivation = (
+                            obj['name'] == 'Orcus' and 
+                            center_object_name == 'Orcus-Vanth Barycenter' and
+                            (obj_data is None or (obj_data.get('x') == 0 and obj_data.get('y') == 0 and obj_data.get('z') == 0))
+                        )
+                        if orcus_needs_derivation:
+
+                            print(f"  - Deriving Orcus position from Vanth (mass ratio method)...", flush=True)
+                            # Fetch Vanth's position
+                            vanth_data = fetch_position('120090482', date_obj, center_id=center_id, id_type=None)
+                            if vanth_data and vanth_data.get('x') != 0:
+                                # Mass ratio: M_Vanth/M_Orcus = 0.16
+                                # Orcus is at -1/mass_ratio * Vanth's position relative to barycenter
+                                mass_ratio = 0.16
+                                x_orcus = -vanth_data['x'] * mass_ratio
+                                y_orcus = -vanth_data['y'] * mass_ratio
+                                z_orcus = -vanth_data['z'] * mass_ratio
+                                r_orcus = np.sqrt(x_orcus**2 + y_orcus**2 + z_orcus**2)
+                                # Velocity: same ratio, opposite direction
+                                vx_orcus = -vanth_data.get('vx', 0) * mass_ratio
+                                vy_orcus = -vanth_data.get('vy', 0) * mass_ratio
+                                vz_orcus = -vanth_data.get('vz', 0) * mass_ratio
+                                v_orcus = np.sqrt(vx_orcus**2 + vy_orcus**2 + vz_orcus**2)
+                                
+                                obj_data = {
+                                    'x': x_orcus, 'y': y_orcus, 'z': z_orcus,
+                                    'range': r_orcus,
+                                    'vx': vx_orcus, 'vy': vy_orcus, 'vz': vz_orcus,
+                                    'velocity': v_orcus,
+                                    'distance_km': r_orcus * KM_PER_AU,
+                                    'distance_lm': r_orcus * LIGHT_MINUTES_PER_AU,
+                                    'distance_lh': (r_orcus * LIGHT_MINUTES_PER_AU) / 60,
+                                    'derived_from_vanth': True
+                                }
+                                print(f"  -> Orcus position: ({x_orcus:.7f}, {y_orcus:.7f}, {z_orcus:.7f}) AU, r={r_orcus:.7f} AU (~{r_orcus * 149597870.7:.0f} km)", flush=True)
+
+                            else:
+                                print(f"  -> Could not fetch Vanth position to derive Orcus", flush=True)
+
                         # Fallback to analytical position for objects not in Horizons (e.g., 6AC4721)
                         if obj_data is None and obj['name'] in active_planetary_params and 'MA' in active_planetary_params[obj['name']]:
                             print(f"  - No JPL data for {obj['name']}, calculating analytical position from MA...", flush=True)
@@ -4116,6 +4297,10 @@ def plot_objects():
                                 'analytical_position': True
                             }
                             print(f"  -> Analytical position: x={x_final:.4f}, y={y_final:.4f}, z={z_final:.4f} AU (r={r:.3f} AU)", flush=True)                        
+
+                        # DEBUG: Check what obj_data contains before assignment
+                        if obj['name'] == 'Orcus':
+                            print(f"  [DEBUG] About to assign Orcus position: {obj_data}", flush=True)
 
                 positions[obj['name']] = obj_data
 
@@ -4347,10 +4532,37 @@ def plot_objects():
                     if center_object_name == 'Sun' and 'helio_id' in obj:
                         fetch_id = obj['helio_id']
                         fetch_id_type = 'smallbody'
-                    
+                                        
                     # Fetch trajectory for plotted period
                     trajectory = fetch_trajectory(fetch_id, plotted_dates, center_id=center_id, id_type=fetch_id_type)
                     
+                    # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
+                    # Derive Orcus trajectory from Vanth using mass ratio
+                    if obj_name == 'Orcus' and center_object_name == 'Orcus-Vanth Barycenter':
+                        # Check if trajectory is all zeros (JPL returns zeros for invalid target)
+                        traj_all_zeros = trajectory and all(
+                            (pos is None or (pos.get('x', 0) == 0 and pos.get('y', 0) == 0 and pos.get('z', 0) == 0))
+                            for pos in trajectory
+                        )
+                        if not trajectory or traj_all_zeros:
+                            print(f"  - Deriving Orcus trajectory from Vanth (mass ratio method)...", flush=True)
+                            # Fetch Vanth trajectory - ID 120090482 works correctly
+                            vanth_trajectory = fetch_trajectory('120090482', plotted_dates, center_id=center_id, id_type=None)
+                            if vanth_trajectory:
+                                mass_ratio = 0.16  # Vanth/Orcus mass ratio
+                                trajectory = []
+                                for vanth_pos in vanth_trajectory:
+                                    if vanth_pos and vanth_pos.get('x') != 0:
+                                        # Orcus is opposite Vanth relative to barycenter, scaled by mass ratio
+                                        trajectory.append({
+                                            'x': -vanth_pos['x'] * mass_ratio,
+                                            'y': -vanth_pos['y'] * mass_ratio,
+                                            'z': -vanth_pos['z'] * mass_ratio
+                                        })
+                                    else:
+                                        trajectory.append({'x': 0, 'y': 0, 'z': 0})
+                                print(f"  -> Derived {len(trajectory)} Orcus positions from Vanth", flush=True)
+
                     if trajectory:
                         x = [pos['x'] for pos in trajectory if pos is not None]
                         y = [pos['y'] for pos in trajectory if pos is not None]
@@ -4421,8 +4633,40 @@ def plot_objects():
                         fetch_id_type = 'smallbody'
                     obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
 
+                    # Special case: Orcus at Orcus-Vanth Barycenter - derive from Vanth's position
+                    orcus_needs_derivation = (
+                        obj['name'] == 'Orcus' and 
+                        center_object_name == 'Orcus-Vanth Barycenter' and
+                        (obj_data is None or (obj_data.get('x') == 0 and obj_data.get('y') == 0 and obj_data.get('z') == 0))
+                    )
+                    if orcus_needs_derivation:
+                        print(f"  - Deriving Orcus position from Vanth (mass ratio method)...", flush=True)
+                        vanth_data = fetch_position('120090482', date_obj, center_id=center_id, id_type=None)
+                        if vanth_data and vanth_data.get('x') != 0:
+                            mass_ratio = 0.16
+                            x_orcus = -vanth_data['x'] * mass_ratio
+                            y_orcus = -vanth_data['y'] * mass_ratio
+                            z_orcus = -vanth_data['z'] * mass_ratio
+                            r_orcus = np.sqrt(x_orcus**2 + y_orcus**2 + z_orcus**2)
+                            vx_orcus = -vanth_data.get('vx', 0) * mass_ratio
+                            vy_orcus = -vanth_data.get('vy', 0) * mass_ratio
+                            vz_orcus = -vanth_data.get('vz', 0) * mass_ratio
+                            v_orcus = np.sqrt(vx_orcus**2 + vy_orcus**2 + vz_orcus**2)
+                            obj_data = {
+                                'x': x_orcus, 'y': y_orcus, 'z': z_orcus,
+                                'range': r_orcus,
+                                'vx': vx_orcus, 'vy': vy_orcus, 'vz': vz_orcus,
+                                'velocity': v_orcus,
+                                'distance_km': r_orcus * KM_PER_AU,
+                                'distance_lm': r_orcus * LIGHT_MINUTES_PER_AU,
+                                'distance_lh': (r_orcus * LIGHT_MINUTES_PER_AU) / 60,
+                                'derived_from_vanth': True
+                            }
+                            print(f"  -> Orcus: r={r_orcus:.7f} AU (~{r_orcus * 149597870.7:.0f} km)", flush=True)
+
                 # Fallback for objects without JPL ephemeris (e.g., MK2, 6AC4721)
-                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
+            #    ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
+                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong', '6AC4721']  # Weywot removed - JPL data works at Quaoar
                 if obj_data is None and obj['name'] in ANALYTICAL_POSITION_FALLBACK:
                     from orbital_elements import planetary_params
                     if obj['name'] in planetary_params:
@@ -4930,6 +5174,10 @@ def plot_objects():
             # Use show_figure_safely to handle both display and save options
             show_figure_safely(fig, default_name)
 
+            # Store fig for social media export
+            _last_plotted_fig[0] = fig
+            _last_plot_name[0] = default_name
+
             # Schedule GUI updates on main thread (required for macOS)
             root.after(0, lambda: output_label.config(text="Plotting complete."))
             root.after(0, lambda: progress_bar.stop())
@@ -4978,6 +5226,10 @@ def animate_objects(step, label):
         osculating_center_body = '@20090482'  # Orcus-Vanth satellite solution barycenter
     elif center_object_name == 'Patroclus-Menoetius Barycenter':
         osculating_center_body = '@20000617'  # Patroclus-Menoetius satellite solution barycenter        
+    elif center_object_name == 'Earth-Moon Barycenter':
+        osculating_center_body = '@3'  # Earth-Moon system barycenter
+    elif center_object_name == 'Earth':
+        osculating_center_body = '@399'  # Earth body center (for Moon's osculating elements)
     else:
         osculating_center_body = None  # Default (heliocentric or auto-detect)
 
@@ -4989,7 +5241,8 @@ def animate_objects(step, label):
         plot_date = datetime.now()
 
     # These TNO moons have no usable JPL parent-centered ephemeris
-    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+#    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong']  
 
     pre_fetch_objects = [
         obj['name'] for obj in selected_objects_for_prefetch 
@@ -5031,6 +5284,11 @@ def animate_objects(step, label):
                         patroclus_system_ids = ['920000617', '120000617', 'A906 UL']
                         if str(horizons_id) in patroclus_system_ids:
                             obj_center_body = osculating_center_body                    
+                    elif center_object_name in ['Earth-Moon Barycenter', 'Earth']:
+                        # Check if this is an Earth-Moon system object (Earth or Moon)
+                        earth_moon_system_ids = ['399', '301']  # Earth, Moon
+                        if str(horizons_id) in earth_moon_system_ids:
+                            obj_center_body = osculating_center_body
 
                     # Get elements with proper Horizons ID and center body
                     fresh_elements = get_elements_with_prompt(
@@ -5430,6 +5688,32 @@ def animate_objects(step, label):
                             center_id=center_id, 
                             id_type=fetch_id_type
                         )
+                        
+                        # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
+                        if obj['name'] == 'Orcus' and center_object_name == 'Orcus-Vanth Barycenter':
+                            traj = positions_over_time.get('Orcus')
+                            traj_all_zeros = traj and all(
+                                (pos is None or (pos.get('x', 0) == 0 and pos.get('y', 0) == 0 and pos.get('z', 0) == 0))
+                                for pos in traj
+                            )
+                            if not traj or traj_all_zeros:
+                                print(f"  - Deriving Orcus trajectory from Vanth (mass ratio method)...", flush=True)
+                                vanth_trajectory = fetch_trajectory('120090482', obj_dates, center_id=center_id, id_type=None)
+                                if vanth_trajectory:
+                                    mass_ratio = 0.16
+                                    derived_traj = []
+                                    for vanth_pos in vanth_trajectory:
+                                        if vanth_pos and vanth_pos.get('x') != 0:
+                                            derived_traj.append({
+                                                'x': -vanth_pos['x'] * mass_ratio,
+                                                'y': -vanth_pos['y'] * mass_ratio,
+                                                'z': -vanth_pos['z'] * mass_ratio
+                                            })
+                                        else:
+                                            derived_traj.append({'x': 0, 'y': 0, 'z': 0})
+                                    positions_over_time['Orcus'] = derived_traj
+                                    print(f"  -> Derived {len(derived_traj)} Orcus positions from Vanth", flush=True)
+
 
                         # Fallback for objects without JPL ephemeris
                         # ===================================================================
@@ -5439,7 +5723,8 @@ def animate_objects(step, label):
                         #      solves Kepler's equation for eccentric orbits
                         # ===================================================================
 
-                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']  # Objects without usable JPL ephemeris
+                #        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']  # Objects without usable JPL ephemeris
+                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong', '6AC4721']  # Weywot removed - JPL data works at Quaoar
 
                         if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
                             # Check if fetch_trajectory returned empty/None
@@ -5864,6 +6149,12 @@ def animate_objects(step, label):
                     trace_indices['Pluto-Charon Barycenter'] = idx
                     break
 
+            # Find and track the Earth-Moon Barycenter trace if it exists
+            for idx, trace in enumerate(fig.data):
+                if trace.name == 'Earth-Moon Barycenter':
+                    trace_indices['Earth-Moon Barycenter'] = idx
+                    break
+
             # Add exoplanet traces if in exoplanet mode
             if is_exoplanet_mode:
                 from exoplanet_orbits import plot_exoplanet_orbits, plot_binary_host_stars, calculate_exoplanet_axis_range
@@ -6206,6 +6497,27 @@ def animate_objects(step, label):
                                 frame_data[frame_idx].z = [bary_z]
                                 frame_data[frame_idx].visible = True
 
+                # Update Earth-Moon Barycenter position (derived from Moon)
+                if 'Earth-Moon Barycenter' in trace_indices and center_object_name == 'Earth':
+                    trace_idx = trace_indices['Earth-Moon Barycenter']
+                    frame_idx = to_frame_idx(trace_idx)
+                    moon_positions = positions_over_time.get('Moon')
+                    
+                    if frame_idx is not None and moon_positions and i < len(moon_positions) and moon_positions[i] is not None:
+                        moon_pos = moon_positions[i]
+                        if 'x' in moon_pos:
+                            EMB_DIST_AU = 0.0000312  # ~4,670 km
+                            mx, my, mz = moon_pos['x'], moon_pos['y'], moon_pos['z']
+                            moon_dist = (mx**2 + my**2 + mz**2)**0.5
+                            if moon_dist > 0:
+                                bary_x = EMB_DIST_AU * (mx / moon_dist)
+                                bary_y = EMB_DIST_AU * (my / moon_dist)
+                                bary_z = EMB_DIST_AU * (mz / moon_dist)
+                                frame_data[frame_idx].x = [bary_x]
+                                frame_data[frame_idx].y = [bary_y]
+                                frame_data[frame_idx].z = [bary_z]
+                                frame_data[frame_idx].visible = True
+
                 # Then update regular solar system objects
                 for obj in objects:
                         if obj['var'].get() == 1 and obj['name'] != center_object_name:
@@ -6481,9 +6793,15 @@ def animate_objects(step, label):
             # Generate default name with timestamp
             current_date = STATIC_TODAY
             default_name = f"{center_object_name}_system_animation_{current_date.strftime('%Y%m%d_%H%M')}"
+
             show_animation_safely(fig, default_name)
 
+            # Store fig for social media export
+            _last_plotted_fig[0] = fig
+            _last_plot_name[0] = default_name
+
             # Update output_label with instructions (schedule on main thread for macOS)
+
             root.after(0, lambda: output_label.config(
                 text=f"Animation of objects around {center_object_name} opened in browser."
             ))
@@ -6981,13 +7299,58 @@ celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame,
 celestial_frame.pack(pady=(10, 5), fill='x')
 CreateToolTip(celestial_frame, "Select celestial bodies for plotting. Selected objects will be plotted on the entered date, as well " 
               "as actual and Keplerian orbits. Selected objects will be animated only over the fetched dates, and will plot both actual and " 
-              "Keplerian orbits.")
+              "Keplerian orbits. Bolded objects can be used as coordinate centers in JPL Horizons.")
 
+# Build center options - only objects with numeric IDs can be Horizons centers
+# Objects with center_id field can also be centers (uses numeric ID when centering)
+def can_be_horizons_center(obj):
+    """Check if object can be used as Horizons coordinate center."""
+    obj_name = obj.get('name', 'UNKNOWN')  # ADD THIS
+    
+    excluded_object_types = {'hypothetical', 'exoplanet', 'exo_host_star', 'exo_binary_star', 'trajectory'}
+    if obj.get('object_type') in excluded_object_types:
+        return False
+    
+    # Exclude missions (spacecraft can't be Horizons centers)
+    if obj.get('is_mission'):
+        return False
+
+    # Explicitly exclude binary system components (use barycenter instead)
+#    excluded_names = {'Patroclus', 'Menoetius'}
+    excluded_names = {}
+    if obj.get('name') in excluded_names:
+        print(f"[DEBUG] Excluding binary component: {obj_name}", flush=True)  # ADD THIS
+        return False
+
+    # Has explicit center_id? Can be centered
+    if obj.get('center_id'):
+        print(f"[DEBUG] {obj_name} can be center (has center_id)", flush=True)  # ADD THIS
+        return True
+    
+    # Otherwise check if main ID is numeric (negative allowed for spacecraft)
+    obj_id = str(obj.get('id', ''))
+    id_to_check = obj_id.lstrip('-')
+    result = id_to_check.isdigit()
+    if result:
+        print(f"[DEBUG] {obj_name} can be center (numeric ID: {obj_id})", flush=True)  # ADD THIS
+    return result
+
+# Track the order checkboxes are created (for center dropdown sorting)
+checkbox_creation_order = []
+
+    
 def create_celestial_checkbutton(name, variable):
-    # For main planets, dwarf planet with satellites, and Sun, make a bold label
+    # Bold objects that can be used as centers (determined dynamically)
+    # Strip leading hyphens/spaces used for visual hierarchy (e.g., "- Orcus" -> "Orcus")
+    lookup_name = name.lstrip('- ')
+    obj_def = next((obj for obj in objects if obj.get('name') == lookup_name), None)
+    is_centerable = obj_def and can_be_horizons_center(obj_def)
+
+    # Also bold exoplanet host stars/barycenters
+    if obj_def and obj_def.get('object_type') in ['exo_host_star', 'exo_barycenter']:
+        is_centerable = True
         
-    if name in ['Sun', 'Mercury', 'Venus', 'Earth', 'Moon', 'L1', 'L2', 'Mars', 'Bennu/OSIRIS', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto', 
-                'Arrokoth/New_Horizons', 'Eris', 'Haumea', 'Makemake', 'Gonggong', 'Orcus', 'Quaoar']:
+    if is_centerable:
 
         # Create frame to hold checkbox and label
         frame = tk.Frame(celestial_frame)
@@ -7004,12 +7367,19 @@ def create_celestial_checkbutton(name, variable):
         # Add tooltip to the frame
         info_text = INFO.get(name.strip('- '), "No information available")
         CreateToolTip(frame, info_text)
+
+        # Track creation order for center dropdown
+        checkbox_creation_order.append(name)
+
     else:
         # Regular checkbutton for other objects
         checkbutton = tk.Checkbutton(celestial_frame, text=name, variable=variable)
         checkbutton.pack(anchor='w')
         info_text = INFO.get(name.strip('- '), "No information available")
         CreateToolTip(checkbutton, info_text)
+
+        # Track creation order for center dropdown
+        checkbox_creation_order.append(name)
 
 # Existing celestial checkbuttons
 create_celestial_checkbutton("Sun", sun_var)
@@ -7230,6 +7600,9 @@ CreateToolTip(earth_hill_sphere_checkbutton, earth_hill_sphere_info)
 create_celestial_checkbutton("Moon", moon_var)  # params
 build_shell_checkboxes('Moon', celestial_frame, globals(), globals(), tk, CreateToolTip)
 
+# Earth-Moon Barycenter - binary system mode
+create_celestial_checkbutton("Earth-Moon Barycenter", earth_moon_barycenter_var)
+
 # Apollo/Amor-type Near-Earth Asteroids (orbit crosses or outside Earth)
 earth_moon_lagrange_label = tk.Label(celestial_frame, text="Earth-Moon Lagrange Points:", font=("Arial", 9, "bold"))
 earth_moon_lagrange_label.pack(anchor='w', pady=(5, 0))
@@ -7289,8 +7662,11 @@ create_celestial_checkbutton("Ceres", ceres_var)    # params
 create_celestial_checkbutton("Orus", orus_var)  # params
 create_celestial_checkbutton("Polymele", polymele_var)  # params
 create_celestial_checkbutton("Eurybates", eurybates_var)    # params
-create_celestial_checkbutton("Patroclus", patroclus_var)    # params
-create_celestial_checkbutton("Menoetius", menoetius_var)    # params
+
+create_celestial_checkbutton("Patroclus-Menoetius Barycenter", patroclus_barycenter_var)
+create_celestial_checkbutton("- Patroclus", patroclus_var)    # params
+create_celestial_checkbutton("- Menoetius", menoetius_var)    # params
+
 create_celestial_checkbutton("Leucus", leucus_var)  # params
 
 # outer planets
@@ -7346,19 +7722,21 @@ create_celestial_checkbutton("- Triton", triton_var)    # params
 create_celestial_checkbutton("- Despina", despina_var)  # params
 create_celestial_checkbutton("- Galatea", galatea_var)  # params
 
-create_celestial_checkbutton("Pluto", pluto_var)    # params
+create_celestial_checkbutton("Pluto-Charon Barycenter", pluto_barycenter_var)
+create_celestial_checkbutton("- Pluto", pluto_var)    # params
 build_shell_checkboxes('Pluto', celestial_frame, globals(), globals(), tk, CreateToolTip)
 create_celestial_checkbutton("- Charon", charon_var)    # params
-create_celestial_checkbutton("- Styx", styx_var)    # params
-create_celestial_checkbutton("- Nix", nix_var)  # params
-create_celestial_checkbutton("- Kerberos", kerberos_var)    # params
-create_celestial_checkbutton("- Hydra", hydra_var)  # params
+create_celestial_checkbutton("-- Styx", styx_var)    # params
+create_celestial_checkbutton("-- Nix", nix_var)  # params
+create_celestial_checkbutton("-- Kerberos", kerberos_var)    # params
+create_celestial_checkbutton("-- Hydra", hydra_var)  # params
 
 kuiper_belt_label = tk.Label(celestial_frame, text="Kuiper Belt Objects (KBOs):", font=("Arial", 9, "bold"))
 kuiper_belt_label.pack(anchor='w', pady=(5, 0))
 
 # Kuiper Belt Objects
-create_celestial_checkbutton("Orcus", orcus_var)            # params
+create_celestial_checkbutton("Orcus-Vanth Barycenter", orcus_barycenter_var)
+create_celestial_checkbutton("- Orcus", orcus_var)            # params
 create_celestial_checkbutton("- Vanth", vanth_var)           
 
 create_celestial_checkbutton("Ixion", ixion_var)            # params
@@ -7366,10 +7744,13 @@ create_celestial_checkbutton("Mani", ms4_var)               # params
 create_celestial_checkbutton("GV9", gv9_var)                # params
 create_celestial_checkbutton("Varuna", varuna_var)          # params
 
+# create_celestial_checkbutton("Haumea System Barycenter", haumea_barycenter_var)
 create_celestial_checkbutton("Haumea", haumea_var)          # params
 create_celestial_checkbutton("- Hi'iaka", hiiaka_var)       # Haumea moon
 create_celestial_checkbutton("- Namaka", namaka_var)        # Haumea moon
 
+# create_celestial_checkbutton("Quaoar-Weywot Barycenter", quaoar_barycenter_var)
+# Quaoar-Weywot Barycenter checkbox removed - barycenter offset ~7 km inside 1090 km body
 create_celestial_checkbutton("Quaoar", quaoar_var)          # params
 create_celestial_checkbutton("- Weywot", weywot_var)           
 
@@ -7378,9 +7759,11 @@ create_celestial_checkbutton("Arrokoth", arrokoth_var)      # params
 create_celestial_checkbutton("Makemake", makemake_var)      # params
 create_celestial_checkbutton("- MK2", mk2_var)              # Makemake moon
 
+# create_celestial_checkbutton("Gonggong-Xiangliu Barycenter", gonggong_barycenter_var)  # Removed: barycenter inside body
 create_celestial_checkbutton("Gonggong", gonggong_var)      # params
 create_celestial_checkbutton("- Xiangliu", xiangliu_var)    # Gonggong moon
 
+# create_celestial_checkbutton("Eris-Dysnomia Barycenter", eris_barycenter_var)
 create_celestial_checkbutton("Eris", eris_var)  # params
 build_shell_checkboxes('Eris', celestial_frame, globals(), globals(), tk, CreateToolTip)
 create_celestial_checkbutton("- Dysnomia", dysnomia_var)    # params
@@ -7832,74 +8215,132 @@ center_frame.pack(pady=(5, 5), fill='x')
 
 center_object_var = tk.StringVar(value='Sun')
 
-# Build center options - only objects with numeric IDs can be Horizons centers
-# Objects with center_id field can also be centers (uses numeric ID when centering)
-def can_be_horizons_center(obj):
-    """Check if object can be used as Horizons coordinate center."""
-    excluded_object_types = {'hypothetical', 'exoplanet', 'exo_host_star', 
-                             'exo_barycenter', 'exo_binary_star'}
-    if obj.get('object_type') in excluded_object_types:
-        return False
+
+# =============================================================================
+# DYNAMIC CENTER DROPDOWN - Updates based on selected objects
+# =============================================================================
+# Instead of a fixed list of all possible centers, the dropdown shows:
+#   1. Sun (always first, always available as default)
+#   2. Selected objects that CAN be centers (in object list order)
+# This makes finding the right center much easier!
+
+def update_center_dropdown(*args):
+    """
+    Update the center dropdown to show only Sun + selected centerable objects.
+    Called whenever any object checkbox changes state.
+    """
+    # Get currently selected objects that can be centers
+    # Also include the current center (it may be shadowed/unchecked but should stay in dropdown)
+    selected_centerable = []
+    current_center = center_object_var.get()
     
-    # Explicitly exclude binary system components (use barycenter instead)
-    excluded_names = {'Patroclus', 'Menoetius'}
-    if obj.get('name') in excluded_names:
-        return False
-
-    # Has explicit center_id? Can be centered
-    if obj.get('center_id'):
-        return True
+    for obj in objects:
+        obj_name = obj['name']
+        
+        # Check if object is selected OR if it's the current center (shadowed)
+        is_selected = obj.get('var') and obj['var'].get() == 1
+        is_current_center = (obj_name == current_center)
+        
+        if is_selected or is_current_center:
+            # Check if it can be a center (solar system object)
+            if can_be_horizons_center(obj):
+                if obj_name not in selected_centerable:
+                    selected_centerable.append(obj_name)
+            # Also check for exoplanet host stars
+            elif obj.get('object_type') in ['exo_host_star', 'exo_barycenter']:
+                if obj_name not in selected_centerable:
+                    selected_centerable.append(obj_name)
     
-    # Otherwise check if main ID is numeric (negative allowed for spacecraft)
-    obj_id = str(obj.get('id', ''))
-    id_to_check = obj_id.lstrip('-')
-    return id_to_check.isdigit()
+    # Build new options: Sun first, then selected objects in checkbox creation order
+    ordered_centers = []
+    for name in checkbox_creation_order:
+        if name in selected_centerable:
+            ordered_centers.append(name)
+    # Add any barycenters that aren't in checkbox_creation_order (auto-added ones)
+    for name in selected_centerable:
+        if name not in ordered_centers:
+            ordered_centers.append(name)
+    
+    new_options = ['Sun'] + ordered_centers
+    
+    # Update the dropdown values
+    center_menu['values'] = new_options
+    
+    # If current selection is no longer valid, revert to Sun
+    if current_center not in new_options:
+        center_object_var.set('Sun')
+        print(f"[CENTER MENU] '{current_center}' deselected, reverting to Sun", flush=True)
+    
+    # Debug output (can be removed later)
+    if len(selected_centerable) > 0:
+        print(f"[CENTER MENU] Dynamic centers: Sun + {selected_centerable}", flush=True)
 
-# center_options = [obj['name'] for obj in objects if can_be_horizons_center(obj)]
-
-# print(f"[CENTER MENU] Available centers: {center_options}", flush=True)
-
-# Solar system centers (uses Horizons)
-solar_system_centers = [obj['name'] for obj in objects if can_be_horizons_center(obj)]
-
-# Add exoplanet host stars (uses Keplerian orbits, not Horizons)
-exoplanet_host_stars = [obj['name'] for obj in objects 
-                        if obj.get('object_type') in ['exo_host_star', 'exo_barycenter']]                        
-
-# Combine both
-center_options = solar_system_centers + exoplanet_host_stars
-
-print(f"[CENTER MENU] Available centers: {center_options}", flush=True)
-
-
+# Create the center dropdown with initial value of just Sun
+# It will be populated dynamically as objects are selected
 center_menu = ttk.Combobox(center_frame, textvariable=center_object_var, 
-                          values=center_options, width=25)
+                          values=['Sun'], width=25)
 
 center_menu.pack(padx=10, pady=5, anchor='w')
-CreateToolTip(center_menu, "Select the object to center the plot on. DO NOT select the same object from the Select Objects check list.")
+CreateToolTip(center_menu, "Select the center object. Only shows Sun + currently selected objects that can be centers.")
 
-"""
-# Define function to update orbit paths when the center object changes
-def on_center_change(*args):
-# Update orbit paths when the center object is changed.
-    center_object = center_object_var.get()
-    if center_object != 'Sun':
-        # Only fetch non-Sun centered paths when needed to avoid excessive startup time
-        status_display.config(text=f"Updating orbit paths for center: {center_object}...")
-        root.update()  # Force GUI to refresh
-        update_orbit_paths(center_object)
-        status_display.config(text=f"Orbit paths updated for center: {center_object}")
-        """
+# Add trace to all object variables to update center dropdown when selection changes
+# This is done after all checkboxes are created, so we do it via the objects list
+def setup_center_dropdown_traces():
+    """Add traces to all object IntVars to update center dropdown on selection change."""
+    trace_count = 0
+    for obj in objects:
+        if obj.get('var'):
+            obj['var'].trace_add('write', update_center_dropdown)
+            trace_count += 1
+    print(f"[CENTER MENU] Added traces to {trace_count} object variables", flush=True)
+
+# Call setup after a brief delay to ensure all widgets are created
+# Using after() ensures the main loop is running
+root.after(100, setup_center_dropdown_traces)
+
+print(f"[CENTER MENU] Dynamic center dropdown initialized (starts with Sun only)", flush=True)
+
+# Track previous center for checkbox shadowing
+_previous_center = ['Sun']  # Use list to allow modification in nested function
 
 def on_center_change(*args):
-    """Update frame title when the center object is changed."""
+    """Update frame title when the center object is changed.
+    Also shadows/unshadows checkboxes to prevent duplicate legend entries.
+    """
     center_object = center_object_var.get()
+    previous_center = _previous_center[0]
     
     # Just update the frame title, don't fetch any data
     orbit_path_frame.config(text=f"Standard Orbit Path Fetching Controls for JSON Cache (Center: {center_object})")
     
     # Update status to show current center
     update_status_display(f"Center changed to: {center_object}", 'info')
+    
+    # CHECKBOX SHADOWING: Prevent duplicate legend entries
+    # When an object becomes the center, uncheck it (it's shown at origin anyway)
+    # When it stops being the center, restore its checked state
+    
+    # Restore previous center's checkbox if it was a non-Sun object
+    if previous_center != 'Sun':
+        prev_obj = next((obj for obj in objects if obj['name'] == previous_center), None)
+        if prev_obj and prev_obj.get('var'):
+            # Check if the object was shadowed (has _was_checked flag)
+            if prev_obj.get('_was_checked', False):
+                prev_obj['var'].set(1)
+                prev_obj['_was_checked'] = False
+                print(f"[CENTER MENU] Restored checkbox for '{previous_center}'", flush=True)
+    
+    # Shadow the new center's checkbox if it's not Sun
+    if center_object != 'Sun':
+        new_obj = next((obj for obj in objects if obj['name'] == center_object), None)
+        if new_obj and new_obj.get('var'):
+            if new_obj['var'].get() == 1:
+                new_obj['_was_checked'] = True
+                new_obj['var'].set(0)
+                print(f"[CENTER MENU] Shadowed checkbox for '{center_object}' (will restore when center changes)", flush=True)
+    
+    # Update previous center tracker
+    _previous_center[0] = center_object
     
     # DO NOT call update_orbit_paths or update_orbit_paths_incrementally here!
     # Data will be fetched when actually plotting with selected objects
@@ -8195,37 +8636,58 @@ plot_button = tk.Button(
 plot_button.pack(side='left', padx=(0, 5), pady=(5, 0))
 CreateToolTip(plot_button, "Plot the positions of selected objects on the selected date.")
 
-paloma_birthday_button = tk.Button(
-    paloma_buttons_frame, 
-    text="Paloma's Birthday", 
-    command=set_palomas_birthday, 
-    bg='pink', 
-    fg='blue',
-    width=BUTTON_WIDTH,      # Set uniform width
-    font=BUTTON_FONT         # Set uniform font   
+# Social Media Export button
+social_export_button = tk.Button(
+    paloma_buttons_frame,
+    text="Social View",
+    command=export_social_view,
+    width=BUTTON_WIDTH,
+    font=BUTTON_FONT,
+    bg='gray90',
+    fg='blue'
 )
-# Pack the button to the left with right padding
-paloma_birthday_button.pack(side='left', padx=(0, 5), pady=(5, 0))
-CreateToolTip(
-    paloma_birthday_button, 
-    "Set the date to Paloma's Birthday (2005-02-04)"
-)
+social_export_button.pack(side='left', padx=(0, 5), pady=(5, 0))
+CreateToolTip(social_export_button,
+    "SOCIAL MEDIA VIEW\n\n"
+    "Export the last plotted figure as a 9:16 portrait HTML\n"
+    "optimized for screen recording Instagram Reels and\n"
+    "YouTube Shorts.\n\n"
+    "- Opens a trace selection dialog\n"
+    "- Bottom panel displays full hovertext\n"
+    "- Hover or click objects to update the panel\n\n"
+    "Requires: Plot first, then export.")
 
-animate_paloma_button = tk.Button(
-    paloma_buttons_frame, 
-    text="Animate", 
-    command=animate_palomas_birthday, 
-    bg='pink', 
-    fg='blue',
-    width=BUTTON_WIDTH,      # Set uniform width
-    font=BUTTON_FONT         # Set uniform font
-)
+#paloma_birthday_button = tk.Button(
+#    paloma_buttons_frame, 
+#    text="Paloma's Birthday", 
+#    command=set_palomas_birthday, 
+#    bg='pink', 
+#    fg='blue',
+#    width=BUTTON_WIDTH,      # Set uniform width
+#    font=BUTTON_FONT         # Set uniform font   
+#)
+# Pack the button to the left with right padding
+#paloma_birthday_button.pack(side='left', padx=(0, 5), pady=(5, 0))
+#CreateToolTip(
+#    paloma_birthday_button, 
+#    "Set the date to Paloma's Birthday (2005-02-04)"
+#)
+
+#animate_paloma_button = tk.Button(
+#    paloma_buttons_frame, 
+#    text="Animate", 
+#    command=animate_palomas_birthday, 
+#    bg='pink', 
+#    fg='blue',
+#    width=BUTTON_WIDTH,      # Set uniform width
+#    font=BUTTON_FONT         # Set uniform font
+#)
 # Pack the button to the left with left padding
-animate_paloma_button.pack(side='left', padx=(0, 5), pady=(5, 0))
-CreateToolTip(
-    animate_paloma_button, 
-    "Animate from Paloma's Birthday over years."
-)
+#animate_paloma_button.pack(side='left', padx=(0, 5), pady=(5, 0))
+#CreateToolTip(
+#    animate_paloma_button, 
+#    "Animate from Paloma's Birthday over years."
+#)
 
 # Advance Buttons
 advance_buttons_frame = tk.Frame(controls_frame)

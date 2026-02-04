@@ -701,6 +701,26 @@ INFO = {
         '  * Beresheet2 (Israel): Planned private lunar mission.\n' 
         '  * Lunar Gateway: A planned international space station in lunar orbit, supporting future human missions.',
 
+        'Earth-Moon Barycenter': 
+        '***SET MANUAL SCALE TO .003 AU TO SEE EARTH-MOON BINARY ORBITS***\n'
+        'Center of mass for the Earth-Moon system -- the highest mass ratio of any PLANET-moon system!\n\n'
+        'BINARY SYSTEM:\n'
+        '* Mass ratio: Moon/Earth = 1.23% (vs Charon/Pluto = 12.2%, Vanth/Orcus = 16%)\n'
+        '* The barycenter is INSIDE Earth (~4,670 km from center)\n'
+        '* That is ~1,700 km below the surface (73% from center to surface)\n'
+        '* Earth orbits barycenter at ~4,670 km radius (~0.0000312 AU)\n'
+        '* Moon orbits barycenter at ~379,730 km radius (~0.00254 AU)\n'
+        '* Period: 27.32 days\n\n'
+        'WHY THIS MATTERS:\n'
+        '* Earth WOBBLES around the barycenter every month\n'
+        '* This wobble affects Earth\'s heliocentric orbit (not a perfect ellipse!)\n'
+        '* The Sun-EMB Lagrange points (L1-L5) orbit THIS point, not Earth\'s center\n'
+        '* Compare: Pluto-Charon barycenter is OUTSIDE Pluto (true binary)\n\n'
+        'VISUALIZE:\n'
+        '* Select this as center, then select Earth and Moon\n'
+        '* Add Earth shells to see barycenter position in context\n'
+        '* The barycenter sits between outer core and lower mantle!',
+
         'Kamo oalewa': 'Horizons: 2016 HO3. Asteroid Kamo\'oalewa (469219 / 2016 HO3) is a near-Earth asteroid that has garnered significant scientific interest.\n' 
         '* Classification and Orbit: Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects. \n' 
         '  What makes it particularly unique is its status as Earth\'s best and most stable "quasi-satellite." This means it orbits the \n' 
@@ -1045,23 +1065,34 @@ INFO = {
         '* Dinkinesh is also notable for being the smallest main belt asteroid ever visited by a spacecraft, providing valuable \n' 
         '  insights into how asteroids evolve, especially those that might eventually leave the main belt and become near-Earth asteroids.',
 
-        'Donaldjohanson': 'Horizons: 1981 EQ5. A main-belt asteroid visited by the Lucy spacecraft. ',
+        'Donaldjohanson': 'Horizons: 1981 EQ5. A main-belt asteroid visited by the Lucy spacecraft. '
+        'Lucy flyby: Apr 20, 2025. D~4 km, C-type. Named for paleoanthropologist who discovered "Lucy" fossil.',
 
-        'Eurybates': 'Horizons: 1973 SO. A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Eurybates': 'Horizons: 1973 SO. A trojan asteroid that will be visited by the Lucy spacecraft. '
+        '* Eurybates has a small satellite named Queta, discovered in 2021 from Hubble Space Telescope images. '
+        '* Lucy flyby: Aug 12, 2027. D~64 km, C-type. Has satellite Queta (~1 km). First C-type Trojan to be visited.',
+
+        'Patroclus-Menoetius Barycenter': '***SET MANUAL SCALE TO 0.000005 AU TO VISUALIZE THE BARYCENTRIC ORBITS***,',
 
         'Patroclus': '***SET MANUAL SCALE TO 10 TO SEE JUPITER AND CLOSEST LUCY APPROACHES IN MARCH 2033***\n'
+        '***SET MANUAL SCALE TO 0.000005 AU TO VISUALIZE THE BARYCENTRIC ORBITS***\n'
         '***TO SEE CLOSEST LUCY APPROACH SET DATES NEAR MARCH 3, 2033 17:27, WITH BARYCENTER***\n\n'
         'Horizons: A906 UL. A trojan asteroid that will be visited by the Lucy spacecraft. Binary companion to Menoetius.',
 
         'Menoetius': '***SET MANUAL SCALE TO 10 TO SEE JUPITER AND CLOSEST LUCY APPROACHES IN MARCH 2033***\n'
+        '***SET MANUAL SCALE TO 0.000005 AU TO VISUALIZE THE BARYCENTRIC ORBITS***\n'
         '***TO SEE CLOSEST LUCY APPROACH SET DATES NEAR MARCH 3, 2033 17:27, WITH BARYCENTER***\n\n'
         'Horizons: 2010 TT191. A trojan asteroid that will be visited by the Lucy spacecraft. Binary companion to Patroclus.',
 
-        'Polymele': 'Horizons: 1999 WB2. A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Polymele': 'Horizons: 1999 WB2. A trojan asteroid that will be visited by the Lucy spacecraft. '
+        '* Polymele has a small satellite named Polymele II, discovered in 2021 from Hubble Space Telescope images. '
+        '* Lucy flyby: Sep 15, 2027. D~40 km, D-type. Extremely slow rotator (~446 hours). Dark, primitive surface.',
 
-        'Orus': 'Horizons: 1999 VQ10. A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Orus': 'Horizons: 1999 VQ10. A trojan asteroid that will be visited by the Lucy spacecraft. '
+        '* Lucy flyby: Nov 11, 2028. D~51 km, D-type. Last L4 Trojan visit before heading to L5.',
 
-        'Leucus': 'Horizons: 1997 TS25. A trojan asteroid that will be visited by the Lucy spacecraft.',
+        'Leucus': 'Horizons: 1997 TS25. A trojan asteroid that will be visited by the Lucy spacecraft. '
+        '* Lucy flyby: Apr 18, 2028. D~34 km, D-type. Fourth Trojan to be visited.',
 
         'Itokawa': 'Horizons: 1998 SF36. Asteroid visited by the original Hayabusa mission.',
 
@@ -1153,8 +1184,11 @@ INFO = {
 
         'Galatea': 'Horizons: 806. Irregularly shaped, with an expected icy and grayish appearance, thought to shepherd the Adams ring arc.',
 
+        'Pluto-Charon Barycenter':
+        '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***',
+
         'Pluto': 
-        '***SET MANUAL SCALE TO .002 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n'
+        '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n'
         '***VISUALIZE PLUTO\'S FULL STRUCTURE WITH SHELLS AT 0.1 AU***\n\n'
         'Horizons: 999. Dwarf planet in a TRUE BINARY system with Charon.\n\n'
         'ORBITAL RESONANCE:\n'
@@ -1182,29 +1216,43 @@ INFO = {
         'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.\n\n'
         'HTML: ~22 MB per frame with all shells/moons.',        
 
-        'Charon': 'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.\n'
+        'Charon': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.\n'
         'Period: 6.387 days. Distance: 19,596 km. Mass ratio to Pluto: 12% (highest was 12% until Orcus-Vanth at 16%).',
 
-        'Styx': 'Horizons: 905. The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
+        'Styx': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Horizons: 905. The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
 
-        'Nix': 'Horizons: 902. A small, elongated moon of Pluto with a chaotic rotation.',
+        'Nix': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Horizons: 902. A small, elongated moon of Pluto with a chaotic rotation.',
 
-        'Kerberos': 'Horizons: 904. Pluto\'s second-smallest moon is thought to have a double-lobed shape.',
+        'Kerberos': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Horizons: 904. Pluto\'s second-smallest moon is thought to have a double-lobed shape.',
 
-        'Hydra': 'Horizons: 903. The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
+        'Hydra': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Horizons: 903. The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
 
         'Haumea': 
+        '***SET MANUAL SCALE, NOT AUTO SCALE, TO 0.0006 AU TO SEE HAUMEA, ITS MOONS, AND ORBITS***\n'
+    #    '***ZOOM TO 0.000002 AU TO THE BARYCENTER AND HAUMEA\'S ORBIT***\n'
         '***JPL DOES NOT HAVE DATA FOR THIS OBJECT PAST 2030-1-31***\n\n'
         'Horizons: 2003 EL61. A dwarf planet known for its elongated shape and fast rotation.',
 
-        "Hi'iaka": 'Haumea\'s outer moon. Period: 49 days. Diameter ~310 km. Named for Hawaiian goddess.',
-        'Namaka': 'Haumea\'s inner moon. Period: 18 days. Diameter ~170 km. Orbit perturbed by Hi\'iaka.',        
+        "Hi'iaka": '***SET MANUAL SCALE, NOT AUTO SCALE, TO 0.0006 AU TO SEE HAUMEA, ITS MOONS, AND ORBITS***\n'
+        'Haumea\'s outer moon. Period: 49 days. Diameter ~310 km. Named for Hawaiian goddess.',
+        
+        'Namaka': '***SET MANUAL SCALE, NOT AUTO SCALE, TO 0.0006 AU TO SEE HAUMEA, ITS MOONS, AND ORBITS***\n'
+        'Haumea\'s inner moon. Period: 18 days. Diameter ~170 km. Orbit perturbed by Hi\'iaka.',        
         
         'Makemake': 'Horizons: 2005 FY9. Dwarf planet in the Kuiper Belt, second-brightest KBO after Pluto. Has one known moon (MK2).',
         'MK2': 'Makemake\'s moon (S/2015 (136472) 1). Period: 18.0 days. Distance: ~22,250 km. Orbit edge-on to Earth. Very dark surface ' 
         '(~4% reflectivity), diameter ~175 km. No JPL ephemeris - uses 2025 Hubble orbital solution.',
 
+        'Eris-Dysnomia Barycenter':
+        '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***',
+
         'Eris': 
+        '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***\n'
         '***JPL DOES NOT HAVE DATA FOR THIS OBJECT PAST 2030-1-31***\n\n'        
         'Horizons: 2003 UB313. A distant dwarf planet, more massive than Pluto.\n'
         '* Eris-centered: do not select Eris; visualize shells at 0.1 AU.\n'
@@ -1212,15 +1260,20 @@ INFO = {
         '* Missions: Proposed.\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
-        'Dysnomia': 'Eris\'s moon. Period: 15.79 days. Diameter ~700 km. Both bodies tidally locked.',
+        'Dysnomia':
+        '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***\n\n' 
+        'Eris\'s moon. Period: 15.79 days. Diameter ~700 km. Both bodies tidally locked.',
 
-        'Quaoar': 'Horizons: 2002 LM60. A classical Kuiper Belt cubewano (~1090 km diameter) with TWO rings discovered 2023. '
+        'Quaoar': '***SET MANUAL SCALE TO 0.0002 AU TO SEE QUAOAR, WEYWOT, BARYCENTER, AND ORBITS***\n'
+        'Horizons: 2002 LM60. Available dates: 1999-12-31 to 2030-01-02.\n\n'
+        'A classical Kuiper Belt cubewano (~1090 km diameter) with TWO rings discovered 2023. '
         'Named after the Tongva (Native American) creator god. Surface has crystalline water ice. '
         'Unusual: rings exist beyond Roche limit where they should accrete into moons. '
         'Discovered June 2002 by Trujillo and Brown. Orbital period: 286 years. Low eccentricity (0.04). '
         'Potentially has a second small moon detected in 2025 occultation.',
 
-        'Weywot': 'Quaoar\'s confirmed moon, named after the Tongva sky god (son of Quaoar). '
+        'Weywot': '***SET MANUAL SCALE TO 0.0002 AU TO SEE QUAOAR, WEYWOT, BARYCENTER, AND ORBITS***\n'
+        'Quaoar\'s confirmed moon, named after the Tongva sky god (son of Quaoar). '
         'Discovered Feb 2006 by Brown in Hubble images. '
         'Period: 12.4 days. Distance: ~13,300 km. Diameter: ~170 km. Very dark (albedo ~4%). '
         'Nearly circular orbit (e~0.01, updated from 2019 occultations). Inclined ~15 deg to ecliptic. '
@@ -1293,7 +1346,8 @@ INFO = {
         '  * These two rings are separated by a 9-kilometer gap and orbit at a distance of about 400 kilometers from Chariklo\'s center.',
 
         'Orcus': 
-        '***SET MANUAL SCALE TO .00015 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n\n'
+        '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
+        '***TO SEE FULL ORCUS ORBIT, SET MANUAL SCALE TO 1500 AU***\n\n'        
         'Horizons: 2004 DW. The "ANTI-PLUTO" - a plutino in 3:2 Neptune resonance.\n\n'
         'ORBITAL RESONANCE:\n'
         '* Same 3:2 resonance as Pluto, but 180 deg OUT OF PHASE!\n'
@@ -1314,7 +1368,8 @@ INFO = {
         'Discovered Feb 17, 2004 by Brown, Trujillo, and Rabinowitz.\n'
         'Named after the Etruscan god of the underworld.',
 
-        'Vanth': 'Horizons: 120090482. Orcus\'s moon, forming the HIGHEST MASS RATIO binary in the solar system!\n\n'
+        'Vanth': '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
+        'Horizons: 120090482. Orcus\'s moon, forming the HIGHEST MASS RATIO binary in the solar system!\n\n'
         'BINARY SYSTEM PHYSICS:\n'
         '* Mass ratio: 16% of Orcus (higher than Charon\'s 12% of Pluto!)\n'
         '* Separation: 9,000 km total\n'
@@ -1331,7 +1386,7 @@ INFO = {
         'Discovered Nov 2005 by Brown in Hubble images. Announced Feb 2007.\n'
         'Diameter: ~443 km (occultation 2017). Named after Etruscan psychopomp (guide of the dead).',
 
-        'Orcus-Vanth Barycenter': 
+        'Orcus-Vanth Barycenter': '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
         'Center of mass for the Orcus-Vanth binary system - the HIGHEST MASS RATIO binary in the solar system!\n\n'
         'BINARY SYSTEM:\n'
         '* Mass ratio: Vanth/Orcus = 16% (vs Charon/Pluto = 12%)\n'
@@ -1358,13 +1413,17 @@ INFO = {
         'GV9': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon.',
         'Mani': 'Horizons: 2002 MS4. A large unnumbered Kuiper Belt Object with no known moons.',  
 
-        'Gonggong': 'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects (~1230 km diameter) with a highly inclined orbit (30.9 deg). '
+        'Gonggong-Xiangliu Barycenter': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***',
+
+        'Gonggong': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***\n'
+        'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects (~1230 km diameter) with a highly inclined orbit (30.9 deg). '
         'Named after the Chinese water god known for causing floods and chaos. '
         'Surface is extremely red due to tholins and water ice, suggesting possible past cryovolcanism. '
         'Slow rotation period (~22 hours) likely caused by tidal forces from its moon Xiangliu. '
         'Currently near aphelion at ~52.7 AU (May 2033). Orbital period: 550 years. Eccentricity: 0.50.',
 
-        'Xiangliu': 'Gonggong\'s only moon, named after the nine-headed serpent minister in Chinese mythology. '
+        'Xiangliu': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***\n'
+        'Gonggong\'s only moon, named after the nine-headed serpent minister in Chinese mythology. '
         'Discovered 2016 by Kiss et al. in Hubble images from 2010. '
         'Period: 25.22 days. Distance: ~24,000 km. Diameter: ~100 km (albedo-dependent). '
         'Highly eccentric orbit (e~0.29) and inclined 83 deg to ecliptic (nearly pole-on from Earth). '
@@ -1422,7 +1481,9 @@ INFO = {
         '* Saturn orbit insertion: June 30, 2004\n'
         '* Final transmission: September 15, 2017',
 
-        'New Horizons': '***SET MANUAL SCALE TO 70 AU. PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n'
+        'New Horizons': 
+        '***SET MANUAL SCALE TO 70 AU PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n'
+        '***SET MANUAL SCALE TO 0.0003 AU TO PLOT NEW HORIZONS-ARROKOTH FLYBY ON 2019-1-1.\n\n'
         'Horizons: -98. New Horizons flew past Pluto in 2015, now exploring the Kuiper Belt.\n' 
         '* The New Horizons space probe is an interplanetary space probe built by the Applied Physics Laboratory of Johns Hopkins\n' 
         'University for NASA.\n' 
@@ -1433,14 +1494,17 @@ INFO = {
         '* Pluto Flyby: On July 14, 2015, Pluto-Charon encounter at 11:49:57 UTC. New Horizons made its historic closest approach to ' 
         'Pluto, capturing stunning images and valuable scientific data about the dwarf planet and its moons.\n' 
         '* Kuiper Belt Exploration: After its Pluto encounter, New Horizons continued its journey into the Kuiper Belt.\n' 
-        '* Arrokoth (2014 MU69) flyby on January 1, 2019, at 05:35 UTC, as close as 3561 km, or 0.0000238015 AU if you plot it. '
-        'NASA reports the closest approach at 3537.7 km, reconstructed, at 5:34:31 UTC.\n' 
+        '* Arrokoth (2014 MU69) flyby on January 1, 2019, at 3537.7 km, at 5:34:31 UTC.\n' 
         '* Scientific Instruments: New Horizons carries a suite of scientific instruments, including cameras, spectrometers, and ' 
         'plasma analyzers, to study the composition, atmosphere, and environment of Pluto and other Kuiper Belt objects.\n' 
         '* Continuing Mission: New Horizons is still traveling through the Kuiper Belt, and NASA may extend its mission to explore ' 
         'other distant objects in the future.',
 
-        'Arrokoth': 'Horizons: 2014 MU69. Arrokoth is the most distant object ever visited by a spacecraft, New Horizons, on January 1, 2019.\n' 
+        'Arrokoth': 
+        '***SET MANUAL SCALE TO 70 AU PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n'
+        '***SET MANUAL SCALE TO 0.0003 AU TO PLOT NEW HORIZONS-ARROKOTH FLYBY ON 2019-1-1.***\n'
+        '***SET MANUAL SCALE TO 0.00003 AU TO PLOT NEW HORIZONS-ARROKOTH FLYBY ON 2019-1-1 34:31 (34-35).***\n\n'
+        'Horizons: 2014 MU69. Arrokoth is the most distant object ever visited by a spacecraft, New Horizons, on January 1, 2019.\n' 
         '  * Official Name: Arrokoth (formerly known as Ultima Thule)\n' 
         '  * JPL Horizons Designation: (486958) 2014 MU69\n' 
         '  * Location: Kuiper Belt, a region beyond Neptune populated by icy bodies\n' 
@@ -1459,8 +1523,8 @@ INFO = {
         '    * Building Blocks of Life: Recent research suggests that Arrokoth may contain sugars like ribose and glucose, which are ' 
         'essential for life as we know it. This raises exciting questions about the potential for life to exist elsewhere in the universe.\n' 
         '    * New Horizons Flyby on January 1, 2019 (See "New Horizons" for more information):\n'
-        '      * Plot Arrokoth/New_Horizons as the center body, and New Horizons, to visualize.\n'
-        '      * Closest approach by New Horizons at 5:35 UTC, as close as 3561 km, or 0.0000238015 AU if you plot it. ID 2486958.\n' 
+        '      * Plot Arrokoth as the center body, and New Horizons, to visualize.\n'
+        '      * Closest approach by New Horizons on January 1, 2019, at 3537.7 km, at 5:34:31 UTC.\n' 
         '      * Detailed Images: Stunning images revealed Arrokoth\'s unique shape and surface features.\n' 
         '      * Compositional Data: Instruments on New Horizons analyzed the light reflected from Arrokoth, giving us information ' 
         'about its composition.\n' 

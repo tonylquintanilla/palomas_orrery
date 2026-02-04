@@ -1714,6 +1714,18 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
     elif horizons_id == '120136472':
         location = '@20136472'  # Relative to Makemake system barycenter
 
+    # Handle Weywot (Quaoar's moon)
+    elif horizons_id == '120050000':
+        location = '@920050000'  # Relative to Quaoar primary body
+
+    # Handle Vanth (Orcus's moon)
+    elif horizons_id == '120090482':
+        location = '@20090482'  # Relative to Orcus system barycenter
+
+    # Handle Xiangliu (Gonggong's moon)
+    elif horizons_id == '120225088':
+        location = '@20225088'  # Relative to Gonggong system barycenter
+
     # ===== END OF LOCATION BLOCK =====
 #    print(f"  [Horizons Query] ID: {horizons_id} | Type: {id_type} | Location: {location} | Date: {date_str}", flush=True)
     

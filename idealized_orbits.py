@@ -1837,7 +1837,8 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         
         # These TNO moons have no usable JPL parent-centered ephemeris
         # Horizons returns heliocentric data which is wrong for satellite visualization
-        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+    #    ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth']  
 
         if satellite_name in ANALYTICAL_ONLY_SATELLITES and satellite_name in planetary_params:
             # Force analytical path - skip cache even if present
@@ -2014,8 +2015,8 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         print(f"  [OK] Plotted {satellite_name} {orbit_type.lower()} orbit", flush=True)
 
         # Add apsidal markers using standard method
-    #    if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
-        if show_apsidal_markers:  # Skip for nearly circular orbits    
+        if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits            
+
             from apsidal_markers import add_perihelion_marker, add_apohelion_marker
             
             # Find periapsis and apoapsis indices
@@ -2307,11 +2308,12 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         cache = load_cache()
         
         if is_barycenter_mode and object_name in ['Orcus', 'Vanth']:
-            # BARYCENTER MODE for Orcus/Vanth:
-            # Calculate semi-major axis from mass ratio
-            # Orcus is closer to barycenter (13.7% of separation)
-            # Vanth is farther (86.3% of separation)
-            
+            # BARYCENTER MODE: JPL Actual Orbit traces now handle this
+            # ALMA orbit circles removed - JPL data is the real orbit
+            # (ALMA orbit was a workaround before we could derive barycentric positions)
+            print(f"\n[ORCUS BARYCENTER MODE] {object_name}: using JPL Actual Orbit (ALMA orbit removed)", flush=True)
+            return fig
+                    
             if object_name == 'Orcus':
                 # Orcus orbits closer to barycenter
                 a = separation * mass_ratio / (1 + mass_ratio)  # ~0.00000822 AU (~1,230 km)
@@ -2538,6 +2540,196 @@ def add_orcus_barycenter_marker(fig, date, vanth_position=None):
     print(f"  [OK] Added Orcus-Vanth barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
     
     return fig
+
+
+def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Gonggong'):
+    """
+    Plot analytical orbit for Xiangliu around Gonggong.
+    
+    Gonggong-centered only (barycenter mode removed - mass ratio ~0.013 means
+    barycenter is only ~312 km from Gonggong center, inside the ~615 km body).
+    
+    Binary System Parameters (from Kiss et al. 2017, 2019; Astronoo):
+    - Total separation: 24,021 km = 0.0001606 AU
+    - Period: 25.22 days (Xiangliu likely tidally locked)
+    - Mass ratio: M_Xiangliu/M_Gonggong = 0.013
+    - Eccentricity: 0.29 (highly eccentric - unusual for TNO binaries)
+    - Inclination to ecliptic: ~83 deg (nearly pole-on from Earth)
+    
+    NOTE: Neither 920225088 (primary) nor 120225088 (secondary) work at JPL Horizons.
+    Only the barycenter (20225088) has ephemeris. All component orbits are analytical.
+    """
+    
+    # Binary system physical parameters
+    BINARY_PARAMS = {
+        'separation_km': 24021,                # Total separation (Kiss et al. 2017)
+        'separation_au': 0.0001606,            # = 24,021 km in AU
+        'period_days': 25.22,                  # Orbital period
+        'eccentricity': 0.29,                  # Highly eccentric (Kiss et al. 2017)
+        'inclination_ecliptic': 83.0,          # Inclination to ecliptic (degrees)
+        'Omega_ecliptic': 0.0,                 # LAN unknown - assume 0
+        'omega': 0.0,                          # Arg of periapsis unknown - assume 0
+    }
+    
+    if object_name != 'Xiangliu':
+        print(f"Warning: plot_gonggong_xiangliu_orbit only handles Xiangliu, got {object_name}", flush=True)
+        return fig
+    
+    try:
+        # Xiangliu orbits Gonggong at full separation
+        a = BINARY_PARAMS['separation_au']  # 0.0001606 AU
+        e = BINARY_PARAMS['eccentricity']
+        i = BINARY_PARAMS['inclination_ecliptic']
+        omega = BINARY_PARAMS['omega']
+        Omega = BINARY_PARAMS['Omega_ecliptic']
+        period = BINARY_PARAMS['period_days']
+        
+        epoch_str = f"{date.strftime('%Y-%m-%d')} osc."
+        
+        print(f"\n[GONGGONG-CENTERED] Xiangliu: using Kiss et al. 2017/2019 analytical orbit", flush=True)
+        print(f"  a = {a:.10f} AU ({a * 149597870.7:.1f} km from Gonggong)", flush=True)
+        print(f"  e = {e:.4f}, i = {i:.1f} deg, Omega = {Omega:.1f} deg", flush=True)
+        
+        # Generate ellipse points
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        # Orbital plane coordinates
+        x_orb = r * np.cos(theta)
+        y_orb = r * np.sin(theta)
+        z_orb = np.zeros_like(theta)
+        
+        # Rotate to ecliptic frame
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        x_ecl, y_ecl, z_ecl = [], [], []
+        for x0, y0, z0 in zip(x_orb, y_orb, z_orb):
+            # Rotation by argument of periapsis (omega)
+            x1 = x0 * np.cos(omega_rad) - y0 * np.sin(omega_rad)
+            y1 = x0 * np.sin(omega_rad) + y0 * np.cos(omega_rad)
+            z1 = z0
+            
+            # Rotation by inclination (i)
+            x2 = x1
+            y2 = y1 * np.cos(i_rad) - z1 * np.sin(i_rad)
+            z2 = y1 * np.sin(i_rad) + z1 * np.cos(i_rad)
+            
+            # Rotation by longitude of ascending node (Omega)
+            x3 = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+            y3 = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+            z3 = z2
+            
+            x_ecl.append(x3)
+            y_ecl.append(y3)
+            z_ecl.append(z3)
+        
+        # Create hover text
+        hover_text = (
+            f"<b>Xiangliu Analytical Orbit</b><br>"
+            f"Orbit around Gonggong<br>"
+            f"<br>a = {a*149597870.7:.1f} km ({a:.2e} AU)<br>"
+            f"P = {period:.2f} days<br>"
+            f"e = {e:.2f} (highly eccentric - unusual for TNO binaries)<br>"
+            f"i = {i:.1f} deg (to ecliptic, nearly pole-on)<br>"
+            f"<br><b>Xiangliu</b><br>"
+            f"Diameter: ~100 km (upper limit from tidal evolution)<br>"
+            f"Nine-headed serpent minister of water god Gonggong<br>"
+            f"<br><b>Data Sources:</b><br>"
+            f"Orbit: Kiss et al. 2017, 2019 (ApJ Letters, Icarus)"
+        )
+        
+        # Plot the orbit
+        fig.add_trace(
+            go.Scatter3d(
+                x=x_ecl,
+                y=y_ecl,
+                z=z_ecl,
+                mode='lines',
+                line=dict(color=color, width=2, dash='dash'),
+                name=f"Xiangliu Analytical Orbit (Epoch: {epoch_str})",
+                text=[hover_text] * len(x_ecl),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            )
+        )
+        
+        print(f"  [OK] Plotted Xiangliu analytical orbit ({len(x_ecl)} points)", flush=True)
+        
+        # Apsidal markers for eccentric orbit (e=0.29, so meaningful)
+        if show_apsidal_markers and e > 0.001:
+            # Periapsis (closest approach)
+            peri_r = a * (1 - e)
+            peri_x_orb = peri_r  # Along x-axis in orbital plane
+            
+            # Rotate periapsis to ecliptic
+            x1 = peri_x_orb * np.cos(omega_rad)
+            y1 = peri_x_orb * np.sin(omega_rad)
+            z1 = 0.0
+            x2 = x1
+            y2 = y1 * np.cos(i_rad)
+            z2 = y1 * np.sin(i_rad)
+            peri_x = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+            peri_y = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+            peri_z = z2
+            
+            peri_hover = (
+                f"<b>Xiangliu Keplerian Periapsis</b><br>"
+                f"q = {peri_r:.7f} AU ({peri_r * 149597870.7:.1f} km)<br>"
+                f"e = {e:.2f}"
+            )
+            
+            fig.add_trace(go.Scatter3d(
+                x=[peri_x], y=[peri_y], z=[peri_z],
+                mode='markers',
+                marker=dict(color=color, size=6, symbol='square-open'),
+                name=f"Xiangliu Keplerian Periapsis",
+                text=[peri_hover],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            ))
+            
+            # Apoapsis (farthest point)
+            apo_r = a * (1 + e)
+            apo_x_orb = -apo_r  # Opposite direction in orbital plane
+            
+            # Rotate apoapsis to ecliptic
+            x1 = apo_x_orb * np.cos(omega_rad)
+            y1 = apo_x_orb * np.sin(omega_rad)
+            z1 = 0.0
+            x2 = x1
+            y2 = y1 * np.cos(i_rad)
+            z2 = y1 * np.sin(i_rad)
+            apo_x = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
+            apo_y = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
+            apo_z = z2
+            
+            apo_hover = (
+                f"<b>Xiangliu Keplerian Apoapsis</b><br>"
+                f"Q = {apo_r:.7f} AU ({apo_r * 149597870.7:.1f} km)<br>"
+                f"e = {e:.2f}"
+            )
+            
+            fig.add_trace(go.Scatter3d(
+                x=[apo_x], y=[apo_y], z=[apo_z],
+                mode='markers',
+                marker=dict(color=color, size=6, symbol='square-open'),
+                name=f"Xiangliu Keplerian Apoapsis",
+                text=[apo_hover],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            ))
+            
+            print(f"  [OK] Added apsidal markers: q={peri_r*149597870.7:.1f} km, Q={apo_r*149597870.7:.1f} km", flush=True)
+        
+        return fig
+        
+    except Exception as ex:
+        print(f"Error plotting Xiangliu orbit: {ex}", flush=True)
+        traceback.print_exc()
+        return fig
+
 
 def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Patroclus-Menoetius Barycenter'):
     """
@@ -3846,6 +4038,317 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     return fig
 
 
+def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Earth'):
+    """
+    Plot osculating orbit for objects in the Earth-Moon binary system.
+    
+    Supports TWO center modes:
+    1. center_id='Earth' - Traditional view, Moon orbits Earth
+    2. center_id='Earth-Moon Barycenter' - Binary view, BOTH objects orbit barycenter
+    
+    When "Earth-Moon Barycenter" is the center:
+    - Earth orbits the barycenter (tiny orbit ~0.0000312 AU = ~4,670 km)
+    - Moon orbits the barycenter (large orbit ~0.00254 AU = ~379,730 km)
+    
+    Unlike Pluto-Charon or Orcus-Vanth, the barycenter is INSIDE Earth.
+    But Earth still wobbles around it every 27.32 days!
+    
+    All osculating elements from JPL Horizons are in ECLIPTIC frame (J2000.0).
+    JPL Horizons has direct ephemeris for both 399@3 (Earth at EMB) and 301@3 (Moon at EMB).
+    
+    Binary System Parameters:
+    - Average separation: 384,400 km = 0.00257 AU
+    - Period: 27.32 days (sidereal)
+    - Mass ratio: M_Moon/M_Earth = 0.01230 (1.23%)
+    - Barycenter: ~4,670 km from Earth center (INSIDE Earth, radius 6,371 km)
+    - Moon's orbital inclination to ecliptic: ~5.145 deg
+    """
+    
+    # Horizons IDs for Earth-Moon system objects
+    EARTH_MOON_IDS = {
+        'Earth': '399',    # Earth body center
+        'Moon': '301',     # Moon body center
+    }
+    
+    # Binary system physical parameters
+    BINARY_PARAMS = {
+        'separation_au': 0.002570,        # 384,400 km average separation
+        'period_days': 27.321582,         # Sidereal orbital period
+        'mass_ratio': 0.01230,            # M_Moon / M_Earth
+        'eccentricity': 0.0549,           # Moon's orbital eccentricity
+        # Fallback angular elements (only used if cache unavailable)
+        'inclination_ecliptic': 5.145,    # To J2000 ecliptic
+        'Omega_ecliptic': 125.0,          # Longitude of ascending node (precesses with 18.6 yr period)
+        'omega': 318.0,                   # Argument of periapsis (approximate)
+    }
+    
+    mass_ratio = BINARY_PARAMS['mass_ratio']
+    separation = BINARY_PARAMS['separation_au']
+    
+    horizons_id = EARTH_MOON_IDS.get(object_name)
+    if not horizons_id:
+        print(f"Warning: No Horizons ID for {object_name} in Earth-Moon system", flush=True)
+        return fig
+    
+    is_barycenter_mode = (center_id == 'Earth-Moon Barycenter')
+    
+    try:
+        from osculating_cache_manager import load_cache, get_cache_key
+        cache = load_cache()
+        
+        if is_barycenter_mode and object_name in ['Earth', 'Moon']:
+            # BARYCENTER MODE for Earth/Moon:
+            # Try to use barycentric osculating elements from cache first
+            # Fall back to calculated values if not available
+            
+            cache_key = get_cache_key(object_name, '@3')  # e.g., 'Earth@3', 'Moon@3'
+            
+            if cache_key in cache:
+                # USE ACTUAL BARYCENTRIC OSCULATING ELEMENTS
+                elements = cache[cache_key]['elements']
+                a = elements.get('a', 0)
+                e = elements.get('e', BINARY_PARAMS['eccentricity'])
+                i = elements.get('i', BINARY_PARAMS['inclination_ecliptic'])
+                omega = elements.get('omega', BINARY_PARAMS['omega'])
+                Omega = elements.get('Omega', BINARY_PARAMS['Omega_ecliptic'])
+                epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
+                print(f"\n[EMB BARYCENTER MODE] {object_name}: using barycentric osculating elements ({cache_key})", flush=True)
+                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  e={e:.6f}, i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
+            else:
+                # FALLBACK: Calculate from mass ratio + angular elements from Moon's Earth-centered cache
+                print(f"\n[EMB BARYCENTER MODE] {object_name}: no barycentric cache ({cache_key}), using calculated values", flush=True)
+                
+                # Calculate semi-major axis from mass ratio
+                if object_name == 'Earth':
+                    a = separation * mass_ratio / (1 + mass_ratio)  # ~0.0000312 AU (~4,670 km)
+                else:  # Moon
+                    a = separation * 1.0 / (1 + mass_ratio)  # ~0.00254 AU (~379,730 km)
+                
+                e = BINARY_PARAMS['eccentricity']
+                
+                # Get angular elements from Moon's Earth-centered cache (defines the orbital plane)
+                if 'Moon' in cache:
+                    cached_elements = cache['Moon']['elements']
+                    i = cached_elements.get('i', BINARY_PARAMS['inclination_ecliptic'])
+                    omega = cached_elements.get('omega', BINARY_PARAMS['omega'])
+                    Omega = cached_elements.get('Omega', BINARY_PARAMS['Omega_ecliptic'])
+                    epoch = cached_elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
+                    print(f"  Using Moon's Earth-centered angular elements as fallback", flush=True)
+                else:
+                    # Final fallback to approximations
+                    i = BINARY_PARAMS['inclination_ecliptic']
+                    omega = BINARY_PARAMS['omega']
+                    Omega = BINARY_PARAMS['Omega_ecliptic']
+                    epoch = f"{date.strftime('%Y-%m-%d')} (approx)"
+                    print(f"  Using fallback angular elements (no cache)", flush=True)
+                
+                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
+
+        else:
+            # EARTH-CENTERED MODE (traditional view):
+            # Use Moon's cached osculating elements directly
+            print(f"\n[OSCULATING] Loading cached elements for {object_name} (Earth-Moon)...", flush=True)
+            
+            if object_name in cache:
+                elements = cache[object_name]['elements']
+                print(f"  [OK] Using cached osculating elements", flush=True)
+            elif object_name in planetary_params:
+                elements = planetary_params[object_name]
+                print(f"  [OK] Using analytical elements from planetary_params", flush=True)
+            else:
+                print(f"  Warning: No elements found for {object_name}", flush=True)
+                return fig
+            
+            a = elements.get('a', 0)
+            e = elements.get('e', 0)
+            i = elements.get('i', 0)
+            omega = elements.get('omega', 0)
+            Omega = elements.get('Omega', 0)
+            epoch = elements.get('epoch', 'analytical')
+        
+        # Skip if no valid semi-major axis
+        if a == 0:
+            print(f"  Warning: Zero semi-major axis for {object_name}", flush=True)
+            return fig
+        
+        print(f"  Plotting: a={a:.7f} AU, i={i:.4f} deg (ecliptic), epoch={epoch}", flush=True)
+        
+        # Generate orbital path
+        theta = np.linspace(0, 2*np.pi, 360)
+        r = a * (1 - e**2) / (1 + e * np.cos(theta))
+        
+        x_orbit = r * np.cos(theta)
+        y_orbit = r * np.sin(theta)
+        z_orbit = np.zeros_like(theta)
+        
+        i_rad = np.radians(i)
+        omega_rad = np.radians(omega)
+        Omega_rad = np.radians(Omega)
+        
+        # Standard Keplerian rotation sequence
+        x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+        x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+        
+        # Build hover text based on mode and object
+        if is_barycenter_mode:
+            if object_name == 'Earth':
+                hover_text_osc = (
+                    f"<b>Earth's Osculating Orbit around Barycenter</b><br>"
+                    f"<i>The tiny wobble of our home planet</i><br><br>"
+                    f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
+                    f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
+                    f"e = {e:.4f}<br>"
+                    f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
+                    f"Period: {BINARY_PARAMS['period_days']:.2f} days<br><br>"
+                    f"<b>Why Earth's orbit is tiny:</b><br>"
+                    f"<i>Earth is ~81x more massive than the Moon,<br>"
+                    f"so it orbits much closer to the barycenter.<br>"
+                    f"Like a heavy adult on a see-saw sitting<br>"
+                    f"right next to the pivot point!</i><br><br>"
+                    f"<b>The barycenter is INSIDE Earth!</b><br>"
+                    f"<i>~4,670 km from center (~1,700 km below surface)<br>"
+                    f"Between the outer core and lower mantle.<br>"
+                    f"Compare: Pluto-Charon barycenter is OUTSIDE Pluto!</i><br><br>"
+                    f"<b>Note:</b> <i>This wobble affects Earth's<br>"
+                    f"heliocentric orbit - the Sun sees Earth<br>"
+                    f"oscillating monthly around the EMB.</i>"
+                )
+            elif object_name == 'Moon':
+                hover_text_osc = (
+                    f"<b>Moon's Osculating Orbit around Barycenter</b><br>"
+                    f"<i>The larger orbit of the pair</i><br><br>"
+                    f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
+                    f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
+                    f"e = {e:.4f}<br>"
+                    f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
+                    f"Period: {BINARY_PARAMS['period_days']:.2f} days<br><br>"
+                    f"<b>Why Moon's orbit is larger:</b><br>"
+                    f"<i>The Moon is only 1.23% of Earth's mass,<br>"
+                    f"so it orbits much farther from the barycenter.<br>"
+                    f"Like a child on a see-saw sitting<br>"
+                    f"far from the pivot point!</i><br><br>"
+                    f"<b>The Dance:</b><br>"
+                    f"<i>Earth and Moon orbit their common center<br>"
+                    f"of mass every 27.32 days. The Moon's orbit<br>"
+                    f"is inclined ~5.1 deg to the ecliptic,<br>"
+                    f"causing the barycenter to bob up and down<br>"
+                    f"relative to Earth's orbital plane.</i>"
+                )
+            else:
+                hover_text_osc = (
+                    f"<b>{object_name} Osculating Orbit</b><br>"
+                    f"Epoch: {epoch}<br>"
+                    f"a={a:.7f} AU, e={e:.6f}, i={i:.2f} deg"
+                )
+        else:
+            hover_text_osc = (
+                f"<b>{object_name} Osculating Orbit</b><br>"
+                f"<i>(around Earth center)</i><br><br>"
+                f"Epoch: {epoch}<br>"
+                f"a = {a:.6f} AU, e = {e:.6f}<br>"
+                f"i = {i:.4f} deg (J2000 ecliptic)"
+            )
+        
+        # Determine line style
+        line_style = dict(color=color, width=2, dash='dash')
+        orbit_label = f'{object_name} Osculating Orbit (Epoch: {epoch})'
+        
+        fig.add_trace(go.Scatter3d(
+            x=x_final, y=y_final, z=z_final,
+            mode='lines',
+            line=line_style,
+            name=orbit_label,
+            text=[hover_text_osc] * len(x_final),
+            customdata=[hover_text_osc] * len(x_final),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True
+        ))
+        
+        print(f"  [OK] Added {object_name} orbit (center: {center_id})", flush=True)
+        return fig
+        
+    except Exception as e:
+        print(f"Error plotting {object_name} Earth-Moon orbit: {e}", flush=True)
+        traceback.print_exc()
+        return fig
+
+
+def add_earth_moon_barycenter_marker(fig, date, moon_position=None):
+    """
+    Add the Earth-Moon barycenter marker to Earth-centered view.
+    
+    The barycenter is ~4,670 km from Earth's center toward the Moon.
+    This is INSIDE Earth's surface (radius ~6,371 km)!
+    It sits between the outer core and lower mantle.
+    
+    Parameters:
+        fig: Plotly figure
+        date: Current date for position calculation
+        moon_position: Dict with Moon's x, y, z position (if available)
+    """
+    # Barycenter distance from Earth center in AU
+    # Calculation: separation x (m_moon / (m_earth + m_moon))
+    # = 384,400 km x (0.01230 / 1.01230) ~ 4,672 km ~ 0.0000312 AU
+    BARYCENTER_DIST_AU = 0.0000312
+    
+    if moon_position and moon_position.get('x') is not None:
+        # Calculate unit vector from Earth toward Moon
+        mx, my, mz = moon_position['x'], moon_position['y'], moon_position['z']
+        moon_dist = (mx**2 + my**2 + mz**2)**0.5
+        
+        if moon_dist > 0:
+            # Barycenter is along the Earth-Moon line
+            bary_x = BARYCENTER_DIST_AU * (mx / moon_dist)
+            bary_y = BARYCENTER_DIST_AU * (my / moon_dist)
+            bary_z = BARYCENTER_DIST_AU * (mz / moon_dist)
+        else:
+            bary_x, bary_y, bary_z = BARYCENTER_DIST_AU, 0, 0
+    else:
+        # Fallback: place on +X axis
+        bary_x, bary_y, bary_z = BARYCENTER_DIST_AU, 0, 0
+    
+    hover_text = (
+        f"<b>Earth-Moon Barycenter</b><br>"
+        f"<i>Center of mass of the Earth-Moon system</i><br><br>"
+        f"Distance from Earth center: ~4,670 km<br>"
+        f"Distance below Earth surface: ~1,700 km<br>"
+        f"Location: between outer core and lower mantle<br>"
+        f"<br><b>Why this matters:</b><br>"
+        f"<i>Earth WOBBLES around this point every month!<br>"
+        f"The barycenter is inside Earth (unlike Pluto-Charon<br>"
+        f"where it's outside both bodies), but the wobble<br>"
+        f"is real and measurable.<br><br>"
+        f"The Sun-EMB Lagrange points (L1-L5) orbit<br>"
+        f"this point, not Earth's center. JWST, SOHO,<br>"
+        f"and other spacecraft 'orbit' a point defined<br>"
+        f"by this barycenter's path around the Sun.<br><br>"
+        f"Mass ratio: Moon/Earth = 1.23%<br>"
+        f"Highest of any planet-moon system!<br>"
+        f"(Compare: Io/Jupiter = 0.005%)</i>"
+    )
+    
+    fig.add_trace(go.Scatter3d(
+        x=[bary_x], y=[bary_y], z=[bary_z],
+        mode='markers',
+        marker=dict(
+            size=8,
+            color=color_map('Earth'),
+            symbol='square-open',
+        ),
+        name='Earth-Moon Barycenter',
+        text=[hover_text],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    ))
+    
+    print(f"  [OK] Added Earth-Moon barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
+    
+    return fig
+
+
 def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_distance=100):
     """
     Generate points for a hyperbolic orbit trajectory.
@@ -4052,6 +4555,19 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                             current_position=moon_current_pos,
                                             show_apsidal_markers=show_apsidal_markers,
                                             planetary_params=moon_params)
+
+                # NEW: Add barycenter marker for Earth-centered view
+                moon_pos = current_positions.get('Moon') if current_positions else None
+                fig = add_earth_moon_barycenter_marker(fig, date, moon_position=moon_pos)
+
+            # NEW: Earth-Moon BARYCENTER mode
+            elif center_id == 'Earth-Moon Barycenter' and moon_name in ['Earth', 'Moon']:
+                if date:
+                    fig = plot_earth_moon_barycenter_orbit(
+                        fig, moon_name, date, color_map(moon_name),
+                        show_apsidal_markers=show_apsidal_markers,
+                        center_id=center_id
+                    )
 
             # Special handling for Mars moons with dual-orbit system
             elif moon_name in ['Phobos', 'Deimos'] and center_id == 'Mars':
@@ -4276,6 +4792,24 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
 
+            # Special handling for Gonggong-Xiangliu system
+            # Source: Kiss et al. 2017, 2019 (ApJ Letters, Icarus)
+            # Separation: 24,021 km, Period: 25.22 days, e=0.29
+            # NOTE: Barycenter mode removed - mass ratio ~0.013, barycenter inside Gonggong
+            # NOTE: Neither 920225088 nor 120225088 work at Horizons - analytical only
+            elif moon_name == 'Xiangliu' and center_id == 'Gonggong':
+                if date:
+                    fig = plot_gonggong_xiangliu_orbit(
+                        fig,
+                        moon_name,
+                        date,
+                        color_map(moon_name),
+                        show_apsidal_markers=show_apsidal_markers,
+                        center_id=center_id
+                    )
+                else:
+                    print(f"  Warning: Could not plot analytical orbit for {moon_name} (missing date)", flush=True)
+
             # Special handling for Patroclus-Menoetius BINARY TROJAN SYSTEM (Lucy target)
             # Source: Brozovic et al. 2024 (AJ 167:104)
             # Binary separation: 692.5 km, Period: 4.283 days
@@ -4367,7 +4901,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
 
                         # For satellites, get TP and epoch from osculating cache if not in params
                         # Skip for analytical-only satellites (their osculating cache has wrong heliocentric data)
-                        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+                #        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
+                        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth']  
                         if 'TP' not in moon_params and moon_name in osc_cache and moon_name not in ANALYTICAL_ONLY_SATELLITES:
 
                             try:
@@ -4418,19 +4953,29 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                         moon_params.get('Omega'),
                                         rotate_points
                                     )
-                                    
+                                                                        
                                     # Use numeric center ID for satellites
-                                    satellite_center_ids = {
-                                        'Earth': '399',   # Geocenter
-                                        'Mars': '499',    # Mars
-                                        'Jupiter': '599', # Jupiter
-                                        'Saturn': '699',  # Saturn
-                                        'Uranus': '799',  # Uranus
-                                        'Neptune': '899', # Neptune
-                                        'Pluto': '999'    # Pluto
-                                    }
-                                    center_id_numeric = satellite_center_ids.get(center_id, center_id)
-                                    
+                                    # First check if center is in objects list (covers TNO systems)
+                                    center_id_numeric = None
+                                    if objects:
+                                        for obj in objects:
+                                            if obj['name'] == center_id:
+                                                center_id_numeric = obj['id']
+                                                break
+                                    # Fallback to hardcoded planet IDs
+                                    if not center_id_numeric:
+                                        satellite_center_ids = {
+                                            'Sun': '10',
+                                            'Earth': '399',   # Geocenter
+                                            'Mars': '499',    # Mars
+                                            'Jupiter': '599', # Jupiter
+                                            'Saturn': '699',  # Saturn
+                                            'Uranus': '799',  # Uranus
+                                            'Neptune': '899', # Neptune
+                                            'Pluto': '999'    # Pluto
+                                        }
+                                        center_id_numeric = satellite_center_ids.get(center_id, center_id)
+
                                     # Fetch actual positions
                                     positions_dict = fetch_positions_for_apsidal_dates(
                                         obj_id=obj_id,
@@ -5047,13 +5592,29 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 params.get('Omega', Omega),
                                 rotate_points
                             )
+                                                
+                            # Resolve center_id to numeric for Horizons queries
+                            center_id_numeric = None
+                            if objects:
+                                for obj in objects:
+                                    if obj['name'] == center_id:
+                                        center_id_numeric = obj['id']
+                                        break
+                            if not center_id_numeric:
+                                satellite_center_ids = {
+                                    'Sun': '10',
+                                    'Earth': '399', 'Mars': '499', 'Jupiter': '599',
+                                    'Saturn': '699', 'Uranus': '799', 'Neptune': '899',
+                                    'Pluto': '999'
+                                }
+                                center_id_numeric = satellite_center_ids.get(center_id, center_id)
                         
                             # Fetch positions for the apsidal dates
                             positions_dict = fetch_positions_for_apsidal_dates(
                                 obj_id=obj_id,
                                 params=params,
                                 date_range=None,  # Don't restrict by date range
-                                center_id=center_id,
+                                center_id=center_id_numeric,  # <-- was center_id
                                 id_type=id_type,
                                 is_satellite=(obj_name in parent_planets.get(center_id, [])),
                                 fetch_position=fetch_position
