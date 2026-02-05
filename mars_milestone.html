@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First AI-Planned Drive on Mars - December 8, 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #111827, #450a0a, #7c2d12);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Stars */
+        .stars {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.2; }
+        }
+        
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 650px;
+            text-align: center;
+        }
+        
+        /* Mars */
+        .mars {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ef4444, #ea580c, #b91c1c);
+            box-shadow: 0 0 60px rgba(239, 68, 68, 0.3);
+            position: relative;
+        }
+        
+        .mars-feature {
+            position: absolute;
+            background: rgba(127, 29, 29, 0.5);
+            border-radius: 50%;
+        }
+        
+        .mars-feature-1 {
+            top: 30px;
+            left: 25px;
+            width: 35px;
+            height: 12px;
+            transform: rotate(-12deg);
+        }
+        
+        .mars-feature-2 {
+            top: 65px;
+            right: 30px;
+            width: 25px;
+            height: 8px;
+            transform: rotate(6deg);
+        }
+        
+        .mars-feature-3 {
+            bottom: 40px;
+            left: 40px;
+            width: 40px;
+            height: 8px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #fed7aa;
+        }
+        
+        .date {
+            font-size: 1.25rem;
+            color: #fdba74;
+            margin-bottom: 2rem;
+        }
+        
+        .quote-box {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        
+        .quote-box p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .quote-box p:last-child {
+            margin-bottom: 0;
+            color: #d1d5db;
+        }
+        
+        .highlight {
+            color: #fdba74;
+            font-weight: 600;
+        }
+        
+        .nasa-link {
+            color: #60a5fa;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #fdba74;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+        
+        .insight {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            font-style: italic;
+            border-top: 1px solid rgba(249, 115, 22, 0.2);
+            padding-top: 1.5rem;
+        }
+        
+        .insight-author {
+            color: #fb923c;
+            display: block;
+            margin-top: 0.5rem;
+        }
+        
+        .rover-tracks {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            opacity: 0.4;
+        }
+        
+        .track {
+            width: 8px;
+            height: 16px;
+            background: #fed7aa;
+            border-radius: 2px;
+            transform: rotate(12deg);
+        }
+        
+        .logo-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(249, 115, 22, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0.7;
+        }
+        
+        .logo-text {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        
+        .palomas-orrery {
+            color: #fdba74;
+            font-weight: 500;
+        }
+        
+        .nasa-section {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        
+        .nasa-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            min-width: 280px;
+            text-align: center;
+        }
+        
+        .nasa-button:hover {
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .nasa-button.secondary {
+            background: linear-gradient(135deg, #374151, #4b5563);
+            border: 1px solid rgba(156, 163, 175, 0.3);
+        }
+        
+        .nasa-button.secondary:hover {
+            background: linear-gradient(135deg, #4b5563, #6b7280);
+            box-shadow: 0 4px 20px rgba(107, 114, 128, 0.4);
+        }
+        
+        .source-note {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        
+        .source-note a {
+            color: #9ca3af;
+            text-decoration: underline;
+        }
+        
+        .source-note a:hover {
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="content">
+        <div class="mars">
+            <div class="mars-feature mars-feature-1"></div>
+            <div class="mars-feature mars-feature-2"></div>
+            <div class="mars-feature mars-feature-3"></div>
+        </div>
+        
+        <h1>First AI-Planned Drive on Mars</h1>
+        <p class="date">December 8, 2025</p>
+        
+        <div class="quote-box">
+            <p>
+                "On December 8, the Perseverance rover safely trundled across the surface of Mars. 
+                This was the <span class="highlight">first AI-planned drive on another planet</span>. 
+                And it was planned by Claude."
+            </p>
+            <p>
+                Engineers at <span class="nasa-link">@nasajpl</span> used Claude to plot out the route 
+                for Perseverance to navigate an approximately <span class="highlight">400-meter path</span> on 
+                the Martian surface.
+            </p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">400m</div>
+                <div class="stat-label">Distance Planned</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1st</div>
+                <div class="stat-label">AI-Planned Drive</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Mars</div>
+                <div class="stat-label">Another Planet</div>
+            </div>
+        </div>
+        
+        <div class="insight">
+            "Language is the secret sauce. But it takes two to have a conversation."
+            <span class="insight-author">- From conversations that span Earth to Mars</span>
+        </div>
+        
+        <div class="source-note">
+            Source: <a href="https://www.instagram.com/claudeai/" target="_blank">@claudeai on Instagram</a>, January 30, 2026
+        </div>
+        
+        <div class="rover-tracks">
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+            <div class="track"></div>
+        </div>
+        
+        <div class="logo-section">
+            <span class="logo-text">Viewed in <span class="palomas-orrery">Paloma's Orrery</span></span>
+        </div>
+        
+        <div class="nasa-section">
+            <a href="https://www.nasa.gov/missions/mars-2020-perseverance/perseverance-rover/nasa-jpl-unveils-rover-operations-center-for-moon-mars-missions/" target="_blank" class="nasa-button">
+                NASA: Rover Operations Center Announcement
+            </a>
+            <a href="https://mars.nasa.gov/mars2020/" target="_blank" class="nasa-button secondary">
+                NASA Mars 2020 Mission Page
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
