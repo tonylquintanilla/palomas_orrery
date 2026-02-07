@@ -730,7 +730,7 @@ OBJECT_DEFINITIONS = [
     'to plot a 400-meter route across the Martian surface. This was planned through conversation, not code.<br><br>'
     'Note: The elevation values shown (-4200m) differ from published scientific values for Jezero Crater (-2600m) due to different <br>'
     'Mars reference systems. JPL Horizons uses one elevation datum, while scientific publications often use the MOLA reference areoid.',
-    'mission_url': 'mars_milestone.html'},  # Local HTML milestone graphic (contains link to NASA)
+    'mission_url': 'https://tonylquintanilla.github.io/palomas_orrery/mars_milestone.html'},  # Local HTML milestone graphic (contains link to NASA)
 
     {'name': 'Lucy', 'id': '-49', 'var_name': 'lucy_var', 'color_key': 'Lucy', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 2), 

@@ -447,7 +447,7 @@ def _build_social_html(fig_dict, plotly_js_src='cdn'):
     min-height: 0;
   }}
 
-  #plotly-scene {{
+    #plotly-scene {{
     width: 100%;
     height: 100%;
   }}

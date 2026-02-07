@@ -8,7 +8,7 @@ __pycache__/
 *.csv
 
 # Plot outputs
-*.html
+# *.html -- removed to allow tracking of certain html files used for visualization
 *.png
 
 # Backup files
