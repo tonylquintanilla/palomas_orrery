@@ -339,6 +339,7 @@ def _prepare_social_figure(fig):
         scene[axis_key] = axis
 
     scene['bgcolor'] = '#000000'
+    scene['domain'] = {'x': [0, 1], 'y': [0, 1]}  # Full width (orrery offsets for UI buttons)    
     layout['scene'] = scene
 
     fig_dict['layout'] = layout

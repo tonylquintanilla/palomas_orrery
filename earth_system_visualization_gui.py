@@ -561,6 +561,7 @@ def open_monthly_temp_lines():
         fig = create_monthly_temperature_lines()
         if fig:
             fig.show()
+            save_plot(fig, "monthly_temperature_lines")
         else:
             messagebox.showerror("Data Not Found",
                 "Temperature data file not found.\n"
@@ -576,6 +577,7 @@ def open_warming_stripes():
         fig = create_warming_stripes()
         if fig:
             fig.show()
+            save_plot(fig, "warming_stripes")
         else:
             messagebox.showerror("Data Not Found",
                 "Temperature data file not found.\n"
@@ -1411,6 +1413,8 @@ def open_ph_viz():
         fig = create_ph_viz()
         if fig:
             fig.show()
+            # Save to output directory
+            save_plot(fig, "ocean_acidification_ph_trend")
         else:
             messagebox.showerror(
                 "Data Not Available",
@@ -1429,6 +1433,7 @@ def open_planetary_boundaries():
         fig = create_planetary_boundaries_viz()
         if fig:
             fig.show()
+            save_plot(fig, "planetary_boundaries")
         else:
             messagebox.showerror(
                 "Visualization Error",
@@ -1524,6 +1529,8 @@ def open_sea_level_viz():
         fig = create_sea_level_viz()
         if fig:
             fig.show()
+            # Save to output directory
+            save_plot(fig, "sea_level_rise")
         else:
             messagebox.showerror(
                 "Data Not Available",
@@ -1543,6 +1550,8 @@ def open_keeling_curve():
         fig = create_keeling_curve()
         if fig:
             fig.show()
+            # Save to output directory
+            save_plot(fig, "keeling_curve_co2_concentration")
         else:
             messagebox.showerror("Data Not Found", 
                 "CO2 data file not found. Please run fetch_climate_data.py first.")
@@ -1555,6 +1564,8 @@ def open_temperature_viz():
         fig = create_temperature_viz()
         if fig:
             fig.show()
+            # Save to output directory
+            save_plot(fig, "global_temperature_anomalies")
         else:
             messagebox.showerror("Data Not Found",
                 "Temperature data file not found. Please run fetch_climate_data.py first.")
@@ -1567,6 +1578,8 @@ def open_ice_viz():
         fig = create_ice_viz()
         if fig:
             fig.show()
+                # Save to output directory  
+            save_plot(fig, "arctic_ice_extent")
         else:
             messagebox.showerror("Data Not Found",
                 "Arctic ice data file not found.\n\n"
@@ -1581,6 +1594,8 @@ def open_energy_imbalance():
         fig = create_energy_imbalance_visualization()
         if fig:
             fig.show()
+            # Save to output directory
+            save_plot(fig, "energy_imbalance")
         else:
             messagebox.showerror("Data Not Found",
                 "Required climate data not found. Please run fetch_climate_data.py first.")

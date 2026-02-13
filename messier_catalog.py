@@ -156,7 +156,7 @@ star_cluster_catalog = {
         'distance_ly': 440,
         'ra': '03h47m0s',
         'dec': '+24d07m00s',
-        'notes': 'Open cluste in Taurus.',
+        'notes': 'Open cluster in Taurus.',
     },
 }
 
@@ -253,19 +253,19 @@ bright_nebulae = {
     'X Sgr A*': {
         'name': 'Sagittarius A*',
         'type': 'Supermassive Black Hole',
-        'vmag': 0,                           # Apparent visual magnitude is not applicable to black holes
+        'vmag': 0,                           # Apparent visual magnitude is not applicable to black holes; intended to pass filter for bright objects
         'distance_ly': 26000,                 # Distance to the Galactic Center
-        'ra': '17h 45m 40.04s',
-        'dec': '-29 deg 00 arcmin 28.1 arcsec',
+        'ra': '17h45m40.04s',
+        'dec': '-29d00m28.1s',
         'notes': 'Supermassive black hole at the center of the Milky Way galaxy.',
     },
     'X Stephenson 2-18': {
         'name': 'Stephenson 2-18',
         'type': 'Red Supergiant',
-        'vmag': 0,                          # Apparent visual magnitude is difficult to determine precisely and varies
+        'vmag': 0,                          # Apparent visual magnitude is difficult to determine precisely and varies; set to 0 to ensure it is included in bright object lists
         'distance_ly': 18900,               # Distance estimates vary
-        'ra': '18h 39m 11s',
-        'dec': '-05 deg 57 arcmin 31 arcsec',
+        'ra': '18h39m11s',
+        'dec': '-05d57m31s',
         'notes': 'One of the largest known stars, a red supergiant in the constellation Scutum.',
     },
 
