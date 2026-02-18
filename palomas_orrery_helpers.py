@@ -649,23 +649,29 @@ def add_url_buttons(fig, objects_to_plot, selected_objects):
 
     # Get existing annotations and create new list
     annotations = list(fig.layout.annotations) if fig.layout.annotations else []
-
-    # Constants for button layout
-    max_per_row = 14
-    button_width = 0.075  # Slight reduction from 0.07 to fit more buttons
-    start_x = -0.05  # Starting position after existing links
-
-    # Add URL buttons while preserving existing annotations
-    for idx, obj in enumerate(url_objects):
-        padded_name = obj['name'].ljust(11)  # This adds spaces to make it exactly 12 chars
-        # Determine row and position within row
-        row = idx // max_per_row
-        position_in_row = idx % max_per_row
-        # Calculate x position - each row starts from the left
-        button_x = start_x + (position_in_row * button_width)
-        # Calculate y position based on row (row 0 is at y=0, row 1 is at y=-0.05)
-        button_y = 0.07 - (row * 0.06)
         
+    # Dynamic button layout - sizes based on name length
+    start_x = -0.05
+    char_width = 0.0068  # paper units per character (monospace size 12)
+    button_padding = 0.018  # gap between buttons
+    min_button_width = 0.075
+    max_row_x = 1.05  # right edge of paper
+
+    # Add URL buttons with cumulative positioning
+    current_x = start_x
+    current_row = 0
+    for idx, obj in enumerate(url_objects):
+        padded_name = obj['name']
+        # Calculate width needed for this name
+        name_width = max(min_button_width, len(padded_name) * char_width + button_padding)
+        # Wrap to next row if this button would exceed right edge
+        if current_x + name_width > max_row_x and current_x > start_x:
+            current_row += 1
+            current_x = start_x
+        button_x = current_x
+        button_y = 0.07 - (current_row * 0.06)
+        current_x += name_width
+
         # >>>>>>>>> NEW CONDITIONAL BLOCK ADDED FOR EARTH SYSTEM VISUALIZATION >>>>>>>>>
         # Earth gets special styling - professional double border with ocean blue
         if obj.get('is_earth', False):

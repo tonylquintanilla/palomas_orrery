@@ -1137,7 +1137,28 @@ class StarVisualizationGUI(tk.Tk):
         
         self.status_label = ttk.Label(status_frame, text="Ready", foreground="green")
         self.status_label.pack()
-        
+                
+        # Social Media Export
+        social_frame = ttk.LabelFrame(middle_frame, text="Social Media Export", padding=10)
+        social_frame.pack(fill='x', pady=(10, 0))
+
+        ttk.Label(
+            social_frame,
+            text="Convert a saved 3D HTML to portrait social view",
+            foreground="gray"
+        ).pack(anchor='w')
+
+        self.social_view_button = tk.Button(
+            social_frame,
+            text="Social View from Saved HTML...",
+            command=self.export_social_view,
+            bg='gray90',
+            fg='purple',
+            width=self.BUTTON_WIDTH,
+            font=self.BUTTON_FONT
+        )
+        self.social_view_button.pack(pady=(5, 0))
+
         # ADD THIS NEW SECTION - Plot Data Report Widget
         self.plot_report = PlotDataReportWidget(middle_frame)
         self.plot_report.pack(fill='both', expand=True, pady=(10, 0))
@@ -1456,6 +1477,107 @@ class StarVisualizationGUI(tk.Tk):
             self.status_label.config(text="Invalid magnitude value", foreground="red")
         except Exception as e:
             self.status_label.config(text=f"Error: {e}", foreground="red")
+
+
+    def export_social_view(self):
+        """Convert a saved 3D HTML file to a social media portrait view.
+
+        Opens a file picker for the user to select an HTML file previously
+        saved from any 3D stellar visualization. Extracts the Plotly figure
+        data using json_converter's bracket-matching extraction, rebuilds
+        a Plotly figure object, then passes it through social_media_export
+        to produce a 9:16 portrait HTML optimized for Instagram/YouTube.
+        """
+        try:
+            from tkinter import filedialog as fd
+
+            # Pre-seed to last save directory if available
+            try:
+                from save_utils import _get_initial_directory
+                initial_dir = _get_initial_directory()
+            except ImportError:
+                initial_dir = os.path.expanduser('~')
+
+            if not os.path.isdir(initial_dir):
+                initial_dir = os.getcwd()
+
+            html_path = fd.askopenfilename(
+                parent=self,
+                title="Select 3D Visualization HTML",
+                initialdir=initial_dir,
+                filetypes=[("HTML files", "*.html"), ("All files", "*.*")]
+            )
+
+            if not html_path:
+                return  # User cancelled
+
+            self.status_label.config(
+                text="Extracting figure from HTML...",
+                foreground="blue"
+            )
+            self.update()
+
+            # Extract figure data from the HTML file
+            from json_converter import extract_plotly_json_from_html
+            fig_dict = extract_plotly_json_from_html(html_path)
+
+            if fig_dict is None:
+                self.status_label.config(
+                    text="Could not extract figure data from HTML",
+                    foreground="red"
+                )
+                messagebox.showerror(
+                    "Extraction Failed",
+                    "Could not find Plotly figure data in the selected file.\n\n"
+                    "Make sure you selected an HTML file saved from a 3D "
+                    "stellar visualization.",
+                    parent=self
+                )
+                return
+
+            # Rebuild as a Plotly figure object
+            import plotly.graph_objects as go
+            fig = go.Figure(fig_dict)
+
+            print(f"[SOCIAL VIEW] Extracted figure with "
+                  f"{len(fig.data)} traces from {os.path.basename(html_path)}")
+
+            # Generate output path next to the source file
+            base_name = os.path.splitext(os.path.basename(html_path))[0]
+            output_path = os.path.join(
+                os.path.dirname(html_path),
+                f"{base_name}_social.html"
+            )
+
+            self.status_label.config(
+                text="Generating social media view...",
+                foreground="blue"
+            )
+            self.update()
+
+            # Run the social media export
+            from social_media_export import export_social_html
+            export_social_html(
+                fig,
+                output_path=output_path,
+                open_browser=True,
+                plotly_js='cdn'
+            )
+
+            self.status_label.config(
+                text=f"Social view saved: {os.path.basename(output_path)}",
+                foreground="green"
+            )
+            print(f"[SOCIAL VIEW] Exported to {output_path}")
+
+        except Exception as e:
+            self.status_label.config(
+                text=f"Social view error: {e}",
+                foreground="red"
+            )
+            print(f"[SOCIAL VIEW] Error: {e}")
+            import traceback
+            traceback.print_exc()
 
 
     def load_and_display_plot_report(self):

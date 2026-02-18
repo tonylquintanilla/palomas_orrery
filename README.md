@@ -1,4 +1,4 @@
-# Last updated: February 4, 2026
+# Last updated: February 16, 2026
 
 # Paloma's Orrery
 
@@ -19,11 +19,12 @@ Created by Tony Quintanilla with assistance from Claude, ChatGPT, Gemini, and De
 7. [Earth System Visualization](#earth-system-visualization)
 8. [Galactic Center Visualization](#galactic-center-visualization)
 9. [Social Media Export](#social-media-export)
-10. [Module Reference](#module-reference)
-11. [Data Files](#data-files)
-12. [Contributing](#contributing)
-13. [License](#license)
-14. [Contact](#contact)
+10. [Web Gallery](#web-gallery)
+11. [Module Reference](#module-reference)
+12. [Data Files](#data-files)
+13. [Contributing](#contributing)
+14. [License](#license)
+15. [Contact](#contact)
 
 ## Overview
 
@@ -47,12 +48,13 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Forensic Heat Wave Analysis: 3D KML generator for wet-bulb temperature extremes
 - Unified save system with CDN/offline HTML options
 - Social media export: 9:16 portrait HTML for Instagram Reels and YouTube Shorts
+- Web gallery at [palomasorrery.com](https://palomasorrery.com/) -- shareable interactive visualizations, no install required
 - Resizable GUI columns with persistent window layout
 
 **Resources:**
 
 - [GitHub Repository](https://github.com/tonylquintanilla/palomas_orrery)
-- [Project Website](https://tonylquintanilla.github.io/palomas_orrery/)
+- [Web Gallery](https://palomasorrery.com/) -- interactive visualizations in your browser
 - [Instagram: @palomas_orrery](https://www.instagram.com/palomas_orrery/)
 - [Video Tutorials](https://www.youtube.com/@tony_quintanilla/featured)
 - Contact: <tonyquintanilla@gmail.com>
@@ -584,6 +586,7 @@ The save dialog remembers your last save location within each session.
 3. **Processing:** Coordinate transforms, orbital calculations
 4. **Visualization:** Interactive HTML with Plotly
 5. **Export:** CDN or offline HTML, PNG images
+6. **Gallery:** JSON extraction, GitHub Pages deployment at palomasorrery.com
 
 ## Earth System Visualization
 
@@ -672,6 +675,44 @@ Export any orrery visualization as a 9:16 portrait HTML file for Instagram Reels
 - CDN (~10 KB) or offline (~5 MB) Plotly.js options
 
 See [social_media_readme.md](social_media_readme.md) for full documentation.
+
+## Web Gallery
+
+Browse interactive visualizations online at [palomasorrery.com](https://palomasorrery.com/) -- no download, no install, no Python required. Tap a link and explore.
+
+**How it works:** The desktop app exports visualizations as HTML. A converter extracts the Plotly figure data into lightweight JSON files. The gallery viewer (a single-page HTML/CSS/JS app hosted on GitHub Pages) loads them with Plotly.js from CDN. The result is a shareable web gallery where every visualization has its own direct link.
+
+**Features:**
+
+- Dark space theme with gold accent matching the desktop app aesthetic
+- Two modes: Desktop (landscape) and Mobile (portrait) with auto-detection
+- Category-grouped navigation (Solar System, Inner Planets, Stellar, Climate, etc.)
+- Shareable deep links per visualization (e.g., palomasorrery.com/#earth-birthday-2025)
+- Floating info cards on mobile (tap objects for details)
+- 3D zoom buttons on mobile (synthetic wheel events for Plotly.js 3D scenes)
+- Light/dark theme auto-detection preserves original plot colors
+- Custom domain with HTTPS (palomasorrery.com)
+
+**Gallery pipeline:**
+
+```
+Desktop App -> save_plot() -> HTML export
+    -> gallery_studio.py -> per-plot curation (optional)
+    -> json_converter.py -> JSON + gallery_metadata.json
+    -> gallery_editor.py -> curate titles, categories, ordering
+    -> GitHub Pages (index.html) -> palomasorrery.com
+```
+
+**Gallery management tools** (in website repo `tools/` folder):
+
+| Tool | Purpose |
+|------|---------|
+| `gallery_studio.py` | Per-plot curation GUI -- background, fonts, margins, portrait preset with info panel |
+| `json_converter.py` | Extracts Plotly figure data from HTML exports to JSON |
+| `gallery_editor.py` | Tkinter GUI for editing metadata, categories, and ordering |
+| `gallery_config.json` | Single source of truth for category definitions (shared by all tools) |
+
+See [web_gallery_handoff.md](web_gallery_handoff.md) for full technical documentation.
 
 ## Module Reference
 
@@ -774,48 +815,79 @@ The following sections highlight the primary modules organized by function. Use 
 
 ### Project Directory Structure
 
+The project spans two repositories on disk. They are **siblings** in the
+same parent folder (not nested). The orrery repo holds the desktop app;
+the website repo holds the web gallery and its tooling.
+
 ```
-palomas_orrery/
-|- *.py                    # Python source code
-|- README/                 # Documentation
-|   |- README.md
-|   |- social_media_readme.md
-|   |- paleoclimate_readme.md
-|   |- climate_readme.md
-|- data/                   # All program data files
-|   |- orbit_paths.json (~94 MB)
-|   |- orbit_paths_backup.json
-|   |- Climate monitoring (automated)
-|   |   |- co2_mauna_loa_monthly.json
-|   |   |- temperature_giss_monthly.json
-|   |   |- arctic_ice_extent_monthly.json
-|   |   |- sea_level_gmsl_monthly.json
-|   |- Climate monitoring (manual)
-|   |   |- ocean_ph_hot_monthly.json
-|   |   |- 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
-|   |- Paleoclimate data
-|       |- epica_co2_800kyr.json
-|       |- lr04_benthic_stack.json
-|       |- temp12k_allmethods_percentiles.csv
-|       |- 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
-|   |- Heat Wave Analysis
-|       |- weather_cache_*.json       # Cached ERA5 data
-|       |- *_spikes_*.kml             # Generated risk layers
-|       |- *_impact_*.kml             # Generated population layers
-|       |- *_heatmap_*.kml            # Generated thermal layers
-|- star_data/              # Protected stellar cache
-|   |- star_properties_distance.pkl (2.6 MB)
-|   |- star_properties_magnitude.pkl (31.8 MB)
-|   |- hipparcos_data_distance.vot (899 KB)
-|   |- hipparcos_data_magnitude.vot (193 KB)
-|   |- gaia_data_distance.vot (9.8 MB)
-|   |- gaia_data_magnitude.vot (291 MB)
-|   |- *_metadata.json files
-|- reports/                # Generated analysis reports
-    |- last_plot_report.json
-    |- last_plot_data.json
-    |- report_*.json (archived with timestamps)
+python_work/                     # Parent folder (your workspace)
+|
+|- orrery/                       # Desktop app repo (palomas_orrery on GitHub)
+|  |- *.py                       # Python source code (75+ modules)
+|  |- README/                    # Documentation
+|  |   |- README.md
+|  |   |- social_media_readme.md
+|  |   |- paleoclimate_readme.md
+|  |   |- climate_readme.md
+|  |- data/                      # All program data files
+|  |   |- orbit_paths.json (~94 MB)
+|  |   |- orbit_paths_backup.json
+|  |   |- Climate monitoring (automated)
+|  |   |   |- co2_mauna_loa_monthly.json
+|  |   |   |- temperature_giss_monthly.json
+|  |   |   |- arctic_ice_extent_monthly.json
+|  |   |   |- sea_level_gmsl_monthly.json
+|  |   |- Climate monitoring (manual)
+|  |   |   |- ocean_ph_hot_monthly.json
+|  |   |   |- 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv
+|  |   |- Paleoclimate data
+|  |       |- epica_co2_800kyr.json
+|  |       |- lr04_benthic_stack.json
+|  |       |- temp12k_allmethods_percentiles.csv
+|  |       |- 8c__Phanerozoic_Pole_to_Equator_Temperatures.csv
+|  |   |- Heat Wave Analysis
+|  |       |- weather_cache_*.json       # Cached ERA5 data
+|  |       |- *_spikes_*.kml             # Generated risk layers
+|  |       |- *_impact_*.kml             # Generated population layers
+|  |       |- *_heatmap_*.kml            # Generated thermal layers
+|  |- star_data/                  # Protected stellar cache
+|  |   |- star_properties_distance.pkl (2.6 MB)
+|  |   |- star_properties_magnitude.pkl (31.8 MB)
+|  |   |- hipparcos_data_distance.vot (899 KB)
+|  |   |- hipparcos_data_magnitude.vot (193 KB)
+|  |   |- gaia_data_distance.vot (9.8 MB)
+|  |   |- gaia_data_magnitude.vot (291 MB)
+|  |   |- *_metadata.json files
+|  |- reports/                    # Generated analysis reports
+|      |- last_plot_report.json
+|      |- last_plot_data.json
+|      |- report_*.json (archived with timestamps)
+|
+|- tonyquintanilla.github.io/    # Website repo (GitHub Pages)
+   |- index.html                 # Gallery viewer (single-page app)
+   |- gallery/                   # JSON visualization data
+   |   |- *.json                 # Converted Plotly figures
+   |   |- gallery_metadata.json  # Titles, categories, ordering
+   |- tools/                     # Gallery management tools
+   |   |- gallery_studio.py      # Per-plot curation GUI
+   |   |- json_converter.py      # HTML-to-JSON converter
+   |   |- gallery_editor.py      # Metadata editor GUI
+   |   |- gallery_config.json    # Category definitions
+   |   |- gallery_studio_configs.json  # Saved per-plot settings
+   |- gallery_config.json        # Category definitions (root copy)
+   |- CNAME                      # Custom domain (palomasorrery.com)
+   |- web_gallery_handoff.md     # Technical documentation
+   |- README.md
 ```
+
+**Why two repos?** GitHub Pages requires its own repository. The app repo
+stays clean for users who download it. The website repo holds the gallery
+viewer and publishing tools. Both are public (required for free GitHub
+Pages).
+
+**Cross-repo imports:** gallery_studio.py (in `tools/`) imports
+`social_media_export.py` and `constants_new.py` from the `orrery/`
+directory. It resolves the path by walking up the directory tree.
 
 ### Cache Files (Included in Release)
 
@@ -908,11 +980,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Author:** Tony Quintanilla
 **Email:** <tonyquintanilla@gmail.com>
 **GitHub:** [github.com/tonylquintanilla/palomas_orrery](https://github.com/tonylquintanilla/palomas_orrery)
-**Website:** [tonylquintanilla.github.io/palomas_orrery](https://tonylquintanilla.github.io/palomas_orrery/)
+**Website:** [palomasorrery.com](https://palomasorrery.com/)
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** February 2026 (v2.4.0 - Social Media Export, Galactic Center, Unified Save System & Resizable GUI)
+**Last Updated:** February 2026 (v2.4.0 - Web Gallery, Social Media Export, Galactic Center, Unified Save System & Resizable GUI)
 
 ---
 

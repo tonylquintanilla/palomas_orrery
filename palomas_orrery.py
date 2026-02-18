@@ -8028,13 +8028,12 @@ create_exoplanet_checkbutton("  - TRAPPIST-1 h (18.8d)", trappist1h_var)
 tk.Label(exoplanet_frame, text="").pack()  # Spacer
 
 # TOI-1338 Binary System (1,292 light-years)
-#create_exoplanet_checkbutton("TOI-1338 Binary (1,292 ly)", toi1338_starA_var, is_star=True)
-create_exoplanet_checkbutton("TOI-1338 Binary", toi1338_barycenter_var, is_star=True)
-#create_exoplanet_checkbutton("  - TOI-1338 A/B (Barycenter)", toi1338_barycenter_var)
-#create_exoplanet_checkbutton("  - TOI-1338 A (G-type)", toi1338_starA_var)
-#create_exoplanet_checkbutton("  - TOI-1338 B (M-type)", toi1338_starB_var)
-create_exoplanet_checkbutton("  - TOI-1338 b", toi1338b_var)
-create_exoplanet_checkbutton("  - TOI-1338 c", toi1338c_var)
+create_exoplanet_checkbutton("TOI-1338 Binary (1,292 ly)", toi1338_barycenter_var, is_star=True)
+create_exoplanet_checkbutton("  - TOI-1338 A/B (Barycenter)", toi1338_barycenter_var)
+create_exoplanet_checkbutton("  - TOI-1338 A (G-type)", toi1338_starA_var)
+create_exoplanet_checkbutton("  - TOI-1338 B (M-type)", toi1338_starB_var)
+create_exoplanet_checkbutton("  - TOI-1338 b (95d)", toi1338b_var)
+create_exoplanet_checkbutton("  - TOI-1338 c (216d)", toi1338c_var)
 
 tk.Label(exoplanet_frame, text="").pack()  # Spacer
 
