@@ -52,3 +52,16 @@ graph TD
 
 *   **Reporting & Infrastructure Module**
     *   *Documentation not provided in the repository structure.* This module likely contains utilities for generating reports, managing data exchange between components, and handling application-level infrastructure concerns.
+
+<script src="[https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js](https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js)"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("code.language-mermaid").forEach(function(block) {
+            let div = document.createElement("div");
+            div.className = "mermaid";
+            div.textContent = block.textContent;
+            block.parentElement.replaceWith(div);
+        });
+        mermaid.initialize({startOnLoad: true});
+    });
+</script> 
