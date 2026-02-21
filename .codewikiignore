@@ -1,0 +1,16 @@
+# Ignore all data and cache directories
+data/
+star_data/
+reports/
+tools/
+
+# Ignore massive data files
+*.json
+*.html
+*.kml
+*.vot
+*.pkl
+*.csv
+*.png
+*.bat
+*.sh
