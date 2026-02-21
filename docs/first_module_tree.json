@@ -1,0 +1,58 @@
+{
+    "mission_control": {
+        "path": "mission_control/",
+        "components": [
+            "earth_system_controller.MissionControlApp",
+            "earth_system_generator.MissionSelector"
+        ],
+        "children": {}
+    },
+    "data_and_cache_services": {
+        "path": "data_services/",
+        "components": [
+            "simbad_manager.SimbadConfig",
+            "simbad_manager.SimbadQueryManager",
+            "simbad_manager.QueryStats",
+            "simbad_manager.RateLimiter",
+            "incremental_cache_manager.CacheMetadata",
+            "incremental_cache_manager.IncrementalCacheManager",
+            "incremental_cache_manager.SimbadCacheManager",
+            "vot_cache_manager.VOTCacheMetadata",
+            "vot_cache_manager.VOTCacheManager",
+            "messier_object_data_handler.MessierObjectHandler",
+            "object_type_analyzer.ObjectTypeAnalyzer"
+        ],
+        "children": {}
+    },
+    "orrery_and_orbital_system": {
+        "path": "orrery_system/",
+        "components": [
+            "refined_orbits.RefinedOrbitSystem",
+            "orrery_integration.OrreryConfiguration",
+            "palomas_orrery.CreateToolTip",
+            "palomas_orrery.ScrollableFrame",
+            "orbital_param_viz.CreateToolTip"
+        ],
+        "children": {}
+    },
+    "star_visualization": {
+        "path": "star_visualization/",
+        "components": [
+            "star_visualization_gui.StarVisualizationGUI",
+            "star_visualization_gui.LazyStarPropertiesLoader",
+            "star_visualization_gui.ScrollableFrame",
+            "star_visualization_gui.StarVisualizationSearchWidget"
+        ],
+        "children": {}
+    },
+    "reporting_and_infrastructure": {
+        "path": "infrastructure/",
+        "components": [
+            "report_manager.ReportManager",
+            "plot_data_report_widget.PlotDataReportWidget",
+            "plot_data_exchange.PlotDataExchange",
+            "shutdown_handler.PlotlyShutdownHandler"
+        ],
+        "children": {}
+    }
+}

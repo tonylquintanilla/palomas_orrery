@@ -588,6 +588,44 @@ The save dialog remembers your last save location within each session.
 5. **Export:** CDN or offline HTML, PNG images
 6. **Gallery:** JSON extraction, GitHub Pages deployment at palomasorrery.com
 
+### Development Complexity
+
+Paloma's Orrery is not enterprise software. Commercial codebases are orders
+of magnitude larger, maintained by teams of hundreds over decades. But for a
+project built by a single developer without formal CS training, using
+conversational AI collaboration, the system has grown to a scale that is
+worth noting.
+
+**System scale:** 75+ Python modules, over 78,000 lines of code, five
+parallel data pipelines for position calculations, 1,350+ cached orbital
+trajectories across 15 center objects, and a full web publishing pipeline
+from desktop application through curation studio to browser-based gallery.
+
+**Domain specificity:** Coordinate frame errors look plausible but are
+physically wrong -- an orbit plotted in the equatorial frame when the data
+is ecliptic appears rotated by 23.4 degrees, and nothing will error out.
+The system handles osculating orbital elements, Schwarzschild precession,
+binary star mass ratios, and the distinction between JPL ephemeris data,
+calculated Keplerian elements, and cached approximations. Visual
+verification catches physics errors that code review misses.
+
+**Pipeline depth:** A change to hover text formatting can touch the desktop
+app's trace generation, the social media export parser, the Gallery Studio's
+hover routing, the JSON converter's extraction, and the web gallery's
+display logic. Five consumers of the same data, each with its own path.
+
+**What makes it interesting:** The complexity-to-team-size ratio. This is
+the kind of system that would traditionally require a small team of
+specialists -- astronomical software, web development, GUI design, data
+pipeline engineering. Conversational AI collaboration compresses that:
+the developer provides vision, domain knowledge, and judgment while AI
+partners handle implementation, pattern recognition, and documentation.
+The conversation is the development environment, and the accumulated
+context across months of sessions shapes every decision. This project
+would not have been possible before AI-assisted development. It began in
+September 2024 and has grown alongside the rapidly improving capabilities
+of the AI models themselves.
+
 ## Earth System Visualization
 
 Access the Earth System Hub from the main interface to explore climate data:

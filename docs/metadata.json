@@ -1,0 +1,23 @@
+{
+    "generation_info": {
+        "timestamp": "2026-02-21T00:49:04.483915",
+        "main_model": "gemini-2.5-flash",
+        "generator_version": "1.0.1",
+        "repo_path": "C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\palomas_orrery_for_github",
+        "commit_id": null
+    },
+    "statistics": {
+        "total_components": 779,
+        "leaf_nodes": 27,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "data_and_cache_services.md",
+        "earth_system_generator.md",
+        "mission_control.md",
+        "simbad_manager.md"
+    ]
+}
