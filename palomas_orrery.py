@@ -2368,6 +2368,14 @@ comet_atlas_var = tk.IntVar(value=0)
 
 comet_lemmon_var = tk.IntVar(value=0)
 
+comet_tempel2_var = tk.IntVar(value=0)
+
+comet_schaumasse_var = tk.IntVar(value=0)
+
+comet_howell_var = tk.IntVar(value=0)
+
+comet_wierzchos_var = tk.IntVar(value=0)
+
 oumuamua_var = tk.IntVar(value=0)
 
 atlas3i_var = tk.IntVar(value=0)
@@ -7855,20 +7863,34 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
     tooltip_text = f"{info_text}\nPerihelion: {perihelion}"
     CreateToolTip(checkbutton, tooltip_text)
 
-create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
-                         "October 21, 1965")    # params 
+create_comet_checkbutton("Tempel 2", comet_tempel2_var, "(1873-present, periodic)",
+                         "August 2, 2026")  # 10P, 5.37-year period, Deep Space 1 flyby 2001
+
 create_comet_checkbutton("Halley", comet_halley_var, "(1900-1-1 to 1994-1-11)",      
                          # data arc: 1835-08-21 to 1994-01-11
                          "February 8, 1986")    # 1986-Feb-08.1983372075
+
+create_comet_checkbutton("Schaumasse", comet_schaumasse_var, "(1911-present, periodic)",
+                         "January 8, 2026")  # 24P, 8.25-year period
+
+create_comet_checkbutton("Ikeya-Seki", comet_ikeya_seki_var, "(1965-09-21 to 1966-01-14)", 
+                         "October 21, 1965")    # params 
+
+create_comet_checkbutton("Howell", comet_howell_var, "(1981-present, periodic)",
+                         "March 18, 2026")  # 88P, 5.5-year period
+
 create_comet_checkbutton("Hyakutake", comet_hyakutake_var, "(1996-01-02 to 1996-11-01)", 
                          "May 1, 1996") # data arc: 1996-01-01 to 1996-11-02
+
 create_comet_checkbutton("Hale-Bopp", comet_hale_bopp_var, "(1993-04-27 to 2022-07-09)", 
                          "March 30, 1997")
                         # data arc: 1993-04-27 to 2022-07-09; TP= 1997-Mar-29.6349071441
+
 create_comet_checkbutton("67P/Churyumov-Gerasimenko", comet_Churyumov_Gerasimenko_var, "(2008-6-2 to 2023-4-25)", 
                         "August 13, 2015")  # params
 # datetime(1962, 1, 20), 'end_date': datetime(2025, 12, 31) replacing datetime (2002, 11, 22), 'end_date': datetime(2021, 5, 1)
 # there are also params for "halley geocentric"
+
 create_comet_checkbutton("NEOWISE", comet_neowise_var, "(2020-03-27 to 2021-06-01)", 
                          "July 3, 2020")    # params
 
@@ -7925,6 +7947,9 @@ create_interstellar_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-08 to 
 create_interstellar_checkbutton("Tsuchinshan", comet_tsuchinshan_atlas_var, "(2022-04-09 to 2029-12-31)",
 # data arc: 2022-04-09 to 2025-10-02 PREDICTS-> 2025-DEC-29
                          "September 28, 2024")
+
+create_interstellar_checkbutton("Wierzchos", comet_wierzchos_var, "(2024-02-15 to 2026+)",
+                         "January 20, 2026")  # C/2024 E1, CO2-driven Oort Cloud comet
 
 create_interstellar_checkbutton("ATLAS", comet_atlas_var, "(2024-04-05 to 2025-12-29)", 
 # PREDICTS-> 2025-DEC-29    data arc: 2024-04-05 to 2025-01-01  Horizons accepts all dates                         

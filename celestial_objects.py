@@ -473,6 +473,31 @@ OBJECT_DEFINITIONS = [
 
     # Comets
 
+    {'name': 'Tempel 2', 'id': '90000214', 'var_name': 'comet_tempel2_var', 'color_key': 'Tempel 2', 'symbol': 'diamond',
+    'object_type': 'orbital', 'id_type': 'smallbody',
+    # Jupiter-family periodic comet, period 5.37 years. Nucleus ~16x9 km (well-studied).
+    # Perihelion: Aug 2, 2026 at 1.42 AU. Discovered 1873 by Wilhelm Tempel.
+    # Deep Space 1 flyby in 2001.
+    # ID: Record 90000214 (2013 epoch) - most recent solution. '10P' is ambiguous (22 records).
+    'mission_info': 'Horizons: 10P. Jupiter-family comet, 5.37-year period. Discovered 1873 by Wilhelm Tempel. Deep Space 1 flyby 2001.',
+    'mission_url': 'https://en.wikipedia.org/wiki/10P/Tempel'},
+
+    {'name': 'Schaumasse', 'id': '90000355', 'var_name': 'comet_schaumasse_var', 'color_key': 'Schaumasse', 'symbol': 'diamond',
+    'object_type': 'orbital', 'id_type': 'smallbody',
+    # Jupiter-family periodic comet, period 8.252 years. Nucleus ~2.6 km.
+    # Perihelion: Jan 8, 2026 at 1.18 AU. Discovered 1911 by Alexandre Schaumasse.
+    # ID: Record 90000355 (2021 epoch) - most recent solution. '24P' is ambiguous (12 records).
+    'mission_info': 'Horizons: 24P. Jupiter-family comet, 8.25-year period. Discovered 1911. Perihelion Jan 8, 2026 at 1.18 AU.',
+    'mission_url': 'https://en.wikipedia.org/wiki/24P/Schaumasse'},
+
+    {'name': 'Howell', 'id': '90000897', 'var_name': 'comet_howell_var', 'color_key': 'Howell', 'symbol': 'diamond',
+    'object_type': 'orbital', 'id_type': 'smallbody',
+    # Jupiter-family periodic comet, period ~5.5 years.
+    # Perihelion: Mar 18, 2026 at ~1.41 AU. Discovered 1981 by Ellen Howell.
+    # ID: Record 90000897 (2019 epoch) - most recent solution. '88P' is ambiguous (9 records).
+    'mission_info': 'Horizons: 88P. Jupiter-family comet, 5.5-year period. Discovered 1981 by Ellen Howell. Perihelion Mar 18, 2026.',
+    'mission_url': 'https://en.wikipedia.org/wiki/88P/Howell'},
+
     {'name': 'Churyumov', 'id': '90000699', 'var_name': 'comet_Churyumov_Gerasimenko_var', 'color_key': 'Churyumov', # 67P/Churyumov-Gerasimenko
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 
     #'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
@@ -519,6 +544,14 @@ OBJECT_DEFINITIONS = [
     #'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
     'mission_info': 'Horizons: C/2020 F3. Retrograde. Brightest comet visible from the Northern Hemisphere in decades. Retrograde (left-handed) orbit.', 
     'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
+
+    {'name': 'Wierzchos', 'id': 'C/2024 E1', 'var_name': 'comet_wierzchos_var', 'color_key': 'Wierzchos', 'symbol': 'diamond',
+    'object_type': 'orbital', 'id_type': 'smallbody',
+    # data arc: 2024-02-15 to 2026+; near-parabolic, outbound period ~200,000 years
+    # Perihelion: Jan 20, 2026 at 0.562 AU. Closest to Earth: Feb 17, 2026 at ~1.0 AU.
+    # CO2-driven activity (JWST confirmed). Reached mag ~6.8 post-perihelion.
+    'mission_info': 'Horizons: C/2024 E1. CO2-driven Oort Cloud comet. Perihelion Jan 20, 2026 at 0.56 AU. Multiple dust tails post-perihelion.',
+    'mission_url': 'https://apod.nasa.gov/apod/ap260217.html'},
 
     {'name': 'SWAN', 'id': 'C/2025 R2', 'var_name': 'comet_c2025r2_var', 'color_key': 'SWAN', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 

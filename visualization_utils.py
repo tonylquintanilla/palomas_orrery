@@ -307,6 +307,44 @@ def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_
     return fig
 
 
+def _calculate_grid_dtick(axis_span):
+    """
+    Calculate an appropriate grid tick spacing for a given axis span.
+    
+    Aims for ~5-8 gridlines across the view, using clean round numbers.
+    Works across scales from AU (full solar system) down to fractions
+    of AU (comet close-ups where 0.001 AU ~ 150,000 km).
+    
+    Parameters:
+        axis_span (float): Total width of the axis range in AU
+        
+    Returns:
+        float: Appropriate dtick value in AU
+    """
+    import math
+    
+    if axis_span <= 0:
+        return 1.0
+    
+    # Target ~6 gridlines across the span
+    raw_tick = axis_span / 6.0
+    
+    # Round to a clean number: 1, 2, 5 x 10^n
+    exponent = math.floor(math.log10(raw_tick))
+    mantissa = raw_tick / (10 ** exponent)
+    
+    if mantissa < 1.5:
+        clean_mantissa = 1.0
+    elif mantissa < 3.5:
+        clean_mantissa = 2.0
+    elif mantissa < 7.5:
+        clean_mantissa = 5.0
+    else:
+        clean_mantissa = 10.0
+    
+    return clean_mantissa * (10 ** exponent)
+
+
 def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_objects=None, 
                                fly_distance=0.1, distance_scale_factor=0.05):
     """
@@ -357,6 +395,10 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
     
     # Add "Full View" button first if we have original ranges
     if orig_x_range and orig_y_range and orig_z_range:
+        # Calculate original dtick from full axis range
+        orig_span = orig_x_range[1] - orig_x_range[0]
+        orig_dtick = _calculate_grid_dtick(orig_span)
+        
         buttons.append(dict(
             label="Return to Full View",
             method="relayout",
@@ -369,6 +411,12 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
                 "scene.xaxis.range": orig_x_range,
                 "scene.yaxis.range": orig_y_range,
                 "scene.zaxis.range": orig_z_range,
+                "scene.xaxis.dtick": orig_dtick,
+                "scene.yaxis.dtick": orig_dtick,
+                "scene.zaxis.dtick": orig_dtick,
+                "scene.xaxis.title": "X (AU)",
+                "scene.yaxis.title": "Y (AU)",
+                "scene.zaxis.title": "Z (AU)",
                 "scene.aspectmode": "cube",
                 "scene.aspectratio": {"x": 1, "y": 1, "z": 1}
             }]
@@ -403,6 +451,20 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
         new_y_range = [float(target_pos[1]) - view_radius, float(target_pos[1]) + view_radius]
         new_z_range = [float(target_pos[2]) - view_radius, float(target_pos[2]) + view_radius]
         
+        # Adaptive grid: pick dtick so ~5-8 gridlines appear across the view
+        zoom_dtick = _calculate_grid_dtick(view_radius * 2)
+        
+        # Format tick labels: show km equivalent when zoomed in close
+        # At small scales (< 0.1 AU), AU values like 1.357 are hard to interpret
+        zoom_dtick_km = zoom_dtick * 149597870.7
+        if zoom_dtick < 0.01:
+            # Very close: show grid spacing in km in axis title
+            axis_title_suffix = f" (grid: {zoom_dtick_km:,.0f} km)"
+        elif zoom_dtick < 0.1:
+            axis_title_suffix = f" (grid: {zoom_dtick_km/1e6:.1f}M km)"
+        else:
+            axis_title_suffix = ""
+        
         button_args = {
             "scene.camera": {
                 "eye": {"x": 1.5, "y": 1.5, "z": 1.2},
@@ -412,6 +474,12 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
             "scene.xaxis.range": new_x_range,
             "scene.yaxis.range": new_y_range,
             "scene.zaxis.range": new_z_range,
+            "scene.xaxis.dtick": zoom_dtick,
+            "scene.yaxis.dtick": zoom_dtick,
+            "scene.zaxis.dtick": zoom_dtick,
+            "scene.xaxis.title": f"X (AU){axis_title_suffix}",
+            "scene.yaxis.title": f"Y (AU){axis_title_suffix}",
+            "scene.zaxis.title": f"Z (AU){axis_title_suffix}",
             "scene.aspectmode": "cube",
             "scene.aspectratio": {"x": 1, "y": 1, "z": 1}            
         }

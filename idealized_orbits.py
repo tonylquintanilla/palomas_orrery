@@ -176,6 +176,186 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     
     return perturbation_notes.get(obj_name, default_note)
 
+
+def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params):
+    """
+    Compare osculating vs mean orbital elements and return perturbation assessment HTML.
+    
+    The difference between osculating (instantaneous) and mean (long-term average)
+    elements reveals how much an object's orbit is being perturbed right now.
+    For most planets, the difference is tiny (stable orbits). For comets near
+    Jupiter or the Moon under solar perturbation, the difference can be dramatic.
+    
+    Parameters:
+        obj_name (str): Object name
+        osc_params (dict): Current osculating parameters (a, e, i, omega, Omega)
+        mean_params (dict): Mean parameters from orbital_elements.py
+    
+    Returns:
+        str: HTML-formatted perturbation assessment, or empty string if not available
+    """
+    if not mean_params:
+        return ""
+    
+    osc_e = osc_params.get('e', 0)
+    mean_e = mean_params.get('e', 0)
+    osc_a = osc_params.get('a', 0)
+    mean_a = mean_params.get('a', 0)
+    osc_i = osc_params.get('i', 0)
+    mean_i = mean_params.get('i', 0)
+    
+    # Calculate deltas
+    delta_e = osc_e - mean_e
+    delta_i = osc_i - mean_i
+    
+    # Eccentricity assessment (use absolute difference since e can cross 1.0)
+    if mean_e != 0:
+        pct_e = abs(delta_e / mean_e * 100)
+    else:
+        pct_e = abs(delta_e) * 100  # Fallback for circular orbits
+    
+    if pct_e < 1:
+        qual_e = "minimal perturbation"
+    elif pct_e < 5:
+        qual_e = "moderate perturbation"
+    elif pct_e < 20:
+        qual_e = "strong perturbation"
+    else:
+        qual_e = "extreme perturbation"
+    
+    # Semi-major axis assessment
+    delta_a_text = ""
+    if mean_a != 0 and osc_a != 0:
+        # For hyperbolic orbits (negative a), compare magnitudes
+        if mean_a < 0 or osc_a < 0:
+            # Near-parabolic: a can swing wildly, report q (perihelion distance) instead
+            osc_q = abs(osc_a) * abs(osc_e - 1)
+            mean_q = abs(mean_a) * abs(mean_e - 1)
+            delta_q = osc_q - mean_q
+            delta_a_text = f"<br>Delta-q: {delta_q:+.6f} AU"
+        else:
+            delta_a = osc_a - mean_a
+            pct_a = abs(delta_a / mean_a * 100)
+            delta_a_text = f"<br>Delta-a: {delta_a:+.6f} AU ({pct_a:.1f}%)"
+    
+    epoch_str = mean_params.get('epoch', 'N/A')
+    
+    assessment = (
+        f"<br><br><b>Perturbation (osculating vs mean):</b>"
+        f"<br>Delta-e: {delta_e:+.8f} ({qual_e})"
+        f"{delta_a_text}"
+        f"<br>Delta-i: {delta_i:+.4f} deg"
+        f"<br>Mean epoch: {epoch_str}"
+    )
+    
+    return assessment
+
+
+def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
+    """
+    Add a mean orbit trace from orbital_elements.py (JPL epoch solution).
+    
+    Mean elements represent the long-term average orbit, smoothing out
+    short-period perturbations from planetary encounters. Comparing the
+    mean orbit to the osculating (instantaneous) orbit visually reveals
+    perturbation effects:
+    
+    - Planets: mean and osculating nearly overlap (orbital stability)
+    - Comets near perihelion: can differ dramatically (Jupiter perturbations)  
+    - Moon: significant variation (solar perturbations on lunar orbit)
+    - Near-parabolic objects: osculating e oscillates around mean e,
+      sometimes elliptical, sometimes hyperbolic -- same object, different story
+    
+    Parameters:
+        fig: Plotly figure
+        obj_name (str): Object name
+        mean_params (dict): Mean parameters from ORIGINAL_planetary_params
+        color_func: Color mapping function
+    
+    Returns:
+        bool: True if trace was added, False if skipped
+    """
+    if not mean_params:
+        return False
+    
+    mean_a = mean_params.get('a', 0)
+    mean_e = mean_params.get('e', 0)
+    mean_i = mean_params.get('i', 0)
+    mean_omega = mean_params.get('omega', 0)
+    mean_Omega = mean_params.get('Omega', 0)
+    epoch_str = mean_params.get('epoch', 'N/A')
+    
+    if mean_a == 0:
+        return False
+    
+    try:
+        if mean_e > 1:
+            # Hyperbolic mean orbit
+            x_mean, y_mean, z_mean, q_mean = generate_hyperbolic_orbit_points(
+                mean_a, mean_e, mean_i, mean_omega, mean_Omega, rotate_points
+            )
+            orbit_type = "Hyperbolic"
+            orbit_info = f"q={q_mean:.6f} AU"
+        elif mean_e >= 0:
+            # Elliptical mean orbit
+            if mean_e > 0.99:
+                theta_first = np.linspace(0, np.pi, 181)
+                theta_second = np.linspace(np.pi, 2*np.pi, 181)[1:]
+                theta = np.concatenate([theta_first, theta_second])
+            else:
+                theta = np.linspace(0, 2*np.pi, 360)
+            
+            r = mean_a * (1 - mean_e**2) / (1 + mean_e * np.cos(theta))
+            x_orbit = r * np.cos(theta)
+            y_orbit = r * np.sin(theta)
+            z_orbit = np.zeros_like(theta)
+            
+            i_rad = np.radians(mean_i)
+            omega_rad = np.radians(mean_omega)
+            Omega_rad = np.radians(mean_Omega)
+            
+            x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+            x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
+            x_mean, y_mean, z_mean = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
+            
+            orbit_type = "Elliptical"
+            orbit_info = f"a={mean_a:.6f} AU"
+        else:
+            return False
+        
+        # Build hover text
+        hover_text = (
+            f"{obj_name} Mean Orbit (Epoch: {epoch_str})"
+            f"<br>{orbit_type}: e={mean_e:.6f}, {orbit_info}"
+            f"<br>i={mean_i:.2f} deg"
+            f"<br><br><i>Mean elements = JPL long-term solution."
+            f"<br>Compare with osculating orbit to see perturbation effects.</i>"
+        )
+        
+        fig.add_trace(
+            go.Scatter3d(
+                x=x_mean,
+                y=y_mean,
+                z=z_mean,
+                mode='lines',
+                line=dict(dash='longdash', width=1.5, color='white'),
+                name=f"{obj_name} Mean Orbit (Epoch: {epoch_str})",
+                text=[hover_text] * len(x_mean),
+                customdata=[f"{obj_name} Mean Orbit"] * len(x_mean),
+                hovertemplate='%{text}<extra></extra>',
+                visible='legendonly',  # Hidden by default, togglable via legend
+                showlegend=True
+            )
+        )
+        
+        print(f"  Added mean orbit trace for {obj_name} (e={mean_e:.6f}, {orbit_type}, epoch={epoch_str})", flush=True)
+        return True
+        
+    except Exception as err:
+        print(f"  [WARN] Could not add mean orbit for {obj_name}: {err}", flush=True)
+        return False
+
+
 # this function adjusts the orbital elements for phobos and deimos based on perturbations
 def calculate_mars_satellite_elements(date, satellite_name):
     """
@@ -5090,7 +5270,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             line=dict(dash='dot', width=1, color=color_map(obj_name)),
                             name=f"{obj_name} Keplerian Orbit{epoch_str}",
                     #        text=[f"{obj_name} Hyperbolic Orbit<br>eccentricity, e={e:.6f}<br>periapsis distance, q={q:.6f} AU"] * len(x_final),
-                            text=[f"{obj_name} Hyperbolic Orbit<br>e={e:.6f}<br>q={q:.6f} AU{get_planet_perturbation_note(obj_name)}"] * len(x_final),
+                            text=[f"{obj_name} Hyperbolic Orbit<br>e={e:.6f}<br>q={q:.6f} AU{get_planet_perturbation_note(obj_name)}{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"] * len(x_final),
                             customdata=[f"{obj_name} Keplerian Orbit"] * len(x_final),
                             hovertemplate='%{text}<extra></extra>',
                             showlegend=True                    
@@ -5269,6 +5449,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         plotted.append(obj_name)
                         print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.5f}, q={q:.5f} AU", flush=True)
 
+                        # ========== MEAN ORBIT TRACE (from JPL epoch solution) ==========
+                        mean_params = ORIGINAL_planetary_params.get(obj_name, {})
+                        if mean_params:
+                            add_mean_orbit_trace(fig, obj_name, mean_params, color_map)
+
                 except Exception as err:
                     print(f"Error plotting hyperbolic orbit for {obj_name}: {err}", flush=True)
                     import traceback
@@ -5326,7 +5511,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     line=dict(dash='dot', width=1, color=color_map(obj_name)),
                     name=f"{obj_name} Keplerian Orbit{epoch_str}",
             #        text=[f"{obj_name} Keplerian Orbit"] * len(x_final),
-                    text=[f"{obj_name} Keplerian Orbit<br>a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg{get_planet_perturbation_note(obj_name)}"] * len(x_final),
+                    text=[f"{obj_name} Keplerian Orbit<br>a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg{get_planet_perturbation_note(obj_name)}{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"] * len(x_final),
                     customdata=[f"{obj_name} Keplerian Orbit"] * len(x_final),
                     hovertemplate='%{text}<extra></extra>',
                     showlegend=True                    
@@ -5439,21 +5624,21 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 tp_time = Time(params['TP'], format='jd')
                                 tp_datetime = tp_time.datetime
 
-                            # SAFE CALCULATION WITH OVERFLOW PROTECTION
-                            half_period_days = period_days / 2
-                            
-                            try:
-                                # Test if calculation would work
-                                keplerian_aphelion = tp_datetime + timedelta(days=half_period_days)
-                                date_str = f"<br>Date: {keplerian_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC (Keplerian estimate)"
-                                position_description = "<br>Unperturbed Keplerian position at Keplerian apoapsis time"
+                                # SAFE CALCULATION WITH OVERFLOW PROTECTION
+                                half_period_days = period_days / 2
                                 
-                            except (OverflowError, ValueError, OSError):
-                                # Handle overflow gracefully for extremely long periods
-                                years_to_aphelion = int(half_period_days / 365.25)
-                                date_str = f"<br>Date: Far future aphelion (~{years_to_aphelion:,} years after perihelion)"
-                                position_description = "<br>Aphelion date beyond calculation range"
-                                print(f"  Aphelion date overflow for {obj_name} - using fallback message", flush=True)
+                                try:
+                                    # Test if calculation would work
+                                    keplerian_aphelion = tp_datetime + timedelta(days=half_period_days)
+                                    date_str = f"<br>Date: {keplerian_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC (Keplerian estimate)"
+                                    position_description = "<br>Unperturbed Keplerian position at Keplerian apoapsis time"
+                                    
+                                except (OverflowError, ValueError, OSError):
+                                    # Handle overflow gracefully for extremely long periods
+                                    years_to_aphelion = int(half_period_days / 365.25)
+                                    date_str = f"<br>Date: Far future aphelion (~{years_to_aphelion:,} years after perihelion)"
+                                    position_description = "<br>Aphelion date beyond calculation range"
+                                    print(f"  Aphelion date overflow for {obj_name} - using fallback message", flush=True)
 
                 # CONTEXT: This fix ensures that:
                 # - The 3D aphelion marker still appears correctly in the plot
@@ -5728,6 +5913,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     
             # Mark this object as successfully plotted
             plotted.append(obj_name)
+
+            # ========== MEAN ORBIT TRACE (from JPL epoch solution) ==========
+            mean_params = ORIGINAL_planetary_params.get(obj_name, {})
+            if mean_params:
+                add_mean_orbit_trace(fig, obj_name, mean_params, color_map)
 
     # Print summary of plotted and skipped objects
     print("\nKeplerian Orbit Summary:", flush=True)

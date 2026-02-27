@@ -15,6 +15,10 @@ COMET_NUCLEUS_SIZES = {
     'Hyakutake': 4,  # ~4 km
     'Lemmon': 3,  # ~3 km (estimated) C/2025 A6
     '3I/ATLAS': 8,  # ~8 km (estimated, interstellar object)
+    'Wierzchos': 5,  # ~2-10 km (JWST estimates), using midpoint
+    'Schaumasse': 3,  # ~2.6 km nucleus
+    'Howell': 3,  # ~3 km (estimated)
+    'Tempel 2': 16,  # ~16x9 km, elongated nucleus (well-studied by Deep Space 1)
     'default': 5  # Default size for generic comets
 }
 
@@ -119,8 +123,7 @@ HISTORICAL_TAIL_DATA = {
     # - SPHEREx measured CO2 coma radius: ~3.5x10^5 km (~0.0023 AU)
     # - ESA Mars flyby (Oct 3, 2025): Imaged at ~30M km, no tail length released
     # - Colors reflect red-sloped, dust-rich appearance in imaging
-    # - Anti-tail feature mentioned in some reports, not yet confirmed
-    # Data arc: 2025-05-15 to 2025-09-21 (646 observations over 129 days)    
+    # Data arc: 2025-05-15 to 2025-09-21 (646 observations over 129 days)
 
     #    'max_dust_tail_length_mkm': 8,  # PRELIMINARY: model-based estimate
     #    'max_ion_tail_length_mkm': 15,  # PRELIMINARY: model-based, multi-million km extent
@@ -137,31 +140,95 @@ HISTORICAL_TAIL_DATA = {
     #    'preliminary_data': True,  # Flag for tail measurement uncertainty
     #    'max_active_distance_au': 2.5  # Conservative estimate for CO2-driven activity
 
-# 3I/ATLAS UPDATED DATA (December 2025):
+# 3I/ATLAS UPDATED DATA (February 2026):
         # - Perihelion: Oct 29.48, 2025 at 1.356 AU (between Mars and Earth)
         # - Closest to Earth: Dec 19, 2025 (~1.8 AU)
+        # - Opposition: Jan 22, 2026 (Sun-Earth-3I aligned to 0.69 deg)
         # - Dynamics: e ~ 6.14, v_inf ~ 58 km/s (Fastest interstellar object yet)
-        # - Size: Nucleus estimated < 5.6 km (Jewitt et al. 2025)
-        
-        'max_dust_tail_length_mkm': 12,  # Increased based on post-perihelion "smoking tail" reports
-        'max_ion_tail_length_mkm': 25,  # Models adjusted for high gas/nickel production
+        # - Size: Nucleus 0.82-5.6 km (Jewitt/Forbes); rotation 7.1 hr
+        # - Ni/Fe ratio: 3.2 pre-perihelion -> 1.1 by late Jan (approaching solar values)
+        # - SPHEREx Dec 2025: "fully active" - H2O, CO2, CO, organics, warm dust
+        # - Post-perihelion outgassing now CO-dominated (surface ices depleted)
+        # - Hubble Jan 7/14/22: quad-jet structure with prominent anti-tail
+        #   Anti-tail: ~400,000 km sunward, tightly collimated, wobbles +/-20 deg
+        #   with 7.2 hr period. Rotation axis aligned within 7 deg of Sun.
+        # - VLT polarimetry: 38% linear polarization in anti-tail (sub-micron silicates)
+        # - Feb 2026: mag ~16.7, coma contracted to 1.8 arcmin, faint dust tail 6 arcmin
+        # - Next event: Jupiter flyby Mar 16, 2026 at 0.358 AU
+
+        'max_dust_tail_length_mkm': 12,  # Post-perihelion dust tail confirmed in long exposures
+        'max_ion_tail_length_mkm': 25,  # Models adjusted for high gas production
         'peak_brightness_mag': 9.5,      # Observed peak near perihelion
         'perihelion_distance_au': 1.356,
         'description': "3I/ATLAS (C/2025 N1) - Third confirmed interstellar object. "
                        "Post-perihelion 'greening' due to C2 release; "
                        "CO2-dominated (8:1 ratio over water). High non-gravitational "
-                       "acceleration observed due to complex outgassing jets."
-                       "Anti-tail: gray/faint silver, visible perspective feature in Nov 2025 images.",
-        'coma_color': '#50FF78',          # UPDATED: Shifted from red/green to distinct green post-perihelion. Bright Green: Dominated by C2 emissions.
-        'dust_tail_color': '#F5EBB4',     # Retains standard reflected sunlight profile. Pale Yellow-White: Reflective sunlight off dust particles.
-        'ion_tail_color': '#55AAFF',      # UPDATED: Bluer than Sun; consistent with gas emission. 
-                                            # Azure/Cyan: "Vividly blue" and "sharply defined" in images from the Virtual Telescope Project.
+                       "acceleration observed due to complex outgassing jets. "
+                       "Hubble quad-jet structure with ~400,000 km anti-tail. "
+                       "Rotation 7.1 hr, Ni/Fe ratio converging toward solar values. "
+                       "Jupiter flyby Mar 16, 2026 at 0.358 AU.",
+        'coma_color': '#50FF78',          # Bright Green: Dominated by C2 emissions post-perihelion
+        'dust_tail_color': '#F5EBB4',     # Pale Yellow-White: Reflective sunlight off dust particles
+        'ion_tail_color': '#55AAFF',      # Azure/Cyan: "Vividly blue" ion tail (Virtual Telescope Project)
         'hyperbolic': True,
         'co2_rich': True,
-        'preliminary_data': False,          # Data now well-constrained by Gemini/Hubble/Webb
-        'max_active_distance_au': 5.5       # Increased: Activity noted out to ~6 AU inbound
+        'preliminary_data': False,          # Data now well-constrained by Hubble/SPHEREx/VLT
+        'max_active_distance_au': 5.5,      # Activity noted out to ~6 AU inbound
+        # Anti-tail properties (Hubble Jan 7/14/22, 2026)
+        'anti_tail_length_km': 400000,      # ~400,000 km sunward (Earth-Moon distance scale)
+        'anti_tail_color': '#C0C0C8',       # Gray/faint silver per imaging reports
+        'anti_tail_collimation': 0.1,       # ~10:1 length-to-width (tightly collimated jet)
+        'jet_count': 4,                     # Quad-jet: 1 anti-tail + 3 mini-jets at 120 deg spacing (Hubble Jan 2026)
     },
 
+    'Wierzchos': {
+        'max_dust_tail_length_mkm': 5,
+        'max_ion_tail_length_mkm': 12,
+        'peak_brightness_mag': 6.8,
+        'perihelion_distance_au': 0.562,
+        'description': "Comet C/2024 E1 (Wierzchos) - CO2-driven Oort Cloud comet, "
+                       "3 dust tails (fan structure) and 5-degree ion tail post-perihelion Jan 2026. "
+                       "APOD Feb 17 2026. Near-parabolic orbit, ~200,000 year outbound period.",
+        'coma_color': 'green',
+        'dust_tail_color': 'yellow',
+        'ion_tail_color': 'blue',
+        'dust_tail_count': 3,       # APOD Feb 17, 2026: 3 dust tails in fan pattern
+        # Two short tails fan NW, one broader ~2 deg tail NE (Coquimbo obs Feb 13, 2026)
+        'dust_tail_fan_angle': 40   # Half-angle of fan spread in degrees
+    },
+    'Schaumasse': {
+        'max_dust_tail_length_mkm': 2,
+        'max_ion_tail_length_mkm': 5,
+        'peak_brightness_mag': 9.0,
+        'perihelion_distance_au': 1.18,
+        'description': "24P/Schaumasse - Jupiter-family periodic comet, 8.25 year period. "
+                       "Discovered 1911 by Alexandre Schaumasse. Nucleus ~2.6 km.",
+        'coma_color': 'green',
+        'dust_tail_color': 'yellow',
+        'ion_tail_color': 'blue'
+    },
+    'Howell': {
+        'max_dust_tail_length_mkm': 2,
+        'max_ion_tail_length_mkm': 4,
+        'peak_brightness_mag': 10.0,
+        'perihelion_distance_au': 1.41,
+        'description': "88P/Howell - Jupiter-family periodic comet, 5.5 year period. "
+                       "Discovered 1981 by Ellen Howell. Southern hemisphere favored.",
+        'coma_color': 'green',
+        'dust_tail_color': 'yellow',
+        'ion_tail_color': 'blue'
+    },
+    'Tempel 2': {
+        'max_dust_tail_length_mkm': 3,
+        'max_ion_tail_length_mkm': 6,
+        'peak_brightness_mag': 8.0,
+        'perihelion_distance_au': 1.42,
+        'description': "10P/Tempel 2 - Jupiter-family periodic comet, 5.37 year period. "
+                       "Discovered 1873 by Wilhelm Tempel. Well-studied nucleus ~16x9 km.",
+        'coma_color': 'green',
+        'dust_tail_color': 'yellow',
+        'ion_tail_color': 'blue'
+    },
     'default': {
         'max_dust_tail_length_mkm': 10,
         'max_ion_tail_length_mkm': 20,
@@ -690,6 +757,187 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
     return [trace]
 
 
+def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000,
+                           activity_factor=1.0, comet_name="Generic",
+                           anti_tail_color='#C0C0C8', collimation_ratio=0.1,
+                           num_particles=200):
+    """
+    Creates anti-tail jet structure pointing TOWARD the Sun.
+    
+    For 3I/ATLAS, Hubble observations (Jan 7/14/22, 2026) revealed a quad-jet
+    structure: 1 dominant anti-tail (sunward) + 3 mini-jets at 120 deg spacing.
+    None of the mini-jets point anti-sunward as expected for a normal comet tail.
+    The anti-tail extends ~400,000 km, tightly collimated (~10:1 length-to-width).
+    The jet system wobbles +/-20 deg with a 7.2 hr rotation period.
+    
+    If the comet's data includes 'jet_count' > 1, mini-jets are rendered in the
+    plane perpendicular to the sunward axis at equal angular spacing. Mini-jets
+    are shorter (~40% of anti-tail) and dimmer (~60% brightness).
+    
+    Parameters:
+    -----------
+    center_position : tuple
+        (x, y, z) position in AU
+    anti_tail_length_km : float
+        Length of anti-tail in km (e.g., 400,000 for 3I/ATLAS)
+    activity_factor : float
+        0-1, scales brightness and length
+    comet_name : str
+        Name of the comet
+    anti_tail_color : str
+        Hex color for the anti-tail (default gray/silver)
+    collimation_ratio : float
+        Width-to-length ratio (0.1 = 10:1 length-to-width, tightly collimated)
+    num_particles : int
+        Number of particles for the DOMINANT anti-tail jet
+    """
+    if activity_factor < 0.05:
+        return []
+    
+    # Calculate SUNWARD direction (opposite of normal tail direction)
+    center_x, center_y, center_z = center_position
+    sun_distance = math.sqrt(center_x**2 + center_y**2 + center_z**2)
+    
+    if sun_distance < 1e-10:
+        return []
+    
+    # Unit vector TOWARD the Sun
+    sun_dir_x = -center_x / sun_distance
+    sun_dir_y = -center_y / sun_distance
+    sun_dir_z = -center_z / sun_distance
+    
+    # Build perpendicular basis vectors (reused for all jets)
+    if abs(sun_dir_z) < 0.9:
+        perp1_x = -sun_dir_y
+        perp1_y = sun_dir_x
+        perp1_z = 0
+    else:
+        perp1_x = 1
+        perp1_y = 0
+        perp1_z = -sun_dir_x / sun_dir_z if abs(sun_dir_z) > 1e-10 else 0
+    
+    perp1_len = math.sqrt(perp1_x**2 + perp1_y**2 + perp1_z**2)
+    if perp1_len > 1e-10:
+        perp1_x /= perp1_len
+        perp1_y /= perp1_len
+        perp1_z /= perp1_len
+    
+    perp2_x = sun_dir_y * perp1_z - sun_dir_z * perp1_y
+    perp2_y = sun_dir_z * perp1_x - sun_dir_x * perp1_z
+    perp2_z = sun_dir_x * perp1_y - sun_dir_y * perp1_x
+    
+    # Parse color - support hex colors directly
+    if anti_tail_color.startswith('#'):
+        hex_color = anti_tail_color.lstrip('#')
+        base_r = int(hex_color[0:2], 16)
+        base_g = int(hex_color[2:4], 16)
+        base_b = int(hex_color[4:6], 16)
+    else:
+        color_palette = COMET_COLOR_PALETTES.get(anti_tail_color, COMET_COLOR_PALETTES['white'])
+        base_r, base_g, base_b = color_palette['base_rgb']
+    
+    # --- Helper: generate one jet as a particle cloud ---
+    def _make_jet_particles(jet_dir, length_au, n_particles, alpha_scale=1.0):
+        """Create particle positions and colors for a single jet."""
+        jx, jy, jz = jet_dir
+        half_angle = math.degrees(math.atan(collimation_ratio))
+        pts_x, pts_y, pts_z = [], [], []
+        
+        for i in range(n_particles):
+            dist = (i / n_particles) * length_au
+            max_r = dist * math.tan(math.radians(half_angle))
+            theta = np.random.uniform(0, 2 * math.pi)
+            r = np.random.uniform(0, max_r) * np.random.random()**0.5
+            
+            pts_x.append(center_x + dist * jx + r * (math.cos(theta) * perp1_x + math.sin(theta) * perp2_x))
+            pts_y.append(center_y + dist * jy + r * (math.cos(theta) * perp1_y + math.sin(theta) * perp2_y))
+            pts_z.append(center_z + dist * jz + r * (math.cos(theta) * perp1_z + math.sin(theta) * perp2_z))
+        
+        colors = []
+        for i in range(n_particles):
+            dist_factor = 1 - (i / n_particles)
+            alpha = (0.4 + 0.2 * activity_factor) * (dist_factor ** 0.8) * alpha_scale
+            alpha = max(alpha, 0.05)
+            colors.append(f'rgba({base_r}, {base_g}, {base_b}, {alpha:.3f})')
+        
+        return pts_x, pts_y, pts_z, colors
+    
+    traces = []
+    
+    # --- 1. Dominant anti-tail (sunward jet) ---
+    effective_length_km = anti_tail_length_km * activity_factor
+    anti_tail_au = effective_length_km / KM_PER_AU
+    
+    at_x, at_y, at_z, at_colors = _make_jet_particles(
+        (sun_dir_x, sun_dir_y, sun_dir_z), anti_tail_au, num_particles, alpha_scale=1.0
+    )
+    
+    description = (
+        f"Anti-tail (Sunward Jet) of {comet_name}<br>"
+        f"Length: ~{effective_length_km:,.0f} km toward the Sun<br>"
+        f"Collimation: ~{int(1/collimation_ratio)}:1 length-to-width ratio<br>"
+        f"This is a physical sunward jet, NOT a perspective effect.<br>"
+        f"Possibly composed of icy fragments or large dust grains<br>"
+        f"that resist solar radiation pressure."
+    )
+    
+    traces.append(go.Scatter3d(
+        x=at_x, y=at_y, z=at_z,
+        mode='markers',
+        marker=dict(size=1.4, color=at_colors, opacity=1.0),
+        name=f'{comet_name}: Anti-tail',
+        text=[description] * len(at_x),
+        customdata=[f'{comet_name}: Anti-tail'] * len(at_x),
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    ))
+    
+    # --- 2. Mini-jets (if jet_count > 1 in comet data) ---
+    comet_data = HISTORICAL_TAIL_DATA.get(comet_name, HISTORICAL_TAIL_DATA['default'])
+    jet_count = comet_data.get('jet_count', 1)
+    
+    if jet_count > 1:
+        num_mini_jets = jet_count - 1  # e.g., 3 mini-jets for quad-jet
+        mini_jet_length_au = anti_tail_au * 0.4  # ~40% of anti-tail length
+        mini_particles = num_particles // 3  # Fewer particles per mini-jet
+        
+        for j in range(num_mini_jets):
+            # Equally spaced in the plane perpendicular to sunward axis
+            angle = (2 * math.pi * j) / num_mini_jets
+            
+            # Mini-jet direction: combination of perpendicular vectors
+            # These jets radiate outward from the nucleus, NOT anti-sunward
+            mj_dir_x = math.cos(angle) * perp1_x + math.sin(angle) * perp2_x
+            mj_dir_y = math.cos(angle) * perp1_y + math.sin(angle) * perp2_y
+            mj_dir_z = math.cos(angle) * perp1_z + math.sin(angle) * perp2_z
+            
+            mj_x, mj_y, mj_z, mj_colors = _make_jet_particles(
+                (mj_dir_x, mj_dir_y, mj_dir_z), mini_jet_length_au,
+                mini_particles, alpha_scale=0.6  # Dimmer than anti-tail
+            )
+            
+            mini_desc = (
+                f"Mini-jet {j+1} of {comet_name}<br>"
+                f"One of {num_mini_jets} jets at 120 deg spacing<br>"
+                f"in the plane perpendicular to the sunward axis.<br>"
+                f"None point anti-sunward (anomalous for comets).<br>"
+                f"Hubble Jan 2026: quad-jet structure confirmed."
+            )
+            
+            traces.append(go.Scatter3d(
+                x=mj_x, y=mj_y, z=mj_z,
+                mode='markers',
+                marker=dict(size=1.0, color=mj_colors, opacity=1.0),
+                name=f'{comet_name}: Mini-jet {j+1}',
+                text=[mini_desc] * len(mj_x),
+                customdata=[f'{comet_name}: Mini-jet {j+1}'] * len(mj_x),
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=True
+            ))
+    
+    return traces
+
+
 def create_complete_comet_visualization(comet_name='Halley', center_position=(0, 0, 0),
                                        velocity_vector=(0, 0, 0), current_distance_au=None):
     """
@@ -741,10 +989,81 @@ def create_complete_comet_visualization(comet_name='Halley', center_position=(0,
         coma_size = 50000 + 150000 * activity_factor
         traces.extend(create_comet_coma(center_position, coma_size, activity_factor, comet_name))
     
-    # 3. Dust tail
+    # 3. Dust tail(s)
     dust_length = comet_data['max_dust_tail_length_mkm']
-    traces.extend(create_comet_dust_tail(center_position, velocity_vector, dust_length, 
-                                        activity_factor, comet_name))
+    dust_tail_count = comet_data.get('dust_tail_count', 1)
+    
+    if dust_tail_count <= 1:
+        # Standard single dust tail
+        traces.extend(create_comet_dust_tail(center_position, velocity_vector, dust_length, 
+                                            activity_factor, comet_name))
+    else:
+        # Multiple dust tails in a fan pattern
+        # Fan uses perpendicular basis vectors to spread tails around the primary direction
+        fan_half_angle = comet_data.get('dust_tail_fan_angle', 30)  # degrees
+        
+        center_x, center_y, center_z = center_position
+        sun_dist = math.sqrt(center_x**2 + center_y**2 + center_z**2)
+        
+        if sun_dist > 1e-10:
+            # Build perpendicular basis for fan spread
+            anti_sun = (center_x/sun_dist, center_y/sun_dist, center_z/sun_dist)
+            
+            # Find a perpendicular vector using cross product with Z-up
+            perp1_x = anti_sun[1] * 1 - anti_sun[2] * 0  # cross with (0,0,1)
+            perp1_y = anti_sun[2] * 0 - anti_sun[0] * 1
+            perp1_z = anti_sun[0] * 0 - anti_sun[1] * 0
+            perp1_mag = math.sqrt(perp1_x**2 + perp1_y**2 + perp1_z**2)
+            
+            if perp1_mag < 1e-10:
+                # Anti-sun is along Z, use X as reference
+                perp1_x, perp1_y, perp1_z = 1, 0, 0
+                perp1_mag = 1.0
+            
+            perp1_x /= perp1_mag
+            perp1_y /= perp1_mag
+            perp1_z /= perp1_mag
+            
+            # Second perpendicular (cross anti_sun x perp1)
+            perp2_x = anti_sun[1]*perp1_z - anti_sun[2]*perp1_y
+            perp2_y = anti_sun[2]*perp1_x - anti_sun[0]*perp1_z
+            perp2_z = anti_sun[0]*perp1_y - anti_sun[1]*perp1_x
+            
+            fan_rad = math.radians(fan_half_angle)
+            
+            for t_idx in range(dust_tail_count):
+                # Spread tails evenly across fan angle
+                if dust_tail_count == 1:
+                    angle = 0
+                else:
+                    angle = -fan_rad + 2 * fan_rad * t_idx / (dust_tail_count - 1)
+                
+                # Offset the velocity vector to curve each tail differently
+                offset_scale = math.tan(angle) * 0.5
+                modified_vel = (
+                    velocity_vector[0] + offset_scale * perp1_x * sun_dist,
+                    velocity_vector[1] + offset_scale * perp1_y * sun_dist,
+                    velocity_vector[2] + offset_scale * perp1_z * sun_dist
+                )
+                
+                # Outer tails are shorter (60% for edges, 100% for primary)
+                center_weight = 1.0 - 0.4 * abs(2.0 * t_idx / (dust_tail_count - 1) - 1.0)
+                tail_len = dust_length * center_weight
+                
+                # Fewer particles for secondary tails
+                num_p = int(800 * center_weight)
+                
+                tail_traces = create_comet_dust_tail(
+                    center_position, modified_vel, tail_len,
+                    activity_factor, comet_name, num_particles=num_p
+                )
+                
+                # Rename secondary tails in legend
+                if t_idx > 0 and tail_traces:
+                    for tr in tail_traces:
+                        tr.name = f"{comet_name}: Dust Tail {t_idx + 1}"
+                
+                traces.extend(tail_traces)
     
     # 4. Ion tail
     ion_length = comet_data['max_ion_tail_length_mkm']
@@ -989,12 +1308,73 @@ def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name
             coma_size = 50000 + 150000 * activity_factor
             traces.extend(create_comet_coma(position_au, coma_size, activity_factor, comet_name))
         
-        # 3. Dust tail (if close enough)
+        # 3. Dust tail(s) (if close enough)
         if features_visible['dust_tail']:
             dust_length = comet_data['max_dust_tail_length_mkm']
-            traces.extend(create_comet_dust_tail(
-                position_au, velocity_km_s, dust_length, activity_factor, comet_name
-            ))
+            dust_tail_count = comet_data.get('dust_tail_count', 1)
+            
+            if dust_tail_count <= 1:
+                traces.extend(create_comet_dust_tail(
+                    position_au, velocity_km_s, dust_length, activity_factor, comet_name
+                ))
+            else:
+                # Multiple dust tails in fan pattern
+                fan_half_angle = comet_data.get('dust_tail_fan_angle', 30)
+                
+                cx, cy, cz = position_au
+                sun_dist = math.sqrt(cx**2 + cy**2 + cz**2)
+                
+                if sun_dist > 1e-10:
+                    anti_sun = (cx/sun_dist, cy/sun_dist, cz/sun_dist)
+                    
+                    # Perpendicular basis for fan spread
+                    perp1_x = anti_sun[1]*1 - anti_sun[2]*0
+                    perp1_y = anti_sun[2]*0 - anti_sun[0]*1
+                    perp1_z = anti_sun[0]*0 - anti_sun[1]*0
+                    perp1_mag = math.sqrt(perp1_x**2 + perp1_y**2 + perp1_z**2)
+                    
+                    if perp1_mag < 1e-10:
+                        perp1_x, perp1_y, perp1_z = 1, 0, 0
+                        perp1_mag = 1.0
+                    
+                    perp1_x /= perp1_mag
+                    perp1_y /= perp1_mag
+                    perp1_z /= perp1_mag
+                    
+                    fan_rad = math.radians(fan_half_angle)
+                    
+                    for t_idx in range(dust_tail_count):
+                        if dust_tail_count == 1:
+                            angle = 0
+                        else:
+                            angle = -fan_rad + 2*fan_rad*t_idx/(dust_tail_count - 1)
+                        
+                        offset_scale = math.tan(angle) * 0.5
+                        modified_vel = (
+                            velocity_km_s[0] + offset_scale * perp1_x * sun_dist,
+                            velocity_km_s[1] + offset_scale * perp1_y * sun_dist,
+                            velocity_km_s[2] + offset_scale * perp1_z * sun_dist
+                        )
+                        
+                        center_weight = 1.0 - 0.4 * abs(2.0*t_idx/(dust_tail_count-1) - 1.0)
+                        tail_len = dust_length * center_weight
+                        num_p = int(800 * center_weight)
+                        
+                        tail_traces = create_comet_dust_tail(
+                            position_au, modified_vel, tail_len,
+                            activity_factor, comet_name, num_particles=num_p
+                        )
+                        
+                        if t_idx > 0 and tail_traces:
+                            for tr in tail_traces:
+                                tr.name = f"{comet_name}: Dust Tail {t_idx + 1}"
+                        
+                        traces.extend(tail_traces)
+                else:
+                    # Fallback to single tail if at Sun
+                    traces.extend(create_comet_dust_tail(
+                        position_au, velocity_km_s, dust_length, activity_factor, comet_name
+                    ))
         
         # 4. Ion tail (if close enough)
         if features_visible['ion_tail']:
@@ -1003,7 +1383,17 @@ def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name
                 position_au, ion_length, activity_factor, comet_name
             ))
         
-        # 5. Sun direction indicator (if any tail is visible)
+        # 5. Anti-tail (if comet has anti_tail_length_km defined and is active)
+        anti_tail_length = comet_data.get('anti_tail_length_km', 0)
+        if anti_tail_length > 0 and features_visible['coma']:
+            anti_tail_color = comet_data.get('anti_tail_color', '#C0C0C8')
+            anti_tail_collimation = comet_data.get('anti_tail_collimation', 0.1)
+            traces.extend(create_comet_anti_tail(
+                position_au, anti_tail_length, activity_factor,
+                comet_name, anti_tail_color, anti_tail_collimation
+            ))
+        
+        # 6. Sun direction indicator (if any tail is visible)
         if features_visible['dust_tail'] or features_visible['ion_tail']:
             max_tail = max(
                 comet_data['max_dust_tail_length_mkm'] if features_visible['dust_tail'] else 0,

@@ -217,7 +217,10 @@ KNOWN_ORBITAL_PERIODS = {
     '6AC4721': 311232,              # Approximate period for sungrazer comet C/2026 A1. This is equivalent to roughly 852.1 years.
     'MAPS': 418226.4926,            # Approximate period for sungrazer comet C/2026 A1. This is equivalent to roughly 1145.041732 years.    
     'Lemmon': 492252.5179,          # PER= 1347.7139437075 jy    
-    
+    'Schaumasse': 3014.1,           # 8.252 years * 365.25 = 3014.1 days
+    'Howell': 2009.4,              # ~5.5 years * 365.25 = 2009.375 days
+    'Tempel 2': 1961.8,            # 5.37 years * 365.25 = 1961.4 days
+  
     # For hyperbolic/parabolic objects, period is undefined
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
     'C/2025_K1': None,      # Hyperbolic comet - effectively infinite period
@@ -228,6 +231,7 @@ KNOWN_ORBITAL_PERIODS = {
     '3I/ATLAS': None,       # Interstellar hyperbolic object - effectively infinite period
     '1I/Oumuamua': None,    # Interstellar hyperbolic object - effectively infinite period  
     '2I/Borisov': None,     # Interstellar hyperbolic object - effectively infinite period
+    'Wierzchos': None,      # Near-parabolic, outbound ~200,000 years; effectively open trajectory     
     
     # Hypothetical
     'Planet 9': 3652500.00, # ~10000 * 365.25 (estimated)
@@ -579,7 +583,11 @@ def color_map(planet):
         'PANSTARRS': 'green',
         '6AC4721': 'cyan',
         'MAPS': 'cyan',
-        'Lemmon': 'green',        
+        'Lemmon': 'green',  
+        'Wierzchos': 'cyan',
+        'Schaumasse': 'gold',
+        'Howell': 'white',
+        'Tempel 2': 'red',             
 
         'SOHO': 'white',
         'JamesWebb': 'gold',
@@ -2265,6 +2273,32 @@ INFO = {
         '* For Northern Hemisphere observers, the comet will be visible in the morning sky until mid-October, when it will become visible ' 
         'in the evening sky. Currently, it is located in the constellation of Leo Minor, and by October 6, it will enter Ursa Major (where ' 
         'the Big Dipper is located). On October 16, it will pass close to the star Cor Caroli.',
+
+        'Wierzchos': 'Horizons: C/2024 E1. CO2-driven (unusual), maximum Vmag ~6.8, perihelion 0.56 AU, passed 0.19 AU from Venus.\n' 
+        'Comet C/2024 E1 (Wierzchoś) is a fascinating object, especially right now since it just recently passed its perihelion and its closest approach to Earth. ' 
+        '* Discovered on March 3, 2024, by Polish astronomer Kacper Wierzchoś during a Mt. Lemmon survey.\n' 
+        '* Hyperbolic long-period comet originating from the Oort Cloud.\n' 
+        '* Perihelion: It reached its closest approach to the Sun (approx 0.566 AU) on January 20, 2026.\n' 
+        '* Perigee: It made its closest approach to Earth on February 17, 2026, passing at a distance of roughly 1.01 AU (about 94 million miles).\n' 
+        '* Visibility: Right now (late February 2026), it is moving away from the inner solar system. It peaked at an apparent magnitude of around +8.0 to +8.5, ' 
+        'meaning it stayed just below naked-eye visibility but remains a solid target for binoculars or a modest telescope. It is currently traversing the ' 
+        'constellations of Cetus and heading into Eridanus.\n' 
+        '* JWST Observations and Composition: What makes C/2024 E1 particularly intriguing to astronomers is its chemical signature. When the comet was still 7 AU ' 
+        'from the Sun, the James Webb Space Telescope (JWST) took its spectrum using the NIRSpec instrument.\n' 
+        '  * CO2-Driven: JWST confirmed that the comet\'s distant, early activity was driven almost entirely by carbon dioxide sublimation.\n' 
+        '  * The Missing CO: Surprisingly, there were no emission features for carbon monoxide (CO) or water. Since CO is far more volatile than CO2, it was ' 
+        'expected to be a primary driver of activity at that distance. The distinct lack of CO suggests the comet\'s nucleus (estimated at 2 to 10 km in diameter) ' 
+        'might have been thermally processed — losing its near-surface hyper-volatiles — during the early days of the solar system, well before it was kicked out ' 
+        'into the Oort Cloud.' 
+        '* Eccentricity: >1, currently hyperbolic due to planetary perturbations in the inner solar system. Since the comet is now outbound, its eccentricity will ' 
+        'eventually settle back just below 1 once it clears the planetary region, putting it on a highly elliptical outbound orbit with a period estimated at ' 
+        'around 200,000 years.', 
+
+        'Schaumasse': '8.25-year period, mag ~9, passed near Jupiter Oct 2025, near Ceres in 2010',
+
+        'Howell': '5.5-year period, mag ~10, southern hemisphere favored',
+
+        'Tempel 2': '5.37-year period, mag ~8, 16x9 km nucleus, Deep Space 1 flyby 2001',
 
     # Exoplanet systems
         'TRAPPIST-1': 'M8V red dwarf at 40.5 ly. 7 Earth-sized planets, 3 in habitable zone.',

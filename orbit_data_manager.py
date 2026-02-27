@@ -1787,15 +1787,45 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
             ta_val = None
 
         # --- Unit Conversion (KM -> AU) ---
-        # Major bodies (like Mercury) often return 'a' in km (e.g., 5.7e7 km).
-        # We need AU (e.g., 0.387 AU). 1 AU approx 1.496e8 km.
-        # Threshold: If a > 10000, it's definitely meters or km, not AU.
+        # Horizons returns elements in either AU or KM depending on object type.
+        # CRITICAL: Use perihelion distance (q) to determine units, NOT semi-major
+        # axis (a). For near-parabolic orbits (e ~ 1), a = q/(1-e) can be millions
+        # of AU, which the old heuristic (a > 10000 -> must be km) misidentified.
+        #
+        # q is always well-behaved: 0.01 - 100 AU for any solar system object.
+        # In km, q is always > 10,000 (even Sun-grazing comets: q ~ 1e6 km).
+        # So q > 10000 reliably means "units are km".
         
         KM_TO_AU = 1.0 / 149597870.7
         
-        if abs(a_val) > 10000: 
-            print(f"    [Unit Conv] converting 'a' from {a_val} (likely km) to AU", flush=True)
+        # Get q FIRST to determine units
+        try:
+            q_val = get_col(['q', 'QR'])
+        except KeyError:
+            q_val = None
+        
+        if q_val is not None and abs(q_val) > 10000:
+            # q > 10000 means units are definitely km (no object has q > 10000 AU)
+            print(f"    [Unit Conv] Detected KM units (q={q_val:.2f} km)", flush=True)
+            q_val = q_val * KM_TO_AU
             a_val = a_val * KM_TO_AU
+            print(f"    [Unit Conv] Converted: a={a_val:.6f} AU, q={q_val:.6f} AU", flush=True)
+        elif q_val is None and abs(a_val) > 10000:
+            # Fallback: no q available, use heuristic on a
+            # But check for near-parabolic orbits where large a is expected in AU
+            if e_val > 0.99:
+                # Near-parabolic: a = q/(1-e) can be millions of AU -- don't convert!
+                print(f"    [Unit Conv] Near-parabolic (e={e_val:.8f}), keeping a={a_val:.2f} AU (large a expected)", flush=True)
+            else:
+                # Not near-parabolic: large a likely means km
+                print(f"    [Unit Conv] converting 'a' from {a_val} (likely km) to AU", flush=True)
+                a_val = a_val * KM_TO_AU
+        elif q_val is not None and abs(q_val) <= 10000:
+            # Units are AU -- q is small
+            if abs(a_val) > 10000:
+                # q says AU but a is huge -- near-parabolic, a is correctly in AU
+                print(f"    [Unit Conv] Units are AU (q={q_val:.4f} AU), a={a_val:.2f} AU (near-parabolic, large a expected)", flush=True)
+            # else: both small, already in AU, no conversion needed
         
         result = {
             'a': a_val,
@@ -1812,15 +1842,9 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
             'center_body': location           # Store which center was used
         }
 
-        # Attempt to add optional data (Perihelion Distance q)
-        try:
-             q_val = get_col(['q', 'QR'])
-             # Apply same unit conversion check for q
-             if abs(q_val) > 10000:
-                 q_val = q_val * KM_TO_AU
-             result['q'] = q_val
-        except KeyError:
-             pass
+        # Store q if we have it (already converted above)
+        if q_val is not None:
+            result['q'] = q_val
         
         return result
         
