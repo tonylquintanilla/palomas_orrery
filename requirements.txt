@@ -1,24 +1,60 @@
+# Paloma's Orrery - Requirements
+# Updated: February 28, 2026
+#
+# PYTHON VERSION COMPATIBILITY
+# ============================
+# Recommended: Python 3.13.x (tested, stable, all dependencies compatible)
+# Supported:   Python 3.11 - 3.13
+# WARNING:     Python 3.14 (released Oct 2025) has known compatibility
+#              issues with several dependencies. See notes below.
+#
+# PYTHON 3.14 KNOWN ISSUES:
+# - kaleido 0.2.1: NOT compatible with Python 3.14. Kaleido v1.0+
+#   requires Plotly 6.1.1+ and Chrome installed separately.
+#   The bundled Chromium approach (v0.2.1) does not build on 3.14.
+# - customtkinter 5.2.2: Last release was 2+ years ago (inactive
+#   project). Uses deprecated distutils patterns. May break on 3.14
+#   which removes more legacy imports. Test before upgrading Python.
+# - plotly: PyPI lists support through 3.13 only. Plotly 6.x works
+#   on 3.14 but requires kaleido v1.0+ for image export (breaking
+#   change from v0.2.1 API).
+# - astropy 7.2: Has begun adding Python 3.14 support (CLI fixes,
+#   wheel builds in progress). Full 3.14 wheels may require astropy 8.x.
+#   The cp314 wheel tracking issue is github.com/astropy/astropy/issues/18187
+# - numpy 2.3+: Supports Python 3.14
+# - scipy 1.15+: Supports Python 3.14
+#
+# RECOMMENDATION: Stay on Python 3.13 until kaleido, customtkinter,
+# and astropy all have confirmed 3.14 support. Monitor:
+#   - github.com/plotly/Kaleido/issues/343 (kaleido 3.14)
+#   - github.com/astropy/astropy/issues/18187 (astropy 3.14 wheels)
+#   - github.com/TomSchimansky/CustomTkinter (dormant since 5.2.2)
+
 # Core data processing and scientific computing
 numpy>=1.24.0         # Array processing, required by multiple dependencies
 pandas>=2.0.0         # Data manipulation and analysis
 scipy>=1.11.0         # Scientific computing
 
 # Astronomical calculations and data access
-astropy>=5.3.4        # Core astronomy library
-astroquery>=0.4.6     # Access to astronomical databases
+astropy>=5.3.4        # Core astronomy library (7.2 latest, 3.14 support in progress)
+astroquery>=0.4.6     # Access to astronomical databases (JPL Horizons, SIMBAD, Gaia)
 
 # Plotting and visualization
-plotly>=5.18.0        # Interactive plotting library
-matplotlib>=3.7.0     # Traditional plotting library for orbit visualizations
-kaleido==0.2.1        # Required for saving static plotly images (exact version needed)
-pillow>=10.0.0        # Image processing, required by kaleido
+plotly>=5.18.0        # Interactive plotting library (5.x for kaleido 0.2.1 compat)
+matplotlib>=3.7.0     # Traditional plotting for KML legends and static images
+kaleido==0.2.1        # Static Plotly image export (PINNED - v1.0 breaks API, needs Chrome)
+                      # NOTE: If upgrading to Plotly 6.x, must also upgrade to kaleido>=1.0.0
+                      # and install Chrome. See: pypi.org/project/kaleido/
+pillow>=10.0.0        # Image processing
 
 # Geospatial and Earth System
-simplekml>=1.3.6      # KML generation for Google Earth visualizations
+simplekml>=1.3.6      # KML generation for Google Earth biosphere visualizations
 
 # GUI and interface
-# Note: tkinter is included with Python standard library, no need to install separately
+# Note: tkinter is included with Python standard library
 customtkinter>=5.2.0  # Modern themed widgets for tkinter
+                      # WARNING: Project appears inactive (no release since 5.2.2, Feb 2024)
+                      # Monitor for Python 3.14 breakage with deprecated distutils
 
 # Interactive shell
 ipython>=8.0.0        # Enhanced interactive Python shell
@@ -28,8 +64,27 @@ python-dateutil>=2.8.2  # Extended datetime functionality
 pytz>=2023.3          # Timezone support
 
 # Network and web
-requests>=2.31.0      # HTTP library
+requests>=2.31.0      # HTTP library (NOAA ERDDAP, climate data APIs)
 beautifulsoup4>=4.12.0  # HTML parsing for web scraping
 
 # Climate data processing
 openpyxl>=3.1.0       # Excel file parsing for NSIDC ice data (V4 format)
+
+# ============================
+# NOTES ON PLOTLY/KALEIDO UPGRADE PATH
+# ============================
+# Current: Plotly 5.x + kaleido 0.2.1 (bundled Chromium, simple API)
+# Future:  Plotly 6.x + kaleido 1.0+ (requires Chrome install, new API)
+#
+# The kaleido 1.0 migration changes:
+#   OLD: fig.write_image("fig.png")  # kaleido 0.2.1, just works
+#   NEW: fig.write_image("fig.png")  # kaleido 1.0+, needs Chrome on system
+#
+# Paloma's Orrery uses write_image() in social_media_export.py and
+# earth_system_generator.py for KML legend PNGs. The web gallery
+# pipeline (json_converter -> index.html) does NOT use kaleido at all.
+# Gallery runs entirely in-browser via Plotly.js CDN.
+#
+# Upgrade when: Python 3.14 is required, or Plotly 5.x reaches EOL.
+# Test with: pip install plotly>=6.1.1 kaleido>=1.0.0
+#            Then run: plotly_get_chrome (installs Chromium for kaleido)
