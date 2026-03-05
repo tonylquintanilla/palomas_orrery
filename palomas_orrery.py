@@ -58,7 +58,10 @@ from palomas_orrery_helpers import (calculate_planet9_position_on_orbit, rotate_
                                     fetch_trajectory, fetch_orbit_path, pad_trajectory, add_url_buttons,
                                     get_default_camera, print_planet_positions, create_orbit_backup, cleanup_old_orbits, 
                                     show_animation_safely)
-from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points 
+
+from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points, plot_hyperbolic_osculating_orbit
+from close_approach_data import get_approach_within_date_range, add_cad_perigee_marker, fetch_position_at_approach
+
 # Exoplanet system support
 from exoplanet_systems import EXOPLANET_CATALOG, get_system, get_planets_in_hz
 from exoplanet_orbits import (
@@ -106,7 +109,9 @@ from planet_visualization import (              # the gryed out imports are crea
     earth_crust_info,
     earth_atmosphere_info,
     earth_upper_atmosphere_info,
+    earth_leo_shell_info,
     earth_magnetosphere_info,
+    earth_geostationary_belt_info,
     earth_hill_sphere_info,
 
     moon_inner_core_info,
@@ -1630,6 +1635,145 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         print(f"Error fetching data for object {object_id} on {date_obj}: {e}", flush=True)
         return None
 
+# ============================================================================
+# CLOSE APPROACH EXTRAS: CAD Perigee Marker + Hyperbolic Osculating Orbit
+# Capabilities B and C from the Apophis close approach infrastructure (March 2026).
+# Called after plot_idealized_orbits when center is a major body (not Sun).
+# ============================================================================
+
+def _add_close_approach_extras(fig, selected_objects, objects, center_object_name,
+                                 color_map, date_obj, settings, show_apsidal_markers,
+                                 parent_window):
+    """
+    Add CAD perigee marker and hyperbolic osculating orbit for small body flybys.
+
+    Called after plot_idealized_orbits for non-Sun center views.
+    Handles Capability B (precision perigee marker) and Capability C (hyperbolic
+    osculating orbit) from the Apophis close approach infrastructure.
+
+    Parameters:
+        fig:                    Plotly Figure object
+        selected_objects:       List of selected object names (str)
+        objects:                Full objects list (dicts)
+        center_object_name:     Central body name e.g. 'Earth'
+        color_map:              Color lookup function
+        date_obj:               Plot start date (datetime)
+        settings:               Settings dict (needs 'days_to_plot', 'start_date', 'end_date')
+        show_apsidal_markers:   Bool -- only run if True
+        parent_window:          Tkinter root window for dialogs
+    """
+    if not show_apsidal_markers:
+        return
+
+    # Only run for major body centers (Earth, Mars, Jupiter, etc.)
+    MAJOR_BODY_CENTERS = {'Earth', 'Mars', 'Venus', 'Mercury', 'Jupiter',
+                          'Saturn', 'Uranus', 'Neptune', 'Moon'}
+    if center_object_name not in MAJOR_BODY_CENTERS:
+        return
+
+    # Determine plot date range for close approach window check
+    from datetime import timedelta
+    days_to_plot = settings.get('days_to_plot', 365)
+    start_date = date_obj
+    end_date = date_obj + timedelta(days=days_to_plot)
+
+    # Center body -> Horizons ID mapping
+    CENTER_TO_HORIZONS_ID = {
+        'Earth':   '399',
+        'Mars':    '499',
+        'Jupiter': '599',
+        'Saturn':  '699',
+        'Uranus':  '799',
+        'Neptune': '899',
+        'Venus':   '299',
+        'Mercury': '199',
+        'Moon':    '301',
+    }
+
+    for obj_name in selected_objects:
+        # Find object metadata
+        obj_info = next((o for o in objects if o['name'] == obj_name), None)
+        if obj_info is None:
+            continue
+
+        # Only process smallbody objects (asteroids, comets, not planets/moons)
+        if obj_info.get('id_type') not in ('smallbody',):
+            continue
+
+        designation = obj_info.get('id', obj_name)
+        best_approach = None   # will be set by Capability B if found; passed to Capability C
+
+        print(f"\n[CloseApp] Checking close approach for {obj_name} near {center_object_name}", flush=True)
+        print(f"  Designation: {designation} | Date range: {start_date.date()} to {end_date.date()}", flush=True)
+
+        # ---- Capability B: CAD Perigee Marker --------------------------------
+        try:
+            from close_approach_data import (get_approach_within_date_range,
+                                              add_cad_perigee_marker,
+                                              fetch_position_at_approach)
+
+            approaches_in_window = get_approach_within_date_range(
+                designation=designation,
+                body=center_object_name,
+                start_date=start_date,
+                end_date=end_date,
+            )
+
+            if approaches_in_window:
+                # Use the closest approach in the window
+                best = min(approaches_in_window, key=lambda a: a['dist_au'])
+                best_approach = best   # pass to Capability C for correct perigee epoch
+                print(f"  [CAD] Close approach found: {best['date']} | "
+                      f"{best['dist_km']:,.1f} km | {best['v_rel_kms']:.3f} km/s", flush=True)
+
+                # Fetch precise position from Horizons at the CAD perigee epoch
+                center_id_num = CENTER_TO_HORIZONS_ID.get(center_object_name, '399')
+                position = fetch_position_at_approach(
+                    approach=best,
+                    designation=designation,
+                    center_body_id=center_id_num,
+                    id_type='smallbody',
+                )
+
+                if position:
+                    add_cad_perigee_marker(
+                        fig=fig,
+                        approach=best,
+                        position=position,
+                        body=center_object_name,
+                        obj_name=obj_name,
+                        color_map=color_map,
+                    )
+                else:
+                    print(f"  [CAD] Could not fetch Horizons position for marker -- skipping", flush=True)
+            else:
+                print(f"  [CAD] No close approach in plotted window for {obj_name}", flush=True)
+
+        except Exception as e:
+            print(f"  [CAD] Error in CAD perigee marker for {obj_name}: {e}", flush=True)
+            import traceback
+            traceback.print_exc()
+
+        # ---- Capability C: Hyperbolic Osculating Orbit -----------------------
+        # Only attempt if apsidal markers are on (same checkbox controls both)
+        try:
+            from idealized_orbits import plot_hyperbolic_osculating_orbit
+            fig = plot_hyperbolic_osculating_orbit(
+                fig=fig,
+                obj_name=obj_name,
+                obj_info=obj_info,
+                center_id=center_object_name,
+                color_map=color_map,
+                date=date_obj,
+                show_apsidal_markers=show_apsidal_markers,
+                parent_window=parent_window,
+                approach=best_approach,
+            )
+        except Exception as e:
+            print(f"  [HypOsc] Error plotting hyperbolic osculating for {obj_name}: {e}", flush=True)
+            import traceback
+            traceback.print_exc()
+
 def calculate_analytical_position(obj_name, date_obj, center_id='Sun'):
     """
     Calculate position from analytical orbital elements when Horizons is unavailable.
@@ -2071,8 +2215,12 @@ earth_system_viz_var = tk.IntVar(value=0)
 earth_atmosphere_var = tk.IntVar(value=0)
 # Earth upper atmosphere shell
 earth_upper_atmosphere_var = tk.IntVar(value=0)
+# Earth LEO shell
+earth_leo_var = tk.IntVar(value=0)
 # Earth magnetosphere shell
 earth_magnetosphere_var = tk.IntVar(value=0)
+# Earth geostationary belt shell
+earth_geostationary_belt_var = tk.IntVar(value=0)
 # Earth hill sphere shell
 earth_hill_sphere_var = tk.IntVar(value=0)
 
@@ -2527,7 +2675,9 @@ earth_shell_vars = {
     'earth_crust': earth_crust_var,
     'earth_atmosphere': earth_atmosphere_var,
     'earth_upper_atmosphere': earth_upper_atmosphere_var,
+    'earth_leo': earth_leo_var,
     'earth_magnetosphere': earth_magnetosphere_var,
+    'earth_geostationary_belt': earth_geostationary_belt_var,
     'earth_hill_sphere': earth_hill_sphere_var
 }
 
@@ -4991,6 +5141,22 @@ def plot_objects():
                                     parent_window=root
                                     )
 
+            # ---- Capability B: CAD perigee marker (precision close approach) ----
+            # ---- Capability C: Hyperbolic osculating orbit ----------------------
+            # Called when center is a major body (not Sun) and apsidal markers enabled
+            if center_object_name != 'Sun' and show_apsidal_markers_var.get():
+                _add_close_approach_extras(
+                    fig=fig,
+                    selected_objects=selected_objects,
+                    objects=objects,
+                    center_object_name=center_object_name,
+                    color_map=color_map,
+                    date_obj=date_obj,
+                    settings=settings,
+                    show_apsidal_markers=show_apsidal_markers_var.get(),
+                    parent_window=root,
+                )
+
                     # Add refined orbits if we're centered on a planet with moons
             if center_object_name != 'Sun' and REFINED_AVAILABLE:
                 # Get the moons for this center
@@ -6143,6 +6309,21 @@ def animate_objects(step, label):
                 show_apsidal_markers=show_apsidal_markers_var.get(),
                 parent_window=root  
             )
+
+            # ---- Capability B: CAD perigee marker (precision close approach) ----
+            # ---- Capability C: Hyperbolic osculating orbit ----------------------
+            if center_object_name != 'Sun' and show_apsidal_markers_var.get():
+                _add_close_approach_extras(
+                    fig=fig,
+                    selected_objects=selected_object_names,
+                    objects=objects,
+                    center_object_name=center_object_name,
+                    color_map=color_map,
+                    date_obj=dates_list[0] if dates_list else datetime.now(),
+                    settings=settings,
+                    show_apsidal_markers=show_apsidal_markers_var.get(),
+                    parent_window=root,
+                )
 
             for i, trace in enumerate(fig.data):
                 print(f"  Trace {i}: {trace.name}", flush=True)      
@@ -7592,14 +7773,27 @@ CreateToolTip(
 earth_atmosphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Atmosphere", variable=earth_atmosphere_var)
 earth_atmosphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_atmosphere_checkbutton, earth_atmosphere_info)
+
 # Earth upper atmosphere shell
 earth_upper_atmosphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Upper Atmosphere", variable=earth_upper_atmosphere_var)
 earth_upper_atmosphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_upper_atmosphere_checkbutton, earth_upper_atmosphere_info)
+
+# Earth LEO shell
+earth_leo_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Low Earth Orbit (LEO)", variable=earth_leo_var)
+earth_leo_checkbutton.pack(anchor='w')
+CreateToolTip(earth_leo_checkbutton, earth_leo_shell_info)
+
 # Earth magnetosphere shell
 earth_magnetosphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Magnetosphere", variable=earth_magnetosphere_var)
 earth_magnetosphere_checkbutton.pack(anchor='w')
 CreateToolTip(earth_magnetosphere_checkbutton, earth_magnetosphere_info)
+
+# Earth geostationary belt shell
+earth_geostationary_belt_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Geostationary Belt (GEO)", variable=earth_geostationary_belt_var)
+earth_geostationary_belt_checkbutton.pack(anchor='w')
+CreateToolTip(earth_geostationary_belt_checkbutton, earth_geostationary_belt_info)
+
 # Earth hill sphere shell
 earth_hill_sphere_checkbutton = tk.Checkbutton(earth_shell_options_frame, text="-- Hill Sphere", variable=earth_hill_sphere_var)
 earth_hill_sphere_checkbutton.pack(anchor='w')

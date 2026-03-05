@@ -86,6 +86,8 @@ from earth_visualization_shells import (create_earth_inner_core_shell,
                                         create_earth_upper_atmosphere_shell,                                           
                                         create_earth_magnetosphere_shell, 
                                         create_earth_hill_sphere_shell,
+                                        create_earth_geostationary_belt_shell,
+                                        create_earth_leo_shell,
                                         earth_inner_core_info, 
                                         earth_outer_core_info,
                                         earth_lower_mantle_info, 
@@ -94,7 +96,9 @@ from earth_visualization_shells import (create_earth_inner_core_shell,
                                         earth_atmosphere_info, 
                                         earth_upper_atmosphere_info,                                           
                                         earth_magnetosphere_info, 
-                                        earth_hill_sphere_info)
+                                        earth_hill_sphere_info,
+                                        earth_geostationary_belt_info,
+                                        earth_leo_shell_info)
 
 from moon_visualization_shells import (create_moon_inner_core_shell, 
                                         create_moon_outer_core_shell, 
@@ -627,6 +631,10 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                     traces.extend(create_earth_magnetosphere_shell(center_position))
                 elif shell_name == 'hill_sphere':
                     traces.extend(create_earth_hill_sphere_shell(center_position))
+                elif shell_name == 'geostationary_belt':
+                    traces.extend(create_earth_geostationary_belt_shell(center_position))
+                elif shell_name == 'leo':
+                    traces.extend(create_earth_leo_shell(center_position))
     
     elif body_name == 'Moon':
         # Handle moon visualization with its specific shells
@@ -906,6 +914,10 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
             traces.extend(create_earth_magnetosphere_shell(center_position))
         if shell_vars['earth_hill_sphere'].get() == 1:
             traces.extend(create_earth_hill_sphere_shell(center_position))
+        if shell_vars['earth_geostationary_belt'].get() == 1:
+            traces.extend(create_earth_geostationary_belt_shell(center_position))
+        if shell_vars['earth_leo'].get() == 1:
+            traces.extend(create_earth_leo_shell(center_position))
 
     if planet_name == 'Moon':
         if shell_vars['moon_inner_core'].get() == 1:

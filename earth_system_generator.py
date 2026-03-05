@@ -444,11 +444,10 @@ def generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir,
     # Build briefing annotation for bottom-left of map
     annotations = []
     if briefing:
-        # Clean up briefing for display: first paragraph only, truncate
+        # Clean up briefing for display: first paragraph only
+        # No character truncation -- index.html injects responsive width for word-wrap
         brief_lines = briefing.split('\n\n')
         brief_text = brief_lines[0] if brief_lines else briefing
-        if len(brief_text) > 200:
-            brief_text = brief_text[:197] + "..."
         # Add hint about 3D Earth button
         brief_text += "<br><br><i>Click 3D Earth for full visualization in Google Earth</i>"
         

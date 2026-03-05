@@ -1,4 +1,4 @@
-# Last updated: February 16, 2026
+# Last updated: March 4, 2026
 
 # Paloma's Orrery
 
@@ -41,6 +41,8 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Galactic Center visualization (S-stars orbiting Sagittarius A*)
 - Stellar neighborhood mapping (123,000+ stars)
 - Planetary and solar interior visualizations (with reference-frame independent rendering)
+- Earth orbital shell infrastructure: Geostationary Belt (GEO, 42,164 km) and Low Earth Orbit (LEO, 200-2,000 km)
+- Close approach infrastructure: JPL CAD API integration, precision perigee markers, hyperbolic osculating orbits (Apophis 2029: passes 4,150 km inside the GEO ring)
 - Spacecraft trajectory two-layer visualization (full mission + plotted period)
 - Animation system with static shell optimization (45% memory reduction)
 - HR diagrams and stellar analysis
@@ -1022,7 +1024,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** February 2026 (v2.4.0 - Web Gallery, Social Media Export, Galactic Center, Unified Save System & Resizable GUI)
+**Last Updated:** March 2026 (v2.5.0 - Close Approach Infrastructure: Apophis 2029, Hyperbolic Osculating Orbits, GEO and LEO Earth Orbital Shells)
 
 ---
 

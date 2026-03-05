@@ -6595,3 +6595,268 @@ def calculate_phoebe_correction_from_normals():
     print(f"  Z rotation: {np.degrees(z_component):.2f} deg", flush=True)
     
     return rotation_axis, angle
+# ============================================================================
+# CAPABILITY C: HYPERBOLIC OSCULATING ORBIT
+# Added March 2026 for Apophis close approach infrastructure.
+# Revised: fetch at CAD perigee epoch; cube-bounded arc; perigee-dense sampling.
+# ============================================================================
+
+def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_map,
+                                      date, show_apsidal_markers=False, parent_window=None,
+                                      approach=None):
+    """
+    Plot a geocentric (or planet-centric) osculating hyperbolic orbit for a
+    small body executing a close flyby.
+
+    KEY DESIGN DECISIONS (revised March 2026):
+
+    1. Epoch at perigee, not plot start.
+       Elements fetched at the CAD perigee time. At perigee, q from
+       osculating elements = actual closest approach distance. Elements
+       fetched at an earlier date give a valid osculating conic, but its
+       periapsis is NOT the actual perigee -- it's a Keplerian projection.
+
+    2. Arc bounded by the plotted cube.
+       We read the current axis range and clip the hyperbola to where
+       r <= axis_range * 1.5. This guarantees the arc is always visible
+       and never flies off-screen, regardless of eccentricity.
+
+    3. Point density highest at periapsis (sinh spacing).
+       Dense near theta=0, sparse near the asymptotes. Smooth curvature
+       at closest approach where it matters.
+
+    4. White color, dot line style.
+       Consistent with "reference curve, not actual trajectory."
+
+    Parameters:
+        fig:              Plotly Figure object
+        obj_name (str):   Display name e.g. 'Apophis'
+        obj_info (dict):  Object metadata dict from objects list
+        center_id (str):  Central body name e.g. 'Earth', 'Mars'
+        color_map:        Color lookup function (kept for API compatibility)
+        date (datetime):  Plot start date (used as fallback epoch only)
+        show_apsidal_markers (bool): Passed through for context
+        parent_window:    Tkinter parent window for dialog prompts
+        approach (dict):  CAD approach dict. If provided, elements are fetched
+                          at the perigee epoch (approach['jd']).
+
+    Returns:
+        fig (modified in place; returned for chaining)
+    """
+    import numpy as np
+    import plotly.graph_objects as go
+    from datetime import datetime
+
+    CENTER_TO_HORIZONS_ID = {
+        'Earth':   '399',
+        'Mars':    '499',
+        'Jupiter': '599',
+        'Saturn':  '699',
+        'Uranus':  '799',
+        'Neptune': '899',
+        'Venus':   '299',
+        'Mercury': '199',
+        'Moon':    '301',
+    }
+
+    center_horizons_id = CENTER_TO_HORIZONS_ID.get(center_id)
+    if center_horizons_id is None:
+        print(f"[HypOsc] No Horizons ID for center '{center_id}' -- skipping {obj_name}", flush=True)
+        return fig
+
+    center_body_str = f'@{center_horizons_id}'
+    horizons_id = obj_info.get('id', obj_name)
+    id_type     = obj_info.get('id_type', 'smallbody')
+
+    # ---- Epoch: use CAD perigee time when available --------------------------
+    # CRITICAL: Elements at perigee give the most physically meaningful hyperbola.
+    # Elements fetched at plot start give a DIFFERENT osculating conic whose
+    # "periapsis" is not the actual closest approach. At e=9 with a=-74 km,
+    # the pre-perigee conic has totally different shape than at perigee.
+    perigee_datetime = None
+    if approach is not None and 'jd' in approach:
+        try:
+            from astropy.time import Time
+            t = Time(approach['jd'], format='jd')
+            perigee_datetime = t.datetime
+            print(f"[HypOsc] Using CAD perigee epoch: "
+                  f"{perigee_datetime.strftime('%Y-%m-%d %H:%M')} UTC", flush=True)
+        except Exception as ex:
+            print(f"[HypOsc] Could not convert CAD JD to datetime: {ex}", flush=True)
+
+    epoch_date = perigee_datetime if perigee_datetime else date
+
+    print(f"\n[HypOsc] Fetching {center_id}-centric osculating elements for {obj_name}", flush=True)
+    print(f"  Horizons ID: {horizons_id} | Type: {id_type} | Center: {center_body_str}", flush=True)
+    print(f"  Epoch: {epoch_date.strftime('%Y-%m-%d %H:%M')}", flush=True)
+
+    # When we have a specific perigee epoch from CAD, bypass the cache entirely
+    # and fetch directly. The osculating cache keys on obj_name+center_body with
+    # no date component -- so a cached April 1 entry would be returned even when
+    # we ask for April 13, giving wrong elements (e=9.3, q=91636 km instead of
+    # e~4.25, q~38012 km). Direct fetch always gives the correct epoch.
+    try:
+        from osculating_cache_manager import fetch_osculating_elements
+        entry = fetch_osculating_elements(
+            obj_name=obj_name,
+            horizons_id=horizons_id,
+            id_type=id_type,
+            date=epoch_date,
+            center_body=center_body_str,
+        )
+        elements = entry['elements'] if entry else None
+    except Exception as ex:
+        print(f"[HypOsc] Could not fetch elements: {ex}", flush=True)
+        return fig
+
+    if elements is None:
+        print(f"[HypOsc] No elements returned for {obj_name}", flush=True)
+        return fig
+
+    e_osc     = elements.get('e', 0)
+    a_osc     = elements.get('a', None)
+    i_osc     = elements.get('i', 0)
+    omega_osc = elements.get('omega', 0)
+    Omega_osc = elements.get('Omega', 0)
+    epoch_osc = elements.get('epoch', epoch_date.strftime('%Y-%m-%d osc.'))
+
+    if e_osc <= 1:
+        print(f"[HypOsc] {obj_name} geocentric e={e_osc:.4f} is elliptical -- skipping", flush=True)
+        return fig
+
+    if a_osc is None or a_osc == 0:
+        print(f"[HypOsc] Invalid semi-major axis for {obj_name} -- skipping", flush=True)
+        return fig
+
+    abs_a = abs(a_osc)
+    q_osc = abs_a * (e_osc - 1.0)   # periapsis distance, AU
+
+    print(f"[HypOsc] Elements at perigee epoch:", flush=True)
+    print(f"  e={e_osc:.6f}, a={a_osc:.8f} AU, |a|={abs_a:.8f} AU", flush=True)
+    print(f"  i={i_osc:.2f} deg, omega={omega_osc:.2f}, Omega={Omega_osc:.2f}", flush=True)
+    print(f"  q={q_osc:.9f} AU = {q_osc * 149597870.7:,.1f} km", flush=True)
+
+    # ---- Determine clip distance from current plot axis range ----------------
+    # Read the figure's axis range if available; fall back to q * 10.
+    try:
+        axis_range = None
+        scene = fig.layout.scene
+        if scene and scene.xaxis and scene.xaxis.range:
+            r = scene.xaxis.range
+            axis_range = abs(r[1] - r[0]) / 2.0
+        if not axis_range or axis_range <= 0:
+            axis_range = max(q_osc * 10, 0.001)
+            print(f"[HypOsc] Axis range fallback: {axis_range:.8f} AU "
+                  f"({axis_range * 149597870.7:,.0f} km)", flush=True)
+        else:
+            print(f"[HypOsc] Axis half-width: {axis_range:.8f} AU "
+                  f"({axis_range * 149597870.7:,.0f} km)", flush=True)
+    except Exception:
+        axis_range = max(q_osc * 10, 0.001)
+
+    clip_distance = axis_range * 1.5   # 50% beyond visible edge
+
+    # ---- Asymptote angle -----------------------------------------------------
+    asymptote_angle = np.arccos(-1.0 / e_osc)   # radians -- r -> inf at this angle
+
+    # ---- Binary search for theta where r = clip_distance ---------------------
+    def r_hyp(th):
+        return abs_a * (e_osc**2 - 1.0) / (1.0 + e_osc * np.cos(th))
+
+    th_lo, th_hi = 0.0, asymptote_angle - 1e-8
+    for _ in range(80):
+        th_mid = (th_lo + th_hi) / 2.0
+        if r_hyp(th_mid) < clip_distance:
+            th_lo = th_mid
+        else:
+            th_hi = th_mid
+    theta_clip = min(th_lo, asymptote_angle - np.radians(0.1))
+
+    print(f"[HypOsc] Asymptote: {np.degrees(asymptote_angle):.1f} deg | "
+          f"Clip theta: {np.degrees(theta_clip):.1f} deg "
+          f"(r={r_hyp(theta_clip) * 149597870.7:,.0f} km)", flush=True)
+
+    # ---- Nonlinear (sinh) sampling: dense near periapsis (theta=0) ----------
+    # sinh spacing: t in [0,1] -> sinh(scale*t)/sinh(scale) in [0,1]
+    # scale=3 gives ~10x more points near center than at edge.
+    N = 300   # points per arm
+    scale = 3.0
+    t = np.linspace(0, 1, N)
+    t_sinh = np.sinh(scale * t) / np.sinh(scale)   # nonlinear 0..1
+
+    theta_arm = t_sinh * theta_clip   # 0 .. theta_clip
+
+    # Full arc: [-theta_clip .. 0 .. +theta_clip]
+    # Reverse the negative arm so points run in order from -theta_clip to +theta_clip
+    theta_full = np.concatenate([-theta_arm[::-1], theta_arm])
+
+    r_full = r_hyp(theta_full)
+
+    # Guard non-positive r
+    valid = r_full > 0
+    theta_full = theta_full[valid]
+    r_full     = r_full[valid]
+
+    # Hyperbola in perifocal frame (periapsis along +x)
+    x_orbit = r_full * np.cos(theta_full)
+    y_orbit = r_full * np.sin(theta_full)
+    z_orbit = np.zeros_like(theta_full)
+
+    # ---- Standard Keplerian rotation sequence --------------------------------
+    # omega around z (arg of periapsis), then i around x, then Omega around z
+    i_rad     = np.radians(i_osc)
+    omega_rad = np.radians(omega_osc)
+    Omega_rad = np.radians(Omega_osc)
+
+    x_t, y_t, z_t = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+    x_t, y_t, z_t = rotate_points(x_t, y_t, z_t, i_rad, 'x')
+    x_final, y_final, z_final = rotate_points(x_t, y_t, z_t, Omega_rad, 'z')
+
+    # ---- Hover text ----------------------------------------------------------
+    asymptote_deg = np.degrees(asymptote_angle)
+
+    pert_note = (
+        "<br><br><i>Osculating hyperbola: instantaneous Keplerian fit<br>"
+        f"at perigee epoch ({epoch_osc}).<br>"
+        f"Center: {center_id}<br>"
+        "Near perigee: closely overlaps actual trajectory.<br>"
+        "Farther out: solar gravity causes divergence.<br>"
+        "Arc clipped to plotted view volume.</i>"
+    )
+
+    hover_text = (
+        f"<b>{obj_name} Osculating Orbit (Hyperbola)</b><br>"
+        f"Epoch: {epoch_osc}<br>"
+        f"Center: {center_id}<br>"
+        f"e = {e_osc:.6f} (hyperbolic)<br>"
+        f"a = {a_osc:.8f} AU (negative = hyperbola)<br>"
+        f"q = {q_osc:.9f} AU<br>"
+        f"q = {q_osc * 149597870.7:,.1f} km (center-to-center)<br>"
+        f"i = {i_osc:.2f} deg<br>"
+        f"Asymptotic half-angle: {asymptote_deg:.1f} deg"
+        f"{pert_note}"
+    )
+
+    orbit_label = f"{obj_name} Osculating Orbit (Epoch: {epoch_osc})"
+
+    # White, dot style -- reference curve distinct from red actual orbit
+    fig.add_trace(
+        go.Scatter3d(
+            x=x_final,
+            y=y_final,
+            z=z_final,
+            mode='lines',
+            line=dict(color='white', width=2, dash='dot'),
+            name=orbit_label,
+            text=[hover_text] * len(x_final),
+            customdata=[hover_text] * len(x_final),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True,
+        )
+    )
+
+    print(f"[HypOsc] Added hyperbolic osculating orbit for {obj_name}: "
+          f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * 149597870.7:,.1f} km)",
+          flush=True)
+
+    return fig

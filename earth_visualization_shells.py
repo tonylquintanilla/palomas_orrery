@@ -717,6 +717,207 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+earth_leo_shell_info = (
+            "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
+            "Low Earth Orbit (LEO) is the region from roughly 200 km to 2,000 km altitude\n"
+            "(1.03 to 1.31 Earth radii), where satellites orbit at all inclinations.\n\n"
+            "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
+            "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"
+            "one orbit in 90-120 minutes and crosses the sky in about 6 minutes.\n\n"
+            "Notable LEO residents:\n"
+            "  * ISS: ~400 km altitude, 51.6 deg inclination\n"
+            "  * Starlink: ~550 km altitude, multiple inclination shells\n"
+            "  * Hubble Space Telescope: ~540 km altitude\n"
+            "  * Most Earth observation and weather satellites\n\n"
+            "There are currently ~8,000 active satellites in LEO, with Starlink alone\n"
+            "operating over 6,000. The total debris population (defunct satellites, rocket\n"
+            "bodies, fragments) exceeds 20,000 tracked objects.\n\n"
+            "The bright moving 'stars' visible at dusk and dawn are LEO objects --\n"
+            "most commonly Starlink trains. GEO satellites at 35,786 km are too faint\n"
+            "and too slow to see with the naked eye."
+)
+
+def create_earth_leo_shell(center_position=(0, 0, 0)):
+    """
+    Creates a representation of Earth's Low Earth Orbit (LEO) shell.
+
+    LEO spans ~200 km to ~2,000 km altitude (1.03 to 1.31 Earth radii).
+    Unlike GEO, LEO objects orbit at all inclinations -- forming a true
+    spherical shell. Points are distributed across the full sphere with
+    slight density enhancement at the Starlink altitude (~550 km).
+
+    The contrast with the GEO ring is the whole point: LEO is what you
+    see in the sky; GEO is invisible but controls global communications.
+    """
+    import numpy as np
+    import plotly.graph_objs as go
+    from planet_visualization_utilities import EARTH_RADIUS_AU
+
+    center_x, center_y, center_z = center_position
+
+    EARTH_RADIUS_KM = 6371.0
+    AU_PER_KM = EARTH_RADIUS_AU / EARTH_RADIUS_KM
+
+    # LEO altitude bands in km
+    LEO_LOW_KM  = 6571.0   # 200 km altitude
+    LEO_HIGH_KM = 8371.0   # 2000 km altitude
+    STARLINK_KM = 6921.0   # ~550 km altitude -- densest population
+
+    np.random.seed(7)      # Deterministic scatter
+
+    # Main LEO shell: 300 points uniformly distributed across sphere
+    n_main = 300
+    # Uniform sphere distribution using spherical coordinates
+    phi_main = np.random.uniform(0, 2 * np.pi, n_main)
+    cos_theta_main = np.random.uniform(-1, 1, n_main)   # cos(theta) uniform -> uniform on sphere
+    theta_main = np.arccos(cos_theta_main)
+
+    # Radii drawn from LEO band, weighted toward Starlink altitude
+    # Mix: 60% uniform across full band, 40% clustered near Starlink
+    n_uniform = int(n_main * 0.6)
+    n_starlink = n_main - n_uniform
+    r_uniform = np.random.uniform(LEO_LOW_KM, LEO_HIGH_KM, n_uniform)
+    r_starlink = np.random.normal(STARLINK_KM, 150, n_starlink)  # 150 km std dev around Starlink
+    r_starlink = np.clip(r_starlink, LEO_LOW_KM, LEO_HIGH_KM)
+    radii_km = np.concatenate([r_uniform, r_starlink])
+    np.random.shuffle(radii_km)
+    radii_au = radii_km * AU_PER_KM
+
+    x = radii_au * np.sin(theta_main) * np.cos(phi_main) + center_x
+    y = radii_au * np.sin(theta_main) * np.sin(phi_main) + center_y
+    z = radii_au * np.cos(theta_main) + center_z
+
+    hover_text = (
+        "Low Earth Orbit (LEO)<br>"
+        "Altitude range: 200 km to 2,000 km above surface<br>"
+        "Radius: 6,571 km to 8,371 km from Earth's center (1.03 to 1.31 Earth radii)<br><br>"
+        "LEO satellites orbit at all inclinations -- forming a true shell, not a ring.<br>"
+        "One orbit takes 90-120 minutes; a satellite crosses the sky in ~6 minutes.<br><br>"
+        "The bright moving points visible at dusk and dawn are LEO objects.<br>"
+        "Starlink (~550 km), ISS (~400 km), and Hubble (~540 km) all live here.<br><br>"
+        "<b>Active satellites:</b> ~8,000 (Starlink alone: 6,000+)<br>"
+        "<b>Tracked debris objects:</b> 20,000+<br><br>"
+        "Compare with the Geostationary Belt (GEO) at 42,164 km -- 5x farther out,<br>"
+        "invisible to the naked eye, but controlling global communications."
+    )
+
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=1.5,
+                color='rgb(255, 248, 220)',   # Warm white -- visible satellites
+                opacity=0.35,
+                symbol='circle',
+            ),
+            name='Earth: Low Earth Orbit (LEO)',
+            text=[hover_text] * len(x),
+            customdata=['Earth: Low Earth Orbit (LEO)'] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True,
+        )
+    ]
+
+    return traces
+
+earth_geostationary_belt_info = (
+            "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
+            "The geostationary belt (GEO) is a ring of orbital space at 42,164 km from Earth's center\n"
+            "(35,786 km altitude), where satellites orbit at exactly Earth's rotation rate\n"
+            "and appear stationary over a fixed point on the equator.\n\n"
+            "Approximately 550 active geostationary satellites currently occupy this belt --\n"
+            "carrying TV broadcasts, weather imagery, GPS augmentation, and communications\n"
+            "for roughly half the world's population.\n\n"
+            "On April 13, 2029, asteroid Apophis will pass Earth at 38,013 km -- roughly 4,150 km\n"
+            "INSIDE this belt. The closest operational satellites will be about 4,000 km away\n"
+            "as it passes through. No impact risk to satellites is expected, but the flyby\n"
+            "will be detectable from geostationary platforms as it transits the sky."
+)
+
+def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
+    """
+    Creates a representation of Earth's geostationary satellite belt at 42,164 km.
+
+    The belt is rendered as a sparse ring of discrete points -- evoking the real
+    population of ~550 active satellites -- rather than a continuous torus.
+    Subtle scatter in radius and inclination suggests the slight orbital variations
+    of real satellites (station-keeping keeps them within +/-0.1 deg of the equator
+    and within a few hundred km in radius).
+
+    Physics:
+        GEO radius:  42,164 km = 6.62 Earth radii
+        GEO altitude: 35,786 km above the surface
+        Apophis 2029: 38,013 km -- 4,151 km INSIDE this belt
+    """
+    import numpy as np
+    import plotly.graph_objs as go
+    from planet_visualization_utilities import EARTH_RADIUS_AU
+
+    center_x, center_y, center_z = center_position
+
+    # Geostationary orbit radius in AU
+    GEO_RADIUS_KM = 42164.0
+    EARTH_RADIUS_KM = 6371.0
+    geo_radius_au = (GEO_RADIUS_KM / EARTH_RADIUS_KM) * EARTH_RADIUS_AU
+
+    # Satellite scatter parameters
+    # Real GEO satellites are station-kept within ~0.1 deg latitude and
+    # a few hundred km in radius. We exaggerate slightly for visual clarity.
+    n_satellites = 240          # ~240 points suggest a populated but sparse belt
+    np.random.seed(42)          # Deterministic scatter for reproducibility
+
+    # Azimuthal positions -- slightly irregular spacing (not perfectly even)
+    # to avoid looking like a simple ring
+    base_angles = np.linspace(0, 2 * np.pi, n_satellites, endpoint=False)
+    angle_jitter = np.random.uniform(-0.008, 0.008, n_satellites)  # Small jitter
+    angles = base_angles + angle_jitter
+
+    # Radial scatter: +/- 0.0002 AU (~30 km at GEO -- realistic station-keeping band)
+    radial_scatter = np.random.uniform(-0.0002, 0.0002, n_satellites) * EARTH_RADIUS_AU
+    radii = geo_radius_au + radial_scatter
+
+    # z scatter: slight inclination variation (real GEO sats drift +/-0.1 deg in lat)
+    # We exaggerate to +/-0.05 Earth radii for visibility
+    z_scatter = np.random.uniform(-0.05, 0.05, n_satellites) * EARTH_RADIUS_AU
+
+    x = radii * np.cos(angles) + center_x
+    y = radii * np.sin(angles) + center_y
+    z = z_scatter + center_z
+
+    hover_text = (
+        "Geostationary Belt (GEO)<br>"
+        "Altitude: 35,786 km above surface<br>"
+        "Radius: 42,164 km from Earth's center (6.62 Earth radii)<br><br>"
+        "Each point represents a region of this belt populated by active satellites.<br>"
+        "Approximately 550 active geostationary satellites carry TV broadcasts,<br>"
+        "weather imagery, communications, and GPS augmentation for half the world.<br><br>"
+        "<b>Apophis 2029:</b> On April 13, 2029, Apophis passes at 38,013 km --<br>"
+        "roughly 4,150 km INSIDE this belt. It will transit the sky as seen<br>"
+        "from geostationary platforms and be visible to the naked eye from Earth.<br><br>"
+        "Source: ITU, UCS Satellite Database, JPL CAD API"
+    )
+
+    traces = [
+        go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(
+                size=2.0,
+                color='rgb(220, 220, 255)',   # Cool silver-white -- human infrastructure
+                opacity=0.55,
+                symbol='circle',
+            ),
+            name='Earth: Geostationary Belt (GEO)',
+            text=[hover_text] * len(x),
+            customdata=['Earth: Geostationary Belt (GEO)'] * len(x),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True,
+        )
+    ]
+
+    return traces
+
 earth_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
             "Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)."
