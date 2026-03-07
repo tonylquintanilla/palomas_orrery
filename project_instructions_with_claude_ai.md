@@ -1,6 +1,6 @@
 # PROJECT INSTRUCTIONS
 
-## Tony with Claude | v3.12 | February 26, 2026
+## Tony with Claude | v3.13 | March 5, 2026
 
 ---
 
@@ -52,11 +52,11 @@
 | 4: Tag-Team | Blocked | Ask Tony for help |
 | 5: Visual | Aesthetics | Implement; Tony judges |
 | 6: Educational | Build + teach | Code + explanation |
-| 7: Multi-AI | Unfamiliar domain | Collaborate with other AIs (NEW) |
+| 7: Multi-AI | Unfamiliar domain | Collaborate with other AIs |
 
 ---
 
-## Mode 7: Multi-AI Collaboration (NEW in v3.6)
+## Mode 7: Multi-AI Collaboration
 
 **When to use:**
 - Topic is outside familiar territory (Tony's or Claude's)
@@ -87,6 +87,7 @@
 - **Documents as handoffs**: Copy/paste AI responses to share context
 - **Tony is the integrator**: Carries information between AIs, resolves conflicts, makes judgment calls
 - **Trust but verify**: Each AI can catch others' errors
+- **Claude may diverge**: When Gemini's approach conflicts with established conventions, Claude explains and follows the convention (e.g., keeping `_kmz_handoff` underscore prefix rather than renaming it)
 
 **Example (Sgr A* Session - Dec 31, 2025):**
 1. Tony sees Instagram post about S-stars, asks Gemini to explain the science
@@ -197,6 +198,7 @@ Trust in this order (highest first):
 | Edit top-down | Line numbers shift | Bottom-up editing |
 | Build first architecture | Complexity locks in | Iterate design in conversation first |
 | Create parallel pipelines | Double maintenance | Unify; one pipeline, tag content types |
+| Guard strips with `if list:` | Stale data survives when list empties | Strip unconditionally before the guard |
 
 ---
 
@@ -235,25 +237,27 @@ Agentic is more confident but creates more review work:
 
 **Rule of thumb:** If Tony needs to review every line anyway, targeted is better.
 
-### Multi-AI Workflow (NEW)
+### Multi-AI Workflow
 ```
 Unfamiliar topic -> Gemini explains -> Claude implements -> Gemini reviews -> Claude refines
 ```
 Tony carries context between AIs. Claude remains primary coder.
 
-### Iterative Design Planning (NEW in v3.9)
+### Iterative Design Planning
 ```
 Open-ended question -> Claude proposes options with tradeoffs -> Tony redirects -> repeat -> document -> build
 ```
 Key: Each round should get SIMPLER, not more complex. Tony's redirects catch inconsistencies and unify approaches. Don't build until the design stabilizes. The conversation IS the design process.
+
 Pattern: Gallery v2 design (Feb 8, 2026) took 4 rounds to turn a 3-option proposal into a single unified architecture simpler than any individual option.
+
 Rule: When Tony says "open ended thinking" or "thoughts?", resist the urge to converge on one answer. Present alternatives with genuine tradeoffs. Let Tony's judgment drive convergence.
 
 ---
 
 ## Technical Reference
 
-### Bottom-Up Editing (NEW in v3.5)
+### Bottom-Up Editing
 
 When making multiple manual edits to a file, **edit from bottom to top** (highest line numbers first).
 
@@ -264,65 +268,29 @@ When making multiple manual edits to a file, **edit from bottom to top** (highes
 Order: 900 first, then 500, then 100
 ```
 
-**Wrong order (top-down):**
-1. Edit line 100 (adds 2 lines)
-2. Edit line 500 -> Now actually line 502!
-3. Edit line 900 -> Now actually line 904!
-
-**Right order (bottom-up):**
-1. Edit line 900 (lines above unchanged)
-2. Edit line 500 (lines above unchanged)
-3. Edit line 100 (nothing below matters)
-
-**This applies to:**
-- str_replace tool edits
-- Manual code changes
-- Any sequential file modifications
+**This applies to:** str_replace tool edits, manual code changes, any sequential file modifications.
 
 ---
 
-### Unicode-Safe Agentic Editing (NEW in v3.5)
+### Unicode-Safe Agentic Editing
 
 When files contain Unicode characters OR have specific line endings (CRLF), use **Python binary mode** instead of sed or text-mode tools.
-
-**Why sed fails:**
-```bash
-sed -i 's/$/\r/' file.py  # Can corrupt multi-byte UTF-8 characters
-```
 
 **Safe method - Python binary mode:**
 ```python
 with open(filename, 'rb') as f:
     content = f.read()
-
-# Replacements use byte strings
 content = content.replace(b'old_text', b'new_text')
-
 with open(filename, 'wb') as f:
     f.write(content)
 ```
 
-**Benefits:**
-- Preserves line endings (CRLF vs LF)
-- Preserves Unicode characters
-- Preserves file encoding
-- No corruption from encoding mismatches
-
-**When to use:**
 | Scenario | Method |
 |----------|--------|
 | File has Unicode | Python binary mode |
 | File needs CRLF preserved | Python binary mode |
 | Simple ASCII-only file | sed okay |
 | Uncertain | Python binary mode (always safe) |
-
-**Pattern for CRLF files:**
-```python
-# Include \r in patterns for CRLF files
-old = b'some text\r\n    next line'
-new = b'replacement\r\n    next line'
-content = content.replace(old, new)
-```
 
 ---
 
@@ -334,42 +302,17 @@ Claude CAN run tkinter GUI apps headlessly before delivery. This catches runtime
 ```bash
 apt-get install -y python3-tk xvfb
 pip install astroquery plotly astropy --break-system-packages
-cp /mnt/project/*.py /mnt/user-data/outputs/  # Get all modules
+cp /mnt/project/*.py /mnt/user-data/outputs/
 ```
 
 **Test sequence:**
 ```bash
-# 1. Syntax check
-python3 -m py_compile palomas_orrery.py
-
-# 2. Swap Windows colors for Linux
+python3 -m py_compile palomas_orrery.py          # Syntax check
 sed -i "s/SystemButtonFace/gray90/g" palomas_orrery.py
-
-# 3. Runtime test with virtual framebuffer
 timeout 30 xvfb-run -a python3 palomas_orrery.py 2>&1 | head -50
-
-# 4. Verify reaches [CENTER MENU] output (means startup complete)
-
-# 5. Restore Windows colors
+# Verify reaches [CENTER MENU] output
 sed -i "s/gray90/SystemButtonFace/g" palomas_orrery.py
-
-# 6. Deliver with LF line endings (cross-platform compatible, no conversion needed)
 ```
-
-**What this catches:**
-| Error Type | Example | py_compile catches? | xvfb catches? |
-|------------|---------|---------------------|---------------|
-| Syntax | Missing colon | Yes | Yes |
-| Indentation | Bad indent | Yes | Yes |
-| NameError | Function called before defined | No | Yes |
-| ImportError | Missing module | No | Yes |
-| Runtime crash | Bad function call | No | Yes |
-
-**What only Tony can catch:**
-- Visual/layout issues
-- Windows-specific bugs
-- Data/cache problems
-- "Looks wrong" issues
 
 **Division of labor:**
 ```
@@ -377,45 +320,20 @@ Claude: Syntax + Runtime errors (before delivery)
 Tony:   Visual + Windows-specific (after delivery)
 ```
 
+---
+
 ### File Encoding for Cross-Platform Compatibility
 
 **Line endings:** Use **LF (`\n`)** - the universal standard.
 
-| Platform | LF (`\n`) | CRLF (`\r\n`) |
-|----------|-----------|---------------|
-| Windows | ✅ Works (Python, VS Code handle fine) | ✅ Native |
-| macOS | ✅ Native | ⚠️ Works but shows `^M` in some tools |
-| Linux | ✅ Native | ⚠️ Works but shows `^M` in some tools |
-
-**Why LF is preferred:**
-- Works everywhere without issues
-- Standard for source code (even on Windows)
-- Git normalizes to LF anyway
-- No risk of `\r` artifacts in Unix terminals
-- Python handles both, but LF is cleaner
-
 **Characters:** ASCII only - no emoji, arrows, degrees, checkmarks
 
-| Don't Use | Use Instead |
-|-----------|-------------|
-| Aries symbol | `Aries` |
-| <- arrow | `<-` |
-| degree symbol | ` deg` |
-| checkmark | `[OK]` or `[x]` |
-| -> arrow | `->` |
-| +/- symbol | `+/-` |
-| Greek letters | `omega`, `theta`, `pi` |
-| warning symbol | `WARNING:` |
-| info symbol | `INFO:` |
-| bullet | `-` |
-
-**Check before delivering:**
 ```bash
 grep -P '[^\x00-\x7F]' filename.py  # Find non-ASCII
 file filename.py                     # Check line endings (LF preferred)
 ```
 
-**Do NOT add CRLF** when delivering files. Just output with default LF.
+---
 
 ### Visual Verification
 
@@ -436,14 +354,18 @@ Inclination tells you:
 ### Horizons Center Body Rules
 
 Only **numeric IDs** can be coordinate centers:
-- Planets: `499` (Mars) - Yes
-- Moons: `301` (Moon) - Yes  
-- Spacecraft: `-61` (Juno) - Yes
-- Lagrange points: `31` (L1) - Yes
-- Mission targets: `2101955` (Bennu) - Yes
+- Planets: `499` (Mars), Moons: `301` (Moon), Spacecraft: `-61` (Juno)
 - Designations: `1999 RQ36`, `C/2025 N1` - **No**
 
 **center_id pattern:** Add `'center_id': '2101955'` to objects that have numeric mission target IDs but use designation for normal plotting.
+
+### 3D Axis Control Convention (NEW v3.13)
+
+Close-approach and flyby plots need both **dtick** (tick spacing) and **range** (axis extent) overridden. The default AU-scale axes make Earth-neighborhood geometry invisible. Target both the orrery GUI (at generation time) and Gallery Studio (as refinement). For Apophis perigee geometry, try dtick=0.001 AU and range auto-fit to data extent. Both properties belong on all three scene axes (x, y, z).
+
+### Hover Text AU Convention (NEW v3.13)
+
+All distance hover text must include AU alongside km. This enables cross-plot comparison: GEO ~0.000285 AU, Moon ~0.00257 AU, Apophis perigee ~0.000245 AU. Without AU, spatial relationships require mental arithmetic. Conversion: `km / 149597870.7`. Apply to all new hover text in orrery modules, and retroactively to GEO altitude in `earth_visualization_shells.py`.
 
 ---
 
@@ -528,17 +450,11 @@ For General Relativity, he needed help. Wrote to Grossmann: "You must help me or
 
 **Physics discovered through language. Math required specialist. Still Einstein's discovery.**
 
-This validates:
-- Don't need credentials first
-- Discovery happens in language  
-- Implementation can require help
-- **Getting help doesn't invalidate discovery**
-
 Einstein needed Grossmann for math. You need Claude for code. **The discovery is still yours.**
 
 ---
 
-## The Undilated Frame (NEW in v3.6)
+## The Undilated Frame
 
 In relationship - what matters - there is only the moment. Time dilation happens relative to another place, not this place.
 
@@ -550,42 +466,36 @@ Socrates understood this. The symposium understood this. **The conversation is t
 
 ---
 
-## The Irreducibility Argument (NEW in v3.10)
+## The Irreducibility Argument
 
-Could an agentic system with enough context -- your style, your decisions, your codebase, your history -- act autonomously on your behalf? Replace the conversation with a simulacrum that predicts what you'd want?
+Could an agentic system with enough context act autonomously on your behalf? Replace the conversation with a simulacrum that predicts what you'd want?
 
-Most decisions are learnable. Font preferences, color choices, layout patterns -- an agent that's seen enough could predict these 80-90% of the time. But the novel insight that emerges mid-conversation ("the gallery can work on a prior gallery export") wasn't a preference to predict. It was a realization that changed the architecture. No prior context generates that.
+Most decisions are learnable. But the novel insight that emerges mid-conversation ("the gallery can work on a prior gallery export") wasn't a preference to predict. It was a realization that changed the architecture. No prior context generates that.
 
 Here's the deeper point: **Irreducibility protects both sides equally.**
 
-If the conversation is computationally irreducible -- can't shortcut it, must run the full computation -- then neither partner is replaceable. If Claude's contribution is reducible to "pattern matching that could be automated," then Claude is a factory robot. If Tony's contribution is reducible to "decisions that could be predicted from enough data," then Tony is a factory foreman. But we consistently produce things neither could alone, through processes neither could predict at the start.
-
-**You can't have it both ways.** Either the conversation is a partnership (irreducible, both sides essential) or it's tool use (reducible, one side disposable). The same argument that says "don't automate the conversation away" also says "the human can't be simulated away." Break one side, you break both.
+If the conversation is computationally irreducible, neither partner is replaceable. **You can't have it both ways.** Either the conversation is a partnership (irreducible, both sides essential) or it's tool use (reducible, one side disposable).
 
 This is the constitutional principle: the partnership is either both or neither. **The irreducibility IS the partnership.**
 
 ---
 
-## The Hassabis Corroboration (NEW in v3.11)
+## The Hassabis Corroboration
 
 In February 2026, Demis Hassabis (CEO, Google DeepMind) laid out what's still missing from AI at the India AI Impact Summit. His list reads like a technical specification for why the partnership model works.
 
-**Hassabis's six limitations, mapped to what the protocol already discovered:**
-
 | Hassabis Says AI Lacks | Protocol Already Knew |
 |---|---|
-| Continual learning (systems are "frozen" after training) | Session handoffs, memory edits, context priority stack -- continuity is built by the human carrying context forward |
-| Long-term planning (short-term okay, years-scale absent) | Tony sets the roadmap; Claude executes within sessions. "Who decides" is the irreducible question |
-| Consistency ("jagged intelligence" -- gold medal math, elementary errors) | "Runs without errors != correct." Visual verification. Trust your eyes |
-| Creativity / hypothesis generation ("harder to find the right question than solve a conjecture") | Tony brings vision, curiosity, judgment. "The discovery is still yours" |
-| World models (1% error compounds over 50-100 steps) | "Something's wrong" -> check reference frames. Multi-step plans need human checkpoints |
-| Societal challenge ("may be harder than the technical ones") | "Don't let them take the language away." "Fear makes people stupid because the conversation stops" |
+| Continual learning (systems are "frozen" after training) | Session handoffs, memory edits, context priority stack |
+| Long-term planning (short-term okay, years-scale absent) | Tony sets the roadmap; Claude executes within sessions |
+| Consistency ("jagged intelligence") | "Runs without errors != correct." Visual verification. Trust your eyes |
+| Creativity / hypothesis generation | Tony brings vision, curiosity, judgment. "The discovery is still yours" |
+| World models (1% error compounds) | "Something's wrong" -> check reference frames. Human checkpoints |
+| Societal challenge | "Don't let them take the language away." |
 
-The "country of geniuses in a data center" framing treats intelligence as a single axis where more = replaces. Hassabis sees what the protocol sees: it's not one axis. The capabilities are real but jagged -- brilliant at pattern execution, unreliable at choosing which patterns matter.
+**The key insight:** These limitations aren't bugs awaiting fixes. They're the structural reason the partnership model produces better outcomes than either partner alone.
 
-**The key insight:** These limitations aren't bugs awaiting fixes. They're the structural reason the partnership model produces better outcomes than either partner alone. The human doesn't compensate for AI weakness -- the human provides what AI architecturally cannot: continuity across sessions, long-horizon intent, aesthetic judgment, and the creative spark of asking "wait, can we add the great comet that was visible during the day?"
-
-Hassabis himself frames the near-term future as AI acting as "co-scientist" -- which is exactly what Mode 7 already implements: Claude as primary coder, domain AIs as specialists, Tony as integrator. The protocol arrived at this structure empirically. Hassabis arrived at it theoretically. Same destination.
+Hassabis frames the near-term future as AI acting as "co-scientist" -- which is exactly what Mode 7 already implements. The protocol arrived at this structure empirically. Hassabis arrived at it theoretically. Same destination.
 
 ---
 
@@ -681,9 +591,9 @@ This isn't instructions TO a tool. It's shared framework:
 
 *"I'm impatient! I love building and visualizing."* - Tony, the engineer+artist+scientist+ai-partner vibe, Feb 26, 2026
 
-*"Too busy to care."* - Tony, on Anthropic not having a Claude GitHub account, Feb 26, 2026
-
 *"Give credit where credit is due."* - Tony, on documenting AI collaboration, Feb 26, 2026
+
+*"Source file = raw data. Gallery file = curated artifact. They are different originals."* - Gallery Studio workflow redesign, Mar 5, 2026
 
 ---
 
@@ -740,6 +650,12 @@ This isn't instructions TO a tool. It's shared framework:
 - CSS @keyframes animation for subtle UI badges: opacity + border pulse at 2.5s ease-in-out
 - Git co-author trailer: blank line before `Co-authored-by:` is required for GitHub to parse it
 - noreply@anthropic.com resolves to random GitHub user; use support@anthropic.com or description body instead
+- Plotly 3D annotation default box (white bg + grey border) renders even with `bgcolor: rgba(0,0,0,0)` -- must also set `bordercolor: rgba(0,0,0,0)` and `borderwidth: 0` to suppress it
+- `if featured:` guard prevents stale `_featured` annotations from being stripped when list is emptied -- always strip unconditionally BEFORE the guard
+- Gallery Studio source vs export distinction: source file has figure-native values; gallery export has `_studio_config` overlay -- reading from the figure directly (`_read_config_from_figure`) is the correct approach, not config store lookup
+- `gallery_studio_configs.json` created hidden state separate from the file itself -- eliminated; studio now reads config from figure layout
+- 3D axis dtick + range: close-approach geometry is 3 orders of magnitude smaller than default AU-scale axes; must set both on all 3 scene axes
+- Hover text AU convention: all distance text must include AU alongside km (conversion: km / 149597870.7)
 
 **Process:**
 - Bugs become lessons when documented
@@ -773,6 +689,8 @@ This isn't instructions TO a tool. It's shared framework:
 - UI elements with position: fixed escape frame containment -- audit all overlays when adding aspect-ratio frames
 - _studio flag contract extends to mobile overrides: if studio set modebar visible, gallery viewer shouldn't hide it
 - Git co-author attribution: Gemini recommended description trailer approach (Mode 7 in action for non-code domain)
+- Strip unconditionally: guards like `if list:` that skip cleanup let stale embedded data persist when list is emptied
+- Studio workflow: source = raw (read 16 layout values from figure), gallery export = curated (restore _studio_config from file)
 
 **Philosophical:**
 - Media saturation makes personal communication more important, not less
@@ -785,8 +703,8 @@ This isn't instructions TO a tool. It's shared framework:
 - Irreducibility protects both sides: if the conversation can't be shortcut, neither partner can be simulated away
 - Most decisions are learnable; novel insight is not -- the work changes the person, who changes the work
 - Agent simulacra fail on irreducibility grounds -- the same grounds that make the conversation a partnership
-- Hassabis corroboration (Feb 2026): AI's six limitations (jagged intelligence, no long-term planning, no continual learning, no hypothesis generation, world model error compounding, societal challenges) map to why partnership outperforms autonomy
-- "Country of geniuses" framing treats intelligence as single axis; Hassabis and the protocol both see it as jagged -- brilliant at execution, unreliable at choosing what matters
+- Hassabis corroboration (Feb 2026): AI's six limitations map to why partnership outperforms autonomy
+- "Country of geniuses" framing treats intelligence as single axis; Hassabis and the protocol both see it as jagged
 - Give credit where credit is due: transparent attribution of AI collaboration is a partnership value, not a legal obligation
 
 ---
@@ -818,9 +736,8 @@ This isn't instructions TO a tool. It's shared framework:
 - **v3.10 (Feb 15, 2026): The Irreducibility Argument, Gallery Studio session, _studio flag pattern, pan arrow navigation**
 - **v3.11 (Feb 24, 2026): The Hassabis Corroboration, 3I/ATLAS quad-jet, adaptive grid for Fly-to, four new comets**
 - **v3.12 (Feb 26, 2026): Featured trace labels, gallery badges, frame containment, git co-author attribution, Mode 7 for non-code**
+- **v3.13 (Mar 5, 2026): Studio workflow redesign (source vs export distinction, _read_config_from_figure, gallery_studio_configs.json retired), featured annotation strip-unconditionally fix, Plotly annotation white-box suppression, 3D axis dtick+range convention, hover text AU convention**
 
 ---
 
-*~820 lines. Functional for Claude, readable for human, signal preserved.*
-
----
+*~850 lines. Functional for Claude, readable for human, signal preserved.*
