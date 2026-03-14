@@ -602,7 +602,7 @@ class MissionSelector:
         for name in SCENARIOS.keys():
             self.listbox.insert(tk.END, name)
 
-        btn = ttk.Button(self.root, text="Generate Assets (Teaser + KMZ)", command=self.run_pipeline)
+        btn = ttk.Button(self.root, text="Generate Assets (Teaser + KMZ) in data/", command=self.run_pipeline)
         btn.pack(pady=20)
         
         self.status_var = tk.StringVar()
@@ -916,7 +916,7 @@ class MissionSelector:
         package_and_cleanup(mission_id, generated_files, DATA_DIR)
 
         self.status_var.set("Ready")
-        messagebox.showinfo("Success", f"Generated Teaser and KMZ Blockbuster for:\n{mission_name}")
+        messagebox.showinfo("Success", f"Generated Teaser and KMZ Blockbuster for:\n{mission_name} in data/")
 
 
 if __name__ == "__main__":

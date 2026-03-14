@@ -59,7 +59,7 @@ from palomas_orrery_helpers import (calculate_planet9_position_on_orbit, rotate_
                                     get_default_camera, print_planet_positions, create_orbit_backup, cleanup_old_orbits, 
                                     show_animation_safely)
 
-from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points, plot_hyperbolic_osculating_orbit
+from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points, plot_hyperbolic_osculating_orbit, plot_perihelion_osculating_orbit
 from close_approach_data import get_approach_within_date_range, add_cad_perigee_marker, fetch_position_at_approach
 
 # Exoplanet system support
@@ -1773,6 +1773,153 @@ def _add_close_approach_extras(fig, selected_objects, objects, center_object_nam
             print(f"  [HypOsc] Error plotting hyperbolic osculating for {obj_name}: {e}", flush=True)
             import traceback
             traceback.print_exc()
+
+
+# ============================================================================
+# PERIHELION OSCULATING ORBIT: Sun-centered osculating conic at Tp
+# Capability D from the close approach infrastructure (March 2026).
+# Called after plot_idealized_orbits when center is Sun and apsidal markers on.
+# ============================================================================
+
+def _is_comet(obj_info):
+    """
+    Detect comets by Horizons ID pattern.
+    
+    Returns True for:
+      - C/ designated comets (C/2025 N1, C/2023 A3, etc.)
+      - Interstellar objects (1I/Oumuamua, 2I/Borisov, 3I/ATLAS)
+      - Numeric record numbers for periodic comets (Halley = 90000030)
+      - A/ designated objects (A/2017 U1 = 1I/Oumuamua's original ID)
+    """
+    obj_id = obj_info.get('id', '')
+    name = obj_info.get('name', '')
+    
+    # C/ designation (most comets)
+    if obj_id.startswith('C/'):
+        return True
+    
+    # A/ designation (interstellar objects before reclassification)
+    if obj_id.startswith('A/'):
+        return True
+    
+    # Interstellar objects by name pattern (1I/, 2I/, 3I/, etc.)
+    if len(name) >= 3 and name[0].isdigit() and name[1:3] == 'I/':
+        return True
+    
+    # Numeric record numbers for periodic comets (90000000+)
+    # Halley = 90000030, Encke = 90000002, etc.
+    if obj_id.isdigit() and len(obj_id) >= 8:
+        try:
+            if int(obj_id) >= 90000000:
+                return True
+        except ValueError:
+            pass
+    
+    return False
+
+
+def _add_perihelion_osculating_orbit(fig, selected_objects, objects, color_map,
+                                      date_obj, show_apsidal_markers, parent_window):
+    """
+    Add perihelion osculating orbit arcs for comets in Sun-centered views.
+
+    Capability D: Sun-centered counterpart to Capabilities B/C.
+    Called after plot_idealized_orbits when center is Sun.
+
+    For each selected comet: resolves Tp (perihelion time), fetches osculating
+    elements at that epoch centered on the Sun, and plots the instantaneous
+    Keplerian conic (hyperbola for e>1, ellipse for e<=1) as a white dotted arc.
+
+    Parameters:
+        fig:                    Plotly Figure object
+        selected_objects:       List of selected object names (str)
+        objects:                Full objects list (dicts)
+        color_map:              Color lookup function
+        date_obj:               Plot start date (datetime)
+        show_apsidal_markers:   Bool -- only run if True
+        parent_window:          Tkinter root window for dialogs
+    """
+    if not show_apsidal_markers:
+        return
+
+    for obj_name in selected_objects:
+        # Find object metadata
+        obj_info = next((o for o in objects if o['name'] == obj_name), None)
+        if obj_info is None:
+            continue
+
+        # Only process smallbody objects
+        if obj_info.get('id_type') not in ('smallbody',):
+            continue
+
+        # Only process comets (detected by ID pattern)
+        if not _is_comet(obj_info):
+            continue
+
+        print(f"\n[PeriOsc] Processing comet {obj_name} for perihelion osculating orbit", flush=True)
+
+        try:
+            from idealized_orbits import plot_perihelion_osculating_orbit
+            fig = plot_perihelion_osculating_orbit(
+                fig=fig,
+                obj_name=obj_name,
+                obj_info=obj_info,
+                color_map=color_map,
+                date=date_obj,
+                show_apsidal_markers=show_apsidal_markers,
+                parent_window=parent_window,
+            )
+        except Exception as e:
+            print(f"  [PeriOsc] Error plotting perihelion osculating for {obj_name}: {e}", flush=True)
+            import traceback
+            traceback.print_exc()
+
+
+# ============================================================================
+# SPACECRAFT ENCOUNTER MARKERS: Pairwise encounter detection
+# Step 4 of spacecraft encounter infrastructure (March 2026).
+# Called alongside _add_close_approach_extras and _add_perihelion_osculating_orbit.
+#
+# Detects when a spacecraft trajectory passes near a non-center target body
+# that is ALSO selected in the scene (Mode 2 from the handoff).
+#
+# Mode 1 (spacecraft -> center body) is already handled by add_closest_approach_marker
+# which fires on the trajectory positions_dict (already center-relative).
+# This function handles Mode 2 (spacecraft -> non-center target, both heliocentric).
+# ============================================================================
+
+def _add_spacecraft_encounter_markers(fig, selected_objects, objects, dates_lists,
+                                        center_object_name, center_id, color_map,
+                                        show_closest_approach, positions_cache=None):
+    """
+    Add tagged encounter markers for spacecraft missions.
+
+    Replaces the original pairwise computation approach (which failed due to
+    date grid mismatches between spacecraft and target). Now delegates to
+    spacecraft_encounters.py which uses authoritative tagged encounter data
+    from NASA/JPL mission documentation.
+
+    Same signature as the original for drop-in replacement at both Pipeline
+    call sites.
+    """
+    try:
+        from spacecraft_encounters import add_tagged_encounter_markers
+        add_tagged_encounter_markers(
+            fig=fig,
+            selected_objects=selected_objects,
+            objects=objects,
+            dates_lists=dates_lists,
+            center_object_name=center_object_name,
+            center_id=center_id,
+            color_map=color_map,
+            show_closest_approach=show_closest_approach,
+            positions_cache=positions_cache,
+        )
+    except ImportError:
+        print("[ENCOUNTER] spacecraft_encounters.py not found — skipping tagged markers", flush=True)
+    except Exception as e:
+        print(f"[ENCOUNTER] Error adding tagged encounter markers: {e}", flush=True)
+
 
 def calculate_analytical_position(obj_name, date_obj, center_id='Sun'):
     """
@@ -4764,9 +4911,9 @@ def plot_objects():
                                     center_body=center_object_name,
                                     color_map=color_map,
                                     date_range=(plotted_dates[0], plotted_dates[-1]) if plotted_dates else None,
-                                    marker_color='yellow'  # Yellow for Plotted Period
+                                    marker_color='yellow',  # Yellow for Plotted Period
+                                    obj_info=obj
                                 )
-
             positions = {}
 
             for obj in objects:
@@ -5157,7 +5304,35 @@ def plot_objects():
                     parent_window=root,
                 )
 
-                    # Add refined orbits if we're centered on a planet with moons
+            # ---- Capability D: Perihelion osculating orbit (Sun-centered) --------
+            if center_object_name == 'Sun' and show_apsidal_markers_var.get():
+                _add_perihelion_osculating_orbit(
+                    fig=fig,
+                    selected_objects=selected_objects,
+                    objects=objects,
+                    color_map=color_map,
+                    date_obj=date_obj,
+                    show_apsidal_markers=show_apsidal_markers_var.get(),
+                    parent_window=root,
+                )
+
+            # ---- Spacecraft Encounter Markers (Mode 2: pairwise detection) --------
+            # Only fires for Sun-centered plots where both objects are heliocentric
+        #    if center_object_name == 'Sun' and show_closest_approach_var.get():
+            # ---- Spacecraft Encounter Markers (tagged encounter data) --------
+            if show_closest_approach_var.get():                
+                _add_spacecraft_encounter_markers(
+                    fig=fig,
+                    selected_objects=selected_objects,
+                    objects=objects,
+                    dates_lists=dates_lists,
+                    center_object_name=center_object_name,
+                    center_id=center_id,
+                    color_map=color_map,
+                    show_closest_approach=show_closest_approach_var.get(),
+                )
+
+            # Add refined orbits if we're centered on a planet with moons
             if center_object_name != 'Sun' and REFINED_AVAILABLE:
                 # Get the moons for this center
                 moons_to_plot = []
@@ -6275,9 +6450,9 @@ def animate_objects(step, label):
                                     center_body=center_object_name,
                                     color_map=color_map,
                                     date_range=(context_dates[0], context_dates[-1]) if context_dates else None,
-                                    marker_color=base_color  # Use base color for Full Mission
+                                    marker_color=base_color,  # Use base color for Full Mission
+                                    obj_info=obj_info
                                 )
-
             # Plot actual orbits using the orbit_dates_lists (DETAIL layer for trajectories)
 
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
@@ -6323,6 +6498,34 @@ def animate_objects(step, label):
                     settings=settings,
                     show_apsidal_markers=show_apsidal_markers_var.get(),
                     parent_window=root,
+                )
+
+            # ---- Capability D: Perihelion osculating orbit (Sun-centered) --------
+            if center_object_name == 'Sun' and show_apsidal_markers_var.get():
+                _add_perihelion_osculating_orbit(
+                    fig=fig,
+                    selected_objects=selected_object_names,
+                    objects=objects,
+                    color_map=color_map,
+                    date_obj=dates_list[0] if dates_list else datetime.now(),
+                    show_apsidal_markers=show_apsidal_markers_var.get(),
+                    parent_window=root,
+                )
+
+            # ---- Spacecraft Encounter Markers (Mode 2: pairwise detection) --------
+        #    if center_object_name == 'Sun' and show_closest_approach_var.get():
+            # ---- Spacecraft Encounter Markers (tagged encounter data) --------
+            if show_closest_approach_var.get():                
+                _add_spacecraft_encounter_markers(
+                    fig=fig,
+                    selected_objects=selected_object_names,
+                    objects=objects,
+                    dates_lists=dates_lists,
+                    center_object_name=center_object_name,
+                    center_id=center_id,
+                    color_map=color_map,
+                    show_closest_approach=show_closest_approach_var.get(),
+                    positions_cache=positions_over_time,
                 )
 
             for i, trace in enumerate(fig.data):
@@ -7996,7 +8199,190 @@ def create_mission_checkbutton(name, variable, dates):
     tooltip_text = f"{info_text}\nMission duration: {dates}"
     if 'mission_url' in INFO:
         tooltip_text += f"\nMore Info: {INFO['mission_url']}"
+
     CreateToolTip(checkbutton, tooltip_text)
+
+    # Stage B: Encounter preset "Go" buttons (always visible, educational)
+    try:
+        from spacecraft_encounters import (get_encounters_for_spacecraft,
+                                           get_full_mission_preset,
+                                           get_encounter_preset)
+        
+        encounters = get_encounters_for_spacecraft(name)
+        full_preset = get_full_mission_preset(name)
+        if encounters or full_preset:
+            enc_frame = tk.Frame(mission_frame)
+            enc_frame.pack(anchor='w', padx=(25, 0))
+            btn_col = 0
+            btn_row = 0
+            if full_preset:
+                def make_full_cmd(sc=name):
+                    return lambda: _apply_mission_preset(sc, 'full_mission')
+                fb = tk.Button(enc_frame, text="Go: Full Mission",
+                               command=make_full_cmd(), font=('TkDefaultFont', 8))
+                fb.grid(row=btn_row, column=btn_col, padx=(0, 4), pady=1, sticky='w')
+                also_names = ', '.join(full_preset.get('select_also', []))
+                CreateToolTip(fb, f"Full mission overview: {full_preset.get('start_date','')} to {full_preset.get('end_date','')}\nCenter: {full_preset.get('center','Sun')}, Scale: Auto\nObjects: {also_names}")
+                btn_col += 1
+                if btn_col >= 3:
+                    btn_col = 0
+                    btn_row += 1
+            for idx, enc in enumerate(encounters):
+                enc_label = enc.get('label', f'Encounter {idx}')
+                def make_enc_cmd(sc=name, ei=idx):
+                    return lambda: _apply_mission_preset(sc, 'encounter', ei)
+                eb = tk.Button(enc_frame, text=f"Go: {enc_label}",
+                               command=make_enc_cmd(), font=('TkDefaultFont', 8))
+                eb.grid(row=btn_row, column=btn_col, padx=(0, 4), pady=1, sticky='w')
+                # Build informative tooltip
+                dist_au = enc.get('dist_au', 0)
+                dist_km = enc.get('dist_km', 0)
+                center_tip = enc.get('center_closeup') or enc.get('center', 'Sun')
+                tip = (f"{enc_label}: {enc.get('date','')}\n"
+                       f"Target: {enc.get('target','')}, "
+                       f"Distance: {dist_au:.7f} AU ({dist_km:,.0f} km)\n"
+                       f"Center: {center_tip}, Type: {enc.get('type','')}")
+                # Add adaptive resolution info if available
+                try:
+                    from spacecraft_encounters import _calculate_encounter_resolution
+                    res = _calculate_encounter_resolution(enc)
+                    if res:
+                        w_sec = (res['end_dt'] - res['start_dt']).total_seconds()
+                        if w_sec > 86400:
+                            w_str = f"{w_sec/86400:.1f} days"
+                        elif w_sec > 3600:
+                            w_str = f"{w_sec/3600:.1f} hrs"
+                        else:
+                            w_str = f"{w_sec/60:.0f} min"
+                        tip += f"\nResolution: {res['fetch_step']} step, {w_str} window"
+                except ImportError:
+                    pass
+                CreateToolTip(eb, tip)
+                btn_col += 1
+                if btn_col >= 3:
+                    btn_col = 0
+                    btn_row += 1
+
+    except ImportError:
+        pass
+
+def _apply_mission_preset(spacecraft_name, preset_type='encounter', encounter_index=0):
+    """Apply a mission preset: set center, dates, scale, check objects, then plot."""
+    try:
+        from spacecraft_encounters import get_full_mission_preset, get_encounter_preset
+        preset = get_full_mission_preset(spacecraft_name) if preset_type == 'full_mission' else get_encounter_preset(spacecraft_name, encounter_index)
+        if not preset:
+            print(f"[ENCOUNTER PRESET] No preset for {spacecraft_name}", flush=True)
+            return
+        
+        label = preset.get('label', 'Preset')
+        print(f"[ENCOUNTER PRESET] Applying: {spacecraft_name} {label}", flush=True)
+
+        # Uncheck all objects first -- each preset is a fresh view, not additive
+        # Also clear _was_checked shadow flag to prevent on_center_change from
+        # restoring the previous center's checkbox when center changes
+        for obj in objects:
+            if obj.get('var'):
+                obj['var'].set(0)
+            obj['_was_checked'] = False
+
+        # Check spacecraft + select_also
+        sc_obj = next((obj for obj in objects if obj['name'] == spacecraft_name), None)
+        if sc_obj and sc_obj.get('var'):
+            sc_obj['var'].set(1)
+        for also_name in preset.get('select_also', []):
+            also_obj = next((obj for obj in objects if obj['name'] == also_name), None)
+            if also_obj and also_obj.get('var'):
+                also_obj['var'].set(1)
+
+        center = preset.get('center', 'Sun')
+        update_center_dropdown()
+        center_object_var.set(center)
+
+        for date_str, (yr, mo, dy, hr, mn) in [
+            (preset.get('start_date'), (entry_year, entry_month, entry_day, entry_hour, entry_minute)),
+            (preset.get('end_date'), (end_entry_year, end_entry_month, end_entry_day, end_entry_hour, end_entry_minute)),
+        ]:
+            if date_str:
+                # Parse datetime string -- supports both '%Y-%m-%d' and '%Y-%m-%d %H:%M:%S'
+                try:
+                    from datetime import datetime as dt_cls
+                    if ' ' in date_str:
+                        dt_parsed = dt_cls.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+                    else:
+                        dt_parsed = dt_cls.strptime(date_str, '%Y-%m-%d')
+                    for widget, val in [
+                        (yr, str(dt_parsed.year)),
+                        (mo, str(dt_parsed.month)),
+                        (dy, str(dt_parsed.day)),
+                        (hr, str(dt_parsed.hour)),
+                        (mn, str(dt_parsed.minute)),
+                    ]:
+                        widget.delete(0, tk.END)
+                        widget.insert(0, val)
+                except (ValueError, TypeError) as parse_err:
+                    print(f"[ENCOUNTER PRESET] Date parse error: {date_str} -> {parse_err}", flush=True)
+        if preset.get('start_date') and preset.get('end_date'):
+            try:
+                from datetime import datetime as dt_cls
+                fmt = '%Y-%m-%d %H:%M:%S' if ' ' in preset['start_date'] else '%Y-%m-%d'
+                s = dt_cls.strptime(preset['start_date'], fmt)
+                fmt_e = '%Y-%m-%d %H:%M:%S' if ' ' in preset['end_date'] else '%Y-%m-%d'
+                e = dt_cls.strptime(preset['end_date'], fmt_e)
+                total_days = max(1, int((e - s).total_seconds() / 86400))
+                days_to_plot_entry.delete(0, tk.END)
+                days_to_plot_entry.insert(0, str(total_days))
+            except ValueError:
+                pass
+        # Set trajectory fetch step if preset provides one (adaptive resolution)
+        fetch_step = preset.get('fetch_step')
+        if fetch_step:
+            trajectory_interval_entry.delete(0, tk.END)
+            trajectory_interval_entry.insert(0, fetch_step)
+            print(f"[ENCOUNTER PRESET] Trajectory interval set to {fetch_step}", flush=True)
+        plot_scale = preset.get('plot_scale_au')
+
+        """
+        for date_str, (yr, mo, dy, hr, mn) in [
+            (preset.get('start_date'), (entry_year, entry_month, entry_day, entry_hour, entry_minute)),
+            (preset.get('end_date'), (end_entry_year, end_entry_month, end_entry_day, end_entry_hour, end_entry_minute)),
+        ]:
+            if date_str:
+                parts = date_str.split('-')
+                if len(parts) == 3:
+                    for widget, val in [(yr, parts[0]), (mo, str(int(parts[1]))), (dy, str(int(parts[2]))), (hr, '0'), (mn, '0')]:
+                        widget.delete(0, tk.END)
+                        widget.insert(0, val)
+        if preset.get('start_date') and preset.get('end_date'):
+            try:
+                from datetime import datetime as dt_cls
+                s = dt_cls.strptime(preset['start_date'], '%Y-%m-%d')
+                e = dt_cls.strptime(preset['end_date'], '%Y-%m-%d')
+                days_to_plot_entry.delete(0, tk.END)
+                days_to_plot_entry.insert(0, str((e - s).days))
+            except ValueError:
+                pass
+        plot_scale = preset.get('plot_scale_au')
+        """
+
+        if plot_scale is None:
+            scale_var.set('Auto')
+        else:
+            scale_var.set('Manual')
+            custom_scale_entry.delete(0, tk.END)
+            custom_scale_entry.insert(0, str(plot_scale))
+    #    print(f"[ENCOUNTER PRESET] Center={center}, Scale={'Auto' if plot_scale is None else f'{plot_scale} AU'}", flush=True)
+        print(f"[ENCOUNTER PRESET] Center={center}, Scale={'Auto' if plot_scale is None else f'{plot_scale:.7f} AU'}"
+              f"{f', Step={fetch_step}' if fetch_step else ''}", flush=True)        
+        root.after(100, plot_objects)
+    except ImportError:
+        print("[ENCOUNTER PRESET] spacecraft_encounters.py not found", flush=True)
+    except Exception as e:
+        print(f"[ENCOUNTER PRESET] Error: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+
+
 # Start dates are the day after launch to avoid missing Horizons data.
 create_mission_checkbutton("Apollo 11 S-IVB", apollo11sivb_var, "(1969-07-16:17 to 1969-07-28:00)")     # Time Specification: Start=1969-07-16 17 UT , Stop=1969-07-28 00, Step=1 (hours)
 create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2002-03-03)")

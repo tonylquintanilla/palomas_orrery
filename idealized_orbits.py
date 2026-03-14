@@ -6657,6 +6657,7 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         'Venus':   '299',
         'Mercury': '199',
         'Moon':    '301',
+        'Sun':     '10',
     }
 
     center_horizons_id = CENTER_TO_HORIZONS_ID.get(center_id)
@@ -6856,6 +6857,373 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
     )
 
     print(f"[HypOsc] Added hyperbolic osculating orbit for {obj_name}: "
+          f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * 149597870.7:,.1f} km)",
+          flush=True)
+
+    return fig
+
+
+def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
+                                      date, show_apsidal_markers=False,
+                                      parent_window=None):
+    """
+    Plot Sun-centered osculating orbit arc at perihelion epoch for comets.
+
+    Capability D: The Sun-centered counterpart to Capability C.
+
+    Fetches heliocentric osculating elements at perihelion time (Tp), then
+    draws the instantaneous Keplerian conic the comet would follow if the
+    Sun were the only gravitational influence.
+
+    For hyperbolic comets (e > 1): draws a hyperbolic arc (open curve).
+    For elliptical comets (e <= 1): draws an elliptical arc clipped to plot bounds.
+
+    The arc provides high-resolution perihelion detail that the ephemeris
+    trace typically lacks -- comets race through perihelion and the standard
+    trajectory points are often days apart through the most dynamic region.
+
+    KEY DESIGN DECISIONS:
+
+    1. Epoch at perihelion (Tp), not plot start.
+       Elements fetched at Tp give the osculating conic AT perihelion.
+       Three-path Tp resolution: osculating cache -> analytical elements -> fetch.
+
+    2. Arc bounded by the plotted cube (spatial clipping).
+       Same approach as Capability C: binary search for theta where r = clip_distance.
+       Works for both hyperbolic (asymptote-bounded) and elliptical (full orbit clipped).
+
+    3. Point density highest at perihelion (sinh spacing for hyperbolic,
+       uniform with extra density near perihelion for elliptical).
+
+    4. White color, dot line style.
+       Consistent with "reference curve, not actual trajectory."
+
+    5. Bypass osculating cache for the epoch-specific fetch.
+       Cache keys on obj_name + center_body with no date component.
+
+    Parameters:
+        fig:              Plotly Figure object
+        obj_name (str):   Display name e.g. '3I/ATLAS', 'Halley'
+        obj_info (dict):  Object metadata dict from objects list
+        color_map:        Color lookup function
+        date (datetime):  Plot start date (used as fallback only)
+        show_apsidal_markers (bool): Should always be True when called
+        parent_window:    Tkinter parent window for dialog prompts
+
+    Returns:
+        fig (modified in place; returned for chaining)
+
+    Claude: 3/10/26 -- initial version    
+    """
+    import numpy as np
+    import plotly.graph_objects as go
+    from datetime import datetime
+
+    horizons_id = obj_info.get('id', obj_name)
+    id_type     = obj_info.get('id_type', 'smallbody')
+
+    # ---- Resolve Tp (perihelion epoch) via three-path fallback ---------------
+    # Path A: Tp from osculating cache (heliocentric entry)
+    # Path B: Tp from analytical elements in orbital_elements.py
+    # Path C: Fetch at plot start date, read Tp from returned elements
+
+    tp_jd = None
+    tp_source = None
+
+    # Path A: Osculating cache
+    try:
+        from osculating_cache_manager import load_cache
+        cache = load_cache()
+        if obj_name in cache and not obj_name.startswith('_'):
+            cached_tp = cache[obj_name].get('elements', {}).get('TP')
+            if cached_tp:
+                tp_jd = cached_tp
+                tp_source = 'osculating cache'
+    except Exception as ex:
+        print(f"[PeriOsc] Cache lookup failed for {obj_name}: {ex}", flush=True)
+
+    # Path B: Analytical elements
+    if tp_jd is None:
+        try:
+            from orbital_elements import planetary_params as analytical_params
+            if obj_name in analytical_params and 'TP' in analytical_params[obj_name]:
+                tp_jd = analytical_params[obj_name]['TP']
+                tp_source = 'analytical elements'
+        except Exception as ex:
+            print(f"[PeriOsc] Analytical lookup failed for {obj_name}: {ex}", flush=True)
+
+    # Path C: Fetch at plot start date, read Tp from returned elements
+    if tp_jd is None:
+        try:
+            from osculating_cache_manager import fetch_osculating_elements
+            print(f"[PeriOsc] No cached Tp for {obj_name} -- fetching at plot start date", flush=True)
+            entry = fetch_osculating_elements(
+                obj_name=obj_name,
+                horizons_id=horizons_id,
+                id_type=id_type,
+                date=date,
+                center_body='@10',
+            )
+            if entry and entry.get('elements', {}).get('TP'):
+                tp_jd = entry['elements']['TP']
+                tp_source = 'Horizons fetch (plot start)'
+        except Exception as ex:
+            print(f"[PeriOsc] Tp fetch failed for {obj_name}: {ex}", flush=True)
+
+    if tp_jd is None:
+        print(f"[PeriOsc] No perihelion time available for {obj_name} -- skipping", flush=True)
+        return fig
+
+    # Convert Tp Julian Date to datetime
+    try:
+        from astropy.time import Time
+        tp_datetime = Time(tp_jd, format='jd').datetime
+    except Exception as ex:
+        print(f"[PeriOsc] Could not convert Tp JD to datetime: {ex}", flush=True)
+        return fig
+
+    print(f"\n[PeriOsc] Perihelion osculating orbit for {obj_name}", flush=True)
+    print(f"  Tp: {tp_datetime.strftime('%Y-%m-%d %H:%M')} UTC (JD {tp_jd:.6f})", flush=True)
+    print(f"  Tp source: {tp_source}", flush=True)
+
+    # ---- Fetch osculating elements at Tp, centered on Sun --------------------
+    # BYPASS CACHE: cache keys on obj_name+center with no date component.
+    # A cached entry from a different date would give wrong elements.
+    try:
+        from osculating_cache_manager import fetch_osculating_elements
+        entry = fetch_osculating_elements(
+            obj_name=obj_name,
+            horizons_id=horizons_id,
+            id_type=id_type,
+            date=tp_datetime,
+            center_body='@10',   # Sun
+        )
+        elements = entry['elements'] if entry else None
+    except Exception as ex:
+        print(f"[PeriOsc] Could not fetch elements at Tp: {ex}", flush=True)
+        return fig
+
+    if elements is None:
+        print(f"[PeriOsc] No elements returned for {obj_name} at Tp", flush=True)
+        return fig
+
+    e_osc     = elements.get('e', 0)
+    a_osc     = elements.get('a', None)
+    i_osc     = elements.get('i', 0)
+    omega_osc = elements.get('omega', 0)
+    Omega_osc = elements.get('Omega', 0)
+    epoch_osc = elements.get('epoch', tp_datetime.strftime('%Y-%m-%d osc.'))
+
+    if a_osc is None or a_osc == 0:
+        print(f"[PeriOsc] Invalid semi-major axis for {obj_name} -- skipping", flush=True)
+        return fig
+
+    # Perihelion distance
+    if e_osc > 1:
+        q_osc = abs(a_osc) * (e_osc - 1.0)
+        orbit_type = "Hyperbolic"
+    else:
+        q_osc = a_osc * (1.0 - e_osc)
+        orbit_type = "Elliptical"
+
+    print(f"[PeriOsc] Elements at perihelion epoch:", flush=True)
+    print(f"  e={e_osc:.6f} ({orbit_type}), a={a_osc:.8f} AU", flush=True)
+    print(f"  i={i_osc:.2f} deg, omega={omega_osc:.2f}, Omega={Omega_osc:.2f}", flush=True)
+    print(f"  q={q_osc:.9f} AU = {q_osc * 149597870.7:,.1f} km", flush=True)
+
+    # ---- Perihelion velocity from vis-viva equation --------------------------
+    # v^2 = GM * (2/r - 1/a) evaluated at r = q (perihelion)
+    # GM_sun = k^2 where k = 0.01720209895 AU^(3/2) / day  (Gaussian gravitational constant)
+    # For hyperbolic orbits, a is negative, so -1/a becomes +1/|a| -- vis-viva still works.
+    GM_sun = 0.01720209895**2   # AU^3 / day^2
+    v_perihelion_au_day = np.sqrt(GM_sun * (2.0 / q_osc - 1.0 / a_osc))  # AU/day
+    v_perihelion_km_s = v_perihelion_au_day * 149597870.7 / 86400.0       # km/s
+    v_perihelion_km_hr = v_perihelion_km_s * 3600.0                       # km/hr
+
+    print(f"[PeriOsc] Perihelion velocity: {v_perihelion_km_s:,.1f} km/s "
+          f"({v_perihelion_au_day:.6f} AU/day, {v_perihelion_km_hr:,.0f} km/hr)", flush=True)
+
+    # ---- Determine clip distance from current plot axis range ----------------
+    try:
+        axis_range = None
+        scene = fig.layout.scene
+        if scene and scene.xaxis and scene.xaxis.range:
+            r = scene.xaxis.range
+            axis_range = abs(r[1] - r[0]) / 2.0
+        if not axis_range or axis_range <= 0:
+            axis_range = max(q_osc * 10, 0.1)  # fallback: 10x perihelion or 0.1 AU minimum
+            print(f"[PeriOsc] Axis range fallback: {axis_range:.4f} AU", flush=True)
+        else:
+            print(f"[PeriOsc] Axis half-width: {axis_range:.4f} AU", flush=True)
+    except Exception:
+        axis_range = max(q_osc * 10, 0.1)
+
+    clip_distance = axis_range * 1.5   # 50% beyond visible edge
+
+    # ---- Generate orbit points based on conic type ---------------------------
+    if e_osc > 1.0:
+        # ---- HYPERBOLIC BRANCH (same pattern as Capability C) ----------------
+        abs_a = abs(a_osc)
+
+        asymptote_angle = np.arccos(-1.0 / e_osc)
+
+        def r_hyp(th):
+            return abs_a * (e_osc**2 - 1.0) / (1.0 + e_osc * np.cos(th))
+
+        # Binary search for theta where r = clip_distance
+        th_lo, th_hi = 0.0, asymptote_angle - 1e-8
+        for _ in range(80):
+            th_mid = (th_lo + th_hi) / 2.0
+            if r_hyp(th_mid) < clip_distance:
+                th_lo = th_mid
+            else:
+                th_hi = th_mid
+        theta_clip = min(th_lo, asymptote_angle - np.radians(0.1))
+
+        print(f"[PeriOsc] Asymptote: {np.degrees(asymptote_angle):.1f} deg | "
+              f"Clip theta: {np.degrees(theta_clip):.1f} deg", flush=True)
+
+        # Sinh spacing: dense near perihelion
+        N = 300
+        scale = 3.0
+        t = np.linspace(0, 1, N)
+        t_sinh = np.sinh(scale * t) / np.sinh(scale)
+        theta_arm = t_sinh * theta_clip
+
+        theta_full = np.concatenate([-theta_arm[::-1], theta_arm])
+        r_full = r_hyp(theta_full)
+
+        # Guard non-positive r
+        valid = r_full > 0
+        theta_full = theta_full[valid]
+        r_full = r_full[valid]
+
+        asymptote_deg = np.degrees(asymptote_angle)
+        type_detail = (
+            f"e = {e_osc:.6f} (hyperbolic)<br>"
+            f"a = {a_osc:.8f} AU (negative = hyperbola)<br>"
+            f"Asymptotic half-angle: {asymptote_deg:.1f} deg<br>"
+            f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
+        )
+
+    else:
+        # ---- ELLIPTICAL BRANCH -----------------------------------------------
+        # Full ellipse in polar: r = a(1-e^2) / (1 + e*cos(theta))
+        # Clip to cube bounds where r > clip_distance.
+        # For near-parabolic comets (e ~ 0.999), only the perihelion region
+        # fits in the plot; the aphelion end is enormous.
+
+        semi_latus = a_osc * (1.0 - e_osc**2)
+
+        def r_ell(th):
+            return semi_latus / (1.0 + e_osc * np.cos(th))
+
+        # Find the theta range where r <= clip_distance
+        # For high-e ellipses, most of the orbit is beyond clip_distance.
+        # Binary search for the clip angle from perihelion (theta=0).
+        # At theta=0, r=q (minimum). At theta=pi, r=aphelion (maximum).
+        # We want the largest theta where r <= clip_distance.
+        r_apo = a_osc * (1.0 + e_osc)  # aphelion distance
+        if r_apo <= clip_distance:
+            # Entire ellipse fits in the plot
+            theta_clip = np.pi
+            print(f"[PeriOsc] Full ellipse fits within clip distance "
+                  f"(aphelion {r_apo:.4f} AU <= clip {clip_distance:.4f} AU)", flush=True)
+        else:
+            # Binary search for clip angle
+            th_lo, th_hi = 0.0, np.pi
+            for _ in range(80):
+                th_mid = (th_lo + th_hi) / 2.0
+                if r_ell(th_mid) < clip_distance:
+                    th_lo = th_mid
+                else:
+                    th_hi = th_mid
+            theta_clip = th_lo
+            print(f"[PeriOsc] Ellipse clipped at theta: {np.degrees(theta_clip):.1f} deg "
+                  f"(r={r_ell(theta_clip):.4f} AU)", flush=True)
+
+        # Generate points: symmetric about perihelion
+        # Use higher density near perihelion for near-parabolic orbits
+        N = 500
+        if e_osc > 0.95:
+            # Sinh spacing for near-parabolic: dense at perihelion
+            scale = 2.0
+            t = np.linspace(0, 1, N)
+            t_spaced = np.sinh(scale * t) / np.sinh(scale)
+            theta_arm = t_spaced * theta_clip
+        else:
+            # Uniform spacing for moderate eccentricity
+            theta_arm = np.linspace(0, theta_clip, N)
+
+        theta_full = np.concatenate([-theta_arm[::-1], theta_arm])
+        r_full = r_ell(theta_full)
+
+        # Guard non-positive r (shouldn't happen for ellipse but be safe)
+        valid = r_full > 0
+        theta_full = theta_full[valid]
+        r_full = r_full[valid]
+
+        type_detail = (
+            f"e = {e_osc:.6f} (elliptical)<br>"
+            f"a = {a_osc:.8f} AU<br>"
+            f"Aphelion: {r_apo:.4f} AU = {r_apo * 149597870.7:,.0f} km<br>"
+            f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
+        )
+
+    # ---- Convert to Cartesian in perifocal frame -----------------------------
+    x_orbit = r_full * np.cos(theta_full)
+    y_orbit = r_full * np.sin(theta_full)
+    z_orbit = np.zeros_like(theta_full)
+
+    # ---- Standard Keplerian rotation sequence --------------------------------
+    i_rad     = np.radians(i_osc)
+    omega_rad = np.radians(omega_osc)
+    Omega_rad = np.radians(Omega_osc)
+
+    x_t, y_t, z_t = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
+    x_t, y_t, z_t = rotate_points(x_t, y_t, z_t, i_rad, 'x')
+    x_final, y_final, z_final = rotate_points(x_t, y_t, z_t, Omega_rad, 'z')
+
+    # ---- Hover text ----------------------------------------------------------
+    pert_note = (
+        "<br><br><i>Osculating orbit: instantaneous Keplerian fit<br>"
+        f"at perihelion epoch ({epoch_osc}).<br>"
+        f"Center: Sun<br>"
+        "Near perihelion: closely overlaps actual trajectory.<br>"
+        "Farther out: planetary gravity causes divergence.<br>"
+        "Arc clipped to plotted view volume.</i>"
+    )
+
+    hover_text = (
+        f"<b>{obj_name} Osculating Orbit ({orbit_type})</b><br>"
+        f"Epoch: {epoch_osc}<br>"
+        f"Center: Sun<br>"
+        f"{type_detail}<br>"
+        f"q = {q_osc:.9f} AU<br>"
+        f"q = {q_osc * 149597870.7:,.1f} km (perihelion distance)<br>"
+        f"i = {i_osc:.2f} deg"
+        f"{pert_note}"
+    )
+
+    orbit_label = f"{obj_name} Perihelion Osc. Orbit (Epoch: {epoch_osc})"
+
+    # White, dot style -- reference curve distinct from actual trajectory
+    fig.add_trace(
+        go.Scatter3d(
+            x=x_final,
+            y=y_final,
+            z=z_final,
+            mode='lines',
+            line=dict(color='white', width=2, dash='dot'),
+            name=orbit_label,
+            text=[hover_text] * len(x_final),
+            customdata=[hover_text] * len(x_final),
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True,
+        )
+    )
+
+    print(f"[PeriOsc] Added {orbit_type.lower()} perihelion osculating orbit for {obj_name}: "
           f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * 149597870.7:,.1f} km)",
           flush=True)
 

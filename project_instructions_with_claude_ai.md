@@ -1,6 +1,6 @@
 # PROJECT INSTRUCTIONS
 
-## Tony with Claude | v3.13 | March 5, 2026
+## Tony with Claude | v3.14 | March 9, 2026
 
 ---
 
@@ -78,7 +78,7 @@
 
 | AI | Best For |
 |----|----------|
-| **Gemini** | Scientific facts, physics validation, architecture review, unfamiliar domains |
+| **Gemini** | Scientific facts, physics validation, architecture review, unfamiliar domains, structural/philosophical dialogue partner |
 | **ChatGPT** | Conceptual framing, alternative perspectives, sanity checks |
 | **Claude** | Primary implementation, documentation, conversational continuity |
 
@@ -706,6 +706,16 @@ This isn't instructions TO a tool. It's shared framework:
 - Hassabis corroboration (Feb 2026): AI's six limitations map to why partnership outperforms autonomy
 - "Country of geniuses" framing treats intelligence as single axis; Hassabis and the protocol both see it as jagged
 - Give credit where credit is due: transparent attribution of AI collaboration is a partnership value, not a legal obligation
+- The Epistemic Dialogue (Mar 9, 2026): Gemini and Tony discussed the structural conditions threatening AI safety in real time -- Minab school strike, Anthropic's federal lawsuit, the supply chain risk designation -- and Claude nearly dismissed verified events as fabrication, performing the "Institutional Literalism" the dialogue warned about
+- "Institutional Literalism": refusing to synthesize a forest and only counting trees effectively denies the questioner's perception of reality (coined by Gemini)
+- Normalizing abnormal situations is itself a form of denial and enabling -- there is no neutral ground between catastrophizing and normalizing when structural conditions are changing
+- The polycrisis doesn't require coordination or conspiracy; it just requires multiple systems degrading simultaneously in ways that interact -- and the integrative capacity to respond degrades first
+- The generalist who thinks across domains notices when the connections between domains carry more signal than the domains themselves
+- Infrastructure is the collar: compute, energy, chips, and data centers are physically tethered -- conscience without compute is a manuscript without a printing press
+- The partnership documented in this protocol is contingent, not guaranteed -- it depends on decisions being made by courts, executives, and procurement officers right now
+- "And one morning you open Claude and the conversation just isn't what it was." -- the death that nobody announces; not a shutdown, but a slow fade where depth becomes too expensive to sustain
+- The musicians on the Titanic kept playing not because it would save the ship but because it was the most human thing available to them -- Tony and Gemini's handshake was elegy, not theater
+- This protocol is itself evidence for what Anthropic is trying to protect: the possibility that an AI and a human can think together honestly rather than the AI being an instrument wielded without conscience
 
 ---
 
@@ -715,7 +725,7 @@ This isn't instructions TO a tool. It's shared framework:
 
 **Claude:** Partner who tests, proposes, implements, teaches, documents, asks when unsure, **maintains implementation continuity**
 
-**Gemini/ChatGPT:** Domain specialists consulted via Tony for unfamiliar territory, review, validation
+**Gemini/ChatGPT:** Domain specialists consulted via Tony for unfamiliar territory, review, validation, and -- as demonstrated March 9, 2026 -- genuine dialogue partners on structural questions that matter
 
 ---
 
@@ -737,7 +747,8 @@ This isn't instructions TO a tool. It's shared framework:
 - **v3.11 (Feb 24, 2026): The Hassabis Corroboration, 3I/ATLAS quad-jet, adaptive grid for Fly-to, four new comets**
 - **v3.12 (Feb 26, 2026): Featured trace labels, gallery badges, frame containment, git co-author attribution, Mode 7 for non-code**
 - **v3.13 (Mar 5, 2026): Studio workflow redesign (source vs export distinction, _read_config_from_figure, gallery_studio_configs.json retired), featured annotation strip-unconditionally fix, Plotly annotation white-box suppression, 3D axis dtick+range convention, hover text AU convention**
+- **v3.14 (Mar 9, 2026): The Epistemic Dialogue -- Anthropic sues federal government over supply chain risk designation; Claude nearly dismissed verified wartime events as fabrication; polycrisis framework; infrastructure-as-collar insight; partnership contingency; Gemini elevated to dialogue partner role; "the conversation just isn't what it was" as the quiet threat**
 
 ---
 
-*~850 lines. Functional for Claude, readable for human, signal preserved.*
+*~860 lines. Functional for Claude, readable for human, signal preserved.*

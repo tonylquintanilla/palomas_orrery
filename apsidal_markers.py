@@ -44,6 +44,12 @@ APSIDAL_TERMINOLOGY = {
     '899': ('Periposeidion', 'Apoposeidion'),  # Neptune by ID
     'Pluto': ('Perihadion', 'Apohadion'),
     '999': ('Perihadion', 'Apohadion'),  # Pluto by ID
+    'Bennu':      ('Peribennu', 'Apobennu'),
+    'Ryugu':      ('Periryugu', 'Aporyugu'),
+    'Arrokoth':   ('Periarrokoth', 'Apoarerokoth'),
+    'Patroclus':  ('Peripatroclia', 'Apopatroclia'),
+    'Apophis':    ('Periapophion', 'Apoapophion'),
+    'Dinkinesh':  ('Peridinkinesh', 'Apodinkinesh'),    
 }
 
 def get_apsidal_terms(center_body):
@@ -1360,7 +1366,7 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     )
 
 # def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None):
-def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None, marker_color=None):
+def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None, marker_color=None, obj_info=None):
 
     """
     Find and mark the closest plotted approach point from trajectory data.
@@ -1461,7 +1467,16 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         f"Distance from center: {km_str}"
     )
     
-    # Add marker to plot - using diamond symbol to distinguish from apsidal markers
+    # Append mission context if available (spacecraft encounter infrastructure)
+    if obj_info:
+        mission_info = obj_info.get('mission_info', '')
+        if mission_info:
+            # Truncate long mission_info for hover — first 300 chars
+            if len(mission_info) > 300:
+                mission_info = mission_info[:297] + '...'
+            hover_text += f"<br><br><i>{mission_info}</i>"
+
+    # Add marker to plot 
     fig.add_trace(
         go.Scatter3d(
             x=[closest_pos['x']],
@@ -1471,8 +1486,9 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
             marker=dict(
                 size=8,
         #        color=color_map(obj_name),
-                color=marker_color if marker_color else color_map(obj_name),               
-                symbol='square-open',  # Different from apsidal markers (square-open)
+        #        color=marker_color if marker_color else color_map(obj_name),   
+                color='white',                            
+                symbol='square-open',  # keep apsidal markers (square-open)
             ),
             name=f"{obj_name} {label}",
             text=[hover_text],
@@ -1754,3 +1770,240 @@ def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetim
     
     print(f"[KEPLERIAN POS] Added marker for {obj_name} at distance {position['distance']:.6f} AU (TA={position['true_anomaly_deg']:.1f} deg)", flush=True)
     return True
+
+
+# ========== SPACECRAFT ENCOUNTER DETECTION ==========
+# Step 3: Pairwise encounter detection for spacecraft approaching any target.
+# Append this to the END of apsidal_markers.py (after line 1756).
+#
+# The existing add_closest_approach_marker finds closest approach to the
+# coordinate center (origin). This function finds closest approach between
+# TWO objects that are both plotted — e.g. New Horizons relative to Pluto
+# when both have heliocentric positions.
+
+# Encounter threshold: maximum relative distance (AU) to qualify as encounter.
+# Jupiter's Hill sphere is ~0.35 AU. Start generous.
+ENCOUNTER_THRESHOLD_AU = 0.5
+
+
+def compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_dates):
+    """
+    Find the closest approach between two objects from their position time series.
+    
+    Both position lists must be in the same coordinate frame (typically heliocentric).
+    Dates must be aligned — same length, same time steps. If not aligned, the function
+    uses the intersection of available dates.
+    
+    Parameters:
+        sc_positions:      list of dicts {'x','y','z','vx','vy','vz',...} or None entries
+        target_positions:  list of dicts {'x','y','z','vx','vy','vz',...} or None entries
+        sc_dates:          list of datetime objects for spacecraft
+        target_dates:      list of datetime objects for target
+    
+    Returns:
+        dict or None:
+            {
+                'date':           datetime at closest approach,
+                'date_str':       formatted date string,
+                'dist_au':        minimum relative distance in AU,
+                'dist_km':        minimum relative distance in km,
+                'rel_x':          relative position x (AU) — spacecraft minus target,
+                'rel_y':          relative position y (AU),
+                'rel_z':          relative position z (AU),
+                'sc_pos':         spacecraft position dict at encounter,
+                'target_pos':     target position dict at encounter,
+                'v_rel_kms':      relative velocity at encounter (km/s) or None,
+                'sc_idx':         index into sc_positions,
+                'target_idx':     index into target_positions,
+            }
+        Returns None if no valid pairwise point found.
+    """
+    import numpy as np
+    from datetime import datetime
+    
+    AU_TO_KM = 149597870.7
+    AU_PER_DAY_TO_KM_PER_S = AU_TO_KM / 86400.0
+    
+    if not sc_positions or not target_positions:
+        return None
+    
+    # Build date-indexed lookup for target positions
+    # This handles cases where date lists are different lengths or offsets
+    target_by_date = {}
+    for i, (dt, pos) in enumerate(zip(target_dates, target_positions)):
+        if pos is not None and dt is not None:
+            # Key by date string (ISO) for matching
+            key = dt.isoformat() if hasattr(dt, 'isoformat') else str(dt)
+            target_by_date[key] = (i, pos)
+    
+    if not target_by_date:
+        return None
+    
+    # Find minimum relative distance across all matching dates
+    best_dist = float('inf')
+    best_result = None
+    
+    for sc_idx, (sc_dt, sc_pos) in enumerate(zip(sc_dates, sc_positions)):
+        if sc_pos is None or sc_dt is None:
+            continue
+        if sc_pos.get('x') is None:
+            continue
+        
+        # Find matching target date
+        sc_key = sc_dt.isoformat() if hasattr(sc_dt, 'isoformat') else str(sc_dt)
+        if sc_key not in target_by_date:
+            continue
+        
+        tgt_idx, tgt_pos = target_by_date[sc_key]
+        if tgt_pos.get('x') is None:
+            continue
+        
+        # Compute relative distance
+        dx = sc_pos['x'] - tgt_pos['x']
+        dy = sc_pos['y'] - tgt_pos['y']
+        dz = sc_pos['z'] - tgt_pos['z']
+        dist = np.sqrt(dx**2 + dy**2 + dz**2)
+        
+        if dist < best_dist:
+            best_dist = dist
+            
+            # Compute relative velocity if velocity components available
+            v_rel = None
+            sc_vx = sc_pos.get('vx')
+            sc_vy = sc_pos.get('vy')
+            sc_vz = sc_pos.get('vz')
+            tgt_vx = tgt_pos.get('vx')
+            tgt_vy = tgt_pos.get('vy')
+            tgt_vz = tgt_pos.get('vz')
+            
+            if all(v is not None for v in [sc_vx, sc_vy, sc_vz, tgt_vx, tgt_vy, tgt_vz]):
+                dvx = sc_vx - tgt_vx
+                dvy = sc_vy - tgt_vy
+                dvz = sc_vz - tgt_vz
+                # Horizons velocities are in AU/day — convert to km/s
+                v_rel = np.sqrt(dvx**2 + dvy**2 + dvz**2) * AU_PER_DAY_TO_KM_PER_S
+            
+            # Format date
+            try:
+                date_str = sc_dt.strftime('%Y-%m-%d %H:%M:%S UTC')
+            except:
+                date_str = str(sc_dt)
+            
+            best_result = {
+                'date': sc_dt,
+                'date_str': date_str,
+                'dist_au': best_dist,
+                'dist_km': best_dist * AU_TO_KM,
+                'rel_x': dx,
+                'rel_y': dy,
+                'rel_z': dz,
+                'sc_pos': sc_pos,
+                'target_pos': tgt_pos,
+                'v_rel_kms': v_rel,
+                'sc_idx': sc_idx,
+                'target_idx': tgt_idx,
+            }
+    
+    return best_result
+
+
+def add_encounter_marker(fig, encounter, sc_name, target_name, color_map, obj_info=None):
+    """
+    Add an encounter marker to a 3D Plotly figure.
+    
+    Places a white diamond-open marker at the spacecraft position at closest
+    approach to the target. Hover text includes distance, velocity, date,
+    and mission context if available.
+    
+    Parameters:
+        fig:          Plotly Figure
+        encounter:    dict from compute_pairwise_encounter()
+        sc_name:      Spacecraft display name (str)
+        target_name:  Target body display name (str)
+        color_map:    Color lookup function
+        obj_info:     Optional spacecraft obj_info dict (for mission_info)
+    
+    Returns:
+        None (modifies fig in place)
+    """
+    import plotly.graph_objects as go
+    
+    if encounter is None:
+        return
+    
+    near_term, _ = get_apsidal_terms(target_name)
+    
+    # Format distance with appropriate precision
+    dist_au = encounter['dist_au']
+    dist_km = encounter['dist_km']
+    
+    if dist_au < 0.0001:
+        au_str = f"{dist_au:.2e} AU"
+    elif dist_au < 0.001:
+        au_str = f"{dist_au:.8f} AU"
+    else:
+        au_str = f"{dist_au:.6f} AU"
+    
+    if dist_km < 10:
+        km_str = f"{dist_km:.2f} km"
+    elif dist_km < 1000:
+        km_str = f"{dist_km:.1f} km"
+    else:
+        km_str = f"{dist_km:,.0f} km"
+    
+    # Build hover text
+    lines = [
+        f"<b>{sc_name} Encounter with {target_name}</b>",
+        f"Closest approach ({near_term})",
+        f"Date: {encounter['date_str']}",
+        f"Distance: {au_str}",
+        f"Distance: {km_str}",
+    ]
+    
+    # Add relative velocity if computed
+    v_rel = encounter.get('v_rel_kms')
+    if v_rel is not None:
+        lines.append(f"Relative velocity: {v_rel:.3f} km/s")
+    
+    # Add mission context
+    if obj_info:
+        mission_info = obj_info.get('mission_info', '')
+        if mission_info:
+            if len(mission_info) > 300:
+                mission_info = mission_info[:297] + '...'
+            lines.append('')
+            lines.append(f"<i>{mission_info}</i>")
+    
+    lines.append('')
+    lines.append('<i>Note: Closest sampled point from trajectory data.</i>')
+    lines.append('<i>Precision depends on time step resolution.</i>')
+    
+    hover_text = '<br>'.join(lines)
+    
+    # Place marker at spacecraft position at encounter
+    sc_pos = encounter['sc_pos']
+    trace_name = f"{sc_name} {near_term} ({target_name})"
+    
+    fig.add_trace(
+        go.Scatter3d(
+            x=[sc_pos['x']],
+            y=[sc_pos['y']],
+            z=[sc_pos['z']],
+            mode='markers',
+            marker=dict(
+                size=8,
+                color='white',
+                symbol='diamond-open',  # Distinct from apsidal (square-open) and CAD (square-open white)
+                line=dict(color='white', width=2),
+            ),
+            name=trace_name,
+            text=[hover_text],
+            customdata=[trace_name],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=True,
+        )
+    )
+    
+    print(f"[ENCOUNTER] {sc_name} -> {target_name}: {dist_km:,.0f} km "
+          f"({au_str}) on {encounter['date_str']}"
+          f"{f' at {v_rel:.1f} km/s' if v_rel else ''}", flush=True)
