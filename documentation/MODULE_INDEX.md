@@ -1,6 +1,6 @@
 # Paloma's Orrery - Module Index
 
-**Last Updated:** January 19, 2026  
+**Last Updated:** March 17, 2026  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Author:** Tony Quintanilla with Claude AI  
 **Philosophy:** Data Preservation is Climate Action
@@ -24,12 +24,16 @@ Paloma's Orrery is a comprehensive astronomical visualization application that t
 - Utility and helper modules: 20+
 - Development/reference modules: 4
 
-**Recent Architectural Additions (Dec 2025 - Jan 2026):**
+**Recent Architectural Additions (Dec 2025 - Mar 2026):**
 - Galactic Center / Sagittarius A* visualization system (S-stars with relativistic precession)
 - TNO satellite visualization system with analytical fallback
 - Center-body aware osculating cache
 - Paleoclimate wet bulb temperature visualization
 - Multi-AI collaboration workflow (Mode 7)
+- Close approach infrastructure: JPL CAD API, precision perigee markers, hyperbolic osculating orbits (Feb-Mar 2026)
+- Spacecraft Mission Explorer: tagged encounter database with adaptive resolution presets (Mar 2026)
+- Web gallery pipeline: Gallery Studio curation, JSON converter, gallery viewer at palomasorrery.com (Feb-Mar 2026)
+- Fly-to mobile buttons: camera presets for close-up views in gallery viewer (Mar 2026)
 
 ---
 
@@ -48,9 +52,11 @@ Paloma's Orrery is a comprehensive astronomical visualization application that t
 
 | Module | Description |
 |--------|-------------|
-| `idealized_orbits.py` | **Core orbit visualization engine** (5,516 lines). Keplerian orbit calculations using osculating elements from `osculating_cache.json`. Supports dual-orbit systems (ideal vs actual), apsidal markers, and multi-center modes including Pluto-Charon barycenter, Orcus-Vanth barycenter. Includes `plot_tno_satellite_orbit()` for TNO moon visualization and `ANALYTICAL_FALLBACK_SATELLITES` list for objects without JPL ephemeris (e.g., MK2 calculated from arXiv:2509.05880). Handles Jupiter, Saturn, Uranus, Neptune, and Pluto moon systems with proper reference frame transformations. |
+| `idealized_orbits.py` | **Core orbit visualization engine** (5,516 lines). Keplerian orbit calculations using osculating elements from `osculating_cache.json`. Supports dual-orbit systems (ideal vs actual), apsidal markers, hyperbolic osculating orbits for close approaches (epoch-specific, cache-bypassing), and multi-center modes including Pluto-Charon barycenter, Orcus-Vanth barycenter. Includes `plot_tno_satellite_orbit()` for TNO moon visualization and `ANALYTICAL_FALLBACK_SATELLITES` list for objects without JPL ephemeris (e.g., MK2 calculated from arXiv:2509.05880). Handles Jupiter, Saturn, Uranus, Neptune, and Pluto moon systems with proper reference frame transformations. |
 | `orbital_elements.py` | **Central orbital element repository** (1,328 lines). Standalone data module (NO IMPORTS to avoid circular dependencies). Contains `planetary_params` dictionary with osculating elements for all solar system objects, `parent_planets` mapping parent-satellite relationships, and `planet_tilts` for axial tilt data. Includes TNO satellite orbital elements (Dysnomia, Hi'iaka, Namaka, MK2) and analytical parameters for objects without JPL ephemeris. |
 | `apsidal_markers.py` | **Apsidal point calculation module** (1,723 lines). Calculates perihelion/aphelion (and body-specific terms like perijove, periareion) from orbital positions and elements. Includes anomaly conversions (true, eccentric, mean), date estimation for apsidal passages, and Plotly marker generation. Features `APSIDAL_TERMINOLOGY` dictionary for correct naming by central body. |
+| `close_approach_data.py` | **JPL CAD API integration**. Fetches precision flyby data from JPL's Small Body Close Approach Data API. Separate cache (`close_approach_cache.json`) to avoid collision with orbit path validator. Functions for position fetch at perigee epoch, white square-open perigee markers, hover text with distance/velocity/uncertainty. Supports major planet encounters (Earth, Mars, Jupiter, etc.). |
+| `spacecraft_encounters.py` | **Tagged spacecraft encounter database**. Contains `SPACECRAFT_ENCOUNTERS` dict with authoritative epoch, distance, velocity, and educational notes for known spacecraft encounters. Adaptive resolution: `_calculate_encounter_resolution()` derives cube scale, fetch step, and time window from encounter geometry (two length scales: cube frames the view, curvature drives resolution). Includes `SPACECRAFT_FULL_MISSION` presets. Integration via `add_tagged_encounter_markers()`. |
 | `celestial_coordinates.py` | **Coordinate transformation utilities** (528 lines). Handles conversions between equatorial (RA/Dec), ecliptic, galactic, and Cartesian coordinate systems. Essential for aligning data from different sources (JPL Horizons uses ecliptic, Gaia uses equatorial). |
 | `coordinate_system_guide.py` | **Reference frame documentation** (664 lines). Educational module documenting coordinate system conventions used throughout the project. Explains ecliptic vs equatorial frames, epoch handling, and common pitfalls. |
 | `exoplanet_coordinates.py` | **Exoplanet coordinate utilities** (517 lines). Specialized coordinate handling for exoplanet system visualization including proper motion corrections and distance-based scaling. |
@@ -179,6 +185,7 @@ Each planet has a dedicated "shells" module containing layered internal structur
 |--------|-------------|
 | `palomas_orrery_helpers.py` | **Main GUI helper functions** (851 lines). Extracted helper functions from palomas_orrery.py: trajectory fetching, orbit calculations, Planet 9 position estimation, animation safety checks. |
 | `save_utils.py` | **Unified save/export utilities** (495 lines). Consistent API for saving Plotly visualizations across all modules. Supports HTML (CDN/offline), PNG (via kaleido), with dialog or direct modes. |
+| `social_media_export.py` | **9:16 portrait export** for Instagram Reels / YouTube Shorts. Splits screen into 3D scene (top 60%) and persistent info panel (bottom 40%) that displays hover data. Parses trace customdata for name/subtitle/body. Reusable pattern for extracting structured data from Plotly hover text. |
 | `orrery_integration.py` | **External integration helpers** (395 lines). Functions for integrating orrery visualizations with external systems. |
 | `plot_data_exchange.py` | **Plot data interchange** (175 lines). Standardized format for passing plot data between modules and to reporting system. |
 | `plot_data_report_widget.py` | **Plot data reporting GUI** (661 lines). Tkinter widget for displaying plot metadata, star lists, and generating reports from visualizations. |
@@ -241,6 +248,7 @@ Each planet has a dedicated "shells" module containing layered internal structur
 |------|-------------|
 | `orbit_paths.json` | ~92MB trajectory cache with 1,300+ orbital entries |
 | `osculating_cache.json` | JPL Horizons osculating elements for 40+ objects |
+| `close_approach_cache.json` | JPL CAD API flyby data (separate from orbit cache) |
 | `star_properties_*.pkl` | Cached SIMBAD stellar properties |
 | `hip_data_*.vot` | Hipparcos catalog cache |
 | `gaia_data_*.vot` | Gaia catalog cache |
@@ -377,5 +385,5 @@ Layer 6: Utilities
 
 ---
 
-*Generated January 19, 2026 for Paloma's Orrery project*  
+*Updated March 17, 2026 for Paloma's Orrery project*  
 *Data Preservation is Climate Action*

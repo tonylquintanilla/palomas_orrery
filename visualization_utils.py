@@ -736,11 +736,24 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
     # ===== NEW: Calculate RA/Dec for full hover text =====
     radec_component = format_radec_hover_component(obj_data, obj_name, compact=False)    
         
+    # Position timestamp -- every marker should show its datetime
+    position_date_str = ""
+    pos_date = obj_data.get('position_date')
+    if pos_date is not None:
+        try:
+            if hasattr(pos_date, 'strftime'):
+                position_date_str = f"Position at: {pos_date.strftime('%Y-%m-%d %H:%M:%S')} UTC<br>"
+            else:
+                position_date_str = f"Position at: {pos_date}<br>"
+        except Exception:
+            pass
+
     # Now build the hover text
     if radec_component:
             # If we have RA/Dec, include it
         full_hover_text = (
             f"<b>{obj_name}</b><br>"  # <- Note: Changed from "<br><br>" to "<br>"
+            f"{position_date_str}"  # <- NEW LINE: Position timestamp
             f"{radec_component}<br><br>"  # <- NEW LINE: RA/Dec info
             f"Distance from Center: {distance_au} AU<br>"
             f"Distance: {distance_km} kilometers<br>"
@@ -755,6 +768,7 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
         # If no RA/Dec available, keep original format
         full_hover_text = (
             f"<b>{obj_name}</b><br><br>"
+            f"{position_date_str}<br>"  # <- NEW LINE: Position timestamp
             f"Distance from Center: {distance_au} AU<br>"
             f"Distance: {distance_km} kilometers<br>"
             f"Distance: {distance_lm} light-minutes<br>"

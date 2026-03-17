@@ -2,8 +2,8 @@
 
 **Project:** Paloma's Orrery  
 **Prepared:** March 4, 2026  
-**Updated:** March 10, 2026  
-**Status:** Implemented, integrated, and visually verified.  
+**Updated:** March 16, 2026  
+**Status:** Capability D complete. Go: Perihelion button complete. Solution-level TP implemented and verified. Non-gravitational acceleration delta visible in hover text. Position marker timestamp added. Apsidal marker TP sources corrected.  
 **Depends on:** Capability C (hyperbolic osculating orbit) -- complete and verified March 4, 2026.
 
 ---
@@ -20,72 +20,38 @@ The result: a white dotted arc showing the instantaneous Keplerian conic the com
 
 ---
 
-## Design Decisions (March 10 Session)
+## Solution-Level TP (March 16, 2026)
 
-### Separate function, not an extension of Capability C
+### The Two Kinds of TP
 
-`plot_hyperbolic_osculating_orbit` (Capability C) is planet-centered and fetches elements relative to Earth/Mars/etc. The new `plot_perihelion_osculating_orbit` (Capability D) is Sun-centered with a different epoch source (Tp instead of CAD JD) and handles both hyperbolic AND elliptical comets. Keeping them separate avoids tangling the two capabilities.
+There are **two different kinds of TP** in the Horizons system:
 
-### Both conic types in one function
+1. **Solution-level TP:** A fixed parameter of the orbit determination solution (e.g., JPL#54 for 3I/ATLAS). This is the "real" perihelion time -- when the comet, pushed by its own outgassing jets, actually reaches closest approach. It appears in the Horizons raw response header: `TP= 2460977.9952628477`. It does not change with query epoch -- only with new orbit solutions.
 
-The function branches on eccentricity after fetching elements:
-- **e > 1 (hyperbolic):** Reuses the sinh-spaced, asymptote-bounded arc pattern from Capability C.
-- **e <= 1 (elliptical):** Uses the standard conic equation r = a(1-e^2)/(1+e*cos(theta)), clipped to plot cube bounds. For near-parabolic comets (e > 0.95), sinh spacing is used for density near perihelion; otherwise uniform spacing.
+2. **Osculating TP:** The perihelion of the instantaneous Keplerian orbit (gravity-only) at a given epoch. This varies with query epoch because perturbations and non-gravitational forces shift the osculating conic. The `astroquery` `elements()` table returns this value. When queried AT the solution Tp epoch, the osculating TP gives the pure-gravity perihelion prediction.
 
-### No eccentricity threshold for the trigger
+**The difference between these two is the non-gravitational acceleration signal.** For 3I/ATLAS (CO2 outgassing, JPL solution #54): solution TP = 11:53:11, osculating TP at perihelion = 11:34:27, delta = **18.7 minutes**. Outgassing jets shifted the actual perihelion 18.7 minutes later than pure gravity predicts.
 
-Every comet benefits from seeing the osculating arc at perihelion, regardless of eccentricity. The trigger is: object is identified as a comet AND has a TP available. Eccentricity only matters inside the function for choosing the conic type. This was a deliberate design choice -- the original handoff proposed e > 0.8, but conversation revealed this was too conservative (long-period comets like Hale-Bopp at e ~ 0.995 and Hyakutake at e ~ 0.9998 would pass, but the threshold itself was the wrong discriminator).
+### TP Resolution Hierarchy (`resolve_tp()`)
 
-### Spatial clipping, not date-range clipping
+All TP consumers now use a single function with four-path fallback:
 
-The arc is clipped where r exceeds axis_range * 1.5 (same as Capability C). This is simpler than converting theta to time via Kepler's equation, and matches the user's visual expectation -- "show me what fits in my plot." For a comet like Halley (aphelion ~35 AU), only the perihelion region appears in an inner solar system plot.
+1. **Path 1: `solution_TP` from cache** -- authoritative, instant. Cached after first fetch.
+2. **Path 2: Live `fetch_solution_tp()`** -- one Horizons call via `vectors_async().text`, parses `TP=` from header. Caches result for Path 1. Returns None for planets/satellites (no solution TP in header).
+3. **Path 3: `TP` from osculating cache** -- standard for planets/satellites. Fallback for comets when Horizons unreachable.
+4. **Path 4: `TP` from analytical elements** -- hardcoded last resort.
 
-### Apsidal markers toggle controls the feature
+Path 2 at position 2 (before osculating cache) eliminates the bootstrap problem: on first press of Go: Perihelion, `resolve_tp()` misses Path 1 (nothing cached yet), fires Path 2 (live fetch), caches the result, and all subsequent calls hit Path 1. No manual seeding required.
 
-The perihelion osculating arc only appears when "Show Apsidal Markers" is on. This coupling makes sense because the perihelion marker is part of the apsidal marker system, and the osculating arc is a detail overlay on that marker.
+### Three Functions in `osculating_cache_manager.py`
 
-### Perihelion velocity via vis-viva equation
+- **`fetch_solution_tp(obj_name, horizons_id, id_type)`** -- Uses `vectors_async().text` (not `elements()` which can fail with "required masses not defined"). Parses `TP= 24xxxxx.xxx` from the JD-format line in the header. Any epoch works.
+- **`cache_solution_tp(obj_name, tp_jd, center_body)`** -- Stores `solution_TP` field alongside existing `TP` in the cache entry. Does not overwrite osculating TP.
+- **`resolve_tp(obj_name, obj_info, center_body)`** -- Four-path hierarchy. Returns `(tp_jd, tp_source)` tuple.
 
-Added after initial testing. The vis-viva equation `v^2 = GM * (2/r - 1/a)` evaluated at r = q gives the perihelion velocity from elements we already have. Works identically for hyperbolic (a negative, so -1/a becomes +1/|a|) and elliptical orbits. Displayed in hover text as km/s and AU/day. Provides vivid cross-comet comparison:
-- MAPS (sungrazer, q = 0.005 AU): 557 km/s
-- 3I/ATLAS (interstellar, q = 1.36 AU): ~68 km/s
-- Halley (periodic, q = 0.587 AU): 54.5 km/s
-- Earth for reference: 30 km/s
+### Osculating Elements ARE Available at Perihelion
 
----
-
-## Why Tp Is Already Available
-
-The osculating cache already stores `TP` (time of perihelion) as a Julian Date for every object it has fetched from Horizons. It is stored in `entry['elements']['TP']`.
-
-From `osculating_cache_manager.py` line ~416:
-```python
-cache_entry = {
-    'elements': {
-        'a': result['a'],
-        'e': result['e'],
-        ...
-        'TP': result.get('TP'),   # Julian Date of perihelion passage
-    },
-    ...
-}
-```
-
-From `orbital_elements.py`, analytical elements for known comets already carry Tp:
-```python
-'3I/ATLAS': {
-    'TP': 2460977.974321826361,   # Time of perihelion (JD)
-    ...
-}
-```
-
-Converting Julian Date to datetime -- identical pattern to Capability C's CAD approach JD:
-```python
-from astropy.time import Time
-tp_datetime = Time(tp_jd, format='jd').datetime
-```
-
-**Important: Tp epoch vs data arc.** The analytical elements may store the *next* perihelion (e.g., Halley's TP = 2061), but if the osculating cache was populated from a plot in the 1986 window, the cache stores the 1986 Tp. Path A (cache) takes priority and correctly returns the Tp matching the user's plot context. This was confirmed in Halley testing -- the pre-fetch at the 1986 plot date populated the cache with the 1986 Tp (JD 2446470.959 = Feb 9, 1986), and Path A found it.
+Despite the web interface sometimes showing "Required masses not defined, osculating elements not available" (which depends on the coordinate center), `astroquery` with `center='@sun'` successfully returns osculating elements for 3I/ATLAS at perihelion epoch. The web interface error was caused by a non-Sun center (Arrokoth default). Sun-centered queries work at all epochs.
 
 ---
 
@@ -95,11 +61,7 @@ tp_datetime = Time(tp_jd, format='jd').datetime
 
 New function appended at end of file (after `plot_hyperbolic_osculating_orbit`).
 
-**Tp resolution -- three-path fallback:**
-
-- **Path A: Osculating cache.** `load_cache()` -> look up `obj_name` -> read `elements.TP`. No fetch required. Preferred because the cache Tp matches the user's current plot context.
-- **Path B: Analytical elements.** `orbital_elements.planetary_params[obj_name]['TP']`. For known comets not yet cached. Caution: may store a different apparition's Tp than the user intends (e.g., Halley 2061 vs 1986).
-- **Path C: Horizons fetch at plot start date.** Fetch returns elements including TP. Most expensive (two fetches: one to get Tp, one to get elements AT Tp). Guarantees correct Tp for any object and any epoch.
+**Tp resolution:** Uses `resolve_tp()` (replaced the original three-path fallback in March 16 session).
 
 **Element fetch at Tp:**
 
@@ -111,6 +73,8 @@ Bypasses the osculating cache (cache keys on obj_name + center_body with no date
 - **Elliptical (e <= 1):** Conic equation with semi-latus rectum. Binary search for clip theta where r exceeds plot bounds. Full ellipse if aphelion fits within clip distance. 500 points, sinh-spaced for e > 0.95, uniform otherwise.
 
 **Perihelion velocity:** Vis-viva equation computed before the branch point, displayed in both branches' hover text.
+
+**Non-gravitational delta (March 16):** Compares `tp_jd` (solution TP from `resolve_tp()`) with `elements.get('TP')` (osculating TP from the fetch AT the solution Tp epoch). The delta is displayed in hover text when > 0.1 minutes. Uses the osculating TP from the perihelion-epoch fetch specifically -- not from the cache, which may be from a distant epoch.
 
 **Shared:** Keplerian rotation (omega, i, Omega), white dotted line style, hover text with AU convention (q in both AU and km), perihelion velocity (km/s and AU/day), legend label with epoch.
 
@@ -136,40 +100,64 @@ def _is_comet(obj_info):
     return False
 ```
 
-No eccentricity guard -- if `_is_comet()` returns True and id_type is 'smallbody', the function fires.
+**Integration points:** Two guard blocks in `palomas_orrery.py` (after ~line 5158 and ~line 6326) check: center == Sun AND show_apsidal_markers AND object is comet -> call `plot_perihelion_osculating_orbit()`.
 
-**Caller function:** Iterates selected objects, filters to smallbody comets, calls `plot_perihelion_osculating_orbit` for each.
+### 4. Go: Perihelion Button (March 15, 2026)
 
-### 4. Two integration points in `palomas_orrery.py`
+**New in `spacecraft_encounters.py`:** `get_comet_perihelion_preset(obj_name, obj_info=None)`
 
-Both are guarded by `center_object_name == 'Sun' and show_apsidal_markers_var.get()`:
-- After line ~5158 (first plot path, uses `selected_objects` and `date_obj`)
-- After line ~6326 (second plot path, uses `selected_object_names` and `dates_list[0]`)
+Builds a perihelion close-up preset for any comet. Uses `resolve_tp()` for authoritative TP, then computes:
+- `q` (perihelion distance) from `a` and `e`
+- Perihelion velocity via vis-viva: `v = sqrt(GM * (2/q - 1/a))`
+- Time window: `crossing_time = 2*q / v`, then `window = crossing_time * 20`, floor 7 days, cap 365 days
+- Plot scale: `q * 4`
 
-### 5. Import update
+Returns a preset dict with center, dates, scale, label, q, v, tp_jd, and tp_source.
 
-Line 62: added `plot_perihelion_osculating_orbit` to the import from `idealized_orbits`.
+**New in `palomas_orrery.py`:** `_apply_comet_perihelion_preset(comet_name)`
+
+Applies the preset with additive behavior (same pattern as spacecraft encounter presets):
+1. Ensures comet checkbox is checked (preserves other selections)
+2. Ensures Sun is checked
+3. Sets center to Sun
+4. Turns on apsidal markers (`show_apsidal_markers_var.set(1)`)
+5. Sets date range centered on Tp
+6. Sets manual scale to `q * 4`
+7. Sets `_encounter_plot_date` to Tp (solution TP) for position marker placement
+8. Triggers `plot_objects()`
+
+**Modified:** `create_comet_checkbutton()` and `create_interstellar_checkbutton()` in `palomas_orrery.py` -- each now adds a "Go: Perihelion" button under the comet checkbox (indented 25px, same visual pattern as spacecraft encounter Go buttons). Uses closure-capture pattern for loop variable safety.
+
+### 5. Apsidal Marker TP Corrections (March 16, 2026)
+
+**Keplerian Periapsis marker:** Now fetches osculating elements at the solution Tp epoch (not the pre-fetch epoch) to get the gravity-only perihelion time. For 3I/ATLAS: 11:34:27 UTC (previously 11:30:55 from pre-fetch at April 29).
+
+**Actual Perihelion marker:** Now uses `resolve_tp()` for the solution-level TP. For 3I/ATLAS: 11:53:11 UTC (previously 11:30:55 from osculating cache, or midnight from date-only truncation).
+
+**Midnight truncation fix:** The Actual Perihelion marker position fetch now uses full datetime (from `perihelion_full`) instead of date-only. At 68 km/s, 10 hours = 2.4 million km offset.
+
+**Non-grav delta in Actual Perihelion hover:** Shows the shift between solution TP and osculating TP at perihelion epoch.
+
+### 6. Position Marker Timestamp (March 16, 2026)
+
+**`format_detailed_hover_text()` in `visualization_utils.py`:** Added `position_date` field. Shows "Position at: YYYY-MM-DD HH:MM:SS UTC" in hover text. Previously the position marker was the only one without a timestamp.
+
+**`palomas_orrery.py`:** `obj_data['position_date'] = date_obj` injected after both `fetch_position()` call sites.
 
 ---
 
-## Trigger Chain
+## Trigger Hierarchy (Capability C vs D vs Go Button)
 
 ```
-center == 'Sun'
+center == Sun
   AND show_apsidal_markers == True
-    -> for each selected object:
-         id_type == 'smallbody'
-           AND _is_comet(obj_info) == True
-             -> resolve Tp (cache -> analytical -> fetch)
-               -> fetch elements at Tp, center='@10', bypass cache
-                 -> compute perihelion velocity (vis-viva)
-                   -> branch on e: hyperbolic or elliptical arc
-                     -> white dotted trace added to figure
-```
+    -> for each selected comet:
+         _is_comet() == True
+           -> resolve_tp() for solution TP
+             -> fetch elements AT Tp, center=Sun
+               -> hyperbolic arc (e > 1) OR elliptical arc (e <= 1)
 
-Compare to Capability C trigger chain:
-```
-center != 'Sun'
+center != Sun
   AND show_apsidal_markers == True
     -> for each selected object:
          id_type == 'smallbody'
@@ -177,82 +165,73 @@ center != 'Sun'
              -> if approach found:
                -> fetch elements at perigee JD, center=planet
                  -> hyperbolic arc (e > 1 only)
+
+Go: Perihelion button pressed:
+  -> get_comet_perihelion_preset() uses resolve_tp() for Tp, q, v
+  -> _apply_comet_perihelion_preset() sets center=Sun, dates, scale, apsidal on
+  -> _encounter_plot_date set to solution Tp
+  -> plot_objects() fires -> Capability D triggers automatically
 ```
 
-The two capabilities are mutually exclusive by center body. Both can coexist without interference.
+The two capabilities (C and D) are mutually exclusive by center body. The Go button is a convenience that sets up the view for Capability D.
 
 ---
 
 ## Files Changed
 
-| File | Change |
-|------|--------|
-| `idealized_orbits.py` | Add `'Sun': '10'` to `CENTER_TO_HORIZONS_ID` in `plot_hyperbolic_osculating_orbit` (line ~6660) |
-| `idealized_orbits.py` | Add `plot_perihelion_osculating_orbit()` function at end of file |
-| `palomas_orrery.py` | Add `plot_perihelion_osculating_orbit` to import (line ~62) |
-| `palomas_orrery.py` | Add `_is_comet()` helper and `_add_perihelion_osculating_orbit()` caller (after `_add_close_approach_extras`) |
-| `palomas_orrery.py` | Add Sun-centered guard block at first integration point (after line ~5158) |
-| `palomas_orrery.py` | Add Sun-centered guard block at second integration point (after line ~6326) |
-
-No other files need to change. `osculating_cache_manager.py`, `close_approach_data.py`, and `orbital_elements.py` are used as-is.
+| File | Change | Session |
+|------|--------|---------|
+| `idealized_orbits.py` | Add `'Sun': '10'` to `CENTER_TO_HORIZONS_ID` | March 10 |
+| `idealized_orbits.py` | Add `plot_perihelion_osculating_orbit()` function | March 10 |
+| `idealized_orbits.py` | Replace Tp resolution with `resolve_tp()` in `plot_perihelion_osculating_orbit` | March 16 |
+| `idealized_orbits.py` | Add non-grav delta to perihelion osculating orbit hover text | March 16 |
+| `idealized_orbits.py` | Fix Keplerian Periapsis marker: fetch osculating TP at solution Tp epoch | March 16 |
+| `idealized_orbits.py` | Fix Actual Perihelion marker: use `resolve_tp()` for solution TP | March 16 |
+| `idealized_orbits.py` | Fix Actual Perihelion marker: full datetime instead of midnight truncation | March 16 |
+| `palomas_orrery.py` | Add `plot_perihelion_osculating_orbit` to import | March 10 |
+| `palomas_orrery.py` | Add `_is_comet()` helper and `_add_perihelion_osculating_orbit()` caller | March 10 |
+| `palomas_orrery.py` | Add Sun-centered guard blocks at two integration points | March 10 |
+| `palomas_orrery.py` | Add `_apply_comet_perihelion_preset()` function | March 15 |
+| `palomas_orrery.py` | Modify `create_comet_checkbutton()` -- add Go: Perihelion button | March 15 |
+| `palomas_orrery.py` | Modify `create_interstellar_checkbutton()` -- add Go: Perihelion button | March 15 |
+| `palomas_orrery.py` | Inject `position_date` into `obj_data` at both fetch sites | March 16 |
+| `palomas_orrery.py` | Set `_encounter_plot_date` from preset `tp_jd` in comet preset | March 16 |
+| `spacecraft_encounters.py` | Add `get_comet_perihelion_preset()` using `resolve_tp()` | March 15/16 |
+| `osculating_cache_manager.py` | Add `fetch_solution_tp()`, `cache_solution_tp()`, `resolve_tp()` | March 16 |
+| `visualization_utils.py` | Add `position_date` to `format_detailed_hover_text()` | March 16 |
 
 ---
 
-## Test Results (March 10, 2026)
+## Test Results (March 16, 2026) -- Solution TP + Non-Gravitational Delta
 
-### 3I/ATLAS -- PASSED (hyperbolic, e ~ 6.14)
+### 3I/ATLAS -- PASSED
 
-- Tp source: osculating cache (Path A, from pre-fetch)
-- Tp: 2025-10-29 11:34 UTC (JD 2460977.983)
-- Elements at Tp: e=6.139313, a=-0.264 AU, q=1.356448 AU
-- Perihelion velocity: ~68 km/s
-- Axis half-width: 16.28 AU, clip theta: 95.6 deg (asymptote 99.4 deg)
-- Visual: dramatic hyperbola with open arms, white dotted arc
+Console output confirms the full pipeline:
+```
+[RESOLVE TP] 3I/ATLAS: Path 1 (solution TP cached) = JD 2460977.9952628477
+[COMET PRESET] Position marker date set to 2025-10-29 11:53:10
+  Keplerian periapsis TP (at Tp epoch): 11:34:26 UTC
+  [HYPERBOLIC] Perihelion: 2025-10-29 11:53:10 UTC (source: solution TP (cached))
+  [PeriOsc] Non-grav delta: 18.7 min (later)
+    Solution TP:  JD 2460977.9952628477
+    Osculating TP (at Tp): JD 2460977.9822540479
+```
 
-### MAPS (C/2026 A1) -- PASSED (elliptical near-parabolic, e ~ 0.99996)
+**Marker positions verified (left to right in plot):**
 
-- Tp source: osculating cache (Path A)
-- Tp: 2026-04-04
-- Elements at Tp: e=0.999962, a=150.33 AU, q=0.00571 AU (854,430 km)
-- Perihelion velocity: 557 km/s (0.32 AU/day) -- Kreutz sungrazer
-- Visual: tight perihelion hairpin turn, elliptical branch with sinh spacing
-- Note: fresh Horizons solution (a=150 AU) differs from analytical (a=109 AU) -- updated orbit solution
+| Marker | Time (UTC) | Source | Physics |
+|--------|-----------|--------|---------|
+| Full Mission Closest Point | 05:16:48 | Nearest daily sample | Trajectory resolution limit |
+| Keplerian Periapsis | 11:34:26 | Osculating TP at Tp epoch | Gravity-only prediction |
+| Actual Perihelion | 11:53:11 | Solution TP via `resolve_tp()` | Full physics (incl. outgassing) |
+| 3I/ATLAS Position | 11:53:10 | `_encounter_plot_date` from preset | Solution TP |
+| Plotted Period Closest Point | 23:56:38 | Nearest daily sample | Trajectory resolution limit |
 
-### Halley (1986 apparition) -- PASSED (elliptical, e ~ 0.967)
+**Non-gravitational delta:** 18.7 minutes (solution perihelion later than Keplerian). This is the integrated effect of CO2 outgassing: `g(r) = (1 au/r)^2`, JPL solution #54.
 
-- Tp source: osculating cache (Path A, from pre-fetch at 1986 plot date)
-- Tp: 1986-02-09 11:01 UTC (JD 2446470.959) -- correctly resolved to 1986 perihelion, not 2061
-- Elements at Tp: e=0.967279, a=17.94 AU, q=0.587103 AU
-- Perihelion velocity: 54.5 km/s (0.0315 AU/day, 196,278 km/hr)
-- Full ellipse visible (aphelion 35.30 AU < clip 63.53 AU)
-- Visual: complete elongated ellipse with retrograde tilt (i=162 deg)
-- Key insight: analytical elements store 2061 Tp, but Path A correctly finds 1986 Tp from cache
+**Position marker hover text:** "Position at: 2025-10-29 11:53:10 UTC" -- confirmed visible.
 
-### Comet eccentricity survey
-
-| Comet | e | Classification | Branch |
-|-------|---|---------------|--------|
-| 3I/ATLAS | 6.140 | Interstellar | Hyperbolic |
-| 2I/Borisov | 3.356 | Interstellar | Hyperbolic |
-| 1I/Oumuamua | 1.201 | Interstellar | Hyperbolic |
-| Borisov (C/2025 V1) | 1.010 | Barely hyperbolic | Hyperbolic |
-| Wierzchos (C/2024 E1) | 1.0001 | Barely hyperbolic | Hyperbolic |
-| West | 1.00002 | Barely hyperbolic | Hyperbolic |
-| McNaught | 1.00002 | Barely hyperbolic | Hyperbolic |
-| ATLAS (C/2024 G3) | 1.00001 | Barely hyperbolic | Hyperbolic |
-| Tsuchinshan | 1.00010 | Barely hyperbolic | Hyperbolic |
-| PANSTARRS | 1.00033 | Barely hyperbolic | Hyperbolic |
-| C/2025 K1 | 1.00025 | Barely hyperbolic | Hyperbolic |
-| Hyakutake | 0.99989 | Near-parabolic | Elliptical (sinh) |
-| Ikeya-Seki | 0.99992 | Near-parabolic | Elliptical (sinh) |
-| MAPS | 0.99995 | Near-parabolic | Elliptical (sinh) |
-| NEOWISE | 0.99918 | Near-parabolic | Elliptical (sinh) |
-| SWAN | 0.99937 | Near-parabolic | Elliptical (sinh) |
-| Hale-Bopp | 0.99498 | Near-parabolic | Elliptical (sinh) |
-| Lemmon | 0.99566 | Near-parabolic | Elliptical (sinh) |
-| Halley | 0.96783 | Elliptical | Elliptical (sinh) |
-
-Note: Wierzchos (e=1.0001) is technically hyperbolic despite being often described as near-parabolic. The original handoff listed it as an elliptical test case -- corrected here.
+**Bootstrap behavior:** First press: Path 2 (live fetch) fires, caches `solution_TP`. Second press and all subsequent: Path 1 (cached) fires instantly. No manual seeding required.
 
 ---
 
@@ -269,6 +248,9 @@ These work and are reused without modification:
 | White dotted line, legend label with epoch | Verified |
 | Binary search for clip angle | Verified |
 | Vis-viva equation for perihelion velocity | Verified (new) |
+| `_encounter_plot_date` one-shot override for position marker | Verified (reused from spacecraft) |
+| Additive preset pattern (ensure checked, don't uncheck) | Verified (reused from spacecraft) |
+| Closure-capture for loop variable in button callbacks | Verified (reused from spacecraft) |
 
 ---
 
@@ -276,7 +258,11 @@ These work and are reused without modification:
 
 *"When a comet swings around the Sun, there's a single moment when it's closest -- perihelion. At that exact moment, if we freeze time and ask 'what path would this comet follow if only the Sun were pulling on it?', the answer is a precise curve called the osculating conic. For comets visiting from outside the solar system -- like 3I/ATLAS -- that curve is a hyperbola: the comet swings around the Sun and leaves forever, never to return. For comets that come back -- like Halley -- that curve is a very stretched-out ellipse. The dotted white line shows that path. The colored line shows what the comet actually does, with Jupiter and Saturn also tugging on it. The difference between the dotted line and the colored line is the fingerprint of all the other planets combined.*
 
-*The hover text also tells you how fast the comet is moving at perihelion. MAPS -- a sungrazer that almost touches the Sun -- reaches 557 km/s. That's nearly 2 million kilometers per hour. Halley, which stays farther out, peaks at 54 km/s. Earth, for comparison, moves at 30 km/s. The closer you get, the faster you go -- that's Kepler's law, and one equation (vis-viva) tells you the whole story."*
+*But there's something even more interesting. Comets aren't just rocks -- they're active. When 3I/ATLAS gets close to the Sun, frozen CO2 on its surface heats up and shoots out as jets. Those tiny jets actually push the comet, like a very weak rocket engine. JPL's scientists can measure this push by comparing two different predictions: one that only uses gravity (the 'Keplerian' prediction) and one that includes the jet forces (the 'solution'). For 3I/ATLAS, the jets shifted perihelion by 18.7 minutes -- the comet arrived 18.7 minutes later than pure gravity predicted. That's the fingerprint of outgassing, and the hover text shows it.*
+
+*The hover text also tells you how fast the comet is moving at perihelion. MAPS -- a sungrazer that almost touches the Sun -- reaches 557 km/s. That's nearly 2 million kilometers per hour. Halley, which stays farther out, peaks at 54 km/s. Earth, for comparison, moves at 30 km/s. The closer you get, the faster you go -- that's Kepler's law, and one equation (vis-viva) tells you the whole story.*
+
+*Now there's a 'Go: Perihelion' button under every comet. Press it and the orrery sets everything up to show you perihelion -- the right date, the right scale, the right center. You don't have to figure out the settings. The math figures out the settings for you."*
 
 ---
 
@@ -291,7 +277,45 @@ These work and are reused without modification:
 *"Every comet benefits from seeing the pure Keplerian path at closest approach."*  
 *"557 km/s at perihelion vs 44 km/s today -- that's what grazing the Sun does."*  
 *"The closer you get, the faster you go. One equation tells you the whole story."*  
-*"Plot the 1986 perihelion, not the 2061 one -- the data arc is what matters."*
+*"Plot the 1986 perihelion, not the 2061 one -- the data arc is what matters."*  
+*"The math figures out the settings for you."* -- On the Go: Perihelion button  
+*"There are two different kinds of TP."* -- The osculating vs solution-level insight, March 15, 2026  
+*"The solution-level TP is the one true perihelion time."* -- On why raw response parsing is the right fix  
+*"Required masses not defined, osculating elements not available."* -- Horizons, reminding us that vectors always work  
+*"The physical signal is the same size as the computational noise."* -- On why `fetch_solution_tp()` isn't just cosmetic  
+*"One authoritative TP unlocks everything else."* -- On how the fix enables the non-gravitational story  
+*"The delta between Keplerian and actual perihelion is the fingerprint of outgassing."* -- The non-gravitational acceleration insight  
+*"18.7 minutes of personality."* -- On the non-gravitational shift for 3I/ATLAS, March 16, 2026  
+*"The osculating TP at perihelion is the purest Keplerian comparison point."* -- On why the epoch of the fetch matters  
+*"Outgassing jets shifted the actual perihelion 18.7 minutes later than pure gravity predicts."* -- The physics story  
+
+---
+
+## Key Lessons
+
+### March 15 Session
+
+- **Osculating TP varies with query epoch.** The TP returned by `astroquery` `elements()` is the perihelion of the instantaneous Keplerian orbit at the query epoch, not the orbit solution's perihelion. Different query epochs -> different TPs.
+- **Solution-level TP is fixed per solution.** It appears in the Horizons raw response header (`TP= <JD>`) and does not change with query epoch. Only changes when JPL publishes a new orbit solution.
+- **Pre-fetch can overwrite cached TP.** The orrery's pre-fetch mechanism queries at the GUI start date, which for wide time windows can be years from perihelion. This overwrites the cache with osculating elements at a distant epoch, shifting the cached TP.
+- **The Go button pattern extends cleanly to comets.** Same additive preset, same `_encounter_plot_date` override, same closure-capture for buttons. The vis-viva equation provides adaptive window sizing from orbital elements alone.
+
+### March 16 Session
+
+- **Live fetch at hierarchy position 2 eliminates bootstrap.** Placing `fetch_solution_tp()` before the osculating cache in the hierarchy means `resolve_tp()` fires the live fetch on first call, caches the result, and all subsequent calls hit the cached Path 1. No manual seeding, no cache deletion required.
+- **The non-gravitational delta must compare the right TPs.** Using the osculating TP from the cache (pre-fetched at a distant epoch) mixes epoch drift with the physical signal. The correct comparison is solution TP vs osculating TP fetched AT the solution Tp epoch. For 3I/ATLAS: 18.7 min (correct) vs 22.2 min (with epoch drift noise).
+- **The Keplerian Periapsis marker needs its own fetch at perihelion epoch.** The pre-fetch populates the cache at the window start date, giving a stale osculating TP. The marker should show the gravity-only perihelion time from elements fetched at the actual perihelion epoch. This costs one extra Horizons call but gives the physically meaningful value.
+- **"Actual Perihelion" = solution TP, "Keplerian Periapsis" = osculating TP at perihelion.** The two markers now have clearly distinct physics: one includes non-gravitational forces, the other is gravity-only. The difference between them is the outgassing fingerprint.
+- **Position marker timestamp makes all markers comparable.** Every marker now shows its datetime, enabling synchronicity comparison across the plot.
+- **Horizons web interface center default can mislead.** The "required masses not defined" error for 3I/ATLAS was caused by a non-Sun coordinate center (Arrokoth default in the web app). Sun-centered queries work at all epochs via the API.
+
+---
+
+## On the Horizon
+
+- **Test Halley and MAPS with solution TP.** Verify non-grav delta for periodic comets (expected: smaller for Halley, near-zero for well-behaved orbits).
+- **Adaptive encounter resolution for perihelion.** The plotted period closest point (23:56:38) is limited by daily time steps. The `_calculate_encounter_resolution` pattern from spacecraft encounters could provide finer sampling near perihelion.
+- **Window cap refinement.** Current 365-day cap may still be too generous for some objects. Consider velocity-dependent capping.
 
 ---
 
@@ -302,9 +326,14 @@ These work and are reused without modification:
 | March 4, 2026 | Design complete. Handoff document created. Implementation not started. |
 | March 10, 2026 | Design refined: both conic types (hyperbolic + elliptical) in one function; eccentricity guard removed from trigger; comet detection by ID pattern; separate function from Capability C. Code written (two patch files). |
 | March 10, 2026 | Integrated, tested, verified. Three comets tested: 3I/ATLAS (hyperbolic), MAPS (near-parabolic elliptical), Halley 1986 (moderate elliptical). All passed. Vis-viva perihelion velocity added to hover text. Wierzchos reclassified as barely hyperbolic (e=1.0001). Halley Tp resolution confirmed: cache Path A correctly returns 1986 Tp when plot is set to 1986 window. |
+| March 15, 2026 | Go: Perihelion button implemented. `get_comet_perihelion_preset()` added to `spacecraft_encounters.py`. `_apply_comet_perihelion_preset()` and button wiring added to `palomas_orrery.py`. Tested on Halley (passed), MAPS (passed), 3I/ATLAS (passed with known TP offset). |
+| March 15, 2026 | TP precision issue discovered and diagnosed. Osculating TP varies with query epoch; solution-level TP (from Horizons raw response header) is the authoritative source. `fetch_solution_tp()` planned for next session. Tony confirmed raw response parsing works: `TP= 2460977.9952628477` from vectors query header. |
+| March 16, 2026 | Solution-level TP implemented: `fetch_solution_tp()`, `cache_solution_tp()`, `resolve_tp()` added to `osculating_cache_manager.py`. Four-path hierarchy with live fetch at position 2 eliminates bootstrap. |
+| March 16, 2026 | All four items wired: position marker timestamp, non-grav delta in hover, Actual Perihelion uses solution TP, Keplerian Periapsis fetches at perihelion epoch. |
+| March 16, 2026 | Verified on 3I/ATLAS: non-grav delta = 18.7 min (CO2 outgassing), all five markers at correct times, position hover shows timestamp. |
 
 ---
 
 **Prepared by:** Tony (with Claude)  
-**Sessions:** March 4, 2026 (design), March 10, 2026 (implementation + testing)  
-**Prerequisite reading:** `apophis_handoff.md` (Capabilities A-C)
+**Sessions:** March 4 (design), March 10 (implementation + testing), March 15 (Go button + TP precision diagnosis), March 16 (solution TP + non-grav delta + apsidal marker corrections)  
+**Prerequisite reading:** `apophis_handoff.md` (Capabilities A-C), `spacecraft_mission_explorer_handoff.md` (Go button pattern)

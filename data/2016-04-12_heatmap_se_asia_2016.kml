@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="263">
+    <Document id="1312">
         <name>se_asia_2016 Heatmap (2016-04-12)</name>
-        <GroundOverlay id="264">
+        <GroundOverlay id="1313">
             <name>Thermal Overlay</name>
-            <Icon id="265">
+            <Icon id="1314">
                 <href>2016-04-12_heatmap_se_asia_2016.png</href>
             </Icon>
             <LatLonBox>
-                <north>25.0</north>
-                <south>11.0</south>
-                <east>109.0</east>
-                <west>95.0</west>
+                <north>25</north>
+                <south>11</south>
+                <east>109</east>
+                <west>95</west>
             </LatLonBox>
         </GroundOverlay>
     </Document>

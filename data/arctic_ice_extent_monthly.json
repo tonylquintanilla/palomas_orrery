@@ -8,11 +8,11 @@
       "data_url": "https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_by_Year_G02135_v4.0.xlsx",
       "citation": "Fetterer, F., K. Knowles, W. N. Meier, M. Savoie, A. K. Windnagel, and T. Stafford. 2025. Sea Ice Index, Version 4. Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center. doi:10.7265/a98x-0f50"
     },
-    "cached_date": "2026-01-15T00:07:11.236124",
-    "record_count": 562,
+    "cached_date": "2026-02-08T20:02:41.988675",
+    "record_count": 563,
     "temporal_range": {
       "start": "1979-01",
-      "end": "2025-12"
+      "end": "2026-01"
     },
     "units": "million km^2",
     "measurement_method": "Satellite passive microwave observations (SMMR, SSM/I, SSMIS)",
@@ -3396,6 +3396,12 @@
       "month": 12,
       "month_name": "December",
       "extent_million_km2": 11.22
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "month_name": "January",
+      "extent_million_km2": 13.11
     }
   ]
 }

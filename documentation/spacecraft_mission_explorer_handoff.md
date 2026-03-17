@@ -1,8 +1,8 @@
 # Spacecraft Mission Explorer -- Handoff Document
 
 **Project:** Paloma's Orrery
-**Sessions:** March 11-14, 2026
-**Status:** Stage A complete. Stage B complete and verified. Adaptive resolution IMPLEMENTED and verified. Ready to expand to more spacecraft.
+**Sessions:** March 11-15, 2026
+**Status:** Stage A complete. Stage B complete and verified. Adaptive resolution IMPLEMENTED and verified. Position marker, center body hover, additive presets -- all verified. Ready to expand to more spacecraft.
 **Supersedes:** Pairwise encounter computation approach (abandoned -- date grid mismatch)
 **Related:** `apophis_handoff.md` (CAD API pattern), `spacecraft_encounter_integration.md` (retired pairwise design)
 
@@ -94,10 +94,11 @@ signature -- both Pipeline call sites unchanged. Graceful fallback if module not
 
 ### Marker Visual Language
 
-- White diamond-open marker at spacecraft's heliocentric position at encounter epoch
+- White square-open marker at spacecraft's heliocentric position at encounter epoch
 - Hover text includes: label, date, distance (AU + km), both velocities with reference frame labels, encounter type, educational note (word-wrapped at ~50 chars), resolution note (when present), data source
 - Legend entry: `"{SC Name} {label}"` e.g. "New Horizons Pluto Flyby"
 - Console log: `[ENCOUNTER] New Horizons Pluto Flyby: 12,472 km (0.0000834 AU), 13.78 km/s ...`
+- Visual language: open squares = positions/events in space (consistent with CAD and apsidal markers); filled symbols = objects
 
 ### Velocity Narrative (Key Lesson)
 
@@ -145,7 +146,8 @@ Wraps to next row at 3 columns for compactness with future missions.
 
 ### Preset Behavior (Adaptive Resolution)
 
-Each Go button creates a fresh view -- unchecks all objects, then checks only what's needed.
+Each Go button applies its preset additively -- ensures preset objects are checked but preserves
+any additional objects the user has already selected (satellites, extra planets, etc.).
 Encounter presets derive scale, fetch step, and time window from encounter geometry.
 Full Mission restores `6h` default interval.
 
@@ -183,9 +185,9 @@ Full Mission restores `6h` default interval.
    - Fills hour/minute GUI widgets (was hardcoded to 0)
    - Uses `total_seconds() / 86400` with `max(1, ...)` for sub-day `days_to_plot`
    - Sets `trajectory_interval_entry` to preset's `fetch_step` before triggering plot
-   - **Unchecks all objects first** -- each preset is a fresh view, not additive
-   - **Clears `_was_checked` shadow flag** on all objects to prevent `on_center_change()`
-     from restoring the previous center's checkbox
+   - **Additive presets** -- ensures preset objects are checked, preserves user selections
+   - **Clears `_was_checked` shadow flag** only for previous center body
+   - **Stores encounter epoch** in `_encounter_plot_date[0]` for position marker override
 2. **Go button layout**: 3-column grid (`grid()` with `sticky='w'`) instead of horizontal
    `pack(side='left')`. Prevents button truncation in narrow left pane.
 3. **Tooltip bug fixed**: `distance_au` -> `dist_au`. Tooltips now include adaptive
@@ -365,6 +367,9 @@ with SWRI/JPL reconstructed trajectories but no osculating element solutions.
 | "Arrokoth can't be a Horizons center" assumption | **Corrected** -- center_id 2486958 works |
 | Manual `plot_days_closeup` / `plot_scale_au_closeup` as primary values | **Superseded** by adaptive resolution (kept as fallback) |
 | "Buttons are additive -- never uncheck" principle | **Replaced** -- each preset is a fresh view |
+| "Each preset is a fresh view" uncheck-all | **Replaced** -- additive presets preserve user selections (March 15) |
+| `diamond-open` encounter marker symbol | **Replaced** -- `square-open` for consistent visual language (March 15) |
+| `hoverinfo='skip'` on non-Sun center bodies | **Replaced** -- full hover from INFO encyclopedia (March 15) |
 | Horizontal button layout (`pack(side='left')`) | **Replaced** -- 3-column grid prevents truncation |
 
 ---
@@ -376,6 +381,68 @@ Point" for New Horizons now shows the italic mission_info text in hover.
 
 **Step 2: Small body apsidal terms** -- Integrated. Bennu, Ryugu, Arrokoth, Patroclus,
 Apophis, Dinkinesh added to APSIDAL_TERMINOLOGY dict.
+
+---
+
+## Session March 15, 2026: Position Marker, Center Hover, Additive Presets
+
+### Issues Identified (from NH Jupiter GA visualization)
+
+1. **NH position marker outside encounter cube.** The "current position" marker
+   plots at the GUI start date (window start), not the encounter epoch. At 0.06 AU
+   cube scale, the window-start position is outside the visible volume.
+
+2. **Center body (Jupiter) has no hover text.** Sun gets full hover via
+   `hover_text_sun` and `hovertemplate`. Non-Sun center bodies get `hoverinfo='skip'`.
+
+3. **Encounter marker overlaps object marker.** Both used `diamond-open` symbol,
+   making them indistinguishable at encounter scale.
+
+4. **Go button wipes user selections.** Satellites (Io, Europa, etc.) are unchecked
+   by the preset's "fresh view" uncheck-all. Shells survive because they use separate
+   variables, but object checkboxes don't.
+
+### Fixes Implemented
+
+**Edit 1-4: Encounter position marker override (`_encounter_plot_date`)**
+
+- Module-level `_encounter_plot_date = [None]` (list wrapper for mutability)
+- `get_encounter_preset()` now returns `'encounter_date'` (authoritative epoch string)
+- `_apply_mission_preset()` stores encounter epoch in `_encounter_plot_date[0]`
+- `plot_objects()` overrides `date_obj` from `_encounter_plot_date` when set, then
+  clears it (one-shot). Position markers land at closest approach, not window edge.
+- Trajectory window stays centered (approach + departure preserved).
+
+**Edit 5: Center body hover text from INFO encyclopedia**
+
+- Non-Sun center bodies now get `hovertemplate='%{text}<extra></extra>'` + `customdata`
+  (same pattern as Sun)
+- Hover text built from `INFO` dict: bold name + "(center body)" + first line summary
+- Mercury's leading `***` scale advice stripped from hover
+- `hoverinfo='skip'` removed
+
+**Edit 6: Encounter marker symbol → `square-open`**
+
+- Consistent visual language: open squares = positions/events, filled symbols = objects
+- Matches CAD markers and apsidal markers
+
+**Edit 7: Additive presets**
+
+- Removed blanket uncheck-all from `_apply_mission_preset()`
+- Only clears `_was_checked` for the previous center body (prevents shadow restore)
+- Preset ensures its objects are checked; user's existing selections survive
+- Both encounter and full mission presets are additive
+- Users can add satellites, extra planets, then press Go without losing them
+
+### Design Decision: Separating Position Marker from Fetch Window
+
+The GUI start date serves double duty: it drives the trajectory fetch window AND
+the position marker date. For encounter presets, the fetch window must start before
+the encounter (to show the approach), but the marker should be at the encounter epoch.
+
+Rather than restructuring the GUI, a module-level `_encounter_plot_date` override
+decouples them cleanly. One-shot usage (cleared after `plot_objects`) means only
+encounter-triggered plots are affected. Manual plots continue using the GUI date.
 
 ---
 
@@ -483,6 +550,10 @@ and comes BACK to Earth just to fly out again?"* -- Tony, on why every encounter
 
 *"Is this what they call 'software engineering' as distinct from 'coding'?"* -- Tony, after the zero-code design session
 
+*"The approach trajectory is half the story."* -- On why the position marker fix needs to preserve the full window
+
+*"Open squares for positions, filled symbols for objects."* -- The marker visual language
+
 ---
 
 ## Key Lessons
@@ -504,10 +575,14 @@ and comes BACK to Earth just to fly out again?"* -- Tony, on why every encounter
 - **Design before implementation.** The adaptive resolution design took one full session of conversation to resolve. Building first would have locked in the wrong formula.
 - **Shadow/restore mechanism on center change.** `on_center_change()` restores the previous center's checkbox via `_was_checked` flag. Preset uncheck-all must clear this flag to prevent carryover. The fix: `obj['_was_checked'] = False` in the uncheck loop.
 - **Each preset is a fresh view.** The "never unchecks" additive principle was wrong for encounter presets. Users see each Go button as a new plot. Unchecking everything first eliminates irrelevant objects, reduces fetch time, and cleans the legend.
+- **Additive presets win.** The "fresh view" uncheck-all was itself wrong. Users want to add satellites, extra planets, then press Go. The preset should *ensure* its objects are checked, not *replace* everything. Shells already survived (separate variables); making object checkboxes survive too is consistent.
+- **Position marker date != fetch window start.** The GUI start date drives both the trajectory fetch window and the position marker. For encounters, the marker should be at the encounter epoch but the trajectory needs the full approach window. Module-level one-shot override (`_encounter_plot_date`) decouples them without restructuring the GUI.
+- **Center bodies deserve hover text.** Sun had full encyclopedia hover; non-Sun centers had `hoverinfo='skip'`. The INFO dict already has encyclopedia text for every planet -- reuse it.
+- **Open squares = positions/events in space.** Consistent marker visual language across CAD markers, apsidal markers, and encounter markers. Filled symbols = objects. Prevents confusion when markers overlap at encounter scale.
 - **Button layout for variable spacecraft.** Horizontal `pack(side='left')` truncates when buttons exceed pane width. Grid layout with column wrapping (3 columns) handles any number of encounters compactly.
 
 ---
 
 **Prepared by:** Tony (with Claude)
-**Sessions:** March 11-14, 2026
+**Sessions:** March 11-15, 2026
 **Next:** Expand to Voyager 2 (Grand Tour). Then Voyager 1, Cassini, Juno. The adaptive resolution formula scales to all encounters -- just add `dist_km` and `v_kms` to the encounter dict.

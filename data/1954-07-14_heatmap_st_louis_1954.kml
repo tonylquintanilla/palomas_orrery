@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="98">
+    <Document id="4840">
         <name>st_louis_1954 Heatmap (1954-07-14)</name>
-        <GroundOverlay id="99">
+        <GroundOverlay id="4841">
             <name>Thermal Overlay</name>
-            <Icon id="100">
+            <Icon id="4842">
                 <href>1954-07-14_heatmap_st_louis_1954.png</href>
             </Icon>
             <LatLonBox>
-                <north>42.0</north>
-                <south>35.0</south>
-                <east>-87.0</east>
-                <west>-94.0</west>
+                <north>42</north>
+                <south>35</south>
+                <east>-87</east>
+                <west>-94</west>
             </LatLonBox>
         </GroundOverlay>
     </Document>

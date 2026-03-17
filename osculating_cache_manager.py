@@ -443,6 +443,201 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         print(f"[FAIL] Failed to fetch elements for {obj_name}: {e}")
         return None
 
+
+# ============================================================================
+# SOLUTION-LEVEL TP (AUTHORITATIVE PERIHELION TIME)
+# ============================================================================
+
+def fetch_solution_tp(obj_name, horizons_id=None, id_type='smallbody'):
+    """
+    Fetch the solution-level TP from JPL Horizons raw response header.
+    
+    The solution-level TP is a fixed parameter of the orbit determination
+    solution (e.g., JPL#54 for 3I/ATLAS). It does NOT change with query
+    epoch -- only when JPL publishes a new orbit solution. This is the
+    authoritative perihelion time.
+    
+    Uses vectors_async().text instead of elements() because the elements
+    table is sometimes unavailable ("required masses not defined") while
+    vectors always work.
+    
+    Parameters:
+        obj_name (str): Display name (e.g., '3I/ATLAS')
+        horizons_id (str, optional): Horizons ID (e.g., 'C/2025 N1')
+        id_type (str): Horizons ID type (default: 'smallbody')
+    
+    Returns:
+        float: Solution-level TP as Julian Date, or None if not found
+        
+    Notes:
+        - Only comets and asteroids have solution-level TP in the header.
+          Planets and satellites will return None.
+        - The TP= line appears twice in some responses: once as JD (24xxxxx.xxx)
+          and once as calendar date (YYYY-Mon-DD.xxx). We match only the JD form.
+    """
+    from astroquery.jplhorizons import Horizons
+    from astropy.time import Time
+    import re
+    
+    query_id = horizons_id if horizons_id else obj_name
+    
+    try:
+        # Any epoch works -- the solution TP is in the header regardless
+        epoch_jd = Time('2025-01-01').jd
+        
+        obj = Horizons(id=query_id, id_type=id_type, location='@sun', epochs=epoch_jd)
+        raw = obj.vectors_async().text
+        
+        # Parse TP= from header lines
+        # Pattern: "TP= 2460977.9952628477" (JD value, starts with 24xxxxx)
+        # Avoid "TP_TYPE" and the calendar-date form "TP= 2025-Oct-29.xxx"
+        tp_jd = None
+        for line in raw.split('\n'):
+            if 'TP=' in line and 'TP_TYPE' not in line:
+                match = re.search(r'TP=\s*(2\d{6}\.\d+)', line)
+                if match:
+                    tp_jd = float(match.group(1))
+                    break
+        
+        if tp_jd is not None:
+            tp_time = Time(tp_jd, format='jd')
+            print(f"[SOLUTION TP] {obj_name}: JD {tp_jd:.10f} = {tp_time.iso} UTC", flush=True)
+            
+            # Extract solution info for logging
+            for line in raw.split('\n'):
+                if 'soln ref' in line.lower() or 'Soln.date' in line:
+                    print(f"[SOLUTION TP] {line.strip()}", flush=True)
+                    break
+            
+            return tp_jd
+        else:
+            print(f"[SOLUTION TP] No TP= found in header for {obj_name}", flush=True)
+            return None
+            
+    except Exception as e:
+        print(f"[SOLUTION TP] Fetch failed for {obj_name}: {e}", flush=True)
+        return None
+
+
+def cache_solution_tp(obj_name, tp_jd, center_body=None):
+    """
+    Store solution-level TP in the osculating cache alongside existing data.
+    
+    Adds a 'solution_TP' field to the cache entry's elements dict.
+    Does not overwrite the existing 'TP' (osculating TP).
+    
+    Parameters:
+        obj_name (str): Cache key name
+        tp_jd (float): Solution-level TP as Julian Date
+        center_body (str, optional): Center body for cache key
+    """
+    try:
+        cache = load_cache()
+        key = get_cache_key(obj_name, center_body)
+        
+        if key in cache:
+            cache[key].setdefault('elements', {})['solution_TP'] = tp_jd
+            print(f"[SOLUTION TP] Cached solution_TP for {key}: JD {tp_jd:.10f}", flush=True)
+        else:
+            # Create minimal entry if object not yet cached
+            cache[key] = {
+                'elements': {'solution_TP': tp_jd},
+                'metadata': {
+                    'fetched': datetime.now().isoformat(),
+                    'source': 'JPL Horizons (solution header)',
+                    'display_name': obj_name,
+                }
+            }
+            print(f"[SOLUTION TP] Created new cache entry for {key} with solution_TP", flush=True)
+        
+        save_cache(cache)
+    except Exception as e:
+        print(f"[SOLUTION TP] Cache write failed for {obj_name}: {e}", flush=True)
+
+
+def resolve_tp(obj_name, obj_info=None, center_body=None):
+    """
+    Resolve the best available TP for an object using a four-path hierarchy.
+    
+    Hierarchy:
+        1. solution_TP from cache (authoritative, instant)
+        2. Live fetch_solution_tp() (one network call, caches result for Path 1)
+        3. TP from cache (osculating -- standard for planets/satellites)
+        4. TP from analytical elements (hardcoded last resort)
+    
+    For comets: Path 1 hits after the first successful fetch. Path 2 fires
+    once per comet, fetches the solution-level TP from the Horizons raw
+    response header, caches it, and all future calls use Path 1.
+    
+    For planets/satellites: Path 2 returns None (no TP= in header), falls
+    through to Path 3 (osculating cache), which is the correct behavior.
+    
+    Parameters:
+        obj_name (str): Display name (e.g., '3I/ATLAS', 'Halley')
+        obj_info (dict, optional): Object info dict with 'id', 'id_type' keys
+        center_body (str, optional): Center body for cache key lookup
+    
+    Returns:
+        tuple: (tp_jd, tp_source) where tp_jd is float JD and tp_source is str,
+               or (None, None) if no TP available
+    """
+    # Path 1: Solution TP from cache (authoritative, instant)
+    try:
+        cache = load_cache()
+        key = get_cache_key(obj_name, center_body)
+        if key in cache:
+            sol_tp = cache[key].get('elements', {}).get('solution_TP')
+            if sol_tp is not None:
+                print(f"[RESOLVE TP] {obj_name}: Path 1 (solution TP cached) = JD {sol_tp:.10f}", flush=True)
+                return sol_tp, 'solution TP (cached)'
+    except Exception as ex:
+        print(f"[RESOLVE TP] Path 1 failed for {obj_name}: {ex}", flush=True)
+    
+    # Path 2: Live fetch from Horizons header (one-time, caches result)
+    try:
+        horizons_id = None
+        id_type_val = 'smallbody'
+        if obj_info:
+            horizons_id = obj_info.get('id')
+            id_type_val = obj_info.get('id_type', 'smallbody')
+        
+        print(f"[RESOLVE TP] {obj_name}: Path 2 (live fetch)...", flush=True)
+        tp_jd = fetch_solution_tp(obj_name, horizons_id=horizons_id, id_type=id_type_val)
+        
+        if tp_jd is not None:
+            # Cache for future use -- next call hits Path 1
+            cache_solution_tp(obj_name, tp_jd, center_body=center_body)
+            return tp_jd, 'solution TP (live fetch)'
+        else:
+            print(f"[RESOLVE TP] {obj_name}: Path 2 returned None (not a comet/asteroid, or no TP in header)", flush=True)
+    except Exception as ex:
+        print(f"[RESOLVE TP] Path 2 failed for {obj_name}: {ex}", flush=True)
+    
+    # Path 3: Osculating TP from cache
+    try:
+        cache = load_cache()
+        key = get_cache_key(obj_name, center_body)
+        if key in cache:
+            osc_tp = cache[key].get('elements', {}).get('TP')
+            if osc_tp is not None:
+                print(f"[RESOLVE TP] {obj_name}: Path 3 (osculating TP cached) = JD {osc_tp:.10f}", flush=True)
+                return osc_tp, 'osculating TP (cached)'
+    except Exception as ex:
+        print(f"[RESOLVE TP] Path 3 failed for {obj_name}: {ex}", flush=True)
+    
+    # Path 4: Analytical elements (hardcoded last resort)
+    try:
+        from orbital_elements import planetary_params as analytical_params
+        if obj_name in analytical_params and 'TP' in analytical_params[obj_name]:
+            tp_jd = analytical_params[obj_name]['TP']
+            print(f"[RESOLVE TP] {obj_name}: Path 4 (analytical) = JD {tp_jd:.10f}", flush=True)
+            return tp_jd, 'analytical elements'
+    except Exception as ex:
+        print(f"[RESOLVE TP] Path 4 failed for {obj_name}: {ex}", flush=True)
+    
+    return None, None
+
+
 # ============================================================================
 # USER DIALOG AND PROMPTING
 # ============================================================================

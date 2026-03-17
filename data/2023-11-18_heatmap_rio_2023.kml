@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="146">
+    <Document id="97">
         <name>rio_2023 Heatmap (2023-11-18)</name>
-        <GroundOverlay id="147">
+        <GroundOverlay id="98">
             <name>Thermal Overlay</name>
-            <Icon id="148">
+            <Icon id="99">
                 <href>2023-11-18_heatmap_rio_2023.png</href>
             </Icon>
             <LatLonBox>
-                <north>-20.0</north>
-                <south>-24.0</south>
-                <east>-41.0</east>
-                <west>-45.0</west>
+                <north>-20</north>
+                <south>-24</south>
+                <east>-41</east>
+                <west>-45</west>
             </LatLonBox>
         </GroundOverlay>
     </Document>

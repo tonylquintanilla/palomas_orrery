@@ -8,11 +8,11 @@
       "data_url": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.txt",
       "citation": "Keeling, C.D., S.C. Piper, R.B. Bacastow, et al. Atmospheric CO2 concentrations from Mauna Loa Observatory. NOAA Global Monitoring Laboratory."
     },
-    "cached_date": "2026-01-15T00:07:10.277592",
-    "record_count": 814,
+    "cached_date": "2026-02-08T20:02:41.048851",
+    "record_count": 815,
     "temporal_range": {
       "start": "1958-03",
-      "end": "2025-12"
+      "end": "2026-01"
     },
     "units": "ppm (parts per million)",
     "measurement_method": "Non-dispersive infrared spectroscopy",
@@ -2997,7 +2997,7 @@
       "month": 12,
       "decimal_date": 1982.9583,
       "co2_ppm": 340.78,
-      "co2_deseasonalized": 341.7,
+      "co2_deseasonalized": 341.71,
       "days": 26,
       "std_dev": 0.3,
       "uncertainty": 0.11
@@ -3016,7 +3016,7 @@
       "year": 1983,
       "month": 2,
       "decimal_date": 1983.125,
-      "co2_ppm": 342.78,
+      "co2_ppm": 342.79,
       "co2_deseasonalized": 342.25,
       "days": 24,
       "std_dev": 0.37,
@@ -4716,7 +4716,7 @@
       "year": 1997,
       "month": 4,
       "decimal_date": 1997.2917,
-      "co2_ppm": 366.49,
+      "co2_ppm": 366.48,
       "co2_deseasonalized": 363.82,
       "days": 21,
       "std_dev": 0.46,
@@ -4887,7 +4887,7 @@
       "month": 9,
       "decimal_date": 1998.7083,
       "co2_ppm": 364.16,
-      "co2_deseasonalized": 367.51,
+      "co2_deseasonalized": 367.52,
       "days": 28,
       "std_dev": 0.4,
       "uncertainty": 0.14
@@ -5086,7 +5086,7 @@
       "year": 2000,
       "month": 5,
       "decimal_date": 2000.375,
-      "co2_ppm": 371.75,
+      "co2_ppm": 371.74,
       "co2_deseasonalized": 368.87,
       "days": 28,
       "std_dev": 0.53,
@@ -5217,7 +5217,7 @@
       "month": 6,
       "decimal_date": 2001.4583,
       "co2_ppm": 373.4,
-      "co2_deseasonalized": 371.18,
+      "co2_deseasonalized": 371.17,
       "days": 26,
       "std_dev": 0.37,
       "uncertainty": 0.14
@@ -7096,7 +7096,7 @@
       "year": 2017,
       "month": 2,
       "decimal_date": 2017.125,
-      "co2_ppm": 406.66,
+      "co2_ppm": 406.65,
       "co2_deseasonalized": 405.8,
       "days": 26,
       "std_dev": 0.71,
@@ -7687,7 +7687,7 @@
       "month": 1,
       "decimal_date": 2022.0417,
       "co2_ppm": 418.13,
-      "co2_deseasonalized": 417.84,
+      "co2_deseasonalized": 417.86,
       "days": 30,
       "std_dev": 0.72,
       "uncertainty": 0.25
@@ -7697,7 +7697,7 @@
       "month": 2,
       "decimal_date": 2022.125,
       "co2_ppm": 419.24,
-      "co2_deseasonalized": 418.3,
+      "co2_deseasonalized": 418.32,
       "days": 27,
       "std_dev": 0.92,
       "uncertainty": 0.34
@@ -7717,7 +7717,7 @@
       "month": 4,
       "decimal_date": 2022.2917,
       "co2_ppm": 420.19,
-      "co2_deseasonalized": 417.69,
+      "co2_deseasonalized": 417.67,
       "days": 28,
       "std_dev": 0.86,
       "uncertainty": 0.31
@@ -7727,7 +7727,7 @@
       "month": 5,
       "decimal_date": 2022.375,
       "co2_ppm": 420.97,
-      "co2_deseasonalized": 417.72,
+      "co2_deseasonalized": 417.7,
       "days": 31,
       "std_dev": 0.75,
       "uncertainty": 0.26
@@ -7737,7 +7737,7 @@
       "month": 6,
       "decimal_date": 2022.4583,
       "co2_ppm": 420.94,
-      "co2_deseasonalized": 418.5,
+      "co2_deseasonalized": 418.47,
       "days": 28,
       "std_dev": 0.3,
       "uncertainty": 0.11
@@ -7747,7 +7747,7 @@
       "month": 7,
       "decimal_date": 2022.5417,
       "co2_ppm": 418.85,
-      "co2_deseasonalized": 418.44,
+      "co2_deseasonalized": 418.41,
       "days": 27,
       "std_dev": 0.57,
       "uncertainty": 0.21
@@ -7757,7 +7757,7 @@
       "month": 8,
       "decimal_date": 2022.625,
       "co2_ppm": 417.15,
-      "co2_deseasonalized": 419.04,
+      "co2_deseasonalized": 419.03,
       "days": 27,
       "std_dev": 0.37,
       "uncertainty": 0.13
@@ -7767,7 +7767,7 @@
       "month": 9,
       "decimal_date": 2022.7083,
       "co2_ppm": 415.91,
-      "co2_deseasonalized": 419.31,
+      "co2_deseasonalized": 419.3,
       "days": 28,
       "std_dev": 0.41,
       "uncertainty": 0.15
@@ -7787,7 +7787,7 @@
       "month": 11,
       "decimal_date": 2022.875,
       "co2_ppm": 417.47,
-      "co2_deseasonalized": 419.46,
+      "co2_deseasonalized": 419.51,
       "days": 25,
       "std_dev": 0.52,
       "uncertainty": 0.2
@@ -7796,8 +7796,8 @@
       "year": 2022,
       "month": 12,
       "decimal_date": 2022.9583,
-      "co2_ppm": 419.0,
-      "co2_deseasonalized": 419.75,
+      "co2_ppm": 418.99,
+      "co2_deseasonalized": 419.79,
       "days": 24,
       "std_dev": 0.57,
       "uncertainty": 0.22
@@ -7807,7 +7807,7 @@
       "month": 1,
       "decimal_date": 2023.0417,
       "co2_ppm": 419.47,
-      "co2_deseasonalized": 419.18,
+      "co2_deseasonalized": 419.22,
       "days": 31,
       "std_dev": 0.39,
       "uncertainty": 0.14
@@ -7817,7 +7817,7 @@
       "month": 2,
       "decimal_date": 2023.125,
       "co2_ppm": 420.31,
-      "co2_deseasonalized": 419.37,
+      "co2_deseasonalized": 419.39,
       "days": 23,
       "std_dev": 0.7,
       "uncertainty": 0.28
@@ -7827,7 +7827,7 @@
       "month": 3,
       "decimal_date": 2023.2083,
       "co2_ppm": 420.99,
-      "co2_deseasonalized": 419.54,
+      "co2_deseasonalized": 419.53,
       "days": 30,
       "std_dev": 0.74,
       "uncertainty": 0.26
@@ -7857,7 +7857,7 @@
       "month": 6,
       "decimal_date": 2023.4583,
       "co2_ppm": 423.68,
-      "co2_deseasonalized": 421.24,
+      "co2_deseasonalized": 421.23,
       "days": 29,
       "std_dev": 0.57,
       "uncertainty": 0.2
@@ -7867,7 +7867,7 @@
       "month": 7,
       "decimal_date": 2023.5417,
       "co2_ppm": 421.83,
-      "co2_deseasonalized": 421.41,
+      "co2_deseasonalized": 421.42,
       "days": 21,
       "std_dev": 0.48,
       "uncertainty": 0.2
@@ -7877,7 +7877,7 @@
       "month": 8,
       "decimal_date": 2023.625,
       "co2_ppm": 419.68,
-      "co2_deseasonalized": 421.58,
+      "co2_deseasonalized": 421.57,
       "days": 21,
       "std_dev": 0.45,
       "uncertainty": 0.19
@@ -7907,7 +7907,7 @@
       "month": 11,
       "decimal_date": 2023.875,
       "co2_ppm": 420.46,
-      "co2_deseasonalized": 422.45,
+      "co2_deseasonalized": 422.43,
       "days": 21,
       "std_dev": 0.91,
       "uncertainty": 0.38
@@ -7927,7 +7927,7 @@
       "month": 1,
       "decimal_date": 2024.0417,
       "co2_ppm": 422.8,
-      "co2_deseasonalized": 422.52,
+      "co2_deseasonalized": 422.56,
       "days": 27,
       "std_dev": 0.7,
       "uncertainty": 0.26
@@ -7937,7 +7937,7 @@
       "month": 2,
       "decimal_date": 2024.125,
       "co2_ppm": 424.55,
-      "co2_deseasonalized": 423.62,
+      "co2_deseasonalized": 423.63,
       "days": 22,
       "std_dev": 1.24,
       "uncertainty": 0.51
@@ -7947,7 +7947,7 @@
       "month": 3,
       "decimal_date": 2024.2083,
       "co2_ppm": 425.38,
-      "co2_deseasonalized": 423.93,
+      "co2_deseasonalized": 423.92,
       "days": 22,
       "std_dev": 0.99,
       "uncertainty": 0.4
@@ -7957,7 +7957,7 @@
       "month": 4,
       "decimal_date": 2024.2917,
       "co2_ppm": 426.51,
-      "co2_deseasonalized": 424.01,
+      "co2_deseasonalized": 424.02,
       "days": 22,
       "std_dev": 0.99,
       "uncertainty": 0.4
@@ -7977,7 +7977,7 @@
       "month": 6,
       "decimal_date": 2024.4583,
       "co2_ppm": 426.91,
-      "co2_deseasonalized": 424.47,
+      "co2_deseasonalized": 424.46,
       "days": 20,
       "std_dev": 0.65,
       "uncertainty": 0.28
@@ -7997,7 +7997,7 @@
       "month": 8,
       "decimal_date": 2024.625,
       "co2_ppm": 422.99,
-      "co2_deseasonalized": 424.89,
+      "co2_deseasonalized": 424.88,
       "days": 22,
       "std_dev": 1.08,
       "uncertainty": 0.44
@@ -8017,7 +8017,7 @@
       "month": 10,
       "decimal_date": 2024.7917,
       "co2_ppm": 422.38,
-      "co2_deseasonalized": 425.61,
+      "co2_deseasonalized": 425.62,
       "days": 22,
       "std_dev": 0.35,
       "uncertainty": 0.14
@@ -8027,7 +8027,7 @@
       "month": 11,
       "decimal_date": 2024.875,
       "co2_ppm": 423.85,
-      "co2_deseasonalized": 425.84,
+      "co2_deseasonalized": 425.82,
       "days": 24,
       "std_dev": 0.33,
       "uncertainty": 0.13
@@ -8037,7 +8037,7 @@
       "month": 12,
       "decimal_date": 2024.9583,
       "co2_ppm": 425.4,
-      "co2_deseasonalized": 426.16,
+      "co2_deseasonalized": 426.15,
       "days": 28,
       "std_dev": 0.7,
       "uncertainty": 0.25
@@ -8047,7 +8047,7 @@
       "month": 1,
       "decimal_date": 2025.0417,
       "co2_ppm": 426.65,
-      "co2_deseasonalized": 426.37,
+      "co2_deseasonalized": 426.4,
       "days": 29,
       "std_dev": 0.62,
       "uncertainty": 0.22
@@ -8057,7 +8057,7 @@
       "month": 2,
       "decimal_date": 2025.125,
       "co2_ppm": 427.09,
-      "co2_deseasonalized": 426.15,
+      "co2_deseasonalized": 426.16,
       "days": 24,
       "std_dev": 0.64,
       "uncertainty": 0.25
@@ -8067,7 +8067,7 @@
       "month": 3,
       "decimal_date": 2025.2083,
       "co2_ppm": 428.15,
-      "co2_deseasonalized": 426.69,
+      "co2_deseasonalized": 426.68,
       "days": 27,
       "std_dev": 1.13,
       "uncertainty": 0.41
@@ -8097,7 +8097,7 @@
       "month": 6,
       "decimal_date": 2025.4583,
       "co2_ppm": 429.61,
-      "co2_deseasonalized": 427.17,
+      "co2_deseasonalized": 427.16,
       "days": 26,
       "std_dev": 0.71,
       "uncertainty": 0.27
@@ -8117,7 +8117,7 @@
       "month": 8,
       "decimal_date": 2025.625,
       "co2_ppm": 425.48,
-      "co2_deseasonalized": 427.38,
+      "co2_deseasonalized": 427.37,
       "days": 24,
       "std_dev": 0.38,
       "uncertainty": 0.15
@@ -8147,7 +8147,7 @@
       "month": 11,
       "decimal_date": 2025.875,
       "co2_ppm": 426.46,
-      "co2_deseasonalized": 428.45,
+      "co2_deseasonalized": 428.43,
       "days": 20,
       "std_dev": 0.69,
       "uncertainty": 0.3
@@ -8159,8 +8159,18 @@
       "co2_ppm": 427.49,
       "co2_deseasonalized": 428.24,
       "days": 24,
-      "std_dev": 0.33,
-      "uncertainty": 0.13
+      "std_dev": 0.32,
+      "uncertainty": 0.12
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "decimal_date": 2026.0417,
+      "co2_ppm": 428.62,
+      "co2_deseasonalized": 428.37,
+      "days": 25,
+      "std_dev": 0.71,
+      "uncertainty": 0.27
     }
   ]
 }

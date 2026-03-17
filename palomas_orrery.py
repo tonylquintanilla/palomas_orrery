@@ -3762,6 +3762,11 @@ body_shells_config = {
 _last_plotted_fig = [None]  # List wrapper for mutability in nested scope
 _last_plot_name = ['']
 
+# Encounter preset: override date for position markers
+# When set, fetch_position uses this date instead of the GUI start date.
+# Cleared after use in plot_objects so it only affects encounter-triggered plots.
+_encounter_plot_date = [None]  # List wrapper for mutability in nested scope
+
 def export_social_view():
     """Export the last plotted figure as a social media view."""
     if _last_plotted_fig[0] is None:
@@ -3985,6 +3990,13 @@ def plot_objects():
             
             # Get the date
             date_obj = get_date_from_gui()
+            
+            # Override with encounter epoch if set by encounter preset
+            # This places position markers at closest approach, not at window start
+            if _encounter_plot_date[0] is not None:
+                date_obj = _encounter_plot_date[0]
+                print(f"[ENCOUNTER] Position marker date overridden to {date_obj}", flush=True)
+                _encounter_plot_date[0] = None  # One-shot: clear after use
 
             # Define hover_data with a default value
             hover_data = "Full Object Info"  # Or "Object Names Only"
@@ -4472,6 +4484,10 @@ def plot_objects():
                             fetch_id_type = 'smallbody'
                         obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
                         
+                        # Thread position timestamp for hover text
+                        if obj_data is not None:
+                            obj_data['position_date'] = date_obj
+
                         # Special case: Orcus at Orcus-Vanth Barycenter - derive from Vanth's position
                         # JPL doesn't have 920090482 as a valid target, but 120090482 (Vanth) works
                         # Orcus is on opposite side of barycenter at 1/mass_ratio of Vanth's distance
@@ -4698,8 +4714,22 @@ def plot_objects():
 
                 else:
                     # For other central bodies (planets), add the center marker trace
-                    # Check if color is transparent to hide legend
+                    # Build hover text from INFO encyclopedia (same pattern as Sun)
                     is_transparent = 'rgba(0,0,0,0)' in str(center_object_info['color']).replace(' ', '')
+                    
+                    # Build hover text for center body
+                    center_hover_lines = [f"<b>{center_object_name}</b> (center body)"]
+                    info_raw = INFO.get(center_object_name, '')
+                    if info_raw:
+                        # Take first sentence/line as summary (before first \n)
+                        first_line = info_raw.split('\n')[0].strip()
+                        # Remove leading *** hints (Mercury has scale advice)
+                        if first_line.startswith('***'):
+                            parts = first_line.split('***')
+                            first_line = parts[-1].strip() if len(parts) > 2 else first_line
+                        if first_line:
+                            center_hover_lines.append(first_line)
+                    center_hover_text = '<br>'.join(center_hover_lines)
                     
                     fig.add_trace(
                         go.Scatter3d(
@@ -4713,12 +4743,12 @@ def plot_objects():
                                 symbol=center_object_info['symbol']
                             ),
                             name=f"{center_object_name}",
-                            text=[center_object_name],
-                            hoverinfo='skip',
+                            text=[center_hover_text],
+                            customdata=[center_object_name],
+                            hovertemplate='%{text}<extra></extra>',
                             showlegend=not is_transparent  # Hide legend if transparent
                         )
                     )
-
 
             # Create dictionary of shell variables for each planet
             planet_shell_vars = {
@@ -4937,6 +4967,10 @@ def plot_objects():
                         fetch_id = obj['helio_id']
                         fetch_id_type = 'smallbody'
                     obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
+
+                    # Thread position timestamp for hover text
+                    if obj_data is not None:
+                        obj_data['position_date'] = date_obj
 
                     # Special case: Orcus at Orcus-Vanth Barycenter - derive from Vanth's position
                     orcus_needs_derivation = (
@@ -7773,6 +7807,61 @@ def create_celestial_checkbutton(name, variable):
         # Track creation order for center dropdown
         checkbox_creation_order.append(name)
 
+    # Target-side encounter Go buttons: if any spacecraft encountered this body,
+    # show "Go: {Spacecraft} {Type}" buttons under the checkbox (cross-reference).
+    # Mirrors the spacecraft-side buttons in create_mission_checkbutton().
+    try:
+        from spacecraft_encounters import get_encounters_for_target, _calculate_encounter_resolution
+        target_encounters = get_encounters_for_target(lookup_name)
+        if target_encounters:
+            tgt_enc_frame = tk.Frame(celestial_frame)
+            tgt_enc_frame.pack(anchor='w', padx=(25, 0))
+            btn_col = 0
+            btn_row = 0
+            for sc_name, enc_idx, enc in target_encounters:
+                # Label from target perspective: "Go: New Horizons Gravity Assist"
+                enc_type = enc.get('label', 'Encounter')
+                # Replace target name with spacecraft name in the label
+                # e.g., "Jupiter Gravity Assist" -> "New Horizons Gravity Assist"
+                target = enc.get('target', '')
+                if enc_type.startswith(target):
+                    btn_label = sc_name + enc_type[len(target):]
+                else:
+                    btn_label = f"{sc_name} {enc_type}"
+                def make_tgt_cmd(sc=sc_name, ei=enc_idx):
+                    return lambda: _apply_mission_preset(sc, 'encounter', ei)
+                tb = tk.Button(tgt_enc_frame, text=f"Go: {btn_label}",
+                               command=make_tgt_cmd(), font=('TkDefaultFont', 8))
+                tb.grid(row=btn_row, column=btn_col, padx=(0, 4), pady=1, sticky='w')
+                # Tooltip with encounter details
+                dist_au = enc.get('dist_au', 0)
+                dist_km = enc.get('dist_km', 0)
+                center_tip = enc.get('center_closeup') or enc.get('center', 'Sun')
+                tip = (f"{sc_name} {enc_type}: {enc.get('date','')}\n"
+                       f"Distance: {dist_au:.7f} AU ({dist_km:,.0f} km)\n"
+                       f"Center: {center_tip}, Type: {enc.get('type','')}")
+                try:
+                    res = _calculate_encounter_resolution(enc)
+                    if res:
+                        w_sec = (res['end_dt'] - res['start_dt']).total_seconds()
+                        if w_sec > 86400:
+                            w_str = f"{w_sec/86400:.1f} days"
+                        elif w_sec > 3600:
+                            w_str = f"{w_sec/3600:.1f} hrs"
+                        else:
+                            w_str = f"{w_sec/60:.0f} min"
+                        tip += f"\nResolution: {res['fetch_step']} step, {w_str} window"
+                except Exception:
+                    pass
+                CreateToolTip(tb, tip)
+                btn_col += 1
+                if btn_col >= 3:
+                    btn_col = 0
+                    btn_row += 1
+    except ImportError:
+        pass
+
+
 # Existing celestial checkbuttons
 create_celestial_checkbutton("Sun", sun_var)
 
@@ -8278,13 +8367,13 @@ def _apply_mission_preset(spacecraft_name, preset_type='encounter', encounter_in
         label = preset.get('label', 'Preset')
         print(f"[ENCOUNTER PRESET] Applying: {spacecraft_name} {label}", flush=True)
 
-        # Uncheck all objects first -- each preset is a fresh view, not additive
-        # Also clear _was_checked shadow flag to prevent on_center_change from
-        # restoring the previous center's checkbox when center changes
+        # Additive preset: ensure preset objects are checked, but preserve
+        # any additional objects the user has already selected (satellites, etc.)
+        # Only clear _was_checked for the previous center to prevent shadow restore
+        prev_center = center_object_var.get()
         for obj in objects:
-            if obj.get('var'):
-                obj['var'].set(0)
-            obj['_was_checked'] = False
+            if obj['name'] == prev_center:
+                obj['_was_checked'] = False
 
         # Check spacecraft + select_also
         sc_obj = next((obj for obj in objects if obj['name'] == spacecraft_name), None)
@@ -8340,6 +8429,21 @@ def _apply_mission_preset(spacecraft_name, preset_type='encounter', encounter_in
             trajectory_interval_entry.delete(0, tk.END)
             trajectory_interval_entry.insert(0, fetch_step)
             print(f"[ENCOUNTER PRESET] Trajectory interval set to {fetch_step}", flush=True)
+
+        # Store encounter epoch for position marker override
+        enc_date_str = preset.get('encounter_date')
+        if enc_date_str and preset_type == 'encounter':
+            try:
+                from datetime import datetime as dt_cls
+                if ' ' in enc_date_str:
+                    _encounter_plot_date[0] = dt_cls.strptime(enc_date_str, '%Y-%m-%d %H:%M:%S')
+                else:
+                    _encounter_plot_date[0] = dt_cls.strptime(enc_date_str, '%Y-%m-%d')
+                print(f"[ENCOUNTER PRESET] Position marker date set to {_encounter_plot_date[0]}", flush=True)
+            except (ValueError, TypeError) as e:
+                print(f"[ENCOUNTER PRESET] Could not parse encounter date: {e}", flush=True)
+                _encounter_plot_date[0] = None
+
         plot_scale = preset.get('plot_scale_au')
 
         """
@@ -8369,8 +8473,16 @@ def _apply_mission_preset(spacecraft_name, preset_type='encounter', encounter_in
             scale_var.set('Auto')
         else:
             scale_var.set('Manual')
+
             custom_scale_entry.delete(0, tk.END)
-            custom_scale_entry.insert(0, str(plot_scale))
+            # Format readably: avoid scientific notation for small values
+            if plot_scale < 0.001:
+                custom_scale_entry.insert(0, f'{plot_scale:.7f}')
+            elif plot_scale < 1:
+                custom_scale_entry.insert(0, f'{plot_scale:.5f}')
+            else:
+                custom_scale_entry.insert(0, str(plot_scale))
+
     #    print(f"[ENCOUNTER PRESET] Center={center}, Scale={'Auto' if plot_scale is None else f'{plot_scale} AU'}", flush=True)
         print(f"[ENCOUNTER PRESET] Center={center}, Scale={'Auto' if plot_scale is None else f'{plot_scale:.7f} AU'}"
               f"{f', Step={fetch_step}' if fetch_step else ''}", flush=True)        
@@ -8379,6 +8491,135 @@ def _apply_mission_preset(spacecraft_name, preset_type='encounter', encounter_in
         print("[ENCOUNTER PRESET] spacecraft_encounters.py not found", flush=True)
     except Exception as e:
         print(f"[ENCOUNTER PRESET] Error: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+
+
+def _apply_comet_perihelion_preset(comet_name):
+    """Apply a perihelion preset for a comet: set center=Sun, dates around Tp, scale, apsidal on, then plot."""
+    try:
+        from spacecraft_encounters import get_comet_perihelion_preset
+
+        # Find obj_info for this comet (needed for horizons_id on Path C fetch)
+        obj_info = next((obj for obj in objects if obj['name'] == comet_name), None)
+        preset = get_comet_perihelion_preset(comet_name, obj_info)
+        if not preset:
+            print(f"[COMET PRESET] No preset available for {comet_name}", flush=True)
+            return
+
+        label = preset.get('label', 'Perihelion')
+        print(f"[COMET PRESET] Applying: {label}", flush=True)
+
+        # Additive preset: ensure comet + Sun are checked, preserve other selections
+        # Clear _was_checked for previous center to prevent shadow restore
+        prev_center = center_object_var.get()
+        for obj in objects:
+            if obj['name'] == prev_center:
+                obj['_was_checked'] = False
+
+        # Check the comet
+        comet_obj = next((obj for obj in objects if obj['name'] == comet_name), None)
+        if comet_obj and comet_obj.get('var'):
+            comet_obj['var'].set(1)
+
+        # Check Sun + any select_also
+        for also_name in preset.get('select_also', []):
+            also_obj = next((obj for obj in objects if obj['name'] == also_name), None)
+            if also_obj and also_obj.get('var'):
+                also_obj['var'].set(1)
+
+        # Set center to Sun
+        center = preset.get('center', 'Sun')
+        update_center_dropdown()
+        center_object_var.set(center)
+
+        # Turn on apsidal markers so Capability D fires
+        show_apsidal_markers_var.set(1)
+
+        # Set date range
+        for date_str, (yr, mo, dy, hr, mn) in [
+            (preset.get('start_date'), (entry_year, entry_month, entry_day, entry_hour, entry_minute)),
+            (preset.get('end_date'), (end_entry_year, end_entry_month, end_entry_day, end_entry_hour, end_entry_minute)),
+        ]:
+            if date_str:
+                try:
+                    from datetime import datetime as dt_cls
+                    if ' ' in date_str:
+                        dt_parsed = dt_cls.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+                    else:
+                        dt_parsed = dt_cls.strptime(date_str, '%Y-%m-%d')
+                    for widget, val in [
+                        (yr, str(dt_parsed.year)),
+                        (mo, str(dt_parsed.month)),
+                        (dy, str(dt_parsed.day)),
+                        (hr, str(dt_parsed.hour)),
+                        (mn, str(dt_parsed.minute)),
+                    ]:
+                        widget.delete(0, tk.END)
+                        widget.insert(0, val)
+                except (ValueError, TypeError) as parse_err:
+                    print(f"[COMET PRESET] Date parse error: {date_str} -> {parse_err}", flush=True)
+
+        # Set days to plot from date range
+        if preset.get('start_date') and preset.get('end_date'):
+            try:
+                from datetime import datetime as dt_cls
+                fmt = '%Y-%m-%d %H:%M:%S' if ' ' in preset['start_date'] else '%Y-%m-%d'
+                s = dt_cls.strptime(preset['start_date'], fmt)
+                fmt_e = '%Y-%m-%d %H:%M:%S' if ' ' in preset['end_date'] else '%Y-%m-%d'
+                e = dt_cls.strptime(preset['end_date'], fmt_e)
+                total_days = max(1, int((e - s).total_seconds() / 86400))
+                days_to_plot_entry.delete(0, tk.END)
+                days_to_plot_entry.insert(0, str(total_days))
+            except ValueError:
+                pass
+
+        # Set scale
+        plot_scale = preset.get('plot_scale_au')
+        if plot_scale is None:
+            scale_var.set('Auto')
+        else:
+            scale_var.set('Manual')
+            custom_scale_entry.delete(0, tk.END)
+            if plot_scale < 0.001:
+                custom_scale_entry.insert(0, f'{plot_scale:.7f}')
+            elif plot_scale < 1:
+                custom_scale_entry.insert(0, f'{plot_scale:.5f}')
+            else:
+                custom_scale_entry.insert(0, str(plot_scale))
+
+# Store perihelion epoch for position marker override (same mechanism as spacecraft)
+        tp_date_str = preset.get('tp_date')
+        if tp_date_str:
+            try:
+                from datetime import datetime as dt_cls
+                if ' ' in tp_date_str:
+                    _encounter_plot_date[0] = dt_cls.strptime(tp_date_str, '%Y-%m-%d %H:%M:%S')
+                else:
+                    _encounter_plot_date[0] = dt_cls.strptime(tp_date_str, '%Y-%m-%d')
+                print(f"[COMET PRESET] Position marker date set to {_encounter_plot_date[0]}", flush=True)
+            except (ValueError, TypeError) as e:
+                print(f"[COMET PRESET] Could not parse Tp date: {e}", flush=True)
+                _encounter_plot_date[0] = None
+
+        print(f"[COMET PRESET] Center={center}, Scale={'Auto' if plot_scale is None else f'{plot_scale:.7f} AU'}", flush=True)
+
+        # Set position marker to perihelion time (not window start)
+        if 'tp_jd' in preset:
+            try:
+                from astropy.time import Time as AstroTime
+                tp_dt = AstroTime(preset['tp_jd'], format='jd').datetime
+                _encounter_plot_date[0] = tp_dt
+                print(f"[COMET PRESET] Position marker date set to {tp_dt.strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
+            except Exception as tp_err:
+                print(f"[COMET PRESET] Could not set position date: {tp_err}", flush=True)
+
+        root.after(100, plot_objects)
+
+    except ImportError:
+        print("[COMET PRESET] spacecraft_encounters.py not found", flush=True)
+    except Exception as e:
+        print(f"[COMET PRESET] Error: {e}", flush=True)
         import traceback
         traceback.print_exc()
 
@@ -8417,10 +8658,11 @@ CreateToolTip(comet_frame, "Select comets for plotting. Selected objects will be
               "orbits. Selected objects will be animated only over the fetched dates only if within their defined date ranges, and will " 
               "plot both actual and Keplerian orbits.")
 
-# Updated create_comet_checkbutton function
+
 def create_comet_checkbutton(name, variable, dates, perihelion):
     """
-    Creates a checkbutton for a comet with a tooltip containing its description and perihelion date.
+    Creates a checkbutton for a comet with a tooltip containing its description,
+    perihelion date, and a "Go: Perihelion" preset button.
 
     Parameters:
     - name (str): The name of the comet.
@@ -8442,6 +8684,19 @@ def create_comet_checkbutton(name, variable, dates, perihelion):
     # Create the tooltip with description and perihelion
     tooltip_text = f"{info_text}\nPerihelion: {perihelion}"
     CreateToolTip(checkbutton, tooltip_text)
+
+    # Go: Perihelion button (same pattern as spacecraft encounter Go buttons)
+    btn_frame = tk.Frame(comet_frame)
+    btn_frame.pack(anchor='w', padx=(25, 0))
+    def make_perihelion_cmd(comet=name):
+        return lambda: _apply_comet_perihelion_preset(comet)
+    pb = tk.Button(btn_frame, text="Go: Perihelion",
+                   command=make_perihelion_cmd(), font=('TkDefaultFont', 8))
+    pb.grid(row=0, column=0, padx=(0, 4), pady=1, sticky='w')
+    CreateToolTip(pb, f"Preset view: {name} at perihelion ({perihelion})\n"
+                      f"Center: Sun, Apsidal markers: On\n"
+                      f"Scale and date range auto-calculated from orbital elements")
+    
 
 create_comet_checkbutton("Tempel 2", comet_tempel2_var, "(1873-present, periodic)",
                          "August 2, 2026")  # 10P, 5.37-year period, Deep Space 1 flyby 2001
@@ -8493,9 +8748,11 @@ CreateToolTip(interstellar_frame, "Select hyperbolic objects for plotting. Selec
               "orbits. Selected objects will be animated only over the fetched dates only if within their defined date ranges, and will " 
               "plot both actual and Keplerian orbits.")
 
+
 def create_interstellar_checkbutton(name, variable, dates, perihelion):
     """
-    Creates a checkbutton for a comet with a tooltip containing its description and perihelion date.
+    Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
+    containing its description, perihelion date, and a "Go: Perihelion" preset button.
 
     Parameters:
     - name (str): The name of the interstellar object.
@@ -8517,6 +8774,19 @@ def create_interstellar_checkbutton(name, variable, dates, perihelion):
     # Create the tooltip with description and perihelion
     tooltip_text = f"{info_text}\nPerihelion: {perihelion}"
     CreateToolTip(checkbutton, tooltip_text)
+
+    # Go: Perihelion button (same pattern as spacecraft encounter Go buttons)
+    btn_frame = tk.Frame(interstellar_frame)
+    btn_frame.pack(anchor='w', padx=(25, 0))
+    def make_perihelion_cmd(comet=name):
+        return lambda: _apply_comet_perihelion_preset(comet)
+    pb = tk.Button(btn_frame, text="Go: Perihelion",
+                   command=make_perihelion_cmd(), font=('TkDefaultFont', 8))
+    pb.grid(row=0, column=0, padx=(0, 4), pady=1, sticky='w')
+    CreateToolTip(pb, f"Preset view: {name} at perihelion ({perihelion})\n"
+                      f"Center: Sun, Apsidal markers: On\n"
+                      f"Scale and date range auto-calculated from orbital elements")
+    
 
 create_interstellar_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
                          "February 25, 1976")

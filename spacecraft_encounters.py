@@ -101,7 +101,7 @@ SPACECRAFT_ENCOUNTERS = {
                      'nitrogen ice plain (Sputnik Planitia) and atmospheric haze layers.'),
             'resolution_note': ('Close-up trajectory fetched at 1-minute resolution. '
                                 'Full mission trace (if visible) uses coarser 6h steps '
-                                'and may diverge at this scale.'),                     
+                                'and may diverge at this scale.'),
             'status': 'completed',
             'source': 'NASA/JPL',
             'center': 'Sun',
@@ -232,6 +232,31 @@ def get_all_encounter_spacecraft():
         list: Spacecraft names that have encounter data
     """
     return list(SPACECRAFT_ENCOUNTERS.keys())
+
+
+def get_encounters_for_target(target_name):
+    """
+    Get all encounters where a given body is the target, across all spacecraft.
+    Returns results sorted chronologically by encounter date.
+
+    Used by create_celestial_checkbutton() to place encounter Go buttons under
+    target body checkboxes (e.g., "Go: New Horizons Gravity Assist" under Jupiter).
+
+    Parameters:
+        target_name (str): Target body name (e.g., 'Jupiter', 'Pluto')
+
+    Returns:
+        list of tuples: [(spacecraft_name, encounter_index, encounter_dict), ...]
+              sorted by encounter date (chronological)
+    """
+    results = []
+    for sc_name, encounters in SPACECRAFT_ENCOUNTERS.items():
+        for idx, enc in enumerate(encounters):
+            if enc.get('target') == target_name:
+                results.append((sc_name, idx, enc))
+    # Sort chronologically by encounter date
+    results.sort(key=lambda x: x[2].get('date', ''))
+    return results
 
 
 def get_full_mission_preset(spacecraft_name):
@@ -389,6 +414,162 @@ def get_encounter_preset(spacecraft_name, encounter_index):
         'plot_scale_au': plot_scale,
         'fetch_step': fetch_step,
         'label': enc.get('label', 'Encounter'),
+        'encounter_date': enc.get('date'),  # Authoritative epoch for position marker
+    }
+
+
+# ============================================================================
+# COMET PERIHELION PRESET
+# ============================================================================
+#
+# Builds a "Go: Perihelion" preset for comets, analogous to spacecraft
+# encounter presets. Uses the three-path Tp resolution from Capability D
+# (osculating cache -> analytical elements -> Horizons fetch) plus vis-viva
+# for adaptive time window sizing.
+#
+# Same pattern as get_encounter_preset(): returns a dict that the GUI
+# applies to center, date range, scale, and checked objects.
+
+def get_comet_perihelion_preset(obj_name, obj_info=None):
+    """
+    Build a perihelion close-up preset for a comet.
+
+    Resolves Tp via three-path fallback, reads a and e to compute q and
+    perihelion velocity, then derives a time window and scale that frame
+    the perihelion region.
+
+    Parameters:
+        obj_name (str):   Display name e.g. 'Halley', '3I/ATLAS', 'MAPS'
+        obj_info (dict):  Optional object metadata dict (for horizons_id, id_type)
+
+    Returns:
+        dict with keys: center, select_also, start_date, end_date,
+                        plot_scale_au, label, tp_date, q_au, v_km_s
+        or None if Tp cannot be resolved
+    """
+
+    # ---- Resolve Tp via three-path fallback ----------------------------------
+    tp_jd = None
+    tp_source = None
+    a_val = None
+    e_val = None
+
+    # Path A: Osculating cache
+    try:
+        from osculating_cache_manager import load_cache
+        cache = load_cache()
+        if obj_name in cache and not obj_name.startswith('_'):
+            elems = cache[obj_name].get('elements', {})
+            cached_tp = elems.get('TP')
+            if cached_tp:
+                tp_jd = cached_tp
+                a_val = elems.get('a')
+                e_val = elems.get('e')
+                tp_source = 'osculating cache'
+    except Exception as ex:
+        print(f"[COMET PRESET] Cache lookup failed for {obj_name}: {ex}", flush=True)
+
+    # Path B: Analytical elements
+    if tp_jd is None:
+        try:
+            from orbital_elements import planetary_params as analytical_params
+            if obj_name in analytical_params:
+                params = analytical_params[obj_name]
+                if 'TP' in params:
+                    tp_jd = params['TP']
+                    a_val = params.get('a')
+                    e_val = params.get('e')
+                    tp_source = 'analytical elements'
+        except Exception as ex:
+            print(f"[COMET PRESET] Analytical lookup failed for {obj_name}: {ex}", flush=True)
+
+    # Path C: Horizons fetch at current date (most expensive)
+    if tp_jd is None:
+        try:
+            from osculating_cache_manager import fetch_osculating_elements
+            horizons_id = obj_name
+            id_type = 'smallbody'
+            if obj_info:
+                horizons_id = obj_info.get('id', obj_name)
+                id_type = obj_info.get('id_type', 'smallbody')
+            print(f"[COMET PRESET] No cached Tp for {obj_name} -- fetching from Horizons", flush=True)
+            entry = fetch_osculating_elements(
+                obj_name=obj_name,
+                horizons_id=horizons_id,
+                id_type=id_type,
+                date=None,  # Current date
+                center_body='@10',
+            )
+            if entry and entry.get('elements'):
+                elems = entry['elements']
+                tp_jd = elems.get('TP')
+                a_val = elems.get('a')
+                e_val = elems.get('e')
+                tp_source = 'Horizons fetch'
+        except Exception as ex:
+            print(f"[COMET PRESET] Horizons fetch failed for {obj_name}: {ex}", flush=True)
+
+    if tp_jd is None:
+        print(f"[COMET PRESET] No perihelion time available for {obj_name}", flush=True)
+        return None
+
+    if a_val is None or e_val is None or a_val == 0:
+        print(f"[COMET PRESET] Missing orbital elements for {obj_name} (a={a_val}, e={e_val})", flush=True)
+        return None
+
+    # ---- Convert Tp to datetime ----------------------------------------------
+    try:
+        from astropy.time import Time
+        tp_datetime = Time(tp_jd, format='jd').datetime
+    except Exception as ex:
+        print(f"[COMET PRESET] Could not convert Tp JD {tp_jd}: {ex}", flush=True)
+        return None
+
+    # ---- Compute q (perihelion distance) -------------------------------------
+    if e_val > 1:
+        q_au = abs(a_val) * (e_val - 1.0)
+    else:
+        q_au = a_val * (1.0 - e_val)
+
+    # ---- Perihelion velocity via vis-viva ------------------------------------
+    # v^2 = GM * (2/r - 1/a) at r = q
+    GM_sun = 0.01720209895**2  # AU^3 / day^2  (Gaussian gravitational constant)
+    import math
+    v_au_day = math.sqrt(GM_sun * (2.0 / q_au - 1.0 / a_val))
+    v_km_s = v_au_day * AU_KM / 86400.0
+
+    # ---- Time window: crossing_time * 20, floor 7 days ----------------------
+    # crossing_time = 2*q / v_perihelion (time to cross 2*q at perihelion speed)
+    crossing_time_days = (2.0 * q_au) / v_au_day  # days
+    window_days = max(7.0, crossing_time_days * 20.0)
+
+    # ---- Scale: q * 4 -------------------------------------------------------
+    plot_scale = q_au * 4.0
+
+    # ---- Build date range around Tp ------------------------------------------
+    half_window = timedelta(days=window_days / 2.0)
+    start_dt = tp_datetime - half_window
+    end_dt = tp_datetime + half_window
+    start_date = start_dt.strftime('%Y-%m-%d %H:%M:%S')
+    end_date = end_dt.strftime('%Y-%m-%d %H:%M:%S')
+
+    print(f"[COMET PRESET] {obj_name} perihelion preset:", flush=True)
+    print(f"  Tp: {tp_datetime.strftime('%Y-%m-%d %H:%M')} UTC (source: {tp_source})", flush=True)
+    print(f"  q={q_au:.6f} AU ({q_au * AU_KM:,.0f} km), e={e_val:.6f}", flush=True)
+    print(f"  v_perihelion={v_km_s:,.1f} km/s ({v_au_day:.6f} AU/day)", flush=True)
+    print(f"  crossing_time={crossing_time_days:.4f} days, window={window_days:.1f} days", flush=True)
+    print(f"  scale={plot_scale:.7f} AU, range: {start_date} to {end_date}", flush=True)
+
+    return {
+        'center': 'Sun',
+        'select_also': ['Sun'],
+        'start_date': start_date,
+        'end_date': end_date,
+        'plot_scale_au': plot_scale,
+        'label': f'{obj_name} Perihelion',
+        'tp_date': tp_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+        'q_au': q_au,
+        'v_km_s': v_km_s,
     }
 
 
@@ -606,9 +787,9 @@ def add_tagged_encounter_marker(fig, encounter, position, spacecraft_name, color
             z=[position['z']],
             mode='markers',
             marker=dict(
-                size=8,
+                size=12,
                 color='white',
-                symbol='diamond-open',
+                symbol='square-open',
                 line=dict(color='gray', width=1),
             ),
             name=f"{spacecraft_name} {label}",
@@ -790,3 +971,117 @@ if __name__ == '__main__':
     print("\n" + "=" * 70)
     print("All self-tests passed.")
     print("=" * 70)
+
+
+def get_comet_perihelion_preset(obj_name, obj_info=None):
+    """
+    Build a perihelion close-up preset for a comet.
+    
+    Uses resolve_tp() for the authoritative TP, then computes window
+    and scale from orbital elements using vis-viva equation.
+    
+    Called by _apply_comet_perihelion_preset() in palomas_orrery.py.
+    
+    Parameters:
+        obj_name (str): Comet display name (e.g., '3I/ATLAS', 'Halley')
+        obj_info (dict, optional): Object info with 'id', 'id_type'
+    
+    Returns:
+        dict: Preset with center, dates, scale, label, q, v, tp_jd, tp_source
+              or None if TP cannot be resolved
+    """
+    import math
+    from datetime import datetime, timedelta
+    
+    try:
+        from osculating_cache_manager import resolve_tp, load_cache
+        from astropy.time import Time
+    except ImportError as ie:
+        print(f"[COMET PRESET] Import error: {ie}", flush=True)
+        return None
+    
+    # Resolve TP using authoritative hierarchy
+    tp_jd, tp_source = resolve_tp(obj_name, obj_info=obj_info)
+    if tp_jd is None:
+        print(f"[COMET PRESET] No TP available for {obj_name}", flush=True)
+        return None
+    
+    tp_datetime = Time(tp_jd, format='jd').datetime
+    print(f"[COMET PRESET] {obj_name} Tp: {tp_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC "
+          f"(source: {tp_source})", flush=True)
+    
+    # Get orbital elements for q and v computation
+    a_au = None
+    e_val = None
+    
+    # Try cache first
+    try:
+        cache = load_cache()
+        if obj_name in cache:
+            elems = cache[obj_name].get('elements', {})
+            a_au = elems.get('a')
+            e_val = elems.get('e')
+    except Exception:
+        pass
+    
+    # Fallback to analytical elements
+    if a_au is None or e_val is None:
+        try:
+            from orbital_elements import planetary_params as analytical_params
+            if obj_name in analytical_params:
+                ap = analytical_params[obj_name]
+                a_au = a_au or ap.get('a')
+                e_val = e_val or ap.get('e')
+        except Exception:
+            pass
+    
+    if a_au is None or e_val is None:
+        print(f"[COMET PRESET] Missing a or e for {obj_name}", flush=True)
+        return None
+    
+    # Perihelion distance q
+    if e_val >= 1.0:
+        q_au = abs(a_au) * (e_val - 1.0)   # Hyperbolic
+    else:
+        q_au = a_au * (1.0 - e_val)         # Elliptical
+    
+    # Perihelion velocity via vis-viva: v^2 = GM * (2/r - 1/a)
+    # GM_sun in AU^3/day^2
+    GM_sun = 2.959122e-4
+    if a_au < 0:
+        v_sq = GM_sun * (2.0 / q_au + 1.0 / abs(a_au))
+    else:
+        v_sq = GM_sun * (2.0 / q_au - 1.0 / a_au)
+    
+    v_au_day = math.sqrt(max(v_sq, 0))
+    v_kms = v_au_day * 149597870.7 / 86400.0
+    
+    # Time window: crossing_time * 20, floor 7 days, cap 365 days
+    crossing_time_days = (2.0 * q_au / v_au_day) if v_au_day > 0 else 30.0
+    window_days = max(7, min(365, int(crossing_time_days * 20)))
+    
+    half_window = timedelta(days=window_days / 2)
+    start_dt = tp_datetime - half_window
+    end_dt = tp_datetime + half_window
+    
+    # Plot scale: q * 4
+    plot_scale = q_au * 4.0
+    
+    label = (f"{obj_name} Perihelion: {tp_datetime.strftime('%Y-%m-%d %H:%M')} UTC | "
+             f"q={q_au:.4f} AU | v={v_kms:.1f} km/s")
+    
+    preset = {
+        'label': label,
+        'center': 'Sun',
+        'select_also': ['Sun'],
+        'start_date': start_dt.strftime('%Y-%m-%d %H:%M:%S'),
+        'end_date': end_dt.strftime('%Y-%m-%d %H:%M:%S'),
+        'plot_scale_au': plot_scale,
+        'tp_jd': tp_jd,
+        'tp_source': tp_source,
+        'q_au': q_au,
+        'v_kms': v_kms,
+    }
+    
+    print(f"[COMET PRESET] Window: {window_days}d, Scale: {plot_scale:.5f} AU", flush=True)
+    return preset

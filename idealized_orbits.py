@@ -5284,23 +5284,53 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     apsides = calculate_exact_apsides(abs(a), e, i, omega, Omega, rotate_points)
 
                     # ========== ADD Keplerian PERIAPSIS MARKER ==========
-                    if show_apsidal_markers:  # ADD THIS CONDITION
+                    if show_apsidal_markers:
                         if apsides['periapsis']:
                             peri = apsides['periapsis']
-                            
-                            # Get date from TP for hyperbolic orbits
-                            date_str = ""
-                            if 'TP' in params:
+ 
+                            # Get gravity-only perihelion time from osculating
+                            # elements fetched AT the solution Tp epoch (not the
+                            # pre-fetch epoch, which can be months away).
+                            kep_date_str = ""
+                            _kep_obj_info = next((o for o in objects if o['name'] == obj_name), None)
+ 
+                            # Step 1: Get solution Tp (tells us WHEN to query)
+                            _sol_tp_jd = None
+                            try:
+                                from osculating_cache_manager import resolve_tp as _resolve_kep
+                                _sol_tp_jd, _ = _resolve_kep(obj_name, obj_info=_kep_obj_info)
+                            except ImportError:
+                                pass
+ 
+                            # Step 2: Fetch osculating elements at solution Tp
+                            _osc_tp_at_perihelion = None
+                            if _sol_tp_jd is not None:
+                                try:
+                                    from osculating_cache_manager import fetch_osculating_elements
+                                    from astropy.time import Time
+                                    _tp_dt = Time(_sol_tp_jd, format='jd').datetime
+                                    _entry = fetch_osculating_elements(
+                                        obj_name=obj_name,
+                                        horizons_id=_kep_obj_info.get('id', obj_name) if _kep_obj_info else obj_name,
+                                        id_type=_kep_obj_info.get('id_type', 'smallbody') if _kep_obj_info else 'smallbody',
+                                        date=_tp_dt,
+                                        center_body='@10',
+                                    )
+                                    if _entry and _entry['elements'].get('TP'):
+                                        _osc_tp_at_perihelion = _entry['elements']['TP']
+                                        _osc_time = Time(_osc_tp_at_perihelion, format='jd')
+                                        kep_date_str = f"<br>Date: {_osc_time.datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                                        print(f"  Keplerian periapsis TP (at Tp epoch): {_osc_time.datetime.strftime('%H:%M:%S')} UTC", flush=True)
+                                except Exception as _ex:
+                                    print(f"  Keplerian periapsis fetch at Tp failed: {_ex}", flush=True)
+ 
+                            # Fallback to params['TP'] if fetch failed
+                            if not kep_date_str and 'TP' in params:
                                 from astropy.time import Time
-                                tp_time = Time(params['TP'], format='jd')
-                                perihelion_datetime = tp_time.datetime
-                                date_str = f"<br>Date: {perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC"
-                                
-                                # Store for later use
-                                params['perihelion_datetime'] = perihelion_datetime
-                                params['perihelion_dates'] = [perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')]
-                            
-                            # Add perturbation assessment for hyperbolic orbits
+                                _fb = Time(params['TP'], format='jd').datetime
+                                kep_date_str = f"<br>Date: {_fb.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+ 
+                            # Perturbation assessment
                             accuracy_note = ""
                             if e > 10:
                                 accuracy_note = "<br><i>Note: Extreme eccentricity - strong perturbations expected</i>"
@@ -5310,17 +5340,16 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 accuracy_note = "<br><i>Note: High eccentricity - moderate perturbations expected</i>"
                             else:
                                 accuracy_note = "<br><i>Note: Near-parabolic - perturbations possible</i>"
-                            
+ 
                             hover_text = (
                                 f"<b>{obj_name} Keplerian Periapsis</b>"
-                                f"{date_str}"
+                                f"{kep_date_str}"
                                 f"<br>q={peri['distance']:.6f} AU"
-                                f"<br>Theoretical minimum distance (theta=0 deg)"
+                                f"<br>Gravity-only orbit (osculating conic at perihelion epoch)"
                                 f"<br>One-time passage (hyperbolic)"
-                                f"<br>Unperturbed Keplerian position at actual periapsis time"
                                 f"{accuracy_note}"
                             )
-                            
+ 
                             fig.add_trace(
                                 go.Scatter3d(
                                     x=[peri['x']],
@@ -5334,31 +5363,57 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     ),
                                     name=f"{obj_name} Keplerian Periapsis",
                                     text=[hover_text],
-                            #        hoverinfo='text',
                                     customdata=[f"{obj_name} Keplerian Periapsis"],
-                                    hovertemplate='%{text}<extra></extra>',                                    
+                                    hovertemplate='%{text}<extra></extra>',
                                     showlegend=True
                                 )
                             )
                             print(f"  Added Keplerian periapsis for {obj_name} at distance {peri['distance']:.6f} AU (hyperbolic)", flush=True)
                     
                     # ========== GENERATE ACTUAL PERIHELION DATE FROM TP ==========
-                    if 'TP' in params:
-                        from datetime import timedelta
-                        from astropy.time import Time
-                        
-                        # For hyperbolic orbits, TP gives us the exact perihelion date and time
-                        tp_jd = params['TP']
-                        tp_time = Time(tp_jd, format='jd')
-                        perihelion_datetime = tp_time.datetime
-                        
-                        # Store with full precision for display
+                    # Use resolve_tp() for the solution-level TP (includes
+                    # non-gravitational forces). This is where perihelion
+                    # actually happens, not the Keplerian prediction.
+                    from datetime import timedelta
+                    from astropy.time import Time as AstroTime
+ 
+                    actual_tp_jd = None
+                    actual_tp_source = None
+                    try:
+                        from osculating_cache_manager import resolve_tp as _resolve_actual
+                        _obj_info_act = next((o for o in objects if o['name'] == obj_name), None)
+                        actual_tp_jd, actual_tp_source = _resolve_actual(obj_name, obj_info=_obj_info_act)
+                    except (ImportError, StopIteration):
+                        pass
+ 
+                    # Fallback to params['TP'] if resolve_tp unavailable
+                    if actual_tp_jd is None and 'TP' in params:
+                        actual_tp_jd = params['TP']
+                        actual_tp_source = 'osculating (params fallback)'
+ 
+                    # Compute non-grav delta for hover text
+                    _nongrav_marker_note = ""
+                    if (actual_tp_jd is not None
+                            and _osc_tp_at_perihelion is not None
+                            and actual_tp_source and 'solution' in actual_tp_source):
+                        _delta_d = actual_tp_jd - _osc_tp_at_perihelion
+                        _delta_m = abs(_delta_d) * 24 * 60
+                        _sign = "later" if _delta_d > 0 else "earlier"
+                        if _delta_m > 0.1:
+                            _nongrav_marker_note = (
+                                f"<br>Non-gravitational shift: {_sign} by {_delta_m:.1f} min"
+                                f"<br>(CO2 outgassing: JPL non-grav model)"
+                            )
+ 
+                    if actual_tp_jd is not None:
+                        actual_tp_time = AstroTime(actual_tp_jd, format='jd')
+                        perihelion_datetime = actual_tp_time.datetime
+ 
                         params['perihelion_datetime'] = perihelion_datetime
-                        # Store as string for compatibility (with time)
                         params['perihelion_dates'] = [perihelion_datetime.strftime('%Y-%m-%d %H:%M:%S')]
-                        print(f"  [HYPERBOLIC] Perihelion: {params['perihelion_dates'][0]} UTC", flush=True)
+                        print(f"  [HYPERBOLIC] Perihelion: {params['perihelion_dates'][0]} UTC (source: {actual_tp_source})", flush=True)
                     else:
-                        print(f"  [HYPERBOLIC] No TP in params for {obj_name}", flush=True)
+                        print(f"  [HYPERBOLIC] No TP available for {obj_name}", flush=True)
                     
                     # ========== SIMPLIFIED ACTUAL MARKER FETCHING FOR HYPERBOLIC ==========
                     # This avoids the datetime parsing issues by fetching with date-only
@@ -5385,11 +5440,18 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             
                             if obj_id and fetch_position:
                                 try:
-                                    # Create a datetime object with just the date (midnight)
+                                    # Use full datetime for position fetch (not midnight)
+                                    # At 68 km/s, 10 hours = 2.4 million km offset
                                     from datetime import datetime
-                                    date_obj = datetime.strptime(perihelion_date_only, '%Y-%m-%d')
-                                    print(f"  Fetching position for {date_obj}", flush=True)
-                                    
+                                    if perihelion_full and ':' in str(perihelion_full):
+                                        try:
+                                            date_obj = datetime.strptime(str(perihelion_full).strip(), '%Y-%m-%d %H:%M:%S')
+                                        except ValueError:
+                                            date_obj = datetime.strptime(perihelion_date_only, '%Y-%m-%d')
+                                    else:
+                                        date_obj = datetime.strptime(perihelion_date_only, '%Y-%m-%d')
+                                    print(f"  Fetching position for {date_obj.strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
+
                                     # Fetch the position
                                     pos_data = fetch_position(obj_id, date_obj, center_id=center_id, id_type=id_type)
                                     
@@ -5415,11 +5477,14 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                                 ),
                                                 
                                                 name=f"{obj_name} Actual Perihelion",
+
                                                 text=[
                                                     f"<b>{obj_name} at Perihelion (Actual)</b><br>"
                                                     f"Date/Time: {perihelion_full} UTC<br>"
-                                                    f"Distance from {center_id}: {distance_au:.6f} AU<br>"
-                                                    f"Distance: {distance_km:.0f} km"
+                                                    f"Source: {actual_tp_source if actual_tp_source else 'osculating elements'}<br>"
+                                                    f"Distance from {center_id}: {distance_au:.6f} AU ({distance_km:.0f} km)"
+                                                    f"{_nongrav_marker_note}"
+
                                                 ],  # Full hover content in text
                                                 customdata=[f"{obj_name} Actual Perihelion"],  # Added customdata
                                                 hovertemplate='%{text}<extra></extra>',  # Standard template
@@ -6923,57 +6988,20 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     id_type     = obj_info.get('id_type', 'smallbody')
 
     # ---- Resolve Tp (perihelion epoch) via three-path fallback ---------------
-    # Path A: Tp from osculating cache (heliocentric entry)
-    # Path B: Tp from analytical elements in orbital_elements.py
-    # Path C: Fetch at plot start date, read Tp from returned elements
 
-    tp_jd = None
-    tp_source = None
-
-    # Path A: Osculating cache
+    # Resolve Tp using the authoritative hierarchy:
+    # 1. solution_TP (cached)  2. osculating TP (cached)
+    # 3. analytical elements   4. live fetch
     try:
-        from osculating_cache_manager import load_cache
-        cache = load_cache()
-        if obj_name in cache and not obj_name.startswith('_'):
-            cached_tp = cache[obj_name].get('elements', {}).get('TP')
-            if cached_tp:
-                tp_jd = cached_tp
-                tp_source = 'osculating cache'
-    except Exception as ex:
-        print(f"[PeriOsc] Cache lookup failed for {obj_name}: {ex}", flush=True)
-
-    # Path B: Analytical elements
-    if tp_jd is None:
-        try:
-            from orbital_elements import planetary_params as analytical_params
-            if obj_name in analytical_params and 'TP' in analytical_params[obj_name]:
-                tp_jd = analytical_params[obj_name]['TP']
-                tp_source = 'analytical elements'
-        except Exception as ex:
-            print(f"[PeriOsc] Analytical lookup failed for {obj_name}: {ex}", flush=True)
-
-    # Path C: Fetch at plot start date, read Tp from returned elements
-    if tp_jd is None:
-        try:
-            from osculating_cache_manager import fetch_osculating_elements
-            print(f"[PeriOsc] No cached Tp for {obj_name} -- fetching at plot start date", flush=True)
-            entry = fetch_osculating_elements(
-                obj_name=obj_name,
-                horizons_id=horizons_id,
-                id_type=id_type,
-                date=date,
-                center_body='@10',
-            )
-            if entry and entry.get('elements', {}).get('TP'):
-                tp_jd = entry['elements']['TP']
-                tp_source = 'Horizons fetch (plot start)'
-        except Exception as ex:
-            print(f"[PeriOsc] Tp fetch failed for {obj_name}: {ex}", flush=True)
-
+        from osculating_cache_manager import resolve_tp
+        tp_jd, tp_source = resolve_tp(obj_name, obj_info=obj_info)
+    except ImportError:
+        tp_jd, tp_source = None, None
+ 
     if tp_jd is None:
         print(f"[PeriOsc] No perihelion time available for {obj_name} -- skipping", flush=True)
         return fig
-
+ 
     # Convert Tp Julian Date to datetime
     try:
         from astropy.time import Time
@@ -6981,10 +7009,11 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     except Exception as ex:
         print(f"[PeriOsc] Could not convert Tp JD to datetime: {ex}", flush=True)
         return fig
-
+ 
     print(f"\n[PeriOsc] Perihelion osculating orbit for {obj_name}", flush=True)
-    print(f"  Tp: {tp_datetime.strftime('%Y-%m-%d %H:%M')} UTC (JD {tp_jd:.6f})", flush=True)
+    print(f"  Tp: {tp_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC (JD {tp_jd:.10f})", flush=True)
     print(f"  Tp source: {tp_source}", flush=True)
+
 
     # ---- Fetch osculating elements at Tp, centered on Sun --------------------
     # BYPASS CACHE: cache keys on obj_name+center with no date component.
@@ -7043,6 +7072,30 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     print(f"[PeriOsc] Perihelion velocity: {v_perihelion_km_s:,.1f} km/s "
           f"({v_perihelion_au_day:.6f} AU/day, {v_perihelion_km_hr:,.0f} km/hr)", flush=True)
 
+# ---- Non-gravitational acceleration delta --------------------------------
+    # Compare solution TP (includes non-grav model) with osculating TP at
+    # perihelion epoch (pure Keplerian). The difference is the integrated
+    # effect of outgassing forces.
+    # IMPORTANT: Use the osculating TP from the fetch AT perihelion (elements),
+    # not from the cache (which may be from a distant epoch).
+    nongrav_note = ""
+    osc_tp_at_perihelion = elements.get('TP')
+    if osc_tp_at_perihelion is not None and tp_source and 'solution' in tp_source:
+        # tp_jd is the solution TP (from resolve_tp), osc_tp_at_perihelion
+        # is the pure Keplerian TP at the perihelion epoch
+        delta_days = tp_jd - osc_tp_at_perihelion
+        delta_min = abs(delta_days) * 24 * 60
+        sign = "later" if delta_days > 0 else "earlier"
+        if delta_min > 0.1:  # Show if > 6 seconds
+            nongrav_note = (
+                f"<br><br><b>Non-gravitational shift:</b><br>"
+                f"Solution perihelion {sign} than Keplerian by {delta_min:.1f} min<br>"
+                f"(CO2 outgassing: JPL non-grav model)"
+            )
+            print(f"  [PeriOsc] Non-grav delta: {delta_min:.1f} min ({sign})", flush=True)
+            print(f"    Solution TP:  JD {tp_jd:.10f}", flush=True)
+            print(f"    Osculating TP (at Tp): JD {osc_tp_at_perihelion:.10f}", flush=True)
+
     # ---- Determine clip distance from current plot axis range ----------------
     try:
         axis_range = None
@@ -7099,11 +7152,13 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         r_full = r_full[valid]
 
         asymptote_deg = np.degrees(asymptote_angle)
+
         type_detail = (
             f"e = {e_osc:.6f} (hyperbolic)<br>"
             f"a = {a_osc:.8f} AU (negative = hyperbola)<br>"
             f"Asymptotic half-angle: {asymptote_deg:.1f} deg<br>"
             f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
+            f"{nongrav_note}"
         )
 
     else:
@@ -7168,6 +7223,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             f"a = {a_osc:.8f} AU<br>"
             f"Aphelion: {r_apo:.4f} AU = {r_apo * 149597870.7:,.0f} km<br>"
             f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
+            f"{nongrav_note}"
         )
 
     # ---- Convert to Cartesian in perifocal frame -----------------------------

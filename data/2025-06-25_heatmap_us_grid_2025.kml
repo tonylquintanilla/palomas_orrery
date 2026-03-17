@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="554">
+    <Document id="422">
         <name>us_grid_2025 Heatmap (2025-06-25)</name>
-        <GroundOverlay id="555">
+        <GroundOverlay id="423">
             <name>Thermal Overlay</name>
-            <Icon id="556">
+            <Icon id="424">
                 <href>2025-06-25_heatmap_us_grid_2025.png</href>
             </Icon>
             <LatLonBox>
-                <north>45.0</north>
-                <south>31.0</south>
-                <east>-71.0</east>
-                <west>-95.0</west>
+                <north>45</north>
+                <south>31</south>
+                <east>-71</east>
+                <west>-95</west>
             </LatLonBox>
         </GroundOverlay>
     </Document>

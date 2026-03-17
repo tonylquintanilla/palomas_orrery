@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="173">
+    <Document id="587">
         <name>pakistan_2025 Heatmap (2025-06-22)</name>
-        <GroundOverlay id="174">
+        <GroundOverlay id="588">
             <name>Thermal Overlay</name>
-            <Icon id="175">
+            <Icon id="589">
                 <href>2025-06-22_heatmap_pakistan_2025.png</href>
             </Icon>
             <LatLonBox>
-                <north>34.0</north>
-                <south>24.0</south>
-                <east>74.0</east>
-                <west>66.0</west>
+                <north>34</north>
+                <south>24</south>
+                <east>74</east>
+                <west>66</west>
             </LatLonBox>
         </GroundOverlay>
     </Document>

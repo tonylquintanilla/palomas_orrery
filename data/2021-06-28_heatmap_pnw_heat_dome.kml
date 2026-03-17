@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="116">
+    <Document id="676">
         <name>pnw_heat_dome Heatmap (2021-06-28)</name>
-        <GroundOverlay id="117">
+        <GroundOverlay id="677">
             <name>Thermal Overlay</name>
-            <Icon id="118">
+            <Icon id="678">
                 <href>2021-06-28_heatmap_pnw_heat_dome.png</href>
             </Icon>
             <LatLonBox>
-                <north>60.0</north>
-                <south>42.0</south>
-                <east>-111.0</east>
-                <west>-131.0</west>
+                <north>60</north>
+                <south>42</south>
+                <east>-111</east>
+                <west>-135</west>
             </LatLonBox>
         </GroundOverlay>
     </Document>
