@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="4733">
+    <Document id="323">
         <name>la_1955 Spikes (1955-09-01)</name>
-        <ScreenOverlay id="4734">
+        <ScreenOverlay id="324">
             <name>Intel Card</name>
-            <Icon id="4735">
+            <Icon id="325">
                 <href>1955-09-01_intel_la_1955.png</href>
             </Icon>
             <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
             <screenXY x="0.02" y="0.98" xunits="fraction" yunits="fraction"/>
             <size x="0.25" y="0" xunits="fraction" yunits="fraction"/>
         </ScreenOverlay>
-        <ScreenOverlay id="4736">
+        <ScreenOverlay id="326">
             <name>Risk Scale</name>
-            <Icon id="4737">
-                <href>legend_risk_index_cited.png</href>
+            <Icon id="327">
+                <href>legend_risk_la_1955.png</href>
             </Icon>
             <overlayXY x="1" y="0" xunits="fraction" yunits="fraction"/>
             <screenXY x="0.98" y="0.05" xunits="fraction" yunits="fraction"/>

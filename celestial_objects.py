@@ -601,12 +601,48 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: C/2024 G3. Retrograde. Hyperbolic. The Great Comet of 2025. Comet C/2024 G3 (ATLAS) created quite a buzz in the Southern Hemisphere!', 
     'mission_url': 'https://en.wikipedia.org/wiki/C/2024_G3_(ATLAS)'},
 
-    {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond', 
+#    {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond', 
+    {'name': 'C/2025_K1', 'id': '90004912', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond',     
     # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
-    'object_type': 'trajectory', 'id_type': 'smallbody', 
+#    'object_type': 'trajectory', 'id_type': 'smallbody', 
+    'object_type': 'trajectory', 'id_type': 'id',
     # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic. A notable comet for observation in late 2025. Retrograde (left-handed) orbit.', 
+#    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic. A notable comet for observation in late 2025. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic (e=1.00026). Perihelion Oct 8, 2025 at 0.33 AU.<br>'
+                    'Nucleus fragmented ~Oct 16 into at least 4 pieces (Hubble, published Icarus Feb 2026).<br>'
+                    'This record is Fragment A (main body, non-gravitational forces modeled). See K1-B, K1-C, K1-D.',   
     'mission_url': 'https://theskylive.com/c2025k1-info'}, 
+
+    # C/2025 K1 FRAGMENTS - Hubble observed breakup ~Oct 16, 2025 (8 days post-perihelion)
+    # Parent record (C/2025 K1, Rec #90004912) IS Fragment A - same SPK-ID, full arc with non-grav forces
+    # Fragments B, C, D have independent orbital solutions starting from Nov 2025 observations
+    # All four share nearly identical perihelion time (Oct 8.44-8.46) but diverge outbound
+    # Fragment C is unique: e=0.99999 (bound!), while B and D are hyperbolic (escaping)
+    # Convergence minimum ~Nov 24 (~70,000 km), then slow divergence outbound
+
+    # The three fragments should be fine as-is (C/2025 K1-B etc. are unambiguous designations), but if you want consistency, 
+    # you could switch them to numeric IDs too (90004913, 90004914, 90004915 with id_type: 'id').     
+
+    {'name': 'C/2025_K1-B', 'id': 'C/2025 K1-B', 'var_name': 'comet_2025k1b_var', 'color_key': 'C/2025_K1-B', 'symbol': 'diamond',
+    # Rec #90004913, JPL#13, data arc: 2025-11-05 to 2026-01-06, 278 obs
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
+    'mission_info': 'Horizons: C/2025 K1-B. Fragment B of comet C/2025 K1 (ATLAS). Hyperbolic (e=1.00203).<br>'
+                    'Breakup observed by Hubble ~Oct 16, 2025, 8 days post-perihelion. Escaping the solar system.',
+    'mission_url': 'https://theskylive.com/c2025k1-info'},
+
+    {'name': 'C/2025_K1-C', 'id': 'C/2025 K1-C', 'var_name': 'comet_2025k1c_var', 'color_key': 'C/2025_K1-C', 'symbol': 'diamond',
+    # Rec #90004914, JPL#14, data arc: 2025-11-25 to 2026-01-10, 158 obs
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
+    'mission_info': 'Horizons: C/2025 K1-C. Fragment C - the stubborn one. Elliptical (e=0.99999, still bound!).<br>'
+                    'While siblings escape, C remains gravitationally bound. Return period ~13 million years.',
+    'mission_url': 'https://theskylive.com/c2025k1-info'},
+
+    {'name': 'C/2025_K1-D', 'id': 'C/2025 K1-D', 'var_name': 'comet_2025k1d_var', 'color_key': 'C/2025_K1-D', 'symbol': 'diamond',
+    # Rec #90004915, JPL#5, data arc: 2025-11-26 to 2025-12-29, 107 obs (shortest arc, 33 days)
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
+    'mission_info': 'Horizons: C/2025 K1-D. Fragment D of comet C/2025 K1 (ATLAS). Hyperbolic (e=1.00246, most divergent).<br>'
+                    'Shortest observation arc (33 days). Escaping the solar system.',
+    'mission_url': 'https://theskylive.com/c2025k1-info'},
 
     {'name': 'PANSTARRS', 'id': 'C/2025 R3', 'var_name': 'comet_c2025r3_var', 'color_key': 'PANSTARRS', 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
     'object_type': 'trajectory', 'id_type': 'smallbody', 

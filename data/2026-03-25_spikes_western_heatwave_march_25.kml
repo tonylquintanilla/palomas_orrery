@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="259">
+        <Style id="266">
+            <IconStyle id="267">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="268">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="271">
+            <IconStyle id="272">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="273">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="276">
+            <IconStyle id="277">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="278">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="281">
+            <IconStyle id="282">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="283">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="286">
+            <IconStyle id="287">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="288">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="291">
+            <IconStyle id="292">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="293">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="296">
+            <IconStyle id="297">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="298">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="301">
+            <IconStyle id="302">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="303">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="306">
+            <IconStyle id="307">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="308">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="311">
+            <IconStyle id="312">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="313">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="316">
+            <IconStyle id="317">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="318">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="321">
+            <IconStyle id="322">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="323">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="326">
+            <IconStyle id="327">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="328">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="331">
+            <IconStyle id="332">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="333">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="336">
+            <IconStyle id="337">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="338">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="341">
+            <IconStyle id="342">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="343">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="346">
+            <IconStyle id="347">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="348">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="351">
+            <IconStyle id="352">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="353">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="356">
+            <IconStyle id="357">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="358">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="361">
+            <IconStyle id="362">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="363">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="366">
+            <IconStyle id="367">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="368">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="371">
+            <IconStyle id="372">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="373">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="376">
+            <IconStyle id="377">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="378">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="381">
+            <IconStyle id="382">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="383">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="386">
+            <IconStyle id="387">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="388">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="391">
+            <IconStyle id="392">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="393">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="396">
+            <IconStyle id="397">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="398">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="401">
+            <IconStyle id="402">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="403">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="406">
+            <IconStyle id="407">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="408">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="411">
+            <IconStyle id="412">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="413">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="416">
+            <IconStyle id="417">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="418">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <name>western_heatwave_march_25 Spikes (2026-03-25)</name>
+        <ScreenOverlay id="260">
+            <name>Intel Card</name>
+            <Icon id="261">
+                <href>2026-03-25_intel_western_heatwave_march_25.png</href>
+            </Icon>
+            <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+            <screenXY x="0.02" y="0.98" xunits="fraction" yunits="fraction"/>
+            <size x="0.25" y="0" xunits="fraction" yunits="fraction"/>
+        </ScreenOverlay>
+        <ScreenOverlay id="262">
+            <name>Risk Scale</name>
+            <Icon id="263">
+                <href>legend_risk_western_heatwave_march_25.png</href>
+            </Icon>
+            <overlayXY x="1" y="0" xunits="fraction" yunits="fraction"/>
+            <screenXY x="0.98" y="0.05" xunits="fraction" yunits="fraction"/>
+            <size x="0.15" y="0" xunits="fraction" yunits="fraction"/>
+        </ScreenOverlay>
+        <Placemark id="265">
+            <name>95F</name>
+            <description>NWS issues first Extreme Heat Watch</description>
+            <styleUrl>#266</styleUrl>
+            <Point id="264">
+                <coordinates>-112.0742,33.4484,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="270">
+            <name>98F</name>
+            <description>Already tracking 15+ above normal</description>
+            <styleUrl>#271</styleUrl>
+            <Point id="269">
+                <coordinates>-114.6196,32.6549,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="275">
+            <name>96F</name>
+            <description>Coachella Valley heating up early</description>
+            <styleUrl>#276</styleUrl>
+            <Point id="274">
+                <coordinates>-116.5453,33.8303,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="280">
+            <name>92F</name>
+            <description>Heat dome compressing over Great Basin</description>
+            <styleUrl>#281</styleUrl>
+            <Point id="279">
+                <coordinates>-115.1398,36.1699,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="285">
+            <name>100F</name>
+            <description>First triple digits in Salton Sea basin</description>
+            <styleUrl>#286</styleUrl>
+            <Point id="284">
+                <coordinates>-116.1064,33.6353,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="290">
+            <name>97F</name>
+            <description>Southern AZ corridor heating</description>
+            <styleUrl>#291</styleUrl>
+            <Point id="289">
+                <coordinates>-110.9747,32.2226,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="295">
+            <name>101F</name>
+            <description>Earliest 100+ day EVER recorded in Phoenix</description>
+            <styleUrl>#296</styleUrl>
+            <Point id="294">
+                <coordinates>-112.0742,33.4484,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="300">
+            <name>94F</name>
+            <description>Shatters all-time March high</description>
+            <styleUrl>#301</styleUrl>
+            <Point id="299">
+                <coordinates>-115.1398,36.1699,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="305">
+            <name>108F</name>
+            <description>Earliest 105+ in Death Valley</description>
+            <styleUrl>#306</styleUrl>
+            <Point id="304">
+                <coordinates>-116.8666,36.4616,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="310">
+            <name>109F</name>
+            <description>Broke 1954 record of 108F</description>
+            <styleUrl>#311</styleUrl>
+            <Point id="309">
+                <coordinates>-114.6196,32.6549,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="315">
+            <name>112F</name>
+            <description>Pending NWS validation - potential national record</description>
+            <styleUrl>#316</styleUrl>
+            <Point id="314">
+                <coordinates>-114.3333,32.7167,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="320">
+            <name>105F</name>
+            <description>Earliest 105F on record</description>
+            <styleUrl>#321</styleUrl>
+            <Point id="319">
+                <coordinates>-112.0742,33.4484,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="325">
+            <name>86F</name>
+            <description>New all-time March record (broke 84F from 1971)</description>
+            <styleUrl>#326</styleUrl>
+            <Point id="324">
+                <coordinates>-104.9903,39.7392,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="330">
+            <name>78F</name>
+            <description>Inland reach of heat dome</description>
+            <styleUrl>#331</styleUrl>
+            <Point id="329">
+                <coordinates>-111.891,40.7608,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="335">
+            <name>91F</name>
+            <description>New all-time March record for NM</description>
+            <styleUrl>#336</styleUrl>
+            <Point id="334">
+                <coordinates>-106.6504,35.0844,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="340">
+            <name>96F</name>
+            <description>CO state March record (ties 1907)</description>
+            <styleUrl>#341</styleUrl>
+            <Point id="339">
+                <coordinates>-102.2694,39.3058,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="345">
+            <name>101F</name>
+            <description>KS state March record; 101F in March</description>
+            <styleUrl>#346</styleUrl>
+            <Point id="344">
+                <coordinates>-99.324,39.7561,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="350">
+            <name>97F</name>
+            <description>IA state March record (broke 92F from 1986)</description>
+            <styleUrl>#351</styleUrl>
+            <Point id="349">
+                <coordinates>-95.8152,41.2247,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="355">
+            <name>99F</name>
+            <description>NE state March record (broke 98F from 1907)</description>
+            <styleUrl>#356</styleUrl>
+            <Point id="354">
+                <coordinates>-100.1665,40.2819,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="360">
+            <name>97F</name>
+            <description>SD state March record (broke 96F from 1943)</description>
+            <styleUrl>#361</styleUrl>
+            <Point id="359">
+                <coordinates>-96.9292,42.7794,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="365">
+            <name>88F</name>
+            <description>MN state March record (ties 88F from 1910)</description>
+            <styleUrl>#366</styleUrl>
+            <Point id="364">
+                <coordinates>-96.2128,43.6536,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="370">
+            <name>97F</name>
+            <description>MO state March record (broke 95F set day before)</description>
+            <styleUrl>#371</styleUrl>
+            <Point id="369">
+                <coordinates>-94.3488,38.6533,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="375">
+            <name>100F</name>
+            <description>NM state March record (broke 99F set day before)</description>
+            <styleUrl>#376</styleUrl>
+            <Point id="374">
+                <coordinates>-104.2288,32.4207,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="380">
+            <name>88F</name>
+            <description>Daily March record; heat reaches Mississippi Valley</description>
+            <styleUrl>#381</styleUrl>
+            <Point id="379">
+                <coordinates>-90.1994,38.627,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="385">
+            <name>90F</name>
+            <description>NWS Record Event Report issued</description>
+            <styleUrl>#386</styleUrl>
+            <Point id="384">
+                <coordinates>-93.2923,37.2089,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="390">
+            <name>92F</name>
+            <description>All-time March record for Kansas City</description>
+            <styleUrl>#391</styleUrl>
+            <Point id="389">
+                <coordinates>-94.5786,39.0997,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="395">
+            <name>92F</name>
+            <description>All-time March record; 78F swing from Mar 16 low</description>
+            <styleUrl>#396</styleUrl>
+            <Point id="394">
+                <coordinates>-100.7601,41.1403,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="400">
+            <name>87F</name>
+            <description>Breaks own all-time March record AGAIN (87F &gt; 86F from Mar 21)</description>
+            <styleUrl>#401</styleUrl>
+            <Point id="399">
+                <coordinates>-104.9903,39.7392,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="405">
+            <name>100F</name>
+            <description>Pulse 2 reaches Texas; forecast 100F</description>
+            <styleUrl>#406</styleUrl>
+            <Point id="404">
+                <coordinates>-101.8552,33.5779,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="410">
+            <name>98F</name>
+            <description>Breaks own all-time March record AGAIN (98F &gt; 97F from Mar 20)</description>
+            <styleUrl>#411</styleUrl>
+            <Point id="409">
+                <coordinates>-115.1398,36.1699,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="415">
+            <name>94F</name>
+            <description>Breaks own all-time March record AGAIN (94F &gt; 91F from Mar 21)</description>
+            <styleUrl>#416</styleUrl>
+            <Point id="414">
+                <coordinates>-106.6504,35.0844,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="1608">
+    <Document id="2125">
         <name>iran_2015 Heatmap (2015-07-31)</name>
-        <GroundOverlay id="1609">
+        <GroundOverlay id="2126">
             <name>Thermal Overlay</name>
-            <Icon id="1610">
+            <Icon id="2127">
                 <href>2015-07-31_heatmap_iran_2015.png</href>
             </Icon>
             <LatLonBox>

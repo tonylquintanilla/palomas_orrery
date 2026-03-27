@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="220">
+        <Style id="227">
+            <IconStyle id="228">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="229">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="232">
+            <IconStyle id="233">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="234">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="237">
+            <IconStyle id="238">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="239">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="242">
+            <IconStyle id="243">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="244">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="247">
+            <IconStyle id="248">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="249">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="252">
+            <IconStyle id="253">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="254">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="257">
+            <IconStyle id="258">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="259">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="262">
+            <IconStyle id="263">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="264">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="267">
+            <IconStyle id="268">
+                <colorMode>normal</colorMode>
+                <scale>0.6</scale>
+                <heading>0</heading>
+                <Icon id="269">
+                    <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <name>western_heatwave_march_18 Spikes (2026-03-18)</name>
+        <ScreenOverlay id="221">
+            <name>Intel Card</name>
+            <Icon id="222">
+                <href>2026-03-18_intel_western_heatwave_march_18.png</href>
+            </Icon>
+            <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+            <screenXY x="0.02" y="0.98" xunits="fraction" yunits="fraction"/>
+            <size x="0.25" y="0" xunits="fraction" yunits="fraction"/>
+        </ScreenOverlay>
+        <ScreenOverlay id="223">
+            <name>Risk Scale</name>
+            <Icon id="224">
+                <href>legend_risk_western_heatwave_march_18.png</href>
+            </Icon>
+            <overlayXY x="1" y="0" xunits="fraction" yunits="fraction"/>
+            <screenXY x="0.98" y="0.05" xunits="fraction" yunits="fraction"/>
+            <size x="0.15" y="0" xunits="fraction" yunits="fraction"/>
+        </ScreenOverlay>
+        <Placemark id="226">
+            <name>95F</name>
+            <description>NWS issues first Extreme Heat Watch</description>
+            <styleUrl>#227</styleUrl>
+            <Point id="225">
+                <coordinates>-112.0742,33.4484,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="231">
+            <name>98F</name>
+            <description>Already tracking 15+ above normal</description>
+            <styleUrl>#232</styleUrl>
+            <Point id="230">
+                <coordinates>-114.6196,32.6549,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="236">
+            <name>96F</name>
+            <description>Coachella Valley heating up early</description>
+            <styleUrl>#237</styleUrl>
+            <Point id="235">
+                <coordinates>-116.5453,33.8303,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="241">
+            <name>92F</name>
+            <description>Heat dome compressing over Great Basin</description>
+            <styleUrl>#242</styleUrl>
+            <Point id="240">
+                <coordinates>-115.1398,36.1699,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="246">
+            <name>100F</name>
+            <description>First triple digits in Salton Sea basin</description>
+            <styleUrl>#247</styleUrl>
+            <Point id="245">
+                <coordinates>-116.1064,33.6353,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="251">
+            <name>97F</name>
+            <description>Southern AZ corridor heating</description>
+            <styleUrl>#252</styleUrl>
+            <Point id="250">
+                <coordinates>-110.9747,32.2226,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="256">
+            <name>101F</name>
+            <description>Earliest 100+ day EVER recorded in Phoenix</description>
+            <styleUrl>#257</styleUrl>
+            <Point id="255">
+                <coordinates>-112.0742,33.4484,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="261">
+            <name>94F</name>
+            <description>Shatters all-time March high</description>
+            <styleUrl>#262</styleUrl>
+            <Point id="260">
+                <coordinates>-115.1398,36.1699,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+        <Placemark id="266">
+            <name>108F</name>
+            <description>Earliest 105+ in Death Valley</description>
+            <styleUrl>#267</styleUrl>
+            <Point id="265">
+                <coordinates>-116.8666,36.4616,0</coordinates>
+                <altitudeMode>clampToGround</altitudeMode>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

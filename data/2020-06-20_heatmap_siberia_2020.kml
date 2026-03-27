@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="836">
+    <Document id="2510">
         <name>siberia_2020 Heatmap (2020-06-20)</name>
-        <GroundOverlay id="837">
+        <GroundOverlay id="2511">
             <name>Thermal Overlay</name>
-            <Icon id="838">
+            <Icon id="2512">
                 <href>2020-06-20_heatmap_siberia_2020.png</href>
             </Icon>
             <LatLonBox>

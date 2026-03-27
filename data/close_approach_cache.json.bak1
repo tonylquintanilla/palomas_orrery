@@ -21,5 +21,23 @@
     "date_max": "2029-04-29",
     "dist_max": "0.5",
     "fetched": "2026-03-04"
+  },
+  "close_approach:2014 MU69:Jupiter": {
+    "designation": "2014 MU69",
+    "body": "Jupiter",
+    "approaches": [],
+    "date_min": "2006-12-30",
+    "date_max": "2007-04-29",
+    "dist_max": "0.5",
+    "fetched": "2026-03-13"
+  },
+  "close_approach:C/2025 N1:Jupiter": {
+    "designation": "C/2025 N1",
+    "body": "Jupiter",
+    "approaches": [],
+    "date_min": "2026-03-18",
+    "date_max": "2027-03-18",
+    "dist_max": "0.5",
+    "fetched": "2026-03-18"
   }
 }

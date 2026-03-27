@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="3490">
+    <Document id="4046">
         <name>delhi_heat_wave Heatmap (2024-05-29)</name>
-        <GroundOverlay id="3491">
+        <GroundOverlay id="4047">
             <name>Thermal Overlay</name>
-            <Icon id="3492">
+            <Icon id="4048">
                 <href>2024-05-29_heatmap_delhi_heat_wave.png</href>
             </Icon>
             <LatLonBox>

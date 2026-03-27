@@ -224,6 +224,9 @@ KNOWN_ORBITAL_PERIODS = {
     # For hyperbolic/parabolic objects, period is undefined
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
     'C/2025_K1': None,      # Hyperbolic comet - effectively infinite period
+    'C/2025_K1-B': None,    # Hyperbolic fragment - escaping solar system
+    'C/2025_K1-C': None,    # Technically ~13M year period, effectively infinite
+    'C/2025_K1-D': None,    # Hyperbolic fragment - escaping solar system    
     'Borisov': None,        # Hyperbolic comet - effectively infinite period    
     'McNaught': None,       # Hyperbolic comet - effectively infinite period 
     'ATLAS': None,          # Hyperbolic comet -- infinite period   PER= 9.999999E99
@@ -574,6 +577,9 @@ def color_map(planet):
         'McNaught': 'green',
         'NEOWISE': 'red',
         'C/2025_K1': 'cyan',
+        'C/2025_K1-B': 'rgb(0, 200, 220)',          # Teal - darker cyan variant
+        'C/2025_K1-C': 'rgb(255, 215, 0)',           # Gold - the bound fragment (special!)
+        'C/2025_K1-D': 'rgb(100, 180, 255)',          # Sky blue - cooler variant        
         'Borisov': 'green',        
         'Tsuchinshan': 'cyan',
         'ATLAS': 'white',
@@ -2111,6 +2117,32 @@ INFO = {
         '  Observers in southern latitudes can spot it in both the evening and morning skies.\n' 
         '* August: It will be faint (around magnitude 13) and visible only from the Southern Hemisphere through large telescopes.',
         
+        'C/2025_K1-B': 'Horizons: C/2025 K1-B. Fragment B of comet C/2025 K1 (ATLAS).\n'
+        '* One of four fragments observed by Hubble Space Telescope in November 2025 (published Icarus, Feb 2026).\n'
+        '* The breakup occurred ~October 16, 2025, approximately 8 days after perihelion at 0.33 AU.\n'
+        '* Orbital characteristics: Hyperbolic (e=1.00203), escaping the solar system.\n'
+        '* Perihelion: October 8.45, 2025, at 0.336 AU - nearly identical to parent.\n'
+        '* No non-gravitational forces modeled (unlike parent Fragment A).\n'
+        '* Data arc: 2025-11-05 to 2026-01-06 (278 observations, JPL solution #13).',
+
+        'C/2025_K1-C': 'Horizons: C/2025 K1-C. Fragment C of comet C/2025 K1 (ATLAS) - the stubborn one.\n'
+        '* The ONLY fragment that remains gravitationally bound to the Sun (e=0.99999).\n'
+        '* While fragments A, B, and D escape the solar system on hyperbolic orbits,\n'
+        '  Fragment C is on an extremely long-period elliptical orbit (~13 million years).\n'
+        '* Its orbital elements are closest to the parent body, suggesting it may be\n'
+        '  the most massive fragment or the one least affected by outgassing forces.\n'
+        '* Perihelion: October 8.44, 2025, at 0.334 AU.\n'
+        '* Chemically unusual: ground-based observations show extreme depletion of carbon-bearing species.\n'
+        '* Data arc: 2025-11-25 to 2026-01-10 (158 observations, JPL solution #14).',
+
+        'C/2025_K1-D': 'Horizons: C/2025 K1-D. Fragment D of comet C/2025 K1 (ATLAS).\n'
+        '* The most divergent fragment - highest eccentricity (e=1.00246) of all four pieces.\n'
+        '* Also the faintest and least observed, with the shortest data arc (33 days).\n'
+        '* Perihelion: October 8.46, 2025, at 0.336 AU.\n'
+        '* By March 2026, Fragment D leads the divergence at ~911,000 km from Fragment A.\n'
+        '* No non-gravitational forces modeled.\n'
+        '* Data arc: 2025-11-26 to 2025-12-29 (107 observations, JPL solution #5).',
+
         'Borisov': 
         '*** SET MANUAL SCALE TO AT LEAST 50 AU TO SEE FULL HYPERBOLIC ORBIT AS ESTIMATED SO FAR BY JPL***\n\n'
         'Horizons: C/2025 V1. Retrograde > 90. Comet C/2025 V1 (Borisov) was just discovered on November 2, 2025. It was \n' 

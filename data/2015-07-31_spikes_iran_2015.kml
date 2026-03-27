@@ -1,1050 +1,819 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="1357">
-        <Style id="1364">
-            <LineStyle id="1366">
+    <Document id="1929">
+        <Style id="1936">
+            <LineStyle id="1938">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1365">
+            <PolyStyle id="1937">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1369">
-            <LineStyle id="1371">
+        <Style id="1941">
+            <LineStyle id="1943">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1370">
+            <PolyStyle id="1942">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1374">
-            <LineStyle id="1376">
+        <Style id="1946">
+            <LineStyle id="1948">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1375">
+            <PolyStyle id="1947">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1379">
-            <LineStyle id="1381">
+        <Style id="1951">
+            <LineStyle id="1953">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1380">
+            <PolyStyle id="1952">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1384">
-            <LineStyle id="1386">
+        <Style id="1956">
+            <LineStyle id="1958">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1385">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1389">
-            <LineStyle id="1391">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1390">
+            <PolyStyle id="1957">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1394">
-            <LineStyle id="1396">
+        <Style id="1961">
+            <LineStyle id="1963">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1395">
+            <PolyStyle id="1962">
                 <color>ff00008b</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1399">
-            <LineStyle id="1401">
+        <Style id="1966">
+            <LineStyle id="1968">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1400">
+            <PolyStyle id="1967">
                 <color>ff00008b</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1404">
-            <LineStyle id="1406">
+        <Style id="1971">
+            <LineStyle id="1973">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1405">
+            <PolyStyle id="1972">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1409">
-            <LineStyle id="1411">
+        <Style id="1976">
+            <LineStyle id="1978">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1410">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1414">
-            <LineStyle id="1416">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1415">
+            <PolyStyle id="1977">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1419">
-            <LineStyle id="1421">
+        <Style id="1981">
+            <LineStyle id="1983">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1420">
+            <PolyStyle id="1982">
                 <color>ff00008b</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1424">
-            <LineStyle id="1426">
+        <Style id="1986">
+            <LineStyle id="1988">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1425">
+            <PolyStyle id="1987">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1429">
-            <LineStyle id="1431">
+        <Style id="1991">
+            <LineStyle id="1993">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1430">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1434">
-            <LineStyle id="1436">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1435">
+            <PolyStyle id="1992">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1439">
-            <LineStyle id="1441">
+        <Style id="1996">
+            <LineStyle id="1998">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1440">
+            <PolyStyle id="1997">
                 <color>ff00008b</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1444">
-            <LineStyle id="1446">
+        <Style id="2001">
+            <LineStyle id="2003">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1445">
+            <PolyStyle id="2002">
                 <color>ff00008b</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1449">
-            <LineStyle id="1451">
+        <Style id="2006">
+            <LineStyle id="2008">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1450">
+            <PolyStyle id="2007">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1454">
-            <LineStyle id="1456">
+        <Style id="2011">
+            <LineStyle id="2013">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1455">
+            <PolyStyle id="2012">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1459">
-            <LineStyle id="1461">
+        <Style id="2016">
+            <LineStyle id="2018">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1460">
+            <PolyStyle id="2017">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1464">
-            <LineStyle id="1466">
+        <Style id="2021">
+            <LineStyle id="2023">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1465">
+            <PolyStyle id="2022">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1469">
-            <LineStyle id="1471">
+        <Style id="2026">
+            <LineStyle id="2028">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1470">
+            <PolyStyle id="2027">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1474">
-            <LineStyle id="1476">
+        <Style id="2031">
+            <LineStyle id="2033">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1475">
+            <PolyStyle id="2032">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1479">
-            <LineStyle id="1481">
+        <Style id="2036">
+            <LineStyle id="2038">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1480">
+            <PolyStyle id="2037">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1484">
-            <LineStyle id="1486">
+        <Style id="2041">
+            <LineStyle id="2043">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1485">
+            <PolyStyle id="2042">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1489">
-            <LineStyle id="1491">
+        <Style id="2046">
+            <LineStyle id="2048">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1490">
+            <PolyStyle id="2047">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1494">
-            <LineStyle id="1496">
+        <Style id="2051">
+            <LineStyle id="2053">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1495">
+            <PolyStyle id="2052">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1499">
-            <LineStyle id="1501">
+        <Style id="2056">
+            <LineStyle id="2058">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1500">
+            <PolyStyle id="2057">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1504">
-            <LineStyle id="1506">
+        <Style id="2061">
+            <LineStyle id="2063">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1505">
+            <PolyStyle id="2062">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1509">
-            <LineStyle id="1511">
+        <Style id="2066">
+            <LineStyle id="2068">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1510">
+            <PolyStyle id="2067">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1514">
-            <LineStyle id="1516">
+        <Style id="2071">
+            <LineStyle id="2073">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1515">
+            <PolyStyle id="2072">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1519">
-            <LineStyle id="1521">
+        <Style id="2076">
+            <LineStyle id="2078">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1520">
+            <PolyStyle id="2077">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1524">
-            <LineStyle id="1526">
+        <Style id="2081">
+            <LineStyle id="2083">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1525">
+            <PolyStyle id="2082">
                 <color>ff00008b</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1529">
-            <LineStyle id="1531">
+        <Style id="2086">
+            <LineStyle id="2088">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1530">
+            <PolyStyle id="2087">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1534">
-            <LineStyle id="1536">
+        <Style id="2091">
+            <LineStyle id="2093">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1535">
+            <PolyStyle id="2092">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1539">
-            <LineStyle id="1541">
+        <Style id="2096">
+            <LineStyle id="2098">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1540">
+            <PolyStyle id="2097">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1544">
-            <LineStyle id="1546">
+        <Style id="2101">
+            <LineStyle id="2103">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1545">
+            <PolyStyle id="2102">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1549">
-            <LineStyle id="1551">
+        <Style id="2106">
+            <LineStyle id="2108">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1550">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1554">
-            <LineStyle id="1556">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1555">
+            <PolyStyle id="2107">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1559">
-            <LineStyle id="1561">
+        <Style id="2111">
+            <LineStyle id="2113">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1560">
+            <PolyStyle id="2112">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1564">
-            <LineStyle id="1566">
+        <Style id="2116">
+            <LineStyle id="2118">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1565">
+            <PolyStyle id="2117">
                 <color>ff0000ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Style id="1569">
-            <LineStyle id="1571">
+        <Style id="2121">
+            <LineStyle id="2123">
                 <colorMode>normal</colorMode>
                 <width>0</width>
             </LineStyle>
-            <PolyStyle id="1570">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1574">
-            <LineStyle id="1576">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1575">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1579">
-            <LineStyle id="1581">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1580">
+            <PolyStyle id="2122">
                 <color>ff0000ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1584">
-            <LineStyle id="1586">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1585">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1589">
-            <LineStyle id="1591">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1590">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1594">
-            <LineStyle id="1596">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1595">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1599">
-            <LineStyle id="1601">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1600">
-                <color>ff00a5ff</color>
-                <colorMode>normal</colorMode>
-                <fill>1</fill>
-                <outline>1</outline>
-            </PolyStyle>
-        </Style>
-        <Style id="1604">
-            <LineStyle id="1606">
-                <colorMode>normal</colorMode>
-                <width>0</width>
-            </LineStyle>
-            <PolyStyle id="1605">
-                <color>ff00a5ff</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
         <name>iran_2015 Spikes (2015-07-31)</name>
-        <ScreenOverlay id="1358">
+        <ScreenOverlay id="1930">
             <name>Intel Card</name>
-            <Icon id="1359">
+            <Icon id="1931">
                 <href>2015-07-31_intel_iran_2015.png</href>
             </Icon>
             <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
             <screenXY x="0.02" y="0.98" xunits="fraction" yunits="fraction"/>
             <size x="0.25" y="0" xunits="fraction" yunits="fraction"/>
         </ScreenOverlay>
-        <ScreenOverlay id="1360">
+        <ScreenOverlay id="1932">
             <name>Risk Scale</name>
-            <Icon id="1361">
-                <href>legend_risk_index_cited.png</href>
+            <Icon id="1933">
+                <href>legend_risk_iran_2015.png</href>
             </Icon>
             <overlayXY x="1" y="0" xunits="fraction" yunits="fraction"/>
             <screenXY x="0.98" y="0.05" xunits="fraction" yunits="fraction"/>
             <size x="0.15" y="0" xunits="fraction" yunits="fraction"/>
         </ScreenOverlay>
-        <Placemark id="1363">
+        <Placemark id="1935">
             <name>26.7</name>
-            <styleUrl>#1364</styleUrl>
-            <Point id="1362">
-                <coordinates>48,31,135346.8873431149</coordinates>
+            <styleUrl>#1936</styleUrl>
+            <Point id="1934">
+                <coordinates>48,31,35346.88734311491</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1368">
+        <Placemark id="1940">
             <name>26.6</name>
-            <styleUrl>#1369</styleUrl>
-            <Point id="1367">
-                <coordinates>49,31,130015.1451986972</coordinates>
+            <styleUrl>#1941</styleUrl>
+            <Point id="1939">
+                <coordinates>49,31,30015.14519869719</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1373">
+        <Placemark id="1945">
             <name>26.4</name>
-            <styleUrl>#1374</styleUrl>
-            <Point id="1372">
-                <coordinates>48,30,121358.9678450001</coordinates>
+            <styleUrl>#1946</styleUrl>
+            <Point id="1944">
+                <coordinates>48,30,21358.967845000087</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1378">
+        <Placemark id="1950">
             <name>30.2</name>
-            <styleUrl>#1379</styleUrl>
-            <Point id="1377">
-                <coordinates>49,30,311679.18553348153</coordinates>
+            <styleUrl>#1951</styleUrl>
+            <Point id="1949">
+                <coordinates>49,30,211679.18553348156</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1383">
-            <name>25.6</name>
-            <styleUrl>#1384</styleUrl>
-            <Point id="1382">
-                <coordinates>50,30,80128.6846093948</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1388">
+        <Placemark id="1955">
             <name>26.1</name>
-            <styleUrl>#1389</styleUrl>
-            <Point id="1387">
-                <coordinates>48,29,103677.73662905257</coordinates>
+            <styleUrl>#1956</styleUrl>
+            <Point id="1954">
+                <coordinates>48,29,3677.7366290525747</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1393">
+        <Placemark id="1960">
             <name>31.5</name>
-            <styleUrl>#1394</styleUrl>
-            <Point id="1392">
-                <coordinates>49,29,373054.5659076258</coordinates>
+            <styleUrl>#1961</styleUrl>
+            <Point id="1959">
+                <coordinates>49,29,273054.5659076258</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1398">
+        <Placemark id="1965">
             <name>31.1</name>
-            <styleUrl>#1399</styleUrl>
-            <Point id="1397">
-                <coordinates>50,29,356144.7682555452</coordinates>
+            <styleUrl>#1966</styleUrl>
+            <Point id="1964">
+                <coordinates>50,29,256144.76825554515</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1403">
+        <Placemark id="1970">
             <name>29.2</name>
-            <styleUrl>#1404</styleUrl>
-            <Point id="1402">
-                <coordinates>51,29,260551.0328613642</coordinates>
+            <styleUrl>#1971</styleUrl>
+            <Point id="1969">
+                <coordinates>51,29,160551.0328613642</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1408">
-            <name>24.3</name>
-            <styleUrl>#1409</styleUrl>
-            <Point id="1407">
-                <coordinates>48,28,12621.877931421288</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1413">
+        <Placemark id="1975">
             <name>31.0</name>
-            <styleUrl>#1414</styleUrl>
-            <Point id="1412">
-                <coordinates>49,28,349929.14513903006</coordinates>
+            <styleUrl>#1976</styleUrl>
+            <Point id="1974">
+                <coordinates>49,28,249929.14513903006</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1418">
+        <Placemark id="1980">
             <name>31.5</name>
-            <styleUrl>#1419</styleUrl>
-            <Point id="1417">
-                <coordinates>50,28,377434.1500325429</coordinates>
+            <styleUrl>#1981</styleUrl>
+            <Point id="1979">
+                <coordinates>50,28,277434.1500325429</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1423">
+        <Placemark id="1985">
             <name>30.8</name>
-            <styleUrl>#1424</styleUrl>
-            <Point id="1422">
-                <coordinates>51,28,339670.1689318812</coordinates>
+            <styleUrl>#1986</styleUrl>
+            <Point id="1984">
+                <coordinates>51,28,239670.1689318812</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1428">
-            <name>24.1</name>
-            <styleUrl>#1429</styleUrl>
-            <Point id="1427">
-                <coordinates>48,27,7387.057719585321</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1433">
+        <Placemark id="1990">
             <name>27.4</name>
-            <styleUrl>#1434</styleUrl>
-            <Point id="1432">
-                <coordinates>49,27,168087.9768822452</coordinates>
+            <styleUrl>#1991</styleUrl>
+            <Point id="1989">
+                <coordinates>49,27,68087.97688224519</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1438">
+        <Placemark id="1995">
             <name>32.6</name>
-            <styleUrl>#1439</styleUrl>
-            <Point id="1437">
-                <coordinates>50,27,428821.7701041255</coordinates>
+            <styleUrl>#1996</styleUrl>
+            <Point id="1994">
+                <coordinates>50,27,328821.7701041255</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1443">
+        <Placemark id="2000">
             <name>31.4</name>
-            <styleUrl>#1444</styleUrl>
-            <Point id="1442">
-                <coordinates>51,27,369075.60162604065</coordinates>
+            <styleUrl>#2001</styleUrl>
+            <Point id="1999">
+                <coordinates>51,27,269075.60162604065</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1448">
+        <Placemark id="2005">
             <name>30.5</name>
-            <styleUrl>#1449</styleUrl>
-            <Point id="1447">
-                <coordinates>52,27,326039.47010617616</coordinates>
+            <styleUrl>#2006</styleUrl>
+            <Point id="2004">
+                <coordinates>52,27,226039.47010617613</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1453">
+        <Placemark id="2010">
             <name>30.1</name>
-            <styleUrl>#1454</styleUrl>
-            <Point id="1452">
-                <coordinates>53,27,304068.22048895154</coordinates>
+            <styleUrl>#2011</styleUrl>
+            <Point id="2009">
+                <coordinates>53,27,204068.22048895154</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1458">
+        <Placemark id="2015">
             <name>26.3</name>
-            <styleUrl>#1459</styleUrl>
-            <Point id="1457">
-                <coordinates>54,27,113680.68695385975</coordinates>
+            <styleUrl>#2016</styleUrl>
+            <Point id="2014">
+                <coordinates>54,27,13680.686953859755</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1463">
+        <Placemark id="2020">
             <name>28.7</name>
-            <styleUrl>#1464</styleUrl>
-            <Point id="1462">
-                <coordinates>55,27,233697.1392346216</coordinates>
+            <styleUrl>#2021</styleUrl>
+            <Point id="2019">
+                <coordinates>55,27,133697.1392346216</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1468">
+        <Placemark id="2025">
             <name>28.8</name>
-            <styleUrl>#1469</styleUrl>
-            <Point id="1467">
-                <coordinates>56,27,240623.025807548</coordinates>
+            <styleUrl>#2026</styleUrl>
+            <Point id="2024">
+                <coordinates>56,27,140623.025807548</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1473">
+        <Placemark id="2030">
             <name>26.8</name>
-            <styleUrl>#1474</styleUrl>
-            <Point id="1472">
-                <coordinates>57,27,142050.9900445323</coordinates>
+            <styleUrl>#2031</styleUrl>
+            <Point id="2029">
+                <coordinates>57,27,42050.99004453228</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1478">
+        <Placemark id="2035">
             <name>30.1</name>
-            <styleUrl>#1479</styleUrl>
-            <Point id="1477">
-                <coordinates>50,26,304068.22048895154</coordinates>
+            <styleUrl>#2036</styleUrl>
+            <Point id="2034">
+                <coordinates>50,26,204068.22048895154</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1483">
+        <Placemark id="2040">
             <name>30.6</name>
-            <styleUrl>#1484</styleUrl>
-            <Point id="1482">
-                <coordinates>51,26,331113.25254156283</coordinates>
+            <styleUrl>#2041</styleUrl>
+            <Point id="2039">
+                <coordinates>51,26,231113.2525415628</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1488">
+        <Placemark id="2045">
             <name>30.8</name>
-            <styleUrl>#1489</styleUrl>
-            <Point id="1487">
-                <coordinates>52,26,340399.74839242024</coordinates>
+            <styleUrl>#2046</styleUrl>
+            <Point id="2044">
+                <coordinates>52,26,240399.74839242024</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1493">
+        <Placemark id="2050">
             <name>30.5</name>
-            <styleUrl>#1494</styleUrl>
-            <Point id="1492">
-                <coordinates>53,26,325976.25944052293</coordinates>
+            <styleUrl>#2051</styleUrl>
+            <Point id="2049">
+                <coordinates>53,26,225976.25944052293</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1498">
+        <Placemark id="2055">
             <name>30.2</name>
-            <styleUrl>#1499</styleUrl>
-            <Point id="1497">
-                <coordinates>54,26,310701.70475166227</coordinates>
+            <styleUrl>#2056</styleUrl>
+            <Point id="2054">
+                <coordinates>54,26,210701.70475166227</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1503">
+        <Placemark id="2060">
             <name>30.2</name>
-            <styleUrl>#1504</styleUrl>
-            <Point id="1502">
-                <coordinates>55,26,310089.625649009</coordinates>
+            <styleUrl>#2061</styleUrl>
+            <Point id="2059">
+                <coordinates>55,26,210089.62564900902</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1508">
+        <Placemark id="2065">
             <name>28.9</name>
-            <styleUrl>#1509</styleUrl>
-            <Point id="1507">
-                <coordinates>56,26,245233.8464304079</coordinates>
+            <styleUrl>#2066</styleUrl>
+            <Point id="2064">
+                <coordinates>56,26,145233.8464304079</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1513">
+        <Placemark id="2070">
             <name>30.9</name>
-            <styleUrl>#1514</styleUrl>
-            <Point id="1512">
-                <coordinates>57,26,345576.0748984586</coordinates>
+            <styleUrl>#2071</styleUrl>
+            <Point id="2069">
+                <coordinates>57,26,245576.0748984586</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1518">
+        <Placemark id="2075">
             <name>27.9</name>
-            <styleUrl>#1519</styleUrl>
-            <Point id="1517">
-                <coordinates>51,25,197405.18323419048</coordinates>
+            <styleUrl>#2076</styleUrl>
+            <Point id="2074">
+                <coordinates>51,25,97405.1832341905</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1523">
+        <Placemark id="2080">
             <name>31.2</name>
-            <styleUrl>#1524</styleUrl>
-            <Point id="1522">
-                <coordinates>52,25,362202.3727853501</coordinates>
+            <styleUrl>#2081</styleUrl>
+            <Point id="2079">
+                <coordinates>52,25,262202.3727853501</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1528">
+        <Placemark id="2085">
             <name>30.7</name>
-            <styleUrl>#1529</styleUrl>
-            <Point id="1527">
-                <coordinates>53,25,333645.7006591742</coordinates>
+            <styleUrl>#2086</styleUrl>
+            <Point id="2084">
+                <coordinates>53,25,233645.70065917415</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1533">
+        <Placemark id="2090">
             <name>30.7</name>
-            <styleUrl>#1534</styleUrl>
-            <Point id="1532">
-                <coordinates>54,25,337209.2356015019</coordinates>
+            <styleUrl>#2091</styleUrl>
+            <Point id="2089">
+                <coordinates>54,25,237209.23560150186</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1538">
+        <Placemark id="2095">
             <name>27.3</name>
-            <styleUrl>#1539</styleUrl>
-            <Point id="1537">
-                <coordinates>55,25,163452.55757191151</coordinates>
+            <styleUrl>#2096</styleUrl>
+            <Point id="2094">
+                <coordinates>55,25,63452.55757191151</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1543">
+        <Placemark id="2100">
             <name>30.4</name>
-            <styleUrl>#1544</styleUrl>
-            <Point id="1542">
-                <coordinates>57,25,319363.1612306886</coordinates>
+            <styleUrl>#2101</styleUrl>
+            <Point id="2099">
+                <coordinates>57,25,219363.1612306886</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1548">
-            <name>25.8</name>
-            <styleUrl>#1549</styleUrl>
-            <Point id="1547">
-                <coordinates>51,24,89631.72014654503</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1553">
+        <Placemark id="2105">
             <name>29.2</name>
-            <styleUrl>#1554</styleUrl>
-            <Point id="1552">
-                <coordinates>52,24,260551.0328613642</coordinates>
+            <styleUrl>#2106</styleUrl>
+            <Point id="2104">
+                <coordinates>52,24,160551.0328613642</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1558">
+        <Placemark id="2110">
             <name>29.7</name>
-            <styleUrl>#1559</styleUrl>
-            <Point id="1557">
-                <coordinates>53,24,282859.22870654135</coordinates>
+            <styleUrl>#2111</styleUrl>
+            <Point id="2109">
+                <coordinates>53,24,182859.22870654135</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1563">
+        <Placemark id="2115">
             <name>29.0</name>
-            <styleUrl>#1564</styleUrl>
-            <Point id="1562">
-                <coordinates>54,24,250639.67112306482</coordinates>
+            <styleUrl>#2116</styleUrl>
+            <Point id="2114">
+                <coordinates>54,24,150639.67112306482</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>
         </Placemark>
-        <Placemark id="1568">
-            <name>24.8</name>
-            <styleUrl>#1569</styleUrl>
-            <Point id="1567">
-                <coordinates>55,24,39097.04227668876</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1573">
-            <name>24.6</name>
-            <styleUrl>#1574</styleUrl>
-            <Point id="1572">
-                <coordinates>56,24,28987.874551176596</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1578">
+        <Placemark id="2120">
             <name>28.0</name>
-            <styleUrl>#1579</styleUrl>
-            <Point id="1577">
-                <coordinates>57,24,199198.30467963227</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1583">
-            <name>24.9</name>
-            <styleUrl>#1584</styleUrl>
-            <Point id="1582">
-                <coordinates>53,23,43359.33416316067</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1588">
-            <name>25.1</name>
-            <styleUrl>#1589</styleUrl>
-            <Point id="1587">
-                <coordinates>54,23,57486.9669224567</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1593">
-            <name>25.3</name>
-            <styleUrl>#1594</styleUrl>
-            <Point id="1592">
-                <coordinates>55,23,63203.49678114212</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1598">
-            <name>25.2</name>
-            <styleUrl>#1599</styleUrl>
-            <Point id="1597">
-                <coordinates>56,23,61328.03338741741</coordinates>
-                <extrude>1</extrude>
-                <altitudeMode>relativeToGround</altitudeMode>
-            </Point>
-        </Placemark>
-        <Placemark id="1603">
-            <name>25.3</name>
-            <styleUrl>#1604</styleUrl>
-            <Point id="1602">
-                <coordinates>57,23,64429.289467414994</coordinates>
+            <styleUrl>#2121</styleUrl>
+            <Point id="2119">
+                <coordinates>57,24,99198.30467963226</coordinates>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
             </Point>

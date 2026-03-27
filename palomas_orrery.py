@@ -2650,6 +2650,9 @@ comet_mcnaught_var = tk.IntVar(value=0)
 comet_neowise_var = tk.IntVar(value=0)
 
 comet_2025k1_var = tk.IntVar(value=0)
+comet_2025k1b_var = tk.IntVar(value=0)
+comet_2025k1c_var = tk.IntVar(value=0)
+comet_2025k1d_var = tk.IntVar(value=0)
 
 comet_2025v1_var = tk.IntVar(value=0)
 
@@ -5533,10 +5536,17 @@ def plot_objects():
                 if obj['var'].get() == 1:
                     # Check if this is a comet by its properties
                     
+            #        is_comet = (
+            #            obj.get('object_type') in ['orbital', 'trajectory'] and  # Allow both types
+            #            obj.get('id_type') == 'smallbody' and
+            #            obj.get('symbol') == 'diamond'
+            #        )
+
                     is_comet = (
                         obj.get('object_type') in ['orbital', 'trajectory'] and  # Allow both types
-                        obj.get('id_type') == 'smallbody' and
-                        obj.get('symbol') == 'diamond'
+                        obj.get('id_type') in ['smallbody', 'id'] and  # Numeric IDs for ambiguous comets
+                        obj.get('symbol') == 'diamond' and
+                        obj.get('show_tails', True)  # Fragments: show_tails=False suppresses tail viz
                     )
 
                     if is_comet and obj['name'] in positions:
@@ -6814,12 +6824,26 @@ def animate_objects(step, label):
                 for obj in objects:
                     if obj['var'].get() == 1:
                         # Check if this is a comet by its properties
-                        is_comet = (
-                            obj.get('object_type') == 'orbital' and 
-                            obj.get('id_type') == 'smallbody' and
-                            obj.get('symbol') == 'diamond'
-                        )
+                #        is_comet = (
+                #            obj.get('object_type') == 'orbital' and 
+                #            obj.get('id_type') == 'smallbody' and
+                #            obj.get('symbol') == 'diamond'
+                #        )
                         
+                #        is_comet = (
+                #            obj.get('object_type') in ['orbital', 'trajectory'] and
+                #            obj.get('id_type') == 'smallbody' and
+                #            obj.get('symbol') == 'diamond' and
+                #            obj.get('show_tails', True)  # Fragments: show_tails=False suppresses tail viz
+                #        )
+
+                        is_comet = (
+                            obj.get('object_type') in ['orbital', 'trajectory'] and
+                            obj.get('id_type') in ['smallbody', 'id'] and  # Numeric IDs for ambiguous comets
+                            obj.get('symbol') == 'diamond' and
+                            obj.get('show_tails', True)  # Fragments: show_tails=False suppresses tail viz
+                        )
+
                         obj_name = obj['name']
                         if is_comet and obj_name in positions_over_time:
                             # Get position for first frame
@@ -8807,6 +8831,22 @@ create_interstellar_checkbutton("ATLAS", comet_atlas_var, "(2024-04-05 to 2025-1
 
 create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
                          "October 8, 2025") # params
+
+# C/2025 K1 fragment checkboxes (indented under parent)
+for frag_name, frag_var, frag_label in [
+    ("C/2025_K1-B", comet_2025k1b_var, "Fragment B (hyperbolic, escaping)"),
+    ("C/2025_K1-C", comet_2025k1c_var, "Fragment C (bound! e=0.99999)"),
+    ("C/2025_K1-D", comet_2025k1d_var, "Fragment D (hyperbolic, most divergent)"),
+]:
+    cb = tk.Checkbutton(
+        interstellar_frame,
+        text=f"  -- {frag_name}",
+        variable=frag_var,
+        command=handle_mission_selection
+    )
+    cb.pack(anchor='w', padx=(20, 0))
+    CreateToolTip(cb, f"{frag_label}\n{INFO.get(frag_name, 'No information available.')}")
+
 
 create_interstellar_checkbutton("PANSTARRS", comet_c2025r3_var, "(2025-09-07 to 2026-01-11)", 
                          "April 19, 2026 at 21:31 UTC") # data arc: 2025-09-07 to 2026-01-11

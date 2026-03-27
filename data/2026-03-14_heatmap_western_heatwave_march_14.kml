@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="22">
+        <name>western_heatwave_march_14 Heatmap (2026-03-14)</name>
+        <GroundOverlay id="23">
+            <name>Thermal Overlay</name>
+            <Icon id="24">
+                <href>2026-03-14_heatmap_western_heatwave_march_14.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>42.0</north>
+                <south>30.0</south>
+                <east>-104.0</east>
+                <west>-125.0</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

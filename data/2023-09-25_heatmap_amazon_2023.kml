@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="369">
+    <Document id="2908">
         <name>amazon_2023 Heatmap (2023-09-25)</name>
-        <GroundOverlay id="370">
+        <GroundOverlay id="2909">
             <name>Thermal Overlay</name>
-            <Icon id="371">
+            <Icon id="2910">
                 <href>2023-09-25_heatmap_amazon_2023.png</href>
             </Icon>
             <LatLonBox>

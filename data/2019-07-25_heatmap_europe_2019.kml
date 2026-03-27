@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="944">
+    <Document id="2459">
         <name>europe_2019 Heatmap (2019-07-25)</name>
-        <GroundOverlay id="945">
+        <GroundOverlay id="2460">
             <name>Thermal Overlay</name>
-            <Icon id="946">
+            <Icon id="2461">
                 <href>2019-07-25_heatmap_europe_2019.png</href>
             </Icon>
             <LatLonBox>
