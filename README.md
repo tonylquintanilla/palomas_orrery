@@ -1,4 +1,4 @@
-# Last updated: March 4, 2026
+# Last updated: April 11, 2026
 
 # Paloma's Orrery
 
@@ -44,6 +44,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Earth orbital shell infrastructure: Geostationary Belt (GEO, 42,164 km) and Low Earth Orbit (LEO, 200-2,000 km)
 - Close approach infrastructure: JPL CAD API integration, precision perigee markers, hyperbolic osculating orbits (Apophis 2029: passes 4,150 km inside the GEO ring)
 - Spacecraft trajectory two-layer visualization (full mission + plotted period)
+- Spacecraft Mission Explorer: tagged encounter database with adaptive resolution presets (New Horizons at Jupiter, Pluto, Arrokoth; Artemis II lunar closest approach)
 - Animation system with static shell optimization (45% memory reduction)
 - HR diagrams and stellar analysis
 - Climate data preservation hub
@@ -51,6 +52,12 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Unified save system with CDN/offline HTML options
 - Social media export: 9:16 portrait HTML for Instagram Reels and YouTube Shorts
 - Web gallery at [palomasorrery.com](https://palomasorrery.com/) -- shareable interactive visualizations, no install required
+- Fly-to navigation buttons: tap to snap the 3D camera to any curated object's close-up view (mobile and desktop gallery)
+- Comet disintegration visualization: date-gated state changes, ghost tail arcs, disintegration markers (MAPS C/2026 A1 coronal journey)
+- Solar corona shell infrastructure: seven near-Sun shells (K-corona, Roche limit, Streamer Belt, Alfven surface, F-corona) with optimized two-trace rendering (89% file size reduction)
+- Comet fragment tracking: C/2025 K1 breakup with four independent trajectories (parent + 3 fragments, distinct colors, Fragment C gravitationally bound)
+- Artemis II lunar mission: trajectory visualization with encounter time derivation from Horizons OEM data
+- Dashboard launcher: central CustomTkinter hub for all tools, live subprocess output, external links
 - Resizable GUI columns with persistent window layout
 
 **Resources:**
@@ -73,7 +80,7 @@ Download from the [GitHub Releases page](https://github.com/tonylquintanilla/pal
 | macOS 10.15+ | [Available from webpage](https://sites.google.com/view/tony-quintanilla) | ~300 MB |
 | Linux | Python source only | See below |
 
-**Windows:** Extract, double-click `START_HERE.bat`
+**Windows:** Extract, double-click `START_HERE.bat` (or `_run_dashboard.bat` for the central launcher)
 
 **macOS:** Download from [Tony's webpage](https://sites.google.com/view/tony-quintanilla) (iCloud link). Extract, double-click `start_orrery.command` (right-click -> Open first time to bypass Gatekeeper)
 
@@ -446,6 +453,7 @@ The save dialog remembers your last save location within each session.
    - Voyager 1 and 2 (interstellar space)
    - Parker Solar Probe (close to the Sun)
    - New Horizons (beyond Pluto)
+   - Artemis II (lunar mission)
    - James Webb Space Telescope
 3. Enable trajectory visualization to see their paths
 4. Set date range to view historical positions or future predictions
@@ -512,6 +520,8 @@ The save dialog remembers your last save location within each session.
 **Solar Structure Visualization:**
 
 - Toggle individual Sun layers (core, radiative zone, convective zone)
+- Seven near-Sun corona shells: Inner K-corona, Roche Limit, Streamer Belt, Alfven Surface, Extended F-corona
+- Optimized two-trace rendering: visual sphere + single info marker (89% file size reduction)
 - View semi-transparent overlays on solar system plots
 - Accurate relative scaling
 
@@ -643,7 +653,7 @@ Access the Earth System Hub from the main interface to explore climate data:
 - **Tool:** `earth_system_generator.py`
 - **Output:** 3D KML layers for Google Earth Pro (Spikes, Heatmap, Impact)
 - **Viewer:** [Google Earth Pro](https://www.google.com/earth/versions/#earth-pro) (free desktop application, required to view KML layers)
-- **Scope:** 27 historical and modern events (NYC 1948 to US Grid 2025)
+- **Scope:** 27+ historical and modern events (NYC 1948 to Western Heat Dome March 2026)
 - **Metric:** Wet-Bulb Temperature ($T_w$) vs. Biological Limits (31 degC)
 - **Documentation:** See [wet_bulb_temperature_readme.md](wet_bulb_temperature_readme.md)
 
@@ -730,6 +740,8 @@ Browse interactive visualizations online at [palomasorrery.com](https://palomaso
 - Shareable deep links per visualization (e.g., palomasorrery.com/#earth-birthday-2025)
 - Floating info cards on mobile (tap objects for details)
 - 3D zoom buttons on mobile (synthetic wheel events for Plotly.js 3D scenes)
+- Fly-to buttons for curated close-up views (up to 4 per plot, with colored dot matching trace)
+- Pan/zoom D-pad with Reset View for 3D navigation
 - Light/dark theme auto-detection preserves original plot colors
 - Custom domain with HTTPS (palomasorrery.com)
 
@@ -747,7 +759,7 @@ Desktop App -> save_plot() -> HTML export
 
 | Tool | Purpose |
 |------|---------|
-| `gallery_studio.py` | Per-plot curation GUI -- background, fonts, margins, portrait preset with info panel |
+| `gallery_studio.py` | Per-plot curation GUI -- background, fonts, margins, portrait preset, fly-to target selection |
 | `json_converter.py` | Extracts Plotly figure data from HTML exports to JSON |
 | `gallery_editor.py` | Tkinter GUI for editing metadata, categories, and ordering |
 | `gallery_config.json` | Single source of truth for category definitions (shared by all tools) |
@@ -764,7 +776,8 @@ The following sections highlight the primary modules organized by function. Use 
 
 | Module | Purpose |
 |--------|---------|
-| `palomas_orrery.py` | Main application (~8,400 lines) - GUI, plot_objects(), animate_objects(), trajectory layers, animation shells |
+| `palomas_orrery.py` | Main application (~9,600 lines) - GUI, plot_objects(), animate_objects(), trajectory layers, animation shells |
+| `palomas_orrery_dashboard.py` | Central launcher dashboard (CustomTkinter) - launches all tools, live subprocess output, external links |
 | `celestial_objects.py` | Object and shell definitions data module (169 objects, 78 shell checkboxes) - separated from GUI for maintainability |
 | `data_acquisition.py` | VizieR catalog queries (Gaia, Hipparcos) |
 | `data_processing.py` | Coordinate transformations and calculations |
@@ -778,8 +791,8 @@ The following sections highlight the primary modules organized by function. Use 
 | `visualization_2d.py` | Hertzsprung-Russell diagram generation |
 | `visualization_3d.py` | Interactive 3D stellar neighborhood plots |
 | `visualization_core.py` | Common plotting utilities and styling |
-| `*_visualization_shells.py` | Planetary interior cross-sections (15 modules) |
-| `comet_visualization_shells.py` | Scientifically accurate comet rendering with dual-tail structures |
+| `*_visualization_shells.py` | Planetary interior cross-sections (15 modules) and solar corona shells (7 near-Sun layers) |
+| `comet_visualization_shells.py` | Comet rendering with dual-tail structures, date-gated disintegration states, ghost tail arcs, and disintegration markers |
 | `orbital_param_viz.py` | Orbital element visualization |
 | `earth_system_visualization_gui.py` | Earth system data hub with climate visualizations |
 | `coordinate_system_guide.py` | Educational J2000 ecliptic coordinate reference |
@@ -837,10 +850,12 @@ The following sections highlight the primary modules organized by function. Use 
 
 | Module | Purpose |
 |--------|---------|
-| `idealized_orbits.py` | Core orbit visualization - Keplerian calculations, osculating elements, TNO satellites, analytical fallback |
+| `idealized_orbits.py` | Core orbit visualization - Keplerian calculations, osculating elements, hyperbolic osculating orbits, TNO satellites, analytical fallback |
 | `orbital_elements.py` | Orbital parameters, parent_planets dictionary, TNO moon elements |
 | `orrery_integration.py` | Integration layer for orbit selection |
 | `apsidal_markers.py` | Perihelion/aphelion markers with perturbation analysis |
+| `close_approach_data.py` | JPL CAD API integration, precision perigee markers, position fetch at flyby epoch |
+| `spacecraft_encounters.py` | Tagged spacecraft encounter database, adaptive resolution presets, encounter markers, encounter time derivation from Horizons OEM data |
 
 ### Exoplanet Modules
 
@@ -864,6 +879,7 @@ python_work/                     # Parent folder (your workspace)
 |
 |- orrery/                       # Desktop app repo (palomas_orrery on GitHub)
 |  |- *.py                       # Python source code (75+ modules)
+|  |- _run_dashboard.bat         # Dashboard launcher (replaces individual bat files)
 |  |- README/                    # Documentation
 |  |   |- README.md
 |  |   |- social_media_readme.md
@@ -872,6 +888,7 @@ python_work/                     # Parent folder (your workspace)
 |  |- data/                      # All program data files
 |  |   |- orbit_paths.json (~94 MB)
 |  |   |- orbit_paths_backup.json
+|  |   |- close_approach_cache.json  # JPL CAD flyby data (separate from orbit cache)
 |  |   |- Climate monitoring (automated)
 |  |   |   |- co2_mauna_loa_monthly.json
 |  |   |   |- temperature_giss_monthly.json
@@ -913,7 +930,6 @@ python_work/                     # Parent folder (your workspace)
    |   |- json_converter.py      # HTML-to-JSON converter
    |   |- gallery_editor.py      # Metadata editor GUI
    |   |- gallery_config.json    # Category definitions
-   |   |- gallery_studio_configs.json  # Saved per-plot settings
    |- gallery_config.json        # Category definitions (root copy)
    |- CNAME                      # Custom domain (palomasorrery.com)
    |- web_gallery_handoff.md     # Technical documentation
@@ -977,6 +993,7 @@ directory. It resolves the path by walking up the directory tree.
 | VOTable files | 1-291 MB each | Raw catalog data |
 | Orbit cache | 94+ MB | Planetary ephemerides |
 | Osculating cache | <1 MB | Orbital elements |
+| Close approach cache | <1 MB | JPL CAD flyby data |
 | Climate data | <1 MB | CO2 measurements |
 
 ## Contributing
@@ -1024,7 +1041,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** March 2026 (v2.5.0 - Close Approach Infrastructure: Apophis 2029, Hyperbolic Osculating Orbits, GEO and LEO Earth Orbital Shells)
+**Last Updated:** April 2026 (v2.8.0 - MAPS disintegration visualization, solar shell optimization, C/2025 K1 fragment tracking, Artemis II mission, dashboard launcher)
 
 ---
 
@@ -1035,8 +1052,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - [VizieR catalog service](https://vizier.cds.unistra.fr/) (CDS, Strasbourg)
 - [SIMBAD astronomical database](https://simbad.u-strasbg.fr/simbad/)
 - [Scripps CO2 Program](https://scrippsco2.ucsd.edu/) for Mauna Loa data
+- [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) for ERA5 reanalysis data
+- [SOHO/LASCO](https://soho.nascom.nasa.gov/) coronagraph observations (ESA/NASA)
 - [GRAVITY Collaboration](https://www.mpe.mpg.de/ir/gravity) for S-star orbital data
 - [Astropy](https://www.astropy.org/) and [Astroquery](https://astroquery.readthedocs.io/) development teams
 - [Plotly](https://plotly.com/) visualization library
 - AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/)
 - Cross-platform compatibility (Windows, macOS & Linux) achieved January 2026
+- README updated: April 2026 with Anthropic's Claude Opus 4.6
