@@ -189,6 +189,7 @@ from planet_visualization import (              # the gryed out imports are crea
 
 from solar_visualization_shells import (
     hover_text_sun,
+    hover_text_sun_and_corona,    
     gravitational_influence_info,
     galactic_tide_info,
     hills_cloud_torus_info,
@@ -202,6 +203,9 @@ from solar_visualization_shells import (
     termination_shock_info,
     outer_corona_info,
     inner_corona_info,
+    streamer_belt_info,
+    roche_limit_info,
+    alfven_surface_info,
     chromosphere_info,
     photosphere_info,
     radiative_zone_info,
@@ -525,14 +529,20 @@ def get_interval_settings():
 def get_date_from_gui():
     """
     Get the date from GUI entry fields.
-    Returns a datetime object.
+    Returns a datetime object. Defaults empty fields to avoid crash.
     """
+    now = datetime.now()
+    def safe_int(val, default):
+        try:
+            return int(val.get()) if val.get().strip() else default
+        except (ValueError, tk.TclError):
+            return default
     return datetime(
-        int(entry_year.get()),
-        int(entry_month.get()),
-        int(entry_day.get()),
-        int(entry_hour.get()),
-        int(entry_minute.get())
+        safe_int(entry_year,   now.year),
+        safe_int(entry_month,  now.month),
+        safe_int(entry_day,    now.day),
+        safe_int(entry_hour,   0),
+        safe_int(entry_minute, 0)
     )
 
 def create_animation_dates(current_date, step, N):
@@ -710,11 +720,23 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
                 print(f"{obj_name}: Hyperbolic orbit - a={a:.6f} AU, e={e:.4f}, perihelion={q:.6f} AU, view range={max_distance:.6f} AU", flush=True)
                 
             else:  # Elliptical orbit (e < 0.99)
-                # Standard calculation for elliptical orbits
-                aphelion = a * (1 + e)
-                max_distances.append(abs(aphelion))  # Use abs to handle any edge cases
-                
-                print(f"{obj_name}: Elliptical orbit - a={a:.6f} AU, e={e:.4f}, aphelion={aphelion:.6f} AU", flush=True)
+                # FIXED: when center is not the Sun, use distance from center body
+                # not heliocentric aphelion -- avoids 1 AU scale dominating Moon/planet center plots
+                if center_object_name != 'Sun':
+                    obj_data = positions.get(obj_name)
+                    if obj_data and obj_data.get('x') is not None:
+                        distance = (obj_data['x']**2 + obj_data['y']**2 + obj_data['z']**2)**0.5
+                        max_distances.append(distance)
+                        print(f"{obj_name}: Elliptical orbit (non-Sun center) - distance from {center_object_name}={distance:.6f} AU", flush=True)
+                    # fall through to aphelion if no position data
+                    else:
+                        aphelion = a * (1 + e)
+                        max_distances.append(abs(aphelion))
+                        print(f"{obj_name}: Elliptical orbit - a={a:.6f} AU, e={e:.4f}, aphelion={aphelion:.6f} AU", flush=True)
+                else:
+                    aphelion = a * (1 + e)
+                    max_distances.append(abs(aphelion))  # Use abs to handle any edge cases
+                    print(f"{obj_name}: Elliptical orbit - a={a:.6f} AU, e={e:.4f}, aphelion={aphelion:.6f} AU", flush=True)
             
         else:
             # Fall back to current position data for objects without orbital parameters
@@ -1697,7 +1719,8 @@ def _add_close_approach_extras(fig, selected_objects, objects, center_object_nam
             continue
 
         # Only process smallbody objects (asteroids, comets, not planets/moons)
-        if obj_info.get('id_type') not in ('smallbody',):
+    #    if obj_info.get('id_type') not in ('smallbody',):
+        if obj_info.get('id_type') not in ('smallbody', 'id'):    
             continue
 
         designation = obj_info.get('id', obj_name)
@@ -1753,6 +1776,61 @@ def _add_close_approach_extras(fig, selected_objects, objects, center_object_nam
             print(f"  [CAD] Error in CAD perigee marker for {obj_name}: {e}", flush=True)
             import traceback
             traceback.print_exc()
+
+        # ---- Capability C-pre: Spacecraft encounter epoch fallback -----------
+        # CAD API returns 400 for spacecraft (no close-approach database entry).
+        # If best_approach is still None and the object is a spacecraft with a
+        # 'horizons' encounter for the current center body, derive the closest
+        # approach time from Horizons trajectory data and synthesize an approach
+        # dict (with 'jd' key) so Capability C uses the correct osculating epoch.
+        if best_approach is None and obj_info.get('id_type') == 'id':
+            try:
+                from spacecraft_encounters import (
+                    get_encounters_for_spacecraft, resolve_encounter_time
+                )
+                from astropy.time import Time as AstroTime
+
+                sc_encounters = get_encounters_for_spacecraft(obj_name)
+                # Find a 'horizons' encounter whose target matches the current center body
+                horizons_enc = next(
+                    (e for e in sc_encounters
+                     if e.get('date_source') == 'horizons'
+                     and e.get('target') == center_object_name),
+                    None
+                )
+                if horizons_enc is not None:
+                    sc_id = str(obj_info.get('id', ''))
+                    obj_start = obj_info.get('start_date')
+                    obj_end   = obj_info.get('end_date')
+                    if sc_id and obj_start and obj_end:
+                        resolved = resolve_encounter_time(
+                            enc=horizons_enc,
+                            sc_id=sc_id,
+                            obj_start_date=obj_start,
+                            obj_end_date=obj_end,
+                            objects=objects,
+                        )
+                        if resolved:
+                            # Convert date string to JD for the approach['jd'] key
+                            # that plot_hyperbolic_osculating_orbit expects
+                            from datetime import datetime as _dt
+                            resolved_dt = _dt.strptime(resolved['date'], '%Y-%m-%d %H:%M:%S')
+                            resolved_jd = AstroTime(resolved_dt).jd
+                            best_approach = {
+                                'jd':      resolved_jd,
+                                'dist_au': resolved['dist_au'],
+                                'dist_km': resolved['dist_km'],
+                                'date':    resolved['date'],
+                            }
+                            print(f"  [HypOsc] Using spacecraft encounter epoch for {obj_name}: "
+                                  f"{resolved['date']} (JD {resolved_jd:.5f}), "
+                                  f"q={resolved['dist_km']:,.0f} km", flush=True)
+                        else:
+                            print(f"  [HypOsc] resolve_encounter_time returned None for {obj_name} -- "
+                                  f"falling back to GUI epoch", flush=True)
+            except Exception as e:
+                print(f"  [HypOsc] Spacecraft encounter epoch fallback failed for {obj_name}: {e}",
+                      flush=True)
 
         # ---- Capability C: Hyperbolic Osculating Orbit -----------------------
         # Only attempt if apsidal markers are on (same checkbox controls both)
@@ -1849,7 +1927,8 @@ def _add_perihelion_osculating_orbit(fig, selected_objects, objects, color_map,
             continue
 
         # Only process smallbody objects
-        if obj_info.get('id_type') not in ('smallbody',):
+    #    if obj_info.get('id_type') not in ('smallbody',):
+        if obj_info.get('id_type') not in ('smallbody', 'id'):    
             continue
 
         # Only process comets (detected by ID pattern)
@@ -2274,6 +2353,9 @@ sun_photosphere_var = tk.IntVar(value=0)
 sun_chromosphere_var = tk.IntVar(value=0)
 sun_inner_corona_var = tk.IntVar(value=0)
 sun_outer_corona_var = tk.IntVar(value=0)
+sun_streamer_belt_var  = tk.IntVar(value=0)
+sun_roche_limit_var    = tk.IntVar(value=0)
+sun_alfven_surface_var = tk.IntVar(value=0)
 sun_corona_from_distance_var = tk.IntVar(value=0)  # NEW: Special checkbox for non-Sun-centered corona
 sun_termination_shock_var = tk.IntVar(value=0)
 sun_heliopause_var = tk.IntVar(value=0)
@@ -2627,6 +2709,8 @@ akatsuki_var = tk.IntVar(value=0)
 
 juice_var = tk.IntVar(value=0)
 
+artemis2_var = tk.IntVar(value=0)
+
 comet_ikeya_seki_var = tk.IntVar(value=0)
 
 comet_west_var = tk.IntVar(value=0)
@@ -2787,6 +2871,9 @@ sun_shell_vars = {
 
     'outer_corona': sun_outer_corona_var,
     'inner_corona': sun_inner_corona_var,
+    'streamer_belt':  sun_streamer_belt_var,
+    'roche_limit':    sun_roche_limit_var,
+    'alfven_surface': sun_alfven_surface_var,    
     'chromosphere': sun_chromosphere_var,
 
     'photosphere': sun_photosphere_var,
@@ -3478,7 +3565,8 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 fetch_id = obj_info['helio_id']
                 fetch_id_type = 'smallbody'  # helio_ids are smallbody designations
             
-            trajectory = fetch_trajectory(fetch_id, dates_list, center_id=center_id, id_type=fetch_id_type)
+            trajectory = fetch_trajectory(fetch_id, dates_list, center_id=center_id, id_type=fetch_id_type,
+                                         start_date=obj_info.get('start_date'), end_date=obj_info.get('end_date'))
             
             # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
             # Derive Orcus trajectory from Vanth using mass ratio
@@ -4060,13 +4148,21 @@ def plot_objects():
                     # Check if orbit exists in cache
                     if orbit_key not in orbit_paths_over_time:
                         need_update = True
+                        # Clamp fetch dates to object's ephemeris bounds (missions/trajectories)
+                        obj_fetch_start = cache_start_date
+                        obj_fetch_end = cache_end_date
+                        if 'start_date' in obj and obj['start_date'] > obj_fetch_start:
+                            obj_fetch_start = obj['start_date']
+                        if 'end_date' in obj and obj['end_date'] < obj_fetch_end:
+                            obj_fetch_end = obj['end_date']
                         fetch_requests.append({
                             'object': obj,
-                            'fetch_start': cache_start_date,
-                            'fetch_end': cache_end_date,
+                            'fetch_start': obj_fetch_start,
+                            'fetch_end': obj_fetch_end,
                             'reason': 'not in cache'
                         })
                         print(f"{obj['name']}: Not in cache, need full range", flush=True)
+
                     else:
                         # Check if cached date range covers what we need
                         cached_data = orbit_paths_over_time[orbit_key]
@@ -4084,13 +4180,18 @@ def plot_objects():
                                 # Determine what gaps need filling
                                 fetch_gaps = []
                                 
+                                # Clamp to object's ephemeris bounds before gap-filling
+                                # FIXED: prevents Horizons errors for tight-window missions (e.g. Artemis II)
+                                eff_start = max(cache_start_date, obj['start_date']) if 'start_date' in obj else cache_start_date
+                                eff_end   = min(cache_end_date,   obj['end_date'])   if 'end_date'   in obj else cache_end_date
+
                                 # Gap at the beginning?
-                                if cache_start_date < existing_start:
-                                    fetch_gaps.append((cache_start_date, existing_start - timedelta(days=1)))
+                                if eff_start < existing_start:
+                                    fetch_gaps.append((eff_start, existing_start - timedelta(days=1)))
                                 
                                 # Gap at the end?
-                                if cache_end_date > existing_end:
-                                    fetch_gaps.append((existing_end + timedelta(days=1), cache_end_date))
+                                if eff_end > existing_end:
+                                    fetch_gaps.append((existing_end + timedelta(days=1), eff_end))
                                 
                                 if fetch_gaps:
                                     need_update = True
@@ -4171,6 +4272,7 @@ def plot_objects():
                         center_object_name=center_object_name,
                 #        days_ahead=int(get_end_date_from_gui()),
                         days_ahead=int(days_to_plot_entry.get()),
+                        fetch_requests=fetch_requests if fetch_requests else None,  # FIXED: pass clamped requests
                         planetary_params=active_planetary_params,
                         parent_planets=parent_planets,
                         root_widget=root
@@ -4214,9 +4316,14 @@ def plot_objects():
                             # Fallback
                             interval = default_interval_entry.get()
                             
-                        # Calculate date range
+                        # Calculate date range, clamped to object's valid ephemeris window
+                        # FIXED: prevents Horizons errors for tight-window missions (e.g. Artemis II)
                         start_date = get_date_from_gui()
                         end_date = get_end_date_from_gui()
+                        if 'start_date' in obj and obj['start_date'] > start_date:
+                            start_date = obj['start_date']
+                        if 'end_date' in obj and obj['end_date'] < end_date:
+                            end_date = obj['end_date']
                         
                         # Fetch without caching to main file
                         orbit_data = fetch_orbit_path(obj, start_date, end_date, interval,
@@ -4872,7 +4979,8 @@ def plot_objects():
                         fetch_id_type = 'smallbody'
                                         
                     # Fetch trajectory for plotted period
-                    trajectory = fetch_trajectory(fetch_id, plotted_dates, center_id=center_id, id_type=fetch_id_type)
+                    trajectory = fetch_trajectory(fetch_id, plotted_dates, center_id=center_id, id_type=fetch_id_type,
+                                                 start_date=obj.get('start_date'), end_date=obj.get('end_date'))
                     
                     # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
                     # Derive Orcus trajectory from Vanth using mass ratio
@@ -5147,9 +5255,11 @@ def plot_objects():
 
             # Calculate the end date for the title based on orbit data range
             try:
+
                 # Get the dates directly
                 start_date = get_date_from_gui()
                 end_date = get_end_date_from_gui()
+
                 days_to_plot = int(days_to_plot_entry.get())
                 
                 # Format the title with date range
@@ -5555,7 +5665,8 @@ def plot_objects():
                             fig,
                             obj['name'],
                             positions[obj['name']],
-                            center_object_name
+                            center_object_name,
+                            current_date=date_obj
                         )
             # ============ END COMET TAILS INTEGRATION ============
 
@@ -6855,7 +6966,9 @@ def animate_objects(step, label):
                                     fig,
                                     obj_name,
                                     first_position,
-                                    center_object_name
+                                    center_object_name,
+                            #        current_date=date_obj
+                                    current_date=first_frame_date
                                 )
             # ============ END COMET TAILS INTEGRATION ============
 
@@ -7289,8 +7402,14 @@ def on_closing():
     finally:
         root.destroy()
 
-# Add the closing protocol to the root window
 root.protocol("WM_DELETE_WINDOW", on_closing)
+
+# FIXED: periodic config save -- on_closing doesn't fire when terminal is killed in VS Code
+def periodic_config_save():
+    save_window_config()
+    root.after(300000, periodic_config_save)  # save every 5 minutes
+
+root.after(300000, periodic_config_save)
 
 # Function to set Paloma's Birthday
 def set_palomas_birthday():
@@ -7427,6 +7546,9 @@ def toggle_all_shells():
     sun_chromosphere_var.set(state)
     sun_inner_corona_var.set(state)
     sun_outer_corona_var.set(state)
+    sun_streamer_belt_var.set(state)
+    sun_roche_limit_var.set(state)
+    sun_alfven_surface_var.set(state)    
 
     # Asteroid belt shells
     asteroid_belt_main_var.set(state)
@@ -7526,16 +7648,6 @@ root.report_callback_exception = report_callback_exception
 # Enhanced date frame with start date, end date, and days to plot
 date_frame = tk.Frame(input_frame)
 date_frame.grid(row=0, column=0, columnspan=9, padx=(0, 0), pady=2, sticky='w')
-
-def get_end_date_from_gui():
-    """Get end date from GUI fields"""
-    return datetime(
-        int(end_entry_year.get()),
-        int(end_entry_month.get()),
-        int(end_entry_day.get()),
-        int(end_entry_hour.get()),
-        int(end_entry_minute.get())
-    )
 
 def sync_end_date_from_days():
     """Calculate end date from start date + days to plot"""
@@ -7724,18 +7836,20 @@ def sync_days_from_dates():
         pass
 
 def get_end_date_from_gui():
-    """Get end date from GUI fields"""
-    try:
-        return datetime(
-            int(end_entry_year.get()),
-            int(end_entry_month.get()),
-            int(end_entry_day.get()),
-            int(end_entry_hour.get()),
-            int(end_entry_minute.get())
-        )
-    except (ValueError, TypeError):
-        # Return a sensible default if fields are empty/invalid
-        return get_date_from_gui() + timedelta(days=365)
+    """Get end date from GUI fields. Defaults empty fields to avoid crash."""
+    now = datetime.now()
+    def safe_int(val, default):
+        try:
+            return int(val.get()) if val.get().strip() else default
+        except (ValueError, tk.TclError):
+            return default
+    return datetime(
+        safe_int(end_entry_year,   now.year),
+        safe_int(end_entry_month,  now.month),
+        safe_int(end_entry_day,    now.day),
+        safe_int(end_entry_hour,   0),
+        safe_int(end_entry_minute, 0)
+    )
 
 # Tooltip for scrollable frame
 CreateToolTip(scrollable_frame.scrollable_frame, "Use the scrollbar to see all objects. Categories include:\n" 
@@ -7893,7 +8007,7 @@ create_celestial_checkbutton("Sun", sun_var)
 # First, modify the existing Solar Shells checkbutton to call toggle_all_shells
 sun_shells_checkbutton = tk.Checkbutton(celestial_frame, text="- Solar System Structures:", variable=sun_shells_var, command=toggle_all_shells)
 sun_shells_checkbutton.pack(anchor='w')
-CreateToolTip(sun_shells_checkbutton, "Toggle all Sun shells on/off")
+CreateToolTip(sun_shells_checkbutton, hover_text_sun_and_corona)
 
 # Create a Frame specifically for the shell options (indented)
 shell_options_frame = tk.Frame(celestial_frame)
@@ -7929,7 +8043,22 @@ sun_inner_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inne
 sun_inner_corona_checkbutton.pack(anchor='w')
 CreateToolTip(sun_inner_corona_checkbutton, inner_corona_info)
 
-sun_outer_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Outer Corona", variable=sun_outer_corona_var)
+sun_roche_limit_checkbutton = tk.Checkbutton(shell_options_frame,
+    text="-- Roche Limit (Comets)", variable=sun_roche_limit_var)
+sun_roche_limit_checkbutton.pack(anchor='w')
+CreateToolTip(sun_roche_limit_checkbutton, roche_limit_info)
+
+sun_streamer_belt_checkbutton = tk.Checkbutton(shell_options_frame,
+    text="-- Streamer Belt (Visible Corona)", variable=sun_streamer_belt_var)
+sun_streamer_belt_checkbutton.pack(anchor='w')
+CreateToolTip(sun_streamer_belt_checkbutton, streamer_belt_info)
+
+sun_alfven_surface_checkbutton = tk.Checkbutton(shell_options_frame,
+    text="-- Alfven Surface", variable=sun_alfven_surface_var)
+sun_alfven_surface_checkbutton.pack(anchor='w')
+CreateToolTip(sun_alfven_surface_checkbutton, alfven_surface_info)
+
+sun_outer_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Extended Corona (F-corona)", variable=sun_outer_corona_var)
 sun_outer_corona_checkbutton.pack(anchor='w')
 CreateToolTip(sun_outer_corona_checkbutton, outer_corona_info)
 
@@ -8647,6 +8776,82 @@ def _apply_comet_perihelion_preset(comet_name):
         import traceback
         traceback.print_exc()
 
+def _apply_comet_disintegration_preset(comet_name):
+    """
+    Apply the MAPS disintegration preset: fixed 4-day window centered on
+    April 4, 2026 08:15 UTC, tight 0.023 AU scale, position marker at
+    the disintegration moment (not perihelion).
+    """
+    try:
+        from spacecraft_encounters import get_comet_disintegration_preset
+        preset = get_comet_disintegration_preset(comet_name)
+        if not preset:
+            print(f"[DISINT PRESET] No disintegration preset for {comet_name}", flush=True)
+            return
+        print(f"[DISINT PRESET] Applying: {preset['label']}", flush=True)
+
+        # Clear previous center shadow
+        prev_center = center_object_var.get()
+        for obj in objects:
+            if obj['name'] == prev_center:
+                obj['_was_checked'] = False
+
+        # Check the comet + Sun
+        comet_obj = next((obj for obj in objects if obj['name'] == comet_name), None)
+        if comet_obj and comet_obj.get('var'):
+            comet_obj['var'].set(1)
+        for also_name in preset.get('select_also', []):
+            also_obj = next((obj for obj in objects if obj['name'] == also_name), None)
+            if also_obj and also_obj.get('var'):
+                also_obj['var'].set(1)
+
+        # Set center
+        update_center_dropdown()
+        center_object_var.set(preset.get('center', 'Sun'))
+
+        # Apsidal markers on so Capability D (osculating orbit) fires
+        show_apsidal_markers_var.set(1)
+
+        # Set date range
+        for date_str, (yr, mo, dy, hr, mn) in [
+            (preset.get('start_date'), (entry_year, entry_month, entry_day,
+                                        entry_hour, entry_minute)),
+            (preset.get('end_date'),   (end_entry_year, end_entry_month, end_entry_day,
+                                        end_entry_hour, end_entry_minute)),
+        ]:
+            if date_str:
+                from datetime import datetime as dt_cls
+                dt_parsed = dt_cls.strptime(date_str, '%Y-%m-%d %H:%M:%S')
+                for widget, val in [
+                    (yr, str(dt_parsed.year)),  (mo, str(dt_parsed.month)),
+                    (dy, str(dt_parsed.day)),   (hr, str(dt_parsed.hour)),
+                    (mn, str(dt_parsed.minute)),
+                ]:
+                    widget.delete(0, tk.END)
+                    widget.insert(0, val)
+
+        # Days to plot
+        days_to_plot_entry.delete(0, tk.END)
+        days_to_plot_entry.insert(0, '4')
+
+        # Scale
+        scale_var.set('Manual')
+        custom_scale_entry.delete(0, tk.END)
+        custom_scale_entry.insert(0, f"{preset['plot_scale_au']:.6f}")
+
+        # Position marker at disintegration time (not perihelion)
+        tp_date_str = preset.get('tp_date')
+        if tp_date_str:
+            from datetime import datetime as dt_cls
+            _encounter_plot_date[0] = dt_cls.strptime(tp_date_str, '%Y-%m-%d %H:%M:%S')
+            print(f"[DISINT PRESET] Position marker set to {_encounter_plot_date[0]}", flush=True)
+
+        root.after(100, plot_objects)
+
+    except Exception as ex:
+        print(f"[DISINT PRESET] Error: {ex}", flush=True)
+        import traceback
+        traceback.print_exc()
 
 # Start dates are the day after launch to avoid missing Horizons data.
 create_mission_checkbutton("Apollo 11 S-IVB", apollo11sivb_var, "(1969-07-16:17 to 1969-07-28:00)")     # Time Specification: Start=1969-07-16 17 UT , Stop=1969-07-28 00, Step=1 (hours)
@@ -8674,6 +8879,7 @@ create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 
 create_mission_checkbutton("JUICE", juice_var, "(2023-04-15 to 2031-07-21)")
 create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2030-3-1)")
 create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to 2031-02-07)")
+create_mission_checkbutton("Artemis II", artemis2_var, "(2026-04-02 2:00 to 2026-04-11)")
 
 # Checkbuttons for comets
 comet_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Comets")
@@ -8762,8 +8968,36 @@ create_comet_checkbutton("SWAN", comet_c2025r2_var, "(2025-08-14 to 2025-09-14)"
 create_comet_checkbutton("6AC4721", comet_6ac4721_var, "(2026-01-13 to 2026-01-19)", 
                          "April 4, 2026") 
 
-create_comet_checkbutton("MAPS", comet_c2026a1_var, "(2026-01-13 to 2026-01-20)", 
-                         "April 4, 2026, at 13:36 UTC") 
+# MAPS gets two preset buttons: perihelion prediction + disintegration event
+checkbutton = tk.Checkbutton(
+    comet_frame,
+    text="MAPS (2026-01-13 to 2026-04-07)",
+    variable=comet_c2026a1_var,
+    command=handle_mission_selection
+)
+checkbutton.pack(anchor='w')
+info_text = INFO.get('MAPS', "No information available.")
+CreateToolTip(checkbutton, f"{info_text}\nPerihelion: April 4, 2026 ~14:22 UTC")
+
+btn_frame = tk.Frame(comet_frame)
+btn_frame.pack(anchor='w', padx=(25, 0))
+
+pb1 = tk.Button(btn_frame, text="Go: Perihelion Prediction",
+                command=lambda: _apply_comet_perihelion_preset('MAPS'),
+                font=('TkDefaultFont', 8))
+pb1.grid(row=0, column=0, padx=(0, 4), pady=1, sticky='w')
+CreateToolTip(pb1, "MAPS at perihelion: April 4, 2026 ~14:22 UTC\n"
+                   "Comet intact (pre-disintegration view).\n"
+                   "Center: Sun | Scale: ~0.023 AU | Apsidal markers: On")
+
+pb2 = tk.Button(btn_frame, text="Go: Disintegration",
+                command=lambda: _apply_comet_disintegration_preset('MAPS'),
+                font=('TkDefaultFont', 8))
+pb2.grid(row=0, column=1, padx=(0, 4), pady=1, sticky='w')
+CreateToolTip(pb2, "MAPS disintegration: April 4, 2026 ~08:15 UTC\n"
+                   "Window: April 3-7 | Scale: 0.06 AU\n"
+                   "Position marker at disintegration (8.33 R_sun, 0.039 AU).\n"
+                   "Ghost tail arc and all solar shells visible.")
 
 # Checkbuttons for interstellar objects
 interstellar_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, text="Select Hyperbolic Comets and Interstellar, I, Objects")

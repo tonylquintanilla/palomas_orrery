@@ -16,6 +16,7 @@ COMET_NUCLEUS_SIZES = {
     'Lemmon': 3,  # ~3 km (estimated) C/2025 A6
     '3I/ATLAS': 8,  # ~8 km (estimated, interstellar object)
     'Wierzchos': 5,  # ~2-10 km (JWST estimates), using midpoint
+    'MAPS': 0.4,   # ~400 m diameter (JWST, March 2026)
     'Schaumasse': 3,  # ~2.6 km nucleus
     'Howell': 3,  # ~3 km (estimated)
     'Tempel 2': 16,  # ~16x9 km, elongated nucleus (well-studied by Deep Space 1)
@@ -196,6 +197,33 @@ HISTORICAL_TAIL_DATA = {
         # Two short tails fan NW, one broader ~2 deg tail NE (Coquimbo obs Feb 13, 2026)
         'dust_tail_fan_angle': 40   # Half-angle of fan spread in degrees
     },
+
+    'MAPS': {
+        'max_dust_tail_length_mkm': 20,       # Estimated medium Kreutz; sky-and-tel "5-10 deg tail"
+        'max_ion_tail_length_mkm': 12,
+        'peak_brightness_mag': -0.6,          # CCOR-1 observed, April 4 08:15 UTC
+        'perihelion_distance_au': 0.005729,   # 1.232 R_sun, JPL
+        'description': (
+            "C/2026 A1 (MAPS) - Kreutz sungrazer. Nucleus (~400 m, JWST March 2026) "
+            "disintegrated April 4, 2026 ~08:15 UTC, ~6 hours before perihelion. "
+            "Blue-green coma observed March 14, 2026. Peak brightness mag -0.6. "
+            "Possibly a fragment of the Great Comet of 363 AD. "
+            "Post-disintegration: headless ghost comet — dust and ion tails persist "
+            "on the outbound arc without a nucleus. SOHO/LASCO tracking through ~April 6."
+        ),
+        'coma_color': 'teal',                 # Blue-green C2 coma, Sky&Tel March 14
+        'dust_tail_color': 'orange',          # Sodium-rich near Sun, like Ikeya-Seki
+        'ion_tail_color': 'blue',
+        # Disintegration event
+        'disintegration_date': '2026-04-04T08:15:00',
+        # Post-disintegration: tails persist at reduced scale, no nucleus/coma
+        'post_disintegration_dust_scale': 0.55,
+        'post_disintegration_ion_scale': 0.35,
+        # In HISTORICAL_TAIL_DATA['MAPS'], add these two keys:
+        'perihelion_distance_au_activity': 0.30,  # activity formula override
+        'max_active_distance_au': 1.0,            # active within 1 AU of Sun        
+    },
+
     'Schaumasse': {
         'max_dust_tail_length_mkm': 2,
         'max_ion_tail_length_mkm': 5,
@@ -365,6 +393,252 @@ def create_comet_nucleus(center_position=(0, 0, 0), nucleus_size_km=5, comet_nam
     )
     
     return [trace]
+
+
+def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
+    import math
+    SUN_RADIUS_KM   = 695700.0
+    KM_PER_AU       = 149597870.7
+    # Corona begins ~2,100 km above photosphere; outer corona extends to ~several million km
+    CORONA_BASE_KM  = 2100.0
+    # Roche limit for a strengthless body (density ~400 kg/m^3) ~ 3.45 solar radii from center
+    ROCHE_LIMIT_KM  = 3.45 * SUN_RADIUS_KM   # ~2,400,165 km from Sun center
+
+    r_au  = math.sqrt(position_au[0]**2 + position_au[1]**2 + position_au[2]**2)
+    r_km  = r_au * KM_PER_AU
+    dist_photosphere_km = r_km - SUN_RADIUS_KM
+    dist_photosphere_au = dist_photosphere_km / KM_PER_AU
+    r_solar_radii = r_km / SUN_RADIUS_KM
+    ROCHE_KM = ROCHE_LIMIT_KM   # alias to match usage below    
+
+    # How deep into the corona? (corona base is ~2,100 km above photosphere)
+    depth_into_corona_km = max(0.0, dist_photosphere_km - CORONA_BASE_KM)
+    # Roche status — disintegration was OUTSIDE the Roche limit
+    inside_roche = r_km < ROCHE_KM
+    roche_status = (
+        f"YES -- {ROCHE_KM - r_km:,.0f} km inside"
+        if inside_roche else
+        f"NO -- {r_km - ROCHE_KM:,.0f} km outside"
+    #    f"  (Roche limit at ~3.45 R_sun, ~0.016 AU -- MAPS never reached it intact)"
+    )
+
+    hover = (
+        f"<b>MAPS (C/2026 A1) — Nucleus Disintegrated</b><br>"
+        f"April 4, 2026 ~08:15 UTC | ~6 hours before perihelion<br>"
+    #    f"<br>"
+        f"<b>Position at disintegration:</b><br>"
+        f"Distance from Sun center: {r_au:.6f} AU ({r_km:,.0f} km)<br>"
+        f"Distance from photosphere: {dist_photosphere_km:,.0f} km "
+        f"({dist_photosphere_au:.6f} AU) = {r_solar_radii:.2f} R_sun<br>"
+        f"Layer: between Alfven Surface (~18.8 R_sun, ~0.087 AU) and Streamer Belt (~6.0 R_sun, ~0.028 AU)<br>"
+    #    f"<br>"
+        f"<b>Solar environment:</b><br>"
+        f"Corona temperature at this distance: ~1-2 million K<br>"
+        f"Inside Alfven surface (crossed ~April 3 18:00 UTC): YES<br>"
+        f"Inside Streamer Belt (~6.0 R_sun, ~0.028 AU): NO -- died before reaching it<br>"
+        f"Inside Roche limit (~3.45 R_sun, ~0.016 AU): {roche_status}<br>"
+        f"Inside Inner K-corona (~3.0 R_sun, ~0.014 AU): NO<br>"
+    #    f"<br>"
+        f"<b>Physics of destruction (at 8.3 R_sun, ~0.039 AU):</b><br>"
+        f"Primary mechanisms at this distance:<br>"
+        f"1. Thermal ablation: 1-2 million K corona vaporizes surface ices<br>"
+        f"2. Rotational spin-up: outgassing jets torque the 400 m nucleus to breakup (only meters of surface loss needed)<br>"
+        f"Note: Tidal disruption requires being inside the Roche limit (~3.45 R_sun, ~0.016 AU). MAPS never reached it intact.<br>"
+        f"The Roche limit, inner K-corona, and perihelion were all crossed by debris only.<br>"
+    #    f"The Roche limit marks where tidal forces overcome self-gravity.<br>"
+    #    f"Survival inside it depends on tensile strength -- Lovejoy (C/2011 W3,<br>"
+    #    f"~500 m) survived at 1.2 R_sun; MAPS at 400 m did not reach it intact.<br>"
+    #    f"MAPS was destroyed at 8.33 R_sun by thermal ablation and rotational<br>"
+    #    f"spin-up -- tidal forces never had a chance to act.<br>"        
+    #    f"<br>"
+        f"<b>The ghost comet:</b><br>"
+        f"After disintegration, the debris swept inbound through the Streamer Belt, Roche limit, and inner K-corona as a headless<br>" 
+        f"dust/ion cloud, reaching perihelion at 1.23 R_sun (0.006 AU) at 556 km/s. Then outbound: SOHO/LASCO tracked the fading debris<br>" 
+        f"trail for ~36-40 hours, until ~April 6 01:00 UTC, by which point the cloud had dispersed to ~28 R_sun (~0.132 AU)" 
+    #    f"-- too diffuse for ground-based detection.<br>"
+    #    f"No naked-eye or amateur telescope visibility. The show was over.<br>"
+        f"<br>"
+        f"Peak brightness: magnitude -0.6 (SOHO/CCOR-1, moments before breakup)<br>"
+        f"Nucleus: ~400 m diameter (JWST March 2026)<br>"
+        f"Perihelion (6h later, debris only): 0.006 AU = 1.23 R_sun = 161,000 km from photosphere -- deep inside Roche limit and inner<br>" 
+        f"K-corona as dust. Possibly last seen intact as the Great Comet of 363 AD -- 1,663 years ago."
+    )
+    trace = go.Scatter3d(
+        x=[position_au[0]], y=[position_au[1]], z=[position_au[2]],
+        mode='markers',
+        marker=dict(
+            size=8,
+            color='rgb(80, 200, 120)',
+            symbol='diamond',
+            opacity=0.95,
+            line=dict(color='white', width=1)
+        ),
+        name='MAPS: Disintegration',
+        text=[hover],
+        customdata=['MAPS: Disintegration'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    )
+    return [trace]
+
+
+def create_maps_ghost_tail_trace(fig=None):
+    """
+    Ghost tail arc for MAPS C/2026 A1, overlaid on the perihelion
+    osculating orbit trace already in the figure.
+
+    Extracts the x,y,z points from the osculating orbit trace (the white
+    ellipse added by plot_perihelion_osculating_orbit), filters to the
+    ghost window (disintegration point through outbound dispersal), and
+    renders a green fading line on those exact coordinates.
+
+    This guarantees the ghost tail lies precisely on the osculating orbit
+    with no segmentation artifacts from colorscale rendering.
+
+    Falls back to the analytical Barker arc if the osculating trace is
+    not found in the figure.
+    """
+    import math
+    import numpy as np
+
+    SUN_RADIUS_AU = 695700.0 / 149597870.7
+
+    # Ghost window in solar radii from Sun center
+    R_DISINTEGRATION = 8.33   # ~0.039 AU, April 4 08:15 UTC
+    R_DISPERSAL      = 29.0   # ~0.132 AU, April 6 01:00 UTC
+    # Convert to AU
+    DIS_AU = R_DISINTEGRATION * SUN_RADIUS_AU   # ~0.0387
+    DISP_AU = R_DISPERSAL * SUN_RADIUS_AU        # ~0.1348
+
+    xs, ys, zs = None, None, None
+
+    # --- Try to extract from the osculating orbit trace in fig ---
+    if fig is not None:
+        for trace in fig.data:
+            if (hasattr(trace, 'name') and trace.name and
+                    'Perihelion Osc. Orbit' in trace.name and
+                    'MAPS' in trace.name):
+                try:
+                    tx = np.array(trace.x, dtype=float)
+                    ty = np.array(trace.y, dtype=float)
+                    tz = np.array(trace.z, dtype=float)
+                    # Filter to ghost window by distance from Sun
+                    r = np.sqrt(tx**2 + ty**2 + tz**2)
+                    # Ghost arc: inbound from DIS_AU, through perihelion,
+                    # outbound to DISP_AU. The osculating trace goes from
+                    # -theta_clip to +theta_clip; negative theta = inbound,
+                    # positive = outbound. We want:
+                    #   inbound side: r <= DIS_AU (from disintegration inward)
+                    #   outbound side: r <= DISP_AU
+                    # Find the perihelion index (minimum r)
+                    peri_idx = int(np.argmin(r))
+                    n = len(r)
+                    inbound  = np.arange(0, peri_idx + 1)
+                    outbound = np.arange(peri_idx, n)
+                    # Filter inbound: keep points where r <= DIS_AU
+                    inbound_mask  = r[inbound]  <= DIS_AU
+                    outbound_mask = r[outbound] <= DISP_AU
+                    in_idx  = inbound[inbound_mask]
+                    out_idx = outbound[outbound_mask]
+                    ghost_idx = np.concatenate([in_idx, out_idx[1:]])  # avoid duplicating perihelion
+                    if len(ghost_idx) >= 2:
+                        xs = list(tx[ghost_idx])
+                        ys = list(ty[ghost_idx])
+                        zs = list(tz[ghost_idx])
+                        print(f"  [MAPS GHOST] Extracted {len(xs)} points from osculating orbit trace",
+                              flush=True)
+                        break
+                except Exception as ex:
+                    print(f"  [MAPS GHOST] Extraction failed: {ex}, using analytical fallback",
+                          flush=True)
+
+    # --- Analytical fallback (Barker's equation) ---
+    if xs is None:
+        print(f"  [MAPS GHOST] Using analytical Barker arc (osculating trace not found)",
+              flush=True)
+        a, e = 104.98992730, 0.999945
+        i_deg, omega_deg, Omega_deg = 144.49, 86.33, 7.87
+        k = 0.01720209895
+        q = a * (1.0 - e)
+        omega_r = math.radians(omega_deg)
+        Omega_r = math.radians(Omega_deg)
+        i_r     = math.radians(i_deg)
+        cos_O, sin_O = math.cos(Omega_r), math.sin(Omega_r)
+        cos_o, sin_o = math.cos(omega_r), math.sin(omega_r)
+        cos_i, sin_i = math.cos(i_r),     math.sin(i_r)
+
+        def barker_xyz(dt_days):
+            rhs = k * dt_days / math.sqrt(2.0 * q**3)
+            W = rhs
+            for _ in range(50):
+                W -= (W + W**3 / 3.0 - rhs) / (1.0 + W**2)
+            f = 2.0 * math.atan(W)
+            r = q * (1.0 + e) / (1.0 + e * math.cos(f))
+            xo = r * math.cos(f)
+            yo = r * math.sin(f)
+            x = (cos_O*cos_o - sin_O*sin_o*cos_i)*xo + (-cos_O*sin_o - sin_O*cos_o*cos_i)*yo
+            y = (sin_O*cos_o + cos_O*sin_o*cos_i)*xo + (-sin_O*sin_o + cos_O*cos_o*cos_i)*yo
+            z = (sin_o*sin_i)*xo + (cos_o*sin_i)*yo
+            return x, y, z
+
+        dts = np.linspace(-0.2548, 1.4417, 40)
+        xs, ys, zs = [], [], []
+        for dt in dts:
+            x, y, z = barker_xyz(dt)
+            xs.append(x); ys.append(y); zs.append(z)
+
+    # --- Build fading green segments ---
+    # Plotly 3D line colorscale renders as discrete segments.
+    # Use multiple short line traces instead for smooth visual fade.
+    # All but the first have showlegend=False.
+    n = len(xs)
+    hover = (
+        "<b>MAPS: Ghost Tail (debris arc)</b><br>"
+        "April 4 08:15 UTC to April 6 01:00 UTC (~40 hours)<br>"
+        "After disintegration at ~8.33 R_sun (~0.039 AU), debris swept<br>"
+        "inbound through Streamer Belt (6 R_sun, 0.028 AU),<br>"
+        "Roche limit (3.45 R_sun, 0.016 AU), inner K-corona (3.0 R_sun, 0.014 AU),<br>"
+        "and perihelion (1.23 R_sun, 0.006 AU) at 556 km/s. Then outbound<br>"
+        "until dispersed to ~29 R_sun (~0.132 AU) by April 6.<br>"
+        "SOHO/LASCO tracked ~40h; no ground-based visibility.<br>"
+        "The nucleus never reached any inner shell intact -- only this debris did.<br>"
+        "Opacity fades from disintegration point toward April 6 dispersal."
+    )
+
+    traces = []
+    n_segs = n - 1
+    for i in range(n_segs):
+        frac = i / max(n_segs - 1, 1)
+        opacity = 0.85 * ((1.0 - frac) ** 1.8) + 0.04
+        opacity = min(0.85, max(0.04, opacity))
+        color = f'rgba(80, 200, 120, {opacity:.3f})'
+        traces.append(go.Scatter3d(
+            x=[xs[i], xs[i+1]],
+            y=[ys[i], ys[i+1]],
+            z=[zs[i], zs[i+1]],
+            mode='lines',
+            line=dict(color=color, width=3),
+            name='MAPS: Ghost Tail (April 4-6)' if i == 0 else '',
+            legendgroup='maps_ghost_tail',
+            hoverinfo='skip',                          # visual only
+            showlegend=(i == 0)
+        ))
+
+    # Single info marker at segment 10 (outbound arc, clear of perihelion crowding)
+    info_idx = min(10, n - 1)
+    traces.append(go.Scatter3d(
+        x=[xs[info_idx]], y=[ys[info_idx]], z=[zs[info_idx]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(80, 200, 120)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup='maps_ghost_tail',
+        text=[hover],
+        customdata=['MAPS: Ghost Tail'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
+    return traces
 
 
 def create_comet_coma(center_position=(0, 0, 0), coma_radius_km=100000, 
@@ -1153,7 +1427,8 @@ COMET_FEATURE_THRESHOLDS = {
 }
 
 
-def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name='Sun'):
+def add_comet_tails_to_figure(fig, comet_name, position_data, 
+                               center_object_name='Sun', current_date=None):
     """
     Add comet visualization to figure with feature-specific thresholds.
     
@@ -1234,6 +1509,67 @@ def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name
         'ion_tail': distance_au <= COMET_FEATURE_THRESHOLDS['ion_tail']
     }
     
+    # ---- MAPS: date-gated disintegration logic ----
+    from datetime import datetime as _dt
+    disintegration_date = None
+    is_post_disintegration = False
+    if comet_name == 'MAPS':
+        comet_data_check = HISTORICAL_TAIL_DATA.get('MAPS', {})
+        dis_str = comet_data_check.get('disintegration_date')
+        if dis_str:
+            disintegration_date = _dt.fromisoformat(dis_str)
+            if current_date is not None and current_date >= disintegration_date:
+                is_post_disintegration = True
+                print(f"  [MAPS] Post-disintegration mode: headless ghost comet")
+            elif current_date is not None:
+                print(f"  [MAPS] Pre-disintegration mode: active comet with coma")
+        # Always add the disintegration marker and ghost tail arc
+        dis_pos = _compute_maps_disintegration_position()
+        if dis_pos is not None:
+            for tr in create_maps_disintegration_marker(dis_pos, comet_name):
+                fig.add_trace(tr)
+        for tr in create_maps_ghost_tail_trace(fig):   # pass fig
+            fig.add_trace(tr)
+
+    if is_post_disintegration:
+        # Suppress nucleus and coma; scale down tails
+        comet_data = HISTORICAL_TAIL_DATA.get('MAPS', HISTORICAL_TAIL_DATA['default'])
+        dust_scale = comet_data.get('post_disintegration_dust_scale', 0.55)
+        ion_scale  = comet_data.get('post_disintegration_ion_scale', 0.35)
+        activity_perihelion = comet_data.get('perihelion_distance_au_activity',
+                                             comet_data['perihelion_distance_au'])
+        max_active = comet_data.get('max_active_distance_au', 3.0)
+        activity_factor = calculate_tail_activity_factor(
+            distance_au, activity_perihelion, max_active)
+        if features_visible['dust_tail']:
+            traces = create_comet_dust_tail(
+                position_au, velocity_km_s,
+                comet_data['max_dust_tail_length_mkm'],
+                activity_factor * dust_scale, 'MAPS'
+            )
+            for tr in traces:
+                tr.name = 'MAPS: Dust Trail (Remains)'
+            for tr in traces:
+                fig.add_trace(tr)
+        if features_visible['ion_tail']:
+            traces = create_comet_ion_tail(
+                position_au, comet_data['max_ion_tail_length_mkm'],
+                activity_factor * ion_scale, 'MAPS'
+            )
+            for tr in traces:
+                tr.name = 'MAPS: Ion Trail (Remains)'
+            for tr in traces:
+                fig.add_trace(tr)
+        # Legend note: no nucleus
+        fig.add_trace(go.Scatter3d(
+            x=[None], y=[None], z=[None], mode='markers',
+            marker=dict(size=0, color='gray'),
+            name='MAPS: Nucleus (disintegrated April 4, 2026)',
+            showlegend=True, hoverinfo='skip'
+        ))
+        return fig
+    # ---- end MAPS special logic; fall through to normal rendering ----
+
     # Print diagnostic info
     print(f"\n[COMET VIZ] {comet_name} at {distance_au:.2f} AU from Sun")
     print(f"  Nucleus: [OK] Always visible")
@@ -1296,7 +1632,9 @@ def add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name
         comet_data = HISTORICAL_TAIL_DATA.get(db_name, HISTORICAL_TAIL_DATA['default'])
         nucleus_size = COMET_NUCLEUS_SIZES.get(db_name, COMET_NUCLEUS_SIZES['default'])
         perihelion_distance = comet_data['perihelion_distance_au']
-        activity_factor = calculate_tail_activity_factor(distance_au, perihelion_distance)
+        activity_perihelion = comet_data.get('perihelion_distance_au_activity', perihelion_distance)
+        max_active = comet_data.get('max_active_distance_au', 3.0)
+        activity_factor = calculate_tail_activity_factor(distance_au, activity_perihelion, max_active)
         
         traces = []
         
@@ -1472,3 +1810,55 @@ if __name__ == "__main__":
         for distance in [0.5, 1.0, 2.0, 3.0, 4.0]:
             activity = calculate_tail_activity_factor(distance, perihelion)
             print(f"  At {distance:.1f} AU: {activity:.1%} activity")
+
+
+def _compute_maps_disintegration_position():
+    """
+    Fetch MAPS position at disintegration (~08:15 UTC April 4, 2026) directly
+    from JPL Horizons. This guarantees the marker sits on the actual trajectory,
+    not an approximated analytical orbit.
+    Falls back to Barker's equation if Horizons is unavailable.
+    """
+    try:
+        from astroquery.jplhorizons import Horizons
+        from astropy.time import Time
+        # 2026-04-04 08:15 UTC as Julian Date
+        t = Time('2026-04-04 08:15:00', scale='utc')
+        obj = Horizons(id='C/2026 A1', id_type='smallbody',
+                       location='@10', epochs=t.jd)
+        vec = obj.vectors()
+        x = float(vec['x'][0])
+        y = float(vec['y'][0])
+        z = float(vec['z'][0])
+        print(f"  [MAPS DIS] Horizons position: ({x:.6f}, {y:.6f}, {z:.6f}) AU", flush=True)
+        return (x, y, z)
+    except Exception as ex:
+        print(f"  [MAPS DIS] Horizons fetch failed ({ex}), using analytical fallback", flush=True)
+        # Analytical fallback using Barker's equation with perihelion-epoch elements
+        import math
+        params = {
+            'a': 104.98992730, 'e': 0.999945,
+            'i': 144.49, 'omega': 86.33, 'Omega': 7.87,
+            'TP': 2461135.0997,
+        }
+        k = 0.01720209895
+        q = params['a'] * (1.0 - params['e'])
+        dt_days = -0.2548   # 6h 7min before perihelion (April 4 08:15 UTC)
+        rhs = k * dt_days / math.sqrt(2.0 * q**3)
+        W = rhs
+        for _ in range(50):
+            W -= (W + W**3/3.0 - rhs) / (1.0 + W**2)
+        f = 2.0 * math.atan(W)
+        r = q * (1.0 + params['e']) / (1.0 + params['e'] * math.cos(f))
+        omega_r = math.radians(params['omega'])
+        Omega_r = math.radians(params['Omega'])
+        i_r = math.radians(params['i'])
+        xo = r * math.cos(f)
+        yo = r * math.sin(f)
+        cos_O, sin_O = math.cos(Omega_r), math.sin(Omega_r)
+        cos_o, sin_o = math.cos(omega_r), math.sin(omega_r)
+        cos_i, sin_i = math.cos(i_r), math.sin(i_r)
+        x = (cos_O*cos_o - sin_O*sin_o*cos_i)*xo + (-cos_O*sin_o - sin_O*cos_o*cos_i)*yo
+        y = (sin_O*cos_o + cos_O*sin_o*cos_i)*xo + (-sin_O*sin_o + cos_O*cos_o*cos_i)*yo
+        z = (sin_o*sin_i)*xo + (cos_o*sin_i)*yo
+        return (x, y, z)

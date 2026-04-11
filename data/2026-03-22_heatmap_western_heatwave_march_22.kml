@@ -10,7 +10,7 @@
             <LatLonBox>
                 <north>50.0</north>
                 <south>25.0</south>
-                <east>-88.0</east>
+                <east>-65.0</east>
                 <west>-125.0</west>
             </LatLonBox>
         </GroundOverlay>

@@ -38,6 +38,14 @@ MAX_DATA_AGE_DAYS = 90  # Maximum age for data before pruning (optional)
 last_center_updated = None
 last_update_time = None
 
+def utc_to_tdb(dt):
+    """
+    Convert UTC datetime to TDB (Terrestrial Dynamical Time) for Horizons queries.
+    TDB runs ~69 seconds ahead of UTC (37 leap seconds + 32.184 sec TT offset).
+    Prevents boundary errors for tight-window spacecraft ephemerides.
+    """
+    return dt + timedelta(seconds=69)
+
 def repair_cache_on_load():
     """Load cache and remove only corrupted entries"""
 #    if not os.path.exists('orbit_paths.json'):
@@ -667,9 +675,9 @@ def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', i
         
         # Format dates as required by Horizons
         epochs = {
-            'start': start_date.strftime('%Y-%m-%d'),
-            'stop': end_date.strftime('%Y-%m-%d'),
-            'step': interval  # e.g. "1d" for one day, "12h" for 12 hours
+            'start': utc_to_tdb(start_date).strftime('%Y-%m-%d %H:%M'),
+            'stop': utc_to_tdb(end_date).strftime('%Y-%m-%d %H:%M'),
+            'step': interval
         }
 
         # Create Horizons object and fetch vectors        
@@ -966,8 +974,21 @@ def fetch_complete_orbit_path(obj, orbit_key, today, end_window, interval, cente
         bool: Success status
     """
     global orbit_paths_over_time
-    
+
+    # FIXED: clamp end_window to object's valid ephemeris boundary
+    # prevents Horizons errors for tight-window missions (e.g. Artemis II ends Apr 10)
+    if 'end_date' in obj and obj['end_date'] < end_window:
+        print(f"[CLAMP] {obj['name']}: clamping end from {end_window.date()} to {obj['end_date'].date()}", flush=True)
+        end_window = obj['end_date']
+    if 'start_date' in obj and obj['start_date'] > today:
+        print(f"[CLAMP] {obj['name']}: clamping start from {today.date()} to {obj['start_date'].date()}", flush=True)
+        today = obj['start_date']
+    if today >= end_window:
+        print(f"[CLAMP] {obj['name']}: degenerate range after clamping, skipping", flush=True)
+        return False
+
     # Special case for Planet 9 - don't fetch from Horizons
+
     if obj.get('id') == 'planet9_placeholder':
         # For Planet 9, we'll create a synthetic orbit and store it
         update_status(f"Calculating synthetic orbit for {obj['name']}")

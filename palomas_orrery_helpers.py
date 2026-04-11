@@ -315,7 +315,8 @@ def calculate_axis_range(objects_to_plot):
     
     return [-max_range, max_range]
     
-def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
+def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
+                     start_date=None, end_date=None):
     """
     Fetch trajectory data in batch for all dates, handling missing epochs through interpolation.
     Includes velocity calculations and additional orbital parameters for each point.
@@ -325,6 +326,8 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
         dates_list (list): List of datetime objects
         center_id (str): ID of central body (default: 'Sun')
         id_type (str): Type of ID (e.g., None, 'smallbody')
+        start_date (datetime): Optional ephemeris start boundary -- epochs before this return None
+        end_date (datetime): Optional ephemeris end boundary -- epochs after this return None
         
     Returns:
         list: List of position dictionaries with complete orbital data
@@ -344,7 +347,22 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
     if id_type == 'exoplanet':
         # Exoplanets use separate orbital calculation system
         return [None] * len(dates_list)
-    
+
+    # FIXED: clamp dates_list to object's valid ephemeris window
+    # Horizons throws if any epoch is outside the window (e.g. Artemis II ends Apr 10 23:50)
+    # Fetch only in-range dates; reconstruct full-length result with None for out-of-range
+    original_dates = list(dates_list)
+    if start_date or end_date:
+        dates_list = [d for d in dates_list if
+                      (start_date is None or d >= start_date) and
+                      (end_date is None or d <= end_date)]
+        clipped = len(original_dates) - len(dates_list)
+        if clipped:
+            print(f"[CLAMP] {object_id}: {clipped}/{len(original_dates)} epochs outside ephemeris window", flush=True)
+        if not dates_list:
+            print(f"[CLAMP] {object_id}: no valid epochs in window, skipping fetch", flush=True)
+            return [None] * len(original_dates)
+
     try:
 
         # Convert dates to Julian Date
@@ -509,15 +527,19 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None):
         if coverage_pct < 50:
             print(f"Warning: Low data coverage ({coverage_pct:.1f}%) for {object_id}")
         
+        # Pad result back to original dates length if we clamped
+        if len(original_dates) != len(dates_list):
+            date_to_pos = {dates_list[i]: positions[i] for i in range(len(dates_list))}
+            positions = [date_to_pos.get(d) for d in original_dates]
         return positions
         
     except Exception as e:
         if "No ephemeris for target" in str(e):
             print(f"No ephemeris available for {object_id}")
-            return [None] * len(dates_list)
+            return [None] * len(original_dates)
         print(f"Error fetching trajectory for {object_id}: {e}")
-        traceback.print_exc()  # Add traceback for better debugging
-        return [None] * len(dates_list)
+        traceback.print_exc()
+        return [None] * len(original_dates)
     
 def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', id_type=None):
     """

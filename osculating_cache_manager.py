@@ -386,8 +386,16 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
     """
     if date is None:
         date = datetime.now()
-    
-    date_str = date.strftime('%Y-%m-%d')
+
+    # Convert UTC epoch to TDB before formatting for Horizons.
+    # The 69-second offset matters for tight-window missions (e.g. Artemis II)
+    # where a midnight UTC epoch can land just before the TDB ephemeris boundary.
+    # orbit_data_manager.py applies the same conversion for orbit path fetches.
+    try:
+        from orbit_data_manager import utc_to_tdb
+        date_str = utc_to_tdb(date).strftime('%Y-%m-%d %H:%M')
+    except Exception:
+        date_str = date.strftime('%Y-%m-%d')  # fallback: date-only, no TDB
     
     # Determine which ID to use for querying
     query_id = horizons_id if horizons_id else obj_name

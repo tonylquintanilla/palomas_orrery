@@ -790,8 +790,25 @@ def format_detailed_hover_text(obj_data, obj_name, center_object_name, objects, 
         )
 
     # Add mission_info if it exists
+#    if mission_info:
+#        full_hover_text += f"<br>{mission_info}"
+
+    # Add mission_info if it exists
     if mission_info:
-        full_hover_text += f"<br>{mission_info}"
+        # Convert \n to <br> for HTML hover text, and auto-wrap long lines
+        info_html = mission_info.replace('\n', '<br>')
+        # Word-wrap lines longer than 80 characters
+        wrapped_lines = []
+        for line in info_html.split('<br>'):
+            while len(line) > 80:
+                # Find last space before 80 chars
+                break_at = line.rfind(' ', 0, 80)
+                if break_at <= 0:
+                    break_at = 80
+                wrapped_lines.append(line[:break_at])
+                line = line[break_at:].lstrip()
+            wrapped_lines.append(line)
+        full_hover_text += f"<br>{'<br>'.join(wrapped_lines)}"        
     
     # Determine if this is a satellite of the center object specifically
     satellite_note = ""

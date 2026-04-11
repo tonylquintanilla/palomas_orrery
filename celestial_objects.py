@@ -607,10 +607,10 @@ OBJECT_DEFINITIONS = [
 #    'object_type': 'trajectory', 'id_type': 'smallbody', 
     'object_type': 'trajectory', 'id_type': 'id',
     # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-#    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic. A notable comet for observation in late 2025. Retrograde (left-handed) orbit.', 
     'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic (e=1.00026). Perihelion Oct 8, 2025 at 0.33 AU.<br>'
                     'Nucleus fragmented ~Oct 16 into at least 4 pieces (Hubble, published Icarus Feb 2026).<br>'
-                    'This record is Fragment A (main body, non-gravitational forces modeled). See K1-B, K1-C, K1-D.',   
+                    'This record is Fragment A (main body, non-gravitational forces modeled). See K1-B, K1-C, K1-D.<br>'
+                    'Fragment separation at perihelion is a backward-extrapolation artifact (comet was still intact Oct 8).',                      
     'mission_url': 'https://theskylive.com/c2025k1-info'}, 
 
     # C/2025 K1 FRAGMENTS - Hubble observed breakup ~Oct 16, 2025 (8 days post-perihelion)
@@ -627,21 +627,24 @@ OBJECT_DEFINITIONS = [
     # Rec #90004913, JPL#13, data arc: 2025-11-05 to 2026-01-06, 278 obs
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
     'mission_info': 'Horizons: C/2025 K1-B. Fragment B of comet C/2025 K1 (ATLAS). Hyperbolic (e=1.00203).<br>'
-                    'Breakup observed by Hubble ~Oct 16, 2025, 8 days post-perihelion. Escaping the solar system.',
+                    'Breakup observed by Hubble ~Oct 16, 2025, 8 days post-perihelion. Escaping the solar system.<br>'
+                    'Positions before ~Oct 16 are backward-extrapolated (comet was still intact at perihelion).',                   
     'mission_url': 'https://theskylive.com/c2025k1-info'},
 
     {'name': 'C/2025_K1-C', 'id': 'C/2025 K1-C', 'var_name': 'comet_2025k1c_var', 'color_key': 'C/2025_K1-C', 'symbol': 'diamond',
     # Rec #90004914, JPL#14, data arc: 2025-11-25 to 2026-01-10, 158 obs
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
     'mission_info': 'Horizons: C/2025 K1-C. Fragment C - the stubborn one. Elliptical (e=0.99999, still bound!).<br>'
-                    'While siblings escape, C remains gravitationally bound. Return period ~13 million years.',
+                    'While siblings escape, C remains gravitationally bound. Return period ~13 million years.<br>'
+                    'Positions before ~Oct 16 are backward-extrapolated (comet was still intact at perihelion).',                    
     'mission_url': 'https://theskylive.com/c2025k1-info'},
 
     {'name': 'C/2025_K1-D', 'id': 'C/2025 K1-D', 'var_name': 'comet_2025k1d_var', 'color_key': 'C/2025_K1-D', 'symbol': 'diamond',
     # Rec #90004915, JPL#5, data arc: 2025-11-26 to 2025-12-29, 107 obs (shortest arc, 33 days)
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
     'mission_info': 'Horizons: C/2025 K1-D. Fragment D of comet C/2025 K1 (ATLAS). Hyperbolic (e=1.00246, most divergent).<br>'
-                    'Shortest observation arc (33 days). Escaping the solar system.',
+                    'Shortest observation arc (33 days). Escaping the solar system.<br>'
+                    'Positions before ~Oct 16 are backward-extrapolated (comet was still intact at perihelion).',                    
     'mission_url': 'https://theskylive.com/c2025k1-info'},
 
     {'name': 'PANSTARRS', 'id': 'C/2025 R3', 'var_name': 'comet_c2025r3_var', 'color_key': 'PANSTARRS', 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
@@ -855,6 +858,17 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 
     'mission_info': 'Horizons: -144. Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
         
+    # Artemis II / Orion "Integrity" (Spacecraft) -1024
+    # Trajectory starts post-ICPS separation (3h24m after launch)
+    # Launched April 1, 2026 22:35:12 UTC from LC-39B, Kennedy Space Center
+    # Orion_OEM_20260401_0335.V0.1              2026-Apr-02 01:59  2026-Apr-10 23:59
+    {'name': 'Artemis II', 'id': '-1024', 'var_name': 'artemis2_var', 'color_key': 'Artemis II', 'symbol': 'diamond-open',
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2026, 4, 2, 2, 5), 'end_date': datetime(2026, 4, 10, 23, 50),  # bounds per OEM: 01:59-23:59 TD; 5min buffer each end 
+    'mission_url': 'https://www.nasa.gov/mission/artemis-ii/',
+    'mission_info': 'Horizons: -1024. First crewed Artemis mission.<br>' 
+    'Crew: Wiseman, Glover, Koch, Hansen (CSA).<br>Lunar free-return trajectory' 
+    'aboard Orion "Integrity". Trajectory begins post-ICPS separation.'},
+
     # --- Adding New Moons ---
 
     # Mars' Moons

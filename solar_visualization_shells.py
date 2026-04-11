@@ -2,8 +2,11 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 from shared_utilities import create_sun_direction_indicator
+
 from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, CHROMOSPHERE_RADII,
-                                            INNER_CORONA_RADII, OUTER_CORONA_RADII, TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
+                                            INNER_CORONA_RADII, OUTER_CORONA_RADII, STREAMER_BELT_RADII,
+                                            ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
+                                            TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
                                             INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU, 
                                             GRAVITATIONAL_INFLUENCE_AU)
 
@@ -199,23 +202,23 @@ termination_shock_info = (
         )
 
 outer_corona_info = (
-            "Sun: Outer Corona:\n\n"
+    "Sun: Extended Corona (F-corona / Outer):\n\n"
 
-            "Solar Outer Corona extends to 50 solar radii or more,  about 0.2 AU. It is the most tenuous and expansive layer of\n" 
-            "the solar atmosphere. The solar Corona generates the solar wind, a stream of electrons, protons, and Helium travelling\n" 
-            "at supersonic speeds between 300 and 800 km/s, and temperatures to 2M K. The high temperature of the corona causes these\n" 
-            "particles to escape the Sun's gravity. This extreme heat is a bit of a mystery, as it's much hotter than the Sun's surface.\n"
-            "Scientists believe that magnetic fields and nanoflares, small explosions on the Sun's surface, play a role in heating the corona.\n\n"   
+    "This shell marks the extended outer solar corona at ~50 solar radii (~0.23 AU).\n"
+    "At this distance the corona is extremely tenuous -- the F-corona (dust-scattered\n"
+    "sunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.\n\n"
 
-            "The outer corona is characterized by various structures, including streamers, loops, and plumes, which are shaped by the\n" 
-            "Sun's magnetic field. These structures are constantly changing and evolving. The outer corona plays a crucial role in\n" 
-            "space weather. Solar flares and coronal mass ejections, which originate in the corona, can disrupt Earth's magnetic field\n" 
-            "and affect satellites, communication systems, and power grids.\n\n"
+    "* The visible structured corona (helmet streamers) extends to ~4-6 R_sun.\n"
+    "* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.\n"
+    "  Parker Solar Probe measured this at 18.8 R_sun on April 28, 2021.\n"
+    "* Beyond the Alfven surface, plasma is solar wind, not corona.\n"
+    "* This 50 R_sun shell represents the faint, extended F-corona envelope.\n\n"
 
-            "* Temperature: ~2-3M K, or an average of 2.5M K.\n" 
-            "* The Outer Corona radiates at an average wavelength of 1.159 nm, which falls within the extreme ultraviolet to X-ray\n" 
-            "  regions of the electromagnetic spectrum."
-        )
+    "* Temperature: ~1-2 million K (the coronal heating paradox -- hotter than the surface)\n"
+    "* The corona merges gradually into the solar wind beyond ~15-20 R_sun.\n"
+    "* Parker Solar Probe's closest approach: ~8.8 R_sun as of 2024.\n"
+    "* The corona radiates at ~1.159 nm average wavelength (extreme ultraviolet to X-ray)."
+)
 
 inner_corona_info = (
             "Sun: Inner Corona:\n\n"
@@ -245,7 +248,7 @@ inner_corona_info = (
             
             "* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)\n"
             "* Temperature: 1-2M K, or an average of about 1.5M K\n"
-            "* It radiates at an average wavelenght of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
+            "* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
         )
 
 chromosphere_info = (
@@ -482,54 +485,195 @@ termination_shock_info_hover = (
         )
 
 outer_corona_info_hover = (
-            "Sun: Outer Corona:<br><br>"
+    "Sun: Extended Corona (F-corona / Outer):<br><br>"
 
-            "Solar Outer Corona extends to 50 solar radii or more,  about 0.2 AU. It is the most tenuous and expansive layer of<br>" 
-            "the solar atmosphere. The solar Corona generates the solar wind, a stream of electrons, protons, and Helium travelling<br>" 
-            "at supersonic speeds between 300 and 800 km/s, and temperatures to 2M K. The high temperature of the corona causes these<br>" 
-            "particles to escape the Sun's gravity. This extreme heat is a bit of a mystery, as it's much hotter than the Sun's surface.<br>"
-            "Scientists believe that magnetic fields and nanoflares, small explosions on the Sun's surface, play a role in heating the corona.<br><br>"   
+    "Extended outer solar corona at ~50 solar radii (~0.23 AU).<br>"
+    "F-corona (dust-scattered sunlight with Fraunhofer lines) dominates at this distance.<br><br>"
 
-            "The outer corona is characterized by various structures, including streamers, loops, and plumes, which are shaped by the<br>" 
-            "Sun's magnetic field. These structures are constantly changing and evolving. The outer corona plays a crucial role in<br>" 
-            "space weather. Solar flares and coronal mass ejections, which originate in the corona, can disrupt Earth's magnetic field<br>" 
-            "and affect satellites, communication systems, and power grids.<br><br>"
+    "Layer hierarchy within this shell:<br>"
+    "* Visible streamer belt: 4-6 R_sun (see Streamer Belt shell)<br>"
+    "* Alfven surface (corona/solar wind boundary): ~15-20 R_sun (see Alfven Surface shell)<br>"
+    "  Parker Solar Probe first crossing: 18.8 R_sun, April 28, 2021<br>"
+    "* F-corona (dust-scattered): 3-50+ R_sun -- this shell's extent<br><br>"
 
-            "* Temperature: ~2-3M K, or an average of 2.5M K.<br>" 
-            "* The Outer Corona radiates at an average wavelength of 1.159 nm, which falls within the extreme ultraviolet to X-ray<br>" 
-            "  regions of the electromagnetic spectrum."
-        )
+    "* Temperature: ~1-2 million K (coronal heating paradox)<br>"
+    "* Beyond the Alfven surface, plasma is solar wind, not true corona<br>"
+    "* Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br>"
+    "* Radiates at ~1.159 nm (extreme ultraviolet to X-ray)<br><br>"
+
+    "MAPS C/2026 A1 entered SOHO/LASCO C3 field (~33 R_sun) on April 2, 2026,<br>"
+    "already inside this shell and approaching the Alfven surface."
+)
+
+streamer_belt_info = (
+    "Sun: Streamer Belt / Visible Corona:\n\n"
+
+    "The streamer belt is the brightest, most structured region of the visible solar corona,\n"
+    "extending from the inner corona out to about 4-6 solar radii. This is the corona that\n"
+    "observers see during total solar eclipses as a pearly white halo around the Sun.\n\n"
+
+    "Three components of white-light corona:\n"
+    "* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.\n"
+    "  Spectrum is continuous (blurred absorption lines) -- electrons move too fast to preserve them.\n"
+    "* F-corona (Fraunhofer): Sunlight scattered off dust particles. Shows Fraunhofer absorption lines.\n"
+    "  Dominates beyond ~3 R_sun and extends to ~15 R_sun. Has an oval shape.\n"
+    "* E-corona (emission): Line emission from highly ionized Fe, Ni, Ca atoms. Visible to ~2 R_sun.\n\n"
+
+    "* Helmet streamers: Bottle-shaped, dense magnetic structures extending to 4-6 R_sun.\n"
+    "  Source of slow solar wind. Visible in coronagraphs and at eclipse.\n"
+    "* Temperature: ~1-2 million K\n"
+    "* MAPS C/2026 A1 was first detected in SOHO/LASCO C3 at ~0.15 AU (~33 R_sun) on April 2, 2026.\n"
+    "  By April 3-4 it was passing through this visible streamer belt region."
+)
+
+streamer_belt_info_hover = (
+    "Sun: Streamer Belt / Visible Corona:<br><br>"
+
+    "The streamer belt is the brightest, most structured region of the visible solar corona,<br>"
+    "extending from the inner corona out to about 4-6 solar radii. This is the corona that<br>"
+    "observers see during total solar eclipses as a pearly white halo around the Sun.<br><br>"
+
+    "Three components of white-light corona:<br>"
+    "* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.<br>"
+    "  Spectrum is continuous -- electrons move too fast to preserve absorption lines.<br>"
+    "* F-corona (Fraunhofer): Sunlight scattered off dust. Shows Fraunhofer absorption lines.<br>"
+    "  Dominates beyond ~3 R_sun, extends to ~15 R_sun. Has an oval shape.<br>"
+    "* E-corona (emission): Line emission from ionized Fe, Ni, Ca. Visible to ~2 R_sun.<br><br>"
+
+    "* Helmet streamers: Dense magnetic structures extending 4-6 R_sun. Source of slow solar wind.<br>"
+    "* Temperature: ~1-2 million K<br><br>"
+    "MAPS C/2026 A1 context:<br>"
+    "MAPS was detected in SOHO/LASCO C3 (~33 R_sun field) from April 2, 2026.<br>"
+    "It passed through this visible streamer belt on April 3-4 before perihelion."
+)
+
+roche_limit_info = (
+    "Sun: Roche Limit (Fluid Body / Comet):\n\n"
+
+    "The Roche limit is the distance within which a fluid body held together only by\n"
+    "self-gravity will be torn apart by the Sun's tidal forces.\n\n"
+
+    "Formula: d = 2.44 x R_sun x (rho_sun / rho_comet)^(1/3)\n"
+    "Solar density: 1,408 kg/m^3 | Comet density: ~500 kg/m^3\n"
+    "Result: ~3.45 solar radii = ~2,400,165 km from Sun center\n"
+    "  = ~1,704,465 km from photosphere (~0.0114 AU)\n\n"
+
+    "Key physics:\n"
+    "* The Roche limit is NOT absolute. It marks where tidal forces overcome SELF-GRAVITY\n"
+    "  only. Tensile strength -- the material bonds holding the nucleus together -- can\n"
+    "  allow survival well inside the formal Roche limit.\n"
+    "* Ikeya-Seki (C/1965 S1, ~5 km nucleus) survived at 1.66 R_sun (0.008 AU).\n"
+    "* Great Comet of 1843 survived at 1.19 R_sun (0.006 AU) -- deepest ever recorded.\n"
+    "* Comet Lovejoy (C/2011 W3, ~500 m) survived perihelion briefly at ~1.2 R_sun.\n"
+    "* Size and structural coherence are decisive: larger nuclei have both stronger\n"
+    "  self-gravity AND stronger material bonds to resist tidal disruption.\n\n"
+
+    "MAPS C/2026 A1 context:\n"
+    "* MAPS disintegrated at ~8.33 R_sun (0.039 AU) -- OUTSIDE the Roche limit.\n"
+    "* Primary destruction mechanisms: thermal ablation (1-2 million K corona) and\n"
+    "  rotational spin-up from outgassing jets. Tidal forces never acted on MAPS.\n"
+    "* The debris swept THROUGH the Roche limit (3.45 R_sun, 0.016 AU) to perihelion\n"
+    "  at 1.23 R_sun -- but the nucleus was already gone."
+)
+
+roche_limit_info_hover = (
+    "Sun: Roche Limit (Fluid Body / Comet):<br><br>"
+
+    "The Roche limit marks where tidal forces overcome a body's self-gravity.<br>"
+    "It is NOT absolute -- tensile strength can allow survival inside it.<br><br>"
+
+    "Formula: d = 2.44 x R_sun x (rho_sun / rho_comet)^(1/3)<br>"
+    "Solar density: 1,408 kg/m^3 | Comet density: ~500 kg/m^3<br>"
+    "Result: ~3.45 R_sun (~0.016 AU) from Sun center<br><br>"
+
+    "Key physics:<br>"
+    "* Roche limit depends on DENSITY RATIO only -- not on nucleus mass or size<br>"
+    "* Tensile strength can allow survival inside the limit:<br>"
+    "  Ikeya-Seki (~5 km) survived at 1.66 R_sun (0.008 AU)<br>"
+    "  Great Comet of 1843 survived at 1.19 R_sun (0.006 AU)<br>"
+    "  Lovejoy (C/2011 W3, ~500 m) survived briefly at ~1.2 R_sun<br>"
+    "* Larger nuclei: stronger self-gravity + stronger material bonds<br><br>"
+
+    "MAPS C/2026 A1 context:<br>"
+    "* Disintegrated at 8.33 R_sun (0.039 AU) -- OUTSIDE the Roche limit<br>"
+    "* Killed by thermal ablation and rotational spin-up, not tidal forces<br>"
+    "* Debris swept through this shell to perihelion at 1.23 R_sun (0.006 AU)<br>"
+    "* The nucleus never reached the Roche limit intact"
+)
+
+alfven_surface_info = (
+    "Sun: Alfven Surface:\n\n"
+
+    "The Alfven surface is the true outer boundary of the solar corona -- the point where\n"
+    "the solar wind accelerates past the local Alfven speed and plasma can no longer\n"
+    "communicate back to the Sun. Beyond it, the corona becomes the solar wind.\n\n"
+
+    "* Location: ~10-20 solar radii, measured directly by NASA's Parker Solar Probe.\n"
+    "  On April 28, 2021, Parker Solar Probe crossed inward at 18.8 R_sun (13 million km),\n"
+    "  spending ~5 hours inside the corona -- the first spacecraft to 'touch the Sun.'\n"
+    "* This is not a smooth sphere: it has spikes and valleys shaped by solar magnetic activity.\n"
+    "  At polar coronal holes: ~12-15 R_sun. In the streamer belt: ~17-19 R_sun.\n\n"
+
+    "Why it matters:\n"
+    "* Inside the Alfven surface: plasma is magnetically connected to the Sun.\n"
+    "  Perturbations (like a passing comet) can propagate back to the solar surface.\n"
+    "* Outside it: plasma becomes the solar wind, causally disconnected from the Sun.\n"
+    "* This boundary governs the Sun's angular momentum loss and spin-down over time.\n\n"
+
+    "MAPS C/2026 A1 context:\n"
+    "* MAPS crossed the Alfven surface approximately April 3, ~18:00 UTC --\n"
+    "  about 20 hours before its nucleus disintegrated.\n"
+    "* Inside this boundary, the comet was immersed in magnetically connected coronal plasma\n"
+    "  at temperatures of 1-2 million K, subject to intense tidal and thermal stresses.\n"
+    "* The corona it entered here is physically different from the visible outer corona --\n"
+    "  this is where the Sun 'feels' the comet and vice versa."
+)
+
+alfven_surface_info_hover = (
+    "Sun: Alfven Surface:<br><br>"
+
+    "The true outer boundary of the solar corona. Beyond this point, plasma can no longer<br>"
+    "communicate back to the Sun -- the corona becomes the solar wind.<br><br>"
+
+    "* Measured directly: Parker Solar Probe, April 28, 2021 at 18.8 R_sun (13 million km)<br>"
+    "  First spacecraft to enter the corona -- 'touching the Sun' for ~5 hours.<br>"
+    "* Not a smooth sphere: spikes and valleys from solar magnetic activity.<br>"
+    "  Polar coronal holes: ~12-15 R_sun | Streamer belt: ~17-19 R_sun<br><br>"
+
+    "Why it matters:<br>"
+    "* Inside: plasma magnetically connected to the Sun. Alfven waves propagate inward.<br>"
+    "* Outside: solar wind -- causally disconnected, flowing outward at 300-800 km/s.<br>"
+    "* Governs the Sun's angular momentum loss and spin-down rate over billions of years.<br><br>"
+
+    "MAPS C/2026 A1 context:<br>"
+    "* MAPS crossed inward ~April 3, 18:00 UTC -- ~20 hours before disintegration.<br>"
+    "* Inside this surface the comet was in magnetically connected 1-2 million K plasma.<br>"
+    "* The corona paradox: hotter farther from surface -- still unexplained (Alfven waves,<br>"
+    "  nanoflares, and magnetic reconnection are leading candidate mechanisms)."
+)
 
 inner_corona_info_hover = (
-            "Sun: Inner Corona:<br><br>"
+    "Sun: Inner Corona (K-corona):<br><br>"
 
-            "The solar inner corona is the region of the Sun's atmosphere that lies closest to its surface. It's a dynamic and complex<br>" 
-            "environment, with temperatures reaching millions of degrees Celsius and a variety of fascinating features:<br>"
-            "* Temperature: While still incredibly hot (around 1-3 million Kelvin), the inner corona is slightly cooler<br>" 
-            "than the outer corona. This temperature difference is one of the factors that drives the solar wind.<br>"
-            "* Density: The inner corona is denser than the outer corona, but still much less dense than the Sun's surface,<br>" 
-            "the photosphere. This low density makes it difficult to observe directly, except during a solar eclipse or<br>" 
-            "with specialized instruments.<br><br>" 
-            
-            "Magnetic field: The inner corona is dominated by the Sun's magnetic field, which shapes and controls the<br>" 
-            "plasma in this region. The magnetic field lines create a variety of structures, including:<br>" 
-            "* Coronal loops: These are closed loops of magnetic flux that trap hot plasma, forming bright arcs that<br>" 
-            "  can be seen in ultraviolet and X-ray images.<br>" 
-            "* Coronal holes: These are areas where the magnetic field lines are open, allowing plasma to escape into<br>" 
-            "  space and contribute to the solar wind.<br>" 
-            "* Streamers: These are large, elongated structures that extend outward from the Sun, often associated with<br>" 
-            "  active regions and coronal mass ejections (CMEs).<br>" 
-            "* Dynamic activity: The inner corona is a constantly changing environment, with features evolving and erupting<br>" 
-            "  on different timescales. This activity is driven by the interplay between the magnetic field and the plasma,<br>" 
-            "  leading to phenomena like:<br>" 
-            "  * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic energy.<br>" 
-            "  * CMEs: These are massive eruptions of plasma and magnetic field from the corona, which can travel through space<br>" 
-            "    and impact Earth, disrupting satellites, communication systems, and power grids.<br><br>"
-            
-            "* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)<br>"
-            "* Temperature: 1-2M K, or an average of about 1.5M K<br>"
-            "* It radiates at an average wavelenght of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
-        )
+    "The solar inner corona closest to the surface. Dominated by the K-corona --<br>"
+    "sunlight scattered off free electrons. Extends to ~2-3 solar radii.<br><br>"
+
+    "* Temperature: 1-3 million K (increases with altitude -- the coronal heating paradox)<br>"
+    "* K-corona dominates within ~2.3 R_sun; F-corona (dust) takes over beyond ~3 R_sun<br>"
+    "* Density: much denser than outer corona, but still far less than photosphere<br>"
+    "* Magnetic structures: coronal loops, coronal holes, streamers<br>"
+    "* Solar flares and CMEs originate here<br><br>"
+
+    "Roche limit proximity:<br>"
+    "* The fluid Roche limit for comets (~3.45 R_sun) lies just outside this shell.<br>"
+    "* Any Kreutz sungrazer penetrating the inner K-corona is at or inside the tidal<br>"
+    "  disruption threshold. MAPS C/2026 A1 perihelion reached 1.23 R_sun --<br>"
+    "  deep inside both the inner corona and the Roche limit simultaneously.<br><br>"
+
+    "* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)<br>"
+    "* Temperature: 1-2M K, or an average of about 1.5M K<br>"
+    "* Radiates at an average wavelength of 1.93 nm, extreme ultraviolet to soft X-ray."
+)
 
 chromosphere_info_hover = (
             "Sun: Chromosphere:<br><br>"
@@ -615,7 +759,7 @@ radiative_zone_info_hover = (
             "  structure, including the radiative zone. By analyzing the frequencies and patterns of these waves, scientists can<br>" 
             "  infer the temperature, density, and composition of the radiative zone.<br>" 
             "* Neutrino observations: Neutrinos are subatomic particles produced in the Sun's core that can pass through the<br>" 
-            "  radiative zone almost unimpeded. By detecting and analyzing these neutrinos, scientists can gain info_hoverrmation about<br>" 
+            "  radiative zone almost unimpeded. By detecting and analyzing these neutrinos, scientists can gain information about<br>" 
             "  the nuclear reactions taking place in the core and the conditions in the radiative zone."
             )
 
@@ -652,32 +796,28 @@ core_info_hover = (
             )
 
 hover_text_sun_and_corona = (
-        '<b>The Sun and Its Atmosphere</b><br><br>'
-        'Visualization shows three main layers:<br>'
-        '* Photosphere (surface): radius 0.00465 AU, ~6,000K<br>'
-        '* Inner Corona: extends to 1.3 to 3 solar radii, >2,000,000K<br>'
-        '* Outer Corona: extends to 10 to 50 solar radii, ~1,000,000K<br><br>'
-        'Parker Solar Probe\'s closest approach: 8.8 solar radii<br><br>'
-        'The solar corona\'s range, especially in terms of solar radii, varies significantly between periods of low and maximum<br>' 
-        'solar activity. Here\'s a breakdown of the inner and outer corona\'s extent:<br>'
-        '* The inner corona is the region closest to the Sun\'s surface, extending outward from the photosphere or chromosphere.<br>' 
-        '  It\'s characterized by high temperatures, intense magnetic fields, and dense plasma. The inner corona typically<br>' 
-        '  extends to about 1.3 to 3 solar radii (Rs) from the center of the Sun. This is a relatively consistent range that<br>' 
-        '  doesn\'t change dramatically with solar activity. However, the structures within the inner corona, such as coronal<br>' 
-        '  loops and streamers, will vary in size, shape, and number.<br>' 
-        '* The outer corona is the very extended, tenuous region of the solar atmosphere that gradually merges with the solar<br>' 
-        '  wind. It\'s less dense and cooler than the inner corona, but still incredibly hot compared to the Sun\'s surface.<br>' 
-        '  The outer corona is much more variable. During solar minimum, the Sun\'s magnetic field is relatively simpler and<br>' 
-        '  more dipole-like. The outer corona is less extended, typically reaching out to around 5-10 Rs. It is often<br>' 
-        '  characterized by large, dark coronal holes at the poles and bright, elongated streamers near the equator. During<br>' 
-        '  solar maximum, the Sun\'s magnetic field is highly complex and dynamic. The outer corona becomes much more extended<br>' 
-        '  structured, reaching out to 20 Rs or even further in some cases. It is filled with numerous complex loops, streamers,<br>' 
-        '  and active regions.'
-        'The corona exhibits an unusual temperature inversion, with the outer atmosphere being much hotter '
-        'than the surface.<br>This "coronal heating problem" is one of the key mysteries being studied by '
-        'Parker Solar Probe.<br><br>'
-        'Marker sizes and transparencies are scaled to represent the actual extent of each layer.'
-    )
+    '<b>The Sun and Its Atmosphere</b><br><br>'
+    'Five corona/boundary layers now visualized separately:<br>'
+    '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
+    '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
+    '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona<br>'
+    '* Alfven Surface: ~18.8 R_sun -- true corona/solar wind boundary<br>'
+    '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
+    '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
+    'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
+    'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
+    'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
+    'nanoflares, and magnetic reconnection -- still actively debated.<br><br>'
+    'MAPS C/2026 A1 (April 2026) crossed each boundary in sequence:<br>'
+    'Extended F-corona (April 2, ~33 R_sun, ~0.153 AU) -><br>'
+    'Alfven Surface (April 3 ~18:00, 18.8 R_sun, 0.087 AU) -><br>'
+    '<b>DISINTEGRATION (April 4 08:15, 8.33 R_sun, 0.039 AU)</b> -><br>'
+    'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY -><br>'
+    'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.<br>'
+    'Ghost tracked by SOHO/LASCO ~36-40 hours outbound; dispersed by April 6.<br>'
+    'Parker Solar Probe closest approach: 8.8 R_sun (0.041 AU) --<br>'
+    'MAPS disintegrated at 8.33 R_sun (0.039 AU), just inside Parker\'s record.'
+)
 
 hover_text_sun = (
         '<b>Sun</b><br>'
@@ -711,28 +851,38 @@ hover_text_sun = (
 
 
 def create_sun_hover_text():
-    """
-    Creates hover text for the Sun visualization with information about each layer.
-    Future expansion could include dynamic temperature and size data.
-    
-    Returns:
-        dict: Hover text for each layer of the Sun
-    """
     return {
         'photosphere': (
             'Solar Photosphere<br>'
             'Temperature: ~6,000K<br>'
-            'Radius: 0.00465 AU'
+            'Radius: 0.00465 AU (1.0 R_sun)'
         ),
         'inner_corona': (
-            'Inner Corona<br>'
-            'Temperature: >2,000,000K<br>'
-            'Extends to: 2-3 solar radii (~0.014 AU)'
+            'Inner Corona (K-corona)<br>'
+            'Temperature: 1-3 million K<br>'
+            'Extends to: 2-3 solar radii (~0.014 AU)<br>'
+            'Roche limit at 3.45 R_sun just beyond this shell'
+        ),
+        'roche_limit': (
+            'Roche Limit (Comets)<br>'
+            '~3.45 solar radii (~0.016 AU)<br>'
+            'Inside: tidal forces exceed cometary self-gravity<br>'
+            'NOT absolute -- tensile strength allows survival inside it'
+        ),
+        'streamer_belt': (
+            'Streamer Belt / Visible Corona<br>'
+            'Temperature: ~1-2 million K<br>'
+            'Extends to: ~6 solar radii -- eclipse white-light corona'
+        ),
+        'alfven_surface': (
+            'Alfven Surface<br>'
+            '~18.8 R_sun -- true corona/solar wind boundary<br>'
+            'Parker Solar Probe first crossing: April 28, 2021'
         ),
         'outer_corona': (
-            'Outer Corona<br>'
-            'Temperature: ~1,000,000K<br>'
-            'Extends to: ~50 solar radii (~0.2 AU)'
+            'Extended Corona (F-corona)<br>'
+            'Temperature: ~1-2 million K<br>'
+            'Extends to: ~50 solar radii (~0.23 AU)'
         )
     }
 
@@ -749,375 +899,460 @@ def create_corona_sphere(radius, n_points=100):  # Increased from 50 to 100 poin
     
     return x.flatten(), y.flatten(), z.flatten()
 
+# ============================================================================
+# SHELL DESIGN PATTERN (applied to all 15 sphere shells):
+#
+# Two-trace structure per shell:
+#   1. Shell sphere  -- n_points=20 (outer/boundary) or 25 (inner sun),
+#                       hoverinfo='skip' (no hover on cloud points)
+#   2. Info marker   -- single cross symbol at north pole, 5% above shell
+#                       radius, carries the full hover text for that shell.
+#
+# Benefits:
+#   * Eliminates hover clutter from 400-3600 identical hover popups
+#   * Reduces export file size by ~17 MB (hover text serialized once, not N^2)
+#   * One predictable hover target per shell -- user learns where to look
+#   * Cross symbol is visually distinct from all object markers (circle,
+#     diamond, square are used elsewhere)
+#
+# Info marker position: (0, 0, r * 1.05) -- north pole of shell, 5% above
+# surface so it floats clear of the shell dot cloud.
+#
+# Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
+# ============================================================================
+
 # Individual Sun shell creation functions
 
 def create_sun_gravitational_shell():
     """Creates the Sun's gravitational influence shell."""
-    x, y, z = create_sphere_points(GRAVITATIONAL_INFLUENCE_AU, n_points=40)
-    
-    text_array = [gravitational_influence_info_hover for _ in range(len(x))]
-    customdata_array = ["Sun's Gravitational Influence" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=1.0,
-                color='rgb(102, 187, 106)', 
-                opacity=0.3
-            ),
-            name='Sun\'s Gravitational Influence',
-            text=text_array,             
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    """
-    sun_traces = create_sun_direction_indicator(
-        center_position=(0, 0, 0), 
-        shell_radius=GRAVITATIONAL_INFLUENCE_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
-    """
+    x, y, z = create_sphere_points(GRAVITATIONAL_INFLUENCE_AU, n_points=20)
+    r_info = GRAVITATIONAL_INFLUENCE_AU * 1.05
 
-    return traces
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='rgb(102, 187, 106)', opacity=0.3),
+        name='Sun\'s Gravitational Influence',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(102, 187, 106)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[gravitational_influence_info_hover],
+        customdata=['Sun\'s Gravitational Influence'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_outer_oort_shell():
     """Creates the Sun's outer Oort cloud shell."""
-    x, y, z = create_sphere_points(OUTER_OORT_CLOUD_AU, n_points=40)
-    
-    text_array = [outer_oort_info_hover for _ in range(len(x))]
-    customdata_array = ["Outer Oort Cloud" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=1.0,
-                color='white',
-                opacity=0.2
-            ),
-            name='Outer Oort Cloud',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    """
-    sun_traces = create_sun_direction_indicator(
-        center_position=(0, 0, 0), 
-        shell_radius=OUTER_OORT_CLOUD_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
-    """
+    x, y, z = create_sphere_points(OUTER_OORT_CLOUD_AU, n_points=20)
+    r_info = OUTER_OORT_CLOUD_AU * 1.05
 
-    return traces
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='white', opacity=0.3),
+        name='Outer Oort Cloud',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='white', opacity=0.9,
+                    symbol='cross', line=dict(color='gray', width=1)),
+        name='',
+        text=[outer_oort_info_hover],
+        customdata=['Outer Oort Cloud'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_inner_oort_shell():
     """Creates the Sun's inner Oort cloud shell."""
-    x, y, z = create_sphere_points(INNER_OORT_CLOUD_AU, n_points=40)
-    
-    text_array = [inner_oort_info_hover for _ in range(len(x))]
-    customdata_array = ["Inner Oort Cloud" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=1.0,
-                color='white',
-                opacity=0.3
-            ),
-            name='Inner Oort Cloud',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    """
-    sun_traces = create_sun_direction_indicator(
-        center_position=(0, 0, 0), 
-        shell_radius=INNER_OORT_CLOUD_AU
+    x, y, z = create_sphere_points(INNER_OORT_CLOUD_AU, n_points=20)
+    r_info = INNER_OORT_CLOUD_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='white', opacity=0.35),
+        name='Inner Oort Cloud',
+        hoverinfo='skip',
+        showlegend=True
     )
-    for trace in sun_traces:
-        traces.append(trace)
-    """
-    
-    return traces
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='white', opacity=0.9,
+                    symbol='cross', line=dict(color='gray', width=1)),
+        name='',
+        text=[inner_oort_info_hover],
+        customdata=['Inner Oort Cloud'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_inner_oort_limit_shell():
     """Creates the inner limit of the Sun's Oort cloud shell."""
-    x, y, z = create_sphere_points(INNER_LIMIT_OORT_CLOUD_AU, n_points=40)
-    
-    text_array = [inner_limit_oort_info_hover for _ in range(len(x))]
-    customdata_array = ["Inner Limit of Oort Cloud" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=1.0,
-                color='white',
-                opacity=0.3
-            ),
-            name='Inner Limit of Oort Cloud',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    """
-    sun_traces = create_sun_direction_indicator(
-        center_position=(0, 0, 0), 
-        shell_radius=INNER_LIMIT_OORT_CLOUD_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-    """
+    x, y, z = create_sphere_points(INNER_LIMIT_OORT_CLOUD_AU, n_points=20)
+    r_info = INNER_LIMIT_OORT_CLOUD_AU * 1.05
 
-    return traces
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='white', opacity=0.35),
+        name='Inner Limit of Oort Cloud',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='white', opacity=0.9,
+                    symbol='cross', line=dict(color='gray', width=1)),
+        name='',
+        text=[inner_limit_oort_info_hover],
+        customdata=['Inner Limit of Oort Cloud'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_heliopause_shell():
     """Creates the Sun's heliopause shell."""
-    x, y, z = create_sphere_points(HELIOPAUSE_RADII * SOLAR_RADIUS_AU, n_points=40)
-    
-    text_array = [solar_wind_info_hover for _ in range(len(x))]
-    customdata_array = ["Solar Wind Heliopause" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=0.5,
-                color='rgb(135, 206, 250)',
-                opacity=0.3
-            ),
-            name='Solar Wind Heliopause',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    """
-    sun_traces = create_sun_direction_indicator(
-        center_position=(0, 0, 0), 
-        shell_radius=HELIOPAUSE_RADII * SOLAR_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-    """
+    x, y, z = create_sphere_points(HELIOPAUSE_RADII * SOLAR_RADIUS_AU, n_points=20)
+    r_info = HELIOPAUSE_RADII * SOLAR_RADIUS_AU * 1.05
 
-    return traces
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='rgb(135, 206, 250)', opacity=0.4),
+        name='Solar Wind Heliopause',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(135, 206, 250)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[solar_wind_info_hover],
+        customdata=['Solar Wind Heliopause'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_termination_shock_shell():
     """Creates the Sun's termination shock shell."""
-    x, y, z = create_sphere_points(TERMINATION_SHOCK_AU, n_points=40)
-    
-    text_array = [termination_shock_info_hover for _ in range(len(x))]
-    customdata_array = ["Solar Wind Termination Shock" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=0.5,
-                color='rgb(240, 244, 255)',
-                opacity=0.3
-            ),
-            name='Solar Wind Termination Shock',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    """
-    sun_traces = create_sun_direction_indicator(
-        center_position=(0, 0, 0), 
-        shell_radius=TERMINATION_SHOCK_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-    """
+    x, y, z = create_sphere_points(TERMINATION_SHOCK_AU, n_points=20)
+    r_info = TERMINATION_SHOCK_AU * 1.05
 
-    return traces
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='rgb(240, 244, 255)', opacity=0.4),
+        name='Solar Wind Termination Shock',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(240, 244, 255)', opacity=0.9,
+                    symbol='cross', line=dict(color='gray', width=1)),
+        name='',
+        text=[termination_shock_info_hover],
+        customdata=['Solar Wind Termination Shock'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_outer_corona_shell():
-    """Creates the Sun's outer corona shell."""
-    x, y, z = create_sphere_points(OUTER_CORONA_RADII * SOLAR_RADIUS_AU, n_points=50)
-    
-    text_array = [outer_corona_info_hover for _ in range(len(x))]
-    customdata_array = ["Sun: Outer Corona" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=0.75,
-                color='rgb(25, 25, 112)',
-                opacity=0.8
-            ),
-            name='Sun: Outer Corona',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    return traces
+    """Creates the Sun's extended outer corona (F-corona) shell."""
+    x, y, z = create_sphere_points(OUTER_CORONA_RADII * SOLAR_RADIUS_AU, n_points=20)
+    r_info = OUTER_CORONA_RADII * SOLAR_RADIUS_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.5, color='rgb(25, 25, 112)', opacity=0.5),
+        name='Sun: Outer Corona',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(25, 25, 112)', opacity=0.95,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[outer_corona_info_hover],
+        customdata=['Sun: Outer Corona'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_inner_corona_shell():
-    """Creates the Sun's inner corona shell."""
-    x, y, z = create_sphere_points(INNER_CORONA_RADII * SOLAR_RADIUS_AU, n_points=60)
-    
-    text_array = [inner_corona_info_hover for _ in range(len(x))]
-    customdata_array = ["Sun: Inner Corona" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=1,
-                color='rgb(0, 0, 255)',
-                opacity=0.2
-            ),
-            name='Sun: Inner Corona',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    return traces
+    """Creates the Sun's inner corona (K-corona) shell."""
+    x, y, z = create_sphere_points(INNER_CORONA_RADII * SOLAR_RADIUS_AU, n_points=20)
+    r_info = INNER_CORONA_RADII * SOLAR_RADIUS_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='rgb(0, 0, 255)', opacity=0.45),
+        name='Sun: Inner Corona',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(0, 0, 255)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[inner_corona_info_hover],
+        customdata=['Sun: Inner Corona'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
+
+def create_sun_streamer_belt_shell():
+    """
+    Visible white-light corona / helmet streamer belt: ~4-6 solar radii.
+    This is the corona seen during total solar eclipses. Distinct from the
+    Alfven surface (plasma boundary) and the extended F-corona (dust-scattered).
+    """
+    x, y, z = create_sphere_points(STREAMER_BELT_RADII * SOLAR_RADIUS_AU, n_points=20)
+    r_info = STREAMER_BELT_RADII * SOLAR_RADIUS_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='rgb(255, 200, 80)', opacity=0.45),
+        name='Sun: Streamer Belt (Visible Corona)',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(255, 200, 80)', opacity=0.95,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[streamer_belt_info_hover],
+        customdata=['Sun: Streamer Belt (Visible Corona)'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
+
+def create_sun_roche_limit_shell():
+    """
+    Fluid Roche limit for cometary bodies: ~3.45 solar radii (~0.016 AU).
+    d = 2.44 * R_sun * (rho_sun / rho_comet)^(1/3)
+    rho_sun=1408, rho_comet=500 kg/m^3.
+    Inside this shell tidal forces overcome a fluid body's self-gravity --
+    but tensile strength allows survival inside it (Ikeya-Seki, Great Comet of 1843).
+    MAPS C/2026 A1 disintegrated at 8.33 R_sun (0.039 AU) -- OUTSIDE this shell.
+    """
+    x, y, z = create_sphere_points(ROCHE_LIMIT_RADII * SOLAR_RADIUS_AU, n_points=20)
+    r_info = ROCHE_LIMIT_RADII * SOLAR_RADIUS_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='rgb(200, 60, 60)', opacity=0.5),
+        name='Sun: Roche Limit (Comets)',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(200, 60, 60)', opacity=0.95,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[roche_limit_info_hover],
+        customdata=['Sun: Roche Limit (Comets)'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
+
+def create_sun_alfven_surface_shell():
+    """
+    Alfven surface: the true outer boundary of the solar corona (~18.8 solar radii,
+    ~0.087 AU). Beyond this surface, plasma can no longer communicate back to the Sun --
+    the corona becomes the solar wind.
+    Measured directly by NASA's Parker Solar Probe on April 28, 2021.
+    MAPS C/2026 A1 crossed inward ~April 3, 2026 -- ~20 hours before disintegration.
+    """
+    x, y, z = create_sphere_points(ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU, n_points=20)
+    r_info = ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.5, color='rgb(0, 200, 200)', opacity=0.35),
+        name='Sun: Alfven Surface',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(0, 200, 200)', opacity=0.95,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[alfven_surface_info_hover],
+        customdata=['Sun: Alfven Surface'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_chromosphere_shell():
     """Creates the Sun's chromosphere shell."""
-    x, y, z = create_sphere_points(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU, n_points=60)
-    
-    text_array = [chromosphere_info_hover for _ in range(len(x))]
-    customdata_array = ["Sun: Chromosphere" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=1.25,
-                color='rgb(30, 144, 255)',
-                opacity=0.2
-            ),
-            name='Sun: Chromosphere',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    return traces
+    x, y, z = create_sphere_points(CHROMOSPHERE_RADII * SOLAR_RADIUS_AU, n_points=25)
+    r_info = CHROMOSPHERE_RADII * SOLAR_RADIUS_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=3.0, color='rgb(30, 144, 255)', opacity=0.5),
+        name='Sun: Chromosphere',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(30, 144, 255)', opacity=0.95,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[chromosphere_info_hover],
+        customdata=['Sun: Chromosphere'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_photosphere_shell():
-    """Creates the Sun's photosphere shell."""
-    x, y, z = create_sphere_points(SOLAR_RADIUS_AU, n_points=60)
-    
-    text_array = [photosphere_info_hover for _ in range(len(x))]
-    customdata_array = ["Sun: Photosphere" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=7.0,
-                color='rgb(255, 244, 214)',
-                opacity=1.0
-            ),
-            name='Sun: Photosphere',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    return traces
+    """Creates the Sun's photosphere shell (the visible solar surface)."""
+    x, y, z = create_sphere_points(SOLAR_RADIUS_AU, n_points=25)
+    r_info = SOLAR_RADIUS_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=7.0, color='rgb(255, 244, 214)', opacity=1.0),
+        name='Sun: Photosphere',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(255, 244, 214)', opacity=0.95,
+                    symbol='cross', line=dict(color='gray', width=1)),
+        name='',
+        text=[photosphere_info_hover],
+        customdata=['Sun: Photosphere'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_radiative_shell():
     """Creates the Sun's radiative zone shell."""
-    x, y, z = create_sphere_points(RADIATIVE_ZONE_AU, n_points=60)
-    
-    text_array = [radiative_zone_info_hover for _ in range(len(x))]
-    customdata_array = ["Sun: Radiative Zone" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=7,
-                color='rgb(30, 144, 255)',
-                opacity=1.0
-            ),
-            name='Sun: Radiative Zone',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    return traces
+    x, y, z = create_sphere_points(RADIATIVE_ZONE_AU, n_points=25)
+    r_info = RADIATIVE_ZONE_AU * 1.05
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=7, color='rgb(30, 144, 255)', opacity=1.0),
+        name='Sun: Radiative Zone',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(30, 144, 255)', opacity=0.95,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[radiative_zone_info_hover],
+        customdata=['Sun: Radiative Zone'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_core_shell():
     """Creates the Sun's core shell."""
-    x, y, z = create_sphere_points(CORE_AU, n_points=60)
-    
-    text_array = [core_info_hover for _ in range(len(x))]
-    customdata_array = ["Sun: Core" for _ in range(len(x))]
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=10,
-                color='rgb(70, 130, 180)',
-                opacity=1.0
-            ),
-            name='Sun: Core',
-            text=text_array,
-            customdata=customdata_array,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ),
-    ]
-    
-    return traces
+    x, y, z = create_sphere_points(CORE_AU, n_points=25)
+    r_info = CORE_AU * 1.05
 
-import numpy as np
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(size=10, color='rgb(70, 130, 180)', opacity=1.0),
+        name='Sun: Core',
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(70, 130, 180)', opacity=0.95,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[core_info_hover],
+        customdata=['Sun: Core'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
+
+# ============================================================================
+# PARTICLE CLOUD FUNCTIONS
+# These are not sphere shells -- they use random point generation for visual
+# effect. Same pattern applied: hoverinfo='skip' on all cloud points,
+# single cross info marker at a representative north-pole position.
+# Point density is unchanged (it defines the visual character of these objects).
+# ============================================================================
+
 import plotly.graph_objs as go
 from planet_visualization_utilities import create_sphere_points, SOLAR_RADIUS_AU
 
@@ -1131,60 +1366,56 @@ def create_sun_hills_cloud_torus(inner_radius=2000, outer_radius=20000, thicknes
     - outer_radius: Outer boundary in AU (default: 20000)
     - thickness_ratio: Ratio of torus thickness to major radius (default: 0.3)
     """
-    # Major radius (center to tube center)
     major_radius = (inner_radius + outer_radius) / 2
-    # Minor radius (tube thickness)
     minor_radius = (outer_radius - inner_radius) / 2 * thickness_ratio
     
-    # Parametric equations for torus
     n_points = 60
-    u = np.linspace(0, 2*np.pi, n_points)  # Around the tube
-    v = np.linspace(0, 2*np.pi, n_points)  # Around the major radius
-    
+    u = np.linspace(0, 2*np.pi, n_points)
+    v = np.linspace(0, 2*np.pi, n_points)
     u, v = np.meshgrid(u, v)
     
-    # Add some randomness to make it less perfect
     noise_factor = 0.1
     radius_variation = 1 + noise_factor * np.random.normal(0, 1, u.shape)
     
     x = (major_radius + minor_radius * np.cos(u)) * np.cos(v) * radius_variation
     y = (major_radius + minor_radius * np.cos(u)) * np.sin(v) * radius_variation
-    z = minor_radius * np.sin(u) * radius_variation * 0.5  # Flatten slightly
+    z = minor_radius * np.sin(u) * radius_variation * 0.5
     
-    # Flatten the arrays to 1D
     x_flat = x.flatten()
     y_flat = y.flatten()
     z_flat = z.flatten()
-    
-    # Create text and customdata arrays with same length as coordinates    
-    text_array = ['Hills Cloud (Inner Oort): Disk-like structure<br>' 
-                  '2,000-20,000 AU<br>'
-                  'More tightly bound to Solar System<br>'
-                  'Source of Jupiter-family comets<br>'
-                  'Toroidal shape due to galactic tides'] * len(x_flat)
-    customdata_array = ['Hills Cloud Torus'] * len(x_flat)
 
-    # Create the Plotly trace object
-    trace = go.Scatter3d(
-        x=x_flat, 
-        y=y_flat, 
-        z=z_flat,
+    hills_hover = (
+        'Hills Cloud (Inner Oort): Disk-like structure<br>'
+        '2,000-20,000 AU<br>'
+        'More tightly bound to Solar System<br>'
+        'Source of Jupiter-family comets<br>'
+        'Toroidal shape due to galactic tides'
+    )
+
+    shell_trace = go.Scatter3d(
+        x=x_flat, y=y_flat, z=z_flat,
         mode='markers',
-        marker=dict(
-            size=1.5,
-            color='rgb(173, 216, 230)',  # Light blue
-            opacity=0.4,
-            symbol='circle'
-        ),
+        marker=dict(size=1.5, color='rgb(173, 216, 230)', opacity=0.4, symbol='circle'),
         name='Hills Cloud (Inner Oort - Toroidal)',
-        text=text_array,
-        customdata=customdata_array,
-        hovertemplate='%{text}<extra></extra>',
+        hoverinfo='skip',
         showlegend=True
     )
-    
-    # Return a list containing the trace (consistent with other shell functions)
-    return [trace]
+    # Info marker at north pole of torus (z = minor_radius above major_radius)
+    r_info = major_radius + minor_radius * 1.05
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(173, 216, 230)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[hills_hover],
+        customdata=['Hills Cloud Torus'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=15):
     """
@@ -1194,7 +1425,6 @@ def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=1
     points_x, points_y, points_z = [], [], []
     
     for i in range(n_clumps):
-        # Random clump center
         clump_radius = np.random.uniform(radius_min, radius_max)
         theta = np.random.uniform(0, 2*np.pi)
         phi = np.random.uniform(-np.pi/2, np.pi/2)
@@ -1203,13 +1433,11 @@ def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=1
         clump_center_y = clump_radius * np.cos(phi) * np.sin(theta)
         clump_center_z = clump_radius * np.sin(phi)
         
-        # Generate points around clump center
         n_points_in_clump = np.random.randint(50, 200)
-        clump_size = np.random.uniform(5000, 15000)  # AU
+        clump_size = np.random.uniform(5000, 15000)
         
         for j in range(n_points_in_clump):
-            # Random point within clump
-            r = clump_size * np.random.beta(2, 5)  # Beta distribution for more realistic clustering
+            r = clump_size * np.random.beta(2, 5)
             theta_local = np.random.uniform(0, 2*np.pi)
             phi_local = np.random.uniform(-np.pi/2, np.pi/2)
             
@@ -1217,44 +1445,45 @@ def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=1
             y = clump_center_y + r * np.cos(phi_local) * np.sin(theta_local)
             z = clump_center_z + r * np.sin(phi_local)
             
-            # Ensure point is within Oort Cloud bounds
             distance = np.sqrt(x**2 + y**2 + z**2)
             if radius_min <= distance <= radius_max:
                 points_x.append(x)
                 points_y.append(y)
                 points_z.append(z)
     
-    # Convert to numpy arrays
     x = np.array(points_x)
     y = np.array(points_y)
     z = np.array(points_z)
-    
-    # Create text and customdata arrays
-    text_array = ['Outer Oort Cloud: Clumpy, asymmetric structure<br>' 
-                  '20,000-100,000+ AU<br>' 
-                  'Source of long-period comets<br>' 
-                  'Influenced by galactic tides and stellar encounters'] * len(x)
-    customdata_array = ['Outer Oort Cloud'] * len(x)
-    
-    # Create the Plotly trace
-    trace = go.Scatter3d(
+
+    clumpy_hover = (
+        'Outer Oort Cloud: Clumpy, asymmetric structure<br>'
+        '20,000-100,000+ AU<br>'
+        'Source of long-period comets<br>'
+        'Influenced by galactic tides and stellar encounters'
+    )
+
+    shell_trace = go.Scatter3d(
         x=x, y=y, z=z,
         mode='markers',
-        marker=dict(
-            size=1.0,
-            color='rgb(255, 255, 255)',  # White
-            opacity=0.3,
-            symbol='circle'
-        ),
+        marker=dict(size=1.0, color='rgb(255, 255, 255)', opacity=0.3, symbol='circle'),
         name='Outer Oort Cloud (Clumpy)',
-        text=text_array,
-        customdata=customdata_array,
-        hovertemplate='%{text}<extra></extra>',
+        hoverinfo='skip',
         showlegend=True
     )
-    
-    # Return a list containing the trace (consistent with other shell functions)
-    return [trace]
+    r_info = radius_max * 1.05
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(255, 255, 255)', opacity=0.9,
+                    symbol='cross', line=dict(color='gray', width=1)),
+        name='',
+        text=[clumpy_hover],
+        customdata=['Outer Oort Cloud'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_sun_galactic_tide(radius=50000, n_points=2000):
     """
@@ -1262,47 +1491,48 @@ def create_sun_galactic_tide(radius=50000, n_points=2000):
     The galactic plane creates asymmetry in the distribution.
     FIXED VERSION - Returns proper Plotly trace objects.
     """
-    # Generate points in spherical coordinates
     r = np.random.normal(radius, radius*0.3, n_points)
-    r = np.clip(r, radius*0.5, radius*1.5)  # Keep within reasonable bounds
+    r = np.clip(r, radius*0.5, radius*1.5)
     
     theta = np.random.uniform(0, 2*np.pi, n_points)
     
-    # Galactic tide effect: fewer objects near galactic plane (z=0)
-    # Use a distribution that's depleted near z=0
     phi_weights = np.linspace(-np.pi/2, np.pi/2, 100)
-    weights = 1 + 0.5 * np.abs(np.sin(phi_weights))  # More objects away from galactic plane
+    weights = 1 + 0.5 * np.abs(np.sin(phi_weights))
     phi = np.random.choice(phi_weights, n_points, p=weights/weights.sum())
     
     x = r * np.cos(phi) * np.cos(theta)
     y = r * np.cos(phi) * np.sin(theta)
     z = r * np.sin(phi)
-    
-    # Create text and customdata arrays
-    text_array = ['Galactic Tide Influenced Objects<br>' 
-                  'Asymmetric distribution due to Milky Way\'s gravity<br>' 
-                  'Objects avoid galactic plane<br>~50,000 AU typical distance'] * len(x)
-    customdata_array = ['Galactic Tide Region'] * len(x)
-    
-    # Create the Plotly trace
-    trace = go.Scatter3d(
+
+    tide_hover = (
+        'Galactic Tide Influenced Objects<br>'
+        'Asymmetric distribution due to Milky Way\'s gravity<br>'
+        'Objects avoid galactic plane<br>'
+        '~50,000 AU typical distance'
+    )
+
+    shell_trace = go.Scatter3d(
         x=x, y=y, z=z,
         mode='markers',
-        marker=dict(
-            size=0.8,
-            color='rgb(255, 182, 193)',  # Light pink
-            opacity=0.2,
-            symbol='diamond'
-        ),
+        marker=dict(size=0.8, color='rgb(255, 182, 193)', opacity=0.2, symbol='circle'),
         name='Galactic Tide Region',
-        text=text_array,
-        customdata=customdata_array,
-        hovertemplate='%{text}<extra></extra>',
+        hoverinfo='skip',
         showlegend=True
     )
-    
-    # Return a list containing the trace (consistent with other shell functions)
-    return [trace]
+    r_info = radius * 1.5 * 1.05
+    info_trace = go.Scatter3d(
+        x=[0], y=[0], z=[r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(255, 182, 193)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        text=[tide_hover],
+        customdata=['Galactic Tide Region'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    return [shell_trace, info_trace]
+
 
 def create_enhanced_oort_cloud_visualization():
     """
@@ -1378,15 +1608,12 @@ def create_oort_cloud_density_visualization():
     """
     traces = []
     
-    # Create multiple density layers
     radii = [5000, 10000, 20000, 40000, 70000, 100000]
-    densities = [0.8, 0.6, 0.5, 0.3, 0.2, 0.1]  # Relative densities
+    densities = [0.8, 0.6, 0.5, 0.3, 0.2, 0.1]
     
     for i, (radius, density) in enumerate(zip(radii, densities)):
-        # Number of points proportional to density
         n_points = int(500 * density)
         
-        # Generate points with some randomness
         theta = np.random.uniform(0, 2*np.pi, n_points)
         phi = np.random.uniform(-np.pi/2, np.pi/2, n_points)
         r = np.random.normal(radius, radius*0.1, n_points)

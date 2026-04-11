@@ -4,15 +4,17 @@ Scenario Module: Parameterized Timeline Snapshots
 
 ARCHITECTURE:
 -------------
-Seven dated snapshots tell the story of a developing 1-in-500-year heat event:
+Nine dated snapshots tell the complete story of a 1-in-500-year heat event:
 
-  March 14 - "The Spark"       : NWS issues first Extreme Heat Watches (CSI 2)
-  March 17 - "The Pivot"       : Heat dome locks in, anomaly jumps to dangerous (CSI 3)
-  March 18 - "Records Fall"    : Phoenix earliest 100+F, Las Vegas shatters March record (CSI 4)
-  March 20 - "The Peak"        : Martinez Lake 112F, Yuma 109F, national records (CSI 5)
-  March 21 - "Eastward Surge"  : 14 states break all-time March records (CSI 5)
-  March 22 - "The Crest"       : Pulse 1 crests at Mississippi Valley; 1500+ records (CSI 5)
-  March 25 - "Round Two"       : Pulse 2 rebuilds; Denver breaks own record again (CSI 5)
+  March 14 - "The Spark"        : NWS issues first Extreme Heat Watches (CSI 2)
+  March 17 - "The Pivot"        : Heat dome locks in, anomaly jumps to dangerous (CSI 3)
+  March 18 - "Records Fall"     : Phoenix earliest 100+F, Las Vegas shatters March record (CSI 4)
+  March 20 - "The Peak"         : Martinez Lake 112F, Yuma 109F, national records (CSI 5)
+  March 21 - "Eastward Surge"   : 14 states break all-time March records (CSI 5)
+  March 22 - "The Crest"        : Pulse 1 crests at Mississippi Valley; 1500+ records (CSI 5)
+  March 25 - "Round Two"        : Pulse 2 rebuilds; Denver breaks own record again (CSI 5)
+  March 26 - "Pulse 2 Crests"   : OK 106F, TX 108F, KS 104F; 17 state records (CSI 5)
+  March 30 - "The Reach"        : Chicago 81F; dome touches Great Lakes; event ends (CSI 4)
 
 Each snapshot uses a shared parameterized fetch function. The date drives:
   - Anomaly magnitude (builds from 15F to 32F over the arc)
@@ -311,6 +313,46 @@ RECORD_STATIONS = {
         'first_date': '2026-03-25',
         'note': 'Breaks own all-time March record AGAIN (94F > 91F from Mar 21)'
     },
+
+    # --- March 26: Pulse 2 crests ---
+    'Beaver_OK': {
+        'lat': 36.8164, 'lon': -100.5198,
+        'air_temp_f': 106.0, 'normal_high_f': 65.0, 'anomaly': 41.0,
+        'first_date': '2026-03-26',
+        'note': 'OK state March record (broke 104F at Frederick, 1971)'
+    },
+    'Rio_Grande_City_TX': {
+        'lat': 26.3797, 'lon': -98.8203,
+        'air_temp_f': 108.0, 'normal_high_f': 82.0, 'anomaly': 26.0,
+        'first_date': '2026-03-26',
+        'note': 'Ties TX all-time March record (108F, 1954 and 1902)'
+    },
+    'Ashland_KS': {
+        'lat': 37.1886, 'lon': -99.7654,
+        'air_temp_f': 104.0, 'normal_high_f': 62.0, 'anomaly': 42.0,
+        'first_date': '2026-03-26',
+        'note': 'KS state March record AGAIN (104F > 101F from Mar 21)'
+    },
+    'Carlsbad_NM_pulse2': {
+        'lat': 32.4207, 'lon': -104.2288,
+        'air_temp_f': 103.0, 'normal_high_f': 75.0, 'anomaly': 28.0,
+        'first_date': '2026-03-26',
+        'note': 'NM state March record AGAIN (103F > 100F Mar 21 > 99F Mar 20)'
+    },
+    'Morrisonville_IL': {
+        'lat': 39.4200, 'lon': -89.4562,
+        'air_temp_f': 94.0, 'normal_high_f': 55.0, 'anomaly': 39.0,
+        'first_date': '2026-03-26',
+        'note': 'IL state March record tied (94F, matches Harrisburg 1929)'
+    },
+
+    # --- March 30: Final eastward reach ---
+    'Chicago_IL': {
+        'lat': 41.9742, 'lon': -87.9073,
+        'air_temp_f': 81.0, 'normal_high_f': 49.0, 'anomaly': 32.0,
+        'first_date': '2026-03-30',
+        'note': 'Daily March 30 record (broke 79F from 1986); heat dome reaches Great Lakes'
+    },
 }
 
 
@@ -396,7 +438,7 @@ SNAPSHOT_CONFIGS = {
         'baseline_center_lon': -105.0,
         'max_anomaly_clip': 42.0,
         'grid_lat_range': (25.0, 50.0),
-        'grid_lon_range': (-125.0, -88.0),
+        'grid_lon_range': (-125.0, -65.0),  # Pacific to Atlantic
         'grid_resolution': 0.5,
     },
     '2026-03-25': {
@@ -409,7 +451,33 @@ SNAPSHOT_CONFIGS = {
         'baseline_center_lon': -108.0,
         'max_anomaly_clip': 35.0,
         'grid_lat_range': (25.0, 50.0),
-        'grid_lon_range': (-125.0, -88.0),
+        'grid_lon_range': (-125.0, -65.0),  # Pacific to Atlantic
+        'grid_resolution': 0.5,
+    },
+    '2026-03-26': {
+        'label': 'Pulse 2 Crests',
+        'csi_level': 5,
+        'csi_description': '5x more likely due to climate change',
+        'baseline_center_anomaly': 22.0,   # Southern Plains peak
+        'baseline_spread': 8.0,            # Very wide
+        'baseline_center_lat': 34.0,       # Shifted south for OK/TX
+        'baseline_center_lon': -102.0,
+        'max_anomaly_clip': 45.0,
+        'grid_lat_range': (25.0, 50.0),
+        'grid_lon_range': (-125.0, -65.0),  # Pacific to Atlantic
+        'grid_resolution': 0.5,
+    },
+    '2026-03-30': {
+        'label': 'The Reach',
+        'csi_level': 4,
+        'csi_description': '4x more likely due to climate change',
+        'baseline_center_anomaly': 14.0,   # Dome weakening
+        'baseline_spread': 9.0,            # Very wide but diffuse
+        'baseline_center_lat': 38.0,       # Shifted northeast
+        'baseline_center_lon': -95.0,      # Centered on Plains/Midwest
+        'max_anomaly_clip': 35.0,
+        'grid_lat_range': (25.0, 50.0),
+        'grid_lon_range': (-125.0, -65.0),  # Pacific to Atlantic
         'grid_resolution': 0.5,
     },
 }
@@ -845,6 +913,22 @@ def _build_briefing(date_str, config):
             'Lubbock TX forecast 100F. 200+ daily records forecast nationwide. '
             'NWS: 42.5M people under CSI 3+ conditions.'
         ),
+        '2026-03-26': (
+            'Pulse 2 crests. Oklahoma 106F (new state March record). '
+            'Texas ties all-time March record at 108F. '
+            'Kansas 104F (broke its own record set 5 days ago). '
+            'Illinois 94F (ties state March record from 1929). '
+            '17 states with broken all-time March records. '
+            'Event total: 17 state records, 1500+ station records.'
+        ),
+        '2026-03-30': (
+            'The final reach. Heat dome touches Great Lakes before '
+            'cold front arrives. Chicago 81F (daily March 30 record). '
+            'March 2026 confirmed as warmest March on record for the US, '
+            'beating 2012 by half a degree F. Warmest Nov-Mar on record. '
+            '17 state records. One of six most astonishing weather events '
+            'of the century (Yale Climate Connections).'
+        ),
     }
 
     detail = details.get(date_str, '')
@@ -912,6 +996,22 @@ def _build_description(date_str, config):
             f'Pulse 2 rebuilds. Denver 87F breaks own all-time March record again. '
             f'Las Vegas 98F, Albuquerque 94F, Lubbock TX 100F. '
             f'200+ daily records forecast. 42.5M under CSI 3+. '
+            f'Climate Shift Index: Level {csi}.'
+        ),
+        '2026-03-26': (
+            f'Western Heat Dome March 26, 2026: {label}. '
+            f'Oklahoma 106F, Texas 108F (ties all-time March), '
+            f'Kansas 104F (broke own 5-day-old record). '
+            f'Illinois 94F (ties 1929 state March record). '
+            f'17 states with all-time March records broken. '
+            f'Climate Shift Index: Level {csi}.'
+        ),
+        '2026-03-30': (
+            f'Western Heat Dome March 30, 2026: {label}. '
+            f'Final snapshot. Chicago 81F (daily March record). '
+            f'Heat dome reaches Great Lakes before cold front ends event. '
+            f'March 2026: warmest March on record (US), warmest Nov-Mar on record. '
+            f'17 state records, 1500+ station records. '
             f'Climate Shift Index: Level {csi}.'
         ),
     }
@@ -1247,6 +1347,176 @@ def _build_encyclopedia(date_str, config):
             'already forecast. The net result is extended fossil fuel '
             'generation during what should be a low-demand shoulder season.'
         ),
+
+        '2026-03-26': (
+            '<b>What Happened</b><br>'
+            'Pulse 2 crested harder than Pulse 1 in the southern corridor. '
+            'Oklahoma hit 106F at Beaver -- a new state March record, breaking '
+            '104F from Frederick in 1971. Texas tied its all-time March record '
+            'at 108F. Kansas broke its own record for the second time in five '
+            'days: 104F at Ashland, up from 101F at Phillipsburg on March 21. '
+            'Carlsbad NM hit 103F, its third consecutive March record (100F, '
+            '102F, 103F). Illinois tied its state March record at 94F, '
+            'confirming the heat dome had formally reached the Midwest. The '
+            'total: 17 states with all-time March records broken, over 1,500 '
+            'station records, and the warmest November-through-March period '
+            'in recorded US history is now a foregone conclusion.'
+            '<br><br>'
+
+            '<b>The Meteorological Engine</b><br>'
+            'The mechanism driving this event is an omega block -- a jet '
+            'stream configuration shaped like the Greek letter omega. A '
+            'massive upper-level ridge of high pressure sits at the center, '
+            'flanked by low-pressure troughs on either side. The '
+            'configuration is remarkably stable: the surrounding lows lock '
+            'the central high in place, resisting the normal west-to-east '
+            'progression of weather systems.<br><br>'
+            'At the 500-millibar level (~18,000 feet), geopotential heights '
+            'reached 3.5 to 4 standard deviations above normal -- the '
+            'strongest mid-tropospheric ridge ever observed in the '
+            'southwestern US in March. Subsiding air within the high '
+            'compresses and heats adiabatically as it descends, suppressing '
+            'cloud formation and allowing intense solar radiation to heat '
+            'the surface unopposed. The dome acts as a lid: warm air rises '
+            'but is forced back down by the high pressure above, creating '
+            'a self-reinforcing feedback.<br><br>'
+            'The two-pulse structure occurs because the omega block weakens '
+            'slightly as shortwave troughs erode its edges (the brief '
+            'Sunday March 23 cooldown), then re-strengthens as the ridge '
+            'rebuilds. This is not two separate events -- it is one '
+            'persistent blocking pattern with internal oscillation. The '
+            'eastward creep of the heat reflects the ridge axis slowly '
+            'migrating, pulling subtropical air into regions progressively '
+            'further from the original center.'
+            '<br><br>'
+
+            '<b>Climate Attribution</b><br>'
+            f'Climate Shift Index: Level {csi} (maximum). '
+            'The omega block pattern itself is a natural feature of '
+            'atmospheric dynamics -- blocking events have occurred throughout '
+            'the observational record. What climate change contributes is '
+            'the baseline: the atmosphere is 1.3C warmer than pre-industrial '
+            'levels, so every blocking event starts from a higher floor. '
+            'WWA estimated this event is 4.7-7.2F (2.6-4C) hotter than it '
+            'would have been without anthropogenic warming. The blocking '
+            'creates the pattern; the warming sets the magnitude. Both are '
+            'necessary; neither alone is sufficient.'
+            '<br><br>'
+
+            '<b>Anomaly vs Records</b><br>'
+            'The ERA5 anomaly field shows 25-34F above normal extending from '
+            'the Pacific coast to the Appalachians -- a continental-scale '
+            'event. Yet all-time March state records concentrate in the '
+            'interior West and Plains. The distinction: anomaly measures '
+            'departure from the local climatological normal for that date. '
+            'A record requires exceeding the highest temperature ever '
+            'observed in any March. The Southeast and Appalachia have a '
+            'history of warm March days from subtropical air surges, so '
+            'their existing March ceilings are already high. The interior '
+            'West and Plains, normally cold in March, have lower ceilings '
+            'to break. The anomaly tells you the whole continent is '
+            'abnormally hot. The pins tell you where the heat exceeded '
+            'anything ever measured.'
+            '<br><br>'
+
+            '<b>Earth System Context</b><br>'
+            '<i>Climate Change:</i> CSI 5 covered approximately 3 million '
+            'square kilometers (29% of the continental US) on March 20 -- '
+            'the largest CSI 5 extent on record since the index began in '
+            '1970. The event physical area may rival the 2012 Midwest heat '
+            'wave and the 2021 Pacific Northwest heat dome, but spans a '
+            'wider geographic range than either.<br><br>'
+            '<i>Freshwater Change:</i> Snowpack across the West is at or '
+            'near record lows for late March. Colorado snowpack is at 25% '
+            'of normal in the south, 50% in the north. Water supply and '
+            'hydropower impacts are expected through summer, especially '
+            'across the Colorado River Basin.<br><br>'
+            '<i>Land System Change:</i> The Morrill County fire in Nebraska '
+            'burned over 640,000 acres -- the largest wildfire in state '
+            'history. Fire preconditioning now extends from California to '
+            'the Great Plains. Spring phenology is 20-30 days ahead of '
+            'normal across the Central Plains.<br><br>'
+            '<i>Novel Entities (Energy System Feedback):</i> The two-pulse '
+            'ratchet forced utilities to maintain emergency generation '
+            'throughout the event. The transition from La Nina to ENSO '
+            'neutral, with signs of a developing strong El Nino, suggests '
+            'the background warming trend will accelerate through 2026-27.'
+        ),
+
+        '2026-03-30': (
+            '<b>What Happened</b><br>'
+            'The heat dome made its final eastward reach. Chicago hit 81F '
+            'at O\'Hare Airport, breaking the March 30 daily record of 79F '
+            'set in 1986. Thunderstorms and a cold front followed, marking '
+            'the meteorological end of the event that started in the Arizona '
+            'desert sixteen days earlier. The omega block that had locked '
+            'the jet stream in place since mid-March finally lost coherence '
+            'as northern-stream disturbances broke through.'
+            '<br><br>'
+
+            '<b>The Final Tally</b><br>'
+            'March 2026 was confirmed as the warmest March on record for the '
+            'United States, beating the previous record (2012) by approximately '
+            'half a degree Fahrenheit. Yale Climate Connections classified the '
+            'event as one of the six most astonishing weather events of the '
+            'century. The numbers: 17 states broke all-time March temperature '
+            'records. Over 1,500 individual station records fell. The national '
+            'March temperature record was broken on three consecutive days '
+            '(March 18-20), reaching 112F. Some locations broke not just March '
+            'but April records -- and in a few cases, May records. It was the '
+            'warmest November-through-March period in recorded US history.'
+            '<br><br>'
+
+            '<b>Climate Attribution</b><br>'
+            f'Climate Shift Index: Level {csi}. '
+            'As the event concludes, the attribution picture is clear. '
+            'World Weather Attribution: "virtually impossible without '
+            'human-induced climate change." Climate change added 4.7-7.2F '
+            'to temperatures. Daniel Swain (Weather West) noted that by '
+            'statistical anomaly metrics, this event was comparable to the '
+            'June 2021 Pacific Northwest heat dome -- but occurred three '
+            'months earlier in the year, when the atmosphere has a '
+            'thermodynamic disadvantage (shorter days, weaker sun, snow '
+            'cover still present). The fact that it happened anyway, '
+            '"despite all the seasonal factors working against it," is '
+            'the measure of how much the baseline has shifted.'
+            '<br><br>'
+
+            '<b>Earth System Context</b><br>'
+            '<i>Climate Change:</i> March 2026 was the warmest March on '
+            'record for at least a third, and possibly half, of the '
+            'continental United States. The warmth was not confined to the '
+            'heat dome\'s footprint -- even the first half of March, before '
+            'the extreme event began, was notably mild nationwide. Winter '
+            '2025-26 was the warmest on record across the western and '
+            'central US. The event sits atop a warming trend that is '
+            'raising the floor for every subsequent extreme.<br><br>'
+            '<i>Freshwater Change:</i> The cascading impacts will outlast '
+            'the heat. Record-low snowpack means reduced summer streamflow, '
+            'lower reservoir levels, and water shortages. Lake Mead and '
+            'Lake Powell are at 30-year lows. The Colorado River Basin '
+            'faces its most stressed water year in memory. Denver declared '
+            'Stage 1 drought restrictions during the event.<br><br>'
+            '<i>Land System Change:</i> Nationally, 13,658 wildfires have '
+            'been recorded in 2026 through late March -- nearly double the '
+            '10-year average. Over 1.4 million acres have burned -- triple '
+            'the average. The traditional fire season has not yet begun. '
+            'Nebraska\'s Morrill County fire (640,000+ acres) was the '
+            'largest in state history.<br><br>'
+            '<i>Biosphere Integrity:</i> Spring leaf-out ran 20-30 days '
+            'ahead of normal across the Central Plains and Rockies, with '
+            'some Montana locations 30+ days early. This phenological shift '
+            'exposes new growth to late frost risk and disrupts pollinator '
+            'synchronization. Winter wheat across the southern Plains faced '
+            'heat stress during vernalization -- a critical yield-limiting '
+            'period.<br><br>'
+            '<i>Looking Forward:</i> A strong El Nino is developing for '
+            '2026-27, which will add further warming to an already '
+            'record-warm baseline. The impacts of March 2026 -- depleted '
+            'snowpack, early fire preconditioning, stressed water systems, '
+            'disrupted phenology -- are not endpoints. They are initial '
+            'conditions for the summer ahead.'
+        ),
     }
 
     body = entries.get(date_str, '')
@@ -1261,12 +1531,19 @@ def _build_encyclopedia(date_str, config):
         + stations_html +
         '<br><br>'
         '<b>Data &amp; Sources</b><br>'
-        'Temperature data: Preliminary synthetic grid seeded with confirmed '
-        'NWS station records. ERA5 reanalysis via CDS API when available.<br>'
-        'Attribution: World Weather Attribution rapid analysis; '
-        'Climate Central Climate Shift Index.<br>'
+        'Visualizations utilize modified Copernicus Climate Change Service '
+        '(C3S) information [2026]. Temperature anomalies derived from ERA5 '
+        'hourly 2m temperature data (Hersbach et al., 2020), computed as '
+        'daily maximum departure from 1991-2020 climatological baseline. '
+        'Neither the European Commission nor ECMWF is responsible for any '
+        'use that may be made of the information it contains.<br>'
+        'Station records: NWS Preliminary Record Event Reports; NOAA '
+        'National Centers for Environmental Information (NCEI).<br>'
+        'Attribution: World Weather Attribution rapid analysis (March 20, '
+        '2026); Climate Central Climate Shift Index (CSI).<br>'
         'Planetary boundaries: Rockstrom et al. (2009), '
-        'Richardson et al. (2023).'
+        'Richardson et al. (2023).<br>'
+        'Visualization engine: Paloma\'s Orrery Earth System Generator.'
     )
     return encyclopedia
 
@@ -1315,7 +1592,7 @@ def _make_scenario(date_str):
         'values': [],
     }
 
-# The seven snapshots, ordered chronologically
+# The nine snapshots, ordered chronologically
 SCENARIOS = [
     _make_scenario('2026-03-14'),
     _make_scenario('2026-03-17'),
@@ -1324,6 +1601,8 @@ SCENARIOS = [
     _make_scenario('2026-03-21'),
     _make_scenario('2026-03-22'),
     _make_scenario('2026-03-25'),
+    _make_scenario('2026-03-26'),
+    _make_scenario('2026-03-30'),
 ]
 
 
@@ -1351,11 +1630,11 @@ def generate_all(engine_module=None):
             return
 
     print("=" * 60)
-    print("WESTERN HEAT DOME MARCH 2026: Generating all 7 snapshots")
+    print("WESTERN HEAT DOME MARCH 2026: Generating all 9 snapshots")
     print("=" * 60)
 
     for i, scenario in enumerate(SCENARIOS):
-        print(f"\n--- [{i+1}/7] {scenario['name']} ---")
+        print(f"\n--- [{i+1}/9] {scenario['name']} ---")
         print(f"    Date: {scenario['date']}")
         print(f"    CSI:  Level {scenario['csi_level']} ({scenario['csi_description']})")
         print(f"    Label: {scenario['narrative_label']}")
@@ -1379,7 +1658,7 @@ def validate_snapshots():
     Quick validation: build all 5 synthetic fields and report stats.
     Does NOT require the engine -- just tests the fetch/data layer.
     """
-    print("Validating 7 snapshot data fields...\n")
+    print("Validating 9 snapshot data fields...\n")
 
     for scenario in SCENARIOS:
         date_str = scenario['date']

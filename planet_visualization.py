@@ -27,11 +27,19 @@ from solar_visualization_shells import (
     core_info_hover
 )  
 
+from planet_visualization_utilities import (
+    ROCHE_LIMIT_RADII, STREAMER_BELT_RADII, ALFVEN_SURFACE_RADII,
+    OUTER_CORONA_RADII, INNER_CORONA_RADII, CHROMOSPHERE_RADII, SOLAR_RADIUS_AU
+)
+
 from solar_visualization_shells import (create_sun_core_shell,
                                         create_sun_radiative_shell,
                                         create_sun_photosphere_shell,
                                         create_sun_chromosphere_shell,
                                         create_sun_inner_corona_shell,
+                                        create_sun_streamer_belt_shell,
+                                        create_sun_roche_limit_shell,
+                                        create_sun_alfven_surface_shell,                                        
                                         create_sun_outer_corona_shell,
                                         create_sun_termination_shock_shell,
                                         create_sun_heliopause_shell,
@@ -391,6 +399,15 @@ def create_sun_visualization(fig, sun_shell_vars, animate=False, frames=None):
         if sun_shell_vars['outer_corona'].get() == 1:
             traces.extend(create_sun_outer_corona_shell())
             
+        if sun_shell_vars.get('roche_limit') and sun_shell_vars['roche_limit'].get() == 1:
+            traces.extend(create_sun_roche_limit_shell())
+
+        if sun_shell_vars.get('streamer_belt') and sun_shell_vars['streamer_belt'].get() == 1:
+            traces.extend(create_sun_streamer_belt_shell())
+
+        if sun_shell_vars.get('alfven_surface') and sun_shell_vars['alfven_surface'].get() == 1:
+            traces.extend(create_sun_alfven_surface_shell())
+
         if sun_shell_vars['inner_corona'].get() == 1:
             traces.extend(create_sun_inner_corona_shell())
             
@@ -478,6 +495,42 @@ def create_sun_corona_from_distance(fig, sun_shell_vars, sun_position):
             showlegend=True
         ))
     
+    if sun_shell_vars.get('roche_limit') and sun_shell_vars['roche_limit'].get() == 1:
+        radius = ROCHE_LIMIT_RADII * SOLAR_RADIUS_AU
+        x, y, z = create_offset_sphere(radius, n_points=30)
+        fig.add_trace(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(size=0.85, color='rgba(200, 60, 60, 0.3)', opacity=0.3),
+            name='Sun: Roche Limit (Comets)',
+            hovertemplate='Sun: Roche Limit (Comets)<br>~3.45 solar radii<br>Tidal disruption threshold<extra></extra>',
+            showlegend=True
+        ))
+
+    if sun_shell_vars.get('streamer_belt') and sun_shell_vars['streamer_belt'].get() == 1:
+        radius = STREAMER_BELT_RADII * SOLAR_RADIUS_AU
+        x, y, z = create_offset_sphere(radius, n_points=30)
+        fig.add_trace(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(size=0.75, color='rgba(255, 200, 80, 0.25)', opacity=0.25),
+            name='Sun: Streamer Belt (Visible Corona)',
+            hovertemplate='Sun: Streamer Belt<br>~6 solar radii<br>Eclipse white-light corona<extra></extra>',
+            showlegend=True
+        ))
+
+    if sun_shell_vars.get('alfven_surface') and sun_shell_vars['alfven_surface'].get() == 1:
+        radius = ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU
+        x, y, z = create_offset_sphere(radius, n_points=30)
+        fig.add_trace(go.Scatter3d(
+            x=x, y=y, z=z,
+            mode='markers',
+            marker=dict(size=0.7, color='rgba(0, 200, 200, 0.2)', opacity=0.2),
+            name='Sun: Alfven Surface',
+            hovertemplate='Sun: Alfven Surface<br>~18.8 solar radii<br>True corona/solar wind boundary<extra></extra>',
+            showlegend=True
+        ))
+
     if sun_shell_vars.get('chromosphere') and sun_shell_vars['chromosphere'].get() == 1:
         radius = CHROMOSPHERE_RADII * SOLAR_RADIUS_AU
         x, y, z = create_offset_sphere(radius, n_points=30)
@@ -545,6 +598,12 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                     traces.extend(create_sun_chromosphere_shell())
                 elif shell_name == 'inner_corona':
                     traces.extend(create_sun_inner_corona_shell())
+                elif shell_name == 'roche_limit':
+                    traces.extend(create_sun_roche_limit_shell())
+                elif shell_name == 'streamer_belt':
+                    traces.extend(create_sun_streamer_belt_shell())
+                elif shell_name == 'alfven_surface':
+                    traces.extend(create_sun_alfven_surface_shell()) 
                 elif shell_name == 'outer_corona':
                     traces.extend(create_sun_outer_corona_shell())
                 elif shell_name == 'termination_shock':

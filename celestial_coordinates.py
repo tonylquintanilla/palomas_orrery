@@ -484,8 +484,10 @@ def format_radec_hover_component(obj_data, obj_name=None, compact=False):
     if compact:
         return f"RA/Dec: {ra_string}, {dec_string} (apparent, {precision_note}{source_note})"
     else:
-        return (f"Right Ascension: {ra_string} (apparent, {precision_note}{source_note})<br>"
-                f"Declination: {dec_string} (apparent, {precision_note}{source_note})")
+        return (f"Right Ascension: {ra_string}<br>"
+                f"  (apparent, {precision_note}{source_note})<br>"
+                f"Declination: {dec_string}<br>"
+                f"  (apparent, {precision_note}{source_note})")
 
 
 def determine_coordinate_precision(obj_data, obj_name):

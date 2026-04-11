@@ -22,13 +22,18 @@ Usage:
         add_tagged_encounter_markers,
     )
 
-Module created: March 11, 2026
+Module updated: April 2, 2026 with Anthropic's Claude 4.6 
 """
 
 import numpy as np
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
+from astroquery.jplhorizons import Horizons
+from astropy.time import Time
 
+def utc_to_tdb(dt):
+    """Convert UTC datetime to TDB for Horizons queries (~69 second offset)."""
+    return dt + timedelta(seconds=69)
 
 # ============================================================================
 # ENCOUNTER DATABASE
@@ -52,6 +57,33 @@ from datetime import datetime, timedelta
 #   plot_scale_au: Suggested manual scale (AU), None for auto -- Stage B
 
 AU_KM = 149597870.7  # 1 AU in km
+
+# ============================================================================
+# DATE SOURCE CONVENTION
+# ============================================================================
+# Each encounter should include a 'date_source' field:
+#
+#   'authoritative'  -- date is fixed and correct. Use as-is. Never query Horizons.
+#                       Use for: burn times, historical missions, event timestamps
+#                       (TLI, reentry, orbit insertion, sample collection).
+#                       Default when field is absent -- all legacy encounters are safe.
+#
+#   'horizons'       -- date is a planning estimate. Actual time derived from
+#                       Horizons trajectory data via two-pass closest-approach search.
+#                       Falls back to planning estimate if Horizons query fails.
+#                       Use for: proximity minima on missions with OEM data in Horizons
+#                       (closest approach to Moon, Earth flyby, gravity assist perigee).
+#
+#   'planning'       -- date is a planning estimate. Try Horizons derivation,
+#                       fall back gracefully. Log both attempts.
+#                       Use for: future missions not yet in Horizons, or encounters
+#                       where Horizons coverage is uncertain.
+#
+# Rule of thumb:
+#   Is it a moment in time (burn, event)?     -> 'authoritative'
+#   Is it a proximity minimum with OEM data?  -> 'horizons'
+#   Is it a future prediction?                -> 'planning'
+# ============================================================================
 
 SPACECRAFT_ENCOUNTERS = {
 
@@ -140,7 +172,110 @@ SPACECRAFT_ENCOUNTERS = {
         },
     ],
 
-    # Future missions will be added here as we expand beyond the test case.
+
+# ========================================================================
+    # ARTEMIS II  (Horizons ID: -1024)
+    # Launched April 1, 2026 22:35:12 UTC from LC-39B, Kennedy Space Center
+    # Crew: Wiseman (CDR), Glover (PLT), Koch (MS), Hansen (MS, CSA)
+    # Orion capsule "Integrity" -- 10-day lunar free-return mission
+    # Module updated: April 2, 2026 with Anthropic's Claude 4.6
+    # ========================================================================
+    'Artemis II': [
+        {
+            'target': 'Earth',
+            'date': '2026-04-03 00:43:00',    # launch + 1d 1h 8m, TLI burn start
+            'type': 'flyby',                   # Earth departure
+            'dist_km': 70377,                  # apogee raise altitude (km)
+            'dist_au': 70377 / AU_KM,           # ~0.000470 AU
+            'v_kms': None,                     # TBD from trajectory data
+            'date_source': 'authoritative',    # burn time -- not a proximity minimum
+            'label': 'Earth Departure (TLI)',
+            'note': ('After ICPS separation at Apr 2 01:59 UTC, Orion completes an '
+                     'elliptical Earth orbit (2223 x 185 km after perigee raise maneuver '
+                     'at Apr 1 23:25 UTC, apogee raised to 70,377 km at Apr 2 00:23 UTC). '
+                     'A perigee raise burn at Apr 2 11:30 UTC reshapes the orbit. Then '
+                     'the translunar injection burn at Apr 3 00:43 UTC (~8 min duration) '
+                     'sends Orion toward the Moon -- the commit point for the free-return '
+                     'lunar trajectory. Four CubeSats were deployed at Apr 2 03:39 UTC: '
+                     'ATENEA (Argentina), TACHELES (Germany), K-RadCube (South Korea), '
+                     'Space Weather CubeSat-1 (Saudi Arabia).'),
+            'resolution_note': ('Earth departure orbit requires high trajectory point '
+                                'count to resolve. The elliptical orbit before TLI is '
+                                'only ~14 hours -- coarse plotting will not capture it.'),
+            'status': 'planned',
+            'source': 'NASA/JSC',
+            'center': 'Earth',
+            'select_also': ['Moon'],
+            'plot_days': 2,
+            'plot_scale_au': 0.0005,
+            'center_closeup': 'Earth',
+            'plot_days_closeup': 1,
+            'plot_scale_au_closeup': 0.0005,
+        },
+        {
+            'target': 'Moon',
+            'date': '2026-04-07 23:06:00',    # planning estimate -- overridden by Horizons derivation
+            'date_source': 'horizons',         # actual time derived from OEM trajectory data
+            'type': 'flyby',
+            'dist_km': 8900,                  # approximate closest approach to lunar surface
+            'dist_au': 8900 / AU_KM,           # ~0.0000595 AU
+            'v_kms': None,                     # TBD from trajectory data
+            'label': 'Lunar Closest Approach',
+            'note': ('First crewed lunar flyby since Apollo 17 in 1972 -- over 53 years. '
+                     'Three trajectory correction burns refined the path: TCB-1 at '
+                     'Apr 4 00:43 UTC, TCB-2 at Apr 5 01:43 UTC, TCB-3 at Apr 6 05:04 UTC. '
+                     'Orion entered the lunar sphere of influence at Apr 6 06:43 UTC. '
+                     'Closest approach to Moon at Apr 7 23:06 UTC, with maximum distance '
+                     'from Earth reached 3 minutes later at 23:09 UTC -- the farthest any '
+                     'human has traveled from Earth, surpassing Apollo 13\'s record of '
+                     '400,171 km. Orion exits the lunar sphere of influence at '
+                     'Apr 7 19:27 UTC and begins the return coast.'),
+            'resolution_note': ('Trajectory from NASA/JSC navigation solution '
+                                'Orion_OEM_20260401_0335.V0.1. Data begins post-ICPS '
+                                'separation, ~3h24m after launch.'),
+            'status': 'planned',
+            'source': 'NASA/JSC',
+            'center': 'Earth-Moon Barycenter',
+            'select_also': ['Moon'],
+            'plot_days': 10,
+            'plot_scale_au': 0.003,
+            'center_closeup': 'Moon',
+            'plot_days_closeup': 2,
+            'plot_scale_au_closeup': 0.0003,
+        },
+        {
+            'target': 'Earth',
+            'date': '2026-04-11 00:04:00',    # launch + 9d 1h 29m, entry interface 122 km
+            'type': 'flyby',                   # free-return reentry
+            'dist_km': 6493,                   # 122 km altitude + 6371 km Earth radius
+            'dist_au': 6493 / AU_KM,            # ~0.0000434 AU
+            'v_kms': 10.8,                     # approximate reentry velocity
+            'date_source': 'authoritative',    # entry interface time -- not a proximity minimum
+            'label': 'Reentry & Splashdown',
+            'note': ('Free-return reentry after lunar flyby. Return trajectory correction '
+                     'burns: RTCB-1 at Apr 8 02:04 UTC, manual piloting demonstration at '
+                     'Apr 9 04:55 UTC, RTCB-2 at Apr 10 05:04 UTC, RTCB-3 at Apr 10 '
+                     '21:04 UTC. Crew and service module separation at Apr 11 01:44 UTC, '
+                     'crew module raise burn at 01:47 UTC. Entry interface at 122 km '
+                     'altitude at 02:04 UTC at approximately 10.8 km/s. Forward bay cover '
+                     'deploys at 11 km, drogue chute at 7.6 km, three main parachutes at '
+                     '2.9 km. Splashdown in Pacific Ocean near Baja California at '
+                     '02:17 UTC, Apr 11. Orion final power down at 02:32 UTC.'),
+            'resolution_note': ('Horizons ephemeris ends at edge of atmosphere. '
+                                'Entry and descent phases are not in the trajectory data.'),
+            'status': 'planned',
+            'source': 'NASA/JSC',
+            'center': 'Earth',
+            'select_also': ['Moon'],
+            'plot_days': 10,
+            'plot_scale_au': 0.003,
+            'center_closeup': 'Earth',
+            'plot_days_closeup': 1,
+            'plot_scale_au_closeup': 0.0001,
+        },
+    ],
+
+    # Future missions will be added here as we expand.
     # Template for adding a new spacecraft:
     #
     # 'Voyager 1': [
@@ -351,6 +486,125 @@ def _calculate_encounter_resolution(enc):
     }
 
 
+def resolve_encounter_time(enc, sc_id, obj_start_date, obj_end_date, objects):
+    """
+    Derive actual closest approach time from Horizons trajectory data.
+    Two-pass search: coarse (1h) over mission window, fine (1m) around minimum.
+
+    Used when encounter has 'derive_from_horizons': True.
+    Falls back gracefully -- returns None if Horizons query fails.
+
+    Parameters:
+        enc (dict): Encounter dict (target, center_id used for body)
+        sc_id (str): Horizons spacecraft ID (e.g. '-1024')
+        obj_start_date (datetime): Mission ephemeris start
+        obj_end_date (datetime): Mission ephemeris end
+
+    Returns:
+        dict with 'date' (str), 'dist_km' (float), 'dist_au' (float)
+        or None on failure
+    """
+    # Return cached result if already derived this session.
+    # Both callers (C-pre HypOsc block and add_tagged_encounter_markers) hit
+    # this for the same encounter -- saves two full Horizons round-trips per plot.
+    if '_resolved' in enc:
+        print(f"[RESOLVE] Using cached result for {enc.get('label', '?')}: {enc['_resolved']['date']}", flush=True)
+        return enc['_resolved']
+
+    try:
+        target = enc.get('target', '')
+        # Map target name to Horizons body ID for distance calculation
+
+        body_id = next(
+
+            (o.get('center_id', o['id']) for o in objects if o['name'] == target),
+            None
+        )
+        if not body_id:
+            print(f"[RESOLVE] Unknown target body '{target}' in objects list, cannot derive encounter time", flush=True)
+            return None
+        print(f"[RESOLVE] Deriving {target} closest approach for {sc_id} "
+              
+              f"over {obj_start_date.date()} to {obj_end_date.date()}", flush=True)
+
+        # PASS 1: coarse 1h search over full mission window
+        coarse = Horizons(
+            id=sc_id,
+            location=f'500@{body_id}',
+            epochs={
+                'start': utc_to_tdb(obj_start_date).strftime('%Y-%m-%d %H:%M'),
+                'stop':  utc_to_tdb(obj_end_date).strftime('%Y-%m-%d %H:%M'),
+                'step':  '1h'
+            },
+            id_type='id'
+        )
+        coarse_vecs = coarse.vectors(refplane='ecliptic')
+        if len(coarse_vecs) == 0:
+            print(f"[RESOLVE] Coarse pass returned no data", flush=True)
+            return None
+
+        # Find epoch with minimum range
+        ranges = list(coarse_vecs['range'])
+        jds = list(coarse_vecs['datetime_jd'])
+        min_idx = ranges.index(min(ranges))
+        min_jd = jds[min_idx]
+
+        # Convert min JD to datetime for fine window
+        from astropy.time import Time as AstroTime
+        min_dt = AstroTime(min_jd, format='jd').to_datetime()
+
+        print(f"[RESOLVE] Coarse minimum: {min_dt.strftime('%Y-%m-%d %H:%M')} UTC "
+              f"({min(ranges):.6f} AU)", flush=True)
+
+        # PASS 2: fine 1m search in +/- 90 min window around coarse minimum
+        fine_start = min_dt - timedelta(minutes=90)
+        fine_end   = min_dt + timedelta(minutes=90)
+        # Clamp to mission window
+        fine_start = max(fine_start, obj_start_date)
+        fine_end   = min(fine_end,   obj_end_date)
+
+        fine = Horizons(
+            id=sc_id,
+            location=f'500@{body_id}',
+            epochs={
+                'start': utc_to_tdb(fine_start).strftime('%Y-%m-%d %H:%M'),
+                'stop':  utc_to_tdb(fine_end).strftime('%Y-%m-%d %H:%M'),
+                'step':  '1m'
+            },
+            id_type='id'
+        )
+        fine_vecs = fine.vectors(refplane='ecliptic')
+        if len(fine_vecs) == 0:
+            print(f"[RESOLVE] Fine pass returned no data, using coarse result", flush=True)
+            fine_vecs = coarse_vecs
+            min_idx_fine = min_idx
+        else:
+            ranges_fine = list(fine_vecs['range'])
+            min_idx_fine = ranges_fine.index(min(ranges_fine))
+
+        best_range_au = float(fine_vecs['range'][min_idx_fine])
+        best_jd = float(fine_vecs['datetime_jd'][min_idx_fine])
+        best_dt = AstroTime(best_jd, format='jd').to_datetime()
+        best_dt_str = best_dt.strftime('%Y-%m-%d %H:%M:%S')
+
+        print(f"[RESOLVE] Fine minimum: {best_dt_str} UTC "
+              f"({best_range_au:.7f} AU = {best_range_au * AU_KM:,.0f} km)", flush=True)
+
+        result = {
+            'date':    best_dt_str,
+            'dist_au': best_range_au,
+            'dist_km': best_range_au * AU_KM,
+        }
+        # Cache on the enc dict so the second caller (add_tagged_encounter_markers
+        # or C-pre HypOsc block) skips the Horizons round-trip entirely.
+        enc['_resolved'] = result
+        return result
+
+    except Exception as e:
+        print(f"[RESOLVE] Failed to derive encounter time: {e}", flush=True)
+        return None
+
+
 def get_encounter_preset(spacecraft_name, encounter_index):
     """
     Build a close-up preset for a specific encounter.
@@ -366,10 +620,22 @@ def get_encounter_preset(spacecraft_name, encounter_index):
                         plot_scale_au, fetch_step, label
         or None if encounter_index is invalid
     """
+
     encounters = get_encounters_for_spacecraft(spacecraft_name)
     if encounter_index < 0 or encounter_index >= len(encounters):
         return None
     enc = encounters[encounter_index]
+
+    # If resolve_encounter_time() has already run this session, use its derived
+    # date/dist values so the Go button centers on the actual closest approach
+    # rather than the hardcoded planning estimate.
+    if '_resolved' in enc:
+        enc = dict(enc)  # shallow copy -- don't mutate original
+        enc['date']    = enc['_resolved']['date']
+        enc['dist_au'] = enc['_resolved']['dist_au']
+        enc['dist_km'] = enc['_resolved']['dist_km']
+        print(f"[ENCOUNTER PRESET] Using resolved time for {enc.get('label', '?')}: {enc['date']}", flush=True)
+
     center = enc.get('center_closeup') or enc.get('center', 'Sun')
 
     # Try adaptive resolution first
@@ -593,8 +859,6 @@ def fetch_position_at_encounter(encounter, center_id, spacecraft_id):
         dict: {'x': float, 'y': float, 'z': float} in AU, or None on failure
     """
     try:
-        from astroquery.jplhorizons import Horizons
-        from astropy.time import Time
 
         enc_date = datetime.strptime(encounter['date'], '%Y-%m-%d %H:%M:%S')
 
@@ -880,6 +1144,36 @@ def add_tagged_encounter_markers(fig, selected_objects, objects, dates_lists,
             if center_object_name != 'Sun':
                 if enc.get('target', '') != center_object_name:
                     continue
+
+            # FIXED: derive actual encounter time from Horizons based on date_source
+            # 'horizons'     -> always derive from trajectory data
+            # 'planning'     -> try Horizons, fall back to hardcoded
+            # 'authoritative'-> never derive, use hardcoded always
+            # absent         -> treat as authoritative (safe default)
+            date_source = enc.get('date_source', 'authoritative')
+            if date_source in ('horizons', 'planning'):
+
+                sc_obj = next((o for o in objects if o['name'] == sc_name), None)
+                if sc_obj and sc_obj.get('start_date') and sc_obj.get('end_date'):
+
+                    resolved = resolve_encounter_time(
+                        enc, sc_id,
+                        sc_obj['start_date'], sc_obj['end_date'],
+                        objects
+                    )
+
+                    if resolved:
+                        enc = dict(enc)  # shallow copy -- don't mutate original
+                        enc['date']    = resolved['date']
+                        enc['dist_au'] = resolved['dist_au']
+                        enc['dist_km'] = resolved['dist_km']
+                        print(f"[RESOLVE] [{date_source}] Using derived time for {enc['label']}: {enc['date']}", flush=True)
+                    else:
+                        if date_source == 'horizons':
+                            print(f"[RESOLVE] [horizons] Derivation failed for {enc['label']} -- using hardcoded fallback", flush=True)
+                        else:
+                            print(f"[RESOLVE] [planning] Derivation failed for {enc['label']} -- using hardcoded date", flush=True)
+
             position = fetch_position_at_encounter(enc, center_id, sc_id)
 
             if position:
@@ -1085,3 +1379,29 @@ def get_comet_perihelion_preset(obj_name, obj_info=None):
     
     print(f"[COMET PRESET] Window: {window_days}d, Scale: {plot_scale:.5f} AU", flush=True)
     return preset
+
+
+def get_comet_disintegration_preset(obj_name):
+    """
+    Fixed preset for the MAPS disintegration event.
+
+    Window: April 3-7, 2026 (4 days centered on the event).
+    Captures: inbound intact comet -> disintegration at 8.33 R_sun ->
+    perihelion as ghost -> outbound debris trail fading to ~29 R_sun.
+    Scale: 0.023 AU -- same tight perihelion scale, shows all inner shells.
+    Position marker: disintegration time (08:15 UTC April 4), not perihelion.
+    """
+    DISINTEGRATION_PRESETS = {
+        'MAPS': {
+            'label':         'MAPS Disintegration: April 4, 2026 ~08:15 UTC | '
+                             '8.33 R_sun (0.039 AU) | between Alfven surface and Streamer Belt',
+            'center':        'Sun',
+            'select_also':   ['Sun'],
+            'start_date':    '2026-04-03 00:00:00',
+            'end_date':      '2026-04-07 00:00:00',
+            'plot_scale_au': 0.06,
+            # Position marker at perihelion
+            'tp_date':       '2026-04-04 14:22:00',
+        },
+    }
+    return DISINTEGRATION_PRESETS.get(obj_name)

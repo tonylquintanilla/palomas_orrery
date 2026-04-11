@@ -4002,25 +4002,19 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         from constants_new import color_map
         color = color_map('Moon')
     
-    # Calculate angular range based on days_to_plot
+    # Always draw complete orbit(s) - Keplerian trace shows the predicted path,
+    # not the traveled path. Partial arcs require TA offset to start at the
+    # body's current position, but full ellipses are visually correct regardless.
     if days_to_plot is not None and days_to_plot > 0:
-        # Get Moon's orbital period from constants
         moon_period_days = KNOWN_ORBITAL_PERIODS.get('Moon', 27.321661)
-        orbital_fraction = days_to_plot / moon_period_days
-        max_angle = 2 * np.pi * orbital_fraction
+        orbital_fraction = max(1.0, days_to_plot / moon_period_days)
     else:
-        # Default to one complete orbit
-        max_angle = 2 * np.pi
         orbital_fraction = 1.0
     
-    # Generate the orbit points
-    if orbital_fraction < 1:
-        num_points = max(180, int(360 * orbital_fraction))
-    else:
-        num_points = int(360 * max(1, orbital_fraction))
-        num_points = min(num_points, 7200)
+    num_points = int(360 * orbital_fraction)
+    num_points = min(num_points, 7200)
     
-    theta = np.linspace(0, max_angle, num_points)
+    theta = np.linspace(0, 2 * np.pi * orbital_fraction, num_points)
     
     # ==================== PLOT ANALYTICAL ORBIT ====================
     # Always plot the analytical orbit (time-averaged elements)
@@ -7270,7 +7264,8 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             y=y_final,
             z=z_final,
             mode='lines',
-            line=dict(color='white', width=2, dash='dot'),
+        #    line=dict(color='white', width=2, dash='dot'),
+            line=dict(color='white', width=2),
             name=orbit_label,
             text=[hover_text] * len(x_final),
             customdata=[hover_text] * len(x_final),

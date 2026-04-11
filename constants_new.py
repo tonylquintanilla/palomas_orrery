@@ -527,7 +527,8 @@ def color_map(planet):
         'Arrokoth': 'red',
         'Juno': 'cyan',
         'Galileo': 'white',
-        'Apollo 11 S-IVB': 'cyan',        
+        'Apollo 11 S-IVB': 'cyan', 
+        'Artemis II': 'gold',       
         'Pioneer 10': 'red',
         'Pioneer 11': 'green',
         'Clipper': 'red',
@@ -678,9 +679,9 @@ INFO = {
         '* Heliocentric: select Earth with or without shells.\n'
         '* Missions: Galileo, Cassini-Huygens, Rosetta, New Horizons, JUNO, Parker Solar Probe, Deep Impact, NEAR Shoemaker, Solar Orbiter.',
 
-        'Moon': 'Horizons: 301. Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145 deg to the ecliptic plane, ' 
-        'but approximately 28.545 deg to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4 deg). '
-        'The Moon\'s orbital parameters are not fixed but vary significantly over time due to precession of the nodes, ' 
+        'Moon': 'Horizons: 301. Earth\'s only natural satellite. The Moon\'s orbit is actually inclined by about 5.145 deg to the ecliptic plane,\n' 
+        'but approximately 28.545 deg to Earth\'s equatorial plane (this variation comes from Earth\'s own axial tilt of 23.4 deg).\n'
+        'The Moon\'s orbital parameters are not fixed but vary significantly over time due to precession of the nodes,\n' 
         'perturbations from the Sun\'s gravity, Earth\'s non-spherical shape, and other gravitational influences.\n\n' 
         'Missions: Early Pioneers (1950s-1960s):\n' 
         '* Luna Programme (USSR): This Soviet program launched many "Luna" probes, achieving significant firsts (1959 - 1966).\n' 
@@ -1995,6 +1996,77 @@ INFO = {
         'Akatsuki': '***SUGGESTED TO PLOT WITH EARTH AND VENUS TO VISUALIZE THE FULL TRAJECTORY***\n'
         'Horizons: -5. The Venus Climate Orbiter mission (PLANET-C), will study the atmospheric circulation of Venus over a nominal mission of 4.5 years.',
 
+        'Artemis II':
+        '***PLOT WITH EARTH-MOON BARYCENTER AS CENTER. SELECT MOON. ADD EARTH AND MOON SHELLS FOR SCALE.***\n'
+        '***MANUALLY SCALE TO 0.003 AU TO SEE FULL TRAJECTORY***\n'
+        'Horizons: -1024. Artemis II -- First crewed mission of NASA\'s Artemis program.\n'
+        'Spacecraft: Orion capsule "Integrity" atop Space Launch System (SLS).\n'
+        'Crew: Reid Wiseman (Commander), Victor Glover (Pilot), Christina Koch (Mission Specialist),\n'
+        '  Jeremy Hansen (CSA, Mission Specialist) -- first non-American in a lunar mission.\n\n'
+        'MISSION PROFILE (10-day lunar free-return):\n'
+        '* Launched April 1, 2026 22:35:12 UTC from LC-39B, Kennedy Space Center\n'
+        '* SLS: 98m tall, 2.61 million kg, 39.1 MN thrust at liftoff\n'
+        '* Orion pressurized volume: 19.6 m^3\n'
+        '* Orion mass to Moon: ~27,000 kg; return landing mass: ~10,400 kg\n'
+        '* Propellant usage: ~9,000 kg\n\n'
+        'WHY THIS LAUNCH WINDOW?\n'
+        '* The lunar flyby coincides with the Moon at apogee (~397,000 km vs ~363,000 km at perigee).\n'
+        '* At apogee the Moon moves slower (Kepler\'s second law), giving Orion more time in the\n'
+        '  lunar neighborhood and a more forgiving free-return flyby geometry.\n'
+        '* The gentler gravitational gradient at greater distance produces a smoother trajectory curve.\n'
+        '* This is visible in the plot: the Moon\'s Keplerian apogee marker sits near the flyby point.\n\n'
+        'TIMELINE (all times UTC, derived from launch April 1, 22:35:12 UTC):\n\n'
+        'ACT 1 -- EARTH DEPARTURE (Apr 1-3)\n'
+        '* Apr 1 22:35  Launch from LC-39B\n'
+        '* Apr 1 22:55  Orion deploys solar arrays in Earth orbit\n'
+        '* Apr 1 23:25  Perigee raise maneuver (2223 x 185 km orbit)\n'
+        '* Apr 2 00:23  Apogee raise maneuver (70,377 km)\n'
+        '* Apr 2 01:59  Orion/ICPS separation *** TRAJECTORY DATA STARTS HERE ***\n'
+        '* Apr 2 03:35  Upper stage separation burn\n'
+        '* Apr 2 03:37  ICPS disposal burn (Pacific splashdown)\n'
+        '* Apr 2 03:39  Four CubeSats deploy at one-minute intervals:\n'
+        '*              ATENEA (Argentina/CONAE) -- radiation environment, shielding, comms\n'
+        '*              TACHELES (Germany/DLR) -- electronics and component testing\n'
+        '*              K-RadCube (South Korea/KASA) -- biological radiation effects\n'
+        '*              Space Weather CubeSat-1 (Saudi Arabia) -- solar radiation, magnetic fields\n'
+        '* Apr 2 11:30  Perigee raise burn\n'
+        '* Apr 3 00:43  TRANSLUNAR INJECTION BURN (~8 min) -- the commit point\n'
+        '* Apr 3 01:05  Earth shadow entrance\n'
+        '* Apr 3 02:11  Earth shadow exit\n\n'
+        'ACT 2 -- LUNAR COAST AND FLYBY (Apr 4-7)\n'
+        '* Apr 4 00:43  Trajectory correction burn #1\n'
+        '* Apr 5 01:43  Trajectory correction burn #2\n'
+        '* Apr 6 05:04  Trajectory correction burn #3\n'
+        '* Apr 6 06:43  Orion enters lunar sphere of influence\n'
+        '* Apr 7 23:06  CLOSEST APPROACH TO MOON\n'
+        '* Apr 7 23:09  Maximum distance from Earth -- farthest humans from Earth since Apollo 17\n'
+        '*              (1972), surpassing Apollo 13\'s record of 400,171 km\n'
+        '* Apr 7 19:27  Orion exits lunar sphere of influence\n\n'
+        'ACT 3 -- RETURN AND REENTRY (Apr 8-11)\n'
+        '* Apr 8 02:04  Return trajectory correction burn #1\n'
+        '* Apr 9 04:55  Manual piloting demonstration\n'
+        '* Apr 10 05:04 Return trajectory correction burn #2\n'
+        '* Apr 10 21:04 Return trajectory correction burn #3\n'
+        '* Apr 11 01:44 Crew and service module separation\n'
+        '* Apr 11 01:47 Crew module raise burn\n'
+        '* Apr 11 02:04 Entry interface (122 km altitude, ~10.8 km/s)\n'
+        '*              11 km: Forward bay cover deploys\n'
+        '*              7.6 km: Drogue parachute deploys\n'
+        '*              2.9 km: Pilot chutes pull out 3 main parachutes\n'
+        '* Apr 11 02:17 SPLASHDOWN in Pacific Ocean near Baja California\n'
+        '* Apr 11 02:32 Orion final power down\n\n'
+        'NOTES ON THE TRAJECTORY DATA:\n'
+        '* Horizons ephemeris begins post-ICPS separation (launch + 3h 24m). The launch,\n'
+        '  Earth orbit insertion, and early maneuvers are not in the trajectory data.\n'
+        '* The SLS/ICPS upper stage is not tracked separately in Horizons (unlike Apollo 11\'s\n'
+        '  S-IVB stage, which got its own entry -399110 because it escaped to heliocentric orbit).\n'
+        '  The Artemis II ICPS was deliberately deorbited into the Pacific ~5 hours after launch.\n'
+        '* Trajectory source: NASA/JSC navigation solution Orion_OEM_20260401_0335.V0.1\n'
+        '* The Earth departure orbit (Act 1) requires high trajectory resolution to visualize --\n'
+        '  the elliptical orbit before TLI is only ~14 hours and will appear as a knot at\n'
+        '  coarse plotting resolution.\n'
+        '* First crewed lunar flyby since Apollo 17 in December 1972 -- over 53 years.',      
+
 # Comets        
         'Ikeya-Seki': 'Horizons: C/1965 S1-A. retrograde > 90. Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
         'in 1965! It was one of the brightest comets of the 20th century and is a member of the Kreutz sungrazers, a family of ' 
@@ -2108,6 +2180,10 @@ INFO = {
         '* Closest approach to Earth: November 24, 2025, at a distance of about 0.40 AU.\n' 
         '* Eccentricity (e): The orbit is highly eccentric, 1.000251464554613 (July 11, 2025), indicating an unbound or nearly parabolic orbit.\n' 
         '* Inclination (i): The orbital plane is highly inclined, 147.864867556013 degrees.\n' 
+        '* Fragmentation: Nucleus fragmented ~October 16, 2025, approximately 8 days after perihelion at 0.33 AU\n'
+        '  (inside Mercury\'s orbit). Hubble Space Telescope observed at least 4 fragments, each with a distinct coma,\n'
+        '  on Nov 8-10, 2025 (published Icarus, Feb 2026, Auburn University). This is Fragment A (main body).\n'
+        '  Fragment C is unique: e=0.99999 (gravitationally bound, ~13 million year return) while B and D escape.\n'
         '* Visibility and Brightness: As of early July 2025, it\'s around magnitude 14-15, requiring a telescope for observation.\n' 
         '* Predicted Peak Brightness: It\'s expected to brighten significantly as it approaches perihelion. Predictions suggest it could \n' 
         '  reach a magnitude of around 5.2 to 8 in early October 2025.\n' 
@@ -2115,7 +2191,12 @@ INFO = {
         '  more likely to be a binocular object for most observers, especially at its peak brightness.\n' 
         '* Observing Locations: Early October (near perihelion), observers in northern latitudes will see it best in the morning sky. \n' 
         '  Observers in southern latitudes can spot it in both the evening and morning skies.\n' 
-        '* August: It will be faint (around magnitude 13) and visible only from the Southern Hemisphere through large telescopes.',
+        '* August: It will be faint (around magnitude 13) and visible only from the Southern Hemisphere through large telescopes.\n'
+        '* VISUALIZATION NOTE: Fragment trajectories are backward-extrapolated from post-breakup observations\n'
+        '  (Nov 2025 - Jan 2026). Apparent separation at perihelion (Oct 8) is a computational artifact -\n'
+        '  the comet was still intact at that date. Fragments never converge to zero because the parent orbit\n'
+        '  includes non-gravitational forces (CO2 outgassing) while fragment orbits do not. The minimum\n'
+        '  cluster size (~70,000 km) occurs around Nov 25, well after the actual breakup.',
         
         'C/2025_K1-B': 'Horizons: C/2025 K1-B. Fragment B of comet C/2025 K1 (ATLAS).\n'
         '* One of four fragments observed by Hubble Space Telescope in November 2025 (published Icarus, Feb 2026).\n'
@@ -2123,7 +2204,9 @@ INFO = {
         '* Orbital characteristics: Hyperbolic (e=1.00203), escaping the solar system.\n'
         '* Perihelion: October 8.45, 2025, at 0.336 AU - nearly identical to parent.\n'
         '* No non-gravitational forces modeled (unlike parent Fragment A).\n'
-        '* Data arc: 2025-11-05 to 2026-01-06 (278 observations, JPL solution #13).',
+        '* Data arc: 2025-11-05 to 2026-01-06 (278 observations, JPL solution #13).\n'
+        '* VISUALIZATION NOTE: Plotted position at perihelion is backward-extrapolated from\n'
+        '  post-breakup observations. The comet was still intact on Oct 8; breakup occurred ~Oct 16.',
 
         'C/2025_K1-C': 'Horizons: C/2025 K1-C. Fragment C of comet C/2025 K1 (ATLAS) - the stubborn one.\n'
         '* The ONLY fragment that remains gravitationally bound to the Sun (e=0.99999).\n'
@@ -2136,12 +2219,15 @@ INFO = {
         '* Data arc: 2025-11-25 to 2026-01-10 (158 observations, JPL solution #14).',
 
         'C/2025_K1-D': 'Horizons: C/2025 K1-D. Fragment D of comet C/2025 K1 (ATLAS).\n'
+        '* One of four fragments observed by Hubble Space Telescope in November 2025 (published Icarus, Feb 2026).\n'
         '* The most divergent fragment - highest eccentricity (e=1.00246) of all four pieces.\n'
         '* Also the faintest and least observed, with the shortest data arc (33 days).\n'
         '* Perihelion: October 8.46, 2025, at 0.336 AU.\n'
         '* By March 2026, Fragment D leads the divergence at ~911,000 km from Fragment A.\n'
         '* No non-gravitational forces modeled.\n'
-        '* Data arc: 2025-11-26 to 2025-12-29 (107 observations, JPL solution #5).',
+        '* Data arc: 2025-11-26 to 2025-12-29 (107 observations, JPL solution #5).\n'
+        '* VISUALIZATION NOTE: Plotted position at perihelion is backward-extrapolated from\n'
+        '  post-breakup observations. The comet was still intact on Oct 8; breakup occurred ~Oct 16.',
 
         'Borisov': 
         '*** SET MANUAL SCALE TO AT LEAST 50 AU TO SEE FULL HYPERBOLIC ORBIT AS ESTIMATED SO FAR BY JPL***\n\n'
@@ -2277,15 +2363,60 @@ INFO = {
         '* Its orbital period is uncertain (hyperbolic), but estimates range from 1,400 to over 20,000 years.\n', 
 
         '6AC4721': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
-        'Comet provisionally designated 6AC4721 (expected to be formally designated C/2026 A1), which was discovered just days ago on ' 
-        'January 13, 2026. This discovery has generated significant excitement in the astronomical community because it appears to be a Kreutz sungrazer ' 
-        'found at an unusually large distance from the Sun, suggesting it could be a substantial object.',
+        'Provisional designation for C/2026 A1 (MAPS) before JPL assigned a formal Horizons ID.\n'
+        'Discovered January 13, 2026 from the AMACS1 Observatory, Atacama Desert, Chile.\n\n'
+        'Paloma\'s Orrery began tracking this object under the provisional designation 6AC4721\n'
+        'within days of discovery, before it appeared in JPL Horizons as C/2026 A1.\n'
+        'The orbital elements were sourced from MPEC 2026-A49 and integrated manually.\n\n'
+        '* Nucleus disintegrated April 4, 2026 ~08:15 UTC, ~6 hours before perihelion.\n'
+        '* Perihelion: April 4, 2026 ~14:22 UTC at 1.23 solar radii (161,000 km from photosphere).\n'
+        '* The orbit trace and outbound arc represent the debris trail of a headless ghost comet.\n\n'
+        'See MAPS (C/2026 A1) entry for the complete story.',
 
         'MAPS': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
-        'Horizons: C/2026 A1. Comet MAPS (C/2026 A1) is a recently discovered comet that has garnered significant attention due to its unique characteristics. \n'
-        'Comet provisionally designated 6AC4721 (expected to be formally designated C/2026 A1), which was discovered just days ago on ' 
-        'January 13, 2026. This discovery has generated significant excitement in the astronomical community because it appears to be a Kreutz sungrazer ' 
-        'found at an unusually large distance from the Sun, suggesting it could be a substantial object.',
+        'Horizons: C/2026 A1. Comet MAPS (C/2026 A1) was a Kreutz sungrazer discovered January 13, 2026\n'
+        'from the AMACS1 Observatory in the Atacama Desert, Chile, by Maury, Attard, Parrott and Signoret.\n'
+        'It holds the record as the most distant Kreutz sungrazer ever detected at discovery -- found\n'
+        '81 days before perihelion, giving astronomers an unprecedented window of observation.\n\n'
+        'Paloma\'s Orrery began tracking this object under provisional designation 6AC4721\n'
+        'within days of its discovery, before JPL formally assigned it the Horizons ID C/2026 A1.\n'
+        'The orbital elements were sourced from MPEC 2026-A49 and integrated manually into the\n'
+        'Orrery\'s idealized orbit pipeline -- a rare case of tracking a comet from near-discovery\n'
+        'all the way through perihelion, disintegration, and the ghost outbound arc.\n\n'
+        'Orbital history:\n'
+        '* ~1,695-year orbital period: likely a second-generation fragment of the Great Comet of 371 BC.\n'
+        '* Possibly one of the daylight comets of 363 AD witnessed by Ammianus Marcellinus.\n'
+        '* Traveled from aphelion beyond 100 AU, inbound for over a millennium, to die in the corona.\n\n'
+        'Pre-perihelion observations:\n'
+        '* Nucleus: ~400 m diameter (JWST, March 2026) -- same size class as C/2011 W3 (Lovejoy).\n'
+        '* Blue-green coma (C2 Swan band emission) observed March 14, 2026 with 25-arcmin tail.\n'
+        '* Brightened 1.5 magnitudes in 3 days (March 6-9); activity plateaued March 11-17.\n\n'
+        'Final passage -- an experimental probe into the solar atmosphere:\n'
+        '* April 2: entered SOHO/LASCO C3 field (~33 R_sun, ~0.153 AU);\n'
+        '  crossed the extended F-corona. Visible in coronagraphs.\n'
+        '* April 3 ~18:00 UTC: crossed the Alfven surface (~18.8 R_sun, ~0.087 AU) --\n'
+        '  now inside the true corona; plasma magnetically connected to the Sun;\n'
+        '  immersed in 1-2 million K coronal plasma.\n'
+        '* April 4 ~08:15 UTC: NUCLEUS DISINTEGRATED at ~8.33 R_sun (~0.039 AU).\n'
+        '  Between the Alfven surface and the Streamer Belt. OUTSIDE the Roche limit,\n'
+        '  Streamer Belt, and inner K-corona -- thermal ablation and rotational spin-up\n'
+        '  killed it before tidal forces had a chance to act.\n'
+        '  Peak brightness: magnitude -0.6 (SOHO/CCOR-1).\n'
+        '* April 4 ~14:22 UTC: the debris cloud reached perihelion at 1.23 R_sun\n'
+        '  (0.006 AU, 161,000 km from photosphere), velocity 556 km/s. It crossed\n'
+        '  the Streamer Belt (6 R_sun, 0.028 AU), Roche limit (3.45 R_sun, 0.016 AU),\n'
+        '  and inner K-corona (3.0 R_sun, 0.014 AU) as debris only. The nucleus\n'
+        '  never reached any of these shells intact.\n'
+        '* April 4-6: ghost comet outbound. SOHO/LASCO tracked the fading debris\n'
+        '  trail for ~36-40 hours. By April 6 ~01:00 UTC the cloud had dispersed\n'
+        '  to ~28 R_sun (~0.132 AU). Too diffuse for any ground-based detection.\n'
+        '  No naked-eye or amateur telescope visibility. The show was over.\n\n'
+        'No spacecraft has ever reached 1.23 solar radii. Parker Solar Probe\'s\n'
+        'closest approach is 8.8 R_sun (0.041 AU). MAPS disintegrated at 8.33 R_sun\n'
+        '(0.039 AU) -- slightly closer than Parker\'s best. The debris went deeper.\n\n'
+        'The orbit trace is the debris trail. The disintegration marker (green diamond)\n'
+        'marks the moment the nucleus was lost. The outbound arc is the ghost.\n\n'
+        'Module updated: April 2026 with Anthropic\'s Claude Sonnet 4.6. In memoriam C/2026 A1.',
 
         'Lemmon': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 250 AU.***\n\n'
         'Horizons: C/2025 A6. Retrograde orbit; i>90. Comet C/2025 A6 (Lemmon) is a non-periodic comet discovered by the Mount Lemmon Survey. It\'s ' 

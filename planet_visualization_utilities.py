@@ -24,14 +24,16 @@ RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, approximately 0.7 Solar 
 CHROMOSPHERE_RADII = 1.5    # Chromosphere extends to about 1.5 solar radii
 INNER_CORONA_RADII = 3  # Inner corona extends to 2-3 solar radii
 OUTER_CORONA_RADII = 50  # Outer corona extends up to 50 solar radii
+STREAMER_BELT_RADII  = 6.0    # Visible white-light corona: helmet streamers 4-6 R_sun (eclipse observations)
+ROCHE_LIMIT_RADII    = 3.45   # Fluid Roche limit: d = 2.44 * R_sun * (rho_sun/rho_comet)^(1/3)
+                               # rho_sun=1408, rho_comet=500 kg/m^3 -> 3.45 R_sun
+ALFVEN_SURFACE_RADII = 18.8   # Parker Solar Probe first crossing: April 28, 2021 at 18.8 R_sun
 TERMINATION_SHOCK_AU = 94  # Termination shock boundary in AU
 HELIOPAUSE_RADII = 26449  # Heliopause at about 123 AU
 INNER_LIMIT_OORT_CLOUD_AU = 2000  # Inner Oort cloud boundary in AU
 INNER_OORT_CLOUD_AU = 20000  # Inner Oort cloud outer boundary in AU
 OUTER_OORT_CLOUD_AU = 100000  # Outer Oort cloud boundary in AU
 GRAVITATIONAL_INFLUENCE_AU = 126000  # Sun's gravitational influence in AU
-# Constants
-KM_PER_AU = 149597870.7  # Conversion factor from km to AU
 
 # Mercury Constants
 MERCURY_RADIUS_KM = CENTER_BODY_RADII['Mercury']        
