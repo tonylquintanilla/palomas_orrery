@@ -18,9 +18,8 @@ import numpy as np
 import pandas as pd
 import re
 import plotly.graph_objects as go
-from constants_new import (
-    object_type_mapping, class_mapping, stellar_class_labels
-)
+from constants_new import stellar_class_labels
+from info_dictionary import object_type_mapping, class_mapping
 import plotly.graph_objects as go
 from visualization_core import (
     format_value, prepare_temperature_colors, generate_star_count_text

@@ -25,7 +25,7 @@ def expand_object_type(ot):
     descriptions = []
     
     # Use the mapping from constants_new that's already imported
-    from constants_new import object_type_mapping
+    from info_dictionary import object_type_mapping
     
     for code in ot_codes:
         code = code.strip()

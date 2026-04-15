@@ -33,7 +33,8 @@ import platform
 from threading import Thread
 
 # Import for expanding object types if needed
-from constants_new import object_type_mapping, class_mapping, stellar_class_labels
+from constants_new import stellar_class_labels
+from info_dictionary import object_type_mapping, class_mapping
 from plot_data_report_widget import PlotDataReportWidget
 from plot_data_exchange import PlotDataExchange
 from report_manager import ReportManager

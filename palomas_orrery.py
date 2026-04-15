@@ -247,8 +247,6 @@ from asteroid_belt_visualization_shells import (            # the greyed out imp
 from constants_new import (
     DEFAULT_MARKER_SIZE,
     color_map,
-    note_text,
-    INFO,
     CENTER_BODY_RADII,
     KM_PER_AU, 
     LIGHT_MINUTES_PER_AU,
@@ -274,6 +272,8 @@ from constants_new import (
     # Spacecraft
     PARKER_CLOSEST_RADII
 )
+
+from info_dictionary import INFO, note_text
 
 # from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, format_detailed_hover_text)
 from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, add_fly_to_object_buttons, format_detailed_hover_text)

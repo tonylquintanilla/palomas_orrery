@@ -175,8 +175,6 @@ from solar_visualization_shells import (
 from constants_new import (
     DEFAULT_MARKER_SIZE,
     color_map,
-    note_text,
-    INFO,
     CENTER_BODY_RADII,
     KM_PER_AU, 
     LIGHT_MINUTES_PER_AU,
@@ -202,6 +200,8 @@ from constants_new import (
     # Spacecraft
     PARKER_CLOSEST_RADII
 )
+
+from info_dictionary import INFO, note_text
 
 from visualization_utils import (format_hover_text, add_hover_toggle_buttons, format_detailed_hover_text)
 

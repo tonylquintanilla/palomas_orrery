@@ -19,9 +19,8 @@ import pandas as pd
 import re
 import plotly.graph_objects as go
 
-from constants_new import (
-    object_type_mapping, class_mapping, stellar_class_labels
-)
+from constants_new import stellar_class_labels
+from info_dictionary import object_type_mapping, class_mapping
 
 from save_utils import save_plot
 from star_notes import unique_notes

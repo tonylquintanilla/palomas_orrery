@@ -14,9 +14,8 @@ import numpy as np
 import pandas as pd
 import re
 import plotly.graph_objects as go
-from constants_new import (
-    object_type_mapping, class_mapping, stellar_class_labels
-)
+from constants_new import stellar_class_labels
+from info_dictionary import object_type_mapping, class_mapping
 from stellar_parameters import calculate_stellar_parameters
 from star_notes import unique_notes
 from solar_visualization_shells import hover_text_sun

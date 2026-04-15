@@ -33,11 +33,8 @@ from stellar_parameters import (
 )
 
 # Import constants and mappings
-from constants_new import (
-    spectral_subclass_temps,
-    class_mapping,
-    object_type_mapping
-)
+from constants_new import spectral_subclass_temps
+from info_dictionary import class_mapping, object_type_mapping
 
 # Import formatting utilities
 from visualization_core import format_value
