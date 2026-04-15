@@ -1,3 +1,18 @@
+"""
+palomas_orrery_helpers.py - Support functions extracted from the main orrery monolith.
+
+Trajectory fetching, orbit path backup/restore, URL button construction,
+camera presets, Planet 9 analytical position calculation, and the _info
+string imports for shell tooltip text. Originally created to reduce
+palomas_orrery.py file size.
+
+Key functions:
+    fetch_trajectory() - Multi-segment Horizons trajectory fetch
+    add_url_buttons() - Plotly updatemenus for JPL/NASA links
+    get_default_camera() - Standard camera position dict
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 #Paloma's Orrery - Solar System Visualization Tool
 
 # Import necessary libraries

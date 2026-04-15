@@ -1,3 +1,19 @@
+"""
+orbital_param_viz.py - Interactive orbital element visualization tool.
+
+Standalone Tkinter GUI that shows how the six Keplerian orbital elements
+(a, e, i, omega, Omega, M) transform a circle into a 3D orbit. Step-by-step
+construction with animated arcs, coordinate frames, and angle annotations.
+Educational companion to the main orrery -- helps users understand what
+osculating elements mean geometrically.
+
+Key functions:
+    create_orbital_transformation_viz() - Build the step-by-step 3D figure
+    create_eccentricity_demo_window() - Interactive e slider demonstration
+    create_orbital_viz_window() - Main GUI window with object selector
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots

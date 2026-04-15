@@ -114,6 +114,19 @@ LAUNCH_GROUPS = {
         GALLERY_TOOLS_DIR),        
     ],
 
+    "Developer Tools": [
+        ("Regenerate Module Atlas",
+         "module_atlas.py",
+         "Scan codebase, generate MODULE_ATLAS.md. Window closes when done.",
+         SCRIPT_DIR,
+         True),
+        ("Dependency Trace",
+         "dep_trace.py",
+         "Opens console. Run: python dep_trace.py spacecraft_encounters 2",
+         SCRIPT_DIR,
+         True),
+    ],
+
 }
 
 # ============================================================
@@ -136,11 +149,11 @@ EXTERNAL_LINKS = [
 
 LOCAL_DOCS = [
     ("README", "README.md"),
+    ("Module Atlas", "MODULE_ATLAS.md"),
     ("Requirements", "requirements.txt"),
     ("Project Instructions", "project_instructions_with_claude_ai.md"),
     ("Web Gallery Handoff", "web_gallery_handoff.md"),
     ("Climate Data Handoff", "climate_data_preservation_handoff.md"),
-    ("Module Index", "coordinate_system_guide.py"),
 ]
 
 # ============================================================
@@ -407,8 +420,9 @@ class PalomasOrreryDashboard(ctk.CTk):
             if interactive:
                 # ---- INTERACTIVE: open in its own console ----
                 if sys.platform == "win32":
+                    # cmd /k keeps the window open after script exits
                     proc = subprocess.Popen(
-                        [python, script_path],
+                        ["cmd", "/k", python, script_path],
                         cwd=base_dir,
                         creationflags=subprocess.CREATE_NEW_CONSOLE,
                     )

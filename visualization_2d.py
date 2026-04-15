@@ -1,3 +1,17 @@
+"""
+visualization_2d.py - 2D HR diagram (color-magnitude) plot builder.
+
+Creates Hertzsprung-Russell diagrams from processed star data: temperature
+vs. luminosity scatter plots with spectral class coloring, hover text with
+stellar properties, and statistical annotation. The 2D counterpart to
+visualization_3d.py. Output displayed in browser via Plotly.
+
+Key functions:
+    create_hr_diagram() - Main HR diagram figure builder
+    prepare_2d_data() - Data preparation and filtering
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # visualization_2d.py
 
 import numpy as np

@@ -1,3 +1,13 @@
+"""
+planetarium_distance.py - 3D star field pipeline for distance-based queries.
+
+Standalone script (runs as subprocess from star_visualization_gui.py).
+Fetches stars within a distance limit, processes through data_processing.py,
+builds 3D stellar neighborhood visualization via visualization_3d.py.
+Results passed back via plot_data_exchange.py.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # planetarium_distance.py
 
 import warnings

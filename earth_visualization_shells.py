@@ -1,3 +1,15 @@
+"""
+earth_visualization_shells.py - Earth interior and orbital shell traces.
+
+Sphere shells for Earth's interior layers (inner core through crust),
+atmosphere, and upper atmosphere. Custom geometry for the magnetosphere,
+LEO altitude shell, and geostationary belt. Each function returns Plotly
+Scatter3d traces positioned relative to a center_position in AU.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

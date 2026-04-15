@@ -1,3 +1,13 @@
+"""
+plot_data_report_widget.py - Embedded report panel for star visualization results.
+
+Tkinter widget that displays star counts, magnitude distributions, spectral
+class breakdowns, and processing times after an HR diagram is generated.
+Reads data from plot_data_exchange.py. Includes object type analysis via
+ObjectTypeAnalyzer when available.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import tkinter as tk
 from tkinter import ttk, scrolledtext
 import time

@@ -1,3 +1,18 @@
+"""
+solar_visualization_shells.py - Sun interior, corona, and heliosphere shell traces.
+
+The largest shell module: 14 sphere shells from core to gravitational
+influence boundary, plus custom geometry for Hills Cloud torus, Oort Cloud
+clumpy distribution, and galactic tide shell. Includes the v3.18 solar
+shell refactor: single-info-marker pattern, n_points=20/25, and the
+three inner corona shells (Streamer Belt, Roche Limit, Alfven Surface)
+added for the MAPS comet coronal journey.
+
+Consumed by: planet_visualization.py (routing dispatcher),
+             palomas_orrery.py (hover_text_sun import)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

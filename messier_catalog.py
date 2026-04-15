@@ -1,3 +1,13 @@
+"""
+messier_catalog.py - Static catalog of Messier objects and bright deep-sky objects.
+
+Dictionary-based catalogs of Messier objects (M1-M110), bright open clusters,
+bright planetary nebulae, and bright emission nebulae. Each entry includes
+name, type, visual magnitude, distance, coordinates, and observing notes.
+Data source for the star visualization 3D planetarium views.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # messier_catalog.py
 
 messier_catalog = {

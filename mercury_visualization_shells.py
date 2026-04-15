@@ -1,3 +1,15 @@
+"""
+mercury_visualization_shells.py - Mercury interior, exosphere, and unique feature traces.
+
+Sphere shells for Mercury's large iron core (inner/outer), thin mantle and
+crust. Custom geometry for the sodium exosphere tail (anti-sunward),
+magnetosphere (compressed by solar wind), and Hill sphere. Mercury's core
+is proportionally the largest of any planet (~85%% of its radius).
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

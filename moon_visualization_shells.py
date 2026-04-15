@@ -1,3 +1,14 @@
+"""
+moon_visualization_shells.py - Lunar interior and exosphere shell traces.
+
+Sphere shells for the Moon: inner core, outer core, mantle, crust,
+tenuous exosphere, and Hill sphere. All sphere-only -- no custom geometry.
+Candidate for full migration to shell_configs.py (no custom functions needed).
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

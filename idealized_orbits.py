@@ -1,3 +1,22 @@
+"""
+idealized_orbits.py - Keplerian orbit ellipse construction and satellite orbit models.
+
+Computes and plots idealized (Keplerian) orbit paths from orbital elements,
+with osculating element support for high-accuracy visualization. Handles
+elliptical, parabolic, and hyperbolic orbits. Includes specialized models
+for planetary satellite systems (Mars, Jupiter, Saturn, Uranus, Neptune)
+with proper parent-body-relative coordinate transforms.
+
+The largest computation module (~6,100 lines). Consumed by palomas_orrery.py
+for both plot_objects and animate_objects orbit rendering.
+
+Key functions:
+    plot_idealized_orbits() - Master orbit renderer for all object types
+    add_mean_orbit_trace() - Simple Keplerian ellipse from mean elements
+    calculate_*_satellite_elements() - Per-system satellite orbit models
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # idealized_orbits.py
 
 import numpy as np

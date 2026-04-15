@@ -1,3 +1,23 @@
+"""
+comet_visualization_shells.py - Comet visual components for 3D orrery plots.
+
+Builds nucleus, coma, ion tail, dust tail, and anti-tail traces for comets.
+Tail geometry is computed from Sun direction and heliocentric distance using
+activity factors that scale with solar proximity. Includes specialized traces
+for C/2026 A1 (MAPS): disintegration marker and ghost tail arc.
+
+Key functions:
+    create_comet_nucleus() - Scaled sphere marker at comet position
+    create_comet_ion_tail() - Straight anti-sunward ion tail
+    create_comet_dust_tail() - Curved dust tail with radiation pressure
+    create_maps_disintegration_marker() - Green diamond at 8.33 R_sun
+    create_maps_ghost_tail_trace() - Post-disintegration debris arc
+    add_comet_tails_to_figure() - Master dispatch: adds all tail traces to fig
+
+Consumed by: palomas_orrery.py (plot_objects, animate_objects)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

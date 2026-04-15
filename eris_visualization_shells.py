@@ -1,3 +1,13 @@
+"""
+eris_visualization_shells.py - Eris interior and boundary shell traces.
+
+Sphere shells for Eris: core, mantle, crust, tenuous atmosphere, and
+Hill sphere. Based on New Horizons flyby constraints and thermal models.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

@@ -1,3 +1,13 @@
+"""
+visualization_core.py - Shared data preparation and formatting for star visualizations.
+
+Common functions used by both visualization_2d.py and visualization_3d.py:
+temperature-to-color mapping, star count analysis, magnitude distribution
+statistics, and hover text formatting. Extracted to avoid duplication
+between the 2D and 3D pipelines.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # visualization_core.py
 
 import numpy as np

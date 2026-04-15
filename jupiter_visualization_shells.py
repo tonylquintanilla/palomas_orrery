@@ -1,3 +1,15 @@
+"""
+jupiter_visualization_shells.py - Jupiter interior, ring, and magnetosphere shell traces.
+
+Sphere shells for Jupiter's interior (core through cloud layer). Custom
+geometry for the ring system, Io plasma torus, radiation belts, and
+magnetosphere. Jupiter's magnetosphere is the largest structure in the
+solar system after the heliosphere.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

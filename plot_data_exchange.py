@@ -1,3 +1,13 @@
+"""
+plot_data_exchange.py - JSON data exchange between subprocess scripts and GUI.
+
+Saves plot data (star counts, processing times, mode settings) to a JSON
+file that the main GUI reads to populate the report widget. Bridge between
+standalone HR diagram scripts (which run as subprocesses) and the star
+visualization GUI.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import json
 import os
 from datetime import datetime

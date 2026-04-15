@@ -1,5 +1,11 @@
 """
-shared_utilities.py - Common utility functions shared between multiple modules
+shared_utilities.py - Small shared helpers used across shell visualization modules.
+
+Currently contains create_sun_direction_indicator(), which adds a visual
+arrow showing the Sun's direction in body-centered plots. Used by most
+planetary shell modules when the center body is not the Sun.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 
 import numpy as np

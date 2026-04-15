@@ -1,3 +1,18 @@
+"""
+data_processing.py - Star catalog data cleaning, merging, and analysis.
+
+Processes raw Hipparcos and Gaia catalog data: coordinate system alignment,
+magnitude estimation, distance calculation, deduplication, and outlier
+detection. Produces the cleaned combined tables used by HR diagram and
+planetarium visualization pipelines.
+
+Key functions:
+    calculate_distances() - Parallax to light-year conversion
+    align_coordinate_systems() - ICRS/Hipparcos frame alignment
+    select_stars_by_magnitude() - Apply magnitude/distance cuts
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # data_processing.py
 
 import os

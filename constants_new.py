@@ -1,3 +1,14 @@
+"""
+constants_new.py - Central constants, parameters, and object catalogs for the orrery.
+
+The project's single source of truth for physical constants (KM_PER_AU,
+solar radii, planetary radii), object type mappings, color palettes, orbital
+period tables, spectral class data, and the master lists of planets, moons,
+comets, asteroids, and spacecraft with their Horizons IDs and orbital elements.
+Nearly every module in the project imports from this file.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # Constants Module
 
 # Import necessary libraries

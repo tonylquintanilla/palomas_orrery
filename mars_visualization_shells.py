@@ -1,3 +1,15 @@
+"""
+mars_visualization_shells.py - Mars interior and remnant field shell traces.
+
+Sphere shells for Mars interior layers (inner core through crust),
+atmosphere, upper atmosphere, remnant magnetosphere, and Hill sphere.
+Mars lacks a global dipole field; its magnetosphere represents crustal
+magnetic anomalies.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

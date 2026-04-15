@@ -1,3 +1,21 @@
+"""
+palomas_orrery.py - Main GUI and plotting engine for Paloma's Orrery.
+
+The central application: Tkinter GUI with object selection, date controls,
+and two primary rendering pipelines -- plot_objects() for static 3D scenes
+and animate_objects() for animated sequences. Integrates JPL Horizons
+ephemeris data, osculating orbital elements, spacecraft encounters, comet
+tails, shell visualizations, and the celestial sphere into interactive
+Plotly figures.
+
+At ~8,600 lines this is the project monolith. Key internal functions:
+    plot_objects() - Static 3D solar system rendering (~line 3900)
+    animate_objects() - Animated rendering with frames (~line 5744)
+    fetch_position() - JPL Horizons position query (~line 1531)
+    calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 #Paloma's Orrery - Solar System Visualization Tool
 # annotated by Tony working with Claude 
 # Import necessary libraries
@@ -285,6 +303,10 @@ if sys.platform == 'win32':
 script_dir = os.path.dirname(os.path.abspath(__file__))                             # Get the directory where the script is located
 os.chdir(script_dir)                                                                # Change working directory to script's location
 print(f"Working directory set to: {os.getcwd()}", flush=True)                       # Print confirmation immediately (don't buffer)
+
+
+# Celestial sphere data loader and renderer live in star_sphere_builder.py
+from star_sphere_builder import add_celestial_sphere_traces
 
 
 def get_fetch_interval_for_type(obj_type, obj_name, trajectory_interval, 
@@ -579,21 +601,6 @@ def create_animation_dates(current_date, step, N):
     
     return dates_list
 
-# ============= REFINED ORBITS INTEGRATION =============
-# Add this entire block to palomas_orrery.py after imports
-
-# Try to import refined orbits module
-USE_REFINED_ORBITS = True  # Set to False to use only idealized orbits
-try:
-    if USE_REFINED_ORBITS:
-        import refined_orbits
-#        print("Refined orbits module loaded successfully")     # refined orbits are deprecated with new idealized improvements
-        REFINED_AVAILABLE = True
-    else:
-        REFINED_AVAILABLE = False
-except ImportError:
-    REFINED_AVAILABLE = False
-    print("Note: refined_orbits.py not found, using keplerian orbits only", flush=True)
 
 def calculate_axis_range_from_orbits(selected_objects, positions, planetary_params, 
                                     parent_planets, center_object_name):
@@ -970,399 +977,6 @@ def calculate_satellite_precession_info(selected_objects, start_date, end_date, 
             info_messages.append(info_msg)
     
     return info_messages
-
-# Helper function to get best available orbit
-def get_best_orbit(object_name, primary=None, idealized_func=None):
-    """
-    Get the best available orbit function for an object.
-    Returns the orbit function (refined if available, otherwise idealized).
-    """
-    # Try refined orbit first
-    if REFINED_AVAILABLE:
-        try:
-            # Map of convenience functions
-            refined_funcs = {
-                'phobos': refined_orbits.create_refined_phobos_orbit,
-                'deimos': refined_orbits.create_refined_deimos_orbit,
-                'moon': refined_orbits.create_refined_moon_orbit,
-                'io': refined_orbits.create_refined_io_orbit,
-                'europa': refined_orbits.create_refined_europa_orbit,
-                'ganymede': refined_orbits.create_refined_ganymede_orbit,
-                'callisto': refined_orbits.create_refined_callisto_orbit,
-            }
-            
-            obj_lower = object_name.lower()
-            if obj_lower in refined_funcs:
-                print(f"Using refined orbit for {object_name}", flush=True)
-                return refined_funcs[obj_lower]()
-        except Exception as e:
-            print(f"Could not load refined orbit for {object_name}: {e}", flush=True)
-    
-    # Fall back to idealized orbit
-    if idealized_func:
-        print(f"Using Keplerian orbit for {object_name}", flush=True)
-        return idealized_func()
-    
-    # No orbit available
-    print(f"Warning: No orbit available for {object_name}", flush=True)
-    return None
-
-def plot_refined_orbits_for_moons(fig, moon_names, center_id, color_map, orbit_data=None,
-                                  date_obj=None, date_range=None):
-    """
-    Add refined orbit traces for moons using refined_orbits module.
-    
-    Parameters:
-        orbit_data: Dict of actual orbit data to use for corrections
-    """
-    if not REFINED_AVAILABLE:
-        print("Refined orbits module not available", flush=True)
-        return fig
-        
-    import numpy as np
-    import plotly.graph_objects as go
-    
-    for moon_name in moon_names:
-        try:
-            # Get refined orbit function
-            print(f"\n{'='*60}", flush=True)
-            print(f"Creating refined orbit for {moon_name}...", flush=True)
-            
-            # Create refined orbit with actual data if available
-            orbit_key = f"{moon_name}_{center_id}"
-            actual_data = orbit_data.get(orbit_key) if orbit_data else None
-            
-            if actual_data:
-                print(f"Found actual orbit data for {moon_name}", flush=True)
-                # Create a custom refined orbit using the actual data
-                refined_orbit = create_refined_orbit_with_actual_data(
-                    moon_name, center_id, actual_data, refined_orbits
-                )
-            else:
-                print(f"No actual orbit data for {moon_name}, using Keplerian only", flush=True)
-                refined_orbit = refined_orbits.create_refined_orbit(moon_name, center_id)
-            
-            # Also get the idealized orbit for comparison
-            system = refined_orbits.get_refined_system()
-            idealized_orbit = system._get_idealized_orbit(moon_name, center_id)
-            
-            # Generate orbit points
-            t = np.linspace(0, 2*np.pi, 50)
-            
-            # Generate positions for both refined and ideal
-            refined_positions = []
-            ideal_positions = []
-            
-            for t_val in t:
-                try:
-                    # Get refined position
-                    pos_refined = refined_orbit(t_val)
-                    refined_positions.append(pos_refined)
-                    
-                    # Get ideal position for comparison
-                    if idealized_orbit:
-                        pos_ideal = idealized_orbit(t_val)
-                        ideal_positions.append(pos_ideal)
-                except Exception as e:
-                    print(f"  Error at t={t_val:.3f}: {e}", flush=True)
-                    refined_positions.append([0, 0, 0])
-                    ideal_positions.append([0, 0, 0])
-            
-            refined_positions = np.array(refined_positions)
-            ideal_positions = np.array(ideal_positions) if ideal_positions else None
-            
-            # Debug: Check the scale of positions
-            mean_radius = np.mean(np.linalg.norm(refined_positions, axis=1))
-            print(f"\nRefined orbit mean radius before conversion: {mean_radius:.6f}", flush=True)
-            
-            # Determine if we need to convert from km to AU
-            if mean_radius > 1:
-                refined_positions_au = refined_positions / 149597870.7
-                print(f"Converting from km to AU (mean radius now: {np.mean(np.linalg.norm(refined_positions_au, axis=1)):.6f} AU)", flush=True)
-            else:
-                refined_positions_au = refined_positions
-                print(f"Already in AU, no conversion needed", flush=True)
-            
-            # Do the same for ideal positions
-            if ideal_positions is not None and len(ideal_positions) > 0:
-                ideal_mean_radius = np.mean(np.linalg.norm(ideal_positions, axis=1))
-                if ideal_mean_radius > 1:
-                    ideal_positions_au = ideal_positions / 149597870.7
-                else:
-                    ideal_positions_au = ideal_positions
-                
-                # Compare refined vs ideal
-                differences = []
-                for i in range(len(refined_positions_au)):
-                    diff = np.linalg.norm(refined_positions_au[i] - ideal_positions_au[i])
-                    differences.append(diff)
-                
-                max_diff = np.max(differences)
-                mean_diff = np.mean(differences)
-                print(f"\nOrbit comparison:", flush=True)
-                print(f"  Maximum difference: {max_diff * 149597870.7:.1f} km ({max_diff:.6f} AU)", flush=True)
-                print(f"  Mean difference: {mean_diff * 149597870.7:.1f} km ({mean_diff:.6f} AU)", flush=True)
-                
-                if max_diff < 1e-10:
-                    print("  - WARNING: Refined orbit is identical to Keplerian orbit!", flush=True)
-                else:
-                    print("  -> Refined orbit differs from Keplerian orbit", flush=True)
-            
-            # Add trace with distinctive style
-            fig.add_trace(
-                go.Scatter3d(
-                    x=refined_positions_au[:, 0],
-                    y=refined_positions_au[:, 1],
-                    z=refined_positions_au[:, 2],
-            #        mode='lines+markers',  # Add markers for visibility
-                    mode='lines',  
-                    line=dict(
-            #            color='moon_color', 
-                        color=color_map(moon_name),     
-                        width=1,           # Thicker
-                        dash='dashdot'     # Different pattern
-            #            dash='dot'     # Different pattern
-                    ),
-            #        marker=dict(
-            #            size=1,
-            #            color='gold'
-            #        ),
-                    name=f"{moon_name} Refined Keplerian",
-                    text=[f"{moon_name} Refined Keplerian"] * len(refined_positions_au),
-                    customdata=[f"{moon_name} Refined Keplerian"] * len(refined_positions_au),
-                    hovertemplate='%{text}<extra></extra>',
-                    showlegend=True,
-                    opacity=0.9
-                )
-            )
-            print(f"\n-> Added refined orbit trace for {moon_name}", flush=True)
-            print(f"{'='*60}", flush=True)
-            
-        except Exception as e:
-            print(f"\n-> Could not add refined orbit for {moon_name}: {e}", flush=True)
-            import traceback
-            traceback.print_exc()
-            print(f"{'='*60}", flush=True)
-    
-    return fig
-
-def create_refined_orbit_with_actual_data(satellite, primary, actual_orbit_data, refined_orbits_module):
-    """Create a refined orbit using provided actual orbit data."""
-    import numpy as np
-    from scipy.spatial.transform import Rotation
-    
-    # Get the refined orbit system
-    system = refined_orbits_module.get_refined_system()
-    
-    # Get the idealized orbit
-    idealized = system._get_idealized_orbit(satellite, primary)
-    if not idealized:
-        print(f"No Keplerian orbit for {satellite}", flush=True)
-        return system._create_default_orbit(satellite, primary)
-    
-    # Calculate correction using the provided actual data
-    correction = None
-    try:
-        # Debug: Print structure of actual_orbit_data
-        print(f"\nActual orbit data keys: {list(actual_orbit_data.keys())}", flush=True)
-        
-        # Handle the nested data structure
-        if 'data_points' in actual_orbit_data:
-            # Data is nested under 'data_points' with date keys
-            data_points = actual_orbit_data['data_points']
-            print(f"Found data_points with {len(data_points)} entries", flush=True)
-            
-            # Extract x, y, z from date-keyed entries
-            if isinstance(data_points, dict) and len(data_points) > 0:
-                # Sort dates to ensure consistent ordering
-                sorted_dates = sorted(data_points.keys())
-                
-                # Extract coordinates
-                actual_x = []
-                actual_y = []
-                actual_z = []
-                
-                for date_key in sorted_dates:
-                    point = data_points[date_key]
-                    if isinstance(point, dict) and 'x' in point and 'y' in point and 'z' in point:
-                        actual_x.append(point['x'])
-                        actual_y.append(point['y'])
-                        actual_z.append(point['z'])
-                
-                actual_x = np.array(actual_x)
-                actual_y = np.array(actual_y)
-                actual_z = np.array(actual_z)
-                
-                print(f"Extracted {len(actual_x)} points from data_points", flush=True)
-            else:
-                print(f"Unexpected data_points structure", flush=True)
-                return idealized
-                
-        elif 'x' in actual_orbit_data and 'y' in actual_orbit_data and 'z' in actual_orbit_data:
-            # Direct x, y, z arrays (original expected format - temp cache uses this)
-            actual_x = np.array(actual_orbit_data['x'])
-            actual_y = np.array(actual_orbit_data['y'])
-            actual_z = np.array(actual_orbit_data['z'])
-            print(f"Using direct x,y,z arrays format (temp cache)", flush=True)
-        else:
-            print(f"Could not find x,y,z data in orbit structure", flush=True)
-            return idealized
-        
-        print(f"Actual orbit data length: x={len(actual_x)}, y={len(actual_y)}, z={len(actual_z)}", flush=True)
-        
-        # Check if actual data is in AU (should be since it comes from JPL)
-        actual_mean_radius = np.mean(np.sqrt(actual_x**2 + actual_y**2 + actual_z**2))
-        print(f"Actual orbit mean radius: {actual_mean_radius:.6f} AU ({actual_mean_radius * 149597870.7:.1f} km)", flush=True)
-        
-        # Ensure we have enough points
-        if len(actual_x) < 3:
-            print("Not enough actual orbit points to calculate correction", flush=True)
-            return idealized
-        
-        # Use SVD to find the best-fit plane through all actual orbit points
-        print("\nCalculating actual orbit normal using SVD...", flush=True)
-        actual_positions = np.column_stack((actual_x, actual_y, actual_z))
-        
-        # Center the points
-        actual_centroid = np.mean(actual_positions, axis=0)
-        actual_centered = actual_positions - actual_centroid
-        
-        # Use SVD to find the principal components
-        U_actual, S_actual, Vt_actual = np.linalg.svd(actual_centered)
-        
-        # The normal to the best-fit plane is the third principal component
-        n_actual = Vt_actual[2]
-        
-        # Ensure consistent orientation (pointing "up" in z)
-        if n_actual[2] < 0:
-            n_actual = -n_actual
-        
-        print(f"Actual orbit normal (SVD): [{n_actual[0]:.4f}, {n_actual[1]:.4f}, {n_actual[2]:.4f}]", flush=True)
-        print(f"SVD singular values: [{S_actual[0]:.6e}, {S_actual[1]:.6e}, {S_actual[2]:.6e}]", flush=True)
-        
-        # Check planarity - if the third singular value is very small, the orbit is planar
-        planarity_ratio = S_actual[2] / S_actual[0] if S_actual[0] > 0 else 0
-        print(f"Planarity ratio: {planarity_ratio:.6e} (smaller = more planar)", flush=True)
-        
-        # Calculate idealized orbit normal using SVD as well
-        print("\nCalculating Keplerian orbit normal using SVD...", flush=True)
-        t_sample = np.linspace(0, 2*np.pi, 50)
-        ideal_positions = []
-        
-        for t in t_sample:
-            pos = idealized(t)
-            ideal_positions.append(pos)
-        
-        ideal_positions = np.array(ideal_positions)
-        
-        # Check if idealized positions are in km or AU
-        ideal_mean_radius = np.mean(np.linalg.norm(ideal_positions, axis=1))
-        print(f"Keplerian orbit mean radius before any conversion: {ideal_mean_radius:.6f}", flush=True)
-        
-        # Convert to AU if needed
-        if ideal_mean_radius > 10:  # Likely in km
-            print(f"Converting Keplerian positions from km to AU", flush=True)
-            ideal_positions = ideal_positions / 149597870.7
-            ideal_mean_radius = np.mean(np.linalg.norm(ideal_positions, axis=1))
-            print(f"Keplerian orbit mean radius after conversion: {ideal_mean_radius:.6f} AU", flush=True)
-        
-        # Center the ideal points
-        ideal_centroid = np.mean(ideal_positions, axis=0)
-        ideal_centered = ideal_positions - ideal_centroid
-        
-        # Use SVD for ideal orbit
-        U_ideal, S_ideal, Vt_ideal = np.linalg.svd(ideal_centered)
-        n_ideal = Vt_ideal[2]
-        
-        # Ensure consistent orientation
-        if n_ideal[2] < 0:
-            n_ideal = -n_ideal
-        
-        print(f"Keplerian orbit normal (SVD): [{n_ideal[0]:.4f}, {n_ideal[1]:.4f}, {n_ideal[2]:.4f}]", flush=True)
-        
-        # Calculate rotation correction
-        dot_product = np.dot(n_ideal, n_actual)
-        print(f"\nDot product of normals: {dot_product:.6f}", flush=True)
-        
-        # Check if normals are already very close
-        if abs(dot_product) > 0.9999:  # Normals are essentially the same
-            print("Normals are already aligned (angle < 0.01 deg), no correction needed", flush=True)
-            return idealized
-        
-        # Calculate the rotation axis
-        axis = np.cross(n_ideal, n_actual)
-        axis_mag = np.linalg.norm(axis)
-        
-        if axis_mag > 1e-10:
-            axis = axis / axis_mag
-            angle = np.arccos(np.clip(dot_product, -1, 1))
-            
-            print(f"Rotation axis: [{axis[0]:.4f}, {axis[1]:.4f}, {axis[2]:.4f}]", flush=True)
-            print(f"Rotation angle: {np.degrees(angle):.2f} deg ({angle:.6f} radians)", flush=True)
-            
-            # Create the rotation correction
-            correction = Rotation.from_rotvec(angle * axis)
-            print(f"Created rotation correction of {np.degrees(angle):.2f} deg", flush=True)
-            
-            # Test the correction
-            test_ideal = ideal_positions[0] - ideal_centroid
-            test_corrected = correction.apply(test_ideal)
-        else:
-            print("Rotation axis has zero magnitude, normals are parallel", flush=True)
-            
-    except Exception as e:
-        print(f"Error calculating correction: {e}", flush=True)
-        import traceback
-        traceback.print_exc()
-    
-    # Create the refined orbit function
-    def refined_orbit(t):
-        """Refined orbit function that applies correction to Keplerian orbit."""
-        # Get position from idealized orbit
-        pos = idealized(t)
-        
-        # Apply correction if available
-        if correction is not None:
-            # Handle both single position and array of positions
-            if isinstance(pos, np.ndarray):
-                if pos.ndim == 1:
-                    # Single position
-                    # Center, rotate, then uncenter
-                    pos_centered = pos - ideal_centroid
-                    pos_corrected = correction.apply(pos_centered) + ideal_centroid
-                else:
-                    # Multiple positions
-                    pos_corrected = np.array([
-                        correction.apply(p - ideal_centroid) + ideal_centroid 
-                        for p in pos
-                    ])
-            else:
-                # Convert to numpy array if needed
-                pos_array = np.array(pos)
-                pos_centered = pos_array - ideal_centroid
-                pos_corrected = correction.apply(pos_centered) + ideal_centroid
-            
-            return pos_corrected
-        else:
-            return pos
-    
-    # Verify the refined orbit
-    if correction is not None:
-        print("\n-> Refined orbit function created WITH correction", flush=True)
-        
-        # Test comparison
-        test_t = np.linspace(0, 2*np.pi, 8)
-        for t in test_t[:3]:  # Just show first 3
-            ideal_pos = idealized(t)
-            refined_pos = refined_orbit(t)
-            diff = np.linalg.norm(ideal_pos - refined_pos) * 149597870.7  # km
-            print(f"  t={t:.2f}: difference = {diff:.1f} km", flush=True)
-    else:
-        print("\n-> Refined orbit function created WITHOUT correction (identical to Keplerian)", flush=True)
-    
-    return refined_orbit
-
-# ============= END REFINED ORBITS INTEGRATION =============
 
 # Add these constants after existing constants
 TEMP_CACHE_FILE = "orbit_paths_temp.json"
@@ -2344,6 +1958,13 @@ status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10),
 #   - Can be read, for example: mercury_var.get() → 0 or 1
 #   - Can be set: mercury_var.set(1)
 #   - Widgets can WATCH it for changes
+
+# Celestial sphere toggle variables (default: off)
+star_background_var = tk.IntVar(value=0)
+star_names_var = tk.IntVar(value=0)
+celestial_grid_var = tk.IntVar(value=0)
+celestial_grid_labels_var = tk.IntVar(value=0)
+constellation_names_var = tk.IntVar(value=0)
 
 sun_var = tk.IntVar(value=0)  
 sun_shells_var = tk.IntVar(value=0)  
@@ -5238,6 +4859,25 @@ def plot_objects():
                                              center_object_name=center_object_name
                                              )  
 
+            # =================================================================
+            # CELESTIAL SPHERE: Star background and grid traces
+            # =================================================================
+            # Stars and grid are added AFTER all solar system traces but BEFORE
+            # the trace reordering step that puts the center marker on top.
+            # Sphere radius = current axis_range magnitude.
+ 
+            # Celestial sphere: star background + coordinate grid
+            if (star_background_var.get() or celestial_grid_var.get()
+                    or constellation_names_var.get() ):
+                add_celestial_sphere_traces(
+                    fig, axis_range,
+                    show_stars=star_background_var.get(),
+                    show_names=star_names_var.get(),
+                    show_grid=celestial_grid_var.get(),
+                    show_labels=celestial_grid_labels_var.get(),
+                    show_constellation_names=constellation_names_var.get()
+                )
+                
             # Rearrange traces to ensure the center marker is on top
             center_trace_name = center_object_name  # This should match the 'name' parameter of your center marker trace
 
@@ -5326,20 +4966,22 @@ def plot_objects():
                     dict(
 
                         text=(
-                            "<b>Coordinate System (J2000 Ecliptic):</b><br><br>"
+                            "<b>Ecliptic Coordinates (J2000):</b><br><br>"
 
-                            "<b>+X:</b> Toward RA=0 deg (&#9800;) - same for all objects<br><br>"
+                            "<b>+X:</b> Vernal equinox (VE marker, RA=0h)<br><br>"
 
-                            + "<b>+Z:</b> Ecliptic North perpendicular to Earth's orbit<br>"
+                            + "<b>+Z:</b> Ecliptic North (NEP)<br>"
                             + ("<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For exoplanets: line of sight from star to Earth)</i><br><br>" 
                             if is_exoplanet_mode else "<br>")
 
-                            + "<b>XY plane:</b> Ecliptic, Earth's orbital plane<br>"
-                            + ("<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For exoplanets: sky plane, perpendicular to line of sight)</i><br><br><br>" 
-                            if is_exoplanet_mode else "<br><br>")
+                            + "<b>XY plane:</b> Ecliptic (amber circle)<br>"
+                            + ("<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(For exoplanets: sky plane, perpendicular to line of sight)</i><br><br>" 
+                            if is_exoplanet_mode else "")
 
-                            + "<i>See Orbital Parameter Visualization for detailed explanation of ecliptic coordinates</i>"
-                        ),                        
+                            + "<b>Teal circle:</b> Celestial equator (tilted 23.4&deg;)<br><br>"
+
+                            + "<i>Enable Celestial Grid to see coordinate circles</i>"
+                        ),                       
 
                         xref='paper',
                         yref='paper',
@@ -5478,52 +5120,6 @@ def plot_objects():
                     color_map=color_map,
                     show_closest_approach=show_closest_approach_var.get(),
                 )
-
-            # Add refined orbits if we're centered on a planet with moons
-            if center_object_name != 'Sun' and REFINED_AVAILABLE:
-                # Get the moons for this center
-                moons_to_plot = []
-                for obj in selected_objects:
-                    if obj in parent_planets.get(center_object_name, []):
-                        moons_to_plot.append(obj)
-                
-                if moons_to_plot:
-        #            print(f"\nAdding refined orbits for {center_object_name}'s moons...", flush=True)  # deprecated   
-
-                    # Pass the orbit data directly if in special fetch mode
-            #        orbit_data_to_pass = None
-                    # Collect actual orbit data to pass directly
-                    orbit_data_to_pass = {}
-
-                    # Check special fetch mode first
-                    if special_fetch_var.get() == 1 and temp_cache:
-            #            orbit_data_to_pass = temp_cache
-                        orbit_data_to_pass = temp_cache.copy()     
-                    else:
-                        # Try to get from the main cache
-                        for moon in moons_to_plot:
-                            orbit_key = f"{moon}_{center_object_name}"
-                            if orbit_key in orbit_paths_over_time:
-                                orbit_data_to_pass[orbit_key] = orbit_paths_over_time[orbit_key]  
-
-                    # Determine the date range based on object type (for satellites)
-                #    sat_plot_orbit_days = int(satellite_days_entry.get())  # Get the satellite days setting
-                    sat_plot_orbit_days = settings['days_to_plot']  # Use the actual days_to_plot value
-                    start_date = date_obj
-                    end_date = date_obj + timedelta(days=sat_plot_orbit_days)
-
-                    # DISABLED: Refined orbits system - osculating elements already include all perturbations
-                    # The refined_orbits.py module was an excellent exploration of orbital mechanics and
-                    # perturbation theory, but JPL Horizons osculating elements already incorporate
-                    # all physical effects (precession, J2, n-body perturbations, etc.)
-                    # Keeping this code for historical reference and potential future educational use.
-                    
-                    # fig = plot_refined_orbits_for_moons(
-                    #     fig, moons_to_plot, center_object_name, color_map, 
-                    #     orbit_data=orbit_data_to_pass,
-                    #     date_obj=date_obj,
-                    #     date_range=(start_date, end_date)
-                    # )
 
         # ============ EXOPLANET ORBITS ============
             # Plot exoplanet systems if any exoplanet objects are selected           
@@ -7177,6 +6773,18 @@ def animate_objects(step, label):
                 )
 
                         
+            # Celestial sphere: star background + coordinate grid (static backdrop)
+            if (star_background_var.get() or celestial_grid_var.get()
+                    or constellation_names_var.get() ):
+                add_celestial_sphere_traces(
+                    fig, axis_range,
+                    show_stars=star_background_var.get(),
+                    show_names=star_names_var.get(),
+                    show_grid=celestial_grid_var.get(),
+                    show_labels=celestial_grid_labels_var.get(),
+                    show_constellation_names=constellation_names_var.get()
+                )
+
             # Update layout with dynamic scaling
             fig.update_layout(
                 scene=dict(
@@ -7217,11 +6825,12 @@ def animate_objects(step, label):
                     # NEW: Coordinate System explanation box
                     dict(
 
-                        text="<b>Coordinate System (J2000 Ecliptic):</b><br><br>"
-                            "<b>+X:</b> Sun's direction from Earth at the vernal equinox (&#9800;)<br><br>"
-                            "<b>+Z:</b> Ecliptic North perpendicular to Earth's orbit<br><br>"
-                            "<b>XY plane:</b> Ecliptic, Earth's orbital plane<br><br><br>"
-                            "<i>See Orbital Parameter Visualization for detailed explanation</i>" if not is_exoplanet_mode
+                        text="<b>Ecliptic Coordinates (J2000):</b><br><br>"
+                            "<b>+X:</b> Vernal equinox (VE marker, RA=0h)<br><br>"
+                            "<b>+Z:</b> Ecliptic North (NEP)<br><br>"
+                            "<b>XY plane:</b> Ecliptic (amber circle)<br>"
+                            "<b>Teal circle:</b> Celestial equator (tilted 23.4&deg;)<br><br>"
+                            "<i>Enable Celestial Grid to see coordinate circles</i>" if not is_exoplanet_mode
                             else "<b>Coordinate System (Exoplanet):</b><br><br>"
                             "<b>Origin:</b> Host star at (0, 0, 0)<br><br>"
                             "<b>XY plane:</b> Sky plane (perpendicular to Earth)<br><br>"
@@ -7903,6 +7512,72 @@ def can_be_horizons_center(obj):
 checkbox_creation_order = []
 
     
+# --- Celestial Sphere Options ---
+# Star background and celestial grid checkboxes
+# These are top-level options in the object selection menu
+ 
+celestial_sphere_frame = tk.LabelFrame(celestial_frame, text="Celestial Sphere")
+celestial_sphere_frame.pack(pady=(5, 5), fill='x', padx=(5, 5))
+CreateToolTip(celestial_sphere_frame,
+    "Add a star background and/or celestial coordinate grid behind the solar system.\n"
+    "Stars are shown as uniform dots at their real sky directions.\n"
+    "The grid shows the ecliptic (planet orbital plane) with zodiac labels,\n"
+    "the celestial equator (tilted 23.4 deg), and coordinate poles.\n\n"
+    "These are cosmetic overlays -- solar system objects are unchanged.")
+ 
+star_bg_checkbutton = tk.Checkbutton(celestial_sphere_frame,
+    text="Star Background", variable=star_background_var)
+star_bg_checkbutton.pack(anchor='w')
+CreateToolTip(star_bg_checkbutton,
+    "Show ~288 stars brighter than magnitude 3.5 as uniform dots\n"
+    "on a sphere scaled to the current axis range.\n"
+    "Stars are at their real RA/Dec sky positions (ecliptic frame).")
+ 
+# Star names sub-checkbox (indented, only meaningful when stars are on)
+star_names_checkbutton = tk.Checkbutton(celestial_sphere_frame,
+    text="  Star Names", variable=star_names_var)
+star_names_checkbutton.pack(anchor='w', padx=(20, 0))
+CreateToolTip(star_names_checkbutton,
+    "Show star designations (e.g. '* alf Ori') on hover.\n"
+    "Requires Star Background to be enabled.")
+
+# Constellation names sub-checkbox (indented)
+constellation_names_checkbutton = tk.Checkbutton(celestial_sphere_frame,
+    text="  Constellation Names", variable=constellation_names_var)
+constellation_names_checkbutton.pack(anchor='w', padx=(20, 0))
+CreateToolTip(constellation_names_checkbutton,
+    "Show IAU constellation names as persistent labels at\n"
+    "brightness-weighted centroids of each constellation.\n"
+    "Names shown for all constellations with at least one\n"
+    "star brighter than magnitude 3.5.\n"
+    "Requires Star Background to be enabled.")
+
+
+celestial_grid_checkbutton = tk.Checkbutton(celestial_sphere_frame,
+    text="Celestial Grid", variable=celestial_grid_var)
+celestial_grid_checkbutton.pack(anchor='w')
+CreateToolTip(celestial_grid_checkbutton,
+    "Show celestial coordinate grid:\n"
+    "- Ecliptic plane (amber) with tick marks every 30 deg\n"
+    "- Celestial equator (teal) with RA tick marks every 2h\n"
+    "- Prime meridian (gray) with Dec tick marks every 30 deg\n"
+    "- Celestial and ecliptic poles, vernal equinox marker\n\n"
+    "The ecliptic is the XY plane in the orrery's coordinate system --\n"
+    "the plane in which the planets orbit.")
+
+# Labels sub-checkbox (indented, only meaningful when grid is on)
+celestial_grid_labels_checkbutton = tk.Checkbutton(celestial_sphere_frame,
+    text="  Labels", variable=celestial_grid_labels_var)
+celestial_grid_labels_checkbutton.pack(anchor='w', padx=(20, 0))
+CreateToolTip(celestial_grid_labels_checkbutton,
+    "Show dense coordinate labels on hover:\n"
+    "- 12 zodiac constellation names along the ecliptic\n"
+    "- Right ascension labels (0h-22h) on the celestial equator\n"
+    "- Declination labels (0 deg to +/-90 deg) on the prime meridian\n"
+    "- Full pole names (North/South Celestial/Ecliptic Pole)\n\n"
+    "Requires Celestial Grid to be enabled.")
+
+
 def create_celestial_checkbutton(name, variable):
     # Bold objects that can be used as centers (determined dynamically)
     # Strip leading hyphens/spaces used for visual hierarchy (e.g., "- Orcus" -> "Orcus")

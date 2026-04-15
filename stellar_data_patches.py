@@ -1,3 +1,12 @@
+"""
+stellar_data_patches.py - Manual corrections for stars with known bad catalog data.
+
+Small patch table mapping HIP numbers to corrected temperature, luminosity,
+and spectral type values. Applied after catalog processing to fix stars
+where automated pipelines produce incorrect results (e.g., Mizar).
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # stellar_data_patches.py
 import pandas as pd
 import numpy as np

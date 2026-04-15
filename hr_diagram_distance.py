@@ -1,4 +1,13 @@
-"""hr_diagram_distance.py - Create HR diagram for stars within specified distance."""
+"""
+hr_diagram_distance.py - HR diagram pipeline for distance-based queries.
+
+Standalone script (runs as subprocess from star_visualization_gui.py).
+Fetches stars from Hipparcos and Gaia within a distance limit in
+light-years, processes through data_processing.py, builds 2D HR diagram
+via visualization_2d.py. Results passed back via plot_data_exchange.py.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 
 import warnings
 from astropy.units import UnitsWarning

@@ -1,3 +1,14 @@
+"""
+star_visualization_gui.py - Stellar visualization GUI for Paloma's Orrery.
+
+Tkinter interface for HR diagrams (2D), 3D stellar neighborhoods, and
+planetarium views. Launches hr_diagram_*.py and planetarium_*.py as
+subprocesses, displays results via plot_data_report_widget.py. Supports
+magnitude-based and distance-based queries with lazy-loaded star property
+details.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # star_visualization_gui.py - Final version with enhanced pickle file support
 # This GUI reads the enhanced pickle files that contain both raw and calculated data
 # 

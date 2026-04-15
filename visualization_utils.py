@@ -1,4 +1,19 @@
-"""visualization_utils.py - Shared utilities for visualization functions."""
+"""
+visualization_utils.py - Shared Plotly utilities for orrery and star visualizations.
+
+Interactive figure controls used by both plot_objects and animate_objects:
+hover toggle buttons, camera center/look-at/fly-to buttons, and the
+format_detailed_hover_text() builder for orrery object hover strings.
+Also contains _calculate_grid_dtick() for scale-aware axis tick spacing.
+
+Key functions:
+    format_detailed_hover_text() - Full hover string for orrery objects
+    add_hover_toggle_buttons() - Show/hide hover text toggle
+    add_fly_to_object_buttons() - Camera fly-to dropdown
+    _calculate_grid_dtick() - Auto-dtick from axis span
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 
 import plotly.graph_objects as go
 import numpy as np

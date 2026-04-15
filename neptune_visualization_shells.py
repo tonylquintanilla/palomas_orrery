@@ -1,3 +1,15 @@
+"""
+neptune_visualization_shells.py - Neptune interior, ring, and magnetosphere shell traces.
+
+Sphere shells for Neptune's interior (core, mantle, clouds). Custom geometry
+for the ring system, tilted magnetosphere (47 degrees from rotation axis),
+magnetic field lines, and radiation belts. Neptune's offset dipole creates
+one of the most complex magnetospheres in the solar system.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

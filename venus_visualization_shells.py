@@ -1,3 +1,15 @@
+"""
+venus_visualization_shells.py - Venus interior and atmosphere shell traces.
+
+Sphere shells for Venus: core, mantle, crust, dense atmosphere, upper
+atmosphere, induced magnetosphere, and Hill sphere. Venus has no intrinsic
+magnetic field; its induced magnetosphere results from solar wind
+interaction with the ionosphere.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

@@ -1,3 +1,17 @@
+"""
+visualization_3d.py - 3D stellar neighborhood and planetarium plot builder.
+
+Creates 3D scatter plots of stars in Cartesian coordinates (light-years or
+parsecs) with spectral class coloring, Messier object overlays, and notable
+star annotations. Includes the Sun at origin. The 3D counterpart to
+visualization_2d.py.
+
+Key functions:
+    create_3d_visualization() - Main 3D star field figure builder
+    prepare_3d_data() - Coordinate transforms and data preparation
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # visualization_3d.py
 
 import numpy as np

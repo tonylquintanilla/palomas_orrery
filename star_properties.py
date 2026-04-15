@@ -1,3 +1,16 @@
+"""
+star_properties.py - SIMBAD stellar property queries with local caching.
+
+Fetches detailed stellar properties (spectral type, magnitudes, identifiers)
+from SIMBAD for individual stars, caching results locally to avoid repeated
+queries. Handles both old and new SIMBAD API column name formats.
+
+Key functions:
+    query_simbad_for_star_properties() - Batch query with cache
+    load_existing_properties() - Load from local pickle cache
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import os
 import pickle
 import time

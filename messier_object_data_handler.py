@@ -1,3 +1,13 @@
+"""
+messier_object_data_handler.py - Messier object coordinate transforms and data preparation.
+
+Converts Messier catalog entries from RA/Dec to Cartesian coordinates for
+3D visualization. Handles both distance-based and magnitude-based queries.
+Adds hover text with observing notes from star_notes.py. Produces pandas
+DataFrames consumed by visualization_3d.py for planetarium rendering.
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # messier_object_data_handler.py
 
 from astropy.coordinates import SkyCoord

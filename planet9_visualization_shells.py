@@ -1,3 +1,14 @@
+"""
+planet9_visualization_shells.py - Hypothetical Planet 9 shell traces.
+
+Sphere shells for Planet 9: estimated surface and Hill sphere only.
+Based on Batygin & Brown (2016) orbital predictions. All sphere-only --
+fully archivable once shell_configs.py migration is complete.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

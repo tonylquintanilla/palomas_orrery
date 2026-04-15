@@ -1,3 +1,15 @@
+"""
+uranus_visualization_shells.py - Uranus interior, ring, and magnetosphere shell traces.
+
+Sphere shells for Uranus interior (core, mantle, clouds). Custom geometry
+for the ring system, radiation belts, tilted magnetosphere (59 degrees
+from rotation axis), and Hill sphere. Uranus rotates nearly on its side,
+making its magnetosphere geometry unique.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

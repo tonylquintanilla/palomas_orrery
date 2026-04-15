@@ -1,3 +1,15 @@
+"""
+catalog_selection.py - Unified star selection from Hipparcos and Gaia catalogs.
+
+Merges stars from both catalogs with consistent deduplication logic.
+Used by both magnitude-mode and distance-mode HR diagram pipelines.
+Returns combined astropy Table with star counts by source category.
+
+Key functions:
+    select_stars() - Select and merge stars by magnitude or distance limit
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 from astropy.table import vstack
 from data_processing import estimate_vmag_from_gaia

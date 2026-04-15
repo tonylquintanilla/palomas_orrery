@@ -1,3 +1,14 @@
+"""
+pluto_visualization_shells.py - Pluto interior and atmosphere shell traces.
+
+Sphere shells for Pluto: core, mantle, crust, haze layer, atmosphere,
+and Hill sphere. Based on New Horizons (2015) data. All sphere-only --
+fully archivable once shell_configs.py migration is complete.
+
+Consumed by: planet_visualization.py (routing dispatcher)
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 import numpy as np
 import math
 import plotly.graph_objs as go

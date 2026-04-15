@@ -1,3 +1,18 @@
+"""
+stellar_parameters.py - Stellar temperature and parameter estimation from spectral types.
+
+Converts spectral type strings (e.g., "G2V", "M3III") to effective
+temperatures using lookup tables from constants_new.py. Handles B-V
+color index temperature estimation as fallback. Used by the HR diagram
+pipeline when catalog temperatures are missing.
+
+Key functions:
+    estimate_temperature_from_spectral_type() - Spectral type to Teff
+    calculate_bv_temperature() - B-V color to Teff fallback
+    select_best_temperature() - Pick best available Teff source
+
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
+"""
 # stellar_parameters.py
 
 import numpy as np
