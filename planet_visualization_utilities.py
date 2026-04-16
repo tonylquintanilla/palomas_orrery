@@ -1,8 +1,25 @@
 """
-Celestial Body Visualization Module
-==================================
-Functions for creating layered visualizations of solar system bodies (Sun, planets) in 3D plots.
-Each celestial body has individual shell components that can be toggled with selection variables.
+planet_visualization_utilities.py - Shared geometry helpers and body-radius aliases.
+
+The shim layer between constants_new.py (pure numeric data) and the per-body
+shell modules (mercury_visualization_shells.py, jupiter_visualization_shells.py,
+etc.). Exposes convenience aliases like MERCURY_RADIUS_AU that shell modules
+consume dozens of times, plus shared geometry functions (sphere point
+generation, magnetosphere shaping, rotations) used across all planets.
+
+Key functions:
+    rotate_points(x, y, z, angle, axis) - rotate point cloud around an axis
+    create_sphere_points(radius, n_points) - uniform sphere surface points
+    create_magnetosphere_shape(params) - asymmetric magnetosphere geometry
+    create_hover_markers_for_planet(center, radius, ...) - hover info trace
+
+Consumed by: all *_visualization_shells.py modules, planet_visualization.py
+
+Part of Paloma's Orrery - Data Preservation is Climate Action
+
+Module updated: April 16, 2026 with Anthropic's Claude Opus 4.6
+(provenance audit; solar/system constants now imported from constants_new.py
+rather than redefined locally)
 """
 
 import math
@@ -10,30 +27,24 @@ import numpy as np
 import plotly.graph_objs as go
 from constants_new import (
     KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS,
-    CENTER_BODY_RADII
+    CENTER_BODY_RADII,
+    # Solar structure
+    SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
+    # Solar atmosphere (in solar radii)
+    CHROMOSPHERE_RADII, INNER_CORONA_RADII, OUTER_CORONA_RADII,
+    STREAMER_BELT_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
+    # Heliosphere and beyond
+    TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
+    INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU,
+    GRAVITATIONAL_INFLUENCE_AU,
 )
 
 #####################################
-# Celestial Body Constants
+# Body-radius aliases (derived from CENTER_BODY_RADII)
 #####################################
-
-# Solar Constants
-SOLAR_RADIUS_AU = 0.00465047  # Sun's radius in AU
-CORE_AU = 0.00093               # Core in AU, approximately 0.2 Solar radii
-RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, approximately 0.7 Solar radii
-CHROMOSPHERE_RADII = 1.5    # Chromosphere extends to about 1.5 solar radii
-INNER_CORONA_RADII = 3  # Inner corona extends to 2-3 solar radii
-OUTER_CORONA_RADII = 50  # Outer corona extends up to 50 solar radii
-STREAMER_BELT_RADII  = 6.0    # Visible white-light corona: helmet streamers 4-6 R_sun (eclipse observations)
-ROCHE_LIMIT_RADII    = 3.45   # Fluid Roche limit: d = 2.44 * R_sun * (rho_sun/rho_comet)^(1/3)
-                               # rho_sun=1408, rho_comet=500 kg/m^3 -> 3.45 R_sun
-ALFVEN_SURFACE_RADII = 18.8   # Parker Solar Probe first crossing: April 28, 2021 at 18.8 R_sun
-TERMINATION_SHOCK_AU = 94  # Termination shock boundary in AU
-HELIOPAUSE_RADII = 26449  # Heliopause at about 123 AU
-INNER_LIMIT_OORT_CLOUD_AU = 2000  # Inner Oort cloud boundary in AU
-INNER_OORT_CLOUD_AU = 20000  # Inner Oort cloud outer boundary in AU
-OUTER_OORT_CLOUD_AU = 100000  # Outer Oort cloud boundary in AU
-GRAVITATIONAL_INFLUENCE_AU = 126000  # Sun's gravitational influence in AU
+# Shell modules consume these short names dozens of times each.
+# Source of truth: CENTER_BODY_RADII in constants_new.py.
+# See v3.20 protocol Option B: utility layer owns aliases, not constants_new.
 
 # Mercury Constants
 MERCURY_RADIUS_KM = CENTER_BODY_RADII['Mercury']        

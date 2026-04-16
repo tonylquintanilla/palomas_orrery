@@ -19,6 +19,16 @@ Verification process (April 2026):
          perihelion number corrected from 21 to 22
     4. Tony integrated corrections and made final decisions
 
+Revised 2026-04-16 by Anthropic's Claude Opus 4.6 and Google Gemini:
+    - CENTER_BODY_RADII convention changed from volumetric mean to
+      hybrid (equatorial for major planets, volumetric for small
+      bodies). Rationale: shell modules scale by R_body as a unit
+      of measure (e.g. 5.9 R_J for Io torus), and planetary-science
+      literature cites these fractions against equatorial radii.
+      Volumetric mean introduced silent ~2.3% position errors.
+    - Parker Solar Probe closest approach: 8.86 -> 9.86 R_sun was
+      correctly applied; this revision does not affect Parker.    
+
 Lesson: Verification by the same AI that generated the value is not
 verification. Cross-AI review (Mode 7) is load-bearing for facts.
 
@@ -206,33 +216,47 @@ PARKER_CLOSEST_RADII = 9.86
 # ============================================================
 # CENTER BODY RADII (km)
 # ============================================================
-# Volumetric mean radii unless noted.
-# Source: NASA NSSDCA Planetary Fact Sheets
+# Hybrid convention:
+#   - Major planets (Earth through Neptune) + Sun + Pluto: equatorial
+#     radius. Matches IAU 2015 nominal values and planetary-science
+#     literature convention for "N radii" measurements (e.g. Io torus
+#     at 5.9 R_J assumes equatorial = 71,492 km).
+#   - Small bodies (Bennu, Eris, Haumea, Makemake, Arrokoth, Planet 9):
+#     volumetric mean radius. "Equatorial" is not well-defined for
+#     irregular or highly ellipsoidal bodies.
+#   - Mercury, Venus, Moon: difference is sub-0.1%; volumetric retained.
+#
+# Sources:
+#   IAU 2015 Resolution B3 (Prsa et al. 2016, AJ 152:41) for Sun,
+#     Earth, Mars, Jupiter, Saturn, Uranus, Neptune nominal values.
+#   NASA NSSDCA Planetary Fact Sheets for Mercury, Venus, Moon.
+#   JPL Solar System Dynamics for dwarf planets / small bodies.
+#   Nimmo et al. 2017 (Icarus) for Pluto.
 # Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/
-# IAU 2015 Resolution B3 for Sun, Earth, Jupiter nominal values
-# JPL Solar System Dynamics for dwarf planets/small bodies
 # Ref: https://ssd.jpl.nasa.gov/planets/phys_par.html
-# Verified: 2026-04-15
+# Verified: 2026-04-16 (equatorial convention adopted per downstream
+#   usage analysis; prior volumetric values caused ~2.3% position error
+#   for Jupiter-scaled shells like Io torus).
 
-CENTER_BODY_RADII = {       # km (volumetric mean radius)
-    'Sun': 695700,       # IAU 2015 nominal (was 696340 -- photospheric measurement)
-    'Mercury': 2439.7,   # NASA Fact Sheet (volumetric mean)
-    'Venus': 6051.8,     # NASA Fact Sheet (volumetric mean)
-    'Earth': 6371.0,     # NASA Fact Sheet (volumetric mean)
-    'Moon': 1737.4,      # NASA Fact Sheet (volumetric mean)
-    'Mars': 3389.5,      # NASA Fact Sheet (volumetric mean; equatorial = 3396.2)
-    'Jupiter': 69911,    # NASA Fact Sheet (volumetric mean; equatorial = 71492 IAU nominal)
-    'Saturn': 58232,
-    'Uranus': 25362,
-    'Neptune': 24622,
-    'Pluto': 1188,
-    'Bennu': 0.262,     # Bennu's mean radius
-    'Eris': 1163,
-    'Haumea': 816,         # Mean radius (highly ellipsoidal: 1050x840x537 km)
-    'Makemake': 715,       # Mean radius
-    'Arrokoth': 9.95,    # Volumetric mean radius (~35x20x14 km bilobed shape)
-                         # Corrected: 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
-    'Planet 9': 24000   # comes from models that assume Planet Nine has a mass around 5-10 Earth masses and an internal composition similar to Uranus and Neptune.
+CENTER_BODY_RADII = {       # km (equatorial for major bodies, volumetric for small)
+    'Sun':      695700,     # IAU 2015 nominal solar radius
+    'Mercury':  2439.7,     # NASA Fact Sheet (volumetric mean; oblateness ~0.0009)
+    'Venus':    6051.8,     # NASA Fact Sheet (volumetric mean; oblateness ~0)
+    'Earth':    6378.137,   # IAU 2015 nominal equatorial (WGS-84; polar = 6356.752)
+    'Moon':     1737.4,     # NASA Fact Sheet (volumetric mean; oblateness ~0.0012)
+    'Mars':     3396.2,     # IAU 2015 nominal equatorial (volumetric = 3389.5)
+    'Jupiter':  71492,      # IAU 2015 nominal equatorial (volumetric = 69911)
+    'Saturn':   60268,      # IAU 2015 nominal equatorial (volumetric = 58232)
+    'Uranus':   25559,      # IAU 2015 nominal equatorial (volumetric = 25362)
+    'Neptune':  24764,      # IAU 2015 nominal equatorial (volumetric = 24622)
+    'Pluto':    1188.3,     # New Horizons occultation (Nimmo et al. 2017)
+    'Bennu':    0.262,      # Volumetric mean (top-shape asteroid, OSIRIS-REx)
+    'Eris':     1163,       # Volumetric mean (Sicardy et al. 2011 occultation)
+    'Haumea':   816,        # Volumetric mean (highly ellipsoidal: 1050x840x537 km)
+    'Makemake': 715,        # Volumetric mean (Brown et al.)
+    'Arrokoth': 9.95,       # Volumetric mean (~35x20x14 km bilobed shape)
+                            # Corrected 2026-04-15 per Gemini review (was 0.0088 = 8.8 meters!)
+    'Planet 9': 24000       # Model estimate (Batygin & Brown; 5-10 M_Earth assumption)
 }
 
 KNOWN_ORBITAL_PERIODS = {

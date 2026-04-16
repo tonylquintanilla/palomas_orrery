@@ -1,8 +1,25 @@
 """
-Celestial Body Visualization Module
-==================================
-Functions for creating layered visualizations of solar system bodies (Sun, planets) in 3D plots.
-Each celestial body has individual shell components that can be toggled with selection variables.
+planet_visualization.py - High-level planet and Sun visualization orchestration.
+
+Builds layered visualizations of solar system bodies (Sun, planets) for 3D
+plots by assembling shell traces from the per-body *_visualization_shells.py
+modules. Exposes the create_* functions called by palomas_orrery.py, plus
+the info-text strings that populate hover tooltips for each shell.
+
+Key functions:
+    create_celestial_body_visualization(fig, body, shell_vars) - dispatch entry
+    create_sun_visualization(fig, sun_shell_vars, animate, frames) - Sun shells
+    create_planet_visualization(fig, planet, shell_vars) - planet shell assembly
+    create_planet_shell_traces(planet, shell_vars) - return traces without adding
+
+Consumed by: palomas_orrery.py, palomas_orrery_helpers.py
+
+Part of Paloma's Orrery - Data Preservation is Climate Action
+
+Module updated: April 16, 2026 with Anthropic's Claude Opus 4.6
+(provenance audit; body-radius aliases and solar/system constants now
+imported from planet_visualization_utilities.py rather than redefined locally.
+Removed shadow redefinition of KM_PER_AU.)
 """
 
 import math
@@ -28,8 +45,27 @@ from solar_visualization_shells import (
 )  
 
 from planet_visualization_utilities import (
-    ROCHE_LIMIT_RADII, STREAMER_BELT_RADII, ALFVEN_SURFACE_RADII,
-    OUTER_CORONA_RADII, INNER_CORONA_RADII, CHROMOSPHERE_RADII, SOLAR_RADIUS_AU
+    # Solar structure and atmosphere
+    SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
+    CHROMOSPHERE_RADII, INNER_CORONA_RADII, OUTER_CORONA_RADII,
+    STREAMER_BELT_RADII, ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
+    # Heliosphere and beyond
+    TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
+    INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU,
+    GRAVITATIONAL_INFLUENCE_AU,
+    # Body-radius aliases (km and AU)
+    MERCURY_RADIUS_KM, MERCURY_RADIUS_AU,
+    VENUS_RADIUS_KM, VENUS_RADIUS_AU,
+    EARTH_RADIUS_KM, EARTH_RADIUS_AU,
+    MOON_RADIUS_KM, MOON_RADIUS_AU,
+    MARS_RADIUS_KM, MARS_RADIUS_AU,
+    JUPITER_RADIUS_KM, JUPITER_RADIUS_AU,
+    SATURN_RADIUS_KM, SATURN_RADIUS_AU,
+    URANUS_RADIUS_KM, URANUS_RADIUS_AU,
+    NEPTUNE_RADIUS_KM, NEPTUNE_RADIUS_AU,
+    PLUTO_RADIUS_KM, PLUTO_RADIUS_AU,
+    ERIS_RADIUS_KM, ERIS_RADIUS_AU,
+    PLANET9_RADIUS_KM, PLANET9_RADIUS_AU,
 )
 
 from solar_visualization_shells import (create_sun_core_shell,
@@ -257,73 +293,10 @@ from planet9_visualization_shells import (create_planet9_surface_shell,
                                         planet9_hill_sphere_info)
 
 
-#####################################
-# Celestial Body Constants
-#####################################
-
-# Solar Constants
-SOLAR_RADIUS_AU = 0.00465047  # Sun's radius in AU
-CORE_AU = 0.00093               # Core in AU, approximately 0.2 Solar radii
-RADIATIVE_ZONE_AU = 0.00325     # Radiative zone in AU, approximately 0.7 Solar radii
-CHROMOSPHERE_RADII = 1.5    # Chromosphere extends to about 1.5 solar radii
-INNER_CORONA_RADII = 3  # Inner corona extends to 2-3 solar radii
-OUTER_CORONA_RADII = 50  # Outer corona extends up to 50 solar radii
-TERMINATION_SHOCK_AU = 94  # Termination shock boundary in AU
-HELIOPAUSE_RADII = 26449  # Heliopause at about 123 AU
-INNER_LIMIT_OORT_CLOUD_AU = 2000  # Inner Oort cloud boundary in AU
-INNER_OORT_CLOUD_AU = 20000  # Inner Oort cloud outer boundary in AU
-OUTER_OORT_CLOUD_AU = 100000  # Outer Oort cloud boundary in AU
-GRAVITATIONAL_INFLUENCE_AU = 126000  # Sun's gravitational influence in AU
-# Constants
-KM_PER_AU = 149597870.7  # Conversion factor from km to AU
-
-# Mercury Constants
-MERCURY_RADIUS_KM = CENTER_BODY_RADII['Mercury']        
-MERCURY_RADIUS_AU = MERCURY_RADIUS_KM / KM_PER_AU
-
-# Venus Constants
-VENUS_RADIUS_KM = CENTER_BODY_RADII['Venus']
-VENUS_RADIUS_AU = VENUS_RADIUS_KM / KM_PER_AU
-
-# Earth Constants
-EARTH_RADIUS_KM = CENTER_BODY_RADII['Earth']
-EARTH_RADIUS_AU = EARTH_RADIUS_KM / KM_PER_AU
-
-# Moon Constants
-MOON_RADIUS_KM = CENTER_BODY_RADII['Moon']
-MOON_RADIUS_AU = MOON_RADIUS_KM / KM_PER_AU
-
-# Mars Constants
-MARS_RADIUS_KM = CENTER_BODY_RADII['Mars']  # JPL uses an equipotential virtual surface with a mean radius at the equator as the Mars datum. 
-MARS_RADIUS_AU = MARS_RADIUS_KM / KM_PER_AU  # Convert to AU
-
-# Jupiter Constants
-JUPITER_RADIUS_KM = CENTER_BODY_RADII['Jupiter']  # Equatorial radius in km
-JUPITER_RADIUS_AU = JUPITER_RADIUS_KM / KM_PER_AU  # Convert to AU
-
-# Saturn Constants
-SATURN_RADIUS_KM = CENTER_BODY_RADII['Saturn']  # Equatorial radius in km
-SATURN_RADIUS_AU = SATURN_RADIUS_KM / KM_PER_AU  # Convert to AU
-
-# Uranus Constants
-URANUS_RADIUS_KM = CENTER_BODY_RADII['Uranus']  # Equatorial radius in km
-URANUS_RADIUS_AU = URANUS_RADIUS_KM / KM_PER_AU  # Convert to AU
-
-# Neptune Constants
-NEPTUNE_RADIUS_KM = CENTER_BODY_RADII['Neptune']  # Equatorial radius in km
-NEPTUNE_RADIUS_AU = NEPTUNE_RADIUS_KM / KM_PER_AU  # Convert to AU
-
-# Pluto Constants
-PLUTO_RADIUS_KM = CENTER_BODY_RADII['Pluto']  # Equatorial radius in km
-PLUTO_RADIUS_AU = PLUTO_RADIUS_KM / KM_PER_AU  # Convert to AU
-
-# Eris Constants
-ERIS_RADIUS_KM = CENTER_BODY_RADII['Eris']  # Equatorial radius in km
-ERIS_RADIUS_AU = ERIS_RADIUS_KM / KM_PER_AU  # Convert to AU
-
-# Planet 9 Constants
-PLANET9_RADIUS_KM = CENTER_BODY_RADII['Planet 9']  # Equatorial radius in km
-PLANET9_RADIUS_AU = PLANET9_RADIUS_KM / KM_PER_AU  # Convert to AU
+# Celestial body constants (solar structure, body radii, KM_PER_AU) are
+# all imported from planet_visualization_utilities.py at the top of this
+# file. Do not redefine them here. Single source of truth: constants_new.py.
+# See protocol v3.20.
 
 def create_sun_visualization(fig, sun_shell_vars, animate=False, frames=None):
     """

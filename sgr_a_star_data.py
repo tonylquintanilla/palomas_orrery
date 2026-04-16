@@ -1,11 +1,20 @@
 """
-sgr_a_star_data.py
-Data module for the Galactic Center S-Stars visualization.
-Contains orbital elements and physical constants.
+sgr_a_star_data.py - S-star catalog and orbital mechanics for Sagittarius A*.
 
-The S-stars orbit Sagittarius A*, the supermassive black hole at the
-center of the Milky Way. These stars serve as "test particles" for
-Einstein's General Relativity, reaching speeds up to 8% of light.
+Data module for the Galactic Center visualization. Contains the catalog of
+S-stars orbiting the supermassive black hole at the Milky Way's center,
+their orbital elements, and the Kepler/GR math needed to place them in
+time. The S-stars serve as "test particles" for General Relativity,
+reaching speeds up to 8% of light.
+
+Key functions:
+    get_star_data(name) - retrieve orbital elements for a named S-star
+    true_anomaly_at_time(t, t_peri, period, e) - Kepler's equation solver
+    calculate_orbital_velocity(a, r, M) - vis-viva for current position
+    calculate_schwarzschild_precession_per_orbit(a, e, M) - GR periapsis shift
+
+Consumed by: sgr_a_visualization_core.py, sgr_a_grand_tour.py,
+sgr_a_visualization_animation.py, sgr_a_visualization_precession.py
 
 Sources:
 - GRAVITY Collaboration (2018, 2019, 2020)
@@ -13,11 +22,15 @@ Sources:
 - Peissker et al. (2020)
 
 Part of Paloma's Orrery - Data Preservation is Climate Action
+
+Module updated: April 15, 2026 with Anthropic's Claude Opus 4.6
 """
 
 import math
 import numpy as np
 import re
+
+from constants_new import KM_PER_AU
 
 # =============================================================================
 # TEMPERATURE AND COLOR UTILITIES
@@ -136,8 +149,16 @@ G_CONST = 6.67430e-11           # Gravitational constant (m^3 kg^-1 s^-2)
 SPEED_OF_LIGHT = 299792458.0    # Speed of light (m/s)
 SPEED_OF_LIGHT_KM_S = 299792.458  # Speed of light (km/s)
 SOLAR_MASS_KG = 1.989e30        # Solar mass (kg)
-AU_TO_METERS = 1.496e11         # 1 AU in meters
-AU_TO_KM = 1.496e8              # 1 AU in kilometers
+
+# AU conversion — imported from constants_new.py for single source of truth.
+# IAU 2012 defined value: 1 AU = 149,597,870.7 km exactly.
+# Previous local values (1.496e8, 1.496e11) were off by ~2,129 km per AU.
+# Source: IAU Resolution B2 (2012)
+# Ref: https://www.iau.org/static/resolutions/IAU2012_English.pdf
+# Verified: April 15, 2026
+AU_TO_KM = KM_PER_AU            # 1 AU in kilometers (149,597,870.7)
+AU_TO_METERS = KM_PER_AU * 1000 # 1 AU in meters (1.495978707e11)
+
 PARSEC_TO_AU = 206265.0         # 1 parsec in AU
 YEAR_TO_SECONDS = 365.25 * 24 * 3600  # Seconds per Julian year
 
