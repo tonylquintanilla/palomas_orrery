@@ -1,12 +1,22 @@
 """
-Paloma's Orrery - Celestial Objects Data Module
+celestial_objects.py - Celestial object definitions for Paloma's Orrery.
 
-This module contains all celestial object definitions separated from the GUI code.
-The data-only structure allows the GUI (palomas_orrery.py) to remain cleaner.
+Master catalog of ~179 objects queried from JPL Horizons. Each entry is a
+dict carrying the Horizons ID, object type, display symbol, hover text, and
+URL. Separated from the GUI so palomas_orrery.py stays clean. Covers planets,
+moons, dwarf planets, Lagrange points, Kuiper Belt / TNOs, comets (periodic,
+long-period, interstellar, sungrazers), spacecraft, and asteroids. Also
+provides shell checkbox builders for the visualization GUI.
 
-Usage in palomas_orrery.py:
-    from celestial_objects import OBJECT_DEFINITIONS, build_objects_list
-    objects = build_objects_list(OBJECT_DEFINITIONS, vars_dict, color_map)
+Key functions:
+    build_objects_list() - Assembles runtime object list from definitions
+    get_all_var_names()  - Returns all checkbox variable names
+    get_shell_var_names() - Returns shell-specific variable names
+    build_shell_checkboxes() - Builds Tkinter checkbox widgets for shells
+
+Consumed by: palomas_orrery.py (object selection, GUI checkboxes)
+
+Module updated: April 2026 with Anthropic's Claude Sonnet 4.6 with Gemini 3.5 Pro review
 """
 
 from datetime import datetime
@@ -648,8 +658,12 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://theskylive.com/c2025k1-info'},
 
     {'name': 'PANSTARRS', 'id': 'C/2025 R3', 'var_name': 'comet_c2025r3_var', 'color_key': 'PANSTARRS', 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
-    'object_type': 'trajectory', 'id_type': 'smallbody', 
-    'mission_info': 'Horizons: C/2025 R3 (PANSTARRS). Retrograde. Hyperbolic. This is a non-periodic comet that was discovered on September 8, 2025.', 
+    'object_type': 'trajectory', 'id_type': 'smallbody',
+    'mission_info': 'Horizons: C/2025 R3 (PANSTARRS). Retrograde. Hyperbolic. Oort Cloud origin.<br>'
+                    'Inbound orbit ~170,000 yr ellipse; Jupiter gravitational slingshot this pass<br>'
+                    'pushed e > 1.0 -- comet now exceeds solar escape velocity. One-way ejection.<br>'
+                    'Perihelion: Apr 19, 2026 at 0.499 AU. Earth closest approach: Apr 26 at 0.489 AU.<br>'
+                    'Gas-rich, dust-poor. Ion tail exceeded 10 deg by Apr 8; naked eye (mag 5.1) Apr 11.',
     'mission_url': 'https://www.space.com/astronomy/comets/will-comet-c-2025-r3-panstarrs-be-the-great-comet-of-2026'},
 
     {'name': 'Borisov', 'id': 'C/2025 V1', 'var_name': 'comet_2025v1_var', 'color_key': 'Borisov', 'symbol': 'diamond', 

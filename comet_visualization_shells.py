@@ -3,21 +3,24 @@ comet_visualization_shells.py - Comet visual components for 3D orrery plots.
 
 Builds nucleus, coma, ion tail, dust tail, and anti-tail traces for comets.
 Tail geometry is computed from Sun direction and heliocentric distance using
-activity factors that scale with solar proximity. Includes specialized traces
-for C/2026 A1 (MAPS): disintegration marker and ghost tail arc.
+activity factors that scale with solar proximity. Each comet entry in
+HISTORICAL_TAIL_DATA carries species-specific colors, tail lengths, and
+sublimation onset distance (max_active_distance_au). Includes specialized
+traces for C/2026 A1 (MAPS): disintegration marker and ghost tail arc.
 
 Key functions:
+    add_comet_tails_to_figure() - Master dispatch: adds all tail traces to fig
+    calculate_tail_activity_factor() - Activity scaling by heliocentric distance
     create_comet_nucleus() - Scaled sphere marker at comet position
     create_comet_ion_tail() - Straight anti-sunward ion tail
-    create_comet_dust_tail() - Curved dust tail with radiation pressure
-    create_maps_disintegration_marker() - Green diamond at 8.33 R_sun
+    create_comet_dust_tail() - Curved dust tail with radiation pressure offset
     create_maps_ghost_tail_trace() - Post-disintegration debris arc
-    add_comet_tails_to_figure() - Master dispatch: adds all tail traces to fig
 
 Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: April 2026 with Anthropic's Claude Sonnet 4.6 with Gemini 3.5 Pro review
 """
+
 import numpy as np
 import math
 import plotly.graph_objs as go
@@ -40,6 +43,7 @@ COMET_NUCLEUS_SIZES = {
     'Schaumasse': 3,  # ~2.6 km nucleus
     'Howell': 3,  # ~3 km (estimated)
     'Tempel 2': 16,  # ~16x9 km, elongated nucleus (well-studied by Deep Space 1)
+    'PANSTARRS': 3,   # ~few km (APOD Apr 14, 2026); no precise measurement published    
     'default': 5  # Default size for generic comets
 }
 
@@ -277,6 +281,46 @@ HISTORICAL_TAIL_DATA = {
         'dust_tail_color': 'yellow',
         'ion_tail_color': 'blue'
     },
+
+    'PANSTARRS': {
+        # C/2025 R3 (PanSTARRS) DATA NOTES (as of April 16, 2026):
+        # - Perihelion: April 19, 2026 at 0.499 AU
+        # - Earth closest approach: April 26, 2026 at 0.489 AU (73.2 million km)
+        # - Hyperbolic; Oort Cloud origin; ~170,000 yr since last inner-system visit
+        # - Inbound orbit was a long ellipse (e just under 1.0)
+        # - Jupiter gravitational slingshot (NOT non-gravitational outgassing) pushed e > 1.0
+        # - Same mechanism as Voyager flyby; accidental rather than planned
+        # - Comet now exceeds solar escape velocity -- permanently unbound
+        # - Gas-rich, dust-poor character (forward scattering boost limited by low dust)
+        # - Coma detected at discovery: 3.60 AU (Sep 11, 2025) -- early sublimation onset
+        # - Ion tail: 10+ degrees by Apr 8-9; dual-ray structure observed Apr 9, 2026
+        # - Naked-eye: mag 5.1 on Apr 11; predicted peak ~mag 3.5 baseline (optimistic ~0 fwd scatter)
+        # - peak_brightness_mag is documentary only; does not drive rendering
+        # - APOD Apr 14, 2026: green coma (C2 emissions), light blue wispy ion tail confirmed
+        # - Nucleus: "likely a few km" (APOD Apr 14); no precise measurement published
+        # - Reviewed: April 2026 with Google Gemini 2.5 Pro
+        'max_dust_tail_length_mkm': 10,   # Faint; gas-rich/dust-poor comet
+        'max_ion_tail_length_mkm': 25,    # 10+ deg observed; dominant feature
+        'peak_brightness_mag': 3.5,       # Baseline observed; optimistic ~0 with forward scattering
+        'perihelion_distance_au': 0.499,
+        'description': (
+            "C/2025 R3 (PanSTARRS) - Pristine Oort Cloud comet, ~170,000 yr since last "
+            "inner-system visit. Inbound orbit was a long ellipse (e just under 1.0); "
+            "Jupiter's gravity this pass acted as a gravitational slingshot -- the same "
+            "mechanism used to accelerate Voyager -- adding enough orbital energy to push "
+            "eccentricity above 1.0 and exceed solar escape velocity. Now on a one-way "
+            "hyperbolic trajectory out of the Solar System. Gas-rich, dust-poor. "
+            "Green C2 coma; dominant ion tail exceeded 10 degrees by Apr 8, 2026, "
+            "with dual-ray structure. Reached naked eye (mag 5.1) Apr 11. "
+            "Perihelion Apr 19 at 0.499 AU; closest to Earth Apr 26 at 0.489 AU."
+        ),
+        'coma_color': 'green',            # C2 emissions confirmed (APOD Apr 14, 2026)
+        'dust_tail_color': 'yellow',      # Faint; reflected sunlight
+        'ion_tail_color': 'blue',         # Light blue, wispy (APOD Apr 14, 2026)
+        'hyperbolic': True,
+        'max_active_distance_au': 4.0,    # Coma present at 3.60 AU at discovery
+    },
+
     'default': {
         'max_dust_tail_length_mkm': 10,
         'max_ion_tail_length_mkm': 20,

@@ -948,6 +948,7 @@ def create_sun_gravitational_shell():
         mode='markers',
         marker=dict(size=3.0, color='rgb(102, 187, 106)', opacity=0.3),
         name='Sun\'s Gravitational Influence',
+        legendgroup='Sun\'s Gravitational Influence',
         hoverinfo='skip',
         showlegend=True
     )
@@ -957,6 +958,7 @@ def create_sun_gravitational_shell():
         marker=dict(size=6, color='rgb(102, 187, 106)', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun\'s Gravitational Influence',
         text=[gravitational_influence_info_hover],
         customdata=['Sun\'s Gravitational Influence'],
         hovertemplate='%{text}<extra></extra>',
@@ -975,6 +977,7 @@ def create_sun_outer_oort_shell():
         mode='markers',
         marker=dict(size=3.0, color='white', opacity=0.3),
         name='Outer Oort Cloud',
+        legendgroup='Outer Oort Cloud',
         hoverinfo='skip',
         showlegend=True
     )
@@ -984,6 +987,7 @@ def create_sun_outer_oort_shell():
         marker=dict(size=6, color='white', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
+        legendgroup='Outer Oort Cloud',
         text=[outer_oort_info_hover],
         customdata=['Outer Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
@@ -1002,6 +1006,7 @@ def create_sun_inner_oort_shell():
         mode='markers',
         marker=dict(size=3.0, color='white', opacity=0.35),
         name='Inner Oort Cloud',
+        legendgroup='Inner Oort Cloud',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1011,6 +1016,7 @@ def create_sun_inner_oort_shell():
         marker=dict(size=6, color='white', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
+        legendgroup='Inner Oort Cloud',
         text=[inner_oort_info_hover],
         customdata=['Inner Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
@@ -1029,6 +1035,7 @@ def create_sun_inner_oort_limit_shell():
         mode='markers',
         marker=dict(size=3.0, color='white', opacity=0.35),
         name='Inner Limit of Oort Cloud',
+        legendgroup='Inner Limit of Oort Cloud',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1038,6 +1045,7 @@ def create_sun_inner_oort_limit_shell():
         marker=dict(size=6, color='white', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
+        legendgroup='Inner Limit of Oort Cloud',
         text=[inner_limit_oort_info_hover],
         customdata=['Inner Limit of Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
@@ -1056,6 +1064,7 @@ def create_sun_heliopause_shell():
         mode='markers',
         marker=dict(size=3.0, color='rgb(135, 206, 250)', opacity=0.4),
         name='Solar Wind Heliopause',
+        legendgroup='Solar Wind Heliopause',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1065,6 +1074,7 @@ def create_sun_heliopause_shell():
         marker=dict(size=6, color='rgb(135, 206, 250)', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Solar Wind Heliopause',
         text=[solar_wind_info_hover],
         customdata=['Solar Wind Heliopause'],
         hovertemplate='%{text}<extra></extra>',
@@ -1083,6 +1093,7 @@ def create_sun_termination_shock_shell():
         mode='markers',
         marker=dict(size=3.0, color='rgb(240, 244, 255)', opacity=0.4),
         name='Solar Wind Termination Shock',
+        legendgroup='Solar Wind Termination Shock',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1092,6 +1103,7 @@ def create_sun_termination_shock_shell():
         marker=dict(size=6, color='rgb(240, 244, 255)', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
+        legendgroup='Solar Wind Termination Shock',
         text=[termination_shock_info_hover],
         customdata=['Solar Wind Termination Shock'],
         hovertemplate='%{text}<extra></extra>',
@@ -1110,6 +1122,7 @@ def create_sun_outer_corona_shell():
         mode='markers',
         marker=dict(size=3.5, color='rgb(25, 25, 112)', opacity=0.5),
         name='Sun: Outer Corona',
+        legendgroup='Sun: Outer Corona',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1119,6 +1132,7 @@ def create_sun_outer_corona_shell():
         marker=dict(size=6, color='rgb(25, 25, 112)', opacity=0.95,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Outer Corona',
         text=[outer_corona_info_hover],
         customdata=['Sun: Outer Corona'],
         hovertemplate='%{text}<extra></extra>',
@@ -1137,6 +1151,7 @@ def create_sun_inner_corona_shell():
         mode='markers',
         marker=dict(size=3.0, color='rgb(0, 0, 255)', opacity=0.45),
         name='Sun: Inner Corona',
+        legendgroup='Sun: Inner Corona',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1146,6 +1161,7 @@ def create_sun_inner_corona_shell():
         marker=dict(size=6, color='rgb(0, 0, 255)', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Inner Corona',
         text=[inner_corona_info_hover],
         customdata=['Sun: Inner Corona'],
         hovertemplate='%{text}<extra></extra>',
@@ -1168,6 +1184,7 @@ def create_sun_streamer_belt_shell():
         mode='markers',
         marker=dict(size=3.0, color='rgb(255, 200, 80)', opacity=0.45),
         name='Sun: Streamer Belt (Visible Corona)',
+        legendgroup='Sun: Streamer Belt (Visible Corona)',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1177,6 +1194,7 @@ def create_sun_streamer_belt_shell():
         marker=dict(size=6, color='rgb(255, 200, 80)', opacity=0.95,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Streamer Belt (Visible Corona)',
         text=[streamer_belt_info_hover],
         customdata=['Sun: Streamer Belt (Visible Corona)'],
         hovertemplate='%{text}<extra></extra>',
@@ -1202,6 +1220,7 @@ def create_sun_roche_limit_shell():
         mode='markers',
         marker=dict(size=3.0, color='rgb(200, 60, 60)', opacity=0.5),
         name='Sun: Roche Limit (Comets)',
+        legendgroup='Sun: Roche Limit (Comets)',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1211,6 +1230,7 @@ def create_sun_roche_limit_shell():
         marker=dict(size=6, color='rgb(200, 60, 60)', opacity=0.95,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Roche Limit (Comets)',
         text=[roche_limit_info_hover],
         customdata=['Sun: Roche Limit (Comets)'],
         hovertemplate='%{text}<extra></extra>',
@@ -1235,6 +1255,7 @@ def create_sun_alfven_surface_shell():
         mode='markers',
         marker=dict(size=3.5, color='rgb(0, 200, 200)', opacity=0.35),
         name='Sun: Alfven Surface',
+        legendgroup='Sun: Alfven Surface',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1244,6 +1265,7 @@ def create_sun_alfven_surface_shell():
         marker=dict(size=6, color='rgb(0, 200, 200)', opacity=0.95,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Alfven Surface',
         text=[alfven_surface_info_hover],
         customdata=['Sun: Alfven Surface'],
         hovertemplate='%{text}<extra></extra>',
@@ -1262,6 +1284,7 @@ def create_sun_chromosphere_shell():
         mode='markers',
         marker=dict(size=3.0, color='rgb(30, 144, 255)', opacity=0.5),
         name='Sun: Chromosphere',
+        legendgroup='Sun: Chromosphere',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1271,6 +1294,7 @@ def create_sun_chromosphere_shell():
         marker=dict(size=6, color='rgb(30, 144, 255)', opacity=0.95,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Chromosphere',
         text=[chromosphere_info_hover],
         customdata=['Sun: Chromosphere'],
         hovertemplate='%{text}<extra></extra>',
@@ -1289,6 +1313,7 @@ def create_sun_photosphere_shell():
         mode='markers',
         marker=dict(size=7.0, color='rgb(255, 244, 214)', opacity=1.0),
         name='Sun: Photosphere',
+        legendgroup='Sun: Photosphere',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1298,6 +1323,7 @@ def create_sun_photosphere_shell():
         marker=dict(size=6, color='rgb(255, 244, 214)', opacity=0.95,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
+        legendgroup='Sun: Photosphere',
         text=[photosphere_info_hover],
         customdata=['Sun: Photosphere'],
         hovertemplate='%{text}<extra></extra>',
@@ -1316,6 +1342,7 @@ def create_sun_radiative_shell():
         mode='markers',
         marker=dict(size=7, color='rgb(30, 144, 255)', opacity=1.0),
         name='Sun: Radiative Zone',
+        legendgroup='Sun: Radiative Zone',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1325,6 +1352,7 @@ def create_sun_radiative_shell():
         marker=dict(size=6, color='rgb(30, 144, 255)', opacity=0.95,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Radiative Zone',
         text=[radiative_zone_info_hover],
         customdata=['Sun: Radiative Zone'],
         hovertemplate='%{text}<extra></extra>',
@@ -1343,6 +1371,7 @@ def create_sun_core_shell():
         mode='markers',
         marker=dict(size=10, color='rgb(70, 130, 180)', opacity=1.0),
         name='Sun: Core',
+        legendgroup='Sun: Core',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1352,6 +1381,7 @@ def create_sun_core_shell():
         marker=dict(size=6, color='rgb(70, 130, 180)', opacity=0.95,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Sun: Core',
         text=[core_info_hover],
         customdata=['Sun: Core'],
         hovertemplate='%{text}<extra></extra>',
@@ -1413,6 +1443,7 @@ def create_sun_hills_cloud_torus(inner_radius=2000, outer_radius=20000, thicknes
         mode='markers',
         marker=dict(size=1.5, color='rgb(173, 216, 230)', opacity=0.4, symbol='circle'),
         name='Hills Cloud (Inner Oort - Toroidal)',
+        legendgroup='Hills Cloud (Inner Oort - Toroidal)',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1424,6 +1455,7 @@ def create_sun_hills_cloud_torus(inner_radius=2000, outer_radius=20000, thicknes
         marker=dict(size=6, color='rgb(173, 216, 230)', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Hills Cloud (Inner Oort - Toroidal)',
         text=[hills_hover],
         customdata=['Hills Cloud Torus'],
         hovertemplate='%{text}<extra></extra>',
@@ -1482,6 +1514,7 @@ def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=1
         mode='markers',
         marker=dict(size=1.0, color='rgb(255, 255, 255)', opacity=0.3, symbol='circle'),
         name='Outer Oort Cloud (Clumpy)',
+        legendgroup='Outer Oort Cloud (Clumpy)',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1492,6 +1525,7 @@ def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=1
         marker=dict(size=6, color='rgb(255, 255, 255)', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
+        legendgroup='Outer Oort Cloud (Clumpy)',
         text=[clumpy_hover],
         customdata=['Outer Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
@@ -1531,6 +1565,7 @@ def create_sun_galactic_tide(radius=50000, n_points=2000):
         mode='markers',
         marker=dict(size=0.8, color='rgb(255, 182, 193)', opacity=0.2, symbol='circle'),
         name='Galactic Tide Region',
+        legendgroup='Galactic Tide Region',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1541,6 +1576,7 @@ def create_sun_galactic_tide(radius=50000, n_points=2000):
         marker=dict(size=6, color='rgb(255, 182, 193)', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
+        legendgroup='Galactic Tide Region',
         text=[tide_hover],
         customdata=['Galactic Tide Region'],
         hovertemplate='%{text}<extra></extra>',

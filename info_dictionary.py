@@ -1957,18 +1957,24 @@ INFO = {
         '* Its orbital period is uncertain, but estimates range from 1,400 to over 20,000 years.\n' 
         '* There is also a chance that Earth may pass through debris from the comet, potentially causing a minor meteor shower around October 5, 2025.',
 
-        'PANSTARRS': 
-        # '***TO VISUALIZE THE COMPLETE ORBIT, SET MANUAL SCALE TO AT LEAST 1500 AU***\n\n'
-        'Horizons: C/2025 R3. Comet C/2025 R3 (PANSTARRS) is a non-periodic comet that was discovered on September 8, 2025.\n' 
-        '* The discovery was made by the Pan-STARRS survey team, who identified the comet in images from the Pan-STARRS telescope.\n' 
-        '* The comet has a long, impressive tail, which has been observed to be about 2 degrees long, or roughly the length of five full moons.\n' 
-        '* The comet reached its perihelion on April 19, 2026, at a distance of about 0.5 astronomical units (AU).\n' 
-        '* After its perihelion, it became more visible from Earth. Its closest approach to our planet is projected to occur around ' 
-        'May 19-21, 2026, at a distance of approximately 0.26 AU (39 million kilometers or 24 million miles).\n' 
-        '* Initially, the comet was best observed from the Southern Hemisphere, but as it moves away from the sun, it will become ' 
-        'easier to see from the Northern Hemisphere. It is currently visible through binoculars, and there is a possibility that it ' 
-        'could become bright enough to be seen with the naked eye under dark skies, potentially reaching an apparent magnitude of 4 or higher.\n' 
-        '* Its orbital period is uncertain (hyperbolic), but estimates range from 1,400 to over 20,000 years.\n', 
+        'PANSTARRS':
+        'Horizons: C/2025 R3. Comet C/2025 R3 (PanSTARRS) is a hyperbolic Oort Cloud comet\n'
+        'discovered September 8, 2025, by the Pan-STARRS survey telescope at Haleakala, Hawaii.\n\n'
+        '* Pristine long-period comet -- likely ~170,000 years since its last inner-system visit.\n'
+        '* This is its final passage. Jupiter\'s gravity acted as an unplanned gravitational\n'
+        '  slingshot -- the same mechanism NASA used to send Voyager to interstellar space --\n'
+        '  adding enough orbital energy to push the comet\'s eccentricity above 1.0.\n'
+        '  The comet now exceeds solar escape velocity and is on a one-way trip into\n'
+        '  interstellar space. It traveled ~170,000 years to get here; Jupiter sent it away forever.\n'
+        '* Perihelion: April 19, 2026 at 0.499 AU (74.6 million km from the Sun).\n'
+        '* Closest approach to Earth: April 26, 2026 at 0.489 AU (73.2 million km).\n'
+        '* Gas-rich, dust-poor character. Ion tail dominated -- exceeded 10 degrees by April 8, 2026,\n'
+        '  with a dual-ray structure observed by astrophotographers on April 9.\n'
+        '* Green coma (C2 dicarbon emissions) and light blue wispy ion tail confirmed (APOD April 14, 2026).\n'
+        '* Reached naked-eye visibility (magnitude 5.1) on April 11, 2026.\n'
+        '* Predicted peak brightness: ~magnitude 3.5 (baseline); possibly ~0 with forward scattering near perihelion.\n'
+        '* Best observed from Northern Hemisphere before April 19; Southern Hemisphere from late April onward.\n'
+        '* Nucleus estimated at a few km diameter; no precise measurement published as of April 2026.\n',
 
         '6AC4721': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
         'Provisional designation for C/2026 A1 (MAPS) before JPL assigned a formal Horizons ID.\n'
