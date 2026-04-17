@@ -664,7 +664,7 @@ OBJECT_DEFINITIONS = [
                     'pushed e > 1.0 -- comet now exceeds solar escape velocity. One-way ejection.<br>'
                     'Perihelion: Apr 19, 2026 at 0.499 AU. Earth closest approach: Apr 26 at 0.489 AU.<br>'
                     'Gas-rich, dust-poor. Ion tail exceeded 10 deg by Apr 8; naked eye (mag 5.1) Apr 11.',
-    'mission_url': 'https://www.space.com/astronomy/comets/will-comet-c-2025-r3-panstarrs-be-the-great-comet-of-2026'},
+    'mission_url': 'https://in-the-sky.org/data/object.php?id=CK25R030'},
 
     {'name': 'Borisov', 'id': 'C/2025 V1', 'var_name': 'comet_2025v1_var', 'color_key': 'Borisov', 'symbol': 'diamond', 
     # Borisov (C/2025 V1) 2025-Nov-11 16:37:03; data arc: 2025-10-29 to 2025-11-05

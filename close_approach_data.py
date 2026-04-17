@@ -1,37 +1,40 @@
 """
-close_approach_data.py
+close_approach_data.py - JPL CAD API client for small-body close approach data.
 
-Fetch and cache close approach data from JPL's Small Body Close Approach
-Data (CAD) API for any small body against any major body.
+Fetches and caches close approach data from JPL's Small Body Close Approach
+Data (CAD) API. Returns center-to-center distances plus derived surface
+distances using canonical center-body radii from constants_new.py. Supports
+any small body against any major planet (plus Moon, Pluto).
 
-API endpoint: https://ssd-api.jpl.nasa.gov/cad.api
-
-Designed for Paloma's Orrery close approach visualization infrastructure.
 Motivated by Apophis (99942) Earth flyby on April 13, 2029 (Friday the 13th).
 
-Cache strategy:
-    Stored in data/close_approach_cache.json under 'close_approach:DESIGNATION:BODY' keys.
-    Same cache file used by orbit_data_manager -- already has multi-generation
-    backup safety procedures.
+API endpoint: https://ssd-api.jpl.nasa.gov/cad.api
+Cache: data/close_approach_cache.json under 'close_approach:DESIGNATION:BODY' keys.
+
+Key functions:
+    get_close_approaches(designation, body, date_min, date_max) - all approaches
+    get_closest_approach(designation, body, date_min, date_max) - single closest
 
 Usage:
-    from close_approach_data import get_close_approaches, get_closest_approach
-
-    # Get all approaches for Apophis near Earth in 2029
-    approaches = get_close_approaches('99942', body='Earth',
-                                       date_min='2029-01-01', date_max='2030-01-01')
-
-    # Get the single closest approach (most common use case)
+    from close_approach_data import get_closest_approach
     approach = get_closest_approach('99942', body='Earth',
                                      date_min='2029-01-01', date_max='2030-01-01')
-
     if approach:
         print(f"Perigee: {approach['date']}")
         print(f"Distance: {approach['dist_km']:.1f} km center-to-center")
         print(f"Velocity: {approach['v_rel_kms']:.3f} km/s")
 
-Part of Paloma's Orrery.
+Consumed by: palomas_orrery.py (Apophis and other close-approach plots)
+
+Part of Paloma's Orrery - Data Preservation is Climate Action
 Created: March 2026
+
+Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
+(provenance audit; local AU conversion and radii dict replaced with imports
+from constants_new.py. The previous local radii dict had pre-April-16
+volumetric-mean values, so Jupiter surface distances were off by ~1,580 km
+and Saturn by ~2,000 km under the current Hybrid Radius Convention.
+Consolidation fixes that staleness.)
 """
 
 import json
@@ -41,30 +44,21 @@ import urllib.parse
 from datetime import datetime, date
 from pathlib import Path
 
+from constants_new import KM_PER_AU, CENTER_BODY_RADII
+
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 
 CAD_API_URL = "https://ssd-api.jpl.nasa.gov/cad.api"
 
-AU_TO_KM = 149597870.7  # km per AU
+# Local alias preserved for minimal churn in existing callsites.
+# Canonical source: constants_new.KM_PER_AU.
+AU_TO_KM = KM_PER_AU
 
-# Surface radii for center bodies (km) -- for surface distance calculation.
-# Matches CENTER_BODY_RADII in constants_new.py; duplicated here to keep
-# this module standalone.
-CENTER_BODY_RADII_KM = {
-    'Sun':     695700.0,
-    'Mercury':   2439.7,
-    'Venus':     6051.8,
-    'Earth':     6371.0,
-    'Moon':      1737.4,
-    'Mars':      3389.5,
-    'Jupiter':  69911.0,
-    'Saturn':   58232.0,
-    'Uranus':   25362.0,
-    'Neptune':  24622.0,
-    'Pluto':     1188.3,
-}
+# Surface radii for center bodies now come from constants_new.CENTER_BODY_RADII
+# (canonical, hybrid convention: equatorial for major planets, volumetric for
+# small bodies). Previously a local dict carried pre-April-16 volumetric values.
 
 # Abbreviated body names accepted by the CAD API
 # See: https://ssd-api.jpl.nasa.gov/doc/cad.html
@@ -276,8 +270,8 @@ def _fetch_from_api(designation, body='Earth', date_min=None, date_max=None,
         dist_km = dist * AU_TO_KM
         surface_km = None
         canonical_body = _BODY_CANONICAL.get(cad_body, body)
-        if canonical_body in CENTER_BODY_RADII_KM:
-            surface_km = dist_km - CENTER_BODY_RADII_KM[canonical_body]
+        if canonical_body in CENTER_BODY_RADII:
+            surface_km = dist_km - CENTER_BODY_RADII[canonical_body]
 
         approaches.append({
             'jd':          jd,

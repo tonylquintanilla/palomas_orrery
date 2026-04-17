@@ -20,13 +20,17 @@ Part of Paloma's Orrery - Data Preservation is Climate Action
 Module updated: April 16, 2026 with Anthropic's Claude Opus 4.6
 (provenance audit; solar/system constants now imported from constants_new.py
 rather than redefined locally)
+
+Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
+(provenance audit; added SUN_RADIUS_KM re-export for comet_visualization_shells.py;
+line endings normalized to LF)
 """
 
 import math
 import numpy as np
 import plotly.graph_objs as go
 from constants_new import (
-    KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS,
+    KM_PER_AU, SUN_RADIUS_KM, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS,
     CENTER_BODY_RADII,
     # Solar structure
     SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,

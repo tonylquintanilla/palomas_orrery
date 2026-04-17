@@ -15,7 +15,9 @@ Key functions:
     add_mean_orbit_trace() - Simple Keplerian ellipse from mean elements
     calculate_*_satellite_elements() - Per-system satellite orbit models
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
+(provenance audit; 45 hardcoded AU-in-km values replaced with KM_PER_AU
+import from constants_new.py)
 """
 # idealized_orbits.py
 
@@ -25,7 +27,7 @@ import plotly.graph_objs as go
 import traceback  # Add this import
 from datetime import datetime, timedelta
 from osculating_cache_manager import get_elements_with_prompt
-from constants_new import color_map, KNOWN_ORBITAL_PERIODS
+from constants_new import color_map, KNOWN_ORBITAL_PERIODS, KM_PER_AU
 from orbital_elements import planetary_params as ORIGINAL_planetary_params
 from apsidal_markers import (
     add_perihelion_marker,
@@ -401,7 +403,7 @@ def calculate_mars_satellite_elements(date, satellite_name):
         
         # Tidal acceleration (Phobos spiraling inward)
         # Semi-major axis decreases by ~1.8 cm/year
-        a_secular = -1.8e-5 / 149597870.7 / 365.25 * d  # AU change
+        a_secular = -1.8e-5 / KM_PER_AU / 365.25 * d  # AU change
         
     elif satellite_name == 'Deimos':
         a_base = 0.0001568
@@ -1776,7 +1778,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                 epoch = f"{date.strftime('%Y-%m-%d')} (approx)"
                 print(f"\n[BARYCENTER MODE] {object_name}: using fallback angular elements (no cache)", flush=True)
             
-            print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+            print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
             print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg (from cache)", flush=True)
             """
         
@@ -1798,7 +1800,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                 Omega = elements.get('Omega', BINARY_PARAMS['Omega_ecliptic'])
                 epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
                 print(f"\n[BARYCENTER MODE] {object_name}: using barycentric osculating elements ({cache_key})", flush=True)
-                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
                 print(f"  e={e:.6f}, i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
             else:
                 # FALLBACK: Calculate from mass ratio + angular elements from Pluto-centered cache
@@ -1828,7 +1830,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                     epoch = f"{date.strftime('%Y-%m-%d')} (approx)"
                     print(f"  Using fallback angular elements (no cache)", flush=True)
                 
-                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
                 print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg (from cache)", flush=True)
 
         else:
@@ -2188,7 +2190,7 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             f"Epoch: {epoch}<br>"
             f"<br>"
             f"<b>Orbital Elements:</b><br>"
-            f"a = {a:.6f} AU ({a * 149597870.7:.0f} km)<br>"
+            f"a = {a:.6f} AU ({a * KM_PER_AU:.0f} km)<br>"
             f"e = {e:.4f}<br>"
             f"i = {i:.2f} deg<br>"
             f"omega = {omega:.2f} deg<br>"
@@ -2281,7 +2283,7 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
             f"<b>Pluto's Osculating Orbit around Barycenter</b><br>"
             f"<i>The smaller orbit of the binary pair</i><br><br>"
             f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-            f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
+            f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
             f"e = {e:.4f} (nearly circular)<br>"
             f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
             f"Period: {binary_params['period_days']:.3f} days<br><br>"
@@ -2304,7 +2306,7 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
             f"<b>Charon's Osculating Orbit around Barycenter</b><br>"
             f"<i>The larger orbit of the binary pair</i><br><br>"
             f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-            f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
+            f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
             f"e = {e:.4f} (nearly circular)<br>"
             f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
             f"Period: {binary_params['period_days']:.3f} days<br><br>"
@@ -2328,7 +2330,7 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
         return (
             f"<b>{object_name} Orbit</b><br>"
             f"<i>(around Pluto-Charon barycenter)</i><br><br>"
-            f"a = {a:.7f} AU ({a * 149597870.7:.0f} km)<br>"
+            f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km)<br>"
             f"e = {e:.4f}<br>"
             f"i = {i:.2f} deg to ecliptic<br><br>"
             f"<b>Orbital Resonance:</b><br>"
@@ -2533,7 +2535,7 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     #        print(f"  (NOTE: Binary orbit is face-on from Earth, i=90 deg to ecliptic)", flush=True)
             print(f"  (NOTE: Binary orbit i={i:.1f} deg, Omega={Omega:.1f} deg to ecliptic)", flush=True)
             
-            print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+            print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
     #        print(f"  i={i:.2f} deg (face-on!), Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
             print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
         
@@ -2589,7 +2591,7 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             if object_name == 'Orcus':
                 hover_text_osc = (
                     f"<b>{object_name} ALMA Orbit (Brown & Butler 2023)</b><br>"
-                    f"<br>Orbital radius: {a:.7f} AU ({a * 149597870.7:.1f} km)<br>"
+                    f"<br>Orbital radius: {a:.7f} AU ({a * KM_PER_AU:.1f} km)<br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br>"
                     f"Eccentricity: ~0.007 (nearly circular)<br>"
                     f"Inclination: {i:.1f} deg, Omega: {Omega:.1f} deg<br>"
@@ -2613,7 +2615,7 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             else:  # Vanth
                 hover_text_osc = (
                     f"<b>{object_name} ALMA Orbit (Brown & Butler 2023)</b><br>"
-                    f"<br>Orbital radius: {a:.7f} AU ({a * 149597870.7:.1f} km)<br>"
+                    f"<br>Orbital radius: {a:.7f} AU ({a * KM_PER_AU:.1f} km)<br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br>"
                     f"Eccentricity: ~0.007 (nearly circular)<br>"
                     f"Inclination: {i:.1f} deg, Omega: {Omega:.1f} deg<br>"
@@ -2639,7 +2641,7 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             hover_text_osc = (
                 f"<b>{object_name} Osculating Orbit</b><br>"
                 f"Epoch: {epoch}<br>"
-                f"<br>a={a:.7f} AU ({a * 149597870.7:.1f} km)<br>"
+                f"<br>a={a:.7f} AU ({a * KM_PER_AU:.1f} km)<br>"
                 f"e={e:.6f}<br>"
                 f"i={i:.2f} deg"
             )
@@ -2786,7 +2788,7 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
         epoch_str = f"{date.strftime('%Y-%m-%d')} osc."
         
         print(f"\n[GONGGONG-CENTERED] Xiangliu: using Kiss et al. 2017/2019 analytical orbit", flush=True)
-        print(f"  a = {a:.10f} AU ({a * 149597870.7:.1f} km from Gonggong)", flush=True)
+        print(f"  a = {a:.10f} AU ({a * KM_PER_AU:.1f} km from Gonggong)", flush=True)
         print(f"  e = {e:.4f}, i = {i:.1f} deg, Omega = {Omega:.1f} deg", flush=True)
         
         # Generate ellipse points
@@ -2828,7 +2830,7 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
         hover_text = (
             f"<b>Xiangliu Analytical Orbit</b><br>"
             f"Orbit around Gonggong<br>"
-            f"<br>a = {a*149597870.7:.1f} km ({a:.2e} AU)<br>"
+            f"<br>a = {a*KM_PER_AU:.1f} km ({a:.2e} AU)<br>"
             f"P = {period:.2f} days<br>"
             f"e = {e:.2f} (highly eccentric - unusual for TNO binaries)<br>"
             f"i = {i:.1f} deg (to ecliptic, nearly pole-on)<br>"
@@ -2875,7 +2877,7 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
             
             peri_hover = (
                 f"<b>Xiangliu Keplerian Periapsis</b><br>"
-                f"q = {peri_r:.7f} AU ({peri_r * 149597870.7:.1f} km)<br>"
+                f"q = {peri_r:.7f} AU ({peri_r * KM_PER_AU:.1f} km)<br>"
                 f"e = {e:.2f}"
             )
             
@@ -2906,7 +2908,7 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
             
             apo_hover = (
                 f"<b>Xiangliu Keplerian Apoapsis</b><br>"
-                f"Q = {apo_r:.7f} AU ({apo_r * 149597870.7:.1f} km)<br>"
+                f"Q = {apo_r:.7f} AU ({apo_r * KM_PER_AU:.1f} km)<br>"
                 f"e = {e:.2f}"
             )
             
@@ -2920,7 +2922,7 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
                 showlegend=True
             ))
             
-            print(f"  [OK] Added apsidal markers: q={peri_r*149597870.7:.1f} km, Q={apo_r*149597870.7:.1f} km", flush=True)
+            print(f"  [OK] Added apsidal markers: q={peri_r*KM_PER_AU:.1f} km, Q={apo_r*KM_PER_AU:.1f} km", flush=True)
         
         return fig
         
@@ -2960,7 +2962,7 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
     # Binary system physical parameters (from Brozovic et al. 2024)
     BINARY_PARAMS = {
         'separation_km': 692.5,               # Total separation in km
-        'separation_au': 692.5 / 149597870.7, # 0.00000463 AU
+        'separation_au': 692.5 / KM_PER_AU, # 0.00000463 AU
         'period_days': 4.282680,              # Orbital period (doubly synchronous)
         'mass_fraction_patroclus': 0.7798,    # Patroclus mass / total mass
         'mass_fraction_menoetius': 0.2202,    # Menoetius mass / total mass
@@ -3018,9 +3020,9 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
         Omega_rad = np.radians(Omega)
         
         # Reference position in ecliptic coordinates (km -> AU)
-        ref_x = PHASE_REFERENCE['patroclus_x_km'] / 149597870.7
-        ref_y = PHASE_REFERENCE['patroclus_y_km'] / 149597870.7
-        ref_z = PHASE_REFERENCE['patroclus_z_km'] / 149597870.7
+        ref_x = PHASE_REFERENCE['patroclus_x_km'] / KM_PER_AU
+        ref_y = PHASE_REFERENCE['patroclus_y_km'] / KM_PER_AU
+        ref_z = PHASE_REFERENCE['patroclus_z_km'] / KM_PER_AU
         
         # Inverse rotation: Ecliptic -> Orbital plane
         # Step 1: Rotate by -Omega around Z
@@ -3059,7 +3061,7 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
         epoch_str = f"{date.strftime('%Y-%m-%d')} osc."
         
         print(f"\n[PATROCLUS BARYCENTER] {object_name}: using Brozovic et al. 2024 + Horizons phase", flush=True)
-        print(f"  a = {a:.10f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+        print(f"  a = {a:.10f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
         print(f"  e = {e:.4f}, i = {i:.1f} deg, Omega = {Omega:.1f} deg", flush=True)
         print(f"  Reference phase (Patroclus): {ref_true_anomaly:.1f} deg at JD {PHASE_REFERENCE['jd_epoch']}", flush=True)
         print(f"  Days from reference: {days_elapsed:.2f}, Phase change: {phase_change:.1f} deg", flush=True)
@@ -3101,7 +3103,7 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
         hover_text = (
             f"<b>{object_name} Analytical Orbit</b><br>"
             f"Binary orbit around barycenter<br>"
-            f"a = {a*149597870.7:.1f} km ({a:.2e} AU)<br>"
+            f"a = {a*KM_PER_AU:.1f} km ({a:.2e} AU)<br>"
             f"P = {period:.3f} days<br>"
             f"e = {e:.4f}<br>"
             f"i = {i:.1f} deg (to ecliptic)<br>"
@@ -3152,7 +3154,7 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
             pos_hover = (
                 f"<b>{object_name} Keplerian Position</b><br>"
                 f"Phase: {current_phase % 360:.1f} deg<br>"
-                f"r = {r_current*149597870.7:.1f} km ({r_current:.2e} AU)<br>"
+                f"r = {r_current*KM_PER_AU:.1f} km ({r_current:.2e} AU)<br>"
                 f"e = {e:.4f} (nearly circular)<br>"
                 f"<i>Note: For nearly circular orbits, periapsis is undefined.</i><br>"
                 f"<i>This marker shows the current calculated position,</i><br>"
@@ -3752,7 +3754,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         # Add markers at key points
         # Get semi-major axis in km for distance calculations        
         # Convert semi-major axis from AU to km
-        a_km = a * 149597870.7  # 1 AU = 149,597,870.7 km
+        a_km = a * KM_PER_AU  # convert AU to km
         
         # Find periapsis (closest approach to parent)
         periapsis_idx = np.argmin(r)
@@ -4306,7 +4308,7 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                 Omega = elements.get('Omega', BINARY_PARAMS['Omega_ecliptic'])
                 epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
                 print(f"\n[EMB BARYCENTER MODE] {object_name}: using barycentric osculating elements ({cache_key})", flush=True)
-                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
                 print(f"  e={e:.6f}, i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
             else:
                 # FALLBACK: Calculate from mass ratio + angular elements from Moon's Earth-centered cache
@@ -4336,7 +4338,7 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                     epoch = f"{date.strftime('%Y-%m-%d')} (approx)"
                     print(f"  Using fallback angular elements (no cache)", flush=True)
                 
-                print(f"  a={a:.7f} AU ({a * 149597870.7:.1f} km from barycenter)", flush=True)
+                print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
                 print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
 
         else:
@@ -4392,7 +4394,7 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                     f"<b>Earth's Osculating Orbit around Barycenter</b><br>"
                     f"<i>The tiny wobble of our home planet</i><br><br>"
                     f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-                    f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
+                    f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
                     f"e = {e:.4f}<br>"
                     f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br><br>"
@@ -4414,7 +4416,7 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                     f"<b>Moon's Osculating Orbit around Barycenter</b><br>"
                     f"<i>The larger orbit of the pair</i><br><br>"
                     f"<b>Orbital Elements (Epoch: {epoch}):</b><br>"
-                    f"a = {a:.7f} AU ({a * 149597870.7:.0f} km) <i>[calculated]</i><br>"
+                    f"a = {a:.7f} AU ({a * KM_PER_AU:.0f} km) <i>[calculated]</i><br>"
                     f"e = {e:.4f}<br>"
                     f"i = {i:.1f} deg to ecliptic <i>[osculating]</i><br>"
                     f"Period: {BINARY_PARAMS['period_days']:.2f} days<br><br>"
@@ -5474,7 +5476,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                         # Calculate distance for hover text
                                         import numpy as np
                                         distance_au = np.sqrt(pos_data['x']**2 + pos_data['y']**2 + pos_data['z']**2)
-                                        distance_km = distance_au * 149597870.7
+                                        distance_km = distance_au * KM_PER_AU
                                         
                                         # Manually add the actual perihelion marker
                                         fig.add_trace(
@@ -5641,9 +5643,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     surface_distance_text = ""
                     if center_id in CENTER_BODY_RADII:
                         center_radius_km = CENTER_BODY_RADII[center_id]
-                        center_radius_au = center_radius_km / 149597870.7
+                        center_radius_au = center_radius_km / KM_PER_AU
                         surface_distance_au = peri['distance'] - center_radius_au
-                        surface_distance_km = surface_distance_au * 149597870.7
+                        surface_distance_km = surface_distance_au * KM_PER_AU
                         surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
                     
                     hover_text = (
@@ -5744,9 +5746,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     surface_distance_text = ""
                     if center_id in CENTER_BODY_RADII:
                         center_radius_km = CENTER_BODY_RADII[center_id]
-                        center_radius_au = center_radius_km / 149597870.7
+                        center_radius_au = center_radius_km / KM_PER_AU
                         surface_distance_au = apo['distance'] - center_radius_au
-                        surface_distance_km = surface_distance_au * 149597870.7
+                        surface_distance_km = surface_distance_au * KM_PER_AU
                         surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
                     
                     hover_text = (
@@ -6813,7 +6815,7 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
     print(f"[HypOsc] Elements at perigee epoch:", flush=True)
     print(f"  e={e_osc:.6f}, a={a_osc:.8f} AU, |a|={abs_a:.8f} AU", flush=True)
     print(f"  i={i_osc:.2f} deg, omega={omega_osc:.2f}, Omega={Omega_osc:.2f}", flush=True)
-    print(f"  q={q_osc:.9f} AU = {q_osc * 149597870.7:,.1f} km", flush=True)
+    print(f"  q={q_osc:.9f} AU = {q_osc * KM_PER_AU:,.1f} km", flush=True)
 
     # ---- Determine clip distance from current plot axis range ----------------
     # Read the figure's axis range if available; fall back to q * 10.
@@ -6826,10 +6828,10 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         if not axis_range or axis_range <= 0:
             axis_range = max(q_osc * 10, 0.001)
             print(f"[HypOsc] Axis range fallback: {axis_range:.8f} AU "
-                  f"({axis_range * 149597870.7:,.0f} km)", flush=True)
+                  f"({axis_range * KM_PER_AU:,.0f} km)", flush=True)
         else:
             print(f"[HypOsc] Axis half-width: {axis_range:.8f} AU "
-                  f"({axis_range * 149597870.7:,.0f} km)", flush=True)
+                  f"({axis_range * KM_PER_AU:,.0f} km)", flush=True)
     except Exception:
         axis_range = max(q_osc * 10, 0.001)
 
@@ -6853,7 +6855,7 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
 
     print(f"[HypOsc] Asymptote: {np.degrees(asymptote_angle):.1f} deg | "
           f"Clip theta: {np.degrees(theta_clip):.1f} deg "
-          f"(r={r_hyp(theta_clip) * 149597870.7:,.0f} km)", flush=True)
+          f"(r={r_hyp(theta_clip) * KM_PER_AU:,.0f} km)", flush=True)
 
     # ---- Nonlinear (sinh) sampling: dense near periapsis (theta=0) ----------
     # sinh spacing: t in [0,1] -> sinh(scale*t)/sinh(scale) in [0,1]
@@ -6910,7 +6912,7 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         f"e = {e_osc:.6f} (hyperbolic)<br>"
         f"a = {a_osc:.8f} AU (negative = hyperbola)<br>"
         f"q = {q_osc:.9f} AU<br>"
-        f"q = {q_osc * 149597870.7:,.1f} km (center-to-center)<br>"
+        f"q = {q_osc * KM_PER_AU:,.1f} km (center-to-center)<br>"
         f"i = {i_osc:.2f} deg<br>"
         f"Asymptotic half-angle: {asymptote_deg:.1f} deg"
         f"{pert_note}"
@@ -6935,7 +6937,7 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
     )
 
     print(f"[HypOsc] Added hyperbolic osculating orbit for {obj_name}: "
-          f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * 149597870.7:,.1f} km)",
+          f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * KM_PER_AU:,.1f} km)",
           flush=True)
 
     return fig
@@ -7071,7 +7073,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     print(f"[PeriOsc] Elements at perihelion epoch:", flush=True)
     print(f"  e={e_osc:.6f} ({orbit_type}), a={a_osc:.8f} AU", flush=True)
     print(f"  i={i_osc:.2f} deg, omega={omega_osc:.2f}, Omega={Omega_osc:.2f}", flush=True)
-    print(f"  q={q_osc:.9f} AU = {q_osc * 149597870.7:,.1f} km", flush=True)
+    print(f"  q={q_osc:.9f} AU = {q_osc * KM_PER_AU:,.1f} km", flush=True)
 
     # ---- Perihelion velocity from vis-viva equation --------------------------
     # v^2 = GM * (2/r - 1/a) evaluated at r = q (perihelion)
@@ -7079,7 +7081,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     # For hyperbolic orbits, a is negative, so -1/a becomes +1/|a| -- vis-viva still works.
     GM_sun = 0.01720209895**2   # AU^3 / day^2
     v_perihelion_au_day = np.sqrt(GM_sun * (2.0 / q_osc - 1.0 / a_osc))  # AU/day
-    v_perihelion_km_s = v_perihelion_au_day * 149597870.7 / 86400.0       # km/s
+    v_perihelion_km_s = v_perihelion_au_day * KM_PER_AU / 86400.0       # km/s
     v_perihelion_km_hr = v_perihelion_km_s * 3600.0                       # km/hr
 
     print(f"[PeriOsc] Perihelion velocity: {v_perihelion_km_s:,.1f} km/s "
@@ -7234,7 +7236,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         type_detail = (
             f"e = {e_osc:.6f} (elliptical)<br>"
             f"a = {a_osc:.8f} AU<br>"
-            f"Aphelion: {r_apo:.4f} AU = {r_apo * 149597870.7:,.0f} km<br>"
+            f"Aphelion: {r_apo:.4f} AU = {r_apo * KM_PER_AU:,.0f} km<br>"
             f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
             f"{nongrav_note}"
         )
@@ -7269,7 +7271,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         f"Center: Sun<br>"
         f"{type_detail}<br>"
         f"q = {q_osc:.9f} AU<br>"
-        f"q = {q_osc * 149597870.7:,.1f} km (perihelion distance)<br>"
+        f"q = {q_osc * KM_PER_AU:,.1f} km (perihelion distance)<br>"
         f"i = {i_osc:.2f} deg"
         f"{pert_note}"
     )
@@ -7294,7 +7296,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     )
 
     print(f"[PeriOsc] Added {orbit_type.lower()} perihelion osculating orbit for {obj_name}: "
-          f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * 149597870.7:,.1f} km)",
+          f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * KM_PER_AU:,.1f} km)",
           flush=True)
 
     return fig

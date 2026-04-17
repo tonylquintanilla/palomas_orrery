@@ -1,19 +1,29 @@
 """
-apsidal_markers.py
+apsidal_markers.py - Perihelion, aphelion, perigee, and apogee marker generation.
 
-Module for calculating perihelion, apohelion, perigee, and apogee dates
-based on current orbital positions and orbital elements.
+Computes apsidal dates from current orbital positions and orbital elements,
+then adds visual markers to Plotly 3D plots. Uses center-body-specific
+terminology (Perihermion for Mercury, Pericytherion for Venus, etc.) and
+decorates markers with hover text including distance-from-surface where
+the central body radius is known.
 
-This module provides functions to:
-- Calculate true anomaly from 3D position
-- Convert between anomaly types (true, eccentric, mean)
-- Calculate dates for apsidal points (perihelion/apohelion, perigee/apogee)
-- Add apsidal markers to Plotly 3D plots
+Key functions:
+    add_apsidal_markers(fig, object_name, center_body, ...) - primary entry
+    calculate_apsidal_dates(elements, center_body) - date prediction
+    find_closest_pairwise_approach(sc_positions, target_positions, ...) - encounter geometry
+
+Consumed by: palomas_orrery.py, palomas_orrery_helpers.py
+
+Part of Paloma's Orrery - Data Preservation is Climate Action
+
+Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
+(provenance audit; hardcoded AU-in-km values replaced with KM_PER_AU
+import from constants_new.py; line endings normalized to LF)
 """
 
 import numpy as np
 import plotly.graph_objects as go
-from constants_new import KNOWN_ORBITAL_PERIODS, color_map, CENTER_BODY_RADII
+from constants_new import KNOWN_ORBITAL_PERIODS, color_map, CENTER_BODY_RADII, KM_PER_AU
 from datetime import datetime, timedelta
 
 # ADD THIS TO YOUR apsidal_markers.py FILE
@@ -136,9 +146,9 @@ def create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos,
     # Add distance from surface for perihelion if center body radius is known
     if is_perihelion and center_body in CENTER_BODY_RADII:
         center_radius_km = CENTER_BODY_RADII[center_body]
-        center_radius_au = center_radius_km / 149597870.7  # km to AU
+        center_radius_au = center_radius_km / KM_PER_AU  # km to AU
         surface_distance_au = actual_r - center_radius_au
-        surface_distance_km = surface_distance_au * 149597870.7
+        surface_distance_km = surface_distance_au * KM_PER_AU
         hover_text += f"Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)<br>"
     
     # DEBUG: Log all conditions for perturbation analysis
@@ -1205,9 +1215,9 @@ def add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     print(f"DEBUG SURFACE: center_body='{center_body}', in CENTER_BODY_RADII={center_body in CENTER_BODY_RADII}", flush=True)  # TEMP DEBUG
     if center_body in CENTER_BODY_RADII:
         center_radius_km = CENTER_BODY_RADII[center_body]
-        center_radius_au = center_radius_km / 149597870.7  # km to AU
+        center_radius_au = center_radius_km / KM_PER_AU  # km to AU
         surface_distance_au = q - center_radius_au
-        surface_distance_km = surface_distance_au * 149597870.7
+        surface_distance_km = surface_distance_au * KM_PER_AU
         surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
     
     hover_text = f"<b>{obj_name} {label}</b>{perihelion_date_str}<br>q={q_str} AU{surface_distance_text}{accuracy_note}"
@@ -1334,9 +1344,9 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
     surface_distance_text = ""
     if center_body in CENTER_BODY_RADII:
         center_radius_km = CENTER_BODY_RADII[center_body]
-        center_radius_au = center_radius_km / 149597870.7  # km to AU
+        center_radius_au = center_radius_km / KM_PER_AU  # km to AU
         surface_distance_au = Q - center_radius_au
-        surface_distance_km = surface_distance_au * 149597870.7
+        surface_distance_km = surface_distance_au * KM_PER_AU
         surface_distance_text = f"<br>Distance from surface: {surface_distance_au:.6f} AU ({surface_distance_km:,.0f} km)"
     
     hover_text = f"<b>{obj_name} {label}</b>{aphelion_date_str}<br>Q={Q_str} AU{surface_distance_text}{accuracy_note}"
@@ -1442,7 +1452,7 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
     label = f"Closest Plotted Point"
     
     # Create comprehensive hover text
-    km_distance = closest_distance * 149597870.7  # AU to km
+    km_distance = closest_distance * KM_PER_AU  # AU to km
     
     # Use appropriate precision based on distance scale
     if closest_distance < 0.0001:  # Less than ~15,000 km - show scientific notation
@@ -1821,7 +1831,7 @@ def compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_
     import numpy as np
     from datetime import datetime
     
-    AU_TO_KM = 149597870.7
+    AU_TO_KM = KM_PER_AU
     AU_PER_DAY_TO_KM_PER_S = AU_TO_KM / 86400.0
     
     if not sc_positions or not target_positions:
