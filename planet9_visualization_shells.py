@@ -8,6 +8,11 @@ fully archivable once shell_configs.py migration is complete.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
+Two corrections: (1) "Eris's orbit" typo fixed to "Planet Nine's orbit"; (2) semi-major axis
+note updated to reflect 2021 refinement (~460 AU central estimate). Radius and Hill sphere
+parameters confirmed per Batygin & Brown (2016, 2021) and Fortney et al. (2016).
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 import numpy as np
 import math
@@ -17,6 +22,9 @@ from shared_utilities import create_sun_direction_indicator
 
 # Planet 9
 
+# Source: Batygin & Brown (2016, 2021); Fortney et al. (2016);
+#         radius 3-4 Earth radii (~3.7 R_E) from thermal evolution models for 5-10 Earth mass ice giant.
+#         Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_surface_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.\n\n"
@@ -34,6 +42,9 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
         'color': 'rgb(83, 68, 55)',  # optical brownish
         'opacity': 1.0,
         'name': 'Crust',
+        # Source: Batygin & Brown (2016, 2021); Fortney et al. (2016);
+        #         3.7 Earth radii for 5-10 Earth mass ice giant; composition modeled on Uranus/Neptune.
+        #         Planet Nine is hypothetical -- all values are model predictions.
         'description': (
             "Planet 9 Surface<br>" 
             "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
@@ -193,6 +204,10 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
 
     return [surface_trace, hover_trace]
 
+# Source: Batygin & Brown (2016, 2021); NASA Solar System Exploration;
+#         Hill sphere ~7.6 AU derived from a=600 AU, e=0.30, m=6 Earth masses.
+#         Note: 2021 refinement favors a=460 +/- 100 AU as central estimate; 600 AU remains valid for visualization.
+#         Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
@@ -209,23 +224,25 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
         'opacity': 0.3,
         'name': 'Hill Sphere',
+        # Source: Batygin & Brown (2016, 2021); NASA Solar System Exploration;
+        #         a=600 AU baseline (2021 refinement: ~460 AU central estimate), e=0.30, m=6 Earth masses.
+        #         Using perihelion distance in Hill sphere formula is more physically accurate for satellite stability.
+        #         Planet Nine is hypothetical -- all values are model predictions.
         'description': (
             "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br><br>"
             "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br><br>" 
             "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU.<br>" 
             "To arrive at the Hill sphere estimate of 7.6 AU, we made the following key assumptions about Planet Nine: <br>" 
             "* Semi-major axis (a): We assumed a semi-major axis of 600 AU. This value is within the range of 500-700 AU suggested <br>" 
-            "  by some studies, including those considering the IRAS/AKARI observations. The semi-major axis is the average distance <br>" 
-            "  of the planet from the Sun and has a direct linear relationship with the Hill sphere radius. A larger semi-major axis <br>" 
-            "  leads to a larger Hill sphere.<br>" 
-            "* Eccentricity (e): We assumed an eccentricity of 0.30. This value aligns with estimates that suggest a highly elliptical <br>" 
-            "  orbit for Planet Nine, consistent with a perihelion around 280 AU and an aphelion around 1120 AU. The eccentricity <br>" 
-            "  affects the Hill sphere radius because the formula uses the distance to the Sun at the perihelion. A higher eccentricity <br>" 
-            "  would result in a smaller Hill sphere radius.<br>" 
-            "* Mass of Planet Nine (m): We assumed a mass of 6 times the mass of Earth. This is within the generally accepted range of <br>" 
-            "  a few to ten Earth masses, and close to some refined estimates. The mass of Planet Nine has a cubic root relationship <br>" 
-            "  with the Hill sphere radius, meaning a larger mass leads to a larger Hill sphere, but the effect is less pronounced than <br>" 
-            "  that of the semi-major axis.<br>" 
+            "  by some studies, including those considering the IRAS/AKARI observations. Note: 2021 refinements by Batygin & Brown <br>" 
+            "  favor a slightly closer orbit (~460 AU central estimate). The semi-major axis has a direct linear relationship with <br>" 
+            "  the Hill sphere radius. A larger semi-major axis leads to a larger Hill sphere.<br>" 
+            "* Eccentricity (e): We assumed an eccentricity of 0.30 (range 0.15-0.40 in newer models). This gives a perihelion <br>" 
+            "  around 280 AU and an aphelion around 1120 AU. The eccentricity affects the Hill sphere radius because the formula <br>" 
+            "  uses the distance to the Sun at the perihelion. A higher eccentricity would result in a smaller Hill sphere radius.<br>" 
+            "* Mass of Planet Nine (m): We assumed a mass of 6 times the mass of Earth. This is the current 'sweet spot' estimate <br>" 
+            "  from Batygin & Brown (2021), revised down from the original 10 Earth mass prediction. The mass has a cubic root <br>" 
+            "  relationship with the Hill sphere radius.<br>" 
             "* Mass of the Sun (M): We used the standard value for the mass of the Sun. This is a well-established constant.<br>" 
             "* In summary: the region where Planet 9's gravity is strong enough to hold onto its own moons despite the Sun's pull is <br>" 
             "  what the Hill sphere represents. To estimate the radius of this safe zone, we take Planet Nine's average distance from <br>" 
@@ -238,7 +255,7 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
             "  compared to the Sun's. We're assuming Planet Nine has a mass of 6 times the mass of the Earth. The Sun, of course, is <br>" 
             "  vastly more massive.<br>" 
             "* The full equation for calculating the Hill sphere radius is: r_Hill = a x (m/(3 x M))^(1/3). Where: a is the semi-major <br>" 
-            "  axis of Eris's orbit around the Sun; m is the mass of Eris; M is the mass of the Sun."        
+            "  axis of Planet Nine's orbit around the Sun; m is the mass of Planet Nine; M is the mass of the Sun."        
             )
     }
         

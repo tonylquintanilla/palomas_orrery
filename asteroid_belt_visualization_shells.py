@@ -232,13 +232,16 @@ def create_main_asteroid_belt(center_position=(0, 0, 0)):
 # Hilda Family
 #####################################
 
+# Source: Dones et al. (2004) -- Oort Cloud structure; MPC (member count ~4000); Gemini fact-check Apr 2026 (Hilda aphelion pattern, not true L-point residence)
 hilda_group_info = (
     "***PLOT WITH MANUAL SCALE AT LEAST 5 AU***\n"
     "8-12 MB PER FRAME FOR HTML.\n\n"
     "The Hilda family is a dynamical group of asteroids in a 3:2 orbital resonance with Jupiter.\n"
     "Located at approximately 3.97 AU, they orbit the Sun three times for every two Jupiter orbits.\n"
     "The group forms a distinctive triangular pattern when viewed from above, with concentrations\n"
-    "at the L3, L4, and L5 Lagrange points relative to Jupiter. Named after asteroid 153 Hilda,\n"
+    "at the L3, L4, and L5 positions as aphelions sweep 120 deg apart. The pattern arises from\n"
+    "3:2 resonance dynamics, not true Lagrange point residence -- one corner aligns near L3,\n"
+    "the other two pass near L4 and L5 transiently. Named after asteroid 153 Hilda,\n"
     "discovered in 1875. Contains about 4,000 known members, most are D-type (dark, reddish) asteroids."
 )
 
@@ -417,12 +420,14 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
 # Jupiter Trojans (L5 - Trojans)
 #####################################
 
+# Source: MPC Jupiter Trojan census; Gemini fact-check Apr 2026 (Agamemnon is L4 not L5; L5 ~40% fewer)
 jupiter_trojans_trojans_info = (
     "10-15 MB PER FRAME FOR HTML.\n\n"
     "The Jupiter Trojans at the L5 Lagrange point (trailing Jupiter by 60 deg) are traditionally\n"
     "called the 'Trojan camp' after Trojan heroes from the Iliad. This stable gravitational point\n"
     "at Jupiter's orbital distance (~5.2 AU) is slightly less populated than L4. Notable members\n"
-    "include 884 Priamus, 1172 Aeneas, and 911 Agamemnon. The L5 camp has about 40% fewer asteroids\n"
+    "include 884 Priamus and 1172 Aeneas. (Note: 911 Agamemnon is at L4, Greek camp, not L5.)\n"
+    "The L5 camp has about 40% fewer asteroids\n"
     "than L4, though the reason for this asymmetry is not fully understood. NASA's Lucy mission\n"
     "will visit both camps. Like L4, most are dark D-type asteroids."
 )

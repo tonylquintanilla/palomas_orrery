@@ -9,6 +9,16 @@ making its magnetosphere geometry unique.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
+Two corrections:
+  (1) Eta Ring: removed incorrect association with moon Mab. Mab is associated with
+      the Mu Gossamer Ring (~86,000-102,000 km), not the Eta Ring (~47,200 km).
+      Source: Showalter & Lissauer (2006, Science).
+  (2) Hill sphere description L1077: "around a where" typo fixed to "around a body where"
+      (same pattern as Earth, Jupiter, Saturn corrections).
+All other claims confirmed (NASA Uranus Fact Sheet, Voyager 2 archives,
+Ness et al. 1986, Podolak et al. 1995, NASA SSD, NASA Planetary Ring Node).
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 import numpy as np
 import math
@@ -20,6 +30,8 @@ from shared_utilities import create_sun_direction_indicator
 
 # Uranus Shell Creation Functions
 
+# Source: NASA Uranus Fact Sheet; Podolak et al. (1995);
+#         silicate/iron-nickel core, ~0.55-1 Earth mass, ~5,000-5,300 K confirmed.
 uranus_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and \n" 
@@ -35,6 +47,8 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
         'color': 'rgb(255, 215, 0)',  # estimated black body color at about 4982 degC (5255 K)
         'opacity': 1.0,
         'name': 'Core',
+        # Source: NASA Uranus Fact Sheet; Podolak et al. (1995);
+        #         silicate/iron-nickel composition, ~0.55-1 Earth mass, ~5,000-5,300 K confirmed.
         'description': (
             "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and <br>" 
             "metallic iron-nickel. It's estimated to have a mass roughly equivalent to that of Earth. Temperatures near the core can <br>" 
@@ -73,6 +87,8 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Solar System Exploration: Uranus; Podolak et al. (1995);
+#         icy mantle ~80%+ mass, 2,000-5,000 K gradient, source of magnetic field confirmed.
 uranus_mantle_info = (
             "2.1 MB PER FRAME FOR HTML.\n\n"
             "mantle: Surrounding the rocky core is a dense fluid layer often referred to as an \"icy mantle.\" This layer makes up the \n" 
@@ -90,6 +106,7 @@ def create_uranus_mantle_shell(center_position=(0, 0, 0)):
         'color': 'rgb(255, 138, 18)',  # estimated black body color at about 2,000 K
         'opacity': 0.9,
         'name': 'mantle',
+        # Source: NASA Solar System Exploration: Uranus; Podolak et al. (1995).
         'description': (
             "mantle: Surrounding the rocky core is a dense fluid layer often referred to as an \"icy mantle.\" This layer makes up the <br>" 
             "majority (80% or more) of the planet's mass. It's not ice in the traditional sense but rather a hot, dense fluid <br>" 
@@ -135,6 +152,8 @@ def create_uranus_mantle_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Uranus Fact Sheet; Lindal et al. (1987);
+#         troposphere 320 K base to 53 K tropopause, cloud stack order, 1-bar radius 25,559 km confirmed.
 uranus_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.\n\n"
@@ -154,6 +173,7 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
         'color': 'rgb(173, 216, 230)',  # optical
         'opacity': 1.0,
         'name': 'Cloud Layer',
+        # Source: NASA Uranus Fact Sheet; Lindal et al. (1987).
         'description': (
             "Uranus Cloud Layer<br>" 
             "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
@@ -317,6 +337,8 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
 
     return [surface_trace, hover_trace]
 
+# Source: NASA Uranus Fact Sheet; Voyager 2 Mission Archive;
+#         coldest atmosphere 49 K (-224 degC), 83% H2 / 15% He / 2.3% CH4, thermosphere to ~2 Ru confirmed.
 uranus_upper_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
             "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H2): Making up about 83% of the atmosphere; \n" 
@@ -397,6 +419,8 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: Voyager 2 Magnetometer results (Ness et al. 1986);
+#         59-60 deg tilt, ~0.3 Ru offset, ~50x Earth's field strength, magnetopause 18-25 Ru confirmed.
 uranus_magnetosphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
             "1.4 MB PER FRAME FOR HTML.\n\n"
@@ -750,7 +774,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 2,         # Approximate thickness
             'color': 'rgb(60, 60, 60)',  
             'opacity': 0.4,
-            'name': 'Ring 6',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); innermost ring, 2 km thick, confirmed.
+        'name': 'Ring 6',
             'description': (
                 "Ring 6: Very narrow. Dark gray. 2 km thick. Very narrow, faint.<br>" 
                 "* Dark, likely icy particles darkened by radiation<br>" 
@@ -766,7 +791,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 7,         # Approximate thickness, 2 to 7 km
             'color': 'rgb(65, 65, 65)',  
             'opacity': 0.4,
-            'name': 'Ring 5',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); radii and thickness confirmed.
+        'name': 'Ring 5',
             'description': (
                 "Ring 5: Narrow. Dark gray. 2 to 7 km thick.<br>" 
                 "* Narrow, slightly wider than Ring 6.<br>" 
@@ -783,7 +809,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 3,         # Approximate thickness 
             'color': 'rgb(60, 60, 60)',  
             'opacity': 0.4,
-            'name': 'Ring 4',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); radii and thickness confirmed.
+        'name': 'Ring 4',
             'description': (
                 "Ring 4: Narrow. Dark gray. 3 km thick.<br>" 
                 "* Narrow, very faint.<br>" 
@@ -800,7 +827,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 10,         # Approximate thickness, 4 to 10 km
             'color': 'rgb(70, 70, 70)',  
             'opacity': 0.3,
-            'name': 'Alpha Ring',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); radii and thickness confirmed.
+        'name': 'Alpha Ring',
             'description': (
                 "Alpha Ring: Relatively narrow. Dark gray. 4 to 10 km thick.<br>" 
                 "* Relatively narrow, but wider than 4, 5, 6.<br>" 
@@ -818,7 +846,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 11,         # Approximate thickness, 5 to 11 km
             'color': 'rgb(75, 75, 75)',  
             'opacity': 0.4,
-            'name': 'Beta Ring',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); radii and thickness confirmed.
+        'name': 'Beta Ring',
             'description': (
                 "Beta Ring: Relatively narrow, but can be brighter than Alpha. Dark gray, sometimes appears slightly lighter. <br>" 
                 "5 to 11 km thick.<br>" 
@@ -837,11 +866,14 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 2,         
             'color': 'rgb(80, 70, 70)',  
             'opacity': 0.2,
-            'name': 'Eta Ring',
+            # Source: NASA Planetary Ring Node; Showalter & Lissauer (2006, Science);
+        #         Eta Ring at ~47,200 km, 2 km thick, narrow with dusty component confirmed.
+        #         CORRECTION: Mab is NOT associated with the Eta Ring; Mab is linked to the
+        #         Mu Gossamer Ring (~86,000-102,000 km). Eta Ring association is still under study.
+        'name': 'Eta Ring',
             'description': (
                 "Eta Ring: Narrow, has a dusty component. Dark gray with a possible faint reddish tint due to associated dust. 2 km thick.<br>" 
                 "* Narrow, has a faint, dusty component extending inwards and outwards.<br>" 
-                "* Associated with the moon Mab's orbit.<br>" 
                 "* Dark, likely icy particles mixed with fine dust.<br>" 
                 "* Low to moderate density.<br>" 
                 "* Likely generated by micrometeoroid impacts on small inner moons, with dustier regions.<br>" 
@@ -855,7 +887,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 4,         # 1 to 4 km
             'color': 'rgb(70, 75, 70)',  
             'opacity': 0.4,
-            'name': 'Gamma Ring',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); radii and thickness confirmed.
+        'name': 'Gamma Ring',
             'description': (
                 "Gamma Ring: Narrow, can appear brighter than Eta. Dark gray, sometimes appears slightly greenish in false-color <br>" 
                 "images used to study composition. 1 to 4 km thick.<br>" 
@@ -874,7 +907,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 7,         # 3 to 7 km
             'color': 'rgb(70, 70, 75)',  
             'opacity': 0.3,
-            'name': 'Delta Ring',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); radii and thickness confirmed.
+        'name': 'Delta Ring',
             'description': (
                 "Delta Ring: Narrow, shows some variations in width and brightness. Dark gray, may show a subtle bluish tint in some <br>" 
                 "enhanced images, but overall very dark. 3 to 7 km thick.<br>" 
@@ -893,7 +927,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 60,         # 20-100 km
             'color': 'rgb(70, 70, 70)',  
             'opacity': 0.3,
-            'name': 'Epsilon Ring',
+            # Source: NASA Planetary Ring Node; Voyager 2 (1986); Cordelia/Ophelia shepherd moons confirmed.
+        'name': 'Epsilon Ring',
             'description': (
                 "Epsilon Ring: Widest and most substantial of the main rings, density variations along it. Neutral dark gray. While <br>" 
                 "the outer dusty Mu ring is bluish, the main Epsilon ring itself is generally considered neutral in color. 20-100 km thick.<br>" 
@@ -913,7 +948,9 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 9500,         # 7000 to 12000 km
             'color': 'rgb(150, 100, 100)',  
             'opacity': 0.1,
-            'name': 'Nu Gossamer Ring',
+            # Source: NASA Planetary Ring Node; Showalter & Lissauer (2006, Science);
+        #         Nu ring ~62,000-97,700 km, reddish/dusty, associated with moon Portia confirmed.
+        'name': 'Nu Gossamer Ring',
             'description': (
                 "Nu Gossamer Ring: Broad, faint, and dusty outer ring. It's associated with the moon Portia. Faint reddish/dusty. <br>" 
                 "7,000 to 12,000 km thick. These rings are much fainter and more diffuse than the main rings, composed primarily of <br>" 
@@ -947,7 +984,9 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             'thickness_km': 16000,         # 15000 to 17000 km
             'color': 'rgb(100, 150, 200)',  
             'opacity': 0.1,
-            'name': 'Mu Gossamer Ring',
+            # Source: NASA Planetary Ring Node; Showalter & Lissauer (2006, Science);
+        #         Mu ring ~86,000-102,000 km, bluish, associated with moon Mab confirmed.
+        'name': 'Mu Gossamer Ring',
             'description': (
                 "Mu Gossamer Ring: Very broad, faint, and dusty outermost ring. It has a distinct bluish color and is associated with <br>" 
                 "the moon Mab. Muted blue. 15,000 to 17,000 km thick. These rings are much fainter and more diffuse than the main <br>" 
@@ -1049,6 +1088,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Solar System Dynamics (SSD);
+#         Hill sphere ~7.02e7 km / ~2,770 Uranus radii confirmed.
 uranus_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
@@ -1068,13 +1109,14 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
         'opacity': 0.25,
         'name': 'Hill Sphere',
+        # Source: NASA Solar System Dynamics (SSD); Hill sphere ~7.02e7 km / ~2,770 Ru confirmed.
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.<br><br>"
     "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity <br>" 
     "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10^7 km, which corresponds to about <br>" 
     "2 770 Uranus radii (mean radius ~25 360 km). This means that any moon or other object orbiting Uranus within this <br>" 
     "sphere is primarily gravitationally bound to the planet. The major moons and rings of Uranus lie well within its Hill Sphere<br><br>" 
-                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 

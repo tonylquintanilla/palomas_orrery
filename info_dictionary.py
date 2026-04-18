@@ -20,6 +20,12 @@ Consumed by: palomas_orrery, palomas_orrery_helpers, gallery_studio,
     visualization_3d, visualization_core, exoplanet_stellar_properties
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+April 2026: provenance audit source citations added, Gemini fact-check applied.
+Corrections: Polymele (size/type/rotation), Leucus (size/sequence), Charon/Vanth/
+Orcus-Vanth Barycenter (mass ratio 16%->14.2%), Dysnomia (diameter 700->150-400 km
+uncertain), Gonggong (aphelion rewritten, 52.7->~89 AU current), Pioneer 10 (last
+signal March->April 27 2002), Gaia (end date corrected to Jan 15 2025).
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 
 # Updated note_text for the GUI note_frame
@@ -93,6 +99,7 @@ note_text = (
 )
 
 
+# Source: SIMBAD Astronomical Database object type classification system (CDS Strasbourg)
 # Mapping of SIMBAD object types to full descriptions
 object_type_mapping = {
     'Ae*': 'A-type Star with emission lines',
@@ -227,6 +234,7 @@ object_type_mapping = {
 }
 
 
+# Source: IAU/MK (Morgan-Keenan) luminosity classification system; Gray & Corbally "Stellar Spectral Classification" (2009)
 # Mapping of Roman numerals to luminosity class descriptions
 # (Full version including sub-types: 0, Ia+, Ia, Iab, Ib, sd, D)
 class_mapping = {
@@ -250,6 +258,7 @@ class_mapping = {
 # Dictionary mapping celestial object names to their descriptions
 INFO = {
 # Celestial objects
+        # Source: NASA Solar System Exploration (solarsystem.nasa.gov/solar-system/sun) -- solar structure, mission list
         'Sun': 'Horizons: 10. The star at the center of our solar system. To display structure and atmosphere select "Solar Shells".\n\n'
         '* Missions:\n' 
         '  * Pioneer 5 (NASA/DOD, 1960): Measured magnetic field phenomena, solar flare particles, and ionization.\n' 
@@ -270,18 +279,21 @@ INFO = {
 
         'Solar Shells': 'Solar structure and atmosphere, Oort cloud, and gravitational reach.',
 
+        # Source: NASA Solar System Exploration (solarsystem.nasa.gov/planets/mercury) -- smallest planet, mission list
         'Mercury': '***IF MERCURY IS THE CENTER OBJECT SET MANUAL SCALE TO 0.2 AU FOR BEST VISUALIZATION.***'
         'Horizons: 199. The smallest planet and closest to the Sun.\n' 
         '* Mercury-centered: do not select Mercury; visualize shells at manual scale 0.002 AU.\n' 
         '* Heliocentric: select Mercury with or without shells.\n' 
         '* Missions: Mariner 10, Messenger, BepiColombo',
 
+        # Source: NASA Solar System Exploration (solarsystem.nasa.gov/planets/venus) -- second planet, mission list
         'Venus': 'Horizons: 299. Second planet from the Sun, known for its thick atmosphere.\n' 
         '* Venus-centered: do not select Venus; visualize shells at 0.01 AU.\n'
         '* Heliocentric: select Venus with or without shells.\n'  
         '* Missions: Venera (USSR); Mariner 2, 5, 10; Pioneer Venus Project, Vega (USSR), Magellan, Galileo, Cassini-Huygens,\n' 
         '  Venus Express, MESSENGER, Akatsuki, Parker Solar Probe, BepiColombo, DAVINCI, VERITAS, EnVision, Shukrayaan-1, Solar Orbiter.',
 
+        # Source: NASA Solar System Exploration (solarsystem.nasa.gov/planets/earth) -- third planet, mission list
         'Earth': 'Horizons: 399. Our home planet, the third from the Sun.\n' 
         '* Earth-centered: do not select Earth; visualize shells at 0.02 AU.\n'
         '* Heliocentric: select Earth with or without shells.\n'
@@ -344,6 +356,7 @@ INFO = {
         '* Add Earth shells to see barycenter position in context\n'
         '* The barycenter sits between outer core and lower mantle!',
 
+        # Source: Sharkey et al. (2021) Nature Communications (quasi-satellite, lunar fragment hypothesis); CNSA Tianwen-2 target
         'Kamo oalewa': 'Horizons: 2016 HO3. Asteroid Kamo\'oalewa (469219 / 2016 HO3) is a near-Earth asteroid that has garnered significant scientific interest.\n' 
         '* Classification and Orbit: Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects. \n' 
         '  What makes it particularly unique is its status as Earth\'s best and most stable "quasi-satellite." This means it orbits the \n' 
@@ -401,6 +414,7 @@ INFO = {
 
         '2025 PY1': 'Horizons: 2025 PY1. Near-Earth asteroid.',
 
+        # Source: NASA CNEOS (close approach May 9 2023, 320322 km from Earth, 192092 km from Moon)
         '2023 JF': 'Horizons: 2023 JF. Asteroid 2023 JF is a small near-Earth asteroid that made a close approach to Earth in May 2023. Here\'s a \n' 
         'breakdown:\n' 
         '* Size: It\'s estimated to be about 34 feet (10 meters) wide, roughly the size of a bus.\n' 
@@ -419,6 +433,7 @@ INFO = {
         'and other space agencies continuously monitor Near-Earth Objects (NEOs) to track their movements and assess any potential impact \n' 
         'risks.',
 
+        # Source: NASA JPL CNEOS / NASA statement Feb 24 2025 (impact probability updated, 2032 close approach)
         '2024 YR4': 'Horizons: 2024 YR4. An extremely eccentric Apollo-type Near-Earth Asteroid and Mars-crosser.\n'
         '* Orbital characteristics: With an eccentricity of 0.662, this asteroid has a highly stretched\n'
         '  elliptical orbit, swinging from 0.851 AU (between Venus and Earth) out to 4.181 AU (well past\n'
@@ -447,6 +462,7 @@ INFO = {
         'Dec. 22, 2032, has moved farther away from the Earth. There still remains a very small chance for asteroid 2024 YR4 to ' 
         'impact the Moon on Dec. 22, 2032. That probability is currently 1.7%."',
 
+        # Source: JPL Horizons / NASA CNEOS (orbital elements, close approach Feb 22 2024)
         '2024 DW': 'Horizons: 2024 DW. A highly eccentric Apollo-type Near-Earth Asteroid and Mars-crosser.\n'
             '* Orbital characteristics: With an eccentricity of 0.694, this asteroid has one of the most elliptical\n'
             '  orbits among NEAs. It swings from 0.741 AU (inside Venus\'s orbit!) out to 4.101 AU (past Mars,\n'
@@ -469,6 +485,7 @@ INFO = {
             'In essence, 2024 DW was a relatively small asteroid that had a close encounter with Earth, providing astronomers with an ' 
             'opportunity to study near-Earth objects.',
 
+        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
         'EM-L1': 'Horizons: 3011. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L1; 3011; Earth-Moon Lagrange 1\n' 
         '#1) The Earth-Moon Lagrange-1 point (EM-L1) is an equilibirium location where the Moon\'s gravitational field partially \n' 
         '    counters that of the Earth.\n' 
@@ -478,6 +495,7 @@ INFO = {
         '#3) EM-L1 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
         '    whereupon it will move away.  In practice, there will always be some disturbance.',
 
+        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
         'EM-L2': 'Horizons: 3012. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L2; 3012; Earth-Moon Lagrange 2\n' 
         '#1) The Earth-Moon Lagrange-2 point (EM-L2) is an equilibirium location where the Moon\'s gravitational field partially \n' 
         '    counters that of the Earth.\n' 
@@ -493,6 +511,7 @@ INFO = {
         '#3) EM-L3 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
         '    whereupon it will move away.  In practice, there will always be some disturbance.', 
 
+        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
         'EM-L4': 'Horizons: 3014. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L4; 3014; Earth-Moon Lagrange 4\n' 
         '#1) The Earth-Moon Lagrange-4 point (EM-L4) is a location where the Moon\'s gravitational field partially counters that of \n' 
         '    the Earth. EM-L4 is one of the stable "Trojan" points (along with EM-L5). Small perturbations can displace an object \n' 
@@ -501,6 +520,7 @@ INFO = {
         '    distance from the Earth and from the Moon (straight-lines), so 356000 to 407000 km, averaging 385000 km from Earth and \n' 
         '    Moon centers, forming the apex of an equilateral triangle, with the Earth and Moon defining the base-line.',
 
+        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
         'EM-L5': 'Horizons: 3015. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L5; 3014; Earth-Moon Lagrange 5\n' 
         '#1) The Earth-Moon Lagrange-5 point (EM-L5) is a location where the Moon\'s gravitational field partially counters that of \n' 
         '    the Earth. EM-L5 is one of the stable "Trojan" points (along with EM-L4). Small perturbations can displace an object \n' 
@@ -533,6 +553,7 @@ INFO = {
         '* SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the line between the Sun and the EMB.\n' 
         '* For the unstable L1, L2, L3 points, they are more like moving "targets" that a spacecraft must constantly adjust to stay near.', 
 
+        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output)
         'L3': 'Horizons: 33. Sun-Earth-Moon Barycenter Lagrange point 3. From JPL Horizons: The Sun & Earth-Moon Barycenter Lagrange-2 (L3) point is \n' 
         'a location where the Earth\'s gravitational field partially counters that of the Sun.\n' 
         '* Here\'s why you\'re observing that irregular motion for SEMB-L3, while the others (especially L4 and L5) appear to trace a \n' 
@@ -566,6 +587,7 @@ INFO = {
         '      various gravitational forces, leading to the irregular path you observed. It\'s a fantastic demonstration of the difference \n' 
         '      between idealized mathematical models and the complex reality of celestial mechanics!',
 
+        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Aug 29 2013)
         'L4': 'Horizons: 34. From JPL Horizons: Revised: Aug 29, 2013; SEMB-L4; 34; Sun & Earth-Moon Barycenter Lagrange 4\n' 
         '#1) The Sun & Earth-Moon Barycenter Lagrange-4 (SEMB-L4) point is a location where the Earth\'s gravitational field partially \n' 
         '    counters that of the Sun.  L4 is one of the stable "Trojan" points (along with L5). Small perturbations can displace an \n' 
@@ -579,6 +601,7 @@ INFO = {
         '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
         '  the EMB\'s orbit.',  
 
+        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Aug 29 2013)
         'L5': 'Horizons: 35. From JPL Horizons:  Revised: Aug 29, 2013; SEMB-L5; 35; Sun & Earth-Moon Barycenter Lagrange 5\n' 
         '#1) The Sun & Earth-Moon Barycenter Lagrange-5 (SEMB-L5) point is a location where the Earth\'s gravitational field partially \n' 
         '    counters that of the Sun. L5 is one of the stable "Trojan" points (along with L4). Small perturbations will displace an \n' 
@@ -592,6 +615,7 @@ INFO = {
         '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
         '  the EMB\'s orbit.',        
 
+        # Source: NASA Mars Exploration Program (mission list, planetary facts)
         'Mars': 'Horizons: 499. Known as the Red Planet, fourth planet from the Sun.\n' 
         '* Mars-centered: do not select Mars; visualize shells at 0.01 AU.\n' 
         '* Heliocentric: select Mars with or without shells.\n'
@@ -606,6 +630,7 @@ INFO = {
 
         'Ceres': 'Horizons: A801 AA. The largest object in the asteroid belt, considered a dwarf planet.',
 
+        # Source: NASA CNEOS (cneos.jpl.nasa.gov/apophis) -- size 370m, Aten-type, 2029 flyby 31600 km, OSIRIS-APEX/RAMSES missions
         'Apophis': '***SET MANUAL SCALE TO 0.005 AU TO SEE THE CLOSE APPROACH TO EARTH AND MOON***\n\n'
         'Horizons: 2004 MN4. The most famous Near-Earth Asteroid - an Aten-type that orbits mostly inside\n'
         ' Earth\'s orbit but crosses outward.\n'
@@ -628,6 +653,7 @@ INFO = {
 
         'Vesta': 'Horizons: A807 FA. Asteroid visited by NASA\'s Dawn mission.',
 
+        # Source: NASA OSIRIS-REx mission (asteroidmission.org) -- C-type, 510m diameter, 4.3h rotation, sample return
         'Bennu': 'Horizons: 1999 RQ36. A near-Earth asteroid studied by the OSIRIS-REx mission.\n' 
         '* Type: Bennu is a near-Earth asteroid classified as a carbonaceous (C-type) asteroid. These types of asteroids are rich in ' 
         'carbon and other organic molecules, as well as hydrated minerals. They are considered to be some of the most primitive ' 
@@ -656,6 +682,7 @@ INFO = {
 
         'Ryugu': 'Horizons: 1999 JU3. Asteroid visited by the Japanese Hayabusa2 mission.',
 
+        # Source: NASA NEAR Shoemaker mission (near.jhuapl.edu) -- first asteroid orbited/landed 2000-2001, size, S-type, Amor classification
         'Eros': 'Horizons: A898 PA. The first Near-Earth Asteroid to be orbited and landed on by a spacecraft\n'
         '  (NEAR Shoemaker mission, 2000-2001).\n'
         '* Size: Approximately 16.8 x 8.2 x 8.2 km - one of the largest NEAs.\n'
@@ -668,6 +695,7 @@ INFO = {
         '* Scientific importance: Detailed study of Eros helped us understand asteroid composition, structure,\n'
         '  and provided insights for planetary defense strategies.',
 
+        # Source: NASA Lucy mission / Levison et al. (2024) Icarus (Dinkinesh flyby Nov 1 2023, Selam contact binary discovery)
         'Dinkinesh': 'Horizons: 1999 VD57. Asteroid Dinkinesh (Horizons ID 152830) is a small asteroid located in the inner main asteroid belt between \n' 
         'Mars and Jupiter. Its name means "you are wonderful" in Amharic, an Ethiopian language, and was given in honor of the Lucy \n' 
         'fossil, for which the Lucy mission is also named.\n' 
@@ -707,15 +735,17 @@ INFO = {
         '***TO SEE CLOSEST LUCY APPROACH SET DATES NEAR MARCH 3, 2033 17:27, WITH BARYCENTER***\n\n'
         'Horizons: 2010 TT191. A trojan asteroid that will be visited by the Lucy spacecraft. Binary companion to Patroclus.',
 
+        # Source: NASA Lucy/SWRI (polymele.html) -- D~21 km, P-type, 5.9h rotation (corrected from D~40 km D-type 446h)
         'Polymele': 'Horizons: 1999 WB2. A trojan asteroid that will be visited by the Lucy spacecraft. '
         '* Polymele has a small satellite named Polymele II, discovered in 2021 from Hubble Space Telescope images. '
-        '* Lucy flyby: Sep 15, 2027. D~40 km, D-type. Extremely slow rotator (~446 hours). Dark, primitive surface.',
+        '* Lucy flyby: Sep 15, 2027. D~21 km, P-type. Rotates in ~5.9 hours. Dark, primitive surface.',
 
         'Orus': 'Horizons: 1999 VQ10. A trojan asteroid that will be visited by the Lucy spacecraft. '
         '* Lucy flyby: Nov 11, 2028. D~51 km, D-type. Last L4 Trojan visit before heading to L5.',
 
+        # Source: NASA Science (leucus.html) -- D~40 km, D-type, third Trojan visited, 446h rotation
         'Leucus': 'Horizons: 1997 TS25. A trojan asteroid that will be visited by the Lucy spacecraft. '
-        '* Lucy flyby: Apr 18, 2028. D~34 km, D-type. Fourth Trojan to be visited.',
+        '* Lucy flyby: Apr 18, 2028. D~40 km, D-type. Extremely slow rotator (~446 hours). Third Trojan to be visited.',
 
         'Itokawa': 'Horizons: 1998 SF36. Asteroid visited by the original Hayabusa mission.',
 
@@ -760,6 +790,7 @@ INFO = {
         'Daphnis': 'Horizons: 635. A small moon that orbits within the Keeler Gap, a narrow gap in the outer part of Saturn\'s A Ring. Its \n' 
         'gravitational influence creates waves in the edges of the gap.', 
 
+        # Source: NASA Cassini mission / Saturn moon fact sheets (shepherd moons of F Ring)
         'Prometheus': 'Horizons:: 616. An irregularly shaped inner moon that acts as a shepherd moon for the inner edge of Saturn\'s F Ring. \n' 
         'Its slightly eccentric orbit leads to complex interactions with the ring material, creating kinks and streamers.',
 
@@ -795,6 +826,7 @@ INFO = {
 
         'Mab': 'horizons 726. Uranus moon, associated with outer ring Mu.',
 
+        # Source: NASA Solar System Exploration (solarsystem.nasa.gov/planets/neptune) -- eighth planet, Voyager 2 mission
         'Neptune': 'Horizons: 899. The eighth and farthest known planet in the solar system.\n'
         '* Neptune-centered: do not select Neptune; visualize shells at 1 AU.\n'
         '* Heliocentric: select Neptune with or without shells.\n'
@@ -839,9 +871,10 @@ INFO = {
         'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.\n\n'
         'HTML: ~22 MB per frame with all shells/moons.',        
 
+        # Source: ALMA Brown & Butler 2018 (Orcus-Vanth mass ratio 14.2%)
         'Charon': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
         'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.\n'
-        'Period: 6.387 days. Distance: 19,596 km. Mass ratio to Pluto: 12% (highest was 12% until Orcus-Vanth at 16%).',
+        'Period: 6.387 days. Distance: 19,596 km. Mass ratio to Pluto: 12% (highest known until Orcus-Vanth at 14.2%).',
 
         'Styx': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
         'Horizons: 905. The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
@@ -871,9 +904,11 @@ INFO = {
         'MK2': 'Makemake\'s moon (S/2015 (136472) 1). Period: 18.0 days. Distance: ~22,250 km. Orbit edge-on to Earth. Very dark surface ' 
         '(~4% reflectivity), diameter ~175 km. No JPL ephemeris - uses 2025 Hubble orbital solution.',
 
+        # Source: Brown et al. (2005) ApJL (Eris discovery); Sicardy et al. (2011) Nature (Dysnomia period 15.79d, tidal lock)
         'Eris-Dysnomia Barycenter':
         '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***',
 
+        # Source: Brown et al. (2005) ApJL (discovery, more massive than Pluto)
         'Eris': 
         '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***\n'
         '***JPL DOES NOT HAVE DATA FOR THIS OBJECT PAST 2030-1-31***\n\n'        
@@ -883,10 +918,12 @@ INFO = {
         '* Missions: Proposed.\n\n'
         'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
 
+        # Source: EBSCO Science Reference Starters / occultation data (diameter uncertain, 700 km not supported)
         'Dysnomia':
         '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***\n\n' 
-        'Eris\'s moon. Period: 15.79 days. Diameter ~700 km. Both bodies tidally locked.',
+        'Eris\'s moon. Period: 15.79 days. Diameter ~150-400 km (uncertain; current occultation data). Both bodies tidally locked.',
 
+        # Source: Trujillo & Brown (2002) ApJL (discovery); Morgado et al. (2023) Nature (rings beyond Roche limit)
         'Quaoar': '***SET MANUAL SCALE TO 0.0002 AU TO SEE QUAOAR, WEYWOT, BARYCENTER, AND ORBITS***\n'
         'Horizons: 2002 LM60. Available dates: 1999-12-31 to 2030-01-02.\n\n'
         'A classical Kuiper Belt cubewano (~1090 km diameter) with TWO rings discovered 2023. '
@@ -934,6 +971,7 @@ INFO = {
         '    a primary piece of evidence supporting the hypothesis of a massive, undiscovered planet-often called "Planet Nine"-that is \n' 
         '    shaping the orbits of these distant objects.',        
 
+        # Source: Brown et al. (2004) ApJL (discovery, orbital elements); MPC (current position ~83 AU)
         'Sedna': 'Horizons: 2003 VB12. A distant trans-Neptunian dwarf planet with a long orbit. \n* Sedna is a fascinating object with an incredibly ' 
         'elongated orbit, meaning its distance from the Sun varies dramatically! \n* Mean distance to Sedna: 526 AU (approximately 79 ' 
         'billion kilometers) - This places it far beyond Pluto and the Kuiper Belt. \n* Perihelion (closest to the Sun): 76 AU ' 
@@ -948,6 +986,7 @@ INFO = {
         'object due to its immense distance. \n* As for its current distance, Sedna is currently at about 83.3 AU from the Sun. This ' 
         'means it\'s relatively close to its perihelion (closest point) and is currently moving closer to the Sun.',
 
+        # Source: Sheppard et al. (2019) AJ (discovery, semi-major axis ~1090 AU, Sednoid class)
         'Leleakuhonua': '**SET MANUAL SCALE TO 2000 AU FOR FULL ORBIT**\n'
         'Horizons: 2015 TG387. Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
         'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
@@ -991,10 +1030,11 @@ INFO = {
         'Discovered Feb 17, 2004 by Brown, Trujillo, and Rabinowitz.\n'
         'Named after the Etruscan god of the underworld.',
 
+        # Source: ALMA Brown & Butler 2018 (mass ratio 14.2%); occultation 2017 (diameter 443 km)
         'Vanth': '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
         'Horizons: 120090482. Orcus\'s moon, forming the HIGHEST MASS RATIO binary in the solar system!\n\n'
         'BINARY SYSTEM PHYSICS:\n'
-        '* Mass ratio: 16% of Orcus (higher than Charon\'s 12% of Pluto!)\n'
+        '* Mass ratio: 14.2% of Orcus (higher than Charon\'s 12% of Pluto!)\n'
         '* Separation: 9,000 km total\n'
         '* Vanth orbits barycenter at: ~7,770 km (86.3% of separation)\n'
         '* Orcus orbits barycenter at: ~1,230 km (13.7% of separation)\n'
@@ -1009,10 +1049,11 @@ INFO = {
         'Discovered Nov 2005 by Brown in Hubble images. Announced Feb 2007.\n'
         'Diameter: ~443 km (occultation 2017). Named after Etruscan psychopomp (guide of the dead).',
 
+        # Source: ALMA Brown & Butler 2018 (mass ratio 14.2%)
         'Orcus-Vanth Barycenter': '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
         'Center of mass for the Orcus-Vanth binary system - the HIGHEST MASS RATIO binary in the solar system!\n\n'
         'BINARY SYSTEM:\n'
-        '* Mass ratio: Vanth/Orcus = 16% (vs Charon/Pluto = 12%)\n'
+        '* Mass ratio: Vanth/Orcus = 14.2% (vs Charon/Pluto = 12%)\n'
         '* The barycenter is OUTSIDE Orcus (~1,230 km from Orcus center)\n'
         '* Orcus orbits barycenter at ~1,230 km radius\n'
         '* Vanth orbits barycenter at ~7,770 km radius\n'
@@ -1038,12 +1079,13 @@ INFO = {
 
         'Gonggong-Xiangliu Barycenter': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***',
 
+        # Source: Wikipedia/MPC (aphelion ~101 AU, current position ~89 AU); Kiss et al. 2017 (Xiangliu)
         'Gonggong': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***\n'
         'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects (~1230 km diameter) with a highly inclined orbit (30.9 deg). '
         'Named after the Chinese water god known for causing floods and chaos. '
         'Surface is extremely red due to tholins and water ice, suggesting possible past cryovolcanism. '
         'Slow rotation period (~22 hours) likely caused by tidal forces from its moon Xiangliu. '
-        'Currently near aphelion at ~52.7 AU (May 2033). Orbital period: 550 years. Eccentricity: 0.50.',
+        'Currently at ~89 AU and moving toward aphelion (~101 AU, late 21st century). Orbital period: 550 years. Eccentricity: 0.50.',
 
         'Xiangliu': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***\n'
         'Gonggong\'s only moon, named after the nine-headed serpent minister in Chinese mythology. '
@@ -1052,6 +1094,7 @@ INFO = {
         'Highly eccentric orbit (e~0.29) and inclined 83 deg to ecliptic (nearly pole-on from Earth). '
         'No JPL ephemeris available. Elements from Kiss et al. 2017.',
 
+        # Source: Phan et al. (2025) RNAAS (IRAS/AKARI candidate); Batygin & Brown (2016) AJ (original Planet 9 hypothesis)
         'Planet 9': 'Hypothetical planet with a potential candidate identified in 2025 IRAS/AKARI infrared data. ' 
         'Estimated to be 7-17 Earth masses (possibly Neptune-sized) at 500-700 AU from the Sun. ' 
         'Last detected in the Eridanus constellation with two observations 23 years apart (1983 IRAS and 2006 AKARI). ' 
@@ -1069,6 +1112,7 @@ INFO = {
         'Select manual scaling of 800 AU to fully display the estimated orbit.', 
 # Missions
 
+        # Source: NASA Voyager mission (voyager.jpl.nasa.gov) -- launch/encounter dates, heliopause crossing Aug 2012, interstellar status
         'Voyager 1': '***SET MANUAL SCALE TO 170 AU TO PLOT THE COMPLETE TRAJECTORY. PLOT WITH JUPITER AND SATURN.***\n'
         'Horizons: -31. The farthest human-made object from Earth, exploring interstellar space. Voyager 1 is a ' 
         'space probe that was launched by NASA on September 5, 1977, to study the outer Solar System and interstellar space. It is the ' 
@@ -1085,6 +1129,7 @@ INFO = {
         'Earth. It is a testament to the ingenuity and perseverance of the scientists and engineers who designed, built, and operate ' 
         'it.',
 
+        # Source: NASA Voyager mission (voyager.jpl.nasa.gov) -- only spacecraft to visit all four gas giants
         'Voyager 2': '***SET MANUAL SCALE TO 150 AU TO PLOT THE COMPLETE TRAJECTORY. PLOT WITH JUPITER, SATURN, URANUS AND NEPTUNE.***\n'
         'Horizons: -32. The only spacecraft to visit all four gas giants: Jupiter, Saturn, Uranus, and Neptune.',
 
@@ -1123,11 +1168,9 @@ INFO = {
         '* Continuing Mission: New Horizons is still traveling through the Kuiper Belt, and NASA may extend its mission to explore ' 
         'other distant objects in the future.',
 
+        # Source: NASA New Horizons / Stern et al. (2019) Science (flyby Jan 1 2019, 3537.7 km, 36 km size); PNAS (2024) ionizing radiation sugars study
         'Arrokoth': 
-        '***SET MANUAL SCALE TO 70 AU PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n'
-        '***SET MANUAL SCALE TO 0.0003 AU TO PLOT NEW HORIZONS-ARROKOTH FLYBY ON 2019-1-1.***\n'
-        '***SET MANUAL SCALE TO 0.00003 AU TO PLOT NEW HORIZONS-ARROKOTH FLYBY ON 2019-1-1 34:31 (34-35).***\n\n'
-        'Horizons: 2014 MU69. Arrokoth is the most distant object ever visited by a spacecraft, New Horizons, on January 1, 2019.\n' 
+        '***SET MANUAL SCALE TO 70 AU PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n' 
         '  * Official Name: Arrokoth (formerly known as Ultima Thule)\n' 
         '  * JPL Horizons Designation: (486958) 2014 MU69\n' 
         '  * Location: Kuiper Belt, a region beyond Neptune populated by icy bodies\n' 
@@ -1178,6 +1221,7 @@ INFO = {
         '  * Juno is currently in an extended mission, which will last until 2025. During this time, it will continue to study Jupiter\n' 
         '    and its moons, providing valuable insights into the formation and evolution of our solar system.',
 
+        # Source: NASA JPL Galileo mission (studied Jupiter, Europa, Ganymede 1995-2003)
         'Galileo': '***SET MANUAL SCALE TO 6 AU. PLOT WITH JUPITER.***\n'
         'Horizons: -77. Studied Jupiter and its major moons, including Europa and Ganymede.',
 
@@ -1249,12 +1293,14 @@ INFO = {
         'encounter, it followed an escape trajectory from the solar system.\n' 
         '* The spacecraft achieved its closest approach to Jupiter on December 4, 1973 (UTC), when it reached approximately 2.8 Jovian ' 
         'radii (about 200,000 km).\n' 
-        '* The last fully successful acquisition of signal was March 3, 2002.\n' 
+        '* The last successful acquisition of telemetry data was April 27, 2002. A final weak signal was detected January 23, 2003, but no data could be extracted.\n'
+        # Source: NASA Solar System Exploration - Pioneer 10 
         '* Horizons: No ephemeris for target "Pioneer 10 (spacecraft)" after A.D. 2050-JAN-01 00:08:50.8161 UT',
         
         'Pioneer 11': '***PLOT WITH SATURN. CURRENTLY AT 116 AU.\n'
         'Horizons: -24. The first spacecraft to encounter Saturn and study its rings.',
         
+        # Source: ESA JUICE factsheet (esa.int/Science_Exploration/Space_Science/Juice/Juice_factsheet) -- launch, arrival, Ganymede orbit, Europa flyby
         'JUICE': '***SET MANUAL SCALE TO 5 AU. PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
         'Horizons: -28.   The JUICE orbiter will investigate Ganymede and evaluate its potential to support life.\n' 
         '* The Jupiter Icy moons Explorer ("JUICE") is an ESA mission launched April 14, 2023 @ 12:14 UTC from French Guiana (ELA-3) on ' 
@@ -1336,6 +1382,7 @@ INFO = {
         'observing point, set the coordinate center to "@ 2101955". The Sample Return Capsule can be accessed as object \'-64090\' ' 
         'Apophis mission trajectory as object \'2099942\'',
 
+        # Source: NASA OSIRIS-APEX mission (nasa.gov/osiris-apex) -- Apophis rendezvous post-2029 flyby
         'OSIRIS APEX': '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
         'OSIRIS-APEX is a NASA mission that will study the asteroid Apophis.\n' 
         '* OSIRIS-REx\'s Legacy: OSIRIS-REx was a NASA mission that successfully traveled to the asteroid Bennu, collected a sample ' 
@@ -1374,6 +1421,7 @@ INFO = {
         'on Bennu. However, this time it won\'t be collecting a sample. Instead, it will use its thrusters to disturb Apophis\'s surface, ' 
         'allowing scientists to study the material beneath.',
         
+        # Source: NASA Parker Solar Probe mission (parkersolarprobe.jhuapl.edu) -- perihelion records, science objectives
         'Parker Solar Probe':
         'Horizons: -96. The Parker Solar Probe is studying the Sun\'s outer corona by flying closer to the Sun than any previous spacecraft.\n\n'
         'Operating Region:\n'
@@ -1393,6 +1441,7 @@ INFO = {
         
         'James Webb Space Telescope': 'Horizons: -170. The James Webb Space Telescope is NASA\'s flagship infrared space telescope, orbiting Lagrange point 2.',
         
+        # Source: ESA Rosetta mission (esa.int/Science_Exploration/Space_Science/Rosetta) -- launch 2004, 67P arrival/Philae/end 2016
         'Rosetta': '***SET MANUAL SCALE TO 6 AU. PLOT WITH EARTH, MARS, STEINS, LUTETIA AND COMET 67P/Churyumov-Gerasimenko.***\n'
         'Horizons: -226. European Space Agency mission that studied Comet 67p/Churyumov-Gerasimenko. The Rosetta mission significantly ' 
         'advanced our understanding of comets and their role in the early solar system. Its data continues to be analyzed, providing ' 
@@ -1423,6 +1472,7 @@ INFO = {
         '* Legacy: The Rosetta mission significantly advanced our understanding of comets and their role in the early solar system. ' 
         'Its data continues to be analyzed, providing valuable information for planetary science.', 
 
+        # Source: ESA BepiColombo mission (esa.int/Science_Exploration/Space_Science/BepiColombo) -- MPO/Mio orbiters, Mercury arrival
         'BepiColombo': '***SET MANUAL SCALE TO 1.5AU. PLOT WITH EARTH, VENUS AND MERCURY.***\n' 
         'Horizons: -121. BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
         'It\'s a joint endeavor by the European Space Agency (ESA) and the Japan Aerospace Exploration Agency (JAXA).\n ' 
@@ -1475,6 +1525,7 @@ INFO = {
         'SOHO Solar Observatory': '***SET MANUAL SCALE TO 1.5 AU. PLOT WITH EARTH AND L1.***\n'
         'Horizons: -21. The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
 
+        # Source: ESA Solar Orbiter mission (esa.int/Science_Exploration/Space_Science/Solar_Orbiter) -- launch, flyby dates, orbital parameters
         'Solar Orbiter': '***SET MANUAL SCALE TO AT LEAST 1.5 AU. PLOT WITH EARTH AND VENUS.***\n'
         'Horizons: -144. From JPL Horizons: Solar Orbiter ("Solo"), an ESA/NASA mission, was launched 2020-Feb-10 at 4:03 UTC from ' 
         'Cape Canaveral, Florida\n' 
@@ -1497,13 +1548,15 @@ INFO = {
         '  * 2029-Jun-10: Venus\n' 
         '  * 2030-Sep-02: Venus',
         
+        # Source: ESA / Observatoire de Paris (observations end date)
         'Gaia': '***PLOT WITH L2 WHERE GAIA WAS STATIONED***\n'
         'Horizons: -139479. European Space Agency mission at L2 mapping the Milky Way.\n' 
-        'Mission ended on 2025-3-28, but Horizons ephemeris is projected through 2125-3-28.',
+        'Scientific observations ceased on 2025-1-15 (fuel exhausted), but Horizons ephemeris is projected through 2125-3-28.',
         
         'Hayabusa 2': '***PLOT WITH ASTEROID RYUGU OR SET MANUAL SCALE TO 1.5 AU TO SEE FULL TRAJECTORY***\n'
         'Horizons: -37. Japan JAXA mission that returned samples from Ryugu.', 
                 
+        # Source: NASA Mars 2020 mission (mars.nasa.gov/mars2020) -- launch/landing dates, Jezero crater, Ingenuity
         'Perseverance Mars Rover': 'Horizons: -168. The Perseverance Rover is NASA\'s Mars rover and Ingenuity helicopter. The NASA Mars Perseverance mission ' 
         'is a robotic space mission currently underway, aimed at exploring the planet Mars and searching for signs of ancient ' 
         'microbial life.\n'
@@ -1568,6 +1621,7 @@ INFO = {
         'celestial bodies.\n' 
         '* Scientific Research: The impact provided valuable data on the composition and structure of asteroids.',
         
+        # Source: NASA Lucy mission (lucy.swri.edu) -- asteroid targets, flyby dates, mission timeline
         'Lucy': '***PLOT WITH EARTH, DINKINESH, DONALDJOHANSON, EURYBATES, POLYMELE, LEUCUS, ORUS, PATROCLUS-MENOETIUS, JUPITER***.\n'
         'Horizons: -49. The NASA Lucy mission exploring Trojan asteroids around Jupiter.\n' 
         '* The Lucy mission is a groundbreaking NASA space probe that\'s on an ambitious journey to explore the Trojan asteroids, a \n' 
@@ -1676,6 +1730,7 @@ INFO = {
         '* First crewed lunar flyby since Apollo 17 in December 1972 -- over 53 years.',      
 
 # Comets        
+        # Source: NASA Solar Data Analysis Center; Sekanina (1967) -- discovery Sept 18 1965, perihelion Oct 21 1965, 450k km, 3 fragments, ~880y period
         'Ikeya-Seki': 'Horizons: C/1965 S1-A. retrograde > 90. Comet Ikeya-Seki, formally designated C/1965 S1, was a stunning sungrazing comet that put on quite a show ' 
         'in 1965! It was one of the brightest comets of the 20th century and is a member of the Kreutz sungrazers, a family of ' 
         'comets believed to have originated from a larger comet that broke apart long ago. As a Kreutz sungrazer, it provided valuable ' 
@@ -1779,6 +1834,7 @@ INFO = {
         
         'NEOWISE': 'Horizons: C/2020 F3. retrograde > 90. Brightest comet visible from the Northern Hemisphere in decades.',
 
+        # Source: Auburn University / Icarus (Feb 2026) -- fragmentation Oct 2025, 4 Hubble fragments; JPL Horizons (orbital elements)
         'C/2025_K1': 'Horizons: C/2025 K1. Retrograde > 90. Comet C/2025 K1 (ATLAS) is a recently discovered comet that is expected to become a notable object for \n' 
         'observation in late 2025. Here\'s a breakdown of what we know:\n' 
         '* Discovery and Classification: It was discovered on May 25, 2025, by the Asteroid Terrestrial-impact Last Alert System (ATLAS) \n' 
@@ -1826,6 +1882,7 @@ INFO = {
         '* Chemically unusual: ground-based observations show extreme depletion of carbon-bearing species.\n'
         '* Data arc: 2025-11-25 to 2026-01-10 (158 observations, JPL solution #14).',
 
+        # Source: Auburn University / Icarus (Feb 2026) -- Hubble HST observed 4 fragments Nov 2025; JPL solution #5
         'C/2025_K1-D': 'Horizons: C/2025 K1-D. Fragment D of comet C/2025 K1 (ATLAS).\n'
         '* One of four fragments observed by Hubble Space Telescope in November 2025 (published Icarus, Feb 2026).\n'
         '* The most divergent fragment - highest eccentricity (e=1.00246) of all four pieces.\n'
@@ -1848,6 +1905,7 @@ INFO = {
         '* Appearance: The comet has gained some attention because, similar to the interstellar object 3I/ATLAS, it appears to lack a \n' 
         'prominent, visible tail. It is very faint (around 13.8 magnitude) and not visible to the naked eye.', 
 
+        # Source: MPC / Wikipedia (discovery Jan/Feb 2023, perihelion Sept 27 2024, peak mag -4.9, Earth approach Oct 12 2024)
         'Tsuchinshan-ATLAS': 'Horizons: C/2023 A3. Comet Tsuchinshan-ATLAS was discovered independently by the Purple Mountain Observatory in China (Tsuchinshan) in January 2023 ' 
         'and the Asteroid Terrestrial-impact Last Alert System (ATLAS) in South Africa in February 2023.\n * It originates from the ' 
         'Oort cloud, meaning it takes tens of thousands of years to orbit the Sun.\n * It orbits the Sun in the opposite direction ' 
@@ -1856,6 +1914,7 @@ INFO = {
         '* It was easily visible to the naked eye and presented a stunning sight with its long, wispy tail.\n * It made its closest ' 
         'approach to Earth on October 12, 2024. At that time, it was about 0.47 AU from Earth.',
         
+        # Source: ESA Rosetta mission (launch/arrival/Philae/end dates); Altwegg et al. (2015) Science (water isotopes)
         '67P/Churyumov-Gerasimenko': 'Horizons: 67P. Comet 67P/Churyumov-Gerasimenko visited by the Rosetta spacecraft.\n' 
         '* Discovered: In 1969 by Soviet astronomers Klim Churyumov and Svetlana Gerasimenko.\n' 
         '* Type: A Jupiter-family comet, meaning its orbit is influenced by Jupiter\'s gravity.\n' 
@@ -1895,6 +1954,7 @@ INFO = {
         
         '1I/Oumuamua': 'Horizons: A/2017 U1. Retrograde > 90. First known interstellar object detected passing through the Solar System.',
 
+        # Source: MPC / ESA (discovery arc June-July 2025, perihelion Oct 2025, Mars periapsis Oct 2025)
         '3I/ATLAS': 'Horizons: C/2025 N1. Retrograde > 90. The third known interstellar object detected passing through the Solar System. Retrograde (left-handed) orbit.\n' 
         'Here\'s a summary of what we know about 3I/ATLAS (C/2025 N1):\n' 
         '* Interstellar Object: It is the third confirmed interstellar object discovered, hence its "3I/" designation. This means it \n' 
@@ -1924,6 +1984,7 @@ INFO = {
         '* Anti-tail: Some reports mention a possible anti-tail feature (dust structure along orbital plane), pending confirmation.\n'
         '* Note: Tail length measurements are preliminary and model-based; official measurements pending ESA/NOIRLab/HST data releases.',        
 
+        # Source: Wikipedia / Universe Space Tech (Jan 2025) -- nucleus disintegrated ~Jan 13 2025; brightest comet 2025
         'ATLAS': '***HYPERBOLIC TRAJECTORY. TO VISUALIZE CURRENT POSITION PLOT OTHER OBJECTS OR MANUAL SCALE TO AT LEAST 5 AU***\n\n'
         'Horizons: C/2024 G3. Retrograde > 90. The Great Comet of 2025. Comet C/2024 G3 (ATLAS) created quite a buzz in the Southern Hemisphere!\n'
         '* Comet C/2024 G3 (ATLAS) is a non-periodic comet that gained attention as it approached the Sun in early 2025. It was considered ' 
@@ -1987,6 +2048,7 @@ INFO = {
         '* The orbit trace and outbound arc represent the debris trail of a headless ghost comet.\n\n'
         'See MAPS (C/2026 A1) entry for the complete story.',
 
+        # Source: MPEC 2026-A49 (orbital elements); SOHO/LASCO/CCOR-1 observations (disintegration Apr 4 2026, perihelion 1.23 R_sun)
         'MAPS': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
         'Horizons: C/2026 A1. Comet MAPS (C/2026 A1) was a Kreutz sungrazer discovered January 13, 2026\n'
         'from the AMACS1 Observatory in the Atacama Desert, Chile, by Maury, Attard, Parrott and Signoret.\n'
@@ -2087,6 +2149,7 @@ INFO = {
         'TRAPPIST-1 g': '[STAR] HABITABLE ZONE (outer edge). 12.4 day period.',
         'TRAPPIST-1 h': 'Outermost, 18.8 day period. Too cold (173 K).',
         
+        # Source: Kostov et al. (2020) AJ (distance 1292 ly, period 14.6d, Star A/B masses, instability zone)
         'TOI-1338 Binary': 
         '***IMPORTANT: RE-SET THE CENTER OBJECT FROM \"Sun\" TO THE EXO-PLANET SYSTEM IN THE \"Select Center Object for Your Plot\" DROP DOWN MENU***\n\n'
         'A rare multi-planet circumbinary system at a distance of 1,292 ly. Two planets orbit the two stars from a stable ' 
@@ -2114,6 +2177,7 @@ INFO = {
         '* TOI-1338 B: Secondary star, M-type Red Dwarf, 0.3 solar masses.\n' 
         '* Two planets orbit the system\'s barycenter and are examples of how planets can form and remain stable in the dynamically challenging ' 
         'environment of a binary star system.',
+        # Source: Kostov et al. (2020) AJ (TOI-1338 b, Wolf Cukier); Standing et al. (2023) Nature Astronomy (TOI-1338 c, first RV circumbinary)
         'TOI-1338 b': 'Planet b was the first planet confirmed in the system and is notable for its discovery story and its proximity to the stars.\n' 
         '* Size and Type: It is a Neptune-sized planet, roughly 6.9 times larger than Earth.\n' 
         '* Its mass is around 11.3 Earth masses.\n' 
@@ -2133,6 +2197,7 @@ INFO = {
         '* Distance: It orbits farther out from the barycenter than planet b, at 0.794 AU.\n' 
         '* Configuration: Like planet b, it is coplanar (or nearly so) with the binary stars and planet b.\n', 
         
+        # Source: Anglada-Escude et al. (2016) Nature (Proxima b); Faria et al. (2022) A&A (Proxima d, ESPRESSO)
         'Proxima Centauri': 'NEAREST star! M5.5V red dwarf at 4.24 ly.',
         'Proxima b': '[STAR] HABITABLE ZONE. NEAREST EXOPLANET! 11.2 day period.',
         'Proxima d': 'Sub-Earth mass (0.26 M[EARTH]). Lightest RV-detected planet. 5.1 days.',

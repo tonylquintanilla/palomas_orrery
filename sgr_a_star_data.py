@@ -481,6 +481,7 @@ def calculate_schwarzschild_precession_per_orbit(a_au, e, M_solar=SGR_A_MASS_SOL
     Returns precession in degrees per orbit.
     
     For S2: ~0.2 degrees (~12 arcminutes) per 16-year orbit.
+    Source: GRAVITY Collaboration (2020, A&A) - definitive Schwarzschild precession detection.
     """
     # Use Schwarzschild radius form for numerical stability
     Rs_au = SCHWARZSCHILD_RADIUS_AU
@@ -498,6 +499,8 @@ def calculate_gravitational_redshift(r_au, M_solar=SGR_A_MASS_SOLAR):
     z = 1 / sqrt(1 - Rs/r) - 1
     
     For S2 at periapsis (~120 AU): z ~ 0.0003 (detected in 2018!)
+    Expressed as velocity shift of ~200 km/s; confirmed Equivalence Principle.
+    Source: GRAVITY Collaboration (2018, A&A); Gillessen et al. (2017).
     """
     Rs_au = SCHWARZSCHILD_RADIUS_AU
     r_au = max(r_au, Rs_au * 1.001)  # Avoid singularity
@@ -651,14 +654,14 @@ HISTORICAL_EVENTS = {
         'name': 'S2 Periapsis 2018 - Gravitational Redshift Detection',
         'date': 2018.38,
         'star': 'S2',
-        'description': 'S2 passed within 120 AU of Sgr A*. The GRAVITY instrument detected gravitational redshift exactly as Einstein predicted.',
+        'description': 'S2 passed within 120 AU of Sgr A* (May 2018). The GRAVITY instrument (VLT interferometry) detected gravitational redshift (z~0.0003, ~200 km/s shift) exactly as Einstein predicted. Source: GRAVITY Collaboration (2018, A&A).',
         'camera_focus': 'periapsis'
     },
     'S2_precession_2020': {
         'name': 'S2 Schwarzschild Precession Confirmed',
         'date': 2020.0,
         'star': 'S2',
-        'description': "After 27 years of observations, S2's orbit was confirmed to precess (rotate) exactly as General Relativity predicts.",
+        'description': "After 27 years of observations (VLT and Keck, nearly two full S2 orbits), S2's orbit was confirmed to precess (rotate) exactly as General Relativity predicts. Source: GRAVITY Collaboration (2020, A&A).",
         'camera_focus': 'orbit_overview'
     },
     'S62_discovery': {

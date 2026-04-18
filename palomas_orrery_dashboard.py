@@ -117,12 +117,26 @@ LAUNCH_GROUPS = {
     "Developer Tools": [
         ("Regenerate Module Atlas",
          "module_atlas.py",
-         "Scan codebase, generate MODULE_ATLAS.md. Window closes when done.",
+         "Scan codebase, generate MODULE_ATLAS.md. "
+         "Run after significant codebase changes (new modules, reorganizations).",
+         SCRIPT_DIR,
+         True),
+        ("Provenance Scanner",
+         "provenance_scanner.py",
+         "Scan for hardcoded constants and duplicates. Writes PROVENANCE_AUDIT.md. "
+         "Run before/after edits to shared values, or when a value looks suspicious.",
+         SCRIPT_DIR,
+         True),
+        ("Test Constants Provenance",
+         "test_constants_provenance.py",
+         "Pass/fail regression tests for constants_new.py. "
+         "Run before committing changes to constants, or first if a plot looks wrong.",
          SCRIPT_DIR,
          True),
         ("Dependency Trace",
          "dep_trace.py",
-         "Opens console. Run: python dep_trace.py spacecraft_encounters 2",
+         "Map who depends on (and is consumed by) a module. "
+         "Run before editing: python dep_trace.py <module_name> [hops]",
          SCRIPT_DIR,
          True),
     ],
@@ -330,6 +344,22 @@ class PalomasOrreryDashboard(ctk.CTk):
                 font=FONT_SECTION, text_color=COLOR_TEXT,
                 anchor="w"
             ).pack(side="left")
+
+            # Developer Tools: remind the user which codebase directory
+            # these tools should audit. Multiple copies of the repo exist
+            # (sandbox, clean repo, Google Drive snapshots) and running
+            # against the wrong one produces misleading results.
+            if group_name == "Developer Tools":
+                ctk.CTkLabel(
+                    section_frame,
+                    text=(
+                        "  Run from "
+                        r"C:\Users\tonyq\OneDrive\Desktop"
+                        r"\python_work\palomas_orrery_for_github"
+                    ),
+                    font=FONT_DESC, text_color=COLOR_TEXT_DIM,
+                    anchor="w"
+                ).pack(side="left", padx=(8, 0))
 
             # Divider
             div = ctk.CTkFrame(self._main_frame, fg_color=COLOR_DIVIDER,

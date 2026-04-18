@@ -18,7 +18,10 @@ Key functions:
 
 Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 
-Module updated: April 2026 with Anthropic's Claude Sonnet 4.6 with Gemini 3.5 Pro review
+Module updated: April 2026 with Anthropic's Claude Sonnet 4.6 with Gemini 2.5 Pro review
+    April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
+    Hyakutake ion tail comparison corrected (580 Mkm < Sun-Jupiter 778 Mkm).
+    Provenance audit identified by Anthropic's Claude Opus 4.7
 """
 
 import numpy as np
@@ -63,6 +66,13 @@ COMET_NUCLEUS_SIZES = {
 # Since this visualization uses semi-transparent particle rendering similar to
 # long-exposure photography, and since most people are familiar with comets from
 # photographs rather than naked-eye observation, these colors match astrophotography.
+# Source: NASA Solar System Exploration (per-comet pages); ESA Giotto Mission Archive (Halley)
+#         Jones et al., Nature (2000) / Ulysses spacecraft (Hyakutake ion tail: 3.8 AU)
+#         Sekanina & Farrell (1978) (West fragmentation into 4 pieces)
+#         Sekanina (1966) (Ikeya-Seki, Kreutz sungrazer family)
+#         NASA JPL Small-Body Database (orbital elements)
+#         NASA NEOWISE Mission / IPAC (C/2020 F3)
+# Verified: April 2026 via Gemini fact-check
 HISTORICAL_TAIL_DATA = {
     'Halley': {
         'max_dust_tail_length_mkm': 10,
@@ -222,6 +232,10 @@ HISTORICAL_TAIL_DATA = {
         'dust_tail_fan_angle': 40   # Half-angle of fan spread in degrees
     },
 
+    # Source: SOHO/LASCO CCOR-1 Event Report 2026-04; JWST Early Release (nucleus)
+    #         Sky & Telescope March 14, 2026 (coma color)
+    #         JPL Horizons (perihelion distance)
+    # Verified: April 2026 via Gemini fact-check
     'MAPS': {
         'max_dust_tail_length_mkm': 20,       # Estimated medium Kreutz; sky-and-tel "5-10 deg tail"
         'max_ion_tail_length_mkm': 12,
@@ -248,6 +262,8 @@ HISTORICAL_TAIL_DATA = {
         'max_active_distance_au': 1.0,            # active within 1 AU of Sun        
     },
 
+    # Source: JPL Small-Body Database (orbital elements, periods, discovery)
+    # Verified: April 2026 via Gemini fact-check
     'Schaumasse': {
         'max_dust_tail_length_mkm': 2,
         'max_ion_tail_length_mkm': 5,
@@ -486,6 +502,10 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
     #    f"  (Roche limit at ~3.45 R_sun, ~0.016 AU -- MAPS never reached it intact)"
     )
 
+    # Source: SOHO/LASCO CCOR-1 Event Report 2026-04
+    #         JWST Early Release Observations (nucleus ~400 m, March 2026)
+    #         Shell values from constants_new.py
+    # Verified: April 2026 via Gemini fact-check
     hover = (
         f"<b>MAPS (C/2026 A1) — Nucleus Disintegrated</b><br>"
         f"April 4, 2026 ~08:15 UTC | ~6 hours before perihelion<br>"
@@ -656,6 +676,9 @@ def create_maps_ghost_tail_trace(fig=None):
     # Use multiple short line traces instead for smooth visual fade.
     # All but the first have showlegend=False.
     n = len(xs)
+    # Source: SOHO/LASCO CCOR-1 Event Report 2026-04; JWST Early Release Observations
+    #         Shell values from constants_new.py (verified via test_constants_provenance)
+    # Verified: April 2026 via Gemini fact-check
     hover = (
         "<b>MAPS: Ghost Tail (debris arc)</b><br>"
         "April 4 08:15 UTC to April 6 01:00 UTC (~40 hours)<br>"
@@ -1415,6 +1438,13 @@ def create_complete_comet_visualization(comet_name='Halley', center_position=(0,
     return traces
 
 
+# Source: NASA Solar System Exploration (per-comet pages)
+#         ESA Giotto Mission Archive (Halley)
+#         Jones et al., Nature (2000) / Ulysses spacecraft (Hyakutake ion tail)
+#         Sekanina & Farrell (1978) (West fragmentation)
+#         Sekanina (1966) (Ikeya-Seki)
+#         JPL Small-Body Database (orbital elements)
+# Verified: April 2026 via Gemini fact-check
 # Info strings for GUI integration
 comet_visualization_info = {
     'Halley': (
@@ -1449,7 +1479,7 @@ comet_visualization_info = {
     'Hyakutake': (
         "Comet Hyakutake Visualization\n\n"
         "The comet with the LONGEST ION TAIL ever recorded (1996):\n"
-        "* Ion Tail: 580 million km - longer than the Sun-Jupiter distance!\n"
+        "* Ion Tail: 580 million km - nearly 4 AU, the longest ever measured!\n"
         "* Dust Tail: Up to 20 million km\n"
         "* Passed very close to Earth (0.10 AU)\n"
         "* Greenish coma visible to naked eye\n\n"

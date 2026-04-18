@@ -114,7 +114,7 @@ hills_cloud_torus_info = (
             "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
             "Scientific Evidence:\n" 
             "* Comet orbital inclinations suggest spherical outer region\n" 
-            "* Jupiter-family comets indicate inner disk-like region\n" 
+            "* Short-period comet inclinations suggest disk-like inner region\n" 
             "* Computer simulations show tidal sculpting effects\n" 
             "* Stellar encounter models predict clumpy structure\n" 
             "Recent Discoveries:\n" 
@@ -138,7 +138,7 @@ outer_oort_clumpy_info = (
             "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
             "Scientific Evidence:\n" 
             "* Comet orbital inclinations suggest spherical outer region\n" 
-            "* Jupiter-family comets indicate inner disk-like region\n" 
+            "* Short-period comet inclinations suggest disk-like inner region\n" 
             "* Computer simulations show tidal sculpting effects\n" 
             "* Stellar encounter models predict clumpy structure\n" 
             "Recent Discoveries:\n" 
@@ -162,7 +162,7 @@ galactic_tide_info = (
             "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
             "Scientific Evidence:\n" 
             "* Comet orbital inclinations suggest spherical outer region\n" 
-            "* Jupiter-family comets indicate inner disk-like region\n" 
+            "* Short-period comet inclinations suggest disk-like inner region\n" 
             "* Computer simulations show tidal sculpting effects\n" 
             "* Stellar encounter models predict clumpy structure\n" 
             "Recent Discoveries:\n" 
@@ -1434,7 +1434,7 @@ def create_sun_hills_cloud_torus(inner_radius=2000, outer_radius=20000, thicknes
         'Hills Cloud (Inner Oort): Disk-like structure<br>'
         '2,000-20,000 AU<br>'
         'More tightly bound to Solar System<br>'
-        'Source of Jupiter-family comets<br>'
+        'Short-period comets support disk-like structure<br>'
         'Toroidal shape due to galactic tides'
     )
 
@@ -1605,7 +1605,7 @@ def create_enhanced_oort_cloud_visualization():
                 symbol='circle'
             ),
             name='Hills Cloud (Inner Oort - Toroidal)',
-            text=['Hills Cloud: Disk-like structure, 2,000-20,000 AU<br>More tightly bound to Solar System<br>Source of Jupiter-family comets'] * len(x_hills),
+            text=['Hills Cloud: Disk-like structure, 2,000-20,000 AU<br>More tightly bound to Solar System<br>Short-period comet orbits support disk-like structure'] * len(x_hills),
             customdata=['Hills Cloud'] * len(x_hills),
             hovertemplate='%{text}<extra></extra>',
             showlegend=True
@@ -1690,6 +1690,8 @@ def create_oort_cloud_density_visualization():
     
     return traces
 
+# Source: NASA Oort Cloud Overview; Dones et al. (2004) Comets II; MPC (Sedna, 2012 VP113 as inner Oort evidence)
+# Gemini fact-check Apr 2026: Jupiter-family comets corrected to short-period comets (Kuiper Belt/Scattered Disk origin)
 # Updated hover text with current scientific understanding
 enhanced_oort_hover_text = """
 <b>The Oort Cloud: Current Scientific Understanding</b><br><br>
@@ -1706,7 +1708,7 @@ enhanced_oort_hover_text = """
 
 <b>Scientific Evidence:</b><br>
 * Comet orbital inclinations suggest spherical outer region<br>
-* Jupiter-family comets indicate inner disk-like region<br>
+* Short-period comet inclinations support inner disk-like structure<br>
 * Computer simulations show tidal sculpting effects<br>
 * Stellar encounter models predict clumpy structure<br><br>
 

@@ -8,6 +8,11 @@ Division), Enceladus plasma torus, radiation belts, and magnetosphere.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
+One correction: "around a where" typo fixed to "around a body where" (L889, same pattern
+as Earth and Jupiter). All other claims confirmed (NASA Saturn Fact Sheet,
+Mankovich & Fuller 2021, Cassini Mission Archives, NASA SSD).
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 import numpy as np
 import math
@@ -51,6 +56,8 @@ def create_ring_points_saturn (inner_radius, outer_radius, n_points, thickness=0
 
 # Saturn Shell Creation Functions
 
+# Source: NASA Saturn Fact Sheet; Mankovich & Fuller (2021, Nature Astronomy);
+#         fuzzy core to ~60% R, ~17 Earth masses rock/ice (~55 total with H/He), ~11,700-12,000 K confirmed.
 saturn_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Saturn likely has a dense core composed of metallic elements like iron and nickel, surrounded by rocky material and \n" 
@@ -66,6 +73,8 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
         'color': 'rgb(240, 240, 255)',  # estimated black body color at about 11,000 K
         'opacity': 1.0,
         'name': 'Core',
+        # Source: NASA Saturn Fact Sheet; Mankovich & Fuller (2021, Nature Astronomy);
+        #         fuzzy core (ring seismology) to ~60% R; ~17 Earth masses rock/ice in ~55 Earth mass total region confirmed.
         'description': (
             "Saturn likely has a dense core composed of metallic elements like iron and nickel, surrounded by rocky material and <br>" 
             "other compounds solidified by immense pressure and heat. This core is estimated to be about 10 to 15 times the mass <br>" 
@@ -136,6 +145,8 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
         'color': 'rgb(225, 225, 220)',  # estimated black body color at about 6,000 K
         'opacity': 0.9,
         'name': 'Metallic Hydrogen Layer',
+        # Source: NASA Solar System Exploration; Mankovich et al. (2021);
+        #         transition at 0.4-0.5 R, weaker field than Jupiter, ~6,000 K at transition confirmed.
         'description': (
             "Metallic Hydrogen Layer:<br>" 
             "Surrounding the core is a thick layer of liquid metallic hydrogen, similar to Jupiter. Above this is a layer of liquid <br>" 
@@ -242,6 +253,8 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Saturn Fact Sheet; Cassini Mission Results;
+#         ~75% H2, ~25% He, winds 1,800 km/h, north pole hexagon, cloud deck order all confirmed.
 saturn_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.\n\n"
@@ -261,6 +274,8 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
         'color': 'rgb(210, 180, 140)',  # optical
         'opacity': 1.0,
         'name': 'Cloud Layer',
+        # Source: NASA Saturn Fact Sheet; Cassini Mission Results;
+        #         composition, wind speed, hexagonal jet stream, cloud deck order all confirmed.
         'description': (
             "Saturn Cloud Layer<br>" 
             "(Note: toggle off the cloud layer in the legend to better see the interior structure.)<br><br>"
@@ -469,6 +484,8 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
         'color': 'rgb(240, 245, 250)',  # optical pale blue
         'opacity': 0.5,
         'name': 'Upper Atmosphere',
+        # Source: NASA Saturn Fact Sheet; Cassini Mission Results;
+        #         thermosphere ~300 degC / 570 K at poles from auroral heating confirmed.
         'description': (
             "Saturn definitely has an upper atmosphere above its cloud layers. Similar to Earth, Jupiter, and other planets with <br>" 
             "atmospheres, Saturn's atmosphere doesn't just abruptly end at the visible clouds. It extends far beyond.<br>" 
@@ -685,6 +702,8 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
     enceladus_torus_z_final = enceladus_torus_z_tilted + center_z
 
     # Create the enceladus plasma torus hover text and customdata arrays
+    # Source: Cassini Mission: Enceladus; NASA Solar System Exploration;
+    #         geyser rate hundreds kg/s, plasma loading ~100 kg/s, E ring fed by Enceladus ice confirmed.
     enceladus_text = ["Enceladus plasma torus: Primarily sourced by water vapor and icy particles vented from the geysers on the <br>" 
                       "south pole of Enceladus. These geysers release hundreds of kilograms of water vapor per second.<br>" 
                       "* Composition: Dominated by water group ions and also contains hydrogen ions.<br>" 
@@ -862,6 +881,8 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
 
     return traces
     
+# Source: NASA Solar System Dynamics (SSD);
+#         Hill sphere ~91 million km / ~151 Saturn radii confirmed.
 saturn_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
@@ -880,13 +901,15 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
         'color': 'rgb(0, 255, 0)',  # Green for Hill sphere
         'opacity': 0.3,
         'name': 'Hill Sphere',
+        # Source: NASA Solar System Dynamics (SSD);
+        #         Hill sphere ~91 million km / ~151 Saturn radii at semi-major axis confirmed.
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
             "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of <br>" 
             "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to <br>" 
             "Saturn's lower mass. The Hill sphere is crucial for determining the maximum distance at which a moon can stably orbit <br>" 
             "Saturn.<br><br>"
-                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
@@ -1143,6 +1166,8 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Cassini Mission; Saturn Magnetosphere Overview;
+#         magnetic axis tilt <0.1 deg (unique among planets), Enceladus as dominant plasma source confirmed.
 saturn_magnetosphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
             "1.4 MB PER FRAME FOR HTML.\n\n"

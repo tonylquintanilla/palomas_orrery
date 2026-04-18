@@ -7,6 +7,15 @@ binary/multiple system notes, and cultural significance. Displayed as
 hover text in HR diagrams and 3D star visualizations.
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
+Four factual corrections:
+  (1) Regulus A luminosity: 140 -> ~288 L_sun (McAlister et al. 2005)
+  (2) Regulus A mass: 3.5 -> ~3.8 M_sun (McAlister et al. 2005)
+  (3) AD Leonis rotation: 2.7 -> ~2.24 days (Morin et al. 2008)
+  (4) Proxima orbit period: 500,000 -> ~550,000 years (Kervella et al. 2017)
+  Also: Aldebaran mass noted as ~1.16 M_sun (not 1.7); text says "about 1.7"
+  which reflects older estimates -- updated to current value.
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
     # Define unique_notes dictionary
 unique_notes = {
@@ -608,14 +617,17 @@ unique_notes = {
         '* alf Lac': '<br>Alpha Lacertae', 
         '* bet Lac': '<br>Beta Lacertae', 
  
-        '* alf Leo': '<br>alpha Leo or Alpha Leo, is more formally known as Regulus or Cor Leonis, and it\'s the brightest star in the constellation <br>' 
-        'Leo the Lion. Regulus is a quadruple star system, with four stars orbiting each other: Regulus A: The main component <br>' 
-        'and the one we see as the bright "star." It\'s a blue-white main-sequence star, much hotter and larger than our Sun. <br>' 
-        'Regulus B: A faint white dwarf companion to Regulus A. They orbit each other very closely. Regulus C and D: A pair of <br>' 
-        'fainter stars that orbit much farther away from Regulus A and B. Properties of Regulus A: Distance: About 79 light-years <br>' 
-        'from Earth. Mass: Roughly 3.5 times the mass of the Sun. Radius: About 3.1 times the radius of the Sun. Luminosity: A <br>' 
-        'whopping 140 times more luminous than the Sun! Temperature: Around 12,500 Kelvin, making it much hotter than our Sun. <br>'
-        'Rotation: Regulus A spins incredibly fast, completing a rotation in just 15.9 hours! This rapid rotation causes it to <br>' 
+        # Source: SIMBAD; McAlister et al. (2005);
+        #         quadruple system confirmed; mass ~3.8 M_sun, radius ~3.1 R_sun, luminosity ~288 L_sun,
+        #         temperature ~12,460 K, rotation ~15.9 hr (96% breakup velocity) confirmed.
+        '* alf Leo': '<br>alpha Leo or Alpha Leo, is more formally known as Regulus or Cor Leonis, and it\'s the brightest star in the constellation <br>'
+        'Leo the Lion. Regulus is a quadruple star system, with four stars orbiting each other: Regulus A: The main component <br>'
+        'and the one we see as the bright "star." It\'s a blue-white main-sequence star, much hotter and larger than our Sun. <br>'
+        'Regulus B: A faint white dwarf companion to Regulus A. They orbit each other very closely. Regulus C and D: A pair of <br>'
+        'fainter stars that orbit much farther away from Regulus A and B. Properties of Regulus A: Distance: About 79 light-years <br>'
+        'from Earth. Mass: Roughly 3.8 times the mass of the Sun. Radius: About 3.1 times the radius of the Sun. Luminosity: About <br>'
+        '288 times more luminous than the Sun. Temperature: Around 12,460 Kelvin, making it much hotter than our Sun. <br>'
+        'Rotation: Regulus A spins incredibly fast, completing a rotation in just 15.9 hours! This rapid rotation causes it to <br>'
         'have an oblate shape (flattened at the poles and bulging at the equator).',
 
         '* gam Leo': '<br>Algieba', 
@@ -631,13 +643,15 @@ unique_notes = {
         '* ome Leo': '<br>Subra', 
         '* 83 Leo': '<br>83 Leonis', 
 
-        '* AD Leo': '<br>AD Leonis also known as Gliese 388. It is a Red dwarf star. <br>' 
-        'AD Leonis is known for its dramatic and unpredictable flares, where it <br>' 
-        'suddenly releases enormous amounts of energy, causing a temporary increase <br>' 
-        'in brightness. These flares are thought to be driven by magnetic activity <br>' 
-        'on the surface. AD Leonis spins much faster than our Sun, completing a <br>' 
-        'rotation in about 2.7 days. This rapid rotation contributes to its strong <br>' 
-        'magnetic fields and frequent flaring activity. AD Leonis is relatively young, <br>' 
+        # Source: SIMBAD; Morin et al. (2008);
+        #         Gliese 388 confirmed; rotation ~2.24 days (not 2.7); age 25-300 Myr confirmed.
+        '* AD Leo': '<br>AD Leonis also known as Gliese 388. It is a Red dwarf star. <br>'
+        'AD Leonis is known for its dramatic and unpredictable flares, where it <br>'
+        'suddenly releases enormous amounts of energy, causing a temporary increase <br>'
+        'in brightness. These flares are thought to be driven by magnetic activity <br>'
+        'on the surface. AD Leonis spins much faster than our Sun, completing a <br>'
+        'rotation in about 2.24 days. This rapid rotation contributes to its strong <br>'
+        'magnetic fields and frequent flaring activity. AD Leonis is relatively young, <br>'
         'estimated to be a few hundred million years old.',
 
         '* alf Lep': '<br>Arneb', 
@@ -670,6 +684,8 @@ unique_notes = {
         '* alf Lyn': '<br>Alpha Lyncis', 
         '* 31 Lyn': '<br>31 Lyncis', 
 
+        # Source: SIMBAD; Aufdenberg et al. (2006);
+        #         5th brightest, 2nd northern hemisphere, ~25 ly, rotation ~12.5 hr, dust disk confirmed.
         '* alf Lyr': '<br>alpha Lyr, Alpha Lyrae, more commonly known as Vega.<br> ' 
         '* Fifth brightest star: Vega shines brilliantly in our night sky, ranking as the fifth-brightest star overall and the<br> ' 
         '  second-brightest in the northern celestial hemisphere.<br> ' 
@@ -1009,23 +1025,28 @@ unique_notes = {
         '* 18 Sex': '<br>18 Sextantis',
         '* 27 Sex': '<br>27 Sextantis',
 
-        '* alf Tau': '<br>alpha Taurus or Alpha Taurus, is better known as Aldebaran. <br>' 
-        'It\'s the brightest star in the constellation Taurus (the Bull) <br>' 
-        'and one of the easiest stars to spot. Aldebaran is an orange giant star, <br>' 
-        'meaning it\'s in a later stage of its life compared to our Sun. Distance: About 65 light-years <br>' 
-        'away from Earth. Mass: Estimated to be about 1.7 times the mass of the Sun. Radius: Around 44 <br>' 
-        'times larger than the Sun! If Aldebaran were placed in our solar system, it would extend almost to <br>' 
-        'Mercury\'s orbit. Luminosity: Over 400 times more luminous than our Sun, making it a true beacon <br>' 
-        'in the sky. Temperature: Around 3,900 Kelvin, which is cooler than our Sun (5,778 K) and gives it <br>' 
-        'its orange hue. Aldebaran is a multiple star system: Aldebaran A: The main component and the bright <br>' 
-        'star we see. Aldebaran B: A much fainter red dwarf companion star orbiting at a considerable <br>' 
-        'distance from Aldebaran A. Its distinctive orange color and brightness make Aldebaran easy to <br>' 
-        'identify in the constellation Taurus. Aldebaran has been featured in many cultures\' mythologies <br>' 
-        'and stories throughout history. There\'s evidence suggesting that Aldebaran A might have a planet <br>' 
-        'orbiting it, though it hasn\'t been definitively confirmed yet. Locate the constellation Orion, <br>' 
-        'and then follow the line of Orion\'s belt stars upward. The first bright, orange-ish star you <br>' 
+        # Source: SIMBAD; Heiter et al. (2015);
+        #         distance ~65 ly, mass ~1.16 M_sun, radius ~44 R_sun, luminosity ~439 L_sun,
+        #         temperature ~3,900 K, Aldebaran B red dwarf companion confirmed.
+        '* alf Tau': '<br>alpha Taurus or Alpha Taurus, is better known as Aldebaran. <br>'
+        'It\'s the brightest star in the constellation Taurus (the Bull) <br>'
+        'and one of the easiest stars to spot. Aldebaran is an orange giant star, <br>'
+        'meaning it\'s in a later stage of its life compared to our Sun. Distance: About 65 light-years <br>'
+        'away from Earth. Mass: Estimated to be about 1.16 times the mass of the Sun. Radius: Around 44 <br>'
+        'times larger than the Sun! If Aldebaran were placed in our solar system, it would extend almost to <br>'
+        'Mercury\'s orbit. Luminosity: Over 400 times more luminous than our Sun, making it a true beacon <br>'
+        'in the sky. Temperature: Around 3,900 Kelvin, which is cooler than our Sun (5,778 K) and gives it <br>'
+        'its orange hue. Aldebaran is a multiple star system: Aldebaran A: The main component and the bright <br>'
+        'star we see. Aldebaran B: A much fainter red dwarf companion star orbiting at a considerable <br>'
+        'distance from Aldebaran A. Its distinctive orange color and brightness make Aldebaran easy to <br>'
+        'identify in the constellation Taurus. Aldebaran has been featured in many cultures\' mythologies <br>'
+        'and stories throughout history. There\'s evidence suggesting that Aldebaran A might have a planet <br>'
+        'orbiting it, though it hasn\'t been definitively confirmed yet. Locate the constellation Orion, <br>'
+        'and then follow the line of Orion\'s belt stars upward. The first bright, orange-ish star you <br>'
         'encounter is Aldebaran. It marks the eye of the bull in the constellation Taurus.',
 
+        # Source: SIMBAD; Hipparcos Catalog (van Leeuwen 2007);
+        #         B7 III, ~13,600 K, ~700 L_sun, chemically peculiar confirmed.
         '* bet Tau': '<br>beta Tauri or Beta Tauri, better known as Elnath.<br>' 
         '* Second brightest in Taurus: Elnath shines brightly, ranking as the second-brightest star in Taurus, after Aldebaran.<br>' 
         '* Giant star: It\'s a blue-white giant star of spectral type B7 III. This means it\'s much hotter, larger, and more<br>' 
@@ -1100,6 +1121,8 @@ unique_notes = {
         '* phi Vel': '<br>Phi Velorum',
         '* ome Vel': '<br>Omega Velorum',
 
+        # Source: SIMBAD; Hipparcos Catalog (van Leeuwen 2007);
+        #         15th brightest, ~250 ly, Beta Cephei variable, binary confirmed.
         '* alf Vir': '<br>alpha Virginis or Alpha Virginis, which is better known by its beautiful name Spica or Azimech.<br> ' 
         '* Close-knit pair: Spica is a binary system composed of two stars orbiting incredibly close to each other.<br> ' 
         '  They\'re so close that they can\'t be resolved as separate stars even with powerful telescopes. We know they\'re<br> ' 
@@ -1168,11 +1191,13 @@ unique_notes = {
         'with a higher mass, leading to faster fuel consumption and a more rapid <br>' 
         'progression through its stellar life cycle.',
 
-        'NAME Proxima Centauri': '<br>Closest known star to the Sun. Proxima is Red Dwarf, <br>' 
-        'and is known for its dramatic flares. In 2016 a planet was discovered orbiting <br>' 
-        'Proxima, called Proxima Centauri b; it is about Earth-sized and within the <br>' 
-        'habitable zone that could allow liquid water. It orbits the Alpha Centauri <br>' 
-        'A-B pair at a far distance, taking 500,000 years to complete its orbit!',
+        # Source: Kervella et al. (2017); Anglada-Escude et al. (2016);
+        #         Proxima b 2016 discovery confirmed; orbit period ~550,000 years (not 500,000).
+        'NAME Proxima Centauri': '<br>Closest known star to the Sun. Proxima is Red Dwarf, <br>'
+        'and is known for its dramatic flares. In 2016 a planet was discovered orbiting <br>'
+        'Proxima, called Proxima Centauri b; it is about Earth-sized and within the <br>'
+        'habitable zone that could allow liquid water. It orbits the Alpha Centauri <br>'
+        'A-B pair at a far distance, taking approximately 550,000 years to complete its orbit!',
 
         'NAME Teegarden\'s Star': '<br>Teegarden\'s Star is a Red Dwarf star, M7V type, <br>' 
         'It is very small, with a radius estimated to be about 11% of the Sun\'s. <br>' 

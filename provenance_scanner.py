@@ -1,27 +1,122 @@
 """
 provenance_scanner.py - Fact provenance auditor for Paloma's Orrery.
 
-Scans every .py file in the project for hardcoded constants, dictionary
-values, and numeric claims in strings. Scores each finding by
-Vulnerability x Criticality to prioritize verification. Detects
-duplicates and value inconsistencies across files.
+Scans every .py file in the project for facts that need verification:
+named constants, dictionary contents, and numeric claims in display
+strings. Scores each finding by Vulnerability x Criticality and flags
+cross-file duplicates and inconsistencies. Produces PROVENANCE_AUDIT.md.
 
-Companion tool to module_atlas.py: uses the same dependency graph to
-determine criticality (propagating constants score highest).
+Architecture: "unit of provenance"
+    The unit is the smallest thing that has a coherent source citation.
+    A dict with one `# Source:` comment is ONE unit, not N entries.
+    A hover string with three numbers that co-refer is ONE unit, not
+    three separate claims. Each unit is scored once; reports can break
+    down to per-entry for dicts when displayed.
 
-Key functions:
-    scan_project() - main entry point, produces PROVENANCE_AUDIT.md
-    scan_file_constants() - extract named constants and dict values
-    scan_file_string_claims() - extract numeric claims from strings
-    find_duplicates() - group same-value constants across files
-    score_finding() - compute V x C risk score
+    This matters because citations in this codebase attach at the
+    declaration level (above a dict, in its docstring, at the top of
+    a section) rather than line-by-line. An earlier line-granular
+    scanner flagged every dict entry as uncited even when the dict
+    itself had a clear source block above it.
+
+    Criticality is resolved per imported-name, not per module. If
+    `KM_PER_AU` is imported by four files, it is C=5 (propagating).
+    If `color_map` is defined in the same file but not imported
+    anywhere, it is not C=5 just because its module is.
+
+Companion tools:
+    module_atlas.py               -- shared dependency graph
+    test_constants_provenance.py  -- pins specific verified values
+                                     in constants_new.py
 
 Usage:
     python provenance_scanner.py                   # scan current directory
     python provenance_scanner.py /path/to/project  # scan specific directory
     python provenance_scanner.py --output audit.md # custom output filename
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Known limitations and accepted residuals:
+    1. Multi-line string false positives (info_dictionary.py):
+       INFO strings can be 50-100 lines long. The scanner detects
+       citations at the entry-key level (# Source: above the dict key)
+       but individual continuation lines within the same string may
+       fall outside the lookback window and be reported as uncited.
+       Lookback was increased from 30 to 60 lines (April 2026) to
+       reduce this, but entries longer than ~60 lines (Apollo 11 S-IVB,
+       Halley, Artemis II) will still produce mid-string false positives.
+       These are not real gaps -- the citation exists at the key level.
+       Treat Tier-2 findings in info_dictionary.py as accepted residuals
+       unless they correspond to a top-level entry key that genuinely
+       lacks a # Source: comment.
+
+    2. "Sourced but potentially stale" (V_STALE) findings:
+       Entries verified correct by Gemini fact-check (April 2026) but
+       containing date-sensitive language (e.g. "currently", "planned",
+       "expected") are flagged V_STALE regardless. These reflect real
+       staleness risk for mission status and close-approach data, not
+       citation gaps. Review when adding new objects or updating missions,
+       not as standalone audit tasks.
+
+    3. Lagrange point entries (L1-L5, EM-L1 through EM-L5):
+       Text is reproduced verbatim from JPL Horizons output and carries
+       "From JPL Horizons" inline. Source comments added April 2026.
+       Any residual flags on continuation lines are false positives.
+
+    4. Numeric values in code lines flagged as display strings:
+       The scanner occasionally flags numeric literals in Python code
+       (variable assignments, np.radians() calls, coordinate arithmetic)
+       as uncited display string claims. Known examples confirmed as
+       false positives (April 2026 audit):
+         - asteroid_belt_visualization_shells.py line 218 (showlegend=True)
+         - earth_visualization_shells.py line 649 (trace construction)
+         - neptune_visualization_shells.py lines 647, 679, 903
+           (magnetic axis coordinates and offsets)
+         - solar_visualization_shells.py lines 1237, 1497, 1621, 1672
+           (rendering geometry)
+       Root cause: the scanner uses AST string-node detection; numeric
+       literals in adjacent code share the same line range. These will
+       recur whenever shell files are regenerated. No action needed.
+
+    5. Module docstrings and dict key strings flagged as display strings:
+       Known false positives (April 2026 audit):
+         - jupiter_visualization_shells.py line 1 (module docstring)
+         - comet_visualization_shells.py line 1282 (function docstring)
+         - sgr_a_star_data.py lines 657, 664 (dict key name strings,
+           not display text)
+         - star_notes.py line 1 (module docstring)
+       The scanner's docstring detector catches most of these but misses
+       dict key strings. No action needed.
+
+    6. Dict values with inline 'source' keys not recognized as citations:
+       spacecraft_encounters.py Tier-2 findings at lines 235 and 266
+       carry 'source': 'NASA/JSC' as a dict value. The scanner requires
+       a # Source: comment; inline dict keys are not recognized. These
+       entries are cited -- the scanner notation is a false positive.
+       Future fix: extend SOURCE_PATTERNS to recognize 'source': '...'
+       dict value pattern.
+
+    7. Accepted Tier-2 residuals (genuine gaps, low urgency):
+       The following are real citation gaps but low-risk and deferred:
+         - star_notes.py: Orion Belt stars (Bellatrix, Mintaka, Alnilam,
+           Alnitak), Fomalhaut, Shaula stellar parameters. Queued for
+           Gemini fact-check.
+         - uranus_visualization_shells.py lines 534, 563: radiation belt
+           extent "3 to 10 R" based on Voyager 2 data. Queued for
+           Gemini fact-check.
+         - solar_visualization_shells.py ~line 1694: Oort Cloud hover
+           text population estimates. Queued for Gemini fact-check.
+         - star_notes.py unique_notes dict (553 entries, score 15):
+           stellar parameters drift as catalogs improve. Review when
+           adding new stars, not as standalone audit task.
+         - comet_visualization_shells.py COMET_NUCLEUS_SIZES dict and
+           COMET_FEATURE_THRESHOLDS dict: rendering geometry, no user-
+           visible impact if slightly off. Deferred.
+         - constants_new.py Tier-2 items: all have source citations
+           (score 10 = V_SOURCED x C_PROPAGATING). No action needed.
+
+Module rewritten: April 17, 2026 with Anthropic's Claude Opus 4.7
+    (replaces earlier line-granular scanner. The previous version
+    produced ~2000 false-positive Tier-1 findings because block-level
+    citations were invisible at its resolution.)
 """
 
 import ast
@@ -30,53 +125,31 @@ import re
 import sys
 from collections import defaultdict
 from datetime import datetime
-from pathlib import Path
 
 # Reuse the atlas dependency graph builder
 from module_atlas import build_dependency_graph, classify_role
 
 
 # ============================================================
-# VULNERABILITY SCORES
+# SCORING CONSTANTS
 # ============================================================
-# How likely is this fact to be wrong?
 
+# Vulnerability: how likely is this fact to be wrong?
 V_FETCHED  = 1   # From authoritative pipeline at runtime
 V_SOURCED  = 2   # Hardcoded but has citation
 V_STALE    = 3   # Was sourced but may have changed
 V_RECALLED = 4   # From LLM training data, no citation
 
-# ============================================================
-# CRITICALITY SCORES
-# ============================================================
-# What's the impact if it IS wrong?
-
+# Criticality: what's the impact if it IS wrong?
 C_COSMETIC    = 1   # Colors, label positions, descriptive text
 C_INTERNAL    = 2   # Used in code but not displayed
 C_LOADBEARING = 3   # Drives geometry, shell radii, orbit params
 C_PUBLIC      = 4   # Visible in hover text, gallery, Instagram
 C_PROPAGATING = 5   # Imported by other modules, affects calculations
 
-# ============================================================
-# ACTION THRESHOLDS
-# ============================================================
-
-THRESHOLD_LABELS = {
-    (16, 20): "FIX NOW -- Source, verify, consolidate",
-    (10, 15): "FIX NEXT SESSION -- Add citation",
-    (5, 9):   "ADD SOURCE WHEN TOUCHED",
-    (1, 4):   "NO ACTION NEEDED",
-}
-
-def action_label(score):
-    """Return action string for a given V x C score."""
-    for (lo, hi), label in THRESHOLD_LABELS.items():
-        if lo <= score <= hi:
-            return label
-    return "UNKNOWN"
 
 def action_tier(score):
-    """Return tier number (1=highest priority) for sorting."""
+    """Return tier number (1=highest priority, 4=lowest)."""
     if score >= 16: return 1
     if score >= 10: return 2
     if score >= 5:  return 3
@@ -84,616 +157,771 @@ def action_tier(score):
 
 
 # ============================================================
-# SOURCE DETECTION
+# CITATION PATTERNS
 # ============================================================
+# Applied to the text of a "context block" -- up to 30 lines
+# preceding a unit, plus the unit's own lines. This is where
+# `# Source: ...` block comments live.
 
-# Patterns that indicate a value has a source citation
 SOURCE_PATTERNS = [
-    re.compile(r'#\s*[Ss]ource:', re.IGNORECASE),
-    re.compile(r'#\s*(?:IAU|JPL|NASA|ESA|NIST|Horizons|arXiv|doi)', re.IGNORECASE),
+    re.compile(r'#\s*[Ss]ource\s*:', re.IGNORECASE),
+    re.compile(r'#\s*(?:Ref|Reference)\s*:', re.IGNORECASE),
+    re.compile(r'#\s*(?:IAU|JPL|NASA|ESA|NIST|Horizons|arXiv|doi|'
+               r'SIMBAD|Gaia|Hipparcos|VizieR|NSSDCA|NOAA|BCO[- ]DMO|'
+               r'ERA5|Copernicus)', re.IGNORECASE),
     re.compile(r'#\s*https?://', re.IGNORECASE),
-    re.compile(r'#\s*(?:Verified|Confirmed)\s+(?:from|via|against)', re.IGNORECASE),
-    re.compile(r'#\s*(?:Based on)\s+arXiv', re.IGNORECASE),
-    re.compile(r'#\s*(?:From JPL|Per JPL|JPL uses)', re.IGNORECASE),
+    re.compile(r'#\s*(?:Verified|Confirmed)\s+', re.IGNORECASE),
+    re.compile(r'#\s*(?:Based on|Per|Derived from|According to)\s+',
+               re.IGNORECASE),
+    # Markers that appear inside docstrings (no leading '#')
+    re.compile(r'^\s*[Ss]ource\s*:\s', re.MULTILINE),
+    re.compile(r'^\s*[Vv]erified\s*:\s', re.MULTILINE),
+    re.compile(r'^\s*[Rr]ef(?:erence)?\s*:\s', re.MULTILINE),
+    # URL-as-citation patterns (data dict entries like celestial_objects.py
+    # where `mission_url` sits alongside `mission_info` narrative).
+    # An https URL appearing anywhere in the context block, or a *_url
+    # key in a dict, counts as a citation for adjacent claims.
+    re.compile(r"['\"]?\w*url\w*['\"]?\s*[:=]\s*['\"]https?://",
+               re.IGNORECASE),
+    re.compile(r'https?://\S+\.\S+', re.IGNORECASE),
 ]
 
-# Patterns that indicate staleness
+# Patterns that suggest a cited value may be stale (date-sensitive).
 STALE_PATTERNS = [
-    re.compile(r'(?:as of|current|currently|latest|updated)\s+\d{4}', re.IGNORECASE),
-    re.compile(r'(?:2024|2025|2026)\s*[-:]', re.IGNORECASE),
-    re.compile(r'(?:Planned|Expected|Upcoming|scheduled)', re.IGNORECASE),
-    re.compile(r'(?:Still active|Present\))', re.IGNORECASE),
+    re.compile(r'(?:as of|current|currently|latest|updated)\s+\d{4}',
+               re.IGNORECASE),
+    re.compile(r'(?:Planned|Expected|Upcoming|scheduled)\b',
+               re.IGNORECASE),
+    re.compile(r'(?:Still active|Currently operating)', re.IGNORECASE),
 ]
 
-# Patterns for numeric claims in strings (hover text, INFO dicts)
-# Matches: number + unit pattern like "8.33 R_sun", "0.039 AU", "695700 km"
+# Looser patterns applied ONLY to docstring text. Docstrings are prose
+# and mention provenance without the structured `# Source:` marker.
+# If a module or function docstring uses any of these words in a
+# citation-like context, we treat the associated claims as cited.
+DOCSTRING_CITATION_PATTERNS = [
+    re.compile(r'\b[Vv]erified\b', re.IGNORECASE),
+    re.compile(r'\b[Cc]itation\b', re.IGNORECASE),
+    re.compile(r'\b[Cc]ited\b', re.IGNORECASE),
+    re.compile(r'\b(?:authoritative|nominal|canonical)\b', re.IGNORECASE),
+    re.compile(r'\b(?:IAU|JPL|NASA|NIST|ESA|Horizons)\b'),
+    re.compile(r'\b(?:arXiv|doi)\b', re.IGNORECASE),
+    re.compile(r'\bper\s+(?:IAU|JPL|NASA|NIST|ESA|Gemini|review)\b',
+               re.IGNORECASE),
+    re.compile(r'\bSource of truth\b', re.IGNORECASE),
+    re.compile(r'\b[Rr]eviewed\s+by\b'),
+]
+
+
+def has_citation(text, is_docstring=False):
+    """Does the given text block contain a citation marker?
+
+    If `is_docstring` is True, prose-style markers are also accepted
+    (docstrings describe provenance in prose, not in `# Source:` form)."""
+    for pat in SOURCE_PATTERNS:
+        if pat.search(text):
+            return True
+    if is_docstring:
+        for pat in DOCSTRING_CITATION_PATTERNS:
+            if pat.search(text):
+                return True
+    return False
+
+
+def has_stale_marker(text):
+    """Does the given text contain a staleness indicator?"""
+    for pat in STALE_PATTERNS:
+        if pat.search(text):
+            return True
+    return False
+
+
+# ============================================================
+# NUMERIC CLAIM EXTRACTION (for display strings)
+# ============================================================
+# Captures numbers with optional comma separators and decimal parts.
+# Comma handling: "31,000 km" is one token, not "31" + "000 km".
+
 NUMERIC_CLAIM_RE = re.compile(
-    r'(\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)\s*'
-    r'(R_sun|AU|km|km/s|m/s|deg|degrees?|solar radii|'
-    r'Earth (?:masses|radii)|M_sun|ly|light[- ]years?|'
-    r'days?|years?|hours?|minutes?|arcsec|mas|pc|kpc|Mpc|'
-    r'K|kg|g/cm3|g/cc|km/h|mph)\b',
+    r'(\d{1,3}(?:,\d{3})+(?:\.\d+)?|'     # 31,000 or 31,000.5
+    r'\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)'    # 8.33 or 1.5e-3
+    r'\s*'
+    r'(R_sun|AU|km/s|km|m/s|degrees?|deg\b|arcsec|mas|pc|kpc|Mpc|'
+    r'solar radii|Earth (?:masses|radii)|M_sun|M_earth|R_earth|'
+    r'ly|light[- ]years?|parsec|'
+    r'days?|years?|hours?|minutes?\b|min\b|sec\b|'
+    r'K\b|kelvin|kg\b|g/cm3|g/cc|'
+    r'km/h|mph)\b',
     re.IGNORECASE
 )
 
 
-def has_source_citation(line_text, context_lines):
-    """Check if a constant has a source citation on same or adjacent lines."""
-    all_text = line_text + ' '.join(context_lines)
-    for pat in SOURCE_PATTERNS:
-        if pat.search(all_text):
-            return True
-    return False
-
-
-def has_stale_markers(line_text, context_lines):
-    """Check if a value has markers suggesting it may be stale."""
-    all_text = line_text + ' '.join(context_lines)
-    for pat in STALE_PATTERNS:
-        if pat.search(all_text):
-            return True
-    return False
-
-
-def assess_vulnerability(line_text, context_lines):
-    """Determine vulnerability score for a finding."""
-    if has_source_citation(line_text, context_lines):
-        if has_stale_markers(line_text, context_lines):
-            return V_STALE, "Sourced but potentially stale"
-        return V_SOURCED, "Has source citation"
-    if has_stale_markers(line_text, context_lines):
-        return V_STALE, "No source, contains date-sensitive claims"
-    return V_RECALLED, "No source citation (recalled)"
+def extract_numeric_claims(text):
+    """Yield (num_str, unit, value_float) for each numeric claim in text.
+    Trivial paired values (0/1/2/3 days/years/hours) are skipped."""
+    for m in NUMERIC_CLAIM_RE.finditer(text):
+        num_str = m.group(1)
+        unit = m.group(2)
+        try:
+            value = float(num_str.replace(',', ''))
+        except ValueError:
+            continue
+        if value in (0, 1, 2, 3) and unit.lower() in (
+                'days', 'years', 'hours', 'minutes', 'min'):
+            continue
+        yield num_str, unit, value
 
 
 # ============================================================
-# CRITICALITY ASSESSMENT
+# IMPORT RESOLUTION (per-name, not per-module)
 # ============================================================
 
-def assess_criticality(module_name, finding_type, consumer_count, role):
-    """Determine criticality score for a finding.
-    
-    Args:
-        module_name: which module the finding is in
-        finding_type: 'constant', 'dict_value', 'string_claim'
-        consumer_count: how many modules import this module
-        role: module role from atlas (data, rendering, etc.)
+def build_name_import_map(project_dir, local_modules):
+    """For each local module, find which NAMES other modules import from it.
+
+    Returns: dict mapping module_name -> {imported_name: set(consumer_modules)}
+
+    Example: imported_names['constants_new']['KM_PER_AU'] =
+        {'apsidal_markers', 'idealized_orbits', ...}
+
+    This lets us score a specific symbol rather than the whole module.
     """
-    # Propagating: defined in a module imported by many others
-    if consumer_count >= 3 and finding_type in ('constant', 'dict_value'):
-        return C_PROPAGATING, f"Imported by {consumer_count} modules"
-    
-    # Public-facing: in hover text, INFO dicts, or rendering modules
-    if finding_type == 'string_claim':
-        return C_PUBLIC, "In display string (hover text / INFO)"
-    
-    # Shell/rendering modules with dict values = load-bearing geometry
-    if role in ('rendering/shells', 'rendering') and finding_type == 'dict_value':
-        return C_LOADBEARING, f"Geometry value in {role} module"
-    
-    # Data modules with constants = likely imported
-    if role == 'data' and finding_type == 'constant':
-        if consumer_count >= 1:
-            return C_PROPAGATING, f"Data constant imported by {consumer_count} modules"
-        return C_LOADBEARING, "Data constant (potential import target)"
-    
-    # Computation modules = load-bearing
-    if role == 'computation':
-        return C_LOADBEARING, f"Value in computation module"
-    
-    # Colors, labels, positions
-    if module_name == 'constants_new' and finding_type == 'dict_value':
-        # Could be color_map (cosmetic) or CENTER_BODY_RADII (propagating)
-        return C_LOADBEARING, "Dictionary value in constants module"
-    
-    # Default
-    return C_INTERNAL, "Internal use"
+    imported_names = defaultdict(lambda: defaultdict(set))
+
+    for fname in os.listdir(project_dir):
+        if not fname.endswith('.py'):
+            continue
+        consumer = fname[:-3]
+        filepath = os.path.join(project_dir, fname)
+        try:
+            with open(filepath, 'rb') as f:
+                tree = ast.parse(f.read())
+        except Exception:
+            continue
+
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and node.module:
+                mod_root = node.module.split('.')[0]
+                if mod_root not in local_modules:
+                    continue
+                for alias in node.names:
+                    name = alias.name
+                    if name == '*':
+                        imported_names[mod_root]['*'].add(consumer)
+                    else:
+                        imported_names[mod_root][name].add(consumer)
+
+    return imported_names
+
+
+def name_is_imported(name, module_name, imported_names):
+    """Return (count, consumers) for a name defined in module_name.
+    Star imports conservatively contribute as if the name were imported."""
+    mod_imports = imported_names.get(module_name, {})
+    consumers = set(mod_imports.get(name, set()))
+    consumers |= mod_imports.get('*', set())
+    return len(consumers), consumers
 
 
 # ============================================================
-# FILE SCANNING
+# PROVENANCE UNIT MODEL
 # ============================================================
 
-class Finding:
-    """A single auditable fact found in the codebase."""
+class ProvenanceUnit:
+    """The smallest thing that has a coherent source citation.
+
+    Three kinds:
+      - 'constant':  a module-level UPPER_CASE or Title_Case assignment
+      - 'dict':      a module-level dict literal assignment
+      - 'string':    a single string literal containing numeric claims
+    """
+
     __slots__ = [
-        'file', 'line', 'name', 'value', 'value_str',
-        'finding_type', 'context', 'vuln', 'vuln_reason',
-        'crit', 'crit_reason', 'score', 'dict_name',
+        'kind', 'module', 'file', 'name', 'line_start', 'line_end',
+        'context_text',        # text the unit sees for citation lookup
+        'entries',             # for dicts: [(key_name, value, value_str, line)]
+        'numeric_claims',      # for strings: [(num_str, unit, value)]
+        'value',               # for constants: the numeric value
+        'value_str',
+        'vuln', 'vuln_reason',
+        'crit', 'crit_reason',
+        'score',
+        'role', 'consumer_count', 'consumers',
+        'is_docstring',        # for strings: True if this is a module/class/func docstring
     ]
-    
+
     def __init__(self, **kwargs):
         for k in self.__slots__:
-            setattr(self, k, kwargs.get(k, ''))
+            setattr(self, k, kwargs.get(k, None))
+        if self.entries is None:
+            self.entries = []
+        if self.numeric_claims is None:
+            self.numeric_claims = []
+        if self.consumers is None:
+            self.consumers = set()
+
+    def compute_score(self):
         if self.vuln and self.crit:
             self.score = self.vuln * self.crit
         else:
             self.score = 0
 
-    def __repr__(self):
-        return f"Finding({self.file}:{self.line} {self.name}={self.value_str} score={self.score})"
+    @property
+    def display_name(self):
+        if self.kind == 'dict':
+            return f"{self.name}[...]" if self.name else "<anonymous dict>"
+        if self.kind == 'string':
+            return f"display string @ line {self.line_start}"
+        return self.name or "<anonymous>"
+
+    @property
+    def short_value(self):
+        if self.kind == 'constant':
+            return str(self.value_str) if self.value_str else str(self.value)
+        if self.kind == 'dict':
+            n = len(self.entries)
+            return f"({n} entr{'y' if n == 1 else 'ies'})"
+        if self.kind == 'string':
+            n = len(self.numeric_claims)
+            return f"({n} claim{'s' if n != 1 else ''})"
+        return ''
 
 
-def get_context_lines(lines, lineno, window=2):
-    """Get surrounding lines for context (0-indexed lineno)."""
-    start = max(0, lineno - window)
-    end = min(len(lines), lineno + window + 1)
-    return [lines[i] for i in range(start, end)]
+# ============================================================
+# CONTEXT BLOCK EXTRACTION
+# ============================================================
 
+def get_context_block(lines, unit_start_line, unit_end_line=None,
+                      lookback=30, lookahead=15):
+    """Return the block of text a unit can see for citation purposes.
 
-def scan_file_constants(filepath, lines):
-    """Extract named constants (module-level assignments to UPPER_CASE names).
-    
-    Finds patterns like:
-        SOLAR_RADIUS_AU = 0.00465047
-        KM_PER_AU = 149597870.7
+    Looks both directions from the unit:
+      - `lookback` lines BEFORE the unit (for section-header citations)
+      - the unit's declaration itself
+      - `lookahead` lines AFTER the unit (for trailing `# Source:` comments,
+        which is this codebase's dominant convention)
+
+    Both directions matter. constants_new.py places citations AFTER the
+    declaration ("KM_PER_AU = 149597870.7\\n# Source: IAU 2012 ..."),
+    but section headers and dict-level citations tend to be ABOVE.
     """
-    findings = []
-    
-    try:
-        with open(filepath, 'rb') as f:
-            tree = ast.parse(f.read())
-    except Exception:
-        return findings
-    
-    for node in ast.iter_child_nodes(tree):
-        if isinstance(node, ast.Assign):
-            for target in node.targets:
-                if isinstance(target, ast.Name):
-                    name = target.id
-                    # Only UPPER_CASE or Title_Case constants
-                    if not (name.isupper() or 
-                            (name[0].isupper() and '_' in name)):
-                        continue
-                    # Skip class definitions, imports, etc.
-                    if name in ('Path', 'Optional', 'Dict', 'List', 'Tuple'):
-                        continue
-                    
-                    # Try to extract the value
-                    value, value_str = extract_value(node.value, lines, node.lineno - 1)
-                    if value is None:
-                        continue
-                    
-                    # Skip non-numeric constants (strings, booleans, etc.)
-                    if not isinstance(value, (int, float)):
-                        continue
-                    
-                    context = get_context_lines(lines, node.lineno - 1)
-                    line_text = lines[node.lineno - 1] if node.lineno - 1 < len(lines) else ''
-                    
-                    findings.append(Finding(
-                        file=os.path.basename(filepath),
-                        line=node.lineno,
-                        name=name,
-                        value=value,
-                        value_str=value_str,
-                        finding_type='constant',
-                        context=context,
-                    ))
-    
-    return findings
+    if unit_end_line is None:
+        unit_end_line = unit_start_line
+    start = max(0, unit_start_line - 1 - lookback)
+    end = min(len(lines), unit_end_line + lookahead)
+    return ''.join(lines[start:end])
 
 
-def extract_value(node, lines, lineno):
-    """Try to extract a numeric value from an AST node."""
+def get_unit_interior(lines, line_start, line_end):
+    """Return the text inside the unit itself (per-entry comments)."""
+    start = max(0, line_start - 1)
+    end = min(len(lines), line_end)
+    return ''.join(lines[start:end])
+
+
+# ============================================================
+# AST-BASED UNIT EXTRACTION
+# ============================================================
+
+CONSTANT_NAME_SKIP = {
+    'Path', 'Optional', 'Dict', 'List', 'Tuple', 'Set', 'Union',
+    'Any', 'Callable', 'Iterator', 'Sequence', 'Mapping',
+    'TYPE_CHECKING',
+}
+
+
+def extract_numeric_value(node):
+    """Evaluate an AST node to a numeric constant.
+    Returns (value, display_str) or (None, None) if not numeric."""
     if isinstance(node, ast.Constant):
-        if isinstance(node.value, (int, float)):
+        if isinstance(node.value, (int, float)) and not isinstance(
+                node.value, bool):
             return node.value, str(node.value)
-    elif isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
-        val, vs = extract_value(node.operand, lines, lineno)
-        if val is not None:
-            return -val, f"-{vs}"
-    elif isinstance(node, ast.BinOp):
-        # Try to evaluate simple expressions like 558.0 * 365.25
+        return None, None
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
+        v, s = extract_numeric_value(node.operand)
+        if v is not None:
+            return -v, f"-{s}"
+    if isinstance(node, ast.BinOp):
         try:
-            line = lines[lineno] if lineno < len(lines) else ''
-            # Find the expression in the line
-            code = ast.get_source_segment(line.encode() if isinstance(line, str) else line, node)
-            if code:
-                val = eval(compile(ast.Expression(node), '<eval>', 'eval'))
-                if isinstance(val, (int, float)):
-                    return val, code.decode() if isinstance(code, bytes) else code
+            v = eval(compile(ast.Expression(node), '<eval>', 'eval'))
+            if isinstance(v, (int, float)):
+                src = ast.unparse(node) if hasattr(ast, 'unparse') else str(v)
+                return v, src
         except Exception:
-            pass
+            return None, None
     return None, None
 
 
-def scan_file_dicts(filepath, lines):
-    """Extract numeric values from dictionary literals.
-    
-    Finds patterns like:
-        'Sun': 696340,
-        'Mercury': 2440,
+def extract_units_from_file(filepath, module_name, role):
+    """Walk the AST of one file and emit ProvenanceUnits.
+
+    Emits:
+      - 'constant' units for top-level numeric assignments
+      - 'dict' units for top-level dict literal assignments
+      - 'string' units for string literals containing numeric claims
+        (only in files expected to carry public-facing narrative)
     """
-    findings = []
-    
+    units = []
+
     try:
         with open(filepath, 'rb') as f:
-            source = f.read()
-        tree = ast.parse(source)
+            source_bytes = f.read()
+        tree = ast.parse(source_bytes)
     except Exception:
-        return findings
-    
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Dict):
-            # Find the parent assignment to get the dict name
-            dict_name = _find_dict_name(tree, node)
-            
-            for key, val in zip(node.keys, node.values):
-                if key is None:
-                    continue
-                # Get the key name
-                if isinstance(key, ast.Constant) and isinstance(key.value, str):
-                    key_name = key.value
-                else:
-                    continue
-                
-                # Get the value
-                value, value_str = extract_value(val, lines, 
-                    val.lineno - 1 if hasattr(val, 'lineno') else 0)
-                if value is None:
-                    continue
-                if not isinstance(value, (int, float)):
-                    continue
-                
-                lineno = val.lineno if hasattr(val, 'lineno') else 0
-                context = get_context_lines(lines, lineno - 1) if lineno > 0 else []
-                line_text = lines[lineno - 1] if 0 < lineno <= len(lines) else ''
-                
-                findings.append(Finding(
-                    file=os.path.basename(filepath),
-                    line=lineno,
-                    name=f"{dict_name}['{key_name}']" if dict_name else f"'{key_name}'",
-                    value=value,
-                    value_str=value_str,
-                    finding_type='dict_value',
-                    context=context,
-                    dict_name=dict_name or '',
-                ))
-    
-    return findings
+        return units
 
+    try:
+        with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+            lines = f.readlines()
+    except Exception:
+        return units
 
-def _find_dict_name(tree, dict_node):
-    """Find the variable name a dict is assigned to."""
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign):
-            if node.value is dict_node:
-                for target in node.targets:
-                    if isinstance(target, ast.Name):
-                        return target.id
-    return None
+    fname = os.path.basename(filepath)
 
-
-def scan_file_string_claims(filepath, lines):
-    """Extract numeric claims from string literals.
-    
-    Finds patterns like "8.33 R_sun", "0.039 AU", "18.8 R_sun" in
-    hover text, INFO dicts, and docstrings.
-    """
-    findings = []
-    
-    # Scan all lines for string content with numeric claims
-    in_string = False
-    string_lines = []
-    
-    for i, line in enumerate(lines):
-        # Look for numeric claims in any line that looks like string content
-        # (inside quotes, triple quotes, or string continuation)
-        matches = NUMERIC_CLAIM_RE.finditer(line)
-        for m in matches:
-            num_str = m.group(1)
-            unit = m.group(2)
-            try:
-                value = float(num_str)
-            except ValueError:
-                continue
-            
-            # Skip very common/trivial values
-            if value in (0, 1, 2, 3) and unit.lower() in ('days', 'years', 'hours'):
-                continue
-            
-            context = get_context_lines(lines, i)
-            
-            # Try to identify what this claim is about from context
-            claim_context = line.strip()[:120]
-            
-            findings.append(Finding(
-                file=os.path.basename(filepath),
-                line=i + 1,
-                name=f"claim: {num_str} {unit}",
-                value=value,
-                value_str=f"{num_str} {unit}",
-                finding_type='string_claim',
-                context=context,
-            ))
-    
-    return findings
-
-
-# ============================================================
-# DUPLICATE DETECTION
-# ============================================================
-
-def find_duplicates(all_findings):
-    """Group findings by concept to detect duplicates and inconsistencies.
-    
-    Returns list of DuplicateGroup objects.
-    """
-    # Group by normalized name
-    by_concept = defaultdict(list)
-    
-    for f in all_findings:
-        if f.finding_type == 'string_claim':
-            continue  # Don't duplicate-check string claims
-        
-        # Normalize the concept name
-        concept = normalize_concept(f.name, f.value)
-        if concept:
-            by_concept[concept].append(f)
-    
-    # Also group by exact numeric value for cross-reference
-    by_value = defaultdict(list)
-    for f in all_findings:
-        if f.finding_type == 'string_claim':
+    # ---- Top-level assignments: constants and dicts ----
+    for node in ast.iter_child_nodes(tree):
+        if not isinstance(node, ast.Assign):
             continue
-        if isinstance(f.value, (int, float)) and f.value != 0:
-            # Round to avoid float precision issues
-            key = round(f.value, 6)
-            by_value[key].append(f)
-    
-    duplicates = []
-    seen_concepts = set()
-    
-    for concept, findings in by_concept.items():
-        if len(findings) > 1:
-            files = set(f.file for f in findings)
-            if len(files) > 1:  # Same concept in different files
-                values = set(round(f.value, 6) for f in findings)
-                duplicates.append({
-                    'concept': concept,
-                    'findings': findings,
-                    'files': files,
-                    'consistent': len(values) == 1,
-                    'values': values,
-                })
-    
-    return duplicates
+        if len(node.targets) != 1:
+            continue
+        target = node.targets[0]
+        if not isinstance(target, ast.Name):
+            continue
+        name = target.id
+
+        if isinstance(node.value, ast.Dict):
+            unit = _make_dict_unit(node, name, lines, module_name,
+                                    fname, role)
+            if unit is not None:
+                units.append(unit)
+            continue
+
+        # Numeric constant? Only UPPER_CASE / Title_Case names.
+        looks_like_constant = (name.isupper() or
+                               (name[0].isupper() and '_' in name))
+        if not looks_like_constant:
+            continue
+        if name in CONSTANT_NAME_SKIP:
+            continue
+
+        value, value_str = extract_numeric_value(node.value)
+        if value is None:
+            continue
+
+        line_start = node.lineno
+        line_end = getattr(node, 'end_lineno', line_start) or line_start
+        context_text = get_context_block(lines, line_start, line_end,
+                                         lookback=30, lookahead=15)
+
+        units.append(ProvenanceUnit(
+            kind='constant',
+            module=module_name,
+            file=fname,
+            name=name,
+            line_start=line_start,
+            line_end=line_end,
+            context_text=context_text,
+            value=value,
+            value_str=value_str,
+            role=role,
+        ))
+
+    # ---- String literals with numeric claims ----
+    narrative_files = {
+        'constants_new', 'info_dictionary', 'celestial_objects',
+        'spacecraft_encounters', 'close_approach_data',
+        'exoplanet_systems', 'exoplanet_stellar_properties',
+        'sgr_a_star_data', 'star_notes', 'solar_visualization_shells',
+    }
+    is_shell_file = module_name.endswith('_visualization_shells')
+    if module_name in narrative_files or is_shell_file:
+        units.extend(_extract_string_units(
+            tree, lines, module_name, fname, role))
+
+    return units
 
 
-def normalize_concept(name, value):
-    """Normalize a constant name to a concept for duplicate detection.
-    
-    Only groups things that genuinely represent the SAME physical quantity.
-    Dictionary entries like period_days for different planets are NOT 
-    the same concept -- they're per-object properties.
-    """
-    name_upper = name.upper()
-    
-    # Known concept families -- physical constants that should be unique
-    if 'SOLAR_RADIUS' in name_upper or 'SUN_RADIUS' in name_upper:
-        return 'SOLAR_RADIUS'
-    if 'KM_PER_AU' in name_upper or 'AU_TO_KM' in name_upper:
-        return 'KM_PER_AU'
-    if 'EARTH_RADIUS' in name_upper:
-        return 'EARTH_RADIUS'
-    if 'OBLIQUITY' in name_upper:
-        return 'OBLIQUITY'
-    
-    # Dictionary entries: only flag if the dict key is a unique object name
-    # AND the same object appears in multiple files with different values.
-    # Keys like 'period_days', 'semi_major_axis_au' are per-object properties
-    # that legitimately differ -- skip those.
-    if '[' in name:
-        # Extract dict_name['key'] -> only track if key is an object name
-        # (like CENTER_BODY_RADII['Sun']) not a property name
-        # (like exoplanet_data['period_days'])
-        match = re.match(r"(\w+)\['(.+)'\]", name)
-        if match:
-            dict_name, key = match.groups()
-            # Per-object property keys -- these SHOULD differ per planet
-            per_object_keys = {
-                'semi_major_axis_au', 'period_days', 'eccentricity',
-                'inclination', 'mass_earth', 'radius_earth',
-                'in_habitable_zone', 'mass_kg', 'mass_solar',
-                'radius_solar', 'temp_k', 'luminosity_solar',
-                'spectral_type', 'discovery_method', 'discovery_year',
-                # Shell properties -- differ per planet by design
-                'radius_fraction', 'opacity', 'color',
-                'sunward_distance', 'equatorial_radius', 'polar_radius',
-                'tail_length', 'tail_base_radius', 'tail_end_radius',
-                'offset_x', 'offset_y', 'offset_z',
-                'n_points', 'label', 'description',
-            }
-            if key in per_object_keys:
-                return None  # Not a duplicate concept
-            
-            # Same object in same-named dict across files IS a duplicate
-            return f"{dict_name}['{key}']"
+def _make_dict_unit(assign_node, name, lines, module_name, fname, role):
+    """Build a ProvenanceUnit for a top-level dict assignment."""
+    dict_node = assign_node.value
+    if not isinstance(dict_node, ast.Dict):
         return None
-    
-    # Named constants (UPPER_CASE)
-    if name.isupper() or (name[0].isupper() and '_' in name):
-        return name
-    
+
+    line_start = assign_node.lineno
+    line_end = getattr(dict_node, 'end_lineno', line_start) or line_start
+    # For dicts the interior is captured separately; use the declaration
+    # line as both start/end for lookahead so we catch trailing
+    # `# Source:` comments that follow the closing brace.
+    context_text = get_context_block(lines, line_start, line_end,
+                                     lookback=30, lookahead=10)
+    interior_text = get_unit_interior(lines, line_start, line_end)
+
+    entries = []
+    for key, val in zip(dict_node.keys, dict_node.values):
+        if key is None:  # ** unpacking
+            continue
+        if not (isinstance(key, ast.Constant) and isinstance(key.value, str)):
+            continue
+        key_name = key.value
+        num_value, num_str = extract_numeric_value(val)
+        if num_value is None:
+            # Accept None / other AST-constant values (e.g. period=None for
+            # hyperbolic comets). Skip non-constants (colors as RGB tuples,
+            # nested dicts, etc).
+            if isinstance(val, ast.Constant):
+                num_value = val.value
+                num_str = repr(val.value) if val.value is not None else 'None'
+            else:
+                continue
+        entry_line = getattr(val, 'lineno', line_start)
+        entries.append((key_name, num_value, num_str, entry_line))
+
+    if not entries:
+        return None
+
+    return ProvenanceUnit(
+        kind='dict',
+        module=module_name,
+        file=fname,
+        name=name,
+        line_start=line_start,
+        line_end=line_end,
+        context_text=context_text + '\n' + interior_text,
+        entries=entries,
+        role=role,
+    )
+
+
+def _extract_string_units(tree, lines, module_name, fname, role):
+    """Find string literals containing numeric claims. One string = one unit.
+
+    Module/class/function docstrings are treated specially: their own text
+    is included in the citation-search scope, so a docstring that mentions
+    "Verified", "Source:", "per NASA", etc. is treated as self-cited.
+    """
+    # Identify docstring string nodes by position (first stmt of module /
+    # class / function whose value is a Constant str).
+    docstring_lines = set()
+
+    def _collect_docstrings(n):
+        body = getattr(n, 'body', None)
+        if body and body:
+            first = body[0]
+            if (isinstance(first, ast.Expr) and
+                isinstance(first.value, ast.Constant) and
+                isinstance(first.value.value, str)):
+                docstring_lines.add(first.value.lineno)
+        for child in ast.iter_child_nodes(n):
+            if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef,
+                                   ast.ClassDef, ast.Module)):
+                _collect_docstrings(child)
+
+    _collect_docstrings(tree)
+
+    units = []
+    seen_lines = set()
+
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Constant):
+            continue
+        if not isinstance(node.value, str):
+            continue
+        s = node.value
+        if len(s) < 3:
+            continue
+        claims = list(extract_numeric_claims(s))
+        if not claims:
+            continue
+
+        line_start = node.lineno
+        if line_start in seen_lines:
+            continue
+        seen_lines.add(line_start)
+        line_end = getattr(node, 'end_lineno', line_start) or line_start
+
+        # If this string is a docstring, include its own text in the
+        # citation-search scope (docstrings self-contextualize).
+        #
+        # Lookback=60: info_dictionary.py INFO strings can be 50-100 lines
+        # long. With lookback=30, continuation lines deep in a long entry
+        # fall outside the citation window even when `# Source:` sits just
+        # above the entry key. 60 lines covers the longest INFO entries
+        # without false-positives in shorter files.
+        # Known residual: very long entries (Apollo 11 S-IVB, Halley,
+        # Artemis II) may still generate mid-string false positives if the
+        # entry itself exceeds 60 lines. These are accepted scanner
+        # limitations -- the citation exists at the entry key level.
+        base_context = get_context_block(lines, line_start, line_end,
+                                         lookback=60, lookahead=10)
+        if line_start in docstring_lines:
+            context_text = base_context + '\n' + s
+        else:
+            context_text = base_context
+
+        units.append(ProvenanceUnit(
+            kind='string',
+            module=module_name,
+            file=fname,
+            name=None,
+            line_start=line_start,
+            line_end=line_end,
+            context_text=context_text,
+            numeric_claims=claims,
+            role=role,
+            is_docstring=(line_start in docstring_lines),
+        ))
+
+    return units
+
+
+# ============================================================
+# SCORING
+# ============================================================
+
+def score_unit(unit, imported_names):
+    """Assign vulnerability and criticality to a unit."""
+    # ---- Vulnerability ----
+    text = unit.context_text or ''
+    is_doc = bool(unit.is_docstring)
+    cited = has_citation(text, is_docstring=is_doc)
+    stale = has_stale_marker(text)
+
+    if cited and stale:
+        unit.vuln = V_STALE
+        unit.vuln_reason = "Sourced but potentially stale"
+    elif cited:
+        unit.vuln = V_SOURCED
+        unit.vuln_reason = "Has source citation"
+    elif stale:
+        unit.vuln = V_STALE
+        unit.vuln_reason = "No source, contains date-sensitive claims"
+    else:
+        unit.vuln = V_RECALLED
+        unit.vuln_reason = "No source citation (recalled)"
+
+    # ---- Criticality ----
+    if unit.kind == 'string':
+        unit.crit = C_PUBLIC
+        unit.crit_reason = "Public-facing display string (hover/INFO)"
+    elif unit.kind in ('constant', 'dict') and unit.name:
+        count, consumers = name_is_imported(
+            unit.name, unit.module, imported_names)
+        unit.consumer_count = count
+        unit.consumers = consumers
+        if count >= 3:
+            unit.crit = C_PROPAGATING
+            unit.crit_reason = f"Imported by {count} modules"
+        elif count >= 1:
+            unit.crit = C_LOADBEARING
+            unit.crit_reason = f"Imported by {count} module(s)"
+        else:
+            unit.crit, unit.crit_reason = _role_based_criticality(unit)
+    else:
+        unit.crit, unit.crit_reason = _role_based_criticality(unit)
+
+    unit.compute_score()
+
+
+def _role_based_criticality(unit):
+    """Fallback criticality when per-name resolution doesn't apply."""
+    if unit.kind == 'dict' and unit.name:
+        lname = unit.name.lower()
+        if lname in ('colors',) or 'label' in lname or 'color' in lname:
+            return C_COSMETIC, f"Cosmetic dictionary ({unit.name})"
+
+    role = unit.role or ''
+    if unit.kind == 'dict' and role.startswith('rendering'):
+        return C_LOADBEARING, f"Geometry dict in {role} module"
+
+    if unit.kind == 'constant' and role in ('computation', 'data'):
+        return C_LOADBEARING, f"Numeric constant in {role} module"
+
+    return C_INTERNAL, "Internal use (not imported externally)"
+
+
+# ============================================================
+# DUPLICATE / INCONSISTENCY DETECTION
+# ============================================================
+# Hand-curated aliases avoid both false positives and false negatives.
+# Same-spelled names across files are caught; deliberately different
+# names (CENTER_BODY_RADII_KM shadow) are NOT caught here -- that
+# requires shadow detection (planned separately).
+
+CONCEPT_ALIASES = {
+    # Map canonical concept name -> tuple of exact name matches.
+    # Matching is done by checking if the constant NAME equals any alias
+    # (substring matching is too loose -- SPEED_OF_LIGHT_KM_S would
+    # collide with SPEED_OF_LIGHT even though they're in different units).
+    'SOLAR_RADIUS_KM':   ('SOLAR_RADIUS_KM', 'SUN_RADIUS_KM'),
+    'SOLAR_RADIUS_AU':   ('SOLAR_RADIUS_AU', 'SUN_RADIUS_AU'),
+    'KM_PER_AU':         ('KM_PER_AU', 'AU_TO_KM', 'AU_IN_KM'),
+    'EARTH_RADIUS_KM':   ('EARTH_RADIUS_KM', 'EARTH_EQUATORIAL_RADIUS_KM'),
+    'SPEED_OF_LIGHT_M_S': ('SPEED_OF_LIGHT',),  # m/s variant
+    'SPEED_OF_LIGHT_KM_S': ('SPEED_OF_LIGHT_KM_S', 'C_KM_S'),
+    'OBLIQUITY':         ('OBLIQUITY', 'EARTH_OBLIQUITY'),
+    'LIGHT_MINUTES_PER_AU': ('LIGHT_MINUTES_PER_AU',),
+    'JUPITER_RADIUS_KM': ('JUPITER_RADIUS_KM', 'JUPITER_EQUATORIAL_RADIUS_KM'),
+}
+
+
+def canonical_concept(name):
+    """Map a constant name to its canonical concept, or None.
+    Uses EXACT name match (not substring) to avoid unit-mismatch
+    false positives like SPEED_OF_LIGHT vs SPEED_OF_LIGHT_KM_S."""
+    up = name.upper()
+    for concept, aliases in CONCEPT_ALIASES.items():
+        if up in aliases:
+            return concept
     return None
 
 
+def find_cross_file_issues(units):
+    """Find same-concept constants across multiple files.
+    Returns (consistent_dups, inconsistencies)."""
+    by_concept = defaultdict(list)
+    for u in units:
+        if u.kind != 'constant' or u.name is None:
+            continue
+        concept = canonical_concept(u.name)
+        if concept:
+            by_concept[concept].append(u)
+
+    consistent_dups = []
+    inconsistencies = []
+
+    for concept, group in by_concept.items():
+        if len(group) < 2:
+            continue
+        files = set(u.file for u in group)
+        if len(files) < 2:
+            continue
+        values = set()
+        for u in group:
+            try:
+                values.add(round(float(u.value), 6))
+            except (TypeError, ValueError):
+                values.add(u.value)
+        entry = {
+            'concept': concept,
+            'units': group,
+            'files': files,
+            'values': values,
+        }
+        if len(values) == 1:
+            consistent_dups.append(entry)
+        else:
+            inconsistencies.append(entry)
+
+    return consistent_dups, inconsistencies
+
+
 # ============================================================
-# KNOWN SKIP LISTS
-# ============================================================
-
-# Dictionaries that are purely cosmetic (colors, label positions)
-COSMETIC_DICTS = {
-    'colors',           # in color_map()
-    'stellar_class_labels',
-}
-
-# Dictionaries with values from authoritative sources
-FETCHED_DICTS = {
-    # (none currently -- but can be added as pipeline sources are identified)
-}
-
-def is_cosmetic_dict(dict_name):
-    """Check if a dictionary is known to be cosmetic."""
-    if not dict_name:
-        return False
-    return dict_name.lower() in COSMETIC_DICTS or dict_name == 'colors'
-
-
-# ============================================================
-# MAIN SCANNER
+# MAIN SCAN
 # ============================================================
 
 def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     """Scan all .py files and produce the provenance audit report."""
-    
     print(f"Provenance Scanner -- scanning {project_dir}")
     print()
-    
-    # Build dependency graph (reuse from module_atlas)
+
     deps, consumers, local_modules = build_dependency_graph(project_dir)
-    
-    # Scan all files
-    all_findings = []
+    imported_names = build_name_import_map(project_dir, local_modules)
+
+    all_units = []
     files_scanned = 0
-    
+
     for fname in sorted(os.listdir(project_dir)):
         if not fname.endswith('.py'):
             continue
-        
         filepath = os.path.join(project_dir, fname)
         module_name = fname[:-3]
         role = classify_role(module_name)
-        consumer_count = len(consumers.get(module_name, set()))
-        
-        # Read file lines
-        try:
-            with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
-                lines = f.readlines()
-        except Exception:
-            continue
-        
+
+        units = extract_units_from_file(filepath, module_name, role)
+        for u in units:
+            score_unit(u, imported_names)
+        all_units.extend(units)
         files_scanned += 1
-        
-        # Scan for constants
-        constants = scan_file_constants(filepath, lines)
-        
-        # Scan for dictionary values
-        dict_values = scan_file_dicts(filepath, lines)
-        
-        # Scan for string claims (only in files with INFO dicts or shell descriptions)
-        string_claims = []
-        # Only scan files likely to contain factual hover text / descriptions
-        string_scan_files = {
-            'constants_new', 'celestial_objects', 'spacecraft_encounters',
-            'close_approach_data', 'exoplanet_systems', 'exoplanet_stellar_properties',
-            'sgr_a_star_data', 'star_notes',
-        }
-        is_shell_file = module_name.endswith('_visualization_shells')
-        if module_name in string_scan_files or is_shell_file:
-            string_claims = scan_file_string_claims(filepath, lines)
-        
-        # Score all findings
-        for f in constants + dict_values + string_claims:
-            line_text = lines[f.line - 1] if 0 < f.line <= len(lines) else ''
-            context = get_context_lines(lines, f.line - 1) if f.line > 0 else []
-            
-            # Vulnerability
-            v, v_reason = assess_vulnerability(line_text, context)
-            
-            # Override for cosmetic dicts
-            if f.finding_type == 'dict_value' and is_cosmetic_dict(f.dict_name):
-                f.crit = C_COSMETIC
-                f.crit_reason = "Cosmetic dictionary (colors/labels)"
-            else:
-                # Criticality from atlas
-                c, c_reason = assess_criticality(
-                    module_name, f.finding_type, consumer_count, role)
-                f.crit = c
-                f.crit_reason = c_reason
-            
-            f.vuln = v
-            f.vuln_reason = v_reason
-            f.score = f.vuln * f.crit
-        
-        all_findings.extend(constants + dict_values + string_claims)
-    
-    # Find duplicates
-    duplicates = find_duplicates(all_findings)
-    
-    # Generate report
-    generate_report(all_findings, duplicates, consumers, 
+
+    consistent_dups, inconsistencies = find_cross_file_issues(all_units)
+
+    generate_report(all_units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path)
-    
-    return all_findings, duplicates
+
+    return all_units, consistent_dups, inconsistencies
 
 
-def generate_report(findings, duplicates, consumers, files_scanned,
-                    project_dir, output_path):
+# ============================================================
+# REPORT GENERATION
+# ============================================================
+
+def generate_report(units, consistent_dups, inconsistencies,
+                    files_scanned, project_dir, output_path):
     """Write PROVENANCE_AUDIT.md."""
-    
     now = datetime.now().strftime('%B %d, %Y')
-    
-    # Sort findings by score descending
-    scored = [f for f in findings if f.score > 0]
-    scored.sort(key=lambda f: (-f.score, f.file, f.line))
-    
-    # Count by tier
+
+    scored = [u for u in units if u.score and u.score > 0]
+    scored.sort(key=lambda u: (-u.score, u.file, u.line_start))
+
     tier_counts = defaultdict(int)
-    for f in scored:
-        tier_counts[action_tier(f.score)] += 1
-    
-    # Count by type
-    type_counts = defaultdict(int)
-    for f in scored:
-        type_counts[f.finding_type] += 1
-    
-    lines = []
-    
-    # Header
-    lines.append("# Paloma's Orrery -- Provenance Audit")
-    lines.append("")
-    lines.append(f"Generated: {now}")
-    lines.append(f"Files scanned: {files_scanned}")
-    lines.append(f"Total findings: {len(scored)}")
-    lines.append(f"Constants: {type_counts.get('constant', 0)} | "
-                 f"Dict values: {type_counts.get('dict_value', 0)} | "
-                 f"String claims: {type_counts.get('string_claim', 0)}")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    
-    # Risk matrix explanation
-    lines.append("## Risk Matrix: Vulnerability x Criticality")
-    lines.append("")
-    lines.append("**Vulnerability** (how likely to be wrong):")
-    lines.append("- 1 = Fetched (authoritative pipeline)")
-    lines.append("- 2 = Sourced (has citation)")
-    lines.append("- 3 = Stale (may have changed)")
-    lines.append("- 4 = Recalled (LLM training data, no citation)")
-    lines.append("")
-    lines.append("**Criticality** (impact if wrong):")
-    lines.append("- 1 = Cosmetic (colors, labels)")
-    lines.append("- 2 = Internal (used but not displayed)")
-    lines.append("- 3 = Load-bearing (drives geometry)")
-    lines.append("- 4 = Public-facing (hover text, gallery)")
-    lines.append("- 5 = Propagating (imported by other modules)")
-    lines.append("")
-    lines.append("**Score = V x C** | Action thresholds:")
-    lines.append("- 16-20: FIX NOW")
-    lines.append("- 10-15: FIX NEXT SESSION")
-    lines.append("- 5-9: ADD SOURCE WHEN TOUCHED")
-    lines.append("- 1-4: NO ACTION NEEDED")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    
-    # Summary by tier
-    lines.append("## Priority Summary")
-    lines.append("")
-    lines.append("| Tier | Score | Action | Count |")
-    lines.append("|------|-------|--------|------:|")
+    for u in scored:
+        tier_counts[action_tier(u.score)] += 1
+
+    kind_counts = defaultdict(int)
+    for u in scored:
+        kind_counts[u.kind] += 1
+
+    out = []
+
+    # ---- Header ----
+    out.append("# Paloma's Orrery -- Provenance Audit")
+    out.append("")
+    out.append(f"Generated: {now}")
+    out.append(f"Files scanned: {files_scanned}")
+    out.append(f"Total findings: {len(scored)}")
+    out.append(f"Constants: {kind_counts.get('constant', 0)} | "
+               f"Dicts: {kind_counts.get('dict', 0)} | "
+               f"Display strings: {kind_counts.get('string', 0)}")
+    out.append("")
+    out.append("Unit of provenance: the smallest thing with a coherent "
+               "source citation. A dict with one block-level `# Source:` "
+               "comment is ONE unit; all its entries inherit that citation. "
+               "A hover string with co-referring numbers is ONE unit.")
+    out.append("")
+    out.append("---")
+    out.append("")
+
+    # ---- Risk matrix ----
+    out.append("## Risk Matrix: Vulnerability x Criticality")
+    out.append("")
+    out.append("**Vulnerability** (how likely to be wrong):")
+    out.append("- 1 = Fetched (authoritative pipeline)")
+    out.append("- 2 = Sourced (has citation)")
+    out.append("- 3 = Stale (may have changed)")
+    out.append("- 4 = Recalled (LLM training data, no citation)")
+    out.append("")
+    out.append("**Criticality** (impact if wrong):")
+    out.append("- 1 = Cosmetic (colors, labels)")
+    out.append("- 2 = Internal (used but not imported elsewhere)")
+    out.append("- 3 = Load-bearing (drives geometry) or imported 1-2x")
+    out.append("- 4 = Public-facing (hover text, gallery)")
+    out.append("- 5 = Propagating (imported by 3+ modules)")
+    out.append("")
+    out.append("**Score = V x C** | Action thresholds:")
+    out.append("- 16-20: FIX NOW")
+    out.append("- 10-15: FIX NEXT SESSION")
+    out.append("- 5-9: ADD SOURCE WHEN TOUCHED")
+    out.append("- 1-4: NO ACTION NEEDED")
+    out.append("")
+    out.append("---")
+    out.append("")
+
+    # ---- Priority summary ----
+    out.append("## Priority Summary")
+    out.append("")
+    out.append("| Tier | Score | Action | Count |")
+    out.append("|------|-------|--------|------:|")
     tier_labels = {
         1: ("16-20", "FIX NOW"),
         2: ("10-15", "FIX NEXT SESSION"),
@@ -703,148 +931,152 @@ def generate_report(findings, duplicates, consumers, files_scanned,
     for tier in [1, 2, 3, 4]:
         score_range, action = tier_labels[tier]
         count = tier_counts.get(tier, 0)
-        lines.append(f"| {tier} | {score_range} | {action} | {count} |")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    
-    # Duplicates / Inconsistencies section (highest priority)
-    if duplicates:
-        inconsistent = [d for d in duplicates if not d['consistent']]
-        consistent_dups = [d for d in duplicates if d['consistent']]
-        
-        if inconsistent:
-            lines.append("## INCONSISTENCIES (Same concept, different values)")
-            lines.append("")
-            lines.append("These are the highest-risk findings: the same physical")
-            lines.append("concept has different numeric values in different files.")
-            lines.append("")
-            
-            for dup in inconsistent:
-                lines.append(f"### {dup['concept']}")
-                lines.append("")
-                lines.append(f"**Values found:** {', '.join(str(v) for v in sorted(dup['values']))}")
-                lines.append(f"**Files:** {', '.join(sorted(dup['files']))}")
-                lines.append("")
-                for f in sorted(dup['findings'], key=lambda x: (x.file, x.line)):
-                    lines.append(f"- `{f.file}:{f.line}` -- `{f.name} = {f.value_str}`")
-                lines.append("")
-                lines.append("**Action:** Determine correct value with citation. "
-                             "Consolidate to single source of truth in constants_new.py. "
-                             "Replace duplicates with imports.")
-                lines.append("")
-            
-            lines.append("---")
-            lines.append("")
-        
-        if consistent_dups:
-            lines.append("## DUPLICATES (Same value, multiple files)")
-            lines.append("")
-            lines.append("These constants have consistent values but are defined")
-            lines.append("in multiple files instead of imported from one source.")
-            lines.append("")
-            
-            for dup in consistent_dups:
-                files_str = ', '.join(sorted(dup['files']))
-                val = list(dup['values'])[0]
-                lines.append(f"- **{dup['concept']}** = {val} -- in {files_str}")
-            lines.append("")
-            lines.append("**Action:** Consolidate to constants_new.py and import.")
-            lines.append("")
-            lines.append("---")
-            lines.append("")
-    
-    # Findings by tier
+        out.append(f"| {tier} | {score_range} | {action} | {count} |")
+    out.append("")
+    out.append("---")
+    out.append("")
+
+    # ---- Inconsistencies (highest priority) ----
+    if inconsistencies:
+        out.append("## INCONSISTENCIES (Same concept, different values)")
+        out.append("")
+        out.append("Highest-risk findings: the same physical concept has ")
+        out.append("different numeric values in different files.")
+        out.append("")
+        for entry in inconsistencies:
+            out.append(f"### {entry['concept']}")
+            out.append("")
+            out.append(f"**Values found:** " +
+                       ", ".join(str(v) for v in sorted(entry['values'])))
+            out.append(f"**Files:** " + ", ".join(sorted(entry['files'])))
+            out.append("")
+            for u in sorted(entry['units'],
+                            key=lambda x: (x.file, x.line_start)):
+                out.append(f"- `{u.file}:{u.line_start}` -- "
+                           f"`{u.name} = {u.value_str}`")
+            out.append("")
+            out.append("**Action:** Determine correct value with citation. "
+                       "Consolidate to single source of truth in "
+                       "constants_new.py. Replace duplicates with imports.")
+            out.append("")
+        out.append("---")
+        out.append("")
+    else:
+        out.append("## INCONSISTENCIES")
+        out.append("")
+        out.append("None detected. No same-concept constants with differing ")
+        out.append("values found across files.")
+        out.append("")
+        out.append("Note: this does NOT rule out silent shadowing (a local ")
+        out.append("dict with different name but overlapping keys). That ")
+        out.append("pattern is the April 16 bug family; shadow detection ")
+        out.append("is planned for a future session.")
+        out.append("")
+        out.append("---")
+        out.append("")
+
+    # ---- Consistent duplicates ----
+    if consistent_dups:
+        out.append("## DUPLICATES (Same value, multiple files)")
+        out.append("")
+        out.append("Consistent values defined in multiple places rather ")
+        out.append("than imported from one source. Consolidation candidates.")
+        out.append("")
+        for entry in consistent_dups:
+            val = list(entry['values'])[0]
+            files_str = ", ".join(sorted(entry['files']))
+            out.append(f"- **{entry['concept']}** = {val} -- in {files_str}")
+        out.append("")
+        out.append("**Action:** Consolidate to constants_new.py and import.")
+        out.append("")
+        out.append("---")
+        out.append("")
+
+    # ---- Per-tier findings ----
     for tier in [1, 2, 3, 4]:
-        tier_findings = [f for f in scored if action_tier(f.score) == tier]
-        if not tier_findings:
+        tier_units = [u for u in scored if action_tier(u.score) == tier]
+        if not tier_units:
             continue
-        
         score_range, action = tier_labels[tier]
-        lines.append(f"## Tier {tier}: {action} (Score {score_range})")
-        lines.append("")
-        
-        # Group by file within tier
+        out.append(f"## Tier {tier}: {action} (Score {score_range})")
+        out.append("")
+
         by_file = defaultdict(list)
-        for f in tier_findings:
-            by_file[f.file].append(f)
-        
+        for u in tier_units:
+            by_file[u.file].append(u)
+
         for fname in sorted(by_file.keys()):
-            file_findings = by_file[fname]
-            lines.append(f"### {fname}")
-            lines.append("")
-            lines.append(f"| Line | Name | Value | V | C | Score | Vulnerability | Criticality |")
-            lines.append(f"|-----:|------|-------|--:|--:|------:|---------------|-------------|")
-            
-            for f in sorted(file_findings, key=lambda x: -x.score):
-                name_short = f.name[:40]
-                val_short = str(f.value_str)[:30]
-                lines.append(
-                    f"| {f.line} | {name_short} | {val_short} | "
-                    f"{f.vuln} | {f.crit} | **{f.score}** | "
-                    f"{f.vuln_reason} | {f.crit_reason} |"
+            out.append(f"### {fname}")
+            out.append("")
+            out.append("| Line | Kind | Name | Size/Value | V | C | "
+                       "Score | Vulnerability | Criticality |")
+            out.append("|-----:|------|------|------------|--:|--:|"
+                       "------:|---------------|-------------|")
+            for u in sorted(by_file[fname], key=lambda x: -x.score):
+                name = u.display_name[:40]
+                val = u.short_value[:20]
+                out.append(
+                    f"| {u.line_start} | {u.kind} | {name} | {val} | "
+                    f"{u.vuln} | {u.crit} | **{u.score}** | "
+                    f"{u.vuln_reason} | {u.crit_reason} |"
                 )
-            lines.append("")
-        
-        lines.append("---")
-        lines.append("")
-    
-    # Footer
-    lines.append("## How to Use This Audit")
-    lines.append("")
-    lines.append("1. Start with INCONSISTENCIES -- these are confirmed problems")
-    lines.append("2. Work through Tier 1 (FIX NOW) findings")
-    lines.append("3. For each finding:")
-    lines.append("   a. Find the correct value from an authoritative source")
-    lines.append("   b. Update the value in constants_new.py")
-    lines.append("   c. Add `# Source: [citation]` comment")
-    lines.append("   d. Replace duplicates with imports")
-    lines.append("   e. Verify downstream behavior unchanged")
-    lines.append("4. Re-run this scanner to confirm fixes")
-    lines.append("")
-    lines.append("Companion tools:")
-    lines.append("- module_atlas.py -- dependency graph for tracing propagation")
-    lines.append("- dep_trace.py -- fine-grained import tracing")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-    lines.append("*Generated by provenance_scanner.py -- "
-                 "Paloma's Orrery Developer Tools*")
-    lines.append("")
-    
-    # Write
-    content = '\n'.join(lines)
+            out.append("")
+        out.append("---")
+        out.append("")
+
+    # ---- Footer ----
+    out.append("## How to Use This Audit")
+    out.append("")
+    out.append("1. Start with INCONSISTENCIES -- these are confirmed problems.")
+    out.append("2. Work through Tier 1 (FIX NOW) findings.")
+    out.append("3. For each finding:")
+    out.append("   a. Locate the correct value from an authoritative source.")
+    out.append("   b. Update constants_new.py (or info_dictionary.py).")
+    out.append("   c. Add a `# Source:` comment above the declaration.")
+    out.append("   d. Replace local copies with imports.")
+    out.append("   e. Verify downstream plots unchanged.")
+    out.append("4. Re-run this scanner to confirm fixes.")
+    out.append("")
+    out.append("Companion tools:")
+    out.append("- module_atlas.py              -- dependency graph")
+    out.append("- test_constants_provenance.py -- pin constants_new.py values")
+    out.append("- dep_trace.py                 -- per-module import tracing")
+    out.append("")
+    out.append("---")
+    out.append("")
+    out.append("*Generated by provenance_scanner.py -- "
+               "Paloma's Orrery Developer Tools*")
+    out.append("")
+
+    content = "\n".join(out)
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     print(f"Audit written to {output_path}")
     print(f"  {len(scored)} findings across {files_scanned} files")
     print()
-    
-    # Print summary
     print("Priority summary:")
     for tier in [1, 2, 3, 4]:
         score_range, action = tier_labels[tier]
         count = tier_counts.get(tier, 0)
-        print(f"  Tier {tier} ({score_range}): {count:4d} findings -- {action}")
-    
-    if any(not d['consistent'] for d in duplicates):
-        n_incon = sum(1 for d in duplicates if not d['consistent'])
-        print(f"\n  *** {n_incon} INCONSISTENCIES detected -- same concept, different values ***")
-    
-    n_dups = sum(1 for d in duplicates if d['consistent'])
-    if n_dups:
-        print(f"  {n_dups} consistent duplicates (consolidation candidates)")
+        print(f"  Tier {tier} ({score_range}): {count:5d} findings -- {action}")
+
+    if inconsistencies:
+        print()
+        print(f"  *** {len(inconsistencies)} INCONSISTENCIES detected ***")
+    if consistent_dups:
+        print(f"  {len(consistent_dups)} consistent duplicates "
+              f"(consolidation candidates)")
 
 
 # ============================================================
-# MAIN
+# CLI
 # ============================================================
 
 def main():
     project_dir = '.'
     output_path = 'PROVENANCE_AUDIT.md'
-    
+
     args = sys.argv[1:]
     i = 0
     while i < len(args):
@@ -856,11 +1088,11 @@ def main():
             i += 1
         else:
             i += 1
-    
+
     if not os.path.isdir(project_dir):
         print(f"ERROR: '{project_dir}' is not a directory")
         sys.exit(1)
-    
+
     scan_project(project_dir, output_path)
 
 

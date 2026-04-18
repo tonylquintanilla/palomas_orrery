@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: April 15, 2026
-Modules: 99 | Functions: 768 | Lines: 79,581
+Generated: April 17, 2026
+Modules: 105 | Functions: 812 | Lines: 87,476
 
 ---
 
@@ -24,17 +24,16 @@ and explains in context.
 
 | Role | Count | Description |
 |------|-------|-------------|
-| gui | 6 | Applications the user launches (GUIs, editors) |
+| gui | 8 | Applications the user launches (GUIs, editors) |
 | rendering | 22 | Builds visual traces, figures, and charts |
 | rendering/shells | 15 | Planetary shell visualizations (sphere layers) |
 | computation | 15 | Math, orbital mechanics, data processing |
-| data | 13 | Catalogs, constants, and static datasets |
-| cache | 8 | Fetch, store, and retrieve computed data |
-| pipeline | 4 | Transforms data between stages (export, conversion) |
+| data | 14 | Catalogs, constants, and static datasets |
+| cache | 5 | Fetch, store, and retrieve computed data |
+| pipeline | 7 | Transforms data between stages (export, conversion, plotting pipelines) |
 | scenario | 3 | Specific Earth system scenarios |
 | utility | 5 | Shared helper functions |
-| devtool | 1 | Developer tools (dependency tracing, atlas) |
-| other | 7 | Uncategorized |
+| devtool | 11 | Developer tools (dependency tracing, atlas) |
 
 ---
 
@@ -99,6 +98,50 @@ and explains in context.
 
 ---
 
+### gallery_editor.py
+
+**Role:** gui | **Lines:** 1,338
+
+> Gallery Metadata Editor for Paloma's Orrery GUI to edit visualization titles, descriptions, categories, reorder items and categories, and copy/move visualizations within the gallery_metadata.json file.
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `load_config(filepath)` (line 37) -- Load gallery_config.json. Returns list of category dicts.
+- `save_config(filepath, categories)` (line 47) -- Save gallery_config.json.
+- `config_to_map(categories)` (line 54) -- Convert category list to key->label dict.
+- `config_to_color_map(categories)` (line 59) -- Convert category list to key->color dict.
+- `load_metadata(filepath)` (line 68) -- Load gallery_metadata.json and return the data dict.
+- `save_metadata(filepath, data)` (line 74) -- Save gallery_metadata.json with a backup first.
+- `get_category_order(vizs, mode_key)` (line 90) -- Derive category display order from JSON sequence for a given mode.
+- `make_label_to_key(label)` (line 111) -- Convert a category label to a snake_case key.
+- `class GalleryEditor` (line 125)
+
+---
+
+### gallery_studio.py
+
+**Role:** gui | **Lines:** 4,485
+
+> Gallery Studio - Interactive HTML Export Tool for Paloma's Orrery
+
+**Depends on:** info_dictionary, visualization_utils
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `class ToolTip` (line 348) -- Hover tooltip for Tkinter widgets.
+- `extract_figure_from_html(html_path)` (line 492) -- Extract Plotly figure dict from an HTML file.
+- `extract_encyclopedia_for_figure(fig_dict)` (line 694) -- Extract encyclopedia entries for objects present in a Plotly figure.
+- `apply_config(fig_dict, config)` (line 819) -- Apply studio configuration to a Plotly figure dict.
+- `build_gallery_html(fig_dict, config, title)` (line 2183) -- Build a standalone gallery-ready HTML file from a figure dict.
+- `class GalleryStudio` (line 3108) -- Tkinter GUI for configuring and exporting gallery-ready HTML.
+- `main()` (line 4999) -- Launch the Gallery Studio.
+
+---
+
 ### orbital_param_viz.py
 
 **Role:** gui | **Lines:** 1,936
@@ -124,11 +167,11 @@ and explains in context.
 
 ### palomas_orrery.py
 
-**Role:** gui | **Lines:** 8,254
+**Role:** gui | **Lines:** 8,253
 
 > palomas_orrery.py - Main GUI and plotting engine for Paloma's Orrery.
 
-**Depends on:** apsidal_markers, asteroid_belt_visualization_shells, celestial_objects, close_approach_data, comet_visualization_shells, constants_new, earth_system_visualization_gui, exoplanet_orbits, exoplanet_stellar_properties, exoplanet_systems, formatting_utils, idealized_orbits, orbit_data_manager, orbital_elements, orbital_param_viz, osculating_cache_manager, palomas_orrery_helpers, planet_visualization, save_utils, sgr_a_grand_tour, shared_utilities, shutdown_handler, social_media_export, solar_visualization_shells, spacecraft_encounters, star_sphere_builder, visualization_utils
+**Depends on:** apsidal_markers, asteroid_belt_visualization_shells, celestial_objects, close_approach_data, comet_visualization_shells, constants_new, earth_system_visualization_gui, exoplanet_orbits, exoplanet_stellar_properties, exoplanet_systems, formatting_utils, idealized_orbits, info_dictionary, orbit_data_manager, orbital_elements, orbital_param_viz, osculating_cache_manager, palomas_orrery_helpers, planet_visualization, save_utils, sgr_a_grand_tour, shared_utilities, shutdown_handler, social_media_export, solar_visualization_shells, spacecraft_encounters, star_sphere_builder, visualization_utils
 **Consumed by:** (none -- standalone)
 
 **Public functions:**
@@ -202,7 +245,7 @@ and explains in context.
 
 ### palomas_orrery_dashboard.py
 
-**Role:** gui | **Lines:** 599
+**Role:** gui | **Lines:** 600
 
 > Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite.
 
@@ -212,26 +255,26 @@ and explains in context.
 **Public functions:**
 
 - `class PalomasOrreryDashboard` (line 175) -- Main dashboard window.
-- `main()` (line 696)
+- `main()` (line 697)
 
 ---
 
 ### star_visualization_gui.py
 
-**Role:** gui | **Lines:** 1,406
+**Role:** gui | **Lines:** 1,407
 
 > star_visualization_gui.py - Stellar visualization GUI for Paloma's Orrery.
 
-**Depends on:** constants_new, hr_diagram_apparent_magnitude, hr_diagram_distance, planetarium_apparent_magnitude, planetarium_distance, plot_data_exchange, plot_data_report_widget, report_manager, save_utils, social_media_export, star_notes
+**Depends on:** constants_new, hr_diagram_apparent_magnitude, hr_diagram_distance, info_dictionary, json_converter, planetarium_apparent_magnitude, planetarium_distance, plot_data_exchange, plot_data_report_widget, report_manager, save_utils, social_media_export, star_notes
 **Consumed by:** (none -- standalone)
 
 **Public functions:**
 
-- `is_frozen()` (line 46) -- Check if running as a PyInstaller frozen executable.
-- `class ScrollableFrame` (line 72) -- A scrollable frame widget.
-- `class LazyStarPropertiesLoader` (line 93) -- Loads star properties on-demand rather than all at startup.
-- `class StarVisualizationSearchWidget` (line 198) -- Search widget with unified display for all star information.
-- `class StarVisualizationGUI` (line 800) -- Main GUI window with search and visualization controls.
+- `is_frozen()` (line 47) -- Check if running as a PyInstaller frozen executable.
+- `class ScrollableFrame` (line 73) -- A scrollable frame widget.
+- `class LazyStarPropertiesLoader` (line 94) -- Loads star properties on-demand rather than all at startup.
+- `class StarVisualizationSearchWidget` (line 199) -- Search widget with unified display for all star information.
+- `class StarVisualizationGUI` (line 801) -- Main GUI window with search and visualization controls.
 
 ---
 
@@ -404,39 +447,39 @@ and explains in context.
 
 ### planet_visualization.py
 
-**Role:** rendering | **Lines:** 1,046
+**Role:** rendering | **Lines:** 1,027
 
-> Celestial Body Visualization Module Functions for creating layered visualizations of solar system bodies (Sun, planets) in 3D plots. Each celestial body has individual shell components that can be toggled with selection variables.
+> planet_visualization.py - High-level planet and Sun visualization orchestration.
 
 **Depends on:** asteroid_belt_visualization_shells, constants_new, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, planet9_visualization_shells, planet_visualization_utilities, pluto_visualization_shells, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
 **Consumed by:** palomas_orrery, palomas_orrery_helpers
 
 **Public functions:**
 
-- `create_sun_visualization(fig, sun_shell_vars, animate, frames)` (line 328) -- Creates a visualization of the Sun's layers based on which shells are selected.
-- `create_sun_corona_from_distance(fig, sun_shell_vars, sun_position)` (line 442) -- Creates a simplified Sun corona visualization for non-Sun-centered views.
-- `create_celestial_body_visualization(fig, body_name, shell_vars, animate, frames, center_position)` (line 562) -- Unified function to create shell visualizations for any celestial body (Sun or planets).
-- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position)` (line 902) -- Creates a visualization of a planet's layers based on which shells are selected.
-- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 1138) -- Creates traces for planet shells without adding them to a figure.
+- `create_sun_visualization(fig, sun_shell_vars, animate, frames)` (line 301) -- Creates a visualization of the Sun's layers based on which shells are selected.
+- `create_sun_corona_from_distance(fig, sun_shell_vars, sun_position)` (line 415) -- Creates a simplified Sun corona visualization for non-Sun-centered views.
+- `create_celestial_body_visualization(fig, body_name, shell_vars, animate, frames, center_position)` (line 535) -- Unified function to create shell visualizations for any celestial body (Sun or planets).
+- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position)` (line 875) -- Creates a visualization of a planet's layers based on which shells are selected.
+- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 1111) -- Creates traces for planet shells without adding them to a figure.
 
 ---
 
 ### planet_visualization_utilities.py
 
-**Role:** rendering | **Lines:** 290
+**Role:** rendering | **Lines:** 297
 
-> Celestial Body Visualization Module Functions for creating layered visualizations of solar system bodies (Sun, planets) in 3D plots. Each celestial body has individual shell components that can be toggled with selection variables.
+> planet_visualization_utilities.py - Shared geometry helpers and body-radius aliases.
 
 **Depends on:** constants_new
 **Consumed by:** comet_visualization_shells, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, planet9_visualization_shells, planet_visualization, pluto_visualization_shells, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
 
 **Public functions:**
 
-- `rotate_points(x, y, z, angle, axis)` (line 92) -- Rotate points around a specified axis by the given angle.
-- `create_hover_markers_for_planet(center_position, radius, color, name, description, num_points)` (line 140) -- Creates clean hover markers for a planet with proper hover text formatting.
-- `create_magnetosphere_shape(params)` (line 197) -- Creates points for a magnetosphere with asymmetry, compressed on sunward side
-- `create_sphere_points(radius, n_points)` (line 251) -- Create points for a sphere surface to represent celestial body layers.
-- `create_sun_direction_indicator_old(center_position)` (line 272) -- Creates a visual indicator showing the direction to the Sun (along negative X-axis).
+- `rotate_points(x, y, z, angle, axis)` (line 103) -- Rotate points around a specified axis by the given angle.
+- `create_hover_markers_for_planet(center_position, radius, color, name, description, num_points)` (line 151) -- Creates clean hover markers for a planet with proper hover text formatting.
+- `create_magnetosphere_shape(params)` (line 208) -- Creates points for a magnetosphere with asymmetry, compressed on sunward side
+- `create_sphere_points(radius, n_points)` (line 262) -- Create points for a sphere surface to represent celestial body layers.
+- `create_sun_direction_indicator_old(center_position)` (line 283) -- Creates a visual indicator showing the direction to the Sun (along negative X-axis).
 
 ---
 
@@ -596,63 +639,63 @@ and explains in context.
 
 ### visualization_2d.py
 
-**Role:** rendering | **Lines:** 524
+**Role:** rendering | **Lines:** 523
 
 > visualization_2d.py - 2D HR diagram (color-magnitude) plot builder.
 
-**Depends on:** constants_new, save_utils, solar_visualization_shells, star_notes, visualization_core, visualization_utils
+**Depends on:** constants_new, info_dictionary, save_utils, solar_visualization_shells, star_notes, visualization_core, visualization_utils
 **Consumed by:** hr_diagram_apparent_magnitude, hr_diagram_distance
 
 **Public functions:**
 
-- `format_value(value, format_spec, default)` (line 34) -- Format a value using Python's built-in format function.
-- `create_hover_text(df, include_3d)` (line 44) -- Create hover text with graceful handling of missing columns.
-- `prepare_2d_data(combined_data)` (line 134) -- Prepare data for plotting.
-- `generate_footer_text(counts_dict, estimation_results, mag_limit, max_light_years)` (line 207) -- Generate updated footer text including estimation information.
-- `create_hr_diagram(combined_df, counts_dict, mag_limit, max_light_years)` (line 272) -- Create HR diagram for either magnitude or distance-based data.
+- `format_value(value, format_spec, default)` (line 33) -- Format a value using Python's built-in format function.
+- `create_hover_text(df, include_3d)` (line 43) -- Create hover text with graceful handling of missing columns.
+- `prepare_2d_data(combined_data)` (line 133) -- Prepare data for plotting.
+- `generate_footer_text(counts_dict, estimation_results, mag_limit, max_light_years)` (line 206) -- Generate updated footer text including estimation information.
+- `create_hr_diagram(combined_df, counts_dict, mag_limit, max_light_years)` (line 271) -- Create HR diagram for either magnitude or distance-based data.
 
 ---
 
 ### visualization_3d.py
 
-**Role:** rendering | **Lines:** 858
+**Role:** rendering | **Lines:** 857
 
 > visualization_3d.py - 3D stellar neighborhood and planetarium plot builder.
 
-**Depends on:** constants_new, save_utils, solar_visualization_shells, star_notes, visualization_core
+**Depends on:** constants_new, info_dictionary, save_utils, solar_visualization_shells, star_notes, visualization_core
 **Consumed by:** planetarium_apparent_magnitude, planetarium_distance
 
 **Public functions:**
 
-- `parse_stellar_classes(df)` (line 38) -- Parse stellar classes from spectral types.
-- `expand_object_type(ot)` (line 52) -- Expand object type codes to full descriptions.
-- `prepare_3d_data(combined_df, max_value, counts, mode)` (line 75) -- Prepare data for 3D visualization with proper handling of Messier objects.
-- `format_value(value, format_spec, default)` (line 186) -- Format a value using Python's built-in format function.
-- `create_hover_text(df, include_3d)` (line 208) -- Create hover text with graceful handling of missing columns.
-- `create_hover_text_old(df, include_3d)` (line 297) -- Create hover text with graceful handling of missing columns.
-- `create_notable_stars_list(combined_df, unique_notes, user_max_coord)` (line 344) -- Create list of notable stars, using vector distance for filtering.
-- `create_3d_visualization(combined_df, max_value, user_max_coord)` (line 447) -- Create 3D visualization of stellar neighborhood or magnitude-limited stars.
+- `parse_stellar_classes(df)` (line 37) -- Parse stellar classes from spectral types.
+- `expand_object_type(ot)` (line 51) -- Expand object type codes to full descriptions.
+- `prepare_3d_data(combined_df, max_value, counts, mode)` (line 74) -- Prepare data for 3D visualization with proper handling of Messier objects.
+- `format_value(value, format_spec, default)` (line 185) -- Format a value using Python's built-in format function.
+- `create_hover_text(df, include_3d)` (line 207) -- Create hover text with graceful handling of missing columns.
+- `create_hover_text_old(df, include_3d)` (line 296) -- Create hover text with graceful handling of missing columns.
+- `create_notable_stars_list(combined_df, unique_notes, user_max_coord)` (line 343) -- Create list of notable stars, using vector distance for filtering.
+- `create_3d_visualization(combined_df, max_value, user_max_coord)` (line 446) -- Create 3D visualization of stellar neighborhood or magnitude-limited stars.
 
 ---
 
 ### visualization_core.py
 
-**Role:** rendering | **Lines:** 351
+**Role:** rendering | **Lines:** 350
 
 > visualization_core.py - Shared data preparation and formatting for star visualizations.
 
-**Depends on:** constants_new, solar_visualization_shells, star_notes, stellar_parameters
+**Depends on:** constants_new, info_dictionary, solar_visualization_shells, star_notes, stellar_parameters
 **Consumed by:** exoplanet_stellar_properties, hr_diagram_apparent_magnitude, hr_diagram_distance, planetarium_apparent_magnitude, planetarium_distance, visualization_2d, visualization_3d
 
 **Public functions:**
 
-- `format_value(value, format_spec, default)` (line 24) -- Format values consistently across visualizations.
-- `create_hover_text(df, include_3d)` (line 35) -- Create hover text for plots with identification of estimated values and special cases.
-- `prepare_temperature_colors()` (line 160) -- Define consistent temperature color scales.
-- `analyze_star_counts(combined_df)` (line 174) -- Analyze star counts and exclusion reasons in detail.
-- `analyze_magnitude_distribution(data, mag_limit)` (line 230) -- Analyze and print the distribution of stars by magnitude ranges.
-- `analyze_and_report_stars(combined_df, mode, max_value)` (line 292) -- Analyze star data and report statistics for both distance and magnitude-limited samples.
-- `generate_star_count_text(counts_dict, combined_df)` (line 386) -- Generate detailed text about star counts from different catalogs.
+- `format_value(value, format_spec, default)` (line 23) -- Format values consistently across visualizations.
+- `create_hover_text(df, include_3d)` (line 34) -- Create hover text for plots with identification of estimated values and special cases.
+- `prepare_temperature_colors()` (line 159) -- Define consistent temperature color scales.
+- `analyze_star_counts(combined_df)` (line 173) -- Analyze star counts and exclusion reasons in detail.
+- `analyze_magnitude_distribution(data, mag_limit)` (line 229) -- Analyze and print the distribution of stars by magnitude ranges.
+- `analyze_and_report_stars(combined_df, mode, max_value)` (line 291) -- Analyze star data and report statistics for both distance and magnitude-limited samples.
+- `generate_star_count_text(counts_dict, combined_df)` (line 385) -- Generate detailed text about star counts from different catalogs.
 
 ---
 
@@ -663,7 +706,7 @@ and explains in context.
 > visualization_utils.py - Shared Plotly utilities for orrery and star visualizations.
 
 **Depends on:** celestial_coordinates, formatting_utils, idealized_orbits
-**Consumed by:** palomas_orrery, palomas_orrery_helpers, visualization_2d
+**Consumed by:** gallery_studio, palomas_orrery, palomas_orrery_helpers, visualization_2d
 
 **Public functions:**
 
@@ -702,7 +745,7 @@ and explains in context.
 
 ### comet_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,647
+**Role:** rendering/shells | **Lines:** 1,688
 
 > comet_visualization_shells.py - Comet visual components for 3D orrery plots.
 
@@ -711,16 +754,16 @@ and explains in context.
 
 **Public functions:**
 
-- `calculate_tail_activity_factor(current_distance_au, perihelion_distance_au, max_active_distance_au)` (line 337) -- Calculate how active the comet is based on solar distance.
-- `create_comet_nucleus(center_position, nucleus_size_km, comet_name)` (line 373) -- Creates a comet nucleus visualization as a single point.
-- `create_maps_disintegration_marker(position_au, comet_name)` (line 418)
-- `create_maps_ghost_tail_trace(fig)` (line 505) -- Ghost tail arc for MAPS C/2026 A1, overlaid on the perihelion
-- `create_comet_coma(center_position, coma_radius_km, activity_factor, comet_name)` (line 664) -- Creates the coma (atmosphere) around the nucleus.
-- `create_comet_dust_tail(center_position, velocity_vector, max_tail_length_mkm, activity_factor, comet_name, num_particles)` (line 751) -- Creates the dust tail (Type II tail).
-- `create_comet_ion_tail(center_position, max_tail_length_mkm, activity_factor, comet_name, num_particles)` (line 922) -- Creates the ion tail (Type I tail, plasma tail).
-- `create_comet_anti_tail(center_position, anti_tail_length_km, activity_factor, comet_name, anti_tail_color, collimation_ratio, num_particles)` (line 1054) -- Creates anti-tail jet structure pointing TOWARD the Sun.
-- `create_complete_comet_visualization(comet_name, center_position, velocity_vector, current_distance_au)` (line 1235) -- Creates a complete comet visualization with nucleus, coma, and both tails.
-- `add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name, current_date)` (line 1450) -- Add comet visualization to figure with feature-specific thresholds.
+- `calculate_tail_activity_factor(current_distance_au, perihelion_distance_au, max_active_distance_au)` (line 381) -- Calculate how active the comet is based on solar distance.
+- `create_comet_nucleus(center_position, nucleus_size_km, comet_name)` (line 417) -- Creates a comet nucleus visualization as a single point.
+- `create_maps_disintegration_marker(position_au, comet_name)` (line 462)
+- `create_maps_ghost_tail_trace(fig)` (line 549) -- Ghost tail arc for MAPS C/2026 A1, overlaid on the perihelion
+- `create_comet_coma(center_position, coma_radius_km, activity_factor, comet_name)` (line 708) -- Creates the coma (atmosphere) around the nucleus.
+- `create_comet_dust_tail(center_position, velocity_vector, max_tail_length_mkm, activity_factor, comet_name, num_particles)` (line 795) -- Creates the dust tail (Type II tail).
+- `create_comet_ion_tail(center_position, max_tail_length_mkm, activity_factor, comet_name, num_particles)` (line 966) -- Creates the ion tail (Type I tail, plasma tail).
+- `create_comet_anti_tail(center_position, anti_tail_length_km, activity_factor, comet_name, anti_tail_color, collimation_ratio, num_particles)` (line 1098) -- Creates anti-tail jet structure pointing TOWARD the Sun.
+- `create_complete_comet_visualization(comet_name, center_position, velocity_vector, current_distance_au)` (line 1279) -- Creates a complete comet visualization with nucleus, coma, and both tails.
+- `add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name, current_date)` (line 1494) -- Add comet visualization to figure with feature-specific thresholds.
 
 ---
 
@@ -945,7 +988,7 @@ and explains in context.
 
 ### solar_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,437
+**Role:** rendering/shells | **Lines:** 1,473
 
 > solar_visualization_shells.py - Sun interior, corona, and heliosphere shell traces.
 
@@ -957,25 +1000,25 @@ and explains in context.
 - `create_sun_hover_text()` (line 868)
 - `create_corona_sphere(radius, n_points)` (line 905) -- Create points for a sphere surface to represent corona layers.
 - `create_sun_gravitational_shell()` (line 941) -- Creates the Sun's gravitational influence shell.
-- `create_sun_outer_oort_shell()` (line 968) -- Creates the Sun's outer Oort cloud shell.
-- `create_sun_inner_oort_shell()` (line 995) -- Creates the Sun's inner Oort cloud shell.
-- `create_sun_inner_oort_limit_shell()` (line 1022) -- Creates the inner limit of the Sun's Oort cloud shell.
-- `create_sun_heliopause_shell()` (line 1049) -- Creates the Sun's heliopause shell.
-- `create_sun_termination_shock_shell()` (line 1076) -- Creates the Sun's termination shock shell.
-- `create_sun_outer_corona_shell()` (line 1103) -- Creates the Sun's extended outer corona (F-corona) shell.
-- `create_sun_inner_corona_shell()` (line 1130) -- Creates the Sun's inner corona (K-corona) shell.
-- `create_sun_streamer_belt_shell()` (line 1157) -- Visible white-light corona / helmet streamer belt: ~4-6 solar radii.
-- `create_sun_roche_limit_shell()` (line 1188) -- Fluid Roche limit for cometary bodies: ~3.45 solar radii (~0.016 AU).
-- `create_sun_alfven_surface_shell()` (line 1222) -- Alfven surface: the true outer boundary of the solar corona (~18.8 solar radii,
-- `create_sun_chromosphere_shell()` (line 1255) -- Creates the Sun's chromosphere shell.
-- `create_sun_photosphere_shell()` (line 1282) -- Creates the Sun's photosphere shell (the visible solar surface).
-- `create_sun_radiative_shell()` (line 1309) -- Creates the Sun's radiative zone shell.
-- `create_sun_core_shell()` (line 1336) -- Creates the Sun's core shell.
-- `create_sun_hills_cloud_torus(inner_radius, outer_radius, thickness_ratio)` (line 1374) -- Create a toroidal (doughnut-shaped) Hills Cloud structure.
-- `create_sun_outer_oort_clumpy(radius_min, radius_max, n_clumps)` (line 1435) -- Create a clumpy, asymmetric outer Oort Cloud with density variations.
-- `create_sun_galactic_tide(radius, n_points)` (line 1503) -- Create Oort Cloud structure influenced by galactic tidal forces.
-- `create_enhanced_oort_cloud_visualization()` (line 1552) -- Create a more scientifically accurate Oort Cloud visualization.
-- `create_oort_cloud_density_visualization()` (line 1620) -- Alternative approach: Show Oort Cloud as density gradients rather than discrete shells.
+- `create_sun_outer_oort_shell()` (line 970) -- Creates the Sun's outer Oort cloud shell.
+- `create_sun_inner_oort_shell()` (line 999) -- Creates the Sun's inner Oort cloud shell.
+- `create_sun_inner_oort_limit_shell()` (line 1028) -- Creates the inner limit of the Sun's Oort cloud shell.
+- `create_sun_heliopause_shell()` (line 1057) -- Creates the Sun's heliopause shell.
+- `create_sun_termination_shock_shell()` (line 1086) -- Creates the Sun's termination shock shell.
+- `create_sun_outer_corona_shell()` (line 1115) -- Creates the Sun's extended outer corona (F-corona) shell.
+- `create_sun_inner_corona_shell()` (line 1144) -- Creates the Sun's inner corona (K-corona) shell.
+- `create_sun_streamer_belt_shell()` (line 1173) -- Visible white-light corona / helmet streamer belt: ~4-6 solar radii.
+- `create_sun_roche_limit_shell()` (line 1206) -- Fluid Roche limit for cometary bodies: ~3.45 solar radii (~0.016 AU).
+- `create_sun_alfven_surface_shell()` (line 1242) -- Alfven surface: the true outer boundary of the solar corona (~18.8 solar radii,
+- `create_sun_chromosphere_shell()` (line 1277) -- Creates the Sun's chromosphere shell.
+- `create_sun_photosphere_shell()` (line 1306) -- Creates the Sun's photosphere shell (the visible solar surface).
+- `create_sun_radiative_shell()` (line 1335) -- Creates the Sun's radiative zone shell.
+- `create_sun_core_shell()` (line 1364) -- Creates the Sun's core shell.
+- `create_sun_hills_cloud_torus(inner_radius, outer_radius, thickness_ratio)` (line 1404) -- Create a toroidal (doughnut-shaped) Hills Cloud structure.
+- `create_sun_outer_oort_clumpy(radius_min, radius_max, n_clumps)` (line 1467) -- Create a clumpy, asymmetric outer Oort Cloud with density variations.
+- `create_sun_galactic_tide(radius, n_points)` (line 1537) -- Create Oort Cloud structure influenced by galactic tidal forces.
+- `create_enhanced_oort_cloud_visualization()` (line 1588) -- Create a more scientifically accurate Oort Cloud visualization.
+- `create_oort_cloud_density_visualization()` (line 1656) -- Alternative approach: Show Oort Cloud as density gradients rather than discrete shells.
 
 ---
 
@@ -1344,7 +1387,7 @@ and explains in context.
 
 > Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation.
 
-**Depends on:** constants_new
+**Depends on:** info_dictionary
 **Consumed by:** hr_diagram_apparent_magnitude, hr_diagram_distance, plot_data_report_widget
 
 **Public functions:**
@@ -1393,20 +1436,20 @@ and explains in context.
 
 ### celestial_objects.py
 
-**Role:** data | **Lines:** 1,225
+**Role:** data | **Lines:** 1,237
 
-> Paloma's Orrery - Celestial Objects Data Module
+> celestial_objects.py - Celestial object definitions for Paloma's Orrery.
 
 **Depends on:** (none)
 **Consumed by:** palomas_orrery
 
 **Public functions:**
 
-- `build_objects_list(definitions, vars_dict, color_map_func)` (line 1253) -- Build the runtime objects list from definitions.
-- `get_all_var_names()` (line 1283) -- Return list of all var_name strings needed for IntVar creation.
-- `get_shell_var_names()` (line 1405) -- Return list of all shell var_name strings needed for IntVar creation.
-- `get_shell_tooltip_names()` (line 1415) -- Return list of all shell tooltip info variable names.
-- `build_shell_checkboxes(body_name, parent_frame, vars_dict, tooltips_dict, tk_module, CreateToolTip)` (line 1425) -- Build shell checkboxes for a single body.
+- `build_objects_list(definitions, vars_dict, color_map_func)` (line 1267) -- Build the runtime objects list from definitions.
+- `get_all_var_names()` (line 1297) -- Return list of all var_name strings needed for IntVar creation.
+- `get_shell_var_names()` (line 1419) -- Return list of all shell var_name strings needed for IntVar creation.
+- `get_shell_tooltip_names()` (line 1429) -- Return list of all shell tooltip info variable names.
+- `build_shell_checkboxes(body_name, parent_frame, vars_dict, tooltips_dict, tk_module, CreateToolTip)` (line 1439) -- Build shell checkboxes for a single body.
 
 ---
 
@@ -1432,16 +1475,16 @@ and explains in context.
 
 ### constants_new.py
 
-**Role:** data | **Lines:** 2,401
+**Role:** data | **Lines:** 629
 
-> constants_new.py - Central constants, parameters, and object catalogs for the orrery.
+> constants_new.py - Verified numeric constants for Paloma's Orrery.
 
 **Depends on:** (none)
-**Consumed by:** apsidal_markers, exoplanet_stellar_properties, idealized_orbits, object_type_analyzer, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, planet_visualization, planet_visualization_utilities, star_visualization_gui, stellar_parameters, visualization_2d, visualization_3d, visualization_core
+**Consumed by:** apsidal_markers, exoplanet_stellar_properties, idealized_orbits, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, planet_visualization, planet_visualization_utilities, sgr_a_star_data, star_visualization_gui, stellar_parameters, visualization_2d, visualization_3d, visualization_core
 
 **Public functions:**
 
-- `color_map(planet)` (line 472)
+- `color_map(planet)` (line 447)
 
 ---
 
@@ -1476,26 +1519,26 @@ and explains in context.
 
 ### exoplanet_stellar_properties.py
 
-**Role:** data | **Lines:** 485
+**Role:** data | **Lines:** 482
 
 > exoplanet_stellar_properties.py - Stellar Properties for Exoplanet Host Stars
 
-**Depends on:** constants_new, stellar_parameters, visualization_core
+**Depends on:** constants_new, info_dictionary, stellar_parameters, visualization_core
 **Consumed by:** exoplanet_orbits, palomas_orrery, sgr_a_star_data
 
 **Public functions:**
 
-- `get_temperature_color(temperature_k)` (line 49) -- Get RGB color for a given temperature using continuous interpolation.
-- `get_temperature_colors_dict()` (line 109) -- Get the complete temperature-to-color mapping dictionary.
-- `parse_stellar_class(spectral_type)` (line 133) -- Parse stellar luminosity class from spectral type string.
-- `get_stellar_class_description(spectral_type)` (line 157) -- Get detailed description of stellar class.
-- `calculate_host_star_properties(host_star_data)` (line 187) -- Calculate comprehensive stellar properties for an exoplanet host star.
-- `calculate_binary_star_properties(star_A_data, star_B_data)` (line 262) -- Calculate properties for both stars in a binary system.
-- `create_exoplanet_host_star_hover_text(host_star_data, system_data, enhanced_properties)` (line 283) -- Create rich hover text for exoplanet host stars.
-- `create_binary_star_hover_text(star_data, star_label, system_data, enhanced_properties)` (line 390) -- Create hover text for individual stars in a binary system.
-- `calculate_marker_size(luminosity, base_size, scale_factor)` (line 449) -- Calculate marker size based on stellar luminosity.
-- `enrich_exoplanet_system(system_dict)` (line 478) -- Enrich an exoplanet system dictionary with calculated stellar properties.
-- `get_exoplanet_object_type_description(spectral_type)` (line 509) -- Get a brief object type description for exoplanet host stars.
+- `get_temperature_color(temperature_k)` (line 46) -- Get RGB color for a given temperature using continuous interpolation.
+- `get_temperature_colors_dict()` (line 106) -- Get the complete temperature-to-color mapping dictionary.
+- `parse_stellar_class(spectral_type)` (line 130) -- Parse stellar luminosity class from spectral type string.
+- `get_stellar_class_description(spectral_type)` (line 154) -- Get detailed description of stellar class.
+- `calculate_host_star_properties(host_star_data)` (line 184) -- Calculate comprehensive stellar properties for an exoplanet host star.
+- `calculate_binary_star_properties(star_A_data, star_B_data)` (line 259) -- Calculate properties for both stars in a binary system.
+- `create_exoplanet_host_star_hover_text(host_star_data, system_data, enhanced_properties)` (line 280) -- Create rich hover text for exoplanet host stars.
+- `create_binary_star_hover_text(star_data, star_label, system_data, enhanced_properties)` (line 387) -- Create hover text for individual stars in a binary system.
+- `calculate_marker_size(luminosity, base_size, scale_factor)` (line 446) -- Calculate marker size based on stellar luminosity.
+- `enrich_exoplanet_system(system_dict)` (line 475) -- Enrich an exoplanet system dictionary with calculated stellar properties.
+- `get_exoplanet_object_type_description(spectral_type)` (line 506) -- Get a brief object type description for exoplanet host stars.
 
 ---
 
@@ -1514,6 +1557,17 @@ and explains in context.
 - `get_all_systems()` (line 631) -- Get list of all available system IDs
 - `get_system_summary(system_id)` (line 635) -- Get quick summary of system for GUI display
 - `get_planets_in_hz(system_id)` (line 659) -- Get list of planets in habitable zone
+
+---
+
+### info_dictionary.py
+
+**Role:** data | **Lines:** 1,943
+
+> info_dictionary.py - Descriptive text and narrative content for Paloma's Orrery.
+
+**Depends on:** (none)
+**Consumed by:** exoplanet_stellar_properties, gallery_studio, object_type_analyzer, palomas_orrery, palomas_orrery_helpers, star_visualization_gui, visualization_2d, visualization_3d, visualization_core
 
 ---
 
@@ -1541,42 +1595,42 @@ and explains in context.
 
 ### sgr_a_star_data.py
 
-**Role:** data | **Lines:** 555
+**Role:** data | **Lines:** 570
 
-> sgr_a_star_data.py Data module for the Galactic Center S-Stars visualization. Contains orbital elements and physical constants.
+> sgr_a_star_data.py - S-star catalog and orbital mechanics for Sagittarius A*.
 
-**Depends on:** exoplanet_stellar_properties, stellar_parameters
+**Depends on:** constants_new, exoplanet_stellar_properties, stellar_parameters
 **Consumed by:** sgr_a_grand_tour, sgr_a_visualization_animation, sgr_a_visualization_core, sgr_a_visualization_core_arcs, sgr_a_visualization_precession
 
 **Public functions:**
 
-- `estimate_temperature_fallback(spectral_type)` (line 52) -- Fallback temperature estimation for B-type stars.
-- `get_temperature_color_fallback(temperature_k)` (line 76) -- Fallback temperature-to-color conversion.
-- `get_star_temperature(star_data)` (line 97) -- Get temperature for a star, using best available method.
-- `get_star_color(star_data)` (line 111) -- Get display color for a star based on its temperature.
-- `get_orbit_color(star_data)` (line 124) -- Get distinct color for orbit trace and labels.
-- `get_star_data(star_name)` (line 249) -- Returns the dictionary for a specific star.
-- `list_stars()` (line 253) -- Returns list of available star keys.
-- `get_all_stars()` (line 257) -- Returns the complete catalog dictionary.
-- `get_spectral_class_description(spectral_type)` (line 265) -- Get human-readable description of spectral type.
-- `calculate_next_periapsis(star_data, reference_year)` (line 295) -- Calculate the next periapsis passage date for a star.
-- `create_star_hover_text(star_name, star_data, current_distance_au, current_velocity_km_s)` (line 317) -- Create rich hover text for S-star markers.
-- `calculate_periapsis_au(a_au, e)` (line 398) -- Calculate periapsis distance (closest approach to black hole).
-- `calculate_apoapsis_au(a_au, e)` (line 405) -- Calculate apoapsis distance (farthest point from black hole).
-- `calculate_orbital_velocity(a_au, r_au, M_solar)` (line 412) -- Calculate orbital velocity at distance r using vis-viva equation.
-- `calculate_periapsis_velocity(a_au, e, M_solar)` (line 430) -- Calculate velocity at periapsis (maximum velocity).
-- `calculate_apoapsis_velocity(a_au, e, M_solar)` (line 435) -- Calculate velocity at apoapsis (minimum velocity).
-- `velocity_as_fraction_of_c(v_km_s)` (line 440) -- Convert velocity to fraction of speed of light.
-- `format_velocity(v_km_s)` (line 444) -- Format velocity as 'X km/s (Y% c)'.
-- `calculate_schwarzschild_precession_per_orbit(a_au, e, M_solar)` (line 453) -- Calculate the Schwarzschild (GR) precession per orbit.
-- `calculate_gravitational_redshift(r_au, M_solar)` (line 473) -- Calculate gravitational redshift factor at distance r.
-- `mean_anomaly_at_time(t_current, t_periapsis, period_yrs)` (line 494) -- Calculate mean anomaly M at a given time.
-- `solve_kepler_equation(M, e, tolerance, max_iterations)` (line 505) -- Solve Kepler's equation: M = E - e*sin(E)
-- `eccentric_to_true_anomaly(E, e)` (line 539) -- Convert eccentric anomaly to true anomaly.
-- `true_anomaly_at_time(t_current, t_periapsis, period_yrs, e)` (line 551) -- Calculate true anomaly at a given time.
-- `radius_from_true_anomaly(a_au, e, nu)` (line 561) -- Calculate orbital radius at true anomaly nu.
-- `get_star_summary(star_name)` (line 572) -- Get a formatted summary of a star's orbital characteristics.
-- `print_catalog_summary()` (line 611) -- Print summary for all stars in the catalog.
+- `estimate_temperature_fallback(spectral_type)` (line 65) -- Fallback temperature estimation for B-type stars.
+- `get_temperature_color_fallback(temperature_k)` (line 89) -- Fallback temperature-to-color conversion.
+- `get_star_temperature(star_data)` (line 110) -- Get temperature for a star, using best available method.
+- `get_star_color(star_data)` (line 124) -- Get display color for a star based on its temperature.
+- `get_orbit_color(star_data)` (line 137) -- Get distinct color for orbit trace and labels.
+- `get_star_data(star_name)` (line 270) -- Returns the dictionary for a specific star.
+- `list_stars()` (line 274) -- Returns list of available star keys.
+- `get_all_stars()` (line 278) -- Returns the complete catalog dictionary.
+- `get_spectral_class_description(spectral_type)` (line 286) -- Get human-readable description of spectral type.
+- `calculate_next_periapsis(star_data, reference_year)` (line 316) -- Calculate the next periapsis passage date for a star.
+- `create_star_hover_text(star_name, star_data, current_distance_au, current_velocity_km_s)` (line 338) -- Create rich hover text for S-star markers.
+- `calculate_periapsis_au(a_au, e)` (line 419) -- Calculate periapsis distance (closest approach to black hole).
+- `calculate_apoapsis_au(a_au, e)` (line 426) -- Calculate apoapsis distance (farthest point from black hole).
+- `calculate_orbital_velocity(a_au, r_au, M_solar)` (line 433) -- Calculate orbital velocity at distance r using vis-viva equation.
+- `calculate_periapsis_velocity(a_au, e, M_solar)` (line 451) -- Calculate velocity at periapsis (maximum velocity).
+- `calculate_apoapsis_velocity(a_au, e, M_solar)` (line 456) -- Calculate velocity at apoapsis (minimum velocity).
+- `velocity_as_fraction_of_c(v_km_s)` (line 461) -- Convert velocity to fraction of speed of light.
+- `format_velocity(v_km_s)` (line 465) -- Format velocity as 'X km/s (Y% c)'.
+- `calculate_schwarzschild_precession_per_orbit(a_au, e, M_solar)` (line 474) -- Calculate the Schwarzschild (GR) precession per orbit.
+- `calculate_gravitational_redshift(r_au, M_solar)` (line 494) -- Calculate gravitational redshift factor at distance r.
+- `mean_anomaly_at_time(t_current, t_periapsis, period_yrs)` (line 515) -- Calculate mean anomaly M at a given time.
+- `solve_kepler_equation(M, e, tolerance, max_iterations)` (line 526) -- Solve Kepler's equation: M = E - e*sin(E)
+- `eccentric_to_true_anomaly(E, e)` (line 560) -- Convert eccentric anomaly to true anomaly.
+- `true_anomaly_at_time(t_current, t_periapsis, period_yrs, e)` (line 572) -- Calculate true anomaly at a given time.
+- `radius_from_true_anomaly(a_au, e, nu)` (line 582) -- Calculate orbital radius at true anomaly nu.
+- `get_star_summary(star_name)` (line 593) -- Get a formatted summary of a star's orbital characteristics.
+- `print_catalog_summary()` (line 632) -- Print summary for all stars in the catalog.
 
 ---
 
@@ -1694,35 +1748,6 @@ and explains in context.
 
 ---
 
-### create_cache_backups.py
-
-**Role:** cache | **Lines:** 8
-
-> create_cache_backups.py - One-shot script to create timestamped backups of star data caches.
-
-**Depends on:** simbad_manager
-**Consumed by:** (none -- standalone)
-
----
-
-### create_ephemeris_database.py
-
-**Role:** cache | **Lines:** 243
-
-> create_ephemeris_database.py - Create satellite_ephemerides.json from multiple sources
-
-**Depends on:** idealized_orbits
-**Consumed by:** (none -- standalone)
-
-**Public functions:**
-
-- `parse_horizons_header(filename)` (line 16) -- Parse orbital elements from JPL Horizons ephemeris file header.
-- `get_idealized_orbits_data()` (line 86) -- Import orbital parameters from idealized_orbits.py if available.
-- `create_satellite_ephemerides()` (line 99) -- Create comprehensive satellite ephemeris database from all available sources.
-- `download_instructions()` (line 273) -- Print instructions for downloading more ephemerides.
-
----
-
 ### incremental_cache_manager.py
 
 **Role:** cache | **Lines:** 657
@@ -1808,22 +1833,6 @@ and explains in context.
 
 ---
 
-### verify_orbit_cache.py
-
-**Role:** cache | **Lines:** 170
-
-> verify_orbit_cache.py - Safely verify and repair orbit_paths.json
-
-**Depends on:** (none)
-**Consumed by:** (none -- standalone)
-
-**Public functions:**
-
-- `create_backup(file_path)` (line 19) -- Create a timestamped backup of the orbit cache file.
-- `verify_orbit_cache(file_path, repair)` (line 35) -- Verify the orbit cache file and optionally repair it.
-
----
-
 ### vot_cache_manager.py
 
 **Role:** cache | **Lines:** 430
@@ -1843,23 +1852,58 @@ and explains in context.
 
 ---
 
-## PIPELINE: Transforms data between stages (export, conversion)
+## PIPELINE: Transforms data between stages (export, conversion, plotting pipelines)
 
-### convert_hot_ph_to_json.py
+### gallery_json_fixer.py
 
-**Role:** pipeline | **Lines:** 197
+**Role:** pipeline | **Lines:** 483
 
-> Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization
+> Gallery JSON Fixer - Update older gallery JSON files for current viewer.
 
 **Depends on:** (none)
 **Consumed by:** (none -- standalone)
 
 **Public functions:**
 
-- `find_hot_data_file()` (line 10) -- Find HOT data file - try multiple possible filenames
-- `parse_hot_ph_csv(filename)` (line 34) -- Parse HOT carbonate chemistry CSV from BCO-DMO
-- `create_metadata(records)` (line 127) -- Create metadata for the pH dataset
-- `main()` (line 178) -- Main conversion workflow
+- `fix_gallery_json(fig_dict, filename)` (line 143) -- Apply non-destructive fixes to a gallery JSON figure dict.
+- `process_file(filepath, dry_run)` (line 358) -- Process a single gallery JSON file.
+- `run_batch(gallery_folder, dry_run)` (line 402) -- Process all JSON files in the gallery folder.
+- `run_interactive()` (line 484) -- Run with a file browser for selecting individual JSON files.
+- `main()` (line 551)
+
+---
+
+### json_converter.py
+
+**Role:** pipeline | **Lines:** 622
+
+> Gallery JSON Converter - Extract Plotly figures from HTML and save as JSON.
+
+**Depends on:** (none)
+**Consumed by:** star_visualization_gui
+
+**Public functions:**
+
+- `extract_plotly_json_from_html(html_path)` (line 136) -- Extract Plotly figure JSON from an HTML file.
+- `save_figure_json(fig, name, output_folder, category, description, auto_metadata, mode)` (line 377) -- Save a Plotly figure object directly as gallery-ready JSON.
+- `convert_html_to_gallery_json(html_path, output_folder, category, description, mode)` (line 431) -- Convert a single HTML visualization to gallery-ready JSON.
+- `run_interactive()` (line 591) -- Run the interactive converter with file selection dialog.
+- `convert_folder(input_folder, output_folder, category)` (line 714) -- Convert all HTML files in a folder to gallery JSON.
+
+---
+
+### messier_object_data_handler.py
+
+**Role:** pipeline | **Lines:** 329
+
+> messier_object_data_handler.py - Messier object coordinate transforms and data preparation.
+
+**Depends on:** messier_catalog, star_notes
+**Consumed by:** planetarium_apparent_magnitude
+
+**Public functions:**
+
+- `class MessierObjectHandler` (line 28) -- Handles all Messier object related operations.
 
 ---
 
@@ -1895,6 +1939,26 @@ and explains in context.
 - `handle_save(fig, default_name)` (line 433) -- Legacy function for backward compatibility.
 - `show_animation_safely(fig, default_name)` (line 446) -- Show and optionally save an animation.
 - `save_html(fig, filename, offline, open_browser)` (line 467) -- Simple direct save for scripts that don't need dialogs.
+
+---
+
+### sgr_a_visualization_core_arcs.py
+
+**Role:** pipeline | **Lines:** 535
+
+> sgr_a_visualization_core.py Core visualization module for S-Stars orbiting Sagittarius A*.
+
+**Depends on:** sgr_a_star_data
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `generate_orbit_points(star_data, num_points, precession_offset_deg)` (line 35) -- Generate 3D orbit points for a star.
+- `generate_position_at_true_anomaly(star_data, true_anomaly_rad, precession_offset_deg)` (line 100) -- Generate 3D position for a star at a specific true anomaly.
+- `create_sgr_a_marker(scale_factor)` (line 149) -- Create the Sagittarius A* black hole marker.
+- `create_orbit_trace(star_name, star_data, show_periapsis)` (line 378) -- Create the orbital path trace for a star.
+- `create_star_marker(star_name, star_data, true_anomaly_rad, precession_offset_deg)` (line 456) -- Create a marker showing the star's current position.
+- `create_sgr_a_figure(stars_to_show, show_all_stars)` (line 508) -- Create the main Sagittarius A* visualization figure.
 
 ---
 
@@ -1984,11 +2048,11 @@ and explains in context.
 
 ### palomas_orrery_helpers.py
 
-**Role:** utility | **Lines:** 777
+**Role:** utility | **Lines:** 776
 
 > palomas_orrery_helpers.py - Support functions extracted from the main orrery monolith.
 
-**Depends on:** constants_new, formatting_utils, idealized_orbits, orbit_data_manager, planet_visualization, save_utils, shared_utilities, shutdown_handler, solar_visualization_shells, visualization_utils
+**Depends on:** constants_new, formatting_utils, idealized_orbits, info_dictionary, orbit_data_manager, planet_visualization, save_utils, shared_utilities, shutdown_handler, solar_visualization_shells, visualization_utils
 **Consumed by:** orbital_param_viz, palomas_orrery
 
 **Public functions:**
@@ -2057,6 +2121,73 @@ and explains in context.
 
 ## DEVTOOL: Developer tools (dependency tracing, atlas)
 
+### add_docstrings.py
+
+**Role:** devtool | **Lines:** 631
+
+> add_docstrings.py - Add or improve module-level docstrings across the codebase.
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `detect_line_ending(content_bytes)` (line 594) -- Detect whether file uses CRLF or LF.
+- `has_existing_docstring(content_bytes)` (line 601) -- Check if file starts with a docstring (triple quotes).
+- `has_leading_comment(content_bytes)` (line 607) -- Check if file starts with # comments (before imports).
+- `insert_docstring(content_bytes, docstring_text, line_ending)` (line 613) -- Insert docstring at the top of a file, before any existing content.
+- `process_module(project_dir, module_name, docstring_text, write)` (line 649) -- Process a single module: read, insert docstring, optionally write.
+- `main()` (line 682)
+
+---
+
+### convert_hot_ph_to_json.py
+
+**Role:** devtool | **Lines:** 197
+
+> Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `find_hot_data_file()` (line 10) -- Find HOT data file - try multiple possible filenames
+- `parse_hot_ph_csv(filename)` (line 34) -- Parse HOT carbonate chemistry CSV from BCO-DMO
+- `create_metadata(records)` (line 127) -- Create metadata for the pH dataset
+- `main()` (line 178) -- Main conversion workflow
+
+---
+
+### create_cache_backups.py
+
+**Role:** devtool | **Lines:** 8
+
+> create_cache_backups.py - One-shot script to create timestamped backups of star data caches.
+
+**Depends on:** simbad_manager
+**Consumed by:** (none -- standalone)
+
+---
+
+### create_ephemeris_database.py
+
+**Role:** devtool | **Lines:** 243
+
+> create_ephemeris_database.py - Create satellite_ephemerides.json from multiple sources
+
+**Depends on:** idealized_orbits
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `parse_horizons_header(filename)` (line 16) -- Parse orbital elements from JPL Horizons ephemeris file header.
+- `get_idealized_orbits_data()` (line 86) -- Import orbital parameters from idealized_orbits.py if available.
+- `create_satellite_ephemerides()` (line 99) -- Create comprehensive satellite ephemeris database from all available sources.
+- `download_instructions()` (line 273) -- Print instructions for downloading more ephemerides.
+
+---
+
 ### dep_trace.py
 
 **Role:** devtool | **Lines:** 399
@@ -2081,31 +2212,9 @@ and explains in context.
 
 ---
 
-## OTHER: Uncategorized
-
-### add_docstrings.py
-
-**Role:** other | **Lines:** 631
-
-> add_docstrings.py - Add or improve module-level docstrings across the codebase.
-
-**Depends on:** (none)
-**Consumed by:** (none -- standalone)
-
-**Public functions:**
-
-- `detect_line_ending(content_bytes)` (line 594) -- Detect whether file uses CRLF or LF.
-- `has_existing_docstring(content_bytes)` (line 601) -- Check if file starts with a docstring (triple quotes).
-- `has_leading_comment(content_bytes)` (line 607) -- Check if file starts with # comments (before imports).
-- `insert_docstring(content_bytes, docstring_text, line_ending)` (line 613) -- Insert docstring at the top of a file, before any existing content.
-- `process_module(project_dir, module_name, docstring_text, write)` (line 649) -- Process a single module: read, insert docstring, optionally write.
-- `main()` (line 682)
-
----
-
 ### diagnose_bcodmo.py
 
-**Role:** other | **Lines:** 65
+**Role:** devtool | **Lines:** 65
 
 > Diagnostic script to examine BCO-DMO pH data structure
 
@@ -2120,7 +2229,7 @@ and explains in context.
 
 ### examine_hot_csv.py
 
-**Role:** other | **Lines:** 45
+**Role:** devtool | **Lines:** 45
 
 > Examine the HOT CSV file structure
 
@@ -2133,29 +2242,14 @@ and explains in context.
 
 ---
 
-### messier_object_data_handler.py
-
-**Role:** other | **Lines:** 329
-
-> messier_object_data_handler.py - Messier object coordinate transforms and data preparation.
-
-**Depends on:** messier_catalog, star_notes
-**Consumed by:** planetarium_apparent_magnitude
-
-**Public functions:**
-
-- `class MessierObjectHandler` (line 28) -- Handles all Messier object related operations.
-
----
-
 ### module_atlas.py
 
-**Role:** other | **Lines:** 484
+**Role:** devtool | **Lines:** 484
 
 > module_atlas.py - Codebase encyclopedia generator for Paloma's Orrery
 
 **Depends on:** (none)
-**Consumed by:** dep_trace
+**Consumed by:** dep_trace, provenance_scanner
 
 **Public functions:**
 
@@ -2170,29 +2264,41 @@ and explains in context.
 
 ---
 
-### sgr_a_visualization_core_arcs.py
+### provenance_scanner.py
 
-**Role:** other | **Lines:** 535
+**Role:** devtool | **Lines:** 710
 
-> sgr_a_visualization_core.py Core visualization module for S-Stars orbiting Sagittarius A*.
+> provenance_scanner.py - Fact provenance auditor for Paloma's Orrery.
 
-**Depends on:** sgr_a_star_data
+**Depends on:** module_atlas
 **Consumed by:** (none -- standalone)
 
 **Public functions:**
 
-- `generate_orbit_points(star_data, num_points, precession_offset_deg)` (line 35) -- Generate 3D orbit points for a star.
-- `generate_position_at_true_anomaly(star_data, true_anomaly_rad, precession_offset_deg)` (line 100) -- Generate 3D position for a star at a specific true anomaly.
-- `create_sgr_a_marker(scale_factor)` (line 149) -- Create the Sagittarius A* black hole marker.
-- `create_orbit_trace(star_name, star_data, show_periapsis)` (line 378) -- Create the orbital path trace for a star.
-- `create_star_marker(star_name, star_data, true_anomaly_rad, precession_offset_deg)` (line 456) -- Create a marker showing the star's current position.
-- `create_sgr_a_figure(stars_to_show, show_all_stars)` (line 508) -- Create the main Sagittarius A* visualization figure.
+- `action_label(score)` (line 71) -- Return action string for a given V x C score.
+- `action_tier(score)` (line 78) -- Return tier number (1=highest priority) for sorting.
+- `has_source_citation(line_text, context_lines)` (line 120) -- Check if a constant has a source citation on same or adjacent lines.
+- `has_stale_markers(line_text, context_lines)` (line 129) -- Check if a value has markers suggesting it may be stale.
+- `assess_vulnerability(line_text, context_lines)` (line 138) -- Determine vulnerability score for a finding.
+- `assess_criticality(module_name, finding_type, consumer_count, role)` (line 153) -- Determine criticality score for a finding.
+- `class Finding` (line 197) -- A single auditable fact found in the codebase.
+- `get_context_lines(lines, lineno, window)` (line 217) -- Get surrounding lines for context (0-indexed lineno).
+- `scan_file_constants(filepath, lines)` (line 224) -- Extract named constants (module-level assignments to UPPER_CASE names).
+- `extract_value(node, lines, lineno)` (line 277) -- Try to extract a numeric value from an AST node.
+- `scan_file_dicts(filepath, lines)` (line 301) -- Extract numeric values from dictionary literals.
+- `scan_file_string_claims(filepath, lines)` (line 368) -- Extract numeric claims from string literals.
+- `find_duplicates(all_findings)` (line 418) -- Group findings by concept to detect duplicates and inconsistencies.
+- `normalize_concept(name, value)` (line 464) -- Normalize a constant name to a concept for duplicate detection.
+- `is_cosmetic_dict(dict_name)` (line 537) -- Check if a dictionary is known to be cosmetic.
+- `scan_project(project_dir, output_path)` (line 548) -- Scan all .py files and produce the provenance audit report.
+- `generate_report(findings, duplicates, consumers, files_scanned, project_dir, output_path)` (line 632) -- Write PROVENANCE_AUDIT.md.
+- `main()` (line 844)
 
 ---
 
 ### test_orbit_cache.py
 
-**Role:** other | **Lines:** 204
+**Role:** devtool | **Lines:** 204
 
 > test_orbit_cache.py - Comprehensive test suite for orbit data caching and repair
 
@@ -2205,53 +2311,74 @@ and explains in context.
 
 ---
 
+### verify_orbit_cache.py
+
+**Role:** devtool | **Lines:** 170
+
+> verify_orbit_cache.py - Safely verify and repair orbit_paths.json
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `create_backup(file_path)` (line 19) -- Create a timestamped backup of the orbit cache file.
+- `verify_orbit_cache(file_path, repair)` (line 35) -- Verify the orbit cache file and optionally repair it.
+
+---
+
 ## Alphabetical Index
 
 | Module | Role | Lines | Deps | Consumers |
 |--------|------|------:|-----:|----------:|
-| add_docstrings | other | 631 | 0 | 0 |
+| add_docstrings | devtool | 631 | 0 | 0 |
 | apsidal_markers | computation | 1,681 | 1 | 4 |
 | asteroid_belt_visualization_shells | rendering/shells | 410 | 1 | 2 |
 | catalog_selection | computation | 92 | 1 | 3 |
 | celestial_coordinates | computation | 454 | 0 | 1 |
-| celestial_objects | data | 1,225 | 0 | 1 |
+| celestial_objects | data | 1,237 | 0 | 1 |
 | climate_cache_manager | cache | 161 | 1 | 1 |
 | close_approach_data | data | 519 | 1 | 1 |
-| comet_visualization_shells | rendering/shells | 1,647 | 2 | 1 |
-| constants_new | data | 2,401 | 0 | 14 |
-| convert_hot_ph_to_json | pipeline | 197 | 0 | 0 |
+| comet_visualization_shells | rendering/shells | 1,688 | 2 | 1 |
+| constants_new | data | 629 | 0 | 14 |
+| convert_hot_ph_to_json | devtool | 197 | 0 | 0 |
 | coordinate_system_guide | computation | 547 | 0 | 0 |
-| create_cache_backups | cache | 8 | 1 | 0 |
-| create_ephemeris_database | cache | 243 | 1 | 0 |
+| create_cache_backups | devtool | 8 | 1 | 0 |
+| create_ephemeris_database | devtool | 243 | 1 | 0 |
 | data_acquisition | computation | 220 | 0 | 4 |
 | data_acquisition_distance | computation | 169 | 2 | 1 |
 | data_processing | computation | 434 | 0 | 5 |
 | dep_trace | devtool | 399 | 1 | 0 |
-| diagnose_bcodmo | other | 65 | 0 | 0 |
+| diagnose_bcodmo | devtool | 65 | 0 | 0 |
 | earth_system_controller | gui | 81 | 0 | 0 |
 | earth_system_generator | computation | 688 | 3 | 1 |
 | earth_system_visualization_gui | gui | 1,822 | 8 | 1 |
 | earth_visualization_shells | rendering/shells | 846 | 2 | 1 |
 | energy_imbalance | computation | 839 | 1 | 1 |
 | eris_visualization_shells | rendering/shells | 407 | 2 | 1 |
-| examine_hot_csv | other | 45 | 0 | 0 |
+| examine_hot_csv | devtool | 45 | 0 | 0 |
 | exoplanet_coordinates | data | 399 | 1 | 0 |
 | exoplanet_orbits | rendering | 613 | 3 | 1 |
-| exoplanet_stellar_properties | data | 485 | 3 | 3 |
+| exoplanet_stellar_properties | data | 482 | 4 | 3 |
 | exoplanet_systems | data | 570 | 0 | 3 |
 | fetch_climate_data | computation | 761 | 0 | 1 |
 | fetch_paleoclimate_data | computation | 169 | 0 | 0 |
 | formatting_utils | utility | 16 | 0 | 4 |
+| gallery_editor | gui | 1,338 | 0 | 0 |
+| gallery_json_fixer | pipeline | 483 | 0 | 0 |
+| gallery_studio | gui | 4,485 | 2 | 0 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
 | idealized_orbits | computation | 6,164 | 4 | 5 |
 | incremental_cache_manager | cache | 657 | 1 | 4 |
+| info_dictionary | data | 1,943 | 0 | 9 |
+| json_converter | pipeline | 622 | 0 | 1 |
 | jupiter_visualization_shells | rendering/shells | 778 | 2 | 1 |
 | mars_visualization_shells | rendering/shells | 710 | 2 | 1 |
 | mercury_visualization_shells | rendering/shells | 650 | 2 | 1 |
 | messier_catalog | data | 404 | 0 | 3 |
-| messier_object_data_handler | other | 329 | 2 | 1 |
-| module_atlas | other | 484 | 0 | 1 |
+| messier_object_data_handler | pipeline | 329 | 2 | 1 |
+| module_atlas | devtool | 484 | 0 | 2 |
 | moon_visualization_shells | rendering/shells | 442 | 2 | 1 |
 | neptune_visualization_shells | rendering/shells | 1,513 | 3 | 1 |
 | object_type_analyzer | computation | 754 | 1 | 3 |
@@ -2264,17 +2391,18 @@ and explains in context.
 | paleoclimate_visualization | rendering | 478 | 1 | 2 |
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
-| palomas_orrery | gui | 8,254 | 27 | 0 |
-| palomas_orrery_dashboard | gui | 599 | 0 | 0 |
-| palomas_orrery_helpers | utility | 777 | 10 | 2 |
+| palomas_orrery | gui | 8,253 | 28 | 0 |
+| palomas_orrery_dashboard | gui | 600 | 0 | 0 |
+| palomas_orrery_helpers | utility | 776 | 11 | 2 |
 | planet9_visualization_shells | rendering/shells | 243 | 2 | 1 |
-| planet_visualization | rendering | 1,046 | 16 | 2 |
-| planet_visualization_utilities | rendering | 290 | 1 | 15 |
+| planet_visualization | rendering | 1,027 | 16 | 2 |
+| planet_visualization_utilities | rendering | 297 | 1 | 15 |
 | planetarium_apparent_magnitude | rendering | 352 | 11 | 1 |
 | planetarium_distance | rendering | 399 | 11 | 1 |
 | plot_data_exchange | pipeline | 168 | 0 | 3 |
 | plot_data_report_widget | rendering | 560 | 2 | 1 |
 | pluto_visualization_shells | rendering/shells | 484 | 2 | 1 |
+| provenance_scanner | devtool | 710 | 1 | 0 |
 | report_manager | utility | 124 | 0 | 4 |
 | saturn_visualization_shells | rendering/shells | 1,002 | 2 | 3 |
 | save_utils | pipeline | 388 | 0 | 18 |
@@ -2282,31 +2410,31 @@ and explains in context.
 | scenarios_heatwaves | scenario | 622 | 0 | 1 |
 | scenarios_western_heatwave_march_2026 | scenario | 1,536 | 1 | 1 |
 | sgr_a_grand_tour | rendering | 742 | 3 | 1 |
-| sgr_a_star_data | data | 555 | 2 | 5 |
+| sgr_a_star_data | data | 570 | 3 | 5 |
 | sgr_a_visualization_animation | rendering | 343 | 3 | 0 |
 | sgr_a_visualization_core | rendering | 557 | 2 | 3 |
-| sgr_a_visualization_core_arcs | other | 535 | 1 | 0 |
+| sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
 | shared_utilities | utility | 123 | 0 | 17 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
 | social_media_export | pipeline | 969 | 1 | 2 |
-| solar_visualization_shells | rendering/shells | 1,437 | 2 | 6 |
+| solar_visualization_shells | rendering/shells | 1,473 | 2 | 6 |
 | spacecraft_encounters | data | 1,204 | 2 | 1 |
 | star_notes | data | 1,137 | 0 | 5 |
 | star_properties | data | 338 | 2 | 4 |
 | star_sphere_builder | rendering | 922 | 0 | 1 |
-| star_visualization_gui | gui | 1,406 | 11 | 0 |
+| star_visualization_gui | gui | 1,407 | 13 | 0 |
 | stellar_data_patches | data | 41 | 0 | 4 |
 | stellar_parameters | data | 352 | 2 | 8 |
-| test_orbit_cache | other | 204 | 1 | 0 |
+| test_orbit_cache | devtool | 204 | 1 | 0 |
 | uranus_visualization_shells | rendering/shells | 988 | 3 | 1 |
 | venus_visualization_shells | rendering/shells | 619 | 2 | 1 |
-| verify_orbit_cache | cache | 170 | 0 | 0 |
-| visualization_2d | rendering | 524 | 6 | 2 |
-| visualization_3d | rendering | 858 | 5 | 2 |
-| visualization_core | rendering | 351 | 4 | 7 |
-| visualization_utils | rendering | 725 | 3 | 3 |
+| verify_orbit_cache | devtool | 170 | 0 | 0 |
+| visualization_2d | rendering | 523 | 7 | 2 |
+| visualization_3d | rendering | 857 | 6 | 2 |
+| visualization_core | rendering | 350 | 5 | 7 |
+| visualization_utils | rendering | 725 | 3 | 4 |
 | vot_cache_manager | cache | 430 | 0 | 2 |
 
 ---

@@ -56,14 +56,17 @@ ROLE_MAP = {
     'json_converter':           'pipeline',
     'social_media_export':      'pipeline',
     'plot_data_exchange':       'pipeline',
-    'convert_hot_ph_to_json':   'pipeline',
     'save_utils':               'pipeline',
+    'gallery_json_fixer':       'pipeline',
+    'messier_object_data_handler': 'pipeline',
+    'sgr_a_visualization_core_arcs': 'pipeline',
 
     # Data - catalogs and constants
     'celestial_objects':        'data',
     'spacecraft_encounters':    'data',
     'close_approach_data':      'data',
     'constants_new':            'data',
+    'info_dictionary':          'data',
     'exoplanet_systems':        'data',
     'exoplanet_coordinates':    'data',
     'exoplanet_stellar_properties': 'data',
@@ -80,9 +83,6 @@ ROLE_MAP = {
     'incremental_cache_manager':'cache',
     'vot_cache_manager':        'cache',
     'orbit_data_manager':       'cache',
-    'create_ephemeris_database':'cache',
-    'verify_orbit_cache':       'cache',
-    'create_cache_backups':     'cache',
 
     # Computation - math, orbital mechanics, data processing
     'orbital_elements':         'computation',
@@ -143,9 +143,19 @@ ROLE_MAP = {
     'orrery_integration':       'utility',
     'report_manager':           'utility',
 
-    # Developer tools
+    # Developer tools - audit, diagnostics, one-shot scripts
+    'module_atlas':             'devtool',
     'dep_trace':                'devtool',
-    # module_atlas would go here too
+    'provenance_scanner':       'devtool',
+    'test_constants_provenance':'devtool',
+    'test_orbit_cache':         'devtool',
+    'verify_orbit_cache':       'devtool',
+    'add_docstrings':           'devtool',
+    'create_cache_backups':     'devtool',
+    'create_ephemeris_database':'devtool',
+    'convert_hot_ph_to_json':   'devtool',
+    'diagnose_bcodmo':          'devtool',
+    'examine_hot_csv':          'devtool',
 
     # Legacy
     'star_visualization_gui_before_pyinstaller_refactor': 'legacy',
@@ -166,7 +176,7 @@ def classify_role(module_name):
 # Role descriptions for the atlas header
 ROLE_DESCRIPTIONS = {
     'gui':              'Applications the user launches (GUIs, editors)',
-    'pipeline':         'Transforms data between stages (export, conversion)',
+    'pipeline':         'Transforms data between stages (export, conversion, plotting pipelines)',
     'data':             'Catalogs, constants, and static datasets',
     'cache':            'Fetch, store, and retrieve computed data',
     'computation':      'Math, orbital mechanics, data processing',

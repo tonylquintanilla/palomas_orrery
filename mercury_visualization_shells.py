@@ -9,6 +9,9 @@ is proportionally the largest of any planet (~85%% of its radius).
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+    April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
+    Sodium tail decimal error corrected (2.4 Mkm -> 24 Mkm).
+    Provenance audit identified by Anthropic's Claude Opus 4.7
 """
 import numpy as np
 import math
@@ -71,6 +74,8 @@ def create_mercury_inner_core_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA MESSENGER Mission; Margot et al. (2012) (outer core 1074 km)
+# Verified: April 2026 via Gemini fact-check
 mercury_outer_core_info = (
             "Outer Core: Surrounding the solid inner core is a liquid metallic outer core. The movement of this molten iron \n" 
             "is thought to be the source of Mercury's weak magnetic field. About 1074 km thick."
@@ -173,6 +178,9 @@ def create_mercury_mantle_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA MESSENGER; Sori (2018) (crustal thickness ~35 km)
+#         Pei et al. (2024) (diamond layer from graphite + meteorite impacts)
+# Verified: April 2026 via Gemini fact-check
 mercury_crust_info = (
             "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin \n" 
@@ -329,6 +337,8 @@ def create_mercury_crust_shell(center_position=(0, 0, 0)):
 
     return [surface_trace, hover_trace]
 
+# Source: NASA MESSENGER; NASA Mercury Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 mercury_atmosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"     
             "Exosphere: Unlike Earth's substantial atmosphere, Mercury has an extremely thin exosphere. This exosphere is not \n" 
@@ -403,12 +413,14 @@ def create_mercury_atmosphere_shell(center_position=(0, 0, 0)):
     return traces
 
 
+# Source: Potter & Morgan (1985); MESSENGER sodium tail observations
+# Verified: April 2026 via Gemini fact-check
 mercury_sodium_tail_info = (
             "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
             "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT OR SET MANUAL SCALE TO 1.0 AU\n\n" 
 
             "Sodium Tail: Mercury has a remarkable sodium tail that extends incredibly far into space - up to 10,000 Mercury radii \n"
-            "(approximately 24 million kilometers or 2.4 million km). This tail is created when sodium atoms from Mercury's exosphere \n"
+            "(approximately 24 million kilometers). This tail is created when sodium atoms from Mercury's exosphere \n"
             "are pushed away by solar radiation pressure. The tail always points away from the Sun, similar to a comet's tail.\n\n"
             "The sodium tail is highly dynamic and can vary significantly based on Mercury's position in its orbit and solar activity. \n"
             "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
@@ -422,7 +434,7 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0)):
         'name': 'Sodium Tail',
         'description': (
             "Sodium Tail: Mercury has a remarkable sodium tail that extends incredibly far into space - up to 10,000 Mercury radii <br>"
-            "(approximately 24 million kilometers or 2.4 million km). This tail is created when sodium atoms from Mercury's exosphere <br>"
+            "(approximately 24 million kilometers). This tail is created when sodium atoms from Mercury's exosphere <br>"
             "are pushed away by solar radiation pressure. The tail always points away from the Sun, similar to a comet's tail.<br><br>"
             "The sodium tail is highly dynamic and can vary significantly based on Mercury's position in its orbit and solar activity. <br>"
             "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
@@ -523,6 +535,8 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA MESSENGER Mission
+# Verified: April 2026 via Gemini fact-check
 mercury_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n" 
 
@@ -694,6 +708,8 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Solar System Dynamics
+# Verified: April 2026 via Gemini fact-check
 mercury_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.003 AU TO VISUALIZE.\n\n" 
             "Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it \n" 

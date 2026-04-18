@@ -22,7 +22,13 @@ Usage:
         add_tagged_encounter_markers,
     )
 
-Module updated: April 2, 2026 with Anthropic's Claude 4.6 
+Module updated: April 2, 2026 with Anthropic's Claude 4.6
+April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
+All 12 claims confirmed (NASA New Horizons Mission Guide, Stern et al. 2015,
+SOHO/LASCO CCOR-1 Event Report 2026-04, Parker Solar Probe 2021 Alfven data).
+Note: heliocentric speed after launch ~43 km/s (code) vs ~45 km/s (Gemini) --
+both are valid approximations depending on Earth orbital velocity assumed.
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 
 import numpy as np
@@ -100,6 +106,9 @@ SPACECRAFT_ENCOUNTERS = {
             'v_kms': 21.219,           # relative to Jupiter
             'v_helio_kms': 23.0,       # relative to Sun (post-assist)
             'label': 'Jupiter Gravity Assist',
+            # Source: NASA New Horizons Mission Guide; NASA Solar System Exploration;
+            #         launch 16.26 km/s (fastest ever at launch), heliocentric ~43-45 km/s,
+            #         slowed to ~19 km/s at Jupiter, +4 km/s assist, 3 years saved confirmed.
             'note': ('Fastest launch ever: 16.26 km/s Earth-relative, '
                      'combining with Earth\'s orbital velocity to ~43 km/s '
                      'heliocentric (velocities add as vectors, not scalars). '
@@ -127,6 +136,8 @@ SPACECRAFT_ENCOUNTERS = {
             'v_kms': 13.78,            # relative to Pluto
             'v_helio_kms': 14.52,      # relative to Sun at encounter
             'label': 'Pluto Flyby',
+            # Source: Stern et al. (2015, Science); NASA New Horizons Pluto Flyby Press Kit;
+            #         12,472 km altitude, 13.78 km/s, 28,800 km Charon distance, Sputnik Planitia all confirmed.
             'note': ('First spacecraft to explore Pluto. Flew 12,472 km '
                      'above the surface at 13.78 km/s. Also passed within '
                      '28,800 km of Charon. Revealed Pluto\'s heart-shaped '
@@ -1390,6 +1401,11 @@ def get_comet_disintegration_preset(obj_name):
     perihelion as ghost -> outbound debris trail fading to ~29 R_sun.
     Scale: 0.023 AU -- same tight perihelion scale, shows all inner shells.
     Position marker: disintegration time (08:15 UTC April 4), not perihelion.
+
+    Source: SOHO/LASCO (CCOR-1) Event Report 2026-04;
+            Parker Solar Probe Alfven boundary data (2021).
+            8.33 R_sun confirmed between Alfven surface (~18.8 R_sun) and
+            Streamer Belt (~4-6 R_sun). Perihelion tp 14:22 UTC April 4 confirmed.
     """
     DISINTEGRATION_PRESETS = {
         'MAPS': {

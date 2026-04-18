@@ -2,11 +2,16 @@
 eris_visualization_shells.py - Eris interior and boundary shell traces.
 
 Sphere shells for Eris: core, mantle, crust, tenuous atmosphere, and
-Hill sphere. Based on New Horizons flyby constraints and thermal models.
+Hill sphere. Based on stellar occultation measurements (Sicardy et al. 2011),
+JWST observations (D/H ratio, 2023/2024), and thermal models (Glein et al. 2024).
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+    April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
+    Hill sphere text updated (perihelion vs semi-major axis basis noted).
+    Corrected "New Horizons" attribution (New Horizons visited Pluto, not Eris).
+    Provenance audit identified by Anthropic's Claude Opus 4.7
 """
 import numpy as np
 import math
@@ -16,6 +21,10 @@ from shared_utilities import create_sun_direction_indicator
 
 # Eris Shell Creation Functions
 
+# Source: Sicardy et al. (2011), Nature (radius 1163 km, density 2.52 g/cm^3, albedo)
+#         Glein et al. (2024) (875 K core temperature model, geochemical modeling)
+#         JWST (2023/2024) (D/H ratio in methane ice, internal heating evidence)
+# Verified: April 2026 via Gemini fact-check
 eris_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations \n" 
@@ -152,6 +161,9 @@ def create_eris_mantle_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: Sicardy et al. (2011), Nature (albedo 0.96)
+#         Brown & Schaller (2007) (nitrogen/methane surface composition)
+# Verified: April 2026 via Gemini fact-check
 eris_crust_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.\n\n"
@@ -397,14 +409,17 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Solar System Dynamics (mass, semi-major axis)
+# Note: Shell geometry uses perihelion-based Hill sphere (~8.1 Mkm);
+#       average orbital distance gives ~9.4 Mkm (~0.06 AU)
+# Verified: April 2026 via Gemini fact-check
 eris_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
 
-            "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant \n" 
-            "force attracting satellites. For Eris, the radius of its Hill sphere is estimated to be about 8.1 million kilometers \n" 
-            "(0.054 astronomical units). This is the region where its moon, Dysnomia, orbits. Any object within this sphere is more \n" 
-            "likely to be gravitationally bound to Eris."                      
+            "Hill Sphere: At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately \n" 
+            "9.4 million kilometers (~0.06 AU). The shell shown uses the perihelion distance (~38 AU), \n" 
+            "giving ~8.1 million km. Dysnomia orbits at ~37,000 km, well within either estimate."
 )
 
 def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
@@ -418,11 +433,11 @@ def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
             "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant <br>" 
-            "force attracting satellites. For Eris, the radius of its Hill sphere is estimated to be about 8.1 million kilometers <br>" 
-            "(0.054 astronomical units). This is the region where its moon, Dysnomia, orbits. Any object within this sphere is more <br>" 
-            "likely to be gravitationally bound to Eris.<br>" 
+            "force attracting satellites. At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately <br>" 
+            "9.4 million kilometers (~0.06 AU). The shell shown here uses the perihelion distance (~38 AU), giving ~8.1 million km. <br>" 
+            "Dysnomia orbits at ~37,000 km, well within either estimate.<br>" 
             "* The region where Eris's gravity is the dominant force attracting satellites extends to a distance of roughly 6965 <br>" 
-            "  Eris radii from its center."          
+            "  Eris radii from its center (perihelion-based)."          
             )
     }
         

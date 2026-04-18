@@ -9,6 +9,11 @@ interaction with the ionosphere.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
+One correction: core radius updated from ~3,000 km to ~3,200 km per current
+interior models (NASA Venus Fact Sheet; NASA Solar System Exploration).
+All other claims confirmed (ESA Venus Express, NASA Pioneer Venus, NASA SSD).
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 import numpy as np
 import math
@@ -18,11 +23,13 @@ from shared_utilities import create_sun_direction_indicator
 
 # Venus Shell Creation Functions
 
+# Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
+#         iron-nickel core, radius ~3,200 km, lack of dynamo due to slow rotation or solid core confirmed.
 venus_core_info = (
             "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. \n" 
-            "Its radius is estimated to be around 3,000 km. Due to the lack of a strong magnetic field, it's speculated that Venus's \n" 
-            "core might be solid or only partially liquid, or that it lacks the internal convection that drives Earth's magnetic \n" 
-            "field. The exact state and dynamics of Venus's core remain a topic of ongoing research."
+            "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's \n" 
+            "core might be solid or only partially liquid, or that Venus's very slow rotation (243 days) prevents the convection \n" 
+            "needed to drive a magnetic dynamo. The exact state and dynamics of Venus's core remain a topic of ongoing research."
 )
 
 def create_venus_core_shell(center_position=(0, 0, 0)):
@@ -33,11 +40,13 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
         'color': 'rgb(255, 180, 140)',  # Orange-red for hot iron core
         'opacity': 1.0,
         'name': 'Core',
+        # Source: NASA Venus Fact Sheet; NASA Solar System Exploration;
+        #         iron-nickel core, radius ~3,200 km, no dynamo (slow rotation or solid core) confirmed.
         'description': (
             "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. <br>" 
-            "Its radius is estimated to be around 3,000 km. Due to the lack of a strong magnetic field, it's speculated that Venus's <br>" 
-            "core might be solid or only partially liquid, or that it lacks the internal convection that drives Earth's magnetic <br>" 
-            "field. The exact state and dynamics of Venus's core remain a topic of ongoing research."
+            "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's <br>" 
+            "core might be solid or only partially liquid, or that Venus's very slow rotation (243 days) prevents the convection <br>" 
+            "needed to drive a magnetic dynamo. The exact state and dynamics of Venus's core remain a topic of ongoing research."
         )
     }
     
@@ -357,6 +366,8 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
         'color': 'rgb(100, 150, 255)',  # Lighter blue
         'opacity': 0.3,
         'name': 'Upper Atmosphere',
+        # Source: ESA Venus Express Mission; NASA Pioneer Venus Project;
+        #         thermosphere ~300 K dayside, night-side cryosphere 90-120 km, ionosphere 120-140 km peak confirmed.
         'description': (
             "The upper atmosphere of Venus is a complex and dynamic region extending far beyond the troposphere. It doesn't have the <br>" 
             "same distinct layers (stratosphere, mesosphere, thermosphere) as Earth's in the same way due to the very different thermal <br>" 
@@ -440,6 +451,8 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
+#         induced magnetosphere (not intrinsic), formed by solar wind / ionosphere interaction confirmed.
 venus_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
 
@@ -488,6 +501,8 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
     y = np.array(y) + center_y
     z = np.array(z) + center_z
     
+    # Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
+    #         induced magnetosphere, bow shock 1.3-1.7 Rv, comet-shaped tail confirmed.
     magnetosphere_text = ["Venus has a very weak, induced magnetosphere. Unlike Earth's magnetic field, which is generated internally by its <br>" 
             "liquid iron core, Venus's weak magnetosphere is formed by the interaction of the solar wind with the planet's <br>" 
             "ionosphere (the upper layer of its atmosphere containing charged particles). This induced magnetosphere is not as <br>" 
@@ -644,6 +659,8 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Solar System Dynamics (SSD); NASA Venus Fact Sheet;
+#         Hill sphere ~1.01 million km / ~167 Venus radii; no natural moons confirmed.
 venus_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
             "Venus's Hill Sphere is the region where its gravitational influence is dominant over the gravitational influence of \n" 

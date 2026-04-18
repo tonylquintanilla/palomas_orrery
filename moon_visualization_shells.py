@@ -8,6 +8,10 @@ Candidate for full migration to shell_configs.py (no custom functions needed).
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
+All 5 flagged claims confirmed (Weber et al. 2011, NASA Moon Fact Sheet, Apollo
+Seismic Experiment reports, NASA SSD, Draper 1847). No factual corrections needed.
+Provenance audit identified by Anthropic's Claude Opus 4.7.
 """
 import numpy as np
 import math
@@ -17,6 +21,8 @@ from shared_utilities import create_sun_direction_indicator
 
 # Moon Shell Creation Functions
 
+# Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
+#         inner core ~240 km radius, 1,600-1,700 K, refined from Apollo seismic data.
 moon_inner_core_info = (
             "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:\n" 
             "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius."
@@ -30,6 +36,8 @@ def create_moon_inner_core_shell(center_position=(0, 0, 0)):
         'color': 'rgb(255, 100, 0)',  # dark red-orange at 1700K
         'opacity': 1.0,
         'name': 'Inner Core',
+        # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
+        #         solid iron-rich inner core ~240 km radius, 1,600-1,700 K confirmed.
         'description': (
             "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:<br>" 
             "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius:<br>" 
@@ -82,6 +90,8 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
         'color': 'rgb(255, 50, 0)',  # very dark, deep red, almost a "charcoal red" or "ember red"
         'opacity': 0.8,
         'name': 'Outer Core',
+        # Source: NASA Moon Fact Sheet; Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
+        #         outer core ~330 km radius, partially molten silicate boundary layer ~150 km thick confirmed.
         'description': (
             "Outer Core: Surrounding the inner core, this is thought to be a liquid, iron-rich outer core with a radius of about <br>" 
             "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core.<br>:" 
@@ -126,6 +136,8 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Moon Fact Sheet; Apollo Seismic Experiment reports (deep moonquakes 700-1,200 km,
+#         tidal stress origin confirmed).
 moon_mantle_info = (
             "Above the core lies the Moon's mantle, which makes up the bulk of its interior:\n" 
             "* Composition: Primarily composed of silicate rocks, similar to Earth's mantle, but with different proportions of \n" 
@@ -144,6 +156,9 @@ def create_moon_mantle_shell(center_position=(0, 0, 0)):
         'color': 'rgb(0, 50, 0)',  # very dark green for peridotite
         'opacity': 0.9655,
         'name': 'Mantle',
+        # Source: NASA Moon Fact Sheet; Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
+        #         Apollo Seismic Experiment reports (deep moonquakes, tidal stress);
+        #         Draper (1847) for Draper point 798 K.
         'description': (
             "Above the core lies the Moon's mantle, which makes up the bulk of its interior:<br>" 
             "* Composition: Primarily composed of silicate rocks, similar to Earth's mantle, but with different proportions of <br>" 
@@ -448,6 +463,8 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Solar System Dynamics (SSD); Hill sphere radius ~60,000 km confirmed,
+#         34.53 lunar radii derived from Moon mean radius 1,737.4 km.
 moon_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.\n\n" 
             "The Moon's Hill sphere (also known as the Roche sphere in this context) is the region around it where its own gravity \n" 

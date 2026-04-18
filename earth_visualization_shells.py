@@ -9,6 +9,10 @@ Scatter3d traces positioned relative to a center_position in AU.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+    April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
+    Stratopause/tropopause temperature label corrected. LEO satellite/debris
+    counts updated to 2026 values. Hill sphere typo fixed.
+    Provenance audit identified by Anthropic's Claude Opus 4.7
 """
 import numpy as np
 import math
@@ -18,6 +22,8 @@ from shared_utilities import create_sun_direction_indicator
 
 # Earth Shell Creation Functions
 
+# Source: USGS Interior of the Earth, NASA Earth Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 earth_inner_core_info = (
             "Earth's inner core is a solid sphere composed primarily of iron and nickel.\n"
             "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly\n"
@@ -74,6 +80,8 @@ def create_earth_inner_core_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: USGS Interior of the Earth, NASA Earth Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 earth_outer_core_info = (
             "The outer core is a liquid layer of iron, nickel, and lighter elements.\n"
             "Convection currents in this highly conductive fluid generate Earth's\n"
@@ -130,6 +138,8 @@ def create_earth_outer_core_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: USGS Interior of the Earth, NASA Earth Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 earth_lower_mantle_info = (
             "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.\n"
             "Despite being solid, it flows very slowly through convection, driving plate tectonics.\n"
@@ -184,6 +194,8 @@ def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: USGS Interior of the Earth, NASA Earth Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 earth_upper_mantle_info = (
             "The upper mantle includes the asthenosphere, a partially molten layer where\n"
             "most magma originates. This region flows more readily than the lower mantle,\n"
@@ -238,6 +250,8 @@ def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: USGS Interior of the Earth, NASA Earth Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 earth_crust_info = (
             "Earth's crust is the thin, solid outer layer where humans live. It's divided into\n"
             "oceanic crust (5-10 km thick) made mostly of basalt, and continental crust (30-50 km thick)\n"
@@ -395,11 +409,14 @@ def create_earth_crust_shell(center_position=(0, 0, 0)):
 
     return [surface_trace, hover_trace]
 
+# Source: NOAA, NASA Earth Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 earth_atmosphere_info = (
             "The lower atmosphere includes the troposphere (0-12 km) where weather occurs, and\n"
             "the stratosphere (12-50 km) which contains the ozone layer. These regions contain\n"
             "99% of atmospheric mass, primarily nitrogen and oxygen. Temperature varies from\n"
-            "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the stratopause."
+            "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the tropopause (12 km).\n"
+            "The stratopause (50 km) warms to near 0 degC (32 degF) due to ozone absorption."
 )
 
 def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
@@ -414,7 +431,8 @@ def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
             "The lower atmosphere includes the troposphere (0-12 km) where weather occurs, and<br>"
             "the stratosphere (12-50 km) which contains the ozone layer. These regions contain<br>"
             "99% of atmospheric mass, primarily nitrogen and oxygen. Temperature varies from<br>"
-            "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the stratopause."
+            "about 15 degC (59 degF) at sea level to -60 degC (-76 degF) at the tropopause (12 km).<br>"
+            "The stratopause (50 km) warms to near 0 degC (32 degF) due to ozone absorption."
         )
     }
     
@@ -449,6 +467,8 @@ def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NOAA, NASA Earth Fact Sheet
+# Verified: April 2026 via Gemini fact-check
 earth_upper_atmosphere_info = (
             "The upper atmosphere extends from 50 km to about 1,000 km altitude. It includes\n"
             "the mesosphere where meteors burn up, the thermosphere where the aurora occurs and\n"
@@ -512,6 +532,9 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Goddard Space Flight Center - Magnetosphere
+#         NASA Van Allen Probes (radiation belts)
+# Verified: April 2026 via Gemini fact-check
 earth_magnetosphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
 
@@ -652,6 +675,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
     # 3. Create and add Van Allen radiation belts
     belt_colors = ['rgb(255, 100, 100)', 'rgb(100, 200, 255)']
     belt_names = ['Earth: Inner Radiation Belt', 'Earth: Outer Radiation Belt']
+    # Source: NASA Van Allen Probes mission
+    # Verified: April 2026 via Gemini fact-check
     belt_texts = [
         "Inner Van Allen Belt: Region of trapped charged particles (mainly protons)<br>"
         "extending from about 1,000 km to 6,000 km above Earth's surface.",
@@ -729,6 +754,9 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: UCS Satellite Database, ESA Space Debris Office, NASA
+#         Satellite/debris counts as of early 2026
+# Verified: April 2026 via Gemini fact-check
 earth_leo_shell_info = (
             "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
             "Low Earth Orbit (LEO) is the region from roughly 200 km to 2,000 km altitude\n"
@@ -741,9 +769,9 @@ earth_leo_shell_info = (
             "  * Starlink: ~550 km altitude, multiple inclination shells\n"
             "  * Hubble Space Telescope: ~540 km altitude\n"
             "  * Most Earth observation and weather satellites\n\n"
-            "There are currently ~8,000 active satellites in LEO, with Starlink alone\n"
-            "operating over 6,000. The total debris population (defunct satellites, rocket\n"
-            "bodies, fragments) exceeds 20,000 tracked objects.\n\n"
+            "There are currently ~11,000 active satellites in LEO, with Starlink alone\n"
+            "operating nearly 7,000. The total debris population (defunct satellites, rocket\n"
+            "bodies, fragments >10 cm) exceeds 35,000 tracked objects.\n\n"
             "The bright moving 'stars' visible at dusk and dawn are LEO objects --\n"
             "most commonly Starlink trains. GEO satellites at 35,786 km are too faint\n"
             "and too slow to see with the naked eye."
@@ -799,6 +827,9 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     y = radii_au * np.sin(theta_main) * np.sin(phi_main) + center_y
     z = radii_au * np.cos(theta_main) + center_z
 
+    # Source: UCS Satellite Database, ESA Space Debris Office (counts as of early 2026)
+    #         SpaceX Starlink status; NASA (ISS, Hubble altitudes)
+    # Verified: April 2026 via Gemini fact-check
     hover_text = (
         "Low Earth Orbit (LEO)<br>"
         "Altitude range: 200 km to 2,000 km above surface<br>"
@@ -807,8 +838,8 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
         "One orbit takes 90-120 minutes; a satellite crosses the sky in ~6 minutes.<br><br>"
         "The bright moving points visible at dusk and dawn are LEO objects.<br>"
         "Starlink (~550 km), ISS (~400 km), and Hubble (~540 km) all live here.<br><br>"
-        "<b>Active satellites:</b> ~8,000 (Starlink alone: 6,000+)<br>"
-        "<b>Tracked debris objects:</b> 20,000+<br><br>"
+        "<b>Active satellites:</b> ~11,000 (Starlink alone: ~7,000)<br>"
+        "<b>Tracked debris objects (>10 cm):</b> 35,000+<br><br>"
         "Compare with the Geostationary Belt (GEO) at 42,164 km -- 5x farther out,<br>"
         "invisible to the naked eye, but controlling global communications."
     )
@@ -897,6 +928,8 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
     y = radii * np.sin(angles) + center_y
     z = z_scatter + center_z
 
+    # Source: ITU, UCS Satellite Database, JPL CAD API (Apophis)
+    # Verified: April 2026 via Gemini fact-check
     hover_text = (
         "Geostationary Belt (GEO)<br>"
         "Altitude: 35,786 km above surface<br>"
@@ -930,6 +963,8 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Solar System Dynamics
+# Verified: April 2026 via Gemini fact-check
 earth_hill_sphere_info = (
             "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
             "Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)."
@@ -955,7 +990,7 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
     
     # Create hover text
     hover_text = ("Earth's Hill Sphere (extends to ~235 Earth radii or about 1.5 million km)<br><br>"
-                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+                "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 

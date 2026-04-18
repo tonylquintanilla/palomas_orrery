@@ -9,6 +9,10 @@ solar system after the heliosphere.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+    April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
+    Hill sphere inconsistency resolved (info string said 530 R_J / 0.25 AU;
+    correct is 740 R_J / 0.35 AU). Hill sphere "around a" typo fixed.
+    Provenance audit identified by Anthropic's Claude Opus 4.7
 """
 import numpy as np
 import math
@@ -58,6 +62,8 @@ def create_ring_points_jupiter (inner_radius, outer_radius, n_points=100, thickn
 
 # Jupiter Shell Creation Functions
 
+# Source: NASA Juno Mission; Wahl et al. (2017)
+# Verified: April 2026 via Gemini fact-check
 jupiter_core_info = (
             "2.4 MB PER FRAME FOR HTML.\n\n"
             "Jupiter's core is believed to be a dense mixture of rock, metal, and hydrogen compounds.\n"
@@ -113,6 +119,8 @@ def create_jupiter_core_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Jupiter Fact Sheet; Juno Science Results
+# Verified: April 2026 via Gemini fact-check
 jupiter_metallic_hydrogen_info = (
             "2.1 MB PER FRAME FOR HTML.\n\n"
             "Under extreme pressure, hydrogen transitions to a metallic state in this layer.\n"
@@ -167,6 +175,8 @@ def create_jupiter_metallic_hydrogen_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Jupiter Fact Sheet; Juno Science Results
+# Verified: April 2026 via Gemini fact-check
 jupiter_molecular_hydrogen_info = (
             "2.5 MB PER FRAME FOR HTML.\n\n"
             "This layer consists of hydrogen in its molecular form. The transition from metallic\n"
@@ -223,6 +233,8 @@ def create_jupiter_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     
     return traces
 
+# Source: NASA Jupiter Fact Sheet; Galileo Probe Results
+# Verified: April 2026 via Gemini fact-check
 jupiter_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
             "4.6 MB PER FRAME FOR HTML.\n\n"
@@ -384,6 +396,8 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
 
     return [surface_trace, hover_trace]
 
+# Source: NASA Jupiter Fact Sheet; Juno Science Results
+# Verified: April 2026 via Gemini fact-check
 jupiter_upper_atmosphere_info = (
             "2.7 MB PER FRAME FOR HTML.\n\n"
             "Jupiter's upper atmosphere includes the stratosphere and thermosphere.\n"
@@ -590,6 +604,8 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Jupiter Magnetosphere Overview; Juno Mission
+# Verified: April 2026 via Gemini fact-check
 jupiter_radiation_belts_info = (
             "560 KB PER FRAME FOR HTML.\n\n"
             "Vizualize at a manual scale of 0.005 AU.\n\n"
@@ -684,10 +700,12 @@ def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
 
     return traces
     
+# Source: NASA Solar System Dynamics
+# Verified: April 2026 via Gemini fact-check
 jupiter_hill_sphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.\n" 
             "1.3 MB PER FRAME FOR HTML.\n\n"
-            "Jupiter's Hill Sphere (extends to ~530 Jupiter radii or about 0.25 AU)"                      
+            "Jupiter's Hill Sphere (extends to ~740 Jupiter radii, about 0.35 AU or ~53 million km)"                      
 )
 
 def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
@@ -700,8 +718,8 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
         'name': 'Hill Sphere',
         'description': (
             "SET MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.<br><br>"
-            "Jupiter's Hill Sphere (extends to ~740 Jupiter radii)<br><br>"
-                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
+            "Jupiter's Hill Sphere (extends to ~740 Jupiter radii, ~0.35 AU or ~53 million km)<br><br>"
+                "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
                 "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
                 "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
@@ -784,6 +802,8 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
     """
     traces = []
     
+    # Source: NASA Jupiter Ring Fact Sheet; Galileo spacecraft data
+    # Verified: April 2026 via Gemini fact-check
     # Define Jupiter's ring parameters in kilometers from Jupiter's center
     # Then convert to Jupiter radii, and finally to AU
     ring_params = {
@@ -900,6 +920,8 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
 
     return traces
 
+# Source: NASA Jupiter Magnetosphere Overview; Juno Mission
+# Verified: April 2026 via Gemini fact-check
 jupiter_magnetosphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.4 AU TO VISUALIZE.\n"
             "1.4 MB PER FRAME FOR HTML.\n\n"
