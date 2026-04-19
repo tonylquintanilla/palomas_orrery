@@ -3049,16 +3049,17 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
         # Check if this is a satellite of the center object
         is_satellite_of_center = center_object_name in parent_planets and name in parent_planets.get(center_object_name, [])
         
-        # Create the hover text arrays
+        # Create the hover text for info marker
         if is_satellite_of_center:
-            hover_text = [f"{name} Orbit around {center_object_name}"] * len(path_data['x'])
+            hover_text = f"{name} Orbit around {center_object_name}"
             orbit_name = f"{name} Orbit around {center_object_name}"
         else:
-            hover_text = [f"{name} Orbit"] * len(path_data['x'])
+            hover_text = f"{name} Orbit"
             orbit_name = f"{name} Orbit"
 
         print(f"Plotting orbit for {name} relative to {center_object_name} ({len(path_data['x'])} points)", flush=True)
       
+        cache_legend_group = f"{name}_cached_orbit"
         fig.add_trace(
             go.Scatter3d(
                 x=path_data['x'],
@@ -3067,10 +3068,28 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
                 mode='lines',
                 line=dict(width=1, color=color_map(name)),
                 name=orbit_name,
-                text=hover_text,
-                customdata=hover_text,
-                hovertemplate='%{text}<extra></extra>',
+                hoverinfo='skip',
+                legendgroup=cache_legend_group,
                 showlegend=True
+            )
+        )
+
+        # Single info marker for cached orbit path
+        cache_info_idx = len(path_data['x']) // 2
+        fig.add_trace(
+            go.Scatter3d(
+                x=[path_data['x'][cache_info_idx]],
+                y=[path_data['y'][cache_info_idx]],
+                z=[path_data['z'][cache_info_idx]],
+                mode='markers',
+                marker=dict(size=8, color=color_map(name), symbol='cross',
+                            opacity=1.0, line=dict(color='white', width=2)),
+                name='',
+                text=[hover_text],
+                customdata=[hover_text],
+                hovertemplate='%{text}<extra></extra>',
+                legendgroup=cache_legend_group,
+                showlegend=False
             )
         )
 
@@ -3117,6 +3136,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 # Create the hover text for the actual orbit
                 hover_text = f"{planet} Orbit"
 
+                special_legend_group = f"{planet}_actual_orbit"
                 fig.add_trace(
                     go.Scatter3d(
                         x=x,
@@ -3126,12 +3146,31 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         line=line,
                         marker=marker,
                         name=f"{planet} Actual Orbit",
-                        text=[hover_text] * len(x),
-                        customdata=[hover_text] * len(x),
-                        hovertemplate='%{text}<extra></extra>',
+                        hoverinfo='skip',
+                        legendgroup=special_legend_group,
                         showlegend=True
                     )
                 )
+
+                # Single info marker for actual orbit
+                special_info_idx = len(x) // 2
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=[x[special_info_idx]],
+                        y=[y[special_info_idx]],
+                        z=[z[special_info_idx]],
+                        mode='markers',
+                        marker=dict(size=8, color=color_map(planet), symbol='cross',
+                                    opacity=1.0, line=dict(color='white', width=2)),
+                        name='',
+                        text=[hover_text],
+                        customdata=[hover_text],
+                        hovertemplate='%{text}<extra></extra>',
+                        legendgroup=special_legend_group,
+                        showlegend=False
+                    )
+                )
+
             else:
 
 # Add closest approach marker if enabled
@@ -3276,6 +3315,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         hover_text = f"{planet} Orbit"
                     legend_name = f"{planet} Actual Orbit"
 
+                actual_legend_group = f"{planet}_actual_orbit"
                 fig.add_trace(
                     go.Scatter3d(
                         x=x,
@@ -3285,10 +3325,28 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         line=line,
                         marker=marker,
                         name=legend_name,
-                        text=[hover_text] * len(x),           # Add proper hover text
-                        customdata=[hover_text] * len(x),     # Same for customdata
-                        hovertemplate='%{text}<extra></extra>',
+                        hoverinfo='skip',
+                        legendgroup=actual_legend_group,
                         showlegend=True
+                    )
+                )
+
+                # Single info marker for actual orbit
+                actual_info_idx = len(x) // 2
+                fig.add_trace(
+                    go.Scatter3d(
+                        x=[x[actual_info_idx]],
+                        y=[y[actual_info_idx]],
+                        z=[z[actual_info_idx]],
+                        mode='markers',
+                        marker=dict(size=8, color=trace_color, symbol='cross',
+                                    opacity=1.0, line=dict(color='white', width=2)),
+                        name='',
+                        text=[hover_text],
+                        customdata=[hover_text if len(hover_text) < 50 else legend_name],
+                        hovertemplate='%{text}<extra></extra>',
+                        legendgroup=actual_legend_group,
+                        showlegend=False
                     )
 
             )
@@ -4636,6 +4694,7 @@ def plot_objects():
                         z = [pos['z'] for pos in trajectory if pos is not None]
                         
                         if x:
+                            period_legend_group = f"{obj_name}_plotted_period"
                             fig.add_trace(
                                 go.Scatter3d(
                                     x=x,
@@ -4645,11 +4704,31 @@ def plot_objects():
                                     line=dict(color='yellow', width=2),
                                     opacity=1.0,
                                     name=f"{obj_name} Plotted Period",
-                                    text=[f"{obj_name} Plotted Period"] * len(x),
-                                    hovertemplate='%{text}<extra></extra>',
+                                    hoverinfo='skip',
+                                    legendgroup=period_legend_group,
                                     showlegend=True
                                 )
                             )
+
+                            # Single info marker for plotted period
+                            period_info_idx = len(x) // 2
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=[x[period_info_idx]],
+                                    y=[y[period_info_idx]],
+                                    z=[z[period_info_idx]],
+                                    mode='markers',
+                                    marker=dict(size=8, color='yellow', symbol='cross',
+                                                opacity=1.0, line=dict(color='white', width=2)),
+                                    name='',
+                                    text=[f"{obj_name} Plotted Period"],
+                                    customdata=[f"{obj_name} Plotted Period"],
+                                    hovertemplate='%{text}<extra></extra>',
+                                    legendgroup=period_legend_group,
+                                    showlegend=False
+                                )
+                            )
+
                             print(f"[PLOTTED PERIOD] {obj_name}: {len(x)} points from {plot_start.strftime('%Y-%m-%d')} to {plot_end.strftime('%Y-%m-%d')}", flush=True)
                             
                             # Add yellow closest approach marker for Plotted Period
@@ -6158,6 +6237,7 @@ def animate_objects(step, label):
                             # Get base color and create faded version
                             base_color = color_map(obj_name)
                             
+                            mission_legend_group = f"{obj_name}_full_mission"
                             fig.add_trace(
                                 go.Scatter3d(
                                     x=x,
@@ -6172,9 +6252,28 @@ def animate_objects(step, label):
                                 #    opacity=0.5,  # Faded
                                     opacity=1.0,  
                                     name=f"{obj_name} Full Mission",
-                                    text=[f"{obj_name} Full Mission Trajectory"] * len(x),
-                                    hovertemplate='%{text}<extra></extra>',
+                                    hoverinfo='skip',
+                                    legendgroup=mission_legend_group,
                                     showlegend=True
+                                )
+                            )
+
+                            # Single info marker for mission trajectory
+                            mission_info_idx = len(x) // 2
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=[x[mission_info_idx]],
+                                    y=[y[mission_info_idx]],
+                                    z=[z[mission_info_idx]],
+                                    mode='markers',
+                                    marker=dict(size=8, color=base_color, symbol='cross',
+                                                opacity=1.0, line=dict(color='white', width=2)),
+                                    name='',
+                                    text=[f"{obj_name} Full Mission Trajectory"],
+                                    customdata=[f"{obj_name} Full Mission Trajectory"],
+                                    hovertemplate='%{text}<extra></extra>',
+                                    legendgroup=mission_legend_group,
+                                    showlegend=False
                                 )
                             )
 

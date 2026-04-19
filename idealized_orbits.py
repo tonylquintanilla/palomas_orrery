@@ -352,7 +352,8 @@ def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
             f"<br><br><i>Mean elements = JPL long-term solution."
             f"<br>Compare with osculating orbit to see perturbation effects.</i>"
         )
-        
+                
+        mean_legend_group = f"{obj_name}_mean_orbit"
         fig.add_trace(
             go.Scatter3d(
                 x=x_mean,
@@ -361,14 +362,33 @@ def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
                 mode='lines',
                 line=dict(dash='longdash', width=1.5, color='white'),
                 name=f"{obj_name} Mean Orbit (Epoch: {epoch_str})",
-                text=[hover_text] * len(x_mean),
-                customdata=[f"{obj_name} Mean Orbit"] * len(x_mean),
-                hovertemplate='%{text}<extra></extra>',
-                visible='legendonly',  # Hidden by default, togglable via legend
+                hoverinfo='skip',
+                legendgroup=mean_legend_group,
+                visible='legendonly',
                 showlegend=True
             )
         )
-        
+
+        # Single info marker for mean orbit (opposite perihelion for clarity)
+        mean_info_idx = 3 * len(x_mean) // 4  # 270 deg, opposite Keplerian info marker
+        fig.add_trace(
+            go.Scatter3d(
+                x=[x_mean[mean_info_idx]],
+                y=[y_mean[mean_info_idx]],
+                z=[z_mean[mean_info_idx]],
+                mode='markers',
+                marker=dict(size=8, color='white', symbol='cross',
+                            opacity=1.0, line=dict(color='white', width=2)),
+                name='',
+                text=[hover_text],
+                customdata=[f"{obj_name} Mean Orbit"],
+                hovertemplate='%{text}<extra></extra>',
+                legendgroup=mean_legend_group,
+                visible='legendonly',
+                showlegend=False
+            )
+        )
+
         print(f"  Added mean orbit trace for {obj_name} (e={mean_e:.6f}, {orbit_type}, epoch={epoch_str})", flush=True)
         return True
         
@@ -5274,8 +5294,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     epoch_str = ""
                     if 'epoch' in params:
                         epoch_str = f" (Epoch: {params['epoch']})"
-
-                    # Plot the hyperbolic orbit path
+                  
+                    # Plot the hyperbolic orbit path - geometry only, hover on info marker
+                    hyp_legend_group = f"{obj_name}_keplerian"
                     fig.add_trace(
                         go.Scatter3d(
                             x=x_final,
@@ -5284,14 +5305,37 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             mode='lines',
                             line=dict(dash='dot', width=1, color=color_map(obj_name)),
                             name=f"{obj_name} Keplerian Orbit{epoch_str}",
-                    #        text=[f"{obj_name} Hyperbolic Orbit<br>eccentricity, e={e:.6f}<br>periapsis distance, q={q:.6f} AU"] * len(x_final),
-                            text=[f"{obj_name} Hyperbolic Orbit<br>e={e:.6f}<br>q={q:.6f} AU{get_planet_perturbation_note(obj_name)}{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"] * len(x_final),
-                            customdata=[f"{obj_name} Keplerian Orbit"] * len(x_final),
-                            hovertemplate='%{text}<extra></extra>',
+                            hoverinfo='skip',
+                            legendgroup=hyp_legend_group,
                             showlegend=True                    
                         )
                     )
-                  
+
+                    # Single info marker for hyperbolic orbit (midpoint of arc)
+                    hyp_info_idx = len(x_final) // 4
+                    hyp_hover_text = (
+                        f"{obj_name} Hyperbolic Orbit<br>"
+                        f"e={e:.6f}<br>q={q:.6f} AU"
+                        f"{get_planet_perturbation_note(obj_name)}"
+                        f"{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"
+                    )
+                    fig.add_trace(
+                        go.Scatter3d(
+                            x=[x_final[hyp_info_idx]],
+                            y=[y_final[hyp_info_idx]],
+                            z=[z_final[hyp_info_idx]],
+                            mode='markers',
+                            marker=dict(size=8, color=color_map(obj_name), symbol='cross',
+                                        opacity=1.0, line=dict(color='white', width=2)),
+                            name='',
+                            text=[hyp_hover_text],
+                            customdata=[f"{obj_name} Keplerian Orbit"],
+                            hovertemplate='%{text}<extra></extra>',
+                            legendgroup=hyp_legend_group,
+                            showlegend=False
+                        )
+                    )
+
                     # ========== CALCULATE EXACT PERIAPSIS AT THETA=0 FOR HYPERBOLIC ==========
                     from apsidal_markers import calculate_exact_apsides
 
@@ -5581,7 +5625,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             if 'epoch' in params:
                 epoch_str = f" (Epoch: {params['epoch']})"
 
-            # PLOT THE ORBIT LINE - THIS IS CRITICAL!
+            # PLOT THE ORBIT LINE - geometry only, hover on info marker
+            kep_legend_group = f"{obj_name}_keplerian"
             fig.add_trace(
                 go.Scatter3d(
                     x=x_final,
@@ -5590,11 +5635,34 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     mode='lines',
                     line=dict(dash='dot', width=1, color=color_map(obj_name)),
                     name=f"{obj_name} Keplerian Orbit{epoch_str}",
-            #        text=[f"{obj_name} Keplerian Orbit"] * len(x_final),
-                    text=[f"{obj_name} Keplerian Orbit<br>a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg{get_planet_perturbation_note(obj_name)}{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"] * len(x_final),
-                    customdata=[f"{obj_name} Keplerian Orbit"] * len(x_final),
-                    hovertemplate='%{text}<extra></extra>',
+                    hoverinfo='skip',
+                    legendgroup=kep_legend_group,
                     showlegend=True                    
+                )
+            )
+
+            # Single info marker for Keplerian orbit (opposite perihelion for clarity)
+            kep_info_idx = len(x_final) // 4  # ~aphelion region, away from apsidal markers
+            kep_hover_text = (
+                f"{obj_name} Keplerian Orbit<br>"
+                f"a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg"
+                f"{get_planet_perturbation_note(obj_name)}"
+                f"{get_mean_vs_osculating_assessment(obj_name, params, ORIGINAL_planetary_params.get(obj_name, {}))}"
+            )
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[x_final[kep_info_idx]],
+                    y=[y_final[kep_info_idx]],
+                    z=[z_final[kep_info_idx]],
+                    mode='markers',
+                    marker=dict(size=8, color=color_map(obj_name), symbol='cross',
+                                opacity=1.0, line=dict(color='white', width=2)),
+                    name='',
+                    text=[kep_hover_text],
+                    customdata=[f"{obj_name} Keplerian Orbit"],
+                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=kep_legend_group,
+                    showlegend=False
                 )
             )
 

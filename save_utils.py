@@ -27,10 +27,11 @@ Usage:
                        output_path="output.html")
 
 HTML Options:
-    - CDN (default): ~10 KB files, requires internet connection to view
-    - Offline: ~5 MB files, works without internet (embeds Plotly.js)
+    - CDN (default): ~10 KB files + plot data, requires internet connection to view
+    - Offline: ~5 MB files + plot data, works without internet (embeds Plotly.js)
 
 Author: Tony Quintanilla / Paloma's Orrery
+Module updated: April 2026 with Anthropic's Claude Opus 4.6
 """
 
 import tkinter as tk
@@ -92,7 +93,7 @@ def _write_html(fig, file_path, offline=False, auto_play=False):
     Parameters:
         fig: Plotly figure object
         file_path: Output file path
-        offline: If True, embed Plotly.js (~5MB). If False, use CDN (~10KB)
+        offline: If True, embed Plotly.js (~5MB + plot data). If False, use CDN (~10KB)
         auto_play: If True, start animations automatically
     """
     include_plotlyjs = True if offline else 'cdn'
@@ -237,19 +238,19 @@ def _save_with_dialog(fig, default_name, auto_play=False, open_browser=False):
         format_window.grab_set()
         
         # Center the window
-        format_window.geometry("350x200")
+        format_window.geometry("350x230")
         format_window.resizable(False, False)
         
         # Variable to store selection
-        format_var = tk.StringVar(value="html_cdn")
+        format_var = tk.StringVar(master=format_window, value="html_cdn")
         
         tk.Label(format_window, text="Choose save format:", 
                  font=('TkDefaultFont', 10, 'bold')).pack(pady=(15, 10))
         
-        tk.Radiobutton(format_window, text="Interactive HTML - Standard (~10 KB, needs internet)",
-                       variable=format_var, value="html_cdn").pack(anchor='w', padx=20)
-        tk.Radiobutton(format_window, text="Interactive HTML - Offline (~5 MB, works anywhere)",
-                       variable=format_var, value="html_offline").pack(anchor='w', padx=20)
+        tk.Radiobutton(format_window, text="Interactive HTML - Standard (~10 KB + plot data, needs internet)",
+                       variable=format_var, value="html_cdn", wraplength=280).pack(anchor='w', padx=20)
+        tk.Radiobutton(format_window, text="Interactive HTML - Offline (~5 MB + plot data, works anywhere)",
+                       variable=format_var, value="html_offline", wraplength=280).pack(anchor='w', padx=20)
         tk.Radiobutton(format_window, text="Static PNG image",
                        variable=format_var, value="png").pack(anchor='w', padx=20)
         
@@ -306,7 +307,7 @@ def _save_with_dialog(fig, default_name, auto_play=False, open_browser=False):
         
         else:  # HTML (CDN or offline)
             offline = (format_choice == "html_offline")
-            size_note = "~5 MB, works offline" if offline else "~10 KB, needs internet"
+            size_note = "~5 MB + plot data, works offline" if offline else "~10 KB + plot data, needs internet"
             
             file_path = filedialog.asksaveasfilename(
                 parent=root,
