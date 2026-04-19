@@ -30,7 +30,7 @@ import math
 import numpy as np
 import re
 
-from constants_new import KM_PER_AU
+from constants_new import KM_PER_AU, SPEED_OF_LIGHT_KM_S
 
 # =============================================================================
 # TEMPERATURE AND COLOR UTILITIES
@@ -147,7 +147,6 @@ def get_orbit_color(star_data):
 
 G_CONST = 6.67430e-11           # Gravitational constant (m^3 kg^-1 s^-2)
 SPEED_OF_LIGHT = 299792458.0    # Speed of light (m/s)
-SPEED_OF_LIGHT_KM_S = 299792.458  # Speed of light (km/s)
 SOLAR_MASS_KG = 1.989e30        # Solar mass (kg)
 
 # AU conversion — imported from constants_new.py for single source of truth.

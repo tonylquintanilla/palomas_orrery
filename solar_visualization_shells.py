@@ -29,6 +29,7 @@ from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_A
 # Sun Visualization Functions
 #####################################
 
+# Source: GRAVITATIONAL_INFLUENCE_AU=126000 in constants_new.py; NASA Solar System Exploration
 gravitational_influence_info = (
             "SELECT A MANUAL SCALE OF AT LEAST 160,000 AU TO VISUALIZE.\n\n"
             
@@ -54,6 +55,7 @@ gravitational_influence_info = (
             "to the Oort Cloud population."
         )
 
+# Source: Dones et al. (2004); OUTER_OORT_CLOUD_AU=100000 in constants_new.py
 outer_oort_info = (
             "Oort Cloud: Outer Limit of Outer Oort Cloud:\n\n"
             
@@ -71,6 +73,7 @@ outer_oort_info = (
             "susceptible to external gravitational perturbations."
         )
 
+# Source: Hills (1981); INNER_OORT_CLOUD_AU=20000 in constants_new.py
 inner_oort_info = (
             "Oort Cloud: Outer Limit of Inner Oort Cloud:\n\n"
 
@@ -85,6 +88,7 @@ inner_oort_info = (
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
 
+# Source: Dones et al. (2004); INNER_LIMIT_OORT_CLOUD_AU=2000 in constants_new.py
 inner_limit_oort_info = (
             "Oort Cloud: Inner Limit:\n\n"
 
@@ -99,6 +103,7 @@ inner_limit_oort_info = (
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
 
+# Source: Hills (1981) AJ; INNER_OORT_CLOUD_AU=20000, INNER_LIMIT_OORT_CLOUD_AU=2000 in constants_new.py
 hills_cloud_torus_info = (
             "Oort Cloud: Hills Cloud Torus:\n\n"
 
@@ -123,6 +128,7 @@ hills_cloud_torus_info = (
             "* NEOWISE survey improving population estimates"
         )
 
+# Source: Dones et al. (2004); OUTER_OORT_CLOUD_AU=100000 in constants_new.py
 outer_oort_clumpy_info = (
             "Oort Cloud: Clumpy Oort Cloud:\n\n"
 
@@ -147,6 +153,7 @@ outer_oort_clumpy_info = (
             "* NEOWISE survey improving population estimates"
         )
 
+# Source: Dones et al. (2004) Comets II -- galactic tidal sculpting of Oort Cloud; GRAVITATIONAL_INFLUENCE_AU=126000 in constants_new.py
 galactic_tide_info = (
             "Oort Cloud: Galactic Tide Influenced Oort:\n\n"
 
@@ -171,6 +178,7 @@ galactic_tide_info = (
             "* NEOWISE survey improving population estimates"
         )
 
+# Source: NASA Heliophysics / Ulysses mission; solar wind speed 400-800 km/s from multiple spacecraft
 solar_wind_info = (
             "Solar Wind: Heliopause:\n\n"
 
@@ -203,6 +211,7 @@ solar_wind_info = (
             "* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye."
         )
 
+# Source: constants_new.py TERMINATION_SHOCK_AU=94; Stone et al. (2005) Science -- Voyager 1 at 94 AU, Voyager 2 at 84 AU
 termination_shock_info = (
             "Solar Wind: Termination Shock:\n\n"
 
@@ -216,6 +225,7 @@ termination_shock_info = (
             "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
         )
 
+# Source: constants_new.py OUTER_CORONA_RADII=50; Koutchmy (1994) F-corona review
 outer_corona_info = (
     "Sun: Extended Corona (F-corona / Outer):\n\n"
 
@@ -235,6 +245,7 @@ outer_corona_info = (
     "* The corona radiates at ~1.159 nm average wavelength (extreme ultraviolet to X-ray)."
 )
 
+# Source: constants_new.py INNER_CORONA_RADII=3; NASA Solar Dynamics Observatory
 inner_corona_info = (
             "Sun: Inner Corona:\n\n"
 
@@ -266,6 +277,7 @@ inner_corona_info = (
             "* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
         )
 
+# Source: constants_new.py CHROMOSPHERE_RADII=1.5; Golub & Pasachoff (2010) The Solar Corona
 chromosphere_info = (
             "Sun: Chromosphere:\n\n"
 
@@ -294,6 +306,7 @@ chromosphere_info = (
             "* Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible."
         )
 
+# Source: NASA Solar System Exploration (solarsystem.nasa.gov/solar-system/sun); SUN_RADIUS_KM=695700 in constants_new.py
 photosphere_info = (
             "Sun: Photosphere\n\n"
 
@@ -326,6 +339,7 @@ photosphere_info = (
             "      communication systems, and power grids.\n\n"
         )
 
+# Source: NASA Solar Interior model; constants_new.py RADIATIVE_ZONE_AU=0.7*SOLAR_RADIUS_AU
 radiative_zone_info = (
             "Sun: Radiative Zone\n\n"
 
@@ -354,6 +368,7 @@ radiative_zone_info = (
             "  the nuclear reactions taking place in the core and the conditions in the radiative zone."
             )
 
+# Source: NASA Solar Interior (nasa.gov/sun/facts); Bahcall et al. standard solar model
 core_info = (
             "Sun: Solar Core\n\n"
 
@@ -386,6 +401,9 @@ core_info = (
             "  information about the nuclear reactions taking place there." 
             )
 
+# Source: NASA Solar System Exploration; constants_new.py pinned values (HELIOPAUSE_RADII, TERMINATION_SHOCK_AU,
+# OUTER_CORONA_RADII, INNER_CORONA_RADII, CHROMOSPHERE_RADII, GRAVITATIONAL_INFLUENCE_AU, Oort Cloud AU constants);
+# Dones et al. (2004) Comets II; Golub & Pasachoff (2010) The Solar Corona; NASA solar interior model
 gravitational_influence_info_hover = (
             "Sun: Outer Limit of Gravitational Influence:<br><br>" 
 
@@ -486,6 +504,8 @@ solar_wind_info_hover = (
             "* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye."
         )
 
+# Source: Stone et al. (2005) Science -- Voyager 1/2 termination shock;
+# TERMINATION_SHOCK_AU=94, STREAMER_BELT_RADII=6 in constants_new.py
 termination_shock_info_hover = (
             "Solar Wind: Termination Shock:<br><br>"
 
@@ -520,6 +540,7 @@ outer_corona_info_hover = (
     "already inside this shell and approaching the Alfven surface."
 )
 
+# Source: constants_new.py STREAMER_BELT_RADII=6.0; NASA Solar Wind / SOHO LASCO observations
 streamer_belt_info = (
     "Sun: Streamer Belt / Visible Corona:\n\n"
 
@@ -562,6 +583,7 @@ streamer_belt_info_hover = (
     "It passed through this visible streamer belt on April 3-4 before perihelion."
 )
 
+# Source: constants_new.py ROCHE_LIMIT_RADII=3.45 (Ida et al. 2020); Ikeya-Seki survived at 1.66 R_sun (tensile strength)
 roche_limit_info = (
     "Sun: Roche Limit (Fluid Body / Comet):\n\n"
 
@@ -616,6 +638,7 @@ roche_limit_info_hover = (
     "* The nucleus never reached the Roche limit intact"
 )
 
+# Source: Cranmer et al. (2007); NASA Parker Solar Probe -- Alfven surface ~18.8 R_sun, solar corona boundary
 alfven_surface_info = (
     "Sun: Alfven Surface:\n\n"
 
@@ -690,6 +713,8 @@ inner_corona_info_hover = (
     "* Radiates at an average wavelength of 1.93 nm, extreme ultraviolet to soft X-ray."
 )
 
+# Source: NASA solar interior model; Golub & Pasachoff (2010) The Solar Corona;
+# Bahcall et al. standard solar model; SUN_RADIUS_KM=695700 in constants_new.py
 chromosphere_info_hover = (
             "Sun: Chromosphere:<br><br>"
 
@@ -750,6 +775,8 @@ photosphere_info_hover = (
             "      communication systems, and power grids.<br><br>"
         )
 
+# Source: Bahcall et al. standard solar model; NASA solar interior;
+# CORE_AU=0.2*SOLAR_RADIUS_AU, RADIATIVE_ZONE_AU=0.7*SOLAR_RADIUS_AU in constants_new.py
 radiative_zone_info_hover = (
             "Sun: Radiative Zone<br><br>"
 
@@ -1203,6 +1230,8 @@ def create_sun_streamer_belt_shell():
     return [shell_trace, info_trace]
 
 
+# Source: ROCHE_LIMIT_RADII=3.45 in constants_new.py; Ida et al. (2020);
+# MAPS disintegration at 8.33 R_sun from SOHO/CCOR-1 observations April 2026
 def create_sun_roche_limit_shell():
     """
     Fluid Roche limit for cometary bodies: ~3.45 solar radii (~0.016 AU).
@@ -1691,7 +1720,7 @@ def create_oort_cloud_density_visualization():
     return traces
 
 # Source: NASA Oort Cloud Overview; Dones et al. (2004) Comets II; MPC (Sedna, 2012 VP113 as inner Oort evidence)
-# Gemini fact-check Apr 2026: Jupiter-family comets corrected to short-period comets (Kuiper Belt/Scattered Disk origin)
+# Gemini fact-check Apr 2026: corrected short-period comet origin (Kuiper Belt/Scattered Disk, not Hills Cloud)
 # Updated hover text with current scientific understanding
 enhanced_oort_hover_text = """
 <b>The Oort Cloud: Current Scientific Understanding</b><br><br>

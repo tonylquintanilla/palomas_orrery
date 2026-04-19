@@ -1791,6 +1791,9 @@ def add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetim
 # TWO objects that are both plotted — e.g. New Horizons relative to Pluto
 # when both have heliocentric positions.
 
+# Source: Jupiter Hill sphere ~0.35 AU (m_J/3m_sun)^(1/3) * a_J; threshold set
+# generously at 0.5 AU to capture all close approaches. Engineering choice, not
+# a physical constant -- see compute_pairwise_encounter() for usage context.
 # Encounter threshold: maximum relative distance (AU) to qualify as encounter.
 # Jupiter's Hill sphere is ~0.35 AU. Start generous.
 ENCOUNTER_THRESHOLD_AU = 0.5

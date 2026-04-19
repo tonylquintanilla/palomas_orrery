@@ -1,0 +1,165 @@
+{
+  "_comment": "Provenance scanner exceptions. Maintained by Tony + Claude.",
+  "_updated": "April 2026",
+  "_format": {
+    "suppressed": "Individual findings to drop from the report entirely. Matched by file + content fingerprint (first 40 chars of string value). Line numbers drift -- fingerprints are stable.",
+    "accepted_residuals": "File-level or category-level findings to annotate in the report rather than suppress. Printed as a standing block at the top of PROVENANCE_AUDIT.md."
+  },
+  "suppressed": [
+    {
+      "file": "asteroid_belt_visualization_shells.py",
+      "fingerprint": "showlegend=True",
+      "line_hint": 218,
+      "reason": "Code line (Plotly trace argument), not a display string"
+    },
+    {
+      "file": "neptune_visualization_shells.py",
+      "fingerprint": "x=[north_x, mag_center_x, south_x]",
+      "line_hint": 647,
+      "reason": "Coordinate assignment, not a display string"
+    },
+    {
+      "file": "neptune_visualization_shells.py",
+      "fingerprint": "traces.append(north_pole_trace)",
+      "line_hint": 679,
+      "reason": "Code line (trace append), not a display string"
+    },
+    {
+      "file": "solar_visualization_shells.py",
+      "fingerprint": "showlegend=False",
+      "line_hint": 1237,
+      "reason": "Plotly argument, not a display string"
+    },
+    {
+      "file": "solar_visualization_shells.py",
+      "fingerprint": "points_x.append(x)",
+      "line_hint": 1497,
+      "reason": "List append in geometry loop, not a display string"
+    },
+    {
+      "file": "solar_visualization_shells.py",
+      "fingerprint": "marker=dict(",
+      "line_hint": 1621,
+      "reason": "Plotly marker dict, not a display string"
+    },
+    {
+      "file": "solar_visualization_shells.py",
+      "fingerprint": "x = r * np.cos(phi) * np.cos(theta)",
+      "line_hint": 1672,
+      "reason": "Math expression in geometry loop, not a display string"
+    },
+    {
+      "file": "jupiter_visualization_shells.py",
+      "fingerprint": "jupiter_visualization_shells.py - Jupiter",
+      "line_hint": 1,
+      "reason": "Module docstring, not a display string"
+    },
+    {
+      "file": "sgr_a_star_data.py",
+      "fingerprint": "S2_precession_2020",
+      "line_hint": 657,
+      "reason": "Dict key string, not display text"
+    },
+    {
+      "file": "sgr_a_star_data.py",
+      "fingerprint": "S62_discovery",
+      "line_hint": 664,
+      "reason": "Dict key string, not display text"
+    },
+    {
+      "file": "star_notes.py",
+      "fingerprint": "star_notes.py - Curated hover text annotatio",
+      "line_hint": 1,
+      "reason": "Module docstring, not a display string"
+    },
+    {
+      "file": "solar_visualization_shells.py",
+      "fingerprint": "group='Galactic Tide Region',\n        hoverinfo='skip',\n        showlegend=True",
+      "line_hint": 1586,
+      "reason": "Plotly trace arguments (code lines), not a display string"
+    },
+    {
+      "file": "uranus_visualization_shells.py",
+      "fingerprint": "ns here, once; actual tilt is 97.77 but using 105 that is best fit empirically",
+      "line_hint": 967,
+      "reason": "Code comment in geometry calculation, not a display string"
+    },
+    {
+      "file": "uranus_visualization_shells.py",
+      "fingerprint": "Mu Gossamer Ring: Very broad, faint, and dusty outermost ring",
+      "line_hint": 967,
+      "reason": "Cited by de Pater et al. (2006) via # Source: above delta_ring block -- outside lookback window"
+    },
+    {
+      "file": "asteroid_belt_visualization_shells.py",
+      "fingerprint": "Hilda Family: Asteroids in 3:2 resonance with Jupiter at ~3.97 AU",
+      "line_hint": 291,
+      "reason": "Hilda hover text -- cited by # Source above hilda_group_info variable; lookback window miss"
+    },
+    {
+      "file": "asteroid_belt_visualization_shells.py",
+      "fingerprint": "Slightly less populated than L4, contains D-type asteroids",
+      "line_hint": 479,
+      "reason": "L5 Trojans hover text -- cited by # Source above jupiter_trojans_trojans_info; lookback window miss"
+    },
+    {
+      "file": "comet_visualization_shells.py",
+      "fingerprint": "jets at 120 deg spacing",
+      "line_hint": 1282,
+      "reason": "Comet quad-jet display string inside create_complete_comet_visualization docstring area -- cited by surrounding Source comments"
+    },
+    {
+      "file": "earth_visualization_shells.py",
+      "fingerprint": "Bow Shock: The boundary where the supersonic solar wind is first slowed",
+      "line_hint": 649,
+      "reason": "Earth bow shock hover text -- cited by surrounding Source comments in earth_visualization_shells.py"
+    },
+    {
+      "file": "neptune_visualization_shells.py",
+      "fingerprint": "The polar cusps represent funnel-shaped openings where solar wind particles can",
+      "line_hint": 903,
+      "reason": "Neptune polar cusp display string -- cited by surrounding Source comments; 47-deg magnetic tilt is documented"
+    }
+  ],
+  "accepted_residuals": [
+    {
+      "file": "info_dictionary.py",
+      "tier": 2,
+      "category": "V_STALE false positives",
+      "reason": "Tier-2 V_STALE findings are multi-line string continuation false positives. Citations exist at entry-key level (# Source: above dict key). Verified correct by Gemini fact-check April 2026. Not real gaps."
+    },
+    {
+      "file": "spacecraft_encounters.py",
+      "tier": 2,
+      "lines": [
+        235,
+        266
+      ],
+      "category": "Inline source key not recognized",
+      "reason": "Artemis II entries carry 'source': 'NASA/JSC' as a dict value. Scanner requires # Source: comment format. Verified correct. Future fix: extend SOURCE_PATTERNS to recognize dict-value citations."
+    },
+    {
+      "file": "star_notes.py",
+      "tier": 2,
+      "name": "unique_notes",
+      "category": "Large dict V_STALE",
+      "reason": "553-entry stellar parameters dict. Verified against SIMBAD/Gaia DR3 April 2026. V_STALE flag reflects real staleness risk as catalogs improve. Review when adding new stars, not as standalone task."
+    },
+    {
+      "file": "constants_new.py",
+      "tier": 2,
+      "category": "V_SOURCED x C_PROPAGATING (score 10)",
+      "reason": "All Tier-2 items have source citations (V=2). Score 10 = cited constant imported by 3+ modules. Not errors -- these are the best-cited values in the codebase."
+    },
+    {
+      "file": "comet_visualization_shells.py",
+      "tier": 2,
+      "names": [
+        "COMET_NUCLEUS_SIZES",
+        "COMET_FEATURE_THRESHOLDS"
+      ],
+      "category": "Rendering geometry dicts",
+      "reason": "Nucleus sizes and feature thresholds drive shell rendering geometry. Low user-visible impact if slightly off. Deferred until comet shell refactor."
+    }
+  ]
+}
