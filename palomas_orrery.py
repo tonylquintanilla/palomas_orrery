@@ -14,7 +14,7 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: April 27, 2026 with Anthropic's Claude Opus 4.6
 """
 #Paloma's Orrery - Solar System Visualization Tool
 # annotated by Tony working with Claude 
@@ -648,23 +648,33 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
 
     # Generic barycenter handling: if center is a barycenter in parent_planets,
     # use the children's orbital elements (which are barycentric, not heliocentric)
+    # BUT only when ALL selected objects are children of this parent -- if non-child
+    # objects are selected (e.g. Sun, Mercury, comets from Earth center), fall through
+    # to the general scaling logic so those objects drive the range.
     if center_object_name in parent_planets:
         children = parent_planets[center_object_name]
-        child_distances = []
-        for child_name in children:
-            if child_name in planetary_params:
-                child_params = planetary_params[child_name]
-                child_a = child_params.get('a', 0)
-                child_e = child_params.get('e', 0)
-                if child_a > 0:
-                    child_apoapsis = child_a * (1 + child_e)
-                    child_distances.append(child_apoapsis)
-                    print(f"[SCALING] {center_object_name} child '{child_name}': a={child_a:.6f} AU, apoapsis={child_apoapsis:.6f} AU", flush=True)
-        
-        if child_distances:
-            max_range = max(child_distances) * 1.5  # 1.5x buffer for comfortable viewing
-            print(f"[SCALING] {center_object_name} mode: using range +/-{max_range:.6f} AU (based on children's orbits)", flush=True)
-            return [-max_range, max_range]
+        # Check if any selected object is NOT a child of the center (and not the center itself)
+        selected_names = [obj['name'] for obj in selected_objects if obj['name'] != center_object_name]
+        has_non_children = any(name not in children for name in selected_names)
+
+        if not has_non_children:
+            child_distances = []
+            for child_name in children:
+                if child_name in planetary_params:
+                    child_params = planetary_params[child_name]
+                    child_a = child_params.get('a', 0)
+                    child_e = child_params.get('e', 0)
+                    if child_a > 0:
+                        child_apoapsis = child_a * (1 + child_e)
+                        child_distances.append(child_apoapsis)
+                        print(f"[SCALING] {center_object_name} child '{child_name}': a={child_a:.6f} AU, apoapsis={child_apoapsis:.6f} AU", flush=True)
+            
+            if child_distances:
+                max_range = max(child_distances) * 1.5  # 1.5x buffer for comfortable viewing
+                print(f"[SCALING] {center_object_name} mode: using range +/-{max_range:.6f} AU (based on children's orbits)", flush=True)
+                return [-max_range, max_range]
+        else:
+            print(f"[SCALING] {center_object_name} is a parent body but non-child objects selected -- using general scaling", flush=True)
 
     max_distances = []
     
@@ -2115,6 +2125,7 @@ mars_magnetosphere_var = tk.IntVar(value=0)
 mars_hill_sphere_var = tk.IntVar(value=0)
 
 ceres_var = tk.IntVar(value=0)
+psyche16_var = tk.IntVar(value=0)
 
 # Asteroid belt shell variables
 asteroid_belt_main_var = tk.IntVar(value=0)
@@ -2312,6 +2323,8 @@ pioneer10_var = tk.IntVar(value=0)
 pioneer11_var = tk.IntVar(value=0)
 
 europa_clipper_var = tk.IntVar(value=0)
+
+psyche_var = tk.IntVar(value=0)
 
 osiris_rex_var = tk.IntVar(value=0)
 osiris_apex_var = tk.IntVar(value=0)
@@ -5317,22 +5330,39 @@ def plot_objects():
 
             # ============ ADD COMET TAILS INTEGRATION ============
             # Conservative comet tail integration
+        #    for obj in objects:
+        #        if obj['var'].get() == 1:
+
+            # ============ ADD COMET TAILS INTEGRATION ============
+            # Conservative comet tail integration
+            # Sun position for correct tail direction when center != Sun
+            _sun_pos_data = positions.get('Sun')
+            _sun_pos_tuple = (
+                (_sun_pos_data['x'], _sun_pos_data['y'], _sun_pos_data['z'])
+                if _sun_pos_data and 'x' in _sun_pos_data else (0, 0, 0)
+            )
+
             for obj in objects:
                 if obj['var'].get() == 1:
-                    # Check if this is a comet by its properties
-                    
-            #        is_comet = (
-            #            obj.get('object_type') in ['orbital', 'trajectory'] and  # Allow both types
-            #            obj.get('id_type') == 'smallbody' and
-            #            obj.get('symbol') == 'diamond'
-            #        )
 
+                    # Check if this is a comet by its properties                    
                     is_comet = (
                         obj.get('object_type') in ['orbital', 'trajectory'] and  # Allow both types
                         obj.get('id_type') in ['smallbody', 'id'] and  # Numeric IDs for ambiguous comets
                         obj.get('symbol') == 'diamond' and
                         obj.get('show_tails', True)  # Fragments: show_tails=False suppresses tail viz
                     )
+
+            #        if is_comet and obj['name'] in positions:
+            #            print(f"Processing comet tails for {obj['name']}...", flush=True)
+            #            fig = add_comet_tails_to_figure(
+            #                fig,
+            #                obj['name'],
+            #                positions[obj['name']],
+            #                center_object_name,
+            #                current_date=date_obj
+            #            )
+            # ============ END COMET TAILS INTEGRATION ============
 
                     if is_comet and obj['name'] in positions:
                         print(f"Processing comet tails for {obj['name']}...", flush=True)
@@ -5341,9 +5371,11 @@ def plot_objects():
                             obj['name'],
                             positions[obj['name']],
                             center_object_name,
-                            current_date=date_obj
+                            current_date=date_obj,
+                            sun_position=_sun_pos_tuple
                         )
             # ============ END COMET TAILS INTEGRATION ============
+
 
             # Generate default name with timestamp
 #            current_date = datetime.now()
@@ -6623,25 +6655,28 @@ def animate_objects(step, label):
             # Conservative comet tail integration for first frame
             # Note: For animations, we only add tails to the initial figure state
             # as recalculating them every frame would be too expensive
+        #    if len(dates_list) > 0:
+        #        first_frame_date = dates_list[0]
+        #        print(f"\n[COMET TAILS] Adding comet tails for animation initial state (date: {first_frame_date})", flush=True)
+                
+        #        for obj in objects:
+
             if len(dates_list) > 0:
                 first_frame_date = dates_list[0]
                 print(f"\n[COMET TAILS] Adding comet tails for animation initial state (date: {first_frame_date})", flush=True)
                 
+                # Sun position for correct tail direction when center != Sun
+                _sun_positions = positions_over_time.get('Sun')
+                if _sun_positions and len(_sun_positions) > 0 and _sun_positions[0] is not None:
+                    _sp = _sun_positions[0]
+                    _sun_pos_tuple = (_sp.get('x', 0), _sp.get('y', 0), _sp.get('z', 0))
+                else:
+                    _sun_pos_tuple = (0, 0, 0)
+
                 for obj in objects:
+
                     if obj['var'].get() == 1:
                         # Check if this is a comet by its properties
-                #        is_comet = (
-                #            obj.get('object_type') == 'orbital' and 
-                #            obj.get('id_type') == 'smallbody' and
-                #            obj.get('symbol') == 'diamond'
-                #        )
-                        
-                #        is_comet = (
-                #            obj.get('object_type') in ['orbital', 'trajectory'] and
-                #            obj.get('id_type') == 'smallbody' and
-                #            obj.get('symbol') == 'diamond' and
-                #            obj.get('show_tails', True)  # Fragments: show_tails=False suppresses tail viz
-                #        )
 
                         is_comet = (
                             obj.get('object_type') in ['orbital', 'trajectory'] and
@@ -6657,14 +6692,25 @@ def animate_objects(step, label):
                             if obj_positions and len(obj_positions) > 0 and obj_positions[0] is not None:
                                 first_position = obj_positions[0]
                                 print(f"Processing comet tails for {obj_name} in animation...", flush=True)
+                        #        fig = add_comet_tails_to_figure(
+                        #            fig,
+                        #            obj_name,
+                        #            first_position,
+                        #            center_object_name,
+                            #        current_date=date_obj
+                        #            current_date=first_frame_date
+                        #        )
+
                                 fig = add_comet_tails_to_figure(
                                     fig,
                                     obj_name,
                                     first_position,
                                     center_object_name,
                             #        current_date=date_obj
-                                    current_date=first_frame_date
+                                    current_date=first_frame_date,
+                                    sun_position=_sun_pos_tuple
                                 )
+
             # ============ END COMET TAILS INTEGRATION ============
 
             # NOW create frames - after trace_indices has been defined
@@ -8080,6 +8126,11 @@ create_celestial_checkbutton("Steins", steins_var)  # params
 create_celestial_checkbutton("Donaldjohanson", donaldjohanson_var)  # params
 create_celestial_checkbutton("Lutetia", lutetia_var)    # params
 create_celestial_checkbutton("Ceres", ceres_var)    # params
+create_celestial_checkbutton("16 Psyche", psyche16_var)    # params
+
+trojans_label = tk.Label(celestial_frame, text="Trojan Asteroids -- following Jupiter", font=("Arial", 9, "bold"))
+trojans_label.pack(anchor='w', pady=(5, 0))
+
 create_celestial_checkbutton("Orus", orus_var)  # params
 create_celestial_checkbutton("Polymele", polymele_var)  # params
 create_celestial_checkbutton("Eurybates", eurybates_var)    # params
@@ -8652,6 +8703,7 @@ create_mission_checkbutton("DART", dart_var, "(2021-11-25 to 2022-09-26)")
 create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to 2030-08-18)")
 create_mission_checkbutton("JUICE", juice_var, "(2023-04-15 to 2031-07-21)")
 create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2030-3-1)")
+create_mission_checkbutton("Psyche", psyche_var, "(2023-10-14 to 2029-06-26)")
 create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to 2031-02-07)")
 create_mission_checkbutton("Artemis II", artemis2_var, "(2026-04-02 2:00 to 2026-04-11)")
 

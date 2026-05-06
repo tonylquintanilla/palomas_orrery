@@ -817,7 +817,8 @@ def create_comet_coma(center_position=(0, 0, 0), coma_radius_km=100000,
 
 def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
                            max_tail_length_mkm=10, activity_factor=1.0, 
-                           comet_name="Generic", num_particles=800):
+                           comet_name="Generic", num_particles=800,
+                           sun_relative_position=None):
     """
     Creates the dust tail (Type II tail).
     
@@ -827,7 +828,7 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
     Parameters:
     -----------
     center_position : tuple
-        (x, y, z) position in AU
+        (x, y, z) position in AU (used for rendering particle positions)
     velocity_vector : tuple
         (vx, vy, vz) velocity vector for curved tail direction
     max_tail_length_mkm : float
@@ -838,6 +839,10 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
         Name of the comet
     num_particles : int
         Number of particles to render
+    sun_relative_position : tuple or None
+        (x, y, z) position relative to Sun in AU. When provided, used for
+        anti-sunward direction instead of center_position. Required when
+        the viewing center is not the Sun.
     """
     if activity_factor < 0.05:
         return []  # No visible tail if very inactive
@@ -847,16 +852,20 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
     max_tail_length_au = effective_length_km / KM_PER_AU
     
     # Calculate anti-solar direction
+    # Use sun_relative_position for direction when available (non-Sun center views)
+    dir_pos = sun_relative_position if sun_relative_position is not None else center_position
+    dir_x, dir_y, dir_z = dir_pos
+    sun_distance = math.sqrt(dir_x**2 + dir_y**2 + dir_z**2)
+    
     center_x, center_y, center_z = center_position
-    sun_distance = math.sqrt(center_x**2 + center_y**2 + center_z**2)
     
     if sun_distance < 1e-10:
         return []  # Can't compute at Sun's location
     
     # Anti-solar direction (away from Sun)
-    anti_solar_x = center_x / sun_distance
-    anti_solar_y = center_y / sun_distance
-    anti_solar_z = center_z / sun_distance
+    anti_solar_x = dir_x / sun_distance
+    anti_solar_y = dir_y / sun_distance
+    anti_solar_z = dir_z / sun_distance
     
     # Orbital velocity direction (for curve)
     vel_x, vel_y, vel_z = velocity_vector
@@ -987,7 +996,8 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
 
 
 def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
-                          activity_factor=1.0, comet_name="Generic", num_particles=600):
+                          activity_factor=1.0, comet_name="Generic", num_particles=600,
+                          sun_relative_position=None):
     """
     Creates the ion tail (Type I tail, plasma tail).
     
@@ -997,7 +1007,7 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
     Parameters:
     -----------
     center_position : tuple
-        (x, y, z) position in AU
+        (x, y, z) position in AU (used for rendering particle positions)
     max_tail_length_mkm : float
         Maximum tail length in millions of kilometers
     activity_factor : float
@@ -1006,6 +1016,9 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
         Name of the comet
     num_particles : int
         Number of particles to render
+    sun_relative_position : tuple or None
+        (x, y, z) position relative to Sun in AU. When provided, used for
+        anti-sunward direction instead of center_position.
     """
     if activity_factor < 0.05:
         return []  # No visible tail if very inactive
@@ -1015,15 +1028,19 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
     max_tail_length_au = effective_length_km / KM_PER_AU
     
     # Calculate anti-solar direction (ion tail points directly away from Sun)
+    # Use sun_relative_position for direction when available (non-Sun center views)
+    dir_pos = sun_relative_position if sun_relative_position is not None else center_position
+    dx, dy, dz = dir_pos
+    sun_distance = math.sqrt(dx**2 + dy**2 + dz**2)
+    
     center_x, center_y, center_z = center_position
-    sun_distance = math.sqrt(center_x**2 + center_y**2 + center_z**2)
     
     if sun_distance < 1e-10:
         return []  # Can't compute at Sun's location
     
-    dir_x = center_x / sun_distance
-    dir_y = center_y / sun_distance
-    dir_z = center_z / sun_distance
+    dir_x = dx / sun_distance
+    dir_y = dy / sun_distance
+    dir_z = dz / sun_distance
     
     # Create tail particles - narrow cone, straighter than dust tail
     tail_points_x = []
@@ -1121,7 +1138,7 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
 def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000,
                            activity_factor=1.0, comet_name="Generic",
                            anti_tail_color='#C0C0C8', collimation_ratio=0.1,
-                           num_particles=200):
+                           num_particles=200, sun_relative_position=None):
     """
     Creates anti-tail jet structure pointing TOWARD the Sun.
     
@@ -1138,7 +1155,7 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
     Parameters:
     -----------
     center_position : tuple
-        (x, y, z) position in AU
+        (x, y, z) position in AU (used for rendering particle positions)
     anti_tail_length_km : float
         Length of anti-tail in km (e.g., 400,000 for 3I/ATLAS)
     activity_factor : float
@@ -1151,21 +1168,28 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
         Width-to-length ratio (0.1 = 10:1 length-to-width, tightly collimated)
     num_particles : int
         Number of particles for the DOMINANT anti-tail jet
+    sun_relative_position : tuple or None
+        (x, y, z) position relative to Sun in AU. When provided, used for
+        sunward direction instead of center_position.
     """
     if activity_factor < 0.05:
         return []
     
     # Calculate SUNWARD direction (opposite of normal tail direction)
+    # Use sun_relative_position for direction when available (non-Sun center views)
+    dir_pos = sun_relative_position if sun_relative_position is not None else center_position
+    dx, dy, dz = dir_pos
+    sun_distance = math.sqrt(dx**2 + dy**2 + dz**2)
+    
     center_x, center_y, center_z = center_position
-    sun_distance = math.sqrt(center_x**2 + center_y**2 + center_z**2)
     
     if sun_distance < 1e-10:
         return []
     
     # Unit vector TOWARD the Sun
-    sun_dir_x = -center_x / sun_distance
-    sun_dir_y = -center_y / sun_distance
-    sun_dir_z = -center_z / sun_distance
+    sun_dir_x = -dx / sun_distance
+    sun_dir_y = -dy / sun_distance
+    sun_dir_z = -dz / sun_distance
     
     # Build perpendicular basis vectors (reused for all jets)
     if abs(sun_dir_z) < 0.9:
@@ -1522,7 +1546,8 @@ COMET_FEATURE_THRESHOLDS = {
 
 
 def add_comet_tails_to_figure(fig, comet_name, position_data, 
-                               center_object_name='Sun', current_date=None):
+                               center_object_name='Sun', current_date=None,
+                               sun_position=None):
     """
     Add comet visualization to figure with feature-specific thresholds.
     
@@ -1539,6 +1564,10 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
         Position data with 'x', 'y', 'z' keys (in AU) and optionally 'velocity' or 'vx', 'vy', 'vz'
     center_object_name : str
         Name of the center object (for coordinate adjustment), default 'Sun'
+    sun_position : tuple or None
+        (x, y, z) of the Sun in center-relative coordinates.
+        None or (0,0,0) when center IS the Sun. Required for correct tail
+        direction and feature thresholds when center is not the Sun.
     
     Returns:
     --------
@@ -1563,14 +1592,24 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
         print(f"[COMET VIZ] Warning: No position data available for {comet_name}, skipping visualization")
         return fig
 
-    # Get position
+    # Get position (center-relative, used for rendering)
     pos_x = position_data.get('x', 0)
     pos_y = position_data.get('y', 0)
     pos_z = position_data.get('z', 0)
     position_au = (pos_x, pos_y, pos_z)
     
-    # Calculate distance from Sun
-    distance_au = math.sqrt(pos_x**2 + pos_y**2 + pos_z**2)
+    # Compute Sun-relative position for tail direction and distance thresholds.
+    # Tail direction is always anti-sunward; feature visibility depends on
+    # distance from Sun (sublimation is solar-driven), not distance from center.
+    if sun_position is not None:
+        sun_rel = (pos_x - sun_position[0],
+                   pos_y - sun_position[1],
+                   pos_z - sun_position[2])
+    else:
+        sun_rel = position_au  # center IS Sun
+    
+    # Distance from Sun (for feature thresholds)
+    distance_au = math.sqrt(sun_rel[0]**2 + sun_rel[1]**2 + sun_rel[2]**2)
     
     # Get velocity if available
     velocity_km_s = position_data.get('velocity', None)
@@ -1639,7 +1678,8 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
             traces = create_comet_dust_tail(
                 position_au, velocity_km_s,
                 comet_data['max_dust_tail_length_mkm'],
-                activity_factor * dust_scale, 'MAPS'
+                activity_factor * dust_scale, 'MAPS',
+                sun_relative_position=sun_rel
             )
             for tr in traces:
                 tr.name = 'MAPS: Dust Trail (Remains)'
@@ -1648,7 +1688,8 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
         if features_visible['ion_tail']:
             traces = create_comet_ion_tail(
                 position_au, comet_data['max_ion_tail_length_mkm'],
-                activity_factor * ion_scale, 'MAPS'
+                activity_factor * ion_scale, 'MAPS',
+                sun_relative_position=sun_rel
             )
             for tr in traces:
                 tr.name = 'MAPS: Ion Trail (Remains)'
@@ -1747,13 +1788,14 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
             
             if dust_tail_count <= 1:
                 traces.extend(create_comet_dust_tail(
-                    position_au, velocity_km_s, dust_length, activity_factor, comet_name
+                    position_au, velocity_km_s, dust_length, activity_factor, comet_name,
+                    sun_relative_position=sun_rel
                 ))
             else:
                 # Multiple dust tails in fan pattern
                 fan_half_angle = comet_data.get('dust_tail_fan_angle', 30)
                 
-                cx, cy, cz = position_au
+                cx, cy, cz = sun_rel  # Use Sun-relative position for direction
                 sun_dist = math.sqrt(cx**2 + cy**2 + cz**2)
                 
                 if sun_dist > 1e-10:
@@ -1794,7 +1836,8 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
                         
                         tail_traces = create_comet_dust_tail(
                             position_au, modified_vel, tail_len,
-                            activity_factor, comet_name, num_particles=num_p
+                            activity_factor, comet_name, num_particles=num_p,
+                            sun_relative_position=sun_rel
                         )
                         
                         if t_idx > 0 and tail_traces:
@@ -1805,14 +1848,16 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
                 else:
                     # Fallback to single tail if at Sun
                     traces.extend(create_comet_dust_tail(
-                        position_au, velocity_km_s, dust_length, activity_factor, comet_name
+                        position_au, velocity_km_s, dust_length, activity_factor, comet_name,
+                        sun_relative_position=sun_rel
                     ))
         
         # 4. Ion tail (if close enough)
         if features_visible['ion_tail']:
             ion_length = comet_data['max_ion_tail_length_mkm']
             traces.extend(create_comet_ion_tail(
-                position_au, ion_length, activity_factor, comet_name
+                position_au, ion_length, activity_factor, comet_name,
+                sun_relative_position=sun_rel
             ))
         
         # 5. Anti-tail (if comet has anti_tail_length_km defined and is active)
@@ -1822,7 +1867,8 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
             anti_tail_collimation = comet_data.get('anti_tail_collimation', 0.1)
             traces.extend(create_comet_anti_tail(
                 position_au, anti_tail_length, activity_factor,
-                comet_name, anti_tail_color, anti_tail_collimation
+                comet_name, anti_tail_color, anti_tail_collimation,
+                sun_relative_position=sun_rel
             ))
         
         # 6. Sun direction indicator (if any tail is visible)

@@ -19,6 +19,12 @@ Part of Paloma's Orrery - Data Preservation is Climate Action
 Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; hardcoded AU-in-km values replaced with KM_PER_AU
 import from constants_new.py; line endings normalized to LF)
+
+Module updated: April 26, 2026 with Anthropic's Claude Opus 4.6
+ 
+Module updated: May 2, 2026 with Anthropic's Claude Opus 4.6
+(_wrap_hover_text: word-wrap long mission_info text in closest plotted
+point hover labels to prevent overflow beyond plot boundaries)
 """
 
 import numpy as np
@@ -1375,6 +1381,32 @@ def add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position,
         )
     )
 
+
+def _wrap_hover_text(text, width=55):
+    """Word-wrap text for Plotly hover labels using <br> tags.
+
+    Plotly hover labels have no CSS max-width; they grow to fit the
+    content.  Long unbroken strings (like mission_info notes) create
+    labels wider than the plot.  This inserts <br> at word boundaries
+    to keep hover labels readable.
+    """
+    words = text.split()
+    lines = []
+    current_line = []
+    current_len = 0
+    for word in words:
+        if current_len + len(word) + 1 > width and current_line:
+            lines.append(' '.join(current_line))
+            current_line = [word]
+            current_len = len(word)
+        else:
+            current_line.append(word)
+            current_len += len(word) + (1 if current_len else 0)
+    if current_line:
+        lines.append(' '.join(current_line))
+    return '<br>'.join(lines)
+
+
 # def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None):
 def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None, marker_color=None, obj_info=None):
 
@@ -1469,22 +1501,37 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         km_str = f"{km_distance:.1f} km"
     else:
         km_str = f"{km_distance:,.0f} km"
-    
+        
     hover_text = (
         f"<b>{obj_name} {label}</b><br>"
         f"Date: {date_str_formatted}<br>"
         f"Distance from center: {au_str}<br>"
         f"Distance from center: {km_str}"
     )
-    
+
+    # Add center body radius and surface distance if known
+    if center_body in CENTER_BODY_RADII:
+        center_radius_km = CENTER_BODY_RADII[center_body]
+        center_radius_au = center_radius_km / KM_PER_AU
+        surface_km = km_distance - center_radius_km
+        surface_au = closest_distance - center_radius_au
+        hover_text += (
+            f"<br>{center_body} radius: {center_radius_km:,.0f} km"
+            f" ({center_radius_au:.6f} AU)"
+            f"<br>Distance from surface: {surface_km:,.0f} km"
+            f" ({surface_au:.6f} AU)"
+        )
+
     # Append mission context if available (spacecraft encounter infrastructure)
     if obj_info:
         mission_info = obj_info.get('mission_info', '')
         if mission_info:
-            # Truncate long mission_info for hover — first 300 chars
-            if len(mission_info) > 300:
-                mission_info = mission_info[:297] + '...'
-            hover_text += f"<br><br><i>{mission_info}</i>"
+    #        hover_text += f"<br><br><i>{mission_info}</i>"
+
+            # Word-wrap long text to prevent hover label overflow
+            # (Plotly hover labels grow to fit; no CSS max-width)
+            wrapped = _wrap_hover_text(mission_info, width=55)
+            hover_text += f"<br><br><i>{wrapped}</i>"
 
     # Add marker to plot 
     fig.add_trace(
@@ -1982,11 +2029,12 @@ def add_encounter_marker(fig, encounter, sc_name, target_name, color_map, obj_in
     if obj_info:
         mission_info = obj_info.get('mission_info', '')
         if mission_info:
-            if len(mission_info) > 300:
-                mission_info = mission_info[:297] + '...'
             lines.append('')
-            lines.append(f"<i>{mission_info}</i>")
+    #        lines.append(f"<i>{mission_info}</i>")
     
+            wrapped = _wrap_hover_text(mission_info, width=55)
+            lines.append(f"<i>{wrapped}</i>")
+
     lines.append('')
     lines.append('<i>Note: Closest sampled point from trajectory data.</i>')
     lines.append('<i>Precision depends on time step resolution.</i>')

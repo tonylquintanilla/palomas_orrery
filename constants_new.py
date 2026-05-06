@@ -245,6 +245,7 @@ CENTER_BODY_RADII = {       # km (equatorial for major bodies, volumetric for sm
     'Earth':    6378.137,   # IAU 2015 nominal equatorial (WGS-84; polar = 6356.752)
     'Moon':     1737.4,     # NASA Fact Sheet (volumetric mean; oblateness ~0.0012)
     'Mars':     3396.2,     # IAU 2015 nominal equatorial (volumetric = 3389.5)
+    'Phobos':   11.1,       # NASA/JPL Solar System Dynamics group
     'Jupiter':  71492,      # IAU 2015 nominal equatorial (volumetric = 69911)
     'Saturn':   60268,      # IAU 2015 nominal equatorial (volumetric = 58232)
     'Uranus':   25559,      # IAU 2015 nominal equatorial (volumetric = 25362)
@@ -261,14 +262,15 @@ CENTER_BODY_RADII = {       # km (equatorial for major bodies, volumetric for sm
 
 KNOWN_ORBITAL_PERIODS = {
     # Planets (converted from years to days)
-    'Mercury': 87.969,      
-    'Venus': 224.701,       
-    'Earth': 365.256,       
-    'Mars': 686.980,        
-    'Jupiter': 4332.589,    
-    'Saturn': 10759.22,   
-    'Uranus': 30688.5,    
-    'Neptune': 60189.0,   
+    'Mercury':  87.969,      
+    'Venus':    224.701,       
+    'Earth':    365.256,       
+    'Mars':     686.980,
+    'Phobos':   0.319,        # JPL Horizons        
+    'Jupiter':  4332.589,    
+    'Saturn':   10759.22,   
+    'Uranus':   30688.5,    
+    'Neptune':  60189.0,   
     
     # Earth satellite
     'Moon': 27.321582,
@@ -374,22 +376,22 @@ KNOWN_ORBITAL_PERIODS = {
     'Chariklo': 22996.00,         # PER= 62.95962 jy = 22996.00121 days 
 
     # Asteroids
-    'Vesta': 1325.75,      # 3.63 * 365.25
-    'Pallas': 1685.37,     # 4.614 * 365.25
-    'Juno': 1591.93,       # 4.358 * 365.25  
-    'Hygiea': 2041.88,     # 5.592 * 365.25
-    'Psyche': 1825.01,     # 4.997 * 365.25
-    'Eros': 642.63,        # 1.76 * 365.25
-    'Itokawa': 556.38,     # 1.52 * 365.25
-    'Ryugu': 473.98,       # 1.30 * 365.25
-    'Bennu': 436.65,       # 1.20 * 365.25
-    'Apophis': 323.60,     # 0.89 * 365.25
-    'Phaethon': 523.42,    # 1.43 * 365.25
-    'Dinkinesh': 1387.50,  # 3.80 * 365.25
-    'Donaldjohanson': 1446.04, # 3.96 * 365.25
-    'Steins': 1327.41,     # 3.64 * 365.25
-    'Lutetia': 1321.00,    # 3.62 * 365.25
-    
+    'Apophis': 323.60,          # 0.89 * 365.25
+    'Bennu': 436.65,            # 1.20 * 365.25
+    'Ryugu': 473.98,            # 1.30 * 365.25
+    'Phaethon': 523.42,         # 1.43 * 365.25
+    'Itokawa': 556.38,          # 1.52 * 365.25
+    'Eros': 642.63,             # 1.76 * 365.25
+    'Lutetia': 1321.00,         # 3.62 * 365.25
+    'Vesta': 1325.75,           # 3.63 * 365.25
+    'Steins': 1327.41,          # 3.64 * 365.25
+    'Dinkinesh': 1387.50,       # 3.80 * 365.25
+    'Donaldjohanson': 1446.04,  # 3.96 * 365.25
+    'Juno': 1591.93,            # 4.358 * 365.25
+    'Pallas': 1685.37,          # 4.614 * 365.25
+    '16 Psyche': 1826.18,       # 4.99982 * 365.25  
+    'Hygiea': 2041.88,          # 5.592 * 365.25
+ 
     # Trojan asteroids (Jupiter's L4 and L5)
     'Orus': 4274.32,       # 11.71 * 365.25
     'Polymele': 4319.33,   # 11.83 * 365.25
@@ -507,21 +509,22 @@ def color_map(planet):
         'Planet 9': 'grey',  # grey
        
         'Voyager 1': 'white',
-        'Voyager 2': 'gold',
+        'Voyager 2': 'magenta',
         'Cassini': 'green',
         'New Horizons': 'cyan',
         'Arrokoth': 'red',
         'Juno': 'cyan',
         'Galileo': 'white',
         'Apollo 11 S-IVB': 'cyan', 
-        'Artemis II': 'gold',       
+        'Artemis II': 'magenta',       
         'Pioneer 10': 'red',
         'Pioneer 11': 'green',
         'Clipper': 'red',
+        'Psyche': 'green',
         'JUICE': 'blue', 
         'OSIRIS': 'cyan',
         'Parker': 'white',
-        'JWST': 'gold',
+        'JWST': 'magenta',
         'Rosetta': 'white',
         'BepiColombo': 'red',
         'SolO': 'red',
@@ -532,71 +535,72 @@ def color_map(planet):
         'EM-L1': 'cyan',        
         'EM-L2': 'white',
         'EM-L3': 'green',
-        'EM-L4': 'gold',
+        'EM-L4': 'magenta',
         'EM-L5': 'red',
         'L1': 'cyan',        
         'L2': 'white',
         'L3': 'green',
-        'L4': 'gold',
+        'L4': 'magenta',
         'L5': 'red',
 
         'Kamo oalewa': 'cyan',
-        '2025 PN7': 'gold',        
+        '2025 PN7': 'magenta',        
         '2024 PT5': 'red',
         '2025 PY1': 'white',
         '2023 JF': 'white',
-        '2024 DW': 'gold',        
+        '2024 DW': 'magenta',        
         '2024 YR4': 'green',
 
+        '16 Psyche': 'magenta',
         'Apophis': 'red',
         'Vesta': 'cyan',
         'Bennu': 'white',
         'Lutetia': 'green',
         'Steins': 'red',  
 
-        '1I/Oumuamua': 'gold',
+        '1I/Oumuamua': 'magenta',
         '3I/ATLAS': 'red',
         'Ikeya-Seki': 'green',
         'West': 'red',
         'Halley': 'cyan',
         'Hyakutake': 'white',
-        'Hale-Bopp': 'gold',
+        'Hale-Bopp': 'magenta',
         'McNaught': 'green',
         'NEOWISE': 'red',
         'C/2025_K1': 'cyan',
         'C/2025_K1-B': 'rgb(0, 200, 220)',          # Teal - darker cyan variant
-        'C/2025_K1-C': 'rgb(255, 215, 0)',           # Gold - the bound fragment (special!)
+        'C/2025_K1-C': 'magenta',           # magenta - the bound fragment (special!)
         'C/2025_K1-D': 'rgb(100, 180, 255)',          # Sky blue - cooler variant        
         'Borisov': 'green',        
         'Tsuchinshan': 'cyan',
         'ATLAS': 'white',
-        'Churyumov': 'gold',
+        'Churyumov': 'magenta',
         '2I/Borisov': 'red',
-        'SWAN': 'gold',
+        'SWAN': 'magenta',
         'PANSTARRS': 'green',
         '6AC4721': 'cyan',
         'MAPS': 'cyan',
         'Lemmon': 'green',  
         'Wierzchos': 'cyan',
-        'Schaumasse': 'gold',
+        'Schaumasse': 'magenta',
         'Howell': 'white',
         'Tempel 2': 'red',             
 
         'SOHO': 'white',
-        'JamesWebb': 'gold',
-        'Ryugu': 'gold',
+        'JamesWebb': 'magenta',
+        'Ryugu': 'magenta',
         'Eros': 'green',
         'Dinkinesh': 'white',
         'Donaldjohanson': 'red',
         'Eurybates': 'green',
         'Patroclus': 'white',
         'Menoetius': 'red',
-        'Leucus': 'gold',
+        'Leucus': 'magenta',
         'Polymele': 'cyan',
         'Orus': 'pink',
         'Itokawa': 'red',
         'MarsRover': 'white',
-        'DART': 'gold',
+        'DART': 'magenta',
         'Lucy': 'green',
         'Gaia': 'red',
         'Hayabusa2': 'cyan',  

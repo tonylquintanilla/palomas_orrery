@@ -624,11 +624,34 @@ INFO = {
         '  Tianwen-1 Orbiter (China); Mars Pathfinder & Sojourner Rover; Spirit & Opportunity Rovers; Phoenix Lander; Curiosity Rover;\n' 
         '  InSight Lander; Perseverance Rover & Ingenuity Helicopter; Tianwen-1 Lander & Zhurong Rover (China).',
 
-        'Phobos': 'Horizons: 401. The larger and closer of Mars\'s two moons, spiraling inward towards Mars.',
+        'Phobos': 'Horizons: 401. The larger and closer of Mars\'s two moons, spiraling inward towards Mars.\n' 
+        'Phobos is the larger and innermost of the two Martian satellites. It is a heavily cratered, low-density object that orbits closer \n' 
+        'to its parent planet than any other moon in the solar system.\n' 
+        'Dimensions: It is a non-spherical, "triaxial" ellipsoid measuring approximately 26.0 x 22.8 x 18.2 km. Mean Radius: 11.1 km.\n' 
+        'Mass: Approximately 1.0659 10^16 kg.\n' 
+        'Density: It has a very low mean density of about 1.876 g/cm³, suggesting a porous "rubble pile" composition or a mix of rock and ice.\n' 
+        'Surface Gravity: Extremely weak at 0.0057 m/s², meaning a person could easily jump off the surface into orbit.\n' 
+        'Proximity: It orbits Mars at a mean distance of only 9,376 km from the planet\'s center (about 6,000 km from the surface).\n' 
+        'Orbital Period: It completes one revolution every 7 hours and 39 minutes, meaning it orbits Mars three times in a single Martian day.\n' 
+        'Tidal Locking: It is synchronously rotating, meaning the same face always points toward Mars.\n' 
+        'Apparent Motion: Because it orbits faster than Mars rotates, it is the only moon that appears to rise in the West and set in the East.\n' 
+        'Stickney Crater: Its most prominent feature is a massive impact crater nearly 9 km wide—large enough that the impact almost shattered the moon.\n' 
+        'Orbital Decay: Phobos is below the "synchronous orbit" radius. Tidal forces are slowly dragging it closer to Mars at a rate of about 2 meters \n' 
+        'every 100 years. In roughly 30 to 50 million years, Phobos will either crash into Mars or be ripped apart by gravity to form a planetary ring.\n' 
+        'Dust Rings: The moon is a source of seasonal dust rings around Mars as micrometeoroid impacts kick material off its surface.\n' 
+        'Discovery: Found by Asaph Hall on August 18, 1877, just six days after he discovered the outer moon, Deimos.\n' 
+        'Origin Theories: Scientists are still debating if Phobos is a captured carbonaceous asteroid from the main belt or formed from Martian impact debris.\n' 
+        'Psyche Mission: On May 15, 2026 19:51 UTC the Psyche spacecraft will pass within 1,151 km of this moon.', 
 
         'Deimos': 'Horizons: 402. The smaller and more distant moon of Mars, with a stable orbit. Retrogade orbit.',
 
         'Ceres': 'Horizons: A801 AA. The largest object in the asteroid belt, considered a dwarf planet.',
+
+        '16 Psyche': 'Horizons: 16 or 20000016 or A852 FA. Scientists hypothesize that Psyche might be the exposed core of a "planetesimal" \n' 
+        '—a building block of an early planet that had its rocky outer layers stripped away by violent collisions billions of years ago. \n'
+        '16 Psyche is the target of the NASA Psyche mission. The spacecraft is expected to reach the asteroid in August 2029. \n' 
+        '16 Psyche is a unique, metal-rich asteroid located in the main asteroid belt between Mars and Jupiter. Unlike most \n' 
+        'asteroids that are composed of rock or ice, Psyche appears to be made largely of nickel and iron—similar to the core of Earth.',
 
         # Source: NASA CNEOS (cneos.jpl.nasa.gov/apophis) -- size 370m, Aten-type, 2029 flyby 31600 km, OSIRIS-APEX/RAMSES missions
         'Apophis': '***SET MANUAL SCALE TO 0.005 AU TO SEE THE CLOSE APPROACH TO EARTH AND MOON***\n\n'
@@ -1344,6 +1367,22 @@ INFO = {
         '* Gravity-assists from Europa (49), Ganymede (7), and Callisto (9) will be used to target different Europa close approach ' 
         'points on each flyby.',
         
+        'Psyche': 'Horizons:-255. JPL: "BACKGROUND:\n'
+        'Psyche is a NASA Discovery-class mission to map the surface and characterize\n'
+        'the composition of \'16 Psyche\', an elongated 280-km diameter metal-rich\n' 
+        'asteroid located in the main asteroid belt between Mars and Jupiter. This\n' 
+        'is the first mission to a metal-rich asteroid.\n\n'
+        'Psyche was launched Oct 13, 2023 @ 14:19:43 UTC on a SpaceX Falcon Heavy\n' 
+        'from Kennedy Space Center, LC-39A.  Stage separation occurred 62 minutes\n'
+        'after launch at 15:21 UTC.\n\n'
+        'A gravity-assist flyby of Mars will occur in May 2026 at an altitude of\n' 
+        '3000-4400 km above the surface, exact details depending on launch date.\n\n'
+        'The arrival phase ends June 26, 2029.\n'
+        'The asteroid\'s gravity will capture the spacecraft into orbit in late July\n' 
+        '2029 and the two-year prime mission will begin in August. Psyche will\n' 
+        'successively lower its orbit over the span of a year, eventually coming\n' 
+        'as close as 75-km from the asteroid\'s surface.', 
+
         'OSIRIS REx': 
         '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
         '***SET MANUAL SCALE TO 0.00003 AU TO SEE ARRIVAL AT BENNU***\n\n'
@@ -2021,21 +2060,22 @@ INFO = {
         'PANSTARRS':
         'Horizons: C/2025 R3. Comet C/2025 R3 (PanSTARRS) is a hyperbolic Oort Cloud comet\n'
         'discovered September 8, 2025, by the Pan-STARRS survey telescope at Haleakala, Hawaii.\n\n'
-        '* Pristine long-period comet -- likely ~170,000 years since its last inner-system visit.\n'
-        '* This is its final passage. Jupiter\'s gravity acted as an unplanned gravitational\n'
-        '  slingshot -- the same mechanism NASA used to send Voyager to interstellar space --\n'
-        '  adding enough orbital energy to push the comet\'s eccentricity above 1.0.\n'
-        '  The comet now exceeds solar escape velocity and is on a one-way trip into\n'
-        '  interstellar space. It traveled ~170,000 years to get here; Jupiter sent it away forever.\n'
+        '* Pristine visitor: It traveled ~170,000 years from the Oort Cloud to reach the inner\n'
+        '  Solar System. This is its first and final visit.\n'
+        '* The Interstellar Exit: During its approach, Jupiter provided a massive gravitational\n'
+        '  slingshot—the same mechanism NASA used to send Voyager into interstellar space.\n'
+        '  This "kick" added enough orbital energy to push its eccentricity above 1.0, meaning\n'
+        '  it now exceeds solar escape velocity and will never return.\n'
         '* Perihelion: April 19, 2026 at 0.499 AU (74.6 million km from the Sun).\n'
-        '* Closest approach to Earth: April 26, 2026 at 0.489 AU (73.2 million km).\n'
-        '* Gas-rich, dust-poor character. Ion tail dominated -- exceeded 10 degrees by April 8, 2026,\n'
-        '  with a dual-ray structure observed by astrophotographers on April 9.\n'
-        '* Green coma (C2 dicarbon emissions) and light blue wispy ion tail confirmed (APOD April 14, 2026).\n'
-        '* Reached naked-eye visibility (magnitude 5.1) on April 11, 2026.\n'
-        '* Predicted peak brightness: ~magnitude 3.5 (baseline); possibly ~0 with forward scattering near perihelion.\n'
-        '* Best observed from Northern Hemisphere before April 19; Southern Hemisphere from late April onward.\n'
-        '* Nucleus estimated at a few km diameter; no precise measurement published as of April 2026.\n',
+        '* Closest approach to Earth (Verified): April 26, 2026, at 09:22 UTC. Distance: 0.489146 AU\n'
+        '  (73,175,295 km). This is the exact moment of perigee as recorded by JPL Horizons.\n'
+        '* Appearance: Gas-rich and dust-poor. Features a massive 10+ degree ion tail with a\n'
+        '  dual-ray structure. Green C2 coma and blue ion tail confirmed (APOD April 14, 2026).\n'
+        '* Visibility: Reached naked-eye mag 5.1 on April 11. Peak brightness (~mag 3.5) enhanced\n'
+        '  by forward scattering near perihelion.\n'
+        '* Observation: Best viewed from the Northern Hemisphere through mid-April; now\n'
+        '  transitioning to the Southern Hemisphere as it recedes into deep space.\n'
+        '* Nucleus: Estimated at 3-5 km; no precise measurement published as of late April 2026.\n',
 
         '6AC4721': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
         'Provisional designation for C/2026 A1 (MAPS) before JPL assigned a formal Horizons ID.\n'

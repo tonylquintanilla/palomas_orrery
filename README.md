@@ -1,4 +1,4 @@
-# Last updated: April 11, 2026
+# Last updated: May 4, 2026
 
 # Paloma's Orrery
 
@@ -50,6 +50,7 @@ Paloma's Orrery combines scientific accuracy with visual beauty, making astronom
 - Climate data preservation hub
 - Forensic Heat Wave Analysis: 3D KML generator for wet-bulb temperature extremes
 - Unified save system with CDN/offline HTML options
+- Object Encyclopedia: interactive info cards embedded in every HTML visualization -- hover or click any object, press the "i" button to read its reference entry (sourced from info_dictionary.py, always-on, no toggle needed)
 - Social media export: 9:16 portrait HTML for Instagram Reels and YouTube Shorts
 - Web gallery at [palomasorrery.com](https://palomasorrery.com/) -- shareable interactive visualizations, no install required
 - Fly-to navigation buttons: tap to snap the 3D camera to any curated object's close-up view (mobile and desktop gallery)
@@ -1041,7 +1042,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 **Instagram:** [@palomas_orrery](https://www.instagram.com/palomas_orrery/)
 **YouTube:** [Paloma's Orrery](https://www.youtube.com/@tony_quintanilla/featured)
 
-**Last Updated:** April 2026 (v2.8.0 - MAPS disintegration visualization, solar shell optimization, C/2025 K1 fragment tracking, Artemis II mission, dashboard launcher)
+**Last Updated:** May 2026 (v2.9.0 - Object Encyclopedia in all HTML output, encounter export design, MAPS disintegration visualization, solar shell optimization, C/2025 K1 fragment tracking, Artemis II mission, dashboard launcher)
 
 ---
 
@@ -1059,4 +1060,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - [Plotly](https://plotly.com/) visualization library
 - AI coding assistants: [Anthropic Claude](https://www.anthropic.com/claude), [OpenAI ChatGPT](https://openai.com/chatgpt), [Google Gemini](https://gemini.google.com/)
 - Cross-platform compatibility (Windows, macOS & Linux) achieved January 2026
-- README updated: April 2026 with Anthropic's Claude Opus 4.6
+- README updated: May 2026 with Anthropic's Claude Opus 4.6

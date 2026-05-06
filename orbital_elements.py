@@ -292,6 +292,16 @@ planetary_params = {
         #     'Ceres': 1680.15,      # 4.6 * 365.25
     },
 
+    '16 Psyche': {                      # Psyche, Horizons number 16, to distinguish from mission Psyche
+        'a': 2.923911398936447,
+        'e': .1354428631790678,
+        'i': 3.098574197998143,
+        'omega': 227.3612622931746,
+        'Omega': 150.2750236911914,
+        'epoch': '2017-04-13',
+        'TP': 2457129.4685003939         # 2015-Apr-16.9685003939
+    },
+
     # Trojan Asteroids
 
      'Orus': {                  # 21900 Orus (1999 VQ10)

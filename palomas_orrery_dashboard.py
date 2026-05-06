@@ -10,6 +10,8 @@ Contact: tonyquintanilla@gmail.com
 Philosophy: "Data Preservation is Climate Action"
 
 AI Collaboration: Built with Claude (Anthropic) - conversational AI partnership
+
+Updated 5/1/2026
 """
 
 import os
@@ -32,7 +34,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 GALLERY_TOOLS_DIR = os.path.join(SCRIPT_DIR, "..", "tonyquintanilla.github.io", "tools")
 
 # Window
-WINDOW_TITLE = "Paloma's Orrery"
+WINDOW_TITLE = "Paloma's Orrery (palomas_orrery_dashboard.py)"
 WINDOW_WIDTH = 960
 WINDOW_HEIGHT = 720
 
@@ -165,9 +167,10 @@ LOCAL_DOCS = [
     ("README", "README.md"),
     ("Module Atlas", "MODULE_ATLAS.md"),
     ("Requirements", "requirements.txt"),
-    ("Project Instructions", "project_instructions_with_claude_ai.md"),
-    ("Web Gallery Handoff", "web_gallery_handoff.md"),
-    ("Climate Data Handoff", "climate_data_preservation_handoff.md"),
+    ("Project Instructions", "project_instructions_V3_20.md"),
+    ("Adding Objects Guide", "ADDING_OBJECTS_GUIDE.md"),
+    ("Color Reference", "Python_Color_Reference_v2.pdf"),    # or color_map.py
+    ("To Do Ideas", "to_do_ideas.md"),    
 ]
 
 # ============================================================

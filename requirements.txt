@@ -1,5 +1,5 @@
 # Paloma's Orrery - Requirements
-# Updated: February 28, 2026
+# Updated: April 24, 2026 with Claude Opus 4.7
 #
 # PYTHON VERSION COMPATIBILITY
 # ============================
@@ -67,8 +67,16 @@ pytz>=2023.3          # Timezone support
 requests>=2.31.0      # HTTP library (NOAA ERDDAP, climate data APIs)
 beautifulsoup4>=4.12.0  # HTML parsing for web scraping
 
-# Climate data processing
-openpyxl>=3.1.0       # Excel file parsing for NSIDC ice data (V4 format)
+# Excel / spreadsheet parsing
+# FTS data is loaded from OCHA .xlsx exports (openpyxl via pandas).
+# When downloading from the FTS website, choose the "xlsx" option
+# from the download dropdown, NOT the "xls" option — the legacy .xls
+# format is BIFF5 and modern xlrd (>=2.0) no longer reads it. openpyxl
+# handles .xlsx cleanly.
+# lxml stays for pandas.read_html, used as a defensive fallback in
+# scenarios_food_insecurity.py for the older HTML-as-.xls FTS format.
+openpyxl>=3.1.0       # Excel .xlsx parsing (NSIDC ice data, OCHA FTS exports)
+lxml>=6.1.0           # HTML parsing for FTS read_html defensive fallback
 
 # ============================
 # NOTES ON PLOTLY/KALEIDO UPGRADE PATH

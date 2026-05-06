@@ -349,11 +349,6 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
 
     # Near-Earth Asteroids
-    {'name': 'Kamo oalewa', 'id': '2016 HO3', 'var_name': 'kamooalewa_var', 'color_key': 'Kamo oalewa', 'symbol': 'circle-open', 'object_type': 'orbital',
-    'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2032, 12, 31), 
-    # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-04. PREDICTS-> 2025-SEP-29
-    'mission_info': 'Horizons: 2016 HO3. Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.', 
-    'mission_url': 'https://www.jpl.nasa.gov/news/small-asteroid-is-earths-constant-companion/'},
 
     {'name': '2025 PN7', 'id': '2025 PN7', 'var_name': 'pn7_var', 'color_key': '2025 PN7', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
@@ -388,7 +383,20 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
 
+    {'name': 'Kamo oalewa', 'id': '2016 HO3', 'var_name': 'kamooalewa_var', 'color_key': 'Kamo oalewa', 'symbol': 'circle-open', 'object_type': 'orbital',
+    'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2032, 12, 31), 
+    # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-04. PREDICTS-> 2025-SEP-29
+    'mission_info': 'Horizons: 2016 HO3. Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.', 
+    'mission_url': 'https://www.jpl.nasa.gov/news/small-asteroid-is-earths-constant-companion/'},
+
     # Main Belt Asteroids
+
+    {'name': '16 Psyche', 'id': 'A852 FA', 'var_name': 'psyche16_var', 'color_key': '16 Psyche', 'symbol': 'circle-open', 'object_type': 'orbital',
+    'id_type': 'smallbody', 
+    'center_id': '20000016',  # Numeric ID for use as Horizons center
+    'mission_info': 'Horizons: A852 FA. A metal-rich asteroid located in the main asteroid belt. The NASA Psyche mission will reach the asteroid in August 2029', 
+    'mission_url': 'https://news.arizona.edu/news/large-craters-offer-clues-origin-asteroid-16-psyche'},
+
     {'name': 'Apophis', 'id': '2004 MN4', 'var_name': 'apophis_var', 'color_key': 'Apophis', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
     'center_id': '2099942',  # Numeric ID for use as Horizons center
@@ -845,6 +853,13 @@ OBJECT_DEFINITIONS = [
     # 2031-07-21 06:31:30.022 (max. for current target body)
     'mission_url': 'https://www.esa.int/esearch?q=juice', 
     'mission_info': 'Horizons: -28. JUICE (Jupiter Icy Moons Explorer) is an ESA mission to study Jupiter and its moons.'},
+
+    {'name': 'Psyche', 'id': '-255', 'var_name': 'psyche_var', 'color_key': 'Psyche', 'symbol': 'diamond-open', 
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 10, 14), 'end_date': datetime(2029, 6, 26), 
+    # 2023-10-13 15:22:57.139 (min. for current target body)
+    # 2029-06-26 14:29:49.496 (max. for current target body)
+    'mission_url': 'https://psyche.ssl.berkeley.edu/', 
+    'mission_info': 'Horizons: -255. The NASA Psyche mission is a journey to metal-rich asteroid 16 Psyche, located in the main asteroid belt. Arrival phase ends June 2029.'},
 
     {'name': 'Clipper', 'id': '-159', 'var_name': 'europa_clipper_var', 'color_key': 'Clipper', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2031, 2, 7), 
