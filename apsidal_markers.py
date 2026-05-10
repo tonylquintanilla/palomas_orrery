@@ -25,6 +25,9 @@ Module updated: April 26, 2026 with Anthropic's Claude Opus 4.6
 Module updated: May 2, 2026 with Anthropic's Claude Opus 4.6
 (_wrap_hover_text: word-wrap long mission_info text in closest plotted
 point hover labels to prevent overflow beyond plot boundaries)
+
+Module updated: May 8, 2026 with Anthropic's Claude 4.6 and 4.7
+- trace_qualifier parameter, deconflicted labels
 """
 
 import numpy as np
@@ -1406,9 +1409,7 @@ def _wrap_hover_text(text, width=55):
         lines.append(' '.join(current_line))
     return '<br>'.join(lines)
 
-
-# def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None):
-def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None, marker_color=None, obj_info=None):
+def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range=None, marker_color=None, obj_info=None, trace_qualifier=None):
 
     """
     Find and mark the closest plotted approach point from trajectory data.
@@ -1478,11 +1479,13 @@ def add_closest_approach_marker(fig, positions_dict, obj_name, center_body, colo
         date_str_formatted = date_obj.strftime('%Y-%m-%d %H:%M:%S UTC')
     except:
         date_str_formatted = closest_date
-    
+        
     # Create label using proper terminology
-#    label = f"Closest Plotted ({near_term})"
-    label = f"Closest Plotted Point"
-    
+    if trace_qualifier:
+        label = f"Closest {trace_qualifier} Point"
+    else:
+        label = f"Closest Plotted Point"
+
     # Create comprehensive hover text
     km_distance = closest_distance * KM_PER_AU  # AU to km
     

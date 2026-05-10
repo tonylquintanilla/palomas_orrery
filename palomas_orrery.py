@@ -14,7 +14,8 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
-Module updated: April 27, 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 8, 2026 with Anthropic's Claude Opus 4.6 and 4.7
+- Three callers pass trace_qualifier, plot_actual_orbits qualifier for trajectories
 """
 #Paloma's Orrery - Solar System Visualization Tool
 # annotated by Tony working with Claude 
@@ -1593,7 +1594,8 @@ def _add_perihelion_osculating_orbit(fig, selected_objects, objects, color_map,
 
 def _add_spacecraft_encounter_markers(fig, selected_objects, objects, dates_lists,
                                         center_object_name, center_id, color_map,
-                                        show_closest_approach, positions_cache=None):
+                                        show_closest_approach, positions_cache=None,
+                                        render_mode=None):
     """
     Add tagged encounter markers for spacecraft missions.
 
@@ -1617,6 +1619,7 @@ def _add_spacecraft_encounter_markers(fig, selected_objects, objects, dates_list
             color_map=color_map,
             show_closest_approach=show_closest_approach,
             positions_cache=positions_cache,
+            render_mode=render_mode,
         )
     except ImportError:
         print("[ENCOUNTER] spacecraft_encounters.py not found — skipping tagged markers", flush=True)
@@ -3381,6 +3384,9 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                     
                     # Add the marker - use trajectory_marker_color for trajectory objects
                     marker_color = trajectory_marker_color if obj_type == 'trajectory' else None
+                    qualifier = None
+                    if obj_type == 'trajectory':
+                        qualifier = 'Plotted Period' if trajectory_marker_color else 'Full Mission'
                     add_closest_approach_marker(
                         fig=fig,
                         positions_dict=positions_dict,
@@ -3388,8 +3394,9 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         center_body=center_object_name,
                         color_map=color_map,
                         date_range=(dates_list[0], dates_list[-1]) if dates_list else None,
-                        marker_color=marker_color
-                    )                     
+                        marker_color=marker_color,
+                        trace_qualifier=qualifier,
+                    )
 
             # ===================================================================
             # ANALYTICAL FALLBACK: For objects without JPL ephemeris
@@ -4766,8 +4773,10 @@ def plot_objects():
                                     color_map=color_map,
                                     date_range=(plotted_dates[0], plotted_dates[-1]) if plotted_dates else None,
                                     marker_color='yellow',  # Yellow for Plotted Period
-                                    obj_info=obj
+                                    obj_info=obj,
+                                    trace_qualifier='Plotted Period',
                                 )
+
             positions = {}
 
             for obj in objects:
@@ -5211,6 +5220,7 @@ def plot_objects():
                     center_id=center_id,
                     color_map=color_map,
                     show_closest_approach=show_closest_approach_var.get(),
+                    render_mode='static',
                 )
 
         # ============ EXOPLANET ORBITS ============
@@ -6333,14 +6343,14 @@ def animate_objects(step, label):
                                     color_map=color_map,
                                     date_range=(context_dates[0], context_dates[-1]) if context_dates else None,
                                     marker_color=base_color,  # Use base color for Full Mission
-                                    obj_info=obj_info
+                                    obj_info=obj_info,
+                                    trace_qualifier='Full Mission',
                                 )
+
             # Plot actual orbits using the orbit_dates_lists (DETAIL layer for trajectories)
 
             selected_planets = [obj['name'] for obj in objects if obj['var'].get() == 1 and obj['name'] != center_object_name]
             # FIXED: Added center_object_name - was defaulting to 'Sun' causing wrong hover text
-    #        plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name, show_closest_approach=show_closest_approach_var.get())
-    #        plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name, show_closest_approach=show_closest_approach_var.get(), trajectory_style='plotted_period')
             # Pass yellow marker color for trajectory Plotted Period traces
             plot_actual_orbits(fig, selected_planets, orbit_dates_lists, center_id=center_id, show_lines=True, center_object_name=center_object_name, show_closest_approach=show_closest_approach_var.get(), trajectory_marker_color='yellow')
     
@@ -6408,6 +6418,7 @@ def animate_objects(step, label):
                     color_map=color_map,
                     show_closest_approach=show_closest_approach_var.get(),
                     positions_cache=positions_over_time,
+                    render_mode='animated',
                 )
 
             for i, trace in enumerate(fig.data):
