@@ -8,7 +8,7 @@ one of the most complex magnetospheres in the solar system.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 One factual correction: ring count updated from "13 known rings" to 5 named rings
 (Galle, Le Verrier, Lassell, Arago, Adams) per NASA Planetary Ring Node / Smith et al. (1989).
@@ -57,7 +57,7 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -65,22 +65,36 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=4.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Neptune: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Neptune: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=4.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -127,7 +141,7 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -135,22 +149,36 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.5,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Neptune: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Neptune: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.5,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -305,32 +333,25 @@ def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
         
     # Create a list of repeated descriptions for each point
     # This is crucial - we need exactly one text entry per point
-    hover_texts = [layer_info['description']] * len(x_hover)
 
     # Just the name for "Object Names Only" mode
-    layer_name = f"Neptune: {layer_info['name']}"
-    minimal_hover_texts = [layer_name] * len(x_hover)
 
     # Create hover trace with direct text assignment
+    # Single info marker at north pole, 5% above radius
+    r_info = radius * 1.05
+    trace_name = f"Neptune: {layer_info['name']} (Info)"
+
     hover_trace = go.Scatter3d(
-        x=x_hover, 
-        y=y_hover, 
-        z=z_hover,
+        x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(
-            size=2,  # originally 5
-            color='rgb(0, 128, 255)',  # Layer color, originally 'white'
-            opacity=1.0,  # originally 0.8
-            line=dict(  # Add a contrasting outline
-                width=1,
-                color='black'
-            )
-        ),
-        name=f"Neptune: {layer_info['name']} (Info)",
-        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
-        customdata=minimal_hover_texts,  # For "Object Names Only" mode
-        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
-        showlegend=False  # Don't show in legend since it's just for hover
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name=trace_name,
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[f"Neptune: {layer_info['name']}"],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
     )
 
     return [surface_trace, hover_trace]
@@ -384,7 +405,7 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -392,22 +413,36 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Neptune: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Neptune: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -532,9 +567,7 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0)):
         "- The magnetotail stretches away from the Sun but is influenced by Neptune's unusual field<br><br>"
         "This unusual magnetic environment was discovered by Voyager 2 during its 1989 flyby and makes Neptune's magnetosphere <br>"
         "one of the most complex and dynamic in our solar system."
-    ] * len(x_final)
-    
-    magnetosphere_customdata = ['Neptune: Magnetosphere'] * len(x_final)
+    ]
     
     # Create main magnetosphere trace
     traces = [
@@ -547,12 +580,23 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0)):
                 opacity=0.3
             ),
             name='Neptune: Magnetosphere',
-            text=magnetosphere_text,
-            customdata=magnetosphere_customdata,
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup='Neptune: Magnetosphere',
+            hoverinfo='skip',
             showlegend=True
         )
     ]
+    traces.append(go.Scatter3d(
+        x=[x_final[0]], y=[y_final[0]], z=[z_final[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(30, 136, 229)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup='Neptune: Magnetosphere',
+        text=magnetosphere_text,
+        customdata=['Neptune: Magnetosphere'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -1011,8 +1055,6 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
         z_final = z_rotated2 + magnetic_center_z
         
         # Create hover information arrays
-        belt_text = [belt['description']] * len(belt_x)
-        belt_customdata = [f"Neptune: {belt['name']}"] * len(belt_x)
         
         # Create the trace
         traces.append(
@@ -1027,12 +1069,23 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
                     opacity=belt['opacity']
                 ),
                 name=f"Neptune: {belt['name']}",
-                text=belt_text,
-                customdata=belt_customdata,
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"Neptune: {belt['name']}",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        traces.append(go.Scatter3d(
+            x=[belt_x[0]], y=[belt_y[0]], z=[belt_z[0]],
+            mode='markers',
+            marker=dict(size=6, color=belt['color'], opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"Neptune: {belt['name']}",
+            text=[belt['description']],
+            customdata=[f"Neptune: {belt['name']}"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     
     # Add field-aligned current visualization connecting regions
     # These are important features in Neptune's dynamic magnetosphere
@@ -1135,8 +1188,6 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
         z_final = z_rot2 + mag_center_z
         
         # Create hover text and customdata arrays for consistency with other traces
-        hover_text = [params['description']] * len(current_x)
-        custom_data = [f"Neptune: {params['name']}"] * len(current_x)
         
         # Create the trace with very small markers to create a line-like effect
         traces.append(
@@ -1151,12 +1202,23 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
                     opacity=0.3
                 ),
                 name=f"Neptune: {params['name']}",
-                text=hover_text,
-                customdata=custom_data,
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"Neptune: {params['name']}",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        traces.append(go.Scatter3d(
+            x=[current_x[0]], y=[current_y[0]], z=[current_z[0]],
+            mode='markers',
+            marker=dict(size=6, color=params.get('color', 'rgb(200, 200, 255)'), opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"Neptune: {params['name']}",
+            text=[params['description']],
+            customdata=[f"Neptune: {params['name']}"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     
     return traces
     
@@ -1657,7 +1719,6 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
         z_final = z_final + center_z
         
         # Create hover text
-        text_array = [ring_info['description']] * len(x)
         
         # Add ring trace
         traces.append(
@@ -1672,12 +1733,24 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
                     opacity=ring_info['opacity']
                 ),
                 name=f"Neptune: {ring_info['name']}",
-                text=text_array,
-                customdata=[f"Neptune: {ring_info['name']}"] * len(x),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"Neptune: {ring_info['name']}",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], neptune_tilt, 'x')
+        traces.append(go.Scatter3d(
+            x=[mx_t[0] + center_x], y=[my_t[0] + center_y], z=[mz_t[0] + center_z],
+            mode='markers',
+            marker=dict(size=6, color=ring_info['color'], opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"Neptune: {ring_info['name']}",
+            text=[ring_info['description']],
+            customdata=[f"Neptune: {ring_info['name']}"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -1722,7 +1795,7 @@ def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * NEPTUNE_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -1730,22 +1803,36 @@ def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Neptune: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Neptune: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Neptune: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=2.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     # Add sun direction indicator scaled to this shell's radius
     sun_traces = create_sun_direction_indicator(

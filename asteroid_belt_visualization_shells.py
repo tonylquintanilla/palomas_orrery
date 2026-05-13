@@ -196,29 +196,33 @@ def create_main_asteroid_belt(center_position=(0, 0, 0)):
     
     # Create the main belt hover text
     # Source: NASA Solar System Exploration; MPC (member count); Dermott & Murray (1983) -- Kirkwood gaps
-    belt_text = ["Main Asteroid Belt: Rocky debris between Mars and Jupiter (2.2-3.2 AU).<br>"
+    belt_desc = ("Main Asteroid Belt: Rocky debris between Mars and Jupiter (2.2-3.2 AU).<br>"
                  "Contains millions of asteroids with distinct Kirkwood gaps caused by<br>"
-                 "Jupiter's gravitational resonances. Peak density at ~2.7 AU."] * len(belt_x)
-    belt_customdata = ['Main Asteroid Belt'] * len(belt_x)
+                 "Jupiter's gravitational resonances. Peak density at ~2.7 AU.")
+    trace_name = 'Main Asteroid Belt'
     
-    traces = [
-        go.Scatter3d(
-            x=belt_x,
-            y=belt_y,
-            z=belt_z,
-            mode='markers',
-            marker=dict(
-                size=belt_sizes,
-                color=belt_colors,
-                opacity=0.4
-            ),
-            name='Main Asteroid Belt',
-            text=belt_text,
-            customdata=belt_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    geom_trace = go.Scatter3d(
+        x=belt_x, y=belt_y, z=belt_z,
+        mode='markers',
+        marker=dict(size=belt_sizes, color=belt_colors, opacity=0.4),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[belt_x[0]], y=[belt_y[0]], z=[belt_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='white', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[belt_desc],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    traces = [geom_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position,
@@ -288,29 +292,33 @@ def create_hilda_group(center_position=(0, 0, 0)):
     hilda_z = np.array(hilda_z) + center_z
     
     # Create hover text
-    hilda_text = ["Hilda Family: Asteroids in 3:2 resonance with Jupiter at ~3.97 AU.<br>"
+    hilda_desc = ("Hilda Family: Asteroids in 3:2 resonance with Jupiter at ~3.97 AU.<br>"
                   "Forms distinctive triangular pattern with three main concentrations<br>"
-                  "120 deg apart. Mostly D-type (dark, reddish) asteroids."] * len(hilda_x)
-    hilda_customdata = ['Hilda Family'] * len(hilda_x)
+                  "120 deg apart. Mostly D-type (dark, reddish) asteroids.")
+    trace_name = 'Hilda Family'
     
-    traces = [
-        go.Scatter3d(
-            x=hilda_x,
-            y=hilda_y,
-            z=hilda_z,
-            mode='markers',
-            marker=dict(
-                size=1.5,
-                color='rgb(200, 170, 100)',  # Golden-yellow
-                opacity=0.5
-            ),
-            name='Hilda Family',
-            text=hilda_text,
-            customdata=hilda_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    geom_trace = go.Scatter3d(
+        x=hilda_x, y=hilda_y, z=hilda_z,
+        mode='markers',
+        marker=dict(size=1.5, color='rgb(200, 170, 100)', opacity=0.5),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[hilda_x[0]], y=[hilda_y[0]], z=[hilda_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(200, 170, 100)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[hilda_desc],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    traces = [geom_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position,
@@ -384,29 +392,33 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
     
     # Create hover text
     # Source: MPC / NASA Lucy mission (lucy.swri.edu) -- D-type composition, L4 population
-    trojan_text = ["Jupiter Trojans (L4 - Greeks): Asteroids trapped at Jupiter's leading<br>"
+    trojan_desc = ("Jupiter Trojans (L4 - Greeks): Asteroids trapped at Jupiter's leading<br>"
                    "Lagrange point (L4), 60 deg ahead. Called 'Greek camp' after Iliad heroes.<br>"
-                   "Contains thousands of D-type asteroids, targets of NASA's Lucy mission."] * len(trojan_x)
-    trojan_customdata = ['Jupiter Trojans (Greeks - L4)'] * len(trojan_x)
+                   "Contains thousands of D-type asteroids, targets of NASA's Lucy mission.")
+    trace_name = 'Jupiter Trojans (Greeks - L4)'
     
-    traces = [
-        go.Scatter3d(
-            x=trojan_x,
-            y=trojan_y,
-            z=trojan_z,
-            mode='markers',
-            marker=dict(
-                size=1.5,
-                color='rgb(180, 100, 100)',  # Reddish
-                opacity=0.5
-            ),
-            name='Jupiter Trojans (Greeks - L4)',
-            text=trojan_text,
-            customdata=trojan_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    geom_trace = go.Scatter3d(
+        x=trojan_x, y=trojan_y, z=trojan_z,
+        mode='markers',
+        marker=dict(size=1.5, color='rgb(180, 100, 100)', opacity=0.5),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[trojan_x[0]], y=[trojan_y[0]], z=[trojan_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(180, 100, 100)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[trojan_desc],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    traces = [geom_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position,
@@ -476,29 +488,33 @@ def create_jupiter_trojans_trojans(center_position=(0, 0, 0), jupiter_angle=0):
     trojan_z = np.array(trojan_z) + center_z
     
     # Create hover text
-    trojan_text = ["Jupiter Trojans (L5 - Trojans): Asteroids trapped at Jupiter's trailing<br>"
+    trojan_desc = ("Jupiter Trojans (L5 - Trojans): Asteroids trapped at Jupiter's trailing<br>"
                    "Lagrange point (L5), 60 deg behind. Called 'Trojan camp' after Iliad heroes.<br>"
-                   "Slightly less populated than L4, contains D-type asteroids."] * len(trojan_x)
-    trojan_customdata = ['Jupiter Trojans (Trojans - L5)'] * len(trojan_x)
+                   "Slightly less populated than L4, contains D-type asteroids.")
+    trace_name = 'Jupiter Trojans (Trojans - L5)'
     
-    traces = [
-        go.Scatter3d(
-            x=trojan_x,
-            y=trojan_y,
-            z=trojan_z,
-            mode='markers',
-            marker=dict(
-                size=1.5,
-                color='rgb(160, 80, 80)',  # Slightly darker reddish
-                opacity=0.5
-            ),
-            name='Jupiter Trojans (Trojans - L5)',
-            text=trojan_text,
-            customdata=trojan_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    geom_trace = go.Scatter3d(
+        x=trojan_x, y=trojan_y, z=trojan_z,
+        mode='markers',
+        marker=dict(size=1.5, color='rgb(160, 80, 80)', opacity=0.5),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[trojan_x[0]], y=[trojan_y[0]], z=[trojan_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(160, 80, 80)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[trojan_desc],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+    traces = [geom_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position,

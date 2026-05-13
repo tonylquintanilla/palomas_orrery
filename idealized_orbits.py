@@ -1,26 +1,21 @@
 """
 idealized_orbits.py - Keplerian orbit ellipse construction and satellite orbit models.
-
 Computes and plots idealized (Keplerian) orbit paths from orbital elements,
 with osculating element support for high-accuracy visualization. Handles
 elliptical, parabolic, and hyperbolic orbits. Includes specialized models
 for planetary satellite systems (Mars, Jupiter, Saturn, Uranus, Neptune)
 with proper parent-body-relative coordinate transforms.
-
 The largest computation module (~6,100 lines). Consumed by palomas_orrery.py
 for both plot_objects and animate_objects orbit rendering.
-
 Key functions:
     plot_idealized_orbits() - Master orbit renderer for all object types
     add_mean_orbit_trace() - Simple Keplerian ellipse from mean elements
     calculate_*_satellite_elements() - Per-system satellite orbit models
-
-Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; 45 hardcoded AU-in-km values replaced with KM_PER_AU
 import from constants_new.py)
 """
 # idealized_orbits.py
-
 import numpy as np
 import math
 import plotly.graph_objs as go
@@ -44,10 +39,8 @@ from apsidal_markers import (
 import sys
 import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-
 # Import orbital element dictionaries from standalone module (no dependencies)
 from orbital_elements import planetary_params, parent_planets, planet_tilts
-
 # Dictionary of planet pole directions (J2000)
 planet_poles = {
     'Mars': {'ra': 317.68, 'dec': 52.89},
@@ -57,38 +50,28 @@ planet_poles = {
     'Neptune': {'ra': 299.36, 'dec': 43.46},
     'Pluto': {'ra': 132.99, 'dec': -6.16}
 }
-
 import numpy as np
 from datetime import datetime, timedelta
-
 JUPITER_MOONS = ['Metis', 'Adrastea', 'Amalthea', 'Thebe', 
                  'Io', 'Europa', 'Ganymede', 'Callisto']
-
 # Saturn moons for osculating-only dual orbit system
 # Note: Phoebe included - has special Laplace plane transformation in plot_saturn_moon_osculating_orbit()
 SATURN_MOONS = ['Pan', 'Daphnis', 'Prometheus', 'Pandora', 'Mimas', 'Enceladus', 
                 'Tethys', 'Dione', 'Rhea', 'Titan', 'Hyperion', 'Iapetus', 'Phoebe']
-
 URANUS_MOONS = ['Miranda', 'Ariel', 'Umbriel', 'Titania', 'Oberon', 'Portia', 'Mab'] 
-
 # Neptune moons for osculating-only dual orbit system
 # Note: Triton is retrograde (i~157 deg), Nereid highly eccentric (e~0.75) - both work with standard Keplerian
 NEPTUNE_MOONS = ['Triton', 'Nereid', 'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus']
-
 # Pluto moons - osculating-only display (pole RA=132.99 deg far from ecliptic ~270 deg)
 # Note: When "Pluto-Charon Barycenter" is center, Charon and Pluto both orbit the barycenter
 PLUTO_MOONS = ['Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
-
 # For barycenter mode: objects that orbit the Pluto system barycenter
 PLUTO_BARYCENTER_ORBITERS = ['Pluto', 'Charon', 'Styx', 'Nix', 'Kerberos', 'Hydra']
-
 # Orcus-Vanth binary system
 # Note: When "Orcus-Vanth Barycenter" is center, both Orcus and Vanth orbit the barycenter
 # Orcus-Vanth has the HIGHEST mass ratio (16%) of any known planet/dwarf planet system!
 ORCUS_BARYCENTER_ORBITERS = ['Orcus', 'Vanth']
-
 # TNO (Trans-Neptunian Object) satellite systems - osculating only
-
 # These use JPL satellite ephemeris solutions (not small body solutions)
 PATROCLUS_BARYCENTER_ORBITERS = ['Patroclus', 'Menoetius']
 ERIS_MOONS = ['Dysnomia']
@@ -97,9 +80,7 @@ ORCUS_MOONS = ['Vanth']
 QUAOAR_MOONS = ['Weywot']
 HAUMEA_MOONS = ["Hi'iaka", 'Namaka']
 MAKEMAKE_MOONS = ['MK2']
-
 TNO_MOONS = ERIS_MOONS + HAUMEA_MOONS + MAKEMAKE_MOONS + GONGGONG_MOONS + ORCUS_MOONS + QUAOAR_MOONS
-
 def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     """
     Get appropriate perturbation note for planet's Keplerian orbit hover text.
@@ -196,8 +177,6 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     )
     
     return perturbation_notes.get(obj_name, default_note)
-
-
 def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params):
     """
     Compare osculating vs mean orbital elements and return perturbation assessment HTML.
@@ -270,8 +249,6 @@ def get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params):
     )
     
     return assessment
-
-
 def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
     """
     Add a mean orbit trace from orbital_elements.py (JPL epoch solution).
@@ -368,7 +345,6 @@ def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
                 showlegend=True
             )
         )
-
         # Single info marker for mean orbit (opposite perihelion for clarity)
         mean_info_idx = 3 * len(x_mean) // 4  # 270 deg, opposite Keplerian info marker
         fig.add_trace(
@@ -388,15 +364,12 @@ def add_mean_orbit_trace(fig, obj_name, mean_params, color_func):
                 showlegend=False
             )
         )
-
         print(f"  Added mean orbit trace for {obj_name} (e={mean_e:.6f}, {orbit_type}, epoch={epoch_str})", flush=True)
         return True
         
     except Exception as err:
         print(f"  [WARN] Could not add mean orbit for {obj_name}: {err}", flush=True)
         return False
-
-
 # this function adjusts the orbital elements for phobos and deimos based on perturbations
 def calculate_mars_satellite_elements(date, satellite_name):
     """
@@ -405,7 +378,6 @@ def calculate_mars_satellite_elements(date, satellite_name):
     """
     # Calculate days since revision date of ephemeris for Phobos and Deimos
     base_epoch = datetime(2025, 6, 2, 0, 0, 0)
-
     # Calculate days since the base epoch (NOT J2000!)
     d = (date - base_epoch).days
     
@@ -455,7 +427,6 @@ def calculate_mars_satellite_elements(date, satellite_name):
         'Omega': Omega
     }
     
-
 def calculate_jupiter_satellite_elements(date, satellite_name):
     """
     Calculate time-varying orbital elements for Jupiter satellites.
@@ -512,7 +483,6 @@ def calculate_jupiter_satellite_elements(date, satellite_name):
     Omega = (Omega_base + Omega_rate * d) % 360.0
     
     return {'a': a_base, 'e': e_base, 'i': i_base, 'omega': omega, 'Omega': Omega}
-
 def calculate_saturn_satellite_elements(date, satellite_name):
     """
     Calculate time-varying orbital elements for Saturn satellites.
@@ -561,8 +531,6 @@ def calculate_saturn_satellite_elements(date, satellite_name):
     Omega = (Omega_base + Omega_rate * d) % 360.0
     
     return {'a': a_base, 'e': e_base, 'i': i_base, 'omega': omega, 'Omega': Omega}
-
-
 def test_mars_rotations(satellite_name, planetary_params, color, fig=None):     # test function only
     """Test multiple rotation combinations to find the best alignment"""
     if fig is None:
@@ -590,12 +558,10 @@ def test_mars_rotations(satellite_name, planetary_params, color, fig=None):     
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
-
         # Test several different rotation combinations
         rotations = [
             {"name": "Basic", "z1": Omega_rad, "x": i_rad, "z2": omega_rad, "extra": None},
@@ -652,19 +618,31 @@ def test_mars_rotations(satellite_name, planetary_params, color, fig=None):     
                     mode='lines',
                     line=dict(dash=line_style, width=1, color=color),
                     name=f"{satellite_name} {rot['name']}",
-                    text=[f"{satellite_name} {rot['name']} Rotation"] * len(x_temp),
-                    customdata=[f"{satellite_name} {rot['name']} Rotation"] * len(x_temp),
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=f"{satellite_name} {rot['name']}",
+                    hoverinfo='skip',
                     showlegend=True
                 )
             )
+            # Info marker at midpoint of arc
+            info_idx = min(len(x_temp) // 2, len(x_temp) - 1)
+            fig.add_trace(go.Scatter3d(
+                x=[x_temp[info_idx]], y=[y_temp[info_idx]], z=[z_temp[info_idx]],
+                mode='markers',
+                marker=dict(size=6, color=color, opacity=0.9,
+                            symbol='cross', line=dict(color='white', width=1)),
+                name='',
+                legendgroup=f"{satellite_name} {rot['name']}",
+                text=[f"{satellite_name} {rot['name']}"],
+                customdata=[f"{satellite_name} {rot['name']}"],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            ))
         
         return fig
     
     except Exception as e:
         print(f"Error testing Mars rotations for {satellite_name}: {e}", flush=True)
         return fig
-
 def test_uranus_equatorial_transformations(satellite_name, planetary_params, color, fig=None):
     """Test transformations assuming orbital elements are in Uranus's equatorial plane"""
     if fig is None:
@@ -692,7 +670,6 @@ def test_uranus_equatorial_transformations(satellite_name, planetary_params, col
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
@@ -749,12 +726,25 @@ def test_uranus_equatorial_transformations(satellite_name, planetary_params, col
                 mode='lines',
                 line=dict(dash='solid', width=2, color=color),
                 name=f"{satellite_name} Equatorial Transform",
-                text=[f"{satellite_name} Equatorial Transform"] * len(x_final),
-                customdata=[f"{satellite_name} Equatorial Transform"] * len(x_final),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"{satellite_name} Equatorial Transform",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"{satellite_name} Equatorial Transform",
+            text=[f"{satellite_name} Equatorial Transform"],
+            customdata=[f"{satellite_name} Equatorial Transform"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
         
         return fig
         
@@ -762,7 +752,6 @@ def test_uranus_equatorial_transformations(satellite_name, planetary_params, col
         print(f"Error in test_uranus_equatorial_transformations: {e}", flush=True)
         traceback.print_exc()
         return fig
-
 def test_uranus_rotation_combinations(satellite_name, planetary_params, color, fig=None):
     """Test multiple rotation combinations for Uranus satellites systematically"""
     if fig is None:
@@ -790,7 +779,6 @@ def test_uranus_rotation_combinations(satellite_name, planetary_params, color, f
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
@@ -859,12 +847,25 @@ def test_uranus_rotation_combinations(satellite_name, planetary_params, color, f
                     mode='lines',
                     line=dict(dash=style, width=1, color=color),
                     name=f"{satellite_name} {combo['name']}",
-                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=f"{satellite_name} {combo['name']}",
+                    hoverinfo='skip',
                     showlegend=True
                 )
             )
+            # Info marker at midpoint of arc
+            info_idx = min(len(x_rotated) // 2, len(x_rotated) - 1)
+            fig.add_trace(go.Scatter3d(
+                x=[x_rotated[info_idx]], y=[y_rotated[info_idx]], z=[z_rotated[info_idx]],
+                mode='markers',
+                marker=dict(size=6, color=color, opacity=0.9,
+                            symbol='cross', line=dict(color='white', width=1)),
+                name='',
+                legendgroup=f"{satellite_name} {combo['name']}",
+                text=[f"{satellite_name} {combo['name']}"],
+                customdata=[f"{satellite_name} {combo['name']}"],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            ))
         
         return fig
         
@@ -872,7 +873,6 @@ def test_uranus_rotation_combinations(satellite_name, planetary_params, color, f
         print(f"Error in test_uranus_rotation_combinations: {e}", flush=True)
         traceback.print_exc()
         return fig
-
 def debug_planet_transformation(planet_name):
     """Print detailed information about the transformation for a specific planet"""
     print(f"\n==== DEBUG: {planet_name} Transformation ====", flush=True)
@@ -946,7 +946,6 @@ def debug_planet_transformation(planet_name):
             print(f"\nAngle between simple and complex transformations: {angle:.2f} deg", flush=True)
         else:
             print("Cannot calculate node vector (pole is directly aligned with Z-axis)", flush=True)
-
 def debug_mars_moons(satellites_data, parent_planets):          # test function only
     """Special debug function for Mars and its moons"""
     print("\n==== MARS SYSTEM DEBUG ====", flush=True)
@@ -992,7 +991,6 @@ def debug_mars_moons(satellites_data, parent_planets):          # test function 
             print(f"  Stated inclination: {i} deg", flush=True)
             print(f"  If relative to Mars' equator, inclination to ecliptic would be ~{i_to_ecliptic:.2f} deg", flush=True)
             print(f"  If relative to ecliptic, inclination to Mars' equator would be ~{i_to_equator:.2f} deg", flush=True)
-
 def compare_transformation_methods(fig, satellites_data, parent_planets):       # test function only
     """Plot orbits with different transformation methods for comparison"""
     
@@ -1025,7 +1023,6 @@ def compare_transformation_methods(fig, satellites_data, parent_planets):       
                 )
     
     return fig
-
 def test_mars_negative_tilt(fig, satellites_data):          # test function only
     """Test hypothesis that Mars needs a negative tilt application"""
     
@@ -1070,14 +1067,27 @@ def test_mars_negative_tilt(fig, satellites_data):          # test function only
                     mode='lines',
                     line=dict(dash='solid', width=2, color='purple'),
                     name=f"{moon} (Negative Tilt Test)",
-                    text=[f"{moon} with negative tilt test"] * len(x_final),
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=f"{moon} (Negative Tilt Test)",
+                    hoverinfo='skip',
                     showlegend=True
                 )
             )
+            # Info marker at midpoint of arc
+            info_idx = min(len(x_final) // 2, len(x_final) - 1)
+            fig.add_trace(go.Scatter3d(
+                x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+                mode='markers',
+                marker=dict(size=6, color=color, opacity=0.9,
+                            symbol='cross', line=dict(color='white', width=1)),
+                name='',
+                legendgroup=f"{moon} (Negative Tilt Test)",
+                text=[f"{moon} (Negative Tilt Test)"],
+                customdata=[f"{moon} (Negative Tilt Test)"],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            ))
     
     return fig
-
 def debug_satellite_systems():
     fig = go.Figure()
     
@@ -1103,7 +1113,6 @@ def debug_satellite_systems():
     )
     
     fig.show()
-
 def rotate_points(x, y, z, angle, axis='z'):
     """
     Rotates points (x,y,z) about the given axis by 'angle' radians.
@@ -1123,12 +1132,10 @@ def rotate_points(x, y, z, angle, axis='z'):
     x = np.array(x, copy=True)
     y = np.array(y, copy=True)
     z = np.array(z, copy=True)
-
     # Initialize rotated coordinates
     xr = x.copy()
     yr = y.copy()
     zr = z.copy()
-
     # Perform rotation based on specified axis
     if axis == 'z':
         # Rotate about z-axis
@@ -1147,9 +1154,7 @@ def rotate_points(x, y, z, angle, axis='z'):
         # yr remains the same
     else:
         raise ValueError(f"Unknown rotation axis: {axis}. Use 'x', 'y', or 'z'.")
-
     return xr, yr, zr
-
 def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers=False):
     """
     Plot osculating orbit for Jupiter satellites.
@@ -1212,7 +1217,6 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         else:
             print(f"  [WARN] No elements available for {satellite_name}, skipping orbit plot", flush=True)
             return fig
-
         # Extract elements
         a = elements.get('a', 0)  # AU
         e = elements.get('e', 0)
@@ -1296,10 +1300,23 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
             mode='lines',
             line=dict(color=color, width=2, dash='dash'),
             name=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
-            text=[hover_text_osc] * len(x_final),
-            customdata=[hover_text_osc] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            text=[hover_text_osc],
+            customdata=[f'{satellite_name} Osculating Orbit (Epoch: {epoch})'],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
         print(f"  [OK] Osculating orbit plotted (ecliptic frame, no Jupiter rotation)", flush=True)
@@ -1311,8 +1328,6 @@ def plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         import traceback
         traceback.print_exc()
         return fig
-
-
 def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers=False):
     """
     Plot osculating orbit for Saturn satellites.
@@ -1337,7 +1352,6 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         'Iapetus': '608',
         'Phoebe': '609'  # Retrograde irregular - has special Laplace plane transformation
     }
-
     horizons_id = SATURN_MOON_IDS.get(satellite_name)
     if not horizons_id:
         print(f"Warning: No Horizons ID for {satellite_name}", flush=True)
@@ -1438,16 +1452,28 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
                 f"Saturn analytical orbits not shown due to<br>"
                 f"reference frame complexity (pole RA=40.58 deg).</i>"
             )
-
         fig.add_trace(go.Scatter3d(
             x=x_final, y=y_final, z=z_final,
             mode='lines',
             line=dict(color=color, width=2, dash='dash'),
             name=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
-            text=[hover_text_osc] * len(x_final),
-            customdata=[hover_text_osc] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            text=[hover_text_osc],
+            customdata=[f'{satellite_name} Osculating Orbit (Epoch: {epoch})'],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
         print(f"  [OK] Osculating orbit plotted (ecliptic frame)", flush=True)
@@ -1458,7 +1484,6 @@ def plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         import traceback
         traceback.print_exc()
         return fig
-
 def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers=False):
     """
     Plot osculating orbit for Uranus satellites.
@@ -1482,7 +1507,6 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         'Portia': '712',
         'Mab': '726'
     }
-
     horizons_id = URANUS_MOON_IDS.get(satellite_name)
     if not horizons_id:
         print(f"Warning: No Horizons ID for {satellite_name}", flush=True)
@@ -1541,16 +1565,28 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
             f"Uranus analytical orbits not shown due to<br>"
             f"extreme axial tilt (97.77 deg) complexity.</i>"
         )
-
         fig.add_trace(go.Scatter3d(
             x=x_final, y=y_final, z=z_final,
             mode='lines',
             line=dict(color=color, width=2, dash='dash'),
             name=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
-            text=[hover_text_osc] * len(x_final),
-            customdata=[hover_text_osc] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            text=[hover_text_osc],
+            customdata=[f'{satellite_name} Osculating Orbit (Epoch: {epoch})'],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
         print(f"  [OK] Osculating orbit plotted (ecliptic frame)", flush=True)
@@ -1561,7 +1597,6 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
         import traceback
         traceback.print_exc()
         return fig
-
 def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers=False):
     """
     Plot osculating orbit for Neptune satellites.
@@ -1590,7 +1625,6 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         'Larissa': '807',
         'Proteus': '808'
     }
-
     horizons_id = NEPTUNE_MOON_IDS.get(satellite_name)
     if not horizons_id:
         print(f"Warning: No Horizons ID for {satellite_name}", flush=True)
@@ -1674,16 +1708,28 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
                 f"Neptune analytical orbits not shown due to<br>"
                 f"pole orientation and Triton complexity.</i>"
             )
-
         fig.add_trace(go.Scatter3d(
             x=x_final, y=y_final, z=z_final,
             mode='lines',
             line=dict(color=color, width=2, dash='dash'),
             name=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
-            text=[hover_text_osc] * len(x_final),
-            customdata=[hover_text_osc] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f'{satellite_name} Osculating Orbit (Epoch: {epoch})',
+            text=[hover_text_osc],
+            customdata=[f'{satellite_name} Osculating Orbit (Epoch: {epoch})'],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
         print(f"  [OK] Osculating orbit plotted (ecliptic frame)", flush=True)
@@ -1694,7 +1740,6 @@ def plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_ap
         import traceback
         traceback.print_exc()
         return fig
-
 def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Pluto'):
     """
     Plot osculating orbit for objects in Pluto binary system.
@@ -1742,7 +1787,6 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     
     mass_ratio = BINARY_PARAMS['mass_ratio']
     separation = BINARY_PARAMS['separation_au']
-
     horizons_id = PLUTO_SYSTEM_IDS.get(object_name)
     if not horizons_id:
         print(f"Warning: No Horizons ID for {object_name}", flush=True)
@@ -1763,10 +1807,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             center_suffix = '@9'  # Barycentric view
         else:
             center_suffix = '@999'  # Pluto-centered view (or None for default)
-
         # Determine which orbital elements to use
-
-
         """
         if is_barycenter_mode and object_name in ['Pluto', 'Charon']:
             # BARYCENTER MODE for Pluto/Charon:
@@ -1802,7 +1843,6 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg (from cache)", flush=True)
             """
         
-
         if is_barycenter_mode and object_name in ['Pluto', 'Charon']:
             # BARYCENTER MODE for Pluto/Charon:
             # Try to use barycentric osculating elements from cache first
@@ -1852,7 +1892,6 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                 
                 print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
                 print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg (from cache)", flush=True)
-
         else:
             # PLUTO-CENTERED MODE or outer moons:
             # Use cached osculating elements with appropriate center
@@ -1923,9 +1962,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         if is_barycenter_mode and object_name in ['Pluto', 'Charon']:
             # Dashed lines for osculating orbits (to distinguish from actual orbits)
             line_style = dict(color=color, width=2, dash='dash')
-
             orbit_label = f'{object_name} Osculating Orbit (Epoch: {epoch})'
-
         else:
             # Dashed for osculating orbits
             line_style = dict(color=color, width=2, dash='dash')
@@ -1936,15 +1973,27 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
             mode='lines',
             line=line_style,
             name=orbit_label,
-            text=[hover_text_osc] * len(x_final),
-            customdata=[hover_text_osc] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=orbit_label,
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=orbit_label,
+            text=[hover_text_osc],
+            customdata=[orbit_label],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
 #        print(f"  [OK] Orbit plotted (ecliptic frame)", flush=True)
 #        return fig
-
         # Add apsidal markers using standard method
         if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits
             from apsidal_markers import add_perihelion_marker, add_apohelion_marker
@@ -2000,14 +2049,11 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         
         print(f"  [OK] Orbit plotted (ecliptic frame)", flush=True)
         return fig
-
     except Exception as e:
         print(f"Error plotting orbit for {object_name}: {e}", flush=True)
         import traceback
         traceback.print_exc()
         return fig
-
-
 def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show_apsidal_markers=False):
     """
     Plot osculating orbit for TNO (Trans-Neptunian Object) satellites.
@@ -2060,13 +2106,11 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         # Horizons returns heliocentric data which is wrong for satellite visualization
     #    ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
         ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth']  
-
         if satellite_name in ANALYTICAL_ONLY_SATELLITES and satellite_name in planetary_params:
             # Force analytical path - skip cache even if present
             elements = planetary_params[satellite_name]
             epoch = "analytical (J2000, theta=0)"
             orbit_type = "Analytical"
-
             if satellite_name == 'MK2':
                 orbit_source = ("Analytical orbit from Hubble observations<br>"
                                "(Bamberger 2025, arXiv:2509.05880)<br>"
@@ -2098,7 +2142,6 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             i = elements.get('i', 0)
             omega = elements.get('omega', 0)
             Omega = elements.get('Omega', 0)
-
         elif satellite_name in cache:
             elements = cache[satellite_name]['elements']
             epoch = elements.get('epoch', f"{date.strftime('%Y-%m-%d')}")
@@ -2121,7 +2164,6 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             elements = planetary_params[satellite_name]
             epoch = "analytical (J2000, theta=0)"
             orbit_type = "Analytical"
-
             if satellite_name == 'MK2':
                 orbit_source = ("Analytical orbit from Hubble observations<br>"
                                "(Bamberger 2025, arXiv:2509.05880)<br>"
@@ -2157,7 +2199,6 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         else:
             print(f"  [WARN] No elements for {satellite_name}, skipping orbit plot", flush=True)
             return fig
-
         print(f"  Elements: a={a:.6f} AU, e={e:.4f}, i={i:.2f} deg, omega={omega:.2f} deg, Omega={Omega:.2f} deg", flush=True)
         
         # Generate orbit points
@@ -2170,7 +2211,6 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             theta = np.concatenate([theta_first_half, theta_second_half])
         else:
             theta = np.linspace(0, 2*np.pi, 360)
-
         # Skip if semi-major axis is invalid
         if a <= 0:
             print(f"  [WARN] Invalid semi-major axis for {satellite_name}", flush=True)
@@ -2227,17 +2267,28 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
             mode='lines',
             line=dict(color=color, width=2, dash='dash'),
             name=f"{satellite_name} {orbit_type} Orbit",
-            text=[hover_text] * len(x_final),
-            customdata=[f"{satellite_name} {orbit_type} Orbit"] * len(x_final),
-            hoverinfo='text',
+            legendgroup=f"{satellite_name} {orbit_type} Orbit",
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"{satellite_name} {orbit_type} Orbit",
+            text=[hover_text],
+            customdata=[f"{satellite_name} {orbit_type} Orbit"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
         print(f"  [OK] Plotted {satellite_name} {orbit_type.lower()} orbit", flush=True)
-
         # Add apsidal markers using standard method
         if show_apsidal_markers and e > 0.001:  # Skip for nearly circular orbits            
-
             from apsidal_markers import add_perihelion_marker, add_apohelion_marker
             
             # Find periapsis and apoapsis indices
@@ -2293,8 +2344,6 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
         import traceback
         traceback.print_exc()
         return fig
-
-
 def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params):
     """Build hover text for barycenter-centered view."""
     
@@ -2365,8 +2414,6 @@ def _build_barycenter_mode_hover_text(object_name, a, e, i, epoch, binary_params
             f"at epoch. Perturbations from Pluto-Charon<br>"
             f"binary cause deviations over time.</i>"
         )
-
-
 def _build_pluto_centered_hover_text(object_name, a, e, i, epoch):
     """Build hover text for traditional Pluto-centered view."""
     
@@ -2401,7 +2448,6 @@ def _build_pluto_centered_hover_text(object_name, a, e, i, epoch):
             f"* The Pluto-Charon binary 'wobble'<br>"
             f"The divergence you see IS the perturbation!</i>"
         )
-
 def add_pluto_barycenter_marker(fig, date, charon_position=None):
     """
     Add the Pluto-Charon barycenter marker to Pluto-centered view.
@@ -2469,7 +2515,6 @@ def add_pluto_barycenter_marker(fig, date, charon_position=None):
     print(f"  [OK] Added barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
     
     return fig
-
 def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Orcus'):
     """
     Plot osculating orbit for objects in the Orcus-Vanth binary system.
@@ -2488,7 +2533,6 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     - Vanth from barycenter: ~7,770 km
     - System inclination to ecliptic: ~90 deg (face-on from Earth)
     """
-
     # Horizons IDs for Orcus system objects  
     # NOTE: JPL Horizons has specific IDs for Orcus system:
     #   '90482;' or '20090482' = satellite solution barycenter (use this as center!)
@@ -2500,7 +2544,6 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     }
     
     # Binary system physical parameters (from ALMA 2016 and Brown et al. 2010)
-
     BINARY_PARAMS = {
         'separation_au': 0.0000601,       # 9,000 km total separation
         'period_days': 9.54,              # Orbital period
@@ -2513,7 +2556,6 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     #    'omega': 0.0,                     # Argument of periapsis (circular orbit)
         'omega': 65.0,                    # Fitted to align orbit with JPL positions
     }
-
     mass_ratio = BINARY_PARAMS['mass_ratio']
     separation = BINARY_PARAMS['separation_au']
     
@@ -2656,7 +2698,6 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                     f"Orbit plane: Fitted to JPL satellite solution<br>"
                     f"Positions: JPL Horizons ID 120090482"
                 )
-
         else:
             hover_text_osc = (
                 f"<b>{object_name} Osculating Orbit</b><br>"
@@ -2673,17 +2714,29 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         else:
             line_style = dict(color=color, width=1, dash='dash')
             orbit_label = f'{object_name} Osculating Orbit (Epoch: {epoch})'
-
         # Add orbit trace
         fig.add_trace(go.Scatter3d(
             x=x_final, y=y_final, z=z_final,
             mode='lines',
             line=line_style,
             name=orbit_label,
-            text=[hover_text_osc] * len(x_final),
-            customdata=[hover_text_osc] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=orbit_label,
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=orbit_label,
+            text=[hover_text_osc],
+            customdata=[orbit_label],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
         print(f"  [OK] Added {object_name} orbit (center: {center_id})", flush=True)
@@ -2693,8 +2746,6 @@ def plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         print(f"Error plotting {object_name} orbit: {e}", flush=True)
         traceback.print_exc()
         return fig
-
-
 def add_orcus_barycenter_marker(fig, date, vanth_position=None):
     """
     Add the Orcus-Vanth barycenter marker to Orcus-centered view.
@@ -2761,8 +2812,6 @@ def add_orcus_barycenter_marker(fig, date, vanth_position=None):
     print(f"  [OK] Added Orcus-Vanth barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
     
     return fig
-
-
 def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Gonggong'):
     """
     Plot analytical orbit for Xiangliu around Gonggong.
@@ -2870,11 +2919,25 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
                 mode='lines',
                 line=dict(color=color, width=2, dash='dash'),
                 name=f"Xiangliu Analytical Orbit (Epoch: {epoch_str})",
-                text=[hover_text] * len(x_ecl),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"Xiangliu Analytical Orbit (Epoch: {epoch_str})",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_ecl) // 2, len(x_ecl) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_ecl[info_idx]], y=[y_ecl[info_idx]], z=[z_ecl[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"Xiangliu Analytical Orbit (Epoch: {epoch_str})",
+            text=[hover_text],
+            customdata=[f"Xiangliu Analytical Orbit (Epoch: {epoch_str})"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
         
         print(f"  [OK] Plotted Xiangliu analytical orbit ({len(x_ecl)} points)", flush=True)
         
@@ -2950,8 +3013,6 @@ def plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_mar
         print(f"Error plotting Xiangliu orbit: {ex}", flush=True)
         traceback.print_exc()
         return fig
-
-
 def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Patroclus-Menoetius Barycenter'):
     """
     Plot analytical orbit for objects in the Patroclus-Menoetius binary Trojan system.
@@ -3139,11 +3200,25 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
                 mode='lines',
                 line=dict(color=color, width=2, dash='dot'),
                 name=f"{object_name} Analytical Orbit (Epoch: {epoch_str})",
-                text=[hover_text] * len(x_ecl),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"{object_name} Analytical Orbit (Epoch: {epoch_str})",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_ecl) // 2, len(x_ecl) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_ecl[info_idx]], y=[y_ecl[info_idx]], z=[z_ecl[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"{object_name} Analytical Orbit (Epoch: {epoch_str})",
+            text=[hover_text],
+            customdata=[f"{object_name} Analytical Orbit (Epoch: {epoch_str})"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
         
         print(f"  [OK] Plotted {object_name} analytical orbit ({len(x_ecl)} points)", flush=True)
         
@@ -3201,7 +3276,6 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
         traceback.print_exc()
     
     return fig
-
 def create_planet_transformation_matrix(planet_name):
     """
     Create a transformation matrix for a planet based on its pole direction.
@@ -3256,7 +3330,6 @@ def create_planet_transformation_matrix(planet_name):
     transform_matrix = np.vstack((x_basis, y_basis, z_basis)).T
     
     return transform_matrix
-
 def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig=None, 
                          date=None, days_to_plot=None, current_position=None,
                          show_apsidal_markers=False):
@@ -3308,11 +3381,9 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 
                 if satellite_name in KNOWN_ORBITAL_PERIODS:
                     period_value = KNOWN_ORBITAL_PERIODS[satellite_name]
-
                     if period_value is None:
                         # Handle hyperbolic/parabolic objects - use Kepler's law
                         period_days = 365.25 * np.sqrt(abs(a)**3) if a else 365.25
-
                     else:
                         # Already in days
                         period_days = period_value
@@ -3331,19 +3402,16 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         else:
             # Full orbit
             theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
-
         # Generate ellipse in orbital plane
         r = a * (1 - e**2) / (1 + e * np.cos(theta))
         
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
-
         # Standard orbital element rotation sequence
         # 1. Longitude of ascending node (Omega) around z-axis
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
@@ -3367,7 +3435,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         #
         # This transformation correctly maps from the satellite's native reference frame (the planet's equator)
         # to the ecliptic reference frame used in our visualization.
-
         # Apply transformation based on the planet
         if parent_planet == 'Mars':
             # This 25 deg value is particularly interesting because it's very close to Mars' axial tilt of 25.19 deg. 
@@ -3393,22 +3460,18 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             # A Y-axis rotation (not X) is needed because it represents a rotation around 
             # the ecliptic plane's normal axis, which correctly positions the orbital planes
             # of Phobos and Deimos relative to Mars' orbital plane.
-
             # Transform from Mars equatorial to ecliptic coordinates
             # Using Mars' axial tilt. Note: A small (~10-20 deg) offset remains
             # between Keplerian and actual orbits, likely due to JPL's specific
             # convention for defining the ascending node reference.
-
             #Different reference conventions: JPL might use a slightly different convention for defining the ascending node that 
             # we haven't identified         
             # Small systematic errors: The ~10-20 deg offset might be inherent to how the orbital elements are defined
             # Time-dependent effects: Small variations in Mars' orientation that aren't captured in a static transformation
-
             # Your time-varying elements are working correctly:
             # Omega change: -157.9 deg per year (matches expected -158 deg)
             # omega change: 27.0 deg per year (matches expected +27 deg)
             #This confirms the precession calculations are accurate.
-
             if date is not None:
                 # Override static orbital elements with time-varying ones
                 orbital_params = calculate_mars_satellite_elements(date, satellite_name)
@@ -3422,7 +3485,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 Omega = orbital_params.get('Omega', 0)
                 
                 print(f"  Time-varying: a={a:.6f} AU, e={e:.6f}, i={i:.2f} deg, omega={omega:.2f} deg, Omega={Omega:.2f} deg", flush=True)
-
                 # Regenerate the orbit with new elements
                 theta = np.linspace(0, 2*np.pi, 360)
                 r = a * (1 - e**2) / (1 + e * np.cos(theta))
@@ -3440,7 +3502,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
                 x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
                 x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, omega_rad, 'z')
-
             # The Y-rotation of 25.19 deg suggests the node reference is already 
             # aligned with the ecliptic in some way. However, there's still
             # a visible offset in your plot.
@@ -3451,14 +3512,11 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
     #        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, z_adjustment, 'z')
             
             # 2. Then apply the Mars tilt
-
             mars_y_rotation = np.radians(25.19)
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, mars_y_rotation, 'y')
             print(f"Transformation applied: Mars with Y-axis rotation of 25.19 deg", flush=True)   
-
     #        z_adjustment = np.radians(10)  # Shift the z adjustment after the y adjustment -- does not improve the discrepancy
     #        x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, z_adjustment, 'z') 
-
         elif parent_planet == 'Jupiter':
             # Jupiter moons with time-varying MEAN elements
             JUPITER_MOONS = ['Io', 'Europa', 'Ganymede', 'Callisto', 
@@ -3501,7 +3559,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             jupiter_tilt = np.radians(3.13)
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, jupiter_tilt, 'x')
             print(f"  Transform: Jupiter equatorial [OK] ecliptic (3.13 deg X-rotation)", flush=True)
-
         elif parent_planet == 'Saturn':
             if satellite_name == 'Phoebe':
                 # Special transformation for Phoebe - irregular retrograde satellite
@@ -3532,7 +3589,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 x_final, y_final, z_final = rotate_points(x_rot3, y_rot3, z_rot3, -saturn_orbit_inc, 'x')
                 
                 print(f"Transformation applied: Phoebe from Laplace plane to ecliptic (enhanced)", flush=True)
-
 # Saturn moons (except Phoebe) - follows Jupiter pattern. The calculate_saturn_satellite_elements() function currently only has 
 # elements for the 8 major moons (Mimas through Iapetus). For Pan, Daphnis, Prometheus, and Pandora, it returns None and prints a warning.
             else:
@@ -3574,7 +3630,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 saturn_tilt = np.radians(-26.73)  # Saturn's axial tilt (negative for correct direction)
                 x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, saturn_tilt, 'x')
                 print(f"  Transform: Saturn equatorial [OK] ecliptic (-26.73 deg X-rotation)", flush=True)
-
         elif parent_planet == 'Uranus':
             # Transformation from Uranus's equatorial frame to ecliptic frame:
             # 
@@ -3600,7 +3655,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             #
             # The need for dual-axis rotation reflects Uranus's unique 3D orientation
             # in space, where its equatorial plane is nearly perpendicular to its orbital plane.
-
             uranus_tilt = 105  # uranus tilt is 97.77 degrees            
             
             # First apply rotation around x-axis
@@ -3613,7 +3667,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             
             # This transformation was determined by testing and provides the best visual alignment
             # between the Keplerian orbits and the actual orbits of Uranian satellites
-
         elif parent_planet == 'Neptune':
             if satellite_name == 'Triton':
                 # Special transformation for Triton, Neptune's largest moon
@@ -3640,7 +3693,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 # Standard transformation for other Neptune satellites
                 tilt_rad = np.radians(planet_tilts['Neptune'])
                 x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, tilt_rad, 'x')
-
         elif parent_planet == 'Pluto':
             # Special case for Pluto's satellites
             # Apply the optimized transformation: X-Tilt->Y-Tilt->Z-105
@@ -3658,7 +3710,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
             x_final, y_final, z_final = rotate_points(x_rotated, y_rotated, z_rotated, z_angle, 'z')
             
             print(f"Transformation applied: Pluto X-Tilt->Y-Tilt->Z-105", flush=True)
-
         elif parent_planet in planet_tilts:
             # Use recorded tilt for other planets
             tilt_rad = np.radians(planet_tilts[parent_planet])
@@ -3676,7 +3727,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
         epoch_from_data = orbital_params.get('epoch', None)
         
         # Special analytical note for Mars moons with time-varying elements
-
         if parent_planet == 'Mars' and satellite_name in ['Phobos', 'Deimos']:
             analytical_note = (
                 "<br><br><i>Analytical orbit uses time-varying elements<br>"
@@ -3698,10 +3748,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 f"i={i:.2f} deg"
                 f"{analytical_note}"
             )
-
             # Check if epoch exists in orbital_params (from planetary_params)
-
-
             # Build orbit label - use epoch from data if it exists
             if epoch_from_data:
                 orbit_label = f"{satellite_name} Analytical Orbit (Epoch: {epoch_from_data})"
@@ -3754,7 +3801,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 # No epoch in data - don't show one
                 hover_text = f"{satellite_name} Analytical Orbit<br>a={a:.6f} AU<br>e={e:.6f}<br>i={i:.2f} deg"
                 orbit_label = f"{satellite_name} Analytical Orbit"
-
         # Add the orbit trace to the figure
         fig.add_trace(
             go.Scatter3d(
@@ -3764,13 +3810,25 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 mode='lines',
                 line=dict(dash='dot', width=1, color=color),
                 name=orbit_label,
-                text=[hover_text] * len(x_final),
-                customdata=[hover_text] * len(x_final),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=orbit_label,
+                hoverinfo='skip',
                 showlegend=True
             )
         )
-
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=orbit_label,
+            text=[hover_text],
+            customdata=[orbit_label],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
         # Add markers at key points
         # Get semi-major axis in km for distance calculations        
         # Convert semi-major axis from AU to km
@@ -3799,7 +3857,6 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 q=r[periapsis_idx], # Pass the periapsis distance
                 center_body=parent_planet  # Use parent planet for terminology
             )
-
         # Find apoapsis (farthest point from parent)
         apoapsis_idx = np.argmax(r)
         
@@ -3825,9 +3882,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
     except Exception as e:
         print(f"Error plotting {satellite_name} orbit: {e}", flush=True)
         return fig
-
 # Add this function to idealized_orbits.py
-
 def calculate_moon_orbital_elements(date):
     """
     Calculate Moon's orbital elements for a specific date
@@ -3894,8 +3949,6 @@ def calculate_moon_orbital_elements(date):
         'omega': omega,
         'Omega': Omega
     }
-
-
 def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, color, parent_planet='Mars'):
     """
     Plot osculating orbit for Mars satellites (Phobos/Deimos)
@@ -3912,7 +3965,6 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
     Returns:
         fig: Updated Plotly figure
     """
-
     print(f"\n[OSCULATING] Fetching elements for {satellite_name}...", flush=True)
     
     # Load from cache (pre-fetch already prompted user, so just use cache)
@@ -3924,7 +3976,6 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
 #        osc_elements = cache[satellite_name]
         osc_elements = cache[satellite_name]['elements']  # Access 'elements' sub-dict
         print(f"  Using cached osculating elements", flush=True)
-
     else:
         print(f"  Warning: No osculating elements in cache for {satellite_name}", flush=True)
         return fig
@@ -4006,21 +4057,31 @@ def plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, colo
             mode='lines',
             line=dict(dash='dash', width=2, color=color),
             name=f"{satellite_name} Osculating Orbit (Epoch: {epoch_osc})",
-            text=[hover_text_osc] * len(x_final_osc),
-            customdata=[hover_text_osc] * len(x_final_osc),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=f"{satellite_name} Osculating Orbit (Epoch: {epoch_osc})",
+            hoverinfo='skip',
             showlegend=True
         )
     )
+    # Info marker at midpoint of arc
+    info_idx = min(len(x_final_osc) // 2, len(x_final_osc) - 1)
+    fig.add_trace(go.Scatter3d(
+        x=[x_final_osc[info_idx]], y=[y_final_osc[info_idx]], z=[z_final_osc[info_idx]],
+        mode='markers',
+        marker=dict(size=6, color=color, opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=f"{satellite_name} Osculating Orbit (Epoch: {epoch_osc})",
+        text=[hover_text_osc],
+        customdata=[f"{satellite_name} Osculating Orbit (Epoch: {epoch_osc})"],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     
     print(f"  [OK] Added osculating orbit trace for {satellite_name}", flush=True)
     
     return fig
-
-
 def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, days_to_plot=None, 
                           current_position=None, show_apsidal_markers=False, planetary_params=None): 
-
     """
     Plot BOTH the Moon's analytical and osculating orbits for educational comparison.
     
@@ -4037,7 +4098,6 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     # Debug: Show current position if provided
     if current_position:
         print(f"[INFO] Moon current position: x={current_position['x']:.6f}, y={current_position['y']:.6f}, z={current_position['z']:.6f} AU", flush=True)    
-
     # Use default Moon color if not specified
     if color is None:
         from constants_new import color_map
@@ -4091,7 +4151,6 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
     
     # Create hover text for analytical orbit
     date_str = date.strftime('%Y-%m-%d %H:%M UTC')
-
     analytical_note = (
         "<br><br><i>Analytical orbit uses time-varying elements<br>"
         "calculated for this specific date.<br>"
@@ -4103,7 +4162,6 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         "<br>Shows general orbital geometry valid<br>"
         "over months for this epoch.</i>"
     )
-
     hover_text_ana = f"Moon Analytical Orbit<br>Date: {date_str}<br>a={a_ana:.6f} AU<br>e={e_ana:.6f}<br>i={i_ana:.2f} deg{analytical_note}"
     
     # Add analytical trace
@@ -4115,19 +4173,31 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
             mode='lines',
             line=dict(dash='dot', width=2, color=color),
             name=f"Moon Analytical Orbit (Epoch: {date.strftime('%Y-%m-%d')})",
-            text=[hover_text_ana] * len(x_final_ana),
-            customdata=[hover_text_ana] * len(x_final_ana),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=f"Moon Analytical Orbit (Epoch: {date.strftime('%Y-%m-%d')})",
+            hoverinfo='skip',
             showlegend=True
         )
     )
+    # Info marker at midpoint of arc
+    info_idx = min(len(x_final_ana) // 2, len(x_final_ana) - 1)
+    fig.add_trace(go.Scatter3d(
+        x=[x_final_ana[info_idx]], y=[y_final_ana[info_idx]], z=[z_final_ana[info_idx]],
+        mode='markers',
+        marker=dict(size=6, color=color, opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=f"Moon Analytical Orbit (Epoch: {date.strftime('%Y-%m-%d')})",
+        text=[hover_text_ana],
+        customdata=[f"Moon Analytical Orbit (Epoch: {date.strftime('%Y-%m-%d')})"],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     
     # ==================== PLOT OSCULATING ORBIT (if available) ====================
         
     if planetary_params is not None:
         # planetary_params is already the Moon's elements dict (not the full dict)
         osc_elements = planetary_params
-
         a_osc = osc_elements['a']
         e_osc = osc_elements['e']
         i_osc = osc_elements['i']
@@ -4180,12 +4250,25 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
                 mode='lines',
                 line=dict(dash='dash', width=2, color=color),  # Dashed line to distinguish from analytical
                 name=f"Moon Osculating Orbit (Epoch: {epoch_osc})",
-                text=[hover_text_osc] * len(x_final_osc),
-                customdata=[hover_text_osc] * len(x_final_osc),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"Moon Osculating Orbit (Epoch: {epoch_osc})",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final_osc) // 2, len(x_final_osc) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final_osc[info_idx]], y=[y_final_osc[info_idx]], z=[z_final_osc[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"Moon Osculating Orbit (Epoch: {epoch_osc})",
+            text=[hover_text_osc],
+            customdata=[f"Moon Osculating Orbit (Epoch: {epoch_osc})"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     else:
         print(f"[INFO] No osculating elements available for Moon - showing analytical orbit only", flush=True)
     
@@ -4251,8 +4334,6 @@ def plot_moon_ideal_orbit(fig, date, center_object_name='Earth', color=None, day
         )
     
     return fig
-
-
 def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers=False, center_id='Earth'):
     """
     Plot osculating orbit for objects in the Earth-Moon binary system.
@@ -4360,7 +4441,6 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
                 
                 print(f"  a={a:.7f} AU ({a * KM_PER_AU:.1f} km from barycenter)", flush=True)
                 print(f"  i={i:.2f} deg, Omega={Omega:.2f} deg, omega={omega:.2f} deg", flush=True)
-
         else:
             # EARTH-CENTERED MODE (traditional view):
             # Use Moon's cached osculating elements directly
@@ -4476,10 +4556,23 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
             mode='lines',
             line=line_style,
             name=orbit_label,
-            text=[hover_text_osc] * len(x_final),
-            customdata=[hover_text_osc] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=orbit_label,
+            hoverinfo='skip',
             showlegend=True
+        ))
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_final) // 2, len(x_final) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=orbit_label,
+            text=[hover_text_osc],
+            customdata=[orbit_label],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
         
         print(f"  [OK] Added {object_name} orbit (center: {center_id})", flush=True)
@@ -4489,8 +4582,6 @@ def plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal
         print(f"Error plotting {object_name} Earth-Moon orbit: {e}", flush=True)
         traceback.print_exc()
         return fig
-
-
 def add_earth_moon_barycenter_marker(fig, date, moon_position=None):
     """
     Add the Earth-Moon barycenter marker to Earth-centered view.
@@ -4562,8 +4653,6 @@ def add_earth_moon_barycenter_marker(fig, date, moon_position=None):
     print(f"  [OK] Added Earth-Moon barycenter marker at ({bary_x:.7f}, {bary_y:.7f}, {bary_z:.7f}) AU", flush=True)
     
     return fig
-
-
 def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_distance=100):
     """
     Generate points for a hyperbolic orbit trajectory.
@@ -4661,7 +4750,6 @@ def generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_d
     x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
     
     return x_final, y_final, z_final, q
-
 def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None, 
                           planetary_params=None, parent_planets=None, color_map=None, 
                           date=None, days_to_plot=None, current_positions=None, fetch_position=None, 
@@ -4687,10 +4775,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
     import numpy as np
     import plotly.graph_objects as go
     from datetime import datetime, timedelta
-
     # Create name to object mapping
     obj_dict = {obj['name']: obj for obj in objects} if objects else {}
-
     # If current_positions not provided, try to extract from objects parameter
     if current_positions is None and objects is not None:
         current_positions = {}
@@ -4701,7 +4787,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     'y': obj.y, 
                     'z': obj.z
                 }
-
     # Track skipped objects by category
     skipped = {
         'satellites': [],
@@ -4711,21 +4796,17 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
         'invalid_orbit': [],
         'error': []  # ADD THIS LINE
     }
-
     plotted = []
-
     # If days_to_plot not provided, try to get from GUI
     if days_to_plot is None:
 #        try:
 #            days_to_plot = int(days_to_plot_entry.get())
 #        except:
         days_to_plot = 365  # Default fallback
-
     # Add date parameter default
     if date is None:
         from datetime import datetime
         date = datetime.now()
-
     # If objects parameter is None, handle gracefully
     if objects is None:
         print("Warning: objects list is None, cannot determine object properties", flush=True)
@@ -4744,7 +4825,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
     # If color_map is None, use a default function
     if color_map is None:
         from constants_new import color_map       
-
     # In the section where we plot satellites of the center object:
     if center_id != 'Sun':
         # Get list of moons for this center
@@ -4765,16 +4845,13 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 # Get Moon's current position from current_positions
                 moon_current_pos = current_positions.get('Moon') if current_positions else None
                 moon_params = planetary_params.get('Moon') if planetary_params else None
-
                 fig = plot_moon_ideal_orbit(fig, date, center_id, color_map(moon_name), days_to_plot,
                                             current_position=moon_current_pos,
                                             show_apsidal_markers=show_apsidal_markers,
                                             planetary_params=moon_params)
-
                 # NEW: Add barycenter marker for Earth-centered view
                 moon_pos = current_positions.get('Moon') if current_positions else None
                 fig = add_earth_moon_barycenter_marker(fig, date, moon_position=moon_pos)
-
             # NEW: Earth-Moon BARYCENTER mode
             elif center_id == 'Earth-Moon Barycenter' and moon_name in ['Earth', 'Moon']:
                 if date:
@@ -4783,7 +4860,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         show_apsidal_markers=show_apsidal_markers,
                         center_id=center_id
                     )
-
             # Special handling for Mars moons with dual-orbit system
             elif moon_name in ['Phobos', 'Deimos'] and center_id == 'Mars':
                 # Get satellite's current position
@@ -4821,7 +4897,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing ID or date)", flush=True)
-
             # Special handling for Jupiter moons with dual-orbit system
             elif moon_name in JUPITER_MOONS and center_id == 'Jupiter':
                 # Get satellite's current position
@@ -4851,7 +4926,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
-
 # Special handling for Saturn moons with dual-orbit system
             elif moon_name in SATURN_MOONS and center_id == 'Saturn':
                 # Get satellite's current position
@@ -4879,7 +4953,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
-
 # Special handling for Uranus moons with osculating-only system
             elif moon_name in URANUS_MOONS and center_id == 'Uranus':
                 # Get satellite's current position
@@ -4902,7 +4975,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
-
 # Special handling for Neptune moons with osculating-only system
             elif moon_name in NEPTUNE_MOONS and center_id == 'Neptune':
                 # Get satellite's current position
@@ -4925,7 +4997,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
-
 # Special handling for Pluto-Charon BINARY SYSTEM
             # Two modes: traditional Pluto-centered, or barycenter-centered
             
@@ -4943,7 +5014,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         show_apsidal_markers=show_apsidal_markers,
                         center_id=center_id  # ADD THIS
                     )
-
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
             
@@ -4960,7 +5030,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         show_apsidal_markers=show_apsidal_markers,
                         center_id=center_id  # ADD THIS
                     )
-
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
                 
@@ -4968,7 +5037,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 if moon_name == 'Charon':
                     charon_pos = current_positions.get('Charon') if current_positions else None
                     fig = add_pluto_barycenter_marker(fig, date, charon_position=charon_pos)
-
             # Special handling for Orcus-Vanth BINARY SYSTEM
             # Two modes: traditional Orcus-centered, or barycenter-centered
             # Orcus-Vanth has the HIGHEST mass ratio (16%) of any known system!
@@ -5006,7 +5074,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     fig = add_orcus_barycenter_marker(fig, date, vanth_position=vanth_pos)
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
-
             # Special handling for Gonggong-Xiangliu system
             # Source: Kiss et al. 2017, 2019 (ApJ Letters, Icarus)
             # Separation: 24,021 km, Period: 25.22 days, e=0.29
@@ -5024,7 +5091,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot analytical orbit for {moon_name} (missing date)", flush=True)
-
             # Special handling for Patroclus-Menoetius BINARY TROJAN SYSTEM (Lucy target)
             # Source: Brozovic et al. 2024 (AJ 167:104)
             # Binary separation: 692.5 km, Period: 4.283 days
@@ -5041,12 +5107,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot analytical orbit for {moon_name} (missing date)", flush=True)
-
             # Special handling for TNO satellites (Eris, Haumea, Makemake, etc. moons)
             # These have no reliable analytical elements - osculating only
             # Note: Vanth is now handled above, but other TNO moons still use this path
             elif moon_name in TNO_MOONS and moon_name != 'Vanth':
-
                 if date:
                     fig = plot_tno_satellite_orbit(
                         fig,
@@ -5058,12 +5122,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     )
                 else:
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
-
             else:
                 # Use the standard satellite plotting function for other moons
                 # Get satellite's current position
                 satellite_current_pos = current_positions.get(moon_name) if current_positions else None
-
                 fig = plot_satellite_orbit(
                     moon_name, 
                     planetary_params,
@@ -5080,7 +5142,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
         
         # COMPLETE CODE: Add After Line 2323 in Keplerian_orbits.py
         # This version loads TP from osculating_cache.json for satellites
-
         # ========== ADD ACTUAL APSIDAL MARKERS FOR ALL SATELLITES ==========
         if show_apsidal_markers and fetch_position:
             print("\n[ACTUAL APSIDAL] Checking satellites for apsidal markers...", flush=True)
@@ -5113,13 +5174,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     moon_params = planetary_params.get(moon_name)
                     
                     if moon_params:
-
                         # For satellites, get TP and epoch from osculating cache if not in params
                         # Skip for analytical-only satellites (their osculating cache has wrong heliocentric data)
                 #        ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
                         ANALYTICAL_ONLY_SATELLITES = ['MK2', 'Xiangliu', 'Vanth']  
                         if 'TP' not in moon_params and moon_name in osc_cache and moon_name not in ANALYTICAL_ONLY_SATELLITES:
-
                             try:
                                 osc_elements = osc_cache[moon_name].get('elements', {})
                                 if 'TP' in osc_elements:
@@ -5190,7 +5249,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                             'Pluto': '999'    # Pluto
                                         }
                                         center_id_numeric = satellite_center_ids.get(center_id, center_id)
-
                                     # Fetch actual positions
                                     positions_dict = fetch_positions_for_apsidal_dates(
                                         obj_id=obj_id,
@@ -5228,7 +5286,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     traceback.print_exc()
                         else:
                             print(f"  [WARN] {moon_name} has no TP in params or osculating cache", flush=True)
-
     # If center is the Sun, plot orbits for selected heliocentric objects
     else:
         for obj_name in objects_to_plot:
@@ -5243,7 +5300,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             if obj_name not in planetary_params:
                 skipped['no_params'].append(obj_name)
                 continue
-
             # Check if this is a satellite of another object (but not of the center)
             # Only skip if object_type is 'satellite' - this excludes primary bodies like Pluto
             # which appear in parent_planets['Pluto-Charon Barycenter'] for binary visualization
@@ -5253,12 +5309,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     if obj_name in moons and planet != center_id:
                         is_satellite_of_another = True
                         break
-
             if is_satellite_of_another:
                 # Skip satellites when centered on Sun (they orbit their parent, not Sun directly)
                 skipped['satellites'].append(obj_name)
                 continue
-
             elif obj_info.get('is_mission', False):
                 skipped['missions'].append(obj_name)
                 continue
@@ -5278,14 +5332,11 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 print(f"[WARN] Skipping {obj_name}: No parameters found", flush=True)
                 skipped['no_params'].append(obj_name)
                 continue
-
             # Add this debug line
             print(f"\n[DEBUG] Processing {obj_name}", flush=True)
             print(f"[DEBUG] params keys: {params.keys()}", flush=True)            
-
 # Improved code for the hyperbolic section in idealized_orbits.py
 # Based on the working pattern from orbital_param_viz.py
-
 # Check if this is a hyperbolic orbit (e > 1)
             if e > 1:
                 try:
@@ -5310,7 +5361,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             showlegend=True                    
                         )
                     )
-
                     # Single info marker for hyperbolic orbit (midpoint of arc)
                     hyp_info_idx = len(x_final) // 4
                     hyp_hover_text = (
@@ -5335,13 +5385,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             showlegend=False
                         )
                     )
-
                     # ========== CALCULATE EXACT PERIAPSIS AT THETA=0 FOR HYPERBOLIC ==========
                     from apsidal_markers import calculate_exact_apsides
-
                     # Calculate exact apsidal positions (only periapsis for hyperbolic)
                     apsides = calculate_exact_apsides(abs(a), e, i, omega, Omega, rotate_points)
-
                     # ========== ADD Keplerian PERIAPSIS MARKER ==========
                     if show_apsidal_markers:
                         if apsides['periapsis']:
@@ -5510,7 +5557,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     else:
                                         date_obj = datetime.strptime(perihelion_date_only, '%Y-%m-%d')
                                     print(f"  Fetching position for {date_obj.strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
-
                                     # Fetch the position
                                     pos_data = fetch_position(obj_id, date_obj, center_id=center_id, id_type=id_type)
                                     
@@ -5536,18 +5582,15 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                                 ),
                                                 
                                                 name=f"{obj_name} Actual Perihelion",
-
                                                 text=[
                                                     f"<b>{obj_name} at Perihelion (Actual)</b><br>"
                                                     f"Date/Time: {perihelion_full} UTC<br>"
                                                     f"Source: {actual_tp_source if actual_tp_source else 'osculating elements'}<br>"
                                                     f"Distance from {center_id}: {distance_au:.6f} AU ({distance_km:.0f} km)"
                                                     f"{_nongrav_marker_note}"
-
                                                 ],  # Full hover content in text
                                                 customdata=[f"{obj_name} Actual Perihelion"],  # Added customdata
                                                 hovertemplate='%{text}<extra></extra>',  # Standard template
-
                                                 showlegend=True
                                             )
                                         )
@@ -5572,12 +5615,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         
                         plotted.append(obj_name)
                         print(f"Plotted hyperbolic orbit for {obj_name}: e={e:.5f}, q={q:.5f} AU", flush=True)
-
                         # ========== MEAN ORBIT TRACE (from JPL epoch solution) ==========
                         mean_params = ORIGINAL_planetary_params.get(obj_name, {})
                         if mean_params:
                             add_mean_orbit_trace(fig, obj_name, mean_params, color_map)
-
                 except Exception as err:
                     print(f"Error plotting hyperbolic orbit for {obj_name}: {err}", flush=True)
                     import traceback
@@ -5603,28 +5644,23 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             else:
                 theta = np.linspace(0, 2*np.pi, 360)  # 360 points for smoothness
             r = a * (1 - e**2) / (1 + e * np.cos(theta))
-
             x_orbit = r * np.cos(theta)
             y_orbit = r * np.sin(theta)
             z_orbit = np.zeros_like(theta)
-
             # Convert angles to radians
             i_rad = np.radians(i)
             omega_rad = np.radians(omega)
             Omega_rad = np.radians(Omega)
-
             # Rotate ellipse by argument of periapsis (omega) around z-axis
             x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
             # Then rotate by inclination (i) around x-axis
             x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
             # Then rotate by longitude of ascending node (Omega) around z-axis
             x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, Omega_rad, 'z')
-
             # ADD THIS CODE to check for epoch
             epoch_str = ""
             if 'epoch' in params:
                 epoch_str = f" (Epoch: {params['epoch']})"
-
             # PLOT THE ORBIT LINE - geometry only, hover on info marker
             kep_legend_group = f"{obj_name}_keplerian"
             fig.add_trace(
@@ -5640,7 +5676,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     showlegend=True                    
                 )
             )
-
             # Single info marker for Keplerian orbit (opposite perihelion for clarity)
             kep_info_idx = len(x_final) // 4  # ~aphelion region, away from apsidal markers
             kep_hover_text = (
@@ -5665,13 +5700,10 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     showlegend=False
                 )
             )
-
             # ========== CALCULATE EXACT APSIDES AT THETA=0 AND THETA=PI ==========
             from apsidal_markers import calculate_exact_apsides, compute_apsidal_dates_from_tp
-
             # Calculate exact apsidal positions
             apsides = calculate_exact_apsides(a, e, i, omega, Omega, rotate_points)
-
             # Get dates for the apsides
             if 'TP' in params:
                 next_perihelion, next_aphelion = compute_apsidal_dates_from_tp(
@@ -5679,7 +5711,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 )
             else:
                 next_perihelion = next_aphelion = None
-
             # ========== ADD Keplerian PERIAPSIS MARKER ==========
             if show_apsidal_markers:  # ADD THIS CONDITION
                 if apsides['periapsis']:
@@ -5725,7 +5756,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         f"<br>Unperturbed Keplerian position at actual periapsis time"
                         f"{accuracy_note}"
                     )
-
                     fig.add_trace(
                         go.Scatter3d(
                             x=[peri['x']],
@@ -5746,7 +5776,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         )
                     )
                     print(f"  Added Keplerian periapsis for {obj_name} at distance {peri['distance']:.6f} AU", flush=True)
-
             # ========== ADD Keplerian APOAPSIS MARKER ==========
             if show_apsidal_markers:  # ADD THIS CONDITION
                 if apsides['apoapsis']:
@@ -5771,7 +5800,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                             if period_days and period_days not in [None, 1e99]:
                                 tp_time = Time(params['TP'], format='jd')
                                 tp_datetime = tp_time.datetime
-
                                 # SAFE CALCULATION WITH OVERFLOW PROTECTION
                                 half_period_days = period_days / 2
                                 
@@ -5787,19 +5815,15 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     date_str = f"<br>Date: Far future aphelion (~{years_to_aphelion:,} years after perihelion)"
                                     position_description = "<br>Aphelion date beyond calculation range"
                                     print(f"  Aphelion date overflow for {obj_name} - using fallback message", flush=True)
-
                 # CONTEXT: This fix ensures that:
                 # - The 3D aphelion marker still appears correctly in the plot
                 # - The hover text shows a meaningful message instead of causing a crash
                 # - Objects with normal periods work exactly as before
                 # - Objects like Leleakuhonua get a "far future" message instead of an overflow error
-
-
                         #        # Aphelion occurs at period/2 after perihelion for Keplerian orbit
                         #        keplerian_aphelion = tp_datetime + timedelta(days=period_days/2)
                         #        date_str = f"<br>Date: {keplerian_aphelion.strftime('%Y-%m-%d %H:%M:%S')} UTC (Keplerian estimate)"
                         #        position_description = "<br>Unperturbed Keplerian position at Keplerian apoapsis time"
-
             #        hover_text = (
             #            f"<b>{obj_name} Keplerian Apoapsis</b>"
             #            f"{date_str}"
@@ -5828,7 +5852,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         f"{position_description}"
                         f"{accuracy_note}"
                     )
-
                     fig.add_trace(
                         go.Scatter3d(
                             x=[apo['x']],
@@ -5849,10 +5872,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         )
                     )
                     print(f"  Added Keplerian apoapsis for {obj_name} at distance {apo['distance']:.6f} AU", flush=True)
-
 # Fix for Keplerian_orbits.py around lines 3200-3350
 # Replace the problematic section with this corrected version:
-
             # ========== NEW: GENERATE APSIDAL DATES FROM TP ==========
             # Initialize these variables BEFORE any conditional logic
             next_perihelion = None
@@ -5868,7 +5889,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 next_perihelion, next_aphelion = compute_apsidal_dates_from_tp(
                     obj_name, params, current_date=date
                 )
-
                 # Check JPL range if needed (optional)
                 JPL_MIN_DATE = datetime(1900, 1, 1)
                 JPL_MAX_DATE = datetime(2199, 12, 29)
@@ -5889,8 +5909,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     print(f"  Next aphelion: {params['aphelion_dates'][0]}", flush=True)
                 elif next_aphelion and e < 1 and not apo_in_range:
                     print(f"  Next aphelion: {next_aphelion.strftime('%Y-%m-%d %H:%M:%S')} (outside JPL range)", flush=True)
-
-
             # ========== EXISTING: PLOT ACTUAL APSIDAL MARKERS ==========
             if show_apsidal_markers:  # ADD THIS CONDITION
                 if 'perihelion_dates' in params or 'aphelion_dates' in params:
@@ -5911,7 +5929,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         # Import the functions we need
                         from apsidal_markers import fetch_positions_for_apsidal_dates, add_actual_apsidal_markers_enhanced, calculate_exact_apsides, compute_apsidal_dates_from_tp
                         from datetime import datetime, timedelta
-
                         # Use the passed fetch_position
                         if fetch_position is None:
                             print("ERROR: fetch_position not provided to plot_idealized_orbits", flush=True)
@@ -5989,7 +6006,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                     color_map,
                                     fetch_failed=True  # Indicates ephemeris limit, not JPL general limit
                                 )
-
                             # DEBUG: Check what we're passing to enhanced markers
                             print(f"[DEBUG] Calling enhanced markers for {obj_name}:", flush=True)
                             print(f"  params has epoch: {'epoch' in params}", flush=True)
@@ -6013,7 +6029,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                                 ideal_apsides=apsides,
                                 filter_by_date_range=False
                             )
-
             if show_apsidal_markers and 'TP' in params:
                 # Check if we should add a note about out-of-range dates
                 if (next_perihelion and not peri_in_range) or (next_aphelion and not apo_in_range):
@@ -6025,7 +6040,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                         next_aphelion if not apo_in_range else None,
                         color_map
                     )
-
             # ========== NEW: ADD KEPLERIAN POSITION MARKER ==========
             # This shows the analytically calculated current position
             # based on osculating elements - visible in legend, hidden by default
@@ -6044,7 +6058,6 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     print(f"[KEPLERIAN POS] Error adding marker for {obj_name}: {kep_err}", flush=True)
                     
             # Mark this object as successfully plotted
-
             # ========== NEW: ADD LEGEND NOTES FOR OUT-OF-RANGE DATES ==========
             # Only check these if show_apsidal_markers is True and we have TP
         #    if show_apsidal_markers and 'TP' in params:
@@ -6061,27 +6074,22 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     
             # Mark this object as successfully plotted
             plotted.append(obj_name)
-
             # ========== MEAN ORBIT TRACE (from JPL epoch solution) ==========
             mean_params = ORIGINAL_planetary_params.get(obj_name, {})
             if mean_params:
                 add_mean_orbit_trace(fig, obj_name, mean_params, color_map)
-
     # Print summary of plotted and skipped objects
     print("\nKeplerian Orbit Summary:", flush=True)
     print(f"Plotted Keplerian orbits for {len(plotted)} objects:", flush=True)
     for obj in plotted:
         print(f"  - {obj}", flush=True)
-
     print("\nSkipped Keplerian orbits for:", flush=True)
     for category, objects_list in skipped.items():
         if objects_list:
             print(f"\n{category.capitalize()} ({len(objects_list)}):", flush=True)
             for obj in objects_list:
                 print(f"  - {obj}", flush=True)
-
     return fig
-
 def test_triton_rotations(satellite_name, planetary_params, color, fig=None):
     """Test multiple rotation combinations for Triton's orbit"""
     if fig is None:
@@ -6109,12 +6117,10 @@ def test_triton_rotations(satellite_name, planetary_params, color, fig=None):
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
-
         # Standard orbital element rotation sequence
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
@@ -6171,7 +6177,6 @@ def test_triton_rotations(satellite_name, planetary_params, color, fig=None):
                 {"axis": 'z', "angle": np.radians(planet_poles['Neptune']['ra'])},
                 {"axis": 'x', "angle": np.radians(90 - planet_poles['Neptune']['dec'])}
             ]},
-
             # Add these to your combinations list
             {"name": "Retrograde", "rotations": [
                 {"axis": 'z', "angle": np.radians(planet_poles['Neptune']['ra'])},
@@ -6183,7 +6188,6 @@ def test_triton_rotations(satellite_name, planetary_params, color, fig=None):
                 {"axis": 'y', "angle": np.radians(90 - planet_poles['Neptune']['dec'])},
                 {"axis": 'x', "angle": np.radians(30)}
             ]}
-
         ]
         
         # Define line styles and colors for each rotation
@@ -6210,12 +6214,25 @@ def test_triton_rotations(satellite_name, planetary_params, color, fig=None):
                     mode='lines',
                     line=dict(dash=style, width=1, color=color),
                     name=f"{satellite_name} {combo['name']}",
-                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=f"{satellite_name} {combo['name']}",
+                    hoverinfo='skip',
                     showlegend=True
                 )
             )
+            # Info marker at midpoint of arc
+            info_idx = min(len(x_rotated) // 2, len(x_rotated) - 1)
+            fig.add_trace(go.Scatter3d(
+                x=[x_rotated[info_idx]], y=[y_rotated[info_idx]], z=[z_rotated[info_idx]],
+                mode='markers',
+                marker=dict(size=6, color=color, opacity=0.9,
+                            symbol='cross', line=dict(color='white', width=1)),
+                name='',
+                legendgroup=f"{satellite_name} {combo['name']}",
+                text=[f"{satellite_name} {combo['name']}"],
+                customdata=[f"{satellite_name} {combo['name']}"],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            ))
         
         return fig
         
@@ -6267,12 +6284,10 @@ def test_pluto_moon_rotations(satellite_name, planetary_params, color, fig=None)
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
-
         # Standard orbital element rotation sequence
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
@@ -6448,12 +6463,25 @@ def test_pluto_moon_rotations(satellite_name, planetary_params, color, fig=None)
                     mode='lines',
                     line=dict(dash=style, width=1, color=color),
                     name=f"{satellite_name} {combo['name']}",
-                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=f"{satellite_name} {combo['name']}",
+                    hoverinfo='skip',
                     showlegend=True
                 )
             )
+            # Info marker at midpoint of arc
+            info_idx = min(len(x_rotated) // 2, len(x_rotated) - 1)
+            fig.add_trace(go.Scatter3d(
+                x=[x_rotated[info_idx]], y=[y_rotated[info_idx]], z=[z_rotated[info_idx]],
+                mode='markers',
+                marker=dict(size=6, color=color, opacity=0.9,
+                            symbol='cross', line=dict(color='white', width=1)),
+                name='',
+                legendgroup=f"{satellite_name} {combo['name']}",
+                text=[f"{satellite_name} {combo['name']}"],
+                customdata=[f"{satellite_name} {combo['name']}"],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            ))
         
         return fig
         
@@ -6461,7 +6489,6 @@ def test_pluto_moon_rotations(satellite_name, planetary_params, color, fig=None)
         print(f"Error in test_pluto_moon_xyz_rotations: {e}", flush=True)
         traceback.print_exc()
         return fig
-
 def very_fine_pluto_rotations(satellite_name, planetary_params, color, fig=None, 
                              x_range=(-125, -115), 
                              y_range=(-125, -115), 
@@ -6512,12 +6539,10 @@ def very_fine_pluto_rotations(satellite_name, planetary_params, color, fig=None,
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
-
         # Standard orbital element rotation sequence
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
@@ -6583,12 +6608,25 @@ def very_fine_pluto_rotations(satellite_name, planetary_params, color, fig=None,
                     mode='lines',
                     line=dict(dash=style, width=1, color=color),
                     name=f"{satellite_name} {combo['name']}",
-                    text=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    customdata=[f"{satellite_name} {combo['name']}"] * len(x_rotated),
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=f"{satellite_name} {combo['name']}",
+                    hoverinfo='skip',
                     showlegend=True
                 )
             )
+            # Info marker at midpoint of arc
+            info_idx = min(len(x_rotated) // 2, len(x_rotated) - 1)
+            fig.add_trace(go.Scatter3d(
+                x=[x_rotated[info_idx]], y=[y_rotated[info_idx]], z=[z_rotated[info_idx]],
+                mode='markers',
+                marker=dict(size=6, color=color, opacity=0.9,
+                            symbol='cross', line=dict(color='white', width=1)),
+                name='',
+                legendgroup=f"{satellite_name} {combo['name']}",
+                text=[f"{satellite_name} {combo['name']}"],
+                customdata=[f"{satellite_name} {combo['name']}"],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
+            ))
         
         return fig
         
@@ -6596,7 +6634,6 @@ def very_fine_pluto_rotations(satellite_name, planetary_params, color, fig=None,
         print(f"Error in very_fine_pluto_rotations: {e}", flush=True)
         traceback.print_exc()
         return fig
-
 def pluto_system_final_transform(satellite_name, planetary_params, color, fig=None, transform=None):
     """
     Apply a specific optimal transformation to Pluto's moons' orbits.
@@ -6654,12 +6691,10 @@ def pluto_system_final_transform(satellite_name, planetary_params, color, fig=No
         x_orbit = r * np.cos(theta)
         y_orbit = r * np.sin(theta)
         z_orbit = np.zeros_like(theta)
-
         # Convert angles to radians
         i_rad = np.radians(i)
         omega_rad = np.radians(omega)
         Omega_rad = np.radians(Omega)
-
         # Standard orbital element rotation sequence
         x_temp, y_temp, z_temp = rotate_points(x_orbit, y_orbit, z_orbit, Omega_rad, 'z')
         x_temp, y_temp, z_temp = rotate_points(x_temp, y_temp, z_temp, i_rad, 'x')
@@ -6697,12 +6732,25 @@ def pluto_system_final_transform(satellite_name, planetary_params, color, fig=No
                 mode='lines',
                 line=dict(width=2, color=color),
                 name=f"{satellite_name} Final",
-                text=[f"{satellite_name} Final Orbit"] * len(x_rotated),
-                customdata=[f"{satellite_name} Final Orbit"] * len(x_rotated),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"{satellite_name} Final",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        # Info marker at midpoint of arc
+        info_idx = min(len(x_rotated) // 2, len(x_rotated) - 1)
+        fig.add_trace(go.Scatter3d(
+            x=[x_rotated[info_idx]], y=[y_rotated[info_idx]], z=[z_rotated[info_idx]],
+            mode='markers',
+            marker=dict(size=6, color=color, opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"{satellite_name} Final",
+            text=[f"{satellite_name} Final"],
+            customdata=[f"{satellite_name} Final"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
         
         return fig
     
@@ -6710,8 +6758,6 @@ def pluto_system_final_transform(satellite_name, planetary_params, color, fig=No
         print(f"Error in pluto_system_final_transform: {e}", flush=True)
         traceback.print_exc()
         return fig
-
-
 def calculate_phoebe_correction_from_normals():
     """
     Calculate the optimal rotation to align Keplerian orbit with actual orbit
@@ -6748,34 +6794,27 @@ def calculate_phoebe_correction_from_normals():
 # Added March 2026 for Apophis close approach infrastructure.
 # Revised: fetch at CAD perigee epoch; cube-bounded arc; perigee-dense sampling.
 # ============================================================================
-
 def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_map,
                                       date, show_apsidal_markers=False, parent_window=None,
                                       approach=None):
     """
     Plot a geocentric (or planet-centric) osculating hyperbolic orbit for a
     small body executing a close flyby.
-
     KEY DESIGN DECISIONS (revised March 2026):
-
     1. Epoch at perigee, not plot start.
        Elements fetched at the CAD perigee time. At perigee, q from
        osculating elements = actual closest approach distance. Elements
        fetched at an earlier date give a valid osculating conic, but its
        periapsis is NOT the actual perigee -- it's a Keplerian projection.
-
     2. Arc bounded by the plotted cube.
        We read the current axis range and clip the hyperbola to where
        r <= axis_range * 1.5. This guarantees the arc is always visible
        and never flies off-screen, regardless of eccentricity.
-
     3. Point density highest at periapsis (sinh spacing).
        Dense near theta=0, sparse near the asymptotes. Smooth curvature
        at closest approach where it matters.
-
     4. White color, dot line style.
        Consistent with "reference curve, not actual trajectory."
-
     Parameters:
         fig:              Plotly Figure object
         obj_name (str):   Display name e.g. 'Apophis'
@@ -6787,14 +6826,12 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         parent_window:    Tkinter parent window for dialog prompts
         approach (dict):  CAD approach dict. If provided, elements are fetched
                           at the perigee epoch (approach['jd']).
-
     Returns:
         fig (modified in place; returned for chaining)
     """
     import numpy as np
     import plotly.graph_objects as go
     from datetime import datetime
-
     CENTER_TO_HORIZONS_ID = {
         'Earth':   '399',
         'Mars':    '499',
@@ -6807,16 +6844,13 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         'Moon':    '301',
         'Sun':     '10',
     }
-
     center_horizons_id = CENTER_TO_HORIZONS_ID.get(center_id)
     if center_horizons_id is None:
         print(f"[HypOsc] No Horizons ID for center '{center_id}' -- skipping {obj_name}", flush=True)
         return fig
-
     center_body_str = f'@{center_horizons_id}'
     horizons_id = obj_info.get('id', obj_name)
     id_type     = obj_info.get('id_type', 'smallbody')
-
     # ---- Epoch: use CAD perigee time when available --------------------------
     # CRITICAL: Elements at perigee give the most physically meaningful hyperbola.
     # Elements fetched at plot start give a DIFFERENT osculating conic whose
@@ -6832,13 +6866,10 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
                   f"{perigee_datetime.strftime('%Y-%m-%d %H:%M')} UTC", flush=True)
         except Exception as ex:
             print(f"[HypOsc] Could not convert CAD JD to datetime: {ex}", flush=True)
-
     epoch_date = perigee_datetime if perigee_datetime else date
-
     print(f"\n[HypOsc] Fetching {center_id}-centric osculating elements for {obj_name}", flush=True)
     print(f"  Horizons ID: {horizons_id} | Type: {id_type} | Center: {center_body_str}", flush=True)
     print(f"  Epoch: {epoch_date.strftime('%Y-%m-%d %H:%M')}", flush=True)
-
     # When we have a specific perigee epoch from CAD, bypass the cache entirely
     # and fetch directly. The osculating cache keys on obj_name+center_body with
     # no date component -- so a cached April 1 entry would be returned even when
@@ -6857,34 +6888,27 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
     except Exception as ex:
         print(f"[HypOsc] Could not fetch elements: {ex}", flush=True)
         return fig
-
     if elements is None:
         print(f"[HypOsc] No elements returned for {obj_name}", flush=True)
         return fig
-
     e_osc     = elements.get('e', 0)
     a_osc     = elements.get('a', None)
     i_osc     = elements.get('i', 0)
     omega_osc = elements.get('omega', 0)
     Omega_osc = elements.get('Omega', 0)
     epoch_osc = elements.get('epoch', epoch_date.strftime('%Y-%m-%d osc.'))
-
     if e_osc <= 1:
         print(f"[HypOsc] {obj_name} geocentric e={e_osc:.4f} is elliptical -- skipping", flush=True)
         return fig
-
     if a_osc is None or a_osc == 0:
         print(f"[HypOsc] Invalid semi-major axis for {obj_name} -- skipping", flush=True)
         return fig
-
     abs_a = abs(a_osc)
     q_osc = abs_a * (e_osc - 1.0)   # periapsis distance, AU
-
     print(f"[HypOsc] Elements at perigee epoch:", flush=True)
     print(f"  e={e_osc:.6f}, a={a_osc:.8f} AU, |a|={abs_a:.8f} AU", flush=True)
     print(f"  i={i_osc:.2f} deg, omega={omega_osc:.2f}, Omega={Omega_osc:.2f}", flush=True)
     print(f"  q={q_osc:.9f} AU = {q_osc * KM_PER_AU:,.1f} km", flush=True)
-
     # ---- Determine clip distance from current plot axis range ----------------
     # Read the figure's axis range if available; fall back to q * 10.
     try:
@@ -6902,16 +6926,12 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
                   f"({axis_range * KM_PER_AU:,.0f} km)", flush=True)
     except Exception:
         axis_range = max(q_osc * 10, 0.001)
-
     clip_distance = axis_range * 1.5   # 50% beyond visible edge
-
     # ---- Asymptote angle -----------------------------------------------------
     asymptote_angle = np.arccos(-1.0 / e_osc)   # radians -- r -> inf at this angle
-
     # ---- Binary search for theta where r = clip_distance ---------------------
     def r_hyp(th):
         return abs_a * (e_osc**2 - 1.0) / (1.0 + e_osc * np.cos(th))
-
     th_lo, th_hi = 0.0, asymptote_angle - 1e-8
     for _ in range(80):
         th_mid = (th_lo + th_hi) / 2.0
@@ -6920,11 +6940,9 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         else:
             th_hi = th_mid
     theta_clip = min(th_lo, asymptote_angle - np.radians(0.1))
-
     print(f"[HypOsc] Asymptote: {np.degrees(asymptote_angle):.1f} deg | "
           f"Clip theta: {np.degrees(theta_clip):.1f} deg "
           f"(r={r_hyp(theta_clip) * KM_PER_AU:,.0f} km)", flush=True)
-
     # ---- Nonlinear (sinh) sampling: dense near periapsis (theta=0) ----------
     # sinh spacing: t in [0,1] -> sinh(scale*t)/sinh(scale) in [0,1]
     # scale=3 gives ~10x more points near center than at edge.
@@ -6932,38 +6950,29 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
     scale = 3.0
     t = np.linspace(0, 1, N)
     t_sinh = np.sinh(scale * t) / np.sinh(scale)   # nonlinear 0..1
-
     theta_arm = t_sinh * theta_clip   # 0 .. theta_clip
-
     # Full arc: [-theta_clip .. 0 .. +theta_clip]
     # Reverse the negative arm so points run in order from -theta_clip to +theta_clip
     theta_full = np.concatenate([-theta_arm[::-1], theta_arm])
-
     r_full = r_hyp(theta_full)
-
     # Guard non-positive r
     valid = r_full > 0
     theta_full = theta_full[valid]
     r_full     = r_full[valid]
-
     # Hyperbola in perifocal frame (periapsis along +x)
     x_orbit = r_full * np.cos(theta_full)
     y_orbit = r_full * np.sin(theta_full)
     z_orbit = np.zeros_like(theta_full)
-
     # ---- Standard Keplerian rotation sequence --------------------------------
     # omega around z (arg of periapsis), then i around x, then Omega around z
     i_rad     = np.radians(i_osc)
     omega_rad = np.radians(omega_osc)
     Omega_rad = np.radians(Omega_osc)
-
     x_t, y_t, z_t = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
     x_t, y_t, z_t = rotate_points(x_t, y_t, z_t, i_rad, 'x')
     x_final, y_final, z_final = rotate_points(x_t, y_t, z_t, Omega_rad, 'z')
-
     # ---- Hover text ----------------------------------------------------------
     asymptote_deg = np.degrees(asymptote_angle)
-
     pert_note = (
         "<br><br><i>Osculating hyperbola: instantaneous Keplerian fit<br>"
         f"at perigee epoch ({epoch_osc}).<br>"
@@ -6972,7 +6981,6 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         "Farther out: solar gravity causes divergence.<br>"
         "Arc clipped to plotted view volume.</i>"
     )
-
     hover_text = (
         f"<b>{obj_name} Osculating Orbit (Hyperbola)</b><br>"
         f"Epoch: {epoch_osc}<br>"
@@ -6985,9 +6993,7 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
         f"Asymptotic half-angle: {asymptote_deg:.1f} deg"
         f"{pert_note}"
     )
-
     orbit_label = f"{obj_name} Osculating Orbit (Epoch: {epoch_osc})"
-
     # White, dot style -- reference curve distinct from red actual orbit
     fig.add_trace(
         go.Scatter3d(
@@ -6997,58 +7003,56 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
             mode='lines',
             line=dict(color='white', width=2, dash='dot'),
             name=orbit_label,
-            text=[hover_text] * len(x_final),
-            customdata=[hover_text] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=orbit_label,
+            hoverinfo='skip',
             showlegend=True,
         )
     )
-
+    # Info marker at midpoint of arc
+    info_idx = min(len(x_final) // 2, len(x_final) - 1)
+    fig.add_trace(go.Scatter3d(
+        x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+        mode='markers',
+        marker=dict(size=6, color=color, opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=orbit_label,
+        text=[hover_text],
+        customdata=[orbit_label],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     print(f"[HypOsc] Added hyperbolic osculating orbit for {obj_name}: "
           f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * KM_PER_AU:,.1f} km)",
           flush=True)
-
     return fig
-
-
 def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
                                       date, show_apsidal_markers=False,
                                       parent_window=None):
     """
     Plot Sun-centered osculating orbit arc at perihelion epoch for comets.
-
     Capability D: The Sun-centered counterpart to Capability C.
-
     Fetches heliocentric osculating elements at perihelion time (Tp), then
     draws the instantaneous Keplerian conic the comet would follow if the
     Sun were the only gravitational influence.
-
     For hyperbolic comets (e > 1): draws a hyperbolic arc (open curve).
     For elliptical comets (e <= 1): draws an elliptical arc clipped to plot bounds.
-
     The arc provides high-resolution perihelion detail that the ephemeris
     trace typically lacks -- comets race through perihelion and the standard
     trajectory points are often days apart through the most dynamic region.
-
     KEY DESIGN DECISIONS:
-
     1. Epoch at perihelion (Tp), not plot start.
        Elements fetched at Tp give the osculating conic AT perihelion.
        Three-path Tp resolution: osculating cache -> analytical elements -> fetch.
-
     2. Arc bounded by the plotted cube (spatial clipping).
        Same approach as Capability C: binary search for theta where r = clip_distance.
        Works for both hyperbolic (asymptote-bounded) and elliptical (full orbit clipped).
-
     3. Point density highest at perihelion (sinh spacing for hyperbolic,
        uniform with extra density near perihelion for elliptical).
-
     4. White color, dot line style.
        Consistent with "reference curve, not actual trajectory."
-
     5. Bypass osculating cache for the epoch-specific fetch.
        Cache keys on obj_name + center_body with no date component.
-
     Parameters:
         fig:              Plotly Figure object
         obj_name (str):   Display name e.g. '3I/ATLAS', 'Halley'
@@ -7057,21 +7061,16 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         date (datetime):  Plot start date (used as fallback only)
         show_apsidal_markers (bool): Should always be True when called
         parent_window:    Tkinter parent window for dialog prompts
-
     Returns:
         fig (modified in place; returned for chaining)
-
     Claude: 3/10/26 -- initial version    
     """
     import numpy as np
     import plotly.graph_objects as go
     from datetime import datetime
-
     horizons_id = obj_info.get('id', obj_name)
     id_type     = obj_info.get('id_type', 'smallbody')
-
     # ---- Resolve Tp (perihelion epoch) via three-path fallback ---------------
-
     # Resolve Tp using the authoritative hierarchy:
     # 1. solution_TP (cached)  2. osculating TP (cached)
     # 3. analytical elements   4. live fetch
@@ -7096,8 +7095,6 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     print(f"\n[PeriOsc] Perihelion osculating orbit for {obj_name}", flush=True)
     print(f"  Tp: {tp_datetime.strftime('%Y-%m-%d %H:%M:%S')} UTC (JD {tp_jd:.10f})", flush=True)
     print(f"  Tp source: {tp_source}", flush=True)
-
-
     # ---- Fetch osculating elements at Tp, centered on Sun --------------------
     # BYPASS CACHE: cache keys on obj_name+center with no date component.
     # A cached entry from a different date would give wrong elements.
@@ -7114,22 +7111,18 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     except Exception as ex:
         print(f"[PeriOsc] Could not fetch elements at Tp: {ex}", flush=True)
         return fig
-
     if elements is None:
         print(f"[PeriOsc] No elements returned for {obj_name} at Tp", flush=True)
         return fig
-
     e_osc     = elements.get('e', 0)
     a_osc     = elements.get('a', None)
     i_osc     = elements.get('i', 0)
     omega_osc = elements.get('omega', 0)
     Omega_osc = elements.get('Omega', 0)
     epoch_osc = elements.get('epoch', tp_datetime.strftime('%Y-%m-%d osc.'))
-
     if a_osc is None or a_osc == 0:
         print(f"[PeriOsc] Invalid semi-major axis for {obj_name} -- skipping", flush=True)
         return fig
-
     # Perihelion distance
     if e_osc > 1:
         q_osc = abs(a_osc) * (e_osc - 1.0)
@@ -7137,12 +7130,10 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     else:
         q_osc = a_osc * (1.0 - e_osc)
         orbit_type = "Elliptical"
-
     print(f"[PeriOsc] Elements at perihelion epoch:", flush=True)
     print(f"  e={e_osc:.6f} ({orbit_type}), a={a_osc:.8f} AU", flush=True)
     print(f"  i={i_osc:.2f} deg, omega={omega_osc:.2f}, Omega={Omega_osc:.2f}", flush=True)
     print(f"  q={q_osc:.9f} AU = {q_osc * KM_PER_AU:,.1f} km", flush=True)
-
     # ---- Perihelion velocity from vis-viva equation --------------------------
     # v^2 = GM * (2/r - 1/a) evaluated at r = q (perihelion)
     # GM_sun = k^2 where k = 0.01720209895 AU^(3/2) / day  (Gaussian gravitational constant)
@@ -7151,10 +7142,8 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
     v_perihelion_au_day = np.sqrt(GM_sun * (2.0 / q_osc - 1.0 / a_osc))  # AU/day
     v_perihelion_km_s = v_perihelion_au_day * KM_PER_AU / 86400.0       # km/s
     v_perihelion_km_hr = v_perihelion_km_s * 3600.0                       # km/hr
-
     print(f"[PeriOsc] Perihelion velocity: {v_perihelion_km_s:,.1f} km/s "
           f"({v_perihelion_au_day:.6f} AU/day, {v_perihelion_km_hr:,.0f} km/hr)", flush=True)
-
 # ---- Non-gravitational acceleration delta --------------------------------
     # Compare solution TP (includes non-grav model) with osculating TP at
     # perihelion epoch (pure Keplerian). The difference is the integrated
@@ -7178,7 +7167,6 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             print(f"  [PeriOsc] Non-grav delta: {delta_min:.1f} min ({sign})", flush=True)
             print(f"    Solution TP:  JD {tp_jd:.10f}", flush=True)
             print(f"    Osculating TP (at Tp): JD {osc_tp_at_perihelion:.10f}", flush=True)
-
     # ---- Determine clip distance from current plot axis range ----------------
     try:
         axis_range = None
@@ -7193,19 +7181,14 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             print(f"[PeriOsc] Axis half-width: {axis_range:.4f} AU", flush=True)
     except Exception:
         axis_range = max(q_osc * 10, 0.1)
-
     clip_distance = axis_range * 1.5   # 50% beyond visible edge
-
     # ---- Generate orbit points based on conic type ---------------------------
     if e_osc > 1.0:
         # ---- HYPERBOLIC BRANCH (same pattern as Capability C) ----------------
         abs_a = abs(a_osc)
-
         asymptote_angle = np.arccos(-1.0 / e_osc)
-
         def r_hyp(th):
             return abs_a * (e_osc**2 - 1.0) / (1.0 + e_osc * np.cos(th))
-
         # Binary search for theta where r = clip_distance
         th_lo, th_hi = 0.0, asymptote_angle - 1e-8
         for _ in range(80):
@@ -7215,27 +7198,21 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             else:
                 th_hi = th_mid
         theta_clip = min(th_lo, asymptote_angle - np.radians(0.1))
-
         print(f"[PeriOsc] Asymptote: {np.degrees(asymptote_angle):.1f} deg | "
               f"Clip theta: {np.degrees(theta_clip):.1f} deg", flush=True)
-
         # Sinh spacing: dense near perihelion
         N = 300
         scale = 3.0
         t = np.linspace(0, 1, N)
         t_sinh = np.sinh(scale * t) / np.sinh(scale)
         theta_arm = t_sinh * theta_clip
-
         theta_full = np.concatenate([-theta_arm[::-1], theta_arm])
         r_full = r_hyp(theta_full)
-
         # Guard non-positive r
         valid = r_full > 0
         theta_full = theta_full[valid]
         r_full = r_full[valid]
-
         asymptote_deg = np.degrees(asymptote_angle)
-
         type_detail = (
             f"e = {e_osc:.6f} (hyperbolic)<br>"
             f"a = {a_osc:.8f} AU (negative = hyperbola)<br>"
@@ -7243,19 +7220,15 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
             f"{nongrav_note}"
         )
-
     else:
         # ---- ELLIPTICAL BRANCH -----------------------------------------------
         # Full ellipse in polar: r = a(1-e^2) / (1 + e*cos(theta))
         # Clip to cube bounds where r > clip_distance.
         # For near-parabolic comets (e ~ 0.999), only the perihelion region
         # fits in the plot; the aphelion end is enormous.
-
         semi_latus = a_osc * (1.0 - e_osc**2)
-
         def r_ell(th):
             return semi_latus / (1.0 + e_osc * np.cos(th))
-
         # Find the theta range where r <= clip_distance
         # For high-e ellipses, most of the orbit is beyond clip_distance.
         # Binary search for the clip angle from perihelion (theta=0).
@@ -7279,7 +7252,6 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             theta_clip = th_lo
             print(f"[PeriOsc] Ellipse clipped at theta: {np.degrees(theta_clip):.1f} deg "
                   f"(r={r_ell(theta_clip):.4f} AU)", flush=True)
-
         # Generate points: symmetric about perihelion
         # Use higher density near perihelion for near-parabolic orbits
         N = 500
@@ -7292,15 +7264,12 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         else:
             # Uniform spacing for moderate eccentricity
             theta_arm = np.linspace(0, theta_clip, N)
-
         theta_full = np.concatenate([-theta_arm[::-1], theta_arm])
         r_full = r_ell(theta_full)
-
         # Guard non-positive r (shouldn't happen for ellipse but be safe)
         valid = r_full > 0
         theta_full = theta_full[valid]
         r_full = r_full[valid]
-
         type_detail = (
             f"e = {e_osc:.6f} (elliptical)<br>"
             f"a = {a_osc:.8f} AU<br>"
@@ -7308,21 +7277,17 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             f"Perihelion velocity: {v_perihelion_km_s:,.1f} km/s ({v_perihelion_au_day:.4f} AU/day)"
             f"{nongrav_note}"
         )
-
     # ---- Convert to Cartesian in perifocal frame -----------------------------
     x_orbit = r_full * np.cos(theta_full)
     y_orbit = r_full * np.sin(theta_full)
     z_orbit = np.zeros_like(theta_full)
-
     # ---- Standard Keplerian rotation sequence --------------------------------
     i_rad     = np.radians(i_osc)
     omega_rad = np.radians(omega_osc)
     Omega_rad = np.radians(Omega_osc)
-
     x_t, y_t, z_t = rotate_points(x_orbit, y_orbit, z_orbit, omega_rad, 'z')
     x_t, y_t, z_t = rotate_points(x_t, y_t, z_t, i_rad, 'x')
     x_final, y_final, z_final = rotate_points(x_t, y_t, z_t, Omega_rad, 'z')
-
     # ---- Hover text ----------------------------------------------------------
     pert_note = (
         "<br><br><i>Osculating orbit: instantaneous Keplerian fit<br>"
@@ -7332,7 +7297,6 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         "Farther out: planetary gravity causes divergence.<br>"
         "Arc clipped to plotted view volume.</i>"
     )
-
     hover_text = (
         f"<b>{obj_name} Osculating Orbit ({orbit_type})</b><br>"
         f"Epoch: {epoch_osc}<br>"
@@ -7343,9 +7307,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         f"i = {i_osc:.2f} deg"
         f"{pert_note}"
     )
-
     orbit_label = f"{obj_name} Perihelion Osc. Orbit (Epoch: {epoch_osc})"
-
     # White, dot style -- reference curve distinct from actual trajectory
     fig.add_trace(
         go.Scatter3d(
@@ -7356,15 +7318,26 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         #    line=dict(color='white', width=2, dash='dot'),
             line=dict(color='white', width=2),
             name=orbit_label,
-            text=[hover_text] * len(x_final),
-            customdata=[hover_text] * len(x_final),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup=orbit_label,
+            hoverinfo='skip',
             showlegend=True,
         )
     )
-
+    # Info marker at midpoint of arc
+    info_idx = min(len(x_final) // 2, len(x_final) - 1)
+    fig.add_trace(go.Scatter3d(
+        x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
+        mode='markers',
+        marker=dict(size=6, color=color, opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=orbit_label,
+        text=[hover_text],
+        customdata=[orbit_label],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     print(f"[PeriOsc] Added {orbit_type.lower()} perihelion osculating orbit for {obj_name}: "
           f"e={e_osc:.4f}, q={q_osc:.9f} AU ({q_osc * KM_PER_AU:,.1f} km)",
           flush=True)
-
     return fig

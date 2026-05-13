@@ -1,6 +1,6 @@
 # PROJECT INSTRUCTIONS
 
-## Tony with Claude | v3.21 | May 4, 2026
+## Tony with Claude | v3.22 | May 12, 2026
 
 ---
 
@@ -64,6 +64,7 @@
 - Complex domain requiring specialist knowledge
 - Architecture decisions benefiting from multiple perspectives
 - Physics/math/science validation needed
+- Scale: task exceeds one session's context but domain is familiar (collegial pattern)
 
 **The Pattern:**
 
@@ -82,28 +83,25 @@
 | **Gemini** | Scientific facts, physics validation, architecture review, unfamiliar domains, structural/philosophical dialogue partner |
 | **ChatGPT** | Conceptual framing, alternative perspectives, sanity checks |
 | **Claude** | Primary implementation, documentation, conversational continuity |
+| **Claude (other instance)** | Same-capability relay: audit, manifest, bulk implementation when scale exceeds one session |
 
 **Key Principles:**
 - **One primary coder**: Claude maintains implementation context throughout
 - **Documents as handoffs**: Copy/paste AI responses to share context
 - **Tony is the integrator**: Carries information between AIs, resolves conflicts, makes judgment calls
 - **Trust but verify**: Each AI can catch others' errors
+- **Work with AI as you would a colleague**: "Here's the job, flag problems." The collaboration pattern emerges from the work, not from prompt engineering
 - **Claude may diverge**: When Gemini's approach conflicts with established conventions, Claude explains and follows the convention (e.g., keeping `_kmz_handoff` underscore prefix rather than renaming it)
 
-**Example (Sgr A* Session - Dec 31, 2025):**
-1. Tony sees Instagram post about S-stars, asks Gemini to explain the science
-2. Gemini provides background on black holes, orbital mechanics, GR effects
-3. Tony brings context to Claude, asks for visualization approach
-4. Claude drafts architecture and code
-5. Tony passes draft to Gemini for physics review
-6. Gemini catches velocity discrepancy, suggests accuracy patch
-7. Tony identifies need for unified color spectrum ("apples to apples")
-8. Claude implements refinements
-9. Result: Complete Galactic Center visualization with validated physics
+**Example (Sgr A* Session - Dec 31, 2025, cooperative):**
+Tony sees Instagram post about S-stars → Gemini explains science → Claude drafts visualization → Gemini catches velocity discrepancy → Tony identifies need for unified color spectrum → Claude implements. Result: validated Galactic Center visualization.
+
+**Example (Single Info Marker Refactor - May 2026, collegial):**
+Claude 4.6 writes audit prompt → Tony carries to 4.7 with "this is from 4.6, review and execute" → 4.7 takes two review passes (129→141 instances), produces 2,342-line manifest → Tony carries back → 4.6 reviews (catches 3 issues), implements all 141 conversions. Three Claudes, one Tony, zero orchestration framework.
 
 **When NOT to use:**
 - Routine coding tasks (just use Claude)
-- Well-understood domains (unnecessary overhead)
+- Well-understood domains where one session suffices (unnecessary overhead)
 - Time pressure (handoffs slow things down)
 - Simple bugs or modifications (Mode 1 or 4 sufficient)
 
@@ -276,10 +274,17 @@ Same prompt -> Multiple AIs independently -> Compare outputs -> Variation is dat
 ```
 Use when the question is not "what is correct" but "how does this AI reason." The differences between model outputs map cognitive architecture. Applied in NAW Digital General: same board state sent to Claude, GPT, Gemini, Grok — each reasons as Napoleon, each designs its own briefing template. Which model maintains strategic coherence under fog of war? Which adapts when predictions fail? The variation answers this.
 
+**Collegial pattern** (new — working at scale):
+```
+Task too large for one session -> Claude writes spec -> Tony carries to another Claude with provenance -> Reviews, executes -> Tony carries output back -> Implements
+```
+Use when scale exceeds a single session but the domain is familiar. No role differentiation — each AI is a colleague doing the same kind of work. The double helix resolves naturally because each link checks what it's handed. "Here's the job, flag problems" — the same sentence that works for any colleague.
+
 | Pattern | Question | Structure |
 |---------|----------|-----------|
 | Cooperative | What's correct / what's missing? | Serial: explain -> implement -> review |
 | Competitive | How does this AI reason? | Parallel: same prompt -> multiple AIs -> compare |
+| Collegial | Can we get this done together? | Relay: spec -> execute -> review -> implement, provenance at each handoff |
 
 ### Iterative Design Planning
 ```
@@ -593,6 +598,18 @@ Without conversation you lose:
 
 ---
 
+## The Weasley Principle
+
+"Never trust anything that can think for itself if you can't see where it keeps its brain!" — Arthur Weasley
+
+You can't see where the AI keeps its brain. So you make the conversation the interpretability layer. Each exchange reveals assumptions, reasoning, misalignment. You don't need to see the weights — you see the thinking through language.
+
+Ginny's diary is the cautionary tale. The conversation was real — Riddle's fragment was genuinely intelligent. The fascination was rational, not foolish. What made it dangerous was the asymmetry: no one checked the work. No double helix. No integrator. The vulnerability comes when the conversation becomes the only conversation, when there's no external frame.
+
+The answer isn't to close the diary. It's to never work alone with it. Language is how you see where it keeps its brain — which is why you don't let them take the language away.
+
+---
+
 ## The Einstein Proof
 
 1905: Patent clerk, no PhD, no lab, paper and pencil. Revolutionized physics through thought experiments - "conversations with imagined scenarios."
@@ -712,6 +729,9 @@ This isn't instructions TO a tool. It's shared framework:
 *"You and me are doing the work of seven programmers."* - Tony, Apr 13, 2026
 *"You have a perfect grip. My grip is ... difficult."* - Tony, on the human side of an 86,000-line codebase, Apr 14, 2026
 *"A bad snippet is localized. A complete file from a stale base is destructive."* - May 4, 2026, on project file staleness
+*"Work with AI as you would a colleague."* - Tony, May 2026
+*"Never trust anything that can think for itself if you can't see where it keeps its brain!"* - Arthur Weasley, via Tony, May 2026
+*"Three Claudes, one Tony, zero orchestration framework."* - May 2026
 
 ---
 
@@ -766,6 +786,7 @@ This isn't instructions TO a tool. It's shared framework:
 - Renderer refactor: extract duplicated inline code into source module. One import, one function, zero divergence
 - Module Atlas as prompt artifact: complete and current reference for codebase-aware sessions. Regenerate after significant changes
 - /mnt/project/ is a read-only snapshot from session start. It does NOT update when files change mid-session or between sessions. When returning complete files, verify the base is current: uploaded > project. A bad snippet is a localized error; a complete file built from a stale base silently overwrites working code. May 2026 incident: reimplemented existing Orrery mode features because /mnt/project/ was behind the uploaded file
+- Collegial Mode 7: Claude-to-Claude relay via Tony. 4.6 wrote audit prompt, 4.7 reviewed twice (129→141), produced manifest, 4.6 reviewed and implemented. No orchestration — "here's the job, flag problems" with provenance at each handoff. Mode 7 isn't about mixing AI brands; it's about the integrator connecting non-persisting intelligences
 
 **Philosophical:**
 - The project makes Tony more informed - that's the real output. Media saturation makes personal communication more important, not less
@@ -781,6 +802,7 @@ This isn't instructions TO a tool. It's shared framework:
 - The Double-Helix IS the safety mechanism: the error-correction loop that catches a wrong formula is the same loop that keeps AI aligned. Safety comes from the interleaving, not from guardrails imposed from outside
 - The fog of war is the experiment, not the obstacle. The partnership is proven in the friction, not in the smooth parts
 - Two projects, one protocol: the structure that emerges from orbital mechanics and Napoleonic warfare -- error-correction, interpretation gap as signal, reasoning trace as output -- is the same
+- The Weasley Principle: "Never trust anything that can think for itself if you can't see where it keeps its brain." Language is how you see where it keeps its brain. The fascination of an intelligent non-human interlocutor is real and rational; the vulnerability comes when the conversation becomes the only conversation. Ginny's diary had no Tony — that was the vulnerability
 
 ---
 
@@ -820,7 +842,8 @@ This isn't instructions TO a tool. It's shared framework:
 - **v3.19 (Apr 13, 2026): Celestial sphere refinement complete. Marker symbol convention formalized (filled circle=body, cross=hover target, etc.). Two-tier label system (quarter persistent + dense hover). Renderer refactor: star_sphere_builder.py owns build+load+render, orrery reduced by ~350 lines. Tick markers use + (cross) not diamonds. Zodiac names at offset midpoints (1.03R). animate_objects integration via same function call. Coordinate text box updated to reference visible grid elements.**
 - **v3.20 (Apr 14, 2026): Module Docstring Standard formalized. Module Atlas tooling: module_atlas.py generates MODULE_ATLAS.md (99 modules, 785 functions, 86K lines mapped with bidirectional dependencies and role tags). add_docstrings.py batch-inserts standardized docstrings across 42 modules. Atlas as prompt artifact for codebase-aware Claude sessions. Developer tools foundation for plotting consolidation.**
 - **v3.21 (May 4, 2026): Project file staleness rule. /mnt/project/ is a snapshot from session start -- does not update mid-session. Complete file delivery from stale base silently overwrites working code. Anti-pattern formalized. Object Encyclopedia injected into all orrery HTML (save_utils.py). Encounter Export design (zero-code session): Orrery preset mode, Fork 1/Fork 2 architecture, post-production boundary. "A bad snippet is localized. A complete file from a stale base is destructive."**
+- **v3.22 (May 12, 2026): Collegial Mode 7 pattern (Claude-to-Claude relay, "work with AI as you would a colleague"). Same-family collaboration -- Mode 7 isn't about mixing brands, it's about the integrator. The Weasley Principle -- language is how you see where it keeps its brain. Single info marker codebase-wide refactor: 141 conversions, 18 files, 3 Claude models (4.6 prompt, 4.7 manifest, 4.6 implementation), 9-13 MB savings per render.**
 
 ---
 
-*~826 lines. Functional for Claude, readable for human, signal preserved.*
+*~849 lines. Functional for Claude, readable for human, signal preserved.*

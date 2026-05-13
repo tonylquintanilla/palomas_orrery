@@ -8,7 +8,7 @@ interaction with the ionosphere.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 One correction: core radius updated from ~3,000 km to ~3,200 km per current
 interior models (NASA Venus Fact Sheet; NASA Solar System Exploration).
@@ -54,7 +54,7 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * VENUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -62,22 +62,36 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=4.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Venus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Venus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Venus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=4.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -106,7 +120,7 @@ def create_venus_mantle_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * VENUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -114,22 +128,36 @@ def create_venus_mantle_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.4,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Venus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Venus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Venus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.4,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
     
@@ -260,32 +288,25 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
         
     # Create a list of repeated descriptions for each point
     # This is crucial - we need exactly one text entry per point
-    hover_texts = [layer_info['description']] * len(x_hover)
 
     # Just the name for "Object Names Only" mode
-    layer_name = f"Venus: {layer_info['name']}"
-    minimal_hover_texts = [layer_name] * len(x_hover)
 
     # Create hover trace with direct text assignment
+    # Single info marker at north pole, 5% above radius
+    r_info = radius * 1.05
+    trace_name = f"Venus: {layer_info['name']} (Info)"
+
     hover_trace = go.Scatter3d(
-        x=x_hover, 
-        y=y_hover, 
-        z=z_hover,
+        x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(
-            size=2,  # originally 5
-            color='rgb(255, 255, 224)',  # Layer color
-            opacity=1.0,  # originally 0.8
-            line=dict(  # Add a contrasting outline
-                width=1,
-                color='black'
-            )
-        ),
-        name=f"Venus: {layer_info['name']} (Info)",
-        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
-        customdata=minimal_hover_texts,  # For "Object Names Only" mode
-        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
-        showlegend=False  # Don't show in legend since it's just for hover
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name=trace_name,
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[f"Venus: {layer_info['name']}"],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
     )
 
     return [surface_trace, hover_trace]
@@ -323,7 +344,7 @@ def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * VENUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -331,22 +352,36 @@ def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.5,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Venus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Venus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Venus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=2.5,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -417,7 +452,7 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * VENUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -425,22 +460,36 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Venus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Venus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Venus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=2.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -583,10 +632,24 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
                 opacity=0.2
             ),
             name='Venus: Magnetosphere',
-            text=magnetosphere_text * len(x),
-            customdata=magnetosphere_customdata * len(x),      
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup='Venus: Magnetosphere',
+            hoverinfo='skip',
             showlegend=True
+        )
+    )
+    # Info marker at first point on magnetosphere structure
+    traces.append(
+        go.Scatter3d(
+            x=[x[0]], y=[y[0]], z=[z[0]],
+            mode='markers',
+            marker=dict(size=6, color='rgb(180, 180, 255)', opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup='Venus: Magnetosphere',
+            text=magnetosphere_text,
+            customdata=magnetosphere_customdata,
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         )
     )
     
@@ -643,10 +706,24 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
                 opacity=0.2
             ),
             name='Venus: Bow Shock',
-            text=bow_shock_text * len(bow_shock_x),
-            customdata=bow_shock_customdata * len(bow_shock_x),  # This was the line causing the error
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup='Venus: Bow Shock',
+            hoverinfo='skip',
             showlegend=True
+        )
+    )
+    # Info marker at first point on bow shock structure
+    traces.append(
+        go.Scatter3d(
+            x=[bow_shock_x[0]], y=[bow_shock_y[0]], z=[bow_shock_z[0]],
+            mode='markers',
+            marker=dict(size=6, color='rgb(255, 200, 150)', opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup='Venus: Bow Shock',
+            text=bow_shock_text,
+            customdata=bow_shock_customdata,
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         )
     )
         
@@ -710,12 +787,24 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
                 opacity=0.25
             ),
             name='Venus: Hill Sphere',
-            text=[hover_text] * len(x),
-            customdata=['Venus: Hill Sphere'] * len(x),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup='Venus: Hill Sphere',
+            hoverinfo='skip',
             showlegend=True
         )
     ]
+    r_info = radius_au * 1.05
+    traces.append(go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color='rgb(0, 255, 0)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup='Venus: Hill Sphere',
+        text=[hover_text],
+        customdata=['Venus: Hill Sphere'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 

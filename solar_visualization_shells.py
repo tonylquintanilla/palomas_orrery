@@ -11,7 +11,7 @@ added for the MAPS comet coronal journey.
 Consumed by: planet_visualization.py (routing dispatcher),
              palomas_orrery.py (hover_text_sun import)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 """
 import numpy as np
 import math
@@ -960,7 +960,7 @@ def create_corona_sphere(radius, n_points=100):  # Increased from 50 to 100 poin
 # Info marker position: (0, 0, r * 1.05) -- north pole of shell, 5% above
 # surface so it floats clear of the shell dot cloud.
 #
-# Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
+# Module updated: May 2026 with Anthropic's Claude Opus 4.7
 # ============================================================================
 
 # Individual Sun shell creation functions
@@ -1634,9 +1634,8 @@ def create_enhanced_oort_cloud_visualization():
                 symbol='circle'
             ),
             name='Hills Cloud (Inner Oort - Toroidal)',
-            text=['Hills Cloud: Disk-like structure, 2,000-20,000 AU<br>More tightly bound to Solar System<br>Short-period comet orbits support disk-like structure'] * len(x_hills),
-            customdata=['Hills Cloud'] * len(x_hills),
-            hovertemplate='%{text}<extra></extra>',
+            hoverinfo='skip',
+                hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ))
     
@@ -1654,9 +1653,8 @@ def create_enhanced_oort_cloud_visualization():
                 symbol='circle'
             ),
             name='Outer Oort Cloud (Clumpy)',
-            text=['Outer Oort Cloud: Clumpy, asymmetric structure<br>20,000-100,000+ AU<br>Source of long-period comets<br>Influenced by galactic tides and stellar encounters'] * len(x_outer),
-            customdata=['Outer Oort Cloud'] * len(x_outer),
-            hovertemplate='%{text}<extra></extra>',
+            hoverinfo='skip',
+                hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ))
     
@@ -1674,9 +1672,8 @@ def create_enhanced_oort_cloud_visualization():
                 symbol='diamond'
             ),
             name='Galactic Tide Region',
-            text=['Galactic Tide Influenced Objects<br>Asymmetric distribution due to Milky Way\'s gravity<br>Objects avoid galactic plane<br>~50,000 AU typical distance'] * len(x_tide),
-            customdata=['Galactic Tide Region'] * len(x_tide),
-            hovertemplate='%{text}<extra></extra>',
+            hoverinfo='skip',
+                hovertemplate='%{text}<extra></extra>',
             showlegend=True
         ))
     
@@ -1702,6 +1699,9 @@ def create_oort_cloud_density_visualization():
         y = r * np.cos(phi) * np.sin(theta)
         z = r * np.sin(phi)
         
+        trace_name = f'Oort Density Layer {i+1}'
+        layer_desc = f'Oort Cloud Density Layer<br>Distance: ~{radius:,} AU<br>Relative density: {density:.1f}'
+
         traces.append(go.Scatter3d(
             x=x, y=y, z=z,
             mode='markers',
@@ -1710,11 +1710,22 @@ def create_oort_cloud_density_visualization():
                 color=f'rgba(255, 255, 255, {density})',
                 opacity=density,
             ),
-            name=f'Oort Density Layer {i+1}',
-            text=[f'Oort Cloud Density Layer<br>Distance: ~{radius:,} AU<br>Relative density: {density:.1f}'] * len(x),
-            customdata=[f'Density Layer {i+1}'] * len(x),
-            hovertemplate='%{text}<extra></extra>',
+            name=trace_name,
+            legendgroup=trace_name,
+            hoverinfo='skip',
             showlegend=True
+        ))
+        traces.append(go.Scatter3d(
+            x=[x[0]], y=[y[0]], z=[z[0]],
+            mode='markers',
+            marker=dict(size=6, color='rgb(255, 255, 255)', opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=trace_name,
+            text=[layer_desc],
+            customdata=[f'Density Layer {i+1}'],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
         ))
     
     return traces

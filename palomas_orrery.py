@@ -14,8 +14,8 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
-Module updated: May 8, 2026 with Anthropic's Claude Opus 4.6 and 4.7
-- Three callers pass trace_qualifier, plot_actual_orbits qualifier for trajectories
+Module updated: May 11, 2026 with Anthropic's Claude Opus 4.6 and 4.7 and Tony
+
 """
 #Paloma's Orrery - Solar System Visualization Tool
 # annotated by Tony working with Claude 
@@ -279,7 +279,7 @@ from info_dictionary import INFO, note_text
 # from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, format_detailed_hover_text)
 from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, add_fly_to_object_buttons, format_detailed_hover_text)
 
-from save_utils import save_plot
+from save_utils import save_plot, set_last_save_directory, get_last_save_directory
 
 from shutdown_handler import PlotlyShutdownHandler, create_monitored_thread, show_figure_safely
 
@@ -1046,7 +1046,8 @@ def save_window_config():
             'geometry': root.geometry(),
             'state': root.state(),
             'platform': platform.system(),
-            'sash_positions': sash_positions
+            'sash_positions': sash_positions,
+            'last_save_directory': get_last_save_directory(),
         }
         with open(CONFIG_FILE, 'w') as f:
             json.dump(config, f, indent=2)
@@ -1084,6 +1085,10 @@ else:
 
 root.minsize(MIN_WIDTH, MIN_HEIGHT)
 root.resizable(True, True)
+
+# Restore last save directory from config
+if saved_config:
+    set_last_save_directory(saved_config.get('last_save_directory'))
 
 # Note: on_closing defined later in file (includes cleanup + save_window_config)
 
@@ -1594,8 +1599,7 @@ def _add_perihelion_osculating_orbit(fig, selected_objects, objects, color_map,
 
 def _add_spacecraft_encounter_markers(fig, selected_objects, objects, dates_lists,
                                         center_object_name, center_id, color_map,
-                                        show_closest_approach, positions_cache=None,
-                                        render_mode=None):
+                                        show_closest_approach, positions_cache=None):
     """
     Add tagged encounter markers for spacecraft missions.
 
@@ -1619,7 +1623,6 @@ def _add_spacecraft_encounter_markers(fig, selected_objects, objects, dates_list
             color_map=color_map,
             show_closest_approach=show_closest_approach,
             positions_cache=positions_cache,
-            render_mode=render_mode,
         )
     except ImportError:
         print("[ENCOUNTER] spacecraft_encounters.py not found — skipping tagged markers", flush=True)
@@ -3516,10 +3519,25 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                                     line=line,
                                     marker=marker,
                                     name=legend_name,
-                                    text=[hover_text] * len(x),
-                                    customdata=[hover_text] * len(x),
-                                    hovertemplate='%{text}<extra></extra>',
+                                    legendgroup=legend_name,
+                                    hoverinfo='skip',
                                     showlegend=True
+                                )
+                            )
+                            # Info marker at midpoint of analytical orbit arc
+                            info_idx = min(len(x) // 2, len(x) - 1)
+                            fig.add_trace(
+                                go.Scatter3d(
+                                    x=[x[info_idx]], y=[y[info_idx]], z=[z[info_idx]],
+                                    mode='markers',
+                                    marker=dict(size=6, color=trace_color, opacity=0.9,
+                                                symbol='cross', line=dict(color='white', width=1)),
+                                    name='',
+                                    legendgroup=legend_name,
+                                    text=[hover_text],
+                                    customdata=[legend_name],
+                                    hovertemplate='%{text}<extra></extra>',
+                                    showlegend=False
                                 )
                             )
 
@@ -5220,7 +5238,6 @@ def plot_objects():
                     center_id=center_id,
                     color_map=color_map,
                     show_closest_approach=show_closest_approach_var.get(),
-                    render_mode='static',
                 )
 
         # ============ EXOPLANET ORBITS ============
@@ -6418,7 +6435,6 @@ def animate_objects(step, label):
                     color_map=color_map,
                     show_closest_approach=show_closest_approach_var.get(),
                     positions_cache=positions_over_time,
-                    render_mode='animated',
                 )
 
             for i, trace in enumerate(fig.data):

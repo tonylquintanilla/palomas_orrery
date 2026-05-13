@@ -24,6 +24,8 @@ rather than redefined locally)
 Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; added SUN_RADIUS_KM re-export for comet_visualization_shells.py;
 line endings normalized to LF)
+
+Module updated: May 11, 2026 by Claude Opus 4.6 and 4.7 and Tony. (Sphere markers)
 """
 
 import math
@@ -182,31 +184,22 @@ def create_hover_markers_for_planet(center_position, radius, color, name, descri
         
         return points
     
-    # Generate fibonacci sphere points
-    fib_points = fibonacci_sphere(samples=num_points)
-    
-    # Scale and offset the points
-    x_hover = [p[0] * radius + center_x for p in fib_points]
-    y_hover = [p[1] * radius + center_y for p in fib_points]
-    z_hover = [p[2] * radius + center_z for p in fib_points]
-    
-    # Create hover markers with clean hover text
+    # Single info marker at north pole, 5% above radius — replaces former fibonacci sphere
+    r_info = radius * 1.05
+
     hover_trace = go.Scatter3d(
-        x=x_hover, 
-        y=y_hover, 
-        z=z_hover,
+        x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(
-            size=3,
-            color=color,
-            opacity=0.5
-        ),
+        marker=dict(size=6, color=color, opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
         name=f"{name} (Info)",
-        text=[description] * len(x_hover),  # Array of identical description strings
-        hoverinfo='text',  # Use only the text for hover
+        legendgroup=f"{name} (Info)",
+        text=[description],
+        customdata=[name],
+        hovertemplate='%{text}<extra></extra>',
         showlegend=False
     )
-    
+
     return hover_trace
 
 def create_magnetosphere_shape(params):

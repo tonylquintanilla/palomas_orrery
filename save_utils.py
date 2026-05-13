@@ -64,6 +64,18 @@ def _update_last_directory(file_path):
         _last_save_directory = os.path.dirname(file_path)
 
 
+def set_last_save_directory(path):
+    """Called at startup with persisted path from config."""
+    global _last_save_directory
+    if path and os.path.isdir(path):
+        _last_save_directory = path
+
+
+def get_last_save_directory():
+    """Called at shutdown to persist to config."""
+    return _last_save_directory
+
+
 def _is_main_thread():
     """Check if we're running in the main thread."""
     return threading.current_thread() is threading.main_thread()

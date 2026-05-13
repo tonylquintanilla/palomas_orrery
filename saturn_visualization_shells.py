@@ -7,7 +7,7 @@ Division), Enceladus plasma torus, radiation belts, and magnetosphere.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 One correction: "around a where" typo fixed to "around a body where" (L889, same pattern
 as Earth and Jupiter). All other claims confirmed (NASA Saturn Fact Sheet,
@@ -103,7 +103,7 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * SATURN_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -111,22 +111,36 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=4.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Saturn: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Saturn: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Saturn: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=4.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -166,7 +180,7 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * SATURN_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -174,22 +188,36 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.5,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Saturn: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Saturn: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Saturn: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.5,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -226,7 +254,7 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * SATURN_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -234,22 +262,36 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Saturn: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Saturn: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Saturn: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -438,32 +480,25 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
         
     # Create a list of repeated descriptions for each point
     # This is crucial - we need exactly one text entry per point
-    hover_texts = [layer_info['description']] * len(x_hover)
 
     # Just the name for "Object Names Only" mode
-    layer_name = f"Saturn: {layer_info['name']}"
-    minimal_hover_texts = [layer_name] * len(x_hover)
 
     # Create hover trace with direct text assignment
+    # Single info marker at north pole, 5% above radius
+    r_info = radius * 1.05
+    trace_name = f"Saturn: {layer_info['name']} (Info)"
+
     hover_trace = go.Scatter3d(
-        x=x_hover, 
-        y=y_hover, 
-        z=z_hover,
+        x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(
-            size=2,  # originally 5
-            color='rgb(210, 180, 140)',  # Layer color, originally 'white'
-            opacity=1.0,  # originally 0.8
-            line=dict(  # Add a contrasting outline
-                width=1,
-                color='black'
-            )
-        ),
-        name=f"Saturn: {layer_info['name']} (Info)",
-        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
-        customdata=minimal_hover_texts,  # For "Object Names Only" mode
-        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
-        showlegend=False  # Don't show in legend since it's just for hover
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name=trace_name,
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[f"Saturn: {layer_info['name']}"],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
     )
 
     return [surface_trace, hover_trace]
@@ -546,7 +581,7 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * SATURN_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -554,22 +589,36 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Saturn: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Saturn: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Saturn: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -622,16 +671,28 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0)):
                 opacity=0.25
             ),
             name='Saturn: Magnetosphere',
-            text=["Saturn has a large magnetosphere, the region of space dominated by its magnetic field. Saturn's magnetic field is <br>" 
-                  "unique because its magnetic axis is almost perfectly aligned with its rotational axis. The magnetosphere deflects <br>" 
-                  "the solar wind and traps charged particles, leading to auroras at the poles.<br>" 
-                  "Material from Enceladus's plumes contributes plasma to Saturn's magnetosphere and its E ring.<br>" 
-                  "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."] * len(x),
-            customdata=['Saturn: Magnetosphere'] * len(x),
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup='Saturn: Magnetosphere',
+            hoverinfo='skip',
             showlegend=True
         )
     ]
+    mag_desc = ("Saturn has a large magnetosphere, the region of space dominated by its magnetic field. Saturn's magnetic field is <br>"
+               "unique because its magnetic axis is almost perfectly aligned with its rotational axis. The magnetosphere deflects <br>"
+               "the solar wind and traps charged particles, leading to auroras at the poles.<br>"
+               "Material from Enceladus's plumes contributes plasma to Saturn's magnetosphere and its E ring.<br>"
+               "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.")
+    traces.append(go.Scatter3d(
+        x=[x[0]], y=[y[0]], z=[z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(200, 200, 255)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup='Saturn: Magnetosphere',
+        text=[mag_desc],
+        customdata=['Saturn: Magnetosphere'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -716,8 +777,7 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
                       "* Ionization: Ionization of the water vapor is driven by UV radiation and electron bombardment within the torus.<br>"
                       "* Color: Neutral gases like water vapor are colorless and transparent. Any visible color would arise from the scattering of <br>" 
                       "  light by the ice particles within the torus. Pure water ice is typically white or very light blue due to scattering."
-                      ] * len(enceladus_torus_x_final)
-    enceladus_customdata = ['Saturn: Enceladus Plasma Torus'] * len(enceladus_torus_x_final)
+                      ]
     
     
     traces = [
@@ -732,12 +792,23 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
                 opacity=0.3
             ),
             name='Saturn: Enceladus Plasma Torus',
-            text=enceladus_text,
-            customdata=enceladus_customdata,
-            hovertemplate='%{text}<extra></extra>',
+            legendgroup='Saturn: Enceladus Plasma Torus',
+            hoverinfo='skip',
             showlegend=True
         )
     ]
+    traces.append(go.Scatter3d(
+        x=[enceladus_torus_x_final[0]], y=[enceladus_torus_y_final[0]], z=[enceladus_torus_z_final[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(200, 220, 255)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup='Saturn: Enceladus Plasma Torus',
+        text=enceladus_text,
+        customdata=['Saturn: Enceladus Plasma Torus'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -837,8 +908,6 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
         belt_z = np.array(belt_z) + center_z
         
         # Create the radiation belt hover text and customdata arrays
-        belt_text = [belt_texts[i]] * len(belt_x)
-        belt_customdata = [belt_names[i]] * len(belt_x)
 
         # Apply center position offset
         belt_x = np.array(belt_x)
@@ -865,12 +934,23 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
                     opacity=0.3
                 ),
                 name=belt_names[i],
-                text=belt_text,
-                customdata=belt_customdata,
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=belt_names[i],
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        traces.append(go.Scatter3d(
+            x=[belt_x_final[0]], y=[belt_y_final[0]], z=[belt_z_final[0]],
+            mode='markers',
+            marker=dict(size=6, color=belt_colors[i], opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=belt_names[i],
+            text=[belt_texts[i]],
+            customdata=[belt_names[i]],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -922,7 +1002,7 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * SATURN_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -930,22 +1010,36 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Saturn: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Saturn: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Saturn: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=2.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     # Add sun direction indicator scaled to this shell's radius
     sun_traces = create_sun_direction_indicator(
@@ -1134,7 +1228,6 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
         z_final = np.array(z_tilted) + center_z
         
         # Create a text list for hover information
-        text_array = [ring_info['description'] for _ in range(len(x))]
         
         # Add ring trace
         traces.append(
@@ -1150,12 +1243,24 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
                     opacity=ring_info['opacity']
                 ),
                 name=f"Saturn: {ring_info['name']}",
-                text=text_array,
-                customdata=[f"Saturn: {ring_info['name']}"] * len(x),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"Saturn: {ring_info['name']}",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], saturn_tilt, 'x')
+        traces.append(go.Scatter3d(
+            x=[mx_t[0] + center_x], y=[my_t[0] + center_y], z=[mz_t[0] + center_z],
+            mode='markers',
+            marker=dict(size=6, color=ring_info['color'], opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"Saturn: {ring_info['name']}",
+            text=[ring_info['description']],
+            customdata=[f"Saturn: {ring_info['name']}"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 

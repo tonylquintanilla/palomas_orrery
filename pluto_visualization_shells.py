@@ -7,7 +7,7 @@ fully archivable once shell_configs.py migration is complete.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 All 16 claims confirmed (Stern et al. 2015, Bierson et al. 2020, Gladstone et al. 2016,
 NASA Pluto Fact Sheet, NASA SSD). No factual corrections needed.
@@ -67,7 +67,7 @@ def create_pluto_core_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -75,22 +75,36 @@ def create_pluto_core_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=4.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Pluto: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Pluto: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=4.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -133,7 +147,7 @@ def create_pluto_mantle_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -141,22 +155,36 @@ def create_pluto_mantle_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.5,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Pluto: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Pluto: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.5,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -303,32 +331,25 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
         
     # Create a list of repeated descriptions for each point
     # This is crucial - we need exactly one text entry per point
-    hover_texts = [layer_info['description']] * len(x_hover)
 
     # Just the name for "Object Names Only" mode
-    layer_name = f"Pluto: {layer_info['name']}"
-    minimal_hover_texts = [layer_name] * len(x_hover)
 
     # Create hover trace with direct text assignment
+    # Single info marker at north pole, 5% above radius
+    r_info = radius * 1.05
+    trace_name = f"Pluto: {layer_info['name']} (Info)"
+
     hover_trace = go.Scatter3d(
-        x=x_hover, 
-        y=y_hover, 
-        z=z_hover,
+        x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(
-            size=2,  # originally 5
-            color='rgb(83, 68, 55)',  # brownish
-            opacity=1.0,  # originally 0.8
-            line=dict(  # Add a contrasting outline
-                width=1,
-                color='black'
-            )
-        ),
-        name=f"Pluto: {layer_info['name']} (Info)",
-        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
-        customdata=minimal_hover_texts,  # For "Object Names Only" mode
-        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
-        showlegend=False  # Don't show in legend since it's just for hover
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name=trace_name,
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[f"Pluto: {layer_info['name']}"],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
     )
 
     return [surface_trace, hover_trace]
@@ -392,7 +413,7 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -400,22 +421,36 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Pluto: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Pluto: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
         
     return traces
 
@@ -471,7 +506,7 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -479,22 +514,36 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Pluto: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Pluto: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -542,7 +591,7 @@ def create_pluto_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * PLUTO_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -550,22 +599,36 @@ def create_pluto_hill_sphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Pluto: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Pluto: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Pluto: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=2.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 

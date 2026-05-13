@@ -134,12 +134,25 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
             width=3,
             dash='dash'
         ),
-
         name='Vernal Equinox Direction (+X)',
-        text=[info_text] * len(sun_direction_x),  # Add hover text
-        hovertemplate='%{text}<extra></extra>',    # Enable hover with template
+        legendgroup='Vernal Equinox Direction (+X)',
+        hoverinfo='skip',
         showlegend=True
     )
 
-    return [indicator_trace]
+    # Info marker at the +X tip of the indicator
+    info_trace = go.Scatter3d(
+        x=[sun_direction_x[1]], y=[sun_direction_y[1]], z=[sun_direction_z[1]],
+        mode='markers',
+        marker=dict(size=6, color='yellow', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup='Vernal Equinox Direction (+X)',
+        text=[info_text],
+        customdata=['Vernal Equinox Direction (+X)'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    return [indicator_trace, info_trace]
 

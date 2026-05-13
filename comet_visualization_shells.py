@@ -18,7 +18,7 @@ Key functions:
 
 Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 
-Module updated: April 2026 with Anthropic's Claude Sonnet 4.6 with Gemini 2.5 Pro review
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Hyakutake ion tail comparison corrected (580 Mkm < Sun-Jupiter 778 Mkm).
     Provenance audit identified by Anthropic's Claude Opus 4.7
@@ -806,13 +806,26 @@ def create_comet_coma(center_position=(0, 0, 0), coma_radius_km=100000,
             opacity=1.0
         ),
         name=f'{comet_name}: Coma',
-        text=[description] * len(coma_points_x),
-        customdata=[f'{comet_name}: Coma'] * len(coma_points_x), 
-        hovertemplate='%{text}<extra></extra>',
+        legendgroup=f'{comet_name}: Coma',
+        hoverinfo='skip',
         showlegend=True
     )
     
-    return [trace]
+    # Info marker at first point
+    info_trace = go.Scatter3d(
+        x=[coma_points_x[0]], y=[coma_points_y[0]], z=[coma_points_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(150, 220, 150)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=f'{comet_name}: Coma',
+        text=[description],
+        customdata=[f'{comet_name}: Coma'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    return [trace, info_trace]
 
 
 def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
@@ -986,13 +999,26 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
             opacity=1.0
         ),
         name=f'{comet_name}: Dust Tail',
-        text=[description] * len(tail_points_x),
-        customdata=[f'{comet_name}: Dust Tail'] * len(tail_points_x),
-        hovertemplate='%{text}<extra></extra>',
+        legendgroup=f'{comet_name}: Dust Tail',
+        hoverinfo='skip',
         showlegend=True
     )
     
-    return [trace]
+    # Info marker at first point
+    info_trace = go.Scatter3d(
+        x=[tail_points_x[0]], y=[tail_points_y[0]], z=[tail_points_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(255, 220, 130)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=f'{comet_name}: Dust Tail',
+        text=[description],
+        customdata=[f'{comet_name}: Dust Tail'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    return [trace, info_trace]
 
 
 def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
@@ -1126,13 +1152,26 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
             opacity=1.0
         ),
         name=f'{comet_name}: Ion Tail',
-        text=[description] * len(tail_points_x),
-        customdata=[f'{comet_name}: Ion Tail'] * len(tail_points_x),
-        hovertemplate='%{text}<extra></extra>',
+        legendgroup=f'{comet_name}: Ion Tail',
+        hoverinfo='skip',
         showlegend=True
     )
     
-    return [trace]
+    # Info marker at first point
+    info_trace = go.Scatter3d(
+        x=[tail_points_x[0]], y=[tail_points_y[0]], z=[tail_points_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(120, 180, 255)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=f'{comet_name}: Ion Tail',
+        text=[description],
+        customdata=[f'{comet_name}: Ion Tail'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    return [trace, info_trace]
 
 
 def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000,
@@ -1271,10 +1310,21 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
         mode='markers',
         marker=dict(size=1.4, color=at_colors, opacity=1.0),
         name=f'{comet_name}: Anti-tail',
-        text=[description] * len(at_x),
-        customdata=[f'{comet_name}: Anti-tail'] * len(at_x),
-        hovertemplate='%{text}<extra></extra>',
+        legendgroup=f'{comet_name}: Anti-tail',
+        hoverinfo='skip',
         showlegend=True
+    ))
+    traces.append(go.Scatter3d(
+        x=[at_x[0]], y=[at_y[0]], z=[at_z[0]],
+        mode='markers',
+        marker=dict(size=6, color='rgb(230, 200, 160)', opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=f'{comet_name}: Anti-tail',
+        text=[description],
+        customdata=[f'{comet_name}: Anti-tail'],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
     ))
     
     # --- 2. Mini-jets (if jet_count > 1 in comet data) ---
@@ -1314,10 +1364,21 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
                 mode='markers',
                 marker=dict(size=1.0, color=mj_colors, opacity=1.0),
                 name=f'{comet_name}: Mini-jet {j+1}',
-                text=[mini_desc] * len(mj_x),
-                customdata=[f'{comet_name}: Mini-jet {j+1}'] * len(mj_x),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f'{comet_name}: Mini-jet {j+1}',
+                hoverinfo='skip',
                 showlegend=True
+            ))
+            traces.append(go.Scatter3d(
+                x=[mj_x[0]], y=[mj_y[0]], z=[mj_z[0]],
+                mode='markers',
+                marker=dict(size=6, color='rgb(200, 180, 220)', opacity=0.9,
+                            symbol='cross', line=dict(color='white', width=1)),
+                name='',
+                legendgroup=f'{comet_name}: Mini-jet {j+1}',
+                text=[mini_desc],
+                customdata=[f'{comet_name}: Mini-jet {j+1}'],
+                hovertemplate='%{text}<extra></extra>',
+                showlegend=False
             ))
     
     return traces

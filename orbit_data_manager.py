@@ -1572,10 +1572,8 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
             
             # Create the hover text
             if is_satellite_of_center:
-                hover_text = [f"{name} Orbit around {center_object_name}"] * len(x_coords)
                 orbit_name = f"{name} Orbit around {center_object_name}"
             else:
-                hover_text = [f"{name} Orbit"] * len(x_coords)
                 orbit_name = f"{name} Orbit"
 
             print(f"Plotting orbit for {name} relative to {center_object_name} ({len(x_coords)} points)", flush=True)
@@ -1594,10 +1592,25 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
                     mode='lines',
                     line=dict(width=1, color=color),  # uses the color from color_map
                     name=orbit_name,
-                    text=hover_text,
-                    customdata=hover_text,
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=orbit_name,
+                    hoverinfo='skip',
                     showlegend=True
+                )
+            )
+            # Info marker at midpoint of orbit arc
+            info_idx = min(len(x_coords) // 2, len(x_coords) - 1)
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[x_coords[info_idx]], y=[y_coords[info_idx]], z=[z_coords[info_idx]],
+                    mode='markers',
+                    marker=dict(size=6, color=color, opacity=0.9,
+                                symbol='cross', line=dict(color='white', width=1)),
+                    name='',
+                    legendgroup=orbit_name,
+                    text=[orbit_name],
+                    customdata=[orbit_name],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
                 )
             )
             
@@ -1610,7 +1623,6 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
                 continue
                 
             # Create the hover text arrays
-            hover_text = [f"{name} Orbit"] * len(path['x'])
             
             # Get color if color_map is provided
             color = 'white'  # Default color
@@ -1625,10 +1637,25 @@ def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=N
                     mode='lines',
                     line=dict(width=1, color=color),
                     name=f"{name} Orbit",
-                    text=hover_text,
-                    customdata=hover_text,
-                    hovertemplate='%{text}<extra></extra>',
+                    legendgroup=f"{name} Orbit",
+                    hoverinfo='skip',
                     showlegend=True
+                )
+            )
+            # Info marker at midpoint
+            info_idx = min(len(path['x']) // 2, len(path['x']) - 1)
+            fig.add_trace(
+                go.Scatter3d(
+                    x=[path['x'][info_idx]], y=[path['y'][info_idx]], z=[path['z'][info_idx]],
+                    mode='markers',
+                    marker=dict(size=6, color=color, opacity=0.9,
+                                symbol='cross', line=dict(color='white', width=1)),
+                    name='',
+                    legendgroup=f"{name} Orbit",
+                    text=[f"{name} Orbit"],
+                    customdata=[f"{name} Orbit"],
+                    hovertemplate='%{text}<extra></extra>',
+                    showlegend=False
                 )
             )
         else:

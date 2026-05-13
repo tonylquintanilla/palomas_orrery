@@ -297,19 +297,19 @@ SPACECRAFT_ENCOUNTERS = {
         # Add to SPACECRAFT_ENCOUNTERS['Psyche'] list:
         {
             'target': 'Mars',
-            'date': '2026-5-15 9:28:00',
+            'date': '2026-5-15 9:29:00',
             'type': 'gravity_assist',
             'dist_km': 8009,        
             'dist_au': 8009 / AU_KM, 
             'v_kms': 5.51,
             'label': 'Mars Gravitational Assist',
-            'note': ('Psyche will use Mars\' gravity to increase its speed as it moves to its encounter with asteroid 16  Psyche. It will also test its instruments.'),
+            'note': ('Psyche will use Mars\' gravity to increase its speed as it moves to its encounter with asteroid 16 Psyche. It will also test its instruments.'),
             'status': 'ongoing',
             'source': 'NASA/JPL',
             'date_source': 'horizons',
             'center': 'Mars',
             'select_also': ['Mars: Crust', 'Mars: Lower Atmosphere', 'Mars: Upper Atmosphere', 'Phobos', 'Deimos', 'Mars'],
-            'plot_days': 1,  # TODO: adjust
+            'plot_days': 1,  
             'plot_scale_au': 0.0003,
         },
 
@@ -332,7 +332,7 @@ SPACECRAFT_ENCOUNTERS = {
             'date_source': 'horizons',
             'center': 'Phobos',
             'select_also': ['Mars', 'Deimos', 'Phobos'],
-            'plot_days': 28,  # TODO: adjust
+            'plot_days': 1,  
             'plot_scale_au': 0.00032926784204852846,
         },
 

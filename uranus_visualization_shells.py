@@ -8,7 +8,7 @@ making its magnetosphere geometry unique.
 
 Consumed by: planet_visualization.py (routing dispatcher)
 
-Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 Source: NASA Uranus Fact Sheet; Ness et al. (1986) Science (magnetosphere/radiation belts);
 Nettelmann et al. (2013) Icarus (interior model); Voyager 2 (1986) in-situ measurements.
 """
@@ -49,7 +49,7 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -57,22 +57,36 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=4.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Uranus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Uranus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=4.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -112,7 +126,7 @@ def create_uranus_mantle_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -120,22 +134,36 @@ def create_uranus_mantle_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.5,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Uranus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Uranus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.5,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     return traces
 
@@ -292,32 +320,25 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
         
     # Create a list of repeated descriptions for each point
     # This is crucial - we need exactly one text entry per point
-    hover_texts = [layer_info['description']] * len(x_hover)
 
     # Just the name for "Object Names Only" mode
-    layer_name = f"Uranus: {layer_info['name']}"
-    minimal_hover_texts = [layer_name] * len(x_hover)
 
     # Create hover trace with direct text assignment
+    # Single info marker at north pole, 5% above radius
+    r_info = radius * 1.05
+    trace_name = f"Uranus: {layer_info['name']} (Info)"
+
     hover_trace = go.Scatter3d(
-        x=x_hover, 
-        y=y_hover, 
-        z=z_hover,
+        x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(
-            size=2,  # originally 5
-            color='rgb(173, 216, 230)',  # Layer color, originally 'white'
-            opacity=1.0,  # originally 0.8
-            line=dict(  # Add a contrasting outline
-                width=1,
-                color='black'
-            )
-        ),
-        name=f"Uranus: {layer_info['name']} (Info)",
-        text=hover_texts,  # IMPORTANT: Matching length with coordinate arrays
-        customdata=minimal_hover_texts,  # For "Object Names Only" mode
-        hovertemplate='%{text}<extra></extra>',  # Use the standard hover template
-        showlegend=False  # Don't show in legend since it's just for hover
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name=trace_name,
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[f"Uranus: {layer_info['name']}"],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
     )
 
     return [surface_trace, hover_trace]
@@ -369,7 +390,7 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -377,22 +398,36 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=3.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Uranus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Uranus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -460,37 +495,7 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0)):
                 opacity=0.3
             ),
             name='Uranus: Magnetosphere',
-            text=["Magnetic Field (Magnetosphere): Uranus possesses a unique and peculiar magnetic field. Unlike most planets, its <br>" 
-            "magnetic axis is tilted at a dramatic angle of nearly 60 degrees relative to its rotational axis. Furthermore, the <br>" 
-            "magnetic field is offset from the planet's center by about one-third of Uranus' radius. This unusual orientation <br>" 
-            "leads to a magnetosphere that is highly distorted and asymmetric. The magnetic field is generated by the convective <br>" 
-            "motions of electrically conductive materials (likely the icy mantle) within the planet. The strength of Uranus' <br>" 
-            "dipole magnetic field is significant, about 50 times that of Earth's, although smaller than Jupiter's. The <br>" 
-            "magnetosphere deflects the solar wind, creating a complex boundary called the magnetopause, which extends a <br>" 
-            "considerable distance from the planet.<br>" 
-            "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.<br>" 
-            "* The distance to Uranus' magnetopause (the boundary where the planet's magnetic field meets the solar wind) on the <BR>" 
-            "  sunward side is estimated to be around 18-24 Ru.<br>" 
-            "* The equatorial radius of Uranus' magnetosphere varies depending on solar wind conditions, but a typical estimate is <br>" 
-            "  around 25-30 Ru.<br>" 
-            "* The polar radius of Uranus' magnetosphere, measured from the center of the planet to the magnetopause along the <br>" 
-            "  magnetic poles, is typically smaller than the equatorial radius due to the interaction with the solar wind and the <br>" 
-            "  shape of the magnetic field. Estimates range, but it's likely in the order of 15-20 Ru.<br>" 
-            "* The magnetotail is the region of the magnetosphere that extends away from the Sun, stretched by the solar wind. The <br>" 
-            "  length of Uranus' magnetotail is highly variable and depends on the conditions of the solar wind. However, Voyager 2 <br>" 
-            "  observations provided some insights. Estimates for the length of Uranus' magnetotail range significantly, but it's <br>" 
-            "  often cited to extend hundreds of Uranus radii downwind. A reasonable estimate based on observations would be in the <br>" 
-            "  order of several hundred Ru, perhaps around 200-500 Ru or even more under certain solar wind conditions.<br>" 
-            "* The \"base\" of the magnetotail is the region connected to the planet's nightside magnetosphere. Its radius is <br>" 
-            "  related to the size of the obstacle the planet presents to the solar wind. A typical estimate for the radius of the <br>" 
-            "  magnetotail near the planet (the base) is on the order of the planet's radius. So, the tail base radius is estimated <br>" 
-            "  to be around 10-20 Ru.<br>" 
-            "* The magnetotail flares out as it extends away from the planet. The radius at the \"end\" (where it becomes less <br>" 
-            "  well-defined and merges with the interplanetary medium) would be larger than at the base. This is even more variable <br>" 
-            "  and less well-defined than the tail length. It could be several tens of Uranus radii. So, a rough estimate for the <br>" 
-            "  tail end radius is ~50-100 Ru."] * len(x),
-            customdata=['Magnetosphere'] * len(x),
-            hovertemplate='%{text}<extra></extra>',
+            hoverinfo='skip',
             showlegend=True
         )
     ]
@@ -626,8 +631,6 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
         belt_z = np.array(belt_z) + center_z
         
         # Create the radiation belt hover text and customdata arrays
-        belt_text = [belt_texts[i]] * len(belt_x)
-        belt_customdata = [belt_names[i]] * len(belt_x)
 
         # Apply center position offset
         belt_x = np.array(belt_x)
@@ -671,12 +674,23 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
                     opacity=0.3
                 ),
                 name=belt_names[i],
-                text=belt_text,
-                customdata=belt_customdata,
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=belt_names[i],
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        traces.append(go.Scatter3d(
+            x=[belt_x_final[0]], y=[belt_y_final[0]], z=[belt_z_final[0]],
+            mode='markers',
+            marker=dict(size=6, color=belt_colors[i], opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=belt_names[i],
+            text=[belt_texts[i]],
+            customdata=[belt_names[i]],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -1032,7 +1046,6 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
         z_final = z_final + center_z  # Use z_final from Y rotation
         
         # Create a text list for hover information
-        text_array = [ring_info['description'] for _ in range(len(x))]
         
         # Add ring trace
         traces.append(
@@ -1048,12 +1061,25 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
                     opacity=ring_info['opacity']
                 ),
                 name=f"Uranus: {ring_info['name']}",
-                text=text_array,
-                customdata=[f"Uranus: {ring_info['name']}"] * len(x),
-                hovertemplate='%{text}<extra></extra>',
+                legendgroup=f"Uranus: {ring_info['name']}",
+                hoverinfo='skip',
                 showlegend=True
             )
         )
+        mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], uranus_tilt, 'x')
+        mx_t2, my_t2, mz_t2 = rotate_points(mx_t, my_t, mz_t, uranus_tilt, 'y')
+        traces.append(go.Scatter3d(
+            x=[mx_t2[0] + center_x], y=[my_t2[0] + center_y], z=[mz_t2[0] + center_z],
+            mode='markers',
+            marker=dict(size=6, color=ring_info['color'], opacity=0.9,
+                        symbol='cross', line=dict(color='white', width=1)),
+            name='',
+            legendgroup=f"Uranus: {ring_info['name']}",
+            text=[ring_info['description']],
+            customdata=[f"Uranus: {ring_info['name']}"],
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
     
     sun_traces = create_sun_direction_indicator(
         center_position=center_position, 
@@ -1103,7 +1129,7 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * URANUS_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=20)
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -1111,22 +1137,36 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
     y = y + center_y
     z = z + center_z
     
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.0,
-                color=layer_info['color'],
-                opacity=layer_info['opacity']
-            ),
-            name=f"Uranus: {layer_info['name']}",
-            text=[layer_info['description']] * len(x),
-            customdata=[f"Uranus: {layer_info['name']}"] * len(x),
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        )
-    ]
+    r_info = layer_radius * 1.05
+    trace_name = f"Uranus: {layer_info['name']}"
+
+    shell_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=2.0,
+            color=layer_info['color'],
+            opacity=layer_info['opacity']
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True
+    )
+    info_trace = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+                    symbol='cross', line=dict(color='white', width=1)),
+        name='',
+        legendgroup=trace_name,
+        text=[layer_info['description']],
+        customdata=[trace_name],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=False
+    )
+
+    traces = [shell_trace, info_trace]
     
     # Add sun direction indicator scaled to this shell's radius
     sun_traces = create_sun_direction_indicator(
