@@ -19,6 +19,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (JUPITER_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
 from shared_utilities import create_sun_direction_indicator
+from orrery_rendering import rotate_to_sunward, create_info_marker
 
 def create_ring_points_jupiter (inner_radius, outer_radius, n_points=100, thickness=0.01):
     """
@@ -533,16 +534,18 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
     for key in params:
         params[key] *= JUPITER_RADIUS_AU
     
-    # Create magnetosphere main shape
+    # Create magnetosphere main shape (generated with -X as sunward)
     x, y, z = create_magnetosphere_shape(params)
     
     # Unpack center position
     center_x, center_y, center_z = center_position
     
-    # Apply center position offset
-    x = np.array(x) + center_x
-    y = np.array(y) + center_y
-    z = np.array(z) + center_z
+    # Rotate to actual sunward direction, then offset to center position
+    x, y, z = np.array(x), np.array(y), np.array(z)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
     
     traces = [
         go.Scatter3d(
@@ -563,26 +566,11 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
                "and forms a magnetotail stretching beyond Saturn's orbit in the opposite direction.<br>"
                "It traps charged particles, creating intense radiation belts that would be lethal to humans.<br>"
                "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.")
-    traces.append(go.Scatter3d(
-        x=[x[0]], y=[y[0]], z=[z[0]],
-        mode='markers',
-        marker=dict(size=6, color='rgb(200, 200, 255)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Jupiter: Magnetosphere',
-        text=[mag_desc],
-        customdata=['Jupiter: Magnetosphere'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    traces.append(create_info_marker(
+        x[0], y[0], z[0],
+        'rgb(200, 200, 255)', mag_desc, 'Jupiter: Magnetosphere'
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=500 * JUPITER_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 jupiter_io_plasma_torus_info = ("634 KB PER FRAME FOR HTML.\n\n"
@@ -653,26 +641,11 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
             showlegend=True
         )
     ]
-    traces.append(go.Scatter3d(
-        x=[io_torus_x[0]], y=[io_torus_y[0]], z=[io_torus_z[0]],
-        mode='markers',
-        marker=dict(size=6, color='rgb(255, 100, 100)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Jupiter: Io Plasma Torus',
-        text=[io_desc],
-        customdata=['Jupiter: Io Plasma Torus'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    traces.append(create_info_marker(
+        io_torus_x[0], io_torus_y[0], io_torus_z[0],
+        'rgb(255, 100, 100)', io_desc, 'Jupiter: Io Plasma Torus'
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=io_torus_distance
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 # Source: NASA Jupiter Magnetosphere Overview; Juno Mission
@@ -758,28 +731,11 @@ def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        traces.append(
-            go.Scatter3d(
-                x=[belt_x[0]], y=[belt_y[0]], z=[belt_z[0]],
-                mode='markers',
-                marker=dict(size=6, color=belt_colors[i], opacity=0.9,
-                            symbol='cross', line=dict(color='white', width=1)),
-                name='',
-                legendgroup=belt_names[i],
-                text=[belt_texts[i]],
-                customdata=[belt_names[i]],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
-            )
-        )
+        traces.append(create_info_marker(
+            belt_x[0], belt_y[0], belt_z[0],
+            belt_colors[i], belt_texts[i], belt_names[i]
+        ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius= 6.0 * JUPITER_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
     
 # Source: NASA Solar System Dynamics
@@ -1006,28 +962,12 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
         )
         # Info marker on outer ring at phi=0
         ring_marker_x = outer_radius_au + center_x
-        traces.append(
-            go.Scatter3d(
-                x=[ring_marker_x], y=[center_y], z=[center_z],
-                mode='markers',
-                marker=dict(size=6, color=ring_info['color'], opacity=0.9,
-                            symbol='cross', line=dict(color='white', width=1)),
-                name='',
-                legendgroup=f"Jupiter: {ring_info['name']}",
-                text=[ring_info['description']],
-                customdata=[f"Jupiter: {ring_info['name']}"],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
-            )
-        )
+        traces.append(create_info_marker(
+            ring_marker_x, center_y, center_z,
+            ring_info['color'], ring_info['description'],
+            f"Jupiter: {ring_info['name']}"
+        ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=226000 / KM_PER_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 # Source: NASA Jupiter Magnetosphere Overview; Juno Mission

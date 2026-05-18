@@ -19,6 +19,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape)
 from shared_utilities import create_sun_direction_indicator
+from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Earth Shell Creation Functions
 
@@ -657,16 +658,19 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
     for key in params:
         params[key] *= EARTH_RADIUS_AU
     
-    # Create magnetosphere main shape
+    # Create magnetosphere main shape (generated with -X as sunward)
     x, y, z = create_magnetosphere_shape(params)
     
     # Unpack center position
     center_x, center_y, center_z = center_position
     
     # 1. Add the main magnetosphere structure
-    x = np.array(x) + center_x
-    y = np.array(y) + center_y
-    z = np.array(z) + center_z
+    # Rotate to actual sunward direction, then offset to center position
+    x, y, z = np.array(x), np.array(y), np.array(z)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
     
     magnetosphere_text = ["Earth's magnetosphere extends about 10 Earth radii on the Sun-facing side<br>"
                  "and stretches into a long magnetotail on the night side. It protects Earth<br>"
@@ -690,20 +694,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
     # Info marker at first point on magnetosphere structure
-    traces.append(
-        go.Scatter3d(
-            x=[x[0]], y=[y[0]], z=[z[0]],
-            mode='markers',
-            marker=dict(size=6, color='rgb(180, 180, 255)', opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup='Earth: Magnetosphere',
-            text=magnetosphere_text,
-            customdata=magnetosphere_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
-        )
-    )
+    traces.append(create_info_marker(
+        x[0], y[0], z[0],
+        'rgb(180, 180, 255)', magnetosphere_text[0], 'Earth: Magnetosphere'
+    ))
     
     # 2. Create and add bow shock
     bow_shock_x = []
@@ -732,10 +726,16 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
             bow_shock_y.append(y)
             bow_shock_z.append(z)
     
-    # Apply center position offset
-    bow_shock_x = np.array(bow_shock_x) + center_x
-    bow_shock_y = np.array(bow_shock_y) + center_y
-    bow_shock_z = np.array(bow_shock_z) + center_z
+    # Apply rotation to sunward direction, then offset to center position
+    bow_shock_x = np.array(bow_shock_x)
+    bow_shock_y = np.array(bow_shock_y)
+    bow_shock_z = np.array(bow_shock_z)
+    bow_shock_x, bow_shock_y, bow_shock_z = rotate_to_sunward(
+        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position
+    )
+    bow_shock_x = bow_shock_x + center_x
+    bow_shock_y = bow_shock_y + center_y
+    bow_shock_z = bow_shock_z + center_z
     
     bow_shock_text = ["Bow Shock: The boundary where the supersonic solar wind is first slowed<br>"
                 "by Earth's magnetic field, typically located about 15 Earth radii upstream<br>"
@@ -762,20 +762,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
     # Info marker at first point on bow shock structure
-    traces.append(
-        go.Scatter3d(
-            x=[bow_shock_x[0]], y=[bow_shock_y[0]], z=[bow_shock_z[0]],
-            mode='markers',
-            marker=dict(size=6, color='rgb(255, 200, 150)', opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup='Earth: Bow Shock',
-            text=bow_shock_text,
-            customdata=bow_shock_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
-        )
-    )
+    traces.append(create_info_marker(
+        bow_shock_x[0], bow_shock_y[0], bow_shock_z[0],
+        'rgb(255, 200, 150)', bow_shock_text[0], 'Earth: Bow Shock'
+    ))
     
     # 3. Create and add Van Allen radiation belts
     belt_colors = ['rgb(255, 100, 100)', 'rgb(100, 200, 255)']
@@ -849,28 +839,11 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
             )
         )
         # Info marker for this belt
-        traces.append(
-            go.Scatter3d(
-                x=[belt_x[0]], y=[belt_y[0]], z=[belt_z[0]],
-                mode='markers',
-                marker=dict(size=6, color=belt_colors[i], opacity=0.9,
-                            symbol='cross', line=dict(color='white', width=1)),
-                name='',
-                legendgroup=belt_names[i],
-                text=belt_text,
-                customdata=belt_customdata,
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
-            )
-        )
+        traces.append(create_info_marker(
+            belt_x[0], belt_y[0], belt_z[0],
+            belt_colors[i], belt_text[0], belt_names[i]
+        ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=100 * EARTH_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 # Source: UCS Satellite Database, ESA Space Debris Office, NASA
@@ -979,18 +952,11 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
             showlegend=True,
         )
     ]
-    r_info = np.max(z)  # LEO outer extent
-    traces.append(go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=6, color='rgb(255, 248, 220)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Earth: Low Earth Orbit (LEO)',
-        text=[hover_text],
-        customdata=['Earth: Low Earth Orbit (LEO)'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Info marker at LEO outer extent on the north pole
+    r_info = np.max(z) - center_z  # LEO outer extent above center
+    traces.append(create_info_marker(
+        center_x, center_y, center_z + r_info,
+        'rgb(255, 248, 220)', hover_text, 'Earth: Low Earth Orbit (LEO)'
     ))
 
     return traces
@@ -1091,17 +1057,9 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
         )
     ]
     # Info marker on GEO ring at phi=0
-    traces.append(go.Scatter3d(
-        x=[center_x + geo_radius_au], y=[center_y], z=[center_z],
-        mode='markers',
-        marker=dict(size=6, color='rgb(220, 220, 255)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Earth: Geostationary Belt (GEO)',
-        text=[hover_text],
-        customdata=['Earth: Geostationary Belt (GEO)'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    traces.append(create_info_marker(
+        center_x + geo_radius_au, center_y, center_z,
+        'rgb(220, 220, 255)', hover_text, 'Earth: Geostationary Belt (GEO)'
     ))
 
     return traces

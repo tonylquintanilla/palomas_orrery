@@ -19,40 +19,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (SATURN_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, rotate_points)
 from shared_utilities import create_sun_direction_indicator
-
-def create_ring_points_saturn (inner_radius, outer_radius, n_points, thickness=0):
-    """
-    Create points for a ring with inner and outer radius.
-    
-    Parameters:
-        inner_radius (float): Inner radius of the ring
-        outer_radius (float): Outer radius of the ring
-        n_points (int): Number of points to generate
-        thickness (float): Thickness of the ring in z-direction
-        
-    Returns:
-        tuple: (x, y, z) arrays of coordinates
-    """
-    # Generate angular positions
-    theta = np.linspace(0, 2*np.pi, n_points)
-    
-    # Calculate radial positions
-    r = np.linspace(inner_radius, outer_radius, int(n_points/10))
-    
-    # Create a meshgrid for combinations
-    theta_grid, r_grid = np.meshgrid(theta, r)
-    
-    # Convert to cartesian coordinates
-    x = r_grid.flatten() * np.cos(theta_grid.flatten())
-    y = r_grid.flatten() * np.sin(theta_grid.flatten())
-    
-    # Add some thickness in z-direction if specified
-    if thickness > 0:
-        z = np.random.uniform(-thickness/2, thickness/2, size=x.shape)
-    else:
-        z = np.zeros_like(x)
-    
-    return x, y, z
+from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 
 # Saturn Shell Creation Functions
 
@@ -650,16 +617,20 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0)):
     for key in params:
         params[key] *= SATURN_RADIUS_AU
     
-    # Create magnetosphere main shape
+    # Create magnetosphere main shape (generated with -X as sunward)
     x, y, z = create_magnetosphere_shape(params)
     
     # Unpack center position
     center_x, center_y, center_z = center_position
     
-    # Apply center position offset
-    x = np.array(x) + center_x
-    y = np.array(y) + center_y
-    z = np.array(z) + center_z
+    # Rotate to actual sunward direction, then offset to center position.
+    # Saturn's magnetic axis is essentially aligned with its rotation axis
+    # (~0 deg tilt), so magnetic_tilt_deg=0 (default).
+    x, y, z = np.array(x), np.array(y), np.array(z)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
     
     traces = [
         go.Scatter3d(
@@ -681,26 +652,11 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0)):
                "the solar wind and traps charged particles, leading to auroras at the poles.<br>"
                "Material from Enceladus's plumes contributes plasma to Saturn's magnetosphere and its E ring.<br>"
                "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.")
-    traces.append(go.Scatter3d(
-        x=[x[0]], y=[y[0]], z=[z[0]],
-        mode='markers',
-        marker=dict(size=6, color='rgb(200, 200, 255)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Saturn: Magnetosphere',
-        text=[mag_desc],
-        customdata=['Saturn: Magnetosphere'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    traces.append(create_info_marker(
+        x[0], y[0], z[0],
+        'rgb(200, 200, 255)', mag_desc, 'Saturn: Magnetosphere'
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=500 * SATURN_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 saturn_enceladus_plasma_torus_info = ("634 KB PER FRAME FOR HTML.\n\n"
@@ -797,26 +753,12 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
             showlegend=True
         )
     ]
-    traces.append(go.Scatter3d(
-        x=[enceladus_torus_x_final[0]], y=[enceladus_torus_y_final[0]], z=[enceladus_torus_z_final[0]],
-        mode='markers',
-        marker=dict(size=6, color='rgb(200, 220, 255)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Saturn: Enceladus Plasma Torus',
-        text=enceladus_text,
-        customdata=['Saturn: Enceladus Plasma Torus'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    traces.append(create_info_marker(
+        enceladus_torus_x_final[0], enceladus_torus_y_final[0],
+        enceladus_torus_z_final[0],
+        'rgb(200, 220, 255)', enceladus_text[0], 'Saturn: Enceladus Plasma Torus'
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=enceladus_torus_distance
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 saturn_radiation_belts_info = (
@@ -902,19 +844,10 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
                 belt_y.append(y)
                 belt_z.append(z)
         
-        # Apply center position offset
-        belt_x = np.array(belt_x) + center_x
-        belt_y = np.array(belt_y) + center_y
-        belt_z = np.array(belt_z) + center_z
-        
-        # Create the radiation belt hover text and customdata arrays
-
-        # Apply center position offset
+        # Apply Saturn's axial tilt (rotate around x-axis)
         belt_x = np.array(belt_x)
         belt_y = np.array(belt_y)
         belt_z = np.array(belt_z)
-        
-        # Apply Saturn's axial tilt (rotate around x-axis)
         belt_x_tilted, belt_y_tilted, belt_z_tilted = rotate_points(belt_x, belt_y, belt_z, saturn_tilt, 'x')
         
         # Apply center position offset
@@ -939,28 +872,13 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        traces.append(go.Scatter3d(
-            x=[belt_x_final[0]], y=[belt_y_final[0]], z=[belt_z_final[0]],
-            mode='markers',
-            marker=dict(size=6, color=belt_colors[i], opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=belt_names[i],
-            text=[belt_texts[i]],
-            customdata=[belt_names[i]],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+        traces.append(create_info_marker(
+            belt_x_final[0], belt_y_final[0], belt_z_final[0],
+            belt_colors[i], belt_texts[i], belt_names[i]
         ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius= 9.0 * SATURN_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
-    
+
 # Source: NASA Solar System Dynamics (SSD);
 #         Hill sphere ~91 million km / ~151 Saturn radii confirmed.
 saturn_hill_sphere_info = (
@@ -1211,7 +1129,7 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
             n_points = 80  # Fewer points for larger gossamer rings
         
         # Create ring points
-        x, y, z = create_ring_points_saturn (inner_radius_au, outer_radius_au, n_points, thickness_au)
+        x, y, z = create_ring_points(inner_radius_au, outer_radius_au, n_points, thickness_au)
         
         # Apply Saturn's axial tilt
         # Rotation around the y-axis by saturn_tilt angle
@@ -1249,26 +1167,12 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
             )
         )
         mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], saturn_tilt, 'x')
-        traces.append(go.Scatter3d(
-            x=[mx_t[0] + center_x], y=[my_t[0] + center_y], z=[mz_t[0] + center_z],
-            mode='markers',
-            marker=dict(size=6, color=ring_info['color'], opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=f"Saturn: {ring_info['name']}",
-            text=[ring_info['description']],
-            customdata=[f"Saturn: {ring_info['name']}"],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+        traces.append(create_info_marker(
+            mx_t[0] + center_x, my_t[0] + center_y, mz_t[0] + center_z,
+            ring_info['color'], ring_info['description'],
+            f"Saturn: {ring_info['name']}"
         ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=480000 / KM_PER_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 # Source: NASA Cassini Mission; Saturn Magnetosphere Overview;

@@ -14,7 +14,7 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
-Module updated: May 11, 2026 with Anthropic's Claude Opus 4.6 and 4.7 and Tony
+Module updated: May 15, 2026 with Anthropic's Claude Opus 4.6 and 4.7 and Tony
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -39,7 +39,7 @@ import warnings                                             # handles warnings t
 # from astropy.utils.exceptions import ErfaWarning
 # from erfa import ErfaWarning
 # ErfaWarning - for suppressing astronomy library warnings about "dubious" dates.
-# Import path has changed across versions (astropy → erfa → erfa.core).
+# Import path has changed across versions (astropy -> erfa -> erfa.core).
 try:
     from erfa.core import ErfaWarning
 except ImportError:
@@ -292,7 +292,7 @@ except ImportError:
     print("Note: earth_system_visualization_gui.py not found", flush=True)    
 
 # Fix Windows console encoding for Unicode symbols
-# Without this fix, printing "Declination: 45°" would crash on Windows.
+# Without this fix, printing "Declination: 45 deg" would crash on Windows.
 if sys.platform == 'win32':
     # Set console code page to UTF-8
     os.system('chcp 65001 > nul')
@@ -1625,7 +1625,7 @@ def _add_spacecraft_encounter_markers(fig, selected_objects, objects, dates_list
             positions_cache=positions_cache,
         )
     except ImportError:
-        print("[ENCOUNTER] spacecraft_encounters.py not found — skipping tagged markers", flush=True)
+        print("[ENCOUNTER] spacecraft_encounters.py not found -- skipping tagged markers", flush=True)
     except Exception as e:
         print(f"[ENCOUNTER] Error adding tagged encounter markers: {e}", flush=True)
 
@@ -1971,7 +1971,7 @@ status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10),
 
 #   This creates a special integer that:
 #   - Lives in both Python AND Tcl/Tk
-#   - Can be read, for example: mercury_var.get() → 0 or 1
+#   - Can be read, for example: mercury_var.get() -> 0 or 1
 #   - Can be set: mercury_var.set(1)
 #   - Widgets can WATCH it for changes
 
@@ -4513,8 +4513,13 @@ def plot_objects():
             elif center_object_name in planet_shells_config:
                 shell_vars = planet_shells_config[center_object_name]
                 if any(var.get() == 1 for var in shell_vars.values()):
+
                     fig = create_planet_visualization(fig, center_object_name, shell_vars)
                     center_shells_added = True
+                    # Auto-scale axis to shell radius for migrated bodies
+                    if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+                        shell_r = fig._shell_outermost_radius_au * 2
+                        axis_range = [-shell_r, shell_r]
 
             # Add center marker only if shells haven't been added
             if not center_shells_added:
@@ -6149,9 +6154,14 @@ def animate_objects(step, label):
             elif center_object_name in animation_shell_config:
                 shell_vars = animation_shell_config[center_object_name]
                 if any(var.get() == 1 for var in shell_vars.values()):
+
                     fig = create_planet_visualization(fig, center_object_name, shell_vars)
                     center_shells_added = True
                     print(f"[ANIMATION] Added {center_object_name} shells ({len(fig.data)} static traces)", flush=True)
+                    # Auto-scale axis to shell radius for migrated bodies
+                    if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+                        shell_r = fig._shell_outermost_radius_au * 2
+                        axis_range = [-shell_r, shell_r]
 
             # Track where static traces end - frames will only update traces after this point
             static_trace_count = len(fig.data)

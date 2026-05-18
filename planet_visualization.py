@@ -16,7 +16,7 @@ Consumed by: palomas_orrery.py, palomas_orrery_helpers.py
 
 Part of Paloma's Orrery - Data Preservation is Climate Action
 
-Module updated: April 16, 2026 with Anthropic's Claude Opus 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; body-radius aliases and solar/system constants now
 imported from planet_visualization_utilities.py rather than redefined locally.
 Removed shadow redefinition of KM_PER_AU.)
@@ -27,6 +27,12 @@ import numpy as np
 import plotly.graph_objs as go
 from constants_new import (
     KM_PER_AU, LIGHT_MINUTES_PER_AU, KNOWN_ORBITAL_PERIODS, CENTER_BODY_RADII)
+
+# Shell consolidation imports (Step 3, Phase A)
+from orrery_rendering import build_sphere_shell
+from shell_configs import SHELL_CONFIGS, CUSTOM_SHELLS
+from shared_utilities import create_sun_direction_indicator
+import importlib
 
 from solar_visualization_shells import (
     # Sun information texts
@@ -89,15 +95,7 @@ from solar_visualization_shells import (create_sun_core_shell,
                                         create_sun_galactic_tide,
                                         create_sun_gravitational_shell)
 
-from mercury_visualization_shells import (create_mercury_inner_core_shell, 
-                                          create_mercury_outer_core_shell, 
-                                          create_mercury_mantle_shell, 
-                                          create_mercury_crust_shell, 
-                                          create_mercury_atmosphere_shell, 
-                                          create_mercury_sodium_tail,
-                                          create_mercury_magnetosphere_shell, 
-                                          create_mercury_hill_sphere_shell,
-                                          mercury_inner_core_info, 
+from mercury_visualization_shells import (mercury_inner_core_info, 
                                           mercury_outer_core_info, 
                                           mercury_mantle_info, 
                                           mercury_crust_info, 
@@ -532,340 +530,111 @@ def create_sun_corona_from_distance(fig, sun_shell_vars, sun_position):
     
     return fig
 
-def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None, center_position=(0, 0, 0)):
+def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None,
+                                        center_position=(0, 0, 0),
+                                        object_type=None, center_object=None):
     """
-    Unified function to create shell visualizations for any celestial body (Sun or planets).
-    Ensures consistent animation support across all body types.
-    
+    Unified config-driven dispatch for celestial body shell visualization.
+
+    Looks up the body's shell configs in SHELL_CONFIGS (sphere shells) and
+    CUSTOM_SHELLS (non-sphere geometry). Sphere shells route through
+    build_sphere_shell(); custom shells are lazy-imported by registry entry.
+
+    Issues ONE sun direction indicator per body at the outermost active
+    shell radius, replacing the per-shell indicator calls that were
+    duplicated across every shell function. The indicator is suppressed
+    when the body is at the origin (body-centered view) because there
+    is no meaningful sunward direction from the coordinate center.
+
+    Step 3 Phase A: only Mercury is fully wired through this function. Other
+    bodies continue to render via create_planet_visualization() blocks until
+    their Phase B/C/D migrations land.
+
     Parameters:
-        fig (plotly.graph_objects.Figure): The figure to add the visualization to
-        body_name (str): Name of the celestial body ('Sun', 'Earth', 'Jupiter', etc.)
-        shell_vars (dict): Dictionary of selection variables for each body's shells
-        animate (bool): Whether this is for an animated plot
-        frames (list, optional): List of frames for animation
-        center_position (tuple): (x, y, z) position of the body's center
-        
+        fig (plotly.graph_objects.Figure): The figure to add traces to
+        body_name (str): Body name as it appears in SHELL_CONFIGS keys
+                         (e.g. 'Mercury', 'Pluto', 'Sun')
+        shell_vars (dict): Maps shell var names to tk.IntVar.
+                           Keys may be prefixed ('mercury_inner_core') or
+                           bare ('inner_core') - prefix is stripped to match
+                           config keys.
+        animate (bool): Reserved for future animation hooks (unused in Phase A)
+        frames (list): Reserved for future animation hooks (unused in Phase A)
+        center_position (tuple): (x, y, z) AU position of the body's center
+        object_type (str): Object type for sun direction indicator suppression
+        center_object (str): Name of object at plot center (indicator suppression)
+
     Returns:
         plotly.graph_objects.Figure: The updated figure
     """
-    print(f"\nCreating visualization for {body_name} (animate={animate})")
-    
-    # Initialize shell_type to avoid undefined variable errors
-#    shell_type = ""
+    configs = SHELL_CONFIGS.get(body_name, {})
+    customs = CUSTOM_SHELLS.get(body_name, {})
 
-    # Create shell traces based on selected variables
-    traces = []
-    
-    if body_name == 'Sun':
-        # Handle Sun visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-                # Call the appropriate shell creation function based on name
-                if shell_name == 'core':
-                    traces.extend(create_sun_core_shell())
-                elif shell_name == 'radiative':
-                    traces.extend(create_sun_radiative_shell())
-                elif shell_name == 'photosphere':
-                    traces.extend(create_sun_photosphere_shell())
-                elif shell_name == 'chromosphere':
-                    traces.extend(create_sun_chromosphere_shell())
-                elif shell_name == 'inner_corona':
-                    traces.extend(create_sun_inner_corona_shell())
-                elif shell_name == 'roche_limit':
-                    traces.extend(create_sun_roche_limit_shell())
-                elif shell_name == 'streamer_belt':
-                    traces.extend(create_sun_streamer_belt_shell())
-                elif shell_name == 'alfven_surface':
-                    traces.extend(create_sun_alfven_surface_shell()) 
-                elif shell_name == 'outer_corona':
-                    traces.extend(create_sun_outer_corona_shell())
-                elif shell_name == 'termination_shock':
-                    traces.extend(create_sun_termination_shock_shell())
-                elif shell_name == 'heliopause':
-                    traces.extend(create_sun_heliopause_shell())
+    # Strip body prefix from shell_vars keys to match config keys.
+    # 'mercury_inner_core' -> 'inner_core'; bare keys (Sun) pass through.
+    # 'Planet 9' becomes 'planet9_'.
+    body_prefix = body_name.lower().replace(' ', '') + '_'
 
-                elif shell_name == 'inner_oort_limit':
-                    traces.extend(create_sun_inner_oort_limit_shell())
-                elif shell_name == 'inner_oort':
-                    traces.extend(create_sun_inner_oort_shell())
-                elif shell_name == 'outer_oort':
-                    traces.extend(create_sun_outer_oort_shell())
+    outermost_radius_au = 0.0
 
-                elif shell_name == 'hills_cloud_torus':
-                    traces.extend(create_sun_hills_cloud_torus())
-                elif shell_name == 'outer_oort_clumpy':
-                    traces.extend(create_sun_outer_oort_clumpy())
-                elif shell_name == 'galactic_tide':
-                    traces.extend(create_sun_galactic_tide())
-                elif shell_name == 'gravitational':
-                    traces.extend(create_sun_gravitational_shell())
-    
-    elif body_name == 'Mercury':
-        # Handle Mercury visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_type = shell_name.replace('mercury_', '')
-                if shell_name == 'inner_core':
-                    traces.extend(create_mercury_inner_core_shell(center_position))
-                elif shell_name == 'outer_core':
-                    traces.extend(create_mercury_outer_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_mercury_mantle_shell(center_position))
-                elif shell_name == 'crust':
-                    traces.extend(create_mercury_crust_shell(center_position))
-                elif shell_name == 'atmosphere':
-                    traces.extend(create_mercury_atmosphere_shell(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_mercury_magnetosphere_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_mercury_hill_sphere_shell(center_position))
+    for key, var in shell_vars.items():
+        try:
+            if var.get() != 1:
+                continue
+        except (AttributeError, TypeError):
+            # var is not a tk.IntVar (e.g., plain int from tests)
+            if not var:
+                continue
 
-    elif body_name == 'Venus':
-        # Handle Venus visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('venus_', '')
-                if shell_name == 'core':
-                    traces.extend(create_venus_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_venus_mantle_shell(center_position))
-                elif shell_name == 'crust':
-                    traces.extend(create_venus_crust_shell(center_position))
-                elif shell_name == 'atmosphere':
-                    traces.extend(create_venus_atmosphere_shell(center_position))
-                elif shell_name == 'upper_atmosphere':
-                    traces.extend(create_venus_upper_atmosphere_shell(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_venus_magnetosphere_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_venus_hill_sphere_shell(center_position))
+        shell_name = key[len(body_prefix):] if key.startswith(body_prefix) else key
 
-    elif body_name == 'Earth':
-        # Handle Earth visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('earth_', '')
-                if shell_name == 'inner_core':
-                    traces.extend(create_earth_inner_core_shell(center_position))
-                elif shell_name == 'outer_core':
-                    traces.extend(create_earth_outer_core_shell(center_position))
-                elif shell_name == 'lower_mantle':
-                    traces.extend(create_earth_lower_mantle_shell(center_position))
-                elif shell_name == 'upper_mantle':
-                    traces.extend(create_earth_upper_mantle_shell(center_position))
-                elif shell_name == 'crust':
-                    traces.extend(create_earth_crust_shell(center_position))
-                elif shell_name == 'atmosphere':
-                    traces.extend(create_earth_atmosphere_shell(center_position))
-                elif shell_name == 'upper_atmosphere':
-                    traces.extend(create_earth_upper_atmosphere_shell(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_earth_magnetosphere_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_earth_hill_sphere_shell(center_position))
-                elif shell_name == 'geostationary_belt':
-                    traces.extend(create_earth_geostationary_belt_shell(center_position))
-                elif shell_name == 'leo':
-                    traces.extend(create_earth_leo_shell(center_position))
-    
-    elif body_name == 'Moon':
-        # Handle moon visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('moon_', '')
-                if shell_name == 'inner_core':
-                    traces.extend(create_moon_inner_core_shell(center_position))
-                elif shell_name == 'outer_core':
-                    traces.extend(create_moon_outer_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_moon_mantle_shell(center_position))
-                elif shell_name == 'crust':
-                    traces.extend(create_moon_crust_shell(center_position))
-                elif shell_name == 'exosphere':
-                    traces.extend(create_moon_exosphere_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_moon_hill_sphere_shell(center_position))
+        if shell_name in configs:
+            config = configs[shell_name]
+            traces = build_sphere_shell(config, body_name, center_position)
+            for t in traces:
+                fig.add_trace(t)
+            # Track outermost radius for indicator scaling
+            if 'radius_au' in config:
+                shell_r = config['radius_au']
+            else:
+                body_r = CENTER_BODY_RADII[body_name] / KM_PER_AU
+                shell_r = config['radius_fraction'] * body_r
+            outermost_radius_au = max(outermost_radius_au, shell_r)
 
-    elif body_name == 'Mars':
-        # Handle Mars visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('mars_', '')
-                if shell_name == 'inner_core':
-                    traces.extend(create_mars_inner_core_shell(center_position))
-                elif shell_name == 'outer_core':
-                    traces.extend(create_mars_outer_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_mars_mantle_shell(center_position))
-                elif shell_name == 'crust':
-                    traces.extend(create_mars_crust_shell(center_position))
-                elif shell_name == 'atmosphere':
-                    traces.extend(create_mars_atmosphere_shell(center_position))
-                elif shell_name == 'upper_atmosphere':
-                    traces.extend(create_mars_upper_atmosphere_shell(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_mars_magnetosphere_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_mars_hill_sphere_shell(center_position))
+        elif shell_name in customs:
+            custom = customs[shell_name]
+            module_path, func_name = custom['builder'].rsplit('.', 1)
+            mod = importlib.import_module(module_path)
+            builder = getattr(mod, func_name)
+            traces = builder(center_position)
+            for t in traces:
+                fig.add_trace(t)
 
-    elif body_name == 'Jupiter':
-        # Handle Jupiter visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('jupiter_', '')
-                if shell_name == 'core':
-                    traces.extend(create_jupiter_core_shell(center_position))
-                elif shell_name == 'metallic_hydrogen':
-                    traces.extend(create_jupiter_metallic_hydrogen_shell(center_position))
-                elif shell_name == 'molecular_hydrogen':
-                    traces.extend(create_jupiter_molecular_hydrogen_shell(center_position))
-                elif shell_name == 'cloud_layer':
-                    traces.extend(create_jupiter_cloud_layer_shell(center_position))
-                elif shell_name == 'upper_atmosphere':
-                    traces.extend(create_jupiter_upper_atmosphere_shell(center_position))
-                elif shell_name == 'ring_system':
-                    traces.extend(create_jupiter_ring_system(center_position))
-                elif shell_name == 'radiation_belts':
-                    traces.extend(create_jupiter_radiation_belts(center_position))
-                elif shell_name == 'io_plasma_torus':
-                    traces.extend(create_jupiter_io_plasma_torus(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_jupiter_magnetosphere(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_jupiter_hill_sphere_shell(center_position))
+        # If shell_name is in neither registry, silently skip.
+        # In Phase A this is expected for bodies that haven't migrated yet
+        # (their dispatch is still in create_planet_visualization).
 
-    elif body_name == 'Saturn':
-        # Handle Saturn visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('saturn_', '')
-                if shell_name == 'core':
-                    traces.extend(create_saturn_core_shell(center_position))
-                elif shell_name == 'metallic_hydrogen':
-                    traces.extend(create_saturn_metallic_hydrogen_shell(center_position))
-                elif shell_name == 'molecular_hydrogen':
-                    traces.extend(create_saturn_molecular_hydrogen_shell(center_position))
-                elif shell_name == 'cloud_layer':
-                    traces.extend(create_saturn_cloud_layer_shell(center_position))
-                elif shell_name == 'upper_atmosphere':
-                    traces.extend(create_saturn_upper_atmosphere_shell(center_position))
-                elif shell_name == 'ring_system':
-                    traces.extend(create_saturn_ring_system(center_position))
-                elif shell_name == 'radiation_belts':
-                    traces.extend(create_saturn_radiation_belts(center_position))
-                elif shell_name == 'enceladus_plasma_torus':
-                    traces.extend(create_saturn_enceladus_plasma_torus(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_saturn_magnetosphere(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_saturn_hill_sphere_shell(center_position))
+    # ONE sun direction indicator per body (replaces ~50 per-shell calls).
+    # Uses outermost active shell radius for scaling. Suppresses at origin
+    # (body-centered view) and for Sun shells.
+    if outermost_radius_au > 0:
+        indicator_traces = create_sun_direction_indicator(
+            center_position=center_position,
+            shell_radius=outermost_radius_au,
+            object_type=object_type if object_type is not None else body_name,
+            center_object=center_object,
+        )
+        for t in indicator_traces:
+            fig.add_trace(t)
 
-    elif body_name == 'Uranus':
-        # Handle uranus visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('uranus_', '')
-                if shell_name == 'core':
-                    traces.extend(create_uranus_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_uranus_mantle_shell(center_position))
-                elif shell_name == 'cloud_layer':
-                    traces.extend(create_uranus_cloud_layer_shell(center_position))
-                elif shell_name == 'upper_atmosphere':
-                    traces.extend(create_uranus_upper_atmosphere_shell(center_position))
-                elif shell_name == 'ring_system':
-                    traces.extend(create_uranus_ring_system(center_position))
-                elif shell_name == 'radiation_belts':
-                    traces.extend(create_uranus_radiation_belts(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_uranus_magnetosphere(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_uranus_hill_sphere_shell(center_position))
+    # Store outermost shell radius for axis auto-scaling.
+    # Consumed by palomas_orrery.py to set axis_range = [-2*r, 2*r]
+    # when Auto scaling is active. Bodies that haven't migrated to the
+    # unified dispatch don't set this attribute -- old behavior continues.
+    if outermost_radius_au > 0:
+        fig._shell_outermost_radius_au = outermost_radius_au
 
-    elif body_name == 'Neptune':
-        # Handle Neptune visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('neptune_', '')
-                if shell_name == 'core':
-                    traces.extend(create_neptune_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_neptune_mantle_shell(center_position))
-                elif shell_name == 'cloud_layer':
-                    traces.extend(create_neptune_cloud_layer_shell(center_position))
-                elif shell_name == 'upper_atmosphere':
-                    traces.extend(create_neptune_upper_atmosphere_shell(center_position))
-                elif shell_name == 'ring_system':
-                    traces.extend(create_neptune_ring_system(center_position))
-                elif shell_name == 'radiation_belts':
-                    traces.extend(create_neptune_radiation_belts(center_position))
-                elif shell_name == 'magnetosphere':
-                    traces.extend(create_neptune_magnetosphere(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_neptune_hill_sphere_shell(center_position))
-
-    elif body_name == 'Pluto':
-        # Handle Pluto visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('pluto_', '')
-                if shell_name == 'core':
-                    traces.extend(create_pluto_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_pluto_mantle_shell(center_position))
-                elif shell_name == 'crust':
-                    traces.extend(create_pluto_crust_shell(center_position))
-                elif shell_name == 'haze_layer':
-                    traces.extend(create_pluto_haze_layer_shell(center_position))
-                elif shell_name == 'atmosphere':
-                    traces.extend(create_pluto_atmosphere_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_pluto_hill_sphere_shell(center_position))
-
-    elif body_name == 'Eris':
-        # Handle eris visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('eris_', '')
-                if shell_name == 'core':
-                    traces.extend(create_eris_core_shell(center_position))
-                elif shell_name == 'mantle':
-                    traces.extend(create_eris_mantle_shell(center_position))
-                elif shell_name == 'crust':
-                    traces.extend(create_eris_crust_shell(center_position))
-                elif shell_name == 'atmosphere':
-                    traces.extend(create_eris_atmosphere_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_eris_hill_sphere_shell(center_position))
-
-    elif body_name == 'Planet 9':
-        # Handle Planet 9 visualization with its specific shells
-        for shell_name, var in shell_vars.items():
-            if var.get() == 1:
-    #            shell_name = shell_name.replace('planet9_', '')
-                if shell_name == 'surface':
-                    traces.extend(create_planet9_surface_shell(center_position))
-                elif shell_name == 'hill_sphere':
-                    traces.extend(create_planet9_hill_sphere_shell(center_position))
-
-    else:
-        print(f"Warning: No visualization available for {body_name}")
-        return fig
-    
-    # Apply consistent animation handling for all bodies
-    print(f"Created {len(traces)} traces for {body_name}")
-    
-    # Add traces to the figure
-    for trace in traces:
-        fig.add_trace(trace)
-    
-    # IMPORTANT: Skip adding to frames completely
-    if animate and frames is not None:
-        print(f"Animation mode: Added {len(traces)} traces to figure only (skipping frames)")
-    
     return fig
-
-
 
 
 #####################################
@@ -894,206 +663,151 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
     # Create shell traces based on selected variables
 
     if planet_name == 'Mercury':
-        if shell_vars['mercury_inner_core'].get() == 1:
-            traces.extend(create_mercury_inner_core_shell(center_position))
-        if shell_vars['mercury_outer_core'].get() == 1:
-            traces.extend(create_mercury_outer_core_shell(center_position))
-        if shell_vars['mercury_mantle'].get() == 1:
-            traces.extend(create_mercury_mantle_shell(center_position))
-        if shell_vars['mercury_crust'].get() == 1:
-            traces.extend(create_mercury_crust_shell(center_position))
-        if shell_vars['mercury_atmosphere'].get() == 1:
-            traces.extend(create_mercury_atmosphere_shell(center_position))
-        if shell_vars['mercury_sodium_tail'].get() == 1:  
-            traces.extend(create_mercury_sodium_tail(center_position))
-        if shell_vars['mercury_magnetosphere'].get() == 1:
-            traces.extend(create_mercury_magnetosphere_shell(center_position))
-        if shell_vars['mercury_hill_sphere'].get() == 1:
-            traces.extend(create_mercury_hill_sphere_shell(center_position))
+        # Step 3 Phase A: delegate to unified config-driven dispatch.
+        # See create_celestial_body_visualization() for the new architecture.
+        # NOTE: center_object hardcoded to body_name here because
+        # create_planet_visualization does not receive the plot's center body.
+        # This becomes correct in Phase D when callers use the unified function
+        # directly with center_object=center_object_name.
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Mercury',
+            center_object='Mercury',
+        )
 
     if planet_name == 'Venus':
-        if shell_vars['venus_core'].get() == 1:
-            traces.extend(create_venus_core_shell(center_position))
-        if shell_vars['venus_mantle'].get() == 1:
-            traces.extend(create_venus_mantle_shell(center_position))
-        if shell_vars['venus_crust'].get() == 1:
-            traces.extend(create_venus_crust_shell(center_position))
-        if shell_vars['venus_atmosphere'].get() == 1:
-            traces.extend(create_venus_atmosphere_shell(center_position))
-        if shell_vars['venus_upper_atmosphere'].get() == 1:
-            traces.extend(create_venus_upper_atmosphere_shell(center_position))
-        if shell_vars['venus_magnetosphere'].get() == 1:
-            traces.extend(create_venus_magnetosphere_shell(center_position))
-        if shell_vars['venus_hill_sphere'].get() == 1:
-            traces.extend(create_venus_hill_sphere_shell(center_position))
+        # Step 3 Phase C1: delegate to unified config-driven dispatch.
+        # Custom geometry: venus_magnetosphere -> CUSTOM_SHELLS['Venus']['magnetosphere']
+        # which lazy-imports and emits both magnetosphere and bow shock traces.
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Venus',
+            center_object='Venus',
+        )
 
     if planet_name == 'Earth':
-        if shell_vars['earth_inner_core'].get() == 1:
-            traces.extend(create_earth_inner_core_shell(center_position))
-        if shell_vars['earth_outer_core'].get() == 1:
-            traces.extend(create_earth_outer_core_shell(center_position))
-        if shell_vars['earth_lower_mantle'].get() == 1:
-            traces.extend(create_earth_lower_mantle_shell(center_position))
-        if shell_vars['earth_upper_mantle'].get() == 1:
-            traces.extend(create_earth_upper_mantle_shell(center_position))
-        if shell_vars['earth_crust'].get() == 1:
-            traces.extend(create_earth_crust_shell(center_position))
-        if shell_vars['earth_atmosphere'].get() == 1:
-            traces.extend(create_earth_atmosphere_shell(center_position))
-        if shell_vars['earth_upper_atmosphere'].get() == 1:
-            traces.extend(create_earth_upper_atmosphere_shell(center_position))
-        if shell_vars['earth_magnetosphere'].get() == 1:
-            traces.extend(create_earth_magnetosphere_shell(center_position))
-        if shell_vars['earth_hill_sphere'].get() == 1:
-            traces.extend(create_earth_hill_sphere_shell(center_position))
-        if shell_vars['earth_geostationary_belt'].get() == 1:
-            traces.extend(create_earth_geostationary_belt_shell(center_position))
-        if shell_vars['earth_leo'].get() == 1:
-            traces.extend(create_earth_leo_shell(center_position))
+        # Step 3 Phase C2: delegate to unified config-driven dispatch.
+        # Custom geometry: earth_magnetosphere -> CUSTOM_SHELLS['Earth']['magnetosphere']
+        # which lazy-imports and emits magnetosphere + bow shock + 2 Van Allen belt traces.
+        # earth_leo and earth_geostationary_belt also lazy-imported via CUSTOM_SHELLS.
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Earth',
+            center_object='Earth',
+        )
 
     if planet_name == 'Moon':
-        if shell_vars['moon_inner_core'].get() == 1:
-            traces.extend(create_moon_inner_core_shell(center_position))
-        if shell_vars['moon_outer_core'].get() == 1:
-            traces.extend(create_moon_outer_core_shell(center_position))
-        if shell_vars['moon_mantle'].get() == 1:
-            traces.extend(create_moon_mantle_shell(center_position))
-        if shell_vars['moon_crust'].get() == 1:
-            traces.extend(create_moon_crust_shell(center_position))
-        if shell_vars['moon_exosphere'].get() == 1:
-            traces.extend(create_moon_exosphere_shell(center_position))
-        if shell_vars['moon_hill_sphere'].get() == 1:
-            traces.extend(create_moon_hill_sphere_shell(center_position))
+        # Step 3 Phase B: delegate to unified config-driven dispatch.
+        # Same pattern as Mercury (Phase A). NOTE: center_object hardcoded
+        # to body_name here because create_planet_visualization does not
+        # receive the plot's center body. Corrected in Phase D when callers
+        # use the unified function directly.
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Moon',
+            center_object='Moon',
+        )
 
     if planet_name == 'Mars':
-        if shell_vars['mars_inner_core'].get() == 1:
-            traces.extend(create_mars_inner_core_shell(center_position))
-        if shell_vars['mars_outer_core'].get() == 1:
-            traces.extend(create_mars_outer_core_shell(center_position))
-        if shell_vars['mars_mantle'].get() == 1:
-            traces.extend(create_mars_mantle_shell(center_position))
-        if shell_vars['mars_crust'].get() == 1:
-            traces.extend(create_mars_crust_shell(center_position))
-        if shell_vars['mars_atmosphere'].get() == 1:
-            traces.extend(create_mars_atmosphere_shell(center_position))
-        if shell_vars['mars_upper_atmosphere'].get() == 1:
-            traces.extend(create_mars_upper_atmosphere_shell(center_position))
-        if shell_vars['mars_magnetosphere'].get() == 1:
-            traces.extend(create_mars_magnetosphere_shell(center_position))
-        if shell_vars['mars_hill_sphere'].get() == 1:
-            traces.extend(create_mars_hill_sphere_shell(center_position))
+        # Step 3 Phase C1: delegate to unified config-driven dispatch.
+        # Custom geometry: mars_magnetosphere -> CUSTOM_SHELLS['Mars']['magnetosphere']
+        # which lazy-imports and emits magnetosphere, bow shock, and crustal fields.
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Mars',
+            center_object='Mars',
+        )
 
     if planet_name == 'Jupiter':
-        if shell_vars['jupiter_core'].get() == 1:
-            traces.extend(create_jupiter_core_shell(center_position))
-        if shell_vars['jupiter_metallic_hydrogen'].get() == 1:
-            traces.extend(create_jupiter_metallic_hydrogen_shell(center_position))
-        if shell_vars['jupiter_molecular_hydrogen'].get() == 1:
-            traces.extend(create_jupiter_molecular_hydrogen_shell(center_position))
-        if shell_vars['jupiter_cloud_layer'].get() == 1:
-            traces.extend(create_jupiter_cloud_layer_shell(center_position))
-        if shell_vars['jupiter_upper_atmosphere'].get() == 1:
-            traces.extend(create_jupiter_upper_atmosphere_shell(center_position))
-        if shell_vars['jupiter_ring_system'].get() == 1:
-            traces.extend(create_jupiter_ring_system(center_position))
-        if shell_vars['jupiter_radiation_belts'].get() == 1:
-            traces.extend(create_jupiter_radiation_belts(center_position))
-        if shell_vars['jupiter_io_plasma_torus'].get() == 1:
-            traces.extend(create_jupiter_io_plasma_torus(center_position))
-        if shell_vars['jupiter_magnetosphere'].get() == 1:
-            traces.extend(create_jupiter_magnetosphere(center_position))
-        if shell_vars['jupiter_hill_sphere'].get() == 1:
-            traces.extend(create_jupiter_hill_sphere_shell(center_position))
+        # Step 3 Phase C3: delegate to unified config-driven dispatch.
+        # Custom geometry: jupiter_magnetosphere, jupiter_io_plasma_torus,
+        # jupiter_radiation_belts (3 belts), jupiter_ring_system (4 rings)
+        # via CUSTOM_SHELLS lazy import.
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Jupiter',
+            center_object='Jupiter',
+        )
 
     if planet_name == 'Saturn':
-        if shell_vars['saturn_core'].get() == 1:
-            traces.extend(create_saturn_core_shell(center_position))
-        if shell_vars['saturn_metallic_hydrogen'].get() == 1:
-            traces.extend(create_saturn_metallic_hydrogen_shell(center_position))
-        if shell_vars['saturn_molecular_hydrogen'].get() == 1:
-            traces.extend(create_saturn_molecular_hydrogen_shell(center_position))
-        if shell_vars['saturn_cloud_layer'].get() == 1:
-            traces.extend(create_saturn_cloud_layer_shell(center_position))
-        if shell_vars['saturn_upper_atmosphere'].get() == 1:
-            traces.extend(create_saturn_upper_atmosphere_shell(center_position))
-        if shell_vars['saturn_ring_system'].get() == 1:
-            traces.extend(create_saturn_ring_system(center_position))
-        if shell_vars['saturn_radiation_belts'].get() == 1:
-            traces.extend(create_saturn_radiation_belts(center_position))
-        if shell_vars['saturn_enceladus_plasma_torus'].get() == 1:
-            traces.extend(create_saturn_enceladus_plasma_torus(center_position))
-        if shell_vars['saturn_magnetosphere'].get() == 1:
-            traces.extend(create_saturn_magnetosphere(center_position))
-        if shell_vars['saturn_hill_sphere'].get() == 1:
-            traces.extend(create_saturn_hill_sphere_shell(center_position))
+        # Step 3 Phase C4: delegate to unified config-driven dispatch.
+        # Custom geometry: saturn_magnetosphere, saturn_enceladus_plasma_torus,
+        # saturn_radiation_belts (6 belts), saturn_ring_system (7 rings)
+        # via CUSTOM_SHELLS lazy import.
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Saturn',
+            center_object='Saturn',
+        )
 
     if planet_name == 'Uranus':
-        if shell_vars['uranus_core'].get() == 1:
-            traces.extend(create_uranus_core_shell(center_position))
-        if shell_vars['uranus_mantle'].get() == 1:
-            traces.extend(create_uranus_mantle_shell(center_position))
-        if shell_vars['uranus_cloud_layer'].get() == 1:
-            traces.extend(create_uranus_cloud_layer_shell(center_position))
-        if shell_vars['uranus_upper_atmosphere'].get() == 1:
-            traces.extend(create_uranus_upper_atmosphere_shell(center_position))
-        if shell_vars['uranus_ring_system'].get() == 1:
-            traces.extend(create_uranus_ring_system(center_position))
-        if shell_vars['uranus_radiation_belts'].get() == 1:
-            traces.extend(create_uranus_radiation_belts(center_position))
-        if shell_vars['uranus_magnetosphere'].get() == 1:
-            traces.extend(create_uranus_magnetosphere(center_position))
-        if shell_vars['uranus_hill_sphere'].get() == 1:
-            traces.extend(create_uranus_hill_sphere_shell(center_position))
+        # Step 3 Phase C4: delegate to unified config-driven dispatch.
+        # Same pattern as Saturn (Phase C4, this session).
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Uranus',
+            center_object='Uranus',
+        )
 
     if planet_name == 'Neptune':
-        if shell_vars['neptune_core'].get() == 1:
-            traces.extend(create_neptune_core_shell(center_position))
-        if shell_vars['neptune_mantle'].get() == 1:
-            traces.extend(create_neptune_mantle_shell(center_position))
-        if shell_vars['neptune_cloud_layer'].get() == 1:
-            traces.extend(create_neptune_cloud_layer_shell(center_position))
-        if shell_vars['neptune_upper_atmosphere'].get() == 1:
-            traces.extend(create_neptune_upper_atmosphere_shell(center_position))
-        if shell_vars['neptune_ring_system'].get() == 1:
-            traces.extend(create_neptune_ring_system(center_position))
-        if shell_vars['neptune_radiation_belts'].get() == 1:
-            traces.extend(create_neptune_radiation_belts(center_position))
-        if shell_vars['neptune_magnetosphere'].get() == 1:
-            traces.extend(create_neptune_magnetosphere(center_position))
-        if shell_vars['neptune_hill_sphere'].get() == 1:
-            traces.extend(create_neptune_hill_sphere_shell(center_position))
+        # Step 3 Phase C4: delegate to unified config-driven dispatch.
+        # Same pattern as Saturn / Uranus (Phase C4, this session).
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Neptune',
+            center_object='Neptune',
+        )
 
     if planet_name == 'Pluto':
-        if shell_vars['pluto_core'].get() == 1:
-            traces.extend(create_pluto_core_shell(center_position))
-        if shell_vars['pluto_mantle'].get() == 1:
-            traces.extend(create_pluto_mantle_shell(center_position))
-        if shell_vars['pluto_crust'].get() == 1:
-            traces.extend(create_pluto_crust_shell(center_position))
-        if shell_vars['pluto_haze_layer'].get() == 1:
-            traces.extend(create_pluto_haze_layer_shell(center_position))
-        if shell_vars['pluto_atmosphere'].get() == 1:
-            traces.extend(create_pluto_atmosphere_shell(center_position))
-        if shell_vars['pluto_hill_sphere'].get() == 1:
-            traces.extend(create_pluto_hill_sphere_shell(center_position))
+        # Step 3 Phase C1: delegate to unified config-driven dispatch.
+        # Same pattern as Mercury (Phase A), Moon/Planet 9 (Phase B).
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Pluto',
+            center_object='Pluto',
+        )
 
     if planet_name == 'Eris':
-        if shell_vars['eris_core'].get() == 1:
-            traces.extend(create_eris_core_shell(center_position))
-        if shell_vars['eris_mantle'].get() == 1:
-            traces.extend(create_eris_mantle_shell(center_position))
-        if shell_vars['eris_crust'].get() == 1:
-            traces.extend(create_eris_crust_shell(center_position))
-        if shell_vars['eris_atmosphere'].get() == 1:
-            traces.extend(create_eris_atmosphere_shell(center_position))
-        if shell_vars['eris_hill_sphere'].get() == 1:
-            traces.extend(create_eris_hill_sphere_shell(center_position))
+        # Step 3 Phase C1: delegate to unified config-driven dispatch.
+        # Same pattern as Mercury (Phase A), Moon/Planet 9 (Phase B).
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Eris',
+            center_object='Eris',
+        )
 
     if planet_name == 'Planet 9':
-        if shell_vars['planet9_surface'].get() == 1:
-            traces.extend(create_planet9_surface_shell(center_position))
-        if shell_vars['planet9_hill_sphere'].get() == 1:
-            traces.extend(create_planet9_hill_sphere_shell(center_position))
+        # Step 3 Phase B: delegate to unified config-driven dispatch.
+        # Same pattern as Mercury (Phase A) and Moon (Phase B above).
+        return create_celestial_body_visualization(
+            fig, planet_name, shell_vars,
+            animate=animate, frames=frames,
+            center_position=center_position,
+            object_type='Planet 9',
+            center_object='Planet 9',
+        )
     
     # Add base traces to figure for static visualization
     for trace in traces:

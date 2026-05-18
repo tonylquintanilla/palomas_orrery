@@ -20,7 +20,7 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, rotate_points)
-from saturn_visualization_shells import create_ring_points_saturn
+from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 from shared_utilities import create_sun_direction_indicator
 
 # Neptune Shell Creation Functions
@@ -443,13 +443,6 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
     )
 
     traces = [shell_trace, info_trace]
-    
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces
 
@@ -466,8 +459,16 @@ neptune_magnetosphere_info = (
 )
 
 # Fixed create_neptune_magnetosphere function
-def create_neptune_magnetosphere(center_position=(0, 0, 0)):
-    """Creates Neptune's main magnetosphere structure with proper tilt and offset."""
+def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
+    """Creates Neptune's main magnetosphere structure with proper tilt and offset.
+
+    Phase C4: rotated to face the actual Sun direction via
+    rotate_to_sunward(). magnetic_tilt_deg=0 because the internal 47-deg
+    tilt is already applied region-specifically below. Double-tilting
+    would be a physics error.
+
+    Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    """
     import numpy as np
     import plotly.graph_objs as go
     from planet_visualization_utilities import NEPTUNE_RADIUS_AU, create_magnetosphere_shape, rotate_points
@@ -545,6 +546,17 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0)):
     x_final = np.concatenate([bow_shock_x, int_x2, tail_x2])
     y_final = np.concatenate([bow_shock_y, int_y2, tail_y2])
     z_final = np.concatenate([bow_shock_z, int_z2, tail_z2])
+
+    # Phase C4 NEW: rotate to face actual Sun direction.
+    # magnetic_tilt_deg=0 because the internal 47-deg tilt is already
+    # applied above (region-specific rotation on lines 530-547).
+    # Double-tilting would be a physics error.
+    x_final, y_final, z_final = rotate_to_sunward(
+        x_final, y_final, z_final,
+        center_position=center_position,
+        sun_position=sun_position,
+        magnetic_tilt_deg=0,
+    )
     
     # Unpack center position
     center_x, center_y, center_z = center_position
@@ -553,21 +565,6 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0)):
     x_final = x_final + center_x
     y_final = y_final + center_y
     z_final = z_final + center_z
-    
-    # Detailed description for hover information with explicit sun direction note
-    # Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science);
-    #         47 deg tilt, 0.55 R_N offset, and complex asymmetric structure all from Voyager 2 flyby data.
-    magnetosphere_text = [
-        "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted (47 deg from its rotation axis) and <br>"
-        "significantly offset from the planet's center by more than half a Neptune radius. This creates an extremely asymmetric magnetosphere <br>"
-        "that varies greatly depending on Neptune's rotation.<br><br>"
-        "In this scientifically accurate model:<br>"
-        "- The bow shock faces the Sun (negative X-axis) as it would in reality, shaped by the solar wind<br>"
-        "- The internal magnetosphere shows Neptune's unique magnetic field configuration with its 47 deg tilt and offset<br>"
-        "- The magnetotail stretches away from the Sun but is influenced by Neptune's unusual field<br><br>"
-        "This unusual magnetic environment was discovered by Voyager 2 during its 1989 flyby and makes Neptune's magnetosphere <br>"
-        "one of the most complex and dynamic in our solar system."
-    ]
     
     # Create main magnetosphere trace
     traces = [
@@ -585,27 +582,24 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0)):
             showlegend=True
         )
     ]
-    traces.append(go.Scatter3d(
-        x=[x_final[0]], y=[y_final[0]], z=[z_final[0]],
-        mode='markers',
-        marker=dict(size=6, color='rgb(30, 136, 229)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Neptune: Magnetosphere',
-        text=magnetosphere_text,
-        customdata=['Neptune: Magnetosphere'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+
+    # Phase C4: info marker at first point of sunward-rotated, offset geometry
+    magnetosphere_text = (
+        "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted "
+        "(47 deg from its rotation axis) and significantly offset from the planet's center by more than "
+        "half a Neptune radius. This creates an extremely asymmetric magnetosphere that varies greatly "
+        "depending on Neptune's rotation.<br><br>"
+        "Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science)."
+    )
+    traces.append(create_info_marker(
+        x_final[0], y_final[0], z_final[0],
+        'rgb(30, 136, 229)', magnetosphere_text, 'Neptune: Magnetosphere'
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=600 * NEPTUNE_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-    
     # Add magnetic poles and axis visualization - with error handling
+    # Phase C4: create_neptune_magnetic_poles call site UNCHANGED (bounded scope).
+    # The 4 pole/axis traces stay in Neptune's body frame; they do NOT track
+    # the sunward direction. Phase D fixes via sun_position extension.
     try:
         mag_poles_traces = create_neptune_magnetic_poles(center_position, offset_distance, magnetic_tilt, azimuthal_angle)
         if mag_poles_traces and len(mag_poles_traces) > 0:
@@ -766,98 +760,6 @@ def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimut
     print(f"Returning {len(traces)} magnetic field traces")
     return traces
 
-# THIS FUNCTION APPEARS OBSOLETE
-def create_neptune_field_lines(mag_center_x, mag_center_y, mag_center_z, 
-                            north_x, north_y, north_z, 
-                            south_x, south_y, south_z,
-                            neptune_radius, tilt, azimuth):
-    """Creates a simple visualization of Neptune's magnetic field lines."""
-    
-    traces = []
-    
-    # Number of field lines to create
-    n_lines = 8
-    n_points = 40  # Points along each field line
-    
-    # Create field lines radiating from the poles
-    for i in range(n_lines):
-        angle = (i / n_lines) * 2 * np.pi
-        
-        # North pole field lines
-        north_lines_x = []
-        north_lines_y = []
-        north_lines_z = []
-        
-        # South pole field lines
-        south_lines_x = []
-        south_lines_y = []
-        south_lines_z = []
-        
-        # Create curved field lines from each pole
-        for j in range(n_points):
-            # Parameter from 0 to 1
-            t = j / (n_points - 1)
-            
-            # For north pole: lines start at pole and curve toward equatorial plane
-            radius_n = 5 * neptune_radius * t  # Distance from pole
-            curve_factor_n = np.sin(np.pi * t)  # Curvature
-            
-            # For south pole: lines start at pole and curve toward equatorial plane
-            radius_s = 5 * neptune_radius * t  # Distance from pole
-            curve_factor_s = np.sin(np.pi * t)  # Curvature
-            
-            # Calculate positions with curvature
-            # North pole lines
-            n_x = north_x - radius_n * (0.5 + 0.5 * curve_factor_n * np.cos(angle))
-            n_y = north_y + radius_n * (curve_factor_n * np.sin(angle))
-            n_z = north_z - radius_n * (0.7 * curve_factor_n)
-            
-            # South pole lines
-            s_x = south_x + radius_s * (0.5 + 0.5 * curve_factor_s * np.cos(angle + np.pi/n_lines))
-            s_y = south_y + radius_s * (curve_factor_s * np.sin(angle + np.pi/n_lines))
-            s_z = south_z + radius_s * (0.7 * curve_factor_s)
-            
-            north_lines_x.append(n_x)
-            north_lines_y.append(n_y)
-            north_lines_z.append(n_z)
-            
-            south_lines_x.append(s_x)
-            south_lines_y.append(s_y)
-            south_lines_z.append(s_z)
-        
-        # Create traces for these field lines
-        north_line_trace = go.Scatter3d(
-            x=north_lines_x,
-            y=north_lines_y,
-            z=north_lines_z,
-            mode='lines',
-            line=dict(
-                color='rgba(100, 150, 255, 0.4)',
-                width=2
-            ),
-            name='Neptune: Magnetic Field Line',
-            showlegend=False,
-            hoverinfo='none'
-        )
-        
-        south_line_trace = go.Scatter3d(
-            x=south_lines_x,
-            y=south_lines_y,
-            z=south_lines_z,
-            mode='lines',
-            line=dict(
-                color='rgba(255, 100, 100, 0.4)',
-                width=2
-            ),
-            name='Neptune: Magnetic Field Line',
-            showlegend=False,
-            hoverinfo='none'
-        )
-        
-        traces.append(north_line_trace)
-        traces.append(south_line_trace)
-        
-    return traces
 
 neptune_radiation_belts_info = (
                 "560 KB PER FRAME FOR HTML.\n\n"
@@ -1074,17 +976,9 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        traces.append(go.Scatter3d(
-            x=[belt_x[0]], y=[belt_y[0]], z=[belt_z[0]],
-            mode='markers',
-            marker=dict(size=6, color=belt['color'], opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=f"Neptune: {belt['name']}",
-            text=[belt['description']],
-            customdata=[f"Neptune: {belt['name']}"],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+        traces.append(create_info_marker(
+            x_final[0], y_final[0], z_final[0],
+            belt['color'], belt['description'], f"Neptune: {belt['name']}"
         ))
     
     # Add field-aligned current visualization connecting regions
@@ -1092,13 +986,6 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
     current_traces = create_field_aligned_currents(magnetic_center_x, magnetic_center_y, magnetic_center_z, 
                                                  magnetic_tilt, azimuthal_angle)
     traces.extend(current_traces)
-    
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius= 6.0 * NEPTUNE_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces
 
@@ -1207,17 +1094,10 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
                 showlegend=True
             )
         )
-        traces.append(go.Scatter3d(
-            x=[current_x[0]], y=[current_y[0]], z=[current_z[0]],
-            mode='markers',
-            marker=dict(size=6, color=params.get('color', 'rgb(200, 200, 255)'), opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=f"Neptune: {params['name']}",
-            text=[params['description']],
-            customdata=[f"Neptune: {params['name']}"],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+        traces.append(create_info_marker(
+            x_final[0], y_final[0], z_final[0],
+            params.get('color', 'rgb(200, 200, 255)'),
+            params['description'], f"Neptune: {params['name']}"
         ))
     
     return traces
@@ -1675,7 +1555,7 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
                 n_points = 80
                 
             # Create ring points
-            x, y, z = create_ring_points_saturn(
+            x, y, z = create_ring_points(
                 inner_radius_au, outer_radius_au, n_points, thickness_au
             )
         
@@ -1739,25 +1619,11 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
             )
         )
         mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], neptune_tilt, 'x')
-        traces.append(go.Scatter3d(
-            x=[mx_t[0] + center_x], y=[my_t[0] + center_y], z=[mz_t[0] + center_z],
-            mode='markers',
-            marker=dict(size=6, color=ring_info['color'], opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=f"Neptune: {ring_info['name']}",
-            text=[ring_info['description']],
-            customdata=[f"Neptune: {ring_info['name']}"],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+        traces.append(create_info_marker(
+            mx_t[0] + center_x, my_t[0] + center_y, mz_t[0] + center_z,
+            ring_info['color'], ring_info['description'],
+            f"Neptune: {ring_info['name']}"
         ))
-    
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=73000 / KM_PER_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces
 
@@ -1833,13 +1699,5 @@ def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
     )
 
     traces = [shell_trace, info_trace]
-    
-    # Add sun direction indicator scaled to this shell's radius
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces

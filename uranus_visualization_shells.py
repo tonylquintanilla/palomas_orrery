@@ -17,7 +17,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (URANUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, 
                                             rotate_points)
-from saturn_visualization_shells import create_ring_points_saturn
+from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 from shared_utilities import create_sun_direction_indicator
 
 # Uranus Shell Creation Functions
@@ -428,13 +428,6 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     )
 
     traces = [shell_trace, info_trace]
-    
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces
 
@@ -453,8 +446,21 @@ uranus_magnetosphere_info = (
             "considerable distance from the planet."                      
 )
 
-def create_uranus_magnetosphere(center_position=(0, 0, 0)):
-    """Creates Uranus's main magnetosphere structure."""
+def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
+    """Creates Uranus's main magnetosphere structure.
+
+    Phase C4: rotated to face the actual Sun direction via
+    rotate_to_sunward(). magnetic_tilt_deg=60 applies an additional
+    rotation about the X axis (bow-shock-to-tail) to model Uranus's
+    60-degree dipole-vs-rotation-axis offset.
+
+    Note: source had no info marker (pre-existing omission, same
+    pattern as Mars C1 item 14). C4 adds one via create_info_marker(),
+    positioned at the first point of the rendered geometry (matching
+    the radiation-belts and ring-system pattern in this module).
+
+    Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    """
     # Parameters for magnetosphere components (in Uranus radii)
     params = {
         # Compressed sunward side
@@ -474,40 +480,63 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0)):
     for key in params:
         params[key] *= URANUS_RADIUS_AU
     
-    # Create magnetosphere main shape
+    # Create magnetosphere main shape (generated with -X as sunward)
     x, y, z = create_magnetosphere_shape(params)
-    
-    # Unpack center position
-    center_x, center_y, center_z = center_position
-    
-    # Apply center position offset
-    x = np.array(x) + center_x
-    y = np.array(y) + center_y
-    z = np.array(z) + center_z
-    
-    traces = [
-        go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=2.0,
-                color='rgb(200, 200, 255)', # Light blue for magnetic field
-                opacity=0.3
-            ),
-            name='Uranus: Magnetosphere',
-            hoverinfo='skip',
-            showlegend=True
-        )
-    ]
-    
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=300 * URANUS_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
-    return traces
+    x = np.array(x)
+    y = np.array(y)
+    z = np.array(z)
+
+    # Phase C4: rotate to face actual Sun direction, with magnetic tilt
+    # (X-axis rotation about the bow-shock-to-tail axis; see Section 3.1
+    # for physics rationale)
+    x, y, z = rotate_to_sunward(
+        x, y, z,
+        center_position=center_position,
+        sun_position=sun_position,
+        magnetic_tilt_deg=60,
+    )
+
+    # Apply center offset to rotated geometry
+    center_x, center_y, center_z = center_position
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
+
+    trace_name = 'Uranus: Magnetosphere'
+
+    description = (
+        "Uranus's Magnetosphere: tilted 60 degrees from the rotation axis -- "
+        "itself tilted 97.77 degrees from the orbital plane. This produces a "
+        "magnetosphere geometry with no analog in the rest of the solar system: "
+        "the dipole axis sweeps a wide cone as Uranus rotates, modulating the "
+        "magnetosphere's solar-wind interaction on a ~17-hour cycle.<br><br>"
+        "Source: Ness et al. (1986) Science -- Voyager 2 magnetometer."
+    )
+
+    geom_trace = go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=2.0,
+            color='rgb(200, 200, 255)',
+            opacity=0.3
+        ),
+        name=trace_name,
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=True,
+    )
+
+    # Phase C4: add info marker at first point of rendered geometry
+    # (pre-existing omission in source). Matches the source's
+    # radiation-belt and ring-system info marker pattern.
+    info_trace = create_info_marker(
+        x[0], y[0], z[0],
+        'rgb(200, 200, 255)', description, trace_name
+    )
+
+    return [geom_trace, info_trace]
 
 # Source: Ness et al. (1986) Science -- Voyager 2 magnetometer; 3-10 R_U belt extent; 59-deg magnetic tilt
 uranus_radiation_belts_info = (
@@ -625,38 +654,14 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
                 belt_y.append(y)
                 belt_z.append(z)
         
-        # Apply center position offset
-        belt_x = np.array(belt_x) + center_x
-        belt_y = np.array(belt_y) + center_y
-        belt_z = np.array(belt_z) + center_z
-        
-        # Create the radiation belt hover text and customdata arrays
-
-        # Apply center position offset
+        # Phase C4: Apply axial tilt (rotate around x-axis).
+        # Dead code stripped: pre-tilt offset, no-op recast, dead Y-axis rotation.
+        # The post-tilt offset at the end is the correct application.
         belt_x = np.array(belt_x)
         belt_y = np.array(belt_y)
         belt_z = np.array(belt_z)
-        
-        # Apply Saturn's axial tilt (rotate around x-axis)
         belt_x_tilted, belt_y_tilted, belt_z_tilted = rotate_points(belt_x, belt_y, belt_z, uranus_tilt, 'x')
-            
-            
-            # First apply rotation around x-axis
-    #    x_tilted, y_tilted, z_tilted = rotate_points(x, y, z, np.radians(uranus_tilt), 'x')
-            
-            # Then apply rotation around y-axis with the same angle
-        belt_x_final, belt_y_final, belt_z_final = rotate_points(belt_x_tilted, belt_y_tilted, belt_z_tilted, uranus_tilt, 'y')        
 
-        # Apply center position offset
-    #    x = np.array(x) + center_x
-    #    y = np.array(y) + center_y
-    #    z = np.array(z) + center_z
-
-        # Apply center position offset
-    #    x_final = np.array(x_tilted) + center_x
-    #    y_final = np.array(y_tilted) + center_y
-    #    z_final = np.array(z_tilted) + center_z
-        
         # Apply center position offset
         belt_x_final = belt_x_tilted + center_x
         belt_y_final = belt_y_tilted + center_y
@@ -679,25 +684,10 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        traces.append(go.Scatter3d(
-            x=[belt_x_final[0]], y=[belt_y_final[0]], z=[belt_z_final[0]],
-            mode='markers',
-            marker=dict(size=6, color=belt_colors[i], opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=belt_names[i],
-            text=[belt_texts[i]],
-            customdata=[belt_names[i]],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+        traces.append(create_info_marker(
+            belt_x_final[0], belt_y_final[0], belt_z_final[0],
+            belt_colors[i], belt_texts[i], belt_names[i]
         ))
-    
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius= 6.0 * URANUS_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces
     
@@ -1026,7 +1016,7 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
             n_points = 80  # Fewer points for larger gossamer rings
         
         # Create ring points
-        x, y, z = create_ring_points_saturn (inner_radius_au, outer_radius_au, n_points, thickness_au)
+        x, y, z = create_ring_points(inner_radius_au, outer_radius_au, n_points, thickness_au)
         
         # Convert to numpy arrays BEFORE applying rotations
         x = np.array(x)
@@ -1068,26 +1058,12 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
         )
         mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], uranus_tilt, 'x')
         mx_t2, my_t2, mz_t2 = rotate_points(mx_t, my_t, mz_t, uranus_tilt, 'y')
-        traces.append(go.Scatter3d(
-            x=[mx_t2[0] + center_x], y=[my_t2[0] + center_y], z=[mz_t2[0] + center_z],
-            mode='markers',
-            marker=dict(size=6, color=ring_info['color'], opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=f"Uranus: {ring_info['name']}",
-            text=[ring_info['description']],
-            customdata=[f"Uranus: {ring_info['name']}"],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
+        traces.append(create_info_marker(
+            mx_t2[0] + center_x, my_t2[0] + center_y, mz_t2[0] + center_z,
+            ring_info['color'], ring_info['description'],
+            f"Uranus: {ring_info['name']}"
         ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=102000 / KM_PER_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 # Source: NASA Uranus Fact Sheet (nssdc.gsfc.nasa.gov); Hill sphere radius ~47 AU from planetary mass ratio
@@ -1167,13 +1143,5 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
     )
 
     traces = [shell_trace, info_trace]
-    
-    # Add sun direction indicator scaled to this shell's radius
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces

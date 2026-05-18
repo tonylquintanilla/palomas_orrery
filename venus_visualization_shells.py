@@ -20,6 +20,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (VENUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
 from shared_utilities import create_sun_direction_indicator
+from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Venus Shell Creation Functions
 
@@ -546,9 +547,12 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
     center_x, center_y, center_z = center_position
     
     # 1. Add the main magnetosphere structure
-    x = np.array(x) + center_x
-    y = np.array(y) + center_y
-    z = np.array(z) + center_z
+    # Rotate to actual sunward direction, then offset to center position
+    x, y, z = np.array(x), np.array(y), np.array(z)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
     
     # Source: ESA Venus Express: Magnetosphere; NASA Pioneer Venus Results;
     #         induced magnetosphere, bow shock 1.3-1.7 Rv, comet-shaped tail confirmed.
@@ -638,20 +642,10 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
     # Info marker at first point on magnetosphere structure
-    traces.append(
-        go.Scatter3d(
-            x=[x[0]], y=[y[0]], z=[z[0]],
-            mode='markers',
-            marker=dict(size=6, color='rgb(180, 180, 255)', opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup='Venus: Magnetosphere',
-            text=magnetosphere_text,
-            customdata=magnetosphere_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
-        )
-    )
+    traces.append(create_info_marker(
+        x[0], y[0], z[0],
+        'rgb(180, 180, 255)', magnetosphere_text[0], 'Venus: Magnetosphere'
+    ))
     
     # 2. Create and add bow shock
     bow_shock_x = []
@@ -680,10 +674,16 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
             bow_shock_y.append(y)
             bow_shock_z.append(z)
     
-    # Apply center position offset
-    bow_shock_x = np.array(bow_shock_x) + center_x
-    bow_shock_y = np.array(bow_shock_y) + center_y
-    bow_shock_z = np.array(bow_shock_z) + center_z
+    # Apply rotation to sunward direction, then offset to center position
+    bow_shock_x = np.array(bow_shock_x)
+    bow_shock_y = np.array(bow_shock_y)
+    bow_shock_z = np.array(bow_shock_z)
+    bow_shock_x, bow_shock_y, bow_shock_z = rotate_to_sunward(
+        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position
+    )
+    bow_shock_x = bow_shock_x + center_x
+    bow_shock_y = bow_shock_y + center_y
+    bow_shock_z = bow_shock_z + center_z
     
     bow_shock_text = ["Bow Shock: The bow shock, which is the outermost boundary where the supersonic solar wind is slowed and <br>" 
                       "deflected by Venus, typically stands off a few thousand kilometers above the dayside surface. At the subsolar <br>" 
@@ -712,27 +712,10 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
     # Info marker at first point on bow shock structure
-    traces.append(
-        go.Scatter3d(
-            x=[bow_shock_x[0]], y=[bow_shock_y[0]], z=[bow_shock_z[0]],
-            mode='markers',
-            marker=dict(size=6, color='rgb(255, 200, 150)', opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup='Venus: Bow Shock',
-            text=bow_shock_text,
-            customdata=bow_shock_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
-        )
-    )
-        
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=60 * VENUS_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
+    traces.append(create_info_marker(
+        bow_shock_x[0], bow_shock_y[0], bow_shock_z[0],
+        'rgb(255, 200, 150)', bow_shock_text[0], 'Venus: Bow Shock'
+    ))
 
     return traces
 

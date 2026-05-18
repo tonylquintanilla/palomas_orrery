@@ -1,12 +1,16 @@
 """
 mercury_visualization_shells.py - Mercury interior, exosphere, and unique feature traces.
 
-Sphere shells for Mercury's large iron core (inner/outer), thin mantle and
-crust. Custom geometry for the sodium exosphere tail (anti-sunward),
-magnetosphere (compressed by solar wind), and Hill sphere. Mercury's core
-is proportionally the largest of any planet (~85%% of its radius).
+Custom geometry for the sodium exosphere tail (anti-sunward) and
+magnetosphere (compressed by solar wind). Sphere shells (inner core,
+outer core, mantle, crust, exosphere, Hill sphere) are now handled by
+build_sphere_shell() in orrery_rendering.py via configs in shell_configs.py.
+The _info strings remain here for GUI tooltip consumption via globals().
 
-Consumed by: planet_visualization.py (routing dispatcher)
+Mercury's core is proportionally the largest of any planet (~85% of its radius).
+
+Consumed by: planet_visualization.py (dispatch loop via CUSTOM_SHELLS lazy import),
+             palomas_orrery.py (_info strings via globals() for build_shell_checkboxes)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
@@ -16,76 +20,22 @@ Module updated: May 2026 with Anthropic's Claude Opus 4.7
 import numpy as np
 import math
 import plotly.graph_objs as go
-from shared_utilities import create_sun_direction_indicator
-from planet_visualization_utilities import (MERCURY_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
+from orrery_rendering import create_info_marker, rotate_to_sunward
+from planet_visualization_utilities import (MERCURY_RADIUS_AU, KM_PER_AU, create_magnetosphere_shape)
 
-# Mercury Shell Creation Functions
+
+# ============================================================
+# GUI tooltip strings (_info)
+# ============================================================
+# These are consumed by palomas_orrery.py via globals() for
+# build_shell_checkboxes() tooltip wiring. They remain here
+# until Phase D migrates tooltips to shell_configs.py.
 
 mercury_inner_core_info = (
             "Inner Core: Mercury has a very large metallic core, unlike Earth's which is proportionally smaller.\n" 
             "Evidence suggests that Mercury has a solid inner core, similar to Earth's. It is estimated to be about \n" 
             "1,000 kilometers thick based on Messenger findings (2019)."
 )
-
-def create_mercury_inner_core_shell(center_position=(0, 0, 0)):
-    """Creates Mercury's inner core shell."""
-    # Define layer properties
-    layer_info = {
-        'radius_fraction': 0.41,  # Inner core: 0-52% of Mercury's radius
-        'color': 'rgb(255, 180, 140)',  # Orange-red for hot iron core
-        'opacity': 1.0,
-        'name': 'Inner Core',
-        'description': (
-            "Inner Core: Mercury has a very large metallic core, unlike Earth's which is proportionally smaller.<br>" 
-            "Evidence suggests that Mercury has a solid inner core, similar to Earth's. It is estimated to be about <br>" 
-            "1,000 kilometers thick based on Messenger findings (2019)."
-        )
-    }
-    
-    # Calculate radius in AU
-    layer_radius = layer_info['radius_fraction'] * MERCURY_RADIUS_AU
-    
-    # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=25)
-    
-    # Apply center position offset
-    center_x, center_y, center_z = center_position
-    x = x + center_x
-    y = y + center_y
-    z = z + center_z
-    
-    r_info = layer_radius * 1.05
-    trace_name = f"Mercury: {layer_info['name']}"
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(
-            size=4.0,
-            color=layer_info['color'],
-            opacity=layer_info['opacity']
-        ),
-        name=trace_name,
-        legendgroup=trace_name,
-        hoverinfo='skip',
-        showlegend=True
-    )
-    info_trace = go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup=trace_name,
-        text=[layer_info['description']],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
-    )
-
-    traces = [shell_trace, info_trace]
-    
-    return traces
 
 # Source: NASA MESSENGER Mission; Margot et al. (2012) (outer core 1074 km)
 # Verified: April 2026 via Gemini fact-check
@@ -94,130 +44,11 @@ mercury_outer_core_info = (
             "is thought to be the source of Mercury's weak magnetic field. About 1074 km thick."
 )
 
-def create_mercury_outer_core_shell(center_position=(0, 0, 0)):
-    """Creates Mercury's outer core shell."""
-    # Define layer properties
-    layer_info = {
-        'radius_fraction': 0.85,  # Outer core: 82-85% of Mercury's radius
-        'color': 'rgb(255, 140, 0)',  # Deeper orange for liquid metal
-        'opacity': 0.8,
-        'name': 'Outer Core',
-        'description': (
-            "Outer Core: Surrounding the solid inner core is a liquid metallic outer core. The movement of this molten iron <br>" 
-            "is thought to be the source of Mercury's weak magnetic field. About 1074 km thick."
-        )
-    }
-    
-    # Calculate radius in AU
-    layer_radius = layer_info['radius_fraction'] * MERCURY_RADIUS_AU
-    
-    # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=25)
-    
-    # Apply center position offset
-    center_x, center_y, center_z = center_position
-    x = x + center_x
-    y = y + center_y
-    z = z + center_z
-    
-    r_info = layer_radius * 1.05
-    trace_name = f"Mercury: {layer_info['name']}"
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(
-            size=3.7,
-            color=layer_info['color'],
-            opacity=layer_info['opacity']
-        ),
-        name=trace_name,
-        legendgroup=trace_name,
-        hoverinfo='skip',
-        showlegend=True
-    )
-    info_trace = go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup=trace_name,
-        text=[layer_info['description']],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
-    )
-
-    traces = [shell_trace, info_trace]
-    
-    return traces
-
 mercury_mantle_info = (
             "Mantle: Surrounding the core is a rocky mantle. Recent research suggests this mantle might even contain a layer of \n" 
             "diamonds, formed from ancient carbon-rich material under immense pressure. The mantle is significantly thinner than \n" 
             "Earth's, estimated to be only about 331 kilometers thick."
 )
-
-def create_mercury_mantle_shell(center_position=(0, 0, 0)):
-    """Creates Mercury's mantle shell."""
-    # Define layer properties
-    layer_info = {
-        'radius_fraction': 0.98,  # Lower mantle: 85-98% of Earth's radius
-        'color': 'rgb(230, 100, 20)',  # Reddish-brown
-        'opacity': 0.7,
-        'name': 'Mantle',
-        'description': (
-            "Mantle: Surrounding the core is a rocky mantle. Recent research suggests this mantle might even contain a layer of <br>" 
-            "diamonds, formed from ancient carbon-rich material under immense pressure. The mantle is significantly thinner than <br>" 
-            "Earth's, estimated to be only about 331 kilometers thick."
-        )
-    }
-    
-    # Calculate radius in AU
-    layer_radius = layer_info['radius_fraction'] * MERCURY_RADIUS_AU
-    
-    # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=25)
-    
-    # Apply center position offset
-    center_x, center_y, center_z = center_position
-    x = x + center_x
-    y = y + center_y
-    z = z + center_z
-    
-    r_info = layer_radius * 1.05
-    trace_name = f"Mercury: {layer_info['name']}"
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(
-            size=3.4,
-            color=layer_info['color'],
-            opacity=layer_info['opacity']
-        ),
-        name=trace_name,
-        legendgroup=trace_name,
-        hoverinfo='skip',
-        showlegend=True
-    )
-    info_trace = go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup=trace_name,
-        text=[layer_info['description']],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
-    )
-
-    traces = [shell_trace, info_trace]
-    
-    return traces
 
 # Source: NASA MESSENGER; Sori (2018) (crustal thickness ~35 km)
 #         Pei et al. (2024) (diamond layer from graphite + meteorite impacts)
@@ -229,148 +60,6 @@ mercury_crust_info = (
             "formed by billions of years of meteorite impacts on a graphite-rich surface. About 35 km thick."
 )
 
-def create_mercury_crust_shell(center_position=(0, 0, 0)):
-
-    """Creates Mercury's crust shell using Mesh3d for better performance with improved hover."""
-    # Define layer properties
-    layer_info = {
-        'radius_fraction': 1.0,  # Crust: 100% of Mercury's radius
-        'color': 'rgb(128, 128, 128)',   # Description: Dark Gray reflecting Mercury's rocky and heavily cratered surface.
-        'opacity': 1.0,
-        'name': 'Crust',
-        'description': (
-            "(Note: toggle off the crust layer in the legend to better see the interior structure.)<br><br>"
-            "Mercury has a solid silicate crust that is heavily cratered, resembling Earth's Moon. The crust is likely quite thin <br>" 
-            "compared to Earth's. There's also a theory that a significant portion of Mercury's crust might be made of diamonds, <br>" 
-            "formed by billions of years of meteorite impacts on a graphite-rich surface. About 35 km thick."
-        )
-    }
-    
-    # Calculate radius in AU
-    radius = layer_info['radius_fraction'] * MERCURY_RADIUS_AU
-    
-    # Unpack center position
-    center_x, center_y, center_z = center_position
-    
-    # Create mesh with reasonable resolution for performance
-    resolution = 24  # Reduced from typical 50 for markers
-    
-    # Create a UV sphere
-    phi = np.linspace(0, 2*np.pi, resolution)
-    theta = np.linspace(-np.pi/2, np.pi/2, resolution)
-    phi, theta = np.meshgrid(phi, theta)
-    
-    x = radius * np.cos(theta) * np.cos(phi)
-    y = radius * np.cos(theta) * np.sin(phi)
-    z = radius * np.sin(theta)
-    
-    # Apply center position offset
-    x = x + center_x
-    y = y + center_y
-    z = z + center_z
-    
-    # Create triangulation
-    indices = []
-    for i in range(resolution-1):
-        for j in range(resolution-1):
-            p1 = i * resolution + j
-            p2 = i * resolution + (j + 1)
-            p3 = (i + 1) * resolution + j
-            p4 = (i + 1) * resolution + (j + 1)
-            
-            indices.append([p1, p2, p4])
-            indices.append([p1, p4, p3])
-    
-    # Create main surface
-    surface_trace = go.Mesh3d(
-        x=x.flatten(), 
-        y=y.flatten(), 
-        z=z.flatten(),
-        i=[idx[0] for idx in indices],
-        j=[idx[1] for idx in indices],
-        k=[idx[2] for idx in indices],
-        color=layer_info['color'],
-        opacity=layer_info['opacity'],
-        name=f"Mercury: {layer_info['name']}",
-        showlegend=True,
-        hoverinfo='none',  # Disable hover on mesh surface
-        # Add these new parameters to make hover text invisible
-        hovertemplate=' ',  # Empty template instead of None
-        hoverlabel=dict(
-    #        bgcolor='rgba(0,0,0,0)',  # Transparent background
-            font=dict(
-                color='rgba(0,0,0,0)',  # Transparent text
-    #            size=0                  # Zero font size
-            ),
-            bordercolor='rgba(0,0,0,0)'  # Transparent border
-        ), 
-        # Add these new parameters to eliminate shading
-        flatshading=True,  # Use flat shading instead of smooth
-        lighting=dict(
-            ambient=1.0,     # Set to maximum (1.0)
-            diffuse=0.0,     # Turn off diffuse lighting
-            specular=0.0,    # Turn off specular highlights
-            roughness=1.0,   # Maximum roughness
-            fresnel=0.0      # Turn off fresnel effect
-        ),
-        lightposition=dict(
-            x=0,  # Centered light
-            y=0,  # Centered light
-            z=10000  # Light from very far above to minimize shadows
-        )       
-    )
-        
-    # Use the Fibonacci sphere algorithm for more even point distribution
-    def fibonacci_sphere(samples=1000):
-        points = []
-        phi = math.pi * (3. - math.sqrt(5.))  # Golden angle in radians
-        
-        for i in range(samples):
-            y = 1 - (i / float(samples - 1)) * 2  # y goes from 1 to -1
-            radius_at_y = math.sqrt(1 - y * y)  # Radius at y
-            
-            theta = phi * i  # Golden angle increment
-            
-            x = math.cos(theta) * radius_at_y
-            z = math.sin(theta) * radius_at_y
-            
-            points.append((x, y, z))
-        
-        return points
-    
-    # Generate fibonacci sphere points
-    fib_points = fibonacci_sphere(samples=50)  # Originally, 50 hover points evenly distributed
-    
-    # Scale and offset the points
-    x_hover = [p[0] * radius + center_x for p in fib_points]
-    y_hover = [p[1] * radius + center_y for p in fib_points]
-    z_hover = [p[2] * radius + center_z for p in fib_points]
-        
-    # Create a list of repeated descriptions for each point
-    # This is crucial - we need exactly one text entry per point
-
-    # Just the name for "Object Names Only" mode
-
-    # Create hover trace with direct text assignment
-    # Single info marker at north pole, 5% above radius
-    r_info = radius * 1.05
-    trace_name = f"Mercury: {layer_info['name']} (Info)"
-
-    hover_trace = go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name=trace_name,
-        legendgroup=trace_name,
-        text=[layer_info['description']],
-        customdata=[f"Mercury: {layer_info['name']}"],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
-    )
-
-    return [surface_trace, hover_trace]
-
 # Source: NASA MESSENGER; NASA Mercury Fact Sheet
 # Verified: April 2026 via Gemini fact-check
 mercury_atmosphere_info = (
@@ -380,85 +69,10 @@ mercury_atmosphere_info = (
             "hydrogen, helium, and potassium atoms that have been blasted off the surface by the solar wind and micrometeoroid impacts."
 )
 
-def create_mercury_atmosphere_shell(center_position=(0, 0, 0)):
-    """Creates Mercury's atmosphere shell."""
-    # Define layer properties
-    layer_info = {
-        'radius_fraction': 2.0,  # Exosphere
-        'color': 'rgb(150, 200, 255)',  # Light blue for atmosphere
-        'opacity': 0.5,
-        'name': 'Exosphere',
-        'description': (
-            "Exosphere: Unlike Earth's substantial atmosphere, Mercury has an extremely thin exosphere. This exosphere is not <br>" 
-            "dense enough to trap heat or offer significant protection from space. It is composed mostly of oxygen, sodium, <br>" 
-            "hydrogen, helium, and potassium atoms that have been blasted off the surface by the solar wind and micrometeoroid impacts.<br><br>"
-            "Mercury has what is more accurately described as a tenuous exosphere rather than a substantial atmosphere like Earth's. <br>" 
-            "This exosphere is extremely thin, and its atoms are so sparse they are more likely to collide with the surface than with <br>" 
-            "each other. The extent of Mercury's exosphere is not well-defined by a pressure gradient as with a true atmosphere. Instead, <br>" 
-            "it gradually fades out into space. However, we can consider how far certain exospheric components have been observed:<br>" 
-            "* Sodium Tail: Due to solar radiation pressure, sodium atoms are pushed away from Mercury, forming a long, comet-like tail. <br>" 
-            "  This tail has been detected extending to distances of over 24 million kilometers (approximately 10,000 Mercury radii) <br>" 
-            "  from the planet. This is by far the most extended component of Mercury's exosphere.<br>" 
-            "* Other Elements: Other elements like hydrogen, helium, oxygen, potassium, calcium, and magnesium are also present in the <br>" 
-            "  exosphere. These are generally found much closer to the planet's surface, within a few Mercury radii. For instance, calcium <br>" 
-            "  and magnesium have been observed in the tail but at distances less than 8 Mercury radii.<br>" 
-            "In summary: While the bulk of Mercury's exospheric atoms are concentrated very close to the surface (within 1 Mercury radius), <br>" 
-            "the sodium tail is a significant feature that extends incredibly far, up to 10,000 Mercury radii. The main body of the exosphere <br>" 
-            "is very close to the surface, but the tenuous sodium tail stretches to an immense distance."
-        )
-    }
-    
-    # Calculate radius in AU
-    layer_radius = layer_info['radius_fraction'] * MERCURY_RADIUS_AU
-    
-    # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=20)
-    
-    # Apply center position offset
-    center_x, center_y, center_z = center_position
-    x = x + center_x
-    y = y + center_y
-    z = z + center_z
-    
-    r_info = layer_radius * 1.05
-    trace_name = f"Mercury: {layer_info['name']}"
 
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(
-            size=2.5,
-            color=layer_info['color'],
-            opacity=layer_info['opacity']
-        ),
-        name=trace_name,
-        legendgroup=trace_name,
-        hoverinfo='skip',
-        showlegend=True
-    )
-    info_trace = go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup=trace_name,
-        text=[layer_info['description']],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
-    )
-
-    traces = [shell_trace, info_trace]
-    
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
-    return traces
+# ============================================================
+# Custom geometry functions (live -- called via CUSTOM_SHELLS lazy import)
+# ============================================================
 
 # Source: Potter & Morgan (1985); MESSENGER sodium tail observations
 # Verified: April 2026 via Gemini fact-check
@@ -562,6 +176,7 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0)):
         alpha = max(alpha, 0.001)
         colors.append(f'rgba(255, 200, 100, {alpha:.3f})')
     
+    trace_name = f"Mercury: {layer_info['name']}"
     traces = [
         go.Scatter3d(
             x=tail_points_x,
@@ -572,28 +187,20 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0)):
                 size=2.5,
                 color=colors,  # Use RGBA colors for per-point opacity
             ),
-            name=f"Mercury: {layer_info['name']}",
-            legendgroup=f"Mercury: {layer_info['name']}",
+            name=trace_name,
+            legendgroup=trace_name,
             hoverinfo='skip',
             showlegend=True
         )
     ]
     # Info marker at first point
-    trace_name = f"Mercury: {layer_info['name']}"
-    traces.append(go.Scatter3d(
-        x=[tail_points_x[0]], y=[tail_points_y[0]], z=[tail_points_z[0]],
-        mode='markers',
-        marker=dict(size=6, color='rgb(255, 200, 100)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup=trace_name,
-        text=[layer_info['description']],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    traces.append(create_info_marker(
+        tail_points_x[0], tail_points_y[0], tail_points_z[0],
+        'rgb(255, 200, 100)', layer_info['description'], trace_name
     ))
     
     return traces
+
 
 # Source: NASA MESSENGER Mission
 # Verified: April 2026 via Gemini fact-check
@@ -605,8 +212,18 @@ mercury_magnetosphere_info = (
 )
 
 def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
-    """Creates Mercury's magnetosphere."""
+    """Creates Mercury's magnetosphere.
+    
+    Geometry is generated with bow shock along -X and tail along +X
+    (the default when Mercury is at origin). When center_position is
+    non-zero, all points are rotated so that the bow shock points
+    toward the Sun at (0,0,0) before the center offset is applied.
+    """
     traces = []
+    
+    # Compute sunward rotation -- promoted to orrery_rendering.rotate_to_sunward()
+    # Phase C1: import replaces the local nested function
+    center_x, center_y, center_z = center_position
     
     # Parameters for magnetosphere components (in Mercury radii)
     params = {
@@ -632,16 +249,15 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
     for key in params:
         params[key] *= MERCURY_RADIUS_AU
     
-    # Create magnetosphere main shape
+    # Create magnetosphere main shape (generated along -X sunward / +X tail)
     x, y, z = create_magnetosphere_shape(params)
     
-    # Unpack center position
-    center_x, center_y, center_z = center_position
-    
-    # 1. Add the main magnetosphere structure
-    x = np.array(x) + center_x
-    y = np.array(y) + center_y
-    z = np.array(z) + center_z
+    # Rotate to actual sunward direction, then offset to center position
+    x, y, z = np.array(x), np.array(y), np.array(z)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x = x + center_x
+    y = y + center_y
+    z = z + center_z
     
     magnetosphere_text = ["Magnetosphere: Mercury has a surprisingly active magnetosphere, given its small size and slow rotation. <br>" 
                           "However, it is significantly weaker and smaller than Earth's magnetosphere.<br>" 
@@ -681,8 +297,6 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
                           "  it gradually widens and becomes more turbulent, eventually merging with the interplanetary magnetic field. At the <br>" 
                           "  estimated lengths of 10 to 30 radii, the radius of the tail is expected to be larger than at the base, likely in the range <br>" 
                           "  of 2 to 5 radii, but this is highly variable and less well-defined."]
-    
-    magnetosphere_customdata = ['Mercury: Magnetosphere']
 
     traces.append(
         go.Scatter3d(
@@ -700,20 +314,10 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
     # Info marker at first point on magnetosphere structure
-    traces.append(
-        go.Scatter3d(
-            x=[x[0]], y=[y[0]], z=[z[0]],
-            mode='markers',
-            marker=dict(size=6, color='rgb(180, 180, 255)', opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup='Mercury: Magnetosphere',
-            text=magnetosphere_text,
-            customdata=magnetosphere_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
-        )
-    )
+    traces.append(create_info_marker(
+        x[0], y[0], z[0],
+        'rgb(180, 180, 255)', magnetosphere_text[0], 'Mercury: Magnetosphere'
+    ))
     
     # 2. Create and add bow shock
     bow_shock_x = []
@@ -742,17 +346,21 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
             bow_shock_y.append(y)
             bow_shock_z.append(z)
     
-    # Apply center position offset
-    bow_shock_x = np.array(bow_shock_x) + center_x
-    bow_shock_y = np.array(bow_shock_y) + center_y
-    bow_shock_z = np.array(bow_shock_z) + center_z
+    # Rotate to actual sunward direction, then offset to center position
+    bow_shock_x = np.array(bow_shock_x)
+    bow_shock_y = np.array(bow_shock_y)
+    bow_shock_z = np.array(bow_shock_z)
+    bow_shock_x, bow_shock_y, bow_shock_z = rotate_to_sunward(
+        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position
+    )
+    bow_shock_x = bow_shock_x + center_x
+    bow_shock_y = bow_shock_y + center_y
+    bow_shock_z = bow_shock_z + center_z
     
     bow_shock_text = ["Bow Shock: The bow shock is the outermost boundary where the supersonic solar wind is slowed and heated as <br>" 
                       "it encounters Mercury's magnetosphere. This distance is highly variable depending on the solar wind conditions, <br>" 
                       "but a typical sunward distance to the bow shock is estimated to be around 1.4 to 2.0 radii from the center of Mercury.<br>"
-                      "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."]
-    
-    bow_shock_customdata = ['Mercury: Bow Shock']
+                      "The Bow Shock points towards the Sun. The XY plane is the ecliptic."]
 
     traces.append(
         go.Scatter3d(
@@ -772,27 +380,13 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
         )
     )
     # Info marker at first point on bow shock structure
-    traces.append(
-        go.Scatter3d(
-            x=[bow_shock_x[0]], y=[bow_shock_y[0]], z=[bow_shock_z[0]],
-            mode='markers',
-            marker=dict(size=6, color='rgb(255, 200, 150)', opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup='Mercury: Bow Shock',
-            text=bow_shock_text,
-            customdata=bow_shock_customdata,
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
-        )
-    )
+    traces.append(create_info_marker(
+        bow_shock_x[0], bow_shock_y[0], bow_shock_z[0],
+        'rgb(255, 200, 150)', bow_shock_text[0], 'Mercury: Bow Shock'
+    ))
         
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=100 * MERCURY_RADIUS_AU
-    )
-    for trace in sun_traces:
-        traces.append(trace)
+    # Phase A (May 2026): sun direction indicator emission moved to dispatch
+    # loop in planet_visualization.py. One indicator per body, not per shell.
 
     return traces
 
@@ -805,78 +399,3 @@ mercury_hill_sphere_info = (
             "its mass and its distance from the Sun. Being the closest planet to the Sun, the Sun's powerful gravity limits the \n" 
             "extent of Mercury's Hill sphere compared to planets farther out."
 )
-
-def create_mercury_hill_sphere_shell(center_position=(0, 0, 0)):
-    """Creates Mercury's Hill sphere."""
-    # Hill sphere radius in Mercury radii
-    radius_fraction = 94.4  # Mercury's Hill sphere is about 90 Mercury radii
-    
-    # Calculate radius in AU
-    radius_au = radius_fraction * MERCURY_RADIUS_AU
-    
-    # Create sphere points with fewer points for memory efficiency
-    n_points = 30  # Reduced for large spheres
-    x, y, z = create_sphere_points(radius_au, n_points=n_points)
-    
-    # Apply center position offset
-    center_x, center_y, center_z = center_position
-    x = x + center_x
-    y = y + center_y
-    z = z + center_z
-    
-    # Create hover text
-    hover_text = ("Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it <br>" 
-                "where its gravity is the dominant gravitational force. Mercury certainly has a Hill sphere, but its size depends on <br>" 
-                "its mass and its distance from the Sun. Being the closest planet to the Sun, the Sun's powerful gravity limits the <br>" 
-                "extent of Mercury's Hill sphere compared to planets farther out.<br><br>" 
-                "The Hill sphere is the region around a where its own gravity is the dominant force in attracting satellites. For <br>" 
-                "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
-                "The Hill Sphere radius can be described in words as follows: it is equal to the planet's average distance from the <br>" 
-                "Sun (its orbital semi-major axis) multiplied by the cube root of the ratio between the planet's mass and three times <br>" 
-                "the Sun's mass. In other words, you take how far the planet orbits out from the Sun, then scale that distance by the <br>" 
-                "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's.")
-    
-    hover_customdata = ["Hill Sphere"]
-
-    # Create the trace
-    traces = [
-        go.Scatter3d(
-            x=x,
-            y=y,
-            z=z,
-            mode='markers',
-            marker=dict(
-                size=1.0,
-                color='rgb(0, 255, 0)',  # Green for Hill sphere
-                opacity=0.25
-            ),
-            name='Mercury: Hill Sphere',
-            legendgroup='Mercury: Hill Sphere',
-            hoverinfo='skip',
-            showlegend=True
-        )
-    ]
-    # Info marker at north pole
-    r_info = radius_au * 1.05
-    traces.append(go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=6, color='rgb(0, 255, 0)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Mercury: Hill Sphere',
-        text=[hover_text],
-        customdata=['Mercury: Hill Sphere'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
-    ))
-    
-
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=radius_au
-    )
-    for trace in sun_traces:
-        traces.append(trace)        
-
-    return traces
