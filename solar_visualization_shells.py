@@ -11,7 +11,7 @@ added for the MAPS comet coronal journey.
 Consumed by: planet_visualization.py (routing dispatcher),
              palomas_orrery.py (hover_text_sun import)
 
-Module updated: May 2026 with Anthropic's Claude Opus 4.7
+Module updated: May 2026 with Anthropic's Claude Opus 4.6
 """
 import numpy as np
 import math
@@ -892,79 +892,6 @@ hover_text_sun = (
 )
 
 
-def create_sun_hover_text():
-    return {
-        'photosphere': (
-            'Solar Photosphere<br>'
-            'Temperature: ~6,000K<br>'
-            'Radius: 0.00465 AU (1.0 R_sun)'
-        ),
-        'inner_corona': (
-            'Inner Corona (K-corona)<br>'
-            'Temperature: 1-3 million K<br>'
-            'Extends to: 2-3 solar radii (~0.014 AU)<br>'
-            'Roche limit at 3.45 R_sun just beyond this shell'
-        ),
-        'roche_limit': (
-            'Roche Limit (Comets)<br>'
-            '~3.45 solar radii (~0.016 AU)<br>'
-            'Inside: tidal forces exceed cometary self-gravity<br>'
-            'NOT absolute -- tensile strength allows survival inside it'
-        ),
-        'streamer_belt': (
-            'Streamer Belt / Visible Corona<br>'
-            'Temperature: ~1-2 million K<br>'
-            'Extends to: ~6 solar radii -- eclipse white-light corona'
-        ),
-        'alfven_surface': (
-            'Alfven Surface<br>'
-            '~18.8 R_sun -- true corona/solar wind boundary<br>'
-            'Parker Solar Probe first crossing: April 28, 2021'
-        ),
-        'outer_corona': (
-            'Extended Corona (F-corona)<br>'
-            'Temperature: ~1-2 million K<br>'
-            'Extends to: ~50 solar radii (~0.23 AU)'
-        )
-    }
-
-# In the create_corona_sphere function, increase the number of points
-def create_corona_sphere(radius, n_points=100):  # Increased from 50 to 100 points
-    """Create points for a sphere surface to represent corona layers."""
-    phi = np.linspace(0, 2*np.pi, n_points)
-    theta = np.linspace(-np.pi/2, np.pi/2, n_points)
-    phi, theta = np.meshgrid(phi, theta)
-
-    x = radius * np.cos(theta) * np.cos(phi)
-    y = radius * np.cos(theta) * np.sin(phi)
-    z = radius * np.sin(theta)
-    
-    return x.flatten(), y.flatten(), z.flatten()
-
-# ============================================================================
-# SHELL DESIGN PATTERN (applied to all 15 sphere shells):
-#
-# Two-trace structure per shell:
-#   1. Shell sphere  -- n_points=20 (outer/boundary) or 25 (inner sun),
-#                       hoverinfo='skip' (no hover on cloud points)
-#   2. Info marker   -- single cross symbol at north pole, 5% above shell
-#                       radius, carries the full hover text for that shell.
-#
-# Benefits:
-#   * Eliminates hover clutter from 400-3600 identical hover popups
-#   * Reduces export file size by ~17 MB (hover text serialized once, not N^2)
-#   * One predictable hover target per shell -- user learns where to look
-#   * Cross symbol is visually distinct from all object markers (circle,
-#     diamond, square are used elsewhere)
-#
-# Info marker position: (0, 0, r * 1.05) -- north pole of shell, 5% above
-# surface so it floats clear of the shell dot cloud.
-#
-# Module updated: May 2026 with Anthropic's Claude Opus 4.7
-# ============================================================================
-
-# Individual Sun shell creation functions
-
 def create_sun_gravitational_shell():
     """Creates the Sun's gravitational influence shell."""
     x, y, z = create_sphere_points(GRAVITATIONAL_INFLUENCE_AU, n_points=20)
@@ -1427,19 +1354,21 @@ def create_sun_core_shell():
 # Point density is unchanged (it defines the visual character of these objects).
 # ============================================================================
 
-import plotly.graph_objs as go
-from planet_visualization_utilities import create_sphere_points, SOLAR_RADIUS_AU
-
-def create_sun_hills_cloud_torus(inner_radius=2000, outer_radius=20000, thickness_ratio=0.3):
+def create_sun_hills_cloud_torus(center_position=(0, 0, 0), inner_radius=2000, outer_radius=20000, thickness_ratio=0.3):
     """
     Create a toroidal (doughnut-shaped) Hills Cloud structure.
     FIXED VERSION - Returns proper Plotly trace objects.
     
     Parameters:
+    - center_position: Sun position tuple (default: (0, 0, 0)).
+      Accepted for interface uniformity with the unified dispatch
+      contract. Geometry translation deferred to switchover phase.
     - inner_radius: Inner boundary in AU (default: 2000)
     - outer_radius: Outer boundary in AU (default: 20000)
     - thickness_ratio: Ratio of torus thickness to major radius (default: 0.3)
     """
+    # Phase D1: center_position accepted for interface uniformity;
+    # geometry translation deferred to switchover phase.
     major_radius = (inner_radius + outer_radius) / 2
     minor_radius = (outer_radius - inner_radius) / 2 * thickness_ratio
     
@@ -1493,11 +1422,21 @@ def create_sun_hills_cloud_torus(inner_radius=2000, outer_radius=20000, thicknes
     return [shell_trace, info_trace]
 
 
-def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=15):
+def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, radius_max=100000, n_clumps=15):
     """
     Create a clumpy, asymmetric outer Oort Cloud with density variations.
     FIXED VERSION - Returns proper Plotly trace objects.
+
+    Parameters:
+    - center_position: Sun position tuple (default: (0, 0, 0)).
+      Accepted for interface uniformity with the unified dispatch
+      contract. Geometry translation deferred to switchover phase.
+    - radius_min: Inner boundary in AU (default: 20000)
+    - radius_max: Outer boundary in AU (default: 100000)
+    - n_clumps: Number of density clumps (default: 15)
     """
+    # Phase D1: center_position accepted for interface uniformity;
+    # geometry translation deferred to switchover phase.
     points_x, points_y, points_z = [], [], []
     
     for i in range(n_clumps):
@@ -1563,12 +1502,21 @@ def create_sun_outer_oort_clumpy(radius_min=20000, radius_max=100000, n_clumps=1
     return [shell_trace, info_trace]
 
 
-def create_sun_galactic_tide(radius=50000, n_points=2000):
+def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2000):
     """
     Create Oort Cloud structure influenced by galactic tidal forces.
     The galactic plane creates asymmetry in the distribution.
     FIXED VERSION - Returns proper Plotly trace objects.
+
+    Parameters:
+    - center_position: Sun position tuple (default: (0, 0, 0)).
+      Accepted for interface uniformity with the unified dispatch
+      contract. Geometry translation deferred to switchover phase.
+    - radius: Typical distance in AU (default: 50000)
+    - n_points: Number of random points (default: 2000)
     """
+    # Phase D1: center_position accepted for interface uniformity;
+    # geometry translation deferred to switchover phase.
     r = np.random.normal(radius, radius*0.3, n_points)
     r = np.clip(r, radius*0.5, radius*1.5)
     
@@ -1613,147 +1561,3 @@ def create_sun_galactic_tide(radius=50000, n_points=2000):
     )
     return [shell_trace, info_trace]
 
-
-def create_enhanced_oort_cloud_visualization():
-    """
-    Create a more scientifically accurate Oort Cloud visualization.
-    """
-    traces = []
-    
-    # 1. Hills Cloud (Inner Oort) - Toroidal structure
-    if True:  # Replace with your checkbox logic
-        x_hills, y_hills, z_hills = create_sun_hills_cloud_torus()
-        
-        traces.append(go.Scatter3d(
-            x=x_hills, y=y_hills, z=z_hills,
-            mode='markers',
-            marker=dict(
-                size=1.5,
-                color='rgb(173, 216, 230)',  # Light blue
-                opacity=0.4,
-                symbol='circle'
-            ),
-            name='Hills Cloud (Inner Oort - Toroidal)',
-            hoverinfo='skip',
-                hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ))
-    
-    # 2. Outer Oort Cloud - Clumpy structure
-    if True:  # Replace with your checkbox logic
-        x_outer, y_outer, z_outer = create_sun_outer_oort_clumpy()
-        
-        traces.append(go.Scatter3d(
-            x=x_outer, y=y_outer, z=z_outer,
-            mode='markers',
-            marker=dict(
-                size=1.0,
-                color='rgb(255, 255, 255)',  # White
-                opacity=0.3,
-                symbol='circle'
-            ),
-            name='Outer Oort Cloud (Clumpy)',
-            hoverinfo='skip',
-                hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ))
-    
-    # 3. Galactic tide influenced region
-    if True:  # Replace with your checkbox logic
-        x_tide, y_tide, z_tide = create_sun_galactic_tide()
-        
-        traces.append(go.Scatter3d(
-            x=x_tide, y=y_tide, z=z_tide,
-            mode='markers',
-            marker=dict(
-                size=0.8,
-                color='rgb(255, 182, 193)',  # Light pink
-                opacity=0.2,
-                symbol='diamond'
-            ),
-            name='Galactic Tide Region',
-            hoverinfo='skip',
-                hovertemplate='%{text}<extra></extra>',
-            showlegend=True
-        ))
-    
-    return traces
-
-def create_oort_cloud_density_visualization():
-    """
-    Alternative approach: Show Oort Cloud as density gradients rather than discrete shells.
-    """
-    traces = []
-    
-    radii = [5000, 10000, 20000, 40000, 70000, 100000]
-    densities = [0.8, 0.6, 0.5, 0.3, 0.2, 0.1]
-    
-    for i, (radius, density) in enumerate(zip(radii, densities)):
-        n_points = int(500 * density)
-        
-        theta = np.random.uniform(0, 2*np.pi, n_points)
-        phi = np.random.uniform(-np.pi/2, np.pi/2, n_points)
-        r = np.random.normal(radius, radius*0.1, n_points)
-        
-        x = r * np.cos(phi) * np.cos(theta)
-        y = r * np.cos(phi) * np.sin(theta)
-        z = r * np.sin(phi)
-        
-        trace_name = f'Oort Density Layer {i+1}'
-        layer_desc = f'Oort Cloud Density Layer<br>Distance: ~{radius:,} AU<br>Relative density: {density:.1f}'
-
-        traces.append(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(
-                size=max(0.5, 2.0 * density),
-                color=f'rgba(255, 255, 255, {density})',
-                opacity=density,
-            ),
-            name=trace_name,
-            legendgroup=trace_name,
-            hoverinfo='skip',
-            showlegend=True
-        ))
-        traces.append(go.Scatter3d(
-            x=[x[0]], y=[y[0]], z=[z[0]],
-            mode='markers',
-            marker=dict(size=6, color='rgb(255, 255, 255)', opacity=0.9,
-                        symbol='cross', line=dict(color='white', width=1)),
-            name='',
-            legendgroup=trace_name,
-            text=[layer_desc],
-            customdata=[f'Density Layer {i+1}'],
-            hovertemplate='%{text}<extra></extra>',
-            showlegend=False
-        ))
-    
-    return traces
-
-# Source: NASA Oort Cloud Overview; Dones et al. (2004) Comets II; MPC (Sedna, 2012 VP113 as inner Oort evidence)
-# Gemini fact-check Apr 2026: corrected short-period comet origin (Kuiper Belt/Scattered Disk, not Hills Cloud)
-# Updated hover text with current scientific understanding
-enhanced_oort_hover_text = """
-<b>The Oort Cloud: Current Scientific Understanding</b><br><br>
-
-<b>Structure:</b><br>
-* <b>Hills Cloud (Inner Oort):</b> 2,000-20,000 AU, disk-like/toroidal<br>
-* <b>Outer Oort Cloud:</b> 20,000-100,000+ AU, roughly spherical but clumpy<br><br>
-
-<b>Key Characteristics:</b><br>
-* Not uniform shells but complex, structured regions<br>
-* Density varies significantly throughout<br>
-* Influenced by galactic tides and stellar encounters<br>
-* Contains an estimated 1-100 trillion objects >1km<br><br>
-
-<b>Scientific Evidence:</b><br>
-* Comet orbital inclinations suggest spherical outer region<br>
-* Short-period comet inclinations support inner disk-like structure<br>
-* Computer simulations show tidal sculpting effects<br>
-* Stellar encounter models predict clumpy structure<br><br>
-
-<b>Recent Discoveries:</b><br>
-* Objects like Sedna may be inner Oort Cloud members<br>
-* 2012 VP113 provides evidence for inner Oort population<br>
-* NEOWISE survey improving population estimates
-"""

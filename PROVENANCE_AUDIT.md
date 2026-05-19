@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: May 18, 2026
+Generated: May 19, 2026
 Files scanned: 105
-Total findings: 498
-Constants: 61 | Dicts: 29 | Display strings: 408
+Total findings: 492
+Constants: 61 | Dicts: 29 | Display strings: 402
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -37,7 +37,7 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 4 |
-| 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 148 |
+| 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 142 |
 | 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 330 |
 | 4 | 1-4 | NO ACTION NEEDED | 16 |
 
@@ -290,12 +290,6 @@ is planned for a future session.
 | 282 | string | display string @ line 282 | (6 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
 | 841 | string | display string @ line 841 | (19 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
 | 865 | string | display string @ line 865 | (5 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
-| 898 | string | display string @ line 898 | (3 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
-| 903 | string | display string @ line 903 | (3 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
-| 909 | string | display string @ line 909 | (2 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
-| 915 | string | display string @ line 915 | (1 claim) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 920 | string | display string @ line 920 | (1 claim) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 925 | string | display string @ line 925 | (2 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
 
 ### spacecraft_encounters.py
 
