@@ -1672,7 +1672,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.6,
             'n_points': 25,
             'marker_size': 4.0,
-            'hover_text': saturn_core_info,
+            'hover_text': saturn_core_info.replace('\n', '<br>'),
+            'tooltip': saturn_core_info,
         },
 
         'metallic_hydrogen': {
@@ -1682,7 +1683,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.9,
             'n_points': 25,
             'marker_size': 3.5,
-            'hover_text': saturn_metallic_hydrogen_info,
+            'hover_text': saturn_metallic_hydrogen_info.replace('\n', '<br>'),
+            'tooltip': saturn_metallic_hydrogen_info,
         },
 
         'molecular_hydrogen': {
@@ -1692,7 +1694,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.99,
             'n_points': 25,
             'marker_size': 3.0,
-            'hover_text': saturn_molecular_hydrogen_info,
+            'hover_text': saturn_molecular_hydrogen_info.replace('\n', '<br>'),
+            'tooltip': saturn_molecular_hydrogen_info,
         },
 
         'cloud_layer': {
@@ -1702,7 +1705,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 1.0,
             'geometry_type': 'mesh3d',
             'mesh_resolution': 24,
-            'hover_text': saturn_cloud_layer_info,
+            'hover_text': saturn_cloud_layer_info.replace('\n', '<br>'),
+            'tooltip': saturn_cloud_layer_info,
         },
 
         'upper_atmosphere': {
@@ -1712,7 +1716,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 1.1,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': saturn_upper_atmosphere_info,
+            'hover_text': saturn_upper_atmosphere_info.replace('\n', '<br>'),
+            'tooltip': saturn_upper_atmosphere_info,
         },
 
         'hill_sphere': {
@@ -1722,7 +1727,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 1120,
             'n_points': 20,
             'marker_size': 2.0,
-            'hover_text': saturn_hill_sphere_info,
+            'hover_text': saturn_hill_sphere_info.replace('\n', '<br>'),
+            'tooltip': saturn_hill_sphere_info,
         },
 
     },
@@ -1743,7 +1749,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.2,
             'n_points': 25,
             'marker_size': 4.0,
-            'hover_text': uranus_core_info,
+            'hover_text': uranus_core_info.replace('\n', '<br>'),
+            'tooltip': uranus_core_info,
         },
 
         'mantle': {
@@ -1753,7 +1760,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.7,
             'n_points': 25,
             'marker_size': 3.5,
-            'hover_text': uranus_mantle_info,
+            'hover_text': uranus_mantle_info.replace('\n', '<br>'),
+            'tooltip': uranus_mantle_info,
         },
 
         'cloud_layer': {
@@ -1763,7 +1771,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 1.0,
             'geometry_type': 'mesh3d',
             'mesh_resolution': 24,
-            'hover_text': uranus_cloud_layer_info,
+            'hover_text': uranus_cloud_layer_info.replace('\n', '<br>'),
+            'tooltip': uranus_cloud_layer_info,
         },
 
         'upper_atmosphere': {
@@ -1773,7 +1782,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 1.16,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': uranus_upper_atmosphere_info,
+            'hover_text': uranus_upper_atmosphere_info.replace('\n', '<br>'),
+            'tooltip': uranus_upper_atmosphere_info,
         },
 
         'hill_sphere': {
@@ -1783,7 +1793,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 2770,
             'n_points': 20,
             'marker_size': 2.0,
-            'hover_text': uranus_hill_sphere_info,
+            'hover_text': uranus_hill_sphere_info.replace('\n', '<br>'),
+            'tooltip': uranus_hill_sphere_info,
         },
 
     },
@@ -1804,7 +1815,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.25,
             'n_points': 25,
             'marker_size': 4.0,
-            'hover_text': neptune_core_info,
+            'hover_text': neptune_core_info.replace('\n', '<br>'),
+            'tooltip': neptune_core_info,
         },
 
         'mantle': {
@@ -1814,7 +1826,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.85,
             'n_points': 25,
             'marker_size': 3.5,
-            'hover_text': neptune_mantle_info,
+            'hover_text': neptune_mantle_info.replace('\n', '<br>'),
+            'tooltip': neptune_mantle_info,
         },
 
         'cloud_layer': {
@@ -1824,7 +1837,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 1.0,
             'geometry_type': 'mesh3d',
             'mesh_resolution': 24,
-            'hover_text': neptune_cloud_layer_info,
+            'hover_text': neptune_cloud_layer_info.replace('\n', '<br>'),
+            'tooltip': neptune_cloud_layer_info,
         },
 
         'upper_atmosphere': {
@@ -1834,7 +1848,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 1.01,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': neptune_upper_atmosphere_info,
+            'hover_text': neptune_upper_atmosphere_info.replace('\n', '<br>'),
+            'tooltip': neptune_upper_atmosphere_info,
         },
 
         'hill_sphere': {
@@ -1844,7 +1859,8 @@ SHELL_CONFIGS = {
             'radius_fraction': 4685,
             'n_points': 20,
             'marker_size': 2.0,
-            'hover_text': neptune_hill_sphere_info,
+            'hover_text': neptune_hill_sphere_info.replace('\n', '<br>'),
+            'tooltip': neptune_hill_sphere_info,
         },
 
     },
@@ -1891,6 +1907,8 @@ SHELL_CONFIGS = {
             'radius_au': SOLAR_RADIUS_AU,
             'color': 'rgb(255, 244, 214)',
             'opacity': 1.0,
+            'geometry_type': 'mesh3d',
+            'mesh_resolution': 24,
             'n_points': 25,
             'marker_size': 7.0,
             'hover_text': photosphere_info_hover,
@@ -2513,6 +2531,8 @@ CUSTOM_SHELLS = {
             'radius_au': SOLAR_RADIUS_AU,
             'color': 'rgb(255, 244, 214)',
             'opacity': 1.0,
+            'geometry_type': 'mesh3d',
+            'mesh_resolution': 24,
             'n_points': 25,
             'marker_size': 7.0,
             'hover_text': photosphere_info_hover,

@@ -208,7 +208,8 @@ from planet_visualization import (              # the gryed out imports are crea
 
 from solar_visualization_shells import (
     hover_text_sun,
-    hover_text_sun_and_corona,    
+    hover_text_sun_and_corona,  
+    hover_text_sun_and_corona_tooltip,  
     gravitational_influence_info,
     galactic_tide_info,
     hills_cloud_torus_info,
@@ -7864,7 +7865,8 @@ create_celestial_checkbutton("Sun", sun_var)
 # First, modify the existing Solar Shells checkbutton to call toggle_all_shells
 sun_shells_checkbutton = tk.Checkbutton(celestial_frame, text="- Solar System Structures:", variable=sun_shells_var, command=toggle_all_shells)
 sun_shells_checkbutton.pack(anchor='w')
-CreateToolTip(sun_shells_checkbutton, hover_text_sun_and_corona)
+# CreateToolTip(sun_shells_checkbutton, hover_text_sun_and_corona)
+CreateToolTip(sun_shells_checkbutton, hover_text_sun_and_corona_tooltip)
 
 # Create a Frame specifically for the shell options (indented)
 shell_options_frame = tk.Frame(celestial_frame)

@@ -19,7 +19,7 @@ Provenance audit identified by Anthropic's Claude Opus 4.7.
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, rotate_points)
+from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, rotate_points, create_magnetosphere_shape)
 from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 from shared_utilities import create_sun_direction_indicator
 
@@ -469,10 +469,6 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
 
     Module updated: May 2026 with Anthropic's Claude Opus 4.7
     """
-    import numpy as np
-    import plotly.graph_objs as go
-    from planet_visualization_utilities import NEPTUNE_RADIUS_AU, create_magnetosphere_shape, rotate_points
-    
     # Parameters for magnetosphere components (in Neptune radii)
     params = {
         # Compressed sunward side - Neptune's bow shock standoff distance
@@ -629,8 +625,6 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
 
 def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth):
     """Creates a simplified visualization of Neptune's magnetic poles and axis."""
-    import numpy as np
-    
     center_x, center_y, center_z = center_position
     
     # Start with offset magnetic center
@@ -756,8 +750,6 @@ def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimut
     )
     traces.append(south_pole_trace)
     
-    # Add debug prints to track the return value
-    print(f"Returning {len(traces)} magnetic field traces")
     return traces
 
 

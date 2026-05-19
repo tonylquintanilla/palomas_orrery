@@ -861,6 +861,33 @@ hover_text_sun_and_corona = (
     'MAPS disintegrated at 8.33 R_sun (0.039 AU), just inside Parker\'s record.'
 )
 
+# Tkinter tooltip version (\n line breaks, no HTML tags)
+# Item 31: hover_text_sun_and_corona uses <br>/<b> for Plotly;
+# Tkinter CreateToolTip renders tags literally. This version is for GUI.
+hover_text_sun_and_corona_tooltip = (
+    'The Sun and Its Atmosphere\n\n'
+    'Five corona/boundary layers now visualized separately:\n'
+    '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K\n'
+    '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets\n'
+    '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona\n'
+    '* Alfven Surface: ~18.8 R_sun -- true corona/solar wind boundary\n'
+    '  (Parker Solar Probe first crossing: April 28, 2021)\n'
+    '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope\n\n'
+    'Parker Solar Probe closest approach: ~8.8 R_sun (2024)\n\n'
+    'The coronal heating paradox: the corona is 200x hotter than the photosphere\n'
+    'despite being farther from the energy source. Leading theories: Alfven waves,\n'
+    'nanoflares, and magnetic reconnection -- still actively debated.\n\n'
+    'MAPS C/2026 A1 (April 2026) crossed each boundary in sequence:\n'
+    'Extended F-corona (April 2, ~33 R_sun, ~0.153 AU) ->\n'
+    'Alfven Surface (April 3 ~18:00, 18.8 R_sun, 0.087 AU) ->\n'
+    'DISINTEGRATION (April 4 08:15, 8.33 R_sun, 0.039 AU) ->\n'
+    'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY ->\n'
+    'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.\n'
+    'Ghost tracked by SOHO/LASCO ~36-40 hours outbound; dispersed by April 6.\n'
+    'Parker Solar Probe closest approach: 8.8 R_sun (0.041 AU) --\n'
+    'MAPS disintegrated at 8.33 R_sun (0.039 AU), just inside Parker\'s record.'
+)
+
 hover_text_sun = (
         '<b>Sun</b><br>'
         'Note: The Sun, our very own star, is a massive ball of hot plasma that sits at the center of our solar system.<br> ' 
@@ -1410,8 +1437,8 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0), inner_radius=2000, o
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(173, 216, 230)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(173, 216, 230)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Hills Cloud (Inner Oort - Toroidal)',
         text=[hills_hover],
@@ -1490,8 +1517,8 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(255, 255, 255)', opacity=0.9,
-                    symbol='cross', line=dict(color='gray', width=1)),
+        marker=dict(size=8, color='rgb(255, 255, 255)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Outer Oort Cloud (Clumpy)',
         text=[clumpy_hover],
@@ -1550,8 +1577,8 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(255, 182, 193)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(255, 182, 193)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Galactic Tide Region',
         text=[tide_hover],
