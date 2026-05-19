@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: April 17, 2026
-Modules: 105 | Functions: 812 | Lines: 87,476
+Generated: May 18, 2026
+Modules: 105 | Functions: 862 | Lines: 85,413
 
 ---
 
@@ -24,16 +24,17 @@ and explains in context.
 
 | Role | Count | Description |
 |------|-------|-------------|
-| gui | 8 | Applications the user launches (GUIs, editors) |
+| gui | 6 | Applications the user launches (GUIs, editors) |
 | rendering | 22 | Builds visual traces, figures, and charts |
 | rendering/shells | 15 | Planetary shell visualizations (sphere layers) |
 | computation | 15 | Math, orbital mechanics, data processing |
 | data | 14 | Catalogs, constants, and static datasets |
 | cache | 5 | Fetch, store, and retrieve computed data |
-| pipeline | 7 | Transforms data between stages (export, conversion, plotting pipelines) |
+| pipeline | 5 | Transforms data between stages (export, conversion, plotting pipelines) |
 | scenario | 3 | Specific Earth system scenarios |
 | utility | 5 | Shared helper functions |
-| devtool | 11 | Developer tools (dependency tracing, atlas) |
+| devtool | 12 | Developer tools (dependency tracing, atlas) |
+| other | 3 | Uncategorized |
 
 ---
 
@@ -98,50 +99,6 @@ and explains in context.
 
 ---
 
-### gallery_editor.py
-
-**Role:** gui | **Lines:** 1,338
-
-> Gallery Metadata Editor for Paloma's Orrery GUI to edit visualization titles, descriptions, categories, reorder items and categories, and copy/move visualizations within the gallery_metadata.json file.
-
-**Depends on:** (none)
-**Consumed by:** (none -- standalone)
-
-**Public functions:**
-
-- `load_config(filepath)` (line 37) -- Load gallery_config.json. Returns list of category dicts.
-- `save_config(filepath, categories)` (line 47) -- Save gallery_config.json.
-- `config_to_map(categories)` (line 54) -- Convert category list to key->label dict.
-- `config_to_color_map(categories)` (line 59) -- Convert category list to key->color dict.
-- `load_metadata(filepath)` (line 68) -- Load gallery_metadata.json and return the data dict.
-- `save_metadata(filepath, data)` (line 74) -- Save gallery_metadata.json with a backup first.
-- `get_category_order(vizs, mode_key)` (line 90) -- Derive category display order from JSON sequence for a given mode.
-- `make_label_to_key(label)` (line 111) -- Convert a category label to a snake_case key.
-- `class GalleryEditor` (line 125)
-
----
-
-### gallery_studio.py
-
-**Role:** gui | **Lines:** 4,485
-
-> Gallery Studio - Interactive HTML Export Tool for Paloma's Orrery
-
-**Depends on:** info_dictionary, visualization_utils
-**Consumed by:** (none -- standalone)
-
-**Public functions:**
-
-- `class ToolTip` (line 348) -- Hover tooltip for Tkinter widgets.
-- `extract_figure_from_html(html_path)` (line 492) -- Extract Plotly figure dict from an HTML file.
-- `extract_encyclopedia_for_figure(fig_dict)` (line 694) -- Extract encyclopedia entries for objects present in a Plotly figure.
-- `apply_config(fig_dict, config)` (line 819) -- Apply studio configuration to a Plotly figure dict.
-- `build_gallery_html(fig_dict, config, title)` (line 2183) -- Build a standalone gallery-ready HTML file from a figure dict.
-- `class GalleryStudio` (line 3108) -- Tkinter GUI for configuring and exporting gallery-ready HTML.
-- `main()` (line 4999) -- Launch the Gallery Studio.
-
----
-
 ### orbital_param_viz.py
 
 **Role:** gui | **Lines:** 1,936
@@ -167,7 +124,7 @@ and explains in context.
 
 ### palomas_orrery.py
 
-**Role:** gui | **Lines:** 8,253
+**Role:** gui | **Lines:** 8,416
 
 > palomas_orrery.py - Main GUI and plotting engine for Paloma's Orrery.
 
@@ -176,76 +133,76 @@ and explains in context.
 
 **Public functions:**
 
-- `get_fetch_interval_for_type(obj_type, obj_name, trajectory_interval, default_interval, satellite_interval, planetary_params)` (line 312) -- Get the appropriate fetch interval based on object type.
-- `create_dates_list_for_object(obj, obj_type, date_obj, trajectory_points, orbital_points, satellite_days, satellite_points, start_date, end_date, planetary_params, parent_planets, center_object_name, max_date, settings)` (line 333) -- Create a list of dates for plotting based on object type.
-- `handle_update_dialog(num_objects)` (line 415) -- Handle the update dialog for cache updates.
-- `get_interval_settings()` (line 477) -- Get all interval settings from the GUI entries.
-- `get_date_from_gui()` (line 551) -- Get the date from GUI entry fields.
-- `create_animation_dates(current_date, step, N)` (line 570) -- Create dates list specifically for animations.
-- `calculate_axis_range_from_orbits(selected_objects, positions, planetary_params, parent_planets, center_object_name)` (line 605) -- Calculate appropriate axis range based on orbital parameters.
-- `get_improved_axis_range(scale_var, custom_scale_entry, selected_objects, positions, planetary_params, parent_planets, center_object_name)` (line 817) -- Get axis range using improved scaling logic.
-- `get_animation_axis_range(scale_var, custom_scale_entry, objects, planetary_params, parent_planets, center_object_name)` (line 835) -- Get axis range for animations using the same logic as static plots.
-- `calculate_satellite_precession_info(selected_objects, start_date, end_date, center_object_name)` (line 856) -- Calculate precession information for selected satellites based on date range.
-- `load_window_config()` (line 1015) -- Load saved window geometry and sash positions from config file.
-- `save_window_config()` (line 1025) -- Save current window geometry and sash positions to config file.
-- `fetch_position(object_id, date_obj, center_id, id_type, override_location, mission_url, mission_info)` (line 1141)
-- `calculate_analytical_position(obj_name, date_obj, center_id)` (line 1617) -- Calculate position from analytical orbital elements when Horizons is unavailable.
-- `fetch_radec_for_hover(object_id, date_obj, id_type)` (line 1700) -- Fetch RA/Dec and uncertainties for hover text
-- `add_celestial_object(fig, obj_data, name, color, symbol, marker_size, hover_data, center_object_name)` (line 1770)
-- `update_status_display(message, status_type)` (line 1843) -- Update status display with color coding and history
-- `configure_controls_canvas(event)` (line 1882)
-- `class ScrollableFrame` (line 2665) -- A scrollable frame that can contain multiple widgets with a vertical scrollbar.
-- `class CreateToolTip` (line 2766) -- Create a tooltip for a given widget with intelligent positioning to prevent clipping.
-- `pulse_progress_bar()` (line 2923) -- Create a pulsating effect for the progress bar
-- `update_orbit_paths(center_object_name)` (line 2929) -- For each object in the global 'objects' list that has an 'id', check if its orbit path is
-- `plot_orbit_paths(fig, objects_to_plot, center_object_name)` (line 3027) -- Plot orbit paths using data from orbit_data_manager or temp cache.
-- `plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id, show_lines, center_object_name, show_closest_approach, trajectory_marker_color)` (line 3081) -- Plot actual orbit positions for selected objects.
-- `export_social_view()` (line 3482) -- Export the last plotted figure as a social media view.
-- `plot_objects()` (line 3509)
-- `animate_objects(step, label)` (line 5308)
-- `on_closing()` (line 6992) -- Handle cleanup when the main window is closed.
-- `periodic_config_save()` (line 7017)
-- `set_palomas_birthday()` (line 7024)
-- `update_date_fields(new_date)` (line 7028)
-- `fill_now()` (line 7041)
-- `calculate_next_vernal_equinox(from_date)` (line 7068) -- Calculate the next vernal equinox (March equinox) from a given date.
-- `fill_next_vernal_equinox()` (line 7138) -- Fill the date fields with the next vernal equinox from the current date.
-- `toggle_all_shells()` (line 7149) -- Toggle all sun shell checkboxes based on the main shell checkbox.
-- `handle_mission_selection()` (line 7181)
-- `animate_one_minute()` (line 7187)
-- `animate_one_hour()` (line 7193)
-- `animate_one_day()` (line 7198)
-- `animate_one_week()` (line 7204)
-- `animate_one_month()` (line 7209)
-- `animate_one_year()` (line 7214)
-- `animate_palomas_birthday()` (line 7219)
-- `report_callback_exception(exc_type, exc_value, exc_traceback)` (line 7249)
-- `sync_end_date_from_days()` (line 7261) -- Calculate end date from start date + days to plot
-- `sync_days_from_dates()` (line 7292) -- Calculate days to plot from start and end dates
-- `sync_days_from_dates()` (line 7304) -- Calculate days to plot from start and end dates
-- `sync_end_date_from_days()` (line 7403) -- Calculate end date from start date + days to plot
-- `sync_days_from_dates()` (line 7435) -- Calculate days to plot from start and end dates
-- `get_end_date_from_gui()` (line 7447) -- Get end date from GUI fields. Defaults empty fields to avoid crash.
-- `can_be_horizons_center(obj)` (line 7479) -- Check if object can be used as Horizons coordinate center.
-- `create_celestial_checkbutton(name, variable)` (line 7581)
-- `create_mission_checkbutton(name, variable, dates)` (line 8111)
-- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 8567) -- Creates a checkbutton for a comet with a tooltip containing its description,
-- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 8685) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
-- `toggle_special_fetch_mode()` (line 8782) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
-- `create_exoplanet_checkbutton(name, variable, is_star)` (line 8798) -- Create checkbutton for exoplanet objects
-- `open_star_visualization()` (line 8819) -- Inform user about standalone Star Visualization executable.
-- `launch_galactic_center()` (line 8892) -- Launch the Sagittarius A* Grand Tour visualization.
-- `update_center_dropdown()` (line 9050) -- Update the center dropdown to show only Sun + selected centerable objects.
-- `setup_center_dropdown_traces()` (line 9111) -- Add traces to all object IntVars to update center dropdown on selection change.
-- `on_center_change()` (line 9129) -- Update frame title when the center object is changed.
-- `open_orbital_param_visualization()` (line 9567) -- Opens the orbital parameter visualization window by calling the
-- `restore_sash_positions()` (line 9739)
+- `get_fetch_interval_for_type(obj_type, obj_name, trajectory_interval, default_interval, satellite_interval, planetary_params)` (line 313) -- Get the appropriate fetch interval based on object type.
+- `create_dates_list_for_object(obj, obj_type, date_obj, trajectory_points, orbital_points, satellite_days, satellite_points, start_date, end_date, planetary_params, parent_planets, center_object_name, max_date, settings)` (line 334) -- Create a list of dates for plotting based on object type.
+- `handle_update_dialog(num_objects)` (line 416) -- Handle the update dialog for cache updates.
+- `get_interval_settings()` (line 478) -- Get all interval settings from the GUI entries.
+- `get_date_from_gui()` (line 552) -- Get the date from GUI entry fields.
+- `create_animation_dates(current_date, step, N)` (line 571) -- Create dates list specifically for animations.
+- `calculate_axis_range_from_orbits(selected_objects, positions, planetary_params, parent_planets, center_object_name)` (line 606) -- Calculate appropriate axis range based on orbital parameters.
+- `get_improved_axis_range(scale_var, custom_scale_entry, selected_objects, positions, planetary_params, parent_planets, center_object_name)` (line 828) -- Get axis range using improved scaling logic.
+- `get_animation_axis_range(scale_var, custom_scale_entry, objects, planetary_params, parent_planets, center_object_name)` (line 846) -- Get axis range for animations using the same logic as static plots.
+- `calculate_satellite_precession_info(selected_objects, start_date, end_date, center_object_name)` (line 867) -- Calculate precession information for selected satellites based on date range.
+- `load_window_config()` (line 1026) -- Load saved window geometry and sash positions from config file.
+- `save_window_config()` (line 1036) -- Save current window geometry and sash positions to config file.
+- `fetch_position(object_id, date_obj, center_id, id_type, override_location, mission_url, mission_info)` (line 1157)
+- `calculate_analytical_position(obj_name, date_obj, center_id)` (line 1633) -- Calculate position from analytical orbital elements when Horizons is unavailable.
+- `fetch_radec_for_hover(object_id, date_obj, id_type)` (line 1716) -- Fetch RA/Dec and uncertainties for hover text
+- `add_celestial_object(fig, obj_data, name, color, symbol, marker_size, hover_data, center_object_name)` (line 1786)
+- `update_status_display(message, status_type)` (line 1859) -- Update status display with color coding and history
+- `configure_controls_canvas(event)` (line 1898)
+- `class ScrollableFrame` (line 2684) -- A scrollable frame that can contain multiple widgets with a vertical scrollbar.
+- `class CreateToolTip` (line 2785) -- Create a tooltip for a given widget with intelligent positioning to prevent clipping.
+- `pulse_progress_bar()` (line 2942) -- Create a pulsating effect for the progress bar
+- `update_orbit_paths(center_object_name)` (line 2948) -- For each object in the global 'objects' list that has an 'id', check if its orbit path is
+- `plot_orbit_paths(fig, objects_to_plot, center_object_name)` (line 3046) -- Plot orbit paths using data from orbit_data_manager or temp cache.
+- `plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id, show_lines, center_object_name, show_closest_approach, trajectory_marker_color)` (line 3119) -- Plot actual orbit positions for selected objects.
+- `export_social_view()` (line 3578) -- Export the last plotted figure as a social media view.
+- `plot_objects()` (line 3605)
+- `animate_objects(step, label)` (line 5451)
+- `on_closing()` (line 7174) -- Handle cleanup when the main window is closed.
+- `periodic_config_save()` (line 7199)
+- `set_palomas_birthday()` (line 7206)
+- `update_date_fields(new_date)` (line 7210)
+- `fill_now()` (line 7223)
+- `calculate_next_vernal_equinox(from_date)` (line 7250) -- Calculate the next vernal equinox (March equinox) from a given date.
+- `fill_next_vernal_equinox()` (line 7320) -- Fill the date fields with the next vernal equinox from the current date.
+- `toggle_all_shells()` (line 7331) -- Toggle all sun shell checkboxes based on the main shell checkbox.
+- `handle_mission_selection()` (line 7363)
+- `animate_one_minute()` (line 7369)
+- `animate_one_hour()` (line 7375)
+- `animate_one_day()` (line 7380)
+- `animate_one_week()` (line 7386)
+- `animate_one_month()` (line 7391)
+- `animate_one_year()` (line 7396)
+- `animate_palomas_birthday()` (line 7401)
+- `report_callback_exception(exc_type, exc_value, exc_traceback)` (line 7431)
+- `sync_end_date_from_days()` (line 7443) -- Calculate end date from start date + days to plot
+- `sync_days_from_dates()` (line 7474) -- Calculate days to plot from start and end dates
+- `sync_days_from_dates()` (line 7486) -- Calculate days to plot from start and end dates
+- `sync_end_date_from_days()` (line 7585) -- Calculate end date from start date + days to plot
+- `sync_days_from_dates()` (line 7617) -- Calculate days to plot from start and end dates
+- `get_end_date_from_gui()` (line 7629) -- Get end date from GUI fields. Defaults empty fields to avoid crash.
+- `can_be_horizons_center(obj)` (line 7661) -- Check if object can be used as Horizons coordinate center.
+- `create_celestial_checkbutton(name, variable)` (line 7763)
+- `create_mission_checkbutton(name, variable, dates)` (line 8298)
+- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 8755) -- Creates a checkbutton for a comet with a tooltip containing its description,
+- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 8873) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
+- `toggle_special_fetch_mode()` (line 8970) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
+- `create_exoplanet_checkbutton(name, variable, is_star)` (line 8986) -- Create checkbutton for exoplanet objects
+- `open_star_visualization()` (line 9007) -- Inform user about standalone Star Visualization executable.
+- `launch_galactic_center()` (line 9080) -- Launch the Sagittarius A* Grand Tour visualization.
+- `update_center_dropdown()` (line 9238) -- Update the center dropdown to show only Sun + selected centerable objects.
+- `setup_center_dropdown_traces()` (line 9299) -- Add traces to all object IntVars to update center dropdown on selection change.
+- `on_center_change()` (line 9317) -- Update frame title when the center object is changed.
+- `open_orbital_param_visualization()` (line 9755) -- Opens the orbital parameter visualization window by calling the
+- `restore_sash_positions()` (line 9927)
 
 ---
 
 ### palomas_orrery_dashboard.py
 
-**Role:** gui | **Lines:** 600
+**Role:** gui | **Lines:** 631
 
 > Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite.
 
@@ -254,8 +211,8 @@ and explains in context.
 
 **Public functions:**
 
-- `class PalomasOrreryDashboard` (line 175) -- Main dashboard window.
-- `main()` (line 697)
+- `class PalomasOrreryDashboard` (line 192) -- Main dashboard window.
+- `main()` (line 730)
 
 ---
 
@@ -265,7 +222,7 @@ and explains in context.
 
 > star_visualization_gui.py - Stellar visualization GUI for Paloma's Orrery.
 
-**Depends on:** constants_new, hr_diagram_apparent_magnitude, hr_diagram_distance, info_dictionary, json_converter, planetarium_apparent_magnitude, planetarium_distance, plot_data_exchange, plot_data_report_widget, report_manager, save_utils, social_media_export, star_notes
+**Depends on:** constants_new, hr_diagram_apparent_magnitude, hr_diagram_distance, info_dictionary, planetarium_apparent_magnitude, planetarium_distance, plot_data_exchange, plot_data_report_widget, report_manager, save_utils, social_media_export, star_notes
 **Consumed by:** (none -- standalone)
 
 **Public functions:**
@@ -447,39 +404,39 @@ and explains in context.
 
 ### planet_visualization.py
 
-**Role:** rendering | **Lines:** 1,027
+**Role:** rendering | **Lines:** 751
 
 > planet_visualization.py - High-level planet and Sun visualization orchestration.
 
-**Depends on:** asteroid_belt_visualization_shells, constants_new, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, planet9_visualization_shells, planet_visualization_utilities, pluto_visualization_shells, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
+**Depends on:** asteroid_belt_visualization_shells, constants_new, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, orrery_rendering, planet9_visualization_shells, planet_visualization_utilities, pluto_visualization_shells, saturn_visualization_shells, shared_utilities, shell_configs, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
 **Consumed by:** palomas_orrery, palomas_orrery_helpers
 
 **Public functions:**
 
-- `create_sun_visualization(fig, sun_shell_vars, animate, frames)` (line 301) -- Creates a visualization of the Sun's layers based on which shells are selected.
-- `create_sun_corona_from_distance(fig, sun_shell_vars, sun_position)` (line 415) -- Creates a simplified Sun corona visualization for non-Sun-centered views.
-- `create_celestial_body_visualization(fig, body_name, shell_vars, animate, frames, center_position)` (line 535) -- Unified function to create shell visualizations for any celestial body (Sun or planets).
-- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position)` (line 875) -- Creates a visualization of a planet's layers based on which shells are selected.
-- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 1111) -- Creates traces for planet shells without adding them to a figure.
+- `create_sun_visualization(fig, sun_shell_vars, animate, frames)` (line 299) -- Creates a visualization of the Sun's layers based on which shells are selected.
+- `create_sun_corona_from_distance(fig, sun_shell_vars, sun_position)` (line 413) -- Creates a simplified Sun corona visualization for non-Sun-centered views.
+- `create_celestial_body_visualization(fig, body_name, shell_vars, animate, frames, center_position, object_type, center_object)` (line 533) -- Unified config-driven dispatch for celestial body shell visualization.
+- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position)` (line 644) -- Creates a visualization of a planet's layers based on which shells are selected.
+- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 825) -- Creates traces for planet shells without adding them to a figure.
 
 ---
 
 ### planet_visualization_utilities.py
 
-**Role:** rendering | **Lines:** 297
+**Role:** rendering | **Lines:** 293
 
 > planet_visualization_utilities.py - Shared geometry helpers and body-radius aliases.
 
 **Depends on:** constants_new
-**Consumed by:** comet_visualization_shells, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, planet9_visualization_shells, planet_visualization, pluto_visualization_shells, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
+**Consumed by:** comet_visualization_shells, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, orrery_rendering, planet9_visualization_shells, planet_visualization, pluto_visualization_shells, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
 
 **Public functions:**
 
-- `rotate_points(x, y, z, angle, axis)` (line 103) -- Rotate points around a specified axis by the given angle.
-- `create_hover_markers_for_planet(center_position, radius, color, name, description, num_points)` (line 151) -- Creates clean hover markers for a planet with proper hover text formatting.
-- `create_magnetosphere_shape(params)` (line 208) -- Creates points for a magnetosphere with asymmetry, compressed on sunward side
-- `create_sphere_points(radius, n_points)` (line 262) -- Create points for a sphere surface to represent celestial body layers.
-- `create_sun_direction_indicator_old(center_position)` (line 283) -- Creates a visual indicator showing the direction to the Sun (along negative X-axis).
+- `rotate_points(x, y, z, angle, axis)` (line 109) -- Rotate points around a specified axis by the given angle.
+- `create_hover_markers_for_planet(center_position, radius, color, name, description, num_points)` (line 157) -- Creates clean hover markers for a planet with proper hover text formatting.
+- `create_magnetosphere_shape(params)` (line 205) -- Creates points for a magnetosphere with asymmetry, compressed on sunward side
+- `create_sphere_points(radius, n_points)` (line 259) -- Create points for a sphere surface to represent celestial body layers.
+- `create_sun_direction_indicator_old(center_position)` (line 280) -- Creates a visual indicator showing the direction to the Sun (along negative X-axis).
 
 ---
 
@@ -706,7 +663,7 @@ and explains in context.
 > visualization_utils.py - Shared Plotly utilities for orrery and star visualizations.
 
 **Depends on:** celestial_coordinates, formatting_utils, idealized_orbits
-**Consumed by:** gallery_studio, palomas_orrery, palomas_orrery_helpers, visualization_2d
+**Consumed by:** palomas_orrery, palomas_orrery_helpers, visualization_2d
 
 **Public functions:**
 
@@ -724,7 +681,7 @@ and explains in context.
 
 ### asteroid_belt_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 410
+**Role:** rendering/shells | **Lines:** 430
 
 > Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location.
 
@@ -737,15 +694,15 @@ and explains in context.
 - `get_jupiter_angle_from_data(ephemeris_data, date_index)` (line 35) -- Extract Jupiter's angle from ephemeris data.
 - `estimate_jupiter_angle_from_date(date_str)` (line 61) -- Estimate Jupiter's orbital angle from a date string.
 - `create_main_asteroid_belt(center_position)` (line 124) -- Creates a visualization of the main asteroid belt with density variations and Kirkwood gaps.
-- `create_hilda_group(center_position)` (line 245) -- Creates a visualization of the Hilda asteroid group showing triangular structure.
-- `create_jupiter_trojans_greeks(center_position, jupiter_angle)` (line 338) -- Creates a visualization of Jupiter's L4 Trojan asteroids (Greek camp).
-- `create_jupiter_trojans_trojans(center_position, jupiter_angle)` (line 430) -- Creates a visualization of Jupiter's L5 Trojan asteroids (Trojan camp).
+- `create_hilda_group(center_position)` (line 250) -- Creates a visualization of the Hilda asteroid group showing triangular structure.
+- `create_jupiter_trojans_greeks(center_position, jupiter_angle)` (line 349) -- Creates a visualization of Jupiter's L4 Trojan asteroids (Greek camp).
+- `create_jupiter_trojans_trojans(center_position, jupiter_angle)` (line 446) -- Creates a visualization of Jupiter's L5 Trojan asteroids (Trojan camp).
 
 ---
 
 ### comet_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,688
+**Role:** rendering/shells | **Lines:** 1,818
 
 > comet_visualization_shells.py - Comet visual components for 3D orrery plots.
 
@@ -754,47 +711,47 @@ and explains in context.
 
 **Public functions:**
 
-- `calculate_tail_activity_factor(current_distance_au, perihelion_distance_au, max_active_distance_au)` (line 381) -- Calculate how active the comet is based on solar distance.
-- `create_comet_nucleus(center_position, nucleus_size_km, comet_name)` (line 417) -- Creates a comet nucleus visualization as a single point.
-- `create_maps_disintegration_marker(position_au, comet_name)` (line 462)
-- `create_maps_ghost_tail_trace(fig)` (line 549) -- Ghost tail arc for MAPS C/2026 A1, overlaid on the perihelion
-- `create_comet_coma(center_position, coma_radius_km, activity_factor, comet_name)` (line 708) -- Creates the coma (atmosphere) around the nucleus.
-- `create_comet_dust_tail(center_position, velocity_vector, max_tail_length_mkm, activity_factor, comet_name, num_particles)` (line 795) -- Creates the dust tail (Type II tail).
-- `create_comet_ion_tail(center_position, max_tail_length_mkm, activity_factor, comet_name, num_particles)` (line 966) -- Creates the ion tail (Type I tail, plasma tail).
-- `create_comet_anti_tail(center_position, anti_tail_length_km, activity_factor, comet_name, anti_tail_color, collimation_ratio, num_particles)` (line 1098) -- Creates anti-tail jet structure pointing TOWARD the Sun.
-- `create_complete_comet_visualization(comet_name, center_position, velocity_vector, current_distance_au)` (line 1279) -- Creates a complete comet visualization with nucleus, coma, and both tails.
-- `add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name, current_date)` (line 1494) -- Add comet visualization to figure with feature-specific thresholds.
+- `calculate_tail_activity_factor(current_distance_au, perihelion_distance_au, max_active_distance_au)` (line 397) -- Calculate how active the comet is based on solar distance.
+- `create_comet_nucleus(center_position, nucleus_size_km, comet_name)` (line 433) -- Creates a comet nucleus visualization as a single point.
+- `create_maps_disintegration_marker(position_au, comet_name)` (line 478)
+- `create_maps_ghost_tail_trace(fig)` (line 569) -- Ghost tail arc for MAPS C/2026 A1, overlaid on the perihelion
+- `create_comet_coma(center_position, coma_radius_km, activity_factor, comet_name)` (line 731) -- Creates the coma (atmosphere) around the nucleus.
+- `create_comet_dust_tail(center_position, velocity_vector, max_tail_length_mkm, activity_factor, comet_name, num_particles, sun_relative_position)` (line 831) -- Creates the dust tail (Type II tail).
+- `create_comet_ion_tail(center_position, max_tail_length_mkm, activity_factor, comet_name, num_particles, sun_relative_position)` (line 1024) -- Creates the ion tail (Type I tail, plasma tail).
+- `create_comet_anti_tail(center_position, anti_tail_length_km, activity_factor, comet_name, anti_tail_color, collimation_ratio, num_particles, sun_relative_position)` (line 1177) -- Creates anti-tail jet structure pointing TOWARD the Sun.
+- `create_complete_comet_visualization(comet_name, center_position, velocity_vector, current_distance_au)` (line 1387) -- Creates a complete comet visualization with nucleus, coma, and both tails.
+- `add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name, current_date, sun_position)` (line 1609) -- Add comet visualization to figure with feature-specific thresholds.
 
 ---
 
 ### earth_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 846
+**Role:** rendering/shells | **Lines:** 982
 
 > earth_visualization_shells.py - Earth interior and orbital shell traces.
 
-**Depends on:** planet_visualization_utilities, shared_utilities
+**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
 **Consumed by:** planet_visualization
 
 **Public functions:**
 
-- `create_earth_inner_core_shell(center_position)` (line 29) -- Creates Earth's inner core shell.
-- `create_earth_outer_core_shell(center_position)` (line 85) -- Creates Earth's outer core shell.
-- `create_earth_lower_mantle_shell(center_position)` (line 140) -- Creates Earth's lower mantle shell.
-- `create_earth_upper_mantle_shell(center_position)` (line 194) -- Creates Earth's upper mantle shell.
-- `create_earth_crust_shell(center_position)` (line 248) -- Creates Earth's crust shell using Mesh3d for better performance with improved hover.
-- `create_earth_atmosphere_shell(center_position)` (line 405) -- Creates Earth's lower atmosphere shell.
-- `create_earth_upper_atmosphere_shell(center_position)` (line 460) -- Creates Earth's upper atmosphere shell.
-- `create_earth_magnetosphere_shell(center_position)` (line 532) -- Creates Earth's magnetosphere.
-- `create_earth_leo_shell(center_position)` (line 752) -- Creates a representation of Earth's Low Earth Orbit (LEO) shell.
-- `create_earth_geostationary_belt_shell(center_position)` (line 850) -- Creates a representation of Earth's geostationary satellite belt at 42,164 km.
-- `create_earth_hill_sphere_shell(center_position)` (line 938) -- Creates Earth's Hill sphere.
+- `create_earth_inner_core_shell(center_position)` (line 36) -- Creates Earth's inner core shell.
+- `create_earth_outer_core_shell(center_position)` (line 108) -- Creates Earth's outer core shell.
+- `create_earth_lower_mantle_shell(center_position)` (line 179) -- Creates Earth's lower mantle shell.
+- `create_earth_upper_mantle_shell(center_position)` (line 249) -- Creates Earth's upper mantle shell.
+- `create_earth_crust_shell(center_position)` (line 319) -- Creates Earth's crust shell using Mesh3d for better performance with improved hover.
+- `create_earth_atmosphere_shell(center_position)` (line 472) -- Creates Earth's lower atmosphere shell.
+- `create_earth_upper_atmosphere_shell(center_position)` (line 544) -- Creates Earth's upper atmosphere shell.
+- `create_earth_magnetosphere_shell(center_position)` (line 633) -- Creates Earth's magnetosphere.
+- `create_earth_leo_shell(center_position)` (line 872) -- Creates a representation of Earth's Low Earth Orbit (LEO) shell.
+- `create_earth_geostationary_belt_shell(center_position)` (line 978) -- Creates a representation of Earth's geostationary satellite belt at 42,164 km.
+- `create_earth_hill_sphere_shell(center_position)` (line 1074) -- Creates Earth's Hill sphere.
 
 ---
 
 ### eris_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 407
+**Role:** rendering/shells | **Lines:** 462
 
 > eris_visualization_shells.py - Eris interior and boundary shell traces.
 
@@ -803,86 +760,80 @@ and explains in context.
 
 **Public functions:**
 
-- `create_eris_core_shell(center_position)` (line 28) -- Creates Eris's core shell.
-- `create_eris_mantle_shell(center_position)` (line 107) -- Creates Eris's mantle shell.
-- `create_eris_crust_shell(center_position)` (line 163) -- Creates eris's cloud layer shell.
-- `create_eris_atmosphere_shell(center_position)` (line 327) -- Creates eris's atmosphere shell.
-- `create_eris_hill_sphere_shell(center_position)` (line 410) -- Creates Eris's Hill sphere shell.
+- `create_eris_core_shell(center_position)` (line 37) -- Creates Eris's core shell.
+- `create_eris_mantle_shell(center_position)` (line 130) -- Creates Eris's mantle shell.
+- `create_eris_crust_shell(center_position)` (line 203) -- Creates eris's cloud layer shell.
+- `create_eris_atmosphere_shell(center_position)` (line 360) -- Creates eris's atmosphere shell.
+- `create_eris_hill_sphere_shell(center_position)` (line 460) -- Creates Eris's Hill sphere shell.
 
 ---
 
 ### jupiter_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 778
+**Role:** rendering/shells | **Lines:** 843
 
 > jupiter_visualization_shells.py - Jupiter interior, ring, and magnetosphere shell traces.
 
-**Depends on:** planet_visualization_utilities, shared_utilities
+**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
 **Consumed by:** planet_visualization
 
 **Public functions:**
 
-- `create_ring_points_jupiter(inner_radius, outer_radius, n_points, thickness)` (line 19) -- Create points for a ring structure (for planets like Saturn).
-- `create_jupiter_core_shell(center_position)` (line 69) -- Creates Jupiter's core shell.
-- `create_jupiter_metallic_hydrogen_shell(center_position)` (line 123) -- Creates Jupiter's metallic hydrogen shell.
-- `create_jupiter_molecular_hydrogen_shell(center_position)` (line 178) -- Creates Jupiter's molecular hydrogen shell.
-- `create_jupiter_cloud_layer_shell(center_position)` (line 236) -- Creates Jupiter's cloud layer shell.
-- `create_jupiter_upper_atmosphere_shell(center_position)` (line 397) -- Creates Jupiter's upper atmosphere shell.
-- `create_jupiter_magnetosphere(center_position)` (line 452) -- Creates Jupiter's main magnetosphere structure.
-- `create_jupiter_io_plasma_torus(center_position)` (line 516) -- Creates Jupiter's Io plasma torus.
-- `create_jupiter_radiation_belts(center_position)` (line 599) -- Creates Jupiter's radiation belts.
-- `create_jupiter_hill_sphere_shell(center_position)` (line 693) -- Creates Jupiter's Hill sphere shell.
-- `create_jupiter_ring_system(center_position)` (line 775) -- Creates a visualization of Jupiter's ring system.
+- `create_ring_points_jupiter(inner_radius, outer_radius, n_points, thickness)` (line 24) -- Create points for a ring structure (for planets like Saturn).
+- `create_jupiter_core_shell(center_position)` (line 76) -- Creates Jupiter's core shell.
+- `create_jupiter_metallic_hydrogen_shell(center_position)` (line 146) -- Creates Jupiter's metallic hydrogen shell.
+- `create_jupiter_molecular_hydrogen_shell(center_position)` (line 217) -- Creates Jupiter's molecular hydrogen shell.
+- `create_jupiter_cloud_layer_shell(center_position)` (line 291) -- Creates Jupiter's cloud layer shell.
+- `create_jupiter_upper_atmosphere_shell(center_position)` (line 447) -- Creates Jupiter's upper atmosphere shell.
+- `create_jupiter_magnetosphere(center_position)` (line 516) -- Creates Jupiter's main magnetosphere structure.
+- `create_jupiter_io_plasma_torus(center_position)` (line 579) -- Creates Jupiter's Io plasma torus.
+- `create_jupiter_radiation_belts(center_position)` (line 659) -- Creates Jupiter's radiation belts.
+- `create_jupiter_hill_sphere_shell(center_position)` (line 749) -- Creates Jupiter's Hill sphere shell.
+- `create_jupiter_ring_system(center_position)` (line 845) -- Creates a visualization of Jupiter's ring system.
 
 ---
 
 ### mars_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 710
+**Role:** rendering/shells | **Lines:** 806
 
 > mars_visualization_shells.py - Mars interior and remnant field shell traces.
 
-**Depends on:** planet_visualization_utilities, shared_utilities
+**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
 **Consumed by:** planet_visualization
 
 **Public functions:**
 
-- `create_mars_inner_core_shell(center_position)` (line 26) -- Creates Mars's inner core shell.
-- `create_mars_outer_core_shell(center_position)` (line 104) -- Creates Mars's outer core shell.
-- `create_mars_mantle_shell(center_position)` (line 173) -- Creates Mars's mantle shell.
-- `create_mars_crust_shell(center_position)` (line 228) -- Creates Mars's crust shell using Mesh3d for better performance with improved hover.
-- `create_mars_atmosphere_shell(center_position)` (line 386) -- Creates Mars's lower atmosphere shell.
-- `create_mars_upper_atmosphere_shell(center_position)` (line 454) -- Creates Mars's upper atmosphere shell.
-- `create_mars_magnetosphere_shell(center_position)` (line 527) -- Creates Mars' induced magnetosphere and localized crustal magnetic fields.
-- `create_mars_hill_sphere_shell(center_position)` (line 749) -- Creates Mars's Hill sphere.
+- `create_mars_inner_core_shell(center_position)` (line 30) -- Creates Mars's inner core shell.
+- `create_mars_outer_core_shell(center_position)` (line 122) -- Creates Mars's outer core shell.
+- `create_mars_mantle_shell(center_position)` (line 205) -- Creates Mars's mantle shell.
+- `create_mars_crust_shell(center_position)` (line 274) -- Creates Mars's crust shell using Mesh3d for better performance with improved hover.
+- `create_mars_atmosphere_shell(center_position)` (line 425) -- Creates Mars's lower atmosphere shell.
+- `create_mars_upper_atmosphere_shell(center_position)` (line 509) -- Creates Mars's upper atmosphere shell.
+- `create_mars_magnetosphere_shell(center_position)` (line 598) -- Creates Mars' induced magnetosphere and localized crustal magnetic fields.
+- `create_mars_hill_sphere_shell(center_position)` (line 842) -- Creates Mars's Hill sphere.
 
 ---
 
 ### mercury_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 650
+**Role:** rendering/shells | **Lines:** 342
 
 > mercury_visualization_shells.py - Mercury interior, exosphere, and unique feature traces.
 
-**Depends on:** planet_visualization_utilities, shared_utilities
+**Depends on:** orrery_rendering, planet_visualization_utilities
 **Consumed by:** planet_visualization
 
 **Public functions:**
 
-- `create_mercury_inner_core_shell(center_position)` (line 28) -- Creates Mercury's inner core shell.
-- `create_mercury_outer_core_shell(center_position)` (line 79) -- Creates Mercury's outer core shell.
-- `create_mercury_mantle_shell(center_position)` (line 130) -- Creates Mercury's mantle shell.
-- `create_mercury_crust_shell(center_position)` (line 183) -- Creates Mercury's crust shell using Mesh3d for better performance with improved hover.
-- `create_mercury_atmosphere_shell(center_position)` (line 339) -- Creates Mercury's atmosphere shell.
-- `create_mercury_sodium_tail(center_position)` (line 417) -- Creates Mercury's sodium tail visualization extending away from the Sun.
-- `create_mercury_magnetosphere_shell(center_position)` (line 533) -- Creates Mercury's magnetosphere.
-- `create_mercury_hill_sphere_shell(center_position)` (line 705) -- Creates Mercury's Hill sphere.
+- `create_mercury_sodium_tail(center_position)` (line 90) -- Creates Mercury's sodium tail visualization extending away from the Sun.
+- `create_mercury_magnetosphere_shell(center_position)` (line 214) -- Creates Mercury's magnetosphere.
 
 ---
 
 ### moon_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 442
+**Role:** rendering/shells | **Lines:** 511
 
 > moon_visualization_shells.py - Lunar interior and exosphere shell traces.
 
@@ -891,43 +842,42 @@ and explains in context.
 
 **Public functions:**
 
-- `create_moon_inner_core_shell(center_position)` (line 25) -- Creates the Moon's inner core shell.
-- `create_moon_outer_core_shell(center_position)` (line 77) -- Creates the Moon's outer core shell.
-- `create_moon_mantle_shell(center_position)` (line 139) -- Creates the Moon's lower mantle shell.
-- `create_moon_crust_shell(center_position)` (line 213) -- Creates Earth's crust shell using Mesh3d for better performance with improved hover.
-- `create_moon_exosphere_shell(center_position)` (line 396) -- Creates the Moon's exosphere shell.
-- `create_moon_hill_sphere_shell(center_position)` (line 459) -- Creates the Moon's Hill sphere.
+- `create_moon_inner_core_shell(center_position)` (line 31) -- Creates the Moon's inner core shell.
+- `create_moon_outer_core_shell(center_position)` (line 99) -- Creates the Moon's outer core shell.
+- `create_moon_mantle_shell(center_position)` (line 179) -- Creates the Moon's lower mantle shell.
+- `create_moon_crust_shell(center_position)` (line 270) -- Creates Earth's crust shell using Mesh3d for better performance with improved hover.
+- `create_moon_exosphere_shell(center_position)` (line 446) -- Creates the Moon's exosphere shell.
+- `create_moon_hill_sphere_shell(center_position)` (line 525) -- Creates the Moon's Hill sphere.
 
 ---
 
 ### neptune_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,513
+**Role:** rendering/shells | **Lines:** 1,505
 
 > neptune_visualization_shells.py - Neptune interior, ring, and magnetosphere shell traces.
 
-**Depends on:** planet_visualization_utilities, saturn_visualization_shells, shared_utilities
-**Consumed by:** planet_visualization
+**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
+**Consumed by:** planet_visualization, shell_configs
 
 **Public functions:**
 
-- `create_neptune_core_shell(center_position)` (line 29) -- Creates Neptune's core shell.
-- `create_neptune_mantle_shell(center_position)` (line 86) -- Creates Neptune's mantle shell.
-- `create_neptune_cloud_layer_shell(center_position)` (line 157) -- Creates neptune's cloud layer shell.
-- `create_neptune_upper_atmosphere_shell(center_position)` (line 326) -- Creates Neptune's upper atmosphere shell.
-- `create_neptune_magnetosphere(center_position)` (line 414) -- Creates Neptune's main magnetosphere structure with proper tilt and offset.
-- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 570) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
-- `create_neptune_field_lines(mag_center_x, mag_center_y, mag_center_z, north_x, north_y, north_z, south_x, south_y, south_z, neptune_radius, tilt, azimuth)` (line 704) -- Creates a simple visualization of Neptune's magnetic field lines.
-- `create_neptune_radiation_belts(center_position)` (line 801) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
-- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 1027) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
-- `create_neptune_ring_system(center_position)` (line 1169) -- Creates a visualization of Neptune's ring system with proper alignment.
-- `create_neptune_hill_sphere_shell(center_position)` (line 1667) -- Creates neptune's Hill sphere shell.
+- `create_neptune_core_shell(center_position)` (line 37) -- Creates Neptune's core shell.
+- `create_neptune_mantle_shell(center_position)` (line 112) -- Creates Neptune's mantle shell.
+- `create_neptune_cloud_layer_shell(center_position)` (line 201) -- Creates neptune's cloud layer shell.
+- `create_neptune_upper_atmosphere_shell(center_position)` (line 365) -- Creates Neptune's upper atmosphere shell.
+- `create_neptune_magnetosphere(center_position, sun_position)` (line 462) -- Creates Neptune's main magnetosphere structure with proper tilt and offset.
+- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 630) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
+- `create_neptune_radiation_belts(center_position)` (line 769) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
+- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 992) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
+- `create_neptune_ring_system(center_position)` (line 1134) -- Creates a visualization of Neptune's ring system with proper alignment.
+- `create_neptune_hill_sphere_shell(center_position)` (line 1642) -- Creates neptune's Hill sphere shell.
 
 ---
 
 ### planet9_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 243
+**Role:** rendering/shells | **Lines:** 264
 
 > planet9_visualization_shells.py - Hypothetical Planet 9 shell traces.
 
@@ -936,14 +886,14 @@ and explains in context.
 
 **Public functions:**
 
-- `create_planet9_surface_shell(center_position)` (line 29) -- Creates eris's cloud layer shell.
-- `create_planet9_hill_sphere_shell(center_position)` (line 204) -- Creates Planet 9's Hill sphere shell.
+- `create_planet9_surface_shell(center_position)` (line 37) -- Creates eris's cloud layer shell.
+- `create_planet9_hill_sphere_shell(center_position)` (line 212) -- Creates Planet 9's Hill sphere shell.
 
 ---
 
 ### pluto_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 484
+**Role:** rendering/shells | **Lines:** 564
 
 > pluto_visualization_shells.py - Pluto interior and atmosphere shell traces.
 
@@ -952,43 +902,42 @@ and explains in context.
 
 **Public functions:**
 
-- `create_pluto_core_shell(center_position)` (line 27) -- Creates pluto's core shell.
-- `create_pluto_mantle_shell(center_position)` (line 96) -- Creates pluto's mantle shell.
-- `create_pluto_crust_shell(center_position)` (line 160) -- Creates pluto's cloud layer shell.
-- `create_pluto_haze_layer_shell(center_position)` (line 331) -- Creates pluto's haze layer shell.
-- `create_pluto_atmosphere_shell(center_position)` (line 413) -- Creates pluto's atmosphere shell.
-- `create_pluto_hill_sphere_shell(center_position)` (line 495) -- Creates pluto's Hill sphere shell.
+- `create_pluto_core_shell(center_position)` (line 33) -- Creates pluto's core shell.
+- `create_pluto_mantle_shell(center_position)` (line 120) -- Creates pluto's mantle shell.
+- `create_pluto_crust_shell(center_position)` (line 202) -- Creates pluto's cloud layer shell.
+- `create_pluto_haze_layer_shell(center_position)` (line 370) -- Creates pluto's haze layer shell.
+- `create_pluto_atmosphere_shell(center_position)` (line 470) -- Creates pluto's atmosphere shell.
+- `create_pluto_hill_sphere_shell(center_position)` (line 570) -- Creates pluto's Hill sphere shell.
 
 ---
 
 ### saturn_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,002
+**Role:** rendering/shells | **Lines:** 1,040
 
 > saturn_visualization_shells.py - Saturn interior, ring, and magnetosphere shell traces.
 
-**Depends on:** planet_visualization_utilities, shared_utilities
-**Consumed by:** neptune_visualization_shells, planet_visualization, uranus_visualization_shells
+**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
+**Consumed by:** planet_visualization, shell_configs
 
 **Public functions:**
 
-- `create_ring_points_saturn(inner_radius, outer_radius, n_points, thickness)` (line 18) -- Create points for a ring with inner and outer radius.
-- `create_saturn_core_shell(center_position)` (line 61) -- Creates saturn's core shell.
-- `create_saturn_metallic_hydrogen_shell(center_position)` (line 131) -- Creates Saturn's liquid metallic hydrogen shell.
-- `create_saturn_molecular_hydrogen_shell(center_position)` (line 192) -- Creates Saturn's molecular hydrogen shell.
-- `create_saturn_cloud_layer_shell(center_position)` (line 256) -- Creates Saturn's cloud layer shell.
-- `create_saturn_upper_atmosphere_shell(center_position)` (line 464) -- Creates Saturn's upper atmosphere shell.
-- `create_saturn_magnetosphere(center_position)` (line 566) -- Creates Saturn's main magnetosphere structure.
-- `create_saturn_enceladus_plasma_torus(center_position)` (line 631) -- Creates Saturn's Enceladus plasma torus.
-- `create_saturn_radiation_belts(center_position)` (line 737) -- Creates Saturn's radiation belts.
-- `create_saturn_hill_sphere_shell(center_position)` (line 875) -- Creates Saturn's Hill sphere shell.
-- `create_saturn_ring_system(center_position)` (line 954) -- Creates a visualization of Saturn's ring system.
+- `create_saturn_core_shell(center_position)` (line 35) -- Creates saturn's core shell.
+- `create_saturn_metallic_hydrogen_shell(center_position)` (line 121) -- Creates Saturn's liquid metallic hydrogen shell.
+- `create_saturn_molecular_hydrogen_shell(center_position)` (line 198) -- Creates Saturn's molecular hydrogen shell.
+- `create_saturn_cloud_layer_shell(center_position)` (line 278) -- Creates Saturn's cloud layer shell.
+- `create_saturn_upper_atmosphere_shell(center_position)` (line 481) -- Creates Saturn's upper atmosphere shell.
+- `create_saturn_magnetosphere(center_position)` (line 599) -- Creates Saturn's main magnetosphere structure.
+- `create_saturn_enceladus_plasma_torus(center_position)` (line 665) -- Creates Saturn's Enceladus plasma torus.
+- `create_saturn_radiation_belts(center_position)` (line 769) -- Creates Saturn's radiation belts.
+- `create_saturn_hill_sphere_shell(center_position)` (line 894) -- Creates Saturn's Hill sphere shell.
+- `create_saturn_ring_system(center_position)` (line 989) -- Creates a visualization of Saturn's ring system.
 
 ---
 
 ### solar_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,473
+**Role:** rendering/shells | **Lines:** 1,514
 
 > solar_visualization_shells.py - Sun interior, corona, and heliosphere shell traces.
 
@@ -997,71 +946,71 @@ and explains in context.
 
 **Public functions:**
 
-- `create_sun_hover_text()` (line 868)
-- `create_corona_sphere(radius, n_points)` (line 905) -- Create points for a sphere surface to represent corona layers.
-- `create_sun_gravitational_shell()` (line 941) -- Creates the Sun's gravitational influence shell.
-- `create_sun_outer_oort_shell()` (line 970) -- Creates the Sun's outer Oort cloud shell.
-- `create_sun_inner_oort_shell()` (line 999) -- Creates the Sun's inner Oort cloud shell.
-- `create_sun_inner_oort_limit_shell()` (line 1028) -- Creates the inner limit of the Sun's Oort cloud shell.
-- `create_sun_heliopause_shell()` (line 1057) -- Creates the Sun's heliopause shell.
-- `create_sun_termination_shock_shell()` (line 1086) -- Creates the Sun's termination shock shell.
-- `create_sun_outer_corona_shell()` (line 1115) -- Creates the Sun's extended outer corona (F-corona) shell.
-- `create_sun_inner_corona_shell()` (line 1144) -- Creates the Sun's inner corona (K-corona) shell.
-- `create_sun_streamer_belt_shell()` (line 1173) -- Visible white-light corona / helmet streamer belt: ~4-6 solar radii.
-- `create_sun_roche_limit_shell()` (line 1206) -- Fluid Roche limit for cometary bodies: ~3.45 solar radii (~0.016 AU).
-- `create_sun_alfven_surface_shell()` (line 1242) -- Alfven surface: the true outer boundary of the solar corona (~18.8 solar radii,
-- `create_sun_chromosphere_shell()` (line 1277) -- Creates the Sun's chromosphere shell.
-- `create_sun_photosphere_shell()` (line 1306) -- Creates the Sun's photosphere shell (the visible solar surface).
-- `create_sun_radiative_shell()` (line 1335) -- Creates the Sun's radiative zone shell.
-- `create_sun_core_shell()` (line 1364) -- Creates the Sun's core shell.
-- `create_sun_hills_cloud_torus(inner_radius, outer_radius, thickness_ratio)` (line 1404) -- Create a toroidal (doughnut-shaped) Hills Cloud structure.
-- `create_sun_outer_oort_clumpy(radius_min, radius_max, n_clumps)` (line 1467) -- Create a clumpy, asymmetric outer Oort Cloud with density variations.
-- `create_sun_galactic_tide(radius, n_points)` (line 1537) -- Create Oort Cloud structure influenced by galactic tidal forces.
-- `create_enhanced_oort_cloud_visualization()` (line 1588) -- Create a more scientifically accurate Oort Cloud visualization.
-- `create_oort_cloud_density_visualization()` (line 1656) -- Alternative approach: Show Oort Cloud as density gradients rather than discrete shells.
+- `create_sun_hover_text()` (line 895)
+- `create_corona_sphere(radius, n_points)` (line 932) -- Create points for a sphere surface to represent corona layers.
+- `create_sun_gravitational_shell()` (line 968) -- Creates the Sun's gravitational influence shell.
+- `create_sun_outer_oort_shell()` (line 997) -- Creates the Sun's outer Oort cloud shell.
+- `create_sun_inner_oort_shell()` (line 1026) -- Creates the Sun's inner Oort cloud shell.
+- `create_sun_inner_oort_limit_shell()` (line 1055) -- Creates the inner limit of the Sun's Oort cloud shell.
+- `create_sun_heliopause_shell()` (line 1084) -- Creates the Sun's heliopause shell.
+- `create_sun_termination_shock_shell()` (line 1113) -- Creates the Sun's termination shock shell.
+- `create_sun_outer_corona_shell()` (line 1142) -- Creates the Sun's extended outer corona (F-corona) shell.
+- `create_sun_inner_corona_shell()` (line 1171) -- Creates the Sun's inner corona (K-corona) shell.
+- `create_sun_streamer_belt_shell()` (line 1200) -- Visible white-light corona / helmet streamer belt: ~4-6 solar radii.
+- `create_sun_roche_limit_shell()` (line 1235) -- Fluid Roche limit for cometary bodies: ~3.45 solar radii (~0.016 AU).
+- `create_sun_alfven_surface_shell()` (line 1271) -- Alfven surface: the true outer boundary of the solar corona (~18.8 solar radii,
+- `create_sun_chromosphere_shell()` (line 1306) -- Creates the Sun's chromosphere shell.
+- `create_sun_photosphere_shell()` (line 1335) -- Creates the Sun's photosphere shell (the visible solar surface).
+- `create_sun_radiative_shell()` (line 1364) -- Creates the Sun's radiative zone shell.
+- `create_sun_core_shell()` (line 1393) -- Creates the Sun's core shell.
+- `create_sun_hills_cloud_torus(inner_radius, outer_radius, thickness_ratio)` (line 1433) -- Create a toroidal (doughnut-shaped) Hills Cloud structure.
+- `create_sun_outer_oort_clumpy(radius_min, radius_max, n_clumps)` (line 1496) -- Create a clumpy, asymmetric outer Oort Cloud with density variations.
+- `create_sun_galactic_tide(radius, n_points)` (line 1566) -- Create Oort Cloud structure influenced by galactic tidal forces.
+- `create_enhanced_oort_cloud_visualization()` (line 1617) -- Create a more scientifically accurate Oort Cloud visualization.
+- `create_oort_cloud_density_visualization()` (line 1682) -- Alternative approach: Show Oort Cloud as density gradients rather than discrete shells.
 
 ---
 
 ### uranus_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 988
+**Role:** rendering/shells | **Lines:** 1,009
 
 > uranus_visualization_shells.py - Uranus interior, ring, and magnetosphere shell traces.
 
-**Depends on:** planet_visualization_utilities, saturn_visualization_shells, shared_utilities
-**Consumed by:** planet_visualization
+**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
+**Consumed by:** planet_visualization, shell_configs
 
 **Public functions:**
 
-- `create_uranus_core_shell(center_position)` (line 30) -- Creates Uranus's core shell.
-- `create_uranus_mantle_shell(center_position)` (line 85) -- Creates Uranus's matel shell.
-- `create_uranus_cloud_layer_shell(center_position)` (line 149) -- Creates Uranus's cloud layer shell.
-- `create_uranus_upper_atmosphere_shell(center_position)` (line 331) -- Creates Uranus's upper atmosphere shell.
-- `create_uranus_magnetosphere(center_position)` (line 414) -- Creates Uranus's main magnetosphere structure.
-- `create_uranus_radiation_belts(center_position)` (line 505) -- Creates Uranus's radiation belts.
-- `create_uranus_ring_system(center_position)` (line 711) -- Creates a visualization of Saturn's ring system.
-- `create_uranus_hill_sphere_shell(center_position)` (line 1063) -- Creates Uranus's Hill sphere shell.
+- `create_uranus_core_shell(center_position)` (line 33) -- Creates Uranus's core shell.
+- `create_uranus_mantle_shell(center_position)` (line 103) -- Creates Uranus's matel shell.
+- `create_uranus_cloud_layer_shell(center_position)` (line 182) -- Creates Uranus's cloud layer shell.
+- `create_uranus_upper_atmosphere_shell(center_position)` (line 358) -- Creates Uranus's upper atmosphere shell.
+- `create_uranus_magnetosphere(center_position, sun_position)` (line 449) -- Creates Uranus's main magnetosphere structure.
+- `create_uranus_radiation_belts(center_position)` (line 547) -- Creates Uranus's radiation belts.
+- `create_uranus_ring_system(center_position)` (line 728) -- Creates a visualization of Saturn's ring system.
+- `create_uranus_hill_sphere_shell(center_position)` (line 1081) -- Creates Uranus's Hill sphere shell.
 
 ---
 
 ### venus_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 619
+**Role:** rendering/shells | **Lines:** 700
 
 > venus_visualization_shells.py - Venus interior and atmosphere shell traces.
 
-**Depends on:** planet_visualization_utilities, shared_utilities
+**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
 **Consumed by:** planet_visualization
 
 **Public functions:**
 
-- `create_venus_core_shell(center_position)` (line 28) -- Creates Venus's core shell.
-- `create_venus_mantle_shell(center_position)` (line 81) -- Creates Venus's mantle shell.
-- `create_venus_crust_shell(center_position)` (line 134) -- Creates Venus's crust shell using Mesh3d for better performance with improved hover.
-- `create_venus_atmosphere_shell(center_position)` (line 293) -- Creates Venus's lower atmosphere shell.
-- `create_venus_upper_atmosphere_shell(center_position)` (line 352) -- Creates Venus's upper atmosphere shell.
-- `create_venus_magnetosphere_shell(center_position)` (line 452) -- Creates Venus's magnetosphere.
-- `create_venus_hill_sphere_shell(center_position)` (line 655) -- Creates Venus's Hill sphere.
+- `create_venus_core_shell(center_position)` (line 36) -- Creates Venus's core shell.
+- `create_venus_mantle_shell(center_position)` (line 105) -- Creates Venus's mantle shell.
+- `create_venus_crust_shell(center_position)` (line 172) -- Creates Venus's crust shell using Mesh3d for better performance with improved hover.
+- `create_venus_atmosphere_shell(center_position)` (line 324) -- Creates Venus's lower atmosphere shell.
+- `create_venus_upper_atmosphere_shell(center_position)` (line 397) -- Creates Venus's upper atmosphere shell.
+- `create_venus_magnetosphere_shell(center_position)` (line 515) -- Creates Venus's magnetosphere.
+- `create_venus_hill_sphere_shell(center_position)` (line 732) -- Creates Venus's Hill sphere.
 
 ---
 
@@ -1069,40 +1018,40 @@ and explains in context.
 
 ### apsidal_markers.py
 
-**Role:** computation | **Lines:** 1,681
+**Role:** computation | **Lines:** 1,733
 
-> Module for calculating perihelion, apohelion, perigee, and apogee dates based on current orbital positions and orbital elements.
+> apsidal_markers.py - Perihelion, aphelion, perigee, and apogee marker generation.
 
 **Depends on:** constants_new
 **Consumed by:** close_approach_data, idealized_orbits, orbital_param_viz, palomas_orrery
 
 **Public functions:**
 
-- `get_apsidal_terms(center_body)` (line 55) -- Get appropriate apsidal terminology for a given central body.
-- `calculate_orbital_angle_shift(ideal_pos, actual_pos)` (line 90) -- Calculate the angular separation between Keplerian and actual positions.
-- `create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos, ideal_pos, params, is_perihelion, center_body)` (line 120) -- Create informative hover text for apsidal markers with perturbation notes.
-- `add_actual_apsidal_markers_enhanced(fig, obj_name, params, date_range, positions_dict, color_map, center_body, is_satellite, ideal_apsides, filter_by_date_range)` (line 212) -- Enhanced version that compares actual vs Keplerian positions.
-- `calculate_exact_apsides(a, e, i, omega, Omega, rotate_points)` (line 358) -- Calculate exact apsidal positions at theta=0 (periapsis) and theta=pi (apoapsis).
-- `add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_map, fetch_failed)` (line 466) -- Add legend entries explaining why actual apsidal markers aren't shown
-- `estimate_hyperbolic_perihelion_date(current_position, q, e, date)` (line 606) -- Estimate perihelion date for hyperbolic orbits.
-- `compute_apsidal_dates_from_tp(obj_name, params, current_date)` (line 643) -- Get perihelion from TP and aphelion from Tapo.
-- `add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict, color_map, center_body, is_satellite)` (line 672) -- Add markers for actual perihelion/aphelion (or perigee/apogee) dates.
-- `fetch_positions_for_apsidal_dates(obj_id, params, date_range, center_id, id_type, is_satellite, fetch_position)` (line 824) -- Fetch actual positions for all apsidal dates within the date range.
-- `get_orbital_period_days(body_name, semi_major_axis_au)` (line 872) -- Get orbital period in Earth days for a given body.
-- `calculate_true_anomaly_from_position(x, y, z, a, e, i, omega, Omega)` (line 907) -- Calculate the true anomaly from a position in 3D space.
-- `true_to_eccentric_anomaly(true_anomaly, e)` (line 952) -- Convert true anomaly to eccentric anomaly.
-- `eccentric_to_mean_anomaly(E, e)` (line 991) -- Convert eccentric anomaly to mean anomaly.
-- `calculate_time_to_anomaly(current_M, target_M, orbital_period_days)` (line 1010) -- Calculate time to reach a target mean anomaly from current mean anomaly.
-- `calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omega, Omega, body_name)` (line 1035) -- Calculate dates for perihelion/apohelion (or perigee/apogee for satellites).
-- `add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position, orbital_params, color_map, q, center_body)` (line 1104) -- Add a perihelion/perigee marker with accurate date calculation.
-- `add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position, orbital_params, color_map, center_body)` (line 1240) -- Add an apohelion/apogee marker to the plot with accurate date calculation.
-- `add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range, marker_color, obj_info)` (line 1369) -- Find and mark the closest plotted approach point from trajectory data.
-- `solve_kepler_equation(M, e, tolerance, max_iterations)` (line 1505) -- Solve Kepler's equation M = E - e*sin(E) for eccentric anomaly E.
-- `eccentric_to_true_anomaly(E, e)` (line 1535) -- Convert eccentric anomaly to true anomaly.
-- `calculate_keplerian_position(orbital_params, current_datetime, rotate_points)` (line 1557) -- Calculate the Keplerian (analytical) position of an object at a given time.
-- `add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetime, rotate_points, center_body)` (line 1688) -- Add a Keplerian (analytical) current position marker to the plot.
-- `compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_dates)` (line 1789) -- Find the closest approach between two objects from their position time series.
-- `add_encounter_marker(fig, encounter, sc_name, target_name, color_map, obj_info)` (line 1910) -- Add an encounter marker to a 3D Plotly figure.
+- `get_apsidal_terms(center_body)` (line 74) -- Get appropriate apsidal terminology for a given central body.
+- `calculate_orbital_angle_shift(ideal_pos, actual_pos)` (line 109) -- Calculate the angular separation between Keplerian and actual positions.
+- `create_enhanced_apsidal_hover_text(obj_name, marker_type, date, actual_pos, ideal_pos, params, is_perihelion, center_body)` (line 139) -- Create informative hover text for apsidal markers with perturbation notes.
+- `add_actual_apsidal_markers_enhanced(fig, obj_name, params, date_range, positions_dict, color_map, center_body, is_satellite, ideal_apsides, filter_by_date_range)` (line 231) -- Enhanced version that compares actual vs Keplerian positions.
+- `calculate_exact_apsides(a, e, i, omega, Omega, rotate_points)` (line 377) -- Calculate exact apsidal positions at theta=0 (periapsis) and theta=pi (apoapsis).
+- `add_apsidal_range_note(fig, obj_name, perihelion_date, aphelion_date, color_map, fetch_failed)` (line 485) -- Add legend entries explaining why actual apsidal markers aren't shown
+- `estimate_hyperbolic_perihelion_date(current_position, q, e, date)` (line 625) -- Estimate perihelion date for hyperbolic orbits.
+- `compute_apsidal_dates_from_tp(obj_name, params, current_date)` (line 662) -- Get perihelion from TP and aphelion from Tapo.
+- `add_actual_apsidal_markers(fig, obj_name, params, date_range, positions_dict, color_map, center_body, is_satellite)` (line 691) -- Add markers for actual perihelion/aphelion (or perigee/apogee) dates.
+- `fetch_positions_for_apsidal_dates(obj_id, params, date_range, center_id, id_type, is_satellite, fetch_position)` (line 843) -- Fetch actual positions for all apsidal dates within the date range.
+- `get_orbital_period_days(body_name, semi_major_axis_au)` (line 891) -- Get orbital period in Earth days for a given body.
+- `calculate_true_anomaly_from_position(x, y, z, a, e, i, omega, Omega)` (line 926) -- Calculate the true anomaly from a position in 3D space.
+- `true_to_eccentric_anomaly(true_anomaly, e)` (line 971) -- Convert true anomaly to eccentric anomaly.
+- `eccentric_to_mean_anomaly(E, e)` (line 1010) -- Convert eccentric anomaly to mean anomaly.
+- `calculate_time_to_anomaly(current_M, target_M, orbital_period_days)` (line 1029) -- Calculate time to reach a target mean anomaly from current mean anomaly.
+- `calculate_apsidal_dates(date, current_x, current_y, current_z, a, e, i, omega, Omega, body_name)` (line 1054) -- Calculate dates for perihelion/apohelion (or perigee/apogee for satellites).
+- `add_perihelion_marker(fig, x, y, z, obj_name, a, e, date, current_position, orbital_params, color_map, q, center_body)` (line 1123) -- Add a perihelion/perigee marker with accurate date calculation.
+- `add_apohelion_marker(fig, x, y, z, obj_name, a, e, date, current_position, orbital_params, color_map, center_body)` (line 1259) -- Add an apohelion/apogee marker to the plot with accurate date calculation.
+- `add_closest_approach_marker(fig, positions_dict, obj_name, center_body, color_map, date_range, marker_color, obj_info, trace_qualifier)` (line 1412) -- Find and mark the closest plotted approach point from trajectory data.
+- `solve_kepler_equation(M, e, tolerance, max_iterations)` (line 1565) -- Solve Kepler's equation M = E - e*sin(E) for eccentric anomaly E.
+- `eccentric_to_true_anomaly(E, e)` (line 1595) -- Convert eccentric anomaly to true anomaly.
+- `calculate_keplerian_position(orbital_params, current_datetime, rotate_points)` (line 1617) -- Calculate the Keplerian (analytical) position of an object at a given time.
+- `add_keplerian_position_marker(fig, obj_name, orbital_params, current_datetime, rotate_points, center_body)` (line 1748) -- Add a Keplerian (analytical) current position marker to the plot.
+- `compute_pairwise_encounter(sc_positions, target_positions, sc_dates, target_dates)` (line 1852) -- Find the closest approach between two objects from their position time series.
+- `add_encounter_marker(fig, encounter, sc_name, target_name, color_map, obj_info)` (line 1973) -- Add an encounter marker to a 3D Plotly figure.
 
 ---
 
@@ -1327,57 +1276,57 @@ and explains in context.
 
 ### idealized_orbits.py
 
-**Role:** computation | **Lines:** 6,164
+**Role:** computation | **Lines:** 6,546
 
-> idealized_orbits.py - Keplerian orbit ellipse construction and satellite orbit models.
+> idealized_orbits.py - Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia...
 
 **Depends on:** apsidal_markers, constants_new, orbital_elements, osculating_cache_manager
 **Consumed by:** create_ephemeris_database, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, visualization_utils
 
 **Public functions:**
 
-- `get_planet_perturbation_note(obj_name, orbit_source)` (line 101) -- Get appropriate perturbation note for planet's Keplerian orbit hover text.
-- `get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params)` (line 199) -- Compare osculating vs mean orbital elements and return perturbation assessment HTML.
-- `add_mean_orbit_trace(fig, obj_name, mean_params, color_func)` (line 273) -- Add a mean orbit trace from orbital_elements.py (JPL epoch solution).
-- `calculate_mars_satellite_elements(date, satellite_name)` (line 379) -- Calculate time-varying orbital elements for Mars satellites
-- `calculate_jupiter_satellite_elements(date, satellite_name)` (line 437) -- Calculate time-varying orbital elements for Jupiter satellites.
-- `calculate_saturn_satellite_elements(date, satellite_name)` (line 494) -- Calculate time-varying orbital elements for Saturn satellites.
-- `test_mars_rotations(satellite_name, planetary_params, color, fig)` (line 544) -- Test multiple rotation combinations to find the best alignment
+- `get_planet_perturbation_note(obj_name, orbit_source)` (line 84) -- Get appropriate perturbation note for planet's Keplerian orbit hover text.
+- `get_mean_vs_osculating_assessment(obj_name, osc_params, mean_params)` (line 180) -- Compare osculating vs mean orbital elements and return perturbation assessment HTML.
+- `add_mean_orbit_trace(fig, obj_name, mean_params, color_func)` (line 252) -- Add a mean orbit trace from orbital_elements.py (JPL epoch solution).
+- `calculate_mars_satellite_elements(date, satellite_name)` (line 374) -- Calculate time-varying orbital elements for Mars satellites
+- `calculate_jupiter_satellite_elements(date, satellite_name)` (line 430) -- Calculate time-varying orbital elements for Jupiter satellites.
+- `calculate_saturn_satellite_elements(date, satellite_name)` (line 486) -- Calculate time-varying orbital elements for Saturn satellites.
+- `test_mars_rotations(satellite_name, planetary_params, color, fig)` (line 534) -- Test multiple rotation combinations to find the best alignment
 - `test_uranus_equatorial_transformations(satellite_name, planetary_params, color, fig)` (line 646) -- Test transformations assuming orbital elements are in Uranus's equatorial plane
-- `test_uranus_rotation_combinations(satellite_name, planetary_params, color, fig)` (line 744) -- Test multiple rotation combinations for Uranus satellites systematically
-- `debug_planet_transformation(planet_name)` (line 854) -- Print detailed information about the transformation for a specific planet
-- `debug_mars_moons(satellites_data, parent_planets)` (line 928) -- Special debug function for Mars and its moons
-- `compare_transformation_methods(fig, satellites_data, parent_planets)` (line 974) -- Plot orbits with different transformation methods for comparison
-- `test_mars_negative_tilt(fig, satellites_data)` (line 1007) -- Test hypothesis that Mars needs a negative tilt application
-- `debug_satellite_systems()` (line 1059)
-- `rotate_points(x, y, z, angle, axis)` (line 1085) -- Rotates points (x,y,z) about the given axis by 'angle' radians.
-- `plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1131) -- Plot osculating orbit for Jupiter satellites.
-- `plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1294) -- Plot osculating orbit for Saturn satellites.
-- `plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1440) -- Plot osculating orbit for Uranus satellites.
-- `plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1543) -- Plot osculating orbit for Neptune satellites.
-- `plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 1676) -- Plot osculating orbit for objects in Pluto binary system.
-- `plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show_apsidal_markers)` (line 1989) -- Plot osculating orbit for TNO (Trans-Neptunian Object) satellites.
-- `add_pluto_barycenter_marker(fig, date, charon_position)` (line 2383) -- Add the Pluto-Charon barycenter marker to Pluto-centered view.
-- `plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 2451) -- Plot osculating orbit for objects in the Orcus-Vanth binary system.
-- `add_orcus_barycenter_marker(fig, date, vanth_position)` (line 2676) -- Add the Orcus-Vanth barycenter marker to Orcus-centered view.
-- `plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 2744) -- Plot analytical orbit for Xiangliu around Gonggong.
-- `plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 2933) -- Plot analytical orbit for objects in the Patroclus-Menoetius binary Trojan system.
-- `create_planet_transformation_matrix(planet_name)` (line 3183) -- Create a transformation matrix for a planet based on its pole direction.
-- `plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig, date, days_to_plot, current_position, show_apsidal_markers)` (line 3238) -- Plot the Keplerian orbit of a satellite around its parent planet.
-- `calculate_moon_orbital_elements(date)` (line 3809) -- Calculate Moon's orbital elements for a specific date
-- `plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, color, parent_planet)` (line 3877) -- Plot osculating orbit for Mars satellites (Phobos/Deimos)
-- `plot_moon_ideal_orbit(fig, date, center_object_name, color, days_to_plot, current_position, show_apsidal_markers, planetary_params)` (line 3999) -- Plot BOTH the Moon's analytical and osculating orbits for educational comparison.
-- `plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 4234) -- Plot osculating orbit for objects in the Earth-Moon binary system.
-- `add_earth_moon_barycenter_marker(fig, date, moon_position)` (line 4472) -- Add the Earth-Moon barycenter marker to Earth-centered view.
-- `generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_distance)` (line 4545) -- Generate points for a hyperbolic orbit trajectory.
-- `plot_idealized_orbits(fig, objects_to_plot, center_id, objects, planetary_params, parent_planets, color_map, date, days_to_plot, current_positions, fetch_position, show_apsidal_markers, parent_window)` (line 4643) -- Plot Keplerian orbits for planets, dwarf planets, asteroids, KBOs, and moons.
-- `test_triton_rotations(satellite_name, planetary_params, color, fig)` (line 6015) -- Test multiple rotation combinations for Triton's orbit
-- `test_pluto_moon_rotations(satellite_name, planetary_params, color, fig)` (line 6157) -- Fine-tuned testing of XYZ rotation combinations for Pluto's moons.
-- `very_fine_pluto_rotations(satellite_name, planetary_params, color, fig, x_range, y_range, z_range, step)` (line 6395) -- Extremely fine-grained testing of XYZ rotation combinations for Pluto's moons.
-- `pluto_system_final_transform(satellite_name, planetary_params, color, fig, transform)` (line 6530) -- Apply a specific optimal transformation to Pluto's moons' orbits.
-- `calculate_phoebe_correction_from_normals()` (line 6645) -- Calculate the optimal rotation to align Keplerian orbit with actual orbit
-- `plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_map, date, show_apsidal_markers, parent_window, approach)` (line 6682) -- Plot a geocentric (or planet-centric) osculating hyperbolic orbit for a
-- `plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map, date, show_apsidal_markers, parent_window)` (line 6944) -- Plot Sun-centered osculating orbit arc at perihelion epoch for comets.
+- `test_uranus_rotation_combinations(satellite_name, planetary_params, color, fig)` (line 755) -- Test multiple rotation combinations for Uranus satellites systematically
+- `debug_planet_transformation(planet_name)` (line 876) -- Print detailed information about the transformation for a specific planet
+- `debug_mars_moons(satellites_data, parent_planets)` (line 949) -- Special debug function for Mars and its moons
+- `compare_transformation_methods(fig, satellites_data, parent_planets)` (line 994) -- Plot orbits with different transformation methods for comparison
+- `test_mars_negative_tilt(fig, satellites_data)` (line 1026) -- Test hypothesis that Mars needs a negative tilt application
+- `debug_satellite_systems()` (line 1091)
+- `rotate_points(x, y, z, angle, axis)` (line 1116) -- Rotates points (x,y,z) about the given axis by 'angle' radians.
+- `plot_jupiter_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1158) -- Plot osculating orbit for Jupiter satellites.
+- `plot_saturn_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1331) -- Plot osculating orbit for Saturn satellites.
+- `plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1487) -- Plot osculating orbit for Uranus satellites.
+- `plot_neptune_moon_osculating_orbit(fig, satellite_name, date, color, show_apsidal_markers)` (line 1600) -- Plot osculating orbit for Neptune satellites.
+- `plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 1743) -- Plot osculating orbit for objects in Pluto binary system.
+- `plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show_apsidal_markers)` (line 2057) -- Plot osculating orbit for TNO (Trans-Neptunian Object) satellites.
+- `add_pluto_barycenter_marker(fig, date, charon_position)` (line 2451) -- Add the Pluto-Charon barycenter marker to Pluto-centered view.
+- `plot_orcus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 2518) -- Plot osculating orbit for objects in the Orcus-Vanth binary system.
+- `add_orcus_barycenter_marker(fig, date, vanth_position)` (line 2749) -- Add the Orcus-Vanth barycenter marker to Orcus-centered view.
+- `plot_gonggong_xiangliu_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 2815) -- Plot analytical orbit for Xiangliu around Gonggong.
+- `plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 3016) -- Plot analytical orbit for objects in the Patroclus-Menoetius binary Trojan system.
+- `create_planet_transformation_matrix(planet_name)` (line 3279) -- Create a transformation matrix for a planet based on its pole direction.
+- `plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig, date, days_to_plot, current_position, show_apsidal_markers)` (line 3333) -- Plot the Keplerian orbit of a satellite around its parent planet.
+- `calculate_moon_orbital_elements(date)` (line 3886) -- Calculate Moon's orbital elements for a specific date
+- `plot_mars_moon_osculating_orbit(fig, satellite_name, horizons_id, date, color, parent_planet)` (line 3952) -- Plot osculating orbit for Mars satellites (Phobos/Deimos)
+- `plot_moon_ideal_orbit(fig, date, center_object_name, color, days_to_plot, current_position, show_apsidal_markers, planetary_params)` (line 4083) -- Plot BOTH the Moon's analytical and osculating orbits for educational comparison.
+- `plot_earth_moon_barycenter_orbit(fig, object_name, date, color, show_apsidal_markers, center_id)` (line 4337) -- Plot osculating orbit for objects in the Earth-Moon binary system.
+- `add_earth_moon_barycenter_marker(fig, date, moon_position)` (line 4585) -- Add the Earth-Moon barycenter marker to Earth-centered view.
+- `generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_distance)` (line 4656) -- Generate points for a hyperbolic orbit trajectory.
+- `plot_idealized_orbits(fig, objects_to_plot, center_id, objects, planetary_params, parent_planets, color_map, date, days_to_plot, current_positions, fetch_position, show_apsidal_markers, parent_window)` (line 4753) -- Plot Keplerian orbits for planets, dwarf planets, asteroids, KBOs, and moons.
+- `test_triton_rotations(satellite_name, planetary_params, color, fig)` (line 6093) -- Test multiple rotation combinations for Triton's orbit
+- `test_pluto_moon_rotations(satellite_name, planetary_params, color, fig)` (line 6244) -- Fine-tuned testing of XYZ rotation combinations for Pluto's moons.
+- `very_fine_pluto_rotations(satellite_name, planetary_params, color, fig, x_range, y_range, z_range, step)` (line 6492) -- Extremely fine-grained testing of XYZ rotation combinations for Pluto's moons.
+- `pluto_system_final_transform(satellite_name, planetary_params, color, fig, transform)` (line 6637) -- Apply a specific optimal transformation to Pluto's moons' orbits.
+- `calculate_phoebe_correction_from_normals()` (line 6761) -- Calculate the optimal rotation to align Keplerian orbit with actual orbit
+- `plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_map, date, show_apsidal_markers, parent_window, approach)` (line 6797) -- Plot a geocentric (or planet-centric) osculating hyperbolic orbit for a
+- `plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map, date, show_apsidal_markers, parent_window)` (line 7029) -- Plot Sun-centered osculating orbit arc at perihelion epoch for comets.
 
 ---
 
@@ -1400,7 +1349,7 @@ and explains in context.
 
 ### orbital_elements.py
 
-**Role:** computation | **Lines:** 1,285
+**Role:** computation | **Lines:** 1,294
 
 > Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies.
 
@@ -1436,7 +1385,7 @@ and explains in context.
 
 ### celestial_objects.py
 
-**Role:** data | **Lines:** 1,237
+**Role:** data | **Lines:** 1,248
 
 > celestial_objects.py - Celestial object definitions for Paloma's Orrery.
 
@@ -1445,46 +1394,46 @@ and explains in context.
 
 **Public functions:**
 
-- `build_objects_list(definitions, vars_dict, color_map_func)` (line 1267) -- Build the runtime objects list from definitions.
-- `get_all_var_names()` (line 1297) -- Return list of all var_name strings needed for IntVar creation.
-- `get_shell_var_names()` (line 1419) -- Return list of all shell var_name strings needed for IntVar creation.
-- `get_shell_tooltip_names()` (line 1429) -- Return list of all shell tooltip info variable names.
-- `build_shell_checkboxes(body_name, parent_frame, vars_dict, tooltips_dict, tk_module, CreateToolTip)` (line 1439) -- Build shell checkboxes for a single body.
+- `build_objects_list(definitions, vars_dict, color_map_func)` (line 1282) -- Build the runtime objects list from definitions.
+- `get_all_var_names()` (line 1312) -- Return list of all var_name strings needed for IntVar creation.
+- `get_shell_var_names()` (line 1434) -- Return list of all shell var_name strings needed for IntVar creation.
+- `get_shell_tooltip_names()` (line 1444) -- Return list of all shell tooltip info variable names.
+- `build_shell_checkboxes(body_name, parent_frame, vars_dict, tooltips_dict, tk_module, CreateToolTip)` (line 1454) -- Build shell checkboxes for a single body.
 
 ---
 
 ### close_approach_data.py
 
-**Role:** data | **Lines:** 519
+**Role:** data | **Lines:** 513
 
-> Fetch and cache close approach data from JPL's Small Body Close Approach Data (CAD) API for any small body against any major body.
+> close_approach_data.py - JPL CAD API client for small-body close approach data.
 
-**Depends on:** apsidal_markers
+**Depends on:** apsidal_markers, constants_new
 **Consumed by:** palomas_orrery
 
 **Public functions:**
 
-- `get_close_approaches(designation, body, date_min, date_max, dist_max, force_refresh)` (line 304) -- Return list of close approach events for a small body near a major body.
-- `get_closest_approach(designation, body, date_min, date_max, dist_max, force_refresh)` (line 370) -- Return the single closest approach event (minimum dist_au) within the
-- `get_approach_within_date_range(designation, body, start_date, end_date, force_refresh)` (line 390) -- Check if a cached close approach falls within a plotted date range.
-- `format_approach_hover(approach, body, obj_name)` (line 439) -- Build Plotly-compatible HTML hover text for a close approach marker.
-- `add_cad_perigee_marker(fig, approach, position, body, obj_name, color_map, label_suffix)` (line 493) -- Add a CAD-sourced perigee marker to a Plotly 3D figure.
-- `fetch_position_at_approach(approach, designation, center_body_id, id_type)` (line 548) -- Fetch the geocentric (or other center) position of a small body at the
+- `get_close_approaches(designation, body, date_min, date_max, dist_max, force_refresh)` (line 298) -- Return list of close approach events for a small body near a major body.
+- `get_closest_approach(designation, body, date_min, date_max, dist_max, force_refresh)` (line 364) -- Return the single closest approach event (minimum dist_au) within the
+- `get_approach_within_date_range(designation, body, start_date, end_date, force_refresh)` (line 384) -- Check if a cached close approach falls within a plotted date range.
+- `format_approach_hover(approach, body, obj_name)` (line 433) -- Build Plotly-compatible HTML hover text for a close approach marker.
+- `add_cad_perigee_marker(fig, approach, position, body, obj_name, color_map, label_suffix)` (line 487) -- Add a CAD-sourced perigee marker to a Plotly 3D figure.
+- `fetch_position_at_approach(approach, designation, center_body_id, id_type)` (line 542) -- Fetch the geocentric (or other center) position of a small body at the
 
 ---
 
 ### constants_new.py
 
-**Role:** data | **Lines:** 629
+**Role:** data | **Lines:** 633
 
 > constants_new.py - Verified numeric constants for Paloma's Orrery.
 
 **Depends on:** (none)
-**Consumed by:** apsidal_markers, exoplanet_stellar_properties, idealized_orbits, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, planet_visualization, planet_visualization_utilities, sgr_a_star_data, star_visualization_gui, stellar_parameters, visualization_2d, visualization_3d, visualization_core
+**Consumed by:** apsidal_markers, close_approach_data, exoplanet_stellar_properties, idealized_orbits, orbital_param_viz, orrery_rendering, palomas_orrery, palomas_orrery_helpers, planet_visualization, planet_visualization_utilities, sgr_a_star_data, star_visualization_gui, stellar_parameters, test_constants_provenance, visualization_2d, visualization_3d, visualization_core
 
 **Public functions:**
 
-- `color_map(planet)` (line 447)
+- `color_map(planet)` (line 449)
 
 ---
 
@@ -1562,12 +1511,12 @@ and explains in context.
 
 ### info_dictionary.py
 
-**Role:** data | **Lines:** 1,943
+**Role:** data | **Lines:** 2,046
 
 > info_dictionary.py - Descriptive text and narrative content for Paloma's Orrery.
 
 **Depends on:** (none)
-**Consumed by:** exoplanet_stellar_properties, gallery_studio, object_type_analyzer, palomas_orrery, palomas_orrery_helpers, star_visualization_gui, visualization_2d, visualization_3d, visualization_core
+**Consumed by:** exoplanet_stellar_properties, object_type_analyzer, palomas_orrery, palomas_orrery_helpers, save_utils, star_visualization_gui, visualization_2d, visualization_3d, visualization_core
 
 ---
 
@@ -1595,7 +1544,7 @@ and explains in context.
 
 ### sgr_a_star_data.py
 
-**Role:** data | **Lines:** 570
+**Role:** data | **Lines:** 572
 
 > sgr_a_star_data.py - S-star catalog and orbital mechanics for Sagittarius A*.
 
@@ -1609,34 +1558,34 @@ and explains in context.
 - `get_star_temperature(star_data)` (line 110) -- Get temperature for a star, using best available method.
 - `get_star_color(star_data)` (line 124) -- Get display color for a star based on its temperature.
 - `get_orbit_color(star_data)` (line 137) -- Get distinct color for orbit trace and labels.
-- `get_star_data(star_name)` (line 270) -- Returns the dictionary for a specific star.
-- `list_stars()` (line 274) -- Returns list of available star keys.
-- `get_all_stars()` (line 278) -- Returns the complete catalog dictionary.
-- `get_spectral_class_description(spectral_type)` (line 286) -- Get human-readable description of spectral type.
-- `calculate_next_periapsis(star_data, reference_year)` (line 316) -- Calculate the next periapsis passage date for a star.
-- `create_star_hover_text(star_name, star_data, current_distance_au, current_velocity_km_s)` (line 338) -- Create rich hover text for S-star markers.
-- `calculate_periapsis_au(a_au, e)` (line 419) -- Calculate periapsis distance (closest approach to black hole).
-- `calculate_apoapsis_au(a_au, e)` (line 426) -- Calculate apoapsis distance (farthest point from black hole).
-- `calculate_orbital_velocity(a_au, r_au, M_solar)` (line 433) -- Calculate orbital velocity at distance r using vis-viva equation.
-- `calculate_periapsis_velocity(a_au, e, M_solar)` (line 451) -- Calculate velocity at periapsis (maximum velocity).
-- `calculate_apoapsis_velocity(a_au, e, M_solar)` (line 456) -- Calculate velocity at apoapsis (minimum velocity).
-- `velocity_as_fraction_of_c(v_km_s)` (line 461) -- Convert velocity to fraction of speed of light.
-- `format_velocity(v_km_s)` (line 465) -- Format velocity as 'X km/s (Y% c)'.
-- `calculate_schwarzschild_precession_per_orbit(a_au, e, M_solar)` (line 474) -- Calculate the Schwarzschild (GR) precession per orbit.
+- `get_star_data(star_name)` (line 269) -- Returns the dictionary for a specific star.
+- `list_stars()` (line 273) -- Returns list of available star keys.
+- `get_all_stars()` (line 277) -- Returns the complete catalog dictionary.
+- `get_spectral_class_description(spectral_type)` (line 285) -- Get human-readable description of spectral type.
+- `calculate_next_periapsis(star_data, reference_year)` (line 315) -- Calculate the next periapsis passage date for a star.
+- `create_star_hover_text(star_name, star_data, current_distance_au, current_velocity_km_s)` (line 337) -- Create rich hover text for S-star markers.
+- `calculate_periapsis_au(a_au, e)` (line 418) -- Calculate periapsis distance (closest approach to black hole).
+- `calculate_apoapsis_au(a_au, e)` (line 425) -- Calculate apoapsis distance (farthest point from black hole).
+- `calculate_orbital_velocity(a_au, r_au, M_solar)` (line 432) -- Calculate orbital velocity at distance r using vis-viva equation.
+- `calculate_periapsis_velocity(a_au, e, M_solar)` (line 450) -- Calculate velocity at periapsis (maximum velocity).
+- `calculate_apoapsis_velocity(a_au, e, M_solar)` (line 455) -- Calculate velocity at apoapsis (minimum velocity).
+- `velocity_as_fraction_of_c(v_km_s)` (line 460) -- Convert velocity to fraction of speed of light.
+- `format_velocity(v_km_s)` (line 464) -- Format velocity as 'X km/s (Y% c)'.
+- `calculate_schwarzschild_precession_per_orbit(a_au, e, M_solar)` (line 473) -- Calculate the Schwarzschild (GR) precession per orbit.
 - `calculate_gravitational_redshift(r_au, M_solar)` (line 494) -- Calculate gravitational redshift factor at distance r.
-- `mean_anomaly_at_time(t_current, t_periapsis, period_yrs)` (line 515) -- Calculate mean anomaly M at a given time.
-- `solve_kepler_equation(M, e, tolerance, max_iterations)` (line 526) -- Solve Kepler's equation: M = E - e*sin(E)
-- `eccentric_to_true_anomaly(E, e)` (line 560) -- Convert eccentric anomaly to true anomaly.
-- `true_anomaly_at_time(t_current, t_periapsis, period_yrs, e)` (line 572) -- Calculate true anomaly at a given time.
-- `radius_from_true_anomaly(a_au, e, nu)` (line 582) -- Calculate orbital radius at true anomaly nu.
-- `get_star_summary(star_name)` (line 593) -- Get a formatted summary of a star's orbital characteristics.
-- `print_catalog_summary()` (line 632) -- Print summary for all stars in the catalog.
+- `mean_anomaly_at_time(t_current, t_periapsis, period_yrs)` (line 517) -- Calculate mean anomaly M at a given time.
+- `solve_kepler_equation(M, e, tolerance, max_iterations)` (line 528) -- Solve Kepler's equation: M = E - e*sin(E)
+- `eccentric_to_true_anomaly(E, e)` (line 562) -- Convert eccentric anomaly to true anomaly.
+- `true_anomaly_at_time(t_current, t_periapsis, period_yrs, e)` (line 574) -- Calculate true anomaly at a given time.
+- `radius_from_true_anomaly(a_au, e, nu)` (line 584) -- Calculate orbital radius at true anomaly nu.
+- `get_star_summary(star_name)` (line 595) -- Get a formatted summary of a star's orbital characteristics.
+- `print_catalog_summary()` (line 634) -- Print summary for all stars in the catalog.
 
 ---
 
 ### spacecraft_encounters.py
 
-**Role:** data | **Lines:** 1,204
+**Role:** data | **Lines:** 1,298
 
 > Tagged encounter data for spacecraft missions in Paloma's Orrery.
 
@@ -1645,27 +1594,27 @@ and explains in context.
 
 **Public functions:**
 
-- `utc_to_tdb(dt)` (line 34) -- Convert UTC datetime to TDB for Horizons queries (~69 second offset).
-- `get_encounters_for_spacecraft(spacecraft_name)` (line 321) -- Get all encounters for a given spacecraft.
-- `get_encounters_in_date_range(spacecraft_name, start_date, end_date)` (line 334) -- Get encounters for a spacecraft that fall within a date range.
-- `get_all_encounter_spacecraft()` (line 362) -- Get list of all spacecraft that have tagged encounters.
-- `get_encounters_for_target(target_name)` (line 372) -- Get all encounters where a given body is the target, across all spacecraft.
-- `get_full_mission_preset(spacecraft_name)` (line 397)
-- `resolve_encounter_time(enc, sc_id, obj_start_date, obj_end_date, objects)` (line 489) -- Derive actual closest approach time from Horizons trajectory data.
-- `get_encounter_preset(spacecraft_name, encounter_index)` (line 608) -- Build a close-up preset for a specific encounter.
-- `get_comet_perihelion_preset(obj_name, obj_info)` (line 699) -- Build a perihelion close-up preset for a comet.
-- `fetch_position_at_encounter(encounter, center_id, spacecraft_id)` (line 846) -- Fetch spacecraft position at the encounter epoch from JPL Horizons.
-- `add_tagged_encounter_marker(fig, encounter, position, spacecraft_name, color_map)` (line 1024) -- Place a white diamond-open marker at the spacecraft's position at encounter epoch.
-- `add_tagged_encounter_markers(fig, selected_objects, objects, dates_lists, center_object_name, center_id, color_map, show_closest_approach, positions_cache)` (line 1083) -- Add tagged encounter markers for all selected spacecraft in the plot.
-- `get_encounter_summary()` (line 1200) -- Get a summary of all encounters for all spacecraft.
-- `get_comet_perihelion_preset(obj_name, obj_info)` (line 1270) -- Build a perihelion close-up preset for a comet.
-- `get_comet_disintegration_preset(obj_name)` (line 1384) -- Fixed preset for the MAPS disintegration event.
+- `utc_to_tdb(dt)` (line 42) -- Convert UTC datetime to TDB for Horizons queries (~69 second offset).
+- `get_encounters_for_spacecraft(spacecraft_name)` (line 399) -- Get all encounters for a given spacecraft.
+- `get_encounters_in_date_range(spacecraft_name, start_date, end_date)` (line 412) -- Get encounters for a spacecraft that fall within a date range.
+- `get_all_encounter_spacecraft()` (line 440) -- Get list of all spacecraft that have tagged encounters.
+- `get_encounters_for_target(target_name)` (line 450) -- Get all encounters where a given body is the target, across all spacecraft.
+- `get_full_mission_preset(spacecraft_name)` (line 475)
+- `resolve_encounter_time(enc, sc_id, obj_start_date, obj_end_date, objects)` (line 584) -- Derive actual closest approach time from Horizons trajectory data.
+- `get_encounter_preset(spacecraft_name, encounter_index)` (line 703) -- Build a close-up preset for a specific encounter.
+- `get_comet_perihelion_preset(obj_name, obj_info)` (line 805) -- Build a perihelion close-up preset for a comet.
+- `fetch_position_at_encounter(encounter, center_id, spacecraft_id)` (line 952) -- Fetch spacecraft position at the encounter epoch from JPL Horizons.
+- `add_tagged_encounter_marker(fig, encounter, position, spacecraft_name, color_map)` (line 1130) -- Place a white diamond-open marker at the spacecraft's position at encounter epoch.
+- `add_tagged_encounter_markers(fig, selected_objects, objects, dates_lists, center_object_name, center_id, color_map, show_closest_approach, positions_cache)` (line 1189) -- Add tagged encounter markers for all selected spacecraft in the plot.
+- `get_encounter_summary()` (line 1309) -- Get a summary of all encounters for all spacecraft.
+- `get_comet_perihelion_preset(obj_name, obj_info)` (line 1379) -- Build a perihelion close-up preset for a comet.
+- `get_comet_disintegration_preset(obj_name)` (line 1493) -- Fixed preset for the MAPS disintegration event.
 
 ---
 
 ### star_notes.py
 
-**Role:** data | **Lines:** 1,137
+**Role:** data | **Lines:** 1,156
 
 > star_notes.py - Curated hover text annotations for notable stars.
 
@@ -1769,7 +1718,7 @@ and explains in context.
 
 ### orbit_data_manager.py
 
-**Role:** cache | **Lines:** 1,520
+**Role:** cache | **Lines:** 1,547
 
 > orbit_data_manager.py - Advanced orbit data caching and management
 
@@ -1799,7 +1748,7 @@ and explains in context.
 - `get_data_stats()` (line 1385) -- Get statistics about the stored orbit data.
 - `on_center_change()` (line 1450) -- Update orbit paths when the center object is changed.
 - `plot_orbit_paths(fig, objects_to_plot, center_object_name, color_map, parent_planets)` (line 1517) -- Plot orbit paths using time-indexed data.
-- `query_horizons_elements(horizons_id, id_type, date_str, center_body)` (line 1645) -- Query JPL Horizons for osculating orbital elements (Keplerian).
+- `query_horizons_elements(horizons_id, id_type, date_str, center_body)` (line 1672) -- Query JPL Horizons for osculating orbital elements (Keplerian).
 
 ---
 
@@ -1854,44 +1803,6 @@ and explains in context.
 
 ## PIPELINE: Transforms data between stages (export, conversion, plotting pipelines)
 
-### gallery_json_fixer.py
-
-**Role:** pipeline | **Lines:** 483
-
-> Gallery JSON Fixer - Update older gallery JSON files for current viewer.
-
-**Depends on:** (none)
-**Consumed by:** (none -- standalone)
-
-**Public functions:**
-
-- `fix_gallery_json(fig_dict, filename)` (line 143) -- Apply non-destructive fixes to a gallery JSON figure dict.
-- `process_file(filepath, dry_run)` (line 358) -- Process a single gallery JSON file.
-- `run_batch(gallery_folder, dry_run)` (line 402) -- Process all JSON files in the gallery folder.
-- `run_interactive()` (line 484) -- Run with a file browser for selecting individual JSON files.
-- `main()` (line 551)
-
----
-
-### json_converter.py
-
-**Role:** pipeline | **Lines:** 622
-
-> Gallery JSON Converter - Extract Plotly figures from HTML and save as JSON.
-
-**Depends on:** (none)
-**Consumed by:** star_visualization_gui
-
-**Public functions:**
-
-- `extract_plotly_json_from_html(html_path)` (line 136) -- Extract Plotly figure JSON from an HTML file.
-- `save_figure_json(fig, name, output_folder, category, description, auto_metadata, mode)` (line 377) -- Save a Plotly figure object directly as gallery-ready JSON.
-- `convert_html_to_gallery_json(html_path, output_folder, category, description, mode)` (line 431) -- Convert a single HTML visualization to gallery-ready JSON.
-- `run_interactive()` (line 591) -- Run the interactive converter with file selection dialog.
-- `convert_folder(input_folder, output_folder, category)` (line 714) -- Convert all HTML files in a folder to gallery JSON.
-
----
-
 ### messier_object_data_handler.py
 
 **Role:** pipeline | **Lines:** 329
@@ -1924,21 +1835,23 @@ and explains in context.
 
 ### save_utils.py
 
-**Role:** pipeline | **Lines:** 388
+**Role:** pipeline | **Lines:** 731
 
-> Consolidated utility functions for saving Plotly visualizations.
+> save_utils.py - Unified save/export for all Plotly visualizations.
 
-**Depends on:** (none)
+**Depends on:** info_dictionary
 **Consumed by:** earth_system_visualization_gui, energy_imbalance, paleoclimate_dual_scale, paleoclimate_human_origins_full, paleoclimate_visualization, paleoclimate_visualization_full, paleoclimate_wet_bulb_full, palomas_orrery, palomas_orrery_helpers, sgr_a_grand_tour, sgr_a_visualization_animation, sgr_a_visualization_core, sgr_a_visualization_precession, shutdown_handler, social_media_export, star_visualization_gui, visualization_2d, visualization_3d
 
 **Public functions:**
 
-- `save_visualization(fig, default_name, mode, output_path, offline, auto_play, open_browser)` (line 109) -- Unified save function for all Plotly visualizations.
-- `show_and_save(fig, default_name, auto_play)` (line 351) -- Show visualization in browser, then offer save dialog.
-- `save_plot(fig, default_name)` (line 415) -- Legacy function for backward compatibility.
-- `handle_save(fig, default_name)` (line 433) -- Legacy function for backward compatibility.
-- `show_animation_safely(fig, default_name)` (line 446) -- Show and optionally save an animation.
-- `save_html(fig, filename, offline, open_browser)` (line 467) -- Simple direct save for scripts that don't need dialogs.
+- `set_last_save_directory(path)` (line 67) -- Called at startup with persisted path from config.
+- `get_last_save_directory()` (line 74) -- Called at shutdown to persist to config.
+- `save_visualization(fig, default_name, mode, output_path, offline, auto_play, open_browser)` (line 507) -- Unified save function for all Plotly visualizations.
+- `show_and_save(fig, default_name, auto_play)` (line 749) -- Show visualization in browser, then offer save dialog.
+- `save_plot(fig, default_name)` (line 813) -- Legacy function for backward compatibility.
+- `handle_save(fig, default_name)` (line 831) -- Legacy function for backward compatibility.
+- `show_animation_safely(fig, default_name)` (line 844) -- Show and optionally save an animation.
+- `save_html(fig, filename, offline, open_browser)` (line 865) -- Simple direct save for scripts that don't need dialogs.
 
 ---
 
@@ -2089,16 +2002,16 @@ and explains in context.
 
 ### shared_utilities.py
 
-**Role:** utility | **Lines:** 123
+**Role:** utility | **Lines:** 107
 
 > shared_utilities.py - Small shared helpers used across shell visualization modules.
 
-**Depends on:** (none)
-**Consumed by:** asteroid_belt_visualization_shells, comet_visualization_shells, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, palomas_orrery, palomas_orrery_helpers, planet9_visualization_shells, pluto_visualization_shells, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
+**Depends on:** orrery_rendering
+**Consumed by:** asteroid_belt_visualization_shells, comet_visualization_shells, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, moon_visualization_shells, neptune_visualization_shells, palomas_orrery, palomas_orrery_helpers, planet9_visualization_shells, planet_visualization, pluto_visualization_shells, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
 
 **Public functions:**
 
-- `create_sun_direction_indicator(center_position, axis_range, shell_radius, object_type, center_object)` (line 15) -- Creates a visual indicator showing the direction to the Sun (along negative X-axis).
+- `create_sun_direction_indicator(center_position, axis_range, shell_radius, object_type, center_object)` (line 23) -- Creates a visual indicator arrow pointing from the body toward the Sun.
 
 ---
 
@@ -2244,7 +2157,7 @@ and explains in context.
 
 ### module_atlas.py
 
-**Role:** devtool | **Lines:** 484
+**Role:** devtool | **Lines:** 494
 
 > module_atlas.py - Codebase encyclopedia generator for Paloma's Orrery
 
@@ -2253,20 +2166,20 @@ and explains in context.
 
 **Public functions:**
 
-- `classify_role(module_name)` (line 155) -- Classify a module's functional role.
-- `get_module_docstring(filepath)` (line 187) -- Extract module-level docstring, falling back to leading comments.
-- `get_public_functions(filepath)` (line 274) -- Extract public function/class names with their docstrings.
-- `get_local_imports(filepath, local_modules)` (line 305) -- Extract project-local imports from a Python file.
-- `count_lines(filepath)` (line 328) -- Count non-blank lines in a file.
-- `build_dependency_graph(project_dir)` (line 341) -- Build bidirectional dependency graph for all local modules.
-- `generate_atlas(project_dir, output_path)` (line 366) -- Generate the MODULE_ATLAS.md file.
-- `main()` (line 542)
+- `classify_role(module_name)` (line 165) -- Classify a module's functional role.
+- `get_module_docstring(filepath)` (line 197) -- Extract module-level docstring, falling back to leading comments.
+- `get_public_functions(filepath)` (line 284) -- Extract public function/class names with their docstrings.
+- `get_local_imports(filepath, local_modules)` (line 315) -- Extract project-local imports from a Python file.
+- `count_lines(filepath)` (line 338) -- Count non-blank lines in a file.
+- `build_dependency_graph(project_dir)` (line 351) -- Build bidirectional dependency graph for all local modules.
+- `generate_atlas(project_dir, output_path)` (line 376) -- Generate the MODULE_ATLAS.md file.
+- `main()` (line 552)
 
 ---
 
 ### provenance_scanner.py
 
-**Role:** devtool | **Lines:** 710
+**Role:** devtool | **Lines:** 1,181
 
 > provenance_scanner.py - Fact provenance auditor for Paloma's Orrery.
 
@@ -2275,24 +2188,115 @@ and explains in context.
 
 **Public functions:**
 
-- `action_label(score)` (line 71) -- Return action string for a given V x C score.
-- `action_tier(score)` (line 78) -- Return tier number (1=highest priority) for sorting.
-- `has_source_citation(line_text, context_lines)` (line 120) -- Check if a constant has a source citation on same or adjacent lines.
-- `has_stale_markers(line_text, context_lines)` (line 129) -- Check if a value has markers suggesting it may be stale.
-- `assess_vulnerability(line_text, context_lines)` (line 138) -- Determine vulnerability score for a finding.
-- `assess_criticality(module_name, finding_type, consumer_count, role)` (line 153) -- Determine criticality score for a finding.
-- `class Finding` (line 197) -- A single auditable fact found in the codebase.
-- `get_context_lines(lines, lineno, window)` (line 217) -- Get surrounding lines for context (0-indexed lineno).
-- `scan_file_constants(filepath, lines)` (line 224) -- Extract named constants (module-level assignments to UPPER_CASE names).
-- `extract_value(node, lines, lineno)` (line 277) -- Try to extract a numeric value from an AST node.
-- `scan_file_dicts(filepath, lines)` (line 301) -- Extract numeric values from dictionary literals.
-- `scan_file_string_claims(filepath, lines)` (line 368) -- Extract numeric claims from string literals.
-- `find_duplicates(all_findings)` (line 418) -- Group findings by concept to detect duplicates and inconsistencies.
-- `normalize_concept(name, value)` (line 464) -- Normalize a constant name to a concept for duplicate detection.
-- `is_cosmetic_dict(dict_name)` (line 537) -- Check if a dictionary is known to be cosmetic.
-- `scan_project(project_dir, output_path)` (line 548) -- Scan all .py files and produce the provenance audit report.
-- `generate_report(findings, duplicates, consumers, files_scanned, project_dir, output_path)` (line 632) -- Write PROVENANCE_AUDIT.md.
-- `main()` (line 844)
+- `action_tier(score)` (line 232) -- Return tier number (1=highest priority, 4=lowest).
+- `has_citation(text, is_docstring)` (line 297) -- Does the given text block contain a citation marker?
+- `has_stale_marker(text)` (line 312) -- Does the given text contain a staleness indicator?
+- `extract_numeric_claims(text)` (line 340) -- Yield (num_str, unit, value_float) for each numeric claim in text.
+- `build_name_import_map(project_dir, local_modules)` (line 360) -- For each local module, find which NAMES other modules import from it.
+- `name_is_imported(name, module_name, imported_names)` (line 398) -- Return (count, consumers) for a name defined in module_name.
+- `class ProvenanceUnit` (line 411) -- The smallest thing that has a coherent source citation.
+- `get_context_block(lines, unit_start_line, unit_end_line, lookback, lookahead)` (line 476) -- Return the block of text a unit can see for citation purposes.
+- `get_unit_interior(lines, line_start, line_end)` (line 497) -- Return the text inside the unit itself (per-entry comments).
+- `extract_numeric_value(node)` (line 515) -- Evaluate an AST node to a numeric constant.
+- `extract_units_from_file(filepath, module_name, role)` (line 538) -- Walk the AST of one file and emit ProvenanceUnits.
+- `build_pinned_values(project_dir)` (line 776) -- Extract numeric values from constants_new.py that have source citations.
+- `score_unit(unit, imported_names, pinned_values)` (line 832) -- Assign vulnerability and criticality to a unit.
+- `canonical_concept(name)` (line 932) -- Map a constant name to its canonical concept, or None.
+- `find_cross_file_issues(units)` (line 943) -- Find same-concept constants across multiple files.
+- `load_exceptions(project_dir)` (line 987) -- Load provenance_exceptions.json from data/ subdirectory if present.
+- `is_suppressed(unit, suppressed_fingerprints)` (line 1019) -- Check if a unit matches any suppressed fingerprint.
+- `format_accepted_residuals(accepted_residuals)` (line 1048) -- Format accepted residuals as a markdown block for the audit report.
+- `scan_project(project_dir, output_path)` (line 1073) -- Scan all .py files and produce the provenance audit report.
+- `generate_report(units, consistent_dups, inconsistencies, files_scanned, project_dir, output_path, accepted_residuals)` (line 1127) -- Write PROVENANCE_AUDIT.md.
+- `main()` (line 1354)
+
+---
+
+### test_constants_provenance.py
+
+**Role:** devtool | **Lines:** 490
+
+> test_constants_provenance.py - Regression tests for verified numeric constants.
+
+**Depends on:** constants_new
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `test_km_per_au()` (line 80) -- IAU 2012 Resolution B2: 1 AU = 149,597,870,700 m exactly (149597870.7 km).
+- `test_sun_radius_km()` (line 85) -- IAU 2015 Resolution B3 nominal solar radius (Prsa et al. 2016, AJ 152:41).
+- `test_earth_equatorial_radius_km()` (line 90) -- IAU 2015 Resolution B3 nominal terrestrial equatorial radius (WGS-84).
+- `test_earth_polar_radius_km()` (line 96) -- IAU 2015 Resolution B3 nominal terrestrial polar radius.
+- `test_jupiter_equatorial_radius_km()` (line 102) -- IAU 2015 Resolution B3 nominal jovian equatorial radius.
+- `test_jupiter_polar_radius_km()` (line 108) -- IAU 2015 Resolution B3 nominal jovian polar radius.
+- `test_speed_of_light_km_s()` (line 114) -- NIST/SI exact definition: c = 299,792.458 km/s.
+- `test_solar_radius_au_is_derived()` (line 127) -- SOLAR_RADIUS_AU must equal SUN_RADIUS_KM / KM_PER_AU to full precision.
+- `test_light_minutes_per_au_is_derived()` (line 134) -- LIGHT_MINUTES_PER_AU must equal KM_PER_AU / SPEED_OF_LIGHT_KM_S / 60 to full precision.
+- `test_solar_radius_au_value_sanity()` (line 141) -- SOLAR_RADIUS_AU should be approximately 0.004650 (spot check on derivation).
+- `test_light_minutes_per_au_value_sanity()` (line 147) -- LIGHT_MINUTES_PER_AU should be approximately 8.317 (spot check on derivation).
+- `test_core_au_derived_from_solar_radius()` (line 157) -- CORE_AU must equal 0.2 * SOLAR_RADIUS_AU (standard solar model).
+- `test_radiative_zone_au_derived_from_solar_radius()` (line 164) -- RADIATIVE_ZONE_AU must equal 0.7 * SOLAR_RADIUS_AU (standard solar model).
+- `test_chromosphere_radii()` (line 171) -- Chromosphere extends to ~1.5 R_sun (Carroll & Ostlie 2017, Ch. 11).
+- `test_inner_corona_radii()` (line 176) -- Inner (K-)corona extends to 2-3 R_sun; we use 3 (Golub & Pasachoff 2010).
+- `test_outer_corona_radii()` (line 181) -- F-corona envelope extends to ~50 R_sun (Mann et al. 2004, A&A 414:1127).
+- `test_streamer_belt_radii()` (line 186) -- Helmet streamers extend 4-6 R_sun; we use 6.0 (DeForest et al. 2018).
+- `test_roche_limit_radii()` (line 191) -- Fluid Roche limit for comet densities: 2.44 * (1408/500)^(1/3) = 3.45 R_sun.
+- `test_alfven_surface_radii()` (line 196) -- Parker Solar Probe first crossing, April 28, 2021 (Kasper et al. 2021).
+- `test_solar_shell_ordering()` (line 201) -- Solar atmosphere shells must nest outward: chromosphere < corona < streamer < alfven.
+- `test_termination_shock_au()` (line 213) -- Voyager 1 crossed termination shock at 94 AU, Dec 2004 (Stone et al. 2005).
+- `test_heliopause_radii()` (line 218) -- ~123 AU converted to solar radii: 123 * 149597870.7 / 695700 = 26449.
+- `test_heliopause_conversion_sanity()` (line 223) -- Verify HELIOPAUSE_RADII conversion math: should round-trip to ~123 AU.
+- `test_inner_limit_oort_cloud_au()` (line 230) -- Hills (1981); Oort (1950) -- inner edge estimate.
+- `test_inner_oort_cloud_au()` (line 236) -- Hills (1981) -- outer edge of inner (Hills) cloud.
+- `test_outer_oort_cloud_au()` (line 241) -- Oort (1950); Weissman (1996) -- estimated outer boundary, ~0.5 parsec.
+- `test_gravitational_influence_au()` (line 246) -- Approximate Hill sphere radius of Sun in Milky Way (~2 light-years).
+- `test_oort_cloud_ordering()` (line 252) -- Oort cloud radii must nest outward: inner limit < inner < outer < gravitational influence.
+- `test_parker_closest_radii()` (line 262) -- Parker Solar Probe perihelion 22, Dec 24, 2024.
+- `test_center_body_radii_sun()` (line 283) -- IAU 2015 nominal solar radius = 695700 km (matches SUN_RADIUS_KM).
+- `test_center_body_radii_mercury()` (line 292) -- NASA Fact Sheet volumetric mean (oblateness ~0.0009, equatorial diff sub-0.1%).
+- `test_center_body_radii_venus()` (line 298) -- NASA Fact Sheet volumetric mean (oblateness ~0).
+- `test_center_body_radii_earth()` (line 304) -- IAU 2015 nominal equatorial (WGS-84). Hybrid convention: EQUATORIAL not volumetric (6371.0).
+- `test_center_body_radii_moon()` (line 314) -- NASA Fact Sheet volumetric mean (oblateness ~0.0012).
+- `test_center_body_radii_mars()` (line 320) -- IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (3389.5).
+- `test_center_body_radii_jupiter()` (line 327) -- IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (69911).
+- `test_center_body_radii_saturn()` (line 341) -- IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (58232).
+- `test_center_body_radii_uranus()` (line 348) -- IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (25362).
+- `test_center_body_radii_neptune()` (line 355) -- IAU 2015 nominal equatorial. Hybrid convention: EQUATORIAL not volumetric (24622).
+- `test_center_body_radii_pluto()` (line 362) -- New Horizons occultation (Nimmo et al. 2017, Icarus).
+- `test_center_body_radii_bennu()` (line 368) -- Volumetric mean from OSIRIS-REx top-shape asteroid observations.
+- `test_center_body_radii_eris()` (line 374) -- Volumetric mean from 2011 occultation (Sicardy et al. 2011).
+- `test_center_body_radii_haumea()` (line 380) -- Volumetric mean (highly ellipsoidal: 1050x840x537 km).
+- `test_center_body_radii_makemake()` (line 386) -- Volumetric mean (Brown et al.).
+- `test_center_body_radii_arrokoth()` (line 392) -- Volumetric mean (~35x20x14 km bilobed shape).
+- `test_center_body_radii_planet9()` (line 400) -- Model estimate (Batygin & Brown; 5-10 M_Earth assumption).
+- `test_center_body_radii_completeness()` (line 406) -- All expected bodies must be present. Protects against accidental deletion.
+- `test_orbital_period_mercury()` (line 425) -- Mercury orbital period: 87.969 days (JPL).
+- `test_orbital_period_venus()` (line 431) -- Venus orbital period: 224.701 days (JPL).
+- `test_orbital_period_earth()` (line 437) -- Earth orbital period: 365.256 days (sidereal year, JPL).
+- `test_orbital_period_mars()` (line 443) -- Mars orbital period: 686.980 days (JPL).
+- `test_orbital_period_jupiter()` (line 449) -- Jupiter orbital period: 4332.589 days (JPL).
+- `test_orbital_period_saturn()` (line 455) -- Saturn orbital period: 10759.22 days (JPL).
+- `test_orbital_period_uranus()` (line 461) -- Uranus orbital period: 30688.5 days (JPL).
+- `test_orbital_period_neptune()` (line 467) -- Neptune orbital period: 60189.0 days (JPL).
+- `test_orbital_period_moon()` (line 473) -- Moon sidereal orbital period: 27.321582 days.
+- `test_orbital_period_io()` (line 479) -- Io orbital period: 1.769 days (42.456 hours, JPL).
+- `test_orbital_period_europa()` (line 485) -- Europa orbital period: 3.551 days (85.224 hours, JPL).
+- `test_orbital_period_ganymede()` (line 491) -- Ganymede orbital period: 7.155 days (171.72 hours, JPL).
+- `test_orbital_period_callisto()` (line 497) -- Callisto orbital period: 16.689 days (400.536 hours, JPL).
+- `test_orbital_period_titan()` (line 503) -- Titan orbital period: 15.945 days (382.68 hours, JPL).
+- `test_orbital_period_triton()` (line 509) -- Triton orbital period: 5.877 days (141.05 hours, JPL). Note: retrograde orbit.
+- `test_orbital_period_charon()` (line 515) -- Charon orbital period: 6.387 days (153.29 hours, JPL). Pluto-Charon barycenter system.
+- `test_orbital_period_phobos()` (line 521) -- Phobos orbital period: 0.319 days (JPL).
+- `test_orbital_period_deimos()` (line 527) -- Deimos orbital period: 1.263 days (JPL).
+- `test_orbital_period_halley()` (line 533) -- Halley's comet period: 75.92414033 Julian years * 365.25 = 27731.29226 days.
+- `test_orbital_period_sedna()` (line 540) -- Sedna orbital period: 11400 * 365.25 = 4163850.00 days (~11,400 years).
+- `test_hyperbolic_objects_are_none()` (line 552) -- Hyperbolic and parabolic objects must have period = None (infinite).
+- `test_earth_equatorial_matches_center_body()` (line 581) -- EARTH_EQUATORIAL_RADIUS_KM and CENTER_BODY_RADII['Earth'] must agree.
+- `test_jupiter_equatorial_matches_center_body()` (line 587) -- JUPITER_EQUATORIAL_RADIUS_KM and CENTER_BODY_RADII['Jupiter'] must agree.
+- `test_sun_radius_matches_center_body()` (line 593) -- SUN_RADIUS_KM and CENTER_BODY_RADII['Sun'] must agree.
+- `test_earth_polar_less_than_equatorial()` (line 599) -- Earth is oblate: polar radius must be less than equatorial.
+- `test_jupiter_polar_less_than_equatorial()` (line 605) -- Jupiter is oblate: polar radius must be less than equatorial.
+- `main()` (line 628) -- Run all tests. Print summary. Exit non-zero on any failure.
 
 ---
 
@@ -2327,20 +2331,67 @@ and explains in context.
 
 ---
 
+## OTHER: Uncategorized
+
+### color_map.py
+
+**Role:** other | **Lines:** 43
+
+> Gemini 5-1-2026 Color swatch of css colors Notes: This reference maps CSS4 named colors in Python/Matplotlib. RGB values are converted to the 0-255 standard for accessibility. In Python scripts, these can be used as strings or converted to 0.0-1.0 floats by dividing by 255.
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `plot_colortable_255(colors, title)` (line 8)
+
+---
+
+### orrery_rendering.py
+
+**Role:** other | **Lines:** 268
+
+> orrery_rendering.py - Rendering contract between plot_objects and animate_objects.
+
+**Depends on:** constants_new, planet_visualization_utilities
+**Consumed by:** earth_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, neptune_visualization_shells, planet_visualization, saturn_visualization_shells, shared_utilities, uranus_visualization_shells, venus_visualization_shells
+
+**Public functions:**
+
+- `create_info_marker(x, y, z, color, text, legendgroup, customdata)` (line 27) -- Create a single info marker trace.
+- `build_sphere_shell(config, body_name, center_position)` (line 58) -- Generic sphere shell from config dict.
+- `rotate_to_sunward(px, py, pz, center_position, sun_position, magnetic_tilt_deg)` (line 180) -- Rotate points from default -X sunward to actual sunward direction.
+- `create_ring_points(inner_radius, outer_radius, n_points, thickness)` (line 291) -- Create points for a planetary ring with inner and outer radii.
+
+---
+
+### shell_configs.py
+
+**Role:** other | **Lines:** 2,108
+
+> shell_configs.py - Shell configuration data for all celestial bodies.
+
+**Depends on:** neptune_visualization_shells, saturn_visualization_shells, uranus_visualization_shells
+**Consumed by:** planet_visualization
+
+---
+
 ## Alphabetical Index
 
 | Module | Role | Lines | Deps | Consumers |
 |--------|------|------:|-----:|----------:|
 | add_docstrings | devtool | 631 | 0 | 0 |
-| apsidal_markers | computation | 1,681 | 1 | 4 |
-| asteroid_belt_visualization_shells | rendering/shells | 410 | 1 | 2 |
+| apsidal_markers | computation | 1,733 | 1 | 4 |
+| asteroid_belt_visualization_shells | rendering/shells | 430 | 1 | 2 |
 | catalog_selection | computation | 92 | 1 | 3 |
 | celestial_coordinates | computation | 454 | 0 | 1 |
-| celestial_objects | data | 1,237 | 0 | 1 |
+| celestial_objects | data | 1,248 | 0 | 1 |
 | climate_cache_manager | cache | 161 | 1 | 1 |
-| close_approach_data | data | 519 | 1 | 1 |
-| comet_visualization_shells | rendering/shells | 1,688 | 2 | 1 |
-| constants_new | data | 629 | 0 | 14 |
+| close_approach_data | data | 513 | 2 | 1 |
+| color_map | other | 43 | 0 | 0 |
+| comet_visualization_shells | rendering/shells | 1,818 | 2 | 1 |
+| constants_new | data | 633 | 0 | 17 |
 | convert_hot_ph_to_json | devtool | 197 | 0 | 0 |
 | coordinate_system_guide | computation | 547 | 0 | 0 |
 | create_cache_backups | devtool | 8 | 1 | 0 |
@@ -2353,9 +2404,9 @@ and explains in context.
 | earth_system_controller | gui | 81 | 0 | 0 |
 | earth_system_generator | computation | 688 | 3 | 1 |
 | earth_system_visualization_gui | gui | 1,822 | 8 | 1 |
-| earth_visualization_shells | rendering/shells | 846 | 2 | 1 |
+| earth_visualization_shells | rendering/shells | 982 | 3 | 1 |
 | energy_imbalance | computation | 839 | 1 | 1 |
-| eris_visualization_shells | rendering/shells | 407 | 2 | 1 |
+| eris_visualization_shells | rendering/shells | 462 | 2 | 1 |
 | examine_hot_csv | devtool | 45 | 0 | 0 |
 | exoplanet_coordinates | data | 399 | 1 | 0 |
 | exoplanet_orbits | rendering | 613 | 3 | 1 |
@@ -2364,77 +2415,76 @@ and explains in context.
 | fetch_climate_data | computation | 761 | 0 | 1 |
 | fetch_paleoclimate_data | computation | 169 | 0 | 0 |
 | formatting_utils | utility | 16 | 0 | 4 |
-| gallery_editor | gui | 1,338 | 0 | 0 |
-| gallery_json_fixer | pipeline | 483 | 0 | 0 |
-| gallery_studio | gui | 4,485 | 2 | 0 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
-| idealized_orbits | computation | 6,164 | 4 | 5 |
+| idealized_orbits | computation | 6,546 | 4 | 5 |
 | incremental_cache_manager | cache | 657 | 1 | 4 |
-| info_dictionary | data | 1,943 | 0 | 9 |
-| json_converter | pipeline | 622 | 0 | 1 |
-| jupiter_visualization_shells | rendering/shells | 778 | 2 | 1 |
-| mars_visualization_shells | rendering/shells | 710 | 2 | 1 |
-| mercury_visualization_shells | rendering/shells | 650 | 2 | 1 |
+| info_dictionary | data | 2,046 | 0 | 9 |
+| jupiter_visualization_shells | rendering/shells | 843 | 3 | 1 |
+| mars_visualization_shells | rendering/shells | 806 | 3 | 1 |
+| mercury_visualization_shells | rendering/shells | 342 | 2 | 1 |
 | messier_catalog | data | 404 | 0 | 3 |
 | messier_object_data_handler | pipeline | 329 | 2 | 1 |
-| module_atlas | devtool | 484 | 0 | 2 |
-| moon_visualization_shells | rendering/shells | 442 | 2 | 1 |
-| neptune_visualization_shells | rendering/shells | 1,513 | 3 | 1 |
+| module_atlas | devtool | 494 | 0 | 2 |
+| moon_visualization_shells | rendering/shells | 511 | 2 | 1 |
+| neptune_visualization_shells | rendering/shells | 1,505 | 3 | 2 |
 | object_type_analyzer | computation | 754 | 1 | 3 |
-| orbit_data_manager | cache | 1,520 | 0 | 4 |
-| orbital_elements | computation | 1,285 | 0 | 4 |
+| orbit_data_manager | cache | 1,547 | 0 | 4 |
+| orbital_elements | computation | 1,294 | 0 | 4 |
 | orbital_param_viz | gui | 1,936 | 5 | 1 |
+| orrery_rendering | other | 268 | 2 | 10 |
 | osculating_cache_manager | cache | 761 | 2 | 3 |
 | paleoclimate_dual_scale | rendering | 955 | 2 | 1 |
 | paleoclimate_human_origins_full | rendering | 1,884 | 1 | 1 |
 | paleoclimate_visualization | rendering | 478 | 1 | 2 |
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
-| palomas_orrery | gui | 8,253 | 28 | 0 |
-| palomas_orrery_dashboard | gui | 600 | 0 | 0 |
+| palomas_orrery | gui | 8,416 | 28 | 0 |
+| palomas_orrery_dashboard | gui | 631 | 0 | 0 |
 | palomas_orrery_helpers | utility | 776 | 11 | 2 |
-| planet9_visualization_shells | rendering/shells | 243 | 2 | 1 |
-| planet_visualization | rendering | 1,027 | 16 | 2 |
-| planet_visualization_utilities | rendering | 297 | 1 | 15 |
+| planet9_visualization_shells | rendering/shells | 264 | 2 | 1 |
+| planet_visualization | rendering | 751 | 19 | 2 |
+| planet_visualization_utilities | rendering | 293 | 1 | 16 |
 | planetarium_apparent_magnitude | rendering | 352 | 11 | 1 |
 | planetarium_distance | rendering | 399 | 11 | 1 |
 | plot_data_exchange | pipeline | 168 | 0 | 3 |
 | plot_data_report_widget | rendering | 560 | 2 | 1 |
-| pluto_visualization_shells | rendering/shells | 484 | 2 | 1 |
-| provenance_scanner | devtool | 710 | 1 | 0 |
+| pluto_visualization_shells | rendering/shells | 564 | 2 | 1 |
+| provenance_scanner | devtool | 1,181 | 1 | 0 |
 | report_manager | utility | 124 | 0 | 4 |
-| saturn_visualization_shells | rendering/shells | 1,002 | 2 | 3 |
-| save_utils | pipeline | 388 | 0 | 18 |
+| saturn_visualization_shells | rendering/shells | 1,040 | 3 | 2 |
+| save_utils | pipeline | 731 | 1 | 18 |
 | scenarios_coral_bleaching | scenario | 191 | 0 | 1 |
 | scenarios_heatwaves | scenario | 622 | 0 | 1 |
 | scenarios_western_heatwave_march_2026 | scenario | 1,536 | 1 | 1 |
 | sgr_a_grand_tour | rendering | 742 | 3 | 1 |
-| sgr_a_star_data | data | 570 | 3 | 5 |
+| sgr_a_star_data | data | 572 | 3 | 5 |
 | sgr_a_visualization_animation | rendering | 343 | 3 | 0 |
 | sgr_a_visualization_core | rendering | 557 | 2 | 3 |
 | sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
-| shared_utilities | utility | 123 | 0 | 17 |
+| shared_utilities | utility | 107 | 1 | 17 |
+| shell_configs | other | 2,108 | 3 | 1 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
 | social_media_export | pipeline | 969 | 1 | 2 |
-| solar_visualization_shells | rendering/shells | 1,473 | 2 | 6 |
-| spacecraft_encounters | data | 1,204 | 2 | 1 |
-| star_notes | data | 1,137 | 0 | 5 |
+| solar_visualization_shells | rendering/shells | 1,514 | 2 | 6 |
+| spacecraft_encounters | data | 1,298 | 2 | 1 |
+| star_notes | data | 1,156 | 0 | 5 |
 | star_properties | data | 338 | 2 | 4 |
 | star_sphere_builder | rendering | 922 | 0 | 1 |
-| star_visualization_gui | gui | 1,407 | 13 | 0 |
+| star_visualization_gui | gui | 1,407 | 12 | 0 |
 | stellar_data_patches | data | 41 | 0 | 4 |
 | stellar_parameters | data | 352 | 2 | 8 |
+| test_constants_provenance | devtool | 490 | 1 | 0 |
 | test_orbit_cache | devtool | 204 | 1 | 0 |
-| uranus_visualization_shells | rendering/shells | 988 | 3 | 1 |
-| venus_visualization_shells | rendering/shells | 619 | 2 | 1 |
+| uranus_visualization_shells | rendering/shells | 1,009 | 3 | 2 |
+| venus_visualization_shells | rendering/shells | 700 | 3 | 1 |
 | verify_orbit_cache | devtool | 170 | 0 | 0 |
 | visualization_2d | rendering | 523 | 7 | 2 |
 | visualization_3d | rendering | 857 | 6 | 2 |
 | visualization_core | rendering | 350 | 5 | 7 |
-| visualization_utils | rendering | 725 | 3 | 4 |
+| visualization_utils | rendering | 725 | 3 | 3 |
 | vot_cache_manager | cache | 430 | 0 | 2 |
 
 ---
