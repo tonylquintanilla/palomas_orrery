@@ -595,7 +595,7 @@ mars_magnetosphere_info = (
     "that existed billions of years ago."
 )
 
-def create_mars_magnetosphere_shell(center_position=(0, 0, 0)):
+def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
     """Creates Mars' induced magnetosphere and localized crustal magnetic fields."""
     traces = []
     
@@ -627,7 +627,7 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0)):
     # 1. Add the main induced magnetosphere structure
     # Rotate to actual sunward direction, then offset to center position
     x, y, z = np.array(x), np.array(y), np.array(z)
-    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position, sun_position=sun_position)
     x = x + center_x
     y = y + center_y
     z = z + center_z
@@ -699,7 +699,7 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0)):
     bow_shock_y = np.array(bow_shock_y)
     bow_shock_z = np.array(bow_shock_z)
     bow_shock_x, bow_shock_y, bow_shock_z = rotate_to_sunward(
-        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position
+        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position, sun_position=sun_position
     )
     bow_shock_x = bow_shock_x + center_x
     bow_shock_y = bow_shock_y + center_y

@@ -513,7 +513,7 @@ def create_jupiter_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
-def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
+def create_jupiter_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
     """Creates Jupiter's main magnetosphere structure."""
     # Parameters for magnetosphere components (in Jupiter radii)
     params = {
@@ -542,7 +542,12 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0)):
     
     # Rotate to actual sunward direction, then offset to center position
     x, y, z = np.array(x), np.array(y), np.array(z)
-    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    # Phase D2: sun_position + magnetic tilt. Jupiter's magnetic dipole
+    # is tilted ~10 deg from its rotation axis.
+    x, y, z = rotate_to_sunward(
+        x, y, z, center_position=center_position,
+        sun_position=sun_position, magnetic_tilt_deg=10,
+    )
     x = x + center_x
     y = y + center_y
     z = z + center_z

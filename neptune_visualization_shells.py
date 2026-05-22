@@ -592,34 +592,29 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
         'rgb(30, 136, 229)', magnetosphere_text, 'Neptune: Magnetosphere'
     ))
     
-    # Add magnetic poles and axis visualization - with error handling
-    # Phase C4: create_neptune_magnetic_poles call site UNCHANGED (bounded scope).
-    # The 4 pole/axis traces stay in Neptune's body frame; they do NOT track
-    # the sunward direction. Phase D fixes via sun_position extension.
-    try:
-        mag_poles_traces = create_neptune_magnetic_poles(center_position, offset_distance, magnetic_tilt, azimuthal_angle)
-        if mag_poles_traces and len(mag_poles_traces) > 0:
-            for trace in mag_poles_traces:
-                traces.append(trace)
-        else:
-            print("Warning: create_neptune_magnetic_poles returned empty traces")
-    except Exception as e:
-        print(f"Error in magnetic poles visualization: {e}")
-        # Create a simple fallback trace for the magnetic center
-        fallback_trace = go.Scatter3d(
-            x=[center_x + 0.2 * offset_distance],
-            y=[center_y + 0.1 * offset_distance],
-            z=[center_z + 0.5 * offset_distance],
-            mode='markers',
-            marker=dict(
-                size=10,
-                color='yellow',
-                symbol='diamond'
-            ),
-            name='Neptune: Magnetic Field Center (fallback)',
-            showlegend=True
-        )
-        traces.append(fallback_trace)
+    # Phase D2 (item 12, Option C): single diamond marker for the offset
+    # magnetic center. The magnetosphere shape communicates the 47-deg tilt
+    # and asymmetric geometry; the axis line and pole markers removed to
+    # reduce legend clutter. The offset is the one insight the shape alone
+    # cannot show -- Neptune's magnetic dipole center is displaced 0.55 radii
+    # from the planet center (Voyager 2, 1989).
+    mag_center_x = center_x + 0.2 * offset_distance
+    mag_center_y = center_y + 0.1 * offset_distance
+    mag_center_z = center_z + 0.5 * offset_distance
+    traces.append(go.Scatter3d(
+        x=[mag_center_x], y=[mag_center_y], z=[mag_center_z],
+        mode='markers',
+        marker=dict(size=8, color='yellow', symbol='diamond',
+                    line=dict(color='orange', width=2)),
+        name='Neptune: Magnetic Field Center',
+        legendgroup='Neptune: Magnetosphere',
+        text=["Neptune's magnetic field center is offset ~0.55 radii from the<br>"
+              "planet center (Voyager 2, 1989). Combined with the 47-degree<br>"
+              "tilt between magnetic and rotation axes, this creates the most<br>"
+              "asymmetric magnetosphere in the solar system."],
+        hovertemplate='%{text}<extra></extra>',
+        showlegend=True
+    ))
    
     return traces
 

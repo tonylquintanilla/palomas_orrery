@@ -630,7 +630,8 @@ earth_magnetosphere_info = (
             "extending from about 13,000 km to 60,000 km above Earth's surface."
 )
 
-def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
+def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
+
     """Creates Earth's magnetosphere."""
     traces = []
     
@@ -667,7 +668,12 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
     # 1. Add the main magnetosphere structure
     # Rotate to actual sunward direction, then offset to center position
     x, y, z = np.array(x), np.array(y), np.array(z)
-    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    # Phase D2: sun_position + magnetic tilt. Earth's magnetic dipole
+    # is tilted ~11 deg from its rotation axis.
+    x, y, z = rotate_to_sunward(
+        x, y, z, center_position=center_position,
+        sun_position=sun_position, magnetic_tilt_deg=11,
+    )
     x = x + center_x
     y = y + center_y
     z = z + center_z
@@ -731,7 +737,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0)):
     bow_shock_y = np.array(bow_shock_y)
     bow_shock_z = np.array(bow_shock_z)
     bow_shock_x, bow_shock_y, bow_shock_z = rotate_to_sunward(
-        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position
+        bow_shock_x, bow_shock_y, bow_shock_z,
+        center_position=center_position, sun_position=sun_position,
     )
     bow_shock_x = bow_shock_x + center_x
     bow_shock_y = bow_shock_y + center_y

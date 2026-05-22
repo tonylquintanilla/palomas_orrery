@@ -596,7 +596,7 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
-def create_saturn_magnetosphere(center_position=(0, 0, 0)):
+def create_saturn_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
     """Creates Saturn's main magnetosphere structure."""
     # Parameters for magnetosphere components (in Saturn radii)
     params = {
@@ -627,7 +627,7 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0)):
     # Saturn's magnetic axis is essentially aligned with its rotation axis
     # (~0 deg tilt), so magnetic_tilt_deg=0 (default).
     x, y, z = np.array(x), np.array(y), np.array(z)
-    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position, sun_position=sun_position)
     x = x + center_x
     y = y + center_y
     z = z + center_z

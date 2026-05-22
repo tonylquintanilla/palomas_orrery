@@ -20,6 +20,8 @@ Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; body-radius aliases and solar/system constants now
 imported from planet_visualization_utilities.py rather than redefined locally.
 Removed shadow redefinition of KM_PER_AU.)
+
+Updated 5/20/26 with Claude 4.6
 """
 
 import math
@@ -172,18 +174,6 @@ from mars_visualization_shells import (create_mars_inner_core_shell,
                                         mars_magnetosphere_info,                                           
                                         mars_hill_sphere_info)
 
-from asteroid_belt_visualization_shells import (
-                                        create_main_asteroid_belt,
-                                        create_hilda_group,
-                                        create_jupiter_trojans_greeks,
-                                        create_jupiter_trojans_trojans,
-                                        main_belt_info,
-                                        hilda_group_info,
-                                        jupiter_trojans_greeks_info,
-                                        jupiter_trojans_trojans_info,
-                                        get_jupiter_angle_from_data,
-                                        calculate_body_angle,
-                                        estimate_jupiter_angle_from_date)
 
 from jupiter_visualization_shells import (create_jupiter_core_shell, 
                                         create_jupiter_metallic_hydrogen_shell, 
@@ -297,242 +287,36 @@ from planet9_visualization_shells import (create_planet9_surface_shell,
 # See protocol v3.20.
 
 def create_sun_visualization(fig, sun_shell_vars, animate=False, frames=None):
+    """RETIRED: Sun rendering migrated to unified dispatch (May 2026).
+
+    Call sites in palomas_orrery.py now use create_celestial_body_visualization()
+    directly. Asteroid belt geometry dispatched at call sites.
+
+    Module updated: May 2026 with Anthropic's Claude Opus 4.6
     """
-    Creates a visualization of the Sun's layers based on which shells are selected.
-    
-    Parameters:
-        fig (plotly.graph_objects.Figure): The figure to add the Sun visualization to
-        sun_shell_vars (dict): Dictionary of selection variables for each Sun shell
-        animate (bool): Whether this is for an animated plot
-        frames (list, optional): List of frames for animation
-        
-    Returns:
-        plotly.graph_objects.Figure: The updated figure
-    """
-    # Create base traces for static visualization
-    def create_layer_traces():
-        traces = []
-        
-        # Add each selected shell based on the selection variables
-        # Order from outermost to innermost
-        if sun_shell_vars['gravitational'].get() == 1:
-            traces.extend(create_sun_gravitational_shell())
-
-        if sun_shell_vars['galactic_tide'].get() == 1:
-            traces.extend(create_sun_galactic_tide())    
-
-        if sun_shell_vars['outer_oort_clumpy'].get() == 1:
-            traces.extend(create_sun_outer_oort_clumpy())   
-
-        if sun_shell_vars['hills_cloud_torus'].get() == 1:
-            traces.extend(create_sun_hills_cloud_torus())       
-            
-
-        if sun_shell_vars['outer_oort'].get() == 1:
-            traces.extend(create_sun_outer_oort_shell())
-            
-        if sun_shell_vars['inner_oort'].get() == 1:
-            traces.extend(create_sun_inner_oort_shell())
-            
-        if sun_shell_vars['inner_oort_limit'].get() == 1:
-            traces.extend(create_sun_inner_oort_limit_shell())
-            
-
-        if sun_shell_vars['heliopause'].get() == 1:
-            traces.extend(create_sun_heliopause_shell())
-            
-        if sun_shell_vars['termination_shock'].get() == 1:
-            traces.extend(create_sun_termination_shock_shell())
-
-
-        if sun_shell_vars['trojans_greeks'].get() == 1:
-            # Get Jupiter's current position for L4 point calculation
-            jupiter_angle = 0  # Default angle
-            # If Jupiter data is available in the current context, calculate its angle
-            # This would need to be passed from the calling context
-            traces.extend(create_jupiter_trojans_greeks(jupiter_angle=jupiter_angle))
-        
-        if sun_shell_vars['trojans_trojans'].get() == 1:
-            # Get Jupiter's current position for L5 point calculation
-            jupiter_angle = 0  # Default angle
-            # If Jupiter data is available in the current context, calculate its angle
-            # This would need to be passed from the calling context
-            traces.extend(create_jupiter_trojans_trojans(jupiter_angle=jupiter_angle))
-
-
-        if sun_shell_vars['main_belt'].get() == 1:
-            traces.extend(create_main_asteroid_belt())
-        
-        if sun_shell_vars['hildas'].get() == 1:
-            traces.extend(create_hilda_group())
-
-            
-        if sun_shell_vars['outer_corona'].get() == 1:
-            traces.extend(create_sun_outer_corona_shell())
-            
-        if sun_shell_vars.get('roche_limit') and sun_shell_vars['roche_limit'].get() == 1:
-            traces.extend(create_sun_roche_limit_shell())
-
-        if sun_shell_vars.get('streamer_belt') and sun_shell_vars['streamer_belt'].get() == 1:
-            traces.extend(create_sun_streamer_belt_shell())
-
-        if sun_shell_vars.get('alfven_surface') and sun_shell_vars['alfven_surface'].get() == 1:
-            traces.extend(create_sun_alfven_surface_shell())
-
-        if sun_shell_vars['inner_corona'].get() == 1:
-            traces.extend(create_sun_inner_corona_shell())
-            
-        if sun_shell_vars['chromosphere'].get() == 1:
-            traces.extend(create_sun_chromosphere_shell())
-            
-        if sun_shell_vars['photosphere'].get() == 1:
-            traces.extend(create_sun_photosphere_shell())
-            
-        if sun_shell_vars['radiative'].get() == 1:
-            traces.extend(create_sun_radiative_shell())
-            
-        if sun_shell_vars['core'].get() == 1:
-            traces.extend(create_sun_core_shell())
-        
-        return traces
-
-    # Add base traces to figure
-    traces = create_layer_traces()
-    for trace in traces:
-        fig.add_trace(trace)
-
-    # If this is for animation, add the traces to each frame
-    if animate and frames is not None:
-        for frame in frames:
-            frame_data = list(frame.data)  # Convert tuple to list if necessary
-            frame_data.extend(traces)
-            frame.data = frame_data
-
-    return fig
+    raise NotImplementedError(
+        "create_sun_visualization() retired May 2026. "
+        "Use create_celestial_body_visualization(fig, 'Sun', ...) instead."
+    )
 
 def create_sun_corona_from_distance(fig, sun_shell_vars, sun_position):
+    """RETIRED: Off-center Sun rendering migrated to unified dispatch (May 2026).
+
+    Sun shells now render at any center via create_celestial_body_visualization()
+    with center_position parameter. No special checkbox needed.
+
+    Module updated: May 2026 with Anthropic's Claude Opus 4.6
     """
-    Creates a simplified Sun corona visualization for non-Sun-centered views.
-    Uses a simpler particle representation that scales appropriately.
+    raise NotImplementedError(
+        "create_sun_corona_from_distance() retired May 2026. "
+        "Use create_celestial_body_visualization(fig, 'Sun', ..., "
+        "center_position=sun_position) instead."
+    )
     
-    Parameters:
-        fig: The plotly figure
-        sun_shell_vars: Dictionary of Sun shell selection variables
-        sun_position: (x, y, z) tuple of Sun's position in AU
-        
-    Returns:
-        Updated figure
-    """
-    import numpy as np
-    import plotly.graph_objects as go
-    
-    # Simple sphere generation at Sun's position
-    def create_offset_sphere(radius_au, n_points=30):
-        """Create sphere points offset to sun_position"""
-        phi = np.linspace(0, 2*np.pi, n_points)
-        theta = np.linspace(0, np.pi, n_points)
-        phi, theta = np.meshgrid(phi, theta)
-        
-        x = radius_au * np.sin(theta) * np.cos(phi) + sun_position[0]
-        y = radius_au * np.sin(theta) * np.sin(phi) + sun_position[1]
-        z = radius_au * np.cos(theta) + sun_position[2]
-        
-        return x.flatten(), y.flatten(), z.flatten()
-    
-    # Add selected layers (outermost to innermost)
-    if sun_shell_vars.get('outer_corona') and sun_shell_vars['outer_corona'].get() == 1:
-        radius = OUTER_CORONA_RADII * SOLAR_RADIUS_AU
-        x, y, z = create_offset_sphere(radius, n_points=30)
-        
-        fig.add_trace(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(size=0.5, color='rgba(255, 245, 200, 0.3)', opacity=0.3),
-            name='Sun: Outer Corona',
-            hovertemplate='Sun: Outer Corona<br>~10 solar radii<br>Temperature: ~2M K<extra></extra>',
-            showlegend=True
-        ))
-    
-    if sun_shell_vars.get('inner_corona') and sun_shell_vars['inner_corona'].get() == 1:
-        radius = INNER_CORONA_RADII * SOLAR_RADIUS_AU
-        x, y, z = create_offset_sphere(radius, n_points=30)
-        
-        fig.add_trace(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(size=0.75, color='rgba(255, 235, 180, 0.4)', opacity=0.4),
-            name='Sun: Inner Corona',
-            hovertemplate='Sun: Inner Corona<br>~3 solar radii<br>Temperature: 1-3M K<extra></extra>',
-            showlegend=True
-        ))
-    
-    if sun_shell_vars.get('roche_limit') and sun_shell_vars['roche_limit'].get() == 1:
-        radius = ROCHE_LIMIT_RADII * SOLAR_RADIUS_AU
-        x, y, z = create_offset_sphere(radius, n_points=30)
-        fig.add_trace(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(size=0.85, color='rgba(200, 60, 60, 0.3)', opacity=0.3),
-            name='Sun: Roche Limit (Comets)',
-            hovertemplate='Sun: Roche Limit (Comets)<br>~3.45 solar radii<br>Tidal disruption threshold<extra></extra>',
-            showlegend=True
-        ))
-
-    if sun_shell_vars.get('streamer_belt') and sun_shell_vars['streamer_belt'].get() == 1:
-        radius = STREAMER_BELT_RADII * SOLAR_RADIUS_AU
-        x, y, z = create_offset_sphere(radius, n_points=30)
-        fig.add_trace(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(size=0.75, color='rgba(255, 200, 80, 0.25)', opacity=0.25),
-            name='Sun: Streamer Belt (Visible Corona)',
-            hovertemplate='Sun: Streamer Belt<br>~6 solar radii<br>Eclipse white-light corona<extra></extra>',
-            showlegend=True
-        ))
-
-    if sun_shell_vars.get('alfven_surface') and sun_shell_vars['alfven_surface'].get() == 1:
-        radius = ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU
-        x, y, z = create_offset_sphere(radius, n_points=30)
-        fig.add_trace(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(size=0.7, color='rgba(0, 200, 200, 0.2)', opacity=0.2),
-            name='Sun: Alfven Surface',
-            hovertemplate='Sun: Alfven Surface<br>~18.8 solar radii<br>True corona/solar wind boundary<extra></extra>',
-            showlegend=True
-        ))
-
-    if sun_shell_vars.get('chromosphere') and sun_shell_vars['chromosphere'].get() == 1:
-        radius = CHROMOSPHERE_RADII * SOLAR_RADIUS_AU
-        x, y, z = create_offset_sphere(radius, n_points=30)
-        
-        fig.add_trace(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(size=1.0, color='rgba(255, 100, 100, 0.5)', opacity=0.5),
-            name='Sun: Chromosphere',
-            hovertemplate='Sun: Chromosphere<br>~2000 km thick<br>Temperature: 4,000-20,000 K<extra></extra>',
-            showlegend=True
-        ))
-    
-    if sun_shell_vars.get('photosphere') and sun_shell_vars['photosphere'].get() == 1:
-        radius = SOLAR_RADIUS_AU
-        x, y, z = create_offset_sphere(radius, n_points=40)
-        
-        fig.add_trace(go.Scatter3d(
-            x=x, y=y, z=z,
-            mode='markers',
-            marker=dict(size=1.5, color='rgba(255, 220, 100, 0.8)', opacity=0.8),
-            name='Sun: Photosphere',
-            hovertemplate='Sun: Photosphere<br>Visible surface<br>Temperature: ~5,800 K<extra></extra>',
-            showlegend=True
-        ))
-    
-    return fig
-
 def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None,
-                                        center_position=(0, 0, 0),
+                                        center_position=(0, 0, 0), sun_position=(0, 0, 0),
                                         object_type=None, center_object=None):
+
     """
     Unified config-driven dispatch for celestial body shell visualization.
 
@@ -563,6 +347,9 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         center_position (tuple): (x, y, z) AU position of the body's center
         object_type (str): Object type for sun direction indicator suppression
         center_object (str): Name of object at plot center (indicator suppression)
+        sun_position (tuple): (x, y, z) AU position of the Sun. Default (0,0,0)
+                            is correct for heliocentric views. Body-centered
+                            views pass actual Sun offset. Phase D2.
 
     Returns:
         plotly.graph_objects.Figure: The updated figure
@@ -606,7 +393,11 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
             module_path, func_name = custom['builder'].rsplit('.', 1)
             mod = importlib.import_module(module_path)
             builder = getattr(mod, func_name)
-            traces = builder(center_position)
+            # Phase D2: pass sun_position to magnetosphere builders
+            if custom.get('needs_sun_position'):
+                traces = builder(center_position, sun_position=sun_position)
+            else:
+                traces = builder(center_position)
             for t in traces:
                 fig.add_trace(t)
 
@@ -617,14 +408,17 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     # ONE sun direction indicator per body (replaces ~50 per-shell calls).
     # Uses outermost active shell radius for scaling. Suppresses at origin
     # (body-centered view) and for Sun shells.
+
     if outermost_radius_au > 0:
         indicator_traces = create_sun_direction_indicator(
             center_position=center_position,
+            sun_position=sun_position,
             shell_radius=outermost_radius_au,
             object_type=object_type if object_type is not None else body_name,
             center_object=center_object,
         )
         for t in indicator_traces:
+
             fig.add_trace(t)
 
     # Store outermost shell radius for axis auto-scaling.
@@ -641,7 +435,8 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
 # Planet Visualization Functions
 #####################################
 
-def create_planet_visualization(fig, planet_name, shell_vars, animate=False, frames=None, center_position=(0, 0, 0)):
+def create_planet_visualization(fig, planet_name, shell_vars, animate=False, frames=None, center_position=(0, 0, 0), sun_position=(0, 0, 0)):
+
     """
     Creates a visualization of a planet's layers based on which shells are selected.
     Works for both static plots and animations.
@@ -672,7 +467,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Mercury',
             center_object='Mercury',
         )
@@ -684,7 +479,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Venus',
             center_object='Venus',
         )
@@ -697,7 +492,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Earth',
             center_object='Earth',
         )
@@ -711,7 +506,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Moon',
             center_object='Moon',
         )
@@ -723,7 +518,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Mars',
             center_object='Mars',
         )
@@ -736,7 +531,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Jupiter',
             center_object='Jupiter',
         )
@@ -749,7 +544,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Saturn',
             center_object='Saturn',
         )
@@ -760,7 +555,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Uranus',
             center_object='Uranus',
         )
@@ -771,7 +566,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Neptune',
             center_object='Neptune',
         )
@@ -782,7 +577,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Pluto',
             center_object='Pluto',
         )
@@ -793,7 +588,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Eris',
             center_object='Eris',
         )
@@ -804,7 +599,7 @@ def create_planet_visualization(fig, planet_name, shell_vars, animate=False, fra
         return create_celestial_body_visualization(
             fig, planet_name, shell_vars,
             animate=animate, frames=frames,
-            center_position=center_position,
+            center_position=center_position, sun_position=sun_position, 
             object_type='Planet 9',
             center_object='Planet 9',
         )

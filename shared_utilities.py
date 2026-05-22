@@ -10,7 +10,7 @@ When the body is at origin (body-centered view), the indicator is suppressed -
 the Sun is visible in the plot and there is no single sunward direction from
 the coordinate center.
 
-Module updated: May 2026 with Anthropic's Claude Opus 4.7
+Module updated: May 2026 with Anthropic's Claude Opus 4.6
 """
 
 import numpy as np
@@ -20,30 +20,43 @@ import plotly.graph_objs as go
 from orrery_rendering import create_info_marker
 
 
-def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, shell_radius=None, 
+def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0, 0),
+                              axis_range=None, shell_radius=None,
                               object_type=None, center_object=None):
     """
     Creates a visual indicator arrow pointing from the body toward the Sun.
 
-    The arrow points from center_position toward the origin (where the Sun is
-    in heliocentric plots). When center_position is at or near the origin
-    (body-centered views), the indicator is suppressed - the Sun is visible
-    in the plot and the coordinate text box provides reference frame context.
+    The arrow points from center_position toward sun_position. When the body
+    is at or near the Sun's position (body-centered views where the Sun is
+    also at origin, or Sun-centered views), the indicator is suppressed.
+
+    Phase D2: sun_position parameter added. Previously hardcoded to origin.
+    Now computes direction toward actual Sun position, which differs from
+    origin in body-centered (non-Sun) views.
 
     Parameters:
         center_position (tuple): (x, y, z) position of the body's center
+        sun_position (tuple): (x, y, z) position of the Sun. Default (0,0,0)
+                              is correct for heliocentric (Sun-centered) views.
+                              Body-centered views pass actual Sun offset.
         axis_range (list): The axis range [min, max] used in the plot (fallback scaling)
         shell_radius (float): Radius of the outermost active shell, for scaling
         object_type (str): Type of object being visualized (for suppression logic)
         center_object (str): Name of the object at the center of the plot
     """
     center_x, center_y, center_z = center_position
-    dist = math.sqrt(center_x**2 + center_y**2 + center_z**2)
+    sun_x, sun_y, sun_z = sun_position
 
-    # Suppress when at or very near origin - no meaningful sunward direction.
-    # The Sun is visible in the plot; the coordinate text box provides orientation.
+    # Vector from body center toward Sun
+    dx = sun_x - center_x
+    dy = sun_y - center_y
+    dz = sun_z - center_z
+    dist = math.sqrt(dx**2 + dy**2 + dz**2)
+
+    # Suppress when body is at or very near Sun - no meaningful sunward direction.
+    # Covers: body-centered view (both at origin), Sun shells, coincident positions.
     if dist < 1e-10:
-        print("Sun direction indicator: Suppressed at origin (body-centered view)")
+        print("Sun direction indicator: Suppressed (body at Sun position)")
         return []
 
     # Suppress for Sun shells (Sun doesn't need direction to itself)
@@ -51,11 +64,11 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
         print("Sun direction indicator: Not showing for Sun shells")
         return []
 
-    # Compute sunward direction (toward origin from center_position)
-    sun_dir_x = -center_x / dist
-    sun_dir_y = -center_y / dist
-    sun_dir_z = -center_z / dist
-    
+    # Sunward unit vector (from body toward Sun)
+    sun_dir_x = dx / dist
+    sun_dir_y = dy / dist
+    sun_dir_z = dz / dist
+
     # Scale the indicator arrow
     if shell_radius is not None and isinstance(shell_radius, (int, float)) and shell_radius > 0:
         plot_scale = shell_radius * 1.15  # 115% of shell radius
@@ -69,25 +82,27 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
                 plot_scale = scale_range * 0.1
                 print(f"Sun direction indicator: Using 10% of range, scale = {plot_scale:.5f} AU")
             else:
-                # Use 1/20th of distance from origin as fallback
+                # Use 1/20th of distance to Sun as fallback
                 plot_scale = dist / 20.0
-                print(f"Sun direction indicator: Using 1/20 of position distance, scale = {plot_scale:.5f} AU")
+                print(f"Sun direction indicator: Using 1/20 of Sun distance, scale = {plot_scale:.5f} AU")
         except Exception as e:
             print(f"Sun direction indicator: Error calculating scale: {e}")
             plot_scale = 0.05
-    
+
     # Minimum size for visibility
     min_scale = 0.001
     if plot_scale < min_scale:
         plot_scale = min_scale
         print(f"Sun direction indicator: Adjusted to minimum scale = {plot_scale:.5f} AU")
-    
+
     # Arrow from body center toward Sun
     tip_x = center_x + plot_scale * sun_dir_x
     tip_y = center_y + plot_scale * sun_dir_y
     tip_z = center_z + plot_scale * sun_dir_z
 
-    # Format scale for hover text
+    # Format distances for hover text
+    dist_au = dist
+    dist_km = dist * 149597870.7
     if plot_scale >= 1000:
         scale_text = f"{plot_scale:.2e} AU"
     else:
@@ -96,8 +111,7 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), axis_range=None, s
 
     info_text = (
         "Sun Direction: Arrow points from this body toward the Sun.<br>"
-        "The Sun is at the origin of the heliocentric coordinate system.<br>"
-        f"Distance to Sun: {dist:.4f} AU<br>"
+        f"Distance to Sun: {dist_au:.4f} AU ({dist_km:,.0f} km)<br>"
         f"Indicator length: {scale_text}"
     )
 

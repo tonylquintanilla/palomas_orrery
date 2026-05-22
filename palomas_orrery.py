@@ -14,7 +14,7 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
-Module updated: May 15, 2026 with Anthropic's Claude Opus 4.6 and 4.7 and Tony
+Module updated: May 21, 2026 with Anthropic's Claude Opus 4.6 and 4.7 and Tony
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -97,12 +97,10 @@ from comet_visualization_shells import (
     add_comet_tails_to_figure,           
     COMET_FEATURE_THRESHOLDS     
 )
-from planet_visualization import (              # the gryed out imports are created in runtime with celestial_objects.py
+from planet_visualization import (              # the greyed out imports are created in runtime with celestial_objects.py
     create_celestial_body_visualization,
     create_planet_visualization,
     create_planet_shell_traces,
-    create_sun_visualization,
-    create_sun_corona_from_distance,
 
     mercury_inner_core_info,
     mercury_outer_core_info,
@@ -1994,7 +1992,6 @@ sun_outer_corona_var = tk.IntVar(value=0)
 sun_streamer_belt_var  = tk.IntVar(value=0)
 sun_roche_limit_var    = tk.IntVar(value=0)
 sun_alfven_surface_var = tk.IntVar(value=0)
-sun_corona_from_distance_var = tk.IntVar(value=0)  # NEW: Special checkbox for non-Sun-centered corona
 sun_termination_shock_var = tk.IntVar(value=0)
 sun_heliopause_var = tk.IntVar(value=0)
 
@@ -2507,8 +2504,6 @@ sun_shell_vars = {
     'trojans_trojans': asteroid_belt_trojans_trojans_var,
 
     'main_belt': asteroid_belt_main_var,
-
-    'corona_from_distance': sun_corona_from_distance_var,  # NEW
 
     'outer_corona': sun_outer_corona_var,
     'inner_corona': sun_inner_corona_var,
@@ -4502,20 +4497,58 @@ def plot_objects():
                 # Add more planets here as shell systems are developed
             }
 
+            # Sun position for shell rendering (sun_position threading, D2)
+            # Must be available regardless of Sun checkbox state
+            # Reused later by comet tails section
+            if center_object_name == 'Sun':
+                _sun_pos_tuple = (0, 0, 0)
+            elif 'Sun' in positions and positions['Sun'] is not None and 'x' in positions['Sun']:
+                _sun_pos_data = positions['Sun']
+                _sun_pos_tuple = (_sun_pos_data['x'], _sun_pos_data['y'], _sun_pos_data['z'])
+            else:
+                # Sun checkbox off -- fetch position for magnetosphere orientation
+                _sun_fetch = fetch_position('10', date_obj, center_id=center_id)
+                if _sun_fetch and 'x' in _sun_fetch:
+                    _sun_pos_tuple = (_sun_fetch['x'], _sun_fetch['y'], _sun_fetch['z'])
+                else:
+                    _sun_pos_tuple = (0, 0, 0)  # Fallback: no rotation
+
             # Flag to track if shells have been added for center object
             center_shells_added = False
 
             # First add Sun visualization if needed
             if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
-                fig = create_sun_visualization(fig, sun_shell_vars)
+                fig = create_celestial_body_visualization(
+                    fig, 'Sun', sun_shell_vars,
+                    center_position=(0, 0, 0),
+                    object_type='Sun',
+                    center_object='Sun',
+                )
                 center_shells_added = True
-                
+                # Auto-scale axis to shell radius (same as planet path)
+                if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+                    shell_r = fig._shell_outermost_radius_au * 2
+                    axis_range = [-shell_r, shell_r]
+                # Asteroid belts: standalone geometry, not part of unified shell dispatch
+                if sun_shell_vars.get('main_belt') and sun_shell_vars['main_belt'].get() == 1:
+                    for t in create_main_asteroid_belt():
+                        fig.add_trace(t)
+                if sun_shell_vars.get('hildas') and sun_shell_vars['hildas'].get() == 1:
+                    for t in create_hilda_group():
+                        fig.add_trace(t)
+                if sun_shell_vars.get('trojans_greeks') and sun_shell_vars['trojans_greeks'].get() == 1:
+                    for t in create_jupiter_trojans_greeks(jupiter_angle=0):
+                        fig.add_trace(t)
+                if sun_shell_vars.get('trojans_trojans') and sun_shell_vars['trojans_trojans'].get() == 1:
+                    for t in create_jupiter_trojans_trojans(jupiter_angle=0):
+                        fig.add_trace(t)
+
             # Now add planet visualization if the center is a planet with shells
             elif center_object_name in planet_shells_config:
                 shell_vars = planet_shells_config[center_object_name]
                 if any(var.get() == 1 for var in shell_vars.values()):
 
-                    fig = create_planet_visualization(fig, center_object_name, shell_vars)
+                    fig = create_planet_visualization(fig, center_object_name, shell_vars, sun_position=_sun_pos_tuple)
                     center_shells_added = True
                     # Auto-scale axis to shell radius for migrated bodies
                     if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
@@ -4609,10 +4642,11 @@ def plot_objects():
                     if is_center and not center_shells_added:
                         print(f"\nAdding shells for center planet {planet_name}", flush=True)
                         fig = create_planet_visualization(
-                            fig,                            # First parameter should be fig
-                            planet_name,                    # Second parameter should be planet_name
-                            planet_shell_vars[planet_name], # Third parameter should be shell_vars
-                            center_position=(0, 0, 0)       # Named parameter can stay as is
+                            fig,
+                            planet_name,
+                            planet_shell_vars[planet_name],
+                            center_position=(0, 0, 0),
+                            sun_position=_sun_pos_tuple
                         )
                     # For non-center planets, use their actual positions
                     elif not is_center and 'position' in planet_data and planet_data['position'] is not None:
@@ -4625,32 +4659,24 @@ def plot_objects():
                                 fig,                            
                                 planet_name,                    
                                 planet_shell_vars[planet_name], 
-                                center_position=planet_data['position']  # Use planet's position
+                                center_position=planet_data['position'],
+                                sun_position=_sun_pos_tuple
                             )
 
-                            # Only add sun direction indicator when Sun is not the center
-                            if center_object_name != 'Sun':
-                                print(f"Adding Sun direction indicator for {planet_name}", flush=True)
-                                sun_direction_traces = create_sun_direction_indicator(
-                                    center_position=planet_data['position'],
-                                    axis_range=axis_range,  # Pass the axis_range parameter
-                                    object_type=planet_name,
-                                    center_object=center_object_name
-                                )
-
-                                for trace in sun_direction_traces:
-                                    fig.add_trace(trace)
-                            
-            # NEW: Add Sun corona when viewing from non-Sun center
+            # Add Sun shells when viewing from non-Sun center (unified dispatch)
             if center_object_name != 'Sun':
-                if sun_shell_vars.get('corona_from_distance') and sun_shell_vars['corona_from_distance'].get() == 1:
-                    # Get Sun's position relative to current center
+                if any(var.get() == 1 for var in sun_shell_vars.values()):
                     if 'Sun' in positions and positions['Sun'] is not None:
                         sun_pos_dict = positions['Sun']
-                        # Extract x, y, z from dictionary
                         sun_position = (sun_pos_dict['x'], sun_pos_dict['y'], sun_pos_dict['z'])
-                        print(f"\nAdding Sun corona layers at position {sun_position}", flush=True)
-                        fig = create_sun_corona_from_distance(fig, sun_shell_vars, sun_position)
+                        print(f"\nAdding Sun shells at offset position {sun_position}", flush=True)
+                        fig = create_celestial_body_visualization(
+                            fig, 'Sun', sun_shell_vars,
+                            center_position=sun_position,
+                            sun_position=(0, 0, 0),  # Sun points at itself = suppressed
+                            object_type='Sun',
+                            center_object=center_object_name,
+                        )
 
             selected_planets = [
                 obj['name'] for obj in objects
@@ -5368,12 +5394,7 @@ def plot_objects():
 
             # ============ ADD COMET TAILS INTEGRATION ============
             # Conservative comet tail integration
-            # Sun position for correct tail direction when center != Sun
-            _sun_pos_data = positions.get('Sun')
-            _sun_pos_tuple = (
-                (_sun_pos_data['x'], _sun_pos_data['y'], _sun_pos_data['z'])
-                if _sun_pos_data and 'x' in _sun_pos_data else (0, 0, 0)
-            )
+            # _sun_pos_tuple already computed above (D2 shell rendering)
 
             for obj in objects:
                 if obj['var'].get() == 1:
@@ -6147,10 +6168,32 @@ def animate_objects(step, label):
 
             # Add Sun visualization if needed
             if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
-                fig = create_sun_visualization(fig, sun_shell_vars)
+                fig = create_celestial_body_visualization(
+                    fig, 'Sun', sun_shell_vars,
+                    center_position=(0, 0, 0),
+                    object_type='Sun',
+                    center_object='Sun',
+                )
                 center_shells_added = True
+                # Auto-scale axis to shell radius (same as planet path)
+                if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+                    shell_r = fig._shell_outermost_radius_au * 2
+                    axis_range = [-shell_r, shell_r]
+                # Asteroid belts: standalone geometry, not part of unified shell dispatch
+                if sun_shell_vars.get('main_belt') and sun_shell_vars['main_belt'].get() == 1:
+                    for t in create_main_asteroid_belt():
+                        fig.add_trace(t)
+                if sun_shell_vars.get('hildas') and sun_shell_vars['hildas'].get() == 1:
+                    for t in create_hilda_group():
+                        fig.add_trace(t)
+                if sun_shell_vars.get('trojans_greeks') and sun_shell_vars['trojans_greeks'].get() == 1:
+                    for t in create_jupiter_trojans_greeks(jupiter_angle=0):
+                        fig.add_trace(t)
+                if sun_shell_vars.get('trojans_trojans') and sun_shell_vars['trojans_trojans'].get() == 1:
+                    for t in create_jupiter_trojans_trojans(jupiter_angle=0):
+                        fig.add_trace(t)
                 print(f"[ANIMATION] Added Sun shells ({len(fig.data)} static traces)", flush=True)
-                
+
             # Add planet visualization if the center is a planet with shells
             elif center_object_name in animation_shell_config:
                 shell_vars = animation_shell_config[center_object_name]
@@ -7920,21 +7963,6 @@ CreateToolTip(sun_alfven_surface_checkbutton, alfven_surface_info)
 sun_outer_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Extended Corona (F-corona)", variable=sun_outer_corona_var)
 sun_outer_corona_checkbutton.pack(anchor='w')
 CreateToolTip(sun_outer_corona_checkbutton, outer_corona_info)
-
-sun_corona_from_distance_checkbutton = tk.Checkbutton(
-    shell_options_frame, 
-    text="---> Enable visible solar structures from a non-solar center", 
-    variable=sun_corona_from_distance_var
-)
-sun_corona_from_distance_checkbutton.pack(anchor='w')
-
-CreateToolTip(
-    sun_corona_from_distance_checkbutton, 
-    "Enables visualization of Sun's visible atmosphere from non-Sun-centered views (Earth, Mars, etc.). "
-    "Check the Sun plus the individual shell boxes (Photosphere, Chromosphere, Inner Corona, Outer Corona) to select which "
-    "layers to display. Useful for visualizing the Sun's 'glare zone' and understanding observational challenges "
-    "for objects near the Sun. Note: Only works when viewing from another center object, not from the Sun itself."
-)
 
 asteroid_belt_label = tk.Label(shell_options_frame, text="-- Asteroid Belt Structure:", font=("Arial", 9, "bold"))
 asteroid_belt_label.pack(anchor='w', pady=(5, 0))

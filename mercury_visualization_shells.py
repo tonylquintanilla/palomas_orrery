@@ -211,7 +211,8 @@ mercury_magnetosphere_info = (
             "significantly weaker and smaller than Earth's magnetosphere."
 )
 
-def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
+def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
+
     """Creates Mercury's magnetosphere.
     
     Geometry is generated with bow shock along -X and tail along +X
@@ -254,7 +255,8 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
     
     # Rotate to actual sunward direction, then offset to center position
     x, y, z = np.array(x), np.array(y), np.array(z)
-    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position)
+    x, y, z = rotate_to_sunward(x, y, z, center_position=center_position, sun_position=sun_position)
+
     x = x + center_x
     y = y + center_y
     z = z + center_z
@@ -350,9 +352,11 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0)):
     bow_shock_x = np.array(bow_shock_x)
     bow_shock_y = np.array(bow_shock_y)
     bow_shock_z = np.array(bow_shock_z)
+  
     bow_shock_x, bow_shock_y, bow_shock_z = rotate_to_sunward(
-        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position
+        bow_shock_x, bow_shock_y, bow_shock_z, center_position=center_position, sun_position=sun_position
     )
+
     bow_shock_x = bow_shock_x + center_x
     bow_shock_y = bow_shock_y + center_y
     bow_shock_z = bow_shock_z + center_z
