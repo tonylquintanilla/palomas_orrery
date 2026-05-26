@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: May 25, 2026
-Modules: 105 | Functions: 858 | Lines: 85,662
+Generated: May 26, 2026
+Modules: 105 | Functions: 858 | Lines: 85,655
 
 ---
 
@@ -124,7 +124,7 @@ and explains in context.
 
 ### palomas_orrery.py
 
-**Role:** gui | **Lines:** 8,450
+**Role:** gui | **Lines:** 8,426
 
 > palomas_orrery.py - Main GUI and plotting engine for Paloma's Orrery.
 
@@ -186,17 +186,17 @@ and explains in context.
 - `can_be_horizons_center(obj)` (line 7705) -- Check if object can be used as Horizons coordinate center.
 - `create_celestial_checkbutton(name, variable)` (line 7807)
 - `create_mission_checkbutton(name, variable, dates)` (line 8328)
-- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 8785) -- Creates a checkbutton for a comet with a tooltip containing its description,
-- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 8903) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
-- `toggle_special_fetch_mode()` (line 9000) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
-- `create_exoplanet_checkbutton(name, variable, is_star)` (line 9016) -- Create checkbutton for exoplanet objects
-- `open_star_visualization()` (line 9037) -- Inform user about standalone Star Visualization executable.
-- `launch_galactic_center()` (line 9110) -- Launch the Sagittarius A* Grand Tour visualization.
-- `update_center_dropdown()` (line 9268) -- Update the center dropdown to show only Sun + selected centerable objects.
-- `setup_center_dropdown_traces()` (line 9329) -- Add traces to all object IntVars to update center dropdown on selection change.
-- `on_center_change()` (line 9347) -- Update frame title when the center object is changed.
-- `open_orbital_param_visualization()` (line 9785) -- Opens the orbital parameter visualization window by calling the
-- `restore_sash_positions()` (line 9957)
+- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 8772) -- Creates a checkbutton for a comet with a tooltip containing its description,
+- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 8890) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
+- `toggle_special_fetch_mode()` (line 8987) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
+- `create_exoplanet_checkbutton(name, variable, is_star)` (line 9003) -- Create checkbutton for exoplanet objects
+- `open_star_visualization()` (line 9024) -- Inform user about standalone Star Visualization executable.
+- `launch_galactic_center()` (line 9097) -- Launch the Sagittarius A* Grand Tour visualization.
+- `update_center_dropdown()` (line 9255) -- Update the center dropdown to show only Sun + selected centerable objects.
+- `setup_center_dropdown_traces()` (line 9316) -- Add traces to all object IntVars to update center dropdown on selection change.
+- `on_center_change()` (line 9331) -- Update frame title and status when the center object is changed.
+- `open_orbital_param_visualization()` (line 9759) -- Opens the orbital parameter visualization window by calling the
+- `restore_sash_positions()` (line 9931)
 
 ---
 
@@ -795,7 +795,7 @@ and explains in context.
 
 ### mars_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 808
+**Role:** rendering/shells | **Lines:** 813
 
 > mars_visualization_shells.py - Mars interior and remnant field shell traces.
 
@@ -811,13 +811,13 @@ and explains in context.
 - `create_mars_atmosphere_shell(center_position)` (line 427) -- Creates Mars's lower atmosphere shell.
 - `create_mars_upper_atmosphere_shell(center_position)` (line 511) -- Creates Mars's upper atmosphere shell.
 - `create_mars_magnetosphere_shell(center_position, sun_position)` (line 600) -- Creates Mars' induced magnetosphere and localized crustal magnetic fields.
-- `create_mars_hill_sphere_shell(center_position)` (line 844) -- Creates Mars's Hill sphere.
+- `create_mars_hill_sphere_shell(center_position)` (line 850) -- Creates Mars's Hill sphere.
 
 ---
 
 ### mercury_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 330
+**Role:** rendering/shells | **Lines:** 349
 
 > mercury_visualization_shells.py - Mercury interior, exosphere, and unique feature traces.
 
@@ -826,8 +826,8 @@ and explains in context.
 
 **Public functions:**
 
-- `create_mercury_sodium_tail(center_position)` (line 91) -- Creates Mercury's sodium tail visualization extending away from the Sun.
-- `create_mercury_magnetosphere_shell(center_position, sun_position)` (line 215) -- Creates Mercury's magnetosphere.
+- `create_mercury_sodium_tail(center_position, sun_position)` (line 92) -- Creates Mercury's sodium tail visualization extending away from the Sun.
+- `create_mercury_magnetosphere_shell(center_position, sun_position)` (line 232) -- Creates Mercury's magnetosphere.
 
 ---
 
@@ -853,7 +853,7 @@ and explains in context.
 
 ### neptune_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,505
+**Role:** rendering/shells | **Lines:** 1,517
 
 > neptune_visualization_shells.py - Neptune interior, ring, and magnetosphere shell traces.
 
@@ -867,11 +867,11 @@ and explains in context.
 - `create_neptune_cloud_layer_shell(center_position)` (line 202) -- Creates neptune's cloud layer shell.
 - `create_neptune_upper_atmosphere_shell(center_position)` (line 367) -- Creates Neptune's upper atmosphere shell.
 - `create_neptune_magnetosphere(center_position, sun_position)` (line 464) -- Creates Neptune's main magnetosphere structure with proper tilt and offset.
-- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 624) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
-- `create_neptune_radiation_belts(center_position)` (line 768) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
-- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 991) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
-- `create_neptune_ring_system(center_position)` (line 1133) -- Creates a visualization of Neptune's ring system with proper alignment.
-- `create_neptune_hill_sphere_shell(center_position)` (line 1641) -- Creates neptune's Hill sphere shell.
+- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 626) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
+- `create_neptune_radiation_belts(center_position)` (line 770) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
+- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 993) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
+- `create_neptune_ring_system(center_position)` (line 1135) -- Creates a visualization of Neptune's ring system with proper alignment.
+- `create_neptune_hill_sphere_shell(center_position)` (line 1655) -- Creates neptune's Hill sphere shell.
 
 ---
 
@@ -991,7 +991,7 @@ and explains in context.
 
 ### venus_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 702
+**Role:** rendering/shells | **Lines:** 681
 
 > venus_visualization_shells.py - Venus interior and atmosphere shell traces.
 
@@ -1005,8 +1005,8 @@ and explains in context.
 - `create_venus_crust_shell(center_position)` (line 173) -- Creates Venus's crust shell using Mesh3d for better performance with improved hover.
 - `create_venus_atmosphere_shell(center_position)` (line 326) -- Creates Venus's lower atmosphere shell.
 - `create_venus_upper_atmosphere_shell(center_position)` (line 399) -- Creates Venus's upper atmosphere shell.
-- `create_venus_magnetosphere_shell(center_position, sun_position)` (line 517) -- Creates Venus's magnetosphere.
-- `create_venus_hill_sphere_shell(center_position)` (line 738) -- Creates Venus's Hill sphere.
+- `create_venus_magnetosphere_shell(center_position, sun_position)` (line 512) -- Creates Venus's magnetosphere.
+- `create_venus_hill_sphere_shell(center_position)` (line 717) -- Creates Venus's Hill sphere.
 
 ---
 
@@ -2346,7 +2346,7 @@ and explains in context.
 
 ### orrery_rendering.py
 
-**Role:** other | **Lines:** 274
+**Role:** other | **Lines:** 275
 
 > orrery_rendering.py - Rendering contract between plot_objects and animate_objects.
 
@@ -2356,15 +2356,15 @@ and explains in context.
 **Public functions:**
 
 - `create_info_marker(x, y, z, color, text, legendgroup, customdata)` (line 27) -- Create a single info marker trace.
-- `build_sphere_shell(config, body_name, center_position)` (line 58) -- Generic sphere shell from config dict.
-- `rotate_to_sunward(px, py, pz, center_position, sun_position, magnetic_tilt_deg)` (line 186) -- Rotate points from default -X sunward to actual sunward direction.
-- `create_ring_points(inner_radius, outer_radius, n_points, thickness)` (line 297) -- Create points for a planetary ring with inner and outer radii.
+- `build_sphere_shell(config, body_name, center_position)` (line 59) -- Generic sphere shell from config dict.
+- `rotate_to_sunward(px, py, pz, center_position, sun_position, magnetic_tilt_deg)` (line 187) -- Rotate points from default -X sunward to actual sunward direction.
+- `create_ring_points(inner_radius, outer_radius, n_points, thickness)` (line 298) -- Create points for a planetary ring with inner and outer radii.
 
 ---
 
 ### shell_configs.py
 
-**Role:** other | **Lines:** 2,516
+**Role:** other | **Lines:** 2,517
 
 > shell_configs.py - Shell configuration data for all celestial bodies.
 
@@ -2417,25 +2417,25 @@ and explains in context.
 | incremental_cache_manager | cache | 657 | 1 | 4 |
 | info_dictionary | data | 2,046 | 0 | 9 |
 | jupiter_visualization_shells | rendering/shells | 850 | 3 | 1 |
-| mars_visualization_shells | rendering/shells | 808 | 3 | 1 |
-| mercury_visualization_shells | rendering/shells | 330 | 2 | 1 |
+| mars_visualization_shells | rendering/shells | 813 | 3 | 1 |
+| mercury_visualization_shells | rendering/shells | 349 | 2 | 1 |
 | messier_catalog | data | 404 | 0 | 3 |
 | messier_object_data_handler | pipeline | 329 | 2 | 1 |
 | module_atlas | devtool | 494 | 0 | 2 |
 | moon_visualization_shells | rendering/shells | 513 | 2 | 1 |
-| neptune_visualization_shells | rendering/shells | 1,505 | 3 | 2 |
+| neptune_visualization_shells | rendering/shells | 1,517 | 3 | 2 |
 | object_type_analyzer | computation | 754 | 1 | 3 |
 | orbit_data_manager | cache | 1,547 | 0 | 4 |
 | orbital_elements | computation | 1,294 | 0 | 4 |
 | orbital_param_viz | gui | 1,936 | 5 | 1 |
-| orrery_rendering | other | 274 | 2 | 10 |
+| orrery_rendering | other | 275 | 2 | 10 |
 | osculating_cache_manager | cache | 761 | 2 | 3 |
 | paleoclimate_dual_scale | rendering | 955 | 2 | 1 |
 | paleoclimate_human_origins_full | rendering | 1,884 | 1 | 1 |
 | paleoclimate_visualization | rendering | 478 | 1 | 2 |
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
-| palomas_orrery | gui | 8,450 | 28 | 0 |
+| palomas_orrery | gui | 8,426 | 28 | 0 |
 | palomas_orrery_dashboard | gui | 631 | 0 | 0 |
 | palomas_orrery_helpers | utility | 776 | 11 | 2 |
 | planet9_visualization_shells | rendering/shells | 266 | 2 | 1 |
@@ -2460,7 +2460,7 @@ and explains in context.
 | sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
 | shared_utilities | utility | 142 | 1 | 17 |
-| shell_configs | other | 2,516 | 5 | 1 |
+| shell_configs | other | 2,517 | 5 | 1 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
 | social_media_export | pipeline | 969 | 1 | 2 |
@@ -2475,7 +2475,7 @@ and explains in context.
 | test_constants_provenance | devtool | 490 | 1 | 0 |
 | test_orbit_cache | devtool | 204 | 1 | 0 |
 | uranus_visualization_shells | rendering/shells | 1,011 | 3 | 2 |
-| venus_visualization_shells | rendering/shells | 702 | 3 | 1 |
+| venus_visualization_shells | rendering/shells | 681 | 3 | 1 |
 | verify_orbit_cache | devtool | 170 | 0 | 0 |
 | visualization_2d | rendering | 523 | 7 | 2 |
 | visualization_3d | rendering | 857 | 6 | 2 |

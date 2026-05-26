@@ -663,12 +663,18 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
             showlegend=True
         )
     )
-    # NOTE: Mars magnetosphere has no info marker (pre-existing Step 2 omission).
-    # The hover_text exists as `magnetosphere_text` but is unused. Flagged in
-    # the C1 handoff for separate fix; preserved as-is to avoid editorial
-    # decisions in a mechanical refactor.
-    # TODO: add create_info_marker call here in a future cleanup pass.
-    
+
+    # Info marker at first point on magnetosphere structure.
+    # Closes the C1 handoff TODO -- single info marker pattern applied
+    # consistently with Mercury, Venus, etc.
+    # Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    traces.append(create_info_marker(
+        x[0], y[0], z[0],
+        'rgb(180, 180, 255)',
+        f"Mars: Induced Magnetosphere<br><br>{magnetosphere_text[0]}",
+        'Mars: Induced Magnetosphere'
+    ))
+
     # 2. Create and add bow shock
     bow_shock_x = []
     bow_shock_y = []

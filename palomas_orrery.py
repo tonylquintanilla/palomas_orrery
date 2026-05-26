@@ -8414,13 +8414,9 @@ def _apply_mission_preset(spacecraft_name, preset_type='encounter', encounter_in
 
         # Additive preset: ensure preset objects are checked, but preserve
         # any additional objects the user has already selected (satellites, etc.)
-        # Only clear _was_checked for the previous center to prevent shadow restore
-        prev_center = center_object_var.get()
-        for obj in objects:
-            if obj['name'] == prev_center:
-                obj['_was_checked'] = False
 
         # Check spacecraft + select_also
+
         sc_obj = next((obj for obj in objects if obj['name'] == spacecraft_name), None)
         if sc_obj and sc_obj.get('var'):
             sc_obj['var'].set(1)
@@ -8556,13 +8552,9 @@ def _apply_comet_perihelion_preset(comet_name):
         print(f"[COMET PRESET] Applying: {label}", flush=True)
 
         # Additive preset: ensure comet + Sun are checked, preserve other selections
-        # Clear _was_checked for previous center to prevent shadow restore
-        prev_center = center_object_var.get()
-        for obj in objects:
-            if obj['name'] == prev_center:
-                obj['_was_checked'] = False
 
         # Check the comet
+
         comet_obj = next((obj for obj in objects if obj['name'] == comet_name), None)
         if comet_obj and comet_obj.get('var'):
             comet_obj['var'].set(1)
@@ -8682,13 +8674,8 @@ def _apply_comet_disintegration_preset(comet_name):
             return
         print(f"[DISINT PRESET] Applying: {preset['label']}", flush=True)
 
-        # Clear previous center shadow
-        prev_center = center_object_var.get()
-        for obj in objects:
-            if obj['name'] == prev_center:
-                obj['_was_checked'] = False
-
         # Check the comet + Sun
+
         comet_obj = next((obj for obj in objects if obj['name'] == comet_name), None)
         if comet_obj and comet_obj.get('var'):
             comet_obj['var'].set(1)
@@ -9341,48 +9328,35 @@ root.after(100, setup_center_dropdown_traces)
 
 print(f"[CENTER MENU] Dynamic center dropdown initialized (starts with Sun only)", flush=True)
 
-# Track previous center for checkbox shadowing
-_previous_center = ['Sun']  # Use list to allow modification in nested function
-
 def on_center_change(*args):
-    """Update frame title when the center object is changed.
-    Also shadows/unshadows checkboxes to prevent duplicate legend entries.
+    """Update frame title and status when the center object is changed.
+
+    Previously this function also shadowed the center body's checkbox
+    (set its var to 0) to prevent a perceived duplicate legend entry.
+    The shadow had three problems:
+      (a) it hid the user's plotting intent -- the box they checked
+          went to 0 with no warning,
+      (b) it suppressed the body's full hover text. The position-fetch
+          loop near line 4263 skips bodies with var=0, so the shadowed
+          center never got into the positions dict, and add_celestial_object
+          never ran for it. The center body lost its rich hover marker
+          and was left with the truncated "(center body)" line or, when
+          shells were rendered, nothing at all,
+      (c) it didn't prevent the only real duplicate, which is between
+          the no-shells center marker block (~lines 4558-4617) and the
+          add_celestial_object call in the main render loop. That
+          duplicate survives when the user checks Sun + selects Sun as
+          center, because Sun was exempt from the shadow logic.
+    Removed in D3.1 follow-through (May 2026, Anthropic's Claude Opus 4.7).
     """
     center_object = center_object_var.get()
-    previous_center = _previous_center[0]
-    
+
     # Just update the frame title, don't fetch any data
     orbit_path_frame.config(text=f"Standard Orbit Path Fetching Controls for JSON Cache (Center: {center_object})")
-    
+
     # Update status to show current center
     update_status_display(f"Center changed to: {center_object}", 'info')
-    
-    # CHECKBOX SHADOWING: Prevent duplicate legend entries
-    # When an object becomes the center, uncheck it (it's shown at origin anyway)
-    # When it stops being the center, restore its checked state
-    
-    # Restore previous center's checkbox if it was a non-Sun object
-    if previous_center != 'Sun':
-        prev_obj = next((obj for obj in objects if obj['name'] == previous_center), None)
-        if prev_obj and prev_obj.get('var'):
-            # Check if the object was shadowed (has _was_checked flag)
-            if prev_obj.get('_was_checked', False):
-                prev_obj['var'].set(1)
-                prev_obj['_was_checked'] = False
-                print(f"[CENTER MENU] Restored checkbox for '{previous_center}'", flush=True)
-    
-    # Shadow the new center's checkbox if it's not Sun
-    if center_object != 'Sun':
-        new_obj = next((obj for obj in objects if obj['name'] == center_object), None)
-        if new_obj and new_obj.get('var'):
-            if new_obj['var'].get() == 1:
-                new_obj['_was_checked'] = True
-                new_obj['var'].set(0)
-                print(f"[CENTER MENU] Shadowed checkbox for '{center_object}' (will restore when center changes)", flush=True)
-    
-    # Update previous center tracker
-    _previous_center[0] = center_object
-    
+
     # DO NOT call update_orbit_paths or update_orbit_paths_incrementally here!
     # Data will be fetched when actually plotting with selected objects
 

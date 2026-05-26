@@ -583,31 +583,33 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
 
     # Phase C4: info marker at first point of sunward-rotated, offset geometry
     magnetosphere_text = (
-        "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted "
-        "(47 deg from its rotation axis) and significantly offset from the planet's center by more than "
-        "half a Neptune radius. This creates an extremely asymmetric magnetosphere that varies greatly "
+        "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted <br>"
+        "(47 deg from its rotation axis) and significantly offset from the planet's center by more than <br>"
+        "half a Neptune radius. This creates an extremely asymmetric magnetosphere that varies greatly <br>"
         "depending on Neptune's rotation.<br><br>"
         "Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science)."
     )
+
     traces.append(create_info_marker(
         x_final[0], y_final[0], z_final[0],
         'rgb(30, 136, 229)', f"Neptune: Magnetosphere<br><br>{magnetosphere_text}", 'Neptune: Magnetosphere'
     ))
     
-    # Phase D2 (item 12, Option C): single diamond marker for the offset
+    # Phase D2 (item 12, Option C): single open-square marker for the offset
     # magnetic center. The magnetosphere shape communicates the 47-deg tilt
     # and asymmetric geometry; the axis line and pole markers removed to
     # reduce legend clutter. The offset is the one insight the shape alone
     # cannot show -- Neptune's magnetic dipole center is displaced 0.55 radii
-    # from the planet center (Voyager 2, 1989).
+    # from the planet center (Voyager 2, 1989). Symbol: square-open per
+    # marker convention -- magnetic field center is a structural position
+    # (like a Lagrange point), not a celestial body. May 2026 update.
     mag_center_x = center_x + 0.2 * offset_distance
     mag_center_y = center_y + 0.1 * offset_distance
     mag_center_z = center_z + 0.5 * offset_distance
     traces.append(go.Scatter3d(
         x=[mag_center_x], y=[mag_center_y], z=[mag_center_z],
         mode='markers',
-        marker=dict(size=8, color='yellow', symbol='diamond',
-                    line=dict(color='orange', width=2)),
+        marker=dict(size=10, color='yellow', symbol='square-open'),
         name='Neptune: Magnetic Field Center',
         legendgroup='Neptune: Magnetosphere',
         text=["Neptune: Magnetic Field Center<br><br>"
@@ -1617,9 +1619,21 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], neptune_tilt, 'x')
+
+        # Info marker on the actual ring geometry, not a separately-rotated
+        # body-frame point. Anchoring at x_final[0]/y_final[0]/z_final[0]:
+        #   - Complete rings start at (inner_radius, 0, 0), so distinct
+        #     inner radii give distinct marker positions.
+        #   - Arcs start at (inner_radius * cos(arc_start), ...), so
+        #     distinct arc_center values give distinct positions.
+        #   - All markers ride with the ring's full two-rotation transform,
+        #     so they sit in the rendered ring's plane.
+        # Closes 2C handoff item (May 2026) -- previously six Adams-radius
+        # markers collapsed to a single 3D point due to a no-op X-axis
+        # rotation of (outer_radius_au, 0, 0).
+        # Module updated: May 2026 with Anthropic's Claude Opus 4.7
         traces.append(create_info_marker(
-            mx_t[0] + center_x, my_t[0] + center_y, mz_t[0] + center_z,
+            x_final[0], y_final[0], z_final[0],
             ring_info['color'], f"Neptune: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Neptune: {ring_info['name']}"
         ))

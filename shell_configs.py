@@ -2070,6 +2070,7 @@ CUSTOM_SHELLS = {
 
         'sodium_tail': {
             'builder': 'mercury_visualization_shells.create_mercury_sodium_tail',
+            'needs_sun_position': True,
             'tooltip': (
                 "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
                 "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT OR SET MANUAL SCALE TO 1.0 AU\n\n"

@@ -88,8 +88,19 @@ mercury_sodium_tail_info = (
             "It's one of Mercury's most distinctive features and can be observed from Earth using specialized telescopes."
 )
 
-def create_mercury_sodium_tail(center_position=(0, 0, 0)):
-    """Creates Mercury's sodium tail visualization extending away from the Sun."""
+
+def create_mercury_sodium_tail(center_position=(0, 0, 0), sun_position=(0, 0, 0)):
+    """Creates Mercury's sodium tail visualization extending away from the Sun.
+
+    Parameters:
+        center_position (tuple): (x, y, z) AU position of Mercury.
+        sun_position (tuple): (x, y, z) AU position of the Sun. Default
+                              (0, 0, 0) = Sun at origin (heliocentric view).
+                              Phase D follow-through (May 2026): pass actual
+                              Sun position from ephemeris so the tail points
+                              anti-sunward in barycenter views and in body-
+                              centered views with Mercury as the center.
+    """
     
     # Define layer properties
     layer_info = {
@@ -106,20 +117,26 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0)):
     # Sodium tail extends up to ~10,000 Mercury radii away from the Sun
     max_tail_length = 10000 * MERCURY_RADIUS_AU
     
-    # Create a conical tail shape pointing away from the Sun
-    # Sun is at origin (0,0,0), so tail points away from (0,0,0) relative to Mercury's position
+    # Create a conical tail shape pointing away from the Sun.
+    # Anti-sunward direction = (Mercury - Sun) normalized; valid in any frame.
+    # D3.1 follow-through (May 2026): previously assumed Sun at origin, which
+    # broke in barycenter views and body-centered views with Mercury as center.
     center_x, center_y, center_z = center_position
+    sun_x, sun_y, sun_z = sun_position
     
-    # Calculate direction away from Sun (normalized)
-    distance = math.sqrt(center_x**2 + center_y**2 + center_z**2)
+    # Calculate anti-sunward direction (Mercury -> away from Sun)
+    dx = center_x - sun_x
+    dy = center_y - sun_y
+    dz = center_z - sun_z
+    distance = math.sqrt(dx**2 + dy**2 + dz**2)
     if distance > 0:
-        dir_x = center_x / distance
-        dir_y = center_y / distance
-        dir_z = center_z / distance
+        dir_x = dx / distance
+        dir_y = dy / distance
+        dir_z = dz / distance
     else:
-        # If Mercury is at origin, default to +x direction
+        # Mercury and Sun coincident (degenerate case): default to +x direction
         dir_x, dir_y, dir_z = 1, 0, 0
-    
+
     # Create tail as a cone of particles with varying density
     num_particles = 500
     tail_points_x = []
@@ -264,29 +281,33 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
     
     magnetosphere_text = ["Magnetosphere: Mercury has a surprisingly active magnetosphere, given its small size and slow rotation. <br>" 
                           "However, it is significantly weaker and smaller than Earth's magnetosphere.<br>" 
-                          "* Intrinsic Magnetic Field: Mercury generates an internal magnetic field, likely due to dynamo action in <br>" 
-                          "  its partially liquid outer core. This was a significant discovery by Mariner 10 in the 1970s and has been <br>" 
-                          "  further studied by the MESSENGER and BepiColombo missions.<br>" 
-                          "* Interaction with the Solar Wind: This weak magnetic field is still strong enough to deflect the solar wind, <br>" 
-                          "  creating a small magnetosphere around the planet. This magnetosphere has features similar to Earth's, including <br>" 
-                          "  a bow shock, magnetopause, and magnetotail.<br>" 
-                          "  Dynamic and Leaky: Due to its proximity to the Sun, Mercury's magnetosphere experiences a much stronger and more <br>" 
-                          "  dynamic solar wind than Earth. This interaction can lead to magnetic reconnection events and a \"leakier\" <br>" 
-                          "  magnetosphere, allowing more solar wind particles to reach the planet's surface and contribute to its exosphere.<br>" 
-                          "* No Stable Radiation Belts: Unlike Earth's Van Allen radiation belts, Mercury's small and dynamic magnetosphere <br>" 
-                          "  doesn't have stable regions for trapping high-energy particles for extended periods.<br><br>" 
-                          "* Sunward Distance (to the Bow Shock): The bow shock is the outermost boundary where the supersonic solar <br>" 
-                          "  wind is slowed and heated as it encounters Mercury's magnetosphere. A typical sunward distance to the bow shock is <br>" 
-                          "  estimated to be around 1.4 to 2.0 radii from the center of Mercury.<br>" 
-                          "* Equatorial Radius (of the Magnetopause): The magnetopause is the boundary where Mercury's magnetic field <br>" 
-                          "  pressure balances the solar wind pressure. In the equatorial plane (perpendicular to the magnetic poles), the <br>" 
-                          "  magnetopause typically extends to about 1.1 to 1.5 radii from the center of Mercury. <br>" 
-                          "* Polar Radius (of the Magnetopause): Estimates for the distance to the magnetopause at the poles range <br>" 
-                          "  from about 0.8 to 1.2 radii from the center. In some models, it can be very close to the surface.<br>" 
-                          "* Tail Length (Magnetotail): around 10 to 30 radii downwind. However, it can be significantly longer or <br>" 
-                          "  shorter depending on solar wind conditions and magnetic reconnection events.<br>" 
-                          "* Tail Base Radius: we can estimate it to be around 1.1 to 1.5 radii.<br>" 
-                          "* Tail End Radius: likely in the range of 2 to 5 radii, but this is highly variable and less well-defined."]
+                          "* Intrinsic Magnetic Field: Mercury generates an internal magnetic field, likely due to dynamo action in its partially liquid outer core. This was a significant <br>" 
+                          "  discovery by Mariner 10 in the 1970s and has been further studied by the MESSENGER and BepiColombo missions.<br>" 
+                          "* Interaction with the Solar Wind: This weak magnetic field is still strong enough to deflect the solar wind, creating a small magnetosphere around the planet. <br>" 
+                          "  This magnetosphere has features similar to Earth's, including a bow shock, magnetopause, and magnetotail.<br>" 
+                          "  Dynamic and Leaky: Due to its proximity to the Sun, Mercury's magnetosphere experiences a much stronger and more dynamic solar wind than Earth. This interaction <br>" 
+                          "  can lead to magnetic reconnection events and a \"leakier\" magnetosphere, allowing more solar wind particles to reach the planet's surface and contribute to its exosphere.<br>" 
+                          "* No Stable Radiation Belts: Unlike Earth's Van Allen radiation belts, Mercury's small and dynamic magnetosphere doesn't have stable regions for trapping <br>" 
+                          "  high-energy particles for extended periods.<br><br>" 
+                          "Estimating the dimensions of Mercury's magnetosphere in terms of Mercury radii (~2440 km) involves <br>" 
+                          "considering its interaction with the solar wind, which is quite dynamic. However, based on observations <br>" 
+                          "from the MESSENGER and BepiColombo missions, we can provide some approximate ranges and typical values:<br>" 
+                          "* Sunward Distance (to the Bow Shock): The bow shock is the outermost boundary where the supersonic solar wind is slowed and heated as it encounters Mercury's <br>" 
+                          "  magnetosphere. This distance is highly variable depending on the solar wind conditions, but a typical sunward distance to the bow shock is estimated to be <br>" 
+                          "  around 1.4 to 2.0 radii from the center of Mercury.<br>" 
+                          "* Equatorial Radius (of the Magnetopause): The magnetopause is the boundary where Mercury's magnetic field pressure balances the solar wind pressure. In the <br>" 
+                          "  equatorial plane (perpendicular to the magnetic poles), the magnetopause typically extends to about 1.1 to 1.5 radii from the center of Mercury. This is quite <br>" 
+                          "  compressed due to the relatively weak magnetic field and strong solar wind pressure at Mercury's orbit.<br>" 
+                          "* Polar Radius (of the Magnetopause): Along Mercury's magnetic poles, the magnetopause is closer to the planet than at the equator due to the field line geometry. <br>" 
+                          "  Estimates for the distance to the magnetopause at the poles range from about 0.8 to 1.2 radii from the center. In some models, it can be very close to the surface.<br>" 
+                          "* Tail Length (Magnetotail): The magnetotail is the region downstream of the planet, stretched out by the solar wind. Mercury's magnetotail is relatively short and <br>" 
+                          "  dynamic compared to Earth's. Estimates for its typical length vary, but it's often considered to extend to around 10 to 30 radii downwind. However, it can be <br>" 
+                          "  significantly longer or shorter depending on solar wind conditions and magnetic reconnection events.<br>" 
+                          "* Tail Base Radius: The base of the magnetotail is the region just behind the planet where the magnetopause starts to be significantly stretched. The radius of this <br>" 
+                          "  tail base in the equatorial plane is roughly comparable to the equatorial radius of the magnetopause, so we can estimate it to be around 1.1 to 1.5 radii.<br>" 
+                          "* Tail End Radius: The \"end\" of Mercury's magnetotail isn't a sharply defined boundary. As the tail extends downwind, it gradually widens and becomes more turbulent, <br>" 
+                          "  eventually merging with the interplanetary magnetic field. At the estimated lengths of 10 to 30 radii, the radius of the tail is expected to be larger than at the base, <br>" 
+                          "  likely in the range of 2 to 5 radii, but this is highly variable and less well-defined."]
 
     traces.append(
         go.Scatter3d(

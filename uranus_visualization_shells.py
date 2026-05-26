@@ -508,10 +508,10 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
     trace_name = 'Uranus: Magnetosphere'
 
     description = (
-        "Uranus's Magnetosphere: tilted 60 degrees from the rotation axis -- "
-        "itself tilted 97.77 degrees from the orbital plane. This produces a "
-        "magnetosphere geometry with no analog in the rest of the solar system: "
-        "the dipole axis sweeps a wide cone as Uranus rotates, modulating the "
+        "Uranus's Magnetosphere: tilted 60 degrees from the rotation axis -- <br>"
+        "itself tilted 97.77 degrees from the orbital plane. This produces a <br>"
+        "magnetosphere geometry with no analog in the rest of the solar system: <br>"
+        "the dipole axis sweeps a wide cone as Uranus rotates, modulating the <br>"
         "magnetosphere's solar-wind interaction on a ~17-hour cycle.<br><br>"
         "Source: Ness et al. (1986) Science -- Voyager 2 magnetometer."
     )

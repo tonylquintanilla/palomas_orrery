@@ -51,6 +51,7 @@ def create_info_marker(x, y, z, color, text, legendgroup, customdata=None):
         text=[text],
         customdata=[customdata if customdata is not None else legendgroup],
         hovertemplate='%{text}<extra></extra>',
+        hoverlabel=dict(font=dict(size=11)),
         showlegend=False
     )
 
