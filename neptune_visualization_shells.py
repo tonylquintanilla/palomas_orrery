@@ -9,6 +9,7 @@ one of the most complex magnetospheres in the solar system.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 One factual correction: ring count updated from "13 known rings" to 5 named rings
 (Galle, Le Verrier, Lassell, Arago, Adams) per NASA Planetary Ring Node / Smith et al. (1989).
@@ -28,9 +29,9 @@ from shared_utilities import create_sun_direction_indicator
 # Source: NASA Neptune Fact Sheet; Podolak et al. (1995);
 #         core ~1.2 Earth masses, ~700-800 GPa, ~5,100 degC; iron/nickel/silicate composition confirmed.
 neptune_core_info = (
-            "2.4 MB PER FRAME FOR HTML.\n\n"
-            "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. \n" 
-            "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million \n" 
+            "2.4 MB PER FRAME FOR HTML.<br><br>"
+            "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. <br>" 
+            "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million <br>" 
             "bars (700 GPa), and the temperature could be as high as 5,100  degC."
 )
 
@@ -88,7 +89,7 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -101,11 +102,11 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
 # Source: NASA Solar System Exploration; Kraus et al. (2017, Nature Astronomy);
 #         superionic water and diamond rain confirmed by high-pressure experiments; 10-15 Earth masses confirmed.
 neptune_mantle_info = (
-            "2.1 MB PER FRAME FOR HTML.\n\n"
-            "Mantle: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. \n " 
-            "This layer constitutes the majority of Neptune's mass, about 10 to 15 Earth masses. The high pressure and temperature create \n" 
-            "an environment where these \"icy\" materials exist in exotic phases, possibly including ionic water and superionic water. \n" 
-            "Some theories suggest that at great depths within the mantle, methane may decompose, forming diamond crystals that could \n" 
+            "2.1 MB PER FRAME FOR HTML.<br><br>"
+            "Mantle: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. <br> " 
+            "This layer constitutes the majority of Neptune's mass, about 10 to 15 Earth masses. The high pressure and temperature create <br>" 
+            "an environment where these \"icy\" materials exist in exotic phases, possibly including ionic water and superionic water. <br>" 
+            "Some theories suggest that at great depths within the mantle, methane may decompose, forming diamond crystals that could <br>" 
             "\"rain\" downwards."
 )
 
@@ -172,7 +173,7 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -186,15 +187,15 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
 #         Wind speed 2,100 km/h is solar system record; H2/He/CH4 composition confirmed.
 neptune_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.\n\n"
-            "Atmosphere: Neptune's atmosphere is primarily composed of hydrogen (around 80%) and helium (around 19%), with a small \n" 
-            "amount of methane (about 1.5%). It's the methane that absorbs red light and reflects blue light, giving Neptune its \n" 
-            "characteristic vivid blue color. The atmosphere extends to great depths, gradually merging into the fluid mantle below.\n" 
-            "* Cloud Layer: Within the troposphere, the lowest layer of the atmosphere, various cloud layers exist at different \n" 
-            "  altitudes. The highest clouds are thought to be composed of methane ice. Below that, there may be clouds of ammonia \n" 
-            "  and hydrogen sulfide, followed by ammonium sulfide and water ice clouds at even deeper levels. These clouds are often \n" 
-            "  swept around the planet by incredibly strong winds, the fastest in the Solar System, reaching up to 2,100 kilometers \n" 
-            "  per hour. Recent observations have shown surprising changes in Neptune's cloud cover, with a significant decrease in \n" 
+            "4.6 MB PER FRAME FOR HTML.<br><br>"
+            "Atmosphere: Neptune's atmosphere is primarily composed of hydrogen (around 80%) and helium (around 19%), with a small <br>" 
+            "amount of methane (about 1.5%). It's the methane that absorbs red light and reflects blue light, giving Neptune its <br>" 
+            "characteristic vivid blue color. The atmosphere extends to great depths, gradually merging into the fluid mantle below.<br>" 
+            "* Cloud Layer: Within the troposphere, the lowest layer of the atmosphere, various cloud layers exist at different <br>" 
+            "  altitudes. The highest clouds are thought to be composed of methane ice. Below that, there may be clouds of ammonia <br>" 
+            "  and hydrogen sulfide, followed by ammonium sulfide and water ice clouds at even deeper levels. These clouds are often <br>" 
+            "  swept around the planet by incredibly strong winds, the fastest in the Solar System, reaching up to 2,100 kilometers <br>" 
+            "  per hour. Recent observations have shown surprising changes in Neptune's cloud cover, with a significant decrease in <br>" 
             "  cloudiness possibly linked to the solar cycle."
 )
 
@@ -277,6 +278,7 @@ def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Neptune: {layer_info['name']}",
+        legendgroup=f"Neptune: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -339,7 +341,7 @@ def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Neptune: {layer_info['name']} (Info)"
+    trace_name = f"Neptune: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -348,7 +350,7 @@ def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Neptune: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -357,8 +359,8 @@ def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 neptune_upper_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.\n\n"
-            "Upper Atmosphere: Above the troposphere lies the stratosphere, where temperature increases with altitude. Higher still \n" 
+            "2.7 MB PER FRAME FOR HTML.<br><br>"
+            "Upper Atmosphere: Above the troposphere lies the stratosphere, where temperature increases with altitude. Higher still <br>" 
             "is the thermosphere, characterized by lower pressures. The outermost layer is the exosphere, which gradually fades into space."
 )
 
@@ -436,7 +438,7 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -449,12 +451,12 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science);
 #         47 deg tilt and 0.55 R_N offset discovered by Voyager 2, 1989.
 neptune_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
-            "1.4 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
+            "1.4 MB PER FRAME FOR HTML.<br><br>"
 
-            "Magnetosphere: Neptune possesses a significant and unusual magnetosphere. Unlike Earth's magnetic field, which is \n" 
-            "roughly aligned with its rotational axis, Neptune's magnetic axis is tilted by about 47 degrees relative to its rotation \n" 
-            "axis and offset from the planet's center by a considerable fraction of its radius. This creates a complex and dynamic \n" 
+            "Magnetosphere: Neptune possesses a significant and unusual magnetosphere. Unlike Earth's magnetic field, which is <br>" 
+            "roughly aligned with its rotational axis, Neptune's magnetic axis is tilted by about 47 degrees relative to its rotation <br>" 
+            "axis and offset from the planet's center by a considerable fraction of its radius. This creates a complex and dynamic <br>" 
             "magnetic environment. The magnetosphere traps charged particles from the solar wind and accelerates them to high energies."                     
 )
 
@@ -589,7 +591,7 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
     )
     traces.append(create_info_marker(
         x_final[0], y_final[0], z_final[0],
-        'rgb(30, 136, 229)', magnetosphere_text, 'Neptune: Magnetosphere'
+        'rgb(30, 136, 229)', f"Neptune: Magnetosphere<br><br>{magnetosphere_text}", 'Neptune: Magnetosphere'
     ))
     
     # Phase D2 (item 12, Option C): single diamond marker for the offset
@@ -608,18 +610,28 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
                     line=dict(color='orange', width=2)),
         name='Neptune: Magnetic Field Center',
         legendgroup='Neptune: Magnetosphere',
-        text=["Neptune's magnetic field center is offset ~0.55 radii from the<br>"
+        text=["Neptune: Magnetic Field Center<br><br>"
+              "Neptune's magnetic field center is offset ~0.55 radii from the<br>"
               "planet center (Voyager 2, 1989). Combined with the 47-degree<br>"
               "tilt between magnetic and rotation axes, this creates the most<br>"
               "asymmetric magnetosphere in the solar system."],
         hovertemplate='%{text}<extra></extra>',
-        showlegend=True
+        showlegend=False
     ))
    
     return traces
 
 def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth):
-    """Creates a simplified visualization of Neptune's magnetic poles and axis."""
+    """Creates a simplified visualization of Neptune's magnetic poles and axis.
+
+    DEPRECATED (D2 Option C, May 2026): This function is no longer called.
+    The D2 sweep replaced the multi-trace magnetic-axis visualization with a
+    single diamond marker rendered inline inside
+    create_neptune_magnetosphere() at the offset magnetic center (~0.55
+    Neptune radii, 47 deg tilt; Voyager 2, 1989). Retained in source for
+    historical reference. The post-D2 inventory script flags this function's
+    four showlegend=True traces; that flagging is expected and harmless.
+    """
     center_x, center_y, center_z = center_position
     
     # Start with offset magnetic center
@@ -749,7 +761,7 @@ def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimut
 
 
 neptune_radiation_belts_info = (
-                "560 KB PER FRAME FOR HTML.\n\n"
+                "560 KB PER FRAME FOR HTML.<br><br>"
                 "Zones of trapped high-energy particles in neptune's magnetosphere"                     
 )
 
@@ -965,7 +977,7 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
         )
         traces.append(create_info_marker(
             x_final[0], y_final[0], z_final[0],
-            belt['color'], belt['description'], f"Neptune: {belt['name']}"
+            belt['color'], f"Neptune: {belt['name']}<br><br>{belt['description']}", f"Neptune: {belt['name']}"
         ))
     
     # Add field-aligned current visualization connecting regions
@@ -1084,7 +1096,7 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
         traces.append(create_info_marker(
             x_final[0], y_final[0], z_final[0],
             params.get('color', 'rgb(200, 200, 255)'),
-            params['description'], f"Neptune: {params['name']}"
+            f"Neptune: {params['name']}<br><br>{params['description']}", f"Neptune: {params['name']}"
         ))
     
     return traces
@@ -1093,28 +1105,28 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
 #         Neptune has 5 named rings (Galle, Le Verrier, Lassell, Arago, Adams) plus diffuse sheets.
 #         "13 known rings" is a high estimate; updated to 5 primary named rings per current consensus.
 neptune_ring_system_info = (
-                "22.2 MB PER FRAME FOR HTML.\n\n"
+                "22.2 MB PER FRAME FOR HTML.<br><br>"
 
-                "Neptune has 5 named rings plus several diffuse dusty sheets. The rings are generally very narrow, dark (reflecting \n"
-                "very little light, similar to charcoal), and composed of dust and larger particles that are icy and darkened by rock. \n"
-                "The rings are grouped into two main systems:\n" 
-                "* Main Rings: Five named rings -- Galle, Le Verrier, Lassell, Arago, and Adams.\n" 
-                "* Outer Dusty Sheets: More distant, broad, diffuse regions of fine dust.\n" 
-                "While the main rings of Neptune are narrow bands, there are also broader, more diffuse rings made of dust. These \n" 
-                "dusty rings could be considered to have a more toroidal (donut-like) distribution of material compared to the thin, \n" 
-                "distinct main rings.\n" 
-                "* The main rings are relatively dense and have well-defined edges. They are composed mostly of larger, darker \n" 
-                "  particles, often described as being the color of charcoal.\n" 
-                "* The Adams Ring is the outermost and most prominent, containing five distinctive arc segments (Courage, Liberte, \n" 
-                "  Egalite 1 & 2, Fraternite) confined by orbital resonances with the moon Galatea.\n" 
-                "* The outer dusty sheets are much fainter and more diffuse than the main rings, composed of fine dust particles \n" 
-                "  likely fed by micrometeoroid impacts on Neptune's inner moons.\n" 
-                "* Composition: The main rings are primarily larger, dark particles, while the outer sheets are predominantly fine dust.\n" 
-                "* Structure: The main rings are narrow and well-defined, whereas the outer sheets are broad and diffuse.\n" 
-                "* Origin and Evolution: The dusty outer sheets are likely fed by dust kicked off Neptune's inner moons by \n"
-                "  micrometeoroid impacts.\n" 
-                "* Visual Characteristics: The main rings are dark and difficult to see, requiring specific observation techniques.\n" 
-                "In summary, while all are part of Neptune's ring system, the significant differences in composition, structure, and \n" 
+                "Neptune has 5 named rings plus several diffuse dusty sheets. The rings are generally very narrow, dark (reflecting <br>"
+                "very little light, similar to charcoal), and composed of dust and larger particles that are icy and darkened by rock. <br>"
+                "The rings are grouped into two main systems:<br>" 
+                "* Main Rings: Five named rings -- Galle, Le Verrier, Lassell, Arago, and Adams.<br>" 
+                "* Outer Dusty Sheets: More distant, broad, diffuse regions of fine dust.<br>" 
+                "While the main rings of Neptune are narrow bands, there are also broader, more diffuse rings made of dust. These <br>" 
+                "dusty rings could be considered to have a more toroidal (donut-like) distribution of material compared to the thin, <br>" 
+                "distinct main rings.<br>" 
+                "* The main rings are relatively dense and have well-defined edges. They are composed mostly of larger, darker <br>" 
+                "  particles, often described as being the color of charcoal.<br>" 
+                "* The Adams Ring is the outermost and most prominent, containing five distinctive arc segments (Courage, Liberte, <br>" 
+                "  Egalite 1 & 2, Fraternite) confined by orbital resonances with the moon Galatea.<br>" 
+                "* The outer dusty sheets are much fainter and more diffuse than the main rings, composed of fine dust particles <br>" 
+                "  likely fed by micrometeoroid impacts on Neptune's inner moons.<br>" 
+                "* Composition: The main rings are primarily larger, dark particles, while the outer sheets are predominantly fine dust.<br>" 
+                "* Structure: The main rings are narrow and well-defined, whereas the outer sheets are broad and diffuse.<br>" 
+                "* Origin and Evolution: The dusty outer sheets are likely fed by dust kicked off Neptune's inner moons by <br>"
+                "  micrometeoroid impacts.<br>" 
+                "* Visual Characteristics: The main rings are dark and difficult to see, requiring specific observation techniques.<br>" 
+                "In summary, while all are part of Neptune's ring system, the significant differences in composition, structure, and <br>" 
                 "likely origin make it accurate to distinguish between the narrow, dark main rings and the broad, dusty outer sheets."
 )
 
@@ -1608,7 +1620,7 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
         mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], neptune_tilt, 'x')
         traces.append(create_info_marker(
             mx_t[0] + center_x, my_t[0] + center_y, mz_t[0] + center_z,
-            ring_info['color'], ring_info['description'],
+            ring_info['color'], f"Neptune: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Neptune: {ring_info['name']}"
         ))
 
@@ -1616,13 +1628,13 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
 
 # Source: NASA Solar System Dynamics (SSD); Hill sphere ~116 million km / ~4,685 Neptune radii confirmed.
 neptune_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.<br>" 
+            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
-            "Neptune's Hill sphere is the region around the planet where its gravitational influence dominates over that of the Sun. \n" 
-            "Any moon or other object orbiting Neptune within this sphere is more likely to remain bound to it rather than being pulled \n" 
-            "away by the Sun's gravity. Neptune's Hill sphere extends to a staggering approximately 4685 times the radius of Neptune. \n" 
-            "This vast gravitational influence allows Neptune to retain its large system of moons, including the distant and unusual \n" 
+            "Neptune's Hill sphere is the region around the planet where its gravitational influence dominates over that of the Sun. <br>" 
+            "Any moon or other object orbiting Neptune within this sphere is more likely to remain bound to it rather than being pulled <br>" 
+            "away by the Sun's gravity. Neptune's Hill sphere extends to a staggering approximately 4685 times the radius of Neptune. <br>" 
+            "This vast gravitational influence allows Neptune to retain its large system of moons, including the distant and unusual <br>" 
             "irregular satellites."                     
 )
 
@@ -1679,7 +1691,7 @@ def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

@@ -9,6 +9,7 @@ magnetic anomalies.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     All claims verified correct; no factual corrections needed.
     Provenance audit identified by Anthropic's Claude Opus 4.7
@@ -23,7 +24,7 @@ from orrery_rendering import rotate_to_sunward, create_info_marker
 # Mars Shell Creation Functions
 
 mars_inner_core_info = (
-            "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars \n" 
+            "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars <br>" 
             "possesses a solid inner core. This inner core is primarily composed of iron and nickel, similar to Earth's."
 )
 
@@ -102,7 +103,7 @@ def create_mars_inner_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -113,9 +114,9 @@ def create_mars_inner_core_shell(center_position=(0, 0, 0)):
     return traces
 
 mars_outer_core_info = (
-            "A Liquid Outer Core: Surrounding the solid inner core is believed to be a liquid outer core, also primarily \n" 
-            "made of iron and nickel, but likely containing a significant amount of lighter elements like sulfur, oxygen, \n" 
-            "or even hydrogen. The presence of these lighter elements would lower the melting point of the iron-nickel alloy, \n" 
+            "A Liquid Outer Core: Surrounding the solid inner core is believed to be a liquid outer core, also primarily <br>" 
+            "made of iron and nickel, but likely containing a significant amount of lighter elements like sulfur, oxygen, <br>" 
+            "or even hydrogen. The presence of these lighter elements would lower the melting point of the iron-nickel alloy, <br>" 
             "allowing it to remain liquid despite the pressure."
 )
 
@@ -187,7 +188,7 @@ def create_mars_outer_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -198,7 +199,7 @@ def create_mars_outer_core_shell(center_position=(0, 0, 0)):
     return traces
 
 mars_mantle_info = (
-            "Mantle: Surrounding the core is a silicate mantle, similar to Earth's. It's composed of dense rocks rich in \n" 
+            "Mantle: Surrounding the core is a silicate mantle, similar to Earth's. It's composed of dense rocks rich in <br>" 
             "elements like silicon, oxygen, iron, and magnesium."
 )
 
@@ -255,7 +256,7 @@ def create_mars_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -266,8 +267,8 @@ def create_mars_mantle_shell(center_position=(0, 0, 0)):
     return traces
 
 mars_crust_info = (
-            "Mars's crust: Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes \n" 
-            "suggest that the Martian crust is significantly thicker than Earth's, perhaps averaging around 70 kilometers \n" 
+            "Mars's crust: Mars has a crust, which is the outermost solid shell. Interestingly, recent findings from marsquakes <br>" 
+            "suggest that the Martian crust is significantly thicker than Earth's, perhaps averaging around 70 kilometers <br>" 
             "(43 miles) or even thicker in some areas."
 )
 
@@ -338,6 +339,7 @@ def create_mars_crust_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Mars: {layer_info['name']}",
+        legendgroup=f"Mars: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -400,7 +402,7 @@ def create_mars_crust_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Mars: {layer_info['name']} (Info)"
+    trace_name = f"Mars: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -409,7 +411,7 @@ def create_mars_crust_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Mars: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -418,7 +420,7 @@ def create_mars_crust_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 mars_atmosphere_info = (
-            "Atmosphere: Mars has a thin atmosphere, much less dense than Earth's. It's primarily composed of carbon dioxide \n" 
+            "Atmosphere: Mars has a thin atmosphere, much less dense than Earth's. It's primarily composed of carbon dioxide <br>" 
             "(about 95%), with small amounts of nitrogen, argon, and other gases."
 )
 
@@ -481,7 +483,7 @@ def create_mars_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -494,15 +496,15 @@ def create_mars_atmosphere_shell(center_position=(0, 0, 0)):
 # Source: NASA MAVEN Mission; NASA Mars Fact Sheet
 # Verified: April 2026 via Gemini fact-check
 mars_upper_atmosphere_info = (
-            "Upper Atmosphere: Like Earth, Mars has upper atmospheric layers, including an ionosphere and exosphere, where \n" 
-            "the atmosphere becomes very thin and interacts with solar radiation and the solar wind.\n\n" 
-            "Exosphere: This is the outermost layer, starting above the thermosphere (around 200 km/124 miles) and gradually \n" 
-            "thinning out into space. Atoms and molecules here are so far apart that they can escape the planet's gravity.\n\n" 
-            "Interaction with Solar Wind: Without a global magnetosphere, the Martian atmosphere is directly exposed to the \n" 
-            "solar wind, a stream of charged particles from the Sun. This interaction is believed to have played a significant \n" 
-            "role in stripping away much of Mars' early, potentially thicker atmosphere and contributing to the loss of liquid \n" 
-            "water on the surface. Unlike Earth, Mars lacks a stratosphere. On Earth, the stratosphere is characterized by a \n" 
-            "temperature inversion due to the absorption of ultraviolet radiation by the ozone layer. Mars has a very thin \n" 
+            "Upper Atmosphere: Like Earth, Mars has upper atmospheric layers, including an ionosphere and exosphere, where <br>" 
+            "the atmosphere becomes very thin and interacts with solar radiation and the solar wind.<br><br>" 
+            "Exosphere: This is the outermost layer, starting above the thermosphere (around 200 km/124 miles) and gradually <br>" 
+            "thinning out into space. Atoms and molecules here are so far apart that they can escape the planet's gravity.<br><br>" 
+            "Interaction with Solar Wind: Without a global magnetosphere, the Martian atmosphere is directly exposed to the <br>" 
+            "solar wind, a stream of charged particles from the Sun. This interaction is believed to have played a significant <br>" 
+            "role in stripping away much of Mars' early, potentially thicker atmosphere and contributing to the loss of liquid <br>" 
+            "water on the surface. Unlike Earth, Mars lacks a stratosphere. On Earth, the stratosphere is characterized by a <br>" 
+            "temperature inversion due to the absorption of ultraviolet radiation by the ozone layer. Mars has a very thin <br>" 
             "atmosphere and no significant ozone layer, so this distinct layer doesn't form."
 )
 
@@ -563,7 +565,7 @@ def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -583,13 +585,13 @@ def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Source: NASA MAVEN Mission; Mars Global Surveyor (crustal magnetic fields)
 # Verified: April 2026 via Gemini fact-check
 mars_magnetosphere_info = (
-    "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n"
-    "Unlike Earth, Mars lacks a global magnetic field generated by its core. Instead, it has:\n\n"
+    "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.<br><br>"
+    "Unlike Earth, Mars lacks a global magnetic field generated by its core. Instead, it has:<br><br>"
     "1. Induced Magnetosphere: Created by the interaction between the solar wind and Mars' ionosphere. "
     "It's much weaker and closer to the planet than Earth's magnetosphere, extending only about 1-2 Mars radii "
-    "on the Sun-facing side.\n\n"
+    "on the Sun-facing side.<br><br>"
     "2. Bow Shock: Still forms where the solar wind first encounters Mars' atmosphere and ionosphere, "
-    "but it's much closer to the planet (around 1.5 Mars radii).\n\n"
+    "but it's much closer to the planet (around 1.5 Mars radii).<br><br>"
     "3. Crustal Magnetic Fields: Localized 'mini-magnetospheres' created by magnetized regions in Mars' crust, "
     "particularly in the southern hemisphere. These are remnants of Mars' ancient global magnetic field "
     "that existed billions of years ago."
@@ -734,7 +736,7 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
     # Info marker at first point on bow shock structure
     traces.append(create_info_marker(
         bow_shock_x[0], bow_shock_y[0], bow_shock_z[0],
-        'rgb(255, 200, 150)', bow_shock_text[0], 'Mars: Bow Shock'
+        'rgb(255, 200, 150)', f"Mars: Bow Shock<br><br>{bow_shock_text[0]}", 'Mars: Bow Shock'
     ))
     
     # 3. Create localized crustal magnetic fields (unique to Mars)
@@ -823,7 +825,7 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
         if i == 0:
             traces.append(create_info_marker(
                 field_x[0], field_y[0], field_z[0],
-                'rgb(255, 100, 255)', crustal_field_text[0],
+                'rgb(255, 100, 255)', f"Mars: Crustal Magnetic Fields<br><br>{crustal_field_text[0]}",
                 'Mars: Crustal Magnetic Fields'
             ))
 
@@ -834,8 +836,8 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
 #         1.1 Mkm / 324.5 R_Mars is the semi-major axis average.
 # Verified: April 2026 via Gemini fact-check
 mars_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
-            "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its \n" 
+            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.<br><br>" 
+            "Mars's Hill Sphere (extends to ~324.5 Mars radii or about 1.1 million km), which defines the region of its <br>" 
             "gravitational influence and encompasses its two moons."
 )
 
@@ -914,7 +916,7 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

@@ -8,6 +8,7 @@ Candidate for full migration to shell_configs.py (no custom functions needed).
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 All 5 flagged claims confirmed (Weber et al. 2011, NASA Moon Fact Sheet, Apollo
 Seismic Experiment reports, NASA SSD, Draper 1847). No factual corrections needed.
@@ -24,7 +25,7 @@ from shared_utilities import create_sun_direction_indicator
 # Source: Weber et al. (2011), Science, "Seismic Detection of the Lunar Core";
 #         inner core ~240 km radius, 1,600-1,700 K, refined from Apollo seismic data.
 moon_inner_core_info = (
-            "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:\n" 
+            "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon\'s wobble suggest:<br>" 
             "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius."
 )
 
@@ -81,7 +82,7 @@ def create_moon_inner_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -92,7 +93,7 @@ def create_moon_inner_core_shell(center_position=(0, 0, 0)):
     return traces
 
 moon_outer_core_info = (
-            "Outer Core: Surrounding the inner core, this is thought to be a liquid, iron-rich outer core with a radius of about \n" 
+            "Outer Core: Surrounding the inner core, this is thought to be a liquid, iron-rich outer core with a radius of about <br>" 
             "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core."
 )
 
@@ -154,7 +155,7 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -167,12 +168,12 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
 # Source: NASA Moon Fact Sheet; Apollo Seismic Experiment reports (deep moonquakes 700-1,200 km,
 #         tidal stress origin confirmed).
 moon_mantle_info = (
-            "Above the core lies the Moon's mantle, which makes up the bulk of its interior:\n" 
-            "* Composition: Primarily composed of silicate rocks, similar to Earth's mantle, but with different proportions of \n" 
-            "  elements. It's thought to be rich in olivine and pyroxene.\n" 
-            "* State: The Moon's mantle is largely solid today. However, in its early history, it would have been at least partially \n" 
-            "  molten, leading to volcanic activity that formed the vast maria (dark plains) on the lunar surface.\n" 
-            "* Lunar Deep Moonquakes: Seismometers left by Apollo missions detected \"deep moonquakes\" originating in the mantle at \n" 
+            "Above the core lies the Moon's mantle, which makes up the bulk of its interior:<br>" 
+            "* Composition: Primarily composed of silicate rocks, similar to Earth's mantle, but with different proportions of <br>" 
+            "  elements. It's thought to be rich in olivine and pyroxene.<br>" 
+            "* State: The Moon's mantle is largely solid today. However, in its early history, it would have been at least partially <br>" 
+            "  molten, leading to volcanic activity that formed the vast maria (dark plains) on the lunar surface.<br>" 
+            "* Lunar Deep Moonquakes: Seismometers left by Apollo missions detected \"deep moonquakes\" originating in the mantle at <br>" 
             "  depths of 700 to 1,200 km (435-745 miles). These are likely caused by tidal stresses from Earth."
 )
 
@@ -243,7 +244,7 @@ def create_moon_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -254,16 +255,16 @@ def create_moon_mantle_shell(center_position=(0, 0, 0)):
     return traces
 
 moon_crust_info = (
-            "The outermost layer of the Moon is its crust, which is significantly thicker on the far side than on the near side:\n" 
-            "* Composition: Dominated by anorthositic rocks (rich in plagioclase feldspar), which are lighter in color and form the \n" 
-            "  lunar highlands. The dark maria, on the other hand, are vast basaltic plains formed by ancient volcanic eruptions that \n" 
+            "The outermost layer of the Moon is its crust, which is significantly thicker on the far side than on the near side:<br>" 
+            "* Composition: Dominated by anorthositic rocks (rich in plagioclase feldspar), which are lighter in color and form the <br>" 
+            "  lunar highlands. The dark maria, on the other hand, are vast basaltic plains formed by ancient volcanic eruptions that <br>" 
             "  filled large impact basins.<br>" 
-            "* Thickness: The lunar crust varies in thickness. On the near side (facing Earth), it's estimated to be around 30-50 \n" 
-            "  kilometers thick. On the far side, it can be much thicker, possibly reaching up to 100 kilometers or more. This \n" 
-            "  asymmetry is a major characteristic of the Moon. The most compelling explanations for the Moon's crustal thickness \n" 
-            "  asymmetry point to a combination of factors related to its formation in Earth\'s intense thermal environment and a \n" 
-            "  massive early impact that shaped its internal heat distribution and subsequent geological evolution.\n" 
-            "* Surface Features: The crust is heavily cratered due to billions of years of impacts from asteroids and comets. Other \n" 
+            "* Thickness: The lunar crust varies in thickness. On the near side (facing Earth), it's estimated to be around 30-50 <br>" 
+            "  kilometers thick. On the far side, it can be much thicker, possibly reaching up to 100 kilometers or more. This <br>" 
+            "  asymmetry is a major characteristic of the Moon. The most compelling explanations for the Moon's crustal thickness <br>" 
+            "  asymmetry point to a combination of factors related to its formation in Earth\'s intense thermal environment and a <br>" 
+            "  massive early impact that shaped its internal heat distribution and subsequent geological evolution.<br>" 
+            "* Surface Features: The crust is heavily cratered due to billions of years of impacts from asteroids and comets. Other <br>" 
             "  features include rilles (channels, often associated with lava flows), domes, and wrinkle ridges."
 )
 
@@ -352,6 +353,7 @@ def create_moon_crust_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Moon: {layer_info['name']}",
+        legendgroup=f"Moon: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -414,7 +416,7 @@ def create_moon_crust_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Moon: {layer_info['name']} (Info)"
+    trace_name = f"Moon: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -423,7 +425,7 @@ def create_moon_crust_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Moon: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -432,14 +434,14 @@ def create_moon_crust_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 moon_exosphere_info = (
-            "The Moon essentially has no atmosphere in the traditional sense. Instead, it has an exosphere. It's an incredibly \n" 
-            "tenuous layer of gases, far less dense than a vacuum on Earth. It's so thin that gas molecules rarely collide with \n" 
-            "each other.\n" 
-            "* Sources: The exosphere is formed from gases released from the Moon\'s interior from radioactive decay, outgassing \n" 
-            "  from the surface due to solar wind bombardment, and micrometeoroid impacts.\n" 
-            "* Composition: Primarily composed of noble gases like argon and helium, along with trace amounts of sodium, potassium, \n" 
-            "  hydrogen, and other elements.\n" 
-            "* No Weather: Due to its extreme thinness, there's no atmospheric pressure, no wind, no weather, and no significant \n" 
+            "The Moon essentially has no atmosphere in the traditional sense. Instead, it has an exosphere. It's an incredibly <br>" 
+            "tenuous layer of gases, far less dense than a vacuum on Earth. It's so thin that gas molecules rarely collide with <br>" 
+            "each other.<br>" 
+            "* Sources: The exosphere is formed from gases released from the Moon\'s interior from radioactive decay, outgassing <br>" 
+            "  from the surface due to solar wind bombardment, and micrometeoroid impacts.<br>" 
+            "* Composition: Primarily composed of noble gases like argon and helium, along with trace amounts of sodium, potassium, <br>" 
+            "  hydrogen, and other elements.<br>" 
+            "* No Weather: Due to its extreme thinness, there's no atmospheric pressure, no wind, no weather, and no significant <br>" 
             "  shielding from solar radiation or micrometeoroids."
 )
 
@@ -502,7 +504,7 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -515,10 +517,10 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
 # Source: NASA Solar System Dynamics (SSD); Hill sphere radius ~60,000 km confirmed,
 #         34.53 lunar radii derived from Moon mean radius 1,737.4 km.
 moon_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.\n\n" 
-            "The Moon's Hill sphere (also known as the Roche sphere in this context) is the region around it where its own gravity \n" 
-            "is the dominant force attracting satellites, as opposed to the much stronger gravitational pull of the Earth. If an \n" 
-            "object is outside the Moon\'s Hill sphere, it would typically end up orbiting Earth instead of the Moon.\n" 
+            "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.<br><br>" 
+            "The Moon's Hill sphere (also known as the Roche sphere in this context) is the region around it where its own gravity <br>" 
+            "is the dominant force attracting satellites, as opposed to the much stronger gravitational pull of the Earth. If an <br>" 
+            "object is outside the Moon\'s Hill sphere, it would typically end up orbiting Earth instead of the Moon.<br>" 
             "* The estimated radius of the Moon's Hill sphere is approximately 60,000 kilometers, approximately 34.53 lunar radii." 
             )
 
@@ -550,7 +552,7 @@ def create_moon_hill_sphere_shell(center_position=(0, 0, 0)):
     
     # Create the trace
     r_info = radius_au * 1.05
-    trace_name = 'Hill Sphere'
+    trace_name = 'Moon: Hill Sphere'
 
     shell_trace = go.Scatter3d(
         x=x,
@@ -574,7 +576,7 @@ def create_moon_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[hover_text],
+        text=[f"{trace_name}<br><br>{hover_text}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

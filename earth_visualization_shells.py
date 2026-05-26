@@ -85,7 +85,7 @@ def create_earth_inner_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -157,7 +157,7 @@ def create_earth_outer_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -227,7 +227,7 @@ def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -297,7 +297,7 @@ def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -380,6 +380,7 @@ def create_earth_crust_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Earth: {layer_info['name']}",
+        legendgroup=f"Earth: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -442,7 +443,7 @@ def create_earth_crust_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Earth: {layer_info['name']} (Info)"
+    trace_name = f"Earth: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -451,7 +452,7 @@ def create_earth_crust_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Earth: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -521,7 +522,7 @@ def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -593,7 +594,7 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -678,7 +679,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     y = y + center_y
     z = z + center_z
     
-    magnetosphere_text = ["Earth's magnetosphere extends about 10 Earth radii on the Sun-facing side<br>"
+    magnetosphere_text = ["Earth: Magnetosphere<br><br>"
+                 "Earth's magnetosphere extends about 10 Earth radii on the Sun-facing side<br>"
                  "and stretches into a long magnetotail on the night side. It protects Earth<br>"
                  "from solar radiation and cosmic rays, making complex life possible."]
     
@@ -744,7 +746,8 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     bow_shock_y = bow_shock_y + center_y
     bow_shock_z = bow_shock_z + center_z
     
-    bow_shock_text = ["Bow Shock: The boundary where the supersonic solar wind is first slowed<br>"
+    bow_shock_text = ["Earth: Bow Shock<br><br>"
+                "Bow Shock: The boundary where the supersonic solar wind is first slowed<br>"
                 "by Earth's magnetic field, typically located about 15 Earth radii upstream<br>"
                 "from Earth on the Sun-facing side.<br>"
                 "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."]
@@ -825,7 +828,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
         belt_y = np.array(belt_y) + center_y
         belt_z = np.array(belt_z) + center_z
         
-        belt_text = [belt_texts[i]]
+        belt_text = [f"{belt_names[i]}<br><br>{belt_texts[i]}"]
         belt_customdata = [belt_names[i]]
 
         traces.append(
@@ -930,6 +933,7 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     #         SpaceX Starlink status; NASA (ISS, Hubble altitudes)
     # Verified: April 2026 via Gemini fact-check
     hover_text = (
+        "Earth: Low Earth Orbit (LEO)<br><br>"
         "Low Earth Orbit (LEO)<br>"
         "Altitude range: 200 km to 2,000 km above surface<br>"
         "Radius: 6,571 km to 8,371 km from Earth's center (1.03 to 1.31 Earth radii)<br><br>"
@@ -1035,6 +1039,7 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
     # Source: ITU, UCS Satellite Database, JPL CAD API (Apophis)
     # Verified: April 2026 via Gemini fact-check
     hover_text = (
+        "Earth: Geostationary Belt (GEO)<br><br>"
         "Geostationary Belt (GEO)<br>"
         "Altitude: 35,786 km above surface<br>"
         "Radius: 42,164 km from Earth's center (6.62 Earth radii)<br><br>"
@@ -1132,7 +1137,7 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Earth: Hill Sphere',
-        text=[hover_text],
+        text=[f"Earth: Hill Sphere<br><br>{hover_text}"],
         customdata=['Earth: Hill Sphere'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

@@ -11,6 +11,8 @@ the Sun is visible in the plot and there is no single sunward direction from
 the coordinate center.
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
+                Anthropic's Claude Opus 4.7 (D3.1 follow-up: body_name parameter
+                for distinct multi-body Sun Direction indicators)
 """
 
 import numpy as np
@@ -22,7 +24,8 @@ from orrery_rendering import create_info_marker
 
 def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0, 0),
                               axis_range=None, shell_radius=None,
-                              object_type=None, center_object=None):
+                              object_type=None, center_object=None,
+                              body_name=None):
     """
     Creates a visual indicator arrow pointing from the body toward the Sun.
 
@@ -34,6 +37,13 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
     Now computes direction toward actual Sun position, which differs from
     origin in body-centered (non-Sun) views.
 
+    D3.1 follow-up (May 2026): body_name parameter added. When provided, the
+    indicator's legend label and legendgroup are prefixed with the body name
+    (e.g. "Earth: Sun Direction"), so multi-body plots (Earth-Moon barycenter
+    view, etc.) show distinct indicators that toggle independently. Default
+    None preserves the original 'Sun Direction' label for callers that don't
+    yet pass body_name (asteroid belt populations, comet trails).
+
     Parameters:
         center_position (tuple): (x, y, z) position of the body's center
         sun_position (tuple): (x, y, z) position of the Sun. Default (0,0,0)
@@ -43,6 +53,8 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
         shell_radius (float): Radius of the outermost active shell, for scaling
         object_type (str): Type of object being visualized (for suppression logic)
         center_object (str): Name of the object at the center of the plot
+        body_name (str): Optional body name for body-prefixed legend label.
+                         When provided, legend reads "{body_name}: Sun Direction".
     """
     center_x, center_y, center_z = center_position
     sun_x, sun_y, sun_z = sun_position
@@ -109,13 +121,25 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
         decimal_places = 5 if plot_scale < 0.1 else 2
         scale_text = f"{plot_scale:.{decimal_places}f} AU"
 
+    # D3.1 follow-up (May 2026): body-prefixed legend label when body_name
+    # provided. Default 'Sun Direction' preserves backward compatibility for
+    # callers that don't pass body_name. Multi-body plots (Earth-Moon
+    # barycenter view, etc.) now produce distinct indicators that toggle
+    # independently.
+    if body_name:
+        legend_name = f"{body_name}: Sun Direction"
+    else:
+        legend_name = 'Sun Direction'
+
+    # Rule 2 prepend: legend label as structural header (D3.1 follow-up,
+    # May 2026 -- fills the dispatch-path blind spot that the per-body
+    # sweep missed).
     info_text = (
+        f"{legend_name}<br><br>"
         "Sun Direction: Arrow points from this body toward the Sun.<br>"
         f"Distance to Sun: {dist_au:.4f} AU ({dist_km:,.0f} km)<br>"
         f"Indicator length: {scale_text}"
     )
-
-    legend_name = 'Sun Direction'
 
     # Dashed yellow line from center toward Sun
     indicator_trace = go.Scatter3d(

@@ -9,6 +9,7 @@ solar system after the heliosphere.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Hill sphere inconsistency resolved (info string said 530 R_J / 0.25 AU;
     correct is 740 R_J / 0.35 AU). Hill sphere "around a" typo fixed.
@@ -66,10 +67,10 @@ def create_ring_points_jupiter (inner_radius, outer_radius, n_points=100, thickn
 # Source: NASA Juno Mission; Wahl et al. (2017)
 # Verified: April 2026 via Gemini fact-check
 jupiter_core_info = (
-            "2.4 MB PER FRAME FOR HTML.\n\n"
-            "Jupiter's core is believed to be a dense mixture of rock, metal, and hydrogen compounds.\n"
-            "It may be up to 10 times the mass of Earth. Recent models suggest the core might be\n"
-            "partially dissolved or 'fuzzy' rather than a distinct solid structure. Its temperature\n"
+            "2.4 MB PER FRAME FOR HTML.<br><br>"
+            "Jupiter's core is believed to be a dense mixture of rock, metal, and hydrogen compounds.<br>"
+            "It may be up to 10 times the mass of Earth. Recent models suggest the core might be<br>"
+            "partially dissolved or 'fuzzy' rather than a distinct solid structure. Its temperature<br>"
             "is estimated at about 20,000K and up to 40,000K. The color chosen approximates a black body."
 )
 
@@ -124,7 +125,7 @@ def create_jupiter_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -137,9 +138,9 @@ def create_jupiter_core_shell(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Fact Sheet; Juno Science Results
 # Verified: April 2026 via Gemini fact-check
 jupiter_metallic_hydrogen_info = (
-            "2.1 MB PER FRAME FOR HTML.\n\n"
-            "Under extreme pressure, hydrogen transitions to a metallic state in this layer.\n"
-            "It behaves like an electrical conductor and is responsible for generating\n"
+            "2.1 MB PER FRAME FOR HTML.<br><br>"
+            "Under extreme pressure, hydrogen transitions to a metallic state in this layer.<br>"
+            "It behaves like an electrical conductor and is responsible for generating<br>"
             "Jupiter's powerful magnetic field. Temperatures in this region may reach 10,000K."
 )
 
@@ -194,7 +195,7 @@ def create_jupiter_metallic_hydrogen_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -207,10 +208,10 @@ def create_jupiter_metallic_hydrogen_shell(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Fact Sheet; Juno Science Results
 # Verified: April 2026 via Gemini fact-check
 jupiter_molecular_hydrogen_info = (
-            "2.5 MB PER FRAME FOR HTML.\n\n"
-            "This layer consists of hydrogen in its molecular form. The transition from metallic\n"
-            "to molecular hydrogen is gradual. This layer makes up the bulk of Jupiter's mass\n"
-            "and is marked by decreasing temperature and pressure as you move outward. The temperature\n"
+            "2.5 MB PER FRAME FOR HTML.<br><br>"
+            "This layer consists of hydrogen in its molecular form. The transition from metallic<br>"
+            "to molecular hydrogen is gradual. This layer makes up the bulk of Jupiter's mass<br>"
+            "and is marked by decreasing temperature and pressure as you move outward. The temperature<br>"
             "ranges from about 5,000K (outer) to 10,000K (inner)."
 )
 
@@ -266,7 +267,7 @@ def create_jupiter_molecular_hydrogen_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -280,11 +281,11 @@ def create_jupiter_molecular_hydrogen_shell(center_position=(0, 0, 0)):
 # Verified: April 2026 via Gemini fact-check
 jupiter_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.\n\n"
-            "Jupiter's visible cloud layer consists of bands of different colors, caused by\n"
-            "variations in chemical composition and atmospheric dynamics. The clouds are primarily\n"
-            "composed of ammonia, ammonium hydrosulfide, and water. The famous Great Red Spot\n"
-            "is a massive storm system located in this layer. Temperature ranges from 120 K in\n" 
+            "4.6 MB PER FRAME FOR HTML.<br><br>"
+            "Jupiter's visible cloud layer consists of bands of different colors, caused by<br>"
+            "variations in chemical composition and atmospheric dynamics. The clouds are primarily<br>"
+            "composed of ammonia, ammonium hydrosulfide, and water. The famous Great Red Spot<br>"
+            "is a massive storm system located in this layer. Temperature ranges from 120 K in<br>" 
             "the highest ammonia ice clouds to about 200 K in the lower ammonium hydrosulfide clouds."
 )
 
@@ -353,6 +354,7 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Jupiter: {layer_info['name']}",
+        legendgroup=f"Jupiter: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -415,7 +417,7 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Jupiter: {layer_info['name']} (Info)"
+    trace_name = f"Jupiter: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -424,7 +426,7 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Jupiter: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -435,11 +437,11 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Fact Sheet; Juno Science Results
 # Verified: April 2026 via Gemini fact-check
 jupiter_upper_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.\n\n"
-            "Jupiter's upper atmosphere includes the stratosphere and thermosphere.\n"
-            "It's less dense than the cloud layer below and contains hydrocarbon haze\n"
-            "produced by solar ultraviolet radiation. Aurora activity can be observed\n"
-            "at Jupiter's poles, caused by interactions with its magnetic field. Temperature\n"
+            "2.7 MB PER FRAME FOR HTML.<br><br>"
+            "Jupiter's upper atmosphere includes the stratosphere and thermosphere.<br>"
+            "It's less dense than the cloud layer below and contains hydrocarbon haze<br>"
+            "produced by solar ultraviolet radiation. Aurora activity can be observed<br>"
+            "at Jupiter's poles, caused by interactions with its magnetic field. Temperature<br>"
             "ranges from 200K in the stratosphere to 1000K in the thermosphere and exosphere."
 )
 
@@ -496,7 +498,7 @@ def create_jupiter_upper_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -573,12 +575,12 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
                "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.")
     traces.append(create_info_marker(
         x[0], y[0], z[0],
-        'rgb(200, 200, 255)', mag_desc, 'Jupiter: Magnetosphere'
+        'rgb(200, 200, 255)', f"Jupiter: Magnetosphere<br><br>{mag_desc}", 'Jupiter: Magnetosphere'
     ))
     
     return traces
 
-jupiter_io_plasma_torus_info = ("634 KB PER FRAME FOR HTML.\n\n"
+jupiter_io_plasma_torus_info = ("634 KB PER FRAME FOR HTML.<br><br>"
               "Donut-shaped region of charged particles from Jupiter's moon Io")
 
 def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
@@ -648,7 +650,7 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
     ]
     traces.append(create_info_marker(
         io_torus_x[0], io_torus_y[0], io_torus_z[0],
-        'rgb(255, 100, 100)', io_desc, 'Jupiter: Io Plasma Torus'
+        'rgb(255, 100, 100)', f"Jupiter: Io Plasma Torus<br><br>{io_desc}", 'Jupiter: Io Plasma Torus'
     ))
     
     return traces
@@ -656,8 +658,8 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Magnetosphere Overview; Juno Mission
 # Verified: April 2026 via Gemini fact-check
 jupiter_radiation_belts_info = (
-            "560 KB PER FRAME FOR HTML.\n\n"
-            "Vizualize at a manual scale of 0.005 AU.\n\n"
+            "560 KB PER FRAME FOR HTML.<br><br>"
+            "Vizualize at a manual scale of 0.005 AU.<br><br>"
             "Zones of trapped high-energy particles in Jupiter's magnetosphere"                     
 )
 
@@ -738,7 +740,7 @@ def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
         )
         traces.append(create_info_marker(
             belt_x[0], belt_y[0], belt_z[0],
-            belt_colors[i], belt_texts[i], belt_names[i]
+            belt_colors[i], f"{belt_names[i]}<br><br>{belt_texts[i]}", belt_names[i]
         ))
     
     return traces
@@ -746,8 +748,8 @@ def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
 # Source: NASA Solar System Dynamics
 # Verified: April 2026 via Gemini fact-check
 jupiter_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.<br>" 
+            "1.3 MB PER FRAME FOR HTML.<br><br>"
             "Jupiter's Hill Sphere (extends to ~740 Jupiter radii, about 0.35 AU or ~53 million km)"                      
 )
 
@@ -806,7 +808,7 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -831,19 +833,19 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_ring_system_info = (
-                "22.2 MB PER FRAME FOR HTML.\n\n"
+                "22.2 MB PER FRAME FOR HTML.<br><br>"
 
-                "The main ring is reddish and composed of dust ejected from Jupiter's small inner moons,\n"
-                "Metis and Adrastea, due to high-speed impacts by micrometeoroids.\n\n"
+                "The main ring is reddish and composed of dust ejected from Jupiter's small inner moons,<br>"
+                "Metis and Adrastea, due to high-speed impacts by micrometeoroids.<br><br>"
 
-                "The Halo Ring is a faint, thick torus of material.\n"
-                "The ring likely consists of fine dust particles pushed out of the main ring\n"
-                "by electromagnetic forces from Jupiter's powerful magnetosphere.\n\n" 
+                "The Halo Ring is a faint, thick torus of material.<br>"
+                "The ring likely consists of fine dust particles pushed out of the main ring<br>"
+                "by electromagnetic forces from Jupiter's powerful magnetosphere.<br><br>" 
 
-                "The Amalthea Gossamer Ring is an extremely faint and wide ring.\n"
-                "It is composed of dust particles ejected from Amalthea by micrometeoroid impacts.\n\n"   
+                "The Amalthea Gossamer Ring is an extremely faint and wide ring.<br>"
+                "It is composed of dust particles ejected from Amalthea by micrometeoroid impacts.<br><br>"   
 
-                "The Thebe Gossamer Ring is another very faint and wide ring.\n"
+                "The Thebe Gossamer Ring is another very faint and wide ring.<br>"
                 "It is composed of dust particles ejected from Thebe by micrometeoroid impacts."                                           
 )
 
@@ -969,7 +971,7 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
         ring_marker_x = outer_radius_au + center_x
         traces.append(create_info_marker(
             ring_marker_x, center_y, center_z,
-            ring_info['color'], ring_info['description'],
+            ring_info['color'], f"Jupiter: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Jupiter: {ring_info['name']}"
         ))
     
@@ -978,18 +980,18 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Magnetosphere Overview; Juno Mission
 # Verified: April 2026 via Gemini fact-check
 jupiter_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.4 AU TO VISUALIZE.\n"
-            "1.4 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.4 AU TO VISUALIZE.<br>"
+            "1.4 MB PER FRAME FOR HTML.<br><br>"
 
-            "Jupiter's magnetosphere extends up to 100 Jupiter radii on the sunward side\n"
-            "and forms a magnetotail stretching beyond Saturn's orbit in the opposite direction.\n"
-            "It traps charged particles, creating intense radiation belts that would be lethal to humans.\n\n"
+            "Jupiter's magnetosphere extends up to 100 Jupiter radii on the sunward side<br>"
+            "and forms a magnetotail stretching beyond Saturn's orbit in the opposite direction.<br>"
+            "It traps charged particles, creating intense radiation belts that would be lethal to humans.<br><br>"
 
-            "Io plasma torus: A donut-shaped region of charged particles emanating from\n"
-            "Jupiter's moon Io due to volcanic activity. These particles become trapped\n"
-            "in Jupiter's magnetic field, forming this distinctive structure.\n\n"  
+            "Io plasma torus: A donut-shaped region of charged particles emanating from<br>"
+            "Jupiter's moon Io due to volcanic activity. These particles become trapped<br>"
+            "in Jupiter's magnetic field, forming this distinctive structure.<br><br>"  
 
-            "Inner radiation belt: Intense region of trapped high-energy particles near Jupiter\n"
-            "Middle radiation belt: Region of trapped charged particles at intermediate distances from Jupiter\n"
+            "Inner radiation belt: Intense region of trapped high-energy particles near Jupiter<br>"
+            "Middle radiation belt: Region of trapped charged particles at intermediate distances from Jupiter<br>"
             "Outer radiation belt: Extended region of trapped particles in Jupiter's outer magnetosphere"                      
 )

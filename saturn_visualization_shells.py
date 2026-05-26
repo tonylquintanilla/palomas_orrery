@@ -8,6 +8,7 @@ Division), Enceladus plasma torus, radiation belts, and magnetosphere.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 One correction: "around a where" typo fixed to "around a body where" (L889, same pattern
 as Earth and Jupiter). All other claims confirmed (NASA Saturn Fact Sheet,
@@ -26,9 +27,9 @@ from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_
 # Source: NASA Saturn Fact Sheet; Mankovich & Fuller (2021, Nature Astronomy);
 #         fuzzy core to ~60% R, ~17 Earth masses rock/ice (~55 total with H/He), ~11,700-12,000 K confirmed.
 saturn_core_info = (
-            "2.4 MB PER FRAME FOR HTML.\n\n"
-            "Saturn likely has a dense core composed of metallic elements like iron and nickel, surrounded by rocky material and \n" 
-            "other compounds solidified by immense pressure and heat. This core is estimated to be about 10 to 15 times the mass \n" 
+            "2.4 MB PER FRAME FOR HTML.<br><br>"
+            "Saturn likely has a dense core composed of metallic elements like iron and nickel, surrounded by rocky material and <br>" 
+            "other compounds solidified by immense pressure and heat. This core is estimated to be about 10 to 15 times the mass <br>" 
             "of Earth. It's smaller relative to the planet's overall size compared to Jupiter's core."
 )
 
@@ -101,7 +102,7 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -112,9 +113,9 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
     return traces
 
 saturn_metallic_hydrogen_info = (
-            "2.1 MB PER FRAME FOR HTML.\n\n"
-            "Surrounding the core is a thick layer of liquid metallic hydrogen, similar to Jupiter. Above this is a layer of liquid \n" 
-            "hydrogen and helium, which gradually transitions to a gaseous atmosphere with increasing altitude. Due to lower pressure \n" 
+            "2.1 MB PER FRAME FOR HTML.<br><br>"
+            "Surrounding the core is a thick layer of liquid metallic hydrogen, similar to Jupiter. Above this is a layer of liquid <br>" 
+            "hydrogen and helium, which gradually transitions to a gaseous atmosphere with increasing altitude. Due to lower pressure <br>" 
             "and a smaller metallic hydrogen zone, Saturn's magnetic field is weaker than Jupiter's."
 )
 
@@ -178,7 +179,7 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -189,9 +190,9 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
     return traces
 
 saturn_molecular_hydrogen_info = (
-            "2.5 MB PER FRAME FOR HTML.\n\n"
-            "Liquid Molecular Hydrogen Layer: Approximately 0.8 - 0.9 R to around 1.0 R, at the level where the atmosphere is \n" 
-            "considered mostly gaseous. This layer lies above the metallic hydrogen and gradually transitions into the gaseous \n" 
+            "2.5 MB PER FRAME FOR HTML.<br><br>"
+            "Liquid Molecular Hydrogen Layer: Approximately 0.8 - 0.9 R to around 1.0 R, at the level where the atmosphere is <br>" 
+            "considered mostly gaseous. This layer lies above the metallic hydrogen and gradually transitions into the gaseous <br>" 
             "atmosphere. The 1.0 R here is a nominal boundary often taken at the cloud tops, which are a distinct layer."
 )
 
@@ -252,7 +253,7 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -266,12 +267,12 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
 #         ~75% H2, ~25% He, winds 1,800 km/h, north pole hexagon, cloud deck order all confirmed.
 saturn_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.\n\n"
-            "Saturn's atmosphere is primarily hydrogen (about 75%) and helium (about 25%), with trace amounts of methane, ammonia, \n" 
-            "and water ice. Like Jupiter, it exhibits banded structures due to strong east-west winds, but these bands are much \n" 
-            "fainter and less distinct due to a hazy upper atmosphere. Saturn is one of the windiest places in the Solar System, \n" 
-            "with equatorial wind speeds reaching up to 1,800 kilometers per hour. A unique feature is a long-lasting hexagonal \n" 
-            "jet stream at its north pole. Cloud layers exist at different depths, composed of ammonia ice (uppermost), ammonium \n" 
+            "4.6 MB PER FRAME FOR HTML.<br><br>"
+            "Saturn's atmosphere is primarily hydrogen (about 75%) and helium (about 25%), with trace amounts of methane, ammonia, <br>" 
+            "and water ice. Like Jupiter, it exhibits banded structures due to strong east-west winds, but these bands are much <br>" 
+            "fainter and less distinct due to a hazy upper atmosphere. Saturn is one of the windiest places in the Solar System, <br>" 
+            "with equatorial wind speeds reaching up to 1,800 kilometers per hour. A unique feature is a long-lasting hexagonal <br>" 
+            "jet stream at its north pole. Cloud layers exist at different depths, composed of ammonia ice (uppermost), ammonium <br>" 
             "hydrosulfide, and water ice (lowest)."
 )
 
@@ -391,6 +392,7 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Saturn: {layer_info['name']}",
+        legendgroup=f"Saturn: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -453,7 +455,7 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Saturn: {layer_info['name']} (Info)"
+    trace_name = f"Saturn: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -462,7 +464,7 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Saturn: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -471,9 +473,9 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 saturn_upper_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.\n\n"
-            "While the colorful cloud bands are the most visually prominent feature of Saturn, there's a significant and complex \n" 
-            "structure of gases extending far above them, each layer with its own characteristics and processes. The Cassini mission \n" 
+            "2.7 MB PER FRAME FOR HTML.<br><br>"
+            "While the colorful cloud bands are the most visually prominent feature of Saturn, there's a significant and complex <br>" 
+            "structure of gases extending far above them, each layer with its own characteristics and processes. The Cassini mission <br>" 
             "provided a wealth of information about these upper atmospheric layers."
 )
 
@@ -579,7 +581,7 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -654,12 +656,12 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
                "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic.")
     traces.append(create_info_marker(
         x[0], y[0], z[0],
-        'rgb(200, 200, 255)', mag_desc, 'Saturn: Magnetosphere'
+        'rgb(200, 200, 255)', f"Saturn: Magnetosphere<br><br>{mag_desc}", 'Saturn: Magnetosphere'
     ))
     
     return traces
 
-saturn_enceladus_plasma_torus_info = ("634 KB PER FRAME FOR HTML.\n\n"
+saturn_enceladus_plasma_torus_info = ("634 KB PER FRAME FOR HTML.<br><br>"
               "Donut-shaped region of charged particles from saturn's moon Io")
 
 def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
@@ -756,13 +758,13 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
     traces.append(create_info_marker(
         enceladus_torus_x_final[0], enceladus_torus_y_final[0],
         enceladus_torus_z_final[0],
-        'rgb(200, 220, 255)', enceladus_text[0], 'Saturn: Enceladus Plasma Torus'
+        'rgb(200, 220, 255)', f"Saturn: Enceladus Plasma Torus<br><br>{enceladus_text[0]}", 'Saturn: Enceladus Plasma Torus'
     ))
     
     return traces
 
 saturn_radiation_belts_info = (
-            "560 KB PER FRAME FOR HTML.\n\n"
+            "560 KB PER FRAME FOR HTML.<br><br>"
             "Zones of trapped high-energy particles in Saturn's magnetosphere"                     
 )
 
@@ -874,7 +876,7 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
         )
         traces.append(create_info_marker(
             belt_x_final[0], belt_y_final[0], belt_z_final[0],
-            belt_colors[i], belt_texts[i], belt_names[i]
+            belt_colors[i], f"{belt_names[i]}<br><br>{belt_texts[i]}", belt_names[i]
         ))
     
     return traces
@@ -882,12 +884,12 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
 # Source: NASA Solar System Dynamics (SSD);
 #         Hill sphere ~91 million km / ~151 Saturn radii confirmed.
 saturn_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.<br>" 
+            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
-            "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of \n" 
-            "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to \n" 
-            "Saturn's lower mass. The Hill sphere is crucial for determining the maximum distance at which a moon can stably orbit \n" 
+            "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of <br>" 
+            "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to <br>" 
+            "Saturn's lower mass. The Hill sphere is crucial for determining the maximum distance at which a moon can stably orbit <br>" 
             "Saturn."                     
 )
 
@@ -951,7 +953,7 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -970,19 +972,19 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
     return traces
 
 saturn_ring_system_info = (
-                "22.2 MB PER FRAME FOR HTML.\n\n"
+                "22.2 MB PER FRAME FOR HTML.<br><br>"
 
-                "The main ring is reddish and composed of dust ejected from Saturn's small inner moons,\n"
-                "Metis and Adrastea, due to high-speed impacts by micrometeoroids.\n\n"
+                "The main ring is reddish and composed of dust ejected from Saturn's small inner moons,<br>"
+                "Metis and Adrastea, due to high-speed impacts by micrometeoroids.<br><br>"
 
-                "The Halo Ring is a faint, thick torus of material.\n"
-                "The ring likely consists of fine dust particles pushed out of the main ring\n"
-                "by electromagnetic forces from Saturn's powerful magnetosphere.\n\n" 
+                "The Halo Ring is a faint, thick torus of material.<br>"
+                "The ring likely consists of fine dust particles pushed out of the main ring<br>"
+                "by electromagnetic forces from Saturn's powerful magnetosphere.<br><br>" 
 
-                "The Amalthea Gossamer Ring is an extremely faint and wide ring.\n"
-                "It is composed of dust particles ejected from Amalthea by micrometeoroid impacts.\n\n"   
+                "The Amalthea Gossamer Ring is an extremely faint and wide ring.<br>"
+                "It is composed of dust particles ejected from Amalthea by micrometeoroid impacts.<br><br>"   
 
-                "The Thebe Gossamer Ring is another very faint and wide ring.\n"
+                "The Thebe Gossamer Ring is another very faint and wide ring.<br>"
                 "It is composed of dust particles ejected from Thebe by micrometeoroid impacts."                                           
 )
 
@@ -1169,7 +1171,7 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
         mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], saturn_tilt, 'x')
         traces.append(create_info_marker(
             mx_t[0] + center_x, my_t[0] + center_y, mz_t[0] + center_z,
-            ring_info['color'], ring_info['description'],
+            ring_info['color'], f"Saturn: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Saturn: {ring_info['name']}"
         ))
     
@@ -1178,11 +1180,11 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
 # Source: NASA Cassini Mission; Saturn Magnetosphere Overview;
 #         magnetic axis tilt <0.1 deg (unique among planets), Enceladus as dominant plasma source confirmed.
 saturn_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
-            "1.4 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
+            "1.4 MB PER FRAME FOR HTML.<br><br>"
 
-            "Saturn has a large magnetosphere, the region of space dominated by its magnetic field. Saturn's magnetic field is \n" 
-            "unique because its magnetic axis is almost perfectly aligned with its rotational axis. The magnetosphere deflects \n" 
-            "the solar wind and traps charged particles, leading to auroras at the poles. Material from Enceladus's plumes \n" 
+            "Saturn has a large magnetosphere, the region of space dominated by its magnetic field. Saturn's magnetic field is <br>" 
+            "unique because its magnetic axis is almost perfectly aligned with its rotational axis. The magnetosphere deflects <br>" 
+            "the solar wind and traps charged particles, leading to auroras at the poles. Material from Enceladus's plumes <br>" 
             "contributes plasma to Saturn's magnetosphere and its E ring."                      
 )

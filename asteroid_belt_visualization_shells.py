@@ -4,6 +4,10 @@ Asteroid Belt Visualization Module
 Functions for creating visualizations of asteroid belt structures in 3D plots.
 Includes Main Belt, Hildas, Trojans, and Greeks.
 Also includes helper functions for dynamic Trojan positioning based on Jupiter's location.
+
+
+Module updated: May 2026 with Anthropic's Claude Opus 4.6
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 """
 
 import numpy as np
@@ -217,7 +221,7 @@ def create_main_asteroid_belt(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[belt_desc],
+        text=[f"{trace_name}<br><br>{belt_desc}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -313,7 +317,7 @@ def create_hilda_group(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[hilda_desc],
+        text=[f"{trace_name}<br><br>{hilda_desc}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -413,7 +417,7 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[trojan_desc],
+        text=[f"{trace_name}<br><br>{trojan_desc}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -509,7 +513,7 @@ def create_jupiter_trojans_trojans(center_position=(0, 0, 0), jupiter_angle=0):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[trojan_desc],
+        text=[f"{trace_name}<br><br>{trojan_desc}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

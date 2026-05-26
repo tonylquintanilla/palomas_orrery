@@ -9,6 +9,7 @@ interaction with the ionosphere.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 One correction: core radius updated from ~3,000 km to ~3,200 km per current
 interior models (NASA Venus Fact Sheet; NASA Solar System Exploration).
@@ -86,7 +87,7 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -152,7 +153,7 @@ def create_venus_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -233,6 +234,7 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Venus: {layer_info['name']}",
+        legendgroup=f"Venus: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -295,7 +297,7 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Venus: {layer_info['name']} (Info)"
+    trace_name = f"Venus: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -304,7 +306,7 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Venus: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -376,7 +378,7 @@ def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -484,7 +486,7 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -646,7 +648,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Info marker at first point on magnetosphere structure
     traces.append(create_info_marker(
         x[0], y[0], z[0],
-        'rgb(180, 180, 255)', magnetosphere_text[0], 'Venus: Magnetosphere'
+        'rgb(180, 180, 255)', f"Venus: Magnetosphere<br><br>{magnetosphere_text[0]}", 'Venus: Magnetosphere'
     ))
     
     # 2. Create and add bow shock
@@ -718,7 +720,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Info marker at first point on bow shock structure
     traces.append(create_info_marker(
         bow_shock_x[0], bow_shock_y[0], bow_shock_z[0],
-        'rgb(255, 200, 150)', bow_shock_text[0], 'Venus: Bow Shock'
+        'rgb(255, 200, 150)', f"Venus: Bow Shock<br><br>{bow_shock_text[0]}", 'Venus: Bow Shock'
     ))
 
     return traces
@@ -787,7 +789,7 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Venus: Hill Sphere',
-        text=[hover_text],
+        text=[f"Venus: Hill Sphere<br><br>{hover_text}"],
         customdata=['Venus: Hill Sphere'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

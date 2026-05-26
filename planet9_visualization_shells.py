@@ -8,6 +8,7 @@ fully archivable once shell_configs.py migration is complete.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 Two corrections: (1) "Eris's orbit" typo fixed to "Planet Nine's orbit"; (2) semi-major axis
 note updated to reflect 2021 refinement (~460 AU central estimate). Radius and Hill sphere
@@ -27,10 +28,10 @@ from shared_utilities import create_sun_direction_indicator
 #         Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_surface_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.\n\n"
-            "The estimation of Planet Nine's radius being between 3 and 4 Earth radii, with a specific estimate of around 3.7 Earth \n" 
-            "radii (or 23,500 - 24,000 km), appears in several scientific discussions. This size estimate is often linked to the \n" 
-            "assumption that Planet Nine is likely an ice giant, similar in composition to Uranus and Neptune, but potentially a \n" 
+            "4.6 MB PER FRAME FOR HTML.<br><br>"
+            "The estimation of Planet Nine's radius being between 3 and 4 Earth radii, with a specific estimate of around 3.7 Earth <br>" 
+            "radii (or 23,500 - 24,000 km), appears in several scientific discussions. This size estimate is often linked to the <br>" 
+            "assumption that Planet Nine is likely an ice giant, similar in composition to Uranus and Neptune, but potentially a <br>" 
             "smaller version."
 )
 
@@ -118,6 +119,7 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Planet 9: {layer_info['name']}",
+        legendgroup=f"Planet 9: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -180,7 +182,7 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Planet 9: {layer_info['name']} (Info)"
+    trace_name = f"Planet 9: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -189,7 +191,7 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Planet 9: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -202,10 +204,10 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
 #         Note: 2021 refinement favors a=460 +/- 100 AU as central estimate; 600 AU remains valid for visualization.
 #         Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br>" 
+            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
-            "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n" 
+            "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br>" 
             "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU."                     
 )
 
@@ -287,7 +289,7 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

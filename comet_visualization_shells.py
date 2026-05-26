@@ -19,6 +19,7 @@ Key functions:
 Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Hyakutake ion tail comparison corrected (580 Mkm < Sun-Jupiter 778 Mkm).
     Provenance audit identified by Anthropic's Claude Opus 4.7
@@ -466,7 +467,8 @@ def create_comet_nucleus(center_position=(0, 0, 0), nucleus_size_km=5, comet_nam
             line=dict(color='white', width=1)  # Subtle white outline for visibility
         ),
         name=f'{comet_name}: Nucleus',
-        text=[description],
+        legendgroup=f'{comet_name}: Nucleus',
+        text=[f"{comet_name}: Nucleus<br><br>{description}"],
         customdata=[f'{comet_name}: Nucleus'], 
         hovertemplate='%{text}<extra></extra>',
         showlegend=True
@@ -558,7 +560,8 @@ def create_maps_disintegration_marker(position_au, comet_name='MAPS'):
             line=dict(color='white', width=1)
         ),
         name='MAPS: Disintegration',
-        text=[hover],
+        legendgroup='MAPS: Disintegration',
+        text=[f"MAPS: Disintegration<br><br>{hover}"],
         customdata=['MAPS: Disintegration'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=True
@@ -720,7 +723,7 @@ def create_maps_ghost_tail_trace(fig=None):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='maps_ghost_tail',
-        text=[hover],
+        text=[f"MAPS: Ghost Tail (April 4-6)<br><br>{hover}"],
         customdata=['MAPS: Ghost Tail'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -819,7 +822,7 @@ def create_comet_coma(center_position=(0, 0, 0), coma_radius_km=100000,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=f'{comet_name}: Coma',
-        text=[description],
+        text=[f"{comet_name}: Coma<br><br>{description}"],
         customdata=[f'{comet_name}: Coma'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1012,7 +1015,7 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=f'{comet_name}: Dust Tail',
-        text=[description],
+        text=[f"{comet_name}: Dust Tail<br><br>{description}"],
         customdata=[f'{comet_name}: Dust Tail'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1165,7 +1168,7 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=f'{comet_name}: Ion Tail',
-        text=[description],
+        text=[f"{comet_name}: Ion Tail<br><br>{description}"],
         customdata=[f'{comet_name}: Ion Tail'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1321,7 +1324,7 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=f'{comet_name}: Anti-tail',
-        text=[description],
+        text=[f"{comet_name}: Anti-tail<br><br>{description}"],
         customdata=[f'{comet_name}: Anti-tail'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1375,7 +1378,7 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
                             symbol='cross', line=dict(color='white', width=1)),
                 name='',
                 legendgroup=f'{comet_name}: Mini-jet {j+1}',
-                text=[mini_desc],
+                text=[f"{comet_name}: Mini-jet {j+1}<br><br>{mini_desc}"],
                 customdata=[f'{comet_name}: Mini-jet {j+1}'],
                 hovertemplate='%{text}<extra></extra>',
                 showlegend=False
@@ -1517,7 +1520,13 @@ def create_complete_comet_visualization(comet_name='Halley', center_position=(0,
     
     # 5. Sun direction indicator
     max_tail = max(dust_length, ion_length) * 1e6 / KM_PER_AU  # Convert to AU
-    sun_traces = create_sun_direction_indicator(center_position, max_tail * activity_factor)
+
+    sun_traces = create_sun_direction_indicator(
+        center_position=center_position,
+        shell_radius=max_tail * activity_factor,
+        body_name=comet_name,
+    )
+
     traces.extend(sun_traces)
     
     return traces
@@ -1761,6 +1770,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
             x=[None], y=[None], z=[None], mode='markers',
             marker=dict(size=0, color='gray'),
             name='MAPS: Nucleus (disintegrated April 4, 2026)',
+            legendgroup='MAPS: Nucleus',
             showlegend=True, hoverinfo='skip'
         ))
         return fig
@@ -1798,6 +1808,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
             mode='markers',
             marker=dict(size=0, color='gray'),
             name=f'{comet_name}: Coma (inactive, >{COMET_FEATURE_THRESHOLDS["coma"]:.1f} AU)',
+            legendgroup=f'{comet_name}: Coma',
             showlegend=True,
             hoverinfo='skip'
         ))
@@ -1807,6 +1818,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
             mode='markers',
             marker=dict(size=0, color='gray'),
             name=f'{comet_name}: Dust Tail (inactive, >{COMET_FEATURE_THRESHOLDS["dust_tail"]:.1f} AU)',
+            legendgroup=f'{comet_name}: Dust Tail',
             showlegend=True,
             hoverinfo='skip'
         ))
@@ -1816,9 +1828,18 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
             mode='markers',
             marker=dict(size=0, color='gray'),
             name=f'{comet_name}: Ion Tail (inactive, >{COMET_FEATURE_THRESHOLDS["ion_tail"]:.1f} AU)',
+            legendgroup=f'{comet_name}: Ion Tail',
             showlegend=True,
             hoverinfo='skip'
         ))
+        
+        # Sun direction indicator (rendered even for inactive comet)
+        sun_traces = create_sun_direction_indicator(
+            center_position=position_au,
+            body_name=comet_name,
+        )
+        for trace in sun_traces:
+            fig.add_trace(trace)
         
         print(f"  [OK] Added nucleus only with legend entries for missing features")
         return fig
@@ -1932,16 +1953,21 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
                 sun_relative_position=sun_rel
             ))
         
-        # 6. Sun direction indicator (if any tail is visible)
-        if features_visible['dust_tail'] or features_visible['ion_tail']:
-            max_tail = max(
-                comet_data['max_dust_tail_length_mkm'] if features_visible['dust_tail'] else 0,
-                comet_data['max_ion_tail_length_mkm'] if features_visible['ion_tail'] else 0
-            )
-            max_tail_au = max_tail * 1e6 / KM_PER_AU
-            sun_traces = create_sun_direction_indicator(position_au, max_tail_au * activity_factor)
-            traces.extend(sun_traces)
-        
+        # 6. Sun direction indicator (always rendered with comet)
+        max_tail = max(
+            comet_data['max_dust_tail_length_mkm'],
+            comet_data['max_ion_tail_length_mkm']
+        )
+        max_tail_au = max_tail * 1e6 / KM_PER_AU
+
+        sun_traces = create_sun_direction_indicator(
+            center_position=position_au,
+            shell_radius=max_tail_au * activity_factor,
+            body_name=comet_name,
+        )
+
+        traces.extend(sun_traces)
+
         # Add all traces to figure
         for trace in traces:
             fig.add_trace(trace)
@@ -1953,6 +1979,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
                 mode='markers',
                 marker=dict(size=0, color='gray'),
                 name=f'{comet_name}: Coma (inactive, >{COMET_FEATURE_THRESHOLDS["coma"]:.1f} AU)',
+                legendgroup=f'{comet_name}: Coma',
                 showlegend=True,
                 hoverinfo='skip'
             ))
@@ -1963,6 +1990,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
                 mode='markers',
                 marker=dict(size=0, color='gray'),
                 name=f'{comet_name}: Dust Tail (inactive, >{COMET_FEATURE_THRESHOLDS["dust_tail"]:.1f} AU)',
+                legendgroup=f'{comet_name}: Dust Tail',
                 showlegend=True,
                 hoverinfo='skip'
             ))
@@ -1973,6 +2001,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
                 mode='markers',
                 marker=dict(size=0, color='gray'),
                 name=f'{comet_name}: Ion Tail (inactive, >{COMET_FEATURE_THRESHOLDS["ion_tail"]:.1f} AU)',
+                legendgroup=f'{comet_name}: Ion Tail',
                 showlegend=True,
                 hoverinfo='skip'
             ))

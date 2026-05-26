@@ -168,10 +168,16 @@ def build_sphere_shell(config, body_name, center_position=(0, 0, 0)):
         )
 
     # Single info marker at north pole, 5% above radius
+    # Rule 2 prepend: legend label as structural header so hover reads
+    # "Body: Shell" then blank line then description (D3.1 follow-up,
+    # May 2026 -- fills the dispatch-path blind spot that the per-body
+    # sweep missed).
     r_info = radius_au * 1.05
     info_trace = create_info_marker(
         center_x, center_y, center_z + r_info,
-        config['color'], config['hover_text'], trace_name
+        config['color'],
+        "%s<br><br>%s" % (trace_name, config['hover_text']),
+        trace_name
     )
 
     return [shell_trace, info_trace]

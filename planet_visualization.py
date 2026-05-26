@@ -22,6 +22,9 @@ imported from planet_visualization_utilities.py rather than redefined locally.
 Removed shadow redefinition of KM_PER_AU.)
 
 Updated 5/20/26 with Claude 4.6
+Module updated: May 2026 with Anthropic's Claude Opus 4.7
+(D3.1 follow-up: Sun Direction indicator fixes -- custom-only fallback for
+outermost_radius_au, body_name passed for distinct multi-body indicators)
 """
 
 import math
@@ -363,6 +366,10 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     body_prefix = body_name.lower().replace(' ', '') + '_'
 
     outermost_radius_au = 0.0
+    # D3.1 follow-up (May 2026, Bug 1): track whether any custom shell was
+    # rendered, so the Sun Direction indicator can fall back to a body-radius
+    # based scale when only custom shells are selected.
+    custom_rendered = False
 
     for key, var in shell_vars.items():
         try:
@@ -400,6 +407,10 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 traces = builder(center_position)
             for t in traces:
                 fig.add_trace(t)
+            # D3.1 follow-up (May 2026, Bug 1): mark that a custom shell was
+            # rendered, so the post-loop fallback can pick a sensible indicator
+            # scale when no sphere shell tracked an outermost radius.
+            custom_rendered = True
 
         # If shell_name is in neither registry, silently skip.
         # In Phase A this is expected for bodies that haven't migrated yet
@@ -409,6 +420,20 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     # Uses outermost active shell radius for scaling. Suppresses at origin
     # (body-centered view) and for Sun shells.
 
+    # D3.1 follow-up (May 2026, Bug 1): custom-only fallback.
+    # The loop above tracks outermost_radius_au only inside the SHELL_CONFIGS
+    # branch. When the user selects only custom shells (magnetosphere, rings,
+    # radiation belts, LEO/GEO, plasma torus, FACs), outermost_radius_au stays
+    # 0 and the indicator was suppressed entirely -- exactly the wrong outcome,
+    # since magnetosphere shells are rotated to face the Sun and benefit most
+    # from a sunward marker. Fallback: 100x body radius, matching the legacy
+    # per-shell call pattern (e.g. 100 * EARTH_RADIUS_AU in the dormant
+    # create_earth_magnetosphere_shell). The fallback only triggers when no
+    # sphere shell was rendered AND at least one custom shell was rendered.
+    if outermost_radius_au == 0 and custom_rendered and body_name in CENTER_BODY_RADII:
+        body_r_au = CENTER_BODY_RADII[body_name] / KM_PER_AU
+        outermost_radius_au = 100.0 * body_r_au
+
     if outermost_radius_au > 0:
         indicator_traces = create_sun_direction_indicator(
             center_position=center_position,
@@ -416,6 +441,7 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
             shell_radius=outermost_radius_au,
             object_type=object_type if object_type is not None else body_name,
             center_object=center_object,
+            body_name=body_name,
         )
         for t in indicator_traces:
 

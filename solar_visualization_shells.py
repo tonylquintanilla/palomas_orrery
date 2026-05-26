@@ -12,6 +12,7 @@ Consumed by: planet_visualization.py (routing dispatcher),
              palomas_orrery.py (hover_text_sun import)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 """
 import numpy as np
 import math
@@ -31,373 +32,373 @@ from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_A
 
 # Source: GRAVITATIONAL_INFLUENCE_AU=126000 in constants_new.py; NASA Solar System Exploration
 gravitational_influence_info = (
-            "SELECT A MANUAL SCALE OF AT LEAST 160,000 AU TO VISUALIZE.\n\n"
+            "SELECT A MANUAL SCALE OF AT LEAST 160,000 AU TO VISUALIZE.<br><br>"
             
-            "Sun: Outer Limit of Gravitational Influence:\n\n" 
+            "Sun: Outer Limit of Gravitational Influence:<br><br>" 
 
-            "The Solar System\'s extent is actually defined in multiple ways. The Heliopause (120-123 AU):\n" 
-            "Where the solar wind meets interstellar space.\n\n" 
+            "The Solar System\'s extent is actually defined in multiple ways. The Heliopause (120-123 AU):<br>" 
+            "Where the solar wind meets interstellar space.<br><br>" 
 
-            "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner\n" 
-            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU). The Sun's gravitational influence\n" 
-            "extends to about 2 light-years (~126,000 AU).\n\n" 
+            "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
+            "Oort Cloud (2,000-20,000 AU), and the Outer Oort Cloud (20,000-100,000 AU). The Sun's gravitational influence<br>" 
+            "extends to about 2 light-years (~126,000 AU).<br><br>" 
             
-            "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much\n" 
-            "further. Sedna and other distant objects remain gravitationally bound to the Sun despite being well beyond\n" 
-            "the Heliopause. This is why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part\n" 
-            "of our Solar System, even though we've never directly observed the Oort Cloud. The distinction comes down to\n" 
-            "different types of influence:\n" 
-            "* Particle/plasma influence (solar wind) [OK] ends at Heliopause;\n" 
-            "* gravitational influence [OK] extends much further, including Sedna and the theoretical Oort Cloud.\n\n" 
+            "While the Heliopause marks where the Sun\'s particle influence ends, its gravitational influence extends much<br>" 
+            "further. Sedna and other distant objects remain gravitationally bound to the Sun despite being well beyond<br>" 
+            "the Heliopause. This is why astronomers generally consider the Oort Cloud (and objects like Sedna) to be part<br>" 
+            "of our Solar System, even though we've never directly observed the Oort Cloud. The distinction comes down to<br>" 
+            "different types of influence:<br>" 
+            "* Particle/plasma influence (solar wind) [OK] ends at Heliopause;<br>" 
+            "* gravitational influence [OK] extends much further, including Sedna and the theoretical Oort Cloud.<br><br>" 
             
-            "So the Solar System is generally considered to extend at least as far as these gravitationally bound objects,\n" 
-            "even beyond the Heliopause. Sedna is one of our first glimpses into this very distant region that may connect\n" 
+            "So the Solar System is generally considered to extend at least as far as these gravitationally bound objects,<br>" 
+            "even beyond the Heliopause. Sedna is one of our first glimpses into this very distant region that may connect<br>" 
             "to the Oort Cloud population."
         )
 
 # Source: Dones et al. (2004); OUTER_OORT_CLOUD_AU=100000 in constants_new.py
 outer_oort_info = (
-            "Oort Cloud: Outer Limit of Outer Oort Cloud:\n\n"
+            "Oort Cloud: Outer Limit of Outer Oort Cloud:<br><br>"
             
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\n\n"
+            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
+            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br><br>"
 
-            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
-            "periods exceeding 200 years.\n\n" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
+            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
+            "periods exceeding 200 years.<br><br>" 
 
-            "Oort Cloud's Outer Edge: At 100,000 AU, it's about 1.58 light-years from the Sun, placing it just\n" 
-            "beyond the nearest star systems and marking the boundary between the Solar System and interstellar space.\n\n" 
+            "Oort Cloud's Outer Edge: At 100,000 AU, it's about 1.58 light-years from the Sun, placing it just<br>" 
+            "beyond the nearest star systems and marking the boundary between the Solar System and interstellar space.<br><br>" 
 
-            "The Outer Oort Cloud is the primary source of long-period comets. Objects here are more loosely bound and more\n" 
+            "The Outer Oort Cloud is the primary source of long-period comets. Objects here are more loosely bound and more<br>" 
             "susceptible to external gravitational perturbations."
         )
 
 # Source: Hills (1981); INNER_OORT_CLOUD_AU=20000 in constants_new.py
 inner_oort_info = (
-            "Oort Cloud: Outer Limit of Inner Oort Cloud:\n\n"
+            "Oort Cloud: Outer Limit of Inner Oort Cloud:<br><br>"
 
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\n" 
-            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
-            "periods exceeding 200 years.\n\n" 
+            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
+            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
+            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
+            "periods exceeding 200 years.<br><br>" 
 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the\n" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an\n" 
+            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
+            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
 
 # Source: Dones et al. (2004); INNER_LIMIT_OORT_CLOUD_AU=2000 in constants_new.py
 inner_limit_oort_info = (
-            "Oort Cloud: Inner Limit:\n\n"
+            "Oort Cloud: Inner Limit:<br><br>"
 
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
-            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.\n" 
-            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
-            "periods exceeding 200 years.\n\n" 
+            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the<br>" 
+            "Solar System at distances ranging from approximately 2,000 AU to 100,000 AU from the Sun.<br>" 
+            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.<br>" 
+            "Believed to be the source of long-period comets that enter the inner Solar System with orbital<br>" 
+            "periods exceeding 200 years.<br><br>" 
 
-            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the\n" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an\n" 
+            "Inner Oort Cloud (Hills Cloud): Extends from about 2,000 AU to 20,000 AU. More tightly bound to the<br>" 
+            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an<br>" 
             "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
         )
 
 # Source: Hills (1981) AJ; INNER_OORT_CLOUD_AU=20000, INNER_LIMIT_OORT_CLOUD_AU=2000 in constants_new.py
 hills_cloud_torus_info = (
-            "Oort Cloud: Hills Cloud Torus:\n\n"
+            "Oort Cloud: Hills Cloud Torus:<br><br>"
 
-            "Based on dynamical models showing the inner Oort Cloud is more disk-like due to galactic tides.\n"
+            "Based on dynamical models showing the inner Oort Cloud is more disk-like due to galactic tides.<br>"
 
-            "Structure:\n" 
-            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n"
-            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\n" 
-            "Key Characteristics:\n" 
-            "* Not uniform shells but complex, structured regions\n" 
-            "* Density varies significantly throughout\n" 
-            "* Influenced by galactic tides and stellar encounters\n" 
-            "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
-            "Scientific Evidence:\n" 
-            "* Comet orbital inclinations suggest spherical outer region\n" 
-            "* Short-period comet inclinations suggest disk-like inner region\n" 
-            "* Computer simulations show tidal sculpting effects\n" 
-            "* Stellar encounter models predict clumpy structure\n" 
-            "Recent Discoveries:\n" 
-            "* Objects like Sedna may be inner Oort Cloud members\n" 
-            "* 2012 VP113 provides evidence for inner Oort population\n" 
+            "Structure:<br>" 
+            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal<br>"
+            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy<br>" 
+            "Key Characteristics:<br>" 
+            "* Not uniform shells but complex, structured regions<br>" 
+            "* Density varies significantly throughout<br>" 
+            "* Influenced by galactic tides and stellar encounters<br>" 
+            "* Contains an estimated 1-100 trillion objects >1km<br><br>" 
+            "Scientific Evidence:<br>" 
+            "* Comet orbital inclinations suggest spherical outer region<br>" 
+            "* Short-period comet inclinations suggest disk-like inner region<br>" 
+            "* Computer simulations show tidal sculpting effects<br>" 
+            "* Stellar encounter models predict clumpy structure<br>" 
+            "Recent Discoveries:<br>" 
+            "* Objects like Sedna may be inner Oort Cloud members<br>" 
+            "* 2012 VP113 provides evidence for inner Oort population<br>" 
             "* NEOWISE survey improving population estimates"
         )
 
 # Source: Dones et al. (2004); OUTER_OORT_CLOUD_AU=100000 in constants_new.py
 outer_oort_clumpy_info = (
-            "Oort Cloud: Clumpy Oort Cloud:\n\n"
+            "Oort Cloud: Clumpy Oort Cloud:<br><br>"
 
-            "Reflects N-body simulations showing stellar encounters create density variations.\n"
+            "Reflects N-body simulations showing stellar encounters create density variations.<br>"
 
-            "Structure:\n" 
-            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n"
-            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\n" 
-            "Key Characteristics:\n" 
-            "* Not uniform shells but complex, structured regions\n" 
-            "* Density varies significantly throughout\n" 
-            "* Influenced by galactic tides and stellar encounters\n" 
-            "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
-            "Scientific Evidence:\n" 
-            "* Comet orbital inclinations suggest spherical outer region\n" 
-            "* Short-period comet inclinations suggest disk-like inner region\n" 
-            "* Computer simulations show tidal sculpting effects\n" 
-            "* Stellar encounter models predict clumpy structure\n" 
-            "Recent Discoveries:\n" 
-            "* Objects like Sedna may be inner Oort Cloud members\n" 
-            "* 2012 VP113 provides evidence for inner Oort population\n" 
+            "Structure:<br>" 
+            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal<br>"
+            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy<br>" 
+            "Key Characteristics:<br>" 
+            "* Not uniform shells but complex, structured regions<br>" 
+            "* Density varies significantly throughout<br>" 
+            "* Influenced by galactic tides and stellar encounters<br>" 
+            "* Contains an estimated 1-100 trillion objects >1km<br><br>" 
+            "Scientific Evidence:<br>" 
+            "* Comet orbital inclinations suggest spherical outer region<br>" 
+            "* Short-period comet inclinations suggest disk-like inner region<br>" 
+            "* Computer simulations show tidal sculpting effects<br>" 
+            "* Stellar encounter models predict clumpy structure<br>" 
+            "Recent Discoveries:<br>" 
+            "* Objects like Sedna may be inner Oort Cloud members<br>" 
+            "* 2012 VP113 provides evidence for inner Oort population<br>" 
             "* NEOWISE survey improving population estimates"
         )
 
 # Source: Dones et al. (2004) Comets II -- galactic tidal sculpting of Oort Cloud; GRAVITATIONAL_INFLUENCE_AU=126000 in constants_new.py
 galactic_tide_info = (
-            "Oort Cloud: Galactic Tide Influenced Oort:\n\n"
+            "Oort Cloud: Galactic Tide Influenced Oort:<br><br>"
 
-            "Shows how the Milky Way's gravity creates asymmetries.\n"
+            "Shows how the Milky Way's gravity creates asymmetries.<br>"
 
-            "Structure:\n" 
-            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal\n"
-            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy\n" 
-            "Key Characteristics:\n" 
-            "* Not uniform shells but complex, structured regions\n" 
-            "* Density varies significantly throughout\n" 
-            "* Influenced by galactic tides and stellar encounters\n" 
-            "* Contains an estimated 1-100 trillion objects >1km<br>\n" 
-            "Scientific Evidence:\n" 
-            "* Comet orbital inclinations suggest spherical outer region\n" 
-            "* Short-period comet inclinations suggest disk-like inner region\n" 
-            "* Computer simulations show tidal sculpting effects\n" 
-            "* Stellar encounter models predict clumpy structure\n" 
-            "Recent Discoveries:\n" 
-            "* Objects like Sedna may be inner Oort Cloud members\n" 
-            "* 2012 VP113 provides evidence for inner Oort population\n" 
+            "Structure:<br>" 
+            "* Hills Cloud (Inner Oort): 2,000-20,000 AU, disk-like/toroidal<br>"
+            "* Outer Oort Cloud: 20,000-100,000+ AU, roughly spherical but clumpy<br>" 
+            "Key Characteristics:<br>" 
+            "* Not uniform shells but complex, structured regions<br>" 
+            "* Density varies significantly throughout<br>" 
+            "* Influenced by galactic tides and stellar encounters<br>" 
+            "* Contains an estimated 1-100 trillion objects >1km<br><br>" 
+            "Scientific Evidence:<br>" 
+            "* Comet orbital inclinations suggest spherical outer region<br>" 
+            "* Short-period comet inclinations suggest disk-like inner region<br>" 
+            "* Computer simulations show tidal sculpting effects<br>" 
+            "* Stellar encounter models predict clumpy structure<br>" 
+            "Recent Discoveries:<br>" 
+            "* Objects like Sedna may be inner Oort Cloud members<br>" 
+            "* 2012 VP113 provides evidence for inner Oort population<br>" 
             "* NEOWISE survey improving population estimates"
         )
 
 # Source: NASA Heliophysics / Ulysses mission; solar wind speed 400-800 km/s from multiple spacecraft
 solar_wind_info = (
-            "Solar Wind: Heliopause:\n\n"
+            "Solar Wind: Heliopause:<br><br>"
 
-            "The heliosphere is a vast, bubble-like region of space that surrounds the Sun and its planets. It's created by the\n" 
-            "solar wind, a constant stream of charged particles flowing out from the Sun.\n" 
-            "* Solar Wind: The solar wind is the driving force behind the heliosphere. It consists mostly of protons and electrons,\n" 
-            "  along with heavier elements in smaller numbers. These particles are accelerated to high speeds by the Sun's heat and\n" 
-            "  then escape its gravity, flowing out into space.\n" 
-            "* Shape: The heliosphere isn't perfectly spherical. It's more like a long, teardrop shape with a rounded head and a\n" 
-            "  flowing tail. This shape is due to the Sun's movement through the interstellar medium, the gas and dust that fills the\n" 
-            "  space between stars.\n\n" 
+            "The heliosphere is a vast, bubble-like region of space that surrounds the Sun and its planets. It's created by the<br>" 
+            "solar wind, a constant stream of charged particles flowing out from the Sun.<br>" 
+            "* Solar Wind: The solar wind is the driving force behind the heliosphere. It consists mostly of protons and electrons,<br>" 
+            "  along with heavier elements in smaller numbers. These particles are accelerated to high speeds by the Sun's heat and<br>" 
+            "  then escape its gravity, flowing out into space.<br>" 
+            "* Shape: The heliosphere isn't perfectly spherical. It's more like a long, teardrop shape with a rounded head and a<br>" 
+            "  flowing tail. This shape is due to the Sun's movement through the interstellar medium, the gas and dust that fills the<br>" 
+            "  space between stars.<br><br>" 
             
-            "Boundaries: The heliosphere has a few distinct boundaries:\n" 
-            "* Termination Shock: This is where the solar wind abruptly slows down as it encounters the interstellar medium.\n" 
-            "* Heliosheath: This is the turbulent region beyond the termination shock, where the solar wind mixes with the interstellar medium.\n" 
-            "* Heliopause: This is the outermost boundary of the heliosphere, where the solar wind's pressure is balanced by the pressure of\n" 
-            "  the interstellar medium. It's considered the true \"edge\" of our solar system.\n" 
-            "* Protective Shield: The heliosphere acts as a protective bubble, shielding the planets within it from harmful galactic cosmic\n" 
-            "  radiation. This radiation comes from outside our solar system and can be dangerous to life.\n" 
-            "* Influence on Planets: The heliosphere also influences the planets within it. It interacts with planetary magnetic fields,\n" 
-            "  creating phenomena like auroras. It can also affect the atmospheres of planets without strong magnetic fields.\n\n"   
+            "Boundaries: The heliosphere has a few distinct boundaries:<br>" 
+            "* Termination Shock: This is where the solar wind abruptly slows down as it encounters the interstellar medium.<br>" 
+            "* Heliosheath: This is the turbulent region beyond the termination shock, where the solar wind mixes with the interstellar medium.<br>" 
+            "* Heliopause: This is the outermost boundary of the heliosphere, where the solar wind's pressure is balanced by the pressure of<br>" 
+            "  the interstellar medium. It's considered the true \"edge\" of our solar system.<br>" 
+            "* Protective Shield: The heliosphere acts as a protective bubble, shielding the planets within it from harmful galactic cosmic<br>" 
+            "  radiation. This radiation comes from outside our solar system and can be dangerous to life.<br>" 
+            "* Influence on Planets: The heliosphere also influences the planets within it. It interacts with planetary magnetic fields,<br>" 
+            "  creating phenomena like auroras. It can also affect the atmospheres of planets without strong magnetic fields.<br><br>"   
                          
-            "Voyager Missions: Our most valuable information about the heliosheath comes from the Voyager 1 and Voyager 2 spacecraft,\n" 
-            "which have been traveling through space since 1977. Both probes have crossed the termination shock and are currently\n" 
-            "exploring the heliosheath, sending back valuable data about this mysterious region. Voyager 1 encountered the Heliopause\n" 
-            "at ~123 AU. This is considered the end of the Sun's influence and the start of interstellar space.\n\n" 
+            "Voyager Missions: Our most valuable information about the heliosheath comes from the Voyager 1 and Voyager 2 spacecraft,<br>" 
+            "which have been traveling through space since 1977. Both probes have crossed the termination shock and are currently<br>" 
+            "exploring the heliosheath, sending back valuable data about this mysterious region. Voyager 1 encountered the Heliopause<br>" 
+            "at ~123 AU. This is considered the end of the Sun's influence and the start of interstellar space.<br><br>" 
             
-            "* The heliosheath extends from ~120 to 150 AU at the Heliopause.\n"
-            "* Temperature: ~1,000,000K on average.\n"
+            "* The heliosheath extends from ~120 to 150 AU at the Heliopause.<br>"
+            "* Temperature: ~1,000,000K on average.<br>"
             "* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye."
         )
 
 # Source: constants_new.py TERMINATION_SHOCK_AU=94; Stone et al. (2005) Science -- Voyager 1 at 94 AU, Voyager 2 at 84 AU
 termination_shock_info = (
-            "Solar Wind: Termination Shock:\n\n"
+            "Solar Wind: Termination Shock:<br><br>"
 
-            "The Solar Wind Termination Shock extends from about 75 to 100 AU.\n\n"
+            "The Solar Wind Termination Shock extends from about 75 to 100 AU.<br><br>"
 
-            "The Termination Shock is the region where the solar wind slows down from\n"
-            "supersonic to subsonic speeds due to interaction with the interstellar\n"
-            "medium. The kinetic energy transfers into heat, increasing abruptly.\n\n"
+            "The Termination Shock is the region where the solar wind slows down from<br>"
+            "supersonic to subsonic speeds due to interaction with the interstellar<br>"
+            "medium. The kinetic energy transfers into heat, increasing abruptly.<br><br>"
 
-            "Voyager 1 encountered the Termination Shock at 94 AU, while Voyager 2 at 84 AU.\n"
+            "Voyager 1 encountered the Termination Shock at 94 AU, while Voyager 2 at 84 AU.<br>"
             "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
         )
 
 # Source: constants_new.py OUTER_CORONA_RADII=50; Koutchmy (1994) F-corona review
 outer_corona_info = (
-    "Sun: Extended Corona (F-corona / Outer):\n\n"
+    "Sun: Extended Corona (F-corona / Outer):<br><br>"
 
-    "This shell marks the extended outer solar corona at ~50 solar radii (~0.23 AU).\n"
-    "At this distance the corona is extremely tenuous -- the F-corona (dust-scattered\n"
-    "sunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.\n\n"
+    "This shell marks the extended outer solar corona at ~50 solar radii (~0.23 AU).<br>"
+    "At this distance the corona is extremely tenuous -- the F-corona (dust-scattered<br>"
+    "sunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.<br><br>"
 
-    "* The visible structured corona (helmet streamers) extends to ~4-6 R_sun.\n"
-    "* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.\n"
-    "  Parker Solar Probe measured this at 18.8 R_sun on April 28, 2021.\n"
-    "* Beyond the Alfven surface, plasma is solar wind, not corona.\n"
-    "* This 50 R_sun shell represents the faint, extended F-corona envelope.\n\n"
+    "* The visible structured corona (helmet streamers) extends to ~4-6 R_sun.<br>"
+    "* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.<br>"
+    "  Parker Solar Probe measured this at 18.8 R_sun on April 28, 2021.<br>"
+    "* Beyond the Alfven surface, plasma is solar wind, not corona.<br>"
+    "* This 50 R_sun shell represents the faint, extended F-corona envelope.<br><br>"
 
-    "* Temperature: ~1-2 million K (the coronal heating paradox -- hotter than the surface)\n"
-    "* The corona merges gradually into the solar wind beyond ~15-20 R_sun.\n"
-    "* Parker Solar Probe's closest approach: ~8.8 R_sun as of 2024.\n"
+    "* Temperature: ~1-2 million K (the coronal heating paradox -- hotter than the surface)<br>"
+    "* The corona merges gradually into the solar wind beyond ~15-20 R_sun.<br>"
+    "* Parker Solar Probe's closest approach: ~8.8 R_sun as of 2024.<br>"
     "* The corona radiates at ~1.159 nm average wavelength (extreme ultraviolet to X-ray)."
 )
 
 # Source: constants_new.py INNER_CORONA_RADII=3; NASA Solar Dynamics Observatory
 inner_corona_info = (
-            "Sun: Inner Corona:\n\n"
+            "Sun: Inner Corona:<br><br>"
 
-            "The solar inner corona is the region of the Sun's atmosphere that lies closest to its surface. It's a dynamic and complex\n" 
-            "environment, with temperatures reaching millions of degrees Celsius and a variety of fascinating features:\n"
-            "* Temperature: While still incredibly hot (around 1-3 million Kelvin), the inner corona is slightly cooler\n" 
-            "than the outer corona. This temperature difference is one of the factors that drives the solar wind.\n"
-            "* Density: The inner corona is denser than the outer corona, but still much less dense than the Sun's surface,\n" 
-            "the photosphere. This low density makes it difficult to observe directly, except during a solar eclipse or\n" 
-            "with specialized instruments.\n\n" 
+            "The solar inner corona is the region of the Sun's atmosphere that lies closest to its surface. It's a dynamic and complex<br>" 
+            "environment, with temperatures reaching millions of degrees Celsius and a variety of fascinating features:<br>"
+            "* Temperature: While still incredibly hot (around 1-3 million Kelvin), the inner corona is slightly cooler<br>" 
+            "than the outer corona. This temperature difference is one of the factors that drives the solar wind.<br>"
+            "* Density: The inner corona is denser than the outer corona, but still much less dense than the Sun's surface,<br>" 
+            "the photosphere. This low density makes it difficult to observe directly, except during a solar eclipse or<br>" 
+            "with specialized instruments.<br><br>" 
             
-            "Magnetic field: The inner corona is dominated by the Sun's magnetic field, which shapes and controls the\n" 
-            "plasma in this region. The magnetic field lines create a variety of structures, including:\n" 
-            "* Coronal loops: These are closed loops of magnetic flux that trap hot plasma, forming bright arcs that\n" 
-            "  can be seen in ultraviolet and X-ray images.\n" 
-            "* Coronal holes: These are areas where the magnetic field lines are open, allowing plasma to escape into\n" 
-            "  space and contribute to the solar wind.\n" 
-            "* Streamers: These are large, elongated structures that extend outward from the Sun, often associated with\n" 
-            "  active regions and coronal mass ejections (CMEs).\n" 
-            "* Dynamic activity: The inner corona is a constantly changing environment, with features evolving and erupting\n" 
-            "  on different timescales. This activity is driven by the interplay between the magnetic field and the plasma,\n" 
-            "  leading to phenomena like:\n" 
-            "  * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic energy.\n" 
-            "  * CMEs: These are massive eruptions of plasma and magnetic field from the corona, which can travel through space\n" 
-            "    and impact Earth, disrupting satellites, communication systems, and power grids.\n\n"
+            "Magnetic field: The inner corona is dominated by the Sun's magnetic field, which shapes and controls the<br>" 
+            "plasma in this region. The magnetic field lines create a variety of structures, including:<br>" 
+            "* Coronal loops: These are closed loops of magnetic flux that trap hot plasma, forming bright arcs that<br>" 
+            "  can be seen in ultraviolet and X-ray images.<br>" 
+            "* Coronal holes: These are areas where the magnetic field lines are open, allowing plasma to escape into<br>" 
+            "  space and contribute to the solar wind.<br>" 
+            "* Streamers: These are large, elongated structures that extend outward from the Sun, often associated with<br>" 
+            "  active regions and coronal mass ejections (CMEs).<br>" 
+            "* Dynamic activity: The inner corona is a constantly changing environment, with features evolving and erupting<br>" 
+            "  on different timescales. This activity is driven by the interplay between the magnetic field and the plasma,<br>" 
+            "  leading to phenomena like:<br>" 
+            "  * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic energy.<br>" 
+            "  * CMEs: These are massive eruptions of plasma and magnetic field from the corona, which can travel through space<br>" 
+            "    and impact Earth, disrupting satellites, communication systems, and power grids.<br><br>"
             
-            "* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)\n"
-            "* Temperature: 1-2M K, or an average of about 1.5M K\n"
+            "* Solar Inner Corona (extends to 2-3 solar radii, ~0.014 AU)<br>"
+            "* Temperature: 1-2M K, or an average of about 1.5M K<br>"
             "* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
         )
 
 # Source: constants_new.py CHROMOSPHERE_RADII=1.5; Golub & Pasachoff (2010) The Solar Corona
 chromosphere_info = (
-            "Sun: Chromosphere:\n\n"
+            "Sun: Chromosphere:<br><br>"
 
-            "The chromosphere is a dynamic and visually stunning layer of the Sun's atmosphere, sandwiched between the\n" 
-            "photosphere (the visible surface) and the corona (the outermost layer). It's a region of dramatic temperature\n" 
-            "changes, intricate structures, and energetic events.\n\n"
+            "The chromosphere is a dynamic and visually stunning layer of the Sun's atmosphere, sandwiched between the<br>" 
+            "photosphere (the visible surface) and the corona (the outermost layer). It's a region of dramatic temperature<br>" 
+            "changes, intricate structures, and energetic events.<br><br>"
              
-            "* The chromosphere is relatively thin, extending only about 2,000 kilometers (1,200 miles) above the photosphere.\n" 
-            "  It's also much less dense than the photosphere.\n" 
-            "* The temperature in the chromosphere increases dramatically with altitude, from around 4,000 Kelvin at the\n" 
-            "  photosphere to about 20,000 Kelvin at the inner corona.\n" 
-            "* The chromosphere gets its name from the Greek word \"chroma,\" meaning color, because of its reddish appearance.\n" 
-            "  This color is primarily due to the strong emission of light from hydrogen atoms\n" 
-            "* The chromosphere is a constantly changing environment, with a variety of features that evolve and erupt on\n" 
-            "  different timescales:\n" 
-            "  * Spicules: These are jet-like eruptions of plasma that rise and fall like geysers, covering the chromosphere\n" 
-            "    in a dynamic, \"grass-like\" pattern.\n" 
-            "  * Filaments and prominences: These are large, cool, dense structures of plasma suspended in the chromosphere\n" 
-            "    and corona by magnetic fields. When seen against the bright disk of the Sun, they appear as dark filaments.\n" 
-            "    When seen extending beyond the Sun's edge, they appear as bright prominences.\n" 
-            "  * Plages: These are bright regions in the chromosphere associated with active regions, where magnetic fields\n" 
-            "    are concentrated.\n\n" 
+            "* The chromosphere is relatively thin, extending only about 2,000 kilometers (1,200 miles) above the photosphere.<br>" 
+            "  It's also much less dense than the photosphere.<br>" 
+            "* The temperature in the chromosphere increases dramatically with altitude, from around 4,000 Kelvin at the<br>" 
+            "  photosphere to about 20,000 Kelvin at the inner corona.<br>" 
+            "* The chromosphere gets its name from the Greek word \"chroma,\" meaning color, because of its reddish appearance.<br>" 
+            "  This color is primarily due to the strong emission of light from hydrogen atoms<br>" 
+            "* The chromosphere is a constantly changing environment, with a variety of features that evolve and erupt on<br>" 
+            "  different timescales:<br>" 
+            "  * Spicules: These are jet-like eruptions of plasma that rise and fall like geysers, covering the chromosphere<br>" 
+            "    in a dynamic, \"grass-like\" pattern.<br>" 
+            "  * Filaments and prominences: These are large, cool, dense structures of plasma suspended in the chromosphere<br>" 
+            "    and corona by magnetic fields. When seen against the bright disk of the Sun, they appear as dark filaments.<br>" 
+            "    When seen extending beyond the Sun's edge, they appear as bright prominences.<br>" 
+            "  * Plages: These are bright regions in the chromosphere associated with active regions, where magnetic fields<br>" 
+            "    are concentrated.<br><br>" 
              
-            "* Radius: from Photosphere to 1.5 Solar radii or ~0.00465 - 0.0070 AU\n"
-            "* Temperature: ~6,000 to 20,000 K, for a average of 10,000 K\n"
+            "* Radius: from Photosphere to 1.5 Solar radii or ~0.00465 - 0.0070 AU<br>"
+            "* Temperature: ~6,000 to 20,000 K, for a average of 10,000 K<br>"
             "* Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible."
         )
 
 # Source: NASA Solar System Exploration (solarsystem.nasa.gov/solar-system/sun); SUN_RADIUS_KM=695700 in constants_new.py
 photosphere_info = (
-            "Sun: Photosphere\n\n"
+            "Sun: Photosphere<br><br>"
 
-            "Solar Convective Zone and Photosphere, the visible surface.\n"
-            "* The photosphere is the visible surface of the Sun. It's a relatively thin layer, only about 500 kilometers thick.\n" 
-            "* Including both the Convective Zone and the Photosphere, the radius is from 0.7 to 1 Solar radii, or about 0.00465 AU.\n"
-            "* Temperature: from 2M K at the Radiative Zone to ~5,500K at the Photosphere.\n"
-            "* Convection transports energy to the visible \"surface\" of the Sun. The convection process starts at the Radiative Zone\n"
-            "* At the Photosphere, the energy is radiated as visible light. Radiation emits at a peak wavelength at 527.32 nm, which\n" 
-            "  is in the green spectrum. The Sun's emitted light is a combination of all visible wavelengths, resulting in a yellowish-white color.\n\n"
+            "Solar Convective Zone and Photosphere, the visible surface.<br>"
+            "* The photosphere is the visible surface of the Sun. It's a relatively thin layer, only about 500 kilometers thick.<br>" 
+            "* Including both the Convective Zone and the Photosphere, the radius is from 0.7 to 1 Solar radii, or about 0.00465 AU.<br>"
+            "* Temperature: from 2M K at the Radiative Zone to ~5,500K at the Photosphere.<br>"
+            "* Convection transports energy to the visible \"surface\" of the Sun. The convection process starts at the Radiative Zone<br>"
+            "* At the Photosphere, the energy is radiated as visible light. Radiation emits at a peak wavelength at 527.32 nm, which<br>" 
+            "  is in the green spectrum. The Sun's emitted light is a combination of all visible wavelengths, resulting in a yellowish-white color.<br><br>"
              
-            "* The photosphere is cooler than the Sun's core and the layers above it, but still hot enough to make the photosphere glow brightly.\n" 
-            "* To the naked eye, the photosphere appears as a smooth, yellow disk. However, closer observations reveal a variety of features, including:\n" 
-            "  * Granulation: This is a pattern of small, bright cells surrounded by darker boundaries, caused by convection\n" 
-            "    currents bringing hot plasma up from the Sun's interior.\n" 
-            "  * Sunspots: These are dark, cooler regions on the photosphere caused by strong magnetic fields. They can be\n" 
-            "    larger than Earth and last for days or weeks.\n" 
-            "  * Faculae: These are bright regions surrounding sunspots, also associated with magnetic fields.\n" 
-            "  * Energy transport: The photosphere is where the Sun's energy, generated in its core through nuclear fusion,\n" 
-            "    is finally released as light. This energy has traveled outward through the Sun's interior in the form of\n" 
-            "    radiation and convection, and it's in the photosphere that it transitions to primarily radiation, allowing it\n" 
-            "    to escape into space.\n" 
-            "  * Spectrum: The photosphere emits a continuous spectrum of light, which includes all colors of the rainbow.\n" 
-            "  * Solar activity: The photosphere is also where many solar activity events originate, such as:\n" 
-            "    * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic\n" 
-            "      energy in the solar atmosphere.\n" 
-            "    * Coronal mass ejections (CMEs): These are massive eruptions of plasma and magnetic field from the Sun's corona,\n" 
-            "      often associated with flares.\n"
-            "    * Solar activity events originating in the photosphere can affect Earth's magnetic field and disrupt satellites,\n" 
-            "      communication systems, and power grids.\n\n"
+            "* The photosphere is cooler than the Sun's core and the layers above it, but still hot enough to make the photosphere glow brightly.<br>" 
+            "* To the naked eye, the photosphere appears as a smooth, yellow disk. However, closer observations reveal a variety of features, including:<br>" 
+            "  * Granulation: This is a pattern of small, bright cells surrounded by darker boundaries, caused by convection<br>" 
+            "    currents bringing hot plasma up from the Sun's interior.<br>" 
+            "  * Sunspots: These are dark, cooler regions on the photosphere caused by strong magnetic fields. They can be<br>" 
+            "    larger than Earth and last for days or weeks.<br>" 
+            "  * Faculae: These are bright regions surrounding sunspots, also associated with magnetic fields.<br>" 
+            "  * Energy transport: The photosphere is where the Sun's energy, generated in its core through nuclear fusion,<br>" 
+            "    is finally released as light. This energy has traveled outward through the Sun's interior in the form of<br>" 
+            "    radiation and convection, and it's in the photosphere that it transitions to primarily radiation, allowing it<br>" 
+            "    to escape into space.<br>" 
+            "  * Spectrum: The photosphere emits a continuous spectrum of light, which includes all colors of the rainbow.<br>" 
+            "  * Solar activity: The photosphere is also where many solar activity events originate, such as:<br>" 
+            "    * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic<br>" 
+            "      energy in the solar atmosphere.<br>" 
+            "    * Coronal mass ejections (CMEs): These are massive eruptions of plasma and magnetic field from the Sun's corona,<br>" 
+            "      often associated with flares.<br>"
+            "    * Solar activity events originating in the photosphere can affect Earth's magnetic field and disrupt satellites,<br>" 
+            "      communication systems, and power grids.<br><br>"
         )
 
 # Source: NASA Solar Interior model; constants_new.py RADIATIVE_ZONE_AU=0.7*SOLAR_RADIUS_AU
 radiative_zone_info = (
-            "Sun: Radiative Zone\n\n"
+            "Sun: Radiative Zone<br><br>"
 
-            "The Solar Radiative Zone extends from about 0.2 to 0.7 solar radii, about 0.00325 AU. Temperature ranges from about\n" 
-            "7M K near the core to about 2M K near the convective zone. Energy is transported by radiative diffusion, through photon\n" 
-            "absorption and re-emission.\n\n"
+            "The Solar Radiative Zone extends from about 0.2 to 0.7 solar radii, about 0.00325 AU. Temperature ranges from about<br>" 
+            "7M K near the core to about 2M K near the convective zone. Energy is transported by radiative diffusion, through photon<br>" 
+            "absorption and re-emission.<br><br>"
 
-            "The radiative zone is a vast region within the Sun, located between the core and the convective zone. It's a place\n" 
-            "of intense heat and density, where energy generated in the core slowly makes its way outward in the form of photons.\n"  
-            "* Density: The density also decreases with distance from the core, but it remains much denser than the convective zone above it.\n\n" 
-            "* Energy transport: The primary mode of energy transport in the radiative zone is radiative diffusion. Photons\n" 
-            "  generated in the core through nuclear fusion undergo countless absorptions and re-emissions as they interact\n" 
-            "  with the dense plasma. This process is incredibly slow, and it can take millions of years for a photon to travel\n" 
-            "  from the core to the outer edge of the radiative zone.\n" 
-            "* Opacity: The radiative zone is highly opaque, meaning that photons can only travel a short distance before being\n" 
-            "  absorbed or scattered. This high opacity is due to the high density and the presence of heavy elements, which are\n" 
-            "  more efficient at absorbing and scattering radiation.\n" 
-            "* Energy transfer: The radiative zone plays a crucial role in transferring energy from the Sun's core to its outer\n" 
-            "  layers. Without it, the Sun would not be able to shine.\n" 
-            "* Stability: The slow and gradual energy transport in the radiative zone helps to maintain the Sun's overall stability.\n" 
-            "* Helioseismology: This technique uses observations of sound waves traveling through the Sun to probe its interior\n" 
-            "  structure, including the radiative zone. By analyzing the frequencies and patterns of these waves, scientists can\n" 
-            "  infer the temperature, density, and composition of the radiative zone.\n" 
-            "* Neutrino observations: Neutrinos are subatomic particles produced in the Sun's core that can pass through the\n" 
-            "  radiative zone almost unimpeded. By detecting and analyzing these neutrinos, scientists can gain information about\n" 
+            "The radiative zone is a vast region within the Sun, located between the core and the convective zone. It's a place<br>" 
+            "of intense heat and density, where energy generated in the core slowly makes its way outward in the form of photons.<br>"  
+            "* Density: The density also decreases with distance from the core, but it remains much denser than the convective zone above it.<br><br>" 
+            "* Energy transport: The primary mode of energy transport in the radiative zone is radiative diffusion. Photons<br>" 
+            "  generated in the core through nuclear fusion undergo countless absorptions and re-emissions as they interact<br>" 
+            "  with the dense plasma. This process is incredibly slow, and it can take millions of years for a photon to travel<br>" 
+            "  from the core to the outer edge of the radiative zone.<br>" 
+            "* Opacity: The radiative zone is highly opaque, meaning that photons can only travel a short distance before being<br>" 
+            "  absorbed or scattered. This high opacity is due to the high density and the presence of heavy elements, which are<br>" 
+            "  more efficient at absorbing and scattering radiation.<br>" 
+            "* Energy transfer: The radiative zone plays a crucial role in transferring energy from the Sun's core to its outer<br>" 
+            "  layers. Without it, the Sun would not be able to shine.<br>" 
+            "* Stability: The slow and gradual energy transport in the radiative zone helps to maintain the Sun's overall stability.<br>" 
+            "* Helioseismology: This technique uses observations of sound waves traveling through the Sun to probe its interior<br>" 
+            "  structure, including the radiative zone. By analyzing the frequencies and patterns of these waves, scientists can<br>" 
+            "  infer the temperature, density, and composition of the radiative zone.<br>" 
+            "* Neutrino observations: Neutrinos are subatomic particles produced in the Sun's core that can pass through the<br>" 
+            "  radiative zone almost unimpeded. By detecting and analyzing these neutrinos, scientists can gain information about<br>" 
             "  the nuclear reactions taking place in the core and the conditions in the radiative zone."
             )
 
 # Source: NASA Solar Interior (nasa.gov/sun/facts); Bahcall et al. standard solar model
 core_info = (
-            "Sun: Solar Core\n\n"
+            "Sun: Solar Core<br><br>"
 
-            "The Sun's core is where the Sun's energy is generated through nuclear fusion, providing the light and heat that sustain life on Earth:\n" 
-            "* Location: The core is located at the very center of the Sun, extending outward to about 25% of the Sun's radius.\n" 
-            "* Size: While relatively small compared to the Sun's overall size, the core contains about 34% of the Sun's total mass.\n" 
-            "* Temperature: The core is the hottest place in the solar system, with temperatures reaching 15 million Kelvin\n" 
-            "* Density: The core is incredibly dense, about 150 times denser than water. This extreme density is due to the\n" 
-            "  immense pressure exerted by the Sun's outer layers.\n" 
-            "* Composition: The core is primarily composed of hydrogen (about 34% by mass) and helium (about 64% by mass).\n" 
-            "  Trace amounts of heavier elements are also present.\n\n"
+            "The Sun's core is where the Sun's energy is generated through nuclear fusion, providing the light and heat that sustain life on Earth:<br>" 
+            "* Location: The core is located at the very center of the Sun, extending outward to about 25% of the Sun's radius.<br>" 
+            "* Size: While relatively small compared to the Sun's overall size, the core contains about 34% of the Sun's total mass.<br>" 
+            "* Temperature: The core is the hottest place in the solar system, with temperatures reaching 15 million Kelvin<br>" 
+            "* Density: The core is incredibly dense, about 150 times denser than water. This extreme density is due to the<br>" 
+            "  immense pressure exerted by the Sun's outer layers.<br>" 
+            "* Composition: The core is primarily composed of hydrogen (about 34% by mass) and helium (about 64% by mass).<br>" 
+            "  Trace amounts of heavier elements are also present.<br><br>"
               
-            "The dominant fusion process in the Sun's core is the proton-proton chain reaction:\n" 
-            "* Two protons, hydrogen nuclei, collide and fuse to form a deuterium nucleus releasing a positron and a neutrino.\n" 
-            "* The deuterium nucleus collides with another proton to form a helium-3 nucleus, releasing a gamma ray.\n" 
-            "* Two helium-3 nuclei collide to form a helium-4 nucleus, releasing two protons.\n" 
-            "* This process converts a small amount of mass into a tremendous amount of energy\n\n" 
+            "The dominant fusion process in the Sun's core is the proton-proton chain reaction:<br>" 
+            "* Two protons, hydrogen nuclei, collide and fuse to form a deuterium nucleus releasing a positron and a neutrino.<br>" 
+            "* The deuterium nucleus collides with another proton to form a helium-3 nucleus, releasing a gamma ray.<br>" 
+            "* Two helium-3 nuclei collide to form a helium-4 nucleus, releasing two protons.<br>" 
+            "* This process converts a small amount of mass into a tremendous amount of energy<br><br>" 
             
-            "The energy generated in the core is transported outward through the Sun in two ways:\n"
-            "* Radiative zone: The energy first travels through the radiative zone, where it is carried by photons that undergo\n" 
-            "  countless absorptions and re-emissions. This process is very slow, taking millions of years for energy to travel\n" 
-            "  from the core to the outer edge of the radiative zone.\n" 
-            "* Convective zone: Once the energy reaches the convective zone, it is transported by convection currents, where hot\n" 
-            "  plasma rises and cooler plasma sinks. This is a much faster process, taking only a few weeks for energy to reach\n" 
-            "  the Sun's surface.\n\n" 
+            "The energy generated in the core is transported outward through the Sun in two ways:<br>"
+            "* Radiative zone: The energy first travels through the radiative zone, where it is carried by photons that undergo<br>" 
+            "  countless absorptions and re-emissions. This process is very slow, taking millions of years for energy to travel<br>" 
+            "  from the core to the outer edge of the radiative zone.<br>" 
+            "* Convective zone: Once the energy reaches the convective zone, it is transported by convection currents, where hot<br>" 
+            "  plasma rises and cooler plasma sinks. This is a much faster process, taking only a few weeks for energy to reach<br>" 
+            "  the Sun's surface.<br><br>" 
             
-            "* Helioseismology: By analyzing sound waves traveling through the Sun, scientists can infer the conditions in the core,\n" 
-            "  such as its temperature, density, and composition.\n" 
-            "* Neutrino observations: Neutrinos produced in the core can pass through the Sun almost unimpeded, providing direct\n" 
+            "* Helioseismology: By analyzing sound waves traveling through the Sun, scientists can infer the conditions in the core,<br>" 
+            "  such as its temperature, density, and composition.<br>" 
+            "* Neutrino observations: Neutrinos produced in the core can pass through the Sun almost unimpeded, providing direct<br>" 
             "  information about the nuclear reactions taking place there." 
             )
 
@@ -542,23 +543,23 @@ outer_corona_info_hover = (
 
 # Source: constants_new.py STREAMER_BELT_RADII=6.0; NASA Solar Wind / SOHO LASCO observations
 streamer_belt_info = (
-    "Sun: Streamer Belt / Visible Corona:\n\n"
+    "Sun: Streamer Belt / Visible Corona:<br><br>"
 
-    "The streamer belt is the brightest, most structured region of the visible solar corona,\n"
-    "extending from the inner corona out to about 4-6 solar radii. This is the corona that\n"
-    "observers see during total solar eclipses as a pearly white halo around the Sun.\n\n"
+    "The streamer belt is the brightest, most structured region of the visible solar corona,<br>"
+    "extending from the inner corona out to about 4-6 solar radii. This is the corona that<br>"
+    "observers see during total solar eclipses as a pearly white halo around the Sun.<br><br>"
 
-    "Three components of white-light corona:\n"
-    "* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.\n"
-    "  Spectrum is continuous (blurred absorption lines) -- electrons move too fast to preserve them.\n"
-    "* F-corona (Fraunhofer): Sunlight scattered off dust particles. Shows Fraunhofer absorption lines.\n"
-    "  Dominates beyond ~3 R_sun and extends to ~15 R_sun. Has an oval shape.\n"
-    "* E-corona (emission): Line emission from highly ionized Fe, Ni, Ca atoms. Visible to ~2 R_sun.\n\n"
+    "Three components of white-light corona:<br>"
+    "* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.<br>"
+    "  Spectrum is continuous (blurred absorption lines) -- electrons move too fast to preserve them.<br>"
+    "* F-corona (Fraunhofer): Sunlight scattered off dust particles. Shows Fraunhofer absorption lines.<br>"
+    "  Dominates beyond ~3 R_sun and extends to ~15 R_sun. Has an oval shape.<br>"
+    "* E-corona (emission): Line emission from highly ionized Fe, Ni, Ca atoms. Visible to ~2 R_sun.<br><br>"
 
-    "* Helmet streamers: Bottle-shaped, dense magnetic structures extending to 4-6 R_sun.\n"
-    "  Source of slow solar wind. Visible in coronagraphs and at eclipse.\n"
-    "* Temperature: ~1-2 million K\n"
-    "* MAPS C/2026 A1 was first detected in SOHO/LASCO C3 at ~0.15 AU (~33 R_sun) on April 2, 2026.\n"
+    "* Helmet streamers: Bottle-shaped, dense magnetic structures extending to 4-6 R_sun.<br>"
+    "  Source of slow solar wind. Visible in coronagraphs and at eclipse.<br>"
+    "* Temperature: ~1-2 million K<br>"
+    "* MAPS C/2026 A1 was first detected in SOHO/LASCO C3 at ~0.15 AU (~33 R_sun) on April 2, 2026.<br>"
     "  By April 3-4 it was passing through this visible streamer belt region."
 )
 
@@ -585,31 +586,31 @@ streamer_belt_info_hover = (
 
 # Source: constants_new.py ROCHE_LIMIT_RADII=3.45 (Ida et al. 2020); Ikeya-Seki survived at 1.66 R_sun (tensile strength)
 roche_limit_info = (
-    "Sun: Roche Limit (Fluid Body / Comet):\n\n"
+    "Sun: Roche Limit (Fluid Body / Comet):<br><br>"
 
-    "The Roche limit is the distance within which a fluid body held together only by\n"
-    "self-gravity will be torn apart by the Sun's tidal forces.\n\n"
+    "The Roche limit is the distance within which a fluid body held together only by<br>"
+    "self-gravity will be torn apart by the Sun's tidal forces.<br><br>"
 
-    "Formula: d = 2.44 x R_sun x (rho_sun / rho_comet)^(1/3)\n"
-    "Solar density: 1,408 kg/m^3 | Comet density: ~500 kg/m^3\n"
-    "Result: ~3.45 solar radii = ~2,400,165 km from Sun center\n"
-    "  = ~1,704,465 km from photosphere (~0.0114 AU)\n\n"
+    "Formula: d = 2.44 x R_sun x (rho_sun / rho_comet)^(1/3)<br>"
+    "Solar density: 1,408 kg/m^3 | Comet density: ~500 kg/m^3<br>"
+    "Result: ~3.45 solar radii = ~2,400,165 km from Sun center<br>"
+    "  = ~1,704,465 km from photosphere (~0.0114 AU)<br><br>"
 
-    "Key physics:\n"
-    "* The Roche limit is NOT absolute. It marks where tidal forces overcome SELF-GRAVITY\n"
-    "  only. Tensile strength -- the material bonds holding the nucleus together -- can\n"
-    "  allow survival well inside the formal Roche limit.\n"
-    "* Ikeya-Seki (C/1965 S1, ~5 km nucleus) survived at 1.66 R_sun (0.008 AU).\n"
-    "* Great Comet of 1843 survived at 1.19 R_sun (0.006 AU) -- deepest ever recorded.\n"
-    "* Comet Lovejoy (C/2011 W3, ~500 m) survived perihelion briefly at ~1.2 R_sun.\n"
-    "* Size and structural coherence are decisive: larger nuclei have both stronger\n"
-    "  self-gravity AND stronger material bonds to resist tidal disruption.\n\n"
+    "Key physics:<br>"
+    "* The Roche limit is NOT absolute. It marks where tidal forces overcome SELF-GRAVITY<br>"
+    "  only. Tensile strength -- the material bonds holding the nucleus together -- can<br>"
+    "  allow survival well inside the formal Roche limit.<br>"
+    "* Ikeya-Seki (C/1965 S1, ~5 km nucleus) survived at 1.66 R_sun (0.008 AU).<br>"
+    "* Great Comet of 1843 survived at 1.19 R_sun (0.006 AU) -- deepest ever recorded.<br>"
+    "* Comet Lovejoy (C/2011 W3, ~500 m) survived perihelion briefly at ~1.2 R_sun.<br>"
+    "* Size and structural coherence are decisive: larger nuclei have both stronger<br>"
+    "  self-gravity AND stronger material bonds to resist tidal disruption.<br><br>"
 
-    "MAPS C/2026 A1 context:\n"
-    "* MAPS disintegrated at ~8.33 R_sun (0.039 AU) -- OUTSIDE the Roche limit.\n"
-    "* Primary destruction mechanisms: thermal ablation (1-2 million K corona) and\n"
-    "  rotational spin-up from outgassing jets. Tidal forces never acted on MAPS.\n"
-    "* The debris swept THROUGH the Roche limit (3.45 R_sun, 0.016 AU) to perihelion\n"
+    "MAPS C/2026 A1 context:<br>"
+    "* MAPS disintegrated at ~8.33 R_sun (0.039 AU) -- OUTSIDE the Roche limit.<br>"
+    "* Primary destruction mechanisms: thermal ablation (1-2 million K corona) and<br>"
+    "  rotational spin-up from outgassing jets. Tidal forces never acted on MAPS.<br>"
+    "* The debris swept THROUGH the Roche limit (3.45 R_sun, 0.016 AU) to perihelion<br>"
     "  at 1.23 R_sun -- but the nucleus was already gone."
 )
 
@@ -640,30 +641,30 @@ roche_limit_info_hover = (
 
 # Source: Cranmer et al. (2007); NASA Parker Solar Probe -- Alfven surface ~18.8 R_sun, solar corona boundary
 alfven_surface_info = (
-    "Sun: Alfven Surface:\n\n"
+    "Sun: Alfven Surface:<br><br>"
 
-    "The Alfven surface is the true outer boundary of the solar corona -- the point where\n"
-    "the solar wind accelerates past the local Alfven speed and plasma can no longer\n"
-    "communicate back to the Sun. Beyond it, the corona becomes the solar wind.\n\n"
+    "The Alfven surface is the true outer boundary of the solar corona -- the point where<br>"
+    "the solar wind accelerates past the local Alfven speed and plasma can no longer<br>"
+    "communicate back to the Sun. Beyond it, the corona becomes the solar wind.<br><br>"
 
-    "* Location: ~10-20 solar radii, measured directly by NASA's Parker Solar Probe.\n"
-    "  On April 28, 2021, Parker Solar Probe crossed inward at 18.8 R_sun (13 million km),\n"
-    "  spending ~5 hours inside the corona -- the first spacecraft to 'touch the Sun.'\n"
-    "* This is not a smooth sphere: it has spikes and valleys shaped by solar magnetic activity.\n"
-    "  At polar coronal holes: ~12-15 R_sun. In the streamer belt: ~17-19 R_sun.\n\n"
+    "* Location: ~10-20 solar radii, measured directly by NASA's Parker Solar Probe.<br>"
+    "  On April 28, 2021, Parker Solar Probe crossed inward at 18.8 R_sun (13 million km),<br>"
+    "  spending ~5 hours inside the corona -- the first spacecraft to 'touch the Sun.'<br>"
+    "* This is not a smooth sphere: it has spikes and valleys shaped by solar magnetic activity.<br>"
+    "  At polar coronal holes: ~12-15 R_sun. In the streamer belt: ~17-19 R_sun.<br><br>"
 
-    "Why it matters:\n"
-    "* Inside the Alfven surface: plasma is magnetically connected to the Sun.\n"
-    "  Perturbations (like a passing comet) can propagate back to the solar surface.\n"
-    "* Outside it: plasma becomes the solar wind, causally disconnected from the Sun.\n"
-    "* This boundary governs the Sun's angular momentum loss and spin-down over time.\n\n"
+    "Why it matters:<br>"
+    "* Inside the Alfven surface: plasma is magnetically connected to the Sun.<br>"
+    "  Perturbations (like a passing comet) can propagate back to the solar surface.<br>"
+    "* Outside it: plasma becomes the solar wind, causally disconnected from the Sun.<br>"
+    "* This boundary governs the Sun's angular momentum loss and spin-down over time.<br><br>"
 
-    "MAPS C/2026 A1 context:\n"
-    "* MAPS crossed the Alfven surface approximately April 3, ~18:00 UTC --\n"
-    "  about 20 hours before its nucleus disintegrated.\n"
-    "* Inside this boundary, the comet was immersed in magnetically connected coronal plasma\n"
-    "  at temperatures of 1-2 million K, subject to intense tidal and thermal stresses.\n"
-    "* The corona it entered here is physically different from the visible outer corona --\n"
+    "MAPS C/2026 A1 context:<br>"
+    "* MAPS crossed the Alfven surface approximately April 3, ~18:00 UTC --<br>"
+    "  about 20 hours before its nucleus disintegrated.<br>"
+    "* Inside this boundary, the comet was immersed in magnetically connected coronal plasma<br>"
+    "  at temperatures of 1-2 million K, subject to intense tidal and thermal stresses.<br>"
+    "* The corona it entered here is physically different from the visible outer corona --<br>"
     "  this is where the Sun 'feels' the comet and vice versa."
 )
 
@@ -865,26 +866,26 @@ hover_text_sun_and_corona = (
 # Item 31: hover_text_sun_and_corona uses <br>/<b> for Plotly;
 # Tkinter CreateToolTip renders tags literally. This version is for GUI.
 hover_text_sun_and_corona_tooltip = (
-    'The Sun and Its Atmosphere\n\n'
-    'Five corona/boundary layers now visualized separately:\n'
-    '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K\n'
-    '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets\n'
-    '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona\n'
-    '* Alfven Surface: ~18.8 R_sun -- true corona/solar wind boundary\n'
-    '  (Parker Solar Probe first crossing: April 28, 2021)\n'
-    '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope\n\n'
-    'Parker Solar Probe closest approach: ~8.8 R_sun (2024)\n\n'
-    'The coronal heating paradox: the corona is 200x hotter than the photosphere\n'
-    'despite being farther from the energy source. Leading theories: Alfven waves,\n'
-    'nanoflares, and magnetic reconnection -- still actively debated.\n\n'
-    'MAPS C/2026 A1 (April 2026) crossed each boundary in sequence:\n'
-    'Extended F-corona (April 2, ~33 R_sun, ~0.153 AU) ->\n'
-    'Alfven Surface (April 3 ~18:00, 18.8 R_sun, 0.087 AU) ->\n'
-    'DISINTEGRATION (April 4 08:15, 8.33 R_sun, 0.039 AU) ->\n'
-    'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY ->\n'
-    'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.\n'
-    'Ghost tracked by SOHO/LASCO ~36-40 hours outbound; dispersed by April 6.\n'
-    'Parker Solar Probe closest approach: 8.8 R_sun (0.041 AU) --\n'
+    'The Sun and Its Atmosphere<br><br>'
+    'Five corona/boundary layers now visualized separately:<br>'
+    '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
+    '* Roche Limit: 3.45 R_sun -- tidal disruption threshold for comets<br>'
+    '* Streamer Belt (Visible Corona): 4-6 R_sun -- eclipse white-light corona<br>'
+    '* Alfven Surface: ~18.8 R_sun -- true corona/solar wind boundary<br>'
+    '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
+    '* Extended Corona (F-corona): ~50 R_sun -- faint dust-scattered envelope<br><br>'
+    'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
+    'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
+    'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
+    'nanoflares, and magnetic reconnection -- still actively debated.<br><br>'
+    'MAPS C/2026 A1 (April 2026) crossed each boundary in sequence:<br>'
+    'Extended F-corona (April 2, ~33 R_sun, ~0.153 AU) -><br>'
+    'Alfven Surface (April 3 ~18:00, 18.8 R_sun, 0.087 AU) -><br>'
+    'DISINTEGRATION (April 4 08:15, 8.33 R_sun, 0.039 AU) -><br>'
+    'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY -><br>'
+    'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.<br>'
+    'Ghost tracked by SOHO/LASCO ~36-40 hours outbound; dispersed by April 6.<br>'
+    'Parker Solar Probe closest approach: 8.8 R_sun (0.041 AU) --<br>'
     'MAPS disintegrated at 8.33 R_sun (0.039 AU), just inside Parker\'s record.'
 )
 
@@ -928,8 +929,8 @@ def create_sun_gravitational_shell():
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='rgb(102, 187, 106)', opacity=0.3),
-        name='Sun\'s Gravitational Influence',
-        legendgroup='Sun\'s Gravitational Influence',
+        name='Sun: Gravitational Influence',
+        legendgroup='Sun: Gravitational Influence',
         hoverinfo='skip',
         showlegend=True
     )
@@ -939,9 +940,9 @@ def create_sun_gravitational_shell():
         marker=dict(size=6, color='rgb(102, 187, 106)', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
-        legendgroup='Sun\'s Gravitational Influence',
-        text=[gravitational_influence_info_hover],
-        customdata=['Sun\'s Gravitational Influence'],
+        legendgroup='Sun: Gravitational Influence',
+        text=[f"Sun: Gravitational Influence<br><br>{gravitational_influence_info_hover}"],
+        customdata=['Sun: Gravitational Influence'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
     )
@@ -957,8 +958,8 @@ def create_sun_outer_oort_shell():
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='white', opacity=0.3),
-        name='Outer Oort Cloud',
-        legendgroup='Outer Oort Cloud',
+        name='Sun: Outer Oort Cloud',
+        legendgroup='Sun: Outer Oort Cloud',
         hoverinfo='skip',
         showlegend=True
     )
@@ -968,8 +969,8 @@ def create_sun_outer_oort_shell():
         marker=dict(size=6, color='white', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
-        legendgroup='Outer Oort Cloud',
-        text=[outer_oort_info_hover],
+        legendgroup='Sun: Outer Oort Cloud',
+        text=[f"Sun: Outer Oort Cloud<br><br>{outer_oort_info_hover}"],
         customdata=['Outer Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -986,8 +987,8 @@ def create_sun_inner_oort_shell():
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='white', opacity=0.35),
-        name='Inner Oort Cloud',
-        legendgroup='Inner Oort Cloud',
+        name='Sun: Inner Oort Cloud',
+        legendgroup='Sun: Inner Oort Cloud',
         hoverinfo='skip',
         showlegend=True
     )
@@ -997,8 +998,8 @@ def create_sun_inner_oort_shell():
         marker=dict(size=6, color='white', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
-        legendgroup='Inner Oort Cloud',
-        text=[inner_oort_info_hover],
+        legendgroup='Sun: Inner Oort Cloud',
+        text=[f"Sun: Inner Oort Cloud<br><br>{inner_oort_info_hover}"],
         customdata=['Inner Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1015,8 +1016,8 @@ def create_sun_inner_oort_limit_shell():
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='white', opacity=0.35),
-        name='Inner Limit of Oort Cloud',
-        legendgroup='Inner Limit of Oort Cloud',
+        name='Sun: Inner Limit of Oort Cloud',
+        legendgroup='Sun: Inner Limit of Oort Cloud',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1026,8 +1027,8 @@ def create_sun_inner_oort_limit_shell():
         marker=dict(size=6, color='white', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
-        legendgroup='Inner Limit of Oort Cloud',
-        text=[inner_limit_oort_info_hover],
+        legendgroup='Sun: Inner Limit of Oort Cloud',
+        text=[f"Sun: Inner Limit of Oort Cloud<br><br>{inner_limit_oort_info_hover}"],
         customdata=['Inner Limit of Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1044,8 +1045,8 @@ def create_sun_heliopause_shell():
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='rgb(135, 206, 250)', opacity=0.4),
-        name='Solar Wind Heliopause',
-        legendgroup='Solar Wind Heliopause',
+        name='Sun: Heliopause',
+        legendgroup='Sun: Heliopause',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1055,8 +1056,8 @@ def create_sun_heliopause_shell():
         marker=dict(size=6, color='rgb(135, 206, 250)', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
-        legendgroup='Solar Wind Heliopause',
-        text=[solar_wind_info_hover],
+        legendgroup='Sun: Heliopause',
+        text=[f"Sun: Heliopause<br><br>{solar_wind_info_hover}"],
         customdata=['Solar Wind Heliopause'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1073,8 +1074,8 @@ def create_sun_termination_shock_shell():
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='rgb(240, 244, 255)', opacity=0.4),
-        name='Solar Wind Termination Shock',
-        legendgroup='Solar Wind Termination Shock',
+        name='Sun: Termination Shock',
+        legendgroup='Sun: Termination Shock',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1084,8 +1085,8 @@ def create_sun_termination_shock_shell():
         marker=dict(size=6, color='rgb(240, 244, 255)', opacity=0.9,
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
-        legendgroup='Solar Wind Termination Shock',
-        text=[termination_shock_info_hover],
+        legendgroup='Sun: Termination Shock',
+        text=[f"Sun: Termination Shock<br><br>{termination_shock_info_hover}"],
         customdata=['Solar Wind Termination Shock'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1114,7 +1115,7 @@ def create_sun_outer_corona_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Outer Corona',
-        text=[outer_corona_info_hover],
+        text=[f"Sun: Outer Corona<br><br>{outer_corona_info_hover}"],
         customdata=['Sun: Outer Corona'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1143,7 +1144,7 @@ def create_sun_inner_corona_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Inner Corona',
-        text=[inner_corona_info_hover],
+        text=[f"Sun: Inner Corona<br><br>{inner_corona_info_hover}"],
         customdata=['Sun: Inner Corona'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1176,7 +1177,7 @@ def create_sun_streamer_belt_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Streamer Belt (Visible Corona)',
-        text=[streamer_belt_info_hover],
+        text=[f"Sun: Streamer Belt (Visible Corona)<br><br>{streamer_belt_info_hover}"],
         customdata=['Sun: Streamer Belt (Visible Corona)'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1214,7 +1215,7 @@ def create_sun_roche_limit_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Roche Limit (Comets)',
-        text=[roche_limit_info_hover],
+        text=[f"Sun: Roche Limit (Comets)<br><br>{roche_limit_info_hover}"],
         customdata=['Sun: Roche Limit (Comets)'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1249,7 +1250,7 @@ def create_sun_alfven_surface_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Alfven Surface',
-        text=[alfven_surface_info_hover],
+        text=[f"Sun: Alfven Surface<br><br>{alfven_surface_info_hover}"],
         customdata=['Sun: Alfven Surface'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1278,7 +1279,7 @@ def create_sun_chromosphere_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Chromosphere',
-        text=[chromosphere_info_hover],
+        text=[f"Sun: Chromosphere<br><br>{chromosphere_info_hover}"],
         customdata=['Sun: Chromosphere'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1307,7 +1308,7 @@ def create_sun_photosphere_shell():
                     symbol='cross', line=dict(color='gray', width=1)),
         name='',
         legendgroup='Sun: Photosphere',
-        text=[photosphere_info_hover],
+        text=[f"Sun: Photosphere<br><br>{photosphere_info_hover}"],
         customdata=['Sun: Photosphere'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1336,7 +1337,7 @@ def create_sun_radiative_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Radiative Zone',
-        text=[radiative_zone_info_hover],
+        text=[f"Sun: Radiative Zone<br><br>{radiative_zone_info_hover}"],
         customdata=['Sun: Radiative Zone'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1365,7 +1366,7 @@ def create_sun_core_shell():
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Core',
-        text=[core_info_hover],
+        text=[f"Sun: Core<br><br>{core_info_hover}"],
         customdata=['Sun: Core'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1427,8 +1428,8 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0), inner_radius=2000, o
         x=x_flat, y=y_flat, z=z_flat,
         mode='markers',
         marker=dict(size=1.5, color='rgb(173, 216, 230)', opacity=0.4, symbol='circle'),
-        name='Hills Cloud (Inner Oort - Toroidal)',
-        legendgroup='Hills Cloud (Inner Oort - Toroidal)',
+        name='Sun: Hills Cloud (Inner Oort - Toroidal)',
+        legendgroup='Sun: Hills Cloud (Inner Oort - Toroidal)',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1440,8 +1441,8 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0), inner_radius=2000, o
         marker=dict(size=8, color='rgb(173, 216, 230)', opacity=1.0,
                     symbol='cross', line=dict(color='red', width=2)),
         name='',
-        legendgroup='Hills Cloud (Inner Oort - Toroidal)',
-        text=[hills_hover],
+        legendgroup='Sun: Hills Cloud (Inner Oort - Toroidal)',
+        text=[f"Sun: Hills Cloud (Inner Oort - Toroidal)<br><br>{hills_hover}"],
         customdata=['Hills Cloud Torus'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1508,8 +1509,8 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=1.0, color='rgb(255, 255, 255)', opacity=0.3, symbol='circle'),
-        name='Outer Oort Cloud (Clumpy)',
-        legendgroup='Outer Oort Cloud (Clumpy)',
+        name='Sun: Outer Oort Cloud (Clumpy)',
+        legendgroup='Sun: Outer Oort Cloud (Clumpy)',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1520,8 +1521,8 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
         marker=dict(size=8, color='rgb(255, 255, 255)', opacity=1.0,
                     symbol='cross', line=dict(color='red', width=2)),
         name='',
-        legendgroup='Outer Oort Cloud (Clumpy)',
-        text=[clumpy_hover],
+        legendgroup='Sun: Outer Oort Cloud (Clumpy)',
+        text=[f"Sun: Outer Oort Cloud (Clumpy)<br><br>{clumpy_hover}"],
         customdata=['Outer Oort Cloud'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -1568,8 +1569,8 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=0.8, color='rgb(255, 182, 193)', opacity=0.2, symbol='circle'),
-        name='Galactic Tide Region',
-        legendgroup='Galactic Tide Region',
+        name='Sun: Galactic Tide Region',
+        legendgroup='Sun: Galactic Tide Region',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1580,8 +1581,8 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
         marker=dict(size=8, color='rgb(255, 182, 193)', opacity=1.0,
                     symbol='cross', line=dict(color='red', width=2)),
         name='',
-        legendgroup='Galactic Tide Region',
-        text=[tide_hover],
+        legendgroup='Sun: Galactic Tide Region',
+        text=[f"Sun: Galactic Tide Region<br><br>{tide_hover}"],
         customdata=['Galactic Tide Region'],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

@@ -9,6 +9,7 @@ making its magnetosphere geometry unique.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 Source: NASA Uranus Fact Sheet; Ness et al. (1986) Science (magnetosphere/radiation belts);
 Nettelmann et al. (2013) Icarus (interior model); Voyager 2 (1986) in-situ measurements.
 """
@@ -24,9 +25,9 @@ from shared_utilities import create_sun_direction_indicator
 
 # Source: NASA Uranus Fact Sheet; Nettelmann et al. (2013) Icarus -- rocky core ~1 Earth mass, 5255 K estimate
 uranus_core_info = (
-            "2.4 MB PER FRAME FOR HTML.\n\n"
-            "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and \n" 
-            "metallic iron-nickel. It's estimated to have a mass roughly equivalent to that of Earth. Temperatures near the core can \n" 
+            "2.4 MB PER FRAME FOR HTML.<br><br>"
+            "Uranus core: Scientists believe Uranus has a relatively small, rocky core. This core is likely composed of silicate and <br>" 
+            "metallic iron-nickel. It's estimated to have a mass roughly equivalent to that of Earth. Temperatures near the core can <br>" 
             "reach incredibly high values, around 4982 degC (5255 K) degrees Celsius."
 )
 
@@ -80,7 +81,7 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -92,11 +93,11 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
 
 # Source: Nettelmann et al. (2013) -- interior model; ice/rock mantle 10-13 Earth masses
 uranus_mantle_info = (
-            "2.1 MB PER FRAME FOR HTML.\n\n"
-            "mantle: Surrounding the rocky core is a dense fluid layer often referred to as an \"icy mantle.\" This layer makes up the \n" 
-            "majority (80% or more) of the planet's mass. It's not ice in the traditional sense but rather a hot, dense fluid \n" 
-            "containing water, ammonia, and methane under immense pressure. These are sometimes referred to as \"ices\" by planetary \n" 
-            "scientists. This mantle is electrically conductive and is thought to be the region where Uranus' unusual magnetic field \n" 
+            "2.1 MB PER FRAME FOR HTML.<br><br>"
+            "mantle: Surrounding the rocky core is a dense fluid layer often referred to as an \"icy mantle.\" This layer makes up the <br>" 
+            "majority (80% or more) of the planet's mass. It's not ice in the traditional sense but rather a hot, dense fluid <br>" 
+            "containing water, ammonia, and methane under immense pressure. These are sometimes referred to as \"ices\" by planetary <br>" 
+            "scientists. This mantle is electrically conductive and is thought to be the region where Uranus' unusual magnetic field <br>" 
             "is generated."
 )
 
@@ -157,7 +158,7 @@ def create_uranus_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -170,12 +171,12 @@ def create_uranus_mantle_shell(center_position=(0, 0, 0)):
 # Source: Lindal et al. (1987) JGR; Sromovsky et al. (2011) -- cloud pressures, temperatures, composition
 uranus_cloud_layer_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.\n\n"
-            "Troposphere: This is the lowest and densest part of the atmosphere, extending from where the pressure is about 100 bar \n" 
-            "(deep inside) up to an altitude of roughly 50 kilometers, where the pressure is around 0.1 bar. In the troposphere, the \n" 
-            "temperature generally decreases with altitude, ranging from around 320 K at the base to a frigid 53 K at the top. This \n" 
-            "region is where most of Uranus' cloud activity occurs. There are several cloud layers within the troposphere, thought to \n" 
-            "be composed of water ice (deepest), ammonium hydrosulfide, ammonia and hydrogen sulfide, and finally methane ice at the \n" 
+            "4.6 MB PER FRAME FOR HTML.<br><br>"
+            "Troposphere: This is the lowest and densest part of the atmosphere, extending from where the pressure is about 100 bar <br>" 
+            "(deep inside) up to an altitude of roughly 50 kilometers, where the pressure is around 0.1 bar. In the troposphere, the <br>" 
+            "temperature generally decreases with altitude, ranging from around 320 K at the base to a frigid 53 K at the top. This <br>" 
+            "region is where most of Uranus' cloud activity occurs. There are several cloud layers within the troposphere, thought to <br>" 
+            "be composed of water ice (deepest), ammonium hydrosulfide, ammonia and hydrogen sulfide, and finally methane ice at the <br>" 
             "highest levels."
 )
 
@@ -264,6 +265,7 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Uranus: {layer_info['name']}",
+        legendgroup=f"Uranus: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -326,7 +328,7 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Uranus: {layer_info['name']} (Info)"
+    trace_name = f"Uranus: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -335,7 +337,7 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Uranus: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -345,13 +347,13 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
 
 # Source: NASA Uranus Fact Sheet; Lindal et al. (1987) JGR -- Voyager 2 radio occultation; atmospheric structure
 uranus_upper_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.\n\n"
-            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H2): Making up about 83% of the atmosphere; \n" 
-            "Helium (He): Constituting around 15%; Methane (CH4): Present in smaller amounts, around 2.3%. This methane absorbs red \n" 
-            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H2O) and ammonia (NH3) are also present \n" 
-            "in small quantities. Other hydrocarbons like ethane, acetylene, and methyl acetylene exist in trace amounts, formed by \n" 
-            "the breakdown of methane by sunlight. The atmosphere lacks the prominent banding seen on Jupiter and Saturn but does \n" 
-            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224  degC), making it the coldest planetary \n" 
+            "2.7 MB PER FRAME FOR HTML.<br><br>"
+            "Atmosphere: Uranus has a thick atmosphere primarily composed of Hydrogen (H2): Making up about 83% of the atmosphere; <br>" 
+            "Helium (He): Constituting around 15%; Methane (CH4): Present in smaller amounts, around 2.3%. This methane absorbs red <br>" 
+            "light, giving Uranus its characteristic blue-green hue. Trace amounts: Water (H2O) and ammonia (NH3) are also present <br>" 
+            "in small quantities. Other hydrocarbons like ethane, acetylene, and methyl acetylene exist in trace amounts, formed by <br>" 
+            "the breakdown of methane by sunlight. The atmosphere lacks the prominent banding seen on Jupiter and Saturn but does <br>" 
+            "experience extremely cold temperatures, reaching as low as 49 Kelvin (-224  degC), making it the coldest planetary <br>" 
             "atmosphere in our solar system. The atmosphere is layered into a troposphere, stratosphere, and thermosphere."
 )
 
@@ -421,7 +423,7 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -433,16 +435,16 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
 # Source: Ness et al. (1986) Science -- Voyager 2; magnetic axis 59 deg offset; Herbert (2009) magnetosphere model
 uranus_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.\n"
-            "1.4 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
+            "1.4 MB PER FRAME FOR HTML.<br><br>"
 
-            "Magnetic Field (Magnetosphere): Uranus possesses a unique and peculiar magnetic field. Unlike most planets, its \n" 
-            "magnetic axis is tilted at a dramatic angle of nearly 60 degrees relative to its rotational axis. Furthermore, the \n" 
-            "magnetic field is offset from the planet's center by about one-third of Uranus' radius. This unusual orientation \n" 
-            "leads to a magnetosphere that is highly distorted and asymmetric. The magnetic field is generated by the convective \n" 
-            "motions of electrically conductive materials (likely the icy mantle) within the planet. The strength of Uranus' \n" 
-            "dipole magnetic field is significant, about 50 times that of Earth's, although smaller than Jupiter's. The \n" 
-            "magnetosphere deflects the solar wind, creating a complex boundary called the magnetopause, which extends a \n" 
+            "Magnetic Field (Magnetosphere): Uranus possesses a unique and peculiar magnetic field. Unlike most planets, its <br>" 
+            "magnetic axis is tilted at a dramatic angle of nearly 60 degrees relative to its rotational axis. Furthermore, the <br>" 
+            "magnetic field is offset from the planet's center by about one-third of Uranus' radius. This unusual orientation <br>" 
+            "leads to a magnetosphere that is highly distorted and asymmetric. The magnetic field is generated by the convective <br>" 
+            "motions of electrically conductive materials (likely the icy mantle) within the planet. The strength of Uranus' <br>" 
+            "dipole magnetic field is significant, about 50 times that of Earth's, although smaller than Jupiter's. The <br>" 
+            "magnetosphere deflects the solar wind, creating a complex boundary called the magnetopause, which extends a <br>" 
             "considerable distance from the planet."                      
 )
 
@@ -533,14 +535,14 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
     # radiation-belt and ring-system info marker pattern.
     info_trace = create_info_marker(
         x[0], y[0], z[0],
-        'rgb(200, 200, 255)', description, trace_name
+        'rgb(200, 200, 255)', f"{trace_name}<br><br>{description}", trace_name
     )
 
     return [geom_trace, info_trace]
 
 # Source: Ness et al. (1986) Science -- Voyager 2 magnetometer; 3-10 R_U belt extent; 59-deg magnetic tilt
 uranus_radiation_belts_info = (
-            "560 KB PER FRAME FOR HTML.\n\n"
+            "560 KB PER FRAME FOR HTML.<br><br>"
             "Zones of trapped high-energy particles in uranus's magnetosphere"                     
 )
 
@@ -686,40 +688,40 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
         )
         traces.append(create_info_marker(
             belt_x_final[0], belt_y_final[0], belt_z_final[0],
-            belt_colors[i], belt_texts[i], belt_names[i]
+            belt_colors[i], f"{belt_names[i]}<br><br>{belt_texts[i]}", belt_names[i]
         ))
 
     return traces
     
 # Source: Elliot et al. (1977) Nature -- Uranus rings discovery; Voyager 2 (1986) confirmed 13 rings; de Pater et al. (2006)
 uranus_ring_system_info = (
-                "22.2 MB PER FRAME FOR HTML.\n\n"
+                "22.2 MB PER FRAME FOR HTML.<br><br>"
 
-                "Uranus has a system of 13 known rings. These rings are generally very narrow, dark (reflecting very little light, \n" 
-                "similar to charcoal), and composed of dust and larger particles that are icy and darkened by rock. The rings are \n" 
-                "grouped into two main systems:\n" 
-                "* Inner Rings: Nine narrow, dark rings.\n" 
-                "* Outer Rings: Two more distant rings, one of which is bluish and the other reddish.\n" 
-                "While the main rings of Uranus are narrow bands, there are also broader, more diffuse rings made of dust. These \n" 
-                "dusty rings could be considered to have a more toroidal (donut-like) distribution of material compared to the thin, \n" 
-                "distinct main rings. For example, the outermost rings (Nu and Mu) are quite broad and dusty.\n" 
-                "* There are nine main, narrow rings. These rings are relatively dense and have well-defined edges. They are composed \n" 
-                "  mostly of larger, darker particles, often described as being the color of charcoal. Examples of the main rings include \n" 
-                "  the Epsilon, Delta, Gamma, Eta, Beta, Alpha, and the numbered rings 4, 5, and 6. The Epsilon ring is the outermost and \n" 
-                "  widest of the main rings.\n" 
-                "* There are two outer rings: the Nu ring and the Mu ring. These rings are much fainter and more diffuse than the main \n" 
-                "  rings. They are composed of fine dust particles. The Mu ring is quite broad and has a more torus-like distribution of \n" 
-                "  material. It also has a distinct blue color, similar to Saturn's E ring. The Nu ring is reddish in color, similar to \n" 
-                "  dusty rings seen elsewhere in the solar system.\n" 
-                "* Composition: The main rings are primarily larger, dark particles, while the outer rings are predominantly fine dust.\n" 
-                "* Structure: The main rings are narrow and well-defined, whereas the outer rings are broad and diffuse, with the Mu \n" 
-                "  ring exhibiting a clear torus-like structure.\n" 
-                "* Origin and Evolution: The origins and the processes that shape these different sets of rings might vary. The dusty \n" 
-                "  outer rings are likely fed by dust kicked off Uranus' inner moons by micrometeoroid impacts.\n" 
-                "* Visual Characteristics: The main rings are dark and difficult to see, requiring specific observation techniques. The \n" 
-                "  outer rings are even fainter, with the Mu ring having a unique blue color.\n" 
-                "In summary, while all are part of Uranus' ring system, the significant differences in their composition, structure, and \n" 
-                "likely origin make it accurate and informative to distinguish between the narrow, dark main rings and the broad, dusty, \n" 
+                "Uranus has a system of 13 known rings. These rings are generally very narrow, dark (reflecting very little light, <br>" 
+                "similar to charcoal), and composed of dust and larger particles that are icy and darkened by rock. The rings are <br>" 
+                "grouped into two main systems:<br>" 
+                "* Inner Rings: Nine narrow, dark rings.<br>" 
+                "* Outer Rings: Two more distant rings, one of which is bluish and the other reddish.<br>" 
+                "While the main rings of Uranus are narrow bands, there are also broader, more diffuse rings made of dust. These <br>" 
+                "dusty rings could be considered to have a more toroidal (donut-like) distribution of material compared to the thin, <br>" 
+                "distinct main rings. For example, the outermost rings (Nu and Mu) are quite broad and dusty.<br>" 
+                "* There are nine main, narrow rings. These rings are relatively dense and have well-defined edges. They are composed <br>" 
+                "  mostly of larger, darker particles, often described as being the color of charcoal. Examples of the main rings include <br>" 
+                "  the Epsilon, Delta, Gamma, Eta, Beta, Alpha, and the numbered rings 4, 5, and 6. The Epsilon ring is the outermost and <br>" 
+                "  widest of the main rings.<br>" 
+                "* There are two outer rings: the Nu ring and the Mu ring. These rings are much fainter and more diffuse than the main <br>" 
+                "  rings. They are composed of fine dust particles. The Mu ring is quite broad and has a more torus-like distribution of <br>" 
+                "  material. It also has a distinct blue color, similar to Saturn's E ring. The Nu ring is reddish in color, similar to <br>" 
+                "  dusty rings seen elsewhere in the solar system.<br>" 
+                "* Composition: The main rings are primarily larger, dark particles, while the outer rings are predominantly fine dust.<br>" 
+                "* Structure: The main rings are narrow and well-defined, whereas the outer rings are broad and diffuse, with the Mu <br>" 
+                "  ring exhibiting a clear torus-like structure.<br>" 
+                "* Origin and Evolution: The origins and the processes that shape these different sets of rings might vary. The dusty <br>" 
+                "  outer rings are likely fed by dust kicked off Uranus' inner moons by micrometeoroid impacts.<br>" 
+                "* Visual Characteristics: The main rings are dark and difficult to see, requiring specific observation techniques. The <br>" 
+                "  outer rings are even fainter, with the Mu ring having a unique blue color.<br>" 
+                "In summary, while all are part of Uranus' ring system, the significant differences in their composition, structure, and <br>" 
+                "likely origin make it accurate and informative to distinguish between the narrow, dark main rings and the broad, dusty, <br>" 
                 "and torus-like outer rings."                                           
 )
 
@@ -1060,7 +1062,7 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
         mx_t2, my_t2, mz_t2 = rotate_points(mx_t, my_t, mz_t, uranus_tilt, 'y')
         traces.append(create_info_marker(
             mx_t2[0] + center_x, my_t2[0] + center_y, mz_t2[0] + center_z,
-            ring_info['color'], ring_info['description'],
+            ring_info['color'], f"Uranus: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Uranus: {ring_info['name']}"
         ))
     
@@ -1068,13 +1070,13 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
 
 # Source: NASA Uranus Fact Sheet (nssdc.gsfc.nasa.gov); Hill sphere radius ~47 AU from planetary mass ratio
 uranus_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.<br>" 
+            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
-            "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity \n" 
-            "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10^7 km, which corresponds to about \n" 
-            "2 770 Uranus radii (mean radius ~25 360 km). This means that any moon or other object orbiting Uranus within this \n" 
-            "sphere is primarily gravitationally bound to the planet. The major moons and rings of Uranus lie well within its Hill \n" 
+            "The Hill sphere (also known as the Roche sphere) represents the region around a celestial body where its own gravity <br>" 
+            "is the dominant force attracting satellites. Uranus has a Hill radius around 7.02x10^7 km, which corresponds to about <br>" 
+            "2 770 Uranus radii (mean radius ~25 360 km). This means that any moon or other object orbiting Uranus within this <br>" 
+            "sphere is primarily gravitationally bound to the planet. The major moons and rings of Uranus lie well within its Hill <br>" 
             "sphere."                     
 )
 
@@ -1136,7 +1138,7 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

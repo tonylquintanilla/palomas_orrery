@@ -8,6 +8,7 @@ fully archivable once shell_configs.py migration is complete.
 Consumed by: planet_visualization.py (routing dispatcher)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 April 18, 2026: provenance audit source citations added, Gemini fact-check applied.
 All 16 claims confirmed (Stern et al. 2015, Bierson et al. 2020, Gladstone et al. 2016,
 NASA Pluto Fact Sheet, NASA SSD). No factual corrections needed.
@@ -24,9 +25,9 @@ from shared_utilities import create_sun_direction_indicator
 # Source: Stern et al. (2015, Science); Bierson et al. (2020, Nature Geoscience);
 #         rocky core ~1,700 km diameter (~70% of total), radioactive heating (U, Th, K), core temp ~1,000 K confirmed.
 pluto_core_info = (
-            "2.4 MB PER FRAME FOR HTML.\n\n"
-            "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter \n" 
-            "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay \n" 
+            "2.4 MB PER FRAME FOR HTML.<br><br>"
+            "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter <br>" 
+            "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay <br>" 
             "of radioactive elements within the core may still be present today."
 )
 
@@ -98,7 +99,7 @@ def create_pluto_core_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -111,9 +112,9 @@ def create_pluto_core_shell(center_position=(0, 0, 0)):
 # Source: NASA New Horizons Mission Press Kit; Stern et al. (2015, Science); Bierson et al. (2020, Nature Geoscience);
 #         water-ice mantle, subsurface ocean 100-180 km thick with ammonia antifreeze confirmed.
 pluto_mantle_info = (
-            "2.1 MB PER FRAME FOR HTML.\n\n"
-            "Mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean \n" 
-            "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean \n" 
+            "2.1 MB PER FRAME FOR HTML.<br><br>"
+            "Mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean <br>" 
+            "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean <br>" 
             "could be 100 to 180 km thick. The presence of this ocean is supported by geological features observed on Pluto's surface."
 )
 
@@ -178,7 +179,7 @@ def create_pluto_mantle_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -192,10 +193,10 @@ def create_pluto_mantle_shell(center_position=(0, 0, 0)):
 #         N2 ice surface (>98% in Sputnik Planitia), water-ice mountains 2-3 km, Sputnik Planitia age <10 Myr confirmed.
 pluto_crust_info = (
             "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.\n\n"
-            "Crust (Surface Layer): This is the outermost layer, composed of more volatile ices: primarily nitrogen ice, with smaller\n" 
-            "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively \n" 
-            "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen \n" 
+            "4.6 MB PER FRAME FOR HTML.<br><br>"
+            "Crust (Surface Layer): This is the outermost layer, composed of more volatile ices: primarily nitrogen ice, with smaller<br>" 
+            "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively <br>" 
+            "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen <br>" 
             "ice layer is estimated to be several kilometers thick and overlies the water-ice lithosphere."
 )
 
@@ -275,6 +276,7 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
         color=layer_info['color'],
         opacity=layer_info['opacity'],
         name=f"Pluto: {layer_info['name']}",
+        legendgroup=f"Pluto: {layer_info['name']}",
         showlegend=True,
         hoverinfo='none',  # Disable hover on mesh surface
         # Add these new parameters to make hover text invisible
@@ -337,7 +339,7 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
     # Create hover trace with direct text assignment
     # Single info marker at north pole, 5% above radius
     r_info = radius * 1.05
-    trace_name = f"Pluto: {layer_info['name']} (Info)"
+    trace_name = f"Pluto: {layer_info['name']}"
 
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
@@ -346,7 +348,7 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[f"Pluto: {layer_info['name']}"],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -357,13 +359,13 @@ def create_pluto_crust_shell(center_position=(0, 0, 0)):
 # Source: Stern et al. (2015, Science); Gladstone et al. (2016, Science);
 #         20+ haze layers up to 200 km confirmed by New Horizons; temperature inversion confirmed.
 pluto_haze_layer_info = (
-            "2.7 MB PER FRAME FOR HTML.\n\n"
-            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
-            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
-            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
-            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
-            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
-            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature \n" 
+            "2.7 MB PER FRAME FOR HTML.<br><br>"
+            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature <br>" 
             "inversion, possibly caused by the presence of methane."
 )
 
@@ -444,7 +446,7 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -457,13 +459,13 @@ def create_pluto_haze_layer_shell(center_position=(0, 0, 0)):
 # Source: Stern et al. (2015, Science); Gladstone et al. (2016, Science);
 #         surface pressure ~10 microbars (1/100,000th Earth's); exobase ~1,700 km; 20+ haze layers confirmed.
 pluto_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.\n\n"
-            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
-            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
-            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
-            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of \n" 
-            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy \n" 
-            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature \n" 
+            "2.7 MB PER FRAME FOR HTML.<br><br>"
+            "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed <br>" 
+            "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes <br>" 
+            "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. <br>" 
+            "When it's closer to the Sun, the surface ice sublimates, forming a gaseous atmosphere. The atmosphere contains layers of <br>" 
+            "haze, extending up to 200 km above the surface, likely formed from the interaction of the atmospheric gases with high-energy <br>" 
+            "radiation. Counterintuitively, Pluto's upper atmosphere is significantly warmer than its surface due to a temperature <br>" 
             "inversion, possibly caused by the presence of methane."
 )
 
@@ -537,7 +539,7 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False
@@ -557,13 +559,13 @@ def create_pluto_atmosphere_shell(center_position=(0, 0, 0)):
 # Source: NASA Solar System Dynamics (SSD); NASA Pluto Fact Sheet;
 #         Hill sphere ~5.99 million km (0.04 AU); all 5 moons (Charon, Styx, Nix, Kerberos, Hydra) confirmed within.
 pluto_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
-            "1.3 MB PER FRAME FOR HTML.\n\n"
+            "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.<br>" 
+            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
-            "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n" 
-            "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is \n" 
-            "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is \n" 
-            "gravitationally bound to it. Pluto has five known moons: Charon, Styx, Nix, Kerberos, and Hydra, all of which reside within \n" 
+            "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br>" 
+            "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is <br>" 
+            "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is <br>" 
+            "gravitationally bound to it. Pluto has five known moons: Charon, Styx, Nix, Kerberos, and Hydra, all of which reside within <br>" 
             "its Hill sphere."                     
 )
 
@@ -622,7 +624,7 @@ def create_pluto_hill_sphere_shell(center_position=(0, 0, 0)):
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=trace_name,
-        text=[layer_info['description']],
+        text=[f"{trace_name}<br><br>{layer_info['description']}"],
         customdata=[trace_name],
         hovertemplate='%{text}<extra></extra>',
         showlegend=False

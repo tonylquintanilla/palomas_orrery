@@ -13,6 +13,7 @@ Consumed by: planet_visualization.py (dispatch loop via CUSTOM_SHELLS lazy impor
              palomas_orrery.py (_info strings via globals() for build_shell_checkboxes)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+    D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Sodium tail decimal error corrected (2.4 Mkm -> 24 Mkm).
     Provenance audit identified by Anthropic's Claude Opus 4.7
@@ -196,7 +197,7 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0)):
     # Info marker at first point
     traces.append(create_info_marker(
         tail_points_x[0], tail_points_y[0], tail_points_z[0],
-        'rgb(255, 200, 100)', layer_info['description'], trace_name
+        'rgb(255, 200, 100)', f"{trace_name}<br><br>{layer_info['description']}", trace_name
     ))
     
     return traces
@@ -274,31 +275,18 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
                           "  magnetosphere, allowing more solar wind particles to reach the planet's surface and contribute to its exosphere.<br>" 
                           "* No Stable Radiation Belts: Unlike Earth's Van Allen radiation belts, Mercury's small and dynamic magnetosphere <br>" 
                           "  doesn't have stable regions for trapping high-energy particles for extended periods.<br><br>" 
-                          "Estimating the dimensions of Mercury's magnetosphere in terms of Mercury radii (~2440 km) involves <br>" 
-                          "considering its interaction with the solar wind, which is quite dynamic. However, based on observations <br>" 
-                          "from the MESSENGER and BepiColombo missions, we can provide some approximate ranges and typical values:<br>" 
                           "* Sunward Distance (to the Bow Shock): The bow shock is the outermost boundary where the supersonic solar <br>" 
-                          "  wind is slowed and heated as it encounters Mercury's magnetosphere. This distance is highly variable <br>" 
-                          "  depending on the solar wind conditions, but a typical sunward distance to the bow shock is estimated to be <br>" 
-                          "  around 1.4 to 2.0 radii from the center of Mercury.<br>" 
+                          "  wind is slowed and heated as it encounters Mercury's magnetosphere. A typical sunward distance to the bow shock is <br>" 
+                          "  estimated to be around 1.4 to 2.0 radii from the center of Mercury.<br>" 
                           "* Equatorial Radius (of the Magnetopause): The magnetopause is the boundary where Mercury's magnetic field <br>" 
                           "  pressure balances the solar wind pressure. In the equatorial plane (perpendicular to the magnetic poles), the <br>" 
-                          "  magnetopause typically extends to about 1.1 to 1.5 radii from the center of Mercury. This is quite compressed <br>" 
-                          "  due to the relatively weak magnetic field and strong solar wind pressure at Mercury's orbit.<br>" 
-                          "* Polar Radius (of the Magnetopause): Along Mercury's magnetic poles, the magnetopause is closer to the planet than <br>" 
-                          "  at the equator due to the field line geometry. Estimates for the distance to the magnetopause at the poles range <br>" 
+                          "  magnetopause typically extends to about 1.1 to 1.5 radii from the center of Mercury. <br>" 
+                          "* Polar Radius (of the Magnetopause): Estimates for the distance to the magnetopause at the poles range <br>" 
                           "  from about 0.8 to 1.2 radii from the center. In some models, it can be very close to the surface.<br>" 
-                          "* Tail Length (Magnetotail): The magnetotail is the region downstream of the planet, stretched out by the solar wind.<br>" 
-                          "  Mercury's magnetotail is relatively short and dynamic compared to Earth's. Estimates for its typical length vary, <br>" 
-                          "  but it's often considered to extend to around 10 to 30 radii downwind. However, it can be significantly longer or <br>" 
+                          "* Tail Length (Magnetotail): around 10 to 30 radii downwind. However, it can be significantly longer or <br>" 
                           "  shorter depending on solar wind conditions and magnetic reconnection events.<br>" 
-                          "* Tail Base Radius: The base of the magnetotail is the region just behind the planet where the magnetopause starts to <br>" 
-                          "  be significantly stretched. The radius of this tail base in the equatorial plane is roughly comparable to the equatorial <br>" 
-                          "  radius of the magnetopause, so we can estimate it to be around 1.1 to 1.5 radii.<br>" 
-                          "* Tail End Radius: The \"end\" of Mercury's magnetotail isn't a sharply defined boundary. As the tail extends downwind, <br>" 
-                          "  it gradually widens and becomes more turbulent, eventually merging with the interplanetary magnetic field. At the <br>" 
-                          "  estimated lengths of 10 to 30 radii, the radius of the tail is expected to be larger than at the base, likely in the range <br>" 
-                          "  of 2 to 5 radii, but this is highly variable and less well-defined."]
+                          "* Tail Base Radius: we can estimate it to be around 1.1 to 1.5 radii.<br>" 
+                          "* Tail End Radius: likely in the range of 2 to 5 radii, but this is highly variable and less well-defined."]
 
     traces.append(
         go.Scatter3d(
@@ -318,7 +306,7 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
     # Info marker at first point on magnetosphere structure
     traces.append(create_info_marker(
         x[0], y[0], z[0],
-        'rgb(180, 180, 255)', magnetosphere_text[0], 'Mercury: Magnetosphere'
+        'rgb(180, 180, 255)', f"Mercury: Magnetosphere<br><br>{magnetosphere_text[0]}", 'Mercury: Magnetosphere'
     ))
     
     # 2. Create and add bow shock
@@ -386,7 +374,7 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
     # Info marker at first point on bow shock structure
     traces.append(create_info_marker(
         bow_shock_x[0], bow_shock_y[0], bow_shock_z[0],
-        'rgb(255, 200, 150)', bow_shock_text[0], 'Mercury: Bow Shock'
+        'rgb(255, 200, 150)', f"Mercury: Bow Shock<br><br>{bow_shock_text[0]}", 'Mercury: Bow Shock'
     ))
         
     # Phase A (May 2026): sun direction indicator emission moved to dispatch
