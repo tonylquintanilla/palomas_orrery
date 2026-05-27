@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: May 26, 2026
-Modules: 105 | Functions: 858 | Lines: 85,655
+Generated: May 27, 2026
+Modules: 105 | Functions: 858 | Lines: 85,659
 
 ---
 
@@ -702,7 +702,7 @@ and explains in context.
 
 ### comet_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,842
+**Role:** rendering/shells | **Lines:** 1,846
 
 > comet_visualization_shells.py - Comet visual components for 3D orrery plots.
 
@@ -714,13 +714,13 @@ and explains in context.
 - `calculate_tail_activity_factor(current_distance_au, perihelion_distance_au, max_active_distance_au)` (line 398) -- Calculate how active the comet is based on solar distance.
 - `create_comet_nucleus(center_position, nucleus_size_km, comet_name)` (line 434) -- Creates a comet nucleus visualization as a single point.
 - `create_maps_disintegration_marker(position_au, comet_name)` (line 480)
-- `create_maps_ghost_tail_trace(fig)` (line 572) -- Ghost tail arc for MAPS C/2026 A1, overlaid on the perihelion
-- `create_comet_coma(center_position, coma_radius_km, activity_factor, comet_name)` (line 734) -- Creates the coma (atmosphere) around the nucleus.
-- `create_comet_dust_tail(center_position, velocity_vector, max_tail_length_mkm, activity_factor, comet_name, num_particles, sun_relative_position)` (line 834) -- Creates the dust tail (Type II tail).
-- `create_comet_ion_tail(center_position, max_tail_length_mkm, activity_factor, comet_name, num_particles, sun_relative_position)` (line 1027) -- Creates the ion tail (Type I tail, plasma tail).
-- `create_comet_anti_tail(center_position, anti_tail_length_km, activity_factor, comet_name, anti_tail_color, collimation_ratio, num_particles, sun_relative_position)` (line 1180) -- Creates anti-tail jet structure pointing TOWARD the Sun.
-- `create_complete_comet_visualization(comet_name, center_position, velocity_vector, current_distance_au)` (line 1390) -- Creates a complete comet visualization with nucleus, coma, and both tails.
-- `add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name, current_date, sun_position)` (line 1618) -- Add comet visualization to figure with feature-specific thresholds.
+- `create_maps_ghost_tail_trace(fig)` (line 573) -- Ghost tail arc for MAPS C/2026 A1, overlaid on the perihelion
+- `create_comet_coma(center_position, coma_radius_km, activity_factor, comet_name)` (line 733) -- Creates the coma (atmosphere) around the nucleus.
+- `create_comet_dust_tail(center_position, velocity_vector, max_tail_length_mkm, activity_factor, comet_name, num_particles, sun_relative_position)` (line 833) -- Creates the dust tail (Type II tail).
+- `create_comet_ion_tail(center_position, max_tail_length_mkm, activity_factor, comet_name, num_particles, sun_relative_position)` (line 1029) -- Creates the ion tail (Type I tail, plasma tail).
+- `create_comet_anti_tail(center_position, anti_tail_length_km, activity_factor, comet_name, anti_tail_color, collimation_ratio, num_particles, sun_relative_position)` (line 1185) -- Creates anti-tail jet structure pointing TOWARD the Sun.
+- `create_complete_comet_visualization(comet_name, center_position, velocity_vector, current_distance_au)` (line 1395) -- Creates a complete comet visualization with nucleus, coma, and both tails.
+- `add_comet_tails_to_figure(fig, comet_name, position_data, center_object_name, current_date, sun_position)` (line 1623) -- Add comet visualization to figure with feature-specific thresholds.
 
 ---
 
@@ -2386,7 +2386,7 @@ and explains in context.
 | climate_cache_manager | cache | 161 | 1 | 1 |
 | close_approach_data | data | 513 | 2 | 1 |
 | color_map | other | 43 | 0 | 0 |
-| comet_visualization_shells | rendering/shells | 1,842 | 2 | 1 |
+| comet_visualization_shells | rendering/shells | 1,846 | 2 | 1 |
 | constants_new | data | 633 | 0 | 17 |
 | convert_hot_ph_to_json | devtool | 197 | 0 | 0 |
 | coordinate_system_guide | computation | 547 | 0 | 0 |
