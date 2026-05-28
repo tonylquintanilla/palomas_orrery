@@ -14,12 +14,17 @@ Two corrections: (1) "Eris's orbit" typo fixed to "Planet Nine's orbit"; (2) sem
 note updated to reflect 2021 refinement (~460 AU central estimate). Radius and Hill sphere
 parameters confirmed per Batygin & Brown (2016, 2021) and Fortney et al. (2016).
 Provenance audit identified by Anthropic's Claude Opus 4.7.
+May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 2 info
+    markers brought to red-border standard; hill_sphere n_points
+    normalized 50 -> 25 (modal convention across 17 sphere-shell sites).
+May 27, 2026 (Thread 1 cleanup, Opus 4.7): hill_sphere per-shell
+    sun_direction call removed -- duplicate of the unified dispatch's
+    post-loop indicator. Dead import removed.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (PLANET9_RADIUS_AU, create_sphere_points)
-from shared_utilities import create_sun_direction_indicator
 
 # Planet 9
 
@@ -187,8 +192,8 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name=trace_name,
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -258,7 +263,7 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
     layer_radius = layer_info['radius_fraction'] * PLANET9_RADIUS_AU
     
     # Create sphere points
-    x, y, z = create_sphere_points(layer_radius, n_points=50)
+    x, y, z = create_sphere_points(layer_radius, n_points=25)  # was 50, normalized to convention May 2026
     
     # Apply center position offset
     center_x, center_y, center_z = center_position
@@ -285,8 +290,8 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -297,9 +302,4 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    # Add a sun direction indicator (arrow pointing toward Sun along negative X-axis)
-    sun_traces = create_sun_direction_indicator(center_position)
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces

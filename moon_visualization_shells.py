@@ -13,6 +13,9 @@ April 18, 2026: provenance audit source citations added, Gemini fact-check appli
 All 5 flagged claims confirmed (Weber et al. 2011, NASA Moon Fact Sheet, Apollo
 Seismic Experiment reports, NASA SSD, Draper 1847). No factual corrections needed.
 Provenance audit identified by Anthropic's Claude Opus 4.7.
+May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 5 info
+    markers brought to red-border standard; 1 red-on-red exception
+    preserved on outer_core (rgb(255, 50, 0) charcoal/ember red).
 """
 import numpy as np
 import math
@@ -78,8 +81,8 @@ def create_moon_inner_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -148,11 +151,38 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
         hoverinfo='skip',
         showlegend=True
     )
+    # NOTE: red-on-red exception (outer_core = rgb(255, 50, 0), charcoal
+    # red). The hard problem: a marker the SAME color as its dense red dot
+    # field is invisible, and Plotly ignores marker line WIDTH in 3D
+    # (plotly.js #4118) so a border cannot be thickened to compensate.
+    # FILL color, SIZE, and SYMBOL all DO render reliably -- so the fix
+    # is contrast via fill, not border. EXPERIMENT v2 (May 27, 2026):
+    # double marker with WHITE FILL. A size-16 white open square gives a
+    # bounding silhouette; a size-8 white cross on top carries the hover.
+    # White-on-red reads regardless of the border-width bug. The markers
+    # intentionally do NOT match the shell color -- an info marker's job
+    # is findability, not color-matching.
+    # If Mode 5 rejects this, revert to single cross: drop info_ring and
+    # append [shell_trace, info_trace].
+    info_ring = go.Scatter3d(
+        x=[center_x], y=[center_y], z=[center_z + r_info],
+        mode='markers',
+        marker=dict(size=16, color='white', opacity=1.0,
+                    symbol='square-open', line=dict(color='white', width=2)),
+        name='',
+        legendgroup=trace_name,
+        hoverinfo='skip',
+        showlegend=False
+    )
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='white', opacity=1.0,  # exception: white fill
+                    symbol='cross', line=dict(color='white', width=2)),
+
+    #    marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+    #                symbol='cross', line=dict(color='white', width=2)),
+
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -161,7 +191,7 @@ def create_moon_outer_core_shell(center_position=(0, 0, 0)):
         showlegend=False
     )
 
-    traces = [shell_trace, info_trace]
+    traces = [shell_trace, info_ring, info_trace]
     
     return traces
 
@@ -240,8 +270,8 @@ def create_moon_mantle_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -421,8 +451,8 @@ def create_moon_crust_shell(center_position=(0, 0, 0)):
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name=trace_name,
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -500,8 +530,8 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -572,8 +602,8 @@ def create_moon_hill_sphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(0, 255, 0)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(0, 255, 0)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{hover_text}"],

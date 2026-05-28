@@ -13,12 +13,18 @@ Module updated: May 2026 with Anthropic's Claude Opus 4.7
     Hill sphere text updated (perihelion vs semi-major axis basis noted).
     Corrected "New Horizons" attribution (New Horizons visited Pluto, not Eris).
     Provenance audit identified by Anthropic's Claude Opus 4.7
+May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 3 info
+    markers brought to red-border standard (crust, atmosphere, hill_sphere);
+    2 red-on-red exceptions preserved with inline comments (core
+    rgb(187, 63, 63) and mantle rgb(150, 0, 0)).
+May 27, 2026 (Thread 1 cleanup, Opus 4.7): atmosphere + hill_sphere per-shell
+    sun_direction calls removed -- duplicates of the unified dispatch's
+    post-loop indicator. Dead import removed.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (ERIS_RADIUS_AU, create_sphere_points)
-from shared_utilities import create_sun_direction_indicator
 
 # Eris Shell Creation Functions
 
@@ -102,6 +108,9 @@ def create_eris_core_shell(center_position=(0, 0, 0)):
         hoverinfo='skip',
         showlegend=True
     )
+    # NOTE: red-on-red exception preserved -- core layer color is
+    # rgb(187, 63, 63) (dull red), which would lose contrast against a red
+    # border. Entire old inline pattern kept per v12 convention.
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
@@ -173,6 +182,9 @@ def create_eris_mantle_shell(center_position=(0, 0, 0)):
         hoverinfo='skip',
         showlegend=True
     )
+    # NOTE: red-on-red exception preserved -- mantle layer color is
+    # rgb(150, 0, 0) (dark red), which would lose contrast against a red
+    # border. Entire old inline pattern kept per v12 convention.
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
@@ -337,8 +349,8 @@ def create_eris_crust_shell(center_position=(0, 0, 0)):
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name=trace_name,
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -425,8 +437,8 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -437,13 +449,6 @@ def create_eris_atmosphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
-
     return traces
 
 # Source: NASA Solar System Dynamics (mass, semi-major axis)
@@ -509,8 +514,8 @@ def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -521,11 +526,4 @@ def create_eris_hill_sphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
-
     return traces

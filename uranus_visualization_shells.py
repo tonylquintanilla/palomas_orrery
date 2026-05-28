@@ -12,6 +12,10 @@ Module updated: May 2026 with Anthropic's Claude Opus 4.7
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
 Source: NASA Uranus Fact Sheet; Ness et al. (1986) Science (magnetosphere/radiation belts);
 Nettelmann et al. (2013) Icarus (interior model); Voyager 2 (1986) in-situ measurements.
+May 27, 2026: Stage 3 info-marker standard sweep + ring marker geometry fix
+    (Opus 4.7). 5 info markers brought to red-border standard; ring info
+    markers fixed (Neptune 2C pattern -- degenerate two-rotation
+    computation gave a radius-independent position).
 """
 import numpy as np
 import math
@@ -77,8 +81,8 @@ def create_uranus_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -154,8 +158,8 @@ def create_uranus_mantle_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -333,8 +337,8 @@ def create_uranus_cloud_layer_shell(center_position=(0, 0, 0)):
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name=trace_name,
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -419,8 +423,8 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -1058,10 +1062,13 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], uranus_tilt, 'x')
-        mx_t2, my_t2, mz_t2 = rotate_points(mx_t, my_t, mz_t, uranus_tilt, 'y')
+        # Ring marker placement -- use first point of already-rotated,
+        # already-offset ring trace. The previous code did X-axis rotation
+        # of (outer_radius, 0, 0) (no-op) followed by Y-axis rotation,
+        # giving a position independent of ring radius variation.
+        # Fix mirrors Neptune 2C and Saturn (May 2026).
         traces.append(create_info_marker(
-            mx_t2[0] + center_x, my_t2[0] + center_y, mz_t2[0] + center_z,
+            x_final[0], y_final[0], z_final[0],
             ring_info['color'], f"Uranus: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Uranus: {ring_info['name']}"
         ))
@@ -1134,8 +1141,8 @@ def create_uranus_hill_sphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],

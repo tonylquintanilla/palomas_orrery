@@ -13,12 +13,26 @@ Module updated: May 2026 with Anthropic's Claude Opus 4.7
     Stratopause/tropopause temperature label corrected. LEO satellite/debris
     counts updated to 2026 values. Hill sphere typo fixed.
     Provenance audit identified by Anthropic's Claude Opus 4.7
+May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). Re-applied
+    after recovery from a single-file regression incident -- this file's
+    /mnt/project snapshot at session start was a stale pre-Phase-D2
+    version (lost magnetosphere sun_position parameter, lost
+    rotate_to_sunward() calls, lost partial create_info_marker factory
+    adoption). Recovered by starting from the May 21 GitHub baseline that
+    Tony uploaded after visual verification caught the magnetosphere
+    rotation regression. 8 interior/atmosphere/hill_sphere inline marker
+    dicts converted to red-border standard. The 5 already-factory sites
+    (magnetosphere, bow shock, 2 radiation belts, LEO, GEO) unchanged
+    -- factory style already matches the new standard.
+May 27, 2026 (Thread 1 cleanup, Opus 4.7): per-shell sun_traces calls
+    in upper_atmosphere and hill_sphere removed -- duplicates of the
+    unified dispatch's post-loop Sun Direction indicator (v9 Residual
+    Cleanup item 1). Dead create_sun_direction_indicator import removed.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape)
-from shared_utilities import create_sun_direction_indicator
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Earth Shell Creation Functions
@@ -81,8 +95,8 @@ def create_earth_inner_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -153,8 +167,8 @@ def create_earth_outer_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -223,8 +237,8 @@ def create_earth_lower_mantle_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -293,8 +307,8 @@ def create_earth_upper_mantle_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -448,8 +462,8 @@ def create_earth_crust_shell(center_position=(0, 0, 0)):
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name=trace_name,
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -518,8 +532,8 @@ def create_earth_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -590,8 +604,8 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -602,13 +616,6 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
-
     return traces
 
 # Source: NASA Goddard Space Flight Center - Magnetosphere
@@ -1133,8 +1140,8 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
     traces.append(go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(0, 255, 0)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(0, 255, 0)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Earth: Hill Sphere',
         text=[f"Earth: Hill Sphere<br><br>{hover_text}"],
@@ -1143,12 +1150,5 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
         showlegend=False
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=radius_au
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
-
     return traces
 

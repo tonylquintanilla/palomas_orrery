@@ -13,12 +13,16 @@ Module updated: May 2026 with Anthropic's Claude Opus 4.7
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     All claims verified correct; no factual corrections needed.
     Provenance audit identified by Anthropic's Claude Opus 4.7
+May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
+    (Opus 4.7). 6 info markers brought to red-border standard;
+    1 red-on-red exception preserved on crust (Mars red rgb(188, 39, 50));
+    2 dormant sun_direction calls removed (upper_atmosphere, hill_sphere
+    -- v9 Residual Cleanup item 1); dead import removed.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (MARS_RADIUS_AU, create_sphere_points, create_magnetosphere_shape)
-from shared_utilities import create_sun_direction_indicator
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Mars Shell Creation Functions
@@ -99,8 +103,8 @@ def create_mars_inner_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -184,8 +188,8 @@ def create_mars_outer_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -252,8 +256,8 @@ def create_mars_mantle_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -404,10 +408,14 @@ def create_mars_crust_shell(center_position=(0, 0, 0)):
     r_info = radius * 1.05
     trace_name = f"Mars: {layer_info['name']}"
 
+    # NOTE: red-on-red exception preserved -- Mars crust color is
+    # rgb(188, 39, 50) ('Mars red'), which would lose contrast
+    # against a red border. Entire old inline pattern kept per
+    # v12 convention.
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
+        marker=dict(size=6, color=layer_info['color'], opacity=0.9,  # exception
                     symbol='cross', line=dict(color='white', width=1)),
         name=trace_name,
         legendgroup=trace_name,
@@ -479,8 +487,8 @@ def create_mars_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -561,8 +569,8 @@ def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -573,12 +581,6 @@ def create_mars_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
 
     return traces
 
@@ -918,8 +920,8 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
     traces.append(go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(0, 255, 0)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(0, 255, 0)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -928,11 +930,5 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
         showlegend=False
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=radius_au
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
 
     return traces

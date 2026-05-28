@@ -15,12 +15,15 @@ One correction: core radius updated from ~3,000 km to ~3,200 km per current
 interior models (NASA Venus Fact Sheet; NASA Solar System Exploration).
 All other claims confirmed (ESA Venus Express, NASA Pioneer Venus, NASA SSD).
 Provenance audit identified by Anthropic's Claude Opus 4.7.
+May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
+    (Opus 4.7). 6 info markers brought to red-border standard;
+    2 dormant sun_direction calls removed (upper_atmosphere, hill_sphere
+    -- v9 Residual Cleanup item 1); dead import removed.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (VENUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
-from shared_utilities import create_sun_direction_indicator
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Venus Shell Creation Functions
@@ -83,8 +86,8 @@ def create_venus_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -149,8 +152,8 @@ def create_venus_mantle_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -302,8 +305,8 @@ def create_venus_crust_shell(center_position=(0, 0, 0)):
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name=trace_name,
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -374,8 +377,8 @@ def create_venus_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -477,8 +480,8 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -489,12 +492,6 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
 
     return traces
 
@@ -764,8 +761,8 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
     traces.append(go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(0, 255, 0)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(0, 255, 0)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Venus: Hill Sphere',
         text=[f"Venus: Hill Sphere<br><br>{hover_text}"],
@@ -774,11 +771,5 @@ def create_venus_hill_sphere_shell(center_position=(0, 0, 0)):
         showlegend=False
     ))
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=radius_au
-    )
-    for trace in sun_traces:
-        traces.append(trace) 
 
     return traces

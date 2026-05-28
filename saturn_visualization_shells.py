@@ -14,12 +14,17 @@ One correction: "around a where" typo fixed to "around a body where" (L889, same
 as Earth and Jupiter). All other claims confirmed (NASA Saturn Fact Sheet,
 Mankovich & Fuller 2021, Cassini Mission Archives, NASA SSD).
 Provenance audit identified by Anthropic's Claude Opus 4.7.
+May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
+    + ring marker geometry fix (Opus 4.7). 6 info markers brought to
+    red-border standard; ring info markers fixed (Neptune 2C pattern --
+    previously all rings shared one degenerate X-axis-rotated marker);
+    2 dormant sun_direction calls removed (upper_atmosphere, hill_sphere
+    -- v9 Residual Cleanup item 1); dead import removed.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (SATURN_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, rotate_points)
-from shared_utilities import create_sun_direction_indicator
 from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 
 # Saturn Shell Creation Functions
@@ -98,8 +103,8 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -175,8 +180,8 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -249,8 +254,8 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -460,8 +465,8 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
     hover_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name=trace_name,
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -577,8 +582,8 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -589,12 +594,6 @@ def create_saturn_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces
 
@@ -949,8 +948,8 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[center_x], y=[center_y], z=[center_z + r_info],
         mode='markers',
-        marker=dict(size=6, color=layer_info['color'], opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color=layer_info['color'], opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{layer_info['description']}"],
@@ -961,13 +960,6 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
 
     traces = [shell_trace, info_trace]
     
-    # Add sun direction indicator scaled to this shell's radius
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position, 
-        shell_radius=layer_radius
-    )
-    for trace in sun_traces:
-        traces.append(trace)
 
     return traces
 
@@ -1168,9 +1160,13 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        mx_t, my_t, mz_t = rotate_points([outer_radius_au], [0.0], [0.0], saturn_tilt, 'x')
+        # Ring marker placement -- use first point of already-rotated,
+        # already-offset ring trace. The previous code did a degenerate
+        # X-axis rotation of (outer_radius, 0, 0) which is a no-op,
+        # collapsing all ring markers to the same X position.
+        # Fix mirrors Neptune 2C (May 2026).
         traces.append(create_info_marker(
-            mx_t[0] + center_x, my_t[0] + center_y, mz_t[0] + center_z,
+            x_final[0], y_final[0], z_final[0],
             ring_info['color'], f"Saturn: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Saturn: {ring_info['name']}"
         ))

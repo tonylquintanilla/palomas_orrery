@@ -13,11 +13,16 @@ Consumed by: planet_visualization.py (routing dispatcher),
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
+May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 9 info
+    markers brought to red-border standard (mix of opacity 0.9 and
+    0.95 sources, all normalized to opacity=1.0); 1 red-on-red
+    exception preserved (Roche limit rgb(200, 60, 60), the closest
+    case to red in the entire sweep). Dead create_sun_direction_indicator
+    import removed (Sun does not get a self-direction indicator).
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
-from shared_utilities import create_sun_direction_indicator
 
 from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, CHROMOSPHERE_RADII,
                                             INNER_CORONA_RADII, OUTER_CORONA_RADII, STREAMER_BELT_RADII,
@@ -937,8 +942,8 @@ def create_sun_gravitational_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(102, 187, 106)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(102, 187, 106)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Gravitational Influence',
         text=[f"Sun: Gravitational Influence<br><br>{gravitational_influence_info_hover}"],
@@ -1053,8 +1058,8 @@ def create_sun_heliopause_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(135, 206, 250)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(135, 206, 250)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Heliopause',
         text=[f"Sun: Heliopause<br><br>{solar_wind_info_hover}"],
@@ -1111,8 +1116,8 @@ def create_sun_outer_corona_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(25, 25, 112)', opacity=0.95,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(25, 25, 112)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Outer Corona',
         text=[f"Sun: Outer Corona<br><br>{outer_corona_info_hover}"],
@@ -1140,8 +1145,8 @@ def create_sun_inner_corona_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(0, 0, 255)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(0, 0, 255)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Inner Corona',
         text=[f"Sun: Inner Corona<br><br>{inner_corona_info_hover}"],
@@ -1173,8 +1178,8 @@ def create_sun_streamer_belt_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(255, 200, 80)', opacity=0.95,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(255, 200, 80)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Streamer Belt (Visible Corona)',
         text=[f"Sun: Streamer Belt (Visible Corona)<br><br>{streamer_belt_info_hover}"],
@@ -1211,7 +1216,11 @@ def create_sun_roche_limit_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(200, 60, 60)', opacity=0.95,
+        # NOTE: red-on-red exception preserved -- Roche limit color is
+        # rgb(200, 60, 60), the closest case to red in the sweep.
+        # A red border would lose contrast. Old inline pattern kept
+        # per v12 convention.
+        marker=dict(size=6, color='rgb(200, 60, 60)', opacity=0.95,  # exception
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup='Sun: Roche Limit (Comets)',
@@ -1246,8 +1255,8 @@ def create_sun_alfven_surface_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(0, 200, 200)', opacity=0.95,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(0, 200, 200)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Alfven Surface',
         text=[f"Sun: Alfven Surface<br><br>{alfven_surface_info_hover}"],
@@ -1275,8 +1284,8 @@ def create_sun_chromosphere_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(30, 144, 255)', opacity=0.95,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(30, 144, 255)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Chromosphere',
         text=[f"Sun: Chromosphere<br><br>{chromosphere_info_hover}"],
@@ -1333,8 +1342,8 @@ def create_sun_radiative_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(30, 144, 255)', opacity=0.95,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(30, 144, 255)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Radiative Zone',
         text=[f"Sun: Radiative Zone<br><br>{radiative_zone_info_hover}"],
@@ -1362,8 +1371,8 @@ def create_sun_core_shell():
     info_trace = go.Scatter3d(
         x=[0], y=[0], z=[r_info],
         mode='markers',
-        marker=dict(size=6, color='rgb(70, 130, 180)', opacity=0.95,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(70, 130, 180)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup='Sun: Core',
         text=[f"Sun: Core<br><br>{core_info_hover}"],

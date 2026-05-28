@@ -15,6 +15,11 @@ Consumed by: planet_visualization.py (dispatch loop),
              *_visualization_shells.py (custom geometry info markers)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+May 27, 2026: Stage 3 info-marker standard sweep complete (Opus 4.7).
+    create_info_marker docstring updated with completed-migration intent
+    paragraph. The factory style is now the canonical info marker style
+    across the codebase; old white-border inline patterns retired except
+    for documented red-on-red exceptions.
 """
 
 import numpy as np
@@ -27,9 +32,26 @@ from planet_visualization_utilities import create_sphere_points
 def create_info_marker(x, y, z, color, text, legendgroup, customdata=None):
     """Create a single info marker trace.
 
-    Centralizes the marker style (size, symbol, outline) so all info
+    Canonical info marker style for the orrery. Size 8, opacity 1.0,
+    cross symbol, red border width 2. Centralizes the style so all info
     markers across the orrery are visually consistent and can be
     updated in one place.
+
+    Migration status (May 27, 2026 -- Stage 3 sweep complete):
+        All planetary and solar shell modules now use this style (either
+        via this factory or via inline marker dicts that match it). The
+        old "white border, size 6, opacity 0.9" inline pattern is fully
+        retired except for a small set of documented red-on-red
+        exceptions where a red fill would lose contrast against a red
+        border. Each exception carries an inline comment explaining the
+        rule. Modules audited and converted:
+            asteroid_belt, earth, eris, jupiter, mars, moon, neptune,
+            planet9, pluto, saturn, solar, uranus, venus.
+
+        New info markers should call this factory directly. New inline
+        marker dicts (when the factory isn't applicable) should match
+        the style above. New red-on-red exceptions require an inline
+        comment.
 
     Parameters:
         x, y, z (float): Position coordinates

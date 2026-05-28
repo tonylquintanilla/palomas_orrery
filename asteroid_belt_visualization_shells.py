@@ -8,11 +8,14 @@ Also includes helper functions for dynamic Trojan positioning based on Jupiter's
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.6
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
+May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
+    (Opus 4.7). 4 info markers brought to red-border standard; 4 dormant
+    sun_direction calls removed (dist=0 suppression branch -- zero
+    behavior change, confirmed v9 Residual Cleanup item 2).
 """
 
 import numpy as np
 import plotly.graph_objs as go
-from shared_utilities import create_sun_direction_indicator
 
 #####################################
 # Jupiter Angle Helper Functions
@@ -217,8 +220,8 @@ def create_main_asteroid_belt(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[belt_x[0]], y=[belt_y[0]], z=[belt_z[0]],
         mode='markers',
-        marker=dict(size=6, color='white', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='white', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{belt_desc}"],
@@ -228,12 +231,6 @@ def create_main_asteroid_belt(center_position=(0, 0, 0)):
     )
     traces = [geom_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position,
-        shell_radius=MAIN_BELT_PEAK
-    )
-    for trace in sun_traces:
-        traces.append(trace)
     
     return traces
 
@@ -313,8 +310,8 @@ def create_hilda_group(center_position=(0, 0, 0)):
     info_trace = go.Scatter3d(
         x=[hilda_x[0]], y=[hilda_y[0]], z=[hilda_z[0]],
         mode='markers',
-        marker=dict(size=6, color='rgb(200, 170, 100)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(200, 170, 100)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{hilda_desc}"],
@@ -324,12 +321,6 @@ def create_hilda_group(center_position=(0, 0, 0)):
     )
     traces = [geom_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position,
-        shell_radius=HILDA_DISTANCE
-    )
-    for trace in sun_traces:
-        traces.append(trace)
     
     return traces
 
@@ -413,8 +404,8 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
     info_trace = go.Scatter3d(
         x=[trojan_x[0]], y=[trojan_y[0]], z=[trojan_z[0]],
         mode='markers',
-        marker=dict(size=6, color='rgb(180, 100, 100)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(180, 100, 100)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{trojan_desc}"],
@@ -424,12 +415,6 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
     )
     traces = [geom_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position,
-        shell_radius=TROJAN_DISTANCE
-    )
-    for trace in sun_traces:
-        traces.append(trace)
     
     return traces
 
@@ -509,8 +494,8 @@ def create_jupiter_trojans_trojans(center_position=(0, 0, 0), jupiter_angle=0):
     info_trace = go.Scatter3d(
         x=[trojan_x[0]], y=[trojan_y[0]], z=[trojan_z[0]],
         mode='markers',
-        marker=dict(size=6, color='rgb(160, 80, 80)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
+        marker=dict(size=8, color='rgb(160, 80, 80)', opacity=1.0,
+                    symbol='cross', line=dict(color='red', width=2)),
         name='',
         legendgroup=trace_name,
         text=[f"{trace_name}<br><br>{trojan_desc}"],
@@ -520,11 +505,5 @@ def create_jupiter_trojans_trojans(center_position=(0, 0, 0), jupiter_angle=0):
     )
     traces = [geom_trace, info_trace]
     
-    sun_traces = create_sun_direction_indicator(
-        center_position=center_position,
-        shell_radius=TROJAN_DISTANCE
-    )
-    for trace in sun_traces:
-        traces.append(trace)
     
     return traces
