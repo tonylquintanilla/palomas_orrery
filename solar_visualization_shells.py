@@ -19,10 +19,19 @@ May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 9 info
     exception preserved (Roche limit rgb(200, 60, 60), the closest
     case to red in the entire sweep). Dead create_sun_direction_indicator
     import removed (Sun does not get a self-direction indicator).
+May 28, 2026: Phase 1 re-pipe (Opus 4.7). 18 live inline info markers
+    routed through orrery_rendering.create_info_marker() factory.
+    Roche Limit (rgb(200,60,60)) red-on-red exception now expressed
+    cleanly via factory's border_color='white' parameter (the v12
+    "exception" became the rule for reddish shells under Tony's
+    two-standards). Five gray-border sites (Outer/Inner/Inner Limit
+    Oort, Termination Shock, Photosphere) lose their inherited gray
+    border to factory default red. Four sites size 6->8 visual bump.
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
+from orrery_rendering import create_info_marker
 
 from planet_visualization_utilities import (create_sphere_points, SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU, CHROMOSPHERE_RADII,
                                             INNER_CORONA_RADII, OUTER_CORONA_RADII, STREAMER_BELT_RADII,
@@ -939,17 +948,12 @@ def create_sun_gravitational_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(102, 187, 106)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Gravitational Influence',
-        text=[f"Sun: Gravitational Influence<br><br>{gravitational_influence_info_hover}"],
-        customdata=['Sun: Gravitational Influence'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(102, 187, 106)',
+        f"Sun: Gravitational Influence<br><br>{gravitational_influence_info_hover}",
+        'Sun: Gravitational Influence'
     )
     return [shell_trace, info_trace]
 
@@ -968,17 +972,14 @@ def create_sun_outer_oort_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=6, color='white', opacity=0.9,
-                    symbol='cross', line=dict(color='gray', width=1)),
-        name='',
-        legendgroup='Sun: Outer Oort Cloud',
-        text=[f"Sun: Outer Oort Cloud<br><br>{outer_oort_info_hover}"],
-        customdata=['Outer Oort Cloud'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
+    # gray border -> red (factory default; gray was inherited inline choice).
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'white',
+        f"Sun: Outer Oort Cloud<br><br>{outer_oort_info_hover}",
+        'Sun: Outer Oort Cloud',
+        customdata='Outer Oort Cloud'
     )
     return [shell_trace, info_trace]
 
@@ -997,17 +998,14 @@ def create_sun_inner_oort_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=6, color='white', opacity=0.9,
-                    symbol='cross', line=dict(color='gray', width=1)),
-        name='',
-        legendgroup='Sun: Inner Oort Cloud',
-        text=[f"Sun: Inner Oort Cloud<br><br>{inner_oort_info_hover}"],
-        customdata=['Inner Oort Cloud'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
+    # gray border -> red (factory default; gray was inherited inline choice).
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'white',
+        f"Sun: Inner Oort Cloud<br><br>{inner_oort_info_hover}",
+        'Sun: Inner Oort Cloud',
+        customdata='Inner Oort Cloud'
     )
     return [shell_trace, info_trace]
 
@@ -1026,17 +1024,14 @@ def create_sun_inner_oort_limit_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=6, color='white', opacity=0.9,
-                    symbol='cross', line=dict(color='gray', width=1)),
-        name='',
-        legendgroup='Sun: Inner Limit of Oort Cloud',
-        text=[f"Sun: Inner Limit of Oort Cloud<br><br>{inner_limit_oort_info_hover}"],
-        customdata=['Inner Limit of Oort Cloud'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
+    # gray border -> red (factory default; gray was inherited inline choice).
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'white',
+        f"Sun: Inner Limit of Oort Cloud<br><br>{inner_limit_oort_info_hover}",
+        'Sun: Inner Limit of Oort Cloud',
+        customdata='Inner Limit of Oort Cloud'
     )
     return [shell_trace, info_trace]
 
@@ -1055,17 +1050,13 @@ def create_sun_heliopause_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(135, 206, 250)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Heliopause',
-        text=[f"Sun: Heliopause<br><br>{solar_wind_info_hover}"],
-        customdata=['Solar Wind Heliopause'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(135, 206, 250)',
+        f"Sun: Heliopause<br><br>{solar_wind_info_hover}",
+        'Sun: Heliopause',
+        customdata='Solar Wind Heliopause'
     )
     return [shell_trace, info_trace]
 
@@ -1084,17 +1075,14 @@ def create_sun_termination_shock_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=6, color='rgb(240, 244, 255)', opacity=0.9,
-                    symbol='cross', line=dict(color='gray', width=1)),
-        name='',
-        legendgroup='Sun: Termination Shock',
-        text=[f"Sun: Termination Shock<br><br>{termination_shock_info_hover}"],
-        customdata=['Solar Wind Termination Shock'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
+    # gray border -> red (factory default).
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(240, 244, 255)',
+        f"Sun: Termination Shock<br><br>{termination_shock_info_hover}",
+        'Sun: Termination Shock',
+        customdata='Solar Wind Termination Shock'
     )
     return [shell_trace, info_trace]
 
@@ -1113,17 +1101,12 @@ def create_sun_outer_corona_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(25, 25, 112)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Outer Corona',
-        text=[f"Sun: Outer Corona<br><br>{outer_corona_info_hover}"],
-        customdata=['Sun: Outer Corona'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(25, 25, 112)',
+        f"Sun: Outer Corona<br><br>{outer_corona_info_hover}",
+        'Sun: Outer Corona'
     )
     return [shell_trace, info_trace]
 
@@ -1142,17 +1125,12 @@ def create_sun_inner_corona_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(0, 0, 255)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Inner Corona',
-        text=[f"Sun: Inner Corona<br><br>{inner_corona_info_hover}"],
-        customdata=['Sun: Inner Corona'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(0, 0, 255)',
+        f"Sun: Inner Corona<br><br>{inner_corona_info_hover}",
+        'Sun: Inner Corona'
     )
     return [shell_trace, info_trace]
 
@@ -1175,17 +1153,12 @@ def create_sun_streamer_belt_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(255, 200, 80)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Streamer Belt (Visible Corona)',
-        text=[f"Sun: Streamer Belt (Visible Corona)<br><br>{streamer_belt_info_hover}"],
-        customdata=['Sun: Streamer Belt (Visible Corona)'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(255, 200, 80)',
+        f"Sun: Streamer Belt (Visible Corona)<br><br>{streamer_belt_info_hover}",
+        'Sun: Streamer Belt (Visible Corona)'
     )
     return [shell_trace, info_trace]
 
@@ -1213,21 +1186,16 @@ def create_sun_roche_limit_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        # NOTE: red-on-red exception preserved -- Roche limit color is
-        # rgb(200, 60, 60), the closest case to red in the sweep.
-        # A red border would lose contrast. Old inline pattern kept
-        # per v12 convention.
-        marker=dict(size=6, color='rgb(200, 60, 60)', opacity=0.95,  # exception
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='Sun: Roche Limit (Comets)',
-        text=[f"Sun: Roche Limit (Comets)<br><br>{roche_limit_info_hover}"],
-        customdata=['Sun: Roche Limit (Comets)'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed with explicit
+    # white border. rgb(200, 60, 60) is dense red -- under Tony's two-standards
+    # convention this gets white outline so the cross reads against the fill.
+    # Was a v12 "exception"; the exception has become the rule for reddish shells.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(200, 60, 60)',
+        f"Sun: Roche Limit (Comets)<br><br>{roche_limit_info_hover}",
+        'Sun: Roche Limit (Comets)',
+        border_color='white'
     )
     return [shell_trace, info_trace]
 
@@ -1252,17 +1220,12 @@ def create_sun_alfven_surface_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(0, 200, 200)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Alfven Surface',
-        text=[f"Sun: Alfven Surface<br><br>{alfven_surface_info_hover}"],
-        customdata=['Sun: Alfven Surface'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(0, 200, 200)',
+        f"Sun: Alfven Surface<br><br>{alfven_surface_info_hover}",
+        'Sun: Alfven Surface'
     )
     return [shell_trace, info_trace]
 
@@ -1281,17 +1244,12 @@ def create_sun_chromosphere_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(30, 144, 255)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Chromosphere',
-        text=[f"Sun: Chromosphere<br><br>{chromosphere_info_hover}"],
-        customdata=['Sun: Chromosphere'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(30, 144, 255)',
+        f"Sun: Chromosphere<br><br>{chromosphere_info_hover}",
+        'Sun: Chromosphere'
     )
     return [shell_trace, info_trace]
 
@@ -1310,17 +1268,13 @@ def create_sun_photosphere_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=6, color='rgb(255, 244, 214)', opacity=0.95,
-                    symbol='cross', line=dict(color='gray', width=1)),
-        name='',
-        legendgroup='Sun: Photosphere',
-        text=[f"Sun: Photosphere<br><br>{photosphere_info_hover}"],
-        customdata=['Sun: Photosphere'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
+    # gray border -> red (factory default).
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(255, 244, 214)',
+        f"Sun: Photosphere<br><br>{photosphere_info_hover}",
+        'Sun: Photosphere'
     )
     return [shell_trace, info_trace]
 
@@ -1339,17 +1293,12 @@ def create_sun_radiative_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(30, 144, 255)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Radiative Zone',
-        text=[f"Sun: Radiative Zone<br><br>{radiative_zone_info_hover}"],
-        customdata=['Sun: Radiative Zone'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(30, 144, 255)',
+        f"Sun: Radiative Zone<br><br>{radiative_zone_info_hover}",
+        'Sun: Radiative Zone'
     )
     return [shell_trace, info_trace]
 
@@ -1368,17 +1317,12 @@ def create_sun_core_shell():
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(70, 130, 180)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Core',
-        text=[f"Sun: Core<br><br>{core_info_hover}"],
-        customdata=['Sun: Core'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(70, 130, 180)',
+        f"Sun: Core<br><br>{core_info_hover}",
+        'Sun: Core'
     )
     return [shell_trace, info_trace]
 
@@ -1444,17 +1388,13 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0), inner_radius=2000, o
     )
     # Info marker at north pole of torus (z = minor_radius above major_radius)
     r_info = major_radius + minor_radius * 1.05
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(173, 216, 230)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Hills Cloud (Inner Oort - Toroidal)',
-        text=[f"Sun: Hills Cloud (Inner Oort - Toroidal)<br><br>{hills_hover}"],
-        customdata=['Hills Cloud Torus'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(173, 216, 230)',
+        f"Sun: Hills Cloud (Inner Oort - Toroidal)<br><br>{hills_hover}",
+        'Sun: Hills Cloud (Inner Oort - Toroidal)',
+        customdata='Hills Cloud Torus'
     )
     return [shell_trace, info_trace]
 
@@ -1524,17 +1464,13 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=20000, ra
         showlegend=True
     )
     r_info = radius_max * 1.05
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(255, 255, 255)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Outer Oort Cloud (Clumpy)',
-        text=[f"Sun: Outer Oort Cloud (Clumpy)<br><br>{clumpy_hover}"],
-        customdata=['Outer Oort Cloud'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(255, 255, 255)',
+        f"Sun: Outer Oort Cloud (Clumpy)<br><br>{clumpy_hover}",
+        'Sun: Outer Oort Cloud (Clumpy)',
+        customdata='Outer Oort Cloud'
     )
     return [shell_trace, info_trace]
 
@@ -1584,17 +1520,13 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), radius=50000, n_points=2
         showlegend=True
     )
     r_info = radius * 1.5 * 1.05
-    info_trace = go.Scatter3d(
-        x=[0], y=[0], z=[r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(255, 182, 193)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Sun: Galactic Tide Region',
-        text=[f"Sun: Galactic Tide Region<br><br>{tide_hover}"],
-        customdata=['Galactic Tide Region'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        0, 0, r_info,
+        'rgb(255, 182, 193)',
+        f"Sun: Galactic Tide Region<br><br>{tide_hover}",
+        'Sun: Galactic Tide Region',
+        customdata='Galactic Tide Region'
     )
     return [shell_trace, info_trace]
 

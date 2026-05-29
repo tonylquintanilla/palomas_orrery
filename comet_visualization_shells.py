@@ -19,6 +19,12 @@ Key functions:
 Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
+May 28, 2026: Phase 1 re-pipe (Opus 4.7). 6 live inline info markers
+    routed through orrery_rendering.create_info_marker() factory:
+    MAPS ghost tail (white border preserved for reddish rgb(255,80,80)
+    fill under two-standards; size 6->8 visual bump), coma, dust tail,
+    ion tail, anti-tail, mini-jet. Pre-existing em-dashes in MAPS elegy
+    text intentionally preserved (display strings, not code).
     D3.1 sweep (May 2026): hovertext/legendgroup consolidation.
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Hyakutake ion tail comparison corrected (580 Mkm < Sun-Jupiter 778 Mkm).
@@ -29,6 +35,7 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 from shared_utilities import create_sun_direction_indicator
+from orrery_rendering import create_info_marker
 from planet_visualization_utilities import KM_PER_AU
 
 # Comet nucleus sizes (approximate, in km)
@@ -713,19 +720,15 @@ def create_maps_ghost_tail_trace(fig=None):
 
     # Single info marker at segment 10 (outbound arc, clear of perihelion crowding)
     info_idx = min(10, n - 1)
-    traces.append(go.Scatter3d(
-        x=[xs[info_idx]], y=[ys[info_idx]], z=[zs[info_idx]],
-        mode='markers',
-
-        marker=dict(size=6, color='rgb(255, 80, 80)', opacity=0.9,
-                    symbol='cross', line=dict(color='white', width=1)),
-        name='',
-        legendgroup='maps_ghost_tail',
-
-        text=[f"MAPS: Ghost Tail (April 4-6)<br><br>{hover}"],
-        customdata=['MAPS: Ghost Tail'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed; white border preserved
+    # because fill rgb(255, 80, 80) is reddish (two-standards). Size 6->8 bump.
+    traces.append(create_info_marker(
+        xs[info_idx], ys[info_idx], zs[info_idx],
+        'rgb(255, 80, 80)',
+        f"MAPS: Ghost Tail (April 4-6)<br><br>{hover}",
+        'maps_ghost_tail',
+        customdata='MAPS: Ghost Tail',
+        border_color='white'
     ))
     return traces
 
@@ -813,18 +816,12 @@ def create_comet_coma(center_position=(0, 0, 0), coma_radius_km=100000,
         showlegend=True
     )
     
-    # Info marker at first point
-    info_trace = go.Scatter3d(
-        x=[coma_points_x[0]], y=[coma_points_y[0]], z=[coma_points_z[0]],
-        mode='markers',
-        marker=dict(size=8, color='rgb(150, 220, 150)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=f'{comet_name}: Coma',
-        text=[f"{comet_name}: Coma<br><br>{description}"],
-        customdata=[f'{comet_name}: Coma'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Info marker at first point. Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        coma_points_x[0], coma_points_y[0], coma_points_z[0],
+        'rgb(150, 220, 150)',
+        f"{comet_name}: Coma<br><br>{description}",
+        f'{comet_name}: Coma'
     )
 
     return [trace, info_trace]
@@ -1009,18 +1006,12 @@ def create_comet_dust_tail(center_position=(0, 0, 0), velocity_vector=(0, 0, 0),
     # Info marker offset along tail (~12% along) to avoid colocating
     # with ion tail info marker, which both originate at comet center
     info_idx = num_particles // 8
-    info_trace = go.Scatter3d(
-        x=[tail_points_x[info_idx]], y=[tail_points_y[info_idx]], z=[tail_points_z[info_idx]],
-        mode='markers',
-        marker=dict(size=8, color='rgb(255, 220, 130)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=f'{comet_name}: Dust Tail',
-
-        text=[f"{comet_name}: Dust Tail<br><br>{description}"],
-        customdata=[f'{comet_name}: Dust Tail'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        tail_points_x[info_idx], tail_points_y[info_idx], tail_points_z[info_idx],
+        'rgb(255, 220, 130)',
+        f"{comet_name}: Dust Tail<br><br>{description}",
+        f'{comet_name}: Dust Tail'
     )
 
     return [trace, info_trace]
@@ -1165,18 +1156,12 @@ def create_comet_ion_tail(center_position=(0, 0, 0), max_tail_length_mkm=20,
     # Info marker offset along tail (~8% along) to avoid colocating
     # with dust tail info marker, which both originate at comet center
     info_idx = num_particles // 12
-    info_trace = go.Scatter3d(
-        x=[tail_points_x[info_idx]], y=[tail_points_y[info_idx]], z=[tail_points_z[info_idx]],
-        mode='markers',
-        marker=dict(size=8, color='rgb(120, 180, 255)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=f'{comet_name}: Ion Tail',
-
-        text=[f"{comet_name}: Ion Tail<br><br>{description}"],
-        customdata=[f'{comet_name}: Ion Tail'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    info_trace = create_info_marker(
+        tail_points_x[info_idx], tail_points_y[info_idx], tail_points_z[info_idx],
+        'rgb(120, 180, 255)',
+        f"{comet_name}: Ion Tail<br><br>{description}",
+        f'{comet_name}: Ion Tail'
     )
 
     return [trace, info_trace]
@@ -1322,17 +1307,12 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
         hoverinfo='skip',
         showlegend=True
     ))
-    traces.append(go.Scatter3d(
-        x=[at_x[0]], y=[at_y[0]], z=[at_z[0]],
-        mode='markers',
-        marker=dict(size=8, color='rgb(230, 200, 160)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=f'{comet_name}: Anti-tail',
-        text=[f"{comet_name}: Anti-tail<br><br>{description}"],
-        customdata=[f'{comet_name}: Anti-tail'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed.
+    traces.append(create_info_marker(
+        at_x[0], at_y[0], at_z[0],
+        'rgb(230, 200, 160)',
+        f"{comet_name}: Anti-tail<br><br>{description}",
+        f'{comet_name}: Anti-tail'
     ))
     
     # --- 2. Mini-jets (if jet_count > 1 in comet data) ---
@@ -1376,17 +1356,12 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
                 hoverinfo='skip',
                 showlegend=True
             ))
-            traces.append(go.Scatter3d(
-                x=[mj_x[0]], y=[mj_y[0]], z=[mj_z[0]],
-                mode='markers',
-                marker=dict(size=8, color='rgb(200, 180, 220)', opacity=1.0,
-                            symbol='cross', line=dict(color='red', width=2)),
-                name='',
-                legendgroup=f'{comet_name}: Mini-jet {j+1}',
-                text=[f"{comet_name}: Mini-jet {j+1}<br><br>{mini_desc}"],
-                customdata=[f'{comet_name}: Mini-jet {j+1}'],
-                hovertemplate='%{text}<extra></extra>',
-                showlegend=False
+            # Phase 1 re-pipe (May 28, 2026): factory-routed.
+            traces.append(create_info_marker(
+                mj_x[0], mj_y[0], mj_z[0],
+                'rgb(200, 180, 220)',
+                f"{comet_name}: Mini-jet {j+1}<br><br>{mini_desc}",
+                f'{comet_name}: Mini-jet {j+1}'
             ))
     
     return traces

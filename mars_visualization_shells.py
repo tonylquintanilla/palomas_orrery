@@ -18,6 +18,10 @@ May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
     1 red-on-red exception preserved on crust (Mars red rgb(188, 39, 50));
     2 dormant sun_direction calls removed (upper_atmosphere, hill_sphere
     -- v9 Residual Cleanup item 1); dead import removed.
+May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
+    routed through orrery_rendering.create_info_marker() factory
+    (Hill Sphere). Already at factory size 8 / opacity 1.0; no visual
+    change beyond factory routing.
 """
 import numpy as np
 import math
@@ -917,17 +921,12 @@ def create_mars_hill_sphere_shell(center_position=(0, 0, 0)):
     ]
     r_info = radius_au * 1.05
     trace_name = f"Mars: {layer_info['name']}"
-    traces.append(go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(0, 255, 0)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=trace_name,
-        text=[f"{trace_name}<br><br>{layer_info['description']}"],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed for centralized styling.
+    traces.append(create_info_marker(
+        center_x, center_y, center_z + r_info,
+        'rgb(0, 255, 0)',
+        f"{trace_name}<br><br>{layer_info['description']}",
+        trace_name
     ))
     
 

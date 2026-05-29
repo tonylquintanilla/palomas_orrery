@@ -98,6 +98,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "Inner Core: Mercury has a very large metallic core, unlike Earth's which is proportionally smaller.<br>"
                 "Evidence suggests that Mercury has a solid inner core, similar to Earth's. It is estimated to be about <br>"
@@ -117,6 +118,7 @@ SHELL_CONFIGS = {
             'opacity': 0.8,
             'n_points': 25,
             'marker_size': 3.7,
+            'info_border': 'white',  # two-standards (May 29, 2026): bright orange fill
             'hover_text': (
                 "Outer Core: Surrounding the solid inner core is a liquid metallic outer core. The movement of this molten iron <br>"
                 "is thought to be the source of Mercury's weak magnetic field. About 1074 km thick."
@@ -134,6 +136,7 @@ SHELL_CONFIGS = {
             'opacity': 0.7,
             'n_points': 25,
             'marker_size': 3.4,
+            'info_border': 'white',  # two-standards (May 29, 2026): burnt orange fill
             'hover_text': (
                 "Mantle: Surrounding the core is a rocky mantle. Recent research suggests this mantle might even contain a layer of <br>"
                 "diamonds, formed from ancient carbon-rich material under immense pressure. The mantle is significantly thinner than <br>"
@@ -246,6 +249,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): dense orange-red fill
             'hover_text': (
                 "The Moon has a small, partially molten core. Seismic data from Apollo missions and more recent studies of the Moon's wobble suggest:<br>"
                 "* Inner Core: Believed to be a solid, iron-rich core, roughly 240 kilometers in radius:<br>"
@@ -265,6 +269,7 @@ SHELL_CONFIGS = {
             'opacity': 0.8,
             'n_points': 25,
             'marker_size': 3.7,
+            'info_border': 'white',  # dense-red shell: shell-color fill, white outline (Tony's two-standards, May 28)
             'hover_text': (
                 "Outer Core: Surrounding the inner core, this is thought to be a liquid, iron-rich outer core with a radius of about <br>"
                 "330 kilometers. There might also be a small, partially molten layer of silicates around the outer core.<br>:"
@@ -518,6 +523,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # dense-red shell: shell-color fill, white outline (Tony's two-standards, May 28)
             'hover_text': (
                 "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter <br>" 
                 "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay <br>" 
@@ -554,6 +560,7 @@ SHELL_CONFIGS = {
             'opacity': 0.9,
             'n_points': 25,
             'marker_size': 3.5,
+            'info_border': 'white',  # dense-red shell: shell-color fill, white outline (Tony's two-standards, May 28)
             'hover_text': (
                 "mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean <br>" 
                 "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean <br>" 
@@ -742,6 +749,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # dense-red shell: shell-color fill, white outline (Tony's two-standards, May 28)
             'hover_text': (
                 "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations <br>" 
                 "and theoretical modeling. Here's what we currently understand:<br>" 
@@ -788,6 +796,7 @@ SHELL_CONFIGS = {
             'opacity': 0.9,
             'n_points': 25,
             'marker_size': 3.5,
+            'info_border': 'white',  # dense-red shell: shell-color fill, white outline (Tony's two-standards, May 28)
             'hover_text': (
                 "Mantle: Surrounding the rocky core is a substantial mantle made of water ice. Unlike Pluto's ice shell, Eris's ice <br>" 
                 "mantle is thought to be convecting. This means that the warmer ice closer to the core rises, while the colder ice near <br>" 
@@ -916,6 +925,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. <br>" 
                 "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's <br>" 
@@ -937,6 +947,7 @@ SHELL_CONFIGS = {
             'opacity': 0.7,
             'n_points': 25,
             'marker_size': 3.4,
+            'info_border': 'white',  # two-standards (May 29, 2026): burnt orange fill
             'hover_text': (
                 "Surrounding the core is a mantle made of hot, dense silicate rock, much like Earth's mantle. It's believed that heat <br>" 
                 "generated by radioactive decay within Venus drives slow convection currents in the mantle. These currents are thought <br>" 
@@ -1096,6 +1107,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars <br>" 
                 "possesses a solid inner core. This inner core is primarily composed of iron and nickel, similar to Earth's.<br><br>"
@@ -1139,6 +1151,7 @@ SHELL_CONFIGS = {
             'opacity': 0.8,
             'n_points': 25,
             'marker_size': 3.7,
+            'info_border': 'white',  # two-standards (May 29, 2026): bright orange fill
             'hover_text': (
                 "A Liquid Outer Core: Surrounding the solid inner core is believed to be a liquid outer core, also primarily <br>" 
                 "made of iron and nickel, but likely containing a significant amount of lighter elements like sulfur, oxygen, <br>" 
@@ -1331,6 +1344,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "Earth's inner core is a solid sphere composed primarily of iron and nickel.<br>"
                 "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly<br>"
@@ -1354,6 +1368,7 @@ SHELL_CONFIGS = {
             'opacity': 0.8,
             'n_points': 25,
             'marker_size': 3.7,
+            'info_border': 'white',  # two-standards (May 29, 2026): bright orange fill
             'hover_text': (
                 "The outer core is a liquid layer of iron, nickel, and lighter elements.<br>"
                 "Convection currents in this highly conductive fluid generate Earth's<br>"
@@ -1377,6 +1392,7 @@ SHELL_CONFIGS = {
             'opacity': 0.7,
             'n_points': 25,
             'marker_size': 3.4,
+            'info_border': 'white',  # two-standards (May 29, 2026): burnt orange fill
             'hover_text': (
                 "The lower mantle is composed of solid silicate rocks rich in iron and magnesium.<br>"
                 "Despite being solid, it flows very slowly through convection, driving plate tectonics.<br>"
@@ -1398,6 +1414,7 @@ SHELL_CONFIGS = {
             'opacity': 0.6,
             'n_points': 25,
             'marker_size': 3.1,
+            'info_border': 'white',  # two-standards (May 29, 2026): pink-red fill
             'hover_text': (
                 "The upper mantle includes the asthenosphere, a partially molten layer where<br>"
                 "most magma originates. This region flows more readily than the lower mantle,<br>"
@@ -1749,6 +1766,7 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.2,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): golden fill
             'hover_text': uranus_core_info.replace('\n', '<br>'),
             'tooltip': uranus_core_info,
         },
@@ -1760,6 +1778,7 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.7,
             'n_points': 25,
             'marker_size': 3.5,
+            'info_border': 'white',  # two-standards (May 29, 2026): bright orange fill
             'hover_text': uranus_mantle_info.replace('\n', '<br>'),
             'tooltip': uranus_mantle_info,
         },
@@ -1815,6 +1834,7 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.25,
             'n_points': 25,
             'marker_size': 4.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): golden fill
             'hover_text': neptune_core_info.replace('\n', '<br>'),
             'tooltip': neptune_core_info,
         },
@@ -1826,6 +1846,7 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.85,
             'n_points': 25,
             'marker_size': 3.5,
+            'info_border': 'white',  # two-standards (May 29, 2026): bright orange fill
             'hover_text': neptune_mantle_info.replace('\n', '<br>'),
             'tooltip': neptune_mantle_info,
         },
@@ -1944,6 +1965,7 @@ SHELL_CONFIGS = {
             'opacity': 0.45,
             'n_points': 20,
             'marker_size': 3.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): golden-orange fill
             'hover_text': streamer_belt_info_hover,
             'tooltip': streamer_belt_info,
         },

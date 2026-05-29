@@ -28,6 +28,15 @@ May 27, 2026 (Thread 1 cleanup, Opus 4.7): per-shell sun_traces calls
     in upper_atmosphere and hill_sphere removed -- duplicates of the
     unified dispatch's post-loop Sun Direction indicator (v9 Residual
     Cleanup item 1). Dead create_sun_direction_indicator import removed.
+May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
+    converted to factory call (Hill Sphere). Van Allen loop retrofit
+    to per-belt borders (white on inner reddish belt, red on outer
+    blue belt) per the two-standards convention locked this session
+    (red border default; white border for reddish fills). The 5 sites
+    already factory-routed in this file (magnetosphere, bow shock,
+    Van Allen loop, LEO, GEO) were untouched -- they already use the
+    factory default (red border) and Tony's earlier Mode 5 testing
+    marked them acceptable.
 """
 import numpy as np
 import math
@@ -855,10 +864,15 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 showlegend=True
             )
         )
-        # Info marker for this belt
+        # Info marker for this belt. Per-belt border per two-standards
+        # (May 28, 2026): white on inner reddish belt (i=0,
+        # rgb(255,100,100)), red on outer blue belt (i=1,
+        # rgb(100,200,255)). Inner belt is the borderline-reddish case
+        # the two-standards convention exists for.
         traces.append(create_info_marker(
             belt_x[0], belt_y[0], belt_z[0],
-            belt_colors[i], belt_text[0], belt_names[i]
+            belt_colors[i], belt_text[0], belt_names[i],
+            border_color='white' if i == 0 else 'red'
         ))
     
     return traces
@@ -1137,17 +1151,12 @@ def create_earth_hill_sphere_shell(center_position=(0, 0, 0)):
         )
     ]
     r_info = radius_au * 1.05
-    traces.append(go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(0, 255, 0)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup='Earth: Hill Sphere',
-        text=[f"Earth: Hill Sphere<br><br>{hover_text}"],
-        customdata=['Earth: Hill Sphere'],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed for centralized styling.
+    traces.append(create_info_marker(
+        center_x, center_y, center_z + r_info,
+        'rgb(0, 255, 0)',
+        f"Earth: Hill Sphere<br><br>{hover_text}",
+        'Earth: Hill Sphere'
     ))
     
     return traces

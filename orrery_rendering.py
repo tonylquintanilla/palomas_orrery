@@ -15,11 +15,16 @@ Consumed by: planet_visualization.py (dispatch loop),
              *_visualization_shells.py (custom geometry info markers)
 
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
-May 27, 2026: Stage 3 info-marker standard sweep complete (Opus 4.7).
-    create_info_marker docstring updated with completed-migration intent
-    paragraph. The factory style is now the canonical info marker style
-    across the codebase; old white-border inline patterns retired except
-    for documented red-on-red exceptions.
+May 28, 2026: Info-marker contrast fix at the real control point (Opus 4.7).
+    create_info_marker() gained fill_color/border_color params;
+    build_sphere_shell() passes per-config 'info_fill'/'info_border' keys
+    through. This is the LIVE render path for SHELL_CONFIGS sphere shells
+    (dispatch: SHELL_CONFIGS -> build_sphere_shell -> create_info_marker).
+    Correction to the May 27 note below: the per-body inline-marker "sweep"
+    edited the *_visualization_shells.py inline dicts, which for sphere
+    shells are NOT on the live dispatch path (dead code) -- the factory
+    here controls sphere-shell marker styling. See handoff v14. CUSTOM_SHELLS
+    builders (magnetospheres, rings, tori) DO use their own inline markers.
 """
 
 import numpy as np
@@ -29,7 +34,8 @@ from constants_new import CENTER_BODY_RADII, KM_PER_AU
 from planet_visualization_utilities import create_sphere_points
 
 
-def create_info_marker(x, y, z, color, text, legendgroup, customdata=None):
+def create_info_marker(x, y, z, color, text, legendgroup, customdata=None,
+                       fill_color=None, border_color='red'):
     """Create a single info marker trace.
 
     Canonical info marker style for the orrery. Size 8, opacity 1.0,
@@ -59,15 +65,26 @@ def create_info_marker(x, y, z, color, text, legendgroup, customdata=None):
         text (str): Hover text content
         legendgroup (str): Legend group to toggle with geometry
         customdata (str): Optional customdata value (defaults to legendgroup)
+        fill_color (str): Optional info-marker fill override. Defaults to
+                          `color` (the shell color). Set to 'white'/'yellow'
+                          for dense-red shells where a shell-colored cross
+                          loses contrast against the dot field.
+        border_color (str): Optional info-marker border color (default 'red').
 
     Returns:
         plotly Scatter3d trace
     """
+    # fill_color overrides the shell color for the info marker fill when the
+    # shell fill is too dark/red to read a red-bordered cross against (the
+    # dense-red shells). Defaults to the shell color. border_color likewise
+    # overridable. Note: Plotly Scatter3d ignores marker.line.width
+    # (plotly.js #4118), so FILL color -- not border -- is the contrast lever.
+    marker_fill = fill_color if fill_color is not None else color
     return go.Scatter3d(
         x=[x], y=[y], z=[z],
         mode='markers',
-        marker=dict(size=8, color=color, opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
+        marker=dict(size=8, color=marker_fill, opacity=1.0,
+                    symbol='cross', line=dict(color=border_color, width=2)),
         name='',
         legendgroup=legendgroup,
         text=[text],
@@ -196,11 +213,17 @@ def build_sphere_shell(config, body_name, center_position=(0, 0, 0)):
     # May 2026 -- fills the dispatch-path blind spot that the per-body
     # sweep missed).
     r_info = radius_au * 1.05
+    # Optional per-shell info-marker overrides. Dense-red shells set
+    # 'info_fill' (e.g. 'white') so the cross reads against the red dot field;
+    # the shell fill itself is unchanged. See handoff v14 / docstring above.
+    # Absent keys -> factory defaults (shell-color fill, red border).
     info_trace = create_info_marker(
         center_x, center_y, center_z + r_info,
         config['color'],
         "%s<br><br>%s" % (trace_name, config['hover_text']),
-        trace_name
+        trace_name,
+        fill_color=config.get('info_fill'),
+        border_color=config.get('info_border', 'red')
     )
 
     return [shell_trace, info_trace]

@@ -16,12 +16,19 @@ Provenance audit identified by Anthropic's Claude Opus 4.7.
 May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 5 info
     markers brought to red-border standard; 1 red-on-red exception
     preserved on outer_core (rgb(255, 50, 0) charcoal/ember red).
+May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
+    routed through orrery_rendering.create_info_marker() factory
+    (Hill Sphere). Already at factory size 8 / opacity 1.0; no visual
+    change beyond factory routing. Moon outer_core dense-red case is
+    handled via SHELL_CONFIGS info_border='white' override (Tony's
+    two-standards: shell-color fill, white outline for reddish shells).
 """
 import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (MOON_RADIUS_AU, create_sphere_points, create_magnetosphere_shape)
 from shared_utilities import create_sun_direction_indicator
+from orrery_rendering import create_info_marker
 
 # Moon Shell Creation Functions
 
@@ -599,17 +606,12 @@ def create_moon_hill_sphere_shell(center_position=(0, 0, 0)):
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[center_x], y=[center_y], z=[center_z + r_info],
-        mode='markers',
-        marker=dict(size=8, color='rgb(0, 255, 0)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=trace_name,
-        text=[f"{trace_name}<br><br>{hover_text}"],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed for centralized styling.
+    info_trace = create_info_marker(
+        center_x, center_y, center_z + r_info,
+        'rgb(0, 255, 0)',
+        f"{trace_name}<br><br>{hover_text}",
+        trace_name
     )
 
     traces = [shell_trace, info_trace]

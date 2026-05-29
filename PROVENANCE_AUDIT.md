@@ -1,6 +1,6 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: May 27, 2026
+Generated: May 29, 2026
 Files scanned: 105
 Total findings: 483
 Constants: 61 | Dicts: 29 | Display strings: 393
@@ -121,9 +121,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 35 | dict | COMET_NUCLEUS_SIZES[...] | (16 entries) | 4 | 3 | **12** | No source citation (recalled) | Geometry dict in rendering/shells module |
-| 324 | string | display string @ line 324 | (3 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 1616 | dict | COMET_FEATURE_THRESHOLDS[...] | (3 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
+| 42 | dict | COMET_NUCLEUS_SIZES[...] | (16 entries) | 4 | 3 | **12** | No source citation (recalled) | Geometry dict in rendering/shells module |
+| 331 | string | display string @ line 331 | (3 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 1591 | dict | COMET_FEATURE_THRESHOLDS[...] | (3 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
 
 ### constants_new.py
 
@@ -147,9 +147,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 983 | string | display string @ line 983 | (6 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 997 | string | display string @ line 997 | (7 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 1049 | string | display string @ line 1049 | (5 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 997 | string | display string @ line 997 | (6 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 1011 | string | display string @ line 1011 | (7 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 1063 | string | display string @ line 1063 | (5 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
 
 ### eris_visualization_shells.py
 
@@ -297,12 +297,12 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 236 | string | display string @ line 236 | (8 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 256 | string | display string @ line 256 | (2 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 288 | string | display string @ line 288 | (6 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
-| 847 | string | display string @ line 847 | (19 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
-| 874 | string | display string @ line 874 | (19 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
-| 898 | string | display string @ line 898 | (5 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
+| 245 | string | display string @ line 245 | (8 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 265 | string | display string @ line 265 | (2 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 297 | string | display string @ line 297 | (6 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 856 | string | display string @ line 856 | (19 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
+| 883 | string | display string @ line 883 | (19 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
+| 907 | string | display string @ line 907 | (5 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
 
 ### spacecraft_encounters.py
 
@@ -363,8 +363,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 69 | string | display string @ line 69 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 121 | string | display string @ line 121 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 74 | string | display string @ line 74 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 126 | string | display string @ line 126 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### celestial_coordinates.py
 
@@ -433,21 +433,21 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 83 | string | display string @ line 83 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 199 | string | display string @ line 199 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 284 | string | display string @ line 284 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 295 | string | display string @ line 295 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 512 | string | display string @ line 512 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 518 | string | display string @ line 518 | (8 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 525 | string | display string @ line 525 | (16 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 691 | string | display string @ line 691 | (14 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1550 | string | display string @ line 1550 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1560 | string | display string @ line 1560 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1570 | string | display string @ line 1570 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1579 | string | display string @ line 1579 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1588 | string | display string @ line 1588 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1598 | string | display string @ line 1598 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1548 | dict | comet_visualization_info[...] | (6 entries) | 2 | 3 | **6** | Has source citation | Geometry dict in rendering/shells module |
+| 90 | string | display string @ line 90 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 206 | string | display string @ line 206 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 291 | string | display string @ line 291 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 302 | string | display string @ line 302 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 519 | string | display string @ line 519 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 525 | string | display string @ line 525 | (8 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 532 | string | display string @ line 532 | (16 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 698 | string | display string @ line 698 | (14 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1525 | string | display string @ line 1525 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1535 | string | display string @ line 1535 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1545 | string | display string @ line 1545 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1554 | string | display string @ line 1554 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1563 | string | display string @ line 1563 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1573 | string | display string @ line 1573 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1523 | dict | comet_visualization_info[...] | (6 entries) | 2 | 3 | **6** | Has source citation | Geometry dict in rendering/shells module |
 
 ### constants_new.py
 
@@ -477,25 +477,25 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 43 | string | display string @ line 43 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 59 | string | display string @ line 59 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 115 | string | display string @ line 115 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 131 | string | display string @ line 131 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 187 | string | display string @ line 187 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 202 | string | display string @ line 202 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 257 | string | display string @ line 257 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 272 | string | display string @ line 272 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 327 | string | display string @ line 327 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 342 | string | display string @ line 342 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 480 | string | display string @ line 480 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 496 | string | display string @ line 496 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 552 | string | display string @ line 552 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 568 | string | display string @ line 568 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 870 | string | display string @ line 870 | (11 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 890 | string | display string @ line 890 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 943 | string | display string @ line 943 | (11 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1089 | string | display string @ line 1089 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1112 | string | display string @ line 1112 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 52 | string | display string @ line 52 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 68 | string | display string @ line 68 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 124 | string | display string @ line 124 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 140 | string | display string @ line 140 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 196 | string | display string @ line 196 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 211 | string | display string @ line 211 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 266 | string | display string @ line 266 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 281 | string | display string @ line 281 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 336 | string | display string @ line 336 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 351 | string | display string @ line 351 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 489 | string | display string @ line 489 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 505 | string | display string @ line 505 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 561 | string | display string @ line 561 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 577 | string | display string @ line 577 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 884 | string | display string @ line 884 | (11 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 904 | string | display string @ line 904 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 957 | string | display string @ line 957 | (11 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1103 | string | display string @ line 1103 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1126 | string | display string @ line 1126 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### eris_visualization_shells.py
 
@@ -572,10 +572,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 507 | string | display string @ line 507 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 590 | string | display string @ line 590 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 720 | string | display string @ line 720 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 847 | string | display string @ line 847 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 511 | string | display string @ line 511 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 594 | string | display string @ line 594 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 724 | string | display string @ line 724 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 851 | string | display string @ line 851 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### mercury_visualization_shells.py
 
@@ -598,10 +598,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 46 | string | display string @ line 46 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 114 | string | display string @ line 114 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 201 | string | display string @ line 201 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 550 | string | display string @ line 550 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 53 | string | display string @ line 53 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 121 | string | display string @ line 121 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 208 | string | display string @ line 208 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 557 | string | display string @ line 557 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### neptune_visualization_shells.py
 
@@ -754,25 +754,25 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 40 | string | display string @ line 40 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 66 | string | display string @ line 66 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 84 | string | display string @ line 84 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 99 | string | display string @ line 99 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 114 | string | display string @ line 114 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 139 | string | display string @ line 139 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 164 | string | display string @ line 164 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 189 | string | display string @ line 189 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 222 | string | display string @ line 222 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 317 | string | display string @ line 317 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 350 | string | display string @ line 350 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 414 | string | display string @ line 414 | (6 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 529 | string | display string @ line 529 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 551 | string | display string @ line 551 | (8 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 594 | string | display string @ line 594 | (17 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 623 | string | display string @ line 623 | (14 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 649 | string | display string @ line 649 | (6 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 677 | string | display string @ line 677 | (6 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 700 | string | display string @ line 700 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 49 | string | display string @ line 49 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 75 | string | display string @ line 75 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 93 | string | display string @ line 93 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 108 | string | display string @ line 108 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 123 | string | display string @ line 123 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 148 | string | display string @ line 148 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 173 | string | display string @ line 173 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 198 | string | display string @ line 198 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 231 | string | display string @ line 231 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 326 | string | display string @ line 326 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 359 | string | display string @ line 359 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 423 | string | display string @ line 423 | (6 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 538 | string | display string @ line 538 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 560 | string | display string @ line 560 | (8 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 603 | string | display string @ line 603 | (17 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 632 | string | display string @ line 632 | (14 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 658 | string | display string @ line 658 | (6 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 686 | string | display string @ line 686 | (6 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 709 | string | display string @ line 709 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### spacecraft_encounters.py
 
@@ -838,12 +838,12 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 1 | string | display string @ line 1 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 34 | string | display string @ line 34 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 51 | string | display string @ line 51 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 413 | string | display string @ line 413 | (12 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 501 | string | display string @ line 501 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 555 | string | display string @ line 555 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 707 | string | display string @ line 707 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 38 | string | display string @ line 38 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 55 | string | display string @ line 55 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 417 | string | display string @ line 417 | (12 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 505 | string | display string @ line 505 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 559 | string | display string @ line 559 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 711 | string | display string @ line 711 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ---
 
@@ -853,11 +853,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 100 | constant | MAIN_BELT_INNER | 2.2 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
-| 101 | constant | MAIN_BELT_OUTER | 3.2 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
-| 102 | constant | MAIN_BELT_PEAK | 2.7 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
-| 104 | constant | HILDA_DISTANCE | 3.97 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
-| 105 | constant | TROJAN_DISTANCE | 5.2 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 105 | constant | MAIN_BELT_INNER | 2.2 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 106 | constant | MAIN_BELT_OUTER | 3.2 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 107 | constant | MAIN_BELT_PEAK | 2.7 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 109 | constant | HILDA_DISTANCE | 3.97 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 110 | constant | TROJAN_DISTANCE | 5.2 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
 
 ### close_approach_data.py
 

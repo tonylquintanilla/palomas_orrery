@@ -12,10 +12,15 @@ May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
     (Opus 4.7). 4 info markers brought to red-border standard; 4 dormant
     sun_direction calls removed (dist=0 suppression branch -- zero
     behavior change, confirmed v9 Residual Cleanup item 2).
+May 28, 2026: Phase 1 re-pipe (Opus 4.7). 4 live inline info markers
+    routed through orrery_rendering.create_info_marker() factory
+    (main belt, Hilda, Trojan L4, Trojan L5). Main belt preserves white
+    fill via factory color arg. No visual change beyond factory routing.
 """
 
 import numpy as np
 import plotly.graph_objs as go
+from orrery_rendering import create_info_marker
 
 #####################################
 # Jupiter Angle Helper Functions
@@ -217,17 +222,12 @@ def create_main_asteroid_belt(center_position=(0, 0, 0)):
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[belt_x[0]], y=[belt_y[0]], z=[belt_z[0]],
-        mode='markers',
-        marker=dict(size=8, color='white', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=trace_name,
-        text=[f"{trace_name}<br><br>{belt_desc}"],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed for centralized styling.
+    info_trace = create_info_marker(
+        belt_x[0], belt_y[0], belt_z[0],
+        'white',
+        f"{trace_name}<br><br>{belt_desc}",
+        trace_name
     )
     traces = [geom_trace, info_trace]
     
@@ -307,17 +307,12 @@ def create_hilda_group(center_position=(0, 0, 0)):
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[hilda_x[0]], y=[hilda_y[0]], z=[hilda_z[0]],
-        mode='markers',
-        marker=dict(size=8, color='rgb(200, 170, 100)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=trace_name,
-        text=[f"{trace_name}<br><br>{hilda_desc}"],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed for centralized styling.
+    info_trace = create_info_marker(
+        hilda_x[0], hilda_y[0], hilda_z[0],
+        'rgb(200, 170, 100)',
+        f"{trace_name}<br><br>{hilda_desc}",
+        trace_name
     )
     traces = [geom_trace, info_trace]
     
@@ -401,17 +396,12 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[trojan_x[0]], y=[trojan_y[0]], z=[trojan_z[0]],
-        mode='markers',
-        marker=dict(size=8, color='rgb(180, 100, 100)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=trace_name,
-        text=[f"{trace_name}<br><br>{trojan_desc}"],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed for centralized styling.
+    info_trace = create_info_marker(
+        trojan_x[0], trojan_y[0], trojan_z[0],
+        'rgb(180, 100, 100)',
+        f"{trace_name}<br><br>{trojan_desc}",
+        trace_name
     )
     traces = [geom_trace, info_trace]
     
@@ -491,17 +481,12 @@ def create_jupiter_trojans_trojans(center_position=(0, 0, 0), jupiter_angle=0):
         hoverinfo='skip',
         showlegend=True
     )
-    info_trace = go.Scatter3d(
-        x=[trojan_x[0]], y=[trojan_y[0]], z=[trojan_z[0]],
-        mode='markers',
-        marker=dict(size=8, color='rgb(160, 80, 80)', opacity=1.0,
-                    symbol='cross', line=dict(color='red', width=2)),
-        name='',
-        legendgroup=trace_name,
-        text=[f"{trace_name}<br><br>{trojan_desc}"],
-        customdata=[trace_name],
-        hovertemplate='%{text}<extra></extra>',
-        showlegend=False
+    # Phase 1 re-pipe (May 28, 2026): factory-routed for centralized styling.
+    info_trace = create_info_marker(
+        trojan_x[0], trojan_y[0], trojan_z[0],
+        'rgb(160, 80, 80)',
+        f"{trace_name}<br><br>{trojan_desc}",
+        trace_name
     )
     traces = [geom_trace, info_trace]
     
