@@ -98,7 +98,6 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
-            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "Inner Core: Mercury has a very large metallic core, unlike Earth's which is proportionally smaller.<br>"
                 "Evidence suggests that Mercury has a solid inner core, similar to Earth's. It is estimated to be about <br>"
@@ -925,7 +924,6 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
-            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "Scientists infer that Venus has a central core, likely composed primarily of iron and nickel, similar to Earth's. <br>" 
                 "Its radius is estimated to be around 3,200 km. Due to the lack of a strong magnetic field, it's speculated that Venus's <br>" 
@@ -1107,7 +1105,6 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
-            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "A Solid Inner Core: Based on seismic data from the InSight lander, scientists have strong evidence that Mars <br>" 
                 "possesses a solid inner core. This inner core is primarily composed of iron and nickel, similar to Earth's.<br><br>"
@@ -1190,6 +1187,7 @@ SHELL_CONFIGS = {
             'opacity': 0.6,
             'n_points': 25,
             'marker_size': 3.1,
+            'info_border': 'white',  # two-standards (May 29, 2026): pink-red fill
             'hover_text': (
                 "Mantle: Surrounding the core is a silicate mantle, similar to Earth's. It's composed of dense rocks rich in <br>" 
                 "elements like silicon, oxygen, iron, and magnesium. While \"upper mantle\" isn't a formal layer name in the <br>" 
@@ -1211,6 +1209,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'geometry_type': 'mesh3d',
             'mesh_resolution': 24,
+            'info_border': 'white',  # two-standards (May 29, 2026): dense red fill
             'hover_text': (
                 "Mars Crust<br>" 
                 "(Note: toggle off the crust layer in the legend to better see the interior structure.)<br><br>" 
@@ -1344,7 +1343,6 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 4.0,
-            'info_border': 'white',  # two-standards (May 29, 2026): orange fill
             'hover_text': (
                 "Earth's inner core is a solid sphere composed primarily of iron and nickel.<br>"
                 "Despite incredible pressure, temperatures of 5,400 degC (9,800 degF) keep it nearly<br>"
@@ -1766,7 +1764,6 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.2,
             'n_points': 25,
             'marker_size': 4.0,
-            'info_border': 'white',  # two-standards (May 29, 2026): golden fill
             'hover_text': uranus_core_info.replace('\n', '<br>'),
             'tooltip': uranus_core_info,
         },
@@ -1834,7 +1831,6 @@ SHELL_CONFIGS = {
             'radius_fraction': 0.25,
             'n_points': 25,
             'marker_size': 4.0,
-            'info_border': 'white',  # two-standards (May 29, 2026): golden fill
             'hover_text': neptune_core_info.replace('\n', '<br>'),
             'tooltip': neptune_core_info,
         },
@@ -1965,7 +1961,6 @@ SHELL_CONFIGS = {
             'opacity': 0.45,
             'n_points': 20,
             'marker_size': 3.0,
-            'info_border': 'white',  # two-standards (May 29, 2026): golden-orange fill
             'hover_text': streamer_belt_info_hover,
             'tooltip': streamer_belt_info,
         },
@@ -1977,6 +1972,7 @@ SHELL_CONFIGS = {
             'opacity': 0.5,
             'n_points': 20,
             'marker_size': 3.0,
+            'info_border': 'white',  # two-standards (May 29, 2026): dense red fill rgb(200,60,60)
             'hover_text': roche_limit_info_hover,
             'tooltip': roche_limit_info,
         },

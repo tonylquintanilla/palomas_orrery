@@ -22,6 +22,9 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
     routed through orrery_rendering.create_info_marker() factory
     (Hill Sphere). Already at factory size 8 / opacity 1.0; no visual
     change beyond factory routing.
+May 29, 2026: Crustal Magnetic Fields info marker (magnetosphere builder)
+    given border_color='white' for contrast against its magenta dots
+    (Mode 5). Magnetosphere and bow-shock markers keep factory red.
 """
 import numpy as np
 import math
@@ -838,7 +841,8 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
             traces.append(create_info_marker(
                 field_x[0], field_y[0], field_z[0],
                 'rgb(255, 100, 255)', f"Mars: Crustal Magnetic Fields<br><br>{crustal_field_text[0]}",
-                'Mars: Crustal Magnetic Fields'
+                'Mars: Crustal Magnetic Fields',
+                border_color='white'  # crustal-field cross: white vs red border on magenta dots (May 29, 2026)
             ))
 
     return traces

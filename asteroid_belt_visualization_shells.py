@@ -16,6 +16,9 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 4 live inline info markers
     routed through orrery_rendering.create_info_marker() factory
     (main belt, Hilda, Trojan L4, Trojan L5). Main belt preserves white
     fill via factory color arg. No visual change beyond factory routing.
+May 29, 2026: Trojan L4/L5 info markers given border_color='white' for
+    contrast against their reddish dot fields (Mode 5). Main belt and
+    Hilda keep the factory default red border.
 """
 
 import numpy as np
@@ -401,7 +404,8 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
         trojan_x[0], trojan_y[0], trojan_z[0],
         'rgb(180, 100, 100)',
         f"{trace_name}<br><br>{trojan_desc}",
-        trace_name
+        trace_name,
+        border_color='white'  # Trojan camps: white border for contrast vs reddish dots (May 29, 2026)
     )
     traces = [geom_trace, info_trace]
     
@@ -486,7 +490,8 @@ def create_jupiter_trojans_trojans(center_position=(0, 0, 0), jupiter_angle=0):
         trojan_x[0], trojan_y[0], trojan_z[0],
         'rgb(160, 80, 80)',
         f"{trace_name}<br><br>{trojan_desc}",
-        trace_name
+        trace_name,
+        border_color='white'  # Trojan camps: white border for contrast vs reddish dots (May 29, 2026)
     )
     traces = [geom_trace, info_trace]
     

@@ -7063,7 +7063,11 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         parent_window:    Tkinter parent window for dialog prompts
     Returns:
         fig (modified in place; returned for chaining)
-    Claude: 3/10/26 -- initial version    
+    Claude: 3/10/26 -- initial version
+    Claude: 5/29/26 -- fixed info marker: 'color' was undefined (NameError
+        silently dropped the marker, leaving the arc with no marker). Now
+        white fill, size 8, placed near perihelion (Option B: first outbound
+        point at r >= 1.5*q) instead of exactly on perihelion.
     """
     import numpy as np
     import plotly.graph_objects as go
@@ -7308,6 +7312,7 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
         f"{pert_note}"
     )
     orbit_label = f"{obj_name} Perihelion Osc. Orbit (Epoch: {epoch_osc})"
+    color = 'white'  # reference-curve color; one place to restyle line + marker
     # White, dot style -- reference curve distinct from actual trajectory
     fig.add_trace(
         go.Scatter3d(
@@ -7315,20 +7320,28 @@ def plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map,
             y=y_final,
             z=z_final,
             mode='lines',
-        #    line=dict(color='white', width=2, dash='dot'),
-            line=dict(color='white', width=2),
+        #    line=dict(color=color, width=2, dash='dot'),
+            line=dict(color=color, width=2),
             name=orbit_label,
             legendgroup=orbit_label,
             hoverinfo='skip',
             showlegend=True,
         )
     )
-    # Info marker at midpoint of arc
-    info_idx = min(len(x_final) // 2, len(x_final) - 1)
+    # Info marker near perihelion (Option B: outbound, ~1.5x perihelion distance)
+    # Place the marker near (not on) perihelion: first outbound point
+    # where r >= 1.5*q. Outbound = increasing index from perihelion
+    # (argmin r). If the view clips before 1.5*q, use the outermost point.
+    # 1.5q chosen (Mode 5, May 29) to stay in the interesting near-perihelion
+    # segment while sitting clearly off perihelion.
+    peri_idx = int(np.argmin(r_full))
+    _hits = np.nonzero(r_full[peri_idx:] >= 1.5 * q_osc)[0]
+    info_idx = peri_idx + int(_hits[0]) if len(_hits) > 0 else len(x_final) - 1
+    info_idx = min(info_idx, len(x_final) - 1)
     fig.add_trace(go.Scatter3d(
         x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
         mode='markers',
-        marker=dict(size=6, color=color, opacity=0.9,
+        marker=dict(size=8, color=color, opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=orbit_label,

@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
 Generated: May 29, 2026
-Modules: 105 | Functions: 858 | Lines: 85,631
+Modules: 105 | Functions: 858 | Lines: 85,649
 
 ---
 
@@ -681,7 +681,7 @@ and explains in context.
 
 ### asteroid_belt_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 396
+**Role:** rendering/shells | **Lines:** 401
 
 > Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location.
 
@@ -690,13 +690,13 @@ and explains in context.
 
 **Public functions:**
 
-- `calculate_body_angle(x, y)` (line 29) -- Calculate the orbital angle of a body from its x,y coordinates.
-- `get_jupiter_angle_from_data(ephemeris_data, date_index)` (line 47) -- Extract Jupiter's angle from ephemeris data.
-- `estimate_jupiter_angle_from_date(date_str)` (line 73) -- Estimate Jupiter's orbital angle from a date string.
-- `create_main_asteroid_belt(center_position)` (line 136) -- Creates a visualization of the main asteroid belt with density variations and Kirkwood gaps.
-- `create_hilda_group(center_position)` (line 251) -- Creates a visualization of the Hilda asteroid group showing triangular structure.
-- `create_jupiter_trojans_greeks(center_position, jupiter_angle)` (line 339) -- Creates a visualization of Jupiter's L4 Trojan asteroids (Greek camp).
-- `create_jupiter_trojans_trojans(center_position, jupiter_angle)` (line 425) -- Creates a visualization of Jupiter's L5 Trojan asteroids (Trojan camp).
+- `calculate_body_angle(x, y)` (line 32) -- Calculate the orbital angle of a body from its x,y coordinates.
+- `get_jupiter_angle_from_data(ephemeris_data, date_index)` (line 50) -- Extract Jupiter's angle from ephemeris data.
+- `estimate_jupiter_angle_from_date(date_str)` (line 76) -- Estimate Jupiter's orbital angle from a date string.
+- `create_main_asteroid_belt(center_position)` (line 139) -- Creates a visualization of the main asteroid belt with density variations and Kirkwood gaps.
+- `create_hilda_group(center_position)` (line 254) -- Creates a visualization of the Hilda asteroid group showing triangular structure.
+- `create_jupiter_trojans_greeks(center_position, jupiter_angle)` (line 342) -- Creates a visualization of Jupiter's L4 Trojan asteroids (Greek camp).
+- `create_jupiter_trojans_trojans(center_position, jupiter_angle)` (line 429) -- Creates a visualization of Jupiter's L5 Trojan asteroids (Trojan camp).
 
 ---
 
@@ -795,7 +795,7 @@ and explains in context.
 
 ### mars_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 808
+**Role:** rendering/shells | **Lines:** 812
 
 > mars_visualization_shells.py - Mars interior and remnant field shell traces.
 
@@ -804,14 +804,14 @@ and explains in context.
 
 **Public functions:**
 
-- `create_mars_inner_core_shell(center_position)` (line 39) -- Creates Mars's inner core shell.
-- `create_mars_outer_core_shell(center_position)` (line 131) -- Creates Mars's outer core shell.
-- `create_mars_mantle_shell(center_position)` (line 214) -- Creates Mars's mantle shell.
-- `create_mars_crust_shell(center_position)` (line 283) -- Creates Mars's crust shell using Mesh3d for better performance with improved hover.
-- `create_mars_atmosphere_shell(center_position)` (line 439) -- Creates Mars's lower atmosphere shell.
-- `create_mars_upper_atmosphere_shell(center_position)` (line 523) -- Creates Mars's upper atmosphere shell.
-- `create_mars_magnetosphere_shell(center_position, sun_position)` (line 606) -- Creates Mars' induced magnetosphere and localized crustal magnetic fields.
-- `create_mars_hill_sphere_shell(center_position)` (line 856) -- Creates Mars's Hill sphere.
+- `create_mars_inner_core_shell(center_position)` (line 42) -- Creates Mars's inner core shell.
+- `create_mars_outer_core_shell(center_position)` (line 134) -- Creates Mars's outer core shell.
+- `create_mars_mantle_shell(center_position)` (line 217) -- Creates Mars's mantle shell.
+- `create_mars_crust_shell(center_position)` (line 286) -- Creates Mars's crust shell using Mesh3d for better performance with improved hover.
+- `create_mars_atmosphere_shell(center_position)` (line 442) -- Creates Mars's lower atmosphere shell.
+- `create_mars_upper_atmosphere_shell(center_position)` (line 526) -- Creates Mars's upper atmosphere shell.
+- `create_mars_magnetosphere_shell(center_position, sun_position)` (line 609) -- Creates Mars' induced magnetosphere and localized crustal magnetic fields.
+- `create_mars_hill_sphere_shell(center_position)` (line 860) -- Creates Mars's Hill sphere.
 
 ---
 
@@ -1272,7 +1272,7 @@ and explains in context.
 
 ### idealized_orbits.py
 
-**Role:** computation | **Lines:** 6,546
+**Role:** computation | **Lines:** 6,559
 
 > idealized_orbits.py - Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia...
 
@@ -2364,7 +2364,7 @@ and explains in context.
 
 ### shell_configs.py
 
-**Role:** other | **Lines:** 2,539
+**Role:** other | **Lines:** 2,535
 
 > shell_configs.py - Shell configuration data for all celestial bodies.
 
@@ -2379,7 +2379,7 @@ and explains in context.
 |--------|------|------:|-----:|----------:|
 | add_docstrings | devtool | 631 | 0 | 0 |
 | apsidal_markers | computation | 1,733 | 1 | 4 |
-| asteroid_belt_visualization_shells | rendering/shells | 396 | 1 | 1 |
+| asteroid_belt_visualization_shells | rendering/shells | 401 | 1 | 1 |
 | catalog_selection | computation | 92 | 1 | 3 |
 | celestial_coordinates | computation | 454 | 0 | 1 |
 | celestial_objects | data | 1,248 | 0 | 1 |
@@ -2413,11 +2413,11 @@ and explains in context.
 | formatting_utils | utility | 16 | 0 | 4 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
-| idealized_orbits | computation | 6,546 | 4 | 5 |
+| idealized_orbits | computation | 6,559 | 4 | 5 |
 | incremental_cache_manager | cache | 657 | 1 | 4 |
 | info_dictionary | data | 2,046 | 0 | 9 |
 | jupiter_visualization_shells | rendering/shells | 840 | 2 | 1 |
-| mars_visualization_shells | rendering/shells | 808 | 2 | 1 |
+| mars_visualization_shells | rendering/shells | 812 | 2 | 1 |
 | mercury_visualization_shells | rendering/shells | 349 | 2 | 1 |
 | messier_catalog | data | 404 | 0 | 3 |
 | messier_object_data_handler | pipeline | 329 | 2 | 1 |
@@ -2460,7 +2460,7 @@ and explains in context.
 | sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
 | shared_utilities | utility | 142 | 1 | 7 |
-| shell_configs | other | 2,539 | 5 | 1 |
+| shell_configs | other | 2,535 | 5 | 1 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
 | social_media_export | pipeline | 969 | 1 | 2 |
