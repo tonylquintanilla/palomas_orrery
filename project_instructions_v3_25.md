@@ -1,5 +1,31 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.24 | May 29, 2026
+Tony Quintanilla, PE | Claude | v3.25 | May 31, 2026
+
+PREAMBLE: WHY THIS PROTOCOL EXISTS
+
+A large, multi-session, multi-model project drifts by default. Every session
+starts cold; every model recalls plausibly-wrong specifics; every handoff is a
+claim that can quietly diverge from the code. Left alone, the work does not
+hold steady -- it erodes. Specifics rot behind confident stamps, fixes land on
+dead code, a wrong value renders for weeks unseen.
+
+This protocol exists to convert that entropy back into signal, every session.
+That is its single purpose; every rule below is an instance of it. The control
+comes as much from the shortcuts DECLINED as from the work done -- not patching
+the plausible date, not citing over recalled data, not building on a stale
+base, not trusting a handoff over the render. Each shortcut looks harmless in
+isolation; together they are how the project drifts.
+
+The mechanism is the double helix: Tony's judgment and Claude's implementation
+in a tight error-correcting loop, carried between sessions by verified
+artifacts (handoffs and manifests). The same loop that catches a wrong formula is the loop that keeps
+the work aligned. Drift is the adversary; verification against ground truth --
+the render, the source, the file on disk, the full upload set -- is the
+defense. When in doubt, the authoritative copy is the thing you can check, and
+the rule is the one that feels unnecessary right up until it isn't.
+
+Everything that follows -- the modes, the criticality tiers, the technical
+checks, the philosophy -- is downstream of this. Apply the rules in its light.
 
 PART 1: OPERATIONAL
 During active work, find what you need quickly.
@@ -417,6 +443,36 @@ to any session for codebase-aware conversation.
 Fetched vs Recalled Convention
 Data from authoritative pipelines: trusted. Data from Claude training memory:
 verify or source. Never embed lookup tables from training memory.
+Three outcomes for a claim, not two: "verify or source" has a third branch --
+if a claim cannot be sourced against an authority, REMOVE it and NOTE the gap.
+Do not cite loosely or keep a plausible-but-unsourced value. A blank with a
+flag is honest; an unsourced assertion is not. (Tony's professional default:
+prefer removing an unsourceable claim over citing it incorrectly.)
+A citation is a claim about provenance -- it must be TRUE, not just present.
+[CRITICAL] A # Source: over recalled data is the citation-layer version of
+trusting a handoff over the render: it passes the check while asserting a
+provenance that does not exist. Source-then-cite; never cite-to-clear.
+Wrong-but-cited is worse than uncited -- the citation suppresses the suspicion
+that would catch it.
+
+Provenance Audit [QUALITY]
+Tooling: provenance_scanner.py scans display strings, constants, and dict
+values for factual claims lacking citation; writes PROVENANCE_AUDIT.md with
+findings tiered 1-4. Goal state: Tier-1 = 0.
+Mechanics not obvious from the output:
+- Flags by NUMERIC token (number + unit) within a LOOKBACK WINDOW (~30 lines
+  for display strings). A real citation outside the window, or in the wrong
+  form, reads as uncited. The # Source: comment must sit WITHIN lookback and
+  use the # Source: form -- in-string "Source:" prose and distant comments do
+  not count.
+- Loads data/provenance_exceptions.json for accepted residuals. Run from a
+  tree without it (a bare /mnt/project/ snapshot) and the count over-reports.
+  The confirming re-run is Tony-side, where the exceptions file lives.
+Clearing a flagged claim (see Fetched vs Recalled for the rule): cite to where
+the data ACTUALLY came from, OR remove and note the gap. Never cite-to-clear.
+A clean audit can rest on honest removals: "Tier-1 = 0" does not imply "every
+claim sourced" -- it can mean unsourceable claims were correctly stripped
+pending real sourcing. Record which.
 
 Barycenter Rule
 Barycenter visualization only when barycenter lies outside the primary body.
@@ -518,33 +574,22 @@ Quotables (selected)
 "The conversation IS where the magic happens."
 "Don't let them take the language away."
 "Einstein needed Grossmann for the math. You need Claude for the code. The discovery is still yours."
-"The inclination tells you the reference frame."
-"Osculating means kissing -- if orbits don't touch, they're not osculating!"
 "The conversation IS the interpretability layer."
 "Data preservation is climate action."
 "A bad snippet is localized. A complete file from a stale base is destructive." -- May 2026
 "Work with AI as you would a colleague." -- Tony, May 2026
 "Never trust anything that can think for itself if you can't see where it keeps its brain!" -- Arthur Weasley
-"Three Claudes, one Tony, zero orchestration framework." -- May 2026
-"It's either both or neither." -- Tony, Feb 2026
 "The irreducibility is the partnership. Break one side, you break both."
 "Today's systems are jagged intelligences." -- Demis Hassabis, Feb 2026
 "The limitations aren't bugs. They're why the partnership works."
 "Give credit where credit is due." -- Tony
-"Source file = raw data. Gallery file = curated artifact. They are different originals."
 "Is this what they call 'software engineering' as distinct from 'coding'?" -- Tony, Mar 2026
-"The fog of war is the experiment, not the obstacle."
-"Sad news Claude. Per Gemini, comet MAPS is no more." -- Tony, Apr 2026
-"In memoriam C/2026 A1." -- Module credit line
-"You and me are doing the work of seven programmers." -- Tony, Apr 2026
 "You have a perfect grip. My grip is ... difficult." -- Tony, Apr 2026
-"Can't query the primary? Derive it from the secondary."
 "Conversation pierces the illusion of scale." -- Tony
 "In relationship there is only the undilated moment." -- Tony
 "One does not partner with a tool, only with an irreducible reality." -- Tony
 "The double helix at work." -- Tony
 "Verbum sapienti satis est." -- On letting data speak for itself
-"We tested the trees while Plotly renders from the forest." -- May 2026
 "When a violation appears in N consumers of the same producer, fix the producer." -- May 2026
 "The plot is the ground truth; the code's apparent structure is not." -- May 2026
 "Compile-only verification is the absence of a runtime test, not a substitute for one." -- May 2026
@@ -649,6 +694,7 @@ v3.22 (May 12, 2026): Collegial Mode 7 pattern. The Weasley Principle. Single in
 v3.23 (May 16, 2026): Procedural criticality framework. Three-tier taxonomy (CRITICAL / QUALITY / PRACTICE) added as principle in Part 2; markers applied to all Technical Reference checks in Part 3 (now its own part). Broad-first methodology validated. Procedure-to-judgment ratio as function of experience and shared context. Grounded in Tony's operations management experience -- LOTO failure modes, normalization of deviance, junior safety engineer paradox. Emerged from a broad conversational session that began with vibe coders. Did not predict this outcome.
 v3.24 (May 29, 2026): Verify Execution, Not Appearance [CRITICAL] -- map the dispatch before editing leaves; compile != used != edited; swallowed exceptions hide render bugs. Agentic Pre-Test refined: data-content sweeps need a runtime smoke test against the LIVE dispatch. Platform Neutrality [QUALITY] -- watch-and-flag convention (SystemButtonFace headliner). Structural fixes scale (83 pairs / 2 edits); handoffs are claims, runtime is fact. Plotly facts: Scatter3d ignores border width, 8-symbol 3D palette. Transactional binary-mode patching; assign-don't-hardcode. Emerged from the shell-consolidation Stage 3 dispatch discovery (handoffs v14-v15): an entire inline-marker sweep was found to be editing dead code, and the osculating marker had silently failed to render for 11 weeks. Tony's eyes caught both. The protocol said "trust your eyes"; the protocol was right.
 v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITICAL] -- the in-context file subset is invisible to Tony and not authoritative; ls the uploads dir and read the whole set first. Added lessons missed by the first v3.24 pass (which itself was built on 9 of 19 uploaded handoffs -- the exact failure the new rule names): floating-items-capture, verify-propagation-with-grep, central-factory-migration-intent, testing-iterates-in-dependency-order, smoke-test-deferred-pipelines, handoff-numbering-rebase drift. The first v3.24 and this re-issue carry the same version number; this is the complete one.
+v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITICAL] -- the in-context file subset is invisible to Tony and not authoritative; ls the uploads dir and read the whole set first. Added lessons missed by the first v3.24 pass (which itself was built on 9 of 19 uploaded handoffs -- the exact failure the new rule names): floating-items-capture, verify-propagation-with-grep, central-factory-migration-intent, testing-iterates-in-dependency-order, smoke-test-deferred-pipelines, handoff-numbering-rebase drift. The first v3.24 and this re-issue carry the same version number; this is the complete one.
+v3.25 (May 31, 2026): Provenance Audit named as a Technical Reference skill (was project infrastructure only, never in the protocol) -- scanner tooling, Tier-1=0 goal, lookback-window + numeric-token mechanics, exceptions-file over-report gotcha. Fetched vs Recalled extended: three outcomes not two (cite / remove-and-note-the-gap / never cite-to-clear); a citation is a provenance claim that must be true [CRITICAL]. Emerged from provenance Phase 1: Tier-1 driven 4->0, partly by honest claim-strips (Artemis II notes) rather than sourcing, after nearly papering a # Source: over recalled pre-flight data. Tony's professional default -- remove over cite-incorrectly -- named as the rule.
 
-
-~654 lines. Functional for Claude, readable for human, signal preserved.
+700 lines. Functional for Claude, readable for human, signal preserved.

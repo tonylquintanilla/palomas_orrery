@@ -511,6 +511,10 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
 
     trace_name = 'Uranus: Magnetosphere'
 
+    # Source: Ness et al. (1986) Science 233:85 -- Voyager 2 magnetometer.
+    # Dipole-vs-rotation tilt: abstract states 60 deg; refined value commonly
+    # cited ~59 deg (58.6 deg). Dipole offset 0.3 R_U (~1/3 radius). Axial tilt
+    # 97.77 deg (NASA Uranus fact sheet). Sidereal rotation ~17.24 h (17h 14m).
     description = (
         "Uranus's Magnetosphere: tilted 60 degrees from the rotation axis -- <br>"
         "itself tilted 97.77 degrees from the orbital plane. This produces a <br>"

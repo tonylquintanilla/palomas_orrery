@@ -586,6 +586,9 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
     ]
 
     # Phase C4: info marker at first point of sunward-rotated, offset geometry
+    # Source: Ness et al. (1989) Science 246:1473 -- Voyager 2 magnetometer;
+    # offset tilted dipole inclined 47 deg to rotation axis, displaced 0.55 R_N
+    # from center. Confirmed NASA "30 Years Ago: Voyager 2 Explores Neptune" (2024).    
     magnetosphere_text = (
         "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted <br>"
         "(47 deg from its rotation axis) and significantly offset from the planet's center by more than <br>"

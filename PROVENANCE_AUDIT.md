@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: May 29, 2026
+Generated: May 31, 2026
 Files scanned: 105
-Total findings: 483
-Constants: 61 | Dicts: 29 | Display strings: 393
+Total findings: 480
+Constants: 61 | Dicts: 29 | Display strings: 390
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -36,9 +36,9 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 4 |
+| 1 | 16-20 | FIX NOW | 0 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 145 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 318 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 319 |
 | 4 | 1-4 | NO ACTION NEEDED | 16 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -80,29 +80,6 @@ Note: this does NOT rule out silent shadowing (a local
 dict with different name but overlapping keys). That 
 pattern is the April 16 bug family; shadow detection 
 is planned for a future session.
-
----
-
-## Tier 1: FIX NOW (Score 16-20)
-
-### neptune_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 590 | string | display string @ line 590 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### spacecraft_encounters.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 237 | string | display string @ line 237 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 268 | string | display string @ line 268 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### uranus_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 515 | string | display string @ line 515 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ---
 
@@ -267,7 +244,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 631 | string | display string @ line 631 | (1 claim) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 634 | string | display string @ line 634 | (1 claim) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
 
 ### orbital_elements.py
 
@@ -341,7 +318,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 560 | string | display string @ line 560 | (1 claim) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
+| 564 | string | display string @ line 564 | (1 claim) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
 
 ---
 
@@ -612,21 +589,22 @@ is planned for a future session.
 | 128 | string | display string @ line 128 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 193 | string | display string @ line 193 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 458 | string | display string @ line 458 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 809 | string | display string @ line 809 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1140 | string | display string @ line 1140 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1173 | string | display string @ line 1173 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1203 | string | display string @ line 1203 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1233 | string | display string @ line 1233 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1263 | string | display string @ line 1263 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1293 | string | display string @ line 1293 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1326 | string | display string @ line 1326 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1358 | string | display string @ line 1358 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1390 | string | display string @ line 1390 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1422 | string | display string @ line 1422 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1454 | string | display string @ line 1454 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1484 | string | display string @ line 1484 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1649 | string | display string @ line 1649 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1669 | string | display string @ line 1669 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 593 | string | display string @ line 593 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 812 | string | display string @ line 812 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1143 | string | display string @ line 1143 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1176 | string | display string @ line 1176 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1206 | string | display string @ line 1206 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1236 | string | display string @ line 1236 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1266 | string | display string @ line 1266 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1296 | string | display string @ line 1296 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1329 | string | display string @ line 1329 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1361 | string | display string @ line 1361 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1393 | string | display string @ line 1393 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1425 | string | display string @ line 1425 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1457 | string | display string @ line 1457 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1487 | string | display string @ line 1487 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1652 | string | display string @ line 1652 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1672 | string | display string @ line 1672 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### orbit_data_manager.py
 
@@ -782,10 +760,9 @@ is planned for a future session.
 | 1 | string | display string @ line 1 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 143 | string | display string @ line 143 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 169 | string | display string @ line 169 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 206 | string | display string @ line 206 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 215 | string | display string @ line 215 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1494 | string | display string @ line 1494 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1510 | string | display string @ line 1510 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 213 | string | display string @ line 213 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1490 | string | display string @ line 1490 | (7 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1506 | string | display string @ line 1506 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### star_notes.py
 
@@ -819,19 +796,20 @@ is planned for a future session.
 | 354 | string | display string @ line 354 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 373 | string | display string @ line 373 | (9 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 442 | string | display string @ line 442 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 735 | string | display string @ line 735 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 778 | string | display string @ line 778 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 794 | string | display string @ line 794 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 812 | string | display string @ line 812 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 829 | string | display string @ line 829 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 847 | string | display string @ line 847 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 866 | string | display string @ line 866 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 884 | string | display string @ line 884 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 904 | string | display string @ line 904 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 923 | string | display string @ line 923 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 943 | string | display string @ line 943 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1080 | string | display string @ line 1080 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1099 | string | display string @ line 1099 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 519 | string | display string @ line 519 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 739 | string | display string @ line 739 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 782 | string | display string @ line 782 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 798 | string | display string @ line 798 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 816 | string | display string @ line 816 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 833 | string | display string @ line 833 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 851 | string | display string @ line 851 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 870 | string | display string @ line 870 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 888 | string | display string @ line 888 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 908 | string | display string @ line 908 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 927 | string | display string @ line 927 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 947 | string | display string @ line 947 | (5 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1084 | string | display string @ line 1084 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1103 | string | display string @ line 1103 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### venus_visualization_shells.py
 

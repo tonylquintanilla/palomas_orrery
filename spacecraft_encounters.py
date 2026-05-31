@@ -29,8 +29,8 @@ Note: heliocentric speed after launch ~43 km/s (code) vs ~45 km/s (Gemini) --
 both are valid approximations depending on Earth orbital velocity assumed.
 Provenance audit identified by Anthropic's Claude Opus 4.7.
 
-Module updated: May 8, 2026 with Anthropic's Claude 4.6 and 4.7
-- Defensive date parser, Psyche dates, scale floor, Horizons refined flag
+Module updated: May 30, 2026 with Anthropic's Claude 4.8
+
 """
 
 import numpy as np
@@ -203,15 +203,13 @@ SPACECRAFT_ENCOUNTERS = {
             'v_kms': None,                     # TBD from trajectory data
             'date_source': 'authoritative',    # burn time -- not a proximity minimum
             'label': 'Earth Departure (TLI)',
-            'note': ('After ICPS separation at Apr 2 01:59 UTC, Orion completes an '
-                     'elliptical Earth orbit (2223 x 185 km after perigee raise maneuver '
-                     'at Apr 1 23:25 UTC, apogee raised to 70,377 km at Apr 2 00:23 UTC). '
-                     'A perigee raise burn at Apr 2 11:30 UTC reshapes the orbit. Then '
-                     'the translunar injection burn at Apr 3 00:43 UTC (~8 min duration) '
-                     'sends Orion toward the Moon -- the commit point for the free-return '
-                     'lunar trajectory. Four CubeSats were deployed at Apr 2 03:39 UTC: '
-                     'ATENEA (Argentina), TACHELES (Germany), K-RadCube (South Korea), '
-                     'Space Weather CubeSat-1 (Saudi Arabia).'),
+            'note': ('First crewed lunar flyby since the Apollo program. Orion '
+                     'followed a free-return trajectory around the Moon, refined '
+                     'by trajectory correction burns during translunar coast, '
+                     'reaching the farthest distance from Earth ever traveled by '
+                     'humans. Detailed event times and distances pending '
+                     're-derivation from the mission trajectory solution '
+                     '(NASA/JSC OEM) and verified mission reports.'),
             'resolution_note': ('Earth departure orbit requires high trajectory point '
                                 'count to resolve. The elliptical orbit before TLI is '
                                 'only ~14 hours -- coarse plotting will not capture it.'),
@@ -234,15 +232,14 @@ SPACECRAFT_ENCOUNTERS = {
             'dist_au': 8900 / AU_KM,           # ~0.0000595 AU
             'v_kms': None,                     # TBD from trajectory data
             'label': 'Lunar Closest Approach',
-            'note': ('First crewed lunar flyby since Apollo 17 in 1972 -- over 53 years. '
-                     'Three trajectory correction burns refined the path: TCB-1 at '
-                     'Apr 4 00:43 UTC, TCB-2 at Apr 5 01:43 UTC, TCB-3 at Apr 6 05:04 UTC. '
-                     'Orion entered the lunar sphere of influence at Apr 6 06:43 UTC. '
-                     'Closest approach to Moon at Apr 7 23:06 UTC, with maximum distance '
-                     'from Earth reached 3 minutes later at 23:09 UTC -- the farthest any '
-                     'human has traveled from Earth, surpassing Apollo 13\'s record of '
-                     '400,171 km. Orion exits the lunar sphere of influence at '
-                     'Apr 7 19:27 UTC and begins the return coast.'),
+            'note': ('Free-return reentry after the lunar flyby. Return '
+                     'trajectory correction burns refined the descent corridor '
+                     'before crew/service-module separation. Orion reentered, '
+                     'deployed its forward bay cover, drogue, and main parachutes '
+                     'in sequence, and splashed down in the Pacific Ocean. '
+                     'Detailed altitudes, velocities, and event times pending '
+                     're-derivation from the mission trajectory solution '
+                     '(NASA/JSC OEM) and verified mission reports.'),
             'resolution_note': ('Trajectory from NASA/JSC navigation solution '
                                 'Orion_OEM_20260401_0335.V0.1. Data begins post-ICPS '
                                 'separation, ~3h24m after launch.'),
@@ -265,15 +262,14 @@ SPACECRAFT_ENCOUNTERS = {
             'v_kms': 10.8,                     # approximate reentry velocity
             'date_source': 'authoritative',    # entry interface time -- not a proximity minimum
             'label': 'Reentry & Splashdown',
-            'note': ('Free-return reentry after lunar flyby. Return trajectory correction '
-                     'burns: RTCB-1 at Apr 8 02:04 UTC, manual piloting demonstration at '
-                     'Apr 9 04:55 UTC, RTCB-2 at Apr 10 05:04 UTC, RTCB-3 at Apr 10 '
-                     '21:04 UTC. Crew and service module separation at Apr 11 01:44 UTC, '
-                     'crew module raise burn at 01:47 UTC. Entry interface at 122 km '
-                     'altitude at 02:04 UTC at approximately 10.8 km/s. Forward bay cover '
-                     'deploys at 11 km, drogue chute at 7.6 km, three main parachutes at '
-                     '2.9 km. Splashdown in Pacific Ocean near Baja California at '
-                     '02:17 UTC, Apr 11. Orion final power down at 02:32 UTC.'),
+            'note': ('Free-return reentry after the lunar flyby. Return '
+                     'trajectory correction burns refined the descent corridor '
+                     'before crew/service-module separation. Orion reentered, '
+                     'deployed its forward bay cover, drogue, and main parachutes '
+                     'in sequence, and splashed down in the Pacific Ocean near '
+                     'Baja California. Detailed altitudes, velocities, and event '
+                     'times pending re-derivation from the mission trajectory '
+                     'solution (NASA/JSC OEM) and verified mission reports.'),
             'resolution_note': ('Horizons ephemeris ends at edge of atmosphere. '
                                 'Entry and descent phases are not in the trajectory data.'),
             'status': 'completed',
