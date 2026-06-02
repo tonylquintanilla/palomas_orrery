@@ -644,6 +644,9 @@ def test_mars_rotations(satellite_name, planetary_params, color, fig=None):     
         print(f"Error testing Mars rotations for {satellite_name}: {e}", flush=True)
         return fig
 def test_uranus_equatorial_transformations(satellite_name, planetary_params, color, fig=None):
+    # DEAD CODE -- Uranus equatorial->ecliptic pole-vector experiment (this is the L683-718 transform the
+    #              v21 handoff mistook for the live producer). The LIVE Uranus moon path is
+    #              plot_uranus_moon_osculating_orbit (ecliptic Horizons elements, NO pole transform). 0 live callers (verified 2026-06-01, Opus 4.8). Retained for reference, not removed.
     """Test transformations assuming orbital elements are in Uranus's equatorial plane"""
     if fig is None:
         fig = go.Figure()
@@ -753,6 +756,8 @@ def test_uranus_equatorial_transformations(satellite_name, planetary_params, col
         traceback.print_exc()
         return fig
 def test_uranus_rotation_combinations(satellite_name, planetary_params, color, fig=None):
+    # DEAD CODE -- Uranus rotation-combination experiment; superseded by the osculating-ecliptic moon path.
+    #              0 live callers (verified 2026-06-01, Opus 4.8). Retained for reference, not removed.
     """Test multiple rotation combinations for Uranus satellites systematically"""
     if fig is None:
         fig = go.Figure()
@@ -874,6 +879,8 @@ def test_uranus_rotation_combinations(satellite_name, planetary_params, color, f
         traceback.print_exc()
         return fig
 def debug_planet_transformation(planet_name):
+    # DEAD CODE -- Debug printer. Reachable ONLY via the dead debug chain
+    #              (debug_satellite_systems -> debug_mars_moons -> here). Dead by chain; 0 live callers (verified 2026-06-01, Opus 4.8). Retained for reference, not removed.
     """Print detailed information about the transformation for a specific planet"""
     print(f"\n==== DEBUG: {planet_name} Transformation ====", flush=True)
     
@@ -946,7 +953,9 @@ def debug_planet_transformation(planet_name):
             print(f"\nAngle between simple and complex transformations: {angle:.2f} deg", flush=True)
         else:
             print("Cannot calculate node vector (pole is directly aligned with Z-axis)", flush=True)
-def debug_mars_moons(satellites_data, parent_planets):          # test function only
+def debug_mars_moons(satellites_data, parent_planets):
+    # DEAD CODE -- Mars-system debug. Reachable ONLY from dead root debug_satellite_systems; also calls
+    #              debug_planet_transformation. Dead by chain; 0 live callers (verified 2026-06-01, Opus 4.8). Retained for reference, not removed.          # test function only
     """Special debug function for Mars and its moons"""
     print("\n==== MARS SYSTEM DEBUG ====", flush=True)
     
@@ -1089,6 +1098,8 @@ def test_mars_negative_tilt(fig, satellites_data):          # test function only
     
     return fig
 def debug_satellite_systems():
+    # DEAD CODE -- DEAD ROOT of the debug chain: no callers and no __main__ block in this module. Calls
+    #              debug_mars_moons + debug_planet_transformation (both dead by chain). 0 live callers (verified 2026-06-01, Opus 4.8). Retained for reference, not removed.
     fig = go.Figure()
     
     # Print transformation matrices
@@ -1491,7 +1502,7 @@ def plot_uranus_moon_osculating_orbit(fig, satellite_name, date, color, show_aps
     CRITICAL: Uranus moon osculating elements are in ECLIPTIC frame (J2000.0)
     No planet-specific rotation needed - standard Keplerian sequence only.
     
-    Uranus's extreme axial tilt (97.77 deg) and pole RA (257.31 deg) make analytical
+    Uranus's extreme axial tilt (97.77 deg) and pole RA (257.43 deg) make analytical
     reference frame transformations extremely complex. Osculating elements from
     JPL Horizons are already in ecliptic frame and provide excellent alignment.
     
@@ -3277,6 +3288,9 @@ def plot_patroclus_barycenter_orbit(fig, object_name, date, color, show_apsidal_
     
     return fig
 def create_planet_transformation_matrix(planet_name):
+    # REVIVED 2026-06-01 (Opus 4.8): math core for orient_to_planet_pole() below,
+    # which routes Uranus belt/ring geometry (U3). Was dead after per-planet inline
+    # rotate_points blocks superseded it; unfudged general construction, render-validated on revival.
     """
     Create a transformation matrix for a planet based on its pole direction.
     Transforms from planet's equatorial coordinates to ecliptic coordinates.
@@ -3310,11 +3324,20 @@ def create_planet_transformation_matrix(planet_name):
     sin_ra = np.sin(ra_pole)
     cos_ra = np.cos(ra_pole)
     
-    # Planet's north pole vector in ecliptic coordinates
+    # Planet's north pole vector -- RA/Dec are EQUATORIAL (J2000) coordinates.
     x_pole = cos_dec * cos_ra
     y_pole = cos_dec * sin_ra
     z_pole = sin_dec
-    
+
+    # U3 fix (June 2026): the visualization frame is ECLIPTIC (J2000), but the pole
+    # above is in the EQUATORIAL frame. Rotate it into ecliptic by the mean obliquity
+    # before building the basis. Omitting this left belts/rings ~23.4 deg off the
+    # (ecliptic-native) moon orbits -- caught by Tony's Mode-5 render, not the container test.
+    _OBLIQUITY = np.radians(23.439291)  # IAU 2006 / J2000 mean obliquity of the ecliptic
+    _ce, _se = np.cos(_OBLIQUITY), np.sin(_OBLIQUITY)
+    y_pole, z_pole = (y_pole * _ce + z_pole * _se,
+                      -y_pole * _se + z_pole * _ce)
+
     # Find the ascending node of planet's equator on the ecliptic
     # This is perpendicular to the pole and in the ecliptic plane
     x_node = -y_pole / np.sqrt(x_pole**2 + y_pole**2)
@@ -3330,6 +3353,33 @@ def create_planet_transformation_matrix(planet_name):
     transform_matrix = np.vstack((x_basis, y_basis, z_basis)).T
     
     return transform_matrix
+
+def orient_to_planet_pole(x, y, z, planet_name):
+    """
+    Rotate a body-equatorial point cloud into the J2000 ecliptic frame using the
+    IAU pole vector for planet_name (via create_planet_transformation_matrix).
+
+    Replaces hand-fitted axial-tilt rotations such as the Uranus 105-deg belt/ring
+    fudge with a transform derived from planet_poles. The pole math is unfudged and
+    general, but this routing is NEW to the render path -- validate by Mode-5 render,
+    no inherited trust. If the geometry comes out mirrored, transpose the matrix
+    (basis handedness): use matrix.T @ pts instead of matrix @ pts.
+
+    Parameters:
+        x, y, z (array-like): body-equatorial coordinates
+        planet_name (str): key into planet_poles
+
+    Returns:
+        tuple: (x_ecl, y_ecl, z_ecl) as numpy arrays
+
+    Module updated: June 2026 with Anthropic's Claude Opus 4.8
+    """
+    matrix = create_planet_transformation_matrix(planet_name)
+    pts = np.vstack((np.asarray(x, dtype=float),
+                     np.asarray(y, dtype=float),
+                     np.asarray(z, dtype=float)))
+    rot = matrix @ pts
+    return rot[0], rot[1], rot[2]
 def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color, fig=None, 
                          date=None, days_to_plot=None, current_position=None,
                          show_apsidal_markers=False):
@@ -6091,6 +6141,8 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 print(f"  - {obj}", flush=True)
     return fig
 def test_triton_rotations(satellite_name, planetary_params, color, fig=None):
+    # DEAD CODE -- Neptune/Triton rotation-combination experiment; the 'Neptune Pole' Euler block lives here
+    #              but is NOT a live producer. 0 live callers (verified 2026-06-01, Opus 4.8). Retained for reference, not removed.
     """Test multiple rotation combinations for Triton's orbit"""
     if fig is None:
         fig = go.Figure()

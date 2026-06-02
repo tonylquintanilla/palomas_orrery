@@ -2,7 +2,7 @@
 uranus_visualization_shells.py - Uranus interior, ring, and magnetosphere shell traces.
 
 Sphere shells for Uranus interior (core, mantle, clouds). Custom geometry
-for the ring system, radiation belts, tilted magnetosphere (59 degrees
+for the ring system, radiation belts, tilted magnetosphere (~60 degrees
 from rotation axis), and Hill sphere. Uranus rotates nearly on its side,
 making its magnetosphere geometry unique.
 
@@ -16,6 +16,9 @@ May 27, 2026: Stage 3 info-marker standard sweep + ring marker geometry fix
     (Opus 4.7). 5 info markers brought to red-border standard; ring info
     markers fixed (Neptune 2C pattern -- degenerate two-rotation
     computation gave a radius-independent position).
+June 2026: U3 with Anthropic's Claude Opus 4.8 -- retired the 105-deg belt/ring
+    axial-tilt fudge; belts and rings now oriented by orient_to_planet_pole()
+    (idealized_orbits.py) from the IAU pole vector. Render-validated.
 """
 import numpy as np
 import math
@@ -24,6 +27,7 @@ from planet_visualization_utilities import (URANUS_RADIUS_AU, KM_PER_AU, create_
                                             rotate_points)
 from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 from shared_utilities import create_sun_direction_indicator
+from idealized_orbits import orient_to_planet_pole  # U3: pole-vector frame for belts/rings
 
 # Uranus Shell Creation Functions
 
@@ -437,7 +441,7 @@ def create_uranus_upper_atmosphere_shell(center_position=(0, 0, 0)):
 
     return traces
 
-# Source: Ness et al. (1986) Science -- Voyager 2; magnetic axis 59 deg offset; Herbert (2009) magnetosphere model
+# Source: Ness et al. (1986) Science -- Voyager 2; magnetic axis ~60 deg offset; Herbert (2009) magnetosphere model
 uranus_magnetosphere_info = (
             "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
             "1.4 MB PER FRAME FOR HTML.<br><br>"
@@ -500,6 +504,12 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
         x, y, z,
         center_position=center_position,
         sun_position=sun_position,
+        # U2 (display convention, verified 2026-06-01, Opus 4.8): the dipole LEAN SIGN is
+        # conventional, not physical. The lean azimuth is set by Uranus's rotation phase, and no
+        # object in the orrery models axial rotation, so the azimuth is undefined and the sign (+)
+        # is a fixed display choice. The MAGNITUDE (~60 deg, one sig fig; U1) is sourced; see Source block
+        # below. Reopen if/when per-object axial rotation is modeled. (N13 dipole sweep-cone is the
+        # planned honest visualization of the envelope this sign arbitrarily fixes.)
         magnetic_tilt_deg=60,
     )
 
@@ -512,11 +522,14 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
     trace_name = 'Uranus: Magnetosphere'
 
     # Source: Ness et al. (1986) Science 233:85 -- Voyager 2 magnetometer.
-    # Dipole-vs-rotation tilt: abstract states 60 deg; refined value commonly
-    # cited ~59 deg (58.6 deg). Dipole offset 0.3 R_U (~1/3 radius). Axial tilt
-    # 97.77 deg (NASA Uranus fact sheet). Sidereal rotation ~17.24 h (17h 14m).
+    # Dipole-vs-rotation tilt reported as 60 deg. Display uses 60 (one sig fig):
+    # a single flyby's tilt determination does not justify sub-degree precision,
+    # so 60, ~59, and the often-cited 58.6 are the same measurement and 58.6 is
+    # spurious digits. Not a 'refined value' question -- a significant-figures one.
+    # Dipole offset 0.3 R_U (~1/3 radius). Axial tilt 97.77 deg (NASA Uranus fact
+    # sheet). Sidereal rotation ~17.24 h (17h 14m).
     description = (
-        "Uranus's Magnetosphere: tilted 60 degrees from the rotation axis -- <br>"
+        "Uranus's Magnetosphere: tilted ~60 degrees from the rotation axis -- <br>"
         "itself tilted 97.77 degrees from the orbital plane. This produces a <br>"
         "magnetosphere geometry with no analog in the rest of the solar system: <br>"
         "the dipole axis sweeps a wide cone as Uranus rotates, modulating the <br>"
@@ -548,7 +561,7 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
 
     return [geom_trace, info_trace]
 
-# Source: Ness et al. (1986) Science -- Voyager 2 magnetometer; 3-10 R_U belt extent; 59-deg magnetic tilt
+# Source: Ness et al. (1986) Science -- Voyager 2 magnetometer; 3-10 R_U belt extent; ~60-deg magnetic tilt
 uranus_radiation_belts_info = (
             "560 KB PER FRAME FOR HTML.<br><br>"
             "Zones of trapped high-energy particles in uranus's magnetosphere"                     
@@ -557,7 +570,7 @@ uranus_radiation_belts_info = (
 def create_uranus_radiation_belts(center_position=(0, 0, 0)):
     """Creates Uranus's radiation belts."""
     # Source: NASA Voyager 2 Uranus Science Summary; Ness et al. (1986) Science -- 3-10 R_U extent,
-    # asymmetry from 59-deg magnetic tilt, Voyager 2 (1986) sole in-situ measurement
+    # asymmetry from ~60-deg magnetic tilt, Voyager 2 (1986) sole in-situ measurement
     belt_colors = ['rgb(255, 255, 100)', 'rgb(100, 255, 150)']
     belt_names = ['Inner Radiation Belt', 'Outer Radiation Belt']
     belt_texts = [
@@ -630,8 +643,9 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
     # Unpack center position
     center_x, center_y, center_z = center_position
 
-    # uranus tilt is 97.77 degrees, 105 was arrived at by trial and error
-    uranus_tilt = np.radians(105)
+    # U3 (June 2026): 105-deg axial-tilt fudge retired. Belt is built in Uranus's
+    # equatorial XY plane below, then oriented into the ecliptic by orient_to_planet_pole()
+    # from the IAU pole vector (RA 257.43, Dec -15.10) -- no hand-fitted angle.
     
     traces = []
     
@@ -651,7 +665,7 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
             for j in range(n_points):
                 angle = (j / n_points) * 2 * np.pi
                 
-                # Create a belt around Saturn's rotational axis
+                # Create a belt around Uranus's rotational axis
                 x = belt_radius * np.cos(angle)
                 y = belt_radius * np.sin(angle)
                 
@@ -670,7 +684,7 @@ def create_uranus_radiation_belts(center_position=(0, 0, 0)):
         belt_x = np.array(belt_x)
         belt_y = np.array(belt_y)
         belt_z = np.array(belt_z)
-        belt_x_tilted, belt_y_tilted, belt_z_tilted = rotate_points(belt_x, belt_y, belt_z, uranus_tilt, 'x')
+        belt_x_tilted, belt_y_tilted, belt_z_tilted = orient_to_planet_pole(belt_x, belt_y, belt_z, 'Uranus')
 
         # Apply center position offset
         belt_x_final = belt_x_tilted + center_x
@@ -737,10 +751,10 @@ uranus_ring_system_info = (
 # de Pater et al. (2006) Science -- ring properties, widths, colors; Showalter & Lissauer (2006)
 def create_uranus_ring_system(center_position=(0, 0, 0)):
     """
-    Creates a visualization of Saturn's ring system.
+    Creates a visualization of Uranus's ring system.
     
     Parameters:
-        center_position (tuple): (x, y, z) position of Saturn's center
+        center_position (tuple): (x, y, z) position of Uranus's center
         
     Returns:
         list: A list of plotly traces representing the ring components
@@ -751,8 +765,9 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
     compound rotation approach due to the planet's extreme axial tilt (97.77 deg).
 
     The transformation uses these key elements:
-    1. A 105 deg rotation around the X-axis followed by a 105 deg rotation around the Y-axis
-    (empirically determined to match satellite orbit alignment)
+    1. A pole-vector transform (orient_to_planet_pole) from Uranus's equatorial plane
+    to the ecliptic, derived from the IAU pole (RA 257.43, Dec -15.10) -- replaces the
+    former empirical 105 deg compound X+Y rotation (U3, June 2026)
     2. Converting point coordinates to NumPy arrays before rotation
     3. Applying center position offset to the final coordinates after both rotations
 
@@ -760,15 +775,15 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
     radiation belts) share the same reference frame, correctly representing the planet's
     unique orientation in space.
 
-    NOTE: The 105 deg value, rather than the nominal 97.77 deg axial tilt, accounts for the 
-    specific reference frame conversion between Uranus's equatorial plane and the
-    ecliptic coordinate system used for visualization.
+    NOTE: The former 105 deg fudge (a hand-fit to mean-element satellite orbits that the
+    osculating path has since replaced) is retired; the equatorial-to-ecliptic conversion
+    is now derived from Uranus's IAU pole vector.
     
     """
     traces = []
     
-    # Define Saturn's ring parameters in kilometers from Saturn's center
-    # Then convert to Saturn radii, and finally to AU
+    # Define Uranus's ring parameters in kilometers from Uranus's center
+    # Then convert to Uranus radii, and finally to AU
     ring_params = {
 
         'ring_6': {
@@ -1011,7 +1026,7 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
     # Unpack center position
     center_x, center_y, center_z = center_position
     
-    uranus_tilt = np.radians(105)  # Convert to radians here, once; actual tilt is 97.77 but using 105 that is best fit empirically
+    # U3 (June 2026): 105-deg fudge retired; rings oriented via orient_to_planet_pole().
 
     # Create traces for each ring
     for ring_name, ring_info in ring_params.items():
@@ -1033,12 +1048,8 @@ def create_uranus_ring_system(center_position=(0, 0, 0)):
         y = np.array(y)
         z = np.array(z)           
             
-            # Apply the SAME compound rotation as for satellites
-            # First apply rotation around x-axis
-        x_tilted, y_tilted, z_tilted = rotate_points(x, y, z, uranus_tilt, 'x')
-            
-            # Then apply rotation around y-axis with the same angle
-        x_final, y_final, z_final = rotate_points(x_tilted, y_tilted, z_tilted, uranus_tilt, 'y')        
+        # Orient into the ecliptic via the IAU pole vector (replaces the compound 105-deg X+Y).
+        x_final, y_final, z_final = orient_to_planet_pole(x, y, z, 'Uranus')
 
         # Apply center position offset to the FINAL coordinates
         x_final = x_final + center_x  # Use x_final from Y rotation
