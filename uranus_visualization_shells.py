@@ -24,7 +24,7 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (URANUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, 
-                                            rotate_points)
+                                            rotate_points, create_bow_shock_shape)
 from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 from shared_utilities import create_sun_direction_indicator
 from idealized_orbits import orient_to_planet_pole  # U3: pole-vector frame for belts/rings
@@ -474,7 +474,7 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
     # Parameters for magnetosphere components (in Uranus radii)
     params = {
         # Compressed sunward side
-        'sunward_distance': 21,  # Compressed toward the sun, ranges from 18-24 Ru
+        'sunward_distance': 18,  # Source: Slavin et al. 1987, Voyager 2 -- subsolar magnetopause ~18 R_U (Gemini Mode-7: was 21, too close to 23.7 shock)
         
         # Equatorial extension (wider than polar)
         'equatorial_radius': 27.5,   # ranges from 25-30 Ru
@@ -559,7 +559,44 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
         'rgb(200, 200, 255)', f"{trace_name}<br><br>{description}", trace_name
     )
 
-    return [geom_trace, info_trace]
+    # ------------------------------------------------------------------
+    # Bow shock (conic-section model via shared builder).
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
+    # ------------------------------------------------------------------
+    bs_standoff = 23.7 * URANUS_RADIUS_AU  # Source: Ness et al. 1986, Voyager 2 (single flyby, single-epoch)
+    bs_x, bs_y, bs_z = create_bow_shock_shape(
+        bs_standoff, width=bs_standoff * 1.6, eccentricity=1.05
+    )
+    bs_x, bs_y, bs_z = np.array(bs_x), np.array(bs_y), np.array(bs_z)
+    bs_x, bs_y, bs_z = rotate_to_sunward(
+        bs_x, bs_y, bs_z, center_position=center_position, sun_position=sun_position
+    )
+    bs_x = bs_x + center_x
+    bs_y = bs_y + center_y
+    bs_z = bs_z + center_z
+    bs_km = bs_standoff * KM_PER_AU
+    bs_text = (
+        "Uranus: Bow Shock<br><br>"
+        "Subsolar standoff ~23.7 R_U "
+        f"({bs_km:,.0f} km / {bs_standoff:.4f} AU).<br>"
+        "Source: Ness et al. 1986, Voyager 2 (single flyby, single-epoch).<br>"
+        "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."
+    )
+    bs_geom = go.Scatter3d(
+        x=bs_x, y=bs_y, z=bs_z,
+        mode='markers',
+        marker=dict(size=1.5, color='rgb(255, 200, 150)', opacity=0.2),
+        name='Uranus: Bow Shock',
+        legendgroup='Uranus: Bow Shock',
+        hoverinfo='skip',
+        showlegend=True,
+    )
+    bs_info = create_info_marker(
+        bs_x[0], bs_y[0], bs_z[0],
+        'rgb(255, 200, 150)', bs_text, 'Uranus: Bow Shock'
+    )
+
+    return [geom_trace, info_trace, bs_geom, bs_info]
 
 # Source: Ness et al. (1986) Science -- Voyager 2 magnetometer; 3-10 R_U belt extent; ~60-deg magnetic tilt
 uranus_radiation_belts_info = (

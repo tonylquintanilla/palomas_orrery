@@ -26,6 +26,9 @@ Module updated: April 17, 2026 with Anthropic's Claude Opus 4.7
 line endings normalized to LF)
 
 Module updated: May 11, 2026 by Claude Opus 4.6 and 4.7 and Tony. (Sphere markers)
+
+Module updated: June 2026 with Anthropic's Claude Opus 4.8
+(shared create_bow_shock_shape extracted from 4 inline copies; conic-section model)
 """
 
 import math
@@ -255,6 +258,101 @@ def create_magnetosphere_shape(params):
             z_coords.append(z)
     
     return x_coords, y_coords, z_coords
+
+# ============================================================================
+# Bow shock shape generator (shared)
+#
+# Extracted June 2026 with Anthropic's Claude Opus 4.8 from the duplicated
+# inline bow-shock blocks in mercury/venus/earth/mars _visualization_shells.py
+# (four near-identical copies; see protocol "extract duplicated rendering into
+# the source module"). Single source of truth for all planetary bow shocks.
+#
+# Geometry: surface of revolution about the -X (sunward) axis, nose sunward,
+# flaring anti-sunward. Caller rotates to the real Sun direction via
+# rotate_to_sunward() and offsets to center -- this function returns body-frame
+# point clouds only, exactly as the original inline blocks did.
+#
+# Two shape modes:
+#   eccentricity is None (DEFAULT) -> reproduces the original paraboloid
+#       formula byte-for-byte: rho = width * (1 + sin(phi)) / 2. Used only as
+#       the one-time extraction regression test (Earth legacy). NOT used in the
+#       delivered render -- all bodies render via the conic path below.
+#   eccentricity = e               -> standard conic-section model used
+#       throughout the planetary bow-shock literature:
+#           r(theta) = L / (1 + e*cos(theta)),  L = standoff * (1 + e)
+#       focus at planet center, theta measured from the sunward (-X) axis.
+#       (Trotignon et al. 2006; Edberg et al. 2008; Masters et al. 2008 /
+#       Went et al. 2011; Simon Wedlund et al. 2022). Typical fitted
+#       eccentricities are marginally hyperbolic: Mars e ~ 1.03-1.05,
+#       Saturn e ~ 1.05, general e ~ 1.02-1.06. e = 1.05 is the illustrative
+#       default. (A pure conic diverges far downstream -- Verigin et al. 2003 --
+#       but is accurate from the nose through the terminator, the rendered
+#       range.)
+# ============================================================================
+
+def create_bow_shock_shape(standoff, width, n_phi=30, n_theta=30,
+                           eccentricity=None):
+    """
+    Generate body-frame point cloud for a bow shock surface of revolution.
+
+    Parameters:
+        standoff (float): subsolar nose distance from body center, in AU
+                          (the physical, sourced quantity). Conic nose sits
+                          exactly here.
+        width (float): legacy paraboloid flank scale in AU. Used ONLY on the
+                       paraboloid path (eccentricity=None). Ignored on the
+                       conic path, where flank flare is set by eccentricity.
+        n_phi, n_theta (int): grid resolution (legacy default 30x30).
+        eccentricity (float or None): None -> legacy paraboloid (regression
+                       test only); a float (typ. ~1.05) -> conic-section model
+                       (the delivered shape).
+
+    Returns:
+        tuple: (x, y, z) lists in the body frame, nose toward -X.
+    """
+    import numpy as np
+
+    bx, by, bz = [], [], []
+
+    if eccentricity is None:
+        # ---- Legacy paraboloid path: byte-for-byte the original formula ----
+        for i_phi in range(n_phi):
+            phi = (i_phi / (n_phi - 1)) * np.pi  # front half only
+            x = -standoff * np.cos(phi)
+            rho = width * (1 + np.sin(phi)) / 2
+            for i_theta in range(n_theta):
+                theta = (i_theta / (n_theta - 1)) * 2 * np.pi
+                bx.append(x)
+                by.append(rho * np.cos(theta))
+                bz.append(rho * np.sin(theta))
+        return bx, by, bz
+
+    # ---- Conic-section path: r(a) = L / (1 + e*cos a), focus at center ----
+    # 'a' is the polar angle from the sunward (-X) axis. a=0 -> nose at
+    # r=L/(1+e)=standoff (sunward). Sweep a from 0 toward the asymptote to open
+    # the flank; cap before the asymptote so the surface stays finite.
+    e = float(eccentricity)
+    L = standoff * (1.0 + e)  # so that r(0) = L/(1+e) = standoff exactly
+
+    if e >= 1.0:
+        a_asymptote = np.arccos(-1.0 / e)
+        a_max = a_asymptote * 0.92  # MODE-5 KNOB: lower to cap flank flare
+    else:
+        a_max = np.pi  # ellipse: closes, no asymptote
+
+    for i_phi in range(n_phi):
+        a = (i_phi / (n_phi - 1)) * a_max
+        r = L / (1.0 + e * np.cos(a))
+        x = -r * np.cos(a)        # nose at -standoff (a=0)
+        rho = r * np.sin(a)
+        for i_theta in range(n_theta):
+            theta = (i_theta / (n_theta - 1)) * 2 * np.pi
+            bx.append(x)
+            by.append(rho * np.cos(theta))
+            bz.append(rho * np.sin(theta))
+
+    return bx, by, bz
+
 
 def create_sphere_points(radius, n_points=50):
     """

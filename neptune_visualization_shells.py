@@ -24,7 +24,7 @@ May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 5 info
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, rotate_points, create_magnetosphere_shape)
+from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, rotate_points, create_magnetosphere_shape, create_bow_shock_shape)
 from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
 from shared_utilities import create_sun_direction_indicator
 
@@ -478,7 +478,7 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
     # Parameters for magnetosphere components (in Neptune radii)
     params = {
         # Compressed sunward side - Neptune's bow shock standoff distance
-        'sunward_distance': 34,  # Based on Voyager 2 data, ~34 Neptune radii
+        'sunward_distance': 26.5,  # Source: Ness et al. 1989, V2 -- magnetopause 26.5 R_N (34.9 was the bow-shock value, mistakenly used here). Required for shock nest.
         
         # Equatorial extension (wider than polar)
         'equatorial_radius': 40,  # Typical equatorial extension
@@ -628,6 +628,46 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
         showlegend=False
     ))
    
+    # ------------------------------------------------------------------
+    # Bow shock (conic-section model via shared builder).
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
+    # ------------------------------------------------------------------
+    bs_standoff = 34.9 * NEPTUNE_RADIUS_AU  # Source: Ness et al. 1989, Voyager 2 (single flyby, single-epoch)
+    bs_x, bs_y, bs_z = create_bow_shock_shape(
+        bs_standoff, width=bs_standoff * 1.6, eccentricity=1.05
+    )
+    bs_x, bs_y, bs_z = np.array(bs_x), np.array(bs_y), np.array(bs_z)
+    bs_x, bs_y, bs_z = rotate_to_sunward(
+        bs_x, bs_y, bs_z, center_position=center_position, sun_position=sun_position
+    )
+    bs_cx, bs_cy, bs_cz = center_position
+    bs_x = bs_x + bs_cx
+    bs_y = bs_y + bs_cy
+    bs_z = bs_z + bs_cz
+    bs_km = bs_standoff * KM_PER_AU
+    bs_text = (
+        "Neptune: Bow Shock<br><br>"
+        "Subsolar standoff ~34.9 R_N "
+        f"({bs_km:,.0f} km / {bs_standoff:.4f} AU).<br>"
+        "Source: Ness et al. 1989, Voyager 2 (single flyby, single-epoch).<br>"
+        "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."
+    )
+    traces.append(
+        go.Scatter3d(
+            x=bs_x, y=bs_y, z=bs_z,
+            mode='markers',
+            marker=dict(size=1.5, color='rgb(255, 200, 150)', opacity=0.2),
+            name='Neptune: Bow Shock',
+            legendgroup='Neptune: Bow Shock',
+            hoverinfo='skip',
+            showlegend=True,
+        )
+    )
+    traces.append(create_info_marker(
+        bs_x[0], bs_y[0], bs_z[0],
+        'rgb(255, 200, 150)', bs_text, 'Neptune: Bow Shock'
+    ))
+
     return traces
 
 def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth):

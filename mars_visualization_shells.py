@@ -29,7 +29,7 @@ May 29, 2026: Crustal Magnetic Fields info marker (magnetosphere builder)
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (MARS_RADIUS_AU, create_sphere_points, create_magnetosphere_shape)
+from planet_visualization_utilities import (MARS_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Mars Shell Creation Functions
@@ -613,7 +613,7 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
     # Parameters for Mars magnetosphere components (in Mars radii)
     params = {
         # Smaller, compressed sunward side
-        'sunward_distance': 1.5,  # Much closer to Mars than Earth's
+        'sunward_distance': 1.29,  # Source: Vignes et al. 2000, MGS -- MPB subsolar 1.29 R_M (Vignes pair with 1.64 shock)
         
         # Smaller equatorial and polar extensions
         'equatorial_radius': 2.0,
@@ -685,31 +685,13 @@ def create_mars_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0, 
     ))
 
     # 2. Create and add bow shock
-    bow_shock_x = []
-    bow_shock_y = []
-    bow_shock_z = []
-    
-    n_phi = 30
-    n_theta = 30
-    bow_shock_standoff = 1.5 * MARS_RADIUS_AU  # Closer to Mars than Earth's bow shock
-    bow_shock_width = 3.0 * MARS_RADIUS_AU
-    
-    # Create a paraboloid for the bow shock
-    for i_phi in range(n_phi):
-        phi = (i_phi / (n_phi-1)) * np.pi  # Only the front half
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            
-            # Paraboloid shape, flattened in x-direction for bow shock
-            x = -bow_shock_standoff * np.cos(phi)  # Negative for sunward direction
-            rho = bow_shock_width * (1 + np.sin(phi)) / 2  # Wider for larger phi (away from sun)
-            y = rho * np.cos(theta)
-            z = rho * np.sin(theta)
-            
-            bow_shock_x.append(x)
-            bow_shock_y.append(y)
-            bow_shock_z.append(z)
+    bow_shock_standoff = 1.64 * MARS_RADIUS_AU  # Source: Vignes et al. 2000, MGS -- subsolar bow shock 1.64 R_M (Gemini Mode-7: 1.5 was too low; Vignes pair with MPB 1.29)
+    bow_shock_width = 3.0 * MARS_RADIUS_AU  # legacy flank scale; ignored on conic path
+    # Conic-section bow shock via shared builder (planet_visualization_utilities).
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
+    bow_shock_x, bow_shock_y, bow_shock_z = create_bow_shock_shape(
+        bow_shock_standoff, width=bow_shock_width, eccentricity=1.05
+    )
     
     # Apply rotation to sunward direction, then offset to center position
     bow_shock_x = np.array(bow_shock_x)

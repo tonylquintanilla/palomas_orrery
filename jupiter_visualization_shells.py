@@ -22,7 +22,7 @@ May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (JUPITER_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
+from planet_visualization_utilities import (JUPITER_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 def create_ring_points_jupiter (inner_radius, outer_radius, n_points=100, thickness=0.01):
@@ -517,7 +517,7 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
     # Parameters for magnetosphere components (in Jupiter radii)
     params = {
         # Compressed sunward side
-        'sunward_distance': 50,  # Compressed toward the sun
+        'sunward_distance': 65,  # Source: Joy et al. 2002 -- median subsolar magnetopause ~65 R_J (Gemini Mode-7: was 50, too compressed)
         
         # Equatorial extension (wider than polar)
         'equatorial_radius': 100,
@@ -575,6 +575,46 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
         'rgb(200, 200, 255)', f"Jupiter: Magnetosphere<br><br>{mag_desc}", 'Jupiter: Magnetosphere'
     ))
     
+    # ------------------------------------------------------------------
+    # Bow shock (conic-section model via shared builder).
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
+    # ------------------------------------------------------------------
+    bs_standoff = 82 * JUPITER_RADIUS_AU  # Source: Joy et al. 2002 (mean ~84 R_J, highly variable)
+    bs_x, bs_y, bs_z = create_bow_shock_shape(
+        bs_standoff, width=bs_standoff * 1.6, eccentricity=1.05
+    )
+    bs_x, bs_y, bs_z = np.array(bs_x), np.array(bs_y), np.array(bs_z)
+    bs_x, bs_y, bs_z = rotate_to_sunward(
+        bs_x, bs_y, bs_z, center_position=center_position, sun_position=sun_position
+    )
+    bs_cx, bs_cy, bs_cz = center_position
+    bs_x = bs_x + bs_cx
+    bs_y = bs_y + bs_cy
+    bs_z = bs_z + bs_cz
+    bs_km = bs_standoff * KM_PER_AU
+    bs_text = (
+        "Jupiter: Bow Shock<br><br>"
+        "Subsolar standoff ~82 R_J "
+        f"({bs_km:,.0f} km / {bs_standoff:.4f} AU).<br>"
+        "Source: Joy et al. 2002 (mean ~84 R_J, highly variable).<br>"
+        "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."
+    )
+    traces.append(
+        go.Scatter3d(
+            x=bs_x, y=bs_y, z=bs_z,
+            mode='markers',
+            marker=dict(size=1.5, color='rgb(255, 200, 150)', opacity=0.2),
+            name='Jupiter: Bow Shock',
+            legendgroup='Jupiter: Bow Shock',
+            hoverinfo='skip',
+            showlegend=True,
+        )
+    )
+    traces.append(create_info_marker(
+        bs_x[0], bs_y[0], bs_z[0],
+        'rgb(255, 200, 150)', bs_text, 'Jupiter: Bow Shock'
+    ))
+
     return traces
 
 jupiter_io_plasma_torus_info = ("634 KB PER FRAME FOR HTML.<br><br>"

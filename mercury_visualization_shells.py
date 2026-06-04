@@ -22,7 +22,7 @@ import numpy as np
 import math
 import plotly.graph_objs as go
 from orrery_rendering import create_info_marker, rotate_to_sunward
-from planet_visualization_utilities import (MERCURY_RADIUS_AU, KM_PER_AU, create_magnetosphere_shape)
+from planet_visualization_utilities import (MERCURY_RADIUS_AU, KM_PER_AU, create_magnetosphere_shape, create_bow_shock_shape)
 
 
 # ============================================================
@@ -247,16 +247,16 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
     # Parameters for magnetosphere components (in Mercury radii)
     params = {
         # Compressed sunward side
-        'sunward_distance': 10,  # Compressed toward the sun
+        'sunward_distance': 1.45,  # Source: Winslow et al. 2013, MESSENGER -- magnetopause subsolar Rss 1.45 R_M (was 10, Earth-scale copy; Gemini Mode-7 confirmed)
         
         # Equatorial extension (wider than polar)
-        'equatorial_radius': 12,
-        'polar_radius': 10,
+        'equatorial_radius': 2.05,  # terminator radius 1.45*sqrt(2)=2.05 R_M from alpha=0.5 Shue fit (Winslow 2013; 2 independent Mode-7 reviews)
+        'polar_radius': 2.0,  # proportioned, slightly oblate vs terminator (Mode-7)
         
         # Magnetotail parameters
-        'tail_length': 100,  # Length of visible magnetotail
-        'tail_base_radius': 15,  # Radius at the base of the tail
-        'tail_end_radius': 25,  # Radius at the end of the tail
+        'tail_length': 15,  # drawn tail length, viz choice (Gemini Mode-7 endorsed)
+        'tail_base_radius': 2.7,  # Source: Winslow 2013 -- tail radius ~2.7 R_M at 3 R_M downstream
+        'tail_end_radius': 3.4,  # Gemini Mode-7: tail nearly cylindrical downstream; ~3.4 R_M at 15 R_M (was 4.0)
         
         # Radiation belts
     #    'inner_belt_distance': 1.5,  # Distance in Earth radii
@@ -331,31 +331,13 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
     ))
     
     # 2. Create and add bow shock
-    bow_shock_x = []
-    bow_shock_y = []
-    bow_shock_z = []
-    
-    n_phi = 30
-    n_theta = 30
-    bow_shock_standoff = 15 * MERCURY_RADIUS_AU
-    bow_shock_width = 25 * MERCURY_RADIUS_AU
-    
-    # Create a paraboloid for the bow shock
-    for i_phi in range(n_phi):
-        phi = (i_phi / (n_phi-1)) * np.pi  # Only the front half
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            
-            # Paraboloid shape, flattened in x-direction for bow shock
-            x = -bow_shock_standoff * np.cos(phi)  # Negative for sunward direction
-            rho = bow_shock_width * (1 + np.sin(phi)) / 2  # Wider for larger phi (away from sun)
-            y = rho * np.cos(theta)
-            z = rho * np.sin(theta)
-            
-            bow_shock_x.append(x)
-            bow_shock_y.append(y)
-            bow_shock_z.append(z)
+    bow_shock_standoff = 1.96 * MERCURY_RADIUS_AU  # Source: Winslow et al. 2013, MESSENGER (mp 1.45)
+    bow_shock_width = 25 * MERCURY_RADIUS_AU  # legacy flank scale; ignored on conic path
+    # Conic-section bow shock via shared builder (planet_visualization_utilities).
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
+    bow_shock_x, bow_shock_y, bow_shock_z = create_bow_shock_shape(
+        bow_shock_standoff, width=bow_shock_width, eccentricity=1.05
+    )
     
     # Rotate to actual sunward direction, then offset to center position
     bow_shock_x = np.array(bow_shock_x)

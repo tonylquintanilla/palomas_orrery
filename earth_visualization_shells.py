@@ -41,7 +41,7 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape)
+from planet_visualization_utilities import (EARTH_RADIUS_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Earth Shell Creation Functions
@@ -724,31 +724,13 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     ))
     
     # 2. Create and add bow shock
-    bow_shock_x = []
-    bow_shock_y = []
-    bow_shock_z = []
-    
-    n_phi = 30
-    n_theta = 30
-    bow_shock_standoff = 15 * EARTH_RADIUS_AU
-    bow_shock_width = 25 * EARTH_RADIUS_AU
-    
-    # Create a paraboloid for the bow shock
-    for i_phi in range(n_phi):
-        phi = (i_phi / (n_phi-1)) * np.pi  # Only the front half
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            
-            # Paraboloid shape, flattened in x-direction for bow shock
-            x = -bow_shock_standoff * np.cos(phi)  # Negative for sunward direction
-            rho = bow_shock_width * (1 + np.sin(phi)) / 2  # Wider for larger phi (away from sun)
-            y = rho * np.cos(theta)
-            z = rho * np.sin(theta)
-            
-            bow_shock_x.append(x)
-            bow_shock_y.append(y)
-            bow_shock_z.append(z)
+    bow_shock_standoff = 15 * EARTH_RADIUS_AU  # Source: textbook ~15 R_E; measured nominal ~11-14 R_E (Nature Comms 2016)
+    bow_shock_width = 25 * EARTH_RADIUS_AU  # legacy flank scale; ignored on conic path
+    # Conic-section bow shock via shared builder (planet_visualization_utilities).
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
+    bow_shock_x, bow_shock_y, bow_shock_z = create_bow_shock_shape(
+        bow_shock_standoff, width=bow_shock_width, eccentricity=1.05
+    )
     
     # Apply rotation to sunward direction, then offset to center position
     bow_shock_x = np.array(bow_shock_x)
@@ -766,6 +748,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed<br>"
                 "by Earth's magnetic field, typically located about 15 Earth radii upstream<br>"
                 "from Earth on the Sun-facing side.<br>"
+                "Measured nominal standoff is ~11-14 R_E; the 15 R_E shown is the textbook value (Nature Comms 2016).<br>"
                 "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."]
     
     bow_shock_customdata = ['Earth: Bow Shock']

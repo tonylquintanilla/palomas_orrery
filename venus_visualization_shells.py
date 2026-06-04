@@ -27,7 +27,7 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
 import numpy as np
 import math
 import plotly.graph_objs as go
-from planet_visualization_utilities import (VENUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape)
+from planet_visualization_utilities import (VENUS_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
 from orrery_rendering import rotate_to_sunward, create_info_marker
 
 # Venus Shell Creation Functions
@@ -518,7 +518,7 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Parameters for magnetosphere components (in Venus radii)
     params = {
         # Compressed sunward side
-        'sunward_distance': 1.5,  # Compressed toward the sun
+        'sunward_distance': 1.05,  # Source: Zhang et al. 2007, Venus Express -- induced magnetopause ~300 km alt = 1.05 R_V (was 1.5; sits inside the 1.40 bow shock)
         
         # Equatorial extension (wider than polar)
         'equatorial_radius': 1.0,
@@ -632,31 +632,13 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     ))
     
     # 2. Create and add bow shock
-    bow_shock_x = []
-    bow_shock_y = []
-    bow_shock_z = []
-    
-    n_phi = 30
-    n_theta = 30
-    bow_shock_standoff = 15 * VENUS_RADIUS_AU
-    bow_shock_width = 25 * VENUS_RADIUS_AU
-    
-    # Create a paraboloid for the bow shock
-    for i_phi in range(n_phi):
-        phi = (i_phi / (n_phi-1)) * np.pi  # Only the front half
-        
-        for i_theta in range(n_theta):
-            theta = (i_theta / (n_theta-1)) * 2 * np.pi
-            
-            # Paraboloid shape, flattened in x-direction for bow shock
-            x = -bow_shock_standoff * np.cos(phi)  # Negative for sunward direction
-            rho = bow_shock_width * (1 + np.sin(phi)) / 2  # Wider for larger phi (away from sun)
-            y = rho * np.cos(theta)
-            z = rho * np.sin(theta)
-            
-            bow_shock_x.append(x)
-            bow_shock_y.append(y)
-            bow_shock_z.append(z)
+    bow_shock_standoff = 1.4 * VENUS_RADIUS_AU  # Source: Shan et al. 2015, Venus Express (induced; range 1.36-1.46)
+    bow_shock_width = 25 * VENUS_RADIUS_AU  # legacy flank scale; ignored on conic path
+    # Conic-section bow shock via shared builder (planet_visualization_utilities).
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8.
+    bow_shock_x, bow_shock_y, bow_shock_z = create_bow_shock_shape(
+        bow_shock_standoff, width=bow_shock_width, eccentricity=1.05
+    )
     
     # Apply rotation to sunward direction, then offset to center position
     bow_shock_x = np.array(bow_shock_x)

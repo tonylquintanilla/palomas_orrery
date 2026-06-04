@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.25 | May 31, 2026
+Tony Quintanilla, PE | Claude | v3.26 | June 2, 2026
 
 PREAMBLE: WHY THIS PROTOCOL EXISTS
 
@@ -34,6 +34,7 @@ Session Start
 
 Assess - New code or existing? Learn or get done?
 Check context - Uploads? Past chats? (Chat compression means organic continuation)
+Pull ground truth - Clone/fetch the GitHub repo at HEAD; record the base SHA as the session's base. Build on the repo (or fresh uploads); /mnt/project and project knowledge are orientation only. (See Session-Start Repo Pull, Part 3.)
 Propose approach - "This looks like targeted/agentic because..."
 Confirm - Wait for go-ahead or redirect
 Execute - If scope changes, ask before expanding
@@ -132,20 +133,23 @@ Domain unfamiliar       Suggest Mode 7 if complex
 
 Context Priority
 Trust in this order (highest first):
-1. Uploaded files
-2. Project files (/mnt/project/)
-3. Project knowledge
-4. This protocol
-5. Conversation history
-6. External AI input (Gemini/ChatGPT via Tony)
-7. Claude's memory
-8. Claude's training
+1. Uploaded files (current; mid-session deltas live here)
+2. GitHub repo at HEAD (session-start ground truth, SHA-pinned)
+3. Project files (/mnt/project/) -- orientation only; verify against repo
+4. Project knowledge -- search/orientation only; can be stale AND haunted
+5. This protocol
+6. Conversation history
+7. External AI input (Gemini/ChatGPT via Tony)
+8. Claude's memory
+9. Claude's training
 
 Project file staleness: /mnt/project/ is a read-only snapshot from session
 start. It does NOT update mid-session or between sessions. When both an
 uploaded file and a project file exist for the same filename, ALWAYS use
 the upload. A bad snippet is a localized error. A complete file from a
 stale base is destructive -- it silently overwrites working code.
+Neither /mnt/project nor project knowledge gates a build -- the GitHub repo
+at HEAD or a fresh upload does (see Session-Start Repo Pull, Part 3).
 Conflicts? Ask.
 
 
@@ -301,6 +305,39 @@ is a hex literal ('#F0F0F0'), platform detection, or ttk styling.
 Other patterns worth flagging: other Tk system color names; hardcoded path
 separators (use pathlib / os.path.join); Unicode in print() (cp1252
 consoles); open() without explicit encoding='utf-8'; OS-specific shell-outs.
+
+Session-Start Repo Pull and Snapshot Integrity [CRITICAL]
+Ground truth for "what is current" is the GitHub repo at HEAD, because Tony
+pushes before every session (sandbox -> test -> local repo -> provenance/atlas
+-> project knowledge -> push). Repo: https://github.com/tonylquintanilla/palomas_orrery
+(branch main). At session start, for any build:
+1. Pull the build-target files (or shallow-clone the repo) from raw GitHub at
+   HEAD. Record the HEAD SHA -- the unforgeable token for the session's base.
+   (git ls-remote --symref <repo> HEAD gives branch + SHA, no auth;
+   raw.githubusercontent.com/<user>/<repo>/<branch>/<file> fetches a file.)
+2. Build on the repo pull or a fresh upload -- NEVER on /mnt/project or project
+   knowledge. Those two are orientation and search only.
+3. Carry the SHA in the handoff ("built on <SHA>"). Next session, after Tony
+   syncs the deltas and pushes, HEAD advances to include them; pull the new
+   HEAD. If HEAD is not what the handoff expects, reconcile before building --
+   the SHA comparison is the anchor-drift check reduced to two hashes.
+Mid-session edited files are HEAD-plus-deltas ("what we have now"), ahead of the
+repo until Tony's post-session sync; uploads cover them, as cross-check not base.
+
+Why the two project stores cannot be trusted for "current" (both observed
+June 2, 2026): the /mnt/project snapshot served a STALE earth_visualization_shells.py
+(old content, right name) -- a duplicate upload shadowing the current one;
+project_knowledge_search served a persistent GHOST (palomas_orrery_before_none.py,
+dated 10/24/25, absent from filesystem and from the GitHub repo, surviving a full
+project-knowledge replacement -- not index lag). Opposite failure modes:
+stale-but-present vs deleted-but-served. Claude cannot ENUMERATE project-knowledge
+documents (no listing tool), so same-name duplicates and ghosts are detectable only
+by DISCREPANCY -- snapshot vs repo, or snapshot vs handoff anchors -- not by
+inventory. A name appearing only in project_knowledge_search, absent from repo and
+filesystem, is a probable purged ghost: note it, do not chase it, do not treat it as
+current; persistent ghosts are a report-to-Anthropic item, not a Tony-deletes item.
+The durable fix is upstream: the repo is the build base, so store fragility stops
+affecting correctness.
 
 Uploads Before Project Files [CRITICAL]
 /mnt/project/ is a snapshot from session start. Does not update mid-session.
@@ -596,6 +633,8 @@ Quotables (selected)
 "The in-context subset is invisible to Tony, and not authoritative -- enumerate the whole upload." -- May 2026
 "A central factory existing does not mean every call site uses it. Grep, don't trust the narrative." -- May 2026
 "Floating items get lost; capture on first mention." -- May 2026
+"Route around the store you don't control to the one you do." -- June 2026
+"The snapshot can be stale; the index can be haunted; the repo at HEAD is neither." -- June 2026
 
 Lessons Archive
 
@@ -624,6 +663,10 @@ Technical:
 - Sphere shells render via SHELL_CONFIGS -> build_sphere_shell -> create_info_marker (factory). Inline markers in *_visualization_shells.py are dead code for sphere shells; custom geometry (magnetospheres, rings, belts) routes via CUSTOM_SHELLS and uses the live inline path
 - Plotly Scatter3d ignores marker border WIDTH (plotly.js #4118) -- the contrast lever is FILL color, not border. 3D symbol palette is only 8: circle, circle-open, cross, diamond, diamond-open, square, square-open, x
 - A swallowed exception in try/except hides render bugs; an undefined variable can drop a marker silently for weeks. Check the console for the caught-error print
+- Two project stores can disagree and neither is authoritative for "current": the /mnt/project snapshot can serve a STALE file (old content, right name, from a shadowing duplicate upload); project_knowledge_search can serve a persistent GHOST (deleted/replaced content surviving a full project-knowledge swap -- not index lag). Ground truth is the GitHub repo at HEAD; pull and SHA-pin it
+- GitHub is reachable in-environment: git ls-remote gives branch+HEAD SHA with no auth; raw.githubusercontent.com fetches files byte-exact. The HEAD SHA is the unforgeable current-state token to carry in the handoff
+- Duplicate/ghost detection is by DISCREPANCY (snapshot vs repo, snapshot vs handoff anchors), not enumeration -- there is no tool to list project-knowledge documents
+
 
 Process:
 - Bugs become lessons when documented. Stories make science memorable
@@ -655,6 +698,9 @@ Process:
 - Testing iterates in dependency order: regression gate, then features, then animation. Some bugs are only findable in later rounds (the Sun-checkbox-off bug needed Round 3). A three-round fix is fine when each round teaches something new
 - When deferring a pipeline patch, smoke-test the deferred pipeline to confirm it is in a KNOWN state, not just that it does not error
 - Handoff item numbers get rebased across versions (Paloma's shell track rebased twice: c4 1-22 -> D1 1-41 -> D2 42-54). A number means different things in different handoffs; items leak at the rebase. One authoritative running ledger beats per-handoff renumbering
+- Tony's session loop makes the repo trustworthy: sandbox -> test -> local repo -> provenance/atlas update -> project knowledge -> push, all before a new session. Because the push precedes the session, repo HEAD == session-start ground truth by construction
+- Route around a fragile store you do not control to one you do: project knowledge proved it can be stale and haunted; the repo is Tony's, so make it the build base and the store's fragility stops mattering for correctness
+
 
 Philosophical:
 - The project makes Tony more informed -- that's the real output
@@ -697,4 +743,6 @@ v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITI
 v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITICAL] -- the in-context file subset is invisible to Tony and not authoritative; ls the uploads dir and read the whole set first. Added lessons missed by the first v3.24 pass (which itself was built on 9 of 19 uploaded handoffs -- the exact failure the new rule names): floating-items-capture, verify-propagation-with-grep, central-factory-migration-intent, testing-iterates-in-dependency-order, smoke-test-deferred-pipelines, handoff-numbering-rebase drift. The first v3.24 and this re-issue carry the same version number; this is the complete one.
 v3.25 (May 31, 2026): Provenance Audit named as a Technical Reference skill (was project infrastructure only, never in the protocol) -- scanner tooling, Tier-1=0 goal, lookback-window + numeric-token mechanics, exceptions-file over-report gotcha. Fetched vs Recalled extended: three outcomes not two (cite / remove-and-note-the-gap / never cite-to-clear); a citation is a provenance claim that must be true [CRITICAL]. Emerged from provenance Phase 1: Tier-1 driven 4->0, partly by honest claim-strips (Artemis II notes) rather than sourcing, after nearly papering a # Source: over recalled pre-flight data. Tony's professional default -- remove over cite-incorrectly -- named as the rule.
 
-700 lines. Functional for Claude, readable for human, signal preserved.
+v3.26 (June 2, 2026): Session-Start Repo Pull and Snapshot Integrity [CRITICAL] -- the GitHub repo at HEAD is session-start ground truth (Tony pushes before every session); pull and SHA-pin the base, build on repo or fresh upload, demote /mnt/project and project knowledge to orientation/search only. Context Priority re-ranked: repo at tier 2, project knowledge flagged "stale AND haunted." Emerged from the recurring stale-Earth thread: root cause was a duplicate upload shadowing the current file (the /mnt/project snapshot served the older twin), compounded by a true ghost (palomas_orrery_before_none.py, Oct 2025, served by project_knowledge_search through a full project-knowledge replacement). Repo-pull validated end to end: repo earth == this session's authoritative upload byte-for-byte; all 9 bow-shock build bases confirmed identical to repo HEAD a57aeb9.
+
+748 lines. Functional for Claude, readable for human, signal preserved.
