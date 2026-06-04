@@ -26,6 +26,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (NEPTUNE_RADIUS_AU, KM_PER_AU, create_sphere_points, rotate_points, create_magnetosphere_shape, create_bow_shock_shape)
 from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
+from idealized_orbits import orient_to_planet_pole  # N15: pole-vector ring orientation
 from shared_utilities import create_sun_direction_indicator
 
 # Neptune Shell Creation Functions
@@ -1612,34 +1613,11 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
         y = np.array(y)
         z = np.array(z)
         
-        # TRANSFORMATION APPROACH:
-        # Neptune's pole is oriented at RA=299.36 deg, DEC=43.46 deg
-        # We'll use a transformation sequence to correctly orient the rings
-        
-        # Step 1: Rotate around z-axis by the Right Ascension
-    #    x_rot1, y_rot1, z_rot1 = rotate_points(x, y, z, pole_ra, 'z')
-        
-        # Step 2: Rotate around x-axis by (90 deg - Declination)
-        # This aligns the z-axis with Neptune's pole
-    #    x_rot2, y_rot2, z_rot2 = rotate_points(x_rot1, y_rot1, z_rot1, np.radians(90) - pole_dec, 'x')
-        
-        # Step 3: Apply final adjustment based on Neptune's specific orientation
-        # This 25 deg rotation adjusts for the reference frame of Neptune's ring observations
-    #    x_final, y_final, z_final = rotate_points(x_rot2, y_rot2, z_rot2, np.radians(25), 'z')
-
-        # SIMPLIFIED TRANSFORMATION:
-        # Instead of using RA/Dec-based transformations, we'll use a direct alignment
-        # to match what we see in the image with Despina and Galatea's orbits
-        
-        # Transform ring coordinates to align with Neptune's equatorial plane
-        # These angles were empirically determined to match the orbital plane of Despina and Galatea
-        # First rotation: 32 deg around x-axis provides the primary tilt 
-        tilt_angle = np.radians(32)
-        x_rot1, y_rot1, z_rot1 = rotate_points(x, y, z, tilt_angle, 'x')
-
-        # Second rotation: 34 deg around z-axis aligns with the final orientation
-        final_orientation = np.radians(34)
-        x_final, y_final, z_final = rotate_points(x_rot1, y_rot1, z_rot1, final_orientation, 'z')
+        # Orient into the ecliptic via the IAU pole vector (N15 migration June 2026).
+        # Retires the empirical 32 deg X + 34 deg Z fudge (measured 8.57 deg off the
+        # Despina/Galatea plane: tilt 32 vs true ~28, plus wrong node). Pole transform
+        # matches the moons' plane by construction, as validated for Uranus (0.0 deg).
+        x_final, y_final, z_final = orient_to_planet_pole(x, y, z, 'Neptune')
         
         # Apply center position offset
         x_final = x_final + center_x

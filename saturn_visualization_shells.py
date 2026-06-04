@@ -26,6 +26,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (SATURN_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, rotate_points, create_bow_shock_shape)
 from orrery_rendering import create_ring_points, rotate_to_sunward, create_info_marker
+from idealized_orbits import orient_to_planet_pole  # N15: pole-vector ring orientation
 
 # Saturn Shell Creation Functions
 
@@ -713,8 +714,8 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
     # Unpack center position
     center_x, center_y, center_z = center_position
 
-    # Saturn's axial tilt in radians (-26.73 degrees)
-    saturn_tilt = np.radians(-26.73)
+    # (Torus tilt is now pole-derived via orient_to_planet_pole; the hardcoded
+    #  -26.73 deg X-rotation was retired in the N15 migration, June 2026.)
     
     # Create the Io plasma torus points
     enceladus_torus_x = []
@@ -749,9 +750,10 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
     enceladus_torus_y = np.array(enceladus_torus_y) 
     enceladus_torus_z = np.array(enceladus_torus_z) 
 
-    # Apply Saturn's axial tilt (rotate around x-axis)
-    enceladus_torus_x_tilted, enceladus_torus_y_tilted, enceladus_torus_z_tilted = rotate_points(
-        enceladus_torus_x, enceladus_torus_y, enceladus_torus_z, saturn_tilt, 'x'
+    # Orient into the ecliptic via the IAU pole vector (N15 migration June 2026;
+    # replaces the hardcoded -26.73 deg X-tilt -- same equatorial plane as the rings).
+    enceladus_torus_x_tilted, enceladus_torus_y_tilted, enceladus_torus_z_tilted = orient_to_planet_pole(
+        enceladus_torus_x, enceladus_torus_y, enceladus_torus_z, 'Saturn'
     )
 
     # Apply center position offset
@@ -851,8 +853,8 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
     # Unpack center position
     center_x, center_y, center_z = center_position
 
-    # Saturn's axial tilt in radians (-26.73 degrees)
-    saturn_tilt = np.radians(-26.73)
+    # (Belt tilt is now pole-derived via orient_to_planet_pole; the hardcoded
+    #  -26.73 deg X-rotation was retired in the N15 migration, June 2026.)
     
     traces = []
     
@@ -885,11 +887,12 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
                 belt_y.append(y)
                 belt_z.append(z)
         
-        # Apply Saturn's axial tilt (rotate around x-axis)
+        # Orient into the ecliptic via the IAU pole vector (N15 migration June 2026;
+        # replaces the hardcoded -26.73 deg X-tilt -- same equatorial plane as the rings).
         belt_x = np.array(belt_x)
         belt_y = np.array(belt_y)
         belt_z = np.array(belt_z)
-        belt_x_tilted, belt_y_tilted, belt_z_tilted = rotate_points(belt_x, belt_y, belt_z, saturn_tilt, 'x')
+        belt_x_tilted, belt_y_tilted, belt_z_tilted = orient_to_planet_pole(belt_x, belt_y, belt_z, 'Saturn')
         
         # Apply center position offset
         belt_x_final = belt_x_tilted + center_x
@@ -1147,8 +1150,8 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
     # Unpack center position
     center_x, center_y, center_z = center_position
     
-    # Saturn's axial tilt in radians (-26.73)
-    saturn_tilt = np.radians(-26.73)         
+    # (Ring tilt is now pole-derived via orient_to_planet_pole; the hardcoded
+    #  -26.73 deg X-rotation was retired in the N15 migration, June 2026.)
 
     # Create traces for each ring
     for ring_name, ring_info in ring_params.items():
@@ -1165,9 +1168,9 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
         # Create ring points
         x, y, z = create_ring_points(inner_radius_au, outer_radius_au, n_points, thickness_au)
         
-        # Apply Saturn's axial tilt
-        # Rotation around the y-axis by saturn_tilt angle
-        x_tilted, y_tilted, z_tilted = rotate_points(x, y, z, saturn_tilt, 'x')
+        # Orient into the ecliptic via the IAU pole vector (N15 migration June 2026;
+        # replaces the hardcoded -26.73 deg X-tilt -- right magnitude, no node, ~5 deg off).
+        x_tilted, y_tilted, z_tilted = orient_to_planet_pole(x, y, z, 'Saturn')
 
         # Apply center position offset
     #    x = np.array(x) + center_x

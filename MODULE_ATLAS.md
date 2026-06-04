@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 03, 2026
-Modules: 106 | Functions: 862 | Lines: 85,985
+Generated: June 04, 2026
+Modules: 107 | Functions: 867 | Lines: 86,030
 
 ---
 
@@ -34,7 +34,7 @@ and explains in context.
 | scenario | 3 | Specific Earth system scenarios |
 | utility | 5 | Shared helper functions |
 | devtool | 12 | Developer tools (dependency tracing, atlas) |
-| other | 4 | Uncategorized |
+| other | 5 | Uncategorized |
 
 ---
 
@@ -771,26 +771,26 @@ and explains in context.
 
 ### jupiter_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 879
+**Role:** rendering/shells | **Lines:** 886
 
 > jupiter_visualization_shells.py - Jupiter interior, ring, and magnetosphere shell traces.
 
-**Depends on:** orrery_rendering, planet_visualization_utilities
+**Depends on:** idealized_orbits, orrery_rendering, planet_visualization_utilities
 **Consumed by:** planet_visualization
 
 **Public functions:**
 
-- `create_ring_points_jupiter(inner_radius, outer_radius, n_points, thickness)` (line 28) -- Create points for a ring structure (for planets like Saturn).
-- `create_jupiter_core_shell(center_position)` (line 80) -- Creates Jupiter's core shell.
-- `create_jupiter_metallic_hydrogen_shell(center_position)` (line 150) -- Creates Jupiter's metallic hydrogen shell.
-- `create_jupiter_molecular_hydrogen_shell(center_position)` (line 221) -- Creates Jupiter's molecular hydrogen shell.
-- `create_jupiter_cloud_layer_shell(center_position)` (line 295) -- Creates Jupiter's cloud layer shell.
-- `create_jupiter_upper_atmosphere_shell(center_position)` (line 452) -- Creates Jupiter's upper atmosphere shell.
-- `create_jupiter_magnetosphere(center_position, sun_position)` (line 515) -- Creates Jupiter's main magnetosphere structure.
-- `create_jupiter_io_plasma_torus(center_position)` (line 623) -- Creates Jupiter's Io plasma torus.
-- `create_jupiter_radiation_belts(center_position)` (line 703) -- Creates Jupiter's radiation belts.
-- `create_jupiter_hill_sphere_shell(center_position)` (line 793) -- Creates Jupiter's Hill sphere shell.
-- `create_jupiter_ring_system(center_position)` (line 881) -- Creates a visualization of Jupiter's ring system.
+- `create_ring_points_jupiter(inner_radius, outer_radius, n_points, thickness)` (line 29) -- Create points for a ring structure (for planets like Saturn).
+- `create_jupiter_core_shell(center_position)` (line 81) -- Creates Jupiter's core shell.
+- `create_jupiter_metallic_hydrogen_shell(center_position)` (line 151) -- Creates Jupiter's metallic hydrogen shell.
+- `create_jupiter_molecular_hydrogen_shell(center_position)` (line 222) -- Creates Jupiter's molecular hydrogen shell.
+- `create_jupiter_cloud_layer_shell(center_position)` (line 296) -- Creates Jupiter's cloud layer shell.
+- `create_jupiter_upper_atmosphere_shell(center_position)` (line 453) -- Creates Jupiter's upper atmosphere shell.
+- `create_jupiter_magnetosphere(center_position, sun_position)` (line 516) -- Creates Jupiter's main magnetosphere structure.
+- `create_jupiter_io_plasma_torus(center_position)` (line 624) -- Creates Jupiter's Io plasma torus.
+- `create_jupiter_radiation_belts(center_position)` (line 704) -- Creates Jupiter's radiation belts.
+- `create_jupiter_hill_sphere_shell(center_position)` (line 794) -- Creates Jupiter's Hill sphere shell.
+- `create_jupiter_ring_system(center_position)` (line 882) -- Creates a visualization of Jupiter's ring system.
 
 ---
 
@@ -818,7 +818,7 @@ and explains in context.
 
 ### mercury_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 336
+**Role:** rendering/shells | **Lines:** 343
 
 > mercury_visualization_shells.py - Mercury interior, exosphere, and unique feature traces.
 
@@ -828,7 +828,7 @@ and explains in context.
 **Public functions:**
 
 - `create_mercury_sodium_tail(center_position, sun_position)` (line 92) -- Creates Mercury's sodium tail visualization extending away from the Sun.
-- `create_mercury_magnetosphere_shell(center_position, sun_position)` (line 232) -- Creates Mercury's magnetosphere.
+- `create_mercury_magnetosphere_shell(center_position, sun_position)` (line 239) -- Creates Mercury's magnetosphere.
 
 ---
 
@@ -854,25 +854,25 @@ and explains in context.
 
 ### neptune_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,563
+**Role:** rendering/shells | **Lines:** 1,547
 
 > neptune_visualization_shells.py - Neptune interior, ring, and magnetosphere shell traces.
 
-**Depends on:** orrery_rendering, planet_visualization_utilities, shared_utilities
+**Depends on:** idealized_orbits, orrery_rendering, planet_visualization_utilities, shared_utilities
 **Consumed by:** planet_visualization, shell_configs
 
 **Public functions:**
 
-- `create_neptune_core_shell(center_position)` (line 42) -- Creates Neptune's core shell.
-- `create_neptune_mantle_shell(center_position)` (line 117) -- Creates Neptune's mantle shell.
-- `create_neptune_cloud_layer_shell(center_position)` (line 206) -- Creates neptune's cloud layer shell.
-- `create_neptune_upper_atmosphere_shell(center_position)` (line 371) -- Creates Neptune's upper atmosphere shell.
-- `create_neptune_magnetosphere(center_position, sun_position)` (line 468) -- Creates Neptune's main magnetosphere structure with proper tilt and offset.
-- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 673) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
-- `create_neptune_radiation_belts(center_position)` (line 817) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
-- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 1040) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
-- `create_neptune_ring_system(center_position)` (line 1182) -- Creates a visualization of Neptune's ring system with proper alignment.
-- `create_neptune_hill_sphere_shell(center_position)` (line 1702) -- Creates neptune's Hill sphere shell.
+- `create_neptune_core_shell(center_position)` (line 43) -- Creates Neptune's core shell.
+- `create_neptune_mantle_shell(center_position)` (line 118) -- Creates Neptune's mantle shell.
+- `create_neptune_cloud_layer_shell(center_position)` (line 207) -- Creates neptune's cloud layer shell.
+- `create_neptune_upper_atmosphere_shell(center_position)` (line 372) -- Creates Neptune's upper atmosphere shell.
+- `create_neptune_magnetosphere(center_position, sun_position)` (line 469) -- Creates Neptune's main magnetosphere structure with proper tilt and offset.
+- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 674) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
+- `create_neptune_radiation_belts(center_position)` (line 818) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
+- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 1041) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
+- `create_neptune_ring_system(center_position)` (line 1183) -- Creates a visualization of Neptune's ring system with proper alignment.
+- `create_neptune_hill_sphere_shell(center_position)` (line 1680) -- Creates neptune's Hill sphere shell.
 
 ---
 
@@ -914,25 +914,25 @@ and explains in context.
 
 ### saturn_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,077
+**Role:** rendering/shells | **Lines:** 1,080
 
 > saturn_visualization_shells.py - Saturn interior, ring, and magnetosphere shell traces.
 
-**Depends on:** orrery_rendering, planet_visualization_utilities
+**Depends on:** idealized_orbits, orrery_rendering, planet_visualization_utilities
 **Consumed by:** planet_visualization, shell_configs
 
 **Public functions:**
 
-- `create_saturn_core_shell(center_position)` (line 41) -- Creates saturn's core shell.
-- `create_saturn_metallic_hydrogen_shell(center_position)` (line 127) -- Creates Saturn's liquid metallic hydrogen shell.
-- `create_saturn_molecular_hydrogen_shell(center_position)` (line 204) -- Creates Saturn's molecular hydrogen shell.
-- `create_saturn_cloud_layer_shell(center_position)` (line 284) -- Creates Saturn's cloud layer shell.
-- `create_saturn_upper_atmosphere_shell(center_position)` (line 488) -- Creates Saturn's upper atmosphere shell.
-- `create_saturn_magnetosphere(center_position, sun_position)` (line 600) -- Creates Saturn's main magnetosphere structure.
-- `create_saturn_enceladus_plasma_torus(center_position)` (line 706) -- Creates Saturn's Enceladus plasma torus.
-- `create_saturn_radiation_belts(center_position)` (line 810) -- Creates Saturn's radiation belts.
-- `create_saturn_hill_sphere_shell(center_position)` (line 935) -- Creates Saturn's Hill sphere shell.
-- `create_saturn_ring_system(center_position)` (line 1023) -- Creates a visualization of Saturn's ring system.
+- `create_saturn_core_shell(center_position)` (line 42) -- Creates saturn's core shell.
+- `create_saturn_metallic_hydrogen_shell(center_position)` (line 128) -- Creates Saturn's liquid metallic hydrogen shell.
+- `create_saturn_molecular_hydrogen_shell(center_position)` (line 205) -- Creates Saturn's molecular hydrogen shell.
+- `create_saturn_cloud_layer_shell(center_position)` (line 285) -- Creates Saturn's cloud layer shell.
+- `create_saturn_upper_atmosphere_shell(center_position)` (line 489) -- Creates Saturn's upper atmosphere shell.
+- `create_saturn_magnetosphere(center_position, sun_position)` (line 601) -- Creates Saturn's main magnetosphere structure.
+- `create_saturn_enceladus_plasma_torus(center_position)` (line 707) -- Creates Saturn's Enceladus plasma torus.
+- `create_saturn_radiation_belts(center_position)` (line 812) -- Creates Saturn's radiation belts.
+- `create_saturn_hill_sphere_shell(center_position)` (line 938) -- Creates Saturn's Hill sphere shell.
+- `create_saturn_ring_system(center_position)` (line 1026) -- Creates a visualization of Saturn's ring system.
 
 ---
 
@@ -992,7 +992,7 @@ and explains in context.
 
 ### venus_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 658
+**Role:** rendering/shells | **Lines:** 614
 
 > venus_visualization_shells.py - Venus interior and atmosphere shell traces.
 
@@ -1007,7 +1007,7 @@ and explains in context.
 - `create_venus_atmosphere_shell(center_position)` (line 333) -- Creates Venus's lower atmosphere shell.
 - `create_venus_upper_atmosphere_shell(center_position)` (line 406) -- Creates Venus's upper atmosphere shell.
 - `create_venus_magnetosphere_shell(center_position, sun_position)` (line 513) -- Creates Venus's magnetosphere.
-- `create_venus_hill_sphere_shell(center_position)` (line 700) -- Creates Venus's Hill sphere.
+- `create_venus_hill_sphere_shell(center_position)` (line 656) -- Creates Venus's Hill sphere.
 
 ---
 
@@ -1273,12 +1273,12 @@ and explains in context.
 
 ### idealized_orbits.py
 
-**Role:** computation | **Lines:** 6,605
+**Role:** computation | **Lines:** 6,600
 
 > idealized_orbits.py - Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia...
 
 **Depends on:** apsidal_markers, constants_new, orbital_elements, osculating_cache_manager
-**Consumed by:** create_ephemeris_database, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, uranus_visualization_shells, visualization_utils
+**Consumed by:** create_ephemeris_database, jupiter_visualization_shells, neptune_visualization_shells, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, saturn_visualization_shells, smoke_ring_planes, uranus_visualization_shells, visualization_utils
 
 **Public functions:**
 
@@ -1318,13 +1318,13 @@ and explains in context.
 - `add_earth_moon_barycenter_marker(fig, date, moon_position)` (line 4635) -- Add the Earth-Moon barycenter marker to Earth-centered view.
 - `generate_hyperbolic_orbit_points(a, e, i, omega, Omega, rotate_points, max_distance)` (line 4706) -- Generate points for a hyperbolic orbit trajectory.
 - `plot_idealized_orbits(fig, objects_to_plot, center_id, objects, planetary_params, parent_planets, color_map, date, days_to_plot, current_positions, fetch_position, show_apsidal_markers, parent_window)` (line 4803) -- Plot Keplerian orbits for planets, dwarf planets, asteroids, KBOs, and moons.
-- `test_triton_rotations(satellite_name, planetary_params, color, fig)` (line 6143) -- Test multiple rotation combinations for Triton's orbit
-- `test_pluto_moon_rotations(satellite_name, planetary_params, color, fig)` (line 6296) -- Fine-tuned testing of XYZ rotation combinations for Pluto's moons.
-- `very_fine_pluto_rotations(satellite_name, planetary_params, color, fig, x_range, y_range, z_range, step)` (line 6544) -- Extremely fine-grained testing of XYZ rotation combinations for Pluto's moons.
-- `pluto_system_final_transform(satellite_name, planetary_params, color, fig, transform)` (line 6689) -- Apply a specific optimal transformation to Pluto's moons' orbits.
-- `calculate_phoebe_correction_from_normals()` (line 6813) -- Calculate the optimal rotation to align Keplerian orbit with actual orbit
-- `plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_map, date, show_apsidal_markers, parent_window, approach)` (line 6849) -- Plot a geocentric (or planet-centric) osculating hyperbolic orbit for a
-- `plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map, date, show_apsidal_markers, parent_window)` (line 7081) -- Plot Sun-centered osculating orbit arc at perihelion epoch for comets.
+- `test_triton_rotations(satellite_name, planetary_params, color, fig)` (line 6138) -- Test multiple rotation combinations for Triton's orbit
+- `test_pluto_moon_rotations(satellite_name, planetary_params, color, fig)` (line 6291) -- Fine-tuned testing of XYZ rotation combinations for Pluto's moons.
+- `very_fine_pluto_rotations(satellite_name, planetary_params, color, fig, x_range, y_range, z_range, step)` (line 6539) -- Extremely fine-grained testing of XYZ rotation combinations for Pluto's moons.
+- `pluto_system_final_transform(satellite_name, planetary_params, color, fig, transform)` (line 6684) -- Apply a specific optimal transformation to Pluto's moons' orbits.
+- `calculate_phoebe_correction_from_normals()` (line 6808) -- Calculate the optimal rotation to align Keplerian orbit with actual orbit
+- `plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_map, date, show_apsidal_markers, parent_window, approach)` (line 6844) -- Plot a geocentric (or planet-centric) osculating hyperbolic orbit for a
+- `plot_perihelion_osculating_orbit(fig, obj_name, obj_info, color_map, date, show_apsidal_markers, parent_window)` (line 7076) -- Plot Sun-centered osculating orbit arc at perihelion epoch for comets.
 
 ---
 
@@ -2366,12 +2366,12 @@ and explains in context.
 
 ### shell_configs.py
 
-**Role:** other | **Lines:** 2,535
+**Role:** other | **Lines:** 2,503
 
 > shell_configs.py - Shell configuration data for all celestial bodies.
 
 **Depends on:** neptune_visualization_shells, planet_visualization_utilities, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells
-**Consumed by:** planet_visualization, smoke_bow_shock
+**Consumed by:** planet_visualization, smoke_bow_shock, smoke_ring_planes
 
 ---
 
@@ -2388,6 +2388,25 @@ and explains in context.
 
 - `audit_loaded_files()` (line 37)
 - `main()` (line 47)
+
+---
+
+### smoke_ring_planes.py
+
+**Role:** other | **Lines:** 125
+
+> smoke_ring_planes.py - N15 ring-plane migration smoke test (live dispatch).
+
+**Depends on:** idealized_orbits, shell_configs
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `resolve_builder(builder_string)` (line 53) -- 'module.function' -> (module, callable). Also returns the module file.
+- `fitted_plane_normal(traces)` (line 60) -- Concatenate all geometry-trace points and return the best-fit plane
+- `expected_pole(body)` (line 87) -- Pole direction in the ecliptic frame, via the SAME function the builders
+- `angle_between(u, v)` (line 97)
+- `main()` (line 102)
 
 ---
 
@@ -2431,17 +2450,17 @@ and explains in context.
 | formatting_utils | utility | 16 | 0 | 4 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
-| idealized_orbits | computation | 6,605 | 4 | 6 |
+| idealized_orbits | computation | 6,600 | 4 | 10 |
 | incremental_cache_manager | cache | 657 | 1 | 4 |
 | info_dictionary | data | 2,046 | 0 | 9 |
-| jupiter_visualization_shells | rendering/shells | 879 | 2 | 1 |
+| jupiter_visualization_shells | rendering/shells | 886 | 3 | 1 |
 | mars_visualization_shells | rendering/shells | 799 | 2 | 1 |
-| mercury_visualization_shells | rendering/shells | 336 | 2 | 1 |
+| mercury_visualization_shells | rendering/shells | 343 | 2 | 1 |
 | messier_catalog | data | 404 | 0 | 3 |
 | messier_object_data_handler | pipeline | 329 | 2 | 1 |
 | module_atlas | devtool | 494 | 0 | 2 |
 | moon_visualization_shells | rendering/shells | 543 | 3 | 1 |
-| neptune_visualization_shells | rendering/shells | 1,563 | 3 | 2 |
+| neptune_visualization_shells | rendering/shells | 1,547 | 4 | 2 |
 | object_type_analyzer | computation | 754 | 1 | 3 |
 | orbit_data_manager | cache | 1,547 | 0 | 4 |
 | orbital_elements | computation | 1,294 | 0 | 4 |
@@ -2466,7 +2485,7 @@ and explains in context.
 | pluto_visualization_shells | rendering/shells | 565 | 1 | 1 |
 | provenance_scanner | devtool | 1,181 | 1 | 0 |
 | report_manager | utility | 124 | 0 | 4 |
-| saturn_visualization_shells | rendering/shells | 1,077 | 2 | 2 |
+| saturn_visualization_shells | rendering/shells | 1,080 | 3 | 2 |
 | save_utils | pipeline | 731 | 1 | 18 |
 | scenarios_coral_bleaching | scenario | 191 | 0 | 1 |
 | scenarios_heatwaves | scenario | 622 | 0 | 1 |
@@ -2478,10 +2497,11 @@ and explains in context.
 | sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
 | shared_utilities | utility | 142 | 1 | 7 |
-| shell_configs | other | 2,535 | 5 | 2 |
+| shell_configs | other | 2,503 | 5 | 3 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
 | smoke_bow_shock | other | 88 | 1 | 0 |
+| smoke_ring_planes | other | 125 | 2 | 0 |
 | social_media_export | pipeline | 969 | 1 | 2 |
 | solar_visualization_shells | rendering/shells | 1,312 | 2 | 7 |
 | spacecraft_encounters | data | 1,293 | 2 | 1 |
@@ -2494,7 +2514,7 @@ and explains in context.
 | test_constants_provenance | devtool | 490 | 1 | 0 |
 | test_orbit_cache | devtool | 204 | 1 | 0 |
 | uranus_visualization_shells | rendering/shells | 1,070 | 4 | 2 |
-| venus_visualization_shells | rendering/shells | 658 | 2 | 1 |
+| venus_visualization_shells | rendering/shells | 614 | 2 | 1 |
 | verify_orbit_cache | devtool | 170 | 0 | 0 |
 | visualization_2d | rendering | 523 | 7 | 2 |
 | visualization_3d | rendering | 857 | 6 | 2 |

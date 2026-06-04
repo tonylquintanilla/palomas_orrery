@@ -24,6 +24,7 @@ import math
 import plotly.graph_objs as go
 from planet_visualization_utilities import (JUPITER_RADIUS_AU, KM_PER_AU, create_sphere_points, create_magnetosphere_shape, create_bow_shock_shape)
 from orrery_rendering import rotate_to_sunward, create_info_marker
+from idealized_orbits import orient_to_planet_pole  # N15: pole-vector ring orientation
 
 def create_ring_points_jupiter (inner_radius, outer_radius, n_points=100, thickness=0.01):
     """
@@ -973,17 +974,23 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
         # Create ring points
         x, y, z = create_ring_points_jupiter (inner_radius_au, outer_radius_au, n_points, thickness_au)
         
-        # Apply center position offset
-        x = np.array(x) + center_x
-        y = np.array(y) + center_y
-        z = np.array(z) + center_z
-        
-        # Create a text list for hover information
-        
+        # Orient into the ecliptic via the IAU pole vector (N15 migration June 2026;
+        # Jupiter obliquity ~3 deg, so the shift is small -- done for consistency with
+        # Saturn/Uranus/Neptune, replacing the prior no-rotation flat ring).
+        x = np.array(x)
+        y = np.array(y)
+        z = np.array(z)
+        x_final, y_final, z_final = orient_to_planet_pole(x, y, z, 'Jupiter')
+
+        # Apply center position offset to the FINAL coordinates
+        x_final = x_final + center_x
+        y_final = y_final + center_y
+        z_final = z_final + center_z
+
         # Add ring trace
         traces.append(
             go.Scatter3d(
-                x=x, y=y, z=z,
+                x=x_final, y=y_final, z=z_final,
                 mode='markers',
                 marker=dict(
                     size=1.5,  # Small markers for rings
@@ -996,10 +1003,10 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
                 showlegend=True
             )
         )
-        # Info marker on outer ring at phi=0
-        ring_marker_x = outer_radius_au + center_x
+        # Ring marker -- first point of the oriented, offset ring (mirrors
+        # Saturn/Uranus/Neptune), so it rides the ring's actual plane.
         traces.append(create_info_marker(
-            ring_marker_x, center_y, center_z,
+            x_final[0], y_final[0], z_final[0],
             ring_info['color'], f"Jupiter: {ring_info['name']}<br><br>{ring_info['description']}",
             f"Jupiter: {ring_info['name']}"
         ))

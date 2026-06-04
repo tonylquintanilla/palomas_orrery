@@ -211,9 +211,16 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0), sun_position=(0, 0, 0)
             showlegend=True
         )
     ]
-    # Info marker at first point
+    # Info marker offset down the tail axis so it clears Mercury's body.
+    # The original anchor (tail_points[0]) sits at tail_distance=0 = planet
+    # center, occluded by the planet sphere when Mercury is the selected/center
+    # body. Single-info-marker convention: one cross at a representative
+    # uncluttered position -- here, on the anti-sunward tail axis just past the surface.
+    marker_offset = 3.0 * MERCURY_RADIUS_AU  # MODE-5 KNOB: down-tail distance
     traces.append(create_info_marker(
-        tail_points_x[0], tail_points_y[0], tail_points_z[0],
+        center_x + marker_offset * dir_x,
+        center_y + marker_offset * dir_y,
+        center_z + marker_offset * dir_z,
         'rgb(255, 200, 100)', f"{trace_name}<br><br>{layer_info['description']}", trace_name
     ))
     

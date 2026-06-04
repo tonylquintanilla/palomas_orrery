@@ -4915,18 +4915,16 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 # Get satellite's current position
                 satellite_current_pos = current_positions.get(moon_name) if current_positions else None
                 
-                # Plot analytical orbit (time-varying elements - dotted line)
-                fig = plot_satellite_orbit(
-                    moon_name, 
-                    planetary_params,
-                    center_id, 
-                    color_map(moon_name), 
-                    fig,
-                    date=date,
-                    days_to_plot=days_to_plot,
-                    current_position=satellite_current_pos,
-                    show_apsidal_markers=show_apsidal_markers
-                )
+                # DECISION: Skip analytical orbit for Mars moons (June 2026).
+                # Removed for consistency with Jupiter/Saturn/Uranus/Neptune (all
+                # osculating-only) and for accuracy: the analytical path applied a
+                # hardcoded 25.19 deg Y-axis tilt (Mars's obliquity, found empirically)
+                # for the equatorial->ecliptic transform -- close but not exact, the
+                # same frame-artifact class N15 retired for rings. Osculating elements
+                # are already ecliptic and track the actual orbit -- that is the
+                # comparison shown. A correct analytical orbit via orient_to_planet_pole
+                # is DEFERRED as an optional educational feature (Mars needs an IAU pole
+                # added to planet_poles; verify Omega/i frame; render-gated).
                                 
                 # Plot osculating orbit (JPL elements - dashed line)
                 # Get Horizons ID from objects list
@@ -4952,18 +4950,15 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 # Get satellite's current position
                 satellite_current_pos = current_positions.get(moon_name) if current_positions else None
                 
-                # Plot analytical orbit (time-varying elements - dotted line)
-                fig = plot_satellite_orbit(
-                    moon_name, 
-                    planetary_params,
-                    center_id, 
-                    color_map(moon_name), 
-                    fig,
-                    date=date,
-                    days_to_plot=days_to_plot,
-                    current_position=satellite_current_pos,
-                    show_apsidal_markers=show_apsidal_markers
-                )
+                # DECISION: Skip analytical orbit for Jupiter moons (June 2026).
+                # Removed for consistency with Saturn/Uranus/Neptune (all osculating-
+                # only) and for accuracy: the analytical path applied a hardcoded
+                # 3.13 deg equatorial->ecliptic tilt and never aligned exactly with the
+                # actual orbit (a residual inclination offset that reads as a frame
+                # artifact, not perturbation). Osculating elements are already ecliptic
+                # and track the actual orbit -- that is the comparison shown. A correct
+                # analytical orbit via orient_to_planet_pole is DEFERRED as an optional
+                # educational feature (verify Omega/i frame per body; render-gated).
                 
                 # Plot osculating orbit (JPL elements - dashed line)
                 if date:
