@@ -395,16 +395,25 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 shell_r = config['radius_fraction'] * body_r
             outermost_radius_au = max(outermost_radius_au, shell_r)
 
-        elif shell_name in customs:
+        elif shell_name in customs and shell_name != 'rotation_axis':
+            # 'rotation_axis' is intentionally NOT shell-triggered. It renders
+            # once per body below, tied to BODY selection (Movement 2). Excluding
+            # it here keeps it from also rendering via a (future) shell checkbox.
             custom = customs[shell_name]
             module_path, func_name = custom['builder'].rsplit('.', 1)
             mod = importlib.import_module(module_path)
             builder = getattr(mod, func_name)
-            # Phase D2: pass sun_position to magnetosphere builders
+            # Phase D2: pass sun_position to magnetosphere builders.
+            # Movement 2 (June 2026): pass planet_name to shared builders (the
+            # rotation-axis primitive uses one builder for all bodies). Both are
+            # opt-in flags; an entry that sets neither calls builder(center_position)
+            # exactly as before -- behavior-preserving for every existing shell.
+            kwargs = {}
             if custom.get('needs_sun_position'):
-                traces = builder(center_position, sun_position=sun_position)
-            else:
-                traces = builder(center_position)
+                kwargs['sun_position'] = sun_position
+            if custom.get('needs_planet_name'):
+                kwargs['planet_name'] = body_name
+            traces = builder(center_position, **kwargs)
             for t in traces:
                 fig.add_trace(t)
             # D3.1 follow-up (May 2026, Bug 1): mark that a custom shell was
@@ -415,6 +424,19 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         # If shell_name is in neither registry, silently skip.
         # In Phase A this is expected for bodies that haven't migrated yet
         # (their dispatch is still in create_planet_visualization).
+
+    # Rotation axis (Movement 2): tied to BODY selection, not a shell checkbox.
+    # This function runs once per plotted body, so building here renders the axis
+    # whenever the body is plotted -- independent of which interior/field shells
+    # are checked. The axis carries its own legend entry (showlegend=True on the
+    # pole line) and toggles as a unit, so the user can still hide it via the
+    # legend. Only the 11 bodies with a sourced spin pole have this entry.
+    if 'rotation_axis' in customs:
+        axis_custom = customs['rotation_axis']
+        axis_mod_path, axis_func = axis_custom['builder'].rsplit('.', 1)
+        axis_builder = getattr(importlib.import_module(axis_mod_path), axis_func)
+        for t in axis_builder(center_position, planet_name=body_name):
+            fig.add_trace(t)
 
     # ONE sun direction indicator per body (replaces ~50 per-shell calls).
     # Uses outermost active shell radius for scaling. Suppresses at origin

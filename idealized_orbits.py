@@ -42,7 +42,18 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 # Import orbital element dictionaries from standalone module (no dependencies)
 from orbital_elements import planetary_params, parent_planets, planet_tilts
 # Dictionary of planet pole directions (J2000)
+# IAU north-pole directions (ICRF equatorial, J2000). RA/Dec in degrees.
+# Source: IAU WGCCRE report, Archinal et al. 2018, Cel. Mech. Dyn. Astron. 130:22
+#         (Table 1, planets/Sun; Table 2, Moon mean pole 269.9949/66.5392, E-terms dropped).
+# N15+ (June 2026): Sun/Mercury/Venus/Earth/Moon added so create_planet_transformation_matrix
+# yields a correct spin pole for every shell body (rotation-axis primitive). The six prior
+# entries are unchanged and cross-check exactly against the same IAU table.
 planet_poles = {
+    'Sun': {'ra': 286.13, 'dec': 63.87},      # Source: IAU 2018 (Archinal et al.)
+    'Mercury': {'ra': 281.01, 'dec': 61.45},  # Source: IAU 2018 (MESSENGER-updated)
+    'Venus': {'ra': 272.76, 'dec': 67.16},    # Source: IAU 2018 (retrograde; pole is IAU-north)
+    'Earth': {'ra': 0.00, 'dec': 90.00},      # Source: IAU 2018 (J2000 celestial north)
+    'Moon': {'ra': 269.99, 'dec': 66.54},     # Source: IAU 2018 Table 2 mean pole (librates)
     'Mars': {'ra': 317.68, 'dec': 52.89},
     'Jupiter': {'ra': 268.05, 'dec': 64.49},
     'Saturn': {'ra': 40.58, 'dec': 83.54},

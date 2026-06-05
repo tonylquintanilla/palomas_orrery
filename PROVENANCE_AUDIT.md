@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: June 04, 2026
-Files scanned: 107
+Generated: June 05, 2026
+Files scanned: 106
 Total findings: 481
-Constants: 63 | Dicts: 29 | Display strings: 389
+Constants: 61 | Dicts: 31 | Display strings: 389
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -37,9 +37,9 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 0 |
-| 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 146 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 319 |
-| 4 | 1-4 | NO ACTION NEEDED | 16 |
+| 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 147 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 317 |
+| 4 | 1-4 | NO ACTION NEEDED | 17 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -251,6 +251,12 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 1430 | dict | planet_tilts[...] | (7 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
+
+### planet_visualization_utilities.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 527 | dict | ROTATION_AXIS_OMITTED[...] | (2 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
 
 ### sgr_a_grand_tour.py
 
@@ -729,13 +735,6 @@ is planned for a future session.
 | 170 | constant | SGR_A_DISTANCE_PC | 8178.0 | 2 | 3 | **6** | Has source citation | Numeric constant in data module |
 | 171 | constant | SGR_A_DISTANCE_LY | 26670.0 | 2 | 3 | **6** | Has source citation | Numeric constant in data module |
 
-### smoke_ring_planes.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 38 | constant | TOLERANCE_DEG | 2.0 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 39 | constant | MIN_GEOM_POINTS | 20 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-
 ### solar_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -880,6 +879,12 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 165 | dict | CORAL_THRESHOLDS[...] | (16 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+
+### smoke_rotation_axis.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 40 | dict | OBLIQ[...] | (11 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
 
 ### star_sphere_builder.py
 

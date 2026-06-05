@@ -187,7 +187,7 @@ def create_hover_markers_for_planet(center_position, radius, color, name, descri
         
         return points
     
-    # Single info marker at north pole, 5% above radius — replaces former fibonacci sphere
+    # Single info marker at north pole, 5% above radius, replaces former fibonacci sphere
     r_info = radius * 1.05
 
     hover_trace = go.Scatter3d(
@@ -457,3 +457,177 @@ def create_sun_direction_indicator_old(center_position=(0, 0, 0)):
 
 
 
+
+# ---------------------------------------------------------------------------
+# Rotation-axis primitive (Movement 2, June 2026, Claude Opus 4.8).
+# Shared builder for all shell bodies: spin-pole line + curved spin-direction
+# arrow + one info marker. Direct consumer of the IAU pole vector from
+# idealized_orbits.create_planet_transformation_matrix (the producer N15 built).
+# Wired via CUSTOM_SHELLS['<body>']['rotation_axis'] with needs_planet_name=True;
+# the dispatch passes planet_name so this one builder serves every body.
+#
+# Sourced rotation data below. Periods + obliquities: NASA NSSDCA Planetary Fact
+# Sheet (D. R. Williams, NASA GSFC). Spin sense: NSSDCA signed rotation period +
+# IAU WGCCRE prograde/retrograde W-dot convention (Archinal et al. 2018, Cel.
+# Mech. Dyn. Astron. 130:22). Giants cross-checked to Voyager 2 (Uranus: Desch
+# et al. 1986; Neptune: Lecacheux et al. 1993). Sun sidereal: Carrington (1863).
+# half_len_frac is a Mode-5 knob: axis half-length as a multiple of body radius,
+# sized to reach each body's outermost physical/field structure (Sun ~50 R_sun
+# reaches the outer corona); excludes Hill sphere by construction.
+# ---------------------------------------------------------------------------
+PLANET_ROTATION = {
+    'Sun':     {'period_str': '25.38 d sidereal (Carrington; differential 24.5-35 d)',
+                'sense': 'prograde', 'obliquity_str': '7.25 deg to ecliptic',
+                'note': 'Differential rotation; a gaseous body has no single solid-body day.',
+                'half_len_frac': 50.0},
+    'Mercury': {'period_str': '58.65 d (3:2 spin-orbit resonance)',
+                'sense': 'prograde', 'obliquity_str': '0.034 deg',
+                'note': 'Nearly upright; spin locked 3:2 to its orbit.',
+                'half_len_frac': 2.0},
+    'Venus':   {'period_str': '243.02 d (retrograde)',
+                'sense': 'retrograde', 'obliquity_str': '177.4 deg',
+                'note': 'Retrograde: spins backwards, axis points nearly south.',
+                'half_len_frac': 2.0},
+    'Earth':   {'period_str': '23.93 h',
+                'sense': 'prograde', 'obliquity_str': '23.44 deg',
+                'note': 'The familiar tilt that drives the seasons.',
+                'half_len_frac': 3.0},
+    'Moon':    {'period_str': '27.32 d (spin-orbit locked)',
+                'sense': 'prograde', 'obliquity_str': '6.68 deg to orbit (1.54 deg to ecliptic)',
+                'note': 'Tidally locked; J2000 mean pole (librates on the 18.6-yr node, a Cassini state).',
+                'half_len_frac': 2.0},
+    'Mars':    {'period_str': '24.62 h',
+                'sense': 'prograde', 'obliquity_str': '25.19 deg',
+                'note': 'Earth-like tilt, but no large moon to stabilize it.',
+                'half_len_frac': 2.0},
+    'Jupiter': {'period_str': '9.93 h (fastest spin of any planet)',
+                'sense': 'prograde', 'obliquity_str': '3.13 deg',
+                'note': 'Rapid spin visibly flattens the disk.',
+                'half_len_frac': 2.5},
+    'Saturn':  {'period_str': '10.66 h',
+                'sense': 'prograde', 'obliquity_str': '26.73 deg',
+                'note': "Tilt near Earth's; the rings share the equatorial plane.",
+                'half_len_frac': 2.5},
+    'Uranus':  {'period_str': '17.24 h (retrograde)',
+                'sense': 'retrograde', 'obliquity_str': '97.77 deg',
+                'note': 'Rolls on its side; axis lies nearly in the orbital plane.',
+                'half_len_frac': 2.5},
+    'Neptune': {'period_str': '16.11 h',
+                'sense': 'prograde', 'obliquity_str': '28.32 deg',
+                'note': 'Earth-like tilt despite its great distance.',
+                'half_len_frac': 2.5},
+    'Pluto':   {'period_str': '6.39 d (retrograde)',
+                'sense': 'retrograde', 'obliquity_str': '122.53 deg',
+                'note': 'High obliquity; tidally locked with Charon.',
+                'half_len_frac': 2.0},
+}
+
+# Bodies deliberately WITHOUT a rotation axis -- the gap made visible (Fetched-vs-
+# Recalled: do not invent unmeasured data). Note surfaced on the body hover.
+ROTATION_AXIS_OMITTED = {
+    'Planet 9': 'Rotation axis omitted: hypothetical body, no measured spin or pole.',
+    'Eris': 'Rotation axis omitted: rotation contested (possibly tidally locked to '
+            'Dysnomia); pole poorly constrained.',
+}
+
+_AXIS_COLOR = 'rgb(255, 209, 102)'  # warm gold, distinct from magnetosphere blues
+
+
+def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
+                               sun_position=None):
+    """Build the rotation-axis primitive for one body.
+
+    Returns a list of plotly traces (6): a spin-pole line through the body
+    center, a curved spin-direction arrow at EACH pole (arc + cone arrowhead),
+    and one info marker carrying period/sense/obliquity in hover. The axis line
+    is the IAU pole from the producer (create_planet_transformation_matrix), so
+    this is a direct consumer of the pole vector. Spin SENSE comes from the
+    explicit PLANET_ROTATION flag. Both arrows encode the same angular-velocity
+    vector (identical circulation in 3-space), so the depiction does not depend
+    on which end of the axis is "north" -- the IAU-pole vs angular-momentum-pole
+    convention never surfaces. sun_position is accepted and ignored for
+    dispatch-signature uniformity.
+
+    Bodies with no sourced spin data return [] (no axis); the omission is noted
+    on the body hover via ROTATION_AXIS_OMITTED.
+    """
+    info = PLANET_ROTATION.get(planet_name)
+    if info is None:
+        return []
+
+    from idealized_orbits import create_planet_transformation_matrix  # lazy: heavy module
+
+    cx, cy, cz = center_position
+    center = np.array([cx, cy, cz], dtype=float)
+
+    M = np.asarray(create_planet_transformation_matrix(planet_name), dtype=float)
+    pole = M[:, 2] / np.linalg.norm(M[:, 2])   # spin pole, ecliptic frame
+    e1 = M[:, 0] / np.linalg.norm(M[:, 0])      # equatorial-plane basis vectors
+    e2 = M[:, 1] / np.linalg.norm(M[:, 1])
+
+    body_r_au = CENTER_BODY_RADII.get(planet_name, 0.0) / KM_PER_AU
+    half = info.get('half_len_frac', 2.0) * body_r_au
+    if half <= 0:
+        return []
+
+    s = -1.0 if info.get('sense') == 'retrograde' else 1.0
+    color = info.get('color', _AXIS_COLOR)
+    legend = '%s: Rotation Axis' % planet_name
+
+    traces = []
+
+    # 1) pole line through the body center
+    p_lo = center - half * pole
+    p_hi = center + half * pole
+    traces.append(go.Scatter3d(
+        x=[p_lo[0], p_hi[0]], y=[p_lo[1], p_hi[1]], z=[p_lo[2], p_hi[2]],
+        mode='lines', line=dict(color=color, width=4),
+        name=legend, legendgroup=legend, showlegend=True, hoverinfo='skip'))
+
+    # 2-3) curved spin-direction arrows at BOTH poles. Both arcs use the SAME
+    # circulation in 3-space: every material point obeys v = omega x r, and a
+    # point at the same perpendicular offset e1 has the same velocity at either
+    # end, so the two arcs follow one angular-velocity vector -- not a flipped
+    # sweep (that would draw a false counter-rotation). Viewed from opposite
+    # poles the one circulation reads as mirror images on screen (e.g. Earth:
+    # CCW from above the north pole, CW from below the south), which is how a
+    # single rigid rotation actually looks. Drawing both ends makes the picture
+    # independent of which end is labelled "north", so the IAU-pole vs
+    # angular-momentum-pole convention never surfaces.
+    arc_r = 0.28 * half
+    sweep = np.radians(270.0)
+    t = np.linspace(0.0, sweep, 60)
+    cos_st = np.cos(s * t)[:, None]
+    sin_st = np.sin(s * t)[:, None]
+    tangent = s * (-np.sin(s * sweep) * e1 + np.cos(s * sweep) * e2)
+    tangent = tangent / np.linalg.norm(tangent)
+    for tip_sign in (1.0, -1.0):
+        arc_at = center + tip_sign * half * pole
+        arc = arc_at[None, :] + arc_r * (cos_st * e1[None, :] + sin_st * e2[None, :])
+        traces.append(go.Scatter3d(
+            x=arc[:, 0], y=arc[:, 1], z=arc[:, 2],
+            mode='lines', line=dict(color=color, width=4),
+            name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+        head = arc[-1]
+        traces.append(go.Cone(
+            x=[head[0]], y=[head[1]], z=[head[2]],
+            u=[tangent[0]], v=[tangent[1]], w=[tangent[2]],
+            sizemode='absolute', sizeref=arc_r * 0.5, anchor='tail',
+            showscale=False, colorscale=[[0, color], [1, color]],
+            name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+
+    # 4) single info marker at the north tip (hub of the spin ring)
+    hover = ('<b>%s -- Rotation Axis</b><br>'
+             'Sidereal rotation: %s<br>'
+             'Direction: %s<br>'
+             'Obliquity: %s<br>'
+             '%s') % (planet_name, info['period_str'], info['sense'],
+                      info['obliquity_str'], info['note'])
+    traces.append(go.Scatter3d(
+        x=[p_hi[0]], y=[p_hi[1]], z=[p_hi[2]], mode='markers',
+        marker=dict(size=5, color=color, symbol='cross',
+                    line=dict(color='white', width=1)),
+        name=legend, legendgroup=legend, showlegend=False,
+        text=[hover], hovertemplate='%{text}<extra></extra>'))
+
+    return traces

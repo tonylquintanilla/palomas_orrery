@@ -463,6 +463,7 @@ SHELL_CONFIGS = {
                 "Nine, if it exists, is likely an ice giant or a sub-Neptune type of planet, rather than a rocky terrestrial planet or a large <br>"
                 "gas giant. This is also consistent with theories about how a planet could have formed or been captured in the distant outer <br>"
                 "solar system."
+                "<br><br><b>Rotation axis omitted:</b> hypothetical body -- no measured spin or pole."
             ),
             'tooltip': (
                 "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
@@ -777,6 +778,7 @@ SHELL_CONFIGS = {
                 "    temperatures (possibly above 150 degC or 300 degF) within the rocky core. Theoretical modeling of Eris's interior, considering <br>" 
                 "    radiogenic heating and thermal conductivity, suggests that the central temperature could have been as high as 875 K.<br>" 
                 "  * This warmth might even be sufficient to support a subsurface ocean at the core-mantle boundary."
+                "<br><br><b>Rotation axis omitted:</b> rotation contested (possibly tidally locked to Dysnomia); pole poorly constrained."
             ),
             'tooltip': (
                 "2.4 MB PER FRAME FOR HTML.\n\n"
@@ -2050,9 +2052,51 @@ SHELL_CONFIGS = {
 CUSTOM_SHELLS = {
 
     # ============================================================
+    # Moon  (rotation axis only; no field shells)
+    # ============================================================
+    'Moon': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+    },
+
+    # ============================================================
+    # Pluto  (rotation axis only; no field shells)
+    # ============================================================
+    'Pluto': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+    },
+
+    # ============================================================
     # Mercury
     # ============================================================
     'Mercury': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
 
         'sodium_tail': {
             'builder': 'mercury_visualization_shells.create_mercury_sodium_tail',
@@ -2088,6 +2132,16 @@ CUSTOM_SHELLS = {
     # Verified: April 2026 provenance audit.
     'Venus': {
 
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+
         'magnetosphere': {
             'builder': 'venus_visualization_shells.create_venus_magnetosphere_shell',
             'needs_sun_position': True,
@@ -2111,6 +2165,16 @@ CUSTOM_SHELLS = {
     #         (Acuna et al. 1999 -- MGS MAG/ER discovery).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Mars': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
 
         'magnetosphere': {
             'builder': 'mars_visualization_shells.create_mars_magnetosphere_shell',
@@ -2137,6 +2201,16 @@ CUSTOM_SHELLS = {
     #         Inner radiation belt ~1.5 R_E (protons), outer ~4.5 R_E (electrons).
     # Verified: April 2026 provenance audit.
     'Earth': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
 
         'magnetosphere': {
             'builder': 'earth_visualization_shells.create_earth_magnetosphere_shell',
@@ -2210,6 +2284,16 @@ CUSTOM_SHELLS = {
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Jupiter': {
 
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+
         'magnetosphere': {
             'builder': 'jupiter_visualization_shells.create_jupiter_magnetosphere',
             'needs_sun_position': True,
@@ -2282,6 +2366,16 @@ CUSTOM_SHELLS = {
     #         NASA Voyager 2 Saturn Encounter; Mankovich & Fuller (2021).
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Saturn': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
 
         'magnetosphere': {
             'builder': 'saturn_visualization_shells.create_saturn_magnetosphere',
@@ -2371,6 +2465,16 @@ CUSTOM_SHELLS = {
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Uranus': {
 
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+
         'magnetosphere': {
             'builder': 'uranus_visualization_shells.create_uranus_magnetosphere',
             'needs_sun_position': True,
@@ -2432,6 +2536,16 @@ CUSTOM_SHELLS = {
     #         Smith et al. (1989, Science); NASA Planetary Ring Node.
     # Verified: April 2026 provenance audit via Gemini fact-check.
     'Neptune': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
 
         'magnetosphere': {
             'builder': 'neptune_visualization_shells.create_neptune_magnetosphere',
@@ -2679,6 +2793,16 @@ CUSTOM_SHELLS = {
     # lives inside the builder functions.
     # Module updated: May 2026 with Anthropic's Claude Opus 4.6
     'Sun': {
+
+        'rotation_axis': {
+            'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
+                "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
+                "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
 
         'hills_cloud_torus': {
             'builder': 'solar_visualization_shells.create_sun_hills_cloud_torus',
