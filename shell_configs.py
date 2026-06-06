@@ -2475,6 +2475,20 @@ CUSTOM_SHELLS = {
             ),
         },
 
+        'dipole_cone': {
+            'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Magnetic dipole cone: the body-fixed magnetic dipole is tilted ~60 deg\n"
+                "from the spin axis, so Uranus's rotation sweeps the dipole axis around a\n"
+                "cone over each ~17 h day. The drawn dipole line is one arbitrary instant\n"
+                "(rotation phase is unmodeled); the cone is the honest sweep, with a spin\n"
+                "arrow echoing the rotation axis. Pole-frame and Sun-independent -- square\n"
+                "to the rings, not the Sun-leaned magnetosphere envelope.\n"
+                "Source: Ness et al. (1986) Science -- Voyager 2 magnetometer."
+            ),
+        },
+
         'magnetosphere': {
             'builder': 'uranus_visualization_shells.create_uranus_magnetosphere',
             'needs_sun_position': True,
@@ -2544,6 +2558,20 @@ CUSTOM_SHELLS = {
                 "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
                 "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
                 "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+
+        'dipole_cone': {
+            'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Magnetic dipole cone: the body-fixed magnetic dipole is tilted ~47 deg\n"
+                "from the spin axis, so Neptune's rotation sweeps the dipole axis around a\n"
+                "cone over each ~16 h day. The drawn dipole line is one arbitrary instant\n"
+                "(rotation phase is unmodeled); the cone is the honest sweep, with a spin\n"
+                "arrow echoing the rotation axis. Pole-frame and Sun-independent -- square\n"
+                "to the rings, not the Sun-leaned magnetosphere envelope.\n"
+                "Source: Ness et al. (1989) Science -- Voyager 2."
             ),
         },
 

@@ -533,7 +533,15 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
         "itself tilted 97.77 degrees from the orbital plane. This produces a <br>"
         "magnetosphere geometry with no analog in the rest of the solar system: <br>"
         "the dipole axis sweeps a wide cone as Uranus rotates, modulating the <br>"
-        "magnetosphere's solar-wind interaction on a ~17-hour cycle.<br><br>"
+        "magnetosphere's solar-wind interaction on a ~17-hour cycle (see the <br>"
+        "Dipole Cone for that sweep).<br><br>"
+        "This envelope is a schematic shape, not a measured surface. Sourced to <br>"
+        "Voyager 2: the subsolar magnetopause standoff (~18 R_U, Slavin et al. <br>"
+        "1987) and the ~60 deg dipole tilt (Ness et al. 1986). Approximate and <br>"
+        "generalized: the oblate cross-section and magnetotail dimensions are <br>"
+        "representative values within Voyager-era literature ranges, and the <br>"
+        "dipole's drawn roll direction is a fixed display choice (the rotation <br>"
+        "phase is not modeled).<br><br>"
         "Source: Ness et al. (1986) Science -- Voyager 2 magnetometer."
     )
 

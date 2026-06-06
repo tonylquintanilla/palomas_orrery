@@ -631,3 +631,164 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
         text=[hover], hovertemplate='%{text}<extra></extra>'))
 
     return traces
+
+
+# ---------------------------------------------------------------------------
+# Magnetic dipole-cone primitive (Movement 2).
+# Module section added: June 2026 with Anthropic's Claude Opus 4.8.
+#
+# A body's magnetic dipole is fixed in the body frame at a tilt from the spin
+# axis, but the planet's rotation carries it around the spin axis -- so over one
+# rotation the dipole axis sweeps a cone (half-angle = the dipole tilt) about the
+# spin pole. PLANET_DIPOLE carries only the dipole-specific data; sense and
+# half_len_frac are read from PLANET_ROTATION so the cone shares the rotation
+# axis's sense and scale (single source of truth, no drift).
+#
+# azimuth_deg is the roll of the single drawn generator and is ARBITRARY by
+# construction: the rotation phase is not modeled, and the period uncertainty
+# smears the inertial azimuth around the full circle since Voyager, so the
+# instantaneous azimuth is unrecoverable, not merely unmodeled. The cone shows
+# the whole sweep so no single azimuth is claimed; the lone generator carries a
+# sweep arrow to read as motion rather than a fixed position. The dipole's
+# physical center offset (magnitude sourced, direction not) is DEFERRED -- apex
+# stays at center until the direction is sourced (Mode-7), per Fetched-vs-Recalled.
+#
+# Only bodies with a sourced dipole tilt appear. Others are omitted, the gap left
+# visible rather than guessed (Earth ~11 deg, Jupiter ~10 deg, Saturn <1 deg,
+# Mercury ~0 deg: deferred pending sourced tilt + sense, their own entries later).
+# ---------------------------------------------------------------------------
+PLANET_DIPOLE = {
+    'Uranus':  {'tilt_deg': 60.0, 'azimuth_deg': 35.0,
+                'source': 'Ness et al. 1986, Voyager 2 magnetometer (Science 233, 85)'},
+    'Neptune': {'tilt_deg': 47.0, 'azimuth_deg': 35.0,
+                'source': 'Ness et al. 1989, Voyager 2 (Science 246, 1473)'},
+}
+
+_DIPOLE_COLOR = 'rgb(255, 93, 210)'  # magenta; distinct from rotation-axis gold and field blues
+
+
+def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
+                             sun_position=None):
+    """Build the magnetic dipole-cone primitive for one body (Movement 2).
+
+    Draws the cone the body-fixed dipole sweeps about the spin axis as the planet
+    rotates: a double nappe (the dipole is two-ended), half-angle = the dipole
+    tilt, hung on the IAU spin pole from create_planet_transformation_matrix.
+    Adds ONE instantaneous dipole generator with a sweep arrow at each tip; the
+    arrow rides the cone RIM (a circle about the SPIN axis) with the same sense
+    and absolute arrowhead size as the rotation-axis spin arrow, so the dipole's
+    sweep reads as the same rotation. The drawn azimuth is arbitrary by
+    construction; the cone is the honest object and the generator asserts motion,
+    not a fixed position.
+
+    Pole frame, Sun-independent: sits square to the rings and radiation belts and
+    does NOT track the Sun-leaned magnetosphere envelope (a different frame --
+    the envelope's tilt is a roll about the Sun-line). Apex at center; the dipole
+    center offset is DEFERRED (magnitude sourced, direction not).
+
+    Returns a list of 8 traces (2 cone nappes, 1 generator line, 2 rim arcs,
+    2 arrowheads, 1 info marker), or [] for bodies with no sourced dipole tilt
+    (intentional omission, not a failure). sun_position is accepted and ignored
+    for dispatch-signature uniformity with the other shared builders.
+    """
+    dip = PLANET_DIPOLE.get(planet_name)
+    rot = PLANET_ROTATION.get(planet_name)
+    if dip is None or rot is None:
+        return []
+
+    from idealized_orbits import create_planet_transformation_matrix  # lazy: heavy module
+
+    cx, cy, cz = center_position
+    center = np.array([cx, cy, cz], dtype=float)
+
+    M = np.asarray(create_planet_transformation_matrix(planet_name), dtype=float)
+    pole = M[:, 2] / np.linalg.norm(M[:, 2])
+    e1 = M[:, 0] / np.linalg.norm(M[:, 0])
+    e2 = M[:, 1] / np.linalg.norm(M[:, 1])
+
+    body_r_au = CENTER_BODY_RADII.get(planet_name, 0.0) / KM_PER_AU
+    half = rot.get('half_len_frac', 2.5) * body_r_au
+    if half <= 0:
+        return []
+
+    s = -1.0 if rot.get('sense') == 'retrograde' else 1.0
+    theta = math.radians(dip['tilt_deg'])
+    az = math.radians(dip.get('azimuth_deg', 0.0))
+    color = _DIPOLE_COLOR
+    legend = '%s: Dipole Cone' % planet_name
+
+    cos_t, sin_t = math.cos(theta), math.sin(theta)
+    dip_dir = cos_t * pole + sin_t * (math.cos(az) * e1 + math.sin(az) * e2)
+
+    n_phi = 72
+    phis = np.linspace(0.0, 2.0 * np.pi, n_phi, endpoint=False)
+    radial = np.cos(phis)[:, None] * e1[None, :] + np.sin(phis)[:, None] * e2[None, :]
+
+    traces = []
+
+    # 1-2) double-nappe cone, apex at center, rim at +/- half*cos_t along the pole
+    for nap_i, nap_sign in enumerate((1.0, -1.0)):
+        ring = center + (nap_sign * half * cos_t) * pole + (half * sin_t) * radial
+        xs = np.concatenate([[center[0]], ring[:, 0]])
+        ys = np.concatenate([[center[1]], ring[:, 1]])
+        zs = np.concatenate([[center[2]], ring[:, 2]])
+        ii = [0] * n_phi
+        jj = [1 + m for m in range(n_phi)]
+        kk = [1 + ((m + 1) % n_phi) for m in range(n_phi)]
+        traces.append(go.Mesh3d(
+            x=xs, y=ys, z=zs, i=ii, j=jj, k=kk, color=color, opacity=0.16,
+            flatshading=True, showscale=False, hoverinfo='skip',
+            name=legend, legendgroup=legend, showlegend=(nap_i == 0)))
+
+    # 3) one instantaneous dipole generator (full line through both magnetic poles)
+    g_lo = center - half * dip_dir
+    g_hi = center + half * dip_dir
+    traces.append(go.Scatter3d(
+        x=[g_lo[0], g_hi[0]], y=[g_lo[1], g_hi[1]], z=[g_lo[2], g_hi[2]],
+        mode='lines', line=dict(color=color, width=5),
+        name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+
+    # 4-7) sweep arrow at each tip: arc of the cone RIM (a circle about the SPIN
+    # axis) + a cone arrowhead, same sense and absolute size as the rotation-axis
+    # spin arrow, so the dipole's sweep reads as the planet's spin.
+    arc_r = 0.28 * half          # rotation-axis arc scale -> matching arrowhead sizeref
+    sizeref = arc_r * 0.5
+    rim_r = half * sin_t
+    span = math.radians(90.0)
+    tau = np.linspace(0.0, span, 40)
+    for tip_sign, start_az in ((1.0, az), (-1.0, az + math.pi)):
+        rim_center = center + (tip_sign * half * cos_t) * pole
+        phi = start_az + s * tau
+        pts = rim_center + rim_r * (np.cos(phi)[:, None] * e1[None, :]
+                                    + np.sin(phi)[:, None] * e2[None, :])
+        traces.append(go.Scatter3d(
+            x=pts[:, 0], y=pts[:, 1], z=pts[:, 2], mode='lines',
+            line=dict(color=color, width=4),
+            name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+        pe = float(phi[-1])
+        tangent = s * (-math.sin(pe) * e1 + math.cos(pe) * e2)
+        tangent = tangent / np.linalg.norm(tangent)
+        traces.append(go.Cone(
+            x=[pts[-1, 0]], y=[pts[-1, 1]], z=[pts[-1, 2]],
+            u=[tangent[0]], v=[tangent[1]], w=[tangent[2]],
+            sizemode='absolute', sizeref=sizeref, anchor='tail', showscale=False,
+            colorscale=[[0, color], [1, color]],
+            name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+
+    # 8) single info marker at the +tip (single-info-marker convention)
+    tip = center + half * dip_dir
+    hover = ('<b>%s -- Magnetic Dipole Cone</b><br>'
+             'Dipole tilt: %.0f deg from the spin axis<br>'
+             'Swept about the spin axis once per rotation (sense: %s)<br>'
+             'Drawn axis is ONE arbitrary instant; the cone is the honest sweep<br>'
+             'Center offset deferred (apex at center)<br>'
+             'Source: %s') % (planet_name, dip['tilt_deg'], rot.get('sense'),
+                              dip['source'])
+    traces.append(go.Scatter3d(
+        x=[tip[0]], y=[tip[1]], z=[tip[2]], mode='markers',
+        marker=dict(size=5, color=color, symbol='cross',
+                    line=dict(color='white', width=1)),
+        name=legend, legendgroup=legend, showlegend=False,
+        text=[hover], hovertemplate='%{text}<extra></extra>'))
+
+    return traces

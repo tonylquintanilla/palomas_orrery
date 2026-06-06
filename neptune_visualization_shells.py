@@ -594,7 +594,12 @@ def create_neptune_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
         "Neptune's Magnetosphere: Unlike other planets, Neptune's magnetic field is dramatically tilted <br>"
         "(47 deg from its rotation axis) and significantly offset from the planet's center by more than <br>"
         "half a Neptune radius. This creates an extremely asymmetric magnetosphere that varies greatly <br>"
-        "depending on Neptune's rotation.<br><br>"
+        "depending on Neptune's rotation (see the Dipole Cone for the dipole's sweep about the spin axis).<br><br>"
+        "This envelope is a schematic shape, not a measured surface. Sourced to Voyager 2: the subsolar <br>"
+        "magnetopause standoff (~26.5 R_N) and the 47 deg dipole tilt and 0.55 R_N offset (Ness et al. <br>"
+        "1989). Approximate and generalized: the oblate cross-section and magnetotail dimensions are <br>"
+        "representative values within Voyager-era literature ranges, and the dipole's drawn roll <br>"
+        "direction is a fixed display choice (the rotation phase is not modeled).<br><br>"
         "Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science)."
     )
 

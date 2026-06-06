@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 05, 2026
-Modules: 106 | Functions: 865 | Lines: 86,262
+Generated: June 06, 2026
+Modules: 107 | Functions: 870 | Lines: 86,571
 
 ---
 
@@ -34,7 +34,7 @@ and explains in context.
 | scenario | 3 | Specific Earth system scenarios |
 | utility | 5 | Shared helper functions |
 | devtool | 12 | Developer tools (dependency tracing, atlas) |
-| other | 4 | Uncategorized |
+| other | 5 | Uncategorized |
 
 ---
 
@@ -404,31 +404,31 @@ and explains in context.
 
 ### planet_visualization.py
 
-**Role:** rendering | **Lines:** 633
+**Role:** rendering | **Lines:** 644
 
 > planet_visualization.py - High-level planet and Sun visualization orchestration.
 
 **Depends on:** constants_new, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, orrery_rendering, planet9_visualization_shells, planet_visualization_utilities, pluto_visualization_shells, saturn_visualization_shells, shared_utilities, shell_configs, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
-**Consumed by:** palomas_orrery, palomas_orrery_helpers, smoke_rotation_axis
+**Consumed by:** palomas_orrery, palomas_orrery_helpers, smoke_dipole_cone, smoke_rotation_axis
 
 **Public functions:**
 
 - `create_sun_visualization(fig, sun_shell_vars, animate, frames)` (line 292) -- RETIRED: Sun rendering migrated to unified dispatch (May 2026).
 - `create_sun_corona_from_distance(fig, sun_shell_vars, sun_position)` (line 305) -- RETIRED: Off-center Sun rendering migrated to unified dispatch (May 2026).
 - `create_celestial_body_visualization(fig, body_name, shell_vars, animate, frames, center_position, sun_position, object_type, center_object)` (line 319) -- Unified config-driven dispatch for celestial body shell visualization.
-- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position, sun_position)` (line 486) -- Creates a visualization of a planet's layers based on which shells are selected.
-- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 668) -- Creates traces for planet shells without adding them to a figure.
+- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position, sun_position)` (line 498) -- Creates a visualization of a planet's layers based on which shells are selected.
+- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 680) -- Creates traces for planet shells without adding them to a figure.
 
 ---
 
 ### planet_visualization_utilities.py
 
-**Role:** rendering | **Lines:** 536
+**Role:** rendering | **Lines:** 676
 
 > planet_visualization_utilities.py - Shared geometry helpers and body-radius aliases.
 
 **Depends on:** constants_new, idealized_orbits
-**Consumed by:** comet_visualization_shells, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, orrery_rendering, planet9_visualization_shells, planet_visualization, pluto_visualization_shells, saturn_visualization_shells, shell_configs, smoke_rotation_axis, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
+**Consumed by:** comet_visualization_shells, earth_visualization_shells, eris_visualization_shells, jupiter_visualization_shells, mars_visualization_shells, mercury_visualization_shells, moon_visualization_shells, neptune_visualization_shells, orrery_rendering, planet9_visualization_shells, planet_visualization, pluto_visualization_shells, saturn_visualization_shells, shell_configs, smoke_dipole_cone, smoke_rotation_axis, solar_visualization_shells, uranus_visualization_shells, venus_visualization_shells
 
 **Public functions:**
 
@@ -439,6 +439,7 @@ and explains in context.
 - `create_sphere_points(radius, n_points)` (line 357) -- Create points for a sphere surface to represent celestial body layers.
 - `create_sun_direction_indicator_old(center_position)` (line 378) -- Creates a visual indicator showing the direction to the Sun (along negative X-axis).
 - `build_rotation_axis_traces(center_position, planet_name, sun_position)` (line 536) -- Build the rotation-axis primitive for one body.
+- `build_dipole_cone_traces(center_position, planet_name, sun_position)` (line 670) -- Build the magnetic dipole-cone primitive for one body (Movement 2).
 
 ---
 
@@ -855,7 +856,7 @@ and explains in context.
 
 ### neptune_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,547
+**Role:** rendering/shells | **Lines:** 1,552
 
 > neptune_visualization_shells.py - Neptune interior, ring, and magnetosphere shell traces.
 
@@ -869,11 +870,11 @@ and explains in context.
 - `create_neptune_cloud_layer_shell(center_position)` (line 207) -- Creates neptune's cloud layer shell.
 - `create_neptune_upper_atmosphere_shell(center_position)` (line 372) -- Creates Neptune's upper atmosphere shell.
 - `create_neptune_magnetosphere(center_position, sun_position)` (line 469) -- Creates Neptune's main magnetosphere structure with proper tilt and offset.
-- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 674) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
-- `create_neptune_radiation_belts(center_position)` (line 818) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
-- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 1041) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
-- `create_neptune_ring_system(center_position)` (line 1183) -- Creates a visualization of Neptune's ring system with proper alignment.
-- `create_neptune_hill_sphere_shell(center_position)` (line 1680) -- Creates neptune's Hill sphere shell.
+- `create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimuth)` (line 679) -- Creates a simplified visualization of Neptune's magnetic poles and axis.
+- `create_neptune_radiation_belts(center_position)` (line 823) -- Creates Neptune's radiation belts with proper structure reflecting the complex magnetospheric environment.
+- `create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt, azimuth)` (line 1046) -- Creates visualization of field-aligned currents in Neptune's magnetosphere.
+- `create_neptune_ring_system(center_position)` (line 1188) -- Creates a visualization of Neptune's ring system with proper alignment.
+- `create_neptune_hill_sphere_shell(center_position)` (line 1685) -- Creates neptune's Hill sphere shell.
 
 ---
 
@@ -971,7 +972,7 @@ and explains in context.
 
 ### uranus_visualization_shells.py
 
-**Role:** rendering/shells | **Lines:** 1,070
+**Role:** rendering/shells | **Lines:** 1,078
 
 > uranus_visualization_shells.py - Uranus interior, ring, and magnetosphere shell traces.
 
@@ -985,9 +986,9 @@ and explains in context.
 - `create_uranus_cloud_layer_shell(center_position)` (line 191) -- Creates Uranus's cloud layer shell.
 - `create_uranus_upper_atmosphere_shell(center_position)` (line 368) -- Creates Uranus's upper atmosphere shell.
 - `create_uranus_magnetosphere(center_position, sun_position)` (line 459) -- Creates Uranus's main magnetosphere structure.
-- `create_uranus_radiation_belts(center_position)` (line 607) -- Creates Uranus's radiation belts.
-- `create_uranus_ring_system(center_position)` (line 789) -- Creates a visualization of Uranus's ring system.
-- `create_uranus_hill_sphere_shell(center_position)` (line 1142) -- Creates Uranus's Hill sphere shell.
+- `create_uranus_radiation_belts(center_position)` (line 615) -- Creates Uranus's radiation belts.
+- `create_uranus_ring_system(center_position)` (line 797) -- Creates a visualization of Uranus's ring system.
+- `create_uranus_hill_sphere_shell(center_position)` (line 1150) -- Creates Uranus's Hill sphere shell.
 
 ---
 
@@ -1279,7 +1280,7 @@ and explains in context.
 > idealized_orbits.py - Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia...
 
 **Depends on:** apsidal_markers, constants_new, orbital_elements, osculating_cache_manager
-**Consumed by:** create_ephemeris_database, jupiter_visualization_shells, neptune_visualization_shells, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, planet_visualization_utilities, saturn_visualization_shells, smoke_rotation_axis, uranus_visualization_shells, visualization_utils
+**Consumed by:** create_ephemeris_database, jupiter_visualization_shells, neptune_visualization_shells, orbital_param_viz, palomas_orrery, palomas_orrery_helpers, planet_visualization_utilities, saturn_visualization_shells, smoke_dipole_cone, smoke_rotation_axis, uranus_visualization_shells, visualization_utils
 
 **Public functions:**
 
@@ -2367,12 +2368,30 @@ and explains in context.
 
 ### shell_configs.py
 
-**Role:** other | **Lines:** 2,614
+**Role:** other | **Lines:** 2,640
 
 > shell_configs.py - Shell configuration data for all celestial bodies.
 
 **Depends on:** neptune_visualization_shells, planet_visualization_utilities, saturn_visualization_shells, solar_visualization_shells, uranus_visualization_shells
-**Consumed by:** planet_visualization, smoke_rotation_axis
+**Consumed by:** planet_visualization, smoke_dipole_cone, smoke_rotation_axis
+
+---
+
+### smoke_dipole_cone.py
+
+**Role:** other | **Lines:** 119
+
+> smoke_dipole_cone.py -- container smoke test for the dipole-cone primitive (Movement 2, June 2026). Mirrors smoke_rotation_axis.py: it exercises the LIVE dispatch, not the builder in isolation, because last session's lesson was that a builder can work while the dispatch never calls it. No network...
+
+**Depends on:** idealized_orbits, planet_visualization, planet_visualization_utilities, shell_configs
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `resolve_builder(body)` (line 39)
+- `generator_line(traces)` (line 46)
+- `rim_arcs(traces)` (line 53)
+- `main()` (line 58)
 
 ---
 
@@ -2434,7 +2453,7 @@ and explains in context.
 | formatting_utils | utility | 16 | 0 | 4 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
-| idealized_orbits | computation | 6,611 | 4 | 11 |
+| idealized_orbits | computation | 6,611 | 4 | 12 |
 | incremental_cache_manager | cache | 657 | 1 | 4 |
 | info_dictionary | data | 2,046 | 0 | 9 |
 | jupiter_visualization_shells | rendering/shells | 886 | 3 | 1 |
@@ -2444,7 +2463,7 @@ and explains in context.
 | messier_object_data_handler | pipeline | 329 | 2 | 1 |
 | module_atlas | devtool | 494 | 0 | 2 |
 | moon_visualization_shells | rendering/shells | 543 | 3 | 1 |
-| neptune_visualization_shells | rendering/shells | 1,547 | 4 | 2 |
+| neptune_visualization_shells | rendering/shells | 1,552 | 4 | 2 |
 | object_type_analyzer | computation | 754 | 1 | 3 |
 | orbit_data_manager | cache | 1,547 | 0 | 4 |
 | orbital_elements | computation | 1,294 | 0 | 4 |
@@ -2460,8 +2479,8 @@ and explains in context.
 | palomas_orrery_dashboard | gui | 631 | 0 | 0 |
 | palomas_orrery_helpers | utility | 776 | 11 | 2 |
 | planet9_visualization_shells | rendering/shells | 267 | 1 | 1 |
-| planet_visualization | rendering | 633 | 18 | 3 |
-| planet_visualization_utilities | rendering | 536 | 2 | 18 |
+| planet_visualization | rendering | 644 | 18 | 4 |
+| planet_visualization_utilities | rendering | 676 | 2 | 19 |
 | planetarium_apparent_magnitude | rendering | 352 | 11 | 1 |
 | planetarium_distance | rendering | 399 | 11 | 1 |
 | plot_data_exchange | pipeline | 168 | 0 | 3 |
@@ -2481,9 +2500,10 @@ and explains in context.
 | sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
 | shared_utilities | utility | 142 | 1 | 7 |
-| shell_configs | other | 2,614 | 5 | 2 |
+| shell_configs | other | 2,640 | 5 | 3 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
+| smoke_dipole_cone | other | 119 | 4 | 0 |
 | smoke_rotation_axis | other | 145 | 4 | 0 |
 | social_media_export | pipeline | 969 | 1 | 2 |
 | solar_visualization_shells | rendering/shells | 1,312 | 2 | 7 |
@@ -2496,7 +2516,7 @@ and explains in context.
 | stellar_parameters | data | 352 | 2 | 8 |
 | test_constants_provenance | devtool | 490 | 1 | 0 |
 | test_orbit_cache | devtool | 204 | 1 | 0 |
-| uranus_visualization_shells | rendering/shells | 1,070 | 4 | 2 |
+| uranus_visualization_shells | rendering/shells | 1,078 | 4 | 2 |
 | venus_visualization_shells | rendering/shells | 614 | 2 | 1 |
 | verify_orbit_cache | devtool | 170 | 0 | 0 |
 | visualization_2d | rendering | 523 | 7 | 2 |

@@ -395,10 +395,10 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 shell_r = config['radius_fraction'] * body_r
             outermost_radius_au = max(outermost_radius_au, shell_r)
 
-        elif shell_name in customs and shell_name != 'rotation_axis':
-            # 'rotation_axis' is intentionally NOT shell-triggered. It renders
-            # once per body below, tied to BODY selection (Movement 2). Excluding
-            # it here keeps it from also rendering via a (future) shell checkbox.
+        elif shell_name in customs and shell_name not in ('rotation_axis', 'dipole_cone'):
+            # 'rotation_axis' and 'dipole_cone' are intentionally NOT shell-triggered.
+            # They render once per body below, tied to BODY selection (Movement 2).
+            # Excluding them here keeps them from also rendering via a shell checkbox.
             custom = customs[shell_name]
             module_path, func_name = custom['builder'].rsplit('.', 1)
             mod = importlib.import_module(module_path)
@@ -436,6 +436,18 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         axis_mod_path, axis_func = axis_custom['builder'].rsplit('.', 1)
         axis_builder = getattr(importlib.import_module(axis_mod_path), axis_func)
         for t in axis_builder(center_position, planet_name=body_name):
+            fig.add_trace(t)
+
+    # Dipole cone (Movement 2): same body-triggered pattern as the rotation axis.
+    # Pole-frame and Sun-independent, rendered once per plotted body that has a
+    # sourced magnetic dipole (Uranus, Neptune). Carries its own legend entry and
+    # toggles as a unit; bodies without a 'dipole_cone' entry get nothing (the
+    # builder also returns [] for any body absent from PLANET_DIPOLE).
+    if 'dipole_cone' in customs:
+        dc_custom = customs['dipole_cone']
+        dc_mod_path, dc_func = dc_custom['builder'].rsplit('.', 1)
+        dc_builder = getattr(importlib.import_module(dc_mod_path), dc_func)
+        for t in dc_builder(center_position, planet_name=body_name):
             fig.add_trace(t)
 
     # ONE sun direction indicator per body (replaces ~50 per-shell calls).
