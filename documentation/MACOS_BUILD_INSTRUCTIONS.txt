@@ -1,0 +1,169 @@
+================================================================
+  PALOMA'S ORRERY - macOS Build Instructions
+  Version 2.2.1 | December 2025
+================================================================
+
+  These instructions are for building new versions on macOS.
+
+================================================================
+  PREREQUISITES
+================================================================
+
+  - macOS 10.15 (Catalina) or later
+  - Python 3.11+ installed
+  - All dependencies from requirements.txt installed
+  - PyInstaller installed: pip3 install pyinstaller
+
+================================================================
+  BUILD STEPS
+================================================================
+
+  1. Open Terminal
+
+  2. Navigate to your project folder:
+     
+     cd ~/Desktop/palomas_orrery
+
+  3. Run the build script:
+
+     chmod +x build_macos_distribution.sh
+     ./build_macos_distribution.sh
+
+  4. Output will be in: dist/Palomas_Orrery_macOS/
+
+================================================================
+  OUTPUT STRUCTURE
+================================================================
+
+  dist/Palomas_Orrery_macOS/
+  ├── palomas_orrery       (Solar System executable)
+  ├── star_visualization   (Star Visualization executable)
+  ├── _internal/           (Libraries + data)
+  │   ├── data/            (Climate data cache)
+  │   ├── star_data/       (Star catalogs)
+  │   ├── reports/         (Output folder)
+  │   └── [Python libs]
+  └── README.txt
+
+================================================================
+  POST-BUILD TESTING
+================================================================
+
+  Test locally before distributing:
+
+     cd dist/Palomas_Orrery_macOS
+     ./palomas_orrery
+     ./star_visualization
+
+================================================================
+  DISTRIBUTION
+================================================================
+
+  IMPORTANT: macOS blocks unsigned apps downloaded from internet.
+
+  DO NOT distribute via:
+  - Google Drive (strips permissions, adds quarantine)
+  - Email attachments
+  - Web downloads
+  - DMG files (still blocked by Library Validation)
+  - Zip files via internet
+
+  DO distribute via:
+  - USB flash drive (copy folder directly)
+  - AirDrop (may work - untested)
+  - Direct file sharing on local network
+
+  STEPS:
+  1. Copy dist/Palomas_Orrery_macOS/ folder to USB flash drive
+  2. On target Mac, copy from flash drive to Desktop or Applications
+  3. Double-click palomas_orrery to run
+
+================================================================
+  WHY INTERNET DISTRIBUTION DOESN'T WORK
+================================================================
+
+  Apple's security layers block unsigned apps:
+
+  1. Gatekeeper - Blocks apps from "unidentified developers"
+  2. Quarantine - Flags downloaded files as untrusted
+  3. Library Validation - Blocks unsigned .so/.dylib files
+  4. Notarization - Apple wants to scan all apps
+
+  Even after running xattr -cr to remove quarantine flags,
+  Library Validation still blocks the Python libraries.
+
+  The only solutions are:
+  - Pay Apple $99/year for Developer account (sign + notarize)
+  - Distribute via flash drive (no quarantine flags added)
+
+  We chose flash drive.
+
+================================================================
+  UPDATING VERSION NUMBER
+================================================================
+
+  Update version in these places:
+  - palomas_orrery.py (if version displayed in app)
+  - README_DISTRIBUTION_MACOS.txt
+  - This file
+  - build_macos_distribution.sh (comment at top)
+
+================================================================
+  TROUBLESHOOTING BUILD
+================================================================
+
+  PyInstaller not found:
+    pip3 install pyinstaller
+
+  Missing modules at runtime:
+    Add --hidden-import=module_name to build script
+
+  Build succeeds but app crashes:
+    Run from Terminal to see error messages:
+    cd dist/Palomas_Orrery_macOS && ./palomas_orrery
+
+  "No module named X" error:
+    Add to build script:
+    --hidden-import=X
+    --collect-data=X (if module has data files)
+
+================================================================
+  FILES NEEDED FOR BUILD
+================================================================
+
+  In your project root (~/Desktop/palomas_orrery/):
+
+  Required:
+  - build_macos_distribution.sh  (this build script)
+  - palomas_orrery.py            (main app)
+  - star_visualization_gui.py    (star app)
+  - All other .py modules
+  - data/                        (climate data)
+  - star_data/                   (star catalogs)
+
+  Optional:
+  - README_DISTRIBUTION_MACOS.txt (copied to dist)
+
+================================================================
+  LESSON LEARNED (December 2025)
+================================================================
+
+  We tried several approaches that DIDN'T work:
+
+  1. .app bundle wrappers
+     - macOS Sandbox blocked access to _internal/ folder
+     - Apps crashed immediately
+
+  2. DMG distribution
+     - Library Validation still blocked unsigned libraries
+     - Same errors as zip download
+
+  3. xattr -cr to remove quarantine
+     - Removes quarantine flag but not Library Validation
+     - Still blocked Python .so files
+
+  What WORKS:
+  - Flash drive distribution (no quarantine flags ever added)
+  - Running from source (python palomas_orrery.py)
+
+================================================================

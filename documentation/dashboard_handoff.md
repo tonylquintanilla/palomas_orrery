@@ -1,6 +1,6 @@
 # Dashboard Handoff
 ## Paloma's Orrery Dashboard -- `palomas_orrery_dashboard.py`
-### Version 1.0 | March 30, 2026
+### Version 1.1 | April 14, 2026
 
 ---
 
@@ -46,6 +46,11 @@ documentation in one place.
 |    - Gallery Studio          [Launch]    |                |
 |    - JSON Converter          [Launch]    |                |
 |    - Gallery Editor          [Launch]    |                |
+|    - Gallery JSON Fixer      [Launch]    |                |
+|                                          |                |
+|  [DT] Developer Tools                   |                |
+|    - Regenerate Module Atlas [Launch]    |                |
+|    - Dependency Trace        [Launch]    |                |
 |                                          |                |
 |  Resources                               |                |
 |    External Links | Documentation        |                |
@@ -139,6 +144,9 @@ List of `(display_name, filename)` tuples. Paths relative to
 `SCRIPT_DIR`. Opens with system default application (VS Code for
 `.md`/`.py` if file associations are set).
 
+Current entries: README, Module Atlas, Requirements, Project
+Instructions, Web Gallery Handoff, Climate Data Handoff.
+
 ### SECTION_SYMBOLS
 
 Optional bracketed labels before group headers. Set to `""` to hide.
@@ -167,10 +175,12 @@ FONT_TITLE = ("Segoe UI", 28, "bold")
 
 ### Interactive Tools (`interactive=True`)
 
-- Launched with `subprocess.CREATE_NEW_CONSOLE` on Windows
-- Opens in its own cmd window for keyboard input
+- Launched via `cmd /k python script.py` on Windows
+- `cmd /k` keeps the console window open after the script exits,
+  allowing the user to type follow-up commands (e.g., dep_trace
+  with different arguments)
 - Status panel logs "Launched in console: ..." but doesn't capture output
-- Currently only `json_converter.py` uses this mode
+- Used by: `json_converter.py`, `module_atlas.py`, `dep_trace.py`
 
 ### Debounce Guard
 
@@ -316,5 +326,32 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\
 
 ---
 
+## Session Notes: v1.1 (April 14, 2026)
+
+**Developer Tools group added:**
+- Regenerate Module Atlas (`module_atlas.py`) -- scans codebase, generates
+  MODULE_ATLAS.md. Interactive mode; window stays open after completion.
+- Dependency Trace (`dep_trace.py`) -- opens console with usage syntax
+  in the description. User types commands in the open window.
+
+**Documentation updates:**
+- MODULE_ATLAS.md added to Documentation panel (second entry after README)
+- Stale "Module Index" (coordinate_system_guide.py) removed from docs list
+
+**Interactive launch fix:**
+- Changed Windows interactive launch from `python script.py` to
+  `cmd /k python script.py`. Previous behavior closed the console
+  immediately when the script exited. Now the window stays open for
+  follow-up commands.
+
+**Dead code cleanup:**
+- `orrery_integration.py` and `refined_orbits.py` deleted from codebase
+- References removed from palomas_orrery.py
+
+---
+
 *"Is this what they call 'software engineering' as distinct from 'coding'?"*
 -- Tony, after a zero-code design session, Mar 14, 2026
+
+*"You have a perfect grip. My grip is ... difficult."*
+-- Tony, on the human side of an 86,000-line codebase, Apr 14, 2026

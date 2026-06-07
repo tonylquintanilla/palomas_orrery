@@ -1,6 +1,6 @@
 # Paloma's Orrery - Web Gallery Initiative
 
-## Session Handoff | February 5 - March 8, 2026 | Claude Opus 4.6
+## Session Handoff | February 5 - May 5, 2026 | Claude Opus 4.6
 
 ---
 
@@ -18,7 +18,7 @@ alive. No download, no install, no "is this safe?"
 
 ## Architecture Decided
 
-Current pipeline (as of Session 27):
+Current pipeline (as of Session 34):
 ```
 Desktop App (Python/Plotly)
     |
@@ -45,6 +45,7 @@ Anyone with a browser, any device
 Gallery management:
     gallery_config.json  <-- single source of truth for categories
     gallery_editor.py    <-- GUI for editing metadata, categories, subcategories, ordering
+    gallery_json_fixer.py <-- batch-fix older JSONs for current viewer compatibility
 ```
 
 Target pipeline (Session 12 refactor):
@@ -1328,11 +1329,12 @@ live in the studio. Remaining work:
    Testing with inconsistent data made it hard to distinguish gallery viewer
    bugs from data format issues. Decision: rebuild gallery systematically.
 
-4. **Animation not yet supported**: json_converter.py extracts only `data`
-   and `layout`. Plotly animated figures also have `frames` (injected via
-   `Plotly.addFrames()` in the HTML). The gallery viewer's `Plotly.newPlot()`
-   call does not pass frames. Both need targeted additions -- a few lines
-   each. Deferred until static plots are solid.
+4. **Animation support** (Session 13 shipped frames pipeline; Session 32
+   fixed extraction and strip-trace bugs): Frames now flow through the
+   full pipeline. **Remaining caveat**: stripping hidden traces
+   (`strip_hidden_traces`) in animated plots requires frame trace-index
+   remapping (Session 32 fix). Without the remap, stripped portrait
+   exports animate the wrong traces. See Session 32 for the fix pattern.
 
 5. **Mobile legend repositioning**: ~~The horizontal legend override
    (orientation: 'h', y: 1.02) on screens <1024px may conflict with titles
@@ -3999,9 +4001,9 @@ the `_studio_config` blob already survives.
 - Preview: buttons appear with correct styling and navigation
 - Multiple targets (3 tested), each flies to correct position
 - Reset View restores original view including axis ranges and dtick
+- Fly-to checkboxes round-trip on gallery export reload (Session 31b fix)
 
 **Known limitations (accepted):**
-- Fly-to checkboxes don't round-trip (same as trace visibility/featured)
 - Auto pan/zoom enable is one-way nudge (user can disable after)
 - Animation deferred (instant snap; Plotly transitions need broader testing)
 
@@ -4050,3 +4052,997 @@ the `_studio_config` blob already survives.
 *"Is this what they call 'software engineering' as distinct from 'coding'?"*
 -- Tony, after a zero-code design session moved the project further than
 most coding sessions, March 16, 2026
+
+### Session 31b (Mar 17, 2026): Fly-to & Route Hover Round-Trip Fixes
+
+Three bugs preventing studio settings from round-tripping on gallery
+export reload. All targeted fixes, no new features.
+
+**Bug 1: flyto_targets filtered out on reload**
+
+`_studio_config` stores `flyto_targets` as a list of dicts (name,
+camera, axis_ranges, dtick). On reload, the restore path
+(`_do_load`) starts from `DEFAULT_CONFIG.copy()` and only overlays
+keys present in the default dict (`if k in restore`). `flyto_targets`
+was missing from `DEFAULT_CONFIG`, so it was silently dropped.
+
+Fix: Added `"flyto_targets": []` to `DEFAULT_CONFIG`.
+
+**Bug 2: Trace list populated before config restore**
+
+`_populate_trace_list()` was called before the `_studio_config`
+restore block, so per-trace settings (flyto checkboxes, featured
+checkboxes) read from `self.config` before it was updated with the
+restored values.
+
+Fix: Moved `_populate_trace_list()` after the config restore
+`if/else` block. Added `self.config = restore` (or
+`DEFAULT_CONFIG.copy()` in the else branch) before the trace list
+population so `self.config` reflects the restored state.
+
+**Bug 3: flyto_targets type mismatch on checkbox restore**
+
+`_populate_trace_list` checked `name in saved_flyto` where `name`
+is a string like `"Mercury"` but `saved_flyto` is a list of dicts
+(`[{"name": "Mercury", "camera": {...}, ...}]`). String-in-list-of-
+dicts always returns False.
+
+Fix: Extract names from the dict list before comparison:
+```python
+saved_flyto_raw = self.config.get('flyto_targets', [])
+saved_flyto = [t['name'] if isinstance(t, dict) else t
+               for t in saved_flyto_raw]
+```
+
+**Bug 4: route_hover_to_panel forced off on reload**
+
+Line 4869 explicitly called `self.var_route_hover.set(False)` after
+config restore. The original comment explained this was because
+"routing is applied at export time, not by stored state." But the
+non-destructive routing refactor (Session 29) already ensures
+`trace['text']` is intact on reload, so there's no data-safety
+reason to force it off. The checkbox should reflect what was saved.
+
+Fix: Removed the `self.var_route_hover.set(False)` block entirely.
+
+**Bug 5: Fly-to dtick not restored on Reset View**
+
+The `panPlot('reset')` function in `build_gallery_html()` captured
+and restored `_initScene` axis ranges but not dtick. Fly-to buttons
+set a tight dtick for close-up views, which then persisted after
+reset.
+
+Fix: Capture dtick alongside range in `_initScene`:
+```javascript
+_initScene[ax] = {range: _sl[ax].range.slice(), dtick: _sl[ax].dtick};
+```
+Restore dtick on reset alongside range:
+```javascript
+if (_initScene[ax].dtick != null) {
+  update['scene.' + ax + '.dtick'] = _initScene[ax].dtick;
+}
+```
+
+**Files modified:**
+- `gallery_studio.py`: `DEFAULT_CONFIG` (added `flyto_targets`),
+  `_do_load` (reordered trace list population, removed route_hover
+  force-off, added `self.config` assignment), `_populate_trace_list`
+  (flyto name extraction from dicts), `build_gallery_html` JS template
+  (dtick capture and restore in `_initScene`/`panPlot('reset')`)
+
+---
+
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| flyto_targets in DEFAULT_CONFIG | Add as empty list | Keys not in default are silently dropped on reload |
+| Trace list vs config restore order | Config first, then populate | Per-trace checkboxes need config values at build time |
+| route_hover force-off | Remove | Non-destructive routing (Session 29) makes it safe; checkbox should reflect saved intent |
+| dtick in _initScene | Capture and restore | Fly-to sets tight dtick; reset must undo it |
+| flyto name extraction | isinstance guard | Handles both dict format (current) and hypothetical plain-string format |
+
+---
+
+**Technical Lessons Learned:**
+
+- Per-trace config (flyto_targets, featured_traces) stored as complex
+  types (list of dicts, list of strings) needs special handling in both
+  the restore path (must be in DEFAULT_CONFIG to survive the filter) and
+  the comparison path (extract comparable values from complex structures).
+
+- Ordering matters in load sequences: GUI population that reads from
+  `self.config` must happen AFTER config restore, not before. The previous
+  ordering happened to work for featured_traces only because
+  `_apply_config_to_gui` had an explicit refresh loop for `featured_vars`.
+
+- When a force-off was added as a safety measure for a destructive
+  operation (old routing blanked trace text), revisit it after the
+  operation becomes non-destructive. Stale safety measures become bugs.
+
+- Reset functions should restore ALL properties that fly-to/navigation
+  functions modify. Camera + range without dtick leaves the grid in the
+  wrong state. Pattern: any property set in the "go" function must have
+  a corresponding restore in the "reset" function.
+
+
+### Session 32 (Apr 7, 2026): Animation Pipeline Fixes -- Frame Extraction & Trace Index Remapping
+
+Four bugs found and fixed while testing animation plots through the
+gallery pipeline. Mercury orbit (5 frames) and Artemis II Moon flyby
+(10 frames) used as test cases. All fixes applied and verified.
+
+**Bug 1: Gallery Studio drops frames from fresh orrery exports**
+
+`extract_figure_from_html()` tries `_extract_newplot` first. Fresh orrery
+HTML uses `Plotly.newPlot()` for data+layout and a separate
+`Plotly.addFrames()` call for frames. `_extract_newplot` succeeds on
+data+layout and returns immediately -- frames extraction code only existed
+inside `_extract_variables`, which never runs.
+
+Root cause: Session 13 documented this exact bug and described the fix
+("restructured to extract data/layout first via any method, then always
+attempt frames extraction afterward") but the restructure was only
+partially applied. Frames extraction was added to `_extract_variables`
+but the parent function still early-returned from `_extract_newplot`.
+
+Why it passed Session 13 testing: Paloma's Birthday was tested as a
+round-trip (Studio re-export), which uses `var data/layout/frames` format.
+`_extract_newplot` fails on re-exports (no `Plotly.newPlot` call with
+inline args), so `_extract_variables` runs and finds frames. First-time
+imports from the orrery were never tested.
+
+Fix: New `_extract_frames_from_html()` helper function (handles both
+`var frames = [...]` and `Plotly.addFrames('id', [...])` formats).
+`extract_figure_from_html()` restructured: try all methods for
+data+layout, then ALWAYS attempt frames extraction on the raw HTML
+before returning.
+
+**Bug 2: json_converter.py has the same early-return bug**
+
+`extract_plotly_json_from_html()` in json_converter.py had identical
+structure: `_extract_via_newplot` succeeds, returns without frames,
+`_extract_via_variables` (which could find `var frames`) never runs.
+Same fix pattern: add `_extract_frames_from_html()` and call it after
+any successful extraction method.
+
+Parallel pipeline lesson: fix in gallery_studio.py didn't propagate to
+json_converter.py. Both extractors need the same frames logic.
+
+**Bug 3: Stripping hidden traces breaks animation frame indices**
+
+Plotly frames carry a `traces` array that maps frame.data entries to
+absolute fig.data indices (e.g., `traces: [5,6,7,8,9]` means
+frame.data[0] updates fig.data[5]). When `strip_hidden_traces` removes
+traces from fig.data, the absolute indices in frames become wrong --
+they point past the end of the shortened array or at the wrong traces.
+
+Symptom: Artemis II landscape (14 traces, no strip) animates correctly.
+Portrait (9 traces, 5 stripped) -- slider works but Artemis and Earth
+markers don't move. The frame updates target indices that no longer
+exist.
+
+Fix: After stripping traces in `apply_config`, build old-index-to-new-
+index map and remap every frame's `traces` array. Also drop frame.data
+entries for stripped traces:
+
+```python
+old_to_new = {}
+new_idx = 0
+for old_idx, keep in enumerate(keep_mask):
+    if keep:
+        old_to_new[old_idx] = new_idx
+        new_idx += 1
+
+for frame in fig.get('frames', []):
+    old_traces = frame.get('traces', [])
+    old_frame_data = frame.get('data', [])
+    if old_traces:
+        new_traces = []
+        new_frame_data = []
+        for i, old_t in enumerate(old_traces):
+            if old_t in old_to_new:
+                new_traces.append(old_to_new[old_t])
+                if i < len(old_frame_data):
+                    new_frame_data.append(old_frame_data[i])
+        frame['traces'] = new_traces
+        frame['data'] = new_frame_data
+```
+
+**Bug 4: HTML annotations with mixed plain text + anchor tags**
+
+`_wrapAnnotations()` in index.html word-wraps annotation text by
+splitting on spaces. Its skip condition (`/^<[^>]+>.*<\/[^>]+>$/`)
+only passes through segments that are *entirely* an HTML tag. Mixed
+content like `"Search: <a href='...'>NASA</a>"` falls through to
+word-splitting, which breaks the anchor tag across lines.
+
+Symptom: `animate_objects` annotations use prefixed links ("Search:",
+"Data source:") while `plot_objects` uses bare links. In landscape
+gallery view, the raw HTML tags render as text instead of clickable
+links.
+
+Note: In portrait exports, these annotations are stripped entirely by
+the portrait preset (`strip_footer_annotations`). That's by design --
+the portrait info panel replaces the annotation-based links. The
+`_wrapAnnotations` bug only manifests in landscape gallery view.
+
+Fix: Change the skip condition on line 1644 of index.html to detect
+any HTML tag presence:
+```javascript
+if (!seg.trim() || /<[a-zA-Z]/.test(seg)) return seg;
+```
+
+**Also noted (not a pipeline bug):**
+
+`animate_objects` is missing two of the four standard link annotations
+(Paloma's Orrery Web Site and GitHub Page) that `plot_objects` includes.
+Parallel pipeline divergence in `palomas_orrery.py` -- the annotations
+block at line ~7202 has only NASA + Horizons, while `plot_objects` at
+line ~5349 has all four. Fix: add the two missing annotations to the
+`animate_objects` block.
+
+**Files modified:**
+- `gallery_studio.py`: New `_extract_frames_from_html()` function,
+  restructured `extract_figure_from_html()` to always attempt frames
+  after data+layout extraction. Frame trace-index remapping after
+  `strip_hidden_traces` in `apply_config()`.
+- `json_converter.py`: Same `_extract_frames_from_html()` function and
+  restructured `extract_plotly_json_from_html()`.
+- `index.html`: `_wrapAnnotations()` skip condition updated to preserve
+  any segment containing HTML tags.
+- `palomas_orrery.py` (pending): Two missing link annotations in
+  `animate_objects` annotations block.
+
+**Validation:**
+- Mercury 5-frame animation: Studio preview, Studio export, JSON
+  conversion, gallery landscape -- all animate correctly.
+- Artemis II 10-frame animation: Studio landscape (14 traces) and
+  portrait (9 traces, 5 stripped) both exported. Landscape works in
+  gallery. Portrait requires the frame trace-index remap fix.
+
+---
+
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| Frame extraction location | Standalone helper called from parent, not embedded in individual methods | Runs regardless of which extraction method succeeded |
+| Two formats for frames | `var frames = [...]` + `Plotly.addFrames('id', [...])` | Studio re-exports use format 1, fresh orrery exports use format 2 |
+| Duplicate helper in two files | Same function in gallery_studio.py and json_converter.py | Each file has its own `_match_bracket`; keeping extractors self-contained |
+| strip_hidden_traces + frames | Remap indices inline after strip | Frame indices are absolute; must track what shifted |
+| HTML tag detection in _wrapAnnotations | `/<[a-zA-Z]/` test | Catches both bare links and prefixed links; plain text passes through to word-wrap |
+| animate_objects missing links | Add to palomas_orrery.py | Same parallel divergence pattern -- two code paths that should have same annotations |
+
+---
+
+**Technical Lessons Learned:**
+
+- Testing round-trips (Studio -> export -> Studio) validates one input
+  format but misses first-time imports from the source application.
+  Both paths must be tested independently.
+
+- Frame trace indexing is absolute, not by name. Any operation that
+  changes the number or order of traces (strip, reorder, filter) must
+  remap frame.traces arrays. This is the same class of bug as hover
+  customdata index mismatches.
+
+- Word-wrapping annotation text is dangerous when annotations contain
+  HTML. The safe pattern is to skip any segment that contains HTML tags,
+  not just segments that are purely HTML.
+
+- "Works in landscape, breaks in portrait" often means the portrait
+  pipeline does something extra (strip, route, resize) that the
+  landscape pipeline doesn't. The difference IS the bug.
+
+
+### Session 33 (Apr 11, 2026): Flyto Button Truncation + Portrait Touch UX Investigation
+
+**Context**: Two issues surfaced during portrait preview and gallery testing.
+
+---
+
+**Fix 1: Flyto buttons covering zoom +/- buttons in portrait preview**
+
+Long target names caused flyto buttons to extend across the frame and
+overlap the zoom controls (bottom-right). Root cause: no width constraint
+on either the button or its container.
+
+Fix applied to `gallery_studio.py` (preview exports) and `index.html`
+(gallery viewer):
+
+- `.flyto-controls`: added `max-width: 140px`
+- `.flyto-btn`: added `max-width: 140px`, `overflow: hidden`, reduced
+  padding `0 14px → 0 10px`
+- `.flyto-btn-label`: new class (`overflow: hidden; text-overflow: ellipsis;
+  min-width: 0`) wrapping the button text so ellipsis applies to text
+  only, not the color dot
+- Color dot gets `flex-shrink: 0` (already present) so it never disappears
+
+In `gallery_studio.py`, button HTML is generated as an f-string — label
+text wrapped in `<span class="flyto-btn-label">`.
+
+In `index.html`, buttons are built via `document.createElement` — replaced
+`document.createTextNode(target.name)` with a `<span class="flyto-btn-label">`
+element so the CSS has a target.
+
+The 140px cap clears the nav cluster (3 × 36px buttons + gaps ≈ 112px)
+with a small margin. Full name always available on hover via existing
+`title` attribute.
+
+**Note on double-braces**: flyto CSS lives inside a Python f-string in
+`gallery_studio.py`. CSS curly braces must be doubled (`{{`, `}}`) to
+avoid Python interpreting them as f-string variables. Single-brace
+interpolations like `{btn_border}` are actual substitutions. The
+`.flyto-btn-label` rule uses `{{` / `}}` throughout (no interpolated
+values).
+
+**Parallel pipeline note**: flyto CSS in `gallery_studio.py` and
+`index.html` are independent — fix must be applied to both. The JS button
+builder in `index.html` is also a separate path from the HTML template in
+`gallery_studio.py`.
+
+---
+
+**Investigation 2: Portrait info card touch behavior by device**
+
+Mapped actual behavior across three contexts:
+
+| | Desktop preview | iPhone | iPad mini |
+|---|---|---|---|
+| First tap/click | arrow displays | arrow displays | card comes up ✓ |
+| Second tap/click | card comes up | nothing | not required |
+| Swipe up | not possible | card comes up | not required |
+
+Root cause: Plotly's 3D WebGL touch handling treats touch as potentially
+pan/rotate on narrow viewports (iPhone). On first touch it fires
+`plotly_hover` (showing the arrow indicator) but holds back `plotly_click`.
+A deliberate swipe-end near the origin crosses an internal threshold that
+triggers `plotly_click`. iPad mini is wide enough that Plotly commits to
+`plotly_click` on tap-end immediately.
+
+The "swipe up to open card" behavior on iPhone is accidental — it works
+but is not discoverable.
+
+**Attempted fix: persistent device-aware tip bar**
+
+Added a 28px bar at top of frame with device-specific text:
+- Desktop: "Click any object to open its information card"
+- iPhone (<500px): "Tap any object · then swipe up for its information card"
+- iPad / wide touch: "Tap any object to open its information card"
+
+Implementation: `.card-tip` div (`position: fixed/absolute`, `top: 0`,
+`z-index` tuned), text set at runtime via JS device detection
+(`'ontouchstart' in window`, `navigator.maxTouchPoints`,
+`window.innerWidth < 500`).
+
+**Reverted**: Two problems emerged in gallery:
+1. z-index 350 covered the hamburger menu and share button (both z-index 200)
+2. Lowering to z-index 150 hid the bar behind the Plotly title
+
+**Decision**: Tip bar removed entirely from both files. Rationale:
+- iPad mini behavior (card on first tap) is already intuitive
+- iPhone swipe behavior follows iOS native patterns users already know
+- A tip that's hard to see or gets in the way is worse than no tip
+
+**Files modified this session:**
+- `gallery_studio.py`: flyto button max-width + label span (CSS + HTML template)
+- `index.html`: flyto button max-width + label span (CSS + JS builder)
+
+**Files NOT modified (tip bar reverted):**
+- Both files restored to pre-tip state; only flyto fixes remain
+
+---
+
+**Technical Lessons Learned:**
+
+- `max-width` on a flex container must also be set on the children if
+  children can independently exceed it. Set both `.flyto-controls` and
+  `.flyto-btn` to 140px.
+
+- `text-overflow: ellipsis` requires a block or inline-block context with
+  `overflow: hidden` AND `white-space: nowrap`. In a flex child, also
+  requires `min-width: 0` — without it, flex items won't shrink below their
+  content width even with `overflow: hidden`.
+
+- `document.createTextNode()` produces a bare text node with no class —
+  CSS `text-overflow` cannot target it. Must wrap in a `<span>` to apply
+  ellipsis.
+
+- `position: fixed` elements at `top: 0` compete with other fixed UI
+  chrome at the same position. z-index tuning alone cannot solve overlap
+  with Plotly's WebGL canvas (which has its own stacking context). A bar
+  spanning full width at top: 0 will always conflict with hamburger/share
+  buttons at the same corner unless it has a left offset.
+
+- Plotly 3D touch behavior varies by viewport width: narrow (iPhone) fires
+  hover-then-never-click; wide (iPad) fires click on tap-end. This is
+  internal to Plotly's WebGL touch handling and cannot be fixed by listening
+  to different Plotly events — `plotly_click` simply never fires on iPhone
+  for 3D scenes in narrow viewports.
+
+
+### Session 34 (Apr 11, 2026): Gallery JSON Fixer
+
+**Context**: Older gallery JSON exports progressively broke as index.html
+evolved -- hover text stopped displaying, info cards didn't appear in
+portrait mode. The alternative was re-running every file through the full
+Gallery Studio -> json_converter pipeline, which requires per-file visual
+judgment. The fixer applies mechanical, non-destructive fixes so older
+visualizations work correctly with the current viewer without re-curation.
+
+**New file: `gallery_json_fixer.py`** (in `tools/` alongside other gallery tools)
+
+A standalone batch tool that scans gallery JSON files and adds missing
+fields the current index.html viewer expects. Zero dependencies on the
+orrery codebase -- contains its own copy of `_parse_hover_html()` so it
+runs anywhere the gallery folder is accessible.
+
+**Three run modes:**
+- Interactive: `python gallery_json_fixer.py` -- file browser, select specific files
+- Batch: `python gallery_json_fixer.py --batch` -- all JSONs in gallery folder
+- Dry run: `python gallery_json_fixer.py --batch --dry-run` -- report only, no writes
+- Optional: `--folder /path/to/gallery` to override auto-detection
+
+**What it fixes (additive only -- never removes existing data):**
+- Strips embedded Plotly template (prevents version mismatch errors)
+- Adds `hovertemplate='%{text}<extra></extra>'` on traces with HTML text
+  that lack it (fixes hover display)
+- Parses `trace.text` HTML into structured `customdata` (name/subtitle/body)
+  for info card support in portrait mode
+- Adds `_hover_mode='default'` to layout when customdata exists (enables
+  info card click handler in portrait mode)
+- Fixes animation frame traces the same way (hovertemplate + customdata)
+- Creates `.json.bak` backups before writing
+- Idempotent: running twice produces no changes on second run
+
+**What it does NOT fix (requires visual judgment / full pipeline):**
+- Theme/bgcolor issues
+- Axis scaling (dtick/range for close-approach plots)
+- Trace visibility curation
+- Legend sizing / positioning
+- Featured annotations
+- Any aesthetic decisions that Gallery Studio handles
+
+**Design decisions:**
+
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| Import hover parser or copy? | Self-contained copy | Zero dependencies on orrery codebase; runs from website repo alone |
+| Destructive or additive? | Additive only | Never removes data; only adds missing fields |
+| Batch or interactive default? | Interactive (file browser) | Matches gallery_editor.py pattern; batch via --batch flag |
+| Backup strategy | One-generation .json.bak | Simple; .gitignore keeps backups out of repo |
+| Dashboard integration | Added to Gallery & Web group | Same GALLERY_TOOLS_DIR, no interactive console needed |
+
+**Test results (Tony's gallery):**
+- 273 files scanned, 55 identified for fixes, 218 already OK, 0 errors
+- Dry run matched actual run (minus 2 files manually fixed during testing)
+- Three categories of fixes observed:
+  - Most common (all 55): `_hover_mode='default'` -- pre-Studio exports lacking the layout flag
+  - Medium (~20 files): customdata parsing -- hover was broken in portrait/mobile mode
+  - Rare (3 files): missing hovertemplate -- oldest exports, most broken
+- TRAPPIST-1 exoplanet system (heaviest test case: 8 traces, all 3 fix types)
+  verified working with info cards in portrait mode after fix
+- Idempotency confirmed: second batch run found 0 files to fix
+
+**Dashboard integration:**
+Added to `palomas_orrery_dashboard.py` LAUNCH_GROUPS["Gallery & Web"]:
+```python
+("Gallery JSON Fixer",
+"gallery_json_fixer.py",
+"Fix older gallery JSON files for current viewer",
+GALLERY_TOOLS_DIR),
+```
+
+**`.gitignore` for website repo:**
+Created `tonyquintanilla.github.io/.gitignore` with `*.json.bak` to
+keep backup files out of the repository.
+
+**Files created:**
+- `gallery_json_fixer.py` (new, in tools/)
+- `.gitignore` (new, in website repo root)
+
+**Files modified:**
+- `palomas_orrery_dashboard.py` (added fixer to Gallery & Web launch group)
+- orrery `.gitignore` (added `*.json.bak`)
+
+---
+
+**Technical Lessons Learned:**
+
+- As index.html evolves, older JSON exports drift out of compatibility.
+  A batch fixer is cheaper than re-curating through the full pipeline,
+  and buys time to re-export at leisure. The fixer is a compression of
+  the pipeline's transforms into additive-only patches.
+
+- Self-contained tools (no cross-repo imports) are more robust for
+  maintenance tasks. The fixer works even if the orrery codebase isn't
+  on the same machine.
+
+- Dry run mode is essential for batch operations on production data.
+  The dry run matched the actual run exactly, building confidence before
+  committing to 273 file modifications.
+
+- `.gitignore` should be created early in any repo that generates
+  artifacts. The website repo had `.gitattributes` but no `.gitignore`,
+  allowing backup files to show up as pending changes in GitHub Desktop.
+
+- Session efficiency: sidebars (product questions, philosophy, "how does
+  X work") should be separate sessions from working sessions. Every
+  message in a session adds to the context that gets replayed on every
+  subsequent response. A fresh session with a good handoff is lighter
+  than a long session carrying accumulated tangent context.
+
+
+### Session 35 (Apr 16, 2026): Link Icon Feature + Orbit Hover Bloat Discovery
+
+---
+
+**Goal:** Add a link icon button to the gallery viewer toolbar that provides
+access to reference URLs (NASA, JPL, etc.) independently of the annotation
+toggle. When annotations are turned off for a clean view, links remain
+accessible via the icon.
+
+**Design decisions:**
+
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| Where does link data come from? | `_link_data` array extracted from `<a href>` annotations | Clean separation; no regex parsing at render time |
+| When is extraction done? | `apply_config()` before annotation visibility toggle | Data survives even when show_annotations is off |
+| Visibility filtering? | `index.html` filters by visible trace names; Studio preview shows all | Studio preview has no trace visibility context at JS level |
+| Portrait vs landscape? | Both -- icon is always visible when `_link_data` exists | Annotations off kills links in both orientations; icon recovers them |
+| Where does the icon live? | `_build_link_overlay()` in `gallery_studio.py` | Same CSS/HTML/JS pattern as `_build_encyclopedia_overlay()` |
+| Preview or export? | Both -- wired into `build_gallery_html()` | `_preview()` and `_export()` both call this function |
+
+**Architecture:**
+
+1. `apply_config()` scans `layout.annotations` for `<a href>` tags, extracts
+   `{name, url}` pairs into `layout['_link_data']` before the show_annotations
+   toggle runs. Data survives annotation clearing.
+
+2. `_build_link_overlay(fig_dict)` reads `_link_data` from layout, returns
+   CSS + HTML + JS (chain-link SVG icon, dropdown, click-outside-to-close,
+   Escape key). Same modular pattern as encyclopedia overlay.
+
+3. `build_gallery_html()` calls `_build_link_overlay()` and inserts the
+   three pieces into the template alongside enc_css/html/js.
+
+4. Three serialization points preserve `_link_data` in `layout_for_json`:
+   landscape builder (~line 2225), portrait builder (~line 3145),
+   preview (~line 5087).
+
+5. `index.html` reads `_link_data` from gallery JSON, filters entries
+   to names matching visible traces, shows icon if any match.
+   JS: `linkReset()`, `linkToggle()`, click-outside/Escape handlers.
+
+**Pipeline flow:**
+
+```
+celestial_objects.py (mission_url/url per object)
+  -> add_url_buttons() creates <a href> annotations in layout
+  -> apply_config() extracts _link_data from annotations
+  -> _build_link_overlay() embeds icon CSS/HTML/JS in gallery HTML
+  -> json_converter passes _link_data through as layout key
+  -> index.html reads _link_data, shows icon + dropdown
+```
+
+**Key discovery: `_preview_as_gallery()` is orphaned.** Neither `_preview()`
+nor `_export()` calls it. Both go through `build_gallery_html()`. The
+`build_social_html()` function is also unused in Studio (legacy orrery GUI
+export only). Initial link button code was placed in the orphaned function --
+that's why the icon didn't appear. Fix: moved to `_build_link_overlay()` +
+`build_gallery_html()`.
+
+**Key discovery: `build_social_html()` is obsolete in Studio.** It exists
+as an orrery GUI export path but is not called by Studio preview or export.
+Both paths use `build_gallery_html()`.
+
+---
+
+**Orbit hover text bloat (discovered, parked):**
+
+While testing a Mercury-only plot, file size was 442 KB for a single planet.
+Root cause: Keplerian and Mean orbit traces duplicate the full perturbation
+description (521 chars) on every orbit point (360 points each). This is the
+pre-existing pattern that the single info marker convention was designed to fix
+-- but idealized orbits in `idealized_orbits.py` haven't been refactored yet.
+
+| Trace | Points | text size | customdata size |
+|-------|--------|-----------|-----------------|
+| Keplerian Orbit | 360 | 189 KB | 10 KB |
+| Mean Orbit | 360 | ~95 KB | ~5 KB |
+| Actual Orbit | 51 | ~2 KB | negligible |
+
+**Impact:** ~300 KB wasted per planet (both text + customdata duplicated).
+For a full 8-planet plot, that's ~2.4 MB of pure hover text bloat, invisible
+in large plots but dominant in small ones.
+
+**Fix (deferred to plotting consolidation):** Apply single info marker pattern
+to idealized orbit traces in `idealized_orbits.py`. Geometry points get
+`hoverinfo='skip'`; one cross marker at a representative position carries
+the hover text. This is the same refactor planned for Ring 2 of the plotting
+consolidation.
+
+---
+
+**Files modified:**
+- `gallery_studio.py` -- `_link_data` extraction in `apply_config()`,
+  `_build_link_overlay()` function, three serialization points,
+  `build_gallery_html()` template insertions
+- `index.html` -- link button CSS, HTML, JS vars, toolbar append,
+  `loadVisualization` link data loading, `linkReset()`/`linkToggle()`
+  functions, event wiring
+
+**Files NOT modified:**
+- `json_converter.py` -- `_link_data` passes through as layout key
+- `celestial_objects.py` -- source data unchanged
+- `palomas_orrery_helpers.py` -- `add_url_buttons()` unchanged
+
+---
+
+**Technical Lessons Learned:**
+
+- Preview and export share a single HTML builder (`build_gallery_html()`).
+  Orphaned builder functions (`_preview_as_gallery`, `build_social_html`)
+  exist but are never called from Studio's UI. Any new UI features in
+  preview/export must go into `build_gallery_html()`.
+
+- The modular overlay pattern (function returns css, html, js strings;
+  template interpolates them) is the right way to add UI elements to the
+  gallery HTML. Keeps each feature self-contained and toggleable.
+
+- Orbit hover text bloat was always there but invisible at scale. A
+  Mercury-only plot made it obvious because the bloat was 98% of the file.
+  Single info marker pattern is the established fix -- just hasn't been
+  applied to idealized orbits yet.
+
+- The `_link_data` extraction must run before the annotation visibility
+  toggle in `apply_config()`. Order matters: extract data, then decide
+  whether to show/hide annotations. The data is independent of the
+  presentation.
+
+
+**Dead code cleanup (same session):**
+
+Removed two orphaned functions from `gallery_studio.py`:
+- `build_social_html()` (~390 lines, line 3104) -- portrait HTML builder
+  never called by Studio. Legacy orrery GUI export path only.
+- `_preview_as_gallery()` (~245 lines, line 5036) -- alternate preview
+  builder never called. `_preview()` uses `build_gallery_html()`.
+
+5527 -> 5025 lines. Syntax verified. No callers existed for either function.
+
+**Shell info marker strip_hidden -- confirmed working (same session):**
+
+Investigated why Roche Limit info marker cross survived strip_hidden.
+Root cause: Tony loaded an HTML file exported BEFORE the legendgroup fix
+(Session 34b). Old exports carry pre-fix trace structure (info markers
+without matching legendgroup). Re-tested with a fresh plot from current
+`solar_visualization_shells.py` -- shells and their info markers strip
+cleanly. Not a code bug; old exports need re-generation to pick up the fix.
+
+**Credit line added** to `gallery_studio.py` module docstring per convention.
+
+**Next steps for next session:**
+- Test link icon end-to-end through full pipeline (Studio -> json_converter -> index.html)
+- Verify link icon positioning with enc-btn and KMZ button coexistence
+- Orbit hover bloat fix deferred to plotting consolidation Ring 2
+
+
+### Session 36 (May 2, 2026): Nav Controls 2D/3D Split
+
+---
+
+**Problem:** When Studio portrait preset exports an animated 3D plot with
+"Show pan/zoom arrows" enabled, the D-pad navigation buttons (position:
+fixed, bottom-right) overlap the Plotly animation frame slider. The slider
+handle cannot be dragged through the button area -- it stops or jumps past
+them, making animation scrubbing broken.
+
+**Root cause:** The full D-pad (up/down/left/right/reset/zoom) was emitted
+identically for both 2D and 3D plots. In 3D, the directional arrows had
+no detectable effect (the `pan3D()` function shifted `camera.eye` and
+`camera.center` by fixed increments via `scene.setCamera()`, but this
+never produced visible results). The arrows were dead UI occupying space
+that the slider needs.
+
+**Design decision:** Separate navigation controls by scene type.
+
+| Scene type | Controls shown | Rationale |
+|------------|---------------|-----------|
+| 2D/polar + studio nav | Full D-pad: arrows + zoom + reset (bottom-right) | Arrows essential -- `Plotly.relayout` on axis ranges is the only way to pan on touch devices |
+| 3D + studio nav | Zoom +/- (raised to bottom: 70px) + standalone reset dot (bottom: 24px) | Native touch-drag handles 3D pan/rotate; arrows were ineffective; compact layout clears the slider |
+| 3D without studio nav | Zoom +/- only (bottom-right, unchanged) | Default mobile 3D behavior, no reset needed |
+| Mapbox | No controls | Built-in scroll/pinch handles everything |
+
+**Implementation (Option A -- 2D/3D split, cleanest):**
+
+`gallery_studio.py` (2 edits):
+1. **nav_html split** (~line 2364): `if has_scene:` emits reset + zoom
+   buttons only (no arrow rows). `else:` emits full D-pad. Both paths
+   keep `class="nav-controls"` and `function panPlot` so json_converter
+   detection is preserved.
+2. **3D nav_js simplified** (~line 2408): `panPlot()` early-returns on
+   anything except `'reset'`. Removed dead directional camera shifting
+   code. `zoomPlot()` unchanged (synthetic wheel events).
+3. **Tooltip updated** (~line 3582): Now explains 2D gets full D-pad,
+   3D gets reset + zoom only.
+
+`index.html` (7 edits):
+1. **CSS**: `.reset-standalone` -- same visual treatment as `.pan-btn`,
+   positioned `bottom: 120px; right: 16px` (above the zoom +/- cluster
+   at bottom: 24px, clearing the animation slider).
+2. **HTML**: Standalone reset button added after `panControls` div.
+3. **JS variable**: `resetStandalone` element reference added.
+4. **Control visibility logic**: `hasStudioNav && sceneType === '3d'`
+   shows `zoomControls` (default position) + `resetStandalone` (above
+   zoom cluster). `hasStudioNav && !3d` shows full D-pad as before.
+5. **Event handler**: `resetStandalone` wired to `resetPanZoom()` (both
+   touchstart + mousedown, matching existing button pattern).
+6. **Cleanup branches**: `resetStandalone` hidden in mapbox, default,
+   and goHome paths.
+
+`json_converter.py` -- **not modified**. Detection logic (`class="nav-controls"`
++ `function panPlot`) works for both 2D and 3D nav_html paths.
+
+**Result:**
+- 3D animated plots: slider has clear space. User gets a reset dot
+  above the zoom +/- cluster (stacked vertically, bottom-right).
+  Native touch-drag handles pan/rotate.
+- 2D plots: completely unchanged (no animation sliders, full D-pad).
+- No preset changes needed -- `has_scene` check at export time gates the
+  arrows regardless of which preset was used.
+
+**Dead code noted (not removed):** `pan3D()` function in `index.html`
+(~line 2619) is now unreachable -- only called by `doPan()` which is
+triggered by D-pad arrow buttons, which are hidden for 3D. The native
+Plotly right-click-drag / shift-drag handles 3D panning. Flagged for
+opportunistic removal.
+
+---
+
+**Files modified:**
+- `gallery_studio.py` -- nav_html 2D/3D split, 3D nav_js simplified,
+  tooltip updated
+- `index.html` -- standalone reset button (CSS, HTML, JS var, visibility
+  logic, event handler, cleanup)
+
+**Files NOT modified:**
+- `json_converter.py` -- detection logic unchanged, works for both paths
+
+---
+
+**Technical Lessons Learned:**
+
+- Directional arrow buttons for 3D scenes were dead UI since their
+  introduction. The `scene.setCamera()` approach (fixed step on
+  `camera.eye` + `camera.center`) produced no visible effect. Native
+  Plotly touch-drag and mouse-drag handle 3D navigation. Testing UI
+  elements in their actual target context matters.
+
+- Animation frame sliders and fixed-position overlays are a fundamental
+  conflict on mobile: the slider is a full-width Plotly element that
+  needs unobstructed drag across the bottom. Any `position: fixed` control
+  in the same zone will eat pointer events. The fix is architectural
+  (remove the conflicting controls) not positional (move them higher).
+
+- Scene type detection (`has_scene`, `has_polar`) was already available
+  in all three pipeline stages (Studio, converter, viewer). The
+  infrastructure to do per-type control selection existed -- it just
+  wasn't used for nav controls until now.
+
+- Position: fixed elements need testing in BOTH Studio preview and
+  gallery viewer -- they have separate nav implementations. A fix in
+  one doesn't propagate to the other (parallel pipeline lesson again).
+
+- Section-level gray-out is too coarse when a section mixes orrery-native
+  and post-production controls. Trace Visibility has visibility checkboxes
+  (orrery-native) alongside strip-hidden, featured labels, and fly-to
+  buttons (post-production). Solution: bulk section disable plus
+  per-widget re-enable/disable for mixed sections.
+
+
+### Session 36b (May 2, 2026): Encounter Export Implementation
+
+---
+
+**Implements:** ENCOUNTER_EXPORT_HANDOFF.md (design session May 1, 2026)
+
+**Feature:** New export path in Gallery Studio that captures spacecraft
+encounter visualizations as Python dict entries for `spacecraft_encounters.py`.
+Studio already captures curation work for the gallery (Fork 1: Export HTML).
+This adds Fork 2: the same curation work, exported as an orrery encounter
+preset.
+
+**Three phases, built and tested in one session:**
+
+**Phase 1 -- Orrery mode infrastructure (153 lines):**
+- Green "Orrery" toggle button on its own row below existing presets
+- `_enter_orrery_mode()`: recursively disables 12 post-production
+  sections, keeps 3D Scene and Trace Visibility active. Within Trace
+  Visibility, selectively disables strip-hidden, featured (gold), and
+  fly-to (green) checkboxes while leaving visibility checkboxes active.
+  Re-enables preset buttons so user can always exit.
+- `_exit_orrery_mode()`: re-enables all controls. Called by every other
+  preset method + Reset Defaults. Preserves status log read-only state.
+- Export Encounter button in action bar: `state='disabled'` by default,
+  `'normal'` in Orrery mode.
+- Verified: 12 sections disabled, 2 active, 3 post-production controls
+  within Trace Visibility individually disabled, all re-enable on exit.
+
+**Phase 2 -- Export Encounter dialog (335 lines):**
+- `_export_encounter()`: two-pane Toplevel modal dialog
+- Left pane (read-only verification): spacecraft, center, select_also,
+  plot_scale_au, plot_days, scene_dtick, date_range -- auto-extracted
+  from figure + Studio Orrery-mode settings
+- Right pane (manual entry): type dropdown (full_mission, flyby,
+  gravity_assist, orbit_insertion, orbit, landing, sample, sample_return,
+  end_of_mission, planned), target, label, date, dist_km (pre-filled),
+  v_kms (pre-filled), date_source, status (completed/ongoing/planned/
+  canceled), source, note textarea
+- `_extract_encounter_data()`: parses loaded figure traces for spacecraft
+  (diamond-open marker symbol), visible traces (select_also), title
+  (center + date range), closest plotted point hover text (dist_km/v_kms
+  suggestions). Filters spacecraft name from select_also.
+
+**Phase 3 -- Output generation (166 lines):**
+- `_generate_encounter_code()`: produces valid Python dict code matching
+  `spacecraft_encounters.py` format
+- `full_mission` type -> `SPACECRAFT_FULL_MISSION` dict entry
+- All other types -> `SPACECRAFT_ENCOUNTERS` list entry
+- `dist_au` computed as `dist_km / AU_KM` (never hardcoded)
+- Comment header with generation date and source file
+- `_save_encounter_code()`: file save dialog -> .py file, clipboard
+  fallback if canceled
+
+**Additional fixes during session:**
+- Nav controls: 3D preview changed from vertical stack (reset above zoom)
+  to horizontal row `[Reset] [+] [-]` to avoid blocking animation slider
+- Nav controls: gallery viewer reset button positioned at `right: 68px`
+  (left of zoom cluster) for same reason
+- Redundant `import re` and `from datetime import datetime as _dt`
+  removed (both already at module level)
+- `ongoing` added to status dropdown values
+- Credit lines added to gallery_studio.py docstring and index.html header
+
+---
+
+**Files modified:**
+- `gallery_studio.py` -- Orrery mode, Export Encounter dialog,
+  auto-extraction, code generation, nav controls horizontal row,
+  status dropdown, credit line (5026 -> ~5700 lines)
+- `index.html` -- standalone reset button, credit line
+
+**Files NOT modified:**
+- `json_converter.py` -- unchanged
+- `spacecraft_encounters.py` -- user pastes generated code manually
+  (note: line 58 status comment needs `ongoing` added)
+
+---
+
+**Full pipeline tested by Tony:**
+1. Nav controls split: 3D animated plot slider scrubs freely
+2. Orrery mode toggle: controls gray out/restore correctly
+3. Export Encounter dialog: auto-extraction, manual entry, code
+   generation all working
+
+**Next steps for next session:**
+- Test link icon end-to-end through full pipeline (Studio -> json_converter -> index.html)
+- Verify link icon positioning with enc-btn and KMZ button coexistence
+- Add `ongoing` to spacecraft_encounters.py status comment (line 58)
+- Orbit hover bloat fix deferred to plotting consolidation Ring 2
+- Test encounter export with various mission types (full_mission vs encounter)
+- Consider camera capture in encounter export (currently not extracted)
+
+
+### Session 37 (May 4-5, 2026): Object Encyclopedia + Encounter Export Design Refinement
+
+---
+
+**Two tracks in one session: encyclopedia build + design iteration.**
+
+**Track 1 -- Object Encyclopedia in save_utils.py:**
+
+Moved "Embed Object Encyclopedia" from post-production (Studio-only)
+to orrery-native (always-on in every HTML output). The encyclopedia
+overlay is now injected by `save_utils.py` at the `_write_html()` choke
+point -- every temp preview and saved HTML gets the "i" button and info
+cards automatically.
+
+Implementation:
+- `_load_info_dictionary()` -- imports INFO with path fallbacks
+- `_strip_plotting_suggestions()` -- removes `***ALL CAPS***` lines
+  meant for the desktop GUI, not HTML output
+- `_extract_encyclopedia(fig)` -- matches trace names against INFO keys
+- `_build_encyclopedia_overlay(encyclopedia)` -- generates self-contained
+  CSS/HTML/JS overlay (~5.5KB) with click/hover events, card UI,
+  Escape dismiss, click-outside dismiss
+- `_inject_encyclopedia(fig, html_str)` -- inserts before `</body>`
+- `_write_html()` modified: `fig.to_html()` -> `_inject_encyclopedia()`
+  -> binary write (replaces direct `fig.write_html()`)
+- Plotly event wiring uses polling (`_encWaitForPlotly`) instead of
+  `DOMContentLoaded` to handle async Plotly initialization timing.
+  `DOMContentLoaded` can fire before `Plotly.newPlot()` completes,
+  leaving the graph div without the `.on()` method
+- No-op when no INFO entries match trace names (HTML unchanged)
+
+Studio keeps its own independent encyclopedia injection for its HTML
+pipeline (Studio strips the orrery wrapper during figure extraction
+and rebuilds HTML from scratch). Studio toggle defaults to on, remains
+available for curation. Orrery has no toggle -- always on.
+
+**Track 2 -- Encounter Export Design Refinement:**
+
+Design session (zero-code) refining the encounter export architecture.
+Key insight surfaced: Studio post-production edits (margins, font scaling,
+annotations) have no orrery equivalent. Exporting them as encounter
+presets would break the orrery pipeline.
+
+Design decisions confirmed:
+- `_enter_orrery_mode()` should reset to `DEFAULT_CONFIG` before graying
+  out controls (same pattern as all other presets). One-line fix:
+  `self._apply_config_to_gui(DEFAULT_CONFIG)` after setting the flag,
+  before the gray-out logic. Without this, switching from a heavily
+  edited landscape mode to Orrery carries over post-production values
+  in the GUI variables even though controls are grayed out.
+- Auto-extracted fields (left pane) are read-only verification. If
+  wrong, close dialog, fix in Studio, re-export. The figure is the
+  source of truth for view parameters.
+- dist_km and v_kms straddle auto/manual: pre-filled from hover text
+  when parseable, but must be verified against mission docs.
+- `full_mission` as a type in the dropdown -- the natural starting
+  point for any mission visualization.
+- Output is a standalone .py artifact, not direct file modification.
+  Preserves manual workflow independence from Claude.
+
+**Track 3 -- Project file staleness lesson:**
+
+During the session, a complete `gallery_studio.py` was built from the
+`/mnt/project/` snapshot (stale from session start) instead of from
+the uploaded current file. This would have silently overwritten the
+existing Orrery mode and Export Encounter implementation. Caught by
+Tony before deployment.
+
+Protocol v3.21 updated with:
+- Context Priority staleness warning
+- Anti-pattern: "Return complete file from stale base"
+- Process lesson documenting the incident
+- Quotable: "A bad snippet is localized. A complete file from a stale
+  base is destructive."
+
+Rule formalized: `/mnt/project/` is a read-only snapshot from session
+start. When both an uploaded file and a project file exist for the same
+filename, ALWAYS use the upload.
+
+---
+
+**Files modified:**
+- `save_utils.py` -- Object Encyclopedia injection (6 new functions,
+  `_write_html()` rewritten, `json` and `re` imports added, module
+  docstring updated)
+- `README.md` -- Object Encyclopedia added to Key Capabilities,
+  version bumped to v2.9.0
+- `ADDING_OBJECTS_GUIDE.md` -- INFO entries documented as enabling
+  Object Encyclopedia, bumped to v1.1
+- `project_instructions_v3_21.md` -- staleness rule, anti-pattern,
+  lesson, quotable, version history
+
+**Files NOT modified:**
+- `gallery_studio.py` -- one-line fix identified but not applied
+  (Tony applies manually: add `self._apply_config_to_gui(DEFAULT_CONFIG)`
+  to `_enter_orrery_mode()` after line 4730)
+- `index.html` -- unchanged
+- `json_converter.py` -- unchanged
+
+---
+
+**Handoff artifacts produced:**
+- `ENCOUNTER_EXPORT_HANDOFF.md` v3.0 -- complete design document with
+  Orrery preset mode, Fork 1/Fork 2 architecture, post-production
+  boundary, completed encyclopedia section
+- `project_instructions_general.md` -- distilled protocol for Discord
+  posting (Anthropic community)
+
+**Next steps for next session:**
+- Apply one-line fix to `_enter_orrery_mode()` (reset to DEFAULT_CONFIG)
+- Test link icon end-to-end through full pipeline (carried from Session 36b)
+- Add `ongoing` to spacecraft_encounters.py status comment (carried)
+- Test encounter export with various mission types (carried)
+- Consider camera capture in encounter export (carried)
+

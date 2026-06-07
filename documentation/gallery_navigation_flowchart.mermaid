@@ -1,0 +1,118 @@
+%%{init: {
+  'theme': 'dark',
+  'themeVariables': {
+    'primaryColor': '#1a1a2e',
+    'primaryTextColor': '#e0e0e0',
+    'primaryBorderColor': '#4a9eff',
+    'lineColor': '#888',
+    'secondaryColor': '#16213e',
+    'tertiaryColor': '#0f3460',
+    'fontSize': '14px'
+  }
+}}%%
+
+flowchart TD
+    %% ===== ENTRY POINTS =====
+    HOME["<b>GALLERY HOME</b><br/>palomasorrery.com"]
+
+    HOME --> HAMBURGER["<b>☰ Menu</b>"]
+    HOME --> CARDS["<b>Card Catalog</b><br/><i>All categories visible</i>"]
+    
+    HAMBURGER --> CAT_MENU["Category Menu<br/><i>Solar System | Inner Planets<br/>Outer Planets | Stars<br/>Earth System | Galactic Center</i>"]
+    HAMBURGER --> READ_MENU["<b>Guided Explorations</b><br/><i>Curated story feeds</i>"]
+
+    %% ===== MODE 1: BROWSE (Card Catalog) =====
+    CARDS --> ES_SECTION["<b>Earth System Section</b><br/><i>Collapsible by boundary</i>"]
+    CAT_MENU --> ES_SECTION
+
+    ES_SECTION --> SUB_CLIMATE["<b>▸ Climate Change</b>"]
+    ES_SECTION --> SUB_OCEAN["▸ Ocean Acidification"]
+    ES_SECTION --> SUB_FRESH["▸ Freshwater Change"]
+    ES_SECTION --> SUB_LAND["▸ Land-System Change"]
+    ES_SECTION --> SUB_BIO["▸ Biosphere Integrity"]
+    ES_SECTION --> SUB_OVERVIEW["<b>▸ Overview</b><br/><i>Planetary Boundaries<br/>Paleoclimate</i>"]
+    ES_SECTION --> SUB_OTHER["▸ Other Boundaries..."]
+
+    SUB_CLIMATE --> CARD_EI["<b>Card:</b> Energy<br/>Imbalance"]
+    SUB_CLIMATE --> CARD_TEMP["<b>Card:</b> Temperature<br/>Anomalies"]
+    SUB_CLIMATE --> CARD_KEELING["<b>Card:</b> Keeling<br/>Curve"]
+    SUB_CLIMATE --> CARD_HEAT["<b>Card:</b> Chicago<br/>1995 Teaser"]
+    SUB_CLIMATE --> CARD_HEAT2["<b>Card:</b> Delhi<br/>2024 Teaser"]
+
+    SUB_OVERVIEW --> CARD_PB["<b>Card:</b> Planetary<br/>Boundaries"]
+
+    %% ===== Tapping a card opens the visualization =====
+    CARD_EI --> VIZ_EI["<b>VISUALIZATION</b><br/><i>Energy Imbalance</i><br/>Full Plotly interactive<br/>Pinch, zoom, hover"]
+    CARD_TEMP --> VIZ_TEMP["<b>VISUALIZATION</b><br/><i>Temperature Anomalies</i><br/>Full Plotly interactive"]
+    CARD_HEAT --> VIZ_HEAT["<b>VISUALIZATION</b><br/><i>Chicago 1995</i><br/>Heat event teaser"]
+    CARD_PB --> VIZ_PB["<b>VISUALIZATION</b><br/><i>Planetary Boundaries</i><br/>Polar chart"]
+
+    %% ===== MODE 2: EXPLORE (Connections on objects) =====
+    VIZ_EI --> CONN_EI["<b>CONNECTIONS</b><br/><i>Below the visualization</i><br/>─────────────────<br/>This energy drives ➜<br/><b>Temperature Anomalies</b><br/>─────────────────<br/>90% absorbed by ➜<br/><b>Ocean Acidification</b><br/>─────────────────<br/>Part of ➜<br/><b>Planetary Boundaries</b>"]
+
+    VIZ_TEMP --> CONN_TEMP["<b>CONNECTIONS</b><br/>─────────────────<br/>Driven by ➜<br/><b>Energy Imbalance</b><br/>─────────────────<br/>Concentrates as ➜<br/><b>Heat Events</b><br/><i>Chicago, Delhi, PNW...</i><br/>─────────────────<br/>Part of ➜<br/><b>Planetary Boundaries</b>"]
+
+    VIZ_HEAT --> CONN_HEAT["<b>CONNECTIONS</b><br/>─────────────────<br/>Caused by ➜<br/><b>Temperature Anomalies</b><br/>─────────────────<br/><b>INTERPRETATION</b><br/><i>739 deaths in 5 days.<br/>82% age 65+. Poverty<br/>and isolation determined<br/>who lived and who died.<br/>(Klinenberg, 2002)</i><br/>─────────────────<br/>See also ➜<br/><b>Europe 2003</b> | <b>Delhi 2024</b>"]
+
+    VIZ_PB --> CONN_PB["<b>CONNECTIONS</b><br/>─────────────────<br/>Each wedge links to<br/>its boundary's objects:<br/>─────────────────<br/>Climate Change ➜<br/><i>Energy, Temp, CO2,<br/>Heat Events</i><br/>─────────────────<br/>Ocean Acidification ➜<br/><i>pH Trend, Coral<br/>Bleaching (future)</i><br/>─────────────────<br/><i>7 of 9 transgressed</i>"]
+
+    %% Connections link to other visualizations
+    CONN_EI -.->|"tap link"| VIZ_TEMP
+    CONN_TEMP -.->|"tap link"| VIZ_EI
+    CONN_TEMP -.->|"tap link"| VIZ_HEAT
+    CONN_HEAT -.->|"tap link"| VIZ_TEMP
+    CONN_PB -.->|"tap wedge"| SUB_CLIMATE
+
+    %% ===== MODE 3: READ (Curated Scroll Feed) =====
+    READ_MENU --> FEED_LIST["<b>Story List</b><br/>─────────────────<br/>▸ The Heat Chain<br/>▸ The Ocean Chain<br/>▸ The Water Chain<br/>▸ The Land Chain"]
+
+    FEED_LIST --> FEED_HEAT["<b>THE HEAT CHAIN</b><br/><i>Curated vertical scroll</i>"]
+
+    FEED_HEAT --> F1["<b>Narrative Card</b><br/><i>Every second, Earth<br/>absorbs more energy<br/>than it radiates...</i>"]
+    F1 --> F2["<b>Embedded Viz</b><br/><i>Energy Imbalance</i><br/>(tap to explore)"]
+    F2 --> F3["<b>Narrative Card</b><br/><i>90% goes to ocean.<br/>The rest heats<br/>the atmosphere...</i>"]
+    F3 --> F4["<b>Embedded Viz</b><br/><i>Temperature Anomalies</i><br/>(tap to explore)"]
+    F4 --> F5["<b>Narrative Card</b><br/><i>A global average hides<br/>the extremes. Heat<br/>concentrates...</i>"]
+    F5 --> F6["<b>Embedded Viz</b><br/><i>Chicago 1995</i><br/>(tap to explore)"]
+    F6 --> F7["<b>Interpretive Card</b><br/><i>THE HUMAN COST</i><br/>Physical: Wet-bulb 28.3C<br/>Demographic: 82% age 65+<br/>Economic: S/W side impact<br/><b>[strong → moderate<br/>→ contested attribution]</b>"]
+    F7 --> F8["<b>Interpretive Card</b><br/><i>BEYOND THE HEAT</i><br/>Ecological → Economic →<br/>Demographic → Political<br/>Case: Syria 2006-2011<br/><i>Kelley 2015 vs Selby 2017</i>"]
+    F8 --> F9["<b>Embedded Viz</b><br/><i>Planetary Boundaries</i><br/>Return to system view"]
+    F9 --> F10["<b>Closing Card</b><br/>Other stories:<br/>Ocean Chain | Water Chain<br/>─────────────────<br/>Back to Gallery"]
+
+    %% Feed vizzes can open full interactive
+    F2 -.->|"tap"| VIZ_EI
+    F4 -.->|"tap"| VIZ_TEMP
+    F6 -.->|"tap"| VIZ_HEAT
+    F9 -.->|"tap"| VIZ_PB
+
+    %% Return paths
+    VIZ_EI -.->|"back"| CARDS
+    VIZ_TEMP -.->|"back"| CARDS
+    VIZ_HEAT -.->|"back"| CARDS
+    VIZ_PB -.->|"back"| CARDS
+    F10 -.->|"back"| CARDS
+
+    %% ===== PLANETARY BOUNDARIES AS SECOND GATE =====
+    CARDS --> CARD_PB
+    VIZ_PB -->|"tap wedge"| SUB_CLIMATE
+
+    %% ===== STYLING =====
+    classDef entry fill:#0f3460,stroke:#4a9eff,stroke-width:2px,color:#fff
+    classDef mode1 fill:#1a1a2e,stroke:#4CAF50,stroke-width:2px,color:#e0e0e0
+    classDef mode2 fill:#1a1a2e,stroke:#FF9800,stroke-width:2px,color:#e0e0e0
+    classDef mode3 fill:#1a1a2e,stroke:#E91E63,stroke-width:2px,color:#e0e0e0
+    classDef viz fill:#16213e,stroke:#4a9eff,stroke-width:3px,color:#fff
+    classDef card fill:#1a1a2e,stroke:#666,stroke-width:1px,color:#ccc
+    classDef conn fill:#0a0a1a,stroke:#FF9800,stroke-width:2px,color:#FFB74D
+    classDef feed fill:#1a1a2e,stroke:#E91E63,stroke-width:1px,color:#F48FB1
+    classDef hub fill:#0f3460,stroke:#FFD700,stroke-width:3px,color:#FFD700
+
+    class HOME,HAMBURGER entry
+    class CARDS,ES_SECTION,SUB_CLIMATE,SUB_OCEAN,SUB_FRESH,SUB_LAND,SUB_BIO,SUB_OVERVIEW,SUB_OTHER,CAT_MENU mode1
+    class CARD_EI,CARD_TEMP,CARD_KEELING,CARD_HEAT,CARD_HEAT2 card
+    class CARD_PB hub
+    class VIZ_EI,VIZ_TEMP,VIZ_HEAT,VIZ_PB viz
+    class CONN_EI,CONN_TEMP,CONN_HEAT,CONN_PB conn
+    class READ_MENU,FEED_LIST,FEED_HEAT mode3
+    class F1,F3,F5,F7,F8,F10 feed
+    class F2,F4,F6,F9 feed

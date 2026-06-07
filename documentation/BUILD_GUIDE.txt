@@ -1,0 +1,162 @@
+# Paloma's Orrery - PyInstaller Build Guide
+# Version: Phase 1 - November 26, 2025
+# ================================================
+
+# This guide walks through building an executable step-by-step.
+# Run these commands from your project root directory (where palomas_orrery.py is).
+
+# ================================================
+# STEP 0: Prerequisites
+# ================================================
+
+# Make sure you have Python 3.11-3.13 and pip installed
+python --version
+pip --version
+
+# Install PyInstaller if not already installed
+pip install pyinstaller
+
+# Verify PyInstaller is working
+pyinstaller --version
+
+# ================================================
+# STEP 1: Simple Test Build (Minimal)
+# ================================================
+
+# First, let's try the simplest possible build to see what happens.
+# This will take 5-10 minutes and create a lot of output.
+
+# Option A: One-folder mode (easier to debug)
+pyinstaller --onedir --console --name palomas_orrery_test palomas_orrery.py
+
+# This creates:
+#   build/              - temporary build files
+#   dist/palomas_orrery_test/  - your executable + all dependencies
+
+# ================================================
+# STEP 2: Check What's Missing
+# ================================================
+
+# Try running the executable:
+cd dist\palomas_orrery_test
+palomas_orrery_test.exe
+
+# If you see errors about missing modules, note them down.
+# Common errors:
+#   - ModuleNotFoundError: No module named 'xxx'
+#   - FileNotFoundError: [Errno 2] No such file or directory: 'data/...'
+#   - ImportError: DLL load failed
+
+# Go back to project root
+cd ..\..
+
+# ================================================
+# STEP 3: Build with Hidden Imports
+# ================================================
+
+# Based on Step 2 errors, add hidden imports.
+# Here's a more complete command with known hidden imports:
+
+pyinstaller --onedir --console --name palomas_orrery ^
+    --hidden-import=astropy.units.format.vounit ^
+    --hidden-import=astropy.coordinates.builtin_frames ^
+    --hidden-import=astropy.time.formats ^
+    --hidden-import=erfa ^
+    --hidden-import=erfa.ufunc ^
+    --hidden-import=astroquery.jplhorizons ^
+    --hidden-import=plotly.validators ^
+    --hidden-import=plotly.graph_objs ^
+    --hidden-import=kaleido ^
+    --hidden-import=kaleido.scopes.plotly ^
+    --hidden-import=customtkinter ^
+    --hidden-import=darkdetect ^
+    --hidden-import=PIL._tkinter_finder ^
+    --collect-data=customtkinter ^
+    --collect-data=plotly ^
+    --collect-data=kaleido ^
+    palomas_orrery.py
+
+# Note: The ^ character continues the command on the next line in Windows CMD.
+# In PowerShell, use ` instead of ^
+
+# ================================================
+# STEP 4: Copy Data Files
+# ================================================
+
+# After the build succeeds, copy your data folders:
+
+# Copy data folder
+xcopy /E /I data dist\palomas_orrery\data
+
+# Copy star_data folder  
+xcopy /E /I star_data dist\palomas_orrery\star_data
+
+# Create reports folder
+mkdir dist\palomas_orrery\reports
+
+# ================================================
+# STEP 5: Test the Complete Build
+# ================================================
+
+cd dist\palomas_orrery
+palomas_orrery.exe
+
+# If it works - congratulations!
+# If not, check the console output for errors.
+
+# ================================================
+# TROUBLESHOOTING
+# ================================================
+
+# PROBLEM: "ModuleNotFoundError: No module named 'xxx'"
+# SOLUTION: Add --hidden-import=xxx to the pyinstaller command
+
+# PROBLEM: "FileNotFoundError: data/orbit_paths.json"
+# SOLUTION: Make sure you copied the data/ folder to dist/palomas_orrery/
+
+# PROBLEM: Blank GUI window / CustomTkinter not working
+# SOLUTION: Make sure --collect-data=customtkinter is in the command
+
+# PROBLEM: Can't save images (kaleido error)
+# SOLUTION: Make sure --collect-data=kaleido is in the command
+
+# PROBLEM: Very slow startup
+# REASON: PyInstaller extracts files on first run; subsequent runs are faster
+
+# PROBLEM: "DLL load failed"  
+# SOLUTION: Install Visual C++ Redistributable:
+# https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+# ================================================
+# STEP 6: Using the Spec File (Advanced)
+# ================================================
+
+# Once basic building works, you can use the spec file for more control:
+
+# Copy palomas_orrery.spec to your project root
+# Edit the project_root variable if needed
+# Then run:
+
+pyinstaller palomas_orrery.spec
+
+# ================================================
+# CLEAN BUILD (if things go wrong)
+# ================================================
+
+# Remove build artifacts and start fresh:
+rmdir /S /Q build
+rmdir /S /Q dist
+del /Q *.spec  # Only if you want to regenerate the spec file
+
+# ================================================
+# FILE SIZES TO EXPECT
+# ================================================
+
+# dist/palomas_orrery/ folder will be approximately:
+#   - 200-400 MB for the executable and dependencies
+#   - Plus whatever data you copy:
+#     - data/ folder: ~100 MB (orbit_paths.json is largest)
+#     - star_data/ folder: ~330 MB (VOT files are largest)
+#
+# Total: 600-900 MB uncompressed
+# Zipped: 200-400 MB (Python compresses well)

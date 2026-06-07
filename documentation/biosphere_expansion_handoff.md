@@ -1,8 +1,9 @@
 # Paloma's Orrery -- Biosphere Expansion & Handoff Pipeline
 
-## Session Handoff | February 28, 2026 | Claude Opus 4.6 + Gemini
+## Session Handoff | February 28 - March 2, 2026 | Claude Opus 4.6 + Gemini
 
-*Original draft by Gemini. Updated by Claude with fixes and findings from Session 20.*
+*Original draft by Gemini. Updated by Claude with fixes and findings
+from Session 20 and Session 21.*
 
 ---
 
@@ -28,7 +29,10 @@ distinct artifacts per scenario:
 **The Teaser (Plotly JSON):** A highly optimized, down-sampled 2D
 interactive map. Loads instantly in index.html, respects all Gallery
 Studio curation, and provides the narrative hook. Now includes briefing
-text and a hint directing users to the 3D Earth button.
+text and a hint directing users to the 3D Earth button. As of Session
+21, renders on an ESRI World Topo Map basemap (green land, blue ocean)
+instead of the dark `carto-darkmatter` style, with YlOrRd colorscale
+for visibility on the light map.
 
 **The Blockbuster (KMZ File):** The raw, millions-of-rows dataset
 packaged into a hardware-accelerated 3D environment. Users access this
@@ -83,8 +87,10 @@ Upgraded the heatwave generator from a "Local Asset Creator" to a
 2D mapbox map using the ERA5 cache. Now includes `briefing` and
 `description` parameters. Renders the first paragraph of the
 briefing as a bottom-left annotation (200 char max, semi-transparent
-background, white text) plus a hint: "Click 3D Earth for full
-visualization in Google Earth."
+background) plus a hint: "Click 3D Earth for full visualization in
+Google Earth." Session 21 changed basemap from `carto-darkmatter`
+to `white-bg` + ESRI World Topo Map raster layer, colorscale from
+Inferno to YlOrRd, and adapted annotation colors for light map.
 
 **The Packager:** `package_and_cleanup()` now implements a merged
 KML approach. Instead of writing multiple separate KML files into
@@ -113,7 +119,11 @@ Successfully bridged the Studio tools and the Web Gallery.
 
 **gallery_studio.py:** Added a "3D Handoff (Google Earth)" text
 entry field. The tool saves the KMZ filename and injects
-`layout['_kmz_handoff']` into the exported JSON payload.
+`layout['_kmz_handoff']` into the exported JSON payload. Session 21
+moved this field from column 1 (buried) to column 3 (top, visible).
+Added auto-detect: loading `*_teaser*.html` auto-populates the
+field with `*_blockbuster.kmz`. Added last-used directory
+persistence via `_last_load_dir` in config store.
 
 **Underscore Survival (Session 20 fix):** `gallery_studio.py` strips
 all underscore-prefixed keys from Plotly JSON at three locations
@@ -193,8 +203,8 @@ GitHub Pages (tonyquintanilla.github.io)
 | File | Changes |
 |------|---------|
 | `index.html` (~2,200 lines) | Button positioning (left: 62px), mapbox zoom detection, KMZ path fix (gallery/assets/), mobile intent URL |
-| `earth_system_generator.py` (~850 lines) | Briefing annotation in teaser, no-delete policy, merged KML approach in package_and_cleanup(), added `import re` |
-| `gallery_studio.py` (~4,500 lines) | Whitelisted `_kmz_handoff` through three underscore filters |
+| `earth_system_generator.py` (~925 lines) | Briefing annotation in teaser, no-delete policy, merged KML approach, `import re`, ESRI World Topo basemap, YlOrRd colorscale, light annotation colors |
+| `gallery_studio.py` (~4,515 lines) | Whitelisted `_kmz_handoff` through three underscore filters, moved 3D Handoff to column 3, auto-detect KMZ filename, last-used directory persistence |
 | `_gitattributes` | Binary markers for KMZ/KML/PNG |
 
 
@@ -263,6 +273,18 @@ Tipping Point) using Global Forest Watch data.
   different zoom/pan API from standard 2D axes. Zoom controls
   built for xaxis/yaxis ranges won't work -- either adapt to
   `mapbox.zoom` or hide controls (mapbox has native touch zoom).
+
+- **Stamen tiles are dead:** `stamen-terrain`, `stamen-watercolor`,
+  `stamen-toner` silently fail (blank map). Moved to Stadia Maps
+  (paid) in July 2023. Use `white-bg` + ESRI raster tile layers.
+
+- **Theme matches content domain:** Space views get dark basemap,
+  Earth views get Earth-like basemap (ESRI World Topo). Visual
+  theme should not be applied uniformly across content types.
+
+- **Config restore ordering:** Auto-populated defaults must run
+  AFTER saved config restore, not before. Otherwise saved empty
+  values overwrite auto-detected values (the stacked bugs pattern).
 
 
 ---
