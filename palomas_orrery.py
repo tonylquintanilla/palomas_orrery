@@ -6166,6 +6166,29 @@ def animate_objects(step, label):
             # Flag to track if shells have been added for center object
             center_shells_added = False
 
+            # Sun position for shell rendering at animation start (21/51 Phase 1).
+            # Mirrors the static-path D2 wiring: magnetosphere/bow-shock builders
+            # need the sunward direction to orient the magnetotail. Animation
+            # frames move object markers, not shells, so this orientation is
+            # FROZEN at the first animation frame; over a long animation span
+            # the real magnetotail would swing with the Sun. Hover disclosure
+            # of that freeze is tracked with the bow-shock sourced-vs-schematic
+            # disclosure remainder (ledger, Movement track).
+            if center_object_name == 'Sun':
+                _sun_pos_tuple = (0, 0, 0)
+            else:
+                _sun_traj = positions_over_time.get('Sun')
+                if _sun_traj and len(_sun_traj) > 0 and _sun_traj[0] is not None and 'x' in _sun_traj[0]:
+                    _sp0 = _sun_traj[0]
+                    _sun_pos_tuple = (_sp0['x'], _sp0['y'], _sp0['z'])
+                else:
+                    # Sun checkbox off -- fetch frame-1 position for orientation
+                    _sun_fetch = fetch_position('10', dates_list[0], center_id=center_id)
+                    if _sun_fetch and 'x' in _sun_fetch:
+                        _sun_pos_tuple = (_sun_fetch['x'], _sun_fetch['y'], _sun_fetch['z'])
+                    else:
+                        _sun_pos_tuple = (0, 0, 0)  # Fallback: no rotation
+
             # Add Sun visualization if needed
             if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
                 fig = create_celestial_body_visualization(
@@ -6199,7 +6222,9 @@ def animate_objects(step, label):
                 shell_vars = animation_shell_config[center_object_name]
                 if any(var.get() == 1 for var in shell_vars.values()):
 
-                    fig = create_planet_visualization(fig, center_object_name, shell_vars)
+                    fig = create_planet_visualization(fig, center_object_name, shell_vars,
+                                                      center_position=(0, 0, 0),
+                                                      sun_position=_sun_pos_tuple)
                     center_shells_added = True
                     print(f"[ANIMATION] Added {center_object_name} shells ({len(fig.data)} static traces)", flush=True)
                     # Auto-scale axis to shell radius for migrated bodies
@@ -6796,24 +6821,38 @@ def animate_objects(step, label):
 
             # NOW create frames - after trace_indices has been defined
             # =================================================================
-            # OPTIMIZATION: Only include dynamic traces in frames
-            # Static shell traces (indices 0 to static_trace_count-1) are not duplicated
-            # This dramatically reduces memory for animations with shell visualizations
+            # OPTIMIZATION: frames carry ONLY the traces the frame loop updates
+            # (the single-point object/barycenter markers registered in
+            # trace_indices). Orbit paths, idealized orbits, trajectory layers,
+            # comet tails, and the center marker added after static_trace_count
+            # never change across frames -- leaving them out of go.Frame keeps
+            # their initial data live in the figure while removing them from
+            # every frame's payload. Previously frames deep-copied EVERY trace
+            # after the static fence: N_frames copies of every orbit line were
+            # serialized into the saved HTML without ever being modified.
+            # Fix: 21/51 Phase 1 (June 2026).
             # =================================================================
-            dynamic_trace_indices = list(range(static_trace_count, len(fig.data)))
-            print(f"[ANIMATION] Static traces: 0-{static_trace_count-1} ({static_trace_count} traces)", flush=True)
-            print(f"[ANIMATION] Dynamic traces: {static_trace_count}-{len(fig.data)-1} ({len(dynamic_trace_indices)} traces)", flush=True)
+            dynamic_trace_indices = sorted(set(
+                idx for idx in trace_indices.values()
+                if static_trace_count <= idx < len(fig.data)
+            ))
+            _frame_pos_by_trace_idx = {abs_idx: i for i, abs_idx in enumerate(dynamic_trace_indices)}
+            _frames_excluded = (len(fig.data) - static_trace_count) - len(dynamic_trace_indices)
+            print(f"[ANIMATION] Static shell traces (before fence): {static_trace_count}", flush=True)
+            print(f"[ANIMATION] Frame-updated traces: {len(dynamic_trace_indices)}; "
+                  f"constant traces excluded from frames: {_frames_excluded}", flush=True)
             
             # Helper function to convert absolute trace index to frame_data index
             def to_frame_idx(absolute_idx):
-                """Convert absolute fig.data index to frame_data index.
-                Returns None if this is a static trace (not in frame_data)."""
-                if absolute_idx >= static_trace_count:
-                    return absolute_idx - static_trace_count
-                return None  # Static trace, not in frame_data
+                """Convert absolute fig.data index to its position in frame_data.
+                Returns None if this trace is not carried in frames (static
+                shells before the fence, or constant traces such as orbit
+                paths that frames never modify)."""
+                return _frame_pos_by_trace_idx.get(absolute_idx)
             
             for i in range(N):
-                # Only copy dynamic traces (skip static shell traces at indices 0 to static_trace_count-1)
+                # Copy only frame-updated traces (static shells and constant
+                # traces like orbit paths are not carried in frames)
                 frame_data = [copy.deepcopy(fig.data[idx]) for idx in dynamic_trace_indices]
                 current_date = dates_list[i]
                 
@@ -7163,10 +7202,14 @@ def animate_objects(step, label):
             fig.layout.sliders[0].active = 0
 
             # Explicitly sync the displayed data with the first frame's data
-            # Note: frames now only contain dynamic traces, so we need to map indices
+            # Note: frames carry ONLY frame-updated traces (sparse), so the
+            # absolute trace index must map through to_frame_idx -- plain
+            # subtraction of static_trace_count would misalign now that
+            # constant traces (orbit paths etc.) are excluded from frames.
+            # Fix: 21/51 Phase 1 (June 2026).
             for obj_name, trace_idx in trace_indices.items():
-                frame_idx = trace_idx - static_trace_count  # Convert to frame index
-                if (trace_idx >= static_trace_count and  # Only dynamic traces
+                frame_idx = to_frame_idx(trace_idx)  # None if not carried in frames
+                if (frame_idx is not None and
                     trace_idx < len(fig.data) and 
                     len(frames) > 0 and 
                     frame_idx < len(frames[0].data)):

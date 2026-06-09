@@ -264,8 +264,17 @@ calls (L1523/1949 -- they fire).
 ### D.Feature -- Bucket A (completes/equips standard rendering; near-term) `[per chain]`
 
 - 23 Earth ionosphere shell.
-- 19 Manual axis dtick + range in orrery GUI (Gallery Studio has it; GUI does not --
-  3D Axis Control Convention parity; xvfb gate).
+- 19 Plot-cube control parity (orrery GUI) -- JOINED / cross-repo (Tony, June 8).
+  Gallery Studio has a full plot-cube control set; the orrery GUI does not.
+  Implement the Studio set in the orrery GUI: scene_axis_range + scene_dtick
+  (the original "manual axis range + dtick" core), scene_aspectmode
+  (auto/cube/data/manual), scene_camera orientation (original/isometric/top/
+  front/side), and show_axes / show_grid toggles. Studio side
+  `[verified @2f40d9d]` (tools/gallery_studio.py DEFAULT_CONFIG ~L72-96; rendering
+  ~L912-941); orrery GUI side is the open work. Design authority:
+  3d_axis_control_handoff.md (website repo documentation/). 3D Axis Control
+  Convention parity; xvfb gate. (Cross-ref
+  Gallery section H.)
 - 20/N5 Shell-resolution GUI control (enabler for Bucket B; bundle with HTML export
   mode and with 19).
 - 49 Fly-to view scaling (the "0.15 AU" bug; visualization_utils.py
@@ -283,10 +292,41 @@ calls (L1523/1949 -- they fire).
 
 ### D.Feature -- Bucket C (architecture; design-before-code) `[per chain]`
 
-- N6 Studio editor review + encounter-event generator + Artemis redo (the
-  data/provenance cluster; folds items 37/38 spacecraft provenance and N11 Horizons-
-  override console check). Keystone resolved: generator emits BOTH full-mission AND
-  encounter-event forms. Zero-code design session first.
+- N6 Studio editor review + encounter-event generator + Artemis redo (data/
+  provenance cluster; folds items 37/38 spacecraft provenance and N11 Artemis
+  lunar-flyby Horizons-override console check). UPDATED June 8: the generator
+  EXISTS and emits both full-mission and encounter forms (gallery_studio.py
+  _generate_encounter_code, ~L5352) -- N6's "design-first / emits both forms"
+  keystone is DONE. Remaining work is a COUPLED refactor + redo, done together,
+  and it SPANS TWO REPOS (Gallery Studio is a separate repo from the orrery):
+    * Generator refactor [Gallery Studio repo, tools/gallery_studio.py @2f40d9d;
+      `[verified @2f40d9d]` -- upload confirmed byte-identical to repo HEAD]:
+      the generator does NOT emit four fields the Artemis presets carry --
+      resolution_note, center_closeup, plot_days_closeup, plot_scale_au_closeup.
+      Extend it to produce them.
+    * Artemis preset redo [orrery repo, `[verified @730b2bf]`]: regenerate the
+      'Artemis II' presets (spacecraft_encounters.py ~L196) through the refactored
+      generator. They hold removed/unverified data (v_kms None; dates "pending
+      re-derivation from NASA/JSC OEM"), so they need the generator's normalized +
+      sourced output (dist_au from dist_km, date normalization, date_source/source).
+    * Coupling (Tony, June 8): the generator must include items only in the presets,
+      and the presets need information the generator produces -- one pass, not two.
+      Because the halves live in DIFFERENT repos, the redo must coordinate a Gallery
+      Studio change with an orrery-repo data change (two HEADs to track).
+    * N11 (Artemis Moon-flyby, date_source 'horizons') rides with the redo: the
+      Horizons-derived date is validated by the console check during regeneration.
+    * Design authority: ENCOUNTER_EXPORT_HANDOFF_v3.md (the "v3.0" doc; Fork 1 /
+      Fork 2, Orrery preset mode, post-production boundary) -- in the ORRERY repo
+      documentation/ `[verified @730b2bf]`, NOT the website repo. Generator built
+      Session 36b (May 2), refined Session 37 (May 4-5) -- per web_gallery_handoff.md
+      (website repo documentation/; Gallery section H).
+    * Refactor scope note: the four missing fields are a SECOND (close-up) view's
+      parameters (center_closeup / plot_days_closeup / plot_scale_au_closeup) plus
+      an editorial resolution_note -- not post-production cosmetics. Open design
+      question the refactor inherits: how the Studio captures a second view in one
+      export (Session 37 held "the figure is the source of truth for view
+      parameters" for a single view). "Camera capture (not extracted)" is the
+      sibling un-emitted field.
 - N10 Note-composition structural refactor (renderer composes the encounter note
   from resolved values + template; structural cure for stale-prose numbers; sits
   behind N6).
@@ -344,6 +384,13 @@ chasing singly:
   Sun key (L2642/L2823, open), inner-four bow-shock hover (radii-only, open).
   (UPDATE June 8: the duplicate Sun key is now CLOSED, and the visible double-Sun was
   traced to a separate center-dropdown bug -- both in section C.)
+- (June 8) RECOVERED a leaked item into N6: the Gallery Studio preset-generator
+  refactor + Artemis preset redo. It floated since June 1 (v21 erratum) with no
+  handoff home ("flag it for whichever ledger" that never landed), so the v23->v28
+  consolidation could not carry it -- it lived below the handoff layer. Now folded
+  into N6 with verified specifics. Also recorded: Gallery Studio is a SEPARATE repo
+  (HEAD 2f40d9d), distinct from the orrery repo (730b2bf) -- this coupled item
+  spans both.
 
 ---
 
@@ -357,6 +404,59 @@ chasing singly:
 
 (Resolved June 7: N12 pole markers -- done; rotation-axis Mode-5 sweep -- most
 confirmed, not an issue. Both removed from the open list.)
+
+---
+
+## H. GALLERY / STUDIO TRACK (website repo; low-activity)
+
+Added June 8 (Tony's call: carry the Gallery as a separate section in this one
+ledger rather than a separate file -- it is much less active). This is the
+website/Gallery-Studio track, a SEPARATE repo from the orrery app repo.
+
+- **Repo source (recorded June 8 for future reference).**
+  URL: https://github.com/tonylquintanilla/tonyquintanilla.github.io
+  Owner `tonylquintanilla` (WITH the 'l', same as the orrery); repo name
+  `tonyquintanilla.github.io` (NO 'l'). That owner/name split is exactly why the
+  repo is easy to mis-locate -- pair them as written. Branch `main`. Public
+  (clones / raw-fetches unauthenticated). HEAD verified this session == `2f40d9d`
+  (matches the SHA Tony provided). Custom domain `palomasorrery.com` (CNAME).
+  Studio file: `tools/gallery_studio.py` (NOT repo root). The uploaded
+  gallery_studio.py this session was byte-IDENTICAL to that path @2f40d9d, so the
+  Studio verification below is repo-grade.
+- **Handoffs / design docs -- which repo holds what (both have a documentation/):**
+  - WEBSITE repo `documentation/` `[verified @2f40d9d]`: `web_gallery_handoff.md`
+    (last Studio handoff, Feb 5 -> May 5, 2026); `3d_axis_control_handoff.md`
+    (design authority for the item-19 plot-cube parity).
+  - ORRERY repo `documentation/` `[verified @730b2bf]`: the encounter-export design
+    docs live HERE, not in the website repo -- `ENCOUNTER_EXPORT_HANDOFF_v3.md`
+    (the "v3.0" authority for N6), plus _v2, DESIGN_encounter_export_v2, and the
+    fix/test set.
+- **No Studio running ledger yet** -- by design (Tony, June 8): stand one up only
+  if/when Studio work resumes in volume. Until then these open items live here.
+
+**Joined / cross-repo items (tracked in their orrery homes; cross-referenced):**
+- **N6** -- encounter-preset generator (Studio repo) refactor + Artemis preset
+  redo (orrery repo). See D.Feature Bucket C.
+- **Item 19** -- plot-cube control parity: port the Studio plot-cube control set
+  to the orrery GUI. See D.Feature Bucket A.
+
+**Open Studio items (carried from the May-5 handoff; statuses checked @2f40d9d
+where file-verifiable):**
+- Encounter export: test with various mission types `[per handoff]`; camera
+  capture -- still NOT extracted, confirmed `[verified @2f40d9d]` (sibling of the
+  N6 second-view gap); link-icon end-to-end test `[per handoff]`.
+- Content re-population: re-export ALL existing gallery content through the
+  Studio (WYSIWYG refactor moved transforms into the Studio; index applies none).
+  Not file-verifiable from a clone `[per handoff]`.
+- Website chrome `[verified @2f40d9d]`: gallery-card thumbnails -- ABSENT (open);
+  content pages About/Downloads/Contact -- ABSENT (only index.html exists, open);
+  social link-preview og:image -- a meta tag IS present in index.html (per-card
+  previews unconfirmed; treat as partial).
+
+**Recently closed (verified this session @uploads/HEAD):**
+- `_enter_orrery_mode()` reset to DEFAULT_CONFIG -- DONE (`[verified @2f40d9d]`,
+  tools/gallery_studio.py ~L4775).
+- `ongoing` added to spacecraft_encounters.py status comment -- DONE (verified, L60).
 
 ---
 
