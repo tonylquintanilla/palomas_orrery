@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.26 | June 2, 2026
+Tony Quintanilla, PE | Claude | v3.28 | June 6, 2026
 
 PREAMBLE: WHY THIS PROTOCOL EXISTS
 
@@ -150,6 +150,14 @@ the upload. A bad snippet is a localized error. A complete file from a
 stale base is destructive -- it silently overwrites working code.
 Neither /mnt/project nor project knowledge gates a build -- the GitHub repo
 at HEAD or a fresh upload does (see Session-Start Repo Pull, Part 3).
+
+Live repo vs snapshots: the GitHub repo is live-readable at ANY point in a
+session (git ls-remote / raw fetch are fresh reads), so after a mid-session push,
+re-pull to read the new bytes and re-confirm the round trip -- no re-upload.
+Project knowledge does NOT re-sync mid-session (it is the session-start
+snapshot). Un-pushed working-copy edits live only in uploads, so uploads stay
+tier 1 during active work; the repo shows only committed+pushed bytes, and being
+live does not promote it over an upload of un-pushed work.
 Conflicts? Ask.
 
 
@@ -321,6 +329,11 @@ At session start, for any build:
    uploads cover them, as cross-check not base.
 3. Carry the SHA in the handoff ("built on <SHA>; pushed at <new SHA>").
 
+Mid-session the repo stays live-readable: a fresh git ls-remote re-reads HEAD
+(this is how a post-session push is confirmed) and a re-pull reads new bytes
+with no re-upload. Project knowledge does NOT re-sync mid-session. See Context
+Priority, Part 1.
+
 THE SHA IS THE ROUND TRIP. A matching remote HEAD confirms commit, push, AND sync
 in one check -- you read the anchor, you don't audit the pipeline. It is
 unforgeable: the hash derives from the bytes, so a matching HEAD means matching
@@ -485,6 +498,23 @@ trusting a handoff over the render: it passes the check while asserting a
 provenance that does not exist. Source-then-cite; never cite-to-clear.
 Wrong-but-cited is worse than uncited -- the citation suppresses the suspicion
 that would catch it.
+
+Show the Envelope of the Unknowable
+Companion to Fetched-vs-Recalled, one layer up: that rule governs a value you
+COULD source; this governs one that is genuinely UNKNOWABLE -- fixed by an input
+the model cannot recover (a rotation phase, an instantaneous dipole azimuth
+smeared around the circle by period uncertainty). Three moves:
+- Real geometry/physics fixes it -> use it (or the measured range).
+- Unknowable -> do not pick one and dress it up; show the ENVELOPE of
+  possibilities as the honest object (the dipole cone is the swept set of every
+  azimuth; the lone generator's sweep arrow reads as motion, not a fixed point).
+- Approximate/stylized with the real value absent -> SAY SO in the hover; silence
+  reads as precision the model lacks. [CRITICAL] Faking an unknowable value is
+  the same failure class as a # Source over recalled data.
+The cone is to an unknowable azimuth what "remove and note the gap" is to an
+uncited number. (Tony: use it or the range where we have it; show the mechanic
+and say so where we don't -- and no element NEEDS to exist; it earns its place
+by what it teaches, not by completeness.)
 
 Provenance Audit [QUALITY]
 Tooling: provenance_scanner.py scans display strings, constants, and dict
@@ -737,14 +767,18 @@ v3.19 (Apr 13, 2026): Marker symbol convention. Two-tier label system. Renderer 
 v3.20 (Apr 14, 2026): Module Docstring Standard. Module Atlas tooling (99 modules, 785 functions, 86K lines).
 v3.21 (May 4, 2026): Project file staleness rule formalized. Object Encyclopedia. Encounter Export design.
 v3.22 (May 12, 2026): Collegial Mode 7 pattern. The Weasley Principle. Single info marker codebase-wide refactor: 141 conversions, 18 files, 3 Claude models, 9-13 MB savings per render.
-v3.23 (May 16, 2026): Procedural criticality framework. Three-tier taxonomy (CRITICAL / QUALITY / PRACTICE) added as principle in Part 2; markers applied to all Technical Reference checks in Part 3 (now its own part). Broad-first methodology validated. Procedure-to-judgment ratio as function of experience and shared context. Grounded in Tony's operations management experience -- LOTO failure modes, normalization of deviance, junior safety engineer paradox. Emerged from a broad conversational session that began with vibe coders. Did not predict this outcome.
-v3.24 (May 29, 2026): Verify Execution, Not Appearance [CRITICAL] -- map the dispatch before editing leaves; compile != used != edited; swallowed exceptions hide render bugs. Agentic Pre-Test refined: data-content sweeps need a runtime smoke test against the LIVE dispatch. Platform Neutrality [QUALITY] -- watch-and-flag convention (SystemButtonFace headliner). Structural fixes scale (83 pairs / 2 edits); handoffs are claims, runtime is fact. Plotly facts: Scatter3d ignores border width, 8-symbol 3D palette. Transactional binary-mode patching; assign-don't-hardcode. Emerged from the shell-consolidation Stage 3 dispatch discovery (handoffs v14-v15): an entire inline-marker sweep was found to be editing dead code, and the osculating marker had silently failed to render for 11 weeks. Tony's eyes caught both. The protocol said "trust your eyes"; the protocol was right.
-v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITICAL] -- the in-context file subset is invisible to Tony and not authoritative; ls the uploads dir and read the whole set first. Added lessons missed by the first v3.24 pass (which itself was built on 9 of 19 uploaded handoffs -- the exact failure the new rule names): floating-items-capture, verify-propagation-with-grep, central-factory-migration-intent, testing-iterates-in-dependency-order, smoke-test-deferred-pipelines, handoff-numbering-rebase drift. The first v3.24 and this re-issue carry the same version number; this is the complete one.
-v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITICAL] -- the in-context file subset is invisible to Tony and not authoritative; ls the uploads dir and read the whole set first. Added lessons missed by the first v3.24 pass (which itself was built on 9 of 19 uploaded handoffs -- the exact failure the new rule names): floating-items-capture, verify-propagation-with-grep, central-factory-migration-intent, testing-iterates-in-dependency-order, smoke-test-deferred-pipelines, handoff-numbering-rebase drift. The first v3.24 and this re-issue carry the same version number; this is the complete one.
-v3.25 (May 31, 2026): Provenance Audit named as a Technical Reference skill (was project infrastructure only, never in the protocol) -- scanner tooling, Tier-1=0 goal, lookback-window + numeric-token mechanics, exceptions-file over-report gotcha. Fetched vs Recalled extended: three outcomes not two (cite / remove-and-note-the-gap / never cite-to-clear); a citation is a provenance claim that must be true [CRITICAL]. Emerged from provenance Phase 1: Tier-1 driven 4->0, partly by honest claim-strips (Artemis II notes) rather than sourcing, after nearly papering a # Source: over recalled pre-flight data. Tony's professional default -- remove over cite-incorrectly -- named as the rule.
+v3.23 (May 16, 2026): Procedural criticality framework -- three-tier taxonomy (CRITICAL / QUALITY / PRACTICE), a Part-2 principle with markers across Part 3. Broad-first methodology validated; procedure-to-judgment ratio scales with experience and shared context. Grounded in Tony's ops-management experience (LOTO, normalization of deviance).
 
-v3.26 (June 2, 2026): Session-Start Repo Pull and Snapshot Integrity [CRITICAL] -- the GitHub repo at HEAD is session-start ground truth (Tony pushes before every session); pull and SHA-pin the base, build on repo or fresh upload, demote /mnt/project and project knowledge to orientation/search only. Context Priority re-ranked: repo at tier 2, project knowledge flagged "stale AND haunted." Emerged from the recurring stale-Earth thread: root cause was a duplicate upload shadowing the current file (the /mnt/project snapshot served the older twin), compounded by a true ghost (palomas_orrery_before_none.py, Oct 2025, served by project_knowledge_search through a full project-knowledge replacement). Repo-pull validated end to end: repo earth == this session's authoritative upload byte-for-byte; all 9 bow-shock build bases confirmed identical to repo HEAD a57aeb9.
+v3.24 (May 29, 2026): Verify Execution, Not Appearance [CRITICAL] -- map the dispatch before editing leaves; compile != used != edited; swallowed exceptions hide render bugs. Agentic Pre-Test refined: data-content sweeps need a runtime smoke against the LIVE dispatch. Platform Neutrality [QUALITY]. Plotly facts (Scatter3d ignores border width, 8-symbol palette); transactional binary-mode patching. From the shell-consolidation dispatch discovery -- an inline-marker sweep editing dead code, an osculating marker silently absent 11 weeks; Tony's eyes caught both.
 
-v3.27 (June 4, 2026): Pipeline change -- project knowledge now auto-syncs from the GitHub repo via the connector (no manual add/delete step), retiring v3.26's stale-snapshot + served-ghost failure class at its source. Session-Start section condensed and reframed around the affirmative rule "The SHA is the round trip": a matching remote HEAD confirms commit + push + sync in one unforgeable check; the residual failures (no push / no sync) are honest and visible as a HEAD mismatch. Context Priority re-ranked -- project knowledge restored as a faithful repo projection. Foundation gains "access is not understanding" (the Weasley Principle extended to sensitive, real-people domains like food insecurity). Quotable added: "Our work is not just right -- it's beautiful." Emerged from the N15 ring-plane / analytical-retirement session (handoff v25): the round trip ran end to end on the new pipeline, a base-vs-HEAD SHA mix-up was caught by the two-hash check, and the Mars render closed the work as beautiful as well as correct.
+v3.24 re-issue (May 29, 2026): Enumerate Uploads Before Claiming a Review [CRITICAL] -- ls the uploads dir, read the whole set; the in-context subset is invisible to Tony and not authoritative. Recovered lessons the first pass missed (itself built on 9 of 19 handoffs -- the exact failure it names): floating-items-capture, verify-propagation-with-grep, central-factory-migration-intent, testing-in-dependency-order, smoke-test-deferred-pipelines, handoff-numbering-rebase drift.
 
-751 lines. Functional for Claude, readable for human, signal preserved.
+v3.25 (May 31, 2026): Provenance Audit named as a Part-3 skill (scanner, Tier-1=0 goal, lookback-window mechanics, exceptions-file over-report gotcha). Fetched-vs-Recalled extended: three outcomes (cite / remove-and-note-the-gap / never cite-to-clear); a citation is a provenance claim that must be TRUE [CRITICAL]. From provenance Phase 1, after nearly papering a # Source over recalled data.
+
+v3.26 (June 2, 2026): Session-Start Repo Pull [CRITICAL] -- the GitHub repo at HEAD is ground truth; pull and SHA-pin, build on repo or fresh upload, /mnt/project + project knowledge demoted to orientation. From the stale-Earth thread: a duplicate upload shadowed the current file and a true ghost was served through a project-knowledge replacement; repo-pull validated byte-for-byte.
+
+v3.27 (June 4, 2026): Project knowledge now auto-syncs from the repo (no manual add/delete), retiring v3.26's stale-snapshot + served-ghost class at source. Session-Start reframed around "The SHA is the round trip" -- a matching remote HEAD confirms commit + push + sync in one unforgeable check. Foundation gains "access is not understanding." Quotable: "Our work is not just right -- it's beautiful."
+
+v3.28 (June 6, 2026): Two additions (Movement-2 dipole-cone session, handoff v27). (1) Live repo vs snapshots -- the repo is live-readable any time (re-pull after a push; reading HEAD is the round-trip check, run live: de12f56 -> c25bdd7); project knowledge does NOT re-sync mid-session; un-pushed edits live only in uploads, which stay tier 1. (2) Show the Envelope of the Unknowable -- companion to Fetched-vs-Recalled: where a value is genuinely unknowable (rotation phase / instantaneous azimuth), show the envelope, not a faked point, and say so in the hover where the shape is approximate; faking an unknowable value is the cite-over-recalled failure class [CRITICAL].
+
+784 lines. Functional for Claude, readable for human, signal preserved.

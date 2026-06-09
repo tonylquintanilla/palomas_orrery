@@ -1852,19 +1852,20 @@ SHELL_CONFIGS = {
 
     },
 
-
-
-    # ============================================================
+# ============================================================
     # Sun
     # ============================================================
     # Source: NASA Solar Dynamics Observatory; NASA Parker Solar Probe;
     #         NASA Heliophysics; IAU 2015 nominal solar radius.
     # Verified: April 2026 provenance audit.
-    # Phase D1: Config extraction only. Configs registered but not yet
-    # invoked by unified dispatch. create_sun_visualization() stays alive.
-    # Legend names follow Option A: clean 'name' values; at eventual
-    # switchover, 6 non-conforming legend entries normalize to 'Sun: <X>'.
-    # Module updated: May 2026 with Anthropic's Claude Opus 4.6
+    # Live: rendered via the unified dispatch --
+    #       create_celestial_body_visualization(fig, 'Sun', ...).
+    #       (Phase D1 config extraction Apr-May 2026; create_sun_visualization()
+    #       retired May 2026, now raises NotImplementedError.)
+    # Legend names: clean 'name' values by design (Option A). The 'Sun: <X>' form
+    #       lives only in the hover/tooltip source strings
+    #       (solar_visualization_shells.py), not the legend -- intentional.
+    # Module updated: June 2026 with Anthropic's Claude Opus 4.8
     'Sun': {
 
         'core': {
@@ -2626,191 +2627,6 @@ CUSTOM_SHELLS = {
         },
 
     },
-
-
-    # ============================================================
-    # Sun
-    # ============================================================
-    # Source: NASA Solar Dynamics Observatory; NASA Parker Solar Probe;
-    #         NASA Heliophysics; IAU 2015 nominal solar radius.
-    # Verified: April 2026 provenance audit.
-    # Phase D1: Config extraction only. Configs registered but not yet
-    # invoked by unified dispatch. create_sun_visualization() stays alive.
-    # Legend names follow Option A: clean 'name' values; at eventual
-    # switchover, 6 non-conforming legend entries normalize to 'Sun: <X>'.
-    # Module updated: May 2026 with Anthropic's Claude Opus 4.6
-    'Sun': {
-
-        'core': {
-            'name': 'Core',
-            'radius_au': CORE_AU,
-            'color': 'rgb(70, 130, 180)',
-            'opacity': 1.0,
-            'n_points': 25,
-            'marker_size': 10,
-            'hover_text': core_info_hover,
-            'tooltip': core_info,
-        },
-
-        'radiative': {
-            'name': 'Radiative Zone',
-            'radius_au': RADIATIVE_ZONE_AU,
-            'color': 'rgb(30, 144, 255)',
-            'opacity': 1.0,
-            'n_points': 25,
-            'marker_size': 7,
-            'hover_text': radiative_zone_info_hover,
-            'tooltip': radiative_zone_info,
-        },
-
-        'photosphere': {
-            'name': 'Photosphere',
-            'radius_au': SOLAR_RADIUS_AU,
-            'color': 'rgb(255, 244, 214)',
-            'opacity': 1.0,
-            'geometry_type': 'mesh3d',
-            'mesh_resolution': 24,
-            'n_points': 25,
-            'marker_size': 7.0,
-            'hover_text': photosphere_info_hover,
-            'tooltip': photosphere_info,
-        },
-
-        'chromosphere': {
-            'name': 'Chromosphere',
-            'radius_au': CHROMOSPHERE_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(30, 144, 255)',
-            'opacity': 0.5,
-            'n_points': 25,
-            'marker_size': 3.0,
-            'hover_text': chromosphere_info_hover,
-            'tooltip': chromosphere_info,
-        },
-
-        'inner_corona': {
-            'name': 'Inner Corona',
-            'radius_au': INNER_CORONA_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(0, 0, 255)',
-            'opacity': 0.45,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': inner_corona_info_hover,
-            'tooltip': inner_corona_info,
-        },
-
-        'streamer_belt': {
-            'name': 'Streamer Belt (Visible Corona)',
-            'radius_au': STREAMER_BELT_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(255, 200, 80)',
-            'opacity': 0.45,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': streamer_belt_info_hover,
-            'tooltip': streamer_belt_info,
-        },
-
-        'roche_limit': {
-            'name': 'Roche Limit (Comets)',
-            'radius_au': ROCHE_LIMIT_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(200, 60, 60)',
-            'opacity': 0.5,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': roche_limit_info_hover,
-            'tooltip': roche_limit_info,
-        },
-
-        'alfven_surface': {
-            'name': 'Alfven Surface',
-            'radius_au': ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(0, 200, 200)',
-            'opacity': 0.35,
-            'n_points': 20,
-            'marker_size': 3.5,
-            'hover_text': alfven_surface_info_hover,
-            'tooltip': alfven_surface_info,
-        },
-
-        'outer_corona': {
-            'name': 'Outer Corona',
-            'radius_au': OUTER_CORONA_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(25, 25, 112)',
-            'opacity': 0.5,
-            'n_points': 20,
-            'marker_size': 3.5,
-            'hover_text': outer_corona_info_hover,
-            'tooltip': outer_corona_info,
-        },
-
-        'termination_shock': {
-            'name': 'Termination Shock',
-            'radius_au': TERMINATION_SHOCK_AU,
-            'color': 'rgb(240, 244, 255)',
-            'opacity': 0.4,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': termination_shock_info_hover,
-            'tooltip': termination_shock_info,
-        },
-
-        'heliopause': {
-            'name': 'Heliopause',
-            'radius_au': HELIOPAUSE_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(135, 206, 250)',
-            'opacity': 0.4,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': solar_wind_info_hover,
-            'tooltip': solar_wind_info,
-        },
-
-        'inner_oort_limit': {
-            'name': 'Inner Limit of Oort Cloud',
-            'radius_au': INNER_LIMIT_OORT_CLOUD_AU,
-            'color': 'white',
-            'opacity': 0.35,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': inner_limit_oort_info_hover,
-            'tooltip': inner_limit_oort_info,
-        },
-
-        'inner_oort': {
-            'name': 'Inner Oort Cloud',
-            'radius_au': INNER_OORT_CLOUD_AU,
-            'color': 'white',
-            'opacity': 0.35,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': inner_oort_info_hover,
-            'tooltip': inner_oort_info,
-        },
-
-        'outer_oort': {
-            'name': 'Outer Oort Cloud',
-            'radius_au': OUTER_OORT_CLOUD_AU,
-            'color': 'white',
-            'opacity': 0.3,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': outer_oort_info_hover,
-            'tooltip': outer_oort_info,
-        },
-
-        'gravitational': {
-            'name': 'Gravitational Influence',
-            'radius_au': GRAVITATIONAL_INFLUENCE_AU,
-            'color': 'rgb(102, 187, 106)',
-            'opacity': 0.3,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': gravitational_influence_info_hover,
-            'tooltip': gravitational_influence_info,
-        },
-
-    },
-
-
 
     # ============================================================
     # Sun

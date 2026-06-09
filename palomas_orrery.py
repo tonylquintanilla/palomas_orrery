@@ -9289,8 +9289,12 @@ def update_center_dropdown(*args):
         if name not in ordered_centers:
             ordered_centers.append(name)
     
-    new_options = ['Sun'] + ordered_centers
-    
+    # 'Sun' is prepended unconditionally; it also qualifies as a centerable
+    # object and is the default center, so it can land in ordered_centers too.
+    # Filter it out here so it is not listed twice.
+    # FIXED: double 'Sun' in the center-object dropdown (every selection).
+    new_options = ['Sun'] + [name for name in ordered_centers if name != 'Sun']
+
     # Update the dropdown values
     center_menu['values'] = new_options
     

@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 06, 2026
-Modules: 107 | Functions: 870 | Lines: 86,571
+Generated: June 08, 2026
+Modules: 107 | Functions: 870 | Lines: 86,413
 
 ---
 
@@ -124,7 +124,7 @@ and explains in context.
 
 ### palomas_orrery.py
 
-**Role:** gui | **Lines:** 8,426
+**Role:** gui | **Lines:** 8,430
 
 > palomas_orrery.py - Main GUI and plotting engine for Paloma's Orrery.
 
@@ -193,10 +193,10 @@ and explains in context.
 - `open_star_visualization()` (line 9024) -- Inform user about standalone Star Visualization executable.
 - `launch_galactic_center()` (line 9097) -- Launch the Sagittarius A* Grand Tour visualization.
 - `update_center_dropdown()` (line 9255) -- Update the center dropdown to show only Sun + selected centerable objects.
-- `setup_center_dropdown_traces()` (line 9316) -- Add traces to all object IntVars to update center dropdown on selection change.
-- `on_center_change()` (line 9331) -- Update frame title and status when the center object is changed.
-- `open_orbital_param_visualization()` (line 9759) -- Opens the orbital parameter visualization window by calling the
-- `restore_sash_positions()` (line 9931)
+- `setup_center_dropdown_traces()` (line 9320) -- Add traces to all object IntVars to update center dropdown on selection change.
+- `on_center_change()` (line 9335) -- Update frame title and status when the center object is changed.
+- `open_orbital_param_visualization()` (line 9763) -- Opens the orbital parameter visualization window by calling the
+- `restore_sash_positions()` (line 9935)
 
 ---
 
@@ -2368,7 +2368,7 @@ and explains in context.
 
 ### shell_configs.py
 
-**Role:** other | **Lines:** 2,640
+**Role:** other | **Lines:** 2,478
 
 > shell_configs.py - Shell configuration data for all celestial bodies.
 
@@ -2475,7 +2475,7 @@ and explains in context.
 | paleoclimate_visualization | rendering | 478 | 1 | 2 |
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
-| palomas_orrery | gui | 8,426 | 28 | 0 |
+| palomas_orrery | gui | 8,430 | 28 | 0 |
 | palomas_orrery_dashboard | gui | 631 | 0 | 0 |
 | palomas_orrery_helpers | utility | 776 | 11 | 2 |
 | planet9_visualization_shells | rendering/shells | 267 | 1 | 1 |
@@ -2500,7 +2500,7 @@ and explains in context.
 | sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
 | shared_utilities | utility | 142 | 1 | 7 |
-| shell_configs | other | 2,640 | 5 | 3 |
+| shell_configs | other | 2,478 | 5 | 3 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
 | smoke_dipole_cone | other | 119 | 4 | 0 |
