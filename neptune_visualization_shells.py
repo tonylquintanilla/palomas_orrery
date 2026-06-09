@@ -900,6 +900,8 @@ def create_neptune_radiation_belts(center_position=(0, 0, 0)):
             'color': 'rgb(200, 150, 180)',  
             'opacity': 0.25,
             'variable_offset': True,  # Special handling for cusp region
+            # Source: Ness et al. (1989) Science 246, 1473 -- Voyager 2 magnetometer:
+            #         Neptune dipole 47 deg tilt, 0.55 R_N offset from center.
             'description': "The polar cusps represent funnel-shaped openings where solar wind particles can directly access <br>"
                           "Neptune's magnetosphere. Due to Neptune's tilted magnetic field, these regions demonstrate complex <br>"
                           "behavior and vary dramatically with the planet's rotation.<br><br>"

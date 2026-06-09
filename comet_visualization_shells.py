@@ -1339,6 +1339,10 @@ def create_comet_anti_tail(center_position=(0, 0, 0), anti_tail_length_km=400000
                 mini_particles, alpha_scale=0.6  # Dimmer than anti-tail
             )
             
+            # Source: NASA/ESA/STScI Hubble (WFC3/UVIS F350LP) imaging of 3I/ATLAS,
+            #         Jan 7/14/22 2026; four-jet structure (1 sunward anti-tail +
+            #         3 mini-jets at 120 deg) via Larson-Sekanina gradient filter --
+            #         Loeb & Scarmato 2026 (RNAAS); Jan 22 alignment obs. Man-To Hui (SHAO).
             mini_desc = (
                 f"Mini-jet {j+1} of {comet_name}<br>"
                 f"One of {num_mini_jets} jets at 120 deg spacing<br>"

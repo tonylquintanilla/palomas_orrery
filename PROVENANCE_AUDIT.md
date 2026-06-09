@@ -36,9 +36,9 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 2 |
+| 1 | 16-20 | FIX NOW | 0 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 148 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 326 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 328 |
 | 4 | 1-4 | NO ACTION NEEDED | 17 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -83,22 +83,6 @@ is planned for a future session.
 
 ---
 
-## Tier 1: FIX NOW (Score 16-20)
-
-### comet_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 1344 | string | display string @ line 1344 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### neptune_visualization_shells.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 903 | string | display string @ line 903 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
----
-
 ## Tier 2: ALL ACCEPTED RESIDUALS -- see note below (Score 10-15)
 
 ### celestial_objects.py
@@ -117,7 +101,7 @@ is planned for a future session.
 | 42 | dict | COMET_NUCLEUS_SIZES[...] | (16 entries) | 4 | 3 | **12** | No source citation (recalled) | Geometry dict in rendering/shells module |
 | 331 | string | display string @ line 331 | (3 claims) | 3 | 4 | **12** | Sourced but potentially stale | Public-facing display string (hover/INFO) |
 | 1174 | string | display string @ line 1174 | (3 claims) | 3 | 4 | **12** | No source, contains date-sensitive claims | Public-facing display string (hover/INFO) |
-| 1591 | dict | COMET_FEATURE_THRESHOLDS[...] | (3 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
+| 1595 | dict | COMET_FEATURE_THRESHOLDS[...] | (3 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
 
 ### constants_new.py
 
@@ -445,13 +429,14 @@ is planned for a future session.
 | 525 | string | display string @ line 525 | (8 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 532 | string | display string @ line 532 | (16 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 698 | string | display string @ line 698 | (14 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1525 | string | display string @ line 1525 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1535 | string | display string @ line 1535 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1545 | string | display string @ line 1545 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1554 | string | display string @ line 1554 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1563 | string | display string @ line 1563 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1573 | string | display string @ line 1573 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1523 | dict | comet_visualization_info[...] | (6 entries) | 2 | 3 | **6** | Has source citation | Geometry dict in rendering/shells module |
+| 1348 | string | display string @ line 1348 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1529 | string | display string @ line 1529 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1539 | string | display string @ line 1539 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1549 | string | display string @ line 1549 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1558 | string | display string @ line 1558 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1567 | string | display string @ line 1567 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1577 | string | display string @ line 1577 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1527 | dict | comet_visualization_info[...] | (6 entries) | 2 | 3 | **6** | Has source citation | Geometry dict in rendering/shells module |
 
 ### constants_new.py
 
@@ -624,20 +609,21 @@ is planned for a future session.
 | 594 | string | display string @ line 594 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 858 | string | display string @ line 858 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 880 | string | display string @ line 880 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1189 | string | display string @ line 1189 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1222 | string | display string @ line 1222 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1252 | string | display string @ line 1252 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1282 | string | display string @ line 1282 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1312 | string | display string @ line 1312 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1342 | string | display string @ line 1342 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1375 | string | display string @ line 1375 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1407 | string | display string @ line 1407 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1439 | string | display string @ line 1439 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1471 | string | display string @ line 1471 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1503 | string | display string @ line 1503 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1533 | string | display string @ line 1533 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1675 | string | display string @ line 1675 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
-| 1695 | string | display string @ line 1695 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 905 | string | display string @ line 905 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1191 | string | display string @ line 1191 | (4 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1224 | string | display string @ line 1224 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1254 | string | display string @ line 1254 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1284 | string | display string @ line 1284 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1314 | string | display string @ line 1314 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1344 | string | display string @ line 1344 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1377 | string | display string @ line 1377 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1409 | string | display string @ line 1409 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1441 | string | display string @ line 1441 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1473 | string | display string @ line 1473 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1505 | string | display string @ line 1505 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1535 | string | display string @ line 1535 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1677 | string | display string @ line 1677 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 1697 | string | display string @ line 1697 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### orbit_data_manager.py
 
