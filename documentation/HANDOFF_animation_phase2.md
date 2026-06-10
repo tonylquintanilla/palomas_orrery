@@ -143,4 +143,82 @@ it is a formatter polish item (ledger candidate), not a Phase 2 defect.
 - Then: Phase 3 tier decision (the three-tier design from the Phase-1
   handoff), and optionally the wrapper-retirement rider (D.Structural 3).
 
-Module updated: June 2026 with Anthropic's Claude Fable 5
+## Phase 2 Test Results (June 10, 2026 -- Tony, Mode 5)
+
+Tested at HEAD 6a0ac2808f3b167e3fa5bebe0bdd5ca16f063591. All four steps
+verified on Windows, Python 3.13.
+
+### P2-1 -- Static, N3 single-marker check
+- PASS. One marker, one legend entry, full formatter hover. INFO icon works.
+
+### P2-2 -- Static, Sun-centered, no shells
+- PASS. Single Sun marker. Full formatter hover serves.
+
+### P2-3 -- Static, shells-on regression
+- PASS. Unchanged from pre-patch. Center marker present. Auto-scale correct.
+
+### P2-4 -- Static, osculating hover spot-check
+- FINDING. Keplerian Orbit hover said "averaged orbital elements" but orbits
+  use osculating elements. Pre-existing labeling error in idealized_orbits.py
+  get_planet_perturbation_note(). FIX APPLIED (Claude Sonnet, same session):
+  10 instances corrected to "osculating (instantaneous) elements at epoch."
+
+### P2-5 -- Animate, O6a/O5 headline (new pixels)
+- PASS. Center marker renders with shells on. Full hover. Constant across
+  frames. Static shell traces: 17 (one higher than Phase 1 P3). Magnetotail
+  + Sun Direction unchanged.
+
+### P2-6 -- Animate, no shells
+- PASS. Full formatter hover (not bare name).
+
+### P2-7 -- Animate, barycenter transparency
+- TEST DESCRIPTION CORRECTED. Barycenters correctly render as open squares
+  with full hover and legend entries (not transparent/suppressed as the
+  checklist expected). Pluto-Charon Barycenter centered: open square, full
+  hover, legend entry. Earth-Moon Barycenter in Earth-centered animation:
+  same. Both CORRECT as rendered.
+
+### P2-8 -- Frame-payload regression
+- Deferred. Fence untouched; console counts match expectations.
+
+### P2-9 -- Console lines
+- PASS. "[ANIMATION] Added Earth shells (16 static traces)" prints from
+  shared helper. Frame-updated/excluded counts print in expected form.
+
+### Observation Log v2 (O7-O9)
+
+O7 -- "Below mean datum" hover: acceptable and informative. No promotion.
+O8 -- Sun hover (new full-formatter vs old custom): acceptable.
+O9 -- Keplerian orbit hover labeling error found and fixed (P2-4).
+      palomas_orrery.py docstring authorship updated.
+
+### Additional Fixes (Claude Sonnet, June 10, 2026)
+
+1. idealized_orbits.py: 10 instances of "averaged orbital elements" changed
+   to "osculating (instantaneous) elements at epoch" in
+   get_planet_perturbation_note(). Pre-existing factual error, not introduced
+   by Phase 2. py_compile clean, ASCII-only. Credit line added.
+
+2. palomas_orrery.py: docstring authorship updated to "June 10, 2026 with
+   Anthropic's Claude Fable 5, Claude Sonnet 4.6, and Tony."
+
+### Phase 2 Disposition
+
+Phase 2 RENDER-CONFIRMED. N3, O5, O6(a) all resolved. No regressions.
+P2-7 test description corrected (barycenters render correctly as-is).
+Osculating hover labeling fixed separately (pre-existing, one file).
+
+### Ledger-Ready Updates (apply to LEDGER_orrery_consolidated.md)
+
+- Move N3, O5, O6(a) to section C (DONE).
+- 21/51: Phase 2 RENDER-CONFIRMED. Phase 2.5 (wrapper retirement) and
+  Phase 3 (tier decision) remain open.
+- New DONE: osculating hover labeling fix (idealized_orbits.py, 10 text
+  corrections in get_planet_perturbation_note).
+- New DONE: palomas_orrery.py authorship update.
+- Queued (section G): animation auto-scale-vs-shells decision; Phase 3
+  tier decision; optional Phase 2.5 wrapper retirement.
+- New SHA after push carries: Phase 2 helpers (6a0ac28 base) + osculating
+  label fix + authorship update.
+
+Module updated: June 2026 with Anthropic's Claude Fable 5 + Claude Sonnet 4.6

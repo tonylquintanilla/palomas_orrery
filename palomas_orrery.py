@@ -14,7 +14,7 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
-Module updated: June 1, 2026 with Anthropic's Claude Opus 4.8 and Tony
+Module updated: June 10, 2026 with Anthropic's Claude Fable 5, Sonnet 4.6 and Tony
 
 """
 #Paloma's Orrery - Solar System Visualization Tool

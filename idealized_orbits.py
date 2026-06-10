@@ -11,6 +11,8 @@ Key functions:
     plot_idealized_orbits() - Master orbit renderer for all object types
     add_mean_orbit_trace() - Simple Keplerian ellipse from mean elements
     calculate_*_satellite_elements() - Per-system satellite orbit models
+Module updated: June 2026 with Anthropic's Claude Sonnet 4.6
+(osculating vs mean element labeling correction in Keplerian orbit hover text)
 Module updated: May 2026 with Anthropic's Claude Opus 4.7
 (provenance audit; 45 hardcoded AU-in-km values replaced with KM_PER_AU
 import from constants_new.py)
@@ -116,7 +118,7 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     # For Keplerian orbits - planet-specific perturbations
     perturbation_notes = {
         'Mercury': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Venus and Jupiter gravitational tugs<br>"
             "* Relativistic precession (+43 arcsec/century)<br>"
@@ -124,56 +126,56 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
             "* High eccentricity amplifies perturbations</i>"
         ),
         'Venus': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Earth and Jupiter gravitational tugs<br>"
             "* Nearly circular orbit (e ~ 0.007)<br>"
             "* Most stable inner planet orbit</i>"
         ),
         'Earth': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Moon's gravitational influence<br>"
             "* Jupiter and Venus gravitational tugs<br>"
             "* Axial precession (25,772 year cycle)</i>"
         ),
         'Mars': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Jupiter gravitational tugs (largest)<br>"
             "* Earth and Venus effects<br>"
             "* Eccentricity varies 0.000-0.140 over ~2 Myr</i>"
         ),
         'Jupiter': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Saturn gravitational interaction<br>"
             "* Great Inequality (900-year cycle)<br>"
             "* Dominates inner solar system dynamics</i>"
         ),
         'Saturn': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Jupiter gravitational interaction<br>"
             "* Great Inequality (900-year cycle)<br>"
             "* 5:2 resonance with Jupiter</i>"
         ),
         'Uranus': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Jupiter and Saturn gravitational tugs<br>"
             "* Neptune interaction<br>"
             "* Extreme axial tilt (98 deg)</i>"
         ),
         'Neptune': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Jupiter and Saturn gravitational tugs<br>"
             "* Uranus interaction<br>"
             "* 3:2 resonance captures Pluto</i>"
         ),
         'Pluto': (
-            "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+            "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
             "Major perturbations from:<br>"
             "* Neptune 3:2 mean motion resonance<br>"
             "* High eccentricity (e ~ 0.25)<br>"
@@ -183,7 +185,7 @@ def get_planet_perturbation_note(obj_name, orbit_source="Keplerian"):
     
     # Default for other objects (asteroids, comets, etc.)
     default_note = (
-        "<br><br><i>Keplerian orbit uses averaged orbital elements.<br>"
+        "<br><br><i>Keplerian orbit uses osculating (instantaneous) elements at epoch.<br>"
         "Subject to gravitational perturbations from planets.</i>"
     )
     
