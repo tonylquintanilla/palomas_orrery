@@ -82,4 +82,75 @@ frame list is sparse; plain subtraction would misalign silently.
   D.Structural 3 wrapper retirement) and Phase 3 tier decision, both seeded
   by the observation log.
 
+## Phase 1 Test Results (June 10, 2026 -- Tony, Mode 5)
+
+Tested at HEAD 7977a11deb5baf4218568fae4df7617319cd658f (commit: "animation
+refactor phase 1"). All three edits verified on Windows, Python 3.13.
+
+### P1 -- Sun-centered, inner planets, no shells, 29 frames
+- PASS. File size 4818 -> 271 KB (94.4% reduction).
+- Console: Frame-updated traces: 3; constant traces excluded from frames: 31.
+- Slider scrub smooth, orbit lines static and persistent, first-frame sync
+  correct (no jump), hover text intact on moving markers.
+
+### P2 -- Sun-centered, inner planets, Sun shells (full corona set), 29 frames
+- PASS. File size 5133 -> 593 KB (88.4% reduction).
+- Console: Static shell traces (before fence): 24; Frame-updated traces: 3;
+  constant traces excluded from frames: 30.
+- Shells render and stay put during playback. Sun direction indicator correctly
+  suppressed (body at Sun position). File larger than P1 due to shell geometry
+  in base figure; frames payload stayed minimal.
+
+### P3 -- Earth-centered, Moon + Earth magnetosphere shells, 29 frames
+- PASS. Magnetotail oriented anti-sunward at frame 1 (confirmed with Sun
+  marker as reference). Sun Direction indicator appears for the first time
+  in any animation -- cross marker + dashed line toward Sun, frozen at
+  frame-1 position (honest, by design). Moon animates correctly around
+  static shells.
+- Console: Static shell traces (before fence) > 0 (magnetosphere traces
+  counted below fence).
+
+### Observation Log (O1-O6)
+
+O1 -- Comet tail freeze: Acceptable at current spans. The freeze at frame 1
+is understood and visually tolerable. Multi-frame comet tail rendering noted
+as a future opt-in mode (not default). Ledger item.
+
+O2 -- Sun shells from planet center: No-op confirmed. Checking Sun shells in
+Earth-centered animation produces no shell traces (animate path has no
+offset-Sun branch).
+
+O3 -- Non-center planet shells: No-op confirmed. Checking Earth magnetosphere
+in Sun-centered animation produces no shell rendering (only center-body shells
+dispatch in animate).
+
+O4 -- Rotation axis / dipole cone at center: Uranus-centered animation with
+magnetosphere, animating Oberon's orbit. Magnetosphere renders, Oberon
+animates correctly. Confirms v27 "animation gap" is non-center-body only --
+center-body shells and body-triggered axis/cone DO dispatch in animate.
+
+O5 -- Center-body hover text: Confirmed bare name in animate vs full INFO
+encyclopedia in static. Should be fixed. Phase 2 consolidation scope.
+
+O6 -- Free-form observations:
+(a) Center body marker does not render in animate when shells are on, even
+    if the body is selected in the menu. Static path does render it. Pre-existing
+    pipeline divergence; root cause in static path not yet mapped. Phase 2 scope.
+(b) Comet plotted-period traces need more visibility (line weight / color).
+    Ledger item.
+(c) Scale, cube, and grid options deserve a separate thorough review. Ledger
+    item, separate track.
+
+### Phase 1 Disposition
+
+Phase 1 RENDER-CONFIRMED. All three edits (frame fence, sun threading,
+first-frame sync) verified on live data. No regressions found. Three
+pre-existing pipeline divergences surfaced and documented for Phase 2
+consolidation (center marker suppression with shells, center hover text
+parity, offset-Sun-shells branch absent in animate). Two new ledger items
+logged (comet plotted-period visibility, scale/cube/grid review).
+
+Next: Phase 2 design conversation (scene-assembly consolidation), seeded by
+these observations.
+
 Module updated: June 2026 with Anthropic's Claude Fable 5
