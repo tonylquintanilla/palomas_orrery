@@ -1,0 +1,536 @@
+1786c1786,1792
+<                          hover_data="Full Object Info", center_object_name=None):
+---
+>                          hover_data="Full Object Info", center_object_name=None,
+>                          params=None, show_legend=True):
+>     # (2a) params: orbital-parameter dict for hover formatting. Pass the
+>     # pipeline's active_planetary_params (osculating elements fetched at plot
+>     # time) where available; defaults to the module-level planetary_params
+>     # (mean/static elements) for backward compatibility.
+>     # show_legend: legend visibility (transparent center bodies pass False).
+1822c1828
+<         planetary_params,
+---
+>         params if params is not None else planetary_params,
+1852c1858
+<             showlegend=True
+---
+>             showlegend=show_legend
+1855a1862,2035
+> # =============================================================================
+> # Scene-assembly helpers (21/51 Phase 2, June 2026)
+> # One implementation for the stages plot_objects() and animate_objects()
+> # previously duplicated. Static-pipeline behavior is the reference; the
+> # animate call sites pass their own position sources (frame-1 entries).
+> # =============================================================================
+> 
+> def get_planet_shell_vars_map():
+>     """(2d) Single source for the planet -> shell-vars mapping.
+> 
+>     Replaces three per-pipeline copies (planet_shells_config and
+>     planet_shell_vars in plot_objects; animation_shell_config in
+>     animate_objects). Add new shelled bodies HERE, once.
+> 
+>     Module updated: June 2026 with Anthropic's Claude Fable 5
+>     """
+>     return {
+>         'Mercury': mercury_shell_vars,
+>         'Venus': venus_shell_vars,
+>         'Earth': earth_shell_vars,
+>         'Moon': moon_shell_vars,
+>         'Mars': mars_shell_vars,
+>         'Jupiter': jupiter_shell_vars,
+>         'Saturn': saturn_shell_vars,
+>         'Uranus': uranus_shell_vars,
+>         'Neptune': neptune_shell_vars,
+>         'Pluto': pluto_shell_vars,
+>         'Eris': eris_shell_vars,
+>         'Planet 9': planet9_shell_vars
+>         # Add more planets here as shell systems are developed
+>     }
+> 
+> 
+> def resolve_shell_sun_position(center_object_name, sun_entry, plot_date, center_id):
+>     """(2b) Resolve the Sun position used to orient magnetosphere/bow-shock
+>     shells (D2 sun_position threading). One producer for both pipelines.
+> 
+>     Parameters:
+>         center_object_name (str): the plot's center body
+>         sun_entry (dict|None): the Sun's position entry ({'x','y','z'} in AU)
+>             from the caller's position source -- plot_objects passes
+>             positions.get('Sun'); animate_objects passes the FRAME-1 entry of
+>             positions_over_time['Sun']. None or an entry without 'x' falls
+>             through to a Horizons fetch.
+>         plot_date (datetime): date for the fallback fetch (static: plot date;
+>             animate: dates_list[0])
+>         center_id: Horizons center for the fallback fetch
+> 
+>     Returns:
+>         (x, y, z) tuple in AU. (0,0,0) when the center IS the Sun
+>         (heliocentric: shells orient from origin) or when every source
+>         fails (fallback: no rotation).
+>     """
+>     if center_object_name == 'Sun':
+>         return (0, 0, 0)
+>     if sun_entry is not None and 'x' in sun_entry:
+>         return (sun_entry['x'], sun_entry['y'], sun_entry['z'])
+>     # Sun not in the caller's position source (checkbox off) -- fetch it
+>     _sun_fetch = fetch_position('10', plot_date, center_id=center_id)
+>     if _sun_fetch and 'x' in _sun_fetch:
+>         return (_sun_fetch['x'], _sun_fetch['y'], _sun_fetch['z'])
+>     return (0, 0, 0)  # Fallback: no rotation
+> 
+> 
+> def add_center_body_marker(fig, center_object_name, params=None):
+>     """(2a) Canonical center-body marker -- the ONE mechanism, both pipelines.
+> 
+>     Routes through add_celestial_object (full format_detailed_hover_text
+>     hover, RA/Dec fetch, CENTER_MARKER_SIZE), identical to how the static
+>     object loop renders the center. Transparent center colors (barycenters)
+>     suppress the legend entry, preserving the old explicit-block behavior.
+> 
+>     History: the center marker used to have TWO mechanisms in plot_objects
+>     (object loop + an explicit block -> ledger N3 double marker) and ONE in
+>     animate_objects (explicit block only, guarded by center_shells_added ->
+>     no marker at all with shells on, observation O6a; bare hover, O5).
+>     plot_objects keeps its object-loop call; animate_objects calls this.
+> 
+>     Parameters:
+>         params (dict|None): orbital params for hover -- pass the pipeline's
+>             active_planetary_params (osculating); None falls back to the
+>             module-level planetary_params inside add_celestial_object.
+>     """
+>     center_object_info = next(
+>         (obj for obj in objects if obj['name'] == center_object_name), None)
+>     if center_object_info is None:
+>         return
+>     is_transparent = 'rgba(0,0,0,0)' in str(center_object_info['color']).replace(' ', '')
+>     add_celestial_object(
+>         fig,
+>         {'x': 0, 'y': 0, 'z': 0},
+>         center_object_name,
+>         center_object_info['color'],
+>         center_object_info['symbol'],
+>         marker_size=CENTER_MARKER_SIZE,
+>         center_object_name=center_object_name,
+>         params=params,
+>         show_legend=not is_transparent,
+>     )
+> 
+> 
+> def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
+>                            planet_shell_vars_map, sun_position,
+>                            scale_value, axis_range, log_prefix=''):
+>     """(2c) Center-body shell dispatch -- one implementation, both pipelines.
+> 
+>     Sun center: unified dispatch (create_celestial_body_visualization) plus
+>     the standalone asteroid-belt geometry. Planet center: the
+>     create_planet_visualization wrapper (delegates to the unified dispatch)
+>     with the threaded sun_position. Either branch applies the shell
+>     auto-scale when scale_value == 'Auto' (live in the static pipeline; the
+>     animate pipeline currently recomputes axis_range downstream and ignores
+>     the returned value -- pre-existing behavior, see ledger).
+> 
+>     Parameters:
+>         sun_shell_vars_map (dict): the Sun shell tk.IntVars
+>         planet_shell_vars_map (dict): from get_planet_shell_vars_map()
+>         sun_position (tuple): from resolve_shell_sun_position()
+>         scale_value (str): scale_var.get() -- 'Auto' enables shell auto-scale
+>         axis_range: current axis range (may be None in the animate pipeline,
+>             where the return value is unused)
+>         log_prefix (str): console tag for shell-add messages; '' silences
+>             (static), '[ANIMATION] ' matches the animate console protocol
+> 
+>     Returns:
+>         (fig, center_shells_added, axis_range)
+>     """
+>     center_shells_added = False
+> 
+>     if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars_map.values()):
+>         fig = create_celestial_body_visualization(
+>             fig, 'Sun', sun_shell_vars_map,
+>             center_position=(0, 0, 0),
+>             object_type='Sun',
+>             center_object='Sun',
+>         )
+>         center_shells_added = True
+>         # Auto-scale axis to shell radius (same as planet path)
+>         if hasattr(fig, '_shell_outermost_radius_au') and scale_value == 'Auto':
+>             shell_r = fig._shell_outermost_radius_au * 2
+>             axis_range = [-shell_r, shell_r]
+>         # Asteroid belts: standalone geometry, not part of unified shell dispatch
+>         if sun_shell_vars_map.get('main_belt') and sun_shell_vars_map['main_belt'].get() == 1:
+>             for t in create_main_asteroid_belt():
+>                 fig.add_trace(t)
+>         if sun_shell_vars_map.get('hildas') and sun_shell_vars_map['hildas'].get() == 1:
+>             for t in create_hilda_group():
+>                 fig.add_trace(t)
+>         if sun_shell_vars_map.get('trojans_greeks') and sun_shell_vars_map['trojans_greeks'].get() == 1:
+>             for t in create_jupiter_trojans_greeks(jupiter_angle=0):
+>                 fig.add_trace(t)
+>         if sun_shell_vars_map.get('trojans_trojans') and sun_shell_vars_map['trojans_trojans'].get() == 1:
+>             for t in create_jupiter_trojans_trojans(jupiter_angle=0):
+>                 fig.add_trace(t)
+>         if log_prefix:
+>             print(f"{log_prefix}Added Sun shells ({len(fig.data)} static traces)", flush=True)
+> 
+>     elif center_object_name in planet_shell_vars_map:
+>         shell_vars = planet_shell_vars_map[center_object_name]
+>         if any(var.get() == 1 for var in shell_vars.values()):
+>             fig = create_planet_visualization(fig, center_object_name, shell_vars,
+>                                               center_position=(0, 0, 0),
+>                                               sun_position=sun_position)
+>             center_shells_added = True
+>             if log_prefix:
+>                 print(f"{log_prefix}Added {center_object_name} shells ({len(fig.data)} static traces)", flush=True)
+>             # Auto-scale axis to shell radius for migrated bodies
+>             if hasattr(fig, '_shell_outermost_radius_au') and scale_value == 'Auto':
+>                 shell_r = fig._shell_outermost_radius_au * 2
+>                 axis_range = [-shell_r, shell_r]
+> 
+>     return fig, center_shells_added, axis_range
+> 
+> 
+4483,4556c4663,4684
+<             # Define dictionary mapping planets to their shell variable dictionaries
+<             planet_shells_config = {
+<                 'Mercury': mercury_shell_vars,
+<                 'Venus': venus_shell_vars,
+<                 'Earth': earth_shell_vars,
+<                 'Moon': moon_shell_vars,
+<                 'Mars': mars_shell_vars,
+<                 'Jupiter': jupiter_shell_vars,
+<                 'Saturn': saturn_shell_vars,
+<                 'Uranus': uranus_shell_vars,
+<                 'Neptune': neptune_shell_vars,
+<                 'Pluto': pluto_shell_vars,
+<                 'Eris': eris_shell_vars,
+<                 'Planet 9': planet9_shell_vars               
+<                 # Add more planets here as shell systems are developed
+<             }
+< 
+<             # Sun position for shell rendering (sun_position threading, D2)
+<             # Must be available regardless of Sun checkbox state
+<             # Reused later by comet tails section
+<             if center_object_name == 'Sun':
+<                 _sun_pos_tuple = (0, 0, 0)
+<             elif 'Sun' in positions and positions['Sun'] is not None and 'x' in positions['Sun']:
+<                 _sun_pos_data = positions['Sun']
+<                 _sun_pos_tuple = (_sun_pos_data['x'], _sun_pos_data['y'], _sun_pos_data['z'])
+<             else:
+<                 # Sun checkbox off -- fetch position for magnetosphere orientation
+<                 _sun_fetch = fetch_position('10', date_obj, center_id=center_id)
+<                 if _sun_fetch and 'x' in _sun_fetch:
+<                     _sun_pos_tuple = (_sun_fetch['x'], _sun_fetch['y'], _sun_fetch['z'])
+<                 else:
+<                     _sun_pos_tuple = (0, 0, 0)  # Fallback: no rotation
+< 
+<             # Flag to track if shells have been added for center object
+<             center_shells_added = False
+< 
+<             # First add Sun visualization if needed
+<             if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
+<                 fig = create_celestial_body_visualization(
+<                     fig, 'Sun', sun_shell_vars,
+<                     center_position=(0, 0, 0),
+<                     object_type='Sun',
+<                     center_object='Sun',
+<                 )
+<                 center_shells_added = True
+<                 # Auto-scale axis to shell radius (same as planet path)
+<                 if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+<                     shell_r = fig._shell_outermost_radius_au * 2
+<                     axis_range = [-shell_r, shell_r]
+<                 # Asteroid belts: standalone geometry, not part of unified shell dispatch
+<                 if sun_shell_vars.get('main_belt') and sun_shell_vars['main_belt'].get() == 1:
+<                     for t in create_main_asteroid_belt():
+<                         fig.add_trace(t)
+<                 if sun_shell_vars.get('hildas') and sun_shell_vars['hildas'].get() == 1:
+<                     for t in create_hilda_group():
+<                         fig.add_trace(t)
+<                 if sun_shell_vars.get('trojans_greeks') and sun_shell_vars['trojans_greeks'].get() == 1:
+<                     for t in create_jupiter_trojans_greeks(jupiter_angle=0):
+<                         fig.add_trace(t)
+<                 if sun_shell_vars.get('trojans_trojans') and sun_shell_vars['trojans_trojans'].get() == 1:
+<                     for t in create_jupiter_trojans_trojans(jupiter_angle=0):
+<                         fig.add_trace(t)
+< 
+<             # Now add planet visualization if the center is a planet with shells
+<             elif center_object_name in planet_shells_config:
+<                 shell_vars = planet_shells_config[center_object_name]
+<                 if any(var.get() == 1 for var in shell_vars.values()):
+< 
+<                     fig = create_planet_visualization(fig, center_object_name, shell_vars, sun_position=_sun_pos_tuple)
+<                     center_shells_added = True
+<                     # Auto-scale axis to shell radius for migrated bodies
+<                     if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+<                         shell_r = fig._shell_outermost_radius_au * 2
+<                         axis_range = [-shell_r, shell_r]
+---
+>             # (2b) Sun position for shell rendering (sun_position threading, D2).
+>             # One producer for both pipelines (resolve_shell_sun_position).
+>             # Must be available regardless of Sun checkbox state.
+>             # Reused later by comet tails section.
+>             _sun_pos_tuple = resolve_shell_sun_position(
+>                 center_object_name, positions.get('Sun'), date_obj, center_id)
+> 
+>             # (2c) Center-body shell dispatch -- one implementation for both
+>             # pipelines (add_center_body_shells). The returned axis_range
+>             # carries the shell auto-scale override (live in the static
+>             # pipeline; Auto scale fits the outermost shell).
+>             fig, center_shells_added, axis_range = add_center_body_shells(
+>                 fig, center_object_name, sun_shell_vars,
+>                 get_planet_shell_vars_map(), _sun_pos_tuple,
+>                 scale_var.get(), axis_range)
+> 
+>             # (2a) The explicit center-marker block that lived here was REMOVED.
+>             # It was the second of two center-marker mechanisms (ledger N3: two
+>             # origin markers when body checked + centered + no shells). The
+>             # canonical mechanism is the object loop below, which renders the
+>             # center body unconditionally via add_celestial_object (full hover,
+>             # CENTER_MARKER_SIZE) -- the render Mode-5 testing approved.
+4558,4633c4686,4687
+<             # Add center marker only if shells haven't been added
+<             if not center_shells_added:
+<                 if center_object_name == 'Sun':
+<                     # Just add the central Sun marker if shells not selected
+<                     fig.add_trace(
+<                         go.Scatter3d(
+<                             x=[0],
+<                             y=[0],
+<                             z=[0],
+<                             mode='markers',
+<                             marker=dict(
+<                                 color='rgb(102, 187, 106)',
+<                                 size=12,
+<                                 symbol=center_object_info['symbol']
+<                             ),
+<                             name="Sun",
+<                             text=[hover_text_sun],
+<                             customdata=["Sun"],
+<                             hovertemplate='%{text}<extra></extra>',
+<                             showlegend=True
+<                         )
+<                     )
+< 
+<                 else:
+<                     # For other central bodies (planets), add the center marker trace
+<                     # Build hover text from INFO encyclopedia (same pattern as Sun)
+<                     is_transparent = 'rgba(0,0,0,0)' in str(center_object_info['color']).replace(' ', '')
+<                     
+<                     # Build hover text for center body
+<                     center_hover_lines = [f"<b>{center_object_name}</b> (center body)"]
+<                     info_raw = INFO.get(center_object_name, '')
+<                     if info_raw:
+<                         # Take first sentence/line as summary (before first \n)
+<                         first_line = info_raw.split('\n')[0].strip()
+<                         # Remove leading *** hints (Mercury has scale advice)
+<                         if first_line.startswith('***'):
+<                             parts = first_line.split('***')
+<                             first_line = parts[-1].strip() if len(parts) > 2 else first_line
+<                         if first_line:
+<                             center_hover_lines.append(first_line)
+<                     center_hover_text = '<br>'.join(center_hover_lines)
+<                     
+<                     fig.add_trace(
+<                         go.Scatter3d(
+<                             x=[0],
+<                             y=[0],
+<                             z=[0],
+<                             mode='markers',
+<                             marker=dict(
+<                                 color=center_object_info['color'],
+<                                 size=12,
+<                                 symbol=center_object_info['symbol']
+<                             ),
+<                             name=f"{center_object_name}",
+<                             text=[center_hover_text],
+<                             customdata=[center_object_name],
+<                             hovertemplate='%{text}<extra></extra>',
+<                             showlegend=not is_transparent  # Hide legend if transparent
+<                         )
+<                     )
+< 
+<             # Create dictionary of shell variables for each planet
+<             planet_shell_vars = {
+<                 'Mercury': mercury_shell_vars,
+<                 'Venus': venus_shell_vars,
+<                 'Earth': earth_shell_vars,
+<                 'Moon': moon_shell_vars,
+<                 'Mars': mars_shell_vars,
+<                 'Jupiter': jupiter_shell_vars,
+<                 'Saturn': saturn_shell_vars,
+<                 'Uranus': uranus_shell_vars,
+<                 'Neptune': neptune_shell_vars,
+<                 'Pluto': pluto_shell_vars,
+<                 'Eris': eris_shell_vars,
+<                 'Planet 9': planet9_shell_vars               
+<             }
+---
+>             # (2d) Shared planet -> shell-vars mapping (one source, both pipelines)
+>             planet_shell_vars = get_planet_shell_vars_map()
+5010c5064,5065
+<                                              center_object_name=center_object_name
+---
+>                                              center_object_name=center_object_name,
+>                                              params=active_planetary_params
+6150,6164c6205,6206
+<             # Define planet shell configuration (same as plot_objects)
+<             animation_shell_config = {
+<                 'Mercury': mercury_shell_vars,
+<                 'Venus': venus_shell_vars,
+<                 'Earth': earth_shell_vars,
+<                 'Moon': moon_shell_vars,
+<                 'Mars': mars_shell_vars,
+<                 'Jupiter': jupiter_shell_vars,
+<                 'Saturn': saturn_shell_vars,
+<                 'Uranus': uranus_shell_vars,
+<                 'Neptune': neptune_shell_vars,
+<                 'Pluto': pluto_shell_vars,
+<                 'Eris': eris_shell_vars,
+<                 'Planet 9': planet9_shell_vars
+<             }
+---
+>             # (2d) The planet -> shell-vars mapping now comes from the shared
+>             # get_planet_shell_vars_map() (one source for both pipelines).
+6169,6233c6211,6240
+<             # Sun position for shell rendering at animation start (21/51 Phase 1).
+<             # Mirrors the static-path D2 wiring: magnetosphere/bow-shock builders
+<             # need the sunward direction to orient the magnetotail. Animation
+<             # frames move object markers, not shells, so this orientation is
+<             # FROZEN at the first animation frame; over a long animation span
+<             # the real magnetotail would swing with the Sun. Hover disclosure
+<             # of that freeze is tracked with the bow-shock sourced-vs-schematic
+<             # disclosure remainder (ledger, Movement track).
+<             if center_object_name == 'Sun':
+<                 _sun_pos_tuple = (0, 0, 0)
+<             else:
+<                 _sun_traj = positions_over_time.get('Sun')
+<                 if _sun_traj and len(_sun_traj) > 0 and _sun_traj[0] is not None and 'x' in _sun_traj[0]:
+<                     _sp0 = _sun_traj[0]
+<                     _sun_pos_tuple = (_sp0['x'], _sp0['y'], _sp0['z'])
+<                 else:
+<                     # Sun checkbox off -- fetch frame-1 position for orientation
+<                     _sun_fetch = fetch_position('10', dates_list[0], center_id=center_id)
+<                     if _sun_fetch and 'x' in _sun_fetch:
+<                         _sun_pos_tuple = (_sun_fetch['x'], _sun_fetch['y'], _sun_fetch['z'])
+<                     else:
+<                         _sun_pos_tuple = (0, 0, 0)  # Fallback: no rotation
+< 
+<             # Add Sun visualization if needed
+<             if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
+<                 fig = create_celestial_body_visualization(
+<                     fig, 'Sun', sun_shell_vars,
+<                     center_position=(0, 0, 0),
+<                     object_type='Sun',
+<                     center_object='Sun',
+<                 )
+<                 center_shells_added = True
+<                 # Auto-scale axis to shell radius (same as planet path)
+<                 if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+<                     shell_r = fig._shell_outermost_radius_au * 2
+<                     axis_range = [-shell_r, shell_r]
+<                 # Asteroid belts: standalone geometry, not part of unified shell dispatch
+<                 if sun_shell_vars.get('main_belt') and sun_shell_vars['main_belt'].get() == 1:
+<                     for t in create_main_asteroid_belt():
+<                         fig.add_trace(t)
+<                 if sun_shell_vars.get('hildas') and sun_shell_vars['hildas'].get() == 1:
+<                     for t in create_hilda_group():
+<                         fig.add_trace(t)
+<                 if sun_shell_vars.get('trojans_greeks') and sun_shell_vars['trojans_greeks'].get() == 1:
+<                     for t in create_jupiter_trojans_greeks(jupiter_angle=0):
+<                         fig.add_trace(t)
+<                 if sun_shell_vars.get('trojans_trojans') and sun_shell_vars['trojans_trojans'].get() == 1:
+<                     for t in create_jupiter_trojans_trojans(jupiter_angle=0):
+<                         fig.add_trace(t)
+<                 print(f"[ANIMATION] Added Sun shells ({len(fig.data)} static traces)", flush=True)
+< 
+<             # Add planet visualization if the center is a planet with shells
+<             elif center_object_name in animation_shell_config:
+<                 shell_vars = animation_shell_config[center_object_name]
+<                 if any(var.get() == 1 for var in shell_vars.values()):
+< 
+<                     fig = create_planet_visualization(fig, center_object_name, shell_vars,
+<                                                       center_position=(0, 0, 0),
+<                                                       sun_position=_sun_pos_tuple)
+<                     center_shells_added = True
+<                     print(f"[ANIMATION] Added {center_object_name} shells ({len(fig.data)} static traces)", flush=True)
+<                     # Auto-scale axis to shell radius for migrated bodies
+<                     if hasattr(fig, '_shell_outermost_radius_au') and scale_var.get() == 'Auto':
+<                         shell_r = fig._shell_outermost_radius_au * 2
+<                         axis_range = [-shell_r, shell_r]
+---
+>             # (2b) Sun position for shell rendering at animation start.
+>             # One producer for both pipelines (resolve_shell_sun_position);
+>             # animate passes the FRAME-1 Sun entry. Orientation is FROZEN at
+>             # the first animation frame; hover disclosure of that freeze is
+>             # tracked with the bow-shock sourced-vs-schematic disclosure
+>             # remainder (ledger, Movement track).
+>             _sun_traj = positions_over_time.get('Sun')
+>             _sun_entry = _sun_traj[0] if _sun_traj and len(_sun_traj) > 0 else None
+>             _sun_pos_tuple = resolve_shell_sun_position(
+>                 center_object_name, _sun_entry, dates_list[0], center_id)
+> 
+>             # (2c) Center-body shell dispatch -- one implementation for both
+>             # pipelines (add_center_body_shells). NOTE: the returned
+>             # _shell_axis_range is intentionally unused here: the animate
+>             # pipeline unconditionally recomputes axis_range via
+>             # get_animation_axis_range further down, so the shell auto-scale
+>             # has no effect in animations (pre-existing behavior, preserved;
+>             # see ledger note "animate shell auto-scale dead").
+>             fig, center_shells_added, _shell_axis_range = add_center_body_shells(
+>                 fig, center_object_name, sun_shell_vars,
+>                 get_planet_shell_vars_map(), _sun_pos_tuple,
+>                 scale_var.get(), None, log_prefix='[ANIMATION] ')
+> 
+>             # (2a) Canonical center-body marker -- unconditional, placed BEFORE
+>             # the fence so it counts as a static (constant) trace. Renders with
+>             # or without shells, matching the static pipeline (closes O6a), with
+>             # the full add_celestial_object hover (closes O5). Not registered in
+>             # trace_indices, so frames never carry it.
+>             add_center_body_marker(fig, center_object_name,
+>                                    params=active_planetary_params)
+6237,6279d6243
+< 
+<             # Add center marker only if shells haven't been added
+<             if not center_shells_added:
+<                 if center_object_name == 'Sun':
+<                     # Just add the central Sun marker if shells not selected
+<                     fig.add_trace(
+<                         go.Scatter3d(
+<                             x=[0], y=[0], z=[0],
+<                             mode='markers',
+<                             marker=dict(
+<                                 color='rgb(102, 187, 106)',
+<                                 size=12,
+<                                 symbol='circle'
+<                             ),
+<                             name="Sun",
+<                             text=["Sun - Center of Solar System"],
+<                             hovertemplate='%{text}<extra></extra>',
+<                             showlegend=True
+<                         )
+<                     )
+<                 else:
+<                     # Add center marker for non-Sun objects
+<                     center_object_info = next((obj for obj in objects if obj['name'] == center_object_name), None)
+<                     if center_object_info:
+<                         # Check if color is transparent to hide legend
+<                         is_transparent = 'rgba(0,0,0,0)' in str(center_object_info['color']).replace(' ', '')
+<                         
+<                         fig.add_trace(
+<                             go.Scatter3d(
+<                                 x=[0], y=[0], z=[0],
+<                                 mode='markers',
+<                                 marker=dict(
+<                                     color=center_object_info['color'],
+<                                     size=12,
+<                                     symbol=center_object_info['symbol']
+<                                 ),
+<                                 name=center_object_name,
+<                                 # FIXED: Barycenter text only for multi-body systems, not single bodies like Bennu
+<                                 text=[f"{center_object_name} system <br>center of gravity<br>(barycenter)"] if 'Barycenter' in center_object_name else [center_object_name],
+<                                 hovertemplate='%{text}<extra></extra>',
+<                                 showlegend=not is_transparent  # Hide legend if transparent
+<                             )
+<                         )

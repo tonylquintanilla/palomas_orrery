@@ -141,6 +141,14 @@ LAUNCH_GROUPS = {
          "Run before editing: python dep_trace.py <module_name> [hops]",
          SCRIPT_DIR,
          True),
+        ("Animation HTML Tool",
+         "measure_animation_html.py",
+         "You point it at a saved animation HTML and it tells you: how many traces, how many frames, " 
+         "which traces are carried inside frames, and the frames payload size. \n"
+         "The use case is comparing a baseline export against a patched export to quantify the frame-fence fix. "
+         "You'd run it from the command line like python measure_animation_html.py some_animation.html.",
+         SCRIPT_DIR,
+         True),        
     ],
 
 }
