@@ -1,0 +1,26 @@
+2060a2061
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2076a2078
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2092a2095
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2136a2140
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2170a2175
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2206a2212
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2288a2295
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2371a2379
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2469a2478
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2479a2489
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2555a2566
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2565a2577
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+2641a2654
+>             'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive

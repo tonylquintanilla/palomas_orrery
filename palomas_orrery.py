@@ -2039,6 +2039,188 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
     return fig, center_shells_added, axis_range
 
 
+# =============================================================================
+# Per-frame element engine (21/51 Phase 3 Session B, June 2026)
+# Rebuild-as-universal: at each animation frame, call the SAME builders the
+# static dispatch uses, at the body's current position. One mechanism, no
+# translate path. Design authority: ANIMATION_ENGINE_DESIGN_v1.md.
+# First customers: rotation axis, dipole cone, sun direction indicator.
+# =============================================================================
+
+import importlib as _importlib
+
+# Per-frame sun-direction indicator radius: mirrors the unified dispatch's
+# fallback (100x body radius) since non-center bodies render no shells whose
+# outermost radius could size it.
+PERFRAME_INDICATOR_RADIUS_FACTOR = 100.0
+
+
+def collect_perframe_elements(center_object_name, candidate_body_names):
+    """(Phase 3) Element specs for engine-animatable primitives.
+
+    A (body, element) pair activates when: the body is NOT the animation
+    center; the body's shells-checked trigger holds (any of its shell
+    checkboxes on -- the same condition that fires the center dispatch,
+    per the GO Decision-1 note); and the element is either a
+    per_frame-tagged CUSTOM_SHELLS entry (rotation_axis, dipole_cone) or
+    the sun-direction-indicator builtin.
+
+    Returns a list of spec dicts:
+        {'body', 'element', 'callable', 'needs_planet_name',
+         'needs_sun_position', 'indicator_kwargs' (builtin only)}
+    """
+    from shell_configs import CUSTOM_SHELLS
+    specs = []
+    planet_map = get_planet_shell_vars_map()
+    for body in candidate_body_names:
+        if body == center_object_name:
+            continue
+        # Shells-checked trigger (mirrors the center-dispatch condition)
+        if body == 'Sun':
+            shell_vars = sun_shell_vars
+        else:
+            shell_vars = planet_map.get(body)
+        if not shell_vars or not any(v.get() == 1 for v in shell_vars.values()):
+            continue
+        customs = CUSTOM_SHELLS.get(body, {})
+        for element, entry in customs.items():
+            if not (isinstance(entry, dict) and entry.get('per_frame')):
+                continue
+            mod_path, fn_name = entry['builder'].rsplit('.', 1)
+            builder = getattr(_importlib.import_module(mod_path), fn_name)
+            specs.append({
+                'body': body,
+                'element': element,
+                'callable': builder,
+                'needs_planet_name': bool(entry.get('needs_planet_name')),
+                'needs_sun_position': bool(entry.get('needs_sun_position')),
+                'indicator_kwargs': None,
+            })
+        # Builtin: sun direction indicator (not a CUSTOM_SHELLS entry).
+        # Suppression when the body IS the Sun is decided by the builder at
+        # allocation (frame 1) and is constant across frames -- design rule
+        # 2(b) in ANIMATION_ENGINE_DESIGN_v1.md.
+        if body in CENTER_BODY_RADII:
+            radius_au = (PERFRAME_INDICATOR_RADIUS_FACTOR
+                         * CENTER_BODY_RADII[body] / KM_PER_AU)
+            specs.append({
+                'body': body,
+                'element': 'sun_direction_indicator',
+                'callable': create_sun_direction_indicator,
+                'needs_planet_name': False,
+                'needs_sun_position': True,
+                'indicator_kwargs': {
+                    'shell_radius': radius_au,
+                    'object_type': body,
+                    'center_object': center_object_name,
+                    'body_name': body,
+                },
+            })
+    return specs
+
+
+def build_perframe_traces(spec, body_pos, sun_pos):
+    """(Phase 3) The one rebuild mechanism: call the spec's builder at this
+    frame's context. Returns the builder's trace list."""
+    if spec['indicator_kwargs'] is not None:
+        return spec['callable'](center_position=body_pos,
+                                sun_position=sun_pos,
+                                **spec['indicator_kwargs'])
+    kwargs = {}
+    if spec['needs_planet_name']:
+        kwargs['planet_name'] = spec['body']
+    if spec['needs_sun_position']:
+        kwargs['sun_position'] = sun_pos
+    return spec['callable'](body_pos, **kwargs)
+
+
+def allocate_perframe_elements(fig, specs, positions_over_time, sun_pos_fallback):
+    """(Phase 3) Frame-1 allocation: build each element once at its frame-1
+    context, append the traces (this IS frame 1's content), and record the
+    absolute trace indices. Returns (groups, total_kb_per_frame).
+
+    Trace-count stability: the count recorded here is the contract every
+    later frame must match (loud assert in the frame loop). An element whose
+    builder returns zero traces at frame 1 (e.g. the indicator's
+    body-at-Sun suppression) is recorded with count 0 and never rebuilt.
+    """
+    import plotly.io as _pio
+    groups = []
+    total_bytes = 0
+    sun_traj = positions_over_time.get('Sun')
+    for spec in specs:
+        body_traj = positions_over_time.get(spec['body'])
+        if not body_traj or body_traj[0] is None or 'x' not in body_traj[0]:
+            continue  # no frame-1 position; element skipped this animation
+        bpos = (body_traj[0]['x'], body_traj[0]['y'], body_traj[0]['z'])
+        if sun_traj and sun_traj[0] is not None and 'x' in sun_traj[0]:
+            spos = (sun_traj[0]['x'], sun_traj[0]['y'], sun_traj[0]['z'])
+        else:
+            spos = sun_pos_fallback
+        traces = build_perframe_traces(spec, bpos, spos)
+        start = len(fig.data)
+        for t in traces:
+            fig.add_trace(t)
+            total_bytes += len(_pio.json.to_json_plotly(t))
+        groups.append({
+            'body': spec['body'],
+            'element': spec['element'],
+            'spec': spec,
+            'indices': list(range(start, len(fig.data))),
+            'count': len(traces),
+        })
+    kb_per_frame = total_bytes / 1e3
+    if groups:
+        print(f"[ANIMATION] Per-frame engine: {len(groups)} element groups, "
+              f"~{kb_per_frame:.1f} KB/frame", flush=True)
+        if kb_per_frame > 150:
+            print(f"[ANIMATION] WARNING: per-frame engine payload exceeds "
+                  f"150 KB/frame -- consider unchecking shells on some "
+                  f"bodies (budget guardrail).", flush=True)
+    return groups, kb_per_frame
+
+
+def add_static_only_legend_placeholders(fig, center_object_name):
+    """(Phase 3) Greyed-out legend disclosure: every shell CHECKED for a body
+    that the animate path will not render gets a dataless legend entry,
+    visible='legendonly' (Plotly renders it in the muted toggled-off style),
+    named '<Body>: <Shell> (static plots only)'. The user looking for a
+    missing trace looks at the LEGEND; this answers them there. Supersedes
+    the paper footnote; the O2/O3 console notices remain as developer
+    diagnostics. legendrank sinks the block to the legend bottom.
+    """
+    def _display(key, body):
+        k = key
+        prefix = body.lower().replace(' ', '_') + '_'
+        if k.startswith(prefix):
+            k = k[len(prefix):]
+        return k.replace('_', ' ').title()
+
+    def _placeholder(body, key):
+        fig.add_trace(go.Scatter3d(
+            x=[None], y=[None], z=[None],
+            mode='markers',
+            name=f"{body}: {_display(key, body)} <i>(static plots only)</i>",
+            visible='legendonly',
+            legendrank=9999,
+            hoverinfo='skip',
+            showlegend=True,
+        ))
+
+    n_before = len(fig.data)
+    if center_object_name != 'Sun':
+        for key, var in sun_shell_vars.items():
+            if var.get() == 1:
+                _placeholder('Sun', key)
+    for body, shell_vars in get_planet_shell_vars_map().items():
+        if body == center_object_name:
+            continue
+        for key, var in shell_vars.items():
+            if var.get() == 1:
+                _placeholder(body, key)
+    return len(fig.data) - n_before
+
+
 # Helper function for status display with history
 status_history = []
 def update_status_display(message, status_type='info'):
@@ -6277,6 +6459,17 @@ def animate_objects(step, label):
                       f"animations (Phase 3 scope). They render in static plots or "
                       f"when that body is the animation center.", flush=True)
 
+            # (Phase 3 Session B) Greyed-out legend disclosure: the user-facing
+            # answer to "where did my trace go?" -- every checked-but-unrendered
+            # shell gets a muted legend entry naming itself "(static plots
+            # only)". The console notices above remain as developer
+            # diagnostics. Static traces (visible='legendonly', no data).
+            _n_placeholders = add_static_only_legend_placeholders(
+                fig, center_object_name)
+            if _n_placeholders:
+                print(f"[ANIMATION] Added {_n_placeholders} static-only legend "
+                      f"disclosure entries.", flush=True)
+
             # Track where static traces end - frames will only update traces after this point
             static_trace_count = len(fig.data)
 
@@ -6824,8 +7017,8 @@ def animate_objects(step, label):
             # NOW create frames - after trace_indices has been defined
             # =================================================================
             # OPTIMIZATION: frames carry ONLY the traces the frame loop updates
-            # (the single-point object/barycenter markers registered in
-            # trace_indices). Orbit paths, idealized orbits, trajectory layers,
+            # (single-point object/barycenter markers registered in
+            # trace_indices, plus Phase-3 per-frame engine element groups). Orbit paths, idealized orbits, trajectory layers,
             # comet tails, and the center marker added after static_trace_count
             # never change across frames -- leaving them out of go.Frame keeps
             # their initial data live in the figure while removing them from
@@ -6834,10 +7027,25 @@ def animate_objects(step, label):
             # serialized into the saved HTML without ever being modified.
             # Fix: 21/51 Phase 1 (June 2026).
             # =================================================================
+            # (Phase 3 Session B) Per-frame engine allocation: build each
+            # eligible element once at frame-1 context (this is frame 1's
+            # content), record its trace indices, and report the byte budget.
+            _engine_specs = collect_perframe_elements(
+                center_object_name, list(positions_over_time.keys()))
+            perframe_groups, _engine_kb = allocate_perframe_elements(
+                fig, _engine_specs, positions_over_time, _sun_pos_tuple)
+            _perframe_indices = set()
+            for _grp in perframe_groups:
+                _perframe_indices.update(_grp['indices'])
+            if perframe_groups and not positions_over_time.get('Sun'):
+                print("[ANIMATION] NOTE: Sun not fetched (checkbox off); "
+                      "sun-direction elements use the frame-1 Sun position "
+                      "for all frames (orientation frozen).", flush=True)
+
             dynamic_trace_indices = sorted(set(
                 idx for idx in trace_indices.values()
                 if static_trace_count <= idx < len(fig.data)
-            ))
+            ).union(_perframe_indices))
             _frame_pos_by_trace_idx = {abs_idx: i for i, abs_idx in enumerate(dynamic_trace_indices)}
             _frames_excluded = (len(fig.data) - static_trace_count) - len(dynamic_trace_indices)
             print(f"[ANIMATION] Static shell traces (before fence): {static_trace_count}", flush=True)
@@ -6992,6 +7200,36 @@ def animate_objects(step, label):
                                 else:
                                     # If position is missing for this frame, make the object invisible
                                     frame_data[frame_idx].visible = False
+
+                # (Phase 3 Session B) Per-frame engine: rebuild each element
+                # group at this frame's body (and Sun) position by calling
+                # the same builder the static dispatch uses. Trace-count
+                # stability is asserted LOUD: a count change would silently
+                # misalign every subsequent trace in the frame.
+                for _grp in perframe_groups:
+                    _btraj = positions_over_time.get(_grp['body'])
+                    _bp = _btraj[i] if _btraj and i < len(_btraj) else None
+                    if _bp is None or 'x' not in _bp:
+                        for _abs in _grp['indices']:
+                            _fi = to_frame_idx(_abs)
+                            if _fi is not None:
+                                frame_data[_fi].visible = False
+                        continue
+                    _straj = positions_over_time.get('Sun')
+                    _sp = _straj[i] if _straj and i < len(_straj) and _straj[i] is not None and 'x' in _straj[i] else None
+                    _spos = (_sp['x'], _sp['y'], _sp['z']) if _sp else _sun_pos_tuple
+                    _rebuilt = build_perframe_traces(
+                        _grp['spec'], (_bp['x'], _bp['y'], _bp['z']), _spos)
+                    assert len(_rebuilt) == _grp['count'], (
+                        f"[ANIMATION] FATAL: per-frame builder for "
+                        f"{_grp['body']}/{_grp['element']} returned "
+                        f"{len(_rebuilt)} traces at frame {i}, allocated "
+                        f"{_grp['count']} -- trace-count stability violated "
+                        f"(see ANIMATION_ENGINE_DESIGN_v1.md sec 2)")
+                    for _k, _abs in enumerate(_grp['indices']):
+                        _fi = to_frame_idx(_abs)
+                        if _fi is not None:
+                            frame_data[_fi] = _rebuilt[_k]
 
                 # Create frame with selective trace update
                 # The traces parameter tells Plotly which fig.data indices this frame updates

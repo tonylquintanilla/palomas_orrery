@@ -2058,6 +2058,7 @@ CUSTOM_SHELLS = {
     'Moon': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2074,6 +2075,7 @@ CUSTOM_SHELLS = {
     'Pluto': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2090,6 +2092,7 @@ CUSTOM_SHELLS = {
     'Mercury': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2134,6 +2137,7 @@ CUSTOM_SHELLS = {
     'Venus': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2168,6 +2172,7 @@ CUSTOM_SHELLS = {
     'Mars': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2204,6 +2209,7 @@ CUSTOM_SHELLS = {
     'Earth': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2286,6 +2292,7 @@ CUSTOM_SHELLS = {
     'Jupiter': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2369,6 +2376,7 @@ CUSTOM_SHELLS = {
     'Saturn': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2467,6 +2475,7 @@ CUSTOM_SHELLS = {
     'Uranus': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2477,6 +2486,7 @@ CUSTOM_SHELLS = {
         },
 
         'dipole_cone': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2553,6 +2563,7 @@ CUSTOM_SHELLS = {
     'Neptune': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2563,6 +2574,7 @@ CUSTOM_SHELLS = {
         },
 
         'dipole_cone': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
             'needs_planet_name': True,
             'tooltip': (
@@ -2639,6 +2651,7 @@ CUSTOM_SHELLS = {
     'Sun': {
 
         'rotation_axis': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
             'builder': 'planet_visualization_utilities.build_rotation_axis_traces',
             'needs_planet_name': True,
             'tooltip': (
