@@ -368,4 +368,59 @@ independently, or should it just fold into 3b's first session? And what
 is your estimate of the session count for 3b -- is this a two-session
 or three-session effort?
 
+## Phase 3 GO Decision (June 10, 2026 -- Tony + Claude Sonnet)
+
+All six answers reviewed. Green light for Session A.
+
+### Decisions confirmed
+
+All Fable 5 answers accepted as stated. Specific confirmations:
+
+- Q1: Mercury sodium tail added to per-frame inventory. Rings deferred to
+  measured follow-on. Info markers ride their parent (no special cases).
+- Q2: Dual disclosure (per-element hover + paper-coordinates footnote).
+  Legend untouched.
+- Q3: 3a folds into Session A. Wrapper retirement as warm-up.
+- Q4: Rebuild per frame, not translate. One path, no special cases.
+- Q5: Resolution-mode shell builders tractable. Gate on measured byte
+  budget + Mode-5 render quality at reduced resolution.
+- Q6: Three-session plan accepted (A: design + 3a + measurements;
+  B: engine + first customers; C: tails + auto-scale + disclosure).
+  Follow-on resolution sweep separately gated.
+
+### Design direction: rebuild as the universal per-frame strategy
+
+The Q4 rebuild decision for comet tails opens a broader design insight:
+rebuild-per-frame should be explored as the UNIVERSAL strategy for all
+per-frame elements, not just tails. The argument that decided Q4 --
+frame payload is identical regardless of how coordinates were computed,
+so translation saves nothing where it matters -- applies equally to
+shells rendered at reduced resolution.
+
+This means the per-frame engine has one mechanism: at each frame, call
+the builder at the body's current position, with resolution constraints
+where applicable. No translate path, no rotate path, no special cases.
+The builder already accepts center_position; the engine calls it N times
+instead of once.
+
+Fable 5 should explore this as a design option in Session A: can the
+engine treat ALL per-frame elements uniformly as "call the builder at
+this frame's position" with the only per-element variation being the
+builder function and its resolution parameter? If yes, the architecture
+is dramatically simpler. If there are elements where rebuild is
+prohibitively expensive even at reduced resolution, those stay frame-1
+frozen -- but the decision is data-driven (measured cost), not
+architectural (separate translate machinery).
+
+This is exactly the kind of design exploration Fable 5 was built for.
+
+### Session A scope
+
+Fable 5 proceeds with:
+1. Design doc (registry, frame-loop extension, rebuild-as-universal
+   strategy, element groups)
+2. 3a patch (console notices + wrapper retirement) as warm-up
+3. Measurement harness delivering the Decision-5(a) budget table
+4. Exploration of rebuild-per-frame as universal engine strategy
+
 Module updated: June 2026 with Anthropic's Claude Fable 5 + Claude Sonnet 4.6
