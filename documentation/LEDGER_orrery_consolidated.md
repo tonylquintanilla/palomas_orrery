@@ -1,11 +1,13 @@
 # LEDGER -- Orrery Refactor / Movement Track (Consolidated, Running)
 
-Tony Quintanilla, PE | Claude | June 7, 2026 (last updated June 10, 2026)
+Tony Quintanilla, PE | Claude | June 7, 2026 (last updated June 11, 2026)
 Base SHA at consolidation: `76c330e` (76c330ea4dbe6bc667fba2ffb5baa1a65ae56d22)
-Current verified base: `3f03c12` (3f03c122d85dc4bbeccf69d74faeb5893c914152)
+Current verified base: `d9460e2` (d9460e22cd41b9da344930bbbac53dba8ed63d7c)
 Chain since consolidation: 76c330e -> 730b2bf (June-8 fixes) -> 7977a11
-(animation Phase 1) -> 3f03c12 (handoff update). Phase 2 is delivered on
-3f03c12 and NOT YET PUSHED (see PENDING ACTION).
+(animation Phase 1) -> 3f03c12 -> 191cf36 (Phase 2) -> 8438a85 (Phase 3 GO)
+-> a9f0ec4 (Session A) -> e5fd86d (Session B) -> 0ce1e26 -> 7b71c29
+(Session C) -> d9460e2 (provenance scan, current HEAD). Session C is PUSHED;
+its render gate (protocol v4) is PENDING (see PENDING ACTION).
 Introduced by: HANDOFF v28. Supersedes the in-handoff ledgers embedded in
 v23 (canonical body), v24, v25, v26, v27.
 
@@ -46,11 +48,11 @@ Items with no tag are administrative (tracks, actions) rather than code claims.
   polygons / approach B, folders-per-period, transcribe-not-synthesize stance).
   Status: awaiting IPC Public API key (request submitted; CC BY-NC-SA 3.0 IGO
   terms reviewed and compatible with the non-commercial educational use).
-  Build base will be HEAD at build time (design base was de12f56; current HEAD
-  3f03c12). RELEASE-DRIFT CORRECTION to fold in at build: the current Sudan
-  release is Feb-May 2026 Current + projections to Jan 2027, and names NO current
-  Famine areas -- so the manifest's section-10 El Fasher/Kadugli Phase-5
-  spot-check (Sept 2025 picture) must be rewritten to the current classification.
+  Build base will be HEAD at build time (design base was de12f56). RELEASE-DRIFT
+  CORRECTION to fold in at build: the current Sudan release is Feb-May 2026
+  Current + projections to Jan 2027, and names NO current Famine areas -- so the
+  manifest's section-10 El Fasher/Kadugli Phase-5 spot-check (Sept 2025 picture)
+  must be rewritten to the current classification.
 - **Protocol -> Skills refactor (process/tooling, not orrery code).** v27 idea:
   split the trigger-fired PROCEDURE layer (docstring standard, agentic pre-test,
   provenance-scanner mechanics, single-info-marker pattern, Horizons center rules,
@@ -63,30 +65,29 @@ Items with no tag are administrative (tracks, actions) rather than code claims.
 - **Protocol amendment candidates (for v3.29; from the animation refactor):**
   - The xvfb SystemButtonFace<->gray90 sed round trip is NOT idempotent on files
     that natively contain gray90 (palomas_orrery.py has 26 native gray90
-    literals; the restore swap converted them in a test copy). Rule: run the
-    swap on a THROWAWAY copy only; never restore-in-place on the deliverable.
-    (Caught June 9 by a copy diff; deliverable unaffected. Applied as practice
-    June 10.)
+    literals). Rule: run the swap on a THROWAWAY copy only; never
+    restore-in-place on the deliverable. (Caught June 9; applied as practice
+    in every session since.)
   - Full-module exec under xvfb with tk mainloop suppressed enables LIVE-dispatch
     tests inside the real module namespace (real tk vars, real builders, network
-    calls patched) -- a stronger gate than startup-only for GUI-embedded
-    functions. Used for the Phase-2 equivalence tests; candidate for the
-    Agentic Pre-Test section.
+    calls patched). Used as the standard verification gate for Sessions
+    Phase 2 through 3C; candidate for the Agentic Pre-Test section.
+  - `grep -c` exits 1 when the count is 0, silently BREAKING an `&&` chain --
+    a downstream verification command can simply never run while the output
+    looks complete. Rule: never put `grep -c` mid-chain with `&&`; run
+    verification greps standalone or with `;`. (Caught June 10 -- one residual
+    check did not execute until re-run standalone.)
 
 ## PENDING ACTION (Tony-side)
 
-- **Run the Phase-2 Mode-5 render gate** (ANIMATION_TEST_PROTOCOL_v2, Phase 2
-  section), then **push the Phase-2 palomas_orrery.py** (delivered June 10,
-  built on 3f03c12). On push, the new HEAD becomes the next base; carry the SHA.
-  On render pass: move N3 / O5 / O6(a) to section C (marked below).
-- **Commit protocol v3.28 to the repo root.** v3.28 exists in the working copy /
-  project instructions but has NOT been pushed (Tony confirmed June 8: no new
-  files pushed to root yet). Until pushed, the doc and its version stamp have
-  not travelled together; the repo root still carries the prior protocol file.
-  `[per chain; not re-verified June 10]`
-- (CLEARED June 10) The June-8 cleanup fixes are AT HEAD: center-dropdown dedup
-  `[verified @730b2bf, palomas_orrery.py L9296]` and single CUSTOM_SHELLS 'Sun'
-  key `[verified @730b2bf via AST]`. Both moved to section C.
+- **Run ANIMATION_TEST_PROTOCOL_v4** (C1-C7 + observation log O14-O17),
+  append results to documentation/HANDOFF_animation_phase3C.md, push. On
+  pass: the Phase 3 CORE TRACK (Sessions A/B/C) is COMPLETE -- move the
+  marked render-gated items below into section C and update 21/51.
+- **Commit protocol v3.28 (or v3.29 with the candidates above) to the repo
+  root.** `[per chain; not re-verified June 11]`
+- (CLEARED June 11) Phase 2, Session A, Session B, and Session C are all AT
+  HEAD (chain above); no code push outstanding.
 
 ---
 
@@ -94,44 +95,46 @@ Items with no tag are administrative (tracks, actions) rather than code claims.
 
 **The shell-consolidation refactor is COMPLETE** (per v23 headline; all 13 bodies
 route through SHELL_CONFIGS / CUSTOM_SHELLS -> create_celestial_body_visualization
--> build_sphere_shell -> create_info_marker; zero bodies on the old
-create_planet_visualization / create_sun_visualization paths). The project is in
-cleanup-and-close, not mid-refactor.
-(June 10 clarification: create_planet_visualization survives as a thin
-delegation WRAPPER -- each body delegates to the unified dispatch -- and after
-animation Phase 2 it has exactly ONE live call site. See D.Structural 3.)
+-> build_sphere_shell -> create_info_marker). The project is in
+cleanup-and-close, not mid-refactor. (June 11: the create_planet_visualization
+wrapper is now RETIRED -- zero pipeline callers; see section C.)
 
-**Animation refactor (21/51) IN PROGRESS, ahead of plan:**
-- Phase 1 (frame fence + sun threading + first-frame sync) -- DONE,
-  `[render-confirmed Mode 5 @7977a11, June 10]`. Frame payloads: P1 4818->271 KB
-  (94.4%), P2 5133->593 KB (88.4%). Sun Direction indicator renders in
-  animations for the first time; magnetotail oriented anti-sunward at frame 1.
-- Phase 2 (scene-assembly consolidation, steps 2a-2d) -- DELIVERED June 10 on
-  base 3f03c12, `[render-gated]`. Closes N3 + O5 + O6(a) on render pass.
-- Phase 3 (moving/non-center shells; tier decision) -- OPEN, design pending.
-Details under D.Architecture 21/51.
+**Animation refactor (21/51): CORE TRACK DELIVERED, final gate pending.**
+- Phase 1 (frame fence + sun threading + first-frame sync) -- DONE
+  `[render-confirmed Mode 5 @7977a11, June 10]`. 88-94% file reductions.
+- Phase 2 (scene-assembly consolidation 2a-2d) -- DONE
+  `[render-confirmed Mode 5, June 10-11]`. Closed N3 + O5 + O6(a); two fixes
+  shipped during testing (incl. osculating labeling, idealized_orbits)
+  `[per chain]`.
+- Phase 2.5 (wrapper retirement, 3 sites) -- DONE
+  `[render-confirmed Mode 5 via Session A gate, June 10]`.
+- Phase 3 Session A (design doc + 3a + budget harness) -- DONE
+  `[render-confirmed Mode 5, June 10]`. Rebuild-as-universal adopted;
+  gate 5(a) bytes PASSED at measured reduction.
+- Phase 3 Session B (per-frame engine + axis/cone/indicator + greyed-legend
+  disclosure) -- CONDITIONALLY render-confirmed June 11: engine allocates,
+  rebuilds, budget-reports correctly; riding behavior visually confirmed at
+  planet-centered scale; solar-system-scale visual confirmation blocked by a
+  TOOLING gap (camera tracking; item 19), not an engine defect.
+- Phase 3 Session C (barycenter Sun fix, console-spam fix, opt-in per-frame
+  comet tails, sodium tail, U+N bow-shock disclosure, one-line auto-scale) --
+  DELIVERED and PUSHED @7b71c29, `[render-gated on protocol v4]`.
 
-**Movement 1 (bow shocks + magnetosphere nest) COMPLETE** (v24): one shared
-conic-section create_bow_shock_shape; all 8 bodies; magnetopause nest corrected
-on the Earth-scaled bodies (Mercury/Venus/Mars/Jupiter/Uranus). `[per chain]`
+**Movement 1 (bow shocks + magnetosphere nest) COMPLETE** (v24). `[per chain]`
 
-**Movement 2 (pole-frame consumers) IN PROGRESS:**
-- Rotation-axis primitive -- DONE across 11 bodies (v26). Static render confirmed
-  Sun/Mercury/Earth. `[per chain]`
-- Dipole cone -- DONE for Uranus (60 deg, Ness 1986) + Neptune (47 deg, Ness 1989)
-  (v27). Static render confirmed. `[per chain]`
-- (June 10) The v27 "axis/cone do not render in animate" gap is RESOLVED for
-  CENTER bodies: O4 render-confirmed (Uranus-centered animation, magnetosphere +
-  Oberon). The remaining gap is NON-center bodies only -> 21/51 Phase 3.
-- Remaining Movement-2 items: see D.Movement below.
+**Movement 2 (pole-frame consumers) COMPLETE pending one gate:** rotation-axis
+primitive (11 bodies, v26) and dipole cones (Uranus/Neptune, v27) done; the
+v27 "animation gap" resolved -- center bodies confirmed O4 (June 10), and
+NON-center bodies now animate via the Phase-3 engine (Session B). The
+bow-shock hover disclosure remainder was delivered in Session C
+`[render-gated C5]`.
 
-**N15 ring-plane migration COMPLETE** (v25): all ring systems + Saturn torus +
-belts orient by IAU pole via orient_to_planet_pole. `[per chain]`
-
-**Analytical moon-orbit retirement DONE** (v25): Jupiter + Mars analytical path
-removed from live dispatch; all major-planet moons osculating-only. `[per chain]`
-
-**Provenance Tier-1 = 0** achieved (v18). `[per chain]`
+**N15 ring-plane migration COMPLETE** (v25). `[per chain]`
+**Analytical moon-orbit retirement DONE** (v25). `[per chain]`
+**Provenance Tier-1 = 0** -- RE-CONFIRMED June 11 post-campaign
+`[verified @d9460e2: PROVENANCE_AUDIT.md, 109 files scanned, 497 findings,
+Tier-1 FIX NOW = 0]`. The clean mark held through the entire animation
+refactor.
 
 ---
 
@@ -152,438 +155,310 @@ legendgroup; 57 Neptune double-leader; 58 MAPS placeholder legendgroups;
 59 create_neptune_magnetic_poles orphan; 60 Moon Hill Sphere prefix;
 N1 osculating-marker "color not defined"; 36/39 Neptune/Uranus provenance Tier-1
 display strings; 53 Neptune magnetic-center marker -> square-open;
-N2-orphan Uranus dipole SIGN closed by convention (comment at load-bearing site).
+N2-orphan Uranus dipole SIGN closed by convention.
 
 Closed SINCE v23 (Movement chain + verified):
-- **24 Bow shocks (all 8, incl. ice giants)** -- DONE, Movement 1 (v24). `[per chain]`
-- **Magnetosphere nest sizing** (Mercury full rescale, Venus, Mars, Jupiter,
-  Uranus) -- DONE (v24). `[per chain]`
-- **U3 Uranus belt/ring 105-deg fudge** -- RETIRED; belts (L732) and rings
-  (L1097) now orient via orient_to_planet_pole. `[verified @76c330e]`
-  (NOTE: the June-1 erratum recorded this as "NOT STARTED / still live"; that text
-  is SUPERSEDED. Do not re-open from the erratum.)
-- **N15 ring-plane migration** (Jupiter / Saturn+torus+belts / Neptune; Uranus was
-  the v23 anchor) -- DONE (v25). `[per chain]`
-- **Analytical moon-orbit retirement** (Jupiter, Mars) -- DONE (v25). `[per chain]`
-- **Rotation-axis primitive** (11 bodies) -- DONE (v26). `[per chain]`
-- **N13 dipole rotation sweep-cone** -- DONE as the v27 dipole cone (Uranus 60 /
-  Neptune 47). `[per chain]` This closes the v23 Bucket-B N13 item.
-- **N12 planet N/S pole markers** -- DONE (Tony-confirmed, June 7). Closes the
-  v23 Bucket-B N12 item.
-- **Double 'Sun' in the center-object dropdown** -- DONE (render-confirmed Mode 5,
-  June 8; AT HEAD `[verified @730b2bf]`, L9296). NOT a duplicate dict key:
-  update_center_dropdown built `new_options = ['Sun'] + ordered_centers`, and
-  'Sun' also enters ordered_centers (numeric Horizons ID passes
-  can_be_horizons_center; it is the default center, so the
-  keep-the-shadowed-center logic retains it) -- so it listed twice in every
-  selection. Fix: `new_options = ['Sun'] + [name for name in ordered_centers
-  if name != 'Sun']`.
-- **Duplicate 'Sun' key in CUSTOM_SHELLS** (shell_configs.py, L2642/L2823) -- DONE
-  (AT HEAD `[verified @730b2bf via AST]`: 11 CUSTOM_SHELLS keys, one 'Sun').
-  Confirmed real via AST (two top-level 'Sun' keys; last wins). Dormant, NOT a
-  live render bug: the dropped L2642 block was a stale sphere-shell duplicate of
-  SHELL_CONFIGS['Sun'] (same 15 keys, served via the sphere path); the surviving
-  L2823 block holds the correct custom geometry (rotation_axis,
-  hills_cloud_torus, outer_oort_clumpy, galactic_tide). Fix: deleted the dead
-  L2631-2811 block (its comment header + the sphere-shell copy) and revised the
-  live SHELL_CONFIGS['Sun'] header (dropped stale "not yet invoked" / "stays
-  alive" / "switchover" notes; Source/Verified provenance preserved verbatim).
-- **21/51 PHASE 1 (animation frame fence + sun threading + first-frame sync)** --
-  DONE `[render-confirmed Mode 5 @7977a11, June 10]`. Frames carry ONLY
-  frame-updated traces (orbit paths / trajectory layers / tails / center marker
-  excluded); 88-94% file reductions on real exports; animate center shells now
-  receive frame-1 sun_position (magnetotail oriented; Sun Direction indicator
-  un-suppressed -- it had never rendered in any animation). Companion artifacts
-  in repo: measure_animation_html.py, ANIMATION_TEST_PROTOCOL (v1 superseded
-  by v2). Phase-1 finding: the old zero sun-vector ALSO suppressed the Sun
-  Direction indicator ("body at Sun position" misread).
+- **24 Bow shocks (all 8)** -- DONE (v24). **Magnetosphere nest sizing** -- DONE
+  (v24). **U3 Uranus 105-deg fudge** -- RETIRED `[verified @76c330e]`.
+  **N15 ring-plane migration** -- DONE (v25). **Analytical moon-orbit
+  retirement** -- DONE (v25). **Rotation-axis primitive** (11 bodies) -- DONE
+  (v26). **N13 dipole sweep-cone** -- DONE (v27). **N12 pole markers** -- DONE
+  (June 7). `[all per chain unless tagged]`
+- **Double 'Sun' in the center dropdown** -- DONE `[verified @730b2bf, L9296]`.
+- **Duplicate 'Sun' key in CUSTOM_SHELLS** -- DONE `[verified @730b2bf via AST]`.
+  (Full root-cause narratives for both retained in the June-8 entry of the
+  prior ledger edition; reachable in git history.)
+- **21/51 PHASE 1** (frame fence + sun threading + first-frame sync) -- DONE
+  `[render-confirmed Mode 5 @7977a11, June 10]`. P1 4818->271 KB (94.4%),
+  P2 5133->593 KB (88.4%); Sun Direction indicator un-suppressed in
+  animations; magnetotail oriented at frame 1. Companion artifacts in repo:
+  measure_animation_html.py, ANIMATION_TEST_PROTOCOL (v4 current).
+- **21/51 PHASE 2 (2a-2d)** -- DONE `[render-confirmed Mode 5, June 10-11]`.
+  One canonical center-body marker (add_celestial_object via
+  add_center_body_marker); explicit blocks deleted in BOTH pipelines; one
+  sun-position producer (resolve_shell_sun_position); one center-shell
+  dispatch (add_center_body_shells); one shell-vars map
+  (get_planet_shell_vars_map, replaced three copies); osculating params
+  threaded through marker hover. Net -36 lines. P2-7 correction recorded:
+  barycenters render as open squares with full hover + legend, correct
+  as-is (the transparency-suppression expectation in the checklist was
+  wrong, not the code).
+- **N3 center-marker double** + **O5 animate bare hover** + **O6(a) animate
+  no-marker-with-shells** -- CLOSED by Phase 2a (one disease: two marker
+  mechanisms in static, one in animate, no canon). `[render-confirmed]`
+- **D.Structural 3: create_planet_visualization RETIRED** -- DONE
+  `[render-confirmed via Session A gate, June 10]`. THREE call sites swapped
+  to the unified dispatch (NOT one -- the prior "one-site" ledger claim was
+  wrong; corrected by repo-wide grep June 10); non-center sites now pass the
+  TRUE center_object (the wrapper's own promised Phase-D correction;
+  live-characterized identical). Wrapper annotated dead; deletion rides
+  D.Structural 6. helpers' dead import joins D.Structural 5/6.
+- **21/51 Phase 3 SESSION A** (3a notices + retirement + design doc +
+  measurement harness) -- DONE `[render-confirmed Mode 5, June 10]`.
+  Rebuild-as-universal adopted (ANIMATION_ENGINE_DESIGN_v1.md); gate 5(a)
+  bytes PASSED: reduced magnetosphere composite 62.4 KB/f -> 1.81 MB @29f
+  (envelope un-reduced; ~1.4 MB after the create_magnetosphere_shape
+  producer promotion). measure_perframe_elements.py in repo.
+- **21/51 Phase 3 SESSION B** (per-frame engine; axis + dipole cone +
+  sun-direction indicator riding non-center bodies; greyed-legend
+  disclosure) -- CONDITIONALLY render-confirmed June 11 @e5fd86d. Engine
+  architecturally sound (allocation, rebuild, budget guardrail, stability
+  assert all confirmed); riding visually confirmed at planet-centered scale
+  (B3: Sun's axis rides the Sun marker); solar-system-scale visual gap is a
+  TOOLING item (camera tracking -> item 19), not an engine defect.
+  Greyed-legend (`visible='legendonly'` + legendrank + italic note)
+  ACCEPTED (B4); click wart acceptable. 14 per_frame registry tags.
 
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
 
-### D.Movement -- Movement-track open items (restored from v24-v27)
+### D.Movement -- Movement-track open items
 
-- **Mercury +0.2 R_M northward dipole offset** -- OPEN. v24 Movement-2 item
-  (N-S asymmetry, large exposed southern cusp; Anderson 2011). Translate the
-  magnetosphere + shock shell north 0.2 R_M; subsolar standoff stays 1.45.
-  `[verified @76c330e]` -- confirmed ABSENT in mercury_visualization_shells.py
-  (only the cosmetic tail-marker offset and the standard sunward-recenter exist).
-  LEAK RECOVERED: present in v24's Movement-2 queue, dropped from v26/v27 ledgers.
-- **Bow-shock / envelope honesty -- CLOSED BY REDESIGN, with one open remainder.**
-  The geometric flank-poke "tilt enclosure" (v24 Movement-2) is RETIRED by Tony's
-  decision (Q2, June 7): the chosen approach is the HOVER DISCLOSURE -- state what
-  geometry is sourced from physics vs approximate/schematic, not re-shape the
-  flank. Envelope hovers (Uranus + Neptune) carry this disclosure as of v27 (DONE).
-  OPEN REMAINDER: the BOW-SHOCK hovers (Uranus 23.7 R_U, Neptune 34.9 R_N) cite
-  their standoff but do NOT yet flag the conic-section approximation (v27 sec 4).
-  Extend the same sourced-vs-schematic disclosure to the bow-shock hovers.
-  (June 10 RIDER, same sweep, same nature: disclose in hover that animation
-  shell ORIENTATION -- magnetotail + Sun Direction indicator -- is FROZEN at
-  the first animation frame while the Sun marker moves. From Phase 1.) `[per chain]`
-- **v24 sec5 precision batch** (low-risk, not blocking):
-  - **Inner-four bow-shock hover missing km/AU** -- OPEN. Mercury/Venus/Earth/Mars
-    bow-shock hover reads "radii" only (e.g. Mercury L304/L364 "1.4 to 2.0 radii");
-    giants got km/AU in v24. Standing Hover-Text-AU-Convention gap.
-    `[verified @76c330e]` (Mercury checked; the other three inner bodies follow the
-    same v24 pattern, `[per chain]`). See section E.
-  - Jupiter compressed/expanded MP toggle (Joy 2002 bimodal ~63/~92; current single
-    65 defensible). Feature, not a number. `[per chain]`
-  - Earth MP/BS citation upgrade (Fairfield/Shue ~10 / ~14.6 over flat "15
-    textbook"); nest unaffected. `[per chain]`
-  - Per-body bow-shock eccentricity (e.g. Mercury 1.02); 1.05 illustrative is
-    visually fine. Optional. `[per chain]`
-- **Envelope -> dipole tie / season-derived roll** (Mode-7). Conditional: only if a
-  season-derived envelope roll is wanted; gated on a physics question (does the
-  magnetopause asymmetry track the instantaneous dipole projection?). Otherwise the
-  frozen still + v27 disclosure is the honest near-term state. `[per chain]`
-- **Dipole offset DIRECTION** (Mode-7). Magnitude sourced (~0.3 R_U, ~0.55 R_N),
-  direction not. Apex stays at center until sourced; do not fake direction. `[per chain]`
-- **Other dipole bodies** -- Earth (~11 deg, the compass-vs-true-north anchor;
-  worth a skinny cone), Jupiter (~10 deg, optional), Saturn (<1 deg, NO cone --
-  hover NOTE only). ALL tilts/sense/poles currently RECALLED; MUST be sourced
-  (primary literature / Mode-7) before any PLANET_DIPOLE entry. `[per chain]`
-- **Per-body half_len_frac tuning** (rotation axis + cone share the scale) -- Mode-5
-  knobs, not a bug. `[render-gated]`
+- **Mercury +0.2 R_M northward dipole offset** -- OPEN. (Anderson 2011;
+  v24 Movement-2 item.) `[verified absent @76c330e]`
+- **Bow-shock hover disclosure remainder** -- DELIVERED Session C
+  `[render-gated C5]`: U+N bow-shock hovers now carry the conic-model
+  sourced-vs-schematic note + the animation-freeze line (this also closes
+  the Phase-1 orientation-freeze disclosure rider and the frame-1-freeze
+  rider -- one sweep, three siblings, as designed). MOVE TO C on the v4
+  gate pass.
+- **v24 sec5 precision batch** (low-risk): inner-four bow-shock hover km/AU
+  `[verified @76c330e]` (also section E); Jupiter compressed/expanded MP
+  toggle; Earth MP/BS citation upgrade; per-body shock eccentricity.
+  `[per chain]`
+- **Envelope -> dipole tie / season-derived roll** (Mode-7, conditional);
+  **dipole offset DIRECTION** (Mode-7; apex stays centered until sourced);
+  **other dipole bodies** (Earth/Jupiter cones, Saturn hover note -- ALL
+  tilts currently RECALLED, must be sourced before any PLANET_DIPOLE
+  entry); **per-body half_len_frac tuning** (Mode-5 knobs). `[per chain]`
 
 ### D.Priority -- real bugs
 
-- (none currently open) The conflated "duplicate 'Sun'" item closed June 8 as TWO
-  distinct fixes: the visible double-Sun was a center-dropdown assembly bug
-  (palomas_orrery.py), and the CUSTOM_SHELLS duplicate key (shell_configs.py
-  L2642/L2823) was a real but dormant dead-block. Both recorded in section C (DONE).
-  Lesson: a duplicate dict key collapses to one on iteration, so it cannot by itself
-  produce a doubled selector entry -- the symptom and the dict-key bug were separate.
+- (none currently open) The B3-bonus barycenter Sun-Direction bug (indicator
+  pointed at (0,0,0)/the barycenter when the Sun checkbox was off) was FIXED
+  in Session C `[render-gated C1]`: the engine resolves a REAL Sun trajectory
+  (fetching it when unchecked) and SUPPRESSES sun-direction elements when
+  unresolvable -- it never points at a placeholder. Root cause for the
+  archive: a fallback value is a CONTRACT -- (0,0,0) was a rotation-skip
+  sentinel to shell-orientation code and literal position data to the
+  indicator; reusing a fallback without checking each consumer's semantics
+  is how a sentinel becomes a physics bug. Suppression beats fabrication.
 
 ### D.Structural -- dead-code / honest shell files (Phase 3)
 
-`[all per v23 / v25 chain; not re-verified @HEAD this session unless tagged]`
-- 2 Asteroid belt migration decision (CUSTOM_SHELLS vs documented exception).
-- 3 Retire create_planet_visualization() frame -- UPDATED June 10: after
-  animation Phase 2, the wrapper has exactly ONE live pipeline call site
-  (inside add_center_body_shells, planet branch) `[verified @3f03c12 + Phase 2
-  delivery]`. Retirement is now a ONE-SITE swap to
-  create_celestial_body_visualization with center_object threading -- a clean
-  Phase 2.5 / Phase 3 rider. Verify no external callers (grep) at execution.
-- 5 _info import cleanup (~89+87 imports, 2 files). UPDATED June 10: the
-  hover_text_sun import (palomas_orrery.py L208) is now UNUSED -- its only
-  consumer was the static explicit center-marker block deleted in Phase 2a.
-  Joins this sweep; deliberately not removed solo.
-- 6 Archive dead shell functions (the "honest shell files" sweep; v9 detail below).
-- 7 Tooltip rewiring globals() -> config fields.
-- 8 Dead create_sun_direction_indicator imports (v14 removed ~10; verify remainder).
-- 13 Neptune ring info-marker rotation (likely subsumed by 47a/47b; VERIFY+close).
-- 26 CUSTOM_SHELLS tooltip verification (Sun customs; low -- D1 used source strings).
-- 28 Neptune superimposed info markers (likely subsumed by 2C; VERIFY+close).
-- 40 Asteroid belt hover -> single info marker (4 belt builders).
-- N2 Saturn/Uranus ring marker placement (saturn L1171, uranus L1061-1062; markers
-  at (r,0,0) not riding the rotated ring; single-line each). Also the erratum's "N2
-  ring marker placement -- unchanged" thread.
-- N3 Center-body marker edge case (two origin markers when body checked +
-  centered + no shells) -- RESOLVED by Phase 2a (the second mechanism, the
-  explicit block at the old 4558-4617, is DELETED; the object loop is the one
-  canon). `[render-gated]` -- MOVE TO SECTION C when the Phase-2 Mode-5
-  checklist passes the single-marker check.
-- N4 Planet 9 single sphere n=50 (should be 20/25 convention).
-- N7 Planetary shell info-marker sweep -- MOSTLY OBSOLETE (sphere-shell inline
-  markers are dead code; factory + per-config info_border already controls them).
-  Reduces to custom-geometry inline markers only. Do NOT edit sphere-shell inline dicts.
-- 9 palomas_orrery_helpers.py CRLF -> LF.
-- 61 Platform Neutrality (SystemButtonFace -> hex literal / platform detect / ttk).
-- **v25 D3 dead-code annotations** (annotate, do NOT remove yet): saturn
-  rotate_points import now unused after N15; idealized_orbits.py analytical branches
-  (Mars 25.19, Jupiter 3.13, Uranus 105 fudge squatting in plot_satellite_orbit) +
-  calculate_jupiter/saturn_satellite_elements now effectively unused in live render.
-- **v25 small-body analytical tail**: TNO_MOONS + Patroclus-Menoetius barycenter
-  orbiters (~L5174) still call plot_satellite_orbit via the generic-parent path.
-  Evaluate same-artifact before migrate-or-retire; rarely-plotted edge cases.
+`[per v23/v25 chain unless tagged]`
+- 2 Asteroid belt migration decision.
+- 5 _info import cleanup (~89+87 imports, 2 files) -- hover_text_sun import
+  (L208) unused since Phase 2a; the helpers' create_planet_visualization
+  import unused since Phase 2.5. Both join this sweep.
+- 6 Archive dead shell functions (v9 detail in prior edition / git history);
+  NOW ALSO: the retired create_planet_visualization body itself
+  (annotated RETIRED June 10; delete here with grep-confirm).
+- 7 Tooltip rewiring globals() -> config fields. 8 Dead
+  create_sun_direction_indicator imports (verify remainder). 13 Neptune ring
+  info-marker rotation (VERIFY+close). 26 CUSTOM_SHELLS tooltip verification.
+  28 Neptune superimposed info markers (VERIFY+close). 40 Asteroid belt
+  hover -> single info marker. N2 Saturn/Uranus ring marker placement.
+  N4 Planet 9 sphere n=50 -> 20/25. N7 reduced to custom-geometry inline
+  markers only. 9 palomas_orrery_helpers.py CRLF -> LF. 61 Platform
+  Neutrality (SystemButtonFace).
+- (NEW June 11) ASCII-convention violation, pre-existing: 3 em-dash lines in
+  comet_visualization_shells.py MAPS strings (L257/505/519)
+  `[verified @0ce1e26]`. Fix on next touch of that file (binary-mode).
+- v25 D3 dead-code annotations + small-body analytical tail. `[per chain]`
 
-v9 dead-code detail (the "archive dead shell functions" target): 10 dormant
-sun_direction blocks (venus 497/798, earth 605/1146, mars 576/925, jupiter 509/826,
-saturn 592/965); asteroid belt 4 dead calls (231/327/427/523); Sun Roche duplicate
-(CUSTOM_SHELLS['Sun']['roche_limit'] shadowed + create_sun_roche_limit_shell
-uncalled); inert sphere-shell inline marker conversions. KEEP: comet sun-direction
-calls (L1523/1949 -- they fire).
+### D.Cosmetic -- polish (bundle when convenient)
 
-### D.Cosmetic -- polish (bundle when convenient) `[per chain unless tagged]`
+- 17 GEO info-marker position. 18 Uranus gossamer ring visibility.
+  41 Sun legend ordering (ordered dispatch iteration; no manual fix).
+  `[per chain]`
+- Comet plotted-period trace visibility (line weight/color; O6b June 10).
+- Center-body hover "Distance to Center Surface: -<radius> km (below mean
+  datum)" (formatter treats center as object-at-zero; pre-existing; polish
+  target is format_detailed_hover_text).
+- O11 verdict June 11: greyed-legend display names derive correctly from
+  checkbox keys -- NO item needed; recorded so it is not re-raised.
 
-- 17 GEO info-marker position (+X side of ring; could move to spoke).
-- 18 Uranus gossamer ring barely visible (Mode-5 when desired; also the erratum's
-  cosmetic-18 thread).
-- 41 Sun legend ordering (DO NOT fix manually -- needs ordered dispatch iteration).
-- (NEW June 10, from O6b) Comet plotted-period traces need more visibility
-  (line weight / color). `[render-gated]`
-- (NEW June 10, from Phase 2 T5) Center-body marker hover shows
-  "Distance to Center Surface: -<radius> km (below mean datum)" style lines --
-  the formatter treats the center as an object at distance 0. PRE-EXISTING in
-  static (the object loop has always rendered this); animate now matches by
-  design. Polish target is format_detailed_hover_text (center-body branch),
-  not the Phase-2 helpers.
+### D.Feature -- Bucket A (near-term)
 
-### D.Feature -- Bucket A (completes/equips standard rendering; near-term) `[per chain]`
-
-- 23 Earth ionosphere shell.
-- 19 Plot-cube control parity (orrery GUI) -- JOINED / cross-repo (Tony, June 8).
-  Gallery Studio has a full plot-cube control set; the orrery GUI does not.
-  Implement the Studio set in the orrery GUI: scene_axis_range + scene_dtick
-  (the original "manual axis range + dtick" core), scene_aspectmode
-  (auto/cube/data/manual), scene_camera orientation (original/isometric/top/
-  front/side), and show_axes / show_grid toggles. Studio side
-  `[verified @2f40d9d]` (tools/gallery_studio.py DEFAULT_CONFIG ~L72-96; rendering
-  ~L912-941); orrery GUI side is the open work. Design authority:
-  3d_axis_control_handoff.md (website repo documentation/). 3D Axis Control
-  Convention parity; xvfb gate. (Cross-ref Gallery section H.)
-  (June 10, from O6c: Tony's call -- scale, cube, and grid options deserve a
-  SEPARATE THOROUGH REVIEW as their own track; fold that review into this
-  item's design pass rather than standing up a fourth axis-control thread.)
-- 20/N5 Shell-resolution GUI control (enabler for Bucket B AND for animation
-  Phase 3 tier 3; bundle with HTML export mode and with 19).
-- 49 Fly-to view scaling (the "0.15 AU" bug; visualization_utils.py
-  add_fly_to_object_buttons; view box sized by distance-from-center not target size).
-- View-window scaling design (49 + 19 + Studio parity): one shared
-  view_window(target|region) -> (range, dtick) producer; zero-code design first.
+- 23 Earth ionosphere shell. `[per chain]`
+- **19 Plot-cube control parity + SCALING/CAMERA COMPREHENSIVE REVIEW** --
+  JOINED / cross-repo. The original parity scope (scene_axis_range,
+  scene_dtick, aspectmode, camera orientation, axes/grid toggles; Studio
+  side `[verified @2f40d9d]`; design authority 3d_axis_control_handoff.md)
+  PLUS, per Tony's June-11 framing call, the accumulated scaling/camera
+  FIXTURE LIST (all scaling work lives here; no separate session track):
+    * Photosphere auto-scale collapse (static Auto = shell extent alone,
+      hiding orbits; Session-A Finding 1 concrete case).
+    * Sun-Direction indicator clipped by cube range (Finding 1 / O12).
+    * Sun orbit around a planet center lacks cube buffer (O12).
+    * Fly To zoom limit ignores shell extent (computed from orbital
+      distance/marker size; planets stop too far out to see magnetosphere
+      or belts; comets okay). (O13b, June 11.)
+    * CAMERA TRACKING across animation frames -- no mechanism exists; Fly To
+      shows frame 1 only; blocks Mode-5 verification of riding primitives
+      at solar-system scale (Session B gap). MECHANISM NOTE for the design
+      pass: go.Frame(layout=...) can carry scene.camera per frame --
+      implementable inside existing animation machinery; needs a
+      user-interaction toggle (frame-driven camera fights manual orbit).
+    * O16 (incoming from the v4 gate): auto-scale max() behavior across
+      scale combinations.
+  20/N5 shell-resolution GUI control (enabler; its backend partially exists
+  since Session A -- bow-shock conic already parameterized, sphere-shell
+  n_points per-config; remaining: create_magnetosphere_shape promotion +
+  per-body density literals). 49 Fly-to view scaling (folds into the
+  fixture list above). View-window design (49 + 19 + Studio parity).
+  `[per chain unless tagged]`
 
 ### D.Feature -- Bucket B (editorial; open-ended) `[per chain]`
 
-- 22 Satellite internal-structure shells (Phase E creative / Mode 7).
-- N14 Miranda inclination-anomaly tooltip (i=4.232-4.34 deg to Uranus equator;
-  3:1 Umbriel resonance hook; confirmed-correct in render). Small editorial; Tony's call.
-- Deeper-detail direction (stratosphere, finer corona, solar storms -> straddles
-  animation Bucket C). Not a finite item; 20/N5 is the on-ramp.
+- 22 Satellite internal-structure shells. N14 Miranda inclination tooltip.
+  Deeper-detail direction (20/N5 is the on-ramp).
 
-### D.Feature -- Bucket C (architecture; design-before-code) `[per chain unless tagged]`
+### D.Feature -- Bucket C (architecture; design-before-code)
 
-- N6 Studio editor review + encounter-event generator + Artemis redo (data/
-  provenance cluster; folds items 37/38 spacecraft provenance and N11 Artemis
-  lunar-flyby Horizons-override console check). UPDATED June 8: the generator
-  EXISTS and emits both full-mission and encounter forms (gallery_studio.py
-  _generate_encounter_code, ~L5352) -- N6's "design-first / emits both forms"
-  keystone is DONE. Remaining work is a COUPLED refactor + redo, done together,
-  and it SPANS TWO REPOS (Gallery Studio is a separate repo from the orrery):
-    * Generator refactor [Gallery Studio repo, tools/gallery_studio.py @2f40d9d;
-      `[verified @2f40d9d]` -- upload confirmed byte-identical to repo HEAD]:
-      the generator does NOT emit four fields the Artemis presets carry --
-      resolution_note, center_closeup, plot_days_closeup, plot_scale_au_closeup.
-      Extend it to produce them.
-    * Artemis preset redo [orrery repo, `[verified @730b2bf]`]: regenerate the
-      'Artemis II' presets (spacecraft_encounters.py ~L196) through the refactored
-      generator. They hold removed/unverified data (v_kms None; dates "pending
-      re-derivation from NASA/JSC OEM"), so they need the generator's normalized +
-      sourced output (dist_au from dist_km, date normalization, date_source/source).
-    * Coupling (Tony, June 8): the generator must include items only in the presets,
-      and the presets need information the generator produces -- one pass, not two.
-      Because the halves live in DIFFERENT repos, the redo must coordinate a Gallery
-      Studio change with an orrery-repo data change (two HEADs to track).
-    * N11 (Artemis Moon-flyby, date_source 'horizons') rides with the redo: the
-      Horizons-derived date is validated by the console check during regeneration.
-    * Design authority: ENCOUNTER_EXPORT_HANDOFF_v3.md (the "v3.0" doc; Fork 1 /
-      Fork 2, Orrery preset mode, post-production boundary) -- in the ORRERY repo
-      documentation/ `[verified @730b2bf]`, NOT the website repo. Generator built
-      Session 36b (May 2), refined Session 37 (May 4-5) -- per web_gallery_handoff.md
-      (website repo documentation/; Gallery section H).
-    * Refactor scope note: the four missing fields are a SECOND (close-up) view's
-      parameters (center_closeup / plot_days_closeup / plot_scale_au_closeup) plus
-      an editorial resolution_note -- not post-production cosmetics. Open design
-      question the refactor inherits: how the Studio captures a second view in one
-      export (Session 37 held "the figure is the source of truth for view
-      parameters" for a single view). "Camera capture (not extracted)" is the
-      sibling un-emitted field.
-- N10 Note-composition structural refactor (renderer composes the encounter note
-  from resolved values + template; structural cure for stale-prose numbers; sits
-  behind N6).
-- **21/51 Animation track (UNIFIED) -- ACTIVE, phased. Status June 10:**
-  Objectives: (1) non-center-body / body-triggered shells render in the animate
-  path (includes the v27 rotation-axis + dipole-cone animation gap); (2) reduce
-  animation memory overhead; (3) consolidate animate with static
-  (parallel-pipeline divergence).
-  - **PHASE 1 -- DONE** `[render-confirmed Mode 5 @7977a11]` (see section C).
-    Objective (2) substantially addressed; objective (3) partially (center-body
-    shells were already static; frame budget now near-empty).
-  - **PHASE 2 -- DELIVERED June 10** on base 3f03c12, `[render-gated]`
-    (ANIMATION_TEST_PROTOCOL_v2, Phase 2 section). Four steps, all approved
-    June 10: 2a center-marker unification (canon = add_celestial_object via
-    add_center_body_marker; explicit blocks deleted in BOTH pipelines; closes
-    N3 + O5 + O6a); 2b resolve_shell_sun_position (one sun-position producer);
-    2c add_center_body_shells (one center-shell dispatch, Sun branch + belts +
-    planet branch + Auto scaling); 2d get_planet_shell_vars_map (one map,
-    replaced three copies). Params resolution implemented:
-    add_celestial_object gains params= / show_legend=; the one existing call
-    site (static object loop) now passes active_planetary_params, so ALL
-    static marker hover uses fresh osculating elements. Net -36 lines.
-    Claude-side verification: live-dispatch equivalence (helper output
-    trace-for-trace identical to the replaced direct dispatch), full-module
-    xvfb exec, py_compile/ASCII/LF.
-  - **PHASE 2.5 (optional rider)** -- retire the create_planet_visualization
-    wrapper (D.Structural 3, now one-site).
-  - **PHASE 3 -- OPEN, design pending.** Scope: non-center body shells,
-    offset-Sun shells in planet-centered animations (O2/O3 no-ops confirmed),
-    moving-shell strategy. Three-tier design space on the table (from the
-    Phase-1 handoff): tier 1 static-at-frame-1 with hover disclosure; tier 2
-    small-primitive animation (axis, dipole cone, info markers, bow-shock
-    outline -- per-frame re-emission of cheap traces; the sweet-spot candidate
-    that closes the v27 gap for non-center bodies); tier 3 full per-frame
-    shell re-emission at reduced resolution, GATED ON 20/N5
-    (shell-resolution control). Tier decision is Tony's; seed with O-log.
-  - **DEFERRED / NOTED (riders on this track):**
-    * Multi-frame comet tail rendering as an OPT-IN mode, not default (Tony,
-      O1: frame-1 freeze acceptable at current spans). Phase 3 or later.
-    * Animate shell auto-scale is DEAD: get_animation_axis_range recomputes
-      axis_range unconditionally and never reads _shell_outermost_radius_au;
-      the Auto-fit-to-shells snippet never had effect in animations
-      `[verified @3f03c12]`. Pre-existing; render-approved as-is (P2/P3).
-      Annotated at the call site. DECISION (section G): should animation Auto
-      scale consider shell extent? If yes: one line (use the helper's returned
-      axis_range), Mode-5 gated.
-    * Animation orientation-freeze hover disclosure -- rides the bow-shock
-      disclosure sweep (D.Movement).
-  - Standing instruction kept: when deferring, smoke-test the animate pipeline
-    to confirm a KNOWN state, not just no-error. Architecture-first;
-    multi-session.
+- **N6** Studio encounter-generator refactor + Artemis preset redo (coupled,
+  TWO repos; full verified specifics in the prior edition / git history;
+  design authority ENCOUNTER_EXPORT_HANDOFF_v3.md, orrery repo). N11 rides.
+  `[per chain + @2f40d9d/@730b2bf verifications]`
+- **N10** Note-composition structural refactor (behind N6). `[per chain]`
+- **21/51 Animation track -- CORE COMPLETE pending the v4 gate. Status
+  June 11:**
+  - Phases 1, 2, 2.5, 3A DONE; 3B conditionally confirmed (section C).
+  - **PHASE 3 SESSION C -- DELIVERED + PUSHED @7b71c29,
+    `[render-gated on ANIMATION_TEST_PROTOCOL_v4]`:** barycenter Sun fix
+    (engine Sun contract: real trajectory / engine fetch / suppression --
+    never a placeholder position); console-spam fix (O13a; quiet rebuilds,
+    builder messages print once at allocation, zero builder edits); comet
+    tails per frame as OPT-IN (Animation Settings checkbox, default off
+    per O1; build_comet_tail_traces capture shim, the 240-line builder
+    unchanged; VARIABLE-COUNT handling: per-frame max-probe + pad-to-max
+    with invisible dummies -- live counts are non-monotonic, 9/7/5/6
+    measured; MAPS excluded, disclosed); Mercury sodium tail as engine
+    customer (checkbox-gated; its greyed placeholder skipped when live);
+    U+N bow-shock hover disclosure (D.Movement remainder); one-line
+    auto-scale (Auto cube = MAX of orbital and center-shell extents, never
+    shell alone -- the Finding-1 inverse).
+  - **ENGINE ARCHITECTURE (for the record):** rebuild-as-universal --
+    builder(**frame_context) through the same dispatch convention as
+    static; registry = 14 per_frame tags in CUSTOM_SHELLS + the indicator
+    builtin; trace-count stability asserted loud, variable-count elements
+    pad-to-max; engine Sun contract with suppression-over-fabrication;
+    quiet rebuilds; live byte-budget guardrail (warn >150 KB/frame).
+    Design authority: ANIMATION_ENGINE_DESIGN_v1.md (sec 8 footnote
+    superseded by the greyed legend -- amend on next touch).
+  - **REMAINING RIDERS after the v4 gate:**
+    * Resolution-sweep follow-on: gate 5(a) bytes PASSED (Session A,
+      measured); gate 5(b) = Tony's Mode-5 quality judgment at reduced
+      density. Scope shrank twice (Session A): bow-shock conic already
+      parameterized; envelope = ONE shared-producer promotion
+      (create_magnetosphere_shape); per-body density literals + one
+      dispatch flag. Doubles as 20/N5's backend.
+    * measure_animation_html.py: add tkinter file-browser dialog (B5).
+    * Camera tracking -> item 19 fixture list (above).
+    * O14/O15 incoming from the v4 gate: comet-tail legend churn verdict;
+      sodium particle count in per-frame mode (knob exists, 500 -> 250
+      measured ~24.9 KB/f).
+  - Standing instruction kept: when deferring, smoke-test the animate
+    pipeline to a KNOWN state.
 
-### D.Parked (Tony's explicit call to leave as-is) `[per chain]`
+### D.Parked (Tony's explicit call) `[per chain]`
 
-- N8 Comet info-marker superposition cluster (hover ikeya_seki + design before work).
-- N9 Codebase-wide white -> red orbit-marker switch (deliberate whole-orrery change;
-  osculating marker intentionally stays white).
+- N8 Comet info-marker superposition cluster. N9 white -> red orbit-marker
+  switch (osculating marker intentionally stays white).
 
 ### D.Loose end to reconcile `[per chain; not re-verified]`
 
-- Uranus pole-value prose inconsistency (erratum): Dec -15.10 (planet_poles, the
-  value v26's table uses) vs prose "RA 257.31 / -15.18" elsewhere (~0.1 deg).
-  Reconcile the stray prose to the load-bearing value when next in the file.
+- Uranus pole-value prose inconsistency (Dec -15.10 load-bearing vs stray
+  prose -15.18; reconcile when next in the file).
 
 ---
 
 ## E. AU-CONVENTION COMPLIANCE CLUSTER (standing convention; one sweep)
 
-The Hover-Text-AU-Convention (all distance hover text includes AU alongside km;
-km/149597870.7) has known residual gaps. Group them into one sweep rather than
-chasing singly:
-- Inner-four bow-shock hover ("radii" only) -- `[verified @76c330e]` (Mercury).
-- GEO altitude hover missing AU (standing-convention note; GEO ~0.000285 AU).
-  `[per standing convention; not re-verified]`
-- Any new hover added by Movement work -- confirm km+AU at add time.
+- Inner-four bow-shock hover ("radii" only) `[verified @76c330e]`; GEO
+  altitude hover missing AU `[per standing convention]`; confirm km+AU on
+  any new hover at add time. (Session C's U+N bow-shock disclosure lines
+  added no new numbers; existing km/AU values untouched.)
 
 ---
 
-## F. CONSOLIDATION LOG (what this pass repaired)
+## F. CONSOLIDATION LOG (what each pass repaired)
 
-- RESTORED 2 leaked Movement-2 items (Mercury north offset; bow-shock honesty)
-  that lived only "by reference" in v24 and were absent from v26/v27 ledgers.
-- RESTORED the v24 sec5 precision batch (inner-four km/AU, Jupiter toggle, Earth
-  citation, eccentricity), absent from v26/v27 ledgers.
-- CORRECTED a stale "open": the June-1 erratum's Uranus 105-fudge "NOT STARTED" is
-  DONE at HEAD (verified); not carried forward as open.
-- UNIFIED three records of the animation issue (v23 21/51, v25 deferral, v27 gap)
-  into one item (21/51).
-- CLOSED N13 (v23 Bucket B) as the v27 dipole cone.
-- CLOSED N12 (pole markers, Tony-confirmed June 7) and dropped the rotation-axis
-  Mode-5 sweep as a non-issue (most confirmed, Tony June 7).
-- RECORDED Q2 decision: flank-poke geometric enclosure closed-by-redesign; hover
-  disclosure is the path; bow-shock-hover disclosure is the open remainder.
-- MOVED Food Insecurity from v23 "on-the-horizon" backlog to an active separate
-  track (Tony, June 7).
-- VERIFIED against HEAD: 105-fudge (done), Mercury offset (absent/open), duplicate
-  Sun key (L2642/L2823, open), inner-four bow-shock hover (radii-only, open).
-  (UPDATE June 8: the duplicate Sun key is now CLOSED, and the visible double-Sun was
-  traced to a separate center-dropdown bug -- both in section C.)
-- (June 8) RECOVERED a leaked item into N6: the Gallery Studio preset-generator
-  refactor + Artemis preset redo. It floated since June 1 (v21 erratum) with no
-  handoff home ("flag it for whichever ledger" that never landed), so the v23->v28
-  consolidation could not carry it -- it lived below the handoff layer. Now folded
-  into N6 with verified specifics. Also recorded: Gallery Studio is a SEPARATE repo
-  (HEAD 2f40d9d), distinct from the orrery repo (730b2bf) -- this coupled item
-  spans both.
-- (June 10) ANIMATION REFACTOR PASS: Phase 1 render-confirmed and moved to C;
-  Phase 2 delivered (render-gated). PENDING-ACTION June-8 items verified AT HEAD
-  and cleared. ROOT-CAUSED the center-marker divergence: N3 (static double
-  marker), O5 (animate bare hover), and O6a (animate no marker with shells) are
-  ONE disease -- two mechanisms in static, one in animate, no canon; Phase 2a
-  installs the canon. NEW findings recorded: v27 axis/cone animation gap is
-  NON-center-only (O4 render-confirmed); animate shell auto-scale is dead
-  (annotated, decision in G); center-hover "below mean datum" cosmetic
-  (D.Cosmetic); hover_text_sun import orphaned (joins D.Structural 5);
-  D.Structural 3 reduced to a one-site change. NEW items from the O-log:
-  comet-tail opt-in mode (21/51 rider), comet plotted-period visibility
-  (D.Cosmetic), scale/cube/grid review (folded into item 19's design pass).
-  Protocol candidates recorded in section A (sed throwaway-copy rule;
-  full-module xvfb live-dispatch testing).
+- (June 7, v28 consolidation) RESTORED 2 leaked Movement-2 items + the v24
+  sec5 batch; corrected the stale U3 "open"; UNIFIED the three animation
+  records into 21/51; closed N13, N12; recorded Q2; moved Food Insecurity
+  to a separate track; HEAD verifications. (Full detail: prior edition /
+  git history.)
+- (June 8) Recovered the N6 generator-refactor leak; recorded the two-repo
+  coupling; Gallery section H stood up.
+- (June 10) ANIMATION PASS 1: Phase 1 render-confirmed; Phase 2 delivered;
+  PENDING June-8 items verified at HEAD and cleared; center-marker
+  divergence root-caused (N3 + O5 + O6a = one disease); v27 axis/cone gap
+  refined to non-center-only (O4); animate shell auto-scale found dead and
+  annotated; new items from the O-log.
+- (June 10, later) Phase 2 render-confirmed; Phase 3 GO (rebuild-universal
+  directive); Session A delivered: the "one-site" wrapper claim CORRECTED
+  by repo-wide grep (three sites); budget harness + gate 5(a) passed;
+  grep -c chain-break lesson.
+- (June 11) Sessions B + C: engine delivered and conditionally confirmed
+  (solar-system-scale visual gap identified as TOOLING -> item 19 with the
+  go.Frame camera mechanism note); greyed-legend disclosure verified and
+  accepted (supersedes the footnote; console notices demoted to dev
+  diagnostics); B3-bonus barycenter bug root-caused (sentinel conflation:
+  a fallback value is a CONTRACT) and fixed with
+  suppression-over-fabrication; comet trace counts measured non-monotonic
+  -> pad-to-max; capture-shim pattern adopted for the comet core (faithful
+  by construction, hairy builder untouched); O13a spam fixed engine-side;
+  scaling consolidated into item 19 per Tony's framing call (no separate
+  track); section-G auto-scale and tier-decision questions CLOSED;
+  provenance re-scan at d9460e2: Tier-1 = 0 held through the campaign.
 
 ---
 
 ## G. OPEN QUESTIONS / TONY CALLS
 
-- AU-convention sweep (section E): KEEP OPEN, revisit (Tony, June 7 -- origin not
-  immediately recalled). Context for the revisit: the verified facts are that the
-  inner-four bow-shock hover reads "radii" only at HEAD (Mercury L304/L364), and
-  the GEO altitude hover lacks AU per the standing convention. Decide then whether
-  to batch them as one pass.
-- (NEW June 10) Animation Auto scale vs shells: get_animation_axis_range ignores
-  shell extent (the shell auto-scale was always dead in animate -- now annotated).
-  Current scaling render-approved (P2/P3). Should animation Auto scale consider
-  shell extent like static does? If yes: one-line use of add_center_body_shells'
-  returned axis_range at the animate call site, Mode-5 gated. If no: leave the
-  annotation, close the question.
-- (NEW June 10) Phase 3 tier decision (see 21/51): which of the three moving-shell
-  tiers earn their place? Tier 2 (small primitives) is the recommended sweet spot;
-  tier 1 (static-at-frame-1, disclosed) may be visually worse than nothing; tier 3
-  needs 20/N5 first. Decide before Phase 3 design starts.
+- AU-convention sweep (section E): KEEP OPEN, revisit (Tony, June 7).
+- **Gate 5(b)** (NEW June 11): does the reduced-density magnetosphere still
+  TEACH? Mode-5 quality judgment at the resolution-sweep follow-on
+  (resolution 12-16 renders vs full). Bytes already passed 5(a).
+- O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium
+  particle count) -- record here if either becomes an item.
 
-(Resolved June 7: N12 pole markers -- done; rotation-axis Mode-5 sweep -- most
-confirmed, not an issue. Both removed from the open list.)
+(CLOSED June 10-11: animation Auto-scale-vs-shells -- implemented as
+max(orbital, shell) in Session C, render-gated C6. Phase 3 tier decision --
+tier 2 adopted at the June-10 GO; tier 1 dropped; tier 3 = the resolution
+follow-on behind gate 5(b).)
 
 ---
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
-Added June 8 (Tony's call: carry the Gallery as a separate section in this one
-ledger rather than a separate file -- it is much less active). This is the
-website/Gallery-Studio track, a SEPARATE repo from the orrery app repo.
+(Unchanged this pass; carried verbatim from the June-10 edition.)
 
-- **Repo source (recorded June 8 for future reference).**
-  URL: https://github.com/tonylquintanilla/tonyquintanilla.github.io
-  Owner `tonylquintanilla` (WITH the 'l', same as the orrery); repo name
-  `tonyquintanilla.github.io` (NO 'l'). That owner/name split is exactly why the
-  repo is easy to mis-locate -- pair them as written. Branch `main`. Public
-  (clones / raw-fetches unauthenticated). HEAD verified this session == `2f40d9d`
-  (matches the SHA Tony provided). Custom domain `palomasorrery.com` (CNAME).
-  Studio file: `tools/gallery_studio.py` (NOT repo root). The uploaded
-  gallery_studio.py this session was byte-IDENTICAL to that path @2f40d9d, so the
-  Studio verification below is repo-grade.
-- **Handoffs / design docs -- which repo holds what (both have a documentation/):**
-  - WEBSITE repo `documentation/` `[verified @2f40d9d]`: `web_gallery_handoff.md`
-    (last Studio handoff, Feb 5 -> May 5, 2026); `3d_axis_control_handoff.md`
-    (design authority for the item-19 plot-cube parity).
-  - ORRERY repo `documentation/` `[verified @730b2bf]`: the encounter-export design
-    docs live HERE, not in the website repo -- `ENCOUNTER_EXPORT_HANDOFF_v3.md`
-    (the "v3.0" authority for N6), plus _v2, DESIGN_encounter_export_v2, and the
-    fix/test set.
-- **No Studio running ledger yet** -- by design (Tony, June 8): stand one up only
-  if/when Studio work resumes in volume. Until then these open items live here.
-
-**Joined / cross-repo items (tracked in their orrery homes; cross-referenced):**
-- **N6** -- encounter-preset generator (Studio repo) refactor + Artemis preset
-  redo (orrery repo). See D.Feature Bucket C.
-- **Item 19** -- plot-cube control parity: port the Studio plot-cube control set
-  to the orrery GUI. See D.Feature Bucket A.
-
-**Open Studio items (carried from the May-5 handoff; statuses checked @2f40d9d
-where file-verifiable):**
-- Encounter export: test with various mission types `[per handoff]`; camera
-  capture -- still NOT extracted, confirmed `[verified @2f40d9d]` (sibling of the
-  N6 second-view gap); link-icon end-to-end test `[per handoff]`.
-- Content re-population: re-export ALL existing gallery content through the
-  Studio (WYSIWYG refactor moved transforms into the Studio; index applies none).
-  Not file-verifiable from a clone `[per handoff]`.
-- Website chrome `[verified @2f40d9d]`: gallery-card thumbnails -- ABSENT (open);
-  content pages About/Downloads/Contact -- ABSENT (only index.html exists, open);
-  social link-preview og:image -- a meta tag IS present in index.html (per-card
-  previews unconfirmed; treat as partial).
-
-**Recently closed (verified this session @uploads/HEAD):**
-- `_enter_orrery_mode()` reset to DEFAULT_CONFIG -- DONE (`[verified @2f40d9d]`,
-  tools/gallery_studio.py ~L4775).
-- `ongoing` added to spacecraft_encounters.py status comment -- DONE (verified, L60).
+- **Repo source.** https://github.com/tonylquintanilla/tonyquintanilla.github.io
+  -- owner WITH the 'l', repo name WITHOUT; branch main; public; HEAD
+  verified June 8 == `2f40d9d`; custom domain palomasorrery.com; Studio file
+  tools/gallery_studio.py (NOT root). Uploaded Studio byte-identical
+  @2f40d9d.
+- **Docs split:** WEBSITE repo documentation/ holds web_gallery_handoff.md +
+  3d_axis_control_handoff.md `[verified @2f40d9d]`; ORRERY repo
+  documentation/ holds the encounter-export design set incl.
+  ENCOUNTER_EXPORT_HANDOFF_v3.md `[verified @730b2bf]`.
+- **No Studio running ledger** by design (stand one up only if Studio work
+  resumes in volume).
+- **Joined items:** N6 (Bucket C) and item 19 (Bucket A) -- tracked in their
+  orrery homes, cross-referenced here.
+- **Open Studio items** (May-5 handoff; checked @2f40d9d where
+  file-verifiable): encounter-export mission-type testing `[per handoff]`;
+  camera capture NOT extracted `[verified]`; link-icon end-to-end test
+  `[per handoff]`; content re-population through the Studio `[per handoff]`;
+  gallery-card thumbnails ABSENT; About/Downloads/Contact pages ABSENT;
+  og:image meta present (per-card previews unconfirmed).
+- **Recently closed:** _enter_orrery_mode() DEFAULT_CONFIG reset
+  `[verified @2f40d9d ~L4775]`; 'ongoing' status comment
+  (spacecraft_encounters.py L60, verified).
 
 ---
 
