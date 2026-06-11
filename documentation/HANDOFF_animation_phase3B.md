@@ -104,4 +104,108 @@ palomas_orrery.py (6 hunks; file 10,062 -> 10,239 lines):
   mode, sodium tail, per-element hover disclosure sweep, consolidated
   auto-scale (with Finding-1 cases as test fixtures).
 
-Module updated: June 2026 with Anthropic's Claude Fable 5
+## Session B Test Results (June 11, 2026 -- Tony, Mode 5)
+
+Tested at HEAD e5fd86df57e279dc5f59576ea668848d95e1efc1. Engine and
+greyed legend verified on Windows, Python 3.13.
+
+### B1 -- Uranus headline
+- PARTIAL PASS. Console reports 3 element groups, ~27.1 KB/frame (correct).
+  Greyed "Uranus: Magnetosphere (static plots only)" in legend (correct).
+  No assert errors. HOWEVER: at solar system scale the riding primitives
+  are subpixel on Uranus -- visual verification of per-frame movement is
+  impossible. Fly To only shows frame 1 position, cannot track across
+  frames. The engine appears to work (console confirms allocation and
+  rebuild) but Mode-5 visual confirmation of the riding behavior requires
+  tooling that doesn't exist yet. LEDGER ITEM.
+
+### B2 -- Earth non-center
+- SAME as B1. Engine allocates and rebuilds, greyed legend correct, but
+  riding primitives not visually verifiable at solar system scale.
+
+### B3 -- Sun as non-center
+- PASS. Sun's rotation axis rides the moving Sun marker in Earth-centered
+  view. Sun direction indicator correctly suppressed. Sun shells greyed
+  in legend. Center body's Sun Direction indicator stays frozen at frame 1
+  (known Phase 1 behavior, not a regression).
+
+### B3 bonus -- Earth-Moon Barycenter centered
+- FINDING: Earth's Sun Direction indicator points at the Moon (not the
+  Sun) and tracks the Moon's orbit as it moves. This is a physics bug:
+  when the Sun checkbox is off, the engine falls back to the frame-1 Sun
+  position which defaults to (0,0,0) -- the barycenter. The indicator
+  points from Earth toward (0,0,0), which visually aligns with the Moon's
+  direction since Earth and Moon are on opposite sides of the barycenter.
+  FIX NEEDED: when Sun is not in positions_over_time, the engine should
+  fetch the Sun's actual position rather than using (0,0,0). Session C
+  scope.
+- Earth's rotation axis stays in correct relative position as Earth orbits
+  the barycenter. Earth's and Moon's sphere shells greyed at legend bottom.
+
+### B4 -- Legend disclosure
+- PASS. Greyed entries at legend bottom, muted style, italic note. Click
+  wart (un-mutes text, nothing renders) ACCEPTABLE -- meaning is clear.
+
+### B5 -- Payload measurement
+- DEFERRED. Measurement tool needs a file browser dialog (like Gallery
+  Studio) for convenience -- the HTML files are saved in a separate folder.
+  LEDGER ITEM: upgrade measure_animation_html.py with tkinter file browser.
+
+### B6 -- Regression
+- PASS. Animated inner planets, no shells: no engine console line, no
+  greyed entries. Static plot with shells: shell_configs per_frame tags
+  are inert. No overhead when unused.
+
+### Observation Log v3 (O10-O13)
+
+O10 -- Riding primitives read okay where visible. At planetary scale
+(Earth-centered) the axis and indicators are discernible and educational.
+At solar system scale (Sun-centered outer planets) they are subpixel.
+
+O11 -- Greyed legend naming quality: good. Names derive correctly from
+checkbox keys.
+
+O12 -- Scaling: Sun Direction indicator clipping by cube range (previously
+noted). Sun orbit around Earth center lacks buffer (previously noted).
+
+O13 -- Additional findings:
+(a) Console spam: "Sun direction indicator: Using shell radius..." prints
+    29 times (once per frame rebuild). Should be suppressed after first
+    print or gated behind a verbose flag. Session C scope.
+(b) Fly To zoom limit does not reach shell-discernible distance for
+    planets. Computed from orbital distance or marker size, not shell
+    extent. Comets are okay (tail geometry is large enough). Planets
+    stop too far away to see magnetosphere, radiation belts, etc. Fly To
+    distance should consider shell extent when shells are checked.
+    LEDGER ITEM: part of scaling/cube/grid comprehensive review.
+(c) No camera-tracking-across-frames capability exists. Fly To shows
+    frame 1 only. To visually verify per-frame engine at outer-planet
+    scales, either camera tracking or directional-arrow camera control
+    (available in Gallery Studio 2D but not Plotly 3D) would be needed.
+    LEDGER ITEM.
+
+### Session B Disposition
+
+Session B CONDITIONALLY RENDER-CONFIRMED. Engine allocates, rebuilds,
+and budget-reports correctly. Greyed legend disclosure works and is
+accepted. No regressions. Riding behavior visually confirmed at
+planet-centered scale (B3) but not at solar-system scale (B1/B2) due
+to tooling gap. The engine is architecturally sound; the visual
+verification gap is a tooling issue, not an engine issue.
+
+Barycenter Sun-Direction bug (B3 bonus) is a real physics error requiring
+a fix in Session C (fetch Sun position when Sun checkbox is off).
+
+### New Ledger Items
+
+- Fly To zoom limit: should consider shell extent, not just orbital
+  distance. Part of scaling/cube/grid review (O6c).
+- Camera tracking across animation frames: no mechanism exists. Needed
+  for visual verification at outer-planet scales.
+- measure_animation_html.py: add tkinter file browser dialog.
+- Console spam: Sun direction indicator message per frame. Suppress
+  after first or gate behind verbose flag.
+- Barycenter Sun-Direction indicator bug: points at barycenter (0,0,0)
+  instead of Sun when Sun checkbox off. Session C fix.
+
+Module updated: June 2026 with Anthropic's Claude Fable 5 + Claude Sonnet 4.6
