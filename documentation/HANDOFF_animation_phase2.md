@@ -221,4 +221,151 @@ Osculating hover labeling fixed separately (pre-existing, one file).
 - New SHA after push carries: Phase 2 helpers (6a0ac28 base) + osculating
   label fix + authorship update.
 
+## Phase 3 Design Decisions (June 10, 2026 -- Tony + Claude Sonnet)
+
+Tony reviewed Fable 5's Phase 3 scope proposal with Claude Sonnet's
+interpretation assist. Five decision points addressed. Fable 5's opinion
+sought on undetermined elements and open design questions before convergence.
+
+### Decision 1: Tier 2 committed
+
+YES. Tier 2 (per-frame re-emission of small primitives) is the committed
+direction. Tiers 1 and 3 are not parked outright but reframed:
+
+- Tier 1 (static-at-frame-1) remains the default for large geometry (sphere
+  shells) -- this is how they already behave post-Phase-1. The honesty
+  problem Fable 5 identified (Moon vs Uranus drift rates) is real and should
+  be disclosed, not suppressed.
+- Tier 3 (full shell re-emission) is reframed as "reduced-resolution
+  per-frame re-emission" -- a measured follow-on to tier 2, not a separate
+  tier. See Decision 5.
+
+Explicit trace inventory for the per-frame engine:
+
+PER-FRAME (small primitives, orientation/position-dependent):
+  - Rotation axis lines (auto-triggered with center body shells, no checkbox)
+  - Dipole cone
+  - Sun direction indicator + line
+  - Comet tails (opt-in mode, second engine customer)
+
+FRAME-1-ONLY (large geometry, static after initial render):
+  - All sphere shells (magnetosphere, bow shock, radiation belts, corona
+    layers, photosphere mesh, core, etc.)
+  - With reduced-resolution per-frame as a measured follow-on (Decision 5)
+
+NOTE: The rotation axis is not checkbox-controlled -- it is automatically
+added when the center body shell dispatch fires. This simplifies the
+per-frame engine: it is always present when shells are on, no conditional
+UI gating needed.
+
+QUESTION FOR FABLE 5: Is this trace inventory complete? Are there other
+small primitives or orientation-dependent elements that should be in the
+per-frame category? What about the info markers that ride on shells --
+should those move with a non-center body or stay at frame-1 position?
+
+### Decision 2: Console notice for 3a
+
+Console notice for the O2/O3 no-ops, not UI greying. The greying-out
+approach (similar to Gallery Studio's preset mode) has a fundamental
+sequencing problem: checkboxes are selected BEFORE the animation button
+is clicked, so there is no animation-context moment to grey them out.
+A proper solution would require rethinking the flow:
+
+  animation checkbox --> context-aware checkboxes --> animation button
+
+This is significant GUI surgery that should not be designed before the
+per-frame engine settles, because the engine determines which elements
+are per-frame vs static vs unavailable -- and that fence may move as
+the engine matures.
+
+For now: console notice + disclosure in the rendered output (title or
+annotation) indicating which elements are per-frame animated vs frame-1
+frozen. The user sees everything they checked rendered; the disclosure
+tells them which moves and which is frozen. Honest without restrictive.
+
+QUESTION FOR FABLE 5: What is the right disclosure mechanism in the
+rendered HTML? A subtitle annotation? A hover-accessible note? Something
+in the legend? What have you seen work in Plotly for this kind of
+per-element status disclosure without cluttering the visualization?
+
+### Decision 3: Auto-scale through consolidated pipeline
+
+Auto-scale should NOT be a standalone 3a one-line patch. It should ride
+the consolidated pipeline in 3b, where the engine knows what is rendered
+and the scale calculation accounts for it naturally. A one-line patch on
+the current animate path risks being overwritten or creating a second
+scaling mechanism when the pipeline consolidation lands.
+
+QUESTION FOR FABLE 5: Does this change your 3a scope? If auto-scale
+moves to 3b, what remains in 3a beyond the console notice and the
+wrapper retirement?
+
+### Decision 4: Comet tails in 3b first cut
+
+YES. Include comet tails as the second customer of the per-frame engine.
+This validates the engine's generality -- if it can handle both rotation
+primitives (orientation-dependent, position-fixed) AND comet tails
+(position-dependent, builder-generated), the architecture is proven.
+If deferred, 3b ships as a single-customer engine and the generality
+claim is untested.
+
+QUESTION FOR FABLE 5: The current comet tail builder generates the tail
+geometry from a position + anti-sunward direction. In the per-frame
+engine, would the tail be rebuilt from scratch each frame (calling the
+builder with the new position), or would the frame-1 tail geometry be
+translated/rotated to the new position? The former is more honest
+physically (tail direction changes as the comet moves relative to the
+Sun); the latter is cheaper. What is your recommendation?
+
+### Decision 5: Element fence -- first cut + measured follow-on
+
+First cut = small primitives only: rotation axis, dipole cone, sun
+direction indicator, comet tails. These are geometrically light and the
+per-frame cost is known to be negligible.
+
+Second cut = reduced-resolution sphere shells (bow shock, magnetosphere),
+GATED on two measurements before committing:
+  (a) Byte budget: Fable 5 measures what a 4x-reduced magnetosphere costs
+      per frame and confirms 29 frames stays within the Phase-1 savings.
+  (b) Render quality: Tony reviews the reduced-resolution shell in Mode 5
+      and judges whether it serves educationally at the lower fidelity.
+
+This is a tier 2 + tier 3 hybrid: frame 1 gets full-resolution shells,
+subsequent frames get simplified versions. Architecturally this means the
+shell builders need a "resolution mode" parameter -- real design work, but
+it keeps the door open rather than parking tier 3 permanently.
+
+Tony's instinct: anything pertaining to the planet or Sun's orientation
+should move per-frame (rotation axis, comet tails, sun direction). Bow
+shock and magnetosphere are desirable but the byte cost must be measured
+first. The educational value of seeing the magnetotail sweep as Earth
+orbits is high -- this is worth pursuing if the budget allows.
+
+QUESTION FOR FABLE 5: What is your estimate of the design work for
+resolution-mode shell builders? Is this a parameter addition to
+build_sphere_shell (e.g., n_points=400 default, n_points=100 for
+per-frame), or does it require a different builder architecture? And
+for the magnetosphere specifically (CUSTOM_SHELLS, not sphere shells),
+what would "reduced resolution" look like?
+
+### Proposed 3a/3b split (for Fable 5's review)
+
+3a (surgical, independently shippable):
+  - O2/O3 console notices for non-center/offset-Sun shell no-ops
+  - Phase 2.5 wrapper retirement (one site)
+  - No auto-scale patch (deferred to 3b)
+
+3b (the engine, multi-session, design-before-code):
+  - Per-frame primitive registry and frame-loop extension
+  - First customers: rotation axis + dipole cone + sun direction + info
+    markers on non-center bodies
+  - Second customer: comet tails (opt-in)
+  - Auto-scale through consolidated pipeline
+  - Measured follow-on: reduced-resolution shells if budget allows
+
+QUESTION FOR FABLE 5: Does this split make sense? Is 3a worth shipping
+independently, or should it just fold into 3b's first session? And what
+is your estimate of the session count for 3b -- is this a two-session
+or three-session effort?
+
 Module updated: June 2026 with Anthropic's Claude Fable 5 + Claude Sonnet 4.6
