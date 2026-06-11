@@ -498,6 +498,18 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
 def create_planet_visualization(fig, planet_name, shell_vars, animate=False, frames=None, center_position=(0, 0, 0), sun_position=(0, 0, 0)):
 
     """
+    RETIRED (June 2026, animation refactor Phase 2.5 / D.Structural 3).
+    Zero live call sites remain in the pipelines: all three former callers in
+    palomas_orrery.py (add_center_body_shells planet branch; the static
+    planets_with_shells center-fallback and non-center sites) now call
+    create_celestial_body_visualization directly with the true
+    center_object=center_object_name -- the Phase-D correction the per-body
+    delegation notes below anticipated. palomas_orrery_helpers.py still
+    IMPORTS this name (dead import; rides the D.Structural 5/6 cleanup
+    sweeps). Kept as dead code per discipline (annotate; do not remove
+    without grep-confirm at sweep time). DO NOT add new callers.
+
+    --- original docstring ---
     Creates a visualization of a planet's layers based on which shells are selected.
     Works for both static plots and animations.
     

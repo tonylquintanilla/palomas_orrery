@@ -99,7 +99,6 @@ from comet_visualization_shells import (
 )
 from planet_visualization import (              # the greyed out imports are created in runtime with celestial_objects.py
     create_celestial_body_visualization,
-    create_planet_visualization,
     create_planet_shell_traces,
 
     mercury_inner_core_info,
@@ -1966,8 +1965,9 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
     """(2c) Center-body shell dispatch -- one implementation, both pipelines.
 
     Sun center: unified dispatch (create_celestial_body_visualization) plus
-    the standalone asteroid-belt geometry. Planet center: the
-    create_planet_visualization wrapper (delegates to the unified dispatch)
+    the standalone asteroid-belt geometry. Planet center: the same unified
+    dispatch, called directly (the create_planet_visualization wrapper was
+    retired June 2026, Phase 2.5)
     with the threaded sun_position. Either branch applies the shell
     auto-scale when scale_value == 'Auto' (live in the static pipeline; the
     animate pipeline currently recomputes axis_range downstream and ignores
@@ -2019,9 +2019,15 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
     elif center_object_name in planet_shell_vars_map:
         shell_vars = planet_shell_vars_map[center_object_name]
         if any(var.get() == 1 for var in shell_vars.values()):
-            fig = create_planet_visualization(fig, center_object_name, shell_vars,
-                                              center_position=(0, 0, 0),
-                                              sun_position=sun_position)
+            # (2.5) Unified dispatch direct (center body: center_object ==
+            # body by construction -- identical to the retired wrapper).
+            fig = create_celestial_body_visualization(
+                fig, center_object_name, shell_vars,
+                center_position=(0, 0, 0),
+                sun_position=sun_position,
+                object_type=center_object_name,
+                center_object=center_object_name,
+            )
             center_shells_added = True
             if log_prefix:
                 print(f"{log_prefix}Added {center_object_name} shells ({len(fig.data)} static traces)", flush=True)
@@ -4695,12 +4701,17 @@ def plot_objects():
                     # For center planet, position at (0,0,0)
                     if is_center and not center_shells_added:
                         print(f"\nAdding shells for center planet {planet_name}", flush=True)
-                        fig = create_planet_visualization(
+                        # (2.5) Unified dispatch direct (is_center here, so
+                        # center_object == planet_name -- identical to the
+                        # retired wrapper's hardcode).
+                        fig = create_celestial_body_visualization(
                             fig,
                             planet_name,
                             planet_shell_vars[planet_name],
                             center_position=(0, 0, 0),
-                            sun_position=_sun_pos_tuple
+                            sun_position=_sun_pos_tuple,
+                            object_type=planet_name,
+                            center_object=center_object_name,
                         )
                     # For non-center planets, use their actual positions
                     elif not is_center and 'position' in planet_data and planet_data['position'] is not None:
@@ -4709,12 +4720,20 @@ def plot_objects():
                             print(f"\nAdding shells for non-center planet {planet_name}", flush=True)
                             
                             # Always add the planet shells
-                            fig = create_planet_visualization(
-                                fig,                            
-                                planet_name,                    
-                                planet_shell_vars[planet_name], 
+                            # (2.5) Unified dispatch direct. center_object is
+                            # now the TRUE plot center (the retired wrapper
+                            # hardcoded center_object=planet_name) -- the
+                            # Phase-D correction its own comment promised.
+                            # Affects only sun-direction indicator suppression
+                            # logic for non-center shells. [render-gated]
+                            fig = create_celestial_body_visualization(
+                                fig,
+                                planet_name,
+                                planet_shell_vars[planet_name],
                                 center_position=planet_data['position'],
-                                sun_position=_sun_pos_tuple
+                                sun_position=_sun_pos_tuple,
+                                object_type=planet_name,
+                                center_object=center_object_name,
                             )
 
             # Add Sun shells when viewing from non-Sun center (unified dispatch)
@@ -6238,6 +6257,25 @@ def animate_objects(step, label):
             # trace_indices, so frames never carry it.
             add_center_body_marker(fig, center_object_name,
                                    params=active_planetary_params)
+
+            # (3a) Honest no-op notices (O2/O3): shells checked for bodies the
+            # animate path cannot yet render. They DO render in static plots
+            # and in body-centered animations. Per-frame/non-center rendering
+            # is Phase 3 scope; until then, say so instead of silence.
+            if center_object_name != 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
+                print(f"[ANIMATION] NOTE: Sun shells are checked but not yet rendered in "
+                      f"{center_object_name}-centered animations (Phase 3 scope). "
+                      f"They render in static plots and Sun-centered animations.", flush=True)
+            _pm_map = get_planet_shell_vars_map()
+            _skipped_shell_bodies = [
+                p for p, vs in _pm_map.items()
+                if p != center_object_name and any(v.get() == 1 for v in vs.values())
+            ]
+            if _skipped_shell_bodies:
+                print(f"[ANIMATION] NOTE: shells checked for non-center bodies "
+                      f"({', '.join(_skipped_shell_bodies)}) are not yet rendered in "
+                      f"animations (Phase 3 scope). They render in static plots or "
+                      f"when that body is the animation center.", flush=True)
 
             # Track where static traces end - frames will only update traces after this point
             static_trace_count = len(fig.data)

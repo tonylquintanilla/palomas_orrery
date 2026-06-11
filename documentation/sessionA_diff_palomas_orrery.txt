@@ -1,0 +1,78 @@
+102d101
+<     create_planet_visualization,
+1969,1970c1968,1970
+<     the standalone asteroid-belt geometry. Planet center: the
+<     create_planet_visualization wrapper (delegates to the unified dispatch)
+---
+>     the standalone asteroid-belt geometry. Planet center: the same unified
+>     dispatch, called directly (the create_planet_visualization wrapper was
+>     retired June 2026, Phase 2.5)
+2022,2024c2022,2030
+<             fig = create_planet_visualization(fig, center_object_name, shell_vars,
+<                                               center_position=(0, 0, 0),
+<                                               sun_position=sun_position)
+---
+>             # (2.5) Unified dispatch direct (center body: center_object ==
+>             # body by construction -- identical to the retired wrapper).
+>             fig = create_celestial_body_visualization(
+>                 fig, center_object_name, shell_vars,
+>                 center_position=(0, 0, 0),
+>                 sun_position=sun_position,
+>                 object_type=center_object_name,
+>                 center_object=center_object_name,
+>             )
+4698c4704,4707
+<                         fig = create_planet_visualization(
+---
+>                         # (2.5) Unified dispatch direct (is_center here, so
+>                         # center_object == planet_name -- identical to the
+>                         # retired wrapper's hardcode).
+>                         fig = create_celestial_body_visualization(
+4703c4712,4714
+<                             sun_position=_sun_pos_tuple
+---
+>                             sun_position=_sun_pos_tuple,
+>                             object_type=planet_name,
+>                             center_object=center_object_name,
+4712,4715c4723,4732
+<                             fig = create_planet_visualization(
+<                                 fig,                            
+<                                 planet_name,                    
+<                                 planet_shell_vars[planet_name], 
+---
+>                             # (2.5) Unified dispatch direct. center_object is
+>                             # now the TRUE plot center (the retired wrapper
+>                             # hardcoded center_object=planet_name) -- the
+>                             # Phase-D correction its own comment promised.
+>                             # Affects only sun-direction indicator suppression
+>                             # logic for non-center shells. [render-gated]
+>                             fig = create_celestial_body_visualization(
+>                                 fig,
+>                                 planet_name,
+>                                 planet_shell_vars[planet_name],
+4717c4734,4736
+<                                 sun_position=_sun_pos_tuple
+---
+>                                 sun_position=_sun_pos_tuple,
+>                                 object_type=planet_name,
+>                                 center_object=center_object_name,
+6240a6260,6278
+> 
+>             # (3a) Honest no-op notices (O2/O3): shells checked for bodies the
+>             # animate path cannot yet render. They DO render in static plots
+>             # and in body-centered animations. Per-frame/non-center rendering
+>             # is Phase 3 scope; until then, say so instead of silence.
+>             if center_object_name != 'Sun' and any(var.get() == 1 for var in sun_shell_vars.values()):
+>                 print(f"[ANIMATION] NOTE: Sun shells are checked but not yet rendered in "
+>                       f"{center_object_name}-centered animations (Phase 3 scope). "
+>                       f"They render in static plots and Sun-centered animations.", flush=True)
+>             _pm_map = get_planet_shell_vars_map()
+>             _skipped_shell_bodies = [
+>                 p for p, vs in _pm_map.items()
+>                 if p != center_object_name and any(v.get() == 1 for v in vs.values())
+>             ]
+>             if _skipped_shell_bodies:
+>                 print(f"[ANIMATION] NOTE: shells checked for non-center bodies "
+>                       f"({', '.join(_skipped_shell_bodies)}) are not yet rendered in "
+>                       f"animations (Phase 3 scope). They render in static plots or "
+>                       f"when that body is the animation center.", flush=True)
