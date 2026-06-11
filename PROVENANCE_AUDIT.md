@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: June 10, 2026
-Files scanned: 108
-Total findings: 493
-Constants: 61 | Dicts: 31 | Display strings: 401
+Files scanned: 109
+Total findings: 496
+Constants: 64 | Dicts: 31 | Display strings: 401
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -38,7 +38,7 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 0 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 148 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 328 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 331 |
 | 4 | 1-4 | NO ACTION NEEDED | 17 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -571,6 +571,14 @@ is planned for a future session.
 | 709 | string | display string @ line 709 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 837 | string | display string @ line 837 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
+### measure_perframe_elements.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 38 | constant | KB | 1000.0 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 39 | constant | FRAMES_29 | 29 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 40 | constant | FRAMES_60 | 60 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+
 ### mercury_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -650,7 +658,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 3115 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 3121 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### palomas_orrery_dashboard.py
 

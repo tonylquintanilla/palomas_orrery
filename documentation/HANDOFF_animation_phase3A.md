@@ -121,4 +121,88 @@ Animate:
 - NEXT: Session B (engine + first customers: axis, cone, sun indicator),
   per ANIMATION_ENGINE_DESIGN_v1.md section 10; protocol v3 issues with it.
 
-Module updated: June 2026 with Anthropic's Claude Fable 5
+## Session A Test Results (June 10, 2026 -- Tony, Mode 5)
+
+Tested at HEAD 9b6a820ac5d0f6690541c774e631d17261373965. Wrapper
+retirement and O2/O3 notices verified on Windows, Python 3.13.
+
+### Static, center + shells
+- PASS. Earth center + magnetosphere. Identical to pre-patch. Wrapper
+  swap did not change center dispatch.
+
+### Static, non-center shells (RENDER GATE)
+- MOSTLY PASS with scaling finding. Sun-centered, Earth magnetosphere
+  checked. Magnetosphere renders correctly at Earth's position (verified
+  via Fly To). Rotation axis correctly triggered by shell dispatch.
+  HOWEVER: when Sun photosphere was added as a test, the auto-scale
+  collapsed from ~1.2 AU to 0.009 AU (photosphere extent only), hiding
+  Earth's orbit entirely. Manual scale override to 1.5 AU required to
+  see Earth. Scale should be max(shell extent, orbital extent), not
+  shell extent alone. Pre-existing, validates Decision 3 (auto-scale
+  through consolidated pipeline, not standalone patch).
+
+### Animate, Earth-centered with Sun shells checked (O2)
+- PASS with disclosure finding. Earth magnetosphere renders correctly.
+  O2 console NOTE prints: "[ANIMATION] NOTE: Sun shells are checked but
+  not yet rendered in Earth-centered animations (Phase 3 scope)."
+  However, the note is buried in heavy Horizons output and practically
+  invisible to the user. See disclosure upgrade below.
+  Cube grid set at exactly 1 AU without buffer -- noted.
+
+### Animate, Sun-centered with Earth magnetosphere checked (O3)
+- PASS with disclosure finding. Sun shells plot, Earth's do not (correct
+  behavior). O3 console NOTE prints listing Earth. Same visibility
+  problem as O2. Grid renders correctly with 1.3 buffer.
+
+### P3-style regression
+- PASS. Earth center + magnetosphere + Moon animation. Center marker,
+  shells, payload all match Phase 2. NOTED: Sun Direction indicator
+  truncated by cube range (sized to magnetosphere extent). Same class
+  of scaling issue as the photosphere finding above.
+
+### Provenance scan
+- Tier 1 = 0. Clean.
+
+### Findings for Session B/C
+
+**1. SCALING requires dedicated attention.** Two manifestations of the
+same root issue: (a) photosphere auto-scale collapses cube to shell
+extent, hiding orbital geometry; (b) Sun Direction indicator truncated
+by cube sized to magnetosphere. The fix belongs in the consolidated
+pipeline (Decision 3) where the engine computes axis_range as
+max(orbital, shell, engine element extents). This needs a dedicated
+session or portion of one, with thorough Mode-5 review of all
+scale combinations. Ledger item: scaling/cube/grid comprehensive
+review (from O6c) now has concrete test cases.
+
+**2. GREYED-OUT LEGEND replaces console notices as disclosure.**
+Console notices (O2/O3) print correctly but are buried in output.
+The user looking for a missing trace looks at the LEGEND, not the
+console. Proposed upgrade: instead of omitting unrenderable traces
+from the legend entirely, include them as greyed-out legend entries
+with a parenthetical note explaining why. Example:
+
+  Earth: Magnetosphere *(static plots only)*
+
+This is per-element (not a blanket footnote), uses the UI surface the
+user already interacts with (legend toggle), and answers the question
+"where did my trace go?" right where the user looks. This supersedes
+both the console notices (3a) AND the paper-coordinates footnote
+proposed in ANIMATION_ENGINE_DESIGN_v1.md section 8. The console
+notices remain as developer diagnostics; the legend is the user-facing
+disclosure.
+
+QUESTION FOR FABLE 5: Is this achievable in Plotly? A legend entry
+with `visible=False` or `visible='legendonly'` appears greyed in the
+legend but doesn't render -- that may be the mechanism. Can the trace
+name carry a parenthetical note without breaking legendgroup toggles?
+What are the Plotly constraints here?
+
+**3. Sun-only center body (no shells checked) does not show rotation
+axis.** For planets, the rotation axis is auto-triggered by the center
+body dispatch. For the Sun, it requires a shell checkbox (e.g.,
+photosphere). This is pre-existing behavior, not a regression. Noted
+for the engine design -- the per-frame axis rendering for non-center
+bodies should follow the same trigger as the center dispatch.
+
+Module updated: June 2026 with Anthropic's Claude Fable 5 + Claude Sonnet 4.6
