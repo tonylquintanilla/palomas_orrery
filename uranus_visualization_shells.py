@@ -588,6 +588,9 @@ def create_uranus_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
         "Subsolar standoff ~23.7 R_U "
         f"({bs_km:,.0f} km / {bs_standoff:.4f} AU).<br>"
         "Source: Ness et al. 1986, Voyager 2 (single flyby, single-epoch).<br>"
+        "Conic-section MODEL: standoff distance is sourced; the flank shape is "
+        "schematic (eccentricity 1.05, illustrative). In animations the shock "
+        "is fixed at the animation start.<br>"
         "The Bow Shock points towards the Sun along the X-axis. The XY plane is the ecliptic."
     )
     bs_geom = go.Scatter3d(

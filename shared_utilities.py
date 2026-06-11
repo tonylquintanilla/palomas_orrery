@@ -138,7 +138,9 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
         f"{legend_name}<br><br>"
         "Sun Direction: Arrow points from this body toward the Sun.<br>"
         f"Distance to Sun: {dist_au:.4f} AU ({dist_km:,.0f} km)<br>"
-        f"Indicator length: {scale_text}"
+        f"Indicator length: {scale_text}<br><br>"
+        "In animations: the center body's indicator is fixed at the<br>"
+        "animation start; non-center indicators update each frame."
     )
 
     # Dashed yellow line from center toward Sun

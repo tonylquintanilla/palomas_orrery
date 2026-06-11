@@ -2086,3 +2086,27 @@ def _compute_maps_disintegration_position():
         y = (sin_O*cos_o + cos_O*sin_o*cos_i)*xo + (-sin_O*sin_o + cos_O*cos_o*cos_i)*yo
         z = (sin_o*sin_i)*xo + (cos_o*sin_i)*yo
         return (x, y, z)
+
+def build_comet_tail_traces(comet_name, position_data, center_object_name='Sun',
+                            current_date=None, sun_position=None):
+    """Trace-returning core for comet tail visualization (21/51 Phase 3
+    Session C). Capture-by-composition: runs the existing fig-mutating
+    add_comet_tails_to_figure on a PRIVATE figure and returns its traces --
+    faithful by construction, zero changes to the 240-line builder.
+
+    Consumed by the per-frame animation engine (palomas_orrery.py). Note:
+    trace count VARIES with distance from Sun (features cross activity
+    thresholds), so the engine treats this as a variable-count element
+    (pad-to-max allocation). MAPS is excluded from per-frame mode (its
+    date-gated disintegration logic and fig-coupled ghost-tail trace are
+    frame-1 static by design).
+
+    Module updated: June 2026 with Anthropic's Claude Fable 5
+    """
+    import plotly.graph_objects as go
+    _fig = go.Figure()
+    add_comet_tails_to_figure(_fig, comet_name, position_data,
+                              center_object_name=center_object_name,
+                              current_date=current_date,
+                              sun_position=sun_position)
+    return list(_fig.data)

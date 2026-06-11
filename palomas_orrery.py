@@ -94,7 +94,8 @@ from comet_visualization_shells import (
     create_complete_comet_visualization,
     HISTORICAL_TAIL_DATA,
     calculate_tail_activity_factor,
-    add_comet_tails_to_figure,           
+    add_comet_tails_to_figure,
+    build_comet_tail_traces,           
     COMET_FEATURE_THRESHOLDS     
 )
 from planet_visualization import (              # the greyed out imports are created in runtime with celestial_objects.py
@@ -2083,8 +2084,17 @@ def collect_perframe_elements(center_object_name, candidate_body_names):
         if not shell_vars or not any(v.get() == 1 for v in shell_vars.values()):
             continue
         customs = CUSTOM_SHELLS.get(body, {})
+        _body_prefix = body.lower().replace(' ', '_') + '_'
         for element, entry in customs.items():
             if not (isinstance(entry, dict) and entry.get('per_frame')):
+                continue
+            # (Session C) Checkbox-gated elements: if this element has its
+            # own checkbox in the body's shell vars (e.g. Mercury sodium
+            # tail), it animates only when THAT box is checked. Elements
+            # without a matching checkbox (rotation axis, dipole cone) ride
+            # the any-shell-checked trigger, mirroring the center dispatch.
+            _own_var = shell_vars.get(_body_prefix + element) or shell_vars.get(element)
+            if _own_var is not None and _own_var.get() != 1:
                 continue
             mod_path, fn_name = entry['builder'].rsplit('.', 1)
             builder = getattr(_importlib.import_module(mod_path), fn_name)
@@ -2116,48 +2126,160 @@ def collect_perframe_elements(center_object_name, candidate_body_names):
                     'body_name': body,
                 },
             })
+
+    # (Session C) Comet tails as engine customers -- OPT-IN via the
+    # animation-settings checkbox; default off (O1 decision). MAPS is
+    # excluded (date-gated disintegration + fig-coupled ghost tail stay
+    # frame-1 static). Variable-count: features cross distance thresholds,
+    # so allocation probes all frames and pads to the maximum.
+    try:
+        _tails_on = animate_comet_tails_var.get() == 1
+    except Exception:
+        _tails_on = False
+    if _tails_on:
+        for obj in objects:
+            name = obj.get('name')
+            if name not in candidate_body_names or name == center_object_name:
+                continue
+            if name == 'MAPS':
+                continue
+            is_comet = (
+                obj.get('object_type') in ['orbital', 'trajectory'] and
+                obj.get('id_type') in ['smallbody', 'id'] and
+                obj.get('symbol') == 'diamond' and
+                obj.get('show_tails', True)
+            )
+            if not is_comet:
+                continue
+            specs.append({
+                'body': name,
+                'element': 'comet_tail',
+                'callable': build_comet_tail_traces,
+                'needs_planet_name': False,
+                'needs_sun_position': True,
+                'indicator_kwargs': None,
+                'comet': True,
+                'comet_center': center_object_name,
+                'variable_count': True,
+            })
     return specs
 
 
-def build_perframe_traces(spec, body_pos, sun_pos):
+def build_perframe_traces(spec, body_pos, sun_pos, frame_entry=None,
+                          frame_date=None, quiet=False):
     """(Phase 3) The one rebuild mechanism: call the spec's builder at this
-    frame's context. Returns the builder's trace list."""
-    if spec['indicator_kwargs'] is not None:
-        return spec['callable'](center_position=body_pos,
-                                sun_position=sun_pos,
-                                **spec['indicator_kwargs'])
-    kwargs = {}
-    if spec['needs_planet_name']:
-        kwargs['planet_name'] = spec['body']
-    if spec['needs_sun_position']:
-        kwargs['sun_position'] = sun_pos
-    return spec['callable'](body_pos, **kwargs)
+    frame's context. Returns the builder's trace list.
+
+    quiet=True suppresses stdout for the duration of the builder call --
+    per-builder console messages then print once at allocation, not once
+    per frame (O13a console-spam fix). frame_entry is the body's raw
+    position dict for this frame (comet builders consume it directly,
+    velocity fields included); frame_date is the frame's datetime.
+    """
+    import contextlib, io
+
+    def _call():
+        if spec.get('comet'):
+            _center = spec.get('comet_center', 'Sun')
+            return spec['callable'](
+                spec['body'], frame_entry,
+                center_object_name=_center,
+                current_date=frame_date,
+                sun_position=None if _center == 'Sun' else sun_pos)
+        if spec['indicator_kwargs'] is not None:
+            return spec['callable'](center_position=body_pos,
+                                    sun_position=sun_pos,
+                                    **spec['indicator_kwargs'])
+        kwargs = {}
+        if spec['needs_planet_name']:
+            kwargs['planet_name'] = spec['body']
+        if spec['needs_sun_position']:
+            kwargs['sun_position'] = sun_pos
+        return spec['callable'](body_pos, **kwargs)
+
+    if quiet:
+        with contextlib.redirect_stdout(io.StringIO()):
+            return _call()
+    return _call()
 
 
-def allocate_perframe_elements(fig, specs, positions_over_time, sun_pos_fallback):
+def _pad_perframe_traces(traces, target_count, body, element, frame_i):
+    """(Session C) Pad a variable-count element's rebuilt traces to its
+    allocated slot count with invisible dummies. A rebuild EXCEEDING the
+    allocation is a real stability violation (the allocation-time max probe
+    missed a case) and fails loud."""
+    if len(traces) > target_count:
+        raise AssertionError(
+            f"[ANIMATION] FATAL: {body}/{element} produced {len(traces)} "
+            f"traces at frame {frame_i}, exceeding the allocated maximum "
+            f"{target_count} -- max-probe missed a case")
+    out = list(traces)
+    while len(out) < target_count:
+        out.append(go.Scatter3d(x=[None], y=[None], z=[None], mode='markers',
+                                visible=False, showlegend=False,
+                                hoverinfo='skip', name=''))
+    return out
+
+
+def allocate_perframe_elements(fig, specs, positions_over_time, engine_sun_traj,
+                               dates_list):
     """(Phase 3) Frame-1 allocation: build each element once at its frame-1
     context, append the traces (this IS frame 1's content), and record the
     absolute trace indices. Returns (groups, total_kb_per_frame).
 
-    Trace-count stability: the count recorded here is the contract every
-    later frame must match (loud assert in the frame loop). An element whose
-    builder returns zero traces at frame 1 (e.g. the indicator's
-    body-at-Sun suppression) is recorded with count 0 and never rebuilt.
+    engine_sun_traj (Session C, the B3-bonus barycenter fix): the RESOLVED
+    Sun trajectory -- positions_over_time['Sun'] when the Sun checkbox is
+    on, an engine-fetched trajectory when it is off, or None when the fetch
+    failed. (0,0,0) is a rotation-skip sentinel for shell orientation; it is
+    NEVER drawn toward. Sun-direction-dependent elements are SUPPRESSED
+    (skipped with a console note) when engine_sun_traj is None -- no arrow
+    is honest, a wrong arrow is not.
+
+    Variable-count elements (comet tails): the allocation probes EVERY
+    frame's trace count (quiet) and allocates the maximum, padding frame-1
+    content with invisible dummies; the frame loop pads each rebuild the
+    same way. Fixed-count elements keep the strict equality contract.
     """
     import plotly.io as _pio
     groups = []
     total_bytes = 0
-    sun_traj = positions_over_time.get('Sun')
     for spec in specs:
         body_traj = positions_over_time.get(spec['body'])
         if not body_traj or body_traj[0] is None or 'x' not in body_traj[0]:
             continue  # no frame-1 position; element skipped this animation
-        bpos = (body_traj[0]['x'], body_traj[0]['y'], body_traj[0]['z'])
-        if sun_traj and sun_traj[0] is not None and 'x' in sun_traj[0]:
-            spos = (sun_traj[0]['x'], sun_traj[0]['y'], sun_traj[0]['z'])
-        else:
-            spos = sun_pos_fallback
-        traces = build_perframe_traces(spec, bpos, spos)
+        if spec['needs_sun_position'] and engine_sun_traj is None:
+            print(f"[ANIMATION] NOTE: {spec['body']}/{spec['element']} "
+                  f"suppressed -- Sun position unresolvable (fetch failed); "
+                  f"the engine never points at a placeholder position.",
+                  flush=True)
+            continue
+        def _sun_at(_k):
+            if engine_sun_traj and _k < len(engine_sun_traj) and \
+                    engine_sun_traj[_k] is not None and 'x' in engine_sun_traj[_k]:
+                _s = engine_sun_traj[_k]
+                return (_s['x'], _s['y'], _s['z'])
+            return (0, 0, 0)  # only reachable for non-sun-needing builders
+        bpos0 = (body_traj[0]['x'], body_traj[0]['y'], body_traj[0]['z'])
+        traces = build_perframe_traces(spec, bpos0, _sun_at(0),
+                                       frame_entry=body_traj[0],
+                                       frame_date=dates_list[0])
+        count = len(traces)
+        if spec.get('variable_count'):
+            # Max-probe across all frames (quiet) so every frame's rebuild
+            # fits the allocated slots.
+            for _k in range(1, len(dates_list)):
+                _e = body_traj[_k] if _k < len(body_traj) else None
+                if _e is None or 'x' not in _e:
+                    continue
+                _n = len(build_perframe_traces(
+                    spec, (_e['x'], _e['y'], _e['z']), _sun_at(_k),
+                    frame_entry=_e, frame_date=dates_list[_k], quiet=True))
+                count = max(count, _n)
+            traces = _pad_perframe_traces(traces, count, spec['body'],
+                                          spec['element'], 0)
+            print(f"[ANIMATION] Per-frame comet tails: {spec['body']} "
+                  f"allocated {count} slots (max over {len(dates_list)} "
+                  f"frames)", flush=True)
         start = len(fig.data)
         for t in traces:
             fig.add_trace(t)
@@ -2167,7 +2289,7 @@ def allocate_perframe_elements(fig, specs, positions_over_time, sun_pos_fallback
             'element': spec['element'],
             'spec': spec,
             'indices': list(range(start, len(fig.data))),
-            'count': len(traces),
+            'count': count,
         })
     kb_per_frame = total_bytes / 1e3
     if groups:
@@ -2207,16 +2329,32 @@ def add_static_only_legend_placeholders(fig, center_object_name):
             showlegend=True,
         ))
 
+    def _engine_animates(body, key):
+        """(Session C) True when this checked shell IS engine-animated for
+        this body -- its legend entry comes from the live element, so no
+        static-only placeholder. Matches collect_perframe_elements' gating:
+        per_frame-tagged CUSTOM_SHELLS element whose name equals the
+        checkbox key (body prefix stripped)."""
+        from shell_configs import CUSTOM_SHELLS
+        if body == center_object_name:
+            return False
+        k = key
+        prefix = body.lower().replace(' ', '_') + '_'
+        if k.startswith(prefix):
+            k = k[len(prefix):]
+        entry = CUSTOM_SHELLS.get(body, {}).get(k)
+        return bool(isinstance(entry, dict) and entry.get('per_frame'))
+
     n_before = len(fig.data)
     if center_object_name != 'Sun':
         for key, var in sun_shell_vars.items():
-            if var.get() == 1:
+            if var.get() == 1 and not _engine_animates('Sun', key):
                 _placeholder('Sun', key)
     for body, shell_vars in get_planet_shell_vars_map().items():
         if body == center_object_name:
             continue
         for key, var in shell_vars.items():
-            if var.get() == 1:
+            if var.get() == 1 and not _engine_animates(body, key):
                 _placeholder(body, key)
     return len(fig.data) - n_before
 
@@ -6421,12 +6559,11 @@ def animate_objects(step, label):
                 center_object_name, _sun_entry, dates_list[0], center_id)
 
             # (2c) Center-body shell dispatch -- one implementation for both
-            # pipelines (add_center_body_shells). NOTE: the returned
-            # _shell_axis_range is intentionally unused here: the animate
-            # pipeline unconditionally recomputes axis_range via
-            # get_animation_axis_range further down, so the shell auto-scale
-            # has no effect in animations (pre-existing behavior, preserved;
-            # see ledger note "animate shell auto-scale dead").
+            # pipelines (add_center_body_shells). The returned
+            # _shell_axis_range is consumed AFTER get_animation_axis_range
+            # below: under Auto, the final cube is the LARGER of the orbital
+            # and shell extents (Session C one-line auto-scale; closes the
+            # section-G dead-auto-scale question).
             fig, center_shells_added, _shell_axis_range = add_center_body_shells(
                 fig, center_object_name, sun_shell_vars,
                 get_planet_shell_vars_map(), _sun_pos_tuple,
@@ -7027,20 +7164,53 @@ def animate_objects(step, label):
             # serialized into the saved HTML without ever being modified.
             # Fix: 21/51 Phase 1 (June 2026).
             # =================================================================
-            # (Phase 3 Session B) Per-frame engine allocation: build each
-            # eligible element once at frame-1 context (this is frame 1's
-            # content), record its trace indices, and report the byte budget.
+            # (Phase 3 Session B/C) Per-frame engine allocation. Session C
+            # adds the engine Sun-trajectory contract (the B3-bonus
+            # barycenter fix): sun-direction elements need the REAL Sun.
+            # Resolution: positions_over_time['Sun'] (checkbox on) -> engine
+            # fetch of the full Sun trajectory (checkbox off; one Horizons
+            # call per frame, the cost of one extra checked object) -> None
+            # (fetch failed; sun-direction elements suppressed at allocation).
             _engine_specs = collect_perframe_elements(
                 center_object_name, list(positions_over_time.keys()))
+            _engine_sun_traj = positions_over_time.get('Sun')
+            if (_engine_sun_traj is None
+                    and any(s['needs_sun_position'] for s in _engine_specs)
+                    and center_object_name != 'Sun'):
+                print("[ANIMATION] Sun checkbox off -- fetching Sun trajectory "
+                      "for sun-direction elements "
+                      f"({len(dates_list)} frames)...", flush=True)
+                _fetched = []
+                for _d in dates_list:
+                    _sf = fetch_position('10', _d, center_id=center_id)
+                    if not _sf or 'x' not in _sf:
+                        _fetched = None
+                        break
+                    _fetched.append(_sf)
+                _engine_sun_traj = _fetched
+            elif _engine_sun_traj is None and center_object_name == 'Sun':
+                # Heliocentric: the Sun IS the origin at every frame.
+                _engine_sun_traj = [{'x': 0.0, 'y': 0.0, 'z': 0.0}
+                                    for _ in dates_list]
+
+            def _engine_sun_pos_at(_k):
+                """Per-frame Sun position for engine rebuilds. Guaranteed
+                real whenever a sun-needing group exists (suppression at
+                allocation otherwise); (0,0,0) is returned only for
+                builders that ignore it."""
+                if (_engine_sun_traj and _k < len(_engine_sun_traj)
+                        and _engine_sun_traj[_k] is not None
+                        and 'x' in _engine_sun_traj[_k]):
+                    _s = _engine_sun_traj[_k]
+                    return (_s['x'], _s['y'], _s['z'])
+                return (0, 0, 0)
+
             perframe_groups, _engine_kb = allocate_perframe_elements(
-                fig, _engine_specs, positions_over_time, _sun_pos_tuple)
+                fig, _engine_specs, positions_over_time, _engine_sun_traj,
+                dates_list)
             _perframe_indices = set()
             for _grp in perframe_groups:
                 _perframe_indices.update(_grp['indices'])
-            if perframe_groups and not positions_over_time.get('Sun'):
-                print("[ANIMATION] NOTE: Sun not fetched (checkbox off); "
-                      "sun-direction elements use the frame-1 Sun position "
-                      "for all frames (orientation frozen).", flush=True)
 
             dynamic_trace_indices = sorted(set(
                 idx for idx in trace_indices.values()
@@ -7201,11 +7371,13 @@ def animate_objects(step, label):
                                     # If position is missing for this frame, make the object invisible
                                     frame_data[frame_idx].visible = False
 
-                # (Phase 3 Session B) Per-frame engine: rebuild each element
+                # (Phase 3 Session B/C) Per-frame engine: rebuild each element
                 # group at this frame's body (and Sun) position by calling
-                # the same builder the static dispatch uses. Trace-count
-                # stability is asserted LOUD: a count change would silently
-                # misalign every subsequent trace in the frame.
+                # the same builder the static dispatch uses. Rebuilds run
+                # QUIET (stdout suppressed) so per-builder console messages
+                # print once at allocation, not once per frame (O13a).
+                # Variable-count elements (comet tails) are padded to their
+                # allocated slot count; fixed elements assert exact count.
                 for _grp in perframe_groups:
                     _btraj = positions_over_time.get(_grp['body'])
                     _bp = _btraj[i] if _btraj and i < len(_btraj) else None
@@ -7215,11 +7387,14 @@ def animate_objects(step, label):
                             if _fi is not None:
                                 frame_data[_fi].visible = False
                         continue
-                    _straj = positions_over_time.get('Sun')
-                    _sp = _straj[i] if _straj and i < len(_straj) and _straj[i] is not None and 'x' in _straj[i] else None
-                    _spos = (_sp['x'], _sp['y'], _sp['z']) if _sp else _sun_pos_tuple
+                    _spos = _engine_sun_pos_at(i)
                     _rebuilt = build_perframe_traces(
-                        _grp['spec'], (_bp['x'], _bp['y'], _bp['z']), _spos)
+                        _grp['spec'], (_bp['x'], _bp['y'], _bp['z']), _spos,
+                        frame_entry=_bp, frame_date=dates_list[i], quiet=True)
+                    if _grp['spec'].get('variable_count'):
+                        _rebuilt = _pad_perframe_traces(_rebuilt, _grp['count'],
+                                                        _grp['body'],
+                                                        _grp['element'], i)
                     assert len(_rebuilt) == _grp['count'], (
                         f"[ANIMATION] FATAL: per-frame builder for "
                         f"{_grp['body']}/{_grp['element']} returned "
@@ -7276,6 +7451,16 @@ def animate_objects(step, label):
                     scale_var, custom_scale_entry, objects, active_planetary_params,
                     parent_planets, center_object_name
                 )
+
+            # (Session C) Auto scale honors center-shell extent: the cube must
+            # hold BOTH the orbital extent and the shells -- the larger of the
+            # two, never shell extent alone (that is the Finding-1 photosphere
+            # collapse). _shell_axis_range is non-None only under Auto with
+            # center shells rendered (add_center_body_shells); manual scale is
+            # therefore never overridden here.
+            if _shell_axis_range is not None and axis_range is not None:
+                _half = max(abs(axis_range[1]), abs(_shell_axis_range[1]))
+                axis_range = [-_half, _half]
 
                         
             # Celestial sphere: star background + coordinate grid (static backdrop)
@@ -9784,6 +9969,23 @@ num_frames_entry = tk.Entry(animation_frame, width=5)
 num_frames_entry.pack(padx=10, pady=(2, 5), anchor='w')
 num_frames_entry.insert(0, '29')  # Default number of frames
 CreateToolTip(num_frames_entry, "Do not exceed 130 to avoid timing out JPL Horizons' data fetch.")
+
+# (21/51 Phase 3 Session C) Opt-in: rebuild comet tails each animation frame.
+# Default OFF per the O1 decision (frame-1 freeze acceptable; multi-frame is
+# opt-in, not default). MAPS is excluded from per-frame mode regardless.
+animate_comet_tails_var = tk.IntVar(value=0)
+animate_comet_tails_check = tk.Checkbutton(
+    animation_frame,
+    text="Animate comet tails (rebuild each frame)",
+    variable=animate_comet_tails_var)
+animate_comet_tails_check.pack(padx=10, pady=(0, 5), anchor='w')
+CreateToolTip(animate_comet_tails_check,
+              "When checked, comet nucleus/coma/tails are rebuilt at each "
+              "animation frame so the tail swings anti-sunward as the comet "
+              "moves (e.g. through perihelion). Adds roughly the comet's "
+              "trace payload per frame to the saved HTML. Off: tails are "
+              "drawn once at the first frame (smaller files). MAPS uses "
+              "first-frame mode regardless (date-gated disintegration).")
 
 """
 # Create a new frame for orbit path fetching controls

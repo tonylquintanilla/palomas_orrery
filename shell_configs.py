@@ -2103,6 +2103,7 @@ CUSTOM_SHELLS = {
         },
 
         'sodium_tail': {
+            'per_frame': True,  # 21/51 Phase 3C: engine-animatable (checkbox-gated)
             'builder': 'mercury_visualization_shells.create_mercury_sodium_tail',
             'needs_sun_position': True,
             'tooltip': (
