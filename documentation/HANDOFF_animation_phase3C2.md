@@ -109,4 +109,78 @@ camera controls and the C6a/O16 partial-pass record; F log gains the
 fix-pass entry (reproduction-before-patch; the perihelion repro
 exonerated the engine and convicted the frame merge).
 
-Module updated: June 2026 with Anthropic's Claude Fable 5
+## V4.1 Retest Results (June 12, 2026 -- Tony, Mode 5)
+
+Tested at HEAD 39370bb3be99559aa5e8cd68bb8188d855dfc31e. Three fixes
+verified on Windows, Python 3.13.
+
+### R1 -- Ikeya-Seki perihelion rerun
+- PASS. Truly beautiful. No doubled nucleus/indicator/legend. Tail
+  PRESENT at perihelion matching the static render's character. Coma
+  and tails appear as distance thresholds cross and persist while active.
+  Sun Direction indicator present and tracking throughout. File size:
+  181 KB without tails, 3215 KB with tails (worth it for the educational
+  value). The tail swinging anti-sunward as the comet rounds perihelion
+  is THE educational moment this engine was built to show.
+
+### R2 -- Mercury-centered Sun tracking
+- PASS. Perfect. Both Sun-on and Sun-off views synchronize. Sodium tail
+  and Sun Direction indicator perfectly align. No doubled traces. Rotation
+  axis fixed in center view (correct physics -- inertial orientation).
+  Beautiful. Meets the "our work is not just right -- it's beautiful"
+  criterion.
+
+### R3 -- Regression
+- Static Mercury-centered: PASS. Correct.
+- B1-style Uranus (29 years, Sun-centered and Uranus-centered): PASS.
+  Sun Direction indicator tracks in both views. In Uranus-centered view,
+  only Sun Direction indicator tracks (rotation axis stays fixed --
+  correct). NOTE: since non-center shell per-frame tracking is not yet
+  implemented for all elements, the hover text for those elements should
+  note this. Ledger item.
+- MAPS animation with opt-in: GAP FOUND. Render with opt-in checked and
+  unchecked is IDENTICAL. Only frame-1 tail shows, even before the comet
+  reaches the disintegration point. The per-frame engine does not engage
+  for MAPS. Root cause: MAPS has special disintegration-mode code paths
+  ("headless ghost comet" / "pre-disintegration mode: active comet with
+  coma") that bypass the standard comet tail builder. The opt-in checkbox
+  likely does not reach the MAPS-specific branch. This is a scoped issue
+  (the engine works for standard comets -- R1 proved it); the MAPS path
+  needs its own wiring.
+
+### Observation Log v4.1 (O18-O20)
+
+O18 -- Perihelion render quality: excellent. The tail development through
+threshold crossings is smooth and educational. The static-vs-animated
+parity at perihelion is now confirmed.
+
+O19 -- Center-body sodium/indicator motion: the Mercury test is a
+showcase render. The tail swing and indicator alignment are precisely
+synchronized. High educational value.
+
+O20 -- Free-form:
+(a) MAPS per-frame tails not engaging (see R3 above). Scoped to
+    MAPS disintegration path, not systemic. Ledger item.
+(b) Uranus-centered: non-tracking elements should carry hover text
+    noting the limitation. Ledger item.
+
+### V4.1 Retest Disposition
+
+Phase 3 core track (Sessions A/B/C + fix pass) CONDITIONALLY CLOSED.
+All three blocking bugs (C2a doubling, C2b/C2c sticky visible,
+C6d Mercury Sun tracking) are RESOLVED. R1 and R2 are clean passes
+with beautiful educational renders. One scoped gap remains: MAPS
+disintegration-mode tails do not engage with the per-frame engine.
+This is NOT a blocker for the core track -- it is a MAPS-specific
+wiring issue that can ride a future MAPS maintenance session.
+
+### New Ledger Items
+
+- MAPS disintegration-mode per-frame tails: the opt-in checkbox does
+  not reach MAPS's special ghost/pre-disintegration code path. Standard
+  comets (Ikeya-Seki) work correctly. MAPS needs its own wiring.
+- Non-center non-tracking elements: hover text should note which
+  elements are per-frame tracked vs frame-1 frozen for non-center
+  bodies in heliocentric animations.
+
+Module updated: June 2026 with Anthropic's Claude Fable 5 + Claude Sonnet 4.6
