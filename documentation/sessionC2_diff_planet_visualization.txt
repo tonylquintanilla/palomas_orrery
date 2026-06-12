@@ -1,0 +1,18 @@
+321c321,322
+<                                         object_type=None, center_object=None):
+---
+>                                         object_type=None, center_object=None,
+>                                         skip_elements=None):
+384a386,392
+>         # (C6d fix, June 2026) Elements the per-frame animation engine
+>         # owns for the CENTER body are skipped here -- the engine's
+>         # allocation provides their frame-1 content and animates them.
+>         # Static pipeline passes skip_elements=None (unaffected).
+>         if skip_elements and shell_name in skip_elements:
+>             continue
+> 
+471c479,480
+<     if outermost_radius_au > 0:
+---
+>     if outermost_radius_au > 0 and not (skip_elements
+>             and 'sun_direction_indicator' in skip_elements):

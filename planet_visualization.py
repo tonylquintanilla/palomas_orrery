@@ -318,7 +318,8 @@ def create_sun_corona_from_distance(fig, sun_shell_vars, sun_position):
     
 def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None,
                                         center_position=(0, 0, 0), sun_position=(0, 0, 0),
-                                        object_type=None, center_object=None):
+                                        object_type=None, center_object=None,
+                                        skip_elements=None):
 
     """
     Unified config-driven dispatch for celestial body shell visualization.
@@ -381,6 +382,13 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 continue
 
         shell_name = key[len(body_prefix):] if key.startswith(body_prefix) else key
+
+        # (C6d fix, June 2026) Elements the per-frame animation engine
+        # owns for the CENTER body are skipped here -- the engine's
+        # allocation provides their frame-1 content and animates them.
+        # Static pipeline passes skip_elements=None (unaffected).
+        if skip_elements and shell_name in skip_elements:
+            continue
 
         if shell_name in configs:
             config = configs[shell_name]
@@ -468,7 +476,8 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         body_r_au = CENTER_BODY_RADII[body_name] / KM_PER_AU
         outermost_radius_au = 100.0 * body_r_au
 
-    if outermost_radius_au > 0:
+    if outermost_radius_au > 0 and not (skip_elements
+            and 'sun_direction_indicator' in skip_elements):
         indicator_traces = create_sun_direction_indicator(
             center_position=center_position,
             sun_position=sun_position,

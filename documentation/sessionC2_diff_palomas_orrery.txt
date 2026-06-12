@@ -1,0 +1,227 @@
+1965c1965,1966
+<                            scale_value, axis_range, log_prefix=''):
+---
+>                            scale_value, axis_range, log_prefix='',
+>                            skip_elements=None):
+1997a1999
+>             skip_elements=skip_elements,
+2030a2033
+>                 skip_elements=skip_elements,
+2059c2062,2124
+< def collect_perframe_elements(center_object_name, candidate_body_names):
+---
+> def get_center_engine_elements(center_object_name):
+>     """(C6d fix) The set of CENTER-body element names the per-frame engine
+>     owns in animations -- the single source of truth consumed by BOTH the
+>     center dispatch (as skip_elements, so it does not render them) and
+>     collect_perframe_elements (which adds the matching center_fixed specs).
+>     One producer, two consumers: the skip set and the engine's coverage
+>     cannot diverge.
+> 
+>     Rule: sun-direction-dependent elements only. A centered body sits at the
+>     origin, but the SUN moves around it across frames -- its sun-direction
+>     indicator and anti-sunward tails must track that motion; a frame-1
+>     freeze there is a physics lie (the C6d Mercury-centered finding).
+>     Inertial elements (rotation axis, dipole cone) stay with the static
+>     dispatch: their orientation does not change, so frozen is CORRECT.
+>     Returns an empty set for a Sun-centered view (the Sun never moves
+>     relative to itself; the indicator is suppressed there by design).
+>     """
+>     from shell_configs import CUSTOM_SHELLS
+>     elements = set()
+>     if center_object_name == 'Sun':
+>         return elements
+>     shell_vars = get_planet_shell_vars_map().get(center_object_name)
+>     if not shell_vars or not any(v.get() == 1 for v in shell_vars.values()):
+>         return elements
+>     prefix = center_object_name.lower().replace(' ', '_') + '_'
+>     customs = CUSTOM_SHELLS.get(center_object_name, {})
+>     for element, entry in customs.items():
+>         if not (isinstance(entry, dict) and entry.get('per_frame')
+>                 and entry.get('needs_sun_position')):
+>             continue
+>         own_var = shell_vars.get(prefix + element) or shell_vars.get(element)
+>         if own_var is not None and own_var.get() != 1:
+>             continue
+>         elements.add(element)
+>     if center_object_name in CENTER_BODY_RADII:
+>         elements.add('sun_direction_indicator')
+>     return elements
+> 
+> 
+> def _perframe_dummy_trace():
+>     """(C2 fix) An explicitly-invisible placeholder for an engine frame
+>     slot. EXPLICIT visible=False matters: Plotly applies frame traces as a
+>     merge, so omitted properties inherit the slot's prior state."""
+>     return go.Scatter3d(x=[None], y=[None], z=[None], mode='markers',
+>                         visible=False, showlegend=False,
+>                         hoverinfo='skip', name='')
+> 
+> 
+> def _normalize_perframe_visibility(traces):
+>     """(C2 fix) Ensure every trace written into a frame slot carries an
+>     EXPLICIT visible value. Builders omit 'visible' (= default True), but a
+>     frame MERGE onto a slot last occupied by a visible=False dummy would
+>     inherit False -- the C2b/C2c mechanism: tails and the indicator
+>     vanished exactly when variable counts reshuffled them into previously
+>     dummied slots. Builder-set values ('legendonly', False) are preserved;
+>     only unset becomes explicit True. In-place."""
+>     for t in traces:
+>         if t.visible is None:
+>             t.visible = True
+> 
+> 
+> def collect_perframe_elements(center_object_name, candidate_body_names,
+>                               center_shell_radius_au=None):
+2164a2230,2273
+> 
+>     # (C6d fix) CENTER-body sun-direction elements: the center sits at the
+>     # origin, but the Sun moves around it -- indicator and anti-sunward
+>     # tails must track per frame. The center dispatch SKIPS exactly this
+>     # set (skip_elements), so engine and dispatch never double. The element
+>     # list comes from the same producer the dispatch consumes.
+>     for element in get_center_engine_elements(center_object_name):
+>         if element == 'sun_direction_indicator':
+>             if center_shell_radius_au is not None and center_shell_radius_au > 0:
+>                 _radius = center_shell_radius_au
+>             elif center_object_name in CENTER_BODY_RADII:
+>                 _radius = (PERFRAME_INDICATOR_RADIUS_FACTOR
+>                            * CENTER_BODY_RADII[center_object_name] / KM_PER_AU)
+>             else:
+>                 continue
+>             specs.append({
+>                 'body': center_object_name,
+>                 'element': 'sun_direction_indicator',
+>                 'callable': create_sun_direction_indicator,
+>                 'needs_planet_name': False,
+>                 'needs_sun_position': True,
+>                 'indicator_kwargs': {
+>                     'shell_radius': _radius,
+>                     'object_type': center_object_name,
+>                     'center_object': center_object_name,
+>                     'body_name': center_object_name,
+>                 },
+>                 'center_fixed': True,
+>             })
+>         else:
+>             entry = CUSTOM_SHELLS.get(center_object_name, {}).get(element)
+>             if not entry:
+>                 continue
+>             mod_path, fn_name = entry['builder'].rsplit('.', 1)
+>             builder = getattr(_importlib.import_module(mod_path), fn_name)
+>             specs.append({
+>                 'body': center_object_name,
+>                 'element': element,
+>                 'callable': builder,
+>                 'needs_planet_name': bool(entry.get('needs_planet_name')),
+>                 'needs_sun_position': True,
+>                 'indicator_kwargs': None,
+>                 'center_fixed': True,
+>             })
+2247,2249c2356,2367
+<         body_traj = positions_over_time.get(spec['body'])
+<         if not body_traj or body_traj[0] is None or 'x' not in body_traj[0]:
+<             continue  # no frame-1 position; element skipped this animation
+---
+>         if spec.get('center_fixed'):
+>             # (C6d) The center body sits at the origin every frame; no
+>             # positions_over_time entry exists or is needed.
+>             body_traj = None
+>             bpos0 = (0.0, 0.0, 0.0)
+>             entry0 = {'x': 0.0, 'y': 0.0, 'z': 0.0}
+>         else:
+>             body_traj = positions_over_time.get(spec['body'])
+>             if not body_traj or body_traj[0] is None or 'x' not in body_traj[0]:
+>                 continue  # no frame-1 position; element skipped this animation
+>             bpos0 = (body_traj[0]['x'], body_traj[0]['y'], body_traj[0]['z'])
+>             entry0 = body_traj[0]
+2262d2379
+<         bpos0 = (body_traj[0]['x'], body_traj[0]['y'], body_traj[0]['z'])
+2264c2381
+<                                        frame_entry=body_traj[0],
+---
+>                                        frame_entry=entry0,
+2271c2388
+<                 _e = body_traj[_k] if _k < len(body_traj) else None
+---
+>                 _e = body_traj[_k] if body_traj and _k < len(body_traj) else None
+2282a2400,2402
+>         # (C2 fix) Explicit visibility from the start: frame merges must
+>         # never inherit a stale visible from any slot's history.
+>         _normalize_perframe_visibility(traces)
+6566a6687,6696
+>             # (C6d fix) Center-body sun-direction elements (indicator, sodium
+>             # tail) must track the MOVING Sun across frames even though the
+>             # center sits at the origin -- a frame-1 freeze there is a physics
+>             # lie. The engine now owns them (collect_perframe_elements adds
+>             # center_fixed specs); the dispatch SKIPS exactly that set so the
+>             # two never double. get_center_engine_elements is the single
+>             # source of truth for both sides. Static pipeline: unaffected
+>             # (skip_elements defaults to None).
+>             _center_engine_elements = get_center_engine_elements(
+>                 center_object_name)
+6570c6700,6701
+<                 scale_var.get(), None, log_prefix='[ANIMATION] ')
+---
+>                 scale_var.get(), None, log_prefix='[ANIMATION] ',
+>                 skip_elements=_center_engine_elements)
+7127a7259,7277
+>                             # (C2a fix) When per-frame comet tails are ON, the
+>                             # engine OWNS this comet's tails: its allocation IS
+>                             # the frame-1 content. Adding the static frame-1
+>                             # tails too doubled every trace (nucleus and Sun
+>                             # Direction appeared twice; the originals sat
+>                             # frozen beneath the animated copies). MAPS stays
+>                             # frame-1 here (excluded from per-frame mode).
+>                             try:
+>                                 _tails_engine_owned = (
+>                                     animate_comet_tails_var.get() == 1
+>                                     and obj_name != 'MAPS')
+>                             except Exception:
+>                                 _tails_engine_owned = False
+>                             if _tails_engine_owned:
+>                                 print(f"[ANIMATION] {obj_name}: per-frame "
+>                                       f"comet tails ON -- frame-1 static "
+>                                       f"tails skipped (engine owns them).",
+>                                       flush=True)
+>                                 continue
+7175c7325,7327
+<                 center_object_name, list(positions_over_time.keys()))
+---
+>                 center_object_name, list(positions_over_time.keys()),
+>                 center_shell_radius_au=getattr(
+>                     fig, '_shell_outermost_radius_au', None))
+7211a7364
+>             _perframe_missing_noted = set()
+7380a7534,7539
+>                 # (C2-fix) EVERY trace written into a frame slot carries an
+>                 # EXPLICIT visible value: Plotly applies frame traces as a
+>                 # MERGE onto current state, so an omitted 'visible' inherits
+>                 # whatever the slot last held -- a slot once dummied to
+>                 # visible=False would otherwise never reappear (the C2b
+>                 # vanishing-tail / C2c vanishing-indicator mechanism).
+7382,7383c7541,7545
+<                     _btraj = positions_over_time.get(_grp['body'])
+<                     _bp = _btraj[i] if _btraj and i < len(_btraj) else None
+---
+>                     if _grp['spec'].get('center_fixed'):
+>                         _bp = {'x': 0.0, 'y': 0.0, 'z': 0.0}
+>                     else:
+>                         _btraj = positions_over_time.get(_grp['body'])
+>                         _bp = _btraj[i] if _btraj and i < len(_btraj) else None
+7384a7547,7555
+>                         # Full replacement with explicit invisible dummies --
+>                         # never mutate copies (merge semantics), never blank
+>                         # silently (one diagnostic note per body).
+>                         if _grp['body'] not in _perframe_missing_noted:
+>                             _perframe_missing_noted.add(_grp['body'])
+>                             print(f"[ANIMATION] NOTE: {_grp['body']} position "
+>                                   f"missing at frame {i}; its per-frame "
+>                                   f"elements are hidden for such frames.",
+>                                   flush=True)
+7388c7559
+<                                 frame_data[_fi].visible = False
+---
+>                                 frame_data[_fi] = _perframe_dummy_trace()
+7403a7575
+>                     _normalize_perframe_visibility(_rebuilt)

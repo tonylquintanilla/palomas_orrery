@@ -6,8 +6,9 @@ Current verified base: `d9460e2` (d9460e22cd41b9da344930bbbac53dba8ed63d7c)
 Chain since consolidation: 76c330e -> 730b2bf (June-8 fixes) -> 7977a11
 (animation Phase 1) -> 3f03c12 -> 191cf36 (Phase 2) -> 8438a85 (Phase 3 GO)
 -> a9f0ec4 (Session A) -> e5fd86d (Session B) -> 0ce1e26 -> 7b71c29
-(Session C) -> d9460e2 (provenance scan, current HEAD). Session C is PUSHED;
-its render gate (protocol v4) is PENDING (see PENDING ACTION).
+(Session C) -> d9460e2 (provenance scan) -> 02cce78 (ledger) -> d05f0f1 (Session C
+test results: NOT YET CONFIRMED, 3 blocking bugs -> fix pass C2
+delivered June 11, render-gated on protocol v4.1).
 Introduced by: HANDOFF v28. Supersedes the in-handoff ledgers embedded in
 v23 (canonical body), v24, v25, v26, v27.
 
@@ -80,10 +81,13 @@ Items with no tag are administrative (tracks, actions) rather than code claims.
 
 ## PENDING ACTION (Tony-side)
 
-- **Run ANIMATION_TEST_PROTOCOL_v4** (C1-C7 + observation log O14-O17),
-  append results to documentation/HANDOFF_animation_phase3C.md, push. On
-  pass: the Phase 3 CORE TRACK (Sessions A/B/C) is COMPLETE -- move the
-  marked render-gated items below into section C and update 21/51.
+- **Apply the C2 fix pass (2 files) and run ANIMATION_TEST_PROTOCOL_v4_1**
+  (the focused retest of C2/C6d + regression), append results to the 3C
+  handoff, push. On pass: the Phase 3 CORE TRACK (Sessions A/B/C + fix
+  pass) is COMPLETE -- move the marked render-gated items below into
+  section C and update 21/51. (v4 first run, June 11: C1/C3/C5/C7 PASS,
+  C4 pass-with-caveat, C2/C6 blocked by the three bugs below -- all
+  three root-caused and fixed in pass C2.)
 - **Commit protocol v3.28 (or v3.29 with the candidates above) to the repo
   root.** `[per chain; not re-verified June 11]`
 - (CLEARED June 11) Phase 2, Session A, Session B, and Session C are all AT
@@ -235,7 +239,39 @@ Closed SINCE v23 (Movement chain + verified):
 
 ### D.Priority -- real bugs
 
-- (none currently open) The B3-bonus barycenter Sun-Direction bug (indicator
+- **`[KEPLERIAN POS] Could not parse epoch date` with 'osc.' suffix**
+  -- OPEN (promoted from the C-results, June 11). Appears EVERY console
+  run for every planet: the epoch parser cannot handle the ' osc.'
+  suffix on osculating epoch strings (e.g. '2026-06-10 12:32 osc.'),
+  silently preventing Keplerian position calculation for every body
+  with osculating elements. Pre-existing (not a Phase regression).
+  Fix: strip/handle the suffix in the parser.
+- FIXED in pass C2 (June 11, `[render-gated v4.1]`), three v4 blockers:
+  * **C2a frame-1 comet doubling** -- the pre-existing frame-1 tail
+    block AND the engine both added the comet's traces (incl. the
+    builder's own Sun Direction). Fix: frame-1 block skips
+    engine-owned comets (opt-in on, non-MAPS); the engine's
+    allocation IS frame-1 content.
+  * **C2b/C2c vanishing tail/indicator** -- STICKY-VISIBLE MERGE:
+    Plotly applies frame traces as a MERGE; builders omit 'visible',
+    so a slot once dummied to visible=False never reappeared. Tails
+    filled previously-dummied slots exactly at perihelion; the
+    indicator reshuffled into a dead slot when variable counts grew.
+    Fix: EXPLICIT visible on every slot write (normalizer); the
+    missing-position branch now writes explicit dummies + a console
+    note (was a silent blanking). LESSON: frame updates are merges --
+    any property a builder omits inherits the slot's history; padding
+    slots with invisible dummies REQUIRES explicit visibility on
+    every later write.
+  * **C6d Mercury-centered Sun tracking** -- the engine excluded the
+    center body entirely, but a centered body's SUN-DIRECTION
+    elements must track the Sun moving around it; frame-1 freeze
+    there is a physics lie. Fix: get_center_engine_elements() is the
+    single source of truth -- the dispatch SKIPS that set
+    (skip_elements threading, static unaffected, regression-tested
+    identical) and the engine adds matching center_fixed specs
+    (origin position, per-frame Sun). Inertial elements (axis, cone)
+    correctly stay frozen. The B3-bonus barycenter Sun-Direction bug (indicator
   pointed at (0,0,0)/the barycenter when the Sun checkbox was off) was FIXED
   in Session C `[render-gated C1]`: the engine resolves a REAL Sun trajectory
   (fetching it when unchecked) and SUPPRESSES sun-direction elements when
@@ -277,6 +313,9 @@ Closed SINCE v23 (Movement chain + verified):
 - Center-body hover "Distance to Center Surface: -<radius> km (below mean
   datum)" (formatter treats center as object-at-zero; pre-existing; polish
   target is format_detailed_hover_text).
+- Solar shell hovertext uses '<br>' where '\n' renders (or vice versa;
+  context-specific -- C6b finding, June 11). Fix in the affected
+  formatter on next touch.
 - O11 verdict June 11: greyed-legend display names derive correctly from
   checkbox keys -- NO item needed; recorded so it is not re-raised.
 
@@ -302,8 +341,11 @@ Closed SINCE v23 (Movement chain + verified):
       pass: go.Frame(layout=...) can carry scene.camera per frame --
       implementable inside existing animation machinery; needs a
       user-interaction toggle (frame-driven camera fights manual orbit).
-    * O16 (incoming from the v4 gate): auto-scale max() behavior across
-      scale combinations.
+    * Directional arrow camera controls for Plotly 3D (Studio has 2D
+      D-pad pan; no 3D equivalent) -- precise cameras without the
+      mouse; aids shell-scale visual verification. (Promoted June 11.)
+    * O16: auto-scale max() Sun-centered case PASSED (C6a, June 11);
+      Mercury-centered case retests in v4.1 after the C6d fix.
   20/N5 shell-resolution GUI control (enabler; its backend partially exists
   since Session A -- bow-shock conic already parameterized, sphere-shell
   n_points per-config; remaining: create_magnetosphere_shape promotion +
@@ -402,6 +444,16 @@ Closed SINCE v23 (Movement chain + verified):
   directive); Session A delivered: the "one-site" wrapper claim CORRECTED
   by repo-wide grep (three sites); budget harness + gate 5(a) passed;
   grep -c chain-break lesson.
+- (June 11, fix pass C2) v4 first run found 3 blockers; all root-caused
+  with reproduction, not patched on guesses: the perihelion repro
+  EXONERATED the engine math and convicted Plotly's frame-merge
+  semantics (sticky visible); the doubling was two producers of one
+  element (frame-1 block + engine); Mercury-centered was a coverage
+  gap, not a trajectory bug (Tony's barycenter-class instinct pointed
+  the way; the trigger differed). skip_elements threaded through the
+  dispatch with a None-default regression test (HEAD-identical).
+  Promoted: epoch-parser 'osc.' gap (D.Priority), <br> hovertext
+  (D.Cosmetic), 3D arrow cameras (item 19).
 - (June 11) Sessions B + C: engine delivered and conditionally confirmed
   (solar-system-scale visual gap identified as TOOLING -> item 19 with the
   go.Frame camera mechanism note); greyed-legend disclosure verified and

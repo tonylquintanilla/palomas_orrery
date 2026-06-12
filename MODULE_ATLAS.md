@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
 Generated: June 11, 2026
-Modules: 109 | Functions: 885 | Lines: 87,144
+Modules: 109 | Functions: 886 | Lines: 87,316
 
 ---
 
@@ -124,7 +124,7 @@ and explains in context.
 
 ### palomas_orrery.py
 
-**Role:** gui | **Lines:** 8,869
+**Role:** gui | **Lines:** 9,033
 
 > palomas_orrery.py - Main GUI and plotting engine for Paloma's Orrery.
 
@@ -152,59 +152,60 @@ and explains in context.
 - `get_planet_shell_vars_map()` (line 1869) -- (2d) Single source for the planet -> shell-vars mapping.
 - `resolve_shell_sun_position(center_object_name, sun_entry, plot_date, center_id)` (line 1895) -- (2b) Resolve the Sun position used to orient magnetosphere/bow-shock
 - `add_center_body_marker(fig, center_object_name, params)` (line 1926) -- (2a) Canonical center-body marker -- the ONE mechanism, both pipelines.
-- `add_center_body_shells(fig, center_object_name, sun_shell_vars_map, planet_shell_vars_map, sun_position, scale_value, axis_range, log_prefix)` (line 1963) -- (2c) Center-body shell dispatch -- one implementation, both pipelines.
-- `collect_perframe_elements(center_object_name, candidate_body_names)` (line 2059) -- (Phase 3) Element specs for engine-animatable primitives.
-- `build_perframe_traces(spec, body_pos, sun_pos, frame_entry, frame_date, quiet)` (line 2168) -- (Phase 3) The one rebuild mechanism: call the spec's builder at this
-- `allocate_perframe_elements(fig, specs, positions_over_time, engine_sun_traj, dates_list)` (line 2224) -- (Phase 3) Frame-1 allocation: build each element once at its frame-1
-- `add_static_only_legend_placeholders(fig, center_object_name)` (line 2305) -- (Phase 3) Greyed-out legend disclosure: every shell CHECKED for a body
-- `update_status_display(message, status_type)` (line 2364) -- Update status display with color coding and history
-- `configure_controls_canvas(event)` (line 2403)
-- `class ScrollableFrame` (line 3186) -- A scrollable frame that can contain multiple widgets with a vertical scrollbar.
-- `class CreateToolTip` (line 3287) -- Create a tooltip for a given widget with intelligent positioning to prevent clipping.
-- `pulse_progress_bar()` (line 3444) -- Create a pulsating effect for the progress bar
-- `update_orbit_paths(center_object_name)` (line 3450) -- For each object in the global 'objects' list that has an 'id', check if its orbit path is
-- `plot_orbit_paths(fig, objects_to_plot, center_object_name)` (line 3548) -- Plot orbit paths using data from orbit_data_manager or temp cache.
-- `plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id, show_lines, center_object_name, show_closest_approach, trajectory_marker_color)` (line 3621) -- Plot actual orbit positions for selected objects.
-- `export_social_view()` (line 4080) -- Export the last plotted figure as a social media view.
-- `plot_objects()` (line 4107)
-- `animate_objects(step, label)` (line 5867)
-- `on_closing()` (line 7686) -- Handle cleanup when the main window is closed.
-- `periodic_config_save()` (line 7711)
-- `set_palomas_birthday()` (line 7718)
-- `update_date_fields(new_date)` (line 7722)
-- `fill_now()` (line 7735)
-- `calculate_next_vernal_equinox(from_date)` (line 7762) -- Calculate the next vernal equinox (March equinox) from a given date.
-- `fill_next_vernal_equinox()` (line 7832) -- Fill the date fields with the next vernal equinox from the current date.
-- `toggle_all_shells()` (line 7843) -- Toggle all sun shell checkboxes based on the main shell checkbox.
-- `handle_mission_selection()` (line 7875)
-- `animate_one_minute()` (line 7881)
-- `animate_one_hour()` (line 7887)
-- `animate_one_day()` (line 7892)
-- `animate_one_week()` (line 7898)
-- `animate_one_month()` (line 7903)
-- `animate_one_year()` (line 7908)
-- `animate_palomas_birthday()` (line 7913)
-- `report_callback_exception(exc_type, exc_value, exc_traceback)` (line 7943)
-- `sync_end_date_from_days()` (line 7955) -- Calculate end date from start date + days to plot
-- `sync_days_from_dates()` (line 7986) -- Calculate days to plot from start and end dates
-- `sync_days_from_dates()` (line 7998) -- Calculate days to plot from start and end dates
-- `sync_end_date_from_days()` (line 8097) -- Calculate end date from start date + days to plot
-- `sync_days_from_dates()` (line 8129) -- Calculate days to plot from start and end dates
-- `get_end_date_from_gui()` (line 8141) -- Get end date from GUI fields. Defaults empty fields to avoid crash.
-- `can_be_horizons_center(obj)` (line 8173) -- Check if object can be used as Horizons coordinate center.
-- `create_celestial_checkbutton(name, variable)` (line 8275)
-- `create_mission_checkbutton(name, variable, dates)` (line 8796)
-- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 9240) -- Creates a checkbutton for a comet with a tooltip containing its description,
-- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 9358) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
-- `toggle_special_fetch_mode()` (line 9455) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
-- `create_exoplanet_checkbutton(name, variable, is_star)` (line 9471) -- Create checkbutton for exoplanet objects
-- `open_star_visualization()` (line 9492) -- Inform user about standalone Star Visualization executable.
-- `launch_galactic_center()` (line 9565) -- Launch the Sagittarius A* Grand Tour visualization.
-- `update_center_dropdown()` (line 9723) -- Update the center dropdown to show only Sun + selected centerable objects.
-- `setup_center_dropdown_traces()` (line 9788) -- Add traces to all object IntVars to update center dropdown on selection change.
-- `on_center_change()` (line 9803) -- Update frame title and status when the center object is changed.
-- `open_orbital_param_visualization()` (line 10248) -- Opens the orbital parameter visualization window by calling the
-- `restore_sash_positions()` (line 10420)
+- `add_center_body_shells(fig, center_object_name, sun_shell_vars_map, planet_shell_vars_map, sun_position, scale_value, axis_range, log_prefix, skip_elements)` (line 1963) -- (2c) Center-body shell dispatch -- one implementation, both pipelines.
+- `get_center_engine_elements(center_object_name)` (line 2062) -- (C6d fix) The set of CENTER-body element names the per-frame engine
+- `collect_perframe_elements(center_object_name, candidate_body_names, center_shell_radius_au)` (line 2123) -- (Phase 3) Element specs for engine-animatable primitives.
+- `build_perframe_traces(spec, body_pos, sun_pos, frame_entry, frame_date, quiet)` (line 2277) -- (Phase 3) The one rebuild mechanism: call the spec's builder at this
+- `allocate_perframe_elements(fig, specs, positions_over_time, engine_sun_traj, dates_list)` (line 2333) -- (Phase 3) Frame-1 allocation: build each element once at its frame-1
+- `add_static_only_legend_placeholders(fig, center_object_name)` (line 2425) -- (Phase 3) Greyed-out legend disclosure: every shell CHECKED for a body
+- `update_status_display(message, status_type)` (line 2484) -- Update status display with color coding and history
+- `configure_controls_canvas(event)` (line 2523)
+- `class ScrollableFrame` (line 3306) -- A scrollable frame that can contain multiple widgets with a vertical scrollbar.
+- `class CreateToolTip` (line 3407) -- Create a tooltip for a given widget with intelligent positioning to prevent clipping.
+- `pulse_progress_bar()` (line 3564) -- Create a pulsating effect for the progress bar
+- `update_orbit_paths(center_object_name)` (line 3570) -- For each object in the global 'objects' list that has an 'id', check if its orbit path is
+- `plot_orbit_paths(fig, objects_to_plot, center_object_name)` (line 3668) -- Plot orbit paths using data from orbit_data_manager or temp cache.
+- `plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id, show_lines, center_object_name, show_closest_approach, trajectory_marker_color)` (line 3741) -- Plot actual orbit positions for selected objects.
+- `export_social_view()` (line 4200) -- Export the last plotted figure as a social media view.
+- `plot_objects()` (line 4227)
+- `animate_objects(step, label)` (line 5987)
+- `on_closing()` (line 7858) -- Handle cleanup when the main window is closed.
+- `periodic_config_save()` (line 7883)
+- `set_palomas_birthday()` (line 7890)
+- `update_date_fields(new_date)` (line 7894)
+- `fill_now()` (line 7907)
+- `calculate_next_vernal_equinox(from_date)` (line 7934) -- Calculate the next vernal equinox (March equinox) from a given date.
+- `fill_next_vernal_equinox()` (line 8004) -- Fill the date fields with the next vernal equinox from the current date.
+- `toggle_all_shells()` (line 8015) -- Toggle all sun shell checkboxes based on the main shell checkbox.
+- `handle_mission_selection()` (line 8047)
+- `animate_one_minute()` (line 8053)
+- `animate_one_hour()` (line 8059)
+- `animate_one_day()` (line 8064)
+- `animate_one_week()` (line 8070)
+- `animate_one_month()` (line 8075)
+- `animate_one_year()` (line 8080)
+- `animate_palomas_birthday()` (line 8085)
+- `report_callback_exception(exc_type, exc_value, exc_traceback)` (line 8115)
+- `sync_end_date_from_days()` (line 8127) -- Calculate end date from start date + days to plot
+- `sync_days_from_dates()` (line 8158) -- Calculate days to plot from start and end dates
+- `sync_days_from_dates()` (line 8170) -- Calculate days to plot from start and end dates
+- `sync_end_date_from_days()` (line 8269) -- Calculate end date from start date + days to plot
+- `sync_days_from_dates()` (line 8301) -- Calculate days to plot from start and end dates
+- `get_end_date_from_gui()` (line 8313) -- Get end date from GUI fields. Defaults empty fields to avoid crash.
+- `can_be_horizons_center(obj)` (line 8345) -- Check if object can be used as Horizons coordinate center.
+- `create_celestial_checkbutton(name, variable)` (line 8447)
+- `create_mission_checkbutton(name, variable, dates)` (line 8968)
+- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 9412) -- Creates a checkbutton for a comet with a tooltip containing its description,
+- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 9530) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
+- `toggle_special_fetch_mode()` (line 9627) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
+- `create_exoplanet_checkbutton(name, variable, is_star)` (line 9643) -- Create checkbutton for exoplanet objects
+- `open_star_visualization()` (line 9664) -- Inform user about standalone Star Visualization executable.
+- `launch_galactic_center()` (line 9737) -- Launch the Sagittarius A* Grand Tour visualization.
+- `update_center_dropdown()` (line 9895) -- Update the center dropdown to show only Sun + selected centerable objects.
+- `setup_center_dropdown_traces()` (line 9960) -- Add traces to all object IntVars to update center dropdown on selection change.
+- `on_center_change()` (line 9975) -- Update frame title and status when the center object is changed.
+- `open_orbital_param_visualization()` (line 10420) -- Opens the orbital parameter visualization window by calling the
+- `restore_sash_positions()` (line 10592)
 
 ---
 
@@ -412,7 +413,7 @@ and explains in context.
 
 ### planet_visualization.py
 
-**Role:** rendering | **Lines:** 655
+**Role:** rendering | **Lines:** 663
 
 > planet_visualization.py - High-level planet and Sun visualization orchestration.
 
@@ -423,9 +424,9 @@ and explains in context.
 
 - `create_sun_visualization(fig, sun_shell_vars, animate, frames)` (line 292) -- RETIRED: Sun rendering migrated to unified dispatch (May 2026).
 - `create_sun_corona_from_distance(fig, sun_shell_vars, sun_position)` (line 305) -- RETIRED: Off-center Sun rendering migrated to unified dispatch (May 2026).
-- `create_celestial_body_visualization(fig, body_name, shell_vars, animate, frames, center_position, sun_position, object_type, center_object)` (line 319) -- Unified config-driven dispatch for celestial body shell visualization.
-- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position, sun_position)` (line 498) -- RETIRED (June 2026, animation refactor Phase 2.5 / D.Structural 3).
-- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 692) -- Creates traces for planet shells without adding them to a figure.
+- `create_celestial_body_visualization(fig, body_name, shell_vars, animate, frames, center_position, sun_position, object_type, center_object, skip_elements)` (line 319) -- Unified config-driven dispatch for celestial body shell visualization.
+- `create_planet_visualization(fig, planet_name, shell_vars, animate, frames, center_position, sun_position)` (line 507) -- RETIRED (June 2026, animation refactor Phase 2.5 / D.Structural 3).
+- `create_planet_shell_traces(planet_name, shell_vars, center_position)` (line 701) -- Creates traces for planet shells without adding them to a figure.
 
 ---
 
@@ -2520,11 +2521,11 @@ and explains in context.
 | paleoclimate_visualization | rendering | 478 | 1 | 2 |
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
-| palomas_orrery | gui | 8,869 | 29 | 0 |
+| palomas_orrery | gui | 9,033 | 29 | 0 |
 | palomas_orrery_dashboard | gui | 639 | 0 | 0 |
 | palomas_orrery_helpers | utility | 776 | 11 | 2 |
 | planet9_visualization_shells | rendering/shells | 267 | 1 | 1 |
-| planet_visualization | rendering | 655 | 18 | 5 |
+| planet_visualization | rendering | 663 | 18 | 5 |
 | planet_visualization_utilities | rendering | 676 | 2 | 20 |
 | planetarium_apparent_magnitude | rendering | 352 | 11 | 1 |
 | planetarium_distance | rendering | 399 | 11 | 1 |
