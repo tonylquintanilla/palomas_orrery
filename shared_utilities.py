@@ -107,6 +107,35 @@ def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0
         plot_scale = min_scale
         print(f"Sun direction indicator: Adjusted to minimum scale = {plot_scale:.5f} AU")
 
+    # (Phase 4, O12 / ledger item 19) Clamp to the visible cube: when the
+    # axis range is known and the arrow would exit it (manual scales, or
+    # the animate pipeline's orbital-derived ranges that can be smaller
+    # than the shell-scaled length), shorten the arrow so it terminates
+    # inside the rendered volume. Direction is preserved; only the length
+    # is clamped. min_scale still wins (a visible short arrow that clips
+    # beats an invisible one).
+    try:
+        if axis_range is not None and isinstance(axis_range, (list, tuple)) and len(axis_range) >= 2:
+            _amin = float(axis_range[0])
+            _amax = float(axis_range[1])
+            _t_exit = float('inf')
+            for _c, _d in ((center_x, sun_dir_x), (center_y, sun_dir_y),
+                           (center_z, sun_dir_z)):
+                if _d > 1e-12:
+                    _t = (_amax - _c) / _d
+                elif _d < -1e-12:
+                    _t = (_amin - _c) / _d
+                else:
+                    continue
+                if _t >= 0:
+                    _t_exit = min(_t_exit, _t)
+            if _t_exit != float('inf') and plot_scale > 0.95 * _t_exit:
+                plot_scale = max(min_scale, 0.95 * _t_exit)
+                print(f"Sun direction indicator: Clamped to axis range, "
+                      f"scale = {plot_scale:.5f} AU")
+    except Exception as _clamp_err:
+        print(f"Sun direction indicator: Clamp skipped ({_clamp_err})")
+
     # Arrow from body center toward Sun
     tip_x = center_x + plot_scale * sun_dir_x
     tip_y = center_y + plot_scale * sun_dir_y

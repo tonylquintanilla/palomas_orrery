@@ -316,10 +316,33 @@ def create_sun_corona_from_distance(fig, sun_shell_vars, sun_position):
         "center_position=sun_position) instead."
     )
     
+def _append_inertial_note(trace):
+    """(Phase 4, O20b) In animations, inertial elements (rotation axis,
+    dipole cone) stay frozen across frames -- correct physics, since their
+    orientation is constant in inertial space over animation timescales --
+    but the hover should SAY so next to elements that do track the Sun.
+    Appends one disclosure line to any hover text the trace carries;
+    geometry traces (hoverinfo='skip', no text) pass through untouched.
+    """
+    _note = ("<br><i>Animation: orientation fixed across frames "
+             "(inertial -- correct physics)</i>")
+    _txt = getattr(trace, 'text', None)
+    if _txt is None:
+        return
+    if isinstance(_txt, str):
+        trace.text = _txt + _note
+        return
+    try:
+        trace.text = [(_t + _note) if isinstance(_t, str) and _t else _t
+                      for _t in _txt]
+    except TypeError:
+        pass
+
+
 def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None,
                                         center_position=(0, 0, 0), sun_position=(0, 0, 0),
                                         object_type=None, center_object=None,
-                                        skip_elements=None):
+                                        skip_elements=None, axis_range=None):
 
     """
     Unified config-driven dispatch for celestial body shell visualization.
@@ -444,6 +467,8 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         axis_mod_path, axis_func = axis_custom['builder'].rsplit('.', 1)
         axis_builder = getattr(importlib.import_module(axis_mod_path), axis_func)
         for t in axis_builder(center_position, planet_name=body_name):
+            if animate:
+                _append_inertial_note(t)
             fig.add_trace(t)
 
     # Dipole cone (Movement 2): same body-triggered pattern as the rotation axis.
@@ -456,6 +481,8 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         dc_mod_path, dc_func = dc_custom['builder'].rsplit('.', 1)
         dc_builder = getattr(importlib.import_module(dc_mod_path), dc_func)
         for t in dc_builder(center_position, planet_name=body_name):
+            if animate:
+                _append_inertial_note(t)
             fig.add_trace(t)
 
     # ONE sun direction indicator per body (replaces ~50 per-shell calls).
@@ -481,6 +508,7 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         indicator_traces = create_sun_direction_indicator(
             center_position=center_position,
             sun_position=sun_position,
+            axis_range=axis_range,
             shell_radius=outermost_radius_au,
             object_type=object_type if object_type is not None else body_name,
             center_object=center_object,

@@ -1664,14 +1664,19 @@ def calculate_keplerian_position(orbital_params, current_datetime, rotate_points
         # Parse epoch date
         # Handle various epoch formats like "2026-01-10 osc." or "2026-01-10"
         epoch_date_str = epoch_str.replace(' osc.', '').strip()
-        try:
-            epoch_datetime = datetime.strptime(epoch_date_str, '%Y-%m-%d')
-        except ValueError:
+        # (Phase 4 rider) Horizons osculating epochs arrive as
+        # '2026-06-10 12:32 osc.' -- the chain previously lacked the
+        # '%Y-%m-%d %H:%M' form, so HH:MM epochs failed on every run.
+        epoch_datetime = None
+        for _fmt in ('%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M', '%Y-%m-%d'):
             try:
-                epoch_datetime = datetime.strptime(epoch_date_str, '%Y-%m-%d %H:%M:%S')
+                epoch_datetime = datetime.strptime(epoch_date_str, _fmt)
+                break
             except ValueError:
-                print(f"[KEPLERIAN POS] Could not parse epoch date: {epoch_str}", flush=True)
-                return None
+                continue
+        if epoch_datetime is None:
+            print(f"[KEPLERIAN POS] Could not parse epoch date: {epoch_str}", flush=True)
+            return None
         
         # Calculate time elapsed since epoch (in days)
         delta_t_days = (current_datetime - epoch_datetime).total_seconds() / 86400.0

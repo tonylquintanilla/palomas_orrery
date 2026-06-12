@@ -205,25 +205,30 @@ def create_hover_markers_for_planet(center_position, radius, color, name, descri
 
     return hover_trace
 
-def create_magnetosphere_shape(params):
+def create_magnetosphere_shape(params, n_phi=20, n_theta=20,
+                               n_tail_segments=10):
     """
     Creates points for a magnetosphere with asymmetry, compressed on sunward side
     and extended on the tail side.
-    
+
     Parameters:
         params (dict): Dictionary of shape parameters
-        
+        n_phi (int): Sunward-hemisphere polar resolution (default 20 --
+            the pre-promotion literal; callers passing nothing render
+            byte-identical output). Phase 4: promoted to a keyword so
+            per-frame callers can request reduced density if a future
+            budget requires it (measured June 2026: full resolution plus
+            7-decimal coordinate rounding already fits the per-frame
+            budget, so the defaults are also the per-frame values).
+        n_theta (int): Azimuthal resolution (default 20).
+        n_tail_segments (int): Magnetotail axial segments (default 10).
+
     Returns:
         tuple: (x, y, z) coordinates as lists
     """
     x_coords = []
     y_coords = []
     z_coords = []
-    
-    # Number of points to generate (reduced for memory efficiency)
-    n_phi = 20              # from 30 to 20
-    n_theta = 20            # from 30 to 20
-    n_tail_segments = 10    # from 20 to 10
     
     # 1. Generate sunward hemisphere (compressed, use an ellipsoid)
     for i_phi in range(int(n_phi/2)):

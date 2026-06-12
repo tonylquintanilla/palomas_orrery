@@ -1105,7 +1105,7 @@ today = datetime.today()
 STATIC_TODAY = today
 
 # Middle column - Controls
-controls_container = tk.Frame(main_paned, bg='gray90')
+controls_container = tk.Frame(main_paned, bg='SystemButtonFace')
 #controls_container.pack_propagate(False)
 #controls_container.config(width=450, height=750)
 
@@ -1113,7 +1113,7 @@ controls_container.pack_propagate(True)  # Allow container to resize
 # Remove the fixed width - let PanedWindow control it
 
 # Create a canvas inside the container
-controls_canvas = tk.Canvas(controls_container, bg='gray90')
+controls_canvas = tk.Canvas(controls_container, bg='SystemButtonFace')
 # controls_scrollbar = tk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview, width=16)
 controls_scrollbar = ttk.Scrollbar(controls_container, orient="vertical", command=controls_canvas.yview)
 
@@ -1123,12 +1123,12 @@ controls_canvas.pack(side="left", fill="both", expand=True)
 controls_scrollbar.pack(side="right", fill="y")
 
 # Create the frame that will contain all the controls
-controls_frame = tk.Frame(controls_canvas, bg='gray90')
+controls_frame = tk.Frame(controls_canvas, bg='SystemButtonFace')
 
 # Add these lines after controls_frame is created
-controls_container.configure(bg='gray90')
-controls_canvas.configure(bg='gray90')
-controls_frame.configure(bg='gray90')
+controls_container.configure(bg='SystemButtonFace')
+controls_canvas.configure(bg='SystemButtonFace')
+controls_frame.configure(bg='SystemButtonFace')
 
 # Update the canvas window creation with explicit width
 controls_window = controls_canvas.create_window(
@@ -1145,7 +1145,7 @@ scroll_message = tk.Label(
     controls_frame,
     text="SCROLL DOWN TO SEE ALL PLOTTING OPTIONS",
     fg='red',
-    bg='gray90',
+    bg='SystemButtonFace',
     font=("Arial", 10, 
     #      "bold"
           )
@@ -1963,7 +1963,7 @@ def add_center_body_marker(fig, center_object_name, params=None):
 def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
                            planet_shell_vars_map, sun_position,
                            scale_value, axis_range, log_prefix='',
-                           skip_elements=None):
+                           skip_elements=None, animate=False):
     """(2c) Center-body shell dispatch -- one implementation, both pipelines.
 
     Sun center: unified dispatch (create_celestial_body_visualization) plus
@@ -1997,6 +1997,14 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
             object_type='Sun',
             center_object='Sun',
             skip_elements=skip_elements,
+            animate=animate,
+            # (Phase 4, O12) Clamp input for the indicator. Auto passes
+            # None: the Auto range is widened to 2x shell extent AFTER
+            # this dispatch runs, so clamping against the incoming
+            # (pre-widening) range would over-clamp; with the widened
+            # range the 1.15x-shell arrow always fits. Manual ranges are
+            # final, so they clamp.
+            axis_range=(None if scale_value == 'Auto' else axis_range),
         )
         center_shells_added = True
         # Auto-scale axis to shell radius (same as planet path)
@@ -2031,6 +2039,10 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
                 object_type=center_object_name,
                 center_object=center_object_name,
                 skip_elements=skip_elements,
+                animate=animate,
+                # (Phase 4, O12) Same Auto-vs-Manual clamp rule as the
+                # Sun branch above.
+                axis_range=(None if scale_value == 'Auto' else axis_range),
             )
             center_shells_added = True
             if log_prefix:
@@ -2057,6 +2069,91 @@ import importlib as _importlib
 # fallback (100x body radius) since non-center bodies render no shells whose
 # outermost radius could size it.
 PERFRAME_INDICATOR_RADIUS_FACTOR = 100.0
+
+
+def _parse_osc_epoch(epoch_str):
+    """(Phase 4 rider) Parse an osculating-elements epoch string. Horizons
+    epochs arrive as '2026-06-10 12:32 osc.', '2026-01-10', or with
+    seconds; the previous per-site chains lacked '%Y-%m-%d %H:%M', so
+    HH:MM epochs fell through -- to a console error in apsidal_markers
+    and, worse, to a SILENT J2000 fallback at four sites in this file (a
+    wrong-position failure, not just noise). Returns datetime or None;
+    callers print a loud note before applying any fallback.
+    """
+    _s = str(epoch_str).replace(' osc.', '').strip()
+    for _fmt in ('%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M', '%Y-%m-%d'):
+        try:
+            return datetime.strptime(_s, _fmt)
+        except ValueError:
+            continue
+    return None
+
+
+# (Phase 4, ADDENDUM decision 3) Coordinate rounding at the engine
+# chokepoint. Frame payloads are coordinate text: rounding x/y/z to 7
+# decimals in AU (~15 km -- invisible at magnetosphere scale at any
+# heliocentric distance) roughly halves the serialized bytes of every
+# per-frame element. Measured June 12, 2026: Earth magnetosphere FULL
+# 133->68 KB/frame; Jupiter FULL 79->43; Mercury sodium tail 46->31.
+# DECIMAL places (not significant digits) are the scale-safe form: local
+# geometry keeps the same absolute resolution at 19 AU as at 1 AU.
+# Applied inside build_perframe_traces, so allocation, the max-probe, and
+# every rebuild all see -- and the 150 KB/frame guardrail budgets --
+# rounded bytes. Full-resolution geometry plus this rounding fits the
+# per-body budget, which is why no density reduction ships with Phase 4.
+PERFRAME_COORD_DECIMALS = 7
+
+
+def _round_perframe_coords(traces):
+    """Round per-frame trace coordinates in place (x/y/z and cone u/v/w
+    when present). Integer mesh indices (i/j/k), text, and customdata are
+    untouched. All-non-finite arrays (invisible dummy slots, x=[None])
+    are skipped so dummies keep their exact None payload; None gap
+    separators inside real line traces serialize as null either way."""
+    for _t in traces:
+        for _attr in ('x', 'y', 'z', 'u', 'v', 'w'):
+            _val = getattr(_t, _attr, None)
+            if _val is None or len(_val) == 0:
+                continue
+            try:
+                _arr = np.asarray(_val, dtype=float)
+            except (TypeError, ValueError):
+                continue
+            if not np.isfinite(_arr).any():
+                continue
+            setattr(_t, _attr, np.round(_arr, PERFRAME_COORD_DECIMALS))
+    return traces
+
+
+def _perframe_optin_active(entry):
+    """(Phase 4) Entries tagged per_frame_opt_in (magnetospheres) animate
+    only when the global 'Animate magnetospheres' checkbox is on; entries
+    without the tag ride their existing triggers unchanged. Consumed by
+    get_center_engine_elements, collect_perframe_elements, and the
+    static-only legend placeholders -- all three per_frame consumers gate
+    identically or they diverge (the parallel-pipeline lesson)."""
+    if not (isinstance(entry, dict) and entry.get('per_frame_opt_in')):
+        return True
+    try:
+        return animate_magnetospheres_var.get() == 1
+    except Exception:
+        return False
+
+
+def _animate_axis_range_hint(center_object_name):
+    """(Phase 4, O12) The animation's axis range, computed from the same
+    inputs the downstream computation uses (a pure function of GUI state
+    and selections), so the sun-direction indicator can be clamped to the
+    visible cube at allocation time -- the animate pipeline otherwise
+    derives its range from ORBITAL extent, which can be smaller than the
+    indicator's shell-scaled length (the O12 clip). None on any failure;
+    the clamp is then simply skipped."""
+    try:
+        return get_animation_axis_range(scale_var, custom_scale_entry,
+                                        objects, planetary_params,
+                                        parent_planets, center_object_name)
+    except Exception:
+        return None
 
 
 def get_center_engine_elements(center_object_name):
@@ -2088,6 +2185,11 @@ def get_center_engine_elements(center_object_name):
     for element, entry in customs.items():
         if not (isinstance(entry, dict) and entry.get('per_frame')
                 and entry.get('needs_sun_position')):
+            continue
+        # (Phase 4) Opt-in gate: with 'Animate magnetospheres' off, the
+        # center's magnetosphere stays with the static dispatch (frozen
+        # at frame 1), so it must NOT enter the skip set.
+        if not _perframe_optin_active(entry):
             continue
         own_var = shell_vars.get(prefix + element) or shell_vars.get(element)
         if own_var is not None and own_var.get() != 1:
@@ -2137,6 +2239,9 @@ def collect_perframe_elements(center_object_name, candidate_body_names,
     """
     from shell_configs import CUSTOM_SHELLS
     specs = []
+    # (Phase 4, O12) One range hint for every indicator spec this call
+    # produces -- the clamp input for create_sun_direction_indicator.
+    _range_hint = _animate_axis_range_hint(center_object_name)
     planet_map = get_planet_shell_vars_map()
     for body in candidate_body_names:
         if body == center_object_name:
@@ -2152,6 +2257,10 @@ def collect_perframe_elements(center_object_name, candidate_body_names,
         _body_prefix = body.lower().replace(' ', '_') + '_'
         for element, entry in customs.items():
             if not (isinstance(entry, dict) and entry.get('per_frame')):
+                continue
+            # (Phase 4) Opt-in gate: magnetosphere-class entries animate
+            # only when the global 'Animate magnetospheres' box is checked.
+            if not _perframe_optin_active(entry):
                 continue
             # (Session C) Checkbox-gated elements: if this element has its
             # own checkbox in the body's shell vars (e.g. Mercury sodium
@@ -2189,6 +2298,7 @@ def collect_perframe_elements(center_object_name, candidate_body_names,
                     'object_type': body,
                     'center_object': center_object_name,
                     'body_name': body,
+                    'axis_range': _range_hint,
                 },
             })
 
@@ -2253,6 +2363,7 @@ def collect_perframe_elements(center_object_name, candidate_body_names,
                     'object_type': center_object_name,
                     'center_object': center_object_name,
                     'body_name': center_object_name,
+                    'axis_range': _range_hint,
                 },
                 'center_fixed': True,
             })
@@ -2308,8 +2419,8 @@ def build_perframe_traces(spec, body_pos, sun_pos, frame_entry=None,
 
     if quiet:
         with contextlib.redirect_stdout(io.StringIO()):
-            return _call()
-    return _call()
+            return _round_perframe_coords(_call())
+    return _round_perframe_coords(_call())
 
 
 def _pad_perframe_traces(traces, target_count, body, element, frame_i):
@@ -2463,7 +2574,14 @@ def add_static_only_legend_placeholders(fig, center_object_name):
         if k.startswith(prefix):
             k = k[len(prefix):]
         entry = CUSTOM_SHELLS.get(body, {}).get(k)
-        return bool(isinstance(entry, dict) and entry.get('per_frame'))
+        # (Phase 4) Mirror the opt-in gate: an entry the engine is gated
+        # OFF from animating is NOT engine-animated, so its checked shell
+        # still earns the '(static plots only)' placeholder. Without this,
+        # a checked magnetosphere would vanish from legend AND render with
+        # the box unchecked -- the exact silent-absence the placeholders
+        # exist to prevent.
+        return bool(isinstance(entry, dict) and entry.get('per_frame')
+                    and _perframe_optin_active(entry))
 
     n_before = len(fig.data)
     if center_object_name != 'Sun':
@@ -2583,7 +2701,7 @@ controls_canvas.config(width=430, height=710)  # 450 container - 16 scrollbar - 
 orbit_paths_over_time = None  # Will be set by orbit_data_manager
 
 # After creating the status_display widget, initialize the orbit_data_manager
-status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg='gray90', fg='black')
+status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg='SystemButtonFace', fg='black')
 
 # orbit_paths_over_time = orbit_data_manager.initialize(status_display)  # removed because it is redundant
 
@@ -3311,7 +3429,7 @@ class ScrollableFrame(tk.Frame):
         super().__init__(container, *args, **kwargs)
 
         # Canvas and Scrollbar
-        self.canvas = tk.Canvas(self, bg='gray90')
+        self.canvas = tk.Canvas(self, bg='SystemButtonFace')
         self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self.scrollbar.set) 
 
@@ -3320,7 +3438,7 @@ class ScrollableFrame(tk.Frame):
         self.scrollbar.pack(side="right", fill="y")
 
         # Scrollable Frame
-        self.scrollable_frame = tk.Frame(self.canvas, bg='gray90')
+        self.scrollable_frame = tk.Frame(self.canvas, bg='SystemButtonFace')
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
 
         # Bind mousewheel to the canvas
@@ -3378,7 +3496,7 @@ class ScrollableFrame(tk.Frame):
         event.widget.unbind_all("<Button-5>")
 
 # Left column - Object selection
-input_frame = tk.Frame(main_paned, bg='gray90')
+input_frame = tk.Frame(main_paned, bg='SystemButtonFace')
 
 # Configure grid weights within input_frame for proper spacing
 input_frame.grid_rowconfigure(0, weight=0)  # Row for date inputs
@@ -4053,10 +4171,11 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         # Reference epoch and mean anomaly
                         if 'MA' in elements and 'epoch' in elements:
                             MA_epoch = elements['MA']
-                            epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
-                            try:
-                                ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
-                            except ValueError:
+                            ref_epoch = _parse_osc_epoch(elements['epoch'])
+                            if ref_epoch is None:
+                                print(f"[EPOCH] Could not parse epoch "
+                                      f"{elements['epoch']!r}; using J2000 "
+                                      f"fallback", flush=True)
                                 ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
                         else:
                             MA_epoch = 0.0
@@ -5001,10 +5120,11 @@ def plot_objects():
                             
                             # Get reference epoch
                             if 'epoch' in elements:
-                                epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
-                                try:
-                                    ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
-                                except ValueError:
+                                ref_epoch = _parse_osc_epoch(elements['epoch'])
+                                if ref_epoch is None:
+                                    print(f"[EPOCH] Could not parse epoch "
+                                          f"{elements['epoch']!r}; using J2000 "
+                                          f"fallback", flush=True)
                                     ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
                             else:
                                 ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
@@ -5424,10 +5544,11 @@ def plot_objects():
                         # Use object's values if available, else J2000 with MA=0
                         if 'MA' in elements and 'epoch' in elements:
                             MA_epoch = elements['MA']
-                            epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
-                            try:
-                                ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
-                            except ValueError:
+                            ref_epoch = _parse_osc_epoch(elements['epoch'])
+                            if ref_epoch is None:
+                                print(f"[EPOCH] Could not parse epoch "
+                                      f"{elements['epoch']!r}; using J2000 "
+                                      f"fallback", flush=True)
                                 ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
                         else:
                             MA_epoch = 0.0
@@ -6538,10 +6659,11 @@ def animate_objects(step, label):
                                     # Use object's values if available, else J2000 with MA=0
                                     if 'MA' in elements and 'epoch' in elements:
                                         MA_epoch = elements['MA']
-                                        epoch_str = str(elements['epoch']).replace(' osc.', '').strip()
-                                        try:
-                                            ref_epoch = datetime.strptime(epoch_str, '%Y-%m-%d')
-                                        except ValueError:
+                                        ref_epoch = _parse_osc_epoch(elements['epoch'])
+                                        if ref_epoch is None:
+                                            print(f"[EPOCH] Could not parse epoch "
+                                                  f"{elements['epoch']!r}; using J2000 "
+                                                  f"fallback", flush=True)
                                             ref_epoch = datetime(2000, 1, 1, 12, 0, 0)
                                     else:
                                         MA_epoch = 0.0
@@ -6698,7 +6820,8 @@ def animate_objects(step, label):
                 fig, center_object_name, sun_shell_vars,
                 get_planet_shell_vars_map(), _sun_pos_tuple,
                 scale_var.get(), None, log_prefix='[ANIMATION] ',
-                skip_elements=_center_engine_elements)
+                skip_elements=_center_engine_elements,
+                animate=True)
 
             # (2a) Canonical center-body marker -- unconditional, placed BEFORE
             # the fence so it counts as a static (constant) trace. Renders with
@@ -7383,6 +7506,71 @@ def animate_objects(step, label):
                 paths that frames never modify)."""
                 return _frame_pos_by_trace_idx.get(absolute_idx)
             
+            # (Phase 4) Camera tracking setup: when a tracked body is
+            # selected, each frame's layout will carry scene axis ranges
+            # centered on the body's position at that frame -- the view
+            # window translates with the body while the CAMERA stays free
+            # (the user can still orbit during playback; range-tracking,
+            # unlike frame-driven camera eyes, does not fight the mouse).
+            # House pattern: the Fly To buttons zoom by moving ranges, not
+            # by flying the camera inside an AU-scale cube, which keeps
+            # this precision- and clipping-safe at any heliocentric
+            # distance. Requires redraw=True in the animate args (already
+            # set) for frame layouts to apply.
+            _track_body = None
+            _track_radius = None
+            try:
+                _tc = track_camera_var.get()
+            except Exception:
+                _tc = 'None (free camera)'
+            if _tc and not _tc.startswith('None'):
+                _ttraj = positions_over_time.get(_tc)
+                if _ttraj and any(_p is not None and 'x' in _p for _p in _ttraj):
+                    _track_body = _tc
+                    _track_shells_on = False
+                    _track_pm = get_planet_shell_vars_map().get(_tc)
+                    if _track_pm and any(v.get() == 1 for v in _track_pm.values()):
+                        _track_shells_on = True
+                    if _track_shells_on and _tc in CENTER_BODY_RADII:
+                        # Frame the magnetosphere: tails run to ~100 body
+                        # radii, so a 120x half-width shows it whole with
+                        # margin (ledger item 19: tracked zoom must respect
+                        # shell extent, not just orbital distance).
+                        _track_radius = 120.0 * CENTER_BODY_RADII[_tc] / KM_PER_AU
+                    else:
+                        _t_first = next(_p for _p in _ttraj
+                                        if _p is not None and 'x' in _p)
+                        _t_dist = (_t_first['x']**2 + _t_first['y']**2
+                                   + _t_first['z']**2) ** 0.5
+                        # Existing Fly To distance formula (defaults).
+                        _track_radius = 0.1 + _t_dist * 0.05
+                    print(f"[ANIMATION] Camera tracking: {_track_body}, "
+                          f"view half-width {_track_radius:.5f} AU "
+                          f"({_track_radius * KM_PER_AU:,.0f} km)", flush=True)
+                else:
+                    print(f"[ANIMATION] NOTE: camera tracking requested for "
+                          f"{_tc!r} but it has no animated positions -- "
+                          f"tracking disabled for this run.", flush=True)
+
+            def _track_frame_layout(_i):
+                """Per-frame scene ranges centered on the tracked body.
+                Returns None when tracking is off or the body's position
+                is missing at this frame (the view then holds its last
+                window rather than jumping)."""
+                if _track_body is None:
+                    return None
+                _tp = positions_over_time.get(_track_body)
+                _e = _tp[_i] if _tp and _i < len(_tp) else None
+                if _e is None or 'x' not in _e:
+                    return None
+                return go.Layout(scene=dict(
+                    xaxis=dict(range=[_e['x'] - _track_radius,
+                                      _e['x'] + _track_radius]),
+                    yaxis=dict(range=[_e['y'] - _track_radius,
+                                      _e['y'] + _track_radius]),
+                    zaxis=dict(range=[_e['z'] - _track_radius,
+                                      _e['z'] + _track_radius])))
+
             for i in range(N):
                 # Copy only frame-updated traces (static shells and constant
                 # traces like orbit paths are not carried in frames)
@@ -7580,11 +7768,18 @@ def animate_objects(step, label):
 
                 # Create frame with selective trace update
                 # The traces parameter tells Plotly which fig.data indices this frame updates
-                frames.append(go.Frame(
+                _frame_kwargs = dict(
                     data=frame_data,
                     traces=dynamic_trace_indices,  # Only update dynamic traces, not static shells
-                    name=str(dates_list[i].strftime('%Y-%m-%d %H:%M'))
-                ))
+                    name=str(dates_list[i].strftime('%Y-%m-%d %H:%M')))
+                # (Phase 4) Camera tracking: this frame's layout carries the
+                # scene ranges centered on the tracked body (None = tracking
+                # off, or the body's position is missing at this frame --
+                # the view then simply holds its last window).
+                _tl = _track_frame_layout(i)
+                if _tl is not None:
+                    _frame_kwargs['layout'] = _tl
+                frames.append(go.Frame(**_frame_kwargs))
 
 
             # Get axis range using orbital parameters (same as static plots)
@@ -7824,6 +8019,27 @@ def animate_objects(step, label):
             fig = add_look_at_object_buttons(fig, initial_positions, center_object_name)            
           
             fig = add_fly_to_object_buttons(fig, initial_positions, center_object_name)  # NEW
+
+            # (Phase 4) Camera tracking: start at the frame-1 tracked window
+            # with a grid sized to it; the per-frame layouts then carry the
+            # window along. Placed after the main layout/buttons so nothing
+            # downstream overrides the initial ranges.
+            if _track_body is not None:
+                _tl0 = _track_frame_layout(0)
+                if _tl0 is not None:
+                    from visualization_utils import _calculate_grid_dtick
+                    _zoom_dtick = _calculate_grid_dtick(_track_radius * 2)
+                    fig.update_layout(scene=dict(
+                        xaxis=dict(range=list(_tl0.scene.xaxis.range),
+                                   dtick=_zoom_dtick),
+                        yaxis=dict(range=list(_tl0.scene.yaxis.range),
+                                   dtick=_zoom_dtick),
+                        zaxis=dict(range=list(_tl0.scene.zaxis.range),
+                                   dtick=_zoom_dtick),
+                        aspectmode='cube'))
+                    print(f"[ANIMATION] Camera tracking: initial view at "
+                          f"{_track_body}'s frame-1 window, grid "
+                          f"{_zoom_dtick:.6f} AU", flush=True)
 
             # Add URL buttons before showing/saving
             fig = add_url_buttons(fig, objects, selected_objects)            
@@ -10142,15 +10358,24 @@ num_frames_entry.pack(padx=10, pady=(2, 5), anchor='w')
 num_frames_entry.insert(0, '29')  # Default number of frames
 CreateToolTip(num_frames_entry, "Do not exceed 130 to avoid timing out JPL Horizons' data fetch.")
 
+# (Phase 4, ADDENDUM decision 2) Per-frame elements group: one labeled home
+# for the opt-in toggles the engine consumes, so Feature N+1 lands here
+# instead of accreting loose checkboxes. Comet tails moved in unchanged
+# (same variable name, same default); magnetospheres and camera tracking
+# are new.
+perframe_frame = tk.LabelFrame(animation_frame,
+                               text="Per-frame elements (rebuild each frame)")
+perframe_frame.pack(padx=10, pady=(0, 5), fill='x')
+
 # (21/51 Phase 3 Session C) Opt-in: rebuild comet tails each animation frame.
 # Default OFF per the O1 decision (frame-1 freeze acceptable; multi-frame is
 # opt-in, not default). MAPS is excluded from per-frame mode regardless.
 animate_comet_tails_var = tk.IntVar(value=0)
 animate_comet_tails_check = tk.Checkbutton(
-    animation_frame,
-    text="Animate comet tails (rebuild each frame)",
+    perframe_frame,
+    text="Animate comet tails",
     variable=animate_comet_tails_var)
-animate_comet_tails_check.pack(padx=10, pady=(0, 5), anchor='w')
+animate_comet_tails_check.pack(padx=10, pady=(2, 0), anchor='w')
 CreateToolTip(animate_comet_tails_check,
               "When checked, comet nucleus/coma/tails are rebuilt at each "
               "animation frame so the tail swings anti-sunward as the comet "
@@ -10158,6 +10383,46 @@ CreateToolTip(animate_comet_tails_check,
               "trace payload per frame to the saved HTML. Off: tails are "
               "drawn once at the first frame (smaller files). MAPS uses "
               "first-frame mode regardless (date-gated disintegration).")
+
+# (Phase 4) Opt-in: rebuild magnetospheres each animation frame. Default OFF
+# (file size); coordinates are rounded to ~15 km at the engine chokepoint,
+# which roughly halves the per-frame payload (measured June 2026).
+animate_magnetospheres_var = tk.IntVar(value=0)
+animate_magnetospheres_check = tk.Checkbutton(
+    perframe_frame,
+    text="Animate magnetospheres",
+    variable=animate_magnetospheres_var)
+animate_magnetospheres_check.pack(padx=10, pady=(2, 0), anchor='w')
+CreateToolTip(animate_magnetospheres_check,
+              "When checked, magnetospheres (with their bow shocks and "
+              "radiation belts) are rebuilt at each animation frame so the "
+              "magnetotail swings to stay anti-sunward as the body orbits "
+              "the Sun -- orientations that respond to the Sun, not just "
+              "positions. Applies to any body whose magnetosphere checkbox "
+              "is on (center or not). Adds roughly 40-80 KB per frame per "
+              "body. Off: the center body's magnetosphere renders frozen "
+              "at its frame-1 orientation; non-center magnetospheres are "
+              "not rendered in animations.")
+
+# (Phase 4) Camera tracking: per-frame scene ranges centered on the tracked
+# body. The view window translates with the body while the camera stays
+# free -- the user can still orbit during playback, because range-tracking
+# (the same mechanism as the Fly To buttons) does not touch the camera eye.
+track_camera_var = tk.StringVar(value='None (free camera)')
+track_camera_label = tk.Label(perframe_frame,
+                              text="Camera: track body across frames:")
+track_camera_label.pack(padx=10, pady=(4, 0), anchor='w')
+track_camera_combo = ttk.Combobox(
+    perframe_frame, textvariable=track_camera_var, width=28,
+    values=['None (free camera)'] + [o['name'] for o in objects])
+track_camera_combo.pack(padx=10, pady=(0, 4), anchor='w')
+CreateToolTip(track_camera_combo,
+              "Follow a body through its orbit: each animation frame "
+              "re-centers the view window on the body (like pressing its "
+              "Fly To button every frame). When the body's shells are "
+              "checked, the window is sized to frame the magnetosphere. "
+              "You can still rotate the view with the mouse during "
+              "playback. 'None' leaves the view fixed (current behavior).")
 
 """
 # Create a new frame for orbit path fetching controls
@@ -10185,7 +10450,7 @@ CreateToolTip(orbit_path_frame,
 )
 
 # After orbit_path_frame, where you want to position the status frame:
-status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg='gray90', fg='black')
+status_frame = tk.LabelFrame(controls_frame, text="Data Fetching Status and Output Messages", padx=10, pady=10, bg='SystemButtonFace', fg='black')
 status_frame.pack(pady=(5, 5), fill='x')
 
 # NOW create the output_label inside the status_frame
@@ -10193,7 +10458,7 @@ output_label = tk.Label(
     status_frame,
     text="Will fetch live data from NASA's Jet Propulsion Laboratory at Caltech. Please be patient ...",
     fg='red',
-    bg='gray90',  # Match the background of the LabelFrame
+    bg='SystemButtonFace',  # Match the background of the LabelFrame
     wraplength=300,  # Increased wraplength for better readability
     justify='left',
     anchor='w'
@@ -10212,7 +10477,7 @@ status_display = tk.Label(
     status_frame, 
     text="Data Fetching Status", 
 #    font=("Arial", 10), 
-    bg='gray90', 
+    bg='SystemButtonFace', 
     fg='green'
 )
 status_display.pack(anchor='w', padx=5, pady=5)
@@ -10306,7 +10571,7 @@ plot_button = tk.Button(
     command=plot_objects, 
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='gray90', 
+    bg='SystemButtonFace', 
     fg='blue'
 )
 plot_button.pack(side='left', padx=(0, 5), pady=(5, 0))
@@ -10319,7 +10584,7 @@ social_export_button = tk.Button(
     command=export_social_view,
     width=BUTTON_WIDTH,
     font=BUTTON_FONT,
-    bg='gray90',
+    bg='SystemButtonFace',
     fg='blue'
 )
 social_export_button.pack(side='left', padx=(0, 5), pady=(5, 0))
@@ -10377,7 +10642,7 @@ animate_minute_button = tk.Button(
     command=animate_one_minute,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='gray90', 
+    bg='SystemButtonFace', 
     fg='blue'
 )
 animate_minute_button.grid(row=0, column=0, padx=(0, 5), pady=(5, 0))
@@ -10391,27 +10656,27 @@ animate_hour_button = tk.Button(
     command=animate_one_hour,
     width=BUTTON_WIDTH, 
     font=BUTTON_FONT, 
-    bg='gray90', 
+    bg='SystemButtonFace', 
     fg='blue'
 )
 animate_hour_button.grid(row=0, column=1, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_hour_button, "Animate the motion over hours. Shows position every hour.")
 
 # First Row of Animate Buttons: "Animate Days" and "Animate Weeks"
-animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
+animate_day_button = tk.Button(advance_buttons_frame, text="Animate Days", command=animate_one_day, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
 animate_day_button.grid(row=1, column=0, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_day_button, "Animate the motion over days. This may take a while due to the large number of positions fetched.")
 
-animate_week_button = tk.Button(advance_buttons_frame, text="Animate Weeks", command=animate_one_week, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
+animate_week_button = tk.Button(advance_buttons_frame, text="Animate Weeks", command=animate_one_week, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
 animate_week_button.grid(row=1, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_week_button, "Animate the motion over weeks. This may take a while due to the large number of positions fetched.")
 
 # Second Row of Animate Buttons: "Animate Months" and "Animate Years"
-animate_month_button = tk.Button(advance_buttons_frame, text="Animate Months", command=animate_one_month, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
+animate_month_button = tk.Button(advance_buttons_frame, text="Animate Months", command=animate_one_month, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
 animate_month_button.grid(row=2, column=0, padx=(0, 5), pady=(5, 0))
 CreateToolTip(animate_month_button, "Animate the motion over months. This may take a while due to the large number of positions fetched.")
 
-animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", command=animate_one_year, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='gray90', fg='blue')
+animate_year_button = tk.Button(advance_buttons_frame, text="Animate Years", command=animate_one_year, width=BUTTON_WIDTH, font=BUTTON_FONT, bg='SystemButtonFace', fg='blue')
 animate_year_button.grid(row=2, column=1, padx=(5, 0), pady=(5, 0))
 CreateToolTip(animate_year_button, "Animate the motion over years. This may take a while due to the large number of positions fetched.")
 
@@ -10536,7 +10801,7 @@ CreateToolTip(orbital_viz_button, "Open an interactive visualization of orbital 
 #    command=open_star_visualization,
 #    width=BUTTON_WIDTH*2 + 5,  # Make it span two columns
 #    font=BUTTON_FONT, 
-#    bg='gray90', 
+#    bg='SystemButtonFace', 
 #    fg='blue'
 #    bg='blue', 
 #    fg='white'
@@ -10546,13 +10811,13 @@ CreateToolTip(orbital_viz_button, "Open an interactive visualization of orbital 
 #              "including HR diagrams and stellar neighborhoods.")
 
 # Right column - Notes
-note_frame = tk.Frame(main_paned, bg='gray90')
+note_frame = tk.Frame(main_paned, bg='SystemButtonFace')
 
 # Add the "Note" Label
 note_label = tk.Label(
     note_frame,
     text="Note:",
-    bg='gray90',
+    bg='SystemButtonFace',
     fg='black',
     font=(
         "Arial",
@@ -10569,7 +10834,7 @@ note_text_widget = scrolledtext.ScrolledText(
     wrap='word',
     width=44,
     height=44.5,
-    bg='gray90',
+    bg='SystemButtonFace',
     fg='black',
     insertbackground='white'
 )

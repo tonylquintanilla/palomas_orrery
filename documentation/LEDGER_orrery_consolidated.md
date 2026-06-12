@@ -240,12 +240,14 @@ Closed SINCE v23 (Movement chain + verified):
 ### D.Priority -- real bugs
 
 - **`[KEPLERIAN POS] Could not parse epoch date` with 'osc.' suffix**
-  -- OPEN (promoted from the C-results, June 11). Appears EVERY console
-  run for every planet: the epoch parser cannot handle the ' osc.'
-  suffix on osculating epoch strings (e.g. '2026-06-10 12:32 osc.'),
-  silently preventing Keplerian position calculation for every body
-  with osculating elements. Pre-existing (not a Phase regression).
-  Fix: strip/handle the suffix in the parser.
+  -- FIXED in Phase 4 (June 12) `[render-gated]`. The apsidal_markers
+  chain gained the missing '%Y-%m-%d %H:%M' form (the suffix WAS being
+  stripped; the HH:MM format was not in the chain). The fix uncovered
+  the worse half: FOUR sites in palomas_orrery.py used the same broken
+  chain with a SILENT J2000 fallback -- a wrong-position failure, not
+  console noise. All four now route through _parse_osc_epoch (one
+  producer, three formats) with a loud [EPOCH] note before any J2000
+  fallback. Smoke-tested (all three Horizons forms + garbage -> None).
 - FIXED in pass C2 (June 11, `[render-gated v4.1]`), three v4 blockers:
   * **C2a frame-1 comet doubling** -- the pre-existing frame-1 tail
     block AND the engine both added the comet's traces (incl. the
@@ -330,17 +332,41 @@ Closed SINCE v23 (Movement chain + verified):
   FIXTURE LIST (all scaling work lives here; no separate session track):
     * Photosphere auto-scale collapse (static Auto = shell extent alone,
       hiding orbits; Session-A Finding 1 concrete case).
-    * Sun-Direction indicator clipped by cube range (Finding 1 / O12).
+    * Sun-Direction indicator clipped by cube range (Finding 1 / O12)
+      -- FIXED in Phase 4 (June 12) `[render-gated]`: geometric clamp in
+      create_sun_direction_indicator (ray-cube exit along the sun
+      direction, 0.95 margin, min_scale floor wins); axis_range threaded
+      through the unified dispatch (Manual scales only -- Auto widens to
+      2x shell extent AFTER the dispatch, so the incoming range would
+      over-clamp) and into both engine indicator specs via a
+      collect-time range hint (the animate pipeline's orbital-derived
+      Auto range CAN undercut the shell-scaled length -- the O12 case).
+      No-range path byte-identical (smoke-tested).
     * Sun orbit around a planet center lacks cube buffer (O12).
     * Fly To zoom limit ignores shell extent (computed from orbital
       distance/marker size; planets stop too far out to see magnetosphere
-      or belts; comets okay). (O13b, June 11.)
-    * CAMERA TRACKING across animation frames -- no mechanism exists; Fly To
-      shows frame 1 only; blocks Mode-5 verification of riding primitives
-      at solar-system scale (Session B gap). MECHANISM NOTE for the design
-      pass: go.Frame(layout=...) can carry scene.camera per frame --
-      implementable inside existing animation machinery; needs a
-      user-interaction toggle (frame-driven camera fights manual orbit).
+      or belts; comets okay). (O13b, June 11.) PARTIAL (Phase 4): the
+      new CAMERA-TRACKING window is shell-aware (120x body radius when
+      shells are checked -- frames the full magnetotail); the static
+      Fly To buttons still use the orbital-distance formula. Remaining
+      scope: port the shell-aware sizing to add_fly_to_object_buttons,
+      consuming fig._shell_outermost_radius_au where set (one producer).
+    * CAMERA TRACKING across animation frames -- IMPLEMENTED in Phase 4
+      (June 12) `[render-gated]`, and BETTER than the mechanism note
+      below anticipated: frames carry per-frame SCENE RANGES centered on
+      the tracked body (go.Frame(layout=...)), not a camera eye. The
+      view window translates with the body while the camera stays FREE
+      -- the user can orbit during playback, because range-tracking
+      (the same mechanism as the Fly To buttons; house pattern) never
+      touches the eye. The track+orbit conflict the note feared largely
+      dissolves. UI: 'Camera: track body across frames' combobox in the
+      new Per-frame elements group; requires redraw=True (already set).
+      RESIDUAL: frame-driven range updates stomp MANUAL ZOOM during
+      playback (orbiting is fine); a JS event-based alternative
+      (relayout on frame transitions, preserving user deltas) is parked
+      as a designed follow-on -- see ADDENDUM_phase4 amendment C.
+      Superseded mechanism note kept for the record: go.Frame layout can
+      also carry scene.camera, but a frame-driven eye fights the mouse.
     * Directional arrow camera controls for Plotly 3D (Studio has 2D
       D-pad pan; no 3D equivalent) -- precise cameras without the
       mouse; aids shell-scale visual verification. (Promoted June 11.)
@@ -391,17 +417,27 @@ Closed SINCE v23 (Movement chain + verified):
     Design authority: ANIMATION_ENGINE_DESIGN_v1.md (sec 8 footnote
     superseded by the greyed legend -- amend on next touch).
   - **REMAINING RIDERS after the v4 gate:**
-    * Resolution-sweep follow-on: gate 5(a) bytes PASSED (Session A,
-      measured); gate 5(b) = Tony's Mode-5 quality judgment at reduced
-      density. Scope shrank twice (Session A): bow-shock conic already
-      parameterized; envelope = ONE shared-producer promotion
-      (create_magnetosphere_shape); per-body density literals + one
-      dispatch flag. Doubles as 20/N5's backend.
+    * Resolution-sweep follow-on: RESOLVED BY MEASUREMENT (Phase 4,
+      June 12, ADDENDUM decision 3). The 7-decimal coordinate-rounding
+      lever (PERFRAME_COORD_DECIMALS, applied at the build_perframe_traces
+      chokepoint -- every engine element inherits it) roughly HALVES
+      per-frame bytes: Earth magnetosphere FULL 133->68 KB/f, Jupiter
+      FULL 79->43, sodium tail 46->31 (live-measured; decimal places are
+      scale-safe at any heliocentric distance, unlike significant
+      digits). Full-resolution geometry + rounding fits the per-body
+      budget, so NO density reduction ships: gate 5(b) is moot in its
+      original form (nothing reduced to judge), and the per-body density
+      literal sweep is CLOSED AS NOT NEEDED (reopen only if multi-
+      magnetosphere or 60-frame budgets bite in practice; all eight
+      simultaneously measure 411 KB/f rounded -- the >150 guardrail
+      warns correctly). create_magnetosphere_shape n-parameter promotion
+      DONE (defaults byte-identical; doubles as 20/N5's backend).
     * measure_animation_html.py: add tkinter file-browser dialog (B5).
-    * Camera tracking -> item 19 fixture list (above).
+    * Camera tracking -> item 19 fixture list (above): IMPLEMENTED.
     * O14/O15 incoming from the v4 gate: comet-tail legend churn verdict;
       sodium particle count in per-frame mode (knob exists, 500 -> 250
-      measured ~24.9 KB/f).
+      measured ~24.9 KB/f -- note rounding now takes 500 to ~31 KB/f,
+      which may settle O15 without the knob).
   - Standing instruction kept: when deferring, smoke-test the animate
     pipeline to a KNOWN state.
 
@@ -472,11 +508,25 @@ Closed SINCE v23 (Movement chain + verified):
 ## G. OPEN QUESTIONS / TONY CALLS
 
 - AU-convention sweep (section E): KEEP OPEN, revisit (Tony, June 7).
-- **Gate 5(b)** (NEW June 11): does the reduced-density magnetosphere still
-  TEACH? Mode-5 quality judgment at the resolution-sweep follow-on
-  (resolution 12-16 renders vs full). Bytes already passed 5(a).
+- **Gate 5(b)** RECAST (June 12): the original question (does REDUCED
+  density still teach?) is moot -- full resolution ships, rounded. The
+  live 5(b) is now the PHASE 4 MODE-5 GATE: (1) animated magnetosphere
+  visually correct (tail anti-sunward across frames, no seam/flicker at
+  d7 rounding -- expected invisible at ~15 km, verify anyway); (2)
+  camera tracking window framing (120x body radius: whole magnetotail
+  visible? margin right?); (3) tracked playback feel (orbit during play
+  works; range stomp on manual zoom acceptable?); (4) indicator clamp
+  renders sensibly at manual scales; (5) inertial-note hover wording.
 - O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium
-  particle count) -- record here if either becomes an item.
+  particle count) -- record here if either becomes an item. O15 may be
+  settled by rounding (500 particles now ~31 KB/f).
+- **Phase 4 residuals** (June 12): O2/O3 console notice wording is
+  slightly stale when magnetosphere opt-in is ON (the blanket "not yet
+  rendered" remains true for sphere shells; engine prints its own
+  allocation lines) -- amend on next touch. apsidal_markers.py carries
+  4 PRE-EXISTING em-dashes (platform-neutrality flag, not Phase 4's).
+  MAPS per-frame wiring DEFERRED per ADDENDUM_phase4 decision 1 (the
+  two-site exclusion warning and partition design are captured there).
 
 (CLOSED June 10-11: animation Auto-scale-vs-shells -- implemented as
 max(orbital, shell) in Session C, render-gated C6. Phase 3 tier decision --
