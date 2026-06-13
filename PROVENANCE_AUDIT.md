@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: June 11, 2026
-Files scanned: 109
-Total findings: 497
-Constants: 65 | Dicts: 31 | Display strings: 401
+Generated: June 12, 2026
+Files scanned: 110
+Total findings: 498
+Constants: 66 | Dicts: 31 | Display strings: 401
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -38,7 +38,7 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 0 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 148 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 332 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 333 |
 | 4 | 1-4 | NO ACTION NEEDED | 17 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -257,7 +257,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 527 | dict | ROTATION_AXIS_OMITTED[...] | (2 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
+| 532 | dict | ROTATION_AXIS_OMITTED[...] | (2 entries) | 4 | 3 | **12** | No source citation (recalled) | Imported by 1 module(s) |
 
 ### sgr_a_grand_tour.py
 
@@ -342,7 +342,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 1849 | constant | ENCOUNTER_THRESHOLD_AU | 0.5 | 2 | 3 | **6** | Has source citation | Numeric constant in computation module |
+| 1854 | constant | ENCOUNTER_THRESHOLD_AU | 0.5 | 2 | 3 | **6** | Has source citation | Numeric constant in computation module |
 
 ### asteroid_belt_visualization_shells.py
 
@@ -658,8 +658,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2059 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 3561 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 2071 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 2104 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 3679 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### palomas_orrery_dashboard.py
 
