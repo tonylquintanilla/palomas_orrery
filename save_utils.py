@@ -471,6 +471,75 @@ def _inject_encyclopedia(fig, html_str):
     return html_str.replace('</body>', overlay_block + '\n</body>')
 
 
+def _inject_camera_tracking(fig, html_str):
+    """Inject a camera-tracking relayout script into a Plotly HTML string.
+
+    When animate_objects sets fig._track_relayout_data (camera tracking a
+    body), this applies the body-centered window with Plotly.relayout on
+    load (centering the tracked body) and on every plotly_animatingframe
+    (holding the window as the body moves). This is the documented-reliable
+    path for driving a 3D scene during animation: Plotly silently drops a
+    per-frame scene RANGE carried in frame.layout when the window is tiny
+    relative to the body's offset from origin, falling back to autorange.
+    Returns the HTML unchanged when no tracking data is present.
+
+    (Phase 4 render-gate, June 2026 with Anthropic's Claude Fable 5.)
+    """
+    data = getattr(fig, '_track_relayout_data', None)
+    if not data or not data.get('byName') or data.get('first') is None:
+        return html_str
+
+    payload = json.dumps({
+        'hw': data['hw'],
+        'dtick': data['dtick'],
+        'first': data['first'],
+        'byName': data['byName'],
+    })
+
+    # Doubled braces are literal (this is not an f-string, but kept uniform
+    # with the encyclopedia block's style; here it is a plain string).
+    block = """
+<!-- ===== CAMERA TRACKING ===== -->
+<script>
+(function() {
+  var TRACK = __TRACK_JSON__;
+  function _applyWindow(p) {
+    if (!p) return;
+    var plotDiv = document.querySelector('.plotly-graph-div');
+    if (!plotDiv || typeof Plotly === 'undefined') return;
+    var hw = TRACK.hw, d = TRACK.dtick;
+    Plotly.relayout(plotDiv, {
+      'scene.xaxis.range': [p[0] - hw, p[0] + hw],
+      'scene.xaxis.autorange': false, 'scene.xaxis.dtick': d,
+      'scene.yaxis.range': [p[1] - hw, p[1] + hw],
+      'scene.yaxis.autorange': false, 'scene.yaxis.dtick': d,
+      'scene.zaxis.range': [p[2] - hw, p[2] + hw],
+      'scene.zaxis.autorange': false, 'scene.zaxis.dtick': d,
+      'scene.aspectmode': 'cube',
+      'scene.aspectratio': {x: 1, y: 1, z: 1}
+    });
+  }
+  function _wire() {
+    var plotDiv = document.querySelector('.plotly-graph-div');
+    if (plotDiv && typeof plotDiv.on === 'function' && typeof Plotly !== 'undefined') {
+      _applyWindow(TRACK.first);  // initial view: center on the tracked body
+      plotDiv.on('plotly_animatingframe', function(e) {
+        var nm = (e && e.name) || (e && e.frame && e.frame.name);
+        if (nm && TRACK.byName[nm]) _applyWindow(TRACK.byName[nm]);
+      });
+    } else {
+      setTimeout(_wire, 100);
+    }
+  }
+  _wire();
+})();
+</script>
+<!-- ===== END CAMERA TRACKING ===== -->
+""".replace('__TRACK_JSON__', payload)
+
+    return html_str.replace('</body>', block + '\n</body>')
+
+
 def _write_html(fig, file_path, offline=False, auto_play=False):
     """Write HTML file with appropriate settings and encyclopedia overlay.
     
@@ -498,6 +567,9 @@ def _write_html(fig, file_path, offline=False, auto_play=False):
     
     # Inject encyclopedia overlay if INFO entries match trace names
     html_str = _inject_encyclopedia(fig, html_str)
+
+    # Inject camera-tracking relayout script if tracking data is present
+    html_str = _inject_camera_tracking(fig, html_str)
     
     # Write with binary mode to preserve encoding
     with open(file_path, 'wb') as f:

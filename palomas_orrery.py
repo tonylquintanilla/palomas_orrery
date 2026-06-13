@@ -7594,6 +7594,36 @@ def animate_objects(step, label):
                 from visualization_utils import _calculate_grid_dtick
                 _track_dtick = _calculate_grid_dtick(_track_radius * 2)
 
+            # (Phase 4 render-gate fix) JS relayout data for camera tracking.
+            # The frame.layout path below works for a large window but Plotly
+            # silently drops a per-frame 3D scene range when the window is
+            # tiny relative to the body's offset from origin (sodium-tail-off
+            # case), and the body-centered INITIAL view did not take effect
+            # either. A post_script (save_utils._inject_camera_tracking)
+            # applies the window with Plotly.relayout on load (centers the
+            # body) and on every plotly_animatingframe (holds the window) --
+            # the documented-reliable path for driving a 3D scene during
+            # animation. Keyed by frame name (the date string) so the slider
+            # and Play both hit it. frame.layout is kept as the no-JS
+            # fallback; the relayout runs after the frame and wins.
+            if _track_body is not None and _track_dtick is not None:
+                _track_traj = positions_over_time.get(_track_body) or []
+                _track_by_name = {}
+                _track_first = None
+                for _ti, _tp in enumerate(_track_traj):
+                    if _tp is None or 'x' not in _tp or _ti >= len(dates_list):
+                        continue
+                    _xyz = [_tp['x'], _tp['y'], _tp['z']]
+                    _track_by_name[dates_list[_ti].strftime('%Y-%m-%d %H:%M')] = _xyz
+                    if _track_first is None:
+                        _track_first = _xyz
+                fig._track_relayout_data = {
+                    'hw': _track_radius,
+                    'dtick': _track_dtick,
+                    'first': _track_first,
+                    'byName': _track_by_name,
+                }
+
             def _track_axis(_c):
                 # Complete per-axis spec: range + explicit autorange-off +
                 # dtick + grid styling. Nothing left to inheritance.
