@@ -381,6 +381,10 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     Returns:
         plotly.graph_objects.Figure: The updated figure
     """
+    # (Phase 4 render-gate) Trace count at entry, so the extent of the
+    # elements THIS call adds for this body can be measured at exit and
+    # recorded per body for Fly To window sizing.
+    _dispatch_start_idx = len(fig.data)
     configs = SHELL_CONFIGS.get(body_name, {})
     customs = CUSTOM_SHELLS.get(body_name, {})
 
@@ -524,6 +528,25 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     # unified dispatch don't set this attribute -- old behavior continues.
     if outermost_radius_au > 0:
         fig._shell_outermost_radius_au = outermost_radius_au
+
+    # (Phase 4 render-gate) Per-body element extent: the max vertex distance
+    # from this body's center over the traces THIS call added (sphere shells,
+    # magnetosphere, sodium tail, belts, indicator). Fly To sizes its window
+    # to the largest active element via this dict, instead of the orbital-
+    # distance formula that left small shells invisible. Keyed per body so a
+    # multi-body plot sizes each Fly To target correctly.
+    try:
+        from shared_utilities import traces_extent_from_center
+        _body_ext = traces_extent_from_center(
+            list(fig.data)[_dispatch_start_idx:], center_position)
+        if _body_ext > 0:
+            if not hasattr(fig, '_body_element_extent_au'):
+                fig._body_element_extent_au = {}
+            if _body_ext > fig._body_element_extent_au.get(body_name, 0.0):
+                fig._body_element_extent_au[body_name] = _body_ext
+    except Exception as _ext_err:
+        print(f"[DISPATCH] element-extent record skipped for {body_name}: "
+              f"{_ext_err}", flush=True)
 
     return fig
 

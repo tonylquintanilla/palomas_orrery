@@ -7073,7 +7073,7 @@ def plot_hyperbolic_osculating_orbit(fig, obj_name, obj_info, center_id, color_m
     fig.add_trace(go.Scatter3d(
         x=[x_final[info_idx]], y=[y_final[info_idx]], z=[z_final[info_idx]],
         mode='markers',
-        marker=dict(size=6, color=color, opacity=0.9,
+        marker=dict(size=6, color='white', opacity=0.9,
                     symbol='cross', line=dict(color='white', width=1)),
         name='',
         legendgroup=orbit_label,

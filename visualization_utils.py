@@ -361,7 +361,8 @@ def _calculate_grid_dtick(axis_span):
 
 
 def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_objects=None, 
-                               fly_distance=0.1, distance_scale_factor=0.05):
+                               fly_distance=0.1, distance_scale_factor=0.05,
+                               target_extents=None):
     """
     Add buttons to fly the camera TO specific target objects, keeping focus on the object.
     
@@ -459,7 +460,19 @@ def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_o
         direction_norm = direction_to_center / distance_from_center
         
         # Calculate camera offset distance (closer for nearby objects, slightly further for distant)
-        view_radius = fly_distance + (distance_from_center * distance_scale_factor)
+        # (Phase 4 render-gate, Tony's call) When the caller supplies a
+        # measured element extent for this target (magnetosphere, sodium
+        # tail, belts), size the window to the LARGEST active element --
+        # 1.2x margin, small absolute floor -- so the body and its shells
+        # are framed, not a sub-pixel speck in an orbital-distance box.
+        # Falls back to the orbital-distance formula when no extent is known.
+        _tgt_ext = None
+        if target_extents:
+            _tgt_ext = target_extents.get(target_name)
+        if _tgt_ext and _tgt_ext > 0:
+            view_radius = max(_tgt_ext * 1.2, 0.0005)
+        else:
+            view_radius = fly_distance + (distance_from_center * distance_scale_factor)
 
         # Zoom axis ranges to target area
         new_x_range = [float(target_pos[0]) - view_radius, float(target_pos[0]) + view_radius]

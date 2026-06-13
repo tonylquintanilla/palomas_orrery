@@ -22,6 +22,38 @@ import plotly.graph_objs as go
 from orrery_rendering import create_info_marker
 
 
+def traces_extent_from_center(traces, center):
+    """Max distance (AU) of any trace vertex from a center point, over a
+    list of plotly 3D traces. Used to size a view window (camera tracking,
+    Fly To) to the actual reach of the largest active element -- a
+    magnetosphere, a sodium tail (10,000 body radii), a comet tail -- rather
+    than a fixed body-radius multiple, which frames one element well and
+    cuts off another. Scatter3d / Mesh3d / Cone all expose x/y/z; empty
+    traces and non-finite vertices are skipped. Returns 0.0 when nothing
+    measurable is present (caller then falls back to its default sizing).
+    (Phase 4 render-gate, June 2026 with Anthropic's Claude Fable 5.)
+    """
+    cx, cy, cz = center
+    rmax = 0.0
+    for t in traces:
+        xs = getattr(t, 'x', None)
+        ys = getattr(t, 'y', None)
+        zs = getattr(t, 'z', None)
+        if xs is None or ys is None or zs is None:
+            continue
+        ax = np.asarray(xs, dtype=float)
+        ay = np.asarray(ys, dtype=float)
+        az = np.asarray(zs, dtype=float)
+        n = min(ax.size, ay.size, az.size)
+        if n == 0:
+            continue
+        d = np.sqrt((ax[:n] - cx) ** 2 + (ay[:n] - cy) ** 2 + (az[:n] - cz) ** 2)
+        d = d[np.isfinite(d)]
+        if d.size:
+            rmax = max(rmax, float(d.max()))
+    return rmax
+
+
 def create_sun_direction_indicator(center_position=(0, 0, 0), sun_position=(0, 0, 0),
                               axis_range=None, shell_radius=None,
                               object_type=None, center_object=None,

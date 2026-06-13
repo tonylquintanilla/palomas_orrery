@@ -6020,7 +6020,8 @@ def plot_objects():
             # Add camera view buttons with dropdown for different target objects
             fig = add_look_at_object_buttons(fig, positions, center_object_name)            
            
-            fig = add_fly_to_object_buttons(fig, positions, center_object_name)  # NEW
+            fig = add_fly_to_object_buttons(fig, positions, center_object_name,
+                                            target_extents=getattr(fig, '_body_element_extent_au', None))  # NEW
 
             # ============ ADD COMET TAILS INTEGRATION ============
             # Conservative comet tail integration
@@ -7488,6 +7489,30 @@ def animate_objects(step, label):
             for _grp in perframe_groups:
                 _perframe_indices.update(_grp['indices'])
 
+            # (Phase 4 render-gate, Tony's call) Per-body extent of the
+            # allocated frame-1 elements, measured from each body's center.
+            # The largest active element (sodium tail >> magnetosphere) sets
+            # the size, so the tracking window and the Fly To dropdown frame
+            # whatever is actually on, instead of a body-radius multiple that
+            # frames one element and cuts off another. One measurement, two
+            # consumers (camera tracking + Fly To).
+            from shared_utilities import traces_extent_from_center as _extent_fn
+            _perframe_body_extent = {}
+            for _grp in perframe_groups:
+                _b = _grp['body']
+                if _grp['spec'].get('center_fixed'):
+                    _bc = (0.0, 0.0, 0.0)
+                else:
+                    _bt = positions_over_time.get(_b)
+                    if not _bt or _bt[0] is None or 'x' not in _bt[0]:
+                        continue
+                    _bc = (_bt[0]['x'], _bt[0]['y'], _bt[0]['z'])
+                _gt = [fig.data[_ix] for _ix in _grp['indices']
+                       if _ix < len(fig.data)]
+                _ge = _extent_fn(_gt, _bc)
+                if _ge > _perframe_body_extent.get(_b, 0.0):
+                    _perframe_body_extent[_b] = _ge
+
             dynamic_trace_indices = sorted(set(
                 idx for idx in trace_indices.values()
                 if static_trace_count <= idx < len(fig.data)
@@ -7527,36 +7552,67 @@ def animate_objects(step, label):
                 _ttraj = positions_over_time.get(_tc)
                 if _ttraj and any(_p is not None and 'x' in _p for _p in _ttraj):
                     _track_body = _tc
-                    _track_shells_on = False
-                    _track_pm = get_planet_shell_vars_map().get(_tc)
-                    if _track_pm and any(v.get() == 1 for v in _track_pm.values()):
-                        _track_shells_on = True
-                    if _track_shells_on and _tc in CENTER_BODY_RADII:
-                        # Frame the magnetosphere: tails run to ~100 body
-                        # radii, so a 120x half-width shows it whole with
-                        # margin (ledger item 19: tracked zoom must respect
-                        # shell extent, not just orbital distance).
-                        _track_radius = 120.0 * CENTER_BODY_RADII[_tc] / KM_PER_AU
+                    # (Phase 4 render-gate, Tony's call) Size the window to
+                    # the LARGEST ACTIVE element's measured extent: the
+                    # sodium tail (10,000 body radii) opens it to hold the
+                    # whole tail; magnetosphere-only collapses it back tight;
+                    # a bare body with no per-frame elements falls back to
+                    # the orbital-distance formula. 1.2x margin; a small
+                    # absolute floor prevents a tiny element from over-zooming
+                    # the body marker to fill the view.
+                    _elem_extent = _perframe_body_extent.get(_tc, 0.0)
+                    if _elem_extent > 0:
+                        _track_radius = max(_elem_extent * 1.2, 0.0005)
+                        _track_size_note = 'element-sized'
                     else:
                         _t_first = next(_p for _p in _ttraj
                                         if _p is not None and 'x' in _p)
                         _t_dist = (_t_first['x']**2 + _t_first['y']**2
                                    + _t_first['z']**2) ** 0.5
-                        # Existing Fly To distance formula (defaults).
                         _track_radius = 0.1 + _t_dist * 0.05
+                        _track_size_note = 'orbital-distance'
                     print(f"[ANIMATION] Camera tracking: {_track_body}, "
                           f"view half-width {_track_radius:.5f} AU "
-                          f"({_track_radius * KM_PER_AU:,.0f} km)", flush=True)
+                          f"({_track_radius * KM_PER_AU:,.0f} km) "
+                          f"[{_track_size_note}]", flush=True)
                 else:
                     print(f"[ANIMATION] NOTE: camera tracking requested for "
                           f"{_tc!r} but it has no animated positions -- "
                           f"tracking disabled for this run.", flush=True)
 
+            # (Phase 4 render-gate fix) One dtick for the tracked window,
+            # computed once and emitted on EVERY frame layout below. The
+            # grid flicker (grid present at the initial view and the final
+            # frame, absent mid-animation) was a layout-merge inheritance
+            # hazard: a range-ONLY frame left dtick, aspectmode, and the
+            # grid styling to inheritance, which Plotly did not reliably
+            # reapply to a 3D scene per frame. Same discipline as the C2
+            # trace-visibility fix, one layer up -- every frame carries the
+            # COMPLETE axis spec, nothing inherited.
+            _track_dtick = None
+            if _track_radius is not None:
+                from visualization_utils import _calculate_grid_dtick
+                _track_dtick = _calculate_grid_dtick(_track_radius * 2)
+
+            def _track_axis(_c):
+                # Complete per-axis spec: range + explicit autorange-off +
+                # dtick + grid styling. Nothing left to inheritance.
+                return dict(
+                    range=[_c - _track_radius, _c + _track_radius],
+                    autorange=False,
+                    dtick=_track_dtick,
+                    showgrid=True, gridcolor='gray',
+                    showbackground=True, backgroundcolor='black')
+
             def _track_frame_layout(_i):
-                """Per-frame scene ranges centered on the tracked body.
-                Returns None when tracking is off or the body's position
-                is missing at this frame (the view then holds its last
-                window rather than jumping)."""
+                """Per-frame scene window centered on the tracked body,
+                carrying the COMPLETE axis spec every frame (range, dtick,
+                aspectmode, grid styling) -- never range alone. Plotly
+                applies a frame's layout as a MERGE, so any omitted axis
+                property inherits whatever the previous frame left, which
+                redrew the 3D grid inconsistently. Returns None when
+                tracking is off or the body's position is missing at this
+                frame (the view then holds its last window)."""
                 if _track_body is None:
                     return None
                 _tp = positions_over_time.get(_track_body)
@@ -7564,12 +7620,11 @@ def animate_objects(step, label):
                 if _e is None or 'x' not in _e:
                     return None
                 return go.Layout(scene=dict(
-                    xaxis=dict(range=[_e['x'] - _track_radius,
-                                      _e['x'] + _track_radius]),
-                    yaxis=dict(range=[_e['y'] - _track_radius,
-                                      _e['y'] + _track_radius]),
-                    zaxis=dict(range=[_e['z'] - _track_radius,
-                                      _e['z'] + _track_radius])))
+                    xaxis=_track_axis(_e['x']),
+                    yaxis=_track_axis(_e['y']),
+                    zaxis=_track_axis(_e['z']),
+                    aspectmode='cube',
+                    aspectratio=dict(x=1, y=1, z=1)))
 
             for i in range(N):
                 # Copy only frame-updated traces (static shells and constant
@@ -8018,28 +8073,22 @@ def animate_objects(step, label):
             # Add camera view buttons with dropdown for different target objects
             fig = add_look_at_object_buttons(fig, initial_positions, center_object_name)            
           
-            fig = add_fly_to_object_buttons(fig, initial_positions, center_object_name)  # NEW
+            fig = add_fly_to_object_buttons(fig, initial_positions, center_object_name,
+                                            target_extents=_perframe_body_extent)  # NEW
 
             # (Phase 4) Camera tracking: start at the frame-1 tracked window
             # with a grid sized to it; the per-frame layouts then carry the
             # window along. Placed after the main layout/buttons so nothing
             # downstream overrides the initial ranges.
-            if _track_body is not None:
+            if _track_body is not None and _track_dtick is not None:
                 _tl0 = _track_frame_layout(0)
                 if _tl0 is not None:
-                    from visualization_utils import _calculate_grid_dtick
-                    _zoom_dtick = _calculate_grid_dtick(_track_radius * 2)
-                    fig.update_layout(scene=dict(
-                        xaxis=dict(range=list(_tl0.scene.xaxis.range),
-                                   dtick=_zoom_dtick),
-                        yaxis=dict(range=list(_tl0.scene.yaxis.range),
-                                   dtick=_zoom_dtick),
-                        zaxis=dict(range=list(_tl0.scene.zaxis.range),
-                                   dtick=_zoom_dtick),
-                        aspectmode='cube'))
+                    # Same complete spec as the frames; merges onto the main
+                    # layout, preserving camera, domain, and axis titles.
+                    fig.update_layout(scene=_tl0.scene)
                     print(f"[ANIMATION] Camera tracking: initial view at "
                           f"{_track_body}'s frame-1 window, grid "
-                          f"{_zoom_dtick:.6f} AU", flush=True)
+                          f"{_track_dtick:.6f} AU", flush=True)
 
             # Add URL buttons before showing/saving
             fig = add_url_buttons(fig, objects, selected_objects)            
