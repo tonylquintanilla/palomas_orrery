@@ -11,8 +11,13 @@ Key functions:
     add_hover_toggle_buttons() - Show/hide hover text toggle
     add_fly_to_object_buttons() - Camera fly-to dropdown
     _calculate_grid_dtick() - Auto-dtick from axis span
+    _calculate_grid_dtick() - Auto-dtick from axis span
+    build_scene() - Full 3D scene dict (axes + aspectmode + camera + domain)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
+Module updated: June 2026 with Anthropic's Claude Opus 4.8. Added
+    build_scene/build_scene_axes/build_scene_axis -- single source of truth
+    for the static and animation main scene dicts (item 19.3 Phase 1).
 """
 
 import plotly.graph_objects as go
@@ -366,6 +371,106 @@ def _calculate_grid_dtick(axis_span):
         clean_mantissa = 10.0
     
     return clean_mantissa * (10 ** exponent)
+
+
+def build_scene_axis(axis_range, axis_title, dtick=None, autorange=None,
+                     show_grid=True, show_background=True):
+    """
+    Build one 3D scene axis dict (x, y, or z) for an orrery plot.
+
+    Reproduces the orrery's standard dark-theme axis: black backplane,
+    gray gridlines, range pinned to the supplied data extent. dtick and
+    autorange are emitted ONLY when explicitly supplied, so the default
+    call is byte-identical to the legacy inline axis dict (no dtick key,
+    no autorange key). Close-approach callers pass an explicit dtick
+    (from _calculate_grid_dtick) plus autorange=False to make the
+    AU-scale grid readable -- the same discipline the camera-tracking
+    (_track_axis) path already uses.
+
+    Parameters:
+        axis_range (list): [min, max] range for the axis, in AU.
+        axis_title (str): Axis title, e.g. 'X (AU)'.
+        dtick (float, optional): Grid tick spacing in AU. Omitted from
+            the output when None (Plotly auto-ticks).
+        autorange (bool, optional): Emitted only when not None. Pass
+            False to pin the explicit range against Plotly auto-fit.
+        show_grid (bool): showgrid -- show gridlines.
+        show_background (bool): showbackground -- show the axis backplane.
+
+    Returns:
+        dict: A Plotly scene-axis spec.
+    """
+    axis = dict(
+        title=axis_title,
+        range=axis_range,
+        backgroundcolor='black',
+        gridcolor='gray',
+        showbackground=show_background,
+        showgrid=show_grid,
+    )
+    if autorange is not None:
+        axis['autorange'] = autorange
+    if dtick is not None:
+        axis['dtick'] = dtick
+    return axis
+
+
+def build_scene_axes(axis_range, dtick=None, autorange=None,
+                     show_grid=True, show_background=True):
+    """
+    Build the x/y/z axis dicts for a 3D orrery scene.
+
+    All three axes share the same range, styling, and (when supplied)
+    dtick/autorange. See build_scene_axis for parameter semantics.
+
+    Returns:
+        dict: {'xaxis': ..., 'yaxis': ..., 'zaxis': ...}
+    """
+    return dict(
+        xaxis=build_scene_axis(axis_range, 'X (AU)', dtick, autorange,
+                               show_grid, show_background),
+        yaxis=build_scene_axis(axis_range, 'Y (AU)', dtick, autorange,
+                               show_grid, show_background),
+        zaxis=build_scene_axis(axis_range, 'Z (AU)', dtick, autorange,
+                               show_grid, show_background),
+    )
+
+
+def build_scene(axis_range, camera, domain, dtick=None, autorange=None,
+                aspectmode='cube', show_grid=True, show_background=True):
+    """
+    Build the full 3D scene dict for an orrery plot: x/y/z axes plus
+    aspectmode, camera, and domain.
+
+    Single source of truth for the static (plot_objects) and animation
+    (animate_objects) main scene specs, which were previously duplicated
+    inline and byte-identical. The layout envelope (title / legend /
+    annotations / margin / paper_bgcolor) stays at the call site -- only
+    the scene dict is built here.
+
+    The default call reproduces the legacy inline scene exactly (no dtick,
+    no autorange key). Close-approach readability (item 19.3) is a one-arg
+    flip: pass dtick=_calculate_grid_dtick(span) and autorange=False.
+
+    Parameters:
+        axis_range (list): [min, max] applied to all three axes, in AU.
+        camera (dict): Plotly scene camera, e.g. get_default_camera().
+        domain (dict): Scene domain, e.g. dict(x=[0.2, 1.0], y=[0.0, 1.0]).
+        dtick (float, optional): Grid tick spacing in AU (all axes).
+        autorange (bool, optional): Emitted only when not None.
+        aspectmode (str): Plotly aspectmode, default 'cube'.
+        show_grid (bool): showgrid on all axes.
+        show_background (bool): showbackground on all axes.
+
+    Returns:
+        dict: A Plotly scene spec, drop-in for fig.update_layout(scene=...).
+    """
+    scene = build_scene_axes(axis_range, dtick, autorange,
+                             show_grid, show_background)
+    scene['aspectmode'] = aspectmode
+    scene['camera'] = camera
+    scene['domain'] = domain
+    return scene
 
 
 def add_fly_to_object_buttons(fig, positions, center_object_name='Sun', target_objects=None, 
