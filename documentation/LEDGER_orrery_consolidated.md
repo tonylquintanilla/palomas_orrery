@@ -1,14 +1,18 @@
 # LEDGER -- Orrery Refactor / Movement Track (Consolidated, Running)
 
-Tony Quintanilla, PE | Claude | June 7, 2026 (last updated June 11, 2026)
+Tony Quintanilla, PE | Claude | June 7, 2026 (last updated June 13, 2026)
 Base SHA at consolidation: `76c330e` (76c330ea4dbe6bc667fba2ffb5baa1a65ae56d22)
-Current verified base: `d9460e2` (d9460e22cd41b9da344930bbbac53dba8ed63d7c)
+Current verified base: `a69c3a7` (a69c3a79466e5e3f02589eaee13031800d08be73)
 Chain since consolidation: 76c330e -> 730b2bf (June-8 fixes) -> 7977a11
 (animation Phase 1) -> 3f03c12 -> 191cf36 (Phase 2) -> 8438a85 (Phase 3 GO)
 -> a9f0ec4 (Session A) -> e5fd86d (Session B) -> 0ce1e26 -> 7b71c29
 (Session C) -> d9460e2 (provenance scan) -> 02cce78 (ledger) -> d05f0f1 (Session C
 test results: NOT YET CONFIRMED, 3 blocking bugs -> fix pass C2
 delivered June 11, render-gated on protocol v4.1).
+Phase 4 render-gate session (June 13): `5e83c1e` -> `a69c3a7` -- camera-tracking
+live fix (JS relayout), element-extent window sizing, per-frame grid fix, center
+reticle suppression under tracking, and the hyperbolic osculating `color` fix;
+all `[render-confirmed Mode 5]` by Tony on live Mercury data.
 Introduced by: HANDOFF v28. Supersedes the in-handoff ledgers embedded in
 v23 (canonical body), v24, v25, v26, v27.
 
@@ -345,28 +349,54 @@ Closed SINCE v23 (Movement chain + verified):
     * Sun orbit around a planet center lacks cube buffer (O12).
     * Fly To zoom limit ignores shell extent (computed from orbital
       distance/marker size; planets stop too far out to see magnetosphere
-      or belts; comets okay). (O13b, June 11.) PARTIAL (Phase 4): the
-      new CAMERA-TRACKING window is shell-aware (120x body radius when
-      shells are checked -- frames the full magnetotail); the static
-      Fly To buttons still use the orbital-distance formula. Remaining
-      scope: port the shell-aware sizing to add_fly_to_object_buttons,
-      consuming fig._shell_outermost_radius_au where set (one producer).
+      or belts; comets okay). (O13b, June 11.) RESOLVED (Phase 4 render-
+      gate, June 13) `[render-confirmed Mode 5]`: window sizing replaced
+      the body-radius multiple with the LARGEST ACTIVE element's MEASURED
+      extent -- traces_extent_from_center() (shared_utilities) is the one
+      producer; the static dispatch records fig._body_element_extent_au per
+      body and the per-frame allocator records _perframe_body_extent, and
+      BOTH the camera-tracking window and add_fly_to_object_buttons
+      (new target_extents param) consume it. Sodium tail on -> window
+      opens to ~0.20 AU to hold the whole 10,003-radii tail; tail off ->
+      collapses to ~0.002 AU on the magnetosphere (Tony's call: largest
+      active element sets the size). The empty-box Fly To is gone.
     * CAMERA TRACKING across animation frames -- IMPLEMENTED in Phase 4
-      (June 12) `[render-gated]`, and BETTER than the mechanism note
-      below anticipated: frames carry per-frame SCENE RANGES centered on
-      the tracked body (go.Frame(layout=...)), not a camera eye. The
-      view window translates with the body while the camera stays FREE
-      -- the user can orbit during playback, because range-tracking
-      (the same mechanism as the Fly To buttons; house pattern) never
-      touches the eye. The track+orbit conflict the note feared largely
-      dissolves. UI: 'Camera: track body across frames' combobox in the
-      new Per-frame elements group; requires redraw=True (already set).
-      RESIDUAL: frame-driven range updates stomp MANUAL ZOOM during
-      playback (orbiting is fine); a JS event-based alternative
-      (relayout on frame transitions, preserving user deltas) is parked
-      as a designed follow-on -- see ADDENDUM_phase4 amendment C.
-      Superseded mechanism note kept for the record: go.Frame layout can
-      also carry scene.camera, but a frame-driven eye fights the mouse.
+      (June 12) and RENDER-CONFIRMED in the Phase 4 render-gate session
+      (June 13) `[render-confirmed Mode 5]`. The view window translates
+      with the body while the camera stays FREE (the user can orbit during
+      playback). UI: 'Camera: track body across frames' combobox in the
+      Per-frame elements group; requires redraw=True (already set).
+      MECHANISM CHANGE (June 13 live fix): per-frame go.Frame(layout=...)
+      scene ranges are UNRELIABLE for a 3D scene when the window is tiny
+      relative to the body's offset from origin -- Plotly silently drops
+      the per-frame range and autoranges the whole Sun-body span (the
+      sodium-tail-off case: a 0.0045 AU cube 0.42 AU from origin swung to
+      ~0.4 AU and went non-uniform; the body also rendered off-center and
+      effectively invisible). FIX: save_utils._inject_camera_tracking
+      injects a post_script that applies the body-centered window via
+      Plotly.relayout on load (centers the body) and on every
+      plotly_animatingframe (holds the window) -- the documented-reliable
+      path for driving a 3D scene during animation; data stashed as
+      fig._track_relayout_data keyed by frame date. Routes through
+      _write_html so it reaches BOTH the browser-opened and the saved
+      offline file (saved round trip render-confirmed). The frame.layout
+      path is kept as a no-JS fallback; the relayout runs after the frame
+      and wins. This IS the JS event-based follow-on the prior RESIDUAL
+      parked (ADDENDUM_phase4 amendment C) -- now built.
+      RESIDUAL (June 13, render-confirmed acceptable): with the JS relayout
+      layered over the retained frame.layout path, the cube SIZE still
+      varies frame-to-frame (~0.15-0.55 AU, non-uniform) -- the two
+      mechanisms not perfectly agreeing. The CENTERING is steady (Mercury
+      focus holds, shells track the Sun) and Tony judged it "visually not
+      a problem." Clean removal: drop scene from frame.layout entirely so
+      JS owns the window outright (one mechanism, likely uniform cube) --
+      render-gated follow-up, not blocking.
+      RETICLE (June 13) `[render-confirmed Mode 5]`: the center '<>' marker
+      (a hand-aligned screen-space paper-coord annotation borrowed from the
+      star viz, never pixel-exact) is suppressed under camera tracking via
+      add_look_at_object_buttons(show_target_marker=_track_body is None) --
+      at shell scale with one body there is nothing to disambiguate, and
+      the eyeball error shows. Kept in all non-tracking and static views.
     * Directional arrow camera controls for Plotly 3D (Studio has 2D
       D-pad pan; no 3D equivalent) -- precise cameras without the
       mouse; aids shell-scale visual verification. (Promoted June 11.)
@@ -508,15 +538,16 @@ Closed SINCE v23 (Movement chain + verified):
 ## G. OPEN QUESTIONS / TONY CALLS
 
 - AU-convention sweep (section E): KEEP OPEN, revisit (Tony, June 7).
-- **Gate 5(b)** RECAST (June 12): the original question (does REDUCED
-  density still teach?) is moot -- full resolution ships, rounded. The
-  live 5(b) is now the PHASE 4 MODE-5 GATE: (1) animated magnetosphere
-  visually correct (tail anti-sunward across frames, no seam/flicker at
-  d7 rounding -- expected invisible at ~15 km, verify anyway); (2)
-  camera tracking window framing (120x body radius: whole magnetotail
-  visible? margin right?); (3) tracked playback feel (orbit during play
-  works; range stomp on manual zoom acceptable?); (4) indicator clamp
-  renders sensibly at manual scales; (5) inertial-note hover wording.
+- **Gate 5(b)** RECAST (June 12); RENDER-CONFIRMED (June 13) `[render-
+  confirmed Mode 5]`: full resolution ships, rounded. Tony's June-13 pass
+  on live Mercury data confirmed (1) animated magnetosphere correct (tail
+  anti-sunward across frames, no seam/flicker at d7 rounding); (2) camera
+  tracking frames the active elements (element-extent window: tail opens
+  it, magnetosphere tightens it); (3) tracked playback centers steadily on
+  the body (cube-size wobble noted acceptable, see camera-tracking RESIDUAL);
+  (4) indicator clamp renders sensibly; (5) inertial-note hover wording.
+  Mercury-centered AND Sun-centered-track-Mercury both confirmed; saved-file
+  round trip confirmed identical to live render.
 - O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium
   particle count) -- record here if either becomes an item. O15 may be
   settled by rounding (500 particles now ~31 KB/f).
