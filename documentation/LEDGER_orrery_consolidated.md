@@ -16,8 +16,11 @@ all `[render-confirmed Mode 5]` by Tony on live Mercury data.
 Reticle + docs pushed -> `33aac7` family -> `33aac56` (current base).
 
 ROADMAP (June 13, Tony's call): active batch is items 1/3/5 --
-(1) cube-residual cleanup [DELIVERED this session, render-gated: frames
-data-only, JS sole window owner]; (3) 3D axis control (dtick + range) in
+(1) cube-residual cleanup [ATTEMPTED + RENDER-FALSIFIED + REVERTED this
+session: frames-data-only did NOT fix the swing (JS relayout overridden by
+Plotly per-frame autorange); pushed 373298d then reverted to restore
+frame.layout; refined diagnosis in the camera-tracking residual, deferred
+to a dedicated session]; (3) 3D axis control (dtick + range) in
 orrery GUI + Studio, machinery warm now (`_calculate_grid_dtick`,
 `traces_extent_from_center`); (5) palate-cleansers: near-parabolic apoapsis
 false-precision (Envelope candidate), stale O2/O3 console wording, 4
@@ -411,15 +414,31 @@ Closed SINCE v23 (Movement chain + verified):
       path is kept as a no-JS fallback; the relayout runs after the frame
       and wins. This IS the JS event-based follow-on the prior RESIDUAL
       parked (ADDENDUM_phase4 amendment C) -- now built.
-      RESIDUAL -> RESOLVED (Item 1, June 13) `[render-gated]`: the cube
-      SIZE previously varied frame-to-frame (~0.15-0.55 AU, non-uniform)
-      because the JS relayout was layered OVER the retained frame.layout
-      scene path and the two disagreed per frame. Item-1 cleanup drops the
-      scene from frame.layout entirely (frames carry DATA ONLY), making the
-      JS relayout the SOLE per-frame window owner -- one mechanism, uniform
-      cube. The initial-view block still seeds the window in Python (JS
-      reapplies on load), so a no-JS open is centered, just not tracked.
-      Awaiting Tony's Mode-5 confirmation that the cube is now uniform.
+      RESIDUAL (OPEN -- item 1 attempted June 13, RENDER-FALSIFIED, then
+      REVERTED): dropping the scene from frame.layout (frames data-only, JS
+      as sole per-frame window owner -- item 1) did NOT make the cube
+      uniform. The render still showed the cube differing BY AXIS and
+      swinging ~0.15-0.65 AU -- essentially unchanged. So the frame.layout/
+      JS conflict was NOT the cause; the render caught the wrong diagnosis.
+      Item 1 was pushed (373298d) then REVERTED (frame.layout restored),
+      because it bought nothing and cost the large-window partial-hold plus
+      the no-JS fallback -- the reverted 33aac56-equivalent behavior is the
+      better baseline. REFINED DIAGNOSIS (next-session seed, NOT verified):
+      Plotly re-autoranges the 3D scene per frame when frames carry data
+      without an explicit range, overriding the JS relayout -- the cube
+      differs by axis (autorange fits the asymmetric sodium tail per axis)
+      and swings as the tail rotates. SUPPORTING EVIDENCE (console): track
+      half-width 0.19612 AU (relayout target ~0.39 cube), but the swing's
+      upper bound (~0.65) matches the static auto-scale "+/-0.606714 AU"
+      full-orbit autorange -- the scene drifts toward the data-extent
+      autorange. CENTERING still holds (relayout midpoint right); only
+      SIZE/uniformity is uncontrolled. COSMETIC: Tony judged the wobble
+      "not a visual problem"; load-bearing behavior (centering, shell-track,
+      saved round trip, reticle) all render-confirmed. DEFERRED to a
+      dedicated session with a repro that ACTUALLY RUNS in Tony's browser
+      (prior two did not). Won't-fix (accept the wobble) is a legitimate
+      close if autorange can't be cleanly suppressed during 3D frame
+      animation.
       RETICLE (June 13) `[render-confirmed Mode 5]`: the center '<>' marker
       (a hand-aligned screen-space paper-coord annotation borrowed from the
       star viz, never pixel-exact) is suppressed under camera tracking via

@@ -2,10 +2,14 @@
 
 Tony Quintanilla, PE | Claude (Fable 5) | June 13, 2026
 
-Built on: `a69c3a7` (a69c3a79466e5e3f02589eaee13031800d08be73), branch `main`.
+Built on: `a69c3a7`; this session's work pushed through `33aac56`
+(reticle + docs) -> `373298d` (item-1 attempt) -> item-1 REVERTED (restore
+`frame.layout`). Confirmed-good base for the NEXT session is the post-revert
+HEAD. Branch `main`.
 Ledger: see `LEDGER_orrery_consolidated.md` (updated in place this session --
-camera tracking, O13b, Gate 5(b), reticle). This handoff is the session
-narrative; the ledger carries the open items.
+camera tracking, O13b, Gate 5(b), reticle, the dipole set, the roadmap, and
+the corrected item-1 status). This handoff is the session narrative; the
+ledger carries the open items.
 
 ## What this session was
 
@@ -13,7 +17,10 @@ A render-gate cycle on the Phase 4 animation work. Phase 4 had landed the
 per-frame engine, camera tracking, d7 coordinate rounding, and element
 extents; this session drove the camera-tracking feature through Tony's
 Mode-5 visual gate and fixed what the render exposed. Five fixes, each
-render-confirmed on live Mercury data, all now in HEAD.
+render-confirmed on live Mercury data, all landed. The session then continued
+into a roadmap re-assessment, a corrected consolidation claim, the verified
+dipole set, and an item-1 cube-cleanup attempt that the render falsified and
+that was reverted (all below).
 
 ## The arc (in the order it unfolded)
 
@@ -79,18 +86,95 @@ render-confirmed on live Mercury data, all now in HEAD.
 - Saved-file round trip: opening saved tracking animations behaves exactly
   as the original render (relayout fires offline).
 
-## Residuals / next
+## Cube-size wobble: item 1 attempted, RENDER-FALSIFIED, REVERTED
 
-- **Cube-size wobble under tracking (open, judged acceptable).** With the JS
-  relayout layered over the retained `frame.layout` path, the cube SIZE
-  varies frame-to-frame (~0.15-0.55 AU, non-uniform); the two mechanisms
-  don't perfectly agree. CENTERING is steady and Tony judged it visually
-  fine. Clean removal: drop the scene from `frame.layout` so JS owns the
-  window outright (one mechanism, likely uniform cube). Render-gated
-  follow-up; not blocking.
-- **MAPS per-frame wiring** remains DEFERRED (ADDENDUM_phase4 decision 1).
-- **O2/O3 console-notice wording** slightly stale when magnetosphere opt-in
-  is ON -- amend on next touch (per ledger Phase 4 residuals).
+The one residual from the render-gate fixes was the cube SIZE wobbling under
+tracking (~0.15-0.65 AU, differs by axis) while CENTERING stayed steady.
+Hypothesis: the JS relayout layered over the retained `frame.layout` path,
+the two disagreeing per frame. Item 1 acted on that -- dropped the scene from
+`frame.layout` so frames carry DATA ONLY and the JS relayout owns the window
+outright.
+
+The render falsified it. With `frame.layout` gone the cube STILL differed by
+axis and swung ~0.15-0.65 -- essentially unchanged. So the two-mechanism
+conflict was NOT the cause. Item 1 was pushed (`373298d`) then REVERTED:
+it fixed nothing and cost the large-window partial-hold plus the no-JS
+fallback, so the pre-item-1 behavior is the better baseline.
+
+REFINED DIAGNOSIS (next-session seed, NOT verified in-container -- no browser
+here): Plotly re-autoranges the 3D scene per frame when frames carry data
+without an explicit range, overriding the JS relayout. The cube differs by
+axis because autorange fits the asymmetric sodium tail per axis, and swings
+as the tail rotates. SUPPORTING EVIDENCE from the console: track half-width
+is 0.19612 AU (relayout target ~0.39 cube), but the swing's upper bound
+(~0.65) matches the static auto-scale "Final axis range: +/-0.606714 AU" --
+the full-orbit autorange. The scene is drifting toward the data-extent
+autorange and away from the element-sized window the relayout sets.
+
+This is COSMETIC. Centering, shell-tracking, the saved round trip, and the
+reticle are all render-confirmed; Tony judged the size wobble "not a visual
+problem." Won't-fix (accept the wobble) is a legitimate close if Plotly's
+per-frame autorange cannot be cleanly suppressed during 3D frame animation.
+
+## Consolidation status (corrected this session)
+
+A stale claim was made and corrected mid-session: the
+`plot_objects`/`animate_objects` consolidation is NOT all deferred. The shell
+consolidation AND the Phase 2 scene-assembly consolidation both landed --
+both pipelines route through shared chokepoints (`create_celestial_body_
+visualization`, `add_center_body_shells`, `add_center_body_marker`,
+`add_celestial_sphere_traces`), and the center-body-marker divergence that
+Phase 1 deferred is RESOLVED (`add_center_body_marker` is "the ONE mechanism,
+both pipelines", closing O6a/O5; Fable 5 found the root cause -- the static
+path had TWO center-marker mechanisms). What remains UN-merged: the two
+top-level functions are still separate (`plot_objects` ~1,760 lines,
+`animate_objects` ~1,700) -- the full Rings 1-3 function merge was never
+executed. Their setup / trace-building / layout / finalization are still
+hand-maintained in parallel, which is where silent drift can still grow.
+
+## Verified dipole-cone set (Tony asked it be on record)
+
+Queried live `CUSTOM_SHELLS`: the dipole_cone exists on Uranus + Neptune
+(done -- the dramatically tilted/offset dipoles). Magnetized bodies still
+WITHOUT a cone, that have a real global dipole: Earth, Jupiter, Mercury
+(Tony's named set) plus Saturn (MARGINAL -- dipole <1 deg from the spin axis,
+near-degenerate cone). EXCLUDED on physics: Mars (crustal fields, no global
+dipole) and Venus (induced magnetosphere, no internal dynamo). PROVENANCE
+GATE: all dipole tilts are currently RECALLED and MUST be sourced before any
+`PLANET_DIPOLE` entry (Fetched-vs-Recalled) -- show the envelope, cite the
+tilt.
+
+## Roadmap (Tony's calls this session)
+
+Active batch is items 1/3/5. (1) cube cleanup -- attempted, render-falsified,
+reverted (above); the real fix is deferred. (3) **3D axis control (dtick +
+range)** in the orrery GUI + Gallery Studio -- the NEXT WARM ITEM; machinery
+is hot now (`_calculate_grid_dtick`, `traces_extent_from_center`,
+auto-sizing), critical for flyby/close-approach plots where geometry is
+orders of magnitude below AU-scale axes, valuable for Mode 5. (5)
+palate-cleansers: near-parabolic apoapsis false-precision (Envelope
+candidate), stale O2/O3 console wording, 4 `apsidal_markers.py` em-dashes,
+and the remaining dipole cones (set above, provenance-gated). DEDICATED
+separate session (NOT a cleanup folder): the `plot_objects`/`animate_objects`
+DIVERGENCE AUDIT -- map both pipelines side by side, three-bucket catalog
+(shared / intentionally divergent / accidentally divergent = drift), optional
+parity smoke test; map-first-decide-second. The FULL function merge stays OFF
+the list (chokepoints earned most of its value; high blast radius). RESERVE:
+IPC food-insecurity build (API key not yet arrived, Tony waiting a few days)
+and the Gallery/Studio track (ledger section H) as the mission-flavored
+option if IPC keeps waiting.
+
+## Next session
+
+- Start from the post-revert HEAD (`frame.layout` restored). SHA round-trip
+  first as always.
+- WARM ITEM: 3D axis control (dtick + range), item 3. Machinery is hot.
+- Cube uniformity, if pursued: build a repro that ACTUALLY RUNS in Tony's
+  browser (the two prior repros did not), use it to confirm the autorange
+  hypothesis, then either suppress autorange per frame or close won't-fix.
+  Centering already works, so this is polish.
+- Standing deferred: MAPS per-frame wiring (ADDENDUM_phase4 decision 1);
+  O2/O3 console wording; the divergence audit as its own session.
 
 ## Files touched (all in HEAD a69c3a7 except where noted)
 
@@ -116,3 +200,20 @@ render-confirmed on live Mercury data, all now in HEAD.
 - **A hand-eyeballed screen-space marker degrades at scale.** The reticle
   was fine at AU scale and wrong at shell scale; suppress where the error
   shows rather than chase pixel alignment on a paper-coord annotation.
+- **A plausible cleanup is still a claim until the render confirms it.**
+  Item 1 (drop `frame.layout`, "one mechanism, uniform cube") compiled
+  clean, launched clean, read as obviously-correct architecture -- and the
+  render falsified it in one run. The gate caught it; the code was reverted.
+  "Cleaner architecture" that removes a partially-working constraint and a
+  fallback is not cleaner if it buys nothing.
+- **`frame.layout` 3D scene ranges behave scale-dependently.** Plotly honors
+  an explicit per-frame range for a roomy window but DROPS it for a tiny
+  window far from origin (autoranges instead). That is why the tiny case
+  needed the JS relayout and the large case did not -- and why removing
+  `frame.layout` hurt the large case. The real adversary for cube uniformity
+  is per-frame autorange, not the two mechanisms disagreeing.
+- **The SHA round trip earns its keep mid-session.** HEAD moved twice between
+  turns (`33aac56` then `373298d`); the round-trip check caught each push
+  before building, so edits landed on the live bytes, and it surfaced that
+  item 1 had been pushed (making "roll it back" a real code action, not a
+  no-op).
