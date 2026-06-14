@@ -155,7 +155,8 @@ def add_camera_center_button(fig, center_object_name='Sun'):
     
     return fig
 
-def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_objects=None):
+def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_objects=None,
+                               show_target_marker=True):
     """
     Add buttons to point camera from center toward specific target objects.
     
@@ -304,18 +305,25 @@ def add_look_at_object_buttons(fig, positions, center_object_name='Sun', target_
         # Update figure layout
         fig.update_layout(updatemenus=existing_menus)
         
-        # Add target marker annotation at screen center
-        fig.add_annotation(
-            dict(       # target marker 
-                x=0.6,
-                y=0.5085,
-                text='<span style="vertical-align:1em;"><></span>',                
-                showarrow=False,
-                xref='paper',
-                yref='paper',
-                font=dict(size=60, color='rgba(0, 255, 255, 0.5)')  # Semi-transparent cyan
+        # Add target marker annotation at screen center.
+        # (Phase 4) This reticle is a hand-aligned screen-space '<>' at a
+        # fixed paper coordinate -- it marks roughly where the center object
+        # appears, not the data center, so it was never pixel-exact. At a
+        # tiny camera-tracking scale (one body filling the view) that
+        # eyeball error becomes visible and there is nothing to disambiguate,
+        # so the caller suppresses it under tracking.
+        if show_target_marker:
+            fig.add_annotation(
+                dict(       # target marker
+                    x=0.6,
+                    y=0.5085,
+                    text='<span style="vertical-align:1em;"><></span>',
+                    showarrow=False,
+                    xref='paper',
+                    yref='paper',
+                    font=dict(size=60, color='rgba(0, 255, 255, 0.5)')  # Semi-transparent cyan
+                )
             )
-        )
 
         print(f"[Camera Buttons] Added dropdown with {len(buttons)} view options")
     

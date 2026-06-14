@@ -8101,7 +8101,8 @@ def animate_objects(step, label):
             fig = add_hover_toggle_buttons(fig)
 
             # Add camera view buttons with dropdown for different target objects
-            fig = add_look_at_object_buttons(fig, initial_positions, center_object_name)            
+            fig = add_look_at_object_buttons(fig, initial_positions, center_object_name,
+                                             show_target_marker=(_track_body is None))            
           
             fig = add_fly_to_object_buttons(fig, initial_positions, center_object_name,
                                             target_extents=_perframe_body_extent)  # NEW
