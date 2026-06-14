@@ -13,6 +13,23 @@ Phase 4 render-gate session (June 13): `5e83c1e` -> `a69c3a7` -- camera-tracking
 live fix (JS relayout), element-extent window sizing, per-frame grid fix, center
 reticle suppression under tracking, and the hyperbolic osculating `color` fix;
 all `[render-confirmed Mode 5]` by Tony on live Mercury data.
+Reticle + docs pushed -> `33aac7` family -> `33aac56` (current base).
+
+ROADMAP (June 13, Tony's call): active batch is items 1/3/5 --
+(1) cube-residual cleanup [DELIVERED this session, render-gated: frames
+data-only, JS sole window owner]; (3) 3D axis control (dtick + range) in
+orrery GUI + Studio, machinery warm now (`_calculate_grid_dtick`,
+`traces_extent_from_center`); (5) palate-cleansers: near-parabolic apoapsis
+false-precision (Envelope candidate), stale O2/O3 console wording, 4
+apsidal_markers.py em-dashes, AND the remaining dipole cones (see set below).
+DEDICATED (not a cleanup folder): the plot_objects/animate_objects DIVERGENCE
+AUDIT -- map both pipelines, three-bucket catalog (shared / intentionally
+divergent / accidentally divergent = drift), optional parity smoke test;
+its own focused session, map-first-decide-second. The FULL function merge
+stays OFF the list (chokepoints already earned most of its value; high blast
+radius). RESERVE: IPC food-insecurity build (API key not yet arrived, Tony
+waiting a few days) and the Gallery/Studio track (section H) as the
+mission-flavored option if IPC keeps waiting.
 Introduced by: HANDOFF v28. Supersedes the in-handoff ledgers embedded in
 v23 (canonical body), v24, v25, v26, v27.
 
@@ -237,9 +254,20 @@ Closed SINCE v23 (Movement chain + verified):
   `[per chain]`
 - **Envelope -> dipole tie / season-derived roll** (Mode-7, conditional);
   **dipole offset DIRECTION** (Mode-7; apex stays centered until sourced);
-  **other dipole bodies** (Earth/Jupiter cones, Saturn hover note -- ALL
-  tilts currently RECALLED, must be sourced before any PLANET_DIPOLE
-  entry); **per-body half_len_frac tuning** (Mode-5 knobs). `[per chain]`
+  **REMAINING DIPOLE CONES** (verified set, June 13 @33aac56): the cone
+  exists on Uranus + Neptune (done -- the dramatically tilted/offset
+  dipoles, where the swept envelope matters most). Of the eight bodies
+  with a magnetosphere, the candidates still WITHOUT a dipole_cone, on
+  physics, are Earth, Jupiter, Mercury (genuine tilted/offset global
+  dipoles -- Tony's named set) plus Saturn (MARGINAL: dipole aligned to
+  <1 deg of the spin axis, so the swept cone is near-degenerate; earns the
+  element only weakly). EXCLUDED on physics: Mars (crustal fields, no
+  global dipole) and Venus (induced magnetosphere, no internal dynamo).
+  PROVENANCE GATE unchanged: all dipole tilts are currently RECALLED and
+  MUST be sourced before any PLANET_DIPOLE entry (Fetched-vs-Recalled) --
+  show the envelope, but the tilt that SETS it must be cited, not
+  remembered. **per-body half_len_frac tuning** (Mode-5 knobs).
+  `[verified set @33aac56]`
 
 ### D.Priority -- real bugs
 
@@ -383,14 +411,15 @@ Closed SINCE v23 (Movement chain + verified):
       path is kept as a no-JS fallback; the relayout runs after the frame
       and wins. This IS the JS event-based follow-on the prior RESIDUAL
       parked (ADDENDUM_phase4 amendment C) -- now built.
-      RESIDUAL (June 13, render-confirmed acceptable): with the JS relayout
-      layered over the retained frame.layout path, the cube SIZE still
-      varies frame-to-frame (~0.15-0.55 AU, non-uniform) -- the two
-      mechanisms not perfectly agreeing. The CENTERING is steady (Mercury
-      focus holds, shells track the Sun) and Tony judged it "visually not
-      a problem." Clean removal: drop scene from frame.layout entirely so
-      JS owns the window outright (one mechanism, likely uniform cube) --
-      render-gated follow-up, not blocking.
+      RESIDUAL -> RESOLVED (Item 1, June 13) `[render-gated]`: the cube
+      SIZE previously varied frame-to-frame (~0.15-0.55 AU, non-uniform)
+      because the JS relayout was layered OVER the retained frame.layout
+      scene path and the two disagreed per frame. Item-1 cleanup drops the
+      scene from frame.layout entirely (frames carry DATA ONLY), making the
+      JS relayout the SOLE per-frame window owner -- one mechanism, uniform
+      cube. The initial-view block still seeds the window in Python (JS
+      reapplies on load), so a no-JS open is centered, just not tracked.
+      Awaiting Tony's Mode-5 confirmation that the cube is now uniform.
       RETICLE (June 13) `[render-confirmed Mode 5]`: the center '<>' marker
       (a hand-aligned screen-space paper-coord annotation borrowed from the
       star viz, never pixel-exact) is suppressed under camera tracking via

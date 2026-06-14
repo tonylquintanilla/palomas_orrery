@@ -7635,14 +7635,16 @@ def animate_objects(step, label):
                     showbackground=True, backgroundcolor='black')
 
             def _track_frame_layout(_i):
-                """Per-frame scene window centered on the tracked body,
-                carrying the COMPLETE axis spec every frame (range, dtick,
-                aspectmode, grid styling) -- never range alone. Plotly
-                applies a frame's layout as a MERGE, so any omitted axis
-                property inherits whatever the previous frame left, which
-                redrew the 3D grid inconsistently. Returns None when
-                tracking is off or the body's position is missing at this
-                frame (the view then holds its last window)."""
+                """Scene window centered on the tracked body at frame _i,
+                carrying the COMPLETE axis spec (range, dtick, aspectmode,
+                grid styling). As of the Item-1 cube cleanup this is used
+                ONLY for the on-load initial view (the update_layout below);
+                per-frame tracking is owned by the JS relayout
+                (save_utils._inject_camera_tracking) so the two no longer
+                disagree. The complete spec still matters here so the first
+                painted frame is a proper cube, not a range-only merge.
+                Returns None when tracking is off or the body's position is
+                missing at this frame."""
                 if _track_body is None:
                     return None
                 _tp = positions_over_time.get(_track_body)
@@ -7857,13 +7859,21 @@ def animate_objects(step, label):
                     data=frame_data,
                     traces=dynamic_trace_indices,  # Only update dynamic traces, not static shells
                     name=str(dates_list[i].strftime('%Y-%m-%d %H:%M')))
-                # (Phase 4) Camera tracking: this frame's layout carries the
-                # scene ranges centered on the tracked body (None = tracking
-                # off, or the body's position is missing at this frame --
-                # the view then simply holds its last window).
-                _tl = _track_frame_layout(i)
-                if _tl is not None:
-                    _frame_kwargs['layout'] = _tl
+                # (Item 1, cube cleanup) Frames carry DATA ONLY. The
+                # body-centered window is owned outright by the JS relayout
+                # (save_utils._inject_camera_tracking, fired on
+                # plotly_animatingframe) -- a single per-frame mechanism.
+                # Carrying scene ranges in frame.layout too made the two
+                # disagree frame-to-frame (cube size wobbled ~0.15-0.55 AU,
+                # non-uniform): Plotly drops a per-frame 3D scene range when
+                # the window is tiny relative to the body's offset from
+                # origin, the JS relayout then corrected it, and the mismatch
+                # showed as a non-uniform cube. With frame.layout out of the
+                # per-frame path, the relayout is the sole authority and the
+                # cube is uniform. The initial-view block above still seeds
+                # the window in Python (JS reapplies it on load), so a no-JS
+                # open is centered on the body -- just not tracked across
+                # frames.
                 frames.append(go.Frame(**_frame_kwargs))
 
 
