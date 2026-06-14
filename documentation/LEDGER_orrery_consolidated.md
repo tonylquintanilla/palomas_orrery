@@ -450,6 +450,27 @@ Closed SINCE v23 (Movement chain + verified):
       mouse; aids shell-scale visual verification. (Promoted June 11.)
     * O16: auto-scale max() Sun-centered case PASSED (C6a, June 11);
       Mercury-centered case retests in v4.1 after the C6d fix.
+- (June 14 DESIGN, no code) Orrery-side axis control (item 19.3) scoped +
+    handed off: HANDOFF_item19_axis_control_orrery_v1.md, built on 1288b51 /
+    gallery 2f40d9d. DECISION (a2): scene-dict extraction only (axes +
+    aspectmode + camera + domain, verified byte-identical across the 5704/7940
+    twins); layout envelope (title/annotation/legend/margin/footer) NOT merged
+    -> divergence-audit seed (4 catalogued divergences in the handoff). Full
+    function-body merge stays off the list. FINDING: _track_axis (7652) is
+    already the complete, correct spec (range + autorange=False + dtick +
+    styling); the two MAIN paths (5704/7940) under-specify (no dtick /
+    autorange) -- THAT is the close-approach unreadability. Feature =
+    generalize the track spec to the under-specified sites via
+    build_scene_axes/build_scene, dtick from the SHARED
+    visualization_utils._calculate_grid_dtick (provable Studio parity). Q2:
+    auto-only first cut (auto dtick + non-Sun-center range autofit IF the
+    existing range logic doesn't already fit extent); user GUI fields = fast
+    follow. Q3 matrix: range never overrides S3(exoplanet)/S4(track); dtick
+    lands on S1/S2 first; S4 already correct. Two-phase: P1 byte-identical
+    extraction (Mode-5 zero-change gate), P2 turn on dtick+range (Apophis
+    render gate). Confirm-at-impl: read get_improved_axis_range /
+    get_animation_axis_range (range-autofit scope), _track_dtick source
+    (parity routing), Studio round-trip (no double-apply).      
   20/N5 shell-resolution GUI control (enabler; its backend partially exists
   since Session A -- bow-shock conic already parameterized, sphere-shell
   n_points per-config; remaining: create_magnetosphere_shape promotion +
@@ -580,7 +601,10 @@ Closed SINCE v23 (Movement chain + verified):
   scaling consolidated into item 19 per Tony's framing call (no separate
   track); section-G auto-scale and tier-decision questions CLOSED;
   provenance re-scan at d9460e2: Tier-1 = 0 held through the campaign.
-
+- (June 14) Item 19.3 design session: SHA round trip verified (orrery 1288b51,
+  gallery 2f40d9d); map-confirmed 4 scene sites (2 twins / 2 variants, prior
+  3-site grep was stale); seam decision (a2) + Q2/Q3 settled; handoff drafted.
+  No code. Divergence-audit seeded.
 ---
 
 ## G. OPEN QUESTIONS / TONY CALLS
