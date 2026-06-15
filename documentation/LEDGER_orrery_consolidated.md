@@ -1,8 +1,8 @@
 # LEDGER -- Orrery Refactor / Movement Track (Consolidated, Running)
 
-Tony Quintanilla, PE | Claude | June 7, 2026 (last updated June 13, 2026)
+Tony Quintanilla, PE | Claude | June 7, 2026 (last updated June 15, 2026)
 Base SHA at consolidation: `76c330e` (76c330ea4dbe6bc667fba2ffb5baa1a65ae56d22)
-Current verified base: `a69c3a7` (a69c3a79466e5e3f02589eaee13031800d08be73)
+Current verified base: `6c5c3b` (6c5c3baaa1878310705465e326e45c92b502db86)
 Chain since consolidation: 76c330e -> 730b2bf (June-8 fixes) -> 7977a11
 (animation Phase 1) -> 3f03c12 -> 191cf36 (Phase 2) -> 8438a85 (Phase 3 GO)
 -> a9f0ec4 (Session A) -> e5fd86d (Session B) -> 0ce1e26 -> 7b71c29
@@ -13,7 +13,14 @@ Phase 4 render-gate session (June 13): `5e83c1e` -> `a69c3a7` -- camera-tracking
 live fix (JS relayout), element-extent window sizing, per-frame grid fix, center
 reticle suppression under tracking, and the hyperbolic osculating `color` fix;
 all `[render-confirmed Mode 5]` by Tony on live Mercury data.
-Reticle + docs pushed -> `33aac7` family -> `33aac56` (current base).
+Reticle + docs pushed -> `33aac7` family -> `33aac56` (June-13 base).
+Item 19.3 (plot-cube parity) chain: `6a64900` -> `7aecc3b` (P1 extraction)
+-> `bd768ee` (P2 builder) -> `aa1a4cd` (P2 call sites); then doc-only
+`25adda6` -> `c461b37` -> `728ceba` -> `77dce3e` (June-15 build base).
+June-15 Reset session: Reset button + center-dropdown trace-storm guard,
+delivered as Mode-1 snippets, both `[render-confirmed Mode 5]` by Tony; pushed
+-> `6c5c3b` (current base; round-trip verified -- remote HEAD matches and the
+pushed file carries reset_all_selections + the guard).
 
 ROADMAP (June 13, Tony's call): active batch is items 1/3/5 --
 (1) cube-residual cleanup [ATTEMPTED + RENDER-FALSIFIED + REVERTED this
@@ -236,6 +243,28 @@ Closed SINCE v23 (Movement chain + verified):
   TOOLING item (camera tracking -> item 19), not an engine defect.
   Greyed-legend (`visible='legendonly'` + legendrank + italic note)
   ACCEPTED (B4); click wart acceptable. 14 per_frame registry tags.
+- **RESET BUTTON + center-dropdown trace-storm guard** -- DONE
+  `[render-confirmed Mode 5, Tony, June 15 @6c5c3b]`. Top-bar Reset (date_frame
+  row 0 col 11, next to Vernal Eq) behind a confirm dialog returns the GUI to
+  STARTUP state. Two Mode-1 snippets into palomas_orrery.py (handler
+  reset_all_selections ~8212; button ~8605) + new file test_reset_completeness.py.
+  Option A; shells cleared by a COMPLEMENT-SET SWEEP (the SHELL_CONFIGS/
+  CUSTOM_SHELLS registry covers only 78 of 113 -- Sun 19/Earth 12/belts 4 are
+  hand-coded). Runtime-proven total: 310 IntVar names -> 309 distinct objects
+  (frag_var aliases comet_2025k1d_var); the sweep targets exactly 117 vars, ALL
+  declared-default 0; the only default-ON vars (show_apsidal_markers_var,
+  show_closest_approach_var = 1) are handled in the named set, never swept.
+  Completeness lives in the TEST (dirty-all -> live handler -> assert all 309
+  IntVars + 3 StringVars + 10 entries restored), not in an over-built registry.
+  GUARD: the objects loop fired update_center_dropdown's per-object 'write' trace
+  ~182x/click (the `[CENTER MENU] Dynamic centers: Sun + ['Sun']` flood); a module
+  flag `_reset_in_progress` + early-return guard (palomas_orrery.py ~10280/10287)
+  + one explicit end-of-handler rebuild after center->Sun cut it to 1 rebuild AND
+  clears a lingering pre-reset center. Storm absence render-confirmed by Tony.
+  MAP CORRECTION: the 4 "stragglers" (arrokoth_new_horizons_var, dw_var, kbo_var,
+  voyager1h_var) are DEAD/unwired; the live "2024 DW" var is asteroid_dw_var
+  (already in the 182 objects); the sweep re-zeros the dead 4 harmlessly (D-sweep
+  candidates).
 
 ---
 
@@ -317,6 +346,38 @@ Closed SINCE v23 (Movement chain + verified):
   sentinel to shell-orientation code and literal position data to the
   indicator; reusing a fallback without checking each consumer's semantics
   is how a sentinel becomes a physics bug. Suppression beats fabrication.
+- **Osculating pre-fetch FALSE-PROVENANCE messages** (June 15, observed; NOT
+  fixed). On the "use existing elements" branch, get_elements_with_prompt returns
+  CACHED elements (osculating_cache_manager.py:813-815 -> get_fallback_elements,
+  which prints "[OK] Using cached elements (...)"), yet palomas_orrery.py STILL
+  prints "[SUCCESS] Mercury fetched fresh data" (4471) and "[PRE-FETCH] OK: <obj>:
+  Updated" (4473). The variable is named fresh_elements but holds cache on that
+  path. One run shows all three lines together (user chose use-existing, cache
+  loaded, "fetched fresh"/"Updated" stamped anyway). Cite-over-recalled failure
+  class [CRITICAL convention]: a provenance stamp asserting a fetch that did not
+  happen -- the exact mechanism that can hide a stale element behind a SUCCESS
+  line. The success line is HARDCODED to Mercury (`if obj_name == 'Mercury':`,
+  4464) leftover debug; other objects get only the false "Updated". Honest fix =
+  report the actual path (fetched vs cached) + the cached element's solution date
+  instead of "unknown age" (calculate_age_days, :285, returns None on a bare
+  except -> the age channel is effectively dead). LATENT (separate): fresh-save
+  writes cache[cache_key] (center-aware, :804) but get_fallback_elements reads
+  bare cache[obj_name] (:832) -- coincide for heliocentric (cache_key == bare
+  name), DIVERGE for barycentric/body-centered ('Charon@9'); one producer, two
+  key conventions.
+- **Mercury 2019-epoch anomaly** (June 15, UNRESOLVED, deferred to recurrence).
+  doc-1 rendered Mercury's Keplerian with epoch 2019-01-01 osc. / 2018 perihelion
+  while Venus/Earth were current. NOT stale cache (project is 18 months old) and
+  NOT the static fallback (planetary_params['Mercury'] epoch = 2025-11-19).
+  Grounded: doc-1 params had MA/TA keys -> OSCULATING source (the static dict has
+  neither); the 2019 element was a runtime set, since overwritten by Tony's update
+  (current Mercury correct: epoch 2026-06-15 17:50, marker 0.433395 == hover
+  0.4333945989). Origin not determinable from disk; recollection insufficient.
+  ACTION: if it recurs, capture osculating_cache_backup.json at that instant
+  and/or add a one-line element-source+epoch print at fetch time before
+  theorizing. LESSON re-affirmed: Claude's "7-year stale cache" was a recalled
+  inference dressed as fact; Tony's domain knowledge overrode it (Observation
+  Override).
 
 ### D.Structural -- dead-code / honest shell files (Phase 3)
 
@@ -355,6 +416,13 @@ Closed SINCE v23 (Movement chain + verified):
   formatter on next touch.
 - O11 verdict June 11: greyed-legend display names derive correctly from
   checkbox keys -- NO item needed; recorded so it is not re-raised.
+- `WARNING: Unknown object type 'satellite'` fires once per satellite (Triton/
+  Despina/Galatea in the June-15 gate). Handled correctly downstream (orbits
+  plotted, Keplerian properly skipped as Satellites) -- spurious; a type-dispatch
+  that does not list 'satellite'. Silence on next touch of that dispatch.
+- Psyche encounter HARDCODED FALLBACK distances (8,009 km Mars GA / 1,151 km
+  Phobos), used when Horizons has no ephemeris past 2029-06-11 (expected,
+  graceful), lack a `# Source:` -- add one (provenance discipline) on next touch.
 
 ### D.Feature -- Bucket A (near-term)
 
