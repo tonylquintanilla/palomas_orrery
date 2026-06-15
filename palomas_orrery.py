@@ -8209,6 +8209,91 @@ def fill_now():
 
         fill_now.initialized = True
 
+def reset_all_selections():
+    """Return the GUI to its STARTUP state, behind a confirm dialog.
+
+    Date -> now; every checkbutton cleared (bodies, shells, celestial, comets,
+    spacecraft); center -> Sun; scale -> Auto; plot scalars -> startup values.
+
+    Completeness is the one real care (a partial reset that clears bodies but
+    leaves shells looks clean but is wrong). It is made provably total here by:
+      1. a per-object loop clearing the 182 body/spacecraft/comet vars,
+      2. restoring the handful of named display/option toggles to their DECLARED
+         defaults (two markers default ON -> restored to 1, not 0),
+      3. a complement-set sweep that zeroes EVERY remaining module tk.IntVar.
+    The sweep reaches all 113 shell/belt vars -- which have no single registry
+    that cleanly covers them -- plus a few dead stragglers, and is drift-proof:
+    a future checkbox family is cleared automatically. Runtime-proven safe: the
+    117 swept vars all have declared default 0; the only default-1 vars (the two
+    markers) are handled explicitly in step 2. Guarded against the LIVE handler
+    by test_reset_completeness.py.
+
+    Module updated: June 2026 with Anthropic's Claude Opus 4.8. Added GUI Reset
+    button + handler (objects loop + named-default restore + IntVar sweep).
+    """
+    if not messagebox.askyesno("Reset",
+                               "Clear all selections and reset to defaults?"):
+        return
+
+    # --- Family 1: object selection vars (bodies, moons, comets, spacecraft) ---
+    for obj in objects:
+        obj['var'].set(0)
+
+    # --- Families 3 & 4: named display/option toggles -> DECLARED defaults ---
+    # The two marker toggles default ON (value=1); restore to 1, not 0. (Their
+    # inline "NOT showing" comments at declaration are stale -- value is 1.)
+    star_background_var.set(0)
+    star_names_var.set(0)
+    celestial_grid_var.set(0)
+    celestial_grid_labels_var.set(0)
+    constellation_names_var.set(0)
+    show_apsidal_markers_var.set(1)       # declared default = 1
+    show_closest_approach_var.set(1)      # declared default = 1
+    animate_comet_tails_var.set(0)
+    animate_magnetospheres_var.set(0)
+    special_fetch_var.set(0)
+
+    # --- Family 2: shell/belt sub-toggles (113) + any other stray IntVar ---
+    # Complement-set sweep: zero every module IntVar NOT handled above. This is
+    # the mechanism that makes the reset provably total without hardcoding 113
+    # shell names or relying on a registry that does not cover all of them.
+    # add new checkbox families here: a new family that needs a NON-zero startup
+    # default must be restored explicitly above, or the sweep will zero it.
+    _handled_ids = {id(obj['var']) for obj in objects}
+    _handled_ids.update(id(v) for v in (
+        star_background_var, star_names_var, celestial_grid_var,
+        celestial_grid_labels_var, constellation_names_var,
+        show_apsidal_markers_var, show_closest_approach_var,
+        animate_comet_tails_var, animate_magnetospheres_var, special_fetch_var,
+    ))
+    for _v in list(globals().values()):
+        if isinstance(_v, tk.IntVar) and id(_v) not in _handled_ids:
+            _v.set(0)
+
+    # --- Family 5: scalar selector StringVars -> startup defaults ---
+    scale_var.set('Auto')
+    center_object_var.set('Sun')
+    track_camera_var.set('None (free camera)')
+
+    # --- Family 6: scalar entry widgets -> startup defaults (delete + insert) ---
+    def _set_entry(entry, value):
+        entry.delete(0, tk.END)
+        entry.insert(0, value)
+    # days_to_plot must be reset BEFORE fill_now() so the end date recomputes.
+    _set_entry(days_to_plot_entry, '28')
+    _set_entry(custom_scale_entry, '10')
+    _set_entry(orbital_points_entry, '50')
+    _set_entry(trajectory_points_entry, '50')
+    _set_entry(satellite_days_entry, '50')
+    _set_entry(satellite_points_entry, '50')
+    _set_entry(num_frames_entry, '29')
+    _set_entry(default_interval_entry, '1d')
+    _set_entry(trajectory_interval_entry, '6h')
+    _set_entry(satellite_interval_entry, '1h')
+
+    # --- Date fields -> now (reuse the startup helper; recomputes end date) ---
+    fill_now()
+
 def calculate_next_vernal_equinox(from_date):
     """
     Calculate the next vernal equinox (March equinox) from a given date.
@@ -8501,6 +8586,10 @@ CreateToolTip(now_button, "Fill the current date and time")
 vernal_equinox_button = tk.Button(date_frame, text="Vernal Eq", command=fill_next_vernal_equinox, width=8)
 vernal_equinox_button.grid(row=0, column=10, padx=(0, 0), pady=2, sticky='w')
 CreateToolTip(vernal_equinox_button, "Fill the next vernal equinox (March equinox) date and time")
+
+reset_button = tk.Button(date_frame, text="Reset", command=reset_all_selections, width=5)
+reset_button.grid(row=0, column=11, padx=(5, 0), pady=2, sticky='w')
+CreateToolTip(reset_button, "Clear all selections and reset the GUI to its startup state (date->now, center Sun, scale Auto)")
 
 # END DATE ROW (Row 1)
 tk.Label(date_frame, text="End:").grid(row=1, column=0, sticky='e', padx=(0, 5), pady=2)
