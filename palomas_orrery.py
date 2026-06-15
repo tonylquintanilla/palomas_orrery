@@ -8236,8 +8236,17 @@ def reset_all_selections():
         return
 
     # --- Family 1: object selection vars (bodies, moons, comets, spacecraft) ---
-    for obj in objects:
-        obj['var'].set(0)
+    # Suppress the per-object center-dropdown 'write' trace during the loop;
+    # without this it rebuilds the OptionMenu once per object (~180 redundant
+    # rebuilds, all the noisy "Dynamic centers: Sun + ['Sun']" lines). One
+    # explicit rebuild runs at the end of this handler.
+    global _reset_in_progress
+    _reset_in_progress = True
+    try:
+        for obj in objects:
+            obj['var'].set(0)
+    finally:
+        _reset_in_progress = False
 
     # --- Families 3 & 4: named display/option toggles -> DECLARED defaults ---
     # The two marker toggles default ON (value=1); restore to 1, not 0. (Their
@@ -8293,6 +8302,12 @@ def reset_all_selections():
 
     # --- Date fields -> now (reuse the startup helper; recomputes end date) ---
     fill_now()
+
+    # Single center-dropdown rebuild now that all objects are cleared and the
+    # center is back to Sun: the dropdown lands on Sun-only, matching startup.
+    # (During the objects loop above the trace was suppressed; this is the one
+    # rebuild, and it also clears any previously-selected center from the menu.)
+    update_center_dropdown()
 
 def calculate_next_vernal_equinox(from_date):
     """
@@ -10259,12 +10274,20 @@ center_object_var = tk.StringVar(value='Sun')
 #   2. Selected objects that CAN be centers (in object list order)
 # This makes finding the right center much easier!
 
+# Set True only inside reset_all_selections() while the object vars are cleared,
+# so the per-object 'write' trace does not rebuild the dropdown once per object.
+# reset_all_selections() does one explicit rebuild afterward.
+_reset_in_progress = False
+
 def update_center_dropdown(*args):
     """
     Update the center dropdown to show only Sun + selected centerable objects.
     Called whenever any object checkbox changes state.
     """
+    if _reset_in_progress:
+        return
     # Get currently selected objects that can be centers
+
     # Also include the current center (it may be shadowed/unchecked but should stay in dropdown)
     selected_centerable = []
     current_center = center_object_var.get()
