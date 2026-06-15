@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
 Generated: June 15, 2026
-Modules: 110 | Functions: 892 | Lines: 88,069
+Modules: 111 | Functions: 893 | Lines: 88,278
 
 ---
 
@@ -34,7 +34,7 @@ and explains in context.
 | scenario | 3 | Specific Earth system scenarios |
 | utility | 5 | Shared helper functions |
 | devtool | 12 | Developer tools (dependency tracing, atlas) |
-| other | 8 | Uncategorized |
+| other | 9 | Uncategorized |
 
 ---
 
@@ -124,7 +124,7 @@ and explains in context.
 
 ### palomas_orrery.py
 
-**Role:** gui | **Lines:** 9,337
+**Role:** gui | **Lines:** 9,435
 
 > palomas_orrery.py - Main GUI and plotting engine for Paloma's Orrery.
 
@@ -174,38 +174,39 @@ and explains in context.
 - `set_palomas_birthday()` (line 8168)
 - `update_date_fields(new_date)` (line 8172)
 - `fill_now()` (line 8185)
-- `calculate_next_vernal_equinox(from_date)` (line 8212) -- Calculate the next vernal equinox (March equinox) from a given date.
-- `fill_next_vernal_equinox()` (line 8282) -- Fill the date fields with the next vernal equinox from the current date.
-- `toggle_all_shells()` (line 8293) -- Toggle all sun shell checkboxes based on the main shell checkbox.
-- `handle_mission_selection()` (line 8325)
-- `animate_one_minute()` (line 8331)
-- `animate_one_hour()` (line 8337)
-- `animate_one_day()` (line 8342)
-- `animate_one_week()` (line 8348)
-- `animate_one_month()` (line 8353)
-- `animate_one_year()` (line 8358)
-- `animate_palomas_birthday()` (line 8363)
-- `report_callback_exception(exc_type, exc_value, exc_traceback)` (line 8393)
-- `sync_end_date_from_days()` (line 8405) -- Calculate end date from start date + days to plot
-- `sync_days_from_dates()` (line 8436) -- Calculate days to plot from start and end dates
-- `sync_days_from_dates()` (line 8448) -- Calculate days to plot from start and end dates
-- `sync_end_date_from_days()` (line 8547) -- Calculate end date from start date + days to plot
-- `sync_days_from_dates()` (line 8579) -- Calculate days to plot from start and end dates
-- `get_end_date_from_gui()` (line 8591) -- Get end date from GUI fields. Defaults empty fields to avoid crash.
-- `can_be_horizons_center(obj)` (line 8623) -- Check if object can be used as Horizons coordinate center.
-- `create_celestial_checkbutton(name, variable)` (line 8725)
-- `create_mission_checkbutton(name, variable, dates)` (line 9246)
-- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 9690) -- Creates a checkbutton for a comet with a tooltip containing its description,
-- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 9808) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
-- `toggle_special_fetch_mode()` (line 9905) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
-- `create_exoplanet_checkbutton(name, variable, is_star)` (line 9921) -- Create checkbutton for exoplanet objects
-- `open_star_visualization()` (line 9942) -- Inform user about standalone Star Visualization executable.
-- `launch_galactic_center()` (line 10015) -- Launch the Sagittarius A* Grand Tour visualization.
-- `update_center_dropdown()` (line 10173) -- Update the center dropdown to show only Sun + selected centerable objects.
-- `setup_center_dropdown_traces()` (line 10238) -- Add traces to all object IntVars to update center dropdown on selection change.
-- `on_center_change()` (line 10253) -- Update frame title and status when the center object is changed.
-- `open_orbital_param_visualization()` (line 10747) -- Opens the orbital parameter visualization window by calling the
-- `restore_sash_positions()` (line 10919)
+- `reset_all_selections()` (line 8212) -- Return the GUI to its STARTUP state, behind a confirm dialog.
+- `calculate_next_vernal_equinox(from_date)` (line 8312) -- Calculate the next vernal equinox (March equinox) from a given date.
+- `fill_next_vernal_equinox()` (line 8382) -- Fill the date fields with the next vernal equinox from the current date.
+- `toggle_all_shells()` (line 8393) -- Toggle all sun shell checkboxes based on the main shell checkbox.
+- `handle_mission_selection()` (line 8425)
+- `animate_one_minute()` (line 8431)
+- `animate_one_hour()` (line 8437)
+- `animate_one_day()` (line 8442)
+- `animate_one_week()` (line 8448)
+- `animate_one_month()` (line 8453)
+- `animate_one_year()` (line 8458)
+- `animate_palomas_birthday()` (line 8463)
+- `report_callback_exception(exc_type, exc_value, exc_traceback)` (line 8493)
+- `sync_end_date_from_days()` (line 8505) -- Calculate end date from start date + days to plot
+- `sync_days_from_dates()` (line 8536) -- Calculate days to plot from start and end dates
+- `sync_days_from_dates()` (line 8548) -- Calculate days to plot from start and end dates
+- `sync_end_date_from_days()` (line 8651) -- Calculate end date from start date + days to plot
+- `sync_days_from_dates()` (line 8683) -- Calculate days to plot from start and end dates
+- `get_end_date_from_gui()` (line 8695) -- Get end date from GUI fields. Defaults empty fields to avoid crash.
+- `can_be_horizons_center(obj)` (line 8727) -- Check if object can be used as Horizons coordinate center.
+- `create_celestial_checkbutton(name, variable)` (line 8829)
+- `create_mission_checkbutton(name, variable, dates)` (line 9350)
+- `create_comet_checkbutton(name, variable, dates, perihelion)` (line 9794) -- Creates a checkbutton for a comet with a tooltip containing its description,
+- `create_interstellar_checkbutton(name, variable, dates, perihelion)` (line 9912) -- Creates a checkbutton for an interstellar/hyperbolic object with a tooltip
+- `toggle_special_fetch_mode()` (line 10009) -- DEPRECATED: Special fetch mode removed - two-layer trajectories provide automatic detail
+- `create_exoplanet_checkbutton(name, variable, is_star)` (line 10025) -- Create checkbutton for exoplanet objects
+- `open_star_visualization()` (line 10046) -- Inform user about standalone Star Visualization executable.
+- `launch_galactic_center()` (line 10119) -- Launch the Sagittarius A* Grand Tour visualization.
+- `update_center_dropdown()` (line 10282) -- Update the center dropdown to show only Sun + selected centerable objects.
+- `setup_center_dropdown_traces()` (line 10350) -- Add traces to all object IntVars to update center dropdown on selection change.
+- `on_center_change()` (line 10365) -- Update frame title and status when the center object is changed.
+- `open_orbital_param_visualization()` (line 10859) -- Opens the orbital parameter visualization window by calling the
+- `restore_sash_positions()` (line 11031)
 
 ---
 
@@ -2477,6 +2478,17 @@ and explains in context.
 
 ---
 
+### test_reset_completeness.py
+
+**Role:** other | **Lines:** 111
+
+> test_reset_completeness.py -- guard the Reset button against partial-reset drift.
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+---
+
 ## Alphabetical Index
 
 | Module | Role | Lines | Deps | Consumers |
@@ -2541,7 +2553,7 @@ and explains in context.
 | paleoclimate_visualization | rendering | 478 | 1 | 2 |
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
-| palomas_orrery | gui | 9,337 | 29 | 0 |
+| palomas_orrery | gui | 9,435 | 29 | 0 |
 | palomas_orrery_dashboard | gui | 639 | 0 | 0 |
 | palomas_orrery_helpers | utility | 776 | 11 | 2 |
 | planet9_visualization_shells | rendering/shells | 267 | 1 | 1 |
@@ -2583,6 +2595,7 @@ and explains in context.
 | stellar_parameters | data | 352 | 2 | 8 |
 | test_constants_provenance | devtool | 490 | 1 | 0 |
 | test_orbit_cache | devtool | 204 | 1 | 0 |
+| test_reset_completeness | other | 111 | 0 | 0 |
 | uranus_visualization_shells | rendering/shells | 1,081 | 4 | 2 |
 | venus_visualization_shells | rendering/shells | 614 | 2 | 1 |
 | verify_orbit_cache | devtool | 170 | 0 | 0 |
