@@ -11,13 +11,13 @@ Key functions:
     add_hover_toggle_buttons() - Show/hide hover text toggle
     add_fly_to_object_buttons() - Camera fly-to dropdown
     _calculate_grid_dtick() - Auto-dtick from axis span
-    _calculate_grid_dtick() - Auto-dtick from axis span
     build_scene() - Full 3D scene dict (axes + aspectmode + camera + domain)
 
 Module updated: April 2026 with Anthropic's Claude Opus 4.6
 Module updated: June 2026 with Anthropic's Claude Opus 4.8. Added
     build_scene/build_scene_axes/build_scene_axis -- single source of truth
-    for the static and animation main scene dicts (item 19.3 Phase 1).
+    for the static and animation main scene dicts (item 19.3 Phase 1);
+    Phase 2 adds auto_dtick + autorange suppression for close-approach grids.
 """
 
 import plotly.graph_objects as go
@@ -437,7 +437,8 @@ def build_scene_axes(axis_range, dtick=None, autorange=None,
 
 
 def build_scene(axis_range, camera, domain, dtick=None, autorange=None,
-                aspectmode='cube', show_grid=True, show_background=True):
+                auto_dtick=False, aspectmode='cube', show_grid=True,
+                show_background=True):
     """
     Build the full 3D scene dict for an orrery plot: x/y/z axes plus
     aspectmode, camera, and domain.
@@ -449,15 +450,21 @@ def build_scene(axis_range, camera, domain, dtick=None, autorange=None,
     the scene dict is built here.
 
     The default call reproduces the legacy inline scene exactly (no dtick,
-    no autorange key). Close-approach readability (item 19.3) is a one-arg
-    flip: pass dtick=_calculate_grid_dtick(span) and autorange=False.
+    no autorange key). Close-approach readability (item 19.3 Phase 2) is two
+    flags: auto_dtick=True (derives dtick from the range span via the shared
+    _calculate_grid_dtick) and autorange=False (pins the range and suppresses
+    Plotly per-frame autorange during animation).
 
     Parameters:
         axis_range (list): [min, max] applied to all three axes, in AU.
         camera (dict): Plotly scene camera, e.g. get_default_camera().
         domain (dict): Scene domain, e.g. dict(x=[0.2, 1.0], y=[0.0, 1.0]).
-        dtick (float, optional): Grid tick spacing in AU (all axes).
-        autorange (bool, optional): Emitted only when not None.
+        dtick (float, optional): Grid tick spacing in AU (all axes). An
+            explicit value overrides auto_dtick.
+        autorange (bool, optional): Emitted only when not None. Pass False
+            with an explicit range to pin it and suppress per-frame autorange.
+        auto_dtick (bool): When True, dtick is None, and axis_range is not
+            None, derive dtick from the range span via _calculate_grid_dtick.
         aspectmode (str): Plotly aspectmode, default 'cube'.
         show_grid (bool): showgrid on all axes.
         show_background (bool): showbackground on all axes.
@@ -465,6 +472,17 @@ def build_scene(axis_range, camera, domain, dtick=None, autorange=None,
     Returns:
         dict: A Plotly scene spec, drop-in for fig.update_layout(scene=...).
     """
+    # Auto-dtick (item 19.3 Phase 2): derive readable tick spacing from the
+    # final range span via the shared _calculate_grid_dtick, so close-approach
+    # cubes do not fall back to AU-scale gridlines. An explicit dtick wins.
+    # dtick and autorange are meaningful only with an explicit range; with
+    # axis_range=None we emit neither and let Plotly auto-fit (pinning a
+    # range that is not there would fight the auto-fit).
+    if axis_range is None:
+        dtick = None
+        autorange = None
+    elif dtick is None and auto_dtick:
+        dtick = _calculate_grid_dtick(axis_range[1] - axis_range[0])
     scene = build_scene_axes(axis_range, dtick, autorange,
                              show_grid, show_background)
     scene['aspectmode'] = aspectmode
