@@ -471,6 +471,31 @@ Closed SINCE v23 (Movement chain + verified):
     render gate). Confirm-at-impl: read get_improved_axis_range /
     get_animation_axis_range (range-autofit scope), _track_dtick source
     (parity routing), Studio round-trip (no double-apply).      
+- (June 15) Item 19.3 Phase 2 COMPLETE. auto_dtick + autorange=False landed on
+  S1/S2 via build_scene. Base 7aecc3b -> bd768ee (builder) -> aa1a4cd (call sites).
+  build_scene gains auto_dtick (derives dtick from the range span via the SHARED
+  visualization_utils._calculate_grid_dtick -> provable Studio parity) + an
+  axis_range=None guard (emit neither dtick nor autorange when no range exists).
+  Headline fix verified: close-approach cubes now readable -- e.g. 0.0008 AU span
+  -> 0.0001 AU dtick (~15,000 km gridlines) instead of effective dtick=1. Default
+  build_scene call stays byte-identical, so Phase 1 untouched. Render gate (Tony,
+  Mode 5, aa1a4cd): static close-approach readable; everyday full-system plots fine
+  with explicit ~6-gridline dtick (intended, visible change: auto_dtick applies to
+  ALL S1/S2 plots).
+  FINDING: the load-bearing non-tracking animation-hold test PASSED -- autorange=False
+  on the up-front once-set scene SUPPRESSES Plotly per-frame autorange (grid/range
+  held across frames). This validates the "real fix (autorange suppression)" named
+  in the palomas_orrery.py June-13 note (~7847) FOR THE NON-TRACKING PATH. BOUNDARY:
+  does NOT resolve the camera-tracking (S4) per-frame autorange residual (separate
+  dedicated-session item; _track_axis untouched). Two distinct problems; only the
+  non-tracking one is closed.
+  Also folded in: removed the duplicate _calculate_grid_dtick() docstring line
+  (Phase-1 insertion artifact). Cosmetic residuals: trailing whitespace on
+  palomas_orrery.py 5711/7927; MODULE_ATLAS.md lags (auto_dtick absent) -- regen
+  when convenient.
+  19.3 Phase 1 (extraction) + Phase 2 (dtick/autorange) done. Fast-follow remains:
+  user-settable range/dtick GUI fields (orrery + Studio round trip); S3 exoplanet
+  opt-in.   
   20/N5 shell-resolution GUI control (enabler; its backend partially exists
   since Session A -- bow-shock conic already parameterized, sphere-shell
   n_points per-config; remaining: create_magnetosphere_shape promotion +
