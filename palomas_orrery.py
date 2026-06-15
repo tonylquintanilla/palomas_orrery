@@ -14,7 +14,8 @@ At ~8,600 lines this is the project monolith. Key internal functions:
     fetch_position() - JPL Horizons position query (~line 1531)
     calculate_axis_range_from_orbits() - Scale-aware axis fitting (~line 602)
 
-Module updated: June 10, 2026 with Anthropic's Claude Fable 5, Sonnet 4.6 and Tony
+Module updated: June 10, 2026 with Anthropic's Claude Fable 5 (RIP), Sonnet 4.6 and Tony
+Updated June 15, 2026 with Opus 4.8.
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -5706,6 +5707,8 @@ def plot_objects():
                     axis_range,
                     camera=get_default_camera(),
                     domain=dict(x=[0.2, 1.0], y=[0.0, 1.0]),
+                    auto_dtick=True,
+                    autorange=False,                    
                 ),
 
                 paper_bgcolor='black',
@@ -7920,6 +7923,8 @@ def animate_objects(step, label):
                     axis_range,
                     camera=get_default_camera(),
                     domain=dict(x=[0.2, 1.0], y=[0.0, 1.0]),
+                    auto_dtick=True,
+                    autorange=False,                   
                 ),
 
                 paper_bgcolor='black',
