@@ -127,19 +127,48 @@ Phase-B session start, do not trust these line numbers cold):
     _apply_config_to_gui(DEFAULT_CONFIG) -> this is where a read-on-load
     populate would slot in.
 
-OPEN DECISION for Phase B (still unmade): the km-suffix.
-  Studio's override appends "(grid: N km)" to axis titles; the orrery does
-  not. If Phase B populates the fields and the override fires on load,
-  loaded plots gain a suffix the orrery never wrote -- a small render
-  divergence. Decide: let Studio annotate (informative), or suppress to
-  match the orrery exactly.
+DECISIONS -- RESOLVED June 16 (scope locked, ready to build):
 
-Suggested Phase-B design (one clean approach): read the figure's grid into
-the fields on load; keep the >0 override semantics; when the user does not
-change them, re-applying the figure's own values is idempotent. Sentinel
-edge: figure with no explicit dtick -> leave field at 0 (auto/inherit).
-Render gate: load the Artemis-II / Apophis-style close-approach export,
-confirm the fields show the orrery's grid and a refine still works.
+  D1 km-suffix: CONDITIONAL on scale. Show "(grid: N km)" on axis titles
+     ONLY when the range half-extent < a threshold; plain "X (AU)" above it.
+     Define the threshold as a named constant KM_SUFFIX_MAX_AU = 0.01 AU
+     (tunable; "bar for modification = a demonstrated failure"). Applies to
+     ALL suffix generation in apply_config -- both the new read-on-load AND
+     the existing user-typed override -- so it also refines today's behavior
+     (no km on a large manual range). Rationale: km is meaningful for
+     close-approach / flyby (Apophis ~0.0002, Moon ~0.0026, Artemis preset
+     ~0.0003 AU) and awkward at system/exoplanet scale (Proxima ~0.058,
+     TRAPPIST ~0.075, TOI-1338 ~0.91, Earth orbit ~1.3 AU). 0.01 AU sits in
+     a clean empty gap -> no edge surprises. NET: system + exoplanet plots
+     load NEUTRAL (titles unchanged, match the orrery); close-approach plots
+     gain the km annotation on load (deliberate, wanted). Residual: a
+     close-approach plot's titles then differ between orrery render (plain)
+     and Studio render (annotated) -- accepted. Full parity (orrery also
+     emitting the suffix under the same cutoff) is an OPTIONAL later item,
+     NOT Phase B.
+
+  D2 sentinel: populate the fields with the figure's REAL value; "unchanged"
+     == re-applying the same value (idempotent). ACCEPTED.
+
+  D3 precedence (both _do_load branches): explicit non-zero override in
+     _studio_config wins; else read from the figure. So the field always
+     reflects the effective grid. ACCEPTED.
+
+  D4 edge cases: figure with no explicit dtick -> leave field 0
+     (auto/inherit); 2D figure (no scene) -> skip, leave 0. ACCEPTED.
+
+  D5 read range AND dtick (range is always present; lets Tony keep the auto
+     cube and refine dtick, or adjust both). ACCEPTED.
+
+Phase-B build shape (small): a _read_scene_grid_from_figure helper; wire it
+into both _do_load branches per D3; add the KM_SUFFIX_MAX_AU guard around
+the suffix line (~982) in apply_config per D1. No new widgets, no change to
+the apply_config math. ~20-30 lines.
+
+Render gate: load the Artemis-II / Apophis-style close-approach export ->
+fields show the orrery's actual range + dtick -> close-approach titles carry
+km, a system/exoplanet plot loads with plain titles -> change dtick ->
+re-render refines -> re-export -> reload -> still consistent, no drift.
 
 --------------------------------------------------------------------------
 ## 6. Observations (pre-existing, NOT Phase A -- triage)
