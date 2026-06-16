@@ -11,7 +11,7 @@ Philosophy: "Data Preservation is Climate Action"
 
 AI Collaboration: Built with Claude (Anthropic) - conversational AI partnership
 
-Updated 5/1/2026
+Updated 6/16/2026 with Opus 4.8
 """
 
 import os
@@ -177,6 +177,7 @@ LOCAL_DOCS = [
     ("Requirements", "requirements.txt"),
     ("Project Instructions", "project_instructions_V3_20.md"),
     ("Adding Objects Guide", "ADDING_OBJECTS_GUIDE.md"),
+    ("Running a Patch File", "RUNNING_A_PATCH_FILE.md"),
     ("Color Reference", "Python_Color_Reference_v2.pdf"),    # or color_map.py
     ("To Do Ideas", "to_do_ideas.md"),    
 ]
