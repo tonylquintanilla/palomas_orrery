@@ -16,6 +16,10 @@ At ~8,600 lines this is the project monolith. Key internal functions:
 
 Module updated: June 10, 2026 with Anthropic's Claude Fable 5 (RIP), Sonnet 4.6 and Tony
 Updated June 15, 2026 with Opus 4.8.
+Updated June 15, 2026 with Opus 4.8: item 19.3 Phase A -- user-settable grid
+spacing (dtick) GUI field threaded to the static plot (S1), free-camera
+animation (S2), and the exoplanet static plot (S3, now routed through
+build_scene for a readable auto/manual grid).
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -5221,6 +5225,16 @@ def plot_objects():
                     progress_bar.stop()
                     return
 
+            # Manual grid spacing (dtick) override -- item 19.3. Blank/0 -> None
+            # (auto_dtick handles it); a positive value overrides the grid on
+            # the static plot (S1) and the exoplanet static plot (S3) below.
+            # Applies under Auto and Manual scale alike (both yield a range).
+            try:
+                _cd = float(custom_dtick_entry.get().strip())
+                custom_dtick = _cd if _cd > 0 else None
+            except (ValueError, AttributeError):
+                custom_dtick = None
+
             # Create Plotly figure
             fig = go.Figure()
 
@@ -5708,7 +5722,8 @@ def plot_objects():
                     camera=get_default_camera(),
                     domain=dict(x=[0.2, 1.0], y=[0.0, 1.0]),
                     auto_dtick=True,
-                    autorange=False,                    
+                    autorange=False,
+                    dtick=custom_dtick,   # item 19.3 manual override (None -> auto)
                 ),
 
                 paper_bgcolor='black',
@@ -5973,12 +5988,20 @@ def plot_objects():
                         # Set axis range for exoplanet system
                         if system_planets:
                             exo_axis_range = calculate_exoplanet_axis_range(system_planets)
+                            # item 19.3: route the exoplanet static scene through
+                            # build_scene (S3) so it gets a readable auto/manual
+                            # grid, matching S1/S2. update_layout merges, so the
+                            # camera/domain/theme set above are preserved; only
+                            # range + dtick change. build_scene sets the same
+                            # 'X/Y/Z (AU)' titles. custom_dtick overrides when > 0.
                             fig.update_layout(
-                                scene=dict(
-                                    xaxis=dict(range=[-exo_axis_range, exo_axis_range], title='X (AU)'),
-                                    yaxis=dict(range=[-exo_axis_range, exo_axis_range], title='Y (AU)'),
-                                    zaxis=dict(range=[-exo_axis_range, exo_axis_range], title='Z (AU)'),
-                                    aspectmode='cube'
+                                scene=build_scene(
+                                    [-exo_axis_range, exo_axis_range],
+                                    camera=get_default_camera(),
+                                    domain=dict(x=[0.2, 1.0], y=[0.0, 1.0]),
+                                    auto_dtick=True,
+                                    autorange=False,
+                                    dtick=custom_dtick,
                                 )
                             )
                             
@@ -7903,6 +7926,16 @@ def animate_objects(step, label):
                 _half = max(abs(axis_range[1]), abs(_shell_axis_range[1]))
                 axis_range = [-_half, _half]
 
+            # Manual grid spacing (dtick) override -- item 19.3. Blank/0 -> None
+            # (auto_dtick handles it); a positive value overrides the grid on
+            # the free-camera animation (S2), under Auto and Manual scale alike;
+            # camera-tracked frames build their own grid (track_camera_var).
+            try:
+                _cd = float(custom_dtick_entry.get().strip())
+                custom_dtick = _cd if _cd > 0 else None
+            except (ValueError, AttributeError):
+                custom_dtick = None
+
                         
             # Celestial sphere: star background + coordinate grid (static backdrop)
             if (star_background_var.get() or celestial_grid_var.get()
@@ -7924,7 +7957,8 @@ def animate_objects(step, label):
                     camera=get_default_camera(),
                     domain=dict(x=[0.2, 1.0], y=[0.0, 1.0]),
                     auto_dtick=True,
-                    autorange=False,                   
+                    autorange=False,
+                    dtick=custom_dtick,   # item 19.3 manual override (None -> auto)
                 ),
 
                 paper_bgcolor='black',
@@ -8291,6 +8325,7 @@ def reset_all_selections():
     # days_to_plot must be reset BEFORE fill_now() so the end date recomputes.
     _set_entry(days_to_plot_entry, '28')
     _set_entry(custom_scale_entry, '10')
+    _set_entry(custom_dtick_entry, '')   # item 19.3: blank -> auto grid
     _set_entry(orbital_points_entry, '50')
     _set_entry(trajectory_points_entry, '50')
     _set_entry(satellite_days_entry, '50')
@@ -10258,6 +10293,29 @@ CreateToolTip(manual_scale_radio, "Some key mean distances for custom scaling: \
 custom_scale_entry = tk.Entry(scale_frame, width=10)
 custom_scale_entry.pack(anchor='w')
 custom_scale_entry.insert(0, '10')  # Default scale value
+
+# --- Manual grid spacing (dtick) override -- item 19.3 ---
+# Leave blank for an automatic grid (auto_dtick derives spacing from the axis
+# span). A positive value overrides the grid spacing on the static plot (S1),
+# the free-camera animation (S2), and the exoplanet static plot (S3). Works
+# under both Auto and Manual scale -- Auto produces a concrete fit cube the
+# grid attaches to. Camera-tracked animations compute their own grid and
+# ignore this field.
+dtick_label = tk.Label(scale_frame,
+    text="Optional grid spacing (dtick) in AU -- blank for auto:")
+dtick_label.pack(anchor='w')
+custom_dtick_entry = tk.Entry(scale_frame, width=10)
+custom_dtick_entry.pack(anchor='w')
+CreateToolTip(custom_dtick_entry,
+    "Optional grid line spacing in AU. Leave blank (or 0) for automatic.\n"
+    "Refines the grid on whatever cube the plot uses -- Auto-fit or Manual.\n"
+    "Handy for close-approach/flyby plots far below the default AU grid.\n"
+    "Examples (AU spacing -> km):\n"
+    "* 0.01 AU   ~ 1,495,979 km\n"
+    "* 0.001 AU  ~ 149,598 km\n"
+    "* 0.0001 AU ~ 14,960 km\n"
+    "* 0.00005 AU ~ 7,480 km\n"
+    "* 0.00002 AU ~ 2,992 km")
 
 # Create a frame for the center object selection
 center_frame = tk.LabelFrame(controls_frame, text="Select Center Object for Your Plot")
