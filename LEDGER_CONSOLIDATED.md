@@ -157,7 +157,7 @@ notes get lost; capturing on first mention is the rule.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*58 live items; 46 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*53 live items; 46 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Updated |
@@ -165,12 +165,6 @@ notes get lost; capturing on first mention is the rule.
 | ! | L-001 | Food Insecurity (Earth System track) | BLOCKED | 2026-06-13 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | - |
 | ! | L-003 | Protocol amendment candidates (for v3.29) | OPEN | 2026-06-10 |
-
-### PENDING
-| Gap | L# | Item | Disposition | Updated |
-|:---:|----|------|-------------|---------|
-|  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | 2026-06-17 |
-|  | L-005 | Commit protocol v3.28 (or v3.29) to repo root | DONE | 2026-06-17 |
 
 ### D.Movement
 | Gap | L# | Item | Disposition | Updated |
@@ -183,8 +177,6 @@ notes get lost; capturing on first mention is the rule.
 ### D.Priority
 | Gap | L# | Item | Disposition | Updated |
 |:---:|----|------|-------------|---------|
-|  | L-010 | Keplerian epoch parse fails on 'osc.' suffix | DONE | 2026-06-12 |
-|  | L-011 | Pass-C2 v4 blockers (3) + B3-bonus barycenter Sun bug | DONE | 2026-06-11 |
 | ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 2026-06-15 |
 |  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 2026-06-15 |
 
@@ -265,7 +257,6 @@ notes get lost; capturing on first mention is the rule.
 |:---:|----|------|-------------|---------|
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 2026-06-07 |
 |  | L-054 | Gate 5(b): full resolution ships, rounded -- render-confirmed | DONE | 2026-06-13 |
-|  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | 2026-06-17 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred | OPEN | 2026-06-12 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | 2026-06-11 |
 
@@ -330,39 +321,6 @@ notes get lost; capturing on first mention is the rule.
 **Gap:** fold into protocol v3.29.
 
 ## PENDING ACTION (Tony-side)
-
-#### [L-004] Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push
-<!-- L:004 status:DONE upd:2026-06-17 section:PENDING flag: -->
-- **Apply the C2 fix pass (2 files) and run ANIMATION_TEST_PROTOCOL_v4_1**
-  (the focused retest of C2/C6d + regression), append results to the 3C
-  handoff, push. On pass: the Phase 3 CORE TRACK (Sessions A/B/C + fix
-  pass) is COMPLETE -- move the marked render-gated items below into
-  section C and update 21/51. (v4 first run, June 11: C1/C3/C5/C7 PASS,
-  C4 pass-with-caveat, C2/C6 blocked by the three bugs below -- all
-  three root-caused and fixed in pass C2.)
-**Tony:** let's discuss this item and remove from Pending Action section. 
-**Note (2026-06-17):** v4.1 gate COMPLETE. C2 PASS (Halley: no doubling,
-  comet details correct, Sun tracking works). C6d PASS (Mercury-centered
-  29-frame animation: Sun tracks correctly). O16 PASS WITH NOTE (auto-scale
-  ~1 AU; root cause logged on L-056 -- positions={} fallback, pre-existing,
-  workaround via 19.3 Phase B). MAPS tail non-animation BY DESIGN.
-  Phase 3 CORE TRACK COMPLETE. L-007 (bow-shock disclosure) moves to C
-  this pass. DONE.
-**Gap:** none -- move to section C.
-
-#### [L-005] Commit protocol v3.28 (or v3.29) to repo root
-<!-- L:005 status:DONE upd:2026-06-17 section:PENDING flag: -->
-- **Commit protocol v3.28 (or v3.29 with the candidates above) to the repo
-  root.** `[per chain; not re-verified June 11]`
-
-- (CLEARED June 11) Phase 2, Session A, Session B, and Session C are all AT
-  HEAD (chain above); no code push outstanding.
-
-**Tony:** protocol v3.28 has been committed to GitHub and can be removed from Pending section. 
-**Note (2026-06-17):** v3.28 confirmed committed @8e0f228. DONE -- move to C.
-**Gap:** none -- move to section C.
-
----
 
 ## B. STRATEGIC STATUS
 
@@ -504,6 +462,113 @@ Closed SINCE v23 (Movement chain + verified):
   (already in the 182 objects); the sweep re-zeros the dead 4 harmlessly (D-sweep
   candidates).
 
+
+#### [L-004] Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push
+<!-- L:004 status:DONE upd:2026-06-17 section:C flag: -->
+- **Apply the C2 fix pass (2 files) and run ANIMATION_TEST_PROTOCOL_v4_1**
+  (the focused retest of C2/C6d + regression), append results to the 3C
+  handoff, push. On pass: the Phase 3 CORE TRACK (Sessions A/B/C + fix
+  pass) is COMPLETE -- move the marked render-gated items below into
+  section C and update 21/51. (v4 first run, June 11: C1/C3/C5/C7 PASS,
+  C4 pass-with-caveat, C2/C6 blocked by the three bugs below -- all
+  three root-caused and fixed in pass C2.)
+**Tony:** let's discuss this item and remove from Pending Action section. 
+**Note (2026-06-17):** v4.1 gate COMPLETE. C2 PASS (Halley: no doubling,
+  comet details correct, Sun tracking works). C6d PASS (Mercury-centered
+  29-frame animation: Sun tracks correctly). O16 PASS WITH NOTE (auto-scale
+  ~1 AU; root cause logged on L-056 -- positions={} fallback, pre-existing,
+  workaround via 19.3 Phase B). MAPS tail non-animation BY DESIGN.
+  Phase 3 CORE TRACK COMPLETE. L-007 (bow-shock disclosure) moves to C
+  this pass. DONE.
+**Gap:** none -- move to section C.
+
+#### [L-005] Commit protocol v3.28 (or v3.29) to repo root
+<!-- L:005 status:DONE upd:2026-06-17 section:C flag: -->
+- **Commit protocol v3.28 (or v3.29 with the candidates above) to the repo
+  root.** `[per chain; not re-verified June 11]`
+
+- (CLEARED June 11) Phase 2, Session A, Session B, and Session C are all AT
+  HEAD (chain above); no code push outstanding.
+
+**Tony:** protocol v3.28 has been committed to GitHub and can be removed from Pending section. 
+**Note (2026-06-17):** v3.28 confirmed committed @8e0f228. DONE -- move to C.
+**Gap:** none -- move to section C.
+
+---
+
+#### [L-010] Keplerian epoch parse fails on 'osc.' suffix
+<!-- L:010 status:DONE upd:2026-06-12 section:C flag: -->
+- **`[KEPLERIAN POS] Could not parse epoch date` with 'osc.' suffix**
+  -- FIXED in Phase 4 (June 12) `[render-gated]`. The apsidal_markers
+  chain gained the missing '%Y-%m-%d %H:%M' form (the suffix WAS being
+  stripped; the HH:MM format was not in the chain). The fix uncovered
+  the worse half: FOUR sites in palomas_orrery.py used the same broken
+  chain with a SILENT J2000 fallback -- a wrong-position failure, not
+  console noise. All four now route through _parse_osc_epoch (one
+  producer, three formats) with a loud [EPOCH] note before any J2000
+  fallback. Smoke-tested (all three Horizons forms + garbage -> None).
+**Tony:** question to Claude: if this bug is fixed should it remain in the Priority section? 
+this is a general question about Ledger organization. I see that there are other similar items. 
+How are "Gap" items addressed? 
+**Note (2026-06-17):** DONE items stay in their section until a housekeeping
+  pass moves them to C -- they provide a readable trail without jumping to
+  the archive. When Gap says "none -- move to section C" that is the
+  housekeeping trigger. render-confirmed Mode 5 is EVIDENCE of correctness,
+  not a disposition -- a DONE item can be render-confirmed; an OPEN item
+  can also be render-confirmed on a partial fix. Moving to C this pass.
+**Gap:** none -- move to section C.
+
+#### [L-011] Pass-C2 v4 blockers (3) + B3-bonus barycenter Sun bug
+<!-- L:011 status:DONE upd:2026-06-11 section:C flag: -->
+- FIXED in pass C2 (June 11, `[render-gated v4.1]`), three v4 blockers:
+  * **C2a frame-1 comet doubling** -- the pre-existing frame-1 tail
+    block AND the engine both added the comet's traces (incl. the
+    builder's own Sun Direction). Fix: frame-1 block skips
+    engine-owned comets (opt-in on, non-MAPS); the engine's
+    allocation IS frame-1 content.
+  * **C2b/C2c vanishing tail/indicator** -- STICKY-VISIBLE MERGE:
+    Plotly applies frame traces as a MERGE; builders omit 'visible',
+    so a slot once dummied to visible=False never reappeared. Tails
+    filled previously-dummied slots exactly at perihelion; the
+    indicator reshuffled into a dead slot when variable counts grew.
+    Fix: EXPLICIT visible on every slot write (normalizer); the
+    missing-position branch now writes explicit dummies + a console
+    note (was a silent blanking). LESSON: frame updates are merges --
+    any property a builder omits inherits the slot's history; padding
+    slots with invisible dummies REQUIRES explicit visibility on
+    every later write.
+  * **C6d Mercury-centered Sun tracking** -- the engine excluded the
+    center body entirely, but a centered body's SUN-DIRECTION
+    elements must track the Sun moving around it; frame-1 freeze
+    there is a physics lie. Fix: get_center_engine_elements() is the
+    single source of truth -- the dispatch SKIPS that set
+    (skip_elements threading, static unaffected, regression-tested
+    identical) and the engine adds matching center_fixed specs
+    (origin position, per-frame Sun). Inertial elements (axis, cone)
+    correctly stay frozen. The B3-bonus barycenter Sun-Direction bug (indicator
+  pointed at (0,0,0)/the barycenter when the Sun checkbox was off) was FIXED
+  in Session C `[render-gated C1]`: the engine resolves a REAL Sun trajectory
+  (fetching it when unchecked) and SUPPRESSES sun-direction elements when
+  unresolvable -- it never points at a placeholder. Root cause for the
+  archive: a fallback value is a CONTRACT -- (0,0,0) was a rotation-skip
+  sentinel to shell-orientation code and literal position data to the
+  indicator; reusing a fallback without checking each consumer's semantics
+  is how a sentinel becomes a physics bug. Suppression beats fabrication.
+**Note (2026-06-17):** v4.1 gate PASS -- C2 confirmed on Halley animation
+  (no doubling, comet details correct, Sun tracking works). C6d confirmed
+  on Mercury-centered 29-frame animation (Sun tracks correctly).
+  MAPS tail non-animation is BY DESIGN (excluded per ADDENDUM_phase4
+  decision 1). Moving to C this pass.
+**Gap:** none -- move to section C.
+
+#### [L-055] O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count)
+<!-- L:055 status:DONE upd:2026-06-17 section:C flag: -->
+- O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium
+  particle count) -- record here if either becomes an item. O15 may be
+  settled by rounding (500 particles now ~31 KB/f).
+**Note (2026-06-17):** v4.1 gate run: O14/O15 not observed as blocking issues
+  during Halley animation test. No new items opened. DONE -- move to C.
+**Gap:** none -- move to section C.
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -555,71 +620,6 @@ Closed SINCE v23 (Movement chain + verified):
 **Gap:** PROVENANCE GATE -- all dipole tilts are RECALLED and MUST be sourced before any PLANET_DIPOLE entry (show the envelope; the tilt that sets it must be cited).
 
 ### D.Priority -- real bugs
-
-#### [L-010] Keplerian epoch parse fails on 'osc.' suffix
-<!-- L:010 status:DONE upd:2026-06-12 section:D.Priority flag: -->
-- **`[KEPLERIAN POS] Could not parse epoch date` with 'osc.' suffix**
-  -- FIXED in Phase 4 (June 12) `[render-gated]`. The apsidal_markers
-  chain gained the missing '%Y-%m-%d %H:%M' form (the suffix WAS being
-  stripped; the HH:MM format was not in the chain). The fix uncovered
-  the worse half: FOUR sites in palomas_orrery.py used the same broken
-  chain with a SILENT J2000 fallback -- a wrong-position failure, not
-  console noise. All four now route through _parse_osc_epoch (one
-  producer, three formats) with a loud [EPOCH] note before any J2000
-  fallback. Smoke-tested (all three Horizons forms + garbage -> None).
-**Tony:** question to Claude: if this bug is fixed should it remain in the Priority section? 
-this is a general question about Ledger organization. I see that there are other similar items. 
-How are "Gap" items addressed? 
-**Note (2026-06-17):** DONE items stay in their section until a housekeeping
-  pass moves them to C -- they provide a readable trail without jumping to
-  the archive. When Gap says "none -- move to section C" that is the
-  housekeeping trigger. render-confirmed Mode 5 is EVIDENCE of correctness,
-  not a disposition -- a DONE item can be render-confirmed; an OPEN item
-  can also be render-confirmed on a partial fix. Moving to C this pass.
-**Gap:** none -- move to section C.
-
-#### [L-011] Pass-C2 v4 blockers (3) + B3-bonus barycenter Sun bug
-<!-- L:011 status:DONE upd:2026-06-11 section:D.Priority flag: -->
-- FIXED in pass C2 (June 11, `[render-gated v4.1]`), three v4 blockers:
-  * **C2a frame-1 comet doubling** -- the pre-existing frame-1 tail
-    block AND the engine both added the comet's traces (incl. the
-    builder's own Sun Direction). Fix: frame-1 block skips
-    engine-owned comets (opt-in on, non-MAPS); the engine's
-    allocation IS frame-1 content.
-  * **C2b/C2c vanishing tail/indicator** -- STICKY-VISIBLE MERGE:
-    Plotly applies frame traces as a MERGE; builders omit 'visible',
-    so a slot once dummied to visible=False never reappeared. Tails
-    filled previously-dummied slots exactly at perihelion; the
-    indicator reshuffled into a dead slot when variable counts grew.
-    Fix: EXPLICIT visible on every slot write (normalizer); the
-    missing-position branch now writes explicit dummies + a console
-    note (was a silent blanking). LESSON: frame updates are merges --
-    any property a builder omits inherits the slot's history; padding
-    slots with invisible dummies REQUIRES explicit visibility on
-    every later write.
-  * **C6d Mercury-centered Sun tracking** -- the engine excluded the
-    center body entirely, but a centered body's SUN-DIRECTION
-    elements must track the Sun moving around it; frame-1 freeze
-    there is a physics lie. Fix: get_center_engine_elements() is the
-    single source of truth -- the dispatch SKIPS that set
-    (skip_elements threading, static unaffected, regression-tested
-    identical) and the engine adds matching center_fixed specs
-    (origin position, per-frame Sun). Inertial elements (axis, cone)
-    correctly stay frozen. The B3-bonus barycenter Sun-Direction bug (indicator
-  pointed at (0,0,0)/the barycenter when the Sun checkbox was off) was FIXED
-  in Session C `[render-gated C1]`: the engine resolves a REAL Sun trajectory
-  (fetching it when unchecked) and SUPPRESSES sun-direction elements when
-  unresolvable -- it never points at a placeholder. Root cause for the
-  archive: a fallback value is a CONTRACT -- (0,0,0) was a rotation-skip
-  sentinel to shell-orientation code and literal position data to the
-  indicator; reusing a fallback without checking each consumer's semantics
-  is how a sentinel becomes a physics bug. Suppression beats fabrication.
-**Note (2026-06-17):** v4.1 gate PASS -- C2 confirmed on Halley animation
-  (no doubling, comet details correct, Sun tracking works). C6d confirmed
-  on Mercury-centered 29-frame animation (Sun tracks correctly).
-  MAPS tail non-animation is BY DESIGN (excluded per ADDENDUM_phase4
-  decision 1). Moving to C this pass.
-**Gap:** none -- move to section C.
 
 #### [L-012] Osculating pre-fetch false-provenance messages
 <!-- L:012 status:OPEN upd:2026-06-15 section:D.Priority flag:CRIT -->
@@ -1195,15 +1195,6 @@ Deeper-detail direction (20/N5 is the on-ramp). `[per chain]`
   (4) indicator clamp renders sensibly; (5) inertial-note hover wording.
   Mercury-centered AND Sun-centered-track-Mercury both confirmed; saved-file
   round trip confirmed identical to live render.
-
-#### [L-055] O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count)
-<!-- L:055 status:DONE upd:2026-06-17 section:G flag: -->
-- O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium
-  particle count) -- record here if either becomes an item. O15 may be
-  settled by rounding (500 particles now ~31 KB/f).
-**Note (2026-06-17):** v4.1 gate run: O14/O15 not observed as blocking issues
-  during Halley animation test. No new items opened. DONE -- move to C.
-**Gap:** none -- move to section C.
 
 #### [L-056] Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred
 <!-- L:056 status:OPEN upd:2026-06-12 section:G flag: -->
