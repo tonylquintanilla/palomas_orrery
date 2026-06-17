@@ -5046,3 +5046,93 @@ filename, ALWAYS use the upload.
 - Test encounter export with various mission types (carried)
 - Consider camera capture in encounter export (carried)
 
+
+### Item 19.3 (June 14-16, 2026): 3D Axis-Control Parity + Studio Read-on-Load Round Trip
+
+---
+
+Closing plot-cube control parity between the orrery generation side and Gallery
+Studio (project item 19). Appended after a gap since Session 37 (the item-19
+track ran in the orrery repo's documentation/ + the consolidated ledger). The
+gallery-side work is Phase B plus a toggle-default follow-on; both land in
+`tools/gallery_studio.py`.
+
+**The round trip.** The orrery bakes a 3D-scene grid (axis range + grid
+spacing/dtick) into every figure. Studio could already OVERRIDE range and dtick,
+but on loading a raw orrery plot it reset those GUI fields to 0 ("auto") -- so
+the orrery's baked grid was invisible and uneditable. The data round-tripped;
+the display did not. Phase A (orrery side, `palomas_orrery.py`, separate push at
+orrery HEAD c28eec0) added a user-settable dtick at generation time. Phase B
+(this entry, gallery side) makes Studio READ the figure's grid into its fields
+on load, closing the loop: orrery bakes -> Studio reads + refines.
+
+**Phase B -- Studio read-on-load (pushed at gallery 6804b39):**
+- New shared reader `_read_scene_grid_from_figure(fig)` -- pulls the symmetric
+  half-extent + dtick from a loaded Plotly figure's scene axes. ONE extractor,
+  used by both the load path and the encounter panel (no parallel pipeline).
+- Both `_do_load` branches populate scene_axis_range / scene_dtick from the
+  figure. D3 precedence: an explicit non-zero Studio override wins; otherwise
+  the figure's baked grid fills the fields.
+- `_extract_encounter_data` routed through the same reader; it now surfaces the
+  figure's dtick in the read-only panel (previously showed "auto" for a
+  dtick-bearing figure).
+- km-suffix gate reconciled (decision D1). The km-equivalent on axis titles
+  ("X (AU) (grid: N km)") now appears only at close-approach scale -- half-extent
+  below a named constant `KM_SUFFIX_MAX_AU = 0.01` AU -- and stays plain
+  "X (AU)" for system + exoplanet plots, where it had been appearing wrongly
+  (e.g. Proxima would have shown "(grid: 2.99M km)"). The existing dtick-keyed
+  exact-km / M-km tiers were kept INSIDE the gate (Option B), with a range-auto
+  fallback so a pure fine-dtick override still annotates.
+- Verified: live smoke against the REAL module functions (reader + suffix gate)
+  13/13; py_compile; ASCII/LF; the delivered patch was byte-identical to the
+  pushed file at 6804b39.
+
+**Follow-on -- toggle defaults on (pushed at gallery 812c05f):**
+- Surfaced by the Phase-B render gate: on raw-orrery load the show_axes /
+  show_grid / show_modebar checkboxes came up UNCHECKED (`DEFAULT_CONFIG`
+  defaulted them False) instead of reflecting what the orrery HTML produces.
+  Pre-existing, not a Phase-B regression.
+- `DEFAULT_CONFIG` show_axes / show_grid / show_modebar flipped False -> True.
+  Tony's call: the GLOBAL landscape default, so these display across the modes,
+  not just on raw load ("I always turn them on"). Blast radius: every path
+  seeded from `DEFAULT_CONFIG` (app startup, Reset Defaults, landscape preset,
+  orrery-mode entry, raw-orrery load) now starts with axes/grid/modebar on.
+  Studio exports UNAFFECTED -- their saved `_studio_config` toggle states
+  override the default on load, so finished gallery files are not forced on.
+- modebar safety: `show_modebar` is only the exported HTML's Plotly
+  `displayModeBar` flag (a browser toolbar); Studio only ingests Plotly figures
+  (non-Plotly bounces at load), so it never touches a tkinter window.
+
+**Files modified:**
+- `tools/gallery_studio.py` -- Phase B read-on-load (shared reader, both
+  `_do_load` branches, `apply_config` suffix gate, encounter-panel reader) and
+  the three `DEFAULT_CONFIG` toggle defaults flipped on.
+
+**Files NOT modified:**
+- orrery side untouched in this entry (Phase A was a separate orrery-repo push).
+- `index.html`, `json_converter.py` -- unchanged.
+
+**SHA chain (gallery repo tonyquintanilla.github.io, branch main):**
+2f40d9d (base) -> 6804b39 (Phase B read-on-load) -> 812c05f (toggle defaults;
+current HEAD). All three verified by remote round-trip check + byte diff.
+Orrery ref this entry: c28eec0 (read-only; untouched).
+
+**Render gate (Tony) -- PASS:** raw close-approach loads with filled grid boxes
++ km titles; raw system/exoplanet loads with filled boxes + plain titles (the
+D1 fix, confirmed by eye); change spacing -> re-render -> re-export -> reload
+holds with no drift; Studio override wins on reload; toggle boxes now reflect
+orrery output. DEFERRED: 2D-plot sanity (boxes stay 0).
+
+**Authoritative detail:** `HANDOFF_item19_3_phaseB_studio_readonload.md`
+(full design, decisions D1-D5, verification, sections 1-8) and
+`LEDGER_orrery_consolidated.md` item 19.
+
+**Next steps:**
+- 2D-plot sanity gate (deferred, low-risk).
+- Optional later: orrery also emitting the km suffix under the same cutoff
+  (full title parity orrery <-> Studio) -- NOT item 19.3.
+- Carried from prior sessions: link-icon end-to-end test; add `ongoing` to
+  spacecraft_encounters.py status comment; encounter-export mission-type tests;
+  camera capture in encounter export.
+
+Entry written June 2026 with Anthropic's Claude Opus 4.8.

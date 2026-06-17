@@ -570,6 +570,92 @@ Closed SINCE v23 (Movement chain + verified):
   per-body density literals). 49 Fly-to view scaling (folds into the
   fixture list above). View-window design (49 + 19 + Studio parity).
   `[per chain unless tagged]`
+- (June 16) Item 19.3 Phase A COMPLETE -- user-settable dtick GUI field
+  (orrery generation side). Base 30840b1 -> 1c08a8a (one transactional patch,
+  7 edit groups, all palomas_orrery.py, Mode 1). Blank field = Phase 2
+  auto_dtick; >0 overrides, threaded to all three live build_scene sites
+  (S1 ~5720, S2 ~7955, S3 ~5998, AST-confirmed 3/3). Orrery already had a
+  user-settable RANGE (custom_scale_entry); this fills the missing DTICK.
+  Studio half of the round trip was ALREADY DONE @2f40d9d (March) -- this
+  added the orrery half, not Studio.
+  S3 PARALLEL-PIPELINE FIX: exoplanet STATIC scene (bare inline scene=dict,
+  AU-coarse grid) migrated to build_scene, matching exoplanet ANIMATION
+  (already on S2 build_scene). update_layout merges -> camera/domain/theme
+  preserved; build_scene_axes emits same X/Y/Z (AU) titles. Verified static
+  AND animated (Proxima ~+/-0.0583 AU).
+  CORRECTION (Observation Override): the design-stage "manual dtick is a no-op
+  under Auto scale" caveat was WRONG. calculate_axis_range_from_orbits /
+  get_animation_axis_range never return None (concrete fit, or [-1,1]
+  fallback), so axis_range is always a concrete cube -> dtick applies under
+  Auto AND Manual, matching Tony's Studio experience. No logic changed; only
+  tooltip + 4 comment blocks corrected. build_scene None-guard (481-483) is
+  defensive only.
+  S4 (camera-track) deliberately EXCLUDED -- computes its own _track_dtick;
+  the Phase-2 per-frame-autorange boundary holds.
+  Render gate (Tony, Mode 5, 1c08a8a): ALL 6 PASS -- regression, Auto+finer
+  dtick, Manual close-approach, S3 exoplanet (static+animated), animation
+  hold, Reset clears.
+  Fast-follow REMAINING -> Phase B: Studio read-on-load (populate
+  scene_axis_range/scene_dtick fields from the loaded figure's baked grid so
+  the round trip is VISIBLE). Open decision: km-suffix on axis titles
+  (annotate vs match orrery). Handoff: HANDOFF_item19_3_phaseA_dtick_gui.md.
+  Pre-existing observation (NOT Phase A): exoplanet-animation
+  "id_type (host_star) not allowed" ValueError on host-star trajectory fetch
+  -- confirm if tracked.
+- (June 16) OBSERVATION logged (pre-existing, NOT item 19.3 / Phase A).
+  Exoplanet + binary system plots (static AND animated) route synthetic
+  objects through the Horizons fetch path, which rejects their identifiers.
+  Reproducible across TRAPPIST-1, TOI-1338 (binary), Proxima Centauri --
+  every run, both modes. Console-only symptoms:
+    - fetch_trajectory (palomas_orrery_helpers.py ~388) raises
+      "id_type (X) not allowed" tracebacks: host_star, binary_star_a/b.
+    - "Error fetching data ... id_type (exoplanet|barycenter) not allowed"
+      for exoplanets and the system barycenter.
+    - "Error fetching data for object 10" (Sun) dumps the full Sun
+      properties block: location='@TOI1338_BARYCENTER ' (trailing space)
+      is unresolvable -- Sun-relative-to-exo-center goes to Horizons too.
+  ROOT: synthetic exo/binary objects carry internal TYPE tags
+  (exo_host_star, exo_binary_star, exoplanet, barycenter) forwarded to
+  Horizons as id_type; these are positioned by the exo synthetic generator
+  and should never hit Horizons. Fetch fails -> caught -> synthetic
+  positioning renders correctly (Tony Mode-5 clean; axis ranges right).
+  IMPACT: cosmetic to the render; cost is tracebacks (can mask a real
+  error) + spurious failed Horizons calls + a Sun-properties dump per
+  exo-system plot.
+  FIX DIRECTION (deferred): gate the Horizons fetch/data path to SKIP
+  synthetic object types (exo_host_star, exo_binary_star, exoplanet,
+  exo-system barycenter, Sun-relative-to-exo-center) instead of calling
+  Horizons and catching the rejection. Bonus: helpers.py is CRLF
+  (standard is LF) -- fold a line-ending normalize into that session.
+  Tier: D.Priority-noise. Thread: helpers.py ~388 + id_type assignment in
+  exoplanet_systems.py / celestial_objects.py.
+ (June 16, item 19.3 Phase B SHIPPED) Studio read-on-load round trip,
+gallery tools/gallery_studio.py, built on 2f40d9d / orrery c28eec0.
+New shared reader _read_scene_grid_from_figure; both _do_load branches
+populate scene_axis_range/scene_dtick from the figure (D3 precedence:
+explicit studio override wins, else figure); _extract_encounter_data
+routed through the same reader (+ figure dtick now surfaced in the
+read-only panel). D1 RECONCILED to the live bytes: the handoff's
+half-extent gate did not match the live dtick-keyed suffix; OPTION B
+chosen (KM_SUFFIX_MAX_AU = 0.01 emit gate on half-extent, dtick tiers
+kept inside, range-auto fallback). Closes the item-19.3 round trip
+(orrery bakes -> Studio reads + refines). Render-gate items in handoff
+sec 5. Optional later: orrery also emitting the suffix under the same
+cutoff (full title parity) -- NOT this item.
+(June 16, item 19.3 Phase B follow-on, from the render-gate observation)
+DEFAULT_CONFIG show_axes / show_grid / show_modebar flipped False -> True
+(gallery tools/gallery_studio.py, landscape editorial baseline), pushed at
+812c05f. Tony's call: the boxes should reflect what the orrery HTML
+produces on load AND these defaults should display across the other modes
+("I always turn them on"), so the global default was flipped rather than a
+surgical raw-branch-only set. Blast radius = every path that seeds from
+DEFAULT_CONFIG (app startup, Reset Defaults, landscape preset, orrery-mode
+entry, raw-orrery load) now starts with axes/grid/modebar on. Studio
+exports UNAFFECTED -- they carry their own saved toggle states in
+_studio_config, which override the default on load. show_modebar=True is
+safe vs non-Plotly input: Studio only ingests Plotly figures (others bounce
+at load), and show_modebar is only the exported HTML's Plotly
+displayModeBar flag -- never touches a tkinter window. 
 
 ### D.Feature -- Bucket B (editorial; open-ended) `[per chain]`
 
