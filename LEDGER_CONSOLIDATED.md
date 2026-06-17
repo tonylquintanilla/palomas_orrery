@@ -334,6 +334,7 @@ notes get lost; capturing on first mention is the rule.
   section C and update 21/51. (v4 first run, June 11: C1/C3/C5/C7 PASS,
   C4 pass-with-caveat, C2/C6 blocked by the three bugs below -- all
   three root-caused and fixed in pass C2.)
+**Tony:** let's discuss this item and remove from Pending Action section. 
 **Gap:** on pass, move the render-gated items (e.g. L-007) into section C and update 21/51.
 
 #### [L-005] Commit protocol v3.28 (or v3.29) to repo root
@@ -343,6 +344,8 @@ notes get lost; capturing on first mention is the rule.
 
 - (CLEARED June 11) Phase 2, Session A, Session B, and Session C are all AT
   HEAD (chain above); no code push outstanding.
+
+**Tony:** protocol v3.28 has been committed to GitHub and can be removed from Pending section. 
 
 ---
 
@@ -496,6 +499,7 @@ Closed SINCE v23 (Movement chain + verified):
 <!-- L:006 status:OPEN upd:- section:D.Movement flag: -->
 - **Mercury +0.2 R_M northward dipole offset** -- OPEN. (Anderson 2011;
   v24 Movement-2 item.) `[verified absent @76c330e]`
+  **Tony:** let's prioritize the dipole implementation for Mercury, Earth and Jupiter and clean these up. 
 
 #### [L-007] Bow-shock hover disclosure remainder
 <!-- L:007 status:PENDING-GATE upd:2026-06-11 section:D.Movement flag: -->
@@ -532,6 +536,7 @@ Closed SINCE v23 (Movement chain + verified):
   show the envelope, but the tilt that SETS it must be cited, not
   remembered. **per-body half_len_frac tuning** (Mode-5 knobs).
   `[verified set @33aac56]`
+**Tony:** as mentioned above, let's prioritize cleaning up the remaining dipoles and cones.
 **Gap:** PROVENANCE GATE -- all dipole tilts are RECALLED and MUST be sourced before any PLANET_DIPOLE entry (show the envelope; the tilt that sets it must be cited).
 
 ### D.Priority -- real bugs
@@ -547,6 +552,9 @@ Closed SINCE v23 (Movement chain + verified):
   console noise. All four now route through _parse_osc_epoch (one
   producer, three formats) with a loud [EPOCH] note before any J2000
   fallback. Smoke-tested (all three Horizons forms + garbage -> None).
+**Tony:** question to Claude: if this bug is fixed should it remain in the Priority section? 
+this is a general question about Ledger organization. I see that there are other similar items. 
+How are "Gap" items addressed? 
 **Gap:** none -- move to section C.
 
 #### [L-011] Pass-C2 v4 blockers (3) + B3-bonus barycenter Sun bug
@@ -629,6 +637,7 @@ Closed SINCE v23 (Movement chain + verified):
 ### D.Structural -- dead-code / honest shell files (Phase 3)
 
 `[per v23/v25 chain unless tagged]`
+**Tony:** dead code items are good canditates for a cleanup pass. 
 
 #### [L-014 | #2] Asteroid-belt migration decision
 <!-- L:014 status:OPEN upd:- section:D.Structural flag: -->
@@ -843,6 +852,7 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
       mouse; aids shell-scale visual verification. (Promoted June 11.)
     * O16: auto-scale max() Sun-centered case PASSED (C6a, June 11);
       Mercury-centered case retests in v4.1 after the C6d fix.
+**Tony:** Question: when we say render-confirmed Mode 5 does that mean the item is completed? Does it still belong in the open items? 
 **Gap:** remaining for item 19: scene_aspectmode + scene_camera parity / read-on-load (next-session scope); camera-tracking per-frame autorange RESIDUAL (dedicated session); 3D arrow camera controls.
 
 #### [L-041] Item 19.3 axis-control round trip (P1/P2/Phase A/Phase B + toggle follow-on)
@@ -1215,4 +1225,4 @@ follow-on behind gate 5(b).)
 
 ---
 
-Module updated: June 2026 with Anthropic's Claude Opus 4.8 + Claude Fable 5
+Module updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 + Claude Fable 5
