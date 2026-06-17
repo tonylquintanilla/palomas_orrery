@@ -93,6 +93,12 @@ cannot desync (module_atlas pattern).
 - DISPOSITION (one per item): `DONE | PENDING-GATE | OPEN | BLOCKED | DEFERRED | PARKED | OBSERVED`
 - EVIDENCE (separate axis, in the detail): `[verified @SHA] | [render-confirmed Mode 5] | [render-gated] | [per chain]`
 - `**Gap:**` states the blocker/next-action on anything not DONE; `**Ref:**` points at the authority (handoff / SHA / code).
+- `render-confirmed Mode 5` is EVIDENCE, not a disposition. It means Tony's
+  eyes passed the output on live data -- a DONE item can carry it, and an
+  OPEN item can carry it on a partial fix. It does not close an item.
+- DONE items stay in their section until a housekeeping pass moves them to C.
+  The trigger is `**Gap:** none -- move to section C`. Items in C are closed
+  for the record; do not re-do them.
 
 ## Using and maintaining this ledger
 
@@ -326,7 +332,7 @@ notes get lost; capturing on first mention is the rule.
 ## PENDING ACTION (Tony-side)
 
 #### [L-004] Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push
-<!-- L:004 status:PENDING-GATE upd:2026-06-11 section:PENDING flag: -->
+<!-- L:004 status:DONE upd:2026-06-17 section:PENDING flag: -->
 - **Apply the C2 fix pass (2 files) and run ANIMATION_TEST_PROTOCOL_v4_1**
   (the focused retest of C2/C6d + regression), append results to the 3C
   handoff, push. On pass: the Phase 3 CORE TRACK (Sessions A/B/C + fix
@@ -335,10 +341,17 @@ notes get lost; capturing on first mention is the rule.
   C4 pass-with-caveat, C2/C6 blocked by the three bugs below -- all
   three root-caused and fixed in pass C2.)
 **Tony:** let's discuss this item and remove from Pending Action section. 
-**Gap:** on pass, move the render-gated items (e.g. L-007) into section C and update 21/51.
+**Note (2026-06-17):** v4.1 gate COMPLETE. C2 PASS (Halley: no doubling,
+  comet details correct, Sun tracking works). C6d PASS (Mercury-centered
+  29-frame animation: Sun tracks correctly). O16 PASS WITH NOTE (auto-scale
+  ~1 AU; root cause logged on L-056 -- positions={} fallback, pre-existing,
+  workaround via 19.3 Phase B). MAPS tail non-animation BY DESIGN.
+  Phase 3 CORE TRACK COMPLETE. L-007 (bow-shock disclosure) moves to C
+  this pass. DONE.
+**Gap:** none -- move to section C.
 
 #### [L-005] Commit protocol v3.28 (or v3.29) to repo root
-<!-- L:005 status:OPEN upd:2026-06-11 section:PENDING flag: -->
+<!-- L:005 status:DONE upd:2026-06-17 section:PENDING flag: -->
 - **Commit protocol v3.28 (or v3.29 with the candidates above) to the repo
   root.** `[per chain; not re-verified June 11]`
 
@@ -346,6 +359,8 @@ notes get lost; capturing on first mention is the rule.
   HEAD (chain above); no code push outstanding.
 
 **Tony:** protocol v3.28 has been committed to GitHub and can be removed from Pending section. 
+**Note (2026-06-17):** v3.28 confirmed committed @8e0f228. DONE -- move to C.
+**Gap:** none -- move to section C.
 
 ---
 
@@ -555,6 +570,12 @@ Closed SINCE v23 (Movement chain + verified):
 **Tony:** question to Claude: if this bug is fixed should it remain in the Priority section? 
 this is a general question about Ledger organization. I see that there are other similar items. 
 How are "Gap" items addressed? 
+**Note (2026-06-17):** DONE items stay in their section until a housekeeping
+  pass moves them to C -- they provide a readable trail without jumping to
+  the archive. When Gap says "none -- move to section C" that is the
+  housekeeping trigger. render-confirmed Mode 5 is EVIDENCE of correctness,
+  not a disposition -- a DONE item can be render-confirmed; an OPEN item
+  can also be render-confirmed on a partial fix. Moving to C this pass.
 **Gap:** none -- move to section C.
 
 #### [L-011] Pass-C2 v4 blockers (3) + B3-bonus barycenter Sun bug
@@ -593,6 +614,11 @@ How are "Gap" items addressed?
   sentinel to shell-orientation code and literal position data to the
   indicator; reusing a fallback without checking each consumer's semantics
   is how a sentinel becomes a physics bug. Suppression beats fabrication.
+**Note (2026-06-17):** v4.1 gate PASS -- C2 confirmed on Halley animation
+  (no doubling, comet details correct, Sun tracking works). C6d confirmed
+  on Mercury-centered 29-frame animation (Sun tracks correctly).
+  MAPS tail non-animation is BY DESIGN (excluded per ADDENDUM_phase4
+  decision 1). Moving to C this pass.
 **Gap:** none -- move to section C.
 
 #### [L-012] Osculating pre-fetch false-provenance messages
@@ -1171,10 +1197,13 @@ Deeper-detail direction (20/N5 is the on-ramp). `[per chain]`
   round trip confirmed identical to live render.
 
 #### [L-055] O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count)
-<!-- L:055 status:OPEN upd:2026-06-12 section:G flag: -->
+<!-- L:055 status:DONE upd:2026-06-17 section:G flag: -->
 - O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium
   particle count) -- record here if either becomes an item. O15 may be
   settled by rounding (500 particles now ~31 KB/f).
+**Note (2026-06-17):** v4.1 gate run: O14/O15 not observed as blocking issues
+  during Halley animation test. No new items opened. DONE -- move to C.
+**Gap:** none -- move to section C.
 
 #### [L-056] Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred
 <!-- L:056 status:OPEN upd:2026-06-12 section:G flag: -->
@@ -1185,6 +1214,15 @@ Deeper-detail direction (20/N5 is the on-ramp). `[per chain]`
   4 PRE-EXISTING em-dashes (platform-neutrality flag, not Phase 4's).
   MAPS per-frame wiring DEFERRED per ADDENDUM_phase4 decision 1 (the
   two-site exclusion warning and partition design are captured there).
+**Note (2026-06-17):** Mercury-centered auto-scale (O16) reads ~1 AU because
+  get_animation_axis_range passes positions={} into calculate_axis_range_from_orbits;
+  the non-Sun-center distance branch can't fire, so the Sun's heliocentric
+  aphelion (~1.017 AU) is used as the fallback, giving a ~1.3 AU cube.
+  Pre-existing; not introduced by the animation refactor. Workaround: use
+  the orrery-side dtick/range field (item 19.3 Phase B) to override at
+  generation time. Reopen as D.Priority only if the fallback causes
+  confusion on other planet-centered animations (e.g. Jupiter-centered
+  with Sun selected = ~5.5 AU, likely fine).
 
 #### [L-057] Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED
 <!-- L:057 status:DONE upd:2026-06-11 section:G flag: -->
