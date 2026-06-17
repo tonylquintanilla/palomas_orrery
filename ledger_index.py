@@ -24,6 +24,7 @@ Module updated: June 2026 with Anthropic's Claude Opus 4.8 (ledger index/detail 
 """
 import re
 import sys
+import pathlib
 
 HEAD_RE = re.compile(r'^####\s*\[L-(\d+)(?:\s*\|\s*#?([\w.\-/]+))?\]\s*(.+?)\s*$')
 META_RE = re.compile(r'^<!--\s*L:(\d+)\s+status:(\S+)\s+upd:(\S+)\s+section:(\S+)(?:\s+flag:(\S*))?\s*-->\s*$')
@@ -113,13 +114,19 @@ def build_index(blocks):
     out.append(END)
     return '\n'.join(out)
 
-
 def main():
+    # Default: LEDGER_CONSOLIDATED.md in the same folder as this script.
     if len(sys.argv) < 2:
-        print(__doc__)
-        sys.exit(2)
-    path = sys.argv[1]
-    check_only = '--check' in sys.argv[2:]
+        default = pathlib.Path(__file__).parent / 'LEDGER_CONSOLIDATED.md'
+        if default.exists():
+            path = str(default)
+            check_only = False
+        else:
+            print(__doc__)
+            sys.exit(2)
+    else:
+        path = sys.argv[1]
+        check_only = '--check' in sys.argv[2:]
     with open(path, encoding='utf-8') as f:
         text = f.read()
     lines = text.split('\n')
