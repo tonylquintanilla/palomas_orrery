@@ -174,6 +174,7 @@ EXTERNAL_LINKS = [
 LOCAL_DOCS = [
     ("README", "README.md"),
     ("Module Atlas", "MODULE_ATLAS.md"),
+    ("Consolidated Ledger", "LEDGER_CONSOLIDATED.md"),
     ("Requirements", "requirements.txt"),
     ("Project Instructions", "project_instructions_V3_20.md"),
     ("Adding Objects Guide", "ADDING_OBJECTS_GUIDE.md"),
