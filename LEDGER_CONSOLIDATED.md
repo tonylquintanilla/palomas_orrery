@@ -157,7 +157,7 @@ notes get lost; capturing on first mention is the rule.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*58 live items; 49 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*58 live items; 46 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Updated |
@@ -169,8 +169,8 @@ notes get lost; capturing on first mention is the rule.
 ### PENDING
 | Gap | L# | Item | Disposition | Updated |
 |:---:|----|------|-------------|---------|
-| ! | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | PENDING-GATE | 2026-06-11 |
-| ! | L-005 | Commit protocol v3.28 (or v3.29) to repo root | OPEN | 2026-06-11 |
+|  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | 2026-06-17 |
+|  | L-005 | Commit protocol v3.28 (or v3.29) to repo root | DONE | 2026-06-17 |
 
 ### D.Movement
 | Gap | L# | Item | Disposition | Updated |
@@ -265,7 +265,7 @@ notes get lost; capturing on first mention is the rule.
 |:---:|----|------|-------------|---------|
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 2026-06-07 |
 |  | L-054 | Gate 5(b): full resolution ships, rounded -- render-confirmed | DONE | 2026-06-13 |
-| ! | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | OPEN | 2026-06-12 |
+|  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | 2026-06-17 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred | OPEN | 2026-06-12 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | 2026-06-11 |
 
