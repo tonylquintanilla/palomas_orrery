@@ -96,8 +96,9 @@ def build_index(blocks):
     out = [START, '', '## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)', '']
     total = sum(len(v) for v in by_section.values())
     gaps = sum(1 for b in blocks if b['status'] in GAP_STATUS)
-    out.append(f"*{total} live items; {gaps} need attention (`!`). Grep `L-0NN` to jump to any item; "
-               "`grep \"| ! |\"` lists every gap.*")
+    out.append(f"*{total} live items; {gaps} need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) "
+               "to jump to any item; search `| ! |` to list every gap. See \"Using and maintaining this "
+               "ledger\" above for details.*")
     out.append('')
     for sec in sorted(by_section, key=sec_key):
         rows = sorted(by_section[sec], key=lambda b: int(b['L']))
