@@ -193,7 +193,7 @@ notes get lost; capturing on first mention is the rule.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*52 live items; 45 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*46 live items; 39 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Updated |
@@ -219,21 +219,15 @@ notes get lost; capturing on first mention is the rule.
 ### D.Structural
 | Gap | L# | Item | Disposition | Updated |
 |:---:|----|------|-------------|---------|
-| ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | - |
+| ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 2026-06-18 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 2026-06-18 |
-| ! | L-016 (#6) | Archive dead shell functions (incl. retired create_planet_visualization body, annotated RETIRED June 10; delete with grep-confirm) | OPEN | - |
-| ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | - |
-| ! | L-019 (#13) | Neptune ring info-marker rotation (verify + close) | OPEN | - |
-| ! | L-020 (#26) | CUSTOM_SHELLS tooltip verification | OPEN | - |
-| ! | L-021 (#28) | Neptune superimposed info markers (verify + close) | OPEN | - |
-| ! | L-022 (#40) | Asteroid belt hover -> single info marker | OPEN | - |
-| ! | L-023 (#N2) | Saturn/Uranus ring marker placement | OPEN | - |
-| ! | L-024 (#N4) | Planet 9 sphere n=50 -> 20/25 | OPEN | - |
-| ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | - |
-| ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | - |
-| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | - |
+| ! | L-016 (#6) | Archive dead shell functions | OPEN | 2026-06-18 |
+| ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 2026-06-18 |
+| ! | L-020 (#26) | CUSTOM_SHELLS tooltip verification | OPEN | 2026-06-18 |
+| ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 2026-06-18 |
+| ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2026-06-18 |
+| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2026-06-18 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 2026-06-11 |
-| ! | L-029 | v25 D3 dead-code annotations + small-body analytical tail | OPEN | - |
 
 ### D.Cosmetic
 | Gap | L# | Item | Disposition | Updated |
@@ -612,6 +606,72 @@ Remainder verified: planet_visualization.py (L512 caller) and
 palomas_orrery.py (L2298/L2363 callables) are live. No dead imports remain.
 **Gap:** none -- move to section C.
 **Ref:** grep confirmation + patch_dead_imports.py [verified @feab717].
+
+#### [L-022 | #40] Asteroid belt hover -> single info marker
+<!-- L:022 status:DONE upd:2026-06-18 section:C flag: -->
+All four belt geometries (main, Hilda, Trojan L4, Trojan L5) use
+create_info_marker() factory with hoverinfo='skip' on geometry traces.
+Completed during Stage 3 sweep + Phase 1 re-pipe (May 27-29, 2026).
+Documented in module docstring.
+**Gap:** none -- move to section C.
+**Ref:** asteroid_belt_visualization_shells.py docstring [verified @7964193].
+
+#### [L-019 | #13] Neptune ring info-marker rotation (verify + close)
+<!-- L:019 status:DONE upd:2026-06-18 section:C flag: -->
+Original concern: ring info markers might not be rotated correctly to
+match ring geometry. Code now uses x_final[0], y_final[0], z_final[0]
+from the rotated ring points -- same transform as the ring geometry itself.
+Fix documented in neptune_visualization_shells.py docstring (Stage 3
+sweep, May 27-28 2026).
+**Note:** visual verification (Mode 5 render) to confirm markers sit on
+their rings, then close. Zero code risk.
+**Tony:** Mode 5 confirmed. Close.
+`**Gap:** none -- move to section C`
+
+#### [L-021 | #28] Neptune superimposed info markers (verify + close)
+<!-- L:021 status:DONE upd:2026-06-18 section:C flag: -->
+Original concern: multiple Neptune info markers (magnetosphere, bow shock,
+radiation belts, ring system) might overlap visually. The Stage 3 sweep
+(May 27-28 2026) fixed the degenerate X-axis-rotation bug where all ring
+markers collapsed to one position.
+**Note:** visual verification (Mode 5 render) -- confirm markers at
+distinct positions. Zero code risk.
+**Tony:** Confirmed Mode 5. Close.
+`**Gap:** none -- move to section C`
+
+#### [L-023 | #N2] Saturn/Uranus ring marker placement
+<!-- L:023 status:DONE upd:2026-06-18 section:C flag: -->
+Original concern: ring info markers at wrong positions. Both modules
+document a fix for the "Neptune 2C pattern -- previously all rings shared
+one degenerate X-axis-rotated marker" (Stage 3 sweep, May 27 2026).
+Markers now use first point of rotated ring geometry.
+**Note:** visual verification (Mode 5 render) -- confirm ring markers sit
+on their respective rings. Zero code risk. Likely DONE.
+**Tony:** Confirmed Mode 5. Close.
+`**Gap:** none -- move to section C`
+
+#### [L-024 | #N4] Planet 9 sphere n=50 -> 20/25
+<!-- L:024 status:DONE upd:2026-06-18 section:C flag: -->
+Planet 9 surface now uses mesh_resolution=24 (mesh3d geometry). Hill sphere
+uses n_points=20. If the original concern was n=50 being too dense, the
+current values (20-24) appear to address it.
+**Note:** verify that no Planet 9 shell still carries n=50. If all are at
+20-24, close. Zero code risk.
+**Tony:** Confirmed Mode 5. Close.
+`**Gap:** none -- move to section C`
+
+#### [L-029] v25 D3 dead-code annotations + small-body analytical tail
+<!-- L:029 status:DONE upd:2026-06-18 section:C flag: -->
+Zero DEAD/UNUSED/ORPHAN/RETIRED annotations found in palomas_orrery.py.
+3 RETIRED annotations in planet_visualization.py (covered by L-016).
+No "analytical tail" references found in codebase. This item may be
+stale -- the original v25 dead-code work may have been completed or
+absorbed by the Phase 3 sweep.
+**Note:** verify whether any actionable content remains. If not, close
+as absorbed. If the "small-body analytical tail" refers to a specific
+feature, needs clarification from Tony.
+**Tony:** No recollection of a gap.
+`**Gap:** none -- move to section C`
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -708,10 +768,6 @@ palomas_orrery.py (L2298/L2363 callables) are live. No dead imports remain.
 `[per v23/v25 chain unless tagged]`
 **Tony:** dead code items are good canditates for a cleanup pass. 
 
-#### [L-014 | #2] Asteroid-belt migration decision
-<!-- L:014 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-
 #### [L-015 | #5] _info import cleanup (~89+87 imports, 2 files)
 <!-- L:015 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
 Named dead imports removed (hover_text_sun, create_planet_visualization)
@@ -720,59 +776,58 @@ from helpers.py [verified @feab717, patched this session].
 ~11 used). Broader sweep deferred; low-risk, moderate volume.
 **Ref:** grep confirmation this session; patch_dead_imports.py.
 
-#### [L-016 | #6] Archive dead shell functions (incl. retired create_planet_visualization body, annotated RETIRED June 10; delete with grep-confirm)
-<!-- L:016 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-**Ref:** v9 detail in prior edition / git history (git log documentation/LEDGER_orrery_consolidated.md)
-
-#### [L-017 | #7] Tooltip rewiring globals() -> config fields
-<!-- L:017 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-
-#### [L-019 | #13] Neptune ring info-marker rotation (verify + close)
-<!-- L:019 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
+#### [L-016 | #6] Archive dead shell functions
+<!-- L:016 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+create_planet_visualization() at planet_visualization.py L558 is annotated
+RETIRED (June 2026, Phase 2.5). Zero callers confirmed -- all references
+are in comments/docstrings. Two retired Sun functions in the same file
+(L293, L306) are similarly dead. Also: create_neptune_magnetic_poles() in
+neptune_visualization_shells.py is marked DEPRECATED (D2 Option C, May 2026).
+**Gap:** grep-confirm zero callers across both pipelines (plot_objects +
+animate_objects), then delete bodies. Low risk; cleanup only.
+**Ref:** planet_visualization.py L558, L293, L306; neptune_visualization_shells.py.
 
 #### [L-020 | #26] CUSTOM_SHELLS tooltip verification
-<!-- L:020 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-
-#### [L-021 | #28] Neptune superimposed info markers (verify + close)
-<!-- L:021 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-
-#### [L-022 | #40] Asteroid belt hover -> single info marker
-<!-- L:022 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-
-#### [L-023 | #N2] Saturn/Uranus ring marker placement
-<!-- L:023 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-
-#### [L-024 | #N4] Planet 9 sphere n=50 -> 20/25
-<!-- L:024 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
+<!-- L:020 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+Verify that every CUSTOM_SHELLS entry in shell_configs.py has a tooltip
+and that the tooltip text is accurate. CUSTOM_SHELLS covers rotation axes,
+sodium tail, magnetospheres, bow shocks, radiation belts, rings, and
+field-aligned currents across Moon, Pluto, Mercury, Venus, Earth, Mars,
+Jupiter, Saturn, Uranus, Neptune.
+**Gap:** scan CUSTOM_SHELLS dict; verify tooltip key present and text
+reasonable. Could be scripted. Zero code risk.
 
 #### [L-025 | #N7] Reduced to custom-geometry inline markers only
-<!-- L:025 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
+<!-- L:025 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+The Phase 3 info-marker sweep (141 conversions, 18 files, May 2026) moved
+sphere-shell markers to the create_info_marker() factory. Inline marker
+dicts should now only remain in CUSTOM_SHELLS builders (rings,
+magnetospheres, radiation belts, etc.) which need geometry-specific
+positioning.
+**Gap:** audit -- grep for inline marker dicts outside CUSTOM_SHELLS
+builders. If none found, close. Zero code risk.
 
 #### [L-026 | #9] palomas_orrery_helpers.py CRLF -> LF
-<!-- L:026 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
+<!-- L:026 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+File confirmed CRLF (verified this session @7964193). Functional no-op
+to convert, but the diff touches every line, so best as a standalone
+commit with no other changes.
+**Gap:** convert CRLF -> LF (binary-mode script or dos2unix). Do as
+isolated commit. Low risk but noisy diff.
 
 #### [L-027 | #61] Platform Neutrality (SystemButtonFace)
-<!-- L:027 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
+<!-- L:027 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+26 occurrences of the Tk color name SystemButtonFace in palomas_orrery.py.
+Resolves on Windows; fails on Linux/macOS. The xvfb pre-test sed swap is
+a workaround, not a fix. Options: hex literal '#F0F0F0', platform
+detection (sys.platform), or ttk styling.
+**Gap:** choose replacement strategy, then sweep. Design decision before
+build. Moderate scope (26 sites); low functional risk (cosmetic only).
 
 #### [L-028] ASCII em-dash violation, comet_visualization_shells.py L257/505/519
 <!-- L:028 status:OPEN upd:2026-06-11 section:D.Structural flag: -->
 Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
-
-#### [L-029] v25 D3 dead-code annotations + small-body analytical tail
-<!-- L:029 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
 
 ### D.Cosmetic -- polish (bundle when convenient)
 
@@ -1084,6 +1139,32 @@ Deeper-detail direction (20/N5 is the on-ramp). `[per chain]`
 `[per chain]`
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
+
+#### [L-014 | #2] Asteroid-belt migration decision
+<!-- L:014 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+The asteroid belt renders via standalone create_main_asteroid_belt() in
+asteroid_belt_visualization_shells.py, called directly (main L2021). It is
+not in SHELL_CONFIGS (not a sphere) or CUSTOM_SHELLS (no checkbox-gated
+toggle per shell -- the four belts have their own tk.IntVars at main L2883).
+Decision: should the four belt geometries move into CUSTOM_SHELLS (like
+rings and magnetospheres), or stay standalone?
+**Gap:** design decision. Benefits: unified dispatch, factory hover standard,
+one fewer standalone call path. Costs: belt geometry is scattered-point
+clouds, not sphere or ring -- CUSTOM_SHELLS builders may need a new
+convention. Low urgency; no bug, no user-visible gap.
+[RECATEGORIZE -> D.Feature-C: design-before-code]
+
+#### [L-017 | #7] Tooltip rewiring globals() -> config fields
+<!-- L:017 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+13 call sites in palomas_orrery.py (L9101-L9376) pass globals() to
+build_shell_checkboxes() so it can look up tk.IntVar shell variables by
+name. Works but fragile -- any rename silently drops a checkbox. The
+alternative is a config dict {var_name: tk_var} built once and passed
+explicitly.
+**Gap:** design decision first (what replaces globals()? dict? dataclass?
+registry?), then implementation across 13 call sites. Moderate scope;
+changes live UI wiring.
+[RECATEGORIZE -> D.Feature-C: design-before-code]
 
 #### [L-046 | #N6] Studio encounter-generator refactor + Artemis preset redo (coupled, two repos)
 <!-- L:046 status:OPEN upd:- section:D.Feature-C flag: -->
