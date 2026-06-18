@@ -193,7 +193,7 @@ notes get lost; capturing on first mention is the rule.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*53 live items; 46 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*52 live items; 45 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Updated |
@@ -220,10 +220,9 @@ notes get lost; capturing on first mention is the rule.
 | Gap | L# | Item | Disposition | Updated |
 |:---:|----|------|-------------|---------|
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | - |
-| ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files): hover_text_sun (L208) unused since Phase 2a; helpers create_planet_visualization import unused since Phase 2.5 | OPEN | - |
+| ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions (incl. retired create_planet_visualization body, annotated RETIRED June 10; delete with grep-confirm) | OPEN | - |
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | - |
-| ! | L-018 (#8) | Dead create_sun_direction_indicator imports (verify remainder) | OPEN | - |
 | ! | L-019 (#13) | Neptune ring info-marker rotation (verify + close) | OPEN | - |
 | ! | L-020 (#26) | CUSTOM_SHELLS tooltip verification | OPEN | - |
 | ! | L-021 (#28) | Neptune superimposed info markers (verify + close) | OPEN | - |
@@ -605,6 +604,14 @@ How are "Gap" items addressed?
 **Note (2026-06-17):** v4.1 gate run: O14/O15 not observed as blocking issues
   during Halley animation test. No new items opened. DONE -- move to C.
 **Gap:** none -- move to section C.
+
+#### [L-018 | #8] Dead create_sun_direction_indicator imports (verify remainder)
+<!-- L:018 status:DONE upd:2026-06-18 section:C flag: -->
+Sole dead import was in palomas_orrery_helpers.py (line 52); removed.
+Remainder verified: planet_visualization.py (L512 caller) and
+palomas_orrery.py (L2298/L2363 callables) are live. No dead imports remain.
+**Gap:** none -- move to section C.
+**Ref:** grep confirmation + patch_dead_imports.py [verified @feab717].
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -705,9 +712,13 @@ How are "Gap" items addressed?
 <!-- L:014 status:OPEN upd:- section:D.Structural flag: -->
 `[per chain]`
 
-#### [L-015 | #5] _info import cleanup (~89+87 imports, 2 files): hover_text_sun (L208) unused since Phase 2a; helpers create_planet_visualization import unused since Phase 2.5
-<!-- L:015 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
+#### [L-015 | #5] _info import cleanup (~89+87 imports, 2 files)
+<!-- L:015 status:OPEN upd:2026-06-18 section:D.Structural flag: -->
+Named dead imports removed (hover_text_sun, create_planet_visualization)
+from helpers.py [verified @feab717, patched this session].
+**Gap:** ~78 remaining dead _info string imports in helpers.py (89 imported,
+~11 used). Broader sweep deferred; low-risk, moderate volume.
+**Ref:** grep confirmation this session; patch_dead_imports.py.
 
 #### [L-016 | #6] Archive dead shell functions (incl. retired create_planet_visualization body, annotated RETIRED June 10; delete with grep-confirm)
 <!-- L:016 status:OPEN upd:- section:D.Structural flag: -->
@@ -716,10 +727,6 @@ How are "Gap" items addressed?
 
 #### [L-017 | #7] Tooltip rewiring globals() -> config fields
 <!-- L:017 status:OPEN upd:- section:D.Structural flag: -->
-`[per chain]`
-
-#### [L-018 | #8] Dead create_sun_direction_indicator imports (verify remainder)
-<!-- L:018 status:OPEN upd:- section:D.Structural flag: -->
 `[per chain]`
 
 #### [L-019 | #13] Neptune ring info-marker rotation (verify + close)

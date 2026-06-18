@@ -49,10 +49,8 @@ import shutil
 
 from idealized_orbits import plot_idealized_orbits, planetary_params, parent_planets, planet_tilts, rotate_points 
 from formatting_utils import format_maybe_float, format_km_float
-from shared_utilities import create_sun_direction_indicator
 from planet_visualization import (
     create_celestial_body_visualization,
-    create_planet_visualization,
     create_planet_shell_traces,
     create_sun_visualization,
 
@@ -157,7 +155,6 @@ from planet_visualization import (
 )
 
 from solar_visualization_shells import (
-    hover_text_sun,
     gravitational_influence_info,
     outer_oort_info,
     inner_oort_info,
