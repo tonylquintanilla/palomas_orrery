@@ -193,7 +193,7 @@ notes get lost; capturing on first mention is the rule.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*46 live items; 39 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*47 live items; 40 need attention (`!`). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Updated |
@@ -201,6 +201,7 @@ notes get lost; capturing on first mention is the rule.
 | ! | L-001 | Food Insecurity (Earth System track) | BLOCKED | 2026-06-13 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | - |
 | ! | L-003 | Protocol amendment candidates (for v3.29) | OPEN | 2026-06-10 |
+| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2026-06-18 |
 
 ### D.Movement
 | Gap | L# | Item | Disposition | Updated |
@@ -348,6 +349,37 @@ notes get lost; capturing on first mention is the rule.
     verification greps standalone or with `;`. (Caught June 10 -- one residual
     check did not execute until re-run standalone.)
 **Gap:** fold into protocol v3.29.
+
+#### [L-060] ENSO Standalone Chart (Earth System track)
+<!-- L:060 status:OPEN upd:2026-06-18 section:A flag: -->
+- **ENSO standalone gallery chart (design locked, build pending).** Earth
+  System track, not the orrery refactor. A single-unit (deg C) chart that
+  leads with RONI so El Nino / La Nina state reads honestly in a warming
+  climate, with ONI drawn lighter beneath (makes the RONI-ONI divergence
+  visible and anchors the forecast) and a 2026 forecast plume drawn as an
+  ENVELOPE, not a picked line (Show-the-Envelope principle; ONI / Nino-3.4
+  basis, hung off the ONI line -- no standard RONI plume exists). El Nino /
+  La Nina phase shading is COMPUTED from RONI crossing +/-0.5 for 5
+  overlapping seasons; any strength descriptor comes from the RONI
+  magnitude, never a recalled Moderate/Strong/Super label (retires the
+  provenance flag on the existing curated bands). The ENSO<->energy-
+  imbalance relationship is told as MECHANISM -- a charge/discharge
+  schematic (no time axis, cannot be misread as a trend) plus cited physics
+  in the "i" card -- NOT drawn as a data overlay and NOT a computed
+  covariance. EEI time series stays drawn once on the energy-imbalance
+  chart (no parallel pipeline); cards cross-link. Data: RONI.ascii.txt
+  CONFIRMED fetchable (CPC, same shape as GISS/NSIDC); ONI file URL and IRI
+  plume fetch format TBV at build. Mobile + desktop variants from the
+  start. Design base SHA 799d7da.
+  Phase 2 (DEFERRED, coupled, do NOT lose): targeted Mode-1 pass on
+  energy_imbalance.py -- narrative correction (the El Nino imbalance dip is
+  led by OUTGOING LONGWAVE from the warm surface, NOT primarily "reflects
+  more sunlight"; fold in the RONI rationale) + add the 2026 band WHEN
+  WARRANTED (trigger TBD: formal RONI threshold-crossing vs
+  provisional-with-flagging a la Western Heatwave). Split to its own
+  L-handle if it risks leaking when L-060 closes.
+**Gap:** build session -- resolve 4 open calls (plume envelope style: mean+skill-Gaussian vs model spread; "i" schematic Plotly vs static image; Phase-2 band trigger; any added trace must earn its place). Confirm ONI file URL + IRI plume parse at HEAD before hardcoding; cached-CSV fallback if the plume scrape is unstable. Provenance-scan the new module (Tier-1=0) before push.
+**Ref:** ENSO_chart_spec.md (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
 
 ## PENDING ACTION (Tony-side)
 
