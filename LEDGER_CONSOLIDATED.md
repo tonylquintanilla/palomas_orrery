@@ -720,7 +720,15 @@ feature, needs clarification from Tony.
   remembered. **per-body half_len_frac tuning** (Mode-5 knobs).
   `[verified set @33aac56]`
 **Tony:** as mentioned above, let's prioritize cleaning up the remaining dipoles and cones.
-**Gap:** PROVENANCE GATE -- all dipole tilts are RECALLED and MUST be sourced before any PLANET_DIPOLE entry (show the envelope; the tilt that sets it must be cited).
+**Gap:** PROVENANCE GATE SATISFIED (Gemini de-novo sourcing, June 18 2026;
+  data in handoff v29). Sourced tilts: Mercury 0 deg (Anderson et al. 2011,
+  MESSENGER), Earth ~9.6 deg (Alken et al. 2021, IGRF-13), Jupiter 10.31 deg
+  (Connerney et al. 2022, JRM33), Saturn 0 deg (Dougherty et al. 2018,
+  Cassini Grand Finale). Offsets sourced for all four (0.19, 0.085, 0.12,
+  0.04-0.05 R_p respectively). Next: design session (D1-D7 in handoff v29)
+  -> extend build_dipole_cone_traces for offset_fraction + tilt=0 handling
+  -> add CUSTOM_SHELLS entries -> Mode 5. L-006 closes when Mercury offset
+  is implemented.
 
 ### D.Priority -- real bugs
 
@@ -1338,6 +1346,14 @@ changes live UI wiring.
   generation time. Reopen as D.Priority only if the fallback causes
   confusion on other planet-centered animations (e.g. Jupiter-centered
   with Sun selected = ~5.5 AU, likely fine).
+**Scoping (2026-06-18):** MAPS per-frame wiring scoped in handoff v29.
+  The exclusion is one line (palomas_orrery.py L2324: `if name == 'MAPS':
+  continue`). The builder (build_comet_tail_traces) is shared with all
+  comets -- no MAPS-specific code needed. Prerequisite: review ADDENDUM_phase4
+  decision 1 to understand the two-site exclusion warning before removing
+  the gate. Main risk: frame-1 tail doubling (known pattern, known guard).
+  Static path (plot_objects L6062) already handles MAPS. O2/O3 wording and
+  apsidal em-dashes remain as separate sub-items.  
 
 #### [L-057] Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED
 <!-- L:057 status:DONE upd:2026-06-11 section:G flag: -->
