@@ -1,0 +1,82 @@
+diff --git a/palomas_orrery_dashboard.py b/palomas_orrery_dashboard.py
+index cb08048..5183767 100644
+--- a/palomas_orrery_dashboard.py
++++ b/palomas_orrery_dashboard.py
+@@ -117,10 +117,10 @@ LAUNCH_GROUPS = {
+     ],
+ 
+     "Developer Tools": [
+-        ("Regenerate Module Atlas",
+-         "module_atlas.py",
+-         "Scan codebase, generate MODULE_ATLAS.md. "
+-         "Run after significant codebase changes (new modules, reorganizations).",
++        ("Update Ledger Index",
++         "ledger_index.py",
++         "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
++         "and migrate DONE items to section C. Run after editing any ledger block.",
+          SCRIPT_DIR,
+          True),
+         ("Provenance Scanner",
+@@ -129,10 +129,10 @@ LAUNCH_GROUPS = {
+          "Run before/after edits to shared values, or when a value looks suspicious.",
+          SCRIPT_DIR,
+          True),
+-        ("Test Constants Provenance",
+-         "test_constants_provenance.py",
+-         "Pass/fail regression tests for constants_new.py. "
+-         "Run before committing changes to constants, or first if a plot looks wrong.",
++        ("Regenerate Module Atlas",
++         "module_atlas.py",
++         "Scan codebase, generate MODULE_ATLAS.md. "
++         "Run after significant codebase changes (new modules, reorganizations).",
+          SCRIPT_DIR,
+          True),
+         ("Dependency Trace",
+@@ -143,12 +143,29 @@ LAUNCH_GROUPS = {
+          True),
+         ("Animation HTML Tool",
+          "measure_animation_html.py",
+-         "You point it at a saved animation HTML and it tells you: how many traces, how many frames, " 
+-         "which traces are carried inside frames, and the frames payload size. \n"
+-         "The use case is comparing a baseline export against a patched export to quantify the frame-fence fix. "
+-         "You'd run it from the command line like python measure_animation_html.py some_animation.html.",
++         "Measure a saved animation HTML: trace count, frame count, which traces "
++         "are carried inside frames, and frames payload size. Run to compare a "
++         "baseline against a patched export and quantify the frame-fence fix.",
+          SCRIPT_DIR,
+-         True),        
++         True),
++        ("Test Constants Provenance",
++         "test_constants_provenance.py",
++         "Pass/fail regression tests for constants_new.py. "
++         "Run before committing changes to constants, or first if a plot looks wrong.",
++         SCRIPT_DIR,
++         True),
++        ("Add Module Docstrings",
++         "add_docstrings.py",
++         "Add or improve module-level docstrings across the codebase; touches no code. "
++         "Run after adding modules, before regenerating the Module Atlas.",
++         SCRIPT_DIR,
++         True),
++        ("Verify Orbit Cache",
++         "verify_orbit_cache.py",
++         "Back up, validate, and repair orbit_paths.json, reporting any issues. "
++         "Run if orbit plots look wrong or the cache may be corrupted.",
++         SCRIPT_DIR,
++         True),
+     ],
+ 
+ }
+@@ -365,11 +382,7 @@ class PalomasOrreryDashboard(ctk.CTk):
+             if group_name == "Developer Tools":
+                 ctk.CTkLabel(
+                     section_frame,
+-                    text=(
+-                        "  Run from "
+-                        r"C:\Users\tonyq\OneDrive\Desktop"
+-                        r"\python_work\palomas_orrery_for_github"
+-                    ),
++                    text=f"  Running from: {SCRIPT_DIR}",
+                     font=FONT_DESC, text_color=COLOR_TEXT_DIM,
+                     anchor="w"
+                 ).pack(side="left", padx=(8, 0))

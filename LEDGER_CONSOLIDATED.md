@@ -352,34 +352,38 @@ notes get lost; capturing on first mention is the rule.
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
 <!-- L:060 status:OPEN upd:2026-06-18 section:A flag: -->
-- **ENSO standalone gallery chart (design locked, build pending).** Earth
-  System track, not the orrery refactor. A single-unit (deg C) chart that
-  leads with RONI so El Nino / La Nina state reads honestly in a warming
-  climate, with ONI drawn lighter beneath (makes the RONI-ONI divergence
-  visible and anchors the forecast) and a 2026 forecast plume drawn as an
-  ENVELOPE, not a picked line (Show-the-Envelope principle; ONI / Nino-3.4
-  basis, hung off the ONI line -- no standard RONI plume exists). El Nino /
-  La Nina phase shading is COMPUTED from RONI crossing +/-0.5 for 5
-  overlapping seasons; any strength descriptor comes from the RONI
-  magnitude, never a recalled Moderate/Strong/Super label (retires the
-  provenance flag on the existing curated bands). The ENSO<->energy-
-  imbalance relationship is told as MECHANISM -- a charge/discharge
-  schematic (no time axis, cannot be misread as a trend) plus cited physics
-  in the "i" card -- NOT drawn as a data overlay and NOT a computed
-  covariance. EEI time series stays drawn once on the energy-imbalance
-  chart (no parallel pipeline); cards cross-link. Data: RONI.ascii.txt
-  CONFIRMED fetchable (CPC, same shape as GISS/NSIDC); ONI file URL and IRI
-  plume fetch format TBV at build. Mobile + desktop variants from the
-  start. Design base SHA 799d7da.
+- **ENSO standalone gallery chart (design locked, build next session).** Earth
+  System track, not the orrery refactor. Single-unit (deg C) chart leading with
+  RONI so El Nino / La Nina state reads honestly in a warming climate; ONI as a
+  thin overlaid line (keeps the RONI-ONI divergence visible, anchors the
+  forecast). RONI drawn as a FILLED-to-zero seesaw -- red El Nino above, blue
+  La Nina below (recognizable, gallery-striking; the Economist / Climate Brink
+  use the same idiom and also lead with RONI -- external validation of the
+  RONI-first call). 2026 forecast as a CALIBRATED envelope: plume mean +
+  skill-scaled Gaussian (official IRI product; widens at the spring barrier;
+  upper edge is where the "strongest ever" tail lives, shown as possibility not
+  promise) -- NOT a single median line (the Economist chart's grey median spike
+  is exactly what we reject). Plume is ONI / Nino-3.4 basis, hung off the ONI
+  line, basis STATED IN HOVER (the Economist chart leaves forecast basis
+  unstated -- our fix). Fallback if IRI skill-calibration params are not cleanly
+  fetchable: labeled model-spread band ("model spread, not a calibrated
+  probability"). 2026 event shown NOW, PROVISIONAL with preliminary/developing
+  flagging (Western Heatwave convention) -- already front-page news. Phase
+  shading COMPUTED from RONI (+/-0.5, 5 overlapping seasons); strength from RONI
+  magnitude, never a recalled label. ENSO<->energy-imbalance told as MECHANISM:
+  a PLOTLY-DRAWN charge/discharge schematic (no time axis) + cited physics in
+  the "i" card -- NOT a data overlay, NOT a computed covariance. EEI stays drawn
+  once on the energy-imbalance chart (no parallel pipeline); cards cross-link.
+  No traces beyond RONI + ONI + thresholds + phases + today + plume (Tony: let
+  it land). Data: RONI.ascii.txt CONFIRMED fetchable; ONI URL + IRI plume parse
+  TBV at build. Mobile + desktop variants from the start. Design base SHA 799d7da.
   Phase 2 (DEFERRED, coupled, do NOT lose): targeted Mode-1 pass on
-  energy_imbalance.py -- narrative correction (the El Nino imbalance dip is
-  led by OUTGOING LONGWAVE from the warm surface, NOT primarily "reflects
-  more sunlight"; fold in the RONI rationale) + add the 2026 band WHEN
-  WARRANTED (trigger TBD: formal RONI threshold-crossing vs
-  provisional-with-flagging a la Western Heatwave). Split to its own
-  L-handle if it risks leaking when L-060 closes.
-**Gap:** build session -- resolve 4 open calls (plume envelope style: mean+skill-Gaussian vs model spread; "i" schematic Plotly vs static image; Phase-2 band trigger; any added trace must earn its place). Confirm ONI file URL + IRI plume parse at HEAD before hardcoding; cached-CSV fallback if the plume scrape is unstable. Provenance-scan the new module (Tier-1=0) before push.
-**Ref:** ENSO_chart_spec.md (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
+  energy_imbalance.py -- narrative correction (El Nino imbalance dip led by
+  OUTGOING LONGWAVE, NOT primarily "reflects more sunlight"; fold in RONI
+  rationale) + add 2026 band provisional-with-flagging. Split to own L-handle if
+  it risks leaking when L-060 closes.
+**Gap:** build next session. One genuine open call left (build, not design): confirm ONI file URL + IRI plume parse / skill-calibration params at HEAD before hardcoding (cached-CSV fallback if scrape unstable; model-spread band fallback if calibration params unavailable). Provenance-scan new module (Tier-1=0) before push. Resolved: plume=calibrated Gaussian envelope; schematic=Plotly; 2026 band=provisional-now; no extra traces.
+**Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
 
 ## PENDING ACTION (Tony-side)
 

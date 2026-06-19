@@ -1,0 +1,153 @@
+diff --git a/tools/gallery_studio.py b/tools/gallery_studio.py
+index b2f198d..01a630f 100644
+--- a/tools/gallery_studio.py
++++ b/tools/gallery_studio.py
+@@ -51,6 +51,13 @@ from datetime import datetime
+ # CONFIGURATION - Defaults based on what works
+ # ============================================================================
+ 
++# Suffix gate: show the km-equivalent on 3D axis titles only when the plot's
++# half-extent is below this (close-approach / flyby scale). At or above it --
++# system and exoplanet plots -- titles stay a plain "X (AU)". Named so it is a
++# one-line tune; the bar for changing it is a demonstrated failure, not a
++# nicer framing.
++KM_SUFFIX_MAX_AU = 0.01  # AU
++
+ DEFAULT_CONFIG = {
+     # Background
+     "bg_color": "#000000",
+@@ -824,6 +831,45 @@ def _parse_hover_html(hover_html):
+     }
+ 
+ 
++def _read_scene_grid_from_figure(fig):
++    """Read the baked 3D-scene grid (symmetric half-extent + dtick) from a
++    loaded Plotly figure dict, so Studio can show the orrery's grid on load.
++    One extractor shared by the read-on-load path and the encounter panel.
++
++    Returns (range_half_extent_au, dtick_au) as floats. A value is 0.0 when
++    absent: 2D figures (no 'scene'), or an axis with no explicit range/dtick.
++    Symmetric half-extent = the largest |bound| across x/y/z; dtick = the first
++    explicit per-axis dtick found.
++
++    Module updated: June 2026 with Anthropic's Claude Opus 4.8 (item 19.3
++    Phase B: Studio read-on-load round trip).
++    """
++    layout = fig.get('layout', {}) if isinstance(fig, dict) else {}
++    scene = layout.get('scene', {})
++    if not scene:
++        return 0.0, 0.0
++
++    half_extent = 0.0
++    dtick = 0.0
++    for ax_name in ('xaxis', 'yaxis', 'zaxis'):
++        ax = scene.get(ax_name, {})
++        rng = ax.get('range', [])
++        if rng and len(rng) == 2:
++            try:
++                half_extent = max(half_extent,
++                                  abs(float(rng[0])), abs(float(rng[1])))
++            except (TypeError, ValueError):
++                pass
++        if dtick <= 0:
++            d = ax.get('dtick')
++            try:
++                if d is not None and float(d) > 0:
++                    dtick = float(d)
++            except (TypeError, ValueError):
++                pass
++    return half_extent, dtick
++
++
+ def apply_config(fig_dict, config):
+     """
+     Apply studio configuration to a Plotly figure dict.
+@@ -964,9 +1010,15 @@ def apply_config(fig_dict, config):
+             if scene_axis_range > 0 and scene_dtick <= 0:
+                 effective_dtick = _calculate_grid_dtick(scene_axis_range * 2)
+ 
+-            # Build km-equivalent suffix for axis titles at small scales
++            # Build km-equivalent suffix for axis titles -- ONLY at small
++            # (close-approach / flyby) scales, where km is meaningful. At or
++            # above KM_SUFFIX_MAX_AU (system + exoplanet plots) the title stays
++            # a plain "X (AU)". When the range is auto/unknown (a pure dtick
++            # override, scene_axis_range == 0) we fall back to gating on the
++            # dtick itself so a fine manual grid still gets the annotation.
++            emit_suffix = (scene_axis_range <= 0) or (scene_axis_range < KM_SUFFIX_MAX_AU)
+             suffix = ""
+-            if effective_dtick > 0:
++            if emit_suffix and effective_dtick > 0:
+                 dtick_km = effective_dtick * 149597870.7
+                 if effective_dtick < 0.01:
+                     suffix = f" (grid: {dtick_km:,.0f} km)"
+@@ -5194,24 +5246,24 @@ class GalleryStudio:
+         # Set after the closest-point loop below. If hover detection
+         # fails, the dialog provides a manual entry field.
+ 
+-        # ---- plot_scale_au: from Studio axis range ----
++        # ---- plot_scale_au + scene_dtick: GUI override first, else figure ----
++        # Shared figure read (_read_scene_grid_from_figure) so this panel and
++        # the read-on-load path agree on one extraction. Adding the figure
++        # dtick here also fixes this panel showing "auto" for a figure that
++        # actually carries a baked dtick.
++        fig_range, fig_dtick = _read_scene_grid_from_figure(fig)
++
+         scale = self.var_scene_axis_range.get()
+         if scale and scale > 0:
+             result['plot_scale_au'] = scale
+-        else:
+-            # Try to read from figure's scene axis range
+-            scene = layout.get('scene', {})
+-            for ax_name in ('xaxis', 'yaxis', 'zaxis'):
+-                ax = scene.get(ax_name, {})
+-                rng = ax.get('range', [])
+-                if rng and len(rng) == 2:
+-                    result['plot_scale_au'] = abs(rng[1])
+-                    break
++        elif fig_range > 0:
++            result['plot_scale_au'] = fig_range
+ 
+-        # ---- scene_dtick: from Studio setting ----
+         dtick = self.var_scene_dtick.get()
+         if dtick and dtick > 0:
+             result['scene_dtick'] = dtick
++        elif fig_dtick > 0:
++            result['scene_dtick'] = fig_dtick
+ 
+         # ---- plot_days: parse from title date range ----
+         # Pattern 1: "YYYY-MM-DD ... through YYYY-MM-DD"
+@@ -5780,6 +5832,14 @@ class GalleryStudio:
+             for k, v in layout['_studio_config'].items():
+                 if k in restore:
+                     restore[k] = v
++            # D3 precedence: an explicit non-zero studio override wins; if the
++            # studio config left a grid field at 0 (auto), fall back to the
++            # figure's baked grid so it stays visible on reload.
++            fig_range, fig_dtick = _read_scene_grid_from_figure(fig)
++            if restore.get('scene_axis_range', 0) <= 0 and fig_range > 0:
++                restore['scene_axis_range'] = fig_range
++            if restore.get('scene_dtick', 0) <= 0 and fig_dtick > 0:
++                restore['scene_dtick'] = fig_dtick
+             self._apply_config_to_gui(restore)
+             self.config = restore  # Make restored config available to _populate_trace_list
+ 
+@@ -5806,8 +5866,17 @@ class GalleryStudio:
+                     f"{restored_count} traces: hover text restored from legacy stash")
+             self._log_status('  |  '.join(status_parts))
+         else:
+-            self._apply_config_to_gui(DEFAULT_CONFIG)
+-            self.config = DEFAULT_CONFIG.copy()
++            # Raw orrery output: start from defaults, but populate the two 3D
++            # grid fields from the figure so the orrery's baked grid is VISIBLE
++            # and editable on load (Phase B read-on-load). 0 stays 0 = auto.
++            source_cfg = DEFAULT_CONFIG.copy()
++            fig_range, fig_dtick = _read_scene_grid_from_figure(fig)
++            if fig_range > 0:
++                source_cfg['scene_axis_range'] = fig_range
++            if fig_dtick > 0:
++                source_cfg['scene_dtick'] = fig_dtick
++            self._apply_config_to_gui(source_cfg)
++            self.config = source_cfg
+             self._log_status(
+                 f"Loaded source file: controls reset to defaults  |  "
+                 f"{trace_count} traces, {'3D' if has_scene else '2D'}")
