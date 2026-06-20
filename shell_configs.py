@@ -2102,6 +2102,20 @@ CUSTOM_SHELLS = {
             ),
         },
 
+        'dipole_cone': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+            'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Magnetic dipole cone: Mercury's magnetic dipole is essentially co-axial\n"
+                "with its spin axis (tilt < 1 deg), so there is no cone to sweep -- the\n"
+                "honest object is the dipole axis itself, drawn offset ~0.19 R_M northward\n"
+                "of center (the large MESSENGER-measured offset). Pole-frame and\n"
+                "Sun-independent -- square to the magnetosphere, not its Sun-leaned envelope.\n"
+                "Source: Anderson et al. (2011) Science -- MESSENGER orbital observations."
+            ),
+        },
+
         'sodium_tail': {
             'per_frame': True,  # 21/51 Phase 3C: engine-animatable (checkbox-gated)
             'builder': 'mercury_visualization_shells.create_mercury_sodium_tail',
@@ -2226,6 +2240,21 @@ CUSTOM_SHELLS = {
             ),
         },
 
+        'dipole_cone': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+            'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Magnetic dipole cone: Earth's magnetic dipole is tilted ~9.6 deg from the\n"
+                "spin axis, so rotation sweeps the dipole axis around a cone each day. The\n"
+                "drawn dipole line is one arbitrary instant (rotation phase unmodeled); the\n"
+                "cone is the honest sweep, with a spin arrow echoing the rotation axis.\n"
+                "Center offset ~0.085 R_E northward (axial approximation; the true center\n"
+                "also shifts laterally with secular variation). Pole-frame, Sun-independent.\n"
+                "Source: Alken et al. (2021) -- IGRF-13 (Swarm + ground observatories)."
+            ),
+        },
+
         'magnetosphere': {
             'builder': 'earth_visualization_shells.create_earth_magnetosphere_shell',
             'needs_sun_position': True,
@@ -2308,6 +2337,21 @@ CUSTOM_SHELLS = {
                 "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
                 "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
                 "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+
+        'dipole_cone': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+            'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Magnetic dipole cone: Jupiter's magnetic dipole is tilted ~10.3 deg from\n"
+                "the spin axis (JRM33 close-in dipole 10.31 deg; the planet-wide integrated\n"
+                "dipole reads ~9.6 deg), so its fast ~10 h rotation sweeps the dipole around\n"
+                "a cone. The drawn line is one arbitrary instant; the cone is the honest\n"
+                "sweep. Center offset ~0.12 R_J (axial approximation; the real shift is\n"
+                "toward the N hemisphere and the System III active longitude). Pole-frame.\n"
+                "Source: Connerney et al. (2022) -- Juno JRM33."
             ),
         },
 
@@ -2394,6 +2438,21 @@ CUSTOM_SHELLS = {
                 "Rotation axis: the body's spin pole (IAU pole vector), drawn with a\n"
                 "curved arrow for spin direction (prograde/retrograde) and hover giving\n"
                 "the sidereal rotation period and obliquity. Separate from the magnetic field."
+            ),
+        },
+
+        'dipole_cone': {
+            'per_frame': True,  # 21/51 Phase 3: engine-animatable primitive
+            'builder': 'planet_visualization_utilities.build_dipole_cone_traces',
+            'needs_planet_name': True,
+            'tooltip': (
+                "Magnetic dipole cone: Saturn's magnetic dipole is co-axial with its spin\n"
+                "axis to within measurement (tilt < 0.01 deg -- the Cowling-theorem paradox,\n"
+                "resolved by a deep helium-rain layer acting as an axisymmetric filter), so\n"
+                "there is no cone to sweep. The honest object is the dipole axis itself,\n"
+                "drawn offset ~0.045 R_S northward (midpoint of the measured 0.04-0.05 R_S).\n"
+                "Pole-frame and Sun-independent -- square to the rings, not the magnetosphere.\n"
+                "Source: Dougherty et al. (2018) Science -- Cassini Grand Finale."
             ),
         },
 

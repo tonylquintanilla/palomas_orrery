@@ -662,7 +662,50 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
 # visible rather than guessed (Earth ~11 deg, Jupiter ~10 deg, Saturn <1 deg,
 # Mercury ~0 deg: deferred pending sourced tilt + sense, their own entries later).
 # ---------------------------------------------------------------------------
+# Movement 2, dipole cluster (L-009 / L-006). Tilts, offsets, and sources are
+# peer-reviewed mission data (Gemini de-novo, June 2026); the recalled values
+# are retired. offset_fraction shifts the cone apex by that fraction of the body
+# radius northward along the IAU spin pole (axial approximation -- offset_note
+# discloses the real geometry). Mercury and Saturn are tilt ~ 0: the cone
+# collapses to the spin axis (the honest envelope of a zero-tilt dipole), so the
+# builder renders the offset axis line + info marker, not a faked wider cone.
+# Cone tilt values are rounded to 0.1 deg (cone projection cannot honor finer);
+# the exact source figure rides in 'note'. Uranus/Neptune omit offset_fraction
+# (-> 0.0) and offset_note (-> "deferred"), rendering unchanged.
+# Module updated: June 2026 with Anthropic's Claude Opus 4.8.
 PLANET_DIPOLE = {
+    'Mercury': {'tilt_deg': 0.0, 'azimuth_deg': 0.0, 'offset_fraction': 0.19,
+                'offset_note': 'Center offset: 0.19 +/- 0.01 R_M northward, axial '
+                               '(~480 km); no measurable equatorial offset',
+                'note': 'Tilt is statistically indistinguishable from zero '
+                        '(< 1 deg); modeled as a purely axial offset dipole -- '
+                        'the envelope of a zero-tilt dipole is the axis line itself',
+                'source': 'Anderson et al. 2011, MESSENGER (Science 333, 1859)'},
+    'Earth':   {'tilt_deg': 9.6, 'azimuth_deg': 0.0, 'offset_fraction': 0.085,
+                'offset_note': 'Center offset: ~0.085 R_E northward, axial '
+                               'approximation (~540 km); the true center is also '
+                               'displaced laterally toward ~22 N, 140 E '
+                               '(secular variation, unmodeled here)',
+                'note': 'Tilt ~9.6 deg for epoch 2020-2025 (IGRF-13); slowly '
+                        'decreasing ~0.05 deg/decade',
+                'source': 'Alken et al. 2021, IGRF-13 (Earth Planets Space 73, 49)'},
+    'Jupiter': {'tilt_deg': 10.3, 'azimuth_deg': 0.0, 'offset_fraction': 0.12,
+                'offset_note': 'Center offset: ~0.12 R_J, axial approximation; the '
+                               'true shift is toward the N hemisphere and the '
+                               'System III active longitude (rotation phase '
+                               'unmodeled)',
+                'note': 'Tilt ~10.3 deg: the JRM33 close-in dipole is 10.31 deg '
+                        '(Connerney 2022); the planet-wide integrated dipole '
+                        'reads ~9.6 deg',
+                'source': 'Connerney et al. 2022, JRM33 (JGR Planets 127(2))'},
+    'Saturn':  {'tilt_deg': 0.0, 'azimuth_deg': 0.0, 'offset_fraction': 0.045,
+                'offset_note': 'Center offset: ~0.045 R_S northward, axial '
+                               '(midpoint of measured 0.04-0.05 R_S); no '
+                               'measurable equatorial offset',
+                'note': 'Tilt < 0.01 deg -- the magnetic and spin axes are '
+                        'co-axial. Deep helium-rain differential rotation acts as '
+                        'an axisymmetric filter (the Cowling-theorem paradox)',
+                'source': 'Dougherty et al. 2018, Cassini Grand Finale (Science 362)'},
     'Uranus':  {'tilt_deg': 60.0, 'azimuth_deg': 35.0,
                 'source': 'Ness et al. 1986, Voyager 2 magnetometer (Science 233, 85)'},
     'Neptune': {'tilt_deg': 47.0, 'azimuth_deg': 35.0,
@@ -688,13 +731,25 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
 
     Pole frame, Sun-independent: sits square to the rings and radiation belts and
     does NOT track the Sun-leaned magnetosphere envelope (a different frame --
-    the envelope's tilt is a roll about the Sun-line). Apex at center; the dipole
-    center offset is DEFERRED (magnitude sourced, direction not).
+    the envelope's tilt is a roll about the Sun-line). The apex is offset
+    northward along the spin pole by offset_fraction * body_radius (axial
+    approximation; offset_note in PLANET_DIPOLE discloses the real geometry).
+    Bodies that omit offset_fraction (Uranus/Neptune) keep apex at center.
 
-    Returns a list of 8 traces (2 cone nappes, 1 generator line, 2 rim arcs,
-    2 arrowheads, 1 info marker), or [] for bodies with no sourced dipole tilt
-    (intentional omission, not a failure). sun_position is accepted and ignored
-    for dispatch-signature uniformity with the other shared builders.
+    Near-zero tilt (Mercury, Saturn): the cone half-angle -> 0, so the nappe rim
+    and the sweep-arc radius both collapse onto the spin axis. The honest object
+    is then the axis line itself (Show the Envelope of the Unknowable -- a faked
+    wider cone would be the cite-over-recalled failure class), so for tilt below
+    _TILT_EPS_DEG the builder emits only the generator line (= offset spin axis)
+    and the info marker, skipping the degenerate nappes and sweep arrows.
+
+    Returns up to 8 traces for a tilted dipole (2 cone nappes, 1 generator line,
+    2 rim arcs, 2 arrowheads, 1 info marker); 2 traces (generator line + info
+    marker) for a near-zero-tilt body; or [] for bodies with no sourced dipole
+    tilt (intentional omission, not a failure). sun_position is accepted and
+    ignored for dispatch-signature uniformity with the other shared builders.
+
+    Module updated: June 2026 with Anthropic's Claude Opus 4.8.
     """
     dip = PLANET_DIPOLE.get(planet_name)
     rot = PLANET_ROTATION.get(planet_name)
@@ -707,7 +762,7 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
     center = np.array([cx, cy, cz], dtype=float)
 
     M = np.asarray(create_planet_transformation_matrix(planet_name), dtype=float)
-    pole = M[:, 2] / np.linalg.norm(M[:, 2])
+    pole = M[:, 2] / np.linalg.norm(M[:, 2])      # IAU north pole (verified northward)
     e1 = M[:, 0] / np.linalg.norm(M[:, 0])
     e2 = M[:, 1] / np.linalg.norm(M[:, 1])
 
@@ -715,6 +770,12 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
     half = rot.get('half_len_frac', 2.5) * body_r_au
     if half <= 0:
         return []
+
+    # Dipole-center offset: shift the apex northward along the spin pole by
+    # offset_fraction of the body radius. Axial approximation; the lateral and
+    # phase-locked components are unmodeled (disclosed in offset_note).
+    offset_frac = dip.get('offset_fraction', 0.0)
+    apex = center + (offset_frac * body_r_au) * pole
 
     s = -1.0 if rot.get('sense') == 'retrograde' else 1.0
     theta = math.radians(dip['tilt_deg'])
@@ -725,70 +786,94 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
     cos_t, sin_t = math.cos(theta), math.sin(theta)
     dip_dir = cos_t * pole + sin_t * (math.cos(az) * e1 + math.sin(az) * e2)
 
-    n_phi = 72
-    phis = np.linspace(0.0, 2.0 * np.pi, n_phi, endpoint=False)
-    radial = np.cos(phis)[:, None] * e1[None, :] + np.sin(phis)[:, None] * e2[None, :]
+    # Degenerate gate: below this tilt the cone is visually a line; render the
+    # axis, not a surface. (Saturn < 0.01 deg, Mercury < 1 deg.)
+    _TILT_EPS_DEG = 0.5
+    degenerate = dip['tilt_deg'] < _TILT_EPS_DEG
 
     traces = []
 
-    # 1-2) double-nappe cone, apex at center, rim at +/- half*cos_t along the pole
-    for nap_i, nap_sign in enumerate((1.0, -1.0)):
-        ring = center + (nap_sign * half * cos_t) * pole + (half * sin_t) * radial
-        xs = np.concatenate([[center[0]], ring[:, 0]])
-        ys = np.concatenate([[center[1]], ring[:, 1]])
-        zs = np.concatenate([[center[2]], ring[:, 2]])
-        ii = [0] * n_phi
-        jj = [1 + m for m in range(n_phi)]
-        kk = [1 + ((m + 1) % n_phi) for m in range(n_phi)]
-        traces.append(go.Mesh3d(
-            x=xs, y=ys, z=zs, i=ii, j=jj, k=kk, color=color, opacity=0.16,
-            flatshading=True, showscale=False, hoverinfo='skip',
-            name=legend, legendgroup=legend, showlegend=(nap_i == 0)))
+    if not degenerate:
+        # 1-2) double-nappe cone, apex at apex, rim at +/- half*cos_t along pole
+        n_phi = 72
+        phis = np.linspace(0.0, 2.0 * np.pi, n_phi, endpoint=False)
+        radial = (np.cos(phis)[:, None] * e1[None, :]
+                  + np.sin(phis)[:, None] * e2[None, :])
+        for nap_i, nap_sign in enumerate((1.0, -1.0)):
+            ring = apex + (nap_sign * half * cos_t) * pole + (half * sin_t) * radial
+            xs = np.concatenate([[apex[0]], ring[:, 0]])
+            ys = np.concatenate([[apex[1]], ring[:, 1]])
+            zs = np.concatenate([[apex[2]], ring[:, 2]])
+            ii = [0] * n_phi
+            jj = [1 + m for m in range(n_phi)]
+            kk = [1 + ((m + 1) % n_phi) for m in range(n_phi)]
+            traces.append(go.Mesh3d(
+                x=xs, y=ys, z=zs, i=ii, j=jj, k=kk, color=color, opacity=0.16,
+                flatshading=True, showscale=False, hoverinfo='skip',
+                name=legend, legendgroup=legend, showlegend=(nap_i == 0)))
 
-    # 3) one instantaneous dipole generator (full line through both magnetic poles)
-    g_lo = center - half * dip_dir
-    g_hi = center + half * dip_dir
+    # generator: full line through both magnetic poles, hung on the apex. For a
+    # degenerate body this IS the (offset) spin axis, and it carries the legend
+    # entry since there is no nappe to.
+    g_lo = apex - half * dip_dir
+    g_hi = apex + half * dip_dir
     traces.append(go.Scatter3d(
         x=[g_lo[0], g_hi[0]], y=[g_lo[1], g_hi[1]], z=[g_lo[2], g_hi[2]],
         mode='lines', line=dict(color=color, width=5),
-        name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+        name=legend, legendgroup=legend,
+        showlegend=degenerate, hoverinfo='skip'))
 
-    # 4-7) sweep arrow at each tip: arc of the cone RIM (a circle about the SPIN
-    # axis) + a cone arrowhead, same sense and absolute size as the rotation-axis
-    # spin arrow, so the dipole's sweep reads as the planet's spin.
-    arc_r = 0.28 * half          # rotation-axis arc scale -> matching arrowhead sizeref
-    sizeref = arc_r * 0.5
-    rim_r = half * sin_t
-    span = math.radians(90.0)
-    tau = np.linspace(0.0, span, 40)
-    for tip_sign, start_az in ((1.0, az), (-1.0, az + math.pi)):
-        rim_center = center + (tip_sign * half * cos_t) * pole
-        phi = start_az + s * tau
-        pts = rim_center + rim_r * (np.cos(phi)[:, None] * e1[None, :]
-                                    + np.sin(phi)[:, None] * e2[None, :])
-        traces.append(go.Scatter3d(
-            x=pts[:, 0], y=pts[:, 1], z=pts[:, 2], mode='lines',
-            line=dict(color=color, width=4),
-            name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
-        pe = float(phi[-1])
-        tangent = s * (-math.sin(pe) * e1 + math.cos(pe) * e2)
-        tangent = tangent / np.linalg.norm(tangent)
-        traces.append(go.Cone(
-            x=[pts[-1, 0]], y=[pts[-1, 1]], z=[pts[-1, 2]],
-            u=[tangent[0]], v=[tangent[1]], w=[tangent[2]],
-            sizemode='absolute', sizeref=sizeref, anchor='tail', showscale=False,
-            colorscale=[[0, color], [1, color]],
-            name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+    if not degenerate:
+        # sweep arrow at each tip: arc of the cone RIM (a circle about the SPIN
+        # axis) + a cone arrowhead, same sense and absolute size as the
+        # rotation-axis spin arrow, so the dipole's sweep reads as the spin.
+        arc_r = 0.28 * half      # rotation-axis arc scale -> matching arrowhead sizeref
+        sizeref = arc_r * 0.5
+        rim_r = half * sin_t
+        span = math.radians(90.0)
+        tau = np.linspace(0.0, span, 40)
+        for tip_sign, start_az in ((1.0, az), (-1.0, az + math.pi)):
+            rim_center = apex + (tip_sign * half * cos_t) * pole
+            phi = start_az + s * tau
+            pts = rim_center + rim_r * (np.cos(phi)[:, None] * e1[None, :]
+                                        + np.sin(phi)[:, None] * e2[None, :])
+            traces.append(go.Scatter3d(
+                x=pts[:, 0], y=pts[:, 1], z=pts[:, 2], mode='lines',
+                line=dict(color=color, width=4),
+                name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
+            pe = float(phi[-1])
+            tangent = s * (-math.sin(pe) * e1 + math.cos(pe) * e2)
+            tangent = tangent / np.linalg.norm(tangent)
+            traces.append(go.Cone(
+                x=[pts[-1, 0]], y=[pts[-1, 1]], z=[pts[-1, 2]],
+                u=[tangent[0]], v=[tangent[1]], w=[tangent[2]],
+                sizemode='absolute', sizeref=sizeref, anchor='tail', showscale=False,
+                colorscale=[[0, color], [1, color]],
+                name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
 
-    # 8) single info marker at the +tip (single-info-marker convention)
-    tip = center + half * dip_dir
-    hover = ('<b>%s -- Magnetic Dipole Cone</b><br>'
-             'Dipole tilt: %.0f deg from the spin axis<br>'
-             'Swept about the spin axis once per rotation (sense: %s)<br>'
-             'Drawn axis is ONE arbitrary instant; the cone is the honest sweep<br>'
-             'Center offset deferred (apex at center)<br>'
-             'Source: %s') % (planet_name, dip['tilt_deg'], rot.get('sense'),
-                              dip['source'])
+    # single info marker at the +tip (single-info-marker convention). Per-body
+    # hover: tilt at 0.1-deg resolution, offset disclosure, and the sourced note
+    # (Jupiter dual-reading, Saturn midpoint/Cowling, Mercury/Saturn degeneracy).
+    tip = apex + half * dip_dir
+    lines = ['<b>%s -- Magnetic Dipole Cone</b>' % planet_name]
+    if degenerate:
+        lines.append('Dipole tilt: ~%.1f deg -- magnetic axis is co-axial with '
+                     'the spin pole to within measurement' % dip['tilt_deg'])
+    else:
+        lines.append('Dipole tilt: ~%.1f deg from the spin axis' % dip['tilt_deg'])
+        lines.append('Swept about the spin axis once per rotation (sense: %s)'
+                     % rot.get('sense'))
+        lines.append('Drawn axis is ONE arbitrary instant; the cone is the honest sweep')
+    if 'offset_note' in dip:
+        lines.append(dip['offset_note'])
+    elif offset_frac > 0:
+        lines.append('Center offset: ~%.3f body radii northward (axial)' % offset_frac)
+    else:
+        lines.append('Center offset deferred (apex at center)')
+    if 'note' in dip:
+        lines.append(dip['note'])
+    lines.append('Source: %s' % dip['source'])
+    hover = '<br>'.join(lines)
     traces.append(go.Scatter3d(
         x=[tip[0]], y=[tip[1]], z=[tip[2]], mode='markers',
         marker=dict(size=5, color=color, symbol='cross',

@@ -7,15 +7,18 @@ builder can work while the dispatch never calls it. No network, no GUI.
 What this PROVES (run in the repo env):
   * each dipole body's CUSTOM_SHELLS['<body>']['dipole_cone'] resolves to the
     shared builder and sets needs_planet_name;
-  * the builder returns 8 traces (2 cone nappes, 1 generator line, 2 rim arcs,
-    2 arrowheads, 1 info marker);
+  * a tilted body returns 8 traces (2 cone nappes, 1 generator line, 2 rim arcs,
+    2 arrowheads, 1 info marker); a near-zero-tilt body (Mercury, Saturn) returns
+    2 (generator line = offset spin axis + info marker), the collapsed cone and
+    sweep arcs omitted -- the honest envelope of a zero-tilt dipole is the line;
   * the drawn generator sits at the sourced tilt off the producer spin pole
-    (Uranus 60, Neptune 47) -- the cone consumes the pole faithfully;
-  * the rim sweep arcs wind with the body's rotation sense (so the sweep reads
-    as the spin);
+    (Earth 9.6, Jupiter 10.3, Uranus 60, Neptune 47; Mercury/Saturn ~0) -- the
+    cone consumes the pole faithfully;
+  * the rim sweep arcs (tilted bodies) wind with the body's rotation sense (so
+    the sweep reads as the spin);
   * LIVE PATH: create_celestial_body_visualization with ZERO shells checked
-    renders the cone on BODY selection (1 legend each) for Uranus and Neptune,
-    and renders NOTHING for bodies without a sourced dipole (Earth, Mars).
+    renders the cone on BODY selection (1 legend each) for all six dipole bodies,
+    and renders NOTHING for bodies without a sourced dipole (Mars).
 
 What this does NOT prove (Mode-5 render, Tony's eyes):
   Whether the magenta sweep arrow and the gold spin arrow read as one rotation
@@ -32,8 +35,14 @@ from idealized_orbits import create_planet_transformation_matrix
 from planet_visualization_utilities import PLANET_DIPOLE, PLANET_ROTATION
 import plotly.graph_objs as go
 
-BODIES = ['Uranus', 'Neptune']
-OMITTED = ['Earth', 'Mars', 'Jupiter', 'Saturn']   # have magnetospheres, no dipole_cone (yet)
+BODIES = ['Mercury', 'Earth', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+OMITTED = ['Mars']   # has a magnetosphere but no sourced dipole tilt -> no dipole_cone
+
+_TILT_EPS_DEG = 0.5   # below this the cone collapses to the spin axis (Mercury, Saturn)
+
+
+def is_degenerate(body):
+    return PLANET_DIPOLE[body]['tilt_deg'] < _TILT_EPS_DEG
 
 
 def resolve_builder(body):
@@ -62,13 +71,16 @@ def main():
         builder = resolve_builder(b)
         traces = builder((0.0, 0.0, 0.0), planet_name=b)
 
-        if len(traces) != 8:
-            failures.append('%s: %d traces (expected 8)' % (b, len(traces)))
+        deg = is_degenerate(b)
+        want_traces = 2 if deg else 8   # degenerate: generator line + info marker only
+        if len(traces) != want_traces:
+            failures.append('%s: %d traces (expected %d)' % (b, len(traces), want_traces))
 
         M = np.asarray(create_planet_transformation_matrix(b), float)
         pole = M[:, 2] / np.linalg.norm(M[:, 2])
 
-        # generator at the sourced tilt off the pole
+        # generator at the sourced tilt off the pole (for a degenerate body the
+        # generator IS the spin axis, want_tilt ~ 0)
         ln = generator_line(traces)
         d = ln[1] - ln[0]; d = d / np.linalg.norm(d)
         ang = math.degrees(math.acos(min(1.0, abs(float(np.dot(d, pole))))))
@@ -77,29 +89,42 @@ def main():
         if dev > 1e-6:
             failures.append('%s: generator %.3f deg off pole, want %.1f' % (b, ang, want_tilt))
 
-        # two nappes, exactly one legend-visible
         nappes = [t for t in traces if isinstance(t, go.Mesh3d)]
-        if len(nappes) != 2:
-            failures.append('%s: %d cone nappes (expected 2)' % (b, len(nappes)))
-        if sum(1 for c in nappes if getattr(c, 'showlegend', False)) != 1:
-            failures.append('%s: nappes do not show exactly one legend entry' % b)
-
-        # rim arcs wind with the rotation sense
-        want_s = -1.0 if PLANET_ROTATION[b]['sense'] == 'retrograde' else 1.0
         arcs = rim_arcs(traces)
-        if len(arcs) != 2:
-            failures.append('%s: %d rim arcs (expected 2)' % (b, len(arcs)))
-        sense_ok = True
-        for p in arcs:
-            wind = np.cross(p[1] - p[0], p[2] - p[1])
-            if float(np.sign(np.dot(wind, pole))) != want_s:
-                sense_ok = False
-        if not sense_ok:
-            failures.append('%s: rim arc winding does not match rotation sense' % b)
-
         heads = [t for t in traces if isinstance(t, go.Cone)]
-        if len(heads) != 2:
-            failures.append('%s: %d arrowheads (expected 2)' % (b, len(heads)))
+        sense_ok = True
+
+        if deg:
+            # collapsed cone: no nappes, no sweep arcs/heads; the generator line
+            # (= offset spin axis) carries the single legend entry
+            if nappes:
+                failures.append('%s: %d cone nappes (expected 0, tilt ~ 0)' % (b, len(nappes)))
+            if arcs:
+                failures.append('%s: %d rim arcs (expected 0, tilt ~ 0)' % (b, len(arcs)))
+            if heads:
+                failures.append('%s: %d arrowheads (expected 0, tilt ~ 0)' % (b, len(heads)))
+            gen_legend = [t for t in traces if isinstance(t, go.Scatter3d)
+                          and t.mode == 'lines' and getattr(t, 'showlegend', False)]
+            if len(gen_legend) != 1:
+                failures.append('%s: generator does not carry exactly one legend entry' % b)
+        else:
+            # two nappes, exactly one legend-visible
+            if len(nappes) != 2:
+                failures.append('%s: %d cone nappes (expected 2)' % (b, len(nappes)))
+            if sum(1 for c in nappes if getattr(c, 'showlegend', False)) != 1:
+                failures.append('%s: nappes do not show exactly one legend entry' % b)
+            # rim arcs wind with the rotation sense
+            want_s = -1.0 if PLANET_ROTATION[b]['sense'] == 'retrograde' else 1.0
+            if len(arcs) != 2:
+                failures.append('%s: %d rim arcs (expected 2)' % (b, len(arcs)))
+            for p in arcs:
+                wind = np.cross(p[1] - p[0], p[2] - p[1])
+                if float(np.sign(np.dot(wind, pole))) != want_s:
+                    sense_ok = False
+            if not sense_ok:
+                failures.append('%s: rim arc winding does not match rotation sense' % b)
+            if len(heads) != 2:
+                failures.append('%s: %d arrowheads (expected 2)' % (b, len(heads)))
 
         print('%-9s %3d %9.2e %9s  %s' % (b, len(traces), dev, sense_ok, PLANET_DIPOLE[b]['source'][:28]))
 
@@ -111,8 +136,9 @@ def main():
         draw(fig, b, shell_vars={}, center_position=(0.0, 0.0, 0.0))
         cone = [t for t in fig.data if getattr(t, 'name', '') and 'Dipole Cone' in t.name]
         legend = [t for t in cone if getattr(t, 'showlegend', False)]
-        if len(cone) != 8:
-            failures.append('%s: render path produced %d cone traces (expected 8) with no shells checked' % (b, len(cone)))
+        want_cone = 2 if is_degenerate(b) else 8
+        if len(cone) != want_cone:
+            failures.append('%s: render path produced %d cone traces (expected %d) with no shells checked' % (b, len(cone), want_cone))
         if len(legend) != 1:
             failures.append('%s: %d legend entries (expected 1)' % (b, len(legend)))
     if not [f for f in failures if 'render path' in f or 'legend' in f]:
@@ -126,7 +152,7 @@ def main():
         draw(fig, b, shell_vars={}, center_position=(0.0, 0.0, 0.0))
         if [t for t in fig.data if getattr(t, 'name', '') and 'Dipole Cone' in t.name]:
             failures.append('%s: render path emitted a dipole cone (should be omitted)' % b)
-    print('omitted bodies (Earth/Mars/Jupiter/Saturn): no dipole cone  OK')
+    print('omitted body (Mars): no dipole cone  OK')
 
     print()
     if failures:
@@ -134,8 +160,9 @@ def main():
         for f in failures:
             print('  - ' + f)
         raise SystemExit(1)
-    print('RESULT: PASS  (2 dipole cones wired + on-pole-tilt + correct sense + body-triggered; '
-          'non-dipole bodies emit none)')
+    print('RESULT: PASS  (6 dipole cones wired: 4 tilted [Earth, Jupiter, Uranus, '
+          'Neptune] + 2 degenerate axis-only [Mercury, Saturn]; on-pole-tilt + '
+          'correct sense + body-triggered; non-dipole bodies emit none)')
     print('Reminder: spin/sweep-arrow rhyme and half_len_frac sizing are the Mode-5 render checks.')
 
 
