@@ -218,7 +218,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*47 live items; 40 need attention (`!`); 45 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*46 live items; 39 need attention (`!`); 44 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -231,10 +231,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Movement
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-006 | Mercury +0.2 R_M northward dipole offset | OPEN | 1.0 | - |
 | ! | L-007 | Bow-shock hover disclosure remainder | PENDING-GATE | 1.0 | 2026-06-11 |
 | ! | L-008 | v24 sec5 precision batch (low-risk) | OPEN | 1.0 | - |
-| ! | L-009 | Dipole cluster: envelope tie / offset direction / remaining cones / half_len_frac | OPEN | 1.0 | 2026-06-13 |
+| ! | L-009 | Dipole cluster: envelope tie / offset direction / remaining cones / half_len_frac | OPEN | 1.0 | 2026-06-20 |
 
 ### D.Priority
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -733,17 +732,23 @@ as absorbed. If the "small-body analytical tail" refers to a specific
 feature, needs clarification from Tony.
 **Tony:** No recollection of a gap.
 `**Gap:** none -- move to section C`
+
+#### [L-006] Mercury +0.2 R_M northward dipole offset
+<!-- L:006 status:DONE upd:2026-06-20 section:C flag: rice:2/2/50/2 -->
+- **Mercury +0.2 R_M northward dipole offset** -- DONE. (Anderson 2011;
+  v24 Movement-2 item.) `[verified absent @76c330e]`
+  **Tony:** let's prioritize the dipole implementation for Mercury, Earth and Jupiter and clean these up. 
+  **Done (2026-06-20, built @5b294c8 -> pushed @08f9831, Mode-5 confirmed):**
+  offset_fraction 0.19 R_M northward implemented in PLANET_DIPOLE +
+  build_dipole_cone_traces (axial; Anderson et al. 2011, MESSENGER). Mercury
+  renders as the degenerate axis-line (tilt 0, option a). This IS the +0.2 item
+  -- Anderson reports 0.19 +/- 0.01 R_M.
+  **Gap:** none -- move to section C
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
-
-#### [L-006] Mercury +0.2 R_M northward dipole offset
-<!-- L:006 status:OPEN upd:- section:D.Movement flag: rice:2/2/50/2 -->
-- **Mercury +0.2 R_M northward dipole offset** -- OPEN. (Anderson 2011;
-  v24 Movement-2 item.) `[verified absent @76c330e]`
-  **Tony:** let's prioritize the dipole implementation for Mercury, Earth and Jupiter and clean these up. 
 
 #### [L-007] Bow-shock hover disclosure remainder
 <!-- L:007 status:PENDING-GATE upd:2026-06-11 section:D.Movement flag: rice:2/2/50/2 -->
@@ -763,7 +768,7 @@ feature, needs clarification from Tony.
   `[per chain]`
 
 #### [L-009] Dipole cluster: envelope tie / offset direction / remaining cones / half_len_frac
-<!-- L:009 status:OPEN upd:2026-06-13 section:D.Movement flag: rice:2/2/50/2 -->
+<!-- L:009 status:OPEN upd:2026-06-20 section:D.Movement flag: rice:2/2/50/2 -->
 - **Envelope -> dipole tie / season-derived roll** (Mode-7, conditional);
   **dipole offset DIRECTION** (Mode-7; apex stays centered until sourced);
   **REMAINING DIPOLE CONES** (verified set, June 13 @33aac56): the cone
@@ -781,15 +786,21 @@ feature, needs clarification from Tony.
   remembered. **per-body half_len_frac tuning** (Mode-5 knobs).
   `[verified set @33aac56]`
 **Tony:** as mentioned above, let's prioritize cleaning up the remaining dipoles and cones.
-**Gap:** PROVENANCE GATE SATISFIED (Gemini de-novo sourcing, June 18 2026;
-  data in handoff v29). Sourced tilts: Mercury 0 deg (Anderson et al. 2011,
-  MESSENGER), Earth ~9.6 deg (Alken et al. 2021, IGRF-13), Jupiter 10.31 deg
-  (Connerney et al. 2022, JRM33), Saturn 0 deg (Dougherty et al. 2018,
-  Cassini Grand Finale). Offsets sourced for all four (0.19, 0.085, 0.12,
-  0.04-0.05 R_p respectively). Next: design session (D1-D7 in handoff v29)
-  -> extend build_dipole_cone_traces for offset_fraction + tilt=0 handling
-  -> add CUSTOM_SHELLS entries -> Mode 5. L-006 closes when Mercury offset
-  is implemented.
+**Done (2026-06-20, built @5b294c8 -> pushed @08f9831, Mode-5 confirmed):**
+  REMAINING DIPOLE CONES sub-part CLOSED -- Mercury, Earth, Jupiter, Saturn
+  dipole_cones built + rendered (handoff v30). Offset MAGNITUDE sourced and
+  applied AXIALLY (northward along spin pole): Mercury 0.19, Earth 0.085,
+  Jupiter 0.12, Saturn 0.045 R_p (peer-reviewed; Gemini de-novo June 18).
+  Mercury + Saturn render as the degenerate axis-line (tilt ~0, option a);
+  Earth + Jupiter as full swept cones (9.6 / 10.3 deg). half_len_frac: existing
+  values Mode-5-confirmed acceptable, no dedicated tuning needed. L-006 closed
+  in parallel. Smoke PASS @08f9831; provenance Tier-1 = 0.
+**Gap:** NARROWED. Two sub-parts remain OPEN: (1) ENVELOPE -> dipole tie /
+  season-derived roll (Mode-7, conditional -- untouched); (2) dipole offset
+  DIRECTION beyond axial -- the lateral / rotation-phase component is unmodeled
+  by design (shown as the honest envelope, disclosed in hover), pending Mode-7
+  sourcing of the true direction. Cones + offset-magnitude DONE; these two are
+  what keep L-009 OPEN.
 
 ### D.Priority -- real bugs
 
