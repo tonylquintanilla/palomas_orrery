@@ -1,6 +1,6 @@
 # HANDOFF -- Ledger Cleanup + Next-Session Scoping
 # Tony Quintanilla, PE | Claude Opus 4.6 | June 18, 2026
-# Base SHA: feab717 -> Final SHA: e0c5313
+# Base SHA: feab717 -> Final SHA: 7a870ff
 
 ---
 
@@ -36,6 +36,21 @@ D.Structural: 16 items -> 7 remaining. Total live items: 58 -> 46.
 ### Two items still open for quick closure
 - L-025: confirming grep (inline markers custom-geometry-only). Likely done.
 - L-020: CUSTOM_SHELLS tooltip scan. Scriptable.
+
+### RICE scoring added to ledger_index.py
+Adapted RICE framework (Reach/Impact/Confidence/Effort) added to the INDEX
+generator. Metadata field: `rice:R/I/C/E` (separator `/` for decimal values).
+Score = R x I x (C/100) / E. Scored items sort to top of their section
+(descending); unscored show `--`. Full backward compatibility with existing
+metadata. RICE documentation added to LEDGER_CONSOLIDATED.md in the "Using
+and maintaining this ledger" section. Tony placed placeholder scores
+(rice:2/2/50/2 -> 1.0) on all items as a starting point for deliberate
+scoring.
+
+### Dashboard launcher pinned to Windows taskbar
+`_run_dashboard.bat` pinned via `explorer.exe` wrapper shortcut (Windows 11
+blocks direct .bat pinning; `explorer.exe "path\to\file.bat"` shortcut
+bypasses the restriction).
 
 ---
 
@@ -203,5 +218,9 @@ incompatibility. Main risk: frame-1 doubling (known pattern, known guard).
 | L-006 | Scoped (next)      | Closes with dipole offset implementation   |
 | L-009 | Scoped (next)      | Provenance gate now satisfied              |
 | L-056 | Scoped (next)      | MAPS per-frame wiring                      |
+| --    | Tooling            | ledger_index.py: RICE scoring (Score column, sort by score) |
+| --    | Documentation      | LEDGER_CONSOLIDATED.md: RICE dimensions + usage documented |
 
-Final HEAD: e0c5313f999c5a85c9636b48b6fa8a9f30162bf8
+Commits: feab717 -> 7964193 -> e0c5313 -> dc88a53 -> 7a870ff (5 commits)
+
+Final HEAD: 7a870ff40e932603f847e22648c7b40f57b8a898
