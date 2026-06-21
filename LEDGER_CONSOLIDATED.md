@@ -235,12 +235,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-008 | v24 sec5 precision batch (low-risk) | OPEN | 1.0 | - |
-| ! | L-061 | Magnetosphere-dipole frame coupling / seasonal roll | OPEN | 0.2 | 2026-06-20 |
+| ! | L-061 | Magnetosphere-dipole frame coupling / seasonal roll | OPEN | 0.2 | 2026-06-21 |
 
 ### D.Priority
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 1.0 | 2026-06-15 |
+| ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 3.6 | 2026-06-21 |
 |  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 0.1 | 2026-06-15 |
 
 ### D.Structural
@@ -258,10 +258,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-033 | Comet plotted-period trace visibility (line weight/color; O6b) | OPEN | 1.5 | 2026-06-10 |
+| ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.5 | 2026-06-21 |
 | ! | L-030 (#17) | GEO info-marker position | OPEN | 1.0 | - |
 | ! | L-031 (#18) | Uranus gossamer ring visibility | OPEN | 1.0 | - |
 | ! | L-032 (#41) | Sun legend ordering (ordered dispatch iteration; no manual fix) | OPEN | 1.0 | - |
-| ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.0 | - |
 | ! | L-035 | Solar shell hovertext <br> vs 
  context mismatch (C6b) | OPEN | 1.0 | 2026-06-11 |
 | ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 0.9 | 2026-06-15 |
@@ -271,21 +271,21 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-040 (#19) | Plot-cube control parity + scaling/camera comprehensive review | OPEN | 1.5 | 2026-06-13 |
-| ! | L-039 (#23) | Earth ionosphere shell | OPEN | 1.0 | - |
+| ! | L-039 (#23) | Earth ionosphere shell | OPEN | 1.2 | 2026-06-21 |
 | ! | L-042 (#20/N5) | Shell-resolution GUI control (20/N5) + Fly-to view scaling (49) | OPEN | 0.5 | 2026-06-11 |
 | ! | L-043 | Exoplanet/binary synthetic objects hit Horizons fetch (id_type rejected) | OPEN | 0.4 | 2026-06-16 |
 
 ### D.Feature-B
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-044 (#22) | Satellite internal-structure shells | OPEN | 2.7 | - |
+| ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | - |
 
 ### D.Feature-C
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-046 (#N6) | Studio encounter-generator refactor + Artemis preset redo (coupled, two repos) | OPEN | 2.2 | - |
-| ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-20 |
+| ! | L-046 (#N6) | Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos) | OPEN | 2.2 | 2026-06-21 |
+| ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
 | ! | L-047 (#N10) | Note-composition structural refactor (behind N6) | OPEN | 1.0 | - |
 | ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.0 | 2026-06-11 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
@@ -299,7 +299,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.LooseEnd
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-051 | Uranus pole-value prose inconsistency (Dec -15.10 vs stray -15.18) | OPEN | 0.7 | - |
+| ! | L-051 | Uranus pole-value prose inconsistency (Dec -15.10 vs stray -15.18) | OPEN | 0.7 | 2026-06-21 |
 
 ### E
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -990,61 +990,65 @@ follow-on behind gate 5(b).)
   L-008 is the precision-VALUES batch -- different content, real remaining work.
 
 #### [L-061] Magnetosphere-dipole frame coupling / seasonal roll
-<!-- L:061 status:OPEN upd:2026-06-20 section:D.Movement flag: rice:1/1/50/3 -->
-- **Magnetosphere-dipole frame coupling / seasonal roll** -- OPEN. Promoted from
-  L-009 (2026-06-20). The dipole cone is BODY-locked (spin-pole frame,
-  Sun-independent); the magnetosphere is SUN-locked (its bow-shock-to-tail axis
-  follows the planet->Sun line). As the planet orbits, the Sun-line sweeps
-  ~360 deg once per orbital YEAR, so the magnetosphere reorients in inertial
-  space while the spin/dipole axis stays fixed -- an apparent ROLL of the dipole
-  relative to the magnetosphere, once per orbit. (Tony's framing, 2026-06-20.)
-  AMPLITUDE = OBLIQUITY: the spin-axis-to-Sun-line angle swings over the orbit
-  with amplitude equal to the axial tilt (magnetospheric "seasons") -- near-nil
-  for Mercury (~0) and Jupiter (~3 deg); meaningful for Earth (23), Saturn (27),
-  Neptune (28); extreme for Uranus (~98 deg, pole swings toward the Sun at
-  solstice over its 84-yr orbit).
-  WHY ITS OWN ITEM (new physics, not a cone remainder): the render currently
-  DECOUPLES the two frames (a clean simplification), but the real system is
-  COUPLED -- the magnetosphere's SHAPE responds to the dipole tilt and the
-  interplanetary field, not just the Sun-line. Modeling that coupling is a
-  Mode-7 question (envelope-orientation physics -> Gemini, not asserted from
-  memory), not a render tweak. Also folds in the L-009 offset-direction
+<!-- L:061 status:OPEN upd:2026-06-21 section:D.Movement flag: rice:1/1/50/3 -->
+- **Magnetosphere-dipole frame coupling / seasonal roll** -- OPEN, deferred.
+  Promoted from L-009 (2026-06-20). Two frames the render currently keeps separate
+  are physically COUPLED:
+    * the dipole cone is BODY-locked (spin-pole frame, Sun-independent);
+    * the magnetosphere is SUN-locked (bow-shock-to-tail axis follows the
+      planet->Sun line).
+  As the planet orbits, the Sun-line sweeps ~360 deg once per orbital YEAR, so the
+  magnetosphere reorients in inertial space while the spin/dipole axis stays fixed
+  -- the dipole orientation appears to ROLL relative to the magnetosphere, once per
+  orbit. (Tony confirms, 2026-06-20: the dipole does not travel WITH the
+  magnetosphere, but has a dynamic relationship with it -- it rolls with respect to
+  the magnetosphere as the planet orbits the Sun.)
+  AMPLITUDE = OBLIQUITY: the spin-axis-to-Sun-line angle swings over the orbit with
+  amplitude equal to the axial tilt (magnetospheric "seasons") -- near-nil for
+  Mercury (~0) and Jupiter (~3 deg); meaningful for Earth (23), Saturn (27),
+  Neptune (28); extreme for Uranus (~98 deg, pole swings sunward at solstice over
+  its 84-yr orbit).
+  WHY ITS OWN ITEM (new physics, not a cone remainder): the real magnetosphere's
+  SHAPE responds to the dipole tilt and the interplanetary field, not just the
+  Sun-line. Modeling the coupling is a Mode-7 question (envelope-orientation
+  physics -> Gemini, not asserted from memory). Folds in the L-009 offset-direction
   remainder (mode 2).
-**Tony:** capture broad; do not refine scope yet (seasonal-roll-only vs full
-  coupling is a judgment call for whoever picks it up).
-**Gap:** OPEN, scope deliberately unrefined. Visible/teachable ONLY under
-  envelope animation across enough of an orbit for the obliquity-driven angle
-  to shift, and dramatic only for high-tilt bodies -- that is also the natural
-  build / re-open trigger. RICE is a placeholder pending deliberate scoring.
-**Tony:** re-open this item. i understand now that the dipole does not travel with the magnetosphere
-but it does have a dynamic relationship with it, so the dipole orientation "rolls" with respect to the 
-magnetosphere as the planet orbits the sun. 
+**Gap:** scope DELIBERATELY UNREFINED (Tony: capture broad, do not refine yet -- seasonal-roll-only vs full coupling is a judgment call for whoever picks it up). Visible/teachable only under envelope animation across enough of an orbit for the obliquity-driven angle to shift, dramatic only for high-tilt bodies -- the natural build/re-open trigger. RICE is a placeholder pending deliberate scoring.
 
 ### D.Priority -- real bugs
 
 #### [L-012] Osculating pre-fetch false-provenance messages
-<!-- L:012 status:OPEN upd:2026-06-15 section:D.Priority flag:CRIT rice:2/2/50/2 -->
-- **Osculating pre-fetch FALSE-PROVENANCE messages** (June 15, observed; NOT
-  fixed). On the "use existing elements" branch, get_elements_with_prompt returns
-  CACHED elements (osculating_cache_manager.py:813-815 -> get_fallback_elements,
-  which prints "[OK] Using cached elements (...)"), yet palomas_orrery.py STILL
-  prints "[SUCCESS] Mercury fetched fresh data" (4471) and "[PRE-FETCH] OK: <obj>:
-  Updated" (4473). The variable is named fresh_elements but holds cache on that
-  path. One run shows all three lines together (user chose use-existing, cache
-  loaded, "fetched fresh"/"Updated" stamped anyway). Cite-over-recalled failure
-  class [CRITICAL convention]: a provenance stamp asserting a fetch that did not
-  happen -- the exact mechanism that can hide a stale element behind a SUCCESS
-  line. The success line is HARDCODED to Mercury (`if obj_name == 'Mercury':`,
-  4464) leftover debug; other objects get only the false "Updated". Honest fix =
-  report the actual path (fetched vs cached) + the cached element's solution date
-  instead of "unknown age" (calculate_age_days, :285, returns None on a bare
-  except -> the age channel is effectively dead). LATENT (separate): fresh-save
-  writes cache[cache_key] (center-aware, :804) but get_fallback_elements reads
-  bare cache[obj_name] (:832) -- coincide for heliocentric (cache_key == bare
-  name), DIVERGE for barycentric/body-centered ('Charon@9'); one producer, two
-  key conventions.
-**Ref:** osculating_cache_manager.py:813-815/832/285/804; palomas_orrery.py:4464/4471/4473
-**Tony:** we should clarify the description of this item. i do not follow. then update rice. 
+<!-- L:012 status:OPEN upd:2026-06-21 section:D.Priority flag:CRIT rice:2/2/90/1 -->
+- **What it is (plain version).** When you choose "use existing elements" (the
+  cached path), the program correctly loads osculating elements FROM CACHE -- but
+  the console then prints messages claiming a FRESH FETCH that did not happen:
+  "[SUCCESS] Mercury fetched fresh data" and "[PRE-FETCH] OK: <obj>: Updated".
+  The log says "fresh" over cached data. (The variable is even named
+  fresh_elements but holds cache on that path.)
+- **Why CRIT (not cosmetic).** Cite-over-recalled failure class: a SUCCESS /
+  "fresh" stamp printed over cached elements can hide a STALE element -- you would
+  trust an old position because the log told you it was freshly fetched. A false
+  provenance line is exactly what the protocol treats as load-bearing. The render
+  looks fine; the trust signal is the lie.
+- **Two defects found alongside the main one:**
+  1. The "[SUCCESS] ... fetched fresh" line is HARDCODED to Mercury
+     (`if obj_name == 'Mercury':`, palomas_orrery.py:4464) -- leftover debug.
+     Every other object gets only the false "Updated".
+  2. The age channel is DEAD: calculate_age_days (:285) swallows its error in a
+     bare except and returns None, so the cached element's real solution date
+     can't be shown -- it reports "unknown age".
+- **Honest fix.** Print the ACTUAL path (fetched vs cached); on a cache hit say
+  so and show the element's real solution date instead of "fetched fresh" /
+  "unknown age". Drop the Mercury-only hardcode so the message is correct for all
+  objects.
+- **LATENT sub-bug (separate, lower-priority).** Fresh-save writes a CENTER-AWARE
+  key cache[cache_key] (:804) but the fallback reads the BARE key cache[obj_name]
+  (:832). They coincide for heliocentric (key == name) but DIVERGE for
+  barycentric / body-centered cases like 'Charon@9' -- one producer, two key
+  conventions, so a non-heliocentric center can miss or read the wrong cached
+  element. Split to its own L-handle if it grows.
+**Gap:** the logging fix (report fetched-vs-cached + real solution date; drop the Mercury hardcode) is the CRIT part, ~0.5 session. The cache-key divergence is a separate, smaller follow-on.
+**Ref:** osculating_cache_manager.py:813-815/832/285/804; palomas_orrery.py:4464/4471/4473 
 
 #### [L-013] Mercury 2019-epoch anomaly
 <!-- L:013 status:DEFERRED upd:2026-06-15 section:D.Priority flag: rice:1/1/10/2 -->
@@ -1157,12 +1161,18 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 - Comet plotted-period trace visibility (line weight/color; O6b June 10).
 
 #### [L-034] Center-body hover "Distance to Center Surface" negative-radius formatting
-<!-- L:034 status:OPEN upd:- section:D.Cosmetic flag: rice:2/2/50/2 -->
-- Center-body hover "Distance to Center Surface: -<radius> km (below mean
-  datum)" (formatter treats center as object-at-zero; pre-existing; polish
-  target is format_detailed_hover_text).
-  **Tony:** unclear about this item. in the hover text we have both the distance to center (r=0)
-  and distance to surface (r=1). we need to clarify and update rice. 
+<!-- L:034 status:OPEN upd:2026-06-21 section:D.Cosmetic flag: rice:1/1/75/0.5 -->
+- **What it is.** The detailed hover already shows two distances correctly: a
+  distance to the center body's CENTER (r=0) and a distance to its SURFACE. The
+  bug is only on the CENTER BODY'S OWN hover: because the formatter treats the
+  center as an object at the origin, its surface line renders as a NEGATIVE radius
+  -- "Distance to Center Surface: -<radius> km (below mean datum)". The
+  magnitudes are right; only the sign/label on the center body's own surface line
+  reads wrong.
+- **Fix.** In format_detailed_hover_text, special-case the center body so its own
+  surface line reads sensibly (drop the misleading minus, or relabel). Mode-5 to
+  confirm the exact wording you want.
+**Gap:** decide display wording (Mode-5), then a targeted edit to format_detailed_hover_text. Cosmetic; zero functional risk.
 
 #### [L-035] Solar shell hovertext <br> vs \n context mismatch (C6b)
 <!-- L:035 status:OPEN upd:2026-06-11 section:D.Cosmetic flag: rice:2/2/50/2 -->
@@ -1187,9 +1197,13 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 ### D.Feature -- Bucket A (near-term)
 
 #### [L-039 | #23] Earth ionosphere shell
-<!-- L:039 status:OPEN upd:- section:D.Feature-A flag: rice:2/2/50/2 -->
-- 23 Earth ionosphere shell. `[per chain]`
-**Tony:** description needed.
+<!-- L:039 status:OPEN upd:2026-06-21 section:D.Feature-A flag: rice:2/2/60/2 -->
+- **Add an ionosphere shell to Earth's visualization** -- a new atmospheric shell
+  alongside Earth's existing shells. The ionosphere is the ionized upper-atmosphere
+  region (~60-1000 km altitude, D/E/F layers). Pattern is the established one: a
+  SHELL_CONFIGS / CUSTOM_SHELLS entry with sourced altitude bounds, a checkbox
+  toggle, the single-info-marker pattern, and hover carrying km + AU per convention.
+**Gap:** SOURCE the layer boundaries before any literal (Fetched-vs-Recalled -- cite, do not recall); pick the representation (single band vs D/E/F sub-layers); then build on the Earth shell pattern. Light design, then standard shell build.
 
 #### [L-040 | #19] Plot-cube control parity + scaling/camera comprehensive review
 <!-- L:040 status:OPEN upd:2026-06-13 section:D.Feature-A flag: rice:3/3/50/3 -->
@@ -1329,11 +1343,16 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 
 ### D.Feature -- Bucket B (editorial; open-ended) `[per chain]`
 
-#### [L-044 | #22] Satellite internal-structure shells
-<!-- L:044 status:OPEN upd:- section:D.Feature-B flag: rice:3/3/90/3 -->
-Deeper-detail direction (20/N5 is the on-ramp). `[per chain]`
-**Tony:** this requires a significant design section. the idea is to develop shell structures for important satellites and other 
-objects, including asteroids and minor planets. 
+#### [L-044 | #22] Satellite (and minor-body) internal-structure shells
+<!-- L:044 status:OPEN upd:2026-06-21 section:D.Feature-B flag: rice:3/3/90/3 -->
+- **Extend internal-structure shells to satellites and minor bodies.** Today the
+  layered internal-structure treatment (core / mantle / crust, named layers with
+  sourced radii) lives on the planets and the Sun. This carries it to important
+  MOONS first (e.g. the Galilean moons, Titan, Triton, Earth's Moon), then outward
+  to ASTEROIDS and MINOR PLANETS. Each body gets sourced layer radii, a toggle,
+  single-info-marker hover (km + AU), per the existing shell pattern. 20/N5
+  (shell-resolution GUI control, L-042) is the on-ramp.
+**Gap:** SIGNIFICANT design session first (Tony): which bodies first, which layers per body, sourcing per body (Fetched-vs-Recalled on every radius). Editorial / open-ended -- build only after the design stabilizes. Bucket B.
 
 #### [L-045 | #N14] Miranda inclination tooltip
 <!-- L:045 status:OPEN upd:- section:D.Feature-B flag: rice:1/1/90/1 -->
@@ -1357,25 +1376,29 @@ convention. Low urgency; no bug, no user-visible gap.
 [D.Feature-C: tag applied 2026-06-20 -- design-before-code]
 
 #### [L-017 | #7] Tooltip rewiring globals() -> config fields
-<!-- L:017 status:OPEN upd:2026-06-20 section:D.Feature-C flag: rice:2/3/50/3 -->
+<!-- L:017 status:OPEN upd:2026-06-21 section:D.Feature-C flag: rice:2/3/50/3 -->
 13 call sites in palomas_orrery.py (L9101-L9376) pass globals() to
-build_shell_checkboxes() so it can look up tk.IntVar shell variables by
-name. Works but fragile -- any rename silently drops a checkbox. The
-alternative is a config dict {var_name: tk_var} built once and passed
-explicitly.
-**Gap:** design decision first (what replaces globals()? dict? dataclass?
-registry?), then implementation across 13 call sites. Moderate scope;
-changes live UI wiring.
+build_shell_checkboxes() so it can look up tk.IntVar shell variables by NAME
+(string). It works, but it is fragile: rename a variable and the lookup silently
+misses, dropping a checkbox with no error -- invisible until someone notices the
+missing toggle in the GUI. Recommended direction: build ONE explicit dict
+{var_name: tk_var} (or a small registry/dataclass) at startup and pass it instead
+of globals(), so a rename surfaces as a missing key, not a silent drop.
+**Gap:** design decision first (dict vs dataclass vs registry), then thread the chosen object through all 13 call sites. Touches live UI wiring -- Mode-5 the GUI after. Design-before-code.
 [D.Feature-C: tag applied 2026-06-20 -- design-before-code]
 
-#### [L-046 | #N6] Studio encounter-generator refactor + Artemis preset redo (coupled, two repos)
-<!-- L:046 status:OPEN upd:- section:D.Feature-C flag: rice:3/3/75/3 -->
-- **N6** Studio encounter-generator refactor + Artemis preset redo (coupled,
-  TWO repos; full verified specifics in the prior edition / git history;
-  design authority ENCOUNTER_EXPORT_HANDOFF_v3.md, orrery repo). N11 rides.
+#### [L-046 | #N6] Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos)
+<!-- L:046 status:OPEN upd:2026-06-21 section:D.Feature-C flag: rice:3/3/75/3 -->
+- **N6, reframed (Tony, 2026-06-21): the encounter generator is a NEW SKILL.**
+  Beyond the original scope (refactor the Studio encounter-generator + redo the
+  Artemis preset, coupled across the TWO repos), the larger intent is to
+  generalize it into a PRESET-AUTHORING capability -- a reusable tool for producing
+  many standard and special visualizations (flybys, close approaches, mission
+  encounters, special framings) as gallery presets, not a one-off Artemis fix. N11
+  rides. Design authority: ENCOUNTER_EXPORT_HANDOFF_v3.md (orrery repo); full
+  verified specifics in git history / prior edition.
   `[per chain + @2f40d9d/@730b2bf verifications]`
-  **Tony:** need more description and design conversation. the encounter generator is a new
-  skill. it can be used to create presets for many standard and special visualizations. 
+**Gap:** design conversation first -- separate (1) the immediate refactor + Artemis redo from (2) the generalized preset-authoring vision; decide how much of (2) to scope now. Coupled across two repos. Design-before-code, Bucket C.
 
 #### [L-047 | #N10] Note-composition structural refactor (behind N6)
 <!-- L:047 status:OPEN upd:- section:D.Feature-C flag: rice:2/2/50/2 -->
@@ -1451,10 +1474,18 @@ changes live UI wiring.
 ### D.Loose end to reconcile `[per chain; not re-verified]`
 
 #### [L-051] Uranus pole-value prose inconsistency (Dec -15.10 vs stray -15.18)
-<!-- L:051 status:OPEN upd:- section:D.LooseEnd flag: rice:1/2/50/1.5 -->
-- Uranus pole-value prose inconsistency (Dec -15.10 load-bearing vs stray
-  prose -15.18; reconcile when next in the file).
-  **Tony:** shouldn't this be caught by the provenance scanner? 
+<!-- L:051 status:OPEN upd:2026-06-21 section:D.LooseEnd flag: rice:1/2/50/1.5 -->
+- **What it is.** Two different Uranus pole Declination values appear in prose:
+  -15.10 (the load-bearing value actually used) and a stray -15.18 elsewhere.
+  Reconcile to one (fix the stray) when next in that file.
+- **Why the provenance scanner does NOT catch it (Tony's question).** The scanner
+  flags a numeric token that LACKS a citation within its lookback window -- it
+  checks for PRESENCE of a # Source, not AGREEMENT between two cited values. Both
+  -15.10 and -15.18 likely sit within lookback of a citation, so each individually
+  passes the "has a source" test; the scanner has no cross-value consistency check,
+  so a contradiction between two separately-cited numbers slips through. A scanner
+  BLIND SPOT, not a missed flag.
+**Gap:** find both occurrences, confirm -15.10 is correct, fix the stray -15.18. Optional: log the scanner's no-consistency-check limitation as an enhancement candidate (fold into L-002/L-003, not its own item).
 
 ## E. AU-CONVENTION COMPLIANCE CLUSTER (standing convention; one sweep)
 
