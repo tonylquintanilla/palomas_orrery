@@ -219,102 +219,101 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*42 live items; 39 need attention (`!`); 41 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*41 live items; 38 need attention (`!`); 41 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-001 | Food Insecurity (Earth System track) | BLOCKED | 1.0 | 2026-06-13 |
-| ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.0 | - |
-| ! | L-003 | Protocol amendment candidates (for v3.29) | OPEN | 1.0 | 2026-06-10 |
-| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 1.0 | 2026-06-18 |
+| ! | L-003 | Protocol amendment candidates (for v3.29) | OPEN | 5.4 | 2026-06-10 |
+| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
+| ! | L-001 | Food Insecurity (Earth System track) | BLOCKED | 2.1 | 2026-06-13 |
+| ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | - |
 
 ### D.Movement
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-007 | Bow-shock hover disclosure remainder | PENDING-GATE | 1.0 | 2026-06-11 |
 | ! | L-008 | v24 sec5 precision batch (low-risk) | OPEN | 1.0 | - |
-| ! | L-061 | Magnetosphere-dipole frame coupling / seasonal roll | OPEN | 1.0 | 2026-06-20 |
+| ! | L-061 | Magnetosphere-dipole frame coupling / seasonal roll | OPEN | 0.2 | 2026-06-20 |
 
 ### D.Priority
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 1.0 | 2026-06-15 |
-|  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 1.0 | 2026-06-15 |
+|  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 0.1 | 2026-06-15 |
 
 ### D.Structural
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 1.0 | 2026-06-18 |
-| ! | L-016 (#6) | Archive dead shell functions | OPEN | 1.0 | 2026-06-18 |
-| ! | L-020 (#26) | CUSTOM_SHELLS tooltip verification | OPEN | 1.0 | 2026-06-18 |
-| ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.0 | 2026-06-18 |
-| ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 1.0 | 2026-06-18 |
-| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 1.0 | 2026-06-18 |
+| ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2.2 | 2026-06-18 |
+| ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
+| ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
+| ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
+| ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
+| ! | L-020 (#26) | CUSTOM_SHELLS tooltip verification | OPEN | 0.9 | 2026-06-18 |
 
 ### D.Cosmetic
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-033 | Comet plotted-period trace visibility (line weight/color; O6b) | OPEN | 1.5 | 2026-06-10 |
 | ! | L-030 (#17) | GEO info-marker position | OPEN | 1.0 | - |
 | ! | L-031 (#18) | Uranus gossamer ring visibility | OPEN | 1.0 | - |
 | ! | L-032 (#41) | Sun legend ordering (ordered dispatch iteration; no manual fix) | OPEN | 1.0 | - |
-| ! | L-033 | Comet plotted-period trace visibility (line weight/color; O6b) | OPEN | 1.0 | 2026-06-10 |
 | ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.0 | - |
 | ! | L-035 | Solar shell hovertext <br> vs 
  context mismatch (C6b) | OPEN | 1.0 | 2026-06-11 |
-| ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 1.0 | 2026-06-15 |
-| ! | L-038 | Psyche encounter hardcoded fallback distances lack # Source | OPEN | 1.0 | - |
+| ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 0.9 | 2026-06-15 |
+| ! | L-038 | Psyche encounter hardcoded fallback distances lack # Source | OPEN | 0.5 | - |
 
 ### D.Feature-A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-040 (#19) | Plot-cube control parity + scaling/camera comprehensive review | OPEN | 1.5 | 2026-06-13 |
 | ! | L-039 (#23) | Earth ionosphere shell | OPEN | 1.0 | - |
-| ! | L-040 (#19) | Plot-cube control parity + scaling/camera comprehensive review | OPEN | 1.0 | 2026-06-13 |
-| ! | L-042 (#20/N5) | Shell-resolution GUI control (20/N5) + Fly-to view scaling (49) | OPEN | 1.0 | 2026-06-11 |
-| ! | L-043 | Exoplanet/binary synthetic objects hit Horizons fetch (id_type rejected) | OPEN | -- | 2026-06-16 |
+| ! | L-042 (#20/N5) | Shell-resolution GUI control (20/N5) + Fly-to view scaling (49) | OPEN | 0.5 | 2026-06-11 |
+| ! | L-043 | Exoplanet/binary synthetic objects hit Horizons fetch (id_type rejected) | OPEN | 0.4 | 2026-06-16 |
 
 ### D.Feature-B
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-044 (#22) | Satellite internal-structure shells | OPEN | 1.0 | - |
-| ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 1.0 | - |
+| ! | L-044 (#22) | Satellite internal-structure shells | OPEN | 2.7 | - |
+| ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | - |
 
 ### D.Feature-C
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 1.0 | 2026-06-20 |
+| ! | L-046 (#N6) | Studio encounter-generator refactor + Artemis preset redo (coupled, two repos) | OPEN | 2.2 | - |
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-20 |
-| ! | L-046 (#N6) | Studio encounter-generator refactor + Artemis preset redo (coupled, two repos) | OPEN | 1.0 | - |
 | ! | L-047 (#N10) | Note-composition structural refactor (behind N6) | OPEN | 1.0 | - |
 | ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.0 | 2026-06-11 |
+| ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
 
 ### D.Parked
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-|  | L-049 (#N8) | Comet info-marker superposition cluster | PARKED | 1.0 | - |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | PARKED | 1.0 | - |
+|  | L-049 (#N8) | Comet info-marker superposition cluster | PARKED | 0.5 | - |
 
 ### D.LooseEnd
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-051 | Uranus pole-value prose inconsistency (Dec -15.10 vs stray -15.18) | OPEN | 1.0 | - |
+| ! | L-051 | Uranus pole-value prose inconsistency (Dec -15.10 vs stray -15.18) | OPEN | 0.7 | - |
 
 ### E
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-052 | AU-convention compliance sweep (GEO altitude hover missing AU; km+AU on all new hover) | OPEN | 1.0 | - |
+| ! | L-052 | AU-convention compliance sweep (GEO altitude hover missing AU; km+AU on all new hover) | OPEN | 0.5 | - |
 
 ### G
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 1.0 | 2026-06-07 |
-| ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred | OPEN | 1.0 | 2026-06-12 |
+| ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
+| ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred | OPEN | 0.5 | 2026-06-12 |
 
 ### H
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.0 | 2026-06-08 |
+| ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
 
 <!-- INDEX:END -->
 
@@ -933,14 +932,9 @@ max(orbital, shell) in Session C, render-gated C6. Phase 3 tier decision --
 tier 2 adopted at the June-10 GO; tier 1 dropped; tier 3 = the resolution
 follow-on behind gate 5(b).)
 **Gap:** none -- move to section C
----
-
-## D. RECONCILED LEDGER -- OPEN
-
-### D.Movement -- Movement-track open items
 
 #### [L-007] Bow-shock hover disclosure remainder
-<!-- L:007 status:PENDING-GATE upd:2026-06-11 section:D.Movement flag: rice: -->
+<!-- L:007 status:DONE upd:2026-06-11 section:C flag: rice: -->
 - **Bow-shock hover disclosure remainder** -- DELIVERED Session C
   `[render-gated C5]`: U+N bow-shock hovers now carry the conic-model
   sourced-vs-schematic note + the animation-freeze line (this also closes
@@ -950,6 +944,11 @@ follow-on behind gate 5(b).)
 **Gap:** MOVE TO section C on the v4 gate pass (L-004).
 **Tony:** L-004 is done. 
 **Gap:** none -- move to section C
+---
+
+## D. RECONCILED LEDGER -- OPEN
+
+### D.Movement -- Movement-track open items
 
 #### [L-008] v24 sec5 precision batch (low-risk)
 <!-- L:008 status:OPEN upd:- section:D.Movement flag: rice:2/2/50/2 -->
