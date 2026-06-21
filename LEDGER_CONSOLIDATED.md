@@ -233,7 +233,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-007 | Bow-shock hover disclosure remainder | PENDING-GATE | 1.0 | 2026-06-11 |
 | ! | L-008 | v24 sec5 precision batch (low-risk) | OPEN | 1.0 | - |
-| ! | L-009 | Dipole cluster: envelope tie / offset direction / remaining cones / half_len_frac | OPEN | 1.0 | 2026-06-20 |
+| ! | L-061 | Magnetosphere-dipole frame coupling / seasonal roll | OPEN | 1.0 | 2026-06-20 |
 
 ### D.Priority
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -744,31 +744,9 @@ feature, needs clarification from Tony.
   renders as the degenerate axis-line (tilt 0, option a). This IS the +0.2 item
   -- Anderson reports 0.19 +/- 0.01 R_M.
   **Gap:** none -- move to section C
----
-
-## D. RECONCILED LEDGER -- OPEN
-
-### D.Movement -- Movement-track open items
-
-#### [L-007] Bow-shock hover disclosure remainder
-<!-- L:007 status:PENDING-GATE upd:2026-06-11 section:D.Movement flag: rice:2/2/50/2 -->
-- **Bow-shock hover disclosure remainder** -- DELIVERED Session C
-  `[render-gated C5]`: U+N bow-shock hovers now carry the conic-model
-  sourced-vs-schematic note + the animation-freeze line (this also closes
-  the Phase-1 orientation-freeze disclosure rider and the frame-1-freeze
-  rider -- one sweep, three siblings, as designed). MOVE TO C on the v4
-  gate pass.
-**Gap:** MOVE TO section C on the v4 gate pass (L-004).
-
-#### [L-008] v24 sec5 precision batch (low-risk)
-<!-- L:008 status:OPEN upd:- section:D.Movement flag: rice:2/2/50/2 -->
-- **v24 sec5 precision batch** (low-risk): inner-four bow-shock hover km/AU
-  `[verified @76c330e]` (also section E); Jupiter compressed/expanded MP
-  toggle; Earth MP/BS citation upgrade; per-body shock eccentricity.
-  `[per chain]`
 
 #### [L-009] Dipole cluster: envelope tie / offset direction / remaining cones / half_len_frac
-<!-- L:009 status:OPEN upd:2026-06-20 section:D.Movement flag: rice:2/2/50/2 -->
+<!-- L:009 status:DONE upd:2026-06-20 section:C flag: rice:2/2/50/2 -->
 - **Envelope -> dipole tie / season-derived roll** (Mode-7, conditional);
   **dipole offset DIRECTION** (Mode-7; apex stays centered until sourced);
   **REMAINING DIPOLE CONES** (verified set, June 13 @33aac56): the cone
@@ -795,12 +773,74 @@ feature, needs clarification from Tony.
   Earth + Jupiter as full swept cones (9.6 / 10.3 deg). half_len_frac: existing
   values Mode-5-confirmed acceptable, no dedicated tuning needed. L-006 closed
   in parallel. Smoke PASS @08f9831; provenance Tier-1 = 0.
-**Gap:** NARROWED. Two sub-parts remain OPEN: (1) ENVELOPE -> dipole tie /
-  season-derived roll (Mode-7, conditional -- untouched); (2) dipole offset
-  DIRECTION beyond axial -- the lateral / rotation-phase component is unmodeled
-  by design (shown as the honest envelope, disclosed in hover), pending Mode-7
-  sourcing of the true direction. Cones + offset-magnitude DONE; these two are
-  what keep L-009 OPEN.
+**Closed by decision (2026-06-20):** the swept cone (the FAST sweep of the
+  dipole axis about the spin axis) + the axial offset are the honest, legible
+  object, and they are DONE. No remainders are kept on this item -- the slower
+  frame-coupling motions are promoted to L-061 (magnetosphere-dipole frame
+  coupling / seasonal roll), because they are new physics, not unfinished cone
+  work, and a closed number should not smuggle separate work as a footnote.
+  ("No element needs to exist; it earns its place by what it teaches"; access
+  is not understanding.)
+
+  THREE MOTIONS, THREE TIMESCALES (kept for the record; only #1 is this item):
+  1. DIPOLE AXIS about the spin axis -- FAST, one rotation (hours-days). DONE:
+     this IS the cone; instantaneous azimuth unknowable -> draw the whole sweep.
+  2. OFFSET lateral direction -- MIXED (longitude-locked fast; Earth secular,
+     over decades). Axial magnitude shipped; lateral part small vs cone scale.
+     -> L-061.
+  3. ENVELOPE -> dipole SEASONAL ROLL -- SLOW, one orbit; invisible in a static
+     plot. -> the core of L-061.
+**Gap:** none -- move to section C
+---
+
+## D. RECONCILED LEDGER -- OPEN
+
+### D.Movement -- Movement-track open items
+
+#### [L-007] Bow-shock hover disclosure remainder
+<!-- L:007 status:PENDING-GATE upd:2026-06-11 section:D.Movement flag: rice:2/2/50/2 -->
+- **Bow-shock hover disclosure remainder** -- DELIVERED Session C
+  `[render-gated C5]`: U+N bow-shock hovers now carry the conic-model
+  sourced-vs-schematic note + the animation-freeze line (this also closes
+  the Phase-1 orientation-freeze disclosure rider and the frame-1-freeze
+  rider -- one sweep, three siblings, as designed). MOVE TO C on the v4
+  gate pass.
+**Gap:** MOVE TO section C on the v4 gate pass (L-004).
+
+#### [L-008] v24 sec5 precision batch (low-risk)
+<!-- L:008 status:OPEN upd:- section:D.Movement flag: rice:2/2/50/2 -->
+- **v24 sec5 precision batch** (low-risk): inner-four bow-shock hover km/AU
+  `[verified @76c330e]` (also section E); Jupiter compressed/expanded MP
+  toggle; Earth MP/BS citation upgrade; per-body shock eccentricity.
+  `[per chain]`
+
+#### [L-061] Magnetosphere-dipole frame coupling / seasonal roll
+<!-- L:061 status:OPEN upd:2026-06-20 section:D.Movement flag: rice:2/2/50/2 -->
+- **Magnetosphere-dipole frame coupling / seasonal roll** -- OPEN. Promoted from
+  L-009 (2026-06-20). The dipole cone is BODY-locked (spin-pole frame,
+  Sun-independent); the magnetosphere is SUN-locked (its bow-shock-to-tail axis
+  follows the planet->Sun line). As the planet orbits, the Sun-line sweeps
+  ~360 deg once per orbital YEAR, so the magnetosphere reorients in inertial
+  space while the spin/dipole axis stays fixed -- an apparent ROLL of the dipole
+  relative to the magnetosphere, once per orbit. (Tony's framing, 2026-06-20.)
+  AMPLITUDE = OBLIQUITY: the spin-axis-to-Sun-line angle swings over the orbit
+  with amplitude equal to the axial tilt (magnetospheric "seasons") -- near-nil
+  for Mercury (~0) and Jupiter (~3 deg); meaningful for Earth (23), Saturn (27),
+  Neptune (28); extreme for Uranus (~98 deg, pole swings toward the Sun at
+  solstice over its 84-yr orbit).
+  WHY ITS OWN ITEM (new physics, not a cone remainder): the render currently
+  DECOUPLES the two frames (a clean simplification), but the real system is
+  COUPLED -- the magnetosphere's SHAPE responds to the dipole tilt and the
+  interplanetary field, not just the Sun-line. Modeling that coupling is a
+  Mode-7 question (envelope-orientation physics -> Gemini, not asserted from
+  memory), not a render tweak. Also folds in the L-009 offset-direction
+  remainder (mode 2).
+**Tony:** capture broad; do not refine scope yet (seasonal-roll-only vs full
+  coupling is a judgment call for whoever picks it up).
+**Gap:** OPEN, scope deliberately unrefined. Visible/teachable ONLY under
+  envelope animation across enough of an orbit for the obliquity-driven angle
+  to shift, and dramatic only for high-tilt bodies -- that is also the natural
+  build / re-open trigger. RICE is a placeholder pending deliberate scoring.
 
 ### D.Priority -- real bugs
 
