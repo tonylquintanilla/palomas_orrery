@@ -85,7 +85,7 @@ what the project still needs to know, each at its own level of abstraction.
 
 **Structure.** DETAIL blocks are the single source of truth. The INDEX below
 is generated from them by `ledger_index.py` -- edit a block, re-run the tool.
-Handles are append-only (L-###, next is L-059); a closed item keeps its handle
+Handles are append-only (L-###, next is L-062); a closed item keeps its handle
 and moves to section C. Section layout:
 
 - **A** -- cross-cutting / strategic items
@@ -144,7 +144,7 @@ status changes, gap/ref notes), normally at the handoff that closes a session
 and only when asked. Tony is the integrator and the only writer to the repo --
 Claude has read-only GitHub access, so every change is reviewed and committed
 by Tony. Updates are made IN PLACE: edit the relevant detail block; do not
-re-embed a fresh copy. Handles are append-only -- the next new item is L-059;
+re-embed a fresh copy. Handles are append-only -- the next new item is L-062;
 a closed item keeps its L-### and moves to section C.
 
 **ledger_index.py -- what it does, when to run it.** The DETAIL blocks are the
@@ -192,7 +192,7 @@ notes get lost; capturing on first mention is the rule.
 **RICE scoring -- prioritization for planning.** Each DETAIL block's
 metadata line can carry an optional `rice:R/I/C/E` field at the end:
 
-    <!-- L:009 status:OPEN upd:2026-06-18 section:D.Movement flag: rice:3/3/100/2 -->
+    <!-- L:999 status:OPEN upd:2026-06-18 section:D.Movement flag: rice:3/3/100/2 -->
 
 The four dimensions, adapted for this project:
 
@@ -218,7 +218,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*46 live items; 39 need attention (`!`); 44 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*42 live items; 39 need attention (`!`); 41 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -238,16 +238,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Priority
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 1.0 | 2026-06-15 |
 |  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 1.0 | 2026-06-15 |
-| ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN | -- | 2026-06-15 |
 
 ### D.Structural
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 1.0 | 2026-06-18 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 1.0 | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 1.0 | 2026-06-18 |
-| ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-18 |
 | ! | L-020 (#26) | CUSTOM_SHELLS tooltip verification | OPEN | 1.0 | 2026-06-18 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.0 | 2026-06-18 |
 | ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 1.0 | 2026-06-18 |
@@ -264,7 +262,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.0 | - |
 | ! | L-035 | Solar shell hovertext <br> vs 
  context mismatch (C6b) | OPEN | 1.0 | 2026-06-11 |
-|  | L-036 | O11 greyed-legend display-name verdict: NO item needed | DONE | 1.0 | 2026-06-11 |
 | ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 1.0 | 2026-06-15 |
 | ! | L-038 | Psyche encounter hardcoded fallback distances lack # Source | OPEN | 1.0 | - |
 
@@ -273,7 +270,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-039 (#23) | Earth ionosphere shell | OPEN | 1.0 | - |
 | ! | L-040 (#19) | Plot-cube control parity + scaling/camera comprehensive review | OPEN | 1.0 | 2026-06-13 |
-|  | L-041 | Item 19.3 axis-control round trip (P1/P2/Phase A/Phase B + toggle follow-on) | DONE | 1.0 | 2026-06-16 |
 | ! | L-042 (#20/N5) | Shell-resolution GUI control (20/N5) + Fly-to view scaling (49) | OPEN | 1.0 | 2026-06-11 |
 | ! | L-043 | Exoplanet/binary synthetic objects hit Horizons fetch (id_type rejected) | OPEN | -- | 2026-06-16 |
 
@@ -286,6 +282,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Feature-C
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 1.0 | 2026-06-20 |
+| ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-20 |
 | ! | L-046 (#N6) | Studio encounter-generator refactor + Artemis preset redo (coupled, two repos) | OPEN | 1.0 | - |
 | ! | L-047 (#N10) | Note-composition structural refactor (behind N6) | OPEN | 1.0 | - |
 | ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.0 | 2026-06-11 |
@@ -310,9 +308,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 1.0 | 2026-06-07 |
-|  | L-054 | Gate 5(b): full resolution ships, rounded -- render-confirmed | DONE | 1.0 | 2026-06-13 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred | OPEN | 1.0 | 2026-06-12 |
-|  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | 1.0 | 2026-06-11 |
 
 ### H
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -791,6 +787,144 @@ feature, needs clarification from Tony.
   3. ENVELOPE -> dipole SEASONAL ROLL -- SLOW, one orbit; invisible in a static
      plot. -> the core of L-061.
 **Gap:** none -- move to section C
+
+#### [L-036] O11 greyed-legend display-name verdict: NO item needed
+<!-- L:036 status:DONE upd:2026-06-11 section:C flag: rice:2/2/50/2 -->
+- O11 verdict June 11: greyed-legend display names derive correctly from
+  checkbox keys -- NO item needed; recorded so it is not re-raised.
+**Gap:** none -- move to section C
+
+#### [L-041] Item 19.3 axis-control round trip (P1/P2/Phase A/Phase B + toggle follow-on)
+<!-- L:041 status:DONE upd:2026-06-16 section:C flag: rice:2/2/50/2 -->
+- (June 14 DESIGN, no code) Orrery-side axis control (item 19.3) scoped +
+    handed off: HANDOFF_item19_axis_control_orrery_v1.md, built on 1288b51 /
+    gallery 2f40d9d. DECISION (a2): scene-dict extraction only (axes +
+    aspectmode + camera + domain, verified byte-identical across the 5704/7940
+    twins); layout envelope (title/annotation/legend/margin/footer) NOT merged
+    -> divergence-audit seed (4 catalogued divergences in the handoff). Full
+    function-body merge stays off the list. FINDING: _track_axis (7652) is
+    already the complete, correct spec (range + autorange=False + dtick +
+    styling); the two MAIN paths (5704/7940) under-specify (no dtick /
+    autorange) -- THAT is the close-approach unreadability. Feature =
+    generalize the track spec to the under-specified sites via
+    build_scene_axes/build_scene, dtick from the SHARED
+    visualization_utils._calculate_grid_dtick (provable Studio parity). Q2:
+    auto-only first cut (auto dtick + non-Sun-center range autofit IF the
+    existing range logic doesn't already fit extent); user GUI fields = fast
+    follow. Q3 matrix: range never overrides S3(exoplanet)/S4(track); dtick
+    lands on S1/S2 first; S4 already correct. Two-phase: P1 byte-identical
+    extraction (Mode-5 zero-change gate), P2 turn on dtick+range (Apophis
+    render gate). Confirm-at-impl: read get_improved_axis_range /
+    get_animation_axis_range (range-autofit scope), _track_dtick source
+    (parity routing), Studio round-trip (no double-apply).      
+- (June 15) Item 19.3 Phase 2 COMPLETE. auto_dtick + autorange=False landed on
+  S1/S2 via build_scene. Base 7aecc3b -> bd768ee (builder) -> aa1a4cd (call sites).
+  build_scene gains auto_dtick (derives dtick from the range span via the SHARED
+  visualization_utils._calculate_grid_dtick -> provable Studio parity) + an
+  axis_range=None guard (emit neither dtick nor autorange when no range exists).
+  Headline fix verified: close-approach cubes now readable -- e.g. 0.0008 AU span
+  -> 0.0001 AU dtick (~15,000 km gridlines) instead of effective dtick=1. Default
+  build_scene call stays byte-identical, so Phase 1 untouched. Render gate (Tony,
+  Mode 5, aa1a4cd): static close-approach readable; everyday full-system plots fine
+  with explicit ~6-gridline dtick (intended, visible change: auto_dtick applies to
+  ALL S1/S2 plots).
+  FINDING: the load-bearing non-tracking animation-hold test PASSED -- autorange=False
+  on the up-front once-set scene SUPPRESSES Plotly per-frame autorange (grid/range
+  held across frames). This validates the "real fix (autorange suppression)" named
+  in the palomas_orrery.py June-13 note (~7847) FOR THE NON-TRACKING PATH. BOUNDARY:
+  does NOT resolve the camera-tracking (S4) per-frame autorange residual (separate
+  dedicated-session item; _track_axis untouched). Two distinct problems; only the
+  non-tracking one is closed.
+  Also folded in: removed the duplicate _calculate_grid_dtick() docstring line
+  (Phase-1 insertion artifact). Cosmetic residuals: trailing whitespace on
+  palomas_orrery.py 5711/7927; MODULE_ATLAS.md lags (auto_dtick absent) -- regen
+  when convenient.
+  19.3 Phase 1 (extraction) + Phase 2 (dtick/autorange) done. Fast-follow remains:
+  user-settable range/dtick GUI fields (orrery + Studio round trip); S3 exoplanet
+  opt-in.   
+- (June 16) Item 19.3 Phase A COMPLETE -- user-settable dtick GUI field
+  (orrery generation side). Base 30840b1 -> 1c08a8a (one transactional patch,
+  7 edit groups, all palomas_orrery.py, Mode 1). Blank field = Phase 2
+  auto_dtick; >0 overrides, threaded to all three live build_scene sites
+  (S1 ~5720, S2 ~7955, S3 ~5998, AST-confirmed 3/3). Orrery already had a
+  user-settable RANGE (custom_scale_entry); this fills the missing DTICK.
+  Studio half of the round trip was ALREADY DONE @2f40d9d (March) -- this
+  added the orrery half, not Studio.
+  S3 PARALLEL-PIPELINE FIX: exoplanet STATIC scene (bare inline scene=dict,
+  AU-coarse grid) migrated to build_scene, matching exoplanet ANIMATION
+  (already on S2 build_scene). update_layout merges -> camera/domain/theme
+  preserved; build_scene_axes emits same X/Y/Z (AU) titles. Verified static
+  AND animated (Proxima ~+/-0.0583 AU).
+  CORRECTION (Observation Override): the design-stage "manual dtick is a no-op
+  under Auto scale" caveat was WRONG. calculate_axis_range_from_orbits /
+  get_animation_axis_range never return None (concrete fit, or [-1,1]
+  fallback), so axis_range is always a concrete cube -> dtick applies under
+  Auto AND Manual, matching Tony's Studio experience. No logic changed; only
+  tooltip + 4 comment blocks corrected. build_scene None-guard (481-483) is
+  defensive only.
+  S4 (camera-track) deliberately EXCLUDED -- computes its own _track_dtick;
+  the Phase-2 per-frame-autorange boundary holds.
+  Render gate (Tony, Mode 5, 1c08a8a): ALL 6 PASS -- regression, Auto+finer
+  dtick, Manual close-approach, S3 exoplanet (static+animated), animation
+  hold, Reset clears.
+  Fast-follow REMAINING -> Phase B: Studio read-on-load (populate
+  scene_axis_range/scene_dtick fields from the loaded figure's baked grid so
+  the round trip is VISIBLE). Open decision: km-suffix on axis titles
+  (annotate vs match orrery). Handoff: HANDOFF_item19_3_phaseA_dtick_gui.md.
+  Pre-existing observation (NOT Phase A): exoplanet-animation
+  "id_type (host_star) not allowed" ValueError on host-star trajectory fetch
+  -- confirm if tracked.
+ (June 16, item 19.3 Phase B SHIPPED) Studio read-on-load round trip,
+gallery tools/gallery_studio.py, built on 2f40d9d / orrery c28eec0.
+New shared reader _read_scene_grid_from_figure; both _do_load branches
+populate scene_axis_range/scene_dtick from the figure (D3 precedence:
+explicit studio override wins, else figure); _extract_encounter_data
+routed through the same reader (+ figure dtick now surfaced in the
+read-only panel). D1 RECONCILED to the live bytes: the handoff's
+half-extent gate did not match the live dtick-keyed suffix; OPTION B
+chosen (KM_SUFFIX_MAX_AU = 0.01 emit gate on half-extent, dtick tiers
+kept inside, range-auto fallback). Closes the item-19.3 round trip
+(orrery bakes -> Studio reads + refines). Render-gate items in handoff
+sec 5. Optional later: orrery also emitting the suffix under the same
+cutoff (full title parity) -- NOT this item.
+(June 16, item 19.3 Phase B follow-on, from the render-gate observation)
+DEFAULT_CONFIG show_axes / show_grid / show_modebar flipped False -> True
+(gallery tools/gallery_studio.py, landscape editorial baseline), pushed at
+812c05f. Tony's call: the boxes should reflect what the orrery HTML
+produces on load AND these defaults should display across the other modes
+("I always turn them on"), so the global default was flipped rather than a
+surgical raw-branch-only set. Blast radius = every path that seeds from
+DEFAULT_CONFIG (app startup, Reset Defaults, landscape preset, orrery-mode
+entry, raw-orrery load) now starts with axes/grid/modebar on. Studio
+exports UNAFFECTED -- they carry their own saved toggle states in
+_studio_config, which override the default on load. show_modebar=True is
+safe vs non-Plotly input: Studio only ingests Plotly figures (others bounce
+at load), and show_modebar is only the exported HTML's Plotly
+displayModeBar flag -- never touches a tkinter window. 
+**Ref:** HANDOFF_item19_3_phaseB_studio_readonload.md; SHA chain 7aecc3b -> ... -> gallery 812c05f
+**Gap:** none -- move to section C
+
+#### [L-054] Gate 5(b): full resolution ships, rounded -- render-confirmed
+<!-- L:054 status:DONE upd:2026-06-13 section:C flag: rice:2/2/50/2 -->
+- **Gate 5(b)** RECAST (June 12); RENDER-CONFIRMED (June 13) `[render-
+  confirmed Mode 5]`: full resolution ships, rounded. Tony's June-13 pass
+  on live Mercury data confirmed (1) animated magnetosphere correct (tail
+  anti-sunward across frames, no seam/flicker at d7 rounding); (2) camera
+  tracking frames the active elements (element-extent window: tail opens
+  it, magnetosphere tightens it); (3) tracked playback centers steadily on
+  the body (cube-size wobble noted acceptable, see camera-tracking RESIDUAL);
+  (4) indicator clamp renders sensibly; (5) inertial-note hover wording.
+  Mercury-centered AND Sun-centered-track-Mercury both confirmed; saved-file
+  round trip confirmed identical to live render.
+**Gap:** none -- move to section C
+
+#### [L-057] Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED
+<!-- L:057 status:DONE upd:2026-06-11 section:C flag: rice:2/2/50/2 -->
+(CLOSED June 10-11: animation Auto-scale-vs-shells -- implemented as
+max(orbital, shell) in Session C, render-gated C6. Phase 3 tier decision --
+tier 2 adopted at the June-10 GO; tier 1 dropped; tier 3 = the resolution
+follow-on behind gate 5(b).)
+**Gap:** none -- move to section C
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -845,7 +979,7 @@ feature, needs clarification from Tony.
 ### D.Priority -- real bugs
 
 #### [L-012] Osculating pre-fetch false-provenance messages
-<!-- L:012 status:OPEN upd:2026-06-15 section:D.Priority flag: rice:2/2/50/2CRIT -->
+<!-- L:012 status:OPEN upd:2026-06-15 section:D.Priority flag:CRIT rice:2/2/50/2 -->
 - **Osculating pre-fetch FALSE-PROVENANCE messages** (June 15, observed; NOT
   fixed). On the "use existing elements" branch, get_elements_with_prompt returns
   CACHED elements (osculating_cache_manager.py:813-815 -> get_fallback_elements,
@@ -979,11 +1113,6 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   context-specific -- C6b finding, June 11). Fix in the affected
   formatter on next touch.
 
-#### [L-036] O11 greyed-legend display-name verdict: NO item needed
-<!-- L:036 status:DONE upd:2026-06-11 section:D.Cosmetic flag: rice:2/2/50/2 -->
-- O11 verdict June 11: greyed-legend display names derive correctly from
-  checkbox keys -- NO item needed; recorded so it is not re-raised.
-
 #### [L-037] WARNING: Unknown object type 'satellite' (spurious; handled downstream)
 <!-- L:037 status:OPEN upd:2026-06-15 section:D.Cosmetic flag: rice:2/2/50/2 -->
 - `WARNING: Unknown object type 'satellite'` fires once per satellite (Triton/
@@ -1099,115 +1228,6 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Tony:** Question: when we say render-confirmed Mode 5 does that mean the item is completed? Does it still belong in the open items? 
 **Gap:** remaining for item 19: scene_aspectmode + scene_camera parity / read-on-load (next-session scope); camera-tracking per-frame autorange RESIDUAL (dedicated session); 3D arrow camera controls.
 
-#### [L-041] Item 19.3 axis-control round trip (P1/P2/Phase A/Phase B + toggle follow-on)
-<!-- L:041 status:DONE upd:2026-06-16 section:D.Feature-A flag: rice:2/2/50/2 -->
-- (June 14 DESIGN, no code) Orrery-side axis control (item 19.3) scoped +
-    handed off: HANDOFF_item19_axis_control_orrery_v1.md, built on 1288b51 /
-    gallery 2f40d9d. DECISION (a2): scene-dict extraction only (axes +
-    aspectmode + camera + domain, verified byte-identical across the 5704/7940
-    twins); layout envelope (title/annotation/legend/margin/footer) NOT merged
-    -> divergence-audit seed (4 catalogued divergences in the handoff). Full
-    function-body merge stays off the list. FINDING: _track_axis (7652) is
-    already the complete, correct spec (range + autorange=False + dtick +
-    styling); the two MAIN paths (5704/7940) under-specify (no dtick /
-    autorange) -- THAT is the close-approach unreadability. Feature =
-    generalize the track spec to the under-specified sites via
-    build_scene_axes/build_scene, dtick from the SHARED
-    visualization_utils._calculate_grid_dtick (provable Studio parity). Q2:
-    auto-only first cut (auto dtick + non-Sun-center range autofit IF the
-    existing range logic doesn't already fit extent); user GUI fields = fast
-    follow. Q3 matrix: range never overrides S3(exoplanet)/S4(track); dtick
-    lands on S1/S2 first; S4 already correct. Two-phase: P1 byte-identical
-    extraction (Mode-5 zero-change gate), P2 turn on dtick+range (Apophis
-    render gate). Confirm-at-impl: read get_improved_axis_range /
-    get_animation_axis_range (range-autofit scope), _track_dtick source
-    (parity routing), Studio round-trip (no double-apply).      
-- (June 15) Item 19.3 Phase 2 COMPLETE. auto_dtick + autorange=False landed on
-  S1/S2 via build_scene. Base 7aecc3b -> bd768ee (builder) -> aa1a4cd (call sites).
-  build_scene gains auto_dtick (derives dtick from the range span via the SHARED
-  visualization_utils._calculate_grid_dtick -> provable Studio parity) + an
-  axis_range=None guard (emit neither dtick nor autorange when no range exists).
-  Headline fix verified: close-approach cubes now readable -- e.g. 0.0008 AU span
-  -> 0.0001 AU dtick (~15,000 km gridlines) instead of effective dtick=1. Default
-  build_scene call stays byte-identical, so Phase 1 untouched. Render gate (Tony,
-  Mode 5, aa1a4cd): static close-approach readable; everyday full-system plots fine
-  with explicit ~6-gridline dtick (intended, visible change: auto_dtick applies to
-  ALL S1/S2 plots).
-  FINDING: the load-bearing non-tracking animation-hold test PASSED -- autorange=False
-  on the up-front once-set scene SUPPRESSES Plotly per-frame autorange (grid/range
-  held across frames). This validates the "real fix (autorange suppression)" named
-  in the palomas_orrery.py June-13 note (~7847) FOR THE NON-TRACKING PATH. BOUNDARY:
-  does NOT resolve the camera-tracking (S4) per-frame autorange residual (separate
-  dedicated-session item; _track_axis untouched). Two distinct problems; only the
-  non-tracking one is closed.
-  Also folded in: removed the duplicate _calculate_grid_dtick() docstring line
-  (Phase-1 insertion artifact). Cosmetic residuals: trailing whitespace on
-  palomas_orrery.py 5711/7927; MODULE_ATLAS.md lags (auto_dtick absent) -- regen
-  when convenient.
-  19.3 Phase 1 (extraction) + Phase 2 (dtick/autorange) done. Fast-follow remains:
-  user-settable range/dtick GUI fields (orrery + Studio round trip); S3 exoplanet
-  opt-in.   
-- (June 16) Item 19.3 Phase A COMPLETE -- user-settable dtick GUI field
-  (orrery generation side). Base 30840b1 -> 1c08a8a (one transactional patch,
-  7 edit groups, all palomas_orrery.py, Mode 1). Blank field = Phase 2
-  auto_dtick; >0 overrides, threaded to all three live build_scene sites
-  (S1 ~5720, S2 ~7955, S3 ~5998, AST-confirmed 3/3). Orrery already had a
-  user-settable RANGE (custom_scale_entry); this fills the missing DTICK.
-  Studio half of the round trip was ALREADY DONE @2f40d9d (March) -- this
-  added the orrery half, not Studio.
-  S3 PARALLEL-PIPELINE FIX: exoplanet STATIC scene (bare inline scene=dict,
-  AU-coarse grid) migrated to build_scene, matching exoplanet ANIMATION
-  (already on S2 build_scene). update_layout merges -> camera/domain/theme
-  preserved; build_scene_axes emits same X/Y/Z (AU) titles. Verified static
-  AND animated (Proxima ~+/-0.0583 AU).
-  CORRECTION (Observation Override): the design-stage "manual dtick is a no-op
-  under Auto scale" caveat was WRONG. calculate_axis_range_from_orbits /
-  get_animation_axis_range never return None (concrete fit, or [-1,1]
-  fallback), so axis_range is always a concrete cube -> dtick applies under
-  Auto AND Manual, matching Tony's Studio experience. No logic changed; only
-  tooltip + 4 comment blocks corrected. build_scene None-guard (481-483) is
-  defensive only.
-  S4 (camera-track) deliberately EXCLUDED -- computes its own _track_dtick;
-  the Phase-2 per-frame-autorange boundary holds.
-  Render gate (Tony, Mode 5, 1c08a8a): ALL 6 PASS -- regression, Auto+finer
-  dtick, Manual close-approach, S3 exoplanet (static+animated), animation
-  hold, Reset clears.
-  Fast-follow REMAINING -> Phase B: Studio read-on-load (populate
-  scene_axis_range/scene_dtick fields from the loaded figure's baked grid so
-  the round trip is VISIBLE). Open decision: km-suffix on axis titles
-  (annotate vs match orrery). Handoff: HANDOFF_item19_3_phaseA_dtick_gui.md.
-  Pre-existing observation (NOT Phase A): exoplanet-animation
-  "id_type (host_star) not allowed" ValueError on host-star trajectory fetch
-  -- confirm if tracked.
- (June 16, item 19.3 Phase B SHIPPED) Studio read-on-load round trip,
-gallery tools/gallery_studio.py, built on 2f40d9d / orrery c28eec0.
-New shared reader _read_scene_grid_from_figure; both _do_load branches
-populate scene_axis_range/scene_dtick from the figure (D3 precedence:
-explicit studio override wins, else figure); _extract_encounter_data
-routed through the same reader (+ figure dtick now surfaced in the
-read-only panel). D1 RECONCILED to the live bytes: the handoff's
-half-extent gate did not match the live dtick-keyed suffix; OPTION B
-chosen (KM_SUFFIX_MAX_AU = 0.01 emit gate on half-extent, dtick tiers
-kept inside, range-auto fallback). Closes the item-19.3 round trip
-(orrery bakes -> Studio reads + refines). Render-gate items in handoff
-sec 5. Optional later: orrery also emitting the suffix under the same
-cutoff (full title parity) -- NOT this item.
-(June 16, item 19.3 Phase B follow-on, from the render-gate observation)
-DEFAULT_CONFIG show_axes / show_grid / show_modebar flipped False -> True
-(gallery tools/gallery_studio.py, landscape editorial baseline), pushed at
-812c05f. Tony's call: the boxes should reflect what the orrery HTML
-produces on load AND these defaults should display across the other modes
-("I always turn them on"), so the global default was flipped rather than a
-surgical raw-branch-only set. Blast radius = every path that seeds from
-DEFAULT_CONFIG (app startup, Reset Defaults, landscape preset, orrery-mode
-entry, raw-orrery load) now starts with axes/grid/modebar on. Studio
-exports UNAFFECTED -- they carry their own saved toggle states in
-_studio_config, which override the default on load. show_modebar=True is
-safe vs non-Plotly input: Studio only ingests Plotly figures (others bounce
-at load), and show_modebar is only the exported HTML's Plotly
-displayModeBar flag -- never touches a tkinter window. 
-**Ref:** HANDOFF_item19_3_phaseB_studio_readonload.md; SHA chain 7aecc3b -> ... -> gallery 812c05f
-
 #### [L-042 | #20/N5] Shell-resolution GUI control (20/N5) + Fly-to view scaling (49)
 <!-- L:042 status:OPEN upd:2026-06-11 section:D.Feature-A flag: rice:2/2/50/2 -->
   20/N5 shell-resolution GUI control (enabler; its backend partially exists
@@ -1261,7 +1281,7 @@ Deeper-detail direction (20/N5 is the on-ramp). `[per chain]`
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
 #### [L-014 | #2] Asteroid-belt migration decision
-<!-- L:014 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:014 status:OPEN upd:2026-06-20 section:D.Feature-C flag: rice:2/2/50/2 -->
 The asteroid belt renders via standalone create_main_asteroid_belt() in
 asteroid_belt_visualization_shells.py, called directly (main L2021). It is
 not in SHELL_CONFIGS (not a sphere) or CUSTOM_SHELLS (no checkbox-gated
@@ -1272,10 +1292,10 @@ rings and magnetospheres), or stay standalone?
 one fewer standalone call path. Costs: belt geometry is scattered-point
 clouds, not sphere or ring -- CUSTOM_SHELLS builders may need a new
 convention. Low urgency; no bug, no user-visible gap.
-[RECATEGORIZE -> D.Feature-C: design-before-code]
+[D.Feature-C: tag applied 2026-06-20 -- design-before-code]
 
 #### [L-017 | #7] Tooltip rewiring globals() -> config fields
-<!-- L:017 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:017 status:OPEN upd:2026-06-20 section:D.Feature-C flag: rice:2/2/50/2 -->
 13 call sites in palomas_orrery.py (L9101-L9376) pass globals() to
 build_shell_checkboxes() so it can look up tk.IntVar shell variables by
 name. Works but fragile -- any rename silently drops a checkbox. The
@@ -1284,7 +1304,7 @@ explicitly.
 **Gap:** design decision first (what replaces globals()? dict? dataclass?
 registry?), then implementation across 13 call sites. Moderate scope;
 changes live UI wiring.
-[RECATEGORIZE -> D.Feature-C: design-before-code]
+[D.Feature-C: tag applied 2026-06-20 -- design-before-code]
 
 #### [L-046 | #N6] Studio encounter-generator refactor + Artemis preset redo (coupled, two repos)
 <!-- L:046 status:OPEN upd:- section:D.Feature-C flag: rice:2/2/50/2 -->
@@ -1427,19 +1447,6 @@ changes live UI wiring.
 <!-- L:053 status:OPEN upd:2026-06-07 section:G flag: rice:2/2/50/2 -->
 - AU-convention sweep (section E): KEEP OPEN, revisit (Tony, June 7).
 
-#### [L-054] Gate 5(b): full resolution ships, rounded -- render-confirmed
-<!-- L:054 status:DONE upd:2026-06-13 section:G flag: rice:2/2/50/2 -->
-- **Gate 5(b)** RECAST (June 12); RENDER-CONFIRMED (June 13) `[render-
-  confirmed Mode 5]`: full resolution ships, rounded. Tony's June-13 pass
-  on live Mercury data confirmed (1) animated magnetosphere correct (tail
-  anti-sunward across frames, no seam/flicker at d7 rounding); (2) camera
-  tracking frames the active elements (element-extent window: tail opens
-  it, magnetosphere tightens it); (3) tracked playback centers steadily on
-  the body (cube-size wobble noted acceptable, see camera-tracking RESIDUAL);
-  (4) indicator clamp renders sensibly; (5) inertial-note hover wording.
-  Mercury-centered AND Sun-centered-track-Mercury both confirmed; saved-file
-  round trip confirmed identical to live render.
-
 #### [L-056] Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred
 <!-- L:056 status:OPEN upd:2026-06-12 section:G flag: rice:2/2/50/2 -->
 - **Phase 4 residuals** (June 12): O2/O3 console notice wording is
@@ -1466,13 +1473,6 @@ changes live UI wiring.
   the gate. Main risk: frame-1 tail doubling (known pattern, known guard).
   Static path (plot_objects L6062) already handles MAPS. O2/O3 wording and
   apsidal em-dashes remain as separate sub-items.  
-
-#### [L-057] Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED
-<!-- L:057 status:DONE upd:2026-06-11 section:G flag: rice:2/2/50/2 -->
-(CLOSED June 10-11: animation Auto-scale-vs-shells -- implemented as
-max(orbital, shell) in Session C, render-gated C6. Phase 3 tier decision --
-tier 2 adopted at the June-10 GO; tier 1 dropped; tier 3 = the resolution
-follow-on behind gate 5(b).)
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 

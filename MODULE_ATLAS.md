@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 18, 2026
-Modules: 112 | Functions: 902 | Lines: 88,570
+Generated: June 21, 2026
+Modules: 112 | Functions: 906 | Lines: 88,803
 
 ---
 
@@ -212,7 +212,7 @@ and explains in context.
 
 ### palomas_orrery_dashboard.py
 
-**Role:** gui | **Lines:** 641
+**Role:** gui | **Lines:** 654
 
 > Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite.
 
@@ -221,8 +221,8 @@ and explains in context.
 
 **Public functions:**
 
-- `class PalomasOrreryDashboard` (line 202) -- Main dashboard window.
-- `main()` (line 740)
+- `class PalomasOrreryDashboard` (line 219) -- Main dashboard window.
+- `main()` (line 753)
 
 ---
 
@@ -433,7 +433,7 @@ and explains in context.
 
 ### planet_visualization_utilities.py
 
-**Role:** rendering | **Lines:** 682
+**Role:** rendering | **Lines:** 764
 
 > planet_visualization_utilities.py - Shared geometry helpers and body-radius aliases.
 
@@ -449,7 +449,7 @@ and explains in context.
 - `create_sphere_points(radius, n_points)` (line 362) -- Create points for a sphere surface to represent celestial body layers.
 - `create_sun_direction_indicator_old(center_position)` (line 383) -- Creates a visual indicator showing the direction to the Sun (along negative X-axis).
 - `build_rotation_axis_traces(center_position, planet_name, sun_position)` (line 541) -- Build the rotation-axis primitive for one body.
-- `build_dipole_cone_traces(center_position, planet_name, sun_position)` (line 675) -- Build the magnetic dipole-cone primitive for one body (Movement 2).
+- `build_dipole_cone_traces(center_position, planet_name, sun_position)` (line 718) -- Build the magnetic dipole-cone primitive for one body (Movement 2).
 
 ---
 
@@ -2365,7 +2365,7 @@ and explains in context.
 
 ### ledger_index.py
 
-**Role:** other | **Lines:** 238
+**Role:** other | **Lines:** 296
 
 > ledger_index.py - Generate the at-a-glance INDEX for the consolidated ledger.
 
@@ -2374,15 +2374,18 @@ and explains in context.
 
 **Public functions:**
 
-- `parse_blocks(lines)` (line 55) -- Return list of dicts (one per L-block) and a list of parse problems.
-- `check(blocks, problems)` (line 78)
-- `cell(s)` (line 88) -- Make a string safe for a markdown table cell (escape the pipe).
-- `fmt_disposition(b)` (line 93)
-- `fmt_id(b)` (line 98)
-- `build_index(blocks)` (line 103)
-- `extract_block_text(lines, start_line)` (line 135) -- Extract the full text of one L-block starting at start_line (the #### header).
-- `migrate_to_section_c(text, blocks)` (line 157) -- Find all DONE blocks with MIGRATE_TRIGGER in their body that are NOT
-- `main()` (line 234)
+- `parse_rice(rice_str)` (line 77) -- Parse a rice:R/I/C/E string into (reach, impact, confidence, effort) or None.
+- `compute_score(rice_tuple)` (line 98) -- Compute RICE score: R x I x (C / 100) / E.  Returns float or None.
+- `fmt_score(score)` (line 106) -- Format a RICE score for the index table.
+- `parse_blocks(lines)` (line 113) -- Return list of dicts (one per L-block) and a list of parse problems.
+- `check(blocks, problems)` (line 137)
+- `cell(s)` (line 147) -- Make a string safe for a markdown table cell (escape the pipe).
+- `fmt_disposition(b)` (line 152)
+- `fmt_id(b)` (line 157)
+- `build_index(blocks)` (line 162)
+- `extract_block_text(lines, start_line)` (line 204) -- Extract the full text of one L-block starting at start_line (the #### header).
+- `migrate_to_section_c(text, blocks)` (line 226) -- Find all DONE blocks with MIGRATE_TRIGGER in their body that are NOT
+- `main()` (line 303)
 
 ---
 
@@ -2440,7 +2443,7 @@ and explains in context.
 
 ### shell_configs.py
 
-**Role:** other | **Lines:** 2,508
+**Role:** other | **Lines:** 2,563
 
 > shell_configs.py - Shell configuration data for all celestial bodies.
 
@@ -2451,7 +2454,7 @@ and explains in context.
 
 ### smoke_dipole_cone.py
 
-**Role:** other | **Lines:** 119
+**Role:** other | **Lines:** 144
 
 > smoke_dipole_cone.py -- container smoke test for the dipole-cone primitive (Movement 2, June 2026). Mirrors smoke_rotation_axis.py: it exercises the LIVE dispatch, not the builder in isolation, because last session's lesson was that a builder can work while the dispatch never calls it. No network...
 
@@ -2460,10 +2463,11 @@ and explains in context.
 
 **Public functions:**
 
-- `resolve_builder(body)` (line 39)
-- `generator_line(traces)` (line 46)
-- `rim_arcs(traces)` (line 53)
-- `main()` (line 58)
+- `is_degenerate(body)` (line 44)
+- `resolve_builder(body)` (line 48)
+- `generator_line(traces)` (line 55)
+- `rim_arcs(traces)` (line 62)
+- `main()` (line 67)
 
 ---
 
@@ -2556,7 +2560,7 @@ and explains in context.
 | incremental_cache_manager | cache | 657 | 1 | 4 |
 | info_dictionary | data | 2,046 | 0 | 9 |
 | jupiter_visualization_shells | rendering/shells | 886 | 3 | 1 |
-| ledger_index | other | 238 | 0 | 0 |
+| ledger_index | other | 296 | 0 | 0 |
 | mars_visualization_shells | rendering/shells | 799 | 2 | 1 |
 | measure_animation_html | other | 99 | 0 | 0 |
 | measure_perframe_elements | other | 123 | 4 | 0 |
@@ -2578,11 +2582,11 @@ and explains in context.
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
 | palomas_orrery | gui | 9,490 | 29 | 0 |
-| palomas_orrery_dashboard | gui | 641 | 0 | 0 |
+| palomas_orrery_dashboard | gui | 654 | 0 | 0 |
 | palomas_orrery_helpers | utility | 773 | 10 | 2 |
 | planet9_visualization_shells | rendering/shells | 267 | 1 | 1 |
 | planet_visualization | rendering | 711 | 18 | 5 |
-| planet_visualization_utilities | rendering | 682 | 2 | 20 |
+| planet_visualization_utilities | rendering | 764 | 2 | 20 |
 | planetarium_apparent_magnitude | rendering | 352 | 11 | 1 |
 | planetarium_distance | rendering | 399 | 11 | 1 |
 | plot_data_exchange | pipeline | 168 | 0 | 3 |
@@ -2602,10 +2606,10 @@ and explains in context.
 | sgr_a_visualization_core_arcs | pipeline | 535 | 1 | 0 |
 | sgr_a_visualization_precession | rendering | 377 | 3 | 0 |
 | shared_utilities | utility | 202 | 1 | 7 |
-| shell_configs | other | 2,508 | 5 | 4 |
+| shell_configs | other | 2,563 | 5 | 4 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
-| smoke_dipole_cone | other | 119 | 4 | 0 |
+| smoke_dipole_cone | other | 144 | 4 | 0 |
 | smoke_phase4 | other | 123 | 1 | 0 |
 | smoke_rotation_axis | other | 145 | 4 | 0 |
 | social_media_export | pipeline | 969 | 1 | 2 |

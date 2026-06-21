@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: June 18, 2026
+Generated: June 21, 2026
 Files scanned: 112
-Total findings: 499
-Constants: 66 | Dicts: 32 | Display strings: 401
+Total findings: 500
+Constants: 67 | Dicts: 32 | Display strings: 401
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -38,7 +38,7 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 0 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 148 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 334 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 335 |
 | 4 | 1-4 | NO ACTION NEEDED | 17 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -757,6 +757,12 @@ is planned for a future session.
 | 170 | constant | SGR_A_DISTANCE_PC | 8178.0 | 2 | 3 | **6** | Has source citation | Numeric constant in data module |
 | 171 | constant | SGR_A_DISTANCE_LY | 26670.0 | 2 | 3 | **6** | Has source citation | Numeric constant in data module |
 
+### smoke_dipole_cone.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 41 | constant | _TILT_EPS_DEG | 0.5 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+
 ### solar_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -894,7 +900,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 190 | dict | SECTION_SYMBOLS[...] | (4 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 207 | dict | SECTION_SYMBOLS[...] | (4 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
 
 ### provenance_scanner.py
 
