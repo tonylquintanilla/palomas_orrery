@@ -219,15 +219,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*41 live items; 38 need attention (`!`); 41 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*43 live items; 40 need attention (`!`); 43 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-003 | Protocol amendment candidates (for v3.29) | OPEN | 5.4 | 2026-06-10 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
-| ! | L-001 | Food Insecurity (Earth System track) | BLOCKED | 2.1 | 2026-06-13 |
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 2.4 | 2026-06-21 |
+| ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | - |
+| ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 
 ### D.Movement
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -324,20 +326,29 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:BLOCKED upd:2026-06-13 section:A flag: rice:3/3/70/3 -->
-- **Food Insecurity (REOPENED, active).** Earth System track, not the orrery
-  refactor. Design locked: HANDOFF_food_insecurity_design_v1.md +
+<!-- L:001 status:OPEN upd:2026-06-21 section:A flag: rice:3/3/80/3 -->
+- **Food Insecurity (REOPENED, active; key no longer the gate).** Earth System
+  track, not the orrery refactor. Design locked: HANDOFF_food_insecurity_design_v1.md +
   MANIFEST_food_insecurity_sudan_first_cut.md (Sudan first cut, IPC KML vector
   polygons / approach B, folders-per-period, transcribe-not-synthesize stance).
-  Status: awaiting IPC Public API key (request submitted; CC BY-NC-SA 3.0 IGO
-  terms reviewed and compatible with the non-commercial educational use).
-  Build base will be HEAD at build time (design base was de12f56). RELEASE-DRIFT
-  CORRECTION to fold in at build: the current Sudan release is Feb-May 2026
-  Current + projections to Jan 2027, and names NO current Famine areas -- so the
-  manifest's section-10 El Fasher/Kadugli Phase-5 spot-check (Sept 2025 picture)
-  must be rewritten to the current classification.
-**Gap:** awaiting IPC Public API key (submitted; no response ~1 week as of June 16); + release-drift correction (manifest sec-10 El Fasher/Kadugli rewrite to the current Feb-May 2026 classification).
-**Tony:** We can proceed with this item using another source for IPC ratings. I have not received a api key from ipc. 
+  SOURCE DECISION (2026-06-21, Tony): proceed via the no-key HDX mirror rather
+  than wait on the IPC key. HDX dataset "Sudan: Acute Food Insecurity Country
+  Data" (data.humdata.org) carries IPC's own analyses, downloadable without an
+  IPC key, scriptable via hdx-python-api (v6.6.8 on PyPI). Provenance line is
+  "IPC, retrieved via HDX" (mirror -- name the retrieval path), NOT bare "IPC"
+  and NOT FEWS NET (a different source that would change the Source line and may
+  classify differently). If the IPC key arrives later, swap to the canonical
+  api.ipcinfo.org path for cleaner provenance; the transcribe-not-synthesize
+  stance is identical either way. SANDBOX WALL unchanged: data.humdata.org is
+  not reachable from Claude's environment -- the fetch is written against the
+  documented schema here, real bytes arrive only when it runs on Tony's machine
+  (the coral arrangement, key-free). Build base = HEAD at build time (design base
+  was de12f56). RELEASE-DRIFT CORRECTION to fold in at build: the current Sudan
+  release is Feb-May 2026 Current + projections to Jan 2027, names NO current
+  Famine areas -- so the manifest's section-10 El Fasher/Kadugli Phase-5
+  spot-check (Sept 2025 picture) must be rewritten to the current classification.
+**Gap:** build next session via HDX no-key path: confirm the HDX Sudan IPC dataset resource list + GeoJSON geometry resource at fetch time (hdx-python-api), then mirror the coral requests pattern; + release-drift correction (manifest sec-10 rewrite to Feb-May 2026). Provenance line "IPC, retrieved via HDX".
+**Ref:** HANDOFF_food_insecurity_design_v1.md + MANIFEST_food_insecurity_sudan_first_cut.md (design base de12f56); HDX dataset "Sudan: Acute Food Insecurity Country Data"; hdx-python-api. 
 
 #### [L-002] Protocol -> Skills refactor (process/tooling)
 <!-- L:002 status:OPEN upd:- section:A flag: rice:3/3/50/3 -->
@@ -406,7 +417,24 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** build next session. One genuine open call left (build, not design): confirm ONI file URL + IRI plume parse / skill-calibration params at HEAD before hardcoding (cached-CSV fallback if scrape unstable; model-spread band fallback if calibration params unavailable). Provenance-scan new module (Tier-1=0) before push. Resolved: plume=calibrated Gaussian envelope; schematic=Plotly; 2026 band=provisional-now; no extra traces.
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
 
-**Tony:** Unrelated to L-060. General comment. We should add an item to review the README file since its last update to include important developments from the handoffs and the ledger. We should open another item to update the Note in the orrery GUI.
+#### [L-062] README refresh -- fold in handoff + ledger developments
+<!-- L:062 status:OPEN upd:2026-06-21 section:A flag: rice:2/1/75/1 -->
+- **README review/refresh.** Review the repo README against its last update and
+  fold in developments captured since in the handoffs and this ledger (Movement
+  track complete, animation engine, item-19.3 axis control, shell-consolidation
+  refactor complete, Gallery/Studio round trip, Earth System track). Goal: a
+  current public-facing description matching what the code actually does. Paired
+  with L-063 (in-GUI Note) -- both are user-facing text that has drifted from
+  project state.
+**Gap:** read current README at HEAD; draft a refresh from the handoff/ledger record; Tony reviews + commits. Scope-light, mostly assembly not design.
+
+#### [L-063] Orrery GUI Note text update
+<!-- L:063 status:OPEN upd:2026-06-21 section:A flag: rice:2/1/50/0.5 -->
+- **Update the Note in the orrery GUI.** The in-app Note text (palomas_orrery.py)
+  has drifted from current project state; refresh it to reflect current scope.
+  Paired with L-062 as the user-facing text refresh. Small Mode-1 edit once the
+  new wording is decided.
+**Gap:** decide the new Note wording (light design -- what should it say now?), then a Mode-1 snippet into palomas_orrery.py (grep the current Note string first). Could alternatively live in D.Cosmetic; kept in A, paired with L-062.
 
 ## PENDING ACTION (Tony-side)
 
@@ -952,11 +980,14 @@ follow-on behind gate 5(b).)
 
 #### [L-008] v24 sec5 precision batch (low-risk)
 <!-- L:008 status:OPEN upd:- section:D.Movement flag: rice:2/2/50/2 -->
-- **v24 sec5 precision batch** (low-risk): inner-four bow-shock hover km/AU
-  `[verified @76c330e]` (also section E); Jupiter compressed/expanded MP
+- **v24 sec5 precision batch** (low-risk): Jupiter compressed/expanded MP
   toggle; Earth MP/BS citation upgrade; per-body shock eccentricity.
-  `[per chain]`
-  **Tony:** unclear what this refers to. Isn't this part of L-007? 
+  `[per chain]` (The inner-four bow-shock hover km/AU sub-item `[verified
+  @76c330e]` is de-duped to L-052 / section E -- the AU-convention home -- so it
+  is not double-counted; the precision batch keeps the three physics sub-items.)
+**Note (2026-06-21):** distinct from L-007. L-007 was the bow-shock hover
+  DISCLOSURE (sourced-vs-schematic + animation-freeze note), now DONE / in C.
+  L-008 is the precision-VALUES batch -- different content, real remaining work.
 
 #### [L-061] Magnetosphere-dipole frame coupling / seasonal roll
 <!-- L:061 status:OPEN upd:2026-06-20 section:D.Movement flag: rice:1/1/50/3 -->
