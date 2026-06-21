@@ -3,7 +3,8 @@
 Tony Quintanilla, PE | Claude | Palomas Orrery Project
 Consolidated: June 7, 2026 from handoff v28; supersedes all prior in-handoff
 ledgers. Current HEAD: see git log (repo is the source of truth).
-Module updated: June 2026 with Anthropic's Claude Sonnet 4.6.
+Module updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 + Claude Fable 5
+Review and RICE update Tony 6-21-2026
 
 ---
 
@@ -324,7 +325,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:BLOCKED upd:2026-06-13 section:A flag: rice:2/2/50/2 -->
+<!-- L:001 status:BLOCKED upd:2026-06-13 section:A flag: rice:3/3/70/3 -->
 - **Food Insecurity (REOPENED, active).** Earth System track, not the orrery
   refactor. Design locked: HANDOFF_food_insecurity_design_v1.md +
   MANIFEST_food_insecurity_sudan_first_cut.md (Sudan first cut, IPC KML vector
@@ -337,9 +338,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
   manifest's section-10 El Fasher/Kadugli Phase-5 spot-check (Sept 2025 picture)
   must be rewritten to the current classification.
 **Gap:** awaiting IPC Public API key (submitted; no response ~1 week as of June 16); + release-drift correction (manifest sec-10 El Fasher/Kadugli rewrite to the current Feb-May 2026 classification).
+**Tony:** We can proceed with this item using another source for IPC ratings. I have not received a api key from ipc. 
 
 #### [L-002] Protocol -> Skills refactor (process/tooling)
-<!-- L:002 status:OPEN upd:- section:A flag: rice:2/2/50/2 -->
+<!-- L:002 status:OPEN upd:- section:A flag: rice:3/3/50/3 -->
 - **Protocol -> Skills refactor (process/tooling, not orrery code).** v27 idea:
   split the trigger-fired PROCEDURE layer (docstring standard, agentic pre-test,
   provenance-scanner mechanics, single-info-marker pattern, Horizons center rules,
@@ -352,7 +354,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** own sketch-first session: design which skills + triggers before building; CRITICAL gates (SHA round trip, verify-execution, enumerate-uploads) must stay resident.
 
 #### [L-003] Protocol amendment candidates (for v3.29)
-<!-- L:003 status:OPEN upd:2026-06-10 section:A flag: rice:2/2/50/2 -->
+<!-- L:003 status:OPEN upd:2026-06-10 section:A flag: rice:3/3/90/1.5 -->
 - **Protocol amendment candidates (for v3.29; from the animation refactor):**
   - The xvfb SystemButtonFace<->gray90 sed round trip is NOT idempotent on files
     that natively contain gray90 (palomas_orrery.py has 26 native gray90
@@ -371,7 +373,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** fold into protocol v3.29.
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
-<!-- L:060 status:OPEN upd:2026-06-18 section:A flag: rice:2/2/50/2 -->
+<!-- L:060 status:OPEN upd:2026-06-18 section:A flag: rice:3/3/75/2.5 -->
 - **ENSO standalone gallery chart (design locked, build next session).** Earth
   System track, not the orrery refactor. Single-unit (deg C) chart leading with
   RONI so El Nino / La Nina state reads honestly in a warming climate; ONI as a
@@ -404,6 +406,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
   it risks leaking when L-060 closes.
 **Gap:** build next session. One genuine open call left (build, not design): confirm ONI file URL + IRI plume parse / skill-calibration params at HEAD before hardcoding (cached-CSV fallback if scrape unstable; model-spread band fallback if calibration params unavailable). Provenance-scan new module (Tier-1=0) before push. Resolved: plume=calibrated Gaussian envelope; schematic=Plotly; 2026 band=provisional-now; no extra traces.
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track); energy_imbalance.py (Phase 2 target).
+
+**Tony:** Unrelated to L-060. General comment. We should add an item to review the README file since its last update to include important developments from the handoffs and the ledger. We should open another item to update the Note in the orrery GUI.
 
 ## PENDING ACTION (Tony-side)
 
@@ -452,6 +456,8 @@ bow-shock hover disclosure remainder was delivered in Session C
 Tier-1 FIX NOW = 0]`. The clean mark held through the entire animation
 refactor.
 
+**Tony:** This item does not have an L-number or header and should be closed and moved to C.
+
 ---
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
@@ -472,6 +478,7 @@ legendgroup; 57 Neptune double-leader; 58 MAPS placeholder legendgroups;
 N1 osculating-marker "color not defined"; 36/39 Neptune/Uranus provenance Tier-1
 display strings; 53 Neptune magnetic-center marker -> square-open;
 N2-orphan Uranus dipole SIGN closed by convention.
+**Tony:** this item does not have an L-number or header. 
 
 Closed SINCE v23 (Movement chain + verified):
 - **24 Bow shocks (all 8)** -- DONE (v24). **Magnetosphere nest sizing** -- DONE
@@ -546,6 +553,7 @@ Closed SINCE v23 (Movement chain + verified):
   voyager1h_var) are DEAD/unwired; the live "2024 DW" var is asteroid_dw_var
   (already in the 182 objects); the sweep re-zeros the dead 4 harmlessly (D-sweep
   candidates).
+  **Tony:** this item does not have an L-number or header. 
 
 
 #### [L-004] Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push
@@ -932,7 +940,7 @@ follow-on behind gate 5(b).)
 ### D.Movement -- Movement-track open items
 
 #### [L-007] Bow-shock hover disclosure remainder
-<!-- L:007 status:PENDING-GATE upd:2026-06-11 section:D.Movement flag: rice:2/2/50/2 -->
+<!-- L:007 status:PENDING-GATE upd:2026-06-11 section:D.Movement flag: rice: -->
 - **Bow-shock hover disclosure remainder** -- DELIVERED Session C
   `[render-gated C5]`: U+N bow-shock hovers now carry the conic-model
   sourced-vs-schematic note + the animation-freeze line (this also closes
@@ -940,6 +948,8 @@ follow-on behind gate 5(b).)
   rider -- one sweep, three siblings, as designed). MOVE TO C on the v4
   gate pass.
 **Gap:** MOVE TO section C on the v4 gate pass (L-004).
+**Tony:** L-004 is done. 
+**Gap:** none -- move to section C
 
 #### [L-008] v24 sec5 precision batch (low-risk)
 <!-- L:008 status:OPEN upd:- section:D.Movement flag: rice:2/2/50/2 -->
@@ -947,9 +957,10 @@ follow-on behind gate 5(b).)
   `[verified @76c330e]` (also section E); Jupiter compressed/expanded MP
   toggle; Earth MP/BS citation upgrade; per-body shock eccentricity.
   `[per chain]`
+  **Tony:** unclear what this refers to. Isn't this part of L-007? 
 
 #### [L-061] Magnetosphere-dipole frame coupling / seasonal roll
-<!-- L:061 status:OPEN upd:2026-06-20 section:D.Movement flag: rice:2/2/50/2 -->
+<!-- L:061 status:OPEN upd:2026-06-20 section:D.Movement flag: rice:1/1/50/3 -->
 - **Magnetosphere-dipole frame coupling / seasonal roll** -- OPEN. Promoted from
   L-009 (2026-06-20). The dipole cone is BODY-locked (spin-pole frame,
   Sun-independent); the magnetosphere is SUN-locked (its bow-shock-to-tail axis
@@ -975,6 +986,9 @@ follow-on behind gate 5(b).)
   envelope animation across enough of an orbit for the obliquity-driven angle
   to shift, and dramatic only for high-tilt bodies -- that is also the natural
   build / re-open trigger. RICE is a placeholder pending deliberate scoring.
+**Tony:** re-open this item. i understand now that the dipole does not travel with the magnetosphere
+but it does have a dynamic relationship with it, so the dipole orientation "rolls" with respect to the 
+magnetosphere as the planet orbits the sun. 
 
 ### D.Priority -- real bugs
 
@@ -1000,9 +1014,10 @@ follow-on behind gate 5(b).)
   name), DIVERGE for barycentric/body-centered ('Charon@9'); one producer, two
   key conventions.
 **Ref:** osculating_cache_manager.py:813-815/832/285/804; palomas_orrery.py:4464/4471/4473
+**Tony:** we should clarify the description of this item. i do not follow. then update rice. 
 
 #### [L-013] Mercury 2019-epoch anomaly
-<!-- L:013 status:DEFERRED upd:2026-06-15 section:D.Priority flag: rice:2/2/50/2 -->
+<!-- L:013 status:DEFERRED upd:2026-06-15 section:D.Priority flag: rice:1/1/10/2 -->
 - **Mercury 2019-epoch anomaly** (June 15, UNRESOLVED, deferred to recurrence).
   doc-1 rendered Mercury's Keplerian with epoch 2019-01-01 osc. / 2018 perihelion
   while Venus/Earth were current. NOT stale cache (project is 18 months old) and
@@ -1016,6 +1031,7 @@ follow-on behind gate 5(b).)
   theorizing. LESSON re-affirmed: Claude's "7-year stale cache" was a recalled
   inference dressed as fact; Tony's domain knowledge overrode it (Observation
   Override).
+  **Tony:** this was a one-time observation. i do not know what caused it. pending better definition. 
 
 ### D.Structural -- dead-code / honest shell files (Phase 3)
 
@@ -1023,7 +1039,7 @@ follow-on behind gate 5(b).)
 **Tony:** dead code items are good canditates for a cleanup pass. 
 
 #### [L-015 | #5] _info import cleanup (~89+87 imports, 2 files)
-<!-- L:015 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:015 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2.5/1/75/2 -->
 Named dead imports removed (hover_text_sun, create_planet_visualization)
 from helpers.py [verified @feab717, patched this session].
 **Gap:** ~78 remaining dead _info string imports in helpers.py (89 imported,
@@ -1031,7 +1047,7 @@ from helpers.py [verified @feab717, patched this session].
 **Ref:** grep confirmation this session; patch_dead_imports.py.
 
 #### [L-016 | #6] Archive dead shell functions
-<!-- L:016 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:016 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:1/1/90/1 -->
 create_planet_visualization() at planet_visualization.py L558 is annotated
 RETIRED (June 2026, Phase 2.5). Zero callers confirmed -- all references
 are in comments/docstrings. Two retired Sun functions in the same file
@@ -1042,7 +1058,7 @@ animate_objects), then delete bodies. Low risk; cleanup only.
 **Ref:** planet_visualization.py L558, L293, L306; neptune_visualization_shells.py.
 
 #### [L-020 | #26] CUSTOM_SHELLS tooltip verification
-<!-- L:020 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:020 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:1/2/90/2 -->
 Verify that every CUSTOM_SHELLS entry in shell_configs.py has a tooltip
 and that the tooltip text is accurate. CUSTOM_SHELLS covers rotation axes,
 sodium tail, magnetospheres, bow shocks, radiation belts, rings, and
@@ -1050,9 +1066,11 @@ field-aligned currents across Moon, Pluto, Mercury, Venus, Earth, Mars,
 Jupiter, Saturn, Uranus, Neptune.
 **Gap:** scan CUSTOM_SHELLS dict; verify tooltip key present and text
 reasonable. Could be scripted. Zero code risk.
+**Tony:** we have verified the hovertext by mode 5 a number of times. a simple grep could
+determine if any were inadvertently missed or misconfigured. 
 
 #### [L-025 | #N7] Reduced to custom-geometry inline markers only
-<!-- L:025 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:025 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/50/2 -->
 The Phase 3 info-marker sweep (141 conversions, 18 files, May 2026) moved
 sphere-shell markers to the create_info_marker() factory. Inline marker
 dicts should now only remain in CUSTOM_SHELLS builders (rings,
@@ -1060,30 +1078,37 @@ magnetospheres, radiation belts, etc.) which need geometry-specific
 positioning.
 **Gap:** audit -- grep for inline marker dicts outside CUSTOM_SHELLS
 builders. If none found, close. Zero code risk.
+**Tony:** unclear on the technical significance. I don't recall a mode 5 issue. 
 
 #### [L-026 | #9] palomas_orrery_helpers.py CRLF -> LF
-<!-- L:026 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:026 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/75/2 -->
 File confirmed CRLF (verified this session @7964193). Functional no-op
 to convert, but the diff touches every line, so best as a standalone
 commit with no other changes.
 **Gap:** convert CRLF -> LF (binary-mode script or dos2unix). Do as
 isolated commit. Low risk but noisy diff.
+**Tony:** this should be part of a general sweep of the code base for LF conversion. 
+this is a maintenance item to keep the codebase platform neutral, which is the larger goal
+and should be stated clearly. 
 
 #### [L-027 | #61] Platform Neutrality (SystemButtonFace)
-<!-- L:027 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:027 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/75/2 -->
 26 occurrences of the Tk color name SystemButtonFace in palomas_orrery.py.
 Resolves on Windows; fails on Linux/macOS. The xvfb pre-test sed swap is
 a workaround, not a fix. Options: hex literal '#F0F0F0', platform
 detection (sys.platform), or ttk styling.
 **Gap:** choose replacement strategy, then sweep. Design decision before
 build. Moderate scope (26 sites); low functional risk (cosmetic only).
+**Tony:** this has the same purpose as L-026. 
 
 #### [L-028] ASCII em-dash violation, comet_visualization_shells.py L257/505/519
-<!-- L:028 status:OPEN upd:2026-06-11 section:D.Structural flag: rice:2/2/50/2 -->
+<!-- L:028 status:OPEN upd:2026-06-11 section:D.Structural flag: rice:1/1/100/1 -->
 Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
 
 ### D.Cosmetic -- polish (bundle when convenient)
+
+**Tony:** the `[per chain]` notes require development. probably a mode 5 pass and rice updates. 
 
 #### [L-030 | #17] GEO info-marker position
 <!-- L:030 status:OPEN upd:- section:D.Cosmetic flag: rice:2/2/50/2 -->
@@ -1098,7 +1123,7 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 `[per chain]`
 
 #### [L-033] Comet plotted-period trace visibility (line weight/color; O6b)
-<!-- L:033 status:OPEN upd:2026-06-10 section:D.Cosmetic flag: rice:2/2/50/2 -->
+<!-- L:033 status:OPEN upd:2026-06-10 section:D.Cosmetic flag: rice:2/1.5/100/2 -->
 - Comet plotted-period trace visibility (line weight/color; O6b June 10).
 
 #### [L-034] Center-body hover "Distance to Center Surface" negative-radius formatting
@@ -1106,6 +1131,8 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 - Center-body hover "Distance to Center Surface: -<radius> km (below mean
   datum)" (formatter treats center as object-at-zero; pre-existing; polish
   target is format_detailed_hover_text).
+  **Tony:** unclear about this item. in the hover text we have both the distance to center (r=0)
+  and distance to surface (r=1). we need to clarify and update rice. 
 
 #### [L-035] Solar shell hovertext <br> vs \n context mismatch (C6b)
 <!-- L:035 status:OPEN upd:2026-06-11 section:D.Cosmetic flag: rice:2/2/50/2 -->
@@ -1114,26 +1141,28 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   formatter on next touch.
 
 #### [L-037] WARNING: Unknown object type 'satellite' (spurious; handled downstream)
-<!-- L:037 status:OPEN upd:2026-06-15 section:D.Cosmetic flag: rice:2/2/50/2 -->
+<!-- L:037 status:OPEN upd:2026-06-15 section:D.Cosmetic flag: rice:1/1/90/1 -->
 - `WARNING: Unknown object type 'satellite'` fires once per satellite (Triton/
   Despina/Galatea in the June-15 gate). Handled correctly downstream (orbits
   plotted, Keplerian properly skipped as Satellites) -- spurious; a type-dispatch
   that does not list 'satellite'. Silence on next touch of that dispatch.
 
 #### [L-038] Psyche encounter hardcoded fallback distances lack # Source
-<!-- L:038 status:OPEN upd:- section:D.Cosmetic flag: rice:2/2/50/2 -->
+<!-- L:038 status:OPEN upd:- section:D.Cosmetic flag: rice:1/1/75/1.5 -->
 - Psyche encounter HARDCODED FALLBACK distances (8,009 km Mars GA / 1,151 km
   Phobos), used when Horizons has no ephemeris past 2029-06-11 (expected,
   graceful), lack a `# Source:` -- add one (provenance discipline) on next touch.
+  **Tony:** unclear why the provenance scanner has not flagged this item. 
 
 ### D.Feature -- Bucket A (near-term)
 
 #### [L-039 | #23] Earth ionosphere shell
 <!-- L:039 status:OPEN upd:- section:D.Feature-A flag: rice:2/2/50/2 -->
 - 23 Earth ionosphere shell. `[per chain]`
+**Tony:** description needed.
 
 #### [L-040 | #19] Plot-cube control parity + scaling/camera comprehensive review
-<!-- L:040 status:OPEN upd:2026-06-13 section:D.Feature-A flag: rice:2/2/50/2 -->
+<!-- L:040 status:OPEN upd:2026-06-13 section:D.Feature-A flag: rice:3/3/50/3 -->
 - **19 Plot-cube control parity + SCALING/CAMERA COMPREHENSIVE REVIEW** --
   JOINED / cross-repo. The original parity scope (scene_axis_range,
   scene_dtick, aspectmode, camera orientation, axes/grid toggles; Studio
@@ -1229,7 +1258,7 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** remaining for item 19: scene_aspectmode + scene_camera parity / read-on-load (next-session scope); camera-tracking per-frame autorange RESIDUAL (dedicated session); 3D arrow camera controls.
 
 #### [L-042 | #20/N5] Shell-resolution GUI control (20/N5) + Fly-to view scaling (49)
-<!-- L:042 status:OPEN upd:2026-06-11 section:D.Feature-A flag: rice:2/2/50/2 -->
+<!-- L:042 status:OPEN upd:2026-06-11 section:D.Feature-A flag: rice:2/1/50/2 -->
   20/N5 shell-resolution GUI control (enabler; its backend partially exists
   since Session A -- bow-shock conic already parameterized, sphere-shell
   n_points per-config; remaining: create_magnetosphere_shape promotion +
@@ -1238,7 +1267,7 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   `[per chain unless tagged]`
 
 #### [L-043] Exoplanet/binary synthetic objects hit Horizons fetch (id_type rejected)
-<!-- L:043 status:OPEN upd:2026-06-16 section:D.Feature-A flag: rice:2/2/50/2noise -->
+<!-- L:043 status:OPEN upd:2026-06-16 section:D.Feature-A flag: rice:1/1/75/2 -->
 - (June 16) OBSERVATION logged (pre-existing, NOT item 19.3 / Phase A).
   Exoplanet + binary system plots (static AND animated) route synthetic
   objects through the Horizons fetch path, which rejects their identifiers.
@@ -1271,17 +1300,20 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 ### D.Feature -- Bucket B (editorial; open-ended) `[per chain]`
 
 #### [L-044 | #22] Satellite internal-structure shells
-<!-- L:044 status:OPEN upd:- section:D.Feature-B flag: rice:2/2/50/2 -->
+<!-- L:044 status:OPEN upd:- section:D.Feature-B flag: rice:3/3/90/3 -->
 Deeper-detail direction (20/N5 is the on-ramp). `[per chain]`
+**Tony:** this requires a significant design section. the idea is to develop shell structures for important satellites and other 
+objects, including asteroids and minor planets. 
 
 #### [L-045 | #N14] Miranda inclination tooltip
-<!-- L:045 status:OPEN upd:- section:D.Feature-B flag: rice:2/2/50/2 -->
+<!-- L:045 status:OPEN upd:- section:D.Feature-B flag: rice:1/1/90/1 -->
 `[per chain]`
+**Tony:** need description. 
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
 #### [L-014 | #2] Asteroid-belt migration decision
-<!-- L:014 status:OPEN upd:2026-06-20 section:D.Feature-C flag: rice:2/2/50/2 -->
+<!-- L:014 status:OPEN upd:2026-06-20 section:D.Feature-C flag: rice:1/1/75/2 -->
 The asteroid belt renders via standalone create_main_asteroid_belt() in
 asteroid_belt_visualization_shells.py, called directly (main L2021). It is
 not in SHELL_CONFIGS (not a sphere) or CUSTOM_SHELLS (no checkbox-gated
@@ -1295,7 +1327,7 @@ convention. Low urgency; no bug, no user-visible gap.
 [D.Feature-C: tag applied 2026-06-20 -- design-before-code]
 
 #### [L-017 | #7] Tooltip rewiring globals() -> config fields
-<!-- L:017 status:OPEN upd:2026-06-20 section:D.Feature-C flag: rice:2/2/50/2 -->
+<!-- L:017 status:OPEN upd:2026-06-20 section:D.Feature-C flag: rice:2/3/50/3 -->
 13 call sites in palomas_orrery.py (L9101-L9376) pass globals() to
 build_shell_checkboxes() so it can look up tk.IntVar shell variables by
 name. Works but fragile -- any rename silently drops a checkbox. The
@@ -1307,15 +1339,18 @@ changes live UI wiring.
 [D.Feature-C: tag applied 2026-06-20 -- design-before-code]
 
 #### [L-046 | #N6] Studio encounter-generator refactor + Artemis preset redo (coupled, two repos)
-<!-- L:046 status:OPEN upd:- section:D.Feature-C flag: rice:2/2/50/2 -->
+<!-- L:046 status:OPEN upd:- section:D.Feature-C flag: rice:3/3/75/3 -->
 - **N6** Studio encounter-generator refactor + Artemis preset redo (coupled,
   TWO repos; full verified specifics in the prior edition / git history;
   design authority ENCOUNTER_EXPORT_HANDOFF_v3.md, orrery repo). N11 rides.
   `[per chain + @2f40d9d/@730b2bf verifications]`
+  **Tony:** need more description and design conversation. the encounter generator is a new
+  skill. it can be used to create presets for many standard and special visualizations. 
 
 #### [L-047 | #N10] Note-composition structural refactor (behind N6)
 <!-- L:047 status:OPEN upd:- section:D.Feature-C flag: rice:2/2/50/2 -->
 - **N10** Note-composition structural refactor (behind N6). `[per chain]`
+**Tony:** this description is unclear. Need to update the rice rating. 
 
 #### [L-048 | #21/51] Animation track 21/51 -- core complete pending the v4 gate
 <!-- L:048 status:PENDING-GATE upd:2026-06-11 section:D.Feature-C flag: rice:2/2/50/2 -->
@@ -1369,34 +1404,40 @@ changes live UI wiring.
   - Standing instruction kept: when deferring, smoke-test the animate
     pipeline to a KNOWN state.
 **Gap:** the v4 gate (L-004); then the remaining riders listed in-block.
+**Tony:** L-004 is done. need to discuss and clarify then update rice.  
 
 ### D.Parked (Tony's explicit call) `[per chain]`
 
 #### [L-049 | #N8] Comet info-marker superposition cluster
-<!-- L:049 status:PARKED upd:- section:D.Parked flag: rice:2/2/50/2 -->
+<!-- L:049 status:PARKED upd:- section:D.Parked flag: rice:1/2/50/2 -->
 `[per chain]`
+**Tony:** need to verify mode 5. 
 
 #### [L-050 | #N9] white -> red orbit-marker switch (osculating marker intentionally stays white)
-<!-- L:050 status:PARKED upd:- section:D.Parked flag: rice:2/2/50/2 -->
+<!-- L:050 status:PARKED upd:- section:D.Parked flag: rice:2/1/50/1 -->
 `[per chain]`
+**Tony:** need to verify mode 5. 
 
 ### D.Loose end to reconcile `[per chain; not re-verified]`
 
 #### [L-051] Uranus pole-value prose inconsistency (Dec -15.10 vs stray -15.18)
-<!-- L:051 status:OPEN upd:- section:D.LooseEnd flag: rice:2/2/50/2 -->
+<!-- L:051 status:OPEN upd:- section:D.LooseEnd flag: rice:1/2/50/1.5 -->
 - Uranus pole-value prose inconsistency (Dec -15.10 load-bearing vs stray
   prose -15.18; reconcile when next in the file).
+  **Tony:** shouldn't this be caught by the provenance scanner? 
 
 ## E. AU-CONVENTION COMPLIANCE CLUSTER (standing convention; one sweep)
 
 #### [L-052] AU-convention compliance sweep (GEO altitude hover missing AU; km+AU on all new hover)
-<!-- L:052 status:OPEN upd:- section:E flag: rice:2/2/50/2 -->
+<!-- L:052 status:OPEN upd:- section:E flag: rice:1/1/50/1 -->
 - Inner-four bow-shock hover ("radii" only) `[verified @76c330e]`; GEO
   altitude hover missing AU `[per standing convention]`; confirm km+AU on
   any new hover at add time. (Session C's U+N bow-shock disclosure lines
   added no new numbers; existing km/AU values untouched.)
 
 ## F. CONSOLIDATION LOG (what each pass repaired)
+
+**Tony:** these items are missing L-numbers and headers. 
 
 - (June 7, v28 consolidation) RESTORED 2 leaked Movement-2 items + the v24
   sec5 batch; corrected the stale U3 "open"; UNIFIED the three animation
@@ -1444,11 +1485,11 @@ changes live UI wiring.
 ## G. OPEN QUESTIONS / TONY CALLS
 
 #### [L-053] AU-convention sweep (section E): keep open, revisit
-<!-- L:053 status:OPEN upd:2026-06-07 section:G flag: rice:2/2/50/2 -->
+<!-- L:053 status:OPEN upd:2026-06-07 section:G flag: rice:3/1/50/2 -->
 - AU-convention sweep (section E): KEEP OPEN, revisit (Tony, June 7).
 
 #### [L-056] Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred
-<!-- L:056 status:OPEN upd:2026-06-12 section:G flag: rice:2/2/50/2 -->
+<!-- L:056 status:OPEN upd:2026-06-12 section:G flag: rice:1/2/50/2 -->
 - **Phase 4 residuals** (June 12): O2/O3 console notice wording is
   slightly stale when magnetosphere opt-in is ON (the blanket "not yet
   rendered" remains true for sphere shells; engine prints its own
@@ -1473,6 +1514,7 @@ changes live UI wiring.
   the gate. Main risk: frame-1 tail doubling (known pattern, known guard).
   Static path (plot_objects L6062) already handles MAPS. O2/O3 wording and
   apsidal em-dashes remain as separate sub-items.  
+**Tony:** needs update. we worked on this. check mode 5. 
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
@@ -1491,9 +1533,10 @@ changes live UI wiring.
   resumes in volume).
 - **Joined items:** N6 (Bucket C) and item 19 (Bucket A) -- tracked in their
   orrery homes, cross-referenced here.
+**Tony:** needs L-number, header, and update. 
 
 #### [L-058] Open Studio items (May-5 handoff, checked @2f40d9d)
-<!-- L:058 status:OPEN upd:2026-06-08 section:H flag: rice:2/2/50/2 -->
+<!-- L:058 status:OPEN upd:2026-06-08 section:H flag: rice:3/3/50/3 -->
 - **Open Studio items** (May-5 handoff; checked @2f40d9d where
   file-verifiable): encounter-export mission-type testing `[per handoff]`;
   camera capture NOT extracted `[verified]`; link-icon end-to-end test
@@ -1503,7 +1546,8 @@ changes live UI wiring.
 - **Recently closed:** _enter_orrery_mode() DEFAULT_CONFIG reset
   `[verified @2f40d9d ~L4775]`; 'ongoing' status comment
   (spacecraft_encounters.py L60, verified).
+**Tony:** this is connect to another item on the studio preset generator refactor. 
 
 ---
 
-Module updated: June 2026 with Anthropic's Claude Sonnet 4.6, Opus 4.8 + Claude Fable 5
+
