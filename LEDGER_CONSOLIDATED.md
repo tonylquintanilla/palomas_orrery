@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*43 live items; 40 need attention (`!`); 43 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*42 live items; 39 need attention (`!`); 42 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -279,14 +279,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
-| ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | - |
+| ! | L-045 (#N14) | Miranda unusual-inclination callout | OPEN | 0.9 | 2026-06-21 |
 
 ### D.Feature-C
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-046 (#N6) | Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos) | OPEN | 2.2 | 2026-06-21 |
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
-| ! | L-047 (#N10) | Note-composition structural refactor (behind N6) | OPEN | 1.0 | - |
 | ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.0 | 2026-06-11 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
 
@@ -1354,10 +1353,15 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   (shell-resolution GUI control, L-042) is the on-ramp.
 **Gap:** SIGNIFICANT design session first (Tony): which bodies first, which layers per body, sourcing per body (Fetched-vs-Recalled on every radius). Editorial / open-ended -- build only after the design stabilizes. Bucket B.
 
-#### [L-045 | #N14] Miranda inclination tooltip
-<!-- L:045 status:OPEN upd:- section:D.Feature-B flag: rice:1/1/90/1 -->
-`[per chain]`
-**Tony:** need description. 
+#### [L-045 | #N14] Miranda unusual-inclination callout
+<!-- L:045 status:OPEN upd:2026-06-21 section:D.Feature-B flag: rice:1/1/90/1 -->
+- **Editorial callout (confirmed, Tony 2026-06-21): note that Miranda has an
+  unusual inclination.** Miranda (Uranian moon) sits at a notably high orbital
+  inclination (~4.3 deg to Uranus's equator) -- unusual among the otherwise
+  near-coplanar regular Uranian satellites, and worth surfacing. Add a short
+  educational line to Miranda's hover/tooltip flagging it (a "why is this
+  interesting" callout, per Scientific Storytelling).
+**Gap:** SOURCE the inclination value + its reference frame before it goes in the string (Fetched-vs-Recalled), then add the callout to Miranda's hover. Small, editorial.
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
@@ -1400,10 +1404,16 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   `[per chain + @2f40d9d/@730b2bf verifications]`
 **Gap:** design conversation first -- separate (1) the immediate refactor + Artemis redo from (2) the generalized preset-authoring vision; decide how much of (2) to scope now. Coupled across two repos. Design-before-code, Bucket C.
 
-#### [L-047 | #N10] Note-composition structural refactor (behind N6)
-<!-- L:047 status:OPEN upd:- section:D.Feature-C flag: rice:2/2/50/2 -->
-- **N10** Note-composition structural refactor (behind N6). `[per chain]`
-**Tony:** this description is unclear. Need to update the rice rating. 
+#### [L-047 | #N10] Note-composition structural refactor (RETIRED -- scope undeterminable)
+<!-- L:047 status:DONE upd:2026-06-21 section:C flag: rice:2/2/50/2 -->
+- **N10** Note-composition structural refactor (was "behind N6"). RETIRED by
+  decision (Tony, 2026-06-21): neither Tony nor Claude can reconstruct what this
+  item referred to -- it carried "per chain" with no surviving specifics, and an
+  item nobody can define cannot be actioned. Closed for the archive rather than
+  kept as a permanent unknown. If a concrete note-composition need surfaces during
+  L-046 (encounter-generator / preset-authoring), open a FRESH L-handle then; do
+  not revive this one.
+**Gap:** none -- move to section C
 
 #### [L-048 | #21/51] Animation track 21/51 -- core complete pending the v4 gate
 <!-- L:048 status:PENDING-GATE upd:2026-06-11 section:D.Feature-C flag: rice:2/2/50/2 -->
