@@ -350,17 +350,40 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Ref:** HANDOFF_food_insecurity_design_v1.md + MANIFEST_food_insecurity_sudan_first_cut.md (design base de12f56); HDX dataset "Sudan: Acute Food Insecurity Country Data"; hdx-python-api. 
 
 #### [L-002] Protocol -> Skills refactor (process/tooling)
-<!-- L:002 status:OPEN upd:- section:A flag: rice:3/3/50/3 -->
-- **Protocol -> Skills refactor (process/tooling, not orrery code).** v27 idea:
-  split the trigger-fired PROCEDURE layer (docstring standard, agentic pre-test,
-  provenance-scanner mechanics, single-info-marker pattern, Horizons center rules,
-  bottom-up / binary-mode editing) into Anthropic skills, keep the resident
-  JUDGMENT layer (modes, criticality philosophy, Foundation, "when unsure ask",
-  double-helix) in context. CAUTION: CRITICAL gates (SHA round trip,
-  verify-execution, enumerate-uploads) must fire reliably -> stay resident or keep
-  a one-line resident pointer; only QUALITY/PRACTICE mechanics are safe spin-offs.
-  Its own sketch-first session: design which skills + triggers before building.
-**Gap:** own sketch-first session: design which skills + triggers before building; CRITICAL gates (SHA round trip, verify-execution, enumerate-uploads) must stay resident.
+<!-- L:002 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/50/3 -->
+- **Protocol -> Skills refactor (process/tooling, not orrery code).** Lift the
+  task-triggered PROCEDURE/CONVENTION layer of Part 3 into Anthropic SKILL.md
+  files (load on demand); keep the JUDGMENT layer (modes, criticality,
+  anti-patterns, Foundation, double-helix) resident. Sketch-first /
+  design-before-build -- the framing below is the leg-up from the v3.29 cleanup,
+  NOT the design itself.
+- **Sorting principle (the design lever):** a skill only helps if its trigger
+  fires at the moment of need. So the cut is NOT QUALITY-vs-CRITICAL and NOT
+  procedure-vs-judgment -- it is "does the moment-of-need announce itself in the
+  task?" Task-coupled guidance (writing hover text -> AU convention) extracts
+  cleanly; checkpoint guidance that must fire UNPROMPTED (session start, every
+  delivery) can't be a skill -- nothing in the request triggers it -- so it stays
+  resident by standing instruction.
+- **Three buckets (v3.29 Part-3 inventory; illustrative, not the final set):**
+  (A) EXTRACT -- task-triggered conventions/procedures: docstring standard,
+      single-info-marker, marker-symbol, hover-AU, 3D-axis, Horizons centers,
+      provenance-scanner mechanics, a safe-editing bundle (bottom-up + binary-mode
+      + file-encoding), platform-neutrality, credit-line, barycenter.
+  (B) RESIDENT POINTER + skill body -- CRITICAL but task-coupled: Agentic Pre-Test
+      (a resident one-liner fires it; the commands + live-dispatch smoke test live
+      in the skill).
+  (C) STAY RESIDENT -- checkpoint CRITICAL gates, never extract: SHA round trip,
+      uploads-before-project, enumerate-uploads, verify-base, verify-execution,
+      check-parallel-pipelines, fetched-vs-recalled, show-the-envelope; + Parts 1/2/4.
+- **Fable-5 caveat (packaging, not content):** skill content is model-invariant; a
+  larger-scope model only changes the ECONOMICS of carrying Part 3 resident. Design
+  the boundary now (cheap, reversible); defer the extraction build until the
+  platform is known -- a bigger context may pull some (A)/(B) items back to (C).
+  Build risks rework; design does not.
+- **Where the deferred design work actually is:** writing each skill's TRIGGER
+  DESCRIPTION (the SKILL.md description is what fires it) + the bundling decisions
+  (how many skills, what groups). That is the sketch-first session.
+**Gap:** deferred design session (possibly post-Fable): finalize the (A)/(B)/(C) sort, write each skill's trigger description, decide bundling. Hard constraint: bucket (C) gates stay resident. RICE holds at 3/3/50/3 until the design lands.
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
 <!-- L:060 status:OPEN upd:2026-06-18 section:A flag: rice:3/3/75/2.5 -->
