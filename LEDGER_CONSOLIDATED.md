@@ -224,7 +224,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-003 | Protocol amendment candidates (for v3.29) | OPEN | 5.4 | 2026-06-10 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 2.4 | 2026-06-21 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
@@ -279,13 +278,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
-| ! | L-045 (#N14) | Miranda unusual-inclination callout | OPEN | 0.9 | 2026-06-21 |
+| ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | - |
 
 ### D.Feature-C
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-046 (#N6) | Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos) | OPEN | 2.2 | 2026-06-21 |
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
+| ! | L-047 (#N10) | Note-composition structural refactor (behind N6) | OPEN | 1.0 | - |
 | ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.0 | 2026-06-11 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
 
@@ -362,29 +362,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
   Its own sketch-first session: design which skills + triggers before building.
 **Gap:** own sketch-first session: design which skills + triggers before building; CRITICAL gates (SHA round trip, verify-execution, enumerate-uploads) must stay resident.
 
-#### [L-003] Protocol amendment candidates (for v3.29)
-<!-- L:003 status:OPEN upd:2026-06-21 section:A flag: rice:3/3/90/1.5 -->
-- **Three lessons from the animation-refactor sessions to fold into protocol
-  v3.29.** Not a code task -- documentation. Amendment text drafted (2026-06-21);
-  paste into the protocol and retire this item.
-  1. **xvfb color-swap must use a throwaway copy.** The pre-test find-replaces
-     SystemButtonFace -> gray90 so the Tk GUI runs headless, then swaps back. But
-     palomas_orrery.py already holds 26 REAL gray90 values, so the swap-back flips
-     those too and silently corrupts the delivered file ("not idempotent" =
-     running it twice doesn't return you to the start). Rule: swap on a throwaway
-     copy, test it, discard it; never restore-in-place on the deliverable. (Caught
-     June 9.) -> corrects the Agentic Pre-Test sed block, [CRITICAL].
-  2. **Live-dispatch smoke test.** Testing a function alone can pass while the
-     live code never calls it (the dead-code trap). Instead run the WHOLE module
-     headless with the GUI window suppressed (tk mainloop no-op) -- real tk vars,
-     real builders, network patched -- so the test exercises the path that
-     actually runs. -> extends the Agentic Pre-Test section.
-  3. **grep -c breaks && chains.** grep -c returns a failure code when it counts
-     zero, which stops an && chain -- the next check silently never runs though
-     the output looks complete. Rule: never put grep -c mid-&&-chain; run greps
-     standalone or join with ;. (Caught June 10.) -> [QUALITY] shell-hygiene note.
-**Gap:** paste the three drafted amendments into protocol v3.29 (1 corrects the existing Agentic Pre-Test sed block; 2 extends it; 3 is a new QUALITY note), then RETIRE -- flip to status:DONE section:C with the move-to-C trigger.
-
 #### [L-060] ENSO Standalone Chart (Earth System track)
 <!-- L:060 status:OPEN upd:2026-06-18 section:A flag: rice:3/3/75/2.5 -->
 - **ENSO standalone gallery chart (design locked, build next session).** Earth
@@ -438,8 +415,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
   Paired with L-062 as the user-facing text refresh. Small Mode-1 edit once the
   new wording is decided.
 **Gap:** decide the new Note wording (light design -- what should it say now?), then a Mode-1 snippet into palomas_orrery.py (grep the current Note string first). Could alternatively live in D.Cosmetic; kept in A, paired with L-062.
-
-**Tony:** add to the ledger: update scripts (update_code sh file and _UPDATE_CODE.bat) for Windows, MacOS and Linux to the dashboard, along with sufficient documentation to the dashboard. And the build executable scripts, build_executable_v3.bat and build_star_visualization.bat. see README_DISTRIBUTION.txt This is old scripts that need to be documented and included in case we use them again. 
 
 ## PENDING ACTION (Tony-side)
 
@@ -977,6 +952,25 @@ follow-on behind gate 5(b).)
 **Gap:** MOVE TO section C on the v4 gate pass (L-004).
 **Tony:** L-004 is done. 
 **Gap:** none -- move to section C
+
+#### [L-003] Protocol amendment candidates (for v3.29)
+<!-- L:003 status:DONE upd:2026-06-22 section:C flag: rice:3/3/90/1.5 -->
+- **Protocol amendment candidates (for v3.29; from the animation refactor):**
+  - The xvfb SystemButtonFace<->gray90 sed round trip is NOT idempotent on files
+    that natively contain gray90 (palomas_orrery.py has 26 native gray90
+    literals). Rule: run the swap on a THROWAWAY copy only; never
+    restore-in-place on the deliverable. (Caught June 9; applied as practice
+    in every session since.)
+  - Full-module exec under xvfb with tk mainloop suppressed enables LIVE-dispatch
+    tests inside the real module namespace (real tk vars, real builders, network
+    calls patched). Used as the standard verification gate for Sessions
+    Phase 2 through 3C; candidate for the Agentic Pre-Test section.
+  - `grep -c` exits 1 when the count is 0, silently BREAKING an `&&` chain --
+    a downstream verification command can simply never run while the output
+    looks complete. Rule: never put `grep -c` mid-chain with `&&`; run
+    verification greps standalone or with `;`. (Caught June 10 -- one residual
+    check did not execute until re-run standalone.)
+**Gap:** none -- move to section C
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -1359,15 +1353,10 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   (shell-resolution GUI control, L-042) is the on-ramp.
 **Gap:** SIGNIFICANT design session first (Tony): which bodies first, which layers per body, sourcing per body (Fetched-vs-Recalled on every radius). Editorial / open-ended -- build only after the design stabilizes. Bucket B.
 
-#### [L-045 | #N14] Miranda unusual-inclination callout
-<!-- L:045 status:OPEN upd:2026-06-21 section:D.Feature-B flag: rice:1/1/90/1 -->
-- **Editorial callout (confirmed, Tony 2026-06-21): note that Miranda has an
-  unusual inclination.** Miranda (Uranian moon) sits at a notably high orbital
-  inclination (~4.3 deg to Uranus's equator) -- unusual among the otherwise
-  near-coplanar regular Uranian satellites, and worth surfacing. Add a short
-  educational line to Miranda's hover/tooltip flagging it (a "why is this
-  interesting" callout, per Scientific Storytelling).
-**Gap:** SOURCE the inclination value + its reference frame before it goes in the string (Fetched-vs-Recalled), then add the callout to Miranda's hover. Small, editorial.
+#### [L-045 | #N14] Miranda inclination tooltip
+<!-- L:045 status:OPEN upd:- section:D.Feature-B flag: rice:1/1/90/1 -->
+`[per chain]`
+**Tony:** need description. 
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
@@ -1410,16 +1399,10 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   `[per chain + @2f40d9d/@730b2bf verifications]`
 **Gap:** design conversation first -- separate (1) the immediate refactor + Artemis redo from (2) the generalized preset-authoring vision; decide how much of (2) to scope now. Coupled across two repos. Design-before-code, Bucket C.
 
-#### [L-047 | #N10] Note-composition structural refactor (RETIRED -- scope undeterminable)
-<!-- L:047 status:DONE upd:2026-06-21 section:C flag: rice:2/2/50/2 -->
-- **N10** Note-composition structural refactor (was "behind N6"). RETIRED by
-  decision (Tony, 2026-06-21): neither Tony nor Claude can reconstruct what this
-  item referred to -- it carried "per chain" with no surviving specifics, and an
-  item nobody can define cannot be actioned. Closed for the archive rather than
-  kept as a permanent unknown. If a concrete note-composition need surfaces during
-  L-046 (encounter-generator / preset-authoring), open a FRESH L-handle then; do
-  not revive this one.
-**Gap:** none -- move to section C
+#### [L-047 | #N10] Note-composition structural refactor (behind N6)
+<!-- L:047 status:OPEN upd:- section:D.Feature-C flag: rice:2/2/50/2 -->
+- **N10** Note-composition structural refactor (behind N6). `[per chain]`
+**Tony:** this description is unclear. Need to update the rice rating. 
 
 #### [L-048 | #21/51] Animation track 21/51 -- core complete pending the v4 gate
 <!-- L:048 status:PENDING-GATE upd:2026-06-11 section:D.Feature-C flag: rice:2/2/50/2 -->
