@@ -363,23 +363,27 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** own sketch-first session: design which skills + triggers before building; CRITICAL gates (SHA round trip, verify-execution, enumerate-uploads) must stay resident.
 
 #### [L-003] Protocol amendment candidates (for v3.29)
-<!-- L:003 status:OPEN upd:2026-06-10 section:A flag: rice:3/3/90/1.5 -->
-- **Protocol amendment candidates (for v3.29; from the animation refactor):**
-  - The xvfb SystemButtonFace<->gray90 sed round trip is NOT idempotent on files
-    that natively contain gray90 (palomas_orrery.py has 26 native gray90
-    literals). Rule: run the swap on a THROWAWAY copy only; never
-    restore-in-place on the deliverable. (Caught June 9; applied as practice
-    in every session since.)
-  - Full-module exec under xvfb with tk mainloop suppressed enables LIVE-dispatch
-    tests inside the real module namespace (real tk vars, real builders, network
-    calls patched). Used as the standard verification gate for Sessions
-    Phase 2 through 3C; candidate for the Agentic Pre-Test section.
-  - `grep -c` exits 1 when the count is 0, silently BREAKING an `&&` chain --
-    a downstream verification command can simply never run while the output
-    looks complete. Rule: never put `grep -c` mid-chain with `&&`; run
-    verification greps standalone or with `;`. (Caught June 10 -- one residual
-    check did not execute until re-run standalone.)
-**Gap:** fold into protocol v3.29.
+<!-- L:003 status:OPEN upd:2026-06-21 section:A flag: rice:3/3/90/1.5 -->
+- **Three lessons from the animation-refactor sessions to fold into protocol
+  v3.29.** Not a code task -- documentation. Amendment text drafted (2026-06-21);
+  paste into the protocol and retire this item.
+  1. **xvfb color-swap must use a throwaway copy.** The pre-test find-replaces
+     SystemButtonFace -> gray90 so the Tk GUI runs headless, then swaps back. But
+     palomas_orrery.py already holds 26 REAL gray90 values, so the swap-back flips
+     those too and silently corrupts the delivered file ("not idempotent" =
+     running it twice doesn't return you to the start). Rule: swap on a throwaway
+     copy, test it, discard it; never restore-in-place on the deliverable. (Caught
+     June 9.) -> corrects the Agentic Pre-Test sed block, [CRITICAL].
+  2. **Live-dispatch smoke test.** Testing a function alone can pass while the
+     live code never calls it (the dead-code trap). Instead run the WHOLE module
+     headless with the GUI window suppressed (tk mainloop no-op) -- real tk vars,
+     real builders, network patched -- so the test exercises the path that
+     actually runs. -> extends the Agentic Pre-Test section.
+  3. **grep -c breaks && chains.** grep -c returns a failure code when it counts
+     zero, which stops an && chain -- the next check silently never runs though
+     the output looks complete. Rule: never put grep -c mid-&&-chain; run greps
+     standalone or join with ;. (Caught June 10.) -> [QUALITY] shell-hygiene note.
+**Gap:** paste the three drafted amendments into protocol v3.29 (1 corrects the existing Agentic Pre-Test sed block; 2 extends it; 3 is a new QUALITY note), then RETIRE -- flip to status:DONE section:C with the move-to-C trigger.
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
 <!-- L:060 status:OPEN upd:2026-06-18 section:A flag: rice:3/3/75/2.5 -->
