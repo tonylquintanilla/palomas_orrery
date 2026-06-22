@@ -439,6 +439,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
   new wording is decided.
 **Gap:** decide the new Note wording (light design -- what should it say now?), then a Mode-1 snippet into palomas_orrery.py (grep the current Note string first). Could alternatively live in D.Cosmetic; kept in A, paired with L-062.
 
+**Tony:** add to the ledger: update scripts (update_code sh file and _UPDATE_CODE.bat) for Windows, MacOS and Linux to the dashboard, along with sufficient documentation to the dashboard. And the build executable scripts, build_executable_v3.bat and build_star_visualization.bat. see README_DISTRIBUTION.txt This is old scripts that need to be documented and included in case we use them again. 
+
 ## PENDING ACTION (Tony-side)
 
 ## B. STRATEGIC STATUS
