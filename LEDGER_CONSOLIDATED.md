@@ -219,11 +219,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*43 live items; 40 need attention (`!`); 43 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*44 live items; 41 need attention (`!`); 44 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-065 | European heat wave heat map (Earth System track) | OPEN | 4.8 | 2026-06-22 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.0 | 2026-06-22 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
@@ -495,6 +496,41 @@ design handoff v2, manifest v2.
   Paired with L-062 as the user-facing text refresh. Small Mode-1 edit once the
   new wording is decided.
 **Gap:** decide the new Note wording (light design -- what should it say now?), then a Mode-1 snippet into palomas_orrery.py (grep the current Note string first). Could alternatively live in D.Cosmetic; kept in A, paired with L-062.
+
+#### [L-065] European heat wave heat map (Earth System track)
+<!-- L:065 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/80/1.5 -->
+- **European heat wave 2026 -- new heat map, reuses the existing ERA5 framework.**
+  Earth System / stressors family (the "heat" member named in the food-insecurity
+  handoff). A dated temperature heat map of the ongoing 2026 European heat wave,
+  built on the existing ERA5/Copernicus heat-map chassis -- new region + date
+  config, NOT a new pipeline. TIMELY: a second, hotter wave began 22 Jun 2026
+  (Western + Central Europe), deaths reported and June records falling; gallery +
+  Reel value is time-sensitive while it is in the news.
+- **Data = Fetched, trusted:** ERA5 2m temperature via Copernicus CDS (the live
+  pipeline). Note the ~5-day near-real-time lag -- "now" honestly means up to ~5
+  days back, so the layer is dated / pinned / deliberately re-pulled (no live
+  auto-update), same as the family. Confirm exact dates, extent, and peak values
+  at fetch time; do NOT recall breaking-news numbers (they go stale fast).
+  Copernicus Sentinel-3 LST is the near-real-time surface-temperature alternative
+  if a snapshot is wanted alongside the air-temp reanalysis.
+- **Human-impact text = composed/transcribed tier (two-tier on-layer text; see
+  L-001 / L-064).** If the layer carries any casualty / health-alert / attribution
+  text, it is transcribed from an authority (national met services, EU Copernicus
+  C3S, WMO, health agencies, WWA-style attribution), per-number `# Source:` within
+  scanner lookback, Tier-1 visible, cite-or-remove. Climate-change attribution
+  belongs to the cited authority in its voice -- we never author it; the reader
+  connects it to the family thesis. Breaking-news tolls are volatile and
+  contested -- transcribe a dated, sourced figure at build or omit.
+**Gap:** scope at build: pick region window + date(s) (current wave from 22 Jun
+2026, or the May + June arc), reuse the ERA5 heat-map generator (read the live
+pattern at HEAD first), decide whether any impact text appears and if so wire it
+through the composed-tier discipline. Confirm provenance scanner coverage of the
+heat-map generator's display path (the L-064 question, asked locally).
+**Ref:** existing ERA5/Copernicus heat-map framework; Copernicus CDS (ERA5 2m
+temp) + Sentinel-3 LST; EU Copernicus Climate Change Service (C3S); L-001 + L-064
+(two-tier on-layer text + scanner-format sweep). Current-event context: 2026
+European heatwaves (record June temps; deaths reported across FR/UK/IE/ES/AT/DE/
+SI), retrieved 2026-06-22.
 
 ## PENDING ACTION (Tony-side)
 
