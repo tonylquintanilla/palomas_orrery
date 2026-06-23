@@ -219,15 +219,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*42 live items; 39 need attention (`!`); 42 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*43 live items; 40 need attention (`!`); 43 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.0 | 2026-06-22 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
-| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 2.4 | 2026-06-21 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
-| ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | - |
+| ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | 2026-06-22 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 
 ### D.Movement
@@ -245,6 +245,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-064 | Provenance-scanner format sweep -- Earth System family | OPEN | 3.0 | 2026-06-22 |
 | ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2.2 | 2026-06-18 |
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
@@ -256,13 +257,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Cosmetic
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-035 | Solar shell hovertext <br> vs 
+ context mismatch (C6b) | OPEN | 4.0 | 2026-06-11 |
+| ! | L-032 (#41) | Sun legend ordering (ordered dispatch iteration; no manual fix) | OPEN | 1.5 | - |
 | ! | L-033 | Comet plotted-period trace visibility (line weight/color; O6b) | OPEN | 1.5 | 2026-06-10 |
 | ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.5 | 2026-06-21 |
 | ! | L-030 (#17) | GEO info-marker position | OPEN | 1.0 | - |
-| ! | L-031 (#18) | Uranus gossamer ring visibility | OPEN | 1.0 | - |
-| ! | L-032 (#41) | Sun legend ordering (ordered dispatch iteration; no manual fix) | OPEN | 1.0 | - |
-| ! | L-035 | Solar shell hovertext <br> vs 
- context mismatch (C6b) | OPEN | 1.0 | 2026-06-11 |
+| ! | L-031 (#18) | Uranus gossamer ring visibility | OPEN | 0.9 | - |
 | ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 0.9 | 2026-06-15 |
 | ! | L-038 | Psyche encounter hardcoded fallback distances lack # Source | OPEN | 0.5 | - |
 
@@ -284,9 +285,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-046 (#N6) | Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos) | OPEN | 2.2 | 2026-06-21 |
+| ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.5 | 2026-06-11 |
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
 | ! | L-047 (#N10) | Note-composition structural refactor (behind N6) | OPEN | 1.0 | - |
-| ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.0 | 2026-06-11 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
 
 ### D.Parked
@@ -325,29 +326,85 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:OPEN upd:2026-06-21 section:A flag: rice:3/3/80/3 -->
-- **Food Insecurity (REOPENED, active; key no longer the gate).** Earth System
-  track, not the orrery refactor. Design locked: HANDOFF_food_insecurity_design_v1.md +
-  MANIFEST_food_insecurity_sudan_first_cut.md (Sudan first cut, IPC KML vector
-  polygons / approach B, folders-per-period, transcribe-not-synthesize stance).
-  SOURCE DECISION (2026-06-21, Tony): proceed via the no-key HDX mirror rather
-  than wait on the IPC key. HDX dataset "Sudan: Acute Food Insecurity Country
-  Data" (data.humdata.org) carries IPC's own analyses, downloadable without an
-  IPC key, scriptable via hdx-python-api (v6.6.8 on PyPI). Provenance line is
-  "IPC, retrieved via HDX" (mirror -- name the retrieval path), NOT bare "IPC"
-  and NOT FEWS NET (a different source that would change the Source line and may
-  classify differently). If the IPC key arrives later, swap to the canonical
-  api.ipcinfo.org path for cleaner provenance; the transcribe-not-synthesize
-  stance is identical either way. SANDBOX WALL unchanged: data.humdata.org is
-  not reachable from Claude's environment -- the fetch is written against the
-  documented schema here, real bytes arrive only when it runs on Tony's machine
-  (the coral arrangement, key-free). Build base = HEAD at build time (design base
-  was de12f56). RELEASE-DRIFT CORRECTION to fold in at build: the current Sudan
-  release is Feb-May 2026 Current + projections to Jan 2027, names NO current
-  Famine areas -- so the manifest's section-10 El Fasher/Kadugli Phase-5
-  spot-check (Sept 2025 picture) must be rewritten to the current classification.
-**Gap:** build next session via HDX no-key path: confirm the HDX Sudan IPC dataset resource list + GeoJSON geometry resource at fetch time (hdx-python-api), then mirror the coral requests pattern; + release-drift correction (manifest sec-10 rewrite to Feb-May 2026). Provenance line "IPC, retrieved via HDX".
-**Ref:** HANDOFF_food_insecurity_design_v1.md + MANIFEST_food_insecurity_sudan_first_cut.md (design base de12f56); HDX dataset "Sudan: Acute Food Insecurity Country Data"; hdx-python-api. 
+<!-- L:001 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/90/2 -->
+- **Food Insecurity -- Sudan, Current period; design re-converged 2026-06-22.**
+  Earth System track. Phase-1 design now locked tighter AND simpler than the
+  original manifest. Old work (period7_food_insecurity.html + pre-rethink
+  handoffs) is REFERENCE ONLY, not a building block -- starting fresh.
+- **Source (SUPERSEDES the 2026-06-21 HDX-mirror call):** IPC Mapping Tool
+  no-key GeoJSON (ipcinfo.org/ipc-country-analysis/ipc-mapping-tool/). IPC-native
+  geometry + full per-area phase attributes in one file, NO key -- the IPC key is
+  no longer needed at all. Fetched + inspected 2026-06-22
+  (IPC_SD_A_87143417_2026-06-22.geojson): 228 features (189 area polygons, 39
+  call-out points), one polygon per analysis area carrying mapped phase, full
+  phase1-5 population/pct, evidence level (confidence_level), assistance level
+  (hfa_value), risk_of_famine flag, period window. Provenance UPGRADES to "IPC,
+  IPC Mapping Tool" (not "IPC via HDX", not FEWS NET -- FEWS is IPC-compatible
+  but NOT IPC consensus, by its own statement). HDX dataset demoted to scriptable
+  backup (ipc_sdn.geojson + CSVs, stable resource IDs) and the route to the
+  deferred historical arc (area_long CSV spans 2019-2027). SANDBOX WALL: ipcinfo
+  + data.humdata.org bot-block automated fetch -- Tony fetches manually (the
+  coral arrangement, confirmed working this session).
+- **Scope: Phase 1 = CURRENT PERIOD ONLY (Feb-May 2026).** Full national coverage
+  (195 localities). Projections (Jun-Sep 2026 lean, Oct 2026-Jan 2027 harvest;
+  PARTIAL, 56/195 localities; IPC's own "do not compare across periods" caveat)
+  DEFERRED to a deliberate second layer. Current-only is both the honest data
+  scope (no comparability hazard; not-analysed collapses to one null feature,
+  Abyei PCA) and the right Reel length.
+- **Popup shows the FULL phase breakdown, not just mapped phase.** Each balloon
+  carries phase1-5 population/pct INCLUDING phase5_population (Catastrophe). This
+  is the structural fix for the mapped-vs-population error: the map color is the
+  highest severity affecting AT LEAST 20% of an area's population, so sub-20%
+  Phase-5 populations hide behind a P4 color (23 areas carry Catastrophe pops,
+  all mapped P4). Legend STATES the 20% rule so the glance is honest.
+- **Drivers = single NATIONAL card, IPC voice:** conflict; displacement/
+  immobility; high food prices; health/WASH collapse; limited humanitarian
+  access. Includes IPC's OWN naming of the Middle East -> fuel/food/fertilizer
+  channel -- the Iran-war test case resolved per the handoff rule (transcribe
+  IPC's framing, never author the linkage; reader makes the Hormuz connection).
+  No per-area driver prose invented.
+- **Totals TRANSCRIBED from the IPC report, NEVER summed from polygons.** Naive
+  GeoJSON sum overcounts (28M vs IPC's 19.5M P3+; 185k vs 135k P5) because
+  IDP-settlement units overlap host localities. Headline figures (19.5M in P3+,
+  ~135k in Catastrophe) come from IPC's text; polygons are for per-area color +
+  popups only.
+- **Corrected section-10 framing (replaces the stale Sept-2025 spot-check):** NO
+  area mapped Phase 5; ~135k in Phase 5 (Catastrophe) [N/S Darfur, S Kordofan];
+  El Fasher/Kadugli "not directly comparable" this round (data did not allow
+  town-level disaggregation -- a data gap, NOT an improvement; concerns remain
+  high); 14 areas at risk of Famine in the Jun-Sep worst-case projection.
+  Verification = "phases render where the CURRENT release puts them," no
+  hardcoded area-to-phase claim.
+- **Two-tier on-layer text (NEW principle):** on-layer text splits by how words
+  get authority. TRANSCRIBED tier (IPC's verbatim words -- drivers, citation,
+  period, analysis date) is safe by construction. COMPOSED tier (sentences we
+  write because no single IPC line says them -- e.g. "no area mapped Phase 5 but
+  ~135k in Catastrophe") is high-stakes: hardcode it as a framing-layer text
+  element, BUILD it in the generator with each numeric token carrying a
+  `# Source:` within scanner lookback (not pasted as a finished string), and it
+  MUST trip provenance scanner Tier-1 before push -- cite-or-remove, never
+  cite-to-clear. (See L-064 for the family-wide sweep.)
+- **Venue: one KMZ, two showings.** Live in the gallery (palomasorrery.com) and
+  as a narrated Reel (60-90s) on instagram (palomas_orrery). The Reel ROUTE
+  (national figure -> the P4 orange -> the hidden Catastrophe -> national drivers
+  -> close) is a first-class design input; narration reads FROM the on-layer
+  framing text, closing the ad-lib gap (words said == words on the layer ==
+  sourced).
+**Gap:** design not yet fully written down. NEXT: (1) [done this session] ledger
+revised; (2) write design handoff v2 as the design-session plan; (3) then
+manifest v2 (executable spec) -- decide now-vs-next-session; (4) then code from
+the manifest. Still to SOURCE before build: exact IPC recommended-citation string
+(lift verbatim from the report); IPC official phase hex ramp (color guidance --
+GeoJSON carries no colors, do not recall); confirm provenance_scanner.py
+traverses the food-insecurity generator's framing-layer display path at HEAD.
+Read the live Earth System KMZ pattern from the repo at HEAD before writing
+integration (do not prescribe from the manifest).
+**Ref:** design base 2026-06-22 (HEAD f1834dc); IPC Mapping Tool GeoJSON
+(IPC_SD_A_87143417_2026-06-22.geojson, analysis "SD February 2026"); IPC Sudan
+Special Report Feb2026-Jan2027 (published 2026-06-03, data to 2026-04-10, Natl
+IPC Technical Working Group); supersedes HANDOFF_food_insecurity_design_v1.md +
+MANIFEST_food_insecurity_sudan_first_cut.md (de12f56, now reference). Pending:
+design handoff v2, manifest v2.
 
 #### [L-002] Protocol -> Skills refactor (process/tooling)
 <!-- L:002 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/50/3 -->
@@ -768,7 +825,7 @@ feature, needs clarification from Tony.
 `**Gap:** none -- move to section C`
 
 #### [L-006] Mercury +0.2 R_M northward dipole offset
-<!-- L:006 status:DONE upd:2026-06-20 section:C flag: rice:2/2/50/2 -->
+<!-- L:006 status:DONE upd:2026-06-20 section:C flag: rice: -->
 - **Mercury +0.2 R_M northward dipole offset** -- DONE. (Anderson 2011;
   v24 Movement-2 item.) `[verified absent @76c330e]`
   **Tony:** let's prioritize the dipole implementation for Mercury, Earth and Jupiter and clean these up. 
@@ -780,7 +837,7 @@ feature, needs clarification from Tony.
   **Gap:** none -- move to section C
 
 #### [L-009] Dipole cluster: envelope tie / offset direction / remaining cones / half_len_frac
-<!-- L:009 status:DONE upd:2026-06-20 section:C flag: rice:2/2/50/2 -->
+<!-- L:009 status:DONE upd:2026-06-20 section:C flag: rice: -->
 - **Envelope -> dipole tie / season-derived roll** (Mode-7, conditional);
   **dipole offset DIRECTION** (Mode-7; apex stays centered until sourced);
   **REMAINING DIPOLE CONES** (verified set, June 13 @33aac56): the cone
@@ -827,13 +884,13 @@ feature, needs clarification from Tony.
 **Gap:** none -- move to section C
 
 #### [L-036] O11 greyed-legend display-name verdict: NO item needed
-<!-- L:036 status:DONE upd:2026-06-11 section:C flag: rice:2/2/50/2 -->
+<!-- L:036 status:DONE upd:2026-06-11 section:C flag: rice: -->
 - O11 verdict June 11: greyed-legend display names derive correctly from
   checkbox keys -- NO item needed; recorded so it is not re-raised.
 **Gap:** none -- move to section C
 
 #### [L-041] Item 19.3 axis-control round trip (P1/P2/Phase A/Phase B + toggle follow-on)
-<!-- L:041 status:DONE upd:2026-06-16 section:C flag: rice:2/2/50/2 -->
+<!-- L:041 status:DONE upd:2026-06-16 section:C flag: rice: -->
 - (June 14 DESIGN, no code) Orrery-side axis control (item 19.3) scoped +
     handed off: HANDOFF_item19_axis_control_orrery_v1.md, built on 1288b51 /
     gallery 2f40d9d. DECISION (a2): scene-dict extraction only (axes +
@@ -943,7 +1000,7 @@ displayModeBar flag -- never touches a tkinter window.
 **Gap:** none -- move to section C
 
 #### [L-054] Gate 5(b): full resolution ships, rounded -- render-confirmed
-<!-- L:054 status:DONE upd:2026-06-13 section:C flag: rice:2/2/50/2 -->
+<!-- L:054 status:DONE upd:2026-06-13 section:C flag: rice: -->
 - **Gate 5(b)** RECAST (June 12); RENDER-CONFIRMED (June 13) `[render-
   confirmed Mode 5]`: full resolution ships, rounded. Tony's June-13 pass
   on live Mercury data confirmed (1) animated magnetosphere correct (tail
@@ -957,7 +1014,7 @@ displayModeBar flag -- never touches a tkinter window.
 **Gap:** none -- move to section C
 
 #### [L-057] Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED
-<!-- L:057 status:DONE upd:2026-06-11 section:C flag: rice:2/2/50/2 -->
+<!-- L:057 status:DONE upd:2026-06-11 section:C flag: rice: -->
 (CLOSED June 10-11: animation Auto-scale-vs-shells -- implemented as
 max(orbital, shell) in Session C, render-gated C6. Phase 3 tier decision --
 tier 2 adopted at the June-10 GO; tier 1 dropped; tier 3 = the resolution
@@ -1010,6 +1067,7 @@ follow-on behind gate 5(b).)
 **Note (2026-06-21):** distinct from L-007. L-007 was the bow-shock hover
   DISCLOSURE (sourced-vs-schematic + animation-freeze note), now DONE / in C.
   L-008 is the precision-VALUES batch -- different content, real remaining work.
+**Tony:** Clarify description. Update RICE.   
 
 #### [L-061] Magnetosphere-dipole frame coupling / seasonal roll
 <!-- L:061 status:OPEN upd:2026-06-21 section:D.Movement flag: rice:1/1/50/3 -->
@@ -1162,20 +1220,41 @@ build. Moderate scope (26 sites); low functional risk (cosmetic only).
 Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
 
+#### [L-064] Provenance-scanner format sweep -- Earth System family
+<!-- L:064 status:OPEN upd:2026-06-22 section:D.Structural flag: rice:3/2/50/1 -->
+- **Sweep the Earth System visualizations so on-layer / display-string text is in
+  a format the provenance scanner catches at Tier-1.** Emerged from L-001's
+  two-tier-text decision: the composed-tier discipline (numeric claims built in
+  the generator with `# Source:` within lookback; framing-layer / annotation text
+  traversed by the scanner, not just per-feature popups) should hold across the
+  whole family -- ERA5 heat maps, energy imbalance, ENSO (L-060), ocean
+  acidification / pH, food insecurity (L-001) -- so composed sensitive statements
+  everywhere are scanner-visible, not "trust me."
+- **Design-needed:** confirm, per module, whether provenance_scanner.py actually
+  traverses each generator's display-string path (esp. framing-layer/annotation
+  text vs per-feature popups); where it does not, the fix (move numeric
+  construction to a scanner-visible site / make the path traversable) is the task.
+  Couples with the provenance audit (PROVENANCE_AUDIT.md, Tier-1=0 goal).
+**Gap:** deferred. Confirm scanner coverage of each Earth System generator at
+HEAD, define the on-layer-text format contract, then sweep. Section placement
+(D.Structural) adjustable.
+**Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; originated from L-001
+(two-tier on-layer text).
+
 ### D.Cosmetic -- polish (bundle when convenient)
 
 **Tony:** the `[per chain]` notes require development. probably a mode 5 pass and rice updates. 
 
 #### [L-030 | #17] GEO info-marker position
-<!-- L:030 status:OPEN upd:- section:D.Cosmetic flag: rice:2/2/50/2 -->
+<!-- L:030 status:OPEN upd:- section:D.Cosmetic flag: rice:1/1/100/1 -->
 `[per chain]`
 
 #### [L-031 | #18] Uranus gossamer ring visibility
-<!-- L:031 status:OPEN upd:- section:D.Cosmetic flag: rice:2/2/50/2 -->
+<!-- L:031 status:OPEN upd:- section:D.Cosmetic flag: rice:1/2/90/2 -->
 `[per chain]`
 
 #### [L-032 | #41] Sun legend ordering (ordered dispatch iteration; no manual fix)
-<!-- L:032 status:OPEN upd:- section:D.Cosmetic flag: rice:2/2/50/2 -->
+<!-- L:032 status:OPEN upd:- section:D.Cosmetic flag: rice:2/2/75/2 -->
 `[per chain]`
 
 #### [L-033] Comet plotted-period trace visibility (line weight/color; O6b)
@@ -1197,7 +1276,7 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** decide display wording (Mode-5), then a targeted edit to format_detailed_hover_text. Cosmetic; zero functional risk.
 
 #### [L-035] Solar shell hovertext <br> vs \n context mismatch (C6b)
-<!-- L:035 status:OPEN upd:2026-06-11 section:D.Cosmetic flag: rice:2/2/50/2 -->
+<!-- L:035 status:OPEN upd:2026-06-11 section:D.Cosmetic flag: rice:2/2/100/1 -->
 - Solar shell hovertext uses '<br>' where '\n' renders (or vice versa;
   context-specific -- C6b finding, June 11). Fix in the affected
   formatter on next touch.
@@ -1428,7 +1507,7 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 **Tony:** this description is unclear. Need to update the rice rating. 
 
 #### [L-048 | #21/51] Animation track 21/51 -- core complete pending the v4 gate
-<!-- L:048 status:PENDING-GATE upd:2026-06-11 section:D.Feature-C flag: rice:2/2/50/2 -->
+<!-- L:048 status:PENDING-GATE upd:2026-06-11 section:D.Feature-C flag: rice:3/3/50/3 -->
 - **21/51 Animation track -- CORE COMPLETE pending the v4 gate. Status
   June 11:**
   - Phases 1, 2, 2.5, 3A DONE; 3B conditionally confirmed (section C).
