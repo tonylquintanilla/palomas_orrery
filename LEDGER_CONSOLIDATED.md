@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*44 live items; 40 need attention (`!`); 44 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*46 live items; 40 need attention (`!`); 46 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -234,7 +234,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Movement
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-008 | v24 sec5 precision batch (low-risk) | OPEN | 1.0 | - |
+| ! | L-008 | v24 sec5 precision batch (low-risk) | OPEN | 1.0 | 2026-06-21 |
 | ! | L-061 | Magnetosphere-dipole frame coupling / seasonal roll | OPEN | 0.2 | 2026-06-21 |
 
 ### D.Priority
@@ -280,15 +280,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
-| ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | - |
+| ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
 
 ### D.Feature-C
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-046 (#N6) | Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos) | OPEN | 2.2 | 2026-06-21 |
-| ! | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | PENDING-GATE | 1.5 | 2026-06-11 |
+|  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
-| ! | L-047 (#N10) | Note-composition structural refactor (behind N6) | OPEN | 1.0 | - |
+|  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
+| ! | L-067 | measure_animation_html.py file-browser dialog (B5) | OPEN | 0.8 | 2026-06-23 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
 
 ### D.Parked
@@ -310,8 +311,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### G
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-066 | MAPS per-frame comet-tail animation wiring | OPEN | 4.5 | 2026-06-23 |
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
-| ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred | OPEN | 0.5 | 2026-06-12 |
+| ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066) | OPEN | 0.5 | 2026-06-23 |
 
 ### H
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1084,9 +1086,12 @@ follow-on behind gate 5(b).)
 ### D.Movement -- Movement-track open items
 
 #### [L-008] v24 sec5 precision batch (low-risk)
-<!-- L:008 status:OPEN upd:- section:D.Movement flag: rice:2/2/50/2 -->
-- **v24 sec5 precision batch** (low-risk): Jupiter compressed/expanded MP
-  toggle; Earth MP/BS citation upgrade; per-body shock eccentricity.
+<!-- L:008 status:OPEN upd:2026-06-21 section:D.Movement flag: rice:2/2/50/2 -->
+- **v24 sec5 precision batch** (low-risk): three magnetosphere/bow-shock
+  precision upgrades -- (1) a Jupiter toggle between its compressed (solar-max)
+  and expanded (solar-min) magnetopause standoff; (2) upgrade Earth's
+  magnetopause + bow-shock values to cited sources; (3) per-body bow-shock
+  eccentricity (body-specific shock shape, not a shared approximation).
   `[per chain]` (The inner-four bow-shock hover km/AU sub-item `[verified
   @76c330e]` is de-duped to L-052 / section E -- the AU-convention home -- so it
   is not double-counted; the precision batch keeps the three physics sub-items.)
@@ -1217,7 +1222,12 @@ magnetospheres, radiation belts, etc.) which need geometry-specific
 positioning.
 **Gap:** audit -- grep for inline marker dicts outside CUSTOM_SHELLS
 builders. If none found, close. Zero code risk.
-**Tony:** unclear on the technical significance. I don't recall a mode 5 issue. 
+**Plain version:** a code-tidiness audit, NOT a render/Mode-5 issue. After the May
+sweep, simple sphere-shell info-markers all go through one factory; custom-geometry
+shells (rings, magnetospheres, belts) keep their markers inline because they need
+special positioning. This item just greps the *_visualization_shells.py files for any
+OLD inline-marker definitions left OUTSIDE a custom-geometry builder -- stragglers the
+sweep missed. None found -> close. (Deferred until run.)
 
 #### [L-026 | #9] palomas_orrery_helpers.py CRLF -> LF
 <!-- L:026 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/75/2 -->
@@ -1424,7 +1434,6 @@ HEAD, define the on-layer-text format contract, then sweep. Section placement
       mouse; aids shell-scale visual verification. (Promoted June 11.)
     * O16: auto-scale max() Sun-centered case PASSED (C6a, June 11);
       Mercury-centered case retests in v4.1 after the C6d fix.
-**Tony:** Question: when we say render-confirmed Mode 5 does that mean the item is completed? Does it still belong in the open items? 
 **Gap:** remaining for item 19: scene_aspectmode + scene_camera parity / read-on-load (next-session scope); camera-tracking per-frame autorange RESIDUAL (dedicated session); 3D arrow camera controls.
 
 #### [L-042 | #20/N5] Shell-resolution GUI control (20/N5) + Fly-to view scaling (49)
@@ -1481,9 +1490,11 @@ HEAD, define the on-layer-text format contract, then sweep. Section placement
 **Gap:** SIGNIFICANT design session first (Tony): which bodies first, which layers per body, sourcing per body (Fetched-vs-Recalled on every radius). Editorial / open-ended -- build only after the design stabilizes. Bucket B.
 
 #### [L-045 | #N14] Miranda inclination tooltip
-<!-- L:045 status:OPEN upd:- section:D.Feature-B flag: rice:1/1/90/1 -->
-`[per chain]`
-**Tony:** need description. 
+<!-- L:045 status:OPEN upd:2026-06-23 section:D.Feature-B flag: rice:1/1/90/1 -->
+- **Add/verify a hover tooltip on Miranda noting its orbital inclination**
+  (~4.3 deg, the highest among Uranus's major moons), so the visible tilt of its
+  orbit in the render is explained. Single-info-marker pattern; km + AU where
+  distances appear. `[per chain]`
 
 ### D.Feature -- Bucket C (architecture; design-before-code)
 
@@ -1527,12 +1538,14 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 **Gap:** design conversation first -- separate (1) the immediate refactor + Artemis redo from (2) the generalized preset-authoring vision; decide how much of (2) to scope now. Coupled across two repos. Design-before-code, Bucket C.
 
 #### [L-047 | #N10] Note-composition structural refactor (behind N6)
-<!-- L:047 status:OPEN upd:- section:D.Feature-C flag: rice:2/2/50/2 -->
+<!-- L:047 status:DONE upd:2026-06-23 section:D.Feature-C flag: rice:2/2/50/2 -->
 - **N10** Note-composition structural refactor (behind N6). `[per chain]`
-**Tony:** this description is unclear. Need to update the rice rating. 
+**RETIRED (2026-06-23, Tony):** undetermined -- the N10 'note-composition refactor'
+scope was never recoverable. Closed as undetermined; if it matters it will resurface.
+**Gap:** none -- retired. (Move to section C on next housekeeping relocation.)
 
 #### [L-048 | #21/51] Animation track 21/51 -- core complete pending the v4 gate
-<!-- L:048 status:PENDING-GATE upd:2026-06-11 section:D.Feature-C flag: rice:3/3/50/3 -->
+<!-- L:048 status:DONE upd:2026-06-23 section:D.Feature-C flag: rice:3/3/50/3 -->
 - **21/51 Animation track -- CORE COMPLETE pending the v4 gate. Status
   June 11:**
   - Phases 1, 2, 2.5, 3A DONE; 3B conditionally confirmed (section C).
@@ -1582,10 +1595,22 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
       which may settle O15 without the knob).
   - Standing instruction kept: when deferring, smoke-test the animate
     pipeline to a KNOWN state.
-**Gap:** the v4 gate (L-004); then the remaining riders listed in-block.
-**Tony:** L-004 is done. need to discuss and clarify then update rice.  
+**Gap:** none -- v4.1 gate (L-004) PASSED; the 21/51 animation core track is
+COMPLETE. O14/O15 verdicts closed via L-055. The lone remaining rider, B5
+(measure_animation_html file-browser dialog), is spun out to L-067. DONE; move to
+section C on next housekeeping relocation.
 
 ### D.Parked (Tony's explicit call) `[per chain]`
+
+#### [L-067] measure_animation_html.py file-browser dialog (B5)
+<!-- L:067 status:OPEN upd:2026-06-23 section:D.Feature-C flag: rice:1/1/75/1 -->
+- **Add a tkinter file-browser dialog to measure_animation_html.py (B5).** Spun out
+  of L-048 on close (2026-06-23): the animation core track 21/51 is DONE (v4.1 gate,
+  L-004), and B5 was the lone remaining rider -- a convenience dialog
+  (filedialog.askopenfilename) to pick the HTML to measure instead of a hardcoded
+  path. Small, isolated tooling.
+**Gap:** add filedialog.askopenfilename to measure_animation_html.py.
+**Ref:** spun out of L-048 (closed 2026-06-23).
 
 #### [L-049 | #N8] Comet info-marker superposition cluster
 <!-- L:049 status:PARKED upd:- section:D.Parked flag: rice:1/2/50/2 -->
@@ -1674,15 +1699,15 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 <!-- L:053 status:OPEN upd:2026-06-07 section:G flag: rice:3/1/50/2 -->
 - AU-convention sweep (section E): KEEP OPEN, revisit (Tony, June 7).
 
-#### [L-056] Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes; MAPS per-frame wiring deferred
-<!-- L:056 status:OPEN upd:2026-06-12 section:G flag: rice:1/2/50/2 -->
+#### [L-056] Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066)
+<!-- L:056 status:OPEN upd:2026-06-23 section:G flag: rice:1/2/50/2 -->
 - **Phase 4 residuals** (June 12): O2/O3 console notice wording is
   slightly stale when magnetosphere opt-in is ON (the blanket "not yet
   rendered" remains true for sphere shells; engine prints its own
   allocation lines) -- amend on next touch. apsidal_markers.py carries
   4 PRE-EXISTING em-dashes (platform-neutrality flag, not Phase 4's).
-  MAPS per-frame wiring DEFERRED per ADDENDUM_phase4 decision 1 (the
-  two-site exclusion warning and partition design are captured there).
+  MAPS per-frame wiring EXTRACTED to its own item L-066 (2026-06-23) -- it is real
+  scoped work (a one-line gate removal), NOT "by design"; see L-066.
 **Note (2026-06-17):** Mercury-centered auto-scale (O16) reads ~1 AU because
   get_animation_axis_range passes positions={} into calculate_axis_range_from_orbits;
   the non-Sun-center distance branch can't fire, so the Sun's heliocentric
@@ -1692,15 +1717,29 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   generation time. Reopen as D.Priority only if the fallback causes
   confusion on other planet-centered animations (e.g. Jupiter-centered
   with Sun selected = ~5.5 AU, likely fine).
-**Scoping (2026-06-18):** MAPS per-frame wiring scoped in handoff v29.
-  The exclusion is one line (palomas_orrery.py L2324: `if name == 'MAPS':
-  continue`). The builder (build_comet_tail_traces) is shared with all
-  comets -- no MAPS-specific code needed. Prerequisite: review ADDENDUM_phase4
-  decision 1 to understand the two-site exclusion warning before removing
-  the gate. Main risk: frame-1 tail doubling (known pattern, known guard).
-  Static path (plot_objects L6062) already handles MAPS. O2/O3 wording and
-  apsidal em-dashes remain as separate sub-items.  
-**Tony:** needs update. we worked on this. check mode 5. 
+**Note (2026-06-23):** MAPS wiring split out to L-066. L-056 now holds only the two
+non-visual residuals: O2/O3 console wording (one-line fix on next touch) and
+apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed here.
+
+#### [L-066] MAPS per-frame comet-tail animation wiring
+<!-- L:066 status:OPEN upd:2026-06-23 section:G flag: rice:2/3/75/1 -->
+- **Wire MAPS into the per-frame comet-tail animation.** In ANIMATION mode the MAPS
+  tail does NOT render at all (it renders in STATIC mode only) -- Tony, Mode-5,
+  2026-06-23. Extracted from L-056. The earlier "non-animation BY DESIGN" notes
+  (L-004 / L-011, now in C) recorded the Phase-4 DEFERRAL (ADDENDUM_phase4 decision
+  1), NOT a permanent exclusion -- the wiring is wanted and was always scoped as
+  deferred, not done. THE FIX (handoff v29 scoping): remove the one-line gate at
+  palomas_orrery.py L2324 (`if name == 'MAPS': continue`). build_comet_tail_traces
+  is shared with all comets -- NO MAPS-specific code needed. Static path
+  (plot_objects L6062) already handles MAPS.
+**Gap:** PREREQUISITE -- review ADDENDUM_phase4 decision 1 (two-site exclusion
+warning + partition design) before removing the L2324 gate. Risk: frame-1 tail
+doubling (known pattern, known guard; Tony reports it currently GONE -- verify it
+stays gone). Mode-5 gate: MAPS tail animates per-frame like the other comets
+(updates each frame), no frame-1 doubling, exclusion warning still correct.
+**Ref:** extracted from L-056 (2026-06-23); ADDENDUM_phase4 decision 1; handoff v29;
+palomas_orrery.py L2324 (gate) + L6062 (static path); build_comet_tail_traces;
+prereqs ADDENDUM_phase4_decisions.md + HANDOFF_animation_phase4_brief.md.
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
