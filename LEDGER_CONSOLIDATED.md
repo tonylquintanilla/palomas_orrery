@@ -1730,7 +1730,7 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 - **Recently closed:** _enter_orrery_mode() DEFAULT_CONFIG reset
   `[verified @2f40d9d ~L4775]`; 'ongoing' status comment
   (spacecraft_encounters.py L60, verified).
-**Tony:** this is connect to another item on the studio preset generator refactor. 
+**Tony:** this connects to another item on the studio preset generator refactor. 
 
 ---
 
