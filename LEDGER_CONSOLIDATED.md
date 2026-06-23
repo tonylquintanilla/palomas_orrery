@@ -534,7 +534,11 @@ SI), retrieved 2026-06-22.
 
 ## PENDING ACTION (Tony-side)
 
-## B. STRATEGIC STATUS
+## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+### Strategic status -- shell-consolidation + animation refactor (CLOSED, for the record)
+(Moved from B. Strategic Status, 2026-06-22; no L-number, historical record. The animation
+"final gate pending" noted below PASSED at L-004 / v4.1, June 17.)
 
 **The shell-consolidation refactor is COMPLETE** (per v23 headline; all 13 bodies
 route through SHELL_CONFIGS / CUSTOM_SHELLS -> create_celestial_body_visualization
@@ -579,11 +583,7 @@ bow-shock hover disclosure remainder was delivered in Session C
 Tier-1 FIX NOW = 0]`. The clean mark held through the entire animation
 refactor.
 
-**Tony:** This item does not have an L-number or header and should be closed and moved to C.
-
 ---
-
-## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
 
 From v23 DONE table (closed by D1/D2/D3.1/C1; `[per chain]`):
 1 Sun config extraction; 4 sun_position wiring (static); 10 double sun direction
@@ -852,7 +852,6 @@ feature, needs clarification from Tony.
 <!-- L:006 status:DONE upd:2026-06-20 section:C flag: rice: -->
 - **Mercury +0.2 R_M northward dipole offset** -- DONE. (Anderson 2011;
   v24 Movement-2 item.) `[verified absent @76c330e]`
-  **Tony:** let's prioritize the dipole implementation for Mercury, Earth and Jupiter and clean these up. 
   **Done (2026-06-20, built @5b294c8 -> pushed @08f9831, Mode-5 confirmed):**
   offset_fraction 0.19 R_M northward implemented in PLANET_DIPOLE +
   build_dipole_cone_traces (axial; Anderson et al. 2011, MESSENGER). Mercury
@@ -878,7 +877,10 @@ feature, needs clarification from Tony.
   show the envelope, but the tilt that SETS it must be cited, not
   remembered. **per-body half_len_frac tuning** (Mode-5 knobs).
   `[verified set @33aac56]`
-**Tony:** as mentioned above, let's prioritize cleaning up the remaining dipoles and cones.
+**DONE (2026-06-22, verified in code @26e58b2):** all six magnetosphere bodies carry a
+SOURCED dipole_cone in CUSTOM_SHELLS (Mercury, Earth, Jupiter, Saturn, Uranus, Neptune);
+implementation + provenance gate cleared. The body text above is the June-13 state, now
+superseded. Only the rolling-cone coupling remains -- tracked as L-061.
 **Done (2026-06-20, built @5b294c8 -> pushed @08f9831, Mode-5 confirmed):**
   REMAINING DIPOLE CONES sub-part CLOSED -- Mercury, Earth, Jupiter, Saturn
   dipole_cones built + rendered (handoff v30). Offset MAGNITUDE sourced and
@@ -1224,9 +1226,8 @@ to convert, but the diff touches every line, so best as a standalone
 commit with no other changes.
 **Gap:** convert CRLF -> LF (binary-mode script or dos2unix). Do as
 isolated commit. Low risk but noisy diff.
-**Tony:** this should be part of a general sweep of the code base for LF conversion. 
-this is a maintenance item to keep the codebase platform neutral, which is the larger goal
-and should be stated clearly. 
+**Platform neutrality (the larger goal):** part of a general codebase LF-conversion sweep;
+keeps the project platform-neutral across Windows / macOS / Linux. Pairs with L-027.
 
 #### [L-027 | #61] Platform Neutrality (SystemButtonFace)
 <!-- L:027 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/75/2 -->
@@ -1236,7 +1237,8 @@ a workaround, not a fix. Options: hex literal '#F0F0F0', platform
 detection (sys.platform), or ttk styling.
 **Gap:** choose replacement strategy, then sweep. Design decision before
 build. Moderate scope (26 sites); low functional risk (cosmetic only).
-**Tony:** this has the same purpose as L-026. 
+**Platform neutrality:** same goal as L-026 (the LF sweep) -- pair them. This is the Tk
+color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk).
 
 #### [L-028] ASCII em-dash violation, comet_visualization_shells.py L257/505/519
 <!-- L:028 status:OPEN upd:2026-06-11 section:D.Structural flag: rice:1/1/100/1 -->
@@ -1730,7 +1732,7 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 - **Recently closed:** _enter_orrery_mode() DEFAULT_CONFIG reset
   `[verified @2f40d9d ~L4775]`; 'ongoing' status comment
   (spacecraft_encounters.py L60, verified).
-**Tony:** this connects to another item on the studio preset generator refactor. 
+**Linked:** coupled to L-046 (encounter generator -> preset-authoring skill).
 
 ---
 
