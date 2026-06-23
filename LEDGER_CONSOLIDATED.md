@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*44 live items; 41 need attention (`!`); 44 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*44 live items; 40 need attention (`!`); 44 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -253,7 +253,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
-| ! | L-020 (#26) | CUSTOM_SHELLS tooltip verification | OPEN | 0.9 | 2026-06-18 |
+|  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
 
 ### D.Cosmetic
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -601,7 +601,6 @@ legendgroup; 57 Neptune double-leader; 58 MAPS placeholder legendgroups;
 N1 osculating-marker "color not defined"; 36/39 Neptune/Uranus provenance Tier-1
 display strings; 53 Neptune magnetic-center marker -> square-open;
 N2-orphan Uranus dipole SIGN closed by convention.
-**Tony:** this item does not have an L-number or header. 
 
 Closed SINCE v23 (Movement chain + verified):
 - **24 Bow shocks (all 8)** -- DONE (v24). **Magnetosphere nest sizing** -- DONE
@@ -676,7 +675,6 @@ Closed SINCE v23 (Movement chain + verified):
   voyager1h_var) are DEAD/unwired; the live "2024 DW" var is asteroid_dw_var
   (already in the 182 objects); the sweep re-zeros the dead 4 harmlessly (D-sweep
   candidates).
-  **Tony:** this item does not have an L-number or header. 
 
 
 #### [L-004] Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push
@@ -688,7 +686,6 @@ Closed SINCE v23 (Movement chain + verified):
   section C and update 21/51. (v4 first run, June 11: C1/C3/C5/C7 PASS,
   C4 pass-with-caveat, C2/C6 blocked by the three bugs below -- all
   three root-caused and fixed in pass C2.)
-**Tony:** let's discuss this item and remove from Pending Action section. 
 **Note (2026-06-17):** v4.1 gate COMPLETE. C2 PASS (Halley: no doubling,
   comet details correct, Sun tracking works). C6d PASS (Mercury-centered
   29-frame animation: Sun tracks correctly). O16 PASS WITH NOTE (auto-scale
@@ -706,7 +703,6 @@ Closed SINCE v23 (Movement chain + verified):
 - (CLEARED June 11) Phase 2, Session A, Session B, and Session C are all AT
   HEAD (chain above); no code push outstanding.
 
-**Tony:** protocol v3.28 has been committed to GitHub and can be removed from Pending section. 
 **Note (2026-06-17):** v3.28 confirmed committed @8e0f228. DONE -- move to C.
 **Gap:** none -- move to section C.
 
@@ -723,9 +719,6 @@ Closed SINCE v23 (Movement chain + verified):
   console noise. All four now route through _parse_osc_epoch (one
   producer, three formats) with a loud [EPOCH] note before any J2000
   fallback. Smoke-tested (all three Horizons forms + garbage -> None).
-**Tony:** question to Claude: if this bug is fixed should it remain in the Priority section? 
-this is a general question about Ledger organization. I see that there are other similar items. 
-How are "Gap" items addressed? 
 **Note (2026-06-17):** DONE items stay in their section until a housekeeping
   pass moves them to C -- they provide a readable trail without jumping to
   the archive. When Gap says "none -- move to section C" that is the
@@ -812,7 +805,6 @@ Fix documented in neptune_visualization_shells.py docstring (Stage 3
 sweep, May 27-28 2026).
 **Note:** visual verification (Mode 5 render) to confirm markers sit on
 their rings, then close. Zero code risk.
-**Tony:** Mode 5 confirmed. Close.
 `**Gap:** none -- move to section C`
 
 #### [L-021 | #28] Neptune superimposed info markers (verify + close)
@@ -823,7 +815,6 @@ radiation belts, ring system) might overlap visually. The Stage 3 sweep
 markers collapsed to one position.
 **Note:** visual verification (Mode 5 render) -- confirm markers at
 distinct positions. Zero code risk.
-**Tony:** Confirmed Mode 5. Close.
 `**Gap:** none -- move to section C`
 
 #### [L-023 | #N2] Saturn/Uranus ring marker placement
@@ -834,7 +825,6 @@ one degenerate X-axis-rotated marker" (Stage 3 sweep, May 27 2026).
 Markers now use first point of rotated ring geometry.
 **Note:** visual verification (Mode 5 render) -- confirm ring markers sit
 on their respective rings. Zero code risk. Likely DONE.
-**Tony:** Confirmed Mode 5. Close.
 `**Gap:** none -- move to section C`
 
 #### [L-024 | #N4] Planet 9 sphere n=50 -> 20/25
@@ -844,7 +834,6 @@ uses n_points=20. If the original concern was n=50 being too dense, the
 current values (20-24) appear to address it.
 **Note:** verify that no Planet 9 shell still carries n=50. If all are at
 20-24, close. Zero code risk.
-**Tony:** Confirmed Mode 5. Close.
 `**Gap:** none -- move to section C`
 
 #### [L-029] v25 D3 dead-code annotations + small-body analytical tail
@@ -857,7 +846,6 @@ absorbed by the Phase 3 sweep.
 **Note:** verify whether any actionable content remains. If not, close
 as absorbed. If the "small-body analytical tail" refers to a specific
 feature, needs clarification from Tony.
-**Tony:** No recollection of a gap.
 `**Gap:** none -- move to section C`
 
 #### [L-006] Mercury +0.2 R_M northward dipole offset
@@ -1208,16 +1196,15 @@ animate_objects), then delete bodies. Low risk; cleanup only.
 **Ref:** planet_visualization.py L558, L293, L306; neptune_visualization_shells.py.
 
 #### [L-020 | #26] CUSTOM_SHELLS tooltip verification
-<!-- L:020 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:1/2/90/2 -->
+<!-- L:020 status:DONE upd:2026-06-22 section:D.Structural flag: rice:1/2/90/2 -->
 Verify that every CUSTOM_SHELLS entry in shell_configs.py has a tooltip
 and that the tooltip text is accurate. CUSTOM_SHELLS covers rotation axes,
 sodium tail, magnetospheres, bow shocks, radiation belts, rings, and
 field-aligned currents across Moon, Pluto, Mercury, Venus, Earth, Mars,
 Jupiter, Saturn, Uranus, Neptune.
-**Gap:** scan CUSTOM_SHELLS dict; verify tooltip key present and text
-reasonable. Could be scripted. Zero code risk.
-**Tony:** we have verified the hovertext by mode 5 a number of times. a simple grep could
-determine if any were inadvertently missed or misconfigured. 
+**Gap:** none -- VERIFIED 2026-06-22 (AST walk of CUSTOM_SHELLS @666244f):
+11 bodies, 41 leaf shell-configs, all 41 carry a tooltip, zero missing. DONE;
+move to section C on next housekeeping relocation.
 
 #### [L-025 | #N7] Reduced to custom-geometry inline markers only
 <!-- L:025 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/50/2 -->
@@ -1635,7 +1622,6 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 
 ## F. CONSOLIDATION LOG (what each pass repaired)
 
-**Tony:** these items are missing L-numbers and headers. 
 
 - (June 7, v28 consolidation) RESTORED 2 leaked Movement-2 items + the v24
   sec5 batch; corrected the stale U3 "open"; UNIFIED the three animation
