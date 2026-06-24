@@ -271,6 +271,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Feature-A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-066 | MAPS per-frame comet-tail animation wiring | OPEN | 4.5 | 2026-06-23 |
 | ! | L-040 (#19) | Plot-cube control parity + scaling/camera comprehensive review | OPEN | 1.5 | 2026-06-13 |
 | ! | L-039 (#23) | Earth ionosphere shell | OPEN | 1.2 | 2026-06-21 |
 | ! | L-042 (#20/N5) | Shell-resolution GUI control (20/N5) + Fly-to view scaling (49) | OPEN | 0.5 | 2026-06-11 |
@@ -295,8 +296,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Parked
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-|  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | PARKED | 1.0 | - |
-|  | L-049 (#N8) | Comet info-marker superposition cluster | PARKED | 0.5 | - |
+|  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
+|  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 
 ### D.LooseEnd
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -311,7 +312,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### G
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-066 | MAPS per-frame comet-tail animation wiring | OPEN | 4.5 | 2026-06-23 |
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066) | OPEN | 0.5 | 2026-06-23 |
 
@@ -1332,6 +1332,26 @@ HEAD, define the on-layer-text format contract, then sweep. Section placement
 
 ### D.Feature -- Bucket A (near-term)
 
+#### [L-066] MAPS per-frame comet-tail animation wiring
+<!-- L:066 status:OPEN upd:2026-06-23 section:D.Feature-A flag: rice:2/3/75/1 -->
+- **Wire MAPS into the per-frame comet-tail animation.** In ANIMATION mode the MAPS
+  tail does NOT render at all (it renders in STATIC mode only) -- Tony, Mode-5,
+  2026-06-23. Extracted from L-056. The earlier "non-animation BY DESIGN" notes
+  (L-004 / L-011, now in C) recorded the Phase-4 DEFERRAL (ADDENDUM_phase4 decision
+  1), NOT a permanent exclusion -- the wiring is wanted and was always scoped as
+  deferred, not done. THE FIX (handoff v29 scoping): remove the one-line gate at
+  palomas_orrery.py L2324 (`if name == 'MAPS': continue`). build_comet_tail_traces
+  is shared with all comets -- NO MAPS-specific code needed. Static path
+  (plot_objects L6062) already handles MAPS.
+**Gap:** PREREQUISITE -- review ADDENDUM_phase4 decision 1 (two-site exclusion
+warning + partition design) before removing the L2324 gate. Risk: frame-1 tail
+doubling (known pattern, known guard; Tony reports it currently GONE -- verify it
+stays gone). Mode-5 gate: MAPS tail animates per-frame like the other comets
+(updates each frame), no frame-1 doubling, exclusion warning still correct.
+**Ref:** extracted from L-056 (2026-06-23); ADDENDUM_phase4 decision 1; handoff v29;
+palomas_orrery.py L2324 (gate) + L6062 (static path); build_comet_tail_traces;
+prereqs ADDENDUM_phase4_decisions.md + HANDOFF_animation_phase4_brief.md.
+
 #### [L-039 | #23] Earth ionosphere shell
 <!-- L:039 status:OPEN upd:2026-06-21 section:D.Feature-A flag: rice:2/2/60/2 -->
 - **Add an ionosphere shell to Earth's visualization** -- a new atmospheric shell
@@ -1613,14 +1633,14 @@ section C on next housekeeping relocation.
 **Ref:** spun out of L-048 (closed 2026-06-23).
 
 #### [L-049 | #N8] Comet info-marker superposition cluster
-<!-- L:049 status:PARKED upd:- section:D.Parked flag: rice:1/2/50/2 -->
+<!-- L:049 status:DONE upd:2026-06-23 section:D.Parked flag: rice:1/2/50/2 -->
 `[per chain]`
-**Tony:** need to verify mode 5. 
+**Mode-5 confirmed (2026-06-23, Tony):** comet info-markers no longer superimposed. DONE; move to C on next housekeeping.
 
 #### [L-050 | #N9] white -> red orbit-marker switch (osculating marker intentionally stays white)
-<!-- L:050 status:PARKED upd:- section:D.Parked flag: rice:2/1/50/1 -->
+<!-- L:050 status:DONE upd:2026-06-23 section:D.Parked flag: rice:2/1/50/1 -->
 `[per chain]`
-**Tony:** need to verify mode 5. 
+**RETIRED (2026-06-23, Tony):** undetermined -- no recollection of an orbit-color problem. Closed as undetermined; will resurface if real.
 
 ### D.Loose end to reconcile `[per chain; not re-verified]`
 
@@ -1720,26 +1740,6 @@ section C on next housekeeping relocation.
 **Note (2026-06-23):** MAPS wiring split out to L-066. L-056 now holds only the two
 non-visual residuals: O2/O3 console wording (one-line fix on next touch) and
 apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed here.
-
-#### [L-066] MAPS per-frame comet-tail animation wiring
-<!-- L:066 status:OPEN upd:2026-06-23 section:G flag: rice:2/3/75/1 -->
-- **Wire MAPS into the per-frame comet-tail animation.** In ANIMATION mode the MAPS
-  tail does NOT render at all (it renders in STATIC mode only) -- Tony, Mode-5,
-  2026-06-23. Extracted from L-056. The earlier "non-animation BY DESIGN" notes
-  (L-004 / L-011, now in C) recorded the Phase-4 DEFERRAL (ADDENDUM_phase4 decision
-  1), NOT a permanent exclusion -- the wiring is wanted and was always scoped as
-  deferred, not done. THE FIX (handoff v29 scoping): remove the one-line gate at
-  palomas_orrery.py L2324 (`if name == 'MAPS': continue`). build_comet_tail_traces
-  is shared with all comets -- NO MAPS-specific code needed. Static path
-  (plot_objects L6062) already handles MAPS.
-**Gap:** PREREQUISITE -- review ADDENDUM_phase4 decision 1 (two-site exclusion
-warning + partition design) before removing the L2324 gate. Risk: frame-1 tail
-doubling (known pattern, known guard; Tony reports it currently GONE -- verify it
-stays gone). Mode-5 gate: MAPS tail animates per-frame like the other comets
-(updates each frame), no frame-1 doubling, exclusion warning still correct.
-**Ref:** extracted from L-056 (2026-06-23); ADDENDUM_phase4 decision 1; handoff v29;
-palomas_orrery.py L2324 (gate) + L6062 (static path); build_comet_tail_traces;
-prereqs ADDENDUM_phase4_decisions.md + HANDOFF_animation_phase4_brief.md.
 
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
