@@ -330,85 +330,28 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/90/2 -->
-- **Food Insecurity -- Sudan, Current period; design re-converged 2026-06-22.**
-  Earth System track. Phase-1 design now locked tighter AND simpler than the
-  original manifest. Old work (period7_food_insecurity.html + pre-rethink
-  handoffs) is REFERENCE ONLY, not a building block -- starting fresh.
-- **Source (SUPERSEDES the 2026-06-21 HDX-mirror call):** IPC Mapping Tool
-  no-key GeoJSON (ipcinfo.org/ipc-country-analysis/ipc-mapping-tool/). IPC-native
-  geometry + full per-area phase attributes in one file, NO key -- the IPC key is
-  no longer needed at all. Fetched + inspected 2026-06-22
-  (IPC_SD_A_87143417_2026-06-22.geojson): 228 features (189 area polygons, 39
-  call-out points), one polygon per analysis area carrying mapped phase, full
-  phase1-5 population/pct, evidence level (confidence_level), assistance level
-  (hfa_value), risk_of_famine flag, period window. Provenance UPGRADES to "IPC,
-  IPC Mapping Tool" (not "IPC via HDX", not FEWS NET -- FEWS is IPC-compatible
-  but NOT IPC consensus, by its own statement). HDX dataset demoted to scriptable
-  backup (ipc_sdn.geojson + CSVs, stable resource IDs) and the route to the
-  deferred historical arc (area_long CSV spans 2019-2027). SANDBOX WALL: ipcinfo
-  + data.humdata.org bot-block automated fetch -- Tony fetches manually (the
-  coral arrangement, confirmed working this session).
-- **Scope: Phase 1 = CURRENT PERIOD ONLY (Feb-May 2026).** Full national coverage
-  (195 localities). Projections (Jun-Sep 2026 lean, Oct 2026-Jan 2027 harvest;
-  PARTIAL, 56/195 localities; IPC's own "do not compare across periods" caveat)
-  DEFERRED to a deliberate second layer. Current-only is both the honest data
-  scope (no comparability hazard; not-analysed collapses to one null feature,
-  Abyei PCA) and the right Reel length.
-- **Popup shows the FULL phase breakdown, not just mapped phase.** Each balloon
-  carries phase1-5 population/pct INCLUDING phase5_population (Catastrophe). This
-  is the structural fix for the mapped-vs-population error: the map color is the
-  highest severity affecting AT LEAST 20% of an area's population, so sub-20%
-  Phase-5 populations hide behind a P4 color (23 areas carry Catastrophe pops,
-  all mapped P4). Legend STATES the 20% rule so the glance is honest.
-- **Drivers = single NATIONAL card, IPC voice:** conflict; displacement/
-  immobility; high food prices; health/WASH collapse; limited humanitarian
-  access. Includes IPC's OWN naming of the Middle East -> fuel/food/fertilizer
-  channel -- the Iran-war test case resolved per the handoff rule (transcribe
-  IPC's framing, never author the linkage; reader makes the Hormuz connection).
-  No per-area driver prose invented.
-- **Totals TRANSCRIBED from the IPC report, NEVER summed from polygons.** Naive
-  GeoJSON sum overcounts (28M vs IPC's 19.5M P3+; 185k vs 135k P5) because
-  IDP-settlement units overlap host localities. Headline figures (19.5M in P3+,
-  ~135k in Catastrophe) come from IPC's text; polygons are for per-area color +
-  popups only.
-- **Corrected section-10 framing (replaces the stale Sept-2025 spot-check):** NO
-  area mapped Phase 5; ~135k in Phase 5 (Catastrophe) [N/S Darfur, S Kordofan];
-  El Fasher/Kadugli "not directly comparable" this round (data did not allow
-  town-level disaggregation -- a data gap, NOT an improvement; concerns remain
-  high); 14 areas at risk of Famine in the Jun-Sep worst-case projection.
-  Verification = "phases render where the CURRENT release puts them," no
-  hardcoded area-to-phase claim.
-- **Two-tier on-layer text (NEW principle):** on-layer text splits by how words
-  get authority. TRANSCRIBED tier (IPC's verbatim words -- drivers, citation,
-  period, analysis date) is safe by construction. COMPOSED tier (sentences we
-  write because no single IPC line says them -- e.g. "no area mapped Phase 5 but
-  ~135k in Catastrophe") is high-stakes: hardcode it as a framing-layer text
-  element, BUILD it in the generator with each numeric token carrying a
-  `# Source:` within scanner lookback (not pasted as a finished string), and it
-  MUST trip provenance scanner Tier-1 before push -- cite-or-remove, never
-  cite-to-clear. (See L-064 for the family-wide sweep.)
-- **Venue: one KMZ, two showings.** Live in the gallery (palomasorrery.com) and
-  as a narrated Reel (60-90s) on instagram (palomas_orrery). The Reel ROUTE
-  (national figure -> the P4 orange -> the hidden Catastrophe -> national drivers
-  -> close) is a first-class design input; narration reads FROM the on-layer
-  framing text, closing the ad-lib gap (words said == words on the layer ==
-  sourced).
-**Gap:** design not yet fully written down. NEXT: (1) [done this session] ledger
-revised; (2) write design handoff v2 as the design-session plan; (3) then
-manifest v2 (executable spec) -- decide now-vs-next-session; (4) then code from
-the manifest. Still to SOURCE before build: exact IPC recommended-citation string
-(lift verbatim from the report); IPC official phase hex ramp (color guidance --
-GeoJSON carries no colors, do not recall); confirm provenance_scanner.py
-traverses the food-insecurity generator's framing-layer display path at HEAD.
-Read the live Earth System KMZ pattern from the repo at HEAD before writing
-integration (do not prescribe from the manifest).
-**Ref:** design base 2026-06-22 (HEAD f1834dc); IPC Mapping Tool GeoJSON
-(IPC_SD_A_87143417_2026-06-22.geojson, analysis "SD February 2026"); IPC Sudan
-Special Report Feb2026-Jan2027 (published 2026-06-03, data to 2026-04-10, Natl
-IPC Technical Working Group); supersedes HANDOFF_food_insecurity_design_v1.md +
-MANIFEST_food_insecurity_sudan_first_cut.md (de12f56, now reference). Pending:
-design handoff v2, manifest v2.
+<!-- L:001 status:OPEN upd:2026-06-24 section:A flag: rice:3/3/95/2 -->
+- **Phase-1 build COMPLETE, render-confirmed (Mode-5, ge_sudan.jpg, built on
+  03630ae).** Module: food_insecurity_generator.py -- new dedicated vector/
+  categorical generator (NOT a bend of run_scenario); 189 area polygons, full
+  phase1-5 balloon breakdown, transcribed national totals (never summed),
+  legend + national ScreenOverlay cards, framing folder, optional Plotly teaser.
+  KMZ byte-verified: Beliel balloon shows Phase 5 = 26,411 under mapped P4 (the
+  hidden Catastrophe made visible). Provenance scanner Tier-1 = 0 (but see L-064
+  -- that clean is currently a false clean for this module).
+- **Discrepancy resolved (file wins):** phase5_population>0 is in 10 areas, not
+  23 as the manifest prose said; all 10 are mapped P4. Built to the file.
+- **Provenance flags carried forward:** phase ramp hex SAMPLED from report p.7
+  legend (not IPC published hex); report has NO formal recommended-citation line
+  (CITATION assembled from title page); per-area confidence_level/hfa_value shown
+  as RAW values (no word-legend in report to map them). All open to retune.
+- **Still open under this track:** GUI registration snippet placement (Earth
+  System selector; module is standalone-runnable now); module-name confirmation
+  (food_insecurity_generator.py is a proposal). Deferred sub-layers split out:
+  Phase-5 reveal -> L-069; 39 IPC call-out points (HFA-bag/IDP symbols) and the
+  Jun-Sep / Oct-Jan projections remain deferred per original scope.
+**Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
+(built on 03630ae); cross-ref L-064, L-069.
 
 #### [L-002] Protocol -> Skills refactor (process/tooling)
 <!-- L:002 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/50/3 -->
@@ -534,6 +477,24 @@ temp) + Sentinel-3 LST; EU Copernicus Climate Change Service (C3S); L-001 + L-06
 (two-tier on-layer text + scanner-format sweep). Current-event context: 2026
 European heatwaves (record June temps; deaths reported across FR/UK/IE/ES/AT/DE/
 SI), retrieved 2026-06-22.
+
+#### [L-069] Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan)
+<!-- L:069 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/65/2 -->
+- **Surface the population-level Phase 5 (Catastrophe) that the choropleth
+  structurally cannot show.** No area is mapped P5; ~135,000 in Catastrophe live
+  as sub-20% pockets inside P4-mapped areas, concentrated in Darfur (Beliel
+  26,411; Al Fasher 26,123; Nyala Shimal 18,231; Um Baru; Kernoi; Melit; At Tina)
+  and Kordofan (Dilling; Al Buram; Kadugli). 10 P5-bearing areas total.
+- **Design (this session, not built):** encoding is the fork, not extent. Leaning
+  graduated-symbol overlay (maroon dot per P5 area, sized by phase5_population,
+  own balloon) toggle-able in the SAME KMZ, + optional saved Darfur/Kordofan
+  LookAt (geographic analog of the 3D-axis dtick+range / close-approach framing).
+  Centroid placement TBD; dot clutter at national scale is the known risk the
+  regional LookAt addresses.
+**Gap:** OPEN DESIGN. Tony decision pending: overlay-in-current-KMZ vs separate
+"Darfur-Kordofan Catastrophe" artifact. Converge before build.
+**Ref:** L-001 (parent track); ge_sudan.jpg (Mode-5 that prompted it);
+food_insecurity_generator.py (build target).
 
 ## PENDING ACTION (Tony-side)
 
@@ -1282,25 +1243,29 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
 
 #### [L-064] Provenance-scanner format sweep -- Earth System family
-<!-- L:064 status:OPEN upd:2026-06-22 section:D.Structural flag: rice:3/2/50/1 -->
-- **Sweep the Earth System visualizations so on-layer / display-string text is in
-  a format the provenance scanner catches at Tier-1.** Emerged from L-001's
-  two-tier-text decision: the composed-tier discipline (numeric claims built in
-  the generator with `# Source:` within lookback; framing-layer / annotation text
-  traversed by the scanner, not just per-feature popups) should hold across the
-  whole family -- ERA5 heat maps, energy imbalance, ENSO (L-060), ocean
-  acidification / pH, food insecurity (L-001) -- so composed sensitive statements
-  everywhere are scanner-visible, not "trust me."
-- **Design-needed:** confirm, per module, whether provenance_scanner.py actually
-  traverses each generator's display-string path (esp. framing-layer/annotation
-  text vs per-feature popups); where it does not, the fix (move numeric
-  construction to a scanner-visible site / make the path traversable) is the task.
-  Couples with the provenance audit (PROVENANCE_AUDIT.md, Tier-1=0 goal).
-**Gap:** deferred. Confirm scanner coverage of each Earth System generator at
-HEAD, define the on-layer-text format contract, then sweep. Section placement
-(D.Structural) adjustable.
-**Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; originated from L-001
-(two-tier on-layer text).
+<!-- L:064 status:OPEN upd:2026-06-24 section:D.Structural flag: rice:3/2/60/2 -->
+- **CONFIRMED for food_insecurity_generator (the per-module question this item
+  poses): the scanner does NOT traverse it.** Two compounding gaps, both proven
+  empirically (uncited recognized-unit token in a fresh file -> zero findings):
+  (1) ALLOW-LIST gap -- _extract_string_units only runs for a hardcoded
+  narrative_files set (+ *_visualization_shells); a new module is excluded, so
+  its display strings are never extracted/scored. (2) VOCABULARY gap --
+  NUMERIC_CLAIM_RE recognizes only physical units (AU/km/deg/masses/K/kg...), no
+  people|percent|%|million|thousand|billion, so humanitarian figures aren't seen
+  as claims even inside an allow-listed file. The module's Tier-1=0 is a FALSE
+  clean.
+- **Verified two-part fix (on a SCRATCH copy; repo scanner untouched):** add
+  'food_insecurity_generator' to narrative_files; append the humanitarian units
+  to NUMERIC_CLAIM_RE. Under it, this module's sourced strings all read "Has
+  source citation," Tier-3 -- the construction-site # Source: discipline holds.
+- **Family ripple (decision driver):** the vocabulary extension newly surfaces a
+  pre-existing REAL Tier-1 -- star_notes.py:1257, "No source citation (recalled)"
+  -- invisible before only because of the vocabulary gap. Part (1) is local/safe;
+  part (2) is family-wide CI with a ripple to triage.
+**Gap:** Tony decision -- take part (1) now / defer part (2) to the full sweep /
+take both and triage star_notes:1257. Then sweep remaining Earth System modules.
+**Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; originated from L-001;
+confirmed via food_insecurity_generator build (HANDOFF_food_insecurity_build_v2.md).
 
 ### D.Cosmetic -- polish (bundle when convenient)
 
