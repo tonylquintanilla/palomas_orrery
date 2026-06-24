@@ -162,7 +162,7 @@ MIDDLE_EAST_LINE = ("IPC notes the ongoing conflict in the Middle East "
 # C3 -- causal-restraint statement. COMPOSED (ours), no numeric token.
 CAUSAL_RESTRAINT = ("This layer documents where IPC records strain and "
                     "attributes drivers to IPC. It draws no causal arrow of its "
-                    "own; the reader connects the pattern.")
+                    "own.")
 
 # Provenance / attribution lines.
 # Source: data is the IPC Mapping Tool no-key GeoJSON download.
@@ -360,18 +360,23 @@ def compose_framing_text():
     return {"national": national, "c1": c1, "c2": c2, "c3": c3}
 
 
-def create_legend_card():
-    """Phase ramp + not-analysed + the >=20% rule sentence (ScreenOverlay PNG)."""
-    fig = plt.figure(figsize=(2.7, 3.4), dpi=130)
+def create_legend_card(p5_min=None, p5_max=None):
+    """Phase ramp + >=20% rule + (if provided) the Phase 5 dot-size key.
+
+    The dot-size key shows what a large vs small maroon dot means. Its values
+    (p5_min/p5_max) are the actual range of phase5_population in the data, passed
+    in at runtime -- nothing here is hardcoded or recalled.
+    """
+    fig = plt.figure(figsize=(2.7, 4.7), dpi=130)
     fig.patch.set_facecolor("white")
     fig.patch.set_alpha(0.9)
     ax = fig.add_subplot(111)
     ax.axis("off")
     ax.set_xlim(0, 10)
-    ax.set_ylim(0, 12)
+    ax.set_ylim(0, 16)
 
-    ax.text(0.2, 11.4, "IPC Acute Food Insecurity", fontweight="bold", fontsize=8)
-    ax.text(0.2, 10.8, "Phase Classification", fontsize=7.5)
+    ax.text(0.2, 15.4, "IPC Acute Food Insecurity", fontweight="bold", fontsize=8)
+    ax.text(0.2, 14.8, "Phase Classification", fontsize=7.5)
 
     rows = [(5, "5  Famine / Catastrophe", PHASE_COLORS_RGB[5]),
             (4, "4  Emergency", PHASE_COLORS_RGB[4]),
@@ -379,7 +384,7 @@ def create_legend_card():
             (2, "2  Stressed", PHASE_COLORS_RGB[2]),
             (1, "1  Minimal", PHASE_COLORS_RGB[1]),
             (0, "Not analysed", NOT_ANALYSED_RGB)]
-    y = 9.6
+    y = 13.6
     for _, label, color in rows:
         ax.add_patch(mpatches.Rectangle((0.3, y - 0.35), 1.0, 0.7,
                                         facecolor=color, edgecolor="#888"))
@@ -388,7 +393,28 @@ def create_legend_card():
 
     rule = ("Mapped phase = highest severity\naffecting at least 20% of an\n"
             "area's population.")
-    ax.text(0.2, 1.4, rule, fontsize=6.5, va="top", color="#333")
+    ax.text(0.2, 5.6, rule, fontsize=6.5, va="top", color="#333")
+
+    # Phase 5 (Catastrophe) dot-size key -- only if a range was supplied.
+    if p5_min is not None and p5_max is not None and p5_max > 0:
+        ax.plot([0.2, 9.8], [3.7, 3.7], color="#bbb", lw=0.6)
+        ax.text(0.2, 3.4, "Phase 5 (Catastrophe) population",
+                fontweight="bold", fontsize=7, va="top")
+        ax.text(0.2, 2.95, "maroon dot, by area; larger = more people",
+                fontsize=6.2, va="top", color="#333")
+        dot_color = PHASE_COLORS_RGB[5]
+        # radii echo the map's sqrt sizing (large vs small), purely visual
+        r_big, r_small = 0.62, 0.62 * (P5_DOT_MIN_SCALE / P5_DOT_MAX_SCALE) ** 0.5
+        ax.add_patch(mpatches.Circle((1.1, 1.4), r_big, facecolor=dot_color,
+                                     edgecolor="white", lw=0.5))
+        ax.add_patch(mpatches.Circle((3.4, 1.15), r_small, facecolor=dot_color,
+                                     edgecolor="white", lw=0.5))
+        ax.text(2.0, 1.4, "{:,}".format(int(round(p5_max))),
+                fontsize=6.5, va="center", color="#222")
+        ax.text(4.1, 1.15, "{:,}".format(int(round(p5_min))),
+                fontsize=6.5, va="center", color="#222")
+        ax.text(0.2, 0.2, "people in Phase 5 (Catastrophe)",
+                fontsize=6.0, va="top", color="#555")
 
     path = os.path.join(DATA_DIR, "legend_%s.png" % SCENARIO_ID)
     plt.savefig(path, bbox_inches="tight", pad_inches=0.08, transparent=False)
@@ -612,7 +638,11 @@ def build_food_insecurity_kml(records, meta):
         ph.coords = [(32.5, 15.5)]  # near Khartoum; label only
 
     # Cards as ScreenOverlays (family convention).
-    legend_png = create_legend_card()
+    p5_vals = [float(r["phase_pop"][5]) for r in records
+               if (r["phase_pop"].get(5) or 0) > 0]
+    legend_png = create_legend_card(
+        p5_min=min(p5_vals) if p5_vals else None,
+        p5_max=max(p5_vals) if p5_vals else None)
     intel_png = create_intel_card(framing)
     _add_screenoverlay(kml, legend_png, sx=0.98, sy=0.05, ox=1, oy=0, size_x=0.16)
     _add_screenoverlay(kml, intel_png, sx=0.02, sy=0.98, ox=0, oy=1, size_x=0.30)
