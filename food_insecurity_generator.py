@@ -86,6 +86,17 @@ POLY_FILL_ALPHA = "CC"   # ~80%
 POLY_LINE_ALPHA = "FF"   # opaque hairline borders
 LINE_RGB = "#5A5A5A"
 
+# --- Phase 5 (Catastrophe) population dots (L-069) ------------------------
+# Graduated proportional symbols: one maroon dot per area carrying a mapped
+# Phase 5 (Catastrophe) population, sized by phase5_population (icon area ~
+# population via sqrt scaling). The dot is pure IPC passthrough -- it carries
+# field values read at runtime; no value is hardcoded or summed. Scale
+# endpoints and the icon are Mode-5 visual tunables, NOT data claims.
+P5_DOT_RGB = PHASE_COLORS_RGB[5]   # maroon; same source as the legend swatch
+P5_DOT_MIN_SCALE = 0.5
+P5_DOT_MAX_SCALE = 1.8
+P5_DOT_ICON = "http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png"
+
 # --- National headline figures (TRANSCRIBED from the report, NEVER summed) --
 # A naive polygon sum over-counts (IDP settlements overlap host localities), so
 # these come from the report TEXT, not from the GeoJSON.
@@ -246,6 +257,18 @@ def _rings_from_polygon(coords):
     outer = [(pt[0], pt[1]) for pt in coords[0]]
     holes = [[(pt[0], pt[1]) for pt in ring] for ring in coords[1:]]
     return outer, holes
+
+
+def _representative_point(geom):
+    """Interior-ish point for a dot: centroid of the largest outer ring's
+    vertices. Placement only -- not a claim about the area."""
+    if geom["type"] == "Polygon":
+        ring = geom["coordinates"][0]
+    else:  # MultiPolygon -> largest outer ring by vertex count
+        ring = max((poly[0] for poly in geom["coordinates"]), key=len)
+    xs = [pt[0] for pt in ring]
+    ys = [pt[1] for pt in ring]
+    return sum(xs) / len(xs), sum(ys) / len(ys)
 
 
 # ==========================================================================
@@ -471,6 +494,69 @@ def _phase_style(phase_value):
     return style
 
 
+def build_phase5_dots(records, document, retrieved, analysis_name=""):
+    """L-069: maroon proportional dots for areas carrying a mapped Phase 5
+    (Catastrophe) population. Pure IPC passthrough -- every displayed value is
+    read from the GeoJSON record at runtime; nothing here is hardcoded or summed.
+    Returned in their own folder so Google Earth toggles them as a group.
+
+    "Catastrophe" is IPC's population-level term; these areas are mapped Phase 4
+    (Emergency), and none is classified Famine (an area-level term). The label
+    "Famine" therefore appears nowhere on these dots, by design.
+
+    Module section updated: June 2026 with Anthropic's Claude Opus 4.8.
+    """
+    import math
+    p5_records = [r for r in records if (r["phase_pop"].get(5) or 0) > 0]
+    if not p5_records:
+        return
+    max_p5 = max(float(r["phase_pop"][5]) for r in p5_records)
+    span = P5_DOT_MAX_SCALE - P5_DOT_MIN_SCALE
+    dot_kml_color = rgb_to_kml(P5_DOT_RGB, "FF")
+
+    fol = document.newfolder(name="Phase 5 (Catastrophe) populations (area level)")
+    for rec in sorted(p5_records, key=lambda r: -float(r["phase_pop"][5])):
+        p5 = float(rec["phase_pop"][5])
+        lon, lat = _representative_point(rec["geometry"])
+        # area ~ population: scale the icon by sqrt of the population fraction
+        scale = (P5_DOT_MIN_SCALE + span * math.sqrt(p5 / max_p5)
+                 if max_p5 else P5_DOT_MIN_SCALE)
+
+        pv = rec["phase_value"]
+        mapped = "Phase %s (%s)" % (pv, PHASE_LABELS.get(pv, rec.get("phase_label", "")))
+
+        # Balloon: IPC fields only, read at runtime. No hardcoded/summed numbers.
+        balloon = (
+            "<![CDATA["
+            "<div style='font-family:Arial,sans-serif;font-size:12px;width:300px'>"
+            "<h3 style='margin:2px 0'>%(name)s</h3>"
+            "<b>Mapped IPC Phase:</b> %(mapped)s<br>"
+            "<b>In Phase 5 (Catastrophe):</b> %(p5)s people (%(p5pct)s%% of area)<br>"
+            "<b>Area population:</b> %(pop)s<br>"
+            "<hr style='border:none;border-top:1px solid #ccc;margin:4px 0'>"
+            "<span style='font-size:10px;color:#555'>"
+            "Analysis: %(analysis)s<br>Source: %(prov)s<br>"
+            "Data retrieved: %(retrieved)s</span></div>]]>"
+        ) % {
+            "name": rec["area_name"],
+            "mapped": mapped,
+            "p5": _intpop(rec["phase_pop"].get(5)),
+            "p5pct": _pct(rec["phase_pct"].get(5)),
+            "pop": _intpop(rec["population"]),
+            "analysis": analysis_name,
+            "prov": PROVENANCE_DATA,
+            "retrieved": retrieved,
+        }
+
+        pt = fol.newpoint(name=rec["area_name"])
+        pt.coords = [(lon, lat)]
+        pt.style.iconstyle.icon.href = P5_DOT_ICON
+        pt.style.iconstyle.color = dot_kml_color
+        pt.style.iconstyle.scale = round(scale, 3)
+        pt.style.labelstyle.scale = 0  # name on click, not as map clutter
+        pt.description = balloon
+
+
 def build_food_insecurity_kml(records, meta):
     """Build the KML doc: phase styles, per-area placemarks, framing, cards."""
     retrieved = (meta.get("export_timestamp") or "")[:10] or "IPC Mapping Tool"
@@ -507,6 +593,10 @@ def build_food_insecurity_kml(records, meta):
                 p.tessellate = 1
             mg.style = style
             mg.description = balloon
+
+    # L-069: Phase 5 (Catastrophe) population dots (pure IPC passthrough).
+    build_phase5_dots(records, kml.document, retrieved,
+                      analysis_name=meta.get("analysis_name", ""))
 
     # Framing-layer text as a KML folder of description-only placemarks (the
     # words on the layer; the sourced numbers live at the construction site).

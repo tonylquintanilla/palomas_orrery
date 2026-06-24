@@ -198,6 +198,7 @@ Module rewritten: April 17, 2026 with Anthropic's Claude Opus 4.7
     false-positive Tier-1 findings.)
 Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
     (Options A/B, lookback=60, exceptions loading, audit completion.)
+Updated with Opus 4.8 for food insecurity provenance, June 26, 2026.     
 """
 
 import ast
@@ -332,7 +333,7 @@ NUMERIC_CLAIM_RE = re.compile(
     r'ly|light[- ]years?|parsec|'
     r'days?|years?|hours?|minutes?\b|min\b|sec\b|'
     r'K\b|kelvin|kg\b|g/cm3|g/cc|'
-    r'km/h|mph)\b',
+    r'km/h|mph|people|persons?|percent|%)\b',
     re.IGNORECASE
 )
 
@@ -610,11 +611,13 @@ def extract_units_from_file(filepath, module_name, role):
         ))
 
     # ---- String literals with numeric claims ----
+
     narrative_files = {
         'constants_new', 'info_dictionary', 'celestial_objects',
         'spacecraft_encounters', 'close_approach_data',
         'exoplanet_systems', 'exoplanet_stellar_properties',
         'sgr_a_star_data', 'star_notes', 'solar_visualization_shells',
+        'food_insecurity_generator',
     }
     is_shell_file = module_name.endswith('_visualization_shells')
     if module_name in narrative_files or is_shell_file:

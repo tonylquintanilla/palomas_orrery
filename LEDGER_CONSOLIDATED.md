@@ -227,8 +227,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-065 | European heat wave heat map (Earth System track) | OPEN | 4.8 | 2026-06-22 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
+| ! | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | OPEN | 2.4 | 2026-06-24 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
-| ! | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | OPEN | 2.0 | 2026-06-24 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | 2026-06-22 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
@@ -481,22 +481,23 @@ European heatwaves (record June temps; deaths reported across FR/UK/IE/ES/AT/DE/
 SI), retrieved 2026-06-22.
 
 #### [L-069] Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan)
-<!-- L:069 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/65/2 -->
-- **Surface the population-level Phase 5 (Catastrophe) that the choropleth
-  structurally cannot show.** No area is mapped P5; ~135,000 in Catastrophe live
-  as sub-20% pockets inside P4-mapped areas, concentrated in Darfur (Beliel
-  26,411; Al Fasher 26,123; Nyala Shimal 18,231; Um Baru; Kernoi; Melit; At Tina)
-  and Kordofan (Dilling; Al Buram; Kadugli). 10 P5-bearing areas total.
-- **Design (this session, not built):** encoding is the fork, not extent. Leaning
-  graduated-symbol overlay (maroon dot per P5 area, sized by phase5_population,
-  own balloon) toggle-able in the SAME KMZ, + optional saved Darfur/Kordofan
-  LookAt (geographic analog of the 3D-axis dtick+range / close-approach framing).
-  Centroid placement TBD; dot clutter at national scale is the known risk the
-  regional LookAt addresses.
-**Gap:** OPEN DESIGN. Tony decision pending: overlay-in-current-KMZ vs separate
-"Darfur-Kordofan Catastrophe" artifact. Converge before build.
-**Ref:** L-001 (parent track); ge_sudan.jpg (Mode-5 that prompted it);
-food_insecurity_generator.py (build target).
+<!-- L:069 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/80/2 -->
+- **BUILT (render-pending Mode-5), on 03630ae.** 10 maroon proportional dots in a
+  toggle-able folder "Phase 5 (Catastrophe) populations (area level)", one per area
+  carrying a mapped Phase 5 population (all mapped P4): Beliel 26,411 ... Kadugli 930.
+  Sized area ~ population (sqrt); placed at each area's representative interior point.
+- **Pure IPC passthrough -- zero hardcoded/composed/summed numbers.** Balloon reads
+  only area_name / overall_phase / phase5_population / phase5_percentage / population
+  at runtime. "Catastrophe" (population term) used throughout; "Famine" (area term,
+  none here) appears nowhere on the dots -- verified in KMZ bytes.
+- **Scanner now CATCHES the module (no longer a false clean):** applied L-064 part-1
+  (allow-list this module) + a NARROW vocab add (people|persons?|percent|%). Verified
+  Tier-1=0, zero family ripple (star_notes:1257's "billion" trigger deliberately NOT
+  added -- deferred to the L-064 sweep). Repo scanner untouched; delivered as snippet.
+**Gap:** Mode-5 render is the close gate (dot legibility at national scale; dot-size
+legend key TBD -- composed-text decision for Tony). Then commit.
+**Ref:** L-001 (parent); L-064 (scanner; magnitude-word coverage still owed there);
+food_insecurity_generator.py; ge_sudan.jpg (the render that prompted it).
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
 <!-- L:070 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/45/3 -->

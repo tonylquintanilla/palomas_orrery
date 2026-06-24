@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
 Generated: June 24, 2026
-Modules: 113 | Functions: 916 | Lines: 89,351
+Modules: 113 | Functions: 917 | Lines: 89,431
 
 ---
 
@@ -2194,7 +2194,7 @@ and explains in context.
 
 ### provenance_scanner.py
 
-**Role:** devtool | **Lines:** 1,181
+**Role:** devtool | **Lines:** 1,183
 
 > provenance_scanner.py - Fact provenance auditor for Paloma's Orrery.
 
@@ -2203,27 +2203,27 @@ and explains in context.
 
 **Public functions:**
 
-- `action_tier(score)` (line 232) -- Return tier number (1=highest priority, 4=lowest).
-- `has_citation(text, is_docstring)` (line 297) -- Does the given text block contain a citation marker?
-- `has_stale_marker(text)` (line 312) -- Does the given text contain a staleness indicator?
-- `extract_numeric_claims(text)` (line 340) -- Yield (num_str, unit, value_float) for each numeric claim in text.
-- `build_name_import_map(project_dir, local_modules)` (line 360) -- For each local module, find which NAMES other modules import from it.
-- `name_is_imported(name, module_name, imported_names)` (line 398) -- Return (count, consumers) for a name defined in module_name.
-- `class ProvenanceUnit` (line 411) -- The smallest thing that has a coherent source citation.
-- `get_context_block(lines, unit_start_line, unit_end_line, lookback, lookahead)` (line 476) -- Return the block of text a unit can see for citation purposes.
-- `get_unit_interior(lines, line_start, line_end)` (line 497) -- Return the text inside the unit itself (per-entry comments).
-- `extract_numeric_value(node)` (line 515) -- Evaluate an AST node to a numeric constant.
-- `extract_units_from_file(filepath, module_name, role)` (line 538) -- Walk the AST of one file and emit ProvenanceUnits.
-- `build_pinned_values(project_dir)` (line 776) -- Extract numeric values from constants_new.py that have source citations.
-- `score_unit(unit, imported_names, pinned_values)` (line 832) -- Assign vulnerability and criticality to a unit.
-- `canonical_concept(name)` (line 932) -- Map a constant name to its canonical concept, or None.
-- `find_cross_file_issues(units)` (line 943) -- Find same-concept constants across multiple files.
-- `load_exceptions(project_dir)` (line 987) -- Load provenance_exceptions.json from data/ subdirectory if present.
-- `is_suppressed(unit, suppressed_fingerprints)` (line 1019) -- Check if a unit matches any suppressed fingerprint.
-- `format_accepted_residuals(accepted_residuals)` (line 1048) -- Format accepted residuals as a markdown block for the audit report.
-- `scan_project(project_dir, output_path)` (line 1073) -- Scan all .py files and produce the provenance audit report.
-- `generate_report(units, consistent_dups, inconsistencies, files_scanned, project_dir, output_path, accepted_residuals)` (line 1127) -- Write PROVENANCE_AUDIT.md.
-- `main()` (line 1354)
+- `action_tier(score)` (line 233) -- Return tier number (1=highest priority, 4=lowest).
+- `has_citation(text, is_docstring)` (line 298) -- Does the given text block contain a citation marker?
+- `has_stale_marker(text)` (line 313) -- Does the given text contain a staleness indicator?
+- `extract_numeric_claims(text)` (line 341) -- Yield (num_str, unit, value_float) for each numeric claim in text.
+- `build_name_import_map(project_dir, local_modules)` (line 361) -- For each local module, find which NAMES other modules import from it.
+- `name_is_imported(name, module_name, imported_names)` (line 399) -- Return (count, consumers) for a name defined in module_name.
+- `class ProvenanceUnit` (line 412) -- The smallest thing that has a coherent source citation.
+- `get_context_block(lines, unit_start_line, unit_end_line, lookback, lookahead)` (line 477) -- Return the block of text a unit can see for citation purposes.
+- `get_unit_interior(lines, line_start, line_end)` (line 498) -- Return the text inside the unit itself (per-entry comments).
+- `extract_numeric_value(node)` (line 516) -- Evaluate an AST node to a numeric constant.
+- `extract_units_from_file(filepath, module_name, role)` (line 539) -- Walk the AST of one file and emit ProvenanceUnits.
+- `build_pinned_values(project_dir)` (line 779) -- Extract numeric values from constants_new.py that have source citations.
+- `score_unit(unit, imported_names, pinned_values)` (line 835) -- Assign vulnerability and criticality to a unit.
+- `canonical_concept(name)` (line 935) -- Map a constant name to its canonical concept, or None.
+- `find_cross_file_issues(units)` (line 946) -- Find same-concept constants across multiple files.
+- `load_exceptions(project_dir)` (line 990) -- Load provenance_exceptions.json from data/ subdirectory if present.
+- `is_suppressed(unit, suppressed_fingerprints)` (line 1022) -- Check if a unit matches any suppressed fingerprint.
+- `format_accepted_residuals(accepted_residuals)` (line 1051) -- Format accepted residuals as a markdown block for the audit report.
+- `scan_project(project_dir, output_path)` (line 1076) -- Scan all .py files and produce the provenance audit report.
+- `generate_report(units, consistent_dups, inconsistencies, files_scanned, project_dir, output_path, accepted_residuals)` (line 1130) -- Write PROVENANCE_AUDIT.md.
+- `main()` (line 1357)
 
 ---
 
@@ -2365,7 +2365,7 @@ and explains in context.
 
 ### food_insecurity_generator.py
 
-**Role:** other | **Lines:** 548
+**Role:** other | **Lines:** 626
 
 > food_insecurity_generator.py - IPC acute food-insecurity KMZ layer (Sudan, current period).
 
@@ -2374,16 +2374,17 @@ and explains in context.
 
 **Public functions:**
 
-- `rgb_to_kml(rgb_hex, alpha_hex)` (line 174) -- Convert #RRGGBB + alpha byte to KML aabbggrr (alpha, blue, green, red).
-- `build_geojson_records(geojson_path)` (line 201) -- Parse the IPC GeoJSON into per-area records (polygons only).
-- `build_balloon_html(rec, retrieved, analysis_name)` (line 255) -- Per-area CDATA HTML balloon. All fields transcribed; none synthesized.
-- `compose_framing_text()` (line 319) -- Return the framing-layer sentences. Numeric tokens are sourced above
-- `create_legend_card()` (line 340) -- Phase ramp + not-analysed + the >=20% rule sentence (ScreenOverlay PNG).
-- `create_intel_card(framing)` (line 376) -- National figures + C1 + drivers + Middle East + C3 + citation (PNG).
-- `build_food_insecurity_kml(records, meta)` (line 474) -- Build the KML doc: phase styles, per-area placemarks, framing, cards.
-- `package_kmz(kml, asset_pngs)` (line 533) -- Write the KMZ: a single doc.kml plus the card PNGs.
-- `generate_plotly_teaser(records, meta)` (line 553) -- 2D choropleth teaser for the web gallery. Returns path or None.
-- `run(geojson_path, make_teaser, status_callback)` (line 603)
+- `rgb_to_kml(rgb_hex, alpha_hex)` (line 185) -- Convert #RRGGBB + alpha byte to KML aabbggrr (alpha, blue, green, red).
+- `build_geojson_records(geojson_path)` (line 212) -- Parse the IPC GeoJSON into per-area records (polygons only).
+- `build_balloon_html(rec, retrieved, analysis_name)` (line 278) -- Per-area CDATA HTML balloon. All fields transcribed; none synthesized.
+- `compose_framing_text()` (line 342) -- Return the framing-layer sentences. Numeric tokens are sourced above
+- `create_legend_card()` (line 363) -- Phase ramp + not-analysed + the >=20% rule sentence (ScreenOverlay PNG).
+- `create_intel_card(framing)` (line 399) -- National figures + C1 + drivers + Middle East + C3 + citation (PNG).
+- `build_phase5_dots(records, document, retrieved, analysis_name)` (line 497) -- L-069: maroon proportional dots for areas carrying a mapped Phase 5
+- `build_food_insecurity_kml(records, meta)` (line 560) -- Build the KML doc: phase styles, per-area placemarks, framing, cards.
+- `package_kmz(kml, asset_pngs)` (line 623) -- Write the KMZ: a single doc.kml plus the card PNGs.
+- `generate_plotly_teaser(records, meta)` (line 643) -- 2D choropleth teaser for the web gallery. Returns path or None.
+- `run(geojson_path, make_teaser, status_callback)` (line 693)
 
 ---
 
@@ -2577,7 +2578,7 @@ and explains in context.
 | exoplanet_systems | data | 570 | 0 | 3 |
 | fetch_climate_data | computation | 761 | 0 | 1 |
 | fetch_paleoclimate_data | computation | 169 | 0 | 0 |
-| food_insecurity_generator | other | 548 | 0 | 0 |
+| food_insecurity_generator | other | 626 | 0 | 0 |
 | formatting_utils | utility | 16 | 0 | 4 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
@@ -2617,7 +2618,7 @@ and explains in context.
 | plot_data_exchange | pipeline | 168 | 0 | 3 |
 | plot_data_report_widget | rendering | 560 | 2 | 1 |
 | pluto_visualization_shells | rendering/shells | 565 | 1 | 1 |
-| provenance_scanner | devtool | 1,181 | 1 | 0 |
+| provenance_scanner | devtool | 1,183 | 1 | 0 |
 | report_manager | utility | 124 | 0 | 4 |
 | saturn_visualization_shells | rendering/shells | 1,080 | 3 | 2 |
 | save_utils | pipeline | 795 | 1 | 18 |
