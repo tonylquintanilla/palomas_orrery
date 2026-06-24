@@ -14,11 +14,12 @@ Companion: HANDOFF_food_insecurity_design_v2.md (the reasoning trail -- WHY the
   design is what it is). Read it first. If this manifest and the handoff ever
   disagree, that disagreement is a flag to raise, not a thing to silently
   resolve.
-Abandoned (do NOT build on): the April period-7 Chart.js thread
-  (scenarios_food_insecurity.py -> data/period7_food_insecurity.html,
-  food_insecurity_handoff_v2_5.md). That work led somewhere we are not using.
-  It is named here only so its module name is not silently reused (see
-  section 12, ISSUE A).
+Abandoned (do NOT build on): the April period-7 Chart.js thread. The generator
+  scenarios_food_insecurity.py lives ONLY in Tony's sandbox archive and is NOT in
+  the repo; its output data/period7_food_insecurity.html and handoff
+  food_insecurity_handoff_v2_5.md ARE in the repo. That work led somewhere we are
+  not using. It is named here only so its module name is not resurrected from the
+  archive (see section 15, ISSUE A).
 
 --------------------------------------------------------------------------------
 ## 0. ONE-LINE PURPOSE
@@ -395,13 +396,16 @@ against repo at HEAD per section 14 item 5 -- do not prescribe from recall):
   - GUI registration so the layer appears in the Earth System selector
   - shared-family legend convention
 
-MODULE NAME -- ISSUE A (decision needed, section "Issues" below): the name
-scenarios_food_insecurity.py is already taken by the ABANDONED period-7 Chart.js
-generator. The new KMZ generator must NOT silently reuse or overwrite it. Either
-choose a distinct name that follows the live Earth System naming pattern
-(confirm at HEAD), or make retiring the period-7 file an explicit, ledgered
-action. Default for this manifest: distinct module name, to be fixed at build
-against the live pattern; period-7 retirement handled separately if at all.
+MODULE NAME -- ISSUE A: the name scenarios_food_insecurity.py belongs to the
+ABANDONED period-7 Chart.js generator, which lives ONLY in Tony's sandbox archive
+-- it is NOT tracked in the repo (verified absent from origin/main at manifest
+time). So there is no in-repo collision and nothing to overwrite. The only
+hazard is resurrecting the name (or pattern) from the archive. The KMZ generator
+takes a distinct name that follows the live Earth System naming pattern (confirm
+at HEAD); do not reuse scenarios_food_insecurity.py. (Note: the period-7 OUTPUT,
+data/period7_food_insecurity.html, and food_insecurity_handoff_v2_5.md ARE in the
+repo; the abandoned generator script is not. No repo action is required by this
+manifest.)
 
 --------------------------------------------------------------------------------
 ## 16. VERIFICATION (Mode-5 + smoke, before the layer is "done")
