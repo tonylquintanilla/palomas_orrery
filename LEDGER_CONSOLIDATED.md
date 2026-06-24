@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*46 live items; 40 need attention (`!`); 46 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*47 live items; 41 need attention (`!`); 47 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -250,6 +250,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2.2 | 2026-06-18 |
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
+| ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
@@ -1200,7 +1201,32 @@ are in comments/docstrings. Two retired Sun functions in the same file
 neptune_visualization_shells.py is marked DEPRECATED (D2 Option C, May 2026).
 **Gap:** grep-confirm zero callers across both pipelines (plot_objects +
 animate_objects), then delete bodies. Low risk; cleanup only.
-**Ref:** planet_visualization.py L558, L293, L306; neptune_visualization_shells.py.
+**Ref:** planet_visualization.py L558, L293, L306; neptune_visualization_shells.py. (umbrella: L-068)
+
+#### [L-068] Static/animation pipeline consolidation -- remaining residuals (umbrella)
+<!-- L:068 status:OPEN upd:2026-06-23 section:D.Structural flag: rice:2/2/75/2 -->
+- **Umbrella thread for the remaining practical consolidation of the static
+  (plot_objects) and animation (animate_objects) pipelines.** The big structural
+  unification is DONE -- see section C ("shell-consolidation + animation refactor")
+  and the Consolidation Log (F): scene-assembly unified, the three animation
+  pipelines merged, explicit blocks deleted in both pipelines, one unified dispatch.
+  What remains is distributed across three discrete residuals, tracked here as one
+  thread:
+    - L-066 -- behavioral parity gap: MAPS tail renders in the static path but not
+      the animation path (one-line L2324 gate). The "make the two paths agree" task.
+    - L-016 -- cleanup: grep-confirm zero callers across both pipelines, then delete
+      the dead duplicate shell-function bodies the unification left behind.
+    - L-014 -- the one render path still OUTSIDE the unified dispatch (the four
+      asteroid belts via standalone create_main_asteroid_belt()); fold into
+      CUSTOM_SHELLS or keep standalone (design call).
+  This item is also the HOME for any NEW static/animation parity gap. The standing
+  "fix both pipelines or neither" rule is a PRACTICE, not a backlog item, so new
+  gaps surface only when caught by eye (the way MAPS/L-066 did) -- when one appears,
+  log it here as a sibling of L-066.
+**Gap:** none of its own -- this thread closes when L-066, L-016, and L-014 all
+close AND no parity gap is outstanding. Tracking/umbrella item.
+**Ref:** L-066, L-016, L-014; section C strategic-status block; Consolidation Log (F);
+protocol Part 3 "Check All Parallel Pipelines".
 
 #### [L-020 | #26] CUSTOM_SHELLS tooltip verification
 <!-- L:020 status:DONE upd:2026-06-22 section:D.Structural flag: rice:1/2/90/2 -->
@@ -1350,7 +1376,7 @@ stays gone). Mode-5 gate: MAPS tail animates per-frame like the other comets
 (updates each frame), no frame-1 doubling, exclusion warning still correct.
 **Ref:** extracted from L-056 (2026-06-23); ADDENDUM_phase4 decision 1; handoff v29;
 palomas_orrery.py L2324 (gate) + L6062 (static path); build_comet_tail_traces;
-prereqs ADDENDUM_phase4_decisions.md + HANDOFF_animation_phase4_brief.md.
+prereqs ADDENDUM_phase4_decisions.md + HANDOFF_animation_phase4_brief.md. (umbrella: L-068)
 
 #### [L-039 | #23] Earth ionosphere shell
 <!-- L:039 status:OPEN upd:2026-06-21 section:D.Feature-A flag: rice:2/2/60/2 -->
@@ -1529,7 +1555,7 @@ rings and magnetospheres), or stay standalone?
 **Gap:** design decision. Benefits: unified dispatch, factory hover standard,
 one fewer standalone call path. Costs: belt geometry is scattered-point
 clouds, not sphere or ring -- CUSTOM_SHELLS builders may need a new
-convention. Low urgency; no bug, no user-visible gap.
+convention. Low urgency; no bug, no user-visible gap. (umbrella: L-068)
 [D.Feature-C: tag applied 2026-06-20 -- design-before-code]
 
 #### [L-017 | #7] Tooltip rewiring globals() -> config fields
