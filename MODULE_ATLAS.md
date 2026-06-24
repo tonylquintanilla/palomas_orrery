@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 21, 2026
-Modules: 112 | Functions: 906 | Lines: 88,803
+Generated: June 24, 2026
+Modules: 113 | Functions: 916 | Lines: 89,351
 
 ---
 
@@ -34,7 +34,7 @@ and explains in context.
 | scenario | 3 | Specific Earth system scenarios |
 | utility | 5 | Shared helper functions |
 | devtool | 12 | Developer tools (dependency tracing, atlas) |
-| other | 10 | Uncategorized |
+| other | 11 | Uncategorized |
 
 ---
 
@@ -2363,6 +2363,30 @@ and explains in context.
 
 ---
 
+### food_insecurity_generator.py
+
+**Role:** other | **Lines:** 548
+
+> food_insecurity_generator.py - IPC acute food-insecurity KMZ layer (Sudan, current period).
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `rgb_to_kml(rgb_hex, alpha_hex)` (line 174) -- Convert #RRGGBB + alpha byte to KML aabbggrr (alpha, blue, green, red).
+- `build_geojson_records(geojson_path)` (line 201) -- Parse the IPC GeoJSON into per-area records (polygons only).
+- `build_balloon_html(rec, retrieved, analysis_name)` (line 255) -- Per-area CDATA HTML balloon. All fields transcribed; none synthesized.
+- `compose_framing_text()` (line 319) -- Return the framing-layer sentences. Numeric tokens are sourced above
+- `create_legend_card()` (line 340) -- Phase ramp + not-analysed + the >=20% rule sentence (ScreenOverlay PNG).
+- `create_intel_card(framing)` (line 376) -- National figures + C1 + drivers + Middle East + C3 + citation (PNG).
+- `build_food_insecurity_kml(records, meta)` (line 474) -- Build the KML doc: phase styles, per-area placemarks, framing, cards.
+- `package_kmz(kml, asset_pngs)` (line 533) -- Write the KMZ: a single doc.kml plus the card PNGs.
+- `generate_plotly_teaser(records, meta)` (line 553) -- 2D choropleth teaser for the web gallery. Returns path or None.
+- `run(geojson_path, make_teaser, status_callback)` (line 603)
+
+---
+
 ### ledger_index.py
 
 **Role:** other | **Lines:** 296
@@ -2553,6 +2577,7 @@ and explains in context.
 | exoplanet_systems | data | 570 | 0 | 3 |
 | fetch_climate_data | computation | 761 | 0 | 1 |
 | fetch_paleoclimate_data | computation | 169 | 0 | 0 |
+| food_insecurity_generator | other | 548 | 0 | 0 |
 | formatting_utils | utility | 16 | 0 | 4 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
