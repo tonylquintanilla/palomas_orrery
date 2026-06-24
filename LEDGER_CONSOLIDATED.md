@@ -219,17 +219,19 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*47 live items; 41 need attention (`!`); 47 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*49 live items; 43 need attention (`!`); 49 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-065 | European heat wave heat map (Earth System track) | OPEN | 4.8 | 2026-06-22 |
-| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.0 | 2026-06-22 |
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
+| ! | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | OPEN | 2.0 | 2026-06-24 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | 2026-06-22 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
+| ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 
 ### D.Movement
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -246,9 +248,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-064 | Provenance-scanner format sweep -- Earth System family | OPEN | 3.0 | 2026-06-22 |
 | ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2.2 | 2026-06-18 |
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
+| ! | L-064 | Provenance-scanner format sweep -- Earth System family | OPEN | 1.8 | 2026-06-24 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
@@ -495,6 +497,21 @@ SI), retrieved 2026-06-22.
 "Darfur-Kordofan Catastrophe" artifact. Converge before build.
 **Ref:** L-001 (parent track); ge_sudan.jpg (Mode-5 that prompted it);
 food_insecurity_generator.py (build target).
+
+#### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
+<!-- L:070 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/45/3 -->
+- **Extend the food-insecurity view across the Sudan-war refugee shed:** Sudan
+  (have, SD) + South Sudan (SS) + Chad (TD) + CAR (CF) + Ethiopia (ET). Each is a
+  SEPARATE IPC analysis / separate manual Mapping Tool fetch (bot-block wall) with
+  its own analysis period -- combined view must LABEL per-country periods, never
+  blend (cross-border form of "don't compare across periods").
+- **Generator already country-agnostic** (reads country/area/phase from the
+  GeoJSON); regional = ingest a file set + per-country period labels + per-country
+  attribution + multi-country LookAt. Encoding identical per country (choropleth +
+  L-069 P5 dots).
+**Gap:** DATA-ACQUISITION GATED. Confirm current IPC availability + period per
+neighbor at fetch time (Tony, manual). Scope: which neighbors in v1.
+**Ref:** L-001 (parent), L-069 (P5 dots reused per country); food_insecurity_generator.py.
 
 ## PENDING ACTION (Tony-side)
 
