@@ -1,6 +1,6 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: June 24, 2026
+Generated: June 25, 2026
 Files scanned: 113
 Total findings: 508
 Constants: 69 | Dicts: 32 | Display strings: 407

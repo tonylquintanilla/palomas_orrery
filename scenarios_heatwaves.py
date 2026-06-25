@@ -636,4 +636,47 @@ SCENARIOS = [
         'fetch': fetch_era5_heatwave,
         'lats': [], 'lons': [], 'values': [],
     },
+    # Europe Heat Dome June 2026 (L-065). Added June 2026 with Anthropic's Claude Opus 4.8.
+    {
+        'scenario_id': 'europe_2026', 'name': 'Europe Heat Dome (June 2026)',
+        'boundary_type': 'heatwave',
+        'date': '2026-06-21',
+        'lat_range': range(53, 36, -2), 'lon_range': range(-10, 16, 2),
+        'focus_val_min': 20.0,
+        'description': 'Saharan dry-heat dome; June air-temp records, low wet-bulb, no-AC mortality.',
+        # Source (briefing attribution numerics): Climate Central Climate Shift Index
+        #   (csi.climatecentral.org), 2026-06-22 [confirm live value at fetch].
+        # Source: Copernicus C3S / WMO, Europe State of the Climate (Europe ~2x global warming rate).
+        'briefing': (
+            "THE DRY DOME. A blocking high pulled Saharan air over Western Europe. "
+            "For Europe the danger is less about wet-bulb extremes than about duration, "
+            "record overnight minima, and low AC adoption -- the 2003 pattern repeating. "
+            "Air-temp records fell from Iberia to the UK.\n\n"
+            "Station Records (Air Temp): UK 35.8C (Wiggonholt, June record); "
+            "Spain 43.7C (Tama, Cantabria); Portugal 42.7C (Pinhao).\n"
+            "Regional Map Peak: [TO-FETCH]C (Wet Bulb).\n\n"
+            "SOURCE: Met Office; AEMET; IPMA. ATTRIBUTION: Climate Central Climate "
+            "Shift Index rates this heat at least 5x more likely due to human-caused "
+            "climate change; EU Copernicus C3S / WMO note Europe is warming about "
+            "twice the global average."
+        ),
+        'populations': [
+            {"name": "Madrid", "lat": 40.4168, "lon": -3.7038, "pop": 3300000},
+            {"name": "Lisbon", "lat": 38.7223, "lon": -9.1393, "pop": 550000},
+            {"name": "Paris", "lat": 48.8566, "lon": 2.3522, "pop": 2100000},
+            {"name": "London", "lat": 51.5074, "lon": -0.1278, "pop": 8900000},
+            {"name": "Seville", "lat": 37.3891, "lon": -5.9845, "pop": 690000},
+        ],
+        'pin_stations': [
+            {"name": "Wiggonholt UK", "lat": 50.95, "lon": -0.50, "air_temp_c": 35.8,
+             "note": "UK June record, provisional"},   # Source: Met Office via CNN, 2026-06-24
+            {"name": "Tama Cantabria", "lat": 43.16, "lon": -4.61, "air_temp_c": 43.7,
+             "note": "Cantabria all-time record"},      # Source: AEMET via CNN, 2026-06-23
+            {"name": "Pinhao PT", "lat": 41.19, "lon": -7.55, "air_temp_c": 42.7,
+             "note": "Iberia peak 21 Jun"},             # Source: AEMET/IPMA via Mappr, 2026-06-21
+        ],
+        'thresholds': HEATWAVE_THRESHOLDS,
+        'fetch': fetch_era5_heatwave,
+        'lats': [], 'lons': [], 'values': [],
+    },
 ]

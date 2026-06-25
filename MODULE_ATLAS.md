@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 24, 2026
-Modules: 113 | Functions: 917 | Lines: 89,431
+Generated: June 25, 2026
+Modules: 113 | Functions: 917 | Lines: 89,505
 
 ---
 
@@ -1197,7 +1197,7 @@ and explains in context.
 
 ### earth_system_generator.py
 
-**Role:** computation | **Lines:** 688
+**Role:** computation | **Lines:** 691
 
 > Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline
 
@@ -1208,16 +1208,16 @@ and explains in context.
 
 - `run_scenario(scenario, status_callback)` (line 59) -- Orchestrates the full pipeline for one scenario.
 - `build_spikes_kml(scenario_id, date, lats, lons, values, thresholds, intel_path, legend_risk_path, pin_stations)` (line 137) -- Builds the vertical extrusion spikes KML layer.
-- `build_heatmap_kml(scenario_id, date, lats, lons, values, thresholds)` (line 227) -- Builds the ground overlay heatmap KML layer with contour PNG.
-- `build_impact_kml(scenario_id, date, populations, legend_pop_path, thresholds)` (line 268) -- Builds the population impact circles KML layer.
-- `generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir, thresholds, briefing, description, mobile_briefing, encyclopedia)` (line 326) -- Generates the fast-loading 2D Plotly Teaser for Web Gallery use.
-- `package_and_cleanup(scenario_id, files_to_package, output_dir)` (line 503) -- Zips the raw KML and PNG files into a single-document KMZ.
-- `create_legend_card(thresholds, scenario_id)` (line 568) -- Creates the risk scale legend image from threshold bands.
-- `create_pop_legend_card(scenario_id)` (line 635) -- Creates the population circle key with tiered size/color.
-- `create_intel_card(title, description, briefing, date, scenario_id)` (line 675) -- Creates the dynamic briefing text card.
-- `create_circle_polygon(lat, lon, radius_km, num_points)` (line 723) -- Generates a circle polygon for KML population impact layer.
-- `kml_to_mpl_color(kml_color)` (line 743) -- Converts KML AABBGGRR hex color to matplotlib-compatible hex.
-- `class MissionSelector` (line 761) -- Tkinter GUI for selecting and running scenarios.
+- `build_heatmap_kml(scenario_id, date, lats, lons, values, thresholds)` (line 230) -- Builds the ground overlay heatmap KML layer with contour PNG.
+- `build_impact_kml(scenario_id, date, populations, legend_pop_path, thresholds)` (line 271) -- Builds the population impact circles KML layer.
+- `generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir, thresholds, briefing, description, mobile_briefing, encyclopedia)` (line 329) -- Generates the fast-loading 2D Plotly Teaser for Web Gallery use.
+- `package_and_cleanup(scenario_id, files_to_package, output_dir)` (line 506) -- Zips the raw KML and PNG files into a single-document KMZ.
+- `create_legend_card(thresholds, scenario_id)` (line 571) -- Creates the risk scale legend image from threshold bands.
+- `create_pop_legend_card(scenario_id)` (line 638) -- Creates the population circle key with tiered size/color.
+- `create_intel_card(title, description, briefing, date, scenario_id)` (line 678) -- Creates the dynamic briefing text card.
+- `create_circle_polygon(lat, lon, radius_km, num_points)` (line 726) -- Generates a circle polygon for KML population impact layer.
+- `kml_to_mpl_color(kml_color)` (line 746) -- Converts KML AABBGGRR hex color to matplotlib-compatible hex.
+- `class MissionSelector` (line 764) -- Tkinter GUI for selecting and running scenarios.
 
 ---
 
@@ -1925,7 +1925,7 @@ and explains in context.
 
 ### scenarios_heatwaves.py
 
-**Role:** scenario | **Lines:** 622
+**Role:** scenario | **Lines:** 665
 
 > Paloma's Orrery: Heatwave Scenario Definitions Provides fetch function + SCENARIOS list for the earth_system_generator engine. Data Source: ERA5 via Open-Meteo Archive API
 
@@ -2365,7 +2365,7 @@ and explains in context.
 
 ### food_insecurity_generator.py
 
-**Role:** other | **Lines:** 626
+**Role:** other | **Lines:** 654
 
 > food_insecurity_generator.py - IPC acute food-insecurity KMZ layer (Sudan, current period).
 
@@ -2378,13 +2378,13 @@ and explains in context.
 - `build_geojson_records(geojson_path)` (line 212) -- Parse the IPC GeoJSON into per-area records (polygons only).
 - `build_balloon_html(rec, retrieved, analysis_name)` (line 278) -- Per-area CDATA HTML balloon. All fields transcribed; none synthesized.
 - `compose_framing_text()` (line 342) -- Return the framing-layer sentences. Numeric tokens are sourced above
-- `create_legend_card()` (line 363) -- Phase ramp + not-analysed + the >=20% rule sentence (ScreenOverlay PNG).
-- `create_intel_card(framing)` (line 399) -- National figures + C1 + drivers + Middle East + C3 + citation (PNG).
-- `build_phase5_dots(records, document, retrieved, analysis_name)` (line 497) -- L-069: maroon proportional dots for areas carrying a mapped Phase 5
-- `build_food_insecurity_kml(records, meta)` (line 560) -- Build the KML doc: phase styles, per-area placemarks, framing, cards.
-- `package_kmz(kml, asset_pngs)` (line 623) -- Write the KMZ: a single doc.kml plus the card PNGs.
-- `generate_plotly_teaser(records, meta)` (line 643) -- 2D choropleth teaser for the web gallery. Returns path or None.
-- `run(geojson_path, make_teaser, status_callback)` (line 693)
+- `create_legend_card(p5_min, p5_max)` (line 363) -- Phase ramp + >=20% rule + (if provided) the Phase 5 dot-size key.
+- `create_intel_card(framing)` (line 425) -- National figures + C1 + drivers + Middle East + C3 + citation (PNG).
+- `build_phase5_dots(records, document, retrieved, analysis_name)` (line 523) -- L-069: maroon proportional dots for areas carrying a mapped Phase 5
+- `build_food_insecurity_kml(records, meta)` (line 586) -- Build the KML doc: phase styles, per-area placemarks, framing, cards.
+- `package_kmz(kml, asset_pngs)` (line 653) -- Write the KMZ: a single doc.kml plus the card PNGs.
+- `generate_plotly_teaser(records, meta)` (line 673) -- 2D choropleth teaser for the web gallery. Returns path or None.
+- `run(geojson_path, make_teaser, status_callback)` (line 723)
 
 ---
 
@@ -2566,7 +2566,7 @@ and explains in context.
 | dep_trace | devtool | 399 | 1 | 0 |
 | diagnose_bcodmo | devtool | 65 | 0 | 0 |
 | earth_system_controller | gui | 81 | 0 | 0 |
-| earth_system_generator | computation | 688 | 3 | 1 |
+| earth_system_generator | computation | 691 | 3 | 1 |
 | earth_system_visualization_gui | gui | 1,822 | 8 | 1 |
 | earth_visualization_shells | rendering/shells | 992 | 2 | 2 |
 | energy_imbalance | computation | 839 | 1 | 1 |
@@ -2578,7 +2578,7 @@ and explains in context.
 | exoplanet_systems | data | 570 | 0 | 3 |
 | fetch_climate_data | computation | 761 | 0 | 1 |
 | fetch_paleoclimate_data | computation | 169 | 0 | 0 |
-| food_insecurity_generator | other | 626 | 0 | 0 |
+| food_insecurity_generator | other | 654 | 0 | 0 |
 | formatting_utils | utility | 16 | 0 | 4 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
@@ -2623,7 +2623,7 @@ and explains in context.
 | saturn_visualization_shells | rendering/shells | 1,080 | 3 | 2 |
 | save_utils | pipeline | 795 | 1 | 18 |
 | scenarios_coral_bleaching | scenario | 191 | 0 | 1 |
-| scenarios_heatwaves | scenario | 622 | 0 | 1 |
+| scenarios_heatwaves | scenario | 665 | 0 | 1 |
 | scenarios_western_heatwave_march_2026 | scenario | 1,536 | 1 | 1 |
 | sgr_a_grand_tour | rendering | 742 | 3 | 1 |
 | sgr_a_star_data | data | 572 | 3 | 5 |

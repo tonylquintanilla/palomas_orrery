@@ -224,7 +224,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-065 | European heat wave heat map (Earth System track) | OPEN | 4.8 | 2026-06-22 |
+  | ! | L-065 | European heat wave heat map (Earth System track) | OPEN | 4.8 | 2026-06-25 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-24 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
@@ -469,6 +469,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
   belongs to the cited authority in its voice -- we never author it; the reader
   connects it to the family thesis. Breaking-news tolls are volatile and
   contested -- transcribe a dated, sourced figure at build or omit.
+ Section H, append to the [L-065] block:
+- BUILD 2026-06-25 (on 7734856): europe_2026 appended to scenarios_heatwaves.py
+    (wet-bulb spine + C-only air-temp pins); earth_system_generator.py pin label
+    made key-aware (C for europe_2026, F preserved for Western). Container gate
+    green. OPEN pending: fetch + wet-bulb-peak fill + live CSI confirm + station
+    confirm + provenance Tier-1=0 + Mode-5 render. Move to DONE after render.
+- Stage 1 (Sentinel-3 LST snapshot) NOT built -- separate artifact; wet-bulb
+    needs humidity which LST does not carry. Spec on request. 
 **Gap:** scope at build: pick region window + date(s) (current wave from 22 Jun
 2026, or the May + June arc), reuse the ERA5 heat-map generator (read the live
 pattern at HEAD first), decide whether any impact text appears and if so wire it
@@ -479,6 +487,8 @@ temp) + Sentinel-3 LST; EU Copernicus Climate Change Service (C3S); L-001 + L-06
 (two-tier on-layer text + scanner-format sweep). Current-event context: 2026
 European heatwaves (record June temps; deaths reported across FR/UK/IE/ES/AT/DE/
 SI), retrieved 2026-06-22.
+**Note:** WATCH: World Weather Attribution rapid study on the June 2026 event. If it
+  publishes, it is the strongest citable attribution -- replace the CSI/C3S line
 
 #### [L-069] Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan)
 <!-- L:069 status:DONE upd:2026-06-24 section:A flag: rice:2/3/95/2 -->

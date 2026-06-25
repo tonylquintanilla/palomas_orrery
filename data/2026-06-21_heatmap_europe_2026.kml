@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="22">
+        <name>europe_2026 Heatmap (2026-06-21)</name>
+        <GroundOverlay id="23">
+            <name>Thermal Overlay</name>
+            <Icon id="24">
+                <href>2026-06-21_heatmap_europe_2026.png</href>
+            </Icon>
+            <LatLonBox>
+                <north>53</north>
+                <south>37</south>
+                <east>14</east>
+                <west>-10</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

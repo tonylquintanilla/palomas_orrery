@@ -167,7 +167,10 @@ def build_spikes_kml(scenario_id, date, lats, lons, values, thresholds,
     if pin_stations:
         for station in pin_stations:
     #        label = f"{station['anomaly']:.1f}F"
-            label = f"{station['air_temp_f']:.0f}F"
+            if 'air_temp_c' in station:
+                label = f"{station['air_temp_c']:.1f}C"
+            else:
+                label = f"{station['air_temp_f']:.0f}F"
             pnt = kml_spikes.newpoint(name=label)
             pnt.coords = [(station['lon'], station['lat'], 0)]
             pnt.altitudemode = simplekml.AltitudeMode.clamptoground
