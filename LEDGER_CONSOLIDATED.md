@@ -219,15 +219,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*49 live items; 43 need attention (`!`); 49 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*49 live items; 42 need attention (`!`); 49 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-065 | European heat wave heat map (Earth System track) | OPEN | 4.8 | 2026-06-22 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-24 |
+|  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
-| ! | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | OPEN | 2.4 | 2026-06-24 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | 2026-06-22 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
@@ -481,23 +481,34 @@ European heatwaves (record June temps; deaths reported across FR/UK/IE/ES/AT/DE/
 SI), retrieved 2026-06-22.
 
 #### [L-069] Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan)
-<!-- L:069 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/80/2 -->
-- **BUILT (render-pending Mode-5), on 03630ae.** 10 maroon proportional dots in a
-  toggle-able folder "Phase 5 (Catastrophe) populations (area level)", one per area
-  carrying a mapped Phase 5 population (all mapped P4): Beliel 26,411 ... Kadugli 930.
-  Sized area ~ population (sqrt); placed at each area's representative interior point.
+<!-- L:069 status:DONE upd:2026-06-24 section:A flag: rice:2/3/95/2 -->
+- **BUILT + RENDER-CONFIRMED (Mode-5, ge_sudan.jpg 2026-06-24), committed 7923ac2.**
+  10 maroon proportional dots in a toggle-able folder "Phase 5 (Catastrophe)
+  populations (area level)", one per area carrying a mapped Phase 5 population (all
+  mapped P4): Beliel 26,411 ... Kadugli 930. Sized area ~ population (sqrt); placed
+  at each area's representative interior point. Renders correctly clustered in North
+  Darfur, South Darfur (Nyala) and South Kordofan.
 - **Pure IPC passthrough -- zero hardcoded/composed/summed numbers.** Balloon reads
   only area_name / overall_phase / phase5_population / phase5_percentage / population
   at runtime. "Catastrophe" (population term) used throughout; "Famine" (area term,
   none here) appears nowhere on the dots -- verified in KMZ bytes.
-- **Scanner now CATCHES the module (no longer a false clean):** applied L-064 part-1
-  (allow-list this module) + a NARROW vocab add (people|persons?|percent|%). Verified
-  Tier-1=0, zero family ripple (star_notes:1257's "billion" trigger deliberately NOT
-  added -- deferred to the L-064 sweep). Repo scanner untouched; delivered as snippet.
-**Gap:** Mode-5 render is the close gate (dot legibility at national scale; dot-size
-legend key TBD -- composed-text decision for Tony). Then commit.
-**Ref:** L-001 (parent); L-064 (scanner; magnitude-word coverage still owed there);
-food_insecurity_generator.py; ge_sudan.jpg (the render that prompted it).
+- **Dot-size legend key added** (Mode-5 follow-up, approved): legend card shows a
+  large + small maroon dot keyed to the data's actual max/min phase5_population
+  (read at runtime, not hardcoded), caption "larger = more people". Render-confirmed.
+- **Causal-restraint wording tightened:** removed "the reader connects the pattern"
+  from C3. C3 now ends "It draws no causal arrow of its own."
+- **PRINCIPLE BANKED (generalizes to L-070 and every sensitive layer):** state the
+  basis for the visualization; do NOT hand the lay reader a connection we will not
+  draw ourselves. "The reader connects the pattern" is buck-passing -- naming the
+  basis is honest, outsourcing the inference is not. (Tony, 2026-06-24.)
+- **Scanner CATCHES the module (real clean, not false):** L-064 part-1 (allow-list)
+  + narrow vocab add (people|persons?|percent|%). Tier-1=0, zero family ripple
+  (star_notes:1257's "billion" trigger deliberately deferred to the L-064 sweep).
+**Gap:** CLOSED (render-confirmed). Residual family work tracked elsewhere: GUI
+registration under L-001; magnitude-word scanner coverage under L-064. Move to
+section C at next reconcile if you prefer closed items there.
+**Ref:** L-001 (parent); L-064 (scanner); food_insecurity_generator.py; ge_sudan.jpg.
+**Tony:** promote the "principle banked" to the protocol at the next update. 
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
 <!-- L:070 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/45/3 -->
