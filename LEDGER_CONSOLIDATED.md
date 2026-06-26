@@ -219,15 +219,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*49 live items; 42 need attention (`!`); 49 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*50 live items; 42 need attention (`!`); 50 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-  | ! | L-065 | European heat wave heat map (Earth System track) | OPEN | 4.8 | 2026-06-25 |
+|  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-24 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
+| ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | 2026-06-22 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
@@ -446,7 +447,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** decide the new Note wording (light design -- what should it say now?), then a Mode-1 snippet into palomas_orrery.py (grep the current Note string first). Could alternatively live in D.Cosmetic; kept in A, paired with L-062.
 
 #### [L-065] European heat wave heat map (Earth System track)
-<!-- L:065 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/80/1.5 -->
+<!-- L:065 status:DONE upd:2026-06-25 section:A flag: rice:3/3/80/1.5 -->
 - **European heat wave 2026 -- new heat map, reuses the existing ERA5 framework.**
   Earth System / stressors family (the "heat" member named in the food-insecurity
   handoff). A dated temperature heat map of the ongoing 2026 European heat wave,
@@ -469,20 +470,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
   belongs to the cited authority in its voice -- we never author it; the reader
   connects it to the family thesis. Breaking-news tolls are volatile and
   contested -- transcribe a dated, sourced figure at build or omit.
- Section H, append to the [L-065] block:
-- BUILD 2026-06-25 (on 7734856): europe_2026 appended to scenarios_heatwaves.py
-    (wet-bulb spine + C-only air-temp pins); earth_system_generator.py pin label
-    made key-aware (C for europe_2026, F preserved for Western). Container gate
-    green. OPEN pending: fetch + wet-bulb-peak fill + live CSI confirm + station
-    confirm + provenance Tier-1=0 + Mode-5 render. Move to DONE after render.
-- Stage 1 (Sentinel-3 LST snapshot) NOT built -- separate artifact; wet-bulb
-    needs humidity which LST does not carry. Spec on request.
-   - BUILD 2026-06-25 (on 26e6be9): teaser fixes (full wrapped briefing w/ source +
-    attribution; showlegend=False removes dup title; KMZ-note reword) and a
-    producer-level [TO-FETCH] peak fill in run_scenario covering KMZ card + teaser
-    + mobile (two parallel-pipeline leaks caught beyond the visible teaser).
-    Record correction: UK pin -> Gosport 36.1C (Met Office primary); AEMET source
-    upgraded. Container gate 8/8. DONE after Mode-5 re-render.    
+- CLOSED 2026-06-25 (on 4685906): Mode-5 verified -- teaser (Gosport 36.1C pin,
+    source visible, single title, "Click 3D Earth" CTA restored) + KMZ card (peak
+    auto-filled, no [TO-FETCH]). Final record correction: UK -> Gosport 36.1C
+    (Met Office, 24 Jun); attribution dated to Climate Central CSI (24 Jun 2026);
+    Tama upgraded to AEMET primary. Tier-1 = 0. Parked, non-blocking: Sentinel-3
+    LST stage-1 snapshot (separate artifact); WWA rapid study to supersede the CSI
+    line if it publishes.
 **Gap:** scope at build: pick region window + date(s) (current wave from 22 Jun
 2026, or the May + June arc), reuse the ERA5 heat-map generator (read the live
 pattern at HEAD first), decide whether any impact text appears and if so wire it
@@ -540,6 +534,23 @@ section C at next reconcile if you prefer closed items there.
 **Gap:** DATA-ACQUISITION GATED. Confirm current IPC availability + period per
 neighbor at fetch time (Tony, manual). Scope: which neighbors in v1.
 **Ref:** L-001 (parent), L-069 (P5 dots reused per country); food_insecurity_generator.py.
+
+#### [L-071] 2026 European heat dome -- track to resolution (dated scenario series)
+<!-- L:071 status:OPEN upd:2026-06-25 section:A flag: rice:3/3/70/2.5 -->
+- **Follow the ongoing 2026 European heat dome across its lifetime as a dated
+  scenario series** -- the Western Heat Dome (Mar 14/17/18) pattern: one new dated
+  europe_* scenario per captured day, NOT one scenario auto-advancing its date.
+  Same chassis as europe_2026 (wet-bulb spine + C-only air-temp pins,
+  fetch_era5_heatwave / Open-Meteo archive). europe_2026 (21 Jun) is entry #1,
+  built and closed under L-065.
+- **Next:** a new dated scenario for the 27-28 Jun peak, once Open-Meteo's archive
+  reaches those dates (a few days' lag). New date = fresh fetch, no cache collision.
+- **Carried forward from L-065 (closed):** (a) WWA attribution watch -- update the
+  line across the series if a study publishes; (b) Sentinel-3 LST surface snapshot --
+  optional separate artifact.
+- **Close when:** the dome resolves and the series is complete.
+**Ref:** L-065 (build + chassis, closed); scenarios_heatwaves.py; Western
+dated-series precedent (scenarios_western_heatwave_march_2026.py).
 
 ## PENDING ACTION (Tony-side)
 
