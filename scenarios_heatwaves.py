@@ -652,12 +652,12 @@ SCENARIOS = [
             "For Europe the danger is less about wet-bulb extremes than about duration, "
             "record overnight minima, and low AC adoption -- the 2003 pattern repeating. "
             "Air-temp records fell from Iberia to the UK.\n\n"
-            "Station Records (Air Temp): UK 35.8C (Wiggonholt, June record); "
+            "Station Records (Air Temp): UK 36.1C (Gosport, prov. June record); "
             "Spain 43.7C (Tama, Cantabria); Portugal 42.7C (Pinhao).\n"
             "Regional Map Peak: [TO-FETCH]C (Wet Bulb).\n\n"
             "SOURCE: Met Office; AEMET; IPMA. ATTRIBUTION: Climate Central Climate "
             "Shift Index rates this heat at least 5x more likely due to human-caused "
-            "climate change; EU Copernicus C3S / WMO note Europe is warming about "
+            "climate change (as reported 24 Jun 2026); EU Copernicus C3S / WMO note Europe is warming about "
             "twice the global average."
         ),
         'populations': [
@@ -668,10 +668,10 @@ SCENARIOS = [
             {"name": "Seville", "lat": 37.3891, "lon": -5.9845, "pop": 690000},
         ],
         'pin_stations': [
-            {"name": "Wiggonholt UK", "lat": 50.95, "lon": -0.50, "air_temp_c": 35.8,
-             "note": "UK June record, provisional"},   # Source: Met Office via CNN, 2026-06-24
+            {"name": "Gosport UK", "lat": 50.79, "lon": -1.13, "air_temp_c": 36.1,
+             "note": "UK June record (provisional, 24 Jun)"},   # Source: Met Office, 2026-06-24
             {"name": "Tama Cantabria", "lat": 43.16, "lon": -4.61, "air_temp_c": 43.7,
-             "note": "Cantabria all-time record"},      # Source: AEMET via CNN, 2026-06-23
+             "note": "Cantabria all-time record"},      # Source: AEMET Cantabria, 2026-06-23
             {"name": "Pinhao PT", "lat": 41.19, "lon": -7.55, "air_temp_c": 42.7,
              "note": "Iberia peak 21 Jun"},             # Source: AEMET/IPMA via Mappr, 2026-06-21
         ],

@@ -51,11 +51,11 @@
             <size x="0.15" y="0" xunits="fraction" yunits="fraction"/>
         </ScreenOverlay>
         <Placemark id="7">
-            <name>35.8C</name>
-            <description>UK June record, provisional</description>
+            <name>36.1C</name>
+            <description>UK June record (provisional, 24 Jun)</description>
             <styleUrl>#8</styleUrl>
             <Point id="6">
-                <coordinates>-0.5,50.95,0</coordinates>
+                <coordinates>-1.13,50.79,0</coordinates>
                 <altitudeMode>clampToGround</altitudeMode>
             </Point>
         </Placemark>

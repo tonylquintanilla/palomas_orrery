@@ -439,7 +439,7 @@ def generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir,
         # substituted upstream, before the mobile-briefing builder too.)
         wrapped = [textwrap.fill(ln, width=90) if ln.strip() else '' for ln in briefing.split('\n')]
         brief_text = '<br>'.join(wrapped).replace('\n', '<br>')
-        brief_text += "<br><br><i>A 3D Google Earth version (KMZ) is also available.</i>"
+        brief_text += "<br><br><i>Click 3D Earth for full visualization in Google Earth</i>"
 
         annotations.append(dict(
             text=brief_text,
