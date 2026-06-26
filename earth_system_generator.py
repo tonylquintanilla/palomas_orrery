@@ -86,6 +86,13 @@ def run_scenario(scenario, status_callback=None):
     if not values:
         raise ValueError(f"No data retrieved for {name}")
 
+    # Fill the regional wet-bulb peak from the fetched grid before ANY briefing
+    # consumer renders it -- KMZ intel card, Plotly teaser, and mobile briefing all
+    # read scenario['briefing']. Producer-level substitution: no consumer sees raw
+    # [TO-FETCH]. (generate_plotly_teaser keeps its own guard for standalone calls.)
+    if '[TO-FETCH]' in scenario.get('briefing', ''):
+        scenario['briefing'] = scenario['briefing'].replace('[TO-FETCH]', f"{max(values):.1f}")
+
     # 2. GENERATE LEGEND AND INTEL CARDS
     if status_callback:
         status_callback("Generating Intel Cards...")
@@ -335,6 +342,9 @@ def generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir,
     """
     print("Building Plotly Teaser...")
 
+    if briefing and values:
+        briefing = briefing.replace('[TO-FETCH]', f"{max(values):.1f}")
+
     colorscale = thresholds.get('colorscale', 'YlOrRd')
     cmin = thresholds.get('cmin', 0)
     cmax = thresholds.get('cmax', 38)
@@ -423,9 +433,13 @@ def generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir,
     # Build briefing annotation for bottom-left of map
     annotations = []
     if briefing:
-        brief_lines = briefing.split('\n\n')
-        brief_text = brief_lines[0] if brief_lines else briefing
-        brief_text += "<br><br><i>Click 3D Earth for full visualization in Google Earth</i>"
+        import textwrap
+        # Render the FULL briefing -- station records, SOURCE and ATTRIBUTION
+        # included -- word-wrapped so it stays inside the box. (Peak already
+        # substituted upstream, before the mobile-briefing builder too.)
+        wrapped = [textwrap.fill(ln, width=90) if ln.strip() else '' for ln in briefing.split('\n')]
+        brief_text = '<br>'.join(wrapped).replace('\n', '<br>')
+        brief_text += "<br><br><i>A 3D Google Earth version (KMZ) is also available.</i>"
 
         annotations.append(dict(
             text=brief_text,
@@ -455,7 +469,8 @@ def generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir,
             )]
         ),
         margin=dict(l=0, r=0, t=40, b=0),
-        annotations=annotations
+        annotations=annotations,
+        showlegend=False       
     )
 
     # Build HTML manually to guarantee Gallery Studio compatibility
