@@ -476,7 +476,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
     green. OPEN pending: fetch + wet-bulb-peak fill + live CSI confirm + station
     confirm + provenance Tier-1=0 + Mode-5 render. Move to DONE after render.
 - Stage 1 (Sentinel-3 LST snapshot) NOT built -- separate artifact; wet-bulb
-    needs humidity which LST does not carry. Spec on request. 
+    needs humidity which LST does not carry. Spec on request.
+   - BUILD 2026-06-25 (on 26e6be9): teaser fixes (full wrapped briefing w/ source +
+    attribution; showlegend=False removes dup title; KMZ-note reword) and a
+    producer-level [TO-FETCH] peak fill in run_scenario covering KMZ card + teaser
+    + mobile (two parallel-pipeline leaks caught beyond the visible teaser).
+    Record correction: UK pin -> Gosport 36.1C (Met Office primary); AEMET source
+    upgraded. Container gate 8/8. DONE after Mode-5 re-render.    
 **Gap:** scope at build: pick region window + date(s) (current wave from 22 Jun
 2026, or the May + June arc), reuse the ERA5 heat-map generator (read the live
 pattern at HEAD first), decide whether any impact text appears and if so wire it
