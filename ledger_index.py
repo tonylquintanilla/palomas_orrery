@@ -65,10 +65,38 @@ MIGRATE_TRIGGER = '**Gap:** none -- move to section C'
 
 # Disposition -> needs-attention (gets the leading '!')
 GAP_STATUS = {'OPEN', 'BLOCKED', 'PENDING-GATE'}
-# Section display order (sections not listed sort to the end, alphabetically)
-SECTION_ORDER = ['A', 'PENDING', 'D.Movement', 'D.Priority', 'D.Structural',
+# Section display order (sections not listed sort to the end, alphabetically).
+# Section C (closed/done) sorts last so the live backlog reads first.
+SECTION_ORDER = ['A', 'B', 'D.Movement', 'D.Priority', 'D.Structural',
                  'D.Cosmetic', 'D.Feature-A', 'D.Feature-B', 'D.Feature-C',
-                 'D.Parked', 'D.LooseEnd', 'E', 'G', 'H']
+                 'D.Parked', 'D.LooseEnd', 'E', 'G', 'H', 'C']
+
+# Tag aliases: normalize legacy/variant section tags to the canonical letter.
+SECTION_ALIASES = {'PENDING': 'B'}
+
+# Descriptive titles mirroring the DETAIL '##'/'###' headers, so the index
+# reads as a structural map rather than a column of bare letters.
+SECTION_TITLES = {
+    'A': 'A. Active Separate Tracks',
+    'B': 'B. Pending Action (Tony-side)',
+    'C': 'C. Reconciled -- Done (closed; for the record)',
+    'D.Movement': 'D.Movement -- Movement track',
+    'D.Priority': 'D.Priority -- Real bugs',
+    'D.Structural': 'D.Structural -- Dead code / honest shells',
+    'D.Cosmetic': 'D.Cosmetic -- Polish',
+    'D.Feature-A': 'D.Feature-A -- Bucket A (near-term)',
+    'D.Feature-B': 'D.Feature-B -- Bucket B (editorial)',
+    'D.Feature-C': 'D.Feature-C -- Bucket C (architecture)',
+    'D.Parked': 'D.Parked (Tony calls)',
+    'D.LooseEnd': 'D.Loose end to reconcile',
+    'E': 'E. AU-Convention Compliance',
+    'G': 'G. Open Questions / Tony Calls',
+    'H': 'H. Gallery / Studio Track',
+}
+
+# Sections always rendered in the index even when they have no items
+# (so the standing structure is visible -- e.g. B. Pending Action).
+ALWAYS_SHOW = {'B'}
 
 # Marker that separates section C from section D in the ledger
 SEC_D_MARKER = '\n---\n\n## D. RECONCILED LEDGER -- OPEN'
@@ -160,27 +188,42 @@ def fmt_id(b):
 
 
 def build_index(blocks):
-    # Exclude section:C blocks from the live index
-    live = [b for b in blocks if b['section'] != 'C']
-
+    # Group ALL blocks (including section C) by their canonical section,
+    # normalizing tag aliases (e.g. PENDING -> B).
     by_section = {}
-    for b in live:
-        by_section.setdefault(b['section'], []).append(b)
+    for b in blocks:
+        sec = SECTION_ALIASES.get(b['section'], b['section'])
+        by_section.setdefault(sec, []).append(b)
 
     def sec_key(s):
         return (SECTION_ORDER.index(s) if s in SECTION_ORDER else len(SECTION_ORDER), s)
 
+    # Summary counts are for the LIVE backlog (everything except closed C).
+    open_blocks = [b for b in blocks
+                   if SECTION_ALIASES.get(b['section'], b['section']) != 'C']
+    closed_n = len(blocks) - len(open_blocks)
+
     out = [START, '', '## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)', '']
-    total = sum(len(v) for v in by_section.values())
-    gaps = sum(1 for b in live if b['status'] in GAP_STATUS)
-    scored = sum(1 for b in live if compute_score(b['rice']) is not None)
-    out.append(f"*{total} live items; {gaps} need attention (`!`); {scored} RICE-scored. "
+    total = len(open_blocks)
+    gaps = sum(1 for b in open_blocks if b['status'] in GAP_STATUS)
+    scored = sum(1 for b in open_blocks if compute_score(b['rice']) is not None)
+    out.append(f"*{total} live items; {gaps} need attention (`!`); {scored} RICE-scored; "
+               f"{closed_n} closed (section C, listed last). "
                "Find an `L-0NN` handle (Ctrl+F in VS Code) "
                "to jump to any item; search `| ! |` to list every gap. See \"Using and maintaining this "
                "ledger\" above for details.*")
     out.append('')
-    for sec in sorted(by_section, key=sec_key):
-        rows = by_section[sec]
+
+    # Display every section that has items, plus any always-show section.
+    display_secs = set(by_section) | ALWAYS_SHOW
+    for sec in sorted(display_secs, key=sec_key):
+        out.append(f"### {SECTION_TITLES.get(sec, sec)}")
+        rows = by_section.get(sec, [])
+        if not rows:
+            out.append('')
+            out.append('*(none currently)*')
+            out.append('')
+            continue
         # Sort: scored items first (by score descending), then unscored (by L-number)
         def sort_key(b):
             s = compute_score(b['rice'])
@@ -188,7 +231,6 @@ def build_index(blocks):
                 return (0, -s, int(b['L']))  # scored first, highest score first
             return (1, 0, int(b['L']))       # unscored after, by L-number
         rows = sorted(rows, key=sort_key)
-        out.append(f"### {sec}")
         out.append('| Gap | L# | Item | Disposition | Score | Updated |')
         out.append('|:---:|----|------|-------------|:-----:|---------|')
         for b in rows:

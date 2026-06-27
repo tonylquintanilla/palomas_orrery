@@ -219,9 +219,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*53 live items; 44 need attention (`!`); 53 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*53 live items; 44 need attention (`!`); 53 RICE-scored; 20 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
-### A
+### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
@@ -234,19 +234,23 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 
-### D.Movement
+### B. Pending Action (Tony-side)
+
+*(none currently)*
+
+### D.Movement -- Movement track
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-008 | v24 sec5 precision batch (low-risk) | OPEN | 1.0 | 2026-06-21 |
 | ! | L-061 | Magnetosphere-dipole frame coupling / seasonal roll | OPEN | 0.2 | 2026-06-21 |
 
-### D.Priority
+### D.Priority -- Real bugs
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 3.6 | 2026-06-21 |
 |  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 0.1 | 2026-06-15 |
 
-### D.Structural
+### D.Structural -- Dead code / honest shells
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2.2 | 2026-06-18 |
@@ -259,7 +263,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
 
-### D.Cosmetic
+### D.Cosmetic -- Polish
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-035 | Solar shell hovertext <br> vs 
@@ -272,7 +276,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 0.9 | 2026-06-15 |
 | ! | L-038 | Psyche encounter hardcoded fallback distances lack # Source | OPEN | 0.5 | - |
 
-### D.Feature-A
+### D.Feature-A -- Bucket A (near-term)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-066 | MAPS per-frame comet-tail animation wiring | OPEN | 4.5 | 2026-06-23 |
@@ -281,13 +285,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-042 (#20/N5) | Shell-resolution GUI control (20/N5) + Fly-to view scaling (49) | OPEN | 0.5 | 2026-06-11 |
 | ! | L-043 | Exoplanet/binary synthetic objects hit Horizons fetch (id_type rejected) | OPEN | 0.4 | 2026-06-16 |
 
-### D.Feature-B
+### D.Feature-B -- Bucket B (editorial)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-044 (#22) | Satellite (and minor-body) internal-structure shells | OPEN | 2.7 | 2026-06-21 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
 
-### D.Feature-C
+### D.Feature-C -- Bucket C (architecture)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-046 (#N6) | Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos) | OPEN | 2.2 | 2026-06-21 |
@@ -297,35 +301,59 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-067 | measure_animation_html.py file-browser dialog (B5) | OPEN | 0.8 | 2026-06-23 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
 
-### D.Parked
+### D.Parked (Tony calls)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
 |  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 
-### D.LooseEnd
+### D.Loose end to reconcile
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-051 | Uranus pole-value prose inconsistency (Dec -15.10 vs stray -15.18) | OPEN | 0.7 | 2026-06-21 |
 
-### E
+### E. AU-Convention Compliance
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-052 | AU-convention compliance sweep (GEO altitude hover missing AU; km+AU on all new hover) | OPEN | 0.5 | - |
 
-### G
+### G. Open Questions / Tony Calls
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066) | OPEN | 0.5 | 2026-06-23 |
 
-### H
+### H. Gallery / Studio Track
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
+
+### C. Reconciled -- Done (closed; for the record)
+| Gap | L# | Item | Disposition | Score | Updated |
+|:---:|----|------|-------------|:-----:|---------|
+|  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
+|  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | -- | 2026-06-17 |
+|  | L-005 | Commit protocol v3.28 (or v3.29) to repo root | DONE | -- | 2026-06-17 |
+|  | L-006 | Mercury +0.2 R_M northward dipole offset | DONE | -- | 2026-06-20 |
+|  | L-007 | Bow-shock hover disclosure remainder | DONE | -- | 2026-06-11 |
+|  | L-009 | Dipole cluster: envelope tie / offset direction / remaining cones / half_len_frac | DONE | -- | 2026-06-20 |
+|  | L-010 | Keplerian epoch parse fails on 'osc.' suffix | DONE | -- | 2026-06-12 |
+|  | L-011 | Pass-C2 v4 blockers (3) + B3-bonus barycenter Sun bug | DONE | -- | 2026-06-11 |
+|  | L-018 (#8) | Dead create_sun_direction_indicator imports (verify remainder) | DONE | -- | 2026-06-18 |
+|  | L-019 (#13) | Neptune ring info-marker rotation (verify + close) | DONE | -- | 2026-06-18 |
+|  | L-021 (#28) | Neptune superimposed info markers (verify + close) | DONE | -- | 2026-06-18 |
+|  | L-022 (#40) | Asteroid belt hover -> single info marker | DONE | -- | 2026-06-18 |
+|  | L-023 (#N2) | Saturn/Uranus ring marker placement | DONE | -- | 2026-06-18 |
+|  | L-024 (#N4) | Planet 9 sphere n=50 -> 20/25 | DONE | -- | 2026-06-18 |
+|  | L-029 | v25 D3 dead-code annotations + small-body analytical tail | DONE | -- | 2026-06-18 |
+|  | L-036 | O11 greyed-legend display-name verdict: NO item needed | DONE | -- | 2026-06-11 |
+|  | L-041 | Item 19.3 axis-control round trip (P1/P2/Phase A/Phase B + toggle follow-on) | DONE | -- | 2026-06-16 |
+|  | L-054 | Gate 5(b): full resolution ships, rounded -- render-confirmed | DONE | -- | 2026-06-13 |
+|  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
+|  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 
 <!-- INDEX:END -->
 
