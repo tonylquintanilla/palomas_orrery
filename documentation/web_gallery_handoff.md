@@ -5136,3 +5136,88 @@ orrery output. DEFERRED: 2D-plot sanity (boxes stay 0).
   camera capture in encounter export.
 
 Entry written June 2026 with Anthropic's Claude Opus 4.8.
+
+### WYSIWYG Gallery Preview (June 26, 2026): Studio Preview renders through the real viewer
+
+---
+
+The long-standing gap: Studio "Preview" opened a bare Plotly figure via a
+`file://` temp file, so the gallery viewer's per-card chrome -- the green Google
+Earth button (driven by `_kmz_handoff`) and the link-icon dropdown (driven by
+`_link_data`) -- never appeared. The preview was not WYSIWYG with the live
+gallery, which adds that chrome at view time. Tony's recurring observation ("the
+3D Handoff field is set but the preview shows no button") traced to exactly this:
+the button is viewer chrome, not a figure annotation, and the Studio preview
+never ran the viewer.
+
+**Decided architecture -- preview THROUGH the real viewer (no second renderer).**
+Rather than teach `build_gallery_html` to imitate the gallery chrome (a parallel
+renderer that would drift), the preview drives the genuine `index.html`. The chain
+is the real production transform, run locally: `build_gallery_html` -> the REAL
+`json_converter.extract_plotly_json_from_html` (same parse that produces the
+pushed JSON) -> a throwaway `gallery/_studio_preview.json` -> the actual
+`index.html`, served over a localhost server, opened at
+`?preview=_studio_preview.json`. No vendored copy of the viewer, no second
+extractor -- WYSIWYG holds by construction.
+
+**Increment 1 -- viewer branch (index.html).** A dormant `?preview=<file>` branch
+in `init()`: when the param is present it injects a synthetic lookup entry and
+calls `loadVisualization` UNCHANGED (which fetches `gallery/<file>`, renders, and
+raises the chrome exactly as for a published card). No render-path refactor; inert
+for every real visitor (no param -> normal hash deep-link). `expandActiveCategory`
+already handles the no-nav-card case, so the synthetic entry is safe.
+
+**Increment 2 -- Studio _preview rewrite (tools/gallery_studio.py).** Replaces the
+`file://` open. New helpers `_repo_root()` (parent of tools/) and
+`_ensure_preview_server(root)` (lazy, localhost-only ThreadingHTTPServer on an
+ephemeral port, daemon thread -- dies with the Studio). `_preview` builds the
+export HTML to a temp file, runs the real `json_converter` extractor on it, writes
+`gallery/_studio_preview.json`, ensures the server, opens the genuine viewer.
+Added stdlib imports (http.server, socketserver, threading, functools) and a
+credit line.
+
+**`.gitignore` cleanup (same session).** The gallery `.gitignore` carried
+orrery-side residue (`*.vot`, `*.pkl`, `*.csv`, `*.png`, `data/*verify_backup*`,
+the `*.backup`/`_backup` family). Trimmed to what the gallery actually
+produces/tracks -- `__pycache__/`, `*.pyc`, `*.json.bak` (the tools write `.bak`),
+and the new `gallery/_studio_preview.json`. Note: `*.png` was actively wrong (the
+repo tracks `palomas_orrery_logo.png` and is a website that should track image
+assets).
+
+**Two-variant lesson (surfaced by the new preview).** Every teaser exists twice:
+the raw `*_teaser.json` (generator output, NO `_kmz_handoff`) and
+`*_teaser_gallery.json` (Studio export, HAS it). The manifest serves only the
+`_gallery`/`_desktop` variants (zero raw entries). A first preview pointed at the
+raw file showed the "Click 3D Earth" annotation but no button -- correctly,
+because that pre-Studio file has no handoff key. The 27 raw files are not served
+and are a cull candidate (ledger L-074).
+
+**Files modified (gallery repo tonyquintanilla.github.io, branch main):**
+- `index.html` -- dormant `?preview=` branch in `init()`.
+- `tools/gallery_studio.py` -- `_preview` rewrite, `_repo_root` /
+  `_ensure_preview_server`, imports, credit line.
+- `.gitignore` -- trimmed to gallery-relevant patterns.
+
+**Files NOT modified:**
+- `json_converter.py` -- used as-is (its extractor is the production parse the
+  preview now reuses).
+- orrery repo -- untouched.
+
+**SHA chain (gallery repo, branch main):**
+3ee1734 (base) -> 495683e (increments 1 + 2 + .gitignore; current HEAD).
+Round-trip confirmed against remote HEAD.
+
+**Render gate (Tony) -- PASS:** preview opens the genuine viewer over localhost;
+GE button renders and click-through resolves for PUSHED assets; no button when the
+card has no KMZ; old `file://` bare-figure preview gone; `import json_converter`
+resolves via the dashboard launch. BY DESIGN (not a gap): the GE button 404s when
+the KMZ is not yet pushed to `gallery/assets/` -- the preview honestly reports
+push status. Increment 3 (local-asset fallback for pre-push click-through)
+DECLINED: Tony pushes the KMZ at generation time, and only the exported HTML
+iterates between previews, so the 404 is a useful push-status check.
+
+**Ledger:** L-072 (section H, DONE). Follow-on candidates: L-073 export-emits-JSON
+(fold the manual converter run into Export; manifest-write the only open decision)
+and L-074 cull unused raw `*_teaser.json`.
+
+Entry written June 2026 with Anthropic's Claude Opus 4.8.

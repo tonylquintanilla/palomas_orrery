@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*50 live items; 42 need attention (`!`); 50 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*53 live items; 44 need attention (`!`); 53 RICE-scored. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -322,7 +322,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### H
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+|  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
+| ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
+| ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
 
 <!-- INDEX:END -->
 
@@ -1819,6 +1822,47 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   `[verified @2f40d9d ~L4775]`; 'ongoing' status comment
   (spacecraft_encounters.py L60, verified).
 **Linked:** coupled to L-046 (encounter generator -> preset-authoring skill).
+
+#### [L-072] Gallery Studio WYSIWYG preview -- render through the real index.html viewer
+<!-- L:072 status:DONE upd:2026-06-26 section:H flag: rice:2/2/100/2 -->
+- **Problem.** Studio Preview opened a bare Plotly figure via file://, so the
+  viewer-only chrome (green Google Earth button from `_kmz_handoff`, link-icon
+  dropdown from `_link_data`) never appeared -- not WYSIWYG with the live gallery,
+  which adds that chrome at view time. The button is viewer chrome, not a figure
+  annotation; the Studio preview never ran the viewer.
+- **Fix (2 increments; gallery repo 3ee1734 -> pushed 495683e).** Inc 1: a dormant
+  `?preview=<file>` branch in index.html `init()` that injects a synthetic lookup
+  entry and reuses `loadVisualization` UNCHANGED (no render-path refactor; inert
+  for real visitors). Inc 2: `gallery_studio.py` `_preview` rewrite --
+  build_gallery_html -> the REAL `json_converter.extract_plotly_json_from_html`
+  (same parse that yields the pushed JSON) -> throwaway
+  `gallery/_studio_preview.json` -> ephemeral 127.0.0.1 daemon server rooted at the
+  repo -> open the GENUINE index.html at `?preview=`. No vendored viewer, no second
+  extractor -- WYSIWYG by construction. `.gitignore` covers the preview slot.
+- **Verified.** Producer-chain smoke: `_kmz_handoff` + `_studio` survive
+  build->extract into the previewed card; py_compile; ASCII/LF. Mode-5 (Tony): GE
+  button renders, click-through resolves for PUSHED assets, no button when no KMZ,
+  old file:// preview gone, `import json_converter` resolves via dashboard launch.
+- **By design (not a gap).** GE button 404s when the KMZ is not yet pushed to
+  `gallery/assets/` -- the preview honestly reports push status. Tony pushes the
+  KMZ at generation time; only the exported HTML iterates between previews.
+  Increment 3 (local-asset fallback) DECLINED for this reason.
+**Linked:** sibling to L-058 (open Studio items); preview reuses json_converter as-is.
+
+#### [L-073] Gallery export-emits-JSON -- fold the manual json_converter run into Export
+<!-- L:073 status:OPEN upd:2026-06-26 section:H flag: rice:2/2/80/2 -->
+- Export produces only HTML today; Tony runs json_converter by hand before push.
+  Wire Export to also emit the JSON via the REAL converter (same transform the
+  preview now uses, proven in L-072). One open decision: card-only, or also stamp
+  the gallery_metadata.json entry (per-file converter does the latter via
+  auto_metadata). Sequence AFTER L-072 so it inherits a proven transform. Curation
+  gate stays downstream (which JSON gets posted) -- the converter does not edit.
+
+#### [L-074] Cull unused raw *_teaser.json in the gallery dir
+<!-- L:074 status:OPEN upd:2026-06-26 section:H flag: rice:1/1/90/1 -->
+- 27 raw `*_teaser.json` are tracked but NOT in gallery_metadata.json (pre-Studio
+  intermediates; manifest serves `_gallery`/`_desktop` exports). Candidate
+  cull/archive. Confirm none are needed as converter inputs before removing.
 
 ---
 
