@@ -162,7 +162,7 @@ def build_spikes_kml(scenario_id, date, lats, lons, values, thresholds,
     screen.icon.href = os.path.basename(intel_path)
     screen.overlayxy = simplekml.OverlayXY(x=0, y=1, xunits=simplekml.Units.fraction,
                                             yunits=simplekml.Units.fraction)
-    screen.screenxy = simplekml.ScreenXY(x=0.02, y=0.90, xunits=simplekml.Units.fraction,
+    screen.screenxy = simplekml.ScreenXY(x=0.02, y=0.84, xunits=simplekml.Units.fraction,
                                           yunits=simplekml.Units.fraction)
     screen.size = simplekml.Size(x=0.22, y=0, xunits=simplekml.Units.fraction,
                                   yunits=simplekml.Units.fraction)
@@ -775,7 +775,7 @@ def create_info_placemark(kml, scenario_id, title, date, briefing, lat, lon):
         '</div>'
     )
 
-    pnt = kml.newpoint(name=f"{scenario_id} - tap for details")
+    pnt = kml.newpoint(name=f"{title} - tap for details")
     pnt.coords = [(lon, lat, 0)]
     pnt.altitudemode = simplekml.AltitudeMode.clamptoground
     # Wrap in CDATA so simplekml emits the HTML unescaped (base.py leaves
