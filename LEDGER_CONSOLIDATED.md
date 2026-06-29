@@ -219,13 +219,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*53 live items; 44 need attention (`!`); 53 RICE-scored; 20 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*54 live items; 44 need attention (`!`); 54 RICE-scored; 20 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-24 |
+|  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-29 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
@@ -582,6 +583,52 @@ neighbor at fetch time (Tony, manual). Scope: which neighbors in v1.
 - **Close when:** the dome resolves and the series is complete.
 **Ref:** L-065 (build + chassis, closed); scenarios_heatwaves.py; Western
 dated-series precedent (scenarios_western_heatwave_march_2026.py).
+
+#### [L-075] KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine)
+<!-- L:075 status:DONE upd:2026-06-29 section:A flag: rice:3/3/95/2 -->
+- **Problem.** The KMZ intel card was a fixed-size matplotlib PNG ScreenOverlay
+  pinned top-left -- it could not reflow and collided with the Google Earth search
+  bar on mobile, the long briefing unreadable on a phone.
+- **"3+5" redesign (earth_system_generator.py; built on 9007ea3 -> pushed 3ba4e8a).**
+  (3) intel card shrunk to a compact always-on header (title + date + "tap the (i)
+  pin" hint) + a tappable info "i" Placemark at the grid centroid whose balloon
+  carries the full briefing. (5) population-exposure key folded into the balloon;
+  risk-scale colorbar moved bottom-right -> right-edge-centered, off the GE nav/3D
+  buttons; header dropped below the mobile search bar. New helpers
+  create_info_placemark + _briefing_to_html; producer-level change in run_scenario
+  / build_spikes_kml.
+- **Key fix -- CDATA.** simplekml 1.3.2 entity-escapes description fields by default
+  (HTML would render as literal tags); wrapping the balloon in <![CDATA[...]]> makes
+  simplekml emit it unescaped (base.py leaves CDATA blocks untouched), so GE renders
+  it as HTML -- matching the proven desktop probe.
+- **Structural win (parallel-pipeline).** Fix landed in the producer (run_scenario /
+  build_spikes_kml), so every heatwave / coral / coastal scenario inherits 3+5 on its
+  next regeneration -- not a per-europe_2026 edit.
+- **Verified.** py_compile; ASCII/LF; synthetic KML smoke (CDATA balloon, briefing
+  reflow, exposure key, repositioned overlays, pop-legend ScreenOverlay removed).
+  Mode-5 (Tony, 2026-06-29): europe_2026 regenerated (cached ERA5, offline) and
+  confirmed on DESKTOP + iPad + iPhone across Chrome / Bing / Safari -- balloon
+  renders everywhere, collision gone, readable. iPhone full-screen sheet is the
+  cleanest render; iPad docks the balloon inline. Gallery KMZ pushed d25fd93.
+- **iOS banner (app chrome, not the KMZ).** Only the iPhone shows the "content is
+  controlled by the author... do not enter passwords" banner: at phone size GE
+  presents the balloon as a full-screen web sheet (which carries the standard safety
+  banner); the iPad docks it inline (no sheet, no banner). Same file, same HTML;
+  harmless (no input field), not switchable from the KML side.
+- **Polish (delivered this session; 2 lines, verified; LANDS on the next europe_2026
+  regenerate + gallery push).** header screenxy y 0.90 -> 0.84 (iPhone search-bar
+  clearance); pin label scenario_id -> title so it matches the balloon heading
+  ("Europe Heat Dome (June 2026) - tap for details"). Both Tony-approved. Only
+  remaining action on this block; a quick re-confirm on the next regenerate closes it.
+- **Dead code surfaced.** create_pop_legend_card is now unused (exposure key folded
+  into the balloon); left defined to keep the live push minimal-risk -> remove in the
+  L-068 dead-code sweep, not its own push.
+**Linked:** chassis from L-065 (europe_2026 build); series tracked under L-071;
+dead-code removal -> L-068. Icon uses remote Google info-i.png (probe parity); bundle
+a local icon only if the iOS pin glyph misbehaves.
+**Ref:** earth_system_generator.py (run_scenario, build_spikes_kml, build_impact_kml,
+create_intel_card, create_info_placemark, _briefing_to_html); simplekml 1.3.2 base.py
+CDATA behavior.
 
 ## PENDING ACTION (Tony-side)
 
