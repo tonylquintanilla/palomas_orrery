@@ -11,6 +11,12 @@ Usage:
     from earth_system_generator import run_scenario
     from scenarios_heatwaves import SCENARIOS
     run_scenario(SCENARIOS[0])
+
+Module updated: June 2026 with Anthropic's Claude Opus 4.8
+- KMZ intel card -> compact always-on header + tappable info balloon
+  (create_info_placemark). Population-exposure key folded into the balloon;
+  risk-scale colorbar repositioned off the bottom chrome. Cards now reflow on
+  mobile Google Earth instead of colliding with the search bar / toolbar.
 """
 import re
 import os
@@ -18,6 +24,7 @@ import math
 import json
 import zipfile
 import textwrap
+import html
 import numpy as np
 import simplekml
 import plotly.graph_objects as go
@@ -98,7 +105,6 @@ def run_scenario(scenario, status_callback=None):
         status_callback("Generating Intel Cards...")
 
     legend_risk_path = create_legend_card(thresholds, scenario_id)
-    legend_pop_path = create_pop_legend_card(scenario_id)
     intel_path = create_intel_card(name, scenario.get('description', ''),
                                    scenario.get('briefing', ''), date, scenario_id)
 
@@ -108,10 +114,11 @@ def run_scenario(scenario, status_callback=None):
 
     spikes_filename = build_spikes_kml(scenario_id, date, lats, lons, values,
                                         thresholds, intel_path, legend_risk_path,
-                                        pin_stations=scenario.get('pin_stations'))
+                                        pin_stations=scenario.get('pin_stations'),
+                                        name=name, briefing=scenario.get('briefing', ''))
     heat_filename = build_heatmap_kml(scenario_id, date, lats, lons, values, thresholds)
     impact_filename = build_impact_kml(scenario_id, date, scenario.get('populations', []),
-                                        legend_pop_path, thresholds)
+                                        None, thresholds)
 
     # 4. GENERATE PLOTLY TEASER
     generate_plotly_teaser(scenario_id, f"{name} ({date})", lats, lons, values,
@@ -129,7 +136,6 @@ def run_scenario(scenario, status_callback=None):
         impact_filename if impact_filename else "",
         img_path,
         legend_risk_path,
-        legend_pop_path,
         intel_path
     ]
     package_and_cleanup(scenario_id, generated_files, DATA_DIR)
@@ -142,7 +148,8 @@ def run_scenario(scenario, status_callback=None):
 # ==========================================
 
 def build_spikes_kml(scenario_id, date, lats, lons, values, thresholds,
-                     intel_path, legend_risk_path, pin_stations=None):
+                     intel_path, legend_risk_path, pin_stations=None,
+                     name='', briefing=''):
     """Builds the vertical extrusion spikes KML layer.
     
     Spike colors and heights are driven by thresholds config.
@@ -150,25 +157,34 @@ def build_spikes_kml(scenario_id, date, lats, lons, values, thresholds,
     kml_spikes = simplekml.Kml()
     kml_spikes.document.name = f"{scenario_id} Spikes ({date})"
 
-    # Intel card overlay (top-left)
+    # Compact header overlay (upper-left, dropped below the mobile search bar)
     screen = kml_spikes.newscreenoverlay(name="Intel Card")
     screen.icon.href = os.path.basename(intel_path)
     screen.overlayxy = simplekml.OverlayXY(x=0, y=1, xunits=simplekml.Units.fraction,
                                             yunits=simplekml.Units.fraction)
-    screen.screenxy = simplekml.ScreenXY(x=0.02, y=0.98, xunits=simplekml.Units.fraction,
+    screen.screenxy = simplekml.ScreenXY(x=0.02, y=0.90, xunits=simplekml.Units.fraction,
                                           yunits=simplekml.Units.fraction)
-    screen.size = simplekml.Size(x=0.25, y=0, xunits=simplekml.Units.fraction,
+    screen.size = simplekml.Size(x=0.22, y=0, xunits=simplekml.Units.fraction,
                                   yunits=simplekml.Units.fraction)
 
-    # Risk scale legend (bottom-right)
+    # Risk scale legend (right edge, vertically centered -- clears the
+    # bottom-right nav / 3D buttons that clipped it on mobile)
     screen_leg = kml_spikes.newscreenoverlay(name="Risk Scale")
     screen_leg.icon.href = os.path.basename(legend_risk_path)
-    screen_leg.overlayxy = simplekml.OverlayXY(x=1, y=0, xunits=simplekml.Units.fraction,
+    screen_leg.overlayxy = simplekml.OverlayXY(x=1, y=0.5, xunits=simplekml.Units.fraction,
                                                 yunits=simplekml.Units.fraction)
-    screen_leg.screenxy = simplekml.ScreenXY(x=0.98, y=0.05, xunits=simplekml.Units.fraction,
+    screen_leg.screenxy = simplekml.ScreenXY(x=0.99, y=0.5, xunits=simplekml.Units.fraction,
                                               yunits=simplekml.Units.fraction)
     screen_leg.size = simplekml.Size(x=0.15, y=0, xunits=simplekml.Units.fraction,
                                       yunits=simplekml.Units.fraction)
+
+    # Tappable info balloon ("i" pin at the grid centroid) -- holds the full
+    # briefing + population-exposure key, reflowing clear of GE chrome.
+    if lats and lons:
+        c_lat = sum(lats) / len(lats)
+        c_lon = sum(lons) / len(lons)
+        create_info_placemark(kml_spikes, scenario_id, name or scenario_id,
+                              date, briefing, c_lat, c_lon)
 
     # Station pin mode: confirmed observations instead of grid stride
     if pin_stations:
@@ -288,14 +304,10 @@ def build_impact_kml(scenario_id, date, populations, legend_pop_path, thresholds
     kml_pop = simplekml.Kml()
     kml_pop.document.name = f"{scenario_id} Impact Zones"
 
-    screen_pop = kml_pop.newscreenoverlay(name="Pop Legend")
-    screen_pop.icon.href = os.path.basename(legend_pop_path)
-    screen_pop.overlayxy = simplekml.OverlayXY(x=0, y=0, xunits=simplekml.Units.fraction,
-                                                yunits=simplekml.Units.fraction)
-    screen_pop.screenxy = simplekml.ScreenXY(x=0.02, y=0.05, xunits=simplekml.Units.fraction,
-                                              yunits=simplekml.Units.fraction)
-    screen_pop.size = simplekml.Size(x=0.15, y=0, xunits=simplekml.Units.fraction,
-                                      yunits=simplekml.Units.fraction)
+    # Population Exposure key now lives in the tappable info balloon
+    # (create_info_placemark), not a fixed ScreenOverlay -- frees the
+    # bottom-left corner that collided with the mobile toolbar. The
+    # legend_pop_path param is retained for call-site compatibility.
 
     for city in populations:
         pop = city['pop']
@@ -691,47 +703,91 @@ def create_pop_legend_card(scenario_id):
 
 
 def create_intel_card(title, description, briefing, date, scenario_id):
-    """Creates the dynamic briefing text card."""
-    fig = plt.figure(figsize=(4, 3.0), dpi=120)
+    """Creates the compact always-on header card (title + date + hint).
+
+    The full briefing now lives in the tappable info balloon
+    (create_info_placemark); this header only identifies the scenario so the
+    map reads at a glance without the long text block colliding with chrome.
+    The description/briefing params are kept for call-site compatibility.
+    """
+    fig = plt.figure(figsize=(4, 0.9), dpi=120)
     fig.patch.set_facecolor('#f8f9fa')
     fig.patch.set_alpha(0.7)
 
     ax = fig.add_subplot(111)
     ax.axis('off')
 
-    plt.text(0.05, 0.9, f"{scenario_id.upper()}",
-             transform=ax.transAxes, fontsize=10, fontweight='bold', color='#333')
-    plt.text(0.05, 0.82, f"DATE: {date}",
+    plt.text(0.04, 0.72, f"{scenario_id.upper()}",
+             transform=ax.transAxes, fontsize=12, fontweight='bold', color='#222')
+    plt.text(0.04, 0.40, f"DATE: {date}",
              transform=ax.transAxes, fontsize=9, fontfamily='monospace', color='#555')
-    plt.plot([0.05, 0.95], [0.78, 0.78], color='black', linewidth=1,
-             transform=ax.transAxes)
-
-#    wrapped_briefing = textwrap.fill(briefing, width=40)
-#    clean_briefing = re.sub(r'<[^>]+>', ' ', briefing).replace('  ', ' ').strip()
-#    wrapped_briefing = textwrap.fill(clean_briefing, width=40)
-
-    # Convert <br> to newlines, then strip remaining HTML tags
-    spaced = briefing.replace('<br>', '\n\n').replace('<BR>', '\n\n')
-    clean_briefing = re.sub(r'<[^>]+>', '', spaced).strip()
-    # Wrap each line independently so line breaks are preserved
-    lines = clean_briefing.split('\n\n')
-    wrapped_lines = []
-    for line in lines:
-        line = line.strip()
-        if line:
-            wrapped_lines.append(textwrap.fill(line, width=50))
-    wrapped_briefing = '\n\n'.join(wrapped_lines)
-
-    plt.text(0.05, 0.72, wrapped_briefing,
-             transform=ax.transAxes, fontsize=8, va='top', ha='left', color='#222')
-
-    plt.text(0.05, 0.05, "METEO DATA: ERA5 Reanalysis via Open-Meteo API",
-             transform=ax.transAxes, fontsize=6, color='#777', style='italic')
+    plt.text(0.04, 0.10, "Tap the (i) pin for the full briefing",
+             transform=ax.transAxes, fontsize=7, color='#777', style='italic')
 
     intel_path = os.path.join(DATA_DIR, f'{date}_intel_{scenario_id}.png')
     plt.savefig(intel_path, bbox_inches='tight', pad_inches=0.1, transparent=False)
     plt.close()
     return intel_path
+
+
+def _briefing_to_html(briefing):
+    """Convert a plain-text briefing into safe, reflowing balloon HTML.
+
+    Normalizes <br> to line breaks, strips any other markup, escapes the
+    text, then re-emits paragraphs so the balloon wraps to the device width.
+    """
+    text = briefing.replace('<br>', '\n').replace('<BR>', '\n')
+    text = re.sub(r'<[^>]+>', '', text)
+    paras = [p.strip() for p in re.split(r'\n\s*\n', text) if p.strip()]
+    out = []
+    for p in paras:
+        esc = html.escape(p).replace('\n', '<br>')
+        out.append('<p style="margin:0 0 8px 0;">' + esc + '</p>')
+    return ''.join(out)
+
+
+def create_info_placemark(kml, scenario_id, title, date, briefing, lat, lon):
+    """Add a tappable info "i" placemark whose balloon holds the full briefing.
+
+    The balloon reflows to the device width and renders clear of Google Earth's
+    search bar / toolbar, so the narrative no longer collides with chrome the
+    way a fixed ScreenOverlay PNG does. The population-exposure key is folded
+    in here as well. Default-closed; opens on tap.
+    """
+    balloon = (
+        '<div style="max-width:340px; '
+        'font-family:-apple-system,Helvetica,Arial,sans-serif; '
+        'font-size:14px; line-height:1.4; color:#222;">'
+        '<h3 style="margin:0 0 6px 0; font-size:16px;">'
+        + html.escape(title) + '</h3>'
+        '<div style="font:12px monospace; color:#666; margin-bottom:8px;">'
+        'DATE: ' + html.escape(str(date)) + '</div>'
+        + _briefing_to_html(briefing) +
+        '<hr style="border:none; border-top:1px solid #ddd; margin:8px 0;">'
+        '<div style="font-weight:bold; margin-bottom:4px;">'
+        'Population Exposure</div>'
+        '<div><span style="color:#e00; font-size:16px;">&#9679;</span> '
+        'Megacity (&gt;5M)</div>'
+        '<div><span style="color:#f80; font-size:16px;">&#9679;</span> '
+        'Major (&gt;1M)</div>'
+        '<div><span style="color:#cc0; font-size:16px;">&#9679;</span> '
+        'Region (&gt;500k)</div>'
+        '</div>'
+    )
+
+    pnt = kml.newpoint(name=f"{scenario_id} - tap for details")
+    pnt.coords = [(lon, lat, 0)]
+    pnt.altitudemode = simplekml.AltitudeMode.clamptoground
+    # Wrap in CDATA so simplekml emits the HTML unescaped (base.py leaves
+    # CDATA blocks untouched); GE then renders the balloon as HTML rather
+    # than printing literal tags -- matching the proven desktop probe.
+    pnt.description = '<![CDATA[' + balloon + ']]>'
+    pnt.style.iconstyle.icon.href = \
+        "http://maps.google.com/mapfiles/kml/shapes/info-i.png"
+    pnt.style.iconstyle.scale = 1.3
+    pnt.style.labelstyle.scale = 0.9
+    pnt.style.balloonstyle.text = "$[description]"
+    return pnt
 
 
 # ==========================================
