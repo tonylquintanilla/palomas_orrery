@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: June 25, 2026
+Generated: June 29, 2026
 Files scanned: 113
-Total findings: 508
-Constants: 69 | Dicts: 32 | Display strings: 407
+Total findings: 510
+Constants: 69 | Dicts: 34 | Display strings: 407
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -38,7 +38,7 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 0 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 148 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 342 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 344 |
 | 4 | 1-4 | NO ACTION NEEDED | 18 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
@@ -571,6 +571,13 @@ is planned for a future session.
 | 937 | string | display string @ line 937 | (2 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 951 | string | display string @ line 951 | (3 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 | 1019 | string | display string @ line 1019 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+
+### ledger_index.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 75 | dict | SECTION_ALIASES[...] | (1 entry) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 79 | dict | SECTION_TITLES[...] | (15 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### mars_visualization_shells.py
 

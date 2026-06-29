@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 25, 2026
-Modules: 113 | Functions: 917 | Lines: 89,505
+Generated: June 29, 2026
+Modules: 113 | Functions: 918 | Lines: 89,606
 
 ---
 
@@ -1197,7 +1197,7 @@ and explains in context.
 
 ### earth_system_generator.py
 
-**Role:** computation | **Lines:** 691
+**Role:** computation | **Lines:** 754
 
 > Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline
 
@@ -1206,18 +1206,19 @@ and explains in context.
 
 **Public functions:**
 
-- `run_scenario(scenario, status_callback)` (line 59) -- Orchestrates the full pipeline for one scenario.
-- `build_spikes_kml(scenario_id, date, lats, lons, values, thresholds, intel_path, legend_risk_path, pin_stations)` (line 137) -- Builds the vertical extrusion spikes KML layer.
-- `build_heatmap_kml(scenario_id, date, lats, lons, values, thresholds)` (line 230) -- Builds the ground overlay heatmap KML layer with contour PNG.
-- `build_impact_kml(scenario_id, date, populations, legend_pop_path, thresholds)` (line 271) -- Builds the population impact circles KML layer.
-- `generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir, thresholds, briefing, description, mobile_briefing, encyclopedia)` (line 329) -- Generates the fast-loading 2D Plotly Teaser for Web Gallery use.
-- `package_and_cleanup(scenario_id, files_to_package, output_dir)` (line 506) -- Zips the raw KML and PNG files into a single-document KMZ.
-- `create_legend_card(thresholds, scenario_id)` (line 571) -- Creates the risk scale legend image from threshold bands.
-- `create_pop_legend_card(scenario_id)` (line 638) -- Creates the population circle key with tiered size/color.
-- `create_intel_card(title, description, briefing, date, scenario_id)` (line 678) -- Creates the dynamic briefing text card.
-- `create_circle_polygon(lat, lon, radius_km, num_points)` (line 726) -- Generates a circle polygon for KML population impact layer.
-- `kml_to_mpl_color(kml_color)` (line 746) -- Converts KML AABBGGRR hex color to matplotlib-compatible hex.
-- `class MissionSelector` (line 764) -- Tkinter GUI for selecting and running scenarios.
+- `run_scenario(scenario, status_callback)` (line 66) -- Orchestrates the full pipeline for one scenario.
+- `build_spikes_kml(scenario_id, date, lats, lons, values, thresholds, intel_path, legend_risk_path, pin_stations, name, briefing)` (line 150) -- Builds the vertical extrusion spikes KML layer.
+- `build_heatmap_kml(scenario_id, date, lats, lons, values, thresholds)` (line 253) -- Builds the ground overlay heatmap KML layer with contour PNG.
+- `build_impact_kml(scenario_id, date, populations, legend_pop_path, thresholds)` (line 294) -- Builds the population impact circles KML layer.
+- `generate_plotly_teaser(scenario_id, title, lats, lons, values, output_dir, thresholds, briefing, description, mobile_briefing, encyclopedia)` (line 348) -- Generates the fast-loading 2D Plotly Teaser for Web Gallery use.
+- `package_and_cleanup(scenario_id, files_to_package, output_dir)` (line 533) -- Zips the raw KML and PNG files into a single-document KMZ.
+- `create_legend_card(thresholds, scenario_id)` (line 598) -- Creates the risk scale legend image from threshold bands.
+- `create_pop_legend_card(scenario_id)` (line 665) -- Creates the population circle key with tiered size/color.
+- `create_intel_card(title, description, briefing, date, scenario_id)` (line 705) -- Creates the compact always-on header card (title + date + hint).
+- `create_info_placemark(kml, scenario_id, title, date, briefing, lat, lon)` (line 749) -- Add a tappable info "i" placemark whose balloon holds the full briefing.
+- `create_circle_polygon(lat, lon, radius_km, num_points)` (line 797) -- Generates a circle polygon for KML population impact layer.
+- `kml_to_mpl_color(kml_color)` (line 817) -- Converts KML AABBGGRR hex color to matplotlib-compatible hex.
+- `class MissionSelector` (line 835) -- Tkinter GUI for selecting and running scenarios.
 
 ---
 
@@ -2390,7 +2391,7 @@ and explains in context.
 
 ### ledger_index.py
 
-**Role:** other | **Lines:** 296
+**Role:** other | **Lines:** 334
 
 > ledger_index.py - Generate the at-a-glance INDEX for the consolidated ledger.
 
@@ -2399,18 +2400,18 @@ and explains in context.
 
 **Public functions:**
 
-- `parse_rice(rice_str)` (line 77) -- Parse a rice:R/I/C/E string into (reach, impact, confidence, effort) or None.
-- `compute_score(rice_tuple)` (line 98) -- Compute RICE score: R x I x (C / 100) / E.  Returns float or None.
-- `fmt_score(score)` (line 106) -- Format a RICE score for the index table.
-- `parse_blocks(lines)` (line 113) -- Return list of dicts (one per L-block) and a list of parse problems.
-- `check(blocks, problems)` (line 137)
-- `cell(s)` (line 147) -- Make a string safe for a markdown table cell (escape the pipe).
-- `fmt_disposition(b)` (line 152)
-- `fmt_id(b)` (line 157)
-- `build_index(blocks)` (line 162)
-- `extract_block_text(lines, start_line)` (line 204) -- Extract the full text of one L-block starting at start_line (the #### header).
-- `migrate_to_section_c(text, blocks)` (line 226) -- Find all DONE blocks with MIGRATE_TRIGGER in their body that are NOT
-- `main()` (line 303)
+- `parse_rice(rice_str)` (line 105) -- Parse a rice:R/I/C/E string into (reach, impact, confidence, effort) or None.
+- `compute_score(rice_tuple)` (line 126) -- Compute RICE score: R x I x (C / 100) / E.  Returns float or None.
+- `fmt_score(score)` (line 134) -- Format a RICE score for the index table.
+- `parse_blocks(lines)` (line 141) -- Return list of dicts (one per L-block) and a list of parse problems.
+- `check(blocks, problems)` (line 165)
+- `cell(s)` (line 175) -- Make a string safe for a markdown table cell (escape the pipe).
+- `fmt_disposition(b)` (line 180)
+- `fmt_id(b)` (line 185)
+- `build_index(blocks)` (line 190)
+- `extract_block_text(lines, start_line)` (line 246) -- Extract the full text of one L-block starting at start_line (the #### header).
+- `migrate_to_section_c(text, blocks)` (line 268) -- Find all DONE blocks with MIGRATE_TRIGGER in their body that are NOT
+- `main()` (line 345)
 
 ---
 
@@ -2566,7 +2567,7 @@ and explains in context.
 | dep_trace | devtool | 399 | 1 | 0 |
 | diagnose_bcodmo | devtool | 65 | 0 | 0 |
 | earth_system_controller | gui | 81 | 0 | 0 |
-| earth_system_generator | computation | 691 | 3 | 1 |
+| earth_system_generator | computation | 754 | 3 | 1 |
 | earth_system_visualization_gui | gui | 1,822 | 8 | 1 |
 | earth_visualization_shells | rendering/shells | 992 | 2 | 2 |
 | energy_imbalance | computation | 839 | 1 | 1 |
@@ -2586,7 +2587,7 @@ and explains in context.
 | incremental_cache_manager | cache | 657 | 1 | 4 |
 | info_dictionary | data | 2,046 | 0 | 9 |
 | jupiter_visualization_shells | rendering/shells | 886 | 3 | 1 |
-| ledger_index | other | 296 | 0 | 0 |
+| ledger_index | other | 334 | 0 | 0 |
 | mars_visualization_shells | rendering/shells | 799 | 2 | 1 |
 | measure_animation_html | other | 99 | 0 | 0 |
 | measure_perframe_elements | other | 123 | 4 | 0 |
