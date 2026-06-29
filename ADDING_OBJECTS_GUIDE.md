@@ -1,5 +1,5 @@
 # Adding New Objects to Paloma's Orrery
-*Guide v1.1 - May 2026 | Tony + Claude*
+*Guide v1.2 - June 2026 | Tony + Claude*
 
 ---
 
@@ -16,6 +16,10 @@ The minimal path is always:
 | `info_dictionary.py` | `INFO[name]` hover text | Recommended (enables Object Encyclopedia) |
 | `orbital_elements.py` | `planetary_params` entry | Only if idealized orbit wanted |
 | `orbital_elements.py` | `parent_planets` entry | Only for satellites/moons |
+
+> **Adding an Earth System KMZ layer instead** (a Google Earth "blockbuster" +
+> its web-gallery card) — that's a separate subsystem with its own pipeline and
+> does not touch any of the files above. See **Section F**.
 
 ---
 
@@ -447,6 +451,121 @@ Add to `SPACECRAFT_FULL_MISSION`:
 
 ---
 
+## Section F: Earth System KMZ Layers (Google Earth blockbusters)
+
+Earth System layers are a **separate subsystem** from the solar-system objects in
+Sections A-E. They do not touch `celestial_objects.py`, `constants_new.py`, or
+`palomas_orrery.py`. Instead a generator reads a climate/impact dataset and emits a
+**pair** of artifacts in one run:
+
+| Artifact | File | Where it's used |
+|----------|------|-----------------|
+| Teaser | `data/{scenario_id}_teaser.html` | Web gallery (fast 2D Plotly map) |
+| KMZ | `data/{scenario_id}_blockbuster.kmz` | Google Earth Pro (the 3D "blockbuster") |
+
+The teaser carries a `_kmz_handoff` string (the KMZ filename); the gallery viewer
+reads it at view time and draws the green "Click 3D Earth" button. The button is
+**viewer chrome**, not baked into the teaser — the teaser only holds the filename.
+
+### Two generator families
+
+| Family | Engine | Config lives in | Examples |
+|--------|--------|-----------------|----------|
+| **Grid scenarios** | `earth_system_generator.run_scenario(scenario)` | a `SCENARIOS` list | `scenarios_heatwaves.py` (28), `scenarios_coral_bleaching.py` (2), `scenarios_western_heatwave_march_2026.py` (dated series, ~10 KMZs) |
+| **Bespoke generators** | a self-contained module with its own `run()` | the module itself | `food_insecurity_generator.py` (IPC GeoJSON -> Sudan) |
+
+Grid scenarios share one engine, so an engine-level change (e.g. the KMZ "3+5"
+info-card redesign, L-075) reaches **every grid scenario** on its next
+regeneration. Bespoke generators have their **own** card/balloon code and do **not**
+inherit engine changes — port the change in separately if you want it there.
+
+### Step F1 — Define the scenario (grid family)
+
+Add a dict to the `SCENARIOS` list (e.g. in `scenarios_heatwaves.py`):
+
+| Key | Meaning |
+|-----|---------|
+| `scenario_id` | stable slug; drives every output filename (`{id}_blockbuster.kmz`, `{id}_teaser.html`) |
+| `name` | human title shown on the teaser + KMZ balloon |
+| `date` | `YYYY-MM-DD`; the dated snapshot (also the fetch cache key) |
+| `lat_range`, `lon_range` | the map window |
+| `description` | one-line tagline |
+| `briefing` | the full narrative; `[TO-FETCH]` is auto-filled with the regional peak. **Every numeric claim needs an inline `# Source:` within scanner lookback (goal: Tier-1 = 0).** |
+| `populations` | list of `{name, lat, lon, pop}` -> proportional impact circles + the balloon's Population Exposure key |
+| `thresholds` | colour bands + height multiplier (e.g. `HEATWAVE_THRESHOLDS`) |
+| `fetch` | the data fetcher (e.g. `fetch_era5_heatwave`), cache-aware via `data/weather_cache.json` keyed `lat_lon_date` |
+
+For a **bespoke** layer, write a module whose `run()` ends by calling its own
+`package_kmz(...)` and (optionally) `generate_plotly_teaser(...)`, emitting the same
+`{scenario_id}_blockbuster.kmz` + `{scenario_id}_teaser.html` pair.
+
+### Step F2 — Generate
+
+Run the scenario module (grid) or the generator's `run()` (bespoke). One run writes
+**both** the teaser HTML and the KMZ into `data/`. Cached date -> offline/instant;
+uncached -> a network fetch (historical reanalysis is stable, so re-fetching a past
+date reproduces the same bytes).
+
+### Step F3 — View in Google Earth (orrery side)
+
+Earth System Visualization GUI -> **Google Earth Layer Launcher** -> add
+`data/{scenario_id}_blockbuster.kmz` -> launch. Requires Google Earth Pro. The
+launcher (`earth_system_controller.py`) is a generic `.kml`/`.kmz` opener.
+
+### Step F4 — Publish to the web gallery
+
+1. Run `json_converter` on `data/{scenario_id}_teaser.html`. It is **interactive**:
+   pick **Mode** (L landscape / P portrait / B both) and pass the **category**. It
+   writes the JSON card(s) and stamps the `gallery_metadata.json` entry the proven
+   way. **Never hand-edit `gallery_metadata.json`** — the converter is the producer
+   that made every working card.
+2. (Optional) set subcategory / labels / featured in the Gallery Editor.
+3. Push to the gallery repo: the JSON card(s) **and** the KMZ into `gallery/assets/`.
+   The card's `layout._kmz_handoff` = the KMZ basename, which the viewer turns into
+   the green 3D-Earth button. Two card variants (`_teaser_gallery` desktop,
+   `_teaser_mobile` portrait) can share one KMZ.
+
+### Update discipline — what to re-push when you change something
+
+The expensive mistakes are re-running the whole pipeline when you didn't need to,
+and skipping a step when you did. Match the change to the artifact:
+
+| What you changed | Teaser changes? | KMZ changes? | Re-push |
+|------------------|:---:|:---:|---------|
+| KMZ-side code only (intel card, balloon, overlays, KML builders) | no | yes | **KMZ only** -> `gallery/assets/`. Cards already point to the stable `{id}_blockbuster.kmz`. |
+| Teaser-side code (`generate_plotly_teaser`, CTA, annotation) | yes | no | re-run `json_converter` -> push new card JSON (+ metadata only if structure changed) |
+| Scenario **data** (date, region, briefing text, peak) | yes | yes | full pipeline: regenerate -> converter -> push card + KMZ |
+| New scenario | new | new | full pipeline + new card + new metadata entry + KMZ |
+
+Because the KMZ filename is stable per `scenario_id`, a pure-KMZ change is a drop-in
+replacement: regenerate, copy the `_blockbuster.kmz` into `gallery/assets/`, push.
+No teaser, converter, card, or metadata work. (This is why the L-075 3+5 rollout is
+KMZ-only.)
+
+### Files touched for an Earth System layer
+
+| Step | File | What | Required? |
+|------|------|------|-----------|
+| F1 | `scenarios_*.py` (or a new generator module) | scenario dict / `run()` | YES |
+| F2 | (none — run it) | produces teaser + KMZ in `data/` | YES |
+| F3 | (none — launch it) | verify the KMZ in Google Earth Pro | to verify |
+| F4 | gallery repo `gallery/` + `gallery/assets/` | card JSON + KMZ | to publish |
+
+### Common mistakes (Earth System)
+
+| Mistake | Symptom | Fix |
+|---------|---------|-----|
+| Hand-editing `gallery_metadata.json` | broken nav / invalid JSON | always go through `json_converter` |
+| Pushing the card but not the KMZ | green 3D button 404s | push `{id}_blockbuster.kmz` to `gallery/assets/` |
+| Regenerating teasers for a KMZ-only change | wasted converter runs, churned cards | KMZ-only -> push only the KMZ |
+| Expecting a bespoke generator to inherit engine changes | the food-insecurity card still looks old after an engine fix | port the change into that generator |
+| Balloon HTML shows as raw `<div>` tags in GE | `simplekml` entity-escaped the description | wrap the balloon HTML in `<![CDATA[ ... ]]>` — `simplekml` leaves CDATA untouched |
+| Population Exposure key on a non-population layer (e.g. coral) | a "Megacity / Major / Region" key appears where it makes no sense | the 3+5 balloon currently always includes it; gate on `populations` if it doesn't fit |
+| Unsourced number in `briefing` | provenance scanner Tier-1 > 0 | inline `# Source:` within lookback, or remove + note the gap |
+| Non-ASCII in a scenario string | Windows console / encoding mangling | ASCII only |
+
+---
+
 ## Checklist: Common Mistakes
 
 | Mistake | Symptom | Fix |
@@ -500,3 +619,4 @@ Options 2 and 3 are good for high-frequency additions. Option 1 is the right fou
 
 *Guide v1.0 - April 2026*
 *Module updated: April 2026 with Anthropic's Claude Sonnet 4.6*
+*Section F (Earth System KMZ Layers) added June 2026 with Anthropic's Claude Opus 4.8*

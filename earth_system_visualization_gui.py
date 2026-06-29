@@ -11,6 +11,8 @@ import webbrowser
 import json
 import subprocess
 import os
+import platform
+import glob
 import threading
 import queue
 import numpy as np
@@ -1695,6 +1697,45 @@ def open_google_earth_controller():
     except Exception as e:
         messagebox.showerror("Error", f"Failed to launch controller: {e}")
 
+def _open_in_google_earth(path):
+    """Open a .kmz/.kml in the OS default handler (Google Earth Pro on Windows)."""
+    if platform.system() == 'Darwin':
+        subprocess.call(('open', path))
+    elif platform.system() == 'Windows':
+        os.startfile(path)
+    else:
+        subprocess.call(('xdg-open', path))
+
+def launch_food_insecurity_layers():
+    """Launch the Food Insecurity KMZ layer(s) in Google Earth Pro.
+
+    Scopes to the food family by the food_insecurity_* filename prefix in the
+    flat data/ folder -- the prefix is the category boundary that keeps food and
+    heat layers apart without separate folders. With a single layer it opens
+    directly; when a second food layer exists, the multi-match case routes through
+    the controller (a food-scoped preload is the planned controller tweak).
+    """
+    try:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        data_dir = os.path.join(script_dir, 'data')
+        matches = sorted(glob.glob(
+            os.path.join(data_dir, 'food_insecurity_*_blockbuster.kmz')))
+
+        if not matches:
+            messagebox.showinfo("No Food Insecurity Layers",
+                "No food_insecurity_*_blockbuster.kmz found in data/.\n\n"
+                "Build one by running food_insecurity_generator.py.")
+            return
+
+        if len(matches) == 1:
+            _open_in_google_earth(matches[0])
+        else:
+            # Multiple food layers: hand off to the controller to pick among them.
+            # (A food-scoped preload of just these files is the deferred tweak.)
+            open_google_earth_controller()
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to launch food insecurity layer(s): {e}")
+
 def open_earth_system_gui(parent=None):
     """
     Open Earth System Visualization hub window
@@ -2020,7 +2061,7 @@ def open_earth_system_gui(parent=None):
     ge_label.pack(anchor='w', pady=(10, 5))
     
     ge_button = tk.Button(right_column,
-                         text='KML Layer Launcher in Google Earth Pro',
+                         text='KMZ Layer Launcher in Google Earth Pro',
                          font=('Arial', 10),
                          bg='gray90',
                          fg='black',
@@ -2043,6 +2084,26 @@ def open_earth_system_gui(parent=None):
                          pady=8,
                          command=open_wet_bulb_viz)
     wetbulb_button.pack(fill='x', pady=2)
+
+    # Google Earth Food Insecurity Layers section (parallel to Heat Wave Layers;
+    # both are arms of the planetary-boundaries scheme in the orrery)
+    fi_label = tk.Label(right_column,
+                        text="Google Earth Food Insecurity Layers (Google Earth preinstalled required):",
+                        font=('Arial', 10, 'bold'),
+                        justify='left')
+    fi_label.pack(anchor='w', pady=(10, 5))
+
+    fi_button = tk.Button(right_column,
+                         text='KMZ Layer Launcher in Google Earth Pro',
+                         font=('Arial', 10),
+                         bg='gray90',
+                         fg='black',
+                         activebackground='#CCCCCC',
+                         cursor='hand2',
+                         padx=15,
+                         pady=8,
+                         command=launch_food_insecurity_layers)
+    fi_button.pack(fill='x', pady=2)
 
     footer_label = tk.Label(content_frame,
                         text="12 of 12 visualizations active",  
