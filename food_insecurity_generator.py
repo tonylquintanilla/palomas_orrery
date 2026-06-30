@@ -425,63 +425,29 @@ def create_legend_card(p5_min=None, p5_max=None):
     return path
 
 
-def create_intel_card(framing):
-    """National figures + C1 + drivers + Middle East + C3 + citation (PNG)."""
-    fig = plt.figure(figsize=(4.3, 5.2), dpi=130)
+def create_intel_card():
+    """Compact always-on header (title + period + hint), matching the heat KMZ
+    3+5 pattern. The full briefing -- framing, drivers, Middle East line,
+    source/citation -- now lives in the tappable i-pin balloon
+    (create_info_placemark via _balloon_info_html), so this header only
+    identifies the layer and the map reads at a glance without the long text
+    block colliding with Google Earth chrome.
+    """
+    fig = plt.figure(figsize=(4, 0.9), dpi=130)
     fig.patch.set_facecolor("#f8f9fa")
     fig.patch.set_alpha(0.92)
     ax = fig.add_subplot(111)
     ax.axis("off")
 
-    import textwrap
-    blocks = []
-    blocks.append(("SUDAN -- ACUTE FOOD INSECURITY", "title"))
-    blocks.append((PERIOD_LABEL, "sub"))
-    blocks.append((framing["national"], "body"))
-    blocks.append((framing["c1"], "body"))
-    blocks.append(("KEY DRIVERS (IPC):", "head"))
-    for name, _text in DRIVERS:
-        blocks.append(("- " + name, "bullet"))
-    blocks.append((MIDDLE_EAST_LINE, "body"))
-    blocks.append((framing["c3"], "italic"))
-    blocks.append(("Source: " + PROVENANCE_DATA, "src"))
-    blocks.append((CITATION, "src"))
-
-    y = 0.98
-    for text, kind in blocks:
-        if kind == "title":
-            ax.text(0.04, y, text, transform=ax.transAxes, fontsize=10,
-                    fontweight="bold", color="#222", va="top")
-            y -= 0.045
-        elif kind == "sub":
-            ax.text(0.04, y, text, transform=ax.transAxes, fontsize=8,
-                    fontfamily="monospace", color="#555", va="top")
-            y -= 0.05
-        elif kind == "head":
-            ax.text(0.04, y, text, transform=ax.transAxes, fontsize=8.5,
-                    fontweight="bold", color="#333", va="top")
-            y -= 0.035
-        elif kind == "bullet":
-            ax.text(0.06, y, text, transform=ax.transAxes, fontsize=7.5,
-                    color="#222", va="top")
-            y -= 0.03
-        elif kind == "italic":
-            for line in textwrap.wrap(text, 62):
-                ax.text(0.04, y, line, transform=ax.transAxes, fontsize=7,
-                        color="#555", style="italic", va="top")
-                y -= 0.027
-            y -= 0.01
-        elif kind == "src":
-            for line in textwrap.wrap(text, 64):
-                ax.text(0.04, y, line, transform=ax.transAxes, fontsize=6,
-                        color="#777", va="top")
-                y -= 0.024
-        else:  # body
-            for line in textwrap.wrap(text, 60):
-                ax.text(0.04, y, line, transform=ax.transAxes, fontsize=7.5,
-                        color="#222", va="top")
-                y -= 0.029
-            y -= 0.01
+    ax.text(0.04, 0.74, "SUDAN -- ACUTE FOOD INSECURITY",
+            transform=ax.transAxes, fontsize=11, fontweight="bold",
+            color="#222", va="top")
+    ax.text(0.04, 0.42, PERIOD_LABEL,
+            transform=ax.transAxes, fontsize=8, fontfamily="monospace",
+            color="#555", va="top")
+    ax.text(0.04, 0.14, "Tap the (i) pin for the full briefing",
+            transform=ax.transAxes, fontsize=7, color="#777", style="italic",
+            va="top")
 
     path = os.path.join(DATA_DIR, "intel_%s.png" % SCENARIO_ID)
     plt.savefig(path, bbox_inches="tight", pad_inches=0.1, transparent=False)
@@ -586,24 +552,36 @@ def build_phase5_dots(records, document, retrieved, analysis_name=""):
         pt.description = balloon
 
 
-def _framing_info_html(framing):
-    """The 'read this first' framing as titled balloon sections, for the
-    tappable i-pin. Transcribed IPC framing text (escaped); relocated from the
-    old invisible framing placemarks so the same words now sit behind a visible
-    'i' icon, matching the heat KMZ pattern. No synthesis.
+def _balloon_info_html(framing):
+    """Full information block for the tappable i-pin: transcribed IPC framing,
+    key drivers, the Middle East context line, and a source / citation footer.
+    These are the same words that were on the old full intel card and the
+    framing folder, consolidated behind the 'i' icon so the always-on header
+    can stay compact (heat 3+5 pattern). Escaped; no synthesis.
     """
-    sections = (
-        ("National summary", framing["national"]),
-        ("The hidden Catastrophe", framing["c1"]),
-        ("What the map color means", framing["c2"]),
-        ("What this layer does not assert", framing["c3"]),
-    )
-    parts = []
-    for title, text in sections:
-        parts.append(
-            '<h4 style="margin:8px 0 2px 0; font-size:14px;">%s</h4>'
-            '<p style="margin:0 0 6px 0;">%s</p>'
-            % (html.escape(title), html.escape(text)))
+    def section(title, text):
+        return ('<h4 style="margin:8px 0 2px 0; font-size:14px;">%s</h4>'
+                '<p style="margin:0 0 6px 0;">%s</p>'
+                % (html.escape(title), html.escape(text)))
+
+    parts = [
+        section("National summary", framing["national"]),
+        section("The hidden Catastrophe", framing["c1"]),
+        section("What the map color means", framing["c2"]),
+    ]
+    parts.append('<h4 style="margin:8px 0 2px 0; font-size:14px;">'
+                 'Key drivers (IPC)</h4>')
+    parts.append('<ul style="margin:0 0 6px 0; padding-left:18px;">')
+    for name, _text in DRIVERS:
+        parts.append('<li>%s</li>' % html.escape(name))
+    parts.append('</ul>')
+    parts.append('<p style="margin:0 0 6px 0;">%s</p>'
+                 % html.escape(MIDDLE_EAST_LINE))
+    parts.append(section("What this layer does not assert", framing["c3"]))
+    parts.append('<hr style="border:none; border-top:1px solid #ddd; '
+                 'margin:8px 0;">'
+                 '<div style="font-size:11px; color:#666;">Source: %s<br>%s</div>'
+                 % (html.escape(PROVENANCE_DATA), html.escape(CITATION)))
     return "".join(parts)
 
 
@@ -656,7 +634,7 @@ def build_food_insecurity_kml(records, meta):
     # instead of four invisible (scale=0) label points. Same transcribed words.
     create_info_placemark(fr, "Sudan -- Acute Food Insecurity",
                           PERIOD_LABEL, "", 15.5, 32.5,
-                          extra_html=_framing_info_html(framing))
+                          extra_html=_balloon_info_html(framing))
 
     # Cards as ScreenOverlays (family convention).
     p5_vals = [float(r["phase_pop"][5]) for r in records
@@ -664,7 +642,7 @@ def build_food_insecurity_kml(records, meta):
     legend_png = create_legend_card(
         p5_min=min(p5_vals) if p5_vals else None,
         p5_max=max(p5_vals) if p5_vals else None)
-    intel_png = create_intel_card(framing)
+    intel_png = create_intel_card()
     _add_screenoverlay(kml, legend_png, sx=0.98, sy=0.05, ox=1, oy=0, size_x=0.16)
     _add_screenoverlay(kml, intel_png, sx=0.02, sy=0.98, ox=0, oy=1, size_x=0.30)
 
