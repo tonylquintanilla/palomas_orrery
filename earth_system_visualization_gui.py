@@ -11,8 +11,6 @@ import webbrowser
 import json
 import subprocess
 import os
-import platform
-import glob
 import threading
 import queue
 import numpy as np
@@ -1682,59 +1680,38 @@ def open_wet_bulb_viz():
     except Exception as e:
         messagebox.showerror("Visualization Error", f"Could not create Wet Bulb visualization:\n{str(e)}")
 
-def open_google_earth_controller():
-    """Launch the Google Earth KML layer controller"""
+def open_google_earth_controller(preload=None):
+    """Launch the Google Earth KMZ layer controller.
+
+    Optional preload=<prefix> passes "--preload <prefix>" so the controller opens
+    with that scoped KMZ family (e.g. food_insecurity) pre-loaded and selected.
+    """
     try:
         # Get the directory where this script is located
         script_dir = os.path.dirname(os.path.abspath(__file__))
         controller_path = os.path.join(script_dir, 'earth_system_controller.py')
-        
+
         if os.path.exists(controller_path):
-            subprocess.Popen(['python', controller_path], cwd=script_dir)
+            cmd = ['python', controller_path]
+            if preload:
+                cmd += ['--preload', preload]
+            subprocess.Popen(cmd, cwd=script_dir)
         else:
             messagebox.showerror("Not Found", 
                 f"Could not find earth_system_controller.py\nExpected at: {controller_path}")
     except Exception as e:
         messagebox.showerror("Error", f"Failed to launch controller: {e}")
 
-def _open_in_google_earth(path):
-    """Open a .kmz/.kml in the OS default handler (Google Earth Pro on Windows)."""
-    if platform.system() == 'Darwin':
-        subprocess.call(('open', path))
-    elif platform.system() == 'Windows':
-        os.startfile(path)
-    else:
-        subprocess.call(('xdg-open', path))
-
 def launch_food_insecurity_layers():
-    """Launch the Food Insecurity KMZ layer(s) in Google Earth Pro.
+    """Open the Food Insecurity KMZ family in the Google Earth controller.
 
-    Scopes to the food family by the food_insecurity_* filename prefix in the
-    flat data/ folder -- the prefix is the category boundary that keeps food and
-    heat layers apart without separate folders. With a single layer it opens
-    directly; when a second food layer exists, the multi-match case routes through
-    the controller (a food-scoped preload is the planned controller tweak).
+    Single-source: delegates to the controller with --preload food_insecurity,
+    which performs the one glob of data/food_insecurity_*_blockbuster.kmz and
+    opens the picker with the family pre-loaded and selected. The
+    food_insecurity_* prefix contract now lives in one place (the controller),
+    and the picker lists every food layer as the family grows.
     """
-    try:
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        data_dir = os.path.join(script_dir, 'data')
-        matches = sorted(glob.glob(
-            os.path.join(data_dir, 'food_insecurity_*_blockbuster.kmz')))
-
-        if not matches:
-            messagebox.showinfo("No Food Insecurity Layers",
-                "No food_insecurity_*_blockbuster.kmz found in data/.\n\n"
-                "Build one by running food_insecurity_generator.py.")
-            return
-
-        if len(matches) == 1:
-            _open_in_google_earth(matches[0])
-        else:
-            # Multiple food layers: hand off to the controller to pick among them.
-            # (A food-scoped preload of just these files is the deferred tweak.)
-            open_google_earth_controller()
-    except Exception as e:
-        messagebox.showerror("Error", f"Failed to launch food insecurity layer(s): {e}")
+    open_google_earth_controller(preload='food_insecurity')
 
 def open_earth_system_gui(parent=None):
     """

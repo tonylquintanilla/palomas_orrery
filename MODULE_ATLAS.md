@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
 Generated: June 29, 2026
-Modules: 113 | Functions: 918 | Lines: 89,606
+Modules: 113 | Functions: 919 | Lines: 89,707
 
 ---
 
@@ -42,7 +42,7 @@ and explains in context.
 
 ### earth_system_controller.py
 
-**Role:** gui | **Lines:** 81
+**Role:** gui | **Lines:** 129
 
 > earth_system_controller.py - KMZ layer selector for Google Earth Pro.
 
@@ -51,13 +51,13 @@ and explains in context.
 
 **Public functions:**
 
-- `class MissionControlApp` (line 16)
+- `class MissionControlApp` (line 22)
 
 ---
 
 ### earth_system_visualization_gui.py
 
-**Role:** gui | **Lines:** 1,822
+**Role:** gui | **Lines:** 1,855
 
 > Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations
 
@@ -94,8 +94,9 @@ and explains in context.
 - `open_energy_imbalance()` (line 1591) -- Open energy imbalance visualization in browser
 - `run_update_in_thread(update_button, status_label, window)` (line 1605) -- Run climate data update in background thread
 - `open_wet_bulb_viz()` (line 1665) -- Open Wet Bulb Temperature paleoclimate visualization
-- `open_google_earth_controller()` (line 1683) -- Launch the Google Earth KML layer controller
-- `open_earth_system_gui(parent)` (line 1698) -- Open Earth System Visualization hub window
+- `open_google_earth_controller(preload)` (line 1683) -- Launch the Google Earth KMZ layer controller.
+- `launch_food_insecurity_layers()` (line 1705) -- Open the Food Insecurity KMZ family in the Google Earth controller.
+- `open_earth_system_gui(parent)` (line 1716) -- Open Earth System Visualization hub window
 
 ---
 
@@ -212,7 +213,7 @@ and explains in context.
 
 ### palomas_orrery_dashboard.py
 
-**Role:** gui | **Lines:** 654
+**Role:** gui | **Lines:** 674
 
 > Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite.
 
@@ -221,8 +222,8 @@ and explains in context.
 
 **Public functions:**
 
-- `class PalomasOrreryDashboard` (line 219) -- Main dashboard window.
-- `main()` (line 753)
+- `class PalomasOrreryDashboard` (line 230) -- Main dashboard window.
+- `main()` (line 773)
 
 ---
 
@@ -2566,9 +2567,9 @@ and explains in context.
 | data_processing | computation | 434 | 0 | 5 |
 | dep_trace | devtool | 399 | 1 | 0 |
 | diagnose_bcodmo | devtool | 65 | 0 | 0 |
-| earth_system_controller | gui | 81 | 0 | 0 |
+| earth_system_controller | gui | 129 | 0 | 0 |
 | earth_system_generator | computation | 754 | 3 | 1 |
-| earth_system_visualization_gui | gui | 1,822 | 8 | 1 |
+| earth_system_visualization_gui | gui | 1,855 | 8 | 1 |
 | earth_visualization_shells | rendering/shells | 992 | 2 | 2 |
 | energy_imbalance | computation | 839 | 1 | 1 |
 | eris_visualization_shells | rendering/shells | 464 | 1 | 1 |
@@ -2609,7 +2610,7 @@ and explains in context.
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
 | palomas_orrery | gui | 9,490 | 29 | 0 |
-| palomas_orrery_dashboard | gui | 654 | 0 | 0 |
+| palomas_orrery_dashboard | gui | 674 | 0 | 0 |
 | palomas_orrery_helpers | utility | 773 | 10 | 2 |
 | planet9_visualization_shells | rendering/shells | 267 | 1 | 1 |
 | planet_visualization | rendering | 711 | 18 | 5 |

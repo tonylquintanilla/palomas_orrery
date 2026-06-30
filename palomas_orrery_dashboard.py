@@ -89,6 +89,17 @@ LAUNCH_GROUPS = {
         ("Earth System Generator",
          "earth_system_generator.py",
          "Create new climate data layers and scenarios"),
+        ("Food Insecurity Generator",
+         "food_insecurity_generator.py",
+         "Build the Sudan IPC food-insecurity KMZ layer "
+         "(data/food_insecurity_sdn_blockbuster.kmz)"),
+        ("Food Insecurity Controller",
+         "earth_system_controller.py",
+         "Launch the Food Insecurity KMZ family in Google Earth "
+         "(preloads data/food_insecurity_*_blockbuster.kmz)",
+         SCRIPT_DIR,
+         False,
+         ["--preload", "food_insecurity"]),
     ],
     "Stars": [
         ("Star Visualization",
@@ -401,11 +412,12 @@ class PalomasOrreryDashboard(ctk.CTk):
                 name, script, desc = entry[0], entry[1], entry[2]
                 base_dir = entry[3] if len(entry) > 3 else SCRIPT_DIR
                 interactive = entry[4] if len(entry) > 4 else False
+                args = entry[5] if len(entry) > 5 else None
                 self._build_launch_card(cards_frame, name, script, desc,
-                                        base_dir, interactive, i)
+                                        base_dir, interactive, args, i)
 
     def _build_launch_card(self, parent, name, script, desc, base_dir,
-                           interactive, index):
+                           interactive, args, index):
         """Individual launch card with button and description."""
         card = ctk.CTkFrame(parent, fg_color=COLOR_SURFACE,
                             corner_radius=10)
@@ -442,23 +454,28 @@ class PalomasOrreryDashboard(ctk.CTk):
             hover_color=COLOR_BUTTON_HOVER if exists else COLOR_DIVIDER,
             text_color=COLOR_TEXT if exists else COLOR_TEXT_DIM,
             corner_radius=8,
-            command=lambda s=script, b=base_dir, ia=interactive: self._launch(s, b, ia),
+            command=lambda s=script, b=base_dir, ia=interactive, a=args: self._launch(s, b, ia, a),
             state="normal" if exists else "disabled"
         )
         btn.pack(side="right", padx=(12, 0))
 
-    def _launch(self, script, base_dir=None, interactive=False):
+    def _launch(self, script, base_dir=None, interactive=False, args=None):
         """Launch a Python script as a subprocess.
 
         Non-interactive: stdout/stderr piped to status panel.
         Interactive:      opens in its own console window.
+        args:             optional CLI args appended to the script (e.g.
+                          ["--preload", "food_insecurity"]). Tracking keys on
+                          script+args so the same script launched in two modes
+                          (generic vs preloaded controller) does not collide.
         """
-        # Debounce: ignore if same script launched within 1 second
+        # Debounce: ignore if same script+args launched within 1 second
         import time
         now = time.time()
-        if script in self._last_launch and (now - self._last_launch[script]) < 1.0:
+        launch_key = script if not args else script + " " + " ".join(args)
+        if launch_key in self._last_launch and (now - self._last_launch[launch_key]) < 1.0:
             return
-        self._last_launch[script] = now
+        self._last_launch[launch_key] = now
 
         if base_dir is None:
             base_dir = SCRIPT_DIR
@@ -469,40 +486,43 @@ class PalomasOrreryDashboard(ctk.CTk):
 
         # Short label for status messages (filename without .py)
         label = os.path.splitext(script)[0]
+        if args:
+            label = label + " [" + " ".join(args) + "]"
 
         try:
             python = sys.executable
+            extra = list(args) if args else []
 
             if interactive:
                 # ---- INTERACTIVE: open in its own console ----
                 if sys.platform == "win32":
                     # cmd /k keeps the window open after script exits
                     proc = subprocess.Popen(
-                        ["cmd", "/k", python, script_path],
+                        ["cmd", "/k", python, script_path] + extra,
                         cwd=base_dir,
                         creationflags=subprocess.CREATE_NEW_CONSOLE,
                     )
                 else:
                     # Linux/macOS fallback: xterm or direct
                     proc = subprocess.Popen(
-                        [python, script_path],
+                        [python, script_path] + extra,
                         cwd=base_dir,
                     )
-                self._processes[script] = {"proc": proc, "label": label}
+                self._processes[launch_key] = {"proc": proc, "label": label}
                 self._log_status(
                     f"Launched in console: {script}  (PID {proc.pid})")
             else:
                 # ---- NON-INTERACTIVE: pipe output to status ----
                 # Use python.exe (not pythonw) so stdout is available
                 proc = subprocess.Popen(
-                    [python, "-u", script_path],  # -u = unbuffered
+                    [python, "-u", script_path] + extra,  # -u = unbuffered
                     cwd=base_dir,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT,
                     text=True,
                     errors="replace",
                 )
-                self._processes[script] = {"proc": proc, "label": label}
+                self._processes[launch_key] = {"proc": proc, "label": label}
                 self._log_status(
                     f"Launched: {script}  (PID {proc.pid})")
 

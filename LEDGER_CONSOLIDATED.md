@@ -225,7 +225,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
-| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-24 |
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-29 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-29 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
@@ -365,7 +365,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:OPEN upd:2026-06-24 section:A flag: rice:3/3/95/2 -->
+<!-- L:001 status:OPEN upd:2026-06-29 section:A flag: rice:3/3/95/2 -->
 - **Phase-1 build COMPLETE, render-confirmed (Mode-5, ge_sudan.jpg, built on
   03630ae).** Module: food_insecurity_generator.py -- new dedicated vector/
   categorical generator (NOT a bend of run_scenario); 189 area polygons, full
@@ -380,11 +380,27 @@ as an archive of the prioritization thinking -- no cleanup on close.
   legend (not IPC published hex); report has NO formal recommended-citation line
   (CITATION assembled from title page); per-area confidence_level/hfa_value shown
   as RAW values (no word-legend in report to map them). All open to retune.
-- **Still open under this track:** GUI registration snippet placement (Earth
-  System selector; module is standalone-runnable now); module-name confirmation
-  (food_insecurity_generator.py is a proposal). Deferred sub-layers split out:
-  Phase-5 reveal -> L-069; 39 IPC call-out points (HFA-bag/IDP symbols) and the
-  Jun-Sep / Oct-Jan projections remain deferred per original scope.
+- **Module name CONFIRMED (no longer a proposal): food_insecurity_generator.py**
+  -- standalone-runnable via __main__ -> run().
+- **KMZ naming convention (Earth System family):**
+  data/<SCENARIO_ID>_blockbuster.kmz. Food layer SCENARIO_ID =
+  "food_insecurity_sdn" (Sudan) -> data/food_insecurity_sdn_blockbuster.kmz;
+  mirrors the heat scenarios (e.g. data/europe_2026_blockbuster.kmz). Generator
+  also emits legend_<ID>.png, intel_<ID>.png, <ID>_teaser.html. The
+  food_insecurity_<region> prefix is LOAD-BEARING: the GUI launcher
+  launch_food_insecurity_layers() globs data/food_insecurity_*_blockbuster.kmz
+  to scope the food family, so future regional layers (L-070: SS/TD/CF/ET) must
+  follow food_insecurity_<code>_blockbuster.kmz to be picked up.
+- **GUI registration (2026-06-29):** Earth System Viewer
+  (earth_system_visualization_gui.py) DONE at b7650bb -- new "Google Earth Food
+  Insecurity Layers" section + "KMZ Layer Launcher in Google Earth Pro" button
+  -> launch_food_insecurity_layers() (launches existing food KMZs in GE, NOT a
+  generator run); existing heat-wave launcher renamed KML -> KMZ. Dashboard
+  (palomas_orrery_dashboard.py): parallel Food Insecurity buttons IN PROGRESS
+  this session.
+- **Still open under this track:** Deferred sub-layers split out: Phase-5 reveal
+  -> L-069; 39 IPC call-out points (HFA-bag/IDP symbols) and the Jun-Sep /
+  Oct-Jan projections remain deferred per original scope.
 **Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
 (built on 03630ae); cross-ref L-064, L-069.
 

@@ -926,7 +926,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 207 | dict | SECTION_SYMBOLS[...] | (4 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 218 | dict | SECTION_SYMBOLS[...] | (4 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
 
 ### scenarios_coral_bleaching.py
 
