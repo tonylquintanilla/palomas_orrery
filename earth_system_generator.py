@@ -34,6 +34,8 @@ from scipy.interpolate import griddata
 import tkinter as tk
 from tkinter import ttk, messagebox
 
+from earth_system_common import create_info_placemark, ScenarioPicker
+
 DATA_DIR = "data"
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
@@ -183,8 +185,9 @@ def build_spikes_kml(scenario_id, date, lats, lons, values, thresholds,
     if lats and lons:
         c_lat = sum(lats) / len(lats)
         c_lon = sum(lons) / len(lons)
-        create_info_placemark(kml_spikes, scenario_id, name or scenario_id,
-                              date, briefing, c_lat, c_lon)
+        create_info_placemark(kml_spikes, name or scenario_id,
+                              date, briefing, c_lat, c_lon,
+                              extra_html=_population_key_html())
 
     # Station pin mode: confirmed observations instead of grid stride
     if pin_stations:
@@ -730,39 +733,11 @@ def create_intel_card(title, description, briefing, date, scenario_id):
     return intel_path
 
 
-def _briefing_to_html(briefing):
-    """Convert a plain-text briefing into safe, reflowing balloon HTML.
-
-    Normalizes <br> to line breaks, strips any other markup, escapes the
-    text, then re-emits paragraphs so the balloon wraps to the device width.
-    """
-    text = briefing.replace('<br>', '\n').replace('<BR>', '\n')
-    text = re.sub(r'<[^>]+>', '', text)
-    paras = [p.strip() for p in re.split(r'\n\s*\n', text) if p.strip()]
-    out = []
-    for p in paras:
-        esc = html.escape(p).replace('\n', '<br>')
-        out.append('<p style="margin:0 0 8px 0;">' + esc + '</p>')
-    return ''.join(out)
-
-
-def create_info_placemark(kml, scenario_id, title, date, briefing, lat, lon):
-    """Add a tappable info "i" placemark whose balloon holds the full briefing.
-
-    The balloon reflows to the device width and renders clear of Google Earth's
-    search bar / toolbar, so the narrative no longer collides with chrome the
-    way a fixed ScreenOverlay PNG does. The population-exposure key is folded
-    in here as well. Default-closed; opens on tap.
-    """
-    balloon = (
-        '<div style="max-width:340px; '
-        'font-family:-apple-system,Helvetica,Arial,sans-serif; '
-        'font-size:14px; line-height:1.4; color:#222;">'
-        '<h3 style="margin:0 0 6px 0; font-size:16px;">'
-        + html.escape(title) + '</h3>'
-        '<div style="font:12px monospace; color:#666; margin-bottom:8px;">'
-        'DATE: ' + html.escape(str(date)) + '</div>'
-        + _briefing_to_html(briefing) +
+def _population_key_html():
+    """Heat population-exposure key, appended to the info balloon via the shared
+    create_info_placemark(extra_html=...). Lifted verbatim from the old inline
+    balloon so the rendered card stays byte-identical (verified)."""
+    return (
         '<hr style="border:none; border-top:1px solid #ddd; margin:8px 0;">'
         '<div style="font-weight:bold; margin-bottom:4px;">'
         'Population Exposure</div>'
@@ -772,22 +747,7 @@ def create_info_placemark(kml, scenario_id, title, date, briefing, lat, lon):
         'Major (&gt;1M)</div>'
         '<div><span style="color:#cc0; font-size:16px;">&#9679;</span> '
         'Region (&gt;500k)</div>'
-        '</div>'
     )
-
-    pnt = kml.newpoint(name=f"{title} - tap for details")
-    pnt.coords = [(lon, lat, 0)]
-    pnt.altitudemode = simplekml.AltitudeMode.clamptoground
-    # Wrap in CDATA so simplekml emits the HTML unescaped (base.py leaves
-    # CDATA blocks untouched); GE then renders the balloon as HTML rather
-    # than printing literal tags -- matching the proven desktop probe.
-    pnt.description = '<![CDATA[' + balloon + ']]>'
-    pnt.style.iconstyle.icon.href = \
-        "http://maps.google.com/mapfiles/kml/shapes/info-i.png"
-    pnt.style.iconstyle.scale = 1.3
-    pnt.style.labelstyle.scale = 0.9
-    pnt.style.balloonstyle.text = "$[description]"
-    return pnt
 
 
 # ==========================================
@@ -832,77 +792,16 @@ def kml_to_mpl_color(kml_color):
 #           GUI SELECTOR
 # ==========================================
 
-class MissionSelector:
-    """Tkinter GUI for selecting and running scenarios.
-    
-    Discovers scenario modules dynamically. Currently supports
-    heatwaves; coral bleaching and other boundary types plug in
-    by adding imports below.
-    """
-    def __init__(self):
-        # Import scenario modules
-        from scenarios_heatwaves import SCENARIOS as HEAT_SCENARIOS
-        self.all_scenarios = []
-        self.all_scenarios.extend(HEAT_SCENARIOS)
-
-        from scenarios_coral_bleaching import SCENARIOS as CORAL_SCENARIOS
-        self.all_scenarios.extend(CORAL_SCENARIOS)
-
-        from scenarios_western_heatwave_march_2026 import SCENARIOS as WESTERN_SCENARIOS
-        self.all_scenarios.extend(WESTERN_SCENARIOS)
-
-        self.root = tk.Tk()
-        self.root.title("Earth System Generator v6.0")
-        self.root.geometry("500x550")
-
-        style = ttk.Style()
-        style.configure("TButton", font=("Helvetica", 11), padding=10)
-
-        lbl = tk.Label(self.root, text="Select Simulation Scenario",
-                       font=("Helvetica", 14, "bold"))
-        lbl.pack(pady=15)
-
-        self.listbox = tk.Listbox(self.root, height=14, font=("Helvetica", 11))
-        self.listbox.pack(padx=20, pady=5, fill=tk.BOTH, expand=True)
-
-        for scenario in self.all_scenarios:
-            display = f"[{scenario.get('boundary_type', '?').upper()[:4]}] {scenario['name']}"
-            self.listbox.insert(tk.END, display)
-
-        btn = ttk.Button(self.root, text="Generate Assets (Teaser + KMZ) in data/",
-                         command=self.run_selected)
-        btn.pack(pady=20)
-
-        self.status_var = tk.StringVar()
-        self.status_var.set("Ready")
-        status_lbl = tk.Label(self.root, textvariable=self.status_var,
-                              font=("Helvetica", 9), fg="gray")
-        status_lbl.pack(pady=5)
-
-    def _status_update(self, msg):
-        """Thread-safe status update for the GUI."""
-        self.status_var.set(msg)
-        self.root.update()
-
-    def run_selected(self):
-        selection = self.listbox.curselection()
-        if not selection:
-            messagebox.showwarning("Warning", "Please select a scenario.")
-            return
-
-        scenario = self.all_scenarios[selection[0]]
-
-        try:
-            run_scenario(scenario, status_callback=self._status_update)
-            self.status_var.set("Ready")
-            messagebox.showinfo("Success",
-                                f"Generated Teaser and KMZ Blockbuster for:\n"
-                                f"{scenario['name']} in data/")
-        except Exception as e:
-            self.status_var.set("Ready")
-            messagebox.showerror("Error", str(e))
+def _heat_scenarios():
+    """Aggregate the heat / coral scenario modules into one list."""
+    from scenarios_heatwaves import SCENARIOS as HEAT_SCENARIOS
+    from scenarios_coral_bleaching import SCENARIOS as CORAL_SCENARIOS
+    from scenarios_western_heatwave_march_2026 import SCENARIOS as WESTERN_SCENARIOS
+    return (list(HEAT_SCENARIOS) + list(CORAL_SCENARIOS)
+            + list(WESTERN_SCENARIOS))
 
 
 if __name__ == "__main__":
-    app = MissionSelector()
-    app.root.mainloop()
+    # Shared picker (earth_system_common.ScenarioPicker); run_scenario injected.
+    ScenarioPicker(_heat_scenarios(), run_scenario,
+                   title="Earth System Generator v6.0").mainloop()

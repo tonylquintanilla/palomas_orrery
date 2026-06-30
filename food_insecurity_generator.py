@@ -30,12 +30,15 @@ import re
 import json
 import math
 import zipfile
+import html
 
 import simplekml
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+
+from earth_system_common import create_info_placemark, ScenarioPicker
 
 DATA_DIR = "data"
 if not os.path.exists(DATA_DIR):
@@ -583,6 +586,27 @@ def build_phase5_dots(records, document, retrieved, analysis_name=""):
         pt.description = balloon
 
 
+def _framing_info_html(framing):
+    """The 'read this first' framing as titled balloon sections, for the
+    tappable i-pin. Transcribed IPC framing text (escaped); relocated from the
+    old invisible framing placemarks so the same words now sit behind a visible
+    'i' icon, matching the heat KMZ pattern. No synthesis.
+    """
+    sections = (
+        ("National summary", framing["national"]),
+        ("The hidden Catastrophe", framing["c1"]),
+        ("What the map color means", framing["c2"]),
+        ("What this layer does not assert", framing["c3"]),
+    )
+    parts = []
+    for title, text in sections:
+        parts.append(
+            '<h4 style="margin:8px 0 2px 0; font-size:14px;">%s</h4>'
+            '<p style="margin:0 0 6px 0;">%s</p>'
+            % (html.escape(title), html.escape(text)))
+    return "".join(parts)
+
+
 def build_food_insecurity_kml(records, meta):
     """Build the KML doc: phase styles, per-area placemarks, framing, cards."""
     retrieved = (meta.get("export_timestamp") or "")[:10] or "IPC Mapping Tool"
@@ -627,15 +651,12 @@ def build_food_insecurity_kml(records, meta):
     # Framing-layer text as a KML folder of description-only placemarks (the
     # words on the layer; the sourced numbers live at the construction site).
     fr = kml.document.newfolder(name="Framing (read this first)")
-    for key, title in (("national", "National summary"),
-                       ("c1", "The hidden Catastrophe"),
-                       ("c2", "What the map color means"),
-                       ("c3", "What this layer does not assert")):
-        ph = fr.newpoint(name=title)
-        ph.description = "<![CDATA[<div style='font-family:Arial;font-size:12px;"
-        ph.description += "width:300px'>%s</div>]]>" % framing[key]
-        ph.style.iconstyle.scale = 0
-        ph.coords = [(32.5, 15.5)]  # near Khartoum; label only
+    # Visible tappable "i" pin (shared create_info_placemark), matching the heat
+    # KMZ pattern: the framing text now sits behind an "i" icon near Khartoum
+    # instead of four invisible (scale=0) label points. Same transcribed words.
+    create_info_placemark(fr, "Sudan -- Acute Food Insecurity",
+                          PERIOD_LABEL, "", 15.5, 32.5,
+                          extra_html=_framing_info_html(framing))
 
     # Cards as ScreenOverlays (family convention).
     p5_vals = [float(r["phase_pop"][5]) for r in records
@@ -720,7 +741,16 @@ def generate_plotly_teaser(records, meta):
 #   ENTRY POINT
 # ==========================================================================
 
-def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None):
+def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None,
+        scenario_id=None):
+    # Output assets are named by SCENARIO_ID (legend_/intel_/<id>_blockbuster.kmz
+    # /<id>_teaser.html). A picker passes the selected scenario's id so a future
+    # country writes its own files; calling run() directly keeps the Sudan
+    # default. One scenario per process, so setting the module value here is safe.
+    if scenario_id:
+        global SCENARIO_ID
+        SCENARIO_ID = scenario_id
+
     def _status(msg):
         if status_callback:
             status_callback(msg)
@@ -750,6 +780,16 @@ def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None):
     return {"kmz": kmz_path, "teaser": teaser_path, "areas": len(records)}
 
 
+def _food_run(scenario, status_callback=None):
+    """Adapter so the shared ScenarioPicker can drive run(): maps a scenario
+    dict to run()'s geojson_path + scenario_id."""
+    return run(geojson_path=scenario.get("geojson", DEFAULT_GEOJSON),
+               status_callback=status_callback,
+               scenario_id=scenario.get("scenario_id"))
+
+
 if __name__ == "__main__":
-    result = run()
-    print("Done:", result)
+    from scenarios_food_insecurity import SCENARIOS
+    ScenarioPicker(SCENARIOS, _food_run,
+                   title="Food Insecurity Generator",
+                   button_text="Generate KMZ (+ teaser) in data/").mainloop()

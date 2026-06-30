@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: June 29, 2026
-Files scanned: 113
+Files scanned: 115
 Total findings: 510
 Constants: 69 | Dicts: 34 | Display strings: 407
 
@@ -507,7 +507,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 143 | string | display string @ line 143 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+| 146 | string | display string @ line 146 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
 ### info_dictionary.py
 
@@ -919,8 +919,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 96 | constant | P5_DOT_MIN_SCALE | 0.5 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
-| 97 | constant | P5_DOT_MAX_SCALE | 1.8 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 99 | constant | P5_DOT_MIN_SCALE | 0.5 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 100 | constant | P5_DOT_MAX_SCALE | 1.8 | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
 
 ### palomas_orrery_dashboard.py
 
