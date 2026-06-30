@@ -1805,11 +1805,12 @@ def open_earth_system_gui(parent=None):
     
     # Description
     desc_label = tk.Label(content_frame,
-                         text="Select a visualization to explore Earth's changing systems.\n"
-                         "Each chart shows critical data about our planet's health.",
+                         text="Select a visualization to explore Earth's changing systems. "
+                         "Each chart shows critical data about our planet's health.\n"
+                         "SCROLL DOWN TO SEE ALL MENU OPTIONS"   ,
                          font=('Arial', 10),
                          justify='left',
-                         wraplength=550)
+                         wraplength=1000)
     desc_label.pack(anchor='w', pady=(0, 15))
     
     # Update Data button (prominent at top)
@@ -1823,9 +1824,10 @@ def open_earth_system_gui(parent=None):
                              fg='black',
                              activebackground='#7BC97B',
                              cursor='hand2',
-                             padx=20,
+                             padx=10,
                              pady=10,
-                             command=lambda: run_update_in_thread(update_button, status_label, window))
+                             command=lambda: run_update_in_thread(update_button, window))
+                            # command=lambda: run_update_in_thread(update_button, status_label, window))
     update_button.pack(fill='x', padx=10, pady=10)
       
     
@@ -1845,12 +1847,12 @@ def open_earth_system_gui(parent=None):
 #    sealevel_note.pack(pady=(0, 10))
     sealevel_note.pack(pady=(0, 5))
 
-    status_label = tk.Label(update_frame,
-                           text="",
-                           font=('Arial', 9),
-                           bg='#E8F5E9',
-                           fg='#666')
-    status_label.pack(pady=(0, 5))
+#    status_label = tk.Label(update_frame,
+#                           text="",
+#                           font=('Arial', 9),
+#                           bg='#E8F5E9',
+#                           fg='#666')
+#    status_label.pack(pady=(0, 5))
     
     # Separator -- removed for cleaner layout
 #    separator = tk.Frame(content_frame, height=2, bg='#ccc')
@@ -1995,7 +1997,7 @@ def open_earth_system_gui(parent=None):
     paleo_phan_btn.pack(fill='x', pady=2)
 
     # Paleoclimate HUMAN ORIGINS button
-    human_origins_btn = tk.Button(right_column,
+    human_origins_btn = tk.Button(left_column,
                          text='[DNA] Human Origins (540 Ma + Evolution)',
                          font=('Arial', 10),
                          bg='#DEB887',
@@ -2083,13 +2085,14 @@ def open_earth_system_gui(parent=None):
 
     # Google Earth Layers section
     ge_label = tk.Label(right_column,
-                        text="Google Earth Heat Wave Layers (Google Earth Pro preinstalled required):",
+                        text="Google Earth Layers (Google Earth Pro preinstalled required):",
+                    #    text="Google Earth Heat Wave Layers (Google Earth Pro preinstalled required):",
                         font=('Arial', 10, 'bold'),
                         justify='left')
     ge_label.pack(anchor='w', pady=(10, 5))
     
     ge_button = tk.Button(right_column,
-                         text='KMZ Layer Launcher in Google Earth Pro',
+                         text='KMZ Heat Wave and Coral Layers Launcher in Google Earth Pro',
                          font=('Arial', 10),
                          bg='gray90',
                          fg='black',
@@ -2115,14 +2118,14 @@ def open_earth_system_gui(parent=None):
 
     # Google Earth Food Insecurity Layers section (parallel to Heat Wave Layers;
     # both are arms of the planetary-boundaries scheme in the orrery)
-    fi_label = tk.Label(right_column,
-                        text="Google Earth Food Insecurity Layers (Google Earth preinstalled required):",
-                        font=('Arial', 10, 'bold'),
-                        justify='left')
-    fi_label.pack(anchor='w', pady=(10, 5))
+#    fi_label = tk.Label(right_column,
+#                        text="Google Earth Food Insecurity Layers (Google Earth preinstalled required):",
+#                        font=('Arial', 10, 'bold'),
+#                        justify='left')
+#    fi_label.pack(anchor='w', pady=(10, 5))
 
     fi_button = tk.Button(right_column,
-                         text='KMZ Layer Launcher in Google Earth Pro',
+                         text='KMZ Food Insecurity Layers Launcher in Google Earth Pro',
                          font=('Arial', 10),
                          bg='gray90',
                          fg='black',
@@ -2134,7 +2137,7 @@ def open_earth_system_gui(parent=None):
     fi_button.pack(fill='x', pady=2)
 
     footer_label = tk.Label(content_frame,
-                        text="12 of 12 visualizations active",  
+                        text="16 of 16 visualizations active",  
                         font=('Arial', 9),
                         fg='#666',
                         justify='center')   
