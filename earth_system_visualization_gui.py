@@ -1748,9 +1748,60 @@ def open_earth_system_gui(parent=None):
                              fg='white')
     subtitle_label.pack()
     
-    # Main content frame
-    content_frame = tk.Frame(window, padx=20, pady=20)
-    content_frame.pack(fill='both', expand=True)
+    # Main content area -- scrollable so every section stays reachable no matter
+    # the window height. The right column keeps growing (food-insecurity layers
+    # are added over time), so a fixed frame clipped the bottom buttons; a canvas
+    # + scrollbar fixes that and survives maximize/resize. The header above stays
+    # fixed; only this area scrolls.
+    scroll_container = tk.Frame(window)
+    scroll_container.pack(fill='both', expand=True)
+
+    scroll_canvas = tk.Canvas(scroll_container, highlightthickness=0)
+    v_scroll = tk.Scrollbar(scroll_container, orient='vertical',
+                            command=scroll_canvas.yview)
+    scroll_canvas.configure(yscrollcommand=v_scroll.set)
+    v_scroll.pack(side='right', fill='y')
+    scroll_canvas.pack(side='left', fill='both', expand=True)
+
+    # The real content frame lives INSIDE the canvas; every widget below is still
+    # parented to content_frame, so the rest of the layout is unchanged.
+    content_frame = tk.Frame(scroll_canvas, padx=20, pady=20)
+    _content_window = scroll_canvas.create_window((0, 0), window=content_frame,
+                                                  anchor='nw')
+
+    def _on_content_configure(_event):
+        # Keep the scrollable region matched to the content's true height.
+        scroll_canvas.configure(scrollregion=scroll_canvas.bbox('all'))
+    content_frame.bind('<Configure>', _on_content_configure)
+
+    def _on_canvas_configure(event):
+        # Make the inner frame span the canvas width so the two columns fill out.
+        scroll_canvas.itemconfigure(_content_window, width=event.width)
+    scroll_canvas.bind('<Configure>', _on_canvas_configure)
+
+    # Mouse-wheel scrolling, scoped to when the pointer is over the canvas so the
+    # global binding never leaks into a parent app window. Windows/macOS send
+    # <MouseWheel> with .delta; Linux sends Button-4/Button-5.
+    def _on_mousewheel(event):
+        if event.num == 4:
+            scroll_canvas.yview_scroll(-1, 'units')
+        elif event.num == 5:
+            scroll_canvas.yview_scroll(1, 'units')
+        else:
+            scroll_canvas.yview_scroll(int(-1 * (event.delta / 120)), 'units')
+
+    def _bind_wheel(_event):
+        scroll_canvas.bind_all('<MouseWheel>', _on_mousewheel)
+        scroll_canvas.bind_all('<Button-4>', _on_mousewheel)
+        scroll_canvas.bind_all('<Button-5>', _on_mousewheel)
+
+    def _unbind_wheel(_event):
+        scroll_canvas.unbind_all('<MouseWheel>')
+        scroll_canvas.unbind_all('<Button-4>')
+        scroll_canvas.unbind_all('<Button-5>')
+
+    scroll_canvas.bind('<Enter>', _bind_wheel)
+    scroll_canvas.bind('<Leave>', _unbind_wheel)
     
     # Description
     desc_label = tk.Label(content_frame,

@@ -27,10 +27,13 @@ Module updated: June 2026 with Anthropic's Claude Opus 4.8
 """
 import os
 import re
+import io
 import json
+import glob
 import math
 import zipfile
 import html
+from datetime import datetime
 
 import simplekml
 import matplotlib
@@ -46,6 +49,11 @@ if not os.path.exists(DATA_DIR):
 
 SCENARIO_ID = "food_insecurity_sdn"
 DEFAULT_GEOJSON = os.path.join(DATA_DIR, "IPC_SD_A_87143417_2026-06-22.geojson")
+
+# Cache-busting build stamp (YYYY-MM-DD-HH-MM) for the ScreenOverlay PNG names;
+# refreshed at the top of each build so a regenerated KMZ never reuses a filename
+# Google Earth has cached. See _overlay_asset_path.
+BUILD_STAMP = datetime.now().strftime("%Y-%m-%d-%H-%M")
 
 # ==========================================================================
 #   SOURCED CONSTANTS -- every numeric/quoted claim carries a # Source: within
@@ -363,6 +371,32 @@ def compose_framing_text():
     return {"national": national, "c1": c1, "c2": c2, "c3": c3}
 
 
+def _overlay_asset_path(kind, png_bytes):
+    """Write a ScreenOverlay PNG under a build-stamped name so a regenerated KMZ
+    never reuses a filename Google Earth has already cached.
+
+    Heat avoids stale overlays by date-stamping its card PNG; food KMZs keep one
+    filename per country, so the old static name (e.g. intel_<id>.png) collided
+    with GE's media cache and the previous card persisted on mobile through layer
+    and file deletion. The build stamp (BUILD_STAMP, YYYY-MM-DD-HH-MM) makes every
+    regenerated overlay a new file -- busting the cache including same-period card
+    edits -- and reads as the build time at a glance. Prior overlays for this
+    scenario+kind are removed so data/ does not accumulate; the KMZ filename is
+    unchanged (the --preload glob still matches).
+    """
+    for old in glob.glob(os.path.join(DATA_DIR,
+                                      "%s_%s*.png" % (kind, SCENARIO_ID))):
+        try:
+            os.remove(old)
+        except OSError:
+            pass
+    path = os.path.join(DATA_DIR,
+                        "%s_%s_%s.png" % (kind, SCENARIO_ID, BUILD_STAMP))
+    with open(path, "wb") as f:
+        f.write(png_bytes)
+    return path
+
+
 def create_legend_card(p5_min=None, p5_max=None):
     """Phase ramp + >=20% rule + (if provided) the Phase 5 dot-size key.
 
@@ -419,10 +453,11 @@ def create_legend_card(p5_min=None, p5_max=None):
         ax.text(0.2, 0.2, "people in Phase 5 (Catastrophe)",
                 fontsize=6.0, va="top", color="#555")
 
-    path = os.path.join(DATA_DIR, "legend_%s.png" % SCENARIO_ID)
-    plt.savefig(path, bbox_inches="tight", pad_inches=0.08, transparent=False)
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png", bbox_inches="tight", pad_inches=0.08,
+                transparent=False)
     plt.close()
-    return path
+    return _overlay_asset_path("legend", buf.getvalue())
 
 
 def create_intel_card():
@@ -449,10 +484,11 @@ def create_intel_card():
             transform=ax.transAxes, fontsize=7, color="#777", style="italic",
             va="top")
 
-    path = os.path.join(DATA_DIR, "intel_%s.png" % SCENARIO_ID)
-    plt.savefig(path, bbox_inches="tight", pad_inches=0.1, transparent=False)
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png", bbox_inches="tight", pad_inches=0.1,
+                transparent=False)
     plt.close()
-    return path
+    return _overlay_asset_path("intel", buf.getvalue())
 
 
 # ==========================================================================
@@ -587,6 +623,8 @@ def _balloon_info_html(framing):
 
 def build_food_insecurity_kml(records, meta):
     """Build the KML doc: phase styles, per-area placemarks, framing, cards."""
+    global BUILD_STAMP
+    BUILD_STAMP = datetime.now().strftime("%Y-%m-%d-%H-%M")
     retrieved = (meta.get("export_timestamp") or "")[:10] or "IPC Mapping Tool"
     framing = compose_framing_text()
 
