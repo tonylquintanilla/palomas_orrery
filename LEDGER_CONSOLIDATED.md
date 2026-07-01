@@ -219,17 +219,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*54 live items; 44 need attention (`!`); 54 RICE-scored; 20 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*56 live items; 45 need attention (`!`); 56 RICE-scored; 21 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
-| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-29 |
-|  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-29 |
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
+|  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
+|  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
+| ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
+| ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 2.1 | 2026-06-30 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | 2026-06-22 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
@@ -256,7 +259,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2.2 | 2026-06-18 |
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
-| ! | L-064 | Provenance-scanner format sweep -- Earth System family | OPEN | 1.8 | 2026-06-24 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
@@ -336,6 +338,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
+|  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | -- | 2026-06-17 |
 |  | L-005 | Commit protocol v3.28 (or v3.29) to repo root | DONE | -- | 2026-06-17 |
 |  | L-006 | Mercury +0.2 R_M northward dipole offset | DONE | -- | 2026-06-20 |
@@ -365,7 +368,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:OPEN upd:2026-06-29 section:A flag: rice:3/3/95/2 -->
+<!-- L:001 status:OPEN upd:2026-06-30 section:A flag: rice:3/3/95/2 -->
 - **Phase-1 build COMPLETE, render-confirmed (Mode-5, ge_sudan.jpg, built on
   03630ae).** Module: food_insecurity_generator.py -- new dedicated vector/
   categorical generator (NOT a bend of run_scenario); 189 area polygons, full
@@ -386,18 +389,43 @@ as an archive of the prioritization thinking -- no cleanup on close.
   data/<SCENARIO_ID>_blockbuster.kmz. Food layer SCENARIO_ID =
   "food_insecurity_sdn" (Sudan) -> data/food_insecurity_sdn_blockbuster.kmz;
   mirrors the heat scenarios (e.g. data/europe_2026_blockbuster.kmz). Generator
-  also emits legend_<ID>.png, intel_<ID>.png, <ID>_teaser.html. The
-  food_insecurity_<region> prefix is LOAD-BEARING: the GUI launcher
-  launch_food_insecurity_layers() globs data/food_insecurity_*_blockbuster.kmz
-  to scope the food family, so future regional layers (L-070: SS/TD/CF/ET) must
-  follow food_insecurity_<code>_blockbuster.kmz to be picked up.
-- **GUI registration (2026-06-29):** Earth System Viewer
-  (earth_system_visualization_gui.py) DONE at b7650bb -- new "Google Earth Food
-  Insecurity Layers" section + "KMZ Layer Launcher in Google Earth Pro" button
-  -> launch_food_insecurity_layers() (launches existing food KMZs in GE, NOT a
-  generator run); existing heat-wave launcher renamed KML -> KMZ. Dashboard
-  (palomas_orrery_dashboard.py): parallel Food Insecurity buttons IN PROGRESS
-  this session.
+  also emits the two ScreenOverlay PNGs and <ID>_teaser.html. Those overlay names
+  are now BUILD-STAMPED -- legend_<ID>_<YYYY-MM-DD-HH-MM>.png and
+  intel_<ID>_<stamp>.png (one stamp per build, shared by both cards; prior copies
+  cleaned) -- so a regenerated KMZ never reuses a filename Google Earth has
+  cached; the KMZ filename itself is unchanged so --preload still matches. The
+  food_insecurity_<region> prefix is LOAD-BEARING: the controller's
+  --preload food_insecurity globs data/food_insecurity_*_blockbuster.kmz (single
+  source; the GUI launcher delegates to it -- see L-076), so future regional
+  layers (L-070: SS/TD/CF/ET) must follow food_insecurity_<code>_blockbuster.kmz
+  to be picked up.
+- **GUI registration (DONE).** Earth System Viewer
+  (earth_system_visualization_gui.py) at b7650bb -- "Google Earth Food
+  Insecurity Layers" section + launcher button -> launch_food_insecurity_layers(),
+  which now DELEGATES to the controller (--preload food_insecurity) instead of
+  globbing itself (single-source; see L-076); existing heat-wave launcher renamed
+  KML -> KMZ. Dashboard (palomas_orrery_dashboard.py): Food Insecurity Generator +
+  Controller buttons DONE (Mode-5 confirmed, 1b74bf1). Viewer scroll fix
+  (97c21e1): the content area is wrapped in a scrollable canvas so the growing
+  food/heat button sections stay reachable at any window size / when maximized
+  (the food section had fallen below the fold).
+- **KMZ "3+5" parity + tappable i-pin (DONE; c81bb3b; Mode-5 iOS-confirmed,
+  IMG_1153/1154).** The food KMZ adopted the heat "3+5" card (L-075) via the
+  shared module (L-076): the fixed full-text intel ScreenOverlay shrank to a
+  compact header (title + period + "tap the (i) pin"), and the four invisible
+  framing placemarks became ONE visible tappable "i" pin whose CDATA balloon
+  carries the full briefing (National summary -> hidden Catastrophe -> map-color
+  note -> Key drivers -> Middle East line -> "does not assert" -> Source/citation).
+  All by reference to the existing transcribed constants -- no synthesis, no new
+  numeric literals, provenance unaffected. On iOS the <h4> sections render fine;
+  the GE "content controlled by the author" banner is app chrome (full-screen web
+  sheet), harmless. run() gained a scenario_id parameter; food __main__ now opens
+  the shared picker instead of auto-running Sudan.
+- **Stale-card episode (resolved -- deploy path, not code).** The old card
+  persisting on the phone through layer/file deletion was a missed
+  data/ -> assets/ copy of the regenerated KMZ, NOT a Google Earth cache fault.
+  Lesson: confirm the DEPLOY path before theorizing a cache. The build-stamped
+  overlay names (above) were kept as cheap cache-bust insurance.
 - **Still open under this track:** Deferred sub-layers split out: Phase-5 reveal
   -> L-069; 39 IPC call-out points (HFA-bag/IDP symbols) and the Jun-Sep /
   Oct-Jan projections remain deferred per original scope.
@@ -601,7 +629,7 @@ neighbor at fetch time (Tony, manual). Scope: which neighbors in v1.
 dated-series precedent (scenarios_western_heatwave_march_2026.py).
 
 #### [L-075] KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine)
-<!-- L:075 status:DONE upd:2026-06-29 section:A flag: rice:3/3/95/2 -->
+<!-- L:075 status:DONE upd:2026-06-30 section:A flag: rice:3/3/95/2 -->
 - **Problem.** The KMZ intel card was a fixed-size matplotlib PNG ScreenOverlay
   pinned top-left -- it could not reflow and collided with the Google Earth search
   bar on mobile, the long briefing unreadable on a phone.
@@ -639,12 +667,158 @@ dated-series precedent (scenarios_western_heatwave_march_2026.py).
 - **Dead code surfaced.** create_pop_legend_card is now unused (exposure key folded
   into the balloon); left defined to keep the live push minimal-risk -> remove in the
   L-068 dead-code sweep, not its own push.
+- **Generalized to the family (this session -> L-076).** create_info_placemark +
+  the briefing-to-HTML helper were extracted to earth_system_common.py and the
+  3+5 card + tappable i-pin applied to the FOOD generator too; the picker was
+  also generalized (ScenarioPicker). Heat balloon verified byte-identical.
 **Linked:** chassis from L-065 (europe_2026 build); series tracked under L-071;
 dead-code removal -> L-068. Icon uses remote Google info-i.png (probe parity); bundle
 a local icon only if the iOS pin glyph misbehaves.
 **Ref:** earth_system_generator.py (run_scenario, build_spikes_kml, build_impact_kml,
 create_intel_card, create_info_placemark, _briefing_to_html); simplekml 1.3.2 base.py
 CDATA behavior.
+
+#### [L-076] Earth System shared module (earth_system_common) + 3+5 generalized to food
+<!-- L:076 status:DONE upd:2026-06-30 section:A flag: rice:3/3/95/2 -->
+- **What.** Extracted the engine-agnostic KMZ/UI helpers shared by the heat and
+  food generators into a new module, earth_system_common.py, retiring the
+  heat<->food duplication before it set in: briefing_to_balloon_html();
+  create_info_placemark(kml, title, date, briefing, lat, lon, extra_html="") --
+  the tappable "i" pin + CDATA balloon, with the heat population-exposure key now
+  passed in via extra_html rather than baked in; and ScenarioPicker(scenarios,
+  run_fn, ...), a generic Tkinter menu whose run_fn(scenario, status_callback) is
+  injected (heat passes run_scenario, food passes a small adapter over its run()).
+  Both generators import from it; both __main__ blocks launch via the shared
+  picker.
+- **Food 3+5 parity (detail under L-001).** With the shared helpers in place, the
+  food KMZ gained the compact header + single tappable i-pin + consolidated
+  balloon -- the L-075 pattern applied to categorical/food data instead of the
+  scalar heat field. The food generator deliberately still does NOT import the
+  scalar heat engine; it shares only the engine-agnostic UI/KMZ helpers.
+- **scenarios_food_insecurity.py.** New scenario registry (Sudan now; commented
+  stubs for South Sudan / Chad / CAR / Ethiopia) -- the structure L-070 builds on.
+- **Controller single-source (--preload).** earth_system_controller.py gained
+  preload_layers(prefix) + a --preload <prefix> flag that globs
+  data/<prefix>_*_blockbuster.kmz; the food GUI launcher delegates to it, so the
+  food_insecurity_* family contract now lives in ONE place. (A symmetric --exclude
+  complement was drafted but NOT committed -- left for a later pass if wanted.)
+- **Verified.** py_compile; ASCII/LF; the heat balloon proven BYTE-IDENTICAL
+  against the pristine create_info_placemark (793 chars, icon + balloonstyle
+  match), so the working heat card cannot have drifted; food KMZ render-tested
+  end-to-end (189 areas, single i-pin, full balloon). Landed 1b74bf1 -> be183c8
+  -> c81bb3b; Mode-5 iOS-confirmed (L-001, IMG_1153/1154). Heat end-to-end render
+  remains Tony's Mode-5 (not all heat scenario deps available in-container).
+**Ref:** earth_system_common.py; earth_system_generator.py;
+food_insecurity_generator.py; scenarios_food_insecurity.py;
+earth_system_controller.py; cross-ref L-075 (heat 3+5 this generalizes), L-001
+(food workstream), L-070 (multi-country it enables).
+
+#### [L-077] 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario
+<!-- L:077 status:OPEN upd:2026-06-30 section:A flag: rice:3/3/60/2.5 -->
+- New L-item (not a sibling of L-071) -- the migrating centroid plus the
+  advancing reanalysis/forecast seam is its own design object, not another
+  dated snapshot. Track: Gulf Coast bullseye -> St. Louis (~Jul 1) ->
+  Chicago (~Jul 4) -> forecast retreat into the High Plains.
+- ERA5T lag confirmed ~5 days behind real-time, D-5 typically by 12 UTC
+  (Copernicus C3S / ECMWF CDS docs, retrieved 2026-06-30) -- so today there
+  is no observed wet-bulb field yet for the June 27-Jul 1 peak.
+- Design: ongoing scenario per the L-071 pattern (one dated scenario per
+  captured day, chassis shared with europe_2026/scenarios_heatwaves.py),
+  but with the forward/migrating segment shown as a forecast ENVELOPE
+  (Show-the-Envelope convention) and the already-happened segment as solid
+  reanalysis once ERA5T catches up -- the advancing seam is the honest,
+  teachable object.
+- El Nino backdrop noted as context only (L-060) -- causal restraint, no
+  drawn connection.
+**Gap:** scaffold the dated-scenario module once ERA5T coverage reaches the
+event window (NOAA WPC June 27-29 peak + ~5-day lag -> earliest observed
+coverage ~early July). Forecast-vs-reanalysis visual treatment is the open
+design detail at build time.
+**Ref:** NOAA WPC; Copernicus C3S/ECMWF CDS ERA5T docs (retrieved 2026-06-30);
+design conversation this session; cross-ref L-071 (sibling pattern, not
+parent), L-060 (El Nino context, no causal claim).
+
+#### [L-078] Provenance scanner: systematic coverage via module_atlas role classification
+<!-- L:078 status:OPEN upd:2026-06-30 section:A flag: rice:3/3/70/3 -->
+- **Root cause (why files get missed in the first place).** provenance_scanner.py
+  gates display-string scanning on a hand-maintained narrative_files allow-list;
+  a new file is invisible until someone notices and adds its name. The scanner
+  already solved this once, structurally, for one family -- is_shell_file =
+  module_name.endswith('_visualization_shells') auto-includes by pattern, no
+  list-editing required -- but that fix was never generalized.
+- **module_atlas.py already does most of what's needed and is more complete than
+  the scanner's own list.** classify_role() tags every module (data / scenario /
+  rendering / rendering-shells / cache / computation / gui / pipeline / utility /
+  devtool / legacy / other), with 'other' as an honest catch-all rather than a
+  silent drop. Its 'data' role already includes 5 catalog/constants files NOT in
+  narrative_files (exoplanet_coordinates, star_properties, stellar_data_patches,
+  stellar_parameters, messier_catalog); its 'scenario' role already cleanly
+  groups the heat/coral/western family the scanner has no equivalent for. The two
+  tools have drifted apart from each other despite Tony running them together --
+  nothing actually diffs their outputs. (Minor, telling: food_insecurity_generator
+  -- the one file properly in narrative_files -- isn't in module_atlas's ROLE_MAP
+  either, so it currently shows 'other' there. Both lists are hand-maintained;
+  both have independently drifted.)
+- **Design, two checks, both surfacing in PROVENANCE_AUDIT.md (Tony's call --
+  that's the output actually reviewed every run, not module_atlas's):**
+  1. MISSING CATEGORIES (file-level). Replace/extend narrative_files with
+     role-driven inclusion: any module classified data / scenario / rendering /
+     rendering-shells gets scanned automatically via module_atlas.classify_role.
+     Any module landing in 'other' that contains claim-shaped string content
+     gets a new "COVERAGE GAPS -- needs role classification" section in the
+     audit output. Mechanical, low risk, the more tractable of the two builds.
+  2. MISSING FIELDS (vocabulary-level). Found the exact hook point:
+     _extract_string_units (provenance_scanner.py ~L711-721) walks every AST
+     string Constant, runs extract_numeric_claims(), and on zero claims just
+     `continue`s -- the string vanishes with no trace. Fix: a second, looser
+     pattern at that exact branch -- number directly followed by 1-4 letters/%/$
+     not matched by NUMERIC_CLAIM_RE -- logged as a near-miss instead of dropped,
+     in a new "VOCABULARY GAPS -- unrecognized unit candidates" section. Runs
+     only on already-covered files (check 1 handles files missing entirely), so
+     naturally narrower scope than a whole-file sweep.
+  3. The F/C bare-degree gap itself (KNOWN now, not a near-miss) lands directly
+     in NUMERIC_CLAIM_RE as its own fix, separate from the near-miss MECHANISM
+     being built to catch the next unknown gap.
+- **Noise risk on the near-miss check (the harder of the two, flagged not
+  solved).** A loose number+token pattern will catch ordinals ("2nd"), version
+  strings ("v3.29"), multipliers ("3x") as false near-misses unless explicitly
+  excluded. Needs scratch-testing against the real corpus and an eyeballed
+  false-positive rate before going live -- not a guess-and-ship.
+- **Architecture: scanner imports classify_role from module_atlas.py directly**
+  (Tony: no strong preference, deferred to whatever reliably catches gaps every
+  run). One-directional, no third shared module. Default unless revisited.
+- **Effort framing (Tony's explicit precedent, 2026-06-30): the original scanner
+  took ~10 sessions with multiple Gemini cross-checks to harden.** Not treating
+  this as a quick patch. Check 1 (categories) is the tractable mechanical build.
+  Check 2 (vocabulary near-miss) is the one likely to need the same kind of
+  cross-check / corpus-tuning the original scanner got. First full run under the
+  new coverage will be heavy (the backlog: 6 missing Earth System files plus
+  likely energy_imbalance.py and the paleoclimate_*_full family surfacing real,
+  previously-invisible findings); subsequent runs are maintenance.
+- **Carried forward from L-064 (closed, superseding this item):** F/C vocabulary
+  gap; energy_imbalance.py (corroborated independently by L-060's own deferred
+  Phase-2 note -- ~47 candidate hits, zero citation markers found in a manual
+  proxy check); paleoclimate_wet_bulb_full / paleoclimate_human_origins_full
+  (manual proxy shows heavy citation density -- likely another false-clean, same
+  shape as scenarios_heatwaves.py) vs paleoclimate_visualization_full (high claim
+  volume, thin citation density -- likely the riskier one, same shape as
+  scenarios_western_heatwave_march_2026.py); star_notes.py:1257 (still open,
+  pre-existing, reconcile in the same pass).
+**Gap:** design has converged on architecture (role-driven inclusion + the exact
+near-miss hook point) but NOT on the near-miss pattern's tuning -- that's the
+real remaining design work before any build. Sequencing: (1) wire role-driven
+inclusion off module_atlas.classify_role, scratch-verify scenarios_heatwaves.py
+comes back clean as expected; (2) build + corpus-tune the near-miss detector,
+likely with a Gemini cross-check given the original scanner's precedent; (3) add
+food_insecurity_generator + scenarios_food_insecurity to module_atlas's own
+ROLE_MAP (currently 'other' there, a small confirmed drift of its own); (4) run
+the real scanner full-tree, triage whatever the heavy first run surfaces
+(energy_imbalance.py, paleoclimate family, star_notes.py:1257, the 5 data-role
+catalog files).
+**Ref:** provenance_scanner.py (_extract_string_units ~L711-721, narrative_files
+~L615-621, NUMERIC_CLAIM_RE ~L327-338); module_atlas.py (ROLE_MAP ~L43-162,
+classify_role ~L165-173); supersedes L-064 (closed 2026-06-30, food-insecurity
+half done and live); design conversation 2026-06-30, repo HEAD 1f5901e.
 
 ## PENDING ACTION (Tony-side)
 
@@ -1393,7 +1567,7 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
 
 #### [L-064] Provenance-scanner format sweep -- Earth System family
-<!-- L:064 status:OPEN upd:2026-06-24 section:D.Structural flag: rice:3/2/60/2 -->
+<!-- L:064 status:DONE upd:2026-06-30 section:C flag: rice:3/3/100/2 -->
 - **CONFIRMED for food_insecurity_generator (the per-module question this item
   poses): the scanner does NOT traverse it.** Two compounding gaps, both proven
   empirically (uncited recognized-unit token in a fresh file -> zero findings):
@@ -1412,10 +1586,36 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   pre-existing REAL Tier-1 -- star_notes.py:1257, "No source citation (recalled)"
   -- invisible before only because of the vocabulary gap. Part (1) is local/safe;
   part (2) is family-wide CI with a ripple to triage.
-**Gap:** Tony decision -- take part (1) now / defer part (2) to the full sweep /
-take both and triage star_notes:1257. Then sweep remaining Earth System modules.
-**Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; originated from L-001;
-confirmed via food_insecurity_generator build (HANDOFF_food_insecurity_build_v2.md).
+- **Live-repo check (2026-06-30, @1f5901e): food's half is ALREADY LANDED, not
+  just scratch-verified.** narrative_files now contains 'food_insecurity_generator'
+  and NUMERIC_CLAIM_RE now carries people|persons?|percent|%. The "scratch copy"
+  framing above is historical -- the food-specific fix is live. star_notes.py:1257
+  triage status not re-confirmed this pass.
+- **Scope expansion (2026-06-30, L-077 scaffold session) found this was bigger
+  than one missing file, and that the manual-list mechanism itself was the
+  problem, not just its current contents.** 6 of 7 Earth System files were
+  missing from narrative_files; a second, separate vocabulary gap (no bare F/C
+  degree-suffix pattern -- "117F" / "47.2C" don't match anything) sits underneath
+  the humanitarian one; and a manual proxy check found likely real gaps beyond
+  the Earth System family entirely (energy_imbalance.py, the paleoclimate_*_full
+  family). Full findings preserved below for reference.
+- [Full per-file risk breakdown and the manual-proxy methodology from the
+  2026-06-30 session retained here verbatim -- see prior revision of this block
+  for the complete scenarios_heatwaves.py / scenarios_western_heatwave_march_2026.py
+  / scenarios_coral_bleaching.py risk split, all still valid as groundwork.]
+**CLOSED BY DECISION (2026-06-30):** the food-insecurity half is genuinely done
+and verified live -- that closes this item. The "sweep remaining Earth System
+modules" half is NOT more of the same work -- it needs a different MECHANISM
+(systematic, role-driven coverage off module_atlas.py, not hand-editing a list
+file by file), so it is new tooling work, not a sweep remainder. Promoted to
+L-078, the same shape as L-009 spinning off L-061 for new physics rather than
+calling it a cone remainder. All empirical findings above (the F/C gap, the
+energy_imbalance.py / paleoclimate candidates, the per-file risk split) carry
+forward into L-078 as groundwork, not lost.
+**Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; module_atlas.py; originated
+from L-001; confirmed via food_insecurity_generator build
+(HANDOFF_food_insecurity_build_v2.md); superseded by L-078, 2026-06-30,
+repo HEAD 1f5901e.
 
 ### D.Cosmetic -- polish (bundle when convenient)
 

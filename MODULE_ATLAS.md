@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 29, 2026
-Modules: 115 | Functions: 920 | Lines: 89,825
+Generated: June 30, 2026
+Modules: 115 | Functions: 920 | Lines: 89,927
 
 ---
 
@@ -57,7 +57,7 @@ and explains in context.
 
 ### earth_system_visualization_gui.py
 
-**Role:** gui | **Lines:** 1,855
+**Role:** gui | **Lines:** 1,901
 
 > Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations
 
@@ -1925,7 +1925,7 @@ and explains in context.
 
 ### scenarios_heatwaves.py
 
-**Role:** scenario | **Lines:** 665
+**Role:** scenario | **Lines:** 709
 
 > Paloma's Orrery: Heatwave Scenario Definitions Provides fetch function + SCENARIOS list for the earth_system_generator engine. Data Source: ERA5 via Open-Meteo Archive API
 
@@ -2382,7 +2382,7 @@ and explains in context.
 
 ### food_insecurity_generator.py
 
-**Role:** other | **Lines:** 688
+**Role:** other | **Lines:** 700
 
 > food_insecurity_generator.py - IPC acute food-insecurity KMZ layer (Sudan, current period).
 
@@ -2391,17 +2391,17 @@ and explains in context.
 
 **Public functions:**
 
-- `rgb_to_kml(rgb_hex, alpha_hex)` (line 188) -- Convert #RRGGBB + alpha byte to KML aabbggrr (alpha, blue, green, red).
-- `build_geojson_records(geojson_path)` (line 215) -- Parse the IPC GeoJSON into per-area records (polygons only).
-- `build_balloon_html(rec, retrieved, analysis_name)` (line 281) -- Per-area CDATA HTML balloon. All fields transcribed; none synthesized.
-- `compose_framing_text()` (line 345) -- Return the framing-layer sentences. Numeric tokens are sourced above
-- `create_legend_card(p5_min, p5_max)` (line 366) -- Phase ramp + >=20% rule + (if provided) the Phase 5 dot-size key.
-- `create_intel_card(framing)` (line 428) -- National figures + C1 + drivers + Middle East + C3 + citation (PNG).
-- `build_phase5_dots(records, document, retrieved, analysis_name)` (line 526) -- L-069: maroon proportional dots for areas carrying a mapped Phase 5
-- `build_food_insecurity_kml(records, meta)` (line 610) -- Build the KML doc: phase styles, per-area placemarks, framing, cards.
-- `package_kmz(kml, asset_pngs)` (line 674) -- Write the KMZ: a single doc.kml plus the card PNGs.
-- `generate_plotly_teaser(records, meta)` (line 694) -- 2D choropleth teaser for the web gallery. Returns path or None.
-- `run(geojson_path, make_teaser, status_callback, scenario_id)` (line 744)
+- `rgb_to_kml(rgb_hex, alpha_hex)` (line 196) -- Convert #RRGGBB + alpha byte to KML aabbggrr (alpha, blue, green, red).
+- `build_geojson_records(geojson_path)` (line 223) -- Parse the IPC GeoJSON into per-area records (polygons only).
+- `build_balloon_html(rec, retrieved, analysis_name)` (line 289) -- Per-area CDATA HTML balloon. All fields transcribed; none synthesized.
+- `compose_framing_text()` (line 353) -- Return the framing-layer sentences. Numeric tokens are sourced above
+- `create_legend_card(p5_min, p5_max)` (line 400) -- Phase ramp + >=20% rule + (if provided) the Phase 5 dot-size key.
+- `create_intel_card()` (line 463) -- Compact always-on header (title + period + hint), matching the heat KMZ
+- `build_phase5_dots(records, document, retrieved, analysis_name)` (line 528) -- L-069: maroon proportional dots for areas carrying a mapped Phase 5
+- `build_food_insecurity_kml(records, meta)` (line 624) -- Build the KML doc: phase styles, per-area placemarks, framing, cards.
+- `package_kmz(kml, asset_pngs)` (line 690) -- Write the KMZ: a single doc.kml plus the card PNGs.
+- `generate_plotly_teaser(records, meta)` (line 710) -- 2D choropleth teaser for the web gallery. Returns path or None.
+- `run(geojson_path, make_teaser, status_callback, scenario_id)` (line 760)
 
 ---
 
@@ -2596,7 +2596,7 @@ and explains in context.
 | earth_system_common | other | 132 | 0 | 2 |
 | earth_system_controller | gui | 129 | 0 | 0 |
 | earth_system_generator | computation | 671 | 4 | 1 |
-| earth_system_visualization_gui | gui | 1,855 | 8 | 1 |
+| earth_system_visualization_gui | gui | 1,901 | 8 | 1 |
 | earth_visualization_shells | rendering/shells | 992 | 2 | 2 |
 | energy_imbalance | computation | 839 | 1 | 1 |
 | eris_visualization_shells | rendering/shells | 464 | 1 | 1 |
@@ -2607,7 +2607,7 @@ and explains in context.
 | exoplanet_systems | data | 570 | 0 | 3 |
 | fetch_climate_data | computation | 761 | 0 | 1 |
 | fetch_paleoclimate_data | computation | 169 | 0 | 0 |
-| food_insecurity_generator | other | 688 | 2 | 0 |
+| food_insecurity_generator | other | 700 | 2 | 0 |
 | formatting_utils | utility | 16 | 0 | 4 |
 | hr_diagram_apparent_magnitude | rendering | 430 | 12 | 1 |
 | hr_diagram_distance | rendering | 449 | 13 | 1 |
@@ -2653,7 +2653,7 @@ and explains in context.
 | save_utils | pipeline | 795 | 1 | 18 |
 | scenarios_coral_bleaching | scenario | 191 | 0 | 1 |
 | scenarios_food_insecurity | other | 35 | 0 | 1 |
-| scenarios_heatwaves | scenario | 665 | 0 | 1 |
+| scenarios_heatwaves | scenario | 709 | 0 | 1 |
 | scenarios_western_heatwave_march_2026 | scenario | 1,536 | 1 | 1 |
 | sgr_a_grand_tour | rendering | 742 | 3 | 1 |
 | sgr_a_star_data | data | 572 | 3 | 5 |

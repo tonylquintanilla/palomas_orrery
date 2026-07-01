@@ -679,4 +679,48 @@ SCENARIOS = [
         'fetch': fetch_era5_heatwave,
         'lats': [], 'lons': [], 'values': [],
     },
+    # US Midwest/Central Heat Dome 2026 (L-077, SCAFFOLD -- structure only,
+    # no observed data yet; see Gap note in the L-077 ledger entry).
+    # Added June 2026 with Anthropic's Claude Sonnet 5.
+    {
+        'scenario_id': 'us_heatdome_2026', 'name': 'US Midwest Heat Dome (June-July 2026)',
+        'boundary_type': 'heatwave',
+        'date': '2026-06-28',  # SCAFFOLD anchor date (Gulf Coast phase). Confirm
+                                # Open-Meteo archive coverage at build time; adjust
+                                # if not yet backfilled. Subsequent captured days
+                                # follow the L-071 dated-series pattern -- own
+                                # scenario_id per day, e.g. us_heatdome_2026_0701.
+        'lat_range': range(45, 27, -2), 'lon_range': range(-98, -82, 2),
+        'focus_val_min': 24.0,
+        'description': ('Migrating heat dome, Gulf Coast -> St. Louis -> Chicago; '
+                         'humid Mississippi Valley corridor, Corn Belt pattern.'),
+        # Source: ERA5T lag confirmed ~5 days behind real-time, D-5 data typically
+        #   available by 12 UTC (Copernicus C3S / ECMWF CDS documentation,
+        #   retrieved 2026-06-30). No observed wet-bulb field exists yet for the
+        #   event's June 27-Jul 1 peak as of this scaffold; all peak/station
+        #   figures below are deliberately [TO-FETCH] pending a real fetch and a
+        #   fresh source check at build time -- do not backfill from recall.
+        'briefing': (
+            "THE MIGRATING DOME. A ridge centroid forecast track ran Gulf Coast "
+            "-> St. Louis -> Chicago -> retreat into the High Plains, against a "
+            "developing El Nino backdrop (context only, no causal claim drawn -- "
+            "see L-060). Humidity (warm overnight lows, high dew points) is the "
+            "dangerous signature -- the same wet-bulb spine as the Chicago 1995 "
+            "and St. Louis 1954/1966 entries in this file.\n\n"
+            "Station Records: [TO-FETCH].\n"
+            "Regional Map Peak: [TO-FETCH]C (Wet Bulb).\n\n"
+            "SOURCE: NOAA Weather Prediction Center [confirm live citation at "
+            "fetch time]; ERA5T latency per Copernicus C3S / ECMWF CDS, "
+            "retrieved 2026-06-30."
+        ),
+        'populations': [
+            {"name": "New Orleans", "lat": 29.9511, "lon": -90.0715, "pop": 370000},
+            {"name": "St. Louis", "lat": 38.6270, "lon": -90.1994, "pop": 300000},
+            {"name": "Memphis", "lat": 35.1495, "lon": -90.0490, "pop": 630000},
+            {"name": "Chicago", "lat": 41.8781, "lon": -87.6298, "pop": 2700000},
+        ],
+        'thresholds': HEATWAVE_THRESHOLDS,
+        'fetch': fetch_era5_heatwave,
+        'lats': [], 'lons': [], 'values': [],
+    },
 ]
