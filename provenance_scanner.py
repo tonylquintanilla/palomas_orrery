@@ -198,7 +198,11 @@ Module rewritten: April 17, 2026 with Anthropic's Claude Opus 4.7
     false-positive Tier-1 findings.)
 Module updated: April 2026 with Anthropic's Claude Sonnet 4.6
     (Options A/B, lookback=60, exceptions loading, audit completion.)
-Updated with Opus 4.8 for food insecurity provenance, June 26, 2026.     
+Updated with Opus 4.8 for food insecurity provenance, June 26, 2026.
+Updated with Claude Sonnet 5 for L-078 check 1: role-driven inclusion off
+    module_atlas.classify_role, additive over narrative_files; coverage-gap
+    safety net for 'other'-role files; citation-recognition fix for
+    single-line narrative strings (June 30, 2026).
 """
 
 import ast
@@ -256,9 +260,13 @@ SOURCE_PATTERNS = [
     re.compile(r'#\s*(?:Based on|Per|Derived from|According to)\s+',
                re.IGNORECASE),
     # Markers that appear inside docstrings (no leading '#')
-    re.compile(r'^\s*[Ss]ource\s*:\s', re.MULTILINE),
-    re.compile(r'^\s*[Vv]erified\s*:\s', re.MULTILINE),
-    re.compile(r'^\s*[Rr]ef(?:erence)?\s*:\s', re.MULTILINE),
+    # L-078: case-insensitive -- narrative display strings (scenario
+    # briefings, KMZ balloon text) write these ALL CAPS ("SOURCE:") as
+    # the reader-facing convention; the code-comment form above is
+    # already case-insensitive, this brings the prose form in line.
+    re.compile(r'^\s*[Ss]ource\s*:\s', re.MULTILINE | re.IGNORECASE),
+    re.compile(r'^\s*[Vv]erified\s*:\s', re.MULTILINE | re.IGNORECASE),
+    re.compile(r'^\s*[Rr]ef(?:erence)?\s*:\s', re.MULTILINE | re.IGNORECASE),
     # URL-as-citation patterns (data dict entries like celestial_objects.py
     # where `mission_url` sits alongside `mission_info` narrative).
     # An https URL appearing anywhere in the context block, or a *_url
@@ -619,8 +627,16 @@ def extract_units_from_file(filepath, module_name, role):
         'sgr_a_star_data', 'star_notes', 'solar_visualization_shells',
         'food_insecurity_generator',
     }
+    # L-078 check 1: role-driven inclusion, additive over the legacy
+    # allow-list -- nothing currently covered loses coverage; the
+    # allow-list becomes a pure safety net once module_atlas.ROLE_MAP
+    # is complete (food_insecurity_generator still shows 'other' there
+    # today, which is why this stays additive rather than a replace).
+    NARRATIVE_ROLES = {'data', 'scenario', 'rendering', 'rendering/shells',
+                        'computation'}
     is_shell_file = module_name.endswith('_visualization_shells')
-    if module_name in narrative_files or is_shell_file:
+    is_narrative_role = role in NARRATIVE_ROLES
+    if module_name in narrative_files or is_shell_file or is_narrative_role:
         units.extend(_extract_string_units(
             tree, lines, module_name, fname, role))
 
@@ -750,10 +766,14 @@ def _extract_string_units(tree, lines, module_name, fname, role):
         # limitations -- the citation exists at the entry key level.
         base_context = get_context_block(lines, line_start, line_end,
                                          lookback=60, lookahead=10)
-        if line_start in docstring_lines:
-            context_text = base_context + '\n' + s
-        else:
-            context_text = base_context
+        # L-078: self-contextualize ALL string units, not just docstrings.
+        # The unit-of-provenance is the whole string either way; a
+        # narrative display string (scenario briefing, KMZ balloon) is
+        # exactly as much "what the reader sees" as a docstring is, and
+        # an inline SOURCE: marker at its end is a real citation -- it
+        # was only invisible before because this text was never part of
+        # the searched context for non-docstring strings.
+        context_text = base_context + '\n' + s
 
         units.append(ProvenanceUnit(
             kind='string',
@@ -1073,6 +1093,35 @@ def format_accepted_residuals(accepted_residuals):
     return lines
 
 
+def _scan_coverage_gap(filepath):
+    """Lightweight claim-shape check for role='other' files (L-078 check 1b).
+
+    These files bypass narrative-string extraction entirely -- role is
+    genuinely unclassified, not a deliberate exclusion like 'gui' or
+    'devtool'. Without this check they sit invisible with no trace, the
+    same failure food_insecurity_generator had before L-064. Returns a
+    count of strings that would register >=1 numeric claim; does not
+    build ProvenanceUnits -- this is a coverage signal, not an audit.
+    """
+    try:
+        with open(filepath, 'rb') as f:
+            tree = ast.parse(f.read())
+    except Exception:
+        return 0
+
+    count = 0
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Constant):
+            continue
+        if not isinstance(node.value, str):
+            continue
+        if len(node.value) < 3:
+            continue
+        if list(extract_numeric_claims(node.value)):
+            count += 1
+    return count
+
+
 def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     """Scan all .py files and produce the provenance audit report."""
     print(f"Provenance Scanner -- scanning {project_dir}")
@@ -1092,6 +1141,7 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
     all_units = []
     files_scanned = 0
     suppressed_count = 0
+    coverage_gaps = []  # L-078 check 1b: [(module_name, claim_string_count), ...]
 
     for fname in sorted(os.listdir(project_dir)):
         if not fname.endswith('.py'):
@@ -1110,6 +1160,12 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
                 all_units.append(u)
         files_scanned += 1
 
+        # L-078 check 1b: coverage-gap safety net for unclassified files.
+        if role == 'other':
+            gap_count = _scan_coverage_gap(filepath)
+            if gap_count:
+                coverage_gaps.append((module_name, gap_count))
+
     if suppressed_count:
         print(f"Suppressed {suppressed_count} known false positives "
               f"(see data/provenance_exceptions.json)")
@@ -1118,7 +1174,8 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
 
     generate_report(all_units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path,
-                    accepted_residuals=accepted_residuals)
+                    accepted_residuals=accepted_residuals,
+                    coverage_gaps=coverage_gaps)
 
     return all_units, consistent_dups, inconsistencies
 
@@ -1129,7 +1186,7 @@ def scan_project(project_dir, output_path='PROVENANCE_AUDIT.md'):
 
 def generate_report(units, consistent_dups, inconsistencies,
                     files_scanned, project_dir, output_path,
-                    accepted_residuals=None):
+                    accepted_residuals=None, coverage_gaps=None):
     """Write PROVENANCE_AUDIT.md."""
     now = datetime.now().strftime('%B %d, %Y')
 
@@ -1212,6 +1269,26 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("")
     out.append("---")
     out.append("")
+
+    # ---- Coverage gaps (L-078 check 1b) ----
+    if coverage_gaps:
+        out.append("## COVERAGE GAPS -- needs role classification")
+        out.append("")
+        out.append("These modules are classified `'other'` in module_atlas.py's "
+                   "ROLE_MAP (unrecognized, not deliberately excluded) and contain "
+                   "string content that looks claim-shaped. They are NOT scanned "
+                   "for narrative citations -- role-driven inclusion only covers "
+                   "data / scenario / rendering / rendering-shells / computation. "
+                   "Add each to ROLE_MAP with its real role (or to narrative_files "
+                   "as a manual override) so it stops being invisible.")
+        out.append("")
+        out.append("| Module | Claim-shaped strings |")
+        out.append("|--------|----------------------:|")
+        for module_name, count in sorted(coverage_gaps, key=lambda x: -x[1]):
+            out.append(f"| `{module_name}.py` | {count} |")
+        out.append("")
+        out.append("---")
+        out.append("")
 
     # ---- Accepted residuals (from exceptions file) ----
     if accepted_residuals:
