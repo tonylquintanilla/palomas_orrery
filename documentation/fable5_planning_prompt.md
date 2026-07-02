@@ -60,24 +60,38 @@ Coral Reef Watch, IPC, HDX). Flag any claim that cannot be sourced.
 3) PUBLICATION -- my biggest challenge, and the main thing I want your judgment on.
 Current channels: the GitHub repos; palomasorrery.com as a GitHub Pages static
 site (the gallery); Instagram @Palomas_Orrery; PyInstaller for Windows/Mac/Linux
-desktop binaries. Stated preference: web hosting, if it can be done with low
-overhead and run efficiently.
-Surface the fork before recommending anything -- the project has two very
-different artifacts: (a) the gallery = static exports, already web-hosted and
-working; and (b) the interactive generator = a Tkinter desktop GUI making live
-data calls, which cannot simply be "web hosted" as-is. The climate/earth-system
-gallery is already a proven precompute -> static-HTML pipeline -- the
-low-overhead model I want -- so part of the question is how much of the
-interactive orrery could also collapse to precomputed scenes rather than needing
-a live backend.
-Map the main paths -- desktop binaries, a hosted web-framework port,
-client-side-in-browser, hybrid/precompute, and any others you see -- with honest
-tradeoffs on reach, ongoing cost/effort, and what decision each commits me to.
-Verify current hosting facts rather than recalling them. A caching layer for the
-data already exists in the repo -- do not propose rebuilding it. Do NOT go into
-data formats or the data path itself; that is a pre-design question for later.
-End with a recommended sequence and the one or two decisions you need from me
-before the next round.
+desktop binaries.
+
+MY REAL TARGET: hosting the interactive orrery so users RUN IT REMOTELY in a
+browser instead of installing and running it locally. Up to now this has not
+seemed practical or even possible -- I want you to RE-EXAMINE that assumption,
+not inherit it. Assess honestly whether it is feasible now, what it would take,
+and what the genuine blockers are. Do NOT quietly downgrade this to "just
+precompute static scenes" because it is the harder path -- that downgrade is the
+assumption I am asking you to test. The interactive generator is currently a
+Tkinter desktop GUI that makes live data calls and renders with Plotly.
+
+Then map the full option space around that target, with honest tradeoffs on
+reach, ongoing cost/effort, feasibility, and what decision each commits me to:
+- Live-hosted interactive orrery -- a web-framework port (Dash / Streamlit /
+  Gradio / Shiny / FastAPI+JS) so the program runs on a server and the user
+  drives it from the browser. THIS IS THE TARGET; scope it seriously.
+- Client-side-in-browser -- the program runs in the user's browser, no install,
+  no server compute.
+- Hybrid / precompute -- publish curated interactive scenes as static exports.
+  The climate/earth-system gallery already proves this precompute -> static-HTML
+  pipeline works and is low-overhead; treat it as a genuine alternative or a
+  first step, NOT the default answer.
+- Desktop binaries -- the current PyInstaller path, as the power-user channel.
+- Any others you see.
+
+For orientation (not to solve here): the gallery is already static exports,
+web-hosted and working; the render layer is already Plotly; and a caching layer
+for the data already exists in the repo (do not propose rebuilding it). Verify
+current hosting facts (tiers, limits, costs) rather than recalling them. Do NOT
+go into data formats or the data path itself -- that is a pre-design question for
+later. End with a recommended sequence and the one or two decisions you need from
+me before the next round.
 
 4) OUTREACH (Instagram @Palomas_Orrery) -- a mini-front, tied to publication.
 If a chosen path can auto-emit shareable stills or short animations from the
@@ -85,10 +99,12 @@ scenes the gallery already produces, the channel feeds itself instead of being
 hand-fed. Sketch whether that is a byproduct of a web build or a small dedicated
 exporter. Keep it lightweight -- a reach multiplier, not a new product.
 
-Before wide release (binaries or hosted): I will need to settle an open-source
-license and the attribution page (front 2). Flag license-compatibility issues
-with any dependency or data-usage terms and recommend a license fit for an
-educational open project.
+Gate to note, not to solve here: wide release (binaries or hosted) will need an
+open-source license and the attribution page settled first. The license choice
+and any dependency-compatibility audit are PRE-DESIGN -- out of scope for this
+pass. The one planning-relevant piece: if a data source's redistribution terms
+would constrain or rule out a hosting/distribution path, flag it, because that
+changes the option set.
 
 DATA NOTE: large data (star catalogs, ephemeris cache, climate reanalysis) lives
 locally, is gitignored (bigger than the repo allows), and the copy in the
