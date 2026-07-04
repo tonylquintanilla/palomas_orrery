@@ -1,5 +1,5 @@
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.30 | July 1, 2026
+Tony Quintanilla, PE | Claude | v3.31 | July 1, 2026
 
 PREAMBLE: WHY THIS PROTOCOL EXISTS
 
@@ -632,5 +632,10 @@ resident protocol keeps the checkpoint CRITICAL gates, the modes, the
 principles, the Foundation, the quotables, and the process/philosophical
 lessons. Designed with Claude Opus 4.6; skills and trimmed protocol built
 with Claude Fable 5 via collegial relay; Tony integrated.
+
+v3.31 (July 4, 2026): Project-knowledge sync removed (L-002 follow-on);
+Context Priority simplified to 7 tiers; skills_index.py devtool (L-097)
+auto-generates the Skill Manifest table; fires_when frontmatter field
+added to all 8 skills.
 
 Functional for Claude, readable for human, signal preserved.

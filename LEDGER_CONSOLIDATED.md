@@ -2269,6 +2269,14 @@ change log for protocol and skills. Extraction audit trail:
 documentation/MAPPING_TABLE_L002.md. Designed with Claude Opus 4.6; built
 with Claude Fable 5 via collegial relay; Tony integrated.
 
+v3.31 (July 4, 2026): Project-knowledge GitHub sync removed; Context Priority
+simplified to 7 tiers (the repo, the protocol+skills, and uploads are the
+three stores). skills_index.py devtool (L-097) auto-generates the Skill
+Manifest table between markers, same pattern as ledger_index.py; fires_when
+frontmatter field added to all 8 skills for editorial control of the manifest.
+Protocol header still reads v3.30; filename bumped to v3_31. Reviewed and
+built with Claude Opus 4.6.
+
 ### Preserved verbatim: v3.29 Technical lessons (now field notes in skills)
 
 - Cache: cache[name]['elements'] (nested dict)
