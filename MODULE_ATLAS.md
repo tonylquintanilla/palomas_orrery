@@ -1,7 +1,7 @@
 # Paloma's Orrery -- Module Atlas
 
-Generated: June 30, 2026
-Modules: 115 | Functions: 920 | Lines: 89,927
+Generated: July 04, 2026
+Modules: 117 | Functions: 934 | Lines: 90,338
 
 ---
 
@@ -34,7 +34,7 @@ and explains in context.
 | scenario | 3 | Specific Earth system scenarios |
 | utility | 5 | Shared helper functions |
 | devtool | 12 | Developer tools (dependency tracing, atlas) |
-| other | 13 | Uncategorized |
+| other | 15 | Uncategorized |
 
 ---
 
@@ -213,7 +213,7 @@ and explains in context.
 
 ### palomas_orrery_dashboard.py
 
-**Role:** gui | **Lines:** 674
+**Role:** gui | **Lines:** 686
 
 > Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite.
 
@@ -222,8 +222,8 @@ and explains in context.
 
 **Public functions:**
 
-- `class PalomasOrreryDashboard` (line 230) -- Main dashboard window.
-- `main()` (line 773)
+- `class PalomasOrreryDashboard` (line 242) -- Main dashboard window.
+- `main()` (line 785)
 
 ---
 
@@ -2194,7 +2194,7 @@ and explains in context.
 
 ### provenance_scanner.py
 
-**Role:** devtool | **Lines:** 1,183
+**Role:** devtool | **Lines:** 1,254
 
 > provenance_scanner.py - Fact provenance auditor for Paloma's Orrery.
 
@@ -2203,27 +2203,27 @@ and explains in context.
 
 **Public functions:**
 
-- `action_tier(score)` (line 233) -- Return tier number (1=highest priority, 4=lowest).
-- `has_citation(text, is_docstring)` (line 298) -- Does the given text block contain a citation marker?
-- `has_stale_marker(text)` (line 313) -- Does the given text contain a staleness indicator?
-- `extract_numeric_claims(text)` (line 341) -- Yield (num_str, unit, value_float) for each numeric claim in text.
-- `build_name_import_map(project_dir, local_modules)` (line 361) -- For each local module, find which NAMES other modules import from it.
-- `name_is_imported(name, module_name, imported_names)` (line 399) -- Return (count, consumers) for a name defined in module_name.
-- `class ProvenanceUnit` (line 412) -- The smallest thing that has a coherent source citation.
-- `get_context_block(lines, unit_start_line, unit_end_line, lookback, lookahead)` (line 477) -- Return the block of text a unit can see for citation purposes.
-- `get_unit_interior(lines, line_start, line_end)` (line 498) -- Return the text inside the unit itself (per-entry comments).
-- `extract_numeric_value(node)` (line 516) -- Evaluate an AST node to a numeric constant.
-- `extract_units_from_file(filepath, module_name, role)` (line 539) -- Walk the AST of one file and emit ProvenanceUnits.
-- `build_pinned_values(project_dir)` (line 779) -- Extract numeric values from constants_new.py that have source citations.
-- `score_unit(unit, imported_names, pinned_values)` (line 835) -- Assign vulnerability and criticality to a unit.
-- `canonical_concept(name)` (line 935) -- Map a constant name to its canonical concept, or None.
-- `find_cross_file_issues(units)` (line 946) -- Find same-concept constants across multiple files.
-- `load_exceptions(project_dir)` (line 990) -- Load provenance_exceptions.json from data/ subdirectory if present.
-- `is_suppressed(unit, suppressed_fingerprints)` (line 1022) -- Check if a unit matches any suppressed fingerprint.
-- `format_accepted_residuals(accepted_residuals)` (line 1051) -- Format accepted residuals as a markdown block for the audit report.
-- `scan_project(project_dir, output_path)` (line 1076) -- Scan all .py files and produce the provenance audit report.
-- `generate_report(units, consistent_dups, inconsistencies, files_scanned, project_dir, output_path, accepted_residuals)` (line 1130) -- Write PROVENANCE_AUDIT.md.
-- `main()` (line 1357)
+- `action_tier(score)` (line 237) -- Return tier number (1=highest priority, 4=lowest).
+- `has_citation(text, is_docstring)` (line 306) -- Does the given text block contain a citation marker?
+- `has_stale_marker(text)` (line 321) -- Does the given text contain a staleness indicator?
+- `extract_numeric_claims(text)` (line 349) -- Yield (num_str, unit, value_float) for each numeric claim in text.
+- `build_name_import_map(project_dir, local_modules)` (line 369) -- For each local module, find which NAMES other modules import from it.
+- `name_is_imported(name, module_name, imported_names)` (line 407) -- Return (count, consumers) for a name defined in module_name.
+- `class ProvenanceUnit` (line 420) -- The smallest thing that has a coherent source citation.
+- `get_context_block(lines, unit_start_line, unit_end_line, lookback, lookahead)` (line 485) -- Return the block of text a unit can see for citation purposes.
+- `get_unit_interior(lines, line_start, line_end)` (line 506) -- Return the text inside the unit itself (per-entry comments).
+- `extract_numeric_value(node)` (line 524) -- Evaluate an AST node to a numeric constant.
+- `extract_units_from_file(filepath, module_name, role)` (line 547) -- Walk the AST of one file and emit ProvenanceUnits.
+- `build_pinned_values(project_dir)` (line 799) -- Extract numeric values from constants_new.py that have source citations.
+- `score_unit(unit, imported_names, pinned_values)` (line 855) -- Assign vulnerability and criticality to a unit.
+- `canonical_concept(name)` (line 955) -- Map a constant name to its canonical concept, or None.
+- `find_cross_file_issues(units)` (line 966) -- Find same-concept constants across multiple files.
+- `load_exceptions(project_dir)` (line 1010) -- Load provenance_exceptions.json from data/ subdirectory if present.
+- `is_suppressed(unit, suppressed_fingerprints)` (line 1042) -- Check if a unit matches any suppressed fingerprint.
+- `format_accepted_residuals(accepted_residuals)` (line 1071) -- Format accepted residuals as a markdown block for the audit report.
+- `scan_project(project_dir, output_path)` (line 1125) -- Scan all .py files and produce the provenance audit report.
+- `generate_report(units, consistent_dups, inconsistencies, files_scanned, project_dir, output_path, accepted_residuals, coverage_gaps)` (line 1187) -- Write PROVENANCE_AUDIT.md.
+- `main()` (line 1434)
 
 ---
 
@@ -2360,6 +2360,25 @@ and explains in context.
 **Public functions:**
 
 - `plot_colortable_255(colors, title)` (line 8)
+
+---
+
+### data_inventory.py
+
+**Role:** other | **Lines:** 73
+
+> data_inventory.py - Inventory the large, gitignored data stores for handoff.
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `human(n)` (line 19)
+- `inventory(dirs)` (line 25)
+- `peek_orbit(path)` (line 39)
+- `peek_pickle(path)` (line 53)
+- `main()` (line 63)
 
 ---
 
@@ -2505,6 +2524,29 @@ and explains in context.
 
 ---
 
+### skills_index.py
+
+**Role:** other | **Lines:** 255
+
+> skills_index.py - Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/.
+
+**Depends on:** (none)
+**Consumed by:** (none -- standalone)
+
+**Public functions:**
+
+- `parse_frontmatter(lines)` (line 97) -- Parse simple 'key: value' YAML frontmatter between the first two
+- `first_sentence(text, limit)` (line 121) -- First sentence of a description, truncated to ~limit chars (option
+- `parse_skill(skill_dir)` (line 131) -- Parse one skills/<name>/SKILL.md.
+- `check(records, problems)` (line 183)
+- `sort_key(record)` (line 194)
+- `format_row(record)` (line 201) -- One manifest row: name/version on the first line, fires_when wrapped
+- `build_manifest(records)` (line 215)
+- `find_default_protocol(folder)` (line 224) -- Highest-versioned project_instructions_v*.md next to this script.
+- `main()` (line 237)
+
+---
+
 ### smoke_dipole_cone.py
 
 **Role:** other | **Lines:** 144
@@ -2590,6 +2632,7 @@ and explains in context.
 | create_ephemeris_database | devtool | 243 | 1 | 0 |
 | data_acquisition | computation | 220 | 0 | 4 |
 | data_acquisition_distance | computation | 169 | 2 | 1 |
+| data_inventory | other | 73 | 0 | 0 |
 | data_processing | computation | 434 | 0 | 5 |
 | dep_trace | devtool | 399 | 1 | 0 |
 | diagnose_bcodmo | devtool | 65 | 0 | 0 |
@@ -2637,7 +2680,7 @@ and explains in context.
 | paleoclimate_visualization_full | rendering | 1,487 | 1 | 1 |
 | paleoclimate_wet_bulb_full | rendering | 2,224 | 1 | 1 |
 | palomas_orrery | gui | 9,490 | 29 | 0 |
-| palomas_orrery_dashboard | gui | 674 | 0 | 0 |
+| palomas_orrery_dashboard | gui | 686 | 0 | 0 |
 | palomas_orrery_helpers | utility | 773 | 10 | 2 |
 | planet9_visualization_shells | rendering/shells | 267 | 1 | 1 |
 | planet_visualization | rendering | 711 | 18 | 5 |
@@ -2647,7 +2690,7 @@ and explains in context.
 | plot_data_exchange | pipeline | 168 | 0 | 3 |
 | plot_data_report_widget | rendering | 560 | 2 | 1 |
 | pluto_visualization_shells | rendering/shells | 565 | 1 | 1 |
-| provenance_scanner | devtool | 1,183 | 1 | 0 |
+| provenance_scanner | devtool | 1,254 | 1 | 0 |
 | report_manager | utility | 124 | 0 | 4 |
 | saturn_visualization_shells | rendering/shells | 1,080 | 3 | 2 |
 | save_utils | pipeline | 795 | 1 | 18 |
@@ -2665,6 +2708,7 @@ and explains in context.
 | shell_configs | other | 2,563 | 5 | 4 |
 | shutdown_handler | utility | 73 | 1 | 5 |
 | simbad_manager | computation | 1,028 | 2 | 6 |
+| skills_index | other | 255 | 0 | 0 |
 | smoke_dipole_cone | other | 144 | 4 | 0 |
 | smoke_phase4 | other | 123 | 1 | 0 |
 | smoke_rotation_axis | other | 145 | 4 | 0 |

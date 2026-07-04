@@ -11,7 +11,7 @@ Philosophy: "Data Preservation is Climate Action"
 
 AI Collaboration: Built with Claude (Anthropic) - conversational AI partnership
 
-Updated 6/16/2026 with Opus 4.8
+Updated 7/4/2026 with Opus 4.6
 """
 
 import os
@@ -132,6 +132,18 @@ LAUNCH_GROUPS = {
          "ledger_index.py",
          "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
          "and migrate DONE items to section C. Run after editing any ledger block.",
+         SCRIPT_DIR,
+         True),
+        ("Update Skill Manifest",
+         "skills_index.py",
+         "Regenerate the Skill Manifest table in the protocol from skills/*/SKILL.md. "
+         "Run after adding, renaming, or versioning a skill.",
+         SCRIPT_DIR,
+         True),
+        ("Data Inventory",
+         "data_inventory.py",
+         "Inventory the large, gitignored data stores (data/, star_data/). "
+         "Writes DATA_INVENTORY.md. Run before handoffs or to check cache state.",
          SCRIPT_DIR,
          True),
         ("Provenance Scanner",
