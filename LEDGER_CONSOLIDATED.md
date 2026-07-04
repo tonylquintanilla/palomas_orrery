@@ -219,12 +219,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*45 live items; 44 need attention (`!`); 45 RICE-scored; 32 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*46 live items; 45 need attention (`!`); 46 RICE-scored; 32 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
+| ! | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | OPEN | 3.2 | 2026-07-04 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
@@ -620,6 +621,26 @@ catalog files).
 ~L615-621, NUMERIC_CLAIM_RE ~L327-338); module_atlas.py (ROLE_MAP ~L43-162,
 classify_role ~L165-173); supersedes L-064 (closed 2026-06-30, food-insecurity
 half done and live); design conversation 2026-06-30, repo HEAD 1f5901e.
+
+#### [L-097] skills_index.py -- Skill Manifest auto-generation (process/tooling)
+<!-- L:097 status:OPEN upd:2026-07-04 section:A flag: rice:2/2/80/1 -->
+- **Devtool mirroring ledger_index.py:** walk skills/, read each SKILL.md
+  frontmatter (name, description) and body version line, regenerate the Skill
+  Manifest table in project_instructions_v3_30.md between markers. Kills
+  manifest-table drift the same way ledger_index.py killed hand-pasted summary
+  rows. Also runs a consistency check: every skill directory has a manifest row
+  and vice versa; version in SKILL.md matches the manifest row.
+- **Pattern:** ledger_index.py (402 lines, marker-based zone regeneration,
+  --check mode for CI-style dry run). Read ledger_index.py as the recipe;
+  mirror the architectural choices (parse -> validate -> regenerate -> report).
+- **Scope:** one file (~150-200 lines), lives in repo root alongside
+  ledger_index.py. Reads skills/*/SKILL.md, writes the zone in
+  project_instructions_v3_30.md (or its successor). Add to
+  ledger-and-session-records skill's tooling section on completion.
+- **Collegial build candidate:** tight enough spec for Fable 5 (or Opus 4.8)
+  via the standard relay. Prompt attached: documentation/FABLE_PROMPT_L097.md.
+**Gap:** build session -- Fable prompt ready, spec is tight.
+**Ref:** L-002 (parent), ledger_index.py (pattern), project_instructions_v3_30.md Part 3 Skill Manifest.
 
 ## PENDING ACTION (Tony-side)
 
