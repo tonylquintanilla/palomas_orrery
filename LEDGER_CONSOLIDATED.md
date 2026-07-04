@@ -433,7 +433,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 (built on 03630ae); cross-ref L-064, L-069.
 
 #### [L-002] Protocol -> Skills refactor (process/tooling)
-<!-- L:002 status:OPEN upd:2026-06-22 section:A flag: rice:3/3/50/3 -->
+<!-- L:002 status:DONE upd:2026-07-04 section:A flag: rice:3/3/50/3 -->
 - **Protocol -> Skills refactor (process/tooling, not orrery code).** Lift the
   task-triggered PROCEDURE/CONVENTION layer of Part 3 into Anthropic SKILL.md
   files (load on demand); keep the JUDGMENT layer (modes, criticality,
