@@ -18,36 +18,31 @@ lists) is preserved in the ledger as institutional memory. Your point
 stands: JPL binary ID encoding and `JSON.stringify(undefined)` guards
 are not philosophy — they're task-triggered reference.
 
-**3. Skills 6-8 sourcing: Code at HEAD PLUS handoffs from documentation/.**
-The workflow handoffs ARE in the repo's `documentation/` directory —
-you can fetch them directly. Use code as the mechanical ground truth
-and handoffs for workflow narrative, design rationale, and lessons.
-Tag any inference not grounded in either source `[VERIFY]`.
+**3. Skills 6-8 sourcing: Derive from code with verify tags.**
+The workflow handoffs are session artifacts, not in the repo. The
+authoritative source is the code at HEAD. Read these modules and derive
+the workflow patterns, tagging inferences `[DERIVED FROM CODE — VERIFY]`:
 
 For earth-system-pipeline (skill 6):
-- Code: `earth_system_generator.py`, `earth_system_common.py`,
-  `food_insecurity_generator.py`, `scenarios_food_insecurity.py`,
-  `scenarios_heatwaves.py`, `scenarios_western_heatwave_march_2026.py`,
-  `scenarios_coral_bleaching.py`
-- Handoffs (in `documentation/`):
-  `HANDOFF_food_insecurity_design_v2.md` (18KB — design rationale)
-  `western_heatwave_handoff_v9.md` (40KB — latest workflow)
-  `HANDOFF_food_insecurity_build_v2.md` (8KB — build lessons)
+- `earth_system_generator.py` (the engine)
+- `earth_system_common.py` (shared helpers: briefing_to_balloon_html,
+  create_info_placemark, ScenarioPicker)
+- `food_insecurity_generator.py` (the food-insecurity engine)
+- `scenarios_food_insecurity.py` (Sudan scenario, stub countries)
+- `scenarios_heatwaves.py` (grid scenario registry)
+- `scenarios_western_heatwave_march_2026.py` (dated-series pattern)
+- `scenarios_coral_bleaching.py` (ocean pattern)
 
 For gallery-pipeline (skill 7):
-- Code: `gallery_studio.py`, `json_converter.py`
-- Gallery repo: https://github.com/tonylquintanilla/tonyquintanilla.github.io
-  (index.html is the viewer)
-- Handoff: `documentation/web_gallery_handoff.md` (253KB — 30+ sessions,
-  the master gallery document. This is large; read at least the latest
-  sessions and the architecture sections)
+- `gallery_studio.py` (the Studio)
+- `json_converter.py` (HTML → JSON)
+- `index.html` in the gallery repo
+  (https://github.com/tonylquintanilla/tonyquintanilla.github.io)
 
 For ledger-and-session-records (skill 8, your renamed version):
-- Code: `ledger_index.py`
-- Source: `LEDGER_CONSOLIDATED.md` (read the header for conventions,
-  format, and the document stack description)
-- Handoffs: `documentation/handoff_v29_ledger_cleanup.md`,
-  `documentation/HANDOFF_v28_consolidated_ledger.md`
+- `ledger_index.py` (index generator + DONE migration)
+- `LEDGER_CONSOLIDATED.md` (the ledger itself — read the header for
+  conventions, format, and the document stack description)
 
 **4. Horizons portability: No. Anchor to the project.**
 No non-orrery astro work in this account. Horizons gets the same

@@ -69,7 +69,8 @@ GAP_STATUS = {'OPEN', 'BLOCKED', 'PENDING-GATE'}
 # Section C (closed/done) sorts last so the live backlog reads first.
 SECTION_ORDER = ['A', 'B', 'D.Movement', 'D.Priority', 'D.Structural',
                  'D.Cosmetic', 'D.Feature-A', 'D.Feature-B', 'D.Feature-C',
-                 'D.Parked', 'D.LooseEnd', 'E', 'G', 'H', 'C']
+                 'D.Parked', 'D.LooseEnd', 'E', 'G', 'H',
+                 'W.Prep', 'W.Active', 'W.Deferred', 'C']
 
 # Tag aliases: normalize legacy/variant section tags to the canonical letter.
 SECTION_ALIASES = {'PENDING': 'B'}
@@ -92,6 +93,9 @@ SECTION_TITLES = {
     'E': 'E. AU-Convention Compliance',
     'G': 'G. Open Questions / Tony Calls',
     'H': 'H. Gallery / Studio Track',
+    'W.Prep': 'W.Prep -- Web Publication prep (before Phase 0)',
+    'W.Active': 'W.Active -- Web Publication active phase',
+    'W.Deferred': 'W.Deferred -- Web Publication deferred (captured)',
 }
 
 # Sections always rendered in the index even when they have no items
