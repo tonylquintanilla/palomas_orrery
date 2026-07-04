@@ -47,7 +47,7 @@ Check context - Uploads? Past chats? The ledger (LEDGER_CONSOLIDATED.md):
   (Chat compression means organic continuation.)
 Pull ground truth - Clone/fetch the GitHub repo at HEAD; record the base SHA
   as the session's base. Build on the repo (or fresh uploads); /mnt/project
-  and project knowledge are orientation only. (See Session-Start Repo Pull,
+  is orientation only. (See Session-Start Repo Pull,
   Part 3.)
 Propose approach - "This looks like targeted/agentic because..."
 Confirm - Wait for go-ahead or redirect
@@ -149,31 +149,25 @@ Context Priority
 Trust in this order (highest first):
 1. Uploaded files (current; mid-session deltas live here)
 2. GitHub repo at HEAD (session-start ground truth, SHA-pinned)
-3. Project knowledge -- auto-synced projection of the repo (v3.27); trustworthy when the SHA matches, stale only if a sync was skipped
-4. Project files (/mnt/project/) -- orientation only; verify against repo
-5. This protocol and the installed skills (versions per the Skill Manifest)
-6. Conversation history
-7. External AI input (Gemini/ChatGPT via Tony)
-8. Claude's memory
-9. Claude's training
+3. This protocol and the installed skills (versions per the Skill Manifest)
+4. Conversation history
+5. External AI input (Gemini/ChatGPT via Tony)
+6. Claude's memory
+7. Claude's training
 
 Project file staleness: /mnt/project/ is a read-only snapshot from session
-start. It does NOT update mid-session or between sessions. When both an
-uploaded file and a project file exist for the same filename, ALWAYS use
-the upload. A bad snippet is a localized error. A complete file from a
-stale base is destructive -- it silently overwrites working code.
-Neither /mnt/project nor project knowledge gates a build -- the GitHub repo
+start (if present). It does NOT update mid-session. When both an uploaded
+file and a project file exist for the same filename, ALWAYS use the upload.
+Neither /mnt/project nor any cached snapshot gates a build -- the GitHub repo
 at HEAD or a fresh upload does (see Session-Start Repo Pull, Part 3).
 
 Live repo vs snapshots: the GitHub repo is live-readable at ANY point in a
 session (git ls-remote / raw fetch are fresh reads), so after a mid-session push,
 re-pull to read the new bytes and re-confirm the round trip -- no re-upload.
-Project knowledge does NOT re-sync mid-session (it is the session-start
-snapshot). Un-pushed working-copy edits live only in uploads, so uploads stay
-tier 1 during active work; the repo shows only committed+pushed bytes, and being
+Un-pushed working-copy edits live only in uploads, so uploads stay tier 1
+during active work; the repo shows only committed+pushed bytes, and being
 live does not promote it over an upload of un-pushed work.
 Conflicts? Ask.
-
 
 PART 2: PRINCIPLES
 Internalize these. They shape judgment.
@@ -309,10 +303,9 @@ ledger-and-session-records   1.0  Ledger edits, ledger_index.py, RICE,
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
 Ground truth for "what is current" is the GitHub repo at HEAD. Tony's loop runs
-sandbox -> test -> local repo -> commit + push, and project knowledge
-AUTO-SYNCS from the repo via the connector (no manual add/delete step). So by
-construction the repo, project knowledge, and -- after a sync -- the next session
-all agree. Repo: https://github.com/tonylquintanilla/palomas_orrery (branch main).
+sandbox -> test -> local repo -> commit + push. Because the push precedes the
+next session, repo HEAD is session-start ground truth by construction.
+Repo: https://github.com/tonylquintanilla/palomas_orrery (branch main).
 At session start, for any build:
 1. Pull the build-target files (or shallow-clone) from raw GitHub at HEAD; record
    the HEAD SHA. (git ls-remote --symref <repo> HEAD gives branch + SHA, no auth;
@@ -326,20 +319,18 @@ SHA separately.
 
 Mid-session the repo stays live-readable: a fresh git ls-remote re-reads HEAD
 (this is how a post-session push is confirmed) and a re-pull reads new bytes
-with no re-upload. Project knowledge does NOT re-sync mid-session. See Context
-Priority, Part 1.
+with no re-upload. See Context Priority, Part 1.
 
-THE SHA IS THE ROUND TRIP. A matching remote HEAD confirms commit, push, AND sync
+THE SHA IS THE ROUND TRIP. A matching remote HEAD confirms commit and push
 in one check -- you read the anchor, you don't audit the pipeline. It is
 unforgeable: the hash derives from the bytes, so a matching HEAD means matching
-content, period. The two failure modes that survive are both honest and visible --
-you didn't push, or you didn't sync -- and both surface the same way: "HEAD is not
-what the handoff expects." Reconcile before building.
+content, period. The one failure mode is honest and visible -- you didn't push
+-- and it surfaces as "HEAD is not what the handoff expects." Reconcile before
+building.
 
-(History: v3.26's stale-snapshot and served-ghost failures both came from the
-manual project-knowledge add/delete step. Auto-syncing project knowledge from the
-repo Tony controls retired that whole class at its source -- the durable fix was
-upstream, as suspected.)
+(History: v3.26-v3.27 debugged stale-snapshot and served-ghost failures in
+project knowledge. v3.30 removed the GitHub project-knowledge sync entirely --
+the repo, the protocol, and the skills are the three stores.)
 
 Uploads Before Project Files [CRITICAL]
 /mnt/project/ is a session-start snapshot; always treat uploads as authoritative,
@@ -358,8 +349,7 @@ as trusting /mnt/project/: a partial read produces confident wrong
 conclusions (e.g. recommending already-finished work because the handoff
 that says it is done was never opened). Tony cannot flag a gap he has no
 way of seeing; enumerating the full set is the only place the gap becomes
-visible, and that is Claude's job. The same caution applies to project
-knowledge, which can also be stale. Emerged May 29, 2026 -- a handoff
+visible, and that is Claude's job. Emerged May 29, 2026 -- a handoff
 review and a v3.24 edit were both built on 9 of 19 uploaded handoffs.
 
 Verify Base Against Handoff [CRITICAL]
@@ -602,8 +592,8 @@ Process:
 - Testing iterates in dependency order: regression gate, then features, then animation. Some bugs are only findable in later rounds (the Sun-checkbox-off bug needed Round 3). A three-round fix is fine when each round teaches something new
 - When deferring a pipeline patch, smoke-test the deferred pipeline to confirm it is in a KNOWN state, not just that it does not error
 - Handoff item numbers get rebased across versions (Paloma's shell track rebased twice: c4 1-22 -> D1 1-41 -> D2 42-54). A number means different things in different handoffs; items leak at the rebase. One authoritative running ledger beats per-handoff renumbering
-- Tony's session loop makes the repo trustworthy: sandbox -> test -> local repo -> provenance/atlas update -> project knowledge -> push, all before a new session. Because the push precedes the session, repo HEAD == session-start ground truth by construction
-- Route around a fragile store you do not control to one you do: project knowledge proved it can be stale and haunted; the repo is Tony's, so make it the build base and the store's fragility stops mattering for correctness
+- Tony's session loop makes the repo trustworthy: sandbox -> test -> local repo -> provenance/atlas update -> push, all before a new session. Because the push precedes the session, repo HEAD == session-start ground truth by construction
+- Route around a fragile store you do not control to one you do: project knowledge proved it could be stale and haunted; the repo is Tony's, so make it the build base -- and ultimately remove the fragile store entirely (v3.30, July 2026)
 - Skills are stores too: author them in the repo, version them, SHA-stamp them, and let the ledger log their changes -- an unversioned knowledge layer is the drift class this protocol exists to kill
 
 Philosophical:

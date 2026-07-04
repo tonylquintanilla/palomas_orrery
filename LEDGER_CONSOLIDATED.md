@@ -541,7 +541,7 @@ design conversation this session; cross-ref L-071 (sibling pattern, not
 parent), L-060 (El Nino context, no causal claim).
 
 #### [L-078] Provenance scanner: systematic coverage via module_atlas role classification
-<!-- L:078 status:OPEN upd:2026-06-30 section:A flag: rice:3/3/70/3 -->
+<!-- L:078 status:OPEN upd:2026-07-04 section:A flag: rice:3/3/70/3 -->
 - **Root cause (why files get missed in the first place).** provenance_scanner.py
   gates display-string scanning on a hand-maintained narrative_files allow-list;
   a new file is invisible until someone notices and adds its name. The scanner
@@ -593,10 +593,23 @@ parent), L-060 (El Nino context, no causal claim).
   took ~10 sessions with multiple Gemini cross-checks to harden.** Not treating
   this as a quick patch. Check 1 (categories) is the tractable mechanical build.
   Check 2 (vocabulary near-miss) is the one likely to need the same kind of
-  cross-check / corpus-tuning the original scanner got. First full run under the
-  new coverage will be heavy (the backlog: 6 missing Earth System files plus
-  likely energy_imbalance.py and the paleoclimate_*_full family surfacing real,
-  previously-invisible findings); subsequent runs are maintenance.
+  cross-check / corpus-tuning the original scanner got.
+- **STATUS (July 4, 2026): step (1) is LIVE -- role-driven inclusion landed.**
+  The scanner at HEAD imports classify_role from module_atlas and uses
+  NARRATIVE_ROLES = {data, scenario, rendering, rendering/shells, computation}
+  additively over the legacy narrative_files allow-list (line 635-639). The
+  COVERAGE GAPS section is working (4 modules flagged: shell_configs 91,
+  food_insecurity_generator 1, orrery_rendering 1, smoke_rotation_axis 1).
+- **First full run under new coverage: Tier-1 = 104** (all score 16: V=4
+  recalled x C=4 public-facing display strings) across 26 modules. Largest
+  contributors: idealized_orbits.py (23 findings), paleoclimate_wet_bulb_full
+  (11), paleoclimate_human_origins_full (9), paleoclimate_visualization_full (7),
+  planet_visualization_utilities (7), sgr_a_grand_tour (6),
+  scenarios_western_heatwave_march_2026 (4), sgr_a_visualization_core (4),
+  exoplanet_coordinates (4). These are real, previously-invisible uncited
+  display strings -- the predicted "heavy first run" from the design. The
+  previous Tier-1=0 was true only for the smaller file set the legacy
+  allow-list covered.
 - **Carried forward from L-064 (closed, superseding this item):** F/C vocabulary
   gap; energy_imbalance.py (corroborated independently by L-060's own deferred
   Phase-2 note -- ~47 candidate hits, zero citation markers found in a manual
@@ -606,21 +619,18 @@ parent), L-060 (El Nino context, no causal claim).
   volume, thin citation density -- likely the riskier one, same shape as
   scenarios_western_heatwave_march_2026.py); star_notes.py:1257 (still open,
   pre-existing, reconcile in the same pass).
-**Gap:** design has converged on architecture (role-driven inclusion + the exact
-near-miss hook point) but NOT on the near-miss pattern's tuning -- that's the
-real remaining design work before any build. Sequencing: (1) wire role-driven
-inclusion off module_atlas.classify_role, scratch-verify scenarios_heatwaves.py
-comes back clean as expected; (2) build + corpus-tune the near-miss detector,
-likely with a Gemini cross-check given the original scanner's precedent; (3) add
-food_insecurity_generator + scenarios_food_insecurity to module_atlas's own
-ROLE_MAP (currently 'other' there, a small confirmed drift of its own); (4) run
-the real scanner full-tree, triage whatever the heavy first run surfaces
-(energy_imbalance.py, paleoclimate family, star_notes.py:1257, the 5 data-role
-catalog files).
+**Gap:** step (1) done. Remaining: (a) triage the 104 Tier-1 findings across
+26 modules -- cite, remove-and-note, or add to provenance_exceptions.json per
+the three-outcome rule; (b) resolve the 4 COVERAGE GAP modules (add to ROLE_MAP
+or narrative_files); (c) step (2) near-miss vocabulary detector (design
+converged on hook point, tuning NOT done); (d) step (3) F/C bare-degree fix to
+NUMERIC_CLAIM_RE. Triage (a) is the heavy lift; (b-d) are mechanical once (a)
+establishes the baseline.
 **Ref:** provenance_scanner.py (_extract_string_units ~L711-721, narrative_files
-~L615-621, NUMERIC_CLAIM_RE ~L327-338); module_atlas.py (ROLE_MAP ~L43-162,
-classify_role ~L165-173); supersedes L-064 (closed 2026-06-30, food-insecurity
-half done and live); design conversation 2026-06-30, repo HEAD 1f5901e.
+~L623, NARRATIVE_ROLES ~L635, classify_role import ~L216, coverage-gap report
+~L1271-1283); module_atlas.py (classify_role, ROLE_MAP); L-064 (closed
+predecessor); PROVENANCE_AUDIT.md (July 4, 2026 run: 115 files, 666 findings,
+Tier-1 = 104).
 
 #### [L-097] skills_index.py -- Skill Manifest auto-generation (process/tooling)
 <!-- L:097 status:OPEN upd:2026-07-04 section:A flag: rice:2/2/80/1 -->
@@ -1386,7 +1396,9 @@ SI), retrieved 2026-06-22.
   (star_notes:1257's "billion" trigger deliberately deferred to the L-064 sweep).
 **Gap:** none -- move to section C.
 **Ref:** L-001 (parent); L-064 (scanner); food_insecurity_generator.py; ge_sudan.jpg.
-**Tony:** promote the "principle banked" to the protocol at the next update. 
+**Tony:** promote the "principle banked" to the protocol at the next update.
+*Addressed: earth-system-pipeline skill captures this as the restraint
+discipline's core stance (v3.30, L-002).*
 
 #### [L-075] KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine)
 <!-- L:075 status:DONE upd:2026-06-30 section:C flag: rice:3/3/95/2 -->
@@ -1501,6 +1513,58 @@ earth_system_controller.py; cross-ref L-075 (heat 3+5 this generalizes), L-001
   Increment 3 (local-asset fallback) DECLINED for this reason.
 **Linked:** sibling to L-058 (open Studio items); preview reuses json_converter as-is.
 **Gap:** none -- move to section C.
+
+#### [L-064] Provenance-scanner format sweep -- Earth System family
+<!-- L:064 status:DONE upd:2026-06-30 section:C flag: rice:3/3/100/2 -->
+- **CONFIRMED for food_insecurity_generator (the per-module question this item
+  poses): the scanner does NOT traverse it.** Two compounding gaps, both proven
+  empirically (uncited recognized-unit token in a fresh file -> zero findings):
+  (1) ALLOW-LIST gap -- _extract_string_units only runs for a hardcoded
+  narrative_files set (+ *_visualization_shells); a new module is excluded, so
+  its display strings are never extracted/scored. (2) VOCABULARY gap --
+  NUMERIC_CLAIM_RE recognizes only physical units (AU/km/deg/masses/K/kg...), no
+  people|percent|%|million|thousand|billion, so humanitarian figures aren't seen
+  as claims even inside an allow-listed file. The module's Tier-1=0 is a FALSE
+  clean.
+- **Verified two-part fix (on a SCRATCH copy; repo scanner untouched):** add
+  'food_insecurity_generator' to narrative_files; append the humanitarian units
+  to NUMERIC_CLAIM_RE. Under it, this module's sourced strings all read "Has
+  source citation," Tier-3 -- the construction-site # Source: discipline holds.
+- **Family ripple (decision driver):** the vocabulary extension newly surfaces a
+  pre-existing REAL Tier-1 -- star_notes.py:1257, "No source citation (recalled)"
+  -- invisible before only because of the vocabulary gap. Part (1) is local/safe;
+  part (2) is family-wide CI with a ripple to triage.
+- **Live-repo check (2026-06-30, @1f5901e): food's half is ALREADY LANDED, not
+  just scratch-verified.** narrative_files now contains 'food_insecurity_generator'
+  and NUMERIC_CLAIM_RE now carries people|persons?|percent|%. The "scratch copy"
+  framing above is historical -- the food-specific fix is live. star_notes.py:1257
+  triage status not re-confirmed this pass.
+- **Scope expansion (2026-06-30, L-077 scaffold session) found this was bigger
+  than one missing file, and that the manual-list mechanism itself was the
+  problem, not just its current contents.** 6 of 7 Earth System files were
+  missing from narrative_files; a second, separate vocabulary gap (no bare F/C
+  degree-suffix pattern -- "117F" / "47.2C" don't match anything) sits underneath
+  the humanitarian one; and a manual proxy check found likely real gaps beyond
+  the Earth System family entirely (energy_imbalance.py, the paleoclimate_*_full
+  family). Full findings preserved below for reference.
+- [Full per-file risk breakdown and the manual-proxy methodology from the
+  2026-06-30 session retained here verbatim -- see prior revision of this block
+  for the complete scenarios_heatwaves.py / scenarios_western_heatwave_march_2026.py
+  / scenarios_coral_bleaching.py risk split, all still valid as groundwork.]
+**CLOSED BY DECISION (2026-06-30):** the food-insecurity half is genuinely done
+and verified live -- that closes this item. The "sweep remaining Earth System
+modules" half is NOT more of the same work -- it needs a different MECHANISM
+(systematic, role-driven coverage off module_atlas.py, not hand-editing a list
+file by file), so it is new tooling work, not a sweep remainder. Promoted to
+L-078, the same shape as L-009 spinning off L-061 for new physics rather than
+calling it a cone remainder. All empirical findings above (the F/C gap, the
+energy_imbalance.py / paleoclimate candidates, the per-file risk split) carry
+forward into L-078 as groundwork, not lost.
+**Gap:** none -- move to section C.
+**Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; module_atlas.py; originated
+from L-001; confirmed via food_insecurity_generator build
+(HANDOFF_food_insecurity_build_v2.md); superseded by L-078, 2026-06-30,
+repo HEAD 1f5901e.
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -1690,58 +1754,6 @@ color-name half (SystemButtonFace -> hex literal / sys.platform detection / ttk)
 <!-- L:028 status:OPEN upd:2026-06-11 section:D.Structural flag: rice:1/1/100/1 -->
 Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
 **Gap:** fix on next touch (binary-mode).
-
-#### [L-064] Provenance-scanner format sweep -- Earth System family
-<!-- L:064 status:DONE upd:2026-06-30 section:C flag: rice:3/3/100/2 -->
-- **CONFIRMED for food_insecurity_generator (the per-module question this item
-  poses): the scanner does NOT traverse it.** Two compounding gaps, both proven
-  empirically (uncited recognized-unit token in a fresh file -> zero findings):
-  (1) ALLOW-LIST gap -- _extract_string_units only runs for a hardcoded
-  narrative_files set (+ *_visualization_shells); a new module is excluded, so
-  its display strings are never extracted/scored. (2) VOCABULARY gap --
-  NUMERIC_CLAIM_RE recognizes only physical units (AU/km/deg/masses/K/kg...), no
-  people|percent|%|million|thousand|billion, so humanitarian figures aren't seen
-  as claims even inside an allow-listed file. The module's Tier-1=0 is a FALSE
-  clean.
-- **Verified two-part fix (on a SCRATCH copy; repo scanner untouched):** add
-  'food_insecurity_generator' to narrative_files; append the humanitarian units
-  to NUMERIC_CLAIM_RE. Under it, this module's sourced strings all read "Has
-  source citation," Tier-3 -- the construction-site # Source: discipline holds.
-- **Family ripple (decision driver):** the vocabulary extension newly surfaces a
-  pre-existing REAL Tier-1 -- star_notes.py:1257, "No source citation (recalled)"
-  -- invisible before only because of the vocabulary gap. Part (1) is local/safe;
-  part (2) is family-wide CI with a ripple to triage.
-- **Live-repo check (2026-06-30, @1f5901e): food's half is ALREADY LANDED, not
-  just scratch-verified.** narrative_files now contains 'food_insecurity_generator'
-  and NUMERIC_CLAIM_RE now carries people|persons?|percent|%. The "scratch copy"
-  framing above is historical -- the food-specific fix is live. star_notes.py:1257
-  triage status not re-confirmed this pass.
-- **Scope expansion (2026-06-30, L-077 scaffold session) found this was bigger
-  than one missing file, and that the manual-list mechanism itself was the
-  problem, not just its current contents.** 6 of 7 Earth System files were
-  missing from narrative_files; a second, separate vocabulary gap (no bare F/C
-  degree-suffix pattern -- "117F" / "47.2C" don't match anything) sits underneath
-  the humanitarian one; and a manual proxy check found likely real gaps beyond
-  the Earth System family entirely (energy_imbalance.py, the paleoclimate_*_full
-  family). Full findings preserved below for reference.
-- [Full per-file risk breakdown and the manual-proxy methodology from the
-  2026-06-30 session retained here verbatim -- see prior revision of this block
-  for the complete scenarios_heatwaves.py / scenarios_western_heatwave_march_2026.py
-  / scenarios_coral_bleaching.py risk split, all still valid as groundwork.]
-**CLOSED BY DECISION (2026-06-30):** the food-insecurity half is genuinely done
-and verified live -- that closes this item. The "sweep remaining Earth System
-modules" half is NOT more of the same work -- it needs a different MECHANISM
-(systematic, role-driven coverage off module_atlas.py, not hand-editing a list
-file by file), so it is new tooling work, not a sweep remainder. Promoted to
-L-078, the same shape as L-009 spinning off L-061 for new physics rather than
-calling it a cone remainder. All empirical findings above (the F/C gap, the
-energy_imbalance.py / paleoclimate candidates, the per-file risk split) carry
-forward into L-078 as groundwork, not lost.
-**Gap:** none -- move to section C.
-**Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; module_atlas.py; originated
-from L-001; confirmed via food_insecurity_generator build
-(HANDOFF_food_insecurity_build_v2.md); superseded by L-078, 2026-06-30,
-repo HEAD 1f5901e.
 
 ### D.Cosmetic -- polish (bundle when convenient)
 
