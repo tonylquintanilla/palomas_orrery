@@ -1,6 +1,7 @@
 ---
 name: agentic-pre-test
 description: Pre-delivery runtime test protocol for Paloma's Orrery Python deliverables. Use BEFORE delivering any complete file or agentic code in the Paloma's Orrery project, and after ANY data-content sweep (hover strings, legendgroup wiring, marker styling). Trigger words in an orrery coding task include "complete file", "agentic", "sweep", "deliver", "generate the module". Covers py_compile, the xvfb headless GUI run, the SystemButtonFace throwaway-copy rule, and the live-dispatch smoke test. The resident protocol also carries a one-line pointer to this skill; if you are about to hand Tony a complete orrery file and this skill has not loaded, load it.
+fires_when: BEFORE delivering complete files/agentic code; after data-content sweeps
 ---
 
 # Agentic Pre-Test Protocol [CRITICAL]

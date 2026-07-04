@@ -1,6 +1,7 @@
 ---
 name: safe-file-editing
 description: Safe practices for editing and patching existing source files, in any project. Use whenever editing existing code files (especially .py), delivering line-targeted snippets, applying sed / regex / string-replacement patches, writing multi-edit patch scripts, or checking file encoding and line endings. Covers bottom-up edit ordering, Unicode-safe binary-mode patching, transactional multi-edit scripts, LF/ASCII encoding gates, platform-neutral patterns, and shell verification gotchas (grep -c inside && chains). This is the PORTABLE editing discipline; project-specific pre-delivery testing for Paloma's Orrery lives in the agentic-pre-test skill.
+fires_when: Editing existing files, patch scripts, sed/regex edits, encoding checks (portable)
 ---
 
 # Safe File Editing

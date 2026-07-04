@@ -1,6 +1,7 @@
 ---
 name: ledger-and-session-records
 description: Ledger and session-record conventions for the Paloma's Orrery project. Use when creating, updating, or closing items in LEDGER_CONSOLIDATED.md, running or modifying ledger_index.py, RICE-scoring items, writing or reading session handoffs or build manifests, recording protocol or skill version changes, regenerating MODULE_ATLAS.md via module_atlas.py, or tracing dependencies with dep_trace.py. Trigger words include L-handle references (L-001, L-078...), "ledger", "handoff", "manifest", "RICE", "module atlas", "dependency trace". Do not use for projects other than Paloma's Orrery.
+fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep_trace
 ---
 
 # Ledger and Session Records

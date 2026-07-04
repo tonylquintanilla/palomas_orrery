@@ -1,6 +1,7 @@
 ---
 name: provenance-discipline
 description: Provenance and citation discipline for the Paloma's Orrery project. Use whenever running or discussing provenance_scanner.py, reading PROVENANCE_AUDIT.md, clearing Tier-1 findings, adding or reviewing # Source: citations, editing provenance_exceptions.json, embedding constants or numeric/factual claims in orrery display strings or data modules, or preparing a GitHub push (Tier-1 = 0 is the push gate). Also use when composing on-layer or user-facing factual text for any orrery visualization. Do not use for projects other than Paloma's Orrery.
+fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 ---
 
 # Provenance Discipline

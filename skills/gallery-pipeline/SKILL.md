@@ -1,6 +1,7 @@
 ---
 name: gallery-pipeline
 description: Web gallery pipeline for the Paloma's Orrery project (palomasorrery.com). Use for any task touching gallery_studio.py, json_converter.py, gallery_editor.py, gallery_json_fixer.py, the index.html gallery viewer, gallery_metadata.json, gallery_config.json, the tonyquintanilla.github.io repo, or GitHub Pages deployment. Use when curating or exporting plots through Gallery Studio, converting HTML to gallery JSON, editing gallery cards or categories, working with _studio_config / _studio / _encyclopedia / _kmz_handoff / _original_text keys, studio presets, mobile or portrait rendering, or the WYSIWYG preview. Do not use for projects other than Paloma's Orrery.
+fires_when: Gallery Studio, json_converter, index.html viewer, gallery cards
 ---
 
 # Gallery Pipeline

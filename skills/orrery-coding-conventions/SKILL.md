@@ -1,6 +1,7 @@
 ---
 name: orrery-coding-conventions
 description: Coding and visual conventions for the Paloma's Orrery solar system visualization project (palomas_orrery.py, *_visualization_shells.py, SHELL_CONFIGS, plot_objects/animate_objects, planet_visualization*, star_visualization_gui, and companion orrery modules). Use whenever working in the Paloma's Orrery codebase on Plotly traces, markers, hover text, legends, legendgroups, 3D axes, shells, module docstrings, or any new or modified visual element -- even if no convention is named in the request. Covers the marker symbol taxonomy, single info marker pattern, hover-text AU convention, 3D axis dtick/range control, credit lines, module docstring standard, barycenter rule, and the live shell dispatch path. Do not use for projects other than Paloma's Orrery.
+fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new visuals
 ---
 
 # Orrery Coding Conventions
