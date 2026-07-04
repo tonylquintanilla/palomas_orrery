@@ -219,22 +219,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*56 live items; 45 need attention (`!`); 56 RICE-scored; 21 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*45 live items; 44 need attention (`!`); 45 RICE-scored; 32 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-|  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
-|  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
-|  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
-|  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 2.1 | 2026-06-30 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
-| ! | L-002 | Protocol -> Skills refactor (process/tooling) | OPEN | 1.5 | 2026-06-22 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 
@@ -264,7 +259,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-028 | ASCII em-dash violation, comet_visualization_shells.py L257/505/519 | OPEN | 1.0 | 2026-06-11 |
 | ! | L-015 (#5) | _info import cleanup (~89+87 imports, 2 files) | OPEN | 0.9 | 2026-06-18 |
 | ! | L-016 (#6) | Archive dead shell functions | OPEN | 0.9 | 2026-06-18 |
-|  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
 
 ### D.Cosmetic -- Polish
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -298,17 +292,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-046 (#N6) | Studio encounter-generator -> preset-authoring capability (refactor + Artemis redo; coupled, two repos) | OPEN | 2.2 | 2026-06-21 |
-|  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
-|  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 | ! | L-067 | measure_animation_html.py file-browser dialog (B5) | OPEN | 0.8 | 2026-06-23 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
-
-### D.Parked (Tony calls)
-| Gap | L# | Item | Disposition | Score | Updated |
-|:---:|----|------|-------------|:-----:|---------|
-|  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
-|  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 
 ### D.Loose end to reconcile
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -329,7 +315,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### H. Gallery / Studio Track
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-|  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
@@ -338,7 +323,18 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
+|  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
+|  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
+|  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
+|  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
+|  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
+|  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
+|  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
+|  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
+|  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
+|  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
+|  | L-049 (#N8) | Comet info-marker superposition cluster | DONE | 0.5 | 2026-06-23 |
 |  | L-004 | Apply C2 fix pass + run ANIMATION_TEST_PROTOCOL_v4_1, push | DONE | -- | 2026-06-17 |
 |  | L-005 | Commit protocol v3.28 (or v3.29) to repo root | DONE | -- | 2026-06-17 |
 |  | L-006 | Mercury +0.2 R_M northward dipole offset | DONE | -- | 2026-06-20 |
@@ -432,42 +428,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
 (built on 03630ae); cross-ref L-064, L-069.
 
-#### [L-002] Protocol -> Skills refactor (process/tooling)
-<!-- L:002 status:DONE upd:2026-07-04 section:A flag: rice:3/3/50/3 -->
-- **Protocol -> Skills refactor (process/tooling, not orrery code).** Lift the
-  task-triggered PROCEDURE/CONVENTION layer of Part 3 into Anthropic SKILL.md
-  files (load on demand); keep the JUDGMENT layer (modes, criticality,
-  anti-patterns, Foundation, double-helix) resident. Sketch-first /
-  design-before-build -- the framing below is the leg-up from the v3.29 cleanup,
-  NOT the design itself.
-- **Sorting principle (the design lever):** a skill only helps if its trigger
-  fires at the moment of need. So the cut is NOT QUALITY-vs-CRITICAL and NOT
-  procedure-vs-judgment -- it is "does the moment-of-need announce itself in the
-  task?" Task-coupled guidance (writing hover text -> AU convention) extracts
-  cleanly; checkpoint guidance that must fire UNPROMPTED (session start, every
-  delivery) can't be a skill -- nothing in the request triggers it -- so it stays
-  resident by standing instruction.
-- **Three buckets (v3.29 Part-3 inventory; illustrative, not the final set):**
-  (A) EXTRACT -- task-triggered conventions/procedures: docstring standard,
-      single-info-marker, marker-symbol, hover-AU, 3D-axis, Horizons centers,
-      provenance-scanner mechanics, a safe-editing bundle (bottom-up + binary-mode
-      + file-encoding), platform-neutrality, credit-line, barycenter.
-  (B) RESIDENT POINTER + skill body -- CRITICAL but task-coupled: Agentic Pre-Test
-      (a resident one-liner fires it; the commands + live-dispatch smoke test live
-      in the skill).
-  (C) STAY RESIDENT -- checkpoint CRITICAL gates, never extract: SHA round trip,
-      uploads-before-project, enumerate-uploads, verify-base, verify-execution,
-      check-parallel-pipelines, fetched-vs-recalled, show-the-envelope; + Parts 1/2/4.
-- **Fable-5 caveat (packaging, not content):** skill content is model-invariant; a
-  larger-scope model only changes the ECONOMICS of carrying Part 3 resident. Design
-  the boundary now (cheap, reversible); defer the extraction build until the
-  platform is known -- a bigger context may pull some (A)/(B) items back to (C).
-  Build risks rework; design does not.
-- **Where the deferred design work actually is:** writing each skill's TRIGGER
-  DESCRIPTION (the SKILL.md description is what fires it) + the bundling decisions
-  (how many skills, what groups). That is the sketch-first session.
-**Gap:** deferred design session (possibly post-Fable): finalize the (A)/(B)/(C) sort, write each skill's trigger description, decide bundling. Hard constraint: bucket (C) gates stay resident. RICE holds at 3/3/50/3 until the design lands.
-
 #### [L-060] ENSO Standalone Chart (Earth System track)
 <!-- L:060 status:OPEN upd:2026-06-18 section:A flag: rice:3/3/75/2.5 -->
 - **ENSO standalone gallery chart (design locked, build next session).** Earth
@@ -522,80 +482,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
   new wording is decided.
 **Gap:** decide the new Note wording (light design -- what should it say now?), then a Mode-1 snippet into palomas_orrery.py (grep the current Note string first). Could alternatively live in D.Cosmetic; kept in A, paired with L-062.
 
-#### [L-065] European heat wave heat map (Earth System track)
-<!-- L:065 status:DONE upd:2026-06-25 section:A flag: rice:3/3/80/1.5 -->
-- **European heat wave 2026 -- new heat map, reuses the existing ERA5 framework.**
-  Earth System / stressors family (the "heat" member named in the food-insecurity
-  handoff). A dated temperature heat map of the ongoing 2026 European heat wave,
-  built on the existing ERA5/Copernicus heat-map chassis -- new region + date
-  config, NOT a new pipeline. TIMELY: a second, hotter wave began 22 Jun 2026
-  (Western + Central Europe), deaths reported and June records falling; gallery +
-  Reel value is time-sensitive while it is in the news.
-- **Data = Fetched, trusted:** ERA5 2m temperature via Copernicus CDS (the live
-  pipeline). Note the ~5-day near-real-time lag -- "now" honestly means up to ~5
-  days back, so the layer is dated / pinned / deliberately re-pulled (no live
-  auto-update), same as the family. Confirm exact dates, extent, and peak values
-  at fetch time; do NOT recall breaking-news numbers (they go stale fast).
-  Copernicus Sentinel-3 LST is the near-real-time surface-temperature alternative
-  if a snapshot is wanted alongside the air-temp reanalysis.
-- **Human-impact text = composed/transcribed tier (two-tier on-layer text; see
-  L-001 / L-064).** If the layer carries any casualty / health-alert / attribution
-  text, it is transcribed from an authority (national met services, EU Copernicus
-  C3S, WMO, health agencies, WWA-style attribution), per-number `# Source:` within
-  scanner lookback, Tier-1 visible, cite-or-remove. Climate-change attribution
-  belongs to the cited authority in its voice -- we never author it; the reader
-  connects it to the family thesis. Breaking-news tolls are volatile and
-  contested -- transcribe a dated, sourced figure at build or omit.
-- CLOSED 2026-06-25 (on 4685906): Mode-5 verified -- teaser (Gosport 36.1C pin,
-    source visible, single title, "Click 3D Earth" CTA restored) + KMZ card (peak
-    auto-filled, no [TO-FETCH]). Final record correction: UK -> Gosport 36.1C
-    (Met Office, 24 Jun); attribution dated to Climate Central CSI (24 Jun 2026);
-    Tama upgraded to AEMET primary. Tier-1 = 0. Parked, non-blocking: Sentinel-3
-    LST stage-1 snapshot (separate artifact); WWA rapid study to supersede the CSI
-    line if it publishes.
-**Gap:** scope at build: pick region window + date(s) (current wave from 22 Jun
-2026, or the May + June arc), reuse the ERA5 heat-map generator (read the live
-pattern at HEAD first), decide whether any impact text appears and if so wire it
-through the composed-tier discipline. Confirm provenance scanner coverage of the
-heat-map generator's display path (the L-064 question, asked locally).
-**Ref:** existing ERA5/Copernicus heat-map framework; Copernicus CDS (ERA5 2m
-temp) + Sentinel-3 LST; EU Copernicus Climate Change Service (C3S); L-001 + L-064
-(two-tier on-layer text + scanner-format sweep). Current-event context: 2026
-European heatwaves (record June temps; deaths reported across FR/UK/IE/ES/AT/DE/
-SI), retrieved 2026-06-22.
-**Note:** WATCH: World Weather Attribution rapid study on the June 2026 event. If it
-  publishes, it is the strongest citable attribution -- replace the CSI/C3S line
-
-#### [L-069] Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan)
-<!-- L:069 status:DONE upd:2026-06-24 section:A flag: rice:2/3/95/2 -->
-- **BUILT + RENDER-CONFIRMED (Mode-5, ge_sudan.jpg 2026-06-24), committed 7923ac2.**
-  10 maroon proportional dots in a toggle-able folder "Phase 5 (Catastrophe)
-  populations (area level)", one per area carrying a mapped Phase 5 population (all
-  mapped P4): Beliel 26,411 ... Kadugli 930. Sized area ~ population (sqrt); placed
-  at each area's representative interior point. Renders correctly clustered in North
-  Darfur, South Darfur (Nyala) and South Kordofan.
-- **Pure IPC passthrough -- zero hardcoded/composed/summed numbers.** Balloon reads
-  only area_name / overall_phase / phase5_population / phase5_percentage / population
-  at runtime. "Catastrophe" (population term) used throughout; "Famine" (area term,
-  none here) appears nowhere on the dots -- verified in KMZ bytes.
-- **Dot-size legend key added** (Mode-5 follow-up, approved): legend card shows a
-  large + small maroon dot keyed to the data's actual max/min phase5_population
-  (read at runtime, not hardcoded), caption "larger = more people". Render-confirmed.
-- **Causal-restraint wording tightened:** removed "the reader connects the pattern"
-  from C3. C3 now ends "It draws no causal arrow of its own."
-- **PRINCIPLE BANKED (generalizes to L-070 and every sensitive layer):** state the
-  basis for the visualization; do NOT hand the lay reader a connection we will not
-  draw ourselves. "The reader connects the pattern" is buck-passing -- naming the
-  basis is honest, outsourcing the inference is not. (Tony, 2026-06-24.)
-- **Scanner CATCHES the module (real clean, not false):** L-064 part-1 (allow-list)
-  + narrow vocab add (people|persons?|percent|%). Tier-1=0, zero family ripple
-  (star_notes:1257's "billion" trigger deliberately deferred to the L-064 sweep).
-**Gap:** CLOSED (render-confirmed). Residual family work tracked elsewhere: GUI
-registration under L-001; magnitude-word scanner coverage under L-064. Move to
-section C at next reconcile if you prefer closed items there.
-**Ref:** L-001 (parent); L-064 (scanner); food_insecurity_generator.py; ge_sudan.jpg.
-**Tony:** promote the "principle banked" to the protocol at the next update. 
-
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
 <!-- L:070 status:OPEN upd:2026-06-24 section:A flag: rice:2/3/45/3 -->
 - **Extend the food-insecurity view across the Sudan-war refugee shed:** Sudan
@@ -627,91 +513,6 @@ neighbor at fetch time (Tony, manual). Scope: which neighbors in v1.
 - **Close when:** the dome resolves and the series is complete.
 **Ref:** L-065 (build + chassis, closed); scenarios_heatwaves.py; Western
 dated-series precedent (scenarios_western_heatwave_march_2026.py).
-
-#### [L-075] KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine)
-<!-- L:075 status:DONE upd:2026-06-30 section:A flag: rice:3/3/95/2 -->
-- **Problem.** The KMZ intel card was a fixed-size matplotlib PNG ScreenOverlay
-  pinned top-left -- it could not reflow and collided with the Google Earth search
-  bar on mobile, the long briefing unreadable on a phone.
-- **"3+5" redesign (earth_system_generator.py; built on 9007ea3 -> pushed 3ba4e8a).**
-  (3) intel card shrunk to a compact always-on header (title + date + "tap the (i)
-  pin" hint) + a tappable info "i" Placemark at the grid centroid whose balloon
-  carries the full briefing. (5) population-exposure key folded into the balloon;
-  risk-scale colorbar moved bottom-right -> right-edge-centered, off the GE nav/3D
-  buttons; header dropped below the mobile search bar. New helpers
-  create_info_placemark + _briefing_to_html; producer-level change in run_scenario
-  / build_spikes_kml.
-- **Key fix -- CDATA.** simplekml 1.3.2 entity-escapes description fields by default
-  (HTML would render as literal tags); wrapping the balloon in <![CDATA[...]]> makes
-  simplekml emit it unescaped (base.py leaves CDATA blocks untouched), so GE renders
-  it as HTML -- matching the proven desktop probe.
-- **Structural win (parallel-pipeline).** Fix landed in the producer (run_scenario /
-  build_spikes_kml), so every heatwave / coral / coastal scenario inherits 3+5 on its
-  next regeneration -- not a per-europe_2026 edit.
-- **Verified.** py_compile; ASCII/LF; synthetic KML smoke (CDATA balloon, briefing
-  reflow, exposure key, repositioned overlays, pop-legend ScreenOverlay removed).
-  Mode-5 (Tony, 2026-06-29): europe_2026 regenerated (cached ERA5, offline) and
-  confirmed on DESKTOP + iPad + iPhone across Chrome / Bing / Safari -- balloon
-  renders everywhere, collision gone, readable. iPhone full-screen sheet is the
-  cleanest render; iPad docks the balloon inline. Gallery KMZ pushed d25fd93.
-- **iOS banner (app chrome, not the KMZ).** Only the iPhone shows the "content is
-  controlled by the author... do not enter passwords" banner: at phone size GE
-  presents the balloon as a full-screen web sheet (which carries the standard safety
-  banner); the iPad docks it inline (no sheet, no banner). Same file, same HTML;
-  harmless (no input field), not switchable from the KML side.
-- **Polish (delivered this session; 2 lines, verified; LANDS on the next europe_2026
-  regenerate + gallery push).** header screenxy y 0.90 -> 0.84 (iPhone search-bar
-  clearance); pin label scenario_id -> title so it matches the balloon heading
-  ("Europe Heat Dome (June 2026) - tap for details"). Both Tony-approved. Only
-  remaining action on this block; a quick re-confirm on the next regenerate closes it.
-- **Dead code surfaced.** create_pop_legend_card is now unused (exposure key folded
-  into the balloon); left defined to keep the live push minimal-risk -> remove in the
-  L-068 dead-code sweep, not its own push.
-- **Generalized to the family (this session -> L-076).** create_info_placemark +
-  the briefing-to-HTML helper were extracted to earth_system_common.py and the
-  3+5 card + tappable i-pin applied to the FOOD generator too; the picker was
-  also generalized (ScenarioPicker). Heat balloon verified byte-identical.
-**Linked:** chassis from L-065 (europe_2026 build); series tracked under L-071;
-dead-code removal -> L-068. Icon uses remote Google info-i.png (probe parity); bundle
-a local icon only if the iOS pin glyph misbehaves.
-**Ref:** earth_system_generator.py (run_scenario, build_spikes_kml, build_impact_kml,
-create_intel_card, create_info_placemark, _briefing_to_html); simplekml 1.3.2 base.py
-CDATA behavior.
-
-#### [L-076] Earth System shared module (earth_system_common) + 3+5 generalized to food
-<!-- L:076 status:DONE upd:2026-06-30 section:A flag: rice:3/3/95/2 -->
-- **What.** Extracted the engine-agnostic KMZ/UI helpers shared by the heat and
-  food generators into a new module, earth_system_common.py, retiring the
-  heat<->food duplication before it set in: briefing_to_balloon_html();
-  create_info_placemark(kml, title, date, briefing, lat, lon, extra_html="") --
-  the tappable "i" pin + CDATA balloon, with the heat population-exposure key now
-  passed in via extra_html rather than baked in; and ScenarioPicker(scenarios,
-  run_fn, ...), a generic Tkinter menu whose run_fn(scenario, status_callback) is
-  injected (heat passes run_scenario, food passes a small adapter over its run()).
-  Both generators import from it; both __main__ blocks launch via the shared
-  picker.
-- **Food 3+5 parity (detail under L-001).** With the shared helpers in place, the
-  food KMZ gained the compact header + single tappable i-pin + consolidated
-  balloon -- the L-075 pattern applied to categorical/food data instead of the
-  scalar heat field. The food generator deliberately still does NOT import the
-  scalar heat engine; it shares only the engine-agnostic UI/KMZ helpers.
-- **scenarios_food_insecurity.py.** New scenario registry (Sudan now; commented
-  stubs for South Sudan / Chad / CAR / Ethiopia) -- the structure L-070 builds on.
-- **Controller single-source (--preload).** earth_system_controller.py gained
-  preload_layers(prefix) + a --preload <prefix> flag that globs
-  data/<prefix>_*_blockbuster.kmz; the food GUI launcher delegates to it, so the
-  food_insecurity_* family contract now lives in ONE place. (A symmetric --exclude
-  complement was drafted but NOT committed -- left for a later pass if wanted.)
-- **Verified.** py_compile; ASCII/LF; the heat balloon proven BYTE-IDENTICAL
-  against the pristine create_info_placemark (793 chars, icon + balloonstyle
-  match), so the working heat card cannot have drifted; food KMZ render-tested
-  end-to-end (189 areas, single i-pin, full balloon). Landed 1b74bf1 -> be183c8
-  -> c81bb3b; Mode-5 iOS-confirmed (L-001, IMG_1153/1154). Heat end-to-end render
-  remains Tony's Mode-5 (not all heat scenario deps available in-container).
-**Ref:** earth_system_common.py; earth_system_generator.py;
-food_insecurity_generator.py; scenarios_food_insecurity.py;
-earth_system_controller.py; cross-ref L-075 (heat 3+5 this generalizes), L-001
-(food workstream), L-070 (multi-country it enables).
 
 #### [L-077] 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario
 <!-- L:077 status:OPEN upd:2026-06-30 section:A flag: rice:3/3/60/2.5 -->
@@ -1365,6 +1166,320 @@ follow-on behind gate 5(b).)
     verification greps standalone or with `;`. (Caught June 10 -- one residual
     check did not execute until re-run standalone.)
 **Gap:** none -- move to section C
+
+#### [L-002] Protocol -> Skills refactor (process/tooling)
+<!-- L:002 status:DONE upd:2026-07-04 section:C flag: rice:3/3/50/3 -->
+- **Protocol -> Skills refactor (process/tooling, not orrery code).** Lift the
+  task-triggered PROCEDURE/CONVENTION layer of Part 3 into Anthropic SKILL.md
+  files (load on demand); keep the JUDGMENT layer (modes, criticality,
+  anti-patterns, Foundation, double-helix) resident. Sketch-first /
+  design-before-build -- the framing below is the leg-up from the v3.29 cleanup,
+  NOT the design itself.
+- **Sorting principle (the design lever):** a skill only helps if its trigger
+  fires at the moment of need. So the cut is NOT QUALITY-vs-CRITICAL and NOT
+  procedure-vs-judgment -- it is "does the moment-of-need announce itself in the
+  task?" Task-coupled guidance (writing hover text -> AU convention) extracts
+  cleanly; checkpoint guidance that must fire UNPROMPTED (session start, every
+  delivery) can't be a skill -- nothing in the request triggers it -- so it stays
+  resident by standing instruction.
+- **Three buckets (v3.29 Part-3 inventory; illustrative, not the final set):**
+  (A) EXTRACT -- task-triggered conventions/procedures: docstring standard,
+      single-info-marker, marker-symbol, hover-AU, 3D-axis, Horizons centers,
+      provenance-scanner mechanics, a safe-editing bundle (bottom-up + binary-mode
+      + file-encoding), platform-neutrality, credit-line, barycenter.
+  (B) RESIDENT POINTER + skill body -- CRITICAL but task-coupled: Agentic Pre-Test
+      (a resident one-liner fires it; the commands + live-dispatch smoke test live
+      in the skill).
+  (C) STAY RESIDENT -- checkpoint CRITICAL gates, never extract: SHA round trip,
+      uploads-before-project, enumerate-uploads, verify-base, verify-execution,
+      check-parallel-pipelines, fetched-vs-recalled, show-the-envelope; + Parts 1/2/4.
+- **COMPLETED July 4, 2026.** Designed with Claude Opus 4.6 (two pre-design
+  sessions: L002_SKILLS_PREDESIGN.md, L002_SKILLS_PREDESIGN_v2.md). Built with
+  Claude Fable 5 via collegial relay. Tony integrated and deployed.
+  Eight skills at v1.0, all cut from palomas_orrery @ b29ad3f8 (gallery-pipeline
+  also from tonyquintanilla.github.io @ 89c8bf30):
+  orrery-coding-conventions, safe-file-editing, agentic-pre-test,
+  horizons-orbital-mechanics, provenance-discipline, earth-system-pipeline,
+  gallery-pipeline, ledger-and-session-records.
+  Protocol v3.30 installed; version history moved to ledger appendix.
+  Extraction audit: documentation/MAPPING_TABLE_L002.md (every v3.29 line mapped;
+  deliberate duplication registry for future amendments).
+  Reviewed by Opus 4.6 against HEAD @ 33f0b148 before deployment.
+  Skills 6-8 are first-time capture (~2/3 of skill content): knowledge that
+  previously lived only in handoffs and code.
+- **Scanner carve-out (design question, decided):** skills contain numeric claims
+  (AU conversion, reference distances) with prose attribution rather than
+  # Source: comments. Carve-out: "skills cite by prose; masters live in cited .py
+  code." The scanner covers the code; the skills describe conventions whose
+  authoritative instances are under scanner coverage. No exceptions entries needed
+  unless scanner scope widens to .md files.
+- **Follow-on:** skills_index.py devtool (L-097) -- same pattern as
+  ledger_index.py; kills manifest-table drift.
+**Gap:** none -- move to section C.
+**Ref:** documentation/MAPPING_TABLE_L002.md, documentation/LEDGER_version_history_block.md, documentation/README_DEPLOYMENT.md, documentation/README_DEPLOYMENT_v2.md, documentation/L002_SKILLS_PREDESIGN.md, documentation/L002_SKILLS_PREDESIGN_v2.md, skills/*.
+
+#### [L-020 | #26] CUSTOM_SHELLS tooltip verification
+<!-- L:020 status:DONE upd:2026-06-22 section:C flag: rice:1/2/90/2 -->
+Verify that every CUSTOM_SHELLS entry in shell_configs.py has a tooltip
+and that the tooltip text is accurate. CUSTOM_SHELLS covers rotation axes,
+sodium tail, magnetospheres, bow shocks, radiation belts, rings, and
+field-aligned currents across Moon, Pluto, Mercury, Venus, Earth, Mars,
+Jupiter, Saturn, Uranus, Neptune.
+**Gap:** none -- move to section C.
+
+#### [L-047 | #N10] Note-composition structural refactor (behind N6)
+<!-- L:047 status:DONE upd:2026-06-23 section:C flag: rice:2/2/50/2 -->
+- **N10** Note-composition structural refactor (behind N6). `[per chain]`
+**RETIRED (2026-06-23, Tony):** undetermined -- the N10 'note-composition refactor'
+scope was never recoverable. Closed as undetermined; if it matters it will resurface.
+**Gap:** none -- move to section C.
+
+#### [L-048 | #21/51] Animation track 21/51 -- core complete pending the v4 gate
+<!-- L:048 status:DONE upd:2026-06-23 section:C flag: rice:3/3/50/3 -->
+- **21/51 Animation track -- CORE COMPLETE pending the v4 gate. Status
+  June 11:**
+  - Phases 1, 2, 2.5, 3A DONE; 3B conditionally confirmed (section C).
+  - **PHASE 3 SESSION C -- DELIVERED + PUSHED @7b71c29,
+    `[render-gated on ANIMATION_TEST_PROTOCOL_v4]`:** barycenter Sun fix
+    (engine Sun contract: real trajectory / engine fetch / suppression --
+    never a placeholder position); console-spam fix (O13a; quiet rebuilds,
+    builder messages print once at allocation, zero builder edits); comet
+    tails per frame as OPT-IN (Animation Settings checkbox, default off
+    per O1; build_comet_tail_traces capture shim, the 240-line builder
+    unchanged; VARIABLE-COUNT handling: per-frame max-probe + pad-to-max
+    with invisible dummies -- live counts are non-monotonic, 9/7/5/6
+    measured; MAPS excluded, disclosed); Mercury sodium tail as engine
+    customer (checkbox-gated; its greyed placeholder skipped when live);
+    U+N bow-shock hover disclosure (D.Movement remainder); one-line
+    auto-scale (Auto cube = MAX of orbital and center-shell extents, never
+    shell alone -- the Finding-1 inverse).
+  - **ENGINE ARCHITECTURE (for the record):** rebuild-as-universal --
+    builder(**frame_context) through the same dispatch convention as
+    static; registry = 14 per_frame tags in CUSTOM_SHELLS + the indicator
+    builtin; trace-count stability asserted loud, variable-count elements
+    pad-to-max; engine Sun contract with suppression-over-fabrication;
+    quiet rebuilds; live byte-budget guardrail (warn >150 KB/frame).
+    Design authority: ANIMATION_ENGINE_DESIGN_v1.md (sec 8 footnote
+    superseded by the greyed legend -- amend on next touch).
+  - **REMAINING RIDERS after the v4 gate:**
+    * Resolution-sweep follow-on: RESOLVED BY MEASUREMENT (Phase 4,
+      June 12, ADDENDUM decision 3). The 7-decimal coordinate-rounding
+      lever (PERFRAME_COORD_DECIMALS, applied at the build_perframe_traces
+      chokepoint -- every engine element inherits it) roughly HALVES
+      per-frame bytes: Earth magnetosphere FULL 133->68 KB/f, Jupiter
+      FULL 79->43, sodium tail 46->31 (live-measured; decimal places are
+      scale-safe at any heliocentric distance, unlike significant
+      digits). Full-resolution geometry + rounding fits the per-body
+      budget, so NO density reduction ships: gate 5(b) is moot in its
+      original form (nothing reduced to judge), and the per-body density
+      literal sweep is CLOSED AS NOT NEEDED (reopen only if multi-
+      magnetosphere or 60-frame budgets bite in practice; all eight
+      simultaneously measure 411 KB/f rounded -- the >150 guardrail
+      warns correctly). create_magnetosphere_shape n-parameter promotion
+      DONE (defaults byte-identical; doubles as 20/N5's backend).
+    * measure_animation_html.py: add tkinter file-browser dialog (B5).
+    * Camera tracking -> item 19 fixture list (above): IMPLEMENTED.
+    * O14/O15 incoming from the v4 gate: comet-tail legend churn verdict;
+      sodium particle count in per-frame mode (knob exists, 500 -> 250
+      measured ~24.9 KB/f -- note rounding now takes 500 to ~31 KB/f,
+      which may settle O15 without the knob).
+  - Standing instruction kept: when deferring, smoke-test the animate
+    pipeline to a KNOWN state.
+**Gap:** none -- move to section C.
+
+#### [L-049 | #N8] Comet info-marker superposition cluster
+<!-- L:049 status:DONE upd:2026-06-23 section:C flag: rice:1/2/50/2 -->
+`[per chain]`
+**Mode-5 confirmed (2026-06-23, Tony):** comet info-markers no longer superimposed. DONE; move to C on next housekeeping.
+**Gap:** none -- move to section C.
+
+#### [L-050 | #N9] white -> red orbit-marker switch (osculating marker intentionally stays white)
+<!-- L:050 status:DONE upd:2026-06-23 section:C flag: rice:2/1/50/1 -->
+`[per chain]`
+**RETIRED (2026-06-23, Tony):** undetermined -- no recollection of an orbit-color problem. Closed as undetermined; will resurface if real.
+**Gap:** none -- move to section C.
+
+#### [L-065] European heat wave heat map (Earth System track)
+<!-- L:065 status:DONE upd:2026-06-25 section:C flag: rice:3/3/80/1.5 -->
+- **European heat wave 2026 -- new heat map, reuses the existing ERA5 framework.**
+  Earth System / stressors family (the "heat" member named in the food-insecurity
+  handoff). A dated temperature heat map of the ongoing 2026 European heat wave,
+  built on the existing ERA5/Copernicus heat-map chassis -- new region + date
+  config, NOT a new pipeline. TIMELY: a second, hotter wave began 22 Jun 2026
+  (Western + Central Europe), deaths reported and June records falling; gallery +
+  Reel value is time-sensitive while it is in the news.
+- **Data = Fetched, trusted:** ERA5 2m temperature via Copernicus CDS (the live
+  pipeline). Note the ~5-day near-real-time lag -- "now" honestly means up to ~5
+  days back, so the layer is dated / pinned / deliberately re-pulled (no live
+  auto-update), same as the family. Confirm exact dates, extent, and peak values
+  at fetch time; do NOT recall breaking-news numbers (they go stale fast).
+  Copernicus Sentinel-3 LST is the near-real-time surface-temperature alternative
+  if a snapshot is wanted alongside the air-temp reanalysis.
+- **Human-impact text = composed/transcribed tier (two-tier on-layer text; see
+  L-001 / L-064).** If the layer carries any casualty / health-alert / attribution
+  text, it is transcribed from an authority (national met services, EU Copernicus
+  C3S, WMO, health agencies, WWA-style attribution), per-number `# Source:` within
+  scanner lookback, Tier-1 visible, cite-or-remove. Climate-change attribution
+  belongs to the cited authority in its voice -- we never author it; the reader
+  connects it to the family thesis. Breaking-news tolls are volatile and
+  contested -- transcribe a dated, sourced figure at build or omit.
+- CLOSED 2026-06-25 (on 4685906): Mode-5 verified -- teaser (Gosport 36.1C pin,
+    source visible, single title, "Click 3D Earth" CTA restored) + KMZ card (peak
+    auto-filled, no [TO-FETCH]). Final record correction: UK -> Gosport 36.1C
+    (Met Office, 24 Jun); attribution dated to Climate Central CSI (24 Jun 2026);
+    Tama upgraded to AEMET primary. Tier-1 = 0. Parked, non-blocking: Sentinel-3
+    LST stage-1 snapshot (separate artifact); WWA rapid study to supersede the CSI
+    line if it publishes.
+**Gap:** none -- move to section C.
+**Ref:** existing ERA5/Copernicus heat-map framework; Copernicus CDS (ERA5 2m
+temp) + Sentinel-3 LST; EU Copernicus Climate Change Service (C3S); L-001 + L-064
+(two-tier on-layer text + scanner-format sweep). Current-event context: 2026
+European heatwaves (record June temps; deaths reported across FR/UK/IE/ES/AT/DE/
+SI), retrieved 2026-06-22.
+**Note:** WATCH: World Weather Attribution rapid study on the June 2026 event. If it
+  publishes, it is the strongest citable attribution -- replace the CSI/C3S line
+
+#### [L-069] Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan)
+<!-- L:069 status:DONE upd:2026-06-24 section:C flag: rice:2/3/95/2 -->
+- **BUILT + RENDER-CONFIRMED (Mode-5, ge_sudan.jpg 2026-06-24), committed 7923ac2.**
+  10 maroon proportional dots in a toggle-able folder "Phase 5 (Catastrophe)
+  populations (area level)", one per area carrying a mapped Phase 5 population (all
+  mapped P4): Beliel 26,411 ... Kadugli 930. Sized area ~ population (sqrt); placed
+  at each area's representative interior point. Renders correctly clustered in North
+  Darfur, South Darfur (Nyala) and South Kordofan.
+- **Pure IPC passthrough -- zero hardcoded/composed/summed numbers.** Balloon reads
+  only area_name / overall_phase / phase5_population / phase5_percentage / population
+  at runtime. "Catastrophe" (population term) used throughout; "Famine" (area term,
+  none here) appears nowhere on the dots -- verified in KMZ bytes.
+- **Dot-size legend key added** (Mode-5 follow-up, approved): legend card shows a
+  large + small maroon dot keyed to the data's actual max/min phase5_population
+  (read at runtime, not hardcoded), caption "larger = more people". Render-confirmed.
+- **Causal-restraint wording tightened:** removed "the reader connects the pattern"
+  from C3. C3 now ends "It draws no causal arrow of its own."
+- **PRINCIPLE BANKED (generalizes to L-070 and every sensitive layer):** state the
+  basis for the visualization; do NOT hand the lay reader a connection we will not
+  draw ourselves. "The reader connects the pattern" is buck-passing -- naming the
+  basis is honest, outsourcing the inference is not. (Tony, 2026-06-24.)
+- **Scanner CATCHES the module (real clean, not false):** L-064 part-1 (allow-list)
+  + narrow vocab add (people|persons?|percent|%). Tier-1=0, zero family ripple
+  (star_notes:1257's "billion" trigger deliberately deferred to the L-064 sweep).
+**Gap:** none -- move to section C.
+**Ref:** L-001 (parent); L-064 (scanner); food_insecurity_generator.py; ge_sudan.jpg.
+**Tony:** promote the "principle banked" to the protocol at the next update. 
+
+#### [L-075] KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine)
+<!-- L:075 status:DONE upd:2026-06-30 section:C flag: rice:3/3/95/2 -->
+- **Problem.** The KMZ intel card was a fixed-size matplotlib PNG ScreenOverlay
+  pinned top-left -- it could not reflow and collided with the Google Earth search
+  bar on mobile, the long briefing unreadable on a phone.
+- **"3+5" redesign (earth_system_generator.py; built on 9007ea3 -> pushed 3ba4e8a).**
+  (3) intel card shrunk to a compact always-on header (title + date + "tap the (i)
+  pin" hint) + a tappable info "i" Placemark at the grid centroid whose balloon
+  carries the full briefing. (5) population-exposure key folded into the balloon;
+  risk-scale colorbar moved bottom-right -> right-edge-centered, off the GE nav/3D
+  buttons; header dropped below the mobile search bar. New helpers
+  create_info_placemark + _briefing_to_html; producer-level change in run_scenario
+  / build_spikes_kml.
+- **Key fix -- CDATA.** simplekml 1.3.2 entity-escapes description fields by default
+  (HTML would render as literal tags); wrapping the balloon in <![CDATA[...]]> makes
+  simplekml emit it unescaped (base.py leaves CDATA blocks untouched), so GE renders
+  it as HTML -- matching the proven desktop probe.
+- **Structural win (parallel-pipeline).** Fix landed in the producer (run_scenario /
+  build_spikes_kml), so every heatwave / coral / coastal scenario inherits 3+5 on its
+  next regeneration -- not a per-europe_2026 edit.
+- **Verified.** py_compile; ASCII/LF; synthetic KML smoke (CDATA balloon, briefing
+  reflow, exposure key, repositioned overlays, pop-legend ScreenOverlay removed).
+  Mode-5 (Tony, 2026-06-29): europe_2026 regenerated (cached ERA5, offline) and
+  confirmed on DESKTOP + iPad + iPhone across Chrome / Bing / Safari -- balloon
+  renders everywhere, collision gone, readable. iPhone full-screen sheet is the
+  cleanest render; iPad docks the balloon inline. Gallery KMZ pushed d25fd93.
+- **iOS banner (app chrome, not the KMZ).** Only the iPhone shows the "content is
+  controlled by the author... do not enter passwords" banner: at phone size GE
+  presents the balloon as a full-screen web sheet (which carries the standard safety
+  banner); the iPad docks it inline (no sheet, no banner). Same file, same HTML;
+  harmless (no input field), not switchable from the KML side.
+- **Polish (delivered this session; 2 lines, verified; LANDS on the next europe_2026
+  regenerate + gallery push).** header screenxy y 0.90 -> 0.84 (iPhone search-bar
+  clearance); pin label scenario_id -> title so it matches the balloon heading
+  ("Europe Heat Dome (June 2026) - tap for details"). Both Tony-approved. Only
+  remaining action on this block; a quick re-confirm on the next regenerate closes it.
+- **Dead code surfaced.** create_pop_legend_card is now unused (exposure key folded
+  into the balloon); left defined to keep the live push minimal-risk -> remove in the
+  L-068 dead-code sweep, not its own push.
+- **Generalized to the family (this session -> L-076).** create_info_placemark +
+  the briefing-to-HTML helper were extracted to earth_system_common.py and the
+  3+5 card + tappable i-pin applied to the FOOD generator too; the picker was
+  also generalized (ScenarioPicker). Heat balloon verified byte-identical.
+**Linked:** chassis from L-065 (europe_2026 build); series tracked under L-071;
+dead-code removal -> L-068. Icon uses remote Google info-i.png (probe parity); bundle
+a local icon only if the iOS pin glyph misbehaves.
+**Gap:** none -- move to section C.
+**Ref:** earth_system_generator.py (run_scenario, build_spikes_kml, build_impact_kml,
+create_intel_card, create_info_placemark, _briefing_to_html); simplekml 1.3.2 base.py
+CDATA behavior.
+
+#### [L-076] Earth System shared module (earth_system_common) + 3+5 generalized to food
+<!-- L:076 status:DONE upd:2026-06-30 section:C flag: rice:3/3/95/2 -->
+- **What.** Extracted the engine-agnostic KMZ/UI helpers shared by the heat and
+  food generators into a new module, earth_system_common.py, retiring the
+  heat<->food duplication before it set in: briefing_to_balloon_html();
+  create_info_placemark(kml, title, date, briefing, lat, lon, extra_html="") --
+  the tappable "i" pin + CDATA balloon, with the heat population-exposure key now
+  passed in via extra_html rather than baked in; and ScenarioPicker(scenarios,
+  run_fn, ...), a generic Tkinter menu whose run_fn(scenario, status_callback) is
+  injected (heat passes run_scenario, food passes a small adapter over its run()).
+  Both generators import from it; both __main__ blocks launch via the shared
+  picker.
+- **Food 3+5 parity (detail under L-001).** With the shared helpers in place, the
+  food KMZ gained the compact header + single tappable i-pin + consolidated
+  balloon -- the L-075 pattern applied to categorical/food data instead of the
+  scalar heat field. The food generator deliberately still does NOT import the
+  scalar heat engine; it shares only the engine-agnostic UI/KMZ helpers.
+- **scenarios_food_insecurity.py.** New scenario registry (Sudan now; commented
+  stubs for South Sudan / Chad / CAR / Ethiopia) -- the structure L-070 builds on.
+- **Controller single-source (--preload).** earth_system_controller.py gained
+  preload_layers(prefix) + a --preload <prefix> flag that globs
+  data/<prefix>_*_blockbuster.kmz; the food GUI launcher delegates to it, so the
+  food_insecurity_* family contract now lives in ONE place. (A symmetric --exclude
+  complement was drafted but NOT committed -- left for a later pass if wanted.)
+- **Verified.** py_compile; ASCII/LF; the heat balloon proven BYTE-IDENTICAL
+  against the pristine create_info_placemark (793 chars, icon + balloonstyle
+  match), so the working heat card cannot have drifted; food KMZ render-tested
+  end-to-end (189 areas, single i-pin, full balloon). Landed 1b74bf1 -> be183c8
+  -> c81bb3b; Mode-5 iOS-confirmed (L-001, IMG_1153/1154). Heat end-to-end render
+  remains Tony's Mode-5 (not all heat scenario deps available in-container).
+**Gap:** none -- move to section C. 
+**Ref:** earth_system_common.py; earth_system_generator.py;
+food_insecurity_generator.py; scenarios_food_insecurity.py;
+earth_system_controller.py; cross-ref L-075 (heat 3+5 this generalizes), L-001
+(food workstream), L-070 (multi-country it enables).
+
+#### [L-072] Gallery Studio WYSIWYG preview -- render through the real index.html viewer
+<!-- L:072 status:DONE upd:2026-06-26 section:C flag: rice:2/2/100/2 -->
+- **Problem.** Studio Preview opened a bare Plotly figure via file://, so the
+  viewer-only chrome (green Google Earth button from `_kmz_handoff`, link-icon
+  dropdown from `_link_data`) never appeared -- not WYSIWYG with the live gallery,
+  which adds that chrome at view time. The button is viewer chrome, not a figure
+  annotation; the Studio preview never ran the viewer.
+- **Fix (2 increments; gallery repo 3ee1734 -> pushed 495683e).** Inc 1: a dormant
+  `?preview=<file>` branch in index.html `init()` that injects a synthetic lookup
+  entry and reuses `loadVisualization` UNCHANGED (no render-path refactor; inert
+  for real visitors). Inc 2: `gallery_studio.py` `_preview` rewrite --
+  build_gallery_html -> the REAL `json_converter.extract_plotly_json_from_html`
+  (same parse that yields the pushed JSON) -> throwaway
+  `gallery/_studio_preview.json` -> ephemeral 127.0.0.1 daemon server rooted at the
+  repo -> open the GENUINE index.html at `?preview=`. No vendored viewer, no second
+  extractor -- WYSIWYG by construction. `.gitignore` covers the preview slot.
+- **Verified.** Producer-chain smoke: `_kmz_handoff` + `_studio` survive
+  build->extract into the previewed card; py_compile; ASCII/LF. Mode-5 (Tony): GE
+  button renders, click-through resolves for PUSHED assets, no button when no KMZ,
+  old file:// preview gone, `import json_converter` resolves via dashboard launch.
+- **By design (not a gap).** GE button 404s when the KMZ is not yet pushed to
+  `gallery/assets/` -- the preview honestly reports push status. Tony pushes the
+  KMZ at generation time; only the exported HTML iterates between previews.
+  Increment 3 (local-asset fallback) DECLINED for this reason.
+**Linked:** sibling to L-058 (open Studio items); preview reuses json_converter as-is.
+**Gap:** none -- move to section C.
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -1513,17 +1628,6 @@ close AND no parity gap is outstanding. Tracking/umbrella item.
 **Ref:** L-066, L-016, L-014; section C strategic-status block; Consolidation Log (F);
 protocol Part 3 "Check All Parallel Pipelines".
 
-#### [L-020 | #26] CUSTOM_SHELLS tooltip verification
-<!-- L:020 status:DONE upd:2026-06-22 section:D.Structural flag: rice:1/2/90/2 -->
-Verify that every CUSTOM_SHELLS entry in shell_configs.py has a tooltip
-and that the tooltip text is accurate. CUSTOM_SHELLS covers rotation axes,
-sodium tail, magnetospheres, bow shocks, radiation belts, rings, and
-field-aligned currents across Moon, Pluto, Mercury, Venus, Earth, Mars,
-Jupiter, Saturn, Uranus, Neptune.
-**Gap:** none -- VERIFIED 2026-06-22 (AST walk of CUSTOM_SHELLS @666244f):
-11 bodies, 41 leaf shell-configs, all 41 carry a tooltip, zero missing. DONE;
-move to section C on next housekeeping relocation.
-
 #### [L-025 | #N7] Reduced to custom-geometry inline markers only
 <!-- L:025 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/50/2 -->
 The Phase 3 info-marker sweep (141 conversions, 18 files, May 2026) moved
@@ -1612,6 +1716,7 @@ L-078, the same shape as L-009 spinning off L-061 for new physics rather than
 calling it a cone remainder. All empirical findings above (the F/C gap, the
 energy_imbalance.py / paleoclimate candidates, the per-file risk split) carry
 forward into L-078 as groundwork, not lost.
+**Gap:** none -- move to section C.
 **Ref:** provenance_scanner.py; PROVENANCE_AUDIT.md; module_atlas.py; originated
 from L-001; confirmed via food_insecurity_generator build
 (HANDOFF_food_insecurity_build_v2.md); superseded by L-078, 2026-06-30,
@@ -1898,69 +2003,6 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   `[per chain + @2f40d9d/@730b2bf verifications]`
 **Gap:** design conversation first -- separate (1) the immediate refactor + Artemis redo from (2) the generalized preset-authoring vision; decide how much of (2) to scope now. Coupled across two repos. Design-before-code, Bucket C.
 
-#### [L-047 | #N10] Note-composition structural refactor (behind N6)
-<!-- L:047 status:DONE upd:2026-06-23 section:D.Feature-C flag: rice:2/2/50/2 -->
-- **N10** Note-composition structural refactor (behind N6). `[per chain]`
-**RETIRED (2026-06-23, Tony):** undetermined -- the N10 'note-composition refactor'
-scope was never recoverable. Closed as undetermined; if it matters it will resurface.
-**Gap:** none -- retired. (Move to section C on next housekeeping relocation.)
-
-#### [L-048 | #21/51] Animation track 21/51 -- core complete pending the v4 gate
-<!-- L:048 status:DONE upd:2026-06-23 section:D.Feature-C flag: rice:3/3/50/3 -->
-- **21/51 Animation track -- CORE COMPLETE pending the v4 gate. Status
-  June 11:**
-  - Phases 1, 2, 2.5, 3A DONE; 3B conditionally confirmed (section C).
-  - **PHASE 3 SESSION C -- DELIVERED + PUSHED @7b71c29,
-    `[render-gated on ANIMATION_TEST_PROTOCOL_v4]`:** barycenter Sun fix
-    (engine Sun contract: real trajectory / engine fetch / suppression --
-    never a placeholder position); console-spam fix (O13a; quiet rebuilds,
-    builder messages print once at allocation, zero builder edits); comet
-    tails per frame as OPT-IN (Animation Settings checkbox, default off
-    per O1; build_comet_tail_traces capture shim, the 240-line builder
-    unchanged; VARIABLE-COUNT handling: per-frame max-probe + pad-to-max
-    with invisible dummies -- live counts are non-monotonic, 9/7/5/6
-    measured; MAPS excluded, disclosed); Mercury sodium tail as engine
-    customer (checkbox-gated; its greyed placeholder skipped when live);
-    U+N bow-shock hover disclosure (D.Movement remainder); one-line
-    auto-scale (Auto cube = MAX of orbital and center-shell extents, never
-    shell alone -- the Finding-1 inverse).
-  - **ENGINE ARCHITECTURE (for the record):** rebuild-as-universal --
-    builder(**frame_context) through the same dispatch convention as
-    static; registry = 14 per_frame tags in CUSTOM_SHELLS + the indicator
-    builtin; trace-count stability asserted loud, variable-count elements
-    pad-to-max; engine Sun contract with suppression-over-fabrication;
-    quiet rebuilds; live byte-budget guardrail (warn >150 KB/frame).
-    Design authority: ANIMATION_ENGINE_DESIGN_v1.md (sec 8 footnote
-    superseded by the greyed legend -- amend on next touch).
-  - **REMAINING RIDERS after the v4 gate:**
-    * Resolution-sweep follow-on: RESOLVED BY MEASUREMENT (Phase 4,
-      June 12, ADDENDUM decision 3). The 7-decimal coordinate-rounding
-      lever (PERFRAME_COORD_DECIMALS, applied at the build_perframe_traces
-      chokepoint -- every engine element inherits it) roughly HALVES
-      per-frame bytes: Earth magnetosphere FULL 133->68 KB/f, Jupiter
-      FULL 79->43, sodium tail 46->31 (live-measured; decimal places are
-      scale-safe at any heliocentric distance, unlike significant
-      digits). Full-resolution geometry + rounding fits the per-body
-      budget, so NO density reduction ships: gate 5(b) is moot in its
-      original form (nothing reduced to judge), and the per-body density
-      literal sweep is CLOSED AS NOT NEEDED (reopen only if multi-
-      magnetosphere or 60-frame budgets bite in practice; all eight
-      simultaneously measure 411 KB/f rounded -- the >150 guardrail
-      warns correctly). create_magnetosphere_shape n-parameter promotion
-      DONE (defaults byte-identical; doubles as 20/N5's backend).
-    * measure_animation_html.py: add tkinter file-browser dialog (B5).
-    * Camera tracking -> item 19 fixture list (above): IMPLEMENTED.
-    * O14/O15 incoming from the v4 gate: comet-tail legend churn verdict;
-      sodium particle count in per-frame mode (knob exists, 500 -> 250
-      measured ~24.9 KB/f -- note rounding now takes 500 to ~31 KB/f,
-      which may settle O15 without the knob).
-  - Standing instruction kept: when deferring, smoke-test the animate
-    pipeline to a KNOWN state.
-**Gap:** none -- v4.1 gate (L-004) PASSED; the 21/51 animation core track is
-COMPLETE. O14/O15 verdicts closed via L-055. The lone remaining rider, B5
-(measure_animation_html file-browser dialog), is spun out to L-067. DONE; move to
-section C on next housekeeping relocation.
-
 ### D.Parked (Tony's explicit call) `[per chain]`
 
 #### [L-067] measure_animation_html.py file-browser dialog (B5)
@@ -1972,16 +2014,6 @@ section C on next housekeeping relocation.
   path. Small, isolated tooling.
 **Gap:** add filedialog.askopenfilename to measure_animation_html.py.
 **Ref:** spun out of L-048 (closed 2026-06-23).
-
-#### [L-049 | #N8] Comet info-marker superposition cluster
-<!-- L:049 status:DONE upd:2026-06-23 section:D.Parked flag: rice:1/2/50/2 -->
-`[per chain]`
-**Mode-5 confirmed (2026-06-23, Tony):** comet info-markers no longer superimposed. DONE; move to C on next housekeeping.
-
-#### [L-050 | #N9] white -> red orbit-marker switch (osculating marker intentionally stays white)
-<!-- L:050 status:DONE upd:2026-06-23 section:D.Parked flag: rice:2/1/50/1 -->
-`[per chain]`
-**RETIRED (2026-06-23, Tony):** undetermined -- no recollection of an orbit-color problem. Closed as undetermined; will resurface if real.
 
 ### D.Loose end to reconcile `[per chain; not re-verified]`
 
@@ -2113,32 +2145,6 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   `[verified @2f40d9d ~L4775]`; 'ongoing' status comment
   (spacecraft_encounters.py L60, verified).
 **Linked:** coupled to L-046 (encounter generator -> preset-authoring skill).
-
-#### [L-072] Gallery Studio WYSIWYG preview -- render through the real index.html viewer
-<!-- L:072 status:DONE upd:2026-06-26 section:H flag: rice:2/2/100/2 -->
-- **Problem.** Studio Preview opened a bare Plotly figure via file://, so the
-  viewer-only chrome (green Google Earth button from `_kmz_handoff`, link-icon
-  dropdown from `_link_data`) never appeared -- not WYSIWYG with the live gallery,
-  which adds that chrome at view time. The button is viewer chrome, not a figure
-  annotation; the Studio preview never ran the viewer.
-- **Fix (2 increments; gallery repo 3ee1734 -> pushed 495683e).** Inc 1: a dormant
-  `?preview=<file>` branch in index.html `init()` that injects a synthetic lookup
-  entry and reuses `loadVisualization` UNCHANGED (no render-path refactor; inert
-  for real visitors). Inc 2: `gallery_studio.py` `_preview` rewrite --
-  build_gallery_html -> the REAL `json_converter.extract_plotly_json_from_html`
-  (same parse that yields the pushed JSON) -> throwaway
-  `gallery/_studio_preview.json` -> ephemeral 127.0.0.1 daemon server rooted at the
-  repo -> open the GENUINE index.html at `?preview=`. No vendored viewer, no second
-  extractor -- WYSIWYG by construction. `.gitignore` covers the preview slot.
-- **Verified.** Producer-chain smoke: `_kmz_handoff` + `_studio` survive
-  build->extract into the previewed card; py_compile; ASCII/LF. Mode-5 (Tony): GE
-  button renders, click-through resolves for PUSHED assets, no button when no KMZ,
-  old file:// preview gone, `import json_converter` resolves via dashboard launch.
-- **By design (not a gap).** GE button 404s when the KMZ is not yet pushed to
-  `gallery/assets/` -- the preview honestly reports push status. Tony pushes the
-  KMZ at generation time; only the exported HTML iterates between previews.
-  Increment 3 (local-asset fallback) DECLINED for this reason.
-**Linked:** sibling to L-058 (open Studio items); preview reuses json_converter as-is.
 
 #### [L-073] Gallery export-emits-JSON -- fold the manual json_converter run into Export
 <!-- L:073 status:OPEN upd:2026-06-26 section:H flag: rice:2/2/80/2 -->
