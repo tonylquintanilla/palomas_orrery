@@ -219,17 +219,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*46 live items; 45 need attention (`!`); 46 RICE-scored; 32 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*45 live items; 44 need attention (`!`); 45 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
-| ! | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | OPEN | 3.2 | 2026-07-04 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
-| ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 2.1 | 2026-06-30 |
+| ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 2.1 | 2026-07-04 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
@@ -328,6 +327,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
+|  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
@@ -631,26 +631,6 @@ establishes the baseline.
 ~L1271-1283); module_atlas.py (classify_role, ROLE_MAP); L-064 (closed
 predecessor); PROVENANCE_AUDIT.md (July 4, 2026 run: 115 files, 666 findings,
 Tier-1 = 104).
-
-#### [L-097] skills_index.py -- Skill Manifest auto-generation (process/tooling)
-<!-- L:097 status:OPEN upd:2026-07-04 section:A flag: rice:2/2/80/1 -->
-- **Devtool mirroring ledger_index.py:** walk skills/, read each SKILL.md
-  frontmatter (name, description) and body version line, regenerate the Skill
-  Manifest table in project_instructions_v3_30.md between markers. Kills
-  manifest-table drift the same way ledger_index.py killed hand-pasted summary
-  rows. Also runs a consistency check: every skill directory has a manifest row
-  and vice versa; version in SKILL.md matches the manifest row.
-- **Pattern:** ledger_index.py (402 lines, marker-based zone regeneration,
-  --check mode for CI-style dry run). Read ledger_index.py as the recipe;
-  mirror the architectural choices (parse -> validate -> regenerate -> report).
-- **Scope:** one file (~150-200 lines), lives in repo root alongside
-  ledger_index.py. Reads skills/*/SKILL.md, writes the zone in
-  project_instructions_v3_30.md (or its successor). Add to
-  ledger-and-session-records skill's tooling section on completion.
-- **Collegial build candidate:** tight enough spec for Fable 5 (or Opus 4.8)
-  via the standard relay. Prompt attached: documentation/FABLE_PROMPT_L097.md.
-**Gap:** build session -- Fable prompt ready, spec is tight.
-**Ref:** L-002 (parent), ledger_index.py (pattern), project_instructions_v3_30.md Part 3 Skill Manifest.
 
 ## PENDING ACTION (Tony-side)
 
@@ -1565,6 +1545,38 @@ forward into L-078 as groundwork, not lost.
 from L-001; confirmed via food_insecurity_generator build
 (HANDOFF_food_insecurity_build_v2.md); superseded by L-078, 2026-06-30,
 repo HEAD 1f5901e.
+
+#### [L-097] skills_index.py -- Skill Manifest auto-generation (process/tooling)
+<!-- L:097 status:DONE upd:2026-07-04 section:C flag: rice:2/2/80/1 -->
+- **Devtool mirroring ledger_index.py:** walk skills/, read each SKILL.md
+  frontmatter (name, description, fires_when) and body version line, regenerate
+  the Skill Manifest table in the protocol file between SKILL-MANIFEST markers.
+  Kills manifest-table drift the same way ledger_index.py killed hand-pasted
+  summary rows. Also runs a consistency check: every skill directory has a
+  manifest row and vice versa; folder name matches frontmatter name; version
+  line exists.
+- **Pattern:** ledger_index.py (402 lines, marker-based zone regeneration,
+  --check mode for CI-style dry run). Read ledger_index.py as the recipe;
+  mirror the architectural choices (parse -> validate -> regenerate -> report).
+- **fires_when frontmatter field** added to all 8 SKILL.md files (editorial
+  control of the manifest's "Fires when" column). Claude's skill loader reads
+  name/description; this field is read only by skills_index.py. Fallback: first
+  sentence of description, truncated, with a warning.
+- **COMPLETED July 4, 2026.** Built by Claude Fable 5 via collegial relay
+  (spec by Opus 4.6, documentation/FABLE_PROMPT_L097.md). Tony integrated.
+  skills_index.py: 262 lines, repo root. Verified: py_compile clean; --check
+  mode zero problems (8 skills parsed); manifest regenerated in
+  project_instructions_v3_31.md, output matches v3.30 hand-written table.
+  Tony ran locally on Windows (Python 3.13) -- clean, manifest regenerated.
+- **Skill-layer verification (July 4, 2026, Opus 4.6 session @3429e568).**
+  All 8 installed skills confirmed firing: orrery-coding-conventions loaded on
+  hover-text trigger, ledger-and-session-records loaded on L-handle trigger.
+  The two-layer system (resident protocol + on-demand skills) is operational.
+  Protocol v3.31 installed with populated manifest; skills_index.py is the
+  ongoing drift check.
+**Gap:** none -- move to section C.
+**Ref:** L-002 (parent), ledger_index.py (pattern), project_instructions_v3_31.md
+Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
