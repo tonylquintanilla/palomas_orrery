@@ -1,8 +1,9 @@
 # MASTER PLAN: Web Publication of Paloma's Orrery
 
-**Status:** Draft v5 — ready for review round.
-**Base:** main @ `d6c8c42`, gallery @ `89c8bf30`
+**Status:** Draft v6 — reviewed, execution-ready.
+**Base:** main @ `7b25eb9`, gallery @ `89c8bf30`
 **Date begun:** July 3, 2026
+**Last updated:** July 4, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
 
 ---
@@ -310,23 +311,102 @@ Gate: end-to-end on hosting platform. Mode 5.
 
 ---
 
+## §5a — Execution Map: Dependencies & Model Assignments
+
+### Dependency Chain
+
+```
+PREP (independent, can start now)
+  ✓ LICENSE moved to root
+  ✓ Section W ledger entries
+  ○ Attribution page ─────────── 4.8 ──→ needed before Phase 6
+  ○ Helpers split ────────────── 4.6 ──→ needed before Phase 2
+
+PHASE 0 ─────┐             ┌───── PHASE 1
+Pilot         │  parallel   │      Vocabulary design
+Dash/Pyodide  │             │      Scene spec skeleton
+(4.6)         └──────┬──────┘      (Fable — Jul 7 deadline)
+                     │
+                     ▼
+           ┌── GATE ──────────────────────────┐
+           │ server/serverless + vocab stable  │
+           └──────────┬───────────────────────┘
+                      │
+                      ▼
+           PHASE 2: Solar system assembler (4.6)
+             │            │            │
+             ▼            ▼            ▼
+        PHASE 3      PHASE 4      PHASE 5
+        Stars        Hybrid       Earth system
+        (4.6)        (4.6)        (4.6 + 4.8)
+             │            │            │
+             └─────── ────┼────────────┘
+                          ▼
+           PHASE 6: Web UI (4.6)
+```
+
+**Critical path:** Phase 1 → Phase 2 → domain builds → Phase 6.
+
+**Secondary dependencies (not on critical path):**
+- Phase 0 → Phase 6 (framework choice)
+- Phase 0 → Phase 3 (star cache wire format tied to server/serverless)
+- Helpers split → Phase 2 (computation functions freed from tkinter)
+- Attribution page → Phase 6 (required before public deployment)
+
+### Model Assignments
+
+**Fable 5** — deep technical analysis, large scope. Best for Phase 1
+vocabulary design: reading the 11,110-line orrery file, understanding what
+`plot_objects` and `animate_objects` consume and produce, distilling a clean
+scene-spec vocabulary. This is the one item where Fable's analytical depth
+over large scope is irreplaceable, and it sits on the critical path.
+
+**Opus 4.8** — verification, convergence, restraint. Attribution page
+(fetching actual license terms — Copernicus, IPC, ESA, JPL — fetched not
+recalled). Vocabulary review after Fable drafts it. Phase 5 restraint
+discipline on human-cost content.
+
+**Opus 4.6** — daily conversational partner, iterative build. Phase 0
+pilot implementation (both sides), helpers split, Phases 2–6 build work,
+delta-log discipline. The relay pattern.
+
+### Fable Access Window
+
+Fable 5 availability in subscription tiers expires July 7, 2026. Current
+weekly usage: ~5%. Highest-leverage allocation: one focused session on
+Phase 1 vocabulary design, run in parallel with Phase 0 pilot work in 4.6.
+Phase 1 is critical-path; Phase 0 is not.
+
+### Parallel Opportunity
+
+Phase 0 and Phase 1 are independent: the scene spec is a plain data
+document (§3), serializable regardless of whether it is consumed by a Dash
+callback or a Pyodide script. Running both tracks simultaneously means
+Phase 2 can start when they converge, rather than waiting for sequential
+completion.
+
+---
+
 ## §6 — Prep Work (before Phase 0)
 
 **L-080 — Smoke-test harness.** Spec for scene equivalence (§5 Phase 1 criteria).
 
-**LICENSE to repo root.** Move from `documentation/LICENSE.md`. Harmonize
-copyright year (file: 2024; README: 2025-2026).
+**LICENSE to repo root.** ✓ Done. `LICENSE.md` at repo root at HEAD (`7b25eb9`).
 
-**Attribution page.** Data sources: JPL Horizons, JPL SBDB/CAD, Copernicus CDS /
-ERA5 / ERA5T, NOAA Coral Reef Watch, IPC and FEWS NET, HDX, OCHA FTS, SIMBAD
-(CDS), Gaia (ESA), Hipparcos, NSIDC, Mauna Loa CO₂ (NOAA GML/Scripps), HOT
-program. Provider citation strings need fetching. Copernicus and IPC terms most
-likely to constrain hosting.
+**Attribution page.** ○ Not started. Data sources: JPL Horizons, JPL SBDB/CAD,
+Copernicus CDS / ERA5 / ERA5T, NOAA Coral Reef Watch, IPC and FEWS NET, HDX,
+OCHA FTS, SIMBAD (CDS), Gaia (ESA), Hipparcos, NSIDC, Mauna Loa CO₂ (NOAA
+GML/Scripps), HOT program. Provider citation strings need fetching (4.8 task —
+fetched not recalled). Copernicus and IPC terms most likely to constrain hosting.
+Not a Phase 0 blocker if pilot kept unlisted; required before Phase 6.
 
 **L-068 residuals** (L-066, L-016, L-014) — Desktop cleanup. Not web blockers.
 
-**`palomas_orrery_helpers.py` split** — Separate computation from tkinter GUI
-helpers. Companion to L-026.
+**`palomas_orrery_helpers.py` split** — ○ Not started. Separate computation
+from tkinter GUI helpers. Computation the assembler needs:
+`calculate_planet9_position_on_orbit`, `rotate_points2`, `calculate_axis_range`.
+Companion to L-026. Required before Phase 2 (critical-path prerequisite once
+Phase 1 completes).
 
 ---
 
@@ -354,6 +434,12 @@ helpers. Companion to L-026.
    choropleth, or map library.
 8. **Star cache wire format:** PKL (Python-version-coupled) vs Parquet/JSON.
    Tied to decision #1 (Pyodide needs non-pickle format).
+9. **Matplotlib in Phase 0 pilot.** The eccentricity demo currently produces
+   matplotlib 2D output. For a true apples-to-apples Dash-vs-Pyodide comparison,
+   both sides should render the same library's output. Options: convert to
+   Plotly for both sides (small work, clean comparison); keep matplotlib and
+   accept the rendering difference as data; or use the Plotly 3D orbital
+   parameter visualization as the pilot subject instead.
 
 ---
 
@@ -399,6 +485,13 @@ This plan draws from eight design sessions:
   corrections. Phase 7 drift window → per-domain migration tails. Vocabulary
   waterfall → just-in-time. Two-sided pilot. Animation envelope. Scene
   equivalence criteria. Coverage index as solar system concept.
+- **Opus 4.6 execution review** (July 4, 2026): Verified prep work status
+  (LICENSE done, Section W done; attribution page and helpers split not done).
+  Mapped dependency chain and critical path (Phase 1 → Phase 2, not Phase 0).
+  Assigned models to phases. Identified Fable access window (expires Jul 7)
+  and highest-leverage allocation (Phase 1 vocabulary, parallel with Phase 0).
+  Surfaced matplotlib question for Phase 0 scope. Confirmed repo HEAD advanced
+  to `7b25eb9`. Produced interactive dependency chart.
 
 **Decisions made (cumulative):**
 - Site never fetches Horizons (§1)
@@ -420,9 +513,13 @@ This plan draws from eight design sessions:
 - Other domain vocabularies designed just-in-time (§5)
 - Animation presets as curated tier-2 exports (§1/§5)
 - Phasing: Pilot → Solar System → Stars → Hybrid → Earth System (§5)
+- Critical path runs through Phase 1, not Phase 0 (§5a)
+- Phase 0 and Phase 1 run in parallel (§5a)
+- Fable → Phase 1 vocabulary; 4.8 → attribution + restraint; 4.6 → all build (§5a)
+- Helpers split is critical-path prerequisite for Phase 2 (§6)
 
 ---
 
-Base: main @ `d6c8c42` / gallery @ `89c8bf30`. Nothing built, nothing pushed.
-Round discipline: this document should get SHORTER next round — options struck
-as decisions land, not added.
+Base: main @ `7b25eb9` / gallery @ `89c8bf30`. Nothing built, nothing pushed.
+Round discipline: options struck as decisions land. Matplotlib question (§7 #9)
+is the one new open item added this round — resolve before Phase 0 build starts.
