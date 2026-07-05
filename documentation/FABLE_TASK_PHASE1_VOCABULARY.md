@@ -21,9 +21,16 @@ domain by reading the two orchestration functions in `palomas_orrery.py` —
 `plot_objects` (static scenes) and `animate_objects` (animations) — and
 distilling every parameter they consume into a GUI-agnostic vocabulary.
 
+**Scope boundary:** This is the vocabulary + coverage-index slice of Phase 1.
+The shared-layer seam gate-check (confirming no tkinter seams beyond the two
+named in §2) and the scene-equivalence criteria (largely Mode 5 / Tony's
+visual judgment) are handled separately — out of scope here.
+
 The master plan (`MASTER_PLAN_WEB_PUBLICATION.md`, uploaded alongside this
 prompt) has the full architectural context. §3 defines the assembler pattern.
-§4a describes the solar system domain. §5 Phase 1 defines this task's scope.
+§4a describes the solar system domain. §4e describes cross-domain integration
+(celestial sphere, exoplanet orbits, Sgr A*) — features the solar system
+assembler calls or hosts. §5 Phase 1 defines this task's scope.
 
 ---
 
@@ -75,8 +82,16 @@ vocabulary's object-selection fields reference this catalog.
 ### In the master plan:
 
 Read §1 (architectural constraints), §3 (assembler architecture), §4a (solar
-system domain), §5 Phase 1 (this task), and §5a (execution map). These are
-settled decisions that constrain the vocabulary.
+system domain), §4e (cross-domain integration — celestial sphere, exoplanets,
+Sgr A*), §5 Phase 1 (this task), and §5a (execution map). These are settled
+decisions that constrain the vocabulary.
+
+**Scope rule for special features:** Some features listed in §4e (exoplanet
+overlays, Sgr A* Grand Tour) are Phase 4 hybrid items, not solar-system-native.
+The clean resolution: if `plot_objects` or `animate_objects` reads a `.get()`
+for a feature today, it is in scope and must be mapped. If they don't, it is
+forward-design — note it in Open Questions but don't fully specify the
+vocabulary fields. Let the actual `.get()` calls drive what's in vs. out.
 
 ---
 
@@ -116,6 +131,10 @@ Organize by semantic group:
 - **Animation parameters** — frame count, speed, trail length (animation only)
 - **Special features** — encounters, close approaches, exoplanet overlays,
   celestial sphere, Planet 9 hypothetical
+  (Note: `calculate_planet9_position_on_orbit` and `calculate_axis_range`
+  live in `palomas_orrery_helpers.py`, not the main file — the vocabulary
+  references these as assembler-called computations but doesn't need their
+  internals. Don't upload helpers; this note is sufficient.)
 - **Content preset** — if using a curated tier-2 preset (encounter, comet
   perihelion, etc.), the preset ID; the assembler expands this into the
   specific object/date/center selections
@@ -126,15 +145,20 @@ drive the structure.)
 ### Deliverable 3: Mapping Table
 
 A table tracing each vocabulary field back to its source `.get()` call(s) in
-the orrery. Format:
+the orrery. **The row set must equal the full `.get()` set** — every `.get()`
+in both functions appears as either a mapped field or an explicit
+"EXCLUDED — [rationale]" row. This is how the table proves completeness;
+excluded inputs that silently vanish leave a hole in the proof. Format:
 
 | Vocabulary field | plot_objects `.get()` | animate_objects `.get()` | Notes |
 |---|---|---|---|
 | `objects.planets` | `planet_vars[name].get()` | `planet_vars[name].get()` | Shared |
+| EXCLUDED | `some_gui_only_var.get()` | — | GUI layout only, no effect on figure |
 | ... | ... | ... | ... |
 
 This table is the verification artifact — it proves the vocabulary is complete
-relative to what the GUI currently offers.
+relative to what the GUI currently offers. The total row count should be
+verifiable against a grep of `.get()` calls in both functions.
 
 ### Deliverable 4: Content-Type Distinction
 
@@ -172,6 +196,13 @@ parameters: always available; Earth system: list of scenarios).
 
 ## Constraints
 
+- **Fetched-not-recalled (house rule).** Every vocabulary field and every
+  `.get()` mapping must come from the actual uploaded file, never from what
+  a solar-system visualization "probably" exposes. You are reasoning over
+  11,110 lines — the dominant failure mode is designing a plausible vocabulary
+  from partial reading plus training recall rather than from the actual code.
+  The mapping table (Deliverable 3) is the guard; treat it as the primary
+  artifact, not a secondary summary.
 - **No tkinter anywhere in the vocabulary.** The spec is a plain Python data
   structure (dict, dataclass, or similar). Both GUIs produce specs; neither
   GUI's implementation leaks into the spec.
@@ -194,16 +225,27 @@ parameters: always available; Earth system: list of scenarios).
 
 ## Output format
 
-Tony is the interpreter between us. Please organize your output with:
+Tony is the interpreter between us. **This is likely a single Fable session —
+the access window closes July 7, and this sits on the critical path.** Be
+complete and self-contained; anything genuinely unresolved goes to Open
+Questions for Tony to carry to another instance. Do not leave silent gaps
+expecting a follow-up Fable round.
 
-1. **A summary section at the top** — the vocabulary at a glance, before the
-   detailed analysis. Tony reads this first to orient.
+Please organize your output with:
+
+1. **A summary section at the top** — the vocabulary as a compact field list
+   (field name, type, allowed values) that Tony can hold in his head. Not a
+   narrative paragraph — a scannable table or structured outline.
 2. **Clear section headers** matching the five deliverables above.
-3. **The mapping table** as a distinct, scannable artifact.
-4. **Design decisions called out explicitly** — where you made a judgment call
+3. **The vocabulary itself as structured tables and concrete dict/dataclass
+   shapes** — field names, Python types, allowed values, defaults. Reserve
+   prose for rationale only.
+4. **The mapping table** as a distinct, scannable artifact with every `.get()`
+   accounted for (see Deliverable 3 completeness requirement).
+5. **Design decisions called out explicitly** — where you made a judgment call
    (e.g., "I grouped X with Y because..."), flag it so Tony can confirm or
    redirect.
-5. **Open questions for Tony** collected at the end — anything the orrery code
+6. **Open questions for Tony** collected at the end — anything the orrery code
    left ambiguous or where multiple vocabulary designs seem equally valid.
 
 ---
@@ -223,4 +265,13 @@ Tony is the interpreter between us. Please organize your output with:
 ---
 
 *Prompt written July 4, 2026 by Claude Opus 4.6 for collegial relay to
-Claude Fable 5. Tony carries context and holds commit authority.*
+Claude Fable 5. Reviewed by Claude Opus 4.8 (9 points, all accepted).
+Tony carries context and holds commit authority.*
+
+*Margin note for Tony (not for Fable): §2 line 65 of the master plan says the
+shared layer was "verified at HEAD (`d6c8c42`)" — the original verification
+SHA, not the current HEAD (`7b25eb9`). The prompt is clean (uses `7b25eb9`
+throughout), but if Fable reads §2 closely it may flag the mismatch as an Open
+Question. The shared-layer boundary hasn't changed — only the LICENSE move and
+Section W entries landed between those SHAs — but worth updating §2 in the
+plan when convenient.*
