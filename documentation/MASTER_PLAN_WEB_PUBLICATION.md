@@ -1,9 +1,9 @@
 # MASTER PLAN: Web Publication of Paloma's Orrery
 
-**Status:** Draft v6 — reviewed, execution-ready.
-**Base:** main @ `7b25eb9`, gallery @ `89c8bf30`
+**Status:** Draft v7 — Phase 1 vocabulary complete; Phase 0 next.
+**Base:** main @ `fdb66ca`, gallery @ `89c8bf30`
 **Date begun:** July 3, 2026
-**Last updated:** July 4, 2026
+**Last updated:** July 5, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
 
 ---
@@ -241,22 +241,29 @@ Gate: lessons-learned document + server-vs-serverless decision before proceeding
 
 ### Phase 1 — Shared Spec Skeleton + Solar System Vocabulary
 
-Design the **shared spec skeleton** — what every spec has across all domains:
-domain tag, content type, display options. Then design the **solar system
-vocabulary**: objects, center, dates, display options, content type
-(static/animation). Other domain vocabularies are designed just-in-time at the
-head of their own phases, informed by lessons learned.
+**Vocabulary and coverage index: ✓ COMPLETE.**
+`PHASE1_SCENE_SPEC_VOCABULARY.md` (Fable 5, July 4, 2026, built on
+`fdb66ca`). Shared skeleton (5 fields) + solar system payload (9 field
+groups) + mapping table (95 active `.get()` calls, all accounted for) +
+content-type distinction (proves one assembler replaces both orchestrators)
++ coverage index interface sketch (Protocol class with envelope and
+assembler methods).
 
-Also in Phase 1:
-- Gate check: confirm no shared-layer seams beyond the two named in §2.
-- Design the **coverage index interface** for the solar system domain.
-- Define **scene equivalence criteria** — the concrete definition of what
-  "equivalent output" means. Largely Mode 5 (Tony's visual judgment), plus a
-  convention checklist (single-info-marker, AU in hover, marker symbols). This
-  definition shapes what L-080's golden artifacts capture.
+Eight design decisions (DD-1 through DD-8) and six open questions (OQ-1
+through OQ-6) are recorded in the deliverable. **Rulings deferred to the
+Phase 0 → Phase 2 transition** — they refine how the assembler interprets
+the vocabulary, not the vocabulary itself. Phase 0 does not use the
+vocabulary. The ones needing rulings soonest at that transition: OQ-4
+(preset expansion semantics) and DD-3 (explicit comet-tails field).
 
-Gate: vocabulary document, index interface spec, and equivalence criteria
-reviewed and stable before any build.
+Remaining Phase 1 gate items (not vocabulary):
+- Seam gate-check: confirm no tkinter seams beyond the two named in §2.
+  Mechanical grep; do at the Phase 0 → Phase 2 transition.
+- Scene equivalence criteria: largely Mode 5 (Tony's visual judgment),
+  plus convention checklist. Define at Phase 2 start.
+
+Gate: vocabulary ✓, index interface ✓. Seam check and equivalence criteria
+at Phase 2 start.
 
 ### Phase 2 — Solar System Assembler + Desktop Migration
 
@@ -322,10 +329,10 @@ PREP (independent, can start now)
   ○ Attribution page ─────────── 4.8 ──→ needed before Phase 6
   ○ Helpers split ────────────── 4.6 ──→ needed before Phase 2
 
-PHASE 0 ─────┐             ┌───── PHASE 1
-Pilot         │  parallel   │      Vocabulary design
-Dash/Pyodide  │             │      Scene spec skeleton
-(4.6)         └──────┬──────┘      (Fable — Jul 7 deadline)
+PHASE 0 ─────┐             ┌───── PHASE 1 ✓ COMPLETE
+Pilot         │  parallel   │      Vocabulary delivered
+Dash/Pyodide  │             │      (Fable, Jul 4)
+(4.6)         └──────┬──────┘      DD/OQ rulings at Phase 2 start
                      │
                      ▼
            ┌── GATE ──────────────────────────┐
@@ -372,18 +379,18 @@ delta-log discipline. The relay pattern.
 
 ### Fable Access Window
 
-Fable 5 availability in subscription tiers expires July 7, 2026. Current
-weekly usage: ~5%. Highest-leverage allocation: one focused session on
-Phase 1 vocabulary design, run in parallel with Phase 0 pilot work in 4.6.
-Phase 1 is critical-path; Phase 0 is not.
+Fable 5 availability in subscription tiers expires July 7, 2026.
+**Phase 1 vocabulary delivered July 4** — the highest-leverage Fable task
+completed within the window. Remaining Fable budget available for any
+additional deep-analysis needs before expiration.
 
-### Parallel Opportunity
+### Next Step
 
-Phase 0 and Phase 1 are independent: the scene spec is a plain data
-document (§3), serializable regardless of whether it is consumed by a Dash
-callback or a Pyodide script. Running both tracks simultaneously means
-Phase 2 can start when they converge, rather than waiting for sequential
-completion.
+Phase 1 complete. Phase 0 (two-sided pilot) is the sole active track.
+The matplotlib question (§7 #9) is the one decision needed before Phase 0
+build starts. Once Phase 0 concludes: resolve DD/OQ rulings from the
+vocabulary, run the seam gate-check, define equivalence criteria, and
+begin Phase 2.
 
 ---
 
@@ -492,6 +499,19 @@ This plan draws from eight design sessions:
   and highest-leverage allocation (Phase 1 vocabulary, parallel with Phase 0).
   Surfaced matplotlib question for Phase 0 scope. Confirmed repo HEAD advanced
   to `7b25eb9`. Produced interactive dependency chart.
+- **Opus 4.6 Fable prompt** (July 4, 2026): Drafted task prompt for Phase 1
+  vocabulary design. Five deliverables specified, fetched-not-recalled named,
+  exhaustive mapping table required. Reviewed by Opus 4.8 (9 points accepted).
+- **Fable 5 vocabulary design** (July 4, 2026): Produced
+  `PHASE1_SCENE_SPEC_VOCABULARY.md` at `fdb66ca`. Shared skeleton (5 fields) +
+  solar system vocabulary (9 groups) + exhaustive mapping table (52+43=95
+  `.get()` reads, reproducible census). Proved animation/static consolidation:
+  one assembler replaces both orchestrators. Coverage index Protocol class.
+  Eight design decisions, six open questions.
+- **Opus 4.6 convergence review** (July 5, 2026): Reviewed Fable deliverable.
+  Accepted all 8 DDs. Recommended rulings on OQ-1 (omittable defaults) and
+  OQ-4 (preset-as-defaults). Tony deferred all DD/OQ rulings to Phase 0 →
+  Phase 2 transition. Phase 1 vocabulary marked complete.
 
 **Decisions made (cumulative):**
 - Site never fetches Horizons (§1)
@@ -517,9 +537,13 @@ This plan draws from eight design sessions:
 - Phase 0 and Phase 1 run in parallel (§5a)
 - Fable → Phase 1 vocabulary; 4.8 → attribution + restraint; 4.6 → all build (§5a)
 - Helpers split is critical-path prerequisite for Phase 2 (§6)
+- Phase 1 vocabulary complete: `PHASE1_SCENE_SPEC_VOCABULARY.md` (Fable, Jul 4)
+- Animation/static consolidation verified — one assembler replaces both (§5/Phase 1)
+- Scene spec is JSON-serializable from day one — settles L-089 (§5/Phase 1)
+- DD/OQ rulings deferred to Phase 0 → Phase 2 transition (§5/Phase 1)
 
 ---
 
-Base: main @ `7b25eb9` / gallery @ `89c8bf30`. Nothing built, nothing pushed.
-Round discipline: options struck as decisions land. Matplotlib question (§7 #9)
-is the one new open item added this round — resolve before Phase 0 build starts.
+Base: main @ `fdb66ca` / gallery @ `89c8bf30`. Phase 1 vocabulary delivered.
+Phase 0 pilot is the next build. Matplotlib question (§7 #9) resolve before
+Phase 0 build starts.
