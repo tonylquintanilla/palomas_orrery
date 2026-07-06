@@ -1,9 +1,9 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** Draft v8 — architectural pivot; ready for review.
-**Base:** main @ `fdb66ca`, gallery @ `89c8bf30`
+**Status:** Draft v9 — Phase 0 proven; data serving framed.
+**Base:** orrery @ `6368c87`, gallery @ `a85a4fa`
 **Date begun:** July 3, 2026
-**Last updated:** July 5, 2026
+**Last updated:** July 6, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
@@ -133,20 +133,21 @@ and calls `Plotly.newPlot()`. It continues to serve curated cards with zero
 changes to the existing pipeline (Studio → converter → viewer). The WYSIWYG
 principle is untouched for curated content.
 
-A single new `interactive.html` handles all interactive exhibits. The domain
-is selected via URL parameter (`?domain=solar_system`). Each domain is a
-"mode" within the page — a different control panel and assembler configuration
-— not a separate HTML file. Two pages total for the entire gallery.
+A single new `interactive.html` handles all interactive exhibits. The exhibit
+is selected via URL parameter (`?exhibit=solar-system-explorer`). Each exhibit
+is a "mode" within the page — a different control panel and assembler
+configuration — not a separate HTML file. Two pages total for the entire
+gallery.
 
 **`gallery_metadata.json` is the bridge.** It gains a `type` field per entry:
 
 ```json
 { "type": "curated",     "file": "gallery/halley_perihelion.json", ... }
-{ "type": "interactive", "domain": "solar_system", "label": "Solar System Explorer", ... }
+{ "type": "interactive", "exhibit": "solar-system-explorer", "label": "Solar System Explorer", ... }
 ```
 
 Curated entries link to `index.html` (the existing viewer). Interactive entries
-link to `interactive.html?domain=<domain>`. The gallery landing page reads
+link to `interactive.html?exhibit=<exhibit>`. The gallery landing page reads
 `gallery_metadata.json` and renders both types as cards — curated cards show
 categories and thumbnails, interactive cards show an "Explore" badge and link
 to the interactive page. The landing page could be `index.html` itself (adding
@@ -170,7 +171,7 @@ both. Resolve in Phase 0.
 **`interactive.html` responsibilities:**
 
 1. Load the common gallery CSS and navigation header
-2. Read the `domain` URL parameter → select the appropriate control panel
+2. Read the `exhibit` URL parameter → select the appropriate control panel
 3. Lazy-load Pyodide (from CDN) + the assembler module + domain cache files
 4. Render the control panel (planet toggles, date picker, presets, etc.)
 5. On user selection: build a scene spec (JSON) → call the assembler via
@@ -200,6 +201,10 @@ both. Resolve in Phase 0.
 - Interactive Plotly figures use the same mobile conventions as curated: hide
   modebar, pinch-zoom, `100dvh` for iOS Safari
 - Preset buttons are touch-friendly (minimum 44px tap targets)
+
+**First artifact deployed:** `interactive.html` at gallery repo root alongside
+`index.html`, serving the Solar System Explorer exhibit. Pyodide v314.0.2.
+Created `300ac30c`, updated `a85a4fa` (July 6, 2026).
 
 **Design inspirations (from research):**
 
@@ -252,95 +257,96 @@ consumer is a gallery interactive page, not a separate web application.
 
 ---
 
-## §3a — Data Serving Architecture (open — Fable review requested)
+## §3a — Data Serving Architecture (framed — Phase 1b)
 
-**The core problem.** The assembler running in Pyodide needs orbit position
-data to produce figures. On the desktop, this data lives in local files. On
-the web, it must be fetched over HTTP from somewhere. The full orbit cache
-(`orbit_paths.json`, 130.4 MB, 1,501 object/center pairs) and the star cache
-(`star_properties_magnitude.pkl`, 31.1 MB) are both **gitignored** — they
-exist only on Tony's local machine and are not served by either repo's GitHub
-Pages. The star cache distributes via GitHub Releases only.
+**What Phase 0 proved.** The Solar System Explorer prototype computes
+Keplerian orbits from mean orbital elements embedded in `orbital_elements.py`,
+with no served data at all. This proves the Keplerian trace needs zero cache.
+But the elements embedded in the codebase are manually maintained and some are
+old (Saturn: epoch 2003, Pluto: epoch 1989). The desktop has better data —
+fresh osculating elements in `osculating_cache_manager.py` and position
+vectors in `orbit_paths.json` — accumulated over months of plotting.
 
-**The planet/satellite split.** Not all objects are equal:
+**The data serving architecture is the pipeline that bridges Tony's desktop
+caches to the browser.**
 
-- **Planets** can fall back to analytical (Keplerian) orbits via
-  `idealized_orbits.py`. The orbit shape is computable from elements; cached
-  positions add dated precision but aren't strictly required for visualization.
-- **Satellites, moons, and spacecraft** have no analytical shortcut. Their
-  trajectories ARE the data — Horizons osculating data, not derivable from
-  simple elements. Without cached positions, there is nothing to plot. Tony's
-  objects list includes all major moons and many small ones.
+**Three trace types (from the desktop codebase, verified in gallery JSON):**
 
-This means the interactive gallery cannot rely on analytical fallback alone.
-Real cached data must reach the browser for the full object catalog.
+- **Actual positions** — Horizons ephemeris, x/y/z at dated time steps. Covers
+  only the selected date range. Critical for precision at encounters, perihelia,
+  close approaches, and date-range sweeps. This is the rolling cache data.
+- **Osculating orbit at epoch** — complete Keplerian conic from instantaneous
+  elements (6 numbers + epoch per object). Critical for moons, where it's the
+  only way to see the full orbit shape. Also important for comets near
+  perihelion. The divergence from the mean orbit IS the perturbation lesson.
+- **Mean elements** — long-term average from `orbital_elements.py`. Ships with
+  the codebase; no serving needed. Toggled off by default. Accurate for planet
+  shapes; poor for close-approach detail.
 
-**The rolling cache question.** The plan calls for a nightly/periodic batch
-that queries Horizons and extends the Tier-1 cache window forward to the
-current date. For the interactive gallery, this raises:
+**Two data types to serve (mean elements ship free):**
 
-- **Window size:** How much history? 30 days? A year? Accumulating forever?
-  For the standard planet catalog (~20 pairs at ~120 bytes/day), storage is
-  trivial — 10 years ≈ 9 MB. For the full 1,501-pair catalog, it's larger.
-- **Satellites need daily resolution** near encounters/maneuvers — the data
-  IS the orbit, and the step size matters.
-- **Date coverage determines interactivity.** A narrow window means users
-  can only explore recent dates. A wide window means richer exploration but
-  more data to serve.
+1. **Osculating elements per object** — tiny (a handful of numbers each). Could
+   ride in the coverage index or a small sidecar file. The assembler computes
+   the complete Keplerian conic from these.
+2. **Position vectors over date ranges** — the rolling cache, the real volume.
+   Per-object canonical files (F2 storage: ~157 positional objects, not 1,501
+   pairs; canonical file count may be slightly higher due to barycenters).
+   ~36 MB for the full catalog (Fable estimate, from 130.4 MB monolith).
 
-**The `.pkl` blocker.** The star cache is pickle format, which Pyodide cannot
-load safely (pickle is Python-version-coupled and a security concern in
-browser contexts). Star cache wire format conversion (→ Parquet or JSON) is
-already §7 #8, gated to Phase 3.
+**What works analytically vs what requires cache — two classes for the rolling
+cache, plus a write-once category:**
 
-**Alternatives surfaced so far:**
+- **Planets, asteroids, comets** — analytical orbits sufficient at solar-system
+  scale. Presets override with cached data for close approaches and perihelia
+  (Tier-2 curated data, write-once).
+- **Moons** — cache required. Constant perturbations and non-heliocentric
+  mechanics make analytical orbits insufficient. The rolling batch is primarily
+  moons.
+- **Spacecraft** — actual position arcs only, write-once (completed missions
+  never change). Elements not typically applicable. Outside the rolling batch.
 
-1. **Per-pair file splitting.** Split `orbit_paths.json` into individual files
-   (`Mercury_Sun.json`, `Europa_Jupiter.json`, etc.). Pyodide fetches only the
-   pairs the user selects. Coverage index maps to file names. Browser caches
-   each file after first fetch. Pro: download proportional to selection, not
-   full cache. Con: 1,501 small files in a repo; batch script must update
-   individual files.
+**Barycenters:** Pluto-Charon and Orcus-Vanth have barycenters outside the
+primary body. The coverage index needs a `stored_center` field per object.
 
-2. **Curated subset in the gallery repo.** Ship only the data the interactive
-   coverage index offers. Pro: small footprint. Con: limits interactivity to
-   what's pre-selected — the very limitation the interactive gallery exists
-   to overcome.
+**F2 canonical storage (settled).** Per-object files, not per-pair. The old
+pair-based `orbit_paths.json` (130.4 MB, 1,501 entries) is archived locally,
+gitignored, and still used by the desktop code. The web cache is a derived
+projection: an export script reads the desktop cache, extracts one canonical
+trajectory per object (heliocentric for planets/asteroids/comets, parent-
+relative for moons, arc-natural for spacecraft), and writes web-format files.
+The precision rule: store moons parent-relative to preserve significance in
+float64.
 
-3. **Orrery repo's GitHub Pages.** The orbit data lives in the orrery repo
-   (separate 1 GB ceiling). Pyodide fetches cross-origin from
-   `tonyquintanilla.github.io/palomas_orrery/cache/...`. Pro: separates data
-   from presentation. Con: data is currently gitignored; would need to un-ignore
-   the served subset.
+**Serving home is a configuration value.** The file layout and index schema
+is the real architectural decision. Fable's H1 (dedicated `palomas-orrery-data`
+repo, orphan-branch publish, zero history growth) is the leading candidate.
+CORS verification needed before locking: does a project site under the custom
+domain (`palomasorrery.com/<repo>/`) share the gallery's origin? Probable
+answer: yes (same-origin under user-site custom domain), but confirm
+empirically — not a blocker, a five-minute check.
 
-4. **GitHub Releases.** Star cache already uses this path. Could work for orbit
-   data. Pro: no repo size impact. Con: not CDN-fast, not designed for
-   per-request fetches by browser code.
+**Star cache:** 31 MB pickle → `.npz` for v1 (NumPy stable in Pyodide; Parquet
+held as optimization). Deferred to Phase 3.
 
-5. **R2 / external CDN.** Cloudflare R2 (10 GB free, no egress fees). Large
-   caches served from a CDN URL. Pro: unlimited growth, fast. Con: additional
-   service to manage, domain configuration.
+**Open questions (carry to Phase 1b / Phase 2 transition):**
 
-6. **Hybrid approaches.** Different tiers use different serving paths. E.g.,
-   standard planet pairs in the gallery repo (tiny); full moon/satellite
-   catalog on R2 or orrery Pages; star cache on R2 after format conversion.
+- OQ-A: Web catalog scope — all 157 positional objects or a curated first
+  tranche?
+- OQ-B: Window policy — sliding, accumulating, or split (accumulate
+  heliocentric, slide moons)?
+- OQ-C: Update cadence — monthly batch + 90-day forward padding as starting
+  point.
+- OQ-D: Moon step size — 6h gives ~7 points per Io orbit (hexagonal). Inner
+  moons may want 2h. Per-object `step_hours` in the index.
+- OQ-E: Serving home — dedicated repo (H1) vs gallery subfolder (H2) vs R2
+  (H3). CORS check first.
+- OQ-F: Canonical frame for each class — settled in principle (helio / parent-
+  relative / arc-natural); implementation details at build time.
+- OQ-G: Wire format — JSON for v1 (debuggability during assembler development).
 
-**The `graph_objects` weight.** 4.8 verified that the shared computation
-engines are deeply `plotly.graph_objects`-based (88 `go.*` usages in
-`idealized_orbits.py` alone). The assembler must load the full `plotly`
-package in Pyodide — there is no lightweight "emit JSON directly" escape
-without rewriting the engines. Combined with orbit data fetching, the total
-first-visit payload is: Pyodide base (~6 MB) + numpy + plotly + orbit data
-for the selected pairs. The gallery already serves 30 MB+ animated plots
-acceptably, so this is within established user expectations.
-
-**The `data_inventory.py` extension.** Extending `data_inventory.py` to
-cover the gallery repo would provide exact numbers for the headroom math
-and inform the R2/Pages/hybrid decision with real data.
-
-**This section is open.** The data serving architecture has multiple viable
-approaches with genuine tradeoffs. Fable 5 has been asked to think broadly
-about solutions before we converge.
+**Source:** Fable 5 broad analysis (`DATA_SERVING_BROAD_ANALYSIS.md`, July 5,
+2026, built on `993dfd5` / `a6420bc`). Reviewed and refined by Opus 4.6 + Tony
+(July 6, 2026). 4.8 review confirmed source faithfulness (July 6, 2026).
 
 ---
 
@@ -429,27 +435,39 @@ during the build gets a ledger tag ("assembler-must-inherit").
 
 ### Phase 0 — Gallery Integration Test
 
-**Test Pyodide inside the existing gallery.** Build the orbital parameter
-eccentricity visualization as a gallery interactive page: Pyodide loads in the
-browser, runs the eccentricity slider computation, renders via Plotly (not
-matplotlib — convert to Plotly for the gallery). Tests:
+**✓ DONE** (July 6, 2026). `interactive.html` deployed to
+`palomasorrery.com/interactive.html` (created `300ac30c`, updated `a85a4fa`).
+Pyodide v314.0.2 + NumPy computing Keplerian orbits from mean elements,
+rendered by Plotly.js. Tested on desktop Chrome and iPhone Safari. Zero
+server, zero data files — pure computation from embedded orbital elements.
 
-1. Pyodide loads inside the gallery's HTML/JS environment
-2. The eccentricity demo runs as Python in the browser
-3. Interactive controls (slider, buttons) coexist with gallery navigation
-4. Cold-start time is acceptable on mobile
-5. The Plotly figure rendered by Pyodide matches a pre-exported one
+**Stack proven:** Python computation runs in the browser on a static GitHub
+Pages site. Server/serverless decision resolved: Pyodide.
 
-If all five pass: the gallery grows interactive, no server needed. If any fail:
-specific data on exactly what doesn't work, informing fallback decisions.
+**Consent gate:** First-time visitors see an explicit opt-in explaining Pyodide
+("a Python computation engine that runs entirely in your browser via
+WebAssembly. No data leaves your device"). Choice persisted in localStorage;
+returning visitors go straight to loading. Resolves the user-trust concern
+about unnamed downloads.
 
-Note: if the page is publicly reachable, keep unlisted until attribution page
-(L-086) lands.
+**Lessons:** Pyodide v314.0.2 loads in ~4-10 seconds depending on connection
+(cached after first visit). The lightweight approach (Python/NumPy computes
+math, JavaScript builds Plotly figure) avoids loading the full `plotly` Python
+package — dramatically faster than loading plotly in Pyodide.
 
-Gate: lessons-learned document + interactive gallery architecture confirmed
-before building domain assemblers.
+**Architecture A vs B fork (deferred to Phase 2 start).** Phase 0 proved
+architecture A: Python computes arrays via NumPy, JavaScript builds Plotly
+traces and calls `Plotly.newPlot()`. This is a different architecture than
+Phase 2 specifies: architecture B, where a Python assembler calls the shared
+computation engines (`idealized_orbits.py`, `planet_visualization.py`) via
+`plotly.graph_objects` and emits complete Plotly JSON. A is lighter and faster
+(no plotly in Pyodide). B reuses the desktop engines — which was the purpose
+of the shared assembler (L-079). Phase 0 de-risked A; it did not de-risk B.
+The decision gate is Phase 2 start, with an explicit plotly-in-Pyodide
+cold-start measurement. Phase 1b (data serving pipeline) is the same
+regardless of A or B. See §7 #10.
 
-### Phase 1 — Shared Spec Skeleton + Solar System Vocabulary
+### Phase 1a — Shared Spec Skeleton + Solar System Vocabulary
 
 **✓ COMPLETE.** `PHASE1_SCENE_SPEC_VOCABULARY.md` (Fable 5, July 4, 2026,
 built on `fdb66ca`). Shared skeleton (5 fields) + solar system payload
@@ -463,6 +481,28 @@ through OQ-6) deferred to Phase 0 → Phase 2 transition.
 Remaining gate items: seam gate-check and scene-equivalence criteria at
 Phase 2 start.
 
+### Phase 1b — Data Serving Pipeline
+
+**Build the bridge from Tony's desktop caches to the browser.** The desktop
+has accumulated months of osculating elements and position vectors from
+Horizons. Phase 1b makes this data available to the interactive gallery.
+
+Deliverables:
+1. **Export script** — reads desktop caches (osculating elements from
+   `osculating_cache_manager.py` + position vectors from `orbit_paths.json`),
+   writes per-object canonical files in web-servable format (F2 storage).
+2. **Coverage index** — JSON manifest listing available objects, their
+   availability class, date coverage, step size, stored center, and osculating
+   elements. The assembler (or the JS figure builder, depending on A/B fork)
+   reads this to know what it can offer.
+3. **Serving home** — resolve OQ-E (CORS check first), set up the serving
+   destination, deploy the first web cache (planets as proof of pipeline).
+4. **Resolve OQ-A through OQ-G** — scope, window policy, cadence, moon step
+   size, format.
+
+Requires: Fable analysis (delivered), gitignore updates (done @ `6368c87`).
+Gate: export script runs, web cache deployed, interactive page can fetch it.
+
 ### Phase 2 — Solar System Assembler + First Interactive Page
 
 Build the solar system assembler: scene spec → Plotly figure JSON. Written
@@ -473,7 +513,8 @@ buttons, center body, date picker. Static scenes only. Presets for encounters,
 comet perihelion, close approaches. Each preset is a pre-filled scene spec that
 the user can view as-is or modify.
 
-Requires: helpers split (L-087), Phase 0 lessons.
+Requires: helpers split (L-087), Phase 1b data pipeline, A/B architecture
+decision (§7 #10 — measure plotly-in-Pyodide cold-start).
 
 Gate: scene equivalence (Mode 5) + the gallery page ships.
 
@@ -525,46 +566,57 @@ PREP (independent, can start now)
   ○ Attribution page ─────────── 4.8 ──→ needed before public pages
   ○ Helpers split ────────────── 4.6 ──→ needed before Phase 2
 
-PHASE 0 ──────────────────────── PHASE 1 ✓ COMPLETE
-Gallery integration test         Vocabulary delivered
-Pyodide + eccentricity           (Fable, Jul 4)
-in gallery shell (4.6)
-         │
-         ▼
-PHASE 2: Solar system assembler + first interactive page (4.6)
-  │            │            │
-  ▼            ▼            ▼
-PHASE 3      PHASE 4      PHASE 5
-Stars        Hybrid       Earth system
-(4.6)        (4.6)        (4.6 + 4.8)
+PHASE 0 ✓ DONE ──── PHASE 1a ✓ COMPLETE ──── PHASE 1b
+Stack proven         Vocabulary delivered       Data serving pipeline
+Arch A proven        (Fable, Jul 4)             Export script + coverage
+(Jul 6)                                         index + serving home
+                          │
+                     ┌────┴────┐
+                  A/B DECISION
+                  Measure plotly-in-Pyodide
+                     └────┬────┘
+                          │
+                     PHASE 2 ◄── Phase 1b + helpers split + A/B decision
+                     Solar system assembler (if B)
+                     or enhanced JS builder (if A)
+                     + interactive page
+                          │
+                     PHASE 3
+                     Star assembler + star cache format
+                          │
+                     PHASE 4
+                     Hybrid domains
+                          │
+                     PHASE 5 ◄── 4.8 restraint discipline
+                     Earth system
 ```
 
-**Critical path:** Phase 0 → Phase 2 → domain pages.
-(Phase 1 vocabulary was the prior critical-path item; now complete.)
+**Critical path:** Phase 1b → A/B decision → Phase 2 → domain pages.
+(Phase 0 and Phase 1a complete.)
 
 **Secondary dependencies:**
 - Helpers split → Phase 2 (computation functions freed from tkinter)
 - Attribution page → any publicly reachable interactive page
 - Star cache wire format → Phase 3 (Pyodide needs non-pickle format)
+- A/B architecture decision → Phase 2 (measure plotly-in-Pyodide cold-start)
 
 ### Model Assignments
 
-**Fable 5** — Phase 1 vocabulary delivered. Remaining Fable budget available
-for deep-analysis needs before July 7 expiration. Potential: gallery-extension
-architecture review.
+**Fable 5** — Phase 1a vocabulary delivered. Data serving analysis delivered.
+Fable access expired July 7, 2026.
 
 **Opus 4.8** — verification, convergence, restraint. Attribution page (fetch
 license terms). Vocabulary DD/OQ review at Phase 2 start. Phase 5 restraint
-discipline on human-cost content. Review this plan.
+discipline on human-cost content. v9 draft review (completed July 6, 2026:
+caught gallery SHA provenance, gitignore claim, A/B fork, OQ-10 overclaim).
 
-**Opus 4.6** — daily conversational partner, iterative build. Phase 0 gallery
-integration test, helpers split, all assembler and interactive page builds.
+**Opus 4.6** — daily conversational partner, iterative build. Phase 1b data
+serving pipeline, helpers split, all assembler and interactive page builds.
 
 ### Next Step
 
-Phase 0: build the eccentricity interactive page inside the gallery shell.
-Resolve the eccentricity visualization from matplotlib to Plotly as part of
-this work (not a separate decision — Plotly is the gallery's language).
+Phase 1b: design and build the data serving pipeline. Export script, coverage
+index, serving home. Resolve OQ-A through OQ-G.
 
 ---
 
@@ -594,20 +646,23 @@ from tkinter GUI helpers. Computation the assembler needs:
 
 ## §7 — Open Decisions
 
-1. ~~**Server vs serverless.**~~ **Resolved in principle: serverless (Pyodide).**
-   The gallery is a static site; Pyodide keeps it static. Phase 0 confirms
-   this works in practice. If Pyodide proves unacceptable, the fallback is a
-   pre-computed library only (bigger menu, no runtime computation) — not a
-   server. A server is the last resort.
+1. ~~**Server vs serverless.**~~ **Resolved: Pyodide.** Phase 0 proved the
+   stack (July 6, 2026): Pyodide v314.0.2 loads in ~4 seconds on WiFi,
+   computes Keplerian orbits via NumPy, renders via Plotly.js. Works on
+   desktop Chrome and iPhone Safari. Consent gate addresses user-trust
+   concern about unnamed downloads.
 2. ~~**Scene-spec vocabulary design.**~~ **Delivered** (Fable 5, July 4).
    DD/OQ rulings at Phase 2 start.
-3. **Multi-file cache structure (solar system):** per-object vs per-pair vs
-   per-(pair+window); coverage index format. Resolved in Phase 2.
-4. **Tier-1 standard catalog:** which pairs, what window, what intervals.
+3. **Data serving file layout and index schema.** Per-object canonical files
+   (F2 settled). Coverage index format, availability classes, `stored_center`
+   field. Resolved in Phase 1b.
+4. **Tier-1 rolling cache scope and window.** OQ-A (which objects), OQ-B
+   (window policy), OQ-C (cadence), OQ-D (moon step size). Resolved in
+   Phase 1b.
 5. **Tier-3 persistence:** on or off. A dial.
-6. **Pages headroom strategy:** gallery (~479 MB) + orbit cache + star cache +
-   assembler code vs 1 GB ceiling. Separate Pages project site, scene-weight
-   reduction, gallery culling (L-074), or R2 for large files.
+6. **Serving home.** CORS check determines whether a dedicated repo (H1)
+   shares origin with the gallery under the custom domain. Five-minute
+   check; probable answer is yes (same-origin). Resolved in Phase 1b.
 7. **Earth system KMZ rendering on the web:** downloads with teasers, Plotly
    choropleth, or map library.
 8. **Star cache wire format:** PKL → Parquet/JSON for Pyodide. Resolved in
@@ -615,10 +670,18 @@ from tkinter GUI helpers. Computation the assembler needs:
 9. ~~**Matplotlib in Phase 0.**~~ **Dissolved.** The gallery is Plotly. The
    eccentricity demo converts to Plotly as part of Phase 0 — not a separate
    decision.
-10. **Pyodide package weight + cold-start.** Plotly is large. The total
-    download (Pyodide base + numpy + plotly) on first visit is the key
-    Phase 0 measurement. If unacceptable: lazy-load Pyodide only on
-    "Explore" click; pre-curated cards never trigger it.
+10. **Pyodide package weight + cold-start.** **Resolved for the lightweight
+    path** (architecture A: NumPy in Pyodide, JS builds figure). Pyodide
+    v314.0.2 loads in ~4-10 seconds; consent gate gives users an explicit
+    choice; returning visitors skip consent (localStorage). **Open for the
+    assembler path** (architecture B: plotly loaded in Pyodide). The shared
+    computation engines are deeply `graph_objects`-based (88 `go.*` usages
+    in `idealized_orbits.py` alone) — if Phase 2 reuses them, the full
+    `plotly` Python package must load in Pyodide, and that cold-start is
+    unmeasured. **Decision gate:** measure plotly-in-Pyodide cold-start at
+    Phase 2 start. If acceptable, B (shared engines). If not, A (JS figure
+    builder, vocabulary and coverage index still apply). Phase 1b is the
+    same regardless.
 11. ~~**Gallery viewer architecture for interactive pages.**~~ **Resolved:
     Option C (hybrid).** `index.html` stays as curated viewer. Single
     `interactive.html` handles all interactive exhibits via URL parameter.
@@ -662,7 +725,7 @@ not on the critical path for the gallery.
 
 ## §10 — Lineage
 
-This plan draws from twelve sessions across three Claude models + one pivot:
+This plan draws from fifteen sessions across three Claude models + two pivots:
 
 - **Fable 5 survey** (July 2, 2026): Four-front survey. L-079 as keystone.
   Five publication options. Six code proposals (L-079–L-084).
@@ -718,6 +781,33 @@ This plan draws from twelve sessions across three Claude models + one pivot:
   don't). Explored per-pair splitting, curated subset, orrery Pages, Releases,
   R2, and hybrid approaches. Identified rolling cache date-range question.
   Referred to Fable 5 for broad-first analysis.
+- **Fable 5 data serving analysis** (July 5, 2026): Broad-first analysis of
+  data serving architecture. Five reframing findings: F2 canonical per-object
+  storage collapses 1,501 pairs to ~157 objects; restructured cache ~36 MB
+  (not 130.4 MB). Three-class split (analytic-capable / elements-degrading /
+  trajectory-is-the-data), refined to two classes + write-once in Tony's
+  convergence. Three hybrid approaches (H1-H3). Serving home identified as
+  configuration value, not architecture. Seven open questions (OQ-A through
+  OQ-G). Six verification items.
+  (`DATA_SERVING_BROAD_ANALYSIS.md`, built on `993dfd5` / `a6420bc`.)
+- **Opus 4.6 + Tony convergence and build** (July 6, 2026): Reviewed Fable
+  analysis; adopted F2, three trace types, two-class model (analytic vs
+  cache-required, plus spacecraft write-once). Built Solar System Explorer
+  as Phase 0 deliverable — `interactive.html` deployed to
+  `palomasorrery.com/interactive.html` (created `300ac30c`, updated
+  `a85a4fa`). Pyodide v314.0.2, mean element Keplerian computation,
+  consent gate. Tested on desktop Chrome and iPhone Safari. Phase 0 proven.
+  Phase 1b (data serving pipeline) identified as the gap between vocabulary
+  (Phase 1a) and assembler (Phase 2). Gitignore updated for orbit cache
+  files (`6368c87`).
+- **Opus 4.8 review of v9 draft** (July 6, 2026): Caught gallery SHA
+  provenance error (draft cited `a6420bc` where `interactive.html` did not
+  yet exist; correct provenance is `300ac30c` / `a85a4fa`). Caught gitignore
+  "done" claim ahead of repo (subsequently pushed at `6368c87`). Named the
+  architecture A vs B fork: Phase 0 proved A (numpy + JS figure builder)
+  while Phase 2 specifies B (Python assembler with `graph_objects`). Flagged
+  OQ-10 overclaimed for the B path. Recommended: name the fork, defer
+  decision to Phase 2 start with measurement gate. All findings accepted.
 
 **Decisions made (cumulative):**
 
@@ -750,6 +840,21 @@ This plan draws from twelve sessions across three Claude models + one pivot:
 - Server-vs-serverless resolved in principle: serverless/Pyodide (§7)
 - Gallery viewer: Option C hybrid — two pages, `index.html` + `interactive.html` (§2a)
 
+*New in v9:*
+- Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (§5)
+- Server/serverless resolved in practice: Pyodide (§7 #1)
+- Architecture A vs B fork named; decision deferred to Phase 2 start (§5, §7 #10)
+- F2 canonical per-object storage adopted (§3a)
+- Three trace types: actual positions, osculating at epoch, mean elements (§3a)
+- Two data types to serve: osculating elements + position vectors (§3a)
+- Two classes for rolling cache + spacecraft write-once (§3a)
+- Phase 1b inserted: data serving pipeline (§5)
+- Consent gate for Pyodide loading (§5, §7 #10)
+- Pyodide cold-start acceptable for lightweight path; unmeasured for assembler path (§7 #10)
+- `interactive.html` deployed as first exhibit (§2a)
+- `orbit_paths.json` and `orbit_cache/` added to `.gitignore` (§3a)
+- URL parameter scheme: `?exhibit=` (§2a)
+
 *Superseded:*
 - ~~Web GUI is a fork, not a replacement~~ → gallery extension (§2)
 - ~~Phase 0 is two-sided pilot: Dash + Pyodide~~ → one-sided gallery test (§5)
@@ -758,5 +863,7 @@ This plan draws from twelve sessions across three Claude models + one pivot:
 
 ---
 
-Base: main @ `fdb66ca` / gallery @ `89c8bf30`. Phase 1 vocabulary delivered.
-Phase 0 (gallery integration test) is the next build.
+Base: orrery @ `6368c87` / gallery @ `a85a4fa`. Phase 0 proven. Phase 1a
+vocabulary delivered. Phase 1b (data serving pipeline) is the next design
+track. A/B architecture fork deferred to Phase 2 start. Solar System
+Explorer live at palomasorrery.com/interactive.html.
