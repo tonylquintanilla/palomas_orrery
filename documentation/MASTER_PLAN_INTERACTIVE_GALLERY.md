@@ -63,11 +63,13 @@ envelope is complex (object/center/date-range matrix). Other domains declare
 their bounds simply: stars state distance and magnitude limits, orbital
 parameters are always available, Earth system lists available scenarios.
 
-**GitHub Pages hosting.** The gallery is ~479 MB against Pages' 1 GB ceiling.
-Headroom is shared between gallery growth, cache data, and the Pyodide
-assembler code. A separate Pages project site (each gets its own 1 GB) is an
-option if space tightens. R2 graduation for large files (star cache, orbit
-cache) is a dial.
+**GitHub Pages hosting.** The gallery is ~436 MB against Pages' 1 GB ceiling,
+with ~588 MB of headroom (post-cleanup, July 2026). The largest remaining
+files are pre-refactoring exports that will shrink further when re-exported
+with the current slimmer plotting functions. Headroom is shared between
+gallery growth, cache data, and the Pyodide assembler code. A separate Pages
+project site (each gets its own 1 GB) is an option if space tightens. R2
+graduation for large files (star cache, orbit cache) is a dial.
 
 ---
 
@@ -247,6 +249,98 @@ content.
 **Per-domain assembler development** follows the same sequence as v7 (solar
 system first, then stars, hybrid, Earth system) but each assembler's first
 consumer is a gallery interactive page, not a separate web application.
+
+---
+
+## §3a — Data Serving Architecture (open — Fable review requested)
+
+**The core problem.** The assembler running in Pyodide needs orbit position
+data to produce figures. On the desktop, this data lives in local files. On
+the web, it must be fetched over HTTP from somewhere. The full orbit cache
+(`orbit_paths.json`, 130.4 MB, 1,501 object/center pairs) and the star cache
+(`star_properties_magnitude.pkl`, 31.1 MB) are both **gitignored** — they
+exist only on Tony's local machine and are not served by either repo's GitHub
+Pages. The star cache distributes via GitHub Releases only.
+
+**The planet/satellite split.** Not all objects are equal:
+
+- **Planets** can fall back to analytical (Keplerian) orbits via
+  `idealized_orbits.py`. The orbit shape is computable from elements; cached
+  positions add dated precision but aren't strictly required for visualization.
+- **Satellites, moons, and spacecraft** have no analytical shortcut. Their
+  trajectories ARE the data — Horizons osculating data, not derivable from
+  simple elements. Without cached positions, there is nothing to plot. Tony's
+  objects list includes all major moons and many small ones.
+
+This means the interactive gallery cannot rely on analytical fallback alone.
+Real cached data must reach the browser for the full object catalog.
+
+**The rolling cache question.** The plan calls for a nightly/periodic batch
+that queries Horizons and extends the Tier-1 cache window forward to the
+current date. For the interactive gallery, this raises:
+
+- **Window size:** How much history? 30 days? A year? Accumulating forever?
+  For the standard planet catalog (~20 pairs at ~120 bytes/day), storage is
+  trivial — 10 years ≈ 9 MB. For the full 1,501-pair catalog, it's larger.
+- **Satellites need daily resolution** near encounters/maneuvers — the data
+  IS the orbit, and the step size matters.
+- **Date coverage determines interactivity.** A narrow window means users
+  can only explore recent dates. A wide window means richer exploration but
+  more data to serve.
+
+**The `.pkl` blocker.** The star cache is pickle format, which Pyodide cannot
+load safely (pickle is Python-version-coupled and a security concern in
+browser contexts). Star cache wire format conversion (→ Parquet or JSON) is
+already §7 #8, gated to Phase 3.
+
+**Alternatives surfaced so far:**
+
+1. **Per-pair file splitting.** Split `orbit_paths.json` into individual files
+   (`Mercury_Sun.json`, `Europa_Jupiter.json`, etc.). Pyodide fetches only the
+   pairs the user selects. Coverage index maps to file names. Browser caches
+   each file after first fetch. Pro: download proportional to selection, not
+   full cache. Con: 1,501 small files in a repo; batch script must update
+   individual files.
+
+2. **Curated subset in the gallery repo.** Ship only the data the interactive
+   coverage index offers. Pro: small footprint. Con: limits interactivity to
+   what's pre-selected — the very limitation the interactive gallery exists
+   to overcome.
+
+3. **Orrery repo's GitHub Pages.** The orbit data lives in the orrery repo
+   (separate 1 GB ceiling). Pyodide fetches cross-origin from
+   `tonyquintanilla.github.io/palomas_orrery/cache/...`. Pro: separates data
+   from presentation. Con: data is currently gitignored; would need to un-ignore
+   the served subset.
+
+4. **GitHub Releases.** Star cache already uses this path. Could work for orbit
+   data. Pro: no repo size impact. Con: not CDN-fast, not designed for
+   per-request fetches by browser code.
+
+5. **R2 / external CDN.** Cloudflare R2 (10 GB free, no egress fees). Large
+   caches served from a CDN URL. Pro: unlimited growth, fast. Con: additional
+   service to manage, domain configuration.
+
+6. **Hybrid approaches.** Different tiers use different serving paths. E.g.,
+   standard planet pairs in the gallery repo (tiny); full moon/satellite
+   catalog on R2 or orrery Pages; star cache on R2 after format conversion.
+
+**The `graph_objects` weight.** 4.8 verified that the shared computation
+engines are deeply `plotly.graph_objects`-based (88 `go.*` usages in
+`idealized_orbits.py` alone). The assembler must load the full `plotly`
+package in Pyodide — there is no lightweight "emit JSON directly" escape
+without rewriting the engines. Combined with orbit data fetching, the total
+first-visit payload is: Pyodide base (~6 MB) + numpy + plotly + orbit data
+for the selected pairs. The gallery already serves 30 MB+ animated plots
+acceptably, so this is within established user expectations.
+
+**The `data_inventory.py` extension.** Extending `data_inventory.py` to
+cover the gallery repo would provide exact numbers for the headroom math
+and inform the R2/Pages/hybrid decision with real data.
+
+**This section is open.** The data serving architecture has multiple viable
+approaches with genuine tradeoffs. Fable 5 has been asked to think broadly
+about solutions before we converge.
 
 ---
 
@@ -604,8 +698,26 @@ This plan draws from twelve sessions across three Claude models + one pivot:
   as unifying principle. Phase 0 simplifies to one-sided Pyodide test inside
   gallery. Matplotlib question dissolved (gallery is Plotly). Phase 6
   dissolved (gallery IS the UI). Server-vs-serverless resolved in principle
-  (Pyodide/static). Desktop migration deferred from critical path. New open
-  decisions: Pyodide weight, gallery viewer architecture for interactive pages.
+  (Pyodide/static). Desktop migration deferred from critical path. Gallery
+  viewer architecture settled (Option C: two pages). New open decisions:
+  Pyodide weight, data serving architecture, second-renderer question
+  (resolved: two WYSIWYG pipelines, not a shared core — each studio previews
+  through its own viewer).
+- **Opus 4.8 review of v8** (July 5, 2026): Confirmed pivot integrity,
+  vocabulary preservation, constraint faithfulness, phasing coherence, and
+  restraint carryover. Flagged second-renderer tension (resolved by
+  two-studio WYSIWYG model). Flagged Pyodide cold-start acceptance criteria
+  (resolved: gallery already serves 30 MB+ files, Pyodide is within norms).
+  Verified `graph_objects` coupling makes full plotly package unavoidable in
+  Pyodide. Confirmed 148 gallery entries vs "330+" claim. Provided headroom
+  math (479+130+31=640 MB, but orbit/star caches are gitignored — not in
+  either repo). Nits accepted.
+- **Opus 4.6 + Tony data serving exploration** (July 5, 2026): Discovered
+  orbit cache and star cache are both gitignored — not served by either repo.
+  Surfaced planet/satellite split (planets have analytical fallback, satellites
+  don't). Explored per-pair splitting, curated subset, orrery Pages, Releases,
+  R2, and hybrid approaches. Identified rolling cache date-range question.
+  Referred to Fable 5 for broad-first analysis.
 
 **Decisions made (cumulative):**
 

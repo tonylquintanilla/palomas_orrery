@@ -57,5 +57,23 @@
     "date_max": "2026-05-14",
     "dist_max": "0.5",
     "fetched": "2026-04-16"
+  },
+  "close_approach:A852 FA:Mars": {
+    "designation": "A852 FA",
+    "body": "Mars",
+    "approaches": [],
+    "date_min": "2026-05-02",
+    "date_max": "2026-05-30",
+    "dist_max": "0.5",
+    "fetched": "2026-05-02"
+  },
+  "close_approach:C/2025 N1:Earth": {
+    "designation": "C/2025 N1",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2025-10-15",
+    "date_max": "2025-11-12",
+    "dist_max": "0.5",
+    "fetched": "2026-06-10"
   }
 }

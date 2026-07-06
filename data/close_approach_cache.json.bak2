@@ -30,5 +30,41 @@
     "date_max": "2007-04-29",
     "dist_max": "0.5",
     "fetched": "2026-03-13"
+  },
+  "close_approach:C/2025 N1:Jupiter": {
+    "designation": "C/2025 N1",
+    "body": "Jupiter",
+    "approaches": [],
+    "date_min": "2026-03-18",
+    "date_max": "2027-03-18",
+    "dist_max": "0.5",
+    "fetched": "2026-03-18"
+  },
+  "close_approach:2004 MN4:Mercury": {
+    "designation": "2004 MN4",
+    "body": "Mercury",
+    "approaches": [],
+    "date_min": "2026-03-26",
+    "date_max": "2026-04-23",
+    "dist_max": "0.5",
+    "fetched": "2026-03-26"
+  },
+  "close_approach:C/2025 R3:Earth": {
+    "designation": "C/2025 R3",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-04-16",
+    "date_max": "2026-05-14",
+    "dist_max": "0.5",
+    "fetched": "2026-04-16"
+  },
+  "close_approach:A852 FA:Mars": {
+    "designation": "A852 FA",
+    "body": "Mars",
+    "approaches": [],
+    "date_min": "2026-05-02",
+    "date_max": "2026-05-30",
+    "dist_max": "0.5",
+    "fetched": "2026-05-02"
   }
 }
