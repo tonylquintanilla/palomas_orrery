@@ -39,12 +39,17 @@ it before beginning.
    of plottable objects including all major moons and many small ones. This is
    the population the data serving architecture must support.
 4. **`DATA_INVENTORY.md`** — the current local data inventory showing what
-   files exist, their sizes, and their formats. Key entries: `orbit_paths.json`
-   (130.4 MB, 1,501 entries), `star_properties_magnitude.pkl` (31.1 MB).
+   files exist, their sizes, and their formats. Key entries:
+   `star_properties_magnitude.pkl` (31.1 MB).
    **Note:** the gallery was cleaned (orphan JSON and .bak files removed) before
    this inventory. Gallery is 436 MB with 588 MB headroom. The top-10 largest
    gallery files are pre-refactoring exports that will shrink further when
    re-exported with current slimmer plotting functions — real headroom will grow.
+   **Note:** `orbit_paths.json` (formerly 130 MB, 1,501 entries) has been removed
+   from local data — the monolith format is not viable at this scale (exceeds
+   GitHub's 100 MB per-file limit). The orbit cache must be restructured for
+   web serving regardless. This is a design opportunity, not a constraint — the
+   new format can be whatever the data serving architecture needs.
 
 ---
 
