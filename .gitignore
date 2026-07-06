@@ -7,6 +7,10 @@ __pycache__/
 *.pkl
 *.csv
 
+# Orbit cache (local desktop data — web-served via separate data repo)
+orbit_paths.json
+orbit_cache/
+
 # Plot outputs
 # *.html -- removed to allow tracking of certain html files used for visualization
 *.png
