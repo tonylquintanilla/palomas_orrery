@@ -17,13 +17,18 @@
   Plotly.js. Tested on desktop Chrome and iPhone Safari. Consent gate for
   first-time visitors (localStorage persistence). ~4-10 second load time,
   cached after first visit. Server/serverless resolved: Pyodide.
-- **Architecture note.** Phase 0 proved architecture A (numpy + JS figure
-  builder). The shared assembler path (architecture B: plotly in Pyodide,
-  `graph_objects`-based engines) is unmeasured. A/B fork deferred to Phase 2
-  start. See §7 #10.
+- **A/B fork resolved: B′.** `measure_plotly.html` timed full plotly-in-Pyodide
+  cold-start on iPhone Safari WiFi: **2.1-3.3 s** (acceptance ≤15 s — passed at
+  one-seventh). `import plotly.graph_objects` = 57-59 ms. Fable's convention-
+  duplication analysis confirmed A's parallel-pipeline cost exceeds B′'s cold-
+  start cost for a solo developer. B′ uses slim self-hosted wheel (~3.9 MB).
+  Two-tier model: frozen A exhibits (instant) + data-backed B′ exhibits
+  (shared engines, one codebase). Phase 0 closed.
 - **Supersedes:** Two-sided pilot (Dash vs Pyodide), matplotlib question — both
   dissolved by the v8 architectural pivot.
-**Ref:** Master plan v9 §5 Phase 0; gallery @ `a85a4fa`.
+- **Attribution gate (L-086):** Publicly reachable with inline "Data: JPL/NASA"
+  credit. Ruled sufficient pending L-086.
+**Ref:** Master plan v9 §5 Phase 0; gallery @ `4b086a6`.
 
 ---
 
@@ -59,14 +64,13 @@
   assembler replaces both orchestrators).
 - **Key decision (settled):** server (Dash) vs serverless (Pyodide) -- Phase 0
   resolved this: Pyodide, proven July 6, 2026 (L-088).
-- **Key decision (open):** architecture A (numpy + JS figure builder, proven)
-  vs B (Python assembler with graph_objects, shared engines, unmeasured).
-  Decision gate: measure plotly-in-Pyodide cold-start at Phase 2 start.
+- **Key decision (settled):** architecture A (numpy + JS figure builder) vs B′
+  (shared engines via plotly in Pyodide, slim self-hosted wheel). B′ measured
+  at 2.1-3.3 s on iPhone WiFi (July 6, 2026). Two-tier model: frozen A
+  exhibits + data-backed B′ exhibits.
 - **Progress:** Phase 1a vocabulary delivered (L-089, Fable 5, July 4, 2026).
-  Phase 0 proven (L-088, July 6, 2026). Architecture A (numpy + JS figure
-  builder) proven; architecture B (plotly in Pyodide, shared engines)
-  unmeasured — fork deferred to Phase 2 start. Phase 1b (data serving
-  pipeline) is the next design track. Master plan at v9.
+  Phase 0 closed (L-088, July 6, 2026). A/B fork resolved: B′. Phase 1b
+  (data serving pipeline) is the next design track. Master plan at v9.
 **Gap:** the master plan IS the gap document. Current phase: Phase 1b (L-098).
 **Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v9; PHASE1_SCENE_SPEC_VOCABULARY.md;
 DATA_SERVING_BROAD_ANALYSIS.md; Fable 5 survey + L-079 deep dive; Opus 4.8
@@ -117,9 +121,11 @@ Fable 5 vocabulary session (July 4).
   + DM Sans fonts, mobile-responsive.
 - **Architecture.** Architecture A (lightweight): Python/NumPy computes orbit
   geometry, JavaScript builds Plotly traces, `Plotly.newPlot()` renders.
-  No plotly Python package in Pyodide. Option C viewer (master plan §2a):
-  `index.html` serves curated cards; `interactive.html` serves interactive
-  exhibits via `?exhibit=` parameter.
+  No plotly Python package in Pyodide. Frozen as an "instant tier" exhibit
+  under the two-tier model (A/B fork resolved: B′ for Phase 2+ data-backed
+  exhibits, A retained for frozen pedagogical demos). Option C viewer
+  (master plan §2a): `index.html` serves curated cards; `interactive.html`
+  serves interactive exhibits via `?exhibit=` parameter (hardcoded in v1).
 - **Next iteration:** Plot refinements (Mercury color contrast, scale presets,
   outer planet zoom, additional controls). Feed observations into the A/B
   architecture decision at Phase 2 start.

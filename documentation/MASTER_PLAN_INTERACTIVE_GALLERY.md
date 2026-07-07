@@ -1,7 +1,7 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** Draft v9 — Phase 0 proven; data serving framed.
-**Base:** orrery @ `6368c87`, gallery @ `a85a4fa`
+**Status:** Draft v9 — Phase 0 closed; A/B fork resolved (B′); data serving framed.
+**Base:** orrery @ `873c6cd`, gallery @ `4b086a6`
 **Date begun:** July 3, 2026
 **Last updated:** July 6, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
@@ -52,9 +52,11 @@ combinations are available; the page shows only those options.
 and the assembler runs, it runs in their browser via Pyodide (Python compiled
 to WebAssembly). No server. The gallery stays a static site on GitHub Pages.
 Pyodide loads from CDN, the assembler and orbit cache are static files in the
-repo. If Phase 0 reveals Pyodide is unacceptable (cold-start too slow, package
-too large), the fallback path is a pre-computed library only — a bigger menu,
-no runtime computation on the web.
+repo. **Phase 0 confirmed Pyodide is acceptable** (2.1-3.3 s cold-start on
+iPhone WiFi, including plotly via micropip). The B′ architecture (shared
+desktop engines running in Pyodide) is the Phase 2 path. Frozen pedagogical
+demos (like the Phase 0 Solar System Explorer) stay on the lightweight A path
+(NumPy only, JS figure builder) — a two-tier model.
 
 **Assemblers read cache through the coverage-index abstraction from day one** —
 never by opening data files directly — so cache restructuring cannot break
@@ -152,12 +154,13 @@ link to `interactive.html?exhibit=<exhibit>`. The gallery landing page reads
 categories and thumbnails, interactive cards show an "Explore" badge and link
 to the interactive page. The landing page could be `index.html` itself (adding
 a section for interactive cards) or a lightweight `gallery.html` that links to
-both. Resolve in Phase 0.
+both. Resolved: `interactive.html` deployed alongside `index.html`; landing
+page integration deferred to Phase 2.
 
 **Why this works:**
 
 - **The existing pipeline is untouched.** Studio, the converter, the viewer —
-  all continue to work exactly as they do today. No regression risk on 330+
+  all continue to work exactly as they do today. No regression risk on 148
   curated cards.
 - **Interactive complexity is isolated.** Pyodide loading, control panels,
   assembler calls, coverage-index queries — all live in `interactive.html`.
@@ -219,7 +222,7 @@ Created `300ac30c`, updated `a85a4fa` (July 6, 2026).
 
 ---
 
-## §3 — The Shared Assembler Architecture (settled)
+## §3 — The Shared Assembler Architecture (settled — architecture B′)
 
 **One shared assembler per domain, called by Pyodide in the browser.**
 
@@ -455,17 +458,35 @@ about unnamed downloads.
 math, JavaScript builds Plotly figure) avoids loading the full `plotly` Python
 package — dramatically faster than loading plotly in Pyodide.
 
-**Architecture A vs B fork (deferred to Phase 2 start).** Phase 0 proved
-architecture A: Python computes arrays via NumPy, JavaScript builds Plotly
-traces and calls `Plotly.newPlot()`. This is a different architecture than
-Phase 2 specifies: architecture B, where a Python assembler calls the shared
-computation engines (`idealized_orbits.py`, `planet_visualization.py`) via
-`plotly.graph_objects` and emits complete Plotly JSON. A is lighter and faster
-(no plotly in Pyodide). B reuses the desktop engines — which was the purpose
-of the shared assembler (L-079). Phase 0 de-risked A; it did not de-risk B.
-The decision gate is Phase 2 start, with an explicit plotly-in-Pyodide
-cold-start measurement. Phase 1b (data serving pipeline) is the same
-regardless of A or B. See §7 #10.
+**Architecture A vs B fork — RESOLVED: B′.** Phase 0 proved architecture A
+(Python/NumPy computes arrays, JS builds Plotly traces). Fable 5 identified
+that A creates a parallel rendering pipeline — convention duplication across
+Python and JavaScript for the life of the project (the protocol's own anti-
+pattern). A B′ measurement page (`measure_plotly.html`) timed the full
+plotly-in-Pyodide cold-start on iPhone Safari WiFi:
+
+- Pyodide runtime: 929-959 ms
+- NumPy: 141-146 ms
+- micropip + plotly install: 507 ms - 1.8 s
+- `import plotly.graph_objects`: 57-59 ms
+- Build figure + `to_json()`: 448-449 ms
+- **Total: 2.1-3.3 s** (acceptance threshold was ≤15 s)
+
+Fable verified plotly 6 imports lazy (0.06 s native); the WASM multiplier is
+~1:1. The feared cold-start cost dissolved. B′ uses a slim self-hosted wheel
+(~3.9 MB, stripped of dead JS bundles and Jupyter extras) from the Phase 1b
+serving home — no PyPI runtime dependency.
+
+**Two-tier model:** frozen pedagogical demos (Phase 0 Solar System Explorer,
+eccentricity demo) stay on A — instant-loading, convention-light, no sync tax
+because frozen exhibits don't change. Data-backed catalog exhibits (Phase 2+)
+take B′ — shared desktop engines, one codebase, scene equivalence by
+construction.
+
+**Attribution gate (L-086):** `interactive.html` is publicly reachable with
+inline "Data: JPL/NASA" credit. Ruled sufficient pending L-086: a JPL-only
+exhibit with inline credit passes. Page kept unlinked from landing page until
+L-086 lands.
 
 ### Phase 1a — Shared Spec Skeleton + Solar System Vocabulary
 
@@ -497,6 +518,8 @@ Deliverables:
    reads this to know what it can offer.
 3. **Serving home** — resolve OQ-E (CORS check first), set up the serving
    destination, deploy the first web cache (planets as proof of pipeline).
+   The slim plotly wheel (~3.9 MB, B′) also lives here — self-hosted,
+   version-pinned, no PyPI dependency.
 4. **Resolve OQ-A through OQ-G** — scope, window policy, cadence, moon step
    size, format.
 
@@ -513,8 +536,8 @@ buttons, center body, date picker. Static scenes only. Presets for encounters,
 comet perihelion, close approaches. Each preset is a pre-filled scene spec that
 the user can view as-is or modify.
 
-Requires: helpers split (L-087), Phase 1b data pipeline, A/B architecture
-decision (§7 #10 — measure plotly-in-Pyodide cold-start).
+Requires: helpers split (L-087), Phase 1b data pipeline. Architecture B′
+confirmed (measurement passed July 6, 2026 — 2.1-3.3 s on iPhone).
 
 Gate: scene equivalence (Mode 5) + the gallery page ships.
 
@@ -569,16 +592,12 @@ PREP (independent, can start now)
 PHASE 0 ✓ DONE ──── PHASE 1a ✓ COMPLETE ──── PHASE 1b
 Stack proven         Vocabulary delivered       Data serving pipeline
 Arch A proven        (Fable, Jul 4)             Export script + coverage
-(Jul 6)                                         index + serving home
+B′ measured: PASS                               index + serving home
+(Jul 6)                                         + slim plotly wheel
                           │
-                     ┌────┴────┐
-                  A/B DECISION
-                  Measure plotly-in-Pyodide
-                     └────┬────┘
-                          │
-                     PHASE 2 ◄── Phase 1b + helpers split + A/B decision
-                     Solar system assembler (if B)
-                     or enhanced JS builder (if A)
+                     PHASE 2 ◄── Phase 1b + helpers split
+                     Solar system assembler (B′)
+                     Shared engines in Pyodide
                      + interactive page
                           │
                      PHASE 3
@@ -591,8 +610,8 @@ Arch A proven        (Fable, Jul 4)             Export script + coverage
                      Earth system
 ```
 
-**Critical path:** Phase 1b → A/B decision → Phase 2 → domain pages.
-(Phase 0 and Phase 1a complete.)
+**Critical path:** Phase 1b → Phase 2 → domain pages.
+(Phase 0, Phase 1a complete. A/B fork resolved: B′.)
 
 **Secondary dependencies:**
 - Helpers split → Phase 2 (computation functions freed from tkinter)
@@ -670,18 +689,18 @@ from tkinter GUI helpers. Computation the assembler needs:
 9. ~~**Matplotlib in Phase 0.**~~ **Dissolved.** The gallery is Plotly. The
    eccentricity demo converts to Plotly as part of Phase 0 — not a separate
    decision.
-10. **Pyodide package weight + cold-start.** **Resolved for the lightweight
-    path** (architecture A: NumPy in Pyodide, JS builds figure). Pyodide
-    v314.0.2 loads in ~4-10 seconds; consent gate gives users an explicit
-    choice; returning visitors skip consent (localStorage). **Open for the
-    assembler path** (architecture B: plotly loaded in Pyodide). The shared
-    computation engines are deeply `graph_objects`-based (88 `go.*` usages
-    in `idealized_orbits.py` alone) — if Phase 2 reuses them, the full
-    `plotly` Python package must load in Pyodide, and that cold-start is
-    unmeasured. **Decision gate:** measure plotly-in-Pyodide cold-start at
-    Phase 2 start. If acceptable, B (shared engines). If not, A (JS figure
-    builder, vocabulary and coverage index still apply). Phase 1b is the
-    same regardless.
+10. ~~**Pyodide package weight + cold-start.**~~ **Resolved: B′.** Measured
+    on iPhone Safari WiFi (July 6, 2026): Pyodide v314.0.2 + NumPy +
+    micropip + plotly (stock wheel from PyPI) = **2.1-3.3 s total cold
+    start**. `import plotly.graph_objects` = 57-59 ms (plotly 6 lazy-loads;
+    WASM multiplier ~1:1). B′ uses a slim self-hosted wheel (~3.9 MB,
+    stripped of dead JS bundles and Jupyter extras per Fable's strip spec)
+    from the Phase 1b serving home — no PyPI dependency. Two-tier model:
+    frozen A exhibits (instant, convention-light) + data-backed B′ exhibits
+    (shared engines, one codebase). Fable's convention-duplication analysis
+    confirmed A's parallel-pipeline cost outweighs B′'s cold-start cost for
+    a solo developer at Phase 2 scale. OQ-i through OQ-v (from Fable A/B
+    analysis) carry to Phase 2 start.
 11. ~~**Gallery viewer architecture for interactive pages.**~~ **Resolved:
     Option C (hybrid).** `index.html` stays as curated viewer. Single
     `interactive.html` handles all interactive exhibits via URL parameter.
@@ -725,7 +744,7 @@ not on the critical path for the gallery.
 
 ## §10 — Lineage
 
-This plan draws from fifteen sessions across three Claude models + two pivots:
+This plan draws from seventeen sessions across three Claude models + two pivots:
 
 - **Fable 5 survey** (July 2, 2026): Four-front survey. L-079 as keystone.
   Five publication options. Six code proposals (L-079–L-084).
@@ -808,6 +827,20 @@ This plan draws from fifteen sessions across three Claude models + two pivots:
   while Phase 2 specifies B (Python assembler with `graph_objects`). Flagged
   OQ-10 overclaimed for the B path. Recommended: name the fork, defer
   decision to Phase 2 start with measurement gate. All findings accepted.
+- **Fable 5 A/B architecture analysis** (July 6, 2026): Convention-duplication
+  inventory at Phase 2 scale. Proved duplication is conserved across the A
+  family (A, A′, A″ relocate it; only engine reuse eliminates it). Verified
+  plotly wheel is 9.9 MB (not 15), import is 0.06 s native (lazy in plotly 6),
+  dead JS bundles are 19.5 MB of 43.2 MB uncompressed. Built and tested slim
+  B′ wheel: 3.9 MB, fully functional for `go.Scatter3d` + `fig.to_json()`.
+  Recommended B′ with A retained for frozen pedagogical demos (two-tier model).
+  OQ-i through OQ-v for Phase 2 start. (`AB_FORK_ANALYSIS.md`, built on
+  `873c6cd` / `827d0b3`.)
+- **B′ cold-start measurement** (July 6, 2026): `measure_plotly.html` deployed,
+  timed on iPhone Safari WiFi. Stock plotly from PyPI: 2.1-3.3 s total cold
+  start. `import plotly.graph_objects` = 57-59 ms. WASM multiplier ~1:1.
+  Acceptance threshold ≤15 s — passed at one-seventh. A/B fork resolved: B′.
+  Phase 0 closed.
 
 **Decisions made (cumulative):**
 
@@ -843,17 +876,19 @@ This plan draws from fifteen sessions across three Claude models + two pivots:
 *New in v9:*
 - Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (§5)
 - Server/serverless resolved in practice: Pyodide (§7 #1)
-- Architecture A vs B fork named; decision deferred to Phase 2 start (§5, §7 #10)
+- A/B architecture fork resolved: B′ (§5, §7 #10, measurement: 2.1-3.3 s)
+- Two-tier model: frozen A exhibits + data-backed B′ exhibits (§1, §5)
 - F2 canonical per-object storage adopted (§3a)
 - Three trace types: actual positions, osculating at epoch, mean elements (§3a)
 - Two data types to serve: osculating elements + position vectors (§3a)
 - Two classes for rolling cache + spacecraft write-once (§3a)
 - Phase 1b inserted: data serving pipeline (§5)
 - Consent gate for Pyodide loading (§5, §7 #10)
-- Pyodide cold-start acceptable for lightweight path; unmeasured for assembler path (§7 #10)
+- L-086 attribution gate ruled: JPL-only with inline credit passes (§5)
 - `interactive.html` deployed as first exhibit (§2a)
 - `orbit_paths.json` and `orbit_cache/` added to `.gitignore` (§3a)
 - URL parameter scheme: `?exhibit=` (§2a)
+- Slim self-hosted plotly wheel (~3.9 MB) in Phase 1b serving home (§5, §7 #10)
 
 *Superseded:*
 - ~~Web GUI is a fork, not a replacement~~ → gallery extension (§2)
@@ -863,7 +898,33 @@ This plan draws from fifteen sessions across three Claude models + two pivots:
 
 ---
 
-Base: orrery @ `6368c87` / gallery @ `a85a4fa`. Phase 0 proven. Phase 1a
-vocabulary delivered. Phase 1b (data serving pipeline) is the next design
-track. A/B architecture fork deferred to Phase 2 start. Solar System
+## §11 — Protocol & Skills Review (from Phase 0)
+
+Phase 0 stress-tested the protocol across three models in a single day.
+Detailed findings in `PROTOCOL_SKILLS_REVIEW_PHASE0.md`. Summary:
+
+**New lessons for protocol v3.32 consideration:**
+- "Measure before analyzing" — when an architectural fork hinges on a
+  measurable quantity, build the measurement before the analysis.
+- Frozen artifacts don't accrue sync tax — refines the parallel-pipeline
+  anti-pattern.
+- Consent gate as a UX pattern for unfamiliar technology.
+- Provenance markers (*(est.)*, *(fetched)*) belong in relay prompts too.
+
+**Skill updates needed:**
+- `gallery-pipeline` v1.1: Option C viewer, consent gate, two-tier model,
+  `interactive.html` conventions, `?exhibit=` parameter.
+- Decide: separate `pyodide-interactive` skill or extend `gallery-pipeline`.
+
+**What worked:** SHA round-trip caught real provenance errors; three-model
+relay produced genuine error correction; "each round simpler" held (feared
+B cost: 15-25 s → measured 2.1 s). **What to improve:** re-pull SHAs at
+draft time (not just session start); mark estimates as *(est.)* in relay
+prompts.
+
+---
+
+Base: orrery @ `873c6cd` / gallery @ `4b086a6`. Phase 0 closed. Phase 1a
+vocabulary delivered. A/B fork resolved: B′ (2.1-3.3 s, shared engines).
+Phase 1b (data serving pipeline) is the next design track. Solar System
 Explorer live at palomasorrery.com/interactive.html.
