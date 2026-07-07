@@ -1,15 +1,26 @@
-# PHASE 1B DATA SERVING PIPELINE — Design Handoff v0.2
+# PHASE 1B DATA SERVING PIPELINE — Design Handoff v0.3
 
 **Type:** DESIGN SESSION (zero code)
 **Base:** orrery @ `f1ede52` / gallery @ `4b086a6`
 **Date:** July 7, 2026
-**Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8 (review)
-**Purpose:** Converged design for Phase 1b. Schema draft, test objects, open
-questions, feature architecture, and validation rules — reviewed and refined
-through 4.8 convergence.
+**Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8 (review),
+Claude Fable 5 (review)
+**Purpose:** Converged design for Phase 1b. Schema draft, test objects,
+validation rules, feature architecture — reviewed through three-model
+convergence.
 **Source:** Master plan v9 §3a, §5 Phase 1b; Fable 5 broad analysis
 (`DATA_SERVING_BROAD_ANALYSIS.md`, July 5 2026); Opus 4.6 + Tony convergence
-(July 6, 2026); Opus 4.8 review (July 7, 2026).
+(July 6–7, 2026); Opus 4.8 review (July 7, 2026); Fable 5 review (July 7,
+2026).
+
+**v0.3 changes from v0.2:** Incorporated Fable 5 review. Resolved invariant
+#4 self-contradiction (parent position files now served; option (b)).
+`stored_center` overload fixed with new `trajectory_of` field (Pluto
+barycenter substitution now explicit). Parent grid nesting invariant added
+(#7). Invariant #3 scaled to skip-with-warning at catalog scope. Positions
+file existence check added (#8). `scene_feature_configs` renamed to avoid
+key collision. Apophis/comet prose slip fixed. Jupiter/Earth added to schema
+with position files.
 
 **v0.2 changes from v0.1:** Incorporated 4.8 convergence review. Added
 osculating `center` field (catch 1), validation invariants (catch 2),
@@ -17,6 +28,12 @@ cross-object parent dependency rules (catch 3). Settled km/AU, OQ-F
 subtraction, OQ-E orphan-branch anchoring, presets-are-self-contained,
 comet tail contract, SHELL_CONFIGS hover gap (flagged, deferred). Hybrid
 provenance source field. Charon added to schema examples.
+
+**SHA note:** Orrery has advanced to `a56e036` since the handoff base
+(`f1ede52`). Before the export script build, diff `f1ede52..a56e036` and
+confirm none of the ten source files in the Provenance Notice changed. If
+any did, that is a delta-log "assembler-must-inherit" per L-079. Flag, not
+blocker — zero-code design session is unaffected.
 
 ---
 
@@ -89,33 +106,39 @@ these before scaling to the full catalog.
 
 | Object    | Class             | What It Tests                                        |
 |-----------|-------------------|------------------------------------------------------|
-| Earth     | analytic          | Baseline planet, easy visual check                   |
-| Jupiter   | analytic          | Outer scale, moon host, parent dependency anchor     |
+| Earth     | analytic + parent | Baseline planet, parent of Moon, position file for composition |
+| Jupiter   | analytic + parent | Outer scale, parent of Io, position file for composition |
 | Moon      | cache-required    | Earth's moon, familiar geometry for visual validation |
 | Io        | cache-required    | Fast period (~42h), step-size stress, parent grid    |
 | Titan     | cache-required    | Different parent (Saturn), slow period               |
-| Pluto     | barycenter edge   | `stored_center` = Pluto-Charon barycenter            |
+| Pluto     | barycenter edge   | `trajectory_of` = `pluto_barycenter`, identity substitution |
 | Charon    | cache-req + bary  | Moon of a barycenter object, osculating center test  |
 | Apophis   | analytic + preset | Close-approach Tier-2 override for specific window   |
 | Voyager 1 | spacecraft        | Arc-natural frame, write-once, no elements           |
 
-**Schema patterns confirmed by the test set (per 4.8 review):** Charon
-tests the osculating-center mismatch (catch 1 — elements referenced to
-barycenter, not Pluto's surface). Io tests parent-grid co-sampling
-(catch 3 — Jupiter must be sampled on Io's time grid for the
-heliocentric→parent-relative transform). Apophis tests self-contained
-presets (the geocentric close-approach data carries no dependency on
-Earth's rolling cache).
+**Schema patterns confirmed by convergence reviews:**
+
+Charon tests the osculating-center mismatch (4.8 catch 1 — elements
+referenced to barycenter, not Pluto's surface). Io tests parent-grid
+co-sampling (4.8 catch 3 — Jupiter must be sampled on Io's time grid
+for the heliocentric→parent-relative transform). Apophis tests
+self-contained presets (4.8 — geocentric close-approach data carries no
+dependency on Earth's rolling cache). Jupiter and Earth, as parents of
+cache-required moons, test the parent-position-file rule (Fable catch 1 —
+invariant #4 requires parent positions to be served, not assumed analytic).
+Pluto tests the `trajectory_of` field (Fable catch 2 — the served
+trajectory IS the barycenter, and the schema must say so explicitly).
 
 **Not in the test set (by design):** inner Galilean moons other than Io
 (Europa, Ganymede, Callisto — same class, different step-size dial),
-comets other than Apophis, additional spacecraft. The nine cover every
-schema pattern; scaling is a catalog question (OQ-A), not a schema
-question.
+additional spacecraft, no comet (a comet is Apophis-shaped: analytic +
+preset; the osculating conic is the exhibit at perihelion). The nine
+cover every schema pattern; scaling is a catalog question (OQ-A), not a
+schema question.
 
 ---
 
-## 3. Coverage Index Schema — Draft v0.2
+## 3. Coverage Index Schema — Draft v0.3
 
 The coverage index is a single JSON file that tells the assembler (or
 any consumer) what data is available, where it lives, and what trace
@@ -126,7 +149,8 @@ script (producer) and the interactive page (consumer).
 
 - **The index is the envelope.** The GUI enables only what the index
   declares. A cache miss is something the UI won't let you request —
-  not a runtime error.
+  not a runtime error. No hidden analytic fallbacks the envelope
+  doesn't declare. *(Strengthened by Fable catch 1)*
 - **Osculating elements ride inline.** They're ~8 numbers per object.
   The assembler can draw a full Keplerian conic from the index alone,
   no file fetch needed. Only position vectors go in separate files.
@@ -135,6 +159,16 @@ script (producer) and the interactive page (consumer).
   Redundant-but-explicit prevents the Charon@9 failure: elements taken
   about the barycenter but drawn from the wrong center render visibly
   wrong, and nothing in the compiler catches it. *(4.8 catch 1)*
+- **Parents serve position files.** Any object that is the `parent` of
+  a parent-relative moon must have a position file, even if it is also
+  analytic-available. The export script writes the parent's co-sampled
+  array as a position file (~100 KB). Wide-view composition is
+  cache-exact, not analytic-approximate. *(Fable catch 1, option (b))*
+- **Trajectory substitution is explicit.** When the served trajectory
+  is of a barycenter substituted for a body at solar-system scale, the
+  `trajectory_of` field says so. `stored_center` describes the data's
+  reference center (always the Sun for heliocentric), not the identity
+  of what's being plotted. *(Fable catch 2, option (i))*
 - **Solar system only.** Star, Earth system, and orbital parameter
   domains declare their bounds in their own simpler manifests (master
   plan §1). The serving home accommodates all domains; the coverage
@@ -184,6 +218,7 @@ Horizons query provenance recorded by the cache manager.
       "parent": "sun",
       "stored_center": "sun",
       "canonical_frame": "heliocentric",
+      "trajectory_of": null,
 
       "osculating": {
         "center": "sun",
@@ -197,7 +232,15 @@ Horizons query provenance recorded by the cache manager.
         "source": "PLACEHOLDER — build reads osculating_cache_manager.py"
       },
 
-      "positions": null,
+      "positions": {
+        "file": "positions/earth.json",
+        "start": "2025-01-01",
+        "end": "2026-04-01",
+        "step_hours": 6,
+        "n_points": "COMPUTED",
+        "size_kb": "COMPUTED"
+      },
+
       "presets": null,
       "features": ["van_allen_belts", "atmosphere_shell"]
     },
@@ -210,6 +253,7 @@ Horizons query provenance recorded by the cache manager.
       "parent": "sun",
       "stored_center": "sun",
       "canonical_frame": "heliocentric",
+      "trajectory_of": null,
 
       "osculating": {
         "center": "sun",
@@ -223,7 +267,15 @@ Horizons query provenance recorded by the cache manager.
         "source": "PLACEHOLDER — build reads osculating_cache_manager.py"
       },
 
-      "positions": null,
+      "positions": {
+        "file": "positions/jupiter.json",
+        "start": "2025-01-01",
+        "end": "2026-04-01",
+        "step_hours": 6,
+        "n_points": "COMPUTED",
+        "size_kb": "COMPUTED"
+      },
+
       "presets": null,
       "features": ["magnetosphere", "ring_system"]
     },
@@ -236,6 +288,7 @@ Horizons query provenance recorded by the cache manager.
       "parent": "jupiter",
       "stored_center": "jupiter",
       "canonical_frame": "parent-relative",
+      "trajectory_of": null,
 
       "osculating": {
         "center": "jupiter",
@@ -254,8 +307,8 @@ Horizons query provenance recorded by the cache manager.
         "start": "2025-01-01",
         "end": "2026-04-01",
         "step_hours": 6,
-        "n_points": "COMPUTED — (end-start)/step",
-        "size_kb": "COMPUTED — measured at export"
+        "n_points": "COMPUTED",
+        "size_kb": "COMPUTED"
       },
 
       "presets": null,
@@ -268,8 +321,9 @@ Horizons query provenance recorded by the cache manager.
       "category": "dwarf_planet",
       "availability": "analytic",
       "parent": "sun",
-      "stored_center": "pluto_barycenter",
+      "stored_center": "sun",
       "canonical_frame": "heliocentric",
+      "trajectory_of": "pluto_barycenter",
 
       "osculating": {
         "center": "pluto_barycenter",
@@ -296,6 +350,7 @@ Horizons query provenance recorded by the cache manager.
       "parent": "pluto",
       "stored_center": "pluto_barycenter",
       "canonical_frame": "parent-relative",
+      "trajectory_of": null,
 
       "osculating": {
         "center": "pluto_barycenter",
@@ -330,6 +385,7 @@ Horizons query provenance recorded by the cache manager.
       "parent": "sun",
       "stored_center": "sun",
       "canonical_frame": "heliocentric",
+      "trajectory_of": null,
 
       "osculating": {
         "center": "sun",
@@ -375,6 +431,7 @@ Horizons query provenance recorded by the cache manager.
       "parent": "sun",
       "stored_center": "sun",
       "canonical_frame": "arc-natural",
+      "trajectory_of": null,
 
       "osculating": null,
 
@@ -408,8 +465,9 @@ Horizons query provenance recorded by the cache manager.
 | `.category` | enum | `planet`, `dwarf_planet`, `moon`, `asteroid`, `comet`, `spacecraft` |
 | `.availability` | enum | `analytic`, `cache-required`, `spacecraft` |
 | `.parent` | string | Slug of gravitational parent (`sun`, `jupiter`, etc.) |
-| `.stored_center` | string | What the position data is relative to (provenance) |
+| `.stored_center` | string | Reference center of the position data. For heliocentric objects this is always `sun`. Does NOT describe the identity of what's plotted (see `trajectory_of`) *(Fable catch 2)* |
 | `.canonical_frame` | enum | `heliocentric`, `parent-relative`, `geocentric`, `arc-natural` |
+| `.trajectory_of` | string\|null | If non-null, the served trajectory is of this body, substituted for the named object at solar-system scale. Example: Pluto's trajectory is actually the Pluto-Charon barycenter's (Horizons target 9 ≠ 999). Null for most objects (trajectory is of the object itself) *(Fable catch 2)* |
 | `.osculating` | object\|null | Keplerian elements for one epoch. Null for spacecraft |
 | `.osculating.center` | string | **Explicit center for these elements.** Usually matches `stored_center` but may differ (Charon: elements about barycenter, not Pluto surface). Redundant-but-explicit prevents silent render errors *(4.8 catch 1)* |
 | `.osculating.epoch_jd` | float | Julian date of the osculating epoch |
@@ -420,7 +478,7 @@ Horizons query provenance recorded by the cache manager.
 | `.osculating.peri_deg` | float | Argument of perihelion in degrees |
 | `.osculating.M0_deg` | float | Mean anomaly at epoch in degrees |
 | `.osculating.source` | string\|object | Provenance. String for non-Horizons sources. Structured `{query_target, center, epoch, retrieved}` for Horizons-derived data (enables re-verification) |
-| `.positions` | object\|null | Rolling cache position data. Null if analytic-only |
+| `.positions` | object\|null | Position data. Null only if analytic-available AND not a parent of any catalog moon. Parents of moons always have positions *(Fable catch 1)* |
 | `.positions.file` | string | Path relative to `serving_base` |
 | `.positions.start` | ISO date | Coverage start |
 | `.positions.end` | ISO date | Coverage end |
@@ -436,41 +494,53 @@ Horizons query provenance recorded by the cache manager.
 | `.presets[].positions.center` | string | Override center for this preset (e.g. `earth` for geocentric close approach) |
 | `.presets[].positions.canonical_frame` | string | Override frame for this preset |
 | `.features` | array\|null | Slugs of available visual features for this object (§6). UI enables toggles based on this list. Rendering params live in `feature_configs.json` |
-| `scene_features` | array | Top-level. Scene-wide visual features (asteroid belt, heliosphere, etc.) |
+| `scene_features` | array | Top-level. Scene-wide visual feature slugs (asteroid belt, heliosphere, etc.) |
 | `feature_configs` | string | Top-level. Path to the feature config file relative to `serving_base` |
 
-### Validation Invariants *(4.8 catch 2)*
+### Validation Invariants
 
 The export script asserts these before emitting the index. A violation is
 a loud export failure, not a silent envelope lie.
 
 1. `availability == "cache-required"` ⟹ `positions != null`
 2. `availability == "spacecraft"` ⟹ `osculating == null && positions != null`
-3. `availability == "analytic"` ⟹ `osculating != null`
+3. `availability == "analytic"` ⟹ `osculating != null`. **At catalog scale
+   (OQ-A expansion):** per-object skip-with-warning, not full-export blocker.
+   Hard assert for the test tranche. *(Fable minor)*
 4. `canonical_frame == "parent-relative"` ⟹ `parent` exists in the catalog
-   with position coverage overlapping this object's window *(4.8 catch 3)*
+   with `positions != null` and time coverage overlapping this object's
+   window. *(4.8 catch 3, corrected by Fable catch 1)*
 5. `osculating != null` ⟹ `osculating.center` is populated
 6. Every `presets[].positions.file` exists on disk at export time
+7. Moon time grids must nest in the parent's grid: aligned epochs and
+   moon `step_hours` divides evenly into parent `step_hours` (or they
+   share the same step). Prevents interpolation smooth-arc artifacts at
+   runtime. *(Fable catch 1, option (b) corollary)*
+8. Every `positions.file` exists on disk at export time (symmetric with
+   #6 for rolling-cache files). *(Fable minor)*
 
-### Cross-Object Parent Dependency *(4.8 catch 3)*
+### Cross-Object Parent Dependency
 
 Storing moons parent-relative (correct for float64 precision) means the
 assembler composes `heliocentric = parent_helio + moon_relative` whenever
 a wide view is needed. This creates a hard dependency: a parent-relative
 moon requires its parent's positions on the moon's time grid.
 
-**Export-side rule:** Co-sample parent and moon on one time grid at export.
-The export script subtracts the parent's heliocentric position from the
-moon's to produce parent-relative vectors. The subtraction is performed
-at float64 (~12 significant digits of headroom, confirmed by Fable's F2
-rule). Re-querying Horizons with the parent as center body is NOT done —
-it would violate the settled principle that the pipeline never fetches
-Horizons; the desktop cache is the sole data source.
+**Resolution *(Fable catch 1, option (b))*:** Parents of moons serve
+position files. The export script co-samples parent and moon on one time
+grid, performs the heliocentric→parent-relative subtraction at float64,
+and writes BOTH the parent's heliocentric array and the moon's parent-
+relative array as position files. The marginal cost is trivial (~100 KB
+per parent). Wide-view composition is cache-exact end to end. No hidden
+analytic fallback the envelope doesn't declare.
 
-**Index-side rule:** Validation invariant #4 — every parent-relative
-object's `parent` must exist in the catalog with overlapping time
-coverage. Otherwise the assembler could offer a wide view it can't
-compose.
+**Transform method — settled *(4.8)*:** Subtract, don't re-query. Float64
+has ~12 significant digits of headroom. Re-querying Horizons violates the
+settled "site never fetches Horizons" principle.
+
+**Grid nesting (invariant #7):** Moon and parent grids share aligned epochs
+and compatible step sizes. This prevents the interpolation smooth-arc
+problem OQ-F warned about from relocating to runtime.
 
 ### Position File Format (v1 — JSON)
 
@@ -507,27 +577,25 @@ provenance-first principle as `# Source:` comments in the codebase.
 
 **Unit rule:** Unit is data; the assembler reads the `unit` field and
 never assumes. `km` for positions (preserves float64 significance for
-moons). `a_au` self-declares AU by field name for osculating elements.
-The split matches each quantity's natural scale. *(4.8 settled)*
+parent-relative moons). `a_au` self-declares AU by field name for
+osculating elements. The split matches each quantity's natural scale.
+*(4.8 settled)*
 
 **Source field:** Structured object for Horizons-derived data (enables
 re-verification — a future audit can re-run the query). For data derived
 from codebase constants (mean elements, feature configs), a plain string
-suffices. The hybrid approach avoids assuming all data is Horizons-shaped
-while giving machine-verifiable provenance where it's available.
+suffices.
 
 ---
 
-## 4. Open Questions — Preliminary Positions
+## 4. Open Questions — Positions
 
 ### OQ-A: Web Catalog Scope
 
 **Position:** Curated first tranche (the 9 test objects), not all 157.
 Prove the pipeline end-to-end before scaling. The schema accommodates
 the full catalog — scaling is an export run, not a schema change. The
-nine were chosen to exercise every schema pattern, including the three
-structural gaps 4.8 found (osculating center, parent dependency,
-self-contained presets).
+nine exercise every schema pattern found by three-model convergence.
 
 ### OQ-B: Window Policy
 
@@ -561,14 +629,15 @@ confirmed this is a Mode 5 question — Tony's render decides.
 publish, zero history growth. Keeps data weight off the gallery's 1 GB
 ceiling. Separate Pages project site under the custom domain.
 
-**Gate:** CORS check. Does `palomasorrery.com/data-repo-name/` share
-origin with `palomasorrery.com/`? Probable yes (same custom domain over
-GitHub Pages user site), but empirical confirmation needed before locking.
-This is the literal first thing to build.
+**Gate:** CORS check. GitHub Pages is believed to serve
+`Access-Control-Allow-Origin: *` on all content *(Fable — from training,
+verify empirically)*. If so, even a different-origin data repo would work.
+The CORS check is confirming which of two working configurations we have,
+not whether the architecture survives. Still right to run it first —
+cheap empiricism beats recollection.
 
 **Anchoring rule *(4.8)*:** A force-pushed orphan branch makes the data
-repo's commit SHA useless as a round-trip anchor — it's not history,
-it's a projection that gets rewritten every export. The coverage index's
+repo's commit SHA useless as a round-trip anchor. The coverage index's
 `generated` timestamp + `generator` version is the provenance anchor for
 the data store. The data repo does NOT participate in the SHA round-trip
 protocol; the orrery and gallery repos do.
@@ -584,9 +653,12 @@ palomas-orrery-data/
 │   ├── coverage_index.json
 │   ├── feature_configs.json
 │   ├── positions/
+│   │   ├── earth.json
+│   │   ├── jupiter.json
 │   │   ├── io.json
 │   │   ├── charon.json
 │   │   ├── titan.json
+│   │   ├── voyager_1.json
 │   │   └── ...
 │   ├── presets/
 │   │   ├── apophis_2029_close_approach.json
@@ -605,24 +677,15 @@ palomas-orrery-data/
 for moons, arc-natural for spacecraft. Presets may override (Apophis close
 approach is geocentric).
 
-**Transform method — settled *(4.8)*:** Subtract, don't re-query. The
-export script subtracts the parent's heliocentric position from the moon's
-to produce parent-relative vectors. Float64 has ~12 significant digits of
-headroom — sufficient for the subtraction. Re-querying Horizons with the
-parent as center body violates the settled principle that the pipeline
-never fetches Horizons; the desktop cache is the sole data source.
-
-**Co-sampling requirement:** Export the parent and moon on the same time
-grid before subtracting. If Jupiter is stepped 1d and Io 6h,
-interpolating Jupiter introduces smooth-arc artifacts. Co-sample
-parent+moon on one grid at export time.
+**Transform method:** Subtract, don't re-query. Co-sample parent and moon
+on one time grid. Float64 sufficient. Desktop cache is sole data source.
+See §3 Cross-Object Parent Dependency. *(4.8 + Fable settled)*
 
 ### OQ-G: Wire Format
 
 **Position:** JSON for v1. Debuggability during assembler development.
 Column-oriented within JSON (see §3). Binary optimization (MessagePack,
-CBOR, .npz) is a dial for later — the schema and file structure are
-format-independent.
+CBOR, .npz) is a dial for later.
 
 ---
 
@@ -631,53 +694,41 @@ format-independent.
 ### Osculating element staleness — SETTLED
 
 **Decision:** No `valid_until` field. The osculating conic represents ONE
-orbit shape at the stated epoch — a snapshot of the orbit geometry, not a
-time-evolving position. The three trace types already distinguish between
-"actual positions" (cached, dated), "osculating at epoch" (shape, epoch-
-specific), and "mean elements" (long-term average). The UI labels the
-osculating trace clearly as epoch-specific.
-
-**Rationale (Tony):** except for comets at perihelion (where the osculating
-orbit IS the interesting thing — the hyperbolic or highly eccentric conic
-at that moment), one orbit shape is about right. The assembler draws one
-Keplerian ellipse from the six elements. No staleness tracking needed.
-
-This is a science museum, not mission planning. Adding `valid_until` would
-imply a precision promise the visualization doesn't need to make.
+orbit shape at the stated epoch. The three trace types distinguish
+between "actual positions" (cached, dated), "osculating at epoch" (shape,
+epoch-specific), and "mean elements" (long-term average). Except for
+comets at perihelion (where the osculating orbit IS the exhibit), one
+orbit shape is about right. This is a science museum, not mission
+planning. *(Tony)*
 
 ### Position data unit (km vs AU) — SETTLED *(4.8)*
 
 **Rule:** Unit is data; the assembler reads the `unit` field and never
-assumes. Position files use km (preserves float64 significance for parent-
-relative moons). Osculating elements use AU (self-declared by field name
-`a_au`). The split matches each quantity's natural scale — more honest
-than degrading moon precision to satisfy uniformity.
+assumes. Position files: km. Osculating elements: AU (by field name).
 
 ### Presets are self-contained — SETTLED *(4.8)*
 
-Rolling cache participates in frame composition (heliocentric→parent-
-relative subtraction); presets never do. A preset stores positions
-directly in its declared frame and center. No assembler-side composition,
-no dependency on other objects' coverage. This keeps Tier-2 curated data
-write-once and dependency-free, and sidesteps a second Charon@9 (an
-overriding center that doesn't match its data).
+Rolling cache participates in frame composition; presets never do. A
+preset stores positions directly in its declared frame and center with
+no external dependency.
 
 ### Subtract, don't re-query — SETTLED *(4.8)*
 
-See OQ-F above. The desktop cache is the sole data source. The export
-script performs the heliocentric→parent-relative subtraction at float64.
-Re-querying Horizons violates the settled "site never fetches Horizons"
-principle.
+Desktop cache is sole data source. Export script subtracts at float64.
+
+### Trajectory substitution is explicit — SETTLED *(Fable)*
+
+`trajectory_of` field. Pluto: `stored_center: "sun"`,
+`trajectory_of: "pluto_barycenter"`. Most objects: null.
 
 ---
 
 ## 6. Feature Rendering Architecture — Three Contexts
 
-Visual features (shells, magnetospheres, ring systems, comet tails, asteroid
-belts, etc.) are procedural, not positional. They're computed from parameters
-(radii, angles, geometry), not from Horizons data. But WHERE they render
-differs across the gallery's three rendering contexts, and the architecture
-must respect that.
+Visual features (shells, magnetospheres, ring systems, comet tails,
+asteroid belts, etc.) are procedural, not positional. They're computed
+from parameters (radii, angles, geometry), not from Horizons data. But
+WHERE they render differs across the gallery's three rendering contexts.
 
 ### The Three Contexts
 
@@ -691,40 +742,35 @@ must respect that.
 
 The B′ Python assembler handles orbit computation only. Feature traces are
 JS-rendered from parameter configs, shared across both A and B′ exhibits.
-This is NOT the parallel-pipeline anti-pattern — the split is by kind of
-computation (orbital mechanics vs parametric geometry), not by duplication
-of the same computation.
+Not the parallel-pipeline anti-pattern — the split is by kind of
+computation (orbital mechanics vs parametric geometry), not by duplication.
 
-The static gallery doesn't need feature configs — its features are pre-baked
-by the desktop Python into the JSON files, same as today. The feature config
-schema is an interactive-side concern only.
+The static gallery doesn't need feature configs — its features are
+pre-baked by the desktop Python into the JSON files, same as today.
 
-**Feature renderer contract *(4.8 settled)*:** Feature renderers may read
-an object's current position from the rendered orbit output; they never
+**Feature renderer contract *(4.8)*:** Feature renderers may read an
+object's current position from the rendered orbit output; they never
 invoke orbital mechanics. A comet tail needs the comet's position (from
 the orbit trace already rendered) and the anti-sunward vector (the sun is
 at the origin in heliocentric, so the vector is `-normalize(position)`).
-The tail is JS-rendered from data JS already holds. This resolves comet
-tails, Mercury's sodium tail, and any future anti-sunward feature without
-breaking the orbit/feature split.
+The tail is JS-rendered from data JS already holds.
 
 ### Feature Config Schema
 
 A separate `feature_configs.json` in the serving home. The coverage index
 references feature availability (slugs); the config file carries the
-rendering parameters. Kept separate to avoid bloating the coverage index
-with rendering details.
+rendering parameters.
 
 ```json
 {
   "schema_version": "1.0",
 
   "renderers": {
-    "ellipsoid_shell": { "description": "3D ellipsoid mesh (magnetospheres, atmospheres)" },
-    "annulus": { "description": "Flat ring (planetary rings)" },
-    "torus_belt": { "description": "Toroidal belt region (asteroid belt, Kuiper belt)" },
-    "cone_sweep": { "description": "Conical sweep (magnetic dipole tilt, bow shock)" },
-    "tail_vector": { "description": "Anti-sunward tail (comet tail, sodium tail)" }
+    "ellipsoid_shell": { "description": "3D ellipsoid mesh" },
+    "annulus": { "description": "Flat ring" },
+    "torus_belt": { "description": "Toroidal belt region" },
+    "cone_sweep": { "description": "Conical sweep" },
+    "tail_vector": { "description": "Anti-sunward tail" }
   },
 
   "object_features": {
@@ -732,8 +778,8 @@ with rendering details.
       "magnetosphere": {
         "renderer": "ellipsoid_shell",
         "params": {
-          "radius_km": "(illustrative — build reads shell_configs.py SHELL_CONFIGS)",
-          "color": "(illustrative — build reads shell_configs.py)",
+          "radius_km": "(illustrative — build reads shell_configs.py)",
+          "color": "(illustrative)",
           "name": "Jupiter Magnetosphere"
         }
       },
@@ -741,7 +787,7 @@ with rendering details.
         "renderer": "annulus",
         "params": {
           "inner_km": "(illustrative — build reads shell_configs.py)",
-          "outer_km": "(illustrative — build reads shell_configs.py)",
+          "outer_km": "(illustrative)",
           "color": "(illustrative)",
           "name": "Jupiter Ring System"
         }
@@ -759,7 +805,7 @@ with rendering details.
     }
   },
 
-  "scene_features": {
+  "scene_feature_configs": {
     "asteroid_belt": {
       "renderer": "torus_belt",
       "params": {
@@ -773,27 +819,9 @@ with rendering details.
 }
 ```
 
-### Coverage Index Integration
-
-The coverage index carries feature slugs only — enough for the UI to know
-what toggles to offer. It does NOT carry rendering parameters.
-
-```json
-"jupiter": {
-  ...
-  "features": ["magnetosphere", "ring_system"]
-}
-```
-
-Scene-level features at the index root:
-
-```json
-{
-  "schema_version": "1.0",
-  "scene_features": ["asteroid_belt", "kuiper_belt", "heliosphere"],
-  "objects": { ... }
-}
-```
+Note: `scene_feature_configs` (in the config file) vs `scene_features`
+(in the coverage index) — deliberately different keys to avoid collision
+when grepping across files. *(Fable minor)*
 
 ### Renderer Vocabulary (Illustrative — Phase 2 Builds This)
 
@@ -811,76 +839,65 @@ Scene-level features at the index root:
 
 ### Hover Behavior Gap *(4.8 flagged, deferred to Phase 2)*
 
-The `renderer + params` schema captures **geometry** (radii, colors,
-opacities) but does NOT capture the desktop's **interaction layer** —
-specifically the single-info-marker pattern (one cross marker carries the
-hover for an entire shell; `hoverinfo='skip'` on all geometry points).
-That's hover routing, not geometry, and it doesn't live in radii/colors.
-
-This is a Phase 2 JS renderer concern, not a Phase 1b schema concern.
-The feature config schema defines *what* to draw and *where*. How to
-handle hover routing in JS/Plotly.js is an implementation decision for
-the JS renderers — the desktop's single-info-marker convention may or
-may not be the right pattern in a browser context.
+`renderer + params` captures geometry but NOT the desktop's interaction
+layer (single-info-marker pattern: one cross marker carries hover for an
+entire shell; `hoverinfo='skip'` on all geometry points). Phase 2 JS
+renderer concern, not Phase 1b schema concern.
 
 ### Merge Point (Phase 2 Design Decision)
 
-In B′ exhibits, the Python assembler returns orbit traces as a Plotly figure.
-JS adds feature traces separately. Two options:
-
-- (a) Python returns figure JSON → JS adds feature traces via
-  `Plotly.addTraces()` after initial render.
-- (b) JS extracts orbit trace data from Python's figure, combines with
-  JS-generated feature traces, calls `Plotly.newPlot()` once.
-
-Option (b) is likely cleaner (single render, no flash). Deferred to Phase 2.
+In B′ exhibits, the Python assembler returns orbit traces. JS adds
+feature traces. Option (b) — single `Plotly.newPlot()` call combining
+both — is likely cleaner. Deferred to Phase 2.
 
 ---
 
 ## 7. What This Handoff Does NOT Cover
 
-- **The export script implementation.** This handoff settles the schema.
-  The script is a Phase 1b build deliverable.
-- **The assembler's consumption of the index.** That's Phase 2, after
-  the data pipeline validates.
+- **The export script implementation.** Schema settled; script is a build.
+- **The assembler's consumption of the index.** Phase 2.
 - **Star data format.** Phase 3 (master plan §7 #8).
 - **Earth system data.** Phase 5.
-- **The slim plotly wheel build.** Fable's strip spec
-  (`AB_FORK_ANALYSIS.md`) covers this. It rides in the serving home
-  but isn't a schema question.
-- **Desktop code changes.** Phase 1b reads the desktop caches; it does
-  not modify them.
-- **JS feature renderer implementation.** The config schema defines
-  the interface; the renderers are Phase 2.
+- **The slim plotly wheel build.** Rides in the serving home; not schema.
+- **Desktop code changes.** Phase 1b reads, does not modify.
+- **JS feature renderer implementation.** Config schema defined; Phase 2.
 
 ---
 
-## 8. Convergence Status After 4.8 Review
+## 8. Convergence Status
 
-### Settled (no further review needed)
+### Settled (three-model convergence)
 
-1. **Osculating center field** — added. Redundant-but-explicit. *(catch 1)*
-2. **Validation invariants** — six rules the export script asserts. *(catch 2)*
-3. **Parent dependency** — co-sample + index validation. *(catch 3)*
-4. **km/AU** — unit is data, assembler reads the field, never assumes.
-5. **OQ-F subtraction** — subtract, don't re-query. Float64 sufficient.
-6. **Presets self-contained** — no frame composition, no dependency.
-7. **Comet tail contract** — feature renderers read position from orbit
-   output, never invoke orbital mechanics.
-8. **Osculating staleness** — no `valid_until`. One orbit shape.
-9. **OQ-E anchoring** — index `generated` timestamp, not repo SHA.
-10. **Provenance source field** — hybrid string/structured object.
+1. **Osculating center field** — explicit in every osculating block *(4.8)*
+2. **Validation invariants** — eight rules; export asserts *(4.8 + Fable)*
+3. **Parent position files served** — cache-exact composition *(Fable)*
+4. **Parent grid nesting** — aligned epochs, compatible steps *(Fable)*
+5. **Trajectory substitution** — `trajectory_of` field *(Fable)*
+6. **`stored_center` clarified** — always the reference center, not
+   identity of what's plotted *(Fable)*
+7. **km/AU** — unit is data, assembler reads field *(4.8)*
+8. **OQ-F subtraction** — subtract, don't re-query *(4.8)*
+9. **Presets self-contained** — no frame composition *(4.8)*
+10. **Comet tail contract** — renderers read position, never invoke
+    orbital mechanics *(4.8)*
+11. **Osculating staleness** — no `valid_until`; one orbit shape *(Tony)*
+12. **OQ-E anchoring** — index timestamp, not repo SHA *(4.8)*
+13. **Provenance source** — hybrid string/structured object *(4.8)*
+14. **scene_feature_configs rename** — avoid key collision *(Fable)*
 
 ### Open (Mode 5 or future phase)
 
-1. **OQ-A catalog scope** — nine test objects now; full catalog is a
-   later export run. No schema change needed.
-2. **OQ-D step size tuning** — 6h default; per-object dial exists.
-   Tony's render decides. Mode 5.
-3. **OQ-E CORS check** — empirical gate. First thing to build.
-4. **Hover behavior in JS renderers** — flagged, deferred to Phase 2.
-5. **Feature config home** — separate `feature_configs.json` is current
-   position. Could go inline later if one-fewer-fetch matters.
+1. **OQ-A catalog scope** — nine now; full catalog later
+2. **OQ-D step size tuning** — 6h default; Mode 5
+3. **OQ-E CORS check** — empirical gate; first thing to build
+4. **Hover behavior in JS renderers** — deferred to Phase 2
+5. **Feature config home** — separate file; could go inline later
+
+### Pre-Build Checklist
+
+1. Diff `f1ede52..a56e036` — confirm no source-file changes
+2. OQ-E CORS probe — deploy test file, fetch from interactive.html
+3. Re-run SHA round trip against live HEAD at build session start
 
 ---
 
@@ -896,14 +913,18 @@ Option (b) is likely cleaner (single render, no flash). Deferred to Phase 2.
   annotations
 - Opus 4.8 convergence review (July 7, 2026): three load-bearing catches
   (osculating center, validation invariants, parent dependency), five
-  settled items (km/AU, subtraction, presets, comet tail, OQ-E anchoring),
-  hover gap flagged
+  settled items
 - Opus 4.6 + Tony convergence to v0.2 (July 7, 2026): all 4.8 catches
-  accepted, Charon added to schema, SHELL_CONFIGS hover gap accepted as
-  flag (deferred), provenance source hybrid adopted
+  accepted, Charon added to schema, hover gap flagged
+- Fable 5 convergence review (July 7, 2026): two load-bearing catches
+  (invariant #4 self-contradiction, stored_center overload), five minor
+  items
+- Opus 4.6 + Tony convergence to v0.3 (July 7, 2026): all Fable catches
+  accepted, parent position files, trajectory_of field, grid nesting
+  invariant, key rename, prose fix
 - Ledger: L-098 (data serving pipeline), L-079 (shared assembler,
   keystone)
 
-Base: orrery @ `f1ede52` / gallery @ `4b086a6`.
+Base: orrery @ `f1ede52` (advanced to `a56e036`) / gallery @ `4b086a6`.
 
 Session/entry written July 2026 with Anthropic's Claude Opus 4.6.
