@@ -1,9 +1,9 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** Draft v9 — Phase 0 closed; A/B fork resolved (B′); data serving framed.
-**Base:** orrery @ `873c6cd`, gallery @ `4b086a6`
+**Status:** Draft v10 — Phase 1b design converged (v0.3, three-model review).
+**Base:** orrery @ `f1ede52` (advanced to `a56e036`), gallery @ `4b086a6`
 **Date begun:** July 3, 2026
-**Last updated:** July 6, 2026
+**Last updated:** July 7, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
@@ -331,25 +331,55 @@ empirically — not a blocker, a five-minute check.
 **Star cache:** 31 MB pickle → `.npz` for v1 (NumPy stable in Pyodide; Parquet
 held as optimization). Deferred to Phase 3.
 
-**Open questions (carry to Phase 1b / Phase 2 transition):**
+**Open questions — status after Phase 1b design convergence (v0.3):**
 
-- OQ-A: Web catalog scope — all 157 positional objects or a curated first
-  tranche?
-- OQ-B: Window policy — sliding, accumulating, or split (accumulate
-  heliocentric, slide moons)?
-- OQ-C: Update cadence — monthly batch + 90-day forward padding as starting
-  point.
-- OQ-D: Moon step size — 6h gives ~7 points per Io orbit (hexagonal). Inner
-  moons may want 2h. Per-object `step_hours` in the index.
-- OQ-E: Serving home — dedicated repo (H1) vs gallery subfolder (H2) vs R2
-  (H3). CORS check first.
-- OQ-F: Canonical frame for each class — settled in principle (helio / parent-
-  relative / arc-natural); implementation details at build time.
-- OQ-G: Wire format — JSON for v1 (debuggability during assembler development).
+- OQ-A: Web catalog scope — curated first tranche (9 test objects); full
+  catalog scales via export run, not schema change. **Positioned.**
+- OQ-B: Window policy — split: accumulate heliocentric, slide moons,
+  write-once spacecraft. Simple per-class conditional. **Settled.**
+- OQ-C: Update cadence — monthly manual batch, 90-day forward padding.
+  **Settled.**
+- OQ-D: Moon step size — 6h default; per-object `step_hours` from day one.
+  Io may want 2h. Mode 5 decides. **Positioned, Mode 5.**
+- OQ-E: Serving home — H1 (dedicated repo, orphan-branch). Data repo does
+  NOT participate in SHA round-trip; coverage index `generated` timestamp is
+  the provenance anchor. **Settled pending CORS check.** GitHub Pages believed
+  to serve `Access-Control-Allow-Origin: *` (Fable — verify empirically).
+- OQ-F: Canonical frame — helio / parent-relative / arc-natural. Export
+  script subtracts (float64 sufficient), does NOT re-query Horizons.
+  Co-sample parent+moon on one grid. **Settled.**
+- OQ-G: Wire format — JSON for v1, column-oriented. **Settled.**
+
+**Schema decisions settled in v0.3 (three-model convergence):**
+
+- Osculating elements carry explicit `center` field (prevents Charon@9 class
+  errors). One orbit shape per object, no `valid_until` (science museum, not
+  mission planning).
+- Parents of moons serve position files (cache-exact composition, ~100 KB
+  per parent). Validation invariant: every parent-relative object's parent
+  exists with overlapping coverage.
+- `trajectory_of` field for barycenter substitution (Pluto's trajectory is
+  the barycenter's; schema says so explicitly).
+- Presets are self-contained (no frame composition, no dependency on other
+  objects' rolling cache).
+- Unit is data: km for positions (float64 significance for moons), AU for
+  osculating elements (by field name). Assembler reads `unit` field, never
+  assumes.
+- Provenance source: hybrid string/structured object (Horizons-derived data
+  carries `{query_target, center, epoch, retrieved}` for re-verification).
+- Feature rendering: always JS in interactive layer (both A and B′). Python
+  assembler handles orbits only. Feature configs in separate
+  `feature_configs.json`. Three-context table: static gallery (pre-baked) /
+  interactive A (JS everything) / interactive B′ (Python orbits + JS
+  features).
+- 8 validation invariants the export script asserts before emitting the index.
+- 9 test objects covering every schema class and edge case.
 
 **Source:** Fable 5 broad analysis (`DATA_SERVING_BROAD_ANALYSIS.md`, July 5,
 2026, built on `993dfd5` / `a6420bc`). Reviewed and refined by Opus 4.6 + Tony
 (July 6, 2026). 4.8 review confirmed source faithfulness (July 6, 2026).
+Phase 1b design handoff v0.3 (`PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md`,
+July 7, 2026): Opus 4.6 + Tony → 4.8 review → Fable 5 review → convergence.
 
 ---
 
@@ -508,22 +538,31 @@ Phase 2 start.
 has accumulated months of osculating elements and position vectors from
 Horizons. Phase 1b makes this data available to the interactive gallery.
 
+**Design converged: v0.3** (July 7, 2026). Three-model review: Opus 4.6 +
+Tony drafted schema → 4.8 caught osculating-center gap, parent dependency,
+validation invariants → Fable 5 caught invariant self-contradiction,
+`stored_center` overload, grid nesting → Opus 4.6 + Tony converged.
+Full design in `PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.3`.
+
 Deliverables:
 1. **Export script** — reads desktop caches (osculating elements from
    `osculating_cache_manager.py` + position vectors from `orbit_paths.json`),
-   writes per-object canonical files in web-servable format (F2 storage).
-2. **Coverage index** — JSON manifest listing available objects, their
-   availability class, date coverage, step size, stored center, and osculating
-   elements. The assembler (or the JS figure builder, depending on A/B fork)
-   reads this to know what it can offer.
-3. **Serving home** — resolve OQ-E (CORS check first), set up the serving
-   destination, deploy the first web cache (planets as proof of pipeline).
-   The slim plotly wheel (~3.9 MB, B′) also lives here — self-hosted,
-   version-pinned, no PyPI dependency.
-4. **Resolve OQ-A through OQ-G** — scope, window policy, cadence, moon step
-   size, format.
+   co-samples parent+moon grids, writes per-object canonical files in
+   web-servable format (F2 storage). Asserts 8 validation invariants.
+2. **Coverage index** — JSON manifest (schema v0.3) listing available objects,
+   availability class, date coverage, step size, osculating elements with
+   explicit center, `trajectory_of` for barycenter substitution, feature
+   slugs. The assembler reads this to know what it can offer.
+3. **Feature configs** — separate `feature_configs.json` with renderer +
+   params for JS feature renderers (interactive layer only; static gallery
+   pre-bakes features).
+4. **Serving home** — resolve OQ-E (CORS check first), set up the dedicated
+   `palomas-orrery-data` repo (orphan-branch publish). Deploy first web cache.
+   The slim plotly wheel (~3.9 MB, B′) also lives here.
 
-Requires: Fable analysis (delivered), gitignore updates (done @ `6368c87`).
+Requires: Fable analysis (delivered), design handoff (converged v0.3),
+gitignore updates (done @ `6368c87`).
+Pre-build: CORS check (OQ-E), diff `f1ede52..a56e036` for source file changes.
 Gate: export script runs, web cache deployed, interactive page can fetch it.
 
 ### Phase 2 — Solar System Assembler + First Interactive Page
@@ -617,25 +656,28 @@ B′ measured: PASS                               index + serving home
 - Helpers split → Phase 2 (computation functions freed from tkinter)
 - Attribution page → any publicly reachable interactive page
 - Star cache wire format → Phase 3 (Pyodide needs non-pickle format)
-- A/B architecture decision → Phase 2 (measure plotly-in-Pyodide cold-start)
+- ~~A/B architecture decision~~ → resolved: B′ (July 6, 2026)
 
 ### Model Assignments
 
 **Fable 5** — Phase 1a vocabulary delivered. Data serving analysis delivered.
-Fable access expired July 7, 2026.
+Phase 1b design review (July 7, 2026: caught invariant #4 self-contradiction,
+`stored_center` overload, grid nesting). Fable access extended to July 12,
+2026. Available for: provenance Tier-1 triage, Phase 2 broad-first design.
 
-**Opus 4.8** — verification, convergence, restraint. Attribution page (fetch
-license terms). Vocabulary DD/OQ review at Phase 2 start. Phase 5 restraint
-discipline on human-cost content. v9 draft review (completed July 6, 2026:
-caught gallery SHA provenance, gitignore claim, A/B fork, OQ-10 overclaim).
+**Opus 4.8** — verification, convergence, restraint. Phase 1b design review
+(July 7, 2026: caught osculating center gap, validation invariants, parent
+dependency). Attribution page (fetch license terms). Vocabulary DD/OQ review
+at Phase 2 start. Phase 5 restraint discipline on human-cost content.
 
-**Opus 4.6** — daily conversational partner, iterative build. Phase 1b data
-serving pipeline, helpers split, all assembler and interactive page builds.
+**Opus 4.6** — daily conversational partner, iterative build. Phase 1b design
+led and converged. Phase 1b build (CORS check, export script, coverage index).
+Helpers split, all assembler and interactive page builds.
 
 ### Next Step
 
-Phase 1b: design and build the data serving pipeline. Export script, coverage
-index, serving home. Resolve OQ-A through OQ-G.
+Phase 1b build. Pre-build: CORS check (OQ-E), diff `f1ede52..a56e036`.
+Then: export script, coverage index, serving home deployment.
 
 ---
 
@@ -873,6 +915,18 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - Server-vs-serverless resolved in principle: serverless/Pyodide (§7)
 - Gallery viewer: Option C hybrid — two pages, `index.html` + `interactive.html` (§2a)
 
+*New in v10:*
+- Phase 1b design converged v0.3, three-model review (§3a, §5)
+- 14 settled schema decisions: osculating center, parent position files,
+  trajectory_of, presets self-contained, subtract-don't-requery, unit-is-data,
+  feature rendering always JS, validation invariants, grid nesting (§3a)
+- Coverage index schema v0.3 with 8 validation invariants (§3a)
+- Feature rendering architecture: three-context split (§3a)
+- OQ-B/C/F/G settled; OQ-A/D positioned; OQ-E pending CORS check (§3a)
+- Fable access extended to July 12, 2026 (§5a)
+- Phase 1b deliverables refined: coverage index, feature configs, export
+  script with invariant assertions (§5)
+
 *New in v9:*
 - Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (§5)
 - Server/serverless resolved in practice: Pyodide (§7 #1)
@@ -924,7 +978,8 @@ prompts.
 
 ---
 
-Base: orrery @ `873c6cd` / gallery @ `4b086a6`. Phase 0 closed. Phase 1a
-vocabulary delivered. A/B fork resolved: B′ (2.1-3.3 s, shared engines).
-Phase 1b (data serving pipeline) is the next design track. Solar System
-Explorer live at palomasorrery.com/interactive.html.
+Base: orrery @ `f1ede52` (advanced to `a56e036`) / gallery @ `4b086a6`.
+Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
+Phase 1b design converged v0.3 (three-model review). Next: Phase 1b build
+(CORS check, export script). Solar System Explorer live at
+palomasorrery.com/interactive.html.
