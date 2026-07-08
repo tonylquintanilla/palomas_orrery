@@ -48,6 +48,32 @@ Consequences, itemized:
 
 See Section "Why the model inverted" for the reasoning, kept for the record.
 
+## v0.6 schema reconciliation (Stage 2 build)
+
+The emitted `coverage_index.json` and position files are reconciled to the
+schema in PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.6 (field names verified
+against the handoff's glossary): per-object `name / horizons_id / category /
+availability / parent / stored_center / canonical_frame / trajectory_of /
+osculating / positions / presets / features`; the positions block
+`{file, start, end, step_hours, n_points, size_kb}`; per-object `presets`
+arrays; top-level `scene_features`; and `schema_version` "1.0" (the schema
+format version the v0.6 example carries -- distinct from the handoff's own
+v0.6). Where v0.6 encoded the subtraction model, v4 carries the correction in
+the values, documented at the construction site:
+- `availability`: `cache-required` is RETIRED. Every non-spacecraft is
+  `analytic` (the orbit renders from osculating); a served trace is expressed
+  by `positions != null`, independent of availability.
+- Invariants: v0.6 #1 (cache-required -> positions), #4 (parent-relative
+  parent dependency), #7 (moon/parent grid nesting) are RETIRED -- all three
+  were subtraction/composition artifacts. Kept: #2, #3, #5, #6, #8, plus the
+  v4 center-match (#C: osculating.center == stored_center).
+- `canonical_frame`: adds `barycenter-relative` (the one enum extension) for
+  Pluto and Charon, per Tony's ruling that both orbit the barycenter.
+- Pluto departs from v0.6's heliocentric-substitution entry: v4 serves Pluto's
+  own barycenter-relative wobble (`Pluto@9` + `Pluto_Pluto-Charon Barycenter`),
+  so `trajectory_of` is null and `stored_center` is `pluto_barycenter`.
+The full output structure is documented in the module docstring (Tony's ask).
+
 ---
 
 ## Why the model inverted (reasoning for the record)

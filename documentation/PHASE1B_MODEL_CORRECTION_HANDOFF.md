@@ -113,11 +113,14 @@ subtraction-oriented fields (`PARENT_OBJECTS`, `stored_center`,
 **Tony:** rulings made this session -- Charon IN (barycenter frame), Pluto
 barycenter frame, Moon @399; Titan_Saturn + an Io-Jupiter pair confirmed from
 prior work. Io stays osculating-only on cadence.
-**Gap:** write manifest v4 Steps 1-6 (Stage 2); revise pre-flight scaffolding
-fields to v4; confirm exact key strings (`Moon_Earth`, `Titan_Saturn`) +
-`@599`/`@699` slug-map entries at build; defer Pluto-Charon relative subsystem
-+ Phase 2 barycenter-heliocentric coverage (29-pt entry) to fine-cadence
-follow-on.
+**Gap:** Stage 2 built and pre-tested (export_orbit_cache.py, 623 lines);
+coverage index reconciled to design handoff v0.6 (field shape verified);
+full output structure documented in the module docstring. Remaining desktop-
+side: run against the primary, Mode 5 render check, provenance Tier-1=0 (+ a
+ROLE_MAP entry for the new module), push + record SHA. Confirm exact key
+strings (`Moon_Earth`, `Titan_Saturn`) at run (export warns->osculating-only
+if any differ). Defer Pluto-Charon relative subsystem + Phase 2 barycenter-
+heliocentric coverage (29-pt entry) to fine-cadence follow-on.
 **Ref:** PHASE1B_BUILD_MANIFEST_v4.md, PHASE1B_MODEL_CORRECTION_HANDOFF.md,
 idealized_orbits.py, celestial_objects.py, osculating_cache.json
 ```
