@@ -181,7 +181,14 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
     - |r| AU-scale (~5e9 km ~ 35 AU) -> heliocentric data under a barycenter
       key: a REAL frame problem. STOP -- do not deploy; fix the source.
   Action: proceed to B2, then let B3 settle it; carry B3's verdict here.
-  Result: ____________________________________________
+  Result: STOP branch confirmed by B3. charon/pluto traces are frame-
+  CONTAMINATED: heliocentric points (~35 AU) for 2025-11-24..2027-01-31, then
+  barycentric (correct) for 2027-02-01..2027-06-10 -- a clean split at
+  2027-02-01 (434 helio + 130 bary of 564). Root cause: the cache pairs
+  `Charon_/Pluto_Pluto-Charon Barycenter` mix frames (NOT an export bug; the
+  center_body='Sun' warning was a true signal). Export hardened v4.1 (#F guard)
+  to DROP contaminated traces to osculating-only. Cache source must be repaired
+  before charon/pluto traces can deploy.
 
 --- B2. Coverage index inspection ----------------------------
   [ ] Open `_export_out/coverage_index.json`.
@@ -193,8 +200,15 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
           "pluto_barycenter" (center-match).
       [ ] moon: stored_center "earth"; titan: "saturn".
       [ ] io + apophis: positions null, osculating present.
-      [ ] voyager_1: osculating null, positions present.
-      Result: ____________________________________________
+      [x] voyager_1: osculating null, positions present.
+      Result: PASS. Verified against the ACTUAL coverage_index.json:
+      schema_version "1.0"; scene_features present; model osculating-primary /
+      not-used; all 10 objects carry the 12 v0.6 fields; pluto+charon
+      stored_center pluto_barycenter, barycenter-relative, osc.center
+      pluto_barycenter; moon earth, titan saturn; io+apophis positions null +
+      osculating present; voyager_1 osculating null + positions present.
+      (Index STRUCTURE is correct; the data problem is in the position DATA,
+      caught in B3.)
 
 --- B3. Position file spot-checks (the manifest S7 checks) ----
   [ ] `_export_out/positions/charon.json`: center "pluto_barycenter",
@@ -211,7 +225,14 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
     python -c "import json;p=json.load(open('_export_out/positions/charon.json'))['data'];print('charon |r| km =',(p['x'][0]**2+p['y'][0]**2+p['z'][0]**2)**0.5)"
     (repeat with pluto, moon, titan). Expected order: charon ~1.7e4,
     pluto ~2.1e3, moon ~3.8e5, titan ~1.2e6. AU-scale (~5e9) = frame problem.
-      Result: ____________________________________________
+      Result: MIXED -- 2 PASS, 2 FAIL (all files km + JD, no decimation).
+        moon  PASS: |r| 356,708 .. 406,683 km, center earth, 1245 pts.
+        titan PASS: |r| 1,186,730 .. 1,256,999 km, center saturn, 736 pts.
+        charon FAIL: |r| 17,461 .. 5.34e9 km  (first pt 5.30e9 = 35 AU).
+        pluto  FAIL: |r| 2,131 .. 5.34e9 km   (first pt 5.30e9 = 35 AU).
+      charon/pluto are frame-CONTAMINATED (see B1a) -> STOP. Re-export with the
+      v4.1 #F guard drops them to osculating-only (6 position files ship: earth,
+      jupiter, saturn, moon, titan, voyager_1). Repair the cache, then re-run.
 
 --- B4. Exact pair-key confirmation --------------------------
   [ ] Confirm the served-pair strings the tranche assumes exist on the primary:
@@ -261,13 +282,27 @@ PASS CRITERIA (all must hold for Stage 2 sign-off)
 ================================================================
   - B1 summary: 8 position files, io/apophis osculating-only, invariants PASS,
     no unexpected warnings.
-  - B2/B3: coverage index v0.6-shaped; every position file km + JD; center-
-    match holds for pluto/charon/moon/titan.
+  - B2: coverage index v0.6-shaped (PASS).
+  - B3: every position file km + JD. moon/titan traces PASS. charon/pluto
+    traces FAIL (frame-contaminated cache pairs) -> BLOCKER B8; they ship
+    osculating-only until the cache is repaired.
   - B4: Moon_Earth + Titan_Saturn confirmed (or keys corrected and re-run).
   - B5: Mode 5 verdict recorded (Tony's eyes; hexagonal Charon/Pluto accepted
     or the trace deferred).
   - B6: provenance Tier-1 = 0 on the new module; ROLE_MAP entry added.
   - B7: deployed, pushed, round trip renders; SHA recorded.
+
+--- B8. BLOCKER: repair the contaminated barycenter cache pairs -----
+  `Charon_Pluto-Charon Barycenter` and `Pluto_Pluto-Charon Barycenter` in the
+  PRIMARY orbit_paths.json mix frames: points before 2027-02-01 are heliocentric
+  (~35 AU), points from 2027-02-01 are barycentric (correct). Repair on the
+  desktop -- purge the pre-2027-02-01 heliocentric points and re-fetch that span
+  with center = Pluto-Charon Barycenter (id 9), or re-fetch the whole pair
+  clean. Then re-run the export; the #F guard should stay silent and charon/
+  pluto traces should serve (~6.4-pt hexagons). Check the OTHER barycenter
+  systems (Orcus/Eris/Haumea, Styx/Nix/Kerberos/Hydra) for the same mix.
+  Ledger: L-098 (add this finding). Owner: Tony.
+  Result: repaired [ ]   re-export guard-clean [ ]   SHA ____________
 
 Deferred (tracked, NOT in this protocol): Pluto-Charon relative subsystem
 (Styx/Nix/Kerberos/Hydra) + fine-cadence moon traces + the 29-pt barycenter
