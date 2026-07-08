@@ -22,29 +22,34 @@ Commands:
   #    output; it is the ground truth the export proceeds on.
   python export_orbit_cache.py --preflight-only
 
-  # 2. Export the test tranche to the default gallery path
-  #    (../tonyquintanilla.github.io/data/solar-system/).
+  # 2. Export the test tranche to the SAFE default scratch dir (./_export_out).
+  #    Writes locally so you can inspect BEFORE anything touches the gallery.
   python export_orbit_cache.py
 
-  # 2b. Export to a chosen directory instead of the default.
-  python export_orbit_cache.py --output-dir ./_export_out
+  # 3. DEPLOY: export straight into the gallery repo -- EXPLICIT path only, so a
+  #    bare run can never overwrite the live gallery data by accident.
+  python export_orbit_cache.py --output-dir ../tonyquintanilla.github.io/data/solar-system/
 
-  # 3. (follow-on) Export the whole catalog, not just the 9-object tranche.
+  # 4. (follow-on) Export the whole catalog, not just the 9-object tranche.
   #    Tranche-scoped in this build -- prints a notice and exports the tranche.
   python export_orbit_cache.py --full-catalog
 
 Flags:
-  --output-dir <path>   where files are written
-                        (default: ../tonyquintanilla.github.io/data/solar-system/)
+  --output-dir <path>   where files are written (default: ./_export_out -- a
+                        local scratch dir; add it to the orrery repo .gitignore.
+                        Pass the gallery data path explicitly, as in (3), to
+                        deploy. The default NEVER writes to the gallery.)
   --preflight-only      run Step 0 diagnostics + Step 0-STOP, then stop
   --full-catalog        follow-on; tranche-scoped for now
 
 Operational order (the double-helix loop): (1) --preflight-only and read it;
-(2) export; (3) Mode 5 -- open the render, Tony's eyes are the gate on the
-~6.4-pt Pluto/Charon hexagons and the Moon/Titan traces; (4) provenance scan
-Tier-1 = 0 before push (add a ROLE_MAP entry for this module so the coverage-
-gap check can classify it); (5) copy the output into the gallery repo, commit,
-push, and record the pushed SHA in the handoff.
+(2) export to the scratch default and INSPECT (positions/*.json km+JD, the
+coverage index, the invariant line); (3) Mode 5 -- open the render, Tony's eyes
+are the gate on the ~6.4-pt Pluto/Charon hexagons and the Moon/Titan traces;
+(4) provenance scan Tier-1 = 0 (add a ROLE_MAP entry for this module so the
+coverage-gap check can classify it); (5) DEPLOY -- re-run with --output-dir set
+to the gallery data path (or copy _export_out/ across), commit, push, and
+record the pushed SHA in the handoff.
 
 Exit codes: 0 success; 1 caches not found; a raised AssertionError on a failed
 invariant (e.g. a center mismatch) is a LOUD failure, by design -- not a
@@ -654,8 +659,9 @@ def run_export(output_dir, full_catalog):
 def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Phase 1b orbit-cache exporter (v4: osculating-primary).")
-    parser.add_argument('--output-dir',
-                        default='../tonyquintanilla.github.io/data/solar-system/')
+    parser.add_argument('--output-dir', default='./_export_out',
+                        help='output dir (default: ./_export_out scratch; pass '
+                             'the gallery data path explicitly to deploy)')
     parser.add_argument('--full-catalog', action='store_true')
     parser.add_argument('--preflight-only', action='store_true')
     args = parser.parse_args(argv)
