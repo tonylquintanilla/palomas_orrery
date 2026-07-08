@@ -134,6 +134,10 @@ VALIDATION INVARIANTS asserted before the index is written (v4 set)
   #6 every presets[].positions.file exists on disk
   #8 every positions.file exists on disk
   #C center-match (v4, the Charon@9 lesson): osculating.center == stored_center
+  #F frame-contamination guard (v4.1): a parent-/barycenter-relative served
+     trace whose max |r| exceeds 0.5 AU is heliocentric-contaminated (a cache
+     pair with mixed-frame points); the trace is DROPPED to osculating-only
+     with a loud warning, and the cache source must be repaired.
 RETIRED with the subtraction model: v0.6 #1 (cache-required -> positions),
 #4 (parent-relative parent dependency), #7 (moon/parent grid nesting) -- all
 were artifacts of deriving moon frames by subtraction, which v4 does not do.
@@ -476,22 +480,39 @@ def write_position_file(cache, obj, out_dir, warn):
         return None
 
     md = entry.get('metadata', {})
-    mcb = md.get('center_body')
-    if mcb is not None:
-        try:
-            if resolve_center_slug(mcb) != obj.stored_center:
-                warn("%s: position center %r != stored_center %s"
-                     % (obj.slug, mcb, obj.stored_center))
-        except ValueError:
-            warn("%s: position center %r unmapped" % (obj.slug, mcb))
+    mcb = md.get('center_body')  # informational only -- unreliable label (many
+                                 # writer paths default to 'Sun'); NOT trusted
+                                 # for the frame check (see the guard below).
 
     t, xs, ys, zs = [], [], [], []
+    max_r_km = 0.0
     for d in dates:
         p = dp[d]
         t.append(_dt_to_jd(_parse_calendar(d)))
-        xs.append(p['x'] * KM_PER_AU)
-        ys.append(p['y'] * KM_PER_AU)
-        zs.append(p['z'] * KM_PER_AU)
+        x, y, z = p['x'] * KM_PER_AU, p['y'] * KM_PER_AU, p['z'] * KM_PER_AU
+        xs.append(x); ys.append(y); zs.append(z)
+        r = (x * x + y * y + z * z) ** 0.5
+        if r > max_r_km:
+            max_r_km = r
+
+    # Frame-contamination guard (replaces the center_body-string check, which
+    # false-alarmed on stale labels AND missed real contamination). A parent-
+    # or barycenter-relative trace must NOT contain heliocentric-scale points:
+    # a cache pair can accumulate points from a heliocentric fetch merged under
+    # a relative-frame key (observed on Pluto/Charon: the pre-2027-02 tail was
+    # ~35 AU). 0.5 AU is far above any real moon/barycenter orbit (the Moon is
+    # ~0.003 AU, distant irregulars stay well under) and far below any
+    # heliocentric radius (>= the system's AU distance). If tripped, drop the
+    # whole trace to osculating-only -- a half-contaminated trace renders as a
+    # broken orbit; the osculating conic renders clean. Repair the cache source.
+    if obj.canonical_frame not in ('heliocentric', 'arc-natural'):
+        max_r_au = max_r_km / KM_PER_AU
+        if max_r_au > 0.5:
+            warn("%s: FRAME CONTAMINATION -- %s trace reaches %.2f AU "
+                 "(heliocentric-scale) in pair %r; the cache pair mixes frames. "
+                 "Trace DROPPED to osculating-only. Repair the cache source."
+                 % (obj.slug, obj.canonical_frame, max_r_au, obj.position_pair_key))
+            return None
 
     start, end = dates[0][:10], dates[-1][:10]
     spacing = _median_spacing_days(dates)

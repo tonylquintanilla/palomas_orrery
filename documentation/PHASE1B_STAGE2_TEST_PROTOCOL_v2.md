@@ -145,8 +145,7 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
       by contrast, RAISES (loud, aborts) -- that is a real failure to
       investigate.
 
-Output: 
- C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>python export_orbit_cache.py
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>python export_orbit_cache.py
 Loading caches from C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\data
 Asserting invariants...
   invariants #2,#3,#5,#6,#8,#C: PASS
@@ -165,7 +164,7 @@ Summary
     - feature 'ring_system' not in SHELL_CONFIGS
     - feature 'van_allen_belts' not in SHELL_CONFIGS
 
-C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>     
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>  
 
 --- B1a. Center-mismatch warning triage (added July 8) ----------
   Fired: `pluto`/`charon: position center 'Sun' != stored_center
