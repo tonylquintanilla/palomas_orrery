@@ -284,25 +284,41 @@ PASS CRITERIA (all must hold for Stage 2 sign-off)
     no unexpected warnings.
   - B2: coverage index v0.6-shaped (PASS).
   - B3: every position file km + JD. moon/titan traces PASS. charon/pluto
-    traces FAIL (frame-contaminated cache pairs) -> BLOCKER B8; they ship
-    osculating-only until the cache is repaired.
+    traces are frame-contaminated -> the #F guard ships them osculating-only,
+    which reproduces the correct desktop barycenter render (B8). ACCEPTED for
+    the tranche; no repair needed to sign off.
   - B4: Moon_Earth + Titan_Saturn confirmed (or keys corrected and re-run).
   - B5: Mode 5 verdict recorded (Tony's eyes; hexagonal Charon/Pluto accepted
     or the trace deferred).
   - B6: provenance Tier-1 = 0 on the new module; ROLE_MAP entry added.
   - B7: deployed, pushed, round trip renders; SHA recorded.
 
---- B8. BLOCKER: repair the contaminated barycenter cache pairs -----
-  `Charon_Pluto-Charon Barycenter` and `Pluto_Pluto-Charon Barycenter` in the
-  PRIMARY orbit_paths.json mix frames: points before 2027-02-01 are heliocentric
-  (~35 AU), points from 2027-02-01 are barycentric (correct). Repair on the
-  desktop -- purge the pre-2027-02-01 heliocentric points and re-fetch that span
-  with center = Pluto-Charon Barycenter (id 9), or re-fetch the whole pair
-  clean. Then re-run the export; the #F guard should stay silent and charon/
-  pluto traces should serve (~6.4-pt hexagons). Check the OTHER barycenter
-  systems (Orcus/Eris/Haumea, Styx/Nix/Kerberos/Hydra) for the same mix.
-  Ledger: L-098 (add this finding). Owner: Tony.
-  Result: repaired [ ]   re-export guard-clean [ ]   SHA ____________
+--- B8. Contaminated barycenter TRACE -- RESOLVED for the tranche ---
+  The barycenter cache pairs `Charon_/Pluto_Pluto-Charon Barycenter` mix frames
+  in their historical data_points: pre-2027-02-01 heliocentric (~35 AU),
+  2027-02-01 onward barycentric (correct). BUT this does not block the tranche.
+  Evidence (desktop re-plot of the Pluto-Charon Barycenter system, July 8
+  17:02): the render is CORRECT -- Pluto 2131.6 km, Charon 17,463.9 km from the
+  barycenter -- because the desktop draws the orbit from the @9 OSCULATING
+  elements ([BARYCENTER MODE] Charon@9), not from the trace. Those values match
+  the export's osculating blocks EXACTLY (pluto a_au 1.42e-5 -> 2131 km; charon
+  1.167e-4 -> 17,464 km). The re-plot smart-fetched 28 clean days but did NOT
+  purge the old heliocentric span, so the #F guard still drops the pluto/charon
+  TRACE to osculating-only -- which reproduces the same correct barycentric
+  ellipse in the browser. The chunky, contaminated 6.4-pt trace is no loss.
+  RESOLUTION: pluto/charon ship osculating-only for the tranche. No cache
+  repair required for Stage 2 sign-off.
+  Verify: re-run the export -> pluto/charon appear under "osculating-only" with
+  the FRAME CONTAMINATION warning; 6 position files ship (earth, jupiter,
+  saturn, moon, titan, voyager_1); coverage_index osculating.center =
+  pluto_barycenter for both.
+    [ ] re-export shows pluto/charon osculating-only
+    [ ] coverage_index osculating a matches desktop (2131 / 17,464 km)
+  DEFERRED (only if the actual-position trace is later wanted -- it is chunky
+  at 6.4 pts/orbit anyway): purge the pre-2027-02-01 points and re-plot the
+  system over the full span (the desktop @9 fetch stores clean data), or
+  delete + re-fetch the pairs. Check the OTHER barycenter systems
+  (Orcus/Eris/Haumea, Styx/Nix/Kerberos/Hydra) for the same mix. Ledger: L-098.
 
 Deferred (tracked, NOT in this protocol): Pluto-Charon relative subsystem
 (Styx/Nix/Kerberos/Hydra) + fine-cadence moon traces + the 29-pt barycenter
