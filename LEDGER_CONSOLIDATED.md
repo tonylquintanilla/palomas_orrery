@@ -330,9 +330,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 |  | L-080 | Characterization harness (scene equivalence gate) | PROPOSED | 1.6 | 2026-07-03 |
-| ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
+| ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-06 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
-| ! | L-098 | Data serving pipeline (Phase 1b) | OPEN | 1.5 | 2026-07-07 |
+| ! | L-098 | Data serving pipeline (Phase 1b) | OPEN | 1.5 | 2026-07-06 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
 
 ### W.Deferred -- Web Publication deferred (captured)
@@ -573,7 +573,7 @@ design conversation this session; cross-ref L-071 (sibling pattern, not
 parent), L-060 (El Nino context, no causal claim).
 
 #### [L-078] Provenance scanner: systematic coverage via module_atlas role classification
-<!-- L:078 status:OPEN upd:2026-07-04 section:A flag: rice:3/3/70/3 -->
+<!-- L:078 status:OPEN upd:2026-07-07 section:A flag: rice:2/2/70/3 -->
 - **Root cause (why files get missed in the first place).** provenance_scanner.py
   gates display-string scanning on a hand-maintained narrative_files allow-list;
   a new file is invisible until someone notices and adds its name. The scanner
@@ -642,6 +642,19 @@ parent), L-060 (El Nino context, no causal claim).
   display strings -- the predicted "heavy first run" from the design. The
   previous Tier-1=0 was true only for the smaller file set the legacy
   allow-list covered.
+- **Phase 1b triage (July 7, 2026).** Cross-referenced the 104 Tier-1 findings
+  against the 10 source files in the Phase 1b export script's provenance table
+  (PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.4). **Zero overlap.** All 10 source
+  files (osculating_cache_manager, orbit_data_manager, orbital_elements,
+  celestial_objects, constants_new, shell_configs, *_visualization_shells,
+  close_approach_data, spacecraft_encounters) are clean of Tier-1 findings. The
+  104 findings cluster in display/visualization modules the export script never
+  touches: paleoclimate (5 modules), sgr_a (3), exoplanets (2), coordinate
+  guides, apsidal markers, idealized orbits, visualization utils. Phase 1b
+  does not propagate provenance gaps to served data. The one flag is
+  shell_configs.py (91 claim-shaped strings in COVERAGE GAPS, not yet scanned) --
+  but that feeds feature configs (Phase 2), not the Phase 1b export script.
+  **This workstream is parallel to Phase 1b, not a blocker.**
 - **Carried forward from L-064 (closed, superseding this item):** F/C vocabulary
   gap; energy_imbalance.py (corroborated independently by L-060's own deferred
   Phase-2 note -- ~47 candidate hits, zero citation markers found in a manual
@@ -651,9 +664,15 @@ parent), L-060 (El Nino context, no causal claim).
   volume, thin citation density -- likely the riskier one, same shape as
   scenarios_western_heatwave_march_2026.py); star_notes.py:1257 (still open,
   pre-existing, reconcile in the same pass).
+- **RICE note (July 7, 2026):** Reach and Impact lowered from 3/3 to 2/2.
+  Findings are in display strings of visualization modules, not in data pipeline
+  or propagating constants. No served data affected. Still real gaps that need
+  citing, but not load-bearing for any current build. Suitable for Fable 5
+  bulk triage (access through July 12, 2026).
 **Gap:** step (1) done. Remaining: (a) triage the 104 Tier-1 findings across
 26 modules -- cite, remove-and-note, or add to provenance_exceptions.json per
-the three-outcome rule; (b) resolve the 4 COVERAGE GAP modules (add to ROLE_MAP
+the three-outcome rule. Fable 5 recommended for bulk triage manifest, then
+4.6 + Tony execute. (b) resolve the 4 COVERAGE GAP modules (add to ROLE_MAP
 or narrative_files); (c) step (2) near-miss vocabulary detector (design
 converged on hook point, tuning NOT done); (d) step (3) F/C bare-degree fix to
 NUMERIC_CLAIM_RE. Triage (a) is the heavy lift; (b-d) are mechanical once (a)
@@ -1641,10 +1660,10 @@ Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 - **Gitignore:** `orbit_paths.json` and `orbit_cache/` added to `.gitignore`
   @ `6368c87` (July 6, 2026). Old pair-based cache preserved locally for
   desktop use.
-**Gap:** CORS check (OQ-E, first gate), pre-build diff (`f1ede52..a56e036`),
-export script, coverage index generator, serving home deployment.
+**Gap:** Pre-build diff (`f1ede52..a56e036`), export script, coverage index
+generator, deploy to `data/` directory in gallery repo.
 **Ref:** DATA_SERVING_BROAD_ANALYSIS.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
-v0.3; master plan v10 §3a, §5 Phase 1b.
+v0.4; master plan v10 §3a, §5 Phase 1b.
 
 #### [L-099] Solar System Explorer interactive exhibit
 <!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->

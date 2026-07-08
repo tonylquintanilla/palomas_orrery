@@ -1,17 +1,36 @@
-# PHASE 1B DATA SERVING PIPELINE — Design Handoff v0.3
+# PHASE 1B DATA SERVING PIPELINE — Design Handoff v0.6
 
 **Type:** DESIGN SESSION (zero code)
 **Base:** orrery @ `f1ede52` / gallery @ `4b086a6`
 **Date:** July 7, 2026
-**Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8 (review),
-Claude Fable 5 (review)
+**Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8 (reviews
+×2), Claude Fable 5 (review)
 **Purpose:** Converged design for Phase 1b. Schema draft, test objects,
 validation rules, feature architecture — reviewed through three-model
-convergence.
-**Source:** Master plan v9 §3a, §5 Phase 1b; Fable 5 broad analysis
+convergence. Source data structures documented for build manifest.
+**Source:** Master plan v10 §3a, §5 Phase 1b; Fable 5 broad analysis
 (`DATA_SERVING_BROAD_ANALYSIS.md`, July 5 2026); Opus 4.6 + Tony convergence
 (July 6–7, 2026); Opus 4.8 review (July 7, 2026); Fable 5 review (July 7,
 2026).
+
+**v0.6 changes from v0.5:** 4.8 manifest review incorporated. Saturn added
+as 10th test object (parent of Titan). Cache key resolution flagged as
+unknown (daily keys may be insufficient for moons — verify at build).
+Parent interpolation required (not grid intersection — intersection
+decimates moon resolution). Explicit center slug map defined. Apophis
+preset acknowledged as likely null for test tranche. Pair key → slug table
+updated for 10 objects.
+
+**v0.5 changes from v0.4:** Source data structures section added. Documents
+the internal format of `orbit_paths.json` (date-keyed dict, AU, pair keys)
+and `osculating_cache.json` (element fields, center suffix convention,
+metadata with provenance). Field mapping table (cache → schema) and pair
+key → slug mapping for all 10 test objects. Key discovery: positions stored
+in AU, schema specifies km — export script converts.
+
+**v0.4 changes from v0.3:** OQ-E resolved: H2 subfolder in gallery repo.
+Gallery at 474 MB, 526 MB headroom, ~72 MB all-phase needs. CORS check
+removed.
 
 **v0.3 changes from v0.2:** Incorporated Fable 5 review. Resolved invariant
 #4 self-contradiction (parent position files now served; option (b)).
@@ -25,9 +44,9 @@ with position files.
 **v0.2 changes from v0.1:** Incorporated 4.8 convergence review. Added
 osculating `center` field (catch 1), validation invariants (catch 2),
 cross-object parent dependency rules (catch 3). Settled km/AU, OQ-F
-subtraction, OQ-E orphan-branch anchoring, presets-are-self-contained,
-comet tail contract, SHELL_CONFIGS hover gap (flagged, deferred). Hybrid
-provenance source field. Charon added to schema examples.
+subtraction, presets-are-self-contained, comet tail contract, SHELL_CONFIGS
+hover gap (flagged, deferred). Hybrid provenance source field. Charon added
+to schema examples.
 
 **SHA note:** Orrery has advanced to `a56e036` since the handoff base
 (`f1ede52`). Before the export script build, diff `f1ede52..a56e036` and
@@ -71,6 +90,157 @@ applies to the export script's code, within scanner lookback distance.
 
 ---
 
+## Source Data Structures (from code review, July 7 2026)
+
+The export script reads two desktop cache files. Their internal structures,
+documented here from the source code (`orbit_data_manager.py` and
+`osculating_cache_manager.py` at HEAD), define the input contract for the
+export script.
+
+### orbit_paths.json (position vectors)
+
+Location: `data/orbit_paths.json` (~92 MB, gitignored).
+Keyed by `"{ObjectName}_{CenterName}"` pairs.
+
+```
+"Io_Sun": {
+    "data_points": {
+        "2025-01-01": {"x": 5.234, "y": -1.678, "z": 0.023},
+        "2025-01-02": {"x": 5.235, "y": -1.677, "z": 0.024},
+        ...
+    },
+    "metadata": {
+        "earliest_date": "2025-01-01",
+        "latest_date": "2026-04-01",
+        "center_body": "Sun",
+        "last_updated": "2026-07-01"
+    }
+}
+```
+
+**Key facts for the export script:**
+- **⚠️ RESOLUTION UNKNOWN.** The code writes date keys via
+  `strftime("%Y-%m-%d")` — daily granularity. If moons were fetched at
+  6h intervals, multiple points per day would collide on the same key and
+  only the last survives. Old-format entries (bare x/y/z arrays) preserve
+  all points. **First build action: print the raw keys for `Io_Sun` and
+  count them.** If daily, moons need a finer desktop re-fetch before the
+  export can produce usable data. *(4.8 manifest catch 1)*
+- Coordinates are in **AU** (Horizons `vectors()` default). The export
+  script converts to km on write (schema says positions in km).
+- Date-keyed dict (`"YYYY-MM-DD"` → `{x, y, z}`), NOT arrays. The export
+  script converts to column-oriented arrays with JD timestamps.
+- **ALL entries are stored with their query center**, typically `"Sun"`.
+  Moons are stored heliocentric (e.g. `"Io_Sun"`, not `"Io_Jupiter"`).
+  The export script must subtract the parent's heliocentric position to
+  produce parent-relative vectors (the co-sampling rule from §3).
+- Old-format entries have bare `x/y/z` arrays without dates (auto-converted
+  on load by `convert_single_orbit_to_new_format()`). The export script
+  should read through the same load path to get normalized data.
+- The pair key uses display names, not Horizons IDs.
+
+### osculating_cache.json (osculating elements)
+
+Location: `data/osculating_cache.json`.
+Keyed by object name with optional `@center` suffix for non-heliocentric.
+
+```
+"Jupiter": {
+    "elements": {
+        "a": 5.2026,
+        "e": 0.0489,
+        "i": 1.303,
+        "omega": 14.7,
+        "Omega": 100.5,
+        "epoch": "2025-01-01 osc.",
+        "TP": 2458849.5,
+        "MA": 357.5,
+        "TA": 356.8
+    },
+    "metadata": {
+        "fetched": "2026-06-15T10:30:00",
+        "source": "JPL Horizons",
+        "horizons_id": "599",
+        "display_name": "Jupiter",
+        "center_body": "@sun",
+        "refresh_interval_days": 30
+    }
+}
+```
+
+Non-heliocentric example: `"Charon@9"` (elements relative to Pluto-Charon
+barycenter, Horizons body 9).
+
+**Key facts for the export script:**
+- `a` is in AU (same as schema's `a_au`).
+- Angular elements (`i`, `omega`, `Omega`) are in degrees.
+- `MA` = mean anomaly at epoch (maps to schema's `M0_deg`).
+- `TP` = time of perihelion passage (JD). Not in the schema directly but
+  available if needed.
+- `epoch` is a string like `"2025-01-01 osc."` — the export script parses
+  the date portion and converts to JD for the schema's `epoch_jd`.
+- `metadata.center_body` carries the Horizons center (e.g. `"@sun"`,
+  `"@9"`). Maps to the schema's `osculating.center` field.
+- `metadata.fetched` + `metadata.source` + `metadata.horizons_id` provide
+  the structured provenance for the schema's `osculating.source` object.
+
+### Field mapping: cache → schema
+
+| Cache field | Schema field | Transform |
+|-------------|-------------|-----------|
+| `a` | `a_au` | Direct (both AU) |
+| `e` | `e` | Direct |
+| `i` | `i_deg` | Direct (both degrees) |
+| `omega` | `peri_deg` | Direct (argument of perihelion) |
+| `Omega` | `node_deg` | Direct (longitude of ascending node) |
+| `MA` | `M0_deg` | Direct (mean anomaly at epoch) |
+| `epoch` (string) | `epoch_jd` | Parse date, convert to JD |
+| `metadata.center_body` | `osculating.center` | Strip `@`, map to slug |
+| `metadata.fetched` | `osculating.source.retrieved` | Direct (ISO string) |
+| `metadata.horizons_id` | `osculating.source.query_target` | Direct |
+| Position `x,y,z` (AU) | Position `x,y,z` (km) | Multiply by AU_TO_KM |
+| Position date keys | `t` array | Parse to JD |
+
+### Center body → slug map *(4.8 manifest catch 4)*
+
+Explicit mapping from Horizons `center_body` strings to schema slugs.
+A numeric-only or wrong-but-populated value passes invariant #5 while
+being semantically wrong. The export script uses this map and rejects
+unmapped values.
+
+| `center_body` value | Schema slug | Notes |
+|---------------------|-------------|-------|
+| `@sun`, `@0`, `@10` | `sun` | Heliocentric (SSB, Sun body) |
+| `@399` | `earth` | Earth body center |
+| `@599` | `jupiter` | Jupiter body center |
+| `@699` | `saturn` | Saturn body center |
+| `@9` | `pluto_barycenter` | Pluto-Charon system barycenter |
+
+For Charon: `osculating.center` must resolve to `pluto_barycenter`, not
+just be non-empty. The export script asserts this specifically — a targeted
+check beyond invariant #5's presence test.
+
+### Pair key → slug mapping
+
+The orbit cache uses `"{Name}_{Center}"` display-name pairs. The schema
+uses object slugs. The export script maps via `celestial_objects.py`'s
+`OBJECT_DEFINITIONS`:
+
+| Cache pair key | Schema slug | Notes |
+|---------------|-------------|-------|
+| `Earth_Sun` | `earth` | |
+| `Jupiter_Sun` | `jupiter` | Parent; position file for composition |
+| `Io_Sun` | `io` | Subtract `Jupiter_Sun` for parent-relative |
+| `Titan_Sun` | `titan` | Subtract `Saturn_Sun` for parent-relative |
+| `Moon_Sun` | `moon` | Subtract `Earth_Sun` for parent-relative |
+| `Pluto_Sun` | `pluto` | `trajectory_of: pluto_barycenter` |
+| `Charon_Sun` | `charon` | Subtract `Pluto_Sun` for parent-relative |
+| `Saturn_Sun` | `saturn` | Parent of Titan; position file for composition |
+| `Voyager 1_Sun` | `voyager_1` | Write-once spacecraft |
+| `Apophis_Sun` | `apophis` | Analytic; preset from close_approach_data |
+
+---
+
 ## 1. What Phase 1b Is
 
 Phase 1b builds the bridge from Tony's desktop caches to the browser. The
@@ -87,9 +257,9 @@ interactive gallery as web-servable static files.
    (Phase 2, B′ architecture) reads this to know what it can offer and
    what controls to enable. The GUI declares the envelope — this is the
    envelope.
-3. **Serving home** — the location where web cache files live. Resolve
-   OQ-E (CORS check first). Deploy first web cache as proof of pipeline.
-   The slim plotly wheel (~3.9 MB, B′) also lives here.
+3. **Serving home** — `data/` directory in the gallery repo (OQ-E settled:
+   H2 subfolder). Deploy first web cache as proof of pipeline. The slim
+   plotly wheel (~3.9 MB, B′) also lives here.
 4. **OQ resolutions** — settle OQ-A through OQ-G (see §4 below).
 
 **What Phase 1b is NOT:** It does not build the assembler (Phase 2). It
@@ -100,7 +270,7 @@ It produces the data files and the index that Phase 2 will consume.
 
 ## 2. Test Objects
 
-Nine objects, selected to represent every class and edge case the schema
+Ten objects, selected to represent every class and edge case the schema
 must express. The export script and coverage index are validated against
 these before scaling to the full catalog.
 
@@ -111,6 +281,7 @@ these before scaling to the full catalog.
 | Moon      | cache-required    | Earth's moon, familiar geometry for visual validation |
 | Io        | cache-required    | Fast period (~42h), step-size stress, parent grid    |
 | Titan     | cache-required    | Different parent (Saturn), slow period               |
+| Saturn    | analytic + parent | Parent of Titan, position file for composition    |
 | Pluto     | barycenter edge   | `trajectory_of` = `pluto_barycenter`, identity substitution |
 | Charon    | cache-req + bary  | Moon of a barycenter object, osculating center test  |
 | Apophis   | analytic + preset | Close-approach Tier-2 override for specific window   |
@@ -123,7 +294,7 @@ referenced to barycenter, not Pluto's surface). Io tests parent-grid
 co-sampling (4.8 catch 3 — Jupiter must be sampled on Io's time grid
 for the heliocentric→parent-relative transform). Apophis tests
 self-contained presets (4.8 — geocentric close-approach data carries no
-dependency on Earth's rolling cache). Jupiter and Earth, as parents of
+dependency on Earth's rolling cache). Jupiter, Earth, and Saturn, as parents of
 cache-required moons, test the parent-position-file rule (Fable catch 1 —
 invariant #4 requires parent positions to be served, not assumed analytic).
 Pluto tests the `trajectory_of` field (Fable catch 2 — the served
@@ -456,7 +627,7 @@ Horizons query provenance recorded by the cache manager.
 | Field | Type | Purpose |
 |-------|------|---------|
 | `schema_version` | string | Lets consumers detect format changes |
-| `generated` | ISO datetime | When this index was produced. **This is the provenance anchor for the data repo** — not the repo SHA, which is ephemeral on an orphan branch *(4.8)* |
+| `generated` | ISO datetime | When this index was produced. **Provenance anchor for the data** — the data files don't carry their own version history *(4.8, adapted)* |
 | `generator` | string | Which script + version produced it |
 | `serving_base` | string | Base URL/path prefix for all file references |
 | `objects.{slug}` | object | Keyed by human-readable slug, not Horizons ID |
@@ -623,32 +794,30 @@ rendering; outer moons (Titan: ~16 days) are fine at 6h or even 12h.
 The dial exists in the schema; the value is tuned per object. 4.8
 confirmed this is a Mode 5 question — Tony's render decides.
 
-### OQ-E: Serving Home — SETTLED + ANCHORING RULE
+### OQ-E: Serving Home — SETTLED (H2 subfolder)
 
-**Position:** H1 — dedicated `palomas-orrery-data` repo, orphan-branch
-publish, zero history growth. Keeps data weight off the gallery's 1 GB
-ceiling. Separate Pages project site under the custom domain.
+**Resolution:** H2 — `data/` subfolder in the gallery repo
+(`tonyquintanilla.github.io`). Same repo, same origin, no CORS question.
 
-**Gate:** CORS check. GitHub Pages is believed to serve
-`Access-Control-Allow-Origin: *` on all content *(Fable — from training,
-verify empirically)*. If so, even a different-origin data repo would work.
-The CORS check is confirming which of two working configurations we have,
-not whether the architecture survives. Still right to run it first —
-cheap empiricism beats recollection.
+**Rationale:** Gallery repo measured at 474 MB (141 JSON cards + 6 MB
+infrastructure). 526 MB headroom against the 1 GB GitHub Pages soft limit.
+All-phase data needs are ~72 MB (solar system ~36 MB, star cache ~31 MB,
+plotly wheel ~4 MB, configs <1 MB) — 14% of remaining space. The 16 gallery
+JSONs over 10 MB each (pre-refactor heavy files) are cullable via L-074 if
+headroom tightens. A separate repo is unnecessary overhead for this scale.
 
-**Anchoring rule *(4.8)*:** A force-pushed orphan branch makes the data
-repo's commit SHA useless as a round-trip anchor. The coverage index's
-`generated` timestamp + `generator` version is the provenance anchor for
-the data store. The data repo does NOT participate in the SHA round-trip
-protocol; the orrery and gallery repos do.
+**Anchoring rule *(4.8, adapted)*:** The data files don't have their own
+repo history — they're pushed alongside gallery content. The coverage
+index's `generated` timestamp + `generator` version is the provenance
+anchor for the data, not any specific commit SHA.
 
 **The serving home accommodates all domains** — solar system data now,
 star cache (Phase 3), Earth system data (Phase 5). The coverage index
-schema is solar system; the repo layout has domain directories.
+schema is solar system; the directory layout has domain subdirectories.
 
-Proposed repo layout:
+Directory layout within the gallery repo:
 ```
-palomas-orrery-data/
+data/
 ├── solar-system/
 │   ├── coverage_index.json
 │   ├── feature_configs.json
@@ -660,11 +829,11 @@ palomas-orrery-data/
 │   │   ├── titan.json
 │   │   ├── voyager_1.json
 │   │   └── ...
-│   ├── presets/
-│   │   ├── apophis_2029_close_approach.json
-│   │   └── ...
-│   └── wheels/
-│       └── plotly-slim-5.x.x-py3-none-any.whl
+│   └── presets/
+│       ├── apophis_2029_close_approach.json
+│       └── ...
+├── wheels/
+│   └── plotly-slim-5.x.x-py3-none-any.whl
 ├── stars/
 │   └── (Phase 3)
 └── earth-system/
@@ -881,7 +1050,8 @@ both — is likely cleaner. Deferred to Phase 2.
 10. **Comet tail contract** — renderers read position, never invoke
     orbital mechanics *(4.8)*
 11. **Osculating staleness** — no `valid_until`; one orbit shape *(Tony)*
-12. **OQ-E anchoring** — index timestamp, not repo SHA *(4.8)*
+12. **OQ-E serving home** — H2 subfolder in gallery repo. Same origin,
+    no CORS. Gallery has 526 MB headroom *(Tony + 4.6)*
 13. **Provenance source** — hybrid string/structured object *(4.8)*
 14. **scene_feature_configs rename** — avoid key collision *(Fable)*
 
@@ -889,15 +1059,13 @@ both — is likely cleaner. Deferred to Phase 2.
 
 1. **OQ-A catalog scope** — nine now; full catalog later
 2. **OQ-D step size tuning** — 6h default; Mode 5
-3. **OQ-E CORS check** — empirical gate; first thing to build
-4. **Hover behavior in JS renderers** — deferred to Phase 2
-5. **Feature config home** — separate file; could go inline later
+3. **Hover behavior in JS renderers** — deferred to Phase 2
+4. **Feature config home** — separate file; could go inline later
 
 ### Pre-Build Checklist
 
 1. Diff `f1ede52..a56e036` — confirm no source-file changes
-2. OQ-E CORS probe — deploy test file, fetch from interactive.html
-3. Re-run SHA round trip against live HEAD at build session start
+2. Re-run SHA round trip against live HEAD at build session start
 
 ---
 
@@ -922,6 +1090,18 @@ both — is likely cleaner. Deferred to Phase 2.
 - Opus 4.6 + Tony convergence to v0.3 (July 7, 2026): all Fable catches
   accepted, parent position files, trajectory_of field, grid nesting
   invariant, key rename, prose fix
+- Opus 4.6 + Tony to v0.4 (July 7, 2026): OQ-E resolved H2 subfolder
+  (gallery at 474 MB, 526 MB headroom, 72 MB all-phase needs)
+- Opus 4.6 code review to v0.5 (July 7, 2026): read orbit_data_manager.py
+  and osculating_cache_manager.py at HEAD; documented source data structures,
+  field mapping, pair key → slug mapping. Key discovery: positions in AU,
+  schema specifies km — export converts
+- Opus 4.8 manifest review (July 7, 2026): four load-bearing catches
+  (cache key resolution, parent interpolation vs intersection, Saturn
+  for Titan, Pluto/Charon center slug map)
+- Opus 4.6 + Tony convergence to v0.6 (July 7, 2026): all 4.8 manifest
+  catches accepted, Saturn added, center slug map defined, resolution
+  flagged for build pre-flight
 - Ledger: L-098 (data serving pipeline), L-079 (shared assembler,
   keystone)
 

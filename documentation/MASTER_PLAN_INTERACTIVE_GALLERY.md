@@ -320,13 +320,14 @@ relative for moons, arc-natural for spacecraft), and writes web-format files.
 The precision rule: store moons parent-relative to preserve significance in
 float64.
 
-**Serving home is a configuration value.** The file layout and index schema
-is the real architectural decision. Fable's H1 (dedicated `palomas-orrery-data`
-repo, orphan-branch publish, zero history growth) is the leading candidate.
-CORS verification needed before locking: does a project site under the custom
-domain (`palomasorrery.com/<repo>/`) share the gallery's origin? Probable
-answer: yes (same-origin under user-site custom domain), but confirm
-empirically — not a blocker, a five-minute check.
+**Serving home is a subdirectory of the gallery repo.** The `data/` directory
+in `tonyquintanilla.github.io` serves at `palomasorrery.com/data/`. Same
+origin by construction — no CORS question. Gallery measured at 474 MB with
+526 MB headroom against the 1 GB GitHub Pages soft limit; all-phase data
+needs are ~72 MB (14% of remaining). Pre-heavy gallery JSONs are cullable
+via L-074 if headroom tightens. The coverage index's `generated` timestamp
+is the provenance anchor for the data (the data files don't carry their own
+version history).
 
 **Star cache:** 31 MB pickle → `.npz` for v1 (NumPy stable in Pyodide; Parquet
 held as optimization). Deferred to Phase 3.
@@ -341,10 +342,9 @@ held as optimization). Deferred to Phase 3.
   **Settled.**
 - OQ-D: Moon step size — 6h default; per-object `step_hours` from day one.
   Io may want 2h. Mode 5 decides. **Positioned, Mode 5.**
-- OQ-E: Serving home — H1 (dedicated repo, orphan-branch). Data repo does
-  NOT participate in SHA round-trip; coverage index `generated` timestamp is
-  the provenance anchor. **Settled pending CORS check.** GitHub Pages believed
-  to serve `Access-Control-Allow-Origin: *` (Fable — verify empirically).
+- OQ-E: Serving home — H2 subfolder in gallery repo (`data/`). Gallery
+  measured at 474 MB, 526 MB headroom, all-phase data needs ~72 MB. No
+  CORS question (same repo, same origin). **Settled.**
 - OQ-F: Canonical frame — helio / parent-relative / arc-natural. Export
   script subtracts (float64 sufficient), does NOT re-query Horizons.
   Co-sample parent+moon on one grid. **Settled.**
@@ -560,10 +560,11 @@ Deliverables:
    `palomas-orrery-data` repo (orphan-branch publish). Deploy first web cache.
    The slim plotly wheel (~3.9 MB, B′) also lives here.
 
-Requires: Fable analysis (delivered), design handoff (converged v0.3),
+Requires: Fable analysis (delivered), design handoff (converged v0.4),
 gitignore updates (done @ `6368c87`).
-Pre-build: CORS check (OQ-E), diff `f1ede52..a56e036` for source file changes.
-Gate: export script runs, web cache deployed, interactive page can fetch it.
+Pre-build: diff `f1ede52..a56e036` for source file changes.
+Gate: export script runs, web cache deployed to `data/`, interactive page
+can fetch it.
 
 ### Phase 2 — Solar System Assembler + First Interactive Page
 
@@ -676,8 +677,8 @@ Helpers split, all assembler and interactive page builds.
 
 ### Next Step
 
-Phase 1b build. Pre-build: CORS check (OQ-E), diff `f1ede52..a56e036`.
-Then: export script, coverage index, serving home deployment.
+Phase 1b build. Pre-build: diff `f1ede52..a56e036`.
+Then: export script, coverage index, deploy to gallery repo `data/` directory.
 
 ---
 
@@ -916,7 +917,9 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - Gallery viewer: Option C hybrid — two pages, `index.html` + `interactive.html` (§2a)
 
 *New in v10:*
-- Phase 1b design converged v0.3, three-model review (§3a, §5)
+- Phase 1b design converged v0.4, three-model review (§3a, §5)
+- OQ-E resolved: H2 subfolder in gallery repo (474 MB used, 526 MB headroom,
+  ~72 MB all-phase data needs) (§3a)
 - 14 settled schema decisions: osculating center, parent position files,
   trajectory_of, presets self-contained, subtract-don't-requery, unit-is-data,
   feature rendering always JS, validation invariants, grid nesting (§3a)
@@ -980,6 +983,6 @@ prompts.
 
 Base: orrery @ `f1ede52` (advanced to `a56e036`) / gallery @ `4b086a6`.
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
-Phase 1b design converged v0.3 (three-model review). Next: Phase 1b build
-(CORS check, export script). Solar System Explorer live at
+Phase 1b design converged v0.4 (three-model review). Next: Phase 1b build
+(diff, export script). Solar System Explorer live at
 palomasorrery.com/interactive.html.
