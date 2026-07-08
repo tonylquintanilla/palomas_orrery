@@ -10,7 +10,7 @@ output is captured and the Step 0-STOP moon-cadence branch is ruled on, because
 both depend on facts only the primary cache can supply.
 
 Key functions:
-    run_preflight()      - Step 0 (0a-0f) diagnostics + the Step 0-STOP summary
+    run_preflight()      - Step 0 (0a-0f) diagnostics + the Step 0-STOP summary: python export_orbit_cache.py --preflight-only
     resolve_center_slug() - map a Horizons center_body to a schema slug
     main()               - CLI entry (--preflight-only works today)
 
