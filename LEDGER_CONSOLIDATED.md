@@ -1632,63 +1632,75 @@ Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 
 #### [L-098] Data serving pipeline (Phase 1b)
 <!-- L:098 status:OPEN upd:2026-07-08 section:W.Active flag: rice:3/3/50/3 -->
-- **What.** Build the bridge from Tony's desktop caches to the browser. The
-  desktop has accumulated months of osculating elements and position vectors
-  from Horizons. This pipeline makes that data available to the interactive
-  gallery as web-servable files.
-- **Deliverables:** (a) Export script: reads desktop caches, writes per-object
-  canonical files (F2 storage). (b) Coverage index: JSON manifest of available
-  objects, availability class, date coverage, step size, stored center, and
-  osculating elements. (c) Serving home: resolve OQ-E (CORS check first),
-  deploy first web cache. (d) Resolve OQ-A through OQ-G.
-- **Design source:** Fable 5 broad analysis (DATA_SERVING_BROAD_ANALYSIS.md,
-  July 5, 2026). Reviewed and refined by Opus 4.6 + Tony (July 6, 2026).
-  F2 canonical storage adopted. Three trace types understood. Two data types
-  to serve (osculating elements + position vectors). Two classes for rolling
-  cache (analytic-available, cache-required) plus spacecraft write-once.
-- **Design converged: v0.3** (July 7, 2026). Three-model review (Opus 4.6 +
-  Tony → Opus 4.8 review → Fable 5 review → Opus 4.6 convergence). Coverage
-  index schema v0.3, 14 settled decisions, 8 validation invariants, 9 test
-  objects covering every schema pattern. Key decisions: osculating elements
-  carry explicit `center` field; parents of moons serve position files
-  (cache-exact composition); `trajectory_of` field for barycenter
-  substitution; presets are self-contained (no frame composition); subtract
-  don't re-query; unit is data (km positions, AU elements); feature rendering
-  always JS in interactive layer (three-context split: static gallery / A /
-  B′); `feature_configs.json` separate from coverage index. Five items open
-  (OQ-A scope, OQ-D step tuning, OQ-E CORS check, hover behavior, feature
-  config home).
-- **Gitignore:** `orbit_paths.json` and `orbit_cache/` added to `.gitignore`
-  @ `6368c87` (July 6, 2026). Old pair-based cache preserved locally for
-  desktop use.
-- **v4 model correction + Stage 2 build (July 8, 2026, Opus 4.8).** Subtraction
-  model RETIRED -- differencing two heliocentric ephemerides was empirically
-  rejected on the desktop (catastrophic cancellation + daily-cadence aliasing),
-  confirmed against idealized_orbits.py at HEAD (osculating-only satellite
-  systems, barycenter mode). Product model INVERTED: osculating elements are
-  the PRIMARY orbit product (center-matched); direct relative-frame Horizons
-  pairs are the SECONDARY trace layer, served where cadence allows. Manifest v4
-  + PHASE1B_MODEL_CORRECTION_HANDOFF written. export_orbit_cache.py Steps 0-6
-  built and pre-tested (compile/ASCII/LF, unit tests, full export: 8 position
-  files + io/apophis osculating-only + Voyager arc; invariants pass). Coverage
-  index reconciled to design handoff v0.6 (field shape verified; availability
-  'cache-required' retired, invariants #1/#4/#7 retired with the subtraction
-  model, 'barycenter-relative' frame added; Pluto/Charon served in the
-  barycenter frame per Tony's ruling). Pre-flight run on the primary; Pluto_Sun
-  = body 999, barycenter a separate id-9 system. [verified @d4c37cf]
-**Gap:** export script + coverage-index generator DONE (pre-tested; not yet run
-on the primary or pushed). Remaining desktop-side, in order: (1) run
---preflight-only then export on the primary; (2) Mode 5 render check (~6.4-pt
-Pluto/Charon hexagons, Moon/Titan traces); (3) provenance Tier-1 = 0 on
-export_orbit_cache.py + add its ROLE_MAP entry (new devtool; see L-078);
-(4) copy output to gallery data/solar-system/, push, record the SHA. Exact
-pair-key strings (Moon_Earth, Titan_Saturn) confirmed at run -- a mismatch
-warns and ships osculating-only, it does not abort. Deferred to a fine-cadence
-follow-on: Pluto-Charon relative subsystem + the 29-pt barycenter heliocentric
-entry (Phase 2 wide-view composition).
-**Ref:** DATA_SERVING_BROAD_ANALYSIS.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
-v0.6; PHASE1B_BUILD_MANIFEST_v4.md; PHASE1B_MODEL_CORRECTION_HANDOFF.md;
-export_orbit_cache.py; L-078 (ROLE_MAP entry); master plan v10 §3a, §5 Phase 1b.
+- **What.** Serve solar-system orbits to the browser gallery: osculating
+  elements (the orbit) + direct-frame position vectors (the actual-motion
+  trace), plus a coverage index the browser reads. Goal unchanged since v0.3;
+  the DATA SOURCE pivoted (trail below).
+
+- **Trail (how the design got here).**
+  - v0.3 design converged July 7 (Fable 5 broad analysis -> Opus 4.8 review ->
+    Opus 4.6 convergence + Tony): coverage-index schema, a 9-object test tranche
+    covering every pattern, 8 invariants. Design handoff v0.6. Legacy
+    orbit_paths.json gitignored in the orrery @ 6368c87.
+  - v4 model correction (July 8, Opus 4.8): the subtraction model (derive a
+    moon's frame by differencing heliocentric ephemerides) was RETIRED --
+    empirically rejected on the desktop (catastrophic cancellation + daily
+    aliasing), confirmed against idealized_orbits.py (osculating-only satellite
+    systems, barycenter mode). Product model INVERTED: osculating is the PRIMARY
+    orbit; direct relative-frame pairs are the SECONDARY trace, served where
+    cadence allows. Coverage index reconciled to v0.6 (field-verified;
+    cache-required + invariants #1/#4/#7 retired; barycenter-relative frame
+    added; Pluto/Charon in the barycenter frame per Tony). Manifest v4 +
+    PHASE1B_MODEL_CORRECTION_HANDOFF.
+  - Stage 2 build + the finding that forced the pivot (July 8): export_orbit_
+    cache.py (Steps 0-6) built, pre-tested, and RUN on the primary. B2 (schema)
+    PASSED; B3 caught frame CONTAMINATION in the served Charon/Pluto traces --
+    heliocentric points (~35 AU) mixed with correct barycentric points under a
+    barycenter key, from a fetch predating the @9 override. The desktop is
+    immune (draws orbits from osculating, not traces); the gallery is EXPOSED
+    (serves the raw traces). merge_orbit_data merges by date with NO frame
+    check, and the extent across 1501 legacy entries is unknowable. Added a
+    magnitude frame guard (#F): a relative-frame trace exceeding 0.5 AU drops to
+    osculating-only. Test record: PHASE1B_STAGE2_TEST_PROTOCOL.
+
+- **Current direction: GALLERY DATA-SOURCE PIVOT (July 8).** Stop reading the
+  legacy desktop cache for the gallery. Build a clean, purpose-built gallery
+  cache by FETCHING FRESH from Horizons with the correct center per object,
+  stored in the GALLERY repo (separate-clean from the orrery), refreshed by a
+  NIGHTLY BATCH, validated on write by the #F guard promoted SOURCE-side so
+  contamination cannot enter by construction. Legacy cache untouched (desktop).
+  Standalone builder (astroquery, no orrery import) makes "where it runs
+  nightly" a scheduler detail, not an architecture fork.
+  Design handoff: GALLERY_DATA_SOURCE_HANDOFF.
+
+- **Carries forward from Stage 2 (only the SOURCE changes):** the v4 osculating-
+  primary model; the coverage-index + position-file schema (v0.6-reconciled);
+  invariants #2/#3/#5/#6/#8/#C + the #F guard; center-slug map, epoch parser
+  (HH:MM), JD convention. export_orbit_cache.py's derive/serve half is reused in
+  the new builder; its "read the legacy cache" input is retired.
+
+**Tony:** fetch-fresh + nightly batch + gallery-repo cache + ~1yr back ratified.
+Open for the builder: (1) intermediate raw cache vs direct-served [lean:
+intermediate]; (2) desktop-scheduled now vs GitHub Action [lean: desktop now];
+(3) daily cadence + rolling window -- weigh git-growth of nightly commits;
+(4) object list = tranche-first gallery config.
+
+**Gap:** Fable 5 broad-first review (FABLE_REVIEW_gallery_data_source.md) ->
+converge the open choices (git-growth of a nightly-committed growing cache is
+the top risk) -> builder manifest -> build (standalone fetch + #F-on-write +
+derive served files) -> first full build over the window -> schedule nightly.
+The legacy-cache Stage 2 deploy is SUPERSEDED (never run/pushed). Deferred:
+Pluto-Charon relative subsystem + sub-daily (time-keyed) moon traces + Phase 2
+wide-view composition.
+
+**Sibling candidate:** source-side frame guard in merge_orbit_data for the
+DESKTOP cache (prevents recurrence of legacy-style contamination; optional).
+
+**Ref:** GALLERY_DATA_SOURCE_HANDOFF.md; FABLE_REVIEW_gallery_data_source.md;
+PHASE1B_STAGE2_TEST_PROTOCOL.md; PHASE1B_BUILD_MANIFEST_v4.md;
+PHASE1B_MODEL_CORRECTION_HANDOFF.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
+v0.6; DATA_SERVING_BROAD_ANALYSIS.md; export_orbit_cache.py; L-078 (ROLE_MAP);
+master plan v10 §3a, §5 Phase 1b.
 
 #### [L-099] Solar System Explorer interactive exhibit
 <!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->
