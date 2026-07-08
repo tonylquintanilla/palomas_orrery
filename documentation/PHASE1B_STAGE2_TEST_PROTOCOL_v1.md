@@ -64,6 +64,63 @@ PART B -- DESKTOP RUNTIME + VISUAL (Tony, against the PRIMARY)
       Result: PASS. 1501 pair keys; all 10 present @ 1.000 d/step, AU;
       osc 9/9, 8/9 HH:MM, 0 MA=None; verdicts as expected. `[verified, primary]`
 
+Output: 
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>python export_orbit_cache.py --preflight-only
+========================================================================
+PHASE 1B PRE-FLIGHT (Step 0) -- read-only diagnostics
+Cache dir: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\data
+========================================================================
+
+orbit_paths.json: 1501 pair keys
+
+--- 0a/0c/0e: presence, key format, cadence, units ---
+  Earth_Sun         8527 pts | date-only    | 1.000 d/step | 2023-10-14 .. 2047-02-17 | center=Sun
+       first-pt |r|=0.9977 -> AU
+  Jupiter_Sun      10595 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2054-05-16 | center=Sun
+       first-pt |r|=5.117 -> AU
+  Saturn_Sun       10597 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2054-05-18 | center=Sun
+       first-pt |r|=9.6 -> AU
+  Pluto_Sun        14458 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2064-12-12 | center=Sun
+       first-pt |r|=35.24 -> AU
+  Moon_Sun           759 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2027-06-11 | center=Sun
+       first-pt |r|=1.005 -> AU
+  Io_Sun           10595 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2054-05-16 | center=Sun
+       first-pt |r|=5.114 -> AU
+  Titan_Sun        10597 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2054-05-18 | center=Sun
+       first-pt |r|=9.6 -> AU
+  Charon_Sun         751 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2027-06-03 | center=Sun
+       first-pt |r|=35.24 -> AU
+  Voyager 1_Sun      751 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2027-06-03 | center=Sun
+       first-pt |r|=166.7 -> AU
+  Apophis_Sun        751 pts | date-only    | 1.000 d/step | 2025-05-13 .. 2027-06-03 | center=Sun
+       first-pt |r|=0.8776 -> AU
+
+--- 0b: Pluto pair -- which Horizons target? ---
+  Pluto_Sun center_body=Sun horizons_id=None
+
+--- 0d: imports ---
+  constants_new.KM_PER_AU: 149597870.7
+  celestial_objects.OBJECT_DEFINITIONS: 182
+
+--- 0f: osculating cache structure ---
+  osculating entries: 115
+  tranche osc keys present: 9/9
+  epochs carrying HH:MM: 8/9
+  entries with MA=None:  0/9
+
+========================================================================
+STEP 0-STOP: moon-cadence -- orbit ALWAYS ships (osculating);
+the question is whether the direct position TRACE is added.
+========================================================================
+  Moon    : 1.000 d/step, period 27.322 d -> ~27.3 pts/orbit [trace chunky (Mode 5)]
+  Io      : 1.000 d/step, period 1.769 d -> ~1.8 pts/orbit [trace UNUSABLE (osculating only)]
+  Titan   : 1.000 d/step, period 15.945 d -> ~15.9 pts/orbit [trace chunky (Mode 5)]
+  Charon  : 1.000 d/step, period 6.387 d -> ~6.4 pts/orbit [trace chunky (Mode 5)]
+========================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>      
+
 --- B1. Scratch export run ------------------------------------
   [ ] `python export_orbit_cache.py`   (writes to ./_export_out -- the SAFE
       default; does NOT touch the gallery)
@@ -81,6 +138,28 @@ PART B -- DESKTOP RUNTIME + VISUAL (Tony, against the PRIMARY)
       only. Fix the key in TEST_OBJECTS (see B4) and re-run. A center mismatch,
       by contrast, RAISES (loud, aborts) -- that is a real failure to
       investigate.
+
+Output: 
+ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>python export_orbit_cache.py
+Loading caches from C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\data
+Asserting invariants...
+  invariants #2,#3,#5,#6,#8,#C: PASS
+  feature_configs.json: 0 feature(s)
+
+Summary
+  objects:          10
+  position files:   8  (earth, jupiter, saturn, moon, titan, pluto, charon, voyager_1)
+  osculating-only:  io, apophis
+  coverage_index.json + feature_configs.json written
+  warnings (6):
+    - pluto: position center 'Sun' != stored_center pluto_barycenter
+    - charon: position center 'Sun' != stored_center pluto_barycenter
+    - feature 'atmosphere_shell' not in SHELL_CONFIGS
+    - feature 'magnetosphere' not in SHELL_CONFIGS
+    - feature 'ring_system' not in SHELL_CONFIGS
+    - feature 'van_allen_belts' not in SHELL_CONFIGS
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>     
 
 --- B2. Coverage index inspection ----------------------------
   [ ] Open `_export_out/coverage_index.json`.
