@@ -63,13 +63,18 @@ Horizons produces the correct perturbed relative motion directly when queried
 with the right center; the cache stores those direct pairs for exactly that
 reason.
 
-## Open decisions carried forward
-- **Charon in/out** of the daily tranche (6.4 pts/orbit hexagon) -- Mode 5
-  render call. Orbit ships either way; decision is only about the trace file.
-- **Moon served frame** -- `@399` body vs Earth-Moon barycenter; confirm the
-  pair matching Moon's `@399` osculating at build, don't assume.
+## Decisions made this session (were open, now resolved)
+- **Charon: IN, barycenter frame** (barycenter outside Pluto's body).
+- **Pluto: barycenter frame** for the test (`Pluto@9` wobble, a~2,127 km);
+  heliocentric orbit stays available for the solar-system view, out of scope
+  for the 9-object test.
+- **Moon: `@399` body frame** (`Moon_Earth` + `Moon@399`); the Earth-Moon
+  barycenter trace also exists but is not needed for the test.
+- **Titan ships a trace** -- `Titan_Saturn` confirmed (~16 pts/orbit). **Io
+  osculating-only** on cadence (~1.8 pts/orbit) even though an Io-Jupiter pair
+  exists.
 - **Pluto-Charon relative subsystem + the 29-pt barycenter heliocentric
-  entry** -- deferred to a fine-cadence follow-on. Phase 2 wide-view
+  entry** -- deferred to a fine-cadence follow-on; Phase 2 wide-view
   composition of the Pluto system is gated on that coverage.
 - **Routing:** proceed in-session (recommended -- code-grounded
   simplification, not broad re-analysis; Fable is credit-metered for no added
@@ -105,11 +110,14 @@ subtraction-oriented fields (`PARENT_OBJECTS`, `stored_center`,
   pluto.json labeled as body; trajectory_of:pluto_barycenter dropped until
   the Pluto-Charon subsystem is served.
 - Diff gate f1ede52..d4c37cf: LEDGER + manifest doc only, zero source.
-**Tony:** rule Charon in/out of the daily trace tranche (Mode 5); confirm
-Moon served frame (@399 vs Earth-Moon barycenter) at build.
-**Gap:** write manifest v4 Steps 1-6 (Stage 2); revise pre-flight
-scaffolding fields to v4; defer Pluto-Charon relative subsystem + Phase 2
-barycenter-heliocentric coverage (29-pt entry) to fine-cadence follow-on.
+**Tony:** rulings made this session -- Charon IN (barycenter frame), Pluto
+barycenter frame, Moon @399; Titan_Saturn + an Io-Jupiter pair confirmed from
+prior work. Io stays osculating-only on cadence.
+**Gap:** write manifest v4 Steps 1-6 (Stage 2); revise pre-flight scaffolding
+fields to v4; confirm exact key strings (`Moon_Earth`, `Titan_Saturn`) +
+`@599`/`@699` slug-map entries at build; defer Pluto-Charon relative subsystem
++ Phase 2 barycenter-heliocentric coverage (29-pt entry) to fine-cadence
+follow-on.
 **Ref:** PHASE1B_BUILD_MANIFEST_v4.md, PHASE1B_MODEL_CORRECTION_HANDOFF.md,
 idealized_orbits.py, celestial_objects.py, osculating_cache.json
 ```
