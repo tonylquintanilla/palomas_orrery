@@ -230,7 +230,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
-| ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-07 |
+| ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-08 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 
 ### B. Pending Action (Tony-side)
@@ -332,7 +332,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-080 | Characterization harness (scene equivalence gate) | PROPOSED | 1.6 | 2026-07-03 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
-| ! | L-098 | Data serving pipeline (Phase 1b) | OPEN | 1.5 | 2026-07-07 |
+| ! | L-098 | Data serving pipeline (Phase 1b) | OPEN | 1.5 | 2026-07-08 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
 
 ### W.Deferred -- Web Publication deferred (captured)
@@ -573,7 +573,7 @@ design conversation this session; cross-ref L-071 (sibling pattern, not
 parent), L-060 (El Nino context, no causal claim).
 
 #### [L-078] Provenance scanner: systematic coverage via module_atlas role classification
-<!-- L:078 status:OPEN upd:2026-07-07 section:A flag: rice:2/2/70/3 -->
+<!-- L:078 status:OPEN upd:2026-07-08 section:A flag: rice:2/2/70/3 -->
 - **Root cause (why files get missed in the first place).** provenance_scanner.py
   gates display-string scanning on a hand-maintained narrative_files allow-list;
   a new file is invisible until someone notices and adds its name. The scanner
@@ -673,7 +673,8 @@ parent), L-060 (El Nino context, no causal claim).
 26 modules -- cite, remove-and-note, or add to provenance_exceptions.json per
 the three-outcome rule. Fable 5 recommended for bulk triage manifest, then
 4.6 + Tony execute. (b) resolve the 4 COVERAGE GAP modules (add to ROLE_MAP
-or narrative_files); (c) step (2) near-miss vocabulary detector (design
+or narrative_files) -- plus export_orbit_cache.py, the new Phase 1b data-serving
+devtool, which needs a ROLE_MAP entry (devtool role; see L-098); (c) step (2) near-miss vocabulary detector (design
 converged on hook point, tuning NOT done); (d) step (3) F/C bare-degree fix to
 NUMERIC_CLAIM_RE. Triage (a) is the heavy lift; (b-d) are mechanical once (a)
 establishes the baseline.
@@ -1630,7 +1631,7 @@ repo HEAD 1f5901e.
 Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 
 #### [L-098] Data serving pipeline (Phase 1b)
-<!-- L:098 status:OPEN upd:2026-07-07 section:W.Active flag: rice:3/3/50/3 -->
+<!-- L:098 status:OPEN upd:2026-07-08 section:W.Active flag: rice:3/3/50/3 -->
 - **What.** Build the bridge from Tony's desktop caches to the browser. The
   desktop has accumulated months of osculating elements and position vectors
   from Horizons. This pipeline makes that data available to the interactive
@@ -1660,10 +1661,34 @@ Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 - **Gitignore:** `orbit_paths.json` and `orbit_cache/` added to `.gitignore`
   @ `6368c87` (July 6, 2026). Old pair-based cache preserved locally for
   desktop use.
-**Gap:** Pre-build diff (`f1ede52..a56e036`), export script, coverage index
-generator, deploy to `data/` directory in gallery repo.
+- **v4 model correction + Stage 2 build (July 8, 2026, Opus 4.8).** Subtraction
+  model RETIRED -- differencing two heliocentric ephemerides was empirically
+  rejected on the desktop (catastrophic cancellation + daily-cadence aliasing),
+  confirmed against idealized_orbits.py at HEAD (osculating-only satellite
+  systems, barycenter mode). Product model INVERTED: osculating elements are
+  the PRIMARY orbit product (center-matched); direct relative-frame Horizons
+  pairs are the SECONDARY trace layer, served where cadence allows. Manifest v4
+  + PHASE1B_MODEL_CORRECTION_HANDOFF written. export_orbit_cache.py Steps 0-6
+  built and pre-tested (compile/ASCII/LF, unit tests, full export: 8 position
+  files + io/apophis osculating-only + Voyager arc; invariants pass). Coverage
+  index reconciled to design handoff v0.6 (field shape verified; availability
+  'cache-required' retired, invariants #1/#4/#7 retired with the subtraction
+  model, 'barycenter-relative' frame added; Pluto/Charon served in the
+  barycenter frame per Tony's ruling). Pre-flight run on the primary; Pluto_Sun
+  = body 999, barycenter a separate id-9 system. [verified @d4c37cf]
+**Gap:** export script + coverage-index generator DONE (pre-tested; not yet run
+on the primary or pushed). Remaining desktop-side, in order: (1) run
+--preflight-only then export on the primary; (2) Mode 5 render check (~6.4-pt
+Pluto/Charon hexagons, Moon/Titan traces); (3) provenance Tier-1 = 0 on
+export_orbit_cache.py + add its ROLE_MAP entry (new devtool; see L-078);
+(4) copy output to gallery data/solar-system/, push, record the SHA. Exact
+pair-key strings (Moon_Earth, Titan_Saturn) confirmed at run -- a mismatch
+warns and ships osculating-only, it does not abort. Deferred to a fine-cadence
+follow-on: Pluto-Charon relative subsystem + the 29-pt barycenter heliocentric
+entry (Phase 2 wide-view composition).
 **Ref:** DATA_SERVING_BROAD_ANALYSIS.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
-v0.4; master plan v10 §3a, §5 Phase 1b.
+v0.6; PHASE1B_BUILD_MANIFEST_v4.md; PHASE1B_MODEL_CORRECTION_HANDOFF.md;
+export_orbit_cache.py; L-078 (ROLE_MAP entry); master plan v10 §3a, §5 Phase 1b.
 
 #### [L-099] Solar System Explorer interactive exhibit
 <!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->
