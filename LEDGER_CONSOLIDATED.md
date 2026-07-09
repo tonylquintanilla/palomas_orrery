@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*61 live items; 46 need attention (`!`); 55 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*67 live items; 52 need attention (`!`); 55 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -232,6 +232,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-08 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
+| ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | -- | 2026-07-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -311,6 +312,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066) | OPEN | 0.5 | 2026-06-23 |
+| ! | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | OPEN | -- | 2026-07-08 |
 
 ### H. Gallery / Studio Track
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -318,6 +320,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
+| ! | L-104 | Gallery Studio preset generator | OPEN | -- | 2026-07-08 |
 
 ### W.Prep -- Web Publication prep (before Phase 0)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -344,6 +347,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-094 | Community cache as commons | DEFERRED | -- | 2026-07-03 |
 |  | L-095 | PWA / offline capability for classrooms | DEFERRED | -- | 2026-07-03 |
 |  | L-096 | Web orrery aesthetic / feel design conversation | DEFERRED | -- | 2026-07-03 |
+| ! | L-101 | Osculating-history fan (perturbed-moon precession view) | OPEN | -- | 2026-07-08 |
+| ! | L-102 | Spacecraft trace thinning (arc-minute decimation) | OPEN | -- | 2026-07-08 |
+| ! | L-103 | Hyperbolic conic -- browser branch (interactive.html) | OPEN | -- | 2026-07-08 |
 
 ### C. Reconciled -- Done (closed; for the record)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1662,6 +1668,19 @@ Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
     check, and the extent across 1501 legacy entries is unknowable. Added a
     magnitude frame guard (#F): a relative-frame trace exceeding 0.5 AU drops to
     osculating-only. Test record: PHASE1B_STAGE2_TEST_PROTOCOL.
+  - v2 + v3 convergence (July 8, Opus 4.8 + Fable 5): Fable broad-first review
+    [verdict: BUILD IT] integrated -- Guard v2 (per-object band k*a(1+e) replaces
+    the global 0.5 AU; a real moon, Neso, apoapsis 0.572 AU proved the constant
+    false-rejects), provisional leading edge (nightly overwrite [today-7d,
+    +horizon]; freeze the older past), raw/served split (dissolves git-growth),
+    nightly atomicity (staging -> validate -> atomic swap -> single commit ->
+    per-object isolation -> git rollback -> size tripwire -> "data as of"
+    staleness). Then the TRACE & CONIC MODEL converged + code-verified @cde22c5:
+    every object serves osculating elements + orbit_type + as-of-today point;
+    conic is two-case (elliptical 360-pt / hyperbolic near-perihelion arc);
+    comets anchor the conic at Tp; spacecraft get a full-arc daily trace. Two-
+    surface principle: interactive = generative-lite, gallery = curated full-
+    fidelity, bridged by the closest-point event_link. Handoff -> v0.3.
 
 - **Current direction: GALLERY DATA-SOURCE PIVOT (July 8).** Stop reading the
   legacy desktop cache for the gallery. Build a clean, purpose-built gallery
@@ -1679,28 +1698,91 @@ Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
   (HH:MM), JD convention. export_orbit_cache.py's derive/serve half is reused in
   the new builder; its "read the legacy cache" input is retired.
 
-**Tony:** fetch-fresh + nightly batch + gallery-repo cache + ~1yr back ratified.
-Open for the builder: (1) intermediate raw cache vs direct-served [lean:
-intermediate]; (2) desktop-scheduled now vs GitHub Action [lean: desktop now];
-(3) daily cadence + rolling window -- weigh git-growth of nightly commits;
-(4) object list = tranche-first gallery config.
+**Tony:** fetch-fresh + nightly batch + gallery-repo cache + ~1yr back ratified
+(Fable-confirmed). Builder choices CONVERGED: (1) intermediate raw cache; (2)
+desktop-scheduled now, Action later (probe Actions early); (3) daily cadence +
+PROVISIONAL leading edge + raw/served split -- git-growth fine with a ~800 MB
+size tripwire (no LFS/squash); (4) object-list config = single authority,
+tranche-first. Guard v2 gates catalog growth. OPEN, Tony's call (own pass): the
+shells interactive-vs-gallery split (L-100).
 
-**Gap:** Fable 5 broad-first review (FABLE_REVIEW_gallery_data_source.md) ->
-converge the open choices (git-growth of a nightly-committed growing cache is
-the top risk) -> builder manifest -> build (standalone fetch + #F-on-write +
-derive served files) -> first full build over the window -> schedule nightly.
-The legacy-cache Stage 2 deploy is SUPERSEDED (never run/pushed). Deferred:
-Pluto-Charon relative subsystem + sub-daily (time-keyed) moon traces + Phase 2
-wide-view composition.
+**Gap:** FIRST -- purge the committed contaminated ghosts (verified @cde22c5:
+data/solar-system/ + _export_out/ tracked, 35.7 AU points under a barycenter
+key, neither gitignored). THEN builder manifest against handoff v0.3 (config-
+driven fetch + Guard v2-on-write + staging/validate/atomic-swap + as-of-today
+fetch + spacecraft arc + per-run build manifest) -> first full build over the
+window -> schedule nightly. Fable offered a narrow 2nd round (atomicity +
+refresh window only) -- optional; the design conversation was the convergence.
+Legacy-cache Stage 2 deploy SUPERSEDED. Deferred: Pluto-Charon relative
+subsystem; sub-daily moon traces; Phase 2 wide-view composition (the np.interp
+containment hazard returns then).
 
-**Sibling candidate:** source-side frame guard in merge_orbit_data for the
-DESKTOP cache (prevents recurrence of legacy-style contamination; optional).
+**Spawned items (this session):** L-100 shells surface (open question);
+L-101 osculating-history fan; L-102 spacecraft thinning; L-103 hyperbolic
+browser branch; L-104 Gallery Studio preset generator; L-105 merge_orbit_data
+desktop-cache frame guard.
 
-**Ref:** GALLERY_DATA_SOURCE_HANDOFF.md; FABLE_REVIEW_gallery_data_source.md;
+**Ref:** GALLERY_DATA_SOURCE_HANDOFF.md v0.3; FABLE5_REVIEW_gallery_data_source_pivot.md;
 PHASE1B_STAGE2_TEST_PROTOCOL.md; PHASE1B_BUILD_MANIFEST_v4.md;
 PHASE1B_MODEL_CORRECTION_HANDOFF.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
 v0.6; DATA_SERVING_BROAD_ANALYSIS.md; export_orbit_cache.py; L-078 (ROLE_MAP);
 master plan v10 §3a, §5 Phase 1b.
+
+#### [L-100] Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION)
+<!-- L:100 status:OPEN upd:2026-07-08 section:G flag: rice: -->
+- Two-surface principle (L-098) extended to ALL shells (atmospheres,
+  magnetospheres, Van Allen belts, rings, comet nucleus/coma/tail). Default:
+  shells live GALLERY-side (pre-rendered authored artifacts, zero browser code);
+  the interactive stays light (conics + positions). OPEN, TONY'S CALL: which
+  shells (if any) are cheap+static enough to ALSO render interactive-side --
+  candidate: simple scaled-sphere/torus (atmosphere, Van Allen); gallery-only:
+  geometry/physics/animation (magnetosphere bow shock, comet tails, ring
+  structure). Aesthetic (worth showing live) + cost (a browser port per
+  interactive-side shell). Own design pass; do not guess. Flows through
+  feature_configs.json. Ref: GALLERY_DATA_SOURCE_HANDOFF.md v0.3.
+
+#### [L-101] Osculating-history fan (perturbed-moon precession view)
+<!-- L:101 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice: -->
+- NET-NEW (data + render). N osculating element-sets, one per orbital period back
+  from the current phase-locked anomaly (default 3, user-select 1-6), drawn as a
+  fan of faint conics -- shows apsidal rotation / plane precession as smooth orbit
+  motion (vs a chunky position trace). Data: builder fetches elements at N epochs
+  (new). Render: overlay N faint ellipses (new). Deferred from the first gallery
+  build; interim = conic + as-of-today point.
+
+#### [L-102] Spacecraft trace thinning (arc-minute decimation)
+<!-- L:102 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice: -->
+- NET-NEW, served-side. Douglas-Peucker style: on the archived daily arc, drop
+  points within X arc-min of the chord between neighbors -- cruise collapses,
+  flyby knuckles keep density. Raw archive stays daily; served trace is thinned;
+  threshold a config constant. Flyby/gravity-assist detail comes from presets.
+
+#### [L-103] Hyperbolic conic -- browser branch (interactive.html)
+<!-- L:103 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice: -->
+- NET-NEW render. interactive.html Pyodide engine is ellipse-only
+  (r=a(1-e^2)/(1+e*cos th) breaks at e>=1). Port generate_hyperbolic_orbit_points
+  (r=|a|(e^2-1)/(1+e*cos th); th_inf=arccos(-1/e); truncate at max_distance;
+  500/1000 pts). Reference exists desktop-side. Needed for comets / interstellar
+  objects (3I/ATLAS) in the interactive. Served data already ready (elements +
+  orbit_type + Tp + max_distance).
+
+#### [L-104] Gallery Studio preset generator
+<!-- L:104 status:OPEN upd:2026-07-08 section:H flag: rice: -->
+- NET-NEW. Author an event window (object, center, {start,end,cadence}, label)
+  in the orrery -- comet perihelion, NEO close approach, spacecraft flyby /
+  gravity assist / landing -- export params via Gallery Studio; store as a gallery
+  item. Feeds the interactive's event_link breadcrumb (closest-point marker ->
+  gallery piece), NOT the interactive cache. Fine cadence (minute/hour, 30-60
+  frames) lives in the preset. Upstream of the builder's preset slot (unpopulated
+  in the first build; Apophis 2029 stays null).
+
+#### [L-105] merge_orbit_data source-side frame guard (desktop cache hardening)
+<!-- L:105 status:OPEN upd:2026-07-08 section:A flag: rice: -->
+- OPTIONAL. merge_orbit_data merges data_points by date with NO frame check --
+  how heliocentric points entered a barycenter-keyed pair (pre-@9-override),
+  producing the L-098 contamination. Add a magnitude/frame guard on cache write
+  to prevent recurrence. Low priority (legacy cache is desktop-only now; the
+  gallery no longer reads it) -- but it is the root-cause fix.
 
 #### [L-099] Solar System Explorer interactive exhibit
 <!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->
