@@ -185,6 +185,17 @@ build_comet_tail_traces, anti-sunward tracking) -- the same feature-rendering
 track as atmosphere/magnetosphere shells. Flows through `feature_configs.json`,
 deferred to Phase-2 feature rendering. Explicitly OUT of the orbit-data builder.
 
+**Two-surface principle (the WHY behind the split).** INTERACTIVE = generative-
+lite: conics (elliptical + hyperbolic-at-perihelion from Tp elements), as-of-
+today positions, spacecraft arcs -- cheap, user-driven, computed in-browser.
+GALLERY = curated, full-fidelity, pre-rendered: the complete comet structure
+(nucleus/coma/anti-sunward tail) and its animation through perihelion, authored
+in the orrery and exported via Studio. The interactive does NOT reproduce the
+heavy render; the closest-point marker's `event_link` is the breadcrumb that
+opens the gallery's finished piece. This is why comet structure is a gallery/
+feature concern, not orbit-builder data -- authored, physically-rich renders
+earn a curated slot; the nightly data builder stays light and generative.
+
 **EXISTS vs NET-NEW (verified):**
   EXISTS both sides: elliptical conic (360), position-at-date, as-of-today.
   EXISTS desktop only: hyperbolic conic; Tp-perihelion conic; closest-point
