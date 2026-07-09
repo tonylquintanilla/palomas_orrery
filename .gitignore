@@ -21,4 +21,5 @@ orbit_cache/
 *_backup
 data/*verify_backup*
 
-
+_export_out/
+data/solar-system/
