@@ -1,9 +1,9 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** Draft v10 — Phase 1b design converged (v0.3, three-model review).
+**Status:** Draft v11 — Phase 1b design converged (v0.4); builder built + offline-verified July 9, live dry-runs pending.
 **Base:** orrery @ `f1ede52` (advanced to `a56e036`), gallery @ `4b086a6`
 **Date begun:** July 3, 2026
-**Last updated:** July 7, 2026
+**Last updated:** July 9, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
@@ -314,9 +314,12 @@ primary body. The coverage index needs a `stored_center` field per object.
 **F2 canonical storage (settled).** Per-object files, not per-pair. The old
 pair-based `orbit_paths.json` (130.4 MB, 1,501 entries) is archived locally,
 gitignored, and still used by the desktop code. The web cache is a derived
-projection: an export script reads the desktop cache, extracts one canonical
-trajectory per object (heliocentric for planets/asteroids/comets, parent-
-relative for moons, arc-natural for spacecraft), and writes web-format files.
+projection -- but NOT by reading the desktop cache (the v0.4 fetch-fresh pivot).
+A standalone nightly builder fetches FRESH from Horizons per object with the
+explicit canonical center (heliocentric for planets/asteroids/comets, parent-
+relative for moons, arc-natural for spacecraft) into a purpose-built gallery
+cache, so provenance is guaranteed by construction; the legacy desktop cache is
+no longer read.
 The precision rule: store moons parent-relative to preserve significance in
 float64.
 
@@ -336,28 +339,39 @@ held as optimization). Deferred to Phase 3.
 
 - OQ-A: Web catalog scope — curated first tranche (9 test objects); full
   catalog scales via export run, not schema change. **Positioned.**
-- OQ-B: Window policy — split: accumulate heliocentric, slide moons,
-  write-once spacecraft. Simple per-class conditional. **Settled.**
-- OQ-C: Update cadence — monthly manual batch, 90-day forward padding.
-  **Settled.**
+- OQ-B: Window policy — v0.4 provisional leading edge -- nightly overwrite
+  `[today-7d, today]`, freeze older past; `horizon=0` for non-spacecraft (the
+  conic covers the future); spacecraft fetch the flown arc once then append
+  today nightly (NOT write-once). **Settled (v0.4).**
+- OQ-C: Update cadence — NIGHTLY batch (v0.3 pivot), no forward padding --
+  `horizon=0`, the conic covers the future. **Settled (v0.4).**
 - OQ-D: Moon step size — 6h default; per-object `step_hours` from day one.
   Io may want 2h. Mode 5 decides. **Positioned, Mode 5.**
 - OQ-E: Serving home — H2 subfolder in gallery repo (`data/`). Gallery
   measured at 474 MB, 526 MB headroom, all-phase data needs ~72 MB. No
   CORS question (same repo, same origin). **Settled.**
-- OQ-F: Canonical frame — helio / parent-relative / arc-natural. Export
-  script subtracts (float64 sufficient), does NOT re-query Horizons.
-  Co-sample parent+moon on one grid. **Settled.**
+- OQ-F: Canonical frame — helio / parent-relative / arc-natural. The v4 model correction
+  RETIRED subtraction (catastrophic cancellation + aliasing); osculating-primary
+  now. The builder fetches FRESH from Horizons at each object's canonical center
+  (it DOES re-query); no co-sampling for the orbit. **Settled (v0.4).**
 - OQ-G: Wire format — JSON for v1, column-oriented. **Settled.**
 
 **Schema decisions settled in v0.3 (three-model convergence):**
 
+> **v0.4 / v4 reconciliation note (July 9):** the SUBTRACTION / parent-
+> composition model in some bullets below was RETIRED by the July-8 v4 model
+> correction. Moons now render from their OWN osculating conic (osculating-
+> primary), fetched FRESH per object; parents no longer compose moon orbits.
+> Where a bullet conflicts with osculating-primary + fetch-fresh,
+> GALLERY_DATA_SOURCE_HANDOFF v0.4 and the shipped gallery_cache_builder.py are
+> authoritative. Full section-3a rewrite tracked as L-108.
+
 - Osculating elements carry explicit `center` field (prevents Charon@9 class
   errors). One orbit shape per object, no `valid_until` (science museum, not
   mission planning).
-- Parents of moons serve position files (cache-exact composition, ~100 KB
-  per parent). Validation invariant: every parent-relative object's parent
-  exists with overlapping coverage.
+- Moons render from their OWN osculating conic in the parent-relative frame
+  (osculating-primary); no parent-position composition for the orbit
+  (superseded the cache-exact composition model -- see the note above).
 - `trajectory_of` field for barycenter substitution (Pluto's trajectory is
   the barycenter's; schema says so explicitly).
 - Presets are self-contained (no frame composition, no dependency on other
@@ -538,17 +552,18 @@ Phase 2 start.
 has accumulated months of osculating elements and position vectors from
 Horizons. Phase 1b makes this data available to the interactive gallery.
 
-**Design converged: v0.3** (July 7, 2026). Three-model review: Opus 4.6 +
+**Design converged: v0.4** (v0.3 July 7 + the fetch-fresh / nightly amendments, July 8-9). Three-model review: Opus 4.6 +
 Tony drafted schema → 4.8 caught osculating-center gap, parent dependency,
 validation invariants → Fable 5 caught invariant self-contradiction,
 `stored_center` overload, grid nesting → Opus 4.6 + Tony converged.
 Full design in `PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.3`.
 
 Deliverables:
-1. **Export script** — reads desktop caches (osculating elements from
-   `osculating_cache_manager.py` + position vectors from `orbit_paths.json`),
-   co-samples parent+moon grids, writes per-object canonical files in
-   web-servable format (F2 storage). Asserts 8 validation invariants.
+1. **Export script** — fetches FRESH from Horizons per object with the explicit canonical
+   center (v0.4 fetch-fresh pivot -- the legacy desktop cache is no longer
+   read), validates on write (Guard v2 MONITOR + structural invariants), then
+   stages -> atomic-swaps -> commits per-object canonical files in web-servable
+   format (F2 storage). Built as `tools/gallery_cache_builder.py`.
 2. **Coverage index** — JSON manifest (schema v0.3) listing available objects,
    availability class, date coverage, step size, osculating elements with
    explicit center, `trajectory_of` for barycenter substitution, feature
@@ -556,8 +571,9 @@ Deliverables:
 3. **Feature configs** — separate `feature_configs.json` with renderer +
    params for JS feature renderers (interactive layer only; static gallery
    pre-bakes features).
-4. **Serving home** — resolve OQ-E (CORS check first), set up the dedicated
-   `palomas-orrery-data` repo (orphan-branch publish). Deploy first web cache.
+4. **Serving home** — OQ-E resolved (H2): the cache lives in the GALLERY repo `data/`
+   subfolder -- same repo, same origin, NO CORS question (the dedicated
+   `palomas-orrery-data` repo, option H1, was superseded). Deploy first web cache.
    The slim plotly wheel (~3.9 MB, B′) also lives here.
 
 Requires: Fable analysis (delivered), design handoff (converged v0.4),
@@ -677,8 +693,11 @@ Helpers split, all assembler and interactive page builds.
 
 ### Next Step
 
-Phase 1b build. Pre-build: diff `f1ede52..a56e036`.
-Then: export script, coverage index, deploy to gallery repo `data/` directory.
+Phase 1b build UNDERWAY. The standalone `gallery_cache_builder.py` +
+`objects_config.json` + an offline smoke test are built and offline-verified
+(47 checks, py_compile clean; provenance to orrery `4e2629c`). NEXT: live dry-
+runs on Tony's hardware (manifest v2 S10 -- voyager_1 ephemeris start, encke
+solution-Tp + Mode-5 Tp match), first full build, schedule nightly + backup.
 
 ---
 
@@ -930,6 +949,19 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - Phase 1b deliverables refined: coverage index, feature configs, export
   script with invariant assertions (§5)
 
+*New in v11 (July 9, 2026):*
+- Phase 1b BUILD: standalone `gallery_cache_builder.py` + `objects_config.json`
+  + offline test, offline-verified (47 checks); live gate pending (L-098).
+- SUBTRACTION model retired (v4 correction): osculating-primary; the builder
+  fetches FRESH from Horizons, does NOT read the desktop cache (section 3a, 5).
+- Cadence corrected to NIGHTLY (was monthly); `horizon=0`, no forward padding;
+  provisional leading edge; spacecraft fetch-once + append-nightly (OQ-B/C).
+- Serving home = gallery repo `data/` subfolder (H2), not the dedicated H1 repo.
+- Guard v2 is a MONITOR (warn + keep), not a reject.
+- Copy-provenance sync register (L-107); master-plan reconciliation (L-108;
+  section-3a schema block partial -- authoritative pointer added).
+- Design converged v0.4; docs GALLERY_DATA_SOURCE_HANDOFF v0.4 / GALLERY_BUILDER_MANIFEST v2 / GALLERY_BUILD_HANDOFF v0.1.
+
 *New in v9:*
 - Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (§5)
 - Server/serverless resolved in practice: Pyodide (§7 #1)
@@ -948,6 +980,9 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - Slim self-hosted plotly wheel (~3.9 MB) in Phase 1b serving home (§5, §7 #10)
 
 *Superseded:*
+- ~~Export script reads the desktop cache~~ -> fetch fresh from Horizons (v0.4)
+- ~~Subtraction / parent-composition for moon frames~~ -> osculating-primary (v4)
+- ~~Monthly cadence + 90-day forward padding~~ -> nightly, horizon=0 (v0.4)
 - ~~Web GUI is a fork, not a replacement~~ → gallery extension (§2)
 - ~~Phase 0 is two-sided pilot: Dash + Pyodide~~ → one-sided gallery test (§5)
 - ~~Two hosting substrates~~ → one: GitHub Pages, static (§1)
@@ -983,6 +1018,6 @@ prompts.
 
 Base: orrery @ `f1ede52` (advanced to `a56e036`) / gallery @ `4b086a6`.
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
-Phase 1b design converged v0.4 (three-model review). Next: Phase 1b build
-(diff, export script). Solar System Explorer live at
+Phase 1b design converged v0.4; builder built + offline-verified (L-098).
+Next: live dry-runs + first build. Solar System Explorer live at
 palomasorrery.com/interactive.html.
