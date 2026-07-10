@@ -54,10 +54,16 @@ altered from v1/v0.3), or NEW.
 (`epochs={'start','stop','step'}`) -- `spacecraft_encounters.py` fetches an
 entire mission window at 1h step in ONE call (the `Horizons(...)` call ~621,
 `.vectors()` ~632), and `orbit_data_manager.py:680` confirms the range pattern.
-This manifest specs range-query primary (one call per spacecraft arc). The
-recursive range-HALVING fallback (S3c) covers a server-side range cap if the
-dry-run hits one (a recalled ~90k-line cap is unsourced; the dry-run verifies).
-This is a correct divergence from the REQUEST, grounded in code.
+This manifest specs range-query primary. SUPERSEDED by the L-109 spacecraft
+redesign: the flown arc is a COARSE glide backbone (fetch_step, e.g. 7d) + daily
+densification inside known flyby windows + Douglas-Peucker thin -- a coarse range
+is ~2,600 points for Voyager, not ~17,900, so there is no giant single-range
+query and no range-HALVING fallback is needed (A-6 dissolved). Authoritative
+config.start replaces the Horizons start-probe. Densify KNOWN event windows
+BEFORE thinning -- you cannot thin toward an epoch you never sampled. Also
+landed with L-109: #T freshness invariant implemented; B-3 parity fields
+(serving_base / scene_features / step_hours); A-3 failed-fetch serves last-good
+conic with as_of_today nulled.
 
 **F2 -- Perihelion function name. [CORRECTED]** v1 said
 `_add_perihelion_osculating_orbit` is "No such symbol at HEAD." That is FALSE.

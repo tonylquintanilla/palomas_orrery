@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*70 live items; 55 need attention (`!`); 58 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*73 live items; 56 need attention (`!`); 61 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -319,7 +319,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-106 | Gallery-cache backup + gitignore discipline | OPEN | 3.6 | 2026-07-09 |
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
+|  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
+|  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 | ! | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | OPEN | 1.8 | 2026-07-09 |
+| ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
@@ -1871,7 +1874,7 @@ GALLERY_DATA_SOURCE_HANDOFF v0.4 (change 5); L-098 (parent).
   - fetch_solution_tp (vectors_async header TP=) -> osculating_cache_manager.py:459
   - resolve_tp hierarchy -- ADAPTED: builder is Path-2-only (no shared cache) +
     nightly re-resolve -> osculating_cache_manager.py:566
-  - CENTER_SLUG_MAP + resolve_center_slug -> export_orbit_cache.py:199-223
+  - CENTER_SLUG_MAP -> export_orbit_cache.py:198-208; resolve_center_slug -> :212-223
   - _dt_to_jd / parse_osc_epoch_to_jd / _true_to_mean_anomaly_deg -> export_orbit_cache.py:~255-295
   - build_osculating_entry / write_position_file served schema -> export_orbit_cache.py:418-541
   - KM_PER_AU -> constants_new.py:47
@@ -1895,7 +1898,7 @@ tools/gallery_cache_builder.py; L-098 (parent).
   merely made it visible (there is now code that fetches fresh). Captured here
   rather than folded silently into the build close-out -- the master plan is
   Tony's versioned roadmap and deserves a proper v11 pass.
-**Tony:** v11 pass done this session (Opus 4.8); pending your review + commit.
+**Note:** v11 pass done this session (Opus 4.8); pending your review + commit.
 The remaining section-3a polish is optional, low priority.
 **Gap:** v11 pass APPLIED this session (July 9): status -> v0.4 + build-underway;
 section-3a projection + OQ-B/C/F + a reconciliation note (subtraction RETIRED,
@@ -1907,6 +1910,126 @@ version v10 -> v11. Transactional patch, 16 edits each matched exactly once; zer
 new non-ASCII. REMAINING (optional, low priority): bullet-by-bullet cleanup of
 the still-historical section-3a schema sub-block beyond the reconciliation note.
 **Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
+
+#### [L-109] Fable 5 adversarial review remediation (builder Pass 1+2)
+<!-- L:109 status:DONE upd:2026-07-10 section:H flag: rice:3/1/95/1 -->
+- **What.** Fable 5 (Mode 7 collegial) adversarially reviewed the shipped
+  gallery_cache_builder.py: 11 code findings (A-1..A-11) + 4 doc (B-1..B-4). All
+  verified against the actual code + astroquery 0.4.11 source (fetched, not
+  recalled) and remediated across two passes.
+- **Pass 1 (safety/validity).** A-1 crash-mid-swap archive-loss seam
+  (recover_incomplete_swap at run start + atomic_swap refuses to delete a
+  pre-existing .prev + nightly-with-no-raw ABORTS); A-2 nonzero exit on abort;
+  A-11 cleanup keeps aborted-run autopsies; A-7 hyperbolic periapsis sign; A-8
+  offline test resolves config from the repo layout (the flat working dir had
+  masked the break).
+- **Pass 2 (correctness/spacecraft).** A-3 failed fetch serves last-good conic
+  with as_of_today NULLED (drop only if no last-good); A-4 id_type majorbody/id
+  -> None; A-5 closest_apparition/no_fragments (CAP;/NOFRAG;) passthrough; A-9
+  #T freshness invariant; A-10 --refresh-spacecraft wired; B-3
+  serving_base/scene_features/step_hours restored for v0.6 parity. Spacecraft
+  fetch REDESIGNED: authoritative config.start (no probe) + coarse glide
+  backbone + daily densify inside known flyby windows + Douglas-Peucker thin.
+  DISSOLVES A-6 (Voyager first build 2,610 coarse points, not ~17,900) and pulls
+  L-102 (spacecraft thinning) FORWARD from deferred served-side to fetch-side.
+- **Verification.** Offline suite 47 -> 63 checks, 0 failures (crash-recovery
+  kill-test, exit-code, DP, A-3 stale-serve, A-4, B-3 parity); py_compile clean;
+  ASCII-clean. Live gate (Horizons) remains Tony's hardware.
+- **Docs.** Master plan B-1/B-2/B-4; this ledger; TESTING_PROTOCOL.md authored.
+**Note:** builder copy source orrery 4e2629c / gallery a2b7435 (un-pushed);
+remediated build re-pushed by Tony for Fable's second pass.
+**Gap:** live --dry-run on Tony's hardware settles the two open questions --
+whether 2P/Encke's Horizons header carries TP=, and whether Horizons clips or
+errors on a pre-SPK spacecraft start.
+**Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; TESTING_PROTOCOL.md; L-098 (parent); L-102 (pulled forward); L-107 (sync register).
+
+#### [L-110] GPT competitive cross-check remediation (builder Pass 4)
+<!-- L:110 status:DONE upd:2026-07-10 section:H flag: rice:3/1/90/1 -->
+- **What.** The SAME review prompt given to Fable 5 was given to GPT (competitive
+  Mode 7: same prompt -> two independent reviewers -> compare). GPT reviewed the
+  pre-remediation build (gallery a2b7435); most of its list was already closed by
+  L-109, but it surfaced real gaps L-109 did not, verified against the CURRENT
+  remediated code before acting.
+- **N1 -- dataset-level atomicity.** L-109's A-1 fixed archive DELETION but the
+  promotion was still four separate subtree swaps (a crash between them left a
+  mixed generation). Fixed via WHOLE-DIRECTORY swap (Option A, Tony's call):
+  staging is a sibling, the entire generation is renamed into place as one unit
+  (atomic_swap_dir), recovery restores the whole generation, and one prior
+  generation is retained as rollback. GPT elevated this to a blocker; Fable had
+  rated it a test-addition.
+- **N2 -- push-as-success.** git push ran check=False and committed=True was set
+  unconditionally -- a silent push failure read as published. THIS IS the failure
+  mode that left gallery a2b7435 committed-but-never-pushed. Fixed: git_commit
+  returns staged/committed_local/pushed_remote/sha; push runs check=True and the
+  remote is confirmed to CONTAIN the SHA; committed now means pushed_remote.
+  Fable did not flag this; the competitive pass caught it.
+- **N3 -- object-set continuity.** No invariant that every served object persists,
+  and first-build had no minimum-count floor. Added: a run ABORTS if it drops an
+  object the prior generation served (guards the add-object moment); non-spacecraft
+  first-build ABORTS below 0.5x the backfill-day floor (clipped-response guard).
+- **N4/N6 -- #U replaced by #B3.** The absolute 1000 km #U threshold both
+  false-rejected close-centered objects and passed a large wrong-AU value; the
+  module header still CLAIMED a B3 check that did not exist. Replaced with #B3
+  conversion-consistency (served km == raw AU x KM_PER_AU), which tests the
+  convert+serialize path and retires the phantom claim.
+- **N5 -- structured solution-TP outcomes.** A network/parse failure in
+  fetch_solution_tp silently degraded a comet to a today-anchored conic (an
+  operational failure masquerading as a model choice). Now returns
+  found/not_present/parse_failed/request_failed; operational failures serve
+  last-good (A-3), only a genuine not_present takes the today fallback.
+- **Verification.** Offline suite 63 -> 68 checks, 0 failures (whole-gen crash
+  recovery, #B3 catch, N3 drop-abort, N5 last-good, N2 local-vs-remote via a real
+  temp git repo); py_compile clean; ASCII-clean.
+- **Methodology note.** The competitive Mode 7 pattern paid off exactly as the
+  protocol predicts: two independent reviewers on one prompt, and GPT caught two
+  real things (N1 elevated, N2 entirely) that Fable's pass missed -- while neither
+  is authoritative over the live render (Mode 5).
+**Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; TESTING_PROTOCOL.md; L-098 (parent); L-109 (Fable remediation).
+
+#### [L-111] Gallery builder Pass 5 -- operability + deferred hardening
+<!-- L:111 status:OPEN upd:2026-07-10 section:H flag: rice:2/2/85/2 -->
+- **What.** Open items after Passes 1-4, captured from Tony's questions and the
+  un-actioned remainder of both reviews. Full detail in GALLERY_BUILD_HANDOFF
+  v0.1 "Open items and deferred work"; this is the tracked handle.
+- **Deployment model (DECIDED July 10).** Automatic FETCH, manual PUSH: Task
+  Scheduler runs the builder nightly WITHOUT --commit (fetch + validate + swap the
+  new generation into the LOCAL tree + write the summary); Tony reads the summary
+  and pushes by hand. Keeps commit authority with Tony (standing rule); N2 push
+  verification becomes advisory (Tony is the eyes-on confirm that caught a2b7435).
+- **Gap-aware catch-up (CORRECTNESS -- do before unattended).** The nightly fetches
+  a FIXED trailing window `[today - freeze, today]` anchored to TODAY, so if the
+  builder is dark longer than `freeze` (machine off, travel) the gap days are
+  SILENTLY skipped. Fix: anchor the refresh window to the ARCHIVE's last date --
+  `[last_archived_date - refine_overlap, today]` -- so a run fills whatever gap
+  exists and self-heals an outage. The small backward `refine_overlap` only re-
+  fetches recently-refined spacecraft points (planets/moons are stable); it is NOT
+  a stopping point. Missed PUSHES are harmless (increments accumulate locally,
+  commits queue, one push catches up); missed RUNS are the case this fixes.
+- **Pass 5 (operability -- do before UNATTENDED scheduling).** (Q1) `--add-object
+  <slug>` one-time backfill so a newly-added config object is onboarded without
+  re-running the whole first-build. (Q2) a `_health.md` summary written EVERY run
+  (status swapped/aborted, per-object result, warning list, COMMITS-PENDING-PUSH
+  count, and an explicit PUSH / DO-NOT-PUSH verdict) -- NO email or phone
+  notification (Tony's call: the summary file is enough). Likely-contamination
+  sets the verdict to DO-NOT-PUSH rather than the builder refusing (push is manual).
+- **Deferred hardening.** N7 -- make date arithmetic UTC-ONLY (fetch
+  epochs, date keys, and the 'today' anchor all in UTC) so DST never enters the
+  data path; DST-immune and subsumes the 69 s Time(jd) boundary wobble. Schedule
+  the job at a non-transition local time (~4 AM, clear of 1-3 AM local) so a
+  spring gap does not skip the run and a fall repeat does not double-fire
+  (double-fire is otherwise harmless: gap-aware catch-up over an already-current
+  archive, atomic swap, N3 clean).
+  N8 exact-today + date-on-point + stale flag; N10 read Astropy units over the
+  q>10000 heuristic; guard-warning fetch-param payload; warnings_log into
+  _health.json; N11 live-response fixtures + identity matrix.
+- **Cleanup.** Remove dead `_replace_file`; reconcile guard outer-tier threshold
+  (10x vs ~30x); source.epoch float-vs-string parity; scheduled-task working dir.
+- **Gap.** The live-gate open dependencies (2P TP= header, Horizons pre-SPK
+  clip/error, id_type/center identity matrix, elements units, epoch scale) are in
+  TESTING_PROTOCOL.md and resolve at the first --dry-run, not here.
+**Note:** GPT 5.5 produced the cross-check (L-110) that surfaced Q2's teeth; the
+render (Mode 5) remains the authority over both AI reviewers.
+**Ref:** GALLERY_BUILD_HANDOFF v0.1 (open-items section); TESTING_PROTOCOL.md; L-109; L-110; L-098 (parent).
 
 #### [L-099] Solar System Explorer interactive exhibit
 <!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->

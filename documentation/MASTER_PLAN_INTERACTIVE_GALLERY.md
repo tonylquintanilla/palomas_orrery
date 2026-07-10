@@ -1,7 +1,7 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
 **Status:** Draft v11 — Phase 1b design converged (v0.4); builder built + offline-verified July 9, live dry-runs pending.
-**Base:** orrery @ `f1ede52` (advanced to `a56e036`), gallery @ `4b086a6`
+**Base:** orrery @ `ca5c052`, gallery @ `4b086a6` (remediated builder pending re-push)
 **Date begun:** July 3, 2026
 **Last updated:** July 9, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
@@ -305,8 +305,10 @@ cache, plus a write-once category:**
 - **Moons** — cache required. Constant perturbations and non-heliocentric
   mechanics make analytical orbits insufficient. The rolling batch is primarily
   moons.
-- **Spacecraft** — actual position arcs only, write-once (completed missions
-  never change). Elements not typically applicable. Outside the rolling batch.
+- **Spacecraft** — actual position arcs. NOT write-once (OQ-B): the flown arc
+  is a coarse glide backbone + daily densification inside known flyby windows,
+  Douglas-Peucker-thinned, and each nightly run appends today's point.
+  Elements not applicable.
 
 **Barycenters:** Pluto-Charon and Orcus-Vanth have barycenters outside the
 primary body. The coverage index needs a `stored_center` field per object.
@@ -548,9 +550,11 @@ Phase 2 start.
 
 ### Phase 1b — Data Serving Pipeline
 
-**Build the bridge from Tony's desktop caches to the browser.** The desktop
-has accumulated months of osculating elements and position vectors from
-Horizons. Phase 1b makes this data available to the interactive gallery.
+**Fetch fresh from Horizons, serve to the browser.** Phase 1b builds a
+purpose-built gallery cache in the gallery repo, populated nightly from
+JPL Horizons with an explicit center per object -- the legacy desktop cache
+is no longer read (provenance by construction). It makes this data
+available to the interactive gallery.
 
 **Design converged: v0.4** (v0.3 July 7 + the fetch-fresh / nightly amendments, July 8-9). Three-model review: Opus 4.6 +
 Tony drafted schema → 4.8 caught osculating-center gap, parent dependency,
@@ -1016,7 +1020,7 @@ prompts.
 
 ---
 
-Base: orrery @ `f1ede52` (advanced to `a56e036`) / gallery @ `4b086a6`.
+Base: orrery @ `ca5c052` / gallery @ `4b086a6` (remediated builder pending re-push).
 Phase 0 closed. Phase 1a vocabulary delivered. A/B fork resolved: B′.
 Phase 1b design converged v0.4; builder built + offline-verified (L-098).
 Next: live dry-runs + first build. Solar System Explorer live at

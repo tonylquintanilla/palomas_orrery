@@ -7,8 +7,23 @@ contract GALLERY_BUILDER_MANIFEST v2. Records what was built, the deltas from
 the manifest that grounding surfaced, and -- load-bearing -- the LIVE gate that
 is still pending because it cannot run in the build container.
 **Base:** orrery HEAD `4e2629c` (copy sources) | gallery HEAD `4b086a6` (deploy
-target). SHA round trip re-confirmed this session. Pushed at `<fill after your
-commit>` -- update the chain when the files land.
+target). SHA round trip re-confirmed this session. The initial local build
+committed at gallery `a2b7435` was never pushed; the L-109-remediated build is
+re-pushed by Tony (gallery SHA pending); the docs landed at orrery `ca5c052`.
+**Remediation (L-109, July 10):** Fable 5 adversarial review -> Pass 1 (A-1
+crash-recovery / archive-loss seam, A-2 exit code, A-7, A-8, A-11) + Pass 2 (A-3
+last-good serve, A-4 id_type, A-5 CAP;, A-9 #T, A-10, B-3 parity fields) +
+spacecraft fetch REDESIGN (authoritative start + coarse/windows/Douglas-Peucker,
+dissolving A-6). Offline suite 47 -> 63 checks, 0 failures.
+**Remediation Pass 4 (L-110, GPT competitive cross-check):** N1 whole-generation
+atomic swap (staging sibling renamed as one unit; a crash leaves a COMPLETE old
+or new generation, one prior retained as rollback); N2 verified push
+(committed_local vs pushed_remote; a silent push failure no longer reads as
+published -- the a2b7435 failure mode); N3 object-set continuity + first-build
+minimum-count floor; N4/N6 #B3 conversion-consistency replaces the absolute #U
+threshold and retires the phantom B3 claim; N5 structured solution-TP outcomes
+(operational failure serves last-good, not a silent today-anchor). Offline suite
+63 -> 68 checks, 0 failures.
 **Companion:** GALLERY_BUILDER_MANIFEST v2 (contract); GALLERY_DATA_SOURCE_
 HANDOFF v0.4 (design). **Ledger:** L-098 (parent); L-107 (copy-provenance sync
 register); L-108 (master-plan drift).
@@ -127,6 +142,114 @@ DOCUMENTATION STATUS
   design retired), and the Status line says v0.3 while the changelog says v0.4.
   The drift is pivot-driven, not build-driven; captured as L-108 for a focused
   v10 -> v11 pass (Tony's roadmap call), not folded silently into this close-out.
+
+---
+
+## Open items and deferred work (as of Pass 4, July 10 2026)
+
+Captured so nothing floats loose. None of these block the first live dry-run;
+the operability set (Pass 5) should land before the job runs UNATTENDED. Items
+are drawn from Tony's questions and the un-actioned remainder of both reviews
+(Fable 5 / L-109, GPT 5.5 / L-110).
+
+### Operability -- Pass 5 (highest value: makes the unattended job legible)
+
+- **Deployment model (DECIDED July 10).** Automatic FETCH, manual PUSH. Task
+  Scheduler runs the builder nightly WITHOUT `--commit`: it fetches, validates,
+  swaps the new generation into the LOCAL tree, and writes the summary. Tony reads
+  the summary and pushes by hand. This keeps commit authority with Tony (the
+  standing rule) and makes N2 push-verification advisory -- Tony is the eyes-on
+  confirm that already caught the a2b7435 miss. The summary is the handoff between
+  the overnight run and the morning push.
+- **New-object onboarding (Tony Q1).** A nightly only refreshes recent dates and
+  copies the archive forward; a newly-added config object has nothing to copy
+  forward, so it needs a ONE-TIME backfill. `--first-build` re-backfills
+  EVERYTHING (wasteful); `--dry-run --object` writes nothing. Add a `--add-object
+  <slug>` mode: backfill just the new object (365d arc / full flown arc) into the
+  existing generation, then nightlies maintain it. Interacts correctly with N3 --
+  a new object appearing is allowed; an existing one vanishing aborts.
+- **Gap-aware catch-up (CORRECTNESS -- do before unattended).** The nightly
+  currently fetches a FIXED trailing window `[today - freeze, today]` anchored to
+  TODAY, so if the builder is dark longer than `freeze` (machine off, travel) the
+  gap days are SILENTLY skipped -- a hole in the archive. Fix: anchor the refresh
+  window to the ARCHIVE's last date, `[last_archived_date - refine_overlap,
+  today]`, so a run fills whatever gap exists and self-heals an outage. The small
+  backward `refine_overlap` only re-fetches recently-refined spacecraft points
+  (planets/moons are stable); it is NOT a stopping point -- the fetch continues
+  from wherever the archive ends. Missed PUSHES are harmless (increments
+  accumulate locally, commits queue, one push catches GitHub up); missed RUNS are
+  the case this fixes.
+- **Run summary (Tony Q2).** A `_health.md` written EVERY run: status (swapped /
+  aborted), per-object result, the warning list, the COMMITS-PENDING-PUSH count,
+  and an explicit PUSH / DO-NOT-PUSH verdict. NO email or phone notification --
+  the summary file is the mechanism (Tony's call). Likely-contamination sets the
+  verdict to DO-NOT-PUSH rather than the builder refusing, since the push is manual.
+
+### Correctness / hardening -- deferred
+
+- **N7 time-scale / date-key (UTC-only, DST-immune).** Make the builder's date
+  arithmetic wholly UTC-INTERNAL -- fetch epochs, date keys, and the 'today'
+  anchor all in UTC -- so neither the 69 s `utc_to_tdb` approximation nor a DST
+  shift can misassign a date key near midnight (same boundary bug: one ~a minute
+  wide, one an hour wide twice a year). Local time then matters ONLY for when the
+  scheduler fires. Verify the boundary at the live gate.
+- **N8 as_of_today exactness.** `#T` catches gross staleness (48 h); add an
+  explicit today-key check + carry the DATE on the served point + a `stale` flag
+  so the browser need not infer it and a clipped trailing edge is visible.
+- **N10 unit handling.** Prefer reading Astropy column UNITS over the
+  `q > 10000` km/AU magnitude heuristic; keep the heuristic only as a logged
+  compatibility fallback. Needs live column evidence.
+- **Guard warning payload (Fable).** `emit_guard_warnings` should carry the
+  fetch params (epoch window, id_type, center) the warning is about.
+- **warnings_log surfacing (Fable).** The warnings list is printed only on the
+  success path; on ABORT / dry-run it is not surfaced -- fold it into
+  `_health.json` (Q2) so it survives every path.
+- **Guard scan scope (Fable).** The guard re-scans the whole archive nightly (a
+  frozen contaminated point warns forever; Voyager's full-arc sanity loop runs
+  nightly). Consider scan-the-refresh-window; low priority.
+- **Schema-shrink continuity (GPT).** N3 guards object-set membership; a
+  finer gate on per-object schema fields / position references / center changes
+  is still only partial (#C + #8). Low priority.
+
+### Tests / fixtures
+
+- **N11 real-response fixtures (GPT).** The offline suite mocks Horizons
+  (pipeline logic). Add sanitized LIVE fixtures captured at the first dry-run for
+  column names / units / masks, header parsing, target ambiguity, empty / clipped
+  ranges, and center strings. Build the identity matrix (slug -> requested
+  target / id_type / location -> returned name / center / frame) and abort
+  first-build on mismatch.
+
+### Cleanup / consistency
+
+- **Dead code.** `_replace_file` is unused after the whole-directory swap (N1)
+  retired the per-subtree promotion -- delete on the next pass.
+- **Severity threshold.** Code / manifest say the outer guard tier fires at
+  >= 10x; handoff v0.4 change 4 says ~30x -- reconcile to one number.
+- **source.epoch type.** Builder emits a float JD where v0.6 used a string --
+  note in the parity claim or align.
+- **Scheduled-task working dir.** `git add` / `--config` / `--output-dir` assume
+  CWD = repo root; the Task Scheduler job MUST set the working directory (or the
+  config load fails before anything else).
+- **DST-safe run time.** Schedule the nightly at a non-transition local time
+  (~4 AM, clear of 1-3 AM local): in spring 2-3 AM local does not exist (a task
+  there may not fire), in fall 1-2 AM local repeats (a task there may fire twice).
+  A double-fire is otherwise harmless (gap-aware catch-up over an already-current
+  archive, atomic swap, N3 clean), but avoiding the window is the clean fix. Pairs
+  with the N7 UTC-only date handling.
+
+### Live-gate open dependencies (resolve at the first --dry-run; see TESTING_PROTOCOL.md)
+
+- Does 2P/Encke's Horizons header carry `TP=` in the expected decimal form?
+  (else the conic degrades to today-anchored -- now a VISIBLE `not_present`, N5.)
+- Does Horizons clip or ERROR on a pre-SPK spacecraft start? (authoritative
+  `config.start` assumes a curated valid date; the error text guides a fix.)
+- id_type / center identity matrix for `@sun`, `@9`, `@599`, spacecraft `-31`,
+  and small-body designations -- abort first-build on target/center mismatch.
+- `elements()` column names / units / masks per object class; record the
+  astroquery version.
+- Windows: schedule the backup action clear of the swap window (a file lock on
+  `raw/` during the rename can fail the swap).
 
 ---
 
