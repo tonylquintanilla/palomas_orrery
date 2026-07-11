@@ -19,7 +19,130 @@ Run: `python3 tools/test_gallery_cache_builder_offline.py`
 State: 68 checks, 0 failures. Mocks the Horizons fetch layer (no network); must
 run from a clean checkout (config resolved from data/solar-system/, A-8).
 
-**tony**: should be 75 checks not 68.
+**tony**: should be 75 checks not 68. Running in Windows so the command is python not python3.
+
+**output**: 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/test_gallery_cache_builder_offline.py
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 11 objects
+  ok  first-build structural validation passes (pass)
+  ok  clean fakes -> no guard warnings
+  ok  11 objects served (11)
+  ok  attribution present
+  ok  served_window field present
+  ok  earth has parity/addition field 'name'
+  ok  earth has parity/addition field 'horizons_id'
+  ok  earth has parity/addition field 'category'
+  ok  earth has parity/addition field 'availability'
+  ok  earth has parity/addition field 'parent'
+  ok  earth has parity/addition field 'stored_center'
+  ok  earth has parity/addition field 'canonical_frame'
+  ok  earth has parity/addition field 'trajectory_of'
+  ok  earth has parity/addition field 'osculating'
+  ok  earth has parity/addition field 'positions'
+  ok  earth has parity/addition field 'presets'
+  ok  earth has parity/addition field 'features'
+  ok  earth has parity/addition field 'orbit_type'
+  ok  earth has parity/addition field 'as_of_today'
+  ok  earth has parity/addition field 'event_link'
+  ok  earth.osculating has 'center'
+  ok  earth.osculating has 'epoch_jd'
+  ok  earth.osculating has 'a_au'
+  ok  earth.osculating has 'e'
+  ok  earth.osculating has 'i_deg'
+  ok  earth.osculating has 'node_deg'
+  ok  earth.osculating has 'peri_deg'
+  ok  earth.osculating has 'M0_deg'
+  ok  earth.osculating has 'source'
+  ok  voyager_1: osculating null, positions present
+  ok  voyager_1 position file on disk
+  ok  position file unit km
+  ok  B-3: serving_base + scene_features restored for v0.6 parity
+  ok  B-3: positions block carries step_hours
+  ok  earth as_of_today is km-scale (|r|=1.5e+08)
+  ok  encke serves Tp_jd + solution_Tp_jd
+  ok  encke orbit_type elliptical (e<1)
+  ok  pluto/charon centered on pluto_barycenter
+  ok  raw vectors written
+  ok  elements JSONL history written
+  ok  run manifest written
+[done] run 20260709T000000Z (nightly): 11 objects
+  ok  nightly structural validation passes
+  ok  nightly did not shrink earth
+  ok  frozen past point unchanged byte-for-byte
+  ok  guard: clean charon point -> no warning
+  ok  guard: 35.7 AU point -> exactly one warning
+  ok  guard: outer-bound trip tagged likely-contamination
+  ok  guard KEPT the point (monitor, not reject)
+  ok  guard: spacecraft |r|>200 AU -> sanity warning
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 11 objects
+[RECOVER] restoring C:\Users\tonyq\AppData\Local\Temp\tmpf7js9k4i\data\solar-system from C:\Users\tonyq\AppData\Local\Temp\tmpf7js9k4i\data\solar-system.prev (crash mid-swap)
+[done] run 20260709T000000Z (nightly): 11 objects
+  ok  A-1/N1: nightly recovered the whole generation from .prev after a crash
+  ok  A-1: archive not thinned by recovery (3740 >= 3740)
+  ok  A-1: recovered nightly validates
+[ABORT] fail: nightly run but no live raw archive (possible unrecovered crash) -- refusing to build a thin cache
+  ok  A-1: nightly with no generation ABORTS instead of committing thin
+  ok  A-2: main() exits nonzero on structural abort
+  ok  A-2: main() exits 0 on pass
+  ok  A-4: majorbody/id -> None
+  ok  A-4: smallbody/None pass through unchanged
+  ok  DP: straight line -> 2 endpoints
+  ok  DP: keeps the bend
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 11 objects
+[warn] titan: FETCH FAILED (simulated Horizons outage); served last-good orbit, as_of_today nulled
+[done] run 20260709T000000Z (nightly): 11 objects
+  ok  A-3: failed Titan still SERVED (not vanished)
+  ok  A-3: Titan conic served from last-good
+  ok  A-3: Titan as_of_today NULLED (no stale marker)
+  ok  A-3: run validates with a stale object
+  ok  N4/#B3: correct km conversion passes
+  ok  N4/#B3: un-converted (AU-valued) served point ABORTS
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 11 objects
+[ABORT] fail: N3 object(s) dropped from a served set: ['titan']
+  ok  N3: dropping a served object (titan) ABORTS the publication
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 11 objects
+[warn] encke: FETCH FAILED (solution-TP request_failed for encke); served last-good orbit, as_of_today nulled
+[done] run 20260709T000000Z (nightly): 11 objects
+  ok  N5: solution-TP request failure serves last-good (not silent today-anchor)
+[master (root-commit) 02cab93] data: nightly 2026-07-10
+ 1 file changed, 1 insertion(+)
+ create mode 100644 data/f.txt
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+
+[commit] PUSH FAILED (Command '['git', '-C', 'C:\\Users\\tonyq\\AppData\\Local\\Temp\\tmpfxr1nnr1', 'push']' returned non-zero exit status 128.) -- committed locally only; remote is STALE
+  ok  N2: local commit succeeds but no-remote push is NOT reported as pushed
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 11 objects
+[dry-run] validated; wrote nothing outside C:\Users\tonyq\AppData\Local\Temp\tmppvji82xl\data\.staging_solar-system_20260709T000000Z
+  ok  P2-2: --dry-run --object clears N3 + no-raw against an existing generation
+[dry-run] validated; wrote nothing outside C:\Users\tonyq\AppData\Local\Temp\tmpgf_i71tg\data\.staging_solar-system_20260709T000000Z
+  ok  P2-2: --dry-run --object works on a clean machine (no raw archive)
+[warn] voyager_1: DP thin glide 2548 -> 2 points (tol=0.02 AU)
+[done] run 20260703T000000Z (first-build): 11 objects
+  ok  P2-1: spacecraft first-build passes #T (arc ends today, not a stale stride point)
+  ok  P2-1: spacecraft as_of_today is fresh regardless of stride phase
+  ok  #B3: correct per-component conversion passes
+  ok  #B3: swapped axes (magnitude-preserving) ABORTS component-wise
+[warn] voyager_1: DP thin glide 2549 -> 2 points (tol=0.02 AU)
+[done] run 20260709T000000Z (first-build): 11 objects
+[warn] encke: FETCH FAILED (solution-TP request_failed for encke); served last-good orbit, as_of_today nulled
+[done] run 20260709T000000Z (nightly): 11 objects
+  ok  P2-9: stale comet carries its comet block forward (not nulled)
+
+PASS (75 checks, 0 failures)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> 
 
 What it PROVES (logic that can be reasoned about statically):
 - Pipeline: first-build -> derive -> structural validation -> atomic swap ->
@@ -56,13 +179,51 @@ mirrors manifest S10 (staging -> validate -> atomic swap -> commit):
    states -- P2-2): validate + write nothing
    outside .staging. Confirm the astroquery version is logged (a builder TODO --
    L-112) and there are no id_type deprecation warnings.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object earth
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014052Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object jupiter
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014200Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object saturn
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014213Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object moon
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014242Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object io
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014258Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object titan
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014315Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object pluto
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014332Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object charon
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014351Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object apophis
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014411Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object voyager_1
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014436Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools/gallery_cache_builder.py --dry-run --object encke
+[dry-run] validated; wrote nothing outside data\.staging_solar-system_20260711T014455Z
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 2. Encke (2P): confirm the raw vectors header carries TP=. If present, the
    solution-Tp anchor holds; if absent, the conic still draws but Tp_jd degrades
    to elements-at-today -- decide accept vs. alternative here. Cross-check the
    resolved Tp against the desktop resolve_tp for the same object.
+
 3. Voyager 1: confirm the authoritative start is accepted (no invalid-date
    error), the coarse backbone + flyby-window densification fetch, and the
    Douglas-Peucker prune count is sane. Inspect the arc SHAPE, not just the count.
+
 4. Manual crash-recovery drill (once): interrupt a real run during the single
    whole-generation swap; re-run; confirm recover_incomplete_swap restores the
    complete generation. With the whole-directory swap (N1) the browser can only
