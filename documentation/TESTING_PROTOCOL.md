@@ -11,11 +11,15 @@ This protocol defines the three verification layers, in the order they run, and
 which reviewer level owns each. The core principle: an offline suite proves the
 LOGIC; only the live render on Tony's hardware proves the OUTPUT.
 
+**tony**: framing issue: the builder creates a new cache. the idea was that the original cache contains framing errors that would be impossible to fully identify and fix. the solution was a new cache. 
+
 ## Layer 1 -- Offline suite (automated, every change)
 
 Run: `python3 tools/test_gallery_cache_builder_offline.py`
 State: 68 checks, 0 failures. Mocks the Horizons fetch layer (no network); must
 run from a clean checkout (config resolved from data/solar-system/, A-8).
+
+**tony**: should be 75 checks not 68.
 
 What it PROVES (logic that can be reasoned about statically):
 - Pipeline: first-build -> derive -> structural validation -> atomic swap ->
