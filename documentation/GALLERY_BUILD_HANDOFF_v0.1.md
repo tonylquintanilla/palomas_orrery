@@ -9,7 +9,8 @@ is still pending because it cannot run in the build container.
 **Base:** orrery HEAD `4e2629c` (copy sources) | gallery HEAD `4b086a6` (deploy
 target). SHA round trip re-confirmed this session. The initial local build
 committed at gallery `a2b7435` was never pushed; the L-109-remediated build is
-re-pushed by Tony (gallery SHA pending); the docs landed at orrery `ca5c052`.
+re-pushed by Tony at gallery `0b0f051` / orrery `331eb95` (Pass 2 reviewed there);
+remediated further by Pass 5 (L-112).
 **Remediation (L-109, July 10):** Fable 5 adversarial review -> Pass 1 (A-1
 crash-recovery / archive-loss seam, A-2 exit code, A-7, A-8, A-11) + Pass 2 (A-3
 last-good serve, A-4 id_type, A-5 CAP;, A-9 #T, A-10, B-3 parity fields) +

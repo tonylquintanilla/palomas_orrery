@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*73 live items; 56 need attention (`!`); 61 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*74 live items; 56 need attention (`!`); 62 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -320,6 +320,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-106 | Gallery-cache backup + gitignore discipline | OPEN | 3.6 | 2026-07-09 |
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
+|  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 | ! | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | OPEN | 1.8 | 2026-07-09 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
@@ -2030,6 +2031,48 @@ errors on a pre-SPK spacecraft start.
 **Note:** GPT 5.5 produced the cross-check (L-110) that surfaced Q2's teeth; the
 render (Mode 5) remains the authority over both AI reviewers.
 **Ref:** GALLERY_BUILD_HANDOFF v0.1 (open-items section); TESTING_PROTOCOL.md; L-109; L-110; L-098 (parent).
+
+#### [L-112] Gallery builder Pass 5: two-reviewer Pass-2 remediation
+<!-- L:112 status:DONE upd:2026-07-10 section:H flag: rice:3/1/95/1 -->
+- **What.** Fable 5 + GPT 5.5 COMPETITIVE Pass-2 reviews of the pushed build
+  (gallery 0b0f051 / orrery 331eb95). Neither a superset -- each caught a
+  blocker-class item the other missed. Verified against code, then remediated.
+- **Fixed (before dry-run).** P2-1 spacecraft first-build/refresh appends the
+  daily [today-freeze, today] top-up so the arc ENDS today (#T passed only by
+  calendar coincidence before -- Fable, demonstrated). P2-2 --dry-run --object was
+  un-runnable in both repo states (N3 + no-raw guards); both now skip for
+  dry_run/only_slug. P2-4 comet apparition kwargs now reach fetch_vectors_range
+  (Encke's nightly point). Push-status persistence: the promoted manifest is
+  rewritten after the push -- it was written pre-swap with committed=false (GPT).
+  #B3 now compares COMPONENTS (a magnitude-preserving axis-swap/sign-flip is
+  caught -- GPT) and raises on a missing raw point (both). DP flyby preservation:
+  DP thins the GLIDE only, event-window points merge after (P2-Q1). N5 collapsed
+  to found-or-last-good (no today-anchor: a comet Horizons serves always has a Tp,
+  so not_present means something is wrong -- Tony). P2-9 stale comet carries its
+  comet block forward from the prior published index. .prev wedge: quarantine-
+  rename + non-silent recovery + sibling sweep.
+- **Verification.** Offline suite 68 -> 75 checks, 0 failures (P2-1 at an
+  ADVERSARIAL NOW, P2-2 both states, #B3 swapped-axis, P2-9, N5); compile + ASCII
+  clean.
+- **Docs.** Manifest body B-6 reconciled (retired-probe lines under the top
+  amendment -- the amend-at-top/stale-body drift, B-1/B-2 one level up); TESTING
+  PROTOCOL nits (11 not 9; version-log TODO; step-1 P2-2); handoff SHA 0b0f051.
+- **P2-3 (do before the backup action is wired).** N1's whole-dir swap put the
+  L-106 backup INSIDE the swapped dir (rides into .prev, deleted next run) and
+  left .gitignore naming the old in-tree .staging/. Relocate the mirror OUTSIDE
+  data/solar-system (e.g. data/_backup/; Google Cloud off-site half unchanged);
+  .gitignore must ignore data/.staging_*, data/solar-system.prev,
+  data/solar-system.quarantine_*. Reconcile L-106 + manifest S8/F9.
+- **Ride with handles (deferred).** P2-5 N3 retirement: NO retired-flag (Tony) --
+  a deliberate config-row removal ABORTS every night until also cleared from the
+  published index; supervised, acceptable, flagged. P2-6 exempt an explicitly-
+  refreshed slug from the per-object shrink check. N2 match refs/heads/main via
+  ls-remote (advisory under manual-push). #B3 reload the WRITTEN
+  coverage_index.json for the served side. as_of_today explicit UTC date. Builder
+  astroquery-version log at run start (feeds N11 identity matrix).
+**Note:** both Pass-2 reviews independently proposed the competitive-review
+protocol amendment that produced them -- adopt in the skills/protocol layer.
+**Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; GALLERY_BUILDER_MANIFEST_v2.md (B-6); L-109; L-110; L-111.
 
 #### [L-099] Solar System Explorer interactive exhibit
 <!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->

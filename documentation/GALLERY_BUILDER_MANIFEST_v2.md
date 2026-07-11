@@ -117,7 +117,7 @@ index carries the latest set only.
 **F7 -- SPK-horizon date. [RESOLVED BY REMOVAL]** v1's unsourced "2029-12-12"
 existed only to bound the pre-fetched FUTURE arc. F5 removes future fetching, so
 there is no future end to source and the date is GONE from the config. The ONLY
-ephemeris bound that still exists is the START, which is discovered from Horizons
+ephemeris bound that still exists is the START, which is an AUTHORITATIVE curated config.start (no probe; L-109/L-110)
 (F5 / S3c), not from a constant. (Note for the record: 2029-12-12 did appear in
 v0.3 point 4 and in the request, as an unsourced value -- v1's "not found in
 v0.3" was imprecise; moot now.)
@@ -233,9 +233,9 @@ at `@9` (barycenter trajectory) and `charon` at `@9`; encke added per F4.
 { "slug": "voyager_1", "name": "Voyager 1", "horizons_id": "-31",
   "id_type": "id", "category": "spacecraft", "canonical_center": "@sun",
   "center_slug": "sun", "trace_policy": "full-arc", "features": [],
-  "overrides": { "spacecraft": { "start": "1977-09-05" } },
-  "notes": "start is a HINT (launch date); real arc start probed from Horizons
-            at first build. No future fetched; nightly appends today's point." }
+  "overrides": { "spacecraft": { "start": "1977-09-06", "fetch_step": "7d", "event_windows": [...], "thin_tol_au": 0.02 } },
+  "notes": "start is AUTHORITATIVE (curated, day-after-launch); coarse glide +
+            flyby-window densify + DP thin + daily top-up; nightly appends today." }
 ```
 
 **Worked row -- comet (Encke; in the seed per F4):**
@@ -309,15 +309,16 @@ F5, spacecraft use this same nightly accretion for their live endpoint -- the
 only spacecraft-specific step is the one-time first-build backfill (3c).
 
 **3c. Spacecraft flown-arc backfill -- `--first-build` (and the optional
-`--refresh-spacecraft`) only (F5).** ONE range query: start = discovered
-ephemeris start, stop = today, step '1d'. Discovering the start: attempt from the
-config `start` hint (or launch); if Horizons returns empty or clips the leading
-edge, read the ACTUAL first available epoch from the response and begin there
-(the same "let the API declare the bound" discipline F7 applies at the other end
--- symmetric: the config supplies HINTS, Horizons supplies VALUES). That
-discovered start becomes the earliest frozen point in the archive forever, so it
-is fact-derived, not launch+1. Guard: spacecraft sanity only (S4). Written to raw
-once; served `positions/<slug>.json` in km/JD (v4 position-file format, carried).
+`--refresh-spacecraft`) only (F5; REDESIGNED L-109/L-110).** NOT one daily range.
+Start = AUTHORITATIVE curated `config.start` (no probe -- the date is verified at
+object creation and the day-after-launch convention avoids Horizons' invalid-date
+error; a rejection is a config defect the error text guides). The flown arc is a
+COARSE glide backbone (`fetch_step`, e.g. 7d) Douglas-Peucker-thinned, PLUS daily
+densification inside curated `event_windows` (flybys) merged AFTER thinning so a
+sub-tolerance deflection is never pruned (P2-Q1), PLUS a daily `[today-freeze,
+today]` top-up so the arc ends TODAY (as_of_today honest, #T passes -- P2-1). The
+curated start is the earliest frozen point forever. Guard: spacecraft sanity only
+(S4). Written to raw once; served `positions/<slug>.json` in km/JD.
 Fallback if the range is rejected: split the span in half recursively (NOT fixed
 75-epoch chunks; range-halving keeps the query count logarithmic), stitch by
 date, assert no duplicate/missing dates at the seams. Thereafter the nightly (3b)
@@ -525,7 +526,7 @@ carried by name in the docstring.
 2. Pre-build gate 3: the backup action AND the `.gitignore` backup-path entry
    both EXIST before first build.
 3. `--dry-run` on voyager_1: confirm the ephemeris START is discovered from
-   Horizons (not launch+1), the flown arc backfills, and NO future is fetched.
+   an authoritative curated start (day-after-launch), the flown arc backfills (coarse glide + flyby windows + DP + daily top-up), and NO future is fetched.
 4. `--dry-run` on encke (LOAD-BEARING, F4): confirm the solution-Tp two-role
    resolution runs (`resolve_tp` -> epoch -> converged osculating TP served),
    the `2P` apparition disambiguation picks the current record, and the served

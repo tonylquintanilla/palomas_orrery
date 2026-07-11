@@ -48,8 +48,10 @@ What it CANNOT prove (structural blind spots -- these are Layer 2/3):
 The container cannot reach ssd.jpl.nasa.gov; this layer is Tony's machine. Order
 mirrors manifest S10 (staging -> validate -> atomic swap -> commit):
 
-1. `--dry-run --object <slug>` per tranche object: validate + write nothing
-   outside .staging. Confirm astroquery version logged, no id_type warnings.
+1. `--dry-run --object <slug>` per tranche object (now runnable in both repo
+   states -- P2-2): validate + write nothing
+   outside .staging. Confirm the astroquery version is logged (a builder TODO --
+   L-112) and there are no id_type deprecation warnings.
 2. Encke (2P): confirm the raw vectors header carries TP=. If present, the
    solution-Tp anchor holds; if absent, the conic still draws but Tp_jd degrades
    to elements-at-today -- decide accept vs. alternative here. Cross-check the
@@ -62,7 +64,7 @@ mirrors manifest S10 (staging -> validate -> atomic swap -> commit):
    complete generation. With the whole-directory swap (N1) the browser can only
    ever see a complete old or complete new generation, so this drill now confirms
    atomicity rather than demonstrating a desync.
-5. First real `--first-build` on the nine-object tranche, then one `--nightly`.
+5. First real `--first-build` on the 11-object tranche, then one `--nightly`.
 
 ## Layer 3 -- Schedule
 
