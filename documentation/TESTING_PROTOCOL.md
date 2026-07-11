@@ -220,16 +220,41 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
    to elements-at-today -- decide accept vs. alternative here. Cross-check the
    resolved Tp against the desktop resolve_tp for the same object.
 
-3. Voyager 1: confirm the authoritative start is accepted (no invalid-date
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools\inspect_staging.py data\.staging_solar-system_20260711T210156Z
+=== Elements (most recent fetch per object) ===
+  encke: TP = 2460240.0283  (2023-10-22 12:40 UTC)
+
+**Tony**: pass  
+
+1. Voyager 1: confirm the authoritative start is accepted (no invalid-date
    error), the coarse backbone + flyby-window densification fetch, and the
    Douglas-Peucker prune count is sane. Inspect the arc SHAPE, not just the count.
 
-4. Manual crash-recovery drill (once): interrupt a real run during the single
+ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools\inspect_staging.py data\.staging_solar-system_20260711T014436Z
+
+=== Position arcs (spacecraft) ===
+  voyager_1: 105 points
+      from 1977-09-06 00:00 UTC  (JD 2443392.5)
+      to   2026-07-11 00:00 UTC  (JD 2461232.5)  
+
+**Note**: 
+This looks right, and the numbers actually tell a good story if you know what to expect from Voyager 1's real trajectory.
+105 points, split roughly two ways:
+
+The two flyby windows (Jupiter, Feb–Mar 1979; Saturn, Oct–Nov 1980) are fetched daily and never thinned — together that's about 70 days ≈ 70 points, always kept in full.
+The remaining ~35 points cover everything else: the 1977–1979 approach, the Jupiter-to-Saturn transfer, and then the nearly 46-year straight-line escape from 1980 to today. That last stretch is genuinely close to a straight line in 3D space — Voyager's been coasting on a ballistic trajectory since the Saturn flyby — so Douglas-Peucker collapsing that whole span down to just a handful of points is correct behavior, not data loss. A curve only needs points where it actually curves.
+
+The date range is the cleanest confirmation: starts exactly at 1977-09-06 (launch + 1 day, matching the config), ends exactly at 2026-07-11 — today. That's the P2-1 fix working on real data, not just in the offline suite.
+
+**Tony**: pass
+
+2. First real `--first-build` on the 11-object tranche, then one `--nightly`.
+
+3. Manual crash-recovery drill (once): interrupt a real run during the single
    whole-generation swap; re-run; confirm recover_incomplete_swap restores the
    complete generation. With the whole-directory swap (N1) the browser can only
    ever see a complete old or complete new generation, so this drill now confirms
    atomicity rather than demonstrating a desync.
-5. First real `--first-build` on the 11-object tranche, then one `--nightly`.
 
 ## Layer 3 -- Schedule
 
