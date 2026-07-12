@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*74 live items; 56 need attention (`!`); 62 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*75 live items; 57 need attention (`!`); 75 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -230,9 +230,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
+| ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-08 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
-| ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | -- | 2026-07-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -280,6 +280,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-066 | MAPS per-frame comet-tail animation wiring | OPEN | 4.5 | 2026-06-23 |
 | ! | L-040 (#19) | Plot-cube control parity + scaling/camera comprehensive review | OPEN | 1.5 | 2026-06-13 |
 | ! | L-039 (#23) | Earth ionosphere shell | OPEN | 1.2 | 2026-06-21 |
+| ! | L-113 | Port DP-style spacecraft trace thinning to the orrery desktop plotting | OPEN | 1.0 | 2026-07-11 |
 | ! | L-042 (#20/N5) | Shell-resolution GUI control (20/N5) + Fly-to view scaling (49) | OPEN | 0.5 | 2026-06-11 |
 | ! | L-043 | Exoplanet/binary synthetic objects hit Horizons fetch (id_type rejected) | OPEN | 0.4 | 2026-06-16 |
 
@@ -310,9 +311,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### G. Open Questions / Tony Calls
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-053 | AU-convention sweep (section E): keep open, revisit | OPEN | 0.8 | 2026-06-07 |
 | ! | L-056 | Phase 4 residuals: stale O2/O3 console wording; apsidal_markers em-dashes (MAPS per-frame wiring -> L-066) | OPEN | 0.5 | 2026-06-23 |
-| ! | L-100 | Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION) | OPEN | -- | 2026-07-08 |
 
 ### H. Gallery / Studio Track
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -326,8 +327,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
+| ! | L-104 | Gallery Studio preset generator | OPEN | 1.0 | 2026-07-08 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
-| ! | L-104 | Gallery Studio preset generator | OPEN | -- | 2026-07-08 |
 
 ### W.Prep -- Web Publication prep (before Phase 0)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -348,15 +349,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### W.Deferred -- Web Publication deferred (captured)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-|  | L-091 | Option E: unified front end | DEFERRED | -- | 2026-07-03 |
-|  | L-092 | Embeddable scenes for educators | DEFERRED | -- | 2026-07-03 |
-|  | L-093 | Educational guided explorations (specs as curriculum) | DEFERRED | -- | 2026-07-03 |
-|  | L-094 | Community cache as commons | DEFERRED | -- | 2026-07-03 |
-|  | L-095 | PWA / offline capability for classrooms | DEFERRED | -- | 2026-07-03 |
-|  | L-096 | Web orrery aesthetic / feel design conversation | DEFERRED | -- | 2026-07-03 |
-| ! | L-101 | Osculating-history fan (perturbed-moon precession view) | OPEN | -- | 2026-07-08 |
-| ! | L-102 | Spacecraft trace thinning (arc-minute decimation) | OPEN | -- | 2026-07-08 |
-| ! | L-103 | Hyperbolic conic -- browser branch (interactive.html) | OPEN | -- | 2026-07-08 |
+|  | L-091 | Option E: unified front end | DEFERRED | 1.0 | 2026-07-03 |
+|  | L-092 | Embeddable scenes for educators | DEFERRED | 1.0 | 2026-07-03 |
+|  | L-093 | Educational guided explorations (specs as curriculum) | DEFERRED | 1.0 | 2026-07-03 |
+|  | L-094 | Community cache as commons | DEFERRED | 1.0 | 2026-07-03 |
+|  | L-095 | PWA / offline capability for classrooms | DEFERRED | 1.0 | 2026-07-03 |
+|  | L-096 | Web orrery aesthetic / feel design conversation | DEFERRED | 1.0 | 2026-07-03 |
+| ! | L-101 | Osculating-history fan (perturbed-moon precession view) | OPEN | 1.0 | 2026-07-08 |
+| ! | L-102 | Spacecraft trace thinning (arc-minute decimation) | OPEN | 1.0 | 2026-07-11 |
+| ! | L-103 | Hyperbolic conic -- browser branch (interactive.html) | OPEN | 1.0 | 2026-07-08 |
 
 ### C. Reconciled -- Done (closed; for the record)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -696,6 +697,14 @@ establishes the baseline.
 ~L1271-1283); module_atlas.py (classify_role, ROLE_MAP); L-064 (closed
 predecessor); PROVENANCE_AUDIT.md (July 4, 2026 run: 115 files, 666 findings,
 Tier-1 = 104).
+
+#### [L-105] merge_orbit_data source-side frame guard (desktop cache hardening)
+<!-- L:105 status:OPEN upd:2026-07-08 section:A flag: rice:2/2/50/2 -->
+- OPTIONAL. merge_orbit_data merges data_points by date with NO frame check --
+  how heliocentric points entered a barycenter-keyed pair (pre-@9-override),
+  producing the L-098 contamination. Add a magnitude/frame guard on cache write
+  to prevent recurrence. Low priority (legacy cache is desktop-only now; the
+  gallery no longer reads it) -- but it is the root-cause fix.
 
 ## PENDING ACTION (Tony-side)
 
@@ -1643,275 +1652,6 @@ repo HEAD 1f5901e.
 **Ref:** L-002 (parent), ledger_index.py (pattern), project_instructions_v3_31.md
 Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 
-#### [L-098] Data serving pipeline (Phase 1b)
-<!-- L:098 status:OPEN upd:2026-07-09 section:W.Active flag: rice:3/3/50/3 -->
-- **What.** Serve solar-system orbits to the browser gallery: osculating
-  elements (the orbit) + direct-frame position vectors (the actual-motion
-  trace), plus a coverage index the browser reads. Goal unchanged since v0.3;
-  the DATA SOURCE pivoted (trail below).
-
-- **Trail (how the design got here).**
-  - v0.3 design converged July 7 (Fable 5 broad analysis -> Opus 4.8 review ->
-    Opus 4.6 convergence + Tony): coverage-index schema, a 9-object test tranche
-    covering every pattern, 8 invariants. Design handoff v0.6. Legacy
-    orbit_paths.json gitignored in the orrery @ 6368c87.
-  - v4 model correction (July 8, Opus 4.8): the subtraction model (derive a
-    moon's frame by differencing heliocentric ephemerides) was RETIRED --
-    empirically rejected on the desktop (catastrophic cancellation + daily
-    aliasing), confirmed against idealized_orbits.py (osculating-only satellite
-    systems, barycenter mode). Product model INVERTED: osculating is the PRIMARY
-    orbit; direct relative-frame pairs are the SECONDARY trace, served where
-    cadence allows. Coverage index reconciled to v0.6 (field-verified;
-    cache-required + invariants #1/#4/#7 retired; barycenter-relative frame
-    added; Pluto/Charon in the barycenter frame per Tony). Manifest v4 +
-    PHASE1B_MODEL_CORRECTION_HANDOFF.
-  - Stage 2 build + the finding that forced the pivot (July 8): export_orbit_
-    cache.py (Steps 0-6) built, pre-tested, and RUN on the primary. B2 (schema)
-    PASSED; B3 caught frame CONTAMINATION in the served Charon/Pluto traces --
-    heliocentric points (~35 AU) mixed with correct barycentric points under a
-    barycenter key, from a fetch predating the @9 override. The desktop is
-    immune (draws orbits from osculating, not traces); the gallery is EXPOSED
-    (serves the raw traces). merge_orbit_data merges by date with NO frame
-    check, and the extent across 1501 legacy entries is unknowable. Added a
-    magnitude frame guard (#F): a relative-frame trace exceeding 0.5 AU drops to
-    osculating-only. Test record: PHASE1B_STAGE2_TEST_PROTOCOL.
-  - v2 + v3 convergence (July 8, Opus 4.8 + Fable 5): Fable broad-first review
-    [verdict: BUILD IT] integrated -- Guard v2 (per-object band k*a(1+e) replaces
-    the global 0.5 AU; a real moon, Neso, apoapsis 0.572 AU proved the constant
-    false-rejects), provisional leading edge (nightly overwrite [today-7d,
-    +horizon]; freeze the older past), raw/served split (dissolves git-growth),
-    nightly atomicity (staging -> validate -> atomic swap -> single commit ->
-    per-object isolation -> git rollback -> size tripwire -> "data as of"
-    staleness). Then the TRACE & CONIC MODEL converged + code-verified @cde22c5:
-    every object serves osculating elements + orbit_type + as-of-today point;
-    conic is two-case (elliptical 360-pt / hyperbolic near-perihelion arc);
-    comets anchor the conic at Tp; spacecraft get a full-arc daily trace. Two-
-    surface principle: interactive = generative-lite, gallery = curated full-
-    fidelity, bridged by the closest-point event_link. Handoff -> v0.3.
-
-- **Current direction: GALLERY DATA-SOURCE PIVOT (July 8).** Stop reading the
-  legacy desktop cache for the gallery. Build a clean, purpose-built gallery
-  cache by FETCHING FRESH from Horizons with the correct center per object,
-  stored in the GALLERY repo (separate-clean from the orrery), refreshed by a
-  NIGHTLY BATCH, validated on write by the #F guard promoted SOURCE-side so
-  contamination cannot enter by construction. Legacy cache untouched (desktop).
-  Standalone builder (astroquery, no orrery import) makes "where it runs
-  nightly" a scheduler detail, not an architecture fork.
-  Design handoff: GALLERY_DATA_SOURCE_HANDOFF.
-
-- **Carries forward from Stage 2 (only the SOURCE changes):** the v4 osculating-
-  primary model; the coverage-index + position-file schema (v0.6-reconciled);
-  invariants #2/#3/#5/#6/#8/#C + the #F guard; center-slug map, epoch parser
-  (HH:MM), JD convention. export_orbit_cache.py's derive/serve half is reused in
-  the new builder; its "read the legacy cache" input is retired.
-
-- **v0.4 convergence review + ratification (July 9, Opus 4.8 + Tony).** Opus 4.8
-  verified manifest v1 against the LIVE repo (SHA round trip, ghost purge,
-  copy-source citations, manifest-vs-v0.3 fidelity) and corrected two false-
-  negative flags (F2: both the perihelion DISPATCHER `_add_perihelion_osculating_
-  orbit` @palomas_orrery.py:1533 AND the LEAF `plot_perihelion_osculating_orbit`
-  @io:7089 exist -- copy the leaf; F7: 2029-12-12 WAS in v0.3), then walked the
-  decision docket with Tony. Resolved/ratified: comet Tp path corrected to the
-  two-role SOLUTION-Tp-locates / converged-osculating-Tp-anchors resolution (the
-  solution-vs-converged residual is the non-grav/outgassing shift; adds
-  resolve_tp/fetch_solution_tp to copy sources); Encke ADDED to the seed (11 rows)
-  to exercise it; spacecraft REDESIGNED (Tony) to fetch the flown arc ONCE +
-  append today NIGHTLY -- retires write-once, the 2029 SPK horizon, and
-  --refresh-spacecraft as load-bearing; ephemeris START discovered from Horizons,
-  not launch+1; Guard v2 -> MONITOR (warn on both bounds, not reject -- defense-in-
-  depth, not the guarantee; loud diagnostic warning required); shrink gate
-  point-count 95%; horizon=0 non-spacecraft; elements JSONL history. NEW: gallery-
-  cache backup discipline (L-106). Manifest -> v2; handoff -> v0.4.
-
-- **Phase 1b build (July 9, Opus 4.8 + Tony, warm-context continuation).** Built
-  the standalone builder in one session off the converged v2/v0.4: tools/
-  gallery_cache_builder.py + data/solar-system/objects_config.json (11-row seed)
-  + an offline mocked-Horizons smoke test. Pre-tested: py_compile clean, 47
-  checks / 0 failures, ASCII-clean; every copied specific carries provenance to
-  orrery 4e2629c. Grounding surfaced as-built deltas (recorded in the BUILD
-  handoff): served schema is the FULL v0.6 shape, not manifest S6's shorthand
-  (schema parity to export_orbit_cache.py); trace_policy is MODEL-derived, NOT
-  carried from TEST_OBJECTS's retired serve/none field; the comet resolver is
-  adapted to Path-2-only (no shared cache) + nightly re-resolve; a coarse #U
-  unit-sanity ABORT was added, distinct from the Guard monitor. Live gate
-  (Horizons dry-runs, Mode-5 Tp match) is Tony's -- unreachable from the build
-  container. Copy-provenance sync register -> L-107; master-plan drift -> L-108.
-
-**Tony:** fetch-fresh + nightly batch + gallery-repo cache + ~1yr back ratified
-(Fable-confirmed). Builder choices CONVERGED: (1) intermediate raw cache; (2)
-desktop-scheduled now, Action later (probe Actions early); (3) daily cadence +
-PROVISIONAL leading edge + raw/served split -- git-growth fine with a ~800 MB
-size tripwire (no LFS/squash); (4) object-list config = single authority,
-tranche-first. Guard v2 gates catalog growth. OPEN, Tony's call (own pass): the
-shells interactive-vs-gallery split (L-100).
-
-**Gap:** Ghost purge DONE (9febac5; both trees absent from HEAD + gitignored).
-Manifest v2 / handoff v0.4 converged (Opus 4.8 + Tony, July 9). BUILDER BUILT +
-OFFLINE-VERIFIED (July 9): tools/gallery_cache_builder.py + objects_config.json
-(11-row seed) + offline smoke test; py_compile clean, 47 checks / 0 failures,
-provenance to orrery 4e2629c. .gitignore add (in-tree .staging/ + backup/) is a
-3-line snippet. NEXT = LIVE gate on Tony's hardware in manifest S10 order:
---dry-run voyager_1 (ephemeris start discovered) + encke (solution-Tp/2P +
-Mode-5 Tp match vs desktop resolve_tp); inject an out-of-band point to see the
-Guard banner fire; confirm the backup action + .gitignore exist BEFORE first
-build (L-106); first full build; schedule nightly + the separate backup action.
-The offline pass is NOT live verification -- the first --dry-run is the
-authoritative render. Legacy-
-cache Stage 2 deploy SUPERSEDED. Deferred: Pluto-Charon relative subsystem;
-sub-daily moon traces; Phase 2 wide-view composition (the np.interp containment
-hazard returns then).
-
-**Spawned items (this session):** L-100 shells surface (open question);
-L-101 osculating-history fan; L-102 spacecraft thinning; L-103 hyperbolic
-browser branch; L-104 Gallery Studio preset generator; L-105 merge_orbit_data
-desktop-cache frame guard. Later (July 9): L-106 gallery-cache backup + gitignore;
-L-107 copy-provenance sync register; L-108 master-plan v11 reconciliation.
-
-**Ref:** GALLERY_DATA_SOURCE_HANDOFF.md v0.4 (amends v0.3); GALLERY_BUILDER_MANIFEST v2 (v1 Fable 5 -> v2 Opus 4.8 review + Tony); GALLERY_BUILD_HANDOFF v0.1 (as-built); tools/gallery_cache_builder.py + data/solar-system/objects_config.json + tools/test_gallery_cache_builder_offline.py; FABLE5_REVIEW_gallery_data_source_pivot.md;
-PHASE1B_STAGE2_TEST_PROTOCOL.md; PHASE1B_BUILD_MANIFEST_v4.md;
-PHASE1B_MODEL_CORRECTION_HANDOFF.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
-v0.6; DATA_SERVING_BROAD_ANALYSIS.md; export_orbit_cache.py; L-078 (ROLE_MAP);
-master plan v10 §3a, §5 Phase 1b.
-
-#### [L-100] Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION)
-<!-- L:100 status:OPEN upd:2026-07-08 section:G flag: rice: -->
-- Two-surface principle (L-098) extended to ALL shells (atmospheres,
-  magnetospheres, Van Allen belts, rings, comet nucleus/coma/tail). Default:
-  shells live GALLERY-side (pre-rendered authored artifacts, zero browser code);
-  the interactive stays light (conics + positions). OPEN, TONY'S CALL: which
-  shells (if any) are cheap+static enough to ALSO render interactive-side --
-  candidate: simple scaled-sphere/torus (atmosphere, Van Allen); gallery-only:
-  geometry/physics/animation (magnetosphere bow shock, comet tails, ring
-  structure). Aesthetic (worth showing live) + cost (a browser port per
-  interactive-side shell). Own design pass; do not guess. Flows through
-  feature_configs.json. Ref: GALLERY_DATA_SOURCE_HANDOFF.md v0.3.
-
-#### [L-101] Osculating-history fan (perturbed-moon precession view)
-<!-- L:101 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice: -->
-- NET-NEW (data + render). N osculating element-sets, one per orbital period back
-  from the current phase-locked anomaly (default 3, user-select 1-6), drawn as a
-  fan of faint conics -- shows apsidal rotation / plane precession as smooth orbit
-  motion (vs a chunky position trace). Data: builder fetches elements at N epochs
-  (new). Render: overlay N faint ellipses (new). Deferred from the first gallery
-  build; interim = conic + as-of-today point.
-
-#### [L-102] Spacecraft trace thinning (arc-minute decimation)
-<!-- L:102 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice: -->
-- NET-NEW, served-side. Douglas-Peucker style: on the archived daily arc, drop
-  points within X arc-min of the chord between neighbors -- cruise collapses,
-  flyby knuckles keep density. Raw archive stays daily; served trace is thinned;
-  threshold a config constant. Flyby/gravity-assist detail comes from presets.
-
-#### [L-103] Hyperbolic conic -- browser branch (interactive.html)
-<!-- L:103 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice: -->
-- NET-NEW render. interactive.html Pyodide engine is ellipse-only
-  (r=a(1-e^2)/(1+e*cos th) breaks at e>=1). Port generate_hyperbolic_orbit_points
-  (r=|a|(e^2-1)/(1+e*cos th); th_inf=arccos(-1/e); truncate at max_distance;
-  500/1000 pts). Reference exists desktop-side. Needed for comets / interstellar
-  objects (3I/ATLAS) in the interactive. Served data already ready (elements +
-  orbit_type + Tp + max_distance).
-
-#### [L-104] Gallery Studio preset generator
-<!-- L:104 status:OPEN upd:2026-07-08 section:H flag: rice: -->
-- NET-NEW. Author an event window (object, center, {start,end,cadence}, label)
-  in the orrery -- comet perihelion, NEO close approach, spacecraft flyby /
-  gravity assist / landing -- export params via Gallery Studio; store as a gallery
-  item. Feeds the interactive's event_link breadcrumb (closest-point marker ->
-  gallery piece), NOT the interactive cache. Fine cadence (minute/hour, 30-60
-  frames) lives in the preset. Upstream of the builder's preset slot (unpopulated
-  in the first build; Apophis 2029 stays null).
-
-#### [L-105] merge_orbit_data source-side frame guard (desktop cache hardening)
-<!-- L:105 status:OPEN upd:2026-07-08 section:A flag: rice: -->
-- OPTIONAL. merge_orbit_data merges data_points by date with NO frame check --
-  how heliocentric points entered a barycenter-keyed pair (pre-@9-override),
-  producing the L-098 contamination. Add a magnitude/frame guard on cache write
-  to prevent recurrence. Low priority (legacy cache is desktop-only now; the
-  gallery no longer reads it) -- but it is the root-cause fix.
-
-#### [L-106] Gallery-cache backup + gitignore discipline
-<!-- L:106 status:OPEN upd:2026-07-09 section:H flag: rice:2/2/90/1 -->
-- **What.** The gallery raw archive (data/solar-system/raw/) is now an
-  irreplaceable fetched-once asset (same class as the orrery Horizons cache).
-  v0.3 specced only ROLLBACK (git history), not BACKUP. Add a SEPARATE scheduled
-  action (mirrors Tony's existing "backup on every cache update") that copies
-  raw/ to a GITIGNORED local path on each successful commit; Google Cloud
-  auto-backup carries the off-site copy (closes the repo/account failure mode on
-  infrastructure separate from GitHub). Served files are derived/regenerable and
-  are NOT backed up independently.
-- **Why gitignore.** The gallery repo serves to the web under ~1 GB Pages
-  guidance (474 MB used); committing backup copies would double growth against
-  the tightest constraint. The local backup path goes in .gitignore alongside
-  .staging/.
-- **Integrity layers (distinct failure modes).** shrink gate (bad write,
-  prevented) / git revert (bad build that committed, rolled back) / off-repo
-  backup (bad repo, survived). No overlap, no gap.
-- **Decoupled.** A backup failure never blocks a good commit; the builder never
-  waits on backup. The action OBSERVES a successful commit -- it is not a builder
-  step.
-**Tony:** backup-on-every-update + Google Cloud off-site are already in practice;
-this extends that discipline to the new gallery cache.
-**Gap:** FIRST-BUILD PRECONDITION -- the backup action AND the .gitignore entry
-must both exist before the first gallery-cache build runs (so the archive is
-never held un-backed-up). Wire the scheduled action to observe the nightly commit;
-add the gitignore line; verify at manifest S10 steps 2 and 9.
-**Ref:** GALLERY_BUILDER_MANIFEST v2 (S8, F9, pre-build gate 3);
-GALLERY_DATA_SOURCE_HANDOFF v0.4 (change 5); L-098 (parent).
-
-#### [L-107] Gallery builder copy-with-provenance sync register
-<!-- L:107 status:OPEN upd:2026-07-09 section:H flag: rice:1/2/90/0.5 -->
-- **What.** tools/gallery_cache_builder.py is STANDALONE by design (no orrery
-  import -- a cross-repo import would couple deployment and break the Actions
-  future), so it COPIES hard-won fetch specifics from the orrery. The manifest
-  promised this deliberate duplication would be ledgered; this is that register.
-  It is the MANAGED exception to the parallel-pipeline anti-pattern: when any
-  listed orrery source changes, re-copy into the builder and re-run the offline
-  test (sync-on-change).
-- **Register (orrery HEAD 4e2629c):**
-  - utc_to_tdb -> orbit_data_manager.py:41
-  - range-query fetch + '@'-center normalization -> orbit_data_manager.py:~672-690
-  - refplane='ecliptic' on .vectors() -> spacecraft_encounters.py:632
-  - elements get_col mapping + q-based km/AU detection -> orbit_data_manager.py:~1800-1878
-  - fetch_solution_tp (vectors_async header TP=) -> osculating_cache_manager.py:459
-  - resolve_tp hierarchy -- ADAPTED: builder is Path-2-only (no shared cache) +
-    nightly re-resolve -> osculating_cache_manager.py:566
-  - CENTER_SLUG_MAP -> export_orbit_cache.py:198-208; resolve_center_slug -> :212-223
-  - _dt_to_jd / parse_osc_epoch_to_jd / _true_to_mean_anomaly_deg -> export_orbit_cache.py:~255-295
-  - build_osculating_entry / write_position_file served schema -> export_orbit_cache.py:418-541
-  - KM_PER_AU -> constants_new.py:47
-**Tony:** copy-not-import is the honest form (Fable's standalone discipline);
-this register is the sync ledger the manifest promised.
-**Gap:** on any change to a listed orrery function, re-copy + re-run the offline
-test. A periodic automated diff check is a possible follow-on (deferred).
-**Ref:** GALLERY_BUILDER_MANIFEST v2 (S1, S3); GALLERY_BUILD_HANDOFF v0.1;
-tools/gallery_cache_builder.py; L-098 (parent).
-
-#### [L-108] Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation
-<!-- L:108 status:OPEN upd:2026-07-09 section:H flag: rice:2/1/90/1 -->
-- **What.** MASTER_PLAN_INTERACTIVE_GALLERY.md (v10) is STALE on Phase 1b: its
-  Status line reads "converged v0.3" while its own changelog reads v0.4
-  (internal inconsistency), and -- more importantly -- section-5 Phase 1b Deliverable
-  #1 (line ~548) and section-3a (line ~317) still describe the export script as one
-  that "reads desktop caches." That is the PRE-PIVOT model. The v0.4 fetch-fresh
-  pivot retired reading the legacy desktop cache; the shipped builder fetches
-  fresh from Horizons into the gallery cache. The plan now contradicts the code.
-- **Origin.** The drift is PIVOT-driven (v0.3/v0.4), not build-driven; the build
-  merely made it visible (there is now code that fetches fresh). Captured here
-  rather than folded silently into the build close-out -- the master plan is
-  Tony's versioned roadmap and deserves a proper v11 pass.
-**Note:** v11 pass done this session (Opus 4.8); pending your review + commit.
-The remaining section-3a polish is optional, low priority.
-**Gap:** v11 pass APPLIED this session (July 9): status -> v0.4 + build-underway;
-section-3a projection + OQ-B/C/F + a reconciliation note (subtraction RETIRED,
-osculating-primary, fetch-fresh, NIGHTLY cadence, no forward padding); the
-parents-serve-position-files bullet corrected; section-5 Deliverable #1 (reads-
-caches -> fetch-fresh) + serving-home (H2 gallery `data/`, not the H1 dedicated
-repo); section-5a next-step (build underway); changelog New-in-v11 + Superseded;
-version v10 -> v11. Transactional patch, 16 edits each matched exactly once; zero
-new non-ASCII. REMAINING (optional, low priority): bullet-by-bullet cleanup of
-the still-historical section-3a schema sub-block beyond the reconciliation note.
-**Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
-
 #### [L-109] Fable 5 adversarial review remediation (builder Pass 1+2)
 <!-- L:109 status:DONE upd:2026-07-10 section:H flag: rice:3/1/95/1 -->
 - **What.** Fable 5 (Mode 7 collegial) adversarially reviewed the shipped
@@ -1986,51 +1726,6 @@ errors on a pre-SPK spacecraft start.
   real things (N1 elevated, N2 entirely) that Fable's pass missed -- while neither
   is authoritative over the live render (Mode 5).
 **Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; TESTING_PROTOCOL.md; L-098 (parent); L-109 (Fable remediation).
-
-#### [L-111] Gallery builder Pass 5 -- operability + deferred hardening
-<!-- L:111 status:OPEN upd:2026-07-10 section:H flag: rice:2/2/85/2 -->
-- **What.** Open items after Passes 1-4, captured from Tony's questions and the
-  un-actioned remainder of both reviews. Full detail in GALLERY_BUILD_HANDOFF
-  v0.1 "Open items and deferred work"; this is the tracked handle.
-- **Deployment model (DECIDED July 10).** Automatic FETCH, manual PUSH: Task
-  Scheduler runs the builder nightly WITHOUT --commit (fetch + validate + swap the
-  new generation into the LOCAL tree + write the summary); Tony reads the summary
-  and pushes by hand. Keeps commit authority with Tony (standing rule); N2 push
-  verification becomes advisory (Tony is the eyes-on confirm that caught a2b7435).
-- **Gap-aware catch-up (CORRECTNESS -- do before unattended).** The nightly fetches
-  a FIXED trailing window `[today - freeze, today]` anchored to TODAY, so if the
-  builder is dark longer than `freeze` (machine off, travel) the gap days are
-  SILENTLY skipped. Fix: anchor the refresh window to the ARCHIVE's last date --
-  `[last_archived_date - refine_overlap, today]` -- so a run fills whatever gap
-  exists and self-heals an outage. The small backward `refine_overlap` only re-
-  fetches recently-refined spacecraft points (planets/moons are stable); it is NOT
-  a stopping point. Missed PUSHES are harmless (increments accumulate locally,
-  commits queue, one push catches up); missed RUNS are the case this fixes.
-- **Pass 5 (operability -- do before UNATTENDED scheduling).** (Q1) `--add-object
-  <slug>` one-time backfill so a newly-added config object is onboarded without
-  re-running the whole first-build. (Q2) a `_health.md` summary written EVERY run
-  (status swapped/aborted, per-object result, warning list, COMMITS-PENDING-PUSH
-  count, and an explicit PUSH / DO-NOT-PUSH verdict) -- NO email or phone
-  notification (Tony's call: the summary file is enough). Likely-contamination
-  sets the verdict to DO-NOT-PUSH rather than the builder refusing (push is manual).
-- **Deferred hardening.** N7 -- make date arithmetic UTC-ONLY (fetch
-  epochs, date keys, and the 'today' anchor all in UTC) so DST never enters the
-  data path; DST-immune and subsumes the 69 s Time(jd) boundary wobble. Schedule
-  the job at a non-transition local time (~4 AM, clear of 1-3 AM local) so a
-  spring gap does not skip the run and a fall repeat does not double-fire
-  (double-fire is otherwise harmless: gap-aware catch-up over an already-current
-  archive, atomic swap, N3 clean).
-  N8 exact-today + date-on-point + stale flag; N10 read Astropy units over the
-  q>10000 heuristic; guard-warning fetch-param payload; warnings_log into
-  _health.json; N11 live-response fixtures + identity matrix.
-- **Cleanup.** Remove dead `_replace_file`; reconcile guard outer-tier threshold
-  (10x vs ~30x); source.epoch float-vs-string parity; scheduled-task working dir.
-- **Gap.** The live-gate open dependencies (2P TP= header, Horizons pre-SPK
-  clip/error, id_type/center identity matrix, elements units, epoch scale) are in
-  TESTING_PROTOCOL.md and resolve at the first --dry-run, not here.
-**Note:** GPT 5.5 produced the cross-check (L-110) that surfaced Q2's teeth; the
-render (Mode 5) remains the authority over both AI reviewers.
-**Ref:** GALLERY_BUILD_HANDOFF v0.1 (open-items section); TESTING_PROTOCOL.md; L-109; L-110; L-098 (parent).
 
 #### [L-112] Gallery builder Pass 5: two-reviewer Pass-2 remediation
 <!-- L:112 status:DONE upd:2026-07-10 section:H flag: rice:3/1/95/1 -->
@@ -2504,6 +2199,31 @@ prereqs ADDENDUM_phase4_decisions.md + HANDOFF_animation_phase4_brief.md. (umbre
   exoplanet_systems.py / celestial_objects.py.
 **Gap:** gate the Horizons fetch/data path to SKIP synthetic types (exo_host_star/exo_binary_star/exoplanet/exo-barycenter/Sun-relative-to-exo-center); + helpers.py CRLF->LF.
 
+#### [L-113] Port DP-style spacecraft trace thinning to the orrery desktop plotting
+<!-- L:113 status:OPEN upd:2026-07-11 section:D.Feature-A flag: rice:2/2/50/2 -->
+- **What.** The gallery cache builder's spacecraft pipeline (coarse glide
+  backbone + daily-densify inside curated flyby windows + Douglas-Peucker
+  thin of the glide only, windows exempt) was verified end-to-end tonight on
+  real Voyager 1 data: both flyby windows (Jupiter 1979, Saturn 1980) came
+  back with zero gaps -- genuinely daily, un-flattened -- while the 49-year
+  glide thinned from 2549 raw points to 29, with a 12-year gap (1992-2004)
+  where the trajectory is simply straight. The orrery's own desktop
+  spacecraft plotting (spacecraft_encounters.py / idealized_orbits.py /
+  plot_objects+animate_objects) does not yet use this technique.
+- **Idea.** Bring the same glide-thin/window-exempt pattern to the desktop
+  path -- likely fewer total points for long-duration spacecraft (Voyager
+  1/2, etc.) without losing flyby detail, reusing the now-proven approach
+  rather than reinventing it. Needs the parallel-pipeline check (both
+  plot_objects and animate_objects) since the desktop has more than one
+  spacecraft rendering path.
+- **Gap:** not scoped -- capture-on-first-mention, not a design session yet.
+  Whether the orrery's current point density is even a real problem (vs.
+  cosmetic) wants a quick look before committing effort.
+**Ref:** gallery_cache_builder.py (douglas_peucker, process_object spacecraft
+branch); L-102 (related but distinct -- L-102 is the web/interactive.html
+served-side thinning, a different consumer; this item is the desktop app
+itself); L-112 (the remediation pass that verified DP flyby preservation).
+
 ### D.Feature -- Bucket B (editorial; open-ended) `[per chain]`
 
 #### [L-044 | #22] Satellite (and minor-body) internal-structure shells
@@ -2565,8 +2285,6 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   `[per chain + @2f40d9d/@730b2bf verifications]`
 **Gap:** design conversation first -- separate (1) the immediate refactor + Artemis redo from (2) the generalized preset-authoring vision; decide how much of (2) to scope now. Coupled across two repos. Design-before-code, Bucket C.
 
-### D.Parked (Tony's explicit call) `[per chain]`
-
 #### [L-067] measure_animation_html.py file-browser dialog (B5)
 <!-- L:067 status:OPEN upd:2026-06-23 section:D.Feature-C flag: rice:1/1/75/1 -->
 - **Add a tkinter file-browser dialog to measure_animation_html.py (B5).** Spun out
@@ -2576,6 +2294,8 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   path. Small, isolated tooling.
 **Gap:** add filedialog.askopenfilename to measure_animation_html.py.
 **Ref:** spun out of L-048 (closed 2026-06-23).
+
+### D.Parked (Tony's explicit call) `[per chain]`
 
 ### D.Loose end to reconcile `[per chain; not re-verified]`
 
@@ -2676,6 +2396,19 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
 non-visual residuals: O2/O3 console wording (one-line fix on next touch) and
 apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed here.
 
+#### [L-100] Gallery feature-render surface: shells gallery-side vs interactive-side (OPEN QUESTION)
+<!-- L:100 status:OPEN upd:2026-07-08 section:G flag: rice:2/2/50/2 -->
+- Two-surface principle (L-098) extended to ALL shells (atmospheres,
+  magnetospheres, Van Allen belts, rings, comet nucleus/coma/tail). Default:
+  shells live GALLERY-side (pre-rendered authored artifacts, zero browser code);
+  the interactive stays light (conics + positions). OPEN, TONY'S CALL: which
+  shells (if any) are cheap+static enough to ALSO render interactive-side --
+  candidate: simple scaled-sphere/torus (atmosphere, Van Allen); gallery-only:
+  geometry/physics/animation (magnetosphere bow shock, comet tails, ring
+  structure). Aesthetic (worth showing live) + cost (a browser port per
+  interactive-side shell). Own design pass; do not guess. Flows through
+  feature_configs.json. Ref: GALLERY_DATA_SOURCE_HANDOFF.md v0.3.
+
 ## H. GALLERY / STUDIO TRACK (website repo; low-activity)
 
 (Unchanged this pass; carried verbatim from the June-10 edition.)
@@ -2724,6 +2457,144 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   cull/archive. Confirm none are needed as converter inputs before removing.
 
 ---
+
+#### [L-104] Gallery Studio preset generator
+<!-- L:104 status:OPEN upd:2026-07-08 section:H flag: rice:2/2/50/2 -->
+- NET-NEW. Author an event window (object, center, {start,end,cadence}, label)
+  in the orrery -- comet perihelion, NEO close approach, spacecraft flyby /
+  gravity assist / landing -- export params via Gallery Studio; store as a gallery
+  item. Feeds the interactive's event_link breadcrumb (closest-point marker ->
+  gallery piece), NOT the interactive cache. Fine cadence (minute/hour, 30-60
+  frames) lives in the preset. Upstream of the builder's preset slot (unpopulated
+  in the first build; Apophis 2029 stays null).
+
+#### [L-106] Gallery-cache backup + gitignore discipline
+<!-- L:106 status:OPEN upd:2026-07-09 section:H flag: rice:2/2/90/1 -->
+- **What.** The gallery raw archive (data/solar-system/raw/) is now an
+  irreplaceable fetched-once asset (same class as the orrery Horizons cache).
+  v0.3 specced only ROLLBACK (git history), not BACKUP. Add a SEPARATE scheduled
+  action (mirrors Tony's existing "backup on every cache update") that copies
+  raw/ to a GITIGNORED local path on each successful commit; Google Cloud
+  auto-backup carries the off-site copy (closes the repo/account failure mode on
+  infrastructure separate from GitHub). Served files are derived/regenerable and
+  are NOT backed up independently.
+- **Why gitignore.** The gallery repo serves to the web under ~1 GB Pages
+  guidance (474 MB used); committing backup copies would double growth against
+  the tightest constraint. The local backup path goes in .gitignore alongside
+  .staging/.
+- **Integrity layers (distinct failure modes).** shrink gate (bad write,
+  prevented) / git revert (bad build that committed, rolled back) / off-repo
+  backup (bad repo, survived). No overlap, no gap.
+- **Decoupled.** A backup failure never blocks a good commit; the builder never
+  waits on backup. The action OBSERVES a successful commit -- it is not a builder
+  step.
+**Tony:** backup-on-every-update + Google Cloud off-site are already in practice;
+this extends that discipline to the new gallery cache.
+**Gap:** FIRST-BUILD PRECONDITION -- the backup action AND the .gitignore entry
+must both exist before the first gallery-cache build runs (so the archive is
+never held un-backed-up). Wire the scheduled action to observe the nightly commit;
+add the gitignore line; verify at manifest S10 steps 2 and 9.
+**Ref:** GALLERY_BUILDER_MANIFEST v2 (S8, F9, pre-build gate 3);
+GALLERY_DATA_SOURCE_HANDOFF v0.4 (change 5); L-098 (parent).
+
+#### [L-107] Gallery builder copy-with-provenance sync register
+<!-- L:107 status:OPEN upd:2026-07-09 section:H flag: rice:1/2/90/0.5 -->
+- **What.** tools/gallery_cache_builder.py is STANDALONE by design (no orrery
+  import -- a cross-repo import would couple deployment and break the Actions
+  future), so it COPIES hard-won fetch specifics from the orrery. The manifest
+  promised this deliberate duplication would be ledgered; this is that register.
+  It is the MANAGED exception to the parallel-pipeline anti-pattern: when any
+  listed orrery source changes, re-copy into the builder and re-run the offline
+  test (sync-on-change).
+- **Register (orrery HEAD 4e2629c):**
+  - utc_to_tdb -> orbit_data_manager.py:41
+  - range-query fetch + '@'-center normalization -> orbit_data_manager.py:~672-690
+  - refplane='ecliptic' on .vectors() -> spacecraft_encounters.py:632
+  - elements get_col mapping + q-based km/AU detection -> orbit_data_manager.py:~1800-1878
+  - fetch_solution_tp (vectors_async header TP=) -> osculating_cache_manager.py:459
+  - resolve_tp hierarchy -- ADAPTED: builder is Path-2-only (no shared cache) +
+    nightly re-resolve -> osculating_cache_manager.py:566
+  - CENTER_SLUG_MAP -> export_orbit_cache.py:198-208; resolve_center_slug -> :212-223
+  - _dt_to_jd / parse_osc_epoch_to_jd / _true_to_mean_anomaly_deg -> export_orbit_cache.py:~255-295
+  - build_osculating_entry / write_position_file served schema -> export_orbit_cache.py:418-541
+  - KM_PER_AU -> constants_new.py:47
+**Tony:** copy-not-import is the honest form (Fable's standalone discipline);
+this register is the sync ledger the manifest promised.
+**Gap:** on any change to a listed orrery function, re-copy + re-run the offline
+test. A periodic automated diff check is a possible follow-on (deferred).
+**Ref:** GALLERY_BUILDER_MANIFEST v2 (S1, S3); GALLERY_BUILD_HANDOFF v0.1;
+tools/gallery_cache_builder.py; L-098 (parent).
+
+#### [L-108] Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation
+<!-- L:108 status:OPEN upd:2026-07-09 section:H flag: rice:2/1/90/1 -->
+- **What.** MASTER_PLAN_INTERACTIVE_GALLERY.md (v10) is STALE on Phase 1b: its
+  Status line reads "converged v0.3" while its own changelog reads v0.4
+  (internal inconsistency), and -- more importantly -- section-5 Phase 1b Deliverable
+  #1 (line ~548) and section-3a (line ~317) still describe the export script as one
+  that "reads desktop caches." That is the PRE-PIVOT model. The v0.4 fetch-fresh
+  pivot retired reading the legacy desktop cache; the shipped builder fetches
+  fresh from Horizons into the gallery cache. The plan now contradicts the code.
+- **Origin.** The drift is PIVOT-driven (v0.3/v0.4), not build-driven; the build
+  merely made it visible (there is now code that fetches fresh). Captured here
+  rather than folded silently into the build close-out -- the master plan is
+  Tony's versioned roadmap and deserves a proper v11 pass.
+**Note:** v11 pass done this session (Opus 4.8); pending your review + commit.
+The remaining section-3a polish is optional, low priority.
+**Gap:** v11 pass APPLIED this session (July 9): status -> v0.4 + build-underway;
+section-3a projection + OQ-B/C/F + a reconciliation note (subtraction RETIRED,
+osculating-primary, fetch-fresh, NIGHTLY cadence, no forward padding); the
+parents-serve-position-files bullet corrected; section-5 Deliverable #1 (reads-
+caches -> fetch-fresh) + serving-home (H2 gallery `data/`, not the H1 dedicated
+repo); section-5a next-step (build underway); changelog New-in-v11 + Superseded;
+version v10 -> v11. Transactional patch, 16 edits each matched exactly once; zero
+new non-ASCII. REMAINING (optional, low priority): bullet-by-bullet cleanup of
+the still-historical section-3a schema sub-block beyond the reconciliation note.
+**Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
+
+#### [L-111] Gallery builder Pass 5 -- operability + deferred hardening
+<!-- L:111 status:OPEN upd:2026-07-10 section:H flag: rice:2/2/85/2 -->
+- **What.** Open items after Passes 1-4, captured from Tony's questions and the
+  un-actioned remainder of both reviews. Full detail in GALLERY_BUILD_HANDOFF
+  v0.1 "Open items and deferred work"; this is the tracked handle.
+- **Deployment model (DECIDED July 10).** Automatic FETCH, manual PUSH: Task
+  Scheduler runs the builder nightly WITHOUT --commit (fetch + validate + swap the
+  new generation into the LOCAL tree + write the summary); Tony reads the summary
+  and pushes by hand. Keeps commit authority with Tony (standing rule); N2 push
+  verification becomes advisory (Tony is the eyes-on confirm that caught a2b7435).
+- **Gap-aware catch-up (CORRECTNESS -- do before unattended).** The nightly fetches
+  a FIXED trailing window `[today - freeze, today]` anchored to TODAY, so if the
+  builder is dark longer than `freeze` (machine off, travel) the gap days are
+  SILENTLY skipped. Fix: anchor the refresh window to the ARCHIVE's last date --
+  `[last_archived_date - refine_overlap, today]` -- so a run fills whatever gap
+  exists and self-heals an outage. The small backward `refine_overlap` only re-
+  fetches recently-refined spacecraft points (planets/moons are stable); it is NOT
+  a stopping point. Missed PUSHES are harmless (increments accumulate locally,
+  commits queue, one push catches up); missed RUNS are the case this fixes.
+- **Pass 5 (operability -- do before UNATTENDED scheduling).** (Q1) `--add-object
+  <slug>` one-time backfill so a newly-added config object is onboarded without
+  re-running the whole first-build. (Q2) a `_health.md` summary written EVERY run
+  (status swapped/aborted, per-object result, warning list, COMMITS-PENDING-PUSH
+  count, and an explicit PUSH / DO-NOT-PUSH verdict) -- NO email or phone
+  notification (Tony's call: the summary file is enough). Likely-contamination
+  sets the verdict to DO-NOT-PUSH rather than the builder refusing (push is manual).
+- **Deferred hardening.** N7 -- make date arithmetic UTC-ONLY (fetch
+  epochs, date keys, and the 'today' anchor all in UTC) so DST never enters the
+  data path; DST-immune and subsumes the 69 s Time(jd) boundary wobble. Schedule
+  the job at a non-transition local time (~4 AM, clear of 1-3 AM local) so a
+  spring gap does not skip the run and a fall repeat does not double-fire
+  (double-fire is otherwise harmless: gap-aware catch-up over an already-current
+  archive, atomic swap, N3 clean).
+  N8 exact-today + date-on-point + stale flag; N10 read Astropy units over the
+  q>10000 heuristic; guard-warning fetch-param payload; warnings_log into
+  _health.json; N11 live-response fixtures + identity matrix.
+- **Cleanup.** Remove dead `_replace_file`; reconcile guard outer-tier threshold
+  (10x vs ~30x); source.epoch float-vs-string parity; scheduled-task working dir.
+- **Gap.** The live-gate open dependencies (2P TP= header, Horizons pre-SPK
+  clip/error, id_type/center identity matrix, elements units, epoch scale) are in
+  TESTING_PROTOCOL.md and resolve at the first --dry-run, not here.
+**Note:** GPT 5.5 produced the cross-check (L-110) that surfaced Q2's teeth; the
+render (Mode 5) remains the authority over both AI reviewers.
+**Ref:** GALLERY_BUILD_HANDOFF v0.1 (open-items section); TESTING_PROTOCOL.md; L-109; L-110; L-098 (parent).
 
 ## W. WEB PUBLICATION TRACK
 
@@ -2908,10 +2779,140 @@ equivalence criteria reviewed and stable before any assembler build.
 decision follows L-088 (Phase 0).
 **Ref:** Fable 5 review of v4 (finding 1); master plan S4b.
 
+#### [L-098] Data serving pipeline (Phase 1b)
+<!-- L:098 status:OPEN upd:2026-07-09 section:W.Active flag: rice:3/3/50/3 -->
+- **What.** Serve solar-system orbits to the browser gallery: osculating
+  elements (the orbit) + direct-frame position vectors (the actual-motion
+  trace), plus a coverage index the browser reads. Goal unchanged since v0.3;
+  the DATA SOURCE pivoted (trail below).
+
+- **Trail (how the design got here).**
+  - v0.3 design converged July 7 (Fable 5 broad analysis -> Opus 4.8 review ->
+    Opus 4.6 convergence + Tony): coverage-index schema, a 9-object test tranche
+    covering every pattern, 8 invariants. Design handoff v0.6. Legacy
+    orbit_paths.json gitignored in the orrery @ 6368c87.
+  - v4 model correction (July 8, Opus 4.8): the subtraction model (derive a
+    moon's frame by differencing heliocentric ephemerides) was RETIRED --
+    empirically rejected on the desktop (catastrophic cancellation + daily
+    aliasing), confirmed against idealized_orbits.py (osculating-only satellite
+    systems, barycenter mode). Product model INVERTED: osculating is the PRIMARY
+    orbit; direct relative-frame pairs are the SECONDARY trace, served where
+    cadence allows. Coverage index reconciled to v0.6 (field-verified;
+    cache-required + invariants #1/#4/#7 retired; barycenter-relative frame
+    added; Pluto/Charon in the barycenter frame per Tony). Manifest v4 +
+    PHASE1B_MODEL_CORRECTION_HANDOFF.
+  - Stage 2 build + the finding that forced the pivot (July 8): export_orbit_
+    cache.py (Steps 0-6) built, pre-tested, and RUN on the primary. B2 (schema)
+    PASSED; B3 caught frame CONTAMINATION in the served Charon/Pluto traces --
+    heliocentric points (~35 AU) mixed with correct barycentric points under a
+    barycenter key, from a fetch predating the @9 override. The desktop is
+    immune (draws orbits from osculating, not traces); the gallery is EXPOSED
+    (serves the raw traces). merge_orbit_data merges by date with NO frame
+    check, and the extent across 1501 legacy entries is unknowable. Added a
+    magnitude frame guard (#F): a relative-frame trace exceeding 0.5 AU drops to
+    osculating-only. Test record: PHASE1B_STAGE2_TEST_PROTOCOL.
+  - v2 + v3 convergence (July 8, Opus 4.8 + Fable 5): Fable broad-first review
+    [verdict: BUILD IT] integrated -- Guard v2 (per-object band k*a(1+e) replaces
+    the global 0.5 AU; a real moon, Neso, apoapsis 0.572 AU proved the constant
+    false-rejects), provisional leading edge (nightly overwrite [today-7d,
+    +horizon]; freeze the older past), raw/served split (dissolves git-growth),
+    nightly atomicity (staging -> validate -> atomic swap -> single commit ->
+    per-object isolation -> git rollback -> size tripwire -> "data as of"
+    staleness). Then the TRACE & CONIC MODEL converged + code-verified @cde22c5:
+    every object serves osculating elements + orbit_type + as-of-today point;
+    conic is two-case (elliptical 360-pt / hyperbolic near-perihelion arc);
+    comets anchor the conic at Tp; spacecraft get a full-arc daily trace. Two-
+    surface principle: interactive = generative-lite, gallery = curated full-
+    fidelity, bridged by the closest-point event_link. Handoff -> v0.3.
+
+- **Current direction: GALLERY DATA-SOURCE PIVOT (July 8).** Stop reading the
+  legacy desktop cache for the gallery. Build a clean, purpose-built gallery
+  cache by FETCHING FRESH from Horizons with the correct center per object,
+  stored in the GALLERY repo (separate-clean from the orrery), refreshed by a
+  NIGHTLY BATCH, validated on write by the #F guard promoted SOURCE-side so
+  contamination cannot enter by construction. Legacy cache untouched (desktop).
+  Standalone builder (astroquery, no orrery import) makes "where it runs
+  nightly" a scheduler detail, not an architecture fork.
+  Design handoff: GALLERY_DATA_SOURCE_HANDOFF.
+
+- **Carries forward from Stage 2 (only the SOURCE changes):** the v4 osculating-
+  primary model; the coverage-index + position-file schema (v0.6-reconciled);
+  invariants #2/#3/#5/#6/#8/#C + the #F guard; center-slug map, epoch parser
+  (HH:MM), JD convention. export_orbit_cache.py's derive/serve half is reused in
+  the new builder; its "read the legacy cache" input is retired.
+
+- **v0.4 convergence review + ratification (July 9, Opus 4.8 + Tony).** Opus 4.8
+  verified manifest v1 against the LIVE repo (SHA round trip, ghost purge,
+  copy-source citations, manifest-vs-v0.3 fidelity) and corrected two false-
+  negative flags (F2: both the perihelion DISPATCHER `_add_perihelion_osculating_
+  orbit` @palomas_orrery.py:1533 AND the LEAF `plot_perihelion_osculating_orbit`
+  @io:7089 exist -- copy the leaf; F7: 2029-12-12 WAS in v0.3), then walked the
+  decision docket with Tony. Resolved/ratified: comet Tp path corrected to the
+  two-role SOLUTION-Tp-locates / converged-osculating-Tp-anchors resolution (the
+  solution-vs-converged residual is the non-grav/outgassing shift; adds
+  resolve_tp/fetch_solution_tp to copy sources); Encke ADDED to the seed (11 rows)
+  to exercise it; spacecraft REDESIGNED (Tony) to fetch the flown arc ONCE +
+  append today NIGHTLY -- retires write-once, the 2029 SPK horizon, and
+  --refresh-spacecraft as load-bearing; ephemeris START discovered from Horizons,
+  not launch+1; Guard v2 -> MONITOR (warn on both bounds, not reject -- defense-in-
+  depth, not the guarantee; loud diagnostic warning required); shrink gate
+  point-count 95%; horizon=0 non-spacecraft; elements JSONL history. NEW: gallery-
+  cache backup discipline (L-106). Manifest -> v2; handoff -> v0.4.
+
+- **Phase 1b build (July 9, Opus 4.8 + Tony, warm-context continuation).** Built
+  the standalone builder in one session off the converged v2/v0.4: tools/
+  gallery_cache_builder.py + data/solar-system/objects_config.json (11-row seed)
+  + an offline mocked-Horizons smoke test. Pre-tested: py_compile clean, 47
+  checks / 0 failures, ASCII-clean; every copied specific carries provenance to
+  orrery 4e2629c. Grounding surfaced as-built deltas (recorded in the BUILD
+  handoff): served schema is the FULL v0.6 shape, not manifest S6's shorthand
+  (schema parity to export_orbit_cache.py); trace_policy is MODEL-derived, NOT
+  carried from TEST_OBJECTS's retired serve/none field; the comet resolver is
+  adapted to Path-2-only (no shared cache) + nightly re-resolve; a coarse #U
+  unit-sanity ABORT was added, distinct from the Guard monitor. Live gate
+  (Horizons dry-runs, Mode-5 Tp match) is Tony's -- unreachable from the build
+  container. Copy-provenance sync register -> L-107; master-plan drift -> L-108.
+
+**Tony:** fetch-fresh + nightly batch + gallery-repo cache + ~1yr back ratified
+(Fable-confirmed). Builder choices CONVERGED: (1) intermediate raw cache; (2)
+desktop-scheduled now, Action later (probe Actions early); (3) daily cadence +
+PROVISIONAL leading edge + raw/served split -- git-growth fine with a ~800 MB
+size tripwire (no LFS/squash); (4) object-list config = single authority,
+tranche-first. Guard v2 gates catalog growth. OPEN, Tony's call (own pass): the
+shells interactive-vs-gallery split (L-100).
+
+**Gap:** Ghost purge DONE (9febac5; both trees absent from HEAD + gitignored).
+Manifest v2 / handoff v0.4 converged (Opus 4.8 + Tony, July 9). BUILDER BUILT +
+OFFLINE-VERIFIED (July 9): tools/gallery_cache_builder.py + objects_config.json
+(11-row seed) + offline smoke test; py_compile clean, 47 checks / 0 failures,
+provenance to orrery 4e2629c. .gitignore add (in-tree .staging/ + backup/) is a
+3-line snippet. NEXT = LIVE gate on Tony's hardware in manifest S10 order:
+--dry-run voyager_1 (ephemeris start discovered) + encke (solution-Tp/2P +
+Mode-5 Tp match vs desktop resolve_tp); inject an out-of-band point to see the
+Guard banner fire; confirm the backup action + .gitignore exist BEFORE first
+build (L-106); first full build; schedule nightly + the separate backup action.
+The offline pass is NOT live verification -- the first --dry-run is the
+authoritative render. Legacy-
+cache Stage 2 deploy SUPERSEDED. Deferred: Pluto-Charon relative subsystem;
+sub-daily moon traces; Phase 2 wide-view composition (the np.interp containment
+hazard returns then).
+
+**Spawned items (this session):** L-100 shells surface (open question);
+L-101 osculating-history fan; L-102 spacecraft thinning; L-103 hyperbolic
+browser branch; L-104 Gallery Studio preset generator; L-105 merge_orbit_data
+desktop-cache frame guard. Later (July 9): L-106 gallery-cache backup + gitignore;
+L-107 copy-provenance sync register; L-108 master-plan v11 reconciliation.
+
+**Ref:** GALLERY_DATA_SOURCE_HANDOFF.md v0.4 (amends v0.3); GALLERY_BUILDER_MANIFEST v2 (v1 Fable 5 -> v2 Opus 4.8 review + Tony); GALLERY_BUILD_HANDOFF v0.1 (as-built); tools/gallery_cache_builder.py + data/solar-system/objects_config.json + tools/test_gallery_cache_builder_offline.py; FABLE5_REVIEW_gallery_data_source_pivot.md;
+PHASE1B_STAGE2_TEST_PROTOCOL.md; PHASE1B_BUILD_MANIFEST_v4.md;
+PHASE1B_MODEL_CORRECTION_HANDOFF.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
+v0.6; DATA_SERVING_BROAD_ANALYSIS.md; export_orbit_cache.py; L-078 (ROLE_MAP);
+master plan v10 §3a, §5 Phase 1b.
+
 ### W.Deferred -- captured, not yet actionable
 
 #### [L-091] Option E: unified front end
-<!-- L:091 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice: -->
+<!-- L:091 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
 - The existing gallery viewer (3,345 lines of JS) becomes the single front end
   for all channels: static gallery, scheduled scenes, server-built and
   browser-built scenes. A and B become interchangeable back ends. Every dollar
@@ -2920,14 +2921,14 @@ decision follows L-088 (Phase 0).
 **Ref:** Fable 5 survey (Option E); master plan S8.
 
 #### [L-092] Embeddable scenes for educators
-<!-- L:092 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice: -->
+<!-- L:092 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
 - An iframe embed snippet per scene, so educators can put a working orrery view,
   HR diagram, or orbital visualization in their own pages. Nearly free given the
   viewer; large reach-per-effort.
 **Ref:** master plan S8.
 
 #### [L-093] Educational guided explorations (specs as curriculum)
-<!-- L:093 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice: -->
+<!-- L:093 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
 - Scene specs as curriculum -- a notebook (JupyterLite or similar) that walks
   through "build a scene of the inner solar system, now change the center to
   Mars, now add Phobos" or "see how eccentricity transforms an orbit." The spec
@@ -2936,7 +2937,7 @@ decision follows L-088 (Phase 0).
 **Ref:** master plan S8.
 
 #### [L-094] Community cache as commons
-<!-- L:094 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice: -->
+<!-- L:094 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
 - If tier-3 persistence is turned on, every fulfilled user request enriches the
   shared cache. Over time, the cache becomes a community-curated collection of
   interesting scenes -- driven by curiosity, not just Tony's curation. Tied to
@@ -2944,14 +2945,14 @@ decision follows L-088 (Phase 0).
 **Ref:** master plan S7/S5, S8.
 
 #### [L-095] PWA / offline capability for classrooms
-<!-- L:095 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice: -->
+<!-- L:095 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
 - Progressive Web App wrapper -- installable and usable offline. Relevant for
   classrooms with unreliable connectivity. Modest effort if the architecture is
   static-first. Verify PWA constraints at build time.
 **Ref:** master plan S8.
 
 #### [L-096] Web orrery aesthetic / feel design conversation
-<!-- L:096 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice: -->
+<!-- L:096 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
 - The desktop is a power tool with 60+ toggles. The web version could be that --
   or something different. A curated explorer. A storytelling medium. An invitation
   to wonder. The envelope-declaring GUI implies curation over completeness. The
@@ -2959,6 +2960,40 @@ decision follows L-088 (Phase 0).
   of care. How do these different voices come together in one web experience?
   Design conversation before Phase 6 (web UI).
 **Ref:** master plan S8 Q4; Fable 5 review of v4.
+
+#### [L-101] Osculating-history fan (perturbed-moon precession view)
+<!-- L:101 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice:2/2/50/2 -->
+- NET-NEW (data + render). N osculating element-sets, one per orbital period back
+  from the current phase-locked anomaly (default 3, user-select 1-6), drawn as a
+  fan of faint conics -- shows apsidal rotation / plane precession as smooth orbit
+  motion (vs a chunky position trace). Data: builder fetches elements at N epochs
+  (new). Render: overlay N faint ellipses (new). Deferred from the first gallery
+  build; interim = conic + as-of-today point.
+
+#### [L-102] Spacecraft trace thinning (arc-minute decimation)
+<!-- L:102 status:OPEN upd:2026-07-11 section:W.Deferred flag: rice:2/2/50/2 -->
+- STALE ASSUMPTION CORRECTED (2026-07-11): this originally assumed the raw
+  archive stays daily and thinning happens separately at serve time. L-109's
+  spacecraft redesign pulled thinning FORWARD to fetch-side instead -- the
+  raw archive itself now stores the Douglas-Peucker-thinned glide (windows
+  exempt, kept daily). Verified end-to-end on real Voyager 1 data (L-113):
+  49-year glide 2549 -> 29 points, both flyby windows fully daily with zero
+  gaps.
+**Gap:** whether this originally-scoped served-side/interactive.html step is
+now fully superseded (nothing left to build -- the builder already delivers
+thinned data) or still needed for a different reason (e.g. interactive.html
+consuming/rendering something not yet aligned to the new shape) is a call
+for you or Opus to make, not resolved here.
+**Ref:** L-109 (the fetch-side redesign); L-113 (tonight's live verification; orrery-side port idea).
+
+#### [L-103] Hyperbolic conic -- browser branch (interactive.html)
+<!-- L:103 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice:2/2/50/2 -->
+- NET-NEW render. interactive.html Pyodide engine is ellipse-only
+  (r=a(1-e^2)/(1+e*cos th) breaks at e>=1). Port generate_hyperbolic_orbit_points
+  (r=|a|(e^2-1)/(1+e*cos th); th_inf=arccos(-1/e); truncate at max_distance;
+  500/1000 pts). Reference exists desktop-side. Needed for comets / interstellar
+  objects (3I/ATLAS) in the interactive. Served data already ready (elements +
+  orbit_type + Tp + max_distance).
 
 ### W.Cross-references -- existing items that interact with the web track
 

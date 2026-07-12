@@ -5,21 +5,28 @@ Applies to: tools/gallery_cache_builder.py (Phase 1b, L-098; remediation L-109)
 
 ## Purpose
 
-The builder is unattended nightly infrastructure that mutates an irreplaceable
-archive (the JPL Horizons raw cache). "Runs without errors" is not the gate.
+The builder is unattended nightly infrastructure that replaces the archive (the
+JPL Horizons raw cache) with a freshly built one every run, rather than
+mutating the existing cache in place -- the prior cache's own framing errors
+were difficult to fully identify and fix, so a clean rebuild each night is the
+actual design, not a patch. "Runs without errors" is not the gate.
 This protocol defines the three verification layers, in the order they run, and
 which reviewer level owns each. The core principle: an offline suite proves the
 LOGIC; only the live render on Tony's hardware proves the OUTPUT.
 
 **tony**: framing issue: the builder creates a new cache. the idea was that the original cache contains framing errors that would be impossible to fully identify and fix. the solution was a new cache. 
 
+**Claude (Sonnet 5)**: Agreed and fixed -- the Purpose paragraph above now says "replaces the archive ... with a freshly built one every run" and explains why (the prior cache's own errors were hard to fix in place), instead of implying the builder mutates/repairs the existing cache.
+
 ## Layer 1 -- Offline suite (automated, every change)
 
 Run: `python3 tools/test_gallery_cache_builder_offline.py`
-State: 68 checks, 0 failures. Mocks the Horizons fetch layer (no network); must
+State: 75 checks, 0 failures. Mocks the Horizons fetch layer (no network); must
 run from a clean checkout (config resolved from data/solar-system/, A-8).
 
 **tony**: should be 75 checks not 68. Running in Windows so the command is python not python3.
+
+**Claude (Sonnet 5)**: Confirmed and fixed -- the doc text above now reads 75 (was 68); it hadn't been updated to match the Pass 5 remediation that added 7 more checks. Independently reproduced too (see the real PASS line further down).
 
 **output**: 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/test_gallery_cache_builder_offline.py
@@ -144,6 +151,8 @@ and then push using the remote name
 PASS (75 checks, 0 failures)
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> 
 
+**Claude (Sonnet 5)**: Independently reproduced -- ran this same offline suite myself in a separate environment tonight and got the identical 75/0 result, so this is a triple-confirmation (my run, Tony's Windows run above, and this printed PASS line), not one source trusting itself.
+
 What it PROVES (logic that can be reasoned about statically):
 - Pipeline: first-build -> derive -> structural validation -> atomic swap ->
   nightly re-run with the shrink gate.
@@ -226,6 +235,8 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python too
 
 **Tony**: pass  
 
+**Claude (Sonnet 5)**: This "pass" is the end of a real debugging thread, worth recording in full since the bare result doesn't show it. The FIRST live run of this exact step returned a genuine failure: `solution-TP not_present for encke (dropped)` -- not a fluke, reproducible. Root cause, found by running the actual astroquery call directly rather than guessing: querying the bare designation "2P" returns an AMBIGUOUS MATCH LIST (61 historical apparition records, one per apparition since 1786) when `closest_apparition` is off, and a flat syntax error ("Missing operator in \"2P\"") when it's on -- because astroquery only prepends the required `DES=` key for `id_type='designation'`/`'name'`/etc., never for `'smallbody'`, which is what Encke's config used. The actual fix, matching the orrery's own already-proven Halley pattern (`id='90000030'`, no apparition flag needed): pin Encke to its specific current record number (`90000091`) instead of the ambiguous bare designation, and drop `closest_apparition` entirely -- a record number has nothing left to disambiguate. Confirmed live, three ways: the direct astroquery A/B test, then the real `--dry-run --object encke`, then this manifest. Also settled along the way, by Tony's own physics reasoning: no comet Horizons serves would ever lack a Tp, so N5's `not_present` branch is treated as a hard failure (raise, serve last-good) rather than a soft today-anchored fallback.
+
 1. Voyager 1: confirm the authoritative start is accepted (no invalid-date
    error), the coarse backbone + flyby-window densification fetch, and the
    Douglas-Peucker prune count is sane. Inspect the arc SHAPE, not just the count.
@@ -248,13 +259,33 @@ The date range is the cleanest confirmation: starts exactly at 1977-09-06 (launc
 
 **Tony**: pass
 
+**Claude (Sonnet 5)**: Confirming -- pulled the raw JSON directly and verified the window gaps by code, not by eye (see the fuller trace in the first-build note below). Spawned L-113 (port this same glide-thin/window-exempt approach to the orrery's own desktop spacecraft plotting).
+
 2. First real `--first-build` on the 11-object tranche, then one `--nightly`.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools\gallery_cache_builder.py --first-build
+[warn] voyager_1: DP thin glide 2549 -> 29 points (tol=0.02 AU)
+[done] run 20260711T214714Z (first-build): 11 objects
+
+**Claude (Sonnet 5)**: Verified beyond the summary line -- parsed the actual manifest and the real `voyager_1.json` raw data directly. All 11 objects show clean `backfilled(N)` with no `failed:` anywhere; on a first build specifically, `len(results)` only counts objects with no fallback available, so 11/11 here means all eleven genuinely succeeded, not just "were attempted." Voyager 1's arc structure holds up under direct inspection too: both flyby windows (Jupiter, Saturn) came back completely daily with zero gaps -- the actual P2-Q1 concern about DP flattening the flyby structure is answered, not just assumed.
 
 3. Manual crash-recovery drill (once): interrupt a real run during the single
    whole-generation swap; re-run; confirm recover_incomplete_swap restores the
    complete generation. With the whole-directory swap (N1) the browser can only
    ever see a complete old or complete new generation, so this drill now confirms
    atomicity rather than demonstrating a desync.
+
+ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python tools\gallery_cache_builder.py --nightly --config data\objects_config.json
+[RECOVER] restoring data\solar-system from data\solar-system.prev (crash mid-swap)
+[done] run 20260711T232647Z (nightly): 11 objects  
+
+**Claude (Sonnet 5)**: Two real findings came out of this step, not just a green result.
+
+First, a genuine bug got found on the way here (not during the drill itself): `objects_config.json` lives inside `data/solar-system/`, the exact directory the atomic swap replaces wholesale. Nothing in the builder ever copies the config into staging, so a successful real build silently strands it in `.prev` -- invisible until the next command fails with `FileNotFoundError`. That's exactly what happened earlier tonight, discovered only because Tony noticed a pre-existing `.prev` folder didn't match my assumptions.
+
+Second, and more serious: `main()` calls `load_config()` before `run_build()` -- so `recover_incomplete_swap()` never gets a chance to run if the config itself is unreadable. Since the config living inside the swapped directory is exactly the condition a real crash produces, a genuine crash at the wrong moment would leave the pipeline stuck with no built-in path to self-heal -- confirmed directly (see the `FileNotFoundError` above the successful run in this section). Worked around tonight via `--config data\objects_config.json` pointing at a manual backup copy; the real fix is structural (move the config outside `data/solar-system/` entirely) and is queued for the next Opus build session.
+
+With that worked around, the drill itself passed cleanly: `[RECOVER]` fired, the correct generation was restored, and the nightly build completed normally on top of it. This closes Layer 2 in full -- all 11 objects individually, Encke's live bug found and fixed, Voyager's arc structurally verified, a real first-build, and a real crash-recovery + nightly run, all on real hardware tonight.
 
 ## Layer 3 -- Schedule
 
