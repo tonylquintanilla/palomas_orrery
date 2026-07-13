@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*72 live items; 57 need attention (`!`); 72 RICE-scored; 40 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*70 live items; 55 need attention (`!`); 70 RICE-scored; 42 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -320,12 +320,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
-| ! | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | OPEN | 3.6 | 2026-07-12 |
-| ! | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | OPEN | 2.5 | 2026-07-12 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
-| ! | L-104 | Gallery Studio preset generator | OPEN | 1.0 | 2026-07-08 |
+| ! | L-104 | Gallery Studio preset generator | OPEN | 1.0 | 2026-07-13 |
 | ! | L-074 | Cull unused raw *_teaser.json in the gallery dir | OPEN | 0.9 | 2026-06-26 |
 
 ### W.Prep -- Web Publication prep (before Phase 0)
@@ -366,11 +364,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
 |  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
+|  | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | DONE | 3.6 | 2026-07-12 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
+|  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
@@ -1819,6 +1819,73 @@ protocol amendment that produced them -- adopt in the skills/protocol layer.
   the open "should Encke be in the tranche" question (unresolved; if it later
   resolves to REMOVE, drop encke from config + mock + assertions).
 
+
+#### [L-115] Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7)
+<!-- L:115 status:DONE upd:2026-07-12 section:C flag: rice:2/2/90/1 -->
+- **What.** Move 1 of the skills-layer update from Fable 5's 2026-07-12
+  Mode 7 review. Five targeted edits, all verified against orrery HEAD
+  7e108b8 by Opus before delivery:
+    - agentic-pre-test 1.1: correct the inverted gray90/SystemButtonFace
+      rationale (palomas_orrery.py has 0 gray90 / 26 SystemButtonFace at
+      HEAD and at the b29ad3f8 cut; real risk is cross-file
+      indistinguishability -- siblings star_visualization_gui.py=5,
+      earth_system_visualization_gui.py=3) + cross-pointer to the
+      gallery-cache-builder gate. [Fable F2]
+    - horizons-orbital-mechanics 1.1: new Small-Body Record Pinning block
+      (short-designation ambiguity; pin comets to 900000XX records: Encke
+      90000091, Halley 90000030); fires_when gains "comet record pinning".
+      [seed 1]
+    - earth-system-pipeline 1.1: fix a phantom GUI name -- MissionSelector /
+      all_scenarios do not exist; real names MissionControlApp,
+      ScenarioPicker, _heat_scenarios(). [Fable F3]
+    - orrery-coding-conventions 1.1: optional "Operational gotchas"
+      docstring block (known-trap + normal-but-scary), PRACTICE. [seed 2]
+    - palomas_orrery.py:1522 comment: Encke 90000002 -> 90000091 (stale
+      recalled record number in an illustrative comment). [Fable F4]
+- **Dropped from the batch:** Fable's provenance-discipline carve-out line
+  -- provenance_scanner.py:382 walks .py only, so SKILL.md is already
+  structurally outside the scan; the line would document a non-existent
+  risk. [verified @7e108b8]
+- **Gap.** Apply the five snippets; bump the four skill version lines to 1.1
+  and re-pin "Cut from ... @ <SHA>" to the POST-PUSH orrery HEAD; run
+  skills_index.py to regenerate the Skill Manifest (horizons fires_when
+  changed); reinstall the four skills to Tony's account. Move 2 (new
+  gallery-cache-builder skill) tracked as a sibling entry when opened.
+- **Ref.** Fable review doc 2026-07-12 (F2/F3/F4, seeds 1-2). Parent: L-002
+  (skills layer).
+**Tony:** RICE proposed 2/2/90/1 -- yours to finalize. One umbrella entry as
+delivered, or split per skill (your call).
+**Gap:** none -- move to section C.
+
+#### [L-116] New skill: gallery-cache-builder (Move 2 of the skills update)
+<!-- L:116 status:DONE upd:2026-07-12 section:C flag: rice:3/2/85/2 -->
+- **What.** Ninth skill, gallery-cache-builder, added for the Phase 1b
+  nightly serving subsystem (L-098) -- Move 2 of Fable 5's 2026-07-12 Mode 7
+  review. Decomposition decision (Tony, this session): NEW skill, not an
+  extension of gallery-pipeline (non-overlapping moments of need; the
+  builder passes every subsystem marker). Authored
+  skills/gallery-cache-builder/SKILL.md in the orrery repo (L-002
+  convention; describes gallery code @ 8e060677 + orrery context @
+  e83fe9ce). Every code fact verified against HEAD before delivery; Fable's
+  cleanup_stale_siblings seed corrected to _sweep_siblings; validation
+  stance corrected (#B3 ABORTs, not WARN -- the code raises).
+  gallery-pipeline bumped to 1.1 with a one-line cross-pointer.
+- **Also in this push (Move 1 follow-through).** Re-pin the four Move-1 skill
+  version lines: the literal placeholder "<ORRERY HEAD after push>" was
+  committed verbatim and is corrected to e83fe9ce (the post-Move-1 orrery
+  HEAD they were verified against).
+- **Spotted, not fixed here.** gallery_cache_builder.py ~line 755 inline
+  comment "guard/B3 WARN" contradicts the code (#B3 raises ValidationAbort)
+  and the module docstring. Low-priority builder-comment cleanup; deferred.
+- **Gap.** Create the new skill dir + file; apply the gallery-pipeline
+  cross-pointer + 1.1 bump; apply the four re-pins; run skills_index.py
+  (manifest gains a 9th row, gallery-pipeline -> 1.1); reinstall the new +
+  edited skills. On push, no post-push re-pin needed -- Move 2's skills
+  describe already-pushed stable trees (unlike Move 1).
+- **Ref.** Fable review doc 2026-07-12, section 2.1 (new-skill argument),
+  seed 3. Parent: L-002. Sibling: L-115 (Move 1). Subsystem: L-098.
+**Tony:** RICE proposed 3/2/85/2 -- yours to finalize.
+**Gap:** none -- move to section C.
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -2535,7 +2602,7 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
 ---
 
 #### [L-104] Gallery Studio preset generator
-<!-- L:104 status:OPEN upd:2026-07-08 section:H flag: rice:2/2/50/2 -->
+<!-- L:104 status:OPEN upd:2026-07-13 section:H flag: rice:2/2/50/2 -->
 - NET-NEW. Author an event window (object, center, {start,end,cadence}, label)
   in the orrery -- comet perihelion, NEO close approach, spacecraft flyby /
   gravity assist / landing -- export params via Gallery Studio; store as a gallery
@@ -2543,6 +2610,32 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   gallery piece), NOT the interactive cache. Fine cadence (minute/hour, 30-60
   frames) lives in the preset. Upstream of the builder's preset slot (unpopulated
   in the first build; Apophis 2029 stays null).
+- **Design refinement (2026-07-13, Phase 2 handoff session).** Two separate
+  preset mechanisms exist in this project, confirmed distinct this session:
+  L-046/L-104 (static Gallery Studio exhibits + event_link breadcrumb) vs. the
+  Phase 1 vocabulary's live `preset_id` scene-spec expansion (OQ-4). This item
+  is the former only -- OQ-4/closeup-shape do not gate it.
+- **Mechanism, worked out concretely:** the precise epoch+position for a
+  curated moment is already computable -- `close_approach_data.py`'s
+  `get_close_approaches`/`fetch_position_at_approach` already does this
+  (Apophis 2029 is its own standalone-test worked example). No new tool
+  needed. Author the event_link entry as a byproduct of the same Gallery
+  Studio session that builds the static exhibit (once L-046 lands), storing
+  {object_slug, epoch, label, exhibit_link} in a small companion data file.
+  Assembler checks this at render time; if the requested window includes the
+  epoch, adds one marker (single-info-marker convention) with the link.
+- **Comet case is free, no curation needed:** every comet already gets an
+  automatic perihelion marker (per-orrery, generated for all comets). Coincide
+  the event_link marker with the existing perihelion marker position --
+  general pattern for every comet at once, verified via golden artifact 7
+  (Halley) in the Phase 2 build sequence.
+- **NEO/spacecraft need genuine curation:** no universal "closest approach"
+  property is inherently noteworthy (most NEOs never warrant one); curated
+  only where a human has actually built a preset for that object/event.
+  Apophis 2029 is the concrete first case, gated on L-046's design
+  conversation, not on anything in the Phase 2 assembler track.
+**Gap unchanged:** still needs L-046's refactor to land first. Design is
+resolved; building is not started.
 
 #### [L-106] Gallery-cache backup + gitignore discipline
 <!-- L:106 status:DONE upd:2026-07-12 section:C flag: rice:2/2/90/1 -->
@@ -2683,71 +2776,6 @@ the still-historical section-3a schema sub-block beyond the reconciliation note.
 render (Mode 5) remains the authority over both AI reviewers.
 **Ref:** GALLERY_BUILD_HANDOFF v0.1 (open-items section); TESTING_PROTOCOL.md; L-109; L-110; L-098 (parent).
 
-#### [L-115] Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7)
-<!-- L:115 status:OPEN upd:2026-07-12 section:H flag: rice:2/2/90/1 -->
-- **What.** Move 1 of the skills-layer update from Fable 5's 2026-07-12
-  Mode 7 review. Five targeted edits, all verified against orrery HEAD
-  7e108b8 by Opus before delivery:
-    - agentic-pre-test 1.1: correct the inverted gray90/SystemButtonFace
-      rationale (palomas_orrery.py has 0 gray90 / 26 SystemButtonFace at
-      HEAD and at the b29ad3f8 cut; real risk is cross-file
-      indistinguishability -- siblings star_visualization_gui.py=5,
-      earth_system_visualization_gui.py=3) + cross-pointer to the
-      gallery-cache-builder gate. [Fable F2]
-    - horizons-orbital-mechanics 1.1: new Small-Body Record Pinning block
-      (short-designation ambiguity; pin comets to 900000XX records: Encke
-      90000091, Halley 90000030); fires_when gains "comet record pinning".
-      [seed 1]
-    - earth-system-pipeline 1.1: fix a phantom GUI name -- MissionSelector /
-      all_scenarios do not exist; real names MissionControlApp,
-      ScenarioPicker, _heat_scenarios(). [Fable F3]
-    - orrery-coding-conventions 1.1: optional "Operational gotchas"
-      docstring block (known-trap + normal-but-scary), PRACTICE. [seed 2]
-    - palomas_orrery.py:1522 comment: Encke 90000002 -> 90000091 (stale
-      recalled record number in an illustrative comment). [Fable F4]
-- **Dropped from the batch:** Fable's provenance-discipline carve-out line
-  -- provenance_scanner.py:382 walks .py only, so SKILL.md is already
-  structurally outside the scan; the line would document a non-existent
-  risk. [verified @7e108b8]
-- **Gap.** Apply the five snippets; bump the four skill version lines to 1.1
-  and re-pin "Cut from ... @ <SHA>" to the POST-PUSH orrery HEAD; run
-  skills_index.py to regenerate the Skill Manifest (horizons fires_when
-  changed); reinstall the four skills to Tony's account. Move 2 (new
-  gallery-cache-builder skill) tracked as a sibling entry when opened.
-- **Ref.** Fable review doc 2026-07-12 (F2/F3/F4, seeds 1-2). Parent: L-002
-  (skills layer).
-**Tony:** RICE proposed 2/2/90/1 -- yours to finalize. One umbrella entry as
-delivered, or split per skill (your call).
-
-#### [L-116] New skill: gallery-cache-builder (Move 2 of the skills update)
-<!-- L:116 status:OPEN upd:2026-07-12 section:H flag: rice:3/2/85/2 -->
-- **What.** Ninth skill, gallery-cache-builder, added for the Phase 1b
-  nightly serving subsystem (L-098) -- Move 2 of Fable 5's 2026-07-12 Mode 7
-  review. Decomposition decision (Tony, this session): NEW skill, not an
-  extension of gallery-pipeline (non-overlapping moments of need; the
-  builder passes every subsystem marker). Authored
-  skills/gallery-cache-builder/SKILL.md in the orrery repo (L-002
-  convention; describes gallery code @ 8e060677 + orrery context @
-  e83fe9ce). Every code fact verified against HEAD before delivery; Fable's
-  cleanup_stale_siblings seed corrected to _sweep_siblings; validation
-  stance corrected (#B3 ABORTs, not WARN -- the code raises).
-  gallery-pipeline bumped to 1.1 with a one-line cross-pointer.
-- **Also in this push (Move 1 follow-through).** Re-pin the four Move-1 skill
-  version lines: the literal placeholder "<ORRERY HEAD after push>" was
-  committed verbatim and is corrected to e83fe9ce (the post-Move-1 orrery
-  HEAD they were verified against).
-- **Spotted, not fixed here.** gallery_cache_builder.py ~line 755 inline
-  comment "guard/B3 WARN" contradicts the code (#B3 raises ValidationAbort)
-  and the module docstring. Low-priority builder-comment cleanup; deferred.
-- **Gap.** Create the new skill dir + file; apply the gallery-pipeline
-  cross-pointer + 1.1 bump; apply the four re-pins; run skills_index.py
-  (manifest gains a 9th row, gallery-pipeline -> 1.1); reinstall the new +
-  edited skills. On push, no post-push re-pin needed -- Move 2's skills
-  describe already-pushed stable trees (unlike Move 1).
-- **Ref.** Fable review doc 2026-07-12, section 2.1 (new-skill argument),
-  seed 3. Parent: L-002. Sibling: L-115 (Move 1). Subsystem: L-098.
-**Tony:** RICE proposed 3/2/85/2 -- yours to finalize.
-
 ## W. WEB PUBLICATION TRACK
 
 Governing document: `documentation/MASTER_PLAN_WEB_PUBLICATION.md`.
@@ -2847,8 +2875,7 @@ no callers break. Closes the second seam identified in master plan S2.
   settled decisions, 8 validation invariants, coverage index schema, feature
   rendering architecture. Next: Phase 1b build (CORS check, export script).
   Master plan at v10.
-**Gap:** the master plan IS the gap document. Current phase: Phase 1b build
-(L-098).
+**Gap:** the master plan IS the gap document. Current phase: Phase 2.
 **Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10; PHASE1_SCENE_SPEC_VOCABULARY.md;
 DATA_SERVING_BROAD_ANALYSIS.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md v0.3;
 Fable 5 survey + L-079 deep dive; Opus 4.8 convergence handoff + reviews;

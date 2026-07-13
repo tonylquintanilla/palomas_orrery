@@ -6,7 +6,7 @@ fires_when: Nightly builder, atomic swap, coverage_index, serving cache, objects
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Skill version: 1.0 | Cut from tonyquintanilla.github.io @ 8e060677 (code) and palomas_orrery @ e83fe9ce (context) | 2026-07-12
+Skill version: 1.1 | Cut from tonyquintanilla.github.io @ a08bdd10 (code) and palomas_orrery @ af58f7f8 (context) | 2026-07-12
 
 The standalone nightly builder that fetches fresh JPL Horizons data and deploys
 the web gallery's served cache. A GALLERY-repo tool; this skill is authored in
@@ -99,6 +99,36 @@ round-trip discipline the project uses by hand, baked into the builder.
   Horizons.
 - Layer 3 -- scheduling (unattended nightly). Correctness/operability items
   gate this (gap-aware catch-up, a health summary) -- see L-098 / L-111.
+
+## Adding a new object -- the full sequence, and where it silently breaks
+
+Beyond the three-layer gate above, onboarding a genuinely NEW object needs
+two things the general gate description doesn't spell out:
+
+- **--first-build is required, not --nightly, for a new non-spacecraft
+  object.** Verified in code: only first-build mode fetches the full
+  365-day backfill window for non-spacecraft objects; nightly mode only
+  fetches [today - freeze, today] -- a few days. Add an object and run
+  --nightly and it onboards with almost no data. first-build also carries
+  the N3 floor check (rejects a clipped/truncated fetch), which nightly
+  skips. Spacecraft are the one exception: a genuinely new one has no
+  prior points, so the code auto-detects this (`not points`) and
+  backfills fully regardless of mode.
+- **Layer 1's offline suite has a hardcoded served-object COUNT
+  assertion** (`check(len(objs) == N, ...)`), separate from the per-object
+  ELEMS mock keys. Adding a new object's ELEMS entry is necessary but not
+  sufficient -- the count itself needs bumping too, or Layer 1 fails on a
+  fully correct addition. Caught concretely adding Halley (11 -> 12): the
+  ELEMS/fake_solution_tp mocks were right the first pass; the count
+  assertion was the thing still pointing at the old total.
+
+Full sequence for onboarding: (1) source horizons_id/id_type/dates from
+celestial_objects.py rather than deriving them -- usually already there
+(see horizons-orbital-mechanics for the record-pinning rule); (2) add the
+ELEMS mock entry (+ fake_solution_tp branch if Tp-anchored) AND bump the
+count assertion; (3) Layer 1 from a clean checkout; (4) Layer 2:
+--dry-run --object <slug> against real Horizons; (5) --first-build (not
+--nightly, per above).
 
 ## Fetch facts proven live (2026-07-11 gate)
 
