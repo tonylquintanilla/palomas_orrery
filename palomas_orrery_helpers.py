@@ -16,10 +16,6 @@ Module updated: April 2026 with Anthropic's Claude Opus 4.6
 #Paloma's Orrery - Solar System Visualization Tool
 
 # Import necessary libraries
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
-from tkinter import scrolledtext
 from astroquery.jplhorizons import Horizons
 import numpy as np
 from datetime import datetime, timedelta
