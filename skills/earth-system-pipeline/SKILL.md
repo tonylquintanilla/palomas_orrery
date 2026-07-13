@@ -6,7 +6,7 @@ fires_when: KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY human-cost visualization
 
 # Earth System Pipeline
 
-Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push> | 2026-07-12
+Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push>   ->   e83fe9ce | 2026-07-12
 Sources: earth_system_generator.py, earth_system_common.py,
 food_insecurity_generator.py, scenarios_* at HEAD; western heatwave handoff
 v9; food insecurity design + build handoffs v2.

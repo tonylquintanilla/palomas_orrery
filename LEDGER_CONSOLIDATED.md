@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*74 live items; 59 need attention (`!`); 74 RICE-scored; 36 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*75 live items; 60 need attention (`!`); 75 RICE-scored; 36 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -322,6 +322,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-106 | Gallery-cache backup + gitignore discipline | OPEN | 3.6 | 2026-07-09 |
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
 | ! | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | OPEN | 3.6 | 2026-07-12 |
+| ! | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | OPEN | 2.5 | 2026-07-12 |
 | ! | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | OPEN | 1.8 | 2026-07-09 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
@@ -1794,6 +1795,35 @@ errors on a pre-SPK spacecraft start.
 protocol amendment that produced them -- adopt in the skills/protocol layer.
 **Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; GALLERY_BUILDER_MANIFEST_v2.md (B-6); L-109; L-110; L-111.
 **Gap:** none -- move to section C
+
+#### [L-116] New skill: gallery-cache-builder (Move 2 of the skills update)
+<!-- L:116 status:OPEN upd:2026-07-12 section:H flag: rice:3/2/85/2 -->
+- **What.** Ninth skill, gallery-cache-builder, added for the Phase 1b
+  nightly serving subsystem (L-098) -- Move 2 of Fable 5's 2026-07-12 Mode 7
+  review. Decomposition decision (Tony, this session): NEW skill, not an
+  extension of gallery-pipeline (non-overlapping moments of need; the
+  builder passes every subsystem marker). Authored
+  skills/gallery-cache-builder/SKILL.md in the orrery repo (L-002
+  convention; describes gallery code @ 8e060677 + orrery context @
+  e83fe9ce). Every code fact verified against HEAD before delivery; Fable's
+  cleanup_stale_siblings seed corrected to _sweep_siblings; validation
+  stance corrected (#B3 ABORTs, not WARN -- the code raises).
+  gallery-pipeline bumped to 1.1 with a one-line cross-pointer.
+- **Also in this push (Move 1 follow-through).** Re-pin the four Move-1 skill
+  version lines: the literal placeholder "<ORRERY HEAD after push>" was
+  committed verbatim and is corrected to e83fe9ce (the post-Move-1 orrery
+  HEAD they were verified against).
+- **Spotted, not fixed here.** gallery_cache_builder.py ~line 755 inline
+  comment "guard/B3 WARN" contradicts the code (#B3 raises ValidationAbort)
+  and the module docstring. Low-priority builder-comment cleanup; deferred.
+- **Gap.** Create the new skill dir + file; apply the gallery-pipeline
+  cross-pointer + 1.1 bump; apply the four re-pins; run skills_index.py
+  (manifest gains a 9th row, gallery-pipeline -> 1.1); reinstall the new +
+  edited skills. On push, no post-push re-pin needed -- Move 2's skills
+  describe already-pushed stable trees (unlike Move 1).
+- **Ref.** Fable review doc 2026-07-12, section 2.1 (new-skill argument),
+  seed 3. Parent: L-002. Sibling: L-115 (Move 1). Subsystem: L-098.
+**Tony:** RICE proposed 3/2/85/2 -- yours to finalize.
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
