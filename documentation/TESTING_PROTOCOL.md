@@ -22,7 +22,7 @@ LOGIC; only the live render on Tony's hardware proves the OUTPUT.
 
 Run: `python3 tools/test_gallery_cache_builder_offline.py`
 State: 75 checks, 0 failures. Mocks the Horizons fetch layer (no network); must
-run from a clean checkout (config resolved from data/solar-system/, A-8).
+ run from a clean checkout (config resolved from data/objects_config.json, outside the swap dir -- A-8, L-114).
 
 **tony**: should be 75 checks not 68. Running in Windows so the command is python not python3.
 

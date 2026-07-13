@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*75 live items; 57 need attention (`!`); 75 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*76 live items; 58 need attention (`!`); 76 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -247,6 +247,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Priority -- Real bugs
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-114 | objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder) | OPEN | 16.2 | 2026-07-12 |
 | ! | L-012 | Osculating pre-fetch false-provenance messages | OPEN [CRIT] | 3.6 | 2026-06-21 |
 |  | L-013 | Mercury 2019-epoch anomaly | DEFERRED | 0.1 | 2026-06-15 |
 
@@ -1887,6 +1888,52 @@ protocol amendment that produced them -- adopt in the skills/protocol layer.
   inference dressed as fact; Tony's domain knowledge overrode it (Observation
   Override).
   **Tony:** this was a one-time observation. i do not know what caused it. pending better definition. 
+
+#### [L-114] objects_config.json stranded by the atomic swap; also blocks crash-recovery (gallery builder)
+<!-- L:114 status:OPEN upd:2026-07-12 section:D.Priority flag: rice:3/3/90/0.5 -->
+- **What.** In gallery_cache_builder.py (GALLERY repo) the config was read from
+  inside data/solar-system/ -- the exact directory the whole-generation atomic
+  swap (atomic_swap_dir) replaces wholesale. It is only ever READ there, never
+  copied into staging like coverage_index.json / feature_configs.json are, so
+  every successful real (non-dry-run) build silently swapped it away into
+  data/solar-system.prev/, invisible until the next command hit
+  FileNotFoundError. Found live 2026-07-11 (Sonnet 5 live-gate) on the real
+  --first-build.
+- **Compounding failure.** main() calls load_config() BEFORE run_build(), hence
+  before recover_incomplete_swap(). A real crash mid-swap leaves the live dir
+  missing (only .prev holds the config), so load_config() dies before the
+  self-healing recovery can run -- no built-in path back. Reproduced live.
+- **Fix (chosen: move OUT, not copy in).** Relocate the config to
+  data/objects_config.json, a sibling outside the swap blast radius. Closes
+  BOTH failure modes at once -- the swap can't strand it, and load_config() no
+  longer depends on a directory a crash may have left mid-swap. atomic_swap_dir
+  and cleanup_stale_siblings only touch dirs named after out_dir, so a sibling
+  file is never in scope (verified by reading both).
+- **State at gallery HEAD 661cddb [verified @661cddb].**
+    - DONE + committed: the config file now lives at data/objects_config.json
+      (Encke 90000091 fix included); data/solar-system/objects_config.json is
+      gone (404).
+    - NOT yet applied: gallery_cache_builder.py still DEFAULTS --config to the
+      OLD path (line ~1085), so a bare --nightly / --first-build at HEAD
+      FileNotFoundErrors on the default -- only explicit
+      --config data/objects_config.json works. HEAD is half-fixed (file moved,
+      code not); that is why status is OPEN, not DONE.
+- **Gap.** Apply FOUR edits and push, then re-run the offline suite from a clean
+  clone as the acceptance check: (1) gallery_cache_builder.py argparse --config
+  default -> 'data/objects_config.json'; (2) its module docstring (new config home
+  + operational notes); (3) test_gallery_cache_builder_offline.py:79 ->
+  data/objects_config.json (+ the line-77 comment); (4) orrery
+  documentation/TESTING_PROTOCOL.md:25 config-path prose. The moved config had
+  FOUR consumers -- builder default, offline-test primary path, offline-test
+  comment, TESTING_PROTOCOL prose; the first fix swept two, Fable's F1 caught the
+  other two. Acceptance = the offline suite passes from a clean checkout (that
+  green run IS the proof every consumer moved). All four drafted + verified
+  2026-07-12; on push, flip to DONE and re-pin the gallery SHA.
+**Tony:** RICE proposed 3/3/90/0.5 (hits every real build; tiny effort, file
+already moved) -- yours to finalize.
+**Ref:** GALLERY tools/gallery_cache_builder.py (argparse --config default;
+load_config; atomic_swap_dir; recover_incomplete_swap; main() call order).
+L-098 (parent). Found 2026-07-11 (Sonnet 5); fixed 2026-07-12 (Opus 4.8).  
 
 ### D.Structural -- dead-code / honest shell files (Phase 3)
 
