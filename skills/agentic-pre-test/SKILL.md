@@ -6,7 +6,7 @@ fires_when: BEFORE delivering complete files/agentic code; after data-content sw
 
 # Agentic Pre-Test Protocol [CRITICAL]
 
-Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push>   ->   e83fe9ce | 2026-07-12
+Skill version: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 (Agentic Pre-Test Protocol).
 Run before delivery. Catches runtime errors Tony would otherwise hit.
 Division of labor: Claude covers Syntax + Runtime; Tony covers Visual +

@@ -6,7 +6,7 @@ fires_when: Horizons queries, centers, frames, osculating elements, encounters, 
 
 # Horizons and Orbital Mechanics Reference
 
-Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push>   ->   e83fe9ce | 2026-07-12
+Skill version: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
 
 ## Horizons Center Body Rules
