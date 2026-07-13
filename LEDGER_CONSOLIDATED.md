@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*75 live items; 60 need attention (`!`); 75 RICE-scored; 36 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*72 live items; 57 need attention (`!`); 72 RICE-scored; 40 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -319,11 +319,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### H. Gallery / Studio Track
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-106 | Gallery-cache backup + gitignore discipline | OPEN | 3.6 | 2026-07-09 |
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
 | ! | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | OPEN | 3.6 | 2026-07-12 |
 | ! | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | OPEN | 2.5 | 2026-07-12 |
-| ! | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | OPEN | 1.8 | 2026-07-09 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
 | ! | L-058 | Open Studio items (May-5 handoff, checked @2f40d9d) | OPEN | 1.5 | 2026-06-08 |
@@ -343,7 +341,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-080 | Characterization harness (scene equivalence gate) | PROPOSED | 1.6 | 2026-07-03 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
-| ! | L-098 | Data serving pipeline (Phase 1b) | OPEN | 1.5 | 2026-07-09 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
 
 ### W.Deferred -- Web Publication deferred (captured)
@@ -362,19 +359,23 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### C. Reconciled -- Done (closed; for the record)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+|  | L-117 | Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock | DONE | 34.2 | 2026-07-12 |
 |  | L-003 | Protocol amendment candidates (for v3.29) | DONE | 5.4 | 2026-06-22 |
 |  | L-065 | European heat wave heat map (Earth System track) | DONE | 4.8 | 2026-06-25 |
 |  | L-064 | Provenance-scanner format sweep -- Earth System family | DONE | 4.5 | 2026-06-30 |
 |  | L-075 | KMZ info-card "3+5" redesign -- compact header + tappable info balloon (Earth System engine) | DONE | 4.3 | 2026-06-30 |
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
+|  | L-106 | Gallery-cache backup + gitignore discipline | DONE | 3.6 | 2026-07-12 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
 |  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
+|  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
+|  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
@@ -1796,34 +1797,28 @@ protocol amendment that produced them -- adopt in the skills/protocol layer.
 **Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; GALLERY_BUILDER_MANIFEST_v2.md (B-6); L-109; L-110; L-111.
 **Gap:** none -- move to section C
 
-#### [L-116] New skill: gallery-cache-builder (Move 2 of the skills update)
-<!-- L:116 status:OPEN upd:2026-07-12 section:H flag: rice:3/2/85/2 -->
-- **What.** Ninth skill, gallery-cache-builder, added for the Phase 1b
-  nightly serving subsystem (L-098) -- Move 2 of Fable 5's 2026-07-12 Mode 7
-  review. Decomposition decision (Tony, this session): NEW skill, not an
-  extension of gallery-pipeline (non-overlapping moments of need; the
-  builder passes every subsystem marker). Authored
-  skills/gallery-cache-builder/SKILL.md in the orrery repo (L-002
-  convention; describes gallery code @ 8e060677 + orrery context @
-  e83fe9ce). Every code fact verified against HEAD before delivery; Fable's
-  cleanup_stale_siblings seed corrected to _sweep_siblings; validation
-  stance corrected (#B3 ABORTs, not WARN -- the code raises).
-  gallery-pipeline bumped to 1.1 with a one-line cross-pointer.
-- **Also in this push (Move 1 follow-through).** Re-pin the four Move-1 skill
-  version lines: the literal placeholder "<ORRERY HEAD after push>" was
-  committed verbatim and is corrected to e83fe9ce (the post-Move-1 orrery
-  HEAD they were verified against).
-- **Spotted, not fixed here.** gallery_cache_builder.py ~line 755 inline
-  comment "guard/B3 WARN" contradicts the code (#B3 raises ValidationAbort)
-  and the module docstring. Low-priority builder-comment cleanup; deferred.
-- **Gap.** Create the new skill dir + file; apply the gallery-pipeline
-  cross-pointer + 1.1 bump; apply the four re-pins; run skills_index.py
-  (manifest gains a 9th row, gallery-pipeline -> 1.1); reinstall the new +
-  edited skills. On push, no post-push re-pin needed -- Move 2's skills
-  describe already-pushed stable trees (unlike Move 1).
-- **Ref.** Fable review doc 2026-07-12, section 2.1 (new-skill argument),
-  seed 3. Parent: L-002. Sibling: L-115 (Move 1). Subsystem: L-098.
-**Tony:** RICE proposed 3/2/85/2 -- yours to finalize.
+#### [L-117] Offline suite red at HEAD: Encke id drift (2P -> 90000091) not mirrored in the mock
+<!-- L:117 status:DONE upd:2026-07-12 section:C flag: rice:3/3/95/0.25 -->
+- **What.** tools/test_gallery_cache_builder_offline.py mocks Horizons by
+  horizons_id: ELEMS keys and fake_solution_tp both keyed '2P'. The live-gate
+  Encke pin (config 2P -> 90000091) was never mirrored here, so the mock
+  returned no data for '90000091', the build dropped encke, and objs['encke']
+  KeyErrored. RED from a clean clone -- reached ~22 checks, then died.
+- **Why it hid.** F1's FileNotFoundError (fixed in the L-114 push) masked
+  this: prior runs died at config-load before reaching the encke assertion
+  (line 138), so no complete green run ever surfaced it. F1's stated
+  acceptance ("suite green from a clean clone") was never actually met --
+  the path fix made the suite RUN, revealing the next failure.
+- **Fix (verified green + pushed).** Two lines: ELEMS key '2P' -> '90000091';
+  fake_solution_tp branch '2P' -> '90000091'. Green three ways (Opus clone,
+  Tony Windows run, PASS 75 checks 0 failures) and LIVE at gallery HEAD
+  a08bdd10. The true completion of L-114's F1 acceptance and the real green
+  gate for L-098 step 1.
+- **Ref.** tools/test_gallery_cache_builder_offline.py (ELEMS ~line 26,
+  fake_solution_tp ~line 63). Parent L-098; sibling of L-114/F1. Connects to
+  the open "should Encke be in the tranche" question (unresolved; if it later
+  resolves to REMOVE, drop encke from config + mock + assertions).
+
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -2550,7 +2545,7 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
   in the first build; Apophis 2029 stays null).
 
 #### [L-106] Gallery-cache backup + gitignore discipline
-<!-- L:106 status:OPEN upd:2026-07-09 section:H flag: rice:2/2/90/1 -->
+<!-- L:106 status:DONE upd:2026-07-12 section:C flag: rice:2/2/90/1 -->
 - **What.** The gallery raw archive (data/solar-system/raw/) is now an
   irreplaceable fetched-once asset (same class as the orrery Horizons cache).
   v0.3 specced only ROLLBACK (git history), not BACKUP. Add a SEPARATE scheduled
@@ -2577,6 +2572,16 @@ never held un-backed-up). Wire the scheduled action to observe the nightly commi
 add the gitignore line; verify at manifest S10 steps 2 and 9.
 **Ref:** GALLERY_BUILDER_MANIFEST v2 (S8, F9, pre-build gate 3);
 GALLERY_DATA_SOURCE_HANDOFF v0.4 (change 5); L-098 (parent).
+**Resolution (2026-07-12).** Off-repo backup requirement met by existing
+background coverage, not a new action: the repo tree lives under
+C:\Users\tonyq\OneDrive\Desktop\python_work, so OneDrive continuously syncs
+the whole working tree (raw/ included) off-machine (verified: gallery repo
+folder green "available on this device"); Google Cloud + Windows backup layer
+on top; raw/ is also committed to git (GitHub). The .gitignore entry
+(data/_backup/) was already present. The explicit copy-raw/-to-_backup/
+scheduled action is NOT built -- redundant with OneDrive folder-level backup +
+version history; building it would duplicate infrastructure.
+**Gap:** none -- move to section C
 
 #### [L-107] Gallery builder copy-with-provenance sync register
 <!-- L:107 status:OPEN upd:2026-07-09 section:H flag: rice:1/2/90/0.5 -->
@@ -2607,7 +2612,7 @@ test. A periodic automated diff check is a possible follow-on (deferred).
 tools/gallery_cache_builder.py; L-098 (parent).
 
 #### [L-108] Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation
-<!-- L:108 status:OPEN upd:2026-07-09 section:H flag: rice:2/1/90/1 -->
+<!-- L:108 status:DONE upd:2026-07-12 section:C flag: rice:2/1/90/1 -->
 - **What.** MASTER_PLAN_INTERACTIVE_GALLERY.md (v10) is STALE on Phase 1b: its
   Status line reads "converged v0.3" while its own changelog reads v0.4
   (internal inconsistency), and -- more importantly -- section-5 Phase 1b Deliverable
@@ -2631,6 +2636,7 @@ version v10 -> v11. Transactional patch, 16 edits each matched exactly once; zer
 new non-ASCII. REMAINING (optional, low priority): bullet-by-bullet cleanup of
 the still-historical section-3a schema sub-block beyond the reconciliation note.
 **Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
+**Gap:** none -- move to section C
 
 #### [L-111] Gallery builder Pass 5 -- operability + deferred hardening
 <!-- L:111 status:OPEN upd:2026-07-10 section:H flag: rice:2/2/85/2 -->
@@ -2712,6 +2718,35 @@ render (Mode 5) remains the authority over both AI reviewers.
   (skills layer).
 **Tony:** RICE proposed 2/2/90/1 -- yours to finalize. One umbrella entry as
 delivered, or split per skill (your call).
+
+#### [L-116] New skill: gallery-cache-builder (Move 2 of the skills update)
+<!-- L:116 status:OPEN upd:2026-07-12 section:H flag: rice:3/2/85/2 -->
+- **What.** Ninth skill, gallery-cache-builder, added for the Phase 1b
+  nightly serving subsystem (L-098) -- Move 2 of Fable 5's 2026-07-12 Mode 7
+  review. Decomposition decision (Tony, this session): NEW skill, not an
+  extension of gallery-pipeline (non-overlapping moments of need; the
+  builder passes every subsystem marker). Authored
+  skills/gallery-cache-builder/SKILL.md in the orrery repo (L-002
+  convention; describes gallery code @ 8e060677 + orrery context @
+  e83fe9ce). Every code fact verified against HEAD before delivery; Fable's
+  cleanup_stale_siblings seed corrected to _sweep_siblings; validation
+  stance corrected (#B3 ABORTs, not WARN -- the code raises).
+  gallery-pipeline bumped to 1.1 with a one-line cross-pointer.
+- **Also in this push (Move 1 follow-through).** Re-pin the four Move-1 skill
+  version lines: the literal placeholder "<ORRERY HEAD after push>" was
+  committed verbatim and is corrected to e83fe9ce (the post-Move-1 orrery
+  HEAD they were verified against).
+- **Spotted, not fixed here.** gallery_cache_builder.py ~line 755 inline
+  comment "guard/B3 WARN" contradicts the code (#B3 raises ValidationAbort)
+  and the module docstring. Low-priority builder-comment cleanup; deferred.
+- **Gap.** Create the new skill dir + file; apply the gallery-pipeline
+  cross-pointer + 1.1 bump; apply the four re-pins; run skills_index.py
+  (manifest gains a 9th row, gallery-pipeline -> 1.1); reinstall the new +
+  edited skills. On push, no post-push re-pin needed -- Move 2's skills
+  describe already-pushed stable trees (unlike Move 1).
+- **Ref.** Fable review doc 2026-07-12, section 2.1 (new-skill argument),
+  seed 3. Parent: L-002. Sibling: L-115 (Move 1). Subsystem: L-098.
+**Tony:** RICE proposed 3/2/85/2 -- yours to finalize.
 
 ## W. WEB PUBLICATION TRACK
 
@@ -2897,7 +2932,7 @@ decision follows L-088 (Phase 0).
 **Ref:** Fable 5 review of v4 (finding 1); master plan S4b.
 
 #### [L-098] Data serving pipeline (Phase 1b)
-<!-- L:098 status:OPEN upd:2026-07-09 section:W.Active flag: rice:3/3/50/3 -->
+<!-- L:098 status:DONE upd:2026-07-12 section:C flag: rice:3/3/50/3 -->
 - **What.** Serve solar-system orbits to the browser gallery: osculating
   elements (the orbit) + direct-frame position vectors (the actual-motion
   trace), plus a coverage index the browser reads. Goal unchanged since v0.3;
@@ -3025,6 +3060,11 @@ PHASE1B_STAGE2_TEST_PROTOCOL.md; PHASE1B_BUILD_MANIFEST_v4.md;
 PHASE1B_MODEL_CORRECTION_HANDOFF.md; PHASE1B_DATA_SERVING_DESIGN_HANDOFF.md
 v0.6; DATA_SERVING_BROAD_ANALYSIS.md; export_orbit_cache.py; L-078 (ROLE_MAP);
 master plan v10 §3a, §5 Phase 1b.
+**Note:** Closed 2026-07-12: builder built,
+offline-verified (75/0 clean clone), live-gated 2026-07-11, deployed to gallery
+data/solar-system/, backup covered (L-106). Children: L-102/L-113 (thinning,
+deferred), L-107 (provenance register), L-111 (unattended-nightly, follow-on).
+**Gap:** none -- move to section C
 
 ### W.Deferred -- captured, not yet actionable
 

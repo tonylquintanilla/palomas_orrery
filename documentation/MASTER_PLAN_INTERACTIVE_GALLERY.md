@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v11 -- Phase 1b BUILT + DEPLOYED (v0.4 fetch-fresh). Live dry-run gate passed 2026-07-11; offline suite green from a clean clone (L-114 config fix + L-117 mock fix); served cache live at gallery data/solar-system/. Close pending only the backup action (L-106).
+**Status:** v11 -- Phase 1b (data-serving pipeline) COMPLETE + DEPLOYED (v0.4 fetch-fresh). Live dry-run gate passed 2026-07-11; offline suite green from a clean clone; served cache live at gallery data/solar-system/; raw archive backed up off-repo (OneDrive + git + Google Cloud). L-098 closed 2026-07-12. Next: unattended nightly scheduling (L-111 correctness/operability items) is a separate follow-on.
 **Base:** orrery @ `ca5c052`, gallery @ `4b086a6` (remediated builder pending re-push)
 **Date begun:** July 3, 2026
 **Last updated:** July 9, 2026
