@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** Draft v11 — Phase 1b design converged (v0.4); builder built + offline-verified July 9, live dry-runs pending.
+**Status:** v11 -- Phase 1b BUILT + DEPLOYED (v0.4 fetch-fresh). Live dry-run gate passed 2026-07-11; offline suite green from a clean clone (L-114 config fix + L-117 mock fix); served cache live at gallery data/solar-system/. Close pending only the backup action (L-106).
 **Base:** orrery @ `ca5c052`, gallery @ `4b086a6` (remediated builder pending re-push)
 **Date begun:** July 3, 2026
 **Last updated:** July 9, 2026
