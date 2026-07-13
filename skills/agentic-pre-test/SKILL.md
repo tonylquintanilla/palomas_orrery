@@ -6,7 +6,7 @@ fires_when: BEFORE delivering complete files/agentic code; after data-content sw
 
 # Agentic Pre-Test Protocol [CRITICAL]
 
-Skill version: 1.0 | Cut from palomas_orrery @ b29ad3f8 | July 1, 2026
+Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push> | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 (Agentic Pre-Test Protocol).
 Run before delivery. Catches runtime errors Tony would otherwise hit.
 Division of labor: Claude covers Syntax + Runtime; Tony covers Visual +
@@ -27,11 +27,15 @@ rm _pretest_throwaway.py
 ## [CRITICAL] Swap on a THROWAWAY copy; never restore-in-place
 
 The SystemButtonFace<->gray90 sed round trip is NOT idempotent:
-palomas_orrery.py natively contains 26 legitimate gray90 literals, so a
-gray90->SystemButtonFace restore converts those real values too, silently
-corrupting the delivered file. Test on a copy, discard the copy; the
-deliverable is never edited by the pre-test. (Caught June 9, 2026;
-practice every session since.)
+palomas_orrery.py contains 26 SystemButtonFace literals and 0 native
+gray90, so the test swap yields gray90 literals indistinguishable from
+NATIVE gray90 -- which DOES exist in sibling GUI files
+(star_visualization_gui.py has 5, earth_system_visualization_gui.py has 3
+at the time of writing). A gray90->SystemButtonFace restore therefore
+cannot tell converted from legitimate values; run it on the wrong file, or
+after the counts drift, and it silently corrupts the deliverable. Test on a
+copy, discard the copy; the deliverable is never edited by the pre-test.
+(Caught June 9, 2026; practice every session since.)
 
 Background: SystemButtonFace is a Tk color name that resolves on Windows
 but not Linux/macOS. The sed swap is a test workaround, not a fix; the
@@ -69,6 +73,9 @@ map, and the resident Verify Execution gate for the principle.
 Not required for: single Mode 1 line snippets Tony will apply and render
 himself (the render is the gate there), pure documentation, design
 sessions.
+Gallery-repo builder deliverables have their own layered gate (offline
+suite + live dry-run + schedule) -- see the gallery-cache-builder skill and
+documentation/TESTING_PROTOCOL.md, not this protocol.
 
 ## Deferred Pipelines
 

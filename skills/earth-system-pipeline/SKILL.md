@@ -6,7 +6,7 @@ fires_when: KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY human-cost visualization
 
 # Earth System Pipeline
 
-Skill version: 1.0 | Cut from palomas_orrery @ b29ad3f8 | July 1, 2026
+Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push> | 2026-07-12
 Sources: earth_system_generator.py, earth_system_common.py,
 food_insecurity_generator.py, scenarios_* at HEAD; western heatwave handoff
 v9; food insecurity design + build handoffs v2.
@@ -30,8 +30,11 @@ fast path that skips the full pipeline. Build-stamped overlay naming
 earth_system_generator.py is the shared SCALAR engine (gridded fields):
 run_scenario orchestrates fetch -> spikes KML -> heatmap KML -> impact KML
 -> cards -> teaser -> package. Scenario modules provide a SCENARIOS list of
-dicts plus a fetch function; the GUI (MissionSelector) extends
-all_scenarios from each module's SCENARIOS. Tony's rule: "The engine should
+dicts plus a fetch function; _heat_scenarios() in earth_system_generator.py aggregates the scalar-engine
+modules' SCENARIOS lists (food insecurity is deliberately NOT aggregated
+there -- it has its own generator and its own controller entry point,
+MissionControlApp in earth_system_controller.py, with the shared
+ScenarioPicker from earth_system_common). Tony's rule: "The engine should
 be centralized and the scenarios connect to it."
 
 Vector/categorical layers (IPC food insecurity polygons) get a DEDICATED

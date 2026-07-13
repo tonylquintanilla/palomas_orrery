@@ -1519,7 +1519,7 @@ def _is_comet(obj_info):
         return True
     
     # Numeric record numbers for periodic comets (90000000+)
-    # Halley = 90000030, Encke = 90000002, etc.
+    # Halley = 90000030, Encke = 90000091, etc.
     if obj_id.isdigit() and len(obj_id) >= 8:
         try:
             if int(obj_id) >= 90000000:

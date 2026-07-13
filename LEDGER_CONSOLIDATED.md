@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*76 live items; 58 need attention (`!`); 76 RICE-scored; 33 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*74 live items; 59 need attention (`!`); 74 RICE-scored; 36 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -321,9 +321,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-106 | Gallery-cache backup + gitignore discipline | OPEN | 3.6 | 2026-07-09 |
 | ! | L-107 | Gallery builder copy-with-provenance sync register | OPEN | 3.6 | 2026-07-09 |
-|  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
-|  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
-|  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
+| ! | L-115 | Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7) | OPEN | 3.6 | 2026-07-12 |
 | ! | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | OPEN | 1.8 | 2026-07-09 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.7 | 2026-07-10 |
 | ! | L-073 | Gallery export-emits-JSON -- fold the manual json_converter run into Export | OPEN | 1.6 | 2026-06-26 |
@@ -370,6 +368,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-076 | Earth System shared module (earth_system_common) + 3+5 generalized to food | DONE | 4.3 | 2026-06-30 |
 |  | L-097 | skills_index.py -- Skill Manifest auto-generation (process/tooling) | DONE | 3.2 | 2026-07-04 |
 |  | L-069 | Food Insecurity Phase-2 -- Phase-5 "hidden Catastrophe" reveal (Darfur/Kordofan) | DONE | 2.8 | 2026-06-24 |
+|  | L-109 | Fable 5 adversarial review remediation (builder Pass 1+2) | DONE | 2.8 | 2026-07-10 |
+|  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
+|  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
@@ -1653,8 +1654,29 @@ repo HEAD 1f5901e.
 **Ref:** L-002 (parent), ledger_index.py (pattern), project_instructions_v3_31.md
 Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 
+#### [L-099] Solar System Explorer interactive exhibit
+<!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->
+- **What.** First interactive exhibit in the gallery. Pyodide + NumPy computes
+  Keplerian orbits from mean orbital elements; Plotly.js renders 3D figure.
+  Planet toggles, date picker, info panel, consent gate.
+- **Done.** `interactive.html` deployed to `palomasorrery.com/interactive.html`
+  (created `300ac30c`, updated `a85a4fa`, July 6, 2026). Tested on desktop
+  Chrome and iPhone Safari. Consent gate explains Pyodide with explicit opt-in
+  (localStorage persistence). Gallery dark-space aesthetic, Cormorant Garamond
+  + DM Sans fonts, mobile-responsive.
+- **Architecture.** Architecture A (lightweight): Python/NumPy computes orbit
+  geometry, JavaScript builds Plotly traces, `Plotly.newPlot()` renders.
+  No plotly Python package in Pyodide. Frozen as an "instant tier" exhibit
+  under the two-tier model (A/B fork resolved: B′ for Phase 2+ data-backed
+  exhibits, A retained for frozen pedagogical demos). Option C viewer
+  (master plan §2a): `index.html` serves curated cards; `interactive.html`
+  serves interactive exhibits via `?exhibit=` parameter (hardcoded in v1).
+- **Next iteration:** Plot refinements (Mercury color contrast, scale presets,
+  outer planet zoom, additional controls).
+**Ref:** Master plan v10 §2a, §5 Phase 0; gallery @ `a85a4fa`.
+
 #### [L-109] Fable 5 adversarial review remediation (builder Pass 1+2)
-<!-- L:109 status:DONE upd:2026-07-10 section:H flag: rice:3/1/95/1 -->
+<!-- L:109 status:DONE upd:2026-07-10 section:C flag: rice:3/1/95/1 -->
 - **What.** Fable 5 (Mode 7 collegial) adversarially reviewed the shipped
   gallery_cache_builder.py: 11 code findings (A-1..A-11) + 4 doc (B-1..B-4). All
   verified against the actual code + astroquery 0.4.11 source (fetched, not
@@ -1684,9 +1706,10 @@ remediated build re-pushed by Tony for Fable's second pass.
 whether 2P/Encke's Horizons header carries TP=, and whether Horizons clips or
 errors on a pre-SPK spacecraft start.
 **Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; TESTING_PROTOCOL.md; L-098 (parent); L-102 (pulled forward); L-107 (sync register).
+**Gap:** none -- move to section C
 
 #### [L-110] GPT competitive cross-check remediation (builder Pass 4)
-<!-- L:110 status:DONE upd:2026-07-10 section:H flag: rice:3/1/90/1 -->
+<!-- L:110 status:DONE upd:2026-07-10 section:C flag: rice:3/1/90/1 -->
 - **What.** The SAME review prompt given to Fable 5 was given to GPT (competitive
   Mode 7: same prompt -> two independent reviewers -> compare). GPT reviewed the
   pre-remediation build (gallery a2b7435); most of its list was already closed by
@@ -1727,9 +1750,10 @@ errors on a pre-SPK spacecraft start.
   real things (N1 elevated, N2 entirely) that Fable's pass missed -- while neither
   is authoritative over the live render (Mode 5).
 **Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; TESTING_PROTOCOL.md; L-098 (parent); L-109 (Fable remediation).
+**Gap:** none -- move to section C
 
 #### [L-112] Gallery builder Pass 5: two-reviewer Pass-2 remediation
-<!-- L:112 status:DONE upd:2026-07-10 section:H flag: rice:3/1/95/1 -->
+<!-- L:112 status:DONE upd:2026-07-10 section:C flag: rice:3/1/95/1 -->
 - **What.** Fable 5 + GPT 5.5 COMPETITIVE Pass-2 reviews of the pushed build
   (gallery 0b0f051 / orrery 331eb95). Neither a superset -- each caught a
   blocker-class item the other missed. Verified against code, then remediated.
@@ -1769,27 +1793,7 @@ errors on a pre-SPK spacecraft start.
 **Note:** both Pass-2 reviews independently proposed the competitive-review
 protocol amendment that produced them -- adopt in the skills/protocol layer.
 **Ref:** gallery_cache_builder.py; test_gallery_cache_builder_offline.py; GALLERY_BUILDER_MANIFEST_v2.md (B-6); L-109; L-110; L-111.
-
-#### [L-099] Solar System Explorer interactive exhibit
-<!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->
-- **What.** First interactive exhibit in the gallery. Pyodide + NumPy computes
-  Keplerian orbits from mean orbital elements; Plotly.js renders 3D figure.
-  Planet toggles, date picker, info panel, consent gate.
-- **Done.** `interactive.html` deployed to `palomasorrery.com/interactive.html`
-  (created `300ac30c`, updated `a85a4fa`, July 6, 2026). Tested on desktop
-  Chrome and iPhone Safari. Consent gate explains Pyodide with explicit opt-in
-  (localStorage persistence). Gallery dark-space aesthetic, Cormorant Garamond
-  + DM Sans fonts, mobile-responsive.
-- **Architecture.** Architecture A (lightweight): Python/NumPy computes orbit
-  geometry, JavaScript builds Plotly traces, `Plotly.newPlot()` renders.
-  No plotly Python package in Pyodide. Frozen as an "instant tier" exhibit
-  under the two-tier model (A/B fork resolved: B′ for Phase 2+ data-backed
-  exhibits, A retained for frozen pedagogical demos). Option C viewer
-  (master plan §2a): `index.html` serves curated cards; `interactive.html`
-  serves interactive exhibits via `?exhibit=` parameter (hardcoded in v1).
-- **Next iteration:** Plot refinements (Mercury color contrast, scale presets,
-  outer planet zoom, additional controls).
-**Ref:** Master plan v10 §2a, §5 Phase 0; gallery @ `a85a4fa`.
+**Gap:** none -- move to section C
 ---
 
 ## D. RECONCILED LEDGER -- OPEN
@@ -2642,6 +2646,42 @@ the still-historical section-3a schema sub-block beyond the reconciliation note.
 **Note:** GPT 5.5 produced the cross-check (L-110) that surfaced Q2's teeth; the
 render (Mode 5) remains the authority over both AI reviewers.
 **Ref:** GALLERY_BUILD_HANDOFF v0.1 (open-items section); TESTING_PROTOCOL.md; L-109; L-110; L-098 (parent).
+
+#### [L-115] Skills v1.1 batch: accuracy fixes + two seed blocks (Fable Mode 7)
+<!-- L:115 status:OPEN upd:2026-07-12 section:H flag: rice:2/2/90/1 -->
+- **What.** Move 1 of the skills-layer update from Fable 5's 2026-07-12
+  Mode 7 review. Five targeted edits, all verified against orrery HEAD
+  7e108b8 by Opus before delivery:
+    - agentic-pre-test 1.1: correct the inverted gray90/SystemButtonFace
+      rationale (palomas_orrery.py has 0 gray90 / 26 SystemButtonFace at
+      HEAD and at the b29ad3f8 cut; real risk is cross-file
+      indistinguishability -- siblings star_visualization_gui.py=5,
+      earth_system_visualization_gui.py=3) + cross-pointer to the
+      gallery-cache-builder gate. [Fable F2]
+    - horizons-orbital-mechanics 1.1: new Small-Body Record Pinning block
+      (short-designation ambiguity; pin comets to 900000XX records: Encke
+      90000091, Halley 90000030); fires_when gains "comet record pinning".
+      [seed 1]
+    - earth-system-pipeline 1.1: fix a phantom GUI name -- MissionSelector /
+      all_scenarios do not exist; real names MissionControlApp,
+      ScenarioPicker, _heat_scenarios(). [Fable F3]
+    - orrery-coding-conventions 1.1: optional "Operational gotchas"
+      docstring block (known-trap + normal-but-scary), PRACTICE. [seed 2]
+    - palomas_orrery.py:1522 comment: Encke 90000002 -> 90000091 (stale
+      recalled record number in an illustrative comment). [Fable F4]
+- **Dropped from the batch:** Fable's provenance-discipline carve-out line
+  -- provenance_scanner.py:382 walks .py only, so SKILL.md is already
+  structurally outside the scan; the line would document a non-existent
+  risk. [verified @7e108b8]
+- **Gap.** Apply the five snippets; bump the four skill version lines to 1.1
+  and re-pin "Cut from ... @ <SHA>" to the POST-PUSH orrery HEAD; run
+  skills_index.py to regenerate the Skill Manifest (horizons fires_when
+  changed); reinstall the four skills to Tony's account. Move 2 (new
+  gallery-cache-builder skill) tracked as a sibling entry when opened.
+- **Ref.** Fable review doc 2026-07-12 (F2/F3/F4, seeds 1-2). Parent: L-002
+  (skills layer).
+**Tony:** RICE proposed 2/2/90/1 -- yours to finalize. One umbrella entry as
+delivered, or split per skill (your call).
 
 ## W. WEB PUBLICATION TRACK
 

@@ -6,7 +6,7 @@ fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new vis
 
 # Orrery Coding Conventions
 
-Skill version: 1.0 | Cut from palomas_orrery @ b29ad3f8 | July 1, 2026
+Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push> | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
@@ -107,6 +107,19 @@ Consumed by: primary consumers
 Module updated: [date] with Anthropic's Claude [version]
 """
 ```
+Optional, for modules with real operational risk (unattended
+infrastructure, destructive file operations, cache managers) -- an
+"Operational gotchas" block at the end of the docstring:
+
+    Operational gotchas:
+        KNOWN TRAP: <the one mistake an operator will plausibly make, and
+        its consequence>
+        NORMAL BUT SCARY: <the one alarming-looking state that is actually
+        fine, so nobody "fixes" it>
+
+One line each, only where earned; most modules never need it. (Motivated by
+L-114: the config-swap trap and the .prev directory both needed exactly
+this warning.)
 
 Tooling: module_atlas.py generates MODULE_ATLAS.md; add_docstrings.py
 batch-inserts docstrings. MODULE_ATLAS.md is the prompt artifact -- current

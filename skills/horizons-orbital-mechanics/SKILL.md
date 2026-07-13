@@ -1,12 +1,12 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Skill version: 1.0 | Cut from palomas_orrery @ b29ad3f8 | July 1, 2026
+Skill version: 1.1 | Cut from palomas_orrery @ <ORRERY HEAD after push> | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
 
 ## Horizons Center Body Rules
@@ -24,6 +24,23 @@ Only NUMERIC IDs can be coordinate centers.
 - 20XXXXXX = barycenter; 920XXXXXX = primary; 120XXXXXX = secondary.
 - Derive the primary's position from the secondary via the mass ratio when
   Horizons serves only one member.
+
+## Small-Body Record Pinning (periodic comets)
+
+90000000+ numeric IDs are Horizons small-body RECORD numbers -- one
+specific orbit solution, usually the current apparition. Use them to pin
+periodic comets:
+- A bare short designation ("2P") with id_type='smallbody' resolves
+  AMBIGUOUSLY (Encke: 61 historical apparition records), and adding
+  closest_apparition throws a syntax error -- astroquery prepends the
+  required DES= key only for id_type='designation'/'name', never for
+  'smallbody'.
+- House pattern: pin the specific current record, no apparition flag
+  needed. Halley id='90000030' (celestial_objects.py); Encke '90000091'
+  (gallery objects_config.json). Proven live 2026-07-11.
+- Cost of pinning: a pinned record does NOT auto-track a future JPL
+  solution update. Recheck pinned records periodically, like any frozen
+  upstream identifier.
 
 ## Reference Frame Diagnostic
 
