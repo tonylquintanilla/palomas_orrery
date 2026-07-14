@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*70 live items; 55 need attention (`!`); 70 RICE-scored; 42 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*70 live items; 56 need attention (`!`); 70 RICE-scored; 42 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -336,7 +336,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### W.Active -- Web Publication active phase
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-|  | L-080 | Characterization harness (scene equivalence gate) | PROPOSED | 1.6 | 2026-07-03 |
+| ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
@@ -2883,20 +2883,43 @@ Opus 4.6 + Tony convergence (July 3, 6, 7); Fable 5 vocabulary session (July 4);
 Fable 5 design review (July 7).
 
 #### [L-080] Characterization harness (scene equivalence gate)
-<!-- L:080 status:PROPOSED upd:2026-07-03 section:W.Active flag: rice:1/2/80/1 -->
-- **What.** A tests/ directory with golden-artifact capture for a fixed set of
-  scenes. The harness gates every phase of the web publication initiative: "scene
-  equivalence confirmed, render agrees" before each step.
-- **Scene equivalence** (not identical output): same object set, positions match,
-  display conventions honored (single-info-marker, AU in hover, marker symbols),
-  plus Mode 5 (Tony's visual judgment). Trace ordering, naming, and layout
-  details may legitimately differ. Concrete criteria are a Phase 1 deliverable
-  (L-089).
-- **Includes:** mainloop-suppression fixture (existing practice, extracted once),
-  the three existing test files folded in, golden-artifact capture and comparison.
-**Gap:** spec the harness for scene equivalence (criteria from L-089). Build.
-Additive; no production modules edited.
-**Ref:** Fable 5 survey (L-080 proposal); master plan S5/S6.
+<!-- L:080 status:OPEN upd:2026-07-14 section:W.Active flag: rice:1/2/80/1 -->
+- **What.** A harness that captures a golden semantic fingerprint per scene and
+  gates every phase of the web publication initiative: "scene equivalence
+  confirmed, render agrees" before each step. NOW LIVE and co-evolving (manifest
+  v2 S8 / handoff v0.3 S7): built as `gallery/assembler/harness/fingerprint.py`,
+  seeded at artifact 1 rather than front-loaded.
+- **Scene equivalence** (not identical output): same object set, positions match
+  within tolerance, display conventions honored (single-info-marker, AU in hover,
+  marker symbols), plus Mode 5 (Tony's visual judgment). Trace ordering, naming,
+  and layout details may legitimately differ.
+- **Fingerprint is semantic, not full Plotly JSON** (both manifests + both
+  second-pass reviews agreed). Fields: artifact_id, scene_spec_hash,
+  cache_snapshot_id, resolved date/center/frame, object_slugs, trace_role_counts,
+  feature_keys (the dispatch decision, not the JS-rendered trace), legend_groups,
+  coordinate_bounds, position_samples vs tolerance, warnings. Built from the
+  frozen AssemblyContext AND the rendered output, so both logical and visual
+  regressions are catchable.
+- **First golden LOCKED:** `artifact_1_earth_alone.json`, scene_spec_hash
+  `abbd01094852b57f`. Reproduces identically in CPython and in-browser (Pyodide)
+  -- it characterizes the scene, not the machine. Artifact 1 (Earth alone) Mode 5
+  gate passed 2026-07-14 [render-gated].
+- **Position tolerance** defaults to 0.001 (0.1%); it is a parameter in
+  fingerprint.py, not a hardcoded constant -- tune against real data (manifest S9.1).
+**Tony:** minor adjustments to the artifact-1 golden are still expected (title
+text, theme, styling). Restyles that do NOT touch trace roles/bounds/samples
+leave `abbd01094852b57f` unchanged (free). Any change that DOES move the
+fingerprint needs a deliberate golden regen, with the reason recorded here and in
+the commit message (manifest v2 S8).
+**Gap:** co-evolve the golden set through artifacts 2-7 (each confirmed artifact
+hands the harness its next fingerprint); fold in the mainloop-suppression fixture
+and the three original test files; concretize L-089's criteria against the
+now-real fingerprint. Additive; no production modules edited.
+**Ref:** `gallery/assembler/harness/fingerprint.py`,
+`gallery/assembler/harness/golden/artifact_1_earth_alone.json`,
+`gallery/assembler/tests/test_artifact1_earth.py` [current gallery HEAD];
+manifest v2 S8; handoff v0.3 S7; L-089 (criteria); L-098 (Phase 1b);
+Fable 5 survey (L-080 proposal); master plan S5/S6.
 
 #### [L-088] Gallery integration test (Phase 0)
 <!-- L:088 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/100/1 -->
