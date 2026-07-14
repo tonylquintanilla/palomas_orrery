@@ -1,10 +1,19 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v11 -- Phase 1b (data-serving pipeline) COMPLETE + DEPLOYED (v0.4 fetch-fresh). Live dry-run gate passed 2026-07-11; offline suite green from a clean clone; served cache live at gallery data/solar-system/; raw archive backed up off-repo (OneDrive + git + Google Cloud). L-098 closed 2026-07-12. Next: unattended nightly scheduling (L-111 correctness/operability items) is a separate follow-on.
-**Base:** orrery @ `ca5c052`, gallery @ `4b086a6` (remediated builder pending re-push)
+**Status:** v12 -- Phase 2 (solar system assembler) DESIGN CLOSED, ready for
+Opus implementation. Design handoff v0.1 -> v0.3 resolved every open question
+(Pluto/Charon composition, Apophis close-encounter scope, OQ-4/closeup-shape
+routing). Competitive manifest cross-check (Fable + GPT independent builds)
+completed two rounds of mutual review; synthesis v2 incorporates both.
+7 golden artifacts settled: Earth, Jupiter/Saturn, Moon/Io/Titan, Halley/Encke,
+Voyager 1, Pluto/Charon, Halley+event_link. Four builder-layer gates found
+(F1-F4) block their respective artifacts until resolved; none built yet.
+Next: Opus implementation, Gate 0 (re-pin + inspect) first.
+**Base:** orrery @ `c10a424`, gallery @ `e864fd42`
 **Date begun:** July 3, 2026
-**Last updated:** July 9, 2026
-**Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8, Claude Fable 5
+**Last updated:** July 14, 2026
+**Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
+Claude Fable 5, Claude Sonnet 5, GPT
 
 **Pivot (v8):** The gallery is no longer a stepping stone to a separate web
 application. The gallery IS the web publication — growing interactive
@@ -939,6 +948,23 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
 - Server-vs-serverless resolved in principle: serverless/Pyodide (§7)
 - Gallery viewer: Option C hybrid — two pages, `index.html` + `interactive.html` (§2a)
 
+*New in v9:*
+- Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (§5)
+- Server/serverless resolved in practice: Pyodide (§7 #1)
+- A/B architecture fork resolved: B′ (§5, §7 #10, measurement: 2.1-3.3 s)
+- Two-tier model: frozen A exhibits + data-backed B′ exhibits (§1, §5)
+- F2 canonical per-object storage adopted (§3a)
+- Three trace types: actual positions, osculating at epoch, mean elements (§3a)
+- Two data types to serve: osculating elements + position vectors (§3a)
+- Two classes for rolling cache + spacecraft write-once (§3a)
+- Phase 1b inserted: data serving pipeline (§5)
+- Consent gate for Pyodide loading (§5, §7 #10)
+- L-086 attribution gate ruled: JPL-only with inline credit passes (§5)
+- `interactive.html` deployed as first exhibit (§2a)
+- `orbit_paths.json` and `orbit_cache/` added to `.gitignore` (§3a)
+- URL parameter scheme: `?exhibit=` (§2a)
+- Slim self-hosted plotly wheel (~3.9 MB) in Phase 1b serving home (§5, §7 #10)
+
 *New in v10:*
 - Phase 1b design converged v0.4, three-model review (§3a, §5)
 - OQ-E resolved: H2 subfolder in gallery repo (474 MB used, 526 MB headroom,
@@ -966,22 +992,45 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   section-3a schema block partial -- authoritative pointer added).
 - Design converged v0.4; docs GALLERY_DATA_SOURCE_HANDOFF v0.4 / GALLERY_BUILDER_MANIFEST v2 / GALLERY_BUILD_HANDOFF v0.1.
 
-*New in v9:*
-- Phase 0 proven: Pyodide v314.0.2 + NumPy + Plotly.js on static GitHub Pages (§5)
-- Server/serverless resolved in practice: Pyodide (§7 #1)
-- A/B architecture fork resolved: B′ (§5, §7 #10, measurement: 2.1-3.3 s)
-- Two-tier model: frozen A exhibits + data-backed B′ exhibits (§1, §5)
-- F2 canonical per-object storage adopted (§3a)
-- Three trace types: actual positions, osculating at epoch, mean elements (§3a)
-- Two data types to serve: osculating elements + position vectors (§3a)
-- Two classes for rolling cache + spacecraft write-once (§3a)
-- Phase 1b inserted: data serving pipeline (§5)
-- Consent gate for Pyodide loading (§5, §7 #10)
-- L-086 attribution gate ruled: JPL-only with inline credit passes (§5)
-- `interactive.html` deployed as first exhibit (§2a)
-- `orbit_paths.json` and `orbit_cache/` added to `.gitignore` (§3a)
-- URL parameter scheme: `?exhibit=` (§2a)
-- Slim self-hosted plotly wheel (~3.9 MB) in Phase 1b serving home (§5, §7 #10)
+*New in v12 (July 14, 2026):*
+- Phase 2 design closed: PHASE2_ASSEMBLER_DESIGN_HANDOFF v0.1 -> v0.3.
+  Pluto/Charon "composition" question dissolved -- existing orrery code,
+  not new architecture. Apophis close-encounter dropped from scope --
+  needs a desktop preset feature (L-046/L-104 track) that doesn't exist
+  yet; replaced with a smaller artifact (Halley + event_link).
+- Competitive cross-check: Claude Fable 5 and GPT each independently built
+  a full manifest from the handoff. Fable's deeper builder-layer
+  verification found four real gates (F1-F4) GPT's manifest didn't reach;
+  GPT's cleaner module architecture and AssemblyContext proposal improved
+  on Fable's version. Both completed a second-pass review of the merged
+  synthesis (PHASE2_SYNTHESIS_MANIFEST v1 -> v2).
+- AssemblyContext (immutable, frozen post-resolution) and view_id (closed
+  enum for Pluto's two views, avoids reopening OQ-4) ratified as new
+  architecture.
+- Date resolution settled: served schema is one osculating-elements
+  snapshot per object, not a position range (Voyager excepted) --
+  propagate via Kepler's equation from M0_deg/epoch_jd, bounded by the
+  served_window field (currently null at HEAD; small builder change
+  needed to populate it).
+- Mean elements (§3a's original "three trace types," never implemented in
+  Phase 1b) completed for planets + a curated comet list (Halley,
+  Ikeya-Seki), porting the orrery's existing name-keyed lookup mechanism.
+  Satellites/moons explicitly excluded -- their mean-element source data
+  lacks secular-rate terms and is inconsistently dated/sourced; flagged as
+  an orrery-side cleanup candidate, independent of this build.
+- §3a's "feature rendering always JS" reaffirmed after a synthesis draft
+  briefly (and incorrectly) merged in a Python-renders-features proposal --
+  caught in second-pass review, reversed.
+- Four builder-layer gates found via direct code/cache verification: F1
+  (feature_configs.json served empty every build -- silent data-loss trap
+  for hand-authored params), F2 (event_link hardcoded None in the builder,
+  AND absent from objects_config.json's schema -- two-step fix), F3
+  (Halley configured but not yet in the served index -- needs a
+  --first-build), F4 (slim plotly wheel not yet deployed anywhere in the
+  gallery repo -- ships-nothing gate). L-086 (attribution) reconfirmed as
+  a ship-gate for the new page, same as interactive.html.
+
+
 
 *Superseded:*
 - ~~Export script reads the desktop cache~~ -> fetch fresh from Horizons (v0.4)
