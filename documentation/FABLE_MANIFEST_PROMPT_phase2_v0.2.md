@@ -27,10 +27,15 @@ design.
 ## Session base — re-pin yourself, same discipline as always
 
 Handoff written against orrery HEAD `af58f7f87f609f2a632853f50a362ed3ebb30d49`,
-gallery HEAD `a08bdd10769f93d7d42601c76fcc14786251ef05`. Re-verify both via
-`git ls-remote --symref` before relying on any code-level claim — time has
-passed since this was written, and the project's standing rule is that a
-matching HEAD is the whole round trip, not something to assume.
+gallery HEAD `a08bdd10769f93d7d42601c76fcc14786251ef05` at the time of
+writing. Both have since moved — current as of this prompt: orrery HEAD
+`8bce8354b6c9ae37b1e941f536cfc6f0a0a435c8`, gallery HEAD
+`e864fd426a6bcffc478fe5ed9452a4dfc9159766` (independently re-verified via
+`git ls-remote`, not just carried from Tony's report). That move covers the
+Halley add-object work and an L-026 CRLF→LF fix — neither changes anything
+this handoff's design conclusions depend on, but re-pin yourself anyway
+before relying on any code-level claim; the project's standing rule is that
+a matching HEAD is the whole round trip, not something to assume.
 
 ## Suggested starting point (not a constraint)
 
