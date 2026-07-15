@@ -1,17 +1,24 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v12 -- Phase 2 (solar system assembler) DESIGN CLOSED, ready for
-Opus implementation. Design handoff v0.1 -> v0.3 resolved every open question
-(Pluto/Charon composition, Apophis close-encounter scope, OQ-4/closeup-shape
-routing). Competitive manifest cross-check (Fable + GPT independent builds)
-completed two rounds of mutual review; synthesis v2 incorporates both.
+**Status:** v13 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
+handoff v0.1 -> v0.3 resolved every open question (Pluto/Charon composition,
+Apophis close-encounter scope, OQ-4/closeup-shape routing). Competitive
+manifest cross-check (Fable + GPT independent builds) completed two rounds
+of mutual review; synthesis v2 incorporates both.
 7 golden artifacts settled: Earth, Jupiter/Saturn, Moon/Io/Titan, Halley/Encke,
-Voyager 1, Pluto/Charon, Halley+event_link. Four builder-layer gates found
-(F1-F4) block their respective artifacts until resolved; none built yet.
-Next: Opus implementation, Gate 0 (re-pin + inspect) first.
-**Base:** orrery @ `c10a424`, gallery @ `e864fd42`
+Voyager 1, Pluto/Charon, Halley+event_link. **Artifact 1 (Earth alone)
+CLOSED** -- L-080 harness live, golden fingerprint `abbd01094852b57f`
+locked, Mode 5 confirmed. F1-F4 (+ F6, non-blocking) now have ledger
+handles: L-118 (F1), L-119 (F2), L-120 (F3), L-121 (F4), L-122 (F6) -- all
+OPEN, none built yet.
+Next: F1 (builder work, gallery repo) before Artifact 2 -- config-shape
+decision (inline in objects_config.json vs. sibling file) still pending
+Tony's call.
+**Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
+Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
+HEAD orrery `73c67bed` / gallery `953c650e`, ledger/documentation work only)
 **Date begun:** July 3, 2026
-**Last updated:** July 14, 2026
+**Last updated:** July 15, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1030,7 +1037,29 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   gallery repo -- ships-nothing gate). L-086 (attribution) reconfirmed as
   a ship-gate for the new page, same as interactive.html.
 
-
+*New in v13 (July 15, 2026):*
+- Artifact 1 (Earth alone) BUILT and CLOSED: `gallery/assembler/` package
+  (Opus 4.8, Mode 7 relay), position engine validated against Earth's
+  as_of_today to machine precision, L-080 golden fingerprint
+  `abbd01094852b57f` locked, Mode 5 confirmed. Full inventory and
+  verification in PHASE2_ARTIFACT1_AS_BUILT.md. Served only from Tony's
+  local machine (`python -m http.server`) -- GitHub Pages deployment is
+  gated on F4, not on Artifact 1 itself.
+- F1-F4 (+ F6, non-blocking) ledgerized for the first time: L-118 (F1),
+  L-119 (F2), L-120 (F3), L-121 (F4), L-122 (F6) -- previously tracked
+  only in this document and the synthesis manifest, not the ledger.
+- Ledger tooling upgrade (`ledger_index.py`): the web-publication track's
+  closed bucket (`W.Done`) now has its own physical destination heading in
+  the DETAIL record (`### W.Done`), mirroring the general `## C.
+  RECONCILED LEDGER`; the tool auto-reconciles both tag and physical
+  placement for any DONE item, no Gap-phrase trigger needed. Corrected
+  several items stranded or mistagged since Phase 1b: L-098, L-106, L-108
+  (general C archive), L-026, L-085, L-099 (W.Done).
+- Section 9 of the artifact-1 as-built mislabeled artifact 3 as
+  "Mars+Jupiter+Saturn / mean elements begin" -- this document's own
+  7-artifact list (above) is correct: artifact 3 is Moon/Io/Titan; mean
+  elements begin at artifact 4 (Halley/Encke). Flagged; not yet corrected
+  in the as-built itself.
 
 *Superseded:*
 - ~~Export script reads the desktop cache~~ -> fetch fresh from Horizons (v0.4)

@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*70 live items; 56 need attention (`!`); 70 RICE-scored; 42 closed (section C, listed last). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*71 live items; 60 need attention (`!`); 71 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -254,7 +254,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural -- Dead code / honest shells
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-| ! | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | OPEN | 2.2 | 2026-06-18 |
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
@@ -329,13 +328,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### W.Prep -- Web Publication prep (before Phase 0)
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
-|  | L-085 | LICENSE to repo root | PROPOSED | 4.0 | 2026-07-03 |
 |  | L-086 | Attribution / credits page | PROPOSED | 2.8 | 2026-07-03 |
 |  | L-087 | palomas_orrery_helpers.py computation/GUI split | PROPOSED | 2.0 | 2026-07-03 |
 
 ### W.Active -- Web Publication active phase
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-118 | feature_configs.json served empty every build (F1, gates artifact 2) | OPEN | 8.1 | 2026-07-15 |
+| ! | L-120 | Halley configured but not yet in the served index (F3, gates artifact 4) | OPEN | 7.6 | 2026-07-15 |
+| ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
+| ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
+| ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
@@ -371,11 +374,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-112 | Gallery builder Pass 5: two-reviewer Pass-2 remediation | DONE | 2.8 | 2026-07-10 |
 |  | L-110 | GPT competitive cross-check remediation (builder Pass 4) | DONE | 2.7 | 2026-07-10 |
 |  | L-116 | New skill: gallery-cache-builder (Move 2 of the skills update) | DONE | 2.5 | 2026-07-12 |
+|  | L-026 (#9) | palomas_orrery_helpers.py CRLF -> LF | DONE | 2.2 | 2026-07-15 |
 |  | L-072 | Gallery Studio WYSIWYG preview -- render through the real index.html viewer | DONE | 2.0 | 2026-06-26 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
-|  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
 |  | L-047 (#N10) | Note-composition structural refactor (behind N6) | DONE | 1.0 | 2026-06-23 |
 |  | L-050 (#N9) | white -> red orbit-marker switch (osculating marker intentionally stays white) | DONE | 1.0 | 2026-06-23 |
 |  | L-020 (#26) | CUSTOM_SHELLS tooltip verification | DONE | 0.9 | 2026-06-22 |
@@ -400,11 +403,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 
-### W.Done
+### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+|  | L-085 | LICENSE to repo root | DONE | 4.0 | 2026-07-03 |
 |  | L-088 | Gallery integration test (Phase 0) | DONE | 4.0 | 2026-07-06 |
 |  | L-099 | Solar System Explorer interactive exhibit | DONE | 3.2 | 2026-07-06 |
+|  | L-098 | Data serving pipeline (Phase 1b) | DONE | 1.5 | 2026-07-12 |
 
 <!-- INDEX:END -->
 
@@ -1656,27 +1661,6 @@ repo HEAD 1f5901e.
 **Ref:** L-002 (parent), ledger_index.py (pattern), project_instructions_v3_31.md
 Part 3 Skill Manifest, documentation/FABLE_PROMPT_L097.md.
 
-#### [L-099] Solar System Explorer interactive exhibit
-<!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->
-- **What.** First interactive exhibit in the gallery. Pyodide + NumPy computes
-  Keplerian orbits from mean orbital elements; Plotly.js renders 3D figure.
-  Planet toggles, date picker, info panel, consent gate.
-- **Done.** `interactive.html` deployed to `palomasorrery.com/interactive.html`
-  (created `300ac30c`, updated `a85a4fa`, July 6, 2026). Tested on desktop
-  Chrome and iPhone Safari. Consent gate explains Pyodide with explicit opt-in
-  (localStorage persistence). Gallery dark-space aesthetic, Cormorant Garamond
-  + DM Sans fonts, mobile-responsive.
-- **Architecture.** Architecture A (lightweight): Python/NumPy computes orbit
-  geometry, JavaScript builds Plotly traces, `Plotly.newPlot()` renders.
-  No plotly Python package in Pyodide. Frozen as an "instant tier" exhibit
-  under the two-tier model (A/B fork resolved: B′ for Phase 2+ data-backed
-  exhibits, A retained for frozen pedagogical demos). Option C viewer
-  (master plan §2a): `index.html` serves curated cards; `interactive.html`
-  serves interactive exhibits via `?exhibit=` parameter (hardcoded in v1).
-- **Next iteration:** Plot refinements (Mercury color contrast, scale presets,
-  outer planet zoom, additional controls).
-**Ref:** Master plan v10 §2a, §5 Phase 0; gallery @ `a85a4fa`.
-
 #### [L-109] Fable 5 adversarial review remediation (builder Pass 1+2)
 <!-- L:109 status:DONE upd:2026-07-10 section:C flag: rice:3/1/95/1 -->
 - **What.** Fable 5 (Mode 7 collegial) adversarially reviewed the shipped
@@ -1886,8 +1870,85 @@ delivered, or split per skill (your call).
   seed 3. Parent: L-002. Sibling: L-115 (Move 1). Subsystem: L-098.
 **Tony:** RICE proposed 3/2/85/2 -- yours to finalize.
 **Gap:** none -- move to section C.
+
+#### [L-106] Gallery-cache backup + gitignore discipline
+<!-- L:106 status:DONE upd:2026-07-12 section:C flag: rice:2/2/90/1 -->
+- **What.** The gallery raw archive (data/solar-system/raw/) is now an
+  irreplaceable fetched-once asset (same class as the orrery Horizons cache).
+  v0.3 specced only ROLLBACK (git history), not BACKUP. Add a SEPARATE scheduled
+  action (mirrors Tony's existing "backup on every cache update") that copies
+  raw/ to a GITIGNORED local path on each successful commit; Google Cloud
+  auto-backup carries the off-site copy (closes the repo/account failure mode on
+  infrastructure separate from GitHub). Served files are derived/regenerable and
+  are NOT backed up independently.
+- **Why gitignore.** The gallery repo serves to the web under ~1 GB Pages
+  guidance (474 MB used); committing backup copies would double growth against
+  the tightest constraint. The local backup path goes in .gitignore alongside
+  .staging/.
+- **Integrity layers (distinct failure modes).** shrink gate (bad write,
+  prevented) / git revert (bad build that committed, rolled back) / off-repo
+  backup (bad repo, survived). No overlap, no gap.
+- **Decoupled.** A backup failure never blocks a good commit; the builder never
+  waits on backup. The action OBSERVES a successful commit -- it is not a builder
+  step.
+**Tony:** backup-on-every-update + Google Cloud off-site are already in practice;
+this extends that discipline to the new gallery cache.
+**Gap:** FIRST-BUILD PRECONDITION -- the backup action AND the .gitignore entry
+must both exist before the first gallery-cache build runs (so the archive is
+never held un-backed-up). Wire the scheduled action to observe the nightly commit;
+add the gitignore line; verify at manifest S10 steps 2 and 9.
+**Ref:** GALLERY_BUILDER_MANIFEST v2 (S8, F9, pre-build gate 3);
+GALLERY_DATA_SOURCE_HANDOFF v0.4 (change 5); L-098 (parent).
+**Resolution (2026-07-12).** Off-repo backup requirement met by existing
+background coverage, not a new action: the repo tree lives under
+C:\Users\tonyq\OneDrive\Desktop\python_work, so OneDrive continuously syncs
+the whole working tree (raw/ included) off-machine (verified: gallery repo
+folder green "available on this device"); Google Cloud + Windows backup layer
+on top; raw/ is also committed to git (GitHub). The .gitignore entry
+(data/_backup/) was already present. The explicit copy-raw/-to-_backup/
+scheduled action is NOT built -- redundant with OneDrive folder-level backup +
+version history; building it would duplicate infrastructure.
+**Gap:** none -- move to section C
+
+#### [L-108] Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation
+<!-- L:108 status:DONE upd:2026-07-12 section:C flag: rice:2/1/90/1 -->
+- **What.** MASTER_PLAN_INTERACTIVE_GALLERY.md (v10) is STALE on Phase 1b: its
+  Status line reads "converged v0.3" while its own changelog reads v0.4
+  (internal inconsistency), and -- more importantly -- section-5 Phase 1b Deliverable
+  #1 (line ~548) and section-3a (line ~317) still describe the export script as one
+  that "reads desktop caches." That is the PRE-PIVOT model. The v0.4 fetch-fresh
+  pivot retired reading the legacy desktop cache; the shipped builder fetches
+  fresh from Horizons into the gallery cache. The plan now contradicts the code.
+- **Origin.** The drift is PIVOT-driven (v0.3/v0.4), not build-driven; the build
+  merely made it visible (there is now code that fetches fresh). Captured here
+  rather than folded silently into the build close-out -- the master plan is
+  Tony's versioned roadmap and deserves a proper v11 pass.
+**Note:** v11 pass done this session (Opus 4.8); pending your review + commit.
+The remaining section-3a polish is optional, low priority.
+**Gap:** v11 pass APPLIED this session (July 9): status -> v0.4 + build-underway;
+section-3a projection + OQ-B/C/F + a reconciliation note (subtraction RETIRED,
+osculating-primary, fetch-fresh, NIGHTLY cadence, no forward padding); the
+parents-serve-position-files bullet corrected; section-5 Deliverable #1 (reads-
+caches -> fetch-fresh) + serving-home (H2 gallery `data/`, not the H1 dedicated
+repo); section-5a next-step (build underway); changelog New-in-v11 + Superseded;
+version v10 -> v11. Transactional patch, 16 edits each matched exactly once; zero
+new non-ASCII. REMAINING (optional, low priority): bullet-by-bullet cleanup of
+the still-historical section-3a schema sub-block beyond the reconciliation note.
+**Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
+**Gap:** none -- move to section C
 ---
 
+
+#### [L-026 | #9] palomas_orrery_helpers.py CRLF -> LF
+<!-- L:026 status:DONE upd:2026-07-15 section:C flag: rice:3/2/75/2 -->
+File confirmed CRLF (verified this session @7964193). Functional no-op
+to convert, but the diff touches every line, so best as a standalone
+commit with no other changes.
+**Gap:** convert CRLF -> LF (binary-mode script or dos2unix). Do as
+isolated commit. Low risk but noisy diff.
+**Platform neutrality (the larger goal):** part of a general codebase LF-conversion sweep;
+keeps the project platform-neutral across Windows / macOS / Linux. Pairs with L-027.
+**Tony:** Done. 
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -2095,16 +2156,6 @@ shells (rings, magnetospheres, belts) keep their markers inline because they nee
 special positioning. This item just greps the *_visualization_shells.py files for any
 OLD inline-marker definitions left OUTSIDE a custom-geometry builder -- stragglers the
 sweep missed. None found -> close. (Deferred until run.)
-
-#### [L-026 | #9] palomas_orrery_helpers.py CRLF -> LF
-<!-- L:026 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/75/2 -->
-File confirmed CRLF (verified this session @7964193). Functional no-op
-to convert, but the diff touches every line, so best as a standalone
-commit with no other changes.
-**Gap:** convert CRLF -> LF (binary-mode script or dos2unix). Do as
-isolated commit. Low risk but noisy diff.
-**Platform neutrality (the larger goal):** part of a general codebase LF-conversion sweep;
-keeps the project platform-neutral across Windows / macOS / Linux. Pairs with L-027.
 
 #### [L-027 | #61] Platform Neutrality (SystemButtonFace)
 <!-- L:027 status:OPEN upd:2026-06-18 section:D.Structural flag: rice:3/2/75/2 -->
@@ -2637,45 +2688,6 @@ apsidal_markers.py em-dashes (-> platform-neutrality, L-027). No Mode-5 needed h
 **Gap unchanged:** still needs L-046's refactor to land first. Design is
 resolved; building is not started.
 
-#### [L-106] Gallery-cache backup + gitignore discipline
-<!-- L:106 status:DONE upd:2026-07-12 section:C flag: rice:2/2/90/1 -->
-- **What.** The gallery raw archive (data/solar-system/raw/) is now an
-  irreplaceable fetched-once asset (same class as the orrery Horizons cache).
-  v0.3 specced only ROLLBACK (git history), not BACKUP. Add a SEPARATE scheduled
-  action (mirrors Tony's existing "backup on every cache update") that copies
-  raw/ to a GITIGNORED local path on each successful commit; Google Cloud
-  auto-backup carries the off-site copy (closes the repo/account failure mode on
-  infrastructure separate from GitHub). Served files are derived/regenerable and
-  are NOT backed up independently.
-- **Why gitignore.** The gallery repo serves to the web under ~1 GB Pages
-  guidance (474 MB used); committing backup copies would double growth against
-  the tightest constraint. The local backup path goes in .gitignore alongside
-  .staging/.
-- **Integrity layers (distinct failure modes).** shrink gate (bad write,
-  prevented) / git revert (bad build that committed, rolled back) / off-repo
-  backup (bad repo, survived). No overlap, no gap.
-- **Decoupled.** A backup failure never blocks a good commit; the builder never
-  waits on backup. The action OBSERVES a successful commit -- it is not a builder
-  step.
-**Tony:** backup-on-every-update + Google Cloud off-site are already in practice;
-this extends that discipline to the new gallery cache.
-**Gap:** FIRST-BUILD PRECONDITION -- the backup action AND the .gitignore entry
-must both exist before the first gallery-cache build runs (so the archive is
-never held un-backed-up). Wire the scheduled action to observe the nightly commit;
-add the gitignore line; verify at manifest S10 steps 2 and 9.
-**Ref:** GALLERY_BUILDER_MANIFEST v2 (S8, F9, pre-build gate 3);
-GALLERY_DATA_SOURCE_HANDOFF v0.4 (change 5); L-098 (parent).
-**Resolution (2026-07-12).** Off-repo backup requirement met by existing
-background coverage, not a new action: the repo tree lives under
-C:\Users\tonyq\OneDrive\Desktop\python_work, so OneDrive continuously syncs
-the whole working tree (raw/ included) off-machine (verified: gallery repo
-folder green "available on this device"); Google Cloud + Windows backup layer
-on top; raw/ is also committed to git (GitHub). The .gitignore entry
-(data/_backup/) was already present. The explicit copy-raw/-to-_backup/
-scheduled action is NOT built -- redundant with OneDrive folder-level backup +
-version history; building it would duplicate infrastructure.
-**Gap:** none -- move to section C
-
 #### [L-107] Gallery builder copy-with-provenance sync register
 <!-- L:107 status:OPEN upd:2026-07-09 section:H flag: rice:1/2/90/0.5 -->
 - **What.** tools/gallery_cache_builder.py is STANDALONE by design (no orrery
@@ -2703,33 +2715,6 @@ this register is the sync ledger the manifest promised.
 test. A periodic automated diff check is a possible follow-on (deferred).
 **Ref:** GALLERY_BUILDER_MANIFEST v2 (S1, S3); GALLERY_BUILD_HANDOFF v0.1;
 tools/gallery_cache_builder.py; L-098 (parent).
-
-#### [L-108] Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation
-<!-- L:108 status:DONE upd:2026-07-12 section:C flag: rice:2/1/90/1 -->
-- **What.** MASTER_PLAN_INTERACTIVE_GALLERY.md (v10) is STALE on Phase 1b: its
-  Status line reads "converged v0.3" while its own changelog reads v0.4
-  (internal inconsistency), and -- more importantly -- section-5 Phase 1b Deliverable
-  #1 (line ~548) and section-3a (line ~317) still describe the export script as one
-  that "reads desktop caches." That is the PRE-PIVOT model. The v0.4 fetch-fresh
-  pivot retired reading the legacy desktop cache; the shipped builder fetches
-  fresh from Horizons into the gallery cache. The plan now contradicts the code.
-- **Origin.** The drift is PIVOT-driven (v0.3/v0.4), not build-driven; the build
-  merely made it visible (there is now code that fetches fresh). Captured here
-  rather than folded silently into the build close-out -- the master plan is
-  Tony's versioned roadmap and deserves a proper v11 pass.
-**Note:** v11 pass done this session (Opus 4.8); pending your review + commit.
-The remaining section-3a polish is optional, low priority.
-**Gap:** v11 pass APPLIED this session (July 9): status -> v0.4 + build-underway;
-section-3a projection + OQ-B/C/F + a reconciliation note (subtraction RETIRED,
-osculating-primary, fetch-fresh, NIGHTLY cadence, no forward padding); the
-parents-serve-position-files bullet corrected; section-5 Deliverable #1 (reads-
-caches -> fetch-fresh) + serving-home (H2 gallery `data/`, not the H1 dedicated
-repo); section-5a next-step (build underway); changelog New-in-v11 + Superseded;
-version v10 -> v11. Transactional patch, 16 edits each matched exactly once; zero
-new non-ASCII. REMAINING (optional, low priority): bullet-by-bullet cleanup of
-the still-historical section-3a schema sub-block beyond the reconciliation note.
-**Ref:** MASTER_PLAN_INTERACTIVE_GALLERY.md v10 (sections 3a, 5); GALLERY_DATA_SOURCE_HANDOFF v0.4; GALLERY_BUILD_HANDOFF v0.1; L-098 (parent).
-**Gap:** none -- move to section C
 
 #### [L-111] Gallery builder Pass 5 -- operability + deferred hardening
 <!-- L:111 status:OPEN upd:2026-07-10 section:H flag: rice:2/2/85/2 -->
@@ -2785,18 +2770,6 @@ L-068 (pipeline residuals), L-071 (Earth storytelling), L-074 (gallery culling),
 L-083 (Plotly 6 / Kaleido -- desktop only, not web).
 
 ### W.Prep -- before Phase 0
-
-#### [L-085] LICENSE to repo root
-<!-- L:085 status:PROPOSED upd:2026-07-03 section:W.Prep flag: rice:2/2/100/1 -->
-- **What.** The MIT license file lives at `documentation/LICENSE.md` where GitHub
-  cannot find it. The repo page shows no license badge; tooling reads the project
-  as unlicensed. Move or copy to repo root.
-- **Copyright year conflict.** The file says Copyright (c) 2024; README says
-  (c) 2025-2026. Harmonize when moving.
-- **Why now.** Cheapest half of the wide-release gate. The license choice already
-  exists; this makes the existing claim true in form.
-**Gap:** move file, harmonize year, verify badge appears. One commit.
-**Ref:** Fable 5 survey (Front 2), master plan S6.
 
 #### [L-086] Attribution / credits page
 <!-- L:086 status:PROPOSED upd:2026-07-03 section:W.Prep flag: rice:2/2/70/1 -->
@@ -2921,29 +2894,6 @@ now-real fingerprint. Additive; no production modules edited.
 manifest v2 S8; handoff v0.3 S7; L-089 (criteria); L-098 (Phase 1b);
 Fable 5 survey (L-080 proposal); master plan S5/S6.
 
-#### [L-088] Gallery integration test (Phase 0)
-<!-- L:088 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/100/1 -->
-- **What.** One-sided Pyodide test in the gallery. Proves the stack: Python
-  computation in the browser on a static GitHub Pages site.
-- **Done.** `interactive.html` deployed to `palomasorrery.com/interactive.html`
-  (created `300ac30c`, updated `a85a4fa`, July 6, 2026). Pyodide v314.0.2 +
-  NumPy computing Keplerian orbits from mean orbital elements, rendered by
-  Plotly.js. Tested on desktop Chrome and iPhone Safari. Consent gate for
-  first-time visitors (localStorage persistence). ~4-10 second load time,
-  cached after first visit. Server/serverless resolved: Pyodide.
-- **A/B fork resolved: B′.** `measure_plotly.html` timed full plotly-in-Pyodide
-  cold-start on iPhone Safari WiFi: **2.1-3.3 s** (acceptance ≤15 s — passed at
-  one-seventh). `import plotly.graph_objects` = 57-59 ms. Fable's convention-
-  duplication analysis confirmed A's parallel-pipeline cost exceeds B′'s cold-
-  start cost for a solo developer. B′ uses slim self-hosted wheel (~3.9 MB).
-  Two-tier model: frozen A exhibits (instant) + data-backed B′ exhibits
-  (shared engines, one codebase). Phase 0 closed.
-- **Supersedes:** Two-sided pilot (Dash vs Pyodide), matplotlib question — both
-  dissolved by the v8 architectural pivot.
-- **Attribution gate (L-086):** Publicly reachable with inline "Data: JPL/NASA"
-  credit. Ruled sufficient pending L-086.
-**Ref:** Master plan v9 §5 Phase 0; gallery @ `4b086a6`.
-
 #### [L-089] Scene-spec shared skeleton + solar system vocabulary (Phase 1)
 <!-- L:089 status:PROPOSED upd:2026-07-03 section:W.Active flag: rice:3/3/50/3 -->
 - **What.** Design in conversation, not code.
@@ -2981,8 +2931,254 @@ equivalence criteria reviewed and stable before any assembler build.
 decision follows L-088 (Phase 0).
 **Ref:** Fable 5 review of v4 (finding 1); master plan S4b.
 
+#### [L-118] feature_configs.json served empty every build (F1, gates artifact 2)
+<!-- L:118 status:OPEN upd:2026-07-15 section:W.Active flag: rice:3/3/90/1 -->
+- **What.** `derive_served` (gallery_cache_builder.py, line ~749-750) writes
+  `feature_configs.json` unconditionally empty
+  (`{'schema_version': ..., 'features': {}}`) into staging on every build.
+  `data/solar-system/` is replaced wholesale by the atomic swap, so any
+  hand-authored feature-renderer params (shell radii, colors, ring geometry)
+  placed in the served file are silently destroyed by the next nightly. Same
+  failure class as L-114 (a producer inside the swap blast radius), one file
+  over -- the swap doesn't strand it here, the builder just never populates it.
+- **Fix (per synthesis manifest v2 S4).** Feature params move OUTSIDE the blast
+  radius into `objects_config.json` (recommended -- matches the existing
+  per-object source-of-truth pattern already used for the `features: [...]`
+  dispatch-key list) or a sibling file (Tony's call, manifest S9.4).
+  `derive_served` then DERIVES `feature_configs.json` from config instead of
+  writing it empty. `served_window` population (currently `null`) rides along
+  in the same change (manifest deviation 2 / as-built S8).
+- **Verified live 2026-07-15** [verified @953c650e/@73c67bed]:
+  `feature_configs.json` still `{"features": {}}`; `served_window` still
+  `null`. Nothing has drifted since the artifact-1 as-built was written.
+- **Naming caution.** The gallery-cache-builder skill's field notes use "F1"
+  for a DIFFERENT, already-closed issue (L-114's config-path stranding). This
+  L-118 is the Phase 2 synthesis manifest's F1 (feature_configs.json
+  empty-write trap). Unrelated to L-114; do not conflate when grepping "F1".
+**Tony:** config-shape decision (manifest S9.4) needed before building -- inline
+in objects_config.json vs. a sibling file. RICE proposed 3/3/90/1 (blocks
+artifact 2 directly, and the JS feature layer it unlocks gates most of the
+remaining golden artifacts transitively; effort is a scoped builder change
+under the existing layered gate) -- yours to finalize.
+**Gap:** Tony's config-shape decision, then: (1) add feature params to
+objects_config.json per object; (2) `derive_served` builds
+`feature_configs.json` from config instead of the empty literal; (3) populate
+`served_window`; (4) Layer-1 offline-suite updates for the new config shape;
+(5) offline suite from a clean checkout, `--dry-run`, then a real
+`--first-build`/`--nightly` as acceptance (gallery-cache-builder skill's
+three-layer gate).
+**Ref:** gallery `tools/gallery_cache_builder.py` (`derive_served` ~line
+710-751); `data/objects_config.json`; `data/solar-system/feature_configs.json`;
+PHASE2_SYNTHESIS_MANIFEST_v2.md S4/S9; PHASE2_ARTIFACT1_AS_BUILT.md S8/S9;
+L-098 (parent, Phase 1b); L-114 (related but distinct -- see naming caution).
+
+#### [L-119] event_link hardcoded None in the builder (F2, gates artifact 7)
+<!-- L:119 status:OPEN upd:2026-07-15 section:W.Active flag: rice:2/2/90/1 -->
+- **What.** `derive_served` (line ~727) hardcodes `'event_link': None` for
+  every object; `objects_config.json` carries this field on NONE of the 12
+  objects -- confirmed by direct inspection, not inferred (a bare
+  `obj.get('event_link')` check would return `None` identically whether the
+  key is missing or present-and-null -- the weaker check the original
+  manifest draft used, self-corrected in synthesis v2: verifying a field's
+  VALUE first requires confirming the field's PRESENCE).
+- **Two-step fix (manifest S4 F2).** (1) add `event_link` to the
+  objects_config.json schema (Halley first, per L-104's comet-perihelion
+  coincidence pattern); (2) wire the builder to pass `obj.get('event_link')`
+  through instead of hardcoding `None`; (3) Layer-1 offline-test updates for
+  the new field.
+- **Verified live 2026-07-15** [verified @953c650e]: `event_link` is `None`
+  for all 11 served objects.
+**Tony:** RICE proposed 2/2/90/1 (gates one artifact only; small, well-verified
+fix) -- yours to finalize.
+**Gap:** sequence after L-118/F1 lands (same builder file, same layered gate)
+-- add the schema field, wire the pass-through, update Layer 1, offline suite
+from a clean checkout as acceptance. Feeds L-104 (event_link breadcrumb
+authoring), which is gated on L-046, not on this.
+**Ref:** gallery `tools/gallery_cache_builder.py` (`derive_served` ~line 727);
+`data/objects_config.json`; PHASE2_SYNTHESIS_MANIFEST_v2.md S4; L-098 (parent);
+L-104 (downstream consumer).
+
+#### [L-120] Halley configured but not yet in the served index (F3, gates artifact 4)
+<!-- L:120 status:OPEN upd:2026-07-15 section:W.Active flag: rice:2/2/95/0.5 -->
+- **What.** `objects_config.json` has 12 objects (Halley included, pinned to
+  record `90000030`); the live `coverage_index.json` has 11 -- no `halley` key
+  (the index predates the config addition). No code change needed: the
+  offline suite already asserts 12 and has Halley-specific mock checks (Layer
+  1 is consistent with config already). What's missing is the Layer-2
+  `--first-build` run on Tony's hardware.
+- **Verified live 2026-07-15** [verified @953c650e]: served index objects =
+  earth, jupiter, saturn, moon, io, titan, pluto, charon, apophis, voyager_1,
+  encke -- no halley.
+**Tony:** RICE proposed 2/2/95/0.5 (no code change, just a build run; high
+confidence since Layer 1 already passes with 12) -- yours to finalize.
+**Gap:** run `--first-build` (not `--nightly` -- a new non-spacecraft object
+needs the full 365-day backfill window + the N3 floor check, per
+gallery-cache-builder skill). Prerequisite for any Halley render (artifact 4)
+and for L-119/F2's Halley-first event_link.
+**Ref:** `data/objects_config.json`; `data/solar-system/coverage_index.json`;
+gallery-cache-builder skill ("Adding a new object" section); L-098 (parent).
+
+#### [L-121] Slim plotly wheel not deployed anywhere (F4, ships-nothing gate)
+<!-- L:121 status:OPEN upd:2026-07-15 section:W.Active flag: rice:3/3/75/3 -->
+- **What.** The B' architecture (two-tier: frozen-A exhibits + data-backed B'
+  exhibits, L-088) calls for a slim self-hosted plotly wheel (~3.9 MB); none is
+  deployed anywhere in the gallery repo tree -- confirmed via full tree
+  listing. The current dev bridge (`solar_system_earth_test.html`, artifact 1)
+  uses `micropip.install` against the live Pyodide CDN, which is a dev
+  convenience, not production architecture.
+- **Gates:** shipping ANY golden artifact publicly. Artifact 1 is currently
+  served only from Tony's own machine (`python -m http.server`), not GitHub
+  Pages -- deliberately, per the as-built (S7).
+- **Ships alongside, not separately:** L-086 (attribution/credit line) is
+  already its own ledger item (PROPOSED, rice:2/2/70/1) -- no new item needed
+  for that half.
+**Tony:** RICE proposed 3/3/75/3 (blocks all public deployment, but larger and
+less-verified effort than L-118/L-119/L-120 -- deploying and wiring the wheel
+is real work, not a config change) -- yours to finalize.
+**Gap:** deploy the slim plotly wheel into the gallery repo tree; wire the
+(eventually-named) real page to use it instead of CDN plotly.js; confirm
+L-086's attribution line carries over to the new page. Downstream of artifacts
+1-7 closing -- this is the ship gate, not a build-order blocker.
+**Ref:** PHASE2_SYNTHESIS_MANIFEST_v2.md S4; PHASE2_ARTIFACT1_AS_BUILT.md S7;
+L-088 (B' decision); L-086 (attribution, companion); L-098 (parent).
+
+#### [L-122] Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking)
+<!-- L:122 status:OPEN upd:2026-07-15 section:W.Active flag: rice:1/1/95/0.5 -->
+- **What.** `data/solar-system.prev_old/` is committed to the gallery repo --
+  looks like a manual-rename artifact predating the atomic-swap `.prev`
+  convention. Confirmed present [verified @953c650e]. Non-blocking; delete at
+  convenience.
+**Tony:** RICE proposed 1/1/95/0.5 -- yours to finalize.
+**Gap:** confirm nothing references it (grep), then delete + commit.
+**Ref:** PHASE2_SYNTHESIS_MANIFEST_v2.md S4 (F6); L-098 (parent).
+
+### W.Deferred -- captured, not yet actionable
+
+#### [L-091] Option E: unified front end
+<!-- L:091 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
+- The existing gallery viewer (3,345 lines of JS) becomes the single front end
+  for all channels: static gallery, scheduled scenes, server-built and
+  browser-built scenes. A and B become interchangeable back ends. Every dollar
+  of work on the viewer pays into all channels. Arrives nearly for free if the
+  serverless (Pyodide) path wins in L-088.
+**Ref:** Fable 5 survey (Option E); master plan S8.
+
+#### [L-092] Embeddable scenes for educators
+<!-- L:092 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
+- An iframe embed snippet per scene, so educators can put a working orrery view,
+  HR diagram, or orbital visualization in their own pages. Nearly free given the
+  viewer; large reach-per-effort.
+**Ref:** master plan S8.
+
+#### [L-093] Educational guided explorations (specs as curriculum)
+<!-- L:093 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
+- Scene specs as curriculum -- a notebook (JupyterLite or similar) that walks
+  through "build a scene of the inner solar system, now change the center to
+  Mars, now add Phobos" or "see how eccentricity transforms an orbit." The spec
+  vocabulary becomes the teaching language. Cheap experiment once the assembler
+  exists.
+**Ref:** master plan S8.
+
+#### [L-094] Community cache as commons
+<!-- L:094 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
+- If tier-3 persistence is turned on, every fulfilled user request enriches the
+  shared cache. Over time, the cache becomes a community-curated collection of
+  interesting scenes -- driven by curiosity, not just Tony's curation. Tied to
+  the tier-3 persistence dial (master plan S7 #5).
+**Ref:** master plan S7/S5, S8.
+
+#### [L-095] PWA / offline capability for classrooms
+<!-- L:095 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
+- Progressive Web App wrapper -- installable and usable offline. Relevant for
+  classrooms with unreliable connectivity. Modest effort if the architecture is
+  static-first. Verify PWA constraints at build time.
+**Ref:** master plan S8.
+
+#### [L-096] Web orrery aesthetic / feel design conversation
+<!-- L:096 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
+- The desktop is a power tool with 60+ toggles. The web version could be that --
+  or something different. A curated explorer. A storytelling medium. An invitation
+  to wonder. The envelope-declaring GUI implies curation over completeness. The
+  orbital parameter viz is inherently educational. The Earth system carries a duty
+  of care. How do these different voices come together in one web experience?
+  Design conversation before Phase 6 (web UI).
+**Ref:** master plan S8 Q4; Fable 5 review of v4.
+
+#### [L-101] Osculating-history fan (perturbed-moon precession view)
+<!-- L:101 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice:2/2/50/2 -->
+- NET-NEW (data + render). N osculating element-sets, one per orbital period back
+  from the current phase-locked anomaly (default 3, user-select 1-6), drawn as a
+  fan of faint conics -- shows apsidal rotation / plane precession as smooth orbit
+  motion (vs a chunky position trace). Data: builder fetches elements at N epochs
+  (new). Render: overlay N faint ellipses (new). Deferred from the first gallery
+  build; interim = conic + as-of-today point.
+
+#### [L-102] Spacecraft trace thinning (arc-minute decimation)
+<!-- L:102 status:OPEN upd:2026-07-11 section:W.Deferred flag: rice:2/2/50/2 -->
+- STALE ASSUMPTION CORRECTED (2026-07-11): this originally assumed the raw
+  archive stays daily and thinning happens separately at serve time. L-109's
+  spacecraft redesign pulled thinning FORWARD to fetch-side instead -- the
+  raw archive itself now stores the Douglas-Peucker-thinned glide (windows
+  exempt, kept daily). Verified end-to-end on real Voyager 1 data (L-113):
+  49-year glide 2549 -> 29 points, both flyby windows fully daily with zero
+  gaps.
+**Gap:** whether this originally-scoped served-side/interactive.html step is
+now fully superseded (nothing left to build -- the builder already delivers
+thinned data) or still needed for a different reason (e.g. interactive.html
+consuming/rendering something not yet aligned to the new shape) is a call
+for you or Opus to make, not resolved here.
+**Ref:** L-109 (the fetch-side redesign); L-113 (tonight's live verification; orrery-side port idea).
+
+#### [L-103] Hyperbolic conic -- browser branch (interactive.html)
+<!-- L:103 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice:2/2/50/2 -->
+- NET-NEW render. interactive.html Pyodide engine is ellipse-only
+  (r=a(1-e^2)/(1+e*cos th) breaks at e>=1). Port generate_hyperbolic_orbit_points
+  (r=|a|(e^2-1)/(1+e*cos th); th_inf=arccos(-1/e); truncate at max_distance;
+  500/1000 pts). Reference exists desktop-side. Needed for comets / interstellar
+  objects (3I/ATLAS) in the interactive. Served data already ready (elements +
+  orbit_type + Tp + max_distance).
+
+### W.Done -- closed items, kept with the track
+
+
+#### [L-085] LICENSE to repo root
+<!-- L:085 status:DONE upd:2026-07-03 section:W.Done flag: rice:2/2/100/1 -->
+- **What.** The MIT license file lives at `documentation/LICENSE.md` where GitHub
+  cannot find it. The repo page shows no license badge; tooling reads the project
+  as unlicensed. Move or copy to repo root.
+- **Copyright year conflict.** The file says Copyright (c) 2024; README says
+  (c) 2025-2026. Harmonize when moving.
+- **Why now.** Cheapest half of the wide-release gate. The license choice already
+  exists; this makes the existing claim true in form.
+**Gap:** move file, harmonize year, verify badge appears. One commit.
+**Ref:** Fable 5 survey (Front 2), master plan S6.
+**Tony:** Done.
+
+#### [L-088] Gallery integration test (Phase 0)
+<!-- L:088 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/100/1 -->
+- **What.** One-sided Pyodide test in the gallery. Proves the stack: Python
+  computation in the browser on a static GitHub Pages site.
+- **Done.** `interactive.html` deployed to `palomasorrery.com/interactive.html`
+  (created `300ac30c`, updated `a85a4fa`, July 6, 2026). Pyodide v314.0.2 +
+  NumPy computing Keplerian orbits from mean orbital elements, rendered by
+  Plotly.js. Tested on desktop Chrome and iPhone Safari. Consent gate for
+  first-time visitors (localStorage persistence). ~4-10 second load time,
+  cached after first visit. Server/serverless resolved: Pyodide.
+- **A/B fork resolved: B′.** `measure_plotly.html` timed full plotly-in-Pyodide
+  cold-start on iPhone Safari WiFi: **2.1-3.3 s** (acceptance ≤15 s — passed at
+  one-seventh). `import plotly.graph_objects` = 57-59 ms. Fable's convention-
+  duplication analysis confirmed A's parallel-pipeline cost exceeds B′'s cold-
+  start cost for a solo developer. B′ uses slim self-hosted wheel (~3.9 MB).
+  Two-tier model: frozen A exhibits (instant) + data-backed B′ exhibits
+  (shared engines, one codebase). Phase 0 closed.
+- **Supersedes:** Two-sided pilot (Dash vs Pyodide), matplotlib question — both
+  dissolved by the v8 architectural pivot.
+- **Attribution gate (L-086):** Publicly reachable with inline "Data: JPL/NASA"
+  credit. Ruled sufficient pending L-086.
+**Ref:** Master plan v9 §5 Phase 0; gallery @ `4b086a6`.
+
 #### [L-098] Data serving pipeline (Phase 1b)
-<!-- L:098 status:DONE upd:2026-07-12 section:C flag: rice:3/3/50/3 -->
+<!-- L:098 status:DONE upd:2026-07-12 section:W.Done flag: rice:3/3/50/3 -->
 - **What.** Serve solar-system orbits to the browser gallery: osculating
   elements (the orbit) + direct-frame position vectors (the actual-motion
   trace), plus a coverage index the browser reads. Goal unchanged since v0.3;
@@ -3116,92 +3312,26 @@ data/solar-system/, backup covered (L-106). Children: L-102/L-113 (thinning,
 deferred), L-107 (provenance register), L-111 (unattended-nightly, follow-on).
 **Gap:** none -- move to section C
 
-### W.Deferred -- captured, not yet actionable
-
-#### [L-091] Option E: unified front end
-<!-- L:091 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
-- The existing gallery viewer (3,345 lines of JS) becomes the single front end
-  for all channels: static gallery, scheduled scenes, server-built and
-  browser-built scenes. A and B become interchangeable back ends. Every dollar
-  of work on the viewer pays into all channels. Arrives nearly for free if the
-  serverless (Pyodide) path wins in L-088.
-**Ref:** Fable 5 survey (Option E); master plan S8.
-
-#### [L-092] Embeddable scenes for educators
-<!-- L:092 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
-- An iframe embed snippet per scene, so educators can put a working orrery view,
-  HR diagram, or orbital visualization in their own pages. Nearly free given the
-  viewer; large reach-per-effort.
-**Ref:** master plan S8.
-
-#### [L-093] Educational guided explorations (specs as curriculum)
-<!-- L:093 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
-- Scene specs as curriculum -- a notebook (JupyterLite or similar) that walks
-  through "build a scene of the inner solar system, now change the center to
-  Mars, now add Phobos" or "see how eccentricity transforms an orbit." The spec
-  vocabulary becomes the teaching language. Cheap experiment once the assembler
-  exists.
-**Ref:** master plan S8.
-
-#### [L-094] Community cache as commons
-<!-- L:094 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
-- If tier-3 persistence is turned on, every fulfilled user request enriches the
-  shared cache. Over time, the cache becomes a community-curated collection of
-  interesting scenes -- driven by curiosity, not just Tony's curation. Tied to
-  the tier-3 persistence dial (master plan S7 #5).
-**Ref:** master plan S7/S5, S8.
-
-#### [L-095] PWA / offline capability for classrooms
-<!-- L:095 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
-- Progressive Web App wrapper -- installable and usable offline. Relevant for
-  classrooms with unreliable connectivity. Modest effort if the architecture is
-  static-first. Verify PWA constraints at build time.
-**Ref:** master plan S8.
-
-#### [L-096] Web orrery aesthetic / feel design conversation
-<!-- L:096 status:DEFERRED upd:2026-07-03 section:W.Deferred flag: rice:2/2/50/2 -->
-- The desktop is a power tool with 60+ toggles. The web version could be that --
-  or something different. A curated explorer. A storytelling medium. An invitation
-  to wonder. The envelope-declaring GUI implies curation over completeness. The
-  orbital parameter viz is inherently educational. The Earth system carries a duty
-  of care. How do these different voices come together in one web experience?
-  Design conversation before Phase 6 (web UI).
-**Ref:** master plan S8 Q4; Fable 5 review of v4.
-
-#### [L-101] Osculating-history fan (perturbed-moon precession view)
-<!-- L:101 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice:2/2/50/2 -->
-- NET-NEW (data + render). N osculating element-sets, one per orbital period back
-  from the current phase-locked anomaly (default 3, user-select 1-6), drawn as a
-  fan of faint conics -- shows apsidal rotation / plane precession as smooth orbit
-  motion (vs a chunky position trace). Data: builder fetches elements at N epochs
-  (new). Render: overlay N faint ellipses (new). Deferred from the first gallery
-  build; interim = conic + as-of-today point.
-
-#### [L-102] Spacecraft trace thinning (arc-minute decimation)
-<!-- L:102 status:OPEN upd:2026-07-11 section:W.Deferred flag: rice:2/2/50/2 -->
-- STALE ASSUMPTION CORRECTED (2026-07-11): this originally assumed the raw
-  archive stays daily and thinning happens separately at serve time. L-109's
-  spacecraft redesign pulled thinning FORWARD to fetch-side instead -- the
-  raw archive itself now stores the Douglas-Peucker-thinned glide (windows
-  exempt, kept daily). Verified end-to-end on real Voyager 1 data (L-113):
-  49-year glide 2549 -> 29 points, both flyby windows fully daily with zero
-  gaps.
-**Gap:** whether this originally-scoped served-side/interactive.html step is
-now fully superseded (nothing left to build -- the builder already delivers
-thinned data) or still needed for a different reason (e.g. interactive.html
-consuming/rendering something not yet aligned to the new shape) is a call
-for you or Opus to make, not resolved here.
-**Ref:** L-109 (the fetch-side redesign); L-113 (tonight's live verification; orrery-side port idea).
-
-#### [L-103] Hyperbolic conic -- browser branch (interactive.html)
-<!-- L:103 status:OPEN upd:2026-07-08 section:W.Deferred flag: rice:2/2/50/2 -->
-- NET-NEW render. interactive.html Pyodide engine is ellipse-only
-  (r=a(1-e^2)/(1+e*cos th) breaks at e>=1). Port generate_hyperbolic_orbit_points
-  (r=|a|(e^2-1)/(1+e*cos th); th_inf=arccos(-1/e); truncate at max_distance;
-  500/1000 pts). Reference exists desktop-side. Needed for comets / interstellar
-  objects (3I/ATLAS) in the interactive. Served data already ready (elements +
-  orbit_type + Tp + max_distance).
-
+#### [L-099] Solar System Explorer interactive exhibit
+<!-- L:099 status:DONE upd:2026-07-06 section:W.Done flag: rice:2/2/80/1 -->
+- **What.** First interactive exhibit in the gallery. Pyodide + NumPy computes
+  Keplerian orbits from mean orbital elements; Plotly.js renders 3D figure.
+  Planet toggles, date picker, info panel, consent gate.
+- **Done.** `interactive.html` deployed to `palomasorrery.com/interactive.html`
+  (created `300ac30c`, updated `a85a4fa`, July 6, 2026). Tested on desktop
+  Chrome and iPhone Safari. Consent gate explains Pyodide with explicit opt-in
+  (localStorage persistence). Gallery dark-space aesthetic, Cormorant Garamond
+  + DM Sans fonts, mobile-responsive.
+- **Architecture.** Architecture A (lightweight): Python/NumPy computes orbit
+  geometry, JavaScript builds Plotly traces, `Plotly.newPlot()` renders.
+  No plotly Python package in Pyodide. Frozen as an "instant tier" exhibit
+  under the two-tier model (A/B fork resolved: B′ for Phase 2+ data-backed
+  exhibits, A retained for frozen pedagogical demos). Option C viewer
+  (master plan §2a): `index.html` serves curated cards; `interactive.html`
+  serves interactive exhibits via `?exhibit=` parameter (hardcoded in v1).
+- **Next iteration:** Plot refinements (Mercury color contrast, scale presets,
+  outer planet zoom, additional controls).
+**Ref:** Master plan v10 §2a, §5 Phase 0; gallery @ `a85a4fa`.
 ### W.Cross-references -- existing items that interact with the web track
 
 - **L-026** -- CRLF to LF on `palomas_orrery_helpers.py`. Companion to L-087.
