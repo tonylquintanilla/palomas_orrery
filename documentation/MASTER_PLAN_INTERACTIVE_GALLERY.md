@@ -1060,6 +1060,19 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   7-artifact list (above) is correct: artifact 3 is Moon/Io/Titan; mean
   elements begin at artifact 4 (Halley/Encke). Flagged; not yet corrected
   in the as-built itself.
+- F1's config-shape decision closed: feature params go INLINE in
+  `objects_config.json`, per-object, not a sibling file -- a second file
+  is the exact two-files-must-stay-in-sync failure shape behind L-114 and
+  the Halley offline-suite miss. Separately, the params themselves are
+  PORTED, not hand-authored: `shell_configs.py` (`SHELL_CONFIGS`/
+  `CUSTOM_SHELLS`) and the `*_visualization_shells.py` generators already
+  hold provenance-audited values for every existing shell (Earth's
+  atmosphere layers, Van Allen belts, etc.). Simple sphere shells port as
+  direct numeric copies; custom geometry (e.g. Van Allen belts'
+  procedural torus generation) needs its small generation algorithm
+  ported to JS alongside its params, not just the numbers -- the same
+  distinction will recur for rings and comet comae/tails later. Both
+  corrected in L-118.  
 
 *Superseded:*
 - ~~Export script reads the desktop cache~~ -> fetch fresh from Horizons (v0.4)

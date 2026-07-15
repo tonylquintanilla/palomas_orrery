@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*71 live items; 60 need attention (`!`); 71 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*72 live items; 61 need attention (`!`); 72 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -339,6 +339,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-119 | event_link hardcoded None in the builder (F2, gates artifact 7) | OPEN | 3.6 | 2026-07-15 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
+| ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
 | ! | L-080 | Characterization harness (scene equivalence gate) | OPEN | 1.6 | 2026-07-14 |
 | ! | L-079 | Shared assembler architecture (keystone — redefined) | OPEN | 1.5 | 2026-07-07 |
 |  | L-089 | Scene-spec shared skeleton + solar system vocabulary (Phase 1) | PROPOSED | 1.5 | 2026-07-03 |
@@ -2937,17 +2938,42 @@ decision follows L-088 (Phase 0).
   `feature_configs.json` unconditionally empty
   (`{'schema_version': ..., 'features': {}}`) into staging on every build.
   `data/solar-system/` is replaced wholesale by the atomic swap, so any
-  hand-authored feature-renderer params (shell radii, colors, ring geometry)
-  placed in the served file are silently destroyed by the next nightly. Same
-  failure class as L-114 (a producer inside the swap blast radius), one file
-  over -- the swap doesn't strand it here, the builder just never populates it.
-- **Fix (per synthesis manifest v2 S4).** Feature params move OUTSIDE the blast
-  radius into `objects_config.json` (recommended -- matches the existing
-  per-object source-of-truth pattern already used for the `features: [...]`
-  dispatch-key list) or a sibling file (Tony's call, manifest S9.4).
-  `derive_served` then DERIVES `feature_configs.json` from config instead of
-  writing it empty. `served_window` population (currently `null`) rides along
-  in the same change (manifest deviation 2 / as-built S8).
+  feature-renderer params (shell radii, colors, ring geometry) placed in
+  the served file are silently destroyed by the next nightly. Same failure
+  class as L-114 (a producer inside the swap blast radius), one file over
+  -- the swap doesn't strand it here, the builder just never populates it.
+- **Config shape: DECIDED, inline.** Feature params move OUTSIDE the blast
+  radius into `objects_config.json`, per-object, alongside the existing
+  `features: [...]` dispatch-key list (which becomes a dict keyed by
+  feature name, each value carrying that feature's params) -- not a
+  sibling file. Rationale (Tony, 2026-07-15): a sibling file is the exact
+  two-files-must-stay-in-sync failure shape behind L-114 and the Halley
+  offline-suite miss; one file removes that class of drift by
+  construction. `derive_served` then DERIVES `feature_configs.json` from
+  config instead of writing it empty. `served_window` population
+  (currently `null`) rides along in the same change (manifest deviation 2
+  / as-built S8).
+- **Values are PORTED, not hand-authored.** [Correction, 2026-07-15] The
+  feature params are not new data to invent -- they already exist,
+  provenance-audited, in the desktop codebase:
+  - **Simple sphere shells** (e.g. Earth's `atmosphere_shell`): a direct
+    numeric port from `SHELL_CONFIGS['Earth']['atmosphere']` /
+    `['upper_atmosphere']` in `shell_configs.py` (`radius_fraction`,
+    `color`, `opacity` -- April 2026 provenance audit, NOAA/NASA sourced).
+    Nothing to invent; copy the numbers.
+  - **Custom-geometry shells** (e.g. Earth's `van_allen_belts`): the
+    params exist too (`CUSTOM_SHELLS['Earth']['magnetosphere']` ->
+    `earth_visualization_shells.create_earth_magnetosphere_shell`: inner
+    belt 1.5 R_E, outer 4.5 R_E, thickness 0.5 R_E, NASA Van Allen Probes
+    sourced) but the belts are generated PROCEDURALLY (5 rings x 80
+    points, sinusoidal z-flattening `z = 0.2*radius*sin(2*angle)`), not a
+    static radius pair. Porting this feature means porting the small
+    generation algorithm to JS alongside its params, not just three
+    numbers. (The belts themselves don't depend on Sun position --
+    `needs_sun_position` on that builder is for the magnetosphere/bow-shock
+    traces in the same function, not the belts.) This distinction will
+    recur for rings and comet comae/tails later -- budget custom-geometry
+    features as algorithm ports, simple shells as data ports.
 - **Verified live 2026-07-15** [verified @953c650e/@73c67bed]:
   `feature_configs.json` still `{"features": {}}`; `served_window` still
   `null`. Nothing has drifted since the artifact-1 as-built was written.
@@ -2955,22 +2981,29 @@ decision follows L-088 (Phase 0).
   for a DIFFERENT, already-closed issue (L-114's config-path stranding). This
   L-118 is the Phase 2 synthesis manifest's F1 (feature_configs.json
   empty-write trap). Unrelated to L-114; do not conflate when grepping "F1".
-**Tony:** config-shape decision (manifest S9.4) needed before building -- inline
-in objects_config.json vs. a sibling file. RICE proposed 3/3/90/1 (blocks
-artifact 2 directly, and the JS feature layer it unlocks gates most of the
-remaining golden artifacts transitively; effort is a scoped builder change
-under the existing layered gate) -- yours to finalize.
-**Gap:** Tony's config-shape decision, then: (1) add feature params to
-objects_config.json per object; (2) `derive_served` builds
-`feature_configs.json` from config instead of the empty literal; (3) populate
-`served_window`; (4) Layer-1 offline-suite updates for the new config shape;
-(5) offline suite from a clean checkout, `--dry-run`, then a real
-`--first-build`/`--nightly` as acceptance (gallery-cache-builder skill's
-three-layer gate).
+**Tony:** RICE proposed 3/3/90/1 (blocks artifact 2 directly, and the JS
+feature layer it unlocks gates most of the remaining golden artifacts
+transitively; effort is a scoped builder change under the existing layered
+gate) -- yours to finalize. Config-shape decision closed (inline); no
+further decision blocks starting this.
+**Gap:** (1) add feature params to objects_config.json per object,
+PORTED from shell_configs.py (SHELL_CONFIGS for simple shells,
+CUSTOM_SHELLS + the relevant *_visualization_shells.py generator for
+custom geometry) rather than freshly authored; (2) `derive_served` builds
+`feature_configs.json` from config instead of the empty literal; (3)
+populate `served_window`; (4) Layer-1 offline-suite updates for the new
+config shape; (5) offline suite from a clean checkout, `--dry-run`, then a
+real `--first-build`/`--nightly` as acceptance (gallery-cache-builder
+skill's three-layer gate). L-123 (info card) rides the same
+serving-pipeline change but is separately scoped -- sequence after this
+Gap, not inside it.
 **Ref:** gallery `tools/gallery_cache_builder.py` (`derive_served` ~line
 710-751); `data/objects_config.json`; `data/solar-system/feature_configs.json`;
+orrery `shell_configs.py` (`SHELL_CONFIGS`/`CUSTOM_SHELLS`, Earth block);
+orrery `earth_visualization_shells.py` (`create_earth_magnetosphere_shell`);
 PHASE2_SYNTHESIS_MANIFEST_v2.md S4/S9; PHASE2_ARTIFACT1_AS_BUILT.md S8/S9;
-L-098 (parent, Phase 1b); L-114 (related but distinct -- see naming caution).
+L-098 (parent, Phase 1b); L-114 (related but distinct -- see naming caution);
+L-123 (info card, rides with this).
 
 #### [L-119] event_link hardcoded None in the builder (F2, gates artifact 7)
 <!-- L:119 status:OPEN upd:2026-07-15 section:W.Active flag: rice:2/2/90/1 -->
@@ -3051,6 +3084,41 @@ L-088 (B' decision); L-086 (attribution, companion); L-098 (parent).
 **Tony:** RICE proposed 1/1/95/0.5 -- yours to finalize.
 **Gap:** confirm nothing references it (grep), then delete + commit.
 **Ref:** PHASE2_SYNTHESIS_MANIFEST_v2.md S4 (F6); L-098 (parent).
+
+#### [L-123] Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1)
+<!-- L:123 status:OPEN upd:2026-07-15 section:W.Active flag: rice:2/2/90/2 -->
+- **What.** Deferred from the artifact-1 build session (per
+  PHASE2_ARTIFACT1_AS_BUILT.md S9/S12): clicking an object marker should
+  open the gallery's existing "i" encyclopedia card, populated with that
+  object's entry from `info_dictionary.py`'s `INFO` dict (2245 lines,
+  keyed by object name, e.g. `'Earth'`, provenance-audited April 2026).
+  No ledger item existed for this until now, per the as-built's own
+  instruction to log one "when F1 opens."
+- **Mechanism (as-built S9/S12, unchanged).** Serve the relevant `INFO`
+  entries as JSON -- same serve-data/render-JS pattern the builder already
+  uses for position/coverage data, extended to carry text content too. A
+  Plotly click handler on the object marker then opens the gallery's
+  existing "i" card UI with that JSON payload -- no new UI, reusing what
+  `gallery_studio.py`'s encyclopedia card already renders.
+- **Why it rides with F1, not before it.** F1 is what teaches
+  `derive_served` to serve richer per-object JSON beyond bare position
+  data; extending that same pipeline to also carry `INFO` text is a small
+  incremental addition once F1's plumbing exists, not a separate serving
+  mechanism. Building this before F1 would mean building (and later
+  discarding) a one-off serving path.
+**Tony:** RICE proposed 2/2/90/2 (meaningful gallery feature -- generalizes
+across all 12 objects, not just Earth; mechanism is precisely scoped, no
+design ambiguity; effort is two sessions -- serving text content plus
+wiring the click handler and card population) -- yours to finalize.
+**Gap:** sequence after L-118/F1's serving-pipeline change lands: (1)
+extend `derive_served` (or a sibling served-data step) to include each
+object's `INFO` entry; (2) wire a Plotly click handler on object markers
+in the assembler's JS layer; (3) route the click payload into the gallery
+Studio's existing "i" card renderer; (4) Layer-1 offline-test coverage
+for the new served field.
+**Ref:** `info_dictionary.py` (`INFO` dict); PHASE2_ARTIFACT1_AS_BUILT.md
+S9 (info card, deferred) and S12 (ledger recommendations); L-118 (F1,
+shared serving pipeline); L-098 (parent, Phase 1b).
 
 ### W.Deferred -- captured, not yet actionable
 
