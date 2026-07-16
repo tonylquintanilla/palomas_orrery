@@ -1,9 +1,9 @@
 # Paloma's Orrery -- Provenance Audit
 
-Generated: June 30, 2026
-Files scanned: 115
-Total findings: 666
-Constants: 69 | Dicts: 34 | Display strings: 563
+Generated: July 16, 2026
+Files scanned: 120
+Total findings: 675
+Constants: 74 | Dicts: 38 | Display strings: 563
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -38,13 +38,108 @@ Unit of provenance: the smallest thing with a coherent source citation. A dict w
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 104 |
 | 2 | 10-15 | ALL ACCEPTED RESIDUALS -- see note below | 153 |
-| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 391 |
-| 4 | 1-4 | NO ACTION NEEDED | 18 |
+| 3 | 5-9 | ALREADY CITED OR LOW RISK -- no action required | 398 |
+| 4 | 1-4 | NO ACTION NEEDED | 20 |
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
 strings, or known scanner limitations. No action required unless a new
 uncited entry appears. See Accepted Residuals block below for details.
+
+---
+
+## Findings by File
+
+Quick-reference counts before the per-tier detail below. Same data, grouped the other way: every file that has at least one finding, with its count in each tier.
+
+| File | Domain | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
+|------|--------|-------:|-------:|-------:|-------:|------:|
+| `info_dictionary.py` | orrery | 0 | 89 | 35 | 0 | 124 |
+| `celestial_objects.py` | orrery | 0 | 4 | 50 | 0 | 54 |
+| `idealized_orbits.py` | orrery | 24 | 2 | 12 | 0 | 38 |
+| `star_notes.py` | stars | 0 | 16 | 15 | 0 | 31 |
+| `earth_visualization_shells.py` | earth_science | 0 | 3 | 24 | 0 | 27 |
+| `solar_visualization_shells.py` | orrery | 0 | 6 | 19 | 0 | 25 |
+| `constants_new.py` | orrery | 0 | 13 | 12 | 0 | 25 |
+| `neptune_visualization_shells.py` | orrery | 0 | 1 | 23 | 0 | 24 |
+| `uranus_visualization_shells.py` | orrery | 0 | 2 | 22 | 0 | 24 |
+| `comet_visualization_shells.py` | orrery | 0 | 4 | 19 | 0 | 23 |
+| `planet_visualization_utilities.py` | orrery | 7 | 1 | 11 | 0 | 19 |
+| `jupiter_visualization_shells.py` | orrery | 0 | 0 | 18 | 0 | 18 |
+| `paleoclimate_wet_bulb_full.py` | earth_science | 11 | 0 | 5 | 0 | 16 |
+| `paleoclimate_human_origins_full.py` | earth_science | 9 | 0 | 2 | 0 | 11 |
+| `sgr_a_grand_tour.py` | orrery | 6 | 1 | 4 | 0 | 11 |
+| `provenance_scanner.py` | dev_tools | 0 | 0 | 10 | 1 | 11 |
+| `sgr_a_star_data.py` | orrery | 0 | 0 | 11 | 0 | 11 |
+| `pluto_visualization_shells.py` | orrery | 0 | 0 | 10 | 0 | 10 |
+| `scenarios_western_heatwave_march_2026.py` | earth_science | 4 | 3 | 2 | 0 | 9 |
+| `saturn_visualization_shells.py` | orrery | 0 | 0 | 9 | 0 | 9 |
+| `spacecraft_encounters.py` | orrery | 0 | 1 | 7 | 0 | 8 |
+| `scenarios_heatwaves.py` | earth_science | 0 | 0 | 8 | 0 | 8 |
+| `paleoclimate_visualization_full.py` | earth_science | 7 | 0 | 0 | 0 | 7 |
+| `mercury_visualization_shells.py` | orrery | 0 | 1 | 6 | 0 | 7 |
+| `asteroid_belt_visualization_shells.py` | orrery | 0 | 0 | 2 | 5 | 7 |
+| `celestial_coordinates.py` | orrery | 3 | 0 | 3 | 0 | 6 |
+| `venus_visualization_shells.py` | orrery | 0 | 0 | 6 | 0 | 6 |
+| `exoplanet_coordinates.py` | stars | 4 | 0 | 1 | 0 | 5 |
+| `sgr_a_visualization_precession.py` | orrery | 3 | 1 | 1 | 0 | 5 |
+| `star_sphere_builder.py` | stars | 0 | 1 | 1 | 3 | 5 |
+| `planet9_visualization_shells.py` | orrery | 0 | 0 | 5 | 0 | 5 |
+| `apsidal_markers.py` | orrery | 3 | 0 | 1 | 0 | 4 |
+| `sgr_a_visualization_core.py` | orrery | 4 | 0 | 0 | 0 | 4 |
+| `eris_visualization_shells.py` | orrery | 0 | 1 | 3 | 0 | 4 |
+| `mars_visualization_shells.py` | orrery | 0 | 0 | 4 | 0 | 4 |
+| `moon_visualization_shells.py` | orrery | 0 | 0 | 4 | 0 | 4 |
+| `skills_index.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
+| `coordinate_system_guide.py` | orrery | 2 | 0 | 1 | 0 | 3 |
+| `paleoclimate_visualization.py` | earth_science | 3 | 0 | 0 | 0 | 3 |
+| `scenarios_coral_bleaching.py` | earth_science | 1 | 0 | 1 | 1 | 3 |
+| `dep_trace.py` | dev_tools | 0 | 0 | 2 | 1 | 3 |
+| `food_insecurity_generator.py` | earth_science | 0 | 0 | 1 | 2 | 3 |
+| `ledger_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
+| `measure_perframe_elements.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
+| `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
+| `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 2 | 1 | 3 |
+| `visualization_3d.py` | stars | 0 | 0 | 3 | 0 | 3 |
+| `exoplanet_systems.py` | stars | 0 | 0 | 0 | 3 | 3 |
+| `earth_system_generator.py` | earth_science | 2 | 0 | 0 | 0 | 2 |
+| `object_type_analyzer.py` | orrery | 1 | 0 | 1 | 0 | 2 |
+| `paleoclimate_dual_scale.py` | earth_science | 2 | 0 | 0 | 0 | 2 |
+| `module_atlas.py` | dev_tools | 0 | 1 | 1 | 0 | 2 |
+| `close_approach_data.py` | orrery | 0 | 0 | 1 | 1 | 2 |
+| `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
+| `data_acquisition.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `energy_imbalance.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
+| `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
+| `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
+| `hr_diagram_distance.py` | stars | 1 | 0 | 0 | 0 | 1 |
+| `planetarium_distance.py` | stars | 1 | 0 | 0 | 0 | 1 |
+| `plot_data_report_widget.py` | utilities | 1 | 0 | 0 | 0 | 1 |
+| `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
+| `orbital_elements.py` | orrery | 0 | 1 | 0 | 0 | 1 |
+| `sgr_a_visualization_animation.py` | orrery | 0 | 1 | 0 | 0 | 1 |
+| `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
+| `smoke_dipole_cone.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `export_orbit_cache.py` | dev_tools | 0 | 0 | 0 | 1 | 1 |
+| `smoke_rotation_axis.py` | dev_tools | 0 | 0 | 0 | 1 | 1 |
+
+---
+
+## Findings by File Type
+
+Same data again, grouped by subject-matter domain rather than by individual file -- orrery, earth science, gallery, stars, utilities, dev tools. Domain is a report-only grouping (see MODULE_DOMAIN_MAP / classify_domain()); it does not affect which files get scanned or scored.
+
+| Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
+|--------|------:|-------:|-------:|-------:|-------:|------:|
+| Orrery (solar system + orbital mechanics) | 36 | 54 | 129 | 308 | 7 | 498 |
+| Earth System | 13 | 41 | 6 | 43 | 3 | 93 |
+| Stars (stellar neighborhood) | 9 | 8 | 17 | 20 | 6 | 51 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 12 | 0 | 1 | 27 | 4 | 32 |
+| Utilities (cross-domain shared helpers) | 1 | 1 | 0 | 0 | 0 | 1 |
+| Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ---
 
@@ -55,6 +150,7 @@ These modules are classified `'other'` in module_atlas.py's ROLE_MAP (unrecogniz
 | Module | Claim-shaped strings |
 |--------|----------------------:|
 | `shell_configs.py` | 91 |
+| `export_orbit_cache.py` | 8 |
 | `food_insecurity_generator.py` | 1 |
 | `orrery_rendering.py` | 1 |
 | `smoke_rotation_axis.py` | 1 |
@@ -358,7 +454,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 47 | constant | KM_PER_AU | 149597870.7 | 2 | 5 | **10** | Has source citation | Imported by 10 modules |
+| 47 | constant | KM_PER_AU | 149597870.7 | 2 | 5 | **10** | Has source citation | Imported by 11 modules |
 | 131 | constant | CHROMOSPHERE_RADII | 1.5 | 2 | 5 | **10** | Has source citation | Imported by 4 modules |
 | 136 | constant | INNER_CORONA_RADII | 3 | 2 | 5 | **10** | Has source citation | Imported by 4 modules |
 | 141 | constant | OUTER_CORONA_RADII | 50 | 2 | 5 | **10** | Has source citation | Imported by 4 modules |
@@ -370,7 +466,7 @@ is planned for a future session.
 | 200 | constant | GRAVITATIONAL_INFLUENCE_AU | 126000 | 2 | 5 | **10** | Has source citation | Imported by 4 modules |
 | 206 | constant | PARKER_CLOSEST_RADII | 9.86 | 2 | 5 | **10** | Has source citation | Imported by 3 modules |
 | 241 | dict | CENTER_BODY_RADII[...] | (18 entries) | 2 | 5 | **10** | Has source citation | Imported by 9 modules |
-| 263 | dict | KNOWN_ORBITAL_PERIODS[...] | (133 entries) | 2 | 5 | **10** | Has source citation | Imported by 8 modules |
+| 263 | dict | KNOWN_ORBITAL_PERIODS[...] | (133 entries) | 2 | 5 | **10** | Has source citation | Imported by 9 modules |
 
 ### earth_visualization_shells.py
 
@@ -733,6 +829,12 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 245 | string | display string @ line 245 | (9 claims) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
 
+### data_inventory.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 27 | constant | PAGES_CEILING_MB | 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+
 ### dep_trace.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -873,8 +975,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 75 | dict | SECTION_ALIASES[...] | (1 entry) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 79 | dict | SECTION_TITLES[...] | (15 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 165 | dict | SECTION_ALIASES[...] | (1 entry) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 169 | dict | SECTION_TITLES[...] | (19 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 466 | dict | ISSUE_TAGS[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### mars_visualization_shells.py
 
@@ -1043,15 +1146,16 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 224 | constant | V_FETCHED | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 225 | constant | V_SOURCED | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 226 | constant | V_STALE | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 227 | constant | V_RECALLED | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 230 | constant | C_COSMETIC | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 231 | constant | C_INTERNAL | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 232 | constant | C_LOADBEARING | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 233 | constant | C_PUBLIC | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
-| 234 | constant | C_PROPAGATING | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 256 | constant | V_FETCHED | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 257 | constant | V_SOURCED | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 258 | constant | V_STALE | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 259 | constant | V_RECALLED | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 262 | constant | C_COSMETIC | 1 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 263 | constant | C_INTERNAL | 2 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 264 | constant | C_LOADBEARING | 3 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 265 | constant | C_PUBLIC | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 266 | constant | C_PROPAGATING | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 320 | dict | MODULE_DOMAIN_MAP[...] | (100 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### saturn_visualization_shells.py
 
@@ -1123,6 +1227,15 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 438 | string | display string @ line 438 | (1 claim) | 2 | 4 | **8** | Has source citation | Public-facing display string (hover/INFO) |
+
+### skills_index.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 90 | constant | NAME_COL_WIDTH | 29 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 91 | constant | VER_COL_WIDTH | 5 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 93 | constant | WRAP_WIDTH | 79 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
+| 94 | constant | FALLBACK_TRUNC | 60 | 4 | 2 | **8** | No source citation (recalled) | Internal use (not imported externally) |
 
 ### smoke_dipole_cone.py
 
@@ -1278,6 +1391,12 @@ is planned for a future session.
 | 324 | dict | TOI1338_SYSTEM[...] | (6 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
 | 483 | dict | PROXIMA_SYSTEM[...] | (6 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
 
+### export_orbit_cache.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 198 | dict | CENTER_SLUG_MAP[...] | (22 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+
 ### food_insecurity_generator.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1289,7 +1408,13 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 218 | dict | SECTION_SYMBOLS[...] | (4 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+| 230 | dict | SECTION_SYMBOLS[...] | (4 entries) | 2 | 2 | **4** | Has source citation | Internal use (not imported externally) |
+
+### provenance_scanner.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 311 | dict | DOMAIN_LABELS[...] | (6 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic dictionary (DOMAIN_LABELS) |
 
 ### scenarios_coral_bleaching.py
 
