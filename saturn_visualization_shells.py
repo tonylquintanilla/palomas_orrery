@@ -1037,6 +1037,12 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
     
     # Define Saturn's ring parameters in kilometers from Saturn's center
     # Then convert to Saturn radii, and finally to AU
+    # Colors: selected by the developer for visual distinction between
+    # rings, not derived from photometric measurement or verified as
+    # visually accurate. Real Saturn ring coloration is subtle and highly
+    # dependent on viewing geometry / image processing (true vs. enhanced
+    # color). See LEDGER_CONSOLIDATED.md L-124 for NASA/Cassini sourcing
+    # found July 2026; kept as a low-priority wishlist item, not acted on.
     ring_params = {
         'd_ring': {
             'inner_radius_km': 66900,  # Inner edge (in km from Saturn's center)

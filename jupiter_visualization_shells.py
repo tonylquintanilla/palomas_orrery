@@ -893,6 +893,11 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
     
     # Source: NASA Jupiter Ring Fact Sheet; Galileo spacecraft data
     # Verified: April 2026 via Gemini fact-check
+    # Scope of the above citation: ring geometry only (inner/outer radius,
+    # thickness). Colors below are selected by the developer for visual
+    # distinction, not verified against the cited source or any other
+    # photometric measurement -- do not read this citation as covering
+    # them (Tony's call, July 16, 2026; see LEDGER_CONSOLIDATED.md L-124).
     # Define Jupiter's ring parameters in kilometers from Jupiter's center
     # Then convert to Jupiter radii, and finally to AU
     ring_params = {

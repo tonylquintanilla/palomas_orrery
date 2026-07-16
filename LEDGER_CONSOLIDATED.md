@@ -219,7 +219,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*72 live items; 61 need attention (`!`); 72 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*74 live items; 63 need attention (`!`); 74 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -266,6 +266,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-035 | Solar shell hovertext <br> vs 
  context mismatch (C6b) | OPEN | 4.0 | 2026-06-11 |
+| ! | L-125 | Color/RGB values excluded from provenance-scanner claims -- report-level disclosure (project-wide) | OPEN | 3.8 | 2026-07-16 |
 | ! | L-032 (#41) | Sun legend ordering (ordered dispatch iteration; no manual fix) | OPEN | 1.5 | - |
 | ! | L-033 | Comet plotted-period trace visibility (line weight/color; O6b) | OPEN | 1.5 | 2026-06-10 |
 | ! | L-034 | Center-body hover "Distance to Center Surface" negative-radius formatting | OPEN | 1.5 | 2026-06-21 |
@@ -273,6 +274,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-031 (#18) | Uranus gossamer ring visibility | OPEN | 0.9 | - |
 | ! | L-037 | WARNING: Unknown object type 'satellite' (spurious; handled downstream) | OPEN | 0.9 | 2026-06-15 |
 | ! | L-038 | Psyche encounter hardcoded fallback distances lack # Source | OPEN | 0.5 | - |
+| ! | L-124 | Ring/belt color accuracy audit across the orrery -- nice-to-have, not a blocker | OPEN | 0.1 | 2026-07-16 |
 
 ### D.Feature-A -- Bucket A (near-term)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -2280,6 +2282,93 @@ Pre-existing; 3 em-dash lines in MAPS strings `[verified @0ce1e26]`.
   Phobos), used when Horizons has no ephemeris past 2029-06-11 (expected,
   graceful), lack a `# Source:` -- add one (provenance discipline) on next touch.
   **Tony:** unclear why the provenance scanner has not flagged this item. 
+
+#### [L-124] Ring/belt color accuracy audit across the orrery -- nice-to-have, not a blocker
+<!-- L:124 status:OPEN upd:2026-07-16 section:D.Cosmetic flag: rice:1/1/60/5 -->
+- **What it is.** Ring/belt colors in Saturn (`ring_params` in
+  `create_saturn_ring_system`), Jupiter (`ring_params` in
+  `create_jupiter_ring_system`; `belt_colors` in
+  `create_jupiter_radiation_belts`), and Earth's Van Allen belt colors are
+  developer/AI aesthetic picks for visual distinction, not measured
+  photometric values -- confirmed directly by Tony (July 16, 2026), who
+  also judged that citing Jupiter's ring colors as accurate would be an
+  overstatement: colors are attempts at representation, coverage is
+  uneven, and the real boundaries aren't known -- the same shape as the
+  original provenance problem, but harder to see because a real citation
+  sits right above the dict and, per the project's usual "unit of
+  provenance" convention, reads as if it covers the colors too. It
+  doesn't. Real ring/belt coloration is also highly viewing-geometry- and
+  processing-dependent (true vs. enhanced color), so "accurate" is a soft
+  target here, not one fixed correct value.
+- **Sourcing found this session** (real NASA/Cassini material, descriptive
+  not numeric -- captured here so it is not lost): Saturn's rings are water
+  ice contaminated by rock/carbon compounds; the B ring has "a pronounced
+  sandy color"; dark-side natural-color imagery describes the rings
+  glowing "in shades of brown and gold"; Voyager 2 enhanced-color
+  processing found the C ring / Cassini Division carry a blue tint
+  (false-color, a weaker claim than the true-color findings above).
+  - https://science.nasa.gov/missions/cassini/saturns-rings-offer-a-fresco-of-color/
+  - https://science.nasa.gov/resource/true-colors/
+  - https://science.nasa.gov/image-detail/pia01486-3/
+  - https://science.nasa.gov/resource/ringscape-in-color/
+- **Tony's call (July 16, 2026):** do not chase color accuracy now -- a
+  real pass would be a major undertaking for marginal payoff, and true
+  ring appearance is itself highly variable. Correct move for now: honest
+  in-source disclosure ("colors selected by the developer, not visually
+  accurate"), with Jupiter's pre-existing citation explicitly narrowed to
+  geometry-only so it can't be misread as covering color. Done this
+  session for both Saturn and Jupiter.
+**Gap:** see L-125.
+**Ref:** `saturn_visualization_shells.py` `create_saturn_ring_system`;
+`jupiter_visualization_shells.py` `create_jupiter_ring_system` /
+`create_jupiter_radiation_belts`; `earth_visualization_shells.py` Van
+Allen belt colors; F1 manifest sourcing question that prompted this
+(PHASE2_F1_BUILD_MANIFEST_v2.md sec 4.2, corrected this session).
+**Tony:** RICE proposed 1/1/60/5 (nice-to-have, little functional impact,
+real effort to do properly given viewing-geometry variability) -- yours
+to finalize.
+
+#### [L-125] Color/RGB values excluded from provenance-scanner claims -- report-level disclosure (project-wide)
+<!-- L:125 status:OPEN upd:2026-07-16 section:D.Cosmetic flag: rice:2/2/95/1 -->
+- **What it is.** `_make_dict_unit` in `provenance_scanner.py` already
+  skipped color/RGB values when building a dict unit's scored `entries`
+  (colors never became individual claims needing citation) -- but the
+  module's own "unit of provenance" documentation said a block
+  `# Source:` comment covers a whole dict as ONE unit, which reads as if
+  it also certifies that dict's `color` field(s). It doesn't, and at
+  least one real case (Jupiter's `ring_params` -- `# Source: NASA Jupiter
+  Ring Fact Sheet`) was being read that way until Tony caught it (July
+  16, 2026): "citing Jupiter's colors as accurate is an overstatement...
+  colors are attempts at representation, but it's uneven and we don't
+  really know the boundaries. Much like the original provenance problem
+  only worse."
+- **The fix (documentation only, zero scoring change):** the module
+  docstring's numbered known-limitations list gets a new item 11 stating
+  this explicitly, and `generate_report()` gets a standing disclosure
+  paragraph printed at the top of every generated `PROVENANCE_AUDIT.md`,
+  right after the existing "Unit of provenance" line -- so it's visible
+  in the report itself, not just in code comments. Verified in a
+  disposable clone: `py_compile` clean, ASCII-only, and re-running the
+  scanner reproduces identical tier counts (673 findings, 102/155/396/20)
+  -- confirms no scoring regression, this is purely a documentation add.
+- **Scope decision (Tony, July 16, 2026):** do this once, at the scanner
+  + report level, instead of individually narrowing citation comments in
+  the ~20 live custom-shell functions (magnetospheres, radiation belts,
+  rings, plasma tori) that have the same real-citation-near-color
+  pattern. "I am not sure it is worth commenting on every color choice
+  we make." Two per-file snippets drafted earlier this session (Jupiter
+  ring citation, Saturn ring disclosure) are superseded by this and
+  should NOT be applied -- this covers them and everything else
+  uniformly.
+**Gap:** apply `patch_provenance_scanner_color_exclusion.py` (delivered
+this session) to `provenance_scanner.py`, then re-run the scanner to
+regenerate `PROVENANCE_AUDIT.md` with the new disclosure visible.
+**Ref:** L-124 (the separate, deferred wishlist for an actual
+color-accuracy pass, if one is ever undertaken); `_make_dict_unit`,
+`generate_report()` in `provenance_scanner.py`.
+**Tony:** RICE proposed 2/2/95/1 (fixes a real overclaim risk codebase-
+wide, high confidence, small effort -- documentation only) -- yours to
+finalize.
 
 ### D.Feature -- Bucket A (near-term)
 
