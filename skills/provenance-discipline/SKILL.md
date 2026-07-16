@@ -6,9 +6,14 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0)
 
 # Provenance Discipline
 
-Skill version: 1.0 | Cut from palomas_orrery @ b29ad3f8 | July 1, 2026
+Skill version: 1.1 | Cut from palomas_orrery @ be6376bb93a3f6fdfa2c0ff5b75a7398e60ea6ce | July 16, 2026
 Source: project_instructions_v3_29.md Part 3 (Provenance Audit, Fetched vs
-Recalled) + food insecurity build handoff + scanner source at HEAD.
+Recalled) + food insecurity build handoff + scanner source at HEAD. v1.1
+adds the report domain-classification mechanics, the Review-Repair
+Protocol (promoted from documentation/provenance_audit_handoff_v4.md),
+and field notes from the F1 provenance-cleanup groundwork session (July
+2026): the by-file/by-file-type report breakdown, a self-referential
+scanning quirk, and a stale-audit-doc near-miss.
 
 The resident protocol carries the two governing principles as CRITICAL
 gates: Fetched-vs-Recalled (a citation is a provenance claim that must be
@@ -35,6 +40,36 @@ asserting a provenance that does not exist -- wrong-but-cited is worse than
 uncited, because the citation suppresses the suspicion that would catch it.
 A blank with a flag is honest; an unsourced assertion is not.
 
+## Review-Repair Protocol for Tier-1 Findings
+
+**Claude cannot be the verifier.** Clearing real Tier-1 findings (not
+scanner false positives) is a three-role relay, not something Claude does
+solo:
+
+1. **Claude preps a fact-check worksheet.** Group flagged claims (usually
+   by file, or by shared likely source), present each as a numbered claim
+   with its current value, and flag anything that looks suspicious on its
+   face. Claude does NOT propose citations or corrected values here --
+   only what needs checking and why. Template precedent:
+   `documentation/worksheet_earth_visualization.md`.
+2. **Tony and/or Gemini research and verify.** This is where the actual
+   sourcing happens -- an outside authority is consulted, not Claude's
+   training memory.
+3. **Claude mechanically inserts the confirmed citations/corrections.**
+   Transcribe what came back from step 2; do not add, embellish, or
+   "helpfully" fill gaps with recalled values while doing this.
+
+Why this order, not "Claude checks its own training data first": a
+citation Claude invented to clear a flag is the exact failure this skill
+exists to prevent (see Clearing a Flagged Claim). The worksheet step is
+Claude's real contribution -- triage, grouping, flagging what's odd -- not
+verification.
+
+Full multi-session history of this protocol (numbered Tier-1 items closed
+via web_search + Gemini cross-check): `documentation/HANDOFF_provenance_
+phase1_v17.md` and related handoffs. The originating rationale:
+`documentation/provenance_audit_handoff_v4.md`.
+
 ## Scanner Mechanics (not obvious from the output)
 
 - Flags by NUMERIC token (number + unit) via NUMERIC_CLAIM_RE. The unit
@@ -59,6 +94,46 @@ A blank with a flag is honest; an unsourced assertion is not.
   file lives.
 - False positives get provenance_exceptions.json entries, not code
   workarounds.
+
+## Report Domain Classification (Findings by File / File Type)
+
+Since July 2026, `PROVENANCE_AUDIT.md` breaks findings down two ways ahead
+of the per-tier detail: **Findings by File** (every file with a finding,
+tier counts, sorted worst-first) and **Findings by File Type** (the same
+data rolled up by subject-matter domain).
+
+Domain is a *report-only* grouping -- it answers "what part of the project
+is this," not "what does this module do" (that's module_atlas.py's
+ROLE_MAP, a different axis entirely; a module's functional role and its
+domain are independent). Domain classification never affects which files
+get scanned or how a finding scores.
+
+Six domains: **orrery** (solar system bodies, orbital mechanics, core
+app -- also the default catch-all), **earth_science**, **gallery**,
+**stars** (stellar neighborhood, exoplanets, HR/planetarium), **utilities**
+(genuinely cross-domain shared helpers), **dev_tools** (audit,
+diagnostics, one-shot infra). The last two didn't exist before this round
+-- they were split out, with the four-domain original (orrery, earth
+science, gallery, stars) proving too coarse for files that don't belong to
+any single subject-matter area.
+
+Mechanics: `MODULE_DOMAIN_MAP` (a module-name-to-domain dict) plus
+`classify_domain()` in provenance_scanner.py. Unmapped files default to
+`orrery` and are tracked and surfaced in a "Domain coverage gap" note in
+the report -- mirroring the existing ROLE_MAP coverage-gap pattern -- so a
+new file with findings doesn't silently drift into the wrong bucket
+forever. Extend `MODULE_DOMAIN_MAP` directly (not a heuristic) when a new
+file needs a home; explicit mapping was chosen over name-pattern guessing
+because domain assignment involves real judgment calls (several file
+categorizations were confirmed with Tony directly rather than inferred).
+
+**Gallery will usually read near-zero.** The gallery ASSEMBLER pipeline
+(resolver.py, cache_reader.py, gallery_studio.py, json_converter.py,
+render_orbits.py, etc.) lives in the separate tonyquintanilla.github.io
+repo, entirely outside this scanner's reach. Only gallery-adjacent files
+that live IN the palomas_orrery repo (currently just social_media_export.py)
+can ever populate that domain here. Do not read a 0 there as "gallery has
+no provenance debt" -- it means "gallery isn't scanned from here."
 
 ## Fetched vs Recalled -- the working procedure
 
@@ -103,3 +178,28 @@ split by how the words get authority:
   never compute them from parts unless the source says the parts sum.
   The full discipline for human-cost data is in earth-system-pipeline.
 - Derive from known quantities; don't estimate manually.
+- **The scanner scans itself, so editing provenance_scanner.py nudges its
+  own self-scan numbers.** Adding a new module-level dict or descriptive
+  string constant to the scanner (e.g. MODULE_DOMAIN_MAP, DOMAIN_LABELS)
+  gets picked up as a claim-shaped unit in provenance_scanner.py's own
+  audit entry, same as in any other file. This is correct behavior, not a
+  bug -- but before assuming a total-findings delta after a scanner change
+  means a real citation gap appeared somewhere in the project, check
+  whether the scanner's own new code is the source of the delta first.
+  (Observed July 2026: a report-formatting-only change to
+  provenance_scanner.py shifted its total findings by +2, both new,
+  correctly landing in the no-action tiers -- verified by diffing the
+  before/after audit line by line, not by trusting the summary count.)
+- **Multiple copies of PROVENANCE_AUDIT.md can exist and silently
+  diverge -- verify which one you're reading.** The committed root-level
+  file can go stale relative to a fresh scan (a small drift was observed
+  directly: a committed doc claimed a different Tier-1 count than an
+  immediate live re-run). Separately, an archived copy can sit elsewhere
+  in the repo (e.g. under documentation/) dated months earlier. `cd`-ing
+  into a subdirectory mid-session and not verifying `pwd` before reading
+  "PROVENANCE_AUDIT.md" again is enough to silently read the wrong copy
+  and draw a confidently wrong conclusion from it -- a real, self-caught
+  near-miss this session. When precision matters (triage, before-citing
+  a count), prefer a fresh live scan over any committed copy, and confirm
+  the working directory before reading a same-named file a second time.
+

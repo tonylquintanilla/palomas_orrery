@@ -231,7 +231,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
 | ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
-| ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-08 |
+| ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
 
 ### B. Pending Action (Tony-side)
@@ -597,7 +597,7 @@ design conversation this session; cross-ref L-071 (sibling pattern, not
 parent), L-060 (El Nino context, no causal claim).
 
 #### [L-078] Provenance scanner: systematic coverage via module_atlas role classification
-<!-- L:078 status:OPEN upd:2026-07-08 section:A flag: rice:2/2/70/3 -->
+<!-- L:078 status:OPEN upd:2026-07-16 section:A flag: rice:2/2/70/3 -->
 - **Root cause (why files get missed in the first place).** provenance_scanner.py
   gates display-string scanning on a hand-maintained narrative_files allow-list;
   a new file is invisible until someone notices and adds its name. The scanner
@@ -693,20 +693,73 @@ parent), L-060 (El Nino context, no causal claim).
   or propagating constants. No served data affected. Still real gaps that need
   citing, but not load-bearing for any current build. Suitable for Fable 5
   bulk triage (access through July 12, 2026).
-**Gap:** step (1) done. Remaining: (a) triage the 104 Tier-1 findings across
-26 modules -- cite, remove-and-note, or add to provenance_exceptions.json per
-the three-outcome rule. Fable 5 recommended for bulk triage manifest, then
-4.6 + Tony execute. (b) resolve the 4 COVERAGE GAP modules (add to ROLE_MAP
-or narrative_files) -- plus export_orbit_cache.py, the new Phase 1b data-serving
-devtool, which needs a ROLE_MAP entry (devtool role; see L-098); (c) step (2) near-miss vocabulary detector (design
-converged on hook point, tuning NOT done); (d) step (3) F/C bare-degree fix to
-NUMERIC_CLAIM_RE. Triage (a) is the heavy lift; (b-d) are mechanical once (a)
-establishes the baseline.
+- **Report tooling groundwork (July 16, 2026), ahead of the (a) triage lift --
+  Claude and Tony framed this explicitly as orchestration groundwork for a
+  separate cleanup session, not the triage itself.** Two report-formatting
+  increments landed at HEAD (design does not touch scoring): (1) a "Findings
+  by File" summary table -- tier 1-4 counts per file, sorted worst-first,
+  ahead of the existing per-tier detail; (2) a "Findings by File Type" domain
+  breakdown via new MODULE_DOMAIN_MAP / classify_domain() -- six domains
+  (orrery, earth_science, gallery, stars, utilities, dev_tools; the last two
+  new, split out of the original four after Tony resolved four ambiguous file
+  clusters: Sgr A*/Galactic Center -> orrery; cross-cutting reference-frame/
+  utility files split three ways -- celestial_coordinates/coordinate_system_
+  guide -> orrery, visualization_utils/_2d/_3d/_core -> stars,
+  shared_utilities/formatting_utils/save_utils/report_manager/
+  plot_data_exchange/plot_data_report_widget -> new utilities bucket;
+  devtools/one-shot infra -> new dev_tools bucket; social_media_export.py ->
+  gallery). Domain is report-only, independent of module_atlas's functional-
+  role ROLE_MAP; unmapped files default to orrery and surface in a new Domain
+  Coverage Gap note, mirroring the existing ROLE_MAP coverage-gap check.
+  Gallery will normally read near-zero here -- the gallery ASSEMBLER pipeline
+  lives entirely in the separate tonyquintanilla.github.io repo, out of this
+  scanner's reach.
+- **Self-referential scanning side effect, chased down and verified not a
+  regression.** The scanner scans itself; the new MODULE_DOMAIN_MAP /
+  DOMAIN_LABELS dicts added to provenance_scanner.py were picked up in its
+  own audit entry (+2 low-tier findings, Tier 3/4, zero Tier-1 change) --
+  confirmed by diffing before/after audits line-by-line rather than trusting
+  the summary count. Now a provenance-discipline field note so a future
+  total-findings delta after a scanner edit isn't mistaken for a new gap
+  appearing elsewhere in the project.
+- **provenance-discipline skill bumped to v1.1** (cut from palomas_orrery @
+  be6376bb93a3f6fdfa2c0ff5b75a7398e60ea6ce, July 16, 2026): documents the
+  Report Domain Classification mechanics above; promotes the Review-Repair
+  Protocol (Claude-cannot-be-the-verifier three-role split: Claude preps a
+  worksheet, Tony/Gemini research and verify, Claude mechanically transcribes
+  confirmed citations) out of documentation/provenance_audit_handoff_v4.md
+  into the durable skill layer; adds the self-referential-scanning field note
+  above and a stale/multiple-copies-of-PROVENANCE_AUDIT.md field note from a
+  self-caught near-miss this session (cd'd into documentation/ mid-session
+  and nearly triaged against an April-dated archived copy instead of a live
+  scan -- caught via pwd/git show before it reached a deliverable).
+- **Live counts after this round (July 16, 2026): 120 files, 675 findings,
+  Tier-1 = 104** [Tony-local run, exceptions file applied -- authoritative,
+  per Scanner Mechanics the confirming re-run is Tony-side]. A sandbox
+  verification run under different local exceptions state showed 673
+  findings / Tier-1 = 102 -- same shape, small drift expected between
+  environments; report STRUCTURE (by-file, by-file-type, domain sums
+  reconciling against totals) was verified in the sandbox before push, then
+  confirmed rendering correctly against Tony's real post-push numbers.
+**Gap:** step (1) done; report tooling (by-file, by-file-type) done. Remaining:
+(a) triage the ~104 Tier-1 findings across 26 modules -- cite, remove-and-note,
+or add to provenance_exceptions.json per the three-outcome rule, now with a
+domain-tagged file table to triage from. Fable 5 recommended for bulk triage
+manifest, then 4.6 + Tony execute. (b) resolve the 4 COVERAGE GAP modules (add
+to ROLE_MAP or narrative_files) -- plus export_orbit_cache.py, the new Phase 1b
+data-serving devtool, which needs a ROLE_MAP entry (devtool role; see L-098);
+(c) step (2) near-miss vocabulary detector (design converged on hook point,
+tuning NOT done); (d) step (3) F/C bare-degree fix to NUMERIC_CLAIM_RE. Triage
+(a) is the heavy lift; (b-d) are mechanical once (a) establishes the baseline.
 **Ref:** provenance_scanner.py (_extract_string_units ~L711-721, narrative_files
 ~L623, NARRATIVE_ROLES ~L635, classify_role import ~L216, coverage-gap report
-~L1271-1283); module_atlas.py (classify_role, ROLE_MAP); L-064 (closed
-predecessor); PROVENANCE_AUDIT.md (July 4, 2026 run: 115 files, 666 findings,
-Tier-1 = 104).
+~L1271-1283, MODULE_DOMAIN_MAP/classify_domain ~L245-421, Findings by File /
+Findings by File Type report sections ~L1467-1546); module_atlas.py
+(classify_role, ROLE_MAP); L-064 (closed predecessor); PROVENANCE_AUDIT.md
+(July 16, 2026 run: 120 files, 675 findings, Tier-1 = 104); skills/
+provenance-discipline/SKILL.md v1.1; documentation/provenance_audit_handoff_v4.md
+(Review-Repair Protocol origin); documentation/worksheet_earth_visualization.md
+(worksheet template precedent for the (a) triage).
 
 #### [L-105] merge_orbit_data source-side frame guard (desktop cache hardening)
 <!-- L:105 status:OPEN upd:2026-07-08 section:A flag: rice:2/2/50/2 -->
