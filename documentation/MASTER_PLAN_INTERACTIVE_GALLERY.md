@@ -1,6 +1,6 @@
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-**Status:** v13 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
+**Status:** v14 -- Phase 2 (solar system assembler) BUILD UNDERWAY. Design
 handoff v0.1 -> v0.3 resolved every open question (Pluto/Charon composition,
 Apophis close-encounter scope, OQ-4/closeup-shape routing). Competitive
 manifest cross-check (Fable + GPT independent builds) completed two rounds
@@ -11,14 +11,22 @@ CLOSED** -- L-080 harness live, golden fingerprint `abbd01094852b57f`
 locked, Mode 5 confirmed. F1-F4 (+ F6, non-blocking) now have ledger
 handles: L-118 (F1), L-119 (F2), L-120 (F3), L-121 (F4), L-122 (F6) -- all
 OPEN, none built yet.
-Next: F1 (builder work, gallery repo) before Artifact 2 -- config-shape
-decision (inline in objects_config.json vs. sibling file) still pending
-Tony's call.
+F1's own design handoff (PHASE2_F1_FEATURE_SERVING_DESIGN_HANDOFF_v0.4.md)
+CONVERGED July 16, 2026, via the same competitive cross-check pattern as
+Phase 2's assembler design (Fable + GPT independent manifests, comparative
+review, reconciled into PHASE2_F1_BUILD_MANIFEST_v2.md) -- catching a real,
+high-impact bug (planetocentric mean-motion in `propagate_marker`) GPT's
+manifest missed entirely. See "New in v14" below.
+Next: F1 build itself (Opus, orrery config edits + gallery builder change)
+-- manifest handed off July 16, 2026; the config-shape decision (inline in
+objects_config.json, ported not hand-authored) was already closed in v13
+and still stands.
 **Base:** orrery @ `c10a424`, gallery @ `e864fd42` (design ratified here;
 Artifact 1 built+pushed at orrery `6fc52b9a` / gallery `f89d83c4`; current
-HEAD orrery `73c67bed` / gallery `953c650e`, ledger/documentation work only)
+HEAD orrery `13acfcf4` / gallery `953c650e`, F1 manifest + provenance-
+citation documentation work only)
 **Date begun:** July 3, 2026
-**Last updated:** July 15, 2026
+**Last updated:** July 16, 2026
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Fable 5, Claude Sonnet 5, GPT
 
@@ -1073,6 +1081,52 @@ This plan draws from seventeen sessions across three Claude models + two pivots:
   ported to JS alongside its params, not just the numbers -- the same
   distinction will recur for rings and comet comae/tails later. Both
   corrected in L-118.  
+
+*New in v14 (July 16, 2026):*
+- F1 design handoff progressed v0.1 -> v0.4 (served_window/trust schema for
+  the per-object trust measurement), CONVERGED. Same competitive
+  cross-check pattern as Phase 2's assembler design: Claude Fable 5 (v1)
+  and GPT (v0.1) each independently built a manifest from the converged
+  handoff. Comparative review (Claude Sonnet 5, re-verified live against
+  HEAD rather than trusting either manifest's word) found Fable's manifest
+  caught a real, high-impact bug GPT's missed entirely: `propagate_marker`
+  (`gallery/assembler/render_orbits.py`) derives mean motion as
+  `n = K_GAUSS / a**1.5` with `K_GAUSS = sqrt(GM_sun)` -- correct for
+  heliocentric bodies, wrong by ~3 orders of magnitude for planetocentric
+  ones (moon, io, titan, charon). Verified by direct arithmetic: the
+  Moon's real sidereal period is 27.3 days; the unfixed formula computes
+  ~68 minutes.
+- Schema-naming question (the manifest's FLAG-1) resolved by recovering
+  the actual settled v0.2 decision from this session's own working files,
+  unreachable by either AI: served config fields mirror the orrery's own
+  source dict shapes exactly (`atmosphere`/`upper_atmosphere`,
+  `inner_belt_distance`/`outer_belt_distance`/`belt_thickness` with no
+  invented unit suffix, ring keys copied near-verbatim from each source's
+  own `ring_params` dict).
+- Partial-measurement-failure semantics (FLAG-3) resolved by Tony's direct
+  call: if any participating object's trust measurement fails, the global
+  `served_window` is served `null` (with a warning), not computed as a
+  minimum over survivors only -- a wrong-but-present bound is invisible to
+  the resolver; null is visibly degraded.
+- `PHASE2_F1_BUILD_MANIFEST_v2.md` reconciled from Fable's manifest as
+  base (the mean-motion fix built in), GPT's stop-condition list and
+  implementation-report template grafted in, schema section rewritten to
+  the recovered settled convention.
+- Tangential citation-provenance finding surfaced while rewriting the
+  ring/belt sections: Jupiter's existing `ring_params` citation ("NASA
+  Jupiter Ring Fact Sheet") was being read, per the project's own "unit of
+  provenance" convention, as also covering ring COLOR values -- Tony
+  judged this an overstatement; ring/belt colors across the codebase are
+  developer/AI aesthetic picks, inconsistent in method, not measured.
+  Resolved at the provenance-scanner + report level rather than per-file
+  edits: L-124 (deferred wishlist for a real color-accuracy pass, NASA/
+  Cassini sourcing captured for later) and L-125 (the scanner and
+  `PROVENANCE_AUDIT.md` now carry a standing disclosure that color values
+  are excluded from citable claims project-wide -- documentation only, no
+  scoring change, tier counts unchanged at 673/102/155/396/20).
+- Manifest handed to Opus for the actual F1 build July 16, 2026
+  (`OPUS_BUILD_PROMPT_F1_v1.md`); orrery re-pinned `13acfcf4`, gallery
+  unchanged `953c650e`.
 
 *Superseded:*
 - ~~Export script reads the desktop cache~~ -> fetch fresh from Horizons (v0.4)
