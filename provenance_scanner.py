@@ -203,6 +203,38 @@ Updated with Claude Sonnet 5 for L-078 check 1: role-driven inclusion off
     module_atlas.classify_role, additive over narrative_files; coverage-gap
     safety net for 'other'-role files; citation-recognition fix for
     single-line narrative strings (June 30, 2026).
+Updated with Claude Sonnet 5, July 2026: added a "Findings by File"
+    summary table to generate_report(), showing tier 1-4 counts per file
+    at a glance (sorted by total findings) ahead of the existing per-tier
+    detail sections. First step of a two-part groundwork request (F1
+    design-review session).
+Updated with Claude Sonnet 5, July 2026 (same session, second increment):
+    added MODULE_DOMAIN_MAP / classify_domain() and a "Findings by File
+    Type" summary section, grouping findings into six subject-matter
+    domains (orrery, earth science, gallery, stars, utilities, dev tools)
+    -- the last two new, split out of an original four after Tony resolved
+    four ambiguous clusters (Sgr A* family, cross-cutting utility files,
+    devtools/infra, social_media_export.py). Domain is a report-only
+    grouping, independent of module_atlas's functional-role ROLE_MAP. Also
+    added a Domain column to the existing "Findings by File" table, and a
+    Domain Coverage Gap note (mirroring the existing ROLE_MAP coverage-gap
+    pattern) that flags any future file with findings but no
+    MODULE_DOMAIN_MAP entry, rather than letting it silently default.
+    Gallery domain currently shows 0 findings -- the gallery ASSEMBLER
+    pipeline lives in the separate tonyquintanilla.github.io repo, out of
+    this scanner's reach; only gallery-adjacent files inside this repo
+    (currently just social_media_export.py) can ever populate it here.
+    Self-referential note: this scanner scans itself, so this very change
+    added 2 new low-tier findings against provenance_scanner.py's own
+    entry in the audit (MODULE_DOMAIN_MAP as an uncited dict, Tier 3;
+    DOMAIN_LABELS similarly, Tier 4) -- verified deliberate, not a scoring
+    regression: both are organizational/report labels, not factual claims,
+    correctly landing in the no-action tiers. Any future edit to this file
+    that adds a new module-level dict or descriptive string will likewise
+    nudge its own self-scan numbers. Worth remembering before assuming a
+    total-findings delta always means a real citation gap appeared
+    elsewhere -- check whether the delta is this file scanning its own
+    diff first.
 """
 
 import ast
@@ -240,6 +272,171 @@ def action_tier(score):
     if score >= 10: return 2
     if score >= 5:  return 3
     return 4
+
+
+# ============================================================
+# DOMAIN CLASSIFICATION (report grouping, not scanning behavior)
+# ============================================================
+# Maps module names (no .py) to a subject-matter domain, purely for the
+# "Findings by File Type" report breakdown -- distinct from module_atlas's
+# ROLE_MAP, which classifies functional role (data/rendering/devtool/...)
+# and drives which files get SCANNED at all. Domain answers "what part of
+# the project is this," not "what does this module do."
+#
+# Six domains, confirmed with Tony (F1 provenance-cleanup groundwork
+# session, July 2026), expanding the original four (orrery, earth science,
+# gallery, stars) after four ambiguous clusters were resolved:
+#   - Sgr A*/Galactic Center family -> orrery
+#   - devtools/one-shot infra       -> new "dev tools" bucket
+#   - social_media_export.py       -> gallery
+#   - cross-cutting reference-frame/utility cluster, split three ways:
+#       celestial_coordinates, coordinate_system_guide      -> orrery
+#       visualization_utils / _2d / _3d / _core             -> stars
+#       shared_utilities, formatting_utils, save_utils,
+#       report_manager, plot_data_exchange,
+#       plot_data_report_widget                             -> new
+#                                                                "utilities"
+#                                                                bucket
+#
+# Note: the gallery ASSEMBLER pipeline (resolver.py, cache_reader.py,
+# gallery_studio.py, json_converter.py, render_orbits.py, etc.) lives in
+# the separate tonyquintanilla.github.io repo and is not scanned by this
+# tool at all -- "gallery" here only ever covers gallery-adjacent files
+# that live IN this repo (currently just social_media_export.py).
+#
+# Anything not listed here defaults to 'orrery' (the original catch-all)
+# and is tracked as an unmapped module so new files don't silently drift
+# into the wrong bucket forever -- see the Domain Coverage Gaps note in
+# generate_report().
+DOMAIN_LABELS = {
+    'orrery':        'Orrery (solar system + orbital mechanics)',
+    'earth_science': 'Earth System',
+    'gallery':       'Gallery',
+    'stars':         'Stars (stellar neighborhood)',
+    'utilities':     'Utilities (cross-domain shared helpers)',
+    'dev_tools':     'Dev Tools (audit, diagnostics, one-shot scripts)',
+}
+
+MODULE_DOMAIN_MAP = {
+    # --- orrery: solar system bodies, orbital mechanics, core app ---
+    'info_dictionary': 'orrery',
+    'celestial_objects': 'orrery',
+    'idealized_orbits': 'orrery',
+    'solar_visualization_shells': 'orrery',
+    'constants_new': 'orrery',
+    'neptune_visualization_shells': 'orrery',
+    'uranus_visualization_shells': 'orrery',
+    'comet_visualization_shells': 'orrery',
+    'planet_visualization_utilities': 'orrery',
+    'jupiter_visualization_shells': 'orrery',
+    'sgr_a_grand_tour': 'orrery',
+    'sgr_a_star_data': 'orrery',
+    'sgr_a_visualization_core': 'orrery',
+    'sgr_a_visualization_core_arcs': 'orrery',
+    'sgr_a_visualization_animation': 'orrery',
+    'sgr_a_visualization_precession': 'orrery',
+    'pluto_visualization_shells': 'orrery',
+    'saturn_visualization_shells': 'orrery',
+    'spacecraft_encounters': 'orrery',
+    'mercury_visualization_shells': 'orrery',
+    'asteroid_belt_visualization_shells': 'orrery',
+    'celestial_coordinates': 'orrery',
+    'venus_visualization_shells': 'orrery',
+    'planet9_visualization_shells': 'orrery',
+    'apsidal_markers': 'orrery',
+    'eris_visualization_shells': 'orrery',
+    'mars_visualization_shells': 'orrery',
+    'moon_visualization_shells': 'orrery',
+    'coordinate_system_guide': 'orrery',
+    'palomas_orrery': 'orrery',
+    'palomas_orrery_dashboard': 'orrery',
+    'close_approach_data': 'orrery',
+    'orbit_data_manager': 'orrery',
+    'data_acquisition': 'orrery',
+    'data_acquisition_distance': 'orrery',
+    'orbital_elements': 'orrery',
+    'osculating_cache_manager': 'orrery',
+    'object_type_analyzer': 'orrery',
+
+    # --- earth_science ---
+    'earth_visualization_shells': 'earth_science',
+    'paleoclimate_wet_bulb_full': 'earth_science',
+    'paleoclimate_human_origins_full': 'earth_science',
+    'scenarios_western_heatwave_march_2026': 'earth_science',
+    'scenarios_heatwaves': 'earth_science',
+    'paleoclimate_visualization_full': 'earth_science',
+    'paleoclimate_visualization': 'earth_science',
+    'scenarios_coral_bleaching': 'earth_science',
+    'food_insecurity_generator': 'earth_science',
+    'earth_system_generator': 'earth_science',
+    'paleoclimate_dual_scale': 'earth_science',
+    'energy_imbalance': 'earth_science',
+    'fetch_paleoclimate_data': 'earth_science',
+    'fetch_climate_data': 'earth_science',
+    'climate_cache_manager': 'earth_science',
+
+    # --- gallery (gallery-adjacent files that live in THIS repo only) ---
+    'social_media_export': 'gallery',
+
+    # --- stars: stellar neighborhood, exoplanets, HR/planetarium ---
+    'star_notes': 'stars',
+    'star_properties': 'stars',
+    'stellar_data_patches': 'stars',
+    'stellar_parameters': 'stars',
+    'exoplanet_coordinates': 'stars',
+    'exoplanet_stellar_properties': 'stars',
+    'star_sphere_builder': 'stars',
+    'exoplanet_systems': 'stars',
+    'exoplanet_orbits': 'stars',
+    'hr_diagram_distance': 'stars',
+    'hr_diagram_apparent_magnitude': 'stars',
+    'planetarium_distance': 'stars',
+    'planetarium_apparent_magnitude': 'stars',
+    'simbad_manager': 'stars',
+    'messier_catalog': 'stars',
+    'messier_object_data_handler': 'stars',
+    'visualization_utils': 'stars',
+    'visualization_2d': 'stars',
+    'visualization_3d': 'stars',
+    'visualization_core': 'stars',
+
+    # --- utilities: genuinely cross-domain shared helpers (new bucket) ---
+    'plot_data_report_widget': 'utilities',
+    'shared_utilities': 'utilities',
+    'formatting_utils': 'utilities',
+    'save_utils': 'utilities',
+    'report_manager': 'utilities',
+    'plot_data_exchange': 'utilities',
+
+    # --- dev_tools: audit/diagnostic/one-shot infra (new bucket) ---
+    'provenance_scanner': 'dev_tools',
+    'skills_index': 'dev_tools',
+    'dep_trace': 'dev_tools',
+    'ledger_index': 'dev_tools',
+    'measure_perframe_elements': 'dev_tools',
+    'module_atlas': 'dev_tools',
+    'add_docstrings': 'dev_tools',
+    'data_inventory': 'dev_tools',
+    'smoke_dipole_cone': 'dev_tools',
+    'smoke_rotation_axis': 'dev_tools',
+    'test_reset_completeness': 'dev_tools',
+    'test_constants_provenance': 'dev_tools',
+    'test_orbit_cache': 'dev_tools',
+    'verify_orbit_cache': 'dev_tools',
+    'create_cache_backups': 'dev_tools',
+    'create_ephemeris_database': 'dev_tools',
+    'convert_hot_ph_to_json': 'dev_tools',
+    'diagnose_bcodmo': 'dev_tools',
+    'examine_hot_csv': 'dev_tools',
+    'export_orbit_cache': 'dev_tools',
+}
+
+
+def classify_domain(module_name):
+    """Classify a module's report domain. Returns (domain, was_mapped)."""
+    if module_name in MODULE_DOMAIN_MAP:
+        return MODULE_DOMAIN_MAP[module_name], True
+    return 'orrery', False  # catch-all default; flagged as unmapped
 
 
 # ============================================================
@@ -1267,6 +1464,83 @@ def generate_report(units, consistent_dups, inconsistencies,
     out.append("strings, or known scanner limitations. No action required unless a new")
     out.append("uncited entry appears. See Accepted Residuals block below for details.")
     out.append("")
+    out.append("---")
+    out.append("")
+
+    # ---- Findings by file (all tiers, at-a-glance) ----
+    out.append("## Findings by File")
+    out.append("")
+    out.append("Quick-reference counts before the per-tier detail below. Same "
+               "data, grouped the other way: every file that has at least one "
+               "finding, with its count in each tier.")
+    out.append("")
+    file_tier_counts = defaultdict(lambda: defaultdict(int))
+    for u in scored:
+        file_tier_counts[u.file][action_tier(u.score)] += 1
+    unmapped_files = set()
+
+    def _domain_for(fname):
+        stem = fname[:-3] if fname.endswith('.py') else fname
+        domain, was_mapped = classify_domain(stem)
+        if not was_mapped:
+            unmapped_files.add(fname)
+        return domain
+
+    out.append("| File | Domain | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |")
+    out.append("|------|--------|-------:|-------:|-------:|-------:|------:|")
+    for fname in sorted(file_tier_counts.keys(),
+                        key=lambda f: -sum(file_tier_counts[f].values())):
+        counts = file_tier_counts[fname]
+        total = sum(counts.values())
+        domain = _domain_for(fname)
+        out.append(f"| `{fname}` | {domain} | {counts.get(1, 0)} | "
+                   f"{counts.get(2, 0)} | {counts.get(3, 0)} | "
+                   f"{counts.get(4, 0)} | {total} |")
+    out.append("")
+    out.append("---")
+    out.append("")
+
+    # ---- Findings by file type (domain breakdown) ----
+    out.append("## Findings by File Type")
+    out.append("")
+    out.append("Same data again, grouped by subject-matter domain rather than "
+               "by individual file -- orrery, earth science, gallery, stars, "
+               "utilities, dev tools. Domain is a report-only grouping "
+               "(see MODULE_DOMAIN_MAP / classify_domain()); it does not "
+               "affect which files get scanned or scored.")
+    out.append("")
+    domain_tier_counts = defaultdict(lambda: defaultdict(int))
+    domain_file_counts = defaultdict(set)
+    for fname, counts in file_tier_counts.items():
+        domain = _domain_for(fname)
+        domain_file_counts[domain].add(fname)
+        for tier, n in counts.items():
+            domain_tier_counts[domain][tier] += n
+    out.append("| Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |")
+    out.append("|--------|------:|-------:|-------:|-------:|-------:|------:|")
+    # Show all six domains, including any with zero current findings --
+    # a domain going quiet (e.g. gallery) is itself worth seeing, not
+    # worth silently dropping from the table.
+    all_domains = sorted(DOMAIN_LABELS.keys(),
+                         key=lambda d: -sum(domain_tier_counts[d].values()))
+    for domain in all_domains:
+        counts = domain_tier_counts[domain]
+        total = sum(counts.values())
+        label = DOMAIN_LABELS.get(domain, domain)
+        out.append(f"| {label} | {len(domain_file_counts[domain])} | "
+                   f"{counts.get(1, 0)} | {counts.get(2, 0)} | "
+                   f"{counts.get(3, 0)} | {counts.get(4, 0)} | {total} |")
+    out.append("")
+    if unmapped_files:
+        out.append("**Domain coverage gap:** the following files have findings "
+                   "but no entry in `MODULE_DOMAIN_MAP` -- defaulted to "
+                   "`orrery` rather than guessed into a more specific bucket. "
+                   "Add each to `MODULE_DOMAIN_MAP` in provenance_scanner.py "
+                   "with its real domain so this stops silently defaulting:")
+        out.append("")
+        for fname in sorted(unmapped_files):
+            out.append(f"- `{fname}`")
+        out.append("")
     out.append("---")
     out.append("")
 
