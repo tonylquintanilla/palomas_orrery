@@ -757,7 +757,7 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         self._status_position; internal contents are identical either way.
         """
         STATUS_WIDTH = 270
-        STATUS_HEIGHT = 90
+        STATUS_HEIGHT = 150
 
         panel = ctk.CTkFrame(
             self._outer_frame,
@@ -768,10 +768,12 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         )
         if self._status_position == "bottom":
             panel.grid(row=1, column=0, sticky="nsew")
-            panel.grid_propagate(False)  # Keep fixed height
+            panel.grid_propagate(False)  # Keep fixed height (grid cell)
+            panel.pack_propagate(False)  # Keep fixed height (packed children)
         else:
             panel.grid(row=0, column=1, sticky="nsew")
-            panel.grid_propagate(False)  # Keep fixed width
+            panel.grid_propagate(False)  # Keep fixed width (grid cell)
+            panel.pack_propagate(False)  # Keep fixed width (packed children)
 
         # Panel header
         ctk.CTkLabel(
