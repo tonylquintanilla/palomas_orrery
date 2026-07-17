@@ -25,6 +25,12 @@ July 2026: split the monolithic ctk.CTk dashboard into an embeddable
 CTkFrame plus a thin standalone-window wrapper, so palomas_orrery.py can
 import the dashboard into its own third GUI column without duplicating
 the launch-card / status-log UI code.
+July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
+cross-platform coverage (CTkScrollableFrame's built-in handling only
+covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
+repos at HEAD; added the 5 gallery_cache_builder-era tools from the
+gallery repo's tools/ and 8 root-level devtools that were live but
+unlisted.
 """
 
 import os
@@ -137,7 +143,40 @@ LAUNCH_GROUPS = {
         ("Gallery JSON Fixer",
         "gallery_json_fixer.py",
         "Fix older gallery JSON files for current viewer",
-        GALLERY_TOOLS_DIR),        
+        GALLERY_TOOLS_DIR),
+        ("Gallery Cache Builder",
+        "gallery_cache_builder.py",
+        "Nightly serving-cache builder (Phase 2 F1): fetch from Horizons, "
+        "validate, atomic swap, commit. Needs flags -- opens a console so "
+        "you can type --dry-run / --first-build / --nightly / --object etc.",
+        GALLERY_TOOLS_DIR,
+        True),
+        ("Inspect Staging",
+        "inspect_staging.py",
+        "Read-only plain-language report on an existing dry-run staging "
+        "folder. Takes one argument: the staging folder path printed at "
+        "the end of a gallery_cache_builder.py --dry-run.",
+        GALLERY_TOOLS_DIR,
+        True),
+        ("Debug Encke TP",
+        "debug_encke_tp.py",
+        "Run the exact live Horizons query the builder's fetch_solution_tp() "
+        "makes for Encke and print the full raw response. No arguments.",
+        GALLERY_TOOLS_DIR,
+        True),
+        ("Gallery Cleanup",
+        "gallery_cleanup.py",
+        "Find and (with confirmation) delete gallery JSON/KMZ files that "
+        "aren't referenced by gallery_metadata.json, plus stray .json.bak files.",
+        GALLERY_TOOLS_DIR,
+        True),
+        ("Gallery Builder Offline Tests",
+        "test_gallery_cache_builder_offline.py",
+        "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
+        "exercises first-build, nightly re-run, and the Guard v2 monitor path. "
+        "No network.",
+        GALLERY_TOOLS_DIR,
+        True),
     ],
 
     "Developer Tools": [
@@ -202,6 +241,53 @@ LAUNCH_GROUPS = {
          "Run if orbit plots look wrong or the cache may be corrupted.",
          SCRIPT_DIR,
          True),
+        ("Test Orbit Cache",
+         "test_orbit_cache.py",
+         "Comprehensive test suite for orbit data caching, format conversion, "
+         "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
+         SCRIPT_DIR,
+         True),
+        ("Export Orbit Cache",
+         "export_orbit_cache.py",
+         "Phase 1b devtool: read the local orbit caches (read-only) and write "
+         "web-servable orbit/position files for the interactive gallery.",
+         SCRIPT_DIR,
+         True),
+        ("Test Reset Completeness",
+         "test_reset_completeness.py",
+         "Guard the Reset button against partial-reset drift: dirties every "
+         "tracked control, calls the live reset handler, asserts everything "
+         "returns to its startup default.",
+         SCRIPT_DIR,
+         True),
+        ("Create Ephemeris Database",
+         "create_ephemeris_database.py",
+         "(Re)build satellite_ephemerides.json from idealized_orbits.py plus "
+         "any downloaded Horizons ephemeris files.",
+         SCRIPT_DIR,
+         True),
+        ("Climate Cache Manager",
+         "climate_cache_manager.py",
+         "Safely update the climate data caches, with validation and rollback.",
+         SCRIPT_DIR,
+         True),
+        ("VOT Cache Manager",
+         "vot_cache_manager.py",
+         "Verify VizieR VOT cache file integrity.",
+         SCRIPT_DIR,
+         True),
+        ("Osculating Cache Manager",
+         "osculating_cache_manager.py",
+         "Load and report on the osculating orbital elements cache "
+         "(two-generation backup, always-prompt workflow).",
+         SCRIPT_DIR,
+         True),
+        ("SIMBAD Query Manager",
+         "simbad_manager.py",
+         "Verify SIMBAD querying against a small sample of objects "
+         "(rate limiting and retry logic).",
+         SCRIPT_DIR,
+         True),
     ],
 
 }
@@ -216,7 +302,12 @@ EXTERNAL_LINKS = [
     ("GitHub", "https://github.com/tonylquintanilla/palomas_orrery"),
     ("Instagram", "https://www.instagram.com/palomas_orrery/"),
     ("YouTube", "https://www.youtube.com/@palomasorrery"),
-    ("Google Drive", ""),  # Tony can fill in the URL
+    ("Google Drive", "https://drive.google.com/drive/folders/1hK0dBvFIx3rt0MFjkLbSqPBOvSYrharh"), 
+    ("Horizons", "https://ssd.jpl.nasa.gov/horizons/app.html#/"),   
+    ("Simbad", "https://simbad.u-strasbg.fr/simbad/"),
+    ("Sky-Map", "https://www.wikisky.org/?locale=EN"),
+    ("Sky View virtual telescope", "https://skyview.gsfc.nasa.gov/current/cgi/titlepage.pl"),  
+    ("Copernicus", "https://climate.copernicus.eu/"), 
 ]
 
 # ============================================================
@@ -229,11 +320,10 @@ LOCAL_DOCS = [
     ("Module Atlas", "MODULE_ATLAS.md"),
     ("Consolidated Ledger", "LEDGER_CONSOLIDATED.md"),
     ("Requirements", "requirements.txt"),
-    ("Project Instructions", "project_instructions_V3_20.md"),
+    ("Project Instructions", "PROJECT_INSTRUCTIONS.md"),
     ("Adding Objects Guide", "ADDING_OBJECTS_GUIDE.md"),
     ("Running a Patch File", "RUNNING_A_PATCH_FILE.md"),
-    ("Color Reference", "Python_Color_Reference_v2.pdf"),    # or color_map.py
-    ("To Do Ideas", "to_do_ideas.md"),    
+    ("Color Reference", "Python_Color_Reference_v2.pdf"),    # or color_map.py    
 ]
 
 # ============================================================
@@ -360,11 +450,40 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
 
             self._build_status_panel()
 
+        # CTkScrollableFrame already binds <MouseWheel> globally (Windows/Mac)
+        # with its own ancestor check (check_if_master_is_canvas), so wheel
+        # scrolling over any card/button inside it already works there --
+        # verified directly (measured pixel-for-pixel on a nested button).
+        # What it does NOT bind is Linux's Button-4/Button-5, unlike columns
+        # 1 and 2 in palomas_orrery.py, which explicitly support all three
+        # platforms. Add that here, reusing the frame's own ancestor check
+        # so this only fires for wheel events actually over this scrollable
+        # area (not columns 1/2, and not the status panel).
+        self._bind_linux_scroll(self._main_frame)
+
         # ---- SCROLLABLE PANEL CONTENTS (same either way) ----
         self._build_header()
         self._build_launch_section()
         self._build_resources_section()
         self._build_footer()
+
+    def _bind_linux_scroll(self, scrollable_frame):
+        """Add Button-4/Button-5 (Linux wheel) scrolling to a
+        ctk.CTkScrollableFrame. Mirrors the platform branches already used
+        for columns 1 and 2 in palomas_orrery.py's own mousewheel handlers.
+        """
+        canvas = scrollable_frame._parent_canvas
+
+        def _on_linux_wheel(event):
+            if not scrollable_frame.check_if_master_is_canvas(event.widget):
+                return
+            if event.num == 4:
+                canvas.yview_scroll(-1, "units")
+            elif event.num == 5:
+                canvas.yview_scroll(1, "units")
+
+        canvas.bind_all("<Button-4>", _on_linux_wheel, add="+")
+        canvas.bind_all("<Button-5>", _on_linux_wheel, add="+")
 
     # ----------------------------------------------------------
     # HEADER
