@@ -219,17 +219,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*75 live items; 64 need attention (`!`); 75 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*76 live items; 65 need attention (`!`); 76 RICE-scored; 46 closed (section C + W.Done). Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 5.1 | 2026-07-17 |
 | ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-06-30 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-06-18 |
 | ! | L-071 | 2026 European heat dome -- track to resolution (dated scenario series) | OPEN | 2.5 | 2026-06-25 |
 | ! | L-077 | 2026 US Midwest/Central heat dome -- migrating-centroid ongoing scenario | OPEN | 2.2 | 2026-06-30 |
 | ! | L-063 | Orrery GUI Note text update | OPEN | 2.0 | 2026-06-21 |
-| ! | L-062 | README refresh -- fold in handoff + ledger developments | OPEN | 1.5 | 2026-06-21 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-06-24 |
@@ -254,6 +254,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ### D.Structural -- Dead code / honest shells
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
+| ! | L-127 | module_atlas.py generates MODULE_INDEX.md too -- single source, eliminate divergence | OPEN | 3.2 | 2026-07-17 |
 | ! | L-027 (#61) | Platform Neutrality (SystemButtonFace) | OPEN | 2.2 | 2026-06-18 |
 | ! | L-025 (#N7) | Reduced to custom-geometry inline markers only | OPEN | 1.5 | 2026-06-18 |
 | ! | L-068 | Static/animation pipeline consolidation -- remaining residuals (umbrella) | OPEN | 1.5 | 2026-06-23 |
@@ -596,7 +597,7 @@ anything else in this item).
 **Ref:** L-063 (paired, in-GUI Note); L-098 (Phase 2 parent, why the
 gallery section is deferred); FABLE_TASK_README_REFRESH.md (this
 session's Fable prompt); requirements.txt; PROVENANCE_AUDIT.md.
-**Tony:** RICE proposed 3/2/85/1 (reach raised -- this is the repo's
+**Claude:** RICE proposed 3/2/85/1 (reach raised -- this is the repo's
 public front door, not an internal doc; impact ticks up, broken links
 and wrong stats are a real credibility/usability issue, not purely
 cosmetic; confidence high, concrete claims verified directly this
@@ -3550,7 +3551,7 @@ anchor, verified live); orrery spacecraft_encounters.py
 resolve_encounter_time / get_encounter_preset / SPACECRAFT_ENCOUNTERS; the
 April 2026 Artemis II HypOsc epoch-timing fix (q=83,203 km vs q=8,318 km);
 L-118 (F1 parent); M2_IMPLEMENTATION_REPORT.md.
-**Tony:** RICE proposed 2/2/85/2 (reach raised from the Apophis-only draft
+**Claude:** RICE proposed 2/2/85/2 (reach raised from the Apophis-only draft
 -- this now covers any future NEO close approach and any spacecraft
 encounter added to the gallery, not one object; confidence stays high,
 grounded in mechanisms already proven and shipping on the desktop side;
