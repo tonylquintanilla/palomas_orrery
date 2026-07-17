@@ -278,7 +278,8 @@ from constants_new import (
     PARKER_CLOSEST_RADII
 )
 
-from info_dictionary import INFO, note_text
+from info_dictionary import INFO
+from palomas_orrery_dashboard import PalomasOrreryDashboardFrame
 
 # from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, format_detailed_hover_text)
 from visualization_utils import (format_hover_text, add_hover_toggle_buttons, add_camera_center_button, add_look_at_object_buttons, add_fly_to_object_buttons, format_detailed_hover_text, build_scene)
@@ -11025,58 +11026,11 @@ orbital_viz_button = tk.Button(
 orbital_viz_button.grid(row=3, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
 CreateToolTip(orbital_viz_button, "Open an interactive visualization of orbital parameter transformations.")
 
-
-# Add Star Visualization button
-#star_viz_button = tk.Button(
-#    advance_buttons_frame, 
-#    text="2D and 3D Star Visualizations", 
-#    command=open_star_visualization,
-#    width=BUTTON_WIDTH*2 + 5,  # Make it span two columns
-#    font=BUTTON_FONT, 
-#    bg='SystemButtonFace', 
-#    fg='blue'
-#    bg='blue', 
-#    fg='white'
-#)
-#star_viz_button.grid(row=4, column=0, columnspan=2, padx=(0, 0), pady=(5, 0))
-#CreateToolTip(star_viz_button, "Open a specialized UI for 2D and 3D star visualizations, " 
-#              "including HR diagrams and stellar neighborhoods.")
-
-# Right column - Notes
+# Right column - Dashboard (imported from palomas_orrery_dashboard.py)
 note_frame = tk.Frame(main_paned, bg='SystemButtonFace')
 
-# Add the "Note" Label
-note_label = tk.Label(
-    note_frame,
-    text="Note:",
-    bg='SystemButtonFace',
-    fg='black',
-    font=(
-        "Arial",
-        10, 
-#          "normal"
-          "bold"          
-          )
-)
-note_label.pack(anchor='w', pady=(0, 5))  # Align to the left with padding below
-
-# Add the ScrolledText widget below the "Note" label
-note_text_widget = scrolledtext.ScrolledText(
-    note_frame,
-    wrap='word',
-    width=44,
-    height=44.5,
-    bg='SystemButtonFace',
-    fg='black',
-    insertbackground='white'
-)
-note_text_widget.pack(expand=True, fill='both')
-
-# Insert the note text into the ScrolledText widget
-note_text_widget.insert(tk.END, note_text)
-
-# Make the ScrolledText widget read-only
-note_text_widget.config(state='disabled')
+dashboard_panel = PalomasOrreryDashboardFrame(note_frame, status_position="bottom")
+dashboard_panel.pack(expand=True, fill='both')
 
 # ============================================================================
 # ADD PANES TO PANEDWINDOW AND RESTORE SASH POSITIONS

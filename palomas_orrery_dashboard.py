@@ -12,6 +12,19 @@ Philosophy: "Data Preservation is Climate Action"
 AI Collaboration: Built with Claude (Anthropic) - conversational AI partnership
 
 Updated 7/4/2026 with Opus 4.6
+
+Classes:
+    PalomasOrreryDashboardFrame - the dashboard UI as a ctk.CTkFrame. Takes
+        a parent widget. Import this to embed the dashboard inside another
+        Tkinter app (e.g. palomas_orrery.py's third GUI column).
+    PalomasOrreryDashboard - standalone root window wrapper around
+        PalomasOrreryDashboardFrame. Used when this file is run directly.
+
+Module updated: July 2026 with Anthropic's Claude Sonnet 5.
+July 2026: split the monolithic ctk.CTk dashboard into an embeddable
+CTkFrame plus a thin standalone-window wrapper, so palomas_orrery.py can
+import the dashboard into its own third GUI column without duplicating
+the launch-card / status-log UI code.
 """
 
 import os
@@ -239,27 +252,40 @@ SECTION_SYMBOLS = {
 # DASHBOARD APPLICATION
 # ============================================================
 
-class PalomasOrreryDashboard(ctk.CTk):
-    """Main dashboard window."""
+class PalomasOrreryDashboardFrame(ctk.CTkFrame):
+    """The dashboard UI, as an embeddable frame.
 
-    def __init__(self):
-        super().__init__()
+    Takes a parent widget (any Tkinter/CTk container) rather than being a
+    root window itself. This is the class to import when embedding the
+    dashboard inside another Tkinter app -- e.g.
 
-        # Window setup
-        self.title(WINDOW_TITLE)
-        self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
-        self.minsize(800, 600)
-        self.configure(fg_color=COLOR_BG)
+        from palomas_orrery_dashboard import PalomasOrreryDashboardFrame
+        panel = PalomasOrreryDashboardFrame(note_frame)
+        panel.pack(expand=True, fill='both')
 
-        # Set window icon
-        icon_path = os.path.join(SCRIPT_DIR, "favicon.ico")
-        if os.path.exists(icon_path):
-            try:
-                self.iconbitmap(icon_path)
-            except Exception:
-                pass  # Not all platforms support .ico
+    Sets the global CTk appearance mode/theme itself on construction, so it
+    renders correctly even when the host app never touches customtkinter
+    (palomas_orrery.py's other GUI columns are plain tkinter and do not).
+    """
+
+    def __init__(self, parent, status_position="right", **kwargs):
+        """
+        status_position: "right" (default) -- status log as a fixed-width
+            vertical panel beside the scrollable launch list. Matches the
+            original 960px standalone design.
+        status_position: "bottom" -- status log as a fixed-height
+            horizontal strip below the launch list. Use this for narrow
+            embeds (e.g. palomas_orrery.py's third GUI column).
+        """
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("blue")
+
+        super().__init__(parent, fg_color=COLOR_BG, **kwargs)
+
+        self._status_position = status_position
 
         # Load favicon as image for header display
+        icon_path = os.path.join(SCRIPT_DIR, "favicon.ico")
         self._logo_image = None
         if os.path.exists(icon_path):
             try:
@@ -288,40 +314,53 @@ class PalomasOrreryDashboard(ctk.CTk):
         # Start polling the output queue (runs on main thread)
         self._poll_output()
 
-        # Center on screen
-        self.update_idletasks()
-        x = (self.winfo_screenwidth() - WINDOW_WIDTH) // 2
-        y = (self.winfo_screenheight() - WINDOW_HEIGHT) // 2
-        self.geometry(f"+{x}+{y}")
-
     def _build_ui(self):
         """Construct the full dashboard layout.
 
-        Two-panel design:
+        status_position="right" (default): horizontal split --
           Left  -- scrollable content (header, launch groups, resources, footer)
-          Right -- fixed status panel (always visible, no scrolling needed)
+          Right -- fixed-width status panel (always visible, no scrolling needed)
+
+        status_position="bottom": vertical stack --
+          Top    -- scrollable content (same as above)
+          Bottom -- fixed-height status strip (always visible)
         """
 
-        # Top-level container: horizontal split
         self._outer_frame = ctk.CTkFrame(self, fg_color=COLOR_BG)
         self._outer_frame.pack(fill="both", expand=True)
-        self._outer_frame.grid_columnconfigure(0, weight=1)   # left expands
-        self._outer_frame.grid_columnconfigure(1, weight=0)   # right fixed
-        self._outer_frame.grid_rowconfigure(0, weight=1)
 
-        # ---- LEFT PANEL (scrollable) ----
-        self._main_frame = ctk.CTkScrollableFrame(
-            self._outer_frame,
-            fg_color=COLOR_BG,
-            scrollbar_button_color=COLOR_DIVIDER,
-            scrollbar_button_hover_color=COLOR_ACCENT_DIM,
-        )
-        self._main_frame.grid(row=0, column=0, sticky="nsew")
+        if self._status_position == "bottom":
+            # Vertical stack: launch list on top, status strip below
+            self._outer_frame.grid_rowconfigure(0, weight=1)    # top expands
+            self._outer_frame.grid_rowconfigure(1, weight=0)    # bottom fixed
+            self._outer_frame.grid_columnconfigure(0, weight=1)
 
-        # ---- RIGHT PANEL (fixed status) ----
-        self._build_status_panel()
+            self._main_frame = ctk.CTkScrollableFrame(
+                self._outer_frame,
+                fg_color=COLOR_BG,
+                scrollbar_button_color=COLOR_DIVIDER,
+                scrollbar_button_hover_color=COLOR_ACCENT_DIM,
+            )
+            self._main_frame.grid(row=0, column=0, sticky="nsew")
 
-        # ---- LEFT PANEL CONTENTS ----
+            self._build_status_panel()
+        else:
+            # Horizontal split: launch list left, status panel right
+            self._outer_frame.grid_columnconfigure(0, weight=1)   # left expands
+            self._outer_frame.grid_columnconfigure(1, weight=0)   # right fixed
+            self._outer_frame.grid_rowconfigure(0, weight=1)
+
+            self._main_frame = ctk.CTkScrollableFrame(
+                self._outer_frame,
+                fg_color=COLOR_BG,
+                scrollbar_button_color=COLOR_DIVIDER,
+                scrollbar_button_hover_color=COLOR_ACCENT_DIM,
+            )
+            self._main_frame.grid(row=0, column=0, sticky="nsew")
+
+            self._build_status_panel()
+
+        # ---- SCROLLABLE PANEL CONTENTS (same either way) ----
         self._build_header()
         self._build_launch_section()
         self._build_resources_section()
@@ -709,20 +748,30 @@ class PalomasOrreryDashboard(ctk.CTk):
             print(f"[DASHBOARD] Error opening folder: {e}")
 
     # ----------------------------------------------------------
-    # STATUS PANEL (right side, fixed)
+    # STATUS PANEL (right side or bottom strip, fixed size either way)
     # ----------------------------------------------------------
     def _build_status_panel(self):
-        """Fixed right-side panel showing launch activity."""
+        """Panel showing launch activity.
+
+        Docked right (fixed width) or bottom (fixed height) depending on
+        self._status_position; internal contents are identical either way.
+        """
         STATUS_WIDTH = 270
+        STATUS_HEIGHT = 90
 
         panel = ctk.CTkFrame(
             self._outer_frame,
             fg_color=COLOR_SURFACE,
-            width=STATUS_WIDTH,
             corner_radius=0,
+            **({"height": STATUS_HEIGHT} if self._status_position == "bottom"
+               else {"width": STATUS_WIDTH}),
         )
-        panel.grid(row=0, column=1, sticky="nsew")
-        panel.grid_propagate(False)  # Keep fixed width
+        if self._status_position == "bottom":
+            panel.grid(row=1, column=0, sticky="nsew")
+            panel.grid_propagate(False)  # Keep fixed height
+        else:
+            panel.grid(row=0, column=1, sticky="nsew")
+            panel.grid_propagate(False)  # Keep fixed width
 
         # Panel header
         ctk.CTkLabel(
@@ -730,10 +779,10 @@ class PalomasOrreryDashboard(ctk.CTk):
             font=("Segoe UI", 14, "bold"),
             text_color=COLOR_ACCENT_DIM,
             anchor="w",
-        ).pack(anchor="w", padx=16, pady=(16, 4))
+        ).pack(anchor="w", padx=16, pady=(16, 4) if self._status_position != "bottom" else (8, 2))
 
         div = ctk.CTkFrame(panel, fg_color=COLOR_DIVIDER, height=1)
-        div.pack(fill="x", padx=12, pady=(0, 8))
+        div.pack(fill="x", padx=12, pady=(0, 8) if self._status_position != "bottom" else (0, 4))
 
         # Status text box (fills remaining space)
         self._status_box = ctk.CTkTextbox(
@@ -745,7 +794,8 @@ class PalomasOrreryDashboard(ctk.CTk):
             state="disabled",
             wrap="word",
         )
-        self._status_box.pack(fill="both", expand=True, padx=12, pady=(0, 12))
+        self._status_box.pack(fill="both", expand=True, padx=12,
+                              pady=(0, 8) if self._status_position == "bottom" else (0, 12))
 
         self._log_status("Dashboard ready.")
 
@@ -779,13 +829,48 @@ class PalomasOrreryDashboard(ctk.CTk):
 
 
 # ============================================================
+# STANDALONE WINDOW WRAPPER
+# ============================================================
+
+class PalomasOrreryDashboard(ctk.CTk):
+    """Standalone root window around PalomasOrreryDashboardFrame.
+
+    Used when palomas_orrery_dashboard.py is run directly (double-click or
+    _run_dashboard.bat). Handles the things only a root window needs: title,
+    geometry, icon, screen centering. All the actual dashboard UI lives in
+    PalomasOrreryDashboardFrame -- import that class directly instead when
+    embedding the dashboard inside another Tkinter app.
+    """
+
+    def __init__(self):
+        super().__init__()
+
+        self.title(WINDOW_TITLE)
+        self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
+        self.minsize(800, 600)
+
+        icon_path = os.path.join(SCRIPT_DIR, "favicon.ico")
+        if os.path.exists(icon_path):
+            try:
+                self.iconbitmap(icon_path)
+            except Exception:
+                pass  # Not all platforms support .ico
+
+        self.frame = PalomasOrreryDashboardFrame(self)
+        self.frame.pack(fill="both", expand=True)
+
+        # Center on screen
+        self.update_idletasks()
+        x = (self.winfo_screenwidth() - WINDOW_WIDTH) // 2
+        y = (self.winfo_screenheight() - WINDOW_HEIGHT) // 2
+        self.geometry(f"+{x}+{y}")
+
+
+# ============================================================
 # ENTRY POINT
 # ============================================================
 
 def main():
-    ctk.set_appearance_mode("dark")
-    ctk.set_default_color_theme("blue")
-
     app = PalomasOrreryDashboard()
     app.mainloop()
 
